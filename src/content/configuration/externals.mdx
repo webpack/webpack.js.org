@@ -72,29 +72,17 @@ The following syntaxes are accepted...
 
 See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
 
-On the other hand, if you want to externalise a library that is available as a CommonJS module, you can provide the external library type together with the library name.
+You can specify [external library type](#externalstype) to the external using the `[externalsType] [externals]` syntax. This will override the default external library type specified in the [externalsType](#externalstype) option.
 
-For example, if you want to exclude `fs-extra` from the output bundle and import it during the runtime instead, you can specify it as follows:
+For example, if you want to externalise a library as a [CommonJS module](#externalstypecommonjs), you can specify
 
 ```javascript
 module.exports = {
-  // ...
+  //...
   externals: {
-    'fs-extra': 'commonjs2 fs-extra',
+    jquery: 'commonjs jQuery',
   },
 };
-```
-
-This leaves any dependent modules unchanged, i.e. the code shown below:
-
-```javascript
-import fs from 'fs-extra';
-```
-
-will compile to something like:
-
-```javascript
-const fs = require('fs-extra');
 ```
 
 ### [string]
@@ -109,6 +97,19 @@ module.exports = {
 ```
 
 `subtract: ['./math', 'subtract']` allows you select part of a commonjs module, where `./math` is the module and your bundle only requires the subset under the `subtract` variable. This example would translate to `require('./math').subtract;`
+
+Similar to the [string syntax](#string), you can specify the external library type with the `[externalsType] [externals]` syntax.
+
+For example
+
+```javascript
+module.exports = {
+  //...
+  externals: {
+    subtract: ['commonjs ./math', 'subtract'],
+  },
+};
+```
 
 ### object
 
@@ -330,7 +331,7 @@ Supported types:
 - `'amd'`
 - `'amd-require'`
 - `'assign'`
-- `'commonjs'`
+- [`'commonjs'`](#externalstypecommonjs)
 - `'commonjs-module'`
 - `'global'`
 - `'import'` - uses `import()` to load a native EcmaScript module (async module)
@@ -354,6 +355,34 @@ module.exports = {
   //...
   externalsType: 'promise',
 };
+```
+
+### externalsType.commonjs
+
+Specify the default type of externals as `'commonjs'`. Webpack will generate code like `const X = require('...')` for externals used in a module.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  externalsType: 'commonjs',
+  externals: {
+    'fs-extra': 'fs-extra',
+  },
+};
+```
+
+Will compile
+
+```javascript
+import fs from 'fs-extra';
+```
+
+into something like:
+
+```javascript
+const fs = require('fs-extra');
 ```
 
 ### externalsType.module
