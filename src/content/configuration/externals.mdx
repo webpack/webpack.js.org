@@ -454,7 +454,7 @@ module.exports = {
   },
   externalsType: 'module',
   externals: {
-    jquery: '$',
+    jquery: 'jquery',
   },
 };
 ```
@@ -462,7 +462,7 @@ module.exports = {
 Will generate into something like
 
 ```javascript
-import * as __WEBPACK_EXTERNAL_MODULE_$_ from '$';
+import * as __WEBPACK_EXTERNAL_MODULE_$_ from 'jquery';
 
 const jq = __WEBPACK_EXTERNAL_MODULE_$_['default'];
 jq('.my-element').animate(/* ... */);
@@ -489,6 +489,9 @@ module.export = {
     outputModule: true,
   },
   externalsType: 'node-commonjs',
+  externals: {
+    jquery: 'jquery',
+  },
 };
 ```
 
@@ -497,7 +500,7 @@ Will generate into something like
 ```javascript
 import { createRequire } from 'module';
 
-const jq = createRequire(import.meta.url)('$');
+const jq = createRequire(import.meta.url)('jquery');
 jq('.my-element').animate(/* ... */);
 ```
 
