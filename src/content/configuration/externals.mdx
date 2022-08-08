@@ -404,7 +404,7 @@ Note that there will be a `require()` in the output bundle.
 
 ### externalsType.global
 
-Specify the default type of externals as `'global'`. Webpack will read the external as a global variable on the `global` object.
+Specify the default type of externals as `'global'`. Webpack will read the external as a global variable on the [`globalObject`](/configuration/output/#outputglobalobject).
 
 #### Example
 
@@ -421,6 +421,9 @@ module.exports = {
   externalsType: 'global',
   externals: {
     jquery: '$',
+  },
+  output: {
+    globalObject: 'global',
   },
 };
 ```
