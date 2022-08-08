@@ -59,13 +59,9 @@ import $ from 'jquery';
 $('.my-element').animate(/* ... */);
 ```
 
-The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable, as the default external library type is `var`, see [externalsType](#externalstype).
+The property name `jquery` specified under `externals` in the above `webpack.config.js` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded from bundling. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable, as the default external library type is `var`, see [externalsType](#externalstype).
 
-The bundle with external dependencies can be used in various module contexts, such as [CommonJS, AMD, global and ES2015 modules](/concepts/modules).
-
-The external library may be available in any of these forms: global variable, CommonJS, AMD, ES2015 Module, see more in [externalsType](#externalstype).
-
-The following syntaxes are accepted...
+While we showed an example consuming external global variable above, the external can actually be available in any of these forms: global variable, CommonJS, AMD, ES2015 Module, see more in [externalsType](#externalstype).
 
 ### string
 
@@ -91,7 +87,7 @@ module.exports = {
 };
 ```
 
-You can specify the [external library type](#externalstype) to the external using the `${externalsType} ${path}` syntax. This will override the default external library type specified in the [externalsType](#externalstype) option.
+You can specify the [external library type](#externalstype) to the external with the `${externalsType} ${libraryName}` syntax. It will override the default external library type specified in the [externalsType](#externalstype) option.
 
 For example, if the external library is a [CommonJS module](#externalstypecommonjs), you can specify
 
@@ -99,7 +95,7 @@ For example, if the external library is a [CommonJS module](#externalstypecommon
 module.exports = {
   //...
   externals: {
-    jquery: 'commonjs jQuery',
+    jquery: 'commonjs jquery',
   },
 };
 ```
@@ -117,9 +113,9 @@ module.exports = {
 
 `subtract: ['./math', 'subtract']` allows you select part of a module, where `./math` is the module and your bundle only requires the subset under the `subtract` variable.
 
-When the `externalsType` is `commonjs`, this example would translate to `require('./math').subtract;`. When the `externalsType` is `window`, this example would translate to `window["./math"]["subtract"];`
+When the `externalsType` is `commonjs`, this example would translate to `require('./math').subtract;` while when the `externalsType` is `window`, this example would translate to `window["./math"]["subtract"];`
 
-Similar to the [string syntax](#string), you can specify the external library type with the `${externalsType} ${path}` syntax, in the first item of the array, for example:
+Similar to the [string syntax](#string), you can specify the external library type with the `${externalsType} ${libraryName}` syntax, in the first item of the array, for example:
 
 ```javascript
 module.exports = {
@@ -472,7 +468,7 @@ const jq = __WEBPACK_EXTERNAL_MODULE_$_['default'];
 jq('.my-element').animate(/* ... */);
 ```
 
-Note that there will be a `import` statement in the output bundle.
+Note that there will be an `import` statement in the output bundle.
 
 ### externalsType.node-commonjs
 
@@ -505,7 +501,7 @@ const jq = createRequire(import.meta.url)('$');
 jq('.my-element').animate(/* ... */);
 ```
 
-Note that there will be a `import` statement in the output bundle.
+Note that there will be an `import` statement in the output bundle.
 
 ### externalsType.promise
 
