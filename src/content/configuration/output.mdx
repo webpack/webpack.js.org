@@ -357,7 +357,7 @@ module.exports = {
 };
 ```
 
-The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)):
+The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/main/lib/ModuleFilenameHelpers.js)):
 
 | Template                 | Description                                                                                         |
 | ------------------------ | --------------------------------------------------------------------------------------------------- |
@@ -568,7 +568,7 @@ Note this option does not affect output files for on-demand-loaded chunks. It on
 
 ### Template strings
 
-The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
+The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js)):
 
 Substitutions available on Compilation-level:
 
@@ -868,7 +868,7 @@ In the above example, we're passing a single entry file to `entry`, however, web
    </script>
    ```
 
-   See [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for more.
+   See [this example](https://github.com/webpack/webpack/tree/main/examples/multi-part-library) for more.
 
    Note that the above configuration won't work as expected if you're going to configure library options per entry point. Here is how to do it [under each of your entries](/concepts/entry-points/#entrydescription-object):
 
@@ -2293,7 +2293,7 @@ module.exports = {
 
 The new option `workerChunkLoading` controls the chunk loading of workers.
 
-T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
 
 **webpack.config.js**
 
