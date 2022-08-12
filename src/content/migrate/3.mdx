@@ -304,6 +304,26 @@ plugins: [
 ]
 ```
 
+## Autoprefixer-core - deprecated
+
+[Autoprefixer-core](https://www.npmjs.com/package/autoprefixer-core) supports upto webpack 1.0.
+
+autoprefixer-core was deprecated, use autoprefixer instead
+
+`npm install --save-dev autoprefixer`
+
+```diff
+var autoprefixer = require('autoprefixer');
+
+module.exports = {
+    ...
+    postcss: function () {
+        return [autoprefixer];
+    }
+    ...
+};
+```
+
 ## Full dynamic requires now fail by default
 
 A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of the context of the complete directory.
