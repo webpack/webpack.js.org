@@ -93,47 +93,47 @@ you need to do the following:
 
 1. Create a module-scope `WeakMap` for compilation hooks:
 
-```ts
-const compilationHooks = new WeakMap<Compilation, MyHooks>();
+    ```ts
+    const compilationHooks = new WeakMap<Compilation, MyHooks>();
 
-interface MyHooks {
-  custom: SyncHook<[number, string]>;
-}
-```
+    interface MyHooks {
+      custom: SyncHook<[number, string]>;
+    }
+    ```
 
 2. Create a static method on your plugin:
 
-```ts
-static getCompilationHooks(compilation: Compilation) : MyHooks {
-  let hooks = compilationHooks.get(compilation);
-  if(hooks === undefined) {
-    compilationHooks.set(compilation, hooks = {
-      custom: new SyncHook()
-    });
-  }
-  return hooks;
-}
-```
+    ```ts
+    static getCompilationHooks(compilation: Compilation) : MyHooks {
+      let hooks = compilationHooks.get(compilation);
+      if(hooks === undefined) {
+        compilationHooks.set(compilation, hooks = {
+          custom: new SyncHook()
+        });
+      }
+      return hooks;
+    }
+    ```
 
 3. Call hooks like below in your plugin:
 
-```ts
-const hooks = MyPlugin.getCompilationHooks(compilation);
+    ```ts
+    const hooks = MyPlugin.getCompilationHooks(compilation);
 
-hooks.custom.call(1, 'hello');
-```
+    hooks.custom.call(1, 'hello');
+    ```
 
 4. Other plugins can access your custom hooks too:
 
-```ts
-import MyPlugin from 'my-plugin';
+    ```ts
+    import MyPlugin from 'my-plugin';
 
-const hooks = MyPlugin.getCompilationHooks(compilation);
+    const hooks = MyPlugin.getCompilationHooks(compilation);
 
-hooks.custom.tap('OtherPlugin', (n, s) => {
-  // magic
-});
-```
+    hooks.custom.tap('OtherPlugin', (n, s) => {
+      // magic
+    });
+    ```
 
 Again, see the [documentation](https://github.com/webpack/tapable) for `tapable` to learn more about the
 different hook classes and how they work.
