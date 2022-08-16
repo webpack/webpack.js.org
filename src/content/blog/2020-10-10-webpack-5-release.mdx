@@ -361,7 +361,7 @@ The inner graph algorithm will figure out that `something` is only used when the
 
 When `"sideEffects": false` is set, this allows to omit even more modules. In this example `./something` will be omitted when the `test` export is unused.
 
-To get the information about unused exports `optimization.unusedExports` is required. To remove side-effect-free modules `optimization.sideEffects` is required.
+To get the information about unused exports `optimization.usedExports` is required. To remove side-effect-free modules `optimization.sideEffects` is required.
 
 The following symbols can be analysed:
 
