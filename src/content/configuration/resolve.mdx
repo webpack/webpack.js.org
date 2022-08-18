@@ -193,7 +193,7 @@ module.exports = {
 };
 ```
 
-Webpack will match export conditions that are listed within the `resolve.conditionNames` array.
+Webpack will match [export conditions](https://nodejs.org/api/packages.html#conditional-exports) that are listed within the `resolve.conditionNames` array.
 
 The key order in the `exports` field is significant. During condition matching, earlier entries have higher priority and take precedence over later entries.
 
@@ -236,7 +236,7 @@ module.exports = {
 importing
 
 - `'foo'` will resolve to `'foo/index-require.js'`
-- `'foo/bar'` will resolve to `'foo/bar-node.js'`
+- `'foo/bar'` will resolve to `'foo/bar-node.js'` as the `"node"` key comes before `"require"` key in the conditional exports object.
 - `'foo/baz'` will resolve to `'foo/baz-node.js'`
 
 ### resolve.descriptionFiles
