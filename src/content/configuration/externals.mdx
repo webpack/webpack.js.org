@@ -171,7 +171,7 @@ Here're arguments the function can receive:
 - `ctx` (`object`): Object containing details of the file.
   - `ctx.context` (`string`): The directory of the file which contains the import.
   - `ctx.request` (`string`): The import path being requested.
-  - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer).
+  - `ctx.contextInfo` (`object`): Contains information about the issuer (e.g. the layer and compiler)
   - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
 - `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
 
