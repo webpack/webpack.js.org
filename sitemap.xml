@@ -34,10 +34,10 @@
         <loc>https://webpack.js.org/get-started</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides</loc>
+        <loc>https://webpack.js.org/glossary</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/glossary</loc>
+        <loc>https://webpack.js.org/guides</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/license</loc>
@@ -49,13 +49,13 @@
         <loc>https://webpack.js.org/migrate</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/migrating</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/migrating</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/support</loc>
@@ -130,19 +130,19 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/entry-points</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/manifest</loc>
@@ -154,10 +154,10 @@
         <loc>https://webpack.js.org/concepts/module-federation</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/modules</loc>
+        <loc>https://webpack.js.org/concepts/module-resolution</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/module-resolution</loc>
+        <loc>https://webpack.js.org/concepts/modules</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/output</loc>
