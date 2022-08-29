@@ -142,7 +142,7 @@
     "webpack-dev-server": "^4.10.0",
     "webpack-merge": "^5.8.0",
     "workbox-webpack-plugin": "^6.5.4",
-    "yarn-deduplicate": "^5.0.2"
+    "yarn-deduplicate": "^6.0.0"
   },
   "dependencies": {
     "@docsearch/react": "^3.0.0-alpha.50",
