@@ -198,7 +198,57 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### resolve.descriptionFiles $#resolvedescriptionfiles$
+=======
+Webpack will match [export conditions](https://nodejs.org/api/packages.html#conditional-exports) that are listed within the `resolve.conditionNames` array.
+
+The key order in the `exports` field is significant. During condition matching, earlier entries have higher priority and take precedence over later entries.
+
+For example,
+
+**package.json**
+
+```json
+{
+  "name": "foo",
+  "exports": {
+    ".": {
+      "import": "./index-import.js",
+      "require": "./index-require.js",
+      "node": "./index-node.js"
+    },
+    "./bar": {
+      "node": "./bar-node.js",
+      "require": "./bar-require.js"
+    },
+    "./baz": {
+      "import": "./baz-import.js",
+      "node": "./baz-node.js"
+    }
+  }
+}
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    conditionNames: ['require', 'node'],
+  },
+};
+```
+
+importing
+
+- `'foo'` will resolve to `'foo/index-require.js'`
+- `'foo/bar'` will resolve to `'foo/bar-node.js'` as the `"node"` key comes before `"require"` key in the conditional exports object.
+- `'foo/baz'` will resolve to `'foo/baz-node.js'`
+
+### resolve.descriptionFiles
+>>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 `[string] = ['package.json']`
 

@@ -719,7 +719,7 @@ console.log('yep');
 **extract-style-loader/index.js**
 
 ```javascript
-const getStylesLoader = require.resolve('./getStyle');
+const getStylesLoader = require.resolve('./getStyles');
 
 module.exports = function (source) {
   if (STYLES_REGEXP.test(source)) {
@@ -736,7 +736,7 @@ module.exports = function (source) {
 
 ```javascript
 module.exports = function (source) {
-  const match = STYLES_REGEXP.match(source);
+  const match = source.match(STYLES_REGEXP);
   return match[0];
 };
 ```

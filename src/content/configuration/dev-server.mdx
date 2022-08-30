@@ -75,7 +75,11 @@ W> 请注意，当[导出多个配置对象](/configuration/configuration-types/
 
 T> 如果你碰到了问题，请将路由导航至 `/webpack-dev-server` 将会为你展示服务文件的位置。例如： `http://localhost:9000/webpack-dev-server`。
 
+<<<<<<< HEAD
 T> 如果你需要要手动重新编译 `bundle`，将路由导航至 `/invalidate` 使当前编译的 `bundle` [无效](/api/node/#invalidate-watching)，并通过 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate) 为你重新编译。根据你的配置，URL 可能看起来像 `http://localhost:9000/invalidate`。
+=======
+T> If you want to manually recompile the bundle, navigating to the `/webpack-dev-server/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, the URL may look like `http://localhost:9000/webpack-dev-server/invalidate`.
+>>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 T> 当启动本地服务的时候 HTML 模板是必须提供的，通常是 `index.html`。确保将脚本引用添加到 HTML 中，webpack-dev-server 不会自动注入它们。
 
@@ -1584,8 +1588,13 @@ module.exports = {
       // 如果你想在所有其他中间件之前运行一个中间件或者当你从 `onBeforeSetupMiddleware` 配置项迁移时，
       // 可以使用 `unshift` 方法
       middlewares.unshift({
+<<<<<<< HEAD
         name: 'fist-in-array',
         // `path` 是可选的
+=======
+        name: 'first-in-array',
+        // `path` is optional
+>>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
         path: '/foo/path',
         middleware: (req, res) => {
           res.send('Foo!');

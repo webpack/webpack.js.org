@@ -9,9 +9,13 @@ contributors:
   - byzyk
   - EugeneHlushko
   - wizardofhogwarts
+<<<<<<< HEAD
 translators:
   - chenzesam
   - QC-L
+=======
+  - snitin315
+>>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 ---
 
 插件是 webpack 生态的关键部分，
@@ -90,18 +94,66 @@ compiler.hooks.run.tapPromise(
 
 ## 自定义钩子 $#custom-hooks$
 
+<<<<<<< HEAD
 为了便于其他插件的编译过程中可以 `tap` 到，则需要创建一个新的 hook，
 我们只需要简单的从 `tapable` 中 `require` 所需的 hook 类，并创建：
+=======
+In order to offer a custom hook to the compilation for other plugins to `tap` into,
+you need to do the following:
+>>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
-```js
-const SyncHook = require('tapable').SyncHook;
+1. Create a module-scope `WeakMap` for compilation hooks:
 
+<<<<<<< HEAD
 if (compiler.hooks.myCustomHook) throw new Error('已存在该钩子');
 compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c']);
 
 // 在你想要触发钩子的位置/时机下调用……
 compiler.hooks.myCustomHook.call(a, b, c);
 ```
+=======
+    ```ts
+    const compilationHooks = new WeakMap<Compilation, MyHooks>();
+
+    interface MyHooks {
+      custom: SyncHook<[number, string]>;
+    }
+    ```
+
+2. Create a static method on your plugin:
+
+    ```ts
+    static getCompilationHooks(compilation: Compilation) : MyHooks {
+      let hooks = compilationHooks.get(compilation);
+      if(hooks === undefined) {
+        compilationHooks.set(compilation, hooks = {
+          custom: new SyncHook()
+        });
+      }
+      return hooks;
+    }
+    ```
+
+3. Call hooks like below in your plugin:
+
+    ```ts
+    const hooks = MyPlugin.getCompilationHooks(compilation);
+
+    hooks.custom.call(1, 'hello');
+    ```
+
+4. Other plugins can access your custom hooks too:
+
+    ```ts
+    import MyPlugin from 'my-plugin';
+
+    const hooks = MyPlugin.getCompilationHooks(compilation);
+
+    hooks.custom.tap('OtherPlugin', (n, s) => {
+      // magic
+    });
+    ```
+>>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 再次声明，
 查看 `tapable` [文档](https://github.com/webpack/tapable) 来了解更多不同的钩子类(hook class)，以及它们是如何工作的。
