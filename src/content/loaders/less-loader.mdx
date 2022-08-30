@@ -44,7 +44,7 @@ module.exports = {
     rules: [
       {
         test: /\.less$/i,
-        loader: [
+        use: [
           // compiles Less to CSS
           'style-loader',
           'css-loader',
