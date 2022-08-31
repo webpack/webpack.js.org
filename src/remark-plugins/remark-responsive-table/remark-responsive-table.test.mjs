@@ -8,7 +8,9 @@ describe('responsive table', () => {
   const processor = remark()
     .use(remarkGfm)
     .use(remarkResponsiveTable)
-    .use(remarkHtml);
+    .use(remarkHtml, {
+      sanitize: false,
+    });
   it('should add data-th', () => {
     processor.process(
       `

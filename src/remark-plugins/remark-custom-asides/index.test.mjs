@@ -9,7 +9,9 @@ describe('customize blockquote', () => {
           'W>': 'warning',
         },
       })
-      .use(remarkHtml)
+      .use(remarkHtml, {
+        sanitize: false
+      })
       .process(
         `
 W> hello world
