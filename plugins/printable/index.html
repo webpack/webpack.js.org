@@ -1746,7 +1746,6 @@ Do not worry about size of images, now they are always optimized/compressed.</p>
 </code></pre><blockquote><p><strong>Warning</strong></p><p>imagemin uses plugin to optimize/generate images, so you need to install them too</p></blockquote><ul><li><a href="https://github.com/GoogleChromeLabs/squoosh/tree/dev/libsquoosh"><code>squoosh</code></a>:</li></ul><pre><code class="hljs language-console">npm install image-minimizer-webpack-plugin @squoosh/lib --save-dev
 </code></pre><ul><li><a href="https://github.com/lovell/sharp"><code>sharp</code></a>:</li></ul><pre><code class="hljs language-console">npm install image-minimizer-webpack-plugin sharp --save-dev
 </code></pre><p>Images can be optimized in two modes:</p><ol><li><a href="https://en.wikipedia.org/wiki/Lossless_compression">Lossless</a> (without loss of quality).</li><li><a href="https://en.wikipedia.org/wiki/Lossy_compression">Lossy</a> (with loss of quality).</li></ol><h3><span id="optimize-with-imagemin"></span>Optimize with <a href="https://github.com/imagemin/imagemin">imagemin</a><a href="#optimize-with-imagemin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><blockquote><p><strong>Note</strong></p></blockquote><ul><li><a href="https://github.com/imagemin/imagemin-mozjpeg">imagemin-mozjpeg</a> can be configured in lossless and lossy mode.</li><li><a href="https://github.com/imagemin/imagemin-svgo">imagemin-svgo</a> can be configured in lossless and lossy mode.</li></ul><p>Explore the options to get the best result for you.</p><p><strong>Recommended imagemin plugins for lossless optimization</strong></p><pre><code class="hljs language-shell"><span class="token function">npm</span> <span class="token function">install</span> imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo --save-dev</code></pre><p><strong>Recommended imagemin plugins for lossy optimization</strong></p><pre><code class="hljs language-shell"><span class="token function">npm</span> <span class="token function">install</span> imagemin-gifsicle imagemin-mozjpeg imagemin-pngquant imagemin-svgo --save-dev</code></pre><p>For <code>imagemin-svgo</code> v9.0.0+ need use svgo <a href="https://github.com/svg/svgo#configuration">configuration</a></p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">const</span> ImageMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;image-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span> extendDefaultPlugins <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;svgo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -1774,18 +1773,23 @@ module<span class="token punctuation">.</span>exports <span class="token operato
               <span class="token punctuation">[</span>
                 <span class="token string">&quot;svgo&quot;</span><span class="token punctuation">,</span>
                 <span class="token punctuation">{</span>
-                  plugins<span class="token operator">:</span> <span class="token function">extendDefaultPlugins</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+                  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
                     <span class="token punctuation">{</span>
-                      name<span class="token operator">:</span> <span class="token string">&quot;removeViewBox&quot;</span><span class="token punctuation">,</span>
-                      active<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-                    <span class="token punctuation">{</span>
-                      name<span class="token operator">:</span> <span class="token string">&quot;addAttributesToSVGElement&quot;</span><span class="token punctuation">,</span>
+                      name<span class="token operator">:</span> <span class="token string">&quot;preset-default&quot;</span><span class="token punctuation">,</span>
                       params<span class="token operator">:</span> <span class="token punctuation">{</span>
-                        attributes<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> xmlns<span class="token operator">:</span> <span class="token string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        overrides<span class="token operator">:</span> <span class="token punctuation">{</span>
+                          removeViewBox<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                          addAttributesToSVGElement<span class="token operator">:</span> <span class="token punctuation">{</span>
+                            params<span class="token operator">:</span> <span class="token punctuation">{</span>
+                              attributes<span class="token operator">:</span> <span class="token punctuation">[</span>
+                                <span class="token punctuation">{</span> xmlns<span class="token operator">:</span> <span class="token string">&quot;http://www.w3.org/2000/svg&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                              <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token punctuation">}</span><span class="token punctuation">,</span>
                       <span class="token punctuation">}</span><span class="token punctuation">,</span>
                     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-                  <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">]</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
               <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
