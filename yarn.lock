@@ -7369,61 +7369,61 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lightningcss-darwin-arm64@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.15.0.tgz#c4fad19f33d96545e92e98f4a664d36edf52f03c"
-  integrity sha512-5MZH4uOq/CgcFJ+8LrhTyAu1gwqEONC+kWg8z/0Lr+VeWl/hTBdPs9f0DMw4EHZVCtAajaicgV7pnwUoDBcn0A==
+lightningcss-darwin-arm64@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.15.1.tgz#9b15f7d65898cae9ceae11d5c7ef6ea64edcce16"
+  integrity sha512-4bqe9OCWzj8gPgwzpDK7TPopIoKx9CQMPVN83/+T5LVLkh9sSS0ltZLjAFI399GIkC6idl6rguUQ5qPeq4yxsQ==
 
-lightningcss-darwin-x64@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-darwin-x64/-/lightningcss-darwin-x64-1.15.0.tgz#509cb0189b7db4d7ea4c3fb710ba79192c17fc9b"
-  integrity sha512-mWYc0xwBL+PDw6AZsgp8ScwyYgh89rgO7JAcbhxAUbFKSGPV6ymseXJVwYEecRbdtmfKxZrL1S1fE+609mRQWA==
+lightningcss-darwin-x64@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-darwin-x64/-/lightningcss-darwin-x64-1.15.1.tgz#897cd5eb116fe50c7608c3936fbc8277b5e26498"
+  integrity sha512-1W7kt2Nd0lPFkZ5VzieJfs/ePVADysM3FS33HcUUzktE52vWL2B6S4ntWibHj6Ccg/lDH5o6GiLcCYwpOPLHug==
 
-lightningcss-linux-arm-gnueabihf@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-linux-arm-gnueabihf/-/lightningcss-linux-arm-gnueabihf-1.15.0.tgz#f916ba49bf9feb47d522cee8fa3c9026436fa7a6"
-  integrity sha512-mK/cI5FNgc1FIgeqpEVpnxXW83DAKewmGrlhvtQfwNEAnOIumltltr0MMjjTURF0usPhZaiGJk/r50xVDrU4FQ==
+lightningcss-linux-arm-gnueabihf@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-linux-arm-gnueabihf/-/lightningcss-linux-arm-gnueabihf-1.15.1.tgz#2d14a9115769bf63cbeb2e0676ba4fb3b69bec2c"
+  integrity sha512-8FijfM4HGJPCQPB9nAaTjdOE2PGQYE66t1wvV+SR915dEePn4yyRdCBJitlas5B6aTAE2AMwEuEl1i/pVDmkGw==
 
-lightningcss-linux-arm64-gnu@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-linux-arm64-gnu/-/lightningcss-linux-arm64-gnu-1.15.0.tgz#49919ba643e896a4a9acdc29dfd9efe3f54fe6c9"
-  integrity sha512-cVpXV5UUsl82uFFp5NUxXtu7eTAkxA1XIK6JLN4CbJKdIVinympA9/yWDzWmGs4Nu39im3clWD0n+1jwE0b4lQ==
+lightningcss-linux-arm64-gnu@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-linux-arm64-gnu/-/lightningcss-linux-arm64-gnu-1.15.1.tgz#2a674bf9b1aef16a39ae49a3dc7d132a0904206e"
+  integrity sha512-ZhCv3MlApRTIwszlNQ2t7FST7qK+M1iP6apTvOetPwDlzOMZ5dcH0a1453JPm4CwOSzHZ8079gnb5EqtU4+pjg==
 
-lightningcss-linux-arm64-musl@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-linux-arm64-musl/-/lightningcss-linux-arm64-musl-1.15.0.tgz#6628d7cb156e1efd5c8232b383f7d16704f92bd1"
-  integrity sha512-xbSvBeoacWXL8l3CzGWSEfQ6ro3L7xwkQobtYOJi5Whlw1F5pLm3pTmxDcRlEClY3Vf6kVQmP0LCoNyfWtmfWQ==
+lightningcss-linux-arm64-musl@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-linux-arm64-musl/-/lightningcss-linux-arm64-musl-1.15.1.tgz#13bb83b88cc9663377596f26311faa8c664aa4eb"
+  integrity sha512-cGhslFivvMLSIsesZbEaUurXRJMGUftHukiY5DjWtXkA2iIqqV7TyK3j6ZJPy76hlRKsjU/WO8CrabAvr6kmsw==
 
-lightningcss-linux-x64-gnu@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-linux-x64-gnu/-/lightningcss-linux-x64-gnu-1.15.0.tgz#7a6a116b85331a2fdc3ba1afb481b3c29d69e3f1"
-  integrity sha512-kdmB3n/pYuX54VVOeORtlRIcXFzGGSZedMJ19IRjiGgrcmuuFWjcNjAw/r4KiNhXTtMoSBJ4tGlo65e+iJBRdQ==
+lightningcss-linux-x64-gnu@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-linux-x64-gnu/-/lightningcss-linux-x64-gnu-1.15.1.tgz#890d163801c634b2e2f35807093ccc0bc906170c"
+  integrity sha512-uVfUgRUjq7laAR9A027oqGPcq72Y/hPVEEqb9agWzNqYvZyT0VAqNxp9g2ncL//gOD1vTwQntcwDhrI5VE2PCw==
 
-lightningcss-linux-x64-musl@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-linux-x64-musl/-/lightningcss-linux-x64-musl-1.15.0.tgz#2a0b055bf4d472d1cccfbd072e7c418e974b4e5b"
-  integrity sha512-9ylrbm6x3a6QYFdrHVl3nbVLgxSzh4IQT5PqjqVeaeP1XaC3tPu0bVoxkHai0o2rRFW+U0CjJI2+3VzZa/RaVA==
+lightningcss-linux-x64-musl@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-linux-x64-musl/-/lightningcss-linux-x64-musl-1.15.1.tgz#ff4c88600e1f3839e7b68b1ab526788caa06db90"
+  integrity sha512-n2cRPHxL57N+YMsBodF9HogieOicmlQVUCFM+RF0FOzayA8LdypacNWI3EDzbERWfkBAWtx2eLvV50DOJrkQdg==
 
-lightningcss-win32-x64-msvc@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.15.0.tgz#5f49afba652990d3a73845762ad4c11fda40ae33"
-  integrity sha512-oQJ1rKjV9NgKSbzyIPupkdmHyFFg56CFEJ16ZT+8j4H/G+uljPIaXvOmR6OplEms84R77JS7rX9zyL5XfF+szA==
+lightningcss-win32-x64-msvc@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.15.1.tgz#a7336edcbbacd604de342eefa92183089e3215f2"
+  integrity sha512-wHGJZnCmHU14cL3mmVNZm1yDz55m8EKxwPhACZTq+/QOvLMeIXQ4qLvNzdvtVL5KESPwz4hjYsYsSNCtpcTfOA==
 
-lightningcss@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/lightningcss/-/lightningcss-1.15.0.tgz#a7e8b4e76718f6a75c504f324563628d2d8dfeb9"
-  integrity sha512-FF1SDM8Mo43lExnWkrXesDMoKFYM5iDbqbLl408VH6VyB4TdMBEQpWW4bbUrE03Vhl7ioIUMEJfgzAV7vaeYkw==
+lightningcss@^1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/lightningcss/-/lightningcss-1.15.1.tgz#a951a0ef651a0d026de4f3ec03bd2a6feae25da4"
+  integrity sha512-d4fqKl8sqpdM27OsseAbKKxhD2otiu6stS7yWlm/DA7wOQAIDKMu/dke54cEN8ED19v9H2pEzMPGTsRfnq3Rdg==
   dependencies:
     detect-libc "^1.0.3"
   optionalDependencies:
-    lightningcss-darwin-arm64 "1.15.0"
-    lightningcss-darwin-x64 "1.15.0"
-    lightningcss-linux-arm-gnueabihf "1.15.0"
-    lightningcss-linux-arm64-gnu "1.15.0"
-    lightningcss-linux-arm64-musl "1.15.0"
-    lightningcss-linux-x64-gnu "1.15.0"
-    lightningcss-linux-x64-musl "1.15.0"
-    lightningcss-win32-x64-msvc "1.15.0"
+    lightningcss-darwin-arm64 "1.15.1"
+    lightningcss-darwin-x64 "1.15.1"
+    lightningcss-linux-arm-gnueabihf "1.15.1"
+    lightningcss-linux-arm64-gnu "1.15.1"
+    lightningcss-linux-arm64-musl "1.15.1"
+    lightningcss-linux-x64-gnu "1.15.1"
+    lightningcss-linux-x64-musl "1.15.1"
+    lightningcss-win32-x64-msvc "1.15.1"
 
 lilconfig@2.0.5:
   version "2.0.5"
