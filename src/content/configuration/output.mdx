@@ -176,6 +176,8 @@ module.exports = {
 
 chunk 的格式（formats 默认包含 `'array-push'` (web/WebWorker)、`'commonjs'` (node.js)、`'module'` (ESM)，还有其他情况可由插件添加）。
 
+T> The default value of this option depends on the [`target`](/configuration/target/) and [`output.module`](#outputmodule) setting. For more details, search for `"chunkFormat"` [in the webpack defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
+
 **webpack.config.js**
 
 ```javascript
@@ -229,6 +231,8 @@ module.exports = {
 `false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
 加载 chunk 的方法（默认值有 `'jsonp'` (web)、`'import'` (ESM)、`'importScripts'` (WebWorker)、`'require'` (sync node.js)、`'async-node'` (async node.js)，还有其他值可由插件添加)。
+
+T> The default value of this option depends on the [`target`](/configuration/target/) and [`chunkFormat `](#outputchunkformat) setting. For more details, search for `"chunkLoading"` [in the webpack defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
 
 **webpack.config.js**
 
@@ -357,7 +361,7 @@ module.exports = {
 };
 ```
 
-模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)）：
+模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/main/lib/ModuleFilenameHelpers.js)）：
 
 | Template                 | Description                                                                |
 | ------------------------ | -------------------------------------------------------------------------- |
@@ -567,7 +571,7 @@ module.exports = {
 
 ### Template strings $#template-strings$
 
-可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）:
+可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js)）:
 
 可在编译层面进行替换的内容：
 
@@ -867,7 +871,7 @@ export function hello(name) {
    </script>
    ```
 
-   查看 [示例](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) 获取更多内容。
+   查看 [示例](https://github.com/webpack/webpack/tree/main/examples/multi-part-library) 获取更多内容。
 
    请注意，如果你打算在每个入口点配置 library 配置项的话，以上配置将不能按照预期执行。这里是如何 [在每个入口点下](/concepts/entry-points/#entrydescription-object) 做的方法：
 
@@ -2292,7 +2296,7 @@ module.exports = {
 
 新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
 
-T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
+T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js) `"workerChunkLoading"`。
 
 **webpack.config.js**
 

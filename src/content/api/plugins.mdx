@@ -9,6 +9,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - wizardofhogwarts
+  - snitin315
 translators:
   - chenzesam
   - QC-L
@@ -90,18 +91,52 @@ compiler.hooks.run.tapPromise(
 
 ## 自定义钩子 $#custom-hooks$
 
-为了便于其他插件的编译过程中可以 `tap` 到，则需要创建一个新的 hook，
-我们只需要简单的从 `tapable` 中 `require` 所需的 hook 类，并创建：
+为了便于其他插件的编译过程中可以 `tap` 到，
+你可以这样做：
 
-```js
-const SyncHook = require('tapable').SyncHook;
+1. Create a module-scope `WeakMap` for compilation hooks:
 
-if (compiler.hooks.myCustomHook) throw new Error('已存在该钩子');
-compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c']);
+    ```ts
+    const compilationHooks = new WeakMap<Compilation, MyHooks>();
 
-// 在你想要触发钩子的位置/时机下调用……
-compiler.hooks.myCustomHook.call(a, b, c);
-```
+    interface MyHooks {
+      custom: SyncHook<[number, string]>;
+    }
+    ```
+
+2. 在插件中创建一个静态方法：
+
+    ```ts
+    static getCompilationHooks(compilation: Compilation) : MyHooks {
+      let hooks = compilationHooks.get(compilation);
+      if(hooks === undefined) {
+        compilationHooks.set(compilation, hooks = {
+          custom: new SyncHook()
+        });
+      }
+      return hooks;
+    }
+    ```
+
+3. 像下面这样在你的插件中调用钩子函数：
+
+    ```ts
+    const hooks = MyPlugin.getCompilationHooks(compilation);
+
+    hooks.custom.call(1, 'hello');
+    ```
+
+4. 其他插件也可以访问你的自定义钩子函数：
+
+    ```ts
+    import MyPlugin from 'my-plugin';
+
+    const hooks = MyPlugin.getCompilationHooks(compilation);
+
+    hooks.custom.tap('OtherPlugin', (n, s) => {
+      // magic
+    });
+    ```
 
 再次声明，
 查看 `tapable` [文档](https://github.com/webpack/tapable) 来了解更多不同的钩子类(hook class)，以及它们是如何工作的。

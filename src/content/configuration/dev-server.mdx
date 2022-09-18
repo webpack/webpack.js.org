@@ -75,7 +75,7 @@ W> 请注意，当[导出多个配置对象](/configuration/configuration-types/
 
 T> 如果你碰到了问题，请将路由导航至 `/webpack-dev-server` 将会为你展示服务文件的位置。例如： `http://localhost:9000/webpack-dev-server`。
 
-T> 如果你需要要手动重新编译 `bundle`，将路由导航至 `/invalidate` 使当前编译的 `bundle` [无效](/api/node/#invalidate-watching)，并通过 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate) 为你重新编译。根据你的配置，URL 可能看起来像 `http://localhost:9000/invalidate`。
+T> 如果你需要要手动重新编译 `bundle`，将路由导航至 `/webpack-dev-server/invalidate` 使当前编译的 `bundle` [无效](/api/node/#invalidate-watching)，并通过 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate) 为你重新编译。根据你的配置，URL 可能看起来像 `http://localhost:9000/webpack-dev-server/invalidate`。
 
 T> 当启动本地服务的时候 HTML 模板是必须提供的，通常是 `index.html`。确保将脚本引用添加到 HTML 中，webpack-dev-server 不会自动注入它们。
 
@@ -1584,7 +1584,7 @@ module.exports = {
       // 如果你想在所有其他中间件之前运行一个中间件或者当你从 `onBeforeSetupMiddleware` 配置项迁移时，
       // 可以使用 `unshift` 方法
       middlewares.unshift({
-        name: 'fist-in-array',
+        name: 'first-in-array',
         // `path` 是可选的
         path: '/foo/path',
         middleware: (req, res) => {

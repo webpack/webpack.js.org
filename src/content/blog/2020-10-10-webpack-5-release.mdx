@@ -365,7 +365,7 @@ export function test() {
 
 当设置`"sideEffects": false`时，可以省略更多的模块。在这个例子中，当 `test` 导出未被使用时，`./something` 将被省略。
 
-要获得未使用的导出信息，需要使用 `optimization.unusedExports`。要删除无副作用的模块，需要使用`optimization.sideEffects`。
+要获得未使用的导出信息，需要使用 `optimization.usedExports`。要删除无副作用的模块，需要使用`optimization.sideEffects`。
 
 可以分析以下标记。
 

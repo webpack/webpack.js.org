@@ -198,7 +198,53 @@ module.exports = {
 };
 ```
 
-### resolve.descriptionFiles $#resolvedescriptionfiles$
+Webpack 将会匹配列在 `resolve.conditionNames` 数组中的 [export conditions](https://nodejs.org/api/packages.html#conditional-exports)。
+
+`exports` 字段中的键顺序很重要。在条件匹配期间，较早的入口具有更高的优先级并优先于后面的入口。
+
+例如，
+
+**package.json**
+
+```json
+{
+  "name": "foo",
+  "exports": {
+    ".": {
+      "import": "./index-import.js",
+      "require": "./index-require.js",
+      "node": "./index-node.js"
+    },
+    "./bar": {
+      "node": "./bar-node.js",
+      "require": "./bar-require.js"
+    },
+    "./baz": {
+      "import": "./baz-import.js",
+      "node": "./baz-node.js"
+    }
+  }
+}
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    conditionNames: ['require', 'node'],
+  },
+};
+```
+
+importing
+
+- `'foo'` 将解析为 `'foo/index-require.js'`
+- `'foo/bar'`将解析为 `'foo/bar-node.js'`，因为在条件导出对象中， `"node"` 字段在 `"require"` 之前。
+- `'foo/baz'` 将解析为 `'foo/baz-node.js'`
+
+### resolve.descriptionFiles
 
 `[string] = ['package.json']`
 
