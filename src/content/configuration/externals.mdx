@@ -61,34 +61,15 @@ import $ from 'jquery';
 $('.my-element').animate(/* ... */);
 ```
 
-<<<<<<< HEAD
-具有外部依赖(external dependency)的 bundle 可以在各种模块上下文(module context)中使用，例如 [CommonJS, AMD, 全局变量和 ES2015 模块](/concepts/modules)。外部 library 可能是以下任何一种形式：
+上面 `webpack.config.js` 中 `externals` 下指定的属性名称 `jquery` 表示 `import $ from 'jquery'` 中的模块 `jquery` 应该从打包产物中排除。 为了替换这个模块，`jQuery` 值将用于检索全局 `jQuery` 变量，因为默认的外部库类型是 `var`，请参阅 [externalsType](#externalstype)。
 
-- **root**：可以通过一个全局变量访问 library（例如，通过 script 标签）。
-- **commonjs**：可以将 library 作为一个 CommonJS 模块访问。
-- **commonjs2**：和上面的类似，但导出的是 `module.exports.default`.
-- **amd**：类似于 `commonjs`，但使用 AMD 模块系统。
-
-可以接受以下语法……
-=======
-The property name `jquery` specified under `externals` in the above `webpack.config.js` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded from bundling. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable, as the default external library type is `var`, see [externalsType](#externalstype).
-
-While we showed an example consuming external global variable above, the external can actually be available in any of these forms: global variable, CommonJS, AMD, ES2015 Module, see more in [externalsType](#externalstype).
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
+虽然我们在上面展示了一个使用外部全局变量的示例，但实际上可以以以下任何形式使用外部变量：全局变量、CommonJS、AMD、ES2015 模块，在 [externalsType](#externalstype) 中查看更多信息。
 
 ### 字符串 $#string$
 
-<<<<<<< HEAD
-请查看上面的例子。属性名称是 `jquery`，表示应该排除 `import $ from 'jquery'` 中的 `jquery` 模块。为了替换这个模块，`jQuery` 的值将被用来检索一个全局的 `jQuery` 变量。换句话说，当设置为一个字符串时，它将被视为`全局的`（定义在上面和下面）。
+根据 [externalsType](#externalstype)，这可能是全局变量的名称（参见 [`'global'`](#externalstypeglobal)、[`'this'`](#externalstypethis)、[`'var '`](#externalstypevar), [`'window'`](#externalstypewindow)) 或模块的名称（参见 `amd`, [`commonjs`](#externalstypecommonjs), [`module`](#externalstypemodule ), `umd`)。
 
-另一方面，如果你想将一个符合 CommonJS 模块化规则的类库外部化，你可以提供外联类库的类型以及类库的名称。
-
-如果你想将 `fs-extra` 从输出的 bundle 中剔除并在运行时中引入它，你可以如下定义：
-=======
-Depending on the [externalsType](#externalstype), this could be the name of the global variable (see [`'global'`](#externalstypeglobal), [`'this'`](#externalstypethis), [`'var'`](#externalstypevar), [`'window'`](#externalstypewindow)) or the name of the module (see `amd`, [`commonjs`](#externalstypecommonjs), [`module`](#externalstypemodule), `umd`).
-
-You can also use the shortcut syntax if you're defining only 1 external:
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
+如果你只定义 1 个 external，您也可以使用快捷语法：
 
 ```javascript
 module.exports = {
@@ -108,21 +89,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-这样的做法会让任何依赖的模块都不变，正如以下所示的代码：
+您可以使用 `${externalsType} ${libraryName}` 语法为外部指定 [外部库类型](#externalstype)。 它将覆盖 [externalsType](#externalstype) 选项中指定的默认外部库类型。
 
-```javascript
-import fs from 'fs-extra';
-```
-
-会将代码编译成：
-
-```javascript
-const fs = require('fs-extra');
-=======
-You can specify the [external library type](#externalstype) to the external with the `${externalsType} ${libraryName}` syntax. It will override the default external library type specified in the [externalsType](#externalstype) option.
-
-For example, if the external library is a [CommonJS module](#externalstypecommonjs), you can specify
+例如，如果外部库是一个 [CommonJS 模块](#externalstypecommonjs)，你可以指定
 
 ```javascript
 module.exports = {
@@ -131,7 +100,6 @@ module.exports = {
     jquery: 'commonjs jquery',
   },
 };
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 ```
 
 ### [string] $#string$
@@ -145,14 +113,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-`subtract: ['./math', 'subtract']` 转换为父子结构，其中 `./math` 是父模块，而 bundle 只引用 `subtract` 变量下的子集。该例子会编译成 `require('./math').subtract;`
-=======
-`subtract: ['./math', 'subtract']` allows you select part of a module, where `./math` is the module and your bundle only requires the subset under the `subtract` variable.
+`subtract: ['./math', 'subtract']` 允许你选择模块的一部分，其中 `./math` 是模块，并且你的包只需要 `subtract` 变量下的子集。
 
-When the `externalsType` is `commonjs`, this example would translate to `require('./math').subtract;` while when the `externalsType` is `window`, this example would translate to `window["./math"]["subtract"];`
+当 `externalsType` 为 `commonjs` 时，此示例将转换为 `require('./math').subtract;`，而当 `externalsType` 为 `window` 时，此示例将转换为 `window["./math"]["subtract"];`
 
-Similar to the [string syntax](#string), you can specify the external library type with the `${externalsType} ${libraryName}` syntax, in the first item of the array, for example:
+与 [string 语法](#string) 类似，你可以使用 `${externalsType} ${libraryName}` 语法在数组的第一项中指定外部库类型，例如：
 
 ```javascript
 module.exports = {
@@ -162,15 +127,10 @@ module.exports = {
   },
 };
 ```
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 ### 对象 $#object$
 
-<<<<<<< HEAD
-W> 一个形如 `{ root, amd, commonjs, ... }` 的对象仅允许用于 [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) 这样的配置.它不被允许 用于其它的 library targets 配置值.
-=======
-W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) and [`externalsType: 'umd'`](#externalstype). It's not allowed for other library targets.
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
+W> 带有 `{ root, amd, commonjs, ... }` 的对象只允许用于 [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) 和 [`externalsType: 'umd'`](#externalstype）。其他库的 target 不允许这样做。
 
 ```javascript
 module.exports = {
@@ -210,33 +170,18 @@ module.exports = {
 
 函数接收两个入参：
 
-<<<<<<< HEAD
 - `ctx` (`object`)：包含文件详情的对象。
   - `ctx.context` (`string`): 包含引用的文件目录。
   - `ctc.request` (`string`): 被请求引入的路径。
-  - `ctx.contextInfo` (`string`): 包含 issuer 的信息（如，layer）
+  - `ctx.contextInfo` (`object`): 包含 issuer 的信息（如，layer 和 compiler）
   - `ctx.getResolve` <Badge text='5.15.0+' />: 获取当前解析器选项的解析函数。
 - `callback` (`function (err, result, type)`): 用于指明模块如何被外部化的回调函数
-=======
-- `ctx` (`object`): Object containing details of the file.
-  - `ctx.context` (`string`): The directory of the file which contains the import.
-  - `ctx.request` (`string`): The import path being requested.
-  - `ctx.contextInfo` (`object`): Contains information about the issuer (e.g. the layer and compiler)
-  - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
-- `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 回调函数接收三个入参：
 
-<<<<<<< HEAD
 - `err` (`Error`): 被用于表明在外部外引用的时候是否会产生错误。如果有错误，这将会是唯一被用到的参数。
-- `result` (`string` `[string]` `object`): 描述外部化的模块。可以接受形如 `${type} ${path}` 格式的字符串，或者其它标准化外部化模块格式，([`string`](#string), [`[string]`](#string-1)，或 [`object`](#object))。
-- `type` (`string`): 可选的参数，用于指明模块的类型（如果它没在 `result` 参数中被指明）。
-=======
-- `err` (`Error`): Used to indicate if there has been an error while externalizing the import. If there is an error, this should be the only parameter used.
-- `result` (`string` `[string]` `object`): Describes the external module with the other external formats ([`string`](#string), [`[string]`](#string-1), or [`object`](#object))
-- `type` (`string`): Optional parameter that indicates the module [external type](#externalstype) (if it has not already been indicated in the `result` parameter).
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
+- `result` (`string` `[string]` `object`): 描述外部化的模块。可以接受其它标准化外部化模块格式，([`string`](#string), [`[string]`](#string-1)，或 [`object`](#object))。
+- `type` (`string`): 可选的参数，用于指明模块的 [external type](#externalstype)（如果它没在 `result` 参数中被指明）。
 
 作为例子，要外部化所有匹配一个正则表达式的引入，你可以像下面那样处理：
 
@@ -410,13 +355,8 @@ module.exports = {
 - `'jsonp'`
 - [`'module'`](#externalstypemodule)
 - [`'node-commonjs'`](#externalstypenode-commonjs)
-<<<<<<< HEAD
-- `'promise'` - 与 `'var'` 相同，但是会 await 结果（适用于 async 模块）
-- `'self'`
-=======
-- [`'promise'`](#externalstypepromise) - same as `'var'` but awaits the result (async module)
+- [`'promise'`](#externalstypepromise) - 与 `'var'` 相同，但是会 await 结果（适用于 async 模块）
 - [`'self'`](#externalstypeself)
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 - `'system'`
 - [`'script'`](#externalstypescript)
 - [`'this'`](#externalstypethis)
@@ -434,14 +374,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### externalsType.module $#externalstype-module$
-=======
 ### externalsType.commonjs
 
-Specify the default type of externals as `'commonjs'`. Webpack will generate code like `const X = require('...')` for externals used in a module.
+将外部的默认类型指定为“commonjs”。Webpack 将为模块中使用的外部生成类似 `const X = require('...')` 的代码。
 
-#### Example
+#### 示例 $#example$
 
 ```javascript
 import fs from 'fs-extra';
@@ -459,19 +396,19 @@ module.exports = {
 };
 ```
 
-Will generate into something like:
+将会转换为类似下面的代码：
 
 ```javascript
 const fs = require('fs-extra');
 ```
 
-Note that there will be a `require()` in the output bundle.
+请注意，输出产物中会有一个 `require()`。
 
 ### externalsType.global
 
-Specify the default type of externals as `'global'`. Webpack will read the external as a global variable on the [`globalObject`](/configuration/output/#outputglobalobject).
+将外部的默认类型指定为 `'global'`。Webpack 会将 external 作为全局变量读取到 [`globalObject`](/configuration/output/#outputglobalobject)。
 
-#### Example
+#### 示例 $#example$
 
 ```javascript
 import jq from 'jquery';
@@ -493,7 +430,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 const jq = global['$'];
@@ -501,7 +438,6 @@ jq('.my-element').animate(/* ... */);
 ```
 
 ### externalsType.module
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 将 externals 类型设置为 `'module'`，webpack 将会在 module 中为外部引用生成形如 `import * as X from '...'` 的代码。
 
@@ -528,10 +464,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### externalsType.node-commonjs $#externalstype-node-commonjs$
-=======
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 import * as __WEBPACK_EXTERNAL_MODULE_jquery__ from 'jquery';
@@ -540,10 +473,9 @@ const jq = __WEBPACK_EXTERNAL_MODULE_jquery__['default'];
 jq('.my-element').animate(/* ... */);
 ```
 
-Note that there will be an `import` statement in the output bundle.
+请注意，输出产物中会有一个 `import` 语句。
 
 ### externalsType.node-commonjs
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 将 externals 类型设置为 `'node-commonjs'`，webpack 将从 `module` 中导入 `createRequire` 来构造一个 require 函数，用于加载模块中使用的外部对象。
 
@@ -568,12 +500,7 @@ module.export = {
 };
 ```
 
-<<<<<<< HEAD
-### externalsType.script $#externalstype-script$
-
-将 externals 类型设置为 `'script'`，webpack 将会通过 HTML 中的 `<script>` 标签加载一个脚本，以暴露预定义的全局变量。当脚本被加载完后 `<script>` 标签会被删除。
-=======
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 import { createRequire } from 'module';
@@ -582,11 +509,11 @@ const jq = createRequire(import.meta.url)('jquery');
 jq('.my-element').animate(/* ... */);
 ```
 
-Note that there will be an `import` statement in the output bundle.
+请注意，输出包中会有一个 `import` 语句。
 
 ### externalsType.promise
 
-Specify the default type of externals as `'promise'`. Webpack will read the external as a global variable (similar to [`'var'`](#externalstypevar)) and `await` for it.
+将外部的默认类型指定为 `'promise'`。Webpack 会将 external 读取为全局变量（类似于 [`'var'`](#externalstypevar)）并为它执行 `await`。
 
 #### Example
 
@@ -607,7 +534,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 const jq = await $;
@@ -616,9 +543,9 @@ jq('.my-element').animate(/* ... */);
 
 ### externalsType.self
 
-Specify the default type of externals as `'self'`. Webpack will read the external as a global variable on the `self` object.
+将外部的默认类型指定为  `'self'`。 Webpack 会将 external 作为 `self` 对象上的全局变量读取。
 
-#### Example
+#### 示例 $#example$
 
 ```javascript
 import jq from 'jquery';
@@ -637,7 +564,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 const jq = self['$'];
@@ -646,8 +573,7 @@ jq('.my-element').animate(/* ... */);
 
 ### externalsType.script
 
-Specify the default type of externals as `'script'`. Webpack will load the external as a script exposing predefined global variables with HTML `<script>` element. The `<script>` tag would be removed after the script has been loaded.
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
+将 external 的默认类型指定为 `'script'`。Webpack 会将 external 作为脚本加载，并使用 HTML `<script>` 元素暴露预定义的全局变量。`<script>` 标签将在脚本加载后被移除。
 
 #### Syntax $#syntax$
 
@@ -729,14 +655,11 @@ T> 当加载带有 HTML `<script>` 标签的代码时，webpack 的 runtime 将�
 
 T> 像 `output.chunkLoadTimeout`，`output.crossOriginLoading` 以及 `output.scriptType` 等选项也会对这种方式加载的 external 脚本产生影响。
 
-<<<<<<< HEAD
-## externalsPresets $#externals-presets$
-=======
 ### externalsType.this
 
-Specify the default type of externals as `'this'`. Webpack will read the external as a global variable on the `this` object.
+将 external 的默认类型指定为 `'this'`。Webpack 会将 external 作为 `this` 对象上的全局变量读取。
 
-#### Example
+示例 $#example$
 
 ```javascript
 import jq from 'jquery';
@@ -755,7 +678,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 const jq = this['$'];
@@ -764,9 +687,9 @@ jq('.my-element').animate(/* ... */);
 
 ### externalsType.var
 
-Specify the default type of externals as `'var'`. Webpack will read the external as a global variable.
+将 external 的默认类型指定为 `'var'`。Webpack 会将 external 作为全局变量读取。
 
-#### Example
+示例 $#example$
 
 ```javascript
 import jq from 'jquery';
@@ -785,7 +708,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 const jq = $;
@@ -794,9 +717,9 @@ jq('.my-element').animate(/* ... */);
 
 ### externalsType.window
 
-Specify the default type of externals as `'window'`. Webpack will read the external as a global variable on the `window` object.
+将 external 的默认类型指定为 `'window'`。Webpack 会将 external 作为 `window` 对象上的全局变量读取。
 
-#### Example
+示例 $#example$
 
 ```javascript
 import jq from 'jquery';
@@ -815,7 +738,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+将会转换为类似下面的代码：
 
 ```javascript
 const jq = window['$'];
@@ -823,7 +746,6 @@ jq('.my-element').animate(/* ... */);
 ```
 
 ## externalsPresets
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
 
 `object`
 

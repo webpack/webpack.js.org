@@ -139,17 +139,11 @@
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.1.8",
     "tap-spot": "^1.1.2",
-<<<<<<< HEAD
     "textlint": "^11.8.2",
     "textlint-rule-heading": "^1.0.10",
-    "unist-util-visit": "^4.1.0",
-    "webpack": "^5.73.0",
-    "webpack-bundle-analyzer": "^4.5.0",
-=======
     "unist-util-visit": "^4.1.1",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.6.1",
->>>>>>> 73993d98f27c3809f16de688fb7220912ea36505
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.10.1",
     "webpack-merge": "^5.8.0",
