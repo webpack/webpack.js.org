@@ -41,7 +41,7 @@ export default (env) =>
     optimization: {
       minimizer: [
         new CssMinimizerPlugin({
-          minify: CssMinimizerPlugin.parcelCssMinify,
+          minify: CssMinimizerPlugin.lightningCssMinify,
         }),
       ],
     },

@@ -19,6 +19,12 @@ module.exports = {
     'react/react-in-jsx-scope': 'off', // ditto
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/no-unknown-property': [
+      'error',
+      {
+        ignore: ['watch', 'align'],
+      },
+    ],
   },
   settings: {
     react: {

@@ -4,9 +4,9 @@ exports[`cleanup readme should clean up div[align="center"] block with paragraph
 "/* @jsxRuntime classic */
 /* @jsx mdx */
 /* @jsxFrag mdx.Fragment */
-const MDXLayout = \\"wrapper\\";
+const MDXLayout = "wrapper";
 function MDXContent({components, ...props}) {
-  return <MDXLayout components={components} {...props}><div align=\\"center\\"><p parentName=\\"div\\"><h1 parentName=\\"p\\">{\\"Imagemin Webpack\\"}</h1></p><p parentName=\\"div\\"><p parentName=\\"p\\">{\\"Plugin and Loader for \\"}<a href=\\"http://webpack.js.org/\\" parentName=\\"p\\">{\\"webpack\\"}</a>{\\" to optimize (compress) all images using \\"}<a href=\\"https://github.com/imagemin/imagemin\\" parentName=\\"p\\">{\\"imagemin\\"}</a>{\\".\\\\nDo not worry about size of images, now they are always optimized/compressed.\\"}</p></p></div></MDXLayout>;
+  return <MDXLayout components={components} {...props}><div align="center"><p parentName="div"><h1 parentName="p">{"Imagemin Webpack"}</h1></p><p parentName="div"><p parentName="p">{"Plugin and Loader for "}<a href="http://webpack.js.org/" parentName="p">{"webpack"}</a>{" to optimize (compress) all images using "}<a href="https://github.com/imagemin/imagemin" parentName="p">{"imagemin"}</a>{".\\nDo not worry about size of images, now they are always optimized/compressed."}</p></p></div></MDXLayout>;
 }
 MDXContent.isMDXComponent = true;
 export default MDXContent;
@@ -17,9 +17,9 @@ exports[`cleanup readme should clean up div[align="center"] block without paragr
 "/* @jsxRuntime classic */
 /* @jsx mdx */
 /* @jsxFrag mdx.Fragment */
-const MDXLayout = \\"wrapper\\";
+const MDXLayout = "wrapper";
 function MDXContent({components, ...props}) {
-  return <MDXLayout components={components} {...props}><div align=\\"center\\" /></MDXLayout>;
+  return <MDXLayout components={components} {...props}><div align="center" /></MDXLayout>;
 }
 MDXContent.isMDXComponent = true;
 export default MDXContent;
@@ -30,9 +30,9 @@ exports[`cleanup readme should clean up nested div[align="center"] block  1`] = 
 "/* @jsxRuntime classic */
 /* @jsx mdx */
 /* @jsxFrag mdx.Fragment */
-const MDXLayout = \\"wrapper\\";
+const MDXLayout = "wrapper";
 function MDXContent({components, ...props}) {
-  return <MDXLayout components={components} {...props}><div align=\\"center\\" /></MDXLayout>;
+  return <MDXLayout components={components} {...props}><div align="center" /></MDXLayout>;
 }
 MDXContent.isMDXComponent = true;
 export default MDXContent;
