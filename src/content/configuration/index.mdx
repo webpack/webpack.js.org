@@ -57,6 +57,7 @@ W> Notice that many array configurations allow to reference the default value vi
 const path = require('path');
 
 module.exports = {
+   name: "my-config", // name of the configuration, shown in output
   <mode "/configuration/mode">
     <default>
       mode: "production", // "production" | "development" | "none"
@@ -65,7 +66,6 @@ module.exports = {
     mode: "development", // enabled useful tools for development
     mode: "none", // no defaults
   </mode>
-  name: "my-config", // name of the configuration, shown in output
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
   <entry "/configuration/entry-context/#entry">
     <default>
