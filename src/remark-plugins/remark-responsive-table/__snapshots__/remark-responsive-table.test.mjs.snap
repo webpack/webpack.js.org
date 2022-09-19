@@ -10,12 +10,12 @@ exports[`responsive table should add data-th 1`] = `
 </thead>
 <tbody>
 <tr>
-<td data-th=\\"foo\\"><span>baz</span></td>
-<td data-th=\\"bar\\"><span>-</span></td>
+<td data-th="foo"><span>baz</span></td>
+<td data-th="bar"><span>-</span></td>
 </tr>
 <tr>
-<td data-th=\\"foo\\"><span>sam</span></td>
-<td data-th=\\"bar\\"><span>chen</span></td>
+<td data-th="foo"><span>sam</span></td>
+<td data-th="bar"><span>chen</span></td>
 </tr>
 </tbody>
 </table>
@@ -32,12 +32,12 @@ exports[`responsive table should handle empty thead 1`] = `
 </thead>
 <tbody>
 <tr>
-<td data-th=\\"\\"><span>baz</span></td>
-<td data-th=\\"bar\\"><span>-</span></td>
+<td data-th=""><span>baz</span></td>
+<td data-th="bar"><span>-</span></td>
 </tr>
 <tr>
-<td data-th=\\"\\"><span>sam</span></td>
-<td data-th=\\"bar\\"><span>chen</span></td>
+<td data-th=""><span>sam</span></td>
+<td data-th="bar"><span>chen</span></td>
 </tr>
 </tbody>
 </table>
