@@ -18,6 +18,7 @@ contributors:
   - bigdawggi
   - anshumanv
   - textbook
+  - coly010
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
@@ -56,6 +57,7 @@ W> Notice that many array configurations allow to reference the default value vi
 const path = require('path');
 
 module.exports = {
+  name: "my-config", // name of the configuration, shown in output
   <mode "/configuration/mode">
     <default>
       mode: "production", // "production" | "development" | "none"
@@ -178,8 +180,6 @@ module.exports = {
     },
     uniqueName: "my-application", // (defaults to package.json "name")
     // unique name for this build to avoid conflicts with other builds in the same HTML
-    name: "my-config",
-    // name of the configuration, shown in output
     <advancedOutput "#">
       <default>
         /* Advanced output configuration (click to show) */
