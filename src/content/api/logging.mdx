@@ -58,6 +58,13 @@ module.exports = function (source) {
 };
 ```
 
+As you can see from the above `my-webpack-plugin.js` example, there're two types of logging methods,
+
+1. `compilation.getLogger`
+2. `compiler.getInfrastructureLogger`
+
+It's advised to use `compilation.getLogger` when plugin/logging is related to the compilation, and they will be stored within the stats. For logging that happens outside the compilation cycle, use `compiler.getInfrastructureLogger` instead.
+
 ## Logger methods
 
 - `logger.error(...)`: for error messages
