@@ -54,7 +54,7 @@
     "printable": "node ./src/scripts/concatenate-docs.mjs",
     "jest": "NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.mjs",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --browser chrome",
     "prettier": "prettier --write '**/*.{js,json,jsx,css,scss,md,mdx}'",
     "prepare": "husky install && rimraf ./node_modules/.cache/webpack && yarn-deduplicate --strategy fewer"
   },
