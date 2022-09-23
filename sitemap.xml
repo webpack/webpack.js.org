@@ -211,13 +211,13 @@
         <loc>https://webpack.js.org/configuration/optimization</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/other-options</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/performance</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/other-options</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/plugins</loc>
@@ -256,9 +256,6 @@
         <loc>https://webpack.js.org/contribute/writing-a-scaffold</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/development/how-to-write-a-plugin</loc>
     </url>
     <url>
@@ -266,6 +263,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/development/release-process</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/get-started/install-webpack</loc>
@@ -391,13 +391,13 @@
         <loc>https://webpack.js.org/loaders/exports-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/expose-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/file-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/html-loader</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/expose-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/imports-loader</loc>
@@ -418,10 +418,10 @@
         <loc>https://webpack.js.org/loaders/null-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/postcss-loader</loc>
+        <loc>https://webpack.js.org/loaders/raw-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/raw-loader</loc>
+        <loc>https://webpack.js.org/loaders/postcss-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/remark-loader</loc>
@@ -589,9 +589,6 @@
         <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
@@ -602,5 +599,8 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/template</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
     </url>
 </urlset>
