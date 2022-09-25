@@ -11,6 +11,7 @@ contributors:
   - Neob91
   - Loonride
   - snitin315
+  - chenxsan
 ---
 
 Webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -128,7 +129,7 @@ T> If you use `require.context`, webpack will watch your entire directory. You w
 
 `boolean = false` `number`
 
-Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by passing `true` which would set the default poll interval to [`5007`](https://github.com/webpack/watchpack/blob/a54bcdb95759558ca5a9fc2819c4d71b771c162f/lib/DirectoryWatcher.js#L79), or specifying a poll interval in milliseconds:
 
 **webpack.config.js**
 
