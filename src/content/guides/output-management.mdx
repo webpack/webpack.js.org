@@ -175,6 +175,21 @@ cacheable modules 530 KiB
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
 webpack 5.4.0 compiled successfully in 2189 ms
 ```
+If an error show up saying npm ERR! Missing script: "build". In other to fix this problem, open the package.json in script properties, add "build": "webpack". After that, run the `npm run build`.
+
+**package.json**
+```diff
+{
+  "name": "webpack-setup",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+   + "build": "webpack"
+  }
+
+```
 
 If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
 
