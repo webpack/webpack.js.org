@@ -10,6 +10,7 @@ contributors:
   - chenxsan
   - rahul3v
   - snitin315
+  - rudolfolah
 ---
 
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
@@ -54,7 +55,8 @@ The top-level structure of the output JSON file is fairly straightforward but th
     // A list of [module objects](#module-objects)
   ],
   'entryPoints': {
-    // A list of [entry objects](#entry-objects)
+    // A map of [entry objects](#entry-objects), where the key is the entry point name
+    "main": {},
   },
   'errors': [
     // A list of [error objects](#errors-and-warnings)
@@ -190,12 +192,12 @@ Every module also contains a list of `reasons` objects describing why that modul
 ### Entry Objects
 
 ```json
-"main": {
+{
   "name": "main",
-  "chunks": [
+  "chunks": [ // list of chunk ids
     179
   ],
-  "assets": [
+  "assets": [ // list of asset objects
     {
       "name": "main.js",
       "size": 22
@@ -203,11 +205,11 @@ Every module also contains a list of `reasons` objects describing why that modul
   ],
   "filteredAssets": 0,
   "assetsSize": 22,
-  "auxiliaryAssets": [],
+  "auxiliaryAssets": [], // list of asset objects
   "filteredAuxiliaryAssets": 0,
   "auxiliaryAssetsSize": 0,
-  "children": {},
-  "childAssets": {},
+  "children": {}, // map of entry objects where the key is the entry object name
+  "childAssets": {}, // map of assets, where the key is the id of the asset
   "isOverSizeLimit": false
 }
 ```
