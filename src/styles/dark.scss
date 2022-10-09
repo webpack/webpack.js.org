@@ -17,6 +17,7 @@ body {
   code,
   tt {
     text-shadow: none;
+    background-color: transparentize(getColor(fiord), 0.55);
   }
   blockquote {
     border-left-color: #343434;
@@ -53,6 +54,9 @@ body {
   }
   pre {
     background-color: #131b1f;
+    code {
+      background: transparent;
+    }
   }
   a code {
     color: #69a8ee;
