@@ -12,6 +12,9 @@ jobs:
         node-version: [16.x]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action
+
       - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -31,6 +34,9 @@ jobs:
         node-version: [16.x]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action
+
       - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -50,6 +56,9 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action
+
       - uses: actions/checkout@v3
 
       - name: Vale
@@ -67,6 +76,9 @@ jobs:
         node-version: [16.x]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action
+
       - uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -101,6 +113,9 @@ jobs:
         node-version: [16.x]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action
+
       - uses: actions/checkout@v3
 
       - name: Enable webpack persistent caching
