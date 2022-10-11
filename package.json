@@ -44,8 +44,8 @@
     "lint": "run-s lint:*",
     "lint:js": "npm run lint-js .",
     "lint-js": "eslint --cache --cache-location .cache/.eslintcache",
-    "lint:markdown": "npm run lint-markdown *.md",
-    "lint-markdown": "markdownlint --config ./.markdownlint.json --ignore '.vale/**/*.md' --ignore '.github/**/*.md'",
+    "lint:markdown": "npm run lint-markdown '**/*.{md,mdx}'",
+    "lint-markdown": "markdownlint --config ./.markdownlint.json",
     "lint:prose": "vale --config='.vale.ini' src/content",
     "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --internal --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip https:// --skip http:// --skip sw.js > internal-links.tap; cat internal-links.tap | tap-spot",
     "sitemap": "cd dist && sitemap-static --ignore-file=../sitemap-ignore.json --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
@@ -62,7 +62,7 @@
     "*.{js,jsx,md,mdx}": [
       "npm run lint-js"
     ],
-    "*.md": [
+    "*.{md,mdx}": [
       "npm run lint-markdown"
     ],
     "*.{js,jsx,css,scss,md,mdx,json}": [

@@ -74,6 +74,7 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
     A shortcut for [`experiments.buildHttp.allowedUris`](#experimentsbuildhttpalloweduris).
 
   - `HttpUriOptions`
+
     ```ts
     {
       allowedUris: (string|RegExp|(uri: string) => boolean)[],
@@ -134,6 +135,7 @@ Define the location for caching remote resources.
   - `string`
   - `false`
 - Example
+
   ```javascript
   // webpack.config.js
   module.exports = {
@@ -259,6 +261,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
 
 - Available: 5.17.0+
 - Example 1:
+
   ```js
   module.exports = {
     // …
@@ -267,6 +270,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
     },
   };
   ```
+
 - Example 2:
 
   ```js

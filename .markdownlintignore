@@ -1,0 +1,3 @@
+.vale/**/*.md
+.github/**/*.md
+node_modules
