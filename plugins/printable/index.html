@@ -1558,8 +1558,22 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
       <span class="token comment">// For `@swc/html`:</span>
       <span class="token comment">//</span>
+      <span class="token comment">// HTML documents - HTML documents with `Doctype` and `&lt;html&gt;/`&lt;head&gt;`/`&lt;body&gt;` tags</span>
+      <span class="token comment">//</span>
+      <span class="token comment">// Options - https://github.com/swc-project/bindings/blob/main/packages/html/index.ts#L5</span>
+      <span class="token comment">//</span>
       <span class="token comment">// new HtmlMinimizerPlugin({</span>
       <span class="token comment">//   minify: HtmlMinimizerPlugin.swcMinify,</span>
+      <span class="token comment">//   minimizerOptions: {}</span>
+      <span class="token comment">// })</span>
+      <span class="token comment">//</span>
+      <span class="token comment">//</span>
+      <span class="token comment">// HTML fragments - HTML fragments, i.e. HTML files without doctype or used in `&lt;template&gt;` tags or HTML parts which injects into another HTML parts</span>
+      <span class="token comment">//</span>
+      <span class="token comment">// Options - https://github.com/swc-project/bindings/blob/main/packages/html/index.ts#L38</span>
+      <span class="token comment">//</span>
+      <span class="token comment">// new HtmlMinimizerPlugin({</span>
+      <span class="token comment">//   minify: HtmlMinimizerPlugin.swcMinifyFragment,</span>
       <span class="token comment">//   minimizerOptions: {}</span>
       <span class="token comment">// })</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1632,7 +1646,8 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p><blockq
       errors<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       warnings<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre><p>Default: <code>HtmlMinimizerPlugin.htmlMinifierTerser</code></p><p>Allows you to override default minify function.
-By default, plugin uses <a href="https://github.com/terser/html-minifier-terser">html-minifier-terser</a> package.</p><p>We currently support:</p><ul><li><code>HtmlMinimizerPlugin.htmlMinifierTerser</code></li><li><code>HtmlMinimizerPlugin.swcMinify</code></li></ul><p>Useful for using and testing unpublished versions or forks.</p><blockquote><p><strong>Warning</strong></p><p><strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p></blockquote><h4><span id="function"></span><code>function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+By default, plugin uses <a href="https://github.com/terser/html-minifier-terser">html-minifier-terser</a> package.</p><p>We currently support:</p><ul><li><code>HtmlMinimizerPlugin.htmlMinifierTerser</code></li><li><code>HtmlMinimizerPlugin.swcMinify</code> (used to compress HTML documents, i.e. with HTML doctype and <code>&lt;html&gt;</code>/<code>&lt;body&gt;</code>/<code>&lt;head&gt;</code> tags)</li><li><code>HtmlMinimizerPlugin.swcMinifyFragment</code> (used to compress HTML fragments, i.e. when you have part of HTML which will be inserted into another HTML parts)</li></ul><blockquote><p><strong>Note</strong></p><p>The difference between <code>swcMinify</code> and <code>swcMinifyFragment</code> is the error reporting.
+You will get errors (invalid or broken syntax) if you have them in your HTML document or fragment. Which allows you to see all the errors and problems at the build stage.</p></blockquote><p>Useful for using and testing unpublished versions or forks.</p><blockquote><p><strong>Warning</strong></p><p><strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p></blockquote><h4><span id="function"></span><code>function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1729,7 +1744,7 @@ If you use <code>minimizerOptions</code> like object, all <code>minify</code> fu
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h2><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><h3><span id="swchtml"></span><code>swc/html</code><a href="#swchtml" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><pre><code class="hljs language-js"><span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h2><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><h3><span id="swchtml"></span><code>swc/html</code><a href="#swchtml" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Available <a href="https://github.com/swc-project/bindings/blob/main/packages/html/index.ts#l5"><code>options</code></a>.</p><p>HTML Documents:</p><pre><code class="hljs language-js"><span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -1757,12 +1772,46 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token keyword">new</span> <span class="token class-name">HtmlMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         minify<span class="token operator">:</span> HtmlMinimizerPlugin<span class="token punctuation">.</span>swcMinify<span class="token punctuation">,</span>
         minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          <span class="token comment">// Options</span>
+          <span class="token comment">// Options - https://github.com/swc-project/bindings/blob/main/packages/html/index.ts#L5</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p><p><a href="https://github.com/webpack-contrib/html-minimizer-webpack-plugin/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p><h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><a href="https://github.com/webpack-contrib/html-minimizer-webpack-plugin/blob/master/LICENSE">MIT</a></p><h1><span id="htmlwebpackplugin"></span>HtmlWebpackPlugin<a href="#htmlwebpackplugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>HTML Framgents:</p><pre><code class="hljs language-js"><span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.html$/i</span><span class="token punctuation">,</span>
+        type<span class="token operator">:</span> <span class="token string">&quot;asset/resource&quot;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          context<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">&quot;./src/*.html&quot;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">new</span> <span class="token class-name">HtmlMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.template\.html$/i</span><span class="token punctuation">,</span>
+        minify<span class="token operator">:</span> HtmlMinimizerPlugin<span class="token punctuation">.</span>swcMinifyFragment<span class="token punctuation">,</span>
+        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token comment">// Options - https://github.com/swc-project/bindings/blob/main/packages/html/index.ts#L38</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>You can use multiple <code>HtmlMinimizerPlugin</code> plugins to compress different files with the different <code>minify</code> function.</p><h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p><p><a href="https://github.com/webpack-contrib/html-minimizer-webpack-plugin/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p><h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><a href="https://github.com/webpack-contrib/html-minimizer-webpack-plugin/blob/master/LICENSE">MIT</a></p><h1><span id="htmlwebpackplugin"></span>HtmlWebpackPlugin<a href="#htmlwebpackplugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <p>The <a href="https://github.com/jantimon/html-webpack-plugin"><code>HtmlWebpackPlugin</code></a> simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using <a href="https://lodash.com/docs#template">lodash templates</a>, or use your own <a href="/loaders">loader</a>.</p><h2><span id="installation"></span>Installation<a href="#installation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev html-webpack-plugin</code></pre><h2><span id="basic-usage"></span>Basic Usage<a href="#basic-usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>The plugin will generate an HTML5 file for you that includes all your webpack
 bundles in the body using <code>script</code> tags. Add the plugin to your webpack
 configuration as follows:</p><pre><code class="hljs language-javascript"><span class="token keyword">const</span> HtmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;html-webpack-plugin&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
