@@ -88,6 +88,9 @@
         <loc>https://webpack.js.org/api/loaders</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/logging</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/module-methods</loc>
     </url>
     <url>
@@ -95,9 +98,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/node</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/logging</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
@@ -160,10 +160,10 @@
         <loc>https://webpack.js.org/concepts/modules</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/plugins</loc>
+        <loc>https://webpack.js.org/concepts/output</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/output</loc>
+        <loc>https://webpack.js.org/concepts/plugins</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/targets</loc>
@@ -187,13 +187,13 @@
         <loc>https://webpack.js.org/configuration/dev-server</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/devtool</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/entry-context</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/experiments</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/devtool</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/externals</loc>
@@ -256,10 +256,10 @@
         <loc>https://webpack.js.org/contribute/writing-a-scaffold</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
+        <loc>https://webpack.js.org/development/how-to-write-a-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/development/how-to-write-a-plugin</loc>
+        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/plugin-patterns</loc>
@@ -268,10 +268,10 @@
         <loc>https://webpack.js.org/development/release-process</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/install-webpack</loc>
+        <loc>https://webpack.js.org/get-started/why-webpack</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/why-webpack</loc>
+        <loc>https://webpack.js.org/get-started/install-webpack</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/asset-management</loc>
@@ -301,10 +301,10 @@
         <loc>https://webpack.js.org/guides/code-splitting-import</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-require</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-libraries</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-libraries</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-require</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/csp</loc>
@@ -325,10 +325,10 @@
         <loc>https://webpack.js.org/guides/entry-advanced</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/getting-started</loc>
+        <loc>https://webpack.js.org/guides/environment-variables</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/environment-variables</loc>
+        <loc>https://webpack.js.org/guides/getting-started</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
@@ -338,9 +338,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/integrations</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/lazy-loading</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/output-management</loc>
@@ -373,10 +370,13 @@
         <loc>https://webpack.js.org/guides/typescript</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/web-workers</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/why-webpack</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/web-workers</loc>
+        <loc>https://webpack.js.org/guides/lazy-loading</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/babel-loader</loc>
@@ -439,6 +439,9 @@
         <loc>https://webpack.js.org/loaders/stylus-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/thread-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/url-loader</loc>
     </url>
     <url>
@@ -446,9 +449,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/worker-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/thread-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/3</loc>
@@ -499,6 +499,9 @@
         <loc>https://webpack.js.org/plugins/eslint-webpack-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin</loc>
     </url>
     <url>
@@ -506,9 +509,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/html-minimizer-webpack-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/html-webpack-plugin</loc>
@@ -541,13 +541,13 @@
         <loc>https://webpack.js.org/plugins/module-concatenation-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/module-federation-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/module-federation-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/prefetch-plugin</loc>
