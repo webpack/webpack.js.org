@@ -42,14 +42,12 @@ import webpack from 'webpack';
 
 The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
-webpack({
-  // [Configuration Object](/configuration/)
-}, (err, stats) => { // [Stats Object](#stats-object)
+webpack({}, (err, stats) => {
   if (err || stats.hasErrors()) {
-    // [Handle errors here](#error-handling)
+    //
   }
   // Done processing
 });
@@ -96,14 +94,14 @@ again. Concurrent compilations will corrupt the output files.
 Calling the `run` method on the `Compiler` instance is much like the quick run
 method mentioned above:
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
 const compiler = webpack({
-  // [Configuration Object](/configuration/)
+  //
 });
 
-compiler.run((err, stats) => { // [Stats Object](#stats-object)
+compiler.run((err, stats) => {
   // ...
 
   compiler.close((closeErr) => {
@@ -124,21 +122,24 @@ change, runs again. Returns an instance of `Watching`.
 watch(watchOptions, callback);
 ```
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
 const compiler = webpack({
-  // [Configuration Object](/configuration/)
+  //
 });
 
-const watching = compiler.watch({
-  // Example [watchOptions](/configuration/watch/#watchoptions)
-  aggregateTimeout: 300,
-  poll: undefined
-}, (err, stats) => { // [Stats Object](#stats-object)
-  // Print watch/build result here...
-  console.log(stats);
-});
+const watching = compiler.watch(
+  {
+    // Example
+    aggregateTimeout: 300,
+    poll: undefined,
+  },
+  (err, stats) => {
+    // Print watch/build result here...
+    console.log(stats);
+  }
+);
 ```
 
 `Watching` options are covered in detail
@@ -206,8 +207,8 @@ Can be used to check if there were warnings while compiling. Returns `true` or
 Returns compilation information as a JSON object. `options` can be either a
 string (a preset) or an object for more granular control:
 
-```js-with-links
-stats.toJson('minimal'); // [more options: 'verbose', etc](/configuration/stats).
+```js
+stats.toJson('minimal');
 ```
 
 ```js
@@ -238,22 +239,27 @@ stats.toString({
 
 Here’s an example of `stats.toString()` usage:
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
-webpack({
-  // [Configuration Object](/configuration/)
-}, (err, stats) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
+webpack(
+  {
+    //
+  },
+  (err, stats) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
 
-  console.log(stats.toString({
-    chunks: false,  // Makes the build much quieter
-    colors: true    // Shows colors in the console
-  }));
-});
+    console.log(
+      stats.toString({
+        chunks: false, // Makes the build much quieter
+        colors: true, // Shows colors in the console
+      })
+    );
+  }
+);
 ```
 
 ## MultiCompiler
@@ -263,15 +269,18 @@ separate compilers. If the `options` parameter in the webpack's NodeJS api is
 an array of options, webpack applies separate compilers and calls the
 `callback` after all compilers have been executed.
 
-```js-with-links
+```js
 var webpack = require('webpack');
 
-webpack([
-  { entry: './index1.js', output: { filename: 'bundle1.js' } },
-  { entry: './index2.js', output: { filename: 'bundle2.js' } }
-], (err, stats) => { // [Stats Object](#stats-object)
-  process.stdout.write(stats.toString() + '\n');
-})
+webpack(
+  [
+    { entry: './index1.js', output: { filename: 'bundle1.js' } },
+    { entry: './index2.js', output: { filename: 'bundle2.js' } },
+  ],
+  (err, stats) => {
+    process.stdout.write(stats.toString() + '\n');
+  }
+);
 ```
 
 W> Multiple configurations will **not be run in parallel**. Each
@@ -288,32 +297,35 @@ For good error handling, you need to account for these three types of errors:
 
 Here’s an example that does all that:
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
-webpack({
-  // [Configuration Object](/configuration/)
-}, (err, stats) => {
-  if (err) {
-    console.error(err.stack || err);
-    if (err.details) {
-      console.error(err.details);
+webpack(
+  {
+    //
+  },
+  (err, stats) => {
+    if (err) {
+      console.error(err.stack || err);
+      if (err.details) {
+        console.error(err.details);
+      }
+      return;
     }
-    return;
+
+    const info = stats.toJson();
+
+    if (stats.hasErrors()) {
+      console.error(info.errors);
+    }
+
+    if (stats.hasWarnings()) {
+      console.warn(info.warnings);
+    }
+
+    // Log result...
   }
-
-  const info = stats.toJson();
-
-  if (stats.hasErrors()) {
-    console.error(info.errors);
-  }
-
-  if (stats.hasWarnings()) {
-    console.warn(info.warnings);
-  }
-
-  // Log result...
-});
+);
 ```
 
 ## Custom File Systems
