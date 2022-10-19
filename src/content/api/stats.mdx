@@ -24,46 +24,39 @@ The `--json=compilation-stats.json` flag indicates to webpack that it should emi
 
 The top-level structure of the output JSON file is fairly straightforward but there are a few nested data structures as well. Each nested structure has a dedicated section below to make this document more consumable. Note that you can click links within the top-level structure below to jump to relevant sections and documentation:
 
-```js-with-links
+```json
 {
-  'version': '5.9.0', // Version of webpack used for the compilation
-  'hash': '11593e3b3ac85436984a', // Compilation specific hash
-  'time': 2469, // Compilation time in milliseconds
-  'publicPath': 'auto',
-  'outputPath': '/', // path to webpack output directory
-  'assetsByChunkName': {
+  "version": "5.9.0", // Version of webpack used for the compilation
+  "hash": "11593e3b3ac85436984a", // Compilation specific hash
+  "time": 2469, // Compilation time in milliseconds
+  "publicPath": "auto",
+  "outputPath": "/", // path to webpack output directory
+  "assetsByChunkName": {
     // Chunk name to emitted asset(s) mapping
-    'main': [
-      'web.js?h=11593e3b3ac85436984a'
-    ],
-    'named-chunk': [
-      'named-chunk.web.js'
-    ],
-    'other-chunk': [
-      'other-chunk.js',
-      'other-chunk.css'
-    ]
+    "main": ["web.js?h=11593e3b3ac85436984a"],
+    "named-chunk": ["named-chunk.web.js"],
+    "other-chunk": ["other-chunk.js", "other-chunk.css"]
   },
-  'assets': [
-    // A list of [asset objects](#asset-objects)
+  "assets": [
+    // A list of asset objects
   ],
-  'chunks': [
-    // A list of [chunk objects](#chunk-objects)
+  "chunks": [
+    // A list of chunk objects
   ],
-  'modules': [
-    // A list of [module objects](#module-objects)
+  "modules": [
+    // A list of module objects
   ],
-  'entryPoints': {
-    // A list of [entry objects](#entry-objects)
+  "entryPoints": {
+    // A list of entry objects
   },
-  'errors': [
-    // A list of [error objects](#errors-and-warnings)
+  "errors": [
+    // A list of error objects
   ],
-  'errorsCount': 0, // number of errors
-  'warnings': [
-    // A list of [warning objects](#errors-and-warnings)
+  "errorsCount": 0, // number of errors
+  "warnings": [
+    // A list of warning objects
   ],
-  'warningsCount': 0, // nummber of warnings
+  "warningsCount": 0 // nummber of warnings
 }
 ```
 
@@ -96,7 +89,7 @@ T> Asset's `info` property is available since webpack v4.40.0
 
 Each `chunks` object represents a group of modules known as a [chunk](/glossary/#c). Each object follows the following structure:
 
-```js-with-links
+```json
 {
   "entry": true, // Indicates whether or not the chunk contains the webpack runtime
   "files": [
@@ -123,7 +116,7 @@ Each `chunks` object represents a group of modules known as a [chunk](/glossary/
 
 The `chunks` object will also contain a list of `origins` describing how the given chunk originated. Each `origins` object follows the following schema:
 
-```js-with-links
+```json
 {
   "loc": "", // Lines of code that generated this chunk
   "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
@@ -141,7 +134,7 @@ The `chunks` object will also contain a list of `origins` describing how the giv
 
 What good would these statistics be without some description of the compiled application's actual modules? Each module in the dependency graph is represented by the following structure:
 
-```js-with-links
+```json
 {
   "assets": [
     // A list of [asset objects](#asset-objects)
@@ -175,7 +168,7 @@ What good would these statistics be without some description of the compiled app
 
 Every module also contains a list of `reasons` objects describing why that module was included in the dependency graph. Each "reason" is similar to the `origins` seen above in the [chunk objects](#chunk-objects) section:
 
-```js-with-links
+```json
 {
   "loc": "33:24-93", // Lines of code that caused the module to be included
   "module": "./lib/index.web.js", // Relative path to the module based on [context](/configuration/entry-context/#context)

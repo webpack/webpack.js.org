@@ -638,7 +638,7 @@ However, parser plugins may accept more than only a boolean. For example, the in
 
 **Examples** (parser options by the default plugins):
 
-```js-with-links
+```js
 module.exports = {
   //...
   module: {
@@ -657,13 +657,13 @@ module.exports = {
           requireJs: false, // disable requirejs.*
           node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
           commonjsMagicComments: false, // disable magic comments support for CommonJS
-          node: {...}, // reconfigure [node](/configuration/node) layer on module level
-          worker: ["default from web-worker", "..."] // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
-        }
-      }
-    ]
-  }
-}
+          node: {}, // reconfigure node layer on module level
+          worker: ['default from web-worker', '...'], // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
+        },
+      },
+    ],
+  },
+};
 ```
 
 If `Rule.type` is an `asset` then `Rules.parser` option may be an object or a function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory.
