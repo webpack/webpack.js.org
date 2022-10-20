@@ -1,5 +1,4 @@
 module.exports = {
-  mode: 'jit',
   content: ['./src/components/**/*.{js,jsx}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
@@ -44,8 +43,7 @@ module.exports = {
       },
     },
   },
-  variants: {
-    extend: {},
+  corePlugins: {
+    preflight: false,
   },
-  plugins: [],
 };
