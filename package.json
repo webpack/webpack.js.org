@@ -81,7 +81,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "next",
     "@svgr/webpack": "^6.5.0",
     "autoprefixer": "^10.4.12",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.2.2",
