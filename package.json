@@ -80,7 +80,7 @@
     "@octokit/rest": "^19.0.5",
     "@pmmmwh/react-refresh-webpack-plugin": "next",
     "@svgr/webpack": "^6.5.1",
-    "autoprefixer": "^10.4.12",
+    "autoprefixer": "^10.4.13",
     "babel-loader": "^9.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
