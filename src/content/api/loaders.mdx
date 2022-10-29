@@ -648,7 +648,7 @@ module.exports = function (source) {
 
 这个模块将获取像下面的 bundle：
 
-```
+```text
 /***/ "./src/loader.js!./src/lib.js":
 /*!************************************!*\
   !*** ./src/loader.js!./src/lib.js ***!
@@ -725,7 +725,10 @@ module.exports = function (source) {
   if (STYLES_REGEXP.test(source)) {
     source = source.replace(STYLES_REGEXP, '');
     return `import ${JSON.stringify(
-      this.utils.contextify(this.context || this.rootContext, `${this.resource}.css!=!${getStylesLoader}!${this.remainingRequest}`)
+      this.utils.contextify(
+        this.context || this.rootContext,
+        `${this.resource}.css!=!${getStylesLoader}!${this.remainingRequest}`
+      )
     )};${source}`;
   }
   return source;

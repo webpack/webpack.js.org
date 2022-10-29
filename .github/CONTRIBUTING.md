@@ -28,7 +28,9 @@ will do this automatically. This step pulls in documentation for loaders/plugins
 in separate repositories such as the ones found in the [webpack-contrib][4] organization.
 See the `package.json` for the full list of `scripts`.
 
-> Note that **Node 12.x** or above is required for the build process to run properly.
+> **Note**
+>
+> **Node v14.20** or above is required for the build process to run properly.
 
 ## Contributor License Agreement
 

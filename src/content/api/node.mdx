@@ -47,14 +47,20 @@ import webpack from 'webpack';
 
 导入的 `webpack` 函数会将 [配置对象](/configuration/) 传给 webpack，如果同时传入回调函数会在 webpack compiler 运行时被执行:
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
+<<<<<<< HEAD
 webpack({
   // [配置对象](/configuration/)
 }, (err, stats) => { // [Stats Object](#stats-object)
   if (err || stats.hasErrors()) {
     // [在这里处理错误](#error-handling)
+=======
+webpack({}, (err, stats) => {
+  if (err || stats.hasErrors()) {
+    // ...
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   }
   // 处理完成
 });
@@ -100,14 +106,18 @@ W> 这个 API 一次仅支持一个编译。当使用 `run` 或者
 调用 `Compiler` 实例的 `run` 方法跟上文提到的
 快速执行方法很类似：
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
 const compiler = webpack({
+<<<<<<< HEAD
   // [配置对象](/configuration/)
+=======
+  // ...
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 });
 
-compiler.run((err, stats) => { // [Stats Object](#stats-object)
+compiler.run((err, stats) => {
   // ...
 
   compiler.close((closeErr) => {
@@ -128,10 +138,11 @@ W> 不要忘记关闭编译器，这样低优先级的工作（比如持久缓�
 watch(watchOptions, callback);
 ```
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
 const compiler = webpack({
+<<<<<<< HEAD
   // [配置对象](/configuration/)
 });
 
@@ -143,6 +154,22 @@ const watching = compiler.watch({
   // 这里打印 watch/build 结果...
   console.log(stats);
 });
+=======
+  // ...
+});
+
+const watching = compiler.watch(
+  {
+    // Example
+    aggregateTimeout: 300,
+    poll: undefined,
+  },
+  (err, stats) => {
+    // Print watch/build result here...
+    console.log(stats);
+  }
+);
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ```
 
 `Watching` 配置选项的细节可以在
@@ -210,8 +237,13 @@ T> 当使用 [`MultiCompiler`](#multicompiler) 时，
 以 JSON 对象形式返回编译信息。
 `options` 可以是一个字符串（预设值）或是颗粒化控制的对象:
 
+<<<<<<< HEAD
 ``` js-with-links
 stats.toJson('minimal'); // [更多选项如: 'verbose' 等](/configuration/stats).
+=======
+```js
+stats.toJson('minimal');
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ```
 
 ```js
@@ -243,9 +275,10 @@ stats.toString({
 
 下面是 `stats.toString()` 用法的示例:
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
+<<<<<<< HEAD
 webpack({
   // [配置对象](/configuration/)
 }, (err, stats) => {
@@ -259,6 +292,26 @@ webpack({
     colors: true    // 在控制台展示颜色
   }));
 });
+=======
+webpack(
+  {
+    // ...
+  },
+  (err, stats) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    console.log(
+      stats.toString({
+        chunks: false, // Makes the build much quieter
+        colors: true, // Shows colors in the console
+      })
+    );
+  }
+);
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ```
 
 ## MultiCompiler $#multicompiler$
@@ -268,15 +321,18 @@ webpack({
 该参数由是由多个配置对象构成的数组，webpack 会相应地创建多个 compiler 实例，
 并且在所有 compiler 执行完毕后调用 `callback` 方法。
 
-```js-with-links
+```js
 var webpack = require('webpack');
 
-webpack([
-  { entry: './index1.js', output: { filename: 'bundle1.js' } },
-  { entry: './index2.js', output: { filename: 'bundle2.js' } }
-], (err, stats) => { // [Stats Object](#stats-object)
-  process.stdout.write(stats.toString() + '\n');
-})
+webpack(
+  [
+    { entry: './index1.js', output: { filename: 'bundle1.js' } },
+    { entry: './index2.js', output: { filename: 'bundle2.js' } },
+  ],
+  (err, stats) => {
+    process.stdout.write(stats.toString() + '\n');
+  }
+);
 ```
 
 W> 多个配置对象在执行时，**不会并行执行**。
@@ -293,9 +349,10 @@ W> 多个配置对象在执行时，**不会并行执行**。
 
 下面是一个覆盖这些场景的示例:
 
-```js-with-links
+```js
 const webpack = require('webpack');
 
+<<<<<<< HEAD
 webpack({
   // [配置对象](/configuration/)
 }, (err, stats) => {
@@ -303,22 +360,34 @@ webpack({
     console.error(err.stack || err);
     if (err.details) {
       console.error(err.details);
+=======
+webpack(
+  {
+    // ...
+  },
+  (err, stats) => {
+    if (err) {
+      console.error(err.stack || err);
+      if (err.details) {
+        console.error(err.details);
+      }
+      return;
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
     }
-    return;
+
+    const info = stats.toJson();
+
+    if (stats.hasErrors()) {
+      console.error(info.errors);
+    }
+
+    if (stats.hasWarnings()) {
+      console.warn(info.warnings);
+    }
+
+    // Log result...
   }
-
-  const info = stats.toJson();
-
-  if (stats.hasErrors()) {
-    console.error(info.errors);
-  }
-
-  if (stats.hasWarnings()) {
-    console.warn(info.warnings);
-  }
-
-  // Log result...
-});
+);
 ```
 
 ## 自定义文件系统(Custom File Systems) $#custom-file-systems$

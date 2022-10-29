@@ -1,5 +1,5 @@
 // Import External Dependencies
-import { Children, isValidElement, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 
@@ -9,7 +9,6 @@ import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
 import Translators from '../Translators/Translators';
 import { PlaceholderString } from '../Placeholder/Placeholder';
-import { Pre } from '../Configuration/Configuration';
 import AdjacentPages from './AdjacentPages';
 
 // Load Styling
@@ -95,16 +94,6 @@ export default function Page(props) {
 
   if (typeof content === 'function') {
     contentRender = content({}).props.children;
-    contentRender = Children.map(contentRender, (child) => {
-      if (isValidElement(child)) {
-        if (child.props.mdxType === 'pre') {
-          // eslint-disable-next-line
-          return <Pre children={child.props.children} />;
-        }
-      }
-
-      return child;
-    });
   } else {
     contentRender = (
       <div

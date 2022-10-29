@@ -71,8 +71,14 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 - `optimization.splitChunks.cacheGroups.vendors` → `optimization.splitChunks.cacheGroups.defaultVendors`
 - `optimization.splitChunks.cacheGroups.test(module, chunks)` → `optimization.splitChunks.cacheGroups.test(module, { chunkGraph, moduleGraph })`
 - `Compilation.entries` → `Compilation.entryDependencies`
+<<<<<<< HEAD
 - `serve` → `serve` 已被移除，推荐使用 [`DevServer`](/configuration/dev-server/)
 - [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (从 v3 开始被移除) → `Rule.options`/`UseEntry.options`
+=======
+- `serve` → `serve` is removed in favor of [`DevServer`](/configuration/dev-server/)
+- [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (deprecated since v3) → `Rule.options`/`UseEntry.options`
+- `Rule.loaders` → [`Rule.use`](/configuration/module/#ruleuse)
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 
 ### 测试 webpack 5 兼容性 $#test-webpack-5-compatibility$
 

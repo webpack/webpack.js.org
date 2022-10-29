@@ -18,9 +18,14 @@ contributors:
   - bigdawggi
   - anshumanv
   - textbook
+<<<<<<< HEAD
 translators:
   - dear-lizhihua
   - QC-L
+=======
+  - coly010
+  - chenxsan
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ---
 
 webpack 开箱即用，可以无需使用任何配置文件。然而，webpack 会假定项目的入口起点为 `src/index.js`，然后会在 `dist/main.js` 输出结果，并且在生产环境开启压缩和优化。
@@ -45,6 +50,7 @@ T> 刚开始学习 webpack？请查看我们提供的指南，从 webpack 一些
 }
 ```
 
+<<<<<<< HEAD
 ## 选项 $#options$
 
 点击下面配置代码中每个选项的名称，跳转到详细的文档。还要注意，带有箭头的项目可以展开，以显示更多示例，在某些情况下可以看到高级配置。
@@ -1137,39 +1143,58 @@ module.exports = {
   </advancedBuild>
 }
 ```
+=======
+## Set up a new webpack project
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 
 W> 在应用 [插件默认值](/contribute/writing-a-plugin/#configuration-defaults) 之后，webpack 将应用配置默认值。
 
+<<<<<<< HEAD
 为了快速生成符合项目要求的 webpack 配置文件，在使用 [webpack-cli 的 `init` 命令](/api/cli/#init)时，会在创建配置文件之前会询问你几个问题。
+=======
+Webpack has a huge set of options which might be overwhelming to you, please take advantage of [webpack-cli's `init` command](/api/cli/#init) which could rapidly generate webpack configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 
 ```bash
-npx webpack-cli init
+npx webpack init
 ```
 
+<<<<<<< HEAD
 如果尚未在项目或全局安装 `@webpack-cli/init`，npx 可能会提示你安装。根据你在配置生成过程中的选择，你也可能会安装额外的 package 到你的项目中。
+=======
+npx might prompt you to install `@webpack-cli/generators` if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the configuration generation.
+>>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 
 ```bash
-npx webpack-cli init
+$ npx webpack init
 
-ℹ INFO For more information and a detailed description of each question, have a look at https://github.com/webpack/webpack-cli/blob/master/INIT.md
-ℹ INFO Alternatively, run `webpack(-cli) --help` for usage info.
+[webpack-cli] For using this command you need to install: '@webpack-cli/generators' package.
+[webpack-cli] Would you like to install '@webpack-cli/generators' package? (That will run 'npm install -D @webpack-cli/generators') (Y/n)
+devDependencies:
++ @webpack-cli/generators 2.5.0
+? Which of the following JS solutions do you want to use? ES6
+? Do you want to use webpack-dev-server? Yes
+? Do you want to simplify the creation of HTML files for your bundle? Yes
+? Do you want to add PWA support? No
+? Which of the following CSS solutions do you want to use? CSS only
+? Will you be using PostCSS in your project? Yes
+? Do you want to extract CSS for every file? Only for Production
+? Do you like to install prettier to format generated configuration? Yes
+? Pick a package manager: pnpm
+[webpack-cli] ℹ INFO  Initialising project...
 
-? Will your application have multiple bundles? No
-? Which module will be the first to enter the application? [default: ./src/index]
-? Which folder will your generated bundles be in? [default: dist]:
-? Will you be using ES2015? Yes
-? Will you use one of the below CSS solutions? No
-
-+ babel-plugin-syntax-dynamic-import@6.18.0
-+ uglifyjs-webpack-plugin@2.0.1
-+ webpack-cli@3.2.3
-+ @babel/core@7.2.2
-+ babel-loader@8.0.4
-+ @babel/preset-env@7.1.0
-+ webpack@4.29.3
-added 124 packages from 39 contributors, updated 4 packages and audited 25221 packages in 7.463s
-found 0 vulnerabilities
-
-
-Congratulations! Your new webpack configuration file has been created!
+devDependencies:
++ @babel/core 7.19.3
++ @babel/preset-env 7.19.4
++ autoprefixer 10.4.12
++ babel-loader 8.2.5
++ css-loader 6.7.1
++ html-webpack-plugin 5.5.0
++ mini-css-extract-plugin 2.6.1
++ postcss 8.4.17
++ postcss-loader 7.0.1
++ prettier 2.7.1
++ style-loader 3.3.1
++ webpack-dev-server 4.11.1
+[webpack-cli] Project has been initialised with webpack!
 ```
