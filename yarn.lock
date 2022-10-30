@@ -3642,11 +3642,7 @@ browser-process-hrtime@^1.0.0:
   resolved "https://registry.yarnpkg.com/browser-process-hrtime/-/browser-process-hrtime-1.0.0.tgz#3c9b4b7d782c8121e56f10106d84c0d0ffc94626"
   integrity sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==
 
-<<<<<<< HEAD
 browserslist@^4.0.0, browserslist@^4.14.5, browserslist@^4.16.6, browserslist@^4.20.3, browserslist@^4.21.3:
-=======
-browserslist@^4.0.0, browserslist@^4.14.5, browserslist@^4.16.6, browserslist@^4.20.3, browserslist@^4.21.3, browserslist@^4.21.4:
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   version "4.21.4"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.21.4.tgz#e7496bbc67b9e39dd0f98565feccdcb0d4ff6987"
   integrity sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==
@@ -3760,17 +3756,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-<<<<<<< HEAD
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001399, caniuse-lite@^1.0.30001400:
   version "1.0.30001402"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001402.tgz#aa29e1f47f5055b0d0c07696a67b8b08023d14c8"
   integrity sha512-Mx4MlhXO5NwuvXGgVb+hg65HZ+bhUYsz8QtDGDo2QmaJS2GBX47Xfi2koL86lc8K+l+htXeTEB/Aeqvezoo6Ew==
-=======
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001400, caniuse-lite@^1.0.30001426:
-  version "1.0.30001426"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001426.tgz#58da20446ccd0cb1dfebd11d2350c907ee7c2eaa"
-  integrity sha512-n7cosrHLl8AWt0wwZw/PJZgUg3lV0gk9LMI7ikGJwhyhgsd2Nb65vKvmSexCqq/J7rbH3mFG6yZZiPR5dLPW5A==
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -4943,15 +4932,9 @@ ejs@^3.1.6:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.251:
-<<<<<<< HEAD
   version "1.4.254"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.254.tgz#c6203583890abf88dfc0be046cd72d3b48f8beb6"
   integrity sha512-Sh/7YsHqQYkA6ZHuHMy24e6TE4eX6KZVsZb9E/DvU1nQRIrH4BflO/4k+83tfdYvDl+MObvlqHPRICzEdC9c6Q==
-=======
-  version "1.4.256"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.256.tgz#c735032f412505e8e0482f147a8ff10cfca45bf4"
-  integrity sha512-x+JnqyluoJv8I0U9gVe+Sk2st8vF0CzMt78SXxuoWCooLLY2k5VerIBdpvG7ql6GKI4dzNnPjmqgDJ76EdaAKw==
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 
 emittery@^0.13.1:
   version "0.13.1"
@@ -11897,7 +11880,6 @@ table-layout@^1.0.1:
     typical "^5.2.0"
     wordwrapjs "^4.0.0"
 
-<<<<<<< HEAD
 table@^3.8.3:
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/table/-/table-3.8.3.tgz#2bbc542f0fda9861a755d3947fefd8b3f513855f"
@@ -11914,12 +11896,6 @@ tailwindcss@^3.1.8:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.1.8.tgz#4f8520550d67a835d32f2f4021580f9fddb7b741"
   integrity sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==
-=======
-tailwindcss@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.2.1.tgz#1bd828fff3172489962357f8d531c184080a6786"
-  integrity sha512-Uw+GVSxp5CM48krnjHObqoOwlCt5Qo6nw1jlCRwfGy68dSYb/LwS9ZFidYGRiM+w6rMawkZiu1mEMAsHYAfoLg==
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   dependencies:
     arg "^5.0.2"
     chokidar "^3.5.3"

@@ -147,16 +147,10 @@ module.exports = {
 
 为 CommonJS 启用 [魔法注释](/api/module-methods/#magic-comments)。
 
-<<<<<<< HEAD
 - 类型：`boolean`
 - 可用版本：5.17.0+
 - 示例：
-=======
-- Type: `boolean`
-- Available: 5.17.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -179,16 +173,10 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 指定动态导入的全局模式。
 
-<<<<<<< HEAD
 - 类型：`'eager' | 'weak' | 'lazy' | 'lazy-once'`
 - 可用版本：5.73.0+
 - 示例：
-=======
-- Type: `'eager' | 'weak' | 'lazy' | 'lazy-once'`
-- Available: 5.73.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -205,16 +193,10 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 指定动态导入的全局 prefetch。
 
-<<<<<<< HEAD
 - 类型：` number | boolean`
 - 可用版本：5.73.0+
 - 示例：
-=======
-- Type: ` number | boolean`
-- Available: 5.73.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -231,16 +213,10 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 指定动态导入的全局 preload。
 
-<<<<<<< HEAD
 - 类型：` number | boolean`
 - 可用版本：5.73.0+
 - 示例：
-=======
-- Type: ` number | boolean`
-- Available: 5.73.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -257,16 +233,10 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 指出在 `\"import ... from ...\"` 与 `\"export ... from ...\"` 中无效导出名称的行为。
 
-<<<<<<< HEAD
 - 类型：`'error' | 'warn' | 'auto' | false`
 - 可用版本：5.62.0+
 - 示例：
-=======
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -283,16 +253,10 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 指出在 `\"import ... from ...\"` 中无效导出名称的行为。
 
-<<<<<<< HEAD
 - 类型：`'error' | 'warn' | 'auto' | false`
 - 可用版本：5.62.0+
 - 示例：
-=======
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -309,16 +273,10 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 Enable or disable evaluating `import.meta`.
 
-<<<<<<< HEAD
 - 类型：`boolean = true`
 - 可用版本：5.68.0+
 - 示例：
-=======
-- Type: `boolean = true`
-- Available: 5.68.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -335,16 +293,10 @@ Enable or disable evaluating `import.meta`.
 
 启用/禁用 [`import.meta.webpackContext`](/api/module-variables/#importmetawebpackcontext) 分析。
 
-<<<<<<< HEAD
 - 类型：`boolean`
 - 可用版本：5.70.0+
 - 示例：
-=======
-- Type: `boolean`
-- Available: 5.70.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -361,16 +313,10 @@ Enable or disable evaluating `import.meta`.
 
 指出在  `\"export ... from ...\"` 中无效导出名称的行为。当在 TypeScript 重新导出类型，从 `\"export ... from ...\"` 迁移到 `\"export type ... from ...\"` 时禁用该配置项是有用的。
 
-<<<<<<< HEAD
 - 类型：`'error' | 'warn' | 'auto' | false`
 - 可用版本：5.62.0+
 - 示例：
-=======
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -387,14 +333,9 @@ Enable or disable evaluating `import.meta`.
 
 启用 `new URL()` 语法解析。
 
-<<<<<<< HEAD
 - 类型：`boolean = true` | `'relative'`
 - 示例:
-=======
-- Type: `boolean = true` | `'relative'`
-- Example:
 
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   ```js
   module.exports = {
     module: {
@@ -717,7 +658,6 @@ module.exports = {
       {
         //...
         parser: {
-<<<<<<< HEAD
           amd: false, // 禁用 AMD
           commonjs: false, // 禁用 CommonJS
           system: false, // 禁用 SystemJS
@@ -728,33 +668,14 @@ module.exports = {
           browserify: false, // 禁用特殊处理的 browserify bundle
           requireJs: false, // 禁用 requirejs.*
           node: false, // 禁用 __dirname, __filename, module, require.extensions, require.main, 等。
-          node: {...}, // 在模块级别(module level)上重新配置 [node](/configuration/node) 层(layer)
+          commonjsMagicComments: false, // 禁用对 CommonJS 的  magic comments 支持
+          node: {}, // 在模块级别(module level)上重新配置 node 层(layer)
           worker: ["default from web-worker", "..."] // 自定义 WebWorker 对 JavaScript 的处理，其中 "..." 为默认值。
         }
       }
     ]
   }
 }
-=======
-          amd: false, // disable AMD
-          commonjs: false, // disable CommonJS
-          system: false, // disable SystemJS
-          harmony: false, // disable ES2015 Harmony import/export
-          requireInclude: false, // disable require.include
-          requireEnsure: false, // disable require.ensure
-          requireContext: false, // disable require.context
-          browserify: false, // disable special handling of Browserify bundles
-          requireJs: false, // disable requirejs.*
-          node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
-          commonjsMagicComments: false, // disable magic comments support for CommonJS
-          node: {}, // reconfigure node layer on module level
-          worker: ['default from web-worker', '...'], // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
-        },
-      },
-    ],
-  },
-};
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ```
 
 如果 `Rule.type` 的值为 `asset`，那么 `Rules.parser` 选项可能是一个对象或一个函数，其作用可能是将文件内容编码为 Base64，还可能是将其当做单独文件 emit 到输出目录。

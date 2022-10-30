@@ -99,12 +99,8 @@
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
     "front-matter": "^4.0.2",
-<<<<<<< HEAD
-    "github-slugger": "^1.4.0",
-    "html-loader": "^2.1.2",
-=======
     "github-slugger": "^2.0.0",
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
+    "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.5.0",
     "http-server": "^14.1.1",
     "husky": "^8.0.1",
