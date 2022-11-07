@@ -67,7 +67,7 @@ _Vercel_ has given us a Pro account.
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
 [concepts-url]: https://github.com/webpack/webpack.js.org/issues/1386
-[contributing-url]: https://github.com/webpack/webpack.js.org/blob/master/.github/CONTRIBUTING.md
+[contributing-url]: https://github.com/webpack/webpack.js.org/blob/main/.github/CONTRIBUTING.md
 [general-url]: https://github.com/webpack/webpack.js.org/issues/1525
 [guides-url]: https://github.com/webpack/webpack.js.org/issues/1258
 [license-url]: https://creativecommons.org/licenses/by/4.0/
