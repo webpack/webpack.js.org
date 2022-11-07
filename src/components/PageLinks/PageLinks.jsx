@@ -1,7 +1,7 @@
 import Url from 'url';
 import PropTypes from 'prop-types';
 
-const baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/';
+const baseURL = 'https://github.com/webpack/webpack.js.org/edit/main/';
 
 PageLinks.propTypes = {
   page: PropTypes.shape({

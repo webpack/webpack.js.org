@@ -12,7 +12,7 @@ export default function StackBlitzPreview(props = {}) {
     description = 'Check out this guide live on StackBlitz.',
   } = props;
 
-  const url = `https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/${example}`;
+  const url = `https://stackblitz.com/github/webpack/webpack.js.org/tree/main/examples/${example}`;
 
   return (
     <aside className="preview">
