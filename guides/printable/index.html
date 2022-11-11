@@ -1501,7 +1501,8 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 </span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;webpack-numbers.js&#x27;,
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    library: &#x27;webpackNumbers&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    library: {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    globalObject: &#x27;this&#x27;,
+</span><span class="token prefix inserted">+</span><span class="token line">    library: {
 </span><span class="token prefix inserted">+</span><span class="token line">      name: &#x27;webpackNumbers&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">      type: &#x27;umd&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">    },
