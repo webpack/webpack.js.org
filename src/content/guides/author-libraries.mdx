@@ -197,6 +197,7 @@ Let's update the `output.library` option with its `type` set to [`'umd'`](/confi
      path: path.resolve(__dirname, 'dist'),
      filename: 'webpack-numbers.js',
 -    library: 'webpackNumbers',
++    globalObject: 'this',
 +    library: {
 +      name: 'webpackNumbers',
 +      type: 'umd',
