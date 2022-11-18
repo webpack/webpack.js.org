@@ -93,7 +93,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-mdx": "^2.0.5",
-    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "front-matter": "^4.0.2",
     "github-slugger": "^2.0.0",
