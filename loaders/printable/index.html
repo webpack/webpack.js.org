@@ -315,7 +315,7 @@ image<span class="token operator">-</span><span class="token function">set</span
                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span>
 
-              <span class="token comment">// Don&#x27;t handle images under root-relatve /external_images/</span>
+              <span class="token comment">// Don&#x27;t handle images under root-relative /external_images/</span>
               <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/^\/external_images\//</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span>
@@ -476,7 +476,7 @@ With <code>:global</code> (without brackets) global mode can be switched on for 
   <span class="token property">composes</span><span class="token punctuation">:</span> edit highlight from <span class="token string">&quot;./edit.css&quot;</span><span class="token punctuation">;</span>
   <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre><p>To import from multiple modules use multiple <code>composes:</code> rules.</p><pre><code class="hljs language-css"><span class="token selector">:local(.className)</span> <span class="token punctuation">{</span>
-  <span class="token property">composes</span><span class="token punctuation">:</span> edit hightlight from <span class="token string">&quot;./edit.css&quot;</span><span class="token punctuation">;</span>
+  <span class="token property">composes</span><span class="token punctuation">:</span> edit highlight from <span class="token string">&quot;./edit.css&quot;</span><span class="token punctuation">;</span>
   <span class="token property">composes</span><span class="token punctuation">:</span> button from <span class="token string">&quot;module/button.css&quot;</span><span class="token punctuation">;</span>
   <span class="token property">composes</span><span class="token punctuation">:</span> classFromThisModule<span class="token punctuation">;</span>
   <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
