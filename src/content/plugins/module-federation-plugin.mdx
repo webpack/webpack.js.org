@@ -76,6 +76,21 @@ format(new Date(2014, 1, 11), 'MM/dd/yyyy');
 and webpack will automatically share `date-fns` between all your federated modules that define `date-fns` as a shared library.
 However, if you want to access something that is not located at the root level of the package, for example `date-fns/locale/en-GB/index.js`, you need need to append `/` to the package name in your `shared` configuration:
 
+```js
+const { ModuleFederationPlugin } = require('webpack').container;
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      // adds date-fns as shared module
+      // all files of the package will be shared
+      shared: ['date-fns/'],
+    }),
+  ],
+};
+```
+
+The `/` syntax allows you to access all files of a package.
+
 #### Specify package versions
 
 There are three ways to specify the versions of shared libraries.
