@@ -53,6 +53,26 @@ module.exports = {
 
 With the `shared` key in the configuration you can define libraries that are shared between your federated modules. The package name is the same as the one found in the `dependencies` section of your package.json. However, by default webpack will only share the root level of a library.
 
+```js
+const { ModuleFederationPlugin } = require('webpack').container;
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      // adds date-fns as shared module
+      shared: ['date-fns'],
+    }),
+  ],
+};
+```
+
+So in your application you could do something like
+
+```js
+import { format } from 'date-fns';
+
+format(new Date(2014, 1, 11), 'MM/dd/yyyy');
+```
+
 #### Specify package versions
 
 There are three ways to specify the versions of shared libraries.
