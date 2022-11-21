@@ -5,6 +5,7 @@ contributors:
   - XiaofengXie16
   - chenxsan
   - burhanuday
+  - christian24
 related:
   - title: Module Federation
     url: /concepts/module-federation/
@@ -48,11 +49,15 @@ module.exports = {
 };
 ```
 
-### Specify package versions
+### Sharing libraries
+
+With the `shared` key in the configuration you can define libraries that are shared between your federated modules. The package name is the same as the one found in the `dependencies` section of your package.json. However, by default webpack will only share the root level of a library.
+
+#### Specify package versions
 
 There are three ways to specify the versions of shared libraries.
 
-#### Array syntax
+##### Array syntax
 
 This syntax allows you to share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given that libraries like `react` and `react-dom` will require additional requirements.
 
@@ -71,7 +76,7 @@ module.exports = {
 };
 ```
 
-#### Object syntax
+##### Object syntax
 
 This syntax provides you more control over each shared library in which you can define package name as the key and version ([semver](https://semver.org/)) as the value.
 
@@ -90,7 +95,7 @@ module.exports = {
 };
 ```
 
-#### Object syntax with sharing hints
+##### Object syntax with sharing hints
 
 This syntax allows you to provide additional [hints](#sharing-hints) to each shared package where you define the package name as the key, and the value as an object containing hints to modify sharing behavior.
 
@@ -112,45 +117,45 @@ module.exports = {
 };
 ```
 
-### Sharing hints
+#### Sharing hints
 
-#### **`eager`**
+##### **`eager`**
 
 `boolean`
 
 This hint will allow webpack to include the provided and fallback module directly instead of fetching the library via an asynchronous request. In other words, this allows to use this shared module in the initial chunk. Also, be careful that all provided and fallback modules will always be downloaded when this hint is enabled.
 
-#### **`import`**
+##### **`import`**
 
 `false | string`
 
 The provided module that should be placed in the shared scope. This provided module also acts as fallback module if no shared module is found in the shared scope or version isn't valid. (The value for this hint defaults to the property name.)
 
-#### **`packageName`**
+##### **`packageName`**
 
 `string`
 
 The package name that is used to determine required version from description file. This is only needed when the package name can't be automatically determined from request.
 
-#### **`requiredVersion`**
+##### **`requiredVersion`**
 
 `false | string`
 
 The required version of the package. It accepts semantic versioning. For example, "^1.2.3".
 
-#### **`shareKey`**
+##### **`shareKey`**
 
 `string`
 
 The requested shared module is looked up under this key from the shared scope.
 
-#### **`shareScope`**
+##### **`shareScope`**
 
 `string`
 
 The name of the shared scope.
 
-#### **`singleton`**
+##### **`singleton`**
 
 `boolean`
 
@@ -158,13 +163,13 @@ This hint only allows a single version of the shared module in the shared scope 
 
 In cases where there are multiple versions of the same dependency in the shared scope, the highest semantic version is used.
 
-#### **`strictVersion`**
+##### **`strictVersion`**
 
 `boolean`
 
 This hint allows webpack to reject the shared module if version is not valid (defaults to `true` when local fallback module is available and shared module is not a singleton, otherwise `false`, it has no effect if there is no required version specified). Throws a runtime error if the required version is not found.
 
-#### **`version`**
+##### **`version`**
 
 `false | string`
 
