@@ -85,7 +85,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.2",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "cypress": "^11.1.0",
+    "cypress": "^11.2.0",
     "directory-tree": "^3.4.0",
     "directory-tree-webpack-plugin": "^1.0.3",
     "duplexer": "^0.1.1",
