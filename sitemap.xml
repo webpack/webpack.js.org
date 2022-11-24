@@ -130,9 +130,6 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
@@ -140,6 +137,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -214,9 +214,6 @@
         <loc>https://webpack.js.org/configuration/other-options</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/output</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/performance</loc>
     </url>
     <url>
@@ -224,6 +221,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/resolve</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/stats</loc>
@@ -544,9 +544,6 @@
         <loc>https://webpack.js.org/plugins/module-federation-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
     </url>
     <url>
@@ -557,6 +554,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/progress-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/provide-plugin</loc>
