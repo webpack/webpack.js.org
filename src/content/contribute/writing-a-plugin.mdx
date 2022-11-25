@@ -186,7 +186,7 @@ module.exports = HelloAsyncPlugin;
 
 ## 示例 $#example$
 
-一旦能我们深入理解 webpack compiler 和每个独立的 compilation，我们依赖 webpack 引擎将有无限多的事可以做。我们可以重新格式化已有的文件，创建衍生的文件，或者制作全新的生成文件。
+一旦我们可以深入理解 webpack compiler 和每个独立的 compilation，我们依赖 webpack 引擎将有无限多的事可以做。我们可以重新格式化已有的文件，创建衍生的文件，或者制作全新的生成文件。
 
 让我们来写一个简单的示例插件，生成一个叫做 `assets.md` 的新文件；文件内容是所有构建生成的文件的列表。这个插件大概像下面这样：
 
@@ -346,7 +346,7 @@ this.hooks = {
   - 用 `tap`/`tapAsync`/`tapPromise` 方法绑定。
   - 用 `callAsync(...params)` 方法调用。
 
-  插件处理函数(handler functions)的参数为所有参数，以及一个签名为 `(err?: Error) -> void` 的 callback 函数，callback 函数的 。处理函数按注册顺序执行。`callback` 在所有处理函数执行完后调用。
+  插件处理函数(handler functions)的参数为所有参数，以及一个签名为 `(err?: Error) -> void` 的 callback 函数，callback 函数的处理函数按注册顺序执行。`callback` 在所有处理函数执行完后调用。
   这是 `emit` 和 `run` 事件的常见使用模式。
 
 - **Async waterfall(异步瀑布)** 插件会用 waterfall 方式异步应用
