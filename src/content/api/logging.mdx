@@ -61,18 +61,14 @@ module.exports = function (source) {
 };
 ```
 
-<<<<<<< HEAD
-## Logger methods $#logger-methods$
-=======
-As you can see from the above `my-webpack-plugin.js` example, there're two types of logging methods,
+从上面的 `my-webpack-plugin.js` 例子中你可以看到，有两种打印日志的方法，
 
 1. `compilation.getLogger`
 2. `compiler.getInfrastructureLogger`
 
-It's advised to use `compilation.getLogger` when plugin/logging is related to the compilation, and they will be stored within the stats. For logging that happens outside the compilation cycle, use `compiler.getInfrastructureLogger` instead.
+当 plugin/logging 与编译相关时，建议使用 `compilation.getLogger`，它们将存储在 stats 中。对于在编译周期之外发生的日志记录，请改用 `compiler.getInfrastructureLogger`。
 
-## Logger methods
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
+## Logger methods $#logger-methods$
 
 - `logger.error(...)`：用于输出错误信息
 - `logger.warn(...)`：用于输出警告信息

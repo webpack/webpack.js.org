@@ -50,17 +50,9 @@ import webpack from 'webpack';
 ```js
 const webpack = require('webpack');
 
-<<<<<<< HEAD
-webpack({
-  // [配置对象](/configuration/)
-}, (err, stats) => { // [Stats Object](#stats-object)
-  if (err || stats.hasErrors()) {
-    // [在这里处理错误](#error-handling)
-=======
 webpack({}, (err, stats) => {
   if (err || stats.hasErrors()) {
     // ...
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
   }
   // 处理完成
 });
@@ -110,11 +102,7 @@ W> 这个 API 一次仅支持一个编译。当使用 `run` 或者
 const webpack = require('webpack');
 
 const compiler = webpack({
-<<<<<<< HEAD
-  // [配置对象](/configuration/)
-=======
   // ...
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 });
 
 compiler.run((err, stats) => {
@@ -142,34 +130,20 @@ watch(watchOptions, callback);
 const webpack = require('webpack');
 
 const compiler = webpack({
-<<<<<<< HEAD
-  // [配置对象](/configuration/)
-});
-
-const watching = compiler.watch({
-  // [watchOptions](/configuration/watch/#watchoptions) 示例
-  aggregateTimeout: 300,
-  poll: undefined
-}, (err, stats) => { // [Stats Object](#stats-object)
-  // 这里打印 watch/build 结果...
-  console.log(stats);
-});
-=======
   // ...
 });
 
 const watching = compiler.watch(
   {
-    // Example
+    // 示例
     aggregateTimeout: 300,
     poll: undefined,
   },
   (err, stats) => {
-    // Print watch/build result here...
+    // 这里打印 watch/build 结果...
     console.log(stats);
   }
 );
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ```
 
 `Watching` 配置选项的细节可以在
@@ -237,13 +211,8 @@ T> 当使用 [`MultiCompiler`](#multicompiler) 时，
 以 JSON 对象形式返回编译信息。
 `options` 可以是一个字符串（预设值）或是颗粒化控制的对象:
 
-<<<<<<< HEAD
-``` js-with-links
-stats.toJson('minimal'); // [更多选项如: 'verbose' 等](/configuration/stats).
-=======
 ```js
 stats.toJson('minimal');
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ```
 
 ```js
@@ -278,21 +247,6 @@ stats.toString({
 ```js
 const webpack = require('webpack');
 
-<<<<<<< HEAD
-webpack({
-  // [配置对象](/configuration/)
-}, (err, stats) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  console.log(stats.toString({
-    chunks: false,  // 使构建过程更静默无输出
-    colors: true    // 在控制台展示颜色
-  }));
-});
-=======
 webpack(
   {
     // ...
@@ -305,13 +259,12 @@ webpack(
 
     console.log(
       stats.toString({
-        chunks: false, // Makes the build much quieter
-        colors: true, // Shows colors in the console
+        chunks: false, // 使构建过程更静默无输出
+        colors: true,  // 在控制台展示颜色
       })
     );
   }
 );
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
 ```
 
 ## MultiCompiler $#multicompiler$
@@ -352,15 +305,6 @@ W> 多个配置对象在执行时，**不会并行执行**。
 ```js
 const webpack = require('webpack');
 
-<<<<<<< HEAD
-webpack({
-  // [配置对象](/configuration/)
-}, (err, stats) => {
-  if (err) {
-    console.error(err.stack || err);
-    if (err.details) {
-      console.error(err.details);
-=======
 webpack(
   {
     // ...
@@ -372,7 +316,6 @@ webpack(
         console.error(err.details);
       }
       return;
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
     }
 
     const info = stats.toJson();

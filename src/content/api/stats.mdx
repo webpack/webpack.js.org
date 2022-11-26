@@ -29,78 +29,44 @@ npx webpack --profile --json=compilation-stats.json
 
 ```json
 {
-<<<<<<< HEAD
-  'version': '5.9.0', // 用来编译的 webpack 版本
-  'hash': '11593e3b3ac85436984a', // 编译的特定哈希值
-  'time': 2469, // 编译时间（毫秒）
-  'publicPath': 'auto',
-  'outputPath': '/', // webpack 的输出目录路径
-  'assetsByChunkName': {
+  "version": "5.9.0", // 用来编译的 webpack 版本
+  "hash": "11593e3b3ac85436984a", // 编译的特定哈希值
+  "time": 2469, // 编译时间（毫秒）
+  "publicPath": "auto",
+  "outputPath": "/", // webpack 的输出目录路径
+  "assetsByChunkName": {
     // 输出资源对应的 Chunk 名称
-    'main': [
-      'web.js?h=11593e3b3ac85436984a'
+    "main": [
+      "web.js?h=11593e3b3ac85436984a"
     ],
-    'named-chunk': [
-      'named-chunk.web.js'
+    "named-chunk": [
+      "named-chunk.web.js"
     ],
-    'other-chunk': [
-      'other-chunk.js',
-      'other-chunk.css'
+    "other-chunk": [
+      "other-chunk.js",
+      "other-chunk.css"
     ]
   },
-  'assets': [
-    // [asset objects](#asset-objects) 列表
-  ],
-  'chunks': [
-    // [chunk objects](#chunk-objects) 列表
-  ],
-  'modules': [
-    // [module objects](#module-objects) 列表
-  ],
-  'entryPoints': {
-    // [entry objects](#entry-objects) 列表
-  },
-  'errors': [
-    // [error objects](#errors-and-warnings) 列表
-  ],
-  'errorsCount': 0, // 错误个数
-  'warnings': [
-    // [warning objects](#errors-and-warnings) 列表
-  ],
-  'warningsCount': 0, // 告警个数
-=======
-  "version": "5.9.0", // Version of webpack used for the compilation
-  "hash": "11593e3b3ac85436984a", // Compilation specific hash
-  "time": 2469, // Compilation time in milliseconds
-  "publicPath": "auto",
-  "outputPath": "/", // path to webpack output directory
-  "assetsByChunkName": {
-    // Chunk name to emitted asset(s) mapping
-    "main": ["web.js?h=11593e3b3ac85436984a"],
-    "named-chunk": ["named-chunk.web.js"],
-    "other-chunk": ["other-chunk.js", "other-chunk.css"]
-  },
   "assets": [
-    // A list of asset objects
+    // asset objects 列表
   ],
   "chunks": [
-    // A list of chunk objects
+    // chunk objects 列表
   ],
   "modules": [
-    // A list of module objects
+    // module objects 列表
   ],
   "entryPoints": {
-    // A list of entry objects
+    // entry objects 列表
   },
   "errors": [
-    // A list of error objects
+    // error objects 列表
   ],
-  "errorsCount": 0, // number of errors
+  "errorsCount": 0, // 错误个数
   "warnings": [
-    // A list of warning objects
+    // warning objects 列表
   ],
-  "warningsCount": 0 // nummber of warnings
->>>>>>> 1bc7704750b8b2b27a168a9afc1bf9f070745f0e
+  "warningsCount": 0, // 告警个数
 }
 ```
 
