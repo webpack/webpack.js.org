@@ -27,46 +27,46 @@ npx webpack --profile --json=compilation-stats.json
 
 输出 JSON 文件的顶层结构相当简单，但是也包含部分嵌套的数据结构。为了让文档更易于使用，每个嵌套的数据结构都有对应的一小节来讲，注意，你可以点击如下的链接，跳转到相关章节查看文档：
 
-```js-with-links
+```json
 {
-  'version': '5.9.0', // 用来编译的 webpack 版本
-  'hash': '11593e3b3ac85436984a', // 编译的特定哈希值
-  'time': 2469, // 编译时间（毫秒）
-  'publicPath': 'auto',
-  'outputPath': '/', // webpack 的输出目录路径
-  'assetsByChunkName': {
+  "version": "5.9.0", // 用来编译的 webpack 版本
+  "hash": "11593e3b3ac85436984a", // 编译的特定哈希值
+  "time": 2469, // 编译时间（毫秒）
+  "publicPath": "auto",
+  "outputPath": "/", // webpack 的输出目录路径
+  "assetsByChunkName": {
     // 输出资源对应的 Chunk 名称
-    'main': [
-      'web.js?h=11593e3b3ac85436984a'
+    "main": [
+      "web.js?h=11593e3b3ac85436984a"
     ],
-    'named-chunk': [
-      'named-chunk.web.js'
+    "named-chunk": [
+      "named-chunk.web.js"
     ],
-    'other-chunk': [
-      'other-chunk.js',
-      'other-chunk.css'
+    "other-chunk": [
+      "other-chunk.js",
+      "other-chunk.css"
     ]
   },
-  'assets': [
-    // [asset objects](#asset-objects) 列表
+  "assets": [
+    // asset objects 列表
   ],
-  'chunks': [
-    // [chunk objects](#chunk-objects) 列表
+  "chunks": [
+    // chunk objects 列表
   ],
-  'modules': [
-    // [module objects](#module-objects) 列表
+  "modules": [
+    // module objects 列表
   ],
-  'entryPoints': {
-    // [entry objects](#entry-objects) 列表
+  "entryPoints": {
+    // entry objects 列表
   },
-  'errors': [
-    // [error objects](#errors-and-warnings) 列表
+  "errors": [
+    // error objects 列表
   ],
-  'errorsCount': 0, // 错误个数
-  'warnings': [
-    // [warning objects](#errors-and-warnings) 列表
+  "errorsCount": 0, // 错误个数
+  "warnings": [
+    // warning objects 列表
   ],
-  'warningsCount': 0, // 告警个数
+  "warningsCount": 0, // 告警个数
 }
 ```
 
@@ -99,7 +99,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 
 每个 `chunks` 对象代表一组名为 [chunk](/glossary/#c) 的模块。每个对象都遵循如下结构：
 
-```js-with-links
+```json
 {
   "entry": true, // 指定 webpack 运行时是否包含 chunk
   "files": [
@@ -126,7 +126,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 
 `chunks` 对象还包含一个 `origins` 列表，它描述来给定的 chunk 每个 `origins` 对象都遵循以下模式：
 
-```js-with-links
+```json
 {
   "loc": "", // 生成当前 chunk 的代码行
   "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // module的路径
@@ -144,7 +144,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 
 假如不描述编译后的应用程序的实际模块，这些统计的数据有什么作用？其依赖关系图中的每个模块用如下结构表示：
 
-```js-with-links
+```json
 {
   "assets": [
     // [asset objects](#asset-objects) 列表
@@ -178,7 +178,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 
 每个模块还包含了一个 `reasons` 列表，它描述了为什么该模块会被包含在依赖关系图中。每个 `reason` 都类似于上面的 [chunk objects](#chunk-objects) 章节的 `origins`：
 
-```js-with-links
+```json
 {
   "loc": "33:24-93", // 当前模块包含的代码行数
   "module": "./lib/index.web.js", // 基于 [context](/configuration/entry-context/#context) 的模块相对路径

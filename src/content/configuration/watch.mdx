@@ -11,6 +11,7 @@ contributors:
   - Neob91
   - Loonride
   - snitin315
+  - chenxsan
 translators:
   - lcxfs1991
   - QC-L
@@ -132,7 +133,7 @@ T> 如果你使用 `require.context`，webpack 会监听你的整个目录。你
 
 `boolean = false` `number`
 
-通过传递 `true` 开启 [polling](https://whatis.techtarget.com/definition/polling)，或者指定毫秒为单位进行轮询。
+通过传递 `true` 开启 [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>)，将会设置默认轮询间隔为 [`5007`](https://github.com/webpack/watchpack/blob/a54bcdb95759558ca5a9fc2819c4d71b771c162f/lib/DirectoryWatcher.js#L79)，或者指定毫秒为单位进行轮询。
 
 **webpack.config.js**
 
@@ -153,6 +154,7 @@ T> 如果监听没生效，试试这个选项吧。这会对 VirtualBox、WSL、
 
 - Type: `boolean`
 - Example:
+
   ```js
   module.exports = {
     //...
@@ -168,6 +170,7 @@ T> 如果监听没生效，试试这个选项吧。这会对 VirtualBox、WSL、
 
 - 类型：`boolean`
 - 示例：
+
   ```js
   module.exports = {
     //...

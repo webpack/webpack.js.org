@@ -150,6 +150,7 @@ module.exports = {
 - 类型：`boolean`
 - 可用版本：5.17.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -175,6 +176,7 @@ const x = require(/* webpackIgnore: true */ 'x');
 - 类型：`'eager' | 'weak' | 'lazy' | 'lazy-once'`
 - 可用版本：5.73.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -194,6 +196,7 @@ const x = require(/* webpackIgnore: true */ 'x');
 - 类型：` number | boolean`
 - 可用版本：5.73.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -213,6 +216,7 @@ const x = require(/* webpackIgnore: true */ 'x');
 - 类型：` number | boolean`
 - 可用版本：5.73.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -232,6 +236,7 @@ const x = require(/* webpackIgnore: true */ 'x');
 - 类型：`'error' | 'warn' | 'auto' | false`
 - 可用版本：5.62.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -251,6 +256,7 @@ const x = require(/* webpackIgnore: true */ 'x');
 - 类型：`'error' | 'warn' | 'auto' | false`
 - 可用版本：5.62.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -270,6 +276,7 @@ Enable or disable evaluating `import.meta`.
 - 类型：`boolean = true`
 - 可用版本：5.68.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -289,6 +296,7 @@ Enable or disable evaluating `import.meta`.
 - 类型：`boolean`
 - 可用版本：5.70.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -308,6 +316,7 @@ Enable or disable evaluating `import.meta`.
 - 类型：`'error' | 'warn' | 'auto' | false`
 - 可用版本：5.62.0+
 - 示例：
+
   ```js
   module.exports = {
     module: {
@@ -326,6 +335,7 @@ Enable or disable evaluating `import.meta`.
 
 - 类型：`boolean = true` | `'relative'`
 - 示例:
+
   ```js
   module.exports = {
     module: {
@@ -340,12 +350,12 @@ Enable or disable evaluating `import.meta`.
 
 自 webpack <Badge text='5.23.0' /> 起，`module.parser.javascript.url` 的 `'relative'` 值可用。当使用 `'relative'` 时，webpack 将为 `new URL()` 语法生成相对的 URL，即结果 URL 中不包含根 URL：
 
-```
+```html
 <!-- with 'relative' -->
-<img src='c43188443804f1b1f534.svg' />
+<img src="c43188443804f1b1f534.svg" />
 
 <!-- without 'relative' -->
-<img src='file:///path/to/project/dist/c43188443804f1b1f534.svg' />
+<img src="file:///path/to/project/dist/c43188443804f1b1f534.svg" />
 ```
 
 1. 当服务器不知道根 URL 时，这对 SSR（服务端渲染）很有用（而且可用节省一些字节）。为了使其相同，它也必须用于客户端构建。
@@ -640,7 +650,7 @@ W> 由于需要支持 `Rule.options`，`UseEntry.options` 以及 `Rule.use`，�
 
 **示例**（默认的插件解析器选项）：
 
-```js-with-links
+```js
 module.exports = {
   //...
   module: {
@@ -658,7 +668,8 @@ module.exports = {
           browserify: false, // 禁用特殊处理的 browserify bundle
           requireJs: false, // 禁用 requirejs.*
           node: false, // 禁用 __dirname, __filename, module, require.extensions, require.main, 等。
-          node: {...}, // 在模块级别(module level)上重新配置 [node](/configuration/node) 层(layer)
+          commonjsMagicComments: false, // 禁用对 CommonJS 的  magic comments 支持
+          node: {}, // 在模块级别(module level)上重新配置 node 层(layer)
           worker: ["default from web-worker", "..."] // 自定义 WebWorker 对 JavaScript 的处理，其中 "..." 为默认值。
         }
       }

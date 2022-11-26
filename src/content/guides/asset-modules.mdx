@@ -476,3 +476,24 @@ module: {
     ]
   },
 ```
+
+## Disable emitting assets
+
+For use cases like Server side rendering, you might want to disable emitting assets, which is feasible with [`emit`](/configuration/module/#rulegeneratoremit) option under `Rule.generator`:
+
+```js
+module.exports = {
+  // …
+  module: {
+    rules: [
+      {
+        test: /\.png$/i,
+        type: 'asset/resource',
+        generator: {
+          emit: false,
+        },
+      },
+    ],
+  },
+};
+```

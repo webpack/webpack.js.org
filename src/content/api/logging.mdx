@@ -61,6 +61,13 @@ module.exports = function (source) {
 };
 ```
 
+从上面的 `my-webpack-plugin.js` 例子中你可以看到，有两种打印日志的方法，
+
+1. `compilation.getLogger`
+2. `compiler.getInfrastructureLogger`
+
+当 plugin/logging 与编译相关时，建议使用 `compilation.getLogger`，它们将存储在 stats 中。对于在编译周期之外发生的日志记录，请改用 `compiler.getInfrastructureLogger`。
+
 ## Logger methods $#logger-methods$
 
 - `logger.error(...)`：用于输出错误信息

@@ -116,6 +116,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
+          browser: chrome
           config-file: cypress.config.js
           build: yarn build
           start: yarn serve-dist
