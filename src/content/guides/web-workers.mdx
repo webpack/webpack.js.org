@@ -11,8 +11,10 @@ As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/d
 
 ```js
 new Worker(new URL('./worker.js', import.meta.url));
+```
 
-// you can customize the chunk name with magic comments
+```js
+// or customize the chunk name with magic comments
 // see https://webpack.js.org/api/module-methods/#magic-comments
 new Worker(
   /* webpackChunkName: "foo-worker" */ new URL('./worker.js', import.meta.url)
