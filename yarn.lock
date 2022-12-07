@@ -4256,10 +4256,10 @@ csstype@^3.0.6:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.6.tgz#865d0b5833d7d8d40f4e5b8a6d76aea3de4725ef"
   integrity sha512-+ZAmfyWMT7TiIlzdqJgjMb7S4f1beorDbWbsocyK4RaiqA5RTX3K14bnBWmmA9QEM0gRdsjyyrEmcyga8Zsxmw==
 
-cypress@^12.0.0:
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-12.0.0.tgz#97138b6a92836b4f37138703d396f20925cb6a13"
-  integrity sha512-hX/UeaKrL4uiRxJh+eX9t5YFXJconJyqG0hkFkK6CG+4xj2mMmzvJERF3e2h/9TzvLxPAkQ6cGz8eaHfJZeyGg==
+cypress@^12.0.1:
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-12.0.1.tgz#3a51a38b2f162256c7226e68e902cfe1750e3d92"
+  integrity sha512-I1Ag5RsPEINfUlQtV6xwkd6ktJuu5QGiKZ3pFa/IXjcyCY6I7CH3gOz0juLOhg/LXOPrQtZH35ulcWDQohyyEA==
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
