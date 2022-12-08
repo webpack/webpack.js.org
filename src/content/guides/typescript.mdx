@@ -62,7 +62,7 @@ Let's set up a configuration to support JSX and compile TypeScript down to ES5..
 
 See [TypeScript's documentation](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) to learn more about `tsconfig.json` configuration options.
 
-To learn more about webpack configuration, see the [configuration concepts](/concepts/configuration/).
+To learn more about webpack configuration, see the [configuration concepts](/src/content/concepts/configuration.mdx).
 
 Now let's configure webpack to handle TypeScript:
 
@@ -127,7 +127,7 @@ Note that if you're already using [`babel-loader`](https://github.com/babel/babe
 
 ## Source Maps
 
-To learn more about source maps, see the [development guide](/guides/development).
+To learn more about source maps, see the [development guide](/src/content/guides/development).
 
 To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our TypeScript configuration:
 
@@ -177,7 +177,7 @@ Now we need to tell webpack to extract these source maps and include in our fina
   };
 ```
 
-See the [devtool documentation](/configuration/devtool/) for more information.
+See the [devtool documentation](/src/content/configuration/devtool/) for more information.
 
 ## Client types
 
