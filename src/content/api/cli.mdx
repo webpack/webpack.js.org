@@ -602,9 +602,7 @@ module.exports = (env, argv) => {
 
 ### node-env
 
-For `webpack-cli v4`.
-
-You can use `--node-env` option to set `process.env.NODE_ENV`:
+You can use `--node-env` option to set `process.env.NODE_ENV`, which is available to both user code and webpack configuration:
 
 ```bash
 npx webpack --node-env production   # process.env.NODE_ENV = 'production'
@@ -616,7 +614,7 @@ T> The `mode` option would respect the `--node-env` option if you don't set it e
 
 For `webpack-cli v5+`.
 
-You can use `--define-process-env-node-env` option to set `process.env.NODE_ENV`:
+An alias for [`--node-env`](/api/cli/#node-env) to set `process.env.NODE_ENV`:
 
 ```bash
 npx webpack --define-process-env-node-env production   # process.env.NODE_ENV = 'production'
