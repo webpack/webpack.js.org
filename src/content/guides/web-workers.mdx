@@ -13,6 +13,14 @@ As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/d
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
+```js
+// or customize the chunk name with magic comments
+// see https://webpack.js.org/api/module-methods/#magic-comments
+new Worker(
+  /* webpackChunkName: "foo-worker" */ new URL('./worker.js', import.meta.url)
+);
+```
+
 The syntax was chosen to allow running code without bundler, it is also available in native ECMAScript modules in the browser.
 
 Note that while the [`Worker` API](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) suggests that `Worker` constructor would accept a string representing the URL of the script, in webpack 5 you can only use `URL` instead.
