@@ -83,7 +83,7 @@
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.0",
     "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.2",
+    "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
     "cypress": "^12.1.0",
     "directory-tree": "^3.4.0",
