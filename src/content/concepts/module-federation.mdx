@@ -34,9 +34,9 @@ This is often known as Micro-Frontends, but is not limited to that.
 
 ## Low-level concepts
 
-We distinguish between local and remote modules. Local modules are normal modules which are part of the current build. Remote modules are modules that are not part of the current build and loaded from a remote container at the runtime.
+We distinguish between local and remote modules. Local modules are regular modules that are part of the current build. Remote modules are modules that are not part of the current build but are loaded at runtime from a remote container.
 
-Loading remote modules is considered an asynchronous operation. When using a remote module these asynchronous operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
+Loading remote modules is considered an asynchronous operation. When using a remote module, these asynchronous operations will be placed in the next chunk loading operation(s) that are between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
 
 A chunk loading operation is usually an `import()` call, but older constructs like `require.ensure` or `require([...])` are supported as well.
 
@@ -51,9 +51,9 @@ It is possible to nest containers. Containers can use modules from other contain
 
 ## High-level concepts
 
-Each build acts as a container and also consumes other builds as containers. This way each build is able to access any other exposed module by loading it from its container.
+Each build acts as a container and also consumes other builds as containers. This way, each build is able to access any other exposed module by loading it from its container.
 
-Shared modules are modules that are both overridable and provided as overrides to nested container. They usually point to the same module in each build, e.g. the same library.
+Shared modules are modules that are both overridable and provided as overrides to nested containers. They usually point to the same module in each build, e.g., the same library.
 
 The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
 
@@ -73,7 +73,7 @@ This plugin adds specific references to containers as externals and allows to im
 
 ## Concept goals
 
-- It should be possible to expose and use any module type that webpack supports.
+- It should be possible to expose and consume any module type that webpack supports.
 - Chunk loading should load everything needed in parallel (web: single round-trip to server).
 - Control from consumer to container
   - Overriding modules is a one-directional operation.
