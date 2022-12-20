@@ -136,7 +136,7 @@ The package name that is used to determine required version from description fil
 
 `false | string`
 
-The required version of the package. A semantic version can also be provided
+The required version of the package. It accepts semantic versioning. For example, "^1.2.3".
 
 #### **`shareKey`**
 
@@ -170,7 +170,7 @@ This hint allows webpack to reject the shared module if version is not valid (de
 
 The version of the provided module. It allows webpack to replace lower matching versions, but not higher.
 
-By default, webpack uses the version from the `package.json` file of the dependency
+By default, webpack uses the version from the `package.json` file of the dependency.
 
 #### **Additional examples**
 
