@@ -160,10 +160,10 @@
         <loc>https://webpack.js.org/concepts/modules</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/output</loc>
+        <loc>https://webpack.js.org/concepts/plugins</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/plugins</loc>
+        <loc>https://webpack.js.org/concepts/output</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/targets</loc>
@@ -205,10 +205,10 @@
         <loc>https://webpack.js.org/configuration/module</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/node</loc>
+        <loc>https://webpack.js.org/configuration/optimization</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/optimization</loc>
+        <loc>https://webpack.js.org/configuration/node</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/other-options</loc>
@@ -289,13 +289,13 @@
         <loc>https://webpack.js.org/guides/caching</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/code-splitting-async</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-css</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/code-splitting</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-import</loc>
@@ -316,10 +316,10 @@
         <loc>https://webpack.js.org/guides/development</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development-vagrant</loc>
+        <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
+        <loc>https://webpack.js.org/guides/development-vagrant</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/entry-advanced</loc>
@@ -352,10 +352,10 @@
         <loc>https://webpack.js.org/guides/production</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/production-build</loc>
+        <loc>https://webpack.js.org/guides/progressive-web-application</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/progressive-web-application</loc>
+        <loc>https://webpack.js.org/guides/production-build</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/public-path</loc>
@@ -496,10 +496,10 @@
         <loc>https://webpack.js.org/plugins/environment-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/eslint-webpack-plugin</loc>
+        <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
+        <loc>https://webpack.js.org/plugins/eslint-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin</loc>
@@ -544,10 +544,10 @@
         <loc>https://webpack.js.org/plugins/module-federation-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
+        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
+        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/prefetch-plugin</loc>
