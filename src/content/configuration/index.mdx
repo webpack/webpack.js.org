@@ -26,7 +26,7 @@ Out of the box, webpack won't require you to use a configuration file. However, 
 
 T> [createapp.dev](https://createapp.dev/webpack) is an online tool for creating custom webpack configurations. It allows you to select various features that will be combined and added to the resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
 
-Usually, your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
+Usually, your projects will need to extend this functionality. For this, you can create a `webpack.config.js` file in the root folder, and webpack will automatically use this file.
 
 All the available configuration options are specified below.
 
@@ -48,13 +48,13 @@ If for some reason you want to use a different configuration file depending on c
 
 W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
 
-Webpack has a huge set of options which might be overwhelming to you, please take advantage of [webpack-cli's `init` command](/api/cli/#init) which could rapidly generate webpack configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.
+Webpack has a huge set of options which might be overwhelming to you. Please take advantage of [webpack-cli's `init` command](/api/cli/#init), which can quickly generate webpack configuration files for your project requirements. It will ask you a couple of questions before creating a configuration file.
 
 ```bash
 npx webpack init
 ```
 
-npx might prompt you to install `@webpack-cli/generators` if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the configuration generation.
+npx might prompt you to install `@webpack-cli/generators` if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you make during the configuration generation.
 
 ```bash
 $ npx webpack init
