@@ -105,7 +105,7 @@
     "lightningcss": "^1.17.1",
     "lint-staged": "^13.1.0",
     "lodash": "^4.17.21",
-    "markdownlint": "^0.26.2",
+    "markdownlint": "^0.27.0",
     "markdownlint-cli": "^0.32.2",
     "mdast-util-to-string": "^3.1.0",
     "mini-css-extract-plugin": "^2.7.2",
