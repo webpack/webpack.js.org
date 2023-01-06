@@ -37,7 +37,7 @@
     display: none;
 
     @include break {
-      display: table; // Get height of its child svg
+      display: block; // Get height of its child svg
     }
 
     img {
