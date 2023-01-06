@@ -4600,7 +4600,7 @@ npx webpack --env <span class="token assign-left variable">APP_TARGET</span><spa
   exclude<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&#x27;vendor.js&#x27;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h3><span id="host-source-maps-externally"></span>Host Source Maps Externally<a href="#host-source-maps-externally" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Set a URL for source maps. Useful for hosting them on a host that requires authorization.</p><pre><code class="hljs language-js"><span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>SourceMapDevToolPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   append<span class="token operator">:</span> <span class="token string">&#x27;\n//# sourceMappingURL=https://example.com/sourcemap/[url]&#x27;</span><span class="token punctuation">,</span>
-  filename<span class="token operator">:</span> <span class="token string">&#x27;[name].map&#x27;</span><span class="token punctuation">,</span>
+  filename<span class="token operator">:</span> <span class="token string">&#x27;[file].map[query]&#x27;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>And for cases when source maps are stored in the upper level directory:</p><pre><code class="hljs language-code">project
 |- dist
   |- public
