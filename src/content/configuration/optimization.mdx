@@ -263,7 +263,27 @@ module.exports = {
 };
 ```
 
-`'...'` can be used in `optimization.minimizer` to access the defaults.
+By default, webpack would set `optimization.minimizer` to [the following value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L1160-L1174):
+
+```js
+[
+  {
+    apply: (compiler) => {
+      // Lazy load the Terser plugin
+      const TerserPlugin = require('terser-webpack-plugin');
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            passes: 2,
+          },
+        },
+      }).apply(compiler);
+    },
+  },
+]
+```
+
+Which can be accessed with `'...'` in case you want to keep it when customizing `optimization.minimizer`:
 
 ```js
 module.exports = {
@@ -272,6 +292,8 @@ module.exports = {
   },
 };
 ```
+
+Basically, it's [a shortcut to access the default configuration value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L98-L108) webpack would otherwise set for us.
 
 ## optimization.moduleIds
 
