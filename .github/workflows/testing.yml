@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x]
+        node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -28,7 +28,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x]
+        node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -64,7 +64,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x]
+        node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -98,7 +98,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x]
+        node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
