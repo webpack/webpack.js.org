@@ -280,7 +280,7 @@ By default, webpack would set `optimization.minimizer` to [the following value](
       }).apply(compiler);
     },
   },
-] // eslint-disable-line
+]; // eslint-disable-line
 ```
 
 Which can be accessed with `'...'` in case you want to keep it when customizing `optimization.minimizer`:
@@ -293,7 +293,7 @@ module.exports = {
 };
 ```
 
-Basically, it's [a shortcut to access the default configuration value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L98-L108) webpack would otherwise set for us.
+Basically, `'...'` is [a shortcut to access the default configuration value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L98-L108) webpack would otherwise set for us.
 
 ## optimization.moduleIds
 
