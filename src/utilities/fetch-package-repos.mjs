@@ -78,6 +78,8 @@ async function main() {
       await writeFile(jsonPath, json);
       console.log(`Fetched file: ${jsonPath}`);
     } catch (e) {
+      const rateLimit = await api.rateLimit.get();
+      console.log('Rate Limit', rateLimit?.data?.resources?.core);
       try {
         const info = await stat(jsonPath);
 
