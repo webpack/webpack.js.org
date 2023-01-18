@@ -85,7 +85,7 @@ async function main() {
         headmatter = yamlHeadmatter(basic);
       }
 
-      const { content } = await api.rest.repos.getReadme({
+      const { content } = await api.repos.getReadme({
         owner,
         repo: packageName
       });

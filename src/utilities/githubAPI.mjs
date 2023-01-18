@@ -1,5 +1,6 @@
 import { Octokit as GithubAPI } from '@octokit/rest';
 import { createActionAuth } from '@octokit/auth-action';
+/** @type import('@octokit/rest').Octokit */
 let api;
 if (process.env.CI && process.env.CI === 'true') {
   const auth = createActionAuth();
