@@ -450,7 +450,7 @@ Make sure you wrap the path in a capture group if you are using regular expressi
 /^(.+?[\\/]node_modules)[\\/]/
 ```
 
-A common use case for `managedPaths` would be to exclude some folders from `node_modules`, e.g. you want webpack to know that files in the `node_modules/@azure/msal-browser` folder can be modified, which can be done with a regular expression like the one below:
+A common use case for `managedPaths` would be to exclude some folders from `node_modules`, e.g. you want webpack to know that files in the `node_modules/@azure/msal-browser` folder are expected to change, which can be done with a regular expression like the one below:
 
 ```js
 module.exports = {
