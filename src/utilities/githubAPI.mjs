@@ -7,7 +7,9 @@ if (process.env.CI && process.env.CI === 'true') {
   api = new GithubAPI({
     auth: authentication.token,
   });
+  console.log('api is authenticated');
 } else {
   api = new GithubAPI();
+  console.log('api is not authenticated');
 }
 export default api;
