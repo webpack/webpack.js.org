@@ -42,6 +42,7 @@ async function main() {
     });
     console.log('api is authenticated');
   } else {
+    console.log('api isn\'t authenticated', process.env.CI);
     api = new GithubAPI();
   }
 
