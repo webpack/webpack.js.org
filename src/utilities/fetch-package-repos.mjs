@@ -40,6 +40,7 @@ async function main() {
     api = new GithubAPI({
       auth: authentication,
     });
+    console.log('api is authenticated');
   } else {
     api = new GithubAPI();
   }
