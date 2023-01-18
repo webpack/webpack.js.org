@@ -68,7 +68,7 @@ async function main() {
           source: url,
           edit: editUrl,
           repo: htmlUrl,
-          thirdParty: true
+          thirdParty: true,
         });
       } else {
         let basic = {
@@ -76,7 +76,7 @@ async function main() {
           source: url,
           edit: editUrl,
           repo: htmlUrl,
-          thirdParty: true
+          thirdParty: true,
         };
 
         if (loaderGroup[packageName]) {
@@ -85,9 +85,12 @@ async function main() {
         headmatter = yamlHeadmatter(basic);
       }
 
-      const { content } = await api.repos.getReadme({
+      const { data: content } = await api.repos.getReadme({
         owner,
-        repo: packageName
+        repo: packageName,
+        mediaType: {
+          format: 'raw',
+        },
       });
       const body = processReadme(content, { source: url });
       await writeFile(fileName, headmatter + body);
