@@ -38,7 +38,7 @@ async function main() {
     const auth = createActionAuth();
     const authentication = await auth();
     api = new GithubAPI({
-      auth: authentication,
+      auth: authentication.token,
     });
     console.log('api is authenticated');
   } else {
