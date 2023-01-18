@@ -444,7 +444,23 @@ Make sure to wrap the path in a capture group if you use regular expressions.
 
 An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
 
-Make sure to wrap the path in a capture group if you use regular expressions.
+Make sure you wrap the path in a capture group if you are using regular expressions so webpack can extract the path, for example, here's a RegExp webpack internally uses to match the `node_modules` directory:
+
+```text
+/^(.+?[\\/]node_modules)[\\/]/
+```
+
+A common use case for `managedPaths` would be to exclude some folders from `node_modules`, e.g. you want webpack to know that files in the `node_modules/@azure/msal-browser` folder can be modified, which can be done with a regular expression like the one below:
+
+```js
+module.exports = {
+  snapshot: {
+    managedPaths: [
+      /^(.+?[\\/]node_modules[\\/](?!(@azure[\\/]msal-browser))(@.+?[\\/])?.+?)[\\/]/,
+    ],
+  },
+};
+```
 
 ### module
 
