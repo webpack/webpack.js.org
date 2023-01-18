@@ -34,7 +34,7 @@ const fetch = {
 
 async function main() {
   let api;
-  if (process.env.CI && process.env.CI === true) {
+  if (process.env.CI && process.env.CI === 'true') {
     const auth = createActionAuth();
     const authentication = await auth();
     api = new GithubAPI({
