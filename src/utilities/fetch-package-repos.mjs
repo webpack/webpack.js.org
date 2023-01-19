@@ -3,10 +3,9 @@ import path from 'path';
 import mkdirp from 'mkdirp';
 import { promisify } from 'util';
 import _ from 'lodash';
-import { Octokit as GithubAPI } from '@octokit/rest';
-import { createActionAuth } from '@octokit/auth-action';
 import { excludedLoaders, excludedPlugins } from './constants.mjs';
 import { fileURLToPath } from 'url';
+import api from './githubAPI.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,17 +32,6 @@ const fetch = {
 };
 
 async function main() {
-  let api;
-  if (process.env.CI && process.env.CI === true) {
-    const auth = createActionAuth();
-    const authentication = await auth();
-    api = new GithubAPI({
-      auth: authentication,
-    });
-  } else {
-    api = new GithubAPI();
-  }
-
   async function paginate(org) {
     const data = await api.paginate('GET /orgs/:org/repos', {
       org: org,
@@ -78,6 +66,8 @@ async function main() {
       await writeFile(jsonPath, json);
       console.log(`Fetched file: ${jsonPath}`);
     } catch (e) {
+      const rateLimit = await api.rateLimit.get();
+      console.log('Rate Limit', rateLimit?.data?.resources?.core);
       try {
         const info = await stat(jsonPath);
 

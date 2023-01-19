@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
 import mkdirp from 'mkdirp';
-import fetch from 'node-fetch';
 import { fileURLToPath } from 'url';
+import api from './githubAPI.mjs';
 
 import yamlHeadmatter from './yaml-headmatter.mjs';
 import processReadme from './process-readme.mjs';
@@ -38,12 +38,13 @@ async function main() {
 
     await mkdirp(outputDir);
 
+    /** @type string[] */
     const repos = JSON.parse(
       await readFile(path.resolve(__dirname, `../../repositories/${type}.json`))
     );
 
     for (const repo of repos) {
-      const [, packageName] = repo.split('/');
+      const [owner, packageName] = repo.split('/');
       const url = `https://raw.githubusercontent.com/${repo}/master/README.md`;
       const htmlUrl = `https://github.com/${repo}`;
       const editUrl = `${htmlUrl}/edit/master/README.md`;
@@ -67,7 +68,7 @@ async function main() {
           source: url,
           edit: editUrl,
           repo: htmlUrl,
-          thirdParty: true
+          thirdParty: true,
         });
       } else {
         let basic = {
@@ -75,7 +76,7 @@ async function main() {
           source: url,
           edit: editUrl,
           repo: htmlUrl,
-          thirdParty: true
+          thirdParty: true,
         };
 
         if (loaderGroup[packageName]) {
@@ -84,8 +85,13 @@ async function main() {
         headmatter = yamlHeadmatter(basic);
       }
 
-      const response = await fetch(url);
-      const content = await response.text();
+      const { data: content } = await api.repos.getReadme({
+        owner,
+        repo: packageName,
+        mediaType: {
+          format: 'raw',
+        },
+      });
       const body = processReadme(content, { source: url });
       await writeFile(fileName, headmatter + body);
       console.log('Generated:', path.relative(cwd, fileName));
