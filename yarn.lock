@@ -1870,13 +1870,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@octokit/auth-action@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-2.0.2.tgz#464392b6340d8c0359c075ca6f278a8ca0804652"
-  integrity sha512-uxYIO3eX7moMRr01jaLmfWAuj53cWPzF154yrqDkqySSrUmT0slQYx3uvDs5YC5twl3eeJYZaD5UQhl/8r5mWA==
+"@octokit/auth-action@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-2.0.3.tgz#c86acd2e7ae8083186fcb45a3bc406cd8f0c3749"
+  integrity sha512-GtUtNR7AmDV8bjNtt+EuqwE2Ipeq0aR10zPInp/B6msgoXL7UPqj2bI+8M/A/y7abGJ3U4h85wXoqZSralnDxw==
   dependencies:
     "@octokit/auth-token" "^3.0.0"
-    "@octokit/types" "^8.0.0"
+    "@octokit/types" "^9.0.0"
 
 "@octokit/auth-token@^3.0.0":
   version "3.0.0"
@@ -1925,6 +1925,11 @@
   version "14.0.0"
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-14.0.0.tgz#949c5019028c93f189abbc2fb42f333290f7134a"
   integrity sha512-HNWisMYlR8VCnNurDU6os2ikx0s0VyEjDYHNS/h4cgb8DeOxQ0n72HyinUtdDVxJhFy3FWLGl0DJhfEWk3P5Iw==
+
+"@octokit/openapi-types@^16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-16.0.0.tgz#d92838a6cd9fb4639ca875ddb3437f1045cc625e"
+  integrity sha512-JbFWOqTJVLHZSUUoF4FzAZKYtqdxWu9Z5m2QQnOyEa04fOFljvyh7D3GYKbfuaSWisqehImiVIMG4eyJeP5VEA==
 
 "@octokit/plugin-paginate-rest@^5.0.0":
   version "5.0.1"
@@ -1999,6 +2004,13 @@
   integrity sha512-65/TPpOJP1i3K4lBJMnWqPUJ6zuOtzhtagDvydAWbEXpbFYA0oMKKyLb95NFZZP0lSh/4b6K+DQlzvYQJQQePg==
   dependencies:
     "@octokit/openapi-types" "^14.0.0"
+
+"@octokit/types@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-9.0.0.tgz#6050db04ddf4188ec92d60e4da1a2ce0633ff635"
+  integrity sha512-LUewfj94xCMH2rbD5YJ+6AQ4AVjFYTgpp6rboWM5T7N3IsIF65SBEOVcYMGAEzO/kKNiNaW4LoWtoThOhH06gw==
+  dependencies:
+    "@octokit/openapi-types" "^16.0.0"
 
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
