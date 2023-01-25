@@ -134,7 +134,7 @@
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.2.4",
     "tap-spot": "^1.1.2",
-    "unist-util-visit": "^4.1.1",
+    "unist-util-visit": "^4.1.2",
     "webpack": "^5.75.0",
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^5.0.1",
