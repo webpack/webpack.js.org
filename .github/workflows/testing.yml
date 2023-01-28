@@ -1,4 +1,4 @@
-name: Ensures PR
+name: Ensure PR
 
 on:
   pull_request:
