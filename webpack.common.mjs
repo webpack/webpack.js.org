@@ -148,5 +148,6 @@ export default ({ ssg = false }) => ({
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
     filename: '[name].bundle.js',
+    hashFunction: 'xxhash64'
   },
 });

@@ -22,7 +22,7 @@ export default (env) =>
       },
     },
     output: {
-      filename: '[name].[contenthash].js',
+      filename: '[name].[contenthash].js'
     },
     optimization: {
       splitChunks: {
