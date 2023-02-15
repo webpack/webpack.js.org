@@ -23,6 +23,7 @@ export default (env) =>
     },
     output: {
       filename: '[name].[contenthash].js',
+      hashFunction: 'xxhash64'
     },
     optimization: {
       splitChunks: {
