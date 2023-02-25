@@ -45,7 +45,7 @@ const mdPlugins = [
     },
   ],
   refractor,
-  remarkRemoveHeadingId
+  remarkRemoveHeadingId,
 ];
 
 export default ({ ssg = false }) => ({
@@ -55,7 +55,7 @@ export default ({ ssg = false }) => ({
     buildDependencies: {
       config: [__filename],
     },
-    cacheDirectory: path.resolve(__dirname, 'node_modules/.cache/webpack')
+    cacheDirectory: path.resolve(__dirname, 'node_modules/.cache/webpack'),
   },
   resolve: {
     extensions: ['.js', '.jsx', '.scss'],
@@ -132,6 +132,12 @@ export default ({ ssg = false }) => ({
         use: ['@svgr/webpack'],
         include: [path.resolve(__dirname, 'src/styles/icons')],
       },
+      {
+        test: /react-spring/i,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
     ],
   },
   plugins: [
@@ -148,6 +154,6 @@ export default ({ ssg = false }) => ({
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
     filename: '[name].bundle.js',
-    hashFunction: 'xxhash64'
+    hashFunction: 'xxhash64',
   },
 });
