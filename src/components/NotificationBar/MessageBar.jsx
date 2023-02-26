@@ -2,7 +2,7 @@ import CloseIcon from '../../styles/icons/cross.svg';
 import PropTypes from 'prop-types';
 import Content from './Notification.mdx';
 import { version, localStorageIsEnabled } from './NotificationBar';
-import { useTransition, animated, config } from 'react-spring';
+import { useTransition, animated, config } from '@react-spring/web';
 import { useEffect, useState } from 'react';
 
 MessageBar.propTypes = {
