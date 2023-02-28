@@ -116,6 +116,8 @@ jobs:
           restore-keys: |-
             build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
             build-${{ hashFiles('**/webpack.*.mjs') }}-
+      - name: debug
+        run: yarn debug
 
       - name: Cypress run
         uses: cypress-io/github-action@v4

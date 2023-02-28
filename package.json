@@ -56,7 +56,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --browser chrome",
     "prettier": "prettier --write '**/*.{js,json,jsx,css,scss,md,mdx}'",
-    "prepare": "husky install && rimraf ./node_modules/.cache/webpack && yarn-deduplicate --strategy fewer"
+    "prepare": "husky install && rimraf ./node_modules/.cache/webpack && yarn-deduplicate --strategy fewer",
+    "debug": "node debug.js"
   },
   "lint-staged": {
     "*.{js,jsx,md,mdx}": [
