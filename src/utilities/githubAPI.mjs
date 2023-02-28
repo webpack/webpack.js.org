@@ -3,7 +3,7 @@ import { createActionAuth } from '@octokit/auth-action';
 /** @type import('@octokit/rest').Octokit */
 let api;
 console.log('process.env.CI', JSON.stringify(process.env.CI), process.env.CI === '1');
-if (process.env.CI && process.env.CI === 'true') {
+if (process.env.CI && (process.env.CI === 'true' || process.env.CI === '1')) {
   const auth = createActionAuth();
   const authentication = await auth();
   api = new GithubAPI({
