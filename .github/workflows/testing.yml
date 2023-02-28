@@ -127,4 +127,3 @@ jobs:
           command: yarn cypress:run
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          CI: true
