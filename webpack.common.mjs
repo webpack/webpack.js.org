@@ -132,12 +132,6 @@ export default ({ ssg = false }) => ({
         use: ['@svgr/webpack'],
         include: [path.resolve(__dirname, 'src/styles/icons')],
       },
-      {
-        test: /react-spring/i,
-        resolve: {
-          fullySpecified: false,
-        },
-      },
     ],
   },
   plugins: [
