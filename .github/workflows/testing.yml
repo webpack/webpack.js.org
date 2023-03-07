@@ -118,7 +118,7 @@ jobs:
             build-${{ hashFiles('**/webpack.*.mjs') }}-
 
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           browser: chrome
           config-file: cypress.config.js
