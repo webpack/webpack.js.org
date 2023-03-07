@@ -108,7 +108,7 @@
     "markdownlint-cli": "^0.33.0",
     "mdast-util-to-string": "^3.1.1",
     "mini-css-extract-plugin": "^2.7.2",
-    "mkdirp": "^2.1.4",
+    "mkdirp": "^2.1.5",
     "modularscale-sass": "^3.0.3",
     "node-fetch": "^3.3.0",
     "npm-run-all": "^4.1.1",
