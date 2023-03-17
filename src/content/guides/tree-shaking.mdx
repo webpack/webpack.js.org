@@ -362,6 +362,7 @@ What we've learned is that in order to take advantage of _tree shaking_, you mus
 - Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of the popular Babel preset @babel/preset-env - see the [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
 - Add a `"sideEffects"` property to your project's `package.json` file.
 - Use the [`production`](/configuration/mode/#mode-production) `mode` configuration option to enable [various optimizations](/configuration/mode/#usage) including minification and tree shaking.
+- Make sure you set a correct value for [`devtool`](/configuration/devtool/#devtool) as some of them can't be used in `production` mode.
 
 You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
 
