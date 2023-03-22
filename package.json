@@ -125,7 +125,7 @@
     "remark-gfm": "^1.0.0",
     "remark-html": "^15.0.2",
     "remark-refractor": "montogeek/remark-refractor",
-    "rimraf": "^4.4.0",
+    "rimraf": "^4.4.1",
     "sass": "^1.59.3",
     "sass-loader": "^13.2.1",
     "sirv-cli": "^2.0.2",
