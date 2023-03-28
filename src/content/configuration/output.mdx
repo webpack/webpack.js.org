@@ -2306,3 +2306,20 @@ module.exports = {
   },
 };
 ```
+
+## output.workerPublicPath
+
+`string`
+
+Set a public path for Worker, defaults to value of [output.publicPath](#outputpublicpath). Only use this option if your worker scripts are located in a different path from your other scripts.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    workerPublicPath: '/workerPublicPath2/',
+  },
+};
+```
