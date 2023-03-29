@@ -91,7 +91,7 @@
     "duplexer": "^0.1.1",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-cypress": "^2.13.1",
+    "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-mdx": "^2.0.5",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
