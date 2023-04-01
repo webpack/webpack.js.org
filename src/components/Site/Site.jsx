@@ -31,7 +31,6 @@ import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import Vote from '../Vote/Vote';
 import Badge from '../Badge/Badge.js';
 import StackBlitzPreview from '../StackBlitzPreview/StackBlitzPreview';
 import { default as LinkComponent } from '../mdxComponents/Link';
@@ -249,7 +248,6 @@ function Site(props) {
                 ),
               },
               { content: 'Contribute', url: '/contribute/' },
-              { content: 'Vote', url: '/vote/' },
               { content: 'Blog', url: '/blog/' },
             ]}
           />
@@ -272,7 +270,6 @@ function Site(props) {
               </Container>
             }
           >
-            <Route path="vote" element={<Vote />} />
             <Route path="app-shell" element={<Fragment />} />
             {pages.map((page) => {
               let path = page.path.replace('src/content/', '');

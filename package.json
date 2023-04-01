@@ -156,7 +156,6 @@
     "react-use": "^17.4.0",
     "react-visibility-sensor": "^5.0.2",
     "webpack-pwa-manifest": "^4.3.0",
-    "webpack.vote": "https://github.com/webpack/voting-app.git",
     "workbox-window": "^6.5.4"
   },
   "resolutions": {
