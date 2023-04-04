@@ -25,6 +25,8 @@ The syntax was chosen to allow running code without bundler, it is also availabl
 
 Note that while the [`Worker` API](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) suggests that `Worker` constructor would accept a string representing the URL of the script, in webpack 5 you can only use `URL` instead.
 
+W> Using a variable in the `Worker` constructor is not supported by webpack. For example, the following code will not work: `const url = new URL('./path/to/worker.ts', import.meta.url); const worker = new Worker(url);`. This is because webpack cannot analyse the syntax statically. It is important to be aware of this limitation when using `Worker` syntax with webpack.
+
 ## Example
 
 **src/index.js**
