@@ -76,7 +76,7 @@ function linkFixerFactory(sourceUrl) {
       console.log('REWRITE URL:', oldHref, '-->', href);
     }
 
-    return markdownLink.replace(oldHref, href);
+    return markdownLink.replaceAll(oldHref, href);
   };
 }
 
@@ -105,6 +105,7 @@ export default function processREADME(body, options = {}) {
     // EXAMPLE: [Contributing](./.github/CONTRIBUTING.md)
     // EXAMPLE: [Contributing](CONTRIBUTING.md)
     // EXAMPLE: [line-identifier]: https://webpack.js.org/loaders/
+    // EXAMPLE: [`./src/config.d.ts`](./src/config.d.ts)
     .replace(inlineLinkRegex, linkFixerFactory(options.source))
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')

@@ -28,4 +28,15 @@ describe('processReadme', () => {
       '- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)'
     );
   });
+  it('rewrite relative url', () => {
+    const options = {
+      source:
+        'https://raw.githubusercontent.com/webpack-contrib/postcss-loader/master/README.md',
+    };
+    const loaderMDData =
+      'See the file [`./src/config.d.ts`](./src/config.d.ts).';
+    expect(processReadme(loaderMDData, options)).toEqual(
+      'See the file [`https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts`](https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts).'
+    );
+  });
 });
