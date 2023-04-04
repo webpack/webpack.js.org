@@ -3368,23 +3368,22 @@ If you use JS styles the <a href="https://github.com/postcss/postcss-js"><code>p
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3><span id="postcssoptions"></span><code>postcssOptions</code><a href="#postcssoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">postcssOptions</span> <span class="token operator">=</span>
-  <span class="token operator">|</span> <span class="token punctuation">{</span>
-      <span class="token keyword">from</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-      map<span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> SourceMapOptions<span class="token punctuation">;</span>
-      parser<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> object <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Parser<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      stringifier<span class="token operator">:</span> Stringifier <span class="token operator">|</span> Syntax<span class="token punctuation">;</span>
-      syntax<span class="token operator">:</span> Syntax<span class="token punctuation">;</span>
-      to<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      <span class="token keyword">from</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-      map<span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> SourceMapOptions<span class="token punctuation">;</span>
-      parser<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> object <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Parser<span class="token punctuation">)</span><span class="token punctuation">;</span>
-      stringifier<span class="token operator">:</span> Stringifier <span class="token operator">|</span> Syntax<span class="token punctuation">;</span>
-      syntax<span class="token operator">:</span> Syntax<span class="token punctuation">;</span>
-      to<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>Default: <code>undefined</code></p><p>Allows to set <a href="https://postcss.org/api/#processoptions"><code>PostCSS options</code></a> and plugins.</p><p>All <code>PostCSS</code> options are supported.
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3><span id="postcssoptions"></span><code>postcssOptions</code><a href="#postcssoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>See the file <a href="https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts"><code>https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts</code></a>.</p><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> Config <span class="token keyword">as</span> PostCSSConfig <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;postcss-load-config&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> LoaderContext <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">type</span> <span class="token class-name">PostCSSLoaderContext</span> <span class="token operator">=</span> LoaderContext<span class="token operator">&lt;</span>PostCSSConfig<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">PostCSSLoaderAPI</span> <span class="token punctuation">{</span>
+  mode<span class="token operator">:</span> PostCSSLoaderContext<span class="token punctuation">[</span><span class="token string">&quot;mode&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  file<span class="token operator">:</span> PostCSSLoaderContext<span class="token punctuation">[</span><span class="token string">&quot;resourcePath&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  webpackLoaderContext<span class="token operator">:</span> PostCSSLoaderContext<span class="token punctuation">;</span>
+  env<span class="token operator">:</span> PostCSSLoaderContext<span class="token punctuation">[</span><span class="token string">&quot;mode&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  options<span class="token operator">:</span> PostCSSConfig<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">PostCSSLoaderOptions</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> PostCSSConfig
+  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>api<span class="token operator">:</span> PostCSSLoaderAPI<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> PostCSSConfig<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>Default: <code>undefined</code></p><p>Allows to set <a href="https://postcss.org/api/#processoptions"><code>PostCSS options</code></a> and plugins.</p><p>All <code>PostCSS</code> options are supported.
 There is the special <code>config</code> option for config files. How it works and how it can be configured is described below.</p><p>We recommend do not specify <code>from</code>, <code>to</code> and <code>map</code> options, because this can lead to wrong path in source maps.
 If you need source maps please use the <a href="#sourcemap"><code>sourcemap</code></a> option.</p><p>For large projects, to optimize performance of the loader, it is better to provide <code>postcssOptions</code> in loader
 config and specify <code>config: false</code>. This approach removes the need to lookup and load external config files multiple
