@@ -896,6 +896,34 @@ In the above example, we're passing a single entry file to `entry`, however, web
    };
    ```
 
+### output.library.amdContainer
+
+<Badge text="5.78.0+" />
+
+Define a namespace for `define`/`require` functions in the AMD module.
+
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      amdContainer: 'window["clientContainer"]',
+      type: 'amd', // or 'amd-require'
+    },
+  },
+};
+```
+
+Which would result code like below:
+
+```js
+function define(name, deps, fn) {
+  fn();
+}
+const window = {};
+window['clientContainer'] = { define };
+```
+
 ### output.library.name
 
 ```js
