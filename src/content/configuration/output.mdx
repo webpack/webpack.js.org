@@ -28,6 +28,7 @@ contributors:
   - anshumanv
   - mrzalyaul
   - JakobJingleheimer
+  - long76
 ---
 
 The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
@@ -900,7 +901,7 @@ In the above example, we're passing a single entry file to `entry`, however, web
 
 <Badge text="5.78.0+" />
 
-Define a container for `define`/`require` functions for calling them in the AMD module.
+Use a container(defined in global space) for call `define`/`require` functions in the AMD module.
 
 ```js
 module.exports = {
