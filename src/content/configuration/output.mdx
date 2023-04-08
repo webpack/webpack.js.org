@@ -900,7 +900,7 @@ In the above example, we're passing a single entry file to `entry`, however, web
 
 <Badge text="5.78.0+" />
 
-Define a namespace for `define`/`require` functions in the AMD module.
+Define a container for `define`/`require` functions for calling them in the AMD module.
 
 ```js
 module.exports = {
@@ -914,14 +914,10 @@ module.exports = {
 };
 ```
 
-Which would result code like below:
+Which would result bundle like below:
 
 ```js
-function define(name, deps, fn) {
-  fn();
-}
-const window = {};
-window['clientContainer'] = { define };
+window['clientContainer'].define(...)... // or 'amd-require' window['clientContainer'].require(...)...
 ```
 
 ### output.library.name
