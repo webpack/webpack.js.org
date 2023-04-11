@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import mkdirp from 'mkdirp';
+import { mkdirp } from 'mkdirp';
 import { promisify } from 'util';
 import _ from 'lodash';
 import { excludedLoaders, excludedPlugins } from './constants.mjs';
