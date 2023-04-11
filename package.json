@@ -122,7 +122,7 @@
     "remark-emoji": "^3.1.1",
     "remark-extract-anchors": "1.1.1",
     "remark-frontmatter": "^4.0.1",
-    "remark-gfm": "^1.0.0",
+    "remark-gfm": "^3.0.1",
     "remark-html": "^15.0.2",
     "remark-refractor": "montogeek/remark-refractor",
     "rimraf": "^5.0.0",
