@@ -2,7 +2,7 @@ import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
-import mkdirp from 'mkdirp';
+import { mkdirp } from 'mkdirp';
 import { fileURLToPath } from 'url';
 import api from './githubAPI.mjs';
 
