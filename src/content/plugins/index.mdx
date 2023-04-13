@@ -1,5 +1,5 @@
 ---
-title: Plugins
+title: 插件
 sort: -1
 contributors:
   - simon04
@@ -12,34 +12,37 @@ contributors:
   - EugeneHlushko
   - snitin315
   - chenxsan
+translators:
+  - hexiaokang
+  - jacob-lcs
 ---
 
-Webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack **flexible**.
+Webpack 拥有丰富的插件接口。webpack 自身的大部分功能都使用这些插件接口。这使得 webpack 很**灵活**。
 
-| Name                                                                            | Description                                                                            |
+| 插件                                                                            | 描述                                                                                    |
 | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [`BannerPlugin`](/plugins/banner-plugin)                                        | Add a banner to the top of each generated chunk                                        |
-| [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)                           | Extract common modules shared between chunks                                           |
-| [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)               | Prepare compressed versions of assets to serve them with Content-Encoding              |
-| [`ContextReplacementPlugin`](/plugins/context-replacement-plugin)               | Override the inferred context of a `require` expression                                |
-| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | Copies individual files or entire directories to the build directory                   |
-| [`DefinePlugin`](/plugins/define-plugin)                                        | Allow global constants configured at compile time                                      |
-| [`DllPlugin`](/plugins/dll-plugin)                                              | Split bundles in order to drastically improve build time                               |
-| [`EnvironmentPlugin`](/plugins/environment-plugin)                              | Shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on `process.env` keys |
-| [`EslintWebpackPlugin`](/plugins/eslint-webpack-plugin)                         | A ESLint plugin for webpack                                                            |
-| [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin)          | Enable Hot Module Replacement (HMR)                                                    |
-| [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)                             | Easily create HTML files to serve your bundles                                         |
-| [`IgnorePlugin`](/plugins/ignore-plugin)                                        | Exclude certain modules from bundles                                                   |
-| [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | Set min/max limits for chunking to better control chunking                             |
-| [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)                          | Keep chunk size above the specified limit                                              |
-| [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)                      | creates a CSS file per JS file which requires CSS                                      |
-| [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | Skip the emitting phase when there are compilation errors                              |
-| [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)    | Replace resource(s) that matches a regexp                                              |
-| [`NpmInstallWebpackPlugin`](/plugins/install-webpack-plugin)                    | Auto-install missing dependencies during development                                   |
-| [`ProgressPlugin`](/plugins/progress-plugin)                                    | Report compilation progress                                                            |
-| [`ProvidePlugin`](/plugins/provide-plugin)                                      | Use modules without having to use import/require                                       |
-| [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)                 | Enables a more fine grained control of source maps                                     |
-| [`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)        | Enables a more fine grained control of eval source maps                                |
-| [`TerserPlugin`](/plugins/terser-webpack-plugin/)                               | Uses Terser to minify the JS in your project                                           |
+| [`BannerPlugin`](/plugins/banner-plugin)                                        | 为每个 chunk 文件头部添加 banner                                             |
+| [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)                           | 提取 chunk 之间的公共模块用以共享                                             |
+| [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)               | 准备好用 Content-Encoding 格式传送的压缩版资源包                               |
+| [`ContextReplacementPlugin`](/plugins/context-replacement-plugin)               | 重写 require 表达式的推断上下文                                             |
+| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | 复制某个文件或整个文件夹到生成目录中                                           |
+| [`DefinePlugin`](/plugins/define-plugin)                                        | 允许创建一个在编译时可配置的全局常量                                           |
+| [`DllPlugin`](/plugins/dll-plugin)                                              | 拆分 bundles，从而大幅减少构建时间                                             |
+| [`EnvironmentPlugin`](/plugins/environment-plugin)                              | 在 `process.env` 键上使用 [`DefinePlugin`](/plugins/define-plugin) 的简写方式 |
+| [`EslintWebpackPlugin`](/plugins/eslint-webpack-plugin)                         | webpack 的 ESLint 插件                                                     |
+| [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin)          | 启用热更新 (HMR)                                                           |
+| [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)                             | 快速创建 HTML 文件来服务 bundles                                               |
+| [`IgnorePlugin`](/plugins/ignore-plugin)                                        | 从 bundles 包中移除某些模块                                                 |
+| [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | 设置 chunk 的最小/最大限制，以便更好的控制 chunk                               |
+| [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)                          | 确保 chunk 大小在指定限制之上                                               |
+| [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)                      | 为每一个包含了 CSS 的 JS 文件创建一个 CSS 文件                                     |
+| [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | 出现编译错误时，跳过输出阶段                                                 |
+| [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)    | 替换与正则表达式匹配的资源                                                   |
+| [`NpmInstallWebpackPlugin`](/plugins/install-webpack-plugin)                    | 开发时自动安装缺少的依赖                                                     |
+| [`ProgressPlugin`](/plugins/progress-plugin)                                    | 报告编译进度                                                               |
+| [`ProvidePlugin`](/plugins/provide-plugin)                                      | 使用模块但无需使用 import/require                                           |
+| [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)                 | 对 source map 进行更细颗粒度的控制                                           |
+| [`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)        | 对 eval source map 进行更细颗粒度的控制                                     |
+| [`TerserPlugin`](/plugins/terser-webpack-plugin/)                               | 在你的项目中使用 Terser 插件来压缩 JS                                         |
 
-For more third-party plugins, see the list from [awesome-webpack](/awesome-webpack/#webpack-plugins).
+查找更多第三方插件，请参阅 [awesome-webpack](/awesome-webpack/#webpack-plugins)。
