@@ -86,7 +86,7 @@ NormalModuleFactory.hooks.someHook.for('identifier').tap(/* ... */);
 
 `HookMap<SyncBailHook>`
 
-在 `Parser` 实例创建后调用。`parserOptions` 是 [module.parser](/configuration/module/#moduleparser) 中对应标识符或空对象的选项。
+在 `Parser` 实例创建之前调用。`parserOptions` 是 [module.parser](/configuration/module/#moduleparser) 中对应标识符或空对象的选项。
 
 - 钩子参数：`identifier`
 
@@ -116,7 +116,7 @@ NormalModuleFactory.hooks.someHook.for('identifier').tap(/* ... */);
 
 `HookMap<SyncBailHook>`
 
-在 `Generator` 实例创建后调用。`generatorOptions` 是 [module.parser](/configuration/module/#modulegenerator) 中对应标识符或空对象的选项。
+在 `Generator` 实例创建之前调用。`generatorOptions` 是 [module.parser](/configuration/module/#modulegenerator) 中对应标识符或空对象的选项。
 
 - 钩子参数：`identifier`
 
