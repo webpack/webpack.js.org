@@ -81,7 +81,22 @@ Depending on the configuration option `node.__dirname`:
 
 If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
-## import.meta.url
+## import.meta
+
+The `import.meta` exposes context-specific metadata to a JavaScript module, such as the URL of the module. It is only available in [ESM](/guides/ecma-script-modules/).
+
+Note that accessing `import.meta` directly is not supported by webpack, you need to use `import.meta` as a property access or through destructuring assignment. E.g.,
+
+```js
+// webpack will warn about this
+Object.keys(import.meta);
+
+// fine to use
+console.log(import.meta.url);
+const { url } = import.meta;
+```
+
+### import.meta.url
 
 Returns the absolute `file:` URL of the module.
 
@@ -91,7 +106,7 @@ Returns the absolute `file:` URL of the module.
 console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
 ```
 
-## import.meta.webpack
+### import.meta.webpack
 
 Returns the webpack version.
 
@@ -101,11 +116,11 @@ Returns the webpack version.
 console.log(import.meta.webpack); // output `5` for webpack 5
 ```
 
-## import.meta.webpackHot
+### import.meta.webpackHot
 
 Webpack specific. An alias for [`module.hot`](#modulehot-webpack-specific), however `import.meta.webpackHot` can be used in [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) while `module.hot` can't.
 
-## import.meta.webpackContext
+### import.meta.webpackContext
 
 Returns the same value as `require.context` but only for `javascript/auto` and `javascript/esm`.
 
