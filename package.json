@@ -97,7 +97,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "front-matter": "^4.0.2",
     "github-slugger": "^2.0.0",
-    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-plugin": "^5.5.1",
     "http-server": "^14.1.1",
     "husky": "^8.0.3",
     "hyperlink": "^5.0.4",
