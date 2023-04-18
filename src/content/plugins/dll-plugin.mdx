@@ -10,6 +10,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - EslamHiko
+  - snitin315
 related:
   - title: Code Splitting Example
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
@@ -23,7 +24,7 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 - `format` (boolean = false): If `true`, manifest json file (output) will be formatted.
-- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[fullhash]` & `[name]` )
+- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[fullhash]`, `[chunkhash]`, `[contenthash]`, & `[name]` )
 - `path`: **absolute path** to the manifest json file (output)
 - `entryOnly` (boolean = true): if `true`, only entry points will be exposed
 - `type`: type of the dll bundle
