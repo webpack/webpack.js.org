@@ -901,9 +901,9 @@ In the above example, we're passing a single entry file to `entry`, however, web
 
 <Badge text="5.78.0+" />
 
-Use a container(defined in global space) for call `define`/`require` functions in the AMD module.
+Use a container(defined in global space) for calling `define`/`require` functions in an AMD module.
 
-W> Note that value of `amdContainer` **must be** set as global variable.
+W> Note that the value of `amdContainer` **must be** set as a global variable.
 
 ```js
 module.exports = {
@@ -917,7 +917,7 @@ module.exports = {
 };
 ```
 
-Which would result bundle like below:
+Which will result in the following bundle:
 
 ```js
 window['clientContainer'].define(/*define args*/); // or 'amd-require' window['clientContainer'].require(/*require args*/);
