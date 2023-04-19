@@ -63,13 +63,13 @@ module.exports = {
         test: /\.svg$/,
         use: [
           {
-            loader: SvgChunkWebpackPlugin.loader
-          }
-        ]
-      }
-    ]
+            loader: SvgChunkWebpackPlugin.loader,
+          },
+        ],
+      },
+    ],
   },
-  plugins: [new SvgChunkWebpackPlugin()]
+  plugins: [new SvgChunkWebpackPlugin()],
 };
 ```
 
@@ -127,11 +127,11 @@ module.exports = {
         test: /\.svg$/,
         loader: SvgChunkWebpackPlugin.loader,
         options: {
-          configFile: './path/svgo.config.js'
-        }
-      }
-    ]
-  }
+          configFile: './path/svgo.config.js',
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -150,16 +150,16 @@ module.exports = {
       params: {
         overrides: {
           inlineStyles: {
-            onlyMatchedOnce: false
+            onlyMatchedOnce: false,
           },
-          removeViewBox: false
-        }
-      }
+          removeViewBox: false,
+        },
+      },
     },
     {
-      name: 'convertStyleToAttrs'
-    }
-  ]
+      name: 'convertStyleToAttrs',
+    },
+  ],
 };
 ```
 
@@ -185,9 +185,9 @@ Tells the plugin whether to personalize the default sprite filename. The placeho
 module.exports = {
   plugins: [
     new SvgChunkWebpackPlugin({
-      filename: '[name].svg'
-    })
-  ]
+      filename: '[name].svg',
+    }),
+  ],
 };
 ```
 
@@ -214,11 +214,11 @@ module.exports = {
       svgstoreConfig: {
         svgAttrs: {
           'aria-hidden': true,
-          style: 'position: absolute; width: 0; height: 0; overflow: hidden;'
-        }
-      }
-    })
-  ]
+          style: 'position: absolute; width: 0; height: 0; overflow: hidden;',
+        },
+      },
+    }),
+  ],
 };
 ```
 
@@ -242,9 +242,9 @@ Tells the plugin whether to generate the `sprites-manifest.json`. The JSON file 
 module.exports = {
   plugins: [
     new SvgChunkWebpackPlugin({
-      generateSpritesManifest: true
-    })
-  ]
+      generateSpritesManifest: true,
+    }),
+  ],
 };
 ```
 
@@ -258,7 +258,7 @@ type generateSpritesPreview = boolean;
 
 Default: `false`
 
-Tells the plugin whether to generate the `sprites-preview.html`. The HTML preview contains a display list of all SVG included by entrypoints with the SVG overviews and the names. See the [sprites preview](./example/sprites-preview.png) of the example.
+Tells the plugin whether to generate the `sprites-preview.html`. The HTML preview contains a display list of all SVG included by entrypoints with the SVG overviews and the names.
 
 **webpack.config.js**
 
@@ -266,9 +266,9 @@ Tells the plugin whether to generate the `sprites-preview.html`. The HTML previe
 module.exports = {
   plugins: [
     new SvgChunkWebpackPlugin({
-      generateSpritesPreview: true
-    })
-  ]
+      generateSpritesPreview: true,
+    }),
+  ],
 };
 ```
 
@@ -292,9 +292,9 @@ The `[contenthash]` placeholder will add a unique hash based on the content of t
 module.exports = {
   plugins: [
     new SvgChunkWebpackPlugin({
-      filename: '[name].[contenthash].svg'
-    })
-  ]
+      filename: '[name].[contenthash].svg',
+    }),
+  ],
 };
 ```
 
@@ -308,9 +308,9 @@ The `[fullhash]` placeholder will add a unique hash generated for every build. W
 module.exports = {
   plugins: [
     new SvgChunkWebpackPlugin({
-      filename: '[name].[fullhash].svg'
-    })
-  ]
+      filename: '[name].[fullhash].svg',
+    }),
+  ],
 };
 ```
 
