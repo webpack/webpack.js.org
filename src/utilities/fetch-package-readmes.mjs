@@ -31,6 +31,10 @@ const loaderGroup = {
   'style-loader': 'CSS',
   'stylus-loader': 'CSS',
 };
+const communityPackages = [{
+  name: 'svg-chunk-webpack-plugin',
+  contributors: ['yoriiis', 'alexander-akait']
+}];
 
 async function main() {
   for (const type of types) {
@@ -62,9 +66,17 @@ async function main() {
       let headmatter;
 
       if (type === 'plugins') {
+        let group = 'webpack contrib';
+        let contributors = [];
+        const packageFromCommunity = communityPackages.find((item) => item.name === packageName);
+        if (packageFromCommunity) {
+            group = 'Community';
+            contributors = packageFromCommunity.contributors;
+        }
         headmatter = yamlHeadmatter({
           title: title,
-          group: 'webpack contrib',
+          group,
+          contributors,
           source: url,
           edit: editUrl,
           repo: htmlUrl,
