@@ -89,7 +89,7 @@
     "directory-tree": "^3.5.1",
     "directory-tree-webpack-plugin": "^1.0.3",
     "duplexer": "^0.1.1",
-    "eslint": "^8.38.0",
+    "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-mdx": "^2.0.5",
