@@ -774,6 +774,23 @@ module.exports = {
 };
 ```
 
+## output.ignoreBrowserWarnings
+
+`boolean = false`
+
+Hide warnings from the browser console in production. This option does not affect the terminal/console output.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    ignoreBrowserWarnings: true,
+  },
+};
+```
+
 ## output.importFunctionName
 
 `string = 'import'`
