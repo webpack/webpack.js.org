@@ -162,7 +162,7 @@ export default function (source) {
     name: 'Example Loader',
     baseDataPath: 'options',
   });
-  
+
   console.log('The request path', urlToRequest(this.resourcePath));
 
   // Apply some transformations to the source...
@@ -241,7 +241,12 @@ export default function loader(source) {
 
 ### Absolute Paths
 
-Don't insert absolute paths into the module code as they break hashing when the root for the project is moved. There's a [`stringifyRequest`](https://github.com/webpack/loader-utils#stringifyrequest) method in `loader-utils` which can be used to convert an absolute path to a relative one.
+Don't insert absolute paths into the module code as they break hashing when the root for the project is moved. You can use below code to convert absolute paths to relative ones.
+
+```js
+// `loaderContext` is same as `this` inside loader function
+JSON.stringify(loaderContext.utils.contextify(loaderContext.context || loaderContext.rootContext, request));
+```
 
 ### Peer Dependencies
 
