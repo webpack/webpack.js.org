@@ -731,7 +731,7 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h5><span id="object-1"></span><code>object</code><a href="#object-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5><p>Enables <code>transform</code> caching and setup cache directory and invalidation keys.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h5><span id="object-1"></span><code>object</code><a href="#object-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5><p>Enables <code>transform</code> caching and setup invalidation keys.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -743,7 +743,6 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
               <span class="token keyword">return</span> <span class="token function">optimize</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
             cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-              directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;cache-directory&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
               keys<span class="token operator">:</span> <span class="token punctuation">{</span>
                 <span class="token comment">// May be useful for invalidating cache based on external values</span>
                 <span class="token comment">// For example, you can invalid cache based on `process.version` - { node: process.version }</span>
@@ -767,7 +766,6 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
               <span class="token keyword">return</span> <span class="token function">optimize</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
             cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-              directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;cache-directory&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
               <span class="token function-variable function">keys</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">defaultCacheKeys<span class="token punctuation">,</span> absoluteFrom</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
                 <span class="token keyword">const</span> keys <span class="token operator">=</span> <span class="token function">getCustomCacheInvalidationKeysSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -794,7 +792,6 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
               <span class="token keyword">return</span> <span class="token function">optimize</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
             cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-              directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;cache-directory&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
               <span class="token function-variable function">keys</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">defaultCacheKeys<span class="token punctuation">,</span> absoluteFrom</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
                 <span class="token keyword">const</span> keys <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">getCustomCacheInvalidationKeysAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
