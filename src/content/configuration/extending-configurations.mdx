@@ -1,0 +1,117 @@
+---
+title: Extends
+sort: 12
+contributors:
+  - burhanuday
+---
+
+## extends
+
+`string | string[]`
+
+The `extends` property allows you to extend an existing configuration to use as base. It internally uses the `webpack-merge` package to merge the configurations and helps you to avoid duplicating configuration between multiple configurations.
+
+**base.webpack.config.js**
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+  ],
+};
+```
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  extends: './base.webpack.config.js',
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+};
+```
+
+## Extending multiple configurations
+
+You can extend multiple configurations at once by passing an array of configuration paths to the `extends` property.
+
+Configurations from the `extends` property are merged from right to left, meaning that the configuration on the right will be merged into the configuration on the left. Configuration can be overriden by passing the same property in the configuration on the right.
+
+**js.webpack.config.js**
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+};
+```
+
+**css.webpack.config.js**
+
+```javascript
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  extends: ['./js.webpack.config.js', './css.webpack.config.js'],
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+};
+```
+
+## Loading configuration from external packages
+
+You can also load configuration from third party packages by passing the package name to the `extends` property. The package must export the webpack configuration in package.json.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  extends: 'webpack-config-foo',
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+};
+```

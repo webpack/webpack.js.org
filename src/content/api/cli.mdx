@@ -18,6 +18,7 @@ contributors:
   - smelukov
   - anikethsaha
   - jamesgeorge007
+  - burhanuday
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -270,6 +271,7 @@ By default webpack ships with the following flags:
 | `--disable-interpret`                                           | boolean         | Disable interpret for loading the config file.                            |
 | `--fail-on-warnings`                                            | boolean         | Stop webpack-cli process with non-zero exit code on warnings from webpack |
 | [`--analyze`](#analyzing-bundle)                                | boolean         | It invokes `webpack-bundle-analyzer` plugin to get bundle information     |
+| [`--extends, -e`](#extends)                                     | string[]        | Extend an existing configuration                                          |
 
 ### Negated Flags
 
@@ -538,6 +540,14 @@ You can merge two or more different webpack configurations with the help of `--m
 
 ```bash
 npx webpack --config ./first.js --config ./second.js --merge
+```
+
+### extends
+
+You can extend existing webpack configurations with the help of `--extends`:
+
+```bash
+npx webpack --extends ./base.webpack.config.js
 ```
 
 ### json
