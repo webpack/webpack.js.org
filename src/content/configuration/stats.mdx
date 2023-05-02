@@ -701,6 +701,23 @@ module.exports = {
 };
 ```
 
+### stats.errorsSpace
+
+<Badge text="5.80.0+" />
+
+`number`
+
+Tells `stats` to limit the number of lines to allocate for displaying an error.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorsSpace: 5,
+  },
+};
+```
+
 ### stats.excludeAssets
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
@@ -1169,6 +1186,23 @@ module.exports = {
   //...
   stats: {
     warnings: false,
+  },
+};
+```
+
+### stats.warningsSpace
+
+<Badge text="5.80.0+" />
+
+`number`
+
+Tells `stats` to limit the number of lines to allocate for displaying a warning.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    warningsSpace: 5,
   },
 };
 ```
