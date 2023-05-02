@@ -4,6 +4,7 @@ group: Plugins
 sort: 13
 contributors:
   - iguessitsokay
+  - chenxsan
 ---
 
 The `NormalModuleFactory` module is used by the `Compiler` to generate modules. Starting with entry points, it resolves each request, parses the content to find further requests, and keeps crawling through files by resolving all and parsing any new files. At last stage, each dependency becomes a Module instance.
@@ -69,6 +70,18 @@ Called after the request is resolved.
 `AsyncSeriesBailHook`
 
 Called before a `NormalModule` instance is created.
+
+- Callback Parameters: `createData` `resolveData`
+
+### createModuleClass
+
+`HookMap<SyncBailHook>`
+
+<Badge text="5.81.0+" />
+
+A hook that allows you to override the `NormalModule` class when creating modules. This hook is called after the [`createModule`](#createmodule) hook and before the [`module`](#module) hook.
+
+- Hook Parameters: `identifier`
 
 - Callback Parameters: `createData` `resolveData`
 
