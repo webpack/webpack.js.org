@@ -13,6 +13,12 @@ if (
     auth: authentication.token,
   });
   console.log('api is authenticated');
+} else if (process.env.CI && process.env.VERCEL) {
+  // see https://vercel.com/docs/concepts/projects/environment-variables/system-environment-variables#system-environment-variables
+  api = new GithubAPI({
+    auth: process.env.WEBPACK_JS_ORG_VERCEL_KEY, // this is a personal access token of @chenxsan
+  });
+  console.log('api is authenticated on vercel');
 } else {
   api = new GithubAPI();
   console.log('api is not authenticated');
