@@ -98,20 +98,3 @@ module.exports = {
   },
 };
 ```
-
-## Loading configuration from external packages
-
-You can also load configuration from third party packages by passing the package name to the `extends` property. The package must export the webpack configuration in package.json.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  extends: 'webpack-config-foo',
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
-};
-```
