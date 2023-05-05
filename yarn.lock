@@ -4091,11 +4091,6 @@ corser@^2.0.1:
   resolved "https://registry.yarnpkg.com/corser/-/corser-2.0.1.tgz#8eda252ecaab5840dcd975ceb90d9370c819ff87"
   integrity sha1-jtolLsqrWEDc2XXOuQ2TcMgZ/4c=
 
-cosmiconfig-typescript-loader@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-4.3.0.tgz#c4259ce474c9df0f32274ed162c0447c951ef073"
-  integrity sha512-NTxV1MFfZDLPiBMjxbHRwSh5LaLcPMwNdCutmnHJCKoVnlvldPWlllonKwrsRJ5pYZBIBGRWWU2tfvzxgeSW5Q==
-
 cosmiconfig@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.1.tgz#714d756522cace867867ccb4474c5d01bbae5d6d"
@@ -9665,13 +9660,13 @@ postcss-load-config@^4.0.1:
     lilconfig "^2.0.5"
     yaml "^2.1.1"
 
-postcss-loader@^7.2.4:
-  version "7.2.4"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-7.2.4.tgz#2884f4ca172de633b2cf1f93dc852968f0632ba9"
-  integrity sha512-F88rpxxNspo5hatIc+orYwZDtHFaVFOSIVAx+fBfJC1GmhWbVmPWtmg2gXKE1OxJbneOSGn8PWdIwsZFcruS+w==
+postcss-loader@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-7.3.0.tgz#05991c1e490d8ff86ef18358d87db3b5b2dcb5f5"
+  integrity sha512-qLAFjvR2BFNz1H930P7mj1iuWJFjGey/nVhimfOAAQ1ZyPpcClAxP8+A55Sl8mBvM+K2a9Pjgdj10KpANWrNfw==
   dependencies:
     cosmiconfig "^8.1.3"
-    cosmiconfig-typescript-loader "^4.3.0"
+    jiti "^1.18.2"
     klona "^2.0.6"
     semver "^7.3.8"
 
