@@ -19,7 +19,7 @@ Once you are in the project directory, run the following commands:
 - `yarn build` to create a production version of the site.
 - `yarn start` to develop on a local webpack-dev-server: [localhost:3000][3].
 
-> NOTE: run `yarn fetch` before running `yarn start` command for the first time
+> NOTE: run `yarn fetch-repos` and then `yarn fetch` before running `yarn start` command for the first time
 
 - `yarn fetch` to retrieve external documentation/data.
 
