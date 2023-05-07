@@ -94,11 +94,43 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  extends: [path.resolve(__dirname, './js.webpack.config.js'), path.resolve(__dirname, './css.webpack.config.js')],
+  extends: [
+    path.resolve(__dirname, './js.webpack.config.js'),
+    path.resolve(__dirname, './css.webpack.config.js'),
+  ],
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+  },
+};
+```
+
+## Overridding Configurations
+
+You can override configurations from the extended configuration by passing the same property in the configuration that extends it.
+
+**base.webpack.config.js**
+
+```javascript
+module.exports = {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+};
+```
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  extends: path.resolve(__dirname, './base.webpack.config.js'),
+  entry: './src/index.js',
+  // overriding the output path and filename
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].bundle.js',
   },
 };
 ```
