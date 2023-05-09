@@ -314,9 +314,9 @@ Usage via the CLI:
 npx webpack serve --client-overlay-errors --no-client-overlay-warnings --client-overlay-runtime-errors
 ```
 
-To filter based on the thrown error, you can pass a function that accepts an `error` parameter and returns boolean.
+To filter based on the thrown error, you can pass a function that accepts an `error` parameter and returns a boolean.
 
-For example, to ignore error thrown by [`AbortController.abort()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort):
+For example, to ignore errors thrown by [`AbortController.abort()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort):
 
 **webpack.config.js**
 
@@ -338,7 +338,7 @@ module.exports = {
 };
 ```
 
-W> The function will not have access to variables declared in the outer scope within the configuration file.
+W> The function will not have access to the variables declared in the outer scope within the configuration file.
 
 ### progress
 
