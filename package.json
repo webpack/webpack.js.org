@@ -79,7 +79,7 @@
     "@octokit/auth-action": "^2.0.3",
     "@octokit/rest": "^19.0.7",
     "@pmmmwh/react-refresh-webpack-plugin": "next",
-    "@svgr/webpack": "^7.0.0",
+    "@svgr/webpack": "^8.0.1",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^11.0.0",
