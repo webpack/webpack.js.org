@@ -38,6 +38,7 @@ jobs:
         run: yarn build
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          OPENCOLLECTIVE_API_KEY: ${{secrets.OPENCOLLECTIVE_API_KEY}}
       - run: yarn lint:links
 
       - name: Deploy

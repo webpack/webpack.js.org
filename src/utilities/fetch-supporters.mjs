@@ -23,7 +23,13 @@ const absoluteFilename = path.resolve(
   filename
 );
 
-const graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+let graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+
+if (process.env.OPENCOLLECTIVE_API_KEY) {
+  // by default a personal access token of @chenxsan was used as I don't have access to the webpack one
+  // @doc https://graphql-docs-v2.opencollective.com/access#with-a-personal-token
+  graphqlEndpoint = `https://api.opencollective.com/graphql/v2?personalToken=${process.env.OPENCOLLECTIVE_API_KEY}`;
+}
 
 // https://github.com/opencollective/opencollective-api/blob/master/server/graphql/v2/query/TransactionsQuery.ts#L81
 const graphqlPageSize = 1000;
@@ -100,7 +106,9 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .catch((err) => console.error(err));
     console.log(result);
     if (result.errors) throw new Error(result.errors[0].message);
     const nodes = getNodes(result.data);
@@ -110,7 +118,12 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
       return allNodes;
     } else {
       // sleep for a while
-      await new Promise((resolve) => setTimeout(resolve, 6000));
+      if (process.env.OPENCOLLECTIVE_API_KEY) {
+        // if we're using personal access token, we don't need to sleep
+        console.log('no sleep');
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, 6000));
+      }
     }
   }
 };
