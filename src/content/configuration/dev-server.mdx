@@ -22,6 +22,7 @@ contributors:
   - snitin315
   - Biki-das
   - SaulSilver
+  - malcolm-kee
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -249,7 +250,7 @@ npx webpack serve --client-logging info
 
 ### overlay
 
-`boolean = true` `object: { errors boolean = true, warnings boolean = true }`
+`boolean = true` `object`
 
 Shows a full-screen overlay in the browser when there are compiler errors or warnings.
 
@@ -278,7 +279,17 @@ To disable:
 npx webpack serve --no-client-overlay
 ```
 
-If you want to show only errors:
+You can provide an object with the following properties for more granular control:
+
+| Property        | Explanation              |
+| --------------- | ------------------------ |
+| `errors`        | compilation errors       |
+| `runtimeErrors` | unhandled runtime errors |
+| `warnings`      | compilation warnings     |
+
+All properties are optional and default to `true` when not provided.
+
+For example, to disable compilation warnings, you can provide the following configuration:
 
 **webpack.config.js**
 
@@ -290,6 +301,7 @@ module.exports = {
       overlay: {
         errors: true,
         warnings: false,
+        runtimeErrors: true,
       },
     },
   },
@@ -299,8 +311,34 @@ module.exports = {
 Usage via the CLI:
 
 ```bash
-npx webpack serve --client-overlay-errors --no-client-overlay-warnings
+npx webpack serve --client-overlay-errors --no-client-overlay-warnings --client-overlay-runtime-errors
 ```
+
+To filter based on the thrown error, you can pass a function that accepts an `error` parameter and returns a boolean.
+
+For example, to ignore errors thrown by [`AbortController.abort()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort):
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    client: {
+      overlay: {
+        runtimeErrors: (error) => {
+          if (error instanceof DOMException && error.name === 'AbortError') {
+            return false;
+          }
+          return true;
+        },
+      },
+    },
+  },
+};
+```
+
+W> The function will not have access to the variables declared in the outer scope within the configuration file.
 
 ### progress
 
