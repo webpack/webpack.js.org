@@ -129,24 +129,29 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
         'Content-Type': 'application/json',
       },
     }).then(async (response) => {
-      const json = await response.json();
-      const headers = response.headers.raw();
-      console.log('json', json);
-      if (json.error) {
-        // when rate limit exceeded, api won't return headers data like x-ratelimit-limit, etc.
-        remaining = 0;
-        reset = Date.now() + 1000 * 60; // 1 minute
-      } else {
-        limit = headers['x-ratelimit-limit'] * 1;
-        remaining = headers['x-ratelimit-remaining'] * 1;
-        reset = headers['x-ratelimit-reset'] * 1000;
-        console.log(
-          `Rate limit: ${remaining}/${limit} remaining. Reset in ${new Date(
-            reset
-          )}`
-        );
+      try {
+        const json = await response.json();
+        const headers = response.headers.raw();
+        console.log('json', json);
+        if (json.error) {
+          // when rate limit exceeded, api won't return headers data like x-ratelimit-limit, etc.
+          remaining = 0;
+          reset = Date.now() + 1000 * 60; // 1 minute
+        } else {
+          limit = headers['x-ratelimit-limit'] * 1;
+          remaining = headers['x-ratelimit-remaining'] * 1;
+          reset = headers['x-ratelimit-reset'] * 1000;
+          console.log(
+            `Rate limit: ${remaining}/${limit} remaining. Reset in ${new Date(
+              reset
+            )}`
+          );
+        }
+        return json;
+      } catch (err) {
+        // utilities/fetch-supporters: SyntaxError: Unexpected token < in JSON at position 0
+        console.log('err', err, await response.text());
       }
-      return json;
     });
     // when rate limit exceeded, api will return {error: {message: ''}}
     // but we could hopefully avoid rate limit by sleeping in the beginning of the loop
