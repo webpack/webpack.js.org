@@ -34,6 +34,10 @@ if (process.env.OPENCOLLECTIVE_API_KEY) {
   // by default a personal access token of @chenxsan was used as I don't have access to the webpack one
   // @doc https://graphql-docs-v2.opencollective.com/access#with-a-personal-token
   graphqlEndpoint = `https://api.opencollective.com/graphql/v2?personalToken=${process.env.OPENCOLLECTIVE_API_KEY}`;
+} else {
+  console.log(
+    'No personal access token found, using public API to fetch supporters from OpenCollective'
+  );
 }
 
 // https://github.com/opencollective/opencollective-api/blob/master/server/graphql/v2/query/TransactionsQuery.ts#L81
