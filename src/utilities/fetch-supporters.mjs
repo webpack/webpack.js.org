@@ -129,7 +129,7 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
         'Content-Type': 'application/json',
       },
     }).then(async (response) => {
-      try {
+      if (response.headers.get('content-type').includes('json')) {
         const json = await response.json();
         const headers = response.headers.raw();
         console.log('json', json);
@@ -148,9 +148,9 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
           );
         }
         return json;
-      } catch (err) {
+      } else {
         // utilities/fetch-supporters: SyntaxError: Unexpected token < in JSON at position 0
-        console.log('err', err, await response.text());
+        console.log('something wrong when fetching', await response.text());
       }
     });
     // when rate limit exceeded, api will return {error: {message: ''}}
