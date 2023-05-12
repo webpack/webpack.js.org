@@ -128,8 +128,8 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then((response) => {
-      const json = response.json();
+    }).then(async (response) => {
+      const json = await response.json();
       const headers = response.headers.raw();
       console.log('json', json);
       if (json.error) {
