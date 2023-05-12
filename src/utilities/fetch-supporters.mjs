@@ -150,7 +150,12 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
         return json;
       } else {
         // utilities/fetch-supporters: SyntaxError: Unexpected token < in JSON at position 0
-        console.log('something wrong when fetching', await response.text());
+        console.log('something wrong when fetching supporters');
+        return {
+          error: {
+            message: await response.text(),
+          },
+        };
       }
     });
     // when rate limit exceeded, api will return {error: {message: ''}}
