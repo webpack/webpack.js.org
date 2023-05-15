@@ -63,8 +63,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-  lintLinks:
-    name: Check Links
+  testAndCheck:
+    name: E2E test and link check
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -91,32 +91,6 @@ jobs:
             build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
             build-${{ hashFiles('**/webpack.*.mjs') }}-
 
-      - name: Build site
-        run: yarn build
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: yarn lint:links
-
-  e2e:
-    name: End to End Testing
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [lts/*]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Enable webpack persistent caching
-        uses: actions/cache@v3
-        id: build-webpack-persistent-cache
-        with:
-          path: node_modules/.cache
-          key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |-
-            build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
-            build-${{ hashFiles('**/webpack.*.mjs') }}-
-
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
@@ -127,3 +101,5 @@ jobs:
           command: yarn cypress:run
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - run: yarn lint:links
