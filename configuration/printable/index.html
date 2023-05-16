@@ -1310,11 +1310,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         oneOf<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
             resourceQuery<span class="token operator">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span> <span class="token comment">// foo.css?inline</span>
-            use<span class="token operator">:</span> <span class="token string">&#x27;url-loader&#x27;</span><span class="token punctuation">,</span>
+            type<span class="token operator">:</span> <span class="token string">&#x27;asset/inline&#x27;</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             resourceQuery<span class="token operator">:</span> <span class="token regex">/external/</span><span class="token punctuation">,</span> <span class="token comment">// foo.css?external</span>
-            use<span class="token operator">:</span> <span class="token string">&#x27;file-loader&#x27;</span><span class="token punctuation">,</span>
+            type<span class="token operator">:</span> <span class="token string">&#x27;asset/resource&#x27;</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1479,7 +1479,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
         resourceQuery<span class="token operator">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token string">&#x27;url-loader&#x27;</span><span class="token punctuation">,</span>
+        type<span class="token operator">:</span> <span class="token string">&#x27;asset/inline&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1640,21 +1640,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        loader<span class="token operator">:</span> <span class="token string">&#x27;file-loader&#x27;</span><span class="token punctuation">,</span>
-        options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          outputPath<span class="token operator">:</span> <span class="token string">&#x27;svgs&#x27;</span><span class="token punctuation">,</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.svg$/</span><span class="token punctuation">,</span>
+        type<span class="token operator">:</span> <span class="token string">&#x27;asset&#x27;</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">use</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">info</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+          loader<span class="token operator">:</span> <span class="token string">&#x27;svgo-loader&#x27;</span><span class="token punctuation">,</span>
+          options<span class="token operator">:</span> <span class="token punctuation">{</span>
+            plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+              <span class="token punctuation">{</span>
+                cleanupIDs<span class="token operator">:</span> <span class="token punctuation">{</span> prefix<span class="token operator">:</span> <span class="token function">basename</span><span class="token punctuation">(</span>info<span class="token punctuation">.</span>resource<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">(</span><span class="token parameter">info</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
-        loader<span class="token operator">:</span> <span class="token string">&#x27;svgo-loader&#x27;</span><span class="token punctuation">,</span>
-        options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
-            <span class="token punctuation">{</span>
-              cleanupIDs<span class="token operator">:</span> <span class="token punctuation">{</span> prefix<span class="token operator">:</span> <span class="token function">basename</span><span class="token punctuation">(</span>info<span class="token punctuation">.</span>resource<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h2><span id="module-contexts"></span>Module Contexts<a href="#module-contexts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>These options describe the default settings for the context created when a dynamic dependency is encountered.</p><p>Example for an <code>unknown</code> dynamic dependency: <code>require</code>.</p><p>Example for an <code>expr</code> dynamic dependency: <code>require(expr)</code>.</p><p>Example for an <code>wrapped</code> dynamic dependency: <code>require(&#x27;./templates/&#x27; + expr)</code>.</p><p>Here are the available options with their <a href="https://github.com/webpack/webpack/blob/master/lib/config/defaults.js">defaults</a>:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
