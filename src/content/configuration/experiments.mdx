@@ -29,7 +29,7 @@ Available options:
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
-- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
+- [`topLevelAwait`](#experimentstoplevelawait)
 
 **webpack.config.js**
 
@@ -301,6 +301,20 @@ Once enabled, webpack will output ECMAScript module syntax whenever possible. Fo
 module.exports = {
   experiments: {
     outputModule: true,
+  },
+};
+```
+
+### experiments.topLevelAwait
+
+`boolean = true`
+
+The `topLevelAwait` option transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0`, this feature is enabled by default. However, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`.
+
+```js
+module.exports = {
+  experiments: {
+    topLevelAwait: true,
   },
 };
 ```
