@@ -307,9 +307,9 @@ module.exports = {
 
 ### experiments.topLevelAwait
 
-`boolean`
+`boolean = true`
 
-The `topLevelAwait` experiment transforms a module into an async module when an `await` is used at the top level. Starting from version `5.83.0`, this feature is enabled by default. However, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`.
+The `topLevelAwait` option transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0`, this feature is enabled by default. However, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`.
 
 ```js
 module.exports = {
