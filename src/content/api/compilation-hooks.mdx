@@ -115,6 +115,19 @@ Fired after the dependency optimization.
 
 - Callback Parameters: `modules`
 
+### afterChunks
+
+`SyncHook`
+
+<Badge text="5.83.0+" />
+
+The `afterChunks` hook is invoked following the creation of the chunks and module graph, and prior to their optimization.
+This hook provides an opportunity to examine, analyze, and modify the chunk graph if necessary.
+
+Here's [an example](https://github.com/webpack/webpack/blob/10be3f9e3fb34078af8c5841a77025a6722f11bf/lib/wasm-sync/WebAssemblyModulesPlugin.js#L114-L137) of how to utilize the `compilation.hooks.afterChunks` hook.
+
+- Callback Parameters: `chunks`
+
 ### optimize
 
 `SyncHook`
