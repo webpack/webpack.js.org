@@ -3921,6 +3921,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
+        <span class="token comment">// If you enable `experiments.css` or `experiments.futureDefaults`, please uncomment line below</span>
+        <span class="token comment">// type: &quot;javascript/auto&quot;,</span>
         test<span class="token operator">:</span> <span class="token regex">/\.(sa|sc|c)ss$/</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           devMode <span class="token operator">?</span> <span class="token string">&quot;style-loader&quot;</span> <span class="token operator">:</span> MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span>
