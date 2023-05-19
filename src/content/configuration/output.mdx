@@ -2276,6 +2276,27 @@ module.exports = {
 };
 ```
 
+### output.trustedTypes.onPolicyCreationFailure
+
+`string = 'stop': 'continue' | 'stop'`
+
+<Badge text="5.82.0+" />
+
+Determine whether to proceed with loading in anticipation that [`require-trusted-types-for 'script'`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) has not been enforced or to immediately fail when the call to `trustedTypes.createPolicy(...)` fails due to the policy name being absent from the CSP `trusted-types` list or being a duplicate.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    trustedTypes: {
+      policyName: 'my-application#webpack',
+      onPolicyCreationFailure: 'continue',
+    },
+  },
+};
+```
+
 ## output.umdNamedDefine
 
 W> Prefer to use [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine) instead.
