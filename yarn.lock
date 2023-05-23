@@ -1948,10 +1948,10 @@
   resolved "https://registry.yarnpkg.com/@npmcli/name-from-folder/-/name-from-folder-2.0.0.tgz#c44d3a7c6d5c184bb6036f4d5995eee298945815"
   integrity sha512-pwK+BfEBZJbKdNYpHHRTNBwBoqrN/iIMO0AiGvYsp3Hoaq0WbgGSWQR6SCldZovoDpY3yje5lkFUe6gsDgJ2vg==
 
-"@octokit/auth-action@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-2.0.3.tgz#c86acd2e7ae8083186fcb45a3bc406cd8f0c3749"
-  integrity sha512-GtUtNR7AmDV8bjNtt+EuqwE2Ipeq0aR10zPInp/B6msgoXL7UPqj2bI+8M/A/y7abGJ3U4h85wXoqZSralnDxw==
+"@octokit/auth-action@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-2.0.4.tgz#79b9a574e170fb5722890a631d9ee1e13a05f3ae"
+  integrity sha512-bD1OArfnifA1LP5idtKIyeYihLyr9YoNFgctpgOiWCtRgkoZ5kYIMHTrzkBkqUzrHiGKu1Ul2hdxorele8rvxQ==
   dependencies:
     "@octokit/auth-token" "^3.0.0"
     "@octokit/types" "^9.0.0"
@@ -1998,11 +1998,6 @@
   version "12.8.0"
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-12.8.0.tgz#f4708cf948724d6e8f7d878cfd91584c1c5c0523"
   integrity sha512-ydcKLs2KKcxlhpdWLzJxEBDEk/U5MUeqtqkXlrtAUXXFPs6vLl1PEGghFC/BbpleosB7iXs0Z4P2DGe7ZT5ZNg==
-
-"@octokit/openapi-types@^17.1.2":
-  version "17.1.2"
-  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-17.1.2.tgz#b7bc1cc5d3581adac9dce197a21f0e5f2ceaabf1"
-  integrity sha512-OaS7Ol4Y+U50PbejfzQflGWRMxO04nYWO5ZBv6JerqMKE2WS/tI9VoVDDPXHBlRMGG2fOdKwtVGlFfc7AVIstw==
 
 "@octokit/openapi-types@^17.2.0":
   version "17.2.0"
@@ -2082,14 +2077,7 @@
   dependencies:
     "@octokit/openapi-types" "^12.7.0"
 
-"@octokit/types@^9.0.0":
-  version "9.2.2"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-9.2.2.tgz#d111d33928f288f48083bfe49d8a9a5945e67db1"
-  integrity sha512-9BjDxjgQIvCjNWZsbqyH5QC2Yni16oaE6xL+8SUBMzcYPF4TGQBXGA97Cl3KceK9mwiNMb1mOYCz6FbCCLEL+g==
-  dependencies:
-    "@octokit/openapi-types" "^17.1.2"
-
-"@octokit/types@^9.2.3":
+"@octokit/types@^9.0.0", "@octokit/types@^9.2.3":
   version "9.2.3"
   resolved "https://registry.yarnpkg.com/@octokit/types/-/types-9.2.3.tgz#d0af522f394d74b585cefb7efd6197ca44d183a9"
   integrity sha512-MMeLdHyFIALioycq+LFcA71v0S2xpQUX2cw6pPbHQjaibcHYwLnmK/kMZaWuGfGfjBJZ3wRUq+dOaWsvrPJVvA==
