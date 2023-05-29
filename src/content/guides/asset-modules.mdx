@@ -28,7 +28,7 @@ Asset Modules types replace all of these loaders by adding 4 new module types:
 - `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
-When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Modules in webpack 5, you might want to stop Asset Modules from processing your assets again as that would result in asset duplication. This can be done by setting assets loader's type to `'javascript/auto'`.
+When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Modules in webpack 5, you might want to stop Asset Modules from processing your assets again as that would result in asset duplication. This can be done by setting the asset's module type to `'javascript/auto'`.
 
 **webpack.config.js**
 
