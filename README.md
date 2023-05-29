@@ -6,7 +6,7 @@
 
 [![Build Status][build-status]][build-status-url]
 [![Standard Version][release]][release-url]
-[![chat on gitter][chat]][chat-url]
+[![GitHub Discussions][discussion]][discussion-url]
 
 Guides, documentation, and all things webpack.
 
@@ -64,8 +64,8 @@ _Vercel_ has given us a Pro account.
 [vercel]: ./src/assets/powered-by-vercel.svg
 [browserstack-url]: http://browserstack.com/
 [vercel-url]: https://vercel.com/?utm_source=webpackdocs
-[chat]: https://badges.gitter.im/webpack/webpack.svg
-[chat-url]: https://gitter.im/webpack/webpack
+[discussion]: https://img.shields.io/github/discussions/webpack/webpack
+[discussion-url]: https://github.com/webpack/webpack/discussions
 [concepts-url]: https://github.com/webpack/webpack.js.org/issues/1386
 [contributing-url]: https://github.com/webpack/webpack.js.org/blob/main/.github/CONTRIBUTING.md
 [general-url]: https://github.com/webpack/webpack.js.org/issues/1525
