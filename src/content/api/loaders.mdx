@@ -318,6 +318,35 @@ Here is a Warning!
 
 T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
 
+### this.environment
+
+Check what kind of ES-features may be used in the generated runtime-code.
+
+E.g.,
+
+```json
+{
+  // The environment supports arrow functions ('() => { ... }').
+  "arrowFunction": true,
+  // The environment supports BigInt as literal (123n).
+  "bigIntLiteral": false,
+  // The environment supports const and let for variable declarations.
+  "const": true,
+  // The environment supports destructuring ('{ a, b } = obj').
+  "destructuring": true,
+  // The environment supports an async import() function to import EcmaScript modules.
+  "dynamicImport": false,
+  // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+  "forOf": true,
+  // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+  "module": false,
+  // The environment supports optional chaining ('obj?.a' or 'obj?.()').
+  "optionalChaining": true,
+  // The environment supports template literals.
+  "templateLiteral": true
+}
+```
+
 ### this.fs
 
 Access to the `compilation`'s `inputFileSystem` property.
