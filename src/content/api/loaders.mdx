@@ -336,8 +336,12 @@ E.g.,
   "destructuring": true,
   // The environment supports an async import() function to import EcmaScript modules.
   "dynamicImport": false,
+  // The environment supports an async import() when creating a worker, only for web targets at the moment.
+  "dynamicImportInWorker": false,
   // The environment supports 'for of' iteration ('for (const x of array) { ... }').
   "forOf": true,
+  // The environment supports 'globalThis'.
+  "globalThis": true,
   // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
   "module": false,
   // The environment supports optional chaining ('obj?.a' or 'obj?.()').
