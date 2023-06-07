@@ -137,7 +137,7 @@
     "unist-util-visit": "^4.1.2",
     "webpack": "^5.85.1",
     "webpack-bundle-analyzer": "^4.9.0",
-    "webpack-cli": "^5.1.1",
+    "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.0",
     "webpack-merge": "^5.9.0",
     "workbox-webpack-plugin": "^7.0.0",
