@@ -432,8 +432,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       destructuring<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports an async import() function to import EcmaScript modules.</span>
       dynamicImport<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token comment">// The environment supports an async import() when creating a worker, only for web targets at the moment.</span>
+      dynamicImportInWorker<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports &#x27;for of&#x27; iteration (&#x27;for (const x of array) { ... }&#x27;).</span>
       forOf<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token comment">// The environment supports &#x27;globalThis&#x27;.</span>
+      globalThis<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from &#x27;...&#x27;).</span>
       module<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports optional chaining (&#x27;obj?.a&#x27; or &#x27;obj?.()&#x27;).</span>
