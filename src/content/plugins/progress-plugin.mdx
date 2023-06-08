@@ -6,13 +6,14 @@ contributors:
   - EugeneHlushko
   - byzyk
   - smelukov
+  - chenxsan
 ---
 
 The `ProgressPlugin` provides a way to customize how progress is reported during a compilation.
 
 ## Usage
 
-Create an instance of `ProgressPlugin` and provide one of the allowed params.
+Create an instance of `ProgressPlugin` and provide one of the allowed params, besides, there's a static method `createDefaultHandler` which can be used to customize the default handler.
 
 ### Providing `function`
 
@@ -59,6 +60,17 @@ new webpack.ProgressPlugin({
   dependenciesCount: 10000,
   percentBy: null,
 });
+```
+
+### webpack.ProgressPlugin.createDefaultHandler
+
+If the default handler of `ProgressPlugin` does not meet your requirements, you can customize it using the static `ProgressPlugin.createDefaultHandler` method.
+
+```ts
+static createDefaultHandler: (
+  profile: undefined | null | boolean,
+  logger: WebpackLogger
+) => (percentage: number, msg: string, ...args: string[]) => void;
 ```
 
 ## Percentage calculation
