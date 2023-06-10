@@ -1,5 +1,5 @@
 ---
-title: 从 v4 升级到 v5
+title: To v5 from v4
 sort: 1
 contributors:
   - sokra
@@ -12,53 +12,48 @@ contributors:
   - jamesgeorge007
   - getsnoopy
   - yevhen-logosha
-translators:
-  - lcxfs1991
-  - QC-L
-  - jacob-lcs
 ---
 
-本指南目标是帮助你在使用 webpack 的时候直接迁移到 webpack 5。如果你使用运行 webpack 更底层的工具，请
-参考工具有关迁移的指引。
+This guide aims to help you migrating to webpack 5 when using webpack directly. If you are using a higher level tool to run webpack, please refer to the tool for migration instructions.
 
-## 准备工作 $#preparations$
+## Preparations
 
-Webpack 5 对 Node.js 的版本要求至少是 10.13.0 (LTS)，因此，如果你还在使用旧版本的 Node.js，请升级它们。
+Webpack 5 requires at least Node.js 10.13.0 (LTS), so make sure you upgrade your Node.js if you're still running an older one.
 
-## 升级 webpack 4 及其相关的 plugin/loader $#upgrade-webpack-and-its-plugins-loaders$
+## Upgrade webpack 4 and its plugins/loaders
 
-1. 升级 `webpack` 4 至最新的可用版本。
+1. Upgrade `webpack` 4 to the latest available version.
 
-- 当使用 webpack >= 4 时，升级到最新的 webpack 5 版本无需额外的操作。
+   - When using webpack >= 4, upgrading to the latest webpack 4 version should not require additional guidance.
 
-- 如果你使用的 webpack 版本小于 4，请查阅 [webpack 4 迁移指南](/migrate/4/)。
+   - If you are using webpack version less than 4 please see the [webpack 4 migration guide](/migrate/4/).
 
-2. 升级 `webpack-cli` 到最新的可用版本（如已使用的情况下）
+2. Upgrade `webpack-cli` to the latest available version (when used)
 
-3. 升级所有使用到的 plugin 和 loader 为最新的可用版本。
+3. Upgrade all used Plugins and Loaders to the latest available version
 
-部分 plugin 和 loader 可能会有一个 beta 版本，必须使用它们才能与 webpack 5 兼容。
-请确保在升级时阅读每个插件/loader 的发布说明，因为最新版本可能只支持 webpack 5，而在 v4 中会运行失败。在这种情况下，建议升级到支持 webpack 4 的最新版本。
+   Some Plugins and Loaders might have a beta version that has to be used in order to be compatible with webpack 5.
+   Make sure to read release notes of each individual plugin/loader when upgrading it, since latest version might only support webpack 5 and will fail in v4. In such case, it's recommended to update to the latest version that supports webpack 4.
 
-### 确保你的构建没有错误或警告 $#make-sure-your-build-has-no-errors-or-warnings$
+### Make sure your build has no errors or warnings
 
-由于升级了 `webpack`，`webpack-cli`，plugin 以及 loader 的版本，因此，可能会出现新的错误或警告。在编译过程中请注意是否有弃用警告。
+There might be new errors or warnings because of the upgraded versions of `webpack`, `webpack-cli`, Plugins and Loaders. Keep an eye for deprecation warnings during the build.
 
-你可以通过如下方式调用 `webpack` 来获取堆栈信息中的弃用警告，从而找出是哪个 plugin 或 loader 造成的。
+You can invoke `webpack` this way to get stack traces for deprecation warnings to figure out which Plugins and Loaders are responsible.
 
 ```bash
 node --trace-deprecation node_modules/webpack/bin/webpack.js
 ```
 
-由于 webpack 5 移除了所有被废弃的特性，因此，需确保在构建过程中没有 webpack 的弃用警告才能继续。
+As webpack 5 removes all deprecated features, make sure there's no webpack deprecation warnings during the build in order to proceed.
 
-### 请确保设置了 `mode` $#make-sure-to-use-mode$
+### Make sure to use `mode`
 
-将 mode 设置成 [`production`](/configuration/mode/#mode-production) 或 [`development`](/configuration/mode/#mode-development) 以确保相应的默认值被设置。
+Set `mode` to either [`production`](/configuration/mode/#mode-production) or [`development`](/configuration/mode/#mode-development) to make sure that corresponding defaults are set.
 
-### 升级废弃的配置项 $#update-outdated-options$
+### Update outdated options
 
-如有使用以下的配置项，请升级至最新的版本：
+Update the following options to their new version (if used):
 
 - `optimization.hashedModuleIds: true` → `optimization.moduleIds: 'hashed'`
 - `optimization.namedChunks: true` → `optimization.chunkIds: 'named'`
@@ -71,13 +66,13 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 - `optimization.splitChunks.cacheGroups.vendors` → `optimization.splitChunks.cacheGroups.defaultVendors`
 - `optimization.splitChunks.cacheGroups.test(module, chunks)` → `optimization.splitChunks.cacheGroups.test(module, { chunkGraph, moduleGraph })`
 - `Compilation.entries` → `Compilation.entryDependencies`
-- `serve` → `serve` 已被移除，推荐使用 [`DevServer`](/configuration/dev-server/)
-- [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (从 v3 开始被移除) → `Rule.options`/`UseEntry.options`
+- `serve` → `serve` is removed in favor of [`DevServer`](/configuration/dev-server/)
+- [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (deprecated since v3) → `Rule.options`/`UseEntry.options`
 - `Rule.loaders` → [`Rule.use`](/configuration/module/#ruleuse)
 
-### 测试 webpack 5 兼容性 $#test-webpack-5-compatibility$
+### Test webpack 5 compatibility
 
-尝试在 webpack 4 的配置中添加如下选项，检查一下构建是否仍然正确的运行。
+Try to set the following options in your webpack 4 configuration and check if build still works correctly.
 
 ```javascript
 module.exports = {
@@ -89,30 +84,30 @@ module.exports = {
 };
 ```
 
-你必须在升级 webpack 5 的配置时，必须删除这些选项。
+You have to remove these options again when upgrading your configuration for webpack 5.
 
-T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
+T> webpack 5 removes these options from the configuration schema and will always use `false`.
 
-## 升级至 webpack 5 $#upgrade-webpack-to-5$
+## Upgrade webpack to 5
 
-现在，让我们升级至 webpack 5：
+Now let's upgrade webpack to version 5:
 
 - npm: `npm install webpack@latest`
 
 - Yarn: `yarn add webpack@latest`
 
-如果你之前在升级 webpack 4 时不能将某些插件或者 loader 升级到最新版本，现在不要忘了升级。
+If you were not able to upgrade some plugins/loaders to the latest in Upgrade webpack 4 and its plugins/loaders step, don't forget to upgrade them now.
 
-#### 清理配置 $#clean-up-configuration$
+### Clean up configuration
 
-- 请考虑将 `optimization.moduleIds` 和 `optimization.chunkIds` 从你 webpack 配置中移除。使用默认值会更合适，因为它们会在 [`production 模式`](/configuration/mode/#mode-production) 下支持长效缓存且可以在 [`development` 模式](/configuration/mode/#mode-development)下进行调试。
-- 当 webpack 配置中使用了 `[hash]` 占位符时，请考虑将它改为 `[contenthash]`。效果一致，但事实证明会更为有效。
-- 如果你使用了 Yarn 的 PnP 以及 `pnp-webpack-plugin` 插件，你可以将其从配置中移除，因为它已被默认支持。
-- 如果你使用了带有正则表达式参数的 `IgnorePlugin`，现已支持传入一个 `options` 对象：`new IgnorePlugin({ resourceRegExp: /regExp/ })`。
-- 如果你使用了类似于 `node.fs: 'empty'`，请使用 `resolve.fallback.fs: false` 代替。
-- 如果你在 webpack 的 Node.js API 中使用了 `watch: true`，请移除它。无需按编译器的提示设置它，当执行 `watch()` 时为 `true`，当执行 `run()` 的时候为 `false`。
-- 如果你定义了 `rules`，以使用 `raw-loader`，`url-loader` 或 `file-loader` 来加载资源，请使用 [资源模块](/guides/asset-modules/) 替代，因为它们可能在不久的将来被淘汰。
-- 如果你将 `target` 设置为函数，则应将其更新为 `false`，然后在 `plugins` 选项中使用该函数。具体示例如下：
+- Consider removing `optimization.moduleIds` and `optimization.chunkIds` from your webpack configuration. The defaults could be better, because they support long term caching in [`production mode`](/configuration/mode/#mode-production) and debugging in [`development` mode](/configuration/mode/#mode-development).
+- When using `[hash]` placeholder in webpack configuration, consider changing it to `[contenthash]`. It is not the same, but proven to be more effective.
+- If you are using Yarn's PnP and the `pnp-webpack-plugin`, we have good news: it is supported by default now. You have to remove it from the configuration.
+- If you are using `IgnorePlugin` with a regular expression as argument, it takes an `options` object now: `new IgnorePlugin({ resourceRegExp: /regExp/ })`.
+- If you are using something like `node.fs: 'empty'` replace it with `resolve.fallback.fs: false`.
+- If you are using `watch: true` in webpack Node.js API, remove it. There's no need to set it as it's indicated by the compiler method you call, either `true` for `watch()` or `false` for `run()`.
+- If you have `rules` defined for loading assets using `raw-loader`, `url-loader`, or `file-loader`, please use [Asset Modules](/guides/asset-modules/) instead as they're going to be deprecated in near future.
+- If you have `target` set to a function, update it to `false` and apply that function within `plugins` option. See example below:
 
   ```json
   // for webpack 4
@@ -129,157 +124,157 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
   }
   ```
 
-如果通过 import 使用了 WebAssembly，应遵循以下两点：
+If you were using WebAssembly via import, you should follow this two step process:
 
-- 在配置增加 `experiments.syncWebAssembly: true` 配置，以启用废弃提醒，获得在 webpack 4 中的相同行为。
-- 在成功升级至 webpack 5 以后，应将 `experiments` 的值改为 `experiments: { asyncWebAssembly: true }` 以使用最新规范的 WASM。
+- Enable the deprecated spec by setting `experiments.syncWebAssembly: true`, to get the same behavior as in webpack 4.
+- After successful migration to webpack 5, change the `experiments` value to `experiments: { asyncWebAssembly: true }` to use the up-to-date spec for WASM integration.
 
-重新考虑 `optimization.splitChunks` 的配置：
+Reconsider `optimization.splitChunks`:
 
-- 推荐使用默认配置或使用 `optimization.splitChunks: { chunks: 'all' }` 配置。
-- 当使用自定义配置时，请删除 `name: false`，并将 `name: string | function` 替换为 `idHint: string | function`。
-- 使用 `optimization.splitChunks.cacheGroups: { default: false, vendors: false }` 配置可以关闭默认值。但我们不推荐这么做，如果你需要在 webpack 5 中获得与之相同的效果：请将配置改为 `optimization.splitChunks.cacheGroups: { default: false, defaultVendors: false }`。
+- It's recommended to use either the defaults or `optimization.splitChunks: { chunks: 'all' }`.
+- When using a custom configuration, drop `name: false` and replace `name: string | function` with `idHint: string | function`.
+- It was possible to turn off the defaults by setting `optimization.splitChunks.cacheGroups: { default: false, vendors: false }`. We don't recommend doing this, but if you really want to get the same effect in webpack 5: `optimization.splitChunks.cacheGroups: { default: false, defaultVendors: false }`.
 
-考虑移除的默认值：
+Consider removing defaults:
 
-- 当设置 `entry: './src/index.js'` 时，你可以省略它，此为默认值。
-- 当设置 `output.path: path.resolve(__dirname, 'dist')` 时：你可以省略它，此为默认值。
-- 当设置 `output.filename: '[name].js'` 时：你可以省略它，此为默认值。
+- Using `entry: './src/index.js'`: you can omit it, that's the default.
+- Using `output.path: path.resolve(__dirname, 'dist')`: you can omit it, that's the default.
+- Using `output.filename: '[name].js'`: you can omit it, that's the default.
 
-### 需要旧版浏览器的支持？比如 IE 11？ $#need-to-support-an-older-browser-like-ie-11$
+### Need to support an older browser like IE 11?
 
-- 如果你在项目中启用了 [browserslist](https://github.com/browserslist/browserslist)，webpack 5 将会重用你的 `browserslist` 配置来决定运行时的代码风格。
+- If you have [browserslist](https://github.com/browserslist/browserslist) enabled for your project, webpack 5 will reuse your `browserslist` config to decide which code style to emit for the runtime code.
 
-  只要确保：
+  Make sure to:
 
-  1. 将 [`target`](/configuration/target/#root) 设置为 `browserslist`，或者移除 `target` 配置，webpack 会自动将其置为 `browserslist`。
-  2. 在你的 browserslist 配置中添加 `IE 11`。
+  1. set [`target`](/configuration/target/#root) to `browserslist` or remove `target` letting webpack set `browserslist` automatically for you.
+  2. add a `IE 11` to your browserslist configuration.
 
-- 如未使用 `browserslist`，webpack 的运行时代码将默认使用 ES2015 语法（例如，箭头函数）来构建一个简洁的 bundles。如果你构建的目标环境并不支持 ES2015 的语法（如 IE 11），你需要设置 `target: ['web', 'es5']` 以使用 ES5 的语法。
-- 对于 Node.js 环境来说，构建中引入了对 Node.js 版本的支持，webpack 会自动找出对应版本支持的语法，例如，`target: 'node8.6'`。
+- Without a `browserslist` webpack's runtime code uses ES2015 syntax (e.g., arrow function) to build smaller bundles. Hence you'll need to set `target: ['web', 'es5']` to use the ES5 syntax for browsers (like IE11) which don't support ES2015 syntax .
+- For Node.js, builds include the supported Node.js version in the `target` option and webpack will automatically figure out which syntax is supported, e.g. `target: 'node8.6'`.
 
-### 清理代码 $#cleanup-the-code$
+### Cleanup the code
 
-#### 使用 `/* webpackChunkName: '...' */` 时 $#using-webpack-chunk-name$
+#### Using `/* webpackChunkName: '...' */`
 
-请确保你了解其意图：
+Make sure to understand the intention:
 
-- 此处 chunk 的名称本意是 public 的。
-- 它不只是用于开发模式的名称。
-- webpack 会在 production 以及 development 的模式中使用它对文件进行命名。
-- 即使不使用 `webpackChunkName`，webpack 5 也会自动在 `development` 模式下分配有意义的文件名。
+- The chunk's name here is intended to be public.
+- It's not a development-only name.
+- Webpack will use it to name files in production and development modes.
+- Webpack 5 will automatically assign useful file names in `development` mode even when not using `webpackChunkName`.
 
-#### 为 JSON 模块使用具名导出 $#using-named-exports-from-json-modules$
+#### Using named exports from JSON modules
 
-新规范中将不再支持下面这种方式，如此做会发出警告：
+This is not supported by the new specification and you will get a warning. Instead of:
 
 ```js
 import { version } from './package.json';
 console.log(version);
 ```
 
-请使用如下方式代替：
+use:
 
 ```js
 import pkg from './package.json';
 console.log(pkg.version);
 ```
 
-#### 清理构建代码 $#cleanup-the-build-code$
+#### Cleanup the build code
 
-- 当使用 `const compiler = webpack(...);`，确保在使用完毕后，使用 `compiler.close(callback);` 关闭编译器。
-  - 这不适用于自动关闭的 `webpack(..., callback)`。
-  - 如果你在监听模式下使用 webpack，直到用户结束进程，此为可选。在监听模式下的空闲阶段将被用于执行此工作。
+- When using `const compiler = webpack(...);`, make sure to close the compiler after using it: `compiler.close(callback);`.
+  - This doesn't apply to the `webpack(..., callback)` form which automatically closes.
+  - This is optional if you use webpack in watching mode until the user ends the process. The idle phases in watch mode will be used for this kind of work.
 
-### 运行单个构建并遵循以下建议 $#run-a-single-build-and-follow-advises$
+### Run a single build and follow advice
 
-请务必仔细阅读构建时的错误/警告。如未发现相关建议，请创建一个 issue，我们会尽力解决。
+Please make sure to read the building errors/warnings carefully. If there is no corresponding advice, please create an issue and we will try to resolve it.
 
-重复以下步骤，直到你至少解决到 Level 3 或 Level 4：
+Repeat the following steps until you solved at least level 3 or 4:
 
-- Level 1: **模式（Schema）校验失败**。
+- Level 1: **Schema validation fails**.
 
-  配置选项已更改。应该要有校验失败的信息且附上 `BREAKING CHANGE:` 提示，或提示应该使用哪个选项。
+  Configuration options have changed. There should be a validation error with a `BREAKING CHANGE:` note, or a hint of which option should be used instead.
 
-- Level 2: **webpack 异常退出并出现错误**。
+- Level 2: **Webpack exits with an error**.
 
-  错误信息应告诉你哪里需要进行修改。
+  The error message should tell you what needs to be changed.
 
-- Level 3: **构建错误**。
+- Level 3: **Build Errors**.
 
-  错误信息应该要有 `BREAKING CHANGE:` 提示。
+  The error message should have a `BREAKING CHANGE:` note.
 
-- Level 4: **构建警告**。
+- Level 4: **Build Warnings**.
 
-  警告信息应该告诉你哪里需要进行修改。
+  The warning message should tell you what can be improved.
 
-- Level 5: **运行时错误**。
+- Level 5: **Runtime Errors**.
 
-  这很棘手，你可能要调试才能找到问题所在。在这里很难给出一个通用的建议。但我们在下面列出了一些关于运行时错误的常见建议：
+  This is tricky. You probably have to debug to find the problem. General advice is difficult here. But we do list some common advice below regarding Runtime Errors:
 
-  - `process` 未定义。
-    - webpack 5 不再引入 Node.js 变量的 polyfill，在前端代码中应避免使用。
-    - 想支持浏览器的用法？使用 `exports` 或 `imports` 中的 package.json 字段，会根据环境不同使用不同的代码。
-      - 也可以使用 `browser` 字段来支持旧的 bundlers。
-      - 替代方案。用 `typeof process` 检查包裹的代码块。请注意，这将对 bundle 大小产生负面影响。
-    - 想要使用环境变量，如 `process.env.VARIABLE`？你需要使用 `DefinePlugin` 或 `EnvironmentPlugin` 在配置中定义这些变量。
-      - 考虑使用 `VARIABLE` 代替，但需要检查 `typeof VARIABLE !== 'undefined'`。`process.env` 是 Node.js 特有，应避免在前端中使用。
-  - 404 的 error 将指向含有 `auto` 的 URL
-    - 并非所有生态系统工具都已设置好新的 `publicPath` 的默认值 `output.publicPath: "auto"`
-      - 使用静态的 `output.publicPath: ""` 代替。
+  - `process` is not defined.
+    - webpack 5 does no longer include a polyfill for this Node.js variable. Avoid using it in the frontend code.
+    - Want to support browser usage? Use the `exports` or `imports` package.json field to use different code depending on the environment.
+      - Also use the `browser` field to support older bundlers.
+      - Alternative: Wrap code blocks with the `typeof process` checks. Note that this will have a negative impact on the bundle size.
+    - Want to use environment variables with `process.env.VARIABLE`? You need to use the `DefinePlugin` or `EnvironmentPlugin` to define these variables in the configuration.
+      - Consider using `VARIABLE` instead and make sure to check `typeof VARIABLE !== 'undefined'` too. `process.env` is Node.js specific and should be avoided in frontend code.
+  - 404 errors pointing to URLs containing `auto`
+    - Not all ecosystem tooling is ready for the new default automatic `publicPath` via `output.publicPath: "auto"`
+      - Use a static `output.publicPath: ""` instead.
 
-- Level 6: **弃用警告**.
+- Level 6: **Deprecation Warnings**.
 
-  你可能会收到很多弃用警告，插件需要时间来赶上内核的变化。请将这些弃用上报给插件。这些弃用只是警告，构建仍然可以正常工作，只是会有小瑕疵（比如性能降低）。
+  You probably get a lot of deprecation warnings. This is not directly a problem. Plugins need time to catch up with core changes. Please report these deprecations to the plugins. These deprecations are only warnings and the build will still work with only minor drawbacks (like less performance).
 
-  - 你使用带有 `--no-deprecation` 选项的 node 运行 webpack，可以隐藏废弃告警，例如：`node --no-deprecation node_modules/webpack/bin/webpack.js`。但这只能作为临时的解决方案。
-  - plugin 和 loader 的开发者，应遵循弃用信息中的建议以改进代码。
+  - You can hide deprecation warnings by running node with `--no-deprecation` flag, e.g.: `node --no-deprecation node_modules/webpack/bin/webpack.js`. This should only be a temporary workaround.
+  - Plugins and Loaders contributors can follow the advice in the deprecation messages to improve the code.
 
-- Level 7: **性能问题**.
+- Level 7: **Performance issues**.
 
-  一般来说，webpack 5 的性能应该会有所提高，但也存在少数情况性能会变差。
+  Usually, performance should improve with webpack 5, but there are also a few cases where performance gets worse.
 
-  而在这里，你可以做一些事情来改善这种情况：
+  And here are something you can do to improve the situation:
 
-  - 通过 Profile 检查时间耗费在哪里。
-    - `--profile --progress` 可以展示一个简单的性能曲线。
-    - `node --inspect-brk node_modules/webpack/bin/webpack.js` + [`chrome://inspect`](chrome://inspect) / [`edge://inspect`](edge://inspect)（查看 profiler 选项）。
-      - 你可以将这些性能文件保存到文件中，并在 issues 中提供它们。
-      - 尝试使用 `--no-turbo-inlining` 选项，在某些情况下可以获得更好的堆栈信息。
-  - 在增量构建时，构建模块的世界可以通过使用像 webpack 4 中的不安全缓存来改善：
+  - Profile where the time is spent.
+    - `--profile --progress` displays a simple performance profile now
+    - `node --inspect-brk node_modules/webpack/bin/webpack.js` + [`chrome://inspect`](chrome://inspect) / [`edge://inspect`](edge://inspect) (see profiler tab).
+      - You can save these profiles to files and provide them in issues.
+      - Try using `--no-turbo-inlining` flag for better stack traces in some cases.
+  - Time for building modules in incremental builds can be improved by reverting to unsafe caching like in webpack 4:
     - `module.unsafeCache: true`
-    - 但这可能会影响处理代码库的一些变化能力。
-  - 全量构建
-    - 与新功能相比，弃用特性的向后兼容层通常性能很差。
-    - 创建许多警告会影响构建性能，即使它们被忽略。
-    - Source Maps 的代价很昂贵。请在文档中查看 [`devtool`](/configuration/devtool/) 选项以比较使用不同选项的代价。
-    - Anti-Virus（反病毒）保护可能会影响文件系统的访问性能。
-    - 持久缓存可以帮助改善重复性的完整构建。
-    - Module Federation 允许将应用程序分割成多个较小的构建。
+    - But this might affect the ability to handle some of the changes to the code base
+  - Full build
+    - Backward-compatibility layer for the deprecated features will usually have worse performance compared to the new features.
+    - Creating many warnings can affect build performance, even if they are ignored.
+    - Source Maps are expensive. Check [`devtool`](/configuration/devtool/) option in the documentation to see a comparison of the different options.
+    - Anti-Virus protection might affect performance of the file system access.
+    - Persistent Caching can help to improve the repetitive full builds.
+    - Module Federation allows to split the application into multiple smaller builds.
 
-## 所有情况都运行如常？ $#everything-works$
+## Everything works?
 
-如果你成功地迁移至 webpack 5。请[发推 @ 我们](https://twitter.com/intent/tweet?source=https://webpack.js.org/migrate/5/&text=I%20just%20migrated%20to%20webpack%205%20using%20its%20migration%20guide!%20&via=webpack&hashtags=webpack,webpack5)。
+Please tweet that you have successfully migrated to webpack 5. [Tweet it](https://twitter.com/intent/tweet?source=https://webpack.js.org/migrate/5/&text=I%20just%20migrated%20to%20webpack%205%20using%20its%20migration%20guide!%20&via=webpack&hashtags=webpack,webpack5)
 
-## 运行异常？ $#it-is-not-working$
+## It is not working?
 
-创建一个 [issue](https://github.com/webpack/webpack/issues/new?template=Bug_report.md) 并告诉我们在迁移过程中你遇到的问题。
+Create an [issue](https://github.com/webpack/webpack/issues/new?template=Bug_report.md) and tell us about the issues you have encountered during the migration.
 
-## 发现本指南中缺失的东西？ $#something-missing-in-this-guide$
+## Something missing in this guide?
 
-请提交 [Pull Request](https://github.com/webpack/webpack.js.org/edit/master/src/content/migrate/5.mdx) 以帮助其他开发者更好地使用该指南。
+Please open a [Pull Request](https://github.com/webpack/webpack.js.org/edit/main/src/content/migrate/5.mdx) to help the next person using this guide.
 
-## 内核的改变 $#changes-to-internals$
+## Changes to internals
 
-如果你对内核感兴趣，此处会列出 webpack 内核相关的变更，如：添加类型，代码重构和方法重命名等。但这些变化并不会作为迁移通用案例的一部份。
+The changes to webpack internals such as: adding types, refactoring code and methods renaming are listed here for anyone interested. But they are not intended as a part of common use-case migration.
 
-- `Module.nameForCondition`，`Module.updateCacheModule` 以及 `Module.chunkCondition` 不再可选。
+- `Module.nameForCondition`, `Module.updateCacheModule` and `Module.chunkCondition` are no longer optional.
 
-### loader 的 getOptions 方法 $#getoptions-method-for-loaders$
+### getOptions method for Loaders
 
-Webpack 5 发布后，在 loader 的上下文中，会带有内置的 [`this.getOptions`](/api/loaders/#thisgetoptionsschema) 方法。这对于那些使用之前推荐 [schema-utils](https://github.com/webpack/schema-utils) 中的 `getOptions` 方法的 loader 而言，这是一个重大更新：
+Webpack 5 ships with built-in [`this.getOptions`](/api/loaders/#thisgetoptionsschema) method available in loader context. This is a breaking change for loaders that had been using `getOptions` method from previously preferred [schema-utils](https://github.com/webpack/schema-utils):
 
-- `this.getOptions` 自 webpack 5 起支持使用
-- 它支持将 JSON 作为查询字符串，而不仅仅是 JSON5：如 `?{arg:true}` → `?{"arg":true}`。在相应的 loader 文档中，应推荐使用 JSON 并不推荐使用 JSON5。
-- [`loader-utils`](https://github.com/webpack/loader-utils) 拥有解析查询字符串的特定行为（如 `true`，`false` 以及 `null` 不会被解析成 `string` 而是原始类型的值）。这对于新的内置 `this.getOptions` 方法来说，不再适用，它使用 Node 原生的 [`querystring`](https://nodejs.org/api/querystring.html) 方法进行解析。此时，需在 loader 中使用 `this.getOptions` 获取配置选项之后，根据情况添加自定义行为。
-- 模式(Schema) 参数对新的 `this.getOptions` 方法而言是可选的，但我们强烈建议给你的 loader 选项添加模式校验。模式中的 `title` 字段，可用于自定义校验的错误信息，比如 `"title": "My Loader ooooptions"` 会在这种方式展示错误信息：`Invalid ooooptions object. My Loader has been initialised using an ooooptions object that does not match the API schema. - ooooptions.foo.bar.baz should be a string.`。
+- `this.getOptions` is available since webpack 5
+- Instead of JSON5 it supports JSON as a query string: `?{arg:true}` → `?{"arg":true}`. Using JSON5 should be considered and documented as deprecated in favor of JSON in the respective Loader's documentation.
+- [`loader-utils`](https://github.com/webpack/loader-utils) has specific behavior for parsing query strings (`true`, `false` and `null` won't be parsed as `string` but as a primitive value). This is no longer the case for the new built-in `this.getOptions` method, which uses native [`querystring`](https://nodejs.org/api/querystring.html) parsing (ships with Node.js). It is still possible to add custom behavior for these cases in the Loader's code after getting the options by using `this.getOptions` method.
+- Schema argument is optional for the new `this.getOptions` method, but we strongly advise to add schema validation for your Loader's options. The `title` field in the schema, can be used to customize the validation error message e.g. `"title": "My Loader ooooptions"` will result in displaying errors this way: `Invalid ooooptions object. My Loader has been initialised using an ooooptions object that does not match the API schema. - ooooptions.foo.bar.baz should be a string.`

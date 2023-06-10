@@ -11,6 +11,7 @@ contributors:
   - XiaofengXie16
   - KyleBastien
   - Alevale
+  - burhanuday
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -18,129 +19,125 @@ related:
     url: https://github.com/module-federation/module-federation-examples
   - title: 'Module Federation YouTube Playlist'
     url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
-translators:
-  - lcxfs1991
-  - QC-L
-  - blesstosam
 ---
 
-## 动机 $#motivation$
+## Motivation
 
-多个独立的构建可以组成一个应用程序，这些独立的构建之间不应该存在依赖关系，因此可以单独开发和部署它们。
+Multiple separate builds should form a single application. These separate builds act like containers and can expose and consume code between builds, creating a single, unified application.
 
-这通常被称作微前端，但并不仅限于此。
+This is often known as Micro-Frontends, but is not limited to that.
 
 <StackBlitzPreview
   example="module-federation?terminal=start&terminal="
   description="Check out this live module federation example on StackBlitz."
 />
 
-## 底层概念 $#low-level-concepts$
+## Low-level concepts
 
-我们区分本地模块和远程模块。本地模块即为普通模块，是当前构建的一部分。远程模块不属于当前构建，并在运行时从所谓的容器加载。
+We distinguish between local and remote modules. Local modules are regular modules that are part of the current build. Remote modules are modules that are not part of the current build but are loaded at runtime from a remote container.
 
-加载远程模块被认为是异步操作。当使用远程模块时，这些异步操作将被放置在远程模块和入口之间的下一个 chunk 的加载操作中。如果没有 chunk 加载操作，就不能使用远程模块。
+Loading remote modules is considered an asynchronous operation. When using a remote module, these asynchronous operations will be placed in the next chunk loading operation(s) that are between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
 
-chunk 的加载操作通常是通过调用 `import()` 实现的，但也支持像 `require.ensure` 或 `require([...])` 之类的旧语法。
+A chunk loading operation is usually an `import()` call, but older constructs like `require.ensure` or `require([...])` are supported as well.
 
-容器是由容器入口创建的，该入口暴露了对特定模块的异步访问。暴露的访问分为两个步骤：
+A container is created through a container entry, which exposes asynchronous access to the specific modules. The exposed access is separated into two steps:
 
-1. 加载模块（异步的）
-2. 执行模块（同步的）
+1. loading the module (asynchronous)
+2. evaluating the module (synchronous).
 
-步骤 1 将在 chunk 加载期间完成。步骤 2 将在与其他（本地和远程）的模块交错执行期间完成。这样一来，执行顺序不受模块从本地转换为远程或从远程转为本地的影响。
+Step 1 will be done during the chunk loading. Step 2 will be done during the module evaluation interleaved with other (local and remote) modules. This way, evaluation order is unaffected by converting a module from local to remote or the other way around.
 
-容器可以嵌套使用，容器可以使用来自其他容器的模块。容器之间也可以循环依赖。
+It is possible to nest containers. Containers can use modules from other containers. Circular dependencies between containers are also possible.
 
-## 高级概念 $#high-level-concepts$
+## High-level concepts
 
-每个构建都充当一个容器，也可将其他构建作为容器。通过这种方式，每个构建都能够通过从对应容器中加载模块来访问其他容器暴露出来的模块。
+Each build acts as a container and also consumes other builds as containers. This way, each build is able to access any other exposed module by loading it from its container.
 
-共享模块是指既可重写的又可作为向嵌套容器提供重写的模块。它们通常指向每个构建中的相同模块，例如相同的库。
+Shared modules are modules that are both overridable and provided as overrides to nested containers. They usually point to the same module in each build, e.g., the same library.
 
-packageName 选项允许通过设置包名来查找所需的版本。默认情况下，它会自动推断模块请求，当想禁用自动推断时，请将 requiredVersion 设置为 false 。
+The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
 
-## 构建块(Building blocks) $#building-blocks$
+## Building blocks
 
-### ContainerPlugin (low level) $#containerplugin-low-level$
+### ContainerPlugin (low level)
 
-该插件使用指定的公开模块来创建一个额外的容器入口。
+This plugin creates an additional container entry with the specified exposed modules.
 
-### ContainerReferencePlugin (low level) $#containerreferenceplugin-low-level$
+### ContainerReferencePlugin (low level)
 
-该插件将特定的引用添加到作为外部资源（externals）的容器中，并允许从这些容器中导入远程模块。它还会调用这些容器的 `override` API 来为它们提供重载。本地的重载（当构建也是一个容器时，通过 `__webpack_override__` 或 `override` API）和指定的重载被提供给所有引用的容器。
+This plugin adds specific references to containers as externals and allows to import remote modules from these containers. It also calls the `override` API of these containers to provide overrides to them. Local overrides (via `__webpack_override__` or `override` API when build is also a container) and specified overrides are provided to all referenced containers.
 
-### ModuleFederationPlugin (high level) $#modulefederationplugin-high-level$
+### ModuleFederationPlugin (high level)
 
-[`ModuleFederationPlugin`](/plugins/module-federation-plugin) 组合了 `ContainerPlugin` 和 `ContainerReferencePlugin`。
+[`ModuleFederationPlugin`](/plugins/module-federation-plugin) combines `ContainerPlugin` and `ContainerReferencePlugin`.
 
-## 概念目标 $#concept-goals$
+## Concept goals
 
-- 它既可以暴露，又可以使用 webpack 支持的任何模块类型
-- 代码块加载应该并行加载所需的所有内容(web:到服务器的单次往返)
-- 从使用者到容器的控制
-  - 重写模块是一种单向操作
-  - 同级容器不能重写彼此的模块。
-- 概念适用于独立于环境
-  - 可用于 web、Node.js 等
-- 共享中的相对和绝对请求
-  - 会一直提供，即使不使用
-  - 会将相对路径解析到 `config.context`
-  - 默认不会使用 `requiredVersion`
-- 共享中的模块请求
-  - 只在使用时提供
-  - 会匹配构建中所有使用的相等模块请求
-  - 将提供所有匹配模块
-  - 将从图中这个位置的 package.json 提取 `requiredVersion`
-  - 当你有嵌套的 node_modules 时，可以提供和使用多个不同的版本
-- 共享中尾部带有 `/`  的模块请求将匹配所有具有这个前缀的模块请求
+- It should be possible to expose and consume any module type that webpack supports.
+- Chunk loading should load everything needed in parallel (web: single round-trip to server).
+- Control from consumer to container
+  - Overriding modules is a one-directional operation.
+  - Sibling containers cannot override each other's modules.
+- Concept should be environment-independent.
+  - Usable in web, Node.js, etc.
+- Relative and absolute request in shared:
+  - Will always be provided, even if not used.
+  - Will resolve relative to `config.context`.
+  - Does not use a `requiredVersion` by default.
+- Module requests in shared:
+  - Are only provided when they are used.
+  - Will match all used equal module requests in your build.
+  - Will provide all matching modules.
+  - Will extract `requiredVersion` from package.json at this position in the graph.
+  - Could provide and consume multiple different versions when you have nested node_modules.
+- Module requests with trailing `/` in shared will match all module requests with this prefix.
 
-## 用例 $#use-cases$
+## Use cases
 
-### 每个页面单独构建 $#separate-builds-per-page$
+### Separate builds per page
 
-单页应用的每个页面都是在单独的构建中从容器暴露出来的。主体应用程序(application shell)也是独立构建，会将所有页面作为远程模块来引用。通过这种方式，可以单独部署每个页面。在更新路由或添加新路由时部署主体应用程序。主体应用程序将常用库定义为共享模块，以避免在页面构建中出现重复。
+Each page of a Single Page Application is exposed from container build in a separate build. The application shell is also a separate build referencing all pages as remote modules. This way each page can be separately deployed. The application shell is deployed when routes are updated or new routes are added. The application shell defines commonly used libraries as shared modules to avoid duplication of them in the page builds.
 
-### 将组件库作为容器 $#components-library-as-container$
+### Components library as container
 
-许多应用程序共享一个通用的组件库，可以将其构建成暴露所有组件的容器。每个应用程序使用来自组件库容器的组件。可以单独部署对组件库的更改，而不需要重新部署所有应用程序。应用程序自动使用组件库的最新版本。
+Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
 
-## 动态远程容器 $#dynamic-remote-containers$
+## Dynamic Remote Containers
 
-该容器接口支持 `get`  和 `init` 方法。
-`init` 是一个兼容 `async` 的方法，调用时，只含有一个参数：共享作用域对象(shared scope object)。此对象在远程容器中用作共享作用域，并由 host 提供的模块填充。
-可以利用它在运行时动态地将远程容器连接到 host 容器。
+The container interface supports `get` and `init` methods.
+`init` is an `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
+It can be leveraged to connect remote containers to a host container dynamically at runtime.
 
 **init.js**
 
-```javascript
+```js
 (async () => {
-  // 初始化共享作用域（shared scope）用提供的已知此构建和所有远程的模块填充它
+  // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
   await __webpack_init_sharing__('default');
-  const container = window.someContainer; // 或从其他地方获取容器
-  // 初始化容器 它可能提供共享模块
+  const container = window.someContainer; // or get the container somewhere else
+  // Initialize the container, it may provide shared modules
   await container.init(__webpack_share_scopes__.default);
   const module = await container.get('./module');
 })();
 ```
 
-容器尝试提供共享模块，但是如果共享模块已经被使用，则会发出警告，并忽略所提供的共享模块。容器仍能将其作为降级模块。
+The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
 
-你可以通过动态加载的方式，提供一个共享模块的不同版本，从而实现 A/B 测试。
+This way you could dynamically load an A/B test which provides a different version of a shared module.
 
-T> 在尝试动态连接远程容器之前，确保已加载容器。
+T> Ensure you have loaded the container before attempting to dynamically connect a remote container.
 
-例子：
+Example:
 
 **init.js**
 
-```javascript
+```js
 function loadComponent(scope, module) {
   return async () => {
-    // 初始化共享作用域（shared scope）用提供的已知此构建和所有远程的模块填充它
+    // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
     await __webpack_init_sharing__('default');
-    const container = window[scope]; // 或从其他地方获取容器
-    // 初始化容器 它可能提供共享模块
+    const container = window[scope]; // or get the container somewhere else
+    // Initialize the container, it may provide shared modules
     await container.init(__webpack_share_scopes__.default);
     const factory = await window[scope].get(module);
     const Module = factory();
@@ -151,11 +148,11 @@ function loadComponent(scope, module) {
 loadComponent('abtests', 'test123');
 ```
 
-[查看完整实现](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
+[See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
 
-## 基于 Promise 的动态 Remote $#promisebaseddynamicremotes$
+## Promise Based Dynamic Remotes
 
-一般来说，remote 是使用 URL 配置的，示例如下：
+Generally, remotes are configured using URL's like in this example:
 
 ```js
 module.exports = {
@@ -170,7 +167,7 @@ module.exports = {
 };
 ```
 
-但是你也可以向 remote 传递一个 promise，其会在运行时被调用。你应该用任何符合上面描述的 `get/init` 接口的模块来调用这个 promise。例如，如果你想传递你应该使用哪个版本的联邦模块，你可以通过一个查询参数做以下事情：
+But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
 
 ```js
 module.exports = {
@@ -211,22 +208,22 @@ module.exports = {
 };
 ```
 
-请注意当使用该 API 时，你 _必须_ resolve 一个包含 get/init API 的对象。
+Note that when using this API you _have_ to resolve an object which contains the get/init API.
 
-## 动态 Public Path $#dynamicpublicpath$
+## Dynamic Public Path
 
-### 提供一个 host api 以设置 publicPath $#offerahostapitosetthepublicpath$
+### Offer a host API to set the publicPath
 
-可以允许 host 在运行时通过公开远程模块的方法来设置远程模块的 publicPath。
+One could allow the host to set the publicPath of a remote module at runtime by exposing a method from that remote module.
 
-当你在 host 域的子路径上挂载独立部署的子应用程序时，这种方法特别有用。
+This approach is particularly helpful when you mount independently deployed child applications on the sub path of the host domain.
 
-场景：
+Scenario:
 
-你在 `https://my-host.com/app/*` 上有一个 host 应用，并且在 `https://foo-app.com` 上有一个子应用。子应用程序也挂载在 host 域上, 因此，
-`https://foo-app.com` 可以通过 `https://my-host.com/app/foo-app` 访问，并且 `https://my-host.com/app/foo-app/*` 可以通过代理重定向到 `https://foo-app.com/*`。
+You have a host app hosted on `https://my-host.com/app/*` and a child app hosted on `https://foo-app.com`. The child app is also mounted on the host domain, hence,
+`https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo-app/*` requests are redirected to `https://foo-app.com/*` via a proxy.
 
-示例：
+Example:
 
 **webpack.config.js (remote)**
 
@@ -237,7 +234,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'remote', // 该名称必须与入口名称相匹配
+      name: 'remote', // this name needs to match with the entry name
       exposes: ['./public-path'],
       // ...
     }),
@@ -262,11 +259,11 @@ publicPath.set('/your-public-path');
 //bootstrap app  e.g. import('./bootstrap.js')
 ```
 
-### Infer publicPath from script $#inferpublicpathfromscript$
+### Infer publicPath from script
 
 One could infer the publicPath from the script tag from `document.currentScript.src` and set it with the [`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific) module variable at runtime.
 
-示例：
+Example:
 
 **webpack.config.js (remote)**
 
@@ -277,7 +274,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'remote', // 该名称必须与入口名称相匹配
+      name: 'remote', // this name needs to match with the entry name
       // ...
     }),
   ],
@@ -287,34 +284,34 @@ module.exports = {
 **setup-public-path.js (remote)**
 
 ```js
-// 使用你自己的逻辑派生 publicPath，并使用 __webpack_public_path__ API 设置它
+// derive the publicPath with your own logic and set it with the __webpack_public_path__ API
 __webpack_public_path__ = document.currentScript.src + '/../';
 ```
 
-T> [`output.publicPath`](/configuration/output/#outputpublicpath) 配置项也可设置为 `'auto'`，它将为你自动决定一个 publicPath。
+T> There is also an `'auto'` value available to [`output.publicPath`](/configuration/output/#outputpublicpath) which automatically determines the publicPath for you.
 
-## 故障排除 $#troubleshooting$
+## Troubleshooting
 
 ### `Uncaught Error: Shared module is not available for eager consumption`
 
-应用程序正急切地执行一个作为全局主机运行的应用程序。有如下选项可供选择:
+The application is eagerly executing an application that is operating as an omnidirectional host. There are options to choose from:
 
-你可以在模块联邦的高级 API 中将依赖设置为即时依赖，此 API 不会将模块放在异步 chunk 中，而是同步地提供它们。这使得我们在初始块中可以直接使用这些共享模块。但是要注意，由于所有提供的和降级模块是要异步下载的，因此，建议只在应用程序的某个地方提供它，例如 shell。
+You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously. This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. It’s recommended to provide it only at one point of your application, e.g. the shell.
 
-我们强烈建议使用异步边界(asynchronous boundary)。它将把初始化代码分割成更大的块，以避免任何额外的开销，以提高总体性能。
+We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.
 
-例如，你的入口看起来是这样的：
+For example, your entry looked like this:
 
 **index.js**
 
-```javascript
+```js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-让我们创建 bootstrap.js 文件，并将入口文件的内容放到里面，然后将 bootstrap 引入到入口文件中:
+Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
 
 **index.js**
 
@@ -335,13 +332,13 @@ ReactDOM.render(<App />, document.getElementById('root'));
 + ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-这种方法有效，但存在局限性或缺点。
+This method works but can have limitations or drawbacks.
 
-通过 `ModuleFederationPlugin`  将依赖的 `eager` 属性设置为 `true`
+Setting `eager: true` for dependency via the `ModuleFederationPlugin`
 
 **webpack.config.js**
 
-```javascript
+```js
 // ...
 new ModuleFederationPlugin({
   shared: {
@@ -355,9 +352,9 @@ new ModuleFederationPlugin({
 
 ### `Uncaught Error: Module "./Button" does not exist in container.`
 
-错误提示中可能不会显示 `"./Button"`，但是信息看起来差不多。这个问题通常会出现在将 webpack beta.16 升级到 webpack beta.17 中。
+It likely does not say `"./Button"`, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.
 
-在 ModuleFederationPlugin 里，更改 exposes:
+Within ModuleFederationPlugin. Change the exposes from:
 
 ```diff
 new ModuleFederationPlugin({
@@ -370,10 +367,9 @@ new ModuleFederationPlugin({
 
 ### `Uncaught TypeError: fn is not a function`
 
-此处错误可能是丢失了远程容器，请确保在使用前添加它。
-如果已为试图使用远程服务器的容器加载了容器，但仍然看到此错误，则需将主机容器的远程容器文件也添加到 HTML 中。
+You are likely missing the remote container, make sure it's added.
+If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
 
-### 来自多个 remote 的模块之间的冲突 $#collision-between-modules-from-different-remotes$
+### Collision between modules from different remotes
 
-如果你想从不同的 remote 中加载多个模块，建议为你的远程构建设置 [`output.uniqueName`](/configuration/output/#outputuniquename) 以避免多个 webpack 运行时之间的冲突。
 If you're going to load multiple modules from different remotes, it's advised to set the [`output.uniqueName`](/configuration/output/#outputuniquename) option for your remote builds to avoid collisions between multiple webpack runtimes.

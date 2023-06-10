@@ -3,23 +3,31 @@ title: Web Workers
 sort: 21
 contributors:
   - chenxsan
-translators:
-  - KimYangOfCat
 ---
 
-从 webpack 5 开始，你可以使用 [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 代替 [`worker-loader`](https://github.com/webpack-contrib/worker-loader)。
+As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) without [`worker-loader`](https://github.com/webpack-contrib/worker-loader).
 
-## 语法 $#syntax$
+## Syntax
 
 ```js
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
-选择这种语法是为了实现不使用 bundler 就可以运行代码，它也可以在浏览器中的原生 ECMAScript 模块中使用。
+```js
+// or customize the chunk name with magic comments
+// see https://webpack.js.org/api/module-methods/#magic-comments
+new Worker(
+  /* webpackChunkName: "foo-worker" */ new URL('./worker.js', import.meta.url)
+);
+```
 
-请注意，虽然 [`Worker` API](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) 建议 `Worker` 构造函数接受表示 URL 的字符串脚本，在 webpack 5 中你只能使用 `URL` 代替。
+The syntax was chosen to allow running code without bundler, it is also available in native ECMAScript modules in the browser.
 
-## 示例 $#example$
+Note that while the [`Worker` API](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) suggests that `Worker` constructor would accept a string representing the URL of the script, in webpack 5 you can only use `URL` instead.
+
+W> Using a variable in the `Worker` constructor is not supported by webpack. For example, the following code will not work: `const url = new URL('./path/to/worker.ts', import.meta.url); const worker = new Worker(url);`. This is because webpack cannot analyse the syntax statically. It is important to be aware of this limitation when using `Worker` syntax with webpack.
+
+## Example
 
 **src/index.js**
 
@@ -44,9 +52,9 @@ self.onmessage = ({ data: { question } }) => {
 };
 ```
 
-## Node.js $#nodejs$
+## Node.js
 
-Node.js（>= 12.17.0） 也支持类似的语法：
+Similar syntax is supported in Node.js (>= 12.17.0):
 
 ```js
 import { Worker } from 'worker_threads';
@@ -54,4 +62,4 @@ import { Worker } from 'worker_threads';
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
-请注意，这仅在 ESM 中可用。但不可用于 ComonnJS，无论 webpack 还是 Node.js 均是如此。
+Note that this is only available in ESM. `Worker` in CommonJS syntax is not supported by either webpack or Node.js.

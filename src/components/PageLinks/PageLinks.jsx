@@ -1,7 +1,7 @@
 import Url from 'url';
 import PropTypes from 'prop-types';
 
-const baseURL = 'https://github.com/docschina/webpack.js.org/edit/cn/';
+const baseURL = 'https://github.com/webpack/webpack.js.org/edit/main/';
 
 PageLinks.propTypes = {
   page: PropTypes.shape({
@@ -22,17 +22,17 @@ export default function PageLinks({ page = {} }) {
   return (
     <div className="print:hidden mt-20">
       <a className={classes} href={editLink}>
-        编辑此页
+        Edit this page
       </a>
       <Separator />
       <a className={classes} onClick={_handlePrintClick}>
-        打印文档
+        Print this page
       </a>
       {page.repo ? (
         <>
           <Separator />
           <a className={classes} href={page.repo}>
-            前往仓库
+            Jump to repository
           </a>
         </>
       ) : null}

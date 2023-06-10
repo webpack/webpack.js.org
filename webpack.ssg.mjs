@@ -17,7 +17,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 
 // content tree to path array
-const paths = [...flattenContentTree(contentTree), '/vote', '/app-shell'];
+const paths = [...flattenContentTree(contentTree), '/app-shell'];
 
 export default (env) =>
   merge(common(env), {

@@ -613,11 +613,11 @@ module.exports = {
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
-            use: 'url-loader',
+            type: 'asset/inline',
           },
           {
             resourceQuery: /external/, // foo.css?external
-            use: 'file-loader',
+            type: 'asset/resource',
           },
         ],
       },
@@ -919,7 +919,7 @@ module.exports = {
       {
         test: /\.css$/,
         resourceQuery: /inline/,
-        use: 'url-loader',
+        type: 'asset/inline',
       },
     ],
   },
@@ -1302,21 +1302,19 @@ module.exports = {
   module: {
     rules: [
       {
-        loader: 'file-loader',
-        options: {
-          outputPath: 'svgs',
-        },
+        test: /\.svg$/,
+        type: 'asset',
+        use: (info) => ({
+          loader: 'svgo-loader',
+          options: {
+            plugins: [
+              {
+                cleanupIDs: { prefix: basename(info.resource) },
+              },
+            ],
+          },
+        }),
       },
-      (info) => ({
-        loader: 'svgo-loader',
-        options: {
-          plugins: [
-            {
-              cleanupIDs: { prefix: basename(info.resource) },
-            },
-          ],
-        },
-      }),
     ],
   },
 };

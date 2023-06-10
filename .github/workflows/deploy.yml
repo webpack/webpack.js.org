@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     - cron: '0 0 * * *'
 jobs:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x]
+        node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
@@ -38,6 +38,7 @@ jobs:
         run: yarn build
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          OPENCOLLECTIVE_API_KEY: ${{secrets.OPENCOLLECTIVE_API_KEY}}
       - run: yarn lint:links
 
       - name: Deploy

@@ -1,5 +1,5 @@
 ---
-title: Stats 对象
+title: Stats
 sort: 18
 contributors:
   - SpaceK33z
@@ -17,16 +17,13 @@ contributors:
   - snitin315
   - u01jmg3
   - grrizzly
-translators:
-  - lcxfs1991
-  - QC-L
 ---
 
 `object` `string`
 
-`stats` 选项让你更精确地控制 bundle 信息该怎么显示。 如果你不希望使用 `quiet` 或 `noInfo` 这样的不显示信息，而是又不想得到全部的信息，只是想要获取某部分 bundle 的信息，使用 stats 选项是比较好的折衷方式。
+The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
 
-W> 在使用 Node.js API 时，此选项无效。你需要将统计配置项传递给 `stats.toString()` 和 `stats.toJson()` 调用。
+W> This option does not have any effect when using the Node.js API. You need to pass the stats options to the `stats.toString()` resp. `stats.toJson()` calls instead.
 
 ```js
 module.exports = {
@@ -35,30 +32,30 @@ module.exports = {
 };
 ```
 
-## Stats Presets $#stats-presets$
+## Stats Presets
 
-webpack 有一些特定的预设选项给统计信息输出：
+Webpack comes with certain presets available for the stats output:
 
-| 预设                | 可选值  | 描述                                              |
-| ------------------- | ------- | ------------------------------------------------- |
-| `'errors-only'`     | _none_  | 只在发生错误时输出                                |
-| `'errors-warnings'` | _none_  | 只在发生错误或有警告时输出                    |
-| `'minimal'`         | _none_  | 只在发生错误或新的编译开始时输出                  |
-| `'none'`            | `false` | 没有输出                                          |
-| `'normal'`          | `true`  | 标准输出                                          |
-| `'verbose'`         | _none_  | 全部输出                                          |
-| `'detailed'`        | _none_  | 全部输出除了 `chunkModules` 和 `chunkRootModules` |
-| `'summary'`         | _none_  | 输出 webpack 版本，以及警告数和错误数             |
+| Preset              | Alternative | Description                                                    |
+| ------------------- | ----------- | -------------------------------------------------------------- |
+| `'errors-only'`     | _none_      | Only output when errors happen                                 |
+| `'errors-warnings'` | _none_      | Only output errors and warnings happen                         |
+| `'minimal'`         | _none_      | Only output when errors or new compilation happen              |
+| `'none'`            | `false`     | Output nothing                                                 |
+| `'normal'`          | `true`      | Standard output                                                |
+| `'verbose'`         | _none_      | Output everything                                              |
+| `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
+| `'summary'`         | _none_      | Output webpack version, warnings count and errors count        |
 
-## Stats $#stats$
+## Stats Options
 
-你可以在统计输出里指定你想看到的信息。
+It is possible to specify which information you want to see in the stats output.
 
-T> 所有在统计信息配置里的选项都是可选的。
+T> All of the options in the stats configuration object are optional.
 
-### stats.all $#statsall$
+### stats.all
 
-当统计信息配置没被定义，则该值是一个回退值。它的优先级比本地的 webpack 默认值高。
+A fallback value for stats options when an option is not defined. It has precedence over local webpack defaults.
 
 ```javascript
 module.exports = {
@@ -69,11 +66,11 @@ module.exports = {
 };
 ```
 
-### stats.assets $#statsassets$
+### stats.assets
 
 `boolean = true`
 
-告知 `stats` 是否展示资源信息。将 `stats.assets` 设置成 `false` 会禁用.
+Tells `stats` whether to show the asset information. Set `stats.assets` to `false` to hide it.
 
 ```javascript
 module.exports = {
@@ -84,11 +81,11 @@ module.exports = {
 };
 ```
 
-### stats.assetsSort $#statsassetssort$
+### stats.assetsSort
 
 `string = 'id'`
 
-告知 `stats` 基于给定的字段对资源进行排序。所有的 [排序字段](#sorting-fields)都被允许作为 `stats.assetsSort`的值。使用 `!` 作为值的前缀以反转基于给定字段的排序结果。
+Tells `stats` to sort the assets by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.assetsSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
 ```javascript
 module.exports = {
@@ -99,11 +96,11 @@ module.exports = {
 };
 ```
 
-### stats.builtAt $#statsbuiltat$
+### stats.builtAt
 
 `boolean = true`
 
-告知 `stats` 是否添加构建日期与时间信息。将 `stats.builtAt` 设置成 `false` 来隐藏.
+Tells `stats` whether to add the build date and the build time information. Set `stats.builtAt` to `false` to hide it.
 
 ```javascript
 module.exports = {
@@ -114,11 +111,11 @@ module.exports = {
 };
 ```
 
-### stats.moduleAssets $#statsmoduleassets$
+### stats.moduleAssets
 
 `boolean = true`
 
-告知 `stats` 是否添加模块内的资源信息。将 `stats.moduleAssets` 设置成 `false` 以隐藏。
+Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
 
 ```javascript
 module.exports = {
@@ -129,11 +126,11 @@ module.exports = {
 };
 ```
 
-### stats.assetsSpace $#statsassetsspace$
+### stats.assetsSpace
 
 `number = 15`
 
-告诉 `stats` 应该显示多少个 asset 项目（将以组的方式折叠，以适应这个空间）。
+Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -144,11 +141,11 @@ module.exports = {
 };
 ```
 
-### stats.modulesSpace $#statsmodulesspace$
+### stats.modulesSpace
 
 `number = 15`
 
-告诉 `stats` 应该显示多少个模块项目（将以组的方式折叠，以适应这个空间）。
+Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -159,11 +156,11 @@ module.exports = {
 };
 ```
 
-### stats.chunkModulesSpace $#statschunkmodulesspace$
+### stats.chunkModulesSpace
 
 `number = 10`
 
-告诉 `stats` 显示多少个 chunk 模块项目（将以组的方式折叠，以适应这个空间）。
+Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -174,11 +171,11 @@ module.exports = {
 };
 ```
 
-### stats.nestedModules $#statsnestedmodules$
+### stats.nestedModules
 
 `boolean`
 
-告知 `stats` 是否添加嵌套在其他模块中的模块信息（比如模块联邦）。
+Tells `stats` whether to add information about modules nested in other modules (like with module concatenation).
 
 ```javascript
 module.exports = {
@@ -189,11 +186,11 @@ module.exports = {
 };
 ```
 
-### stats.nestedModulesSpace $#statsnestedmodulesspace$
+### stats.nestedModulesSpace
 
 `number = 10`
 
-告诉 `stats` 应该显示多少个嵌套模块的项目（将以组的方式折叠，以适应这个空间）。
+Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -204,15 +201,15 @@ module.exports = {
 };
 ```
 
-### stats.cached $#statscached$
+### stats.cached
 
-旧版的 `stats.cachedModules`.
+Old version of `stats.cachedModules`.
 
-### stats.cachedModules $#statscachedmodules$
+### stats.cachedModules
 
 `boolean = true`
 
-告诉 `stats` 是否要缓存（非内置）模块的信息。
+Tells `stats` whether to add information about cached (not built) modules.
 
 ```javascript
 module.exports = {
@@ -223,11 +220,11 @@ module.exports = {
 };
 ```
 
-### stats.runtimeModules $#statsruntimemodules$
+### stats.runtimeModules
 
 `boolean = true`
 
-告诉 `stats` 是否要添加运行时模块的信息。
+Tells `stats` whether to add information about runtime modules.
 
 ```javascript
 module.exports = {
@@ -238,11 +235,11 @@ module.exports = {
 };
 ```
 
-### stats.dependentModules $#statsdependentmodules$
+### stats.dependentModules
 
 `boolean`
 
-告诉 `stats` 是否要展示该 chunk 依赖的其他模块的 chunk 模块。
+Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
 
 ```javascript
 module.exports = {
@@ -253,11 +250,11 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByChunk $#statsgroupassetsbychunk$
+### stats.groupAssetsByChunk
 
 `boolean`
 
-告诉 `stats` 是否按照 asset 与 chunk 的关系进行分组。
+Tells `stats` whether to group assets by how their are related to chunks.
 
 ```javascript
 module.exports = {
@@ -268,11 +265,11 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByEmitStatus $#statsgroupassetsbyemitstatus$
+### stats.groupAssetsByEmitStatus
 
 `boolean`
 
-告诉 `stats` 是否按照 asset 的状态进行分组（emitted，对比 emit 或缓存）.
+Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
 
 ```javascript
 module.exports = {
@@ -283,11 +280,11 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByExtension $#statsgroupassetsbyextension$
+### stats.groupAssetsByExtension
 
 `boolean`
 
-告诉 `stats` 是否根据它们的拓展名聚合静态资源。
+Tells `stats` whether to group assets by their extension.
 
 ```javascript
 module.exports = {
@@ -298,11 +295,11 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByInfo $#statsgroupassetsbyinfo$
+### stats.groupAssetsByInfo
 
 `boolean`
 
-告诉 `stats` 是否按照 asset 信息对 asset 进行分组（immutable，development。hotModuleReplacement 等）。
+Tells `stats` whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).
 
 ```javascript
 module.exports = {
@@ -313,11 +310,11 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByPath $#statsgroupassetsbypath$
+### stats.groupAssetsByPath
 
 `boolean`
 
-告诉 `stats` 是否根据它们的路径聚合静态资源。
+Tells `stats` whether to group assets by their asset path.
 
 ```javascript
 module.exports = {
@@ -328,11 +325,11 @@ module.exports = {
 };
 ```
 
-### stats.groupModulesByAttributes $#statsgroupmodulesbyattributes$
+### stats.groupModulesByAttributes
 
 `boolean`
 
-告诉 `stats` 是否按模块的属性进行分组（errors，warnings，assets，optional，orphan 或者 dependent）。
+Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
 
 ```javascript
 module.exports = {
@@ -343,11 +340,11 @@ module.exports = {
 };
 ```
 
-### stats.groupModulesByCacheStatus $#statsgroupmodulesbycachestatus$
+### stats.groupModulesByCacheStatus
 
 `boolean`
 
-告诉 `stats` 是否按模块的缓存状态进行分组（已缓存或者已构建并且可缓存）。
+Tells `stats` whether to group modules by their cache status (cached or built and cacheable).
 
 ```javascript
 module.exports = {
@@ -358,11 +355,11 @@ module.exports = {
 };
 ```
 
-### stats.groupModulesByExtension $#statsgroupmodulesbyextension$
+### stats.groupModulesByExtension
 
 `boolean`
 
-告诉 `stats` 是否按模块的拓展名进行分组。
+Tells `stats` whether to group modules by their extension.
 
 ```javascript
 module.exports = {
@@ -373,11 +370,11 @@ module.exports = {
 };
 ```
 
-### stats.groupModulesByLayer $#statsgroupmodulesbylayer$
+### stats.groupModulesByLayer
 
 `boolean`
 
-告诉 `stats` 是否按模块的 layer 进行分组。
+Tells `stats` whether to group modules by their layer.
 
 ```javascript
 module.exports = {
@@ -388,11 +385,11 @@ module.exports = {
 };
 ```
 
-### stats.groupModulesByPath $#statsgroupmodulesbypath$
+### stats.groupModulesByPath
 
 `boolean`
 
-告诉 `stats` 是否按模块的路径进行分组。
+Tells `stats` whether to group modules by their path.
 
 ```javascript
 module.exports = {
@@ -403,11 +400,11 @@ module.exports = {
 };
 ```
 
-### stats.groupModulesByType $#statsgroupmodulesbytype$
+### stats.groupModulesByType
 
 `boolean`
 
-告诉 `stats` 是否按模块的类型进行分组。
+Tells `stats` whether to group modules by their type.
 
 ```javascript
 module.exports = {
@@ -418,7 +415,7 @@ module.exports = {
 };
 ```
 
-### stats.groupReasonsByOrigin $#statsgroupreasonsbyorigin$
+### stats.groupReasonsByOrigin
 
 `boolean`
 
@@ -435,11 +432,11 @@ module.exports = {
 };
 ```
 
-### stats.cachedAssets $#statscachedassets$
+### stats.cachedAssets
 
 `boolean = true`
 
-告知 `stats` 是否添加关于缓存资源的信息。 将 `stats.cachedAssets` 设置成 `false` 会告知 `stats` 仅展示被生成的文件 (并非被构建的模块)。
+Tells `stats` whether to add information about the cached assets. Setting `stats.cachedAssets` to `false` will tell `stats` to only show the emitted files (not the ones that were built).
 
 ```javascript
 module.exports = {
@@ -450,11 +447,11 @@ module.exports = {
 };
 ```
 
-### stats.children $#statschildren$
+### stats.children
 
 `boolean = true`
 
-告知 `stats` 是否添加关于子模块的信息。
+Tells `stats` whether to add information about the children.
 
 ```javascript
 module.exports = {
@@ -465,11 +462,11 @@ module.exports = {
 };
 ```
 
-### stats.chunks $#statschunks$
+### stats.chunks
 
 `boolean = true`
 
-告知 `stats` 是否添加关于 chunk 的信息。 将 `stats.chunks` 设置为 `false` 会引发更少的输出。
+Tells `stats` whether to add information about the chunk. Setting `stats.chunks` to `false` results in a less verbose output.
 
 ```javascript
 module.exports = {
@@ -480,11 +477,11 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroups $#statschunkgroups$
+### stats.chunkGroups
 
 `boolean = true`
 
-告知 `stats` 是否添加关于 `namedChunkGroups` 的信息。
+Tells `stats` whether to add information about the `namedChunkGroups`.
 
 ```javascript
 module.exports = {
@@ -495,11 +492,11 @@ module.exports = {
 };
 ```
 
-### stats.chunkModules $#statschunkmodules$
+### stats.chunkModules
 
 `boolean = true`
 
-告知 `stats` 是否添加关于已构建模块和关于 chunk 的信息。
+Tells `stats` whether to add information about the built modules to information about the chunk.
 
 ```javascript
 module.exports = {
@@ -510,11 +507,11 @@ module.exports = {
 };
 ```
 
-### stats.chunkOrigins $#statschunkorigins$
+### stats.chunkOrigins
 
 `boolean = true`
 
-告知 `stats` 是不添加关于 chunks 的来源和 chunk 合并的信息。
+Tells `stats` whether to add information about the origins of chunks and chunk merging.
 
 ```javascript
 module.exports = {
@@ -525,11 +522,11 @@ module.exports = {
 };
 ```
 
-### stats.chunksSort $#statschunkssort$
+### stats.chunksSort
 
 `string = 'id'`
 
-告知 `stats` 基于给定的字段给 chunks 排序。所有 [排序字段](#sorting-fields) 都被允许用于作为 `stats.chunksSort` 的值。使用 `!` 作为值里的前缀用以将基于给定字段排序的结果反转。
+Tells `stats` to sort the chunks by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.chunksSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
 ```javascript
 module.exports = {
@@ -540,11 +537,11 @@ module.exports = {
 };
 ```
 
-### stats.context $#statscontext$
+### stats.context
 
 `string`
 
-stats 的基本目录，用来缩短请求信息的 **绝对路径**。
+The stats base directory, an **absolute path** for shortening the request information.
 
 ```javascript
 const path = require('path');
@@ -557,13 +554,13 @@ module.exports = {
 };
 ```
 
-默认情况下，[`context`](/configuration/entry-context/#context) 的值是 Node.js 的当前工作目录。
+By default, the value of [`context`](/configuration/entry-context/#context) or the Node.js current working directory is used.
 
-### stats.colors $#statscolors$
+### stats.colors
 
 `boolean = false` `object`
 
-告知 `stats` 是否输出不同的颜色。
+Tells `stats` whether to output in the different colors.
 
 ```javascript
 module.exports = {
@@ -574,7 +571,7 @@ module.exports = {
 };
 ```
 
-它也可用通过命令行的参数实现：
+It is also available as a CLI flag:
 
 ```bash
 npx webpack --stats-colors
@@ -586,7 +583,7 @@ To disable:
 npx webpack --no-stats-colors
 ```
 
-你可以通过使用 [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code) 指定你自己的命令行终端颜色。
+You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
 
 ```js
 module.exports = {
@@ -597,11 +594,11 @@ module.exports = {
 };
 ```
 
-### stats.depth $#statsdepth$
+### stats.depth
 
 `boolean = false`
 
-告知 `stats` 是否展示每个模块与入口文件的距离。
+Tells `stats` whether to display the distance from the entry point for each module.
 
 ```javascript
 module.exports = {
@@ -612,11 +609,11 @@ module.exports = {
 };
 ```
 
-### stats.entrypoints $#statsentrypoints$
+### stats.entrypoints
 
 `boolean = true` `string = 'auto'`
 
-告知 `stats` 是否展示入口文件与对应的文件 bundles。
+Tells `stats` whether to display the entry points with the corresponding bundles.
 
 ```javascript
 module.exports = {
@@ -627,13 +624,13 @@ module.exports = {
 };
 ```
 
-当 `stats.entrypoints` 被设置为 `'auto'` 时，webpack 将自动决定是否在 stats 输出中展示入口信息。
+When `stats.entrypoints` is set to `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
 
-### stats.env $#statsenv$
+### stats.env
 
 `boolean = false`
 
-告知 `stats` 是否展示 `--env` 信息.
+Tells `stats` whether to display the `--env` information.
 
 ```javascript
 module.exports = {
@@ -644,11 +641,11 @@ module.exports = {
 };
 ```
 
-### stats.orphanModules $#statsorphanmodules$
+### stats.orphanModules
 
 `boolean = false`
 
-告知 `stats` 是否隐藏 `孤儿(orphan)` 模块. 一个模块属于 `孤儿(orphan)` 如果它不被包含在任何一个 chunk 里。孤儿模块默认在 `stats` 中会被隐藏。
+Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphan modules are hidden by default in `stats`.
 
 ```javascript
 module.exports = {
@@ -659,11 +656,11 @@ module.exports = {
 };
 ```
 
-### stats.errors $#statserrors$
+### stats.errors
 
 `boolean = true`
 
-告知 `stats` 是否展示错误。
+Tells `stats` whether to display the errors.
 
 ```javascript
 module.exports = {
@@ -674,11 +671,11 @@ module.exports = {
 };
 ```
 
-### stats.errorDetails $#statserrordetails$
+### stats.errorDetails
 
 `boolean` `string = "auto"`
 
-告知 `stats` 是否添加错误的详情。如果默认值为 `'auto'`，当只有 2 个或更少的错误时，它将显示错误详情。
+Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
 
 ```javascript
 module.exports = {
@@ -689,11 +686,11 @@ module.exports = {
 };
 ```
 
-### stats.errorStack $#statserrorstack$
+### stats.errorStack
 
 `boolean = true`
 
-告知 `stats` 是否展示错位的栈追踪信息。
+Tells `stats` whether to show stack trace of errors.
 
 ```javascript
 module.exports = {
@@ -704,11 +701,28 @@ module.exports = {
 };
 ```
 
-### stats.excludeAssets $#statsexcludeassets$
+### stats.errorsSpace
+
+<Badge text="5.80.0+" />
+
+`number`
+
+Tells `stats` to limit the number of lines to allocate for displaying an error.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorsSpace: 5,
+  },
+};
+```
+
+### stats.excludeAssets
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
 
-告知 `stats` 排除掉匹配的资源信息。这个可以通过设置一个 `字符串`, 一个 `正则表达式`, 一个 `函数` 取得资源的名字作为入参且返回一个 `布尔值`。 `stats.excludeAssets` 可以是一个包括上面任意一类型值的 `数组` 。
+Tells `stats` to exclude the matching assets information. This can be done with a `string`, a `RegExp`, a `function` that is getting the assets name as an argument and returns a `boolean`. `stats.excludeAssets` can be an `array` of any of the above.
 
 ```javascript
 module.exports = {
@@ -723,11 +737,11 @@ module.exports = {
 };
 ```
 
-### stats.excludeModules $#statsexcludemodules$
+### stats.excludeModules
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean` `boolean: false`
 
-告知 `stats` 排除掉匹配的资源信息。这个可以通过设置一个 `字符串`, 一个 `正则表达式`, 一个 `函数` 取得资源的名字作为入参且返回一个 `布尔值`。 `stats.excludeModules` 可以是一个包括上面任意一类型值的 `数组` 。`stats.excludeModules` 会与 `stats.exclude` 的配置值[进行合并](https://github.com/webpack/webpack/blob/master/lib/Stats.js#L215)。
+Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, a `function` that is getting the module's source as an argument and returns a `boolean`. `stats.excludeModules` can be an `array` of any of the above. `stats.excludeModules`'s configuration [is merged](https://github.com/webpack/webpack/blob/master/lib/Stats.js#L215) with the `stats.exclude`'s configuration value.
 
 ```javascript
 module.exports = {
@@ -738,7 +752,7 @@ module.exports = {
 };
 ```
 
-将 `stats.excludeModules` 设置为 `false` 会禁用以上的排除行为。
+Setting `stats.excludeModules` to `false` will disable the exclude behaviour.
 
 ```javascript
 module.exports = {
@@ -749,15 +763,15 @@ module.exports = {
 };
 ```
 
-### stats.exclude $#statsexclude$
+### stats.exclude
 
-详参 [`stats.excludeModules`](#statsexcludemodules).
+See [`stats.excludeModules`](#statsexcludemodules).
 
-### stats.hash $#statshash$
+### stats.hash
 
 `boolean = true`
 
-告知 `stats` 是否添加关于编译哈希值的信息。
+Tells `stats` whether to add information about the hash of the compilation.
 
 ```javascript
 module.exports = {
@@ -768,18 +782,18 @@ module.exports = {
 };
 ```
 
-### stats.logging $#statslogging$
+### stats.logging
 
 `string = 'info': 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'` `boolean`
 
-告知 `stats` 是否添加日志输出。
+Tells `stats` whether to add logging output.
 
-- `'none'`, `false` - 禁用日志
-- `'error'` - 仅显示错误
-- `'warn'` - 仅显示错误与告警
-- `'info'` - 显示错误，告警与信息
-- `'log'`, `true` - 显示错误，告警与信息，日志，组别，清理。折叠组别会在折叠状态中被显示 。
-- `'verbose'` - 输出所有日志除了调试与追踪。 折叠组别会在扩展状态中被显示 。
+- `'none'`, `false` - disable logging
+- `'error'` - errors only
+- `'warn'` - errors and warnings only
+- `'info'` - errors, warnings, and info messages
+- `'log'`, `true` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
+- `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
 
 ```javascript
 module.exports = {
@@ -790,11 +804,11 @@ module.exports = {
 };
 ```
 
-### stats.loggingDebug $#statsloggingdebug$
+### stats.loggingDebug
 
 `array = []: string | RegExp | function (name) => boolean` `string` `RegExp` `function (name) => boolean`
 
-告知 `stats` 去包括特定的日志工具调试信息比如插件或加载器的日志工具。当 [`stats.logging`](#statslogging) 被设置为 `false`, `stats.loggingDebug` 配置会被忽略。
+Tells `stats` to include the debug information of the specified loggers such as Plugins or Loaders. When [`stats.logging`](#statslogging) is set to `false`, `stats.loggingDebug` option is ignored.
 
 ```javascript
 module.exports = {
@@ -810,11 +824,11 @@ module.exports = {
 };
 ```
 
-### stats.loggingTrace $#statsloggingtrace$
+### stats.loggingTrace
 
 `boolean = true`
 
-启用错误，告警与追踪的日志输出中的堆栈追踪。将 `stats.loggingTrace` 设置为 `false` 隐藏追踪。
+Enable stack traces in the logging output for errors, warnings and traces. Set `stats.loggingTrace` to hide the trace.
 
 ```javascript
 module.exports = {
@@ -825,11 +839,11 @@ module.exports = {
 };
 ```
 
-### stats.modules $#statsmodules$
+### stats.modules
 
 `boolean = true`
 
-告知 `stats` 是否添加关于构建模块的信息。
+Tells `stats` whether to add information about the built modules.
 
 ```javascript
 module.exports = {
@@ -840,11 +854,11 @@ module.exports = {
 };
 ```
 
-### stats.modulesSort $#statsmodulessort$
+### stats.modulesSort
 
 `string = 'id'`
 
-告知 `stats` 基于给定的字段对资源进行排序。所有的 [排序字段](#sorting-fields)都被允许作为 `stats.modulesSort`的值。使用 `!` 作为值的前缀以反转基于给定字段的排序结果。
+Tells `stats` to sort the modules by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.modulesSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
 ```javascript
 module.exports = {
@@ -855,11 +869,11 @@ module.exports = {
 };
 ```
 
-### stats.moduleTrace $#statsmoduletrace$
+### stats.moduleTrace
 
 `boolean = true`
 
-告知 `stats` 展示依赖和告警/错误的来源。`stats.moduleTrace` 从 webpack 2.5.0 起可用。
+Tells `stats` to show dependencies and the origin of warnings/errors. `stats.moduleTrace` is available since webpack 2.5.0.
 
 ```javascript
 module.exports = {
@@ -870,11 +884,11 @@ module.exports = {
 };
 ```
 
-### stats.optimizationBailout $#statsoptimizationbailout$
+### stats.optimizationBailout
 
 `boolean`
 
-告诉 `stats` 展示模块优化失效的原因。
+Tells `stats` to show the reasons why optimization bailed out for modules.
 
 ```javascript
 module.exports = {
@@ -885,11 +899,11 @@ module.exports = {
 };
 ```
 
-### stats.outputPath $#statsoutputpath$
+### stats.outputPath
 
 `boolean = true`
 
-告知 `stats` 展示 `outputPath`.
+Tells `stats` to show the `outputPath`.
 
 ```javascript
 module.exports = {
@@ -900,11 +914,11 @@ module.exports = {
 };
 ```
 
-### stats.performance $#statsperformance$
+### stats.performance
 
 `boolean = true`
 
-告知 `stats` 当文件大小超过 [`performance.maxAssetSize`](/configuration/performance/#performancemaxassetsize)配置值时，展示性能提性。
+Tells `stats` to show performance hint when the file size exceeds [`performance.maxAssetSize`](/configuration/performance/#performancemaxassetsize).
 
 ```javascript
 module.exports = {
@@ -915,11 +929,11 @@ module.exports = {
 };
 ```
 
-### stats.preset $#statspreset$
+### stats.preset
 
 `string` `boolean: false`
 
-为展示的信息类型设置 [预设值](/configuration/stats/#stats-presets)。这对[扩展统计信息行为](/configuration/stats/#extending-stats-behaviours)非常有用。
+Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
 ```javascript
 module.exports = {
@@ -930,13 +944,13 @@ module.exports = {
 };
 ```
 
-将 `stats.preset` 的值设置为`false` 告知 webpack 使用 `'none'` [统计信息预设值](/configuration/stats/#stats-presets)。
+Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
 
-### stats.providedExports $#statsprovidedexports$
+### stats.providedExports
 
 `boolean = false`
 
-告知 `stats` 去展示模块的导出。
+Tells `stats` to show the exports of the modules.
 
 ```javascript
 module.exports = {
@@ -947,11 +961,11 @@ module.exports = {
 };
 ```
 
-### stats.errorsCount $#statserrorscount$
+### stats.errorsCount
 
 `boolean = true`
 
-添加展示 errors 个数。
+Add errors count.
 
 ```javascript
 module.exports = {
@@ -962,11 +976,11 @@ module.exports = {
 };
 ```
 
-### stats.warningsCount $#statswarningscount$
+### stats.warningsCount
 
 `boolean = true`
 
-添加展示 warnings 个数。
+Add warnings count.
 
 ```javascript
 module.exports = {
@@ -977,11 +991,11 @@ module.exports = {
 };
 ```
 
-### stats.publicPath $#statspublicpath$
+### stats.publicPath
 
 `boolean = true`
 
-告知 `stats` 展示 `publicPath`。
+Tells `stats` to show the `publicPath`.
 
 ```javascript
 module.exports = {
@@ -992,11 +1006,11 @@ module.exports = {
 };
 ```
 
-### stats.reasons $#statsreasons$
+### stats.reasons
 
 `boolean = true`
 
-告知 `stats` 添加关于模块被引用的原因信息。
+Tells `stats` to add information about the reasons of why modules are included.
 
 ```javascript
 module.exports = {
@@ -1007,7 +1021,7 @@ module.exports = {
 };
 ```
 
-### stats.reasonsSpace $#statsreasonspace$
+### stats.reasonsSpace
 
 `number`
 
@@ -1026,11 +1040,11 @@ module.exports = {
 
 T> The [`detailed preset`](#stats-presets) limits [`modulesSpace`](#statsmodulesspace), [`assetsSpace`](#statsassetsspace), and [`reasonsSpace`](#statsreasonsspace) to 1000 by default.
 
-### stats.relatedAssets $#statsrelatedassets$
+### stats.relatedAssets
 
 `boolean = false`
 
-告诉 `stats` 是否需添加与其他 assets 相关的信息（例如 assets 的 SourceMaps）。
+Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
 
 ```javascript
 module.exports = {
@@ -1041,11 +1055,11 @@ module.exports = {
 };
 ```
 
-### stats.source $#statssource$
+### stats.source
 
 `boolean = false`
 
-告知 `stats` 去添加模块的源码。
+Tells `stats` to add the source code of modules.
 
 ```javascript
 module.exports = {
@@ -1056,11 +1070,11 @@ module.exports = {
 };
 ```
 
-### stats.timings $#statstimings$
+### stats.timings
 
 `boolean = true`
 
-告知 `stats` 添加时间信息。
+Tells `stats` to add the timing information.
 
 ```javascript
 module.exports = {
@@ -1071,11 +1085,11 @@ module.exports = {
 };
 ```
 
-### stats.ids $#statsids$
+### stats.ids
 
 `boolean = false`
 
-通知 `stats` 给 module 和 chunk 添加 id。
+Tells `stats` to add IDs of modules and chunks.
 
 ```javascript
 module.exports = {
@@ -1086,11 +1100,11 @@ module.exports = {
 };
 ```
 
-### stats.usedExports $#statsusedexports$
+### stats.usedExports
 
 `boolean = false`
 
-告知 `stats` 是否展示模块用了哪些导出。
+Tells `stats` whether to show which exports of a module are used.
 
 ```javascript
 module.exports = {
@@ -1101,11 +1115,11 @@ module.exports = {
 };
 ```
 
-### stats.version $#statsversion$
+### stats.version
 
 `boolean = true`
 
-告知 `stats` 添加关于 webpack 版本的信息。
+Tells `stats` to add information about the webpack version used.
 
 ```javascript
 module.exports = {
@@ -1116,11 +1130,11 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroupAuxiliary $#statschunkgroupauxiliary$
+### stats.chunkGroupAuxiliary
 
 `boolean = true`
 
-在 chunk 组中展示辅助 asset。
+Display auxiliary assets in chunk groups.
 
 ```javascript
 module.exports = {
@@ -1131,11 +1145,11 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroupChildren $#statschunkgroupchildren$
+### stats.chunkGroupChildren
 
 `boolean = true`
 
-显示 chunk 组的子 chunk。（例如，预置（prefetched），预加载（preloaded）的 chunk 和 asset)。
+Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
 
 ```javascript
 module.exports = {
@@ -1146,11 +1160,11 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroupMaxAssets $#statschunkgroupmaxassets$
+### stats.chunkGroupMaxAssets
 
 `number`
 
-chunk 组中的 asset 数上限。
+Limit of assets displayed in chunk groups.
 
 ```javascript
 module.exports = {
@@ -1161,11 +1175,11 @@ module.exports = {
 };
 ```
 
-### stats.warnings $#statswarnings$
+### stats.warnings
 
 `boolean = true`
 
-告知 `stats` 添加告警。
+Tells `stats` to add warnings.
 
 ```javascript
 module.exports = {
@@ -1176,11 +1190,28 @@ module.exports = {
 };
 ```
 
-### stats.warningsFilter $#statswarningsfilter$
+### stats.warningsSpace
+
+<Badge text="5.80.0+" />
+
+`number`
+
+Tells `stats` to limit the number of lines to allocate for displaying a warning.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    warningsSpace: 5,
+  },
+};
+```
+
+### stats.warningsFilter
 
 `array = []: string | RegExp | function (warning) => boolean` `string` `RegExp` `function (warning) => boolean`
 
-告知 `stats` 排除掉匹配的告警信息。这个可以通过设置一个 `字符串`, 一个 `正则表达式`, 一个 `函数` 取得资源的名字作为入参且返回一个 `布尔值`。 `stats.warningsFilter` 可以是一个包括上面任意一类型值的 `数组` 。
+Tells `stats` to exclude the warnings that are matching given filters. This can be done with a `string`, a `RegExp`, a `function` that is getting a warning as an argument and returns a `boolean`. `stats.warningsFilter` can be an `array` of any of the above.
 
 ```javascript
 module.exports = {
@@ -1191,41 +1222,41 @@ module.exports = {
 };
 ```
 
-W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configuration/other-options/#ignorewarnings)。
+W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
 
-### stats.chunkRelations $#statschunkrelations$
+### stats.chunkRelations
 
 `boolean = false`
 
-告知 `stats` 展示 chunk 的父 chunk，孩子 chunk 和兄弟 chunk。
+Tells `stats` to display chunk parents, children and siblings.
 
-### 字段排序 $#sorting-fields$
+### Sorting fields
 
-对于 `assetsSort`, `chunksSort` 和 `modulesSort` 它们有几个可用的字段用于排序：
+For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fields that you can sort items by:
 
-- `'id'` 是元素（指资源，chunk 或模块，下同）的 id;
-- `'name'` - 一个元素的名字，在导引的时候被分配；
-- `'size'` - 一个元素的大小，单位字节（bytes）;
-- `'chunks'` - 元素来源于哪些 chunks (例如，一个 chunk 有多个子 chunks， - 子 chunks 会被基于主 chunk 组合到一起);
-- `'errors'` - 元素组错误的数量;
-- `'warnings'` - 元素中告警的数量;
-- `'failed'` - 元素是被编译失败;
-- `'cacheable'` - 元素是否被缓存;
-- `'built'` - 资源是否被构建;
-- `'prefetched'` - 资源是否被预拉取;
-- `'optional'` - 资源是否可选;
-- `'identifier'` - 元素的标识符;
-- `'index'` - 元素加工指针;
+- `'id'` is the item's id;
+- `'name'` - a item's name that was assigned to it upon importing;
+- `'size'` - a size of item in bytes;
+- `'chunks'` - what chunks the item originates from (for example, if there are multiple subchunks for one chunk - the subchunks will be grouped together according to their main chunk);
+- `'errors'` - amount of errors in items;
+- `'warnings'` - amount of warnings in items;
+- `'failed'` - whether the item has failed compilation;
+- `'cacheable'` - whether the item is cacheable;
+- `'built'` - whether the asset has been built;
+- `'prefetched'` - whether the asset will be prefetched;
+- `'optional'` - whether the asset is optional;
+- `'identifier'` - identifier of the item;
+- `'index'` - item's processing index;
 - `'index2'`
 - `'profile'`
-- `'issuer'` - 发起者(issuer)的标识符;
-- `'issuerId'` - 发起者(issuer)的 id;
-- `'issuerName'` - 发起者(issuer)的名字;
-- `'issuerPath'` - 一个完整的发起者(issuer)对象。基于这个字段排序没有现实的需要;
+- `'issuer'` - an identifier of the issuer;
+- `'issuerId'` - an id of the issuer;
+- `'issuerName'` - a name of the issuer;
+- `'issuerPath'` - a full issuer object. There's no real need to sort by this field;
 
-### 扩展统计信息行为 $#extending-stats-behaviours$
+### Extending stats behaviours
 
-如果你想使用其中一个预定义的行为，例如 `'minimal'`，但仍想重载一个或更多的规则：请指定想要设置的 `stats.preset` 同时在后面添加自定义或额外的规则。
+If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules: specify the desired `stats.preset` and add the customized or additional rules afterwards.
 
 **webpack.config.js**
 

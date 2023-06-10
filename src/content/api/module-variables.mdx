@@ -85,7 +85,22 @@ exports.aFunction = function doSomething() {
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
-## import.meta.url
+## import.meta
+
+The `import.meta` exposes context-specific metadata to a JavaScript module, such as the URL of the module. It is only available in [ESM](/guides/ecma-script-modules/).
+
+Please note that webpack does not support direct access to `import.meta`. Instead, you should access its properties or use destructuring assignment. E.g.,
+
+```js
+// webpack will warn about this
+Object.keys(import.meta);
+
+// fine to use
+console.log(import.meta.url);
+const { url } = import.meta;
+```
+
+### import.meta.url
 
 返回模块以 `file:` 开头绝对路径的 URL。
 
@@ -95,7 +110,7 @@ exports.aFunction = function doSomething() {
 console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/project/src/index.js`
 ```
 
-## import.meta.webpack
+### import.meta.webpack
 
 返回 webpack 的版本
 
@@ -105,11 +120,11 @@ console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/pro
 console.log(import.meta.webpack); // output `5` for webpack 5
 ```
 
-## import.meta.webpackHot
+### import.meta.webpackHot
 
 webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中可以使用 `import.meta.webpackHot` 但是不能使用 `module.hot`。
 
-## import.meta.webpackContext
+### import.meta.webpackContext
 
 返回与 `require.context` 一样的值，但是仅用于 `javascript/auto` 和 `javascript/esm`。
 

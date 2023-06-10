@@ -64,6 +64,34 @@ body {
       color: #82b7f6;
     }
   }
+
+  aside.tip,
+  aside.warning,
+  aside.preview,
+  aside.todo {
+    background-color: #222222;
+    color: #fff;
+  }
+  aside.tip {
+    > .tip__prefix {
+      color: #fff;
+    }
+  }
+  aside.warning {
+    > .warning__prefix {
+      color: #fff;
+    }
+  }
+  aside.preview {
+    > .preview__prefix {
+      color: #fff;
+    }
+  }
+  aside.todo {
+    > .todo__prefix {
+      color: #fff;
+    }
+  }
 }
 .sidebar-item__title,
 .sidebar-item__anchor a {

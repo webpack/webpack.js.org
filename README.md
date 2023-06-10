@@ -6,40 +6,72 @@
 
 [![Build Status][build-status]][build-status-url]
 [![Standard Version][release]][release-url]
-[![chat on gitter][chat]][chat-url]
+[![GitHub Discussions][discussion]][discussion-url]
 
-指南、文档以及 webpack 的一切
+Guides, documentation, and all things webpack.
 
 </div>
 
-## 📝 如何参与贡献
+## Content Progress
 
-目前 webpack 中文文档处于稳定维护状态。
+Now that we've covered much of the backlog of _missing documentation_, we are
+starting to heavily review each section of the site's content to sort and
+structure it appropriately. The following issues should provide a pretty good
+idea of where things are, and where they are going:
 
-**工作流介绍：** 我们会每天拉取 [英文版文档](https://github.com/webpack/webpack/tree/main) 内容的更新，并由印记中文 bot 自动发起 PR，我们会根据该 PR 解决 Git 冲突并翻译内容。
+- [Guides - Review and Simplify][guides-url]
+- [Concepts - Review and Organize][concepts-url]
 
-贡献指南敬请点击 [这里](https://github.com/docschina/webpack.js.org/issues/749)。
+We haven't created issues for the other sections yet, but they will be coming
+soon. For dev-related work please see [General - Updates & Fixes][general-url].
 
-## 📥 如何开始编辑
+## Translation
 
-```bash
-# 克隆本仓库
-$ git clone https://github.com/docschina/webpack.js.org.git
+To help translate this documentation please jump to the [translation branch][translate-url].
 
-# 安装依赖
-$ yarn
+## Versioning
 
-# 启动开发服务器
-$ yarn start
-```
+Since webpack 4 we have created a subdomain-based archive for older states of documentation
+matching older webpack version. Webpack 4's documentation is available at
+[https://v4.webpack.js.org/](https://v4.webpack.js.org/) and is deployed from [`gh-pages` branch of v4.webpack.js.org repository](https://github.com/webpack/v4.webpack.js.org/tree/gh-pages)
+
+There are various known issues that need fixing ([#3366](https://github.com/webpack/webpack.js.org/issues/3366)).
+
+## Contributing
+
+Read through the [writer's guide][writer-guide-url] if you're interested in editing the
+content on this site. See the [contributors page][contributing-url] to learn how to set up and
+start working on the site locally.
 
 ## License
 
-内容在 [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可下可用。
+The content is available under the [Creative Commons BY 4.0][license-url] license.
+
+## Special Thanks
+
+_BrowserStack_ has graciously allowed us to do cross-browser and cross-os
+testing of the site at no cost...
+
+[![BrowserStackLogo][browserstack]][browserstack-url]
+
+_Vercel_ has given us a Pro account.
+
+[![VercelLogo][vercel]][vercel-url]
 
 [build-status]: https://github.com/webpack/webpack.js.org/workflows/Deploy/badge.svg
 [build-status-url]: https://github.com/webpack/webpack.js.org/actions
-[chat]: https://badges.gitter.im/webpack/webpack.svg
-[chat-url]: https://gitter.im/webpack/webpack
+[browserstack]: ./browserstack-logo.png
+[vercel]: ./src/assets/powered-by-vercel.svg
+[browserstack-url]: http://browserstack.com/
+[vercel-url]: https://vercel.com/?utm_source=webpackdocs
+[discussion]: https://img.shields.io/github/discussions/webpack/webpack
+[discussion-url]: https://github.com/webpack/webpack/discussions
+[concepts-url]: https://github.com/webpack/webpack.js.org/issues/1386
+[contributing-url]: https://github.com/webpack/webpack.js.org/blob/main/.github/CONTRIBUTING.md
+[general-url]: https://github.com/webpack/webpack.js.org/issues/1525
+[guides-url]: https://github.com/webpack/webpack.js.org/issues/1258
+[license-url]: https://creativecommons.org/licenses/by/4.0/
 [release]: https://img.shields.io/badge/release-standard%20version-brightgreen.svg
 [release-url]: https://github.com/conventional-changelog/standard-version
+[translate-url]: https://github.com/webpack/webpack.js.org/tree/translation
+[writer-guide-url]: https://webpack.js.org/contribute/writers-guide

@@ -1,5 +1,5 @@
 ---
-title: compilation 钩子
+title: Compilation Hooks
 group: Plugins
 sort: 10
 contributors:
@@ -11,36 +11,32 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - jamesgeorge007
-translators:
-  - dear-lizhihua
-  - QC-L
-  - jacob-lcs
 ---
 
-`Compilation` 模块会被 `Compiler` 用来创建新的 compilation 对象（或新的 build 对象）。
-`compilation` 实例能够访问所有的模块和它们的依赖（大部分是循环依赖）。
-它会对应用程序的依赖图中所有模块，
-进行字面上的编译(literal compilation)。
-在编译阶段，模块会被加载(load)、封存(seal)、优化(optimize)、
-分块(chunk)、哈希(hash)和重新创建(restore)。
+The `Compilation` module is used by the `Compiler` to create new compilations
+(or builds). A `compilation` instance has access to all modules and their
+dependencies (most of which are circular references). It is the literal
+compilation of all the modules in the dependency graph of an application.
+During the compilation phase, modules are loaded, sealed, optimized, chunked,
+hashed and restored.
 
-`Compilation` 类扩展(extend)自 `Tapable`，并提供了以下生命周期钩子。
-可以按照 compiler 钩子的相同方式来调用 tap：
+The `Compilation` class also extends `Tapable` and provides the following
+lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ```js
 compilation.hooks.someHook.tap(/* ... */);
 ```
 
-和 `compiler` 用法相同，取决于不同的钩子类型，
-所以也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
+As with the `compiler`, `tapAsync` and `tapPromise` may also be available
+depending on the type of hook.
 
-### buildModule $#buildmodule$
+### buildModule
 
 `SyncHook`
 
-在模块构建开始之前触发，可以用来修改模块。
+Triggered before a module build has started, can be used to modify the module.
 
-- 回调参数：`module`
+- Callback Parameters: `module`
 
 ```js
 compilation.hooks.buildModule.tap(
@@ -51,320 +47,333 @@ compilation.hooks.buildModule.tap(
 );
 ```
 
-### rebuildModule $#rebuildmodule$
+### rebuildModule
 
 `SyncHook`
 
-在重新构建一个模块之前触发。
+Fired before rebuilding a module.
 
-- 回调参数：`module`
+- Callback Parameters: `module`
 
-### failedModule $#failedmodule$
-
-`SyncHook`
-
-模块构建失败时执行。
-
-- 回调参数：`module` `error`
-
-### succeedModule $#succeedmodule$
+### failedModule
 
 `SyncHook`
 
-模块构建成功时执行。
+Run when a module build has failed.
 
-- 回调参数：`module`
+- Callback Parameters: `module` `error`
 
-### finishModules $#finishmodules$
+### succeedModule
+
+`SyncHook`
+
+Executed when a module has been built successfully.
+
+- Callback Parameters: `module`
+
+### finishModules
 
 `AsyncSeriesHook`
 
-所有模块都完成构建并且没有错误时执行。
+Called when all modules have been built without errors.
 
-- 回调参数：`modules`
+- Callback Parameters: `modules`
 
-### finishRebuildingModule $#finishrebuildingmodule$
-
-`SyncHook`
-
-一个模块完成重新构建时执行，在都成功或有错误的情况下。
-
-- 回调参数：`module`
-
-### seal $#seal$
+### finishRebuildingModule
 
 `SyncHook`
 
-compilation 对象停止接收新的模块时触发。
+Executed when a module has been rebuilt, in case of both success or with errors.
 
-### unseal $#unseal$
+- Callback Parameters: `module`
+
+### seal
 
 `SyncHook`
 
-compilation 对象开始接收新模块时触发。
+Fired when the compilation stops accepting new modules.
 
-### optimizeDependencies $#optimizedependencies$
+### unseal
+
+`SyncHook`
+
+Fired when a compilation begins accepting new modules.
+
+### optimizeDependencies
 
 `SyncBailHook`
 
-依赖优化开始时触发。
+Fired at the beginning of dependency optimization.
 
-- 回调参数：`modules`
+- Callback Parameters: `modules`
 
-### afterOptimizeDependencies $#afteroptimizedependencies$
-
-`SyncHook`
-
-依赖优化之后触发。
-
-- 回调参数：`modules`
-
-### optimize $#optimize$
+### afterOptimizeDependencies
 
 `SyncHook`
 
-优化阶段开始时触发。
+Fired after the dependency optimization.
 
-### optimizeModules $#optimizemodules$
+- Callback Parameters: `modules`
+
+### afterChunks
+
+`SyncHook`
+
+<Badge text="5.83.0+" />
+
+The `afterChunks` hook is invoked following the creation of the chunks and module graph, and prior to their optimization.
+This hook provides an opportunity to examine, analyze, and modify the chunk graph if necessary.
+
+Here's [an example](https://github.com/webpack/webpack/blob/10be3f9e3fb34078af8c5841a77025a6722f11bf/lib/wasm-sync/WebAssemblyModulesPlugin.js#L114-L137) of how to utilize the `compilation.hooks.afterChunks` hook.
+
+- Callback Parameters: `chunks`
+
+### optimize
+
+`SyncHook`
+
+Triggered at the beginning of the optimization phase.
+
+### optimizeModules
 
 `SyncBailHook`
 
-在模块优化阶段开始时调用。插件可以 tap 此钩子对模块进行优化。
+Called at the beginning of the module optimization phase. A plugin can tap into this hook to perform optimizations on modules.
 
-- 回调参数：`modules`
+- Callback Parameters: `modules`
 
-### afterOptimizeModules $#afteroptimizemodules$
+### afterOptimizeModules
 
 `SyncHook`
 
-在模块优化完成之后调用。
+Called after modules optimization has completed.
 
-- 回调参数：`modules`
+- Callback Parameters: `modules`
 
-### optimizeChunks $#optimizechunks$
+### optimizeChunks
 
 `SyncBailHook`
 
-在 chunk 优化阶段开始时调用。插件可以 tap 此钩子对 chunk 执行优化。
+Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
 
-- 回调参数：`chunks`
+- Callback Parameters: `chunks`
 
-### afterOptimizeChunks $#afteroptimizechunks$
+### afterOptimizeChunks
 
 `SyncHook`
 
-chunk 优化完成之后触发。
+Fired after chunk optimization has completed.
 
-- 回调参数：`chunks`
+- Callback Parameters: `chunks`
 
-### optimizeTree $#optimizetree$
+### optimizeTree
 
 `AsyncSeriesHook`
 
-在优化依赖树之前调用。插件可以 tap 此钩子执行依赖树优化。
+Called before optimizing the dependency tree. A plugin can tap into this hook to perform a dependency tree optimization.
 
-- 回调参数：`chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
-### afterOptimizeTree $#afteroptimizetree$
+### afterOptimizeTree
 
 `SyncHook`
 
-在依赖树优化成功完成之后调用。
+Called after the dependency tree optimization has completed with success.
 
-- 回调参数：`chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
-### optimizeChunkModules $#optimizechunkmodules$
+### optimizeChunkModules
 
 `SyncBailHook`
 
-在树优化之后，chunk 模块优化开始时调用。插件可以 tap 此钩子来执行 chunk 模块的优化。
+Called after the tree optimization, at the beginning of the chunk modules optimization. A plugin can tap into this hook to perform optimizations of chunk modules.
 
-- 回调参数：`chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
-### afterOptimizeChunkModules $#afteroptimizechunkmodules$
+### afterOptimizeChunkModules
 
 `SyncHook`
 
-在 chunk 模块优化成功完成之后调用。
+Called after the chunkmodules optimization has completed successfully.
 
-- 回调参数：`chunks` `modules`
+- Callback Parameters: `chunks` `modules`
 
-### shouldRecord $#shouldrecord$
+### shouldRecord
 
 `SyncBailHook`
 
-调用来决定是否存储 record。返回任何内容 `!== false` 将阻止执行所有其他 "record" 钩子（[`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) 和 [`recordHash`](#recordhash)）。
+Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed ([`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) and [`recordHash`](#recordhash)).
 
-### reviveModules $#revivemodules$
-
-`SyncHook`
-
-从 record 中恢复模块信息。
-
-- 回调参数：`modules` `records`
-
-### beforeModuleIds $#beforemoduleids$
+### reviveModules
 
 `SyncHook`
 
-在为每个模块分配 `id` 之前执行。
+Restore module information from records.
 
-- 回调参数：`modules`
+- Callback Parameters: `modules` `records`
 
-### moduleIds $#moduleids$
-
-`SyncHook`
-
-调用来每个模块分配一个 `id`。
-
-- 回调参数：`modules`
-
-### optimizeModuleIds $#optimizemoduleids$
+### beforeModuleIds
 
 `SyncHook`
 
-在模块 `id` 优化开始时调用。
+Executed before assigning an `id` to each module.
 
-- 回调参数：`modules`
+- Callback Parameters: `modules`
 
-### afterOptimizeModuleIds $#afteroptimizemoduleids$
-
-`SyncHook`
-
-在模块 `id` 优化完成时调用。
-
-- 回调参数：`modules`
-
-### reviveChunks $#revivechunks$
+### moduleIds
 
 `SyncHook`
 
-从 record 中恢复 chunk 信息。
+Called to assign an `id` to each module.
 
-- 回调参数：`chunks` `records`
+- Callback Parameters: `modules`
 
-### beforeChunkIds $#beforechunkids$
-
-`SyncHook`
-
-在为每个 chunk 分配 `id` 之前执行。
-
-- 回调参数：`chunks`
-
-### chunkIds $#chunkids$
+### optimizeModuleIds
 
 `SyncHook`
 
-调用时，会为每个 chunk 分配一个 `id`。
+Called at the beginning of the modules `id` optimization.
 
-- 回调函数的参数为：`chunks`
+- Callback Parameters: `modules`
 
-### optimizeChunkIds $#optimizechunkids$
-
-`SyncHook`
-
-在 chunk `id` 优化阶段开始时调用。
-
-- 回调参数：`chunks`
-
-### afterOptimizeChunkIds $#afteroptimizechunkids$
+### afterOptimizeModuleIds
 
 `SyncHook`
 
-chunk `id` 优化结束之后触发。
+Called when the modules `id` optimization phase has completed.
 
-- 回调参数：`chunks`
+- Callback Parameters: `modules`
 
-### recordModules $#recordmodules$
-
-`SyncHook`
-
-将模块信息存储到 record 中。[`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
-
-- 回调参数：`modules` `records`
-
-### recordChunks $#recordchunks$
+### reviveChunks
 
 `SyncHook`
 
-将 chunk 存储到 record 中。[`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
+Restore chunk information from records.
 
-- 回调参数：`chunks` `records`
+- Callback Parameters: `chunks` `records`
 
-### beforeModuleHash $#beforemodulehash$
+### beforeChunkIds
 
 `SyncHook`
 
-在创建模块哈希（hash）之前。
+Executed before assigning an `id` to each chunk.
 
-### afterModuleHash $#aftermodulehash$
+- Callback Parameters: `chunks`
+
+### chunkIds
+
+`SyncHook`
+
+Called to assign an `id` to each chunk.
+
+- Callback Parameters: `chunks`
+
+### optimizeChunkIds
+
+`SyncHook`
+
+Called at the beginning of the chunks `id` optimization phase.
+
+- Callback Parameters: `chunks`
+
+### afterOptimizeChunkIds
+
+`SyncHook`
+
+Triggered after chunk `id` optimization has finished.
+
+- Callback Parameters: `chunks`
+
+### recordModules
+
+`SyncHook`
+
+Store module info to the records. This is triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+
+- Callback Parameters: `modules` `records`
+
+### recordChunks
+
+`SyncHook`
+
+Store chunk info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+
+- Callback Parameters: `chunks` `records`
+
+### beforeModuleHash
+
+`SyncHook`
+
+Called before modules are hashed.
+
+### afterModuleHash
 
 `syncHook`
 
-在创建模块哈希（hash）之后。
+Called after modules are hashed.
 
-### beforeHash $#beforehash$
-
-`SyncHook`
-
-在 compilation 添加哈希（hash）之前。
-
-### afterHash $#afterhash$
+### beforeHash
 
 `SyncHook`
 
-在 compilation 添加哈希（hash）之后。
+Called before the compilation is hashed.
 
-### recordHash $#recordhash$
-
-`SyncHook`
-
-将有关 record 的信息存储到 `records` 中。仅在 [`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
-
-- 回调参数：`records`
-
-### record $#record$
+### afterHash
 
 `SyncHook`
 
-将 `compilation` 相关信息存储到 `record` 中。仅在 [`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
+Called after the compilation is hashed.
 
-- 回调参数：`compilation` `records`
-
-### beforeModuleAssets $#beforemoduleassets$
+### recordHash
 
 `SyncHook`
 
-在创建模块 asset 之前执行。
+Store information about record hash to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
-### additionalChunkAssets $#additionalchunkassets$
+- Callback Parameters: `records`
+
+### record
 
 `SyncHook`
 
-W> `additionalChunkAssets` 已弃用（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 ompilation.PROCESS_ASSETS_STAGE\_\* 作为其选项参数。）
+Store information about the `compilation` to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
-为这些 chunk 创建其他 asset。
+- Callback Parameters: `compilation` `records`
 
-- 回调参数：`chunks`
+### beforeModuleAssets
 
-### shouldGenerateChunkAssets $#shouldgeneratechunkassets$
+`SyncHook`
+
+Executed before module assets creation.
+
+### additionalChunkAssets
+
+`SyncHook`
+
+W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
+
+Create additional assets for the chunks.
+
+- Callback Parameters: `chunks`
+
+### shouldGenerateChunkAssets
 
 `SyncBailHook`
 
-调用以确定是否生成 chunk asset。返回任何 `!== false` 将允许生成 chunk asset。
+Called to determine whether or not generate chunks assets. Returning anything `!== false` will allow chunk assets generation.
 
-### beforeChunkAssets $#beforechunkassets$
+### beforeChunkAssets
 
 `SyncHook`
 
-在创建 chunk asset 之前。
+Executed before creating the chunks assets.
 
-### additionalAssets $#additionalassets$
+### additionalAssets
 
 `AsyncSeriesHook`
 
-为 compilation 创建额外 asset。
-这个钩子可以用来下载图像，例如：
+Create additional assets for the compilation. This hook can be used to download
+an image, for example:
 
 ```js
 compilation.hooks.additionalAssets.tapAsync('MyPlugin', (callback) => {
@@ -381,17 +390,17 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', (callback) => {
 });
 ```
 
-### optimizeChunkAssets $#optimizechunkassets$
+### optimizeChunkAssets
 
 `AsyncSeriesHook`
 
-W> `optimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE\_\* 作为其选项参数。
+W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
 
-优化所有 chunk asset。asset 存储在 `compilation.assets` 中。
-每个 `Chunk` 都具有一个 `files` 属性，其指向由一个 chunk 创建的所有文件。
-任何额外 chunk asset 都存储在 `compilation.additionalChunkAssets` 中。
+Optimize any chunk assets. The assets are stored in `compilation.assets`. A
+`Chunk` has a property `files` which points to all files created by a chunk.
+Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
 
-- 回调参数：`chunks`
+- Callback Parameters: `chunks`
 
 Here's an example that adds a banner to each chunk.
 
@@ -414,17 +423,17 @@ compilation.hooks.optimizeChunkAssets.tapAsync(
 );
 ```
 
-### afterOptimizeChunkAssets $#afteroptimizechunkassets$
+### afterOptimizeChunkAssets
 
 `SyncHook`
 
-W> `afterOptimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE\_\* 作为其选项参数。
+W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
 
-chunk asset 已经被优化。
+The chunk assets have been optimized.
 
-- 回调参数：`chunks`
+- Callback Parameters: `chunks`
 
-这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细地输出每个 chunk 里有什么。
+Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
 
 ```js
 compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
@@ -438,39 +447,39 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
 });
 ```
 
-### optimizeAssets $#optimizeassets$
+### optimizeAssets
 
 `AsyncSeriesHook`
 
-优化存储在 `compilation.assets` 中的所有 asset。
+Optimize all assets stored in `compilation.assets`.
 
-- 回调参数：`assets`
+- Callback Parameters: `assets`
 
-### afterOptimizeAssets $#afteroptimizeassets$
+### afterOptimizeAssets
 
 `SyncHook`
 
-asset 已经优化。
+The assets have been optimized.
 
-- 回调参数：`assets`
+- Callback Parameters: `assets`
 
-### processAssets $#processassets$
+### processAssets
 
 `AsyncSeriesHook`
 
-asset 处理.
+Asset processing.
 
-**Hook 参数：**
+**Hook parameters:**
 
-- `name: string` — 插件名称
+- `name: string` — a name of the plugin
 - `stage: Stage` — a stage to tap into (see the [list of supported stages](#list-of-asset-processing-stages) below)
 - `additionalAssets?: true | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
 
-**回调参数：**
+**Callback parameters:**
 
-- `assets: { [pathname: string]: Source }` — 普通对象，其中 key 是 asset 的路径名，value 是 asset 的数据，具体的代表请参考 [`Source`](https://github.com/webpack/webpack-sources#source)。
+- `assets: { [pathname: string]: Source }` — a plain object, where key is the asset's pathname, and the value is data of the asset represented by the [`Source`](https://github.com/webpack/webpack-sources#source).
 
-**示例：**
+**Example:**
 
 ```js
 compilation.hooks.processAssets.tap(
@@ -487,13 +496,13 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-#### 额外的 assets $#additional-assets$
+#### Additional assets
 
-除了 `name` 和 `stage` 以外，你还可以传递 `additionalAssets` <Badge text='5.8.0+' /> 选项，此选项可接受 `true` 或者一个带有 `assets` 的函数作为参数：
+In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a callback function that receives `assets` as a first argument:
 
-1. `true` - 针对插件后续添加的 asset 执行回调。
+1. `true` — run the provided callback again for assets added later by plugins.
 
-   在此模式下，回调将被多次调用：一次是在指定阶段之前添加资产时，另一次是后来由插件添加资产时。（在本阶段或下一阶段）。
+   In this mode, the callback will be called multiple times: once for assets added prior to the specified stage, and additional times for assets added by plugins later (on this or next stages).
 
    ```js
    compilation.hooks.processAssets.tap(
@@ -508,7 +517,7 @@ compilation.hooks.processAssets.tap(
    );
    ```
 
-2. `(assets, [callback]) => (void | Promise<void>)` - 针对插件后续添加的 asset 执行指定的回调（在本阶段或下一阶段）。回调必须遵循所使用的 tap 函数的类型（例如，当与 `tapPromise()` 一同使用时，它应该返回一个 Promise）。
+2. `(assets, [callback]) => (void | Promise<void>)` — run the specified callback against assets added by plugins later (on this or next stages). The callback must respect the type of the tap method used (e.g. when used with `tapPromise()`, it should return a promise).
 
    ```js
    compilation.hooks.processAssets.tap(
@@ -525,29 +534,29 @@ compilation.hooks.processAssets.tap(
    );
    ```
 
-#### 资产处理 stage 的列表 $#list-of-asset-processing-stages$
+#### List of asset processing stages
 
-如下是我们可以使用的 stage 清单（按顺序处理）：
+Here's a list of supported stages (in the order of processing):
 
-- `PROCESS_ASSETS_STAGE_ADDITIONAL` — 在编译中添加额外的 asset。
-- `PROCESS_ASSETS_STAGE_PRE_PROCESS` — asset 进行了基础预处理。
-- `PROCESS_ASSETS_STAGE_DERIVED` — 从已有 asset 中获取新的 asset。
-- `PROCESS_ASSETS_STAGE_ADDITIONS` — 为现有的 asset 添加额外的内容，例如 banner 或初始代码。
-- `PROCESS_ASSETS_STAGE_OPTIMIZE` — 以通用的方式优化已有 asset。
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` — 优化现有资产的数量，例如，进行合并操作。
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` — 优化现有 asset 兼容性，例如添加 polyfills 或者 vendor prefixes。
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` — 优化现有 asset 大小，例如进行压缩或者删除空格。
-- `PROCESS_ASSETS_STAGE_DEV_TOOLING` — 为 asset 添加开发者工具，例如，提取 source map。
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> — 优化已有 asset 数量，例如，通过将 asset 内联到其他 asset 中。
-- `PROCESS_ASSETS_STAGE_SUMMARIZE` — 整理现有 asset 列表。
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` — 优化 asset 的 hash 值，例如，生成 asset 内容的真实 hash 值。
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` — 优化已有 asset 的转换操作，例如对 asset 进行压缩，并作为独立的 asset。
-- `PROCESS_ASSETS_STAGE_ANALYSE` — 分析已有 asset。
-- `PROCESS_ASSETS_STAGE_REPORT` — 创建用于上报的 asset。
+- `PROCESS_ASSETS_STAGE_ADDITIONAL` — add additional assets to the compilation.
+- `PROCESS_ASSETS_STAGE_PRE_PROCESS` — basic preprocessing of the assets.
+- `PROCESS_ASSETS_STAGE_DERIVED` — derive new assets from the existing assets.
+- `PROCESS_ASSETS_STAGE_ADDITIONS` — add additional sections to the existing assets e.g. banner or initialization code.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE` — optimize existing assets in a general way.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` — optimize the count of existing assets, e.g. by merging them.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` — optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` — optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
+- `PROCESS_ASSETS_STAGE_DEV_TOOLING` — add development tooling to the assets, e.g. by extracting a source map.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> — optimize the numbers of existing assets, e.g. by inlining assets into other assets.
+- `PROCESS_ASSETS_STAGE_SUMMARIZE` — summarize the list of existing assets.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` — optimize the hashes of the assets, e.g. by generating real hashes of the asset content.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` — optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
+- `PROCESS_ASSETS_STAGE_ANALYSE` — analyze the existing assets.
+- `PROCESS_ASSETS_STAGE_REPORT` — creating assets for the reporting purposes.
 
-#### Assets info $#assets-info$
+#### Assets info
 
-"asset info" 元数据不会自动提供给这个 hook。如果必须使用，你需要通过编译实例以及 asset 路径来手动获取这个元数据。这将在未来的 webpack 版本中得到改善。
+The "asset info" metadata is not automatically provided for this hook. If needed, you will have to resolve this metadata manually using the compilation instance and the provided asset pathname. This will be improved in a future version of the webpack.
 
 **Example:**
 
@@ -565,70 +574,70 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-### afterProcessAssets $#afterprocessassets$
+### afterProcessAssets
 
 `SyncHook`
 
-在 [`processAssets`](#processassets) hook 无错误执行后调用。
+Called after the [`processAssets`](#processassets) hook had finished without error.
 
-### needAdditionalSeal $#needadditionalseal$
+### needAdditionalSeal
 
 `SyncBailHook`
 
-调用来决定 compilation 是否需要解除 seal 以引入其他文件。
+Called to determine if the compilation needs to be unsealed to include other files.
 
-### afterSeal $#afterseal$
+### afterSeal
 
 `AsyncSeriesHook`
 
-在 `needAdditionalSeal` 之后立即执行。
+Executed right after `needAdditionalSeal`.
 
-### chunkHash $#chunkhash$
-
-`SyncHook`
-
-触发来为每个 chunk 生成 hash。
-
-- 回调参数：`chunk` `chunkHash`
-
-### moduleAsset $#moduleasset$
+### chunkHash
 
 `SyncHook`
 
-一个模块中的一个 asset 被添加到 compilation 时调用。
+Triggered to emit the hash for each chunk.
 
-- 回调参数：`module` `filename`
+- Callback Parameters: `chunk` `chunkHash`
 
-### chunkAsset $#chunkasset$
+### moduleAsset
 
 `SyncHook`
 
-一个 chunk 中的一个 asset 被添加到 compilation 时调用。
+Called when an asset from a module was added to the compilation.
 
-- 回调参数：`chunk` `filename`
+- Callback Parameters: `module` `filename`
 
-### assetPath $#assetpath$
+### chunkAsset
+
+`SyncHook`
+
+Triggered when an asset from a chunk was added to the compilation.
+
+- Callback Parameters: `chunk` `filename`
+
+### assetPath
 
 `SyncWaterfallHook`
 
-调用以决定 asset 的路径。
+Called to determine the path of an asset.
 
-- 回调参数：`path` `options`
+- Callback Parameters: `path` `options`
 
-### needAdditionalPass $#needadditionalpass$
+### needAdditionalPass
 
 `SyncBailHook`
 
-调用以决定 asset 在输出后是否需要进一步处理。
+Called to determine if an asset needs to be processed further after being emitted.
 
-### childCompiler $#childcompiler$
+### childCompiler
 
 `SyncHook`
 
-子 compiler 设置之后执行。
+Executed after setting up a child compiler.
 
-- 回调参数：`childCompiler` `compilerName` `compilerIndex`
+- Callback Parameters: `childCompiler` `compilerName` `compilerIndex`
 
-### normalModuleLoader $#normalmoduleloader$
+### normalModuleLoader
 
-从 webpack v5 开始，`normalModuleLoader` 钩子已经删除。现在要访问 loader 请改用 `NormalModule.getCompilationHooks(compilation).loader`。
+Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
