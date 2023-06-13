@@ -10742,10 +10742,10 @@ remark-autolink-headings@7.0.1:
     unified "^10.0.0"
     unist-util-visit "^4.0.0"
 
-remark-emoji@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/remark-emoji/-/remark-emoji-3.1.1.tgz#ce7420c251336c5d04c896a7cd1e3aa7dc4282f3"
-  integrity sha512-kVCTaHzX+/ls67mE8JsGd3ZX511p2FlAPmKhdGpRCb5z6GSwp+3sAIB5oTySIetPh7CtqfGf7JBUt5fyMjgOHw==
+remark-emoji@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/remark-emoji/-/remark-emoji-3.1.2.tgz#5eb738a119cbd0f50393e2541fdd01a76f59b62d"
+  integrity sha512-QwhAzNk27Ol64uV4z/3n55MKrNz9bhr8wg+mO5aGqIYDS+jUarS1d8Y0ZIeEBVhfGkXj6gGYM+727sOgAPvV/A==
   dependencies:
     emoticon "^4.0.1"
     mdast-util-find-and-replace "^2.2.2"
