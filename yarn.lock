@@ -2088,10 +2088,10 @@
   resolved "https://registry.yarnpkg.com/@npmcli/name-from-folder/-/name-from-folder-2.0.0.tgz#c44d3a7c6d5c184bb6036f4d5995eee298945815"
   integrity sha512-pwK+BfEBZJbKdNYpHHRTNBwBoqrN/iIMO0AiGvYsp3Hoaq0WbgGSWQR6SCldZovoDpY3yje5lkFUe6gsDgJ2vg==
 
-"@octokit/auth-action@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-2.1.1.tgz#19b9615991808345b4f0d5c02c75d6e7f2dfe85f"
-  integrity sha512-396owpMa68wKT9tVf1rInQ0I8WdSJUXbEPWTDyIwqVGEd0xemKJwGHPv768Dh24BSJHY96MsUXJZ8CRaz28XCw==
+"@octokit/auth-action@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-3.0.0.tgz#84aecad9cfa2c729fe8892c392d44bd10c0e084c"
+  integrity sha512-wNNEZ2c1XUgLAPjEZ9PmrDugQBlMDHPhrv7+McrIWnGeHkThd6cjoVx1HVN46TinBfYTJIQYiF/MpBD30lXziA==
   dependencies:
     "@octokit/auth-token" "^3.0.0"
     "@octokit/types" "^9.0.0"
