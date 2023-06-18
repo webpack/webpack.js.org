@@ -31,7 +31,7 @@ The following options are supported:
 - `exclude` (`string|RegExp|array`): Exclude modules that match the given value from source map generation.
 - `append` (`string|function`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
 
-  Since webpack 5.84.0, `append` can be a function that takes the path data and asset info object as arguments and returns a string:
+  Starting from version 5.84.0, webpack allows the `append` option to be a function that accepts path data and an asset info object as arguments, and returns a string.
 
   ```ts
   (pathData: PathData, assetInfo?: AssetInfo) => string;
