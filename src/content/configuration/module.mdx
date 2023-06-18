@@ -26,6 +26,37 @@ contributors:
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
 
+## module.defaultRules
+
+An array of rules applied by default for modules.
+
+See [source code](https://github.com/webpack/webpack/blob/dc4d97429b2013f7770ba785721b65cf82c2ef04/lib/config/defaults.js#L608) for details.
+
+```js
+module.exports = {
+  module: {
+    defaultRules: [
+      '...', // you can use "..." to reference those rules applied by webpack by default
+    ],
+  },
+};
+```
+
+Starting with webpack 5.87.0, falsy values including `0`, `""`, `false`, `null` and `undefined` are allowed to pass to `module.defaultRules` to conditionally disable specific rules.
+
+```js
+module.exports = {
+  module: {
+    defaultRules: [
+      false &&
+        {
+          // this rule will be disabled
+        },
+    ],
+  },
+};
+```
+
 ## module.generator
 
 <Badge text="5.12.0+" />
@@ -426,9 +457,11 @@ module.exports = {
 
 ## module.rules
 
-`[Rule]`
+`(Rule | undefined | null | false | "" | 0 | "...")[]`
 
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
+
+As of webpack 5.87.0, falsy values such as `false`, `undefined`, `null` and `0` can be used to conditionally disable a rule.
 
 ## Rule
 
@@ -1028,6 +1061,8 @@ module.exports = {
 ## Rule.use
 
 `[UseEntry]` `function(info)`
+
+Starting with webpack 5.87.0 falsy values such as `undefined` `null` can be used to conditionally disable specific use entry.
 
 **`[UseEntry]`**
 

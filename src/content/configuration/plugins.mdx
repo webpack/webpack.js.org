@@ -18,7 +18,7 @@ T> Note: This page only discusses using plugins, however if you are interested i
 
 [`[Plugin]`](/plugins/)
 
-An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugin/) allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and release builds.
+An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugin/) allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and release builds. Starting with webpack 5.87.0 falsy values can be used to disable specific plugins conditionally.
 
 **webpack.config.js**
 
@@ -29,6 +29,7 @@ module.exports = {
     new webpack.DefinePlugin({
       // Definitions...
     }),
+    false && new webpack.IgnorePlugin(), // disabled conditionally
   ],
 };
 ```
