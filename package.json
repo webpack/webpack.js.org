@@ -76,7 +76,7 @@
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "@mdx-js/loader": "^2.0.0-next.9",
-    "@octokit/auth-action": "^3.0.0",
+    "@octokit/auth-action": "^3.0.2",
     "@octokit/rest": "^19.0.12",
     "@pmmmwh/react-refresh-webpack-plugin": "next",
     "@svgr/webpack": "^8.0.1",
