@@ -202,8 +202,7 @@ Experimental features:
 - <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json` files:
   webpack will look for `style` field in `package.json` files and use that if it
   exists for imports inside CSS files.
-- Content hash for CSS files: webpack will generate a content hash for CSS files
-  and use it in the filename. This is useful for long-term caching.
+- Content hash for CSS files: webpack will generate a content hash for CSS files and use it in the filename. This is useful for long-term caching.
 - CSS extraction: Webpack will extract CSS into a separate file. This functionality replaces the need for `mini-css-extract-plugin` and `css-loader`, as it provides native support.
 - CSS imports: webpack will inline CSS imports into the generated CSS file.
 - Hot Module Reload (HMR): webpack supports HMR for CSS files. This means that changes made to CSS files will be reflected in the browser without a full page reload.
