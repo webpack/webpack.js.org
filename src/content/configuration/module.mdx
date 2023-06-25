@@ -1034,7 +1034,7 @@ Include all modules that pass test assertion. If you supply a `Rule.test` option
 
 `string`
 
-Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline'`
+Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline' | 'css/auto'`
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
 
@@ -1057,6 +1057,31 @@ module.exports = {
 ```
 
 > See [Asset Modules guide](/guides/asset-modules/) for more about `asset*` type.
+
+### css/auto
+
+<Badge text="5.87.0+" />
+
+See use case of `css/auto` module type [here](https://github.com/webpack/webpack/issues/16572). Make sure to enable [`experiments.css`](/configuration/experiments/#experimentscss) to use `css/auto`.
+
+```js
+module.exports = {
+  target: 'web',
+  mode: 'development',
+  experiments: {
+    css: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: 'less-loader',
+        type: 'css/auto',
+      },
+    ],
+  },
+};
+```
 
 ## Rule.use
 
