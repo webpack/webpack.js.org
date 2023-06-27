@@ -2,6 +2,7 @@
 title: Configuration Languages
 sort: 2
 contributors:
+  - piouson
   - sokra
   - skipjack
   - tarang9211
@@ -33,8 +34,8 @@ and then proceed to write your configuration:
 **webpack.config.ts**
 
 ```typescript
-import * as path from 'path';
-import * as webpack from 'webpack';
+import path from 'path';
+import webpack from 'webpack';
 // in case you run into any typescript error when configuring `devServer`
 import 'webpack-dev-server';
 
@@ -48,6 +49,17 @@ const config: webpack.Configuration = {
 };
 
 export default config;
+```
+
+**tsconfig.json**
+
+```json
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}
 ```
 
 The above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
