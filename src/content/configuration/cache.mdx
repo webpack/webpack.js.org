@@ -376,6 +376,23 @@ module.exports = {
 };
 ```
 
+### cache.readonly
+
+`boolean` <Badge text='5.85.0' />
+
+Prevent webpack from storing cache into file system. Only available when `cache.type === "filesystem"` and `cache.store === 'pack'`.
+
+```js
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    store: 'pack',
+    readonly: true,
+  },
+};
+```
+
 ### cache.store
 
 `string = 'pack': 'pack'`
