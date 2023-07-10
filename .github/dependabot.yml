@@ -10,3 +10,7 @@ updates:
     ignore:
       - dependency-name: "react"
       - dependency-name: "react-dom"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
