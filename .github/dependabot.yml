@@ -10,6 +10,7 @@ updates:
     ignore:
       - dependency-name: "react"
       - dependency-name: "react-dom"
+      - dependency-name: "@docsearch/react" # unfortunately I don't have the app id
     groups:
       dependencies:
         patterns:
