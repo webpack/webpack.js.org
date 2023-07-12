@@ -70,10 +70,10 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.22.8",
-    "@babel/eslint-parser": "^7.22.7",
+    "@babel/core": "^7.22.9",
+    "@babel/eslint-parser": "^7.22.9",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/preset-env": "^7.22.7",
+    "@babel/preset-env": "^7.22.9",
     "@babel/preset-react": "^7.22.5",
     "@mdx-js/loader": "^2.0.0-next.9",
     "@octokit/auth-action": "^4.0.0",
