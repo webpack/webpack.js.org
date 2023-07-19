@@ -5,6 +5,14 @@ metadata:
   namespace: economist-impact
   annotations:
     github.com/project-slug: signal-noise/webpack.js.org
+      # the circleCI project, mirrors github repo in this case: 
+    circleci.com/project-slug: github/signal-noise/webpack.js.org
+      # GUID - see https://docs.newrelic.com/docs/query-your-data/explore-query-data/dashboards/manage-your-dashboard/
+    newrelic.com/dashboard-guid: MzY1MjgxOXxWSVp8REFTSEJPQVJEfGRhOjE3MDkwOA
+    newrelic.com/dashboard-guid: MzY1MjgxOXxWSVp8REFTSEJPQVJEfGRhOjE5NTIyNw
+    description: covid-relative-risk for SignalNoise Economist Impact Project
+    opsgenie:
+      domain: https://economist.app.opsgenie.com/teams/dashboard/49177ca8-5e59-4364-af23-c22cc60c026f/main
     backstage.io/techdocs-ref: dir:.
 spec:
   type: website
