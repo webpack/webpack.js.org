@@ -2,7 +2,6 @@
 import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
-import fetch from 'node-fetch';
 import lodash from 'lodash';
 import { fileURLToPath } from 'url';
 
@@ -131,16 +130,15 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
     }).then(async (response) => {
       if (response.headers.get('content-type').includes('json')) {
         const json = await response.json();
-        const headers = response.headers.raw();
         console.log('json', json);
         if (json.error) {
           // when rate limit exceeded, api won't return headers data like x-ratelimit-limit, etc.
           remaining = 0;
           reset = Date.now() + 1000 * 60; // 1 minute
         } else {
-          limit = headers['x-ratelimit-limit'] * 1;
-          remaining = headers['x-ratelimit-remaining'] * 1;
-          reset = headers['x-ratelimit-reset'] * 1000;
+          limit = response.headers.get('x-ratelimit-limit') * 1;
+          remaining = response.headers.get('x-ratelimit-remaining') * 1;
+          reset = response.headers.get('x-ratelimit-reset') * 1000;
           console.log(
             `Rate limit: ${remaining}/${limit} remaining. Reset in ${new Date(
               reset
