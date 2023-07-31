@@ -190,15 +190,15 @@ console.log(import.meta.webpack); // without reference declared above, TypeScrip
 
 ## Using Third Party Libraries
 
-When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](https://microsoft.github.io/TypeSearch/).
+When installing third party libraries from npm, it is important to remember to install the typing definition for that library.
 
-For example if we want to install lodash we can run the following command to get the typings for it:
+For example, if we want to install lodash we can run the following command to get the typings for it:
 
 ```bash
 npm install --save-dev @types/lodash
 ```
 
-For more information see [this blog post](https://devblogs.microsoft.com/typescript/the-future-of-declaration-files-2/).
+If the npm package already includes its declaration typings in the package bundle, downloading the corresponding `@types` package is not needed. For more information see the [TypeScript changelog blog](https://github.blog/changelog/2020-12-16-npm-displays-packages-with-bundled-typescript-declarations/).
 
 ## Importing Other Assets
 
