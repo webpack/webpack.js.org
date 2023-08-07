@@ -4645,7 +4645,7 @@ npx webpack --env <span class="token assign-left variable">APP_TARGET</span><spa
     |- bundle-[hash].js
   |- sourcemaps
     |- bundle-[hash].js.map
-</code></pre><p>With next config:</p><pre><code class="hljs language-js"><span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>SourceMapDevToolPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+</code></pre><p>With the following config:</p><pre><code class="hljs language-js"><span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>SourceMapDevToolPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   filename<span class="token operator">:</span> <span class="token string">&#x27;sourcemaps/[file].map&#x27;</span><span class="token punctuation">,</span>
   publicPath<span class="token operator">:</span> <span class="token string">&#x27;https://example.com/project/&#x27;</span><span class="token punctuation">,</span>
   fileContext<span class="token operator">:</span> <span class="token string">&#x27;public&#x27;</span><span class="token punctuation">,</span>
