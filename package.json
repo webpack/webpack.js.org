@@ -70,10 +70,10 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.22.9",
-    "@babel/eslint-parser": "^7.22.9",
+    "@babel/core": "^7.22.10",
+    "@babel/eslint-parser": "^7.22.10",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.22.5",
     "@mdx-js/loader": "^2.0.0-next.9",
     "@octokit/auth-action": "^4.0.0",
@@ -90,7 +90,7 @@
     "directory-tree-webpack-plugin": "^1.0.3",
     "duplexer": "^0.1.1",
     "eslint": "^8.46.0",
-    "eslint-config-prettier": "^8.10.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-mdx": "^2.1.0",
     "eslint-plugin-react": "^7.33.1",
