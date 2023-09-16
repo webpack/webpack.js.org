@@ -13,10 +13,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [lts/*]
+        node-version: [latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -32,10 +32,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [lts/*]
+        node-version: [latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -54,7 +54,7 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Vale
         uses: errata-ai/vale-action@v2.0.1
@@ -68,10 +68,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [lts/*]
+        node-version: [latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
