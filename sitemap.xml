@@ -64,6 +64,9 @@
         <loc>https://webpack.js.org/writers-guide</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/internal-plugins</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/cli</loc>
     </url>
     <url>
@@ -521,9 +524,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/install-webpack-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/internal-plugins</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
