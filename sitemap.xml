@@ -373,15 +373,6 @@
         <loc>https://webpack.js.org/guides/typescript</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/prefetch-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/web-workers</loc>
     </url>
     <url>
@@ -392,6 +383,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/coffee-loader</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/prefetch-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/css-loader</loc>
@@ -551,6 +545,12 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/module-federation-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/profiling-plugin</loc>
