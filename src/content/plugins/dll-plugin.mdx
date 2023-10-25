@@ -13,7 +13,7 @@ contributors:
   - snitin315
 related:
   - title: Code Splitting Example
-    url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
+    url: https://github.com/webpack/webpack/blob/main/examples/explicit-vendor-chunk/README.md
 ---
 
 The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance. The term "DLL" stands for Dynamic-link library which was originally introduced by Microsoft.
@@ -24,7 +24,7 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 - `format` (boolean = false): If `true`, manifest json file (output) will be formatted.
-- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[fullhash]`, `[chunkhash]`, `[contenthash]`, & `[name]` )
+- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js): `[fullhash]`, `[chunkhash]`, `[contenthash]`, & `[name]` )
 - `path`: **absolute path** to the manifest json file (output)
 - `entryOnly` (boolean = true): if `true`, only entry points will be exposed
 - `type`: type of the dll bundle
@@ -114,14 +114,14 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 ### Source
 
-- [DllPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllPlugin.js)
-- [DllReferencePlugin source](https://github.com/webpack/webpack/blob/master/lib/DllReferencePlugin.js)
-- [DllEntryPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllEntryPlugin.js)
-- [DllModuleFactory source](https://github.com/webpack/webpack/blob/master/lib/DllModuleFactory.js)
-- [ManifestPlugin source](https://github.com/webpack/webpack/blob/master/lib/LibManifestPlugin.js)
+- [DllPlugin source](https://github.com/webpack/webpack/blob/main/lib/DllPlugin.js)
+- [DllReferencePlugin source](https://github.com/webpack/webpack/blob/main/lib/DllReferencePlugin.js)
+- [DllEntryPlugin source](https://github.com/webpack/webpack/blob/main/lib/DllEntryPlugin.js)
+- [DllModuleFactory source](https://github.com/webpack/webpack/blob/main/lib/DllModuleFactory.js)
+- [ManifestPlugin source](https://github.com/webpack/webpack/blob/main/lib/LibManifestPlugin.js)
 
 ### Tests
 
-- [DllPlugin creation test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
-- [DllPlugin without scope test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
+- [DllPlugin creation test](https://github.com/webpack/webpack/blob/main/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
+- [DllPlugin without scope test](https://github.com/webpack/webpack/blob/main/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
 - [DllReferencePlugin use Dll test](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin)
