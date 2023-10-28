@@ -4,15 +4,6 @@
         <loc>https://webpack.js.org/</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/pluginsapi</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/support</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/writers-guide</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api</loc>
     </url>
     <url>
@@ -64,19 +55,13 @@
         <loc>https://webpack.js.org/plugins</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/environment-plugin</loc>
+        <loc>https://webpack.js.org/pluginsapi</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/eslint-webpack-plugin</loc>
+        <loc>https://webpack.js.org/support</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/pluginsapi/compiler</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/pluginsapi/template</loc>
+        <loc>https://webpack.js.org/writers-guide</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/cli</loc>
@@ -88,10 +73,10 @@
         <loc>https://webpack.js.org/api/compilation-object</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/compiler-hooks</loc>
+        <loc>https://webpack.js.org/api/contextmodulefactory-hooks</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/contextmodulefactory-hooks</loc>
+        <loc>https://webpack.js.org/api/compiler-hooks</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/hot-module-replacement</loc>
@@ -173,9 +158,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/output</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/plugins</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/targets</loc>
@@ -325,13 +307,16 @@
         <loc>https://webpack.js.org/guides/csp</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/plugins</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/dependency-management</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development</loc>
+        <loc>https://webpack.js.org/guides/development-vagrant</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development-vagrant</loc>
+        <loc>https://webpack.js.org/guides/development</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
@@ -397,10 +382,10 @@
         <loc>https://webpack.js.org/loaders/babel-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/css-loader</loc>
+        <loc>https://webpack.js.org/loaders/coffee-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/coffee-loader</loc>
+        <loc>https://webpack.js.org/loaders/css-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/exports-loader</loc>
@@ -508,6 +493,15 @@
         <loc>https://webpack.js.org/plugins/dll-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/environment-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/eslint-webpack-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin</loc>
     </url>
     <url>
@@ -584,6 +578,12 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/watch-ignore-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/pluginsapi/compiler</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/compilation</loc>
