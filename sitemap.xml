@@ -58,13 +58,25 @@
         <loc>https://webpack.js.org/pluginsapi</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/writers-guide</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/support</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/provide-plugin</loc>
+        <loc>https://webpack.js.org/writers-guide</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/module</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/node</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/optimization</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/other-options</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/cli</loc>
@@ -203,21 +215,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/mode</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/module</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/node</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/optimization</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/other-options</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/performance</loc>
@@ -560,6 +557,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/progress-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/provide-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin</loc>
