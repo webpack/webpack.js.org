@@ -9,5 +9,13 @@ export default function (location) {
   ) {
     return `/configuration/cache/${location.hash}`;
   }
+
+  if (location.pathname === '/r/webpack/') {
+    const searchParams = new URLSearchParams(location.search);
+    const option = searchParams.get('option') || '';
+    const options = option.split('/').filter(Boolean);
+    if (options.length === 0) return '/configuration/';
+    return `/configuration/${options[0]}/#${options.join('').toLowerCase()}`;
+  }
   return false;
 }
