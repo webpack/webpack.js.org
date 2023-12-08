@@ -372,6 +372,8 @@ Executed before creating the chunks assets.
 
 `AsyncSeriesHook`
 
+W> `additionalAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) hook instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
+
 Create additional assets for the compilation. This hook can be used to download
 an image, for example:
 
@@ -451,6 +453,8 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
 
 `AsyncSeriesHook`
 
+W> `optimizeAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) hook instead)
+
 Optimize all assets stored in `compilation.assets`.
 
 - Callback Parameters: `assets`
@@ -458,6 +462,8 @@ Optimize all assets stored in `compilation.assets`.
 ### afterOptimizeAssets
 
 `SyncHook`
+
+W> `afterOptimizeAssets` is deprecated (use the [Compilation.hook.afterProcessAssets](#afterprocessassets) hook instead)
 
 The assets have been optimized.
 
