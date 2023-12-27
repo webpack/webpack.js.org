@@ -11,6 +11,7 @@ contributors:
   - smelukov
   - anshumanv
   - snitin315
+  - wongjn
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -120,7 +121,7 @@ module.exports = {
 };
 ```
 
-The `app` chunk will not contain the modules that `react-vendors` have.
+The `app` chunk will now contain the modules that `react-vendors` have.
 
 `dependOn` option can also accept an array of strings:
 
