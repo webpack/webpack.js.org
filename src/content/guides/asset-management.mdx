@@ -277,6 +277,10 @@ webpack 5.4.0 compiled successfully in 1972 ms
 
 If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `29822eaa871e8eadeaa4.png`. This means webpack found our file in the `src` folder and processed it!
 
+Note that, In the above example, the image will be loaded twice as it is imported in the JavaScript file using import myImage from './path/to/my-image.jpg';, and it's used with the Image() object to dynamically load it into the DOM and also at the same time, the image path is used in the CSS file as a background.
+
+To avoid loading the image twice choose the approach based on your specific use case and whether you need to dynamically manipulate the image in your JavaScript code. If you don't need dynamic loading or manipulation, using the image in CSS directly can help avoid unnecessary duplicate loading.
+
 ## Loading Fonts
 
 So what about other assets like fonts? The Asset Modules will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
