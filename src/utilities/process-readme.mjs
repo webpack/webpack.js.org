@@ -109,9 +109,9 @@ export default function processREADME(body, options = {}) {
     .replace(inlineLinkRegex, linkFixerFactory(options.source))
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')
-    .replace(/<\/h2>/g, '')
+    .replace(/<\/h2>/g, '');
     // Drop any comments
-    .replace(/<!--[\s\S]*?-->/g, '');
+    // .replace(/<!--[\s\S]*?-->/g, '');
 
   // find the laoders links
   const loaderMatches = getMatches(
