@@ -434,7 +434,7 @@ Instead please use <code>/</code>.</p></blockquote><p><strong>webpack.config.js<
         <span class="token comment">// If absolute path is a `glob` we replace backslashes with forward slashes, because only forward slashes can be used in the `glob`</span>
         path<span class="token punctuation">.</span>posix<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>
           path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;src&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\\/g</span><span class="token punctuation">,</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-          <span class="token string">&quot;*.txt&quot;</span>
+          <span class="token string">&quot;*.txt&quot;</span><span class="token punctuation">,</span>
         <span class="token punctuation">)</span><span class="token punctuation">,</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -458,7 +458,7 @@ See <a href="https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-window
           <span class="token comment">// If absolute path is a `glob` we replace backslashes with forward slashes, because only forward slashes can be used in the `glob`</span>
           <span class="token keyword">from</span><span class="token operator">:</span> path<span class="token punctuation">.</span>posix<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>
             path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;fixtures&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\\/g</span><span class="token punctuation">,</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">&quot;*.txt&quot;</span>
+            <span class="token string">&quot;*.txt&quot;</span><span class="token punctuation">,</span>
           <span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -708,7 +708,7 @@ To overwrite files, the <a href="#force"><code>force</code></a> option must be e
         defaultCacheKeys<span class="token operator">:</span> <span class="token punctuation">{</span>
           <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span>
+        absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
         <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
@@ -811,7 +811,7 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
     data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
     sourceFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
     absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token punctuation">;</span></code></pre><p>Default: <code>undefined</code></p><p>Allows you to modify the contents of multiple files and save the result to one file.</p><blockquote><p><strong>Note</strong></p><p>The <code>to</code> option must be specified and point to a file. It is allowed to use only <code>[contenthash]</code> and <code>[fullhash]</code> template strings.</p></blockquote><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -948,7 +948,7 @@ nested-file.txt
             __dirname<span class="token punctuation">,</span>
             <span class="token string">&quot;src&quot;</span><span class="token punctuation">,</span>
             <span class="token string">&quot;directory-nested&quot;</span><span class="token punctuation">,</span>
-            <span class="token string">&quot;nested-file.txt&quot;</span>
+            <span class="token string">&quot;nested-file.txt&quot;</span><span class="token punctuation">,</span>
           <span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -974,7 +974,7 @@ nested-file.txt
         <span class="token punctuation">{</span>
           <span class="token keyword">from</span><span class="token operator">:</span> path<span class="token punctuation">.</span>posix<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>
             path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;src&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex">/\\/g</span><span class="token punctuation">,</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">&quot;**/*&quot;</span>
+            <span class="token string">&quot;**/*&quot;</span><span class="token punctuation">,</span>
           <span class="token punctuation">)</span><span class="token punctuation">,</span>
           globOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
             ignore<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1041,7 +1041,7 @@ To avoid this, should explicitly specify where to copy the files from using <cod
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span>
           <span class="token keyword">from</span><span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>
-            require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>moduleName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/package.json</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
+            require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>moduleName<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/package.json</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span>
           <span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/target</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
           to<span class="token operator">:</span> <span class="token string">&quot;target&quot;</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
