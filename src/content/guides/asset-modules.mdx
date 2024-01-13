@@ -78,11 +78,11 @@ module.exports = {
 }
 ```
 
-### Public Path
+## Public Path
 
 By default, under the hood, the `asset` type does `__webpack_public_path__ + import.meta`. This means that setting the `output.publicPath` in your config will allow you to override the URL from which the `asset` loads.
 
-#### On The Fly Override
+### On The Fly Override
 
 If you set the `__webpack_public_path__` in code, the way you need to achieve it so as not to break the `asset` loading logic is to make sure you run it as the first code in your app and not use a function to do so. An example of this would be having a file called `publicPath.js` with contents
 
