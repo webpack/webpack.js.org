@@ -4002,7 +4002,7 @@ backend<span class="token operator">?</span><span class="token operator">:</span
     <span class="token comment">/**
      * Specify where to listen to from the server.
      */</span>
-    listen<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> ListenOptions <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>server<span class="token operator">:</span> <span class="token keyword">typeof</span> Server<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    listen<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> ListenOptions <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>server<span class="token operator">:</span> Server<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment">/**
      * Specify the protocol the client should use to connect to the server.
@@ -4012,7 +4012,7 @@ backend<span class="token operator">?</span><span class="token operator">:</span
     <span class="token comment">/**
      * Specify how to create the server handling the EventSource requests.
      */</span>
-    server<span class="token operator">?</span><span class="token operator">:</span> ServerOptionsImport <span class="token operator">|</span> ServerOptionsHttps <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">typeof</span> Server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    server<span class="token operator">?</span><span class="token operator">:</span> ServerOptionsImport <span class="token operator">|</span> ServerOptionsHttps <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Server<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token punctuation">}</span><span class="token punctuation">,</span>
 entries<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
