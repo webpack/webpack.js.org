@@ -80,7 +80,7 @@ module.exports = {
 
 ### Public Path
 
-By default, the `asset` type does `__webpack_public_path__ + import.meta` under the hood. This means that setting the `output.publicPath` in your config will allow you to override the url that the `asset` loads from.
+By default, under the hood, the `asset` type does `__webpack_public_path__ + import.meta`. This means that setting the `output.publicPath` in your config will allow you to override the URL from which the `asset` loads.
 
 #### On The Fly Override
 
