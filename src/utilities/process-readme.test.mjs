@@ -39,4 +39,38 @@ describe('processReadme', () => {
       'See the file [`https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts`](https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts).'
     );
   });
+
+  it('should preserve comments inside code blocks', () => {
+    const options = {
+      source:
+        'https://raw.githubusercontent.com/webpack-contrib/postcss-loader/master/README.md',
+    };
+    const loaderMDData = `
+    <!-- some comment that should be dropped -->
+    ### Disable url resolving using the \`<!-- webpackIgnore: true -->\` comment
+
+    \`\`\`html
+    <!-- Disabled url handling for the src attribute -->
+    <!-- webpackIgnore: true -->
+    <img src="image.png" />
+
+    <!-- Disabled url handling for the src and srcset attributes -->
+    <!-- webpackIgnore: true -->
+    <img
+      srcset="image.png 480w, image.png 768w"
+      src="image.png"
+      alt="Elva dressed as a fairy"
+    />
+
+    <!-- Disabled url handling for the content attribute -->
+    <!-- webpackIgnore: true -->
+    <meta itemprop="image" content="./image.png" />
+
+    <!-- Disabled url handling for the href attribute -->
+    <!-- webpackIgnore: true -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./image.png" />
+    \`\`\`
+    `;
+    expect(processReadme(loaderMDData, options)).toMatchSnapshot();
+  });
 });

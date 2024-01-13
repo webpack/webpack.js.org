@@ -109,11 +109,36 @@ export default function processREADME(body, options = {}) {
     .replace(inlineLinkRegex, linkFixerFactory(options.source))
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')
-    .replace(/<\/h2>/g, '')
-    // Drop any comments
-    .replace(/<!--[\s\S]*?-->/g, '');
+    .replace(/<\/h2>/g, '');
 
-  // find the laoders links
+  // Drop any comments that are not in code blocks
+  // EXAMPLE: <!-- some comment --> should be dropped
+  // EXAMPLE: `<!-- webpackIgnore: true -->` should  not be dropped
+  // EXAMPLE: ```html <!-- webpackIgnore: true -->  <!-- some comment -->``` should not be dropped
+  processingString = processingString.replace(/<!--[\s\S]*?-->/g, (match) => {
+    const codeBlockPattern = /```([\s\S]*?)```|`([\s\S]*?)`/g;
+    const contents = [];
+    let matches;
+    while ((matches = codeBlockPattern.exec(processingString)) !== null) {
+      // Content inside triple backticks
+      if (matches[1] !== undefined) {
+        contents.push(matches[1]);
+      }
+      // Content inside single backticks
+      else if (matches[2] !== undefined) {
+        contents.push(matches[2]);
+      }
+    }
+
+    // If the comment is inside a code block, return the match
+    if (contents.join('').includes(match)) {
+      return match;
+    }
+
+    return '';
+  });
+
+  // find the loaders links
   const loaderMatches = getMatches(
     processingString,
     /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g
