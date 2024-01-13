@@ -265,7 +265,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
         /**
          * Specify where to listen to from the server.
          */
-        listen?: number | ListenOptions | ((server: Server) => void);
+        listen?: number | ListenOptions | ((server: typeof Server) => void);
 
         /**
          * Specify the protocol the client should use to connect to the server.
@@ -275,7 +275,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
         /**
          * Specify how to create the server handling the EventSource requests.
          */
-        server?: ServerOptionsImport | ServerOptionsHttps | (() => Server);
+        server?: ServerOptionsImport | ServerOptionsHttps | (() => typeof Server);
 
     },
     entries?: boolean,
