@@ -1125,22 +1125,62 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       asset<span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// Generator options for asset modules</span>
 
+        <span class="token comment">// The options for data url generator.</span>
+        dataUrl<span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token comment">// Asset encoding (defaults to &quot;base64&quot;)</span>
+          <span class="token comment">// type: &#x27;base64&#x27; | false</span>
+          encoding<span class="token operator">:</span> <span class="token string">&#x27;base64&#x27;</span><span class="token punctuation">,</span>
+          <span class="token comment">// Asset mimetype (getting from file extension by default).</span>
+          <span class="token comment">// type: string</span>
+          mimetype<span class="token operator">:</span> <span class="token string">&#x27;image/png&#x27;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Emit an output asset from this asset module. This can be set to &#x27;false&#x27; to omit emitting e. g. for SSR.</span>
+        <span class="token comment">// type: boolean</span>
+        emit<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Customize filename for this asset module</span>
+        <span class="token comment">// type: string | ((pathData: PathData, assetInfo?: AssetInfo) =&gt; string)</span>
+        filename<span class="token operator">:</span> <span class="token string">&#x27;static/[path][name][ext]&#x27;</span><span class="token punctuation">,</span>
+
         <span class="token comment">// Customize publicPath for asset modules, available since webpack 5.28.0</span>
+        <span class="token comment">// type: string | ((pathData: PathData, assetInfo?: AssetInfo) =&gt; string)</span>
         publicPath<span class="token operator">:</span> <span class="token string">&#x27;https://cdn/assets/&#x27;</span><span class="token punctuation">,</span>
 
         <span class="token comment">// Emit the asset in the specified folder relative to &#x27;output.path&#x27;, available since webpack 5.67.0</span>
+        <span class="token comment">// type: string | ((pathData: PathData, assetInfo?: AssetInfo) =&gt; string)</span>
         outputPath<span class="token operator">:</span> <span class="token string">&#x27;cdn-assets/&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">&#x27;asset/inline&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// Generator options for asset/inline modules</span>
+
+        <span class="token comment">// The options for data url generator.</span>
+        dataUrl<span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token comment">// Asset encoding (defaults to &quot;base64&quot;)</span>
+          <span class="token comment">// type: &#x27;base64&#x27; | false</span>
+          encoding<span class="token operator">:</span> <span class="token string">&#x27;base64&#x27;</span><span class="token punctuation">,</span>
+          <span class="token comment">// Asset mimetype (getting from file extension by default).</span>
+          <span class="token comment">// type: string</span>
+          mimetype<span class="token operator">:</span> <span class="token string">&#x27;image/png&#x27;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">&#x27;asset/resource&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// Generator options for asset/resource modules</span>
 
+        <span class="token comment">// Emit an output asset from this asset module. This can be set to &#x27;false&#x27; to omit emitting e. g. for SSR.</span>
+        <span class="token comment">// type: boolean</span>
+        emit<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Customize filename for this asset module</span>
+        <span class="token comment">// type: string | ((pathData: PathData, assetInfo?: AssetInfo) =&gt; string)</span>
+        filename<span class="token operator">:</span> <span class="token string">&#x27;static/[path][name][ext]&#x27;</span><span class="token punctuation">,</span>
+
         <span class="token comment">// Customize publicPath for asset/resource modules, available since webpack 5.28.0</span>
+        <span class="token comment">// type: string | ((pathData: PathData, assetInfo?: AssetInfo) =&gt; string)</span>
         publicPath<span class="token operator">:</span> <span class="token string">&#x27;https://cdn/assets/&#x27;</span><span class="token punctuation">,</span>
 
         <span class="token comment">// Emit the asset in the specified folder relative to &#x27;output.path&#x27;, available since webpack 5.67.0</span>
+        <span class="token comment">// type: string | ((pathData: PathData, assetInfo?: AssetInfo) =&gt; string)</span>
         outputPath<span class="token operator">:</span> <span class="token string">&#x27;cdn-assets/&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       javascript<span class="token operator">:</span> <span class="token punctuation">{</span>
