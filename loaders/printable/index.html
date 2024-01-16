@@ -4261,61 +4261,12 @@ In order to avoid this situation you can use the <code>implementation</code> opt
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>Note that when using <code>sass</code> (<code>Dart Sass</code>), <strong>synchronous compilation is twice as fast as asynchronous compilation</strong> by default, due to the overhead of asynchronous callbacks.
-To avoid this overhead, you can use the <a href="https://www.npmjs.com/package/fibers">fibers</a> package to call asynchronous importers from the synchronous code path.</p><p>We automatically inject the <a href="https://github.com/laverdet/node-fibers"><code>fibers</code></a> package (setup <code>sassOptions.fiber</code>) for <code>Node.js</code> less v16.0.0 if is possible (i.e. you need install the <a href="https://github.com/laverdet/node-fibers"><code>fibers</code></a> package).</p><blockquote><p><strong>Warning</strong></p><p>Fibers is not compatible with <code>Node.js</code> v16.0.0 or later. Unfortunately, v8 commit <a href="https://github.com/v8/v8/commit/dacc2fee0f815823782a7e432c79c2a7767a4765">dacc2fee0f</a> is a breaking change and workarounds are non-trivial. (<a href="https://github.com/laverdet/node-fibers">see introduction to readme</a>).</p></blockquote><p><strong>package.json</strong></p><pre><code class="hljs language-json"><span class="token punctuation">{</span>
-  <span class="token property">&quot;devDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token property">&quot;sass-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.2.0&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;sass&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.22.10&quot;</span><span class="token punctuation">,</span>
-    <span class="token property">&quot;fibers&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^4.0.1&quot;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span></code></pre><p>You can disable automatically injecting the <a href="https://github.com/laverdet/node-fibers"><code>fibers</code></a> package by passing a <code>false</code> value for the <code>sassOptions.fiber</code> option.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.s[ac]ss$/i</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span>
-          <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              implementation<span class="token operator">:</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              sassOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                fiber<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">]</span><span class="token punctuation">,</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>You can also pass the <code>fiber</code> value using this code:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.s[ac]ss$/i</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span>
-          <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              implementation<span class="token operator">:</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              sassOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                fiber<span class="token operator">:</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fibers&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">]</span><span class="token punctuation">,</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3><span id="sassoptions"></span><code>sassOptions</code><a href="#sassoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">sassOptions</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>LegacyOptions<span class="token operator">&lt;</span><span class="token string">&quot;async&quot;</span><span class="token operator">&gt;</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
       content<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> Buffer<span class="token punctuation">,</span>
       loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">,</span>
-      meta<span class="token operator">:</span> <span class="token builtin">any</span>
+      meta<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>LegacyOptions<span class="token operator">&lt;</span><span class="token string">&quot;async&quot;</span><span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>Default: defaults values for Sass implementation</p><p>Options for <a href="http://sass-lang.com/dart-sass">Dart Sass</a> or <a href="https://github.com/sass/node-sass">Node Sass</a> implementation.</p><blockquote><p><strong>Note</strong></p><p>The <code>charset</code> option has <code>true</code> value by default for <code>dart-sass</code>, we strongly discourage change value to <code>false</code>, because webpack doesn&#x27;t support files other than <code>utf-8</code>.</p></blockquote><blockquote><p><strong>Note</strong></p><p>The <code>indentedSyntax</code> option has <code>true</code> value for the <code>sass</code> extension.</p></blockquote><blockquote><p><strong>Note</strong></p><p>Options such as <code>data</code> and <code>file</code> are unavailable and will be ignored.</p></blockquote><blockquote><p>ℹ We strongly discourage change <code>outFile</code>, <code>sourceMapContents</code>, <code>sourceMapEmbed</code>, <code>sourceMapRoot</code> options because <code>sass-loader</code> automatically sets these options when the <code>sourceMap</code> option is <code>true</code>.</p></blockquote><blockquote><p><strong>Note</strong></p><p>Access to the <a href="/api/loaders/#the-loader-context">loader context</a> inside the custom importer can be done using the <code>this.webpackLoaderContext</code> property.</p></blockquote><p>There is a slight difference between the <code>sass</code> (<code>dart-sass</code>) and <code>node-sass</code> options.</p><p>Please consult documentation before using them:</p><ul><li><a href="https://sass-lang.com/documentation/js-api/interfaces/Options">Dart Sass documentation</a> for all available <code>sass</code> options.</li><li><a href="https://github.com/sass/node-sass/#options">Node Sass documentation</a> for all available <code>node-sass</code> options.</li></ul><h4><span id="object-1"></span><code>object</code><a href="#object-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>Use an object for the Sass implementation setup.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -5943,7 +5894,7 @@ own custom loader logic, without having to write a custom loader.</p><p>The targ
               executableFile<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>
                 __dirname<span class="token punctuation">,</span>
                 <span class="token string">&quot;fixtures&quot;</span><span class="token punctuation">,</span>
-                <span class="token string">&quot;executableFile.js&quot;</span>
+                <span class="token string">&quot;executableFile.js&quot;</span><span class="token punctuation">,</span>
               <span class="token punctuation">)</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
