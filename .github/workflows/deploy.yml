@@ -24,7 +24,7 @@ jobs:
           cache: yarn
 
       - name: Enable webpack persistent caching
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: build-webpack-persistent-cache
         with:
           path: node_modules/.cache
