@@ -24,14 +24,7 @@ jobs:
           cache: yarn
 
       - name: Enable webpack persistent caching
-        uses: actions/cache@v4
-        id: build-webpack-persistent-cache
-        with:
-          path: node_modules/.cache
-          key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |-
-            build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
-            build-${{ hashFiles('**/webpack.*.mjs') }}-
+        uses: ./.github/actions/webpack-persistent-cache
 
       - run: yarn --frozen-lockfile
       - name: Build site
