@@ -397,6 +397,7 @@ module.exports = {
   snapshot: {
     managedPaths: [path.resolve(__dirname, '../node_modules')],
     immutablePaths: [],
+    unmanagedPaths: [],
     buildDependencies: {
       hash: true,
       timestamp: true,
@@ -461,6 +462,16 @@ module.exports = {
   },
 };
 ```
+
+### unmanagedPaths
+
+<Badge text="5.90.0+" />
+
+`(RegExp | string)[]`
+
+An array of paths that are not managed by a package manager and the contents are subject to change.
+
+Make sure to wrap the path in a capture group if you use regular expressions.
 
 ### module
 
