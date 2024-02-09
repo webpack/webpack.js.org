@@ -34,10 +34,6 @@ const Sponsors = () => {
           <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
             <div className="sponsors__tagline">
               Datagrid and Charting for Enterprise Applications
-              <br />
-              <span style={{ color: '#0070E0', fontSize: '0.70em' }}>
-                Learn more...
-              </span>
             </div>
             <div className="sponsors__img__wrapper">
               <img
