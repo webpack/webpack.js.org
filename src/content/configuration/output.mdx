@@ -330,6 +330,22 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 - `'anonymous'` - Enable cross-origin loading **without credentials**
 - `'use-credentials'` - Enable cross-origin loading **with credentials**
 
+## output.cssChunkFilename
+
+`string` `function (pathData, assetInfo) => string`
+
+This option determines the name of non-initial CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
+
+You **must not** specify an absolute path here. However, feel free to include folders separated by `'/'`. This specified path combines with the [`output.path`](#outputpath) value to pinpoint the location on the disk.
+
+## output.cssFilename
+
+`string` `function (pathData, assetInfo) => string`
+
+This option determines the name of CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
+
+You **must not** specify an absolute path here. However, feel free to include folders separated by `'/'`. This specified path combines with the [`output.path`](#outputpath) value to pinpoint the location on the disk.
+
 ## output.devtoolFallbackModuleFilenameTemplate
 
 `string` `function (info)`
