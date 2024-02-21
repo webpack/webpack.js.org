@@ -27,9 +27,9 @@ contributors:
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
 
-This page describes the options that affect the behavior of webpack-dev-server (short: dev-server) <Badge text="version >= 4.0.0" />. Migration guide from `v3` to `v4` can be found [here](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md).
+This page describes the options that affect the behavior of webpack-dev-server (short: dev-server) <Badge text="version >= 5.0.0" />. Migration guide from `v4` to `v5` can be found [here](https://github.com/webpack/webpack-dev-server/blob/master/migration-v5.md).
 
-W> `webpack-dev-server v4.0.0+` requires `node >= v12.13.0`, `webpack >= v4.37.0` (but we recommend using `webpack >= v5.0.0`), and `webpack-cli >= v4.7.0`.
+W> `webpack-dev-server v5.0.0+` requires `node >= v18.12.0`, `webpack >= v5.0.0` and `webpack-cli >= v4.7.0`, we recommend using the latest version.
 
 ## devServer
 
@@ -461,7 +461,7 @@ module.exports = {
 Usage via the CLI:
 
 ```bash
-npx webpack serve --client-web-socket-transport ws --web-socket-server ws
+npx webpack serve --client-web-socket-transport ws --web-socket-server-type ws
 ```
 
 T> When providing a custom client and server implementation make sure that they are compatible with one another to communicate successfully.
@@ -606,148 +606,6 @@ module.exports = {
   },
 };
 ```
-
-## devServer.http2
-
-`boolean`
-
-Serve over HTTP/2 using [spdy](https://www.npmjs.com/package/spdy). This option is ignored for Node 15.0.0 and above, as spdy is broken for those versions. The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
-
-HTTP/2 with a self-signed certificate:
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    http2: true,
-  },
-};
-```
-
-Usage via CLI
-
-```bash
-npx webpack serve --http2
-```
-
-To disable:
-
-```bash
-npx webpack serve --no-http2
-```
-
-Provide your own certificate using the [https](#devserverhttps) option:
-
-**webpack.config.js**
-
-```javascript
-const fs = require('fs');
-
-module.exports = {
-  //...
-  devServer: {
-    http2: true,
-    https: {
-      key: fs.readFileSync('/path/to/server.key'),
-      cert: fs.readFileSync('/path/to/server.crt'),
-      ca: fs.readFileSync('/path/to/ca.pem'),
-    },
-  },
-};
-```
-
-To pass your certificate via CLI, use the following options:
-
-```bash
-npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem
-```
-
-W> This option is deprecated in favor of the [devServer.server](#devserverserver) option.
-
-## devServer.https
-
-`boolean` `object`
-
-By default, dev-server will be served over `HTTP`. It can optionally be served over `HTTPS`:
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    https: true,
-  },
-};
-```
-
-Usage via the CLI:
-
-```bash
-npx webpack serve --https
-```
-
-To disable:
-
-```bash
-npx webpack serve --no-https
-```
-
-With the above setting, a self-signed certificate is used, but you can provide your own:
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  devServer: {
-    https: {
-      ca: './path/to/server.pem',
-      pfx: './path/to/server.pfx',
-      key: './path/to/server.key',
-      cert: './path/to/server.crt',
-      passphrase: 'webpack-dev-server',
-      requestCert: true,
-    },
-  },
-};
-```
-
-This object is passed straight to the Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
-
-To pass your own certificate via the CLI use the following options:
-
-```bash
-npx webpack serve --https-request-cert --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem --https-pfx ./path/to/server.pfx --https-passphrase webpack-dev-server
-```
-
-`webpack-dev-server >= v4.2.0` allows you to set additional [TLS options](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) like `minVersion`. Also, you can directly pass the contents of respective files:
-
-**webpack.config.js**
-
-```javascript
-const fs = require('fs');
-const path = require('path');
-
-module.exports = {
-  devServer: {
-    https: {
-      minVersion: 'TLSv1.1',
-      key: fs.readFileSync(path.join(__dirname, './server.key')),
-      pfx: fs.readFileSync(path.join(__dirname, './server.pfx')),
-      cert: fs.readFileSync(path.join(__dirname, './server.crt')),
-      ca: fs.readFileSync(path.join(__dirname, './ca.pem')),
-      passphrase: 'webpack-dev-server',
-      requestCert: true,
-    },
-  },
-};
-```
-
-W> Don't specify `https.ca` and `https.cacert` options together, if specified `https.ca` will be used. `https.cacert` is deprecated and will be removed in the next major release.
-
-W> This option is deprecated in favor of the [devServer.server](#devserverserver) option.
 
 ## devServer.headers
 
@@ -1042,94 +900,6 @@ npx webpack serve --no-live-reload
 
 W> Live reloading works only with web related [targets](/configuration/target/#string) like `web`, `webworker`, `electron-renderer` and `node-webkit`.
 
-## devServer.magicHtml
-
-`boolean = true`
-
-<Badge text="v4.1.0+" />
-
-Tell dev-server to enable/disable magic HTML routes (routes corresponding to your webpack output, for example `/main` for `main.js`).
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    magicHtml: true,
-  },
-};
-```
-
-Usage via the CLI:
-
-```bash
-npx webpack serve --magic-html
-```
-
-To disable:
-
-```bash
-npx webpack serve --no-magic-html
-```
-
-## devServer.onAfterSetupMiddleware
-
-`function (devServer)`
-
-Provides the ability to execute custom middleware after all other middleware
-internally within the server.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    onAfterSetupMiddleware: function (devServer) {
-      if (!devServer) {
-        throw new Error('webpack-dev-server is not defined');
-      }
-
-      devServer.app.get('/some/path', function (req, res) {
-        res.json({ custom: 'response' });
-      });
-    },
-  },
-};
-```
-
-W> This option is deprecated in favor of the [devServer.setupMiddlewares](#devserversetupmiddlewares) option.
-
-## devServer.onBeforeSetupMiddleware
-
-`function (devServer)`
-
-Provides the ability to execute custom middleware prior to all other middleware
-internally within the server. This could be used to define custom handlers, for
-example:
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    onBeforeSetupMiddleware: function (devServer) {
-      if (!devServer) {
-        throw new Error('webpack-dev-server is not defined');
-      }
-
-      devServer.app.get('/some/path', function (req, res) {
-        res.json({ custom: 'response' });
-      });
-    },
-  },
-};
-```
-
-W> This option is deprecated in favor of the [devServer.setupMiddlewares](#devserversetupmiddlewares) option.
-
 ## devserver.onListening
 
 `function (devServer)`
@@ -1309,7 +1079,7 @@ npx webpack serve --port auto
 
 ## devServer.proxy
 
-`object` `[object, function]`
+`[object, function]`
 
 Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
 
@@ -1323,9 +1093,12 @@ With a backend on `localhost:3000`, you can use this to enable proxying:
 module.exports = {
   //...
   devServer: {
-    proxy: {
-      '/api': 'http://localhost:3000',
-    },
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://localhost:3000',
+      },
+    ],
   },
 };
 ```
@@ -1340,12 +1113,13 @@ If you don't want `/api` to be passed along, we need to rewrite the path:
 module.exports = {
   //...
   devServer: {
-    proxy: {
-      '/api': {
+    proxy: [
+      {
+        context: ['/api'],
         target: 'http://localhost:3000',
         pathRewrite: { '^/api': '' },
       },
-    },
+    ],
   },
 };
 ```
@@ -1358,12 +1132,13 @@ A backend server running on HTTPS with an invalid certificate will not be accept
 module.exports = {
   //...
   devServer: {
-    proxy: {
-      '/api': {
-        target: 'https://other-server.example.com',
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://localhost:3000',
         secure: false,
       },
-    },
+    ],
   },
 };
 ```
@@ -1384,8 +1159,9 @@ E.g. for a browser request, you want to serve an HTML page, but for an API reque
 module.exports = {
   //...
   devServer: {
-    proxy: {
-      '/api': {
+    proxy: [
+      {
+        context: ['/api'],
         target: 'http://localhost:3000',
         bypass: function (req, res, proxyOptions) {
           if (req.headers.accept.indexOf('html') !== -1) {
@@ -1394,10 +1170,12 @@ module.exports = {
           }
         },
       },
-    },
+    ],
   },
 };
 ```
+
+W> The `bypass` option is deprecated for proxy in favor of the `router` and the `context` options. [Read more here](https://github.com/chimurai/http-proxy-middleware/tree/v2.0.6#http-proxy-middleware-options).
 
 If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a `context` property:
 
@@ -1428,10 +1206,12 @@ module.exports = {
     devMiddleware: {
       index: false, // specify to enable root proxying
     },
-    proxy: {
-      context: () => true,
-      target: 'http://localhost:1234',
-    },
+    proxy: [
+      {
+        context: () => true,
+        target: 'http://localhost:1234',
+      },
+    ],
   },
 };
 ```
@@ -1444,12 +1224,13 @@ The origin of the host header is kept when proxying by default, you can set `cha
 module.exports = {
   //...
   devServer: {
-    proxy: {
-      '/api': {
+    proxy: [
+      {
+        context: ['/api'],
         target: 'http://localhost:3000',
         changeOrigin: true,
       },
-    },
+    ],
   },
 };
 ```
@@ -1574,8 +1355,6 @@ module.exports = {
   },
 };
 ```
-
-W> Don't specify `server.options.ca` and `server.options.cacert` options together, if specified `server.options.ca` will be used. `server.options.cacert` is deprecated and will be removed in the next major release.
 
 ## devServer.setupExitSignals
 
