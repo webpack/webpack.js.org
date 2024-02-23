@@ -2394,6 +2394,21 @@ module.exports = {
 };
 ```
 
+## output.webassemblyModuleFilename
+
+`string = '[hash].module.wasm'`
+
+Specifies the filename of WebAssembly modules. It should be provided as a relative path within the `output.path` directory
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    webassemblyModuleFilename: '[id].[hash].wasm',
+  },
+};
+```
+
 ## output.workerChunkLoading
 
 `string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
