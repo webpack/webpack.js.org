@@ -832,6 +832,21 @@ module.exports = {
 };
 ```
 
+## output.importMetaName
+
+The name of the native `import.meta` object (can be exchanged for a polyfill).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importMetaName: 'pseudoImport.meta',
+  },
+};
+```
+
 ## output.library
 
 Output a library exposing the exports of your entry point.
