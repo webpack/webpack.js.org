@@ -2376,7 +2376,7 @@ module.exports = {
 
 ## output.wasmLoading
 
-`boolean = false` `string`
+`false` `'fetch-streaming' | 'fetch' | 'async-node'` `string`
 
 Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
 
@@ -2441,6 +2441,23 @@ module.exports = {
   //...
   output: {
     workerPublicPath: '/workerPublicPath2/',
+  },
+};
+```
+
+## output.workerWasmLoading
+
+`false` `'fetch-streaming' | 'fetch' | 'async-node'` `string`
+
+Option to set the method of loading WebAssembly Modules in workers, defaults to value of [output.wasmLoading](#outputwasmloading).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    workerWasmLoading: 'fetch',
   },
 };
 ```
