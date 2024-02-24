@@ -436,7 +436,7 @@ const lazyComp = () =>
   });
 ```
 
-If the script loading will fail before webpack starts loading of that script by itself (webpack just creates a script tag to load its code, if that script is not on a page), that catch handler won't start till [chunkLoadTimeout](/configuration/output/#outputchunkloadtimeout) is not passed. This behavior can be unexpected. But it's explainable — webpack can not throw any error, cause webpack doesn't know, that script failed. Webpack will add onerror handler to the script right after the error has happen.
+If the script loading will fail before webpack starts loading of that script by itself (webpack creates a script tag to load its code, if that script is not on a page), that catch handler won't start till [chunkLoadTimeout](/configuration/output/#outputchunkloadtimeout) is not passed. This behavior can be unexpected. But it's explainable — webpack can not throw any error, cause webpack doesn't know, that script failed. Webpack will add onerror handler to the script right after the error has happen.
 
 To prevent such problem you can add your own onerror handler, which removes the script in case of any error:
 
