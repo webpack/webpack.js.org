@@ -22,6 +22,7 @@ contributors:
   - chenxsan
   - snitin315
   - vabushkevich
+  - ahabhgk
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -148,9 +149,28 @@ module.exports = {
         // Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.
         // type: boolean, available since webpack 5.90.0
         exportsOnly: true,
+
+        // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
+        // available since webpack 5.90.4
+        exportsConvention: 'camel-case-only',
       },
       'css/auto': {
-        // ditto
+        // Generator options for css/auto modules
+
+        // Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.
+        // type: boolean, available since webpack 5.90.0
+        exportsOnly: true,
+
+        // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
+        // available since webpack 5.90.4
+        exportsConvention: 'camel-case-only',
+
+        // Customize the format of the local class names generated for css modules.
+        // type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].
+        // available since webpack 5.90.4
+        localIdentName: '[uniqueName]-[id]-[local]',
       },
       'css/global': {
         // ditto
