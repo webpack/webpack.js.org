@@ -1218,9 +1218,28 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token comment">// Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.</span>
         <span class="token comment">// type: boolean, available since webpack 5.90.0</span>
         exportsOnly<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.</span>
+        <span class="token comment">// type: &#x27;as-is&#x27; | &#x27;camel-case&#x27; | &#x27;camel-case-only&#x27; | &#x27;dashes&#x27; | &#x27;dashes-only&#x27; | ((name: string) =&gt; string)</span>
+        <span class="token comment">// available since webpack 5.90.4</span>
+        exportsConvention<span class="token operator">:</span> <span class="token string">&#x27;camel-case-only&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">&#x27;css/auto&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token comment">// ditto</span>
+        <span class="token comment">// Generator options for css/auto modules</span>
+
+        <span class="token comment">// Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.</span>
+        <span class="token comment">// type: boolean, available since webpack 5.90.0</span>
+        exportsOnly<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.</span>
+        <span class="token comment">// type: &#x27;as-is&#x27; | &#x27;camel-case&#x27; | &#x27;camel-case-only&#x27; | &#x27;dashes&#x27; | &#x27;dashes-only&#x27; | ((name: string) =&gt; string)</span>
+        <span class="token comment">// available since webpack 5.90.4</span>
+        exportsConvention<span class="token operator">:</span> <span class="token string">&#x27;camel-case-only&#x27;</span><span class="token punctuation">,</span>
+
+        <span class="token comment">// Customize the format of the local class names generated for css modules.</span>
+        <span class="token comment">// type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].</span>
+        <span class="token comment">// available since webpack 5.90.4</span>
+        localIdentName<span class="token operator">:</span> <span class="token string">&#x27;[uniqueName]-[id]-[local]&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">&#x27;css/global&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// ditto</span>
