@@ -29,6 +29,7 @@ contributors:
   - mrzalyaul
   - JakobJingleheimer
   - long76
+  - ahabhgk
 ---
 
 The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
@@ -345,6 +346,12 @@ You **must not** specify an absolute path here. However, feel free to include fo
 This option determines the name of CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
 
 You **must not** specify an absolute path here. However, feel free to include folders separated by `'/'`. This specified path combines with the [`output.path`](#outputpath) value to pinpoint the location on the disk.
+
+## output.cssHeadDataCompression
+
+`boolean`
+
+This options determines whether to compress the meta data generated in the head tag of CSS files. This option defaults to `true` in `production` and `false` in `development` [mode](/configuration/mode/) respectively.
 
 ## output.devtoolFallbackModuleFilenameTemplate
 
