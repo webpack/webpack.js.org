@@ -33,6 +33,8 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 new webpack.DllPlugin(options);
 ```
 
+W> When webpack output uses [code splitting](/guides/code-splitting), we should use [Template strings](/configuration/output/#template-strings) in `path` to ensure that webpack generates multiple manifest files.
+
 W> We recommend using DllPlugin only with `entryOnly: true`, otherwise tree shaking in the DLL won't work as all the exports might be used.
 
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests to module ids. It is used by the `DllReferencePlugin`.
