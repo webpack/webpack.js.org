@@ -19,7 +19,24 @@ related:
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Since version 4 webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
+Webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
+
+## optimization.checkWasmTypes
+
+`boolean`
+
+Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported. By default `optimization.checkWasmTypes` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    checkWasmTypes: false,
+  },
+};
+```
 
 ## optimization.chunkIds
 
