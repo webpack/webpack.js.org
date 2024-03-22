@@ -11,6 +11,7 @@ contributors:
   - smelukov
   - anshumanv
   - snitin315
+  - hai-x
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -36,7 +37,7 @@ By default, the current working directory of Node.js is used, but it's recommend
 
 ## entry
 
-`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
+`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string, runtime string | false }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string, layer string, runtime string | false })`
 
 The point or points where to start the application bundling process. If an array is passed then all items will be processed.
 
@@ -185,3 +186,25 @@ module.exports = {
 ```
 
 When combining with the [`output.library`](/configuration/output/#outputlibrary) option: If an array is passed only the last item is exported.
+
+### Runtime chunk
+
+It allows setting the runtime chunk for an entry point and setting it to `false` to avoid a new runtime chunk since webpack `v5.43.0`.
+
+`optimization.runtimeChunk` allows setting it globally for unspecified entry points.
+
+```js
+module.exports = {
+  //...
+  entry: {
+    home: {
+      import: './home.js',
+      runtime: 'home-runtime',
+    },
+    about: {
+      import: './about.js',
+      runtime: false,
+    },
+  },
+};
+```
