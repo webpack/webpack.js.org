@@ -463,6 +463,23 @@ module.exports = {
 };
 ```
 
+### resolve.fullySpecified
+
+`boolean`
+
+When set to true, this option treats user-specified requests as fully specified. This means that no extensions are automatically added, and the mainFiles within directories are not resolved. It's important to note that this behavior does not affect requests made through `mainFields`, `aliasFields`, or `aliases`.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    fullySpecified: true,
+  },
+};
+```
+
 ### resolve.importsFields
 
 `[string]`
