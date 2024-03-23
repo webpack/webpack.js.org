@@ -533,13 +533,18 @@ The `'relative'` value for `module.parser.javascript.url` is available since web
 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
+`noParse` can be also used as a way to deliberately prevent expansion of all `import`, `require`, `define` etc. calls for cases when those calls are unreachable at runtime.
+For example, when building a project for `'browser'` [target](/configuration/target/) and using a third-party library that was prebuilt for both browser and Node.js and it requires Node.js built-ins e.g. `require('os')`.
+
+T> You may need to use `[\\/]` in regex to match `\` on Windows and `/` on Mac/Linux.
+
 **webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   module: {
-    noParse: /jquery|lodash/,
+    noParse: /jquery|lodash|src[\\/]vendor[\\/]somelib/,
   },
 };
 ```
@@ -548,7 +553,8 @@ module.exports = {
 module.exports = {
   //...
   module: {
-    noParse: (content) => /jquery|lodash/.test(content),
+    noParse: (content) =>
+      /jquery|lodash|src[\\/]vendor[\\/]somelib/.test(content),
   },
 };
 ```
