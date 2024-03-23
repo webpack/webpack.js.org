@@ -1998,18 +1998,23 @@
   resolved "https://registry.yarnpkg.com/@npmcli/name-from-folder/-/name-from-folder-2.0.0.tgz#c44d3a7c6d5c184bb6036f4d5995eee298945815"
   integrity sha512-pwK+BfEBZJbKdNYpHHRTNBwBoqrN/iIMO0AiGvYsp3Hoaq0WbgGSWQR6SCldZovoDpY3yje5lkFUe6gsDgJ2vg==
 
-"@octokit/auth-action@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-4.0.1.tgz#b6fe7579b5ee1d544accdb9588c7697681a93fa6"
-  integrity sha512-mJLOcFFafIivLZ7BEkGDCTFoHPJv7BeL5Zwy7j5qMDU0b/DKshhi6GCU9tw3vmKhOxTNquYfvwqsEfPpemaaxg==
+"@octokit/auth-action@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-5.0.0.tgz#648ee185b402f3aea87afca85e9ec7f3868ae375"
+  integrity sha512-tllw9B8xNwzWnCnizHmz0eT+LChUFytyMQzEtzlYBbotYz8IO9HrLzTq2p6SJMCyKFSBAGl+KTC2YVfawWoLaQ==
   dependencies:
-    "@octokit/auth-token" "^4.0.0"
-    "@octokit/types" "^12.0.0"
+    "@octokit/auth-token" "^5.0.0"
+    "@octokit/types" "^12.6.0"
 
 "@octokit/auth-token@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-4.0.0.tgz#40d203ea827b9f17f42a29c6afb93b7745ef80c7"
   integrity sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==
+
+"@octokit/auth-token@^5.0.0":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-5.0.1.tgz#1b882a54587d9e58b7aebb5ae5b9a08522c822f0"
+  integrity sha512-RTmWsLfig8SBoiSdgvCht4BXl1CHU89Co5xiQ5JF19my/sIRDFCQ1RPrmK0exgqUZuNm39C/bV8+/83+MJEjGg==
 
 "@octokit/core@^5.0.0":
   version "5.0.0"
@@ -2051,6 +2056,11 @@
   version "19.1.0"
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-19.1.0.tgz#75ec7e64743870fc73e1ab4bc6ec252ecdd624dc"
   integrity sha512-6G+ywGClliGQwRsjvqVYpklIfa7oRPA0vyhPQG/1Feh+B+wU0vGH1JiJ5T25d3g1JZYBHzR2qefLi9x8Gt+cpw==
+
+"@octokit/openapi-types@^20.0.0":
+  version "20.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-20.0.0.tgz#9ec2daa0090eeb865ee147636e0c00f73790c6e5"
+  integrity sha512-EtqRBEjp1dL/15V7WiX5LJMIxxkdiGJnabzYx5Apx4FkQIFgAfKumXeYAqqJCj1s+BMX4cPFIFC4OLCR6stlnA==
 
 "@octokit/plugin-paginate-rest@^9.0.0":
   version "9.1.5"
@@ -2108,12 +2118,12 @@
   dependencies:
     "@octokit/openapi-types" "^18.0.0"
 
-"@octokit/types@^12.0.0", "@octokit/types@^12.3.0", "@octokit/types@^12.4.0":
-  version "12.4.0"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-12.4.0.tgz#8f97b601e91ce6b9776ed8152217e77a71be7aac"
-  integrity sha512-FLWs/AvZllw/AGVs+nJ+ELCDZZJk+kY0zMen118xhL2zD0s1etIUHm1odgjP7epxYU1ln7SZxEUWYop5bhsdgQ==
+"@octokit/types@^12.3.0", "@octokit/types@^12.4.0", "@octokit/types@^12.6.0":
+  version "12.6.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-12.6.0.tgz#8100fb9eeedfe083aae66473bd97b15b62aedcb2"
+  integrity sha512-1rhSOfRa6H9w4YwK0yrf5faDaDTb+yLyBUKOCV4xtCDB5VmIPqd/v9yr9o6SAzOAlRxMiRiCic6JVM1/kunVkw==
   dependencies:
-    "@octokit/openapi-types" "^19.1.0"
+    "@octokit/openapi-types" "^20.0.0"
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
