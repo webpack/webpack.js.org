@@ -668,3 +668,23 @@ compilation.hooks.statsPreset.for('my-preset').tap('MyPlugin', (options) => {
 ```
 
 This plugin ensures that for the preset `'my-preset'`, if the `all` option is undefined, it defaults to true.
+
+### statsNormalize
+
+`SyncHook`
+
+This hook is used to transform an options object into a consistent format that can be easily used by subsequent hooks. It also ensures that missing options are set to their default values.
+
+- Callback Parameters: `options` `context`
+
+Here's an illustrative plugin example:
+
+```js
+compilation.hooks.statsNormalize.tap('MyPlugin', (options) => {
+  if (options.myOption === undefined) options.myOption = [];
+
+  if (!Array.isArray(options.myOption)) options.myOptions = [options.myOptions];
+});
+```
+
+In this plugin, if the `myOption` is missing, it sets it to an empty array. Additionally, it ensures that `myOption` is always an array even if it was originally defined as a single value.
