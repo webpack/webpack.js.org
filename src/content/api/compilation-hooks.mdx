@@ -650,3 +650,21 @@ Executed after setting up a child compiler.
 ### normalModuleLoader
 
 Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
+
+### statsPreset
+
+`HookMap`
+
+This HookMap is like a list of actions that gets triggered when a preset is used. It takes in an options object. When a plugin manages a preset, it should change settings in this object carefully without replacing existing ones.
+
+- Callback Parameters: `options` `context`
+
+Here's an illustrative plugin example:
+
+```js
+compilation.hooks.statsPreset.for('my-preset').tap('MyPlugin', (options) => {
+  if (options.all === undefined) options.all = true;
+});
+```
+
+This plugin ensures that for the preset `'my-preset'`, if the `all` option is undefined, it defaults to true.
