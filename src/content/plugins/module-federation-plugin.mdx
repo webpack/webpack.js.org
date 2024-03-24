@@ -177,9 +177,9 @@ The package name that is used to determine required version from description fil
 
 ##### **`requiredVersion`**
 
-`false | string`
+`false` `string`
 
-The required version of the package. It accepts semantic versioning. For example, "^1.2.3".
+This field specifies the required version of the package. It accepts semantic versioning, such as "^1.2.3". Additionally, it retrieves the version if it's provided as a URL, for instance: "git+ssh://git@github.com:foo/bar.git#v1.0.0".
 
 ##### **`shareKey`**
 
