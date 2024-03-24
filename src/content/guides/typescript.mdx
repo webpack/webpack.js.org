@@ -9,6 +9,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - snitin315
+  - deerawan
 ---
 
 T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide.
@@ -93,6 +94,45 @@ module.exports = {
 ```
 
 This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
+
+Regarding webpack configuration, instead of using Javascript for `webpack.config.js`, we could use the Typescript version `webpack.config.ts`. This is possible by installing `ts-node`.
+
+```bash
+npm install --save-dev ts-node
+```
+
+`ts-node` is required by webpack to load the configuration in Typescript.
+
+Let's see the Typescript version of webpack config file.
+
+**webpack.config.ts**
+
+```ts
+import * as path from 'path';
+import { Configuration } from 'webpack';
+
+const config: Configuration = {
+  entry: './src/index.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+
+export default config;
+```
 
 Now lets change the import of `lodash` in our `./index.ts` due to the fact that there is no default export present in `lodash` definitions.
 
