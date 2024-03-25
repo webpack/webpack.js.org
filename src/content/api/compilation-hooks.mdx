@@ -688,3 +688,37 @@ compilation.hooks.statsNormalize.tap('MyPlugin', (options) => {
 ```
 
 In this plugin, if the `myOption` is missing, it sets it to an empty array. Additionally, it ensures that `myOption` is always an array even if it was originally defined as a single value.
+
+### statsFactory
+
+This hook provides access to the StatsFactory class for specific options.
+
+- Callback Parameters: `statsFactory` `options`
+
+#### StatsFactory.hooks.extract
+
+`HookMap`
+
+- Callback Parameters: `object` `data` `context`
+
+`data` contains the class. object is an object to which properties should be added. `context` provides contextual information, such as classes on the path.
+
+Example:
+
+```js
+compilation.hooks.statsFactory.tap('MyPlugin', (statsFactory, options) => {
+  statsFactory.hooks.extract
+    .for('compilation')
+    .tap('MyPlugin', (object, compilation) => {
+      object.customProperty = MyPlugin.getCustomValue(compilation);
+    });
+});
+```
+
+#### StatsFactory.hooks.result
+
+`HookMap`
+
+Called with the result on each level.
+
+- Callback Parameters: `result` `context`
