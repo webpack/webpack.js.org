@@ -691,7 +691,7 @@ In this plugin, if the `myOption` is missing, it sets it to an empty array. Addi
 
 ### statsFactory
 
-This hook provides access to the StatsFactory class for specific options.
+This hook provides access to the [`StatsFactory` class](https://github.com/webpack/webpack/blob/main/lib/stats/StatsFactory.js) for specific options.
 
 - Callback Parameters: `statsFactory` `options`
 
@@ -720,5 +720,27 @@ compilation.hooks.statsFactory.tap('MyPlugin', (statsFactory, options) => {
 `HookMap`
 
 Called with the result on each level.
+
+- Callback Parameters: `result` `context`
+
+### statsPrinter
+
+This hook provides access to the [`StatsPrinter` class](https://github.com/webpack/webpack/blob/main/lib/stats/StatsPrinter.js) for specific options.
+
+- Callback Parameters: `statsPrinter` `options`
+
+#### StatsPrinter.hooks.print
+
+`HookMap`
+
+This hook is called when a part should be printed.
+
+- Callback Parameters: `object` `context`
+
+#### StatsPrinter.hooks.result
+
+`HookMap`
+
+This hook is called for the resulting string for a part.
 
 - Callback Parameters: `result` `context`
