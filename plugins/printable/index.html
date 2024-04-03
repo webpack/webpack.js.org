@@ -3975,7 +3975,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3><span id="loader-options"></span>Loader Options<a href="#loader-options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><ul><li><strong><a href="#publicpath"><code>publicPath</code></a></strong></li><li><strong><a href="#emit"><code>emit</code></a></strong></li><li><strong><a href="#esmodule"><code>esModule</code></a></strong></li></ul><h4><span id="publicpath"></span><code>publicPath</code><a href="#publicpath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">publicPath</span> <span class="token operator">=</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3><span id="loader-options"></span>Loader Options<a href="#loader-options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><ul><li><strong><a href="#publicpath"><code>publicPath</code></a></strong></li><li><strong><a href="#emit"><code>emit</code></a></strong></li><li><strong><a href="#esmodule"><code>esModule</code></a></strong></li><li><strong><a href="#defaultexport"><code>defaultExport</code></a></strong></li></ul><h4><span id="publicpath"></span><code>publicPath</code><a href="#publicpath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">publicPath</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>resourcePath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> rootContext<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>Default: the <code>publicPath</code> in <code>webpackOptions.output</code></p><p>Specifies a custom public path for the external resources like images, files, etc inside <code>CSS</code>.
 Works like <a href="/configuration/output/#outputpublicpath"><code>output.publicPath</code></a></p><h5><span id="string-2"></span><code>string</code><a href="#string-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -4052,6 +4052,36 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h4><span id="defaultexport"></span><code>defaultExport</code><a href="#defaultexport" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">defaultExport</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre><p>Default: <code>false</code></p><blockquote><p><strong>Note</strong></p><p>This option will work only when you set <code>namedExport</code> to <code>true</code> in <code>css-loader</code></p></blockquote><p>By default, <code>mini-css-extract-plugin</code> generates JS modules based on the <code>esModule</code> and <code>namedExport</code> options in <code>css-loader</code>.
+Using the <code>esModule</code> and <code>namedExport</code> options will allow you to better optimize your code.
+If you set <code>esModule: true</code> and <code>namedExport: true</code> for <code>css-loader</code> <code>mini-css-extract-plugin</code> will generate <strong>only</strong> a named export.
+Our official recommendation is to use only named export for better future compatibility.
+But for some applications, it is not easy to quickly rewrite the code from the default export to a named export.</p><p>In case you need both default and named exports, you can enable this option:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/i</span><span class="token punctuation">,</span>
+        use<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            loader<span class="token operator">:</span> MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+              defaultExport<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
+            esModule<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            modules<span class="token operator">:</span> <span class="token punctuation">{</span>
+              namedExport<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
