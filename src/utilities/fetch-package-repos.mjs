@@ -29,6 +29,7 @@ const fetch = {
       hides: excludedPlugins,
     },
     'yoriiis/svg-chunk-webpack-plugin',
+    'yoriiis/chunks-webpack-plugin',
   ],
 };
 

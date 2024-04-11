@@ -21,7 +21,7 @@ W> As of webpack 5, You can configure only `global`, `__filename` or `__dirname`
 
 ## node
 
-`boolean: false` `object`
+`false` `object`
 
 **webpack.config.js**
 
@@ -36,7 +36,7 @@ module.exports = {
 };
 ```
 
-Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` plugin.
+The `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` plugin.
 
 ## node.global
 
@@ -54,7 +54,7 @@ Options:
 
 ## node.\_\_filename
 
-`boolean` `'mock' | 'warn-mock' | 'node_module' | 'eval-only'`
+`boolean` `'mock' | 'warn-mock' | 'node-module' | 'eval-only'`
 
 Options:
 
@@ -62,12 +62,12 @@ Options:
 - `false`: Webpack won't touch your `__filename` code, which means you have the regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/index.js'`.
 - `'warn-mock'`: Use the fixed value of `'/index.js'` but show a warning.
-- `node_module`: Replace `__filename` in CommonJS modules to `fileURLToPath(import.meta.url)` when `output.module` is enabled.
+- `'node-module'`: Replace `__filename` in CommonJS modules to `fileURLToPath(import.meta.url)` when `output.module` is enabled.
 - `'eval-only'`
 
 ## node.\_\_dirname
 
-`boolean` `'mock' | 'warn-mock' | 'node_module' | 'eval-only'`
+`boolean` `'mock' | 'warn-mock' | 'node-module' | 'eval-only'`
 
 Options:
 
@@ -75,5 +75,5 @@ Options:
 - `false`: Webpack won't touch your `__dirname` code, which means you have the regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/'`.
 - `'warn-mock'`: Use the fixed value of `'/'` but show a warning.
-- `node_module`: Replace `__dirname` in CommonJS modules to `fileURLToPath(import.meta.url + "/..")` when `output.module` is enabled.
+- `'node-module'`: Replace `__dirname` in CommonJS modules to `fileURLToPath(import.meta.url + "/..")` when `output.module` is enabled.
 - `'eval-only'`

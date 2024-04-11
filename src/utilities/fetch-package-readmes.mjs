@@ -34,6 +34,9 @@ const loaderGroup = {
 const communityPackages = [{
   name: 'svg-chunk-webpack-plugin',
   contributors: ['yoriiis', 'alexander-akait']
+}, {
+  name: 'chunks-webpack-plugin',
+  contributors: ['yoriiis', 'alexander-akait']
 }];
 
 async function main() {

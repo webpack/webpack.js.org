@@ -22,6 +22,7 @@ contributors:
   - chenxsan
   - snitin315
   - vabushkevich
+  - ahabhgk
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -148,9 +149,28 @@ module.exports = {
         // Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.
         // type: boolean, available since webpack 5.90.0
         exportsOnly: true,
+
+        // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
+        // available since webpack 5.90.4
+        exportsConvention: 'camel-case-only',
       },
       'css/auto': {
-        // ditto
+        // Generator options for css/auto modules
+
+        // Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.
+        // type: boolean, available since webpack 5.90.0
+        exportsOnly: true,
+
+        // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
+        // available since webpack 5.90.4
+        exportsConvention: 'camel-case-only',
+
+        // Customize the format of the local class names generated for css modules.
+        // type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].
+        // available since webpack 5.90.4
+        localIdentName: '[uniqueName]-[id]-[local]',
       },
       'css/global': {
         // ditto
@@ -513,13 +533,18 @@ The `'relative'` value for `module.parser.javascript.url` is available since web
 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
+`noParse` can be also used as a way to deliberately prevent expansion of all `import`, `require`, `define` etc. calls for cases when those calls are unreachable at runtime.
+For example, when building a project for `'browser'` [target](/configuration/target/) and using a third-party library that was prebuilt for both browser and Node.js and it requires Node.js built-ins e.g. `require('os')`.
+
+T> You may need to use `[\\/]` in regex to match `\` on Windows and `/` on Mac/Linux.
+
 **webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   module: {
-    noParse: /jquery|lodash/,
+    noParse: /jquery|lodash|src[\\/]vendor[\\/]somelib/,
   },
 };
 ```
@@ -528,7 +553,8 @@ module.exports = {
 module.exports = {
   //...
   module: {
-    noParse: (content) => /jquery|lodash/.test(content),
+    noParse: (content) =>
+      /jquery|lodash|src[\\/]vendor[\\/]somelib/.test(content),
   },
 };
 ```
@@ -1134,7 +1160,7 @@ Include all modules that pass test assertion. If you supply a `Rule.test` option
 
 Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline' | 'css/auto'`
 
-`Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
+`Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing.
 
 **webpack.config.js**
 
@@ -1416,7 +1442,7 @@ It can have an `options` property being a string or object. This value is passed
 
 For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
 
-Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have some stringified values.
+Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have same stringified values.
 
 It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 

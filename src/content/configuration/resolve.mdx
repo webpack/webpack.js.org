@@ -170,6 +170,70 @@ module.exports = {
 };
 ```
 
+### resolve.byDependency
+
+Configure resolve options by the type of module request.
+
+- Type: `[type: string]: ResolveOptions`
+- Example:
+
+  ```js
+  module.exports = {
+    // ...
+    resolve: {
+      byDependency: {
+        // ...
+        esm: {
+          mainFields: ['browser', 'module'],
+        },
+        commonjs: {
+          aliasFields: ['browser'],
+        },
+        url: {
+          preferRelative: true,
+        },
+      },
+    },
+  };
+  ```
+
+### resolve.cache
+
+`boolean`
+
+Enables caching of successfully resolved requests, allowing cache entries to be revalidated.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    cache: true,
+  },
+};
+```
+
+### resolve.cachePredicate
+
+`function(module) => boolean`
+
+A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. It must return a boolean.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    cachePredicate: (module) => {
+      // additional logic
+      return true;
+    },
+  },
+};
+```
+
 ### resolve.cacheWithContext
 
 `boolean`
@@ -269,6 +333,23 @@ module.exports = {
   //...
   resolve: {
     enforceExtension: false,
+  },
+};
+```
+
+### resolve.exportsFields
+
+`[string] = ['exports']`
+
+Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    exportsFields: ['exports', 'myCompanyExports'],
   },
 };
 ```
@@ -382,6 +463,40 @@ module.exports = {
 };
 ```
 
+### resolve.fullySpecified
+
+`boolean`
+
+When set to true, this option treats user-specified requests as fully specified. This means that no extensions are automatically added, and the mainFiles within directories are not resolved. It's important to note that this behavior does not affect requests made through `mainFields`, `aliasFields`, or `aliases`.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    fullySpecified: true,
+  },
+};
+```
+
+### resolve.importsFields
+
+`[string]`
+
+Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    importsFields: ['browser', 'module', 'main'],
+  },
+};
+```
+
 ### resolve.mainFields
 
 `[string]`
@@ -442,23 +557,6 @@ module.exports = {
 };
 ```
 
-### resolve.exportsFields
-
-`[string] = ['exports']`
-
-Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    exportsFields: ['exports', 'myCompanyExports'],
-  },
-};
-```
-
 ### resolve.modules
 
 `[string] = ['node_modules']`
@@ -493,6 +591,125 @@ module.exports = {
   //...
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
+};
+```
+
+### resolve.plugins
+
+[`[Plugin]`](/plugins/)
+
+A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    plugins: [new DirectoryNamedWebpackPlugin()],
+  },
+};
+```
+
+### resolve.preferAbsolute
+
+`boolean`
+
+<Badge text="5.13.0+" />
+
+Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    preferAbsolute: true,
+  },
+};
+```
+
+### resolve.preferRelative
+
+`boolean`
+
+When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    preferRelative: true,
+  },
+};
+```
+
+**src/index.js**
+
+```js
+// let's say `src/logo.svg` exists
+import logo1 from 'logo.svg'; // this is viable when `preferRelative` enabled
+import logo2 from './logo.svg'; // otherwise you can only use relative path to resolve logo.svg
+
+// `preferRelative` is enabled by default for `new URL()` case
+const b = new URL('module/path', import.meta.url);
+const a = new URL('./module/path', import.meta.url);
+```
+
+### resolve.restrictions
+
+`[string, RegExp]`
+
+A list of resolve restrictions to restrict the paths that a request can be resolved on.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    restrictions: [/\.(sass|scss|css)$/],
+  },
+};
+```
+
+### resolve.roots
+
+`[string]`
+
+A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
+
+**webpack.config.js**
+
+```js
+const fixtures = path.resolve(__dirname, 'fixtures');
+module.exports = {
+  //...
+  resolve: {
+    roots: [__dirname, fixtures],
+  },
+};
+```
+
+### resolve.symlinks
+
+`boolean = true`
+
+Whether to resolve symlinks to their symlinked location.
+
+When enabled, symlinked resources are resolved to their _real_ path, not their symlinked location. Note that this may cause module resolution to fail when using tools that symlink packages (like `npm link`).
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    symlinks: true,
   },
 };
 ```
@@ -545,189 +762,6 @@ module.exports = {
   },
 };
 ```
-
-### resolve.plugins
-
-[`[Plugin]`](/plugins/)
-
-A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    plugins: [new DirectoryNamedWebpackPlugin()],
-  },
-};
-```
-
-### resolve.preferRelative
-
-`boolean`
-
-When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    preferRelative: true,
-  },
-};
-```
-
-**src/index.js**
-
-```js
-// let's say `src/logo.svg` exists
-import logo1 from 'logo.svg'; // this is viable when `preferRelative` enabled
-import logo2 from './logo.svg'; // otherwise you can only use relative path to resolve logo.svg
-
-// `preferRelative` is enabled by default for `new URL()` case
-const b = new URL('module/path', import.meta.url);
-const a = new URL('./module/path', import.meta.url);
-```
-
-### resolve.preferAbsolute
-
-`boolean`
-
-<Badge text="5.13.0+" />
-
-Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    preferAbsolute: true,
-  },
-};
-```
-
-### resolve.symlinks
-
-`boolean = true`
-
-Whether to resolve symlinks to their symlinked location.
-
-When enabled, symlinked resources are resolved to their _real_ path, not their symlinked location. Note that this may cause module resolution to fail when using tools that symlink packages (like `npm link`).
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    symlinks: true,
-  },
-};
-```
-
-### resolve.cachePredicate
-
-`function(module) => boolean`
-
-A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. It must return a boolean.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    cachePredicate: (module) => {
-      // additional logic
-      return true;
-    },
-  },
-};
-```
-
-### resolve.restrictions
-
-`[string, RegExp]`
-
-A list of resolve restrictions to restrict the paths that a request can be resolved on.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    restrictions: [/\.(sass|scss|css)$/],
-  },
-};
-```
-
-### resolve.roots
-
-`[string]`
-
-A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
-
-**webpack.config.js**
-
-```js
-const fixtures = path.resolve(__dirname, 'fixtures');
-module.exports = {
-  //...
-  resolve: {
-    roots: [__dirname, fixtures],
-  },
-};
-```
-
-### resolve.importsFields
-
-`[string]`
-
-Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    importsFields: ['browser', 'module', 'main'],
-  },
-};
-```
-
-### resolve.byDependency
-
-Configure resolve options by the type of module request.
-
-- Type: `[type: string]: ResolveOptions`
-- Example:
-
-  ```js
-  module.exports = {
-    // ...
-    resolve: {
-      byDependency: {
-        // ...
-        esm: {
-          mainFields: ['browser', 'module'],
-        },
-        commonjs: {
-          aliasFields: ['browser'],
-        },
-        url: {
-          preferRelative: true,
-        },
-      },
-    },
-  };
-  ```
 
 ## resolveLoader
 

@@ -171,6 +171,22 @@ export default function (source) {
 }
 ```
 
+### Data Sharing
+
+In webpack, loaders can be chained together and share data with subsequent loaders in the chain. To achieve this, you can pass data along with the content (source code) using the `this.callback` method in raw loaders. In the default exported function of a raw loader, you can pass data using the fourth argument of `this.callback`.
+
+```javascript
+export default function (source) {
+  const options = getOptions(this);
+  // Pass data using the fourth argument of this.callback
+  this.callback(null, `export default ${JSON.stringify(source)}`, null, {
+    some: data,
+  });
+}
+```
+
+In the example above, `some` property in the fourth argument of `this.callback` is used to pass data to the next chained loader.
+
 ### Loader Dependencies
 
 If a loader uses external resources (i.e. by reading from filesystem), they **must** indicate it. This information is used to invalidate cacheable loaders and recompile in watch mode. Here's a brief example of how to accomplish this using the `addDependency` method:
@@ -245,7 +261,12 @@ Don't insert absolute paths into the module code as they break hashing when the 
 
 ```js
 // `loaderContext` is same as `this` inside loader function
-JSON.stringify(loaderContext.utils.contextify(loaderContext.context || loaderContext.rootContext, request));
+JSON.stringify(
+  loaderContext.utils.contextify(
+    loaderContext.context || loaderContext.rootContext,
+    request
+  )
+);
 ```
 
 ### Peer Dependencies

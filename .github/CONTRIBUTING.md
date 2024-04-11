@@ -30,7 +30,7 @@ See the `package.json` for the full list of `scripts`.
 
 > **Note**
 >
-> **Node v14.20** or above is required for the build process to run properly.
+> **Node v18.12.0** or above is required for the build process to run properly.
 
 ## Contributor License Agreement
 

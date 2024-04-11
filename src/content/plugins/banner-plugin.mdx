@@ -5,6 +5,7 @@ contributors:
   - simon04
   - byzyk
   - chenxsan
+  - snitin315
 related:
   - title: banner-plugin-hashing test
     url: https://github.com/webpack/webpack/blob/main/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
@@ -31,6 +32,7 @@ new webpack.BannerPlugin(options);
   include: string | RegExp | [string, RegExp], // Include all modules matching any of these conditions.
   exclude: string | RegExp | [string, RegExp], // Exclude all modules matching any of these conditions.
   footer?: boolean, // if true, the banner will be placed at the end of the compilation
+  stage?: number, // the stage of the compilation in which the banner should be injected
 }
 ```
 
@@ -49,6 +51,13 @@ new webpack.BannerPlugin({
   banner: (yourVariable) => {
     return `yourVariable: ${yourVariable}`;
   },
+});
+
+// It will add the banner message after minimizers and any asset manipulation
+new webpack.BannerPlugin({
+  raw: true,
+  banner: '/* banner is a string */',
+  stage: webpack.Compilation.PROCESS_ASSETS_STAGE_REPORT,
 });
 ```
 

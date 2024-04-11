@@ -29,13 +29,15 @@ contributors:
   - mrzalyaul
   - JakobJingleheimer
   - long76
+  - ahabhgk
+  - tanyabouman
 ---
 
 The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
 
 ## output.assetModuleFilename
 
-`string = '[hash][ext][query]'`
+`string = '[hash][ext][query]'` `function (pathData, assetInfo) => string`
 
 The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/).
 
@@ -329,6 +331,30 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 
 - `'anonymous'` - Enable cross-origin loading **without credentials**
 - `'use-credentials'` - Enable cross-origin loading **with credentials**
+
+## output.cssChunkFilename
+
+`string` `function (pathData, assetInfo) => string`
+
+This option determines the name of non-initial CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
+
+You **must not** specify an absolute path here. However, feel free to include folders separated by `'/'`. This specified path combines with the [`output.path`](#outputpath) value to pinpoint the location on the disk.
+
+## output.cssFilename
+
+`string` `function (pathData, assetInfo) => string`
+
+This option determines the name of CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
+
+You **must not** specify an absolute path here. However, feel free to include folders separated by `'/'`. This specified path combines with the [`output.path`](#outputpath) value to pinpoint the location on the disk.
+
+## output.cssHeadDataCompression
+
+<Badge text="5.91.0+" />
+
+`boolean`
+
+This option determines whether to compress the metadata generated in the head tag of CSS files. This option defaults to `true` in `production` and `false` in `development` [mode](/configuration/mode/) respectively.
 
 ## output.devtoolFallbackModuleFilenameTemplate
 
@@ -669,9 +695,9 @@ T> In some contexts properties will use JavaScript code expressions instead of r
 
 `string = 'self'`
 
-When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
+When targeting a library, especially when `library.type` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
 
-The return value of your entry point will be assigned to the global object using the value of `output.library.name`. Depending on the value of the `target` option, the global object could change respectively, e.g., `self`, `global`, or `globalThis`.
+The return value of your entry point will be assigned to the global object using the value of `output.library.name`. Depending on the value of the `type` option, the global object could change respectively, e.g., `self`, `global`, or `globalThis`.
 
 For example:
 
@@ -681,8 +707,10 @@ For example:
 module.exports = {
   // ...
   output: {
-    library: 'myLib',
-    libraryTarget: 'umd',
+    library: {
+      name: 'myLib',
+      type: 'umd',
+    },
     filename: 'myLib.js',
     globalObject: 'this',
   },
@@ -812,6 +840,23 @@ module.exports = {
   //...
   output: {
     importFunctionName: '__import__',
+  },
+};
+```
+
+## output.importMetaName
+
+`string`
+
+The name of the native `import.meta` object (can be exchanged for a polyfill).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importMetaName: 'pseudoImport.meta',
   },
 };
 ```
@@ -1361,7 +1406,7 @@ Note that omitting `library.name` will result in the assignment of all propertie
 module.exports = {
   //...
   output: {
-    libraryTarget: 'umd',
+    type: 'umd',
   },
 };
 ```
@@ -2256,13 +2301,13 @@ require('module'); // <- also throws
 
 ## output.trustedTypes
 
-`boolean = false` `string` `object`
+`true` `string` `object`
 
 <Badge text="5.37.0+" />
 
 Controls [Trusted Types](https://web.dev/trusted-types) compatibility. When enabled, webpack will detect Trusted Types support and, if they are supported, use Trusted Types policies to create script URLs it loads dynamically. Use when the application runs under a [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) Content Security Policy directive.
 
-It defaults to `false` (no compatibility, script URLs are strings).
+It is disabled by default (no compatibility, script URLs are strings).
 
 - When set to `true`, webpack will use [`output.uniqueName`](#outputuniquename) as the Trusted Types policy name.
 - When set to a non-empty string, its value will be used as a policy name.
@@ -2343,7 +2388,7 @@ module.exports = {
 
 ## output.wasmLoading
 
-`boolean = false` `string`
+`false` `'fetch-streaming' | 'fetch' | 'async-node'` `string`
 
 Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
 
@@ -2357,6 +2402,21 @@ module.exports = {
   //...
   output: {
     wasmLoading: 'fetch',
+  },
+};
+```
+
+## output.webassemblyModuleFilename
+
+`string = '[hash].module.wasm'`
+
+Specifies the filename of WebAssembly modules. It should be provided as a relative path within the `output.path` directory
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    webassemblyModuleFilename: '[id].[hash].wasm',
   },
 };
 ```
@@ -2393,6 +2453,23 @@ module.exports = {
   //...
   output: {
     workerPublicPath: '/workerPublicPath2/',
+  },
+};
+```
+
+## output.workerWasmLoading
+
+`false` `'fetch-streaming' | 'fetch' | 'async-node'` `string`
+
+Option to set the method of loading WebAssembly Modules in workers, defaults to the value of [output.wasmLoading](#outputwasmloading).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    workerWasmLoading: 'fetch',
   },
 };
 ```

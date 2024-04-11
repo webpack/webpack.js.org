@@ -70,6 +70,8 @@ Update the following options to their new version (if used):
 - [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (deprecated since v3) → `Rule.options`/`UseEntry.options`
 - `Rule.loaders` → [`Rule.use`](/configuration/module/#ruleuse)
 
+T> Checkout the detailed changes in the configuration options [here](/blog/2020-10-10-webpack-5-release/#changes-to-the-configuration).
+
 ### Test webpack 5 compatibility
 
 Try to set the following options in your webpack 4 configuration and check if build still works correctly.
@@ -121,6 +123,28 @@ If you were not able to upgrade some plugins/loaders to the latest in Upgrade we
       plugins: [
           WebExtensionTarget(nodeConfig)
       ]
+  }
+  ```
+
+- If you have output.library or output.libraryTarget defined, change the property names: (output.libraryTarget -> output.library.type, output.library -> output.library.name). Example
+
+  ```json
+  // for webpack 4
+  {
+      output: {
+        library: 'MyLibrary',
+        libraryTarget: 'commonjs2'
+      }
+  }
+
+  // for webpack 5
+  {
+      output: {
+        library: {
+          name: 'MyLibrary',
+          type: 'commonjs2'
+        }
+      }
   }
   ```
 

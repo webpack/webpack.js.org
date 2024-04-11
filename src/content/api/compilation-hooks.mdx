@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - jamesgeorge007
+  - snitin315
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -29,6 +30,8 @@ compilation.hooks.someHook.tap(/* ... */);
 
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
+
+W> Since webpack 5, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
 
 ### buildModule
 
@@ -647,3 +650,97 @@ Executed after setting up a child compiler.
 ### normalModuleLoader
 
 Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
+
+### statsPreset
+
+`HookMap`
+
+This HookMap is like a list of actions that gets triggered when a preset is used. It takes in an options object. When a plugin manages a preset, it should change settings in this object carefully without replacing existing ones.
+
+- Callback Parameters: `options` `context`
+
+Here's an illustrative plugin example:
+
+```js
+compilation.hooks.statsPreset.for('my-preset').tap('MyPlugin', (options) => {
+  if (options.all === undefined) options.all = true;
+});
+```
+
+This plugin ensures that for the preset `'my-preset'`, if the `all` option is undefined, it defaults to true.
+
+### statsNormalize
+
+`SyncHook`
+
+This hook is used to transform an options object into a consistent format that can be easily used by subsequent hooks. It also ensures that missing options are set to their default values.
+
+- Callback Parameters: `options` `context`
+
+Here's an illustrative plugin example:
+
+```js
+compilation.hooks.statsNormalize.tap('MyPlugin', (options) => {
+  if (options.myOption === undefined) options.myOption = [];
+
+  if (!Array.isArray(options.myOption)) options.myOptions = [options.myOptions];
+});
+```
+
+In this plugin, if the `myOption` is missing, it sets it to an empty array. Additionally, it ensures that `myOption` is always an array even if it was originally defined as a single value.
+
+### statsFactory
+
+This hook provides access to the [`StatsFactory` class](https://github.com/webpack/webpack/blob/main/lib/stats/StatsFactory.js) for specific options.
+
+- Callback Parameters: `statsFactory` `options`
+
+#### StatsFactory.hooks.extract
+
+`HookMap`
+
+- Callback Parameters: `object` `data` `context`
+
+`data` contains the class. object is an object to which properties should be added. `context` provides contextual information, such as classes on the path.
+
+Example:
+
+```js
+compilation.hooks.statsFactory.tap('MyPlugin', (statsFactory, options) => {
+  statsFactory.hooks.extract
+    .for('compilation')
+    .tap('MyPlugin', (object, compilation) => {
+      object.customProperty = MyPlugin.getCustomValue(compilation);
+    });
+});
+```
+
+#### StatsFactory.hooks.result
+
+`HookMap`
+
+Called with the result on each level.
+
+- Callback Parameters: `result` `context`
+
+### statsPrinter
+
+This hook provides access to the [`StatsPrinter` class](https://github.com/webpack/webpack/blob/main/lib/stats/StatsPrinter.js) for specific options.
+
+- Callback Parameters: `statsPrinter` `options`
+
+#### StatsPrinter.hooks.print
+
+`HookMap`
+
+This hook is called when a part should be printed.
+
+- Callback Parameters: `object` `context`
+
+#### StatsPrinter.hooks.result
+
+`HookMap`
+
+This hook is called for the resulting string for a part.
+
+- Callback Parameters: `result` `context`
