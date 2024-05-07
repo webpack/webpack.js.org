@@ -26,6 +26,14 @@ Use the latest webpack version. We are always making performance improvements. T
 
 Staying up-to-date with **Node.js** can also help with performance. On top of this, keeping your package manager (e.g. `npm` or `yarn`) up-to-date can also help. Newer versions create more efficient module trees and increase resolving speed.
 
+### Use Rspack
+
+Rspack is a high performance Rust-based bundler that offers strong interoperability with the webpack ecosystem.
+
+It provides configuration options and APIs that are essentially the same as webpack, and can typically improve the build performance of webpack applications by 5 to 10 times.
+
+See [Rspack documentation](https://www.rspack.dev/) for more details.
+
 ### Loaders
 
 Apply loaders to the minimal number of modules necessary. Instead of:
