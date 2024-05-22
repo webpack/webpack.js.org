@@ -14,6 +14,7 @@ contributors:
   - pixel-ray
   - chenxsan
   - Roberto14
+  - hai-x
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -422,9 +423,9 @@ module.exports = {
 
 ## optimization.realContentHash
 
-`boolean = true`
+`boolean`
 
-Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical. By default `optimization.realContentHash` is enabled in production mode and disabled elsewise.
 
 **webpack.config.js**
 
