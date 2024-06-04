@@ -459,6 +459,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       globalThis<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from &#x27;...&#x27;).</span>
       module<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token comment">// Determines if the node: prefix is generated for core module imports in environments that support it.</span>
+      <span class="token comment">// This is only applicable to Webpack runtime code.</span>
+      nodePrefixForCoreModules<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports optional chaining (&#x27;obj?.a&#x27; or &#x27;obj?.()&#x27;).</span>
       optionalChaining<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports template literals.</span>
