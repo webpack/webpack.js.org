@@ -270,6 +270,59 @@ module.exports = {
 };
 ```
 
+### module.parser.css.namedExports
+
+This option enables the use of ES modules named export for CSS exports. When set to true, the CSS module will export its classes and styles using named exports.
+
+- Type: `boolean`
+- Available: 5.90.0+
+- Example:
+
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        css: {
+          namedExports: true,
+        },
+      },
+    },
+  };
+  ```
+
+When `namedExports` is `false` (default behavior) for CSS modules, you can retrieve CSS classes using various import methods.
+Named exports are redirected to improve developer experience (DX), facilitating a smooth transition from default exports to named exports:
+
+```js
+import * as styles from './styles.css';
+import styles1 from './styles.css';
+import { foo } from './styles.css';
+
+console.log(styles.default.foo); // Access via styles.default
+console.log(styles.foo); // Access directly from styles
+console.log(styles1.foo); // Access via default import styles1
+console.log(foo); // Direct named import
+```
+
+When `namedExports` is enabled, you can use **only** named exports to import CSS classes.
+
+```css
+/* styles.css */
+.header {
+  color: blue;
+}
+
+.footer {
+  color: green;
+}
+```
+
+```js
+import { header, footer } from './styles.css';
+```
+
+By enabling `namedExports`, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.
+
 ### module.parser.javascript
 
 Configure options for JavaScript parser.
