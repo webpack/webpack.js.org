@@ -620,7 +620,7 @@ You can use `--node-env` option to set `process.env.NODE_ENV`, which is availabl
 npx webpack --node-env production   # process.env.NODE_ENV = 'production'
 ```
 
-T> The `mode` option would respect the `--node-env` option if you don't set it explicitly, i.e. `--node-env production` would set both `process.env.NODE_ENV` and `mode` to `'production'`
+W> This option is deprecated and removed in v5 in favor of the `--define-process-env-node-env` option.
 
 ### define-process-env-node-env
 
@@ -632,7 +632,18 @@ An alias for [`--node-env`](/api/cli/#node-env) to set `process.env.NODE_ENV`:
 npx webpack --define-process-env-node-env production   # process.env.NODE_ENV = 'production'
 ```
 
-T> The `mode` option would respect the `--define-process-env-node-env` option if you don't set it explicitly, i.e. `--define-process-env-node-env production` would set both `process.env.NODE_ENV` and `mode` to `'production'`
+When the `mode` option is not specified in the configuration, you can use the `--define-process-env-node-env` option to set the `mode`. For example, using `--define-process-env-node-env production` will set both `process.env.NODE_ENV` and `mode` to `'production'`.
+
+If your configuration exports a function, the value of `--define-process-env-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--define-process-env-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
+
+```javascript
+module.exports = (env, argv) => {
+  console.log(argv.defineProcessEnvNodeEnv); // 'production' if --define-process-env-node-env production is used
+  return {
+    // your configuration
+  };
+};
+```
 
 ## Configuration Options
 
