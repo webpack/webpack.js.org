@@ -290,7 +290,7 @@ This option enables the use of ES modules named export for CSS exports. When set
   };
   ```
 
-When `namedExports` is `false` (default behavior) for CSS modules, you can retrieve CSS classes using various import methods.
+When `namedExports` is `false` for CSS modules, you can retrieve CSS classes using various import methods.
 Named exports are redirected to improve developer experience (DX), facilitating a smooth transition from default exports to named exports:
 
 ```js
@@ -304,7 +304,7 @@ console.log(styles1.foo); // Access via default import styles1
 console.log(foo); // Direct named import
 ```
 
-When `namedExports` is enabled, you can use **only** named exports to import CSS classes.
+When `namedExports` is enabled (default behavior), you can use **only** named exports to import CSS classes.
 
 ```css
 /* styles.css */
