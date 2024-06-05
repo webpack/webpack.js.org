@@ -236,7 +236,9 @@ The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract co
   };
 ```
 
-With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimizationsplitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. However, it's important to note that common dependencies are only extracted into a separate chunk if they meet the [size thresholds](/plugins/split-chunks-plugin/#splitchunksminsize) specified by webpack. Let's do an `npm run build` to see if it worked:
+With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimizationsplitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. However, it's important to note that common dependencies are only extracted into a separate chunk if they meet the [size thresholds](/plugins/split-chunks-plugin/#splitchunksminsize) specified by webpack.
+
+Let's do an `npm run build` to see if it worked:
 
 ```bash
 ...
