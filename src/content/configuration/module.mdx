@@ -294,9 +294,9 @@ When `namedExports` is `false` for CSS modules, you can retrieve CSS classes usi
 Named exports are redirected to improve developer experience (DX), facilitating a smooth transition from default exports to named exports:
 
 ```js
-import * as styles from './styles.css';
-import styles1 from './styles.css';
-import { foo } from './styles.css';
+import * as styles from './styles.module.css';
+import styles1 from './styles.module.css';
+import { foo } from './styles.module.css';
 
 console.log(styles.default.foo); // Access via styles.default
 console.log(styles.foo); // Access directly from styles
@@ -318,7 +318,7 @@ When `namedExports` is enabled (default behavior), you can use **only** named ex
 ```
 
 ```js
-import { header, footer } from './styles.css';
+import { header, footer } from './styles.module.css';
 ```
 
 By enabling `namedExports`, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.
