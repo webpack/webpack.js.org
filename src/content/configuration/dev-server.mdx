@@ -94,6 +94,25 @@ While it's recommended to run `webpack-dev-server` via the CLI, you may also cho
 
 See the related [API documentation for `webpack-dev-server`](/api/webpack-dev-server/).
 
+## devServer.app
+
+`function`
+
+Allows you to use custom server applications, such as `connect`, `fastify`, etc. The default application used is `express`.
+
+**webpack.config.js**
+
+```javascript
+const connect = require('connect');
+
+module.exports = {
+  //...
+  devServer: {
+    app: connect(),
+  },
+};
+```
+
 ## devServer.allowedHosts
 
 `'auto' | 'all'` `[string]`
