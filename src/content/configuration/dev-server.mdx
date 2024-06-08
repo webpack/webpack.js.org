@@ -108,7 +108,7 @@ const connect = require('connect');
 module.exports = {
   //...
   devServer: {
-    app: connect(),
+    app: () => connect(),
   },
 };
 ```
