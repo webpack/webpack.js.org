@@ -2093,6 +2093,8 @@ module.exports = {
 
 Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching/) for details.
 
+W> The path must not contain an exclamation mark (`!`) as it is reserved by webpack for [loader syntax](/concepts/loaders/#inline).
+
 ## output.pathinfo
 
 `boolean=true` `string: 'verbose'`
