@@ -12,7 +12,7 @@ describe('remark slug', () => {
 this is me.
 `,
         function (err, { value: contents }) {
-          expect(err).toBeNull();
+          expect(err).toBeUndefined();
           expect(contents).toMatchSnapshot();
         }
       );

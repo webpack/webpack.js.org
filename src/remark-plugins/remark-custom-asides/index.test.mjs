@@ -17,7 +17,7 @@ describe('customize blockquote', () => {
 W> hello world
 `,
         function (err, { value: contents }) {
-          expect(err).toBeNull();
+          expect(err).toBeUndefined();
           expect(contents).toContain('<aside class="warning"');
           expect(contents).toContain('<h6 class="warning__prefix"');
           expect(contents).toContain('warning');

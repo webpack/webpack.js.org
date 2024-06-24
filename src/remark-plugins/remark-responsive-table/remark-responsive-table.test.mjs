@@ -20,7 +20,7 @@ describe('responsive table', () => {
 | sam | chen |
       `,
       (error, { value: contents }) => {
-        expect(error).toBeNull();
+        expect(error).toBeUndefined();
         expect(contents).toContain('data-th="foo"');
         expect(contents).toContain('data-th="bar"');
         expect(contents).toContain('-');
@@ -37,7 +37,7 @@ describe('responsive table', () => {
 | sam | chen |
       `,
       (error, { value: contents }) => {
-        expect(error).toBeNull();
+        expect(error).toBeUndefined();
         expect(contents).toMatchSnapshot();
       }
     );
