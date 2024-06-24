@@ -8,7 +8,7 @@ import {
   Outlet,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MDXProvider } from '@mdx-js/react';
+import { MDXProvider, useMDXComponents } from '@mdx-js/react';
 
 // Import Utilities
 import {
@@ -177,8 +177,10 @@ function Site(props) {
     }
   }, [location, navigate]);
 
+  const components = useMDXComponents(mdxComponents);
+
   return (
-    <MDXProvider components={mdxComponents}>
+    <MDXProvider components={components}>
       <div className="site">
         <Helmet>
           <html lang="en" />
