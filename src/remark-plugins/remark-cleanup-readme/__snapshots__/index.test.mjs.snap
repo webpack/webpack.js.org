@@ -1,13 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cleanup readme should clean up div[align="center"] block with paragraph 1`] = `
-VFile {
-  "cwd": "/Users/samchen/Documents/GitHub/chenxsan/webpack.js.org",
-  "data": {},
-  "history": [],
-  "map": undefined,
-  "messages": [],
-  "value": "import {jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
+"import {jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
 function _createMdxContent(props) {
   const _components = {
     p: "p",
@@ -37,18 +31,11 @@ export default function MDXContent(props = {}) {
     })
   }) : _createMdxContent(props);
 }
-",
-}
+"
 `;
 
 exports[`cleanup readme should clean up div[align="center"] block without paragraph 1`] = `
-VFile {
-  "cwd": "/Users/samchen/Documents/GitHub/chenxsan/webpack.js.org",
-  "data": {},
-  "history": [],
-  "map": undefined,
-  "messages": [],
-  "value": "import {jsx as _jsx} from "react/jsx-runtime";
+"import {jsx as _jsx} from "react/jsx-runtime";
 function _createMdxContent(props) {
   return _jsx("div", {
     align: "center"
@@ -63,18 +50,11 @@ export default function MDXContent(props = {}) {
     })
   }) : _createMdxContent(props);
 }
-",
-}
+"
 `;
 
 exports[`cleanup readme should clean up nested div[align="center"] block  1`] = `
-VFile {
-  "cwd": "/Users/samchen/Documents/GitHub/chenxsan/webpack.js.org",
-  "data": {},
-  "history": [],
-  "map": undefined,
-  "messages": [],
-  "value": "import {jsx as _jsx} from "react/jsx-runtime";
+"import {jsx as _jsx} from "react/jsx-runtime";
 function _createMdxContent(props) {
   return _jsx("div", {
     align: "center"
@@ -89,6 +69,5 @@ export default function MDXContent(props = {}) {
     })
   }) : _createMdxContent(props);
 }
-",
-}
+"
 `;
