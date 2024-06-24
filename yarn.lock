@@ -1941,6 +1941,13 @@
     unist-util-visit "^5.0.0"
     vfile "^6.0.0"
 
+"@mdx-js/react@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-3.0.1.tgz#997a19b3a5b783d936c75ae7c47cfe62f967f746"
+  integrity sha512-9ZrPIU4MGf6et1m1ov3zKf+q9+deetI51zprKB1D/z3NOb+rUxxtEl3mCjW5wTGh6VhRdwPueh1oRzi6ezkA8A==
+  dependencies:
+    "@types/mdx" "^2.0.0"
+
 "@munter/tap-render@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@munter/tap-render/-/tap-render-0.2.0.tgz#41bdacccbdcaee5d6e35ad204f90bc71c501d44a"
