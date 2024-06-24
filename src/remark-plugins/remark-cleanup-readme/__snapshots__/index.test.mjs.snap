@@ -7,12 +7,12 @@ VFile {
   "history": [],
   "map": undefined,
   "messages": [],
-  "value": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
+  "value": "import {jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
 function _createMdxContent(props) {
-  const _components = Object.assign({
-    p: "p"
-  }, props.components);
+  const _components = {
+    p: "p",
+    ...props.components
+  };
   return _jsx("div", {
     align: "center",
     children: _jsx("p", {
@@ -28,13 +28,15 @@ function _createMdxContent(props) {
     })
   });
 }
-function MDXContent(props = {}) {
+export default function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = props.components || ({});
-  return MDXLayout ? _jsx(MDXLayout, Object.assign({}, props, {
-    children: _jsx(_createMdxContent, props)
-  })) : _createMdxContent(props);
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
 }
-export default MDXContent;
 ",
 }
 `;
@@ -46,20 +48,21 @@ VFile {
   "history": [],
   "map": undefined,
   "messages": [],
-  "value": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {jsx as _jsx} from "react/jsx-runtime";
+  "value": "import {jsx as _jsx} from "react/jsx-runtime";
 function _createMdxContent(props) {
   return _jsx("div", {
     align: "center"
   });
 }
-function MDXContent(props = {}) {
+export default function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = props.components || ({});
-  return MDXLayout ? _jsx(MDXLayout, Object.assign({}, props, {
-    children: _jsx(_createMdxContent, props)
-  })) : _createMdxContent(props);
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
 }
-export default MDXContent;
 ",
 }
 `;
@@ -71,20 +74,21 @@ VFile {
   "history": [],
   "map": undefined,
   "messages": [],
-  "value": "/*@jsxRuntime automatic @jsxImportSource react*/
-import {jsx as _jsx} from "react/jsx-runtime";
+  "value": "import {jsx as _jsx} from "react/jsx-runtime";
 function _createMdxContent(props) {
   return _jsx("div", {
     align: "center"
   });
 }
-function MDXContent(props = {}) {
+export default function MDXContent(props = {}) {
   const {wrapper: MDXLayout} = props.components || ({});
-  return MDXLayout ? _jsx(MDXLayout, Object.assign({}, props, {
-    children: _jsx(_createMdxContent, props)
-  })) : _createMdxContent(props);
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
 }
-export default MDXContent;
 ",
 }
 `;
