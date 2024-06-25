@@ -8,7 +8,6 @@ import {
   Outlet,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MDXProvider } from '@mdx-js/react';
 
 // Import Utilities
 import {
@@ -31,9 +30,6 @@ import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import Badge from '../Badge/Badge.js';
-import StackBlitzPreview from '../StackBlitzPreview/StackBlitzPreview';
-import { default as LinkComponent } from '../mdxComponents/Link';
 import { Helmet } from 'react-helmet-async';
 
 import Favicon from '../../favicon.ico';
@@ -48,12 +44,6 @@ import './Site.scss';
 import Content from '../../_content.json';
 
 import clientSideRedirections from './clientSideRedirections';
-
-const mdxComponents = {
-  Badge: Badge,
-  StackBlitzPreview: StackBlitzPreview,
-  a: LinkComponent,
-};
 
 Site.propTypes = {
   import: PropTypes.func,
@@ -178,131 +168,129 @@ function Site(props) {
   }, [location, navigate]);
 
   return (
-    <MDXProvider components={mdxComponents}>
-      <div className="site">
-        <Helmet>
-          <html lang="en" />
-          <meta charset="utf-8" />
-          <meta name="theme-color" content="#2B3A42" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          {isPrintPage(location.pathname) ? (
-            <meta name="robots" content="noindex,nofollow" />
-          ) : null}
-          <title>{title}</title>
-          <meta name="description" content={description} />
-          <meta property="og:site_name" content="webpack" />
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content={title} />
-          <meta
-            property="og:description"
-            name="description"
-            content={description}
-          />
-          <meta
-            property="og:image"
-            content={`https://webpack.js.org${OgImage}`}
-          />
-          <meta property="twitter:card" content="summary" />
-          <meta property="twitter:site" content="@webpack" />
-          <meta property="twitter:creator" content="@webpack" />
-          <meta property="twitter:domain" content="https://webpack.js.org/" />
-          <link rel="icon" type="image/x-icon" href={Favicon} />
-          {process.env.NODE_ENV === 'production' && (
-            <link rel="manifest" href="/manifest.json" />
-          )}
-          <link
-            rel="canonical"
-            href={`https://webpack.js.org${enforceTrailingSlash(
-              location.pathname
-            )}`}
-          />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <link rel="icon" sizes="192x192" href="/icon_192x192.png" />
-          <link rel="icon" sizes="512x512" href="/icon_512x512.png" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta name="apple-mobile-web-app-title" content="webpack" />
-          <link rel="apple-touch-icon" href="/icon_180x180.png" />
-          <link rel="mask-icon" href={Logo} color="#465e69" />
-          <meta name="msapplication-TileImage" content="/icon_150x150.png" />
-          <meta name="msapplication-TileColor" content="#465e69" />
-        </Helmet>
-        <div className="site__header">
-          <Navigation
-            pathname={location.pathname}
-            hash={location.hash}
-            toggleSidebar={_toggleSidebar}
-            links={[
-              {
-                content: 'Documentation',
-                url: '/concepts/',
-                isactive: (_, location) => {
-                  return /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
-                    location.pathname
-                  );
-                },
-                children: _strip(
-                  sections.filter(
-                    ({ name }) => excludeItems.includes(name) === false
-                  )
-                ),
-              },
-              { content: 'Contribute', url: '/contribute/' },
-              { content: 'Blog', url: '/blog/' },
-            ]}
-          />
-        </div>
-
-        {isClient ? (
-          <SidebarMobile
-            isOpen={mobileSidebarOpen}
-            sections={_strip(Content.children)}
-            toggle={_toggleSidebar}
-          />
+    <div className="site">
+      <Helmet>
+        <html lang="en" />
+        <meta charset="utf-8" />
+        <meta name="theme-color" content="#2B3A42" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {isPrintPage(location.pathname) ? (
+          <meta name="robots" content="noindex,nofollow" />
         ) : null}
-
-        <Routes>
-          <Route index element={<Splash />} />
-          <Route
-            element={
-              <Container className="site__content">
-                <Outlet />
-              </Container>
-            }
-          >
-            <Route path="app-shell" element={<Fragment />} />
-            {pages.map((page) => {
-              let path = page.path.replace('src/content/', '');
-              const { previous, next } = getAdjacentPages(
-                sidebarPages,
-                page,
-                'url'
-              );
-              return (
-                <Route
-                  key={page.url}
-                  path={page.url}
-                  element={
-                    <PageElement
-                      currentPage={location.pathname}
-                      sidebarPages={sidebarPages}
-                      page={page}
-                      next={next}
-                      previous={previous}
-                      import={props.import}
-                      path={path}
-                    />
-                  }
-                />
-              );
-            })}
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-        </Routes>
-        <Footer />
-        <NotificationBar />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:site_name" content="webpack" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta
+          property="og:description"
+          name="description"
+          content={description}
+        />
+        <meta
+          property="og:image"
+          content={`https://webpack.js.org${OgImage}`}
+        />
+        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:site" content="@webpack" />
+        <meta property="twitter:creator" content="@webpack" />
+        <meta property="twitter:domain" content="https://webpack.js.org/" />
+        <link rel="icon" type="image/x-icon" href={Favicon} />
+        {process.env.NODE_ENV === 'production' && (
+          <link rel="manifest" href="/manifest.json" />
+        )}
+        <link
+          rel="canonical"
+          href={`https://webpack.js.org${enforceTrailingSlash(
+            location.pathname
+          )}`}
+        />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="icon" sizes="192x192" href="/icon_192x192.png" />
+        <link rel="icon" sizes="512x512" href="/icon_512x512.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-mobile-web-app-title" content="webpack" />
+        <link rel="apple-touch-icon" href="/icon_180x180.png" />
+        <link rel="mask-icon" href={Logo} color="#465e69" />
+        <meta name="msapplication-TileImage" content="/icon_150x150.png" />
+        <meta name="msapplication-TileColor" content="#465e69" />
+      </Helmet>
+      <div className="site__header">
+        <Navigation
+          pathname={location.pathname}
+          hash={location.hash}
+          toggleSidebar={_toggleSidebar}
+          links={[
+            {
+              content: 'Documentation',
+              url: '/concepts/',
+              isactive: (_, location) => {
+                return /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
+                  location.pathname
+                );
+              },
+              children: _strip(
+                sections.filter(
+                  ({ name }) => excludeItems.includes(name) === false
+                )
+              ),
+            },
+            { content: 'Contribute', url: '/contribute/' },
+            { content: 'Blog', url: '/blog/' },
+          ]}
+        />
       </div>
-    </MDXProvider>
+
+      {isClient ? (
+        <SidebarMobile
+          isOpen={mobileSidebarOpen}
+          sections={_strip(Content.children)}
+          toggle={_toggleSidebar}
+        />
+      ) : null}
+
+      <Routes>
+        <Route index element={<Splash />} />
+        <Route
+          element={
+            <Container className="site__content">
+              <Outlet />
+            </Container>
+          }
+        >
+          <Route path="app-shell" element={<Fragment />} />
+          {pages.map((page) => {
+            let path = page.path.replace('src/content/', '');
+            const { previous, next } = getAdjacentPages(
+              sidebarPages,
+              page,
+              'url'
+            );
+            return (
+              <Route
+                key={page.url}
+                path={page.url}
+                element={
+                  <PageElement
+                    currentPage={location.pathname}
+                    sidebarPages={sidebarPages}
+                    page={page}
+                    next={next}
+                    previous={previous}
+                    import={props.import}
+                    path={path}
+                  />
+                }
+              />
+            );
+          })}
+          <Route path="*" element={<PageNotFound />} />
+        </Route>
+      </Routes>
+      <Footer />
+      <NotificationBar />
+    </div>
   );
 }
 export default Site;

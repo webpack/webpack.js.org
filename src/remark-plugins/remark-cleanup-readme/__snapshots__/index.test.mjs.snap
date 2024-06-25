@@ -1,40 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`cleanup readme should clean up div[align="center"] block with paragraph 1`] = `
-"/* @jsxRuntime classic */
-/* @jsx mdx */
-/* @jsxFrag mdx.Fragment */
-const MDXLayout = "wrapper";
-function MDXContent({components, ...props}) {
-  return <MDXLayout components={components} {...props}><div align="center"><p parentName="div"><h1 parentName="p">{"Imagemin Webpack"}</h1></p><p parentName="div"><p parentName="p">{"Plugin and Loader for "}<a href="http://webpack.js.org/" parentName="p">{"webpack"}</a>{" to optimize (compress) all images using "}<a href="https://github.com/imagemin/imagemin" parentName="p">{"imagemin"}</a>{".\\nDo not worry about size of images, now they are always optimized/compressed."}</p></p></div></MDXLayout>;
+"import {jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";
+function _createMdxContent(props) {
+  const _components = {
+    p: "p",
+    ...props.components
+  };
+  return _jsx("div", {
+    align: "center",
+    children: _jsx("p", {
+      children: _jsxs(_components.p, {
+        children: ["Plugin and Loader for ", _jsx("a", {
+          href: "http://webpack.js.org/",
+          children: "webpack"
+        }), " to optimize (compress) all images using ", _jsx("a", {
+          href: "https://github.com/imagemin/imagemin",
+          children: "imagemin"
+        }), ".\\nDo not worry about size of images, now they are always optimized/compressed."]
+      })
+    })
+  });
 }
-MDXContent.isMDXComponent = true;
-export default MDXContent;
+export default function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
 "
 `;
 
 exports[`cleanup readme should clean up div[align="center"] block without paragraph 1`] = `
-"/* @jsxRuntime classic */
-/* @jsx mdx */
-/* @jsxFrag mdx.Fragment */
-const MDXLayout = "wrapper";
-function MDXContent({components, ...props}) {
-  return <MDXLayout components={components} {...props}><div align="center" /></MDXLayout>;
+"import {jsx as _jsx} from "react/jsx-runtime";
+function _createMdxContent(props) {
+  return _jsx("div", {
+    align: "center"
+  });
 }
-MDXContent.isMDXComponent = true;
-export default MDXContent;
+export default function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
 "
 `;
 
 exports[`cleanup readme should clean up nested div[align="center"] block  1`] = `
-"/* @jsxRuntime classic */
-/* @jsx mdx */
-/* @jsxFrag mdx.Fragment */
-const MDXLayout = "wrapper";
-function MDXContent({components, ...props}) {
-  return <MDXLayout components={components} {...props}><div align="center" /></MDXLayout>;
+"import {jsx as _jsx} from "react/jsx-runtime";
+function _createMdxContent(props) {
+  return _jsx("div", {
+    align: "center"
+  });
 }
-MDXContent.isMDXComponent = true;
-export default MDXContent;
+export default function MDXContent(props = {}) {
+  const {wrapper: MDXLayout} = props.components || ({});
+  return MDXLayout ? _jsx(MDXLayout, {
+    ...props,
+    children: _jsx(_createMdxContent, {
+      ...props
+    })
+  }) : _createMdxContent(props);
+}
 "
 `;

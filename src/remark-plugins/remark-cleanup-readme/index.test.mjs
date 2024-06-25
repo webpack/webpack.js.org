@@ -1,4 +1,4 @@
-import mdx from '@mdx-js/mdx';
+import { compileSync } from '@mdx-js/mdx';
 import CleanupReadme from './index.mjs';
 describe('cleanup readme', () => {
   it('should clean up div[align="center"] block without paragraph', () => {
@@ -12,10 +12,10 @@ describe('cleanup readme', () => {
   </a>
 </div>
 `;
-    const html = mdx.sync(mdxText, {
+    const vfile = compileSync(mdxText, {
       remarkPlugins: [CleanupReadme],
     });
-    expect(html).toMatchSnapshot();
+    expect(vfile.value).toMatchSnapshot();
   });
 
   it('should clean up div[align="center"] block with paragraph', () => {
@@ -32,10 +32,10 @@ describe('cleanup readme', () => {
   </p>
 </div>
     `;
-    const html = mdx.sync(mdxText, {
+    const vfile = compileSync(mdxText, {
       remarkPlugins: [CleanupReadme],
     });
-    expect(html).toMatchSnapshot();
+    expect(vfile.value).toMatchSnapshot();
   });
 
   it('should clean up nested div[align="center"] block ', () => {
@@ -67,9 +67,9 @@ describe('cleanup readme', () => {
   </div>
 </div>
         `;
-    const html = mdx.sync(mdxText, {
+    const vfile = compileSync(mdxText, {
       remarkPlugins: [CleanupReadme],
     });
-    expect(html).toMatchSnapshot();
+    expect(vfile.value).toMatchSnapshot();
   });
 });
