@@ -86,7 +86,7 @@
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
-    "cypress": "^13.12.0",
+    "cypress": "^13.13.0",
     "directory-tree": "^3.5.1",
     "directory-tree-webpack-plugin": "^1.0.3",
     "duplexer": "^0.1.1",
@@ -139,7 +139,7 @@
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4",
-    "webpack-merge": "^5.10.0",
+    "webpack-merge": "^6.0.1",
     "workbox-webpack-plugin": "^7.1.0",
     "yarn-deduplicate": "^6.0.2"
   },
