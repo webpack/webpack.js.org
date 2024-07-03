@@ -15,11 +15,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 const Router = isProduction ? AnalyticsRouter : BrowserRouter;
 const container = document.getElementById('root');
 const JSX = () => (
-  <Router id="UA-46921629-2">
-    <HelmetProvider>
+  <HelmetProvider>
+    <Router id="UA-46921629-2">
       <App />
-    </HelmetProvider>
-  </Router>
+    </Router>
+  </HelmetProvider>
 );
 // Client Side Rendering
 if (isClient) {
