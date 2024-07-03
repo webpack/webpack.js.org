@@ -8,20 +8,17 @@ import App from './App.jsx';
 import './styles/tailwind.css';
 // Import helpers
 import { HelmetProvider } from 'react-helmet-async';
-import { StrictMode } from 'react';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const Router = isProduction ? AnalyticsRouter : BrowserRouter;
 const container = document.getElementById('root');
 const JSX = () => (
-  <StrictMode>
-    <Router id="UA-46921629-2">
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </Router>
-  </StrictMode>
+  <Router id="UA-46921629-2">
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
+  </Router>
 );
 if (isProduction) {
   hydrateRoot(container, <JSX />);
