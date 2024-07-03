@@ -306,9 +306,9 @@ For example, your entry looked like this:
 
 ```js
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
-ReactDOM.render(<App />, document.getElementById('root'));
+createRoot(document.getElementById('root')).render(<App />);
 ```
 
 Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
@@ -320,7 +320,7 @@ Let's create `bootstrap.js` file and move contents of the entry into it, and imp
 - import React from 'react';
 - import ReactDOM from 'react-dom';
 - import App from './App';
-- ReactDOM.render(<App />, document.getElementById('root'));
+- createRoot(document.getElementById('root')).render(<App />);
 ```
 
 **bootstrap.js**
@@ -329,7 +329,7 @@ Let's create `bootstrap.js` file and move contents of the entry into it, and imp
 + import React from 'react';
 + import ReactDOM from 'react-dom';
 + import App from './App';
-+ ReactDOM.render(<App />, document.getElementById('root'));
++ createRoot(document.getElementById('root')).render(<App />);
 ```
 
 This method works but can have limitations or drawbacks.

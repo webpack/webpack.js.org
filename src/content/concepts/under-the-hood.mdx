@@ -86,10 +86,12 @@ module.exports = {
 
 ```js
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import('./app.jsx').then((App) => {
-  ReactDOM.render(<App />, root);
+  const container = document.getElementById('app');
+  const root = createRoot(container);
+  root.render(<App />);
 });
 ```
 
@@ -116,7 +118,9 @@ import(
   /* webpackChunkName: "app" */
   './app.jsx'
 ).then((App) => {
-  ReactDOM.render(<App />, root);
+  const container = document.getElementById('app');
+  const root = createRoot(container);
+  root.render(<App />);
 });
 ```
 
