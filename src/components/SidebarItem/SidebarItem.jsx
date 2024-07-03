@@ -94,10 +94,10 @@ export default class SidebarItem extends Component {
     );
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.currentPage !== this.props.currentPage) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentPage !== this.props.currentPage) {
       this.setState({
-        open: this._isOpen(nextProps),
+        open: this._isOpen(this.props),
       });
     }
   }

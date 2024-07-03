@@ -9,17 +9,20 @@ import './styles/tailwind.css';
 // Import helpers
 import isClient from './utilities/is-client';
 import { HelmetProvider } from 'react-helmet-async';
+import { StrictMode } from 'react';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const Router = isProduction ? AnalyticsRouter : BrowserRouter;
 const container = document.getElementById('root');
 const JSX = () => (
-  <HelmetProvider>
-    <Router id="UA-46921629-2">
-      <App />
-    </Router>
-  </HelmetProvider>
+  <StrictMode>
+    <HelmetProvider>
+      <Router id="UA-46921629-2">
+        <App />
+      </Router>
+    </HelmetProvider>
+  </StrictMode>
 );
 // Client Side Rendering
 if (isClient) {
