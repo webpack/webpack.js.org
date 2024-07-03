@@ -8463,7 +8463,7 @@ longest-streak@^3.0.0:
   resolved "https://registry.yarnpkg.com/longest-streak/-/longest-streak-3.0.0.tgz#f127e2bded83caa6a35ac5f7a2f2b2f94b36f3dc"
   integrity sha512-XhUjWR5CFaQ03JOP+iSDS9koy8T5jfoImCZ4XprElw3BXsSk4MpVYOLw/6LTDKZhO13PlAXnB5gS4MHQTpkSOw==
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -10816,13 +10816,12 @@ raw-body@2.5.2:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-dom@^18.3.1:
-  version "18.3.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.3.1.tgz#c2265d79511b57d479b3dd3fdfa51536494c5cb4"
-  integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
+react-dom@^19.0.0-rc-100dfd7dab-20240701:
+  version "19.0.0-rc-100dfd7dab-20240701"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-19.0.0-rc-100dfd7dab-20240701.tgz#3e8a5866c801528d92d016befd4414d47c3d89e5"
+  integrity sha512-1VQkUQegr8ejWp6YANC6HAtS5L12Ym6cAFlPOOFvaY0tgfOf37dduR3iynsyRkxfEQi42D1HwTEyBi03KxuLOQ==
   dependencies:
-    loose-envify "^1.1.0"
-    scheduler "^0.23.2"
+    scheduler "0.25.0-rc-100dfd7dab-20240701"
 
 react-fast-compare@^3.2.0:
   version "3.2.0"
@@ -10907,12 +10906,10 @@ react-visibility-sensor@^5.0.2:
   dependencies:
     prop-types "^15.7.2"
 
-react@^18.3.1:
-  version "18.3.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-18.3.1.tgz#49ab892009c53933625bd16b2533fc754cab2891"
-  integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
-  dependencies:
-    loose-envify "^1.1.0"
+react@^19.0.0-rc-100dfd7dab-20240701:
+  version "19.0.0-rc-100dfd7dab-20240701"
+  resolved "https://registry.yarnpkg.com/react/-/react-19.0.0-rc-100dfd7dab-20240701.tgz#8d998f28f17b31229dc4925db86a912474a9a87b"
+  integrity sha512-qy+1N8lIy1TC1Tj5yhOW4EaRqVWHCtO94OjhxJYjTa6/lwn+ZI49D3Xk4RkdZyWDgclUK8HAALxhsgiHibowMQ==
 
 read-cache@^1.0.0:
   version "1.0.0"
@@ -11483,12 +11480,10 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.23.2:
-  version "0.23.2"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.23.2.tgz#414ba64a3b282892e944cf2108ecc078d115cdc3"
-  integrity sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==
-  dependencies:
-    loose-envify "^1.1.0"
+scheduler@0.25.0-rc-100dfd7dab-20240701:
+  version "0.25.0-rc-100dfd7dab-20240701"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.25.0-rc-100dfd7dab-20240701.tgz#14eb3d987db2d49345e1ab379818e583f4420425"
+  integrity sha512-aEBSd2lcLFsvlbWbwGXpttfGyMfyJjSvQ13o3kiSeCduKa8WlW5Go0b8c8hQ+p6CHLeXKWnKL+TC/vjbyFqSCw==
 
 schema-utils@^3.1.1, schema-utils@^3.2.0:
   version "3.3.0"
