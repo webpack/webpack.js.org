@@ -7,7 +7,6 @@ import App from './App.jsx';
 
 import './styles/tailwind.css';
 // Import helpers
-import isClient from './utilities/is-client';
 import { HelmetProvider } from 'react-helmet-async';
 import { StrictMode } from 'react';
 
@@ -24,12 +23,9 @@ const JSX = () => (
     </Router>
   </StrictMode>
 );
-// Client Side Rendering
-if (isClient) {
-  if (isProduction) {
-    hydrateRoot(container, <JSX />);
-  } else {
-    const root = createRoot(container);
-    root.render(<JSX />);
-  }
+if (isProduction) {
+  hydrateRoot(container, <JSX />);
+} else {
+  const root = createRoot(container);
+  root.render(<JSX />);
 }
