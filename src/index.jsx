@@ -7,6 +7,7 @@ import App from './App.jsx';
 
 import './styles/tailwind.css';
 // Import helpers
+import isClient from './utilities/is-client';
 import { HelmetProvider } from 'react-helmet-async';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -20,14 +21,12 @@ const JSX = () => (
     </HelmetProvider>
   </Router>
 );
-if (isProduction) {
-  // server side rendered in production
-  hydrateRoot(container, <JSX />, {
-    onRecoverableError: (error, errorInfo) => {
-      console.error(error, errorInfo);
-    },
-  });
-} else {
-  const root = createRoot(container);
-  root.render(<JSX />);
+// Client Side Rendering
+if (isClient) {
+  if (isProduction) {
+    hydrateRoot(container, <JSX />);
+  } else {
+    const root = createRoot(container);
+    root.render(<JSX />);
+  }
 }
