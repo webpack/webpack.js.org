@@ -3701,7 +3701,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="resolveunsafecache"></span>resolve.unsafeCache<a href="#resolveunsafecache" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p><code>RegExp</code> <code>[RegExp]</code> <code>boolean: true</code></p>
+<p><code>object</code> <code>boolean = true</code></p>
 <p>Enable aggressive, but <strong>unsafe</strong>, caching of modules. Passing <code>true</code> will cache everything.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -3710,12 +3710,30 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     unsafeCache<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:</p>
+<p>When an object is provided, webpack will use it as cache.</p>
+<p>For example, you can supply a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy object</a> instead of a regular one:</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre><code class="hljs language-js"><span class="token comment">// copied from discussion here https://github.com/webpack/webpack/discussions/18089</span>
+<span class="token keyword">const</span> realUnsafeCache <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> unsafeCacheHandler <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function">get</span><span class="token punctuation">(</span>cache<span class="token punctuation">,</span> key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> cachedValue <span class="token operator">=</span> cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// make sure the file exists on disk</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>cachedValue <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>fs<span class="token punctuation">.</span><span class="token function">existsSync</span><span class="token punctuation">(</span>cachedValue<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// and if it doesn&#x27;t, evict that cache entry.</span>
+      <span class="token keyword">delete</span> cache<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> cachedValue<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> theProxiedCache <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span>realUnsafeCache<span class="token punctuation">,</span> unsafeCacheHandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">//...</span>
   resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
-    unsafeCache<span class="token operator">:</span> <span class="token regex">/src\/utilities/</span><span class="token punctuation">,</span>
+    unsafeCache<span class="token operator">:</span> theProxiedCache<span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <aside class="warning"><h6 class="warning__prefix">warning</h6><p>Changes to cached paths may cause failure in rare cases.</p></aside>
