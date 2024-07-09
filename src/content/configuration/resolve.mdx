@@ -716,7 +716,7 @@ module.exports = {
 
 ### resolve.unsafeCache
 
-`RegExp` `[RegExp]` `boolean: true`
+`object` `boolean: true`
 
 Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything.
 
@@ -731,15 +731,34 @@ module.exports = {
 };
 ```
 
-A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
+When an object is provided, webpack will use it as cache.
+
+For example, you can supply a [Proxy object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) instead of regular one:
 
 **webpack.config.js**
 
 ```js
+// copied from discussion here https://github.com/webpack/webpack/discussions/18089
+const realUnsafeCache = {};
+const unsafeCacheHandler = {
+  get(cache, key) {
+    const cachedValue = cache[key];
+
+    // make sure the file exists on disk
+    if (cachedValue && !fs.existsSync(cachedValue.path)) {
+      // and if it doesn't, evict that cache entry.
+      delete cache[key];
+      return undefined;
+    }
+
+    return cachedValue;
+  },
+};
+const theProxiedCache = new Proxy(realUnsafeCache, unsafeCacheHandler);
 module.exports = {
   //...
   resolve: {
-    unsafeCache: /src\/utilities/,
+    unsafeCache: theProxiedCache,
   },
 };
 ```
