@@ -238,6 +238,8 @@ module.exports = {
         // Parser options for javascript modules
         // e.g, enable parsing of require.ensure syntax
         requireEnsure: true,
+        // Set the module to `'strict'` or `'non-strict'` mode. This can affect the module's behavior, as some behaviors differ between strict and non-strict modes.
+        overrideStrict: 'non-strict',
       },
       'javascript/auto': {
         // ditto
@@ -522,6 +524,26 @@ Enable/disable evaluating [`import.meta.webpackContext`](/api/module-variables/#
       parser: {
         javascript: {
           importMetaContext: true,
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.overrideStrict
+
+Set the module to `'strict'` or `'non-strict'` mode. This can affect the module's behavior, as some behaviors differ between strict and non-strict modes.
+
+- Type: `'strict' | 'non-strict'`
+- Available: 5.93.0+
+- Example:
+
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          overrideStrict: 'non-strict',
         },
       },
     },
