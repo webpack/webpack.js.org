@@ -2176,6 +2176,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token comment">// Parser options for javascript modules</span>
         <span class="token comment">// e.g, enable parsing of require.ensure syntax</span>
         requireEnsure<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token comment">// Set the module to `&#x27;strict&#x27;` or `&#x27;non-strict&#x27;` mode. This can affect the module&#x27;s behavior, as some behaviors differ between strict and non-strict modes.</span>
+        overrideStrict<span class="token operator">:</span> <span class="token string">&#x27;non-strict&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">&#x27;javascript/auto&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// ditto</span>
@@ -2456,6 +2458,28 @@ console<span class="token punctuation">.</span><span class="token function">log<
     parser<span class="token operator">:</span> <span class="token punctuation">{</span>
       javascript<span class="token operator">:</span> <span class="token punctuation">{</span>
         importMetaContext<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+</li>
+</ul>
+<h4><span id="moduleparserjavascriptoverridestrict"></span>module.parser.javascript.overrideStrict<a href="#moduleparserjavascriptoverridestrict" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
+<p>Set the module to <code>&#x27;strict&#x27;</code> or <code>&#x27;non-strict&#x27;</code> mode. This can affect the module&#x27;s behavior, as some behaviors differ between strict and non-strict modes.</p>
+<ul>
+<li>
+<p>Type: <code>&#x27;strict&#x27; | &#x27;non-strict&#x27;</code></p>
+</li>
+<li>
+<p>Available: 5.93.0+</p>
+</li>
+<li>
+<p>Example:</p>
+<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    parser<span class="token operator">:</span> <span class="token punctuation">{</span>
+      javascript<span class="token operator">:</span> <span class="token punctuation">{</span>
+        overrideStrict<span class="token operator">:</span> <span class="token string">&#x27;non-strict&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
