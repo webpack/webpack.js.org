@@ -53,13 +53,20 @@ If you are using legacy Babel v6, see the <a href="https://github.com/babel/babe
     <span class="token punctuation">}</span>
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span></code></pre>
+<p>The <code>options</code> passed here will be <a href="https://babeljs.io/docs/configuration#how-babel-merges-config-items">merged</a> with Babel config files, e.g. <code>babel.config.js</code> or <code>.babelrc</code>.</p>
 <p>This loader also supports the following loader-specific option:</p>
 <ul>
 <li>
 <p><code>cacheDirectory</code>: Default <code>false</code>. When set, the given directory will be used to cache the results of the loader. Future webpack builds will attempt to read from the cache to avoid needing to run the potentially expensive Babel recompilation process on each run. If the value is set to <code>true</code> in options (<code>{cacheDirectory: true}</code>), the loader will use the default cache directory in <code>node_modules/.cache/babel-loader</code> or fallback to the default OS temporary file directory if no <code>node_modules</code> folder could be found in any root directory.</p>
 </li>
 <li>
-<p><code>cacheIdentifier</code>: Default is a string composed by the <code>@babel/core</code>&#x27;s version, the <code>babel-loader</code>&#x27;s version, the contents of <code>.babelrc</code> file if it exists, and the value of the environment variable <code>BABEL_ENV</code> with a fallback to the <code>NODE_ENV</code> environment variable. This can be set to a custom value to force cache busting if the identifier changes.</p>
+<p><code>cacheIdentifier</code>: Default is a string composed by</p>
+<ul>
+<li>the <code>@babel/core</code>&#x27;s version and the <code>babel-loader</code>&#x27;s version</li>
+<li>the <a href="https://babeljs.io/docs/configuration#how-babel-merges-config-items">merged</a> <a href="https://babeljs.io/docs/config-files">Babel config</a>, including options passed to <code>babel-loader</code> and the contents of <code>babel.config.js</code> or <code>.babelrc</code> file if they exist</li>
+<li>the value of the environment variable <code>BABEL_ENV</code> with a fallback to the <code>NODE_ENV</code> environment variable.
+This can be set to a custom value to force cache busting if the identifier changes.</li>
+</ul>
 </li>
 <li>
 <p><code>cacheCompression</code>: Default <code>true</code>. When set, each Babel transform output will be compressed with Gzip. If you want to opt-out of cache compression, set it to <code>false</code> -- your project may benefit from this if it transpiles thousands of files.</p>
