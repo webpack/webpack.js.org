@@ -569,10 +569,11 @@ Example values: `'web'`, `'node'`
 
 <Badge text="5.27.0+" />
 
-Access to `contextify` and `absolutify` utilities.
+Access to the following utilities.
 
-- `contextify`: Return a new request string avoiding absolute paths when possible.
 - `absolutify`: Return a new request string using absolute paths when possible.
+- `contextify`: Return a new request string avoiding absolute paths when possible.
+- `createHash`: Return a new Hash object from provided hash function.
 
 **my-sync-loader.js**
 
@@ -583,6 +584,11 @@ module.exports = function (content) {
     this.utils.absolutify(this.context, './index.js')
   );
   this.utils.absolutify(this.context, this.resourcePath);
+  const mainHash = this.utils.createHash(
+    this._compilation.outputOptions.hashFunction
+  );
+  mainHash.update(content);
+  mainHash.digest("hex");
   // …
   return content;
 };
