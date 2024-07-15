@@ -588,7 +588,7 @@ module.exports = function (content) {
     this._compilation.outputOptions.hashFunction
   );
   mainHash.update(content);
-  mainHash.digest("hex");
+  mainHash.digest('hex');
   // …
   return content;
 };
