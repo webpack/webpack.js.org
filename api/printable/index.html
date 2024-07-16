@@ -1489,10 +1489,11 @@ Here is a Warning<span class="token operator">!</span>
 <p>Example values: <code>&#x27;web&#x27;</code>, <code>&#x27;node&#x27;</code></p>
 <h3><span id="thisutils"></span>this.utils<a href="#thisutils" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <span class="badge">5.27.0+</span>
-<p>Access to <code>contextify</code> and <code>absolutify</code> utilities.</p>
+<p>Access to the following utilities.</p>
 <ul>
-<li><code>contextify</code>: Return a new request string avoiding absolute paths when possible.</li>
 <li><code>absolutify</code>: Return a new request string using absolute paths when possible.</li>
+<li><code>contextify</code>: Return a new request string avoiding absolute paths when possible.</li>
+<li><code>createHash</code>: Return a new Hash object from provided hash function.</li>
 </ul>
 <p><strong>my-sync-loader.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">content</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1501,6 +1502,11 @@ Here is a Warning<span class="token operator">!</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span><span class="token function">absolutify</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">,</span> <span class="token string">&#x27;./index.js&#x27;</span><span class="token punctuation">)</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span><span class="token function">absolutify</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>resourcePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> mainHash <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>utils<span class="token punctuation">.</span><span class="token function">createHash</span><span class="token punctuation">(</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_compilation<span class="token punctuation">.</span>outputOptions<span class="token punctuation">.</span>hashFunction
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  mainHash<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  mainHash<span class="token punctuation">.</span><span class="token function">digest</span><span class="token punctuation">(</span><span class="token string">&#x27;hex&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token comment">// …</span>
   <span class="token keyword">return</span> content<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
