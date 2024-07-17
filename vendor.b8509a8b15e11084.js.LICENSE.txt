@@ -7,7 +7,7 @@ object-assign
 /*! https://mths.be/punycode v1.3.2 by @mathias */
 
 /**
- * @remix-run/router v1.17.1
+ * @remix-run/router v1.18.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -18,7 +18,7 @@ object-assign
  */
 
 /**
- * React Router DOM v6.24.1
+ * React Router DOM v6.25.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -29,7 +29,7 @@ object-assign
  */
 
 /**
- * React Router v6.24.1
+ * React Router v6.25.0
  *
  * Copyright (c) Remix Software Inc.
  *
