@@ -79,6 +79,7 @@ async function main() {
         } else {
           console.warn(e.message);
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (e2) {
         throw e;
       }

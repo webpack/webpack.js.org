@@ -83,7 +83,7 @@ function linkFixerFactory(sourceUrl) {
 function getMatches(string, regex) {
   const matches = [];
   let match;
-  // eslint-disable-next-line
+   
   while ((match = regex.exec(string))) {
     matches.push(match);
   }
