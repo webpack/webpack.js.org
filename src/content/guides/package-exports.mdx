@@ -67,6 +67,20 @@ Example:
 
 Here `package/things/apple` might be found in `.../package/good-things/apple` or in `.../package/bad-things/apple`.
 
+W> As of version 5.93.1, webpack's behavior has been updated to align with Node's behavior. It now selects the first valid path without attempting further resolutions and throws an error if the path cannot be resolved.
+
+For example, given the following configuration:
+
+```json
+{
+  "exports": {
+    ".": ["-bad-specifier-", "./non-existent.js", "./existent.js"]
+  }
+}
+```
+
+Webpack 5.93.1+ will now throw an error since `non-existent.js` is not found while the previous behavior would have resolved to `existent.js`.
+
 ## Conditional syntax
 
 Instead of providing results directly in the `exports` field,
