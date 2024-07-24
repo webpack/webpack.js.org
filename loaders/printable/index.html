@@ -6362,15 +6362,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p>We highly recommend using <a href="https://github.com/sass/dart-sass">Dart Sass</a>.</p>
+<p>We highly recommend using <a href="https://github.com/sass/embedded-host-node">Sass Embedded</a> or <a href="https://github.com/sass/dart-sass">Dart Sass</a>.</p>
 </blockquote>
 <blockquote>
 <p>[!WARNING]</p>
 <p><a href="https://github.com/sass/node-sass">Node Sass</a> does not work with <a href="https://classic.yarnpkg.com/en/docs/pnp/">Yarn PnP</a> and doesn&#x27;t support <a href="https://sass-lang.com/documentation/at-rules/use">@use rule</a>.</p>
-</blockquote>
-<blockquote>
-<p>[!WARNING]</p>
-<p><a href="https://github.com/sass/embedded-host-node">Sass Embedded</a> is experimental and in <code>beta</code>, therefore some features may not work</p>
 </blockquote>
 <p>Chain the <code>sass-loader</code> with the <a href="/loaders/css-loader/">css-loader</a> and the <a href="/loaders/style-loader/">style-loader</a> to immediately apply all styles to the DOM or the <a href="/plugins/mini-css-extract-plugin/">mini-css-extract-plugin</a> to extract it into a separate file.</p>
 <p>Then add the loader to your webpack configuration. For example:</p>
@@ -6440,8 +6436,8 @@ Writing <code>@import &quot;style.scss&quot;</code> is the same as <code>@import
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">implementation</span> <span class="token operator">=</span> object <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>sass</code></p>
 <p>The special <code>implementation</code> option determines which implementation of Sass to use.</p>
-<p>By default, the loader resolve the implementation based on your dependencies.
-Just add the desired implementation to your <code>package.json</code> (<code>sass</code> or <code>node-sass</code> package) and install dependencies.</p>
+<p>By default, the loader resolves the implementation based on your dependencies.
+Just add the desired implementation to your <code>package.json</code> (<code>sass</code>, <code>sass-embedded</code>, or <code>node-sass</code> package) and install dependencies.</p>
 <p>Example where the <code>sass-loader</code> loader uses the <code>sass</code> (<code>dart-sass</code>) implementation:</p>
 <p><strong>package.json</strong></p>
 <pre><code class="hljs language-json"><span class="token punctuation">{</span>
@@ -6458,11 +6454,31 @@ Just add the desired implementation to your <code>package.json</code> (<code>sas
     <span class="token property">&quot;node-sass&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^5.0.0&quot;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>Beware the situation where both <code>node-sass</code> and <code>sass</code> are installed! By default, the <code>sass-loader</code> prefers <code>sass</code>.
-In order to avoid this situation you can use the <code>implementation</code> option.</p>
-<p>The <code>implementation</code> options either accepts <code>sass</code> (<code>Dart Sass</code>) or <code>node-sass</code> as a module.</p>
+<p>Example where the <code>sass-loader</code> loader uses the <code>sass-embedded</code> implementation:</p>
+<p><strong>package.json</strong></p>
+<pre><code class="hljs language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;devDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;sass-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.2.0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;sass&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.22.10&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;optionalDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;sass-embedded&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.70.0&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p>[!NOTE]</p>
+<p>Using <code>optionalDependencies</code> means that <code>sass-loader</code> can fallback to <code>sass</code>
+when running on an operating system not supported by <code>sass-embedded</code></p>
+</blockquote>
+<p>Be aware of the order that <code>sass-loader</code> will resolve the implementation:</p>
+<ol>
+<li><code>sass-embedded</code></li>
+<li><code>sass</code></li>
+<li><code>node-sass</code></li>
+</ol>
+<p>You can specify a specific implementation by using the <code>implementation</code> option, which accepts one of the above values.</p>
 <h4><span id="object"></span><code>object</code><a href="#object" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>For example, to use Dart Sass, you&#x27;d pass:</p>
+<p>For example, to always use Dart Sass, you&#x27;d pass:</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -6474,7 +6490,7 @@ In order to avoid this situation you can use the <code>implementation</code> opt
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              <span class="token comment">// Prefer `dart-sass`</span>
+              <span class="token comment">// Prefer `dart-sass`, even if `sass-embedded` is available</span>
               implementation<span class="token operator">:</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -6496,7 +6512,7 @@ In order to avoid this situation you can use the <code>implementation</code> opt
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              <span class="token comment">// Prefer `dart-sass`</span>
+              <span class="token comment">// Prefer `dart-sass`, even if `sass-embedded` is available</span>
               implementation<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>

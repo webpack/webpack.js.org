@@ -24,15 +24,11 @@
 <p>This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p>We highly recommend using <a href="https://github.com/sass/dart-sass">Dart Sass</a>.</p>
+<p>We highly recommend using <a href="https://github.com/sass/embedded-host-node">Sass Embedded</a> or <a href="https://github.com/sass/dart-sass">Dart Sass</a>.</p>
 </blockquote>
 <blockquote>
 <p>[!WARNING]</p>
 <p><a href="https://github.com/sass/node-sass">Node Sass</a> does not work with <a href="https://classic.yarnpkg.com/en/docs/pnp/">Yarn PnP</a> and doesn&#x27;t support <a href="https://sass-lang.com/documentation/at-rules/use">@use rule</a>.</p>
-</blockquote>
-<blockquote>
-<p>[!WARNING]</p>
-<p><a href="https://github.com/sass/embedded-host-node">Sass Embedded</a> is experimental and in <code>beta</code>, therefore some features may not work</p>
 </blockquote>
 <p>Chain the <code>sass-loader</code> with the <a href="/loaders/css-loader/">css-loader</a> and the <a href="/loaders/style-loader/">style-loader</a> to immediately apply all styles to the DOM or the <a href="/plugins/mini-css-extract-plugin/">mini-css-extract-plugin</a> to extract it into a separate file.</p>
 <p>Then add the loader to your webpack configuration. For example:</p>
@@ -102,8 +98,8 @@ Writing <code>@import &quot;style.scss&quot;</code> is the same as <code>@import
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">implementation</span> <span class="token operator">=</span> object <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>sass</code></p>
 <p>The special <code>implementation</code> option determines which implementation of Sass to use.</p>
-<p>By default, the loader resolve the implementation based on your dependencies.
-Just add the desired implementation to your <code>package.json</code> (<code>sass</code> or <code>node-sass</code> package) and install dependencies.</p>
+<p>By default, the loader resolves the implementation based on your dependencies.
+Just add the desired implementation to your <code>package.json</code> (<code>sass</code>, <code>sass-embedded</code>, or <code>node-sass</code> package) and install dependencies.</p>
 <p>Example where the <code>sass-loader</code> loader uses the <code>sass</code> (<code>dart-sass</code>) implementation:</p>
 <p><strong>package.json</strong></p>
 <pre><code class="hljs language-json"><span class="token punctuation">{</span>
@@ -120,11 +116,31 @@ Just add the desired implementation to your <code>package.json</code> (<code>sas
     <span class="token property">&quot;node-sass&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^5.0.0&quot;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<p>Beware the situation where both <code>node-sass</code> and <code>sass</code> are installed! By default, the <code>sass-loader</code> prefers <code>sass</code>.
-In order to avoid this situation you can use the <code>implementation</code> option.</p>
-<p>The <code>implementation</code> options either accepts <code>sass</code> (<code>Dart Sass</code>) or <code>node-sass</code> as a module.</p>
+<p>Example where the <code>sass-loader</code> loader uses the <code>sass-embedded</code> implementation:</p>
+<p><strong>package.json</strong></p>
+<pre><code class="hljs language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;devDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;sass-loader&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.2.0&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;sass&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.22.10&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;optionalDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;sass-embedded&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.70.0&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p>[!NOTE]</p>
+<p>Using <code>optionalDependencies</code> means that <code>sass-loader</code> can fallback to <code>sass</code>
+when running on an operating system not supported by <code>sass-embedded</code></p>
+</blockquote>
+<p>Be aware of the order that <code>sass-loader</code> will resolve the implementation:</p>
+<ol>
+<li><code>sass-embedded</code></li>
+<li><code>sass</code></li>
+<li><code>node-sass</code></li>
+</ol>
+<p>You can specify a specific implementation by using the <code>implementation</code> option, which accepts one of the above values.</p>
 <h4><span id="object"></span><code>object</code><a href="#object" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>For example, to use Dart Sass, you&#x27;d pass:</p>
+<p>For example, to always use Dart Sass, you&#x27;d pass:</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -136,7 +152,7 @@ In order to avoid this situation you can use the <code>implementation</code> opt
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              <span class="token comment">// Prefer `dart-sass`</span>
+              <span class="token comment">// Prefer `dart-sass`, even if `sass-embedded` is available</span>
               implementation<span class="token operator">:</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -158,7 +174,7 @@ In order to avoid this situation you can use the <code>implementation</code> opt
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              <span class="token comment">// Prefer `dart-sass`</span>
+              <span class="token comment">// Prefer `dart-sass`, even if `sass-embedded` is available</span>
               implementation<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;sass&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -649,4 +665,4 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p>
 <p><a href="https://github.com/webpack-contrib/sass-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack-contrib/sass-loader/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/sass-loader/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/sass-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/postcss-loader/">postcss-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/style-loader/">style-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://gitter.im/webpack/webpack" target="_blank" rel="noopener noreferrer" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.b8509a8b15e11084.js"></script><script src="/index.000069d3f93e8f2d.js"></script></body>
+<p><a href="https://github.com/webpack-contrib/sass-loader/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/sass-loader/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/sass-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/postcss-loader/">postcss-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/style-loader/">style-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://gitter.im/webpack/webpack" target="_blank" rel="noopener noreferrer" class="footer__link">Gitter</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.b8509a8b15e11084.js"></script><script src="/index.4e9f8c7d2a003b53.js"></script></body>
