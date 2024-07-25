@@ -9,6 +9,7 @@ module.exports = function () {
   try {
     localStorage.setItem(test, test);
     localStorage.removeItem(test);
+    // eslint-disable-next-line no-unused-vars
   } catch (e) {
     return false;
   }
