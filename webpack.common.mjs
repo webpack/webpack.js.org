@@ -97,6 +97,7 @@ export default ({ ssg = false }) => ({
           {
             loader: 'sass-loader',
             options: {
+              api: 'legacy',
               sassOptions: {
                 includePaths: [path.join('./src/styles/partials')],
               },
