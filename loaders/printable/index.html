@@ -6905,7 +6905,7 @@ You can pass your own <code>importer</code> to solve this (see <a href="https://
 <h3><span id="api"></span><code>api</code><a href="#api" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">api</span> <span class="token operator">=</span> <span class="token string">&quot;legacy&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;modern&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;modern-compiler&quot;</span><span class="token punctuation">;</span></code></pre>
-<p>Default: <code>&quot;legacy&quot;</code></p>
+<p>Default: <code>&quot;modern&quot;</code> for <code>sass</code> (<code>dart-sass</code>) and <code>sass-embedded</code> or <code>&quot;legacy&quot;</code> for <code>node-sass</code></p>
 <p>Allows you to switch between the <code>legacy</code> and <code>modern</code> APIs. You can find more information <a href="https://sass-lang.com/documentation/js-api">here</a>. The <code>modern-compiler</code> option enables the modern API with support for <a href="https://github.com/sass/sass/blob/main/accepted/shared-resources.d.ts.md">Shared Resources</a>.</p>
 <blockquote>
 <p>[!NOTE]</p>
@@ -6927,7 +6927,7 @@ You can pass your own <code>importer</code> to solve this (see <a href="https://
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              api<span class="token operator">:</span> <span class="token string">&quot;modern&quot;</span><span class="token punctuation">,</span>
+              api<span class="token operator">:</span> <span class="token string">&quot;modern-compiler&quot;</span><span class="token punctuation">,</span>
               sassOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
                 <span class="token comment">// Your sass options</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>

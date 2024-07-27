@@ -3730,9 +3730,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h4><span id="query-parameters-only-squoosh-and-sharp-currently"></span>Query Parameters (only <code>squoosh</code> and <code>sharp</code> currently)<a href="#query-parameters-only-squoosh-and-sharp-currently" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>The plugin supports the following query parameters:</p>
 <ul>
-<li><code>width</code>/<code>w</code> - allows you to set the image width</li>
-<li><code>height</code>/<code>h</code> - allows you to set the image height</li>
-<li><code>as</code> - to specify the <a href="#preset">preset</a> option</li>
+<li>
+<p><code>width</code>/<code>w</code> - allows you to set the image width</p>
+</li>
+<li>
+<p><code>height</code>/<code>h</code> - allows you to set the image height</p>
+</li>
+<li>
+<p><code>as</code> - to specify the <a href="#preset">preset</a> option</p>
+<p><strong>Only supported for <code>sharp</code> currently:</strong></p>
+</li>
+<li>
+<p><code>unit</code>/<code>u</code> - can be <code>px</code> or <code>percent</code> and allows you to resize by a percentage of the image&#x27;s size.</p>
+</li>
 </ul>
 <p>Examples:</p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> myImage1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;image.png?width=150&amp;height=120&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -3742,7 +3752,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token comment">// It works with the `preset` query parameter</span>
 <span class="token keyword">const</span> myImage4 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;image.png?as=webp&amp;w=150&amp;h=120&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// You can use `auto` to reset `width` or `height` from the `preset` option</span>
-<span class="token keyword">const</span> myImage5 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;image.png?as=webp&amp;w=150&amp;h=auto&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<span class="token keyword">const</span> myImage5 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;image.png?as=webp&amp;w=150&amp;h=auto&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// You can use `unit` to get the non-retina resize of images that are retina sized</span>
+<span class="token keyword">const</span> myImage6 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;image.png?width=50&amp;unit=percent&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <pre><code class="hljs language-css"><span class="token selector">.class</span> <span class="token punctuation">{</span>
   <span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">&quot;./image.png?width=150&amp;height=120&quot;</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
@@ -4570,6 +4582,38 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>You can find more information <a href="https://github.com/GoogleChromeLabs/squoosh/tree/dev/libsquoosh">here</a>.</p>
+<p>For only <code>sharp</code> currently, you can even generate the non-retina resizes of images:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> ImageMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;image-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token string">&quot;...&quot;</span><span class="token punctuation">,</span>
+      <span class="token keyword">new</span> <span class="token class-name">ImageMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        generator<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token comment">// You can apply generator using `?as=webp-1x`, you can use any name and provide more options</span>
+            preset<span class="token operator">:</span> <span class="token string">&quot;webp-1x&quot;</span><span class="token punctuation">,</span>
+            implementation<span class="token operator">:</span> ImageMinimizerPlugin<span class="token punctuation">.</span>sharpGenerate<span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+              resize<span class="token operator">:</span> <span class="token punctuation">{</span>
+                enabled<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                width<span class="token operator">:</span> <span class="token number">50</span><span class="token punctuation">,</span>
+                unit<span class="token operator">:</span> <span class="token string">&quot;percent&quot;</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              encodeOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+                webp<span class="token operator">:</span> <span class="token punctuation">{</span>
+                  quality<span class="token operator">:</span> <span class="token number">90</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h4><span id="generator-example-for-user-defined-implementation"></span>Generator example for user defined implementation<a href="#generator-example-for-user-defined-implementation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>You can use your own generator implementation.</p>
 <p><strong>webpack.config.js</strong></p>
