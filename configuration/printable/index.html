@@ -2020,6 +2020,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       asset<span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// Generator options for asset modules</span>
 
+        <span class="token comment">// Indicates if this asset should be treated as binary. Set to &#x27;false&#x27; to handle it as text instead. Available since webpack 5.93.0</span>
+        binary<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+
         <span class="token comment">// The options for data url generator.</span>
         dataUrl<span class="token operator">:</span> <span class="token punctuation">{</span>
           <span class="token comment">// Asset encoding (defaults to &quot;base64&quot;)</span>
@@ -2049,6 +2052,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token string">&#x27;asset/inline&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// Generator options for asset/inline modules</span>
 
+        <span class="token comment">// Indicates if this asset should be treated as binary. Set to &#x27;false&#x27; to handle it as text instead. Available since webpack 5.93.0</span>
+        binary<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+
         <span class="token comment">// The options for data url generator.</span>
         dataUrl<span class="token operator">:</span> <span class="token punctuation">{</span>
           <span class="token comment">// Asset encoding (defaults to &quot;base64&quot;)</span>
@@ -2061,6 +2067,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">&#x27;asset/resource&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// Generator options for asset/resource modules</span>
+
+        <span class="token comment">// Indicates if this asset should be treated as binary. Set to &#x27;false&#x27; to handle it as text instead. Available since webpack 5.93.0</span>
+        binary<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
 
         <span class="token comment">// Emit an output asset from this asset module. This can be set to &#x27;false&#x27; to omit emitting e. g. for SSR.</span>
         <span class="token comment">// type: boolean</span>
