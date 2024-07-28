@@ -73,6 +73,9 @@ module.exports = {
       asset: {
         // Generator options for asset modules
 
+        // Indicates if this asset module should be treated as binary. Set to 'false' to handle it as text instead.
+        binary: false,
+
         // The options for data url generator.
         dataUrl: {
           // Asset encoding (defaults to "base64")
@@ -102,6 +105,9 @@ module.exports = {
       'asset/inline': {
         // Generator options for asset/inline modules
 
+        // Indicates if this asset module should be treated as binary. Set to 'false' to handle it as text instead.
+        binary: false,
+
         // The options for data url generator.
         dataUrl: {
           // Asset encoding (defaults to "base64")
@@ -114,6 +120,9 @@ module.exports = {
       },
       'asset/resource': {
         // Generator options for asset/resource modules
+
+        // Indicates if this asset module should be treated as binary. Set to 'false' to handle it as text instead.
+        binary: false,
 
         // Emit an output asset from this asset module. This can be set to 'false' to omit emitting e. g. for SSR.
         // type: boolean
