@@ -542,6 +542,7 @@ module<span class="token punctuation">.</span><span class="token function-variab
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If the <code>output.filename</code> is defined as a string contiaining placeholder such as <code>[name]</code>, <code>[id]</code>, [<code>contenthash</code>], or [<code>chunkhash</code>], the default value for <code>output.chunkFilename</code> will be derived from the <code>output.filename</code>. Otherwise, <code>[id].js</code> will be used as the default value.</p></aside>
 <h2><span id="outputchunkformat"></span>output.chunkFormat<a href="#outputchunkformat" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>false</code> <code>string: &#x27;array-push&#x27; | &#x27;commonjs&#x27; | &#x27;module&#x27; | &lt;any string&gt;</code></p>
 <p>The format of chunks (formats included by default are <code>&#x27;array-push&#x27;</code> (web/WebWorker), <code>&#x27;commonjs&#x27;</code> (node.js), <code>&#x27;module&#x27;</code> (ESM), but others might be added by plugins).</p>
@@ -814,7 +815,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Make sure to read the <a href="/guides/caching">Caching guide</a> for details. There are more steps involved than only setting this option.</p>
 <p>Note this option is called filename but you are still allowed to use something like <code>&#x27;js/[name]/bundle.js&#x27;</code> to create a folder structure.</p>
-<p>Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files, the <a href="#outputchunkfilename"><code>output.chunkFilename</code></a> option is used. Files created by loaders also aren&#x27;t affected. In this case, you would have to try the specific loader&#x27;s available options.</p>
+<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files, the <a href="#outputchunkfilename"><code>output.chunkFilename</code></a> option is used. Files created by loaders also aren&#x27;t affected. In this case, you would have to try the specific loader&#x27;s available options.</p></aside>
 <h3><span id="template-strings"></span>Template strings<a href="#template-strings" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>The following substitutions are available in template strings (via webpack&#x27;s internal <a href="https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js"><code>TemplatedPathPlugin</code></a>):</p>
 <p>Substitutions available on Compilation-level:</p>
