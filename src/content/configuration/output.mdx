@@ -169,7 +169,7 @@ module.exports = {
 };
 ```
 
-T> If the `output.filename` contains placeholder such as `[name]`, `[id]`, [`contenthash`], or [`chunkhash`], the default value for `output.chunkFilename` will be derived from the `output.filename`. Otherwise, `[id].js` will be used as the default value.
+T> If the `output.filename` is defined as a string contiaining placeholder such as `[name]`, `[id]`, [`contenthash`], or [`chunkhash`], the default value for `output.chunkFilename` will be derived from the `output.filename`. Otherwise, `[id].js` will be used as the default value.
 
 ## output.chunkFormat
 
@@ -602,7 +602,7 @@ Make sure to read the [Caching guide](/guides/caching) for details. There are mo
 
 Note this option is called filename but you are still allowed to use something like `'js/[name]/bundle.js'` to create a folder structure.
 
-Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files, the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case, you would have to try the specific loader's available options.
+T> Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files, the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case, you would have to try the specific loader's available options.
 
 ### Template strings
 
