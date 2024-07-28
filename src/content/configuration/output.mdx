@@ -169,6 +169,8 @@ module.exports = {
 };
 ```
 
+T> If the `output.filename` contains placeholder such as `[name]`, `[id]`, [`contenthash`], or [`chunkhash`], the default value for `output.chunkFilename` will be derived from the `output.filename`. Otherwise, `[id].js` will be used as the default value.
+
 ## output.chunkFormat
 
 `false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
