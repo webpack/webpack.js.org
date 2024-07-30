@@ -70,10 +70,10 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.24.9",
+    "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/preset-env": "^7.25.0",
+    "@babel/preset-env": "^7.25.2",
     "@babel/preset-react": "^7.24.7",
     "@eslint/compat": "^1.1.1",
     "@eslint/eslintrc": "^3.1.0",
