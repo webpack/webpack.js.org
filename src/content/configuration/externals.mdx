@@ -19,6 +19,7 @@ contributors:
   - kinetifex
   - anshumanv
   - SaulSilver
+  - fi3ework
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to **library developers**, however there are a variety of applications for it.
@@ -473,6 +474,103 @@ jq('.my-element').animate(/* ... */);
 ```
 
 Note that there will be an `import` statement in the output bundle.
+
+### externalsType.import
+
+Specify the default type of externals as `'import'`. Webpack will generate code like `import('...')` for externals used in a module.
+
+#### Example
+
+```javascript
+async function foo() {
+  const jq = await import('jQuery');
+  jq('.my-element').animate(/* ... */);
+}
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  externalsType: 'import',
+  externals: {
+    jquery: 'jquery',
+  },
+};
+```
+
+Will generate into something like
+
+```javascript
+var __webpack_modules__ = {
+  jQuery: (module) => {
+    module.exports = import('jQuery');
+  },
+};
+
+// webpack runtime...
+
+async function foo() {
+  const jq = await Promise.resolve(/* import() */).then(
+    __webpack_require__.bind(__webpack_require__, 'jQuery')
+  );
+  jq('.my-element').animate(/* ... */);
+}
+```
+
+Note that there will be an `import()` statement in the output bundle.
+
+### externalsType['module-import']
+
+Specify the default type of externals as `'module-import'`. This combines [`'module'`](#externalstypemodule) and [`'import'`](#externalstypeimport). Webpack will automatically detect the type of import syntax, setting it to `'module'` for static imports and `'import'` for dynamic imports.
+
+Make sure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first if static imports exist, otherwise webpack will throw errors.
+
+#### Example
+
+```javascript
+import { attempt } from 'lodash';
+
+async function foo() {
+  const jq = await import('jQuery');
+  attempt(() => jq('.my-element').animate(/* ... */));
+}
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  externalsType: 'import',
+  externals: {
+    jquery: 'jquery',
+  },
+};
+```
+
+Will generate into something like
+
+```javascript
+import * as __WEBPACK_EXTERNAL_MODULE_lodash__ from 'lodash';
+const lodash = __WEBPACK_EXTERNAL_MODULE_jquery__;
+
+var __webpack_modules__ = {
+  jQuery: (module) => {
+    module.exports = import('jQuery');
+  },
+};
+
+// webpack runtime...
+
+async function foo() {
+  const jq = await Promise.resolve(/* import() */).then(
+    __webpack_require__.bind(__webpack_require__, 'jQuery')
+  );
+  (0, lodash.attempt)(() => jq('.my-element').animate(/* ... */));
+}
+```
+
+Note that there will be an `import` or `import()` statement in the output bundle.
 
 ### externalsType.node-commonjs
 
