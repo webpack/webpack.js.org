@@ -13,7 +13,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import '@docsearch/css';
 
 import GithubIcon from '../../styles/icons/github.svg';
-import TwitterIcon from '../../styles/icons/twitter.svg';
+import XIcon from '../../styles/icons/x.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 import Hamburger from '../../styles/icons/hamburger.svg';
 import HelloDarkness from '../HelloDarkness';
@@ -130,9 +130,9 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 children: <GithubIcon {...navigationIconProps} />,
               },
               {
-                to: 'https://twitter.com/webpack',
-                title: 'Twitter',
-                children: <TwitterIcon {...navigationIconProps} />,
+                to: 'https://x.com/webpack',
+                title: 'X',
+                children: <XIcon {...navigationIconProps} />,
               },
               {
                 to: 'https://stackoverflow.com/questions/tagged/webpack',
