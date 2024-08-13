@@ -7320,7 +7320,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
     plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>NormalModuleReplacementPlugin</span><span class="token punctuation">(</span>
-        <span class="token regex">/(.*)-APP_TARGET(\.*)/</span><span class="token punctuation">,</span>
+        <span class="token regex">/-APP_TARGET$/</span><span class="token punctuation">,</span>
         <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">resource</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
           resource<span class="token punctuation">.</span>request <span class="token operator">=</span> resource<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>
             <span class="token regex">/-APP_TARGET/</span><span class="token punctuation">,</span>
