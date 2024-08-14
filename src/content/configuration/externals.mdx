@@ -354,6 +354,8 @@ Supported types:
 - `'import'` - uses `import()` to load a native EcmaScript module (async module)
 - `'jsonp'`
 - [`'module'`](#externalstypemodule)
+- [`'import'`](#externalstypeimport)
+- [`'module-import'`](#externalstypemodule-import)
 - [`'node-commonjs'`](#externalstypenode-commonjs)
 - [`'promise'`](#externalstypepromise) - same as `'var'` but awaits the result (async module)
 - [`'self'`](#externalstypeself)
@@ -520,7 +522,7 @@ async function foo() {
 
 Note that there will be an `import()` statement in the output bundle.
 
-### externalsType['module-import']
+### externalsType.module-import
 
 Specify the default type of externals as `'module-import'`. This combines [`'module'`](#externalstypemodule) and [`'import'`](#externalstypeimport). Webpack will automatically detect the type of import syntax, setting it to `'module'` for static imports and `'import'` for dynamic imports.
 
@@ -571,6 +573,14 @@ async function foo() {
 ```
 
 Note that there will be an `import` or `import()` statement in the output bundle.
+
+When a module is not imported via `import` or `import()`, webpack will determine which type of external to use as fallback based on the configuration of [`externalsPresets`](#externalspresets). When one of the previous `externalsPresets` type is enabled, the following `externalsPresets` type will no longer apply. The order is listed below.
+
+- When `externalsPresets.web` is `true`, use `module`.
+- When `externalsPresets.webAsync` is `true`, use `import`.
+- When node.js related (`electron`, `electronMain`, `electronPreload`, `electronRenderer`, `node`, `nwjs`) externalsPresets is true, use `node-commonjs`.
+
+When none of the above `externalsPresets` type is enabled or can be derived, webpack will use `commonjs` as the default type.
 
 ### externalsType.node-commonjs
 
