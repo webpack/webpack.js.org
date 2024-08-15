@@ -673,9 +673,9 @@ It can be leveraged to connect remote containers to a host container dynamically
         // we can now resolve this Promise
         const proxy = {
           get: (request) =&gt; window.app1.get(request),
-          init: (arg) =&gt; {
+          init: (...arg) =&gt; {
             try {
-              return window.app1.init(arg)
+              return window.app1.init(...arg)
             } catch(e) {
               console.log(&#x27;remote container already initialized&#x27;)
             }
