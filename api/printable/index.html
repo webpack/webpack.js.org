@@ -1821,7 +1821,8 @@ logging<span class="token punctuation">.</span><span class="token function">conf
 <h5><span id="webpackexclude"></span><code>webpackExclude</code><a href="#webpackexclude" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>A regular expression that will be matched against during import resolution. Any module that matches <strong>will not be bundled</strong>.</p>
 <aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that <code>webpackInclude</code> and <code>webpackExclude</code> options do not interfere with the prefix. eg: <code>./locale</code>.</p></aside>
-<p><code>webpackExports</code>: tells webpack to only bundle the specified exports of a dynamically <code>import()</code>ed module. It can decrease the output size of a chunk. Available since <a href="https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18">webpack 5.0.0-beta.18</a>.</p>
+<h5><span id="webpackexports"></span><code>webpackExports</code><a href="#webpackexports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
+<p>Tells webpack to only bundle the specified exports of a dynamically <code>import()</code>ed module. It can decrease the output size of a chunk. Available since <a href="https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18">webpack 5.0.0-beta.18</a>.</p>
 <h2><span id="commonjs"></span>CommonJS<a href="#commonjs" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The goal of CommonJS is to specify an ecosystem for JavaScript outside the browser. The following CommonJS methods are supported by webpack:</p>
 <h3><span id="require"></span>require<a href="#require" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
