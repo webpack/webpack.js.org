@@ -722,6 +722,35 @@ The order of evaluation is as follows:
 2. [`rules`](#rulerules)
 3. [`oneOf`](#ruleoneof)
 
+## Rule.assert
+
+A [`Condition`](#condition) that allows you to match the import assertion of a dependency and apply specific rules based on the assertion type.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        // Handles imports with the assertion "assert { type: 'json' }"
+        assert: { type: 'json' },
+        loader: require.resolve('./loader-assert.js'),
+      },
+    ],
+  },
+};
+```
+
+**index.js**
+
+```javascript
+import one from './pkg-1.json' assert { type: 'json' };
+```
+
+In this example, `Rule.assert` is used to apply `loader-assert.js` to any module imported with the assertion `assert { type: "json" }`, ensuring that JSON files are processed correctly.
+
 ## Rule.enforce
 
 `string`
