@@ -6299,6 +6299,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token function">jq</span><span class="token punctuation">(</span><span class="token string">&#x27;.my-element&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Note that there will be an <code>import</code> statement in the output bundle.</p>
 <h3><span id="externalstypeimport"></span>externalsType.import<a href="#externalstypeimport" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
+<span class="badge">5.94.0+</span>
 <p>Specify the default type of externals as <code>&#x27;import&#x27;</code>. Webpack will generate code like <code>import(&#x27;...&#x27;)</code> for externals used in a module.</p>
 <h4><span id="example-3"></span>Example<a href="#example-3" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <pre><code class="hljs language-javascript"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -6329,6 +6330,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span></code></pre>
 <p>Note that the output bundle will have an <code>import()</code> statement.</p>
 <h3><span id="externalstypemodule-import"></span>externalsType.module-import<a href="#externalstypemodule-import" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
+<span class="badge">5.94.0+</span>
 <p>Specify the default type of externals as <code>&#x27;module-import&#x27;</code>. This combines <a href="#externalstypemodule"><code>&#x27;module&#x27;</code></a> and <a href="#externalstypeimport"><code>&#x27;import&#x27;</code></a>. Webpack will automatically detect the type of import syntax, setting it to <code>&#x27;module&#x27;</code> for static imports and <code>&#x27;import&#x27;</code> for dynamic imports.</p>
 <p>Ensure to enable <a href="/configuration/experiments/#experimentsoutputmodule"><code>experiments.outputModule</code></a> first if static imports exist, otherwise, webpack will throw errors.</p>
 <h4><span id="example-4"></span>Example<a href="#example-4" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
