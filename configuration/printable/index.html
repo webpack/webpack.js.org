@@ -1076,7 +1076,7 @@ The passed object will have this type: (properties available depending on contex
 <ul>
 <li>
 <p>Type: <code>string</code></p>
-<p>Types included by default are <code>&#x27;var&#x27;</code>, <code>&#x27;module&#x27;</code>, <code>&#x27;assign&#x27;</code>, <code>&#x27;assign-properties&#x27;</code>, <code>&#x27;this&#x27;</code>, <code>&#x27;window&#x27;</code>, <code>&#x27;self&#x27;</code>, <code>&#x27;global&#x27;</code>, <code>&#x27;commonjs&#x27;</code>, <code>&#x27;commonjs2&#x27;</code>, <code>&#x27;commonjs-module&#x27;</code>, <code>&#x27;commonjs-static&#x27;</code>, <code>&#x27;amd&#x27;</code>, <code>&#x27;amd-require&#x27;</code>, <code>&#x27;umd&#x27;</code>, <code>&#x27;umd2&#x27;</code>, <code>&#x27;jsonp&#x27;</code> and <code>&#x27;system&#x27;</code>, but others might be added by plugins.</p>
+<p>Types included by default are <code>&#x27;var&#x27;</code>, <code>&#x27;module&#x27;</code>, <code>&#x27;modern-module&#x27;</code>, <code>&#x27;assign&#x27;</code>, <code>&#x27;assign-properties&#x27;</code>, <code>&#x27;this&#x27;</code>, <code>&#x27;window&#x27;</code>, <code>&#x27;self&#x27;</code>, <code>&#x27;global&#x27;</code>, <code>&#x27;commonjs&#x27;</code>, <code>&#x27;commonjs2&#x27;</code>, <code>&#x27;commonjs-module&#x27;</code>, <code>&#x27;commonjs-static&#x27;</code>, <code>&#x27;amd&#x27;</code>, <code>&#x27;amd-require&#x27;</code>, <code>&#x27;umd&#x27;</code>, <code>&#x27;umd2&#x27;</code>, <code>&#x27;jsonp&#x27;</code> and <code>&#x27;system&#x27;</code>, but others might be added by plugins.</p>
 </li>
 </ul>
 <p>For the following examples, we&#x27;ll use <code>_entry_return_</code> to indicate the values returned by the entry point.</p>
@@ -1213,6 +1213,22 @@ global<span class="token punctuation">.</span>MyLibrary<span class="token punctu
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Output ES Module.</p>
 <p>However this feature is still experimental and not fully supported yet, so make sure to enable <a href="/configuration/experiments/">experiments.outputModule</a> beforehand. In addition, you can track the development progress in <a href="https://github.com/webpack/webpack/issues/2933#issuecomment-774253975">this thread</a>.</p>
+<h5><span id="type-modern-module"></span>type: &#x27;modern-module&#x27;<a href="#type-modern-module" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
+<span class="badge">v5.93.0+</span>
+<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// …</span>
+  experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
+    outputModule<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  output<span class="token operator">:</span> <span class="token punctuation">{</span>
+    library<span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token comment">// do not specify a `name` here</span>
+      type<span class="token operator">:</span> <span class="token string">&#x27;modern-module&#x27;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>This configuration generates tree-shakable output for ES Modules.</p>
+<p>However this feature is still experimental and not fully supported yet, so make sure to enable <a href="/configuration/experiments/">experiments.outputModule</a> beforehand.</p>
 <h5><span id="type-commonjs2"></span>type: &#x27;commonjs2&#x27;<a href="#type-commonjs2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// …</span>
