@@ -1503,6 +1503,37 @@ module.exports = {
 
 W> `resolve.fullySpecified` doesn't affect requests from [mainFields](/configuration/resolve/#resolvemainfields), [aliasFields](/configuration/resolve/#resolvealiasfields) or [aliases](/configuration/resolve/#resolvealias).
 
+## Rule.with
+
+<Badge text="v5.92.0+" />
+
+A [`Condition`](#condition) that allows you to match the imports based on specific conditions provided with the `with` keyword, enabling different rules to be applied based on the content type.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        // Handles imports with the condition "with { type: 'json' }"
+        with: { type: 'json' },
+        loader: require.resolve('./loader-assert.js'),
+      },
+    ],
+  },
+};
+```
+
+**index.js**
+
+```javascript
+import one from './pkg-1.json' with { type: 'json' };
+```
+
+In this example, `Rule.with` is used to apply `loader-assert.js` to any module imported with the condition `with { type: "json" }`.
+
 ## Condition
 
 Conditions can be one of these:
