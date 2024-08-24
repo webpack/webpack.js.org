@@ -479,6 +479,8 @@ Note that there will be an `import` statement in the output bundle.
 
 ### externalsType.import
 
+<Badge text="5.94.0+" />
+
 Specify the default type of externals as `'import'`. Webpack will generate code like `import('...')` for externals used in a module.
 
 #### Example
@@ -523,6 +525,8 @@ async function foo() {
 Note that the output bundle will have an `import()` statement.
 
 ### externalsType.module-import
+
+<Badge text="5.94.0+" />
 
 Specify the default type of externals as `'module-import'`. This combines [`'module'`](#externalstypemodule) and [`'import'`](#externalstypeimport). Webpack will automatically detect the type of import syntax, setting it to `'module'` for static imports and `'import'` for dynamic imports.
 
