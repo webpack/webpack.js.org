@@ -734,7 +734,7 @@ module.exports = {
   module: {
     rules: [
       {
-        // Handles imports with the assertion type "json"
+        // Handles imports with the assertion "assert { type: 'json' }"
         assert: { type: 'json' },
         loader: require.resolve('./loader-assert.js'),
       },
