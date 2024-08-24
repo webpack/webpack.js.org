@@ -194,6 +194,8 @@ T> Note that `webpackInclude` and `webpackExclude` options do not interfere with
 
 Tells webpack to only bundle the specified exports of a dynamically `import()`ed module. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
+W> `webpackExports` cannot be used with destructuring assignments.
+
 ## CommonJS
 
 The goal of CommonJS is to specify an ecosystem for JavaScript outside the browser. The following CommonJS methods are supported by webpack:
