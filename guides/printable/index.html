@@ -4491,6 +4491,14 @@ In such a scenario this list is tried in order and the first valid result will b
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <p>Here <code>package/things/apple</code> might be found in <code>.../package/good-things/apple</code> or in <code>.../package/bad-things/apple</code>.</p>
+<aside class="warning"><h6 class="warning__prefix">warning</h6><p>As of version 5.94.0, webpack&#x27;s behavior has been updated to align with Node&#x27;s behavior. It now selects the first valid path without attempting further resolutions and throws an error if the path cannot be resolved.</p></aside>
+<p>For example, given the following configuration:</p>
+<pre><code class="hljs language-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;.&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;-bad-specifier-&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./non-existent.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./existent.js&quot;</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Webpack 5.94.0+ will now throw an error since <code>non-existent.js</code> is not found while the previous behavior would have resolved to <code>existent.js</code>.</p>
 <h2><span id="conditional-syntax"></span>Conditional syntax<a href="#conditional-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Instead of providing results directly in the <code>exports</code> field,
 the package author may let the module system choose one based on conditions about the environment.</p>
