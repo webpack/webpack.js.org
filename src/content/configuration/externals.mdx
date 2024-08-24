@@ -501,7 +501,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+Will generate something like below:
 
 ```javascript
 var __webpack_modules__ = {
@@ -520,13 +520,13 @@ async function foo() {
 }
 ```
 
-Note that there will be an `import()` statement in the output bundle.
+Note that the output bundle will have an `import()` statement.
 
 ### externalsType.module-import
 
 Specify the default type of externals as `'module-import'`. This combines [`'module'`](#externalstypemodule) and [`'import'`](#externalstypeimport). Webpack will automatically detect the type of import syntax, setting it to `'module'` for static imports and `'import'` for dynamic imports.
 
-Make sure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first if static imports exist, otherwise webpack will throw errors.
+Ensure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first if static imports exist, otherwise, webpack will throw errors.
 
 #### Example
 
@@ -550,7 +550,7 @@ module.exports = {
 };
 ```
 
-Will generate into something like
+Will generate something like below:
 
 ```javascript
 import * as __WEBPACK_EXTERNAL_MODULE_lodash__ from 'lodash';
@@ -572,9 +572,9 @@ async function foo() {
 }
 ```
 
-Note that there will be an `import` or `import()` statement in the output bundle.
+Note that the output bundle will have an `import` or `import()` statement.
 
-When a module is not imported via `import` or `import()`, webpack will use `"module"` externals type as fallback. If you want to use a different type of externals as fallback, you can specify it with a function in the `externals` option. For example:
+When a module is not imported via `import` or `import()`, webpack will use the `"module"` externals type as a fallback. If you want to use a different kind of externals as a fallback, you can specify it with a function in the `externals` option. For example:
 
 ```js
 module.exports = {
