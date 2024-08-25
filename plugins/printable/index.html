@@ -7319,15 +7319,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token keyword">var</span> appTarget <span class="token operator">=</span> env<span class="token punctuation">.</span><span class="token constant">APP_TARGET</span> <span class="token operator">||</span> <span class="token string">&#x27;VERSION_A&#x27;</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
     plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>NormalModuleReplacementPlugin</span><span class="token punctuation">(</span>
-        <span class="token regex">/-APP_TARGET$/</span><span class="token punctuation">,</span>
-        <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">resource</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          resource<span class="token punctuation">.</span>request <span class="token operator">=</span> resource<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>
-            <span class="token regex">/-APP_TARGET/</span><span class="token punctuation">,</span>
-            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>appTarget<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
-          <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>NormalModuleReplacementPlugin</span><span class="token punctuation">(</span><span class="token regex">/-APP_TARGET$/</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>
+        <span class="token parameter">resource</span>
+      <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        resource<span class="token punctuation">.</span>request <span class="token operator">=</span> resource<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span>
+          <span class="token regex">/-APP_TARGET/</span><span class="token punctuation">,</span>
+          <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>appTarget<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>resource<span class="token punctuation">.</span>createData<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          resource<span class="token punctuation">.</span>createData<span class="token punctuation">.</span>request <span class="token operator">=</span> resource<span class="token punctuation">.</span>request<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-      <span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
