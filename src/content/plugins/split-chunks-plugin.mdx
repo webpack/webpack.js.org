@@ -262,7 +262,7 @@ Providing a string or a function allows you to use a custom name. Specifying eit
 
 If you choose to specify a function, you may find the `chunk.name` property (where `chunk` is an element of the `chunks` array) particularly useful in choosing a name for your chunk.
 
-If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
+If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry-point chunk & the cache group will be combined into a single chunk.
 
 T> `splitChunks.cacheGroups.{cacheGroup}.name` can be used to move modules into a chunk that is a parent of the source chunk. For example, use `name: "entry-name"` to move modules into the `entry-name` chunk. You can also use on demand named chunks, but you must be careful that the selected modules are only used under this chunk.
 
