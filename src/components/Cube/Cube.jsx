@@ -69,7 +69,7 @@ export default class Cube extends Component {
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
-              transform: `translateX(-50%)
+              transform: `translateX(-50%) translateY(2px)
             scale3d(0.5,0.5,0.5)
             rotateX(${-x}deg)
             rotateY(${-y}deg)
