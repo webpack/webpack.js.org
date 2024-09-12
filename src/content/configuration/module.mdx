@@ -751,6 +751,33 @@ import one from './pkg-1.json' assert { type: 'json' };
 
 In this example, `Rule.assert` is used to apply `loader-assert.js` to any module imported with the assertion `assert { type: "json" }`, ensuring that JSON files are processed correctly.
 
+## Rule.compiler
+
+A [`Condition`](#condition) that allows you to match the child compiler name.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  name: "compiler"
+  module: {
+    rules: [
+			{
+				test: /a\.js$/,
+				compiler: "compiler", // Matches the "compiler" name, loader will be applied
+				use: "./loader"
+			},
+			{
+				test: /b\.js$/,
+				compiler: "other-compiler", // Does not match the "compiler" name, loader will NOT be applied
+				use: "./loader"
+			}
+		]
+  },
+};
+```
+
 ## Rule.enforce
 
 `string`
