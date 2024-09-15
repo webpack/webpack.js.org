@@ -235,37 +235,36 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
 
     ```ts
     {
-    // define a custom backend
-    backend?: ((
-      compiler: Compiler,
-      callback: (err?: Error, api?: BackendApi) => void
+      // define a custom backend
+      backend?: ((
+        compiler: Compiler,
+        callback: (err?: Error, api?: BackendApi) => void
       ) => void)
-      | ((compiler: Compiler) => Promise<BackendApi>)
-      | {
-        /**
-         * A custom client.
-        */
-        client?: string;
+        | ((compiler: Compiler) => Promise<BackendApi>)
+        | {
+          /**
+           * A custom client.
+           */
+          client?: string;
 
-        /**
-         * Specify where to listen to from the server.
-         */
-        listen?: number | ListenOptions | ((server: Server) => void);
+          /**
+           * Specify where to listen to from the server.
+           */
+          listen?: number | ListenOptions | ((server: Server) => void);
 
-        /**
-         * Specify the protocol the client should use to connect to the server.
-         */
-        protocol?: "http" | "https";
+          /**
+           * Specify the protocol the client should use to connect to the server.
+           */
+          protocol?: "http" | "https";
 
-        /**
-         * Specify how to create the server handling the EventSource requests.
-         */
-        server?: ServerOptionsImport | ServerOptionsHttps | (() => Server);
-
-    },
-    entries?: boolean,
-    imports?: boolean,
-    test?: string | RegExp | ((module: Module) => boolean)
+          /**
+           * Specify how to create the server handling the EventSource requests.
+           */
+          server?: ServerOptionsImport | ServerOptionsHttps | (() => Server);
+        },
+      entries?: boolean,
+      imports?: boolean,
+      test?: string | RegExp | ((module: Module) => boolean)
     }
     ```
 
