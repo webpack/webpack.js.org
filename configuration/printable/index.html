@@ -2665,20 +2665,20 @@ For example, when building a project for <code>&#x27;browser&#x27;</code> <a hre
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  name<span class="token operator">:</span> <span class="token string">&quot;compiler&quot;</span>
+  name<span class="token operator">:</span> <span class="token string">&#x27;compiler&#x27;</span><span class="token punctuation">,</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
-			<span class="token punctuation">{</span>
-				test<span class="token operator">:</span> <span class="token regex">/a\.js$/</span><span class="token punctuation">,</span>
-				compiler<span class="token operator">:</span> <span class="token string">&quot;compiler&quot;</span><span class="token punctuation">,</span> <span class="token comment">// Matches the &quot;compiler&quot; name, loader will be applied</span>
-				use<span class="token operator">:</span> <span class="token string">&quot;./loader&quot;</span>
-			<span class="token punctuation">}</span><span class="token punctuation">,</span>
-			<span class="token punctuation">{</span>
-				test<span class="token operator">:</span> <span class="token regex">/b\.js$/</span><span class="token punctuation">,</span>
-				compiler<span class="token operator">:</span> <span class="token string">&quot;other-compiler&quot;</span><span class="token punctuation">,</span> <span class="token comment">// Does not match the &quot;compiler&quot; name, loader will NOT be applied</span>
-				use<span class="token operator">:</span> <span class="token string">&quot;./loader&quot;</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">]</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/a\.js$/</span><span class="token punctuation">,</span>
+        compiler<span class="token operator">:</span> <span class="token string">&#x27;compiler&#x27;</span><span class="token punctuation">,</span> <span class="token comment">// Matches the &quot;compiler&quot; name, loader will be applied</span>
+        use<span class="token operator">:</span> <span class="token string">&#x27;./loader&#x27;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/b\.js$/</span><span class="token punctuation">,</span>
+        compiler<span class="token operator">:</span> <span class="token string">&#x27;other-compiler&#x27;</span><span class="token punctuation">,</span> <span class="token comment">// Does not match the &quot;compiler&quot; name, loader will NOT be applied</span>
+        use<span class="token operator">:</span> <span class="token string">&#x27;./loader&#x27;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="ruleenforce"></span>Rule.enforce<a href="#ruleenforce" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -7694,37 +7694,36 @@ exists for imports inside CSS files.</p>
 <li>
 <p><code>object</code></p>
 <pre><code class="hljs language-ts"><span class="token punctuation">{</span>
-<span class="token comment">// define a custom backend</span>
-backend<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-  compiler<span class="token operator">:</span> Compiler<span class="token punctuation">,</span>
-  <span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span>err<span class="token operator">?</span><span class="token operator">:</span> Error<span class="token punctuation">,</span> api<span class="token operator">?</span><span class="token operator">:</span> BackendApi<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+  <span class="token comment">// define a custom backend</span>
+  backend<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
+    compiler<span class="token operator">:</span> Compiler<span class="token punctuation">,</span>
+    <span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span>err<span class="token operator">?</span><span class="token operator">:</span> Error<span class="token punctuation">,</span> api<span class="token operator">?</span><span class="token operator">:</span> BackendApi<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span>
-  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>compiler<span class="token operator">:</span> Compiler<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>BackendApi<span class="token operator">&gt;</span><span class="token punctuation">)</span>
-  <span class="token operator">|</span> <span class="token punctuation">{</span>
-    <span class="token comment">/**
-     * A custom client.
-    */</span>
-    client<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+    <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>compiler<span class="token operator">:</span> Compiler<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>BackendApi<span class="token operator">&gt;</span><span class="token punctuation">)</span>
+    <span class="token operator">|</span> <span class="token punctuation">{</span>
+      <span class="token comment">/**
+       * A custom client.
+       */</span>
+      client<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 
-    <span class="token comment">/**
-     * Specify where to listen to from the server.
-     */</span>
-    listen<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> ListenOptions <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>server<span class="token operator">:</span> Server<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">/**
+       * Specify where to listen to from the server.
+       */</span>
+      listen<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> ListenOptions <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>server<span class="token operator">:</span> Server<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token comment">/**
-     * Specify the protocol the client should use to connect to the server.
-     */</span>
-    protocol<span class="token operator">?</span><span class="token operator">:</span> <span class="token string">&quot;http&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">;</span>
+      <span class="token comment">/**
+       * Specify the protocol the client should use to connect to the server.
+       */</span>
+      protocol<span class="token operator">?</span><span class="token operator">:</span> <span class="token string">&quot;http&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">;</span>
 
-    <span class="token comment">/**
-     * Specify how to create the server handling the EventSource requests.
-     */</span>
-    server<span class="token operator">?</span><span class="token operator">:</span> ServerOptionsImport <span class="token operator">|</span> ServerOptionsHttps <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Server<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token punctuation">}</span><span class="token punctuation">,</span>
-entries<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-imports<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-test<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token operator">:</span> Module<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
+      <span class="token comment">/**
+       * Specify how to create the server handling the EventSource requests.
+       */</span>
+      server<span class="token operator">?</span><span class="token operator">:</span> ServerOptionsImport <span class="token operator">|</span> ServerOptionsHttps <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> Server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  entries<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
+  imports<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
+  test<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token operator">:</span> Module<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span></code></pre>
 <ul>
 <li><code>backend</code>: Customize the backend.</li>
