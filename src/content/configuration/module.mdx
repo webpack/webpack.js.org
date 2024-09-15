@@ -760,20 +760,20 @@ A [`Condition`](#condition) that allows you to match the child compiler name.
 ```javascript
 module.exports = {
   // ...
-  name: "compiler"
+  name: 'compiler',
   module: {
     rules: [
-			{
-				test: /a\.js$/,
-				compiler: "compiler", // Matches the "compiler" name, loader will be applied
-				use: "./loader"
-			},
-			{
-				test: /b\.js$/,
-				compiler: "other-compiler", // Does not match the "compiler" name, loader will NOT be applied
-				use: "./loader"
-			}
-		]
+      {
+        test: /a\.js$/,
+        compiler: 'compiler', // Matches the "compiler" name, loader will be applied
+        use: './loader',
+      },
+      {
+        test: /b\.js$/,
+        compiler: 'other-compiler', // Does not match the "compiler" name, loader will NOT be applied
+        use: './loader',
+      },
+    ],
   },
 };
 ```
