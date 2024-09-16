@@ -148,7 +148,7 @@
     "yarn-deduplicate": "^6.0.2"
   },
   "dependencies": {
-    "@docsearch/react": "^3.0.0-alpha.50",
+    "@docsearch/react": "^3.6.1",
     "@react-spring/web": "^9.7.4",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.8.1",
