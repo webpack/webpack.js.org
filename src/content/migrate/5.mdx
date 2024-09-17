@@ -39,20 +39,23 @@ Webpack 5 requires at least Node.js 10.13.0 (LTS), so make sure you upgrade your
 
 ## Codemods
 
-To assist with the upgrade from Webpack v4 to v5, we have provided a community codemod that can help automate parts of the migration process. Please note that this codemod is not an official Webpack tool, and while it aims to streamline the migration, it may not cover all cases. You may still need to perform additional manual steps to fully complete the upgrade. Run the following command to use the codemod for Webpack v5 migration:
+To assist with the upgrade from webpack v4 to v5, [Codemod](https://github.com/codemod-com/codemod) provides open-source community codemods that can help automate most of the migration process.
+
+Please note that these are not official webpack codemods, and while it aims to streamline the migration, it may not cover all cases. You may still need to perform additional manual steps to fully complete the upgrade.
+
+Run the [webpack v5 migration codemods](https://go.codemod.com/webpack-v5-recipe):
 
 ```bash
 npx codemod webpack/v5/migration-recipe
 ```
 
-This will run the following codemods from the webpack Codemod repository:
+This will run the following codemods from [Codemod registry](https://codemod.com/registry):
 
-- **webpack/v5/set-target-to-false-and-update-plugins**
-- **webpack/v5/migrate-library-target-to-library-object**
-- **webpack/v5/json-imports-to-default-imports**
+- [`webpack/v5/set-target-to-false-and-update-plugins`](https://go.codemod.com/webpack-set-target-false)
+- [`webpack/v5/migrate-library-target-to-library-object`](https://go.codemod.com/webpack-migrate-library-target)
+- [`webpack/v5/json-imports-to-default-imports`](https://go.codemod.com/webpack-json-imports)
 
-Each of these codemods automates the changes listed in the v5 migration guide. For a complete list of available webpack codemods and further details, see the [codemod registry](https://codemod.com/registry?q=webpack).
-
+Each of these codemods automates a change listed in the webpack v5 migration guide. For a complete list of available webpack v5 codemods, see [Codemod Registry](https://go.codemod.com/webpack-v5).
 
 ### Make sure your build has no errors or warnings
 
