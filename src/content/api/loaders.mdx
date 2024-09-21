@@ -393,25 +393,25 @@ module.exports = function (source) {
 
 `string`
 
-The algorithm used for the hash.
+The encoding to use when generating the hash. See [output.hashDigest](/configuration/output/#outputhashdigest).
 
 ### this.hashDigestLength
 
 `number`
 
-The length of the hash.
+The prefix length of the hash digest to use. See [output.hashDigestLength](/configuration/output/#outputhashdigestlength).
 
 ### this.hashFunction
 
-`string`
+`string` `function`
 
-The hash function used.
+The hashing algorithm to use. See [output.hashFunction](/configuration/output/#outputhashfunction).
 
 ### this.hashSalt
 
 `string`
 
-The salt used for the hash.
+An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding). See [output.hashSalt](/configuration/output/#outputhashsalt).
 
 ### this.importModule
 
