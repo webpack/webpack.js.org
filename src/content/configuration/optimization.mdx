@@ -124,15 +124,15 @@ module.exports = {
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
-## optimization.entryIife
+## optimization.avoidEntryIife
 
 `boolean = false`
 
-Use `optimization.entryIife` to avoid wrapping the entry module in an IIFE when it is required (search for `"This entry need to be wrapped in an IIFE because"` in [JavascriptModulesPlugin](https://github.com/webpack/webpack/blob/main/lib/javascript/JavascriptModulesPlugin.js)). This approach helps optimize performance for JavaScript engines and enables tree shaking when building ESM libraries.
+Use `optimization.avoidEntryIife` to avoid wrapping the entry module in an IIFE when it is required (search for `"This entry need to be wrapped in an IIFE because"` in [JavascriptModulesPlugin](https://github.com/webpack/webpack/blob/main/lib/javascript/JavascriptModulesPlugin.js)). This approach helps optimize performance for JavaScript engines and enables tree shaking when building ESM libraries.
 
-Currently, `optimization.entryIife` can only optimize a single entry module along with other modules.
+Currently, `optimization.avoidEntryIife` can only optimize a single entry module along with other modules.
 
-By default `optimization.entryIife` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+By default `optimization.avoidEntryIife` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
 **webpack.config.js**
 
@@ -140,12 +140,12 @@ By default `optimization.entryIife` is enabled in `production` [mode](/configura
 module.exports = {
   //...
   optimization: {
-    entryIife: true,
+    avoidEntryIife: true,
   },
 };
 ```
 
-W> The `⁠optimization.entryIife` option can negatively affect build performance, if you prioritize build performance over these optimizations, consider disabling this option.
+W> The `⁠optimization.avoidEntryIife` option can negatively affect build performance, if you prioritize build performance over these optimizations, consider disabling this option.
 
 ## optimization.flagIncludedChunks
 
