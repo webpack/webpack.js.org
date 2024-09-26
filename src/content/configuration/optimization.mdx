@@ -128,6 +128,8 @@ W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit 
 
 `boolean = false`
 
+<Badge text="5.95.0+" />
+
 Use `optimization.avoidEntryIife` to avoid wrapping the entry module in an IIFE when it is required (search for `"This entry need to be wrapped in an IIFE because"` in [JavascriptModulesPlugin](https://github.com/webpack/webpack/blob/main/lib/javascript/JavascriptModulesPlugin.js)). This approach helps optimize performance for JavaScript engines and enables tree shaking when building ESM libraries.
 
 Currently, `optimization.avoidEntryIife` can only optimize a single entry module along with other modules.
