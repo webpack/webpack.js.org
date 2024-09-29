@@ -124,6 +124,31 @@ module.exports = {
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
+## optimization.avoidEntryIife
+
+`boolean = false`
+
+<Badge text="5.95.0+" />
+
+Use `optimization.avoidEntryIife` to avoid wrapping the entry module in an IIFE when it is required (search for `"This entry needs to be wrapped in an IIFE because"` in [JavascriptModulesPlugin](https://github.com/webpack/webpack/blob/main/lib/javascript/JavascriptModulesPlugin.js)). This approach helps optimize performance for JavaScript engines and enables tree shaking when building ESM libraries.
+
+Currently, `optimization.avoidEntryIife` can only optimize a single entry module along with other modules.
+
+By default, `optimization.avoidEntryIife` is enabled in `production` [mode](/configuration/mode/) and disabled otherwise.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    avoidEntryIife: true,
+  },
+};
+```
+
+W> The `⁠optimization.avoidEntryIife` option can negatively affect build performance, if you prioritize build performance over these optimizations, consider disabling this option.
+
 ## optimization.flagIncludedChunks
 
 `boolean`
@@ -425,7 +450,7 @@ module.exports = {
 
 `boolean`
 
-Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical. By default `optimization.realContentHash` is enabled in production mode and disabled elsewise.
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical. By default `optimization.realContentHash` is enabled in production [mode](/configuration/mode/) and disabled otherwise.
 
 **webpack.config.js**
 
