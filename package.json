@@ -130,7 +130,7 @@
     "remark-html": "^16.0.1",
     "remark-refractor": "montogeek/remark-refractor",
     "rimraf": "^6.0.1",
-    "sass": "^1.79.3",
+    "sass": "^1.79.4",
     "sass-loader": "^16.0.2",
     "sirv-cli": "^2.0.2",
     "sitemap-static": "^0.4.2",
