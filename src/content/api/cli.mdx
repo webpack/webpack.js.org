@@ -71,16 +71,16 @@ npx webpack build --config ./webpack.config.js --stats verbose
 
 ### Init
 
-Used to initialize a new webpack project.
+Used to initialize a new webpack project using `@webpack-cli/create-webpack-app`.
 
 ```bash
-npx webpack init [generation-path] [options]
+npx create-webpack-app init [generation-path] [options]
 ```
 
 **example**
 
 ```bash
-npx webpack init ./my-app --force --template=default
+npx create-webpack-app init ./my-app --force --template=default
 ```
 
 #### Generation Path
@@ -101,20 +101,25 @@ Name of template to generate.
 
 To generate a project without questions. When enabled, the default answer for each question will be used.
 
-T> See the [full documentation of `webpack init` command](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md).
+#### Templates supported
+
+- `--template=default` - Default template with basic configuration.
+- `--template=react` - Template with React configuration.
+- `--template=vue` - Template with Vue configuration.
+- `--template=svelte` - Template with Svelte configuration.`
 
 ### Loader
 
 Scaffold a loader.
 
 ```bash
-npx webpack loader [output-path] [options]
+npx create-webpack-app loader [output-path] [options]
 ```
 
 **example**
 
 ```bash
-npx webpack loader ./my-loader --template=default
+npx create-webpack-app loader ./my-loader --template=default
 ```
 
 #### Output Path
@@ -134,13 +139,13 @@ Type of template.
 Scaffold a plugin.
 
 ```bash
-npx webpack plugin [output-path] [options]
+npx create-webpack-app plugin [output-path] [options]
 ```
 
 **example**
 
 ```bash
-npx webpack plugin ./my-plugin --template=default
+npx create-webpack-app plugin ./my-plugin --template=default
 ```
 
 #### Output Path
@@ -154,6 +159,8 @@ Path to the output directory, e.g. `./plugin-name`.
 `string = 'default'`
 
 Type of template.
+
+T> See the [full documentation of `create-webpack-app`](https://github.com/webpack/webpack-cli/blob/master/packages/create-webpack-app/README.md).
 
 ### Info
 
