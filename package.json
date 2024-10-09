@@ -101,7 +101,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "front-matter": "^4.0.2",
     "github-slugger": "^2.0.0",
-    "globals": "^15.10.0",
+    "globals": "^15.11.0",
     "html-webpack-plugin": "^5.5.4",
     "http-server": "^14.1.1",
     "husky": "^9.1.6",
