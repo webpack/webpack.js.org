@@ -422,7 +422,7 @@ This option determines the module's namespace used with the [`output.devtoolModu
 
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`. 
 
-This option also accepts template strings like `[name]` to dynamically generate the namespace.
+You can use template strings like `[name]` to dynamically generate namespaces based on the build context, providing additional flexibility.
 
 **webpack.config.js**
 
@@ -433,7 +433,7 @@ module.exports = {
     filename: "[name]-bundle.js",
 		library: "library-[name]",
 		libraryTarget: "commonjs",
-		devtoolNamespace: "library-[name]"
+		devtoolNamespace: "library-[name]" // Sets a unique namespace for each library
   },
 };
 ```
