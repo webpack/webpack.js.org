@@ -51,7 +51,8 @@ jobs:
     name: Proselint
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        # TODO remove after https://github.com/errata-ai/vale-action/issues/128
+        os: [ubuntu-22.04]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
