@@ -420,7 +420,23 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 This option determines the module's namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.uniqueName`](#outputuniquename). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
 
-For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
+For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`. 
+
+This option also accepts template strings like `[name]` to dynamically generate the namespace.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    filename: "[name]-bundle.js",
+		library: "library-[name]",
+		libraryTarget: "commonjs",
+		devtoolNamespace: "library-[name]"
+  },
+};
+```
 
 ## output.enabledChunkLoadingTypes
 
