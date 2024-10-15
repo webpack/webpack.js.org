@@ -5101,6 +5101,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Setup the <code>target</code> option to <code>node</code>/<code>async-node</code>/<code>electron-main</code>/<code>electron-renderer</code>/<code>electron-preload</code> value and do not mock the <code>__dirname</code> global variable.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
+    extensions<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;...&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;.node&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
   target<span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
   node<span class="token operator">:</span> <span class="token punctuation">{</span>
     __dirname<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
