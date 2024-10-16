@@ -113,6 +113,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
               height={20}
               className="fill-current text-white"
             />
+            <span className="sr-only">Hamburger Icon</span>
           </button>
           <Link to="/" className="md:mr-auto">
             <Logo />
