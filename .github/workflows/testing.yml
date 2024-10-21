@@ -96,4 +96,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - run: yarn lint:links
+      - name: Link check
+        run: |
+          yarn build
+          yarn lint:links
