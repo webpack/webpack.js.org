@@ -1033,6 +1033,10 @@ Instead please use <code>/</code> or <code>path</code> methods.</p>
 <p>If <code>from</code> is a directory, then <code>context</code> equals <code>from</code>. The result paths will be the paths of the directory&#x27;s contents (including nested contents), relative to the directory.</p>
 <p>The use of <code>context</code> is illustrated by these <a href="#examples"><code>examples</code></a>.</p>
 <h4><span id="globoptions"></span><code>globOptions</code><a href="#globoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
+<blockquote>
+<p>[!WARNING]</p>
+<p>The <em>onlyDirectories</em> does not work because the plugin is designed to copy files.</p>
+</blockquote>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;globby&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Options<span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>

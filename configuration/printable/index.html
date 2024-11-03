@@ -695,6 +695,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>string</code></p>
 <p>This option determines the module&#x27;s namespace used with the <a href="#outputdevtoolmodulefilenametemplate"><code>output.devtoolModuleFilenameTemplate</code></a>. When not specified, it will default to the value of: <a href="#outputuniquename"><code>output.uniqueName</code></a>. It&#x27;s used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.</p>
 <p>For example, if you have 2 libraries, with namespaces <code>library1</code> and <code>library2</code>, which both have a file <code>./src/index.js</code> (with potentially different contents), they will expose these files as <code>webpack://library1/./src/index.js</code> and <code>webpack://library2/./src/index.js</code>.</p>
+<p>You can use template strings like <code>[name]</code> to dynamically generate namespaces based on the build context, providing additional flexibility.</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  output<span class="token operator">:</span> <span class="token punctuation">{</span>
+    filename<span class="token operator">:</span> <span class="token string">&quot;[name]-bundle.js&quot;</span><span class="token punctuation">,</span>
+		library<span class="token operator">:</span> <span class="token string">&quot;library-[name]&quot;</span><span class="token punctuation">,</span>
+		libraryTarget<span class="token operator">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span>
+		devtoolNamespace<span class="token operator">:</span> <span class="token string">&quot;library-[name]&quot;</span> <span class="token comment">// Sets a unique namespace for each library</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="outputenabledchunkloadingtypes"></span>output.enabledChunkLoadingTypes<a href="#outputenabledchunkloadingtypes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>[string: &#x27;jsonp&#x27; | &#x27;import-scripts&#x27; | &#x27;require&#x27; | &#x27;async-node&#x27; | &lt;any string&gt;]</code></p>
 <p>List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.</p>
