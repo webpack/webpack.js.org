@@ -23,6 +23,10 @@ if (
   api = new GithubAPI({
     auth: process.env.GITHUB_TOKEN,
   });
-  console.log(typeof process.env.GITHUB_TOKEN === "undefined" ? 'api is not authenticated' : 'api is authenticated locally');
+  console.log(
+    typeof process.env.GITHUB_TOKEN === 'undefined'
+      ? 'api is not authenticated'
+      : 'api is authenticated locally'
+  );
 }
 export default api;
