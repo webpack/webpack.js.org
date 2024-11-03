@@ -20,7 +20,9 @@ if (
   });
   console.log('api is authenticated on vercel');
 } else {
-  api = new GithubAPI();
-  console.log('api is not authenticated');
+  api = new GithubAPI({
+    auth: process.env.GITHUB_TOKEN,
+  });
+  console.log(typeof process.env.GITHUB_TOKEN === "undefined" ? 'api is not authenticated' : 'api is authenticated locally');
 }
 export default api;
