@@ -82,9 +82,6 @@ jobs:
 
       - run: yarn
 
-      - name: Enable webpack persistent caching
-        uses: ./.github/actions/webpack-persistent-cache
-
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
