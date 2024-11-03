@@ -51,7 +51,7 @@ jobs:
     name: Proselint
     strategy:
       matrix:
-        os: [latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
