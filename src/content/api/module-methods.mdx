@@ -133,7 +133,17 @@ import(
   /* webpackPreload: true */
   `./locale/${language}`
 );
+
+import(/* webpackIgnore: true */ 'ignored-module.js');
 ```
+
+##### webpackIgnore
+
+**JavaScript Usage**
+
+Disables dynamic import parsing when set to `true`.
+
+When using `import.meta.url`, it does not remain as-is; instead, it gets replaced based on the `baseURI`. For modules, it is replaced with `new URL("./", import.meta.url)`, and for other cases, it defaults to `document.baseURI`. This ensures that relative URLs work correctly, aligning with the base URL context.
 
 ```js
 import(/* webpackIgnore: true */ 'ignored-module.js');
@@ -141,13 +151,33 @@ import(/* webpackIgnore: true */ 'ignored-module.js');
 new URL(/* webpackIgnore: true */ 'file1.css', import.meta.url);
 ```
 
-##### webpackIgnore
-
-Disables dynamic import parsing when set to `true`.
-
-When using `import.meta.url`, it does not remain as-is; instead, it gets replaced based on the `baseURI`. For modules, it is replaced with `new URL("./", import.meta.url)`, and for other cases, it defaults to `document.baseURI`. This ensures that relative URLs work correctly, aligning with the base URL context.
-
 W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
+
+**CSS Usage**
+
+The `webpackIgnore` comment can control whether webpack processes a specific import or URL reference.
+It works in certain cases out of the box but **doesn’t support all cases** by default due to performance reasons.
+
+We support `webpackIgnore` in the following cases:
+
+```css
+@import /* webpackIgnore: false */ url(./basic.css);
+
+.class {
+  color: red;
+  background: /* webpackIgnore: true */ url('./url/img.png');
+}
+
+.class {
+  background-image: image-set(
+    /*webpackIgnore:  true*/ url(./url/img1x.png) 1x,
+    url(./url/img2x.png) 2x,
+    url(./url/img3x.png) 3x
+  );
+}
+```
+
+T> For other CSS scenarios, [`css-loader` fully supports `webpackIgnore`](/loaders/css-loader/#disable-url-resolving-using-the--webpackignore-true--comment), allowing more flexibility if needed.
 
 ##### webpackChunkName
 
