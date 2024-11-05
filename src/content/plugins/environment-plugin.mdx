@@ -27,7 +27,7 @@ new webpack.DefinePlugin({
 });
 ```
 
-T> Not specifying the environment variable raises an "`EnvironmentPlugin` - `${key}` environment variable is undefined" error.
+W> `EnvironmentPlugin` checks `process.env` for the specified variable. If it’s missing, it searches for a default value provided in the configuration. If neither the environment variable nor the default value is defined, an error will be thrown: **"`EnvironmentPlugin` - `${key}` environment variable is `undefined`"**.
 
 ## Usage with default values
 
@@ -45,8 +45,6 @@ W> Variables coming from `process.env` are always strings.
 T> Unlike [`DefinePlugin`](/plugins/define-plugin), default values are applied to `JSON.stringify` by the `EnvironmentPlugin`.
 
 T> Default values of `null` and `undefined` behave differently. Use `undefined` for variables that _must_ be provided during bundling, or `null` if they are optional.
-
-W> If an environment variable is not found during bundling and no default value was provided, webpack will throw an error instead of a warning.
 
 **Example:**
 
