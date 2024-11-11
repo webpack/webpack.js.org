@@ -116,7 +116,7 @@
     "mkdirp": "^3.0.1",
     "modularscale-sass": "^3.0.3",
     "npm-run-all": "^4.1.1",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.48",
     "postcss-loader": "^8.1.1",
     "prettier": "^3.3.3",
     "react-refresh": "^0.14.2",
