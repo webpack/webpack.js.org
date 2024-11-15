@@ -632,6 +632,49 @@ jq('.my-element').animate(/* ... */);
 
 Note that there will be an `import` statement in the output bundle.
 
+This is useful when dependencies rely on Node.js built-in modules or require a CommonJS-style `require` function to preserve prototypes, which is necessary for functions like [`util.inherits`](https://nodejs.org/api/util.html#utilinheritsconstructor-superconstructor). Refer to [this issue](https://github.com/webpack/webpack.js.org/issues/7446) for more details.
+
+For code that relies on prototype structures, like:
+
+```js
+function ChunkStream() {
+  Stream.call(this);
+}
+util.inherits(ChunkStream, Stream);
+```
+
+You can use `node-commonjs` to ensure that the prototype chain is preserved:
+
+```js
+const { builtinModules } = require('module');
+
+module.exports = {
+  experiments: { outputModule: true },
+  externalsType: 'node-commonjs',
+  externals: ({ request }, callback) => {
+    if (/^node:/.test(request) || builtinModules.includes(request)) {
+      return callback(null, 'node-commonjs ' + request);
+    }
+    callback();
+  },
+};
+```
+
+This produces something like:
+
+```js
+import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "node:module";
+// ...
+/***/ 2613:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
+
+/***/ }),
+```
+
+This setup keeps the prototype structure intact, resolving issues with Node.js built-ins.
+
 ### externalsType.promise
 
 Specify the default type of externals as `'promise'`. Webpack will read the external as a global variable (similar to [`'var'`](#externalstypevar)) and `await` for it.
