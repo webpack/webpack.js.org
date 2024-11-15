@@ -1806,14 +1806,36 @@ logging<span class="token punctuation">.</span><span class="token function">conf
   <span class="token comment">/* webpackPrefetch: true */</span>
   <span class="token comment">/* webpackPreload: true */</span>
   <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">./locale/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>language<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackIgnore: true */</span> <span class="token string">&#x27;ignored-module.js&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h5><span id="webpackignore"></span>webpackIgnore<a href="#webpackignore" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
+<p><strong>JavaScript Usage</strong></p>
+<p>Disables dynamic import parsing when set to <code>true</code>.</p>
+<p>When using <code>import.meta.url</code>, it does not remain as-is; instead, it gets replaced based on the <code>baseURI</code>. For modules, it is replaced with <code>new URL(&quot;./&quot;, import.meta.url)</code>, and for other cases, it defaults to <code>document.baseURI</code>. This ensures that relative URLs work correctly, aligning with the base URL context.</p>
 <pre><code class="hljs language-js"><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackIgnore: true */</span> <span class="token string">&#x27;ignored-module.js&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token comment">/* webpackIgnore: true */</span> <span class="token string">&#x27;file1.css&#x27;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h5><span id="webpackignore"></span>webpackIgnore<a href="#webpackignore" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<p>Disables dynamic import parsing when set to <code>true</code>.</p>
-<p>When using <code>import.meta.url</code>, it does not remain as-is; instead, it gets replaced based on the <code>baseURI</code>. For modules, it is replaced with <code>new URL(&quot;./&quot;, import.meta.url)</code>, and for other cases, it defaults to <code>document.baseURI</code>. This ensures that relative URLs work correctly, aligning with the base URL context.</p>
 <aside class="warning"><h6 class="warning__prefix">warning</h6><p>Note that setting <code>webpackIgnore</code> to <code>true</code> opts out of code splitting.</p></aside>
+<p><strong>CSS Usage</strong></p>
+<p>The <code>webpackIgnore</code> comment can control whether webpack processes a specific import or URL reference.
+It works in certain cases out of the box but <strong>doesn’t support all cases</strong> by default due to performance reasons.</p>
+<p>We support <code>webpackIgnore</code> in the following cases:</p>
+<pre><code class="hljs language-css">@import <span class="token comment">/* webpackIgnore: false */</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./basic.css<span class="token punctuation">)</span></span><span class="token selector">;
+
+.class</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token comment">/* webpackIgnore: true */</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">&#x27;./url/img.png&#x27;</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.class</span> <span class="token punctuation">{</span>
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token function">image-set</span><span class="token punctuation">(</span>
+    <span class="token comment">/*webpackIgnore:  true*/</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./url/img1x.png<span class="token punctuation">)</span></span> 1x<span class="token punctuation">,</span>
+    <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./url/img2x.png<span class="token punctuation">)</span></span> 2x<span class="token punctuation">,</span>
+    <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>./url/img3x.png<span class="token punctuation">)</span></span> 3x
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<aside class="tip"><h6 class="tip__prefix">tip</h6><p>For other CSS scenarios, <a href="/loaders/css-loader/#disable-url-resolving-using-the--webpackignore-true--comment"><code>css-loader</code> fully supports <code>webpackIgnore</code></a>, allowing more flexibility if needed.</p></aside>
 <h5><span id="webpackchunkname"></span>webpackChunkName<a href="#webpackchunkname" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>A name for the new chunk. Since webpack 2.6.0, the placeholders <code>[index]</code> and <code>[request]</code> are supported within the given string to an incremented number or the actual resolved filename respectively. Adding this comment will cause our separate chunk to be named [my-chunk-name].js instead of [id].js.</p>
 <h5><span id="webpackfetchpriority"></span>webpackFetchPriority<a href="#webpackfetchpriority" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
