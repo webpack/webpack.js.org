@@ -163,7 +163,7 @@
 </blockquote>
 <hr/>
 <details><summary>Multiple entrypoints example</summary><h2><span id="multiple-entrypoints-example"></span>Multiple entrypoints example<a href="#multiple-entrypoints-example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Example of the webpack configuration with multiple entry points which share common code with the <code>splitChunks</code> option.</p><pre><code class="hljs language-js"><span class="token keyword">import</span> ChunksWebpackPlugin <span class="token keyword">from</span> <span class="token string">&#x27;chunks-webpack-plugin&#x27;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&#x27;path&#x27;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&#x27;node:path&#x27;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
