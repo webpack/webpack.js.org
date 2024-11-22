@@ -155,7 +155,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^6.28.0",
+    "react-router-dom": "^7.0.1",
     "react-tiny-popover": "5",
     "react-use": "^17.5.1",
     "react-visibility-sensor": "^5.0.2",
