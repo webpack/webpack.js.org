@@ -262,6 +262,9 @@ module.exports = {
       css: {
         // Parser options for css modules
 
+        // Enable/disable `@import` at-rules handling, available since webpack 5.97.0
+        // type: boolean
+        import: true,
         // Use ES modules named export for css exports, available since webpack 5.90.0
         // type: boolean
         namedExports: true,
@@ -281,9 +284,65 @@ module.exports = {
 };
 ```
 
-### module.parser.css.namedExports
+### module.parser.css
 
-This option enables the use of ES modules named export for CSS exports. When set to true, the CSS module will export its classes and styles using named exports.
+Configure options for the CSS parser.
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      css: {
+        // ...
+        namedExports: true,
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.import
+
+This option enables the handling of `@import` at-rules in CSS files. When set to `true`, `@import` statements are processed, allowing modular inclusion of styles from other CSS files.
+
+- Type: `boolean`
+- Available: 5.97.0+
+- Example:
+
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        css: {
+          import: true,
+        },
+      },
+    },
+  };
+  ```
+
+  ```css
+  /* reset-styles.css */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  ```
+
+  ```css
+  /* styles.css */
+  @import './reset-styles.css';
+
+  body {
+    background-color: red;
+  }
+  ```
+
+T> Filtering of `@import` rules, as [supported by css-loader](/loaders/css-loader/#filter), is not supported in the parser.
+
+#### module.parser.css.namedExports
+
+This option enables the use of ES modules named export for CSS exports. When set to `true`, the CSS module will export its classes and styles using named exports.
 
 - Type: `boolean`
 - Available: 5.90.0+
