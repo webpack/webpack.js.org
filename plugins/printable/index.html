@@ -7610,6 +7610,9 @@ npx webpack --env <span class="token assign-left variable">APP_TARGET</span><spa
 <li>
 <p><code>sourceRoot</code> (<code>string</code>): Provide a custom value for the <code>sourceRoot</code> property in the SourceMap.</p>
 </li>
+<li>
+<p><code>debugIds</code> (<code>boolean</code>): If <code>true</code>, unique ids will be emitted in source and sourcemaps which streamlines identifying sourcemaps across different builds. See the <a href="https://github.com/tc39/ecma426/blob/main/proposals/debug-id.md">TC39 sourcemap debug ID proposal</a> for more details.</p>
+</li>
 </ul>
 <p>The <code>fileContext</code> option is useful when you want to store source maps in an upper level directory to avoid <code>../../</code> appearing in the absolute <code>[url]</code>.</p>
 <aside class="tip"><h6 class="tip__prefix">tip</h6><p>Setting <code>module</code> and/or <code>columns</code> to <code>false</code> will yield less accurate source maps but will also improve compilation performance significantly.</p></aside>
