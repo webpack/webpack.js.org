@@ -166,6 +166,6 @@
     "sitemap-static/minimist": "1.2.5",
     "ini": "1.3.7",
     "eval": "^0.1.5",
-    "markdownlint-cli/markdownlint": "^0.37.0"
+    "markdownlint-cli/markdownlint": "^0.27.0"
   }
 }
