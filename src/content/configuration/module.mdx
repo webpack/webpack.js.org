@@ -416,19 +416,13 @@ This option enables or disables the handling of URLs in functions such as `url()
   ```
 
   ```css
-  /* reset-styles.css */
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  ```
-
-  ```css
   /* styles.css */
-  @import './reset-styles.css';
+  .background {
+    background-image: url('./images/bg.jpg');
+  }
 
-  body {
-    background-color: red;
+  .icon {
+    content: image('./icons/star.svg');
   }
   ```
 
