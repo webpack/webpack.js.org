@@ -2234,6 +2234,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token comment">// Use ES modules named export for css exports, available since webpack 5.90.0</span>
         <span class="token comment">// type: boolean</span>
         namedExports<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token comment">// Enable/disable url()/image-set()/src()/image() functions handling, available since webpack 5.97.0</span>
+        url<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token string">&#x27;css/auto&#x27;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// ditto</span>
@@ -2337,6 +2339,37 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token punctuation">}</span></code></pre>
 <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> header<span class="token punctuation">,</span> footer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&#x27;./styles.module.css&#x27;</span><span class="token punctuation">;</span></code></pre>
 <p>By enabling <code>namedExports</code>, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.</p>
+<h4><span id="moduleparsercssurl"></span>module.parser.css.url<a href="#moduleparsercssurl" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
+<p>This option enables or disables the handling of URLs in functions such as <code>url()</code>, <code>image-set()</code>, <code>src()</code>, and <code>image()</code> within CSS files. When enabled, these URLs are resolved and processed by webpack.</p>
+<ul>
+<li>
+<p>Type: <code>boolean</code></p>
+</li>
+<li>
+<p>Available: 5.97.0+</p>
+</li>
+<li>
+<p>Example:</p>
+<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    parser<span class="token operator">:</span> <span class="token punctuation">{</span>
+      css<span class="token operator">:</span> <span class="token punctuation">{</span>
+        url<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-css"><span class="token comment">/* styles.css */</span>
+<span class="token selector">.background</span> <span class="token punctuation">{</span>
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">&#x27;./images/bg.jpg&#x27;</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.icon</span> <span class="token punctuation">{</span>
+  <span class="token property">content</span><span class="token punctuation">:</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token string">&#x27;./icons/star.svg&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+</ul>
+<aside class="tip"><h6 class="tip__prefix">tip</h6><p>To filter specific imports, you can use Webpack&#x27;s built-in <a href="/plugins/ignore-plugin/">IgnorePlugin</a>. The <a href="/loaders/css-loader/#filter"><code>filter</code> option</a>, as available in <code>css-loader</code>, is not supported.</p></aside>
 <h3><span id="moduleparserjavascript"></span>module.parser.javascript<a href="#moduleparserjavascript" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Configure options for JavaScript parser.</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
