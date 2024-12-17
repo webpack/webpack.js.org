@@ -303,6 +303,32 @@ importing
 - `'foo/bar'` will resolve to `'foo/bar-node.js'` as the `"node"` key comes before `"require"` key in the conditional exports object.
 - `'foo/baz'` will resolve to `'foo/baz-node.js'`
 
+If you want to add your custom field names while still retaining the default Webpack values, you can use `"..."`:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    conditionNames: ['my-custom-condition', '...'],
+  },
+};
+```
+
+Alternatively, to prioritize the deault conditions first, then add your custom conditions:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    conditionNames: ['...', 'my-custom-condition'],
+  },
+};
+```
+
 ### resolve.descriptionFiles
 
 `[string] = ['package.json']`
