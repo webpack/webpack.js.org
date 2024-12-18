@@ -3646,6 +3646,22 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li><code>&#x27;foo/bar&#x27;</code> will resolve to <code>&#x27;foo/bar-node.js&#x27;</code> as the <code>&quot;node&quot;</code> key comes before <code>&quot;require&quot;</code> key in the conditional exports object.</li>
 <li><code>&#x27;foo/baz&#x27;</code> will resolve to <code>&#x27;foo/baz-node.js&#x27;</code></li>
 </ul>
+<p>If you want to add your custom field names while still retaining the default Webpack values, you can use <code>&quot;...&quot;</code>:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
+    conditionNames<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&#x27;my-custom-condition&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;...&#x27;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Alternatively, to prioritize the deault conditions first, then add your custom conditions:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
+    conditionNames<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&#x27;...&#x27;</span><span class="token punctuation">,</span> <span class="token string">&#x27;my-custom-condition&#x27;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="resolvedescriptionfiles"></span>resolve.descriptionFiles<a href="#resolvedescriptionfiles" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>[string] = [&#x27;package.json&#x27;]</code></p>
 <p>The JSON files to use for descriptions.</p>
