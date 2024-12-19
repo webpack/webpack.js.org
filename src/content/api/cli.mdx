@@ -68,16 +68,22 @@ npx webpack build --config ./webpack.config.js --stats verbose
 
 ### Init
 
-Used to initialize a new webpack project using `@webpack-cli/create-webpack-app`.
+Used to initialize a new webpack project using `create-new-webpack-app`.
 
 ```bash
-npx create-webpack-app init [generation-path] [options]
+npx create-new-webpack-app [generation-path] [options]
 ```
 
 **example**
 
 ```bash
-npx create-webpack-app init ./my-app --force --template=default
+npx create-new-webpack-app ./my-app --force --template=default
+```
+
+Alias to:
+
+```bash
+npx create-new-webpack-app init ./my-app --force --template=default
 ```
 
 #### Generation Path
@@ -110,13 +116,13 @@ To generate a project without questions. When enabled, the default answer for ea
 Scaffold a loader.
 
 ```bash
-npx create-webpack-app loader [output-path] [options]
+npx create-new-webpack-app loader [output-path] [options]
 ```
 
 **example**
 
 ```bash
-npx create-webpack-app loader ./my-loader --template=default
+npx create-new-webpack-app loader ./my-loader --template=default
 ```
 
 #### Output Path
@@ -136,13 +142,13 @@ Type of template.
 Scaffold a plugin.
 
 ```bash
-npx create-webpack-app plugin [output-path] [options]
+npx create-new-webpack-app plugin [output-path] [options]
 ```
 
 **example**
 
 ```bash
-npx create-webpack-app plugin ./my-plugin --template=default
+npx create-new-webpack-app plugin ./my-plugin --template=default
 ```
 
 #### Output Path
@@ -157,7 +163,7 @@ Path to the output directory, e.g. `./plugin-name`.
 
 Type of template.
 
-T> See the [full documentation of `create-webpack-app`](https://github.com/webpack/webpack-cli/blob/master/packages/create-webpack-app/README.md).
+T> See the [full documentation of `create-new-webpack-app`](https://github.com/webpack/webpack-cli/blob/master/packages/create-webpack-app/README.md).
 
 ### Info
 
