@@ -47,10 +47,7 @@ webpack-cli offers a variety of commands to make working with webpack easier. By
 | [`build`](#build)           | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
 | [`configtest`](#configtest) | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
 | [`help`](#help)             | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
-| [`info`](#info)             | `info\|i [options]`                                   | Outputs information about your system.                                          |
-| [`init`](#init)             | `init\|create\|c\|new\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
-| [`loader`](#loader)         | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
-| [`plugin`](#plugin)         | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
+| [`info`](#info)             | `info\|i [options]`                                   | Outputs information about your system.                                                           |
 | [`serve`](#serve)           | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
 | [`version`](#version)       | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
 | [`watch`](#watch)           | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
@@ -71,16 +68,22 @@ npx webpack build --config ./webpack.config.js --stats verbose
 
 ### Init
 
-Used to initialize a new webpack project.
+Used to initialize a new webpack project using `create-new-webpack-app`.
 
 ```bash
-npx webpack init [generation-path] [options]
+npx create-new-webpack-app [generation-path] [options]
 ```
 
 **example**
 
 ```bash
-npx webpack init ./my-app --force --template=default
+npx create-new-webpack-app ./my-app --force --template=default
+```
+
+Alias to:
+
+```bash
+npx create-new-webpack-app init ./my-app --force --template=default
 ```
 
 #### Generation Path
@@ -101,20 +104,25 @@ Name of template to generate.
 
 To generate a project without questions. When enabled, the default answer for each question will be used.
 
-T> See the [full documentation of `webpack init` command](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md).
+#### Templates supported
+
+- `--template=default` - Default template with basic configuration.
+- `--template=react` - Template with React configuration.
+- `--template=vue` - Template with Vue configuration.
+- `--template=svelte` - Template with Svelte configuration.`
 
 ### Loader
 
 Scaffold a loader.
 
 ```bash
-npx webpack loader [output-path] [options]
+npx create-new-webpack-app loader [output-path] [options]
 ```
 
 **example**
 
 ```bash
-npx webpack loader ./my-loader --template=default
+npx create-new-webpack-app loader ./my-loader --template=default
 ```
 
 #### Output Path
@@ -134,13 +142,13 @@ Type of template.
 Scaffold a plugin.
 
 ```bash
-npx webpack plugin [output-path] [options]
+npx create-new-webpack-app plugin [output-path] [options]
 ```
 
 **example**
 
 ```bash
-npx webpack plugin ./my-plugin --template=default
+npx create-new-webpack-app plugin ./my-plugin --template=default
 ```
 
 #### Output Path
@@ -154,6 +162,8 @@ Path to the output directory, e.g. `./plugin-name`.
 `string = 'default'`
 
 Type of template.
+
+T> See the [full documentation of `create-new-webpack-app`](https://github.com/webpack/webpack-cli/blob/master/packages/create-webpack-app/README.md).
 
 ### Info
 
