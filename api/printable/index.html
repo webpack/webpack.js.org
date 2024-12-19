@@ -40,17 +40,19 @@ access to the current state of the compilation.</p>
 <aside class="warning"><h6 class="warning__prefix">warning</h6><p>If you want to run webpack using <code>npx</code> please make sure you have <code>webpack-cli</code> installed.</p></aside>
 <h2><span id="commands"></span>Commands<a href="#commands" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>webpack-cli offers a variety of commands to make working with webpack easier. By default webpack ships with</p>
-<table><thead><tr><th>Command</th><th>Usage</th><th>Description</th></tr></thead><tbody><tr><td data-th="Command"><span><a href="#build"><code>build</code></a></span></td><td data-th="Usage"><span><code>build|bundle|b [entries...] [options]</code></span></td><td data-th="Description"><span>Run webpack (default command, can be omitted).</span></td></tr><tr><td data-th="Command"><span><a href="#configtest"><code>configtest</code></a></span></td><td data-th="Usage"><span><code>configtest|t [config-path]</code></span></td><td data-th="Description"><span>Validate a webpack configuration.</span></td></tr><tr><td data-th="Command"><span><a href="#help"><code>help</code></a></span></td><td data-th="Usage"><span><code>help|h [command] [option]</code></span></td><td data-th="Description"><span>Display help for commands and options.</span></td></tr><tr><td data-th="Command"><span><a href="#info"><code>info</code></a></span></td><td data-th="Usage"><span><code>info|i [options]</code></span></td><td data-th="Description"><span>Outputs information about your system.</span></td></tr><tr><td data-th="Command"><span><a href="#init"><code>init</code></a></span></td><td data-th="Usage"><span><code>init|create|c|new|n [generation-path] [options]</code></span></td><td data-th="Description"><span>Initialize a new webpack project.</span></td></tr><tr><td data-th="Command"><span><a href="#loader"><code>loader</code></a></span></td><td data-th="Usage"><span><code>loader|l [output-path] [options]</code></span></td><td data-th="Description"><span>Scaffold a loader.</span></td></tr><tr><td data-th="Command"><span><a href="#plugin"><code>plugin</code></a></span></td><td data-th="Usage"><span><code>plugin|p [output-path] [options]</code></span></td><td data-th="Description"><span>Scaffold a plugin.</span></td></tr><tr><td data-th="Command"><span><a href="#serve"><code>serve</code></a></span></td><td data-th="Usage"><span><code>serve|server|s [options]</code></span></td><td data-th="Description"><span>Run the <code>webpack-dev-server</code>.</span></td></tr><tr><td data-th="Command"><span><a href="#version"><code>version</code></a></span></td><td data-th="Usage"><span><code>version|v [commands...]</code></span></td><td data-th="Description"><span>Output the version number of <code>webpack</code>, <code>webpack-cli</code> and <code>webpack-dev-server</code>.</span></td></tr><tr><td data-th="Command"><span><a href="#watch"><code>watch</code></a></span></td><td data-th="Usage"><span><code>watch|w [entries...] [options]</code></span></td><td data-th="Description"><span>Run webpack and watch for files changes.</span></td></tr></tbody></table>
+<table><thead><tr><th>Command</th><th>Usage</th><th>Description</th></tr></thead><tbody><tr><td data-th="Command"><span><a href="#build"><code>build</code></a></span></td><td data-th="Usage"><span><code>build|bundle|b [entries...] [options]</code></span></td><td data-th="Description"><span>Run webpack (default command, can be omitted).</span></td></tr><tr><td data-th="Command"><span><a href="#configtest"><code>configtest</code></a></span></td><td data-th="Usage"><span><code>configtest|t [config-path]</code></span></td><td data-th="Description"><span>Validate a webpack configuration.</span></td></tr><tr><td data-th="Command"><span><a href="#help"><code>help</code></a></span></td><td data-th="Usage"><span><code>help|h [command] [option]</code></span></td><td data-th="Description"><span>Display help for commands and options.</span></td></tr><tr><td data-th="Command"><span><a href="#info"><code>info</code></a></span></td><td data-th="Usage"><span><code>info|i [options]</code></span></td><td data-th="Description"><span>Outputs information about your system.</span></td></tr><tr><td data-th="Command"><span><a href="#serve"><code>serve</code></a></span></td><td data-th="Usage"><span><code>serve|server|s [options]</code></span></td><td data-th="Description"><span>Run the <code>webpack-dev-server</code>.</span></td></tr><tr><td data-th="Command"><span><a href="#version"><code>version</code></a></span></td><td data-th="Usage"><span><code>version|v [commands...]</code></span></td><td data-th="Description"><span>Output the version number of <code>webpack</code>, <code>webpack-cli</code> and <code>webpack-dev-server</code>.</span></td></tr><tr><td data-th="Command"><span><a href="#watch"><code>watch</code></a></span></td><td data-th="Usage"><span><code>watch|w [entries...] [options]</code></span></td><td data-th="Description"><span>Run webpack and watch for files changes.</span></td></tr></tbody></table>
 <h3><span id="build"></span>Build<a href="#build" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Run webpack (default command, can be omitted).</p>
 <pre><code class="hljs language-bash">npx webpack build <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
 <p><strong>example</strong></p>
 <pre><code class="hljs language-bash">npx webpack build --config ./webpack.config.js --stats verbose</code></pre>
 <h3><span id="init"></span>Init<a href="#init" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>Used to initialize a new webpack project.</p>
-<pre><code class="hljs language-bash">npx webpack init <span class="token punctuation">[</span>generation-path<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
+<p>Used to initialize a new webpack project using <code>create-new-webpack-app</code>.</p>
+<pre><code class="hljs language-bash">npx create-new-webpack-app <span class="token punctuation">[</span>generation-path<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
 <p><strong>example</strong></p>
-<pre><code class="hljs language-bash">npx webpack init ./my-app --force --template<span class="token operator">=</span>default</code></pre>
+<pre><code class="hljs language-bash">npx create-new-webpack-app ./my-app --force --template<span class="token operator">=</span>default</code></pre>
+<p>Alias to:</p>
+<pre><code class="hljs language-bash">npx create-new-webpack-app init ./my-app --force --template<span class="token operator">=</span>default</code></pre>
 <h4><span id="generation-path"></span>Generation Path<a href="#generation-path" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Location of where to generate the configuration. Defaults to <code>process.cwd()</code>.</p>
 <h4><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
@@ -60,12 +62,18 @@ access to the current state of the compilation.</p>
 <p><strong><code>-f</code>, <code>--force</code></strong></p>
 <p><code>boolean</code></p>
 <p>To generate a project without questions. When enabled, the default answer for each question will be used.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>See the <a href="https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md">full documentation of <code>webpack init</code> command</a>.</p></aside>
+<h4><span id="templates-supported"></span>Templates supported<a href="#templates-supported" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
+<ul>
+<li><code>--template=default</code> - Default template with basic configuration.</li>
+<li><code>--template=react</code> - Template with React configuration.</li>
+<li><code>--template=vue</code> - Template with Vue configuration.</li>
+<li><code>--template=svelte</code> - Template with Svelte configuration.`</li>
+</ul>
 <h3><span id="loader"></span>Loader<a href="#loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Scaffold a loader.</p>
-<pre><code class="hljs language-bash">npx webpack loader <span class="token punctuation">[</span>output-path<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
+<pre><code class="hljs language-bash">npx create-new-webpack-app loader <span class="token punctuation">[</span>output-path<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
 <p><strong>example</strong></p>
-<pre><code class="hljs language-bash">npx webpack loader ./my-loader --template<span class="token operator">=</span>default</code></pre>
+<pre><code class="hljs language-bash">npx create-new-webpack-app loader ./my-loader --template<span class="token operator">=</span>default</code></pre>
 <h4><span id="output-path"></span>Output Path<a href="#output-path" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Path to the output directory, e.g. <code>./loader-name</code>.</p>
 <h4><span id="options-1"></span>Options<a href="#options-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
@@ -74,15 +82,16 @@ access to the current state of the compilation.</p>
 <p>Type of template.</p>
 <h3><span id="plugin"></span>Plugin<a href="#plugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Scaffold a plugin.</p>
-<pre><code class="hljs language-bash">npx webpack plugin <span class="token punctuation">[</span>output-path<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
+<pre><code class="hljs language-bash">npx create-new-webpack-app plugin <span class="token punctuation">[</span>output-path<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
 <p><strong>example</strong></p>
-<pre><code class="hljs language-bash">npx webpack plugin ./my-plugin --template<span class="token operator">=</span>default</code></pre>
+<pre><code class="hljs language-bash">npx create-new-webpack-app plugin ./my-plugin --template<span class="token operator">=</span>default</code></pre>
 <h4><span id="output-path-1"></span>Output Path<a href="#output-path-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Path to the output directory, e.g. <code>./plugin-name</code>.</p>
 <h4><span id="options-2"></span>Options<a href="#options-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong><code>-t</code>, <code>--template</code></strong></p>
 <p><code>string = &#x27;default&#x27;</code></p>
 <p>Type of template.</p>
+<aside class="tip"><h6 class="tip__prefix">tip</h6><p>See the <a href="https://github.com/webpack/webpack-cli/blob/master/packages/create-webpack-app/README.md">full documentation of <code>create-new-webpack-app</code></a>.</p></aside>
 <h3><span id="info"></span>Info<a href="#info" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Outputs information about your system.</p>
 <pre><code class="hljs language-bash">npx webpack info <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>

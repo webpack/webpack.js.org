@@ -3788,10 +3788,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token comment">// We recommend using only for the &quot;production&quot; mode</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.(jpe?g|png|gif|svg)$/i</span><span class="token punctuation">,</span>
+        enforce<span class="token operator">:</span> <span class="token string">&quot;pre&quot;</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> ImageMinimizerPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span>
-            enforce<span class="token operator">:</span> <span class="token string">&quot;pre&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               minimizer<span class="token operator">:</span> <span class="token punctuation">{</span>
                 implementation<span class="token operator">:</span> ImageMinimizerPlugin<span class="token punctuation">.</span>imageminMinify<span class="token punctuation">,</span>
