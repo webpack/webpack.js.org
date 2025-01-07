@@ -21,9 +21,10 @@ function NavigationItem({ children, url, isActive }) {
       isActive,
     };
   }
-  
-  const classes = 'text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200';
-  
+
+  const classes =
+    'text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200';
+
   if (url.startsWith('http') || url.startsWith('//')) {
     return (
       <a
@@ -36,7 +37,7 @@ function NavigationItem({ children, url, isActive }) {
       </a>
     );
   }
-  
+
   return (
     <NavLink
       {...obj}
