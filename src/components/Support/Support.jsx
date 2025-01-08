@@ -173,10 +173,10 @@ export default class Support extends Component {
           {rank === 'backer'
             ? 'Backers'
             : rank === 'latest'
-            ? 'Latest Sponsors'
-            : `${rank[0].toUpperCase()}${rank.slice(1)} ${
-                type === 'monthly' ? 'Monthly ' : ''
-              }Sponsors`}
+              ? 'Latest Sponsors'
+              : `${rank[0].toUpperCase()}${rank.slice(1)} ${
+                  type === 'monthly' ? 'Monthly ' : ''
+                }Sponsors`}
         </h2>
         <VisibilitySensor
           delayedCall

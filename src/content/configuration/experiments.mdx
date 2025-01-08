@@ -190,9 +190,9 @@ Enable native CSS support. Note that it's an experimental feature still under de
 Experimental features:
 
 - CSS Modules support: webpack will generate a unique name for each CSS class. Use the `.module.css` extension for CSS Modules.
-- <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json` files:
-  webpack will look for `style` field in `package.json` files and use that if it
-  exists for imports inside CSS files.
+- <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json`
+  files: webpack will look for `style` field in `package.json` files and use
+  that if it exists for imports inside CSS files.
 
   For example, if you add `@import 'bootstrap';` to your CSS file, webpack will look for `bootstrap` in `node_modules` and use the `style` field in `package.json` from there. If `style` field is not found, webpack will use the `main` field instead to preserve backward compatibility.
 
