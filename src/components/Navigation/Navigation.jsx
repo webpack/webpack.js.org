@@ -68,7 +68,6 @@ function NavigationIcon({ children, to, title }) {
       >
         {children}
       </Link>
-      {/* Tooltip */}
       <div className="absolute top-full mt-2 px-3 py-1 bg-blue-500 text-white text-sm rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
         {title}
       </div>
@@ -95,6 +94,9 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
   useEffect(() => {
     setLocationHash(hash);
   }, [hash]);
+
+  // Helper function to check if we're on the home page
+  const isHomePage = location.pathname === '/';
 
   return (
     <>
@@ -185,47 +187,50 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             />
           </div>
         </div>
-        {/* Sub navigation */}
-        {links
-          .filter((link) => link.children)
-          .map((link) => {
-            if (link.isActive && !link.isActive({}, location)) {
-              return null;
-            }
-            return (
-              <div
-                key={link.url}
-                className="bg-gray-100 dark:bg-gray-800 hidden md:block"
-              >
+
+        {/* Sub navigation - Updated with fixed logic */}
+        {!isHomePage &&
+          links
+            .filter((link) => link.children)
+            .map((link) => {
+              if (link.isActive && !link.isActive({}, location)) {
+                return null;
+              }
+
+              return (
                 <div
-                  className="md:max-w-[1024px] md:mx-auto md:grid md:grid-flow-col md:justify-end md:gap-x-[20px] md:px-[24px]"
-                  data-testid="sub-navigation"
+                  key={link.url}
+                  className="bg-gray-100 dark:bg-gray-800 hidden md:block"
                 >
-                  {link.children.map((child) => {
-                    const classNames =
-                      'text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white';
-                    const isActive = location.pathname.startsWith(child.url);
-                    return (
-                      <NavLink
-                        key={child.url}
-                        to={child.url}
-                        title={child.title}
-                        className={() =>
-                          isActive
-                            ? `!text-black dark:!text-white ${classNames}`
-                            : classNames
-                        }
-                      >
-                        {child.content === 'api'
-                          ? child.content.toUpperCase()
-                          : child.content}
-                      </NavLink>
-                    );
-                  })}
+                  <div
+                    className="md:max-w-[1024px] md:mx-auto md:grid md:grid-flow-col md:justify-end md:gap-x-[20px] md:px-[24px]"
+                    data-testid="sub-navigation"
+                  >
+                    {link.children.map((child) => {
+                      const classNames =
+                        'text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white';
+                      const isActive = location.pathname.startsWith(child.url);
+                      return (
+                        <NavLink
+                          key={child.url}
+                          to={child.url}
+                          title={child.title}
+                          className={() =>
+                            isActive
+                              ? `!text-black dark:!text-white ${classNames}`
+                              : classNames
+                          }
+                        >
+                          {child.content === 'api'
+                            ? child.content.toUpperCase()
+                            : child.content}
+                        </NavLink>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
       </header>
     </>
   );
