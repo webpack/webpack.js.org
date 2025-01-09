@@ -1,0 +1,19 @@
+name: Webpack persistent cache
+description: Cache webpack's persistent cache between builds.
+
+outputs:
+  cache-hit:
+    description: Whether the cache was restored from the cache key.
+    value: ${{ steps.build-webpack-persistent-cache.outputs.cache-hit }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/cache@v4
+      id: build-webpack-persistent-cache
+      with:
+        path: node_modules/.cache
+        key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |-
+          build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+          build-${{ hashFiles('**/webpack.*.mjs') }}-

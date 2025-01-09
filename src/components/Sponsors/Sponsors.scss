@@ -1,0 +1,104 @@
+@import 'functions';
+@import 'mixins';
+
+$sponsor-text-color-dark: #cecece;
+$sponsor-text-color-light: #535353;
+$background-color-hover: rgb(50, 50, 50);
+$link-wrapper-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
+$link-wrapper-shadow-dark: 0 3px 10px 0px rgba(255, 255, 255, 0.2);
+$link-wrapper-radius: 8px;
+$link-wrapper-margin: 8px;
+$tagline-font-size: 2em;
+$footer-font-size: 1.7em;
+
+[data-theme='dark'] {
+  .agGridLogo {
+    content: url('../../assets/ag-grid-logo-dark.png');
+  }
+
+  .agChartsLogo {
+    content: url('../../assets/ag-charts-logo-dark.png');
+  }
+
+  .sponsors {
+    &__tagline,
+    &__footer {
+      margin: 1rem 0;
+      text-align: center;
+      color: $sponsor-text-color-dark;
+    }
+    &__tagline {
+      font-size: $tagline-font-size;
+    }
+    &__footer {
+      font-size: $footer-font-size;
+      font-style: italic;
+    }
+    &__link-wrapper {
+      background: rgb(12, 12, 12);
+      box-shadow: $link-wrapper-shadow-dark;
+      border-radius: $link-wrapper-radius;
+      margin: $link-wrapper-margin;
+      transition: transform 0.2s;
+      &:hover {
+        background-color: $background-color-hover;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.sponsors {
+  position: absolute;
+  height: 100%;
+  width: 250px;
+  margin-left: -250px;
+  margin-right: 8px;
+
+  &__link-wrapper {
+    box-shadow: $link-wrapper-shadow;
+    border-radius: $link-wrapper-radius;
+    margin: $link-wrapper-margin;
+    transition: transform 0.2s;
+    &:hover {
+      background-color: getColor(concrete);
+      transform: scale(1.05);
+    }
+  }
+  &__tagline,
+  &__footer {
+    margin: 1rem 0;
+    text-align: center;
+    color: $sponsor-text-color-light;
+  }
+  &__tagline {
+    font-size: $tagline-font-size;
+  }
+  &__footer {
+    font-size: $footer-font-size;
+    font-style: italic;
+  }
+  &__content {
+    position: sticky;
+    display: none;
+    margin: 1.5em 0;
+    top: 6em;
+    padding: 0 1.5em 3em;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    border-right: 2px solid getColor(concrete);
+    overflow: hidden;
+    transition: background-color 250ms;
+    @include break(xlarge) {
+      display: flex;
+    }
+  }
+  &__img {
+    &__wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}

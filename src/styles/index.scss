@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@600&display=swap');
+
+@import 'vars';
+@import 'functions';
+@import 'mixins';
+
+@import './reset';
+
+* {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font: 400 getFontSize(0) $font-stack-body;
+  color: getColor(elephant);
+}
+
+.header-link {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../assets/link.svg');
+  background-size: contain;
+}
+[aria-hidden='true']:hover .header-link {
+  visibility: visible;
+}
+a,
+button.as-link {
+  color: $text-color-highlight;
+  text-decoration: none;
+  transition: color 250ms;
+
+  &.icon-link {
+    display: inline-block;
+    font-size: 0.7em;
+    margin-left: 16px;
+    transform: rotate(-45deg);
+    color: lighten(getColor(dusty-grey), 10%);
+
+    &:hover {
+      color: $text-color-highlight;
+    }
+  }
+
+  &:hover {
+    color: darken(getColor(denim), 5%);
+  }
+}
+
+::selection {
+  background: transparentize(getColor(malibu), 0.65);
+}
+
+.language-diff {
+  .token.prefix.inserted,
+  .token.prefix.deleted {
+    user-select: none;
+  }
+}
+[data-theme='dark'] {
+  @import 'dark';
+}

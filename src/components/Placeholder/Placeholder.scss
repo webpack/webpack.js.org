@@ -1,0 +1,53 @@
+@import 'functions';
+
+.placeholder {
+  h2,
+  p {
+    background-color: getColor(concrete);
+    // use system font to prevent layout change
+    font-family: sans-serif;
+    overflow: hidden;
+    position: relative;
+
+    &:after {
+      animation: placeholderAnimation 1s infinite;
+      background: linear-gradient(
+        to right,
+        getColor(concrete),
+        #fcfcfc,
+        getColor(concrete)
+      );
+      content: '';
+      left: 0;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &__xsmall {
+    width: 35%;
+  }
+
+  &__small {
+    width: 50%;
+  }
+
+  &__medium {
+    width: 75%;
+  }
+
+  &__large {
+    width: 85%;
+  }
+}
+
+@keyframes placeholderAnimation {
+  from {
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    transform: translate3d(100%, 0, 0);
+  }
+}

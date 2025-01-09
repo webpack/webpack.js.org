@@ -1,0 +1,21 @@
+@mixin break($size: medium) {
+  @media (min-width: map-get($screens, $size)) {
+    @content;
+  }
+}
+
+@mixin control-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin fontantialias($on) {
+  @if $on == true {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  } @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}

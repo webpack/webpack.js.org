@@ -1,0 +1,19 @@
+# Top-most EditorConfig file
+root = true
+
+# AutoFormat All Files
+[*]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Format Source Code
+[*.{md,mdx,js,jsx,json,scss,hbs}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+quote_type = single
+
+# Format Configs
+[.eslintignore,*rc]
+indent_style = space
+indent_size = 2

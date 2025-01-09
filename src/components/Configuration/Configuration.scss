@@ -1,0 +1,20 @@
+.shadow {
+  overflow: visible;
+  border-radius: 4px;
+  box-shadow: -1px 1px 10px 0 rgba(255, 255, 255, 0.44);
+
+  pre.inline {
+    padding: 0;
+    display: block;
+  }
+}
+
+.shadow > .markdown {
+  max-height: 48vh !important;
+  overflow: auto;
+}
+
+.inline {
+  padding-right: 15px !important;
+  margin: 0 !important;
+}

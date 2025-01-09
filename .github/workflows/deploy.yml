@@ -1,0 +1,42 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  deploy:
+    name: Deploy Site
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [lts/*]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+
+      - name: Enable webpack persistent caching
+        uses: ./.github/actions/webpack-persistent-cache
+
+      - run: yarn --frozen-lockfile
+      - name: Build site
+        run: yarn build
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          OPENCOLLECTIVE_API_KEY: ${{secrets.OPENCOLLECTIVE_API_KEY}}
+      - run: yarn lint:links
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.7.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          folder: dist
+          clean: true

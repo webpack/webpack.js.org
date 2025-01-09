@@ -1,0 +1,103 @@
+@import 'mixins';
+@import 'functions';
+
+.sidebar-item {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 15px;
+  margin: 0.6em 0;
+
+  &__toggle {
+    flex: 0 0 auto;
+    margin-top: 0.125em;
+    margin-right: 0.5em;
+    cursor: pointer;
+    color: getColor(denim);
+    transition: all 250ms;
+
+    &:hover {
+      color: getColor(mine-shaft);
+    }
+  }
+
+  &__title {
+    flex: 1 1 auto;
+    color: getColor(elephant);
+    max-width: 85%;
+    @include control-overflow;
+    &.active {
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  &__anchors {
+    position: relative;
+    display: none;
+    flex: 0 0 100%;
+    flex-wrap: wrap;
+    margin: 0.35em 0;
+    padding-left: 1.5em;
+    overflow: hidden;
+    list-style: none;
+    line-height: 19px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: calc(100% - 0.6em);
+      top: 0;
+      left: 1.5em;
+      border-left: 1px dashed getColor(dusty-grey);
+    }
+  }
+
+  &__anchor {
+    position: relative;
+    flex: 0 0 100%;
+    margin: 0.25em 0;
+    padding-left: 1em;
+    @include control-overflow;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      width: 0.5em;
+      left: 0;
+      top: 10px;
+      border-bottom: 1px dashed getColor(dusty-grey);
+    }
+
+    a {
+      color: getColor(elephant);
+
+      &:hover {
+        color: getColor(denim);
+      }
+    }
+  }
+
+  &--open {
+    .sidebar-item__anchors {
+      display: flex;
+    }
+
+    .sidebar-item__toggle {
+      transform-origin: center center;
+      transform: rotate(90deg);
+    }
+  }
+
+  &--disabled {
+    .sidebar-item__toggle {
+      color: #aaa;
+    }
+  }
+}

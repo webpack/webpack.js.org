@@ -1,0 +1,61 @@
+@import 'functions';
+@import 'vars';
+@import 'mixins';
+
+.splash-viz {
+  position: relative;
+  display: flex;
+  height: calc(100vh - 55px);
+  min-height: 320px;
+  max-height: 720px;
+  background: getColor(elephant);
+  flex-direction: column;
+  overflow: hidden;
+
+  &__heading {
+    color: getColor(white);
+    font-size: getFontSize(4);
+    text-align: center;
+    font-weight: 200;
+    margin-top: 130px;
+
+    @include break {
+      font-size: getFontSize(5);
+      margin-top: 110px;
+    }
+  }
+
+  &__modules {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 75vw;
+    min-width: 550px;
+    max-width: map-get($screens, large);
+    margin: 0 auto;
+    transform: translate(-50%, -50%);
+    display: none;
+
+    @include break {
+      display: block; // Get height of its child svg
+    }
+
+    img {
+      // Padding is needed to center align
+      // webpack icon with the module image
+      padding-top: 1.5em;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__cube {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 1;
+  }
+}

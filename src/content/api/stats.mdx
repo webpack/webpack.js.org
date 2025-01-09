@@ -1,0 +1,250 @@
+---
+title: Stats Data
+sort: 3
+contributors:
+  - skipjack
+  - franjohn21
+  - byzyk
+  - EugeneHlushko
+  - superburrito
+  - chenxsan
+  - rahul3v
+  - snitin315
+---
+
+When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
+
+```bash
+npx webpack --profile --json=compilation-stats.json
+```
+
+The `--json=compilation-stats.json` flag indicates to webpack that it should emit the `compilation-stats.json` containing the dependency graph and various other build information. Typically, the `--profile` flag is also added so that a `profile` section is added to each [`modules` object](#module-objects) containing module-specific compilation stats.
+
+## Structure
+
+The top-level structure of the output JSON file is fairly straightforward but there are a few nested data structures as well. Each nested structure has a dedicated section below to make this document more consumable. Note that you can click links within the top-level structure below to jump to relevant sections and documentation:
+
+```json
+{
+  "version": "5.9.0", // Version of webpack used for the compilation
+  "hash": "11593e3b3ac85436984a", // Compilation specific hash
+  "time": 2469, // Compilation time in milliseconds
+  "publicPath": "auto",
+  "outputPath": "/", // path to webpack output directory
+  "assetsByChunkName": {
+    // Chunk name to emitted asset(s) mapping
+    "main": ["web.js?h=11593e3b3ac85436984a"],
+    "named-chunk": ["named-chunk.web.js"],
+    "other-chunk": ["other-chunk.js", "other-chunk.css"]
+  },
+  "assets": [
+    // A list of asset objects
+  ],
+  "chunks": [
+    // A list of chunk objects
+  ],
+  "modules": [
+    // A list of module objects
+  ],
+  "entryPoints": {
+    // A list of entry objects
+  },
+  "errors": [
+    // A list of error objects
+  ],
+  "errorsCount": 0, // number of errors
+  "warnings": [
+    // A list of warning objects
+  ],
+  "warningsCount": 0 // nummber of warnings
+}
+```
+
+### Asset Objects
+
+Each `assets` object represents an `output` file emitted from the compilation. They all follow a similar structure:
+
+```json
+{
+  "chunkNames": [], // The chunks this asset contains
+  "chunks": [10, 6], // The chunk IDs this asset contains
+  "comparedForEmit": false, // Indicates whether or not the asset was compared with the same file on the output file system
+  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
+  "name": "10.web.js", // The `output` filename
+  "size": 1058, // The size of the file in bytes
+  "info": {
+    "immutable": true, // A flag telling whether the asset can be long term cached (contains a hash)
+    "size": 1058, // The size in bytes, only becomes available after asset has been emitted
+    "development": true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
+    "hotModuleReplacement": true, // A flag telling whether the asset ships data for updating an existing application (HMR)
+    "sourceFilename": "originalfile.js", // sourceFilename when asset was created from a source file (potentially transformed)
+    "javascriptModule": true // true, when asset is javascript and an ESM
+  }
+}
+```
+
+### Chunk Objects
+
+Each `chunks` object represents a group of modules known as a [chunk](/glossary/#c). Each object follows the following structure:
+
+```json
+{
+  "entry": true, // Indicates whether or not the chunk contains the webpack runtime
+  "files": [
+    // An array of filename strings that contain this chunk
+  ],
+  "filteredModules": 0, // See the description in the [top-level structure](#structure) above
+  "id": 0, // The ID of this chunk
+  "initial": true, // Indicates whether this chunk is loaded on initial page load or [on demand](/guides/lazy-loading)
+  "modules": [
+    // A list of [module objects](#module-objects)
+    "web.js?h=11593e3b3ac85436984a"
+  ],
+  "names": [
+    // An list of chunk names contained within this chunk
+  ],
+  "origins": [
+    // See the description below...
+  ],
+  "parents": [], // Parent chunk IDs
+  "rendered": true, // Indicates whether or not the chunk went through Code Generation
+  "size": 188057 // Chunk size in bytes
+}
+```
+
+The `chunks` object will also contain a list of `origins` describing how the given chunk originated. Each `origins` object follows the following schema:
+
+```json
+{
+  "loc": "", // Lines of code that generated this chunk
+  "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
+  "moduleId": 0, // The ID of the module
+  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
+  "moduleName": "./lib/index.web.js", // Relative path to the module
+  "name": "main", // The name of the chunk
+  "reasons": [
+    // A list of the same `reasons` found in [module objects](#module-objects)
+  ]
+}
+```
+
+### Module Objects
+
+What good would these statistics be without some description of the compiled application's actual modules? Each module in the dependency graph is represented by the following structure:
+
+```json
+{
+  "assets": [
+    // A list of [asset objects](#asset-objects)
+  ],
+  "built": true, // Indicates that the module went through [Loaders](/concepts/loaders), Parsing, and Code Generation
+  "cacheable": true, // Whether or not this module is cacheable
+  "chunks": [
+    // IDs of chunks that contain this module
+  ],
+  "errors": 0, // Number of errors when resolving or processing the module
+  "failed": false, // Whether or not compilation failed on this module
+  "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables/#moduleid-commonjs))
+  "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // A unique ID used internally
+  "name": "./lib/index.web.js", // Path to the actual file
+  "optional": false, // All requests to this module are with `try... catch` blocks (irrelevant with ESM)
+  "prefetched": false, // Indicates whether or not the module was [prefetched](/plugins/prefetch-plugin)
+  "profile": {
+    // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli/#profiling) (in milliseconds)
+    "building": 73, // Loading and parsing
+    "dependencies": 242, // Building dependencies
+    "factory": 11 // Resolving dependencies
+  },
+  "reasons": [
+    // See the description below...
+  ],
+  "size": 3593, // Estimated size of the module in bytes
+  "source": "// Should not break it...\r\nif(typeof...", // The stringified raw source
+  "warnings": 0 // Number of warnings when resolving or processing the module
+}
+```
+
+Every module also contains a list of `reasons` objects describing why that module was included in the dependency graph. Each "reason" is similar to the `origins` seen above in the [chunk objects](#chunk-objects) section:
+
+```json
+{
+  "loc": "33:24-93", // Lines of code that caused the module to be included
+  "module": "./lib/index.web.js", // Relative path to the module based on [context](/configuration/entry-context/#context)
+  "moduleId": 0, // The ID of the module
+  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
+  "moduleName": "./lib/index.web.js", // A more readable name for the module (used for "pretty-printing")
+  "type": "require.context", // The [type of request](/api/module-methods) used
+  "userRequest": "../../cases" // Raw string used for the `import` or `require` request
+}
+```
+
+### Entry Objects
+
+```json
+"main": {
+  "name": "main",
+  "chunks": [
+    179
+  ],
+  "assets": [
+    {
+      "name": "main.js",
+      "size": 22
+    }
+  ],
+  "filteredAssets": 0,
+  "assetsSize": 22,
+  "auxiliaryAssets": [],
+  "filteredAuxiliaryAssets": 0,
+  "auxiliaryAssetsSize": 0,
+  "children": {},
+  "childAssets": {},
+  "isOverSizeLimit": false
+}
+```
+
+### Errors and Warnings
+
+The `errors` and `warnings` properties each contain a list of objects. Each object contains a message, a stack trace and various other properties:
+
+```json
+{
+  "moduleIdentifier": "C:\\Repos\\webpack\\test\\cases\\context\\issue-5750\\index.js",
+  "moduleName": "(webpack)/test/cases/context/issue-5750/index.js",
+  "loc": "3:8-47",
+  "message": "Critical dependency: Contexts can't use RegExps with the 'g' or 'y' flags.",
+  "moduleId": 29595,
+  "moduleTrace": [
+    {
+      "originIdentifier": "C:\\Repos\\webpack\\test\\cases|sync|/^\\.\\/[^/]+\\/[^/]+\\/index\\.js$/",
+      "originName": "(webpack)/test/cases sync ^\\.\\/[^/]+\\/[^/]+\\/index\\.js$",
+      "moduleIdentifier": "C:\\Repos\\webpack\\test\\cases\\context\\issue-5750\\index.js",
+      "moduleName": "(webpack)/test/cases/context/issue-5750/index.js",
+      "dependencies": [
+        {
+          "loc": "./context/issue-5750/index.js"
+        }
+      ],
+      "originId": 32582,
+      "moduleId": 29595
+    },
+    {
+      "originIdentifier": "C:\\Repos\\webpack\\testCases.js",
+      "originName": "(webpack)/testCases.js",
+      "moduleIdentifier": "C:\\Repos\\webpack\\test\\cases|sync|/^\\.\\/[^/]+\\/[^/]+\\/index\\.js$/",
+      "moduleName": "(webpack)/test/cases sync ^\\.\\/[^/]+\\/[^/]+\\/index\\.js$",
+      "dependencies": [
+        {
+          "loc": "1:0-70"
+        }
+      ],
+      "originId": 8198,
+      "moduleId": 32582
+    }
+  ],
+  "details": "at RequireContextDependency.getWarnings (C:\\Repos\\webpack\\lib\\dependencies\\ContextDependency.js:79:5)\n    at Compilation.reportDependencyErrorsAndWarnings (C:\\Repos\\webpack\\lib\\Compilation.js:1727:24)\n    at C:\\Repos\\webpack\\lib\\Compilation.js:1467:10\n    at _next2 (<anonymous>:16:1)\n    at eval (<anonymous>:42:1)\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:219:18\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:40:16\n    at Hook.eval [as callAsync] (<anonymous>:38:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (C:\\Repos\\tapable\\lib\\Hook.js:18:14)\n    at Compilation.finish (C:\\Repos\\webpack\\lib\\Compilation.js:1462:28)\n    at C:\\Repos\\webpack\\lib\\Compiler.js:909:18\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)\n",
+  "stack": "ModuleDependencyWarning: Critical dependency: Contexts can't use RegExps with the 'g' or 'y' flags.\n    at Compilation.reportDependencyErrorsAndWarnings (C:\\Repos\\webpack\\lib\\Compilation.js:1732:23)\n    at C:\\Repos\\webpack\\lib\\Compilation.js:1467:10\n    at _next2 (<anonymous>:16:1)\n    at eval (<anonymous>:42:1)\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:219:18\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:40:16\n    at Hook.eval [as callAsync] (<anonymous>:38:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (C:\\Repos\\tapable\\lib\\Hook.js:18:14)\n    at Compilation.finish (C:\\Repos\\webpack\\lib\\Compilation.js:1462:28)\n    at C:\\Repos\\webpack\\lib\\Compiler.js:909:18\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)\n"
+}
+```
+
+W> Note that the stack traces are removed when `errorStack: false` is passed to the `toJson` method. The `errorStack` option is set to `true` by default.

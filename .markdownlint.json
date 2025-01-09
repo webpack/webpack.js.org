@@ -1,0 +1,18 @@
+{
+  "default": true,
+  "MD002": false,
+  "MD004": { "style": "dash" },
+  "MD007": { "indent": 2 },
+  "MD013": { "line_length": 600, "code_blocks": false },
+  "MD024": {
+    "siblings_only": true
+  },
+  "MD026": false,
+  "MD029": { "style": "ordered" },
+  "MD033": false,
+  "MD034": false,
+  "MD036": false,
+  "MD041": false,
+  "no-hard-tabs": false,
+  "whitespace": false
+}

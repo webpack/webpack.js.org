@@ -1,0 +1,93 @@
+@import 'functions';
+
+.support {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 0.5em 1em;
+
+  &__description {
+    flex: 0 0 100%;
+    margin-bottom: 1em;
+  }
+
+  &__rank {
+    text-transform: capitalize;
+
+    &:after {
+      content: ' ';
+    }
+  }
+
+  &__item {
+    position: relative;
+    margin: 0 2px 2px 2px;
+    @media (prefers-color-scheme: dark) {
+      background-color: #fff;
+    }
+  }
+
+  &__latest-avatar {
+    max-height: 64px;
+    max-width: 192px;
+    vertical-align: middle;
+  }
+
+  &__bronze-avatar {
+    max-height: 32px;
+    max-width: 96px;
+    vertical-align: middle;
+  }
+
+  &__silver-avatar {
+    max-height: 64px;
+    max-width: 192px;
+    vertical-align: middle;
+  }
+
+  &__gold-avatar {
+    max-height: 96px;
+    max-width: 288px;
+    vertical-align: middle;
+  }
+
+  &__platinum-avatar {
+    max-height: 128px;
+    max-width: 100%;
+    vertical-align: middle;
+
+    @media (min-width: 400px) {
+      max-width: 384px;
+    }
+  }
+
+  &__backer-avatar {
+    display: inline-block;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: 0 0 0 1px rgb(112, 202, 10);
+    overflow: hidden;
+  }
+
+  &__bottom {
+    flex: 0 0 100%;
+    margin-top: 1em;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: 0.4em 1em;
+    text-transform: uppercase;
+    color: getColor(denim);
+    border: 1px solid getColor(denim);
+    border-radius: 1.25em;
+    transition: all 250ms;
+
+    &:hover {
+      background: getColor(denim);
+      color: getColor(white);
+    }
+  }
+}

@@ -1,0 +1,65 @@
+@import 'vars';
+@import 'mixins';
+@import 'functions';
+
+.sidebar {
+  display: none;
+  width: 100%;
+  max-width: 280px;
+  will-change: transform;
+
+  @include break {
+    display: block;
+  }
+}
+
+.sidebar__inner {
+  padding: 1.5em;
+  position: sticky;
+  top: -1px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.sidebar__group {
+  margin-top: 1.5em;
+  margin-left: 0.15em;
+  text-transform: capitalize;
+  font-size: getFontSize(1);
+  font-family: $font-stack-heading;
+  color: getColor(elephant);
+}
+
+.sidebar__shields {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    margin-right: 6px;
+
+    img {
+      height: 20px;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.sidebar__docs-version {
+  color: #535353;
+  border-top: 1px solid #f2f2f2;
+  margin-top: 12px;
+  padding-top: 12px;
+  font-size: 15px;
+
+  ul {
+    margin-top: 12px;
+
+    li {
+      margin-top: 6px;
+      list-style: none;
+    }
+  }
+}

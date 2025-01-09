@@ -1,0 +1,65 @@
+---
+title: Web Workers
+sort: 21
+contributors:
+  - chenxsan
+---
+
+As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) without [`worker-loader`](https://github.com/webpack-contrib/worker-loader).
+
+## Syntax
+
+```js
+new Worker(new URL('./worker.js', import.meta.url));
+```
+
+```js
+// or customize the chunk name with magic comments
+// see https://webpack.js.org/api/module-methods/#magic-comments
+new Worker(
+  /* webpackChunkName: "foo-worker" */ new URL('./worker.js', import.meta.url)
+);
+```
+
+The syntax was chosen to allow running code without bundler, it is also available in native ECMAScript modules in the browser.
+
+Note that while the [`Worker` API](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) suggests that `Worker` constructor would accept a string representing the URL of the script, in webpack 5 you can only use `URL` instead.
+
+W> Using a variable in the `Worker` constructor is not supported by webpack. For example, the following code will not work: `const url = new URL('./path/to/worker.ts', import.meta.url); const worker = new Worker(url);`. This is because webpack cannot analyse the syntax statically. It is important to be aware of this limitation when using `Worker` syntax with webpack.
+
+## Example
+
+**src/index.js**
+
+```js
+const worker = new Worker(new URL('./deep-thought.js', import.meta.url));
+worker.postMessage({
+  question:
+    'The Answer to the Ultimate Question of Life, The Universe, and Everything.',
+});
+worker.onmessage = ({ data: { answer } }) => {
+  console.log(answer);
+};
+```
+
+**src/deep-thought.js**
+
+```js
+self.onmessage = ({ data: { question } }) => {
+  self.postMessage({
+    answer: 42,
+  });
+};
+```
+
+## Node.js
+
+Similar syntax is supported in Node.js (>= 12.17.0):
+
+```js
+import { Worker } from 'worker_threads';
+
+new Worker(new URL('./worker.js', import.meta.url));
+```
+
+Note that this is only available in ESM. `Worker` in CommonJS syntax is not supported by either webpack or Node.js.

@@ -1,0 +1,304 @@
+---
+title: To v5 from v4
+sort: 1
+contributors:
+  - sokra
+  - salemhilal
+  - keichinger
+  - EugeneHlushko
+  - MattGoldwater
+  - rramaa
+  - chenxsan
+  - jamesgeorge007
+  - getsnoopy
+  - yevhen-logosha
+---
+
+This guide aims to help you migrating to webpack 5 when using webpack directly. If you are using a higher level tool to run webpack, please refer to the tool for migration instructions.
+
+## Preparations
+
+Webpack 5 requires at least Node.js 10.13.0 (LTS), so make sure you upgrade your Node.js if you're still running an older one.
+
+## Upgrade webpack 4 and its plugins/loaders
+
+1. Upgrade `webpack` 4 to the latest available version.
+
+   - When using webpack >= 4, upgrading to the latest webpack 4 version should not require additional guidance.
+
+   - If you are using webpack version less than 4 please see the [webpack 4 migration guide](/migrate/4/).
+
+2. Upgrade `webpack-cli` to the latest available version (when used)
+
+3. Upgrade all used Plugins and Loaders to the latest available version
+
+   Some Plugins and Loaders might have a beta version that has to be used in order to be compatible with webpack 5.
+   Make sure to read release notes of each individual plugin/loader when upgrading it, since latest version might only support webpack 5 and will fail in v4. In such case, it's recommended to update to the latest version that supports webpack 4.
+
+### Make sure your build has no errors or warnings
+
+There might be new errors or warnings because of the upgraded versions of `webpack`, `webpack-cli`, Plugins and Loaders. Keep an eye for deprecation warnings during the build.
+
+You can invoke `webpack` this way to get stack traces for deprecation warnings to figure out which Plugins and Loaders are responsible.
+
+```bash
+node --trace-deprecation node_modules/webpack/bin/webpack.js
+```
+
+As webpack 5 removes all deprecated features, make sure there's no webpack deprecation warnings during the build in order to proceed.
+
+### Make sure to use `mode`
+
+Set `mode` to either [`production`](/configuration/mode/#mode-production) or [`development`](/configuration/mode/#mode-development) to make sure that corresponding defaults are set.
+
+### Update outdated options
+
+Update the following options to their new version (if used):
+
+- `optimization.hashedModuleIds: true` → `optimization.moduleIds: 'hashed'`
+- `optimization.namedChunks: true` → `optimization.chunkIds: 'named'`
+- `optimization.namedModules: true` → `optimization.moduleIds: 'named'`
+- `NamedModulesPlugin` → `optimization.moduleIds: 'named'`
+- `NamedChunksPlugin` → `optimization.chunkIds: 'named'`
+- `HashedModuleIdsPlugin` → `optimization.moduleIds: 'hashed'`
+- `optimization.noEmitOnErrors: false` → `optimization.emitOnErrors: true`
+- `optimization.occurrenceOrder: true` → `optimization: { chunkIds: 'total-size', moduleIds: 'size' }`
+- `optimization.splitChunks.cacheGroups.vendors` → `optimization.splitChunks.cacheGroups.defaultVendors`
+- `optimization.splitChunks.cacheGroups.test(module, chunks)` → `optimization.splitChunks.cacheGroups.test(module, { chunkGraph, moduleGraph })`
+- `Compilation.entries` → `Compilation.entryDependencies`
+- `serve` → `serve` is removed in favor of [`DevServer`](/configuration/dev-server/)
+- [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (deprecated since v3) → `Rule.options`/`UseEntry.options`
+- `Rule.loaders` → [`Rule.use`](/configuration/module/#ruleuse)
+
+T> Checkout the detailed changes in the configuration options [here](/blog/2020-10-10-webpack-5-release/#changes-to-the-configuration).
+
+### Test webpack 5 compatibility
+
+Try to set the following options in your webpack 4 configuration and check if build still works correctly.
+
+```javascript
+module.exports = {
+  // ...
+  node: {
+    Buffer: false,
+    process: false,
+  },
+};
+```
+
+You have to remove these options again when upgrading your configuration for webpack 5.
+
+T> webpack 5 removes these options from the configuration schema and will always use `false`.
+
+## Upgrade webpack to 5
+
+Now let's upgrade webpack to version 5:
+
+- npm: `npm install webpack@latest`
+
+- Yarn: `yarn add webpack@latest`
+
+If you were not able to upgrade some plugins/loaders to the latest in Upgrade webpack 4 and its plugins/loaders step, don't forget to upgrade them now.
+
+### Clean up configuration
+
+- Consider removing `optimization.moduleIds` and `optimization.chunkIds` from your webpack configuration. The defaults could be better, because they support long term caching in [`production mode`](/configuration/mode/#mode-production) and debugging in [`development` mode](/configuration/mode/#mode-development).
+- When using `[hash]` placeholder in webpack configuration, consider changing it to `[contenthash]`. It is not the same, but proven to be more effective.
+- If you are using Yarn's PnP and the `pnp-webpack-plugin`, we have good news: it is supported by default now. You have to remove it from the configuration.
+- If you are using `IgnorePlugin` with a regular expression as argument, it takes an `options` object now: `new IgnorePlugin({ resourceRegExp: /regExp/ })`.
+- If you are using something like `node.fs: 'empty'` replace it with `resolve.fallback.fs: false`.
+- If you are using `watch: true` in webpack Node.js API, remove it. There's no need to set it as it's indicated by the compiler method you call, either `true` for `watch()` or `false` for `run()`.
+- If you have `rules` defined for loading assets using `raw-loader`, `url-loader`, or `file-loader`, please use [Asset Modules](/guides/asset-modules/) instead as they're going to be deprecated in near future.
+- If you have `target` set to a function, update it to `false` and apply that function within `plugins` option. See example below:
+
+  ```json
+  // for webpack 4
+  {
+      target: WebExtensionTarget(nodeConfig)
+  }
+
+  // for webpack 5
+  {
+      target: false,
+      plugins: [
+          WebExtensionTarget(nodeConfig)
+      ]
+  }
+  ```
+
+- If you have output.library or output.libraryTarget defined, change the property names: (output.libraryTarget -> output.library.type, output.library -> output.library.name). Example
+
+  ```json
+  // for webpack 4
+  {
+      output: {
+        library: 'MyLibrary',
+        libraryTarget: 'commonjs2'
+      }
+  }
+
+  // for webpack 5
+  {
+      output: {
+        library: {
+          name: 'MyLibrary',
+          type: 'commonjs2'
+        }
+      }
+  }
+  ```
+
+If you were using WebAssembly via import, you should follow this two step process:
+
+- Enable the deprecated spec by setting `experiments.syncWebAssembly: true`, to get the same behavior as in webpack 4.
+- After successful migration to webpack 5, change the `experiments` value to `experiments: { asyncWebAssembly: true }` to use the up-to-date spec for WASM integration.
+
+Reconsider `optimization.splitChunks`:
+
+- It's recommended to use either the defaults or `optimization.splitChunks: { chunks: 'all' }`.
+- When using a custom configuration, drop `name: false` and replace `name: string | function` with `idHint: string | function`.
+- It was possible to turn off the defaults by setting `optimization.splitChunks.cacheGroups: { default: false, vendors: false }`. We don't recommend doing this, but if you really want to get the same effect in webpack 5: `optimization.splitChunks.cacheGroups: { default: false, defaultVendors: false }`.
+
+Consider removing defaults:
+
+- Using `entry: './src/index.js'`: you can omit it, that's the default.
+- Using `output.path: path.resolve(__dirname, 'dist')`: you can omit it, that's the default.
+- Using `output.filename: '[name].js'`: you can omit it, that's the default.
+
+### Need to support an older browser like IE 11?
+
+- If you have [browserslist](https://github.com/browserslist/browserslist) enabled for your project, webpack 5 will reuse your `browserslist` config to decide which code style to emit for the runtime code.
+
+  Make sure to:
+
+  1. set [`target`](/configuration/target/#root) to `browserslist` or remove `target` letting webpack set `browserslist` automatically for you.
+  2. add a `IE 11` to your browserslist configuration.
+
+- Without a `browserslist` webpack's runtime code uses ES2015 syntax (e.g., arrow function) to build smaller bundles. Hence you'll need to set `target: ['web', 'es5']` to use the ES5 syntax for browsers (like IE11) which don't support ES2015 syntax .
+- For Node.js, builds include the supported Node.js version in the `target` option and webpack will automatically figure out which syntax is supported, e.g. `target: 'node8.6'`.
+
+### Cleanup the code
+
+#### Using `/* webpackChunkName: '...' */`
+
+Make sure to understand the intention:
+
+- The chunk's name here is intended to be public.
+- It's not a development-only name.
+- Webpack will use it to name files in production and development modes.
+- Webpack 5 will automatically assign useful file names in `development` mode even when not using `webpackChunkName`.
+
+#### Using named exports from JSON modules
+
+This is not supported by the new specification and you will get a warning. Instead of:
+
+```js
+import { version } from './package.json';
+console.log(version);
+```
+
+use:
+
+```js
+import pkg from './package.json';
+console.log(pkg.version);
+```
+
+#### Cleanup the build code
+
+- When using `const compiler = webpack(...);`, make sure to close the compiler after using it: `compiler.close(callback);`.
+  - This doesn't apply to the `webpack(..., callback)` form which automatically closes.
+  - This is optional if you use webpack in watching mode until the user ends the process. The idle phases in watch mode will be used for this kind of work.
+
+### Run a single build and follow advice
+
+Please make sure to read the building errors/warnings carefully. If there is no corresponding advice, please create an issue and we will try to resolve it.
+
+Repeat the following steps until you solved at least level 3 or 4:
+
+- Level 1: **Schema validation fails**.
+
+  Configuration options have changed. There should be a validation error with a `BREAKING CHANGE:` note, or a hint of which option should be used instead.
+
+- Level 2: **Webpack exits with an error**.
+
+  The error message should tell you what needs to be changed.
+
+- Level 3: **Build Errors**.
+
+  The error message should have a `BREAKING CHANGE:` note.
+
+- Level 4: **Build Warnings**.
+
+  The warning message should tell you what can be improved.
+
+- Level 5: **Runtime Errors**.
+
+  This is tricky. You probably have to debug to find the problem. General advice is difficult here. But we do list some common advice below regarding Runtime Errors:
+
+  - `process` is not defined.
+    - webpack 5 does no longer include a polyfill for this Node.js variable. Avoid using it in the frontend code.
+    - Want to support browser usage? Use the `exports` or `imports` package.json field to use different code depending on the environment.
+      - Also use the `browser` field to support older bundlers.
+      - Alternative: Wrap code blocks with the `typeof process` checks. Note that this will have a negative impact on the bundle size.
+    - Want to use environment variables with `process.env.VARIABLE`? You need to use the `DefinePlugin` or `EnvironmentPlugin` to define these variables in the configuration.
+      - Consider using `VARIABLE` instead and make sure to check `typeof VARIABLE !== 'undefined'` too. `process.env` is Node.js specific and should be avoided in frontend code.
+  - 404 errors pointing to URLs containing `auto`
+    - Not all ecosystem tooling is ready for the new default automatic `publicPath` via `output.publicPath: "auto"`
+      - Use a static `output.publicPath: ""` instead.
+
+- Level 6: **Deprecation Warnings**.
+
+  You probably get a lot of deprecation warnings. This is not directly a problem. Plugins need time to catch up with core changes. Please report these deprecations to the plugins. These deprecations are only warnings and the build will still work with only minor drawbacks (like less performance).
+
+  - You can hide deprecation warnings by running node with `--no-deprecation` flag, e.g.: `node --no-deprecation node_modules/webpack/bin/webpack.js`. This should only be a temporary workaround.
+  - Plugins and Loaders contributors can follow the advice in the deprecation messages to improve the code.
+
+- Level 7: **Performance issues**.
+
+  Usually, performance should improve with webpack 5, but there are also a few cases where performance gets worse.
+
+  And here are something you can do to improve the situation:
+
+  - Profile where the time is spent.
+    - `--profile --progress` displays a simple performance profile now
+    - `node --inspect-brk node_modules/webpack/bin/webpack.js` + [`chrome://inspect`](chrome://inspect) / [`edge://inspect`](edge://inspect) (see profiler tab).
+      - You can save these profiles to files and provide them in issues.
+      - Try using `--no-turbo-inlining` flag for better stack traces in some cases.
+  - Time for building modules in incremental builds can be improved by reverting to unsafe caching like in webpack 4:
+    - `module.unsafeCache: true`
+    - But this might affect the ability to handle some of the changes to the code base
+  - Full build
+    - Backward-compatibility layer for the deprecated features will usually have worse performance compared to the new features.
+    - Creating many warnings can affect build performance, even if they are ignored.
+    - Source Maps are expensive. Check [`devtool`](/configuration/devtool/) option in the documentation to see a comparison of the different options.
+    - Anti-Virus protection might affect performance of the file system access.
+    - Persistent Caching can help to improve the repetitive full builds.
+    - Module Federation allows to split the application into multiple smaller builds.
+
+## Everything works?
+
+Please tweet that you have successfully migrated to webpack 5. [Tweet it](https://twitter.com/intent/tweet?source=https://webpack.js.org/migrate/5/&text=I%20just%20migrated%20to%20webpack%205%20using%20its%20migration%20guide!%20&via=webpack&hashtags=webpack,webpack5)
+
+## It is not working?
+
+Create an [issue](https://github.com/webpack/webpack/issues/new?template=Bug_report.md) and tell us about the issues you have encountered during the migration.
+
+## Something missing in this guide?
+
+Please open a [Pull Request](https://github.com/webpack/webpack.js.org/edit/main/src/content/migrate/5.mdx) to help the next person using this guide.
+
+## Changes to internals
+
+The changes to webpack internals such as: adding types, refactoring code and methods renaming are listed here for anyone interested. But they are not intended as a part of common use-case migration.
+
+- `Module.nameForCondition`, `Module.updateCacheModule` and `Module.chunkCondition` are no longer optional.
+
+### getOptions method for Loaders
+
+Webpack 5 ships with built-in [`this.getOptions`](/api/loaders/#thisgetoptionsschema) method available in loader context. This is a breaking change for loaders that had been using `getOptions` method from previously preferred [schema-utils](https://github.com/webpack/schema-utils):
+
+- `this.getOptions` is available since webpack 5
+- Instead of JSON5 it supports JSON as a query string: `?{arg:true}` → `?{"arg":true}`. Using JSON5 should be considered and documented as deprecated in favor of JSON in the respective Loader's documentation.
+- [`loader-utils`](https://github.com/webpack/loader-utils) has specific behavior for parsing query strings (`true`, `false` and `null` won't be parsed as `string` but as a primitive value). This is no longer the case for the new built-in `this.getOptions` method, which uses native [`querystring`](https://nodejs.org/api/querystring.html) parsing (ships with Node.js). It is still possible to add custom behavior for these cases in the Loader's code after getting the options by using `this.getOptions` method.
+- Schema argument is optional for the new `this.getOptions` method, but we strongly advise to add schema validation for your Loader's options. The `title` field in the schema, can be used to customize the validation error message e.g. `"title": "My Loader ooooptions"` will result in displaying errors this way: `Invalid ooooptions object. My Loader has been initialised using an ooooptions object that does not match the API schema. - ooooptions.foo.bar.baz should be a string.`

@@ -1,0 +1,7 @@
+- [ ] Check the current issues to ensure you aren't creating a duplicate.
+- [ ] Consider making small typo fixes and such directly as pull requests.
+- [ ] For the voting application, go to https://github.com/webpack-contrib/voting-app.
+- [ ] For the document of Chinese translation（中文版文档), go to https://github.com/docschina/webpack.js.org.
+- [ ] For loader/plugin docs, consider opening an issue in the corresponding repository.
+- [ ] No existing issue? Go ahead and open a new one.
+- **Remove these instructions from your PR as they are for your eyes only.**

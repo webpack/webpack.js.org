@@ -1,0 +1,162 @@
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+.splash__section--dark {
+  background-color: #202020;
+}
+.markdown {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #9ab3c0;
+  }
+  code,
+  tt {
+    text-shadow: none;
+    background-color: transparentize(getColor(fiord), 0.55);
+  }
+  blockquote {
+    border-left-color: #343434;
+    color: #a3a3a3;
+  }
+  blockquote.tip {
+    background-color: #192429;
+    color: #7da2b4;
+  }
+  blockquote.warning {
+    background-color: #27220a;
+    color: #a49d83;
+  }
+  blockquote.todo {
+    background-color: #402b1f;
+    color: #998478;
+  }
+  hr {
+    background-color: #343434;
+  }
+  th {
+    background-color: #121212;
+    border-color: #252525;
+  }
+  tr,
+  tr:last-child {
+    border-color: #252525;
+  }
+  tr:nth-child(2n) {
+    background-color: #202020;
+  }
+  td {
+    border-color: #252525;
+  }
+  pre {
+    background-color: #131b1f;
+    code {
+      background: transparent;
+    }
+  }
+  a code {
+    color: #69a8ee;
+    &:hover {
+      color: #82b7f6;
+    }
+  }
+
+  aside.tip,
+  aside.warning,
+  aside.preview,
+  aside.todo {
+    background-color: #222222;
+    color: #fff;
+  }
+  aside.tip {
+    > .tip__prefix {
+      color: #fff;
+    }
+  }
+  aside.warning {
+    > .warning__prefix {
+      color: #fff;
+    }
+  }
+  aside.preview {
+    > .preview__prefix {
+      color: #fff;
+    }
+  }
+  aside.todo {
+    > .todo__prefix {
+      color: #fff;
+    }
+  }
+}
+.sidebar-item__title,
+.sidebar-item__anchor a {
+  color: #b8b8b8;
+}
+.sidebar-item__title.active {
+  color: #fff;
+}
+.gitter__button {
+  background: #1c3b39;
+}
+.sponsors__content,
+.footer__inner {
+  border-color: #252525;
+}
+a,
+button.as-link {
+  color: #69a8ee;
+}
+.page-links__gap {
+  color: #999;
+}
+.sidebar-item__toggle,
+.sidebar-item--disabled .sidebar-item__toggle {
+  color: #69a8ee;
+}
+.sidebar-item__anchor a:hover,
+a:hover {
+  color: #82b7f6;
+}
+.site {
+  background: #121212 !important;
+}
+.sidebar__docs-version {
+  border-color: #252525;
+  color: #b8b8b8;
+}
+.contributor .contributor__name {
+  background-color: #121212;
+  color: #9ab3c0;
+}
+.placeholder h2,
+.placeholder p {
+  background-color: #252525;
+  &:after {
+    background: linear-gradient(90deg, #252525, #121212, #252525);
+  }
+}
+
+// Mobile
+.sidebar-mobile__content {
+  background-color: #121212;
+}
+.sidebar-mobile__section-header {
+  color: #cadbe6;
+}
+.sidebar-mobile__page {
+  color: #a3a3a3;
+}
+.sidebar-mobile__page--active,
+.sidebar-mobile__page:active {
+  background-color: #222424;
+}
+.sidebar-mobile__content
+  div:not(:first-of-type)
+  .sidebar-mobile__section-header {
+  border-color: #343434;
+}

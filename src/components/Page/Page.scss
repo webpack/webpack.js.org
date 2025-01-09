@@ -1,0 +1,14 @@
+@import 'mixins';
+@import 'functions';
+
+.page {
+  flex: 1 1 auto;
+  position: relative;
+  overflow-x: hidden;
+  padding: 1.5em 1em;
+
+  @include break {
+    flex: 3;
+    padding: 1.5em;
+  }
+}

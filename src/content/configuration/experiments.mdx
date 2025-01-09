@@ -1,0 +1,334 @@
+---
+title: Experiments
+sort: 19
+contributors:
+  - EugeneHlushko
+  - wizardofhogwarts
+  - chenxsan
+  - anshumanv
+  - snitin315
+  - burhanuday
+---
+
+## experiments
+
+`boolean: false`
+
+`experiments` option was introduced in webpack 5 to empower users with the ability to activate and try out experimental features.
+
+W> Because experimental features have relaxed semantic versioning and might contain breaking changes, make sure to fix webpack's version to minor e.g. `webpack: ~5.4.3` instead of `webpack: ^5.4.3` or use a lockfile when using `experiments`.
+
+Available options:
+
+- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
+- [`backCompat`](#experimentsbackcompat)
+- [`buildHttp`](#experimentsbuildhttp)
+- [`cacheUnaffected`](#experimentscacheunaffected)
+- [`css`](#experimentscss)
+- [`futureDefaults`](#experimentsfuturedefaults)
+- `layers`: Enable module and chunk layers.
+- [`lazyCompilation`](#experimentslazycompilation)
+- [`outputModule`](#experimentsoutputmodule)
+- `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
+- [`topLevelAwait`](#experimentstoplevelawait)
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  experiments: {
+    asyncWebAssembly: true,
+    buildHttp: true,
+    layers: true,
+    lazyCompilation: true,
+    outputModule: true,
+    syncWebAssembly: true,
+    topLevelAwait: true,
+  },
+};
+```
+
+### experiments.backCompat
+
+Enable backward-compat layer with deprecation warnings for many webpack 4 APIs.
+
+- Type: `boolean`
+
+```js
+module.exports = {
+  //...
+  experiments: {
+    backCompat: true,
+  },
+};
+```
+
+### experiments.buildHttp
+
+When enabled, webpack can build remote resources that begin with the `http(s):` protocol.
+
+- Type:
+
+  - `(string | RegExp | ((uri: string) => boolean))[]`
+
+    A shortcut for [`experiments.buildHttp.allowedUris`](#experimentsbuildhttpalloweduris).
+
+  - `HttpUriOptions`
+
+    ```ts
+    {
+      allowedUris: (string|RegExp|(uri: string) => boolean)[],
+      cacheLocation?: false | string,
+      frozen?: boolean,
+      lockfileLocation?: string,
+      upgrade?: boolean
+    }
+    ```
+
+- Available: 5.49.0+
+- Example
+
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: true,
+    },
+  };
+  ```
+
+  ```js
+  // src/index.js
+  import pMap1 from 'https://cdn.skypack.dev/p-map';
+  // with `buildHttp` enabled, webpack will build pMap1 like a regular local module
+  console.log(pMap1);
+  ```
+
+#### experiments.buildHttp.allowedUris
+
+A list of allowed URIs.
+
+- Type: `(string|RegExp|(uri: string) => boolean)[]`
+- Example
+
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: {
+        allowedUris: [
+          'http://localhost:9990/',
+          'https://raw.githubusercontent.com/',
+        ],
+      },
+    },
+  };
+  ```
+
+#### experiments.buildHttp.cacheLocation
+
+Define the location for caching remote resources.
+
+- Type
+  - `string`
+  - `false`
+- Example
+
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: {
+        cacheLocation: false,
+      },
+    },
+  };
+  ```
+
+By default webpack would use `<compiler-name.>webpack.lock.data/` for caching, but you can disable it by setting its value to `false`.
+
+Note that you should commit files under `experiments.buildHttp.cacheLocation` into a version control system as no network requests will be made during the `production` build.
+
+#### experiments.buildHttp.frozen
+
+Freeze the remote resources and lockfile. Any modification to the lockfile or resource contents will result in an error.
+
+- Type: `boolean`
+
+#### experiments.buildHttp.lockfileLocation
+
+Define the location to store the lockfile.
+
+- Type: `string`
+
+By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make sure to commit it into a version control system. During the `production` build, webpack will build those modules beginning with `http(s):` protocol from the lockfile and caches under [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
+
+#### experiments.buildHttp.proxy
+
+Specify the proxy server to use for fetching remote resources.
+
+- Type: `string`
+
+By default, Webpack would imply the proxy server to use for fetching remote resources from the `http_proxy` (case insensitive) environment variable. However, you can also specify one through the `proxy` option.
+
+#### experiments.buildHttp.upgrade
+
+Detect changes to remote resources and upgrade them automatically.
+
+- Type: `boolean`
+
+### experiments.css
+
+Enable native CSS support. Note that it's an experimental feature still under development and will be enabled by default in webpack v6, however you can track the progress on [GitHub](https://github.com/webpack/webpack/issues/14893).
+
+- Type: `boolean`
+
+Experimental features:
+
+- CSS Modules support: webpack will generate a unique name for each CSS class. Use the `.module.css` extension for CSS Modules.
+- <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json` files:
+  webpack will look for `style` field in `package.json` files and use that if it
+  exists for imports inside CSS files.
+
+  For example, if you add `@import 'bootstrap';` to your CSS file, webpack will look for `bootstrap` in `node_modules` and use the `style` field in `package.json` from there. If `style` field is not found, webpack will use the `main` field instead to preserve backward compatibility.
+
+- Content hash for CSS files: webpack will generate a content hash for CSS files and use it in the filename. This is useful for long-term caching.
+- CSS extraction: webpack will extract CSS into a separate file. This functionality replaces the need for `mini-css-extract-plugin` and `css-loader`, as it provides native support.
+- CSS imports: webpack will inline CSS imports into the generated CSS file.
+- Hot Module Reload (HMR): webpack supports HMR for CSS files. This means that changes made to CSS files will be reflected in the browser without a full page reload.
+
+### experiments.cacheUnaffected
+
+Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
+
+- Type: `boolean`
+
+Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
+
+### experiments.futureDefaults
+
+Use defaults of the next major webpack and show warnings in any problematic places.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  experiments: {
+    futureDefaults: true,
+  },
+};
+```
+
+### experiments.lazyCompilation
+
+Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
+
+- Type
+
+  - `boolean`
+  - `object`
+
+    ```ts
+    {
+      // define a custom backend
+      backend?: ((
+        compiler: Compiler,
+        callback: (err?: Error, api?: BackendApi) => void
+      ) => void)
+        | ((compiler: Compiler) => Promise<BackendApi>)
+        | {
+          /**
+           * A custom client.
+           */
+          client?: string;
+
+          /**
+           * Specify where to listen to from the server.
+           */
+          listen?: number | ListenOptions | ((server: Server) => void);
+
+          /**
+           * Specify the protocol the client should use to connect to the server.
+           */
+          protocol?: "http" | "https";
+
+          /**
+           * Specify how to create the server handling the EventSource requests.
+           */
+          server?: ServerOptionsImport | ServerOptionsHttps | (() => Server);
+        },
+      entries?: boolean,
+      imports?: boolean,
+      test?: string | RegExp | ((module: Module) => boolean)
+    }
+    ```
+
+    - `backend`: Customize the backend.
+    - `entries`: Enable lazy compilation for entries.
+    - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
+    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
+
+- Available: 5.17.0+
+- Example 1:
+
+  ```js
+  module.exports = {
+    // …
+    experiments: {
+      lazyCompilation: true,
+    },
+  };
+  ```
+
+- Example 2:
+
+  ```js
+  module.exports = {
+    // …
+    experiments: {
+      lazyCompilation: {
+        // disable lazy compilation for dynamic imports
+        imports: false,
+
+        // disable lazy compilation for entries
+        entries: false,
+
+        // do not lazily compile moduleB
+        test: (module) => !/moduleB/.test(module.nameForCondition()),
+      },
+    },
+  };
+  ```
+
+### experiments.outputModule
+
+`boolean`
+
+Once enabled, webpack will output ECMAScript module syntax whenever possible. For instance, `import()` to load chunks, ESM exports to expose chunk data, among others.
+
+```js
+module.exports = {
+  experiments: {
+    outputModule: true,
+  },
+};
+```
+
+### experiments.topLevelAwait
+
+`boolean = true`
+
+The `topLevelAwait` option transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0`, this feature is enabled by default. However, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`.
+
+```js
+module.exports = {
+  experiments: {
+    topLevelAwait: true,
+  },
+};
+```

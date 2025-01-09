@@ -1,0 +1,13 @@
+[
+  "app-shell/index.html",
+  "appcache/manifest.html",
+  "printable/index.html",
+  "api/printable/index.html",
+  "concepts/printable/index.html",
+  "configuration/printable/index.html",
+  "contribute/printable/index.html",
+  "guides/printable/index.html",
+  "migrate/printable/index.html",
+  "loaders/printable/index.html",
+  "plugins/printable/index.html"
+]
