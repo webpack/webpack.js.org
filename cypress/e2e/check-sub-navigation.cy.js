@@ -7,11 +7,11 @@ describe('Detect sub navigation', () => {
     cy.get(selector).should('exist');
   });
 
-  it('should not show sub navigation', () => {
+  it('should show sub navigation on homepage', () => {
     cy.visit('/');
 
     const selector = '[data-testid="sub-navigation"]';
 
-    cy.get(selector).should('not.exist');
+    cy.get(selector).should('exist');
   });
 });
