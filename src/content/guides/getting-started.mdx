@@ -27,6 +27,7 @@ contributors:
   - d3lm
   - snitin315
   - Etheryen
+  - RajeevPullat
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -111,6 +112,7 @@ T> If you want to learn more about the inner workings of `package.json`, then we
    "description": "",
 -  "main": "index.js",
 +  "private": true,
++  "type": "module",
    "scripts": {
      "test": "echo \"Error: no test specified\" && exit 1"
    },
@@ -133,6 +135,8 @@ There are problems with managing JavaScript projects this way:
 - If a dependency is included but not used, the browser will be forced to download unnecessary code.
 
 Let's use webpack to manage these scripts instead.
+
+T> The `type: module` in the package.json is required to enable ES module import statements in .js files by telling Node.js to treat them as ES modules instead of the default CommonJS modules.
 
 ## Creating a Bundle
 
