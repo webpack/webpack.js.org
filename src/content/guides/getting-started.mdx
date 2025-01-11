@@ -237,14 +237,14 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
   webpack-demo
   |- package.json
   |- package-lock.json
-+ |- webpack.config.js
++ |- webpack.config.cjs
   |- /dist
     |- index.html
   |- /src
     |- index.js
 ```
 
-**webpack.config.js**
+**webpack.config.cjs**
 
 ```javascript
 const path = require('path');
@@ -261,7 +261,7 @@ module.exports = {
 Now, let's run the build again but instead using our new configuration file:
 
 ```bash
-$ npx webpack --config webpack.config.js
+$ npx webpack --config webpack.config.cjs
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
@@ -271,7 +271,7 @@ cacheable modules 530 KiB
 webpack 5.4.0 compiled successfully in 1934 ms
 ```
 
-T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
+T> By default, if you run the webpack command without specifying a configuration file, Webpack will look for certain default filenames. These typically include: `webpack.config.js` (for CommonJS format in JavaScript), `webpack.config.cjs` (for explicit CommonJS format) or `webpack.config.mjs` (for ES Modules). We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
 A configuration file allows far more flexibility than CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
 
@@ -335,7 +335,7 @@ Now that you have a basic build together you should move on to the next guide [`
 webpack-demo
 |- package.json
 |- package-lock.json
-|- webpack.config.js
+|- webpack.config.cjs
 |- /dist
   |- main.js
   |- index.html
