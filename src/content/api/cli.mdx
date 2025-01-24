@@ -42,15 +42,15 @@ W> If you want to run webpack using `npx` please make sure you have `webpack-cli
 
 webpack-cli offers a variety of commands to make working with webpack easier. By default webpack ships with
 
-| Command                     | Usage                                                 | Description                                                                     |
-| --------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [`build`](#build)           | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
-| [`configtest`](#configtest) | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
-| [`help`](#help)             | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
-| [`info`](#info)             | `info\|i [options]`                                   | Outputs information about your system.                                                           |
-| [`serve`](#serve)           | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
-| [`version`](#version)       | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
-| [`watch`](#watch)           | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
+| Command                     | Usage                                     | Description                                                                     |
+| --------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| [`build`](#build)           | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
+| [`configtest`](#configtest) | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
+| [`help`](#help)             | `help\|h [command] [option]`              | Display help for commands and options.                                          |
+| [`info`](#info)             | `info\|i [options]`                       | Outputs information about your system.                                          |
+| [`serve`](#serve)           | `serve\|server\|s [options]`              | Run the `webpack-dev-server`.                                                   |
+| [`version`](#version)       | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
+| [`watch`](#watch)           | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
 
 ### Build
 
@@ -257,31 +257,31 @@ npx webpack watch --mode development
 
 By default webpack ships with the following flags:
 
-| Flag / Alias                                                    | Type            | Description                                                               |
-| --------------------------------------------------------------- | --------------- | ------------------------------------------------------------------------- |
-| [`--entry`](#entry)                                             | string[]        | The entry point(s) of your application e.g. `./src/main.js`               |
-| [`--config, -c`](#config)                                       | string[]        | Provide path to a webpack configuration file e.g. `./webpack.config.js`   |
-| [`--config-name`](#config-name)                                 | string[]        | Name of the configuration to use                                          |
-| `--name`                                                        | string          | Name of the configuration. Used when loading multiple configurations      |
-| `--color`                                                       | boolean         | Enable colors on console                                                  |
-| [`--merge, -m`](#merge)                                         | boolean         | Merge two or more configurations using `webpack-merge`                    |
-| [`--env`](#env)                                                 | string[]        | Environment passed to the configuration when it is a function             |
-| [`--define-process-env-node-env`](#define-process-env-node-env) | string          | Set `process.env.NODE_ENV` to the specified value                         |
-| [`--progress`](#progress)                                       | boolean, string | Print compilation progress during build                                   |
-| [`--help`](#help)                                               | boolean         | Outputs list of supported flags and commands                              |
-| [`--output-path, -o`](#output-path)                             | string          | Output location of the file generated by webpack e.g. `./dist`            |
-| `--target, -t`                                                  | string[]        | Sets the build target                                                     |
-| `--watch, -w`                                                   | boolean         | Watch for file changes                                                    |
-| `--watch-options-stdin`                                         | boolean         | Stop watching when stdin stream has ended                                 |
-| `--devtool, -d`                                                 | string          | Controls if and how source maps are generated.                            |
-| [`--json, -j`](#json)                                           | boolean, string | Prints result as JSON or store it in a file                               |
-| `--mode`                                                        | string          | Defines the mode to pass to webpack                                       |
-| [`--version, -v`](#version)                                     | boolean         | Get current version                                                       |
-| `--stats`                                                       | boolean, string | It instructs webpack on how to treat the stats                            |
-| `--disable-interpret`                                           | boolean         | Disable interpret for loading the config file.                            |
-| `--fail-on-warnings`                                            | boolean         | Stop webpack-cli process with non-zero exit code on warnings from webpack |
-| [`--analyze`](#analyzing-bundle)                                | boolean         | It invokes `webpack-bundle-analyzer` plugin to get bundle information     |
-| [`--extends, -e`](#extends)                                     | string[]        | Extend an existing configuration                                          |
+| Flag / Alias                            | Type            | Description                                                               |
+| --------------------------------------- | --------------- | ------------------------------------------------------------------------- |
+| [`--entry`](#entry)                     | string[]        | The entry point(s) of your application e.g. `./src/main.js`               |
+| [`--config, -c`](#config)               | string[]        | Provide path to a webpack configuration file e.g. `./webpack.config.js`   |
+| [`--config-name`](#config-name)         | string[]        | Name of the configuration to use                                          |
+| `--name`                                | string          | Name of the configuration. Used when loading multiple configurations      |
+| `--color`                               | boolean         | Enable colors on console                                                  |
+| [`--merge, -m`](#merge)                 | boolean         | Merge two or more configurations using `webpack-merge`                    |
+| [`--env`](#env)                         | string[]        | Environment passed to the configuration when it is a function             |
+| [`--config-node-env`](#config-node-env) | string          | Set `process.env.NODE_ENV` to the specified value                         |
+| [`--progress`](#progress)               | boolean, string | Print compilation progress during build                                   |
+| [`--help`](#help)                       | boolean         | Outputs list of supported flags and commands                              |
+| [`--output-path, -o`](#output-path)     | string          | Output location of the file generated by webpack e.g. `./dist`            |
+| `--target, -t`                          | string[]        | Sets the build target                                                     |
+| `--watch, -w`                           | boolean         | Watch for file changes                                                    |
+| `--watch-options-stdin`                 | boolean         | Stop watching when stdin stream has ended                                 |
+| `--devtool, -d`                         | string          | Controls if and how source maps are generated.                            |
+| [`--json, -j`](#json)                   | boolean, string | Prints result as JSON or store it in a file                               |
+| `--mode`                                | string          | Defines the mode to pass to webpack                                       |
+| [`--version, -v`](#version)             | boolean         | Get current version                                                       |
+| `--stats`                               | boolean, string | It instructs webpack on how to treat the stats                            |
+| `--disable-interpret`                   | boolean         | Disable interpret for loading the config file.                            |
+| `--fail-on-warnings`                    | boolean         | Stop webpack-cli process with non-zero exit code on warnings from webpack |
+| [`--analyze`](#analyzing-bundle)        | boolean         | It invokes `webpack-bundle-analyzer` plugin to get bundle information     |
+| [`--extends, -e`](#extends)             | string[]        | Extend an existing configuration                                          |
 
 ### Negated Flags
 
@@ -632,25 +632,25 @@ You can use `--node-env` option to set `process.env.NODE_ENV`, which is availabl
 npx webpack --node-env production   # process.env.NODE_ENV = 'production'
 ```
 
-W> This option is deprecated and removed in webpack-cli v5 in favor of the `--define-process-env-node-env` option.
+W> This option is deprecated in webpack-cli v6 in favor of the `--config-node-env` option.
 
-### define-process-env-node-env
+### config-node-env
 
-For `webpack-cli v5+`.
+<Badge text="webpack-cli v6.0.0+" />
 
 An alias for [`--node-env`](/api/cli/#node-env) to set `process.env.NODE_ENV`:
 
 ```bash
-npx webpack --define-process-env-node-env production   # process.env.NODE_ENV = 'production'
+npx webpack --config-node-env production   # process.env.NODE_ENV = 'production'
 ```
 
-When the `mode` option is not specified in the configuration, you can use the `--define-process-env-node-env` option to set the `mode`. For example, using `--define-process-env-node-env production` will set both `process.env.NODE_ENV` and `mode` to `'production'`.
+When the `mode` option is not specified in the configuration, you can use the `--config-node-env` option to set the `mode`. For example, using `--config-node-env production` will set both `process.env.NODE_ENV` and `mode` to `'production'`.
 
-If your configuration exports a function, the value of `--define-process-env-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--define-process-env-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
+If your configuration exports a function, the value of `--config-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--config-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
 
 ```javascript
 module.exports = (env, argv) => {
-  console.log(argv.defineProcessEnvNodeEnv); // 'production' if --define-process-env-node-env production is used
+  console.log(argv.defineProcessEnvNodeEnv); // 'production' if --config-node-env production is used
   return {
     // your configuration
   };
