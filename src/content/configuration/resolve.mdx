@@ -18,6 +18,7 @@ contributors:
   - chenxsan
   - jamesgeorge007
   - snitin315
+  - sapenlei
 ---
 
 These options change how modules are resolved. Webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -95,6 +96,28 @@ which would yield these results:
 ```js
 import Test1 from 'xyz'; // Exact match, so path/to/file.js is resolved and imported
 import Test2 from 'xyz/file.js'; // Not an exact match, normal resolution takes place
+```
+
+You can also use wildcards (`*`) in your alias configuration to create more flexible mappings:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      '@*': path.resolve(__dirname, 'src/*'), // maps @something to path/to/something
+    },
+  },
+};
+```
+
+This allows you to use imports like:
+
+```js
+import Component from '@components/Button';
+import utils from '@utils/helpers';
 ```
 
 The following table explains other cases:
