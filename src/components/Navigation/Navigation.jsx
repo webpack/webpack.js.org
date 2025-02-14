@@ -1,15 +1,10 @@
-// Import External Dependencies
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DocSearch } from '@docsearch/react';
 import { Link as ReactDOMLink, NavLink, useLocation } from 'react-router-dom';
-
-// Import Components
 import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
-
-// Load Styling
 import '@docsearch/css';
 
 import GithubIcon from '../../styles/icons/github.svg';
@@ -18,23 +13,18 @@ import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 import Hamburger from '../../styles/icons/hamburger.svg';
 import HelloDarkness from '../HelloDarkness';
 
-NavigationItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  url: PropTypes.string.isRequired,
-  isactive: PropTypes.func,
-};
-
-function NavigationItem({ children, url, isactive }) {
+// NavigationItem Component
+function NavigationItem({ children, url, isActive }) {
   let obj = {};
-  // decide if the link is active or not by providing a function
-  // otherwise we'll let react-dom makes the decision for us
-  if (isactive) {
+  if (isActive) {
     obj = {
-      isactive,
+      isActive,
     };
   }
+
   const classes =
     'text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200';
+
   if (url.startsWith('http') || url.startsWith('//')) {
     return (
       <a
@@ -47,6 +37,7 @@ function NavigationItem({ children, url, isactive }) {
       </a>
     );
   }
+
   return (
     <NavLink
       {...obj}
@@ -60,40 +51,45 @@ function NavigationItem({ children, url, isactive }) {
   );
 }
 
+NavigationItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  url: PropTypes.string.isRequired,
+  isActive: PropTypes.func,
+};
+
+// NavigationIcon component with tooltip
+function NavigationIcon({ children, to, title }) {
+  return (
+    <div className="relative group inline-flex flex-col items-center">
+      <Link
+        to={to}
+        className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
+        title={`webpack on ${title}`}
+      >
+        {children}
+      </Link>
+      {/* Tooltip */}
+      <div className="absolute top-full mt-2 px-3 py-1 bg-blue-500 text-white text-sm rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+        {title}
+      </div>
+    </div>
+  );
+}
+
 NavigationIcon.propTypes = {
   children: PropTypes.node.isRequired,
   to: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
-function NavigationIcon({ children, to, title }) {
-  return (
-    <Link
-      to={to}
-      className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
-      title={`webpack on ${title}`}
-    >
-      {children}
-    </Link>
-  );
-}
+
 const navigationIconProps = {
   'aria-hidden': true,
   fill: 'currentColor',
   width: 16,
 };
 
-Navigation.propTypes = {
-  pathname: PropTypes.string,
-  hash: PropTypes.string,
-  links: PropTypes.array,
-  toggleSidebar: PropTypes.func,
-  theme: PropTypes.string,
-  switchTheme: PropTypes.func,
-};
-
 function Navigation({ links, pathname, hash = '', toggleSidebar }) {
   const [locationHash, setLocationHash] = useState(hash);
-
   const location = useLocation();
 
   useEffect(() => {
@@ -123,6 +119,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 {content}
               </NavigationItem>
             ))}
+            {/* Social Media Icons with Tooltips */}
             {[
               {
                 to: 'https://github.com/webpack/webpack',
@@ -188,18 +185,12 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             />
           </div>
         </div>
-        {/* sub navigation */}
+        {/* Sub navigation */}
         {links
-          .filter((link) => {
-            // only those with children are displayed
-            return link.children;
-          })
+          .filter((link) => link.children)
           .map((link) => {
-            if (link.isactive) {
-              // hide the children if the link is not active
-              if (!link.isactive({}, location)) {
-                return null;
-              }
+            if (link.isActive && !link.isActive({}, location)) {
+              return null;
             }
             return (
               <div
@@ -239,5 +230,12 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
     </>
   );
 }
+
+Navigation.propTypes = {
+  pathname: PropTypes.string,
+  hash: PropTypes.string,
+  links: PropTypes.array,
+  toggleSidebar: PropTypes.func,
+};
 
 export default Navigation;
