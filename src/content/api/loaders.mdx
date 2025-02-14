@@ -14,13 +14,16 @@ contributors:
   - snitin315
   - chenxsan
   - jamesgeorge007
+  - alexeyr
 ---
 
 A loader is a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
 
 The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as a JSON object) may also be passed.
 
-A single result can be returned in [sync mode](#synchronous-loaders). For multiple results the `this.callback()` must be called. In [async mode](#asynchronous-loaders) `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
+A single result can be returned in [sync mode](#synchronous-loaders). For multiple results the `this.callback()` must be called and the loader must return `undefined`.
+
+In [async mode](#asynchronous-loaders) you can return a single result from an `async function`. Alternatively, you may call `this.async()` to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. In this case the loader must return `undefined` and call that callback. This is the only option for multiple results.
 
 ```js
 /**
@@ -63,9 +66,20 @@ module.exports = function (content, map, meta) {
 
 ### Asynchronous Loaders
 
-For asynchronous loaders, [`this.async`](#thisasync) is used to retrieve the `callback` function:
+For asynchronous loaders, you can return the transformed `content` from an `async function`:
 
 **async-loader.js**
+
+```javascript
+module.exports = async function (content, map, meta) {
+  var result = await someAsyncOperation(content);
+  return result;
+};
+```
+
+Or you can use [`this.async`](#thisasync) to retrieve the `callback` function:
+
+**async-loader-with-callback.js**
 
 ```javascript
 module.exports = function (content, map, meta) {
