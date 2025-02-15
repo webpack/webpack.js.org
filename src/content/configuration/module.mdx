@@ -23,6 +23,7 @@ contributors:
   - snitin315
   - vabushkevich
   - ahabhgk
+  - hai-x
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -704,6 +705,52 @@ The `'relative'` value for `module.parser.javascript.url` is available since web
 
 1. This is useful for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.
 2. Also for static site generators, mini-css-plugin and html-plugin, etc. where server side rendering is commonly needed.
+
+### module.parser.json
+
+Configure options for json parser.
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      json: {
+        // options
+      },
+    },
+  },
+};
+```
+
+### module.parser.json.exportsDepth
+
+The depth of json dependency flagged as `exportInfo`. By default, it is set to `Infinity` in production mode, and `1` in development mode.
+
+- Type: `number`
+- Available: <Badge text='5.98.0+' />
+- Example:
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      json: {
+        // For example, for the following json
+        // {
+        //   "depth_1": {
+        //     "depth_2": {
+        //       "depth_3": "foo"
+        //     }
+        //   },
+        //   "_depth_1": "bar"
+        // }
+        // when `exportsDepth: 1`, `depth_2` and `depth_3` will not be flagged as `exportInfo`.
+        exportsDepth: 1,
+      },
+    },
+  },
+};
+```
 
 ## module.noParse
 
