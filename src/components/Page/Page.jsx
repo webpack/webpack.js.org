@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import { MDXProvider } from '@mdx-js/react';
 
 // Import Components
 import PageLinks from '../PageLinks/PageLinks';
@@ -9,10 +10,14 @@ import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
 import { PlaceholderString } from '../Placeholder/Placeholder';
 import AdjacentPages from './AdjacentPages';
+import CodeBlock from '../CodeBlock/CodeBlock';
 
 // Load Styling
 import './Page.scss';
 import Link from '../Link/Link';
+
+const components = { pre: CodeBlock };
+
 export default function Page(props) {
   const {
     title,
@@ -113,7 +118,9 @@ export default function Page(props) {
           </div>
         ) : null}
 
-        <div id="md-content">{contentRender}</div>
+        <MDXProvider components={components}>
+          <div id="md-content">{contentRender}</div>
+        </MDXProvider>
 
         {loadRelated && (
           <div className="print:hidden">
