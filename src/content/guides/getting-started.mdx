@@ -98,7 +98,9 @@ document.body.appendChild(component());
 </html>
 ```
 
-We also need to adjust our `package.json` file in order to make sure we mark our package as `private`, as well as removing the `main` entry. This is to prevent an accidental publish of your code.
+We also need to adjust our `package.json` file with the following changes:
+- Mark out package as `private` and remove the `main` entry. This is to prevent an accidental publish of your code.
+- Remove the `type` entry. The latest version of npm sets this by default to commonjs. This will throw error when we use `import` in js files.
 
 T> If you want to learn more about the inner workings of `package.json`, then we recommend reading the [npm documentation](https://docs.npmjs.com/files/package.json).
 
@@ -117,6 +119,7 @@ T> If you want to learn more about the inner workings of `package.json`, then we
    "keywords": [],
    "author": "",
    "license": "MIT",
+-  "type": "commonjs",
    "devDependencies": {
      "webpack": "^5.38.1",
      "webpack-cli": "^4.7.2"
