@@ -2496,7 +2496,7 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 </ul>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">configType</span> <span class="token operator">=</span> <span class="token string">&#x27;flat&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;eslintrc&#x27;</span><span class="token punctuation">;</span></code></pre>
 <ul>
-<li>Default: <code>eslintrc</code></li>
+<li>Default: <code>flat</code></li>
 </ul>
 <p>Specify the type of configuration to use with ESLint.</p>
 <ul>
@@ -2504,10 +2504,6 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 <li><code>flat</code> is the new format introduced in ESLint 8.21.0.</li>
 </ul>
 <p>The new configuration format is explained in its <a href="https://eslint.org/docs/latest/use/configure/configuration-files-new">own documentation</a>.</p>
-<blockquote>
-<p>This configuration format being considered as experimental, it is not exported in the main ESLint module in ESLint 8.
-You need to set your <code>eslintPath</code> to <code>eslint/use-at-your-own-risk</code> for this config format to work.</p>
-</blockquote>
 <h3><span id="context"></span><code>context</code><a href="#context" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <ul>
 <li>Type:</li>
