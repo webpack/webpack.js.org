@@ -559,7 +559,7 @@ image<span class="token operator">-</span><span class="token function">set</span
               <span class="token punctuation">}</span>
 
               <span class="token comment">// Don&#x27;t handle images under root-relative /external_images/</span>
-              <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/^\/external_images\//</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/^\/external_images\//</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span>
 
