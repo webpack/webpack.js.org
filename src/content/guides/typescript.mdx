@@ -115,6 +115,42 @@ Now lets change the import of `lodash` in our `./index.ts` due to the fact that 
 
 T> To make imports do this by default and keep `import _ from 'lodash';` syntax in TypeScript, set `"allowSyntheticDefaultImports" : true` and `"esModuleInterop" : true` in your **tsconfig.json** file. This is related to TypeScript configuration and mentioned in our guide only for your information.
 
+## Ways to Use TypeScript in `webpack.config.ts`
+
+There are 5 ways to use TypeScript in `webpack.config.ts`:
+
+1. **Using webpack with TypeScript config:**
+
+   ```bash
+   webpack -c ./webpack.config.ts
+   ```
+
+   (Not all things are supported due to limitations of `rechoir` and `interpret`.)
+
+2. **Using custom `--import` for Node.js:**
+
+   ```bash
+   NODE_OPTIONS='--import tsx'  webpack --disable-interpret -c ./webpack.config.ts
+   ```
+
+3. **Using built-in TypeScript module for Node.js v22.7.0 ≥ YOUR NODE.JS VERSION < v23.6.0:**
+
+   ```bash
+   NODE_OPTIONS='--experimental-strip-types' webpack --disable-interpret -c ./webpack.config.ts
+   ```
+
+4. **Using built-in TypeScript module for Node.js ≥ v22.6.0:**
+
+   ```bash
+   webpack --disable-interpret -c ./webpack.config.ts
+   ```
+
+5. **Using a tsx for Node.js ≥ v22.6.0:**
+
+   ```bash
+   NODE_OPTIONS='--no-experimental-strip-types --import tsx' webpack --disable-interpret -c ./webpack.config.ts
+   ```
+
 ## Loader
 
 [`ts-loader`](https://github.com/TypeStrong/ts-loader)
