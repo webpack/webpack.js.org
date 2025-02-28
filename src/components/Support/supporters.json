@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "company-alpha",
+    "name": "Company Alpha",
+    "totalDonations": 5500000,
+    "monthlyDonations": 300000,
+    "website": "https://company-alpha.com",
+    "avatar": "https://example.com/avatars/company-alpha.png",
+    "firstDonation": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "slug": "tech-innovators",
+    "name": "Tech Innovators LLC",
+    "totalDonations": 2500000,
+    "monthlyDonations": 150000,
+    "website": "https://tech-innovators.com",
+    "avatar": "https://example.com/avatars/tech-innovators.png",
+    "firstDonation": "2024-01-15T00:00:00.000Z"
+  }
+]
