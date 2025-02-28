@@ -1038,9 +1038,9 @@ Instead please use <code>/</code> or <code>path</code> methods.</p>
 <p>The <em>onlyDirectories</em> does not work because the plugin is designed to copy files.</p>
 </blockquote>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;globby&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Options<span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;tinyglobby&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>GlobOptions<span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
-<p>Allows to configure the glob pattern matching library used by the plugin. <a href="https://github.com/sindresorhus/globby#options">See the list of supported options</a>
+<p>Allows to configure the glob pattern matching library used by the plugin. <a href="https://github.com/SuperchupuDev/tinyglobby#options">See the list of supported options</a>
 To exclude files from the selection, you should use <a href="https://github.com/mrmlnc/fast-glob#ignore">globOptions.ignore option</a></p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -1475,7 +1475,7 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
         <span class="token string">&quot;relative/path/to/file.ext&quot;</span><span class="token punctuation">,</span>
         <span class="token punctuation">{</span>
           <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">&quot;**/*&quot;</span><span class="token punctuation">,</span>
-          <span class="token comment">// Terser skip this file for minimization</span>
+          <span class="token comment">// Terser skip this file for minification</span>
           info<span class="token operator">:</span> <span class="token punctuation">{</span> minimized<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1504,8 +1504,8 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
 <h4><span id="concurrency"></span><code>concurrency</code><a href="#concurrency" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">concurrency</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre>
-<p>default: <code>100</code></p>
-<p>limits the number of simultaneous requests to fs</p>
+<p>Default: <code>100</code></p>
+<p>Limits the number of simultaneous requests to fs.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
