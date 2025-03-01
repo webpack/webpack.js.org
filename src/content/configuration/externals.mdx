@@ -547,9 +547,10 @@ async function foo() {
 
 ```js
 module.exports = {
-  externalsType: 'import',
+  externalsType: 'module-import',
   externals: {
     jquery: 'jquery',
+    lodash: 'lodash',
   },
 };
 ```
