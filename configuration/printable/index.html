@@ -6569,9 +6569,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span></code></pre>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&#x27;import&#x27;</span><span class="token punctuation">,</span>
+  externalsType<span class="token operator">:</span> <span class="token string">&#x27;module-import&#x27;</span><span class="token punctuation">,</span>
   externals<span class="token operator">:</span> <span class="token punctuation">{</span>
     jquery<span class="token operator">:</span> <span class="token string">&#x27;jquery&#x27;</span><span class="token punctuation">,</span>
+    lodash<span class="token operator">:</span> <span class="token string">&#x27;lodash&#x27;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Will generate something like below:</p>
