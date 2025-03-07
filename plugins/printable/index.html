@@ -1853,7 +1853,7 @@ Default: <code>undefined</code></p>
 <p>Type: <code>Boolean|Number</code>
 Default: <code>true</code></p>
 <p>Use multi-process parallel running to improve the build speed.
-Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
+Default number of concurrent runs: <code>os.cpus().length - 1</code> or <code>os.availableParallelism() - 1</code> (if this function is supported).</p>
 <blockquote>
 <p>ℹ️ Parallelization can speed up your build significantly and is therefore <strong>highly recommended</strong>.
 If a parallelization is enabled, the packages in <code>minimizerOptions</code> must be required via strings (<code>packageName</code> or <code>require.resolve(packageName)</code>). Read more in <a href="#minimizeroptions"><code>minimizerOptions</code></a></p>
@@ -2931,7 +2931,7 @@ If you want to run it also in development set the <code>optimization.minimize</c
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">parallel</span> <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">|</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>true</code></p>
 <p>Use multi-process parallel running to improve the build speed.
-Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
+Default number of concurrent runs: <code>os.cpus().length - 1</code> or <code>os.availableParallelism() - 1</code> (if this function is supported).</p>
 <blockquote>
 <p>[!NOTE]</p>
 <p>Parallelization can speed up your build significantly and is therefore <strong>highly recommended</strong>.</p>
@@ -8649,7 +8649,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">parallel</span> <span class="token operator">=</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>true</code></p>
 <p>Use multi-process parallel running to improve the build speed.
-Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p>
+Default number of concurrent runs: <code>os.cpus().length - 1</code> or <code>os.availableParallelism() - 1</code> (if this function is supported).</p>
 <blockquote>
 <p><strong>Note</strong></p>
 <p>Parallelization can speedup your build significantly and is therefore <strong>highly recommended</strong>.</p>
