@@ -1,5 +1,14 @@
 @import 'functions';
 
+.support__image {
+  width: 100px; /* Set a uniform width */
+  height: 100px; /* Set a uniform height */
+  object-fit: contain; /* Ensures the image maintains its aspect ratio */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  background-color: white; /* Fallback background */
+  padding: 3px; /* Add some spacing */
+}
+
 .support {
   display: flex;
   flex-wrap: wrap;
