@@ -173,10 +173,10 @@ export default class Support extends Component {
           {rank === 'backer'
             ? 'Backers'
             : rank === 'latest'
-            ? 'Latest Sponsors'
-            : `${rank[0].toUpperCase()}${rank.slice(1)} ${
-                type === 'monthly' ? 'Monthly ' : ''
-              }Sponsors`}
+              ? 'Latest Sponsors'
+              : `${rank[0].toUpperCase()}${rank.slice(1)} ${
+                  type === 'monthly' ? 'Monthly ' : ''
+                }Sponsors`}
         </h2>
         <VisibilitySensor
           delayedCall
@@ -240,7 +240,7 @@ export default class Support extends Component {
               >
                 {
                   <img
-                    className={`support__${rank}-avatar`}
+                    className={`support__${rank}-avatar support__image`}
                     src={
                       inView && supporter.avatar ? supporter.avatar : SmallIcon
                     }
@@ -276,6 +276,7 @@ export default class Support extends Component {
    */
   _handleImgError(e) {
     const imgNode = e.target;
+    console.error('Image failed to load:', imgNode.src);
     if (imgNode.getAttribute('src') === SmallIcon) return;
     imgNode.setAttribute('src', SmallIcon);
   }
