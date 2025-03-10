@@ -276,7 +276,6 @@ export default class Support extends Component {
    */
   _handleImgError(e) {
     const imgNode = e.target;
-    console.error('Image failed to load:', imgNode.src);
     if (imgNode.getAttribute('src') === SmallIcon) return;
     imgNode.setAttribute('src', SmallIcon);
   }
