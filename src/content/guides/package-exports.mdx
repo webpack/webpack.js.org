@@ -200,10 +200,10 @@ One of these conditions is set depending on the syntax used to reference the mod
 | --------- | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
 | `import`  | Request is issued from ESM syntax or similar.                     | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
 | `require` | Request is issued from CommonJs/AMD syntax or similar.            | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
-| `style`   | Request is issued from a stylesheet reference.                    |
-| `sass`    | Request is issued from a sass stylesheet reference.               |
-| `asset`   | Request is issued from a asset reference.                         |
-| `script`  | Request is issued from a normal script tag without module system. |
+| `style`   | Request is issued from a stylesheet reference.                    |                                                                      |
+| `sass`    | Request is issued from a sass stylesheet reference.               |                                                                      |
+| `asset`   | Request is issued from a asset reference.                         |                                                                      |
+| `script`  | Request is issued from a normal script tag without module system. |                                                                      |
 
 These conditions might also be set additionally:
 
@@ -211,7 +211,7 @@ These conditions might also be set additionally:
 | ----------- | ------------------------------------------------------------------------------------------------------------------- | -------------------- |
 | `module`    | All module syntax that allows to reference javascript supports ESM.<br />(only combined with `import` or `require`) | webpack, rollup, wmr |
 | `esmodules` | Always set by supported tools.                                                                                      | wmr                  |
-| `types`     | Request is issued from typescript that is interested in type declarations.                                          |
+| `types`     | Request is issued from typescript that is interested in type declarations.                                          |                      |
 
 (1) `import` and `require` are both set independent of referencing syntax. `require` has always lower priority.
 
@@ -327,8 +327,8 @@ The following tools support custom conditions:
 | Node.js   | yes       | Use [`--conditions`](https://nodejs.org/api/cli.html#cli_c_condition_conditions_condition) CLI argument. |
 | webpack   | yes       | Use [`resolve.conditionNames`](/configuration/resolve/#resolveconditionnames) configuration option.      |
 | rollup    | yes       | Use `exportConditions` option for `@rollup/plugin-node-resolve`                                          |
-| esinstall | no        |
-| wmr       | no        |
+| esinstall | no        |                                                                                                          |
+| wmr       | no        |                                                                                                          |
 
 For custom conditions the following naming schema is recommended:
 
