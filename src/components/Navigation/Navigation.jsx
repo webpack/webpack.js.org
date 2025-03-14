@@ -22,9 +22,10 @@ NavigationItem.propTypes = {
   children: PropTypes.node.isRequired,
   url: PropTypes.string.isRequired,
   isactive: PropTypes.func,
+  ariaLabel: PropTypes.string,
 };
 
-function NavigationItem({ children, url, isactive }) {
+function NavigationItem({ children, url, isactive, ariaLabel }) {
   let obj = {};
   // decide if the link is active or not by providing a function
   // otherwise we'll let react-dom makes the decision for us
@@ -42,6 +43,7 @@ function NavigationItem({ children, url, isactive }) {
         target="_blank"
         rel="noopener noreferrer"
         className={classes}
+        aria-label={ariaLabel}
       >
         {children}
       </a>
@@ -54,6 +56,7 @@ function NavigationItem({ children, url, isactive }) {
         isActive ? `${classes} !text-blue-200` : classes
       }
       to={url}
+      aria-label={ariaLabel}
     >
       {children}
     </NavLink>
@@ -71,6 +74,7 @@ function NavigationIcon({ children, to, title }) {
       to={to}
       className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
       title={`webpack on ${title}`}
+      aria-label={`webpack on ${title}`}
     >
       {children}
     </Link>
@@ -118,8 +122,13 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             <Logo />
           </Link>
           <nav className="hidden md:inline-grid md:grid-flow-col md:gap-x-[18px]">
-            {links.map(({ content, url, isActive }) => (
-              <NavigationItem key={url} url={url} isActive={isActive}>
+            {links.map(({ content, url, isActive, ariaLabel }) => (
+              <NavigationItem
+                key={url}
+                url={url}
+                isActive={isActive}
+                ariaLabel={ariaLabel}
+              >
                 {content}
               </NavigationItem>
             ))}
