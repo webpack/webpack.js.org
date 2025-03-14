@@ -1,17 +1,5 @@
 @import 'functions';
 
-.support__image {
-  width: 100px; /* Default width */
-  height: 100px; /* Default height */
-  object-fit: contain; /* Maintain aspect ratio */
-  border-radius: 10px; /* Rounded corners */
-  background-color: white; /* Fallback background */
-  padding: 3px; /* Spacing */
-
-  /* Responsive adjustments */
-  max-width: 100%;
-}
-
 .support {
   display: flex;
   flex-wrap: wrap;
@@ -70,11 +58,6 @@
 
     @media (min-width: 400px) {
       max-width: 384px;
-      .support__image {
-        width: 60px;
-        height: 60px;
-        padding: 2px;
-      }
     }
   }
 

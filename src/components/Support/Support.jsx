@@ -240,7 +240,7 @@ export default class Support extends Component {
               >
                 {
                   <img
-                    className={`support__${rank}-avatar support__image`}
+                    className={`support__${rank}-avatar`}
                     src={
                       inView && supporter.avatar ? supporter.avatar : SmallIcon
                     }
