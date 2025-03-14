@@ -224,6 +224,7 @@ function Site(props) {
           links={[
             {
               content: 'Documentation',
+              ariaLabel: 'webpack documentation',
               url: '/concepts/',
               isactive: (_, location) => {
                 return /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
@@ -236,8 +237,12 @@ function Site(props) {
                 )
               ),
             },
-            { content: 'Contribute', url: '/contribute/' },
-            { content: 'Blog', url: '/blog/' },
+            {
+              content: 'Contribute',
+              url: '/contribute/',
+              ariaLabel: 'contribute to webpack',
+            },
+            { content: 'Blog', url: '/blog/', ariaLabel: 'webpack blog' },
           ]}
         />
       </div>
