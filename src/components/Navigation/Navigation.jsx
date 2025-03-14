@@ -71,6 +71,7 @@ function NavigationIcon({ children, to, title }) {
       to={to}
       className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
       title={`webpack on ${title}`}
+      aria-label={`webpack on ${title}`}
     >
       {children}
     </Link>
