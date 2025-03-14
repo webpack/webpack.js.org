@@ -92,85 +92,107 @@ const nodeToSupporter = (node) => ({
 });
 
 const getAllNodes = async (graphqlQuery, getNodes) => {
-  const body = {
-    query: graphqlQuery,
-    variables: {
-      limit: graphqlPageSize,
-      offset: 0,
-      dateFrom: new Date(
-        new Date().setFullYear(new Date().getFullYear() - 1)
-      ).toISOString(), // data from last year
-    },
-  };
+  // Store original value
+  const originalTlsRejectUnauthorized =
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+  const isCI = process.env.CI === 'true' || (process.env.CI && process.env.VERCEL);
 
-  let allNodes = [];
-
-  let limit = 10,
-    remaining = 10,
-    reset;
-  if (process.env.OPENCOLLECTIVE_API_KEY) {
-    limit = 100;
-    remaining = 100;
-  }
-  // Handling pagination if necessary
-   
-  while (true) {
-    if (remaining === 0) {
-      console.log(`Rate limit exceeded. Sleeping until ${new Date(reset)}.`);
-      await new Promise((resolve) =>
-        setTimeout(resolve, reset - Date.now() + 100)
-      );
+  try {
+    // Only disable SSL verification in local development
+    if (!isCI) {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+      console.log('Running locally - SSL verification disabled');
     }
-    const result = await fetch(graphqlEndpoint, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
+
+    const body = {
+      query: graphqlQuery,
+      variables: {
+        limit: graphqlPageSize,
+        offset: 0,
+        dateFrom: new Date(
+          new Date().setFullYear(new Date().getFullYear() - 1)
+        ).toISOString(), // data from last year
       },
-    }).then(async (response) => {
-      if (response.headers.get('content-type').includes('json')) {
-        const json = await response.json();
-        console.log('json', json);
-        if (json.error) {
-          // when rate limit exceeded, api won't return headers data like x-ratelimit-limit, etc.
-          remaining = 0;
-          reset = Date.now() + 1000 * 60; // 1 minute
-        } else {
-          limit = response.headers.get('x-ratelimit-limit') * 1;
-          remaining = response.headers.get('x-ratelimit-remaining') * 1;
-          reset = response.headers.get('x-ratelimit-reset') * 1000;
-          console.log(
-            `Rate limit: ${remaining}/${limit} remaining. Reset in ${new Date(
-              reset
-            )}`
-          );
+    };
+
+    let allNodes = [];
+
+    let limit = 10,
+      remaining = 10,
+      reset;
+    if (process.env.OPENCOLLECTIVE_API_KEY) {
+      limit = 100;
+      remaining = 100;
+    }
+    // Handling pagination if necessary
+
+    while (true) {
+      if (remaining === 0) {
+        console.log(`Rate limit exceeded. Sleeping until ${new Date(reset)}.`);
+        await new Promise((resolve) =>
+          setTimeout(resolve, reset - Date.now() + 100)
+        );
+      }
+      const fetchOptions = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const result = await fetch(graphqlEndpoint, fetchOptions).then(
+        async (response) => {
+          if (response.headers.get('content-type').includes('json')) {
+            const json = await response.json();
+            console.log('json', json);
+            if (json.error) {
+              // when rate limit exceeded, api won't return headers data like x-ratelimit-limit, etc.
+              remaining = 0;
+              reset = Date.now() + 1000 * 60; // 1 minute
+            } else {
+              limit = response.headers.get('x-ratelimit-limit') * 1;
+              remaining = response.headers.get('x-ratelimit-remaining') * 1;
+              reset = response.headers.get('x-ratelimit-reset') * 1000;
+              console.log(
+                `Rate limit: ${remaining}/${limit} remaining. Reset in ${new Date(
+                  reset
+                )}`
+              );
+            }
+            return json;
+          } else {
+            // utilities/fetch-supporters: SyntaxError: Unexpected token < in JSON at position 0
+            console.log('something wrong when fetching supporters');
+            return {
+              error: {
+                message: await response.text(),
+              },
+            };
+          }
         }
-        return json;
+      );
+      // when rate limit exceeded, api will return {error: {message: ''}}
+      // but we could hopefully avoid rate limit by sleeping in the beginning of the loop
+      // however, when there're multiple task running simultaneously, it's still possible to hit the rate limit
+      if (result.error) {
+        console.log('error', result.error);
+        // let the loop continue
       } else {
-        // utilities/fetch-supporters: SyntaxError: Unexpected token < in JSON at position 0
-        console.log('something wrong when fetching supporters');
-        return {
-          error: {
-            message: await response.text(),
-          },
-        };
+        const nodes = getNodes(result.data);
+        allNodes = [...allNodes, ...nodes];
+        body.variables.offset += graphqlPageSize;
+        if (nodes.length < graphqlPageSize) {
+          return allNodes;
+        } else {
+          // more nodes to fetch
+        }
       }
-    });
-    // when rate limit exceeded, api will return {error: {message: ''}}
-    // but we could hopefully avoid rate limit by sleeping in the beginning of the loop
-    // however, when there're multiple task running simultaneously, it's still possible to hit the rate limit
-    if (result.error) {
-      console.log('error', result.error);
-      // let the loop continue
-    } else {
-      const nodes = getNodes(result.data);
-      allNodes = [...allNodes, ...nodes];
-      body.variables.offset += graphqlPageSize;
-      if (nodes.length < graphqlPageSize) {
-        return allNodes;
-      } else {
-        // more nodes to fetch
-      }
+    }
+  } finally {
+    // Only restore if we modified it
+    if (!isCI) {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = originalTlsRejectUnauthorized;
     }
   }
 };
