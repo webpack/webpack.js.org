@@ -95,10 +95,11 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
   // Store original value
   const originalTlsRejectUnauthorized =
     process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+  const isCI = process.env.CI === 'true' || (process.env.CI && process.env.VERCEL);
 
   try {
     // Only disable SSL verification in local development
-    if (process.env.CI !== 'true') {
+    if (!isCI) {
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
       console.log('Running locally - SSL verification disabled');
     }
@@ -190,7 +191,7 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
     }
   } finally {
     // Only restore if we modified it
-    if (process.env.CI !== 'true') {
+    if (!isCI) {
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = originalTlsRejectUnauthorized;
     }
   }
