@@ -7,6 +7,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import Backers from './_supporters.json';
 import Additional from './AdditionalSupporters';
 import SmallIcon from '../../assets/icon-square-small-slack.png';
+import Tooltip from '../Tooltip/Tooltip';
 
 // Load Styling
 import './Support.scss';
@@ -225,34 +226,39 @@ export default class Support extends Component {
             </div>
 
             {supporters.map((supporter, index) => (
-              <a
+              <Tooltip
                 key={supporter.slug || index}
-                className="support__item"
-                title={`$${formatMoney(supporter.totalDonations / 100)} by ${
+                content={`$${formatMoney(supporter.totalDonations / 100)} by ${
                   supporter.name || supporter.slug
                 } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                href={
-                  supporter.website ||
-                  `https://opencollective.com/${supporter.slug}`
-                }
               >
-                {
-                  <img
-                    className={`support__${rank}-avatar`}
-                    src={
-                      inView && supporter.avatar ? supporter.avatar : SmallIcon
-                    }
-                    alt={
-                      supporter.name || supporter.slug
-                        ? `${supporter.name || supporter.slug}'s avatar`
-                        : 'avatar'
-                    }
-                    onError={this._handleImgError}
-                  />
-                }
-              </a>
+                <a
+                  className="support__item"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  href={
+                    supporter.website ||
+                    `https://opencollective.com/${supporter.slug}`
+                  }
+                >
+                  {
+                    <img
+                      className={`support__${rank}-avatar`}
+                      src={
+                        inView && supporter.avatar
+                          ? supporter.avatar
+                          : SmallIcon
+                      }
+                      alt={
+                        supporter.name || supporter.slug
+                          ? `${supporter.name || supporter.slug}'s avatar`
+                          : 'avatar'
+                      }
+                      onError={this._handleImgError}
+                    />
+                  }
+                </a>
+              </Tooltip>
             ))}
 
             <div className="support__bottom">

@@ -8,6 +8,7 @@ import { Link as ReactDOMLink, NavLink, useLocation } from 'react-router-dom';
 import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
+import Tooltip from '../Tooltip/Tooltip';
 
 // Load Styling
 import '@docsearch/css';
@@ -70,14 +71,15 @@ NavigationIcon.propTypes = {
 };
 function NavigationIcon({ children, to, title }) {
   return (
-    <Link
-      to={to}
-      className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
-      title={`webpack on ${title}`}
-      aria-label={`webpack on ${title}`}
-    >
-      {children}
-    </Link>
+    <Tooltip content={`webpack on ${title}`}>
+      <Link
+        to={to}
+        className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
+        aria-label={`webpack on ${title}`}
+      >
+        {children}
+      </Link>
+    </Tooltip>
   );
 }
 const navigationIconProps = {
