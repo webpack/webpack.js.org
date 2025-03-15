@@ -32,6 +32,7 @@ SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
 // Define ranks
 const totalRanks = {
   backer: {
+    minimum: 1,
     maximum: 200,
     random: 100,
   },
@@ -57,6 +58,7 @@ const totalRanks = {
 };
 const monthlyRanks = {
   backer: {
+    minimum: 1,
     maximum: 10,
     random: 100,
   },
