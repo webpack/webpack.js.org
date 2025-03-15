@@ -12,6 +12,7 @@ contributors:
   - jamesgeorge007
   - getsnoopy
   - yevhen-logosha
+  - akash-kumar-dev
 ---
 
 This guide aims to help you migrating to webpack 5 when using webpack directly. If you are using a higher level tool to run webpack, please refer to the tool for migration instructions.
@@ -34,6 +35,27 @@ Webpack 5 requires at least Node.js 10.13.0 (LTS), so make sure you upgrade your
 
    Some Plugins and Loaders might have a beta version that has to be used in order to be compatible with webpack 5.
    Make sure to read release notes of each individual plugin/loader when upgrading it, since latest version might only support webpack 5 and will fail in v4. In such case, it's recommended to update to the latest version that supports webpack 4.
+
+
+## Codemods
+
+To assist with the upgrade from webpack v4 to v5, [Codemod](https://github.com/codemod-com/codemod) provides open-source community codemods that can help automate most of the migration process.
+
+Please note that these are not official webpack codemods, and while it aims to streamline the migration, it may not cover all cases. You may still need to perform additional manual steps to fully complete the upgrade.
+
+Run the [webpack v5 migration codemods](https://go.codemod.com/webpack-v5-recipe):
+
+```bash
+npx codemod webpack/v5/migration-recipe
+```
+
+This will run the following codemods from [Codemod registry](https://codemod.com/registry):
+
+- [`webpack/v5/set-target-to-false-and-update-plugins`](https://go.codemod.com/webpack-set-target-false)
+- [`webpack/v5/migrate-library-target-to-library-object`](https://go.codemod.com/webpack-migrate-library-target)
+- [`webpack/v5/json-imports-to-default-imports`](https://go.codemod.com/webpack-json-imports)
+
+Each of these codemods automates a change listed in the webpack v5 migration guide. For a complete list of available webpack v5 codemods, see [Codemod Registry](https://go.codemod.com/webpack-v5).
 
 ### Make sure your build has no errors or warnings
 
@@ -126,6 +148,14 @@ If you were not able to upgrade some plugins/loaders to the latest in Upgrade we
   }
   ```
 
+  > **Note**: Codemod for this Chnages:
+  >
+  > ```bash
+  > npx codemod set-target-to-false-and-update-plugins
+  > ```
+  >
+  > (See the [registry here](https://codemod.com/registry/webpack-v5-set-target-to-false-and-update-plugins).)
+
 - If you have output.library or output.libraryTarget defined, change the property names: (output.libraryTarget -> output.library.type, output.library -> output.library.name). Example
 
   ```json
@@ -147,6 +177,14 @@ If you were not able to upgrade some plugins/loaders to the latest in Upgrade we
       }
   }
   ```
+
+  > **Note**: Codemod for this Chnages:
+  >
+  > ```bash
+  > npx codemod webpack/v5/migrate-library-target-to-library-object
+  > ```
+  >
+  > (See the [registry here](https://codemod.com/registry/webpack-v5-migrate-library-target-to-library-object).)
 
 If you were using WebAssembly via import, you should follow this two step process:
 
@@ -203,6 +241,14 @@ use:
 import pkg from './package.json';
 console.log(pkg.version);
 ```
+
+  > **Note**: Codemod for this Chnages:
+  >
+  > ```bash
+  > npx codemod codemod webpack/v5/json-imports-to-default-imports
+  > ```
+  >
+  > (See the [registry here](https://codemod.com/registry/webpack-v5-json-imports-to-default-imports).)
 
 #### Cleanup the build code
 
