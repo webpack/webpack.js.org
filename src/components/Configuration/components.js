@@ -81,7 +81,7 @@ export class Details extends Component {
         position={['right', 'top']}
         padding={0}
         onClickOutside={this.clickOutsideHandler}
-        containerClassName={'shadow'}
+        containerClassName={'shadow-sm'}
         content={<Card body={content} />}
       >
         <span

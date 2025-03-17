@@ -54,7 +54,7 @@ function NavigationItem({ children, url, isactive, ariaLabel }) {
     <NavLink
       {...obj}
       className={({ isActive }) =>
-        isActive ? `${classes} !text-blue-200` : classes
+        isActive ? `${classes} text-blue-200!` : classes
       }
       to={url}
       aria-label={ariaLabel}
@@ -232,7 +232,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                         title={child.title}
                         className={() =>
                           isActive
-                            ? `!text-black dark:!text-white ${classNames}`
+                            ? `text-black! dark:text-white! ${classNames}`
                             : classNames
                         }
                       >

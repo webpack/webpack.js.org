@@ -136,7 +136,7 @@ export default function Page(props) {
 
         {loadContributors && (
           <div data-testid="contributors" className="print:hidden">
-            <h2 className="!font-sans !font-normal">
+            <h2 className="font-sans! font-normal!">
               {numberOfContributors}{' '}
               {numberOfContributors === 1 ? 'Contributor' : 'Contributors'}
             </h2>
