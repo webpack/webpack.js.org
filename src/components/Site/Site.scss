@@ -14,7 +14,18 @@
     flex: 1 1 auto;
     position: relative;
     display: flex;
-    margin-top: 110px;
+
+    @media (min-width: 1525px) {
+      margin-top: 110px;
+    }
+
+    @media (max-width: 1524px) {
+      margin-top: 350px;
+    }
+
+    @media (max-width: 641px) {
+      margin-top: 350px;
+    }
 
     @media print {
       margin-top: 0px;
