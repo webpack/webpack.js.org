@@ -24,8 +24,8 @@ new webpack.SourceMapDevToolPlugin(options);
 
 The following options are supported:
 
-- `test` (`string` `RegExp` `[string, RegExp]`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
-- `include` (`string` `RegExp` `[string, RegExp]`): Include source maps for module paths that match the given value.
+- `test` (`string` `RegExp` `[string, RegExp]`): Include source maps for modules paths that match the given value (defaults to modules with the extensions `.js`, `.cjs`, `.mjs`, and `.css`). Note that when this option is a string, it matches from the start of the path.
+- `include` (`string` `RegExp` `[string, RegExp]`): Include source maps for module paths that match the given value. Note that when this option is a string, it matches from the start of the path.
 - `exclude` (`string` `RegExp` `[string, RegExp]`): Exclude modules that match the given value from source map generation.
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
 - `append` (`string` `function` `false`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. Since webpack v4.36.0, path parameters are supported: `[chunk]`, `[filename]` and `[contenthash]`. Setting `append` to `false` disables the appending.
