@@ -48,12 +48,6 @@ const Footer = () => (
         >
           Changelog
         </Link>
-        <Link
-          className="footer__link"
-          to="https://discord.com/invite/your-server"
-        >
-          Join Discord
-        </Link>
 
         <Link className="footer__link footer__license" to="/license">
           <img alt="Creative Commons License" src={CC} width={25} height={25} />
