@@ -12,40 +12,29 @@
 <span class="token punctuation">}</span></code></pre>
 <h2><span id="set-up-a-new-webpack-project"></span>Set up a new webpack project<a href="#set-up-a-new-webpack-project" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <aside class="warning"><h6 class="warning__prefix">warning</h6><p>webpack applies configuration defaults after <a href="/contribute/writing-a-plugin/#configuration-defaults">plugins defaults</a> are applied.</p></aside>
-<p>Webpack has a huge set of options which might be overwhelming to you, please take advantage of <a href="/api/cli/#init">webpack-cli&#x27;s <code>init</code> command</a> which could rapidly generate webpack configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.</p>
-<pre><code class="hljs language-bash">npx webpack init</code></pre>
-<p>npx might prompt you to install <code>@webpack-cli/generators</code> if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you&#x27;ve made during the configuration generation.</p>
-<pre><code class="hljs language-bash">$ npx webpack init
+<p>Webpack has a huge set of options which might be overwhelming to you, please take advantage of <code>webpack-cli</code> starting from version v6.0.0 new tool <a href="https://github.com/webpack/webpack-cli/">create-new-webpack-app</a> which could rapidly generate webpack application with specific configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.</p>
+<pre><code class="hljs language-bash">npx create-new-webpack-app <span class="token punctuation">[</span>command<span class="token punctuation">]</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span></code></pre>
+<p>npx might prompt you to install <code>create-new-webpack-app</code> if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you&#x27;ve made during the new webpack application generation.</p>
+<pre><code class="hljs language-bash">$ npx create-new-webpack-app init
 
-<span class="token punctuation">[</span>webpack-cli<span class="token punctuation">]</span> For using this <span class="token builtin class-name">command</span> you need to install: <span class="token string">&#x27;@webpack-cli/generators&#x27;</span> package.
-<span class="token punctuation">[</span>webpack-cli<span class="token punctuation">]</span> Would you like to <span class="token function">install</span> <span class="token string">&#x27;@webpack-cli/generators&#x27;</span> package? <span class="token punctuation">(</span>That will run <span class="token string">&#x27;npm install -D @webpack-cli/generators&#x27;</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>Y/n<span class="token punctuation">)</span>
-devDependencies:
-+ @webpack-cli/generators <span class="token number">2.5</span>.0
-? Which of the following JS solutions <span class="token keyword">do</span> you want to use? ES6
+Need to <span class="token function">install</span> the following packages:
+create-new-webpack-app@1.1.1
+Ok to proceed? <span class="token punctuation">(</span>y<span class="token punctuation">)</span>
+
+? Which of the following JS solutions <span class="token keyword">do</span> you want to use? Typescript
 ? Do you want to use webpack-dev-server? Yes
 ? Do you want to simplify the creation of HTML files <span class="token keyword">for</span> your bundle? Yes
 ? Do you want to <span class="token function">add</span> PWA support? No
 ? Which of the following CSS solutions <span class="token keyword">do</span> you want to use? CSS only
 ? Will you be using PostCSS <span class="token keyword">in</span> your project? Yes
 ? Do you want to extract CSS <span class="token keyword">for</span> every file? Only <span class="token keyword">for</span> Production
-? Do you like to <span class="token function">install</span> prettier to <span class="token function">format</span> generated configuration? Yes
-? Pick a package manager: <span class="token function">pnpm</span>
-<span class="token punctuation">[</span>webpack-cli<span class="token punctuation">]</span> ℹ INFO  Initialising project<span class="token punctuation">..</span>.
-
-devDependencies:
-+ @babel/core <span class="token number">7.19</span>.3
-+ @babel/preset-env <span class="token number">7.19</span>.4
-+ autoprefixer <span class="token number">10.4</span>.12
-+ babel-loader <span class="token number">8.2</span>.5
-+ css-loader <span class="token number">6.7</span>.1
-+ html-webpack-plugin <span class="token number">5.5</span>.0
-+ mini-css-extract-plugin <span class="token number">2.6</span>.1
-+ postcss <span class="token number">8.4</span>.17
-+ postcss-loader <span class="token number">7.0</span>.1
-+ prettier <span class="token number">2.7</span>.1
-+ style-loader <span class="token number">3.3</span>.1
-+ webpack-dev-server <span class="token number">4.11</span>.1
-<span class="token punctuation">[</span>webpack-cli<span class="token punctuation">]</span> Project has been initialised with webpack<span class="token operator">!</span></code></pre>
+? Which package manager <span class="token keyword">do</span> you want to use? <span class="token function">npm</span>
+<span class="token punctuation">[</span>create-webpack<span class="token punctuation">]</span> ℹ️ Initializing a new Webpack project
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>create-webpack<span class="token punctuation">]</span> ✅ Project dependencies installed successfully<span class="token operator">!</span>
+<span class="token punctuation">[</span>create-webpack<span class="token punctuation">]</span> ✅ Project has been initialised with webpack<span class="token operator">!</span></code></pre>
 <h1><span id="configuration-languages"></span>Configuration Languages<a href="#configuration-languages" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found in the <a href="https://github.com/gulpjs/interpret">node-interpret</a> package. Using <a href="https://github.com/gulpjs/interpret">node-interpret</a>, webpack can handle many different types of configuration files.</p>
