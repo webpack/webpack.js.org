@@ -18,6 +18,7 @@ contributors:
   - torifat
   - rahul3v
   - snitin315
+  - vansh5632
 related:
   - title: Debugging Optimization Bailouts
     url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
@@ -312,6 +313,187 @@ After this optimization, other optimizations can still apply. For example: `butt
 
 Module Concatenation also applies. So that these 4 modules plus the entry module (and probably more dependencies) can be concatenated. **`index.js` has no code generated in the end**.
 
+## Full Example: Understanding Side Effects with CSS Files
+
+To better understand the impact of the `sideEffects` flag, let's look at a complete example of an npm package with CSS assets and how they might be affected during tree shaking. We'll create a fictional UI component library called "awesome-ui".
+
+### Package Structure
+
+Our example package looks like this:
+
+```bash
+awesome-ui/
+├── package.json
+├── dist/
+│   ├── index.js
+│   ├── components/
+│   │   ├── index.js
+│   │   ├── Button/
+│   │   │   ├── index.js
+│   │   │   └── Button.css
+│   │   ├── Card/
+│   │   │   ├── index.js
+│   │   │   └── Card.css
+│   │   └── Modal/
+│   │       ├── index.js
+│   │       └── Modal.css
+│   └── theme/
+│       ├── index.js
+│       └── defaultTheme.css
+```
+
+### Package Files Content
+
+**package.json**
+
+```json
+{
+  "name": "awesome-ui",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "sideEffects": false
+}
+```
+
+**dist/index.js**
+
+```javascript
+export * from './components';
+export * from './theme';
+```
+
+**dist/components/index.js**
+
+```javascript
+export { default as Button } from './Button';
+export { default as Card } from './Card';
+export { default as Modal } from './Modal';
+```
+
+**dist/components/Button/index.js**
+
+```javascript
+import './Button.css'; // This has a side effect - it applies styles when imported!
+
+export default function Button(props) {
+  // Button component implementation
+  return {
+    type: 'button',
+    ...props,
+  };
+}
+```
+
+**dist/components/Button/Button.css**
+
+```css
+.awesome-ui-button {
+  background-color: #0078d7;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+```
+
+**dist/components/Card/index.js** and **dist/components/Modal/index.js** would have similar structure.
+
+**dist/theme/index.js**
+
+```javascript
+import './defaultTheme.css'; // This has a side effect!
+
+export const themeColors = {
+  primary: '#0078d7',
+  secondary: '#f3f2f1',
+  danger: '#d13438',
+};
+```
+
+### What Happens When Consuming This Package?
+
+Now, imagine a consumer application that only wants to use the Button component:
+
+```javascript
+import { Button } from 'awesome-ui';
+
+// Use the Button component
+```
+
+#### With `sideEffects: false` in package.json
+
+When webpack processes this import with tree shaking enabled:
+
+1. It sees the import for only Button
+2. It looks at the package.json and sees `sideEffects: false`
+3. It determines it only needs to include the Button component code
+4. Since all files are marked as having no side effects, it will include **only** the JavaScript code for the Button
+5. **The CSS file import gets dropped!** Even though Button.css is imported in Button/index.js, webpack assumes this import has no side effects.
+
+The result: The Button component will render, but without any styling since Button.css was eliminated during tree shaking.
+
+#### The Correct Configuration for This Package
+
+To fix this, we need to update package.json to properly mark CSS files as having side effects:
+
+```json
+{
+  "name": "awesome-ui",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "sideEffects": ["**/*.css"]
+}
+```
+
+With this configuration:
+
+1. Webpack still identifies that only the Button component is needed
+2. But now it recognizes that CSS files have side effects
+3. So, it includes Button.css when processing Button/index.js
+
+### The Decision Tree for Side Effects
+
+Here's how webpack evaluates modules during tree shaking:
+
+1. Is the export from this module used directly or indirectly?
+
+   - If yes: Include the module
+   - If no: Continue to step 2
+
+2. Is the module marked with side effects?
+   - If yes (`sideEffects` includes this file or is `true`): Include the module
+   - If no (`sideEffects` is `false` or doesn't include this file): Exclude the module and its dependencies
+
+For our library's files with the proper sideEffects configuration:
+
+- `dist/index.js`: No direct export used, no side effects -> Skip over
+- `dist/components/index.js`: No direct export used, no side effects -> Skip over
+- `dist/components/Button/index.js`: Direct export used -> Include
+- `dist/components/Button/Button.css`: No exports, has side effects -> Include
+- `dist/components/Card/*`: No exports used, no side effects -> Exclude
+- `dist/components/Modal/*`: No exports used, no side effects -> Exclude
+- `dist/theme/*`: No exports used, no side effects -> Exclude
+
+### Real-World Impact
+
+The impact of incorrect side effects configuration can be significant:
+
+1. **CSS not being included**: Components render without styles
+2. **Global JavaScript not running**: Polyfills or global configurations don't execute
+3. **Initialization code skipped**: Functions that register components or set up event listeners never run
+
+These issues can be particularly hard to debug because they often only appear in production builds when tree shaking is enabled.
+
+### Testing Side Effects Configuration
+
+A good way to test if your side effects configuration is correct:
+
+1. Create a minimal application that imports just one component
+2. Build it with production settings (with tree shaking enabled)
+3. Check if all necessary styles and behaviors work correctly
+4. Look at the generated bundle to confirm the right files are included
+
 ## Mark a function call as side-effect-free
 
 It is possible to tell webpack that a function call is side-effect-free (pure) by using the `/*#__PURE__*/` annotation. It can be put in front of function calls to mark them as side-effect-free. Arguments passed to the function are not being marked by the annotation and may need to be marked individually. When the initial value in a variable declaration of an unused variable is considered as side-effect-free (pure), it is getting marked as dead code, not executed and dropped by the minimizer.
@@ -354,6 +536,41 @@ Notice anything different about `dist/bundle.js`? The whole bundle is now minifi
 
 T> [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) is needed for the tree shaking to work. It is added by `mode: 'production'`. If you are not using it, remember to add the [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) manually.
 
+## Common Pitfalls with Side Effects
+
+When working with tree shaking and the `sideEffects` flag, there are several common pitfalls to avoid:
+
+### 1. Over-optimistic `sideEffects: false`
+
+Setting `sideEffects: false` in your package.json is tempting for optimal tree shaking, but this can cause problems if your code actually does have side effects. Examples of hidden side effects:
+
+- CSS imports (as demonstrated above)
+- Polyfills that modify global objects
+- Libraries that register global event listeners
+- Code that modifies prototype chains
+
+### 2. Re-exports with Side Effects
+
+Consider this pattern:
+
+```javascript
+// This file has side effects that might be skipped
+import './polyfill';
+
+// Re-export components
+export * from './components';
+```
+
+If a consumer only imports specific components, the polyfill import might be skipped entirely if not properly marked with side effects.
+
+### 3. Forgetting about Nested Dependencies
+
+Your package might correctly mark side effects, but if it depends on third-party packages that incorrectly mark their side effects, you might still encounter issues.
+
+### 4. Testing Only in Development Mode
+
+Tree shaking typically only fully activates in production mode. Testing only in development can hide tree shaking issues until deployment.
+
 ## Conclusion
 
 What we've learned is that in order to take advantage of _tree shaking_, you must...
@@ -361,6 +578,7 @@ What we've learned is that in order to take advantage of _tree shaking_, you mus
 - Use ES2015 module syntax (i.e. `import` and `export`).
 - Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of the popular Babel preset @babel/preset-env - see the [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
 - Add a `"sideEffects"` property to your project's `package.json` file.
+- Be careful about correctly marking files with side effects, especially CSS imports.
 - Use the [`production`](/configuration/mode/#mode-production) `mode` configuration option to enable [various optimizations](/configuration/mode/#usage) including minification and tree shaking (side effects optimization is enabled in development mode using the flag value).
 - Make sure you set a correct value for [`devtool`](/configuration/devtool/#devtool) as some of them can't be used in `production` mode.
 
