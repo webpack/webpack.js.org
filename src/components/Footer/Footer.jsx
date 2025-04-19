@@ -39,9 +39,6 @@ const Footer = () => (
         <Link className="footer__link" to="/branding/">
           Branding
         </Link>
-        <Link className="footer__link" to="https://gitter.im/webpack/webpack">
-          Gitter
-        </Link>
         <Link
           className="footer__link"
           to="https://github.com/webpack/webpack/releases"
