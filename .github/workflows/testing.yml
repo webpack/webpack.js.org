@@ -52,9 +52,19 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
+        node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: yarn
+
+      - name: Install MDX Parser
+        run: npm install -g mdx2vast
 
       - name: Vale
         uses: errata-ai/vale-action@v2.1.1
