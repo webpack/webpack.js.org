@@ -31,7 +31,7 @@ const Tooltip = ({
   const bgColor = '#526B78';
   return (
     <div
-      className={`relative ${className}`}
+      className={`relative flex items-center justify-center ${className}`}
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
       onFocus={showTooltip}
