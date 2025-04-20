@@ -140,6 +140,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 title: 'GitHub',
                 children: <GithubIcon {...navigationIconProps} />,
               },
+
               {
                 to: 'https://x.com/webpack',
                 title: 'X',
