@@ -39,6 +39,9 @@ const Footer = () => (
         <Link className="footer__link" to="/branding/">
           Branding
         </Link>
+        <Link className="footer__link" to="https://discord.com/invite/8WWf6F7p">
+          Discord
+        </Link>
         <Link
           className="footer__link"
           to="https://github.com/webpack/webpack/releases"
