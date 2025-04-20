@@ -13,7 +13,6 @@ import Tooltip from '../Tooltip/Tooltip';
 // Load Styling
 import '@docsearch/css';
 
-import DiscordIcon from '../../styles/icons/discord.svg';
 import GithubIcon from '../../styles/icons/github.svg';
 import XIcon from '../../styles/icons/x.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
@@ -141,11 +140,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 title: 'GitHub',
                 children: <GithubIcon {...navigationIconProps} />,
               },
-              {
-                to: 'https://discord.com/invite/5sxFZPdx2k',
-                title: 'Discord',
-                children: <DiscordIcon {...navigationIconProps} />,
-              },
+
               {
                 to: 'https://x.com/webpack',
                 title: 'X',
