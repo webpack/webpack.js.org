@@ -217,7 +217,7 @@ export default class Support extends Component {
                     </span>
                   ) : (
                     <span>
-                      are those who have pledged{' '}
+                      are those who have contributed{' '}
                       {minimum ? `$${formatMoney(minimum)}` : 'up'}{' '}
                       {maximum ? `to $${formatMoney(maximum)}` : 'or more'} to
                       webpack.
