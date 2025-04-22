@@ -70,8 +70,10 @@
 <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> chunks-webpack-plugin --save-dev</code></pre>
 <pre><code class="hljs language-bash"><span class="token function">yarn</span> <span class="token function">add</span> chunks-webpack-plugin --dev</code></pre>
 <blockquote>
-<p><strong>Warning</strong> <code>chunks-webpack-plugin@10</code> is ESM only.</p>
-<p><strong>Note</strong> Minimum supported <code>Node.js</code> version is <code>16.20.0</code> and Webpack <code>&gt;=5.10.3</code>.</p>
+<p>[!WARNING]
+Plugin <code>chunks-webpack-plugin@10</code> is ESM only.
+[!NOTE]
+Minimum supported <code>Node.js</code> version is <code>16.20.0</code> and Webpack <code>&gt;=5.10.3</code>.</p>
 </blockquote>
 <h2><span id="example"></span>Example<a href="#example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The project includes a minimalist example in the <code>./example</code> directory. Run the <code>npm run build:example</code> command to execute the Webpack example and see the plugin&#x27;s implementation in action.</p>
@@ -106,7 +108,8 @@
   filename<span class="token operator">:</span> <span class="token string">&#x27;templates/[name]-[type].html&#x27;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
-<p><strong>Note</strong> The <code>filename</code> can contain directories, which will be created automatically.</p>
+<p>[!NOTE]
+The <code>filename</code> can contain directories, which will be created automatically.</p>
 </blockquote>
 <h3><span id="templatestyle"></span><code>templateStyle</code><a href="#templatestyle" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
@@ -159,7 +162,8 @@
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
-<p><strong>Warning</strong> When set to <code>false</code>, HTML files will not be generated. It can <strong>only</strong> be useful together with <code>generateChunksManifest</code> option set to <code>true</code> for custom generation of the HTML files.</p>
+<p>[!WARNING]
+When set to <code>false</code>, HTML files will not be generated. It can <strong>only</strong> be useful together with <code>generateChunksManifest</code> option set to <code>true</code> for custom generation of the HTML files.</p>
 </blockquote>
 <hr/>
 <details><summary>Multiple entrypoints example</summary><h2><span id="multiple-entrypoints-example"></span>Multiple entrypoints example<a href="#multiple-entrypoints-example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Example of the webpack configuration with multiple entry points which share common code with the <code>splitChunks</code> option.</p><pre><code class="hljs language-js"><span class="token keyword">import</span> ChunksWebpackPlugin <span class="token keyword">from</span> <span class="token string">&#x27;chunks-webpack-plugin&#x27;</span><span class="token punctuation">;</span>
@@ -8363,8 +8367,10 @@ You can pass in a different formatter for the output file, if none is passed in 
 <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> svg-chunk-webpack-plugin --save-dev</code></pre>
 <pre><code class="hljs language-bash"><span class="token function">yarn</span> <span class="token function">add</span> svg-chunk-webpack-plugin --dev</code></pre>
 <blockquote>
-<p><strong>Warning</strong> <code>svg-chunk-webpack-plugin@5</code> is ESM only.</p>
-<p><strong>Note</strong> Minimum supported <code>Node.js</code> version is <code>16.20.0</code> and Webpack <code>&gt;=5.10.3</code>.</p>
+<p>[!WARNING]
+Plugin <code>svg-chunk-webpack-plugin@5</code> is ESM only.
+[!NOTE]
+Minimum supported <code>Node.js</code> version is <code>16.20.0</code> and Webpack <code>&gt;=5.10.3</code>.</p>
 </blockquote>
 <h2><span id="example"></span>Example<a href="#example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The project includes a minimalist example in the <code>./example</code> directory. Run the <code>npm run build:example</code> command to execute the Webpack example and see the plugin&#x27;s implementation in action.</p>
@@ -8372,7 +8378,8 @@ You can pass in a different formatter for the output file, if none is passed in 
 <p>The plugin will generate one SVG sprite for each entrypoints. Sprites are built in the output path directory with all the other assets. Each sprite filename is composed with its entrypoint name (in the example below, that would be <code>home.svg</code>).</p>
 <p>First, let&#x27;s add the loader and the plugin to the Webpack configuration.</p>
 <blockquote>
-<p><strong>Warning</strong> The loader and the plugin need to works together.</p>
+<p>[!WARNING]
+The loader and the plugin need to works together.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-javascript"><span class="token keyword">import</span> SvgChunkWebpackPlugin <span class="token keyword">from</span> <span class="token string">&#x27;svg-chunk-webpack-plugin&#x27;</span><span class="token punctuation">;</span>
@@ -8393,8 +8400,8 @@ You can pass in a different formatter for the output file, if none is passed in 
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">SvgChunkWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
-<p><strong>Note</strong></p>
-<p>For more flexibility and better performance, inline SVG files are better. Fewer HTTP requests, CSS properties to change the style, no flickering during the page load.</p>
+<p>[!NOTE]
+For more flexibility and better performance, inline SVG files are better. Fewer HTTP requests, CSS properties to change the style, no flickering during the page load.</p>
 </blockquote>
 <p>Then, include the sprite in the wanted pages (<em>we use Twig in the following example</em>).</p>
 <p><strong>home.html.twig</strong></p>
@@ -8467,7 +8474,8 @@ You can pass in a different formatter for the output file, if none is passed in 
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
-<p><strong>Note</strong> The <code>filename</code> parameter is compatible with Webpack caching placeholders, see the section <a href="#caching">caching</a>.</p>
+<p>[!NOTE]
+The <code>filename</code> parameter is compatible with Webpack caching placeholders, see the section <a href="#caching">caching</a>.</p>
 </blockquote>
 <h3><span id="svgstoreconfig"></span><code>svgstoreConfig</code><a href="#svgstoreconfig" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
@@ -8488,7 +8496,8 @@ You can pass in a different formatter for the output file, if none is passed in 
   <span class="token punctuation">]</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
-<p><strong>Note</strong> To avoid LinearGradient conflicts, avoid the <code>display: none</code> property which breaks SVG definitions.</p>
+<p>[!NOTE]
+To avoid LinearGradient conflicts, avoid the <code>display: none</code> property which breaks SVG definitions.</p>
 </blockquote>
 <h3><span id="generatespritesmanifest"></span><code>generateSpritesManifest</code><a href="#generatespritesmanifest" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
@@ -8520,8 +8529,8 @@ You can pass in a different formatter for the output file, if none is passed in 
 <h2><span id="caching"></span>Caching<a href="#caching" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>With <a href="/guides/caching">webpack caching</a>, several placeholders are available depending on your needs. With SVG inlined in the page, this option is not useful.</p>
 <blockquote>
-<p><strong>Note</strong></p>
-<p>The <code>[contenthash]</code> placeholder is the best option because it depends on the sprite content. Cache placeholders are expensive in build performance, use it only in production mode.</p>
+<p>[!NOTE]
+The <code>[contenthash]</code> placeholder is the best option because it depends on the sprite content. Cache placeholders are expensive in build performance, use it only in production mode.</p>
 </blockquote>
 <h3><span id="contenthash"></span><code>[contenthash]</code><a href="#contenthash" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>The <code>[contenthash]</code> placeholder will add a unique hash based on the content of the sprite. When the sprite&#x27;s content changes, the hash will change as well.</p>
