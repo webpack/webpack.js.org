@@ -32,7 +32,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 <p>To assist with the upgrade from webpack v4 to v5, <a href="https://github.com/codemod-com/codemod">Codemod</a> provides open-source community codemods that can help automate most of the migration process.</p>
 <p>Please note that these are not official webpack codemods, and while it aims to streamline the migration, it may not cover all cases. You may still need to perform additional manual steps to fully complete the upgrade.</p>
 <p>Run the <a href="https://go.codemod.com/webpack-v5-recipe">webpack v5 migration codemods</a>:</p>
-<pre><code class="hljs language-bash">npx codemod webpack/v5/migration-recipe</code></pre>
+<pre><code class="hljs language-bash">npx codemod@latest webpack/v5/migration-recipe</code></pre>
 <p>This will run the following codemods from <a href="https://codemod.com/registry">Codemod registry</a>:</p>
 <ul>
 <li><a href="https://go.codemod.com/webpack-set-target-false"><code>webpack/v5/set-target-to-false-and-update-plugins</code></a></li>
@@ -126,8 +126,8 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
     <span class="token punctuation">]</span>
 <span class="token punctuation">}</span></code></pre>
 <blockquote>
-<p><strong>Note</strong>: Codemod for this Chnages:</p>
-<pre><code class="hljs language-bash">npx codemod set-target-to-false-and-update-plugins</code></pre>
+<p><strong>Note</strong>: Codemod for this change:</p>
+<pre><code class="hljs language-bash">npx codemod webpack/v5/set-target-to-false-and-update-plugins</code></pre>
 <p>(See the <a href="https://codemod.com/registry/webpack-v5-set-target-to-false-and-update-plugins">registry here</a>.)</p>
 </blockquote>
 </li>
@@ -151,7 +151,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
 <blockquote>
-<p><strong>Note</strong>: Codemod for this Chnages:</p>
+<p><strong>Note</strong>: Codemod for this change:</p>
 <pre><code class="hljs language-bash">npx codemod webpack/v5/migrate-library-target-to-library-object</code></pre>
 <p>(See the <a href="https://codemod.com/registry/webpack-v5-migrate-library-target-to-library-object">registry here</a>.)</p>
 </blockquote>
@@ -208,8 +208,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <pre><code class="hljs language-js"><span class="token keyword">import</span> pkg <span class="token keyword">from</span> <span class="token string">&#x27;./package.json&#x27;</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>pkg<span class="token punctuation">.</span>version<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
-<p><strong>Note</strong>: Codemod for this Chnages:</p>
-<pre><code class="hljs language-bash">npx codemod codemod webpack/v5/json-imports-to-default-imports</code></pre>
+<p><strong>Note</strong>: Codemod for this change:</p>
+<pre><code class="hljs language-bash">npx codemod webpack/v5/json-imports-to-default-imports</code></pre>
 <p>(See the <a href="https://codemod.com/registry/webpack-v5-json-imports-to-default-imports">registry here</a>.)</p>
 </blockquote>
 <h4><span id="cleanup-the-build-code"></span>Cleanup the build code<a href="#cleanup-the-build-code" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
