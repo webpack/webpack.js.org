@@ -46,7 +46,7 @@ Please note that these are not official webpack codemods, and while it aims to s
 Run the [webpack v5 migration codemods](https://go.codemod.com/webpack-v5-recipe):
 
 ```bash
-npx codemod webpack/v5/migration-recipe
+npx codemod@latest webpack/v5/migration-recipe
 ```
 
 This will run the following codemods from [Codemod registry](https://codemod.com/registry):
@@ -148,10 +148,10 @@ If you were not able to upgrade some plugins/loaders to the latest in Upgrade we
   }
   ```
 
-  > **Note**: Codemod for this changes:
+  > **Note**: Codemod for this change:
   >
   > ```bash
-  > npx codemod set-target-to-false-and-update-plugins
+  > npx codemod webpack/v5/set-target-to-false-and-update-plugins
   > ```
   >
   > (See the [registry here](https://codemod.com/registry/webpack-v5-set-target-to-false-and-update-plugins).)
@@ -178,7 +178,7 @@ If you were not able to upgrade some plugins/loaders to the latest in Upgrade we
   }
   ```
 
-  > **Note**: Codemod for this changes:
+  > **Note**: Codemod for this change:
   >
   > ```bash
   > npx codemod webpack/v5/migrate-library-target-to-library-object
@@ -242,7 +242,7 @@ import pkg from './package.json';
 console.log(pkg.version);
 ```
 
-  > **Note**: Codemod for this changes:
+  > **Note**: Codemod for this change:
   >
   > ```bash
   > npx codemod webpack/v5/json-imports-to-default-imports
