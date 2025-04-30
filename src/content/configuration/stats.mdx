@@ -474,6 +474,23 @@ module.exports = {
 };
 ```
 
+### stats.errorErrors
+
+`boolean` `"auto"`
+
+Tells `stats` whether to include the errors array from [`AggregateError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) instances in the output. It defaults to `true`.
+
+Useful when a single error is composed of multiple underlying errors, providing deeper visibility into grouped error structures.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorErrors: true,
+  },
+};
+```
+
 ### stats.errorStack
 
 `boolean = true`
