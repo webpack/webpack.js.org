@@ -444,6 +444,21 @@ module.exports = {
 };
 ```
 
+### stats.errorCause
+
+`boolean` `"auto"`
+
+Tells `stats` whether to include the [`cause`](https://nodejs.org/en/blog/release/v16.9.0/#error-cause) property of errors in the output. It defaults to `true`.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorCause: true,
+  },
+};
+```
+
 ### stats.errorDetails
 
 `boolean` `"auto"`
@@ -455,6 +470,23 @@ module.exports = {
   //...
   stats: {
     errorDetails: false,
+  },
+};
+```
+
+### stats.errorErrors
+
+`boolean` `"auto"`
+
+Tells `stats` whether to include the errors array from [`AggregateError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) instances in the output. It defaults to `true`.
+
+Useful when a single error is composed of multiple underlying errors, providing deeper visibility into grouped error structures.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorErrors: true,
   },
 };
 ```
