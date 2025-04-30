@@ -444,6 +444,21 @@ module.exports = {
 };
 ```
 
+### stats.errorCause
+
+`boolean` `"auto"`
+
+Tells `stats` whether to include the [`cause`](https://nodejs.org/en/blog/release/v16.9.0/#error-cause) property of errors in the output. It defaults to `true`.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorCause: true,
+  },
+};
+```
+
 ### stats.errorDetails
 
 `boolean` `"auto"`
