@@ -4809,7 +4809,7 @@ In this case, the <code>less-loader</code> will not override the source but just
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="webpackimporter"></span><code>webpackImporter</code><a href="#webpackimporter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">webpackImporter</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">webpackImporter</span> <span class="token operator">=</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token string">&quot;only&quot;</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>true</code></p>
 <p>Enables/Disables the default <code>webpack</code> importer.</p>
 <p>This can improve performance in some cases. Use it with caution because aliases and <code>@import</code> from <a href="/configuration/resolve/#resolvemodules"><code>node_modules</code></a> will not work.</p>
