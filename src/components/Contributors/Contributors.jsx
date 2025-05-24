@@ -20,7 +20,7 @@ function Contributor({ contributor, inView }) {
         height={45}
         alt={contributor}
         title={contributor}
-        className="w-full rounded-full shadow"
+        className="w-full rounded-full shadow-sm"
         src={
           inView ? `https://github.com/${contributor}.png?size=90` : SmallIcon
         }
