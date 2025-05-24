@@ -324,7 +324,7 @@ be passed to <code>babel.transform</code>.</p>
 <p>or</p>
 <pre><code class="hljs language-console">pnpm add -D coffeescript coffee-loader
 </code></pre>
-<p>Then add the plugin to your <code>webpack</code> config. For example:</p>
+<p>Then add the loader to your <code>webpack.config.js</code>. For example:</p>
 <p><strong>file.coffee</strong></p>
 <pre><code class="hljs language-coffee"># Assignment:
 number   = 42
@@ -368,19 +368,19 @@ cubes = (math.cube num for num in list)
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Alternative usage:</p>
 <pre><code class="hljs language-js"><span class="token keyword">import</span> coffee <span class="token keyword">from</span> <span class="token string">&quot;coffee-loader!./file.coffee&quot;</span><span class="token punctuation">;</span></code></pre>
-<p>And run <code>webpack</code> via your preferred method.</p>
+<p>Finally, run <code>webpack</code> using the method you normally use (e.g., via CLI or an npm script).</p>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Type: <code>Object</code>
 Default: <code>{ bare: true }</code></p>
-<p>Options for CoffeeScript. All possible options you can find <a href="https://coffeescript.org/#nodejs-usage">here</a>.</p>
-<p>Documentation for the <code>transpile</code> option you can find <a href="https://coffeescript.org/#transpilation">here</a>.</p>
+<p>You can find all available CoffeeScript options <a href="https://coffeescript.org/#nodejs-usage">here</a>.</p>
+<p>For documentation on the <code>transpile</code> option, see <a href="https://coffeescript.org/#transpilation">this section</a>.</p>
 <blockquote>
 <p>[!NOTE]</p>
 <p>The <code>sourceMap</code> option takes a value from the <code>compiler.devtool</code> value by default.</p>
 </blockquote>
 <blockquote>
 <p>[!NOTE]</p>
-<p>The <code>filename</code> option takes a value from webpack loader API. The option value will be ignored.</p>
+<p>The <code>filename</code> option takes a value from webpack loader API, but it&#x27;s value will be ignored.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -404,10 +404,10 @@ Default: <code>{ bare: true }</code></p>
 <p>From CoffeeScript 2 documentation:</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p>CoffeeScript 2 generates JavaScript that uses the latest, modern syntax.
+<p>CoffeeScript 2 generates JavaScript using the latest, modern syntax.
 The runtime or browsers where you want your code to run might not support all of that syntax.
-In that case, we want to convert modern JavaScript into older JavaScript that will run in older versions of Node or older browsers; for example, <code>{ a } = obj</code> into <code>a = obj.a</code>.
-This is done via transpilers like Babel, Bublé or Traceur Compiler.</p>
+In that case, modern JavaScript needs to be converted into an older JavaScript that will run in older versions of Node or older browsers; for example: <code>{ a } = obj</code> into <code>a = obj.a</code>.
+This conversion is done using transpilers like Babel, Bublé or Traceur Compiler.</p>
 </blockquote>
 <p>You&#x27;ll need to install <code>@babel/core</code> and <code>@babel/preset-env</code> and then create a configuration file:</p>
 <pre><code class="hljs language-console">npm install --save-dev @babel/core @babel/preset-env
@@ -430,7 +430,7 @@ echo &#x27;{ &quot;presets&quot;: [&quot;@babel/env&quot;] }&#x27; &gt; .babelrc
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="literate-coffeescript"></span>Literate CoffeeScript<a href="#literate-coffeescript" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>For using Literate CoffeeScript you should setup:</p>
+<p>To use Literate CoffeeScript you should setup:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
