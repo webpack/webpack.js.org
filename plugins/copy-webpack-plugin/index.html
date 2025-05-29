@@ -5,7 +5,7 @@
 <a href="https://codecov.io/gh/webpack-contrib/copy-webpack-plugin"><img src="https://codecov.io/gh/webpack-contrib/copy-webpack-plugin/branch/master/graph/badge.svg" alt="cover"/></a>
 <a href="https://github.com/webpack/webpack/discussions"><img src="https://img.shields.io/github/discussions/webpack/webpack" alt="discussion"/></a>
 <a href="https://packagephobia.now.sh/result?p=copy-webpack-plugin"><img src="https://packagephobia.now.sh/badge?p=copy-webpack-plugin" alt="size"/></a></p>
-<p>Copies individual files or entire directories, which already exist, to the build directory.</p>
+<p>Copies existing individual files or entire directories to the build directory.</p>
 <h2><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>To begin, you&#x27;ll need to install <code>copy-webpack-plugin</code>:</p>
 <pre><code class="hljs language-console">npm install copy-webpack-plugin --save-dev
@@ -16,7 +16,7 @@
 <p>or</p>
 <pre><code class="hljs language-console">pnpm add -D copy-webpack-plugin
 </code></pre>
-<p>Then add the plugin to your <code>webpack</code> config. For example:</p>
+<p>Then add the plugin to your <code>webpack</code> configuration. For example:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -32,22 +32,22 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
 <p>[!NOTE]</p>
-<p><code>copy-webpack-plugin</code> is not designed to copy files generated from the build process; rather, it is to copy files that already exist in the source tree, as part of the build process.</p>
+<p><code>copy-webpack-plugin</code> is not designed to copy files generated during the build process. Instead, it is meant to copy files that already exist in the source tree, as part of the build process.</p>
 </blockquote>
 <blockquote>
 <p>[!NOTE]</p>
-<p>If you want <code>webpack-dev-server</code> to write files to the output directory during development, you can force it with the <a href="https://github.com/webpack/webpack-dev-middleware#writetodisk"><code>writeToDisk</code></a> option or the <a href="https://github.com/gajus/write-file-webpack-plugin"><code>write-file-webpack-plugin</code></a>.</p>
+<p>If you want <code>webpack-dev-server</code> to write files to the output directory during development, you can enable the <a href="https://github.com/webpack/webpack-dev-middleware#writetodisk"><code>writeToDisk</code></a> option or use the <a href="https://github.com/gajus/write-file-webpack-plugin"><code>write-file-webpack-plugin</code></a>.</p>
 </blockquote>
 <blockquote>
 <p>[!NOTE]</p>
-<p>You can get the original source filename from <a href="/api/stats/#asset-objects">Asset Objects</a>.</p>
+<p>You can get the original source filename from the <a href="/api/stats/#asset-objects">Asset Objects</a> in the webpack stats API.</p>
 </blockquote>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <ul>
 <li><strong><a href="#patterns"><code>patterns</code></a></strong></li>
 <li><strong><a href="#options-1"><code>options</code></a></strong></li>
 </ul>
-<p>The plugin&#x27;s signature:</p>
+<p>The plugin&#x27;s usage:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -56,7 +56,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">&quot;source&quot;</span><span class="token punctuation">,</span> to<span class="token operator">:</span> <span class="token string">&quot;dest&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token string">&quot;path/to/source&quot;</span><span class="token punctuation">,</span> <span class="token comment">// absolute or relative, files/directories/globs - see below for examples</span>
+        <span class="token string">&quot;path/to/source&quot;</span><span class="token punctuation">,</span> <span class="token comment">// Absolute or relative path, can be files, directories or globs. See examples below.</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
       options<span class="token operator">:</span> <span class="token punctuation">{</span>
         concurrency<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
@@ -84,13 +84,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token keyword">from</span></span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Glob or path from where we copy files.
-Globs accept <a href="https://github.com/mrmlnc/fast-glob#pattern-syntax">fast-glob pattern-syntax</a>.
-Glob can only be a <code>string</code>.</p>
+Globs follow the <a href="https://github.com/mrmlnc/fast-glob#pattern-syntax">fast-glob pattern-syntax</a>.
+Note: Globs must be a <code>string</code>.</p>
 <blockquote>
 <p>[!WARNING]</p>
-<p>Don&#x27;t use directly <code>\\</code> in <code>from</code> option if it is a <code>glob</code> (i.e <code>path\to\file.ext</code>) option because on UNIX the backslash is a valid character inside a path component, i.e., it&#x27;s not a separator.
-On Windows, the forward slash and the backward slash are both separators.
-Instead please use <code>/</code>.</p>
+<p>Don&#x27;t use directly <code>\\</code> in <code>from</code> option if it is a <code>glob</code> (i.e <code>path\to\file.ext</code>) option, as backslashes are treated as regular characters on UNIX systems(not as path separators).
+On Windows, both forward slashes and backslashes act as separators.
+Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -115,7 +115,7 @@ Instead please use <code>/</code>.</p>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h5><span id="for-windows"></span><code>For windows</code><a href="#for-windows" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<p>If you define <code>from</code> as absolute file path or absolute folder path on <code>Windows</code>, you can use windows path segment (<code>\\</code>)</p>
+<p>If you&#x27;re using an absolute file or folder path in the <code>from</code> option on <code>Windows</code>, you can use windows path segment (<code>\\</code>)</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -127,8 +127,8 @@ Instead please use <code>/</code>.</p>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>But you should always use forward-slashes in <code>glob</code> expressions
-See <a href="https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-windows">fast-glob manual</a>.</p>
+<p>However, when writing <code>glob</code> expressions, always use forward slashes.
+See the <a href="https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-windows">fast-glob manual</a> for more details.</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -144,8 +144,8 @@ See <a href="https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-window
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>The <code>context</code> behaves differently depending on what the <code>from</code> is (<code>glob</code>, <code>file</code> or <code>dir</code>).
-More <a href="#examples"><code>examples</code></a></p>
+<p>The behavior of the <code>context</code> option varies depending on whether the <code>from</code> value is a <code>glob</code>, <code>file</code> or <code>dir</code>.
+See more <a href="#examples"><code>examples</code></a>.</p>
 <h4><span id="to"></span><code>to</code><a href="#to" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">to</span> <span class="token operator">=</span>
@@ -153,12 +153,12 @@ More <a href="#examples"><code>examples</code></a></p>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>pathData<span class="token operator">:</span> <span class="token punctuation">{</span> context<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> absoluteFilename<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>compiler.options.output</code></p>
 <h5><span id="string"></span><code>string</code><a href="#string" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<p>Output path.</p>
+<p>Specifies the output path.</p>
 <blockquote>
 <p>[!WARNING]</p>
-<p>Don&#x27;t use directly <code>\\</code> in <code>to</code> (i.e <code>path\to\dest</code>) option because on UNIX the backslash is a valid character inside a path component, i.e., it&#x27;s not a separator.
-On Windows, the forward slash and the backward slash are both separators.
-Instead please use <code>/</code> or <code>path</code> methods.</p>
+<p>Don&#x27;t use directly <code>\\</code> in the <code>to</code> path (i.e <code>path\to\dest</code>) option, as backslashes are treated as regular characters on UNIX systems(not as path separators).
+On Windows, both forward slashes and backslashes act as separators.
+Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -185,9 +185,9 @@ Instead please use <code>/</code> or <code>path</code> methods.</p>
 <p>Allows to modify the writing path.</p>
 <blockquote>
 <p>[!WARNING]</p>
-<p>Don&#x27;t return directly <code>\\</code> in <code>to</code> (i.e <code>path\to\newFile</code>) option because on UNIX the backslash is a valid character inside a path component, i.e., it&#x27;s not a separator.
-On Windows, the forward slash and the backward slash are both separators.
-Instead please use <code>/</code> or <code>path</code> methods.</p>
+<p>Don&#x27;t use directly <code>\\</code> in <code>to</code> (i.e <code>path\to\newFile</code>) option, as backslashes are treated as regular characters on UNIX systems(not as path separators).
+On Windows, both forward slashes and backslashes act as separators.
+Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -223,12 +223,20 @@ Instead please use <code>/</code> or <code>path</code> methods.</p>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">context</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>options.context|compiler.options.context</code></p>
-<p>A path to be (1) prepended to <code>from</code> and (2) removed from the start of the result path(s).</p>
+<p>Defines the base directory used for two purposes:</p>
+<ol>
+<li>
+<p>It is prepended to the <code>from</code> path.</p>
+</li>
+<li>
+<p>It is removed from the beginning of the result path(s).</p>
+</li>
+</ol>
 <blockquote>
 <p>[!WARNING]</p>
-<p>Don&#x27;t use directly <code>\\</code> in <code>context</code> (i.e <code>path\to\context</code>) option because on UNIX the backslash is a valid character inside a path component, i.e., it&#x27;s not a separator.
-On Windows, the forward slash and the backward slash are both separators.
-Instead please use <code>/</code> or <code>path</code> methods.</p>
+<p>Don&#x27;t use directly <code>\\</code> in <code>to</code> (i.e <code>path\to\newFile</code>) option, as backslashes are treated as regular characters on UNIX systems(not as path separators).
+On Windows, both forward slashes and backslashes act as separators.
+Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -244,21 +252,27 @@ Instead please use <code>/</code> or <code>path</code> methods.</p>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p><code>context</code> can be an absolute path or a relative path. If it is a relative path, then it will be converted to an absolute path based on <code>compiler.options.context</code>.</p>
-<p><code>context</code> should be explicitly set only when <code>from</code> contains a glob. Otherwise, <code>context</code> is automatically set, based on whether <code>from</code> is a file or a directory:</p>
-<p>If <code>from</code> is a file, then <code>context</code> is its directory. The result path will be the filename alone.</p>
-<p>If <code>from</code> is a directory, then <code>context</code> equals <code>from</code>. The result paths will be the paths of the directory&#x27;s contents (including nested contents), relative to the directory.</p>
+<p>The <code>context</code> can be an absolute or relative path. If it&#x27;s relative, then it will be converted to an absolute path based on <code>compiler.options.context</code>.</p>
+<p>You should explicitly define <code>context</code> when <code>from</code> uses a glob pattern. Otherwise, the plugin sets it automatically based on the nature of <code>from</code>:</p>
+<ul>
+<li>
+<p>If <code>from</code> is a file, then <code>context</code> defaults to the file’s directory. The result path will be just the filename alone.</p>
+</li>
+<li>
+<p>If <code>from</code> is a directory, <code>context</code> is set to the same directory. The result paths include the directory’s contents (including subdirectories), relative to it.</p>
+</li>
+</ul>
 <p>The use of <code>context</code> is illustrated by these <a href="#examples"><code>examples</code></a>.</p>
 <h4><span id="globoptions"></span><code>globOptions</code><a href="#globoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <blockquote>
 <p>[!WARNING]</p>
-<p>The <em>onlyDirectories</em> does not work because the plugin is designed to copy files.</p>
+<p>The <em>onlyDirectories</em> does not work because the plugin is designed to copy files, not directories alone.</p>
 </blockquote>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;tinyglobby&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>GlobOptions<span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
-<p>Allows to configure the glob pattern matching library used by the plugin. <a href="https://github.com/SuperchupuDev/tinyglobby#options">See the list of supported options</a>
-To exclude files from the selection, you should use <a href="https://github.com/mrmlnc/fast-glob#ignore">globOptions.ignore option</a></p>
+<p>Allows you to configure the glob pattern matching library used by the plugin. <a href="https://github.com/SuperchupuDev/tinyglobby#options">See the list of supported options</a>
+To exclude files from being copied, use the <a href="https://github.com/mrmlnc/fast-glob#ignore">globOptions.ignore option</a></p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -282,7 +296,7 @@ To exclude files from the selection, you should use <a href="https://github.com/
 <p>Default: <code>undefined</code></p>
 <blockquote>
 <p>[!NOTE]</p>
-<p>To ignore files by path please use the <a href="#globoptions"><code>globOptions.ignore</code></a> option.</p>
+<p>To ignore files by path (e.g., by extension or name), prefer using the [<code>globOptions.ignore</code>] option.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;fs&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>promise<span class="token punctuation">;</span>
@@ -312,11 +326,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">toType</span> <span class="token operator">=</span> <span class="token string">&quot;dir&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;file&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;template&quot;</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
-<p>Determinate what is <code>to</code> option - directory, file or template.
+<p>Determines the type of the <code>to</code> option — whether it&#x27;s a directory, file, or template.
 Sometimes it is hard to say what is <code>to</code>, example <code>path/to/dir-with.ext</code>.
-If you want to copy files in directory you need use <code>dir</code> option.
-We try to automatically determine the <code>type</code> so you most likely do not need this option.</p>
-<table><thead><tr><th style="text-align:center">Name</th><th style="text-align:center">Type</th><th style="text-align:center">Default</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#dir"><code>&#x27;dir&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>If <code>to</code> has no extension or ends on <code>&#x27;/&#x27;</code></span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#file"><code>&#x27;file&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>If <code>to</code> is not a directory and is not a template</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#template"><code>&#x27;template&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>If <code>to</code> contains <a href="/configuration/output/#template-strings">a template pattern</a></span></td></tr></tbody></table>
+If you want to copy files in directory you should explicitly set the type to <code>dir</code>.
+In most cases, the plugin will automatically determine the correct <code>type</code>, so you typically don&#x27;t need to set this option manually.</p>
+<table><thead><tr><th style="text-align:center">Name</th><th style="text-align:center">Type</th><th style="text-align:center">Default</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#dir"><code>&#x27;dir&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Used <code>to</code> has no extension or ends with a <code>&#x27;/&#x27;</code>.</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#file"><code>&#x27;file&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Used when <code>to</code> is a file path that is not a directory or template.</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#template"><code>&#x27;template&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Used when <code>to</code> contains <a href="/configuration/output/#template-strings">a template pattern</a></span></td></tr></tbody></table>
 <h5><span id="dir"></span><code>&#x27;dir&#x27;</code><a href="#dir" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -366,7 +380,7 @@ We try to automatically determine the <code>type</code> so you most likely do no
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">force</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>false</code></p>
-<p>Overwrites files already in <code>compilation.assets</code> (usually added by other plugins/loaders).</p>
+<p>Overwrites files that already exist in <code>compilation.assets</code> (typically added by other plugins or loaders).</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -387,8 +401,8 @@ We try to automatically determine the <code>type</code> so you most likely do no
 <p>Default: <code>0</code></p>
 <p>Allows to specify the priority of copying files with the same destination name.
 Files for patterns with higher priority will be copied later.
-To overwrite files, the <a href="#force"><code>force</code></a> option must be enabled.</p>
-<p><strong>webpack.config.js</strong></p>
+To enable overwriting, the <a href="#force"><code>force</code></a> option must be set to <code>true</code>.
+<strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -419,7 +433,7 @@ To overwrite files, the <a href="#force"><code>force</code></a> option must be e
     <span class="token punctuation">}</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span> <span class="token operator">|</span> Buffer<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
-<p>Allows to modify the file contents.</p>
+<p>Allows you to modify the contents of a file before it is written to the output directory.</p>
 <h5><span id="function-1"></span><code>function</code><a href="#function-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -440,7 +454,7 @@ To overwrite files, the <a href="#force"><code>force</code></a> option must be e
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h5><span id="object"></span><code>object</code><a href="#object" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<table><thead><tr><th style="text-align:center">Name</th><th style="text-align:center">Default</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#transformer"><code>transformer</code></a></strong></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Allows to modify the file contents.</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#cache"><code>cache</code></a></strong></span></td><td data-th="Default" style="text-align:center"><span><code>false</code></span></td><td data-th="Description" style="text-align:left"><span>Enable <code>transform</code> caching. You can use <code>transform: { cache: { key: &#x27;my-cache-key&#x27; } }</code> to invalidate the cache.</span></td></tr></tbody></table>
+<table><thead><tr><th style="text-align:center">Name</th><th style="text-align:center">Default</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#transformer"><code>transformer</code></a></strong></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Allows you to modify the contents of the file.</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#cache"><code>cache</code></a></strong></span></td><td data-th="Default" style="text-align:center"><span><code>false</code></span></td><td data-th="Description" style="text-align:left"><span>Enables caching for <code>transform</code>. You can use <code>transform: { cache: { key: &#x27;my-cache-key&#x27; } }</code> to manually invalidate the cache when needed.</span></td></tr></tbody></table>
 <h6><span id="transformer"></span><code>transformer</code><a href="#transformer" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h6>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">transformer</span> <span class="token operator">=</span> <span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
@@ -505,8 +519,8 @@ To overwrite files, the <a href="#force"><code>force</code></a> option must be e
   <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>false</code></p>
 <p><strong>webpack.config.js</strong></p>
-<p>Enable/disable and configure caching.
-Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</code>.</p>
+<p>Enable or disable caching and configure its behavior.
+By default, the cache directory is located at: <code>node_modules/.cache/copy-webpack-plugin</code>.</p>
 <h6><span id="boolean"></span><code>boolean</code><a href="#boolean" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h6>
 <p>Enables/Disable <code>transform</code> caching.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -624,10 +638,10 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
   <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
-<p>Allows you to modify the contents of multiple files and save the result to one file.</p>
+<p>Allows you to modify the contents of multiple files and save the combined result into a single file.</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p>The <code>to</code> option must be specified and point to a file. It is allowed to use only <code>[contenthash]</code> and <code>[fullhash]</code> template strings.</p>
+<p>The <code>to</code> option must be specified and point to a file. Only the <code>[contenthash]</code> and <code>[fullhash]</code> template strings are allowed in the filename.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -637,7 +651,7 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
         <span class="token punctuation">{</span>
           <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">&quot;src/**/*.txt&quot;</span><span class="token punctuation">,</span>
           to<span class="token operator">:</span> <span class="token string">&quot;dest/file.txt&quot;</span><span class="token punctuation">,</span>
-          <span class="token comment">// The `assets` argument is an assets array for the pattern.from (&quot;src/**/*.txt&quot;)</span>
+          <span class="token comment">// The `assets` argument is an array of assets matched by the pattern `from` (&quot;src/**/*.txt&quot;)</span>
           <span class="token function">transformAll</span><span class="token punctuation">(</span><span class="token parameter">assets</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">const</span> result <span class="token operator">=</span> assets<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">accumulator<span class="token punctuation">,</span> asset</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
               <span class="token comment">// The asset content can be obtained from `asset.source` using `source` method.</span>
@@ -659,7 +673,7 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">noErrorOnMissing</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>false</code></p>
-<p>Doesn&#x27;t generate an error on missing file(s).</p>
+<p>Doesn&#x27;t generate an error if file(s) are missing.</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -734,7 +748,7 @@ Default path to cache directory: <code>node_modules/.cache/copy-webpack-plugin</
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <h4><span id="different-variants-of-from-glob-file-or-dir"></span>Different variants of <code>from</code> (<code>glob</code>, <code>file</code> or <code>dir</code>).<a href="#different-variants-of-from-glob-file-or-dir" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>Take for example the following file structure:</p>
+<p>Consider the following file structure:</p>
 <pre><code>src/directory-nested/deep-nested/deepnested-file.txt
 src/directory-nested/nested-file.txt
 </code></pre>
@@ -791,7 +805,7 @@ nested-file.txt
 <pre><code class="hljs language-txt">deep-nested/deepnested-file.txt,
 nested-file.txt
 </code></pre>
-<p>Technically, this is <code>**/*</code> with a predefined context equal to the specified directory.</p>
+<p>Technically, this is equivalent to using <code>**/*</code> with a predefined context set to the specified directory</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -829,7 +843,7 @@ nested-file.txt
 <p>Result:</p>
 <pre><code class="hljs language-txt">nested-file.txt
 </code></pre>
-<p>Technically, this is a filename with a predefined context equal to <code>path.dirname(pathToFile)</code>.</p>
+<p>Technically, this is a filename with a predefined context equal to the file&#x27;s directory <code>path.dirname(pathToFile)</code>.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -871,7 +885,7 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h4><span id="flatten-copy"></span>Flatten copy<a href="#flatten-copy" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>Removes all directory references and only copies file names.</p>
+<p>Removes all directory references and copies only file names.</p>
 <blockquote>
 <p>[!WARNING]</p>
 <p>If files have the same name, the result is non-deterministic.</p>
@@ -936,8 +950,8 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h5><span id="yarn-workspaces-and-monorepos"></span><code>yarn workspaces</code> and <code>monorepos</code><a href="#yarn-workspaces-and-monorepos" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<p>When using <code>yarn workspaces</code> or<code> monorepos</code>, relative copy paths from node_modules can be broken due to the way packages are hoisting.
-To avoid this, should explicitly specify where to copy the files from using <code>require.resolve</code>.</p>
+<p>When using <code>yarn workspaces</code> or<code> monorepos</code>, relative copy paths from <code>node_modules</code> can be broken due to the way packages are hoisting.
+To avoid this, you should explicitly specify where to copy the files from; by using <code>require.resolve</code>.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -957,4 +971,4 @@ To avoid this, should explicitly specify where to copy the files from using <cod
 <p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p>
 <p><a href="https://github.com/webpack-contrib/copy-webpack-plugin/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack-contrib/copy-webpack-plugin/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/copy-webpack-plugin/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/copy-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/compression-webpack-plugin/">CompressionWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/css-minimizer-webpack-plugin/">CssMinimizerWebpackPlugin</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.f8e9851a98ced3ee.js"></script></body>
+<p><a href="https://github.com/webpack-contrib/copy-webpack-plugin/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/copy-webpack-plugin/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/copy-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/compression-webpack-plugin/">CompressionWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/css-minimizer-webpack-plugin/">CssMinimizerWebpackPlugin</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.c6228f08967a9cb8.js"></script></body>

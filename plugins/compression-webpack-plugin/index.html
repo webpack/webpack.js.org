@@ -23,7 +23,7 @@
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>And run <code>webpack</code> via your preferred method.</p>
+<p>Finally, run <code>webpack</code> using the method you normally use (e.g., via CLI or an npm script).</p>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <ul>
 <li><strong><a href="#test"><code>test</code></a></strong></li>
@@ -104,14 +104,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>Default: <code>gzip</code></p>
-<p>The compression algorithm/function.</p>
+<p>Defines the compression algorithm or function to use. Defaults to <code>gzip</code>.</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p>If you use custom function for the <code>algorithm</code> option, the default value of the <code>compressionOptions</code> option is <code>{}</code>.</p>
+<p>If you use a custom function for the <code>algorithm</code> option, the default value of <code>compressionOptions</code> will be an empty object <code>{}</code>.</p>
 </blockquote>
 <h4><span id="string"></span><code>string</code><a href="#string" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>The algorithm is taken from <a href="https://nodejs.org/api/zlib.html">zlib</a>.</p>
+<p>The algorithm is based on the Node.js <a href="https://nodejs.org/api/zlib.html">zlib</a> module.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -121,7 +120,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h4><span id="function"></span><code>function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>Allow to specify a custom compression function.</p>
+<p>Allow you to specify a custom compression function.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -148,10 +147,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>{ level: 9 }</code></p>
 <p>Compression options for <code>algorithm</code>.</p>
-<p>You can find all options here <a href="https://nodejs.org/api/zlib.html#zlib_class_options">zlib</a>.</p>
+<p>You can find all available options in the <a href="https://nodejs.org/api/zlib.html#zlib_class_options">zlib</a> documentation.</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p>If you use custom function for the <code>algorithm</code> option, the default value is <code>{}</code>.</p>
+<p>If you use a custom function for the <code>algorithm</code> option, the default value of <code>compressionOptions</code> will be an empty object <code>{}</code>.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -165,7 +164,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">threshold</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>0</code></p>
-<p>Only assets bigger than this size are processed. In bytes.</p>
+<p>Only assets larger than this size (in bytes) are processed.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -179,10 +178,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minRatio</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>0.8</code></p>
 <p>Only assets that compress better than this ratio are processed (<code>minRatio = Compressed Size / Original Size</code>).
-Example: you have <code>image.png</code> file with 1024b size, compressed version of file has 768b size, so <code>minRatio</code> equal <code>0.75</code>.
-In other words assets will be processed when the <code>Compressed Size / Original Size</code> value less <code>minRatio</code> value.</p>
-<p>You can use <code>1</code> value to process assets that are smaller than the original.</p>
-<p>Use a value of <code>Infinity</code> to process all assets even if they are larger than the original size or their original size is <code>0</code> bytes (useful when you are pre-zipping all assets for AWS).</p>
+For example, if you have a <code>image.png</code> file with a size of 1024 bytes, and its compressed version is of 768 bytes, the <code>minRatio</code> is <code>0.75</code>.
+In other words, assets will be processed only when the ratio of <code>Compressed Size / Original Size</code> is less than the specified <code>minRatio</code>.</p>
+<p>You can use a value of <code>1</code> to process assets that are smaller than or equal to the original size.</p>
+<p>Use a value of <code>Infinity</code> to process all assets, even if they are larger than the original size or their original size is <code>0</code> bytes (useful when you are pre-zipping all assets for AWS).</p>
 <p>Use a value of <code>Number.MAX_SAFE_INTEGER</code> to process all assets even if they are larger than the original size, excluding assets with their original size is <code>0</code> bytes.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -204,13 +203,13 @@ In other words assets will be processed when the <code>Compressed Size / Origina
 <p>Default: <code>&quot;[path][base].gz&quot;</code></p>
 <p>The target asset filename.</p>
 <h4><span id="string-1"></span><code>string</code><a href="#string-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>For example we have <code>assets/images/image.png?foo=bar#hash</code>:</p>
-<p><code>[path]</code> is replaced with the directories to the original asset, included trailing <code>/</code> (<code>assets/images/</code>).</p>
-<p><code>[file]</code> is replaced with the path of original asset (<code>assets/images/image.png</code>).</p>
-<p><code>[base]</code> is replaced with the base (<code>[name]</code> + <code>[ext]</code>) of the original asset (<code>image.png</code>).</p>
+<p>For example, given an asset path: <code>assets/images/image.png?foo=bar#hash</code>:</p>
+<p><code>[path]</code> is replaced with the directories of the original asset, including the trailing <code>/</code> (<code>assets/images/</code>).</p>
+<p><code>[file]</code> is replaced with the path of the original asset (<code>assets/images/image.png</code>).</p>
+<p><code>[base]</code> is replaced with the base name (<code>[name]</code> + <code>[ext]</code>) of the original asset (<code>image.png</code>).</p>
 <p><code>[name]</code> is replaced with the name of the original asset (<code>image</code>).</p>
-<p><code>[ext]</code> is replaced with the extension of the original asset, included <code>.</code> (<code>.png</code>).</p>
-<p><code>[query]</code> is replaced with the query of the original asset, included <code>?</code> (<code>?foo=bar</code>).</p>
+<p><code>[ext]</code> is replaced with the extension of the original asset, including the <code>.</code> (<code>.png</code>).</p>
+<p><code>[query]</code> is replaced with the query of the original asset, including the <code>?</code> (<code>?foo=bar</code>).</p>
 <p><code>[fragment]</code> is replaced with the fragment (in the concept of URL it is called <code>hash</code>) of the original asset (<code>#hash</code>).</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -244,7 +243,29 @@ In other words assets will be processed when the <code>Compressed Size / Origina
   <span class="token operator">|</span> <span class="token string">&quot;keep-source-map&quot;</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>false</code></p>
-<p>Whether to delete the original assets or not.</p>
+<p>Determines whether the original (uncompressed) assets should be deleted after compression.</p>
+<ul>
+<li>
+<p>If set to <code>true</code> , all original assets will be deleted.</p>
+</li>
+<li>
+<p>If set to <code>&quot;keep-source-map&quot;</code>, all original assets except source maps (<code>.map</code> files) will be deleted.</p>
+</li>
+<li>
+<p>If a function is provided, it will be called with each asset’s name and should return <code>true</code> to delete the asset or <code>false</code> to keep it.</p>
+</li>
+</ul>
+<p>Example:</p>
+<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token function-variable function">deleteOriginalAssets</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">assetName</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Delete all assets except images</span>
+        <span class="token keyword">return</span> <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.png&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.jpg&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -279,10 +300,10 @@ In other words assets will be processed when the <code>Compressed Size / Origina
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="using-zopfli"></span>Using Zopfli<a href="#using-zopfli" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>Prepare compressed versions of assets using <code>zopfli</code> library.</p>
+<p>Prepare compressed versions of assets using the <code>zopfli</code> library.</p>
 <blockquote>
 <p>[!NOTE]</p>
-<p><code>@gfx/zopfli</code> require minimum <code>8</code> version of <code>node</code>.</p>
+<p><code>@gfx/zopfli</code> requires at least <code>Node.js</code> version <code>8</code>.</p>
 </blockquote>
 <p>To begin, you&#x27;ll need to install <code>@gfx/zopfli</code>:</p>
 <pre><code class="hljs language-console">$ npm install @gfx/zopfli --save-dev
@@ -304,8 +325,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="using-brotli"></span>Using Brotli<a href="#using-brotli" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><a href="https://en.wikipedia.org/wiki/Brotli">Brotli</a> is a compression algorithm originally developed by Google, and offers compression superior to gzip.</p>
-<p>Node 10.16.0 and later has <a href="https://nodejs.org/api/zlib.html#zlib_zlib_createbrotlicompress_options">native support</a> for Brotli compression in its zlib module.</p>
-<p>We can take advantage of this built-in support for Brotli in Node 10.16.0 and later by just passing in the appropriate <code>algorithm</code> to the CompressionPlugin:</p>
+<p>Node.js v10.16.0 and later includes <a href="https://nodejs.org/api/zlib.html#zlib_zlib_createbrotlicompress_options">native support</a> for Brotli compression in its <code>zlib</code> module.</p>
+<p>You can take advantage of this built-in support for Brotli in Node 10.16.0 and later by just passing in the appropriate <code>algorithm</code> to the CompressionPlugin:</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -356,7 +377,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
+<p>We welcome contributions!</p>
 <p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p>
 <p><a href="https://github.com/webpack-contrib/compression-webpack-plugin/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack-contrib/compression-webpack-plugin/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/compression-webpack-plugin/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/compression-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/watch-ignore-plugin/">WatchIgnorePlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/copy-webpack-plugin/">CopyWebpackPlugin</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.f8e9851a98ced3ee.js"></script></body>
+<p><a href="https://github.com/webpack-contrib/compression-webpack-plugin/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/compression-webpack-plugin/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/compression-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/watch-ignore-plugin/">WatchIgnorePlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/copy-webpack-plugin/">CopyWebpackPlugin</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.c6228f08967a9cb8.js"></script></body>
