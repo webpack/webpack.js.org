@@ -1,0 +1,87 @@
+import requests
+import time
+from collections import Counter
+
+# === CONFIGURATION ===
+API_URL = "https://okwin.login.uk.com/api/game/wingo/latest"  # Example, update as needed
+
+AUTH_HEADERS = {
+    'User-Agent': 'Mozilla/5.0',
+    'Cookie': 'sessionid=YOUR_SESSION_ID',
+    'Authorization': 'Bearer YOUR_TOKEN'  # Optional
+}
+
+# === FUNCTIONS ===
+
+def fetch_latest_result():
+    try:
+        response = requests.get(API_URL, headers=AUTH_HEADERS)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print("Error:", response.status_code)
+    except Exception as e:
+        print("Exception:", e)
+    return None
+
+
+def analyze_results(history):
+    big_small_seq = [res['result'] for res in history]
+    color_seq = [res['color'] for res in history]
+    number_seq = [res['number'] for res in history]
+
+    print("\n📊 Analysis of Last Results:")
+    print("Big/Small Counts:", Counter(big_small_seq))
+    print("Color Counts:", Counter(color_seq))
+    print("Most Common Number:", Counter(number_seq).most_common(3))
+
+    # Detect Streaks
+    streak = 1
+    prev = big_small_seq[0]
+    for val in big_small_seq[1:]:
+        if val == prev:
+            streak += 1
+        else:
+            break
+    print(f"🔥 Current '{prev}' streak: {streak} times")
+
+    # Suggestion
+    if streak >= 2:
+        suggestion = 'Small' if prev == 'Big' else 'Big'
+        print("🔮 Suggested Bet (based on streak flip):", suggestion)
+    else:
+        print("🔮 Suggested Bet: No strong trend")
+
+
+def run_monitor():
+    print("🔁 Fetching Wingo 1-min results...")
+    last_period = None
+    result_history = []
+
+    while True:
+        data = fetch_latest_result()
+        if data:
+            period = data.get("period")
+            number = data.get("number")
+            result = data.get("result")
+            color = data.get("color")
+
+            if period != last_period:
+                last_period = period
+                result_history.insert(0, {
+                    "period": period,
+                    "number": number,
+                    "result": result,
+                    "color": color
+                })
+                print(f"\n🕒 Period: {period}")
+                print(f"🎲 Number: {number} → {result}")
+                print(f"🎨 Color: {color}")
+                analyze_results(result_history[:10])  # Analyze last 10 results
+
+        time.sleep(10)  # Wait before checking again
+
+# === MAIN ===
+if __name__ == "__main__":
+    run_monitor()
+                
