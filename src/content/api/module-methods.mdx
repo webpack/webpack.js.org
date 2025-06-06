@@ -98,7 +98,7 @@ W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/W
 
 It is not possible to use a fully dynamic import statement, such as `import(foo)`. Because `foo` could potentially be any path to any file in your system or project.
 
-The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included. For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
+The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included. For example, ``import(`./locale/${language}.json`)`` will only bundle all `.json` files in the `./locale` directory and subdirectories into the new chunk and exclude files with other file extensions. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
 
 ```javascript
 // imagine we had a method to get language from cookies or other storage
@@ -112,7 +112,7 @@ T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-
 
 #### Magic Comments
 
-Inline comments to make features work. By adding comments to the import, we can do things such as name our chunk or select different modes. For a full list of these magic comments see the code below followed by an explanation of what these comments do.
+By adding comments to the import, we can do things such as name our chunk or select different modes. For a full list of these magic comments see the code below followed by an explanation of what these comments do.
 
 ```js
 // Single target
@@ -137,6 +137,8 @@ import(
 
 import(/* webpackIgnore: true */ 'ignored-module.js');
 ```
+
+T> Single line comments (`//`) are also supported. JSDoc comments (`/** */`) are not.
 
 ##### webpackIgnore
 
