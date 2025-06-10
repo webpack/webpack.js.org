@@ -292,6 +292,10 @@ Repeat the following steps until you solved at least level 3 or 4:
   - 404 errors pointing to URLs containing `auto`
     - Not all ecosystem tooling is ready for the new default automatic `publicPath` via `output.publicPath: "auto"`
       - Use a static `output.publicPath: ""` instead.
+  - Cannot read properties of undefined (reading 'call')
+    - If you see this error during runtime, it may be related to the [ModuleConcatenationPlugin](https://webpack.js.org/plugins/module-concatenation-plugin/). Check if you are using the plugin, and if you've included it in the `plugins` sections of a config, and that config is also set to `production` mode, remove the plugin (ie `new webpack.optimize.ModuleConcatenationPlugin()`) from your plugins list. In webpack 5, the plugin is enabled by default in production mode, and it may get included twice.
+    - In general, disabling each plugin and testing the build is a good way to triage where the issue might be coming from. 
+    - See: [this issue](https://github.com/webpack/webpack/discussions/15369#discussioncomment-13420496) for more details.
 
 - Level 6: **Deprecation Warnings**.
 
