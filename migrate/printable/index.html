@@ -270,6 +270,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </li>
 </ul>
 </li>
+<li>Cannot read properties of undefined (reading &#x27;call&#x27;)<!-- -->
+<ul>
+<li>If you see this error during runtime, it may be related to the <a href="https://webpack.js.org/plugins/module-concatenation-plugin/">ModuleConcatenationPlugin</a>. Check if you are using the plugin, and if you&#x27;ve included it in the <code>plugins</code> sections of a config, and that config is also set to <code>production</code> mode, remove the plugin (ie <code>new webpack.optimize.ModuleConcatenationPlugin()</code>) from your plugins list. In webpack 5, the plugin is enabled by default in production mode, and it may get included twice.</li>
+<li>In general, disabling each plugin and testing the build is a good way to triage where the issue might be coming from.</li>
+<li>See: <a href="https://github.com/webpack/webpack/discussions/15369#discussioncomment-13420496">this issue</a> for more details.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
