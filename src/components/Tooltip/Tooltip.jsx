@@ -41,7 +41,7 @@ const Tooltip = ({
       {isVisible && (
         <div
           className={`
-            absolute z-[9999]
+            absolute z-9999
             ${positions[position]}
             ${isDelayed ? 'opacity-100' : 'opacity-0'}
             transition-opacity duration-200
