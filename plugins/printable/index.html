@@ -6198,7 +6198,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <a href="https://codecov.io/gh/webpack-contrib/mini-css-extract-plugin"><img src="https://codecov.io/gh/webpack-contrib/mini-css-extract-plugin/branch/master/graph/badge.svg" alt="coverage"/></a>
 <a href="https://github.com/webpack/webpack/discussions"><img src="https://img.shields.io/github/discussions/webpack/webpack" alt="discussion"/></a>
 <a href="https://packagephobia.now.sh/result?p=mini-css-extract-plugin"><img src="https://packagephobia.now.sh/badge?p=mini-css-extract-plugin" alt="size"/></a></p>
-<p>This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.</p>
+<p>This plugin extracts CSS into separate files. It creates a CSS file for each JS file that contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.</p>
 <p>It builds on top of a new webpack v5 feature and requires webpack 5 to work.</p>
 <p>Compared to the extract-text-webpack-plugin:</p>
 <ul>
@@ -6218,7 +6218,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-console">pnpm add -D mini-css-extract-plugin
 </code></pre>
 <p>It&#x27;s recommended to combine <code>mini-css-extract-plugin</code> with the <a href="/loaders/css-loader/"><code>css-loader</code></a></p>
-<p>Then add the loader and the plugin to your <code>webpack</code> config. For example:</p>
+<p>Then add the loader and the plugin to your <code>webpack</code> configuration. For example:</p>
 <p><strong>style.css</strong></p>
 <pre><code class="hljs language-css"><span class="token selector">body</span> <span class="token punctuation">{</span>
   <span class="token property">background</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
@@ -6241,7 +6241,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
 <p>[!WARNING]</p>
-<p>Note that if you import CSS from your webpack entrypoint or import styles in the <a href="/concepts/under-the-hood/#chunks">initial</a> chunk, <code>mini-css-extract-plugin</code> will not load this CSS into the page. Please use <a href="https://github.com/jantimon/html-webpack-plugin"><code>html-webpack-plugin</code></a> for automatic generation <code>link</code> tags or create <code>index.html</code> file with <code>link</code> tag.</p>
+<p>Note that if you import CSS from your webpack entrypoint or import styles in the <a href="/concepts/under-the-hood/#chunks">initial</a> chunk, <code>mini-css-extract-plugin</code> will not load this CSS into the page automatically. Please use <a href="https://github.com/jantimon/html-webpack-plugin"><code>html-webpack-plugin</code></a> for automatic generation <code>link</code> tags or manually include a <code>&lt;link&gt;</code> tag in your <code>index.html</code> file.</p>
 </blockquote>
 <blockquote>
 <p>[!WARNING]</p>
@@ -6272,7 +6272,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">chunkFilename</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>pathData<span class="token operator">:</span> PathData<span class="token punctuation">,</span> assetInfo<span class="token operator">?</span><span class="token operator">:</span> AssetInfo<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>Default: <code>based on filename</code></p>
+<p>Default: <code>Based on filename</code></p>
 <blockquote>
 <p>Specifying <code>chunkFilename</code> as a <code>function</code> is only available in webpack@5</p>
 </blockquote>
@@ -6283,7 +6283,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">ignoreOrder</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>false</code></p>
 <p>Remove Order Warnings.
-See <a href="#remove-order-warnings">examples</a> below for details.</p>
+See <a href="#remove-order-warnings">examples</a> for more details.</p>
 <h4><span id="insert"></span><code>insert</code><a href="#insert" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">insert</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>linkTag<span class="token operator">:</span> HTMLLinkElement<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
@@ -6291,13 +6291,13 @@ See <a href="#remove-order-warnings">examples</a> below for details.</p>
 <p>Inserts the <code>link</code> tag at the given position for <a href="/concepts/under-the-hood/#chunks">non-initial (async)</a> CSS chunks</p>
 <blockquote>
 <p>[!WARNING]</p>
-<p>Only for <a href="/concepts/under-the-hood/#chunks">non-initial (async)</a> chunks.</p>
+<p>Only applicable for <a href="/concepts/under-the-hood/#chunks">non-initial (async)</a> chunks.</p>
 </blockquote>
 <p>By default, the <code>mini-css-extract-plugin</code> appends styles (<code>&lt;link&gt;</code> elements) to <code>document.head</code> of the current <code>window</code>.</p>
 <p>However in some circumstances it might be necessary to have finer control over the append target or even delay <code>link</code> elements insertion.
 For example this is the case when you asynchronously load styles for an application that runs inside of an iframe.
 In such cases <code>insert</code> can be configured to be a function or a custom selector.</p>
-<p>If you target an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement">iframe</a> make sure that the parent document has sufficient access rights to reach into the frame document and append elements to it.</p>
+<p>If you target an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement">iframe</a>, make sure that the parent document has sufficient access rights to reach into the frame document and append elements to it.</p>
 <h5><span id="string"></span><code>string</code><a href="#string" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>Allows to setup custom <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">query selector</a>.
 A new <code>&lt;link&gt;</code> element will be inserted after the found item.</p>
@@ -6305,13 +6305,11 @@ A new <code>&lt;link&gt;</code> element will be inserted after the found item.</
 <pre><code class="hljs language-js"><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   insert<span class="token operator">:</span> <span class="token string">&quot;#some-element&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>A new <code>&lt;link&gt;</code> element will be inserted after the element with id <code>some-element</code>.</p>
+<p>A new <code>&lt;link&gt;</code> tag will be inserted after the element with the ID <code>some-element</code>.</p>
 <h5><span id="function"></span><code>function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>Allows to override default behavior and insert styles at any position.</p>
 <blockquote>
 <p>⚠ Do not forget that this code will run in the browser alongside your application. Since not all browsers support latest ECMA features like <code>let</code>, <code>const</code>, <code>arrow function expression</code> and etc we recommend you to use only ECMA 5 features and syntax.</p>
-</blockquote>
-<blockquote>
 <blockquote>
 <p>⚠ The <code>insert</code> function is serialized to string and passed to the plugin. This means that it won&#x27;t have access to the scope of the webpack configuration module.</p>
 </blockquote>
@@ -6325,14 +6323,14 @@ A new <code>&lt;link&gt;</code> element will be inserted after the found item.</
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>A new <code>&lt;link&gt;</code> element will be inserted before the element with id <code>some-element</code>.</p>
+<p>A new <code>&lt;link&gt;</code> tag will be inserted before the element with the ID <code>some-element</code>.</p>
 <h4><span id="attributes"></span><code>attributes</code><a href="#attributes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">attributes</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>{}</code></p>
 <blockquote>
 <p>[!WARNING]</p>
-<p>Only for <a href="/concepts/under-the-hood/#chunks">non-initial (async)</a> chunks.</p>
+<p>Only applies to <a href="/concepts/under-the-hood/#chunks">non-initial (async)</a> chunks.</p>
 </blockquote>
 <p>If defined, the <code>mini-css-extract-plugin</code> will attach given attributes with their values on <code>&lt;link&gt;</code> element.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -6358,7 +6356,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
 <p>[!NOTE]</p>
-<p>It&#x27;s only applied to dynamically loaded css chunks, if you want to modify link attributes inside html file, please using <a href="https://github.com/jantimon/html-webpack-plugin">html-webpack-plugin</a></p>
+<p>It&#x27;s only applied to dynamically loaded CSS chunks.
+If you want to modify <code>&lt;link&gt;</code> attributes inside HTML file, please use <a href="https://github.com/jantimon/html-webpack-plugin">html-webpack-plugin</a></p>
 </blockquote>
 <h4><span id="linktype"></span><code>linkType</code><a href="#linktype" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
@@ -6386,7 +6385,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h5><span id="boolean"></span><code>boolean</code><a href="#boolean" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<p><code>false</code> disables the link <code>type</code> attribute</p>
+<p><code>false</code> disables the link <code>type</code> attribute entirely.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -6437,9 +6436,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Default: <code>undefined</code></p>
 <p>Enabled by default if not explicitly enabled (i.e. <code>true</code> and <code>false</code> allow you to explicitly control this option) and new API is available (at least webpack <code>5.52.0</code> is required).
 Boolean values are available since version <code>5.33.2</code>, but you need to enable <code>experiments.executeModule</code> (not required from webpack <code>5.52.0</code>).</p>
-<p>Use a new webpack API to execute modules instead of child compilers.
-This improves performance and memory usage a lot.</p>
-<p>When combined with <code>experiments.layers</code>, this adds a <code>layer</code> option to the loader options to specify the layer of the css execution.</p>
+<p>Use a new webpack API to execute modules instead of child compilers, significantly improving performance and memory usage.</p>
+<p>When combined with <code>experiments.layers</code>, this adds a <code>layer</code> option to the loader options to specify the layer of the CSS execution.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -6542,7 +6540,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">emit</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>true</code></p>
-<p>If true, emits a file (writes a file to the filesystem). If false, the plugin will extract the CSS but <strong>will not</strong> emit the file.
+<p>If <code>true</code>, emits a file (writes a file to the filesystem).
+If <code>false</code>, the plugin will extract the CSS but <strong>will not</strong> emit the file.
 It is often useful to disable this option for server-side packages.</p>
 <h4><span id="esmodule"></span><code>esModule</code><a href="#esmodule" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
@@ -6619,11 +6618,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="recommended"></span>Recommended<a href="#recommended" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>For <code>production</code> builds it&#x27;s recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
-This can be achieved by using the <code>mini-css-extract-plugin</code>, because it creates separate css files.
+<p>For <code>production</code> builds, it is recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on. This can be achieved by using the <code>mini-css-extract-plugin</code>, because it creates separate css files.
 For <code>development</code> mode (including <code>webpack-dev-server</code>) you can use <a href="/loaders/style-loader/">style-loader</a>, because it injects CSS into the DOM using multiple <style></style> and works faster.</p>
 <blockquote>
-<p>Do not use <code>style-loader</code> and <code>mini-css-extract-plugin</code> together.</p>
+<p>Important: Do not use <code>style-loader</code> and <code>mini-css-extract-plugin</code> together.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -6685,7 +6683,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>⚠ Names of locals are converted to <code>camelCase</code>.</p>
 </blockquote>
 <blockquote>
-<p>⚠ It is not allowed to use JavaScript reserved words in css class names.</p>
+<p>⚠ It is not allowed to use JavaScript reserved words in CSS class names.</p>
 </blockquote>
 <blockquote>
 <p>⚠ Options <code>esModule</code> and <code>modules.namedExport</code> in <code>css-loader</code> should be enabled.</p>
@@ -6731,6 +6729,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="the-publicpath-option-as-function"></span>The <code>publicPath</code> option as function<a href="#the-publicpath-option-as-function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
+<p>You can specify <code>publicPath</code> as a function to dynamically determine the public path based on each resource’s location relative to the project root or context.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -6810,7 +6809,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>[!NOTE]</p>
 <p>HMR is automatically supported in webpack 5. No need to configure it. Skip the following:</p>
 </blockquote>
-<p>The <code>mini-css-extract-plugin</code> supports hot reloading of actual css files in development.
+<p>The <code>mini-css-extract-plugin</code> supports hot reloading of actual CSS files in development.
 Some options are provided to enable HMR of both standard stylesheets and locally scoped CSS or CSS modules.
 Below is an example configuration of mini-css for HMR use with CSS modules.</p>
 <p>You should not use <code>HotModuleReplacementPlugin</code> plugin if you are using a <code>webpack-dev-server</code>.
@@ -6872,21 +6871,27 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token comment">// For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line</span>
+      <span class="token comment">// For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`).</span>
+      <span class="token comment">// Uncomment the next line o keep JS minimizers and add CSS minimizer:</span>
       <span class="token comment">// `...`,</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
-<p>This will enable CSS optimization only in production mode. If you want to run it also in development set the <code>optimization.minimize</code> option to true.</p>
+<ul>
+<li>By default, CSS minimization runs in production mode.</li>
+<li>If you want to run it also in development set the <code>optimization.minimize</code> option to <code>true</code>.</li>
+</ul>
 <h3><span id="using-preloaded-or-inlined-css"></span>Using preloaded or inlined CSS<a href="#using-preloaded-or-inlined-css" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>The runtime code detects already added CSS via <code>&lt;link&gt;</code> or <code>&lt;style&gt;</code> tag.
-This can be useful when injecting CSS on server-side for Server-Side-Rendering.
-The <code>href</code> of the <code>&lt;link&gt;</code> tag has to match the URL that will be used for loading the CSS chunk.
-The <code>data-href</code> attribute can be used for <code>&lt;link&gt;</code> and <code>&lt;style&gt;</code> too.
-When inlining CSS <code>data-href</code> must be used.</p>
+<p>The runtime code detects already added CSS via <code>&lt;link&gt;</code> or <code>&lt;style&gt;</code> tags and avoids duplicating CSS loading.</p>
+<ul>
+<li>This can be useful when injecting CSS on server-side for Server-Side-Rendering (SSR).</li>
+<li>The <code>href</code> of the <code>&lt;link&gt;</code> tag has to match the URL that will be used for loading the CSS chunk.</li>
+<li>The <code>data-href</code> attribute can be used for both <code>&lt;link&gt;</code> and <code>&lt;style&gt;</code> elements.</li>
+<li>When inlining CSS <code>data-href</code> must be used.</li>
+</ul>
 <h3><span id="extracting-all-css-in-a-single-file"></span>Extracting all CSS in a single file<a href="#extracting-all-css-in-a-single-file" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>The CSS can be extracted in one CSS file using <code>optimization.splitChunks.cacheGroups</code>.</p>
+<p>The CSS can be extracted in one CSS file using <code>optimization.splitChunks.cacheGroups</code> with the <code>type</code> <code>&quot;css/mini-extract&quot;</code>.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -7010,7 +7015,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="remove-order-warnings"></span>Remove Order Warnings<a href="#remove-order-warnings" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>For projects where css ordering has been mitigated through consistent use of scoping or naming conventions, such as <a href="https://github.com/css-modules/css-modules">CSS Modules</a>, the css order warnings can be disabled by setting the ignoreOrder flag to true for the plugin.</p>
+<p>For projects where CSS ordering has been mitigated through consistent use of scoping or naming conventions, such as <a href="https://github.com/css-modules/css-modules">CSS Modules</a>, the css order warnings can be disabled by setting the ignoreOrder flag to true for the plugin.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -7030,6 +7035,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="multiple-themes"></span>Multiple Themes<a href="#multiple-themes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
+<p>Switch themes by conditionally loading different SCSS variants with query parameters.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -7168,7 +7174,8 @@ document<span class="token punctuation">.</span><span class="token function-vari
     <span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p>
+<p>We welcome all contributions!
+If you&#x27;re new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.</p>
 <p><a href="https://github.com/webpack-contrib/mini-css-extract-plugin/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><a href="https://github.com/webpack-contrib/mini-css-extract-plugin/blob/master/LICENSE">MIT</a></p>
