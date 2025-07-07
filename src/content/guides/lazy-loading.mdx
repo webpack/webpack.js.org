@@ -102,11 +102,11 @@ index.bundle.js     548 kB       1  [emitted]  [big]  index
 
 ## Defer Import Example
 
-W> This section does not lazy "load" a module, but lazy "evaluate" a module. This means that the module is still downloaded and parsed, but its evaluation is lazy.
+W> This feature does not lazily "load" a module, but it lazily "evaluates" a module. This means that the module is still downloaded and parsed, but its evaluation is lazy.
 
 In some cases, it might be annoying or hard to convert all uses of a module to asynchronous, since it enforces the unnecessary asyncification of all functions, without providing the ability to only defer the synchronous evaluation work.
 
-The tc39 proposal [Deferring Module Evaluation](https://github.com/tc39/proposal-defer-import-eval) is to solve this problem.
+The TC39 proposal [Deferring Module Evaluation](https://github.com/tc39/proposal-defer-import-eval) is to solve this problem.
 
 > The proposal is to have a new syntactical import form which will only ever return a namespace exotic object. When used, the module and its dependencies would not be executed, but would be fully loaded to the point of being execution-ready before the module graph is considered loaded.
 >

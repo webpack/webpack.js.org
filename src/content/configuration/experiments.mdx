@@ -214,13 +214,13 @@ Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
 
 Enable support of the tc39 proposal [Deferring Module Evaluation](https://github.com/tc39/proposal-defer-import-eval).
 This allows deferring the evaluation of a module until its first use.
-This is useful when using dynamic `import()` is problematic.
+This is useful to synchronously defer code execution when it's not possible to use `import()` due to its asynchronous nature.
 
 - Type: `boolean`
 
 This feature requires the runtime environment to have [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) (ES6) support.
 
-Enable the following syntaxes:
+Enables the following syntaxes:
 
 ```js
 import defer * as module from 'module-name';
@@ -235,9 +235,9 @@ export function f() {
 
 #### Limitations of magic comments (`/* webpackDefer: true */`)
 
-It's suggested to put the magic comment after the `from` keyword, other positions may work, but have not been tested.
+It's suggested to put the magic comment after the `from` keyword. Other positions may work, but have not been tested.
 
-Putting the magic comment after the `import` keyword is known to be broken, it will break the filesystem cache.
+Putting the magic comment after the `import` keyword is incompatible with the filesystem cache.
 
 ```js
 import /* webpackDefer: true */ * as ns from '...'; // known broken
