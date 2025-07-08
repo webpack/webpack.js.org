@@ -21,7 +21,7 @@ T> This guide is a small follow-up to [Code Splitting](/guides/code-splitting). 
 
 Lazy, or "on demand", loading is a great way to optimize your site or application. This practice essentially involves splitting your code at logical breakpoints, and then loading it once the user has done something that requires, or will require, a new block of code. This speeds up the initial load of the application and lightens its overall weight as some blocks may never even be loaded.
 
-## Example
+## Dynamic Import Example
 
 Let's take the example from [Code Splitting](/guides/code-splitting/#dynamic-imports) and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, `lodash.bundle.js`, to be generated and technically "lazy-loads" it as soon as the script is run. The trouble is that no user interaction is required to load the bundle – meaning that every time the page is loaded, the request will fire. This doesn't help us too much and will impact performance negatively.
 
@@ -98,6 +98,124 @@ print.bundle.js  417 bytes       0  [emitted]         print
 index.bundle.js     548 kB       1  [emitted]  [big]  index
      index.html  189 bytes          [emitted]
 ...
+```
+
+## Defer Import Example
+
+W> This feature does not lazily "load" a module, but it lazily "evaluates" a module. This means that the module is still downloaded and parsed, but its evaluation is lazy.
+
+In some cases, it might be annoying or hard to convert all uses of a module to asynchronous, since it enforces the unnecessary asyncification of all functions, without providing the ability to only defer the synchronous evaluation work.
+
+The TC39 proposal [Deferring Module Evaluation](https://github.com/tc39/proposal-defer-import-eval) is to solve this problem.
+
+> The proposal is to have a new syntactical import form which will only ever return a namespace exotic object. When used, the module and its dependencies would not be executed, but would be fully loaded to the point of being execution-ready before the module graph is considered loaded.
+>
+> _Only when accessing a property of this module, would the execution operations be performed (if needed)._
+
+This feature is available by enabling [experiments.deferImport](/configuration/experiments/#experimentsdeferimport).
+
+W> This feature is still in the experimental stage and may change in future versions of webpack.
+
+**project**
+
+```diff
+webpack-demo
+|- package.json
+|- package-lock.json
+|- webpack.config.js
+|- /dist
+|- /src
+  |- index.js
++ |- print.js
+|- /node_modules
+```
+
+**src/print.js**
+
+```js
+console.log(
+  'The print.js module has loaded! See the network tab in dev tools...'
+);
+
+export default () => {
+  console.log('Button Clicked: Here\'s "some text"!');
+};
+```
+
+**src/index.js**
+
+```diff
+  import _ from 'lodash';
++ import defer * as print from './print';
+
+  function component() {
+    const element = document.createElement('div');
+    const button = document.createElement('button');
+    const br = document.createElement('br');
+
+    button.innerHTML = 'Click me and look at the console!';
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.appendChild(br);
+    element.appendChild(button);
+
+-   // Note that because a network request is involved, some indication
+-   // of loading would need to be shown in a production-level site/app.
++   // In this example, the print module is downloaded but not evaluated,
++   // so there is no network request involved after the button is clicked.
+-   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
++   button.onclick = e => {
+      const print = module.default;
++     //                  ^ The module is evaluated here.
+
+      print();
+-   });
++   };
+
+    return element;
+  }
+
+  getComponent().then(component => {
+    document.body.appendChild(component);
+  });
+  document.body.appendChild(component());
+```
+
+This is similar to the CommonJS style of lazy loading:
+
+**src/index.js**
+
+```diff
+  import _ from 'lodash';
+- import defer * as print from './print';
+
+  function component() {
+    const element = document.createElement('div');
+    const button = document.createElement('button');
+    const br = document.createElement('br');
+
+    button.innerHTML = 'Click me and look at the console!';
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.appendChild(br);
+    element.appendChild(button);
+
+    // In this example, the print module is downloaded but not evaluated,
+    // so there is no network request involved after the button is clicked.
+    button.onclick = e => {
++     const print = require('./print');
++     //            ^ The module is evaluated here.
+      const print = module.default;
+-     //                  ^ The module is evaluated here.
+
+      print();
+    };
+
+    return element;
+  }
+
+  getComponent().then(component => {
+    document.body.appendChild(component);
+  });
+  document.body.appendChild(component());
 ```
 
 ## Frameworks

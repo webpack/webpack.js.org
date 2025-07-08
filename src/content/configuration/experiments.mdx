@@ -25,6 +25,7 @@ Available options:
 - [`buildHttp`](#experimentsbuildhttp)
 - [`cacheUnaffected`](#experimentscacheunaffected)
 - [`css`](#experimentscss)
+- [`deferImport`](#experimentsdeferimport)
 - [`futureDefaults`](#experimentsfuturedefaults)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
@@ -190,9 +191,9 @@ Enable native CSS support. Note that it's an experimental feature still under de
 Experimental features:
 
 - CSS Modules support: webpack will generate a unique name for each CSS class. Use the `.module.css` extension for CSS Modules.
-- <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json` files:
-  webpack will look for `style` field in `package.json` files and use that if it
-  exists for imports inside CSS files.
+- <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json`
+  files: webpack will look for `style` field in `package.json` files and use
+  that if it exists for imports inside CSS files.
 
   For example, if you add `@import 'bootstrap';` to your CSS file, webpack will look for `bootstrap` in `node_modules` and use the `style` field in `package.json` from there. If `style` field is not found, webpack will use the `main` field instead to preserve backward compatibility.
 
@@ -208,6 +209,55 @@ Enable additional in-memory caching of modules which are unchanged and reference
 - Type: `boolean`
 
 Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
+
+### experiments.deferImport
+
+Enable support of the tc39 proposal [the `import defer` proposal](https://github.com/tc39/proposal-defer-import-eval).
+This allows deferring the evaluation of a module until its first use.
+This is useful to synchronously defer code execution when it's not possible to use `import()` due to its asynchronous nature.
+
+- Type: `boolean`
+
+This feature requires the runtime environment to have [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) (ES6) support.
+
+Enables the following syntaxes:
+
+```js
+import defer * as module from 'module-name';
+// or
+import * as module2 from /* webpackDefer: true */ 'module-name2';
+
+export function f() {
+  // module-name is evaluated synchronously, then call doSomething() on it.
+  module.doSomething();
+}
+```
+
+#### Limitations of magic comments (`/* webpackDefer: true */`)
+
+It's suggested to put the magic comment after the `from` keyword. Other positions may work, but have not been tested.
+
+Putting the magic comment after the `import` keyword is incompatible with the filesystem cache.
+
+```js
+import /* webpackDefer: true */ * as ns from '...'; // known broken
+import * as ns from /* webpackDefer: true */ '...'; // recommended
+```
+
+You should make sure your loaders do not remove the magic comment.
+
+TypeScript, Babel, SWC, and Flow.js can be configured to preserve the magic comment.
+
+Esbuild is _not_ compatible with this feature (see [evanw/esbuild#1439](https://github.com/evanw/esbuild/issues/1439) and [evanw/esbuild#309](https://github.com/evanw/esbuild/issues/309)), but it may support this in the future.
+
+#### Not implemented
+
+The asynchronous form of this proposal is not implemented yet.
+
+```js
+import.defer('module-name'); // not implemented
+import(/* webpackDefer: true */ 'module-name'); // not implemented
+```
 
 ### experiments.futureDefaults
 
