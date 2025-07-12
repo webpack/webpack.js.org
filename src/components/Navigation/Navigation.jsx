@@ -1,5 +1,5 @@
 // Import External Dependencies
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DocSearch } from '@docsearch/react';
 import { Link as ReactDOMLink, NavLink, useLocation } from 'react-router-dom';
@@ -70,12 +70,21 @@ NavigationIcon.propTypes = {
   title: PropTypes.string.isRequired,
 };
 function NavigationIcon({ children, to, title }) {
+  const tooltipRef = useRef();
+
+  const hideTooltip = () => {
+    if (tooltipRef.current) {
+      tooltipRef.current.blur();
+    }
+  };
+
   return (
-    <Tooltip content={`webpack on ${title}`}>
+    <Tooltip content={`webpack on ${title}`} ref={tooltipRef}>
       <Link
         to={to}
         className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
         aria-label={`webpack on ${title}`}
+        onClick={hideTooltip}
       >
         {children}
       </Link>
