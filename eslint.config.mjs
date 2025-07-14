@@ -43,7 +43,7 @@ export default [
         ...globals.browser,
         ...globals.node,
         ...globals.jest,
-        ...cypress.environments.globals.globals,
+        ...cypress.configs.globals.languageOptions.globals,
       },
 
       parser: babelParser,
@@ -82,6 +82,14 @@ export default [
   })),
   {
     files: ['**/*.mdx'],
+    ignores: [
+      '**/dist/',
+      '**/examples/',
+      'src/content/loaders/_*.mdx',
+      'src/content/plugins/_*.mdx',
+      '.github/**/*.md',
+      '**/README.md',
+    ],
 
     languageOptions: {
       globals: {
