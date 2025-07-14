@@ -82,14 +82,6 @@ export default [
   })),
   {
     files: ['**/*.mdx'],
-    ignores: [
-      '**/dist/',
-      '**/examples/',
-      'src/content/loaders/_*.mdx',
-      'src/content/plugins/_*.mdx',
-      '.github/**/*.md',
-      '**/README.md',
-    ],
 
     languageOptions: {
       globals: {
