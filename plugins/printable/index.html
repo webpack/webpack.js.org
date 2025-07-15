@@ -411,7 +411,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h3><span id="test"></span><code>test</code><a href="#test" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Include all assets that pass test assertion.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -424,7 +424,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="include"></span><code>include</code><a href="#include" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Include all assets matching any of these conditions.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -437,7 +437,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="exclude"></span><code>exclude</code><a href="#exclude" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Exclude all assets matching any of these conditions.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -476,7 +476,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
               <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span>hint<span class="token operator">:</span><span class="token operator">%</span><span class="token number">20</span><span class="token operator">%</span><span class="token number">22</span><span class="token builtin">string</span><span class="token operator">%</span><span class="token number">22</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
-    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Defines the compression algorithm or function to use. Defaults to <code>gzip</code>.</p>
 <blockquote>
 <p>[!NOTE]</p>
@@ -506,7 +506,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="compressionoptions"></span><code>compressionOptions</code><a href="#compressionoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">compressionOptions</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre><code class="hljs language-ts"><span class="token keyword">interface</span> <span class="token class-name">compressionOptions</span> <span class="token punctuation">{</span>
   flush<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
   finishFlush<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
   chunkSize<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
@@ -517,7 +517,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   dictionary<span class="token operator">?</span><span class="token operator">:</span> Buffer <span class="token operator">|</span> TypedArray <span class="token operator">|</span> DataView <span class="token operator">|</span> ArrayBuffer<span class="token punctuation">;</span>
   info<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
   maxOutputLength<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>Default: <code>{ level: 9 }</code></p>
 <p>Compression options for <code>algorithm</code>.</p>
 <p>You can find all available options in the <a href="https://nodejs.org/api/zlib.html#zlib_class_options">zlib</a> documentation.</p>
@@ -632,10 +632,9 @@ In other words, assets will be processed only when the ratio of <code>Compressed
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      <span class="token function-variable function">deleteOriginalAssets</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">assetName</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function-variable function">deleteOriginalAssets</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">assetName</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
         <span class="token comment">// Delete all assets except images</span>
-        <span class="token keyword">return</span> <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.png&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.jpg&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.png&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.jpg&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
@@ -701,7 +700,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Node.js v10.16.0 and later includes <a href="https://nodejs.org/api/zlib.html#zlib_zlib_createbrotlicompress_options">native support</a> for Brotli compression in its <code>zlib</code> module.</p>
 <p>You can take advantage of this built-in support for Brotli in Node 10.16.0 and later by just passing in the appropriate <code>algorithm</code> to the CompressionPlugin:</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -727,7 +726,7 @@ You can find all Brotli’s options in <a href="https://nodejs.org/api/zlib.html
 <p>Node.js 22.15.0 and later includes <a href="https://nodejs.org/api/zlib.html#zlibcreatezstdcompressoptions">native support</a> for Zstandard compression in its <code>zlib</code> module.</p>
 <p>You can take advantage of this built-in support for zstd in Node 22.15.0 and later by just passing in the appropriate <code>algorithm</code> to the CompressionPlugin:</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -749,7 +748,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You can find all Zstandard&#x27;s options in <a href="https://nodejs.org/api/zlib.html#class-zstdoptions">the relevant part of the zlib module documentation</a>.</p>
 <h3><span id="multiple-compressed-versions-of-assets-for-different-algorithm"></span>Multiple compressed versions of assets for different algorithm<a href="#multiple-compressed-versions-of-assets-for-different-algorithm" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
