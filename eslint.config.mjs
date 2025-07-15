@@ -43,7 +43,7 @@ export default [
         ...globals.browser,
         ...globals.node,
         ...globals.jest,
-        ...cypress.environments.globals.globals,
+        ...cypress.configs.globals.languageOptions.globals,
       },
 
       parser: babelParser,
