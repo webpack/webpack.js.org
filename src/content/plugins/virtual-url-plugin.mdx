@@ -1,0 +1,140 @@
+---
+title: VirtualUrlPlugin
+group: webpack
+contributors:
+  - xiaoxiaojx
+---
+
+Allow creating virtual modules of any type, such as `.ts`, `.json`, `.css`, etc. default is `.js`.
+
+<Badge text="5.100.0+" />
+
+```javascript
+const webpack = require('webpack');
+
+new webpack.experiments.schemes.VirtualUrlPlugin({
+  myModule: `export const msg = "from virtual module"`,
+});
+```
+
+**src/app.js**
+
+```javascript
+import { msg } from 'virtual:myModule';
+
+console.log(msg);
+```
+
+## Basic Example
+
+Create a virtual module that generates build information
+
+```javascript
+const webpack = require('webpack')
+
+new webpack.experiments.schemes.VirtualUrlPlugin({
+  buildInfo: {
+    source: () {
+      return `export const buildTime = ${+new Date()}`
+    },
+    version: true
+  }
+});
+```
+
+**src/app.js**
+
+```javascript
+import { buildTime } from 'virtual:buildInfo';
+
+console.log('App version: ', buildTime);
+```
+
+Use custom schema
+
+```javascript
+const webpack = require('webpack');
+
+new webpack.experiments.schemes.VirtualUrlPlugin(
+  {
+    myModule: `export const msg = "from virtual module"`,
+  },
+  'v'
+);
+```
+
+**src/app.js**
+
+```javascript
+import { msg } from 'v:myModule';
+
+console.log(msg);
+```
+
+## Advanced Example
+
+Create multiple virtual modules of different types
+
+```javascript
+const webpack = require('webpack');
+
+new webpack.experiments.schemes.VirtualUrlPlugin({
+  myCssModule: {
+    type: '.css',
+    source: 'body{background-color: powderblue;}',
+  },
+  myJsonModule: {
+    type: '.json',
+    source: `{"name": "virtual-url-plugin"}`,
+  },
+});
+```
+
+**src/app.js**
+
+```javascript
+import json from 'virtual:myJsonModule';
+import 'virtual:myCssModule';
+```
+
+Virtualize the routing file
+
+```javascript
+const webpack = require('webpack');
+const path = require('path');
+const watchDir = path.join(__dirname, './src/routes');
+
+new webpack.experiments.schemes.VirtualUrlPlugin({
+  routes: {
+    source(loaderContext) {
+      // Use addContextDependency to monitor the addition or removal of subdirectories in watchDir to trigger the rebuilding of virtual modules.
+      loaderContext.addContextDependency(watchDir);
+
+      const files = fs.readdirSync(watchDir);
+      return `
+        export const routes = {
+          ${files.map((key) => `${key.split('.')[0]}: () => import('./src/routes/${key}')`).join(',\n')}
+        }
+      `;
+    },
+  },
+});
+```
+
+**src/app.js**
+
+```javascript
+import { routes } from 'virtual:routes';
+```
+
+## Options
+
+- `module.type` (`string`): Content type of the virtual module.
+
+T> Make sure that these types have a loader set via [module.rules](https://webpack.js.org/configuration/module/#modulerules).
+
+- `module.source` (`string | ((loaderContext: import('webpack').LoaderContext<T>) => Promise<string> | string))`: Factory function for generating the content of virtual module.
+
+- `module.version`(`boolean | string | () => string`): When a invalidate is triggered, the source function is called again if the value of the version is different from the previous one. If set to true it will always trigger.
+
+- `schema` (`string`): Customizable virtual module schema, default is `virtual`.
