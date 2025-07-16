@@ -10,10 +10,10 @@ Allow creating virtual modules of any type, such as `.ts`, `.json`, `.css`, etc.
 <Badge text="5.100.0+" />
 
 ```javascript
-const webpack = require("webpack)
+const webpack = require('webpack');
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
-  myModule: `export const msg = "from virtual module"`
+  myModule: `export const msg = "from virtual module"`,
 });
 ```
 
@@ -30,7 +30,7 @@ console.log(msg);
 Create a virtual module that generates build information
 
 ```javascript
-const webpack = require("webpack)
+const webpack = require("webpack")
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
   buildInfo: {
@@ -53,11 +53,14 @@ console.log('App version: ', buildTime);
 Use custom schema
 
 ```javascript
-const webpack = require("webpack)
+const webpack = require('webpack');
 
-new webpack.experiments.schemes.VirtualUrlPlugin({
-  myModule: `export const msg = "from virtual module"`
-}, "v");
+new webpack.experiments.schemes.VirtualUrlPlugin(
+  {
+    myModule: `export const msg = "from virtual module"`,
+  },
+  'v'
+);
 ```
 
 **src/app.js**
@@ -73,15 +76,15 @@ console.log(msg);
 Create multiple virtual modules of different types
 
 ```javascript
-const webpack = require("webpack)
+const webpack = require('webpack');
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
   myCssModule: {
-    type: ".css",
-    source: "body{background-color: powderblue;}",
+    type: '.css',
+    source: 'body{background-color: powderblue;}',
   },
   myJsonModule: {
-    type: ".json",
+    type: '.json',
     source: `{"name": "virtual-url-plugin"}`,
   },
 });
@@ -97,24 +100,24 @@ import 'virtual:myCssModule';
 Virtualize the routing file
 
 ```javascript
-const webpack = require("webpack")
-const path = require("path)
-const watchDir = path.join(__dirname, "./src/routes")
+const webpack = require('webpack');
+const path = require('path');
+const watchDir = path.join(__dirname, './src/routes');
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
   routes: {
     source(loaderContext) {
       // Use addContextDependency to monitor the addition or removal of subdirectories in watchDir to trigger the rebuilding of virtual modules.
-      loaderContext.addContextDependency(watchDir)
+      loaderContext.addContextDependency(watchDir);
 
-      const files = fs.readdirSync(watchDir)
+      const files = fs.readdirSync(watchDir);
       return `
         export const routes = {
-          ${files.map(key => `${key.split(".")[0]}: () => import('./src/routes/${key}')`).join(",\n")}
+          ${files.map((key) => `${key.split('.')[0]}: () => import('./src/routes/${key}')`).join(',\n')}
         }
-      `
+      `;
     },
-  }
+  },
 });
 ```
 
