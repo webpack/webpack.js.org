@@ -70,9 +70,7 @@ The documentation and syntax examples can be read <a href="#syntax">here</a>.</p
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
 <span class="token comment">// ...</span></code></pre>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> myLib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span>
-  <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">imports-loader?type=commonjs&amp;imports=single|jquery|$,angular!./example.js</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> myLib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;imports-loader?type=commonjs&amp;imports=single|jquery|$,angular!./example.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// `|` is separator in a query string, equivalently `single|jquery|$` and `angular`</span>
 <span class="token comment">// Adds the following code to the beginning of example.js:</span>
 <span class="token comment">//</span>
@@ -82,9 +80,7 @@ The documentation and syntax examples can be read <a href="#syntax">here</a>.</p
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
 <span class="token comment">// ...</span></code></pre>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> myLib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span>
-  <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">imports-loader?type=commonjs&amp;imports=single|myLib|myMethod&amp;wrapper=window&amp;!./example.js</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> myLib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;imports-loader?type=commonjs&amp;imports=single|myLib|myMethod&amp;wrapper=window&amp;!./example.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// `|` is separator in a query string, equivalently `single|myLib|myMethod` and `angular`</span>
 <span class="token comment">// Adds the following code to the example.js:</span>
 <span class="token comment">//</span>
@@ -137,12 +133,12 @@ The documentation and syntax examples can be read <a href="#syntax">here</a>.</p
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Generate output:</p>
-<pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">import</span> angular <span class="token keyword">from</span> <span class="token string">&quot;angular&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> lib_2_default <span class="token keyword">from</span> <span class="token string">&quot;lib_2&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> lib2_method_1<span class="token punctuation">,</span> lib2_method_2 <span class="token keyword">as</span> lib_2_method_2_short <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;lib_3&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> my_namespace <span class="token keyword">from</span> <span class="token string">&quot;lib_4&quot;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token string">&quot;lib_5&quot;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> angular <span class="token keyword">from</span> <span class="token string">&quot;angular&quot;</span><span class="token punctuation">;</span></code></pre>
+<span class="token keyword">import</span> <span class="token string">&quot;lib_5&quot;</span><span class="token punctuation">;</span></code></pre>
 <p>Finally, run <code>webpack</code> using the method you normally use (e.g., via CLI or an npm script).</p>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <ul>
@@ -179,7 +175,7 @@ The documentation and syntax examples can be read <a href="#syntax">here</a>.</p
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Generate output:</p>
-<pre><code class="hljs language-js"><span class="token keyword">var</span> Foo <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> Foo <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -223,7 +219,7 @@ The documentation and syntax examples can be read <a href="#syntax">here</a>.</p
       name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
       alias<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>
+  <span class="token operator">|</span> <span class="token punctuation">(</span>
       <span class="token operator">|</span> <span class="token builtin">string</span>
       <span class="token operator">|</span> <span class="token punctuation">{</span>
           syntax<span class="token operator">:</span>
@@ -238,7 +234,7 @@ The documentation and syntax examples can be read <a href="#syntax">here</a>.</p
           name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
           alias<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+    <span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>List of imports.</p>
 <h4><span id="string"></span><code>string</code><a href="#string" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
@@ -330,7 +326,7 @@ The documentation and syntax examples can be read <a href="#syntax">here</a>.</p
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Generate output:</p>
-<pre><code class="hljs language-js"><span class="token keyword">var</span> myName <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;lib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> myName <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;lib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -444,7 +440,7 @@ Each item can be either a <a href="https://github.com/webpack-contrib/imports-lo
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       thisArg<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-      args<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+      args<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Closes the module code in a function with a given <code>thisArg</code> and <code>args</code> (<code>(function () { ... }).call();</code>).</p>
@@ -515,7 +511,7 @@ Each item can be either a <a href="https://github.com/webpack-contrib/imports-lo
   <span class="token comment">// ...</span>
   <span class="token comment">// Code</span>
   <span class="token comment">// ...</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>window<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>globalThis<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h4><span id="object-1"></span><code>object</code><a href="#object-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Allows advanced control: specify the this context and custom arguments passed into the IIFE</p>
 <p><strong>webpack.config.js</strong></p>
@@ -550,7 +546,7 @@ Each item can be either a <a href="https://github.com/webpack-contrib/imports-lo
   <span class="token comment">// ...</span>
   <span class="token comment">// Code</span>
   <span class="token comment">// ...</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> myVariable<span class="token punctuation">,</span> myOtherVariable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>globalThis<span class="token punctuation">,</span> myVariable<span class="token punctuation">,</span> myOtherVariable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h4><span id="object-with-different-parameter-names"></span><code>object</code> with different parameter names<a href="#object-with-different-parameter-names" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Allows remapping argument names in the function signature using a key-value object.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -588,7 +584,7 @@ Each item can be either a <a href="https://github.com/webpack-contrib/imports-lo
   <span class="token comment">// ...</span>
   <span class="token comment">// Code</span>
   <span class="token comment">// ...</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> myVariable<span class="token punctuation">,</span> myOtherVariable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>globalThis<span class="token punctuation">,</span> myVariable<span class="token punctuation">,</span> myOtherVariable<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="additionalcode"></span><code>additionalCode</code><a href="#additionalcode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">additionalCode</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
@@ -621,7 +617,7 @@ Each item can be either a <a href="https://github.com/webpack-contrib/imports-lo
 <p>Generate output:</p>
 <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">var</span> myVariable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> myVariable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -653,7 +649,7 @@ Each item can be either a <a href="https://github.com/webpack-contrib/imports-lo
 <p>Generate output:</p>
 <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">var</span> define <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">/* Disable AMD for misbehaving libraries */</span>
+<span class="token keyword">const</span> define <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">/* Disable AMD for misbehaving libraries */</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -663,4 +659,4 @@ Each item can be either a <a href="https://github.com/webpack-contrib/imports-lo
 If you’re interested in helping improve this loader, please take a moment to read our contributing guidelines.</p>
 <p><a href="https://github.com/webpack-contrib/imports-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack-contrib/imports-loader/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/imports-loader/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/imports-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/html-loader/">html-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/node-loader/">node-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.a51357174b557aa6.js"></script></body>
+<p><a href="https://github.com/webpack-contrib/imports-loader/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/imports-loader/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/imports-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/html-loader/">html-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/node-loader/">node-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.c6f08ccb0ca0a782.js"></script></body>

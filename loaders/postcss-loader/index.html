@@ -99,15 +99,11 @@ If you use JS styles the <a href="https://github.com/postcss/postcss-js"><code>p
         test<span class="token operator">:</span> <span class="token regex">/\.style.js$/</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                parser<span class="token operator">:</span> <span class="token string">&quot;postcss-js&quot;</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span> parser<span class="token operator">:</span> <span class="token string">&quot;postcss-js&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
               execute<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -119,8 +115,8 @@ If you use JS styles the <a href="https://github.com/postcss/postcss-js"><code>p
 <h3><span id="postcssoptions"></span><code>postcssOptions</code><a href="#postcssoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>See the file <a href="https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts"><code>https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts</code></a>.</p>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> Config <span class="token keyword">as</span> PostCSSConfig <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;postcss-load-config&quot;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> LoaderContext <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token keyword">type</span> <span class="token class-name">Config</span> <span class="token keyword">as</span> PostCSSConfig <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;postcss-load-config&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token keyword">type</span> <span class="token class-name">LoaderContext</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">type</span> <span class="token class-name">PostCSSLoaderContext</span> <span class="token operator">=</span> LoaderContext<span class="token operator">&lt;</span>PostCSSConfig<span class="token operator">&gt;</span><span class="token punctuation">;</span>
 
@@ -179,10 +175,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
           postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-            plugins<span class="token operator">:</span> <span class="token punctuation">{</span>
-              <span class="token string">&quot;postcss-import&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
-              <span class="token string">&quot;postcss-short&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span> prefix<span class="token operator">:</span> <span class="token string">&quot;x&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            plugins<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;postcss-import&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">&quot;postcss-short&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span> prefix<span class="token operator">:</span> <span class="token string">&quot;x&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -384,12 +377,7 @@ You can use it standalone or in conjunction with <code>css-loader</code> (recomm
         test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              importLoaders<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -405,11 +393,7 @@ You can use it standalone or in conjunction with <code>css-loader</code> (recomm
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.css$/i</span><span class="token punctuation">,</span>
         loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
-        options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-            config<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        options<span class="token operator">:</span> <span class="token punctuation">{</span> postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span> config<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -417,7 +401,7 @@ You can use it standalone or in conjunction with <code>css-loader</code> (recomm
 <h4><span id="string"></span>String<a href="#string" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Allows to specify the path to the config file.</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -536,17 +520,10 @@ All values enable source map generation except <code>eval</code> and <code>false
         test<span class="token operator">:</span> <span class="token regex">/\.sss$/i</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                parser<span class="token operator">:</span> <span class="token string">&quot;sugarss&quot;</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span> postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span> parser<span class="token operator">:</span> <span class="token string">&quot;sugarss&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -566,10 +543,7 @@ All values enable source map generation except <code>eval</code> and <code>false
         test<span class="token operator">:</span> <span class="token regex">/\.css$/i</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -606,10 +580,7 @@ All values enable source map generation except <code>eval</code> and <code>false
         test<span class="token operator">:</span> <span class="token regex">/\.css$/i</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -646,10 +617,7 @@ To make them work properly, either add the <code>css-loader</code>’s <code>imp
           <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              modules<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-              importLoaders<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span> modules<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> importLoaders<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -671,18 +639,11 @@ To make them work properly, either add the <code>css-loader</code>’s <code>imp
         test<span class="token operator">:</span> <span class="token regex">/\.style.js$/</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              importLoaders<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> options<span class="token operator">:</span> <span class="token punctuation">{</span> importLoaders<span class="token operator">:</span> <span class="token number">2</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                parser<span class="token operator">:</span> <span class="token string">&quot;postcss-js&quot;</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span> parser<span class="token operator">:</span> <span class="token string">&quot;postcss-js&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
               execute<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -696,13 +657,7 @@ To make them work properly, either add the <code>css-loader</code>’s <code>imp
 <pre><code class="hljs language-js"><span class="token keyword">import</span> colors <span class="token keyword">from</span> <span class="token string">&quot;./styles/colors&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  <span class="token string">&quot;.menu&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    color<span class="token operator">:</span> colors<span class="token punctuation">.</span>main<span class="token punctuation">,</span>
-    height<span class="token operator">:</span> <span class="token number">25</span><span class="token punctuation">,</span>
-    <span class="token string">&quot;&amp;_link&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      color<span class="token operator">:</span> <span class="token string">&quot;white&quot;</span><span class="token punctuation">,</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;.menu&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span> color<span class="token operator">:</span> colors<span class="token punctuation">.</span>main<span class="token punctuation">,</span> height<span class="token operator">:</span> <span class="token number">25</span><span class="token punctuation">,</span> <span class="token string">&quot;&amp;_link&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span> color<span class="token operator">:</span> <span class="token string">&quot;white&quot;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <blockquote>
 <p>[!WARNING]</p>
@@ -753,18 +708,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li><code>info</code> - asset info</li>
 </ul>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> <span class="token function-variable function">postcssCustomPlugin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">opts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    postcssPlugin<span class="token operator">:</span> <span class="token string">&quot;postcss-custom-plugin&quot;</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">Once</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">root<span class="token punctuation">,</span> <span class="token punctuation">{</span> result <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      result<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        type<span class="token operator">:</span> <span class="token string">&quot;asset&quot;</span><span class="token punctuation">,</span>
-        file<span class="token operator">:</span> <span class="token string">&quot;sprite.svg&quot;</span><span class="token punctuation">,</span>
-        content<span class="token operator">:</span> <span class="token string">&quot;&lt;svg&gt;...&lt;/svg&gt;&quot;</span><span class="token punctuation">,</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> <span class="token function-variable function">postcssCustomPlugin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">opts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  postcssPlugin<span class="token operator">:</span> <span class="token string">&quot;postcss-custom-plugin&quot;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">Once</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">root<span class="token punctuation">,</span> <span class="token punctuation">{</span> result <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    result<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      type<span class="token operator">:</span> <span class="token string">&quot;asset&quot;</span><span class="token punctuation">,</span>
+      file<span class="token operator">:</span> <span class="token string">&quot;sprite.svg&quot;</span><span class="token punctuation">,</span>
+      content<span class="token operator">:</span> <span class="token string">&quot;&lt;svg&gt;...&lt;/svg&gt;&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -776,11 +729,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token function">postcssCustomPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span> postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span> plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token function">postcssCustomPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -802,19 +751,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li><code>file</code> - absolute file path (require)</li>
 </ul>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> <span class="token function-variable function">postcssCustomPlugin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">opts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    postcssPlugin<span class="token operator">:</span> <span class="token string">&quot;postcss-custom-plugin&quot;</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">Once</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">root<span class="token punctuation">,</span> <span class="token punctuation">{</span> result <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      result<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        type<span class="token operator">:</span> <span class="token string">&quot;dependency&quot;</span><span class="token punctuation">,</span>
-        file<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;path&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;to&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;file&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">postcssCustomPlugin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">opts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  postcssPlugin<span class="token operator">:</span> <span class="token string">&quot;postcss-custom-plugin&quot;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">Once</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">root<span class="token punctuation">,</span> <span class="token punctuation">{</span> result <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    result<span class="token punctuation">.</span>messages<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      type<span class="token operator">:</span> <span class="token string">&quot;dependency&quot;</span><span class="token punctuation">,</span>
+      file<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;path&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;to&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;file&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -826,11 +773,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token function">postcssCustomPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span> postcssOptions<span class="token operator">:</span> <span class="token punctuation">{</span> plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token function">postcssCustomPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -844,7 +787,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>Pass <code>loaderContext</code> in plugin (for advanced setups).</li>
 </ol>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -881,20 +824,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p><strong>postcssCustomPlugin.js</strong></p>
 <p>Register a file dependency using <code>loaderContext.addDependency</code>:</p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> <span class="token function-variable function">postcssCustomPlugin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">opts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    postcssPlugin<span class="token operator">:</span> <span class="token string">&quot;postcss-custom-plugin&quot;</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">Once</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">root<span class="token punctuation">,</span> <span class="token punctuation">{</span> result <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      opts<span class="token punctuation">.</span>loaderContext<span class="token punctuation">.</span><span class="token function">addDependency</span><span class="token punctuation">(</span>
-        path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;path&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;to&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;file&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      <span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token function-variable function">postcssCustomPlugin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">opts <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  postcssPlugin<span class="token operator">:</span> <span class="token string">&quot;postcss-custom-plugin&quot;</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">Once</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">root<span class="token punctuation">,</span> <span class="token punctuation">{</span> result <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    opts<span class="token punctuation">.</span>loaderContext<span class="token punctuation">.</span><span class="token function">addDependency</span><span class="token punctuation">(</span>
+      path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;path&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;to&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;file&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 postcssCustomPlugin<span class="token punctuation">.</span>postcss <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> postcssCustomPlugin<span class="token punctuation">;</span></code></pre>
 <blockquote>
 <p>✅ This method is ideal when you want to dynamically declare dependencies without relying on result.messages, especially in more complex setups or shared plugin configurations.</p>
@@ -904,4 +846,4 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 If you&#x27;re new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.</p>
 <p><a href="https://github.com/webpack-contrib/postcss-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack-contrib/postcss-loader/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/postcss-loader/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/postcss-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/less-loader/">less-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/sass-loader/">sass-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.a51357174b557aa6.js"></script></body>
+<p><a href="https://github.com/webpack-contrib/postcss-loader/blob/master/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/postcss-loader/edit/master/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack-contrib/postcss-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/less-loader/">less-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/sass-loader/">sass-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/8WWf6F7p" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.817bc9c70027aefa.js"></script><script src="/index.c6f08ccb0ca0a782.js"></script></body>

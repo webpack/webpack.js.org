@@ -2891,8 +2891,8 @@ if none is passed in the default/configured formatter will be used.</li>
 </code></pre>
 <p>Then add the plugin to your <code>webpack</code> configuration. For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -2971,7 +2971,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h3><span id="test"></span><code>test</code><a href="#test" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>/\.html(\?.*)?$/i</code></p>
 <p>Test to match files against.</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -2986,7 +2986,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="include"></span><code>include</code><a href="#include" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to include for minification.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -3002,7 +3002,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="exclude"></span><code>exclude</code><a href="#exclude" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to exclude from minification.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -3063,20 +3063,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minify</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-      data<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>file<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      data<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+      minimizerOptions<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       code<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
       errors<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       warnings<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-      data<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span>file<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      data<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
+      minimizerOptions<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       code<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
       errors<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">unknown</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -3115,6 +3111,7 @@ You will get errors (invalid or broken syntax) if you have them in your HTML doc
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token function-variable function">minify</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           <span class="token keyword">const</span> htmlMinifier <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minifier-terser&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
           <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>filename<span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
           <span class="token keyword">return</span> <span class="token punctuation">{</span>
@@ -3157,7 +3154,7 @@ You will get errors (invalid or broken syntax) if you have them in your HTML doc
             <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>filename<span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token comment">// To do something</span>
             <span class="token keyword">return</span> <span class="token punctuation">{</span>
-              code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">optimised code</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+              code<span class="token operator">:</span> <span class="token string">&quot;optimised code&quot;</span><span class="token punctuation">,</span>
               warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
               errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -3169,13 +3166,7 @@ You will get errors (invalid or broken syntax) if you have them in your HTML doc
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="minimizeroptions"></span><code>minimizerOptions</code><a href="#minimizeroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minimizerOptions</span> <span class="token operator">=</span>
-  <span class="token operator">|</span> <span class="token punctuation">{</span>
-      <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
-      <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minimizerOptions</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default:</p>
 <pre><code class="hljs language-js"><span class="token punctuation">{</span>
 caseSensitive<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -3226,7 +3217,7 @@ If you use <code>minimizerOptions</code> like object, all <code>minify</code> fu
             <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>filename<span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token comment">// To do something</span>
             <span class="token keyword">return</span> <span class="token punctuation">{</span>
-              code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">optimised code</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+              code<span class="token operator">:</span> <span class="token string">&quot;optimised code&quot;</span><span class="token punctuation">,</span>
               warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
               errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -3240,8 +3231,8 @@ If you use <code>minimizerOptions</code> like object, all <code>minify</code> fu
 <h3><span id="swchtml"></span><code>swc/html</code><a href="#swchtml" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Available <a href="https://github.com/swc-project/bindings/blob/main/packages/html/index.ts#l5"><code>options</code></a>.</p>
 <p>HTML Documents:</p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -3276,9 +3267,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>HTML Fragments:</p>
 <p>Use this for partial HTML files (e.g. inside <code>&lt;template&gt;&lt;/template&gt;</code> tags or HTML strings).</p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -3315,8 +3306,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="minify-htmlnode"></span><code>@minify-html/node</code><a href="#minify-htmlnode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Available <a href="https://github.com/wilsonzlin/minify-html#minification"><code>options</code></a>.</p>
 <p>HTML Documents:</p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> HtmlMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -6035,8 +6026,8 @@ compiler<span class="token punctuation">.</span>hooks<span class="token punctuat
 </code></pre>
 <p>Then add the plugin to your <code>webpack</code> configuration. For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> JsonMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;json-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> JsonMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;json-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -6076,7 +6067,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h3><span id="test"></span><code>test</code><a href="#test" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>/\.json(\?.*)?$/i</code></p>
 <p>Test to match files against.</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -6091,7 +6082,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="include"></span><code>include</code><a href="#include" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to include for minimization.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -6107,7 +6098,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="exclude"></span><code>exclude</code><a href="#exclude" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to exclude from minimization.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -6123,10 +6114,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="minimizeroptions"></span><code>minimizerOptions</code><a href="#minimizeroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minimizerOptions</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre><code class="hljs language-ts"><span class="token keyword">interface</span> <span class="token class-name">minimizerOptions</span> <span class="token punctuation">{</span>
   space<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  replacer<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> <span class="token builtin">Function</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+  replacer<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">null</span> <span class="token operator">|</span> <span class="token builtin">Function</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
 <p>Default: <code>{ replacer: null, space: null }</code></p>
 <p><code>JSON.stringify()</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">options</a>.</p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
