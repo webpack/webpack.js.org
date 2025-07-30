@@ -1823,8 +1823,8 @@ To avoid this, you should explicitly specify where to copy the files from; by us
 </code></pre>
 <p>Then add the plugin to your <code>webpack</code> configuration. For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CssMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;css-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> CssMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;css-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -2013,15 +2013,14 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
         minify<span class="token operator">:</span> <span class="token punctuation">[</span>
           CssMinimizerPlugin<span class="token punctuation">.</span>cssnanoMinify<span class="token punctuation">,</span>
           CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
-          <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> inputMap<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> inputMap<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
             <span class="token comment">//  Custom minifier function</span>
-            <span class="token keyword">return</span> <span class="token punctuation">{</span>
-              code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">a{color: red}</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-              map<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">{&quot;version&quot;: &quot;3&quot;, ...}</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+            <span class="token punctuation">(</span><span class="token punctuation">{</span>
+              code<span class="token operator">:</span> <span class="token string">&quot;a{color: red}&quot;</span><span class="token punctuation">,</span>
+              map<span class="token operator">:</span> <span class="token string">&#x27;{&quot;version&quot;: &quot;3&quot;, ...}&#x27;</span><span class="token punctuation">,</span>
               warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
               errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>

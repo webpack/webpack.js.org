@@ -2819,18 +2819,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exposes</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
-      globalName<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+      globalName<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
       moduleLocalName<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
       override<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>
+  <span class="token operator">|</span> <span class="token punctuation">(</span>
       <span class="token operator">|</span> <span class="token builtin">string</span>
       <span class="token operator">|</span> <span class="token punctuation">{</span>
-          globalName<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
+          globalName<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
           moduleLocalName<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
           override<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-    <span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+    <span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>List of exposes.</p>
 <h4><span id="string"></span><code>string</code><a href="#string" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
@@ -2878,7 +2878,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Allows to use an object to describe an expose.</p>
 <h5><span id="globalname"></span><code>globalName</code><a href="#globalname" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globalName</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globalName</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>The name in the global object. (<strong>required</strong>).</p>
 <p><strong>src/index.js</strong></p>
@@ -8424,10 +8424,10 @@ Often there&#x27;s a simpler solution than this, such as using multiple Stylus e
                 <span class="token keyword">const</span> relativePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>rootContext<span class="token punctuation">,</span> resourcePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>relativePath <span class="token operator">===</span> <span class="token string">&quot;styles/foo.styl&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                  <span class="token keyword">return</span> <span class="token string">&quot;value = 100px&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">value = 100px</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
 
-                <span class="token keyword">return</span> <span class="token string">&quot;value = 200px&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">value = 200px</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -8454,10 +8454,10 @@ Often there&#x27;s a simpler solution than this, such as using multiple Stylus e
                 <span class="token keyword">const</span> relativePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>rootContext<span class="token punctuation">,</span> resourcePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>relativePath <span class="token operator">===</span> <span class="token string">&quot;styles/foo.styl&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                  <span class="token keyword">return</span> <span class="token string">&quot;value = 100px&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">value = 100px</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
 
-                <span class="token keyword">return</span> <span class="token string">&quot;value = 200px&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">value = 200px</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
