@@ -8279,7 +8279,7 @@ All placeholders available in <a href="/configuration/output/#outputfilename"><c
 <p>If you are using Stylelint 13 rather than 14+, you might also need to install <code>@types/stylelint</code> as a dev dependency if you encounter Stylelint-related type errors.</p>
 </blockquote>
 <p>Then add the plugin to your webpack configuration. For example:</p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> StylelintPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;stylelint-webpack-plugin&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> StylelintPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;stylelint-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -8332,7 +8332,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>[&#x27;node_modules&#x27;, compiler.options.output.path]</code></li>
 </ul>
@@ -8341,7 +8341,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">extensions</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">extensions</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>[&#x27;css&#x27;, &#x27;scss&#x27;, &#x27;sass&#x27;]</code></li>
 </ul>
@@ -8350,7 +8350,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">files</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">files</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>null</code></li>
 </ul>
@@ -8368,9 +8368,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">formatter</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span>
-  results<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;stylelint&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>LintResult<span class="token operator">&gt;</span>
-<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">formatter</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> <span class="token builtin">string</span>
+  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>results<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;stylelint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>&#x27;string&#x27;</code></li>
 </ul>
@@ -8460,10 +8460,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       filePath<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       formatter<span class="token operator">?</span><span class="token operator">:</span>
-        <span class="token operator">|</span> <span class="token punctuation">(</span>
-            <span class="token operator">|</span> <span class="token builtin">string</span>
-            <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>results<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;stylelint&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>LintResult<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
-          <span class="token punctuation">)</span>
+        <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>results<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;stylelint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
         <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <ul>
@@ -8472,10 +8469,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Writes the output of the errors to a file - for example, a <code>json</code> file for use for reporting.</p>
 <p>The <code>filePath</code> is relative to the webpack config: <code>output.path</code>.</p>
 <p>You can pass in a different formatter for the output file. If none is passed in the default/configured formatter will be used.</p>
-<pre><code class="hljs language-js"><span class="token punctuation">{</span>
-  filePath<span class="token operator">:</span> <span class="token string">&#x27;path/to/file&#x27;</span><span class="token punctuation">;</span>
-  formatter<span class="token operator">:</span> <span class="token string">&#x27;json&#x27;</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> outputReport <span class="token operator">=</span> <span class="token punctuation">{</span>
+  filePath<span class="token operator">:</span> <span class="token string">&quot;path/to/file&quot;</span><span class="token punctuation">,</span>
+  formatter<span class="token operator">:</span> <span class="token string">&quot;json&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="changelog"></span>Changelog<a href="#changelog" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><a href="https://github.com/webpack-contrib/stylelint-webpack-plugin/blob/master/CHANGELOG.md">Changelog</a></p>
 <h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
