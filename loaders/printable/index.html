@@ -6649,7 +6649,7 @@ Just add the desired implementation to your <code>package.json</code> (<code>sas
             loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               sassOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-                style<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">compressed</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+                style<span class="token operator">:</span> <span class="token string">&quot;compressed&quot;</span><span class="token punctuation">,</span>
                 loadPaths<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;absolute/path/a&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;absolute/path/b&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -6777,7 +6777,7 @@ In this case, the <code>sass-loader</code> will not override the <code>data</cod
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              additionalData<span class="token operator">:</span> <span class="token string">&quot;$env: &quot;</span> <span class="token operator">+</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">+</span> <span class="token string">&quot;;&quot;</span><span class="token punctuation">,</span>
+              additionalData<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">$env: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -6804,10 +6804,10 @@ In this case, the <code>sass-loader</code> will not override the <code>data</cod
                 <span class="token keyword">const</span> relativePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>rootContext<span class="token punctuation">,</span> resourcePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>relativePath <span class="token operator">===</span> <span class="token string">&quot;styles/foo.scss&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                  <span class="token keyword">return</span> <span class="token string">&quot;$value: 100px;&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">$value: 100px;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
 
-                <span class="token keyword">return</span> <span class="token string">&quot;$value: 200px;&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">$value: 200px;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -6834,10 +6834,10 @@ In this case, the <code>sass-loader</code> will not override the <code>data</cod
                 <span class="token keyword">const</span> relativePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>rootContext<span class="token punctuation">,</span> resourcePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
                 <span class="token keyword">if</span> <span class="token punctuation">(</span>relativePath <span class="token operator">===</span> <span class="token string">&quot;styles/foo.scss&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                  <span class="token keyword">return</span> <span class="token string">&quot;$value: 100px;&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">$value: 100px;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
 
-                <span class="token keyword">return</span> <span class="token string">&quot;$value: 200px;&quot;</span> <span class="token operator">+</span> content<span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">$value: 200px;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>content<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -6998,8 +6998,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h4><span id="2-asset-modules"></span>2. <a href="/guides/asset-modules/">Asset Modules</a><a href="#2-asset-modules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">[</span>__dirname <span class="token operator">+</span> <span class="token string">&quot;/src/scss/app.scss&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">[</span>path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./src/scss/app.scss&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -7022,8 +7024,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h4><span id="3-extract-loader-simpler-but-specialized-on-the-css-loaders-output"></span>3. <a href="https://github.com/peerigon/extract-loader">extract-loader</a> (simpler, but specialized on the css-loader&#x27;s output)<a href="#3-extract-loader-simpler-but-specialized-on-the-css-loaders-output" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <h4><span id="4-file-loader-deprecated--should-only-be-used-in-webpack-v4"></span>4. <a href="https://github.com/webpack-contrib/file-loader">file-loader</a> (deprecated--should only be used in webpack v4)<a href="#4-file-loader-deprecated--should-only-be-used-in-webpack-v4" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">[</span>__dirname <span class="token operator">+</span> <span class="token string">&quot;/src/scss/app.scss&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">[</span>path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./src/scss/app.scss&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
