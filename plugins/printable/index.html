@@ -6299,8 +6299,8 @@ A new <code>&lt;link&gt;</code> element will be inserted after the found item.</
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  <span class="token function-variable function">insert</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">linkTag</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">var</span> reference <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;#some-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">insert</span><span class="token punctuation">(</span><span class="token parameter">linkTag</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> reference <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;#some-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>reference<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       reference<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>linkTag<span class="token punctuation">,</span> reference<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -6309,7 +6309,7 @@ A new <code>&lt;link&gt;</code> element will be inserted after the found item.</
 <p>A new <code>&lt;link&gt;</code> tag will be inserted before the element with the ID <code>some-element</code>.</p>
 <h4><span id="attributes"></span><code>attributes</code><a href="#attributes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">attributes</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">attributes</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>{}</code></p>
 <blockquote>
 <p>[!WARNING]</p>
@@ -6508,9 +6508,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              <span class="token function-variable function">publicPath</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">resourcePath<span class="token punctuation">,</span> context</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-                <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>resourcePath<span class="token punctuation">)</span><span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">;</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token function-variable function">publicPath</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">resourcePath<span class="token punctuation">,</span> context</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+                <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>resourcePath<span class="token punctuation">)</span><span class="token punctuation">,</span> context<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
@@ -6608,6 +6607,7 @@ For <code>development</code> mode (including <code>webpack-dev-server</code>) yo
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 <span class="token keyword">const</span> devMode <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -6626,7 +6626,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>devMode <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>devMode <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">flat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="minimal-example"></span>Minimal example<a href="#minimal-example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
@@ -6679,7 +6679,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p><strong>index.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> fooBaz<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./styles.css&quot;</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> bar<span class="token punctuation">,</span> fooBaz <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./styles.css&quot;</span><span class="token punctuation">;</span>
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fooBaz<span class="token punctuation">,</span> bar<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>You can enable a ES module named export using:</p>
@@ -6733,12 +6733,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token punctuation">{</span>
             loader<span class="token operator">:</span> MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              <span class="token function-variable function">publicPath</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">resourcePath<span class="token punctuation">,</span> context</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+              <span class="token function-variable function">publicPath</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">resourcePath<span class="token punctuation">,</span> context</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
                 <span class="token comment">// publicPath is the relative path of the resource to the context</span>
                 <span class="token comment">// e.g. for ./css/admin/main.css the publicPath will be ../../</span>
                 <span class="token comment">// while for ./css/main.css the publicPath will be ../</span>
-                <span class="token keyword">return</span> path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>resourcePath<span class="token punctuation">)</span><span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">&quot;/&quot;</span><span class="token punctuation">;</span>
-              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>path<span class="token punctuation">.</span><span class="token function">relative</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>resourcePath<span class="token punctuation">)</span><span class="token punctuation">,</span> context<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
@@ -6754,8 +6753,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You should not use <code>HotModuleReplacementPlugin</code> plugin if you are using a <code>webpack-dev-server</code>.
 <code>webpack-dev-server</code> enables / disables HMR using <code>hot</code> option.</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 <span class="token keyword">const</span> devMode <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> plugins <span class="token operator">=</span> <span class="token punctuation">[</span>
@@ -6798,8 +6798,8 @@ Below is an example configuration of mini-css for HMR use with CSS modules.</p>
 <p>You should not use <code>HotModuleReplacementPlugin</code> plugin if you are using a <code>webpack-dev-server</code>.
 <code>webpack-dev-server</code> enables / disables HMR using <code>hot</code> option.</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> plugins <span class="token operator">=</span> <span class="token punctuation">[</span>
   <span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -6834,8 +6834,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="minimizing-for-production"></span>Minimizing For Production<a href="#minimizing-for-production" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>To minify the output, use a plugin like <a href="/plugins/css-minimizer-webpack-plugin/">css-minimizer-webpack-plugin</a>.</p>
 <p><strong>webpack.config.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> CssMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;css-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> CssMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;css-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -6924,17 +6924,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         fooStyles<span class="token operator">:</span> <span class="token punctuation">{</span>
           type<span class="token operator">:</span> <span class="token string">&quot;css/mini-extract&quot;</span><span class="token punctuation">,</span>
           name<span class="token operator">:</span> <span class="token string">&quot;styles_foo&quot;</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">chunks</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> chunk<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">&quot;foo&quot;</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token function-variable function">chunks</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> chunk<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">&quot;foo&quot;</span><span class="token punctuation">,</span>
           enforce<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         barStyles<span class="token operator">:</span> <span class="token punctuation">{</span>
           type<span class="token operator">:</span> <span class="token string">&quot;css/mini-extract&quot;</span><span class="token punctuation">,</span>
           name<span class="token operator">:</span> <span class="token string">&quot;styles_bar&quot;</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">chunks</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> chunk<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token function-variable function">chunks</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> chunk<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">,</span>
           enforce<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -7037,7 +7033,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
               <span class="token punctuation">{</span>
                 loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
                 options<span class="token operator">:</span> <span class="token punctuation">{</span>
-                  additionalData<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">@use &#x27;dark-theme/vars&#x27; as vars;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+                  additionalData<span class="token operator">:</span> <span class="token string">&quot;@use &#x27;dark-theme/vars&#x27; as vars;&quot;</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -7049,7 +7045,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
               <span class="token punctuation">{</span>
                 loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span>
                 options<span class="token operator">:</span> <span class="token punctuation">{</span>
-                  additionalData<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">@use &#x27;light-theme/vars&#x27; as vars;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+                  additionalData<span class="token operator">:</span> <span class="token string">&quot;@use &#x27;light-theme/vars&#x27; as vars;&quot;</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -7068,54 +7064,51 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p><strong>src/index.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&quot;./style.scss&quot;</span><span class="token punctuation">;</span>
+<pre><code>import &quot;./style.scss&quot;;
 
-<span class="token keyword">let</span> theme <span class="token operator">=</span> <span class="token string">&quot;light&quot;</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> themes <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+let theme = &quot;light&quot;;
+const themes = {};
 
-themes<span class="token punctuation">[</span>theme<span class="token punctuation">]</span> <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;#theme&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+themes[theme] = document.querySelector(&quot;#theme&quot;);
 
-<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">loadTheme</span><span class="token punctuation">(</span><span class="token parameter">newTheme</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token comment">// eslint-disable-next-line no-console</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">CHANGE THEME - </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>newTheme<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+async function loadTheme(newTheme) {
+  console.log(`CHANGE THEME - ${newTheme}`);
 
-  <span class="token keyword">const</span> themeElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;#theme&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  const themeElement = document.querySelector(&quot;#theme&quot;);
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>themeElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    themeElement<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+  if (themeElement) {
+    themeElement.remove();
+  }
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>themes<span class="token punctuation">[</span>newTheme<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// eslint-disable-next-line no-console</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">THEME ALREADY LOADED - </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>newTheme<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  if (themes[newTheme]) {
+    console.log(`THEME ALREADY LOADED - ${newTheme}`);
 
-    document<span class="token punctuation">.</span>head<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>themes<span class="token punctuation">[</span>newTheme<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    document.head.appendChild(themes[newTheme]);
 
-    <span class="token keyword">return</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+    return;
+  }
 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>newTheme <span class="token operator">===</span> <span class="token string">&quot;dark&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// eslint-disable-next-line no-console</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">LOADING THEME - </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>newTheme<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  if (newTheme === &quot;dark&quot;) {
+    console.log(`LOADING THEME - ${newTheme}`);
 
-    <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackChunkName: &quot;dark&quot; */</span> <span class="token string">&quot;./style.scss?dark&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      themes<span class="token punctuation">[</span>newTheme<span class="token punctuation">]</span> <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;#theme&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    import(/* webpackChunkName: &quot;dark&quot; */ &quot;./style.scss?dark&quot;).then(() =&gt; {
+      themes[newTheme] = document.querySelector(&quot;#theme&quot;);
 
-      <span class="token comment">// eslint-disable-next-line no-console</span>
-      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">LOADED - </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>newTheme<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+      console.log(`LOADED - ${newTheme}`);
+    });
+  }
+}
 
-document<span class="token punctuation">.</span><span class="token function-variable function">onclick</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>theme <span class="token operator">===</span> <span class="token string">&quot;light&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    theme <span class="token operator">=</span> <span class="token string">&quot;dark&quot;</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-    theme <span class="token operator">=</span> <span class="token string">&quot;light&quot;</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
+document.onclick = () =&gt; {
+  if (theme === &quot;light&quot;) {
+    theme = &quot;dark&quot;;
+  } else {
+    theme = &quot;light&quot;;
+  }
 
-  <span class="token function">loadTheme</span><span class="token punctuation">(</span>theme<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+  loadTheme(theme);
+};
+</code></pre>
 <p><strong>src/dark-theme/_vars.scss</strong></p>
 <pre><code class="hljs language-scss"><span class="token property"><span class="token variable">$background</span></span><span class="token punctuation">:</span> black<span class="token punctuation">;</span></code></pre>
 <p><strong>src/light-theme/_vars.scss</strong></p>
@@ -7154,7 +7147,7 @@ document<span class="token punctuation">.</span><span class="token function-vari
     Template<span class="token punctuation">.</span><span class="token function">asString</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
       source<span class="token punctuation">,</span>
       <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>varNames<span class="token punctuation">.</span>tag<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.setAttribute(&quot;href&quot;, &quot;/plugins/mini-css-extract-plugin/));</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-    <span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>We welcome all contributions!
