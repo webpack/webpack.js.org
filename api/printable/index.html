@@ -1856,7 +1856,7 @@ It works in certain cases out of the box but <strong>doesn’t support all cases
 <p>A name for the new chunk. Since webpack 2.6.0, the placeholders <code>[index]</code> and <code>[request]</code> are supported within the given string to an incremented number or the actual resolved filename respectively. Adding this comment will cause our separate chunk to be named [my-chunk-name].js instead of [id].js.</p>
 <h5><span id="webpackfetchpriority"></span>webpackFetchPriority<a href="#webpackfetchpriority" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <span class="badge">5.87.0+</span>
-<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority"><code>fetchPriority</code></a> for specific dynamic imports. It&#x27;s also possible to set a global default value for all dynamic imports by using the <a href="/configuration/module/#moduleparserjavascriptdynamicimportfetchpriority"><code>module.parser.javascript.dynamicImportFetchPriority</code></a> option.</p>
+<p>Set <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/fetchPriority"><code>fetchPriority</code></a> for specific dynamic imports. It&#x27;s also possible to set a global default value for all dynamic imports by using the <a href="/configuration/module/#moduleparserjavascriptdynamicimportfetchpriority"><code>module.parser.javascript.dynamicImportFetchPriority</code></a> option.</p>
 <pre><code class="hljs language-js"><span class="token keyword">import</span><span class="token punctuation">(</span>
   <span class="token comment">/* webpackFetchPriority: &quot;high&quot; */</span>
   <span class="token string">&#x27;path/to/module&#x27;</span>
