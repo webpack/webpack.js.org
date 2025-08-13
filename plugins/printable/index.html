@@ -3975,7 +3975,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h3><span id="test"></span><code>test</code><a href="#test" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>/\.(jpe?g\|png\|gif\|tif\|webp\|svg\|avif)\$/i</code></p>
 <p>Test to match files against.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -3993,7 +3993,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="include"></span><code>include</code><a href="#include" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to include.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -4011,7 +4011,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="exclude"></span><code>exclude</code><a href="#exclude" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to exclude.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -4035,30 +4035,22 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         original<span class="token operator">:</span> <span class="token punctuation">{</span>
           filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
           data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-          warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-          errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+          warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
           info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        options<span class="token operator">?</span><span class="token operator">:</span>
-          <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-          <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+        options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
         filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
         data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-        warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-        errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+        warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span>
         setup<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
         teardown<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">;</span>
-      options<span class="token operator">?</span><span class="token operator">:</span>
-        <span class="token operator">|</span> <span class="token punctuation">{</span>
-            <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-        <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+      options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filter<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>source<span class="token operator">:</span> Buffer<span class="token punctuation">,</span> sourcePath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filename<span class="token operator">?</span><span class="token operator">:</span>
         <span class="token operator">|</span> <span class="token builtin">string</span>
@@ -4070,35 +4062,27 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
         <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
+  <span class="token operator">|</span> <span class="token punctuation">{</span>
       implementation<span class="token operator">:</span> <span class="token punctuation">(</span>
         original<span class="token operator">:</span> <span class="token punctuation">{</span>
           filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
           data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-          warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-          errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+          warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
           info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        options<span class="token operator">?</span><span class="token operator">:</span>
-          <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-          <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+        options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
         filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
         data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-        warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-        errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+        warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span>
         setup<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
         teardown<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">;</span>
-      options<span class="token operator">?</span><span class="token operator">:</span>
-        <span class="token operator">|</span> <span class="token punctuation">{</span>
-            <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-        <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+      options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filter<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>source<span class="token operator">:</span> Buffer<span class="token punctuation">,</span> sourcePath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filename<span class="token operator">?</span><span class="token operator">:</span>
         <span class="token operator">|</span> <span class="token builtin">string</span>
@@ -4109,7 +4093,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             assetInfo<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
           <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
         <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+    <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Allows to setup default minify function.</p>
 <h4><span id="available-minimizers"></span>Available minimizers<a href="#available-minimizers" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
@@ -4300,16 +4284,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   original<span class="token operator">:</span> <span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
     data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-    warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-    errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+    warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   options<span class="token operator">?</span><span class="token operator">:</span> BasicTransformerOptions<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
   filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-  warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-  errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
   info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span>
   setup<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -4343,9 +4327,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h5><span id="options"></span><code>options</code><a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">options</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">options</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Options for the <code>implementation</code> option (i.e. options for <code>imagemin</code>/<code>squoosh</code>/<code>sharp</code>/custom implementation).</p>
 <p><strong>webpack.config.js</strong></p>
@@ -4475,35 +4457,27 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="generator"></span><code>generator</code><a href="#generator" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">generator</span> <span class="token operator">=</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">generator</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   implementation<span class="token operator">:</span> <span class="token punctuation">(</span>
     original<span class="token operator">:</span> <span class="token punctuation">{</span>
       filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
       data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-      warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-      errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+      warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
       info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    options<span class="token operator">?</span><span class="token operator">:</span>
-      <span class="token operator">|</span> <span class="token punctuation">{</span>
-          <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-      <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+    options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
   <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
     data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-    warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-    errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+    warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span>
     setup<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
     teardown<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
-  options<span class="token operator">?</span><span class="token operator">:</span>
-    <span class="token operator">|</span> <span class="token punctuation">{</span>
-        <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-    <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+  options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   filter<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>source<span class="token operator">:</span> Buffer<span class="token punctuation">,</span> sourcePath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   filename<span class="token operator">?</span><span class="token operator">:</span>
     <span class="token operator">|</span> <span class="token builtin">string</span>
@@ -4516,7 +4490,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   preset<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   <span class="token keyword">type</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token string">&quot;import&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;asset&quot;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Allow to setup default image generators.
 This is useful when you want to generate additional formats like <code>webp</code>, <code>avif</code>, etc., from the original images.</p>
@@ -4870,20 +4844,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   original<span class="token operator">:</span> <span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
     data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-    warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-    errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+    warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  options<span class="token operator">?</span><span class="token operator">:</span>
-    <span class="token operator">|</span> <span class="token punctuation">{</span>
-        <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-    <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+  options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
   filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-  warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-  errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+  warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
   info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span>
   setup<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -4919,9 +4889,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h5><span id="options-1"></span><code>options</code><a href="#options-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">options</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">options</span> <span class="token operator">=</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Options for the <code>implementation</code> (i.e. options for <code>imagemin</code>/<code>squoosh</code>/<code>sharp</code>/custom implementation).</p>
 <p><strong>webpack.config.js</strong></p>
@@ -5125,7 +5093,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="concurrency"></span><code>concurrency</code><a href="#concurrency" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">concurrency</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre>
-<p>Default: <code>Math.max(1, os.cpus().length - 1)</code></p>
+<p>Default: <code>Math.max(1, os.availableParallelism() - 1)</code></p>
 <p>Maximum number of concurrency optimization processes in one time.</p>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> ImageMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;image-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -5199,30 +5167,22 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         original<span class="token operator">:</span> <span class="token punctuation">{</span>
           filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
           data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-          warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-          errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+          warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
           info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        options<span class="token operator">?</span><span class="token operator">:</span>
-          <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-          <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+        options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
         filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
         data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-        warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-        errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+        warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span>
         setup<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
         teardown<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">;</span>
-      options<span class="token operator">?</span><span class="token operator">:</span>
-        <span class="token operator">|</span> <span class="token punctuation">{</span>
-            <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-        <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+      options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filter<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>source<span class="token operator">:</span> Buffer<span class="token punctuation">,</span> sourcePath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filename<span class="token operator">?</span><span class="token operator">:</span>
         <span class="token operator">|</span> <span class="token builtin">string</span>
@@ -5234,35 +5194,27 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
         <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
+  <span class="token operator">|</span> <span class="token punctuation">{</span>
       implementation<span class="token operator">:</span> <span class="token punctuation">(</span>
         original<span class="token operator">:</span> <span class="token punctuation">{</span>
           filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
           data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-          warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-          errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+          warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
           info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        options<span class="token operator">?</span><span class="token operator">:</span>
-          <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-          <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+        options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
         filename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
         data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
-        warnings<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
-        errors<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>Error<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+        warnings<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        errors<span class="token operator">:</span> Error<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         info<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo<span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token operator">&gt;</span> <span class="token operator">&amp;</span> <span class="token punctuation">{</span>
         setup<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
         teardown<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">;</span>
-      options<span class="token operator">?</span><span class="token operator">:</span>
-        <span class="token operator">|</span> <span class="token punctuation">{</span>
-            <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-        <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+      options<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filter<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span>source<span class="token operator">:</span> Buffer<span class="token punctuation">,</span> sourcePath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filename<span class="token operator">?</span><span class="token operator">:</span>
         <span class="token operator">|</span> <span class="token builtin">string</span>
@@ -5273,7 +5225,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             assetInfo<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AssetInfo <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
           <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
         <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+    <span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Allows to setup default minimizer.</p>
 <p>You can use either a single minimizer object or an array of them.</p>
@@ -5312,14 +5264,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>For more information and supported options please read <a href="#minimizer">here</a>.</p>
 <h3><span id="generator-1"></span><code>generator</code><a href="#generator-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">generator</span> <span class="token operator">=</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">generator</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   implementation<span class="token operator">:</span> TransformerFunction<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
   options<span class="token operator">?</span><span class="token operator">:</span> BasicTransformerOptions<span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
   filter<span class="token operator">?</span><span class="token operator">:</span> FilterFn <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   filename<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> FilenameFn <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   preset<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
   <span class="token keyword">type</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token string">&quot;import&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;asset&quot;</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Allow to setup default generators.
 This is useful for creating new image formats (e.g., webp, avif, etc.) from existing images.</p>
@@ -5397,8 +5349,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="additional-api"></span>Additional API<a href="#additional-api" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="imageminnormalizeconfigconfig"></span><code>imageminNormalizeConfig(config)</code><a href="#imageminnormalizeconfigconfig" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>The function normalizes configuration (converts plugins names and options to <code>Function</code>s) for using in <code>imagemin</code> package directly.</p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> imagemin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;imagemin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span> imageminNormalizeConfig <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;image-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> imageminNormalizeConfig <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;image-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> imagemin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;imagemin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">/*
   console.log(imageminConfig);
@@ -5412,18 +5364,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   }
 */</span>
 
-<span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> imageminConfig <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">imageminNormalizeConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;jpegtran&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">&quot;pngquant&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> quality<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0.6</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> files <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">imagemin</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;images/*.{jpg,png}&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-    destination<span class="token operator">:</span> <span class="token string">&quot;build/images&quot;</span><span class="token punctuation">,</span>
-    plugins<span class="token operator">:</span> imageminConfig<span class="token punctuation">.</span>plugins<span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> imageminConfig <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">imageminNormalizeConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;jpegtran&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">&quot;pngquant&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> quality<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token number">0.6</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>files<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">// =&gt; [{data: &lt;Buffer 89 50 4e …&gt;, path: &#x27;build/images/foo.jpg&#x27;}, …]</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<span class="token keyword">const</span> files <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">imagemin</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;images/*.{jpg,png}&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  destination<span class="token operator">:</span> <span class="token string">&quot;build/images&quot;</span><span class="token punctuation">,</span>
+  plugins<span class="token operator">:</span> imageminConfig<span class="token punctuation">.</span>plugins<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>files<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// =&gt; [{data: &lt;Buffer 89 50 4e …&gt;, path: &#x27;build/images/foo.jpg&#x27;}, …]</span></code></pre>
 <h2><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="optimize-images-based-on-size"></span>Optimize images based on size<a href="#optimize-images-based-on-size" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>You can use difference options (like <code>progressive</code>/<code>interlaced</code>/etc.) based on image size (example - don&#x27;t do progressive transformation for small images).</p>
