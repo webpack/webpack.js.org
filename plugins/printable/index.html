@@ -2531,7 +2531,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <pre><code class="hljs language-console">pnpm add -D eslint
 </code></pre>
 <p>Then add the plugin to your webpack configuration. For example:</p>
-<pre><code class="hljs language-js"><span class="token keyword">const</span> ESLintPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;eslint-webpack-plugin&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">const</span> ESLintPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;eslint-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -2572,7 +2572,7 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">configType</span> <span class="token operator">=</span> <span class="token string">&#x27;flat&#x27;</span> <span class="token operator">|</span> <span class="token string">&#x27;eslintrc&#x27;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">configType</span> <span class="token operator">=</span> <span class="token string">&quot;flat&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;eslintrc&quot;</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>flat</code></li>
 </ul>
@@ -2605,7 +2605,7 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">extensions</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">extensions</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>&#x27;js&#x27;</code></li>
 </ul>
@@ -2614,7 +2614,7 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>&#x27;node_modules&#x27;</code></li>
 </ul>
@@ -2623,7 +2623,7 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">resourceQueryExclude</span> <span class="token operator">=</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span>RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">resourceQueryExclude</span> <span class="token operator">=</span> RegExp <span class="token operator">|</span> RegExp<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>[]</code></li>
 </ul>
@@ -2632,7 +2632,7 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">files</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">files</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>null</code></li>
 </ul>
@@ -2653,10 +2653,12 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">formatter</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token operator">|</span> <span class="token punctuation">(</span>
-  results<span class="token operator">:</span>  <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;eslint&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-  data<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;eslint&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> <span class="token keyword">undefined</span>
-<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">formatter</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> <span class="token builtin">string</span>
+  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
+      results<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      data<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <ul>
 <li>Default: <code>&#x27;stylish&#x27;</code></li>
 </ul>
@@ -2740,8 +2742,8 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
         <span class="token operator">|</span> <span class="token punctuation">(</span>
             <span class="token operator">|</span> <span class="token builtin">string</span>
             <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-                results<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;eslint&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token operator">&gt;</span><span class="token punctuation">,</span>
-                data<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;eslint&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+                results<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                data<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
               <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
           <span class="token punctuation">)</span>
         <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -8684,7 +8686,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h3><span id="test"></span><code>test</code><a href="#test" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>/\.m?js(\?.*)?$/i</code></p>
 <p>Test to match files against.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -8700,7 +8702,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="include"></span><code>include</code><a href="#include" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to include.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -8716,7 +8718,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="exclude"></span><code>exclude</code><a href="#exclude" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Files to exclude.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -8773,9 +8775,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="minify"></span><code>minify</code><a href="#minify" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minify</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
-  input<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">[</span>file<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  input<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">,</span>
   sourceMap<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;@jridgewell/trace-mapping&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>SourceMapInput <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
   minifyOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token keyword">module</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -8794,7 +8794,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           pos<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
           line<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
           col<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
     <span class="token operator">|</span> <span class="token punctuation">{</span>
         condition<span class="token operator">?</span><span class="token operator">:</span>
@@ -8810,7 +8810,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
                 pos<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
                 line<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
                 col<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-              <span class="token punctuation">}</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
           <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
         filename<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>fileData<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -8820,7 +8820,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>commentsFile<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
           <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
-    <span class="token operator">|</span> <span class="token keyword">undefined</span>
+    <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
 <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token punctuation">{</span>
   code<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   map<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;@jridgewell/trace-mapping&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>SourceMapInput <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -8859,7 +8859,6 @@ minify<span class="token punctuation">.</span><span class="token function-variab
   <span class="token keyword">let</span> packageJson<span class="token punctuation">;</span>
 
   <span class="token keyword">try</span> <span class="token punctuation">{</span>
-    <span class="token comment">// eslint-disable-next-line global-require, import/no-extraneous-dependencies</span>
     packageJson <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;uglify-module/package.json&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Ignore</span>
@@ -8883,7 +8882,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="terseroptions"></span><code>terserOptions</code><a href="#terseroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">terserOptions</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre><code class="hljs language-ts"><span class="token keyword">interface</span> <span class="token class-name">terserOptions</span> <span class="token punctuation">{</span>
   compress<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> CompressOptions<span class="token punctuation">;</span>
   ecma<span class="token operator">?</span><span class="token operator">:</span> <span class="token constant">ECMA</span><span class="token punctuation">;</span>
   enclose<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
@@ -8900,7 +8899,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   safari10<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
   sourceMap<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> SourceMapOptions<span class="token punctuation">;</span>
   toplevel<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>Default: <a href="https://github.com/terser/terser#minify-options">default</a></p>
 <p>Terser <a href="https://github.com/terser/terser#minify-options">options</a>.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -8943,7 +8942,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         pos<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
         line<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
         col<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       condition<span class="token operator">?</span><span class="token operator">:</span>
@@ -8959,7 +8958,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
               pos<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
               line<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
               col<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
         <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
       filename<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>fileData<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -9042,13 +9041,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token keyword">new</span> <span class="token class-name">TerserPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         extractComments<span class="token operator">:</span> <span class="token punctuation">{</span>
           condition<span class="token operator">:</span> <span class="token regex">/^\**!|@preserve|@license|@cc_on/i</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">filename</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">fileData</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function-variable function">filename</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">fileData</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
             <span class="token comment">// The &quot;fileData&quot; argument contains object with &quot;filename&quot;, &quot;basename&quot;, &quot;query&quot; and &quot;hash&quot;</span>
-            <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.LICENSE.txt</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>query<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">licenseFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">License information can be found in </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>licenseFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.LICENSE.txt</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>query<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">licenseFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">License information can be found in </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>licenseFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -9069,7 +9066,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         pos<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
         line<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
         col<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
   <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span></code></pre>
 <p>The condition that determines which comments should be extracted.</p>
@@ -9081,13 +9078,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token keyword">new</span> <span class="token class-name">TerserPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         extractComments<span class="token operator">:</span> <span class="token punctuation">{</span>
           condition<span class="token operator">:</span> <span class="token string">&quot;some&quot;</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">filename</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">fileData</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function-variable function">filename</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">fileData</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
             <span class="token comment">// The &quot;fileData&quot; argument contains object with &quot;filename&quot;, &quot;basename&quot;, &quot;query&quot; and &quot;hash&quot;</span>
-            <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.LICENSE.txt</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>query<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">licenseFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">License information can be found in </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>licenseFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.LICENSE.txt</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>query<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">licenseFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">License information can be found in </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>licenseFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -9113,9 +9108,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         extractComments<span class="token operator">:</span> <span class="token punctuation">{</span>
           condition<span class="token operator">:</span> <span class="token regex">/^\**!|@preserve|@license|@cc_on/i</span><span class="token punctuation">,</span>
           filename<span class="token operator">:</span> <span class="token string">&quot;extracted-comments.js&quot;</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">licenseFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">License information can be found in </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>licenseFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">licenseFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">License information can be found in </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>licenseFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -9136,13 +9130,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token keyword">new</span> <span class="token class-name">TerserPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         extractComments<span class="token operator">:</span> <span class="token punctuation">{</span>
           condition<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">filename</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">fileData</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token function-variable function">filename</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">fileData</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
             <span class="token comment">// The &quot;fileData&quot; argument contains object with &quot;filename&quot;, &quot;basename&quot;, &quot;query&quot; and &quot;hash&quot;</span>
-            <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.LICENSE.txt</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>query<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">commentsFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">My custom banner about license information </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>commentsFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.LICENSE.txt</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fileData<span class="token punctuation">.</span>query<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+          <span class="token function-variable function">banner</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">commentsFile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">My custom banner about license information </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>commentsFile<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -9289,10 +9281,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>With built-in minify functions:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> JsMinifyOptions <span class="token keyword">as</span> SwcOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@swc/core&quot;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> MinifyOptions <span class="token keyword">as</span> UglifyJSOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;uglify-js&quot;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> TransformOptions <span class="token keyword">as</span> EsbuildOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;esbuild&quot;</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> MinifyOptions <span class="token keyword">as</span> TerserOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;terser&quot;</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-ts"><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token keyword">type</span> <span class="token class-name">JsMinifyOptions</span> <span class="token keyword">as</span> SwcOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@swc/core&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token keyword">type</span> <span class="token class-name">TransformOptions</span> <span class="token keyword">as</span> EsbuildOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;esbuild&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token keyword">type</span> <span class="token class-name">MinifyOptions</span> <span class="token keyword">as</span> TerserOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;terser&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token keyword">type</span> <span class="token class-name">MinifyOptions</span> <span class="token keyword">as</span> UglifyJSOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;uglify-js&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">module</span><span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>

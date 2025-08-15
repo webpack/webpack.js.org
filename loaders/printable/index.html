@@ -7571,9 +7571,9 @@ divElement<span class="token punctuation">.</span>className <span class="token o
 <p>Insert styles at top of <code>head</code> tag:</p>
 <p><strong>insert-function.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">insertAtTop</span><span class="token punctuation">(</span><span class="token parameter">element</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">var</span> parent <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;head&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">// eslint-disable-next-line no-underscore-dangle</span>
-  <span class="token keyword">var</span> lastInsertedElement <span class="token operator">=</span> window<span class="token punctuation">.</span>_lastElementInsertedByStyleLoader<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> parent <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;head&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> lastInsertedElement <span class="token operator">=</span> window<span class="token punctuation">.</span>_lastElementInsertedByStyleLoader<span class="token punctuation">;</span>
 
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>lastInsertedElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     parent<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> parent<span class="token punctuation">.</span>firstChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -7583,7 +7583,6 @@ divElement<span class="token punctuation">.</span>className <span class="token o
     parent<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 
-  <span class="token comment">// eslint-disable-next-line no-underscore-dangle</span>
   window<span class="token punctuation">.</span>_lastElementInsertedByStyleLoader <span class="token operator">=</span> element<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
@@ -7610,7 +7609,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You can pass any parameters to <code>style.use(options)</code> and this value will be passed to the <code>insert</code> and <code>styleTagTransform</code> functions.</p>
 <p><strong>insert-function.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">insertIntoTarget</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">var</span> parent <span class="token operator">=</span> options<span class="token punctuation">.</span>target <span class="token operator">||</span> document<span class="token punctuation">.</span>head<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> parent <span class="token operator">=</span> options<span class="token punctuation">.</span>target <span class="token operator">||</span> document<span class="token punctuation">.</span>head<span class="token punctuation">;</span>
 
   parent<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
@@ -7789,6 +7788,7 @@ For <code>development</code> mode (including <code>webpack-dev-server</code>), y
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
 <span class="token keyword">const</span> devMode <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -7805,7 +7805,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>devMode <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>devMode <span class="token operator">?</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">flat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="named-export-for-css-modules"></span>Named export for CSS Modules<a href="#named-export-for-css-modules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <blockquote>
@@ -7827,7 +7827,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p><strong>index.js</strong></p>
-<pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> fooBaz<span class="token punctuation">,</span> bar<span class="token punctuation">,</span> <span class="token string">&quot;my-class&quot;</span> <span class="token keyword">as</span> myClass <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./styles.css&quot;</span><span class="token punctuation">;</span>
+<pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> bar<span class="token punctuation">,</span> fooBaz<span class="token punctuation">,</span> <span class="token string">&quot;my-class&quot;</span> <span class="token keyword">as</span> myClass <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./styles.css&quot;</span><span class="token punctuation">;</span>
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>fooBaz<span class="token punctuation">,</span> bar<span class="token punctuation">,</span> myClass<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Or:</p>
@@ -7949,8 +7949,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>Insert styles at top of <code>head</code> tag.</p>
 <p><strong>insert-function.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">insertAtTop</span><span class="token punctuation">(</span><span class="token parameter">element</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">var</span> parent <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;head&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> lastInsertedElement <span class="token operator">=</span> window<span class="token punctuation">.</span>_lastElementInsertedByStyleLoader<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> parent <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">&quot;head&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> lastInsertedElement <span class="token operator">=</span> window<span class="token punctuation">.</span>_lastElementInsertedByStyleLoader<span class="token punctuation">;</span>
 
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>lastInsertedElement<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     parent<span class="token punctuation">.</span><span class="token function">insertBefore</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> parent<span class="token punctuation">.</span>firstChild<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -8027,7 +8027,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You can define custom target for your styles when using the <code>lazyStyleTag</code> type.</p>
 <p><strong>insert-function.js</strong></p>
 <pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">insertIntoTarget</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">var</span> parent <span class="token operator">=</span> options<span class="token punctuation">.</span>target <span class="token operator">||</span> document<span class="token punctuation">.</span>head<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> parent <span class="token operator">=</span> options<span class="token punctuation">.</span>target <span class="token operator">||</span> document<span class="token punctuation">.</span>head<span class="token punctuation">;</span>
 
   parent<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
