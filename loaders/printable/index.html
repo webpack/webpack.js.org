@@ -8148,17 +8148,17 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">stylusOptions</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
-      use<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Function</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
-      include<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
-      define<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token punctuation">;</span>
+      use<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>stylusOptions<span class="token operator">:</span> StylusOptions<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      include<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      define<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
       includeCSS<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-      resolveURL<span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> Object<span class="token punctuation">;</span>
+      resolveURL<span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> object<span class="token punctuation">;</span>
       lineNumbers<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
       hoistAtrules<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
       compress<span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-  <span class="token operator">|</span> <span class="token punctuation">(</span>loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token operator">&gt;</span><span class="token punctuation">;</span></code></pre>
+  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>{}</code></p>
 <p>You can pass any Stylus specific options to the <code>stylus-loader</code> through the <code>stylusOptions</code> property in the <a href="/configuration/module/#ruleoptions--rulequery">loader options</a>.</p>
 <p>See the <a href="https://stylus-lang.com/docs/js.html">Stylus documentation</a>.</p>
@@ -8375,11 +8375,11 @@ Use it with caution because aliases and <code>@import</code> at-rules starting w
 <p>Type:</p>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">additionalData</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
-  <span class="token operator">|</span> <span class="token punctuation">(</span>
+  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
       content<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> Buffer<span class="token punctuation">,</span>
       loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">,</span>
-      meta<span class="token operator">:</span> <span class="token builtin">any</span>
-    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
+      meta<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Default: <code>undefined</code></p>
 <p>Prepends <code>Stylus</code> code before the actual entry file.
 In this case, the <code>stylus-loader</code> will not override the source but will simply <strong>prepend</strong> the entry&#x27;s content.</p>
@@ -8472,7 +8472,7 @@ Often there&#x27;s a simpler solution than this, such as using multiple Stylus e
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="implementation"></span><code>implementation</code><a href="#implementation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">implementation</span> <span class="token operator">=</span> <span class="token builtin">Function</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
+<pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">implementation</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">typeof</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;stylus&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
 <p>The <code>implementation</code> option allows you to specify which <code>Stylus implementation</code> to use.
 It overrides the locally installed <code>peerDependency</code> version of <code>stylus</code>.</p>
 <h4><span id="function-2"></span><code>function</code><a href="#function-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
