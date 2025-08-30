@@ -1707,6 +1707,29 @@ import one from './pkg-1.json' with { type: 'json' };
 
 In this example, `Rule.with` is used to apply `loader-assert.js` to any module imported with the condition `with { type: "json" }`.
 
+## Rule.extractSourceMap
+
+<Badge text="v5.102.0+" />
+
+`boolean = false`
+
+extract sourceMappingURL comments from modules.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        extractSourceMap: true,
+      },
+    ],
+  },
+};
+```
+
 ## Condition
 
 Conditions can be one of these:

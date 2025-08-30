@@ -354,3 +354,12 @@ Snapshots for resolving of build dependencies when using the persistent cache.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
+
+### contextModule
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for building [context modules](/configuration/module/#module-contexts).
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
