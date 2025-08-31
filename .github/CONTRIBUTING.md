@@ -13,10 +13,15 @@ Start by ensuring that you have Node.js installed and forking the repository:
 - Fork the **webpack.js.org** repo from [the main repository][2].
 - `git clone <your-clone-url> && cd webpack.js.org`
 
+Some operations in the build process require a GitHub token. To create and export one:
+
+- Go to [GitHub Personal Access Tokens](https://github.com/settings/personal-access-tokens) and generate a new token with the repo and workflow scopes.
+- Export it in your terminal before running build or fetch commands:
+
 Once you are in the project directory, run the following commands:
 
 - `yarn` to pull all dependencies.
-- `yarn build` to create a production version of the site.
+- `export GITHUB_TOKEN=<your-token-here> yarn build` to create a production version of the site.
 - `yarn start` to develop on a local webpack-dev-server: [localhost:3000][3].
 
 > NOTE: run `yarn fetch-repos` and then `yarn fetch` before running `yarn start` command for the first time
