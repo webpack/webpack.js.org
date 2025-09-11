@@ -39,7 +39,7 @@ const Footer = () => (
         <Link className="footer__link" to="/branding/">
           Branding
         </Link>
-        <Link className="footer__link" to="https://discord.com/invite/8WWf6F7p">
+        <Link className="footer__link" to="https://discord.com/invite/5sxFZPdx2k">
           Discord
         </Link>
         <Link
