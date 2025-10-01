@@ -141,6 +141,9 @@ module.exports = {
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
         outputPath: 'cdn-assets/',
       },
+      'asset/bytes': {
+        // No generator options are supported for this module type yet
+      }
       javascript: {
         // No generator options are supported for this module type yet
       },
@@ -247,6 +250,9 @@ module.exports = {
         // ditto
       },
       'asset/source': {
+        // ditto
+      },
+      'asset/bytes': {
         // ditto
       },
       javascript: {
@@ -1019,6 +1025,28 @@ module.exports = {
 };
 ```
 
+## Rule.extractSourceMap
+
+`boolean = false`
+
+Extracts existing source map data from files (from their `//# sourceMappingURL` comment), useful for preserving the source maps of third-party libraries.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        extractSourceMap: true,
+      },
+    ],
+  },
+};
+```
+
 ## Rule.loader
 
 `Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.loader`](#useentry) for details.
@@ -1280,11 +1308,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.png/,
+        test: /\.png$/,
         type: 'asset/resource',
       },
       {
-        test: /\.html/,
+        test: /\.html$/,
         type: 'asset/resource',
         generator: {
           filename: 'static/[hash][ext]',
@@ -1444,7 +1472,7 @@ Include all modules that pass test assertion. If you supply a `Rule.test` option
 
 `string`
 
-Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline' | 'css/auto'`
+Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline' | 'asset/bytes' | 'css' | 'css/auto' | 'css/module' | 'css/global'`
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing.
 
