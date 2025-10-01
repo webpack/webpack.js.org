@@ -260,6 +260,10 @@ module.exports = {
     module: {
       timestamp: true,
     },
+    contextModule: {
+      hash: true,
+      timestamp: true,
+    },
     resolve: {
       timestamp: true,
     },
@@ -336,6 +340,16 @@ Snapshots for building modules.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
+
+### contextModule
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for building context modules.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
 
 ### resolve
 
