@@ -1,0 +1,318 @@
+---
+title: Dotenv
+sort: 16
+contributors:
+  - xiaoxiaojx
+related:
+  - title: dotenv
+    url: https://github.com/motdotla/dotenv
+  - title: dotenv-expand
+    url: https://github.com/motdotla/dotenv-expand
+---
+
+<Badge text="5.103.0+" />
+The `dotenv` option enables webpack's built-in environment variable loading from
+`.env` files. ## `dotenv`
+
+`boolean` `object`
+
+Enable and configure the built-in Dotenv plugin to load environment variables from `.env` files.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: true,
+};
+```
+
+Setting `dotenv` to `true` enables the plugin with default options. For custom configuration, pass an options object:
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    prefix: 'WEBPACK_',
+    dir: true,
+    template: ['.env', '.env.local', '.env.[mode]', '.env.[mode].local'],
+  },
+};
+```
+
+## Options
+
+### `prefix`
+
+`string` `string[]`
+
+**Default:** `'WEBPACK_'`
+
+Only expose environment variables that start with the specified prefix(es). This prevents accidental exposure of sensitive variables.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    prefix: 'APP_', // Only expose APP_* variables
+  },
+};
+```
+
+**Multiple prefixes:**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    prefix: ['APP_', 'CONFIG_'], // Expose both APP_* and CONFIG_* variables
+  },
+};
+```
+
+T> For security reasons, an empty string `''` is not allowed as a prefix, as it would expose all environment variables.
+
+### `dir`
+
+`boolean` `string`
+
+**Default:** `true`
+
+The directory from which `.env` files are loaded.
+
+- `true` - Load from the project root (context)
+- `false` - Disable `.env` file loading
+- `string` - Relative path from project root or absolute path
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    dir: './config', // Load from ./config directory
+  },
+};
+```
+
+**Disable loading:**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    dir: false, // Only use process.env variables
+  },
+};
+```
+
+### `template`
+
+`string[]`
+
+**Default:** `['.env', '.env.local', '.env.[mode]', '.env.[mode].local']`
+
+Template patterns for `.env` file names. Use `[mode]` as a placeholder for the webpack mode (e.g., `development`, `production`).
+
+Files are loaded in the order specified, with later files overriding earlier ones.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  mode: 'production',
+  dotenv: {
+    template: ['.env', '.env.production'], // Only load these two files
+  },
+};
+```
+
+**Custom patterns:**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    template: [
+      '.env',
+      '.env.local',
+      '.env.[mode]',
+      '.env.[mode].local',
+      '.env.override', // Always loaded last
+    ],
+  },
+};
+```
+
+T> The `[mode]` placeholder will be replaced with the current webpack mode. For example, in `production` mode, `.env.[mode]` becomes `.env.production`.
+
+## File Priority
+
+Environment files are loaded in order, with later files having higher priority:
+
+1. `.env` - Loaded in all modes
+2. `.env.local` - Loaded in all modes, ignored by git (convention)
+3. `.env.[mode]` - Only loaded in specified mode (e.g., `.env.production`)
+4. `.env.[mode].local` - Only loaded in specified mode, ignored by git
+
+Variables from later files override those from earlier files. Additionally, variables already set in `process.env` take the highest priority.
+
+## Variable Expansion
+
+Environment variables are automatically expanded using the [dotenv-expand](https://github.com/motdotla/dotenv-expand) syntax:
+
+**.env**
+
+```bash
+WEBPACK_API_BASE=https://api.example.com
+WEBPACK_API_URL=${WEBPACK_API_BASE}/v1
+WEBPACK_PORT=${WEBPACK_PORT:-3000}  # Use WEBPACK_PORT from process.env, or 3000 as default
+```
+
+**In your code:**
+
+```javascript
+console.log(process.env.WEBPACK_API_URL); // "https://api.example.com/v1"
+console.log(process.env.WEBPACK_PORT); // Value of process.env.WEBPACK_PORT if set, otherwise "3000"
+```
+
+T> During expansion, you can reference any variable from `process.env` (e.g., `${PORT}`), but only variables with the specified prefix (e.g., `WEBPACK_`) will be exposed in your final bundle. In the example above, `${WEBPACK_PORT:-3000}` references `WEBPACK_PORT` from `process.env` if it exists.
+
+**Expansion behavior example:**
+
+```bash
+# .env file
+WEBPACK_API_URL=${API_BASE:-https://default.com}/api
+```
+
+```bash
+# Run with environment variable
+API_BASE=https://custom.com npm run build
+```
+
+Result: `process.env.WEBPACK_API_URL` will be `"https://custom.com/api"` because `API_BASE` from `process.env` is used during expansion, even though `API_BASE` itself won't be exposed in the bundle (it lacks the `WEBPACK_` prefix).
+
+## Usage Examples
+
+### Basic Usage
+
+Create a `.env` file in your project root:
+
+**.env**
+
+```bash
+WEBPACK_API_URL=https://api.example.com
+WEBPACK_FEATURE_FLAG=true
+SECRET_KEY=should-not-be-exposed  # Won't be exposed (no WEBPACK_ prefix)
+```
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: true, // Uses default prefix "WEBPACK_"
+};
+```
+
+**In your application:**
+
+```javascript
+console.log(process.env.WEBPACK_API_URL); // "https://api.example.com"
+console.log(process.env.WEBPACK_FEATURE_FLAG); // "true"
+console.log(process.env.SECRET_KEY); // undefined (not exposed)
+```
+
+### Mode-Specific Configuration
+
+Create mode-specific files:
+
+**.env**
+
+```bash
+WEBPACK_API_URL=https://api.example.com
+WEBPACK_DEBUG=false
+```
+
+**.env.production**
+
+```bash
+WEBPACK_API_URL=https://prod-api.example.com
+WEBPACK_DEBUG=false
+```
+
+**.env.development**
+
+```bash
+WEBPACK_API_URL=https://dev-api.example.com
+WEBPACK_DEBUG=true
+```
+
+When building with `--mode production`, `WEBPACK_API_URL` will be `"https://prod-api.example.com"`.
+
+### Multiple Prefixes
+
+Expose variables with different prefixes:
+
+**.env**
+
+```bash
+APP_NAME=MyApp
+APP_VERSION=1.0.0
+CONFIG_TIMEOUT=5000
+CONFIG_RETRY=3
+PRIVATE_KEY=secret  # Won't be exposed
+```
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    prefix: ['APP_', 'CONFIG_'],
+  },
+};
+```
+
+### Custom Directory and Template
+
+Load environment files from a custom location with custom naming:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  dotenv: {
+    dir: './environments',
+    template: ['.env.base', '.env.[mode]'],
+  },
+};
+```
+
+This will load:
+
+- `./environments/.env.base`
+- `./environments/.env.production` (in production mode)
+
+## Security Considerations
+
+W> **Never commit sensitive data to version control!**
+
+- Use `.gitignore` to exclude `.env.local` and `.env.[mode].local` files
+- Only expose environment variables with specific prefixes
+- Never use an empty string `''` as a prefix
+- Consider using different `.env` files for different environments
+- Store production secrets in your deployment platform's environment variables
+
+**.gitignore**
+
+```bash
+# local env files
+.env.local
+.env.*.local
+```
