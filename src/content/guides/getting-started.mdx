@@ -27,6 +27,7 @@ contributors:
   - d3lm
   - snitin315
   - Etheryen
+  - zowiebeha
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -90,10 +91,10 @@ document.body.appendChild(component());
   <head>
     <meta charset="utf-8" />
     <title>Getting Started</title>
-    <script src="https://unpkg.com/lodash@4.17.20"></script>
+    <script defer src="https://unpkg.com/lodash@4.17.20"></script>
+    <script defer src="./src/index.js"></script>
   </head>
   <body>
-    <script src="./src/index.js"></script>
   </body>
 </html>
 ```
@@ -191,11 +192,11 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
    <head>
      <meta charset="utf-8" />
      <title>Getting Started</title>
--    <script src="https://unpkg.com/lodash@4.17.20"></script>
+-    <script defer src="https://unpkg.com/lodash@4.17.20"></script>
+-    <script defer src="./src/index.js"></script>
++    <script defer src="main.js"></script>
    </head>
    <body>
--    <script src="./src/index.js"></script>
-+    <script src="main.js"></script>
    </body>
  </html>
 ```
