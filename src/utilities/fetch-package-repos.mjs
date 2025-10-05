@@ -20,6 +20,11 @@ const fetch = {
       suffixes: ['-loader'],
       hides: excludedLoaders,
     },
+    {
+      organization: 'webpack',
+      suffixes: ['-loader'],
+      hides: [],
+    },
     'babel/babel-loader',
   ],
   plugins: [
@@ -58,7 +63,12 @@ async function main() {
 
           return repos
             .map((repo) => repo.full_name)
-            .filter((name) => suffixes.some((suffix) => name.endsWith(suffix)))
+            .filter((name) =>
+              suffixes.some(
+                (suffix) =>
+                  name.endsWith(suffix) || name === 'webpack/sass-loader'
+              )
+            )
             .filter((name) => !hides.includes(name));
         })
       );
