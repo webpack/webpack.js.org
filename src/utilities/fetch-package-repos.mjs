@@ -20,7 +20,6 @@ const fetch = {
       suffixes: ['-loader'],
       hides: excludedLoaders,
     },
-    'webpack-contrib/sass-loader',
     'babel/babel-loader',
   ],
   plugins: [
