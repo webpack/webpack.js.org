@@ -369,7 +369,7 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="peer-dependencies"></span>Peer Dependencies<a href="#peer-dependencies" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>If the loader you&#x27;re working on is a simple wrapper around another package, then you should include the package as a <code>peerDependency</code>. This approach allows the application&#x27;s developer to specify the exact version in the <code>package.json</code> if desired.</p>
-<p>For instance, the <code>sass-loader</code> <a href="https://github.com/webpack-contrib/sass-loader/blob/master/package.json">specifies <code>node-sass</code></a> as peer dependency like so:</p>
+<p>For instance, the <code>sass-loader</code> <a href="https://github.com/webpack/sass-loader/blob/main/package.json">specifies <code>node-sass</code></a> as peer dependency like so:</p>
 <pre><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;peerDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;node-sass&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^4.0.0&quot;</span>
