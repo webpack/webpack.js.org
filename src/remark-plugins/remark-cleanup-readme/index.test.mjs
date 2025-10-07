@@ -39,7 +39,7 @@ describe('cleanup readme', () => {
   });
 
   it('should clean up nested div[align="center"] block ', () => {
-    // see https://github.com/webpack-contrib/postcss-loader/blob/master/README.md
+    // see https://github.com/webpack/postcss-loader/blob/master/README.md
     const mdxText = `
 <div align="center">
   <img
