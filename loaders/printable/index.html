@@ -455,8 +455,8 @@ echo &#x27;{ &quot;presets&quot;: [&quot;@babel/env&quot;] }&#x27; &gt; .babelrc
 <div align="center"></div>
 <p><a href="https://npmjs.com/package/css-loader"><img src="https://img.shields.io/npm/v/css-loader.svg" alt="npm"/></a>
 <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/css-loader.svg" alt="node"/></a>
-<a href="https://github.com/webpack-contrib/css-loader/actions"><img src="https://github.com/webpack-contrib/css-loader/workflows/css-loader/badge.svg" alt="tests"/></a>
-<a href="https://codecov.io/gh/webpack-contrib/css-loader"><img src="https://codecov.io/gh/webpack-contrib/css-loader/branch/master/graph/badge.svg" alt="coverage"/></a>
+<a href="https://github.com/webpack/css-loader/actions"><img src="https://github.com/webpack/css-loader/workflows/css-loader/badge.svg" alt="tests"/></a>
+<a href="https://codecov.io/gh/webpack/css-loader"><img src="https://codecov.io/gh/webpack/css-loader/branch/main/graph/badge.svg" alt="coverage"/></a>
 <a href="https://github.com/webpack/webpack/discussions"><img src="https://img.shields.io/github/discussions/webpack/webpack" alt="discussion"/></a>
 <a href="https://packagephobia.now.sh/result?p=css-loader"><img src="https://packagephobia.now.sh/badge?p=css-loader" alt="size"/></a></p>
 <p>The <code>css-loader</code> interprets <code>@import</code> and <code>url()</code> like <code>import/require()</code> and resolves them.</p>
@@ -489,7 +489,7 @@ echo &#x27;{ &quot;presets&quot;: [&quot;@babel/env&quot;] }&#x27; &gt; .babelrc
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Finally, run <code>webpack</code> using the method you normally use (e.g., via CLI or an npm script).</p>
-<p>If you need to extract CSS into a separate file (i.e. do not store CSS in a JS module), consider using the <a href="https://github.com/webpack-contrib/css-loader#recommend">recommend example</a>.</p>
+<p>If you need to extract CSS into a separate file (i.e. do not store CSS in a JS module), consider using the <a href="https://github.com/webpack/css-loader#recommend">recommend example</a>.</p>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <ul>
 <li><strong><a href="#url"><code>url</code></a></strong></li>
@@ -513,7 +513,7 @@ echo &#x27;{ &quot;presets&quot;: [&quot;@babel/env&quot;] }&#x27; &gt; .babelrc
 <li>If set to <code>false</code>, <code>css-loader</code> will not parse any paths specified in <code>url</code> or <code>image-set</code>.</li>
 <li>You can also pass a function to control this behavior dynamically based on the asset path.</li>
 </ul>
-<p>As of version <a href="https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25">4.0.0</a>, absolute paths are resolved based on the server root.</p>
+<p>As of version <a href="https://github.com/webpack/css-loader/main/CHANGELOG.md#400-2020-07-25">4.0.0</a>, absolute paths are resolved based on the server root.</p>
 <p>Examples resolutions:</p>
 <pre><code class="hljs language-js"><span class="token function">url</span><span class="token punctuation">(</span><span class="token parameter">image<span class="token punctuation">.</span>png</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;./image.png&#x27;</span><span class="token punctuation">)</span>
 <span class="token function">url</span><span class="token punctuation">(</span><span class="token string">&#x27;image.png&#x27;</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;./image.png&#x27;</span><span class="token punctuation">)</span>
@@ -708,8 +708,8 @@ image<span class="token operator">-</span><span class="token function">set</span
 <li><code>undefined</code>: Enables CSS modules for all files matching <code>/\.module\.\w+$/i.test(filename)</code> or <code>/\.icss\.\w+$/i.test(filename)</code> regexp.</li>
 <li><code>true</code>: Enables CSS modules for all files.</li>
 <li><code>false</code>: Disables CSS Modules for all files.</li>
-<li><code>string</code>: Disables CSS Modules for all files and set the <code>mode</code> option (see <a href="https://github.com/webpack-contrib/css-loader#mode">mode</a> for details).</li>
-<li><code>object</code>: Enables CSS modules for all files unless the <code>modules.auto</code> option is provided. otherwise the <code>modules.auto</code> option will determine whether if it is CSS Modules or not (see <a href="https://github.com/webpack-contrib/css-loader#auto">auto</a> for more details).</li>
+<li><code>string</code>: Disables CSS Modules for all files and set the <code>mode</code> option (see <a href="https://github.com/webpack/css-loader#mode">mode</a> for details).</li>
+<li><code>object</code>: Enables CSS modules for all files unless the <code>modules.auto</code> option is provided. otherwise the <code>modules.auto</code> option will determine whether if it is CSS Modules or not (see <a href="https://github.com/webpack/css-loader#auto">auto</a> for more details).</li>
 </ul>
 <p>The <code>modules</code> option enables/disables the <strong><a href="https://github.com/css-modules/css-modules">CSS Modules</a></strong> specification and configures its behavior.</p>
 <p>Setting <code>modules: false</code> can improve performance because we avoid parsing <strong>CSS Modules</strong> features, this is useful for developers using use vanilla CSS or other technologies.</p>
@@ -1816,7 +1816,7 @@ shadowRoot<span class="token punctuation">.</span>adoptedStyleSheets <span class
 <blockquote>
 <p>[!WARNING]</p>
 <p>You should not use <a href="/loaders/style-loader/"><code>style-loader</code></a> or <a href="/plugins/mini-css-extract-plugin/"><code>mini-css-extract-plugin</code></a> with this value.</p>
-<p>The <code>esModule</code> option should be enabled if you want to use it with <a href="https://github.com/webpack-contrib/css-loader#modules"><code>CSS modules</code></a>. By default for locals <a href="https://github.com/webpack-contrib/css-loader#namedexport">named export</a> will be used.</p>
+<p>The <code>esModule</code> option should be enabled if you want to use it with <a href="https://github.com/webpack/css-loader#modules"><code>CSS modules</code></a>. By default for locals <a href="https://github.com/webpack/css-loader#namedexport">named export</a> will be used.</p>
 </blockquote>
 <p>The default export is <code>string</code>.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -1845,7 +1845,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </blockquote>
 <blockquote>
 <p>[!WARNING]</p>
-<p>The <code>esModule</code> option should be enabled if you want to use it with <a href="https://github.com/webpack-contrib/css-loader#modules"><code>CSS modules</code></a>. By default for locals <a href="https://github.com/webpack-contrib/css-loader#namedexport">named export</a> will be used.</p>
+<p>The <code>esModule</code> option should be enabled if you want to use it with <a href="https://github.com/webpack/css-loader#modules"><code>CSS modules</code></a>. By default for locals <a href="https://github.com/webpack/css-loader#namedexport">named export</a> will be used.</p>
 </blockquote>
 <blockquote>
 <p>[!WARNING]</p>
@@ -2218,9 +2218,9 @@ ctx.fillStyle = `${svars.colorBackgroundCanvas}`;
 <h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>We welcome all contributions!</p>
 <p>If you are new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.</p>
-<p><a href="https://github.com/webpack-contrib/css-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
+<p><a href="https://github.com/webpack/css-loader/main/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack-contrib/css-loader/blob/master/LICENSE">MIT</a></p>
+<p><a href="https://github.com/webpack/css-loader/main/LICENSE">MIT</a></p>
 <h1><span id="exports-loader"></span>exports-loader<a href="#exports-loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <div align="center"></div>
@@ -7205,8 +7205,8 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
 <div align="center"></div>
 <p><a href="https://npmjs.com/package/style-loader"><img src="https://img.shields.io/npm/v/style-loader.svg" alt="npm"/></a>
 <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/style-loader.svg" alt="node"/></a>
-<a href="https://github.com/webpack-contrib/style-loader/actions"><img src="https://github.com/webpack-contrib/style-loader/workflows/style-loader/badge.svg" alt="tests"/></a>
-<a href="https://codecov.io/gh/webpack-contrib/style-loader"><img src="https://codecov.io/gh/webpack-contrib/style-loader/branch/master/graph/badge.svg" alt="coverage"/></a>
+<a href="https://github.com/webpack/style-loader/actions"><img src="https://github.com/webpack/style-loader/workflows/style-loader/badge.svg" alt="tests"/></a>
+<a href="https://codecov.io/gh/webpack/style-loader"><img src="https://codecov.io/gh/webpack/style-loader/branch/main/graph/badge.svg" alt="coverage"/></a>
 <a href="https://github.com/webpack/webpack/discussions"><img src="https://img.shields.io/github/discussions/webpack/webpack" alt="discussion"/></a>
 <a href="https://packagephobia.now.sh/result?p=style-loader"><img src="https://packagephobia.now.sh/badge?p=style-loader" alt="size"/></a></p>
 <p>Inject CSS into the DOM.</p>
@@ -7719,7 +7719,7 @@ customElements<span class="token punctuation">.</span><span class="token functio
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <h3><span id="base"></span><code>base</code><a href="#base" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">base</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre>
-<p>This setting is primarily used as a workaround for <a href="https://github.com/webpack-contrib/style-loader/issues/163">CSS clashes</a> when using one or more <a href="https://robertknight.me.uk/posts/webpack-dll-plugins/">DllPlugin</a>s.
+<p>This setting is primarily used as a workaround for <a href="https://github.com/webpack/style-loader/issues/163">CSS clashes</a> when using one or more <a href="https://robertknight.me.uk/posts/webpack-dll-plugins/">DllPlugin</a>s.
 <code>base</code> allows you to prevent either the <em>app</em>&#x27;s CSS (or <em>DllPlugin2</em>&#x27;s css) from overwriting <em>DllPlugin1</em>&#x27;s CSS by specifying a CSS module ID base that is greater than the range used by <em>DllPlugin1</em> e.g.:</p>
 <p><strong>webpack.dll1.config.js</strong></p>
 <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -8104,9 +8104,9 @@ customElements<span class="token punctuation">.</span><span class="token functio
 <h2><span id="contributing"></span>Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>We welcome all contributions!
 If you&#x27;re new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.</p>
-<p><a href="https://github.com/webpack-contrib/style-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
+<p><a href="https://github.com/webpack/style-loader/main/.github/CONTRIBUTING.md">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack-contrib/style-loader/blob/master/LICENSE">MIT</a></p>
+<p><a href="https://github.com/webpack/style-loader/main/LICENSE">MIT</a></p>
 <h1><span id="stylus-loader"></span>stylus-loader<a href="#stylus-loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <div align="center"></div>
