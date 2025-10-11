@@ -91,10 +91,10 @@ document.body.appendChild(component());
   <head>
     <meta charset="utf-8" />
     <title>Getting Started</title>
-    <script defer src="https://unpkg.com/lodash@4.17.20"></script>
-    <script defer src="./src/index.js"></script>
+    <script src="https://unpkg.com/lodash@4.17.20"></script>
   </head>
   <body>
+    <script src="./src/index.js"></script>
   </body>
 </html>
 ```
@@ -192,14 +192,16 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
    <head>
      <meta charset="utf-8" />
      <title>Getting Started</title>
--    <script defer src="https://unpkg.com/lodash@4.17.20"></script>
--    <script defer src="./src/index.js"></script>
-+    <script defer src="main.js"></script>
+-    <script src="https://unpkg.com/lodash@4.17.20"></script>
    </head>
    <body>
+-    <script src="./src/index.js"></script>
++    <script src="main.js"></script>
    </body>
  </html>
 ```
+
+T> Deferred loading is an alternative to the above, where instead scripts are consolidated into the `<head>` and are given the `defer` attribute. This strategy downloads the external script resource in parallel with document parsing, and will execute the script after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource.
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
