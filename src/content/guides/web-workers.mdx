@@ -63,6 +63,7 @@ new Worker(new URL('./worker.js', import.meta.url));
 ```
 
 ---
+Note that this is only available in ESM. `Worker` in CommonJS syntax is not supported by either webpack or Node.js.
 
 ## Advanced: Cross-Domain and Dynamic Web Workers
 
