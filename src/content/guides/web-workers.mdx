@@ -62,4 +62,21 @@ import { Worker } from 'worker_threads';
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
-Note that this is only available in ESM. `Worker` in CommonJS syntax is not supported by either webpack or Node.js.
+---
+
+## Advanced: Cross-Domain and Dynamic Web Workers
+
+In some setups you might need your worker script to be hosted on a different origin  
+(for example, using a CDN or micro-frontend).  
+Webpack supports this, but you must make the worker aware of the correct public path.
+
+### Setting a dynamic public path
+
+Inside the worker, explicitly set the same public path used by the main bundle:
+
+```js
+// worker.js
+/* global __webpack_public_path__, __webpack_require__ */
+
+// Ensure the worker knows where to load chunks from
+__webpack_public_path__ = __webpack_require__.p = self.location.origin + '/assets/';
