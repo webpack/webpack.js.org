@@ -201,7 +201,7 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
  </html>
 ```
 
-T> Deferred loading is an alternative to the above, where instead scripts are consolidated into the `<head>` and are given the `defer` attribute. This strategy downloads the external script resource in parallel with document parsing, and will execute the script after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource.
+T> A couple other script loading strategies exist. Deferred loading is one such alternative to the above, where instead scripts are consolidated into the `<head>` and are given the `defer` attribute. This strategy downloads the external script resource(s) in parallel with document parsing, and will execute the scripts in order of document appearance after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource syncronously. To learn more about this process, MDN has a nice [`reference guide`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script#async_and_defer).
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
