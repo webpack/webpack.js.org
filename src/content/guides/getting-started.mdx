@@ -247,9 +247,26 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
     |- index.js
 ```
 
-**webpack.config.js**
+<CodeGroup>
+
+<CodeBlock label="webpack.config.mjs" active>
 
 ```javascript
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+</CodeBlock>
+
+<CodeBlock label="webpack.config.cjs / .js">
 const path = require('path');
 
 module.exports = {
@@ -259,7 +276,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
 };
-```
+</CodeBlock>
+
+</CodeGroup>
+
 
 Now, let's run the build again but instead using our new configuration file:
 
