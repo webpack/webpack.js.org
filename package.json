@@ -35,6 +35,7 @@
     "fetch": "run-p fetch:*",
     "fetch:readmes": "node src/utilities/fetch-package-readmes.mjs",
     "fetch:supporters": "node src/utilities/fetch-supporters.mjs",
+    "fetch-all": "run-s fetch-repos fetch",
     "prebuild": "npm run clean",
     "build": "run-s fetch-repos fetch content && webpack --config webpack.prod.mjs --config-node-env production && run-s printable content && webpack --config webpack.ssg.mjs --config-node-env production --env ssg",
     "postbuild": "npm run sitemap",
