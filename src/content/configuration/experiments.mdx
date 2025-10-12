@@ -27,11 +27,11 @@ Available options:
 - [`css`](#experimentscss)
 - [`deferImport`](#experimentsdeferimport)
 - [`futureDefaults`](#experimentsfuturedefaults)
-- `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
-- [`topLevelAwait`](#experimentstoplevelawait)
+- `layers`: Enable module and chunk layers, removed and works without additional options since `5.102.0`.
+- `topLevelAwait`: Transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0` (however, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`), this feature is enabled by default, removed and works without additional options since `5.102.0`.
 
 **webpack.config.js**
 
@@ -41,7 +41,6 @@ module.exports = {
   experiments: {
     asyncWebAssembly: true,
     buildHttp: true,
-    layers: true,
     lazyCompilation: true,
     outputModule: true,
     syncWebAssembly: true,
@@ -365,20 +364,6 @@ Once enabled, webpack will output ECMAScript module syntax whenever possible. Fo
 module.exports = {
   experiments: {
     outputModule: true,
-  },
-};
-```
-
-### experiments.topLevelAwait
-
-`boolean = true`
-
-The `topLevelAwait` option transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0`, this feature is enabled by default. However, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`.
-
-```js
-module.exports = {
-  experiments: {
-    topLevelAwait: true,
   },
 };
 ```

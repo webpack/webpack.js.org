@@ -31,19 +31,19 @@ describe('processReadme', () => {
   it('rewrite relative url', () => {
     const options = {
       source:
-        'https://raw.githubusercontent.com/webpack-contrib/postcss-loader/master/README.md',
+        'https://raw.githubusercontent.com/webpack/postcss-loader/main/README.md',
     };
     const loaderMDData =
       'See the file [`./src/config.d.ts`](./src/config.d.ts).';
     expect(processReadme(loaderMDData, options)).toEqual(
-      'See the file [`https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts`](https://github.com/webpack-contrib/postcss-loader/blob/master/src/config.d.ts).'
+      'See the file [`https://github.com/webpack/postcss-loader/main/src/config.d.ts`](https://github.com/webpack/postcss-loader/main/src/config.d.ts).'
     );
   });
 
   it('should preserve comments inside code blocks', () => {
     const options = {
       source:
-        'https://raw.githubusercontent.com/webpack-contrib/postcss-loader/master/README.md',
+        'https://raw.githubusercontent.com/webpack/postcss-loader/main/README.md',
     };
     const loaderMDData = `
     <!-- some comment that should be dropped -->

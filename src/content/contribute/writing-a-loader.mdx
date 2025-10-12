@@ -9,6 +9,7 @@ contributors:
   - jamesgeorge007
   - chenxsan
   - dev-itsheng
+  - evenstensberg
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -273,7 +274,7 @@ JSON.stringify(
 
 If the loader you're working on is a simple wrapper around another package, then you should include the package as a `peerDependency`. This approach allows the application's developer to specify the exact version in the `package.json` if desired.
 
-For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpack-contrib/sass-loader/blob/master/package.json) as peer dependency like so:
+For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpack/sass-loader/blob/main/package.json) as peer dependency like so:
 
 ```json
 {

@@ -8,6 +8,7 @@ contributors:
   - anshumanv
   - spence-s
   - dkdk225
+  - alexander-akait
 related:
   - title: webpack 5 - Asset Modules
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -21,11 +22,12 @@ Prior to webpack 5 it was common to use:
 - [`url-loader`](https://v4.webpack.js.org/loaders/url-loader/) to inline a file into the bundle as a data URI
 - [`file-loader`](https://v4.webpack.js.org/loaders/file-loader/) to emit a file into the output directory
 
-Asset Modules types replace all of these loaders by adding 4 new module types:
+Asset Modules types replace all of these loaders by adding 5 new module types:
 
 - `asset/resource` emits a separate file and exports the URL. Previously achievable by using `file-loader`.
 - `asset/inline` exports a data URI of the asset. Previously achievable by using `url-loader`.
 - `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
+- `asset/bytes` exports a [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) view of the asset.
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
 When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Modules in webpack 5, you might want to stop Asset Modules from processing your assets again as that would result in asset duplication. This can be done by setting the asset's module type to `'javascript/auto'`.
@@ -104,7 +106,7 @@ Alternatively, you can do the following in your `App.js` without modifying your 
 import './publicPath.js';
 ```
 
-## Resource assets
+## Resource type
 
 **webpack.config.js**
 
@@ -121,9 +123,9 @@ module.exports = {
 +   rules: [
 +     {
 +       test: /\.png/,
-+       type: 'asset/resource'
-+     }
-+   ]
++       type: 'asset/resource',
++     },
++   ],
 + },
 };
 ```
@@ -154,15 +156,15 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext][query]'
++   assetModuleFilename: 'images/[hash][ext][query]',
   },
   module: {
     rules: [
       {
         test: /\.png/,
-        type: 'asset/resource'
-      }
-    ]
+        type: 'asset/resource',
+      },
+    ],
   },
 };
 ```
@@ -177,23 +179,18 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext][query]'
++   assetModuleFilename: 'images/[hash][ext][query]',
   },
   module: {
     rules: [
-      {
-        test: /\.png/,
-        type: 'asset/resource'
--     }
-+     },
 +     {
 +       test: /\.html/,
 +       type: 'asset/resource',
 +       generator: {
-+         filename: 'static/[hash][ext][query]'
-+       }
-+     }
-    ]
++         filename: 'static/[hash][ext][query]',
++       },
++     },
+    ],
   },
 };
 ```
@@ -206,7 +203,7 @@ With this configuration all the `html` files will be emitted into a `static` dir
 
 **webpack.config.js**
 
-```diff
+```js
 const path = require('path');
 
 module.exports = {
@@ -214,37 +211,24 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
--   assetModuleFilename: 'images/[hash][ext][query]'
   },
   module: {
     rules: [
-      {
--       test: /\.png/,
--       type: 'asset/resource'
++     {
 +       test: /\.svg/,
-+       type: 'asset/inline'
--     },
-+     }
--     {
--       test: /\.html/,
--       type: 'asset/resource',
--       generator: {
--         filename: 'static/[hash][ext][query]'
--       }
--     }
-    ]
-  }
++       type: 'asset/inline',
++     },
+    ],
+  },
 };
 ```
 
 **src/index.js**
 
-```diff
-- import mainImage from './images/main.png';
-+ import metroMap from './images/metro.svg';
+```js
+import metroMap from './images/metro.svg';
 
-- img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
-+ block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
+block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 ```
 
 All `.svg` files will be injected into the bundles as data URI.
@@ -276,48 +260,41 @@ module.exports = {
 +         dataUrl: content => {
 +           content = content.toString();
 +           return svgToMiniDataURI(content);
-+         }
-+       }
-      }
-    ]
++         },
++       },
+      },
+    ],
   },
 };
 ```
 
 Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
 
-## Source assets
+## Source type
 
 **webpack.config.js**
 
 ```diff
 const path = require('path');
-- const svgToMiniDataURI = require('mini-svg-data-uri');
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
-      {
--       test: /\.svg/,
--       type: 'asset/inline',
--       generator: {
--         dataUrl: content => {
--           content = content.toString();
--           return svgToMiniDataURI(content);
--         }
--       }
++     {
 +       test: /\.txt/,
 +       type: 'asset/source',
-      }
-    ]
++     },
+    ],
   },
 };
 ```
+
+T> You don't need to add rules when using `import text from './file.txt' with { type: "text" };` syntax.
 
 **src/example.txt**
 
@@ -327,12 +304,20 @@ Hello world
 
 **src/index.js**
 
-```diff
-- import metroMap from './images/metro.svg';
-+ import exampleText from './example.txt';
+```js
+import exampleText from './example.txt';
 
-- block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
-+ block.textContent = exampleText; // 'Hello world'
+block.textContent = exampleText; // 'Hello world';
+```
+
+Alternative usage:
+
+**src/index.js**
+
+```js
+import exampleText from './example.txt' with { type: 'text' };
+
+block.textContent = exampleText; // 'Hello world';
 ```
 
 All `.txt` files will be injected into the bundles as is.
@@ -340,6 +325,8 @@ All `.txt` files will be injected into the bundles as is.
 ## URL assets
 
 When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
+
+T> You don't need to add rules when using `const file = new URL('./file.ext', import.meta.url);` syntax.
 
 **src/index.js**
 
@@ -377,7 +364,7 @@ console.log(url.protocol === 'data:');
 console.log(url.pathname === ',');
 ```
 
-## General asset type
+## Asset type
 
 **webpack.config.js**
 
@@ -392,11 +379,11 @@ module.exports = {
   },
   module: {
     rules: [
-      {
++     {
 +       test: /\.txt/,
 +       type: 'asset',
-      }
-    ]
++     },
+    ],
   },
 };
 ```
@@ -414,7 +401,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
@@ -423,16 +410,74 @@ module.exports = {
         type: 'asset',
 +       parser: {
 +         dataUrlCondition: {
-+           maxSize: 4 * 1024 // 4kb
-+         }
-+       }
-      }
-    ]
++           maxSize: 4 * 1024, // 4kb
++         },
++       },
+      },
+    ],
   },
 };
 ```
 
 Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
+
+## Bytes type
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
++     {
++       test: /\.txt/,
++       type: 'asset/bytes',
++     },
+    ],
+  },
+};
+```
+
+T> You don't need to add rules when using `import data from './file.ext' with { type: "bytes" };` syntax.
+
+**src/example.txt**
+
+```text
+Hello world
+```
+
+**src/index.js**
+
+```js
+import exampleText from './example.txt';
+
+const decoder = new TextDecoder('utf-8');
+const textString = decoder.decode(exampleText); // 'Uint8Array'
+
+block.textContent = exampleText; // 'Hello world';
+```
+
+Alternative usage:
+
+**src/index.js**
+
+```js
+import exampleText from './example.txt' with { type: 'bytes' };
+
+const decoder = new TextDecoder('utf-8');
+const textString = decoder.decode(exampleText); // 'Uint8Array'
+
+block.textContent = exampleText; // 'Hello world';
+```
+
+All `.txt` files will be injected into the bundles as is.
 
 ## Replacing Inline Loader Syntax
 
