@@ -67,17 +67,21 @@ Note that this is only available in ESM. `Worker` in CommonJS syntax is not supp
 
 ## Advanced: Cross-Domain and Dynamic Web Workers
 
-In some setups you might need your worker script to be hosted on a different origin  
-(for example, using a CDN or micro-frontend).  
-Webpack supports this, but you must make the worker aware of the correct public path.
+In some setups, you may need your worker script to be hosted on a different origin  
+(for example, on a CDN or within a micro-frontend).  
+Webpack supports this, but the worker must know the correct **public path** at runtime.
 
-### Setting a dynamic public path
+### Setting a dynamic public path safely
 
-Inside the worker, explicitly set the same public path used by the main bundle:
+The recommended approach is to define `__webpack_public_path__` at the beginning of your worker entry file, before any imports.  
+This lets webpack resolve chunk URLs correctly without editing generated code:
 
 ```js
 // worker.js
-/* global __webpack_public_path__, __webpack_require__ */
 
-// Ensure the worker knows where to load chunks from
-__webpack_public_path__ = __webpack_require__.p = self.location.origin + '/assets/';
+// Define the public path dynamically before loading other modules
+/* eslint-disable camelcase */
+__webpack_public_path__ = self.location.origin + '/assets/';
+
+// Then import or execute the rest of your worker logic
+importScripts('deep-thought.js');
