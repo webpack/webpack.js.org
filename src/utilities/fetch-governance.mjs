@@ -35,6 +35,11 @@ function generateTitle(filename) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+// Fix internal markdown links (.md → /) for static site compatibility
+function fixMarkdownLinks(content) {
+  return content.replace(/(\]\([A-Z0-9_-]+)\.md(\))/gi, '$1/$2');
+}
+
 // Helper to get slug from filename
 function destSlugFromFilename(destFile) {
   const name = path.basename(destFile, path.extname(destFile));
@@ -71,7 +76,8 @@ async function fetchGovernanceDocs() {
       if (!destFile) continue;
 
       const response = await fetch(file.download_url);
-      const content = await response.text();
+      let content = await response.text();
+      content = fixMarkdownLinks(content);
       const title = generateTitle(filename);
 
       const sortOrder =
