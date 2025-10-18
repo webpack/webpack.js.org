@@ -33,6 +33,11 @@ const fetch = {
       suffixes: ['-webpack-plugin', '-extract-plugin'],
       hides: excludedPlugins,
     },
+    {
+      organization: 'webpack',
+      suffixes: ['-webpack-plugin', '-extract-plugin'],
+      hides: excludedPlugins,
+    },
     'yoriiis/svg-chunk-webpack-plugin',
     'yoriiis/chunks-webpack-plugin',
   ],
