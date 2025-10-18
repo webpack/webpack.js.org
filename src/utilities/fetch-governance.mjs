@@ -1,15 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 import { mkdirp } from 'mkdirp';
-import { promisify } from 'util';
+import { writeFile } from 'fs/promises';
 import { fileURLToPath } from 'url';
 import api from './githubAPI.mjs';
 import yamlHeadmatter from './yaml-headmatter.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const writeFile = promisify(fs.writeFile);
 
 const owner = 'webpack';
 const repo = 'governance';
