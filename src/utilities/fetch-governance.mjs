@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 import { mkdirp } from 'mkdirp';
 import { writeFile } from 'fs/promises';
@@ -12,21 +11,12 @@ const __dirname = path.dirname(__filename);
 const owner = 'webpack';
 const repo = 'governance';
 
-// Output directory for governance content
-const outputDir = path.resolve(__dirname, '../content/contribute/Governance');
+// Output directly under /contribute (no Governance subfolder)
+const outputDir = path.resolve(__dirname, '../content/contribute');
 
-// Mapping GitHub files to local filenames
-const fileMap = {
-  'README.md': 'index.mdx',
-  'CHARTER.md': 'charter.mdx',
-  'MEMBER_EXPECTATIONS.md': 'member-expectations.mdx',
-  'MODERATION_POLICY.md': 'moderation-policy.mdx',
-  'WORKING_GROUPS.md': 'working-groups.mdx',
-};
-
-// Generate title for frontmatter
+// Generate readable title from filename
 function generateTitle(filename) {
-  if (filename === 'README.md') return 'Governance';
+  if (filename === 'README.md') return 'Governance Overview';
   return filename
     .replace('.md', '')
     .replace(/_/g, ' ')
@@ -35,26 +25,9 @@ function generateTitle(filename) {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-// Fix internal markdown links (.md → /) for static site compatibility
+// Fix internal markdown links (.md → /)
 function fixMarkdownLinks(content) {
   return content.replace(/(\]\([A-Z0-9_-]+)\.md(\))/gi, '$1/$2');
-}
-
-// Helper to get slug from filename
-function destSlugFromFilename(destFile) {
-  const name = path.basename(destFile, path.extname(destFile));
-  return name.toLowerCase() === 'index' ? '/' : `/${name}/`;
-}
-
-// Replace related section block in index
-function replaceRelatedSection(indexContent, relatedBlock) {
-  const startMarker = '{/* GOV-RELATED-START */}';
-  const endMarker = '{/* GOV-RELATED-END */}';
-  const regex = new RegExp(`${startMarker}[\\s\\S]*?${endMarker}`, 'm');
-  const wrappedBlock = `${startMarker}\n${relatedBlock}\n${endMarker}`;
-  return regex.test(indexContent)
-    ? indexContent.replace(regex, wrappedBlock)
-    : `${indexContent}\n\n${wrappedBlock}\n`;
 }
 
 async function fetchGovernanceDocs() {
@@ -63,23 +36,36 @@ async function fetchGovernanceDocs() {
   await mkdirp(outputDir);
 
   try {
+    // Get markdown files from governance repo
     const { data: files } = await api.repos.getContent({
       owner,
       repo,
       path: '',
     });
+
     const markdownFiles = files.filter((file) => file.name.endsWith('.md'));
 
     for (const file of markdownFiles) {
       const filename = file.name;
-      const destFile = fileMap[filename];
-      if (!destFile) continue;
 
+      // Create Capitalized prefixed filenames
+      const baseName = filename
+        .replace('.md', '')
+        .replace(/_/g, '-')
+        .toLowerCase();
+
+      const destFile =
+        filename === 'README.md'
+          ? 'Governance-Overview.mdx'
+          : `Governance-${baseName}.mdx`;
+
+      // Fetch content from GitHub and fix markdown links
       const response = await fetch(file.download_url);
       let content = await response.text();
       content = fixMarkdownLinks(content);
-      const title = generateTitle(filename);
 
+      // Generate title and sorting order
+      const title = generateTitle(filename);
       const sortOrder =
         {
           'README.md': 0,
@@ -89,61 +75,26 @@ async function fetchGovernanceDocs() {
           'WORKING_GROUPS.md': 4,
         }[filename] ?? 10;
 
-      // Build frontmatter object: only add group for the index (README.md)
+      // Build YAML frontmatter
       const fm = {
         title,
+        group: 'Contribute',
         sort: sortOrder,
         source: `https://github.com/${owner}/${repo}/blob/main/${filename}`,
         edit: `https://github.com/${owner}/${repo}/edit/main/${filename}`,
       };
 
-      if (filename === 'README.md') fm.group = 'Contribute';
-
       const frontmatter = yamlHeadmatter(fm);
-      await writeFile(
-        path.join(outputDir, destFile),
-        frontmatter + content,
-        'utf8'
-      );
-      console.log(`Synced: ${filename}`);
+
+      // Write .mdx file
+      const destPath = path.join(outputDir, destFile);
+      await writeFile(destPath, frontmatter + content, 'utf8');
+      console.log(`Synced: ${filename} → ${destFile}`);
     }
 
-    // Ensure index.mdx exists and is properly formatted
-    const indexPath = path.resolve(outputDir, 'index.mdx');
-    let indexContent = '';
-
-    try {
-      indexContent = fs.readFileSync(indexPath, 'utf8');
-    } catch {
-      indexContent =
-        '---\n' +
-        'title: Governance\n' +
-        'group: Contribute\n' +
-        'directory: true\n' +
-        'sort: 0\n' +
-        '---\n\n' +
-        '# Governance\n\n';
-      console.log('Created fallback index.mdx with metadata.');
-    }
-
-    const relatedItems = Object.entries(fileMap)
-      .filter(([key]) => key !== 'README.md')
-      .map(([key, dest]) => {
-        const title = generateTitle(key);
-        const slug = destSlugFromFilename(dest);
-        return `- [${title}](/contribute/Governance${slug})`;
-      })
-      .join('\n');
-
-    const relatedBlock = `## Related Documents\n\n${relatedItems}\n`;
-    fs.writeFileSync(
-      indexPath,
-      replaceRelatedSection(indexContent, relatedBlock),
-      'utf8'
+    console.log(
+      '\nGovernance content generated successfully with Capitalized prefix!'
     );
-    console.log('Updated index.mdx with related governance links.');
-
-    console.log('Governance content successfully synced.');
   } catch (error) {
     console.error('Error fetching governance files:', error.message);
     process.exitCode = 1;
