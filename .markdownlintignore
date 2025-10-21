@@ -1,3 +1,4 @@
 node_modules
 src/content/loaders/_*.mdx
 src/content/plugins/_*.mdx
+dist/contribute/Governance-*
