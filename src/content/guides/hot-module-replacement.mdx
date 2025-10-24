@@ -41,7 +41,7 @@ This feature is great for productivity. All we need to do is update our [webpack
 
 Since `webpack-dev-server` v4.0.0, Hot Module Replacement is enabled by default.
 
-T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom server or application.
+T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/webpack/webpack-hot-middleware) package to enable HMR on your custom server or application.
 
 **webpack.config.js**
 
@@ -225,7 +225,7 @@ const server = new webpackDevServer({ hot: false, client: false }, compiler);
 
 See the [full documentation of `webpack-dev-server` Node.js API](/api/webpack-dev-server/).
 
-T> If you're [using `webpack-dev-middleware`](/guides/development/#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom dev server.
+T> If you're [using `webpack-dev-middleware`](/guides/development/#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/webpack/webpack-hot-middleware) package to enable HMR on your custom dev server.
 
 ## Gotchas
 
