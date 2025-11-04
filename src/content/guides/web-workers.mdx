@@ -68,10 +68,6 @@ Note that this is only available in ESM. `Worker` in CommonJS syntax is not supp
 ### Cross-Domain and Dynamic Web Workers
 
 In some setups, you may need your worker script to be hosted on a different origin  
-(for example, on a CDN or within a micro-frontend).  
-Webpack supports this, but the worker must know the correct **public path** at runtime.
-
-### Setting a dynamic public path safely
 
 The recommended approach is to define `__webpack_public_path__` at the beginning of your worker entry file, before any imports.  
 This lets webpack resolve chunk URLs correctly without editing generated code:
