@@ -103,7 +103,7 @@ Usually, webpack would align with proposals, so that&#x27;s something to conside
 We have to check whether it&#x27;s possible to avoid potential conflicts.</p>
 <h4><span id="html-as-entrypoint"></span>HTML as entrypoint<a href="#html-as-entrypoint" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Following Parcels example, we also want to support HTML natively as entrypoints.
-Supporting that would be inline with the goal as web app optimizer, as web apps unusally start with a HTML.
+Supporting that would be inline with the goal as web app optimizer, as web apps usually start with an HTML document.
 It is also a huge developer experience improvement for beginners as many things can be inferred from the HTML.</p>
 <p>Being in control of the generated HTML does also allow to optimize more aggressively by default.
 Currently, we prevent renaming or splitting initial chunks by default, as this requires additional infrastructure for the HTML generation.</p>
@@ -116,7 +116,7 @@ This is something we want to look into for webpack, but also for terser, which i
 <h3><span id="exportsimports-packagejson-field"></span><code>exports</code>/<code>imports</code> package.json field<a href="#exportsimports-packagejson-field" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Node.js 14 has added support for the <code>exports</code> field in package.json to allow to define entrypoints of a package.
 Webpack 5 followed this, and even added additional conditions like <code>production/development</code>.</p>
-<p>Shortly after that Node.js made further additionals to that, e.g. they also added an <code>imports</code> field for private imports.</p>
+<p>Shortly after that Node.js made further additions to that, e.g. they also added an <code>imports</code> field for private imports.</p>
 <p>That&#x27;s something we also want to add.</p>
 <h3><span id="improve-commonjs-analysis"></span>Improve CommonJS analysis<a href="#improve-commonjs-analysis" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>While ESM is the future, there are still a lot of CommonJS packages in npm and in use.
@@ -548,7 +548,7 @@ This is true in general, but might not be always true during webpack or plugin d
 <h2><span id="major-changes-long-outstanding-problems"></span>Major Changes: Long outstanding problems<a href="#major-changes-long-outstanding-problems" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="code-splitting-for-single-file-targets"></span>Code Splitting for single-file-targets<a href="#code-splitting-for-single-file-targets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Targets that only allow to startup a single file (like node, WebWorker, electron main) now supports loading the dependent pieces required for bootstrapping automatically by the runtime.</p>
-<p>This allows using <code>opimization.splitChunks</code> for these targets with <code>chunks: &quot;all&quot;</code> and also <code>optimization.runtimeChunk</code></p>
+<p>This allows using <code>optimization.splitChunks</code> for these targets with <code>chunks: &quot;all&quot;</code> and also <code>optimization.runtimeChunk</code></p>
 <p>Note that with targets where chunk loading is async, this makes initial evaluation async too. This can be an issue when using <code>output.library</code>, since the exported value is a Promise now.</p>
 <h3><span id="updated-resolver"></span>Updated Resolver<a href="#updated-resolver" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>enhanced-resolve</code> was updated to v5. This has the following improvements:</p>
@@ -1215,7 +1215,7 @@ So they can never have referenced modules or influence exports/imports.</p>
 <li><code>Compilation.prefetch</code> removed</li>
 <li><code>Compilation.hooks.beforeHash</code> is now called after the hashes of modules are created<!-- -->
 <ul>
-<li><strong>MIGRATION</strong>: Use <code>Compiliation.hooks.beforeModuleHash</code> instead</li>
+<li><strong>MIGRATION</strong>: Use <code>Compilation.hooks.beforeModuleHash</code> instead</li>
 </ul>
 </li>
 <li><code>Compilation.applyModuleIds</code> removed</li>
@@ -1341,7 +1341,7 @@ So they can never have referenced modules or influence exports/imports.</p>
 <li><code>HarmonyInitDependency</code> removed</li>
 <li><code>Dependency.getInitFragments</code> deprecated<!-- -->
 <ul>
-<li><strong>MIGRATION</strong>: Use <code>apply</code> <code>initFragements</code> instead</li>
+<li><strong>MIGRATION</strong>: Use <code>apply</code> <code>initFragments</code> instead</li>
 </ul>
 </li>
 <li>DependencyReference now takes a function to a module instead of a Module</li>
