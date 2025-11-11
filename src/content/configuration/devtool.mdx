@@ -74,7 +74,7 @@ T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugi
 | `hidden-*` addition     | no reference to the SourceMap added. When SourceMap is not deployed, but should still be generated, e. g. for error reporting purposes.                                                                                                                                                                           |
 | `nosources-*` addition  | source code is not included in SourceMap. This can be useful when the original files should be referenced (further config options needed).                                                                                                                                                                        |
 
-T> We expect a certain pattern when validate devtool name, pay attention and dont mix up the sequence of devtool string. The pattern is: `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`.
+T> We expect a certain pattern when validate devtool name, pay attention and don't mix up the sequence of devtool string. The pattern is: `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`.
 
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate and support minimizing.
 
