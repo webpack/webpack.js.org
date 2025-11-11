@@ -587,7 +587,7 @@ This is true in general, but might not be always true during webpack or plugin d
 
 Targets that only allow to startup a single file (like node, WebWorker, electron main) now supports loading the dependent pieces required for bootstrapping automatically by the runtime.
 
-This allows using `opimization.splitChunks` for these targets with `chunks: "all"` and also `optimization.runtimeChunk`
+This allows using `optimization.splitChunks` for these targets with `chunks: "all"` and also `optimization.runtimeChunk`
 
 Note that with targets where chunk loading is async, this makes initial evaluation async too. This can be an issue when using `output.library`, since the exported value is a Promise now.
 
@@ -1293,7 +1293,7 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `Compilation.addModuleDependencies` removed
 - `Compilation.prefetch` removed
 - `Compilation.hooks.beforeHash` is now called after the hashes of modules are created
-  - **MIGRATION**: Use `Compiliation.hooks.beforeModuleHash` instead
+  - **MIGRATION**: Use `Compilation.hooks.beforeModuleHash` instead
 - `Compilation.applyModuleIds` removed
 - `Compilation.applyChunkIds` removed
 - `Compiler.root` added, which points to the root compiler
@@ -1392,7 +1392,7 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `ExternalModule.external` removed
 - `HarmonyInitDependency` removed
 - `Dependency.getInitFragments` deprecated
-  - **MIGRATION**: Use `apply` `initFragements` instead
+  - **MIGRATION**: Use `apply` `initFragments` instead
 - DependencyReference now takes a function to a module instead of a Module
 - HarmonyImportSpecifierDependency.redirectedId removed
   - **MIGRATION**: Use `setId` instead

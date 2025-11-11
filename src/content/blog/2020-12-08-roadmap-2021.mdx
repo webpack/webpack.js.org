@@ -160,7 +160,7 @@ We have to check whether it's possible to avoid potential conflicts.
 #### HTML as entrypoint
 
 Following Parcels example, we also want to support HTML natively as entrypoints.
-Supporting that would be inline with the goal as web app optimizer, as web apps unusally start with a HTML.
+Supporting that would be inline with the goal as web app optimizer, as web apps usually start with an HTML document.
 It is also a huge developer experience improvement for beginners as many things can be inferred from the HTML.
 
 Being in control of the generated HTML does also allow to optimize more aggressively by default.
@@ -182,7 +182,7 @@ This is something we want to look into for webpack, but also for terser, which i
 Node.js 14 has added support for the `exports` field in package.json to allow to define entrypoints of a package.
 Webpack 5 followed this, and even added additional conditions like `production/development`.
 
-Shortly after that Node.js made further additionals to that, e.g. they also added an `imports` field for private imports.
+Shortly after that Node.js made further additions to that, e.g. they also added an `imports` field for private imports.
 
 That's something we also want to add.
 
