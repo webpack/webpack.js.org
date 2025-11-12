@@ -1,7 +1,8 @@
 import path from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
-import h from 'hastscript';
+import * as _hastscript from 'hastscript';
+const h = _hastscript?.default ?? _hastscript?.h ?? _hastscript;
 import remarkResponsiveTable from './src/remark-plugins/remark-responsive-table/remark-responsive-table.mjs';
 import gfm from 'remark-gfm';
 import slug from './src/remark-plugins/remark-slug/index.mjs';
