@@ -57,9 +57,7 @@ _Vercel_ has given us a Pro account.
 
 [build-status]: https://github.com/webpack/webpack.js.org/workflows/Deploy/badge.svg
 [build-status-url]: https://github.com/webpack/webpack.js.org/actions
-[browserstack]: ./browserstack-logo.png
 [vercel]: ./src/assets/powered-by-vercel.svg
-[browserstack-url]: http://browserstack.com/
 [vercel-url]: https://vercel.com/?utm_source=webpackdocs
 [discussion]: https://img.shields.io/github/discussions/webpack/webpack
 [discussion-url]: https://github.com/webpack/webpack/discussions
