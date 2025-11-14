@@ -49,10 +49,7 @@ The content is available under the [Creative Commons BY 4.0][license-url] licens
 
 ## Special Thanks
 
-_BrowserStack_ has graciously allowed us to do cross-browser and cross-os
-testing of the site at no cost...
-
-[![BrowserStackLogo][browserstack]][browserstack-url]
+If you want reach from us at webpack, contact us and we can arrange something in return for your donations!
 
 _Vercel_ has given us a Pro account.
 
@@ -60,9 +57,7 @@ _Vercel_ has given us a Pro account.
 
 [build-status]: https://github.com/webpack/webpack.js.org/workflows/Deploy/badge.svg
 [build-status-url]: https://github.com/webpack/webpack.js.org/actions
-[browserstack]: ./browserstack-logo.png
 [vercel]: ./src/assets/powered-by-vercel.svg
-[browserstack-url]: http://browserstack.com/
 [vercel-url]: https://vercel.com/?utm_source=webpackdocs
 [discussion]: https://img.shields.io/github/discussions/webpack/webpack
 [discussion-url]: https://github.com/webpack/webpack/discussions
