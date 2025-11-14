@@ -1,5 +1,6 @@
 // Import External Dependencies
 import { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
 import { PlaceholderString } from '../Placeholder/Placeholder';
 import AdjacentPages from './AdjacentPages';
+import CopyCodeButton from '../CopyCodeButton/CopyCodeButton';
 
 // Load Styling
 import './Page.scss';
@@ -80,6 +82,48 @@ export default function Page(props) {
       }
     };
   }, [contentLoaded, pathname, hash]);
+
+  // Enhance code blocks with copy buttons for /concepts routes
+  useEffect(() => {
+    if (contentLoaded && pathname.startsWith('/concepts')) {
+      const enhanceCodeBlocks = () => {
+        const allPreBlocks = document.querySelectorAll('pre');
+
+        allPreBlocks.forEach((pre) => {
+          if (pre.dataset.copyButtonAdded) {
+            return;
+          }
+
+          pre.style.position = 'relative';
+
+          const codeText = pre.textContent || pre.innerText;
+
+          const buttonWrapper = document.createElement('div');
+          buttonWrapper.className = 'copy-button-wrapper';
+          buttonWrapper.style.position = 'absolute';
+          buttonWrapper.style.top = '8px';
+          buttonWrapper.style.right = '8px';
+          buttonWrapper.style.zIndex = '10';
+          buttonWrapper.style.pointerEvents = 'auto';
+
+          ReactDOM.render(<CopyCodeButton text={codeText} />, buttonWrapper);
+
+          pre.appendChild(buttonWrapper);
+          pre.dataset.copyButtonAdded = 'true';
+        });
+      };
+
+      // Run immediately and after delays to catch dynamically rendered content
+      enhanceCodeBlocks();
+      const timer1 = setTimeout(() => enhanceCodeBlocks(), 300);
+      const timer2 = setTimeout(() => enhanceCodeBlocks(), 1000);
+
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
+    }
+  }, [contentLoaded, pathname]);
 
   const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;

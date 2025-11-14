@@ -1,0 +1,45 @@
+.copy-code-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  background-color: #f5f5f5;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  font-family: inherit;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: #e8e8e8;
+    border-color: #999;
+    color: #333;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    color: #999;
+    background-color: #2a2a2a;
+    border-color: #444;
+
+    &:hover {
+      background-color: #3a3a3a;
+      border-color: #666;
+      color: #ccc;
+    }
+  }
+}
