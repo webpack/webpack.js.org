@@ -49,10 +49,7 @@ The content is available under the [Creative Commons BY 4.0][license-url] licens
 
 ## Special Thanks
 
-_BrowserStack_ has graciously allowed us to do cross-browser and cross-os
-testing of the site at no cost...
-
-[![BrowserStackLogo][browserstack]][browserstack-url]
+If you want reach from us at webpack, contact us and we can arrange something in return for your donations!
 
 _Vercel_ has given us a Pro account.
 
