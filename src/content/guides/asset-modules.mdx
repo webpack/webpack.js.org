@@ -2,16 +2,16 @@
 title: Asset Modules
 sort: 25
 contributors:
-  - smelukov
-  - EugeneHlushko
-  - chenxsan
-  - anshumanv
-  - spence-s
-  - dkdk225
-  - alexander-akait
+  - smelukov
+  - EugeneHlushko
+  - chenxsan
+  - anshumanv
+  - spence-s
+  - dkdk225
+  - alexander-akait
 related:
-  - title: webpack 5 - Asset Modules
-  <strong>  url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
+  - title: webpack 5 - Asset Modules
+    url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
 Asset Modules provide a built-in way to use asset files (fonts, icons, etc.) without configuring additional loaders. Asset Modules provide five new module types:
@@ -32,3 +32,412 @@ If you set the `__webpack_public_path__` in code, the way you need to achieve it
 
 ```javascript
 __webpack_public_path__ = '[https://cdn.url.com](https://cdn.url.com)';
+```
+
+And then in your `webpack.config.js` updating your `entry` field to look like
+
+```javascript
+module.exports = {
+  entry: ['./publicPath.js', './App.js'],
+};
+```
+
+Alternatively, you can do the following in your `App.js` without modifying your webpack config. The only downside is you have to enforce ordering here and that can collide with some linting tools.
+
+```javascript
+import './publicPath.js';
+```
+
+## Resource type
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist')
+  },
++ module: {
++   rules: [
++     {
++       test: /\.png/,
++       type: 'asset/resource',
++     },
++   ],
++ },
+};
+```
+
+**src/index.js**
+
+```js
+import mainImage from './images/main.png';
+
+img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
+```
+
+All `.png` files will be emitted to the output directory and their paths will be injected into the bundles, besides, you can customize [`outputPath`](/configuration/module/#rulegeneratoroutputpath) and [`publicPath`](/configuration/module/#rulegeneratorpublicpath) for them.
+
+### Custom output filename
+
+By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory.
+
+You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
++   assetModuleFilename: 'images/[hash][ext][query]',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+};
+```
+
+Another case to customize output filename is to emit some kind of assets to a specified directory:
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
++   assetModuleFilename: 'images/[hash][ext][query]',
+  },
+  module: {
+    rules: [
++     {
++       test: /\.html/,
++       type: 'asset/resource',
++       generator: {
++         filename: 'static/[hash][ext][query]',
++       },
++     },
+    ],
+  },
+};
+```
+
+With this configuration all the `html` files will be emitted into a `static` directory within the output directory.
+
+`Rule.generator.filename` is the same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) and works only with `asset` and `asset/resource` module types.
+
+## Inlining assets
+
+**webpack.config.js**
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
++     {
++       test: /\.svg/,
++       type: 'asset/inline',
++     },
+    ],
+  },
+};
+```
+
+**src/index.js**
+
+```js
+import metroMap from './images/metro.svg';
+
+block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
+```
+
+All `.svg` files will be injected into the bundles as data URI.
+
+### Custom data URI generator
+
+By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.
+
+If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
++ const svgToMiniDataURI = require('mini-svg-data-uri');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.svg/,
+        type: 'asset/inline',
++       generator: {
++         dataUrl: content => {
++           content = content.toString();
++           return svgToMiniDataURI(content);
++         },
++       },
+      },
+    ],
+  },
+};
+```
+
+Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
+
+## Source type
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
++     {
++       test: /\.txt/,
++       type: 'asset/source',
++     },
+    ],
+  },
+};
+```
+
+T> You don't need to add rules when using `import text from './file.txt' with { type: "text" };` syntax.
+
+**src/example.txt**
+
+```text
+Hello world
+```
+
+**src/index.js**
+
+```js
+import exampleText from './example.txt';
+
+block.textContent = exampleText; // 'Hello world';
+```
+
+Alternative usage:
+
+**src/index.js**
+
+```js
+import exampleText from './example.txt' with { type: 'text' };
+
+block.textContent = exampleText; // 'Hello world';
+```
+
+All `.txt` files will be injected into the bundles as is.
+
+## URL assets
+
+When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
+
+T> You don't need to add rules when using `const file = new URL('./file.ext', import.meta.url);` syntax.
+
+**src/index.js**
+
+```js
+const logo = new URL('./logo.svg', import.meta.url);
+```
+
+Depending on the [`target`](/configuration/target/) in your configuration, webpack would compile the above code into a different result:
+
+```js
+// target: web
+new URL(
+  __webpack_public_path__ + 'logo.svg',
+  document.baseURI || self.location.href
+);
+
+// target: webworker
+new URL(__webpack_public_path__ + 'logo.svg', self.location);
+
+// target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
+new URL(
+  __webpack_public_path__ + 'logo.svg',
+  require('url').pathToFileUrl(__filename)
+);
+```
+
+As of webpack 5.38.0, [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) are supported in `new URL()` as well:
+
+**src/index.js**
+
+```js
+const url = new URL('data:,', import.meta.url);
+console.log(url.href === 'data:,');
+console.log(url.protocol === 'data:');
+console.log(url.pathname === ',');
+```
+
+## Asset type
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  module: {
+    rules: [
++     {
++       test: /\.txt/,
++       type: 'asset',
++     },
+    ],
+  },
+};
+```
+
+Now webpack will automatically choose between `resource` and `inline` by following a default condition: a file with size less than 8kb will be treated as a `inline` module type and `resource` module type otherwise.
+
+You can change this condition by setting a [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) option on the module rule level of your webpack configuration:
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.txt/,
+        type: 'asset',
++       parser: {
++         dataUrlCondition: {
++           maxSize: 4 * 1024, // 4kb
++         },
++       },
+      },
+    ],
+  },
+};
+```
+
+Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
+
+## Bytes type
+
+**webpack.config.js**
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
++     {
++       test: /\.txt/,
++       type: 'asset/bytes',
++     },
+    ],
+  },
+};
+```
+
+T> You don't need to add rules when using `import data from './file.ext' with { type: "bytes" };` syntax.
+
+**src/example.txt**
+
+```text
+Hello world
+```
+
+**src/index.js**
+
+```js
+import exampleText from './example.txt';
+
+const decoder = new TextDecoder('utf-8');
+const textString = decoder.decode(exampleText); // 'Uint8Array'
+
+block.textContent = exampleText; // 'Hello world';
+```
+
+Alternative usage:
+
+**src/index.js**
+
+```js
+import exampleText from './example.txt' with { type: 'bytes' };
+
+const decoder = new TextDecoder('utf-8');
+const textString = decoder.decode(exampleText); // 'Uint8Array'
+
+block.textContent = exampleText; // 'Hello world';
+```
+
+All `.txt` files will be injected into the bundles as is.
+
+## Disable emitting assets
+
+For use cases like Server side rendering, you might want to disable emitting assets, which is feasible with [`emit`](/configuration/module/#rulegeneratoremit) option under `Rule.generator`:
+
+```js
+module.exports = {
+  // …
+  module: {
+    rules: [
+      {
+        test: /\.png$/i,
+        type: 'asset/resource',
+        generator: {
+          emit: false,
+        },
+      },
+    ],
+  },
+};
+```
