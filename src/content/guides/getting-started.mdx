@@ -247,9 +247,26 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
     |- index.js
 ```
 
-**webpack.config.js**
+<CodeGroup>
 
-```javascript
+<CodeBlock label="webpack.config.mjs" active>
+
+````javascript
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+</CodeBlock>
+
+<CodeBlock label="webpack.config.cjs">
 const path = require('path');
 
 module.exports = {
@@ -259,7 +276,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
 };
-```
+</CodeBlock>
+
+</CodeGroup>
+
 
 Now, let's run the build again but instead using our new configuration file:
 
@@ -272,7 +292,7 @@ cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
 webpack 5.4.0 compiled successfully in 1934 ms
-```
+````
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
