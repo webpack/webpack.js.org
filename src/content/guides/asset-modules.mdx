@@ -14,71 +14,13 @@ related:
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
-Asset Modules allow one to use asset files (fonts, icons, etc) without configuring additional loaders.
+Asset Modules provide a built-in way to use asset files (fonts, icons, etc.) without configuring additional loaders. Asset Modules provide five new module types:
 
-Prior to webpack 5 it was common to use:
-
-- [`raw-loader`](https://v4.webpack.js.org/loaders/raw-loader/) to import a file as a string
-- [`url-loader`](https://v4.webpack.js.org/loaders/url-loader/) to inline a file into the bundle as a data URI
-- [`file-loader`](https://v4.webpack.js.org/loaders/file-loader/) to emit a file into the output directory
-
-Asset Modules types replace all of these loaders by adding 5 new module types:
-
-- `asset/resource` emits a separate file and exports the URL. Previously achievable by using `file-loader`.
-- `asset/inline` exports a data URI of the asset. Previously achievable by using `url-loader`.
-- `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
+- `asset/resource` emits a separate file and exports the URL.
+- `asset/inline` exports a data URI of the asset.
+- `asset/source` exports the source code of the asset.
 - `asset/bytes` exports a [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) view of the asset.
-- `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
-
-When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Modules in webpack 5, you might want to stop Asset Modules from processing your assets again as that would result in asset duplication. This can be done by setting the asset's module type to `'javascript/auto'`.
-
-**webpack.config.js**
-
-```diff
-module.exports = {
-  module: {
-   rules: [
-      {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            }
-          },
-        ],
-+       type: 'javascript/auto'
-      },
-   ]
-  },
-}
-```
-
-To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
-
-**webpack.config.js**
-
-```diff
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(png|jpg|gif)$/i,
-+       dependency: { not: ['url'] },
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-            },
-          },
-        ],
-      },
-    ],
-  }
-}
-```
+- `asset` automatically chooses between exporting a data URI and emitting a separate file.
 
 ## Public Path
 
@@ -478,72 +420,6 @@ block.textContent = exampleText; // 'Hello world';
 ```
 
 All `.txt` files will be injected into the bundles as is.
-
-## Replacing Inline Loader Syntax
-
-Before Asset Modules and Webpack 5, it was possible to use [inline syntax](https://webpack.js.org/concepts/loaders/#inline) with the legacy loaders mentioned above.
-
-It is now recommended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.
-
-For example, in the case of replacing `raw-loader` with `asset/source` type:
-
-```diff
-- import myModule from 'raw-loader!my-module';
-+ import myModule from 'my-module?raw';
-```
-
-and in the webpack configuration:
-
-```diff
-module: {
-    rules: [
-    // ...
-+     {
-+       resourceQuery: /raw/,
-+       type: 'asset/source',
-+     }
-    ]
-  },
-```
-
-and if you'd like to exclude raw assets from being processed by other loaders, use a negative condition:
-
-```diff
-module: {
-    rules: [
-    // ...
-+     {
-+       test: /\.m?js$/,
-+       resourceQuery: { not: [/raw/] },
-+       use: [ ... ]
-+     },
-      {
-        resourceQuery: /raw/,
-        type: 'asset/source',
-      }
-    ]
-  },
-```
-
-or a `oneOf` list of rules. Here only the first matching rule will be applied:
-
-```diff
-module: {
-    rules: [
-    // ...
-+     { oneOf: [
-        {
-          resourceQuery: /raw/,
-          type: 'asset/source',
-        },
-+       {
-+         test: /\.m?js$/,
-+         use: [ ... ]
-+       },
-+     ] }
-    ]
-  },
-```
 
 ## Disable emitting assets
 
