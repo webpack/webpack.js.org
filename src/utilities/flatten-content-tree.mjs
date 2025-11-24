@@ -7,11 +7,13 @@ export default (tree) => {
     }
 
     if ('children' in node) {
-      node.children.map(crawl);
+      node.children.forEach(crawl);
     }
   };
 
-  tree.children.map(crawl);
+  if (Array.isArray(tree.children)) {
+    tree.children.forEach(crawl);
+  }
 
   return paths;
 };

@@ -1,3 +1,6 @@
-const isClient = window !== undefined && window.document !== undefined;
+// Guard against ReferenceError in non-browser/SSR environments
+// and use a consistent ESM default export.
+const isClient =
+  typeof window !== 'undefined' && typeof window.document !== 'undefined';
 
-module.exports = isClient;
+export default isClient;

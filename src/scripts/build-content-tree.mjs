@@ -41,15 +41,16 @@ function buildContentTree(source, output) {
     dir: source,
   });
 
-  fs.writeFileSync(
-    path.resolve(output),
-    JSON.stringify(content, null, 2),
-    (error) => {
-      if (error) {
-        console.log('scripts/build-content-tree', error);
-      } else {
-        console.log('Successfully built content tree file at ' + output);
-      }
-    }
-  );
+  // fs.writeFileSync does not accept a callback; wrap with try/catch and
+  // log a clear success or error instead.
+  try {
+    fs.writeFileSync(
+      path.resolve(output),
+      JSON.stringify(content, null, 2)
+    );
+    console.log('Successfully built content tree file at ' + output);
+  } catch (error) {
+    console.error('scripts/build-content-tree', error);
+    process.exitCode = 1;
+  }
 }
