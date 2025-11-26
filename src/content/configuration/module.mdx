@@ -277,11 +277,15 @@ module.exports = {
         // Enable/disable `@import` at-rules handling, available since webpack 5.97.0
         // type: boolean
         import: true,
+        // Enable/disable url()/image-set()/src()/image() functions handling, available since webpack 5.97.0
+        // type: boolean
+        url: true,
         // Use ES modules named export for css exports, available since webpack 5.90.0
         // type: boolean
         namedExports: true,
-        // Enable/disable url()/image-set()/src()/image() functions handling, available since webpack 5.97.0
-        url: true,
+        // Configure how CSS content is exported
+        // type: string
+        exportType: 'link',
       },
       'css/auto': {
         // ditto
@@ -354,6 +358,39 @@ This option enables the handling of `@import` at-rules in CSS files. When set to
 
 T> To filter specific imports, you can use Webpack's built-in [IgnorePlugin](/plugins/ignore-plugin/). The [`filter` option](/loaders/css-loader/#filter), as available in `css-loader`, is not supported.
 
+#### module.parser.css.url
+
+This option enables or disables the handling of URLs in functions such as `url()`, `image-set()`, `src()`, and `image()` within CSS files. When enabled, these URLs are resolved and processed by webpack.
+
+- Type: `boolean`
+- Available: 5.97.0+
+- Example:
+
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        css: {
+          url: true,
+        },
+      },
+    },
+  };
+  ```
+
+  ```css
+  /* styles.css */
+  .background {
+    background-image: url('./images/bg.jpg');
+  }
+
+  .icon {
+    content: image('./icons/star.svg');
+  }
+  ```
+
+T> To filter specific imports, you can use Webpack's built-in [IgnorePlugin](/plugins/ignore-plugin/). The [`filter` option](/loaders/css-loader/#filter), as available in `css-loader`, is not supported.
+
 #### module.parser.css.namedExports
 
 This option enables the use of ES modules named export for CSS exports. When set to `true`, the CSS module will export its classes and styles using named exports.
@@ -407,12 +444,12 @@ import { header, footer } from './styles.module.css';
 
 By enabling `namedExports`, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.
 
-#### module.parser.css.url
+### module.parser.css.exportType
 
-This option enables or disables the handling of URLs in functions such as `url()`, `image-set()`, `src()`, and `image()` within CSS files. When enabled, these URLs are resolved and processed by webpack.
+Configure how CSS content will be exported.
 
 - Type: `boolean`
-- Available: 5.97.0+
+- Available: 5.102.0+
 - Example:
 
   ```js
@@ -420,25 +457,19 @@ This option enables or disables the handling of URLs in functions such as `url()
     module: {
       parser: {
         css: {
-          url: true,
+          // ...
+          exportType: 'text',
         },
       },
     },
   };
   ```
 
-  ```css
-  /* styles.css */
-  .background {
-    background-image: url('./images/bg.jpg');
-  }
+Possible values: `'link' | 'text' | 'css-style-sheet'
 
-  .icon {
-    content: image('./icons/star.svg');
-  }
-  ```
-
-T> To filter specific imports, you can use Webpack's built-in [IgnorePlugin](/plugins/ignore-plugin/). The [`filter` option](/loaders/css-loader/#filter), as available in `css-loader`, is not supported.
+- `link` - extract CSS into own file and use `link` tags to inject into DOM.
+- `text` - store CSS in JS file and return using default export.
+- `css-style-sheet` - the default export is a constructable stylesheet (i.e. CSSStyleSheet). Useful for custom elements and shadow DOM.
 
 ### module.parser.javascript
 
@@ -757,6 +788,51 @@ module.exports = {
         // }
         // when `exportsDepth: 1`, `depth_2` and `depth_3` will not be flagged as `exportInfo`.
         exportsDepth: 1,
+      },
+    },
+  },
+};
+```
+
+### module.parser.json.namedExports
+
+Allow named exports for json of object type.
+
+- Type: `boolean`
+- Available: <Badge text='5.103.0+' />
+- Example:
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      json: {
+        // Example:
+        // import { myField } from "./file.json";
+        //
+        // console.log(myField);
+        namedExports: true,
+      },
+    },
+  },
+};
+```
+
+### module.parser.json.parse
+
+Function to parser content and return JSON.
+
+- Type: `((input: string) => Buffer | JsonValue)`
+- Example:
+
+```js
+const json5 = require('json5');
+
+module.exports = {
+  module: {
+    parser: {
+      json: {
+        parse: json5.parse,
       },
     },
   },

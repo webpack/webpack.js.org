@@ -38,9 +38,10 @@ The following options are supported:
 
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
-- `namespace` (`string`): See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
+- `ignoreList` (`string|RegExp|array`): Decide whether to ignore source files that match the specified value in source maps.
 - `module = true` (`boolean`): Indicates whether loaders should generate source maps.
 - `columns = true` (`boolean`): Indicates whether column mappings should be used.
+- `namespace` (`string`): Namespace prefix to allow multiple webpack roots in the devtools. See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
 - `noSources = false` (`boolean`): Prevents the source file content from being included in the source map.
 - `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
 - `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
