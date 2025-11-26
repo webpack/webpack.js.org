@@ -2787,16 +2787,31 @@ if none is passed in the default/configured formatter will be used.</li>
 <pre><code class="hljs language-ts"><span class="token punctuation">(</span>pathData<span class="token operator">:</span> PathData<span class="token punctuation">,</span> assetInfo<span class="token operator">?</span><span class="token operator">:</span> AssetInfo<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre>
 </li>
 <li>
-<p><code>moduleFilenameTemplate</code> (<code>string</code>): See <a href="/configuration/output/#outputdevtoolmodulefilenametemplate"><code>output.devtoolModuleFilenameTemplate</code></a>.</p>
+<p><code>ignoreList</code> (<code>string|RegExp|array</code>): Decide whether to ignore source files that match the specified value in source maps.</p>
 </li>
 <li>
 <p><code>module</code> (<code>boolean</code>): Indicates whether loaders should generate source maps (defaults to <code>true</code>).</p>
+</li>
+<li>
+<p><code>moduleFilenameTemplate</code> (<code>string</code>): See <a href="/configuration/output/#outputdevtoolmodulefilenametemplate"><code>output.devtoolModuleFilenameTemplate</code></a>.</p>
 </li>
 <li>
 <p><code>columns</code> (<code>boolean</code>): Indicates whether column mappings should be used (defaults to <code>true</code>).</p>
 </li>
 <li>
 <p><code>protocol</code> (<code>string</code>): Allows user to override default protocol (<code>webpack-internal://</code>)</p>
+</li>
+<li>
+<p><code>namespace</code> (<code>string</code>): Namespace prefix to allow multiple webpack roots in the devtools. See <a href="/configuration/output/#outputdevtoolnamespace"><code>output.devtoolNamespace</code></a>.</p>
+</li>
+<li>
+<p><code>noSources = false</code> (<code>boolean</code>): Prevents the source file content from being included in the source map.</p>
+</li>
+<li>
+<p><code>sourceRoot</code> (<code>string</code>): Provide a custom value for the <code>sourceRoot</code> property in source maps.</p>
+</li>
+<li>
+<p><code>debugIds</code> (<code>boolean</code>): If <code>true</code>, unique ids will be emitted in source and sourcemaps which streamlines identifying sourcemaps across different builds. See the <a href="https://github.com/tc39/ecma426/blob/main/proposals/debug-id.md">TC39 sourcemap debug ID proposal</a> for more details.</p>
 </li>
 </ul>
 <aside class="tip"><h6 class="tip__prefix">tip</h6><p>Setting <code>module</code> and/or <code>columns</code> to <code>false</code> will yield less accurate source maps but will also improve compilation performance significantly.</p></aside>
@@ -7665,13 +7680,16 @@ npx webpack --env <span class="token assign-left variable">APP_TARGET</span><spa
 <p><code>fallbackModuleFilenameTemplate</code> (<code>string</code>): See link above.</p>
 </li>
 <li>
-<p><code>namespace</code> (<code>string</code>): See <a href="/configuration/output/#outputdevtoolnamespace"><code>output.devtoolNamespace</code></a>.</p>
+<p><code>ignoreList</code> (<code>string|RegExp|array</code>): Decide whether to ignore source files that match the specified value in source maps.</p>
 </li>
 <li>
 <p><code>module = true</code> (<code>boolean</code>): Indicates whether loaders should generate source maps.</p>
 </li>
 <li>
 <p><code>columns = true</code> (<code>boolean</code>): Indicates whether column mappings should be used.</p>
+</li>
+<li>
+<p><code>namespace</code> (<code>string</code>): Namespace prefix to allow multiple webpack roots in the devtools. See <a href="/configuration/output/#outputdevtoolnamespace"><code>output.devtoolNamespace</code></a>.</p>
 </li>
 <li>
 <p><code>noSources = false</code> (<code>boolean</code>): Prevents the source file content from being included in the source map.</p>
