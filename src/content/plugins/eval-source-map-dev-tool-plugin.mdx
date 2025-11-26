@@ -37,10 +37,15 @@ The following options are supported:
   (pathData: PathData, assetInfo?: AssetInfo) => string;
   ```
 
-- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
+- `ignoreList` (`string|RegExp|array`): Decide whether to ignore source files that match the specified value in source maps.
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
+- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `protocol` (`string`): Allows user to override default protocol (`webpack-internal://`)
+- `namespace` (`string`): Namespace prefix to allow multiple webpack roots in the devtools. See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
+- `noSources = false` (`boolean`): Prevents the source file content from being included in the source map.
+- `sourceRoot` (`string`): Provide a custom value for the `sourceRoot` property in source maps.
+- `debugIds` (`boolean`): If `true`, unique ids will be emitted in source and sourcemaps which streamlines identifying sourcemaps across different builds. See the [TC39 sourcemap debug ID proposal](https://github.com/tc39/ecma426/blob/main/proposals/debug-id.md) for more details.
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 

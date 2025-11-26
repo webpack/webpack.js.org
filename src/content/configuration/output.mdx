@@ -508,6 +508,8 @@ module.exports = {
       globalThis: true,
       // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
       module: false,
+      // The environment supports object method shorthand ('{ module() {} }').
+      methodShorthand: true,
       // Determines if the node: prefix is generated for core module imports in environments that support it.
       // This is only applicable to Webpack runtime code.
       nodePrefixForCoreModules: false,
@@ -515,6 +517,8 @@ module.exports = {
       optionalChaining: true,
       // The environment supports template literals.
       templateLiteral: true,
+      // The environment supports `import.meta.dirname` and `import.meta.filename`.
+      importMetaDirnameAndFilename: false,
     },
   },
 };
@@ -2158,7 +2162,6 @@ T> It also adds some info about tree shaking to the generated bundle.
 ## output.publicPath
 
 - Type:
-
   - `function`
   - `string`
 
