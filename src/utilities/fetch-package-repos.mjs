@@ -16,23 +16,13 @@ const stat = promisify(fs.stat);
 const fetch = {
   loaders: [
     {
-      organization: 'webpack-contrib',
-      suffixes: ['-loader'],
-      hides: excludedLoaders,
-    },
-    {
       organization: 'webpack',
       suffixes: ['-loader'],
-      hides: [],
+      hides: excludedLoaders,
     },
     'babel/babel-loader',
   ],
   plugins: [
-    {
-      organization: 'webpack-contrib',
-      suffixes: ['-webpack-plugin', '-extract-plugin'],
-      hides: excludedPlugins,
-    },
     {
       organization: 'webpack',
       suffixes: ['-webpack-plugin', '-extract-plugin'],
@@ -65,6 +55,8 @@ async function main() {
           const { organization, suffixes, hides } = item;
 
           const repos = await paginate(organization);
+
+          console.log(repos);
 
           return repos
             .map((repo) => repo.full_name)
