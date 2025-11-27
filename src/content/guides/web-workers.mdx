@@ -74,7 +74,7 @@ self.onmessage = ({ data: { publicPath, ...otherData } }) => {
 
 ```js
 const worker = new Worker(new URL('./worker.js', import.meta.url));
-worker.postMessage({publicPath: window.__MY_GLOBAL_PUBLIC_PATH_VAR__});
+worker.postMessage({ publicPath: window.__MY_GLOBAL_PUBLIC_PATH_VAR__ });
 ```
 
 ## Node.js
