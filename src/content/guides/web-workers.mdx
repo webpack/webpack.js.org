@@ -52,6 +52,31 @@ self.onmessage = ({ data: { question } }) => {
 };
 ```
 
+## Set a public path from a variable
+
+When you set `__webpack_public_path__` from a variable, and use `publicPath` equal to `auto`, worker chunks will get a separate runtime, and Webpack runtime will set `publicPath` to automatically calculated public path, that is probably is not what you expect.
+
+To work around this issue, you need to set `__webpack_public_path__` from within the worker code. Here is an example:
+
+**worker.js**
+
+```js
+self.onmessage = ({ data: { publicPath, ...otherData } }) => {
+  if (publicPath) {
+    __webpack_public_path__ = publicPath;
+  }
+
+  // rest of the worker code
+}
+```
+
+**app.js**
+
+```js
+const worker = new Worker(new URL('./worker.js', import.meta.url));
+worker.postMessage({ publicPath: window.__MY_GLOBAL_PUBLIC_PATH_VAR__ });
+```
+
 ## Node.js
 
 Similar syntax is supported in Node.js (>= 12.17.0):
