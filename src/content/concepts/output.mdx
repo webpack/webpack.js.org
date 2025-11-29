@@ -9,6 +9,8 @@ contributors:
   - EugeneHlushko
 ---
 
+import CodeBlockWithCopy from "../../../components/CodeBlockWithCopy"
+
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
 
 ## Usage
@@ -26,7 +28,7 @@ module.exports = {
   },
 };
 ```
-  
+
 </CodeBlockWithCopy>
 
 This configuration would output a single `bundle.js` file into the `dist` directory.
