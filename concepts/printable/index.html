@@ -242,11 +242,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="usage"></span>Usage<a href="#usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The minimum requirement for the <code>output</code> property in your webpack configuration is to set its value to an object and provide an <a href="/configuration/output/#outputfilename"><code>output.filename</code></a> to use for the output file(s):</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token string">&#x27;bundle.js&#x27;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>This configuration would output a single <code>bundle.js</code> file into the <code>dist</code> directory.</p>
 <h2><span id="multiple-entry-points"></span>Multiple Entry Points<a href="#multiple-entry-points" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>If your configuration creates more than a single &quot;chunk&quot; (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use <a href="/configuration/output/#outputfilename">substitutions</a> to ensure that each file has a unique name.</p>
