@@ -2691,6 +2691,53 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>This is useful for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.</li>
 <li>Also for static site generators, mini-css-plugin and html-plugin, etc. where server side rendering is commonly needed.</li>
 </ol>
+<h4><span id="moduleparserjavascriptparse"></span>module.parser.javascript.parse<a href="#moduleparserjavascriptparse" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
+<span class="badge">5.103.0+</span>
+<p>Use a custom JavaScript parse function instead of webpack&#x27;s built-in parser.</p>
+<p>Return <code>ast</code>, <code>comments</code>, and <code>semicolons</code> to ensure webpack’s AST analysis works correctly.</p>
+<ul>
+<li>
+<p><code>ast</code> should be ESTree-compatible.</p>
+</li>
+<li>
+<p><code>comments</code> is an array of ESTree comment nodes.</p>
+</li>
+<li>
+<p><code>semicolons</code> is a set of positions where the parser inserted a semicolon.</p>
+</li>
+<li>
+<p>Type: <code>(code: string, options: ParseOptions) =&gt; ParseResult</code></p>
+</li>
+<li>
+<p>Example:</p>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    parser<span class="token operator">:</span> <span class="token punctuation">{</span>
+      javascript<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token function-variable function">parse</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">code<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> comments <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+          <span class="token keyword">const</span> semicolons <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">const</span> <span class="token function-variable function">onInsertedSemicolon</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">pos</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> semicolons<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">const</span> parseOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+            <span class="token operator">...</span>options<span class="token punctuation">,</span>
+            module<span class="token operator">:</span> options<span class="token punctuation">.</span>sourceType <span class="token operator">===</span> <span class="token string">&#x27;module&#x27;</span><span class="token punctuation">,</span>
+            loc<span class="token operator">:</span> options<span class="token punctuation">.</span>locations<span class="token punctuation">,</span>
+            onComment<span class="token operator">:</span> options<span class="token punctuation">.</span>comments <span class="token operator">?</span> comments <span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+            onInsertedSemicolon<span class="token operator">:</span> options<span class="token punctuation">.</span>semicolons
+              <span class="token operator">?</span> onInsertedSemicolon
+              <span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">const</span> ast <span class="token operator">=</span> meriyah<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> parseOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> <span class="token punctuation">{</span> ast<span class="token punctuation">,</span> comments<span class="token punctuation">,</span> semicolons <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+</li>
+</ul>
 <h3><span id="moduleparserjson"></span>module.parser.json<a href="#moduleparserjson" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Configure options for json parser.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -6896,7 +6943,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <!-- -->
 <span class="badge">5.103.0+</span>
 <p>The <code>dotenv</code> option enables webpack&#x27;s built-in environment variable loading from
-<code>.env</code> files. ## <code>dotenv</code></p>
+<code>.env</code> files.</p>
 <p><code>boolean</code> <code>object</code></p>
 <p>Enable and configure the built-in Dotenv plugin to load environment variables from <code>.env</code> files.</p>
 <p><strong>webpack.config.js</strong></p>
@@ -8119,8 +8166,11 @@ This is useful to synchronously defer code execution when it&#x27;s not possible
 <p>This feature requires the runtime environment to have <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"><code>Proxy</code></a> (ES6) support.</p>
 <p>Enables the following syntaxes:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> defer <span class="token operator">*</span> <span class="token keyword">as</span> module <span class="token keyword">from</span> <span class="token string">&#x27;module-name&#x27;</span><span class="token punctuation">;</span>
-<span class="token comment">// or</span>
 <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> module2 <span class="token keyword">from</span> <span class="token comment">/* webpackDefer: true */</span> <span class="token string">&#x27;module-name2&#x27;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Or using dynamic import</span>
+<span class="token keyword">import</span><span class="token punctuation">.</span><span class="token function">defer</span><span class="token punctuation">(</span><span class="token string">&#x27;module-name3&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackDefer: true */</span> <span class="token string">&#x27;module-name4&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// module-name is evaluated synchronously, then call doSomething() on it.</span>
@@ -8135,9 +8185,7 @@ This is useful to synchronously defer code execution when it&#x27;s not possible
 <p>TypeScript, Babel, SWC, and Flow.js can be configured to preserve the magic comment.</p>
 <p>Esbuild is <em>not</em> compatible with this feature (see <a href="https://github.com/evanw/esbuild/issues/1439">evanw/esbuild#1439</a> and <a href="https://github.com/evanw/esbuild/issues/309">evanw/esbuild#309</a>), but it may support this in the future.</p>
 <h4><span id="not-implemented"></span>Not implemented<a href="#not-implemented" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>The asynchronous form of this proposal is not implemented yet.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span><span class="token punctuation">.</span><span class="token function">defer</span><span class="token punctuation">(</span><span class="token string">&#x27;module-name&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// not implemented</span>
-<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackDefer: true */</span> <span class="token string">&#x27;module-name&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// not implemented</span></code></pre></div>
+<p>import.defer() is not yet supported for ContextModule (the import path is a dynamic expression).</p>
 <h3><span id="experimentsfuturedefaults"></span>experiments.futureDefaults<a href="#experimentsfuturedefaults" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Use defaults of the next major webpack and show warnings in any problematic places.</p>
 <p><strong>webpack.config.js</strong></p>
