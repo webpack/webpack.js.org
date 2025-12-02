@@ -1,0 +1,106 @@
+---
+title: ManifestPlugin
+group: webpack
+contributors:
+  - hai-x
+  - alexander-akait
+---
+
+<Badge text="5.103.0+" />
+
+The built-in `ManifestPlugin` generates one asset manifest for your build. Port from [`WebpackManifestPlugin`](https://github.com/shellscape/webpack-manifest-plugin).
+
+**webpack.config.js**
+
+```javascript
+new webpack.ManifestPlugin({
+  // options...
+});
+```
+
+## Options
+
+### `entrypoints`
+
+`boolean = true`
+
+Enables generation of the `entrypoints` section in the manifest.
+
+When `entrypoints` is enabled and one entry uses `dependOn`
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  entry: {
+    entry1: {
+      import: './src/file_1.js',
+      dependOn: 'entry2',
+    },
+    entry2: './src/file_2.js',
+  },
+  plugins: [
+    new webpack.ManifestPlugin({
+      filename: 'manifest.json',
+    }),
+  ],
+};
+```
+
+The resulting manifest will contain the parent/child relationship map
+
+**manifest.json**
+
+```json
+{
+  "entrypoints": {
+    "entry1": {
+      "imports": ["entry1.js"],
+      "parents": ["entry2"]
+    },
+    "entry2": {
+      "imports": ["entry2.js"]
+    }
+  }
+}
+```
+
+### `filename`
+
+`string = manifest.json`
+
+Specifies the filename of the output file on disk. By default the plugin will emit `manifest.json` inside the `output.path` directory.
+
+### `filter`
+
+`(item: ManifestItem) => boolean`
+
+Allows filtering the files which make up the manifest.
+
+### `generate`
+
+`function (manifest: ManifestObject) => ManifestObject`
+
+Receives the manifest object, modifies it, and returns the modified manifest.
+
+### `prefix`
+
+`string = "[publicpath]"`
+
+Specifies a path prefix for all keys in the manifest.
+
+### serialize
+
+`function (manifest: ManifestObject) => string = (manifest) => JSON.stringify(manifest, null, 2)`
+
+Receives the manifest object and returns the manifest string.
+
+Use `serialize` to output other formats, for example YAML:
+
+```javascript
+new webpack.ManifestPlugin({
+  serialize(manifest) {
+    return YAML.stringify(manifest, 4);
+  },
+});
+```

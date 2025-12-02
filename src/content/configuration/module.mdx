@@ -748,6 +748,50 @@ The `'relative'` value for `module.parser.javascript.url` is available since web
 1. This is useful for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.
 2. Also for static site generators, mini-css-plugin and html-plugin, etc. where server side rendering is commonly needed.
 
+#### module.parser.javascript.parse
+
+<Badge text="5.103.0+" />
+
+Use a custom JavaScript parse function instead of webpack's built-in parser.
+
+Return `ast`, `comments`, and `semicolons` to ensure webpack’s AST analysis works correctly.
+
+- `ast` should be ESTree-compatible.
+- `comments` is an array of ESTree comment nodes.
+- `semicolons` is a set of positions where the parser inserted a semicolon.
+
+- Type: `(code: string, options: ParseOptions) => ParseResult`
+- Example:
+
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          parse: (code, options) => {
+            const comments = [];
+            const semicolons = new Set();
+            const onInsertedSemicolon = (pos) => semicolons.add(pos);
+
+            const parseOptions = {
+              ...options,
+              module: options.sourceType === 'module',
+              loc: options.locations,
+              onComment: options.comments ? comments : undefined,
+              onInsertedSemicolon: options.semicolons
+                ? onInsertedSemicolon
+                : undefined,
+            };
+
+            const ast = meriyah.parse(code, parseOptions);
+            return { ast, comments, semicolons };
+          },
+        },
+      },
+    },
+  };
+  ```
+
 ### module.parser.json
 
 Configure options for json parser.

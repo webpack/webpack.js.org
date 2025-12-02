@@ -26,9 +26,9 @@ new webpack.EvalSourceMapDevToolPlugin(options);
 
 The following options are supported:
 
-- `test` (`string|RegExp|array`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
-- `include` (`string|RegExp|array`): Include source maps for module paths that match the given value.
-- `exclude` (`string|RegExp|array`): Exclude modules that match the given value from source map generation.
+- `test` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
+- `include` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): Include source maps for module paths that match the given value.
+- `exclude` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): Exclude modules that match the given value from source map generation.
 - `append` (`string|function`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file.
 
   Starting from version 5.84.0, webpack allows the `append` option to be a function that accepts path data and an asset info object as arguments, and returns a string.
@@ -37,7 +37,7 @@ The following options are supported:
   (pathData: PathData, assetInfo?: AssetInfo) => string;
   ```
 
-- `ignoreList` (`string|RegExp|array`): Decide whether to ignore source files that match the specified value in source maps.
+- `ignoreList` (`string` `RegExp` `function (source) => boolean` `[string, RegExp, function (source) => boolean]`): Decide whether to ignore source files that match the specified value in source maps.
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).

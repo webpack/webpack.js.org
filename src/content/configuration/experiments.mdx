@@ -69,7 +69,6 @@ module.exports = {
 When enabled, webpack can build remote resources that begin with the `http(s):` protocol.
 
 - Type:
-
   - `(string | RegExp | ((uri: string) => boolean))[]`
 
     A shortcut for [`experiments.buildHttp.allowedUris`](#experimentsbuildhttpalloweduris).
@@ -223,8 +222,11 @@ Enables the following syntaxes:
 
 ```js
 import defer * as module from 'module-name';
-// or
 import * as module2 from /* webpackDefer: true */ 'module-name2';
+
+// Or using dynamic import
+import.defer('module-name3');
+import(/* webpackDefer: true */ 'module-name4');
 
 export function f() {
   // module-name is evaluated synchronously, then call doSomething() on it.
@@ -251,12 +253,7 @@ Esbuild is _not_ compatible with this feature (see [evanw/esbuild#1439](https://
 
 #### Not implemented
 
-The asynchronous form of this proposal is not implemented yet.
-
-```js
-import.defer('module-name'); // not implemented
-import(/* webpackDefer: true */ 'module-name'); // not implemented
-```
+import.defer() is not yet supported for ContextModule (the import path is a dynamic expression).
 
 ### experiments.futureDefaults
 
@@ -278,7 +275,6 @@ module.exports = {
 Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
 
 - Type
-
   - `boolean`
   - `object`
 
