@@ -24,7 +24,9 @@ compiler.hooks.normalModuleFactory.tap('MyPlugin', (factory) => {
   factory.hooks.parser
     .for('javascript/auto')
     .tap('MyPlugin', (parser, options) => {
-      parser.hooks.someHook.tap(/* ... */);
+      parser.hooks.someHook.tap('MyPlugin', (data) => {
+        // ...
+      });
     });
 });
 ```
@@ -378,7 +380,7 @@ Triggered before renaming an identifier to determine if the renaming is allowed.
 - Callback Parameters: `expression`
 
 ```js
-var a = b;
+const a = b;
 
 parser.hooks.canRename.for('b').tap('MyPlugin', (expression) => {
   // returning true allows renaming
@@ -396,12 +398,12 @@ Triggered when renaming to get the new identifier. This hook will be called only
 - Callback Parameters: `expression`
 
 ```js
-var a = b;
+const a = b;
 
 parser.hooks.rename.for('b').tap('MyPlugin', (expression) => {});
 ```
 
-### assigned
+### assign (before parsing assigned expression)
 
 `SyncBailHook`
 
@@ -413,12 +415,12 @@ Called when parsing an `AssignmentExpression` before parsing the assigned expres
 ```js
 a += b;
 
-parser.hooks.assigned.for('a').tap('MyPlugin', (expression) => {
+parser.hooks.assign.for('a').tap('MyPlugin', (expression) => {
   // this is called before parsing b
 });
 ```
 
-### assign
+### assign (before parsing target)
 
 `SyncBailHook`
 
@@ -430,7 +432,7 @@ Called when parsing an `AssignmentExpression` before parsing the assign expressi
 ```js
 a += b;
 
-parser.hooks.assigned.for('a').tap('MyPlugin', (expression) => {
+parser.hooks.assign.for('a').tap('MyPlugin', (expression) => {
   // this is called before parsing a
 });
 ```

@@ -13,13 +13,20 @@ The `NormalModuleFactory` class extends `Tapable` and provides the following
 lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ```js
-NormalModuleFactory.hooks.someHook.tap(/* ... */);
+const nmf = NormalModuleFactory.hooks;
+nmf.someHook.tap('MyPlugin', (resolveData) => {
+  // ...
+});
 ```
 
-NormaleModuleFactory creates `Parser` and `Generator` instances which can be accessed by HookMaps. Identifier must be passed to tap into these:
+NormalModuleFactory creates `Parser` and `Generator` instances which can be accessed by HookMaps. Identifier must be passed to tap into these:
 
 ```js
-NormalModuleFactory.hooks.someHook.for('identifier').tap(/* ... */);
+NormalModuleFactory.hooks.parser
+  .for('javascript/esm')
+  .tap('MyPlugin', (parser, parserOptions) => {
+    // ...
+  });
 ```
 
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available

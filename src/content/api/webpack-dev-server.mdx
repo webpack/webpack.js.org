@@ -18,8 +18,8 @@ npm install --save-dev webpack webpack-dev-server
 Then require the modules in your Node.js script:
 
 ```js
-const Webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
+import Webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
 ```
 
 ## start
@@ -29,9 +29,9 @@ It instructs `webpack-dev-server` instance to start the server.
 **server.js**
 
 ```js
-const Webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('./webpack.config.js');
+import Webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import webpackConfig from './webpack.config.js';
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = { ...webpackConfig.devServer, open: true };
@@ -58,9 +58,9 @@ It instructs `webpack-dev-server` instance to start the server and then run the 
 **server.js**
 
 ```js
-const Webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('./webpack.config.js');
+import Webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import webpackConfig from './webpack.config.js';
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = { ...webpackConfig.devServer, open: true };
@@ -84,9 +84,9 @@ It instructs `webpack-dev-server` instance to stop the server.
 **server.js**
 
 ```js
-const Webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('./webpack.config.js');
+import Webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import webpackConfig from './webpack.config.js';
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = { ...webpackConfig.devServer, open: true };
@@ -120,9 +120,9 @@ It instructs `webpack-dev-server` instance to stop the server and then run the c
 **server.js**
 
 ```js
-const Webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const webpackConfig = require('./webpack.config.js');
+import Webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import webpackConfig from './webpack.config.js';
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = { ...webpackConfig.devServer, open: true };
@@ -153,7 +153,7 @@ Returns the internal `IPv4`/`IPv6` address asynchronously.
 **server.js**
 
 ```js
-const WebpackDevServer = require('webpack-dev-server');
+import WebpackDevServer from 'webpack-dev-server';
 
 const logInternalIPs = async () => {
   const localIPv4 = await WebpackDevServer.internalIP('v4');
@@ -173,7 +173,7 @@ Returns the internal `IPv4`/`IPv6` address synchronously.
 **server.js**
 
 ```js
-const WebpackDevServer = require('webpack-dev-server');
+import WebpackDevServer from 'webpack-dev-server';
 
 const localIPv4 = WebpackDevServer.internalIPSync('v4');
 const localIPv6 = WebpackDevServer.internalIPSync('v6');
