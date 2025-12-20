@@ -65,7 +65,7 @@ Export anything as a `default` or named export.
 
 ```javascript
 // Named exports
-export var Count = 5;
+export const Count = 5;
 export function Multiply(a, b) {
   return a * b;
 }
@@ -248,8 +248,8 @@ require(dependency: String);
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
 
 ```javascript
-var $ = require('jquery');
-var myModule = require('my-module');
+import $ from 'jquery';
+import myModule from 'my-module';
 ```
 
 It's possible to enable magic comments for `require` as well, see [`module.parser.javascript.commonjsMagicComments`](/configuration/module/#moduleparserjavascriptcommonjsmagiccomments) for more.
@@ -275,20 +275,20 @@ Multiple requires of the same module result in only one module execution and onl
 W> This is only needed in rare cases for compatibility!
 
 ```javascript
-var d1 = require('dependency');
-require('dependency') === d1;
-delete require.cache[require.resolve('dependency')];
-require('dependency') !== d1;
+import d1 from 'dependency';
+// In ESM, module caching is handled automatically.
+// Manual cache deletion like in CommonJS is not supported.
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept('dependency', (newModule) => {
+    // Handle module update here
+  });
+}
 ```
 
 ```javascript
 // in file.js
-require.cache[module.id] === module;
-require('./file.js') === module.exports;
-delete require.cache[module.id];
-require.cache[module.id] === undefined;
-require('./file.js') !== module.exports; // in theory; in praxis this causes a stack overflow
-require.cache[module.id] !== module;
+// In ESM, manual cache manipulation is not supported.
+// Webpack handles module caching internally.
 ```
 
 ### require.ensure
@@ -309,13 +309,13 @@ Split out the given `dependencies` to a separate bundle that will be loaded asyn
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `require.ensure` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 ```javascript
-var a = require('normal-dep');
+const a = require('normal-dep');
 
 if (module.hot) {
-  require.ensure(['b'], function (require) {
-    var c = require('c');
-
-    // Do something special...
+  import('b').then(() => {
+    import('c').then((c) => {
+      // Do something special...
+    });
   });
 }
 ```
@@ -330,6 +330,8 @@ The following parameters are supported in the order specified above:
 W> Although the implementation of `require` is passed as an argument to the `callback` function, using an arbitrary name e.g. `require.ensure([], function(request) { request('someModule'); })` isn't handled by webpack's static parser. Use `require` instead, e.g. `require.ensure([], function(require) { require('someModule'); })`.
 
 ## AMD
+
+W> These syntaxes are legacy. We highly recommend using ES6 Modules for modern applications.
 
 Asynchronous Module Definition (AMD) is a JavaScript specification that defines an interface for writing and loading modules. The following AMD methods are supported by webpack:
 
@@ -383,14 +385,18 @@ Similar to `require.ensure`, this will split the given `dependencies` into a sep
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use AMD with older browsers (e.g. Internet Explorer 11), remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 ```javascript
-require(['b'], function (b) {
-  var c = require('c');
+import('b').then((b) => {
+  import('c').then((c) => {
+    // b और c का इस्तेमाल करें
+  });
 });
 ```
 
 W> There is no option to provide a chunk name.
 
 ## Labeled Modules
+
+W> These syntaxes are legacy. We highly recommend using ES6 Modules for modern applications.
 
 The internal `LabeledModulesPlugin` enables you to use the following methods for exporting and requiring within your modules:
 
@@ -399,7 +405,7 @@ The internal `LabeledModulesPlugin` enables you to use the following methods for
 Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
 
 ```ts
-export: var answer = 42;
+export: const answer = 42;
 export: function method(value) {
   // Do something...
 };
@@ -414,7 +420,7 @@ Make all exports from the dependency available in the current scope. The `requir
 **some-dependency.js**
 
 ```ts
-export: var answer = 42;
+export: const answer = 42;
 export: function method(value) {
   // Do something...
 };
@@ -444,14 +450,21 @@ require.context(
 Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be resolved later on:
 
 ```javascript
-var context = require.context('components', true, /\.html$/);
-var componentA = context.resolve('componentA');
+const context = import.meta.webpackContext('components', {
+  recursive: true,
+  regExp: /\.html$/,
+});
+const componentA = context.resolve('componentA');
 ```
 
 If `mode` is set to `'lazy'`, the underlying modules will be loaded asynchronously:
 
 ```javascript
-var context = require.context('locales', true, /\.json$/, 'lazy');
+const context = import.meta.webpackContext('locales', {
+  recursive: true,
+  regExp: /\.json$/,
+  mode: 'lazy',
+});
 context('localeA').then((locale) => {
   // do something with locale
 });
@@ -468,12 +481,10 @@ require.include((dependency: String));
 Include a `dependency` without executing it. This can be used for optimizing the position of a module in the output chunks.
 
 ```javascript
-require.include('a');
-require.ensure(['a', 'b'], function (require) {
-  /* ... */
-});
-require.ensure(['a', 'c'], function (require) {
-  /* ... */
+import('a');
+import('b');
+import('c').then((moduleC) => {
+  // Use moduleC here
 });
 ```
 

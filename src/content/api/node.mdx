@@ -26,13 +26,7 @@ To start using the webpack Node.js API, first install webpack if you haven’t y
 npm install --save-dev webpack
 ```
 
-Then require the webpack module in your Node.js script:
-
-```js
-const webpack = require('webpack');
-```
-
-Or if you prefer ES2015:
+Then import the webpack module in your Node.js script:
 
 ```js
 import webpack from 'webpack';
@@ -43,7 +37,7 @@ import webpack from 'webpack';
 The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
 ```js
-const webpack = require('webpack');
+import webpack from 'webpack';
 
 webpack({}, (err, stats) => {
   if (err || stats.hasErrors()) {
@@ -95,7 +89,7 @@ Calling the `run` method on the `Compiler` instance is much like the quick run
 method mentioned above:
 
 ```js
-const webpack = require('webpack');
+import webpack from 'webpack';
 
 const compiler = webpack({
   // ...
@@ -123,7 +117,7 @@ watch(watchOptions, callback);
 ```
 
 ```js
-const webpack = require('webpack');
+import webpack from 'webpack';
 
 const compiler = webpack({
   // ...
@@ -240,7 +234,7 @@ stats.toString({
 Here’s an example of `stats.toString()` usage:
 
 ```js
-const webpack = require('webpack');
+import webpack from 'webpack';
 
 webpack(
   {
@@ -270,7 +264,7 @@ an array of options, webpack applies separate compilers and calls the
 `callback` after all compilers have been executed.
 
 ```js
-var webpack = require('webpack');
+import webpack from 'webpack';
 
 webpack(
   [
@@ -298,7 +292,7 @@ For good error handling, you need to account for these three types of errors:
 Here’s an example that does all that:
 
 ```js
-const webpack = require('webpack');
+import webpack from 'webpack';
 
 webpack(
   {
@@ -339,8 +333,8 @@ replace the default `outputFileSystem` with
 instead of to disk:
 
 ```js
-const { createFsFromVolume, Volume } = require('memfs');
-const webpack = require('webpack');
+import { createFsFromVolume, Volume } from 'memfs';
+import webpack from 'webpack';
 
 const fs = createFsFromVolume(new Volume());
 const compiler = webpack({

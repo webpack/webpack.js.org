@@ -48,9 +48,9 @@ Either `return` or `this.callback` can be used to return the transformed `conten
 **sync-loader.js**
 
 ```javascript
-module.exports = function (content, map, meta) {
+export default function (content, map, meta) {
   return someSyncOperation(content);
-};
+}
 ```
 
 The `this.callback` method is more flexible as you pass multiple arguments instead of using `content` only.
@@ -58,10 +58,10 @@ The `this.callback` method is more flexible as you pass multiple arguments inste
 **sync-loader-with-multiple-results.js**
 
 ```javascript
-module.exports = function (content, map, meta) {
+export default function (content, map, meta) {
   this.callback(null, someSyncOperation(content), map, meta);
   return; // always return undefined when calling callback()
-};
+}
 ```
 
 ### Asynchronous Loaders
@@ -71,10 +71,10 @@ For asynchronous loaders, you can return the transformed `content` from an `asyn
 **async-loader.js**
 
 ```javascript
-module.exports = async function (content, map, meta) {
+export default async function (content, map, meta) {
   var result = await someAsyncOperation(content);
   return result;
-};
+}
 ```
 
 Or you can use [`this.async`](#thisasync) to retrieve the `callback` function:
@@ -82,25 +82,25 @@ Or you can use [`this.async`](#thisasync) to retrieve the `callback` function:
 **async-loader-with-callback.js**
 
 ```javascript
-module.exports = function (content, map, meta) {
+export default function (content, map, meta) {
   var callback = this.async();
   someAsyncOperation(content, function (err, result) {
     if (err) return callback(err);
     callback(null, result, map, meta);
   });
-};
+}
 ```
 
 **async-loader-with-multiple-results.js**
 
 ```javascript
-module.exports = function (content, map, meta) {
+export default function (content, map, meta) {
   var callback = this.async();
   someAsyncOperation(content, function (err, result, sourceMaps, meta) {
     if (err) return callback(err);
     callback(null, result, sourceMaps, meta);
   });
-};
+}
 ```
 
 T> Loaders were originally designed to work in synchronous loader pipelines, like Node.js (using [enhanced-require](https://github.com/webpack/enhanced-require)), _and_ asynchronous pipelines, like in webpack. However, since expensive synchronous computations are a bad idea in a single-threaded environment like Node.js, we advise making your loader asynchronous if possible. Synchronous loaders are ok if the amount of computation is trivial.
@@ -112,13 +112,13 @@ By default, the resource file is converted to a UTF-8 string and passed to the l
 **raw-loader.js**
 
 ```javascript
-module.exports = function (content) {
+export default function (content) {
   assert(content instanceof Buffer);
   return someSyncOperation(content);
   // return value can be a `Buffer` too
   // This is also allowed if loader is not "raw"
-};
-module.exports.raw = true;
+}
+export const raw = true;
 ```
 
 ### Pitching Loader
@@ -130,7 +130,7 @@ T> Loaders may be added inline in requests and disabled via inline prefixes, whi
 For the following configuration of [`use`](/configuration/module/#ruleuse):
 
 ```javascript
-module.exports = {
+export default {
   //...
   module: {
     rules: [
@@ -160,11 +160,11 @@ So why might a loader take advantage of the "pitching" phase?
 First, the `data` passed to the `pitch` method is exposed in the execution phase as well under `this.data` and could be useful for capturing and sharing information from earlier in the cycle.
 
 ```javascript
-module.exports = function (content) {
+export default function (content) {
   return someSyncOperation(content, this.data.value);
-};
+}
 
-module.exports.pitch = function (remainingRequest, precedingRequest, data) {
+export const pitch = function (remainingRequest, precedingRequest, data) {
   data.value = 42;
 };
 ```
@@ -172,16 +172,16 @@ module.exports.pitch = function (remainingRequest, precedingRequest, data) {
 Second, if a loader delivers a result in the `pitch` method, the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
 
 ```javascript
-module.exports = function (content) {
+export default function (content) {
   return someSyncOperation(content);
-};
+}
 
-module.exports.pitch = function (remainingRequest, precedingRequest, data) {
+export const pitch = function (remainingRequest, precedingRequest, data) {
   if (someCondition()) {
     return (
-      'module.exports = require(' +
+      'import _from_loader from ' +
       JSON.stringify('-!' + remainingRequest) +
-      ');'
+      '; export default _from_loader;'
     );
   }
 };
@@ -206,7 +206,7 @@ Given the following example, this require call is used:
 In `/abc/file.js`:
 
 ```javascript
-require('./loader1?xyz!loader2!./resource?rrr');
+import './loader1?xyz!loader2!./resource?rrr';
 ```
 
 ### this.addContextDependency
@@ -397,10 +397,10 @@ All dependencies of the resolving operation are automatically added as dependenc
 Information about HMR for loaders.
 
 ```javascript
-module.exports = function (source) {
+export default function (source) {
   console.log(this.hot); // true if HMR is enabled via --hot flag or webpack configuration
   return source;
-};
+}
 ```
 
 ### this.hashDigest
@@ -452,7 +452,7 @@ An alternative lightweight solution for the child compiler to compile and execut
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -624,7 +624,7 @@ Access to the following utilities.
 **my-sync-loader.js**
 
 ```js
-module.exports = function (content) {
+export default function (content) {
   this.utils.contextify(
     this.context,
     this.utils.absolutify(this.context, './index.js')
@@ -637,7 +637,7 @@ module.exports = function (content) {
   mainHash.digest('hex');
   // …
   return content;
-};
+}
 ```
 
 ### this.version
@@ -703,7 +703,7 @@ For example:
 **./src/index.js**
 
 ```javascript
-require('./loader!./lib');
+import './loader!./lib';
 ```
 
 Throwing an error from loader:
@@ -711,9 +711,9 @@ Throwing an error from loader:
 **./src/loader.js**
 
 ```javascript
-module.exports = function (source) {
+export default function (source) {
   throw new Error('This is a Fatal Error!');
-};
+}
 ```
 
 Or pass an error to the callback in async mode:
@@ -721,11 +721,11 @@ Or pass an error to the callback in async mode:
 **./src/loader.js**
 
 ```javascript
-module.exports = function (source) {
+export default function (source) {
   const callback = this.async();
   //...
   callback(new Error('This is a Fatal Error!'), source);
-};
+}
 ```
 
 The module will get bundled like this:
@@ -801,9 +801,9 @@ The loader could look like this:
 **extract-style-loader/index.js**
 
 ```javascript
-const getStylesLoader = require.resolve('./getStyles');
+import getStylesLoader from './getStyles';
 
-module.exports = function (source) {
+export default function (source) {
   if (STYLES_REGEXP.test(source)) {
     source = source.replace(STYLES_REGEXP, '');
     return `import ${JSON.stringify(
@@ -814,16 +814,16 @@ module.exports = function (source) {
     )};${source}`;
   }
   return source;
-};
+}
 ```
 
 **extract-style-loader/getStyles.js**
 
 ```javascript
-module.exports = function (source) {
+export default function (source) {
   const match = source.match(STYLES_REGEXP);
   return match[0];
-};
+}
 ```
 
 ## Logging

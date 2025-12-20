@@ -50,12 +50,12 @@ export class MyWebpackPlugin {
 **my-webpack-loader.js**
 
 ```js
-module.exports = function (source) {
+export default function (source) {
   // you can get Logger with `this.getLogger` in your webpack loaders
   const logger = this.getLogger('my-webpack-loader');
   logger.info('hello Logger');
   return source;
-};
+}
 ```
 
 As you can see from the above `my-webpack-plugin.js` example, there're two types of logging methods,
@@ -84,12 +84,12 @@ It's advised to use `compilation.getLogger` when plugin/logging is related to th
 
 Runtime logger API is only intended to be used as a development tool, it is not intended to be included in [production mode](/configuration/mode/#mode-production).
 
-- `const logging = require('webpack/lib/logging/runtime')`: to use the logger in runtime, require it directly from webpack
+- `import logging from 'webpack/lib/logging/runtime'`: to use the logger in runtime, require it directly from webpack
 - `logging.getLogger('name')`: to get individual logger by name
 - `logging.configureDefaultLogger(...)`: to override the default logger.
 
 ```javascript
-const logging = require('webpack/lib/logging/runtime');
+import logging from 'webpack/lib/logging/runtime';
 logging.configureDefaultLogger({
   level: 'log',
   debug: /something/,

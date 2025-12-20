@@ -36,31 +36,31 @@ Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replaceme
 The ID of the current module.
 
 ```javascript
-module.id === require.resolve('./file.js');
+console.log(import.meta.url);
 ```
 
-## module.exports (CommonJS)
+## export default
 
-Defines the value that will be returned when a consumer makes a `require` call to the module (defaults to a new object).
+Defines the value that will be returned when a consumer makes a `import` call to the module (defaults to a new object).
 
 ```javascript
-module.exports = function doSomething() {
+export default function doSomething() {
   // Do something...
-};
+}
 ```
 
 W> This CANNOT be used in an asynchronous function.
 
 ## exports (CommonJS)
 
-This variable is equal to the default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
+Named exports allow you to export multiple variables, functions, or objects from a single module. Unlike a default export, you must use the exact name when importing these values.
 
 ```javascript
-exports.someValue = 42;
-exports.anObject = {
+export const someValue = 42;
+export const anObject = {
   x: 123,
 };
-exports.aFunction = function doSomething() {
+export const aFunction = function doSomething() {
   // Do something
 };
 ```
@@ -167,10 +167,10 @@ If used inside an expression that is parsed by the Parser, the configuration opt
 
 ## \_\_resourceQuery (webpack-specific)
 
-The resource query of the current module. If the following `require` call was made, then the query string would be available in `file.js`.
+The resource query of the current module. If the following `import` call was made, then the query string would be available in `file.js`.
 
 ```javascript
-require('file.js?test');
+import 'file.js?test';
 ```
 
 **file.js**
@@ -265,14 +265,12 @@ In modules, `__webpack_exports_info__` is available to allow exports introspecti
 - `__webpack_exports_info__.<exportName>.used` is `false` when the export is known to be unused, `true` otherwise
 
 - `__webpack_exports_info__.<exportName>.useInfo` is
-
   - `false` when the export is known to be unused
   - `true` when the export is known to be used
   - `null` when the export usage could depend on runtime conditions
   - `undefined` when no info is available
 
 - `__webpack_exports_info__.<exportName>.provideInfo` is
-
   - `false` when the export is known to be not provided
   - `true` when the export is known to be provided
   - `null` when the export provision could depend on runtime conditions

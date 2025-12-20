@@ -503,7 +503,7 @@ In case your configuration file exports multiple configurations, you can use `--
 Consider the following `webpack.config.js`:
 
 ```js
-module.exports = [
+export default [
   {
     output: {
       filename: './dist-first.js',
@@ -617,7 +617,7 @@ In addition to the customized `env` showed above, there are some built-in ones u
 Note that you can not access those built-in environment variables inside the bundled code.
 
 ```javascript
-module.exports = (env, argv) => {
+export default (env, argv) => {
   return {
     mode: env.WEBPACK_SERVE ? 'development' : 'production',
   };
@@ -649,7 +649,7 @@ When the `mode` option is not specified in the configuration, you can use the `-
 If your configuration exports a function, the value of `--config-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--config-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
 
 ```javascript
-module.exports = (env, argv) => {
+export default (env, argv) => {
   console.log(argv.defineProcessEnvNodeEnv); // 'production' if --config-node-env production is used
   return {
     // your configuration
