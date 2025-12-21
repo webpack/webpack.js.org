@@ -116,6 +116,10 @@ export default (env) =>
             to: './assets/',
           },
           {
+            from: './assets/supporters-*.png',
+            to: './assets/',
+          },
+          {
             from: './assets/robots.txt',
             to: './',
           },

@@ -252,9 +252,11 @@ export default class Support extends Component {
                           : SmallIcon
                       }
                       alt={
-                        supporter.name || supporter.slug
-                          ? `${supporter.name || supporter.slug}'s avatar`
-                          : 'avatar'
+                        supporter.alt
+                          ? supporter.alt
+                          : supporter.name || supporter.slug
+                            ? `${supporter.name || supporter.slug}'s avatar`
+                            : 'avatar'
                       }
                       onError={this._handleImgError}
                     />
