@@ -243,9 +243,6 @@ export default class Support extends Component {
                     `https://opencollective.com/${supporter.slug}`
                   }
                 >
-                  <div>
-                    Debug (in {inView} inView): {supporter.avatar}
-                  </div>
                   {
                     <img
                       className={`support__${rank}-avatar`}
