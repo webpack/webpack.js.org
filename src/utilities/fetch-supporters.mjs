@@ -81,15 +81,30 @@ const transactionsGraphqlQuery = `query transactions($dateFrom: DateTime, $limit
   }
 }`;
 
-const nodeToSupporter = (node) => ({
-  name: node.account.name,
-  slug: node.account.slug,
-  website: node.account.website,
-  avatar: node.account.imageUrl,
-  firstDonation: node.createdAt,
-  totalDonations: node.totalDonations.value * 100,
-  monthlyDonations: 0,
-});
+const additionalInformation = {
+  'gem-m': {
+    website: 'https://www.noneedtostudy.com/take-my-praxis-test-for-me',
+    avatar:
+      'https://webpack.js.org/assets/supporters-noneedtostudy-logo-medium.png',
+    alt: 'Take My Praxis Test For Me - NoNeedToStudy.com Praxis Tutors',
+  },
+};
+
+const nodeToSupporter = (node) => {
+  const { slug } = node.account;
+  const info = additionalInformation[slug];
+
+  return {
+    name: node.account.name,
+    website: node.account.website,
+    avatar: node.account.imageUrl,
+    ...info,
+    slug: slug,
+    firstDonation: node.createdAt,
+    totalDonations: node.totalDonations.value * 100,
+    monthlyDonations: 0,
+  };
+};
 
 const getAllNodes = async (graphqlQuery, getNodes) => {
   const body = {
@@ -113,7 +128,7 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
     remaining = 100;
   }
   // Handling pagination if necessary
-   
+
   while (true) {
     if (remaining === 0) {
       console.log(`Rate limit exceeded. Sleeping until ${new Date(reset)}.`);
