@@ -117,7 +117,7 @@ export default (env) =>
           },
           {
             from: './assets/supporters-*.png',
-            to: './assets/',
+            to: './',
           },
           {
             from: './assets/robots.txt',

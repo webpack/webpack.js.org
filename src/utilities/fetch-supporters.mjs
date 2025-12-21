@@ -85,7 +85,7 @@ const additionalInformation = {
   'gem-m': {
     website: 'https://www.noneedtostudy.com/take-my-praxis-test-for-me',
     avatar:
-      'https://webpack.js.org/assets/supporters-logo-noneedtostudy.com-logo-medium.png',
+      'https://webpack.js.org/assets/supporters-noneedtostudy-logo-medium.png',
     alt: 'Take My Praxis Test For Me - NoNeedToStudy.com Praxis Tutors',
   },
 };
