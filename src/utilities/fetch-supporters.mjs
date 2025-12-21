@@ -83,6 +83,7 @@ const transactionsGraphqlQuery = `query transactions($dateFrom: DateTime, $limit
 
 const additionalInformation = {
   'gem-m': {
+    name: 'Donor',
     website: 'https://www.noneedtostudy.com/take-my-praxis-test-for-me',
     avatar:
       'https://webpack.js.org/assets/supporters-noneedtostudy-logo-medium.png',
