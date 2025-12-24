@@ -17,6 +17,7 @@ Because it's a standard ECMAscript Module, you **can do the following**:
 - use JavaScript control flow expressions, e.g. the `?:` operator
 - use constants or variables for often used values
 - write and execute functions to generate a part of the configuration
+- emulate `__dirname` using `fileURLToPath(import.meta.url)` and `path.dirname()` for path resolution
 
 Use these features when appropriate.
 
@@ -36,12 +37,16 @@ The examples below describe how webpack's configuration can be both expressive a
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   mode: 'development',
   entry: './foo.js',
   output: {
-    path: path.resolve(process.cwd(), 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'foo.bundle.js',
   },
 };

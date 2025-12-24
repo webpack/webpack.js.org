@@ -25,7 +25,7 @@ Turn on watch mode. This means that after the initial build, webpack will contin
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   watch: true,
 };
@@ -42,7 +42,7 @@ A set of options used to customize watch mode:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   watchOptions: {
     aggregateTimeout: 200,
@@ -58,7 +58,7 @@ module.exports = {
 Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
 
 ```javascript
-module.exports = {
+export default {
   //...
   watchOptions: {
     aggregateTimeout: 600,
@@ -75,7 +75,7 @@ For some systems, watching many files can result in a lot of CPU or memory usage
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   watchOptions: {
     ignored: /node_modules/,
@@ -88,7 +88,7 @@ Alternatively, a glob pattern may be used:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   watchOptions: {
     ignored: '**/node_modules',
@@ -101,7 +101,7 @@ It is also possible to use multiple glob patterns:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   watchOptions: {
     ignored: ['**/files/**/*.js', '**/node_modules'],
@@ -112,8 +112,8 @@ module.exports = {
 In addition, you can specify an absolute path:
 
 ```js
-const path = require('path');
-module.exports = {
+import path from 'path';
+export default {
   //...
   watchOptions: {
     ignored: [path.posix.resolve(__dirname, './ignored-dir')],
@@ -134,7 +134,7 @@ Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   watchOptions: {
     poll: 1000, // Check for changes every second
@@ -152,7 +152,7 @@ Follow symbolic links while looking for a file. This is usually not needed as we
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     //...
     watchOptions: {
       followSymlinks: true,
@@ -168,7 +168,7 @@ Stop watching when stdin stream has ended.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     //...
     watchOptions: {
       stdin: true,

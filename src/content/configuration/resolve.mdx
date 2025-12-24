@@ -32,7 +32,7 @@ Configure how modules are resolved. For example, when calling `import 'lodash'` 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     // configuration options
@@ -49,9 +49,9 @@ Create aliases to `import` or `require` certain modules more easily. For example
 **webpack.config.js**
 
 ```js
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   resolve: {
     alias: {
@@ -79,9 +79,9 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 **webpack.config.js**
 
 ```js
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   resolve: {
     alias: {
@@ -103,7 +103,7 @@ You can also use wildcards (`*`) in your alias configuration to create more flex
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     alias: {
@@ -149,7 +149,7 @@ W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated
 W> `[string]` values are supported since webpack 5.
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     alias: {
@@ -165,7 +165,7 @@ module.exports = {
 Setting `resolve.alias` to `false` will tell webpack to ignore a module.
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     alias: {
@@ -185,7 +185,7 @@ Specify a field, such as `browser`, to be parsed according to [this specificatio
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     aliasFields: ['browser'],
@@ -201,7 +201,7 @@ Configure resolve options by the type of module request.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     // ...
     resolve: {
       byDependency: {
@@ -229,7 +229,7 @@ Enables caching of successfully resolved requests, allowing cache entries to be 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     cache: true,
@@ -246,7 +246,7 @@ A function which decides whether a request should be cached or not. An object is
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     cachePredicate: (module) => {
@@ -272,7 +272,7 @@ Condition names for [`exports` field](https://nodejs.org/api/packages.html#packa
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     conditionNames: ['require', 'node'],
@@ -312,7 +312,7 @@ For example,
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     conditionNames: ['require', 'node'],
@@ -331,7 +331,7 @@ If you want to add your custom field names while still retaining the default Web
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     conditionNames: ['my-custom-condition', '...'],
@@ -344,7 +344,7 @@ Alternatively, to prioritize the default conditions first, then add your custom 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     conditionNames: ['...', 'my-custom-condition'],
@@ -361,7 +361,7 @@ The JSON files to use for descriptions.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     descriptionFiles: ['package.json'],
@@ -378,7 +378,7 @@ If `true`, it will not allow extension-less files. So by default `require('./foo
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     enforceExtension: false,
@@ -395,7 +395,7 @@ Fields in package.json that are used for resolving module requests. See [package
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     exportsFields: ['exports', 'myCompanyExports'],
@@ -412,7 +412,7 @@ An object which maps extension to extension aliases.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     extensionAlias: {
@@ -432,7 +432,7 @@ Attempt to resolve these extensions in order. If multiple files share the same n
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     extensions: ['.js', '.json', '.wasm'],
@@ -449,7 +449,7 @@ import File from '../path/to/file';
 Note that using `resolve.extensions` like above will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. However you can use `'...'` to access the default extensions:
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     extensions: ['.ts', '...'],
@@ -466,7 +466,7 @@ Redirect module requests when normal resolving fails.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     fallback: {
@@ -480,7 +480,7 @@ module.exports = {
 Webpack 5 no longer polyfills Node.js core modules automatically which means if you use them in your code running in browsers or alike, you will have to install compatible modules from npm and include them yourself. Here is a list of polyfills webpack has used before webpack 5:
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     fallback: {
@@ -521,7 +521,7 @@ When set to true, this option treats user-specified requests as fully specified.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     fullySpecified: true,
@@ -538,7 +538,7 @@ Fields from `package.json` which are used to provide the internal requests of a 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     importsFields: ['browser', 'module', 'main'],
@@ -557,7 +557,7 @@ When the `target` property is set to `webworker`, `web`, or left unspecified:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     mainFields: ['browser', 'module', 'main'],
@@ -570,7 +570,7 @@ For any other target (including `node`):
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     mainFields: ['module', 'main'],
@@ -598,7 +598,7 @@ The filename to be used while resolving directories.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     mainFiles: ['index'],
@@ -621,7 +621,7 @@ With an absolute path, it will only search in the given directory.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     modules: ['node_modules'],
@@ -634,9 +634,9 @@ If you want to add a directory to search in that takes precedence over `node_mod
 **webpack.config.js**
 
 ```js
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -653,7 +653,7 @@ A list of additional resolve plugins which should be applied. It allows plugins 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     plugins: [new DirectoryNamedWebpackPlugin()],
@@ -672,7 +672,7 @@ Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     preferAbsolute: true,
@@ -689,7 +689,7 @@ When enabled, webpack would prefer to resolve module requests as relative reques
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     preferRelative: true,
@@ -718,7 +718,7 @@ A list of resolve restrictions to restrict the paths that a request can be resol
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     restrictions: [/\.(sass|scss|css)$/],
@@ -736,7 +736,7 @@ A list of directories where requests of server-relative URLs (starting with '/')
 
 ```js
 const fixtures = path.resolve(__dirname, 'fixtures');
-module.exports = {
+export default {
   //...
   resolve: {
     roots: [__dirname, fixtures],
@@ -755,7 +755,7 @@ When enabled, symlinked resources are resolved to their _real_ path, not their s
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     symlinks: true,
@@ -772,7 +772,7 @@ Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     unsafeCache: true,
@@ -804,7 +804,7 @@ const unsafeCacheHandler = {
   },
 };
 const theProxiedCache = new Proxy(realUnsafeCache, unsafeCacheHandler);
-module.exports = {
+export default {
   //...
   resolve: {
     unsafeCache: theProxiedCache,
@@ -823,7 +823,7 @@ Use synchronous filesystem calls for the resolver.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolve: {
     useSyncFileSystemCalls: true,
@@ -840,7 +840,7 @@ This set of options is identical to the `resolve` property set above, but is use
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   resolveLoader: {
     modules: ['node_modules'],

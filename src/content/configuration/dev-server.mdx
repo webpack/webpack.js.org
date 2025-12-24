@@ -40,9 +40,9 @@ This set of options is picked up by [webpack-dev-server](https://github.com/webp
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: {
@@ -103,9 +103,9 @@ Allows you to use custom server applications, such as `connect`, `fastify`, etc.
 **webpack.config.js**
 
 ```javascript
-const connect = require('connect');
+import connect from 'connect';
 
-module.exports = {
+export default {
   //...
   devServer: {
     app: () => connect(),
@@ -122,7 +122,7 @@ This option allows you to allowlist services that are allowed to access the dev 
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     allowedHosts: [
@@ -140,7 +140,7 @@ Mimicking Django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a 
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     // this achieves the same effect as the first example
@@ -162,7 +162,7 @@ When set to `'all'` this option bypasses host checking. **THIS IS NOT RECOMMENDE
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     allowedHosts: 'all',
@@ -181,7 +181,7 @@ When set to `'auto'` this option always allows `localhost`, [`host`](#devserverh
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     allowedHosts: 'auto',
@@ -204,7 +204,7 @@ This option broadcasts the server via [ZeroConf](http://www.zeroconf.org/) netwo
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     bonjour: true,
@@ -229,7 +229,7 @@ You can also pass [custom options](https://github.com/watson/bonjour#initializin
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     bonjour: {
@@ -251,7 +251,7 @@ Allows to set log level in the browser, e.g. before reloading, before an error o
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -276,7 +276,7 @@ Shows a full-screen overlay in the browser when there are compiler errors or war
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -313,7 +313,7 @@ For example, to disable compilation warnings, you can provide the following conf
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -340,7 +340,7 @@ For example, to ignore errors thrown by [`AbortController.abort()`](https://deve
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -368,7 +368,7 @@ Prints compilation progress in percentage in the browser.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -401,7 +401,7 @@ Tells dev-server the number of times it should try to reconnect the client. When
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -420,7 +420,7 @@ npx webpack serve --client-reconnect
 When set to `false` it will not try to reconnect.
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -439,7 +439,7 @@ npx webpack serve --no-client-reconnect
 You can also specify the exact number of times the client should try to reconnect.
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -466,7 +466,7 @@ T> Providing `'ws'` or `'sockjs'` to [`webSocketServer`](#devserverwebsocketserv
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -492,7 +492,7 @@ Using path to `CustomClient.js`, a custom WebSocket client implementation, along
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -508,7 +508,7 @@ Using custom, compatible WebSocket client and server implementations:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -528,7 +528,7 @@ This option allows specifying URL to web socket server (useful when you're proxy
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -556,7 +556,7 @@ You can also specify an object with the following properties:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -584,7 +584,7 @@ Enable [gzip compression](https://betterexplained.com/articles/how-to-optimize-y
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     compress: true,
@@ -613,7 +613,7 @@ Provide options to [webpack-dev-middleware](https://github.com/webpack/webpack-d
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   devServer: {
     devMiddleware: {
       index: true,
@@ -635,7 +635,7 @@ Adds headers to all responses:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     headers: {
@@ -650,7 +650,7 @@ You can also pass an array:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     headers: [
@@ -670,7 +670,7 @@ module.exports = {
 You can also pass a function:
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     headers: () => {
@@ -689,7 +689,7 @@ When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     historyApiFallback: true,
@@ -714,7 +714,7 @@ By providing an object this behavior can be controlled further using options lik
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     historyApiFallback: {
@@ -733,7 +733,7 @@ When using dots in your path (common with Angular), you may need to use the `dis
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     historyApiFallback: {
@@ -754,7 +754,7 @@ Specify a host to use. If you want your server to be accessible externally, spec
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     host: '0.0.0.0',
@@ -807,7 +807,7 @@ Enable webpack's [Hot Module Replacement](/concepts/hot-module-replacement/) fea
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     hot: true,
@@ -832,7 +832,7 @@ To enable Hot Module Replacement without page refresh as a fallback in case of b
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     hot: 'only',
@@ -859,7 +859,7 @@ Setting it to `true` will listen to a socket at `/your-os-temp-dir/webpack-dev-s
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     ipc: true,
@@ -878,9 +878,9 @@ You can also listen to a different socket with:
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     ipc: path.join(__dirname, 'my-socket.sock'),
@@ -897,7 +897,7 @@ By default, the dev-server will reload/refresh the page when file changes are de
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     liveReload: false,
@@ -928,7 +928,7 @@ Provides the ability to execute a custom function when webpack-dev-server starts
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     onListening: function (devServer) {
@@ -952,7 +952,7 @@ Tells dev-server to open the browser after server had been started. Set it to `t
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     open: true,
@@ -977,7 +977,7 @@ To open a specified page in a browser:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     open: ['/my-page'],
@@ -996,7 +996,7 @@ To open multiple specified pages in browser:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     open: ['/my-page', '/another-page'],
@@ -1015,7 +1015,7 @@ Provide browser name to use instead of the default one:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     open: {
@@ -1038,7 +1038,7 @@ The object accepts all [open](https://www.npmjs.com/package/open) options:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     open: {
@@ -1063,7 +1063,7 @@ Specify a port number to listen for requests on:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     port: 8080,
@@ -1082,7 +1082,7 @@ npx webpack serve --port 8080
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     port: 'auto',
@@ -1109,7 +1109,7 @@ With a backend on `localhost:3000`, you can use this to enable proxying:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     proxy: [
@@ -1129,7 +1129,7 @@ If you don't want `/api` to be passed along, we need to rewrite the path:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     proxy: [
@@ -1148,7 +1148,7 @@ A backend server running on HTTPS with an invalid certificate will not be accept
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     proxy: [
@@ -1175,7 +1175,7 @@ E.g. for a browser request, you want to serve an HTML page, but for an API reque
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     proxy: [
@@ -1201,7 +1201,7 @@ If you want to proxy multiple, specific paths to the same target, you can use an
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     proxy: [
@@ -1219,7 +1219,7 @@ Note that requests to root won't be proxied by default. To enable root proxying,
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     devMiddleware: {
@@ -1240,7 +1240,7 @@ The origin of the host header is kept when proxying by default, you can set `cha
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     proxy: [
@@ -1265,7 +1265,7 @@ Allows to set server and options (by default 'http').
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     server: 'http',
@@ -1284,7 +1284,7 @@ To serve over `HTTPS` with a self-signed certificate:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     server: 'https',
@@ -1303,7 +1303,7 @@ To serve over `HTTP/2` using [spdy](https://www.npmjs.com/package/spdy) with a s
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     server: 'spdy',
@@ -1324,7 +1324,7 @@ Use the object syntax to provide your own certificate:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     server: {
@@ -1353,10 +1353,10 @@ It also allows you to set additional [TLS options](https://nodejs.org/api/tls.ht
 **webpack.config.js**
 
 ```javascript
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     server: {
@@ -1384,7 +1384,7 @@ Allows to close dev server and exit the process on `SIGINT` and `SIGTERM` signal
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     setupExitSignals: true,
@@ -1403,7 +1403,7 @@ Provides the ability to execute a custom function and apply custom middleware(s)
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   devServer: {
     setupMiddlewares: (middlewares, devServer) => {
@@ -1456,7 +1456,7 @@ This option allows configuring options for serving static files from the directo
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     static: false,
@@ -1481,7 +1481,7 @@ To watch a single directory:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   devServer: {
     static: ['assets'],
@@ -1500,7 +1500,7 @@ To watch multiple static directories:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   devServer: {
     static: ['assets', 'css'],
@@ -1523,9 +1523,9 @@ Tell the server where to serve the content from. This is only necessary if you w
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: {
@@ -1540,9 +1540,9 @@ Provide an array of objects in case you have multiple static folders:
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: [
@@ -1568,7 +1568,7 @@ It is possible to configure advanced options for serving static files from [`sta
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     static: {
@@ -1589,9 +1589,9 @@ Tell the server at which URL to serve [`static.directory`](#directory) content. 
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: {
@@ -1607,9 +1607,9 @@ Provide an array of objects in case you have multiple static folders:
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: [
@@ -1637,9 +1637,9 @@ Tell dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) 
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: {
@@ -1671,9 +1671,9 @@ Tell dev-server to watch the files served by the [`static.directory`](#directory
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: {
@@ -1701,9 +1701,9 @@ It is possible to configure advanced options for watching static files from [`st
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   devServer: {
     static: {
@@ -1726,7 +1726,7 @@ This option allows you to configure a list of globs/directories/files to watch f
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     watchFiles: ['src/**/*.php', 'public/**/*'],
@@ -1739,7 +1739,7 @@ It is possible to configure advanced options for watching files. See the [`choki
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     watchFiles: {
@@ -1763,7 +1763,7 @@ The current default mode is `'ws'`. This mode uses [`ws`](https://www.npmjs.com/
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     webSocketServer: 'ws',
@@ -1778,7 +1778,7 @@ Using path to `CustomServer.js`, a custom WebSocket server implementation, along
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {
@@ -1794,7 +1794,7 @@ Using custom, compatible WebSocket client and server implementations:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   devServer: {
     client: {

@@ -36,7 +36,7 @@ Available options:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   experiments: {
     asyncWebAssembly: true,
@@ -56,7 +56,7 @@ Enable backward-compat layer with deprecation warnings for many webpack 4 APIs.
 - Type: `boolean`
 
 ```js
-module.exports = {
+export default {
   //...
   experiments: {
     backCompat: true,
@@ -90,7 +90,7 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
 
   ```javascript
   // webpack.config.js
-  module.exports = {
+  export default {
     //...
     experiments: {
       buildHttp: true,
@@ -114,7 +114,7 @@ A list of allowed URIs.
 
   ```javascript
   // webpack.config.js
-  module.exports = {
+  export default {
     //...
     experiments: {
       buildHttp: {
@@ -138,7 +138,7 @@ Define the location for caching remote resources.
 
   ```javascript
   // webpack.config.js
-  module.exports = {
+  export default {
     //...
     experiments: {
       buildHttp: {
@@ -262,7 +262,7 @@ Use defaults of the next major webpack and show warnings in any problematic plac
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   experiments: {
     futureDefaults: true,
@@ -322,7 +322,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
 - Example 1:
 
   ```js
-  module.exports = {
+  export default {
     // …
     experiments: {
       lazyCompilation: true,
@@ -333,7 +333,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
 - Example 2:
 
   ```js
-  module.exports = {
+  export default {
     // …
     experiments: {
       lazyCompilation: {
@@ -357,7 +357,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
 Once enabled, webpack will output ECMAScript module syntax whenever possible. For instance, `import()` to load chunks, ESM exports to expose chunk data, among others.
 
 ```js
-module.exports = {
+export default {
   experiments: {
     outputModule: true,
   },

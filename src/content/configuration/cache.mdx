@@ -15,7 +15,7 @@ Cache the generated webpack modules and chunks to improve build speed. `cache` i
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: false,
 };
@@ -34,7 +34,7 @@ Collect unused memory allocated during deserialization, only available when [`ca
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   cache: {
     type: 'filesystem',
     allowCollectingMemory: true,
@@ -55,7 +55,7 @@ T> It's recommended to set `cache.buildDependencies.config: [__filename]` in you
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   cache: {
     buildDependencies: {
       // This makes all dependencies of this file - build dependencies
@@ -77,9 +77,9 @@ Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -99,9 +99,9 @@ Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.n
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -120,7 +120,7 @@ Cache computation of modules which are unchanged and reference only unchanged mo
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'memory',
@@ -142,7 +142,7 @@ Compression type used for the cache files. By default it is `false`.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -162,7 +162,7 @@ Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -182,7 +182,7 @@ Time in milliseconds. `cache.idleTimeout` denotes the time period after which th
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //..
   cache: {
     type: 'filesystem',
@@ -204,7 +204,7 @@ Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period af
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //..
   cache: {
     type: 'filesystem',
@@ -224,7 +224,7 @@ Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period afte
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //..
   cache: {
     type: 'filesystem',
@@ -254,7 +254,7 @@ The amount of time in milliseconds that unused cache entries are allowed to stay
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   cache: {
     type: 'filesystem',
@@ -280,7 +280,7 @@ Define the lifespan of unused cache entries in the memory cache.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   cache: {
     type: 'memory',
@@ -310,7 +310,7 @@ Define the lifespan of unused cache entries in the memory cache.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   cache: {
     type: 'filesystem',
@@ -329,7 +329,7 @@ Cache computation of modules which are unchanged and reference only unchanged mo
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -349,7 +349,7 @@ Name for the cache. Different names will lead to different coexisting caches. De
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -367,7 +367,7 @@ Track and log detailed timing information for individual cache items of type `'f
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -383,7 +383,7 @@ module.exports = {
 Prevent webpack from storing cache into file system. Only available when `cache.type === "filesystem"` and `cache.store === 'pack'`.
 
 ```js
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -408,7 +408,7 @@ W> `pack` is the only supported mode since webpack 5.0.x
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',
@@ -426,7 +426,7 @@ Sets the `cache` type to either in memory or on the file system. The `memory` op
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'memory',
@@ -445,7 +445,7 @@ Version of the cache data. Different versions won't allow to reuse the cache and
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   cache: {
     type: 'filesystem',

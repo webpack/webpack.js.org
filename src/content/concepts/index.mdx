@@ -71,11 +71,15 @@ You can configure this part of the process by specifying an `output` field in yo
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   entry: './path/to/my/entry/file.js',
   output: {
-    path: path.resolve(process.cwd(), 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'my-first-webpack.bundle.js',
   },
 };
