@@ -18,7 +18,7 @@ Append lines to the output instead of updating existing output, useful for statu
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   infrastructureLogging: {
     appendOnly: true,
@@ -45,7 +45,7 @@ Enable colorful output for infrastructure level logging. This option is used onl
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   infrastructureLogging: {
     colors: true,
@@ -71,7 +71,7 @@ Customize the console used for infrastructure level logging.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   infrastructureLogging: {
     console: yourCustomConsole(),
@@ -88,7 +88,7 @@ Enable debug information of specified loggers such as plugins or loaders. Simila
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   infrastructureLogging: {
     level: 'info',
@@ -115,7 +115,7 @@ Possible values:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   infrastructureLogging: {
     level: 'info',
@@ -134,7 +134,7 @@ Stream used for logging output. Defaults to `process.stderr`. This option is use
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   infrastructureLogging: {
     stream: process.stderr,

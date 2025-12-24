@@ -23,9 +23,9 @@ The entry object is where webpack looks to start building the bundle. The contex
 The base directory, an **absolute path**, for resolving entry points and loaders from the configuration.
 
 ```js
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   context: path.resolve(__dirname, 'app'),
 };
@@ -46,7 +46,7 @@ A dynamically loaded module is **not** an entry point.
 A rule to consider: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
 
 ```js
-module.exports = {
+export default {
   //...
   entry: {
     home: './home.js',
@@ -65,7 +65,7 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 If an object is passed the value might be a string, array of strings, or a descriptor:
 
 ```js
-module.exports = {
+export default {
   //...
   entry: {
     home: './home.js',
@@ -95,7 +95,7 @@ Descriptor syntax might be used to pass additional options to an entry point.
 By default, the output filename for the entry chunk is extracted from [`output.filename`](/configuration/output/#outputfilename) but you can specify a custom output filename for a specific entry:
 
 ```js
-module.exports = {
+export default {
   //...
   entry: {
     app: './app.js',
@@ -112,7 +112,7 @@ Descriptor syntax was used here to pass `filename`-option to the specific entry 
 By default, every entry chunk stores all the modules that it uses. With `dependOn` option you can share the modules from one entry chunk to another:
 
 ```js
-module.exports = {
+export default {
   //...
   entry: {
     app: { import: './app.js', dependOn: 'react-vendors' },
@@ -126,7 +126,7 @@ The `app` chunk will not contain the modules that `react-vendors` have.
 `dependOn` option can also accept an array of strings:
 
 ```js
-module.exports = {
+export default {
   //...
   entry: {
     moment: { import: 'moment-mini', runtime: 'runtime' },
@@ -142,7 +142,7 @@ module.exports = {
 Also, you can specify multiple files per entry using an array:
 
 ```js
-module.exports = {
+export default {
   //...
   entry: {
     app: { import: ['./app.js', './app2.js'], dependOn: 'react-vendors' },
@@ -158,7 +158,7 @@ If a function is passed then it will be invoked on every [make](/api/compiler-ho
 > Note that the `make` event triggers when webpack starts and for every invalidation when [watching for file changes](/configuration/watch/).
 
 ```js
-module.exports = {
+export default {
   //...
   entry: () => './demo',
 };
@@ -167,7 +167,7 @@ module.exports = {
 or
 
 ```js
-module.exports = {
+export default {
   //...
   entry: () => new Promise((resolve) => resolve(['./demo', './demo2'])),
 };
@@ -178,7 +178,7 @@ For example: you can use dynamic entries to get the actual entries from an exter
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   entry() {
     return fetchPathsFromSomeExternalSource(); // returns a promise that will be resolved with something like ['src/main-layout.js', 'src/admin-layout.js']
   },
@@ -194,7 +194,7 @@ It allows setting the runtime chunk for an entry point and setting it to `false`
 `optimization.runtimeChunk` allows setting it globally for unspecified entry points.
 
 ```js
-module.exports = {
+export default {
   //...
   entry: {
     home: {

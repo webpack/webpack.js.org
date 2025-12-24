@@ -21,7 +21,7 @@ Enable and configure the built-in Dotenv plugin to load environment variables fr
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: true,
 };
@@ -30,7 +30,7 @@ module.exports = {
 Setting `dotenv` to `true` enables the plugin with default options. For custom configuration, pass an options object:
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     prefix: 'WEBPACK_',
@@ -53,7 +53,7 @@ Only expose environment variables that start with the specified prefix(es). This
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     prefix: 'APP_', // Only expose APP_* variables
@@ -64,7 +64,7 @@ module.exports = {
 **Multiple prefixes:**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     prefix: ['APP_', 'CONFIG_'], // Expose both APP_* and CONFIG_* variables
@@ -89,7 +89,7 @@ The directory from which `.env` files are loaded.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     dir: './config', // Load from ./config directory
@@ -100,7 +100,7 @@ module.exports = {
 **Disable loading:**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     dir: false, // Only use process.env variables
@@ -121,7 +121,7 @@ Files are loaded in the order specified, with later files overriding earlier one
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   mode: 'production',
   dotenv: {
@@ -133,7 +133,7 @@ module.exports = {
 **Custom patterns:**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     template: [
@@ -212,7 +212,7 @@ SECRET_KEY=should-not-be-exposed  # Won't be exposed (no WEBPACK_ prefix)
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: true, // Uses default prefix "WEBPACK_"
 };
@@ -270,7 +270,7 @@ PRIVATE_KEY=secret  # Won't be exposed
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     prefix: ['APP_', 'CONFIG_'],
@@ -285,7 +285,7 @@ Load environment files from a custom location with custom naming:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   dotenv: {
     dir: './environments',
