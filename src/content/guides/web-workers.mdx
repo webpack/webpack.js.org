@@ -52,11 +52,46 @@ self.onmessage = ({ data: { question } }) => {
 };
 ```
 
+---
+
+## Cross-Domain Workers
+
+Webpack 5 allows workers to be hosted on a different domain.  
+This is useful when your main app and workers are deployed separately.
+
+### Example (Main Thread)
+
+```js
+const worker = new Worker(
+  new URL('https://example.com/worker.js', import.meta.url),
+  { type: 'module' }
+);
+
+worker.onmessage = ({ data }) => {
+  console.log('Message from worker:', data);
+};
+```
+
+### Example (Worker Code)
+
+```js
+self.postMessage('Hello from cross-domain worker');
+```
+
+### Full Examples
+
+- Main thread: https://github.com/webpack/webpack/tree/main/examples/cross-origin-main-thread
+- Host: https://github.com/webpack/webpack/tree/main/examples/cross-origin-host
+- Worker: https://github.com/webpack/webpack/tree/main/examples/cross-origin-worker
+
+---
+
 ## Set a public path from a variable
 
-When you set `__webpack_public_path__` from a variable, and use `publicPath` equal to `auto`, worker chunks will get a separate runtime, and Webpack runtime will set `publicPath` to automatically calculated public path, that is probably is not what you expect.
+When using a dynamic public path with `publicPath: "auto"`, workers receive their own runtime.  
+Webpack may calculate the public path incorrectly if your application uses a CDN or a different deployment origin.
 
-To work around this issue, you need to set `__webpack_public_path__` from within the worker code. Here is an example:
+To avoid this, set `__webpack_public_path__` inside the worker before loading other modules.
 
 **worker.js**
 
@@ -67,7 +102,7 @@ self.onmessage = ({ data: { publicPath, ...otherData } }) => {
   }
 
   // rest of the worker code
-}
+};
 ```
 
 **app.js**
@@ -76,6 +111,8 @@ self.onmessage = ({ data: { publicPath, ...otherData } }) => {
 const worker = new Worker(new URL('./worker.js', import.meta.url));
 worker.postMessage({ publicPath: window.__MY_GLOBAL_PUBLIC_PATH_VAR__ });
 ```
+
+---
 
 ## Node.js
 
@@ -88,3 +125,38 @@ new Worker(new URL('./worker.js', import.meta.url));
 ```
 
 Note that this is only available in ESM. `Worker` in CommonJS syntax is not supported by either webpack or Node.js.
+
+---
+
+## Multi-Compiler Mode
+
+When using multiple Webpack configurations (multi-compiler mode), each worker entry may produce its own separate runtime.  
+You must load the correct output file based on the compiler that generated it.
+
+### Example
+
+**webpack.config.js**
+
+```js
+module.exports = [
+  {
+    name: 'main',
+    entry: './src/index.js',
+    output: { filename: 'main-bundle.js' },
+  },
+  {
+    name: 'worker',
+    entry: './src/worker.js',
+    target: 'webworker',
+    output: { filename: 'worker-bundle.js' },
+  },
+];
+```
+
+### Creating the Worker
+
+```js
+const worker = new Worker(new URL('./worker-bundle.js', import.meta.url), {
+  type: 'module',
+});
+```
