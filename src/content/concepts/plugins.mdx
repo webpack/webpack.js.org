@@ -26,14 +26,13 @@ A webpack **plugin** is a JavaScript object that has an [`apply`](https://develo
 ```javascript
 const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
-export deafult class ConsoleLogOnBuildWebpackPlugin {
+export default class ConsoleLogOnBuildWebpackPlugin {
   apply(compiler) {
-    compiler.hooks.run.tap(pluginName, (compilation) => {
+    compiler.hooks.run.tap(pluginName, () => {
       console.log('The webpack build process is starting!');
     });
   }
 }
-
 ```
 
 It is recommended that the first parameter of the tap method of the compiler hook should be a camelized version of the plugin name. It is advisable to use a constant for this so it can be reused in all hooks.
