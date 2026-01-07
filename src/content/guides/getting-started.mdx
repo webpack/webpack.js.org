@@ -249,11 +249,11 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
 
 **webpack.config.js**
 
-```js
+```javascript
 const path = require("path");
 
-module.exports = {
-  entry: "./src/index.js",
+export default = {
+  entry: './src/index.js',
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
@@ -263,7 +263,7 @@ module.exports = {
 
 If you are using ES modules instead of CommonJS, `__dirname` is not available by default in Node.js. You can define it manually:
 
-```js
+```javascript
 import path from "path";
 import { fileURLToPath } from "url";
 
