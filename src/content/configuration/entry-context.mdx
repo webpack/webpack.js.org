@@ -12,6 +12,7 @@ contributors:
   - anshumanv
   - snitin315
   - hai-x
+  - cengizilhan
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -170,6 +171,19 @@ or
 module.exports = {
   //...
   entry: () => new Promise((resolve) => resolve(['./demo', './demo2'])),
+};
+```
+
+### Multiple Entry Points in Different Folders
+
+In some scenarios, you might want to organize your entry points into different folders for better structure and maintainability. Here's how you can define multiple entry points located in different folders:
+
+```javascript
+module.exports = {
+ entry: {
+    '/scriptFolder/one/app': './src/one/app.js',
+    '/scriptFolder/two/main': './src/two/main.js',
+  },
 };
 ```
 
