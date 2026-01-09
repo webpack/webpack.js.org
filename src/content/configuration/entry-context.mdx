@@ -12,6 +12,7 @@ contributors:
   - anshumanv
   - snitin315
   - hai-x
+  - cengizilhan
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -180,8 +181,9 @@ In some scenarios, you might want to organize your entry points into different f
 module.exports = {
   //...
  entry: {
-    '/scriptFolder/one': './Static/one.js',
-    '/scriptFolder/js/two': './Static/js/two.js',
+    /* entry (logical output path/name) : source file */
+    '/scriptFolder/app': './Static/app.js',
+    '/scriptFolder/js/main': './Static/js/main.js',
   },
 };
 
