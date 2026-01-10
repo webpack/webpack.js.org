@@ -45,7 +45,7 @@ For example, to include [jQuery](https://jquery.com/) from a CDN instead of bund
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: {
     jquery: 'jQuery',
@@ -72,7 +72,7 @@ Depending on the [externalsType](#externalstype), this could be the name of the 
 You can also use the shortcut syntax if you're defining only 1 external:
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: 'jquery',
 };
@@ -81,7 +81,7 @@ module.exports = {
 equals to
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: {
     jquery: 'jquery',
@@ -94,7 +94,7 @@ You can specify the [external library type](#externalstype) to the external with
 For example, if the external library is a [CommonJS module](#externalstypecommonjs), you can specify
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: {
     jquery: 'commonjs jquery',
@@ -105,7 +105,7 @@ module.exports = {
 ### [string]
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: {
     subtract: ['./math', 'subtract'],
@@ -120,7 +120,7 @@ When the `externalsType` is `commonjs`, this example would translate to `require
 Similar to the [string syntax](#string), you can specify the external library type with the `${externalsType} ${libraryName}` syntax, in the first item of the array, for example:
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: {
     subtract: ['commonjs ./math', 'subtract'],
@@ -133,7 +133,7 @@ module.exports = {
 W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) and [`externalsType: 'umd'`](#externalstype). It's not allowed for other library targets.
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: {
     react: 'react',
@@ -188,7 +188,7 @@ As an example, to externalize all imports where the import path matches a regula
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: [
     function ({ context, request }, callback) {
@@ -209,7 +209,7 @@ Other examples using different module formats:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   externals: [
     function (ctx, callback) {
       // The external is a `commonjs2` module located in `@scope/library`
@@ -222,7 +222,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   externals: [
     function (ctx, callback) {
       // The external is a global variable called `nameOfGlobal`.
@@ -235,7 +235,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   externals: [
     function (ctx, callback) {
       // The external is a named export in the `@scope/library` module.
@@ -248,7 +248,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   externals: [
     function (ctx, callback) {
       // The external is a UMD module
@@ -270,7 +270,7 @@ Every dependency that matches the given regular expression will be excluded from
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: /^(jquery|\$)$/i,
 };
@@ -285,7 +285,7 @@ Sometimes you may want to use a combination of the above syntaxes. This can be d
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   externals: [
     {
@@ -326,7 +326,7 @@ Specify externals by layer.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   externals: {
     byLayer: {
       layer: {
@@ -370,7 +370,7 @@ Supported types:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   externalsType: 'promise',
 };
@@ -389,7 +389,7 @@ import fs from 'fs-extra';
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   externalsType: 'commonjs',
   externals: {
@@ -420,7 +420,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   externalsType: 'global',
   externals: {
@@ -455,7 +455,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   experiments: {
     outputModule: true,
   },
@@ -495,7 +495,7 @@ async function foo() {
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   externalsType: 'import',
   externals: {
     jquery: 'jquery',
@@ -546,7 +546,7 @@ async function foo() {
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   externalsType: 'module-import',
   externals: {
     jquery: 'jquery',
@@ -582,19 +582,17 @@ Note that the output bundle will have an `import` or `import()` statement.
 When a module is not imported via `import` or `import()`, webpack will use the `"module"` externals type as a fallback. If you want to use a different kind of externals as a fallback, you can specify it with a function in the `externals` option. For example:
 
 ```js
-module.exports = {
-  externalsType: "module-import",
+export default {
+  externalsType: 'module-import',
   externals: [
-    function (
-      { request, dependencyType },
-      callback
-    ) {
-      if (dependencyType === "commonjs") {
+    function ({ request, dependencyType }, callback) {
+      if (dependencyType === 'commonjs') {
         return callback(null, `node-commonjs ${request}`);
       }
       callback();
     },
-  ]
+  ],
+};
 ```
 
 ### externalsType.node-commonjs
@@ -611,7 +609,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```js
-module.export = {
+export default {
   experiments: {
     outputModule: true,
   },
@@ -649,7 +647,7 @@ You can use `node-commonjs` to ensure that the prototype chain is preserved:
 ```js
 const { builtinModules } = require('module');
 
-module.exports = {
+export default {
   experiments: { outputModule: true },
   externalsType: 'node-commonjs',
   externals: ({ request }, callback) => {
@@ -690,7 +688,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   externalsType: 'promise',
   externals: {
@@ -720,7 +718,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   externalsType: 'self',
   externals: {
@@ -743,7 +741,7 @@ Specify the default type of externals as `'script'`. Webpack will load the exter
 #### Syntax
 
 ```javascript
-module.exports = {
+export default {
   externalsType: 'script',
   externals: {
     packageName: [
@@ -759,7 +757,7 @@ module.exports = {
 You can also use the shortcut syntax if you're not going to specify any properties:
 
 ```javascript
-module.exports = {
+export default {
   externalsType: 'script',
   externals: {
     packageName: 'global@http://example.com/script.js', // no properties here
@@ -776,7 +774,7 @@ Let's load a `lodash` from CDN:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   externalsType: 'script',
   externals: {
@@ -795,7 +793,7 @@ console.log(_.head([1, 2, 3]));
 Here's how we specify properties for the above example:
 
 ```js
-module.exports = {
+export default {
   // ...
   externalsType: 'script',
   externals: {
@@ -834,7 +832,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   externalsType: 'this',
   externals: {
@@ -864,7 +862,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   externalsType: 'var',
   externals: {
@@ -894,7 +892,7 @@ jq('.my-element').animate(/* ... */);
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   externalsType: 'window',
   externals: {
@@ -936,7 +934,7 @@ Using `node` preset will not bundle built-in modules and treats them as external
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   externalsPresets: {
     node: true,

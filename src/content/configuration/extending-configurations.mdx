@@ -18,7 +18,7 @@ W> **This option is not supported via the Node API**: Extends will have no effec
 **base.webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -43,7 +43,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   extends: path.resolve(__dirname, './base.webpack.config.js'),
   entry: './src/index.js',
   output: {
@@ -62,7 +62,7 @@ Configurations from the `extends` property are merged from right to left, meanin
 **js.webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -78,7 +78,7 @@ module.exports = {
 **css.webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -93,7 +93,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   extends: [
     path.resolve(__dirname, './js.webpack.config.js'),
     path.resolve(__dirname, './css.webpack.config.js'),
@@ -113,7 +113,7 @@ You can override configurations from the extended configuration by passing the s
 **base.webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -124,7 +124,7 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   extends: path.resolve(__dirname, './base.webpack.config.js'),
   entry: './src/index.js',
   // overriding the output path and filename
@@ -142,7 +142,7 @@ You can also load configuration from third-party packages by passing the package
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   extends: require.resolve('webpack-config-foo'),
   entry: './src/index.js',
   output: {

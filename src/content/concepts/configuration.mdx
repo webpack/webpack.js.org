@@ -10,13 +10,14 @@ contributors:
 
 You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports a webpack [configuration](/configuration/).** This configuration is then processed by webpack based upon its defined properties.
 
-Because it's a standard Node.js CommonJS module, you **can do the following**:
+Because it's a standard ECMAScript Module, you **can do the following**:
 
-- Import other files via `require(...)`
-- use utilities on npm via `require(...)`
+- Import other files via `import...from...`
+- use utilities on npm via `import`
 - use JavaScript control flow expressions, e.g. the `?:` operator
 - use constants or variables for often used values
 - write and execute functions to generate a part of the configuration
+- emulate `__dirname` using `fileURLToPath(import.meta.url)` and `path.dirname()` for path resolution
 
 Use these features when appropriate.
 
@@ -35,9 +36,13 @@ The examples below describe how webpack's configuration can be both expressive a
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   mode: 'development',
   entry: './foo.js',
   output: {

@@ -35,7 +35,7 @@ Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will di
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   amd: {
     jQuery: true,
@@ -59,7 +59,7 @@ Fail out on the first error instead of tolerating it. By default webpack will lo
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   bail: true,
 };
@@ -85,7 +85,7 @@ Remember that current configuration will not compile until its dependencies are 
 **webpack.config.js**
 
 ```js
-module.exports = [
+export default [
   {
     name: 'client',
     target: 'web',
@@ -112,7 +112,7 @@ Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a c
 `ignoreWarnings` must be an `array` of any or all of the above.
 
 ```javascript
-module.exports = {
+export default {
   //...
   ignoreWarnings: [
     {
@@ -139,7 +139,7 @@ For example, you can define a new variable in the loader context:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   loader: {
     answer: 42,
@@ -152,11 +152,11 @@ Then use `this.answer` to get its value in the loader:
 **custom-loader.js**
 
 ```javascript
-module.exports = function (source) {
+export default function (source) {
   // ...
   console.log(this.answer); // will log `42` here
   return source;
-};
+}
 ```
 
 T> You can override properties in the loader context as webpack copies all properties that are defined in the `loader` to the loader context.
@@ -170,7 +170,7 @@ Name of the configuration. Used when loading multiple configurations.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   name: 'admin-app',
 };
@@ -205,9 +205,9 @@ Specify where the records should be written. The following example shows how you
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
   recordsOutputPath: path.join(__dirname, 'newRecords.json'),
@@ -223,9 +223,9 @@ Use this option to generate a JSON file containing webpack "records" – pieces 
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   recordsPath: path.join(__dirname, 'records.json'),
 };
@@ -246,8 +246,8 @@ W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOut
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
-module.exports = {
+import path from 'path';
+export default {
   // ...
   snapshot: {
     managedPaths: [path.resolve(__dirname, '../node_modules')],
@@ -313,7 +313,7 @@ Make sure you wrap the path in a capture group if you are using regular expressi
 A common use case for `managedPaths` would be to exclude some folders from `node_modules`, e.g. you want webpack to know that files in the `node_modules/@azure/msal-browser` folder are expected to change, which can be done with a regular expression like the one below:
 
 ```js
-module.exports = {
+export default {
   snapshot: {
     managedPaths: [
       /^(.+?[\\/]node_modules[\\/](?!(@azure[\\/]msal-browser))(@.+?[\\/])?.+?)[\\/]/,

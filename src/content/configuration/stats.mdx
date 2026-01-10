@@ -26,7 +26,7 @@ The `stats` option lets you precisely control what bundle information gets displ
 W> This option does not have any effect when using the [Node.js API](/api/node). You need to pass the stats options to the `stats.toString()` resp. `stats.toJson()` calls instead.
 
 ```js
-module.exports = {
+export default {
   //...
   stats: 'errors-only',
 };
@@ -58,7 +58,7 @@ T> All of the options in the stats configuration object are optional.
 A fallback value for stats options when an option is not defined. It has precedence over local webpack defaults.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     all: undefined,
@@ -73,7 +73,7 @@ module.exports = {
 Tells `stats` whether to show the asset information. Set `stats.assets` to `false` to hide it.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     assets: false,
@@ -88,7 +88,7 @@ module.exports = {
 Tells `stats` to sort the assets by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.assetsSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     assetsSort: '!size',
@@ -103,7 +103,7 @@ module.exports = {
 Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     assetsSpace: 15,
@@ -118,7 +118,7 @@ module.exports = {
 Tells `stats` whether to add the build date and the build time information. Set `stats.builtAt` to `false` to hide it.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     builtAt: false,
@@ -137,7 +137,7 @@ Old version of `stats.cachedModules`.
 Tells `stats` whether to add information about the cached assets. Setting `stats.cachedAssets` to `false` will tell `stats` to only show the emitted files (not the ones that were built).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     cachedAssets: false,
@@ -152,7 +152,7 @@ module.exports = {
 Tells `stats` whether to add information about cached (not built) modules.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     cachedModules: false,
@@ -167,7 +167,7 @@ module.exports = {
 Tells `stats` whether to add information about the children.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     children: false,
@@ -182,7 +182,7 @@ module.exports = {
 Display auxiliary assets in chunk groups.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkGroupAuxiliary: false,
@@ -197,7 +197,7 @@ module.exports = {
 Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkGroupChildren: false,
@@ -212,7 +212,7 @@ module.exports = {
 Limit of assets displayed in chunk groups.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkGroupMaxAssets: 5,
@@ -227,7 +227,7 @@ module.exports = {
 Tells `stats` whether to add information about the `namedChunkGroups`.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkGroups: false,
@@ -242,7 +242,7 @@ module.exports = {
 Tells `stats` whether to add information about the built modules to information about the chunk.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkModules: false,
@@ -257,7 +257,7 @@ module.exports = {
 Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkModulesSpace: 15,
@@ -272,7 +272,7 @@ module.exports = {
 Tells `stats` whether to add information about the origins of chunks and chunk merging.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkOrigins: false,
@@ -287,7 +287,7 @@ module.exports = {
 Tells `stats` to display chunk parents, children and siblings.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunkRelations: false,
@@ -302,7 +302,7 @@ module.exports = {
 Tells `stats` whether to add information about the chunk. Setting `stats.chunks` to `false` results in a less verbose output.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunks: false,
@@ -317,7 +317,7 @@ module.exports = {
 Tells `stats` to sort the chunks by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.chunksSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     chunksSort: 'name',
@@ -332,7 +332,7 @@ module.exports = {
 Tells `stats` whether to output in the different colors.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     colors: true,
@@ -355,10 +355,10 @@ npx webpack --no-stats-colors
 You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
 
 ```js
-module.exports = {
+export default {
   //...
   colors: {
-    green: '\u001b[32m',
+    green: '\u001b[32m],
   },
 };
 ```
@@ -370,9 +370,9 @@ module.exports = {
 The stats base directory, an **absolute path** for shortening the request information.
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   //...
   stats: {
     context: path.resolve(__dirname, 'src/components'),
@@ -389,7 +389,7 @@ By default, the value of [`context`](/configuration/entry-context/#context) or t
 Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     dependentModules: false,
@@ -404,7 +404,7 @@ module.exports = {
 Tells `stats` whether to display the distance from the entry point for each module.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     depth: true,
@@ -419,7 +419,7 @@ module.exports = {
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     entrypoints: false,
@@ -436,7 +436,7 @@ When `stats.entrypoints` is set to `'auto'`, webpack will decide automatically w
 Tells `stats` whether to display the `--env` information.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     env: true,
@@ -451,7 +451,7 @@ module.exports = {
 Tells `stats` whether to include the [`cause`](https://nodejs.org/en/blog/release/v16.9.0/#error-cause) property of errors in the output. It defaults to `true`.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     errorCause: true,
@@ -466,7 +466,7 @@ module.exports = {
 Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     errorDetails: false,
@@ -483,7 +483,7 @@ Tells `stats` whether to include the errors array from [`AggregateError`](https:
 Useful when a single error is composed of multiple underlying errors, providing deeper visibility into grouped error structures.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     errorErrors: true,
@@ -498,7 +498,7 @@ module.exports = {
 Tells `stats` whether to show stack trace of errors.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     errorStack: false,
@@ -513,7 +513,7 @@ module.exports = {
 Tells `stats` whether to display the errors.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     errors: false,
@@ -528,7 +528,7 @@ module.exports = {
 Add errors count.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     errorsCount: false,
@@ -545,7 +545,7 @@ module.exports = {
 Tells `stats` to limit the number of lines to allocate for displaying an error.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     errorsSpace: 5,
@@ -564,7 +564,7 @@ See [`stats.excludeModules`](#statsexcludemodules).
 Tells `stats` to exclude the matching assets information. This can be done with a `string`, a `RegExp`, a `function` that is getting the assets name as an argument and returns a `boolean`. `stats.excludeAssets` can be an `array` of any of the above.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     excludeAssets: [
@@ -583,7 +583,7 @@ module.exports = {
 Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, a `function` that is getting the module's source as an argument and returns a `boolean`. `stats.excludeModules` can be an `array` of any of the above. `stats.excludeModules`'s configuration [is merged](https://github.com/webpack/webpack/blob/main/lib/Stats.js#L215) with the `stats.exclude`'s configuration value.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     excludeModules: ['filter', /filter/, (moduleSource) => true],
@@ -594,7 +594,7 @@ module.exports = {
 Setting `stats.excludeModules` to `false` will disable the exclude behaviour.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     excludeModules: false,
@@ -609,7 +609,7 @@ module.exports = {
 Tells `stats` whether to group assets by how their are related to chunks.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupAssetsByChunk: false,
@@ -624,7 +624,7 @@ module.exports = {
 Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupAssetsByEmitStatus: false,
@@ -639,7 +639,7 @@ module.exports = {
 Tells `stats` whether to group assets by their extension.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupAssetsByExtension: false,
@@ -654,7 +654,7 @@ module.exports = {
 Tells `stats` whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupAssetsByInfo: false,
@@ -669,7 +669,7 @@ module.exports = {
 Tells `stats` whether to group assets by their asset path.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupAssetsByPath: false,
@@ -684,7 +684,7 @@ module.exports = {
 Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupModulesByAttributes: false,
@@ -699,7 +699,7 @@ module.exports = {
 Tells `stats` whether to group modules by their cache status (cached or built and cacheable).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupModulesByCacheStatus: true,
@@ -714,7 +714,7 @@ module.exports = {
 Tells `stats` whether to group modules by their extension.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupModulesByExtension: true,
@@ -729,7 +729,7 @@ module.exports = {
 Tells `stats` whether to group modules by their layer.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupModulesByLayer: true,
@@ -744,7 +744,7 @@ module.exports = {
 Tells `stats` whether to group modules by their path.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupModulesByPath: true,
@@ -759,7 +759,7 @@ module.exports = {
 Tells `stats` whether to group modules by their type.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupModulesByType: true,
@@ -776,7 +776,7 @@ module.exports = {
 Group [`reasons`](#statsreasons) by their origin module to avoid large set of reasons.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     groupReasonsByOrigin: true,
@@ -791,7 +791,7 @@ module.exports = {
 Tells `stats` whether to add information about the hash of the compilation.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     hash: false,
@@ -806,7 +806,7 @@ module.exports = {
 Tells `stats` to add IDs of modules and chunks.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     ids: true,
@@ -828,7 +828,7 @@ Tells `stats` whether to add logging output.
 - `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     logging: 'verbose',
@@ -843,7 +843,7 @@ module.exports = {
 Tells `stats` to include the debug information of the specified loggers such as Plugins or Loaders. When [`stats.logging`](#statslogging) is set to `false`, `stats.loggingDebug` option is ignored.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     loggingDebug: [
@@ -863,7 +863,7 @@ module.exports = {
 Enable stack traces in the logging output for errors, warnings and traces. Set `stats.loggingTrace` to hide the trace.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     loggingTrace: false,
@@ -878,7 +878,7 @@ module.exports = {
 Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     moduleAssets: false,
@@ -893,7 +893,7 @@ module.exports = {
 Tells `stats` to show dependencies and the origin of warnings/errors. `stats.moduleTrace` is available since webpack 2.5.0.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     moduleTrace: false,
@@ -908,7 +908,7 @@ module.exports = {
 Tells `stats` whether to add information about the built modules.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     modules: false,
@@ -923,7 +923,7 @@ module.exports = {
 Tells `stats` to sort the modules by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.modulesSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     modulesSort: 'size',
@@ -938,7 +938,7 @@ module.exports = {
 Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     modulesSpace: 15,
@@ -953,7 +953,7 @@ module.exports = {
 Tells `stats` whether to add information about modules nested in other modules (like with module concatenation).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     nestedModules: true,
@@ -968,7 +968,7 @@ module.exports = {
 Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     nestedModulesSpace: 15,
@@ -983,7 +983,7 @@ module.exports = {
 Tells `stats` to show the reasons why optimization bailed out for modules.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     optimizationBailout: false,
@@ -998,7 +998,7 @@ module.exports = {
 Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphan modules are hidden by default in `stats`.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     orphanModules: true,
@@ -1013,7 +1013,7 @@ module.exports = {
 Tells `stats` to show the `outputPath`.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     outputPath: false,
@@ -1028,7 +1028,7 @@ module.exports = {
 Tells `stats` to show performance hint when the file size exceeds [`performance.maxAssetSize`](/configuration/performance/#performancemaxassetsize).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     performance: false,
@@ -1043,7 +1043,7 @@ module.exports = {
 Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     preset: 'minimal',
@@ -1060,7 +1060,7 @@ Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats 
 Tells `stats` to show the exports of the modules.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     providedExports: true,
@@ -1075,7 +1075,7 @@ module.exports = {
 Tells `stats` to show the `publicPath`.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     publicPath: false,
@@ -1090,7 +1090,7 @@ module.exports = {
 Tells `stats` to add information about the reasons of why modules are included.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     reasons: false,
@@ -1107,7 +1107,7 @@ module.exports = {
 Space to display [`reasons`](#statsreasons) (groups will be collapsed to fit this space).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     reasonsSpace: 1000,
@@ -1124,7 +1124,7 @@ T> The [`detailed preset`](#stats-presets) limits [`modulesSpace`](#statsmodules
 Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     relatedAssets: true,
@@ -1139,7 +1139,7 @@ module.exports = {
 Tells `stats` whether to add information about runtime modules.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     runtimeModules: false,
@@ -1154,7 +1154,7 @@ module.exports = {
 Tells `stats` to add the source code of modules.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     source: true,
@@ -1169,7 +1169,7 @@ module.exports = {
 Tells `stats` to add the timing information.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     timings: false,
@@ -1184,7 +1184,7 @@ module.exports = {
 Tells `stats` whether to show which exports of a module are used.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     usedExports: true,
@@ -1199,7 +1199,7 @@ module.exports = {
 Tells `stats` to add information about the webpack version used.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     version: false,
@@ -1214,7 +1214,7 @@ module.exports = {
 Tells `stats` to add warnings.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     warnings: false,
@@ -1229,7 +1229,7 @@ module.exports = {
 Add warnings count.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     warningsCount: false,
@@ -1244,7 +1244,7 @@ module.exports = {
 Tells `stats` to exclude the warnings that are matching given filters. This can be done with a `string`, a `RegExp`, a `function` that is getting a warning as an argument and returns a `boolean`. `stats.warningsFilter` can be an `array` of any of the above.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     warningsFilter: ['filter', /filter/, (warning) => true],
@@ -1263,7 +1263,7 @@ W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configur
 Tells `stats` to limit the number of lines to allocate for displaying a warning.
 
 ```javascript
-module.exports = {
+export default {
   //...
   stats: {
     warningsSpace: 5,
@@ -1302,7 +1302,7 @@ If you want to use one of the presets e.g. `'minimal'` but still override some o
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //..
   stats: {
     preset: 'minimal',
