@@ -55,6 +55,7 @@ Create async chunks that are loaded on demand.
 export default {
   //...
   output: {
+    //...
     asyncChunks: true,
   },
 };
@@ -147,6 +148,7 @@ By default `[id].js` is used or a value inferred from [`output.filename`](#outpu
 export default {
   //...
   output: {
+    //...
     chunkFilename: '[id].js',
   },
 };
@@ -201,6 +203,7 @@ The Number of milliseconds before chunk request expires. This option is supporte
 export default {
   //...
   output: {
+    //...
     chunkLoadTimeout: 30000,
   },
 };
@@ -218,6 +221,7 @@ The global variable is used by webpack for loading chunks.
 export default {
   //...
   output: {
+    //...
     chunkLoadingGlobal: 'myCustomFunc',
   },
 };
@@ -237,6 +241,7 @@ T> The default value of this option depends on the [`target`](/configuration/tar
 export default {
   //...
   output: {
+    //...
     chunkLoading: 'async-node',
   },
 };
