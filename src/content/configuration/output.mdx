@@ -52,7 +52,7 @@ Create async chunks that are loaded on demand.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     //...
@@ -145,7 +145,7 @@ By default `[id].js` is used or a value inferred from [`output.filename`](#outpu
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     //...
@@ -200,7 +200,7 @@ The Number of milliseconds before chunk request expires. This option is supporte
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     //...
@@ -218,7 +218,7 @@ The global variable is used by webpack for loading chunks.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     //...
@@ -238,7 +238,7 @@ T> The default value of this option depends on the [`target`](/configuration/tar
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     //...
@@ -254,7 +254,7 @@ module.exports = {
 `boolean` `{ dry?: boolean, keep?: RegExp | string | ((filename: string) => boolean) }`
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     clean: true, // Clean the output directory before emit.
@@ -263,7 +263,7 @@ module.exports = {
 ```
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     clean: {
@@ -274,7 +274,7 @@ module.exports = {
 ```
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     clean: {
@@ -317,7 +317,7 @@ Tells webpack to check if to be emitted file already exists and has the same con
 W> webpack will not write output file when file already exists on disk with the same content.
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     compareBeforeEmit: false,
@@ -819,7 +819,7 @@ T> Typically you don't need to change `output.hotUpdateMainFilename`.
 Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     iife: true,
@@ -838,7 +838,7 @@ Hide warnings from the browser console in production. This option does not affec
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   //...
   output: {
     ignoreBrowserWarnings: true,
