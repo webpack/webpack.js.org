@@ -224,7 +224,7 @@ It's possible to use webpack specific features in your TypeScript code, such as 
 console.log(import.meta.webpack); // without reference declared above, TypeScript will throw an error
 ```
 
-To enable the types for the whole project, add `webpack/module` to `types` in `tsconfig.json`:
+To enable the types for the whole project, add `webpack/module` to `compilerOptions.types` in `tsconfig.json`:
 
 ```diff
   {
