@@ -227,13 +227,13 @@ console.log(import.meta.webpack); // without reference declared above, TypeScrip
 Alternatively, you can also add `webpack/module` to `types` in `tsconfig.json` to enable the types for the whole project:
 
 ```diff
-{
-  "compilerOptions": {
-    "types": [
-+      "webpack/module"
-    ]
+  {
+    "compilerOptions": {
+      "types": [
++       "webpack/module"
+      ]
+    }
   }
-}
 ```
 
 ## Using Third Party Libraries
