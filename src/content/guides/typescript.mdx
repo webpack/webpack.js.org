@@ -224,6 +224,18 @@ It's possible to use webpack specific features in your TypeScript code, such as 
 console.log(import.meta.webpack); // without reference declared above, TypeScript will throw an error
 ```
 
+Alternatively, you can also add `webpack/module` to your `tsconfig.json` to add the types for the whole project:
+
+```diff
+{
+  "compilerOptions": {
+    "types": [
++      "webpack/module"
+    ]
+  }
+}
+```
+
 ## Using Third Party Libraries
 
 When installing third party libraries from npm, it is important to remember to install the typing definition for that library.
