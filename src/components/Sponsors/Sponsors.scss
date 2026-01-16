@@ -10,6 +10,8 @@ $link-wrapper-radius: 8px;
 $link-wrapper-margin: 8px;
 $tagline-font-size: 2em;
 $footer-font-size: 1.7em;
+$tagline-font-size-mobile: 1.4em;
+$footer-font-size-mobile: 1.2em;
 
 [data-theme='dark'] {
   .agGridLogo {
@@ -48,57 +50,191 @@ $footer-font-size: 1.7em;
   }
 }
 
-.sponsors {
-  position: absolute;
-  height: 100%;
-  width: 250px;
-  margin-left: -250px;
-  margin-right: 8px;
+@media (max-width: 642px) {
+  .agGridLogo {
+    height: 50px;
+  }
 
-  &__link-wrapper {
-    box-shadow: $link-wrapper-shadow;
-    border-radius: $link-wrapper-radius;
-    margin: $link-wrapper-margin;
-    transition: transform 0.2s;
-    &:hover {
-      background-color: getColor(concrete);
-      transform: scale(1.05);
+  .agChartsLogo {
+    height: 50px;
+  }
+
+  .sponsors {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    margin-top: -275px;
+
+    &__link-wrapper {
+      box-shadow: $link-wrapper-shadow;
+      border-radius: $link-wrapper-radius;
+      margin: $link-wrapper-margin;
+      transition: transform 0.2s;
+      &:hover {
+        background-color: getColor(concrete);
+        transform: scale(1.05);
+      }
     }
-  }
-  &__tagline,
-  &__footer {
-    margin: 1rem 0;
-    text-align: center;
-    color: $sponsor-text-color-light;
-  }
-  &__tagline {
-    font-size: $tagline-font-size;
-  }
-  &__footer {
-    font-size: $footer-font-size;
-    font-style: italic;
-  }
-  &__content {
-    position: sticky;
-    display: none;
-    margin: 1.5em 0;
-    top: 6em;
-    padding: 0 1.5em 3em;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    border-right: 2px solid getColor(concrete);
-    overflow: hidden;
-    transition: background-color 250ms;
-    @include break(xlarge) {
-      display: flex;
+    &__tagline,
+    &__footer {
+      margin: 1rem 0;
+      text-align: center;
+      color: $sponsor-text-color-light;
     }
-  }
-  &__img {
-    &__wrapper {
+    &__tagline {
+      font-size: $tagline-font-size-mobile;
+    }
+    &__footer {
+      font-size: $footer-font-size-mobile;
+      font-style: italic;
+    }
+    &__content {
+      position: sticky;
       display: flex;
+      margin: 1.5em 0;
+      top: 6em;
+      padding-bottom: 16px;
+      flex-wrap: wrap;
       justify-content: center;
+      align-items: flex-start;
+      overflow: hidden;
+      transition: background-color 250ms;
+    }
+    &__img {
+      &__wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 642px) and (max-width: 1524px) {
+  .agGridLogo {
+    height: 50px;
+  }
+
+  .agChartsLogo {
+    height: 50px;
+  }
+
+  .sponsors {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    margin-top: -240px;
+
+    &__buttons__wrapper {
+      display: flex;
       width: 100%;
+      flex-direction: row;
+      justify-content: center;
+    }
+    &__link-wrapper {
+      box-shadow: $link-wrapper-shadow;
+      border-radius: $link-wrapper-radius;
+      margin: $link-wrapper-margin;
+      transition: transform 0.2s;
+      &:hover {
+        background-color: getColor(concrete);
+        transform: scale(1.05);
+      }
+    }
+    &__tagline,
+    &__footer {
+      margin: 1rem 0;
+      text-align: center;
+      color: $sponsor-text-color-light;
+    }
+    &__tagline {
+      font-size: $tagline-font-size-mobile;
+    }
+    &__footer {
+      font-size: $footer-font-size-mobile;
+      font-style: italic;
+    }
+    &__content {
+      position: sticky;
+      display: flex;
+      flex-direction: column;
+      margin: 1.5em 0;
+      top: 6em;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid getColor(concrete);
+      overflow: hidden;
+      transition: background-color 250ms;
+      padding-bottom: 32px;
+    }
+    &__img {
+      background: red !important;
+      &__wrapper {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 1525px) {
+  .agGridLogo {
+    max-width: 220px;
+    height: auto;
+  }
+
+  .agChartsLogo {
+    max-width: 220px;
+    height: auto;
+  }
+
+  .sponsors {
+    position: absolute;
+    height: 100%;
+    width: 250px;
+    margin-left: -250px;
+    margin-right: 8px;
+
+    &__link-wrapper {
+      box-shadow: $link-wrapper-shadow;
+      border-radius: $link-wrapper-radius;
+      margin: $link-wrapper-margin;
+      transition: transform 0.2s;
+      &:hover {
+        background-color: getColor(concrete);
+        transform: scale(1.05);
+      }
+    }
+    &__tagline,
+    &__footer {
+      margin: 1rem 0;
+      text-align: center;
+      color: $sponsor-text-color-light;
+    }
+    &__tagline {
+      font-size: $tagline-font-size;
+    }
+    &__footer {
+      font-size: $footer-font-size;
+      font-style: italic;
+    }
+    &__content {
+      position: sticky;
+      display: flex;
+      margin: 1.5em 0;
+      top: 6em;
+      padding: 0 1.5em 3em;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      border-right: 2px solid getColor(concrete);
+      overflow: hidden;
+      transition: background-color 250ms;
+    }
+    &__img {
+      &__wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
     }
   }
 }
