@@ -20,7 +20,6 @@ import isClient from '../../utilities/is-client';
 import getAdjacentPages from '../../utilities/get-adjacent-pages/index.mjs';
 
 // Import Components
-import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import Container from '../Container/Container';
@@ -294,7 +293,7 @@ function Site(props) {
         </Route>
       </Routes>
       <Footer />
-      <NotificationBar />
+      
     </div>
   );
 }
