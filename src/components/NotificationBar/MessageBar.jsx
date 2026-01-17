@@ -32,7 +32,7 @@ export default function MessageBar(props) {
         >
           <Content />
           {localStorageIsEnabled ? (
-            <button
+            <div
               type="button"
               className="px-20 self-stretch inline-flex items-center cursor-pointer"
               onClick={close}
@@ -42,7 +42,7 @@ export default function MessageBar(props) {
                 className="fill-current text-gray-300 dark:text-white transform duration-200 hover:text-gray-700"
                 width={25}
               />
-            </button>
+            </div>
           ) : null}
         </animated.div>
       ))}
