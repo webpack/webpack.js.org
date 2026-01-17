@@ -33,7 +33,7 @@ export default function MessageBar(props) {
           <Content />
           {localStorageIsEnabled ? (
             <div
-              type="button"
+              role="button"
               className="px-20 self-stretch inline-flex items-center cursor-pointer"
               onClick={close}
             >
