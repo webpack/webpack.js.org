@@ -156,7 +156,7 @@ loadComponent('abtests', 'test123');
 Generally, remotes are configured using URL's like in this example:
 
 ```js
-module.exports = {
+export default {
   plugins: [
     new ModuleFederationPlugin({
       name: 'host',
@@ -171,7 +171,7 @@ module.exports = {
 But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
 
 ```js
-module.exports = {
+export default {
   plugins: [
     new ModuleFederationPlugin({
       name: 'host',
@@ -229,7 +229,7 @@ Example:
 **webpack.config.js (remote)**
 
 ```js
-module.exports = {
+export default {
   entry: {
     remote: './public-path',
   },
@@ -269,7 +269,7 @@ Example:
 **webpack.config.js (remote)**
 
 ```js
-module.exports = {
+export default {
   entry: {
     remote: './setup-public-path',
   },

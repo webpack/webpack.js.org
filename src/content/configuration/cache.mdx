@@ -78,6 +78,10 @@ Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -100,6 +104,10 @@ Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.n
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...

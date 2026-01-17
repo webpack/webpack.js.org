@@ -41,6 +41,10 @@ This set of options is picked up by [webpack-dev-server](https://github.com/webp
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -879,6 +883,10 @@ You can also listen to a different socket with:
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1355,6 +1363,10 @@ It also allows you to set additional [TLS options](https://nodejs.org/api/tls.ht
 ```javascript
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1524,6 +1536,10 @@ Tell the server where to serve the content from. This is only necessary if you w
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1541,6 +1557,10 @@ Provide an array of objects in case you have multiple static folders:
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1590,6 +1610,10 @@ Tell the server at which URL to serve [`static.directory`](#directory) content. 
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1608,6 +1632,10 @@ Provide an array of objects in case you have multiple static folders:
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1638,6 +1666,10 @@ Tell dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) 
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1672,6 +1704,10 @@ Tell dev-server to watch the files served by the [`static.directory`](#directory
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
@@ -1702,6 +1738,10 @@ It is possible to configure advanced options for watching static files from [`st
 
 ```javascript
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   //...
