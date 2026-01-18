@@ -35,6 +35,7 @@ export default function MessageBar(props) {
             <button
               type="button"
               className="px-20 self-stretch inline-flex items-center cursor-pointer"
+              style={{ background: 'none', border: 'none'}}
               onClick={close}
             >
               <CloseIcon
