@@ -31,7 +31,7 @@ Tells webpack to check the incompatible types of WebAssembly modules when they a
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     checkWasmTypes: false,
@@ -61,7 +61,7 @@ The following string values are supported:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     chunkIds: 'named',
@@ -74,7 +74,7 @@ By default, a minimum length of 3 digits is used when `optimization.chunkIds` is
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     chunkIds: false,
@@ -97,7 +97,7 @@ By default `optimization.concatenateModules` is enabled in `production` [mode](/
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     concatenateModules: true,
@@ -114,7 +114,7 @@ Use the `optimization.emitOnErrors` to emit assets whenever there are errors whi
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     emitOnErrors: true,
@@ -139,7 +139,7 @@ By default, `optimization.avoidEntryIife` is enabled in `production` [mode](/con
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     avoidEntryIife: true,
@@ -158,7 +158,7 @@ Tells webpack to determine and flag chunks which are subsets of other chunks in 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     flagIncludedChunks: true,
@@ -175,7 +175,7 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     innerGraph: false,
@@ -203,7 +203,7 @@ The following values are supported:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     mangleExports: true,
@@ -220,7 +220,7 @@ When set to `true` tells webpack to reduce the size of WASM by changing imports 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     mangleWasmImports: true,
@@ -237,7 +237,7 @@ Tells webpack to merge chunks which contain the same modules. Setting `optimizat
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     mergeDuplicateChunks: false,
@@ -254,7 +254,7 @@ Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-web
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     minimize: false,
@@ -275,7 +275,7 @@ Allows you to override the default minimizer by providing a different one or mor
 ```js
 const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = {
+export default {
   optimization: {
     minimizer: [
       new TerserPlugin({
@@ -292,7 +292,7 @@ module.exports = {
 Or, as function:
 
 ```js
-module.exports = {
+export default {
   optimization: {
     minimizer: [
       (compiler) => {
@@ -329,7 +329,7 @@ By default, webpack would set `optimization.minimizer` to [the following value](
 Which can be accessed with `'...'` in case you want to keep it when customizing `optimization.minimizer`:
 
 ```js
-module.exports = {
+export default {
   optimization: {
     minimizer: [new CssMinimizer(), '...'],
   },
@@ -356,7 +356,7 @@ The following string values are supported:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     moduleIds: 'deterministic',
@@ -369,7 +369,7 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     moduleIds: false,
@@ -400,7 +400,7 @@ Possible values:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     nodeEnv: 'production',
@@ -421,7 +421,7 @@ By default `optimization.portableRecords` is disabled. Automatically enabled if 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     portableRecords: true,
@@ -438,7 +438,7 @@ Tells webpack to figure out which exports are provided by modules to generate mo
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     providedExports: false,
@@ -455,7 +455,7 @@ Adds an additional hash compilation pass after the assets have been processed to
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     realContentHash: false,
@@ -472,7 +472,7 @@ Tells webpack to detect and remove modules from chunks when these modules are al
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     removeAvailableModules: true,
@@ -491,7 +491,7 @@ Tells webpack to detect and remove chunks which are empty. Setting `optimization
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     removeEmptyChunks: false,
@@ -508,7 +508,7 @@ Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     runtimeChunk: {
@@ -523,7 +523,7 @@ The value `'single'` instead creates a runtime file to be shared for all generat
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     runtimeChunk: {
@@ -542,7 +542,7 @@ W> Imported modules are initialized for each runtime chunk separately, so if you
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     runtimeChunk: {
@@ -575,7 +575,7 @@ T> Please note that `sideEffects` should be in the npm module's `package.json` f
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     sideEffects: true,
@@ -586,7 +586,7 @@ module.exports = {
 To only use the manual flag and do not analyse source code:
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     sideEffects: 'flag',
@@ -614,7 +614,7 @@ Dead code elimination in minimizers will benefit from this and can remove unused
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     usedExports: false,
@@ -625,7 +625,7 @@ module.exports = {
 To opt-out from used exports analysis per runtime:
 
 ```js
-module.exports = {
+export default {
   //...
   optimization: {
     usedExports: 'global',

@@ -26,15 +26,13 @@ A webpack **plugin** is a JavaScript object that has an [`apply`](https://develo
 ```javascript
 const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
-class ConsoleLogOnBuildWebpackPlugin {
+export default class ConsoleLogOnBuildWebpackPlugin {
   apply(compiler) {
     compiler.hooks.run.tap(pluginName, (compilation) => {
       console.log('The webpack build process is starting!');
     });
   }
 }
-
-module.exports = ConsoleLogOnBuildWebpackPlugin;
 ```
 
 It is recommended that the first parameter of the tap method of the compiler hook should be a camelized version of the plugin name. It is advisable to use a constant for this so it can be reused in all hooks.
@@ -50,11 +48,15 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
 **webpack.config.js**
 
 ```javascript
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack'); //to access built-in plugins
-const path = require('path');
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack'; //to access built-in plugins
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: './path/to/my/entry/file.js',
   output: {
     filename: 'my-first-webpack.bundle.js',
@@ -84,10 +86,10 @@ When using the Node API, you can also pass plugins via the `plugins` property in
 **some-node-script.js**
 
 ```javascript
-const webpack = require('webpack'); //to access webpack runtime
-const configuration = require('./webpack.config.js');
+import webpack from 'webpack'; //to access webpack runtime
+import configuration from './webpack.config.js';
 
-let compiler = webpack(configuration);
+const compiler = webpack(configuration);
 
 new webpack.ProgressPlugin().apply(compiler);
 

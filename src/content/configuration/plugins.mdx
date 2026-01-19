@@ -23,7 +23,7 @@ An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugi
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   //...
   plugins: [
     new webpack.DefinePlugin({
@@ -44,7 +44,7 @@ var webpack = require('webpack');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
 // adding plugins to your configuration
-module.exports = {
+export default {
   //...
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

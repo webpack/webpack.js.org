@@ -39,7 +39,7 @@ When you describe an entry point - under the hood, you create a chunk group with
 **./webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   entry: './index.js',
 };
 ```
@@ -52,7 +52,7 @@ Another example:
 **./webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   entry: {
     home: './home.js',
     about: './about.js',
@@ -77,7 +77,7 @@ Each chunk has a corresponding **asset**. The assets are the output files - the 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   entry: './src/index.jsx',
 };
 ```

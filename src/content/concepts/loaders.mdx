@@ -34,7 +34,7 @@ And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for eve
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     rules: [
       { test: /\.css$/, use: 'css-loader' },
@@ -61,7 +61,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
 
 ```js
-module.exports = {
+export default {
   module: {
     rules: [
       {

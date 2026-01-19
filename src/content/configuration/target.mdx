@@ -50,7 +50,7 @@ A version of `node` or `electron` may be optionally specified. This is denoted b
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   target: 'node12.18',
 };
@@ -80,7 +80,7 @@ When multiple targets are passed, then common subset of features will be used:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   target: ['web', 'es5'],
 };
@@ -93,7 +93,7 @@ Not all targets may be mixed for now.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   target: ['web', 'node'],
 };
@@ -108,7 +108,7 @@ Set `target` to `false` if none of the predefined targets from the list above me
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   target: false,
 };
@@ -121,7 +121,7 @@ Or you can apply specific plugins you want:
 ```js
 const webpack = require('webpack');
 
-module.exports = {
+export default {
   // ...
   target: false,
   plugins: [

@@ -54,7 +54,7 @@ By default its value is `./src/index.js`, but you can specify a different (or mu
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   entry: './path/to/my/entry/file.js',
 };
 ```
@@ -70,9 +70,13 @@ You can configure this part of the process by specifying an `output` field in yo
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: './path/to/my/entry/file.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -99,9 +103,9 @@ At a high level, **loaders** have two properties in your webpack configuration:
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+import path from 'path';
 
-module.exports = {
+export default {
   output: {
     filename: 'my-first-webpack.bundle.js',
   },
@@ -132,10 +136,10 @@ In order to use a plugin, you need to `require()` it and add it to the `plugins`
 **webpack.config.js**
 
 ```javascript
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack'); //to access built-in plugins
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack'; //to access built-in plugins
 
-module.exports = {
+export default {
   module: {
     rules: [{ test: /\.txt$/, use: 'raw-loader' }],
   },
@@ -154,7 +158,7 @@ Using plugins in your webpack configuration is straightforward. However, there a
 By setting the `mode` parameter to either `development`, `production` or `none`, you can enable webpack's built-in optimizations that correspond to each environment. The default value is `production`.
 
 ```javascript
-module.exports = {
+export default {
   mode: 'production',
 };
 ```
