@@ -32,7 +32,7 @@ NormalModuleFactory.hooks.parser
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
 
-### beforeResolve
+## beforeResolve
 
 `AsyncSeriesBailHook`
 
@@ -40,7 +40,7 @@ Called when a new dependency request is encountered. A dependency can be ignored
 
 - Callback Parameters: `resolveData`
 
-### factorize
+## factorize
 
 `AsyncSeriesBailHook`
 
@@ -48,7 +48,7 @@ Called before initiating resolve. It should return `undefined` to proceed.
 
 - Callback Parameters: `resolveData`
 
-### resolve
+## resolve
 
 `AsyncSeriesBailHook`
 
@@ -56,7 +56,7 @@ Called before the request is resolved. A dependency can be ignored by returning 
 
 - Callback Parameters: `resolveData`
 
-### resolveForScheme
+## resolveForScheme
 
 `AsyncSeriesBailHook`
 
@@ -64,7 +64,7 @@ Called before a request with scheme (URI) is resolved.
 
 - Callback Parameters: `resolveData`
 
-### afterResolve
+## afterResolve
 
 `AsyncSeriesBailHook`
 
@@ -72,7 +72,7 @@ Called after the request is resolved.
 
 - Callback Parameters: `resolveData`
 
-### createModule
+## createModule
 
 `AsyncSeriesBailHook`
 
@@ -80,7 +80,7 @@ Called before a `NormalModule` instance is created.
 
 - Callback Parameters: `createData` `resolveData`
 
-### createModuleClass
+## createModuleClass
 
 `HookMap<SyncBailHook>`
 
@@ -92,7 +92,7 @@ A hook that allows you to override the `NormalModule` class when creating module
 
 - Callback Parameters: `createData` `resolveData`
 
-### module
+## module
 
 `SyncWaterfallHook`
 
@@ -100,7 +100,7 @@ Called after a `NormalModule` instance is created.
 
 - Callback Parameters: `module` `createData` `resolveData`
 
-### createParser
+## createParser
 
 `HookMap<SyncBailHook>`
 
@@ -110,7 +110,7 @@ Called before a `Parser` instance is created. `parserOptions` is options in [mod
 
 - Callback Parameters: `parserOptions`
 
-### parser
+## parser
 
 `HookMap<SyncHook>`
 
@@ -130,7 +130,7 @@ Possible default identifiers:
 6. `webassembly/async`
 7. `asset`
 
-### createGenerator
+## createGenerator
 
 `HookMap<SyncBailHook>`
 
@@ -140,7 +140,7 @@ Called before a `Generator` instance is created. `generatorOptions` is options i
 
 - Callback Parameters: `generatorOptions`
 
-### generator
+## generator
 
 `HookMap<SyncHook>`
 
