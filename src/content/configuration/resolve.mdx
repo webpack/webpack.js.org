@@ -33,7 +33,7 @@ Configure how modules are resolved. For example, when calling `import 'lodash'` 
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     // configuration options
   },
@@ -49,14 +49,14 @@ Create aliases to `import` or `require` certain modules more easily. For example
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   resolve: {
     alias: {
-      Utilities: path.resolve(__dirname, 'src/utilities/'),
-      Templates: path.resolve(__dirname, 'src/templates/'),
+      Utilities: path.resolve(__dirname, "src/utilities/"),
+      Templates: path.resolve(__dirname, "src/templates/"),
     },
   },
 };
@@ -65,13 +65,13 @@ module.exports = {
 Now, instead of using relative paths when importing like so:
 
 ```js
-import Utility from '../../utilities/utility';
+import Utility from "../../utilities/utility";
 ```
 
 you can use the alias:
 
 ```js
-import Utility from 'Utilities/utility';
+import Utility from "Utilities/utility";
 ```
 
 A trailing `$` can also be added to the given object's keys to signify an exact match:
@@ -79,13 +79,13 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   resolve: {
     alias: {
-      xyz$: path.resolve(__dirname, 'path/to/file.js'),
+      xyz$: path.resolve(__dirname, "path/to/file.js"),
     },
   },
 };
@@ -94,8 +94,8 @@ module.exports = {
 which would yield these results:
 
 ```js
-import Test1 from 'xyz'; // Exact match, so path/to/file.js is resolved and imported
-import Test2 from 'xyz/file.js'; // Not an exact match, normal resolution takes place
+import Test1 from "xyz"; // Exact match, so path/to/file.js is resolved and imported
+import Test2 from "xyz/file.js"; // Not an exact match, normal resolution takes place
 ```
 
 You can also use wildcards (`*`) in your alias configuration to create more flexible mappings:
@@ -104,10 +104,10 @@ You can also use wildcards (`*`) in your alias configuration to create more flex
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     alias: {
-      '@*': path.resolve(__dirname, 'src/*'), // maps @something to path/to/something
+      "@*": path.resolve(__dirname, "src/*"), // maps @something to path/to/something
     },
   },
 };
@@ -116,8 +116,8 @@ module.exports = {
 This allows you to use imports like:
 
 ```js
-import Component from '@components/Button';
-import utils from '@utils/helpers';
+import Component from "@components/Button";
+import utils from "@utils/helpers";
 ```
 
 The following table explains other cases:
@@ -150,12 +150,12 @@ W> `[string]` values are supported since webpack 5.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     alias: {
       _: [
-        path.resolve(__dirname, 'src/utilities/'),
-        path.resolve(__dirname, 'src/templates/'),
+        path.resolve(__dirname, "src/utilities/"),
+        path.resolve(__dirname, "src/templates/"),
       ],
     },
   },
@@ -166,11 +166,11 @@ Setting `resolve.alias` to `false` will tell webpack to ignore a module.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     alias: {
-      'ignored-module': false,
-      './ignored-module': false,
+      "ignored-module": false,
+      "./ignored-module": false,
     },
   },
 };
@@ -186,9 +186,9 @@ Specify a field, such as `browser`, to be parsed according to [this specificatio
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    aliasFields: ['browser'],
+    aliasFields: ["browser"],
   },
 };
 ```
@@ -207,10 +207,10 @@ Configure resolve options by the type of module request.
       byDependency: {
         // ...
         esm: {
-          mainFields: ['browser', 'module'],
+          mainFields: ["browser", "module"],
         },
         commonjs: {
-          aliasFields: ['browser'],
+          aliasFields: ["browser"],
         },
         url: {
           preferRelative: true,
@@ -230,7 +230,7 @@ Enables caching of successfully resolved requests, allowing cache entries to be 
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     cache: true,
   },
@@ -247,12 +247,11 @@ A function which decides whether a request should be cached or not. An object is
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    cachePredicate: (module) => {
+    cachePredicate: (module) =>
       // additional logic
-      return true;
-    },
+      true,
   },
 };
 ```
@@ -273,9 +272,9 @@ Condition names for [`exports` field](https://nodejs.org/api/packages.html#packa
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    conditionNames: ['require', 'node'],
+    conditionNames: ["require", "node"],
   },
 };
 ```
@@ -313,9 +312,9 @@ For example,
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    conditionNames: ['require', 'node'],
+    conditionNames: ["require", "node"],
   },
 };
 ```
@@ -332,9 +331,9 @@ If you want to add your custom field names while still retaining the default Web
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    conditionNames: ['my-custom-condition', '...'],
+    conditionNames: ["my-custom-condition", "..."],
   },
 };
 ```
@@ -345,9 +344,9 @@ Alternatively, to prioritize the default conditions first, then add your custom 
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    conditionNames: ['...', 'my-custom-condition'],
+    conditionNames: ["...", "my-custom-condition"],
   },
 };
 ```
@@ -362,9 +361,9 @@ The JSON files to use for descriptions.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    descriptionFiles: ['package.json'],
+    descriptionFiles: ["package.json"],
   },
 };
 ```
@@ -379,7 +378,7 @@ If `true`, it will not allow extension-less files. So by default `require('./foo
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     enforceExtension: false,
   },
@@ -396,9 +395,9 @@ Fields in package.json that are used for resolving module requests. See [package
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    exportsFields: ['exports', 'myCompanyExports'],
+    exportsFields: ["exports", "myCompanyExports"],
   },
 };
 ```
@@ -413,11 +412,11 @@ An object which maps extension to extension aliases.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     extensionAlias: {
-      '.js': ['.ts', '.js'],
-      '.mjs': ['.mts', '.mjs'],
+      ".js": [".ts", ".js"],
+      ".mjs": [".mts", ".mjs"],
     },
   },
 };
@@ -433,9 +432,9 @@ Attempt to resolve these extensions in order. If multiple files share the same n
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    extensions: ['.js', '.json', '.wasm'],
+    extensions: [".js", ".json", ".wasm"],
   },
 };
 ```
@@ -443,16 +442,16 @@ module.exports = {
 which is what enables users to leave off the extension when importing:
 
 ```js
-import File from '../path/to/file';
+import File from "../path/to/file";
 ```
 
 Note that using `resolve.extensions` like above will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. However you can use `'...'` to access the default extensions:
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    extensions: ['.ts', '...'],
+    extensions: [".ts", "..."],
   },
 };
 ```
@@ -467,11 +466,11 @@ Redirect module requests when normal resolving fails.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     fallback: {
       abc: false, // do not include a polyfill for abc
-      xyz: path.resolve(__dirname, 'path/to/file.js'), // include a polyfill for xyz
+      xyz: path.resolve(__dirname, "path/to/file.js"), // include a polyfill for xyz
     },
   },
 };
@@ -481,32 +480,32 @@ Webpack 5 no longer polyfills Node.js core modules automatically which means if 
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     fallback: {
-      assert: require.resolve('assert'),
-      buffer: require.resolve('buffer'),
-      console: require.resolve('console-browserify'),
-      constants: require.resolve('constants-browserify'),
-      crypto: require.resolve('crypto-browserify'),
-      domain: require.resolve('domain-browser'),
-      events: require.resolve('events'),
-      http: require.resolve('stream-http'),
-      https: require.resolve('https-browserify'),
-      os: require.resolve('os-browserify/browser'),
-      path: require.resolve('path-browserify'),
-      punycode: require.resolve('punycode'),
-      process: require.resolve('process/browser'),
-      querystring: require.resolve('querystring-es3'),
-      stream: require.resolve('stream-browserify'),
-      string_decoder: require.resolve('string_decoder'),
-      sys: require.resolve('util'),
-      timers: require.resolve('timers-browserify'),
-      tty: require.resolve('tty-browserify'),
-      url: require.resolve('url'),
-      util: require.resolve('util'),
-      vm: require.resolve('vm-browserify'),
-      zlib: require.resolve('browserify-zlib'),
+      assert: require.resolve("assert"),
+      buffer: require.resolve("buffer"),
+      console: require.resolve("console-browserify"),
+      constants: require.resolve("constants-browserify"),
+      crypto: require.resolve("crypto-browserify"),
+      domain: require.resolve("domain-browser"),
+      events: require.resolve("events"),
+      http: require.resolve("stream-http"),
+      https: require.resolve("https-browserify"),
+      os: require.resolve("os-browserify/browser"),
+      path: require.resolve("path-browserify"),
+      punycode: require.resolve("punycode"),
+      process: require.resolve("process/browser"),
+      querystring: require.resolve("querystring-es3"),
+      stream: require.resolve("stream-browserify"),
+      string_decoder: require.resolve("string_decoder"),
+      sys: require.resolve("util"),
+      timers: require.resolve("timers-browserify"),
+      tty: require.resolve("tty-browserify"),
+      url: require.resolve("url"),
+      util: require.resolve("util"),
+      vm: require.resolve("vm-browserify"),
+      zlib: require.resolve("browserify-zlib"),
     },
   },
 };
@@ -522,7 +521,7 @@ When set to true, this option treats user-specified requests as fully specified.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     fullySpecified: true,
   },
@@ -539,9 +538,9 @@ Fields from `package.json` which are used to provide the internal requests of a 
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    importsFields: ['browser', 'module', 'main'],
+    importsFields: ["browser", "module", "main"],
   },
 };
 ```
@@ -558,9 +557,9 @@ When the `target` property is set to `webworker`, `web`, or left unspecified:
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    mainFields: ['browser', 'module', 'main'],
+    mainFields: ["browser", "module", "main"],
   },
 };
 ```
@@ -571,9 +570,9 @@ For any other target (including `node`):
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    mainFields: ['module', 'main'],
+    mainFields: ["module", "main"],
   },
 };
 ```
@@ -599,9 +598,9 @@ The filename to be used while resolving directories.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    mainFiles: ['index'],
+    mainFiles: ["index"],
   },
 };
 ```
@@ -622,9 +621,9 @@ With an absolute path, it will only search in the given directory.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
-    modules: ['node_modules'],
+    modules: ["node_modules"],
   },
 };
 ```
@@ -634,12 +633,12 @@ If you want to add a directory to search in that takes precedence over `node_mod
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
   },
 };
 ```
@@ -654,7 +653,7 @@ A list of additional resolve plugins which should be applied. It allows plugins 
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     plugins: [new DirectoryNamedWebpackPlugin()],
   },
@@ -673,7 +672,7 @@ Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     preferAbsolute: true,
   },
@@ -690,7 +689,7 @@ When enabled, webpack would prefer to resolve module requests as relative reques
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     preferRelative: true,
   },
@@ -699,14 +698,16 @@ module.exports = {
 
 **src/index.js**
 
+{/* eslint-disable */}
+
 ```js
 // let's say `src/logo.svg` exists
-import logo1 from 'logo.svg'; // this is viable when `preferRelative` enabled
-import logo2 from './logo.svg'; // otherwise you can only use relative path to resolve logo.svg
+import logo1 from "logo.svg"; // this is viable when `preferRelative` enabled
+import logo2 from "./logo.svg"; // otherwise you can only use relative path to resolve logo.svg
 
 // `preferRelative` is enabled by default for `new URL()` case
-const b = new URL('module/path', import.meta.url);
-const a = new URL('./module/path', import.meta.url);
+const b = new URL("module/path", import.meta.url);
+const a = new URL("./module/path", import.meta.url);
 ```
 
 ### resolve.restrictions
@@ -719,7 +720,7 @@ A list of resolve restrictions to restrict the paths that a request can be resol
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     restrictions: [/\.(sass|scss|css)$/],
   },
@@ -735,9 +736,10 @@ A list of directories where requests of server-relative URLs (starting with '/')
 **webpack.config.js**
 
 ```js
-const fixtures = path.resolve(__dirname, 'fixtures');
+const fixtures = path.resolve(__dirname, "fixtures");
+
 module.exports = {
-  //...
+  // ...
   resolve: {
     roots: [__dirname, fixtures],
   },
@@ -756,7 +758,7 @@ When enabled, symlinked resources are resolved to their _real_ path, not their s
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     symlinks: true,
   },
@@ -773,7 +775,7 @@ Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     unsafeCache: true,
   },
@@ -804,8 +806,9 @@ const unsafeCacheHandler = {
   },
 };
 const theProxiedCache = new Proxy(realUnsafeCache, unsafeCacheHandler);
+
 module.exports = {
-  //...
+  // ...
   resolve: {
     unsafeCache: theProxiedCache,
   },
@@ -824,7 +827,7 @@ Use synchronous filesystem calls for the resolver.
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolve: {
     useSyncFileSystemCalls: true,
   },
@@ -841,11 +844,11 @@ This set of options is identical to the `resolve` property set above, but is use
 
 ```js
 module.exports = {
-  //...
+  // ...
   resolveLoader: {
-    modules: ['node_modules'],
-    extensions: ['.js', '.json'],
-    mainFields: ['loader', 'main'],
+    modules: ["node_modules"],
+    extensions: [".js", ".json"],
+    mainFields: ["loader", "main"],
   },
 };
 ```

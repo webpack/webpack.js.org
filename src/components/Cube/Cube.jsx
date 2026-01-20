@@ -1,9 +1,9 @@
 // Import External Dependencies
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Component } from "react";
 
 // Load Styling
-import './Cube.scss';
+import "./Cube.scss";
 
 export default class Cube extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ export default class Cube extends Component {
 
   static defaultProps = {
     hover: false,
-    theme: 'dark',
+    theme: "dark",
     depth: 30,
     repeatDelay: 1000,
   };
@@ -30,8 +30,8 @@ export default class Cube extends Component {
   };
 
   render() {
-    let { x, y, z } = this.state;
-    let { theme, depth, className = '' } = this.props;
+    const { x, y, z } = this.state;
+    const { theme, depth, className = "" } = this.props;
 
     return (
       <div
@@ -62,7 +62,7 @@ export default class Cube extends Component {
             rotateZ(${z}deg)`,
             }}
           >
-            {this._getFaces('outer')}
+            {this._getFaces("outer")}
           </figure>
           <figure
             className="cube__inner"
@@ -76,7 +76,7 @@ export default class Cube extends Component {
             rotateZ(${-z}deg)`,
             }}
           >
-            {this._getFaces('inner')}
+            {this._getFaces("inner")}
           </figure>
         </span>
       </div>
@@ -84,26 +84,27 @@ export default class Cube extends Component {
   }
 
   componentDidMount() {
-    let { hover, continuous, repeatDelay } = this.props;
+    const { hover, continuous, repeatDelay } = this.props;
 
     if (hover) {
-      this.container.addEventListener('mouseenter', this._spin);
-      this.container.addEventListener('mouseleave', this._reset);
+      this.container.addEventListener("mouseenter", this._spin);
+      this.container.addEventListener("mouseleave", this._reset);
     } else if (continuous) {
       let degrees = 0;
-      let axis = 'y';
+      const axis = "y";
 
-      let animation = () => {
-        let obj = {};
+      const animation = () => {
+        const obj = {};
         obj[axis] = degrees += 90;
         this.setState({
           ...obj,
           iteration: (this.state.iteration + 1) % 4,
         });
+        // eslint-disable-next-line no-use-before-define
         tick();
       };
 
-      let tick = () =>
+      const tick = () =>
         setTimeout(() => requestAnimationFrame(animation), repeatDelay);
 
       this._timeout = tick();
@@ -111,11 +112,11 @@ export default class Cube extends Component {
   }
 
   componentWillUnmount() {
-    let { hover, continuous } = this.props;
+    const { hover, continuous } = this.props;
 
     if (hover) {
-      this.container.removeEventListener('mouseenter', this._spin);
-      this.container.removeEventListener('mouseleave', this._reset);
+      this.container.removeEventListener("mouseenter", this._spin);
+      this.container.removeEventListener("mouseleave", this._reset);
     } else if (continuous) {
       clearTimeout(this._timeout);
     }
@@ -128,7 +129,7 @@ export default class Cube extends Component {
    * @return {array} - An array of nodes
    */
   _getFaces(type) {
-    let { iteration } = this.state;
+    const { iteration } = this.state;
 
     // Keep the thicker border on
     // the outside on each iteration
@@ -172,15 +173,15 @@ export default class Cube extends Component {
     };
 
     return [
-      'rotateX(0deg)',
-      'rotateX(-90deg)',
-      'rotateX(90deg)',
-      'rotateY(-90deg)',
-      'rotateY(90deg)',
-      'rotateY(180deg)',
+      "rotateX(0deg)",
+      "rotateX(-90deg)",
+      "rotateX(90deg)",
+      "rotateY(-90deg)",
+      "rotateY(90deg)",
+      "rotateY(180deg)",
     ].map((rotation, i) => {
       const borderStyles =
-        type === 'outer'
+        type === "outer"
           ? {
               borderTopWidth: borderWidthMap[i].top[iteration],
               borderRightWidth: borderWidthMap[i].right[iteration],
@@ -208,7 +209,7 @@ export default class Cube extends Component {
    * @return {string} - A random axis (i.e. x, y, or z)
    */
   _getRandomAxis() {
-    let axes = Object.keys(this.state);
+    const axes = Object.keys(this.state);
 
     return axes[Math.floor(Math.random() * axes.length)];
   }
@@ -219,9 +220,9 @@ export default class Cube extends Component {
    * @param {object} e - Native event
    */
   _spin = () => {
-    let obj = {};
-    let axis = this._getRandomAxis();
-    let sign = Math.random() < 0.5 ? -1 : 1;
+    const obj = {};
+    const axis = this._getRandomAxis();
+    const sign = Math.random() < 0.5 ? -1 : 1;
 
     obj[axis] = sign * 90;
 

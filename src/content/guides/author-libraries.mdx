@@ -75,26 +75,22 @@ We install `lodash` as `devDependencies` instead of `dependencies` because we do
 **src/index.js**
 
 ```js
-import _ from 'lodash';
-import numRef from './ref.json';
+import _ from "lodash";
+import numRef from "./ref.json";
 
 export function numToWord(num) {
   return _.reduce(
     numRef,
-    (accum, ref) => {
-      return ref.num === num ? ref.word : accum;
-    },
-    ''
+    (accum, ref) => (ref.num === num ? ref.word : accum),
+    "",
   );
 }
 
 export function wordToNum(word) {
   return _.reduce(
     numRef,
-    (accum, ref) => {
-      return ref.word === word && word.toLowerCase() ? ref.num : accum;
-    },
-    -1
+    (accum, ref) => (ref.word === word && word.toLowerCase() ? ref.num : accum),
+    -1,
   );
 }
 ```
@@ -106,13 +102,13 @@ Let's start with this basic webpack configuration:
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-numbers.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "webpack-numbers.js",
   },
 };
 ```
@@ -143,7 +139,7 @@ We exposed the entry point as `webpackNumbers` so users can use it through scrip
 ```html
 <script src="https://example.org/webpack-numbers.js"></script>
 <script>
-  window.webpackNumbers.wordToNum('Five');
+  window.webpackNumbers.wordToNum("Five");
 </script>
 ```
 
@@ -154,17 +150,18 @@ As a library author, we want it to be compatible in different environments, i.e.
 - **CommonJS module require**:
 
   ```js
-  const webpackNumbers = require('webpack-numbers');
+  const webpackNumbers = require("webpack-numbers");
+
   // ...
-  webpackNumbers.wordToNum('Two');
+  webpackNumbers.wordToNum("Two");
   ```
 
 - **AMD module require**:
 
   ```js
-  require(['webpackNumbers'], function (webpackNumbers) {
+  require(["webpackNumbers"], (webpackNumbers) => {
     // ...
-    webpackNumbers.wordToNum('Two');
+    webpackNumbers.wordToNum("Two");
   });
   ```
 
@@ -178,9 +175,9 @@ As a library author, we want it to be compatible in different environments, i.e.
     <script>
       // ...
       // Global variable
-      webpackNumbers.wordToNum('Five');
+      webpackNumbers.wordToNum("Five");
       // Property in the window object
-      window.webpackNumbers.wordToNum('Five');
+      window.webpackNumbers.wordToNum("Five");
       // ...
     </script>
   </html>
@@ -249,8 +246,8 @@ This means that your library expects a dependency named `lodash` to be available
 For libraries that use several files from a dependency:
 
 ```js
-import A from 'library/one';
-import B from 'library/two';
+import A from "library/one";
+import B from "library/two";
 
 // ...
 ```
@@ -259,10 +256,10 @@ You won't be able to exclude them from the bundle by specifying `library` in the
 
 ```js
 module.exports = {
-  //...
+  // ...
   externals: [
-    'library/one',
-    'library/two',
+    "library/one",
+    "library/two",
     // Everything that starts with "library/"
     /^library\/.+$/,
   ],

@@ -23,18 +23,18 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: "babel-loader",
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      "process.env.NODE_ENV": JSON.stringify("production"),
     }),
   ],
 };
@@ -44,11 +44,11 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  extends: path.resolve(__dirname, './base.webpack.config.js'),
-  entry: './src/index.js',
+  extends: path.resolve(__dirname, "./base.webpack.config.js"),
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
 };
 ```
@@ -67,7 +67,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
+        use: "babel-loader",
         exclude: /node_modules/,
       },
     ],
@@ -83,7 +83,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -95,13 +95,13 @@ module.exports = {
 ```javascript
 module.exports = {
   extends: [
-    path.resolve(__dirname, './js.webpack.config.js'),
-    path.resolve(__dirname, './css.webpack.config.js'),
+    path.resolve(__dirname, "./js.webpack.config.js"),
+    path.resolve(__dirname, "./css.webpack.config.js"),
   ],
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
 };
 ```
@@ -115,8 +115,8 @@ You can override configurations from the extended configuration by passing the s
 ```javascript
 module.exports = {
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
 };
 ```
@@ -125,12 +125,12 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  extends: path.resolve(__dirname, './base.webpack.config.js'),
-  entry: './src/index.js',
+  extends: path.resolve(__dirname, "./base.webpack.config.js"),
+  entry: "./src/index.js",
   // overriding the output path and filename
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, "build"),
+    filename: "[name].bundle.js",
   },
 };
 ```
@@ -143,11 +143,11 @@ You can also load configuration from third-party packages by passing the package
 
 ```javascript
 module.exports = {
-  extends: require.resolve('webpack-config-foo'),
-  entry: './src/index.js',
+  extends: require.resolve("webpack-config-foo"),
+  entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
 };
 ```

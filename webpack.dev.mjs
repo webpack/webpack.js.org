@@ -1,15 +1,16 @@
-import path from 'path';
-import { merge } from 'webpack-merge';
-import HTMLPlugin from 'html-webpack-plugin';
-import DirectoryTreePlugin from 'directory-tree-webpack-plugin';
-import common from './webpack.common.mjs';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import DirectoryTreePlugin from "directory-tree-webpack-plugin";
+import HTMLPlugin from "html-webpack-plugin";
+import { merge } from "webpack-merge";
 import {
   enhance,
   filter,
   sort,
-} from './src/utilities/content-tree-enhancers.mjs';
-import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import { fileURLToPath } from 'url';
+} from "./src/utilities/content-tree-enhancers.mjs";
+import common from "./webpack.common.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -18,20 +19,20 @@ export default (env) =>
     experiments: {
       lazyCompilation: false,
     },
-    mode: 'development',
-    devtool: 'source-map',
+    mode: "development",
+    devtool: "source-map",
     entry: {
-      index: './index.jsx',
+      index: "./index.jsx",
     },
     plugins: [
       new ReactRefreshWebpackPlugin(),
       new HTMLPlugin({
-        template: 'index.html',
-        favicon: 'favicon.ico',
+        template: "index.html",
+        favicon: "favicon.ico",
       }),
       new DirectoryTreePlugin({
-        dir: 'src/content',
-        path: 'src/_content.json',
+        dir: "src/content",
+        path: "src/_content.json",
         extensions: /\.mdx?/,
         enhance,
         filter,
@@ -39,7 +40,7 @@ export default (env) =>
       }),
     ],
     devServer: {
-      static: path.resolve(__dirname, './dist'),
+      static: path.resolve(__dirname, "./dist"),
       port: 3000,
       hot: true,
       compress: true,

@@ -14,7 +14,7 @@ lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ```js
 const nmf = NormalModuleFactory.hooks;
-nmf.someHook.tap('MyPlugin', (resolveData) => {
+nmf.someHook.tap("MyPlugin", (resolveData) => {
   // ...
 });
 ```
@@ -23,8 +23,8 @@ NormalModuleFactory creates `Parser` and `Generator` instances which can be acce
 
 ```js
 NormalModuleFactory.hooks.parser
-  .for('javascript/esm')
-  .tap('MyPlugin', (parser, parserOptions) => {
+  .for("javascript/esm")
+  .tap("MyPlugin", (parser, parserOptions) => {
     // ...
   });
 ```

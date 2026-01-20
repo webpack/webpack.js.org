@@ -1,17 +1,9 @@
-import { useState } from 'react';
-import VisibilitySensor from 'react-visibility-sensor';
-import SmallIcon from '../../assets/icon-square-small-slack.png';
-import PropTypes from 'prop-types';
-import { contributorsNotFound } from './404.js';
+import PropTypes from "prop-types";
+import { useState } from "react";
+import VisibilitySensor from "react-visibility-sensor";
+import SmallIcon from "../../assets/icon-square-small-slack.png";
+import { contributorsNotFound } from "./404.js";
 
-Contributors.propTypes = {
-  contributors: PropTypes.array.isRequired,
-};
-
-Contributor.propTypes = {
-  contributor: PropTypes.string.isRequired,
-  inView: PropTypes.bool.isRequired,
-};
 function Contributor({ contributor, inView }) {
   return (
     <a key={contributor} href={`https://github.com/${contributor}`}>
@@ -28,6 +20,11 @@ function Contributor({ contributor, inView }) {
     </a>
   );
 }
+
+Contributor.propTypes = {
+  contributor: PropTypes.string.isRequired,
+  inView: PropTypes.bool.isRequired,
+};
 
 export default function Contributors({ contributors }) {
   const [inView, setInView] = useState(false);
@@ -51,7 +48,10 @@ export default function Contributors({ contributors }) {
       <div>
         <div className="grid gap-[10px] lg:gap-[15px] grid-cols-contributors">
           {contributors
-            .filter((c) => contributorsNotFound.includes(c) === false)
+            .filter(
+              (contributor) =>
+                contributorsNotFound.includes(contributor) === false,
+            )
             .map((contributor) => (
               <Contributor
                 key={contributor}
@@ -64,3 +64,7 @@ export default function Contributors({ contributors }) {
     </VisibilitySensor>
   );
 }
+
+Contributors.propTypes = {
+  contributors: PropTypes.array.isRequired,
+};

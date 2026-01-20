@@ -6,11 +6,11 @@ contributors:
   - EugeneHlushko
   - Kolhar730
 related:
-  - title: 'To v2 or v3 from v1'
+  - title: "To v2 or v3 from v1"
     url: https://webpack.js.org/migrate/3/
-  - title: 'RIP CommonChunkPlugin'
+  - title: "RIP CommonChunkPlugin"
     url: https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
-  - title: 'webpack 4: migration guide for plugins/loaders'
+  - title: "webpack 4: migration guide for plugins/loaders"
     url: https://medium.com/webpack/webpack-4-migration-guide-for-plugins-loaders-20a79b927202
 ---
 
@@ -109,7 +109,7 @@ When using `import()` to load non-ESM the result has changed in webpack 4. Now y
 ```javascript
 module.exports = {
   sayHello: () => {
-    console.log('hello world');
+    console.log("hello world");
   },
 };
 ```
@@ -118,7 +118,7 @@ module.exports = {
 
 ```javascript
 function sayHello() {
-  import('./non-esm.js').then((module) => {
+  import("./non-esm.js").then((module) => {
     module.default.sayHello();
   });
 }

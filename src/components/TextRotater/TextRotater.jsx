@@ -1,9 +1,9 @@
 // Import External Dependencies
-import { Children, cloneElement, PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Children, PureComponent, cloneElement } from "react";
 
 // Load Styling
-import './TextRotater.scss';
+import "./TextRotater.scss";
 
 export default class TextRotater extends PureComponent {
   static defaultProps = {
@@ -31,11 +31,11 @@ export default class TextRotater extends PureComponent {
     const childrenCount = Children.count(children);
 
     const currentChild = cloneElement(children[currentIndex], {
-      ref: (c) => (this.content = c),
+      ref: (child) => (this.content = child),
     });
 
     const nextChild = cloneElement(
-      children[(currentIndex + 1) % childrenCount]
+      children[(currentIndex + 1) % childrenCount],
     );
 
     return (
@@ -62,15 +62,15 @@ export default class TextRotater extends PureComponent {
 
     setTimeout(() => {
       if (this.textRotatorWrap) {
-        this.textRotatorWrap.classList.add('text-rotater--slide-up');
+        this.textRotatorWrap.classList.add("text-rotater--slide-up");
       }
     }, delay);
 
-    window.addEventListener('resize', this._calculateContentHeight);
+    window.addEventListener("resize", this._calculateContentHeight);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this._calculateContentHeight);
+    window.removeEventListener("resize", this._calculateContentHeight);
   }
 
   _calculateContentHeight = () => {
@@ -83,7 +83,7 @@ export default class TextRotater extends PureComponent {
     const { children, repeatDelay } = this.props;
 
     if (this.textRotatorWrap) {
-      this.textRotatorWrap.classList.remove('text-rotater--slide-up');
+      this.textRotatorWrap.classList.remove("text-rotater--slide-up");
 
       this.setState(
         {
@@ -93,10 +93,10 @@ export default class TextRotater extends PureComponent {
         () => {
           setTimeout(() => {
             if (this.textRotatorWrap) {
-              this.textRotatorWrap.classList.add('text-rotater--slide-up');
+              this.textRotatorWrap.classList.add("text-rotater--slide-up");
             }
           }, repeatDelay);
-        }
+        },
       );
     }
   };

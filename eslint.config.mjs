@@ -1,123 +1,89 @@
-import cypress from 'eslint-plugin-cypress';
-import reactHooks from 'eslint-plugin-react-hooks';
-import { fixupPluginRules } from '@eslint/compat';
-import globals from 'globals';
-import babelParser from '@babel/eslint-parser';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
+import { defineConfig, globalIgnores } from "eslint/config";
+import configs from "eslint-config-webpack/configs.js";
+import cypressPlugin from "eslint-plugin-cypress";
+import * as mdx from "eslint-plugin-mdx";
+import globals from "globals";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
-export default [
+export default defineConfig([
+  globalIgnores([
+    "**/dist/",
+    "**/examples/",
+    "src/content/loaders/_*.mdx",
+    "src/content/plugins/_*.mdx",
+    "src/content/contribute/Governance-*.mdx",
+    ".github/**/*.md",
+    "**/README.md",
+    "src/mdx-components.mjs",
+  ]),
   {
-    ignores: [
-      '**/dist/',
-      '**/examples/',
-      'src/content/loaders/_*.mdx',
-      'src/content/plugins/_*.mdx',
-      '.github/**/*.md',
-      '**/README.md',
-    ],
-  },
-  ...compat.extends(
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'prettier'
-  ),
-  {
-    plugins: {
-      cypress,
-      'react-hooks': fixupPluginRules(reactHooks),
+    extends: [configs.recommended],
+    rules: {
+      "no-console": "off",
+      "n/no-unsupported-features/node-builtins": "off",
     },
-
+  },
+  {
+    extends: [configs["browser/recommended-outdated-module"]],
+    files: [
+      "src/components/**/*.{js,jsx}",
+      "src/utilities/test-local-storage.js",
+      "src/*.jsx",
+      "src/sw.js",
+    ],
+    rules: {
+      "unicorn/prefer-global-this": "off",
+    },
+  },
+  {
+    files: ["cypress/**/*.js"],
+    extends: [cypressPlugin.configs.recommended],
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.jest,
-        ...cypress.configs.globals.languageOptions.globals,
-      },
-
-      parser: babelParser,
-    },
-
-    settings: {
-      react: {
-        version: 'detect',
+        ...cypressPlugin.configs.globals.languageOptions.globals,
       },
     },
-
     rules: {
-      'no-console': 'off',
-      semi: ['error', 'always'],
-      quotes: ['error', 'single'],
-      'no-duplicate-imports': 'error',
-      'react/jsx-uses-react': 'off',
-      'react/react-in-jsx-scope': 'off',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-
-      'react/no-unknown-property': [
-        'error',
-        {
-          ignore: ['watch', 'align'],
-        },
-      ],
+      "no-unused-expressions": "off",
     },
   },
   {
-    files: ['src/**/*.jsx'],
+    ...mdx.flat,
+    files: ["**/*.mdx"],
+    linterOptions: {
+      // Buggy with mdx
+      reportUnusedDisableDirectives: "off",
+    },
+    processor: mdx.createRemarkProcessor({
+      lintCodeBlocks: true,
+    }),
   },
-  ...compat.extends('plugin:mdx/recommended').map((config) => ({
-    ...config,
-    files: ['**/*.mdx'],
-  })),
   {
-    files: ['**/*.mdx'],
-
+    ...mdx.flatCodeBlocks,
     languageOptions: {
-      globals: {
-        Badge: true,
-        StackBlitzPreview: true,
+      sourceType: "module",
+      ecmaVersion: "latest",
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+          globalReturn: true,
+          impliedStrict: true,
+        },
       },
     },
-
-    settings: {
-      'mdx/code-blocks': true,
-    },
-
+    files: ["**/*.mdx/*.{js,jsx,javascript}"],
     rules: {
-      semi: ['off'],
+      ...configs["markdown/recommended"].find(
+        (item) => item.name === "markdown/code-blocks/js",
+      ).rules,
+      "func-names": "off",
+      "no-duplicate-imports": "off",
+      "n/exports-style": "off",
+      "import/no-amd": "off",
+      "import/extensions": "off",
+      "import/default": "off",
+      "unicorn/prefer-top-level-await": "off",
     },
   },
-  {
-    files: ['**/*.mdx/*.{js,javascript}'],
-
-    rules: {
-      indent: ['error', 2],
-
-      quotes: [
-        'error',
-        'single',
-        {
-          allowTemplateLiterals: true,
-        },
-      ],
-
-      'no-undef': 'off',
-      'no-unused-vars': 'off',
-      'no-constant-condition': 'off',
-      'no-useless-escape': 'off',
-      'no-dupe-keys': 'off',
-      'no-duplicate-imports': 'off',
-    },
-  },
-];
+]);

@@ -9,7 +9,7 @@ contributors:
   - EugeneHlushko
 ---
 
-import CodeBlockWithCopy from '../../components/CodeBlockWithCopy/CodeBlockWithCopy';
+import CodeBlockWithCopy from "../../components/CodeBlockWithCopy/CodeBlockWithCopy";
 
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
 
@@ -22,7 +22,7 @@ The minimum requirement for the `output` property in your webpack configuration 
 ```javascript
 module.exports = {
   output: {
-    filename: 'bundle.js',
+    filename: "bundle.js",
   },
 };
 ```
@@ -34,14 +34,16 @@ This configuration would output a single `bundle.js` file into the `dist` direct
 If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output/#outputfilename) to ensure that each file has a unique name.
 
 ```javascript
+const path = require("node:path");
+
 module.exports = {
   entry: {
-    app: './src/app.js',
-    search: './src/search.js',
+    app: "./src/app.js",
+    search: "./src/search.js",
   },
   output: {
-    filename: '[name].js',
-    path: __dirname + '/dist',
+    filename: "[name].js",
+    path: path.resolve(__dirname, "./dist"),
   },
 };
 
@@ -56,10 +58,10 @@ Here's a more complicated example of using a CDN and hashes for assets:
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   output: {
-    path: '/home/proj/cdn/assets/[fullhash]',
-    publicPath: 'https://cdn.example.com/assets/[fullhash]/',
+    path: "/home/proj/cdn/assets/[fullhash]",
+    publicPath: "https://cdn.example.com/assets/[fullhash]/",
   },
 };
 ```

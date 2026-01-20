@@ -1,40 +1,40 @@
-import { isValidElement, Component } from 'react';
-import Popover from 'react-tiny-popover';
-import './Configuration.scss';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Component, isValidElement } from "react";
+import Popover from "react-tiny-popover";
+import "./Configuration.scss";
 
 const DEFAULT_CHILDREN_SIZE = 4;
 
-const isFirstChild = (child) => typeof child === 'string' && child !== ' ';
+const isFirstChild = (child) => typeof child === "string" && child !== " ";
 
 const removeSpaces = (child) => (isFirstChild(child) ? child.trim() : child);
 
-const addLink = (child, i, url) => {
-  return isFirstChild(child) ? (
+const addLink = (child, i, url) =>
+  isFirstChild(child) ? (
     <a href={url} key={i}>
       {child}
     </a>
   ) : (
     child
   );
-};
-const Card = ({ body }) => {
-  return (
-    <div className="markdown">
-      <pre className="inline">
-        <code>{body}</code>
-      </pre>
-    </div>
-  );
-};
+const Card = ({ body }) => (
+  <div className="markdown">
+    <pre className="inline">
+      <code>{body}</code>
+    </pre>
+  </div>
+);
+
 Card.propTypes = {
   body: PropTypes.node,
 };
+
 export class Details extends Component {
   static propTypes = {
     url: PropTypes.string,
     myChilds: PropTypes.arrayOf(PropTypes.node),
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -57,13 +57,15 @@ export class Details extends Component {
     const closeDefaultTagIndex = myChilds.findIndex((child) => {
       if (isValidElement(child)) {
         return (
-          child.props.className.includes('tag') &&
+          child.props.className.includes("tag") &&
           child.props.children.length === DEFAULT_CHILDREN_SIZE
         );
       }
+
+      return false;
     });
 
-    const content = myChilds.slice();
+    const content = [...myChilds];
 
     // Summary is the part of the snippet that would be shown in the code snippet,
     // to get it we need to cut the <default></default> enclosing tags
@@ -78,10 +80,10 @@ export class Details extends Component {
     return (
       <Popover
         isOpen={open}
-        position={['right', 'top']}
+        position={["right", "top"]}
         padding={0}
         onClickOutside={this.clickOutsideHandler}
-        containerClassName={'shadow'}
+        containerClassName={"shadow"}
         content={<Card body={content} />}
       >
         <span

@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Find the minimum level in the anchors
  */

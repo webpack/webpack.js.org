@@ -1,6 +1,8 @@
-import { compileSync } from '@mdx-js/mdx';
-import CleanupReadme from './index.mjs';
-describe('cleanup readme', () => {
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { compileSync } from "@mdx-js/mdx";
+import CleanupReadme from "./index.mjs";
+
+describe("cleanup readme", () => {
   it('should clean up div[align="center"] block without paragraph', () => {
     const mdxText = `
 <div align="center">
@@ -38,7 +40,7 @@ describe('cleanup readme', () => {
     expect(vfile.value).toMatchSnapshot();
   });
 
-  it('should clean up nested div[align="center"] block ', () => {
+  it('should clean up nested div[align="center"] block', () => {
     // see https://github.com/webpack/postcss-loader/blob/master/README.md
     const mdxText = `
 <div align="center">

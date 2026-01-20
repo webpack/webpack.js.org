@@ -1,12 +1,12 @@
-import { Component } from 'react';
-import './SidebarItem.scss';
-import list2Tree from '../../utilities/list2Tree';
-import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
-import BarIcon from '../../styles/icons/vertical-bar.svg';
-import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { Component } from "react";
+import "./SidebarItem.scss";
+import { NavLink } from "react-router-dom";
+import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
+import BarIcon from "../../styles/icons/vertical-bar.svg";
+import list2Tree from "../../utilities/list2Tree/index.js";
 
-const block = 'sidebar-item';
+const block = "sidebar-item";
 
 export default class SidebarItem extends Component {
   static propTypes = {
@@ -15,6 +15,7 @@ export default class SidebarItem extends Component {
     url: PropTypes.string,
     currentPage: PropTypes.string,
   };
+
   state = {
     open: this._isOpen(this.props),
   };
@@ -23,7 +24,7 @@ export default class SidebarItem extends Component {
     // there're two cases
     // 1. location.pathname or location.hash changes which will be handled by useEffect in Page.jsx
     // 2. location.pathname and location.hash doesn't change at all
-    if (window.location.hash !== '') {
+    if (window.location.hash !== "") {
       // case 1
       return;
     }
@@ -53,9 +54,9 @@ export default class SidebarItem extends Component {
   }
 
   render() {
-    let { title, anchors = [] } = this.props;
-    let openMod = this.state.open ? `${block}--open` : '';
-    let disabledMod = anchors.length === 0 ? `${block}--disabled` : '';
+    const { title, anchors = [] } = this.props;
+    const openMod = this.state.open ? `${block}--open` : "";
+    const disabledMod = anchors.length === 0 ? `${block}--disabled` : "";
 
     const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
     const tree = list2Tree(title, filteredAnchors);
@@ -94,6 +95,7 @@ export default class SidebarItem extends Component {
     );
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.currentPage !== this.props.currentPage) {
       this.setState({
@@ -108,7 +110,7 @@ export default class SidebarItem extends Component {
    * @param {object} props - The current props
    */
   _isOpen(props) {
-    return RegExp(`${props.currentPage}/?$`).test(props.url);
+    return new RegExp(`${props.currentPage}/?$`).test(props.url);
   }
 
   /**
@@ -129,7 +131,7 @@ export default class SidebarItem extends Component {
    * @returns {string}
    */
   _generateAnchorURL(anchor) {
-    let { url } = this.props;
+    const { url } = this.props;
     return anchor.id ? `${url}#${anchor.id}` : url;
   }
 }

@@ -24,11 +24,11 @@ The entry object is where webpack looks to start building the bundle. The contex
 The base directory, an **absolute path**, for resolving entry points and loaders from the configuration.
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
-  context: path.resolve(__dirname, 'app'),
+  // ...
+  context: path.resolve(__dirname, "app"),
 };
 ```
 
@@ -48,11 +48,11 @@ A rule to consider: one entry point per HTML page. SPA: one entry point, MPA: mu
 
 ```js
 module.exports = {
-  //...
+  // ...
   entry: {
-    home: './home.js',
-    about: './about.js',
-    contact: './contact.js',
+    home: "./home.js",
+    about: "./about.js",
+    contact: "./contact.js",
   },
 };
 ```
@@ -67,23 +67,23 @@ If an object is passed the value might be a string, array of strings, or a descr
 
 ```js
 module.exports = {
-  //...
+  // ...
   entry: {
-    home: './home.js',
-    shared: ['react', 'react-dom', 'redux', 'react-redux'],
+    home: "./home.js",
+    shared: ["react", "react-dom", "redux", "react-redux"],
     catalog: {
-      import: './catalog.js',
-      filename: 'pages/catalog.js',
-      dependOn: 'shared',
+      import: "./catalog.js",
+      filename: "pages/catalog.js",
+      dependOn: "shared",
       chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
     },
     personal: {
-      import: './personal.js',
-      filename: 'pages/personal.js',
-      dependOn: 'shared',
-      chunkLoading: 'jsonp',
+      import: "./personal.js",
+      filename: "pages/personal.js",
+      dependOn: "shared",
+      chunkLoading: "jsonp",
       asyncChunks: true, // Create async chunks that are loaded on demand.
-      layer: 'name of layer', // set the layer for an entry point
+      layer: "name of layer", // set the layer for an entry point
     },
   },
 };
@@ -97,11 +97,11 @@ By default, the output filename for the entry chunk is extracted from [`output.f
 
 ```js
 module.exports = {
-  //...
+  // ...
   entry: {
-    app: './app.js',
-    home: { import: './contact.js', filename: 'pages/[name].js' },
-    about: { import: './about.js', filename: 'pages/[name].js' },
+    app: "./app.js",
+    home: { import: "./contact.js", filename: "pages/[name].js" },
+    about: { import: "./about.js", filename: "pages/[name].js" },
   },
 };
 ```
@@ -114,10 +114,10 @@ By default, every entry chunk stores all the modules that it uses. With `dependO
 
 ```js
 module.exports = {
-  //...
+  // ...
   entry: {
-    app: { import: './app.js', dependOn: 'react-vendors' },
-    'react-vendors': ['react', 'react-dom', 'prop-types'],
+    app: { import: "./app.js", dependOn: "react-vendors" },
+    "react-vendors": ["react", "react-dom", "prop-types"],
   },
 };
 ```
@@ -128,13 +128,13 @@ The `app` chunk will not contain the modules that `react-vendors` have.
 
 ```js
 module.exports = {
-  //...
+  // ...
   entry: {
-    moment: { import: 'moment-mini', runtime: 'runtime' },
-    reactvendors: { import: ['react', 'react-dom'], runtime: 'runtime' },
+    moment: { import: "moment-mini", runtime: "runtime" },
+    reactvendors: { import: ["react", "react-dom"], runtime: "runtime" },
     testapp: {
-      import: './wwwroot/component/TestApp.tsx',
-      dependOn: ['reactvendors', 'moment'],
+      import: "./wwwroot/component/TestApp.tsx",
+      dependOn: ["reactvendors", "moment"],
     },
   },
 };
@@ -144,10 +144,10 @@ Also, you can specify multiple files per entry using an array:
 
 ```js
 module.exports = {
-  //...
+  // ...
   entry: {
-    app: { import: ['./app.js', './app2.js'], dependOn: 'react-vendors' },
-    'react-vendors': ['react', 'react-dom', 'prop-types'],
+    app: { import: ["./app.js", "./app2.js"], dependOn: "react-vendors" },
+    "react-vendors": ["react", "react-dom", "prop-types"],
   },
 };
 ```
@@ -160,8 +160,8 @@ If a function is passed then it will be invoked on every [make](/api/compiler-ho
 
 ```js
 module.exports = {
-  //...
-  entry: () => './demo',
+  // ...
+  entry: () => "./demo",
 };
 ```
 
@@ -169,8 +169,11 @@ or
 
 ```js
 module.exports = {
-  //...
-  entry: () => new Promise((resolve) => resolve(['./demo', './demo2'])),
+  // ...
+  entry: () =>
+    new Promise((resolve) => {
+      resolve(["./demo", "./demo2"]);
+    }),
 };
 ```
 
@@ -180,9 +183,9 @@ In some scenarios, you might want to organize your entry points into different f
 
 ```javascript
 module.exports = {
- entry: {
-    '/scriptFolder/one/app': './src/one/app.js',
-    '/scriptFolder/two/main': './src/two/main.js',
+  entry: {
+    "/scriptFolder/one/app": "./src/one/app.js",
+    "/scriptFolder/two/main": "./src/two/main.js",
   },
 };
 ```
@@ -209,14 +212,14 @@ It allows setting the runtime chunk for an entry point and setting it to `false`
 
 ```js
 module.exports = {
-  //...
+  // ...
   entry: {
     home: {
-      import: './home.js',
-      runtime: 'home-runtime',
+      import: "./home.js",
+      runtime: "home-runtime",
     },
     about: {
-      import: './about.js',
+      import: "./about.js",
       runtime: false,
     },
   },

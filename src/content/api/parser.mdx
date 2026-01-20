@@ -20,11 +20,11 @@ The `parser` is found within [NormalModuleFactory](/api/compiler-hooks/#normalmo
 more work to access:
 
 ```js
-compiler.hooks.normalModuleFactory.tap('MyPlugin', (factory) => {
+compiler.hooks.normalModuleFactory.tap("MyPlugin", (factory) => {
   factory.hooks.parser
-    .for('javascript/auto')
-    .tap('MyPlugin', (parser, options) => {
-      parser.hooks.someHook.tap('MyPlugin', (data) => {
+    .for("javascript/auto")
+    .tap("MyPlugin", (parser, options) => {
+      parser.hooks.someHook.tap("MyPlugin", (data) => {
         // ...
       });
     });
@@ -51,12 +51,12 @@ Triggered when evaluating an expression consisting in a `typeof` of a free varia
 - Callback Parameters: `expression`
 
 ```js
-parser.hooks.evaluateTypeof
-  .for('myIdentifier')
-  .tap('MyPlugin', (expression) => {
+parser.hooks.evaluateTypeof.for("myIdentifier").tap(
+  "MyPlugin",
+  (expression) =>
     /* ... */
-    return expressionResult;
-  });
+    expressionResult,
+);
 ```
 
 This will trigger the `evaluateTypeof` hook:
@@ -86,16 +86,18 @@ For example:
 **index.js**
 
 ```js
-const a = new String();
+const a = new MyClass();
 ```
 
 **MyPlugin.js**
 
 ```js
-parser.hooks.evaluate.for('NewExpression').tap('MyPlugin', (expression) => {
-  /* ... */
-  return expressionResult;
-});
+parser.hooks.evaluate.for("NewExpression").tap(
+  "MyPlugin",
+  (expression) =>
+    /* ... */
+    expressionResult,
+);
 ```
 
 Where the expressions types are:
@@ -159,12 +161,12 @@ const a = expression.myFunc();
 **MyPlugin.js**
 
 ```js
-parser.hooks.evaluateCallExpressionMember
-  .for('myFunc')
-  .tap('MyPlugin', (expression, param) => {
+parser.hooks.evaluateCallExpressionMember.for("myFunc").tap(
+  "MyPlugin",
+  (expression, param) =>
     /* ... */
-    return expressionResult;
-  });
+    expressionResult,
+);
 ```
 
 ### statement
@@ -176,7 +178,7 @@ General purpose hook that is called for every parsed statement in a code fragmen
 - Callback Parameters: `statement`
 
 ```js
-parser.hooks.statement.tap('MyPlugin', (statement) => {
+parser.hooks.statement.tap("MyPlugin", (statement) => {
   /* ... */
 });
 ```
@@ -235,13 +237,13 @@ The following import statement will trigger the hook once:
 **index.js**
 
 ```js
-import _ from 'lodash';
+import _ from "lodash";
 ```
 
 **MyPlugin.js**
 
 ```js
-parser.hooks.import.tap('MyPlugin', (statement, source) => {
+parser.hooks.import.tap("MyPlugin", (statement, source) => {
   // source == 'lodash'
 });
 ```
@@ -259,14 +261,14 @@ The following import statement will trigger the hook twice:
 **index.js**
 
 ```js
-import _, { has } from 'lodash';
+import _, { has } from "lodash";
 ```
 
 **MyPlugin.js**
 
 ```js
 parser.hooks.importSpecifier.tap(
-  'MyPlugin',
+  "MyPlugin",
   (statement, source, exportName, identifierName) => {
     /* First call
     source == 'lodash'
@@ -278,7 +280,7 @@ parser.hooks.importSpecifier.tap(
     exportName == 'has'
     identifierName == 'has'
   */
-  }
+  },
 );
 ```
 
@@ -309,7 +311,7 @@ Called for every `export` statement exporting a declaration.
 Those exports will trigger this hook:
 
 ```js
-export const myVar = 'hello'; // also var, let
+export const myVar = "hello"; // also var, let
 export function FunctionName() {}
 export class ClassName {}
 ```
@@ -382,10 +384,12 @@ Triggered before renaming an identifier to determine if the renaming is allowed.
 ```js
 const a = b;
 
-parser.hooks.canRename.for('b').tap('MyPlugin', (expression) => {
-  // returning true allows renaming
-  return true;
-});
+parser.hooks.canRename.for("b").tap(
+  "MyPlugin",
+  (expression) =>
+    // returning true allows renaming
+    true,
+);
 ```
 
 ### rename
@@ -400,7 +404,7 @@ Triggered when renaming to get the new identifier. This hook will be called only
 ```js
 const a = b;
 
-parser.hooks.rename.for('b').tap('MyPlugin', (expression) => {});
+parser.hooks.rename.for("b").tap("MyPlugin", (expression) => {});
 ```
 
 ### assign (before parsing assigned expression)
@@ -415,7 +419,7 @@ Called when parsing an `AssignmentExpression` before parsing the assigned expres
 ```js
 a += b;
 
-parser.hooks.assign.for('a').tap('MyPlugin', (expression) => {
+parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
   // this is called before parsing b
 });
 ```
@@ -432,7 +436,7 @@ Called when parsing an `AssignmentExpression` before parsing the assign expressi
 ```js
 a += b;
 
-parser.hooks.assign.for('a').tap('MyPlugin', (expression) => {
+parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
   // this is called before parsing a
 });
 ```
@@ -455,10 +459,12 @@ Called when parsing a function call.
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
+{/* eslint-disable no-eval */}
+
 ```js
 eval(/* something */);
 
-parser.hooks.call.for('eval').tap('MyPlugin', (expression) => {});
+parser.hooks.call.for("eval").tap("MyPlugin", (expression) => {});
 ```
 
 ### callMemberChain
@@ -474,8 +480,8 @@ Triggered when parsing a call to a member function of an object.
 myObj.anyFunc();
 
 parser.hooks.callMemberChain
-  .for('myObj')
-  .tap('MyPlugin', (expression, properties) => {});
+  .for("myObj")
+  .tap("MyPlugin", (expression, properties) => {});
 ```
 
 ### new
@@ -490,7 +496,7 @@ Invoked when parsing a `new` expression.
 ```js
 new MyClass();
 
-parser.hooks.new.for('MyClass').tap('MyPlugin', (expression) => {});
+parser.hooks.new.for("MyClass").tap("MyPlugin", (expression) => {});
 ```
 
 ### expression
@@ -505,7 +511,7 @@ Called when parsing an expression.
 ```js
 const a = this;
 
-parser.hooks.expression.for('this').tap('MyPlugin', (expression) => {});
+parser.hooks.expression.for("this").tap("MyPlugin", (expression) => {});
 ```
 
 ### expressionConditionalOperator

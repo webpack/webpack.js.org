@@ -1,5 +1,5 @@
 // TODO: Try raw-loader or other approach when build process is refactored
-module.exports = {
+export default {
   body: `
   <svg viewBox="0 0 1088 615" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g stroke-width="1" fill="none" fill-rule="evenodd">

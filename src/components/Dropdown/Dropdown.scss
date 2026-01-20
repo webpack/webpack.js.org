@@ -1,4 +1,4 @@
-@import 'functions';
+@import "functions";
 
 .dropdown {
   position: relative;
@@ -22,7 +22,7 @@
 
 .dropdown__arrow {
   &:before {
-    content: '\25be';
+    content: "\25be";
   }
 }
 

@@ -53,7 +53,7 @@ export default function MDXContent(props = {}) {
 "
 `;
 
-exports[`cleanup readme should clean up nested div[align="center"] block  1`] = `
+exports[`cleanup readme should clean up nested div[align="center"] block 1`] = `
 "import {jsx as _jsx} from "react/jsx-runtime";
 function _createMdxContent(props) {
   return _jsx("div", {

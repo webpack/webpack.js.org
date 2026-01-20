@@ -48,7 +48,7 @@ Either `return` or `this.callback` can be used to return the transformed `conten
 **sync-loader.js**
 
 ```javascript
-export default function (content, map, meta) {
+export default function syncLoader(content, map, meta) {
   return someSyncOperation(content);
 }
 ```
@@ -57,8 +57,10 @@ The `this.callback` method is more flexible as you pass multiple arguments inste
 
 **sync-loader-with-multiple-results.js**
 
+{/* eslint-disable no-useless-return */}
+
 ```javascript
-export default function (content, map, meta) {
+export default function syncLoaderWithMultipleResults(content, map, meta) {
   this.callback(null, someSyncOperation(content), map, meta);
   return; // always return undefined when calling callback()
 }
@@ -71,8 +73,8 @@ For asynchronous loaders, you can return the transformed `content` from an `asyn
 **async-loader.js**
 
 ```javascript
-export default async function (content, map, meta) {
-  var result = await someAsyncOperation(content);
+export default async function asyncLoader(content, map, meta) {
+  const result = await someAsyncOperation(content);
   return result;
 }
 ```
@@ -82,9 +84,9 @@ Or you can use [`this.async`](#thisasync) to retrieve the `callback` function:
 **async-loader-with-callback.js**
 
 ```javascript
-export default function (content, map, meta) {
-  var callback = this.async();
-  someAsyncOperation(content, function (err, result) {
+export default function asyncLoaderWithCallback(content, map, meta) {
+  const callback = this.async();
+  someAsyncOperation(content, (err, result) => {
     if (err) return callback(err);
     callback(null, result, map, meta);
   });
@@ -94,9 +96,9 @@ export default function (content, map, meta) {
 **async-loader-with-multiple-results.js**
 
 ```javascript
-export default function (content, map, meta) {
-  var callback = this.async();
-  someAsyncOperation(content, function (err, result, sourceMaps, meta) {
+export default function asyncLoaderWithMultipleResults(content, map, meta) {
+  const callback = this.async();
+  someAsyncOperation(content, (err, result, sourceMaps, meta) => {
     if (err) return callback(err);
     callback(null, result, sourceMaps, meta);
   });
@@ -112,7 +114,7 @@ By default, the resource file is converted to a UTF-8 string and passed to the l
 **raw-loader.js**
 
 ```javascript
-export default function (content) {
+export default function rawLoader(content) {
   assert(content instanceof Buffer);
   return someSyncOperation(content);
   // return value can be a `Buffer` too
@@ -131,12 +133,12 @@ For the following configuration of [`use`](/configuration/module/#ruleuse):
 
 ```javascript
 export default {
-  //...
+  // ...
   module: {
     rules: [
       {
-        //...
-        use: ['a-loader', 'b-loader', 'c-loader'],
+        // ...
+        use: ["a-loader", "b-loader", "c-loader"],
       },
     ],
   },
@@ -160,31 +162,27 @@ So why might a loader take advantage of the "pitching" phase?
 First, the `data` passed to the `pitch` method is exposed in the execution phase as well under `this.data` and could be useful for capturing and sharing information from earlier in the cycle.
 
 ```javascript
-export default function (content) {
+export default function myLoaderName(content) {
   return someSyncOperation(content, this.data.value);
 }
 
-export const pitch = function (remainingRequest, precedingRequest, data) {
+export function pitch(remainingRequest, precedingRequest, data) {
   data.value = 42;
-};
+}
 ```
 
 Second, if a loader delivers a result in the `pitch` method, the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
 
 ```javascript
-export default function (content) {
+export default function myLoaderName(content) {
   return someSyncOperation(content);
 }
 
-export const pitch = function (remainingRequest, precedingRequest, data) {
+export function pitch(remainingRequest, precedingRequest, data) {
   if (someCondition()) {
-    return (
-      'import _from_loader from ' +
-      JSON.stringify('-!' + remainingRequest) +
-      '; export default _from_loader;'
-    );
+    return `import _from_loader from "${JSON.stringify(`-!${remainingRequest}`)}"; export default _from_loader;`;
   }
-};
+}
 ```
 
 The steps above would be shortened to:
@@ -206,7 +204,7 @@ Given the following example, this require call is used:
 In `/abc/file.js`:
 
 ```javascript
-import './loader1?xyz!loader2!./resource?rrr';
+import "./loader1?xyz!loader2!./resource?rrr";
 ```
 
 ### this.addContextDependency
@@ -457,8 +455,8 @@ export default {
     rules: [
       {
         test: /stylesheet\.js$/i,
-        use: ['./a-pitching-loader.js'],
-        type: 'asset/source', // we set type to 'asset/source' as the loader will return a string
+        use: ["./a-pitching-loader.js"],
+        type: "asset/source", // we set type to 'asset/source' as the loader will return a string
       },
     ],
   },
@@ -468,9 +466,9 @@ export default {
 **a-pitching-loader.js**
 
 ```js
-exports.pitch = async function (remaining) {
+module.exports.pitch = async function pitch(remaining) {
   const result = await this.importModule(
-    this.resourcePath + '.webpack[javascript/auto]' + '!=!' + remaining
+    `${this.resourcePath}.webpack[javascript/auto]!=!${remaining}`,
   );
   return result.default || result;
 };
@@ -479,21 +477,22 @@ exports.pitch = async function (remaining) {
 **src/stylesheet.js**
 
 ```js
-import { green, red } from './colors.js';
+import { green, red } from "./colors.js";
+
 export default `body { background: ${red}; color: ${green}; }`;
 ```
 
 **src/colors.js**
 
 ```js
-export const red = '#f00';
-export const green = '#0f0';
+export const red = "#f00";
+export const green = "#0f0";
 ```
 
 **src/index.js**
 
 ```js
-import stylesheet from './stylesheet.js';
+import stylesheet from "./stylesheet.js";
 // stylesheet will be a string `body { background: #f00; color: #0f0; }` at build time
 ```
 
@@ -534,15 +533,15 @@ In [the example](#example-for-the-loader-context):
 ```javascript
 [
   {
-    request: '/abc/loader1.js?xyz',
-    path: '/abc/loader1.js',
-    query: '?xyz',
+    request: "/abc/loader1.js?xyz",
+    path: "/abc/loader1.js",
+    query: "?xyz",
     module: [Function],
   },
   {
-    request: '/abc/node_modules/loader2/index.js',
-    path: '/abc/node_modules/loader2/index.js',
-    query: '',
+    request: "/abc/node_modules/loader2/index.js",
+    path: "/abc/node_modules/loader2/index.js",
+    query: "",
     module: [Function],
   },
 ];
@@ -627,14 +626,14 @@ Access to the following utilities.
 export default function (content) {
   this.utils.contextify(
     this.context,
-    this.utils.absolutify(this.context, './index.js')
+    this.utils.absolutify(this.context, "./index.js"),
   );
   this.utils.absolutify(this.context, this.resourcePath);
   const mainHash = this.utils.createHash(
-    this._compilation.outputOptions.hashFunction
+    this._compilation.outputOptions.hashFunction,
   );
   mainHash.update(content);
-  mainHash.digest('hex');
+  mainHash.digest("hex");
   // …
   return content;
 }
@@ -703,7 +702,7 @@ For example:
 **./src/index.js**
 
 ```javascript
-import './loader!./lib';
+import "./loader!./lib";
 ```
 
 Throwing an error from loader:
@@ -712,7 +711,7 @@ Throwing an error from loader:
 
 ```javascript
 export default function (source) {
-  throw new Error('This is a Fatal Error!');
+  throw new Error("This is a Fatal Error!");
 }
 ```
 
@@ -723,8 +722,8 @@ Or pass an error to the callback in async mode:
 ```javascript
 export default function (source) {
   const callback = this.async();
-  //...
-  callback(new Error('This is a Fatal Error!'), source);
+  // ...
+  callback(new Error("This is a Fatal Error!"), source);
 }
 ```
 
@@ -782,7 +781,7 @@ Example:
 
 ```javascript
 /* STYLE: body { background: red; } */
-console.log('yep');
+console.log("yep");
 ```
 
 A loader could transform the file into the following file and use the `matchResource` to apply the user-specified CSS processing rules:
@@ -790,8 +789,9 @@ A loader could transform the file into the following file and use the `matchReso
 **file.js** (transformed by loader)
 
 ```javascript
-import './file.js.css!=!extract-style-loader/getStyles!./file.js';
-console.log('yep');
+import "./file.js.css!=!extract-style-loader/getStyles!./file.js";
+
+console.log("yep");
 ```
 
 This will add a dependency to `extract-style-loader/getStyles!./file.js` and treat the result as `file.js.css`. Because [`module.rules`](/configuration/module/#modulerules) has a rule matching `/\.css$/` and it will apply to this dependency.
@@ -801,16 +801,16 @@ The loader could look like this:
 **extract-style-loader/index.js**
 
 ```javascript
-import getStylesLoader from './getStyles';
+import getStylesLoader from "./getStyles";
 
 export default function (source) {
   if (STYLES_REGEXP.test(source)) {
-    source = source.replace(STYLES_REGEXP, '');
+    source = source.replace(STYLES_REGEXP, "");
     return `import ${JSON.stringify(
       this.utils.contextify(
         this.context || this.rootContext,
-        `${this.resource}.css!=!${getStylesLoader}!${this.remainingRequest}`
-      )
+        `${this.resource}.css!=!${getStylesLoader}!${this.remainingRequest}`,
+      ),
     )};${source}`;
   }
   return source;

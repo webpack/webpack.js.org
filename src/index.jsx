@@ -1,16 +1,16 @@
 // Import External Dependencies
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import AnalyticsRouter from './AnalyticsRouter.jsx';
+import ReactDOM from "react-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { BrowserRouter } from "react-router-dom";
+import AnalyticsRouter from "./AnalyticsRouter.jsx";
 
-import App from './App.jsx';
+import App from "./App.jsx";
 
-import './styles/tailwind.css';
+import "./styles/tailwind.css";
 // Import helpers
-import isClient from './utilities/is-client';
-import { HelmetProvider } from 'react-helmet-async';
+import isClient from "./utilities/is-client.js";
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 
 const Router = isProduction ? AnalyticsRouter : BrowserRouter;
 const render = isProduction ? ReactDOM.hydrate : ReactDOM.render;
@@ -23,6 +23,6 @@ if (isClient) {
         <App />
       </HelmetProvider>
     </Router>,
-    document.getElementById('root')
+    document.getElementById("root"),
   );
 }

@@ -1,17 +1,16 @@
 // Import External Dependencies
-import ReactDOMServer from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
+import ReactDOMServer from "react-dom/server";
+import { HelmetProvider } from "react-helmet-async";
+import { StaticRouter } from "react-router-dom/server";
 
 // Import Components
-import Site from './components/Site/Site';
-import PrintScript from './components/Print/PrintScript';
-
-import { HelmetProvider } from 'react-helmet-async';
-
-import assets from '../dist/prod-assets-manifest.json';
+// eslint-disable-next-line import/no-unresolved
+import assets from "../dist/prod-assets-manifest.json";
+import PrintScript from "./components/Print/PrintScript.jsx";
+import Site from "./components/Site/Site.jsx";
 
 function isPrintPage(url) {
-  return url.includes('/printable');
+  return url.includes("/printable");
 }
 
 // Export method for `SSGPlugin`
@@ -26,6 +25,7 @@ export default (locals) => {
             <Site
               // note that here we use require instead of import
               // i.e., can't  reuse App.jsx
+              // eslint-disable-next-line no-undef
               import={(path) => require(`./content/${path}`)}
             />
           </div>
@@ -36,14 +36,14 @@ export default (locals) => {
           )}
         </body>
       </StaticRouter>
-    </HelmetProvider>
+    </HelmetProvider>,
   );
 
   const { helmet } = helmetContext;
 
   const css = assets.css
     .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
-    .join('');
+    .join("");
 
   return `<!DOCTYPE html><html ${helmet.htmlAttributes.toString()}><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${css}</head>${renderedHtml}`;
 };

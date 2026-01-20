@@ -1,14 +1,14 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
-import testLocalStorage from '../../utilities/test-local-storage';
+import { Suspense, lazy, useEffect, useState } from "react";
+import testLocalStorage from "../../utilities/test-local-storage.js";
 
-const MessageBar = lazy(() => import('./MessageBar'));
+const MessageBar = lazy(() => import("./MessageBar.jsx"));
 
-export const version = '3';
+export const version = "3";
 export const localStorageIsEnabled = testLocalStorage() !== false;
 
 const barDismissed = () => {
   if (localStorageIsEnabled) {
-    return localStorage.getItem('notification-dismissed') === version;
+    return localStorage.getItem("notification-dismissed") === version;
   }
   return false;
 };
@@ -21,6 +21,7 @@ export default function NotificationBar() {
   };
   useEffect(() => {
     // update dismissed value when component mounted
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDismissed(() => barDismissed());
   }, []);
 

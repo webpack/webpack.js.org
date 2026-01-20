@@ -35,7 +35,7 @@ example_directory
 When following `require()` call is evaluated:
 
 ```javascript
-require('./template/' + name + '.ejs');
+require(`./template/${name}.ejs`);
 ```
 
 Webpack parses the `require()` call and extracts some information:
@@ -79,19 +79,19 @@ require.context(
   directory,
   (useSubdirectories = true),
   (regExp = /^\.\/.*$/),
-  (mode = 'sync')
+  (mode = "sync"),
 );
 ```
 
 Examples:
 
 ```javascript
-require.context('./test', false, /\.test\.js$/);
+require.context("./test", false, /\.test\.js$/);
 // a context with files from the test directory that can be required with a request ending with `.test.js`.
 ```
 
 ```javascript
-require.context('../', true, /\.stories\.js$/);
+require.context("../", true, /\.stories\.js$/);
 // a context with all files in the parent folder and descending folders ending with `.stories.js`.
 ```
 
@@ -108,22 +108,24 @@ The exported function has 3 properties: `resolve`, `keys`, `id`.
 
 This can be useful if you want to require all files in a directory or matching a pattern, Example:
 
+{/* eslint-disable */}
+
 ```javascript
 function importAll(r) {
   r.keys().forEach(r);
 }
 
-importAll(require.context('../components/', true, /\.js$/));
+importAll(require.context("../components/", true, /\.js$/));
 ```
 
 ```javascript
 const cache = {};
 
 function importAll(r) {
-  r.keys().forEach((key) => (cache[key] = r(key)));
+  for (const key of r.keys()) cache[key] = r(key);
 }
 
-importAll(require.context('../components/', true, /\.js$/));
+importAll(require.context("../components/", true, /\.js$/));
 // At build-time cache will be populated with all required modules.
 ```
 

@@ -1,9 +1,13 @@
-const findTopLevel = require('./findTopLevel');
-describe('findTopLevel', () => {
-  test('should return level 1', () => {
+"use strict";
+
+const findTopLevel = require("./findTopLevel");
+
+describe("findTopLevel", () => {
+  it("should return level 1", () => {
     expect(findTopLevel([{ level: 1 }, { level: 2 }])).toBe(1);
   });
-  test('should be undefined', () => {
+
+  it("should be undefined", () => {
     expect(findTopLevel([])).toBeUndefined();
   });
 });

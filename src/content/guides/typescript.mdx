@@ -69,25 +69,25 @@ Now let's configure webpack to handle TypeScript:
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: "./src/index.ts",
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
 };
 ```
@@ -255,7 +255,7 @@ To use non-code assets with TypeScript, we need to defer the type for these impo
 **custom.d.ts**
 
 ```typescript
-declare module '*.svg' {
+declare module "*.svg" {
   const content: any;
   export default content;
 }

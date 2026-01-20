@@ -21,13 +21,13 @@ Every file used in your project is a [Module](/concepts/modules/)
 **./index.js**
 
 ```js
-import app from './app.js';
+import app from "./app.js";
 ```
 
 **./app.js**
 
 ```js
-export default 'the app';
+export default "the app";
 ```
 
 By using each other, the modules form a graph (`ModuleGraph`).
@@ -40,7 +40,7 @@ When you describe an entry point - under the hood, you create a chunk group with
 
 ```js
 module.exports = {
-  entry: './index.js',
+  entry: "./index.js",
 };
 ```
 
@@ -54,8 +54,8 @@ Another example:
 ```js
 module.exports = {
   entry: {
-    home: './home.js',
-    about: './about.js',
+    home: "./home.js",
+    about: "./about.js",
   },
 };
 ```
@@ -78,17 +78,17 @@ Each chunk has a corresponding **asset**. The assets are the output files - the 
 
 ```js
 module.exports = {
-  entry: './src/index.jsx',
+  entry: "./src/index.jsx",
 };
 ```
 
 **./src/index.jsx**
 
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
 
-import('./app.jsx').then((App) => {
+import("./app.jsx").then((App) => {
   ReactDOM.render(<App />, root);
 });
 ```
@@ -111,10 +111,10 @@ Non-initial chunk for `./app.jsx` is created as this module is imported dynamica
 By default, there is no name for `non-initial` chunks so that a unique ID is used instead of a name.
 When using dynamic import we may specify a chunk name explicitly by using a ["magic" comment](/api/module-methods/#magic-comments):
 
-```js
+```jsx
 import(
   /* webpackChunkName: "app" */
-  './app.jsx'
+  "./app.jsx"
 ).then((App) => {
   ReactDOM.render(<App />, root);
 });

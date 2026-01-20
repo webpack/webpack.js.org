@@ -33,19 +33,19 @@ class MyExampleWebpackPlugin {
   apply(compiler) {
     // Specify the event hook to attach to
     compiler.hooks.emit.tapAsync(
-      'MyExampleWebpackPlugin',
+      "MyExampleWebpackPlugin",
       (compilation, callback) => {
-        console.log('This is an example plugin!');
+        console.log("This is an example plugin!");
         console.log(
-          'Here’s the `compilation` object which represents a single build of assets:',
-          compilation
+          "Here’s the `compilation` object which represents a single build of assets:",
+          compilation,
         );
 
         // Manipulate the build using the plugin API provided by webpack
         compilation.addModule(/* ... */);
 
         callback();
-      }
+      },
     );
   }
 }
@@ -59,12 +59,12 @@ Plugins are instantiated objects with an `apply` method on their prototype. This
 class HelloWorldPlugin {
   apply(compiler) {
     compiler.hooks.done.tap(
-      'Hello World Plugin',
+      "Hello World Plugin",
       (
-        stats /* stats is passed as an argument when done hook is tapped.  */
+        stats /* stats is passed as an argument when done hook is tapped.  */,
       ) => {
-        console.log('Hello World!');
-      }
+        console.log("Hello World!");
+      },
     );
   }
 }
@@ -76,7 +76,7 @@ Then to use the plugin, include an instance in your webpack configuration `plugi
 
 ```javascript
 // webpack.config.js
-var HelloWorldPlugin = require('hello-world');
+const HelloWorldPlugin = require("hello-world");
 
 module.exports = {
   // ... configuration settings here ...
@@ -87,14 +87,14 @@ module.exports = {
 Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
 
 ```javascript
-import { validate } from 'schema-utils';
+import { validate } from "schema-utils";
 
 // schema for options object
 const schema = {
-  type: 'object',
+  type: "object",
   properties: {
     test: {
-      type: 'string',
+      type: "string",
     },
   },
 };
@@ -102,8 +102,8 @@ const schema = {
 export default class HelloWorldPlugin {
   constructor(options = {}) {
     validate(schema, options, {
-      name: 'Hello World Plugin',
-      baseDataPath: 'options',
+      name: "Hello World Plugin",
+      baseDataPath: "options",
     });
   }
 
@@ -119,10 +119,10 @@ Among the two most important resources while developing plugins are the [`compil
 class HelloCompilationPlugin {
   apply(compiler) {
     // Tap into compilation hook which gives compilation as argument to the callback function
-    compiler.hooks.compilation.tap('HelloCompilationPlugin', (compilation) => {
+    compiler.hooks.compilation.tap("HelloCompilationPlugin", (compilation) => {
       // Now we can tap into various hooks available through compilation
-      compilation.hooks.optimize.tap('HelloCompilationPlugin', () => {
-        console.log('Assets are being optimized.');
+      compilation.hooks.optimize.tap("HelloCompilationPlugin", () => {
+        console.log("Assets are being optimized.");
       });
     });
   }
@@ -145,14 +145,14 @@ When we use `tapAsync` method to tap into plugins, we need to call the callback 
 class HelloAsyncPlugin {
   apply(compiler) {
     compiler.hooks.emit.tapAsync(
-      'HelloAsyncPlugin',
+      "HelloAsyncPlugin",
       (compilation, callback) => {
         // Do something async...
-        setTimeout(function () {
-          console.log('Done with async work...');
+        setTimeout(() => {
+          console.log("Done with async work...");
           callback();
         }, 1000);
-      }
+      },
     );
   }
 }
@@ -167,15 +167,17 @@ When we use `tapPromise` method to tap into plugins, we need to return a promise
 ```javascript
 class HelloAsyncPlugin {
   apply(compiler) {
-    compiler.hooks.emit.tapPromise('HelloAsyncPlugin', (compilation) => {
-      // return a Promise that resolves when we are done...
-      return new Promise((resolve, reject) => {
-        setTimeout(function () {
-          console.log('Done with async work...');
-          resolve();
-        }, 1000);
-      });
-    });
+    compiler.hooks.emit.tapPromise(
+      "HelloAsyncPlugin",
+      (compilation) =>
+        // return a Promise that resolves when we are done...
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log("Done with async work...");
+            resolve();
+          }, 1000);
+        }),
+    );
   }
 }
 
@@ -191,7 +193,7 @@ Let's write an example plugin that generates a new build file called `assets.md`
 ```javascript
 class FileListPlugin {
   static defaultOptions = {
-    outputFile: 'assets.md',
+    outputFile: "assets.md",
   };
 
   // Any options should be passed in the constructor of your plugin,
@@ -237,19 +239,17 @@ class FileListPlugin {
 
           // Iterating over all the assets and
           // generating content for our Markdown file.
-          const content =
-            '# In this build:\n\n' +
-            Object.keys(assets)
-              .map((filename) => `- ${filename}`)
-              .join('\n');
+          const content = `# In this build:\n\n${Object.keys(assets)
+            .map((filename) => `- ${filename}`)
+            .join("\n")}`;
 
           // Adding new asset to the compilation, so it would be automatically
           // generated by the webpack in the output directory.
           compilation.emitAsset(
             this.options.outputFile,
-            new RawSource(content)
+            new RawSource(content),
           );
-        }
+        },
       );
     });
   }
@@ -261,7 +261,7 @@ module.exports = { FileListPlugin };
 **webpack.config.js**
 
 ```javascript
-const { FileListPlugin } = require('./file-list-plugin.js');
+const { FileListPlugin } = require("./file-list-plugin.js");
 
 // Use the plugin in your webpack configuration:
 module.exports = {
@@ -275,7 +275,7 @@ module.exports = {
 
     // You can choose to pass any supported options to it:
     new FileListPlugin({
-      outputFile: 'my-assets.md',
+      outputFile: "my-assets.md",
     }),
   ],
 };
@@ -303,7 +303,7 @@ For example:
 
 ```javascript
 this.hooks = {
-  shouldEmit: new SyncBailHook(['compilation']),
+  shouldEmit: new SyncBailHook(["compilation"]),
 };
 ```
 
@@ -314,13 +314,11 @@ Various types of hooks supported are :
 ### Synchronous Hooks
 
 - **SyncHook**
-
   - Defined as `new SyncHook([params])`
   - Tapped into using `tap` method.
   - Called using `call(...params)` method.
 
 - **Bail Hooks**
-
   - Defined using `SyncBailHook[params]`
   - Tapped into using `tap` method.
   - Called using `call(...params)` method.
@@ -328,7 +326,6 @@ Various types of hooks supported are :
   In these types of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeChunkModules` are SyncBailHooks.
 
 - **Waterfall Hooks**
-
   - Defined using `SyncWaterfallHook[params]`
   - Tapped into using `tap` method.
   - Called using `call(...params)` method
@@ -339,7 +336,6 @@ Various types of hooks supported are :
 ### Asynchronous Hooks
 
 - **Async Series Hook**
-
   - Defined using `AsyncSeriesHook[params]`
   - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
   - Called using `callAsync(...params)` method
@@ -348,7 +344,6 @@ Various types of hooks supported are :
   This is also a commonly used pattern for events like `emit`, `run`.
 
 - **Async waterfall** The plugins will be applied asynchronously in the waterfall manner.
-
   - Defined using `AsyncWaterfallHook[params]`
   - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
   - Called using `callAsync(...params)` method
@@ -357,13 +352,11 @@ Various types of hooks supported are :
   This plugin pattern is expected for events like `before-resolve` and `after-resolve`.
 
 - **Async Series Bail**
-
   - Defined using `AsyncSeriesBailHook[params]`
   - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
   - Called using `callAsync(...params)` method
 
 - **Async Parallel**
-
   - Defined using `AsyncParallelHook[params]`
   - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
   - Called using `callAsync(...params)` method

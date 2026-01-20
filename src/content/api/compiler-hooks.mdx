@@ -38,7 +38,7 @@ The following lifecycle hooks are exposed by the `compiler` and can be accessed
 as such:
 
 ```js
-compiler.hooks.someHook.tap('MyPlugin', (params) => {
+compiler.hooks.someHook.tap("MyPlugin", (params) => {
   /* ... */
 });
 ```
@@ -68,7 +68,7 @@ Called after the [`entry` configuration](/configuration/entry-context/#entry) fr
 - Callback Parameters: [`context`](/configuration/entry-context/#context), [`entry`](/configuration/entry-context/#entry)
 
 ```js
-compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
+compiler.hooks.entryOption.tap("MyPlugin", (context, entry) => {
   /* ... */
 });
 ```
@@ -155,8 +155,8 @@ compilationParams = {
 This hook can be used to add/modify the compilation parameters:
 
 ```js
-compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
-  params['MyPlugin - data'] = 'important stuff my plugin will use later';
+compiler.hooks.beforeCompile.tapAsync("MyPlugin", (params, callback) => {
+  params["MyPlugin - data"] = "important stuff my plugin will use later";
   callback();
 });
 ```
@@ -210,10 +210,12 @@ Called before emitting assets. Should return a boolean telling whether to emit.
 - Callback Parameters: `compilation`
 
 ```js
-compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
-  // return true to emit the output, otherwise false
-  return true;
-});
+compiler.hooks.shouldEmit.tap(
+  "MyPlugin",
+  (compilation) =>
+    // return true to emit the output, otherwise false
+    true,
+);
 ```
 
 ### emit
@@ -244,10 +246,10 @@ For example, you may access the asset's content buffer via `info.content`:
 
 ```js
 compiler.hooks.assetEmitted.tap(
-  'MyPlugin',
+  "MyPlugin",
   (file, { content, source, outputPath, compilation, targetPath }) => {
     console.log(content); // <Buffer 66 6f 6f 62 61 72>
-  }
+  },
 );
 ```
 

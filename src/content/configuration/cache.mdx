@@ -16,7 +16,7 @@ Cache the generated webpack modules and chunks to improve build speed. `cache` i
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: false,
 };
 ```
@@ -36,7 +36,7 @@ Collect unused memory allocated during deserialization, only available when [`ca
 ```js
 module.exports = {
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     allowCollectingMemory: true,
   },
 };
@@ -77,13 +77,13 @@ Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    cacheDirectory: path.resolve(__dirname, '.temp_cache'),
+    type: "filesystem",
+    cacheDirectory: path.resolve(__dirname, ".temp_cache"),
   },
 };
 ```
@@ -99,13 +99,13 @@ Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.n
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    cacheLocation: path.resolve(__dirname, '.test_cache'),
+    type: "filesystem",
+    cacheLocation: path.resolve(__dirname, ".test_cache"),
   },
 };
 ```
@@ -121,9 +121,9 @@ Cache computation of modules which are unchanged and reference only unchanged mo
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'memory',
+    type: "memory",
     cacheUnaffected: true,
   },
 };
@@ -143,10 +143,10 @@ Compression type used for the cache files. By default it is `false`.
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    compression: 'gzip',
+    type: "filesystem",
+    compression: "gzip",
   },
 };
 ```
@@ -163,10 +163,10 @@ Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    hashAlgorithm: 'md4',
+    type: "filesystem",
+    hashAlgorithm: "md4",
   },
 };
 ```
@@ -183,9 +183,9 @@ Time in milliseconds. `cache.idleTimeout` denotes the time period after which th
 
 ```javascript
 module.exports = {
-  //..
+  // ..
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     idleTimeout: 60000,
   },
 };
@@ -205,9 +205,9 @@ Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period af
 
 ```javascript
 module.exports = {
-  //..
+  // ..
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     idleTimeoutAfterLargeChanges: 1000,
   },
 };
@@ -225,9 +225,9 @@ Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period afte
 
 ```javascript
 module.exports = {
-  //..
+  // ..
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     idleTimeoutForInitialStore: 0,
   },
 };
@@ -257,7 +257,7 @@ The amount of time in milliseconds that unused cache entries are allowed to stay
 module.exports = {
   // ...
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     maxAge: 5184000000,
   },
 };
@@ -283,7 +283,7 @@ Define the lifespan of unused cache entries in the memory cache.
 module.exports = {
   // ...
   cache: {
-    type: 'memory',
+    type: "memory",
     maxGenerations: Infinity,
   },
 };
@@ -313,7 +313,7 @@ Define the lifespan of unused cache entries in the memory cache.
 module.exports = {
   // ...
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     maxMemoryGenerations: Infinity,
   },
 };
@@ -330,9 +330,9 @@ Cache computation of modules which are unchanged and reference only unchanged mo
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     memoryCacheUnaffected: true,
   },
 };
@@ -350,10 +350,10 @@ Name for the cache. Different names will lead to different coexisting caches. De
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    name: 'AppBuildCache',
+    type: "filesystem",
+    name: "AppBuildCache",
   },
 };
 ```
@@ -368,9 +368,9 @@ Track and log detailed timing information for individual cache items of type `'f
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     profile: true,
   },
 };
@@ -384,10 +384,10 @@ Prevent webpack from storing cache into file system. Only available when `cache.
 
 ```js
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    store: 'pack',
+    type: "filesystem",
+    store: "pack",
     readonly: true,
   },
 };
@@ -409,10 +409,10 @@ W> `pack` is the only supported mode since webpack 5.0.x
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    store: 'pack',
+    type: "filesystem",
+    store: "pack",
   },
 };
 ```
@@ -427,9 +427,9 @@ Sets the `cache` type to either in memory or on the file system. The `memory` op
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'memory',
+    type: "memory",
   },
 };
 ```
@@ -446,10 +446,10 @@ Version of the cache data. Different versions won't allow to reuse the cache and
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   cache: {
-    type: 'filesystem',
-    version: 'your_version',
+    type: "filesystem",
+    version: "your_version",
   },
 };
 ```
@@ -475,7 +475,7 @@ variables:
 # this is webpack build job
 build-job:
   cache:
-    key: '$CI_COMMIT_REF_SLUG' # branch/tag name
+    key: "$CI_COMMIT_REF_SLUG" # branch/tag name
     paths:
       # cache directory
       # make sure that you don't run "npm ci" in this job or change default cache directory

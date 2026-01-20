@@ -222,13 +222,13 @@ Let's say a library creates a global variable that it expects its consumers to u
 **src/globals.js**
 
 ```js
-const file = 'blah.txt';
+const file = "blah.txt";
 const helpers = {
-  test: function () {
-    console.log('test something');
+  test() {
+    console.log("test something");
   },
-  parse: function () {
-    console.log('parse something');
+  parse() {
+    console.log("parse something");
   },
 };
 ```
@@ -351,8 +351,8 @@ npm install --save whatwg-fetch
 **src/polyfills.js**
 
 ```javascript
-import 'babel-polyfill';
-import 'whatwg-fetch';
+import "babel-polyfill";
+import "whatwg-fetch";
 ```
 
 **webpack.config.js**
@@ -459,12 +459,14 @@ If we run our build, another `polyfills.bundle.js` file will be emitted and ever
 
 The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the [`useBuiltIns`](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
 
+{/* eslint-skip */}
+
 ```js
-import 'core-js/modules/es7.string.pad-start';
-import 'core-js/modules/es7.string.pad-end';
-import 'core-js/modules/web.timers';
-import 'core-js/modules/web.immediate';
-import 'core-js/modules/web.dom.iterable';
+import "core-js/modules/es7.string.pad-start";
+import "core-js/modules/es7.string.pad-end";
+import "core-js/modules/web.timers";
+import "core-js/modules/web.immediate";
+import "core-js/modules/web.dom.iterable";
 ```
 
 See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.

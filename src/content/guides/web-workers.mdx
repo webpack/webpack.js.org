@@ -10,14 +10,14 @@ As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/d
 ## Syntax
 
 ```js
-new Worker(new URL('./worker.js', import.meta.url));
+new Worker(new URL("./worker.js", import.meta.url));
 ```
 
 ```js
 // or customize the chunk name with magic comments
 // see https://webpack.js.org/api/module-methods/#magic-comments
 new Worker(
-  /* webpackChunkName: "foo-worker" */ new URL('./worker.js', import.meta.url)
+  /* webpackChunkName: "foo-worker" */ new URL("./worker.js", import.meta.url),
 );
 ```
 
@@ -32,10 +32,10 @@ W> Using a variable in the `Worker` constructor is not supported by webpack. For
 **src/index.js**
 
 ```js
-const worker = new Worker(new URL('./deep-thought.js', import.meta.url));
+const worker = new Worker(new URL("./deep-thought.js", import.meta.url));
 worker.postMessage({
   question:
-    'The Answer to the Ultimate Question of Life, The Universe, and Everything.',
+    "The Answer to the Ultimate Question of Life, The Universe, and Everything.",
 });
 worker.onmessage = ({ data: { answer } }) => {
   console.log(answer);
@@ -45,7 +45,7 @@ worker.onmessage = ({ data: { answer } }) => {
 **src/deep-thought.js**
 
 ```js
-self.onmessage = ({ data: { question } }) => {
+globalThis.onmessage = ({ data: { question } }) => {
   self.postMessage({
     answer: 42,
   });
@@ -61,20 +61,21 @@ To work around this issue, you need to set `__webpack_public_path__` from within
 **worker.js**
 
 ```js
-self.onmessage = ({ data: { publicPath, ...otherData } }) => {
+globalThis.onmessage = ({ data: { publicPath, ...otherData } }) => {
   if (publicPath) {
     __webpack_public_path__ = publicPath;
   }
 
   // rest of the worker code
-}
+};
 ```
 
 **app.js**
 
 ```js
-const worker = new Worker(new URL('./worker.js', import.meta.url));
-worker.postMessage({ publicPath: window.__MY_GLOBAL_PUBLIC_PATH_VAR__ });
+const worker = new Worker(new URL("./worker.js", import.meta.url));
+
+worker.postMessage({ publicPath: globalThis.__MY_GLOBAL_PUBLIC_PATH_VAR__ });
 ```
 
 ## Node.js
@@ -82,9 +83,9 @@ worker.postMessage({ publicPath: window.__MY_GLOBAL_PUBLIC_PATH_VAR__ });
 Similar syntax is supported in Node.js (>= 12.17.0):
 
 ```js
-import { Worker } from 'worker_threads';
+import { Worker } from "node:worker_threads";
 
-new Worker(new URL('./worker.js', import.meta.url));
+new Worker(new URL("./worker.js", import.meta.url));
 ```
 
 Note that this is only available in ESM. `Worker` in CommonJS syntax is not supported by either webpack or Node.js.

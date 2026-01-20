@@ -1,17 +1,20 @@
-import { describe, expect } from '@jest/globals';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect } from "@jest/globals";
 
-import { remark } from 'remark';
-import remarkHtml from 'remark-html';
-import remarkGfm from 'remark-gfm';
-import remarkResponsiveTable from './remark-responsive-table.mjs';
-describe('responsive table', () => {
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import remarkHtml from "remark-html";
+import remarkResponsiveTable from "./remark-responsive-table.mjs";
+
+describe("responsive table", () => {
   const processor = remark()
     .use(remarkGfm)
     .use(remarkResponsiveTable)
     .use(remarkHtml, {
       sanitize: false,
     });
-  it('should add data-th', () => {
+
+  it("should add data-th", () => {
     processor.process(
       `
 | foo | bar |
@@ -23,12 +26,13 @@ describe('responsive table', () => {
         expect(error).toBeUndefined();
         expect(contents).toContain('data-th="foo"');
         expect(contents).toContain('data-th="bar"');
-        expect(contents).toContain('-');
+        expect(contents).toContain("-");
         expect(contents).toMatchSnapshot();
-      }
+      },
     );
   });
-  it('should handle empty thead', () => {
+
+  it("should handle empty thead", () => {
     processor.process(
       `
 | | bar |
@@ -39,7 +43,7 @@ describe('responsive table', () => {
       (error, { value: contents }) => {
         expect(error).toBeUndefined();
         expect(contents).toMatchSnapshot();
-      }
+      },
     );
   });
 });

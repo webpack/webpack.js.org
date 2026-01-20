@@ -26,7 +26,7 @@ Turn on watch mode. This means that after the initial build, webpack will contin
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   watch: true,
 };
 ```
@@ -43,7 +43,7 @@ A set of options used to customize watch mode:
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   watchOptions: {
     aggregateTimeout: 200,
     poll: 1000,
@@ -59,7 +59,7 @@ Add a delay before rebuilding once the first file changed. This allows webpack t
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   watchOptions: {
     aggregateTimeout: 600,
   },
@@ -76,7 +76,7 @@ For some systems, watching many files can result in a lot of CPU or memory usage
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   watchOptions: {
     ignored: /node_modules/,
   },
@@ -89,9 +89,9 @@ Alternatively, a glob pattern may be used:
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   watchOptions: {
-    ignored: '**/node_modules',
+    ignored: "**/node_modules",
   },
 };
 ```
@@ -102,9 +102,9 @@ It is also possible to use multiple glob patterns:
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   watchOptions: {
-    ignored: ['**/files/**/*.js', '**/node_modules'],
+    ignored: ["**/files/**/*.js", "**/node_modules"],
   },
 };
 ```
@@ -112,11 +112,12 @@ module.exports = {
 In addition, you can specify an absolute path:
 
 ```js
-const path = require('path');
+const path = require("node:path");
+
 module.exports = {
-  //...
+  // ...
   watchOptions: {
-    ignored: [path.posix.resolve(__dirname, './ignored-dir')],
+    ignored: [path.posix.resolve(__dirname, "./ignored-dir")],
   },
 };
 ```
@@ -135,7 +136,7 @@ Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   watchOptions: {
     poll: 1000, // Check for changes every second
   },
@@ -153,7 +154,7 @@ Follow symbolic links while looking for a file. This is usually not needed as we
 
   ```js
   module.exports = {
-    //...
+    // ...
     watchOptions: {
       followSymlinks: true,
     },
@@ -169,7 +170,7 @@ Stop watching when stdin stream has ended.
 
   ```js
   module.exports = {
-    //...
+    // ...
     watchOptions: {
       stdin: true,
     },

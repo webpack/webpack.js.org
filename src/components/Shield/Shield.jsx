@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+
 const Shield = (props) => (
   <img
     alt="webpack shield"
@@ -9,4 +10,5 @@ Shield.propTypes = {
   content: PropTypes.string,
   label: PropTypes.string,
 };
+
 export default Shield;

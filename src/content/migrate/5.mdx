@@ -25,7 +25,6 @@ Webpack 5 requires at least Node.js 10.13.0 (LTS), so make sure you upgrade your
 ## Upgrade webpack 4 and its plugins/loaders
 
 1. Upgrade `webpack` 4 to the latest available version.
-
    - When using webpack >= 4, upgrading to the latest webpack 4 version should not require additional guidance.
 
    - If you are using webpack version less than 4 please see the [webpack 4 migration guide](/migrate/4/).
@@ -36,7 +35,6 @@ Webpack 5 requires at least Node.js 10.13.0 (LTS), so make sure you upgrade your
 
    Some Plugins and Loaders might have a beta version that has to be used in order to be compatible with webpack 5.
    Make sure to read release notes of each individual plugin/loader when upgrading it, since latest version might only support webpack 5 and will fail in v4. In such case, it's recommended to update to the latest version that supports webpack 4.
-
 
 ## Codemods
 
@@ -209,7 +207,6 @@ Consider removing defaults:
 - If you have [browserslist](https://github.com/browserslist/browserslist) enabled for your project, webpack 5 will reuse your `browserslist` config to decide which code style to emit for the runtime code.
 
   Make sure to:
-
   1. set [`target`](/configuration/target/#root) to `browserslist` or remove `target` letting webpack set `browserslist` automatically for you.
   2. add a `IE 11` to your browserslist configuration.
 
@@ -232,24 +229,26 @@ Make sure to understand the intention:
 This is not supported by the new specification and you will get a warning. Instead of:
 
 ```js
-import { version } from './package.json';
+import { version } from "./package.json";
+
 console.log(version);
 ```
 
 use:
 
 ```js
-import pkg from './package.json';
+import pkg from "./package.json";
+
 console.log(pkg.version);
 ```
 
-  > **Note**: Codemod for this change:
-  >
-  > ```bash
-  > npx codemod webpack/v5/json-imports-to-default-imports
-  > ```
-  >
-  > (See the [registry here](https://codemod.com/registry/webpack-v5-json-imports-to-default-imports).)
+> **Note**: Codemod for this change:
+>
+> ```bash
+> npx codemod webpack/v5/json-imports-to-default-imports
+> ```
+>
+> (See the [registry here](https://codemod.com/registry/webpack-v5-json-imports-to-default-imports).)
 
 #### Cleanup the build code
 
@@ -282,7 +281,6 @@ Repeat the following steps until you solved at least level 3 or 4:
 - Level 5: **Runtime Errors**.
 
   This is tricky. You probably have to debug to find the problem. General advice is difficult here. But we do list some common advice below regarding Runtime Errors:
-
   - `process` is not defined.
     - webpack 5 does no longer include a polyfill for this Node.js variable. Avoid using it in the frontend code.
     - Want to support browser usage? Use the `exports` or `imports` package.json field to use different code depending on the environment.
@@ -295,13 +293,12 @@ Repeat the following steps until you solved at least level 3 or 4:
       - Use a static `output.publicPath: ""` instead.
   - Cannot read properties of undefined (reading 'call')
     - If you see this error during runtime, it may be related to the [ModuleConcatenationPlugin](https://webpack.js.org/plugins/module-concatenation-plugin/). Check if you are using the plugin, and if you've included it in the `plugins` sections of a config, and that config is also set to `production` mode, remove the plugin (ie `new webpack.optimize.ModuleConcatenationPlugin()`) from your plugins list. In webpack 5, the plugin is enabled by default in production mode, and it may get included twice.
-    - In general, disabling each plugin and testing the build is a good way to triage where the issue might be coming from. 
+    - In general, disabling each plugin and testing the build is a good way to triage where the issue might be coming from.
     - See: [this issue](https://github.com/webpack/webpack/discussions/15369#discussioncomment-13420496) for more details.
 
 - Level 6: **Deprecation Warnings**.
 
   You probably get a lot of deprecation warnings. This is not directly a problem. Plugins need time to catch up with core changes. Please report these deprecations to the plugins. These deprecations are only warnings and the build will still work with only minor drawbacks (like less performance).
-
   - You can hide deprecation warnings by running node with `--no-deprecation` flag, e.g.: `node --no-deprecation node_modules/webpack/bin/webpack.js`. This should only be a temporary workaround.
   - Plugins and Loaders contributors can follow the advice in the deprecation messages to improve the code.
 
@@ -310,7 +307,6 @@ Repeat the following steps until you solved at least level 3 or 4:
   Usually, performance should improve with webpack 5, but there are also a few cases where performance gets worse.
 
   And here are something you can do to improve the situation:
-
   - Profile where the time is spent.
     - `--profile --progress` displays a simple performance profile now
     - `node --inspect-brk node_modules/webpack/bin/webpack.js` + [`chrome://inspect`](chrome://inspect) / [`edge://inspect`](edge://inspect) (see profiler tab).

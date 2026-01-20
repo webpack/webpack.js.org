@@ -1,7 +1,7 @@
-@use 'sass:color';
-@import 'vars';
-@import 'functions';
-@import 'prism-theme';
+@use "sass:color";
+@import "vars";
+@import "functions";
+@import "prism-theme";
 
 $bannerHeight: 56px;
 $navigationHeight: 56px;
@@ -76,7 +76,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       color: inherit;
     }
 
-    a[aria-hidden='true'] {
+    a[aria-hidden="true"] {
       margin-left: 8px;
       font-size: 0.8em;
       height: 1em;
@@ -85,7 +85,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       transition: all 250ms;
     }
 
-    &:hover a[aria-hidden='true'] {
+    &:hover a[aria-hidden="true"] {
       opacity: 1;
       visibility: visible;
     }
@@ -221,7 +221,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       border-left-color: darken(#fbddcd, 40%);
 
       .tip-content::before {
-        content: '[TODO]: ';
+        content: "[TODO]: ";
         font-style: normal;
       }
     }
@@ -327,7 +327,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     }
   }
 
-  img:not([class*='support__']) {
+  img:not([class*="support__"]) {
     max-width: 100%;
     height: auto;
   }
@@ -381,7 +381,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
         cursor: pointer;
 
         &::after {
-          content: '›';
+          content: "›";
           float: left;
           position: relative;
           left: -2px;

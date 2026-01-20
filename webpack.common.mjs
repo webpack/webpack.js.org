@@ -1,19 +1,21 @@
-import path from 'path';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import webpack from 'webpack';
-import h from 'hastscript';
-import remarkResponsiveTable from './src/remark-plugins/remark-responsive-table/remark-responsive-table.mjs';
-import gfm from 'remark-gfm';
-import slug from './src/remark-plugins/remark-slug/index.mjs';
-import cleanup from './src/remark-plugins/remark-cleanup-readme/index.mjs';
-import aside from './src/remark-plugins/remark-custom-asides/index.mjs';
-import autolink from 'remark-autolink-headings';
-import refractor from 'remark-refractor';
-import frontmatter from 'remark-frontmatter';
-import { createRequire } from 'module';
-import remarkEmoji from 'remark-emoji';
-import { fileURLToPath } from 'url';
-import remarkRemoveHeadingId from './src/remark-plugins/remark-remove-heading-id/index.mjs';
+import { createRequire } from "node:module";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import hastscript from "hastscript";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import autolink from "remark-autolink-headings";
+import remarkEmoji from "remark-emoji";
+import frontmatter from "remark-frontmatter";
+import gfm from "remark-gfm";
+import refractor from "remark-refractor";
+import webpack from "webpack";
+import cleanup from "./src/remark-plugins/remark-cleanup-readme/index.mjs";
+import aside from "./src/remark-plugins/remark-custom-asides/index.mjs";
+import remarkRemoveHeadingId from "./src/remark-plugins/remark-remove-heading-id/index.mjs";
+import remarkResponsiveTable from "./src/remark-plugins/remark-responsive-table/remark-responsive-table.mjs";
+import slug from "./src/remark-plugins/remark-slug/index.mjs";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -29,18 +31,18 @@ const mdPlugins = [
     aside,
     {
       mapping: {
-        'T>': 'tip',
-        'W>': 'warning',
-        '?>': 'todo',
+        "T>": "tip",
+        "W>": "warning",
+        "?>": "todo",
       },
     },
   ],
   [
     autolink,
     {
-      behavior: 'append',
+      behavior: "append",
       content() {
-        return [h('span.header-link')];
+        return [hastscript("span.header-link")];
       },
     },
   ],
@@ -49,18 +51,18 @@ const mdPlugins = [
 ];
 
 export default ({ ssg = false }) => ({
-  context: path.resolve(__dirname, './src'),
+  context: path.resolve(__dirname, "./src"),
   cache: {
-    type: 'filesystem',
+    type: "filesystem",
     buildDependencies: {
       config: [__filename],
     },
-    cacheDirectory: path.resolve(__dirname, 'node_modules/.cache/webpack'),
+    cacheDirectory: path.resolve(__dirname, "node_modules/.cache/webpack"),
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
+    extensions: [".js", ".jsx", ".scss"],
     fallback: {
-      path: require.resolve('path-browserify'),
+      path: require.resolve("path-browserify"),
     },
   },
   module: {
@@ -68,38 +70,38 @@ export default ({ ssg = false }) => ({
       {
         test: /\.mdx$/,
         use: [
-          'babel-loader',
+          "babel-loader",
           {
-            loader: '@mdx-js/loader',
+            loader: "@mdx-js/loader",
             /** @type {import('@mdx-js/loader').Options} */
             options: {
               remarkPlugins: [...mdPlugins, [frontmatter]],
-              providerImportSource: path.resolve('./src/mdx-components.js'),
+              providerImportSource: path.resolve("./src/mdx-components.mjs"),
             },
           },
         ],
       },
       {
-        test: /\.jsx?$/,
+        test: [/\.(m|c)?jsx?$/],
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ["babel-loader"],
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
       {
         test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
+          "css-loader",
+          "postcss-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
-              api: 'legacy',
+              api: "legacy",
               sassOptions: {
-                includePaths: [path.join('./src/styles/partials')],
+                includePaths: [path.join("./src/styles/partials")],
               },
             },
           },
@@ -107,50 +109,50 @@ export default ({ ssg = false }) => ({
       },
       {
         test: /\.woff2?$/,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'font/[name].[hash][ext][query]',
+          filename: "font/[name].[hash][ext][query]",
           emit: ssg !== true,
         },
       },
       {
         test: /\.(jpg|jpeg|png|ico)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: '[name].[hash][ext][query]',
+          filename: "[name].[hash][ext][query]",
           emit: ssg !== true,
         },
       },
       {
         test: /\.svg$/i,
-        type: 'asset/resource',
-        exclude: [path.resolve(__dirname, 'src/styles/icons')],
+        type: "asset/resource",
+        exclude: [path.resolve(__dirname, "src/styles/icons")],
         generator: {
-          filename: '[name].[hash][ext][query]',
+          filename: "[name].[hash][ext][query]",
           emit: ssg !== true,
         },
       },
       {
         test: /\.svg$/i,
-        use: ['@svgr/webpack'],
-        include: [path.resolve(__dirname, 'src/styles/icons')],
+        use: ["@svgr/webpack"],
+        include: [path.resolve(__dirname, "src/styles/icons")],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: "[name].[contenthash].css",
       experimentalUseImportModule: true,
     }),
     new webpack.DefinePlugin({
       // https://github.com/algolia/algoliasearch-client-javascript/issues/764
-      'process.env.RESET_APP_DATA_TIMER': JSON.stringify(''), // fix for algoliasearch
+      "process.env.RESET_APP_DATA_TIMER": JSON.stringify(""), // fix for algoliasearch
     }),
   ],
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/',
-    filename: '[name].bundle.js',
-    hashFunction: 'xxhash64',
+    path: path.resolve(__dirname, "./dist"),
+    publicPath: "/",
+    filename: "[name].bundle.js",
+    hashFunction: "xxhash64",
   },
 });

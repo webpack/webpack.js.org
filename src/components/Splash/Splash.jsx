@@ -1,22 +1,22 @@
 // Import External Dependencies
-import { lazy, Suspense, useState, useEffect } from 'react';
+import { Suspense, lazy, useEffect, useState } from "react";
 
 // Import Components
-import Container from '../Container/Container';
-import SplashViz from '../SplashViz/SplashViz';
-import Markdown from '../Markdown/Markdown';
-import { PlaceholderComponent } from '../Placeholder/Placeholder';
+import SplashContent from "../../content/index.mdx";
+import isClient from "../../utilities/is-client.js";
+import Container from "../Container/Container.jsx";
+import Markdown from "../Markdown/Markdown.jsx";
+import { PlaceholderComponent } from "../Placeholder/Placeholder.jsx";
+import SplashViz from "../SplashViz/SplashViz.jsx";
 
 // Import helpers
-import isClient from '../../utilities/is-client';
 
 // Import Demo Content
-import SplashContent from '../../content/index.mdx';
 
 // Load Styling
-import './Splash.scss';
+import "./Splash.scss";
 
-const Support = lazy(() => import('../Support/Support'));
+const Support = lazy(() => import("../Support/Support.jsx"));
 
 const SponsorsPlaceholder = () => (
   <>
@@ -43,9 +43,10 @@ const SponsorsPlaceholder = () => (
 const Splash = () => {
   const [showSponsors, setShowSponsors] = useState(false);
   const [supportType, setSupportType] = useState(() =>
-    Math.random() < 0.33 ? 'monthly' : 'total'
+    Math.random() < 0.33 ? "monthly" : "total",
   );
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (isClient) setShowSponsors(true);
   }, []);
   return (
@@ -79,9 +80,11 @@ const Splash = () => {
                     <input
                       id="support-type"
                       type="checkbox"
-                      checked={supportType === 'monthly'}
-                      onChange={(e) =>
-                        setSupportType(e.target.checked ? 'monthly' : 'total')
+                      checked={supportType === "monthly"}
+                      onChange={(event) =>
+                        setSupportType(
+                          event.target.checked ? "monthly" : "total",
+                        )
                       }
                     />
                     Show sponsors by their average monthly amount of sponsoring

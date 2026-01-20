@@ -24,7 +24,7 @@ Usage: `entry: string | [string]`
 
 ```javascript
 module.exports = {
-  entry: './path/to/my/entry/file.js',
+  entry: "./path/to/my/entry/file.js",
 };
 ```
 
@@ -35,7 +35,7 @@ The single entry syntax for the `entry` property is a shorthand for:
 ```javascript
 module.exports = {
   entry: {
-    main: './path/to/my/entry/file.js',
+    main: "./path/to/my/entry/file.js",
   },
 };
 ```
@@ -46,9 +46,9 @@ We can also pass an array of file paths to the `entry` property which creates wh
 
 ```javascript
 module.exports = {
-  entry: ['./src/file_1.js', './src/file_2.js'],
+  entry: ["./src/file_1.js", "./src/file_2.js"],
   output: {
-    filename: 'bundle.js',
+    filename: "bundle.js",
   },
 };
 ```
@@ -64,8 +64,8 @@ Usage: `entry: { <entryChunkName> string | [string] } | {}`
 ```javascript
 module.exports = {
   entry: {
-    app: './src/app.js',
-    adminApp: './src/adminApp.js',
+    app: "./src/app.js",
+    adminApp: "./src/adminApp.js",
   },
 };
 ```
@@ -93,10 +93,10 @@ An object of entry point description. You can specify the following properties.
 ```javascript
 module.exports = {
   entry: {
-    a2: 'dependingfile.js',
+    a2: "dependingfile.js",
     b2: {
-      dependOn: 'a2',
-      import: './src/app.js',
+      dependOn: "a2",
+      import: "./src/app.js",
     },
   },
 };
@@ -109,11 +109,11 @@ module.exports = {
 ```javascript
 module.exports = {
   entry: {
-    a2: './a',
+    a2: "./a",
     b2: {
-      runtime: 'x2',
-      dependOn: 'a2',
-      import: './b',
+      runtime: "x2",
+      dependOn: "a2",
+      import: "./b",
     },
   },
 };
@@ -124,10 +124,10 @@ Make sure `runtime` must not point to an existing entry point name, for example 
 ```javascript
 module.exports = {
   entry: {
-    a1: './a',
+    a1: "./a",
     b1: {
-      runtime: 'a1',
-      import: './b',
+      runtime: "a1",
+      import: "./b",
     },
   },
 };
@@ -139,12 +139,12 @@ Also `dependOn` must not be circular, the following example again would throw an
 module.exports = {
   entry: {
     a3: {
-      import: './a',
-      dependOn: 'b3',
+      import: "./a",
+      dependOn: "b3",
     },
     b3: {
-      import: './b',
-      dependOn: 'a3',
+      import: "./b",
+      dependOn: "a3",
     },
   },
 };
@@ -161,8 +161,8 @@ Below is a list of entry configurations and their real-world use cases:
 ```javascript
 module.exports = {
   entry: {
-    main: './src/app.js',
-    vendor: './src/vendor.js',
+    main: "./src/app.js",
+    vendor: "./src/vendor.js",
   },
 };
 ```
@@ -172,7 +172,7 @@ module.exports = {
 ```javascript
 module.exports = {
   output: {
-    filename: '[name].[contenthash].bundle.js',
+    filename: "[name].[contenthash].bundle.js",
   },
 };
 ```
@@ -182,7 +182,7 @@ module.exports = {
 ```javascript
 module.exports = {
   output: {
-    filename: '[name].bundle.js',
+    filename: "[name].bundle.js",
   },
 };
 ```
@@ -200,9 +200,9 @@ T> In webpack version < 4 it was common to add vendors as a separate entry point
 ```javascript
 module.exports = {
   entry: {
-    pageOne: './src/pageOne/index.js',
-    pageTwo: './src/pageTwo/index.js',
-    pageThree: './src/pageThree/index.js',
+    pageOne: "./src/pageOne/index.js",
+    pageTwo: "./src/pageTwo/index.js",
+    pageThree: "./src/pageThree/index.js",
   },
 };
 ```

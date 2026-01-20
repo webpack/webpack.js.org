@@ -17,6 +17,8 @@ Webpack supports processing ECMAScript Modules to optimize them.
 
 The `export` keyword allows to expose things from an ESM to other modules:
 
+{/* eslint-disable */}
+
 ```js
 export const CONSTANT = 42;
 
@@ -25,12 +27,12 @@ export let variable = 42;
 // it's not possible to modify the variable from outside
 
 export function fun() {
-  console.log('fun');
+  console.log("fun");
 }
 
 export class C extends Super {
   method() {
-    console.log('method');
+    console.log("method");
   }
 }
 
@@ -45,18 +47,19 @@ export default 1 + 2 + 3 + more();
 The `import` keyword allows to get references to things from other modules into an ESM:
 
 ```js
-import { CONSTANT, variable } from './module.js';
 // import "bindings" to exports from another module
 // these bindings are live. The values are not copied,
 // instead accessing "variable" will get the current value
 // in the imported module
+import { CONSTANT, variable } from "./module.js";
 
-import * as module from './module.js';
-module.fun();
-// import the "namespace object" which contains all exports
-
-import theDefaultValue from './module.js';
 // shortcut to import the "default" export
+import theDefaultValue from "./module.js";
+
+// import the "namespace object" which contains all exports
+import * as module from "./module.js";
+
+module.fun();
 ```
 
 ## Flagging modules as ESM

@@ -29,11 +29,9 @@ can be customized via plugins:
 
 ```js
 compiler.resolverFactory.hooks.resolver
-  .for('normal')
-  .tap('MyResolverPlugin', (resolver) => {
-    resolver.hooks.result.tap('MyResolverPlugin', (result) => {
-      return result;
-    });
+  .for("normal")
+  .tap("MyResolverPlugin", (resolver) => {
+    resolver.hooks.result.tap("MyResolverPlugin", (result) => result);
   });
 ```
 

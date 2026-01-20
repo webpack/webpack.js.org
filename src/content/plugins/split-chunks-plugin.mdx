@@ -22,7 +22,7 @@ contributors:
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/main/examples/many-pages/README.md
-  - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
+  - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
@@ -59,10 +59,10 @@ This configuration object represents the default behavior of the `SplitChunksPlu
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
-      chunks: 'async',
+      chunks: "async",
       minSize: 20000,
       minRemainingSize: 0,
       minChunks: 1,
@@ -108,11 +108,11 @@ Note that it is applied to the fallback cache group as well (`splitChunks.fallba
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       // include all types of chunks
-      chunks: 'all',
+      chunks: "all",
     },
   },
 };
@@ -122,12 +122,12 @@ Alternatively, you may provide a function for more control. The return value wil
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       chunks(chunk) {
         // exclude `my-excluded-chunk`
-        return chunk.name !== 'my-excluded-chunk';
+        return chunk.name !== "my-excluded-chunk";
       },
     },
   },
@@ -138,7 +138,7 @@ If you are using webpack version 5.86.0 or later, you can also pass a regular ex
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       chunks: /foo/,
@@ -269,16 +269,16 @@ T> `splitChunks.cacheGroups.{cacheGroup}.name` can be used to move modules into 
 **main.js**
 
 ```js
-import _ from 'lodash';
+import _ from "lodash";
 
-console.log(_.join(['Hello', 'webpack'], ' '));
+console.log(_.join(["Hello", "webpack"], " "));
 ```
 
 **webpack.config.js**
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -288,12 +288,12 @@ module.exports = {
           name(module, chunks, cacheGroupKey) {
             const moduleFileName = module
               .identifier()
-              .split('/')
+              .split("/")
               .reduceRight((item) => item);
-            const allChunksNames = chunks.map((item) => item.name).join('~');
+            const allChunksNames = chunks.map((item) => item.name).join("~");
             return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
           },
-          chunks: 'all',
+          chunks: "all",
         },
       },
     },
@@ -322,7 +322,7 @@ Cache groups can inherit and/or override any options from `splitChunks.*`; but `
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -349,7 +349,7 @@ If the current chunk contains modules already split out from the main bundle, it
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -372,12 +372,12 @@ Allows to assign modules to a cache group by module type.
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         json: {
-          type: 'json',
+          type: "json",
         },
       },
     },
@@ -399,7 +399,7 @@ Providing a function to`{cacheGroup}.test`:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -407,17 +407,18 @@ module.exports = {
           test(module) {
             // `module.resource` contains the absolute path of the file on disk.
             // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
-            const path = require('path');
+            const path = require("node:path");
+
             return (
               module.resource &&
-              module.resource.endsWith('.svg') &&
+              module.resource.endsWith(".svg") &&
               module.resource.includes(`${path.sep}cacheable_svgs${path.sep}`)
             );
           },
         },
         byModuleTypeGroup: {
           test(module) {
-            return module.type === 'javascript/auto';
+            return module.type === "javascript/auto";
           },
         },
       },
@@ -434,7 +435,7 @@ Providing a `RegExp` to `{cacheGroup}.test`:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -461,12 +462,12 @@ W> This option can also be set globally in `splitChunks.filename`, but this isn'
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          filename: '[name].bundle.js',
+          filename: "[name].bundle.js",
         },
       },
     },
@@ -480,15 +481,14 @@ And as a function:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          filename: (pathData) => {
+          filename: (pathData) =>
             // Use pathData object for generating filename string based on your requirements
-            return `${pathData.chunk.name}-bundle.js`;
-          },
+            `${pathData.chunk.name}-bundle.js`,
         },
       },
     },
@@ -502,12 +502,12 @@ It is possible to create a folder structure by providing path prefixing the file
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          filename: 'js/[name]/bundle.js',
+          filename: "js/[name]/bundle.js",
         },
       },
     },
@@ -525,7 +525,7 @@ Tells webpack to ignore [`splitChunks.minSize`](#splitchunksminsize), [`splitChu
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -548,12 +548,12 @@ Sets the hint for chunk id. It will be added to chunk's filename.
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          idHint: 'vendors',
+          idHint: "vendors",
         },
       },
     },
@@ -568,14 +568,14 @@ module.exports = {
 ```js
 // index.js
 
-import('./a'); // dynamic import
+import("./a"); // dynamic import
 ```
 
 ```js
 // a.js
-import 'react';
+import "react";
 
-//...
+// ...
 ```
 
 **Result:** A separate chunk would be created containing `react`. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
@@ -595,23 +595,23 @@ What's the reasoning behind this? `react` probably won't change as often as your
 // entry.js
 
 // dynamic imports
-import('./a');
-import('./b');
+import("./a");
+import("./b");
 ```
 
 ```js
 // a.js
-import './helpers'; // helpers is 40kb in size
+import "./helpers"; // helpers is 40kb in size
 
-//...
+// ...
 ```
 
 ```js
 // b.js
-import './helpers';
-import './more-helpers'; // more-helpers is also 40kb in size
+import "./helpers";
+import "./more-helpers"; // more-helpers is also 40kb in size
 
-//...
+// ...
 ```
 
 **Result:** A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
@@ -633,13 +633,13 @@ Create a `commons` chunk, which includes all code shared between entry points.
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         commons: {
-          name: 'commons',
-          chunks: 'initial',
+          name: "commons",
+          chunks: "initial",
           minChunks: 2,
         },
       },
@@ -658,14 +658,14 @@ Create a `vendors` chunk, which includes all code from `node_modules` in the who
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
+          name: "vendors",
+          chunks: "all",
         },
       },
     },
@@ -683,14 +683,14 @@ Create a `custom vendor` chunk, which contains certain `node_modules` packages m
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
+          name: "vendor",
+          chunks: "all",
         },
       },
     },

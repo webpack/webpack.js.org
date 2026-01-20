@@ -1,15 +1,15 @@
 // Import External Dependencies
-import { Component } from 'react';
+import { Component } from "react";
 
 // Load Images
-import HomeSVG from './SplashVizSVG';
 
 // Import Components
-import Cube from '../Cube/Cube';
-import TextRotator from '../TextRotater/TextRotater';
+import Cube from "../Cube/Cube.jsx";
+import TextRotator from "../TextRotater/TextRotater.jsx";
+import HomeSVG from "./SplashVizSVG.mjs";
 
 // Load Styling
-import './SplashViz.scss';
+import "./SplashViz.scss";
 
 export default class SplashViz extends Component {
   render() {

@@ -114,13 +114,13 @@ Example:
 This translates to something like:
 
 ```ts
-if (red && valid('./stop.js')) return './stop.js';
-if (yellow && valid('./stop.js')) return './stop.js';
+if (red && valid("./stop.js")) return "./stop.js";
+if (yellow && valid("./stop.js")) return "./stop.js";
 if (green) {
-  if (free && valid('./drive.js')) return './drive.js';
-  if (valid('./wait.js')) return './wait.js';
+  if (free && valid("./drive.js")) return "./drive.js";
+  if (valid("./wait.js")) return "./wait.js";
 }
-if (valid('./drive-carefully.js')) return './drive-carefully.js';
+if (valid("./drive-carefully.js")) return "./drive-carefully.js";
 throw new ModuleNotFoundError();
 ```
 
@@ -422,9 +422,11 @@ Note that here stateless also means class instances are not tested with `instanc
 }
 ```
 
+{/* eslint-disable prefer-destructuring */}
+
 ```js
 // wrapper.js
-import cjs from './index.cjs';
+import cjs from "./index.cjs";
 
 export const A = cjs.A;
 export const B = cjs.B;
@@ -499,11 +501,10 @@ Otherwise, in production or when mode is unknown, we use the optimized version.
 
 ```js
 // wrapper-process-env.cjs
-if (process.env.NODE_ENV !== 'development') {
-  module.exports = require('./index-optimized.cjs');
-} else {
-  module.exports = require('./index-with-devtools.cjs');
-}
+module.exports =
+  process.env.NODE_ENV !== "development"
+    ? require("./index-optimized.cjs")
+    : require("./index-with-devtools.cjs");
 ```
 
 We prefer static detection of production/development mode via the `production` or `development` condition.

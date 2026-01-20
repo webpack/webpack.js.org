@@ -292,7 +292,7 @@ This makes it easier to figure out which plugin is causing performance problems.
 A newly added `percentBy`-option tells `ProgressPlugin` how to calculate progress percentage.
 
 ```js
-new webpack.ProgressPlugin({ percentBy: 'entries' });
+new webpack.ProgressPlugin({ percentBy: "entries" });
 ```
 
 To make progress percentage more accurate `ProgressPlugin` caches the last known total modules count and reuses this value on the next build. The first build will warm the cache but the following builds will use and update this value.
@@ -323,17 +323,25 @@ Webpack 5 generates typescript typings from source code and exposes them via the
 
 Webpack is now able to track access to nested properties of exports. This can improve Tree Shaking (Unused export elimination and export mangling) when reexporting namespace objects.
 
-```js
-// inner.js
+**inner.js**
+
+```javascript
 export const a = 1;
 export const b = 2;
+```
 
-// module.js
-export * as inner from './inner';
+**module.js**
+
+```javascript
+export * as inner from "./inner";
 // or import * as inner from './inner'; export { inner };
+```
 
-// user.js
-import * as module from './module';
+**user.js**
+
+```javascript
+import * as module from "./module";
+
 console.log(module.inner.a);
 ```
 
@@ -346,7 +354,7 @@ Webpack 4 didn't analyze dependencies between exports and imports of a module. W
 In a module like this:
 
 ```js
-import { something } from './something';
+import { something } from "./something";
 
 function usingSomething() {
   return something;
@@ -522,7 +530,7 @@ There is now a filesystem cache. It's opt-in and can be enabled with the followi
 module.exports = {
   cache: {
     // 1. Set cache type to filesystem
-    type: 'filesystem',
+    type: "filesystem",
 
     buildDependencies: {
       // 2. Add your config as buildDependency to get cache invalidation on config change
@@ -883,7 +891,7 @@ If an object is passed as entry point the value might be a string, array of stri
 module.exports = {
   entry: {
     catalog: {
-      import: './catalog.js',
+      import: "./catalog.js",
     },
   },
 };
@@ -898,7 +906,7 @@ By default, the output filename for the entry chunk is extracted from `output.fi
 ```js
 module.exports = {
   entry: {
-    about: { import: './about.js', filename: 'pages/[name][ext]' },
+    about: { import: "./about.js", filename: "pages/[name][ext]" },
   },
 };
 ```
@@ -910,8 +918,8 @@ By default, every entry chunk stores all the modules that it uses. With `dependO
 ```js
 module.exports = {
   entry: {
-    app: { import: './app.js', dependOn: 'react-vendors' },
-    'react-vendors': ['react', 'react-dom', 'prop-types'],
+    app: { import: "./app.js", dependOn: "react-vendors" },
+    "react-vendors": ["react", "react-dom", "prop-types"],
   },
 };
 ```
@@ -926,15 +934,15 @@ The entry descriptor allows to pass a different `library` option for each entryp
 module.exports = {
   entry: {
     commonjs: {
-      import: './lib.js',
+      import: "./lib.js",
       library: {
-        type: 'commonjs-module',
+        type: "commonjs-module",
       },
     },
     amd: {
-      import: './lib.js',
+      import: "./lib.js",
       library: {
-        type: 'amd',
+        type: "amd",
       },
     },
   },
@@ -952,8 +960,8 @@ This means they could be used together on the same HTML page.
 module.exports = {
   entry: {
     app: {
-      import: './app.js',
-      runtime: 'app-runtime',
+      import: "./app.js",
+      runtime: "app-runtime",
     },
   },
 };
@@ -968,11 +976,11 @@ The runtime for this entry will use this to load chunks.
 module.exports = {
   entry: {
     app: {
-      import: './app.js',
+      import: "./app.js",
     },
     worker: {
-      import: './worker.js',
-      chunkLoading: 'importScripts',
+      import: "./worker.js",
+      chunkLoading: "importScripts",
     },
   },
 };
@@ -1175,7 +1183,7 @@ These dependencies are cheaper to process and webpack uses them when possible
   module.exports = {
     resolve: {
       alias: {
-        [path.resolve(__dirname, '....')]: false,
+        [path.resolve(__dirname, "....")]: false,
       },
     },
   };

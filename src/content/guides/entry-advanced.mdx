@@ -14,7 +14,7 @@ Let's make an example. We have a PHP application with two page types: home and a
 **home.js**
 
 ```javascript
-console.log('home page type');
+console.log("home page type");
 ```
 
 **home.scss**
@@ -26,7 +26,7 @@ console.log('home page type');
 **account.js**
 
 ```javascript
-console.log('account page type');
+console.log("account page type");
 ```
 
 **account.scss**
@@ -40,16 +40,16 @@ We will use [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin/) in `prod
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    home: ['./home.js', './home.scss'],
-    account: ['./account.js', './account.scss'],
+    home: ["./home.js", "./home.scss"],
+    account: ["./account.js", "./account.scss"],
   },
   output: {
-    filename: '[name].js',
+    filename: "[name].js",
   },
   module: {
     rules: [
@@ -57,18 +57,18 @@ module.exports = {
         test: /\.scss$/,
         use: [
           // fallback to style-loader in development
-          process.env.NODE_ENV !== 'production'
-            ? 'style-loader'
+          process.env.NODE_ENV !== "production"
+            ? "style-loader"
             : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
+          "css-loader",
+          "sass-loader",
         ],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: "[name].css",
     }),
   ],
 };

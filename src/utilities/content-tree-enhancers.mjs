@@ -1,44 +1,44 @@
-import fs from 'fs';
-import path from 'path';
-import frontMatter from 'front-matter';
-import { remark } from 'remark';
-import slug from '../../src/remark-plugins/remark-slug/index.mjs';
-import extractAnchors from 'remark-extract-anchors';
-import remarkHtml from 'remark-html';
-import frontmatter from 'remark-frontmatter';
-import gfm from 'remark-gfm';
-import emoji from 'remark-emoji';
-import remarkRemoveHeadingId from '../remark-plugins/remark-remove-heading-id/index.mjs';
+import fs from "node:fs";
+import path from "node:path";
+import frontMatter from "front-matter";
+import { remark } from "remark";
+import emoji from "remark-emoji";
+import extractAnchors from "remark-extract-anchors";
+import frontmatter from "remark-frontmatter";
+import gfm from "remark-gfm";
+import remarkHtml from "remark-html";
+import slug from "../../src/remark-plugins/remark-slug/index.mjs";
+import remarkRemoveHeadingId from "../remark-plugins/remark-remove-heading-id/index.mjs";
 
 export const enhance = (tree, options) => {
   // delete `./` root directory on node
-  const dir = path.normalize(options.dir).replace(/^(\.\/)/gm, '');
+  const dir = path.normalize(options.dir).replaceAll(/^(\.\/)/gm, "");
 
   tree.url = tree.path
     // delete `.mdx` extensions
-    .replace(tree.extension, '')
+    .replace(tree.extension, "")
     // delete source content directory
-    .replace(dir, '')
+    .replace(dir, "")
     // Normalize url for Windows
-    .replace(/\\/g, '/')
+    .replaceAll("\\", "/")
     // remove `index` for root urls
-    .replace(/\/index$/, '')
+    .replace(/\/index$/, "")
     // replace empty strings with `/`
-    .replace(/^$/, '/')
+    .replace(/^$/, "/")
     // delete trailing dots for node
-    .replace(/^(\.)/g, '')
+    .replaceAll(/^(\.)/g, "")
     // add trailing slash if missing
-    .replace(/\/?$/, '/');
+    .replace(/\/?$/, "/");
 
-  if (tree.type === 'file') {
-    let anchors = [];
-    let content = fs.readFileSync(tree.path, 'utf8');
-    let { attributes } = frontMatter(content);
+  if (tree.type === "file") {
+    const anchors = [];
+    const content = fs.readFileSync(tree.path, "utf8");
+    const { attributes } = frontMatter(content);
 
     // remove underscore from fetched files
-    if (tree.name[0] === '_') {
-      tree.name = tree.name.replace('_', '');
-      tree.url = tree.url.replace('_', '');
+    if (tree.name[0] === "_") {
+      tree.name = tree.name.replace("_", "");
+      tree.url = tree.url.replace("_", "");
     }
 
     remark()
@@ -60,9 +60,9 @@ export const enhance = (tree, options) => {
     Object.assign(
       tree,
       {
-        path: tree.path.replace(/\\/g, '/'),
+        path: tree.path.replaceAll("\\", "/"),
       },
-      attributes
+      attributes,
     );
   }
 };
@@ -70,15 +70,15 @@ export const enhance = (tree, options) => {
 export const filter = () => true;
 
 export const sort = (a, b) => {
-  let group1 = (a.group || '').toLowerCase();
-  let group2 = (b.group || '').toLowerCase();
+  const group1 = (a.group || "").toLowerCase();
+  const group2 = (b.group || "").toLowerCase();
 
   if (group1 < group2) return -1;
   if (group1 > group2) return 1;
   if (a.sort && b.sort) return a.sort - b.sort;
 
-  let aTitle = (a.title || '').toLowerCase();
-  let bTitle = (b.title || '').toLowerCase();
+  const aTitle = (a.title || "").toLowerCase();
+  const bTitle = (b.title || "").toLowerCase();
   if (aTitle < bTitle) return -1;
   if (aTitle > bTitle) return 1;
 
@@ -89,7 +89,7 @@ export function restructure(item, options) {
   enhance(item, options);
 
   if (item.children) {
-    item.children.forEach((child) => restructure(child, options));
+    for (const child of item.children) restructure(child, options);
 
     item.children.filter(filter);
     item.children.sort(sort);

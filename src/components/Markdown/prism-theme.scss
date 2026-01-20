@@ -1,8 +1,8 @@
-@import 'functions';
-@import 'mixins';
+@import "functions";
+@import "mixins";
 
-code[class*='lang-'],
-pre[class*='lang-'] {
+code[class*="lang-"],
+pre[class*="lang-"] {
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -20,7 +20,7 @@ pre[class*='lang-'] {
 }
 
 /* Code blocks */
-pre[class*='lang-'] {
+pre[class*="lang-"] {
   padding: 0.4em 0.8em;
   margin: 0.5em 0;
   overflow: auto;
@@ -28,7 +28,7 @@ pre[class*='lang-'] {
 }
 
 /* Inline code */
-:not(pre) > code[class*='lang-'] {
+:not(pre) > code[class*="lang-"] {
   padding: 0.2em;
   border-radius: 0.3em;
   box-shadow: none;

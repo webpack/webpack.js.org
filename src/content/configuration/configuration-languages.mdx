@@ -34,17 +34,17 @@ and then proceed to write your configuration:
 **webpack.config.ts**
 
 ```typescript
-import path from 'path';
-import webpack from 'webpack';
+import path from "path";
+import webpack from "webpack";
 // in case you run into any typescript error when configuring `devServer`
-import 'webpack-dev-server';
+import "webpack-dev-server";
 
 const config: webpack.Configuration = {
-  mode: 'production',
-  entry: './foo.js',
+  mode: "production",
+  entry: "./foo.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'foo.bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "foo.bundle.js",
   },
 };
 
@@ -72,7 +72,6 @@ There are three solutions to this issue:
 - Modify `tsconfig.json` and add settings for `ts-node`.
 - Install `tsconfig-paths`.
 
-
 The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
 The **second option** is to add settings for ts-node:
@@ -82,7 +81,7 @@ You can keep `"module": "ESNext"` for `tsc`, and if you use webpack, or another 
 ```json
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "ESNext"
   },
   "ts-node": {
     "compilerOptions": {
@@ -184,13 +183,15 @@ npm install --save-dev babel-register jsxobj babel-preset-es2015
 
 **webpack.config.babel.js**
 
-```js
-import jsxobj from 'jsxobj';
+{/* eslint-skip */}
+
+```jsx
+import jsxobj from "jsxobj";
 
 // example of an imported plugin
 const CustomPlugin = (config) => ({
   ...config,
-  name: 'custom-plugin',
+  name: "custom-plugin",
 });
 
 export default (
@@ -199,8 +200,8 @@ export default (
     <resolve>
       <alias
         {...{
-          react: 'preact-compat',
-          'react-dom': 'preact-compat',
+          react: "preact-compat",
+          "react-dom": "preact-compat",
         }}
       />
     </resolve>

@@ -1,10 +1,12 @@
+"use strict";
+
 // set scrollBehavior to false
 // because we don't want cypress to scroll itself
-describe('Open page in new tab', { scrollBehavior: false }, () => {
-  it('should not scroll to top when right clicked', () => {
-    cy.visit('/concepts/plugins/', {
+describe("Open page in new tab", { scrollBehavior: false }, () => {
+  it("should not scroll to top when right clicked", () => {
+    cy.visit("/concepts/plugins/", {
       onBeforeLoad: (win) => {
-        cy.stub(win, 'scrollTo');
+        cy.stub(win, "scrollTo");
       },
     });
     // there's one call in Page.jsx when componentDidMount
@@ -21,7 +23,7 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
       expect(win.scrollTo).to.be.calledTwice;
     });
 
-    if (Cypress.platform === 'darwin') {
+    if (Cypress.platform === "darwin") {
       cy.get(selector).click({
         metaKey: true,
       });
@@ -29,7 +31,7 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
       cy.window().then((win) => {
         expect(win.scrollTo).to.be.calledTwice;
       });
-    } else if (Cypress.platform === 'win32' || Cypress.platform === 'linux') {
+    } else if (Cypress.platform === "win32" || Cypress.platform === "linux") {
       // win32, linux
       cy.get(selector).click({
         ctrlKey: true,

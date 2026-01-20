@@ -1,23 +1,24 @@
 // Import External Dependencies
-import { Component } from 'react';
-import PropTypes from 'prop-types';
-import VisibilitySensor from 'react-visibility-sensor';
+import PropTypes from "prop-types";
+import { Component } from "react";
+import VisibilitySensor from "react-visibility-sensor";
 
 // Import Data
-import Backers from './_supporters.json';
-import Additional from './AdditionalSupporters';
-import SmallIcon from '../../assets/icon-square-small-slack.png';
-import Tooltip from '../Tooltip/Tooltip';
+import SmallIcon from "../../assets/icon-square-small-slack.png";
+import Tooltip from "../Tooltip/Tooltip.jsx";
+import Additional from "./AdditionalSupporters.mjs";
+/* eslint import/no-unresolved: ["error", { ignore: ["_supporters\.json$"] }] */
+import Backers from "./_supporters.json";
 
 // Load Styling
-import './Support.scss';
+import "./Support.scss";
 
 const SUPPORTERS = [...Backers];
 
 // Merge or add additional backers/sponsors
 for (const additional of Additional) {
   const existing = SUPPORTERS.find(
-    (supporter) => supporter.slug && supporter.slug === additional.slug
+    (supporter) => supporter.slug && supporter.slug === additional.slug,
   );
 
   if (existing) {
@@ -85,10 +86,10 @@ const monthlyRanks = {
 };
 
 function formatMoney(number) {
-  let str = Math.round(number) + '';
+  let str = `${Math.round(number)}`;
 
   if (str.length > 3) {
-    str = str.slice(0, -3) + ',' + str.slice(-3);
+    str = `${str.slice(0, -3)},${str.slice(-3)}`;
   }
   return str;
 }
@@ -98,6 +99,7 @@ export default class Support extends Component {
     rank: PropTypes.string,
     type: PropTypes.string,
   };
+
   state = {
     inView: false,
   };
@@ -110,16 +112,20 @@ export default class Support extends Component {
   };
 
   render() {
-    let { rank, type } = this.props;
+    const { rank, type } = this.props;
 
     const { inView } = this.state;
 
     let supporters = SUPPORTERS;
-    let minimum, maximum, maxAge, limit, random;
+    let minimum;
+    let maximum;
+    let maxAge;
+    let limit;
+    let random;
 
-    const ranks = type === 'monthly' ? monthlyRanks : totalRanks;
+    const ranks = type === "monthly" ? monthlyRanks : totalRanks;
     const getAmount =
-      type === 'monthly'
+      type === "monthly"
         ? (item) => item.monthlyDonations
         : (item) => item.totalDonations;
 
@@ -131,40 +137,38 @@ export default class Support extends Component {
       random = ranks[rank].random;
     }
 
-    if (typeof minimum === 'number') {
+    if (typeof minimum === "number") {
       supporters = supporters.filter(
-        (item) => getAmount(item) >= minimum * 100
+        (item) => getAmount(item) >= minimum * 100,
       );
     }
 
-    if (typeof maximum === 'number') {
+    if (typeof maximum === "number") {
       supporters = supporters.filter((item) => getAmount(item) < maximum * 100);
     }
 
-    if (typeof maxAge === 'number') {
+    if (typeof maxAge === "number") {
       const now = Date.now();
       supporters = supporters.filter(
         (item) =>
           item.firstDonation &&
-          now - new Date(item.firstDonation).getTime() < maxAge
+          now - new Date(item.firstDonation).getTime() < maxAge,
       );
     }
 
-    if (typeof limit === 'number') {
+    if (typeof limit === "number") {
       supporters = supporters.slice(0, limit);
     }
 
-    if (typeof random === 'number') {
-      if (supporters.length >= random) {
-        // Pick n random items
-        for (let i = 0; i < random; i++) {
-          const other = Math.floor(Math.random() * (supporters.length - i));
-          const temp = supporters[other];
-          supporters[other] = supporters[i];
-          supporters[i] = temp;
-        }
-        supporters = supporters.slice(0, random);
+    if (typeof random === "number" && supporters.length >= random) {
+      // Pick n random items
+      for (let i = 0; i < random; i++) {
+        const other = Math.floor(Math.random() * (supporters.length - i));
+        const temp = supporters[other];
+        supporters[other] = supporters[i];
+        supporters[i] = temp;
       }
+      supporters = supporters.slice(0, random);
     }
 
     // resort to keep order
@@ -173,12 +177,12 @@ export default class Support extends Component {
     return (
       <>
         <h2>
-          {rank === 'backer'
-            ? 'Backers'
-            : rank === 'latest'
-              ? 'Latest Sponsors'
+          {rank === "backer"
+            ? "Backers"
+            : rank === "latest"
+              ? "Latest Sponsors"
               : `${rank[0].toUpperCase()}${rank.slice(1)} ${
-                  type === 'monthly' ? 'Monthly ' : ''
+                  type === "monthly" ? "Monthly " : ""
                 }Sponsors`}
         </h2>
         <VisibilitySensor
@@ -189,7 +193,7 @@ export default class Support extends Component {
         >
           <div className="support">
             <div className="support__description">
-              {rank === 'backer' ? (
+              {rank === "backer" ? (
                 <p>
                   The following <b>Backers</b> are individuals who have
                   contributed various amounts of money in order to help support
@@ -197,7 +201,7 @@ export default class Support extends Component {
                   smallest contributions. This list shows {random} randomly
                   chosen backers:
                 </p>
-              ) : rank === 'latest' ? (
+              ) : rank === "latest" ? (
                 <p>
                   The following persons/organizations made their first donation
                   in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days
@@ -206,20 +210,20 @@ export default class Support extends Component {
               ) : (
                 <p>
                   <b className="support__rank">
-                    {type === 'monthly' ? rank + ' monthly' : rank} sponsors
+                    {type === "monthly" ? `${rank} monthly` : rank} sponsors
                   </b>
-                  {type === 'monthly' ? (
+                  {type === "monthly" ? (
                     <span>
-                      are those who are currently pledging{' '}
-                      {minimum ? `$${formatMoney(minimum)}` : 'up'}{' '}
-                      {maximum ? `to $${formatMoney(maximum)}` : 'or more'}{' '}
+                      are those who are currently pledging{" "}
+                      {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
+                      {maximum ? `to $${formatMoney(maximum)}` : "or more"}{" "}
                       monthly to webpack.
                     </span>
                   ) : (
                     <span>
-                      are those who have contributed{' '}
-                      {minimum ? `$${formatMoney(minimum)}` : 'up'}{' '}
-                      {maximum ? `to $${formatMoney(maximum)}` : 'or more'} to
+                      are those who have contributed{" "}
+                      {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
+                      {maximum ? `to $${formatMoney(maximum)}` : "or more"} to
                       webpack.
                     </span>
                   )}
@@ -252,11 +256,10 @@ export default class Support extends Component {
                           : SmallIcon
                       }
                       alt={
-                        supporter.alt
-                          ? supporter.alt
-                          : supporter.name || supporter.slug
-                            ? `${supporter.name || supporter.slug}'s avatar`
-                            : 'avatar'
+                        supporter.alt ||
+                        (supporter.name || supporter.slug
+                          ? `${supporter.name || supporter.slug}'s avatar`
+                          : "avatar")
                       }
                       onError={this._handleImgError}
                     />
@@ -270,7 +273,7 @@ export default class Support extends Component {
                 className="support__button"
                 href="https://opencollective.com/webpack#support"
               >
-                Become a {rank === 'backer' ? 'backer' : 'sponsor'}
+                Become a {rank === "backer" ? "backer" : "sponsor"}
               </a>
             </div>
           </div>
@@ -282,11 +285,11 @@ export default class Support extends Component {
   /**
    * Handle images that aren't found
    *
-   * @param {object} e - React synthetic event
+   * @param {object} event - React synthetic event
    */
-  _handleImgError(e) {
-    const imgNode = e.target;
-    if (imgNode.getAttribute('src') === SmallIcon) return;
-    imgNode.setAttribute('src', SmallIcon);
+  _handleImgError(event) {
+    const imgNode = event.target;
+    if (imgNode.getAttribute("src") === SmallIcon) return;
+    imgNode.setAttribute("src", SmallIcon);
   }
 }

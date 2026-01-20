@@ -1,9 +1,9 @@
-import Link from '../Link/Link';
-import Container from '../Container/Container';
-import Icon from '../../assets/icon-square-small.svg';
-import CC from '../../assets/cc.svg';
-import BY from '../../assets/by.svg';
-import './Footer.scss';
+import BY from "../../assets/by.svg";
+import CC from "../../assets/cc.svg";
+import Icon from "../../assets/icon-square-small.svg";
+import Container from "../Container/Container.jsx";
+import Link from "../Link/Link.jsx";
+import "./Footer.scss";
 
 const Footer = () => (
   <footer className="footer">
@@ -39,7 +39,10 @@ const Footer = () => (
         <Link className="footer__link" to="/branding/">
           Branding
         </Link>
-        <Link className="footer__link" to="https://discord.com/invite/5sxFZPdx2k">
+        <Link
+          className="footer__link"
+          to="https://discord.com/invite/5sxFZPdx2k"
+        >
           Discord
         </Link>
         <Link

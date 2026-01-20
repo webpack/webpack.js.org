@@ -1,30 +1,23 @@
 // Import External Dependencies
-import { useEffect, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { DocSearch } from '@docsearch/react';
-import { Link as ReactDOMLink, NavLink, useLocation } from 'react-router-dom';
+import { DocSearch } from "@docsearch/react";
+import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
+import { Link as ReactDOMLink, NavLink, useLocation } from "react-router-dom";
 
 // Import Components
-import Link from '../Link/Link';
-import Logo from '../Logo/Logo';
-import Dropdown from '../Dropdown/Dropdown';
-import Tooltip from '../Tooltip/Tooltip';
+import GithubIcon from "../../styles/icons/github.svg";
+import Hamburger from "../../styles/icons/hamburger.svg";
+import StackOverflowIcon from "../../styles/icons/stack-overflow.svg";
+import XIcon from "../../styles/icons/x.svg";
+import Dropdown from "../Dropdown/Dropdown.jsx";
+import HelloDarkness from "../HelloDarkness.jsx";
+import Link from "../Link/Link.jsx";
+import Logo from "../Logo/Logo.jsx";
+import Tooltip from "../Tooltip/Tooltip.jsx";
 
 // Load Styling
-import '@docsearch/css';
-
-import GithubIcon from '../../styles/icons/github.svg';
-import XIcon from '../../styles/icons/x.svg';
-import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
-import Hamburger from '../../styles/icons/hamburger.svg';
-import HelloDarkness from '../HelloDarkness';
-
-NavigationItem.propTypes = {
-  children: PropTypes.node.isRequired,
-  url: PropTypes.string.isRequired,
-  isactive: PropTypes.func,
-  ariaLabel: PropTypes.string,
-};
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "@docsearch/css";
 
 function NavigationItem({ children, url, isactive, ariaLabel }) {
   let obj = {};
@@ -36,8 +29,8 @@ function NavigationItem({ children, url, isactive, ariaLabel }) {
     };
   }
   const classes =
-    'text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200';
-  if (url.startsWith('http') || url.startsWith('//')) {
+    "text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200";
+  if (url.startsWith("http") || url.startsWith("//")) {
     return (
       <a
         href={url}
@@ -64,11 +57,13 @@ function NavigationItem({ children, url, isactive, ariaLabel }) {
   );
 }
 
-NavigationIcon.propTypes = {
+NavigationItem.propTypes = {
   children: PropTypes.node.isRequired,
-  to: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  isactive: PropTypes.func,
+  ariaLabel: PropTypes.string,
 };
+
 function NavigationIcon({ children, to, title }) {
   const tooltipRef = useRef();
 
@@ -91,22 +86,20 @@ function NavigationIcon({ children, to, title }) {
     </Tooltip>
   );
 }
+
+NavigationIcon.propTypes = {
+  children: PropTypes.node.isRequired,
+  to: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
 const navigationIconProps = {
-  'aria-hidden': true,
-  fill: 'currentColor',
+  "aria-hidden": true,
+  fill: "currentColor",
   width: 16,
 };
 
-Navigation.propTypes = {
-  pathname: PropTypes.string,
-  hash: PropTypes.string,
-  links: PropTypes.array,
-  toggleSidebar: PropTypes.func,
-  theme: PropTypes.string,
-  switchTheme: PropTypes.func,
-};
-
-function Navigation({ links, pathname, hash = '', toggleSidebar }) {
+function Navigation({ links, pathname, hash = "", toggleSidebar }) {
   const [locationHash, setLocationHash] = useState(hash);
 
   const location = useLocation();
@@ -145,18 +138,18 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             ))}
             {[
               {
-                to: 'https://github.com/webpack/webpack',
-                title: 'GitHub',
+                to: "https://github.com/webpack/webpack",
+                title: "GitHub",
                 children: <GithubIcon {...navigationIconProps} />,
               },
               {
-                to: 'https://x.com/webpack',
-                title: 'X',
+                to: "https://x.com/webpack",
+                title: "X",
                 children: <XIcon {...navigationIconProps} />,
               },
               {
-                to: 'https://stackoverflow.com/questions/tagged/webpack',
-                title: 'StackOverflow',
+                to: "https://stackoverflow.com/questions/tagged/webpack",
+                title: "StackOverflow",
                 children: <StackOverflowIcon {...navigationIconProps} />,
               },
             ].map(({ to, title, children }) => (
@@ -169,17 +162,17 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
               className=""
               items={[
                 {
-                  title: 'English',
+                  title: "English",
                   url: `https://webpack.js.org${pathname}${locationHash}`,
                 },
                 {
-                  lang: 'zh',
-                  title: '中文',
+                  lang: "zh",
+                  title: "中文",
                   url: `https://webpack.docschina.org${pathname}${locationHash}`,
                 },
                 {
-                  lang: 'ko',
-                  title: '한국어',
+                  lang: "ko",
+                  title: "한국어",
                   url: `https://webpack.kr${pathname}${locationHash}`,
                 },
               ]}
@@ -189,7 +182,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             <HelloDarkness />
             <DocSearch
               appId="BH4D9OD16A"
-              apiKey={'fac401d1a5f68bc41f01fb6261661490'}
+              apiKey={"fac401d1a5f68bc41f01fb6261661490"}
               indexName="webpack-js-org"
               disableUserPersonalization={true}
               placeholder="Search webpack documentation"
@@ -198,28 +191,29 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                   const { origin } = new URL(url);
                   return {
                     ...others,
-                    url: url.replace(new RegExp(`^${origin}`), ''),
+                    url: url.replace(new RegExp(`^${origin}`), ""),
                   };
                 })
               }
-              hitComponent={({ hit, children }) => {
-                return <ReactDOMLink to={hit.url}>{children}</ReactDOMLink>;
-              }}
+              hitComponent={({ hit, children }) => (
+                <ReactDOMLink to={hit.url}>{children}</ReactDOMLink>
+              )}
             />
           </div>
         </div>
         {/* sub navigation */}
         {links
-          .filter((link) => {
-            // only those with children are displayed
-            return link.children;
-          })
+          .filter(
+            (link) =>
+              // only those with children are displayed
+              link.children,
+          )
           .map((link) => {
-            if (link.isactive) {
-              // hide the children if the link is not active
-              if (!link.isactive({}, location)) {
-                return null;
-              }
+            if (
+              link.isactive && // hide the children if the link is not active
+              !link.isactive({}, location)
+            ) {
+              return null;
             }
             return (
               <div
@@ -232,7 +226,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 >
                   {link.children.map((child) => {
                     const classNames =
-                      'text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white';
+                      "text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white";
                     const isActive = location.pathname.startsWith(child.url);
                     return (
                       <NavLink
@@ -245,7 +239,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                             : classNames
                         }
                       >
-                        {child.content === 'api'
+                        {child.content === "api"
                           ? child.content.toUpperCase()
                           : child.content}
                       </NavLink>
@@ -259,5 +253,14 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
     </>
   );
 }
+
+Navigation.propTypes = {
+  pathname: PropTypes.string,
+  hash: PropTypes.string,
+  links: PropTypes.array,
+  toggleSidebar: PropTypes.func,
+  theme: PropTypes.string,
+  switchTheme: PropTypes.func,
+};
 
 export default Navigation;

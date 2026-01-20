@@ -9,7 +9,7 @@ contributors:
   - snitin315
   - chenxsan
 related:
-  - title: 'webpack default options (source code)'
+  - title: "webpack default options (source code)"
     url: https://github.com/webpack/webpack/blob/main/lib/config/defaults.js
 ---
 
@@ -23,7 +23,7 @@ Provide the `mode` option in the config:
 
 ```javascript
 module.exports = {
-  mode: 'development',
+  mode: "development",
 };
 ```
 
@@ -50,7 +50,7 @@ T> If `mode` is not provided via configuration or CLI, CLI will use any valid `N
 ```js
 // webpack.development.config.js
 module.exports = {
-  mode: 'development',
+  mode: "development",
 };
 ```
 
@@ -59,7 +59,7 @@ module.exports = {
 ```js
 // webpack.production.config.js
 module.exports = {
-  mode: 'production',
+  mode: "production",
 };
 ```
 
@@ -68,25 +68,25 @@ module.exports = {
 ```js
 // webpack.custom.config.js
 module.exports = {
-  mode: 'none',
+  mode: "none",
 };
 ```
 
 If you want to change the behavior according to the **mode** variable inside the _webpack.config.js_, you have to export a function instead of an object:
 
 ```javascript
-var config = {
-  entry: './app.js',
-  //...
+const config = {
+  entry: "./app.js",
+  // ...
 };
 
 module.exports = (env, argv) => {
-  if (argv.mode === 'development') {
-    config.devtool = 'source-map';
+  if (argv.mode === "development") {
+    config.devtool = "source-map";
   }
 
-  if (argv.mode === 'production') {
-    //...
+  if (argv.mode === "production") {
+    // ...
   }
 
   return config;

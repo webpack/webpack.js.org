@@ -15,7 +15,7 @@ related:
 The `ModuleFederationPlugin` allows a build to provide or consume modules with other independent builds at runtime.
 
 ```ts
-const { ModuleFederationPlugin } = require('webpack').container;
+const { ModuleFederationPlugin } = require("webpack").container;
 module.exports = {
   plugins: [
     new ModuleFederationPlugin({
@@ -40,11 +40,12 @@ Create a new runtime chunk with the specified name.
 **webpack.config.js**
 
 ```js
-const { ModuleFederationPlugin } = require('webpack').container;
+const { ModuleFederationPlugin } = require("webpack").container;
+
 module.exports = {
   plugins: [
     new ModuleFederationPlugin({
-      runtime: 'my-runtime-name',
+      runtime: "my-runtime-name",
     }),
   ],
 };
@@ -55,12 +56,13 @@ module.exports = {
 With the `shared` key in the configuration you can define libraries that are shared between your federated modules. The package name is the same as the one found in the `dependencies` section of your package.json. However, by default webpack will only share the root level of a library.
 
 ```js
-const { ModuleFederationPlugin } = require('webpack').container;
+const { ModuleFederationPlugin } = require("webpack").container;
+
 module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       // adds date-fns as shared module
-      shared: ['date-fns'],
+      shared: ["date-fns"],
     }),
   ],
 };
@@ -69,22 +71,23 @@ module.exports = {
 So in your application you could do something like
 
 ```js
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
-format(new Date(2014, 1, 11), 'MM/dd/yyyy');
+format(new Date(2014, 1, 11), "MM/dd/yyyy");
 ```
 
 and webpack will automatically share `date-fns` between all your federated modules that define `date-fns` as a shared library.
 However, if you want to access something that is not located at the root level of the package, for example `date-fns/locale/en-GB/index.js`, you need to append `/` to the package name in your `shared` configuration:
 
 ```js
-const { ModuleFederationPlugin } = require('webpack').container;
+const { ModuleFederationPlugin } = require("webpack").container;
+
 module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       // adds date-fns as shared module
       // all files of the package will be shared
-      shared: ['date-fns/'],
+      shared: ["date-fns/"],
     }),
   ],
 };
@@ -101,7 +104,8 @@ There are three ways to specify the versions of shared libraries.
 This syntax allows you to share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given that libraries like `react` and `react-dom` will require additional requirements.
 
 ```js
-const { ModuleFederationPlugin } = require('webpack').container;
+const { ModuleFederationPlugin } = require("webpack").container;
+
 module.exports = {
   plugins: [
     new ModuleFederationPlugin({
@@ -109,7 +113,7 @@ module.exports = {
       // version is inferred from package.json
       // there is no version check for the required version
       // so it will always use the higher version found
-      shared: ['lodash'],
+      shared: ["lodash"],
     }),
   ],
 };
@@ -127,7 +131,7 @@ module.exports = {
         // adds lodash as shared module
         // version is inferred from package.json
         // it will use the highest lodash version that is >= 4.17 and < 5
-        lodash: '^4.17.0',
+        lodash: "^4.17.0",
       },
     }),
   ],
@@ -139,7 +143,7 @@ module.exports = {
 This syntax allows you to provide additional [hints](#sharing-hints) to each shared package where you define the package name as the key, and the value as an object containing hints to modify sharing behavior.
 
 ```js
-const deps = require('./package.json').dependencies;
+const deps = require("./package.json").dependencies;
 
 module.exports = {
   plugins: [
@@ -227,7 +231,7 @@ module.exports = {
       // it will always use the shared version, but print a warning when the shared vue is < 2.6.5 or >= 3
       shared: {
         vue: {
-          requiredVersion: '^2.6.5',
+          requiredVersion: "^2.6.5",
           singleton: true,
         },
       },
@@ -246,7 +250,7 @@ module.exports = {
       shared: {
         vue: {
           import: false,
-          requiredVersion: '^2.6.5',
+          requiredVersion: "^2.6.5",
         },
       },
     }),
@@ -264,7 +268,7 @@ module.exports = {
       shared: {
         vue: {
           import: false,
-          requiredVersion: '^2.6.5',
+          requiredVersion: "^2.6.5",
           strictVersion: true,
         },
       },
@@ -278,15 +282,15 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       shared: {
-        'my-vue': {
+        "my-vue": {
           // can be referenced by import "my-vue"
-          import: 'vue', // the "vue" package will be used as a provided and fallback module
-          shareKey: 'shared-vue', // under this name the shared module will be placed in the share scope
-          shareScope: 'default', // share scope with this name will be used
+          import: "vue", // the "vue" package will be used as a provided and fallback module
+          shareKey: "shared-vue", // under this name the shared module will be placed in the share scope
+          shareScope: "default", // share scope with this name will be used
           singleton: true, // only a single version of the shared module is allowed
           strictVersion: true, // don't use shared version when version isn't valid. Singleton or modules without fallback will throw, otherwise fallback is used
-          version: '1.2.3', // the version of the shared module
-          requiredVersion: '^1.0.0', // the required version of the shared module
+          version: "1.2.3", // the version of the shared module
+          requiredVersion: "^1.0.0", // the required version of the shared module
         },
       },
     }),

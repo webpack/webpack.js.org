@@ -22,9 +22,11 @@ An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugi
 
 **webpack.config.js**
 
+{/* eslint-disable no-constant-binary-expression */}
+
 ```js
 module.exports = {
-  //...
+  // ...
   plugins: [
     new webpack.DefinePlugin({
       // Definitions...
@@ -39,18 +41,18 @@ A more complex example, using multiple plugins, might look something like this:
 **webpack.config.js**
 
 ```js
-var webpack = require('webpack');
+const webpack = require("webpack");
 // importing plugins that do not come by default in webpack
-var DashboardPlugin = require('webpack-dashboard/plugin');
+const DashboardPlugin = require("webpack-dashboard/plugin");
 
 // adding plugins to your configuration
 module.exports = {
-  //...
+  // ...
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // compile time plugins
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"',
+      "process.env.NODE_ENV": '"production"',
     }),
     // webpack-dev-server enhancement plugins
     new DashboardPlugin(),

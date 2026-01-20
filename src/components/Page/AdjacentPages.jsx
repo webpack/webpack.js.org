@@ -1,16 +1,6 @@
-import Link from '../Link/Link';
-import './AdjacentPages.scss';
-import PropTypes from 'prop-types';
-AdjacentPages.propTypes = {
-  previous: PropTypes.shape({
-    url: PropTypes.string,
-    title: PropTypes.string,
-  }),
-  next: PropTypes.shape({
-    url: PropTypes.string,
-    title: PropTypes.string,
-  }),
-};
+import PropTypes from "prop-types";
+import Link from "../Link/Link.jsx";
+import "./AdjacentPages.scss";
 
 export default function AdjacentPages({ previous, next }) {
   if (!previous && !next) return null;
@@ -35,3 +25,14 @@ export default function AdjacentPages({ previous, next }) {
     </div>
   );
 }
+
+AdjacentPages.propTypes = {
+  previous: PropTypes.shape({
+    url: PropTypes.string,
+    title: PropTypes.string,
+  }),
+  next: PropTypes.shape({
+    url: PropTypes.string,
+    title: PropTypes.string,
+  }),
+};

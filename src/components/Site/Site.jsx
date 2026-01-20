@@ -1,52 +1,49 @@
 // Import External Dependencies
-import { Fragment, useEffect, useState } from 'react';
+import PropTypes from "prop-types";
+import { Fragment, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import {
-  Routes,
+  Outlet,
   Route,
+  Routes,
   useLocation,
   useNavigate,
-  Outlet,
-} from 'react-router-dom';
-import PropTypes from 'prop-types';
+} from "react-router-dom";
 
 // Import Utilities
+/* eslint import/no-unresolved: ["error", { ignore: ["_content\.json$"] }] */
+import Content from "../../_content.json";
+import OgImage from "../../assets/icon-pwa-512x512.png";
+import Logo from "../../assets/logo-on-white-bg.svg";
+import Favicon from "../../favicon.ico";
 import {
   extractPages,
   extractSections,
   getPageDescription,
   getPageTitle,
-} from '../../utilities/content-utils.mjs';
-import isClient from '../../utilities/is-client';
-import getAdjacentPages from '../../utilities/get-adjacent-pages/index.mjs';
+} from "../../utilities/content-utils.mjs";
+import getAdjacentPages from "../../utilities/get-adjacent-pages/index.mjs";
+import isClient from "../../utilities/is-client.js";
 
 // Import Components
-import Navigation from '../Navigation/Navigation';
-import SidebarMobile from '../SidebarMobile/SidebarMobile';
-import Container from '../Container/Container';
-import Splash from '../Splash/Splash';
-import Sponsors from '../Sponsors/Sponsors';
-import Sidebar from '../Sidebar/Sidebar';
-import Footer from '../Footer/Footer';
-import Page from '../Page/Page';
-import PageNotFound from '../PageNotFound/PageNotFound';
-import { Helmet } from 'react-helmet-async';
-
-import Favicon from '../../favicon.ico';
-import Logo from '../../assets/logo-on-white-bg.svg';
-import OgImage from '../../assets/icon-pwa-512x512.png';
+import Container from "../Container/Container.jsx";
+import Footer from "../Footer/Footer.jsx";
+import Navigation from "../Navigation/Navigation.jsx";
+import Page from "../Page/Page.jsx";
+import PageNotFound from "../PageNotFound/PageNotFound.jsx";
+import Sidebar from "../Sidebar/Sidebar.jsx";
+import SidebarMobile from "../SidebarMobile/SidebarMobile.jsx";
+import Splash from "../Splash/Splash.jsx";
+import Sponsors from "../Sponsors/Sponsors.jsx";
 
 // Load Styling
-import '../../styles/index';
-import './Site.scss';
+import "../../styles/index.scss";
+import "./Site.scss";
 
 // Load Content Tree
-import Content from '../../_content.json';
 
-import clientSideRedirections from './clientSideRedirections';
+import clientSideRedirections from "./clientSideRedirections.js";
 
-Site.propTypes = {
-  import: PropTypes.func,
-};
 function Site(props) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -67,8 +64,8 @@ function Site(props) {
    * @return {array}       - ...
    */
   const _strip = (array) => {
-    let anchorTitleIndex = array.findIndex(
-      (item) => item.name.toLowerCase() === 'index.mdx'
+    const anchorTitleIndex = array.findIndex(
+      (item) => item.name.toLowerCase() === "index.mdx",
     );
 
     if (anchorTitleIndex !== -1) {
@@ -89,72 +86,70 @@ function Site(props) {
       }))
       .filter(
         (page) =>
-          page.title !== 'printable.mdx' && !page.content.includes('Printable')
+          page.title !== "printable.mdx" && !page.content.includes("Printable"),
       );
   };
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
         window.location.reload();
       });
     }
   }, []);
 
   useEffect(() => {
-    if (isClient) {
-      if (process.env.NODE_ENV === 'production') {
-        // only register sw.js in production
-        if ('serviceWorker' in navigator) {
-          // dynamic load sw
-          import('workbox-window/Workbox.mjs').then(({ Workbox }) => {
-            const wb = new Workbox('/sw.js');
+    if (
+      isClient &&
+      process.env.NODE_ENV === "production" && // only register sw.js in production
+      "serviceWorker" in navigator
+    ) {
+      // dynamic load sw
+      import("workbox-window/Workbox.mjs").then(({ Workbox }) => {
+        const wb = new Workbox("/sw.js");
 
-            // listen to `waiting` event
-            wb.addEventListener('waiting', () => {
-              // log and show updateBox
-              console.log(
-                // eslint-disable-next-line
-                "A new service worker has installed, but it can't activate until all tabs running the current version have been unloaded"
-              );
-            });
+        // listen to `waiting` event
+        wb.addEventListener("waiting", () => {
+          // log and show updateBox
+          console.log(
+            "A new service worker has installed, but it can't activate until all tabs running the current version have been unloaded",
+          );
+        });
 
-            // register the service worker
-            wb.register();
-          });
-        }
-      }
+        // register the service worker
+        wb.register();
+      });
     }
   }, []);
 
-  let sections = extractSections(Content);
-  let section = sections.find(({ url }) => location.pathname.startsWith(url));
-  let pages = extractPages(Content);
+  const sections = extractSections(Content);
+  const section = sections.find(({ url }) => location.pathname.startsWith(url));
+  const pages = extractPages(Content);
   const sidebarPages = _strip(
     section
       ? section.children
       : Content.children.filter(
-          (item) => item.type !== 'directory' && item.url !== '/'
-        )
+          (item) => item.type !== "directory" && item.url !== "/",
+        ),
   );
 
   // not to show in sub navbar
-  const excludeItems = ['contribute', 'blog'];
+  const excludeItems = ["contribute", "blog"];
 
   const title = getPageTitle(Content, location.pathname);
 
   const description =
     getPageDescription(Content, location.pathname) ||
-    'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
+    "webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.";
 
   function isPrintPage(url) {
-    return url.includes('/printable');
+    return url.includes("/printable");
   }
 
   // As github pages uses trailing slash, we need to provide it to canonicals for consistency
   // between canonical href and final url served by github pages.
   function enforceTrailingSlash(url) {
-    return url.replace(/\/?$/, '/');
+    return url.replace(/\/?$/, "/");
   }
 
   // Enable client side redirection
@@ -195,13 +190,13 @@ function Site(props) {
         <meta property="twitter:creator" content="@webpack" />
         <meta property="twitter:domain" content="https://webpack.js.org/" />
         <link rel="icon" type="image/x-icon" href={Favicon} />
-        {process.env.NODE_ENV === 'production' && (
+        {process.env.NODE_ENV === "production" && (
           <link rel="manifest" href="/manifest.json" />
         )}
         <link
           rel="canonical"
           href={`https://webpack.js.org${enforceTrailingSlash(
-            location.pathname
+            location.pathname,
           )}`}
         />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -222,26 +217,25 @@ function Site(props) {
           toggleSidebar={_toggleSidebar}
           links={[
             {
-              content: 'Documentation',
-              ariaLabel: 'webpack documentation',
-              url: '/concepts/',
-              isactive: (_, location) => {
-                return /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
-                  location.pathname
-                );
-              },
+              content: "Documentation",
+              ariaLabel: "webpack documentation",
+              url: "/concepts/",
+              isactive: (_, location) =>
+                /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
+                  location.pathname,
+                ),
               children: _strip(
                 sections.filter(
-                  ({ name }) => excludeItems.includes(name) === false
-                )
+                  ({ name }) => excludeItems.includes(name) === false,
+                ),
               ),
             },
             {
-              content: 'Contribute',
-              url: '/contribute/',
-              ariaLabel: 'contribute to webpack',
+              content: "Contribute",
+              url: "/contribute/",
+              ariaLabel: "contribute to webpack",
             },
-            { content: 'Blog', url: '/blog/', ariaLabel: 'webpack blog' },
+            { content: "Blog", url: "/blog/", ariaLabel: "webpack blog" },
           ]}
         />
       </div>
@@ -265,11 +259,11 @@ function Site(props) {
         >
           <Route path="app-shell" element={<Fragment />} />
           {pages.map((page) => {
-            let path = page.path.replace('src/content/', '');
+            const path = page.path.replace("src/content/", "");
             const { previous, next } = getAdjacentPages(
               sidebarPages,
               page,
-              'url'
+              "url",
             );
             return (
               <Route
@@ -293,20 +287,16 @@ function Site(props) {
         </Route>
       </Routes>
       <Footer />
-      
     </div>
   );
 }
-export default Site;
-PageElement.propTypes = {
-  currentPage: PropTypes.string,
-  sidebarPages: PropTypes.array,
-  previous: PropTypes.object,
-  next: PropTypes.object,
-  page: PropTypes.object,
+
+Site.propTypes = {
   import: PropTypes.func,
-  path: PropTypes.string,
 };
+
+export default Site;
+
 function PageElement(props) {
   const { currentPage, sidebarPages, page, previous, next } = props;
   const content = props.import(props.path);
@@ -322,3 +312,13 @@ function PageElement(props) {
     </Fragment>
   );
 }
+
+PageElement.propTypes = {
+  currentPage: PropTypes.string,
+  sidebarPages: PropTypes.array,
+  previous: PropTypes.object,
+  next: PropTypes.object,
+  page: PropTypes.object,
+  import: PropTypes.func,
+  path: PropTypes.string,
+};

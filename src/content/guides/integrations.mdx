@@ -34,20 +34,20 @@ Then register a configuration and load the task:
 **Gruntfile.js**
 
 ```js
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require("./webpack.config.js");
 
 module.exports = function (grunt) {
   grunt.initConfig({
     webpack: {
       options: {
-        stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development',
+        stats: !process.env.NODE_ENV || process.env.NODE_ENV === "development",
       },
       prod: webpackConfig,
-      dev: Object.assign({ watch: true }, webpackConfig),
+      dev: { watch: true, ...webpackConfig },
     },
   });
 
-  grunt.loadNpmTasks('grunt-webpack');
+  grunt.loadNpmTasks("grunt-webpack");
 };
 ```
 
@@ -66,18 +66,19 @@ You can `require('webpack-stream')` instead of `webpack` and optionally pass it 
 **gulpfile.js**
 
 ```js
-const gulp = require('gulp');
-const webpack = require('webpack-stream');
-gulp.task('default', function () {
-  return gulp
-    .src('src/entry.js')
+const gulp = require("gulp");
+const webpack = require("webpack-stream");
+
+gulp.task("default", () =>
+  gulp
+    .src("src/entry.js")
     .pipe(
       webpack({
         // Any configuration options...
-      })
+      }),
     )
-    .pipe(gulp.dest('dist/'));
-});
+    .pipe(gulp.dest("dist/")),
+);
 ```
 
 For more information, please visit the [repository](https://github.com/shama/webpack-stream).
@@ -106,19 +107,19 @@ npm install --save-dev webpack karma karma-webpack
 ```js
 module.exports = function (config) {
   config.set({
-    frameworks: ['webpack'],
+    frameworks: ["webpack"],
     files: [
-      { pattern: 'test/*_test.js', watched: false },
-      { pattern: 'test/**/*_test.js', watched: false },
+      { pattern: "test/*_test.js", watched: false },
+      { pattern: "test/**/*_test.js", watched: false },
     ],
     preprocessors: {
-      'test/*_test.js': ['webpack'],
-      'test/**/*_test.js': ['webpack'],
+      "test/*_test.js": ["webpack"],
+      "test/**/*_test.js": ["webpack"],
     },
     webpack: {
       // Any custom webpack configuration...
     },
-    plugins: ['karma-webpack'],
+    plugins: ["karma-webpack"],
   });
 };
 ```

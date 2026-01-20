@@ -57,7 +57,7 @@ new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
 
   Object.assign(context, {
     regExp: /^\.\/\w+/,
-    request: '../../locale', // resolved relatively
+    request: "../../locale", // resolved relatively
   });
 });
 ```
@@ -77,8 +77,8 @@ new webpack.ContextReplacementPlugin(
 These two parameters can be used together to redirect requests in a more targeted way. The `newContentCreateContextMap` allows you to map runtime requests to compile requests in the form of an object:
 
 ```javascript
-new ContextReplacementPlugin(/selector/, './folder', {
-  './request': './request',
-  './other-request': './new-request',
+new ContextReplacementPlugin(/selector/, "./folder", {
+  "./request": "./request",
+  "./other-request": "./new-request",
 });
 ```

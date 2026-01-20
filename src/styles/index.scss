@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@600&display=swap");
 
-@import 'vars';
-@import 'functions';
-@import 'mixins';
+@import "vars";
+@import "functions";
+@import "mixins";
 
-@import './reset';
+@import "./reset";
 
 * {
   box-sizing: inherit;
@@ -25,10 +25,10 @@ body {
   height: 22px;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('../assets/link.svg');
+  background-image: url("../assets/link.svg");
   background-size: contain;
 }
-[aria-hidden='true']:hover .header-link {
+[aria-hidden="true"]:hover .header-link {
   visibility: visible;
 }
 a,
@@ -64,6 +64,6 @@ button.as-link {
     user-select: none;
   }
 }
-[data-theme='dark'] {
-  @import 'dark';
+[data-theme="dark"] {
+  @import "dark";
 }

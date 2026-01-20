@@ -52,7 +52,7 @@ A version of `node` or `electron` may be optionally specified. This is denoted b
 ```js
 module.exports = {
   // ...
-  target: 'node12.18',
+  target: "node12.18",
 };
 ```
 
@@ -82,7 +82,7 @@ When multiple targets are passed, then common subset of features will be used:
 ```js
 module.exports = {
   // ...
-  target: ['web', 'es5'],
+  target: ["web", "es5"],
 };
 ```
 
@@ -95,7 +95,7 @@ Not all targets may be mixed for now.
 ```js
 module.exports = {
   // ...
-  target: ['web', 'node'],
+  target: ["web", "node"],
 };
 ```
 
@@ -119,14 +119,14 @@ Or you can apply specific plugins you want:
 **webpack.config.js**
 
 ```js
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = {
   // ...
   target: false,
   plugins: [
     new webpack.web.JsonpTemplatePlugin(options.output),
-    new webpack.LoaderTargetPlugin('web'),
+    new webpack.LoaderTargetPlugin("web"),
   ],
 };
 ```

@@ -8,9 +8,9 @@ export const walkContent = (tree, callback) => {
   callback(tree);
 
   if (tree.children) {
-    tree.children.forEach((child) => {
+    for (const child of tree.children) {
       walkContent(child, callback);
-    });
+    }
   }
 };
 
@@ -22,12 +22,15 @@ export const walkContent = (tree, callback) => {
  */
 export const flattenContent = (tree) => {
   if (tree.children) {
-    return tree.children.reduce((flat, item) => {
-      return flat.concat(
-        Array.isArray(item.children) ? flattenContent(item) : item
-      );
-    }, []);
-  } else return [];
+    return tree.children.reduce(
+      (flat, item) => [
+        ...flat,
+        ...(Array.isArray(item.children) ? flattenContent(item) : [item]),
+      ],
+      [],
+    );
+  }
+  return [];
 };
 
 /**
@@ -38,7 +41,7 @@ export const flattenContent = (tree) => {
  * @return {object}        - The first leaf node that passes the `test`
  */
 export const findInContent = (tree, test) => {
-  let list = flattenContent(tree);
+  const list = flattenContent(tree);
 
   return list.find(test);
 };
@@ -49,9 +52,8 @@ export const findInContent = (tree, test) => {
  * @param  {object} tree - Any node in the content tree
  * @return {array}       - Immediate children of the given `tree` that are directories
  */
-export const extractSections = (tree) => {
-  return tree.children.filter((item) => item.type === 'directory');
-};
+export const extractSections = (tree) =>
+  tree.children.filter((item) => item.type === "directory");
 
 /**
  * Get all markdown pages
@@ -59,11 +61,10 @@ export const extractSections = (tree) => {
  * @param  {object} tree - Any node in the content tree
  * @return {array}       - All markdown descendants of the given `tree`
  */
-export const extractPages = (tree) => {
-  return flattenContent(tree).filter(
-    (item) => item.extension === '.md' || item.extension === '.mdx'
+export const extractPages = (tree) =>
+  flattenContent(tree).filter(
+    (item) => item.extension === ".md" || item.extension === ".mdx",
   );
-};
 
 /**
  * Retrieve the page title from the given `tree` based on the given `path`
@@ -76,13 +77,13 @@ export const getPageTitle = (tree, path) => {
   const page = findInContent(tree, (item) => item.url === path);
 
   // non page found
-  if (!page) return 'webpack';
+  if (!page) return "webpack";
 
   if (page) {
-    if (path.includes('/printable')) {
-      return 'Combined printable page | webpack';
+    if (path.includes("/printable")) {
+      return "Combined printable page | webpack";
     }
-    if (path === '/') return page.title || 'webpack';
+    if (path === "/") return page.title || "webpack";
     return `${page.title} | webpack`;
   }
 };
@@ -90,7 +91,7 @@ export const getPageTitle = (tree, path) => {
 export const getPageDescription = (tree, path) => {
   const page = findInContent(tree, (item) => item.url === path);
   if (!page) return undefined;
-  if (path.includes('/printable')) return '';
+  if (path.includes("/printable")) return "";
 
-  return page.description || '';
+  return page.description || "";
 };
