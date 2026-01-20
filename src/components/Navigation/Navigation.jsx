@@ -16,7 +16,6 @@ import Logo from "../Logo/Logo.jsx";
 import Tooltip from "../Tooltip/Tooltip.jsx";
 
 // Load Styling
-// eslint-disable-next-line import/no-extraneous-dependencies
 import "@docsearch/css";
 
 function NavigationItem({ children, url, isactive, ariaLabel }) {
