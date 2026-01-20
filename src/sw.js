@@ -58,7 +58,6 @@ self.addEventListener("activate", (event) => {
     ),
   );
 });
-
 registerRoute(
   ({ url }) => manifestURLs.includes(url.href),
   new NetworkFirst({
