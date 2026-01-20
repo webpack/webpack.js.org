@@ -46,6 +46,9 @@ export default (env) =>
     plugins: [
       new SSGPlugin({
         globals: {
+          ReadableStream: globalThis.ReadableStream,
+          WritableStream: globalThis.WritableStream,
+          TransformStream: globalThis.TransformStream,
           window: {
             __ssgrun: true,
           },
