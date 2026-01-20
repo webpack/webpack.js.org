@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`remark slug should add id 1`] = `
 "<h2 id="user-content-hello-world"><span id="user-content-hello-world"></span>hello world</h2>
