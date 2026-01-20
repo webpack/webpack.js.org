@@ -68,13 +68,11 @@
     ]
   },
   "resolutions": {
-    "sitemap-static/minimist": "1.2.5",
-    "ini": "1.3.7",
     "eval": "^0.1.5"
   },
   "dependencies": {
     "@docsearch/react": "^3.9.0",
-    "@react-spring/web": "^9.7.5",
+    "@react-spring/web": "^10.0.3",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -108,7 +106,7 @@
     "directory-tree-webpack-plugin": "^1.0.3",
     "duplexer": "^0.1.1",
     "eslint": "^9.39.2",
-    "eslint-config-webpack": "^4.8.4",
+    "eslint-config-webpack": "^4.8.5",
     "eslint-plugin-cypress": "^5.2.1",
     "eslint-plugin-mdx": "^3.6.2",
     "front-matter": "^4.0.2",
@@ -131,7 +129,7 @@
     "postcss": "^8.5.6",
     "postcss-loader": "^8.2.0",
     "prettier": "^3.8.0",
-    "react-refresh": "^0.14.2",
+    "react-refresh": "^0.18.0",
     "redirect-webpack-plugin": "^1.0.0",
     "remark": "^15.0.1",
     "remark-autolink-headings": "7.0.1",
