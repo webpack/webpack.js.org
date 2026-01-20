@@ -41,7 +41,6 @@ self.addEventListener("install", (event) => {
     })(),
   );
 });
-
 self.addEventListener("activate", (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
