@@ -103,7 +103,7 @@
     "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.4",
-    "cypress": "^13.16.0",
+    "cypress": "^15.9.0",
     "directory-tree": "^3.5.2",
     "directory-tree-webpack-plugin": "^1.0.3",
     "duplexer": "^0.1.1",
