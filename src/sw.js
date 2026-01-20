@@ -59,7 +59,7 @@ self.addEventListener("activate", (event) => {
           }
         }
       }),
-    ),
+    )
   );
 });
 registerRoute(
