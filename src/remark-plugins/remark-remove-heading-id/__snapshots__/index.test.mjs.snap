@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`customize blockquote should add id 1`] = `
 "<h2><span id="user-content-hello-world"></span>hello world</h2>

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`cleanup readme should clean up div[align="center"] block with paragraph 1`] = `
 "import {jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime";

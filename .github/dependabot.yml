@@ -10,12 +10,16 @@ updates:
     ignore:
       - dependency-name: "react"
       - dependency-name: "react-dom"
+      - dependency-name: "react-router-dom"
     groups:
       dependencies:
         patterns:
           - "*"
-  # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
