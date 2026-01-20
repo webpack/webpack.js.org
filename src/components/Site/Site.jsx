@@ -28,7 +28,6 @@ import isClient from "../../utilities/is-client.js";
 import Container from "../Container/Container.jsx";
 import Footer from "../Footer/Footer.jsx";
 import Navigation from "../Navigation/Navigation.jsx";
-import NotificationBar from "../NotificationBar/NotificationBar.jsx";
 import Page from "../Page/Page.jsx";
 import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import Sidebar from "../Sidebar/Sidebar.jsx";
