@@ -6,8 +6,6 @@ export default function CodeBlockWithCopy({ children }) {
   const preRef = useRef(null);
   const [copyStatus, setCopyStatus] = useState("copy");
 
-  console.log(process);
-
   const handleCopy = async () => {
     if (!preRef.current) return;
 
