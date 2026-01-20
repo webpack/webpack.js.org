@@ -37,16 +37,16 @@ self.addEventListener("install", (event) => {
       await Promise.all(
         manifestURLs.map(async (url) => {
           try {
-            const response = await fetch(url, { cache: 'no-store' });
+            const response = await fetch(url, { cache: "no-store" });
             if (response && response.ok) {
               await cache.put(url, response);
             }
           } catch (err) {
-            console.warn('[sw] Failed to precache:', url, err);
+            console.warn("[sw] Failed to precache:", url, err);
           }
         })
       );
-    })()
+    })();
   );
   });
 
@@ -59,9 +59,9 @@ self.addEventListener("activate", (event) => {
           if (!manifestURLs.includes(request.url)) {
             cache.delete(request);
           }
-        });
+        })
       });
-    })
+    }),
   );
 });
 
