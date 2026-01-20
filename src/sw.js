@@ -1,53 +1,68 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { CacheableResponsePlugin } from "workbox-cacheable-response";
-import { cacheNames } from "workbox-core";
-import { ExpirationPlugin } from "workbox-expiration";
+import { cacheNames } from 'workbox-core';
 import {
   registerRoute,
   setCatchHandler,
   setDefaultHandler,
-} from "workbox-routing";
+} from 'workbox-routing';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import {
   NetworkFirst,
-  NetworkOnly,
   StaleWhileRevalidate,
-} from "workbox-strategies";
-/* eslint-enable import/no-extraneous-dependencies */
+  NetworkOnly,
+} from 'workbox-strategies';
+import { ExpirationPlugin } from 'workbox-expiration';
 
 const cacheName = cacheNames.runtime;
 
 const manifest = self.__WB_MANIFEST;
 const otherManifest = [
   {
-    url: "/manifest.json",
+    url: '/manifest.json',
   },
   {
-    url: "/app-shell/index.html",
+    url: '/app-shell/index.html',
   },
 ];
 const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
   const url = new URL(entry.url, self.location);
   return url.href;
 });
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(manifestURLs)),
+self.addEventListener('install', (event) => {
+event.waitUntil(
+    (async () => {
+      const cache = await caches.open(cacheName);
+
+      await Promise.all(
+        manifestURLs.map(async (url) => {
+          try {
+            const response = await fetch(url, { cache: 'no-store' });
+            if (response && response.ok) {
+              await cache.put(url, response);
+            }
+          } catch (err) {
+            // Firefox fails SW install if any precache request rejects.
+            // Ignore individual failures to allow SW installation.
+            console.warn('[sw] Failed to precache:', url, err);
+          }
+        })
+      );
+    })()
   );
 });
 
-self.addEventListener("activate", (event) => {
+self.addEventListener('activate', (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
       // clean up those who are not listed in manifestURLs
-      cache.keys().then((keys) => {
-        for (const request of keys) {
+      return cache.keys().then((keys) => {
+        keys.forEach((request) => {
           if (!manifestURLs.includes(request.url)) {
             cache.delete(request);
           }
-        }
+        });
       });
-    }),
+    })
   );
 });
 
@@ -55,14 +70,14 @@ registerRoute(
   ({ url }) => manifestURLs.includes(url.href),
   new NetworkFirst({
     cacheName,
-  }),
+  })
 );
 
 // Cache Google Fonts
 registerRoute(
   /https:\/\/fonts\.gstatic\.com/,
   new StaleWhileRevalidate({
-    cacheName: "google-fonts-cache",
+    cacheName: 'google-fonts-cache',
     plugins: [
       // Ensure that only requests that result in a 200 status are cached
       new CacheableResponsePlugin({
@@ -74,7 +89,7 @@ registerRoute(
         maxEntries: 30,
       }),
     ],
-  }),
+  })
 );
 
 setDefaultHandler(new NetworkOnly());
@@ -82,8 +97,8 @@ setDefaultHandler(new NetworkOnly());
 // fallback to app-shell for document request
 setCatchHandler(({ event }) => {
   switch (event.request.destination) {
-    case "document":
-      return caches.match("/app-shell/index.html");
+    case 'document':
+      return caches.match('/app-shell/index.html');
     default:
       return Response.error();
   }
