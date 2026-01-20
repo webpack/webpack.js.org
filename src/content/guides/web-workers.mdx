@@ -78,7 +78,17 @@ const worker = new Worker(new URL("./worker.js", import.meta.url));
 worker.postMessage({ publicPath: globalThis.__MY_GLOBAL_PUBLIC_PATH_VAR__ });
 ```
 
+**When to use this:**
+
+This pattern is only required when a worker needs to load additional chunks and the asset base URL is determined at runtime (for example, when using a CDN or a multi-domain deployment).
+
+Since workers run in an isolated global scope, the automatically detected public path may differ from the one used by the main thread. In such cases, the public path (`__webpack_public_path__`) must be explicitly passed to the worker and set inside the worker runtime.
+
+> Note: This is an advanced use case. If your worker does not load additional chunks or your assets are served from a static, same-origin path, you typically do not need to set `__webpack_public_path__` manually.
+
 ## Node.js
+
+This section describes using Web Workers in a Node.js environment via the `worker_threads` module.
 
 Similar syntax is supported in Node.js (>= 12.17.0):
 
