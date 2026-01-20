@@ -1,51 +1,53 @@
-import { Component } from 'react';
-import './Dropdown.scss';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Component } from "react";
+
+import "./Dropdown.scss";
 
 export default class Dropdown extends Component {
   static propTypes = {
     className: PropTypes.string,
     items: PropTypes.array,
   };
+
   state = {
     active: false,
   };
 
   componentDidMount() {
     document.addEventListener(
-      'keyup',
+      "keyup",
       this._closeDropdownOnEsc.bind(this),
-      true
+      true,
     );
     document.addEventListener(
-      'focus',
+      "focus",
       this._closeDropdownIfFocusLost.bind(this),
-      true
+      true,
     );
     document.addEventListener(
-      'click',
+      "click",
       this._closeDropdownIfFocusLost.bind(this),
-      true
+      true,
     );
   }
 
-  _closeDropdownOnEsc(e) {
-    if (e.key === 'Escape' && this.state.active) {
+  _closeDropdownOnEsc(event) {
+    if (event.key === "Escape" && this.state.active) {
       this.setState({ active: false }, () => {
         this.dropdownButton.focus();
       });
     }
   }
 
-  _closeDropdownIfFocusLost(e) {
-    if (this.state.active && !this.dropdown.contains(e.target)) {
+  _closeDropdownIfFocusLost(event) {
+    if (this.state.active && !this.dropdown.contains(event.target)) {
       this.setState({ active: false });
     }
   }
 
   render() {
-    let { className = '', items = [] } = this.props;
-    let activeMod = this.state.active ? 'dropdown__list--active' : '';
+    const { className = "", items = [] } = this.props;
+    const activeMod = this.state.active ? "dropdown__list--active" : "";
 
     return (
       <nav
@@ -96,46 +98,44 @@ export default class Dropdown extends Component {
         </button>
         <div className={`dropdown__list ${activeMod}`}>
           <ul>
-            {items.map((item, i) => {
-              return (
-                <li key={item.title}>
-                  <a
-                    onKeyDown={this._handleArrowKeys.bind(
-                      this,
-                      i,
-                      items.length - 1
-                    )}
-                    ref={(node) =>
-                      this.links ? this.links.push(node) : (this.links = [node])
-                    }
-                    href={item.url}
-                    className="px-5 block"
-                  >
-                    <span lang={item.lang}>{item.title}</span>
-                  </a>
-                </li>
-              );
-            })}
+            {items.map((item, i) => (
+              <li key={item.title}>
+                <a
+                  onKeyDown={this._handleArrowKeys.bind(
+                    this,
+                    i,
+                    items.length - 1,
+                  )}
+                  ref={(node) =>
+                    this.links ? this.links.push(node) : (this.links = [node])
+                  }
+                  href={item.url}
+                  className="px-5 block"
+                >
+                  <span lang={item.lang}>{item.title}</span>
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </nav>
     );
   }
 
-  _handleArrowKeys(currentIndex, lastIndex, e) {
-    if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
-      e.preventDefault();
+  _handleArrowKeys(currentIndex, lastIndex, event) {
+    if (["ArrowDown", "ArrowUp"].includes(event.key)) {
+      event.preventDefault();
     }
 
     let newIndex = currentIndex;
-    if (e.key === 'ArrowDown') {
+    if (event.key === "ArrowDown") {
       newIndex++;
       if (newIndex > lastIndex) {
         newIndex = 0;
       }
     }
 
-    if (e.key === 'ArrowUp') {
+    if (event.key === "ArrowUp") {
       newIndex--;
       if (newIndex < 0) {
         newIndex = lastIndex;

@@ -43,8 +43,8 @@ Version 2 of webpack supports ES6 module syntax natively, meaning you can use `i
 Statically `import` the `export`s of another module.
 
 ```javascript
-import MyModule from './my-module.js';
-import { NamedExport } from './other-module.js';
+import MyModule from "./my-module.js";
+import { NamedExport } from "./other-module.js";
 ```
 
 W> The keyword here is **statically**. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
@@ -52,11 +52,11 @@ W> The keyword here is **statically**. A normal `import` statement cannot be use
 You can also `import` Data URI:
 
 ```javascript
-import 'data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7';
+import "data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7";
 import {
-  number,
   fn,
-} from 'data:text/javascript;charset=utf-8;base64,ZXhwb3J0IGNvbnN0IG51bWJlciA9IDQyOwpleHBvcnQgY29uc3QgZm4gPSAoKSA9PiAiSGVsbG8gd29ybGQiOw==';
+  number,
+} from "data:text/javascript;charset=utf-8;base64,ZXhwb3J0IGNvbnN0IG51bWJlciA9IDQyOwpleHBvcnQgY29uc3QgZm4gPSAoKSA9PiAiSGVsbG8gd29ybGQiOw==";
 ```
 
 ### export
@@ -86,7 +86,7 @@ T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()`
 
 ```javascript
 if (module.hot) {
-  import('lodash').then((_) => {
+  import("lodash").then((_) => {
     // Do something with lodash (a.k.a '_')...
   });
 }
@@ -122,7 +122,7 @@ import(
   /* webpackMode: "lazy" */
   /* webpackExports: ["default", "named"] */
   /* webpackFetchPriority: "high" */
-  'module'
+  "node:module"
 );
 
 // Multiple possible targets
@@ -136,7 +136,7 @@ import(
   `./locale/${language}`
 );
 
-import(/* webpackIgnore: true */ 'ignored-module.js');
+import(/* webpackIgnore: true */ "ignored-module.js");
 ```
 
 T> Single line comments (`//`) are also supported. JSDoc comments (`/** */`) are not.
@@ -150,9 +150,9 @@ Disables dynamic import parsing when set to `true`.
 When using `import.meta.url`, it does not remain as-is; instead, it gets replaced based on the `baseURI`. For modules, it is replaced with `new URL("./", import.meta.url)`, and for other cases, it defaults to `document.baseURI`. This ensures that relative URLs work correctly, aligning with the base URL context.
 
 ```js
-import(/* webpackIgnore: true */ 'ignored-module.js');
+import(/* webpackIgnore: true */ "ignored-module.js");
 
-new URL(/* webpackIgnore: true */ 'file1.css', import.meta.url);
+new URL(/* webpackIgnore: true */ "./file1.css", import.meta.url);
 ```
 
 W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
@@ -169,7 +169,7 @@ We support `webpackIgnore` in the following cases:
 
 .class {
   color: red;
-  background: /* webpackIgnore: true */ url('./url/img.png');
+  background: /* webpackIgnore: true */ url("./url/img.png");
 }
 
 .class {
@@ -196,7 +196,7 @@ Set [`fetchPriority`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScrip
 ```js
 import(
   /* webpackFetchPriority: "high" */
-  'path/to/module'
+  "path/to/module"
 );
 ```
 
@@ -248,8 +248,8 @@ require(dependency: String);
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
 
 ```javascript
-import $ from 'jquery';
-import myModule from 'my-module';
+import $ from "jquery";
+import myModule from "my-module";
 ```
 
 It's possible to enable magic comments for `require` as well, see [`module.parser.javascript.commonjsMagicComments`](/configuration/module/#moduleparserjavascriptcommonjsmagiccomments) for more.
@@ -275,11 +275,12 @@ Multiple requires of the same module result in only one module execution and onl
 W> This is only needed in rare cases for compatibility!
 
 ```javascript
-import d1 from 'dependency';
+import d1 from "dependency";
+
 // In ESM, module caching is handled automatically.
 // Manual cache deletion like in CommonJS is not supported.
 if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept('dependency', (newModule) => {
+  import.meta.webpackHot.accept("dependency", (newModule) => {
     // Handle module update here
   });
 }
@@ -309,11 +310,11 @@ Split out the given `dependencies` to a separate bundle that will be loaded asyn
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `require.ensure` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 ```javascript
-const a = require('normal-dep');
+const a = require("normal-dep");
 
 if (module.hot) {
-  import('b').then(() => {
-    import('c').then((c) => {
+  import("b").then(() => {
+    import("c").then((c) => {
       // Do something special...
     });
   });
@@ -346,14 +347,13 @@ If `dependencies` are provided, `factoryMethod` will be called with the exports 
 W> Note that webpack ignores the `name` argument.
 
 ```javascript
-define(['jquery', 'my-module'], function ($, myModule) {
+define(["jquery", "my-module"], ($, myModule) =>
   // Do something with $ and myModule...
 
   // Export a function
-  return function doSomething() {
+  function doSomething() {
     // ...
-  };
-});
+  });
 ```
 
 W> This CANNOT be used in an asynchronous function.
@@ -385,8 +385,8 @@ Similar to `require.ensure`, this will split the given `dependencies` into a sep
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use AMD with older browsers (e.g. Internet Explorer 11), remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 ```javascript
-import('b').then((b) => {
-  import('c').then((c) => {
+import("b").then((b) => {
+  import("c").then((c) => {
     // b और c का इस्तेमाल करें
   });
 });
@@ -450,22 +450,22 @@ require.context(
 Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be resolved later on:
 
 ```javascript
-const context = import.meta.webpackContext('components', {
+const context = import.meta.webpackContext("components", {
   recursive: true,
   regExp: /\.html$/,
 });
-const componentA = context.resolve('componentA');
+const componentA = context.resolve("componentA");
 ```
 
 If `mode` is set to `'lazy'`, the underlying modules will be loaded asynchronously:
 
 ```javascript
-const context = import.meta.webpackContext('locales', {
+const context = import.meta.webpackContext("locales", {
   recursive: true,
   regExp: /\.json$/,
-  mode: 'lazy',
+  mode: "lazy",
 });
-context('localeA').then((locale) => {
+context("localeA").then((locale) => {
   // do something with locale
 });
 ```
@@ -481,9 +481,9 @@ require.include((dependency: String));
 Include a `dependency` without executing it. This can be used for optimizing the position of a module in the output chunks.
 
 ```javascript
-import('a');
-import('b');
-import('c').then((moduleC) => {
+import("a");
+import("b");
+import("c").then((moduleC) => {
   // Use moduleC here
 });
 ```
@@ -501,16 +501,16 @@ Without `require.include('a')` it would be duplicated in both anonymous chunks.
 Similar to `require.resolve`, but this won't pull the `module` into the bundle. It's what is considered a "weak" dependency.
 
 ```javascript
-if (__webpack_modules__[require.resolveWeak('module')]) {
+if (__webpack_modules__[require.resolveWeak("module")]) {
   // Do something when module is available...
 }
-if (require.cache[require.resolveWeak('module')]) {
+if (require.cache[require.resolveWeak("module")]) {
   // Do something when module was loaded before...
 }
 
 // You can perform dynamic resolves ("context")
 // similarly to other require/import methods.
-const page = 'Foo';
+const page = "Foo";
 __webpack_modules__[require.resolveWeak(`./page/${page}`)];
 ```
 

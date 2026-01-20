@@ -28,18 +28,18 @@ There is one change that you will have to make to your webpack config. Typically
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = (env) => {
   // Use env.<YOUR VARIABLE> here:
-  console.log('Goal: ', env.goal); // 'local'
-  console.log('Production: ', env.production); // true
+  console.log("Goal:", env.goal); // 'local'
+  console.log("Production:", env.production); // true
 
   return {
-    entry: './src/index.js',
+    entry: "./src/index.js",
     output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
+      filename: "bundle.js",
+      path: path.resolve(__dirname, "dist"),
     },
   };
 };

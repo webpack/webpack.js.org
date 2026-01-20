@@ -52,8 +52,8 @@ example, when hooking into the `compile` stage, only the synchronous `tap` metho
 can be used:
 
 ```js
-compiler.hooks.compile.tap('MyPlugin', (params) => {
-  console.log('Synchronously tapping the compile hook.');
+compiler.hooks.compile.tap("MyPlugin", (params) => {
+  console.log("Synchronously tapping the compile hook.");
 });
 ```
 
@@ -62,25 +62,29 @@ or `tapPromise` (as well as `tap`):
 
 ```js
 compiler.hooks.run.tapAsync(
-  'MyPlugin',
+  "MyPlugin",
   (source, target, routesList, callback) => {
-    console.log('Asynchronously tapping the run hook.');
+    console.log("Asynchronously tapping the run hook.");
     callback();
-  }
+  },
 );
 
-compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
-  return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-    console.log('Asynchronously tapping the run hook with a delay.');
-  });
-});
+compiler.hooks.run.tapPromise("MyPlugin", (source, target, routesList) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, 1000);
+  }).then(() => {
+    console.log("Asynchronously tapping the run hook with a delay.");
+  }),
+);
 
 compiler.hooks.run.tapPromise(
-  'MyPlugin',
+  "MyPlugin",
   async (source, target, routesList) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log('Asynchronously tapping the run hook with a delay.');
-  }
+    await new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+    console.log("Asynchronously tapping the run hook with a delay.");
+  },
 );
 ```
 
@@ -121,17 +125,17 @@ you need to do the following:
    ```ts
    const hooks = MyPlugin.getCompilationHooks(compilation);
 
-   hooks.custom.call(1, 'hello');
+   hooks.custom.call(1, "hello");
    ```
 
 4. Other plugins can access your custom hooks too:
 
    ```ts
-   import MyPlugin from 'my-plugin';
+   import MyPlugin from "my-plugin";
 
    const hooks = MyPlugin.getCompilationHooks(compilation);
 
-   hooks.custom.tap('OtherPlugin', (n, s) => {
+   hooks.custom.tap("OtherPlugin", (n, s) => {
      // magic
    });
    ```
@@ -150,17 +154,17 @@ To report progress, a plugin must `tap` into a hook using the `context: true` op
 ```js
 compiler.hooks.emit.tapAsync(
   {
-    name: 'MyPlugin',
+    name: "MyPlugin",
     context: true,
   },
   (context, compiler, callback) => {
     const reportProgress = context && context.reportProgress;
-    if (reportProgress) reportProgress(0.95, 'Starting work');
+    if (reportProgress) reportProgress(0.95, "Starting work");
     setTimeout(() => {
-      if (reportProgress) reportProgress(0.95, 'Done work');
+      if (reportProgress) reportProgress(0.95, "Done work");
       callback();
     }, 1000);
-  }
+  },
 );
 ```
 

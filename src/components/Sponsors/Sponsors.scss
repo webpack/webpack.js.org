@@ -1,5 +1,5 @@
-@import 'functions';
-@import 'mixins';
+@import "functions";
+@import "mixins";
 
 $sponsor-text-color-dark: #cecece;
 $sponsor-text-color-light: #535353;
@@ -11,13 +11,13 @@ $link-wrapper-margin: 8px;
 $tagline-font-size: 2em;
 $footer-font-size: 1.7em;
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   .agGridLogo {
-    content: url('../../assets/ag-grid-logo-dark.png');
+    content: url("../../assets/ag-grid-logo-dark.png");
   }
 
   .agChartsLogo {
-    content: url('../../assets/ag-charts-logo-dark.png');
+    content: url("../../assets/ag-charts-logo-dark.png");
   }
 
   .sponsors {

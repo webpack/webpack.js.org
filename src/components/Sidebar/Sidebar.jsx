@@ -1,30 +1,24 @@
 // Import External Dependencies
-import SidebarItem from '../SidebarItem/SidebarItem';
-import Print from '../Print/Print';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import DownIcon from "../../styles/icons/chevron-down.svg";
+import LoadingIcon from "../../styles/icons/loading.svg";
+import Print from "../Print/Print.jsx";
+import SidebarItem from "../SidebarItem/SidebarItem.jsx";
 
 // Load Styling
-import './Sidebar.scss';
-import { useEffect, useState } from 'react';
-
-import DownIcon from '../../styles/icons/chevron-down.svg';
-import LoadingIcon from '../../styles/icons/loading.svg';
+import "./Sidebar.scss";
 
 const versions = [5, 4];
 const currentDocsVersion = 5;
 
-Sidebar.propTypes = {
-  className: PropTypes.string,
-  pages: PropTypes.array,
-  currentPage: PropTypes.string,
-};
 // Create and export the component
-export default function Sidebar({ className = '', pages, currentPage }) {
+export default function Sidebar({ className = "", pages, currentPage }) {
   const [version, setVersion] = useState(currentDocsVersion);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (version === currentDocsVersion) return;
-    const href = window.location.href;
+    const { href } = window.location;
     const url = new URL(href);
     url.hostname = `v${version}.webpack.js.org`;
 
@@ -40,9 +34,9 @@ export default function Sidebar({ className = '', pages, currentPage }) {
           <select
             className="text-gray-600 text-14 px-5 py-5 appearance-none box-border border border-gray-200 border-solid flex-col flex w-full rounded-none bg-transparent bg-none"
             value={version}
-            onChange={(e) => {
-              setVersion(+e.target.value);
-              if (+e.target.value !== currentDocsVersion) {
+            onChange={(event) => {
+              setVersion(Number(event.target.value));
+              if (Number(event.target.value) !== currentDocsVersion) {
                 setLoading(true);
               }
             }}
@@ -70,7 +64,8 @@ export default function Sidebar({ className = '', pages, currentPage }) {
         <Print url={currentPage} />
 
         {pages.map((page, index) => {
-          let displayGroup = group !== page.group && page.group !== '-';
+          const displayGroup = group !== page.group && page.group !== "-";
+          // eslint-disable-next-line react-hooks/immutability
           group = page.group;
 
           return (
@@ -93,3 +88,9 @@ export default function Sidebar({ className = '', pages, currentPage }) {
     </nav>
   );
 }
+
+Sidebar.propTypes = {
+  className: PropTypes.string,
+  pages: PropTypes.array,
+  currentPage: PropTypes.string,
+};

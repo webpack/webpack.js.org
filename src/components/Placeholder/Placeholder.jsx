@@ -1,7 +1,7 @@
-import './Placeholder.scss';
+import "./Placeholder.scss";
 
 // Placeholder string
-const PlaceholderString = () => `
+const placeholderString = () => `
   <div class="placeholder">
     <p class="placeholder__medium">&nbsp;</p>
     <p class="placeholder__large">&nbsp;</p>
@@ -31,4 +31,4 @@ function PlaceholderComponent() {
   );
 }
 
-export { PlaceholderString, PlaceholderComponent };
+export { PlaceholderComponent, placeholderString };

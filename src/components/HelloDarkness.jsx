@@ -1,30 +1,22 @@
-import { THEME, THEME_LOCAL_STORAGE_KEY } from '../constants/theme';
-import PropTypes from 'prop-types';
-import { useLocalStorage } from 'react-use';
-import { useEffect } from 'react';
-import Tooltip from './Tooltip/Tooltip';
+import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { useLocalStorage } from "react-use";
+import { THEME_LOCAL_STORAGE_KEY, Theme } from "../constants/theme.mjs";
+import Tooltip from "./Tooltip/Tooltip.jsx";
 
-const { DARK, LIGHT } = THEME;
+const { DARK, LIGHT } = Theme;
 
-HelloDarkness.propTypes = {
-  theme: PropTypes.oneOf([DARK, LIGHT]),
-  switchTheme: PropTypes.func,
-};
-
-HelloDarkness.defaultProps = {
-  theme: LIGHT,
-};
 export default function HelloDarkness() {
   const [theme, setTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
-    THEME.LIGHT
+    Theme.LIGHT,
   );
   const applyTheme = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    if (theme === THEME.DARK) {
-      document.documentElement.classList.add(THEME.DARK);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (theme === Theme.DARK) {
+      document.documentElement.classList.add(Theme.DARK);
     } else {
-      document.documentElement.classList.remove(THEME.DARK);
+      document.documentElement.classList.remove(Theme.DARK);
     }
   };
   useEffect(() => {
@@ -38,12 +30,12 @@ export default function HelloDarkness() {
   return (
     <Tooltip
       content={
-        theme === DARK ? 'Switch to light theme' : 'Switch to dark theme'
+        theme === DARK ? "Switch to light theme" : "Switch to dark theme"
       }
     >
       <button
         aria-label={
-          theme === DARK ? 'Switch to light theme' : 'Switch to dark theme'
+          theme === DARK ? "Switch to light theme" : "Switch to dark theme"
         }
         className="bg-transparent border-none cursor-pointer text-[16px] p-0 inline-flex items-center text-gray-100 hover:text-blue-200 transition-colors duration-200"
         onClick={themeSwitcher}
@@ -80,3 +72,12 @@ export default function HelloDarkness() {
     </Tooltip>
   );
 }
+
+HelloDarkness.propTypes = {
+  theme: PropTypes.oneOf([DARK, LIGHT]),
+  switchTheme: PropTypes.func,
+};
+
+HelloDarkness.defaultProps = {
+  theme: LIGHT,
+};

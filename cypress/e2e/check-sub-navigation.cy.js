@@ -1,17 +1,19 @@
-describe('Detect sub navigation', () => {
-  it('should show sub navigation', () => {
-    cy.visit('/concepts/');
+"use strict";
+
+describe("Detect sub navigation", () => {
+  it("should show sub navigation", () => {
+    cy.visit("/concepts/");
 
     const selector = '[data-testid="sub-navigation"]';
 
-    cy.get(selector).should('exist');
+    cy.get(selector).should("exist");
   });
 
-  it('should not show sub navigation', () => {
-    cy.visit('/');
+  it("should not show sub navigation", () => {
+    cy.visit("/");
 
     const selector = '[data-testid="sub-navigation"]';
 
-    cy.get(selector).should('not.exist');
+    cy.get(selector).should("not.exist");
   });
 });

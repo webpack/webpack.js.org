@@ -51,7 +51,7 @@ The `resourceRegExp` parameter passed to `IgnorePlugin` is not tested against th
 Rather, because `moment` imports with this code:
 
 ```js
-require('./locale/' + name);
+require(`./locale/${name}`);
 ```
 
 ...your first regexp must match that `'./locale/'` string. The second `contextRegExp` parameter is then used to select specific directories from where the import took place. The following will cause those locale files to be ignored:

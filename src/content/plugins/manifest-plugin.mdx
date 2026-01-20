@@ -34,14 +34,14 @@ When `entrypoints` is enabled and one entry uses `dependOn`
 module.exports = {
   entry: {
     entry1: {
-      import: './src/file_1.js',
-      dependOn: 'entry2',
+      import: "./src/file_1.js",
+      dependOn: "entry2",
     },
-    entry2: './src/file_2.js',
+    entry2: "./src/file_2.js",
   },
   plugins: [
     new webpack.ManifestPlugin({
-      filename: 'manifest.json',
+      filename: "manifest.json",
     }),
   ],
 };

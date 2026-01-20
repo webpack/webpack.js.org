@@ -75,9 +75,9 @@ webpack-demo
 **another-module.js**
 
 ```js
-import _ from 'lodash';
+import _ from "lodash";
 
-console.log(_.join(['Another', 'module', 'loaded!'], ' '));
+console.log(_.join(["Another", "module", "loaded!"], " "));
 ```
 
 **webpack.config.js**
@@ -398,8 +398,8 @@ An example of this is having a `HomePage` component, which renders a `LoginButto
 **LoginButton.js**
 
 ```js
-//...
-import(/* webpackPrefetch: true */ './path/to/LoginModal.js');
+// ...
+import(/* webpackPrefetch: true */ "./path/to/LoginModal.js");
 ```
 
 This will result in `<link rel="prefetch" href="login-modal-chunk.js">` being appended in the head of the page, which will instruct the browser to prefetch in idle time the `login-modal-chunk.js` file.
@@ -420,8 +420,8 @@ Let's imagine a component `ChartComponent` which needs a huge `ChartingLibrary`.
 **ChartComponent.js**
 
 ```js
-//...
-import(/* webpackPreload: true */ 'ChartingLibrary');
+// ...
+import(/* webpackPreload: true */ "ChartingLibrary");
 ```
 
 When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.
@@ -432,7 +432,7 @@ Sometimes you need to have your own control over preload. For example, preload o
 
 ```js
 const lazyComp = () =>
-  import('DynamicComponent').catch((error) => {
+  import("DynamicComponent").catch((error) => {
     // Do something with the error.
     // For example, we can retry the request in case of any net error
   });

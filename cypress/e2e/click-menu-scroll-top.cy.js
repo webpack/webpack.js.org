@@ -1,6 +1,8 @@
-describe('Click menu', () => {
-  it('scroll to top when menu clicked', () => {
-    cy.visit('/concepts/modules/');
+"use strict";
+
+describe("Click menu", () => {
+  it("scroll to top when menu clicked", () => {
+    cy.visit("/concepts/modules/");
     // scroll to Contributors section
     // note that there's no hash in url
     cy.get('[data-testid="contributors"]').scrollIntoView();

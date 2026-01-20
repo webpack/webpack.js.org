@@ -1,13 +1,15 @@
-import { Component } from 'react';
-import Link from '../Link/Link';
-import './SidebarMobile.scss';
-import CloseIcon from '../../styles/icons/cross.svg';
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Component } from "react";
+import CloseIcon from "../../styles/icons/cross.svg";
+import Link from "../Link/Link.jsx";
+import "./SidebarMobile.scss";
 
 // TODO: Check to make sure all pages are shown and properly sorted
 export default class SidebarMobile extends Component {
   _container = null;
+
   _initialTouchPosition = {};
+
   _lastTouchPosition = {};
 
   static propTypes = {
@@ -15,9 +17,10 @@ export default class SidebarMobile extends Component {
     toggle: PropTypes.func,
     sections: PropTypes.array,
   };
+
   render() {
-    let { isOpen, toggle } = this.props;
-    let openMod = isOpen ? ' sidebar-mobile--visible' : '';
+    const { isOpen, toggle } = this.props;
+    const openMod = isOpen ? " sidebar-mobile--visible" : "";
 
     this._toggleBodyListener(isOpen);
 
@@ -52,9 +55,9 @@ export default class SidebarMobile extends Component {
   }
 
   _toggleBodyListener = (add) => {
-    let actionName = add ? 'addEventListener' : 'removeEventListener';
-    window[actionName]('touchstart', this._handleBodyClick);
-    window[actionName]('mousedown', this._handleBodyClick);
+    const actionName = add ? "addEventListener" : "removeEventListener";
+    window[actionName]("touchstart", this._handleBodyClick);
+    window[actionName]("mousedown", this._handleBodyClick);
   };
 
   /**
@@ -63,19 +66,19 @@ export default class SidebarMobile extends Component {
    * @return {array} - Markup containing sections and links
    */
   _getSections() {
-    let pathname = '';
+    let pathname = "";
 
     if (window && window.location !== undefined) {
       pathname = window.location.pathname;
     }
 
     return this.props.sections.map((section) => {
-      let active = section.url !== '/' && pathname.startsWith(section.url);
+      const active = section.url !== "/" && pathname.startsWith(section.url);
 
       return (
         <div
           className={`sidebar-mobile__section ${
-            active ? 'sidebar-mobile__section--active' : ''
+            active ? "sidebar-mobile__section--active" : ""
           }`}
           key={section.url}
         >
@@ -101,21 +104,21 @@ export default class SidebarMobile extends Component {
    * @return {array} - Markup containing the page links
    */
   _getPages(pages) {
-    let pathname = '';
+    let pathname = "";
 
     if (window.location !== undefined) {
       pathname = window.location.pathname;
     }
 
     return pages.map((page) => {
-      let url = `${page.url}`,
-        active = pathname === url;
+      const url = `${page.url}`;
+      const active = pathname === url;
 
       return (
         <Link
           key={url}
           className={`sidebar-mobile__page sidebar-mobile__section-child ${
-            active ? 'sidebar-mobile__page--active' : ''
+            active ? "sidebar-mobile__page--active" : ""
           }`}
           to={url}
           onClick={this.props.toggle.bind(null, false)}
@@ -129,58 +132,58 @@ export default class SidebarMobile extends Component {
   /**
    * Handle clicks on content
    *
-   * @param {object} e - Native click event
+   * @param {object} event - Native click event
    */
-  _handleBodyClick = (e) => {
+  _handleBodyClick = (event) => {
     const { isOpen, toggle } = this.props;
-    if (isOpen && !this._container.contains(e.target)) {
+    if (isOpen && !this._container.contains(event.target)) {
       toggle(false);
     }
   };
 
-  _handleTouchStart = (e) => {
-    this._initialTouchPosition.x = e.touches[0].pageX;
-    this._initialTouchPosition.y = e.touches[0].pageY;
+  _handleTouchStart = (event) => {
+    this._initialTouchPosition.x = event.touches[0].pageX;
+    this._initialTouchPosition.y = event.touches[0].pageY;
 
     // For instant transform along with the touch
-    this._container.classList.add('no-delay');
+    this._container.classList.add("no-delay");
   };
 
-  _handleTouchMove = (e) => {
-    let xDiff = this._initialTouchPosition.x - e.touches[0].pageX;
-    let yDiff = this._initialTouchPosition.y - e.touches[0].pageY;
-    let factor = Math.abs(yDiff / xDiff);
+  _handleTouchMove = (event) => {
+    const xDiff = this._initialTouchPosition.x - event.touches[0].pageX;
+    const yDiff = this._initialTouchPosition.y - event.touches[0].pageY;
+    const factor = Math.abs(yDiff / xDiff);
 
     // Factor makes sure horizontal and vertical scroll dont take place together
     if (xDiff > 0 && factor < 0.8) {
-      e.preventDefault();
+      event.preventDefault();
       this._container.style.transform = `translateX(-${xDiff}px)`;
-      this._lastTouchPosition.x = e.touches[0].pageX;
-      this._lastTouchPosition.y = e.touches[0].pageY;
+      this._lastTouchPosition.x = event.touches[0].pageX;
+      this._lastTouchPosition.y = event.touches[0].pageY;
     }
   };
 
-  _handleOpenerTouchMove = (e) => {
-    let xDiff = e.touches[0].pageX - this._initialTouchPosition.x;
-    let yDiff = this._initialTouchPosition.y - e.touches[0].pageY;
-    let factor = Math.abs(yDiff / xDiff);
+  _handleOpenerTouchMove = (event) => {
+    const xDiff = event.touches[0].pageX - this._initialTouchPosition.x;
+    const yDiff = this._initialTouchPosition.y - event.touches[0].pageY;
+    const factor = Math.abs(yDiff / xDiff);
 
     // Factor makes sure horizontal and vertical scroll dont take place together
     if (xDiff > 0 && xDiff < 295 && factor < 0.8) {
-      e.preventDefault();
+      event.preventDefault();
       this._container.style.transform = `translateX(calc(-100% + ${xDiff}px))`;
-      this._lastTouchPosition.x = e.touches[0].pageX;
-      this._lastTouchPosition.y = e.touches[0].pageY;
+      this._lastTouchPosition.x = event.touches[0].pageX;
+      this._lastTouchPosition.y = event.touches[0].pageY;
     }
   };
 
-  _handleTouchEnd = (e) => {
+  _handleTouchEnd = (event) => {
     const { isOpen } = this.props;
     const threshold = 20;
 
     // Free up all the inline styling
-    this._container.classList.remove('no-delay');
-    this._container.style.transform = '';
+    this._container.classList.remove("no-delay");
+    this._container.style.transform = "";
 
     // are we open?
     if (
@@ -194,8 +197,8 @@ export default class SidebarMobile extends Component {
       this._lastTouchPosition.x - this._initialTouchPosition.x > threshold
     ) {
       this.props.toggle(true);
-      e.preventDefault();
-      e.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
     }
   };
 }

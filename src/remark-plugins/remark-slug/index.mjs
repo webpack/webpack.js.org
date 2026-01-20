@@ -5,9 +5,9 @@
  * @typedef {import('hast').Properties} Properties
  */
 
-import { toString } from 'mdast-util-to-string';
-import { visit } from 'unist-util-visit';
-import BananaSlug from 'github-slugger';
+import BananaSlug from "github-slugger";
+import { toString } from "mdast-util-to-string";
+import { visit } from "unist-util-visit";
 
 const slugs = new BananaSlug();
 
@@ -20,12 +20,10 @@ export default function remarkSlug() {
   return (tree) => {
     slugs.reset();
 
-    visit(tree, 'heading', (node) => {
-      const data = node.data || (node.data = {});
-      const props = /** @type {Properties} */ (
-        data.hProperties || (data.hProperties = {})
-      );
-      let id = props.id;
+    visit(tree, "heading", (node) => {
+      const data = (node.data ||= {});
+      const props = /** @type {Properties} */ (data.hProperties ||= {});
+      let { id } = props;
 
       id = id ? slugs.slug(String(id), true) : slugs.slug(toString(node));
 
@@ -35,17 +33,17 @@ export default function remarkSlug() {
       // insert <span id="..." /> for headings
       node.children = [
         {
-          type: 'paragraph',
+          type: "paragraph",
           data: {
-            hName: 'span',
+            hName: "span",
             hProperties: {
               id,
             },
           },
           children: [
             {
-              type: 'text',
-              value: '',
+              type: "text",
+              value: "",
             },
           ],
         },

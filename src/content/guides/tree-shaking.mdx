@@ -113,12 +113,15 @@ Note that we **did not `import` the `square` method** from the `src/math.js` mod
 
 **dist/bundle.js (around lines 90 - 100)**
 
+{/* eslint-disable no-use-before-define */}
+
 ```js
 /* 1 */
 /***/ (function (module, __webpack_exports__, __webpack_require__) {
-  'use strict';
+  "use strict";
+
   /* unused harmony export square */
-  /* harmony export (immutable) */ __webpack_exports__['a'] = cube;
+  /* harmony export (immutable) */ __webpack_exports__.a = cube;
   function square(x) {
     return x * x;
   }
@@ -181,31 +184,33 @@ The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`
 Let's make an example:
 
 ```javascript
-import { Button } from '@shopify/polaris';
+import { Button } from "@shopify/polaris";
 ```
 
 The pre-bundled version looks like this:
 
+{/* eslint-disable @stylistic/spaced-comment, prefer-rest-params */}
+
 ```javascript
-import hoistStatics from 'hoist-non-react-statics';
+import hoistStatics from "hoist-non-react-statics";
 
 function Button(_ref) {
   // ...
 }
 
 function merge() {
-  var _final = {};
+  const _final = {};
 
   for (
-    var _len = arguments.length, objs = new Array(_len), _key = 0;
+    let _len = arguments.length, objs = Array.from({ length: _len }), _key = 0;
     _key < _len;
     _key++
   ) {
     objs[_key] = arguments[_key];
   }
 
-  for (var _i = 0, _objs = objs; _i < _objs.length; _i++) {
-    var obj = _objs[_i];
+  for (let _i = 0, _objs = objs; _i < _objs.length; _i++) {
+    const obj = _objs[_i];
     mergeRecursively(_final, obj);
   }
 
@@ -214,7 +219,7 @@ function merge() {
 
 function withAppProvider() {
   return function addProvider(WrappedComponent) {
-    var WithProvider =
+    const WithProvider =
       /*#__PURE__*/
       (function (_React$Component) {
         // ...
@@ -224,12 +229,12 @@ function withAppProvider() {
     WithProvider.contextTypes = WrappedComponent.contextTypes
       ? merge(WrappedComponent.contextTypes, polarisAppProviderContextTypes)
       : polarisAppProviderContextTypes;
-    var FinalComponent = hoistStatics(WithProvider, WrappedComponent);
+    const FinalComponent = hoistStatics(WithProvider, WrappedComponent);
     return FinalComponent;
   };
 }
 
-var Button$1 = withAppProvider()(Button);
+const Button$1 = withAppProvider()(Button);
 
 export {
   // ...,
@@ -244,7 +249,7 @@ Terser actually tries to figure it out, but it doesn't know for sure in many cas
 But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a small change would make it possible to tree-shake the code:
 
 ```javascript
-var Button$1 = /*#__PURE__*/ withAppProvider()(Button);
+const Button$1 = /* #__PURE__ */ withAppProvider()(Button);
 ```
 
 This would allow to remove this piece of code. But there are still questions with the imports which need to be included/evaluated because they could contain side effects.
@@ -258,18 +263,19 @@ In the Shopify's Polaris example, original modules look like this:
 **index.js**
 
 ```javascript
-import './configure';
-export * from './types';
-export * from './components';
+import "./configure";
+
+export * from "./types";
+export * from "./components";
 ```
 
 **components/index.js**
 
 ```javascript
 // ...
-export { default as Breadcrumbs } from './Breadcrumbs';
-export { default as Button, buttonFrom, buttonsFrom } from './Button';
-export { default as ButtonGroup } from './ButtonGroup';
+export { default as Breadcrumbs } from "./Breadcrumbs";
+export { buttonFrom, buttonsFrom, default as Button } from "./Button";
+export { default as ButtonGroup } from "./ButtonGroup";
 // ...
 ```
 
@@ -358,27 +364,27 @@ awesome-ui/
 **dist/index.js**
 
 ```javascript
-export * from './components';
-export * from './theme';
+export * from "./components";
+export * from "./theme";
 ```
 
 **dist/components/index.js**
 
 ```javascript
-export { default as Button } from './Button';
-export { default as Card } from './Card';
-export { default as Modal } from './Modal';
+export { default as Button } from "./Button";
+export { default as Card } from "./Card";
+export { default as Modal } from "./Modal";
 ```
 
 **dist/components/Button/index.js**
 
 ```javascript
-import './Button.css'; // This has a side effect - it applies styles when imported!
+import "./Button.css"; // This has a side effect - it applies styles when imported!
 
 export default function Button(props) {
   // Button component implementation
   return {
-    type: 'button',
+    type: "button",
     ...props,
   };
 }
@@ -402,12 +408,12 @@ export default function Button(props) {
 **dist/theme/index.js**
 
 ```javascript
-import './defaultTheme.css'; // This has a side effect!
+import "./defaultTheme.css"; // This has a side effect!
 
 export const themeColors = {
-  primary: '#0078d7',
-  secondary: '#f3f2f1',
-  danger: '#d13438',
+  primary: "#0078d7",
+  secondary: "#f3f2f1",
+  danger: "#d13438",
 };
 ```
 
@@ -416,7 +422,7 @@ export const themeColors = {
 Now, imagine a consumer application that only wants to use the Button component:
 
 ```javascript
-import { Button } from 'awesome-ui';
+import { Button } from "awesome-ui";
 
 // Use the Button component
 ```
@@ -457,7 +463,6 @@ With this configuration:
 Here's how webpack evaluates modules during tree shaking:
 
 1. Is the export from this module used directly or indirectly?
-
    - If yes: Include the module
    - If no: Continue to step 2
 
@@ -502,7 +507,7 @@ This behavior is enabled when [`optimization.innerGraph`](/configuration/optimiz
 **file.js**
 
 ```javascript
-/*#__PURE__*/ double(55);
+/* #__PURE__ */ double(55);
 ```
 
 ## Minify the Output
@@ -555,10 +560,10 @@ Consider this pattern:
 
 ```javascript
 // This file has side effects that might be skipped
-import './polyfill';
+import "./polyfill";
 
 // Re-export components
-export * from './components';
+export * from "./components";
 ```
 
 If a consumer only imports specific components, the polyfill import might be skipped entirely if not properly marked with side effects.

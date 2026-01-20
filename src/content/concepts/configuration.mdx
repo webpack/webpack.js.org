@@ -35,14 +35,14 @@ The examples below describe how webpack's configuration can be both expressive a
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  mode: 'development',
-  entry: './foo.js',
+  mode: "development",
+  entry: "./foo.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'foo.bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "foo.bundle.js",
   },
 };
 ```

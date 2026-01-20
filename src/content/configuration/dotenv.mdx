@@ -22,7 +22,7 @@ Enable and configure the built-in Dotenv plugin to load environment variables fr
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: true,
 };
 ```
@@ -31,11 +31,11 @@ Setting `dotenv` to `true` enables the plugin with default options. For custom c
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
-    prefix: 'WEBPACK_',
+    prefix: "WEBPACK_",
     dir: true,
-    template: ['.env', '.env.local', '.env.[mode]', '.env.[mode].local'],
+    template: [".env", ".env.local", ".env.[mode]", ".env.[mode].local"],
   },
 };
 ```
@@ -54,9 +54,9 @@ Only expose environment variables that start with the specified prefix(es). This
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
-    prefix: 'APP_', // Only expose APP_* variables
+    prefix: "APP_", // Only expose APP_* variables
   },
 };
 ```
@@ -65,9 +65,9 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
-    prefix: ['APP_', 'CONFIG_'], // Expose both APP_* and CONFIG_* variables
+    prefix: ["APP_", "CONFIG_"], // Expose both APP_* and CONFIG_* variables
   },
 };
 ```
@@ -90,9 +90,9 @@ The directory from which `.env` files are loaded.
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
-    dir: './config', // Load from ./config directory
+    dir: "./config", // Load from ./config directory
   },
 };
 ```
@@ -101,7 +101,7 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
     dir: false, // Only use process.env variables
   },
@@ -122,10 +122,10 @@ Files are loaded in the order specified, with later files overriding earlier one
 
 ```javascript
 module.exports = {
-  //...
-  mode: 'production',
+  // ...
+  mode: "production",
   dotenv: {
-    template: ['.env', '.env.production'], // Only load these two files
+    template: [".env", ".env.production"], // Only load these two files
   },
 };
 ```
@@ -134,14 +134,14 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
     template: [
-      '.env',
-      '.env.local',
-      '.env.[mode]',
-      '.env.[mode].local',
-      '.env.override', // Always loaded last
+      ".env",
+      ".env.local",
+      ".env.[mode]",
+      ".env.[mode].local",
+      ".env.override", // Always loaded last
     ],
   },
 };
@@ -213,7 +213,7 @@ SECRET_KEY=should-not-be-exposed  # Won't be exposed (no WEBPACK_ prefix)
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: true, // Uses default prefix "WEBPACK_"
 };
 ```
@@ -271,9 +271,9 @@ PRIVATE_KEY=secret  # Won't be exposed
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
-    prefix: ['APP_', 'CONFIG_'],
+    prefix: ["APP_", "CONFIG_"],
   },
 };
 ```
@@ -286,10 +286,10 @@ Load environment files from a custom location with custom naming:
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   dotenv: {
-    dir: './environments',
-    template: ['.env.base', '.env.[mode]'],
+    dir: "./environments",
+    template: [".env.base", ".env.[mode]"],
   },
 };
 ```

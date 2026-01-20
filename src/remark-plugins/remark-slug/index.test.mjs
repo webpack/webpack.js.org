@@ -1,8 +1,9 @@
-import { remark } from 'remark';
-import remarkHtml from 'remark-html';
-import Plugin from './index.mjs';
-describe('remark slug', () => {
-  it('should add id', () => {
+import { remark } from "remark";
+import remarkHtml from "remark-html";
+import Plugin from "./index.mjs";
+
+describe("remark slug", () => {
+  it("should add id", () => {
     remark()
       .use(Plugin)
       .use(remarkHtml)
@@ -11,10 +12,10 @@ describe('remark slug', () => {
 
 this is me.
 `,
-        function (err, { value: contents }) {
+        (err, { value: contents }) => {
           expect(err).toBeUndefined();
           expect(contents).toMatchSnapshot();
-        }
+        },
       );
   });
 });

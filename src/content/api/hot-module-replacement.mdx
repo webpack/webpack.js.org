@@ -21,14 +21,14 @@ Typically, users will check to see if the interface is accessible, then begin wo
 
 ```js
 if (module.hot) {
-  module.hot.accept('./library.js', function () {
+  module.hot.accept("./library.js", () => {
     // Do something with the updated library module...
   });
 }
 
 // or
 if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept('./library.js', function () {
+  import.meta.webpackHot.accept("./library.js", () => {
     // Do something with the updated library module…
   });
 }
@@ -46,14 +46,14 @@ Accept updates for the given `dependencies` and fire a `callback` to react to th
 module.hot.accept(
   dependencies, // Either a string or an array of strings
   callback, // Function to fire when the dependencies are updated
-  errorHandler // (err, {moduleId, dependencyId}) => {}
+  errorHandler, // (err, {moduleId, dependencyId}) => {}
 );
 
 // or
 import.meta.webpackHot.accept(
   dependencies, // Either a string or an array of strings
   callback, // Function to fire when the dependencies are updated
-  errorHandler // (err, {moduleId, dependencyId}) => {}
+  errorHandler, // (err, {moduleId, dependencyId}) => {}
 );
 ```
 
@@ -75,12 +75,12 @@ Accept updates for itself.
 
 ```js
 module.hot.accept(
-  errorHandler // Function to handle errors when evaluating the new version
+  errorHandler, // Function to handle errors when evaluating the new version
 );
 
 // or
 import.meta.webpackHot.accept(
-  errorHandler // Function to handle errors when evaluating the new version
+  errorHandler, // Function to handle errors when evaluating the new version
 );
 ```
 
@@ -104,12 +104,12 @@ Reject updates for the given `dependencies` forcing the update to fail with a `'
 
 ```js
 module.hot.decline(
-  dependencies // Either a string or an array of strings
+  dependencies, // Either a string or an array of strings
 );
 
 // or
 import.meta.webpackHot.decline(
-  dependencies // Either a string or an array of strings
+  dependencies, // Either a string or an array of strings
 );
 ```
 
@@ -162,15 +162,16 @@ When called during the `dispose` or `apply` state, HMR will pick it up after get
 A module can accept a dependency, but can call `invalidate` when the change of the dependency is not handleable:
 
 ```js
-import { x, y } from './dep';
-import { processX, processY } from 'anotherDep';
+import { processX, processY } from "anotherDep";
+import { x, y } from "./dep";
 
 const oldY = y;
 
 processX(x);
+
 export default processY(y);
 
-module.hot.accept('./dep', () => {
+module.hot.accept("./dep", () => {
   if (y !== oldY) {
     // This can't be handled, bubble to parent
     module.hot.invalidate();
@@ -186,7 +187,7 @@ module.hot.accept('./dep', () => {
 A module can self-accept itself, but can invalidate itself when the change is not handleable:
 
 ```javascript
-const VALUE = 'constant';
+const VALUE = "constant";
 
 export default VALUE;
 
@@ -205,6 +206,8 @@ if (
 ```
 
 **Triggering custom HMR updates**
+
+{/* eslint-disable no-eval */}
 
 ```javascript
 const moduleId = chooseAModule();

@@ -515,10 +515,12 @@ W> Only the default export of JSON modules can be used without warning.
 
 ```javascript
 // No warning
-import data from './data.json';
+import data from "./data.json";
+```
 
+```javascript
 // Warning shown, this is not allowed by the spec.
-import { foo } from './data.json';
+import { foo } from "./data.json";
 ```
 
 ### Customize parser of JSON modules
@@ -557,13 +559,13 @@ owner:
 ```json5
 {
   // comment
-  title: 'JSON5 Example',
+  title: "JSON5 Example",
   owner: {
-    name: 'Tom Preston-Werner',
-    organization: 'GitHub',
-    bio: 'GitHub Cofounder & CEO\n\
-Likes tater tots and beer.',
-    dob: '1979-05-27T07:32:00.000Z',
+    name: "Tom Preston-Werner",
+    organization: "GitHub",
+    bio: "GitHub Cofounder & CEO\n\
+Likes tater tots and beer.",
+    dob: "1979-05-27T07:32:00.000Z",
   },
 }
 ```

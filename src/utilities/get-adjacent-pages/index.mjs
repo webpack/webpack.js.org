@@ -1,5 +1,6 @@
-export default function getAdjacentPages(haystack, needle, by = 'url') {
-  let previous, next;
+export default function getAdjacentPages(haystack, needle, by = "url") {
+  let previous;
+  let next;
   const findMe = haystack.findIndex((page) => page[by] === needle[by]);
   if (findMe !== -1) {
     previous = haystack[findMe - 1];

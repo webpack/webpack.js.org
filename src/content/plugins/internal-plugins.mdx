@@ -158,7 +158,7 @@ There are multiple optimizations in production mode regarding dead branches:
 Webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. Webpack can't do constant folding unless the compiler knows it. For example:
 
 ```javascript
-import { calculateTax } from './tax';
+import { calculateTax } from "./tax";
 
 const FOO = 1;
 if (FOO === 0) {
@@ -298,12 +298,13 @@ When [`optimization.realContentHash`](/configuration/optimization/#optimizationr
 `RealContentHashPlugin` provides a `updateHash` <Badge text='5.8.0+' /> hook for customizing hash updating:
 
 ```js
-const webpack = require('webpack');
-const RealContentHashPlugin = webpack.optimize.RealContentHashPlugin;
+const webpack = require("webpack");
+
+const { RealContentHashPlugin } = webpack.optimize;
 // ...
-compiler.hooks.compilation.tap('MyPlugin', (compilation) => {
+compiler.hooks.compilation.tap("MyPlugin", (compilation) => {
   const hooks = RealContentHashPlugin.getCompilationHooks(compilation);
-  hooks.updateHash.tap('MyPlugin', (content, oldHash) => {
+  hooks.updateHash.tap("MyPlugin", (content, oldHash) => {
     // you can calculate the hash here as you wish
   });
 });

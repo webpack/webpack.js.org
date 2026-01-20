@@ -29,7 +29,7 @@ npm install --save-dev webpack
 Then import the webpack module in your Node.js script:
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 ```
 
 ## webpack()
@@ -37,7 +37,7 @@ import webpack from 'webpack';
 The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 
 webpack({}, (err, stats) => {
   if (err || stats.hasErrors()) {
@@ -89,7 +89,7 @@ Calling the `run` method on the `Compiler` instance is much like the quick run
 method mentioned above:
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 
 const compiler = webpack({
   // ...
@@ -117,7 +117,7 @@ watch(watchOptions, callback);
 ```
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 
 const compiler = webpack({
   // ...
@@ -132,7 +132,7 @@ const watching = compiler.watch(
   (err, stats) => {
     // Print watch/build result here...
     console.log(stats);
-  }
+  },
 );
 ```
 
@@ -151,7 +151,7 @@ The `watch` method returns a `Watching` instance that exposes
 
 ```js
 watching.close((closeErr) => {
-  console.log('Watching Ended.');
+  console.log("Watching Ended.");
 });
 ```
 
@@ -202,7 +202,7 @@ Returns compilation information as a JSON object. `options` can be either a
 string (a preset) or an object for more granular control:
 
 ```js
-stats.toJson('minimal');
+stats.toJson("minimal");
 ```
 
 ```js
@@ -234,7 +234,7 @@ stats.toString({
 Here’s an example of `stats.toString()` usage:
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 
 webpack(
   {
@@ -250,9 +250,9 @@ webpack(
       stats.toString({
         chunks: false, // Makes the build much quieter
         colors: true, // Shows colors in the console
-      })
+      }),
     );
-  }
+  },
 );
 ```
 
@@ -264,16 +264,16 @@ an array of options, webpack applies separate compilers and calls the
 `callback` after all compilers have been executed.
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 
 webpack(
   [
-    { entry: './index1.js', output: { filename: 'bundle1.js' } },
-    { entry: './index2.js', output: { filename: 'bundle2.js' } },
+    { entry: "./index1.js", output: { filename: "bundle1.js" } },
+    { entry: "./index2.js", output: { filename: "bundle2.js" } },
   ],
   (err, stats) => {
-    process.stdout.write(stats.toString() + '\n');
-  }
+    process.stdout.write(`${stats.toString()}`);
+  },
 );
 ```
 
@@ -292,7 +292,7 @@ For good error handling, you need to account for these three types of errors:
 Here’s an example that does all that:
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 
 webpack(
   {
@@ -318,7 +318,7 @@ webpack(
     }
 
     // Log result...
-  }
+  },
 );
 ```
 
@@ -333,8 +333,8 @@ replace the default `outputFileSystem` with
 instead of to disk:
 
 ```js
-import { createFsFromVolume, Volume } from 'memfs';
-import webpack from 'webpack';
+import { Volume, createFsFromVolume } from "memfs";
+import webpack from "webpack";
 
 const fs = createFsFromVolume(new Volume());
 const compiler = webpack({
@@ -344,7 +344,7 @@ const compiler = webpack({
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
   // Read the output later:
-  const content = fs.readFileSync('...');
+  const content = fs.readFileSync("...");
   compiler.close((closeErr) => {
     // ...
   });

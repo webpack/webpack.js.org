@@ -72,10 +72,10 @@ Now we'll create the following directory structure, files and their contents:
 
 ```javascript
 function component() {
-  const element = document.createElement('div');
+  const element = document.createElement("div");
 
   // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.innerHTML = _.join(["Hello", "webpack"], " ");
 
   return element;
 }
@@ -250,17 +250,17 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
 **webpack.config.js**
 
 ```javascript
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
   },
 };
 ```

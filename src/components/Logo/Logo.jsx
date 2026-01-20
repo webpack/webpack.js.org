@@ -1,5 +1,5 @@
-import Logo from '../../assets/site-logo.svg';
-import './Logo.scss';
+import Logo from "../../assets/site-logo.svg";
+import "./Logo.scss";
 
 export default function LogoComp() {
   return (

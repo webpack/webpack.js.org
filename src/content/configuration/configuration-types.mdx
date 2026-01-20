@@ -47,16 +47,15 @@ Webpack will run the function exported by the configuration file and wait for a 
 T> It is possible to export multiple promises by wrapping them into `Promise.all([/* Your promises */]).`
 
 ```js
-module.exports = () => {
-  return new Promise((resolve, reject) => {
+module.exports = () =>
+  new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        entry: './app.js',
+        entry: "./app.js",
         /* ... */
       });
     }, 5000);
   });
-};
 ```
 
 W> Returning a `Promise` only works when using webpack via CLI. [`webpack()`](/api/node/#webpack) expects an object.
@@ -69,21 +68,21 @@ Instead of exporting a single configuration object/function, you may export mult
 module.exports = [
   {
     output: {
-      filename: './dist-amd.js',
-      libraryTarget: 'amd',
+      filename: "./dist-amd.js",
+      libraryTarget: "amd",
     },
-    name: 'amd',
-    entry: './app.js',
-    mode: 'production',
+    name: "amd",
+    entry: "./app.js",
+    mode: "production",
   },
   {
     output: {
-      filename: './dist-commonjs.js',
-      libraryTarget: 'commonjs',
+      filename: "./dist-commonjs.js",
+      libraryTarget: "commonjs",
     },
-    name: 'commonjs',
-    entry: './app.js',
-    mode: 'production',
+    name: "commonjs",
+    entry: "./app.js",
+    mode: "production",
   },
 ];
 ```
@@ -99,14 +98,14 @@ In case you have a configuration that depends on the output of another configura
 ```js
 module.exports = [
   {
-    name: 'client',
-    target: 'web',
+    name: "client",
+    target: "web",
     // …
   },
   {
-    name: 'server',
-    target: 'node',
-    dependencies: ['client'],
+    name: "server",
+    target: "node",
+    dependencies: ["client"],
   },
 ];
 ```
@@ -123,10 +122,10 @@ In case you export multiple configurations, you can use the `parallelism` option
 ```javascript
 module.exports = [
   {
-    //config-1
+    // config-1
   },
   {
-    //config-2
+    // config-2
   },
 ];
 module.exports.parallelism = 1;

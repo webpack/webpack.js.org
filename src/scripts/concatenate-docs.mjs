@@ -1,14 +1,14 @@
-import fs from 'fs';
-import path from 'path';
-import os from 'os';
-import front from 'front-matter';
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import front from "front-matter";
 
 // root path
-const rootPath = path.join('src', 'content');
-const outFileName = 'printable.mdx';
+const rootPath = path.join("src", "content");
+const outFileName = "printable.mdx";
 
 console.info(
-  'Concatenating *.mdx files of each content directory to create chapter-wide help files to be used for printing'
+  "Concatenating *.mdx files of each content directory to create chapter-wide help files to be used for printing",
 );
 
 // getDirectoryRecursive() recursively walks through all sub directories of the provided path
@@ -23,25 +23,25 @@ function getDirectoryRecursive(basePath) {
   const targetFilePath = path.join(basePath, outFileName);
 
   // list current working directory
-  fs.readdir(basePath, function (err, fileNames) {
+  fs.readdir(basePath, (err, fileNames) => {
     if (err) throw err;
 
-    let fileContents = [];
+    const fileContents = [];
 
-    for (let file of fileNames) {
+    for (const file of fileNames) {
       const fullPath = path.join(basePath, file);
 
       // if the directory entry is a directory, recurse into that directory
       if (fs.statSync(fullPath).isDirectory()) {
         getDirectoryRecursive(fullPath);
-      } else if (fullPath.endsWith('.mdx')) {
+      } else if (fullPath.endsWith(".mdx")) {
         // import the respective mdx file
         // prefix a `W` to prevent filename like 12345.mdx
         const basename = path
-          .basename(file, '.mdx')
-          .split('-')
-          .map((x) => x.toUpperCase())
-          .join('');
+          .basename(file, ".mdx")
+          .split("-")
+          .map((name) => name.toUpperCase())
+          .join("");
         fileContents[fileContents.length] = {
           ...front(fs.readFileSync(fullPath).toString()),
           body: `
@@ -54,7 +54,7 @@ import W${basename} from './${file}'
     }
 
     // sort mdx files by FrontMatter 'sort' attribute (QuickSort)
-    for (let i = 0; i < fileContents.length - 1; ++i)
+    for (let i = 0; i < fileContents.length - 1; ++i) {
       for (let j = i + 1; j < fileContents.length; ++j) {
         const left = fileContents[i].attributes;
         const right = fileContents[j].attributes;
@@ -69,6 +69,7 @@ import W${basename} from './${file}'
           ];
         }
       }
+    }
 
     // write compound target file
     const targetFile = fs.createWriteStream(targetFilePath);
@@ -82,12 +83,12 @@ contributors:
 
     `);
 
-    targetFile.on('error', (error) => {
+    targetFile.on("error", (error) => {
       throw error;
     });
-    for (let file of fileContents) {
+    for (const file of fileContents) {
       // use FrontMatter 'title' attribute as main heading of target file
-      targetFile.write(os.EOL + os.EOL + '# ' + file.attributes.title + os.EOL);
+      targetFile.write(`${os.EOL + os.EOL}# ${file.attributes.title}${os.EOL}`);
       targetFile.write(file.body);
     }
 
@@ -98,8 +99,8 @@ contributors:
 getDirectoryRecursive(rootPath);
 
 // end message
-process.on('exit', () =>
+process.on("exit", () =>
   console.info(
-    `Successfully created "${outFileName}" files in each directory within ${rootPath}`
-  )
+    `Successfully created "${outFileName}" files in each directory within ${rootPath}`,
+  ),
 );

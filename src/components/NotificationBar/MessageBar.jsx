@@ -1,26 +1,24 @@
-import CloseIcon from '../../styles/icons/cross.svg';
-import PropTypes from 'prop-types';
-import Content from './Notification.mdx';
-import { version, localStorageIsEnabled } from './NotificationBar';
-import { useTransition, animated, config } from '@react-spring/web';
-import { useEffect, useState } from 'react';
+import { animated, config, useTransition } from "@react-spring/web";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import CloseIcon from "../../styles/icons/cross.svg";
+import Content from "./Notification.mdx";
+import { localStorageIsEnabled, version } from "./NotificationBar.jsx";
 
-MessageBar.propTypes = {
-  onClose: PropTypes.func,
-};
 export default function MessageBar(props) {
   const [list, setList] = useState([]);
   const listTransitions = useTransition(list, {
     config: config.gentle,
-    from: { opacity: 0, transform: 'translate3d(-50%, 0px, 0px)' },
-    enter: { opacity: 1, transform: 'translate3d(0px, 0px, 0px)' },
+    from: { opacity: 0, transform: "translate3d(-50%, 0px, 0px)" },
+    enter: { opacity: 1, transform: "translate3d(0px, 0px, 0px)" },
     keys: list.map((item, index) => index),
   });
   useEffect(() => {
-    setList(['']);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setList([""]);
   }, []);
   const close = () => {
-    localStorage.setItem('notification-dismissed', version);
+    localStorage.setItem("notification-dismissed", version);
     props.onClose();
   };
   return (
@@ -49,3 +47,7 @@ export default function MessageBar(props) {
     </>
   );
 }
+
+MessageBar.propTypes = {
+  onClose: PropTypes.func,
+};

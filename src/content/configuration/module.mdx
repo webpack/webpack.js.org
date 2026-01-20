@@ -38,13 +38,15 @@ See [source code](https://github.com/webpack/webpack/blob/dc4d97429b2013f7770ba7
 module.exports = {
   module: {
     defaultRules: [
-      '...', // you can use "..." to reference those rules applied by webpack by default
+      "...", // you can use "..." to reference those rules applied by webpack by default
     ],
   },
 };
 ```
 
 Starting with webpack 5.87.0, falsy values including `0`, `""`, `false`, `null` and `undefined` are allowed to pass to `module.defaultRules` to conditionally disable specific rules.
+
+{/* eslint-disable */}
 
 ```js
 module.exports = {
@@ -81,10 +83,10 @@ module.exports = {
         dataUrl: {
           // Asset encoding (defaults to "base64")
           // type: 'base64' | false
-          encoding: 'base64',
+          encoding: "base64",
           // Asset mimetype (getting from file extension by default).
           // type: string
-          mimetype: 'image/png',
+          mimetype: "image/png",
         },
 
         // Emit an output asset from this asset module. This can be set to 'false' to omit emitting e. g. for SSR.
@@ -93,17 +95,17 @@ module.exports = {
 
         // Customize filename for this asset module
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        filename: 'static/[path][name][ext]',
+        filename: "static/[path][name][ext]",
 
         // Customize publicPath for asset modules, available since webpack 5.28.0
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        publicPath: 'https://cdn/assets/',
+        publicPath: "https://cdn/assets/",
 
         // Emit the asset in the specified folder relative to 'output.path', available since webpack 5.67.0
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        outputPath: 'cdn-assets/',
+        outputPath: "cdn-assets/",
       },
-      'asset/inline': {
+      "asset/inline": {
         // Generator options for asset/inline modules
 
         // Indicates if this asset should be treated as binary. Set to 'false' to handle it as text instead. Available since webpack 5.93.0
@@ -113,13 +115,13 @@ module.exports = {
         dataUrl: {
           // Asset encoding (defaults to "base64")
           // type: 'base64' | false
-          encoding: 'base64',
+          encoding: "base64",
           // Asset mimetype (getting from file extension by default).
           // type: string
-          mimetype: 'image/png',
+          mimetype: "image/png",
         },
       },
-      'asset/resource': {
+      "asset/resource": {
         // Generator options for asset/resource modules
 
         // Indicates if this asset should be treated as binary. Set to 'false' to handle it as text instead. Available since webpack 5.93.0
@@ -131,29 +133,29 @@ module.exports = {
 
         // Customize filename for this asset module
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        filename: 'static/[path][name][ext]',
+        filename: "static/[path][name][ext]",
 
         // Customize publicPath for asset/resource modules, available since webpack 5.28.0
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        publicPath: 'https://cdn/assets/',
+        publicPath: "https://cdn/assets/",
 
         // Emit the asset in the specified folder relative to 'output.path', available since webpack 5.67.0
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        outputPath: 'cdn-assets/',
+        outputPath: "cdn-assets/",
       },
-      'asset/bytes': {
+      "asset/bytes": {
         // No generator options are supported for this module type yet
-      }
+      },
       javascript: {
         // No generator options are supported for this module type yet
       },
-      'javascript/auto': {
+      "javascript/auto": {
         // ditto
       },
-      'javascript/dynamic': {
+      "javascript/dynamic": {
         // ditto
       },
-      'javascript/esm': {
+      "javascript/esm": {
         // ditto
       },
       css: {
@@ -166,9 +168,9 @@ module.exports = {
         // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
         // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
         // available since webpack 5.90.4
-        exportsConvention: 'camel-case-only',
+        exportsConvention: "camel-case-only",
       },
-      'css/auto': {
+      "css/auto": {
         // Generator options for css/auto modules
 
         // Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.
@@ -178,23 +180,23 @@ module.exports = {
         // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
         // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
         // available since webpack 5.90.4
-        exportsConvention: 'camel-case-only',
+        exportsConvention: "camel-case-only",
 
         // Customize the format of the local class names generated for css modules.
         // type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].
         // available since webpack 5.90.4
-        localIdentName: '[uniqueName]-[id]-[local]',
+        localIdentName: "[uniqueName]-[id]-[local]",
       },
-      'css/global': {
+      "css/global": {
         // ditto
       },
-      'css/module': {
+      "css/module": {
         // ditto
       },
       json: {
         // Generator options for json modules
         // Use `JSON.parse` when the JSON string is longer than 20 characters.
-        JSONParse: true,
+        parse: JSONParse,
       },
       // others…
     },
@@ -221,10 +223,10 @@ module.exports = {
         dataUrl: {
           // Asset encoding (defaults to "base64")
           // type: 'base64' | false
-          encoding: 'base64',
+          encoding: "base64",
           // Asset mimetype (getting from file extension by default).
           // type: string
-          mimetype: 'image/png',
+          mimetype: "image/png",
         },
 
         // Emit an output asset from this asset module. This can be set to 'false' to omit emitting e. g. for SSR.
@@ -233,26 +235,26 @@ module.exports = {
 
         // Customize filename for this asset module
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        filename: 'static/[path][name][ext]',
+        filename: "static/[path][name][ext]",
 
         // Customize publicPath for asset modules, available since webpack 5.28.0
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        publicPath: 'https://cdn/assets/',
+        publicPath: "https://cdn/assets/",
 
         // Emit the asset in the specified folder relative to 'output.path', available since webpack 5.67.0
         // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        outputPath: 'cdn-assets/',
+        outputPath: "cdn-assets/",
       },
-      'asset/inline': {
+      "asset/inline": {
         // No parser options are supported for this module type yet
       },
-      'asset/resource': {
+      "asset/resource": {
         // ditto
       },
-      'asset/source': {
+      "asset/source": {
         // ditto
       },
-      'asset/bytes': {
+      "asset/bytes": {
         // ditto
       },
       javascript: {
@@ -260,15 +262,15 @@ module.exports = {
         // e.g, enable parsing of require.ensure syntax
         requireEnsure: true,
         // Set the module to `'strict'` or `'non-strict'` mode. This can affect the module's behavior, as some behaviors differ between strict and non-strict modes.
-        overrideStrict: 'non-strict',
+        overrideStrict: "non-strict",
       },
-      'javascript/auto': {
+      "javascript/auto": {
         // ditto
       },
-      'javascript/dynamic': {
+      "javascript/dynamic": {
         // ditto
       },
-      'javascript/esm': {
+      "javascript/esm": {
         // ditto
       },
       css: {
@@ -285,15 +287,15 @@ module.exports = {
         namedExports: true,
         // Configure how CSS content is exported
         // type: string
-        exportType: 'link',
+        exportType: "link",
       },
-      'css/auto': {
+      "css/auto": {
         // ditto
       },
-      'css/global': {
+      "css/global": {
         // ditto
       },
-      'css/module': {
+      "css/module": {
         // ditto
       },
       // others…
@@ -349,7 +351,7 @@ This option enables the handling of `@import` at-rules in CSS files. When set to
 
   ```css
   /* styles.css */
-  @import './reset-styles.css';
+  @import "./reset-styles.css";
 
   body {
     background-color: red;
@@ -381,11 +383,11 @@ This option enables or disables the handling of URLs in functions such as `url()
   ```css
   /* styles.css */
   .background {
-    background-image: url('./images/bg.jpg');
+    background-image: url("./images/bg.jpg");
   }
 
   .icon {
-    content: image('./icons/star.svg');
+    content: image("./icons/star.svg");
   }
   ```
 
@@ -415,9 +417,9 @@ When `namedExports` is `false` for CSS modules, you can retrieve CSS classes usi
 Named exports are redirected to improve developer experience (DX), facilitating a smooth transition from default exports to named exports:
 
 ```js
-import * as styles from './styles.module.css';
-import styles1 from './styles.module.css';
-import { foo } from './styles.module.css';
+import * as styles from "./styles.module.css";
+import styles1 from "./styles.module.css";
+import { foo } from "./styles.module.css";
 
 console.log(styles.default.foo); // Access via styles.default
 console.log(styles.foo); // Access directly from styles
@@ -439,7 +441,7 @@ When `namedExports` is enabled (default behavior), you can use **only** named ex
 ```
 
 ```js
-import { header, footer } from './styles.module.css';
+import { footer, header } from "./styles.module.css";
 ```
 
 By enabling `namedExports`, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.
@@ -458,7 +460,7 @@ Configure how CSS content will be exported.
       parser: {
         css: {
           // ...
-          exportType: 'text',
+          exportType: "text",
         },
       },
     },
@@ -513,7 +515,7 @@ Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJ
 Note that only `webpackIgnore` comment is supported at the moment:
 
 ```js
-const x = require(/* webpackIgnore: true */ 'x');
+const x = require(/* webpackIgnore: true */ "x");
 ```
 
 #### module.parser.javascript.dynamicImportFetchPriority
@@ -529,7 +531,7 @@ Specify the global [fetchPriority](https://developer.mozilla.org/en-US/docs/Web/
     module: {
       parser: {
         javascript: {
-          dynamicImportFetchPriority: 'high',
+          dynamicImportFetchPriority: "high",
         },
       },
     },
@@ -549,7 +551,7 @@ Specifies global mode for dynamic import.
     module: {
       parser: {
         javascript: {
-          dynamicImportMode: 'lazy',
+          dynamicImportMode: "lazy",
         },
       },
     },
@@ -609,7 +611,7 @@ Specifies the behavior of invalid export names in `\"import ... from ...\"` and 
     module: {
       parser: {
         javascript: {
-          exportsPresence: 'error',
+          exportsPresence: "error",
         },
       },
     },
@@ -629,7 +631,7 @@ Specifies the behavior of invalid export names in `\"import ... from ...\"`.
     module: {
       parser: {
         javascript: {
-          importExportsPresence: 'error',
+          importExportsPresence: "error",
         },
       },
     },
@@ -689,7 +691,7 @@ Set the module to `'strict'` or `'non-strict'` mode. This can affect the module'
     module: {
       parser: {
         javascript: {
-          overrideStrict: 'non-strict',
+          overrideStrict: "non-strict",
         },
       },
     },
@@ -709,7 +711,7 @@ Specifies the behavior of invalid export names in `\"export ... from ...\"`. Thi
     module: {
       parser: {
         javascript: {
-          reexportExportsPresence: 'error',
+          reexportExportsPresence: "error",
         },
       },
     },
@@ -775,7 +777,7 @@ Return `ast`, `comments`, and `semicolons` to ensure webpack’s AST analysis wo
 
             const parseOptions = {
               ...options,
-              module: options.sourceType === 'module',
+              module: options.sourceType === "module",
               loc: options.locations,
               onComment: options.comments ? comments : undefined,
               onInsertedSemicolon: options.semicolons
@@ -870,7 +872,7 @@ Function to parser content and return JSON.
 - Example:
 
 ```js
-const json5 = require('json5');
+const json5 = require("json5");
 
 module.exports = {
   module: {
@@ -898,7 +900,7 @@ T> You may need to use `[\\/]` in regex to match `\` on Windows and `/` on Mac/L
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     noParse: /jquery|lodash|src[\\/]vendor[\\/]somelib/,
   },
@@ -907,7 +909,7 @@ module.exports = {
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     noParse: (content) =>
       /jquery|lodash|src[\\/]vendor[\\/]somelib/.test(content),
@@ -928,7 +930,7 @@ Cache the resolution of module requests. There are a couple of defaults for `mod
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     unsafeCache: false,
   },
@@ -1007,8 +1009,8 @@ module.exports = {
     rules: [
       {
         // Handles imports with the assertion "assert { type: 'json' }"
-        assert: { type: 'json' },
-        loader: require.resolve('./loader-assert.js'),
+        assert: { type: "json" },
+        loader: require.resolve("./loader-assert.js"),
       },
     ],
   },
@@ -1017,8 +1019,10 @@ module.exports = {
 
 **index.js**
 
+{/* eslint-skip */}
+
 ```javascript
-import one from './pkg-1.json' assert { type: 'json' };
+import one from "./pkg-1.json" assert { type: "json" };
 ```
 
 In this example, `Rule.assert` is used to apply `loader-assert.js` to any module imported with the assertion `assert { type: "json" }`, ensuring that JSON files are processed correctly.
@@ -1032,18 +1036,18 @@ A [`Condition`](#condition) that allows you to match the child compiler name.
 ```javascript
 module.exports = {
   // ...
-  name: 'compiler',
+  name: "compiler",
   module: {
     rules: [
       {
         test: /a\.js$/,
-        compiler: 'compiler', // Matches the "compiler" name, loader will be applied
-        use: './loader',
+        compiler: "compiler", // Matches the "compiler" name, loader will be applied
+        use: "./loader",
       },
       {
         test: /b\.js$/,
-        compiler: 'other-compiler', // Does not match the "compiler" name, loader will NOT be applied
-        use: './loader',
+        compiler: "other-compiler", // Does not match the "compiler" name, loader will NOT be applied
+        use: "./loader",
       },
     ],
   },
@@ -1073,13 +1077,17 @@ All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` i
 
 ```javascript
 // Disable normal loaders
-import { a } from '!./file1.js';
+import { a } from "!./file1.js";
+```
 
+```javascript
 // Disable preloaders and normal loaders
-import { b } from '-!./file2.js';
+import { b } from "-!./file2.js";
+```
 
+```javascript
 // Disable all loaders
-import { c } from '!!./file3.js';
+import { c } from "!!./file3.js";
 ```
 
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be used by loader generated code.
@@ -1099,7 +1107,7 @@ A [`Condition`](#condition) to match against the module that issued the request.
 **index.js**
 
 ```javascript
-import A from './a.js';
+import A from "./a.js";
 ```
 
 This option can be used to apply loaders to the dependencies of a specific module or set of modules.
@@ -1116,7 +1124,7 @@ module.exports = {
   module: {
     rules: [
       {
-        issuerLayer: 'other-layer',
+        issuerLayer: "other-layer",
       },
     ],
   },
@@ -1138,7 +1146,7 @@ module.exports = {
     rules: [
       {
         test: /module-layer-change/,
-        layer: 'layer',
+        layer: "layer",
       },
     ],
   },
@@ -1189,8 +1197,8 @@ module.exports = {
   module: {
     rules: [
       {
-        mimetype: 'application/json',
-        type: 'json',
+        mimetype: "application/json",
+        type: "json",
       },
     ],
   },
@@ -1207,7 +1215,7 @@ An array of [`Rules`](#rule) from which only the first matching Rule is used whe
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
@@ -1215,11 +1223,11 @@ module.exports = {
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
-            type: 'asset/inline',
+            type: "asset/inline",
           },
           {
             resourceQuery: /external/, // foo.css?external
-            type: 'asset/resource',
+            type: "asset/resource",
           },
         ],
       },
@@ -1251,11 +1259,11 @@ However, parser plugins may accept more than only a boolean. For example, the in
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
-        //...
+        // ...
         parser: {
           amd: false, // disable AMD
           commonjs: false, // disable CommonJS
@@ -1266,10 +1274,11 @@ module.exports = {
           requireContext: false, // disable require.context
           browserify: false, // disable special handling of Browserify bundles
           requireJs: false, // disable requirejs.*
-          node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
           commonjsMagicComments: false, // disable magic comments support for CommonJS
           node: {}, // reconfigure node layer on module level
-          worker: ['default from web-worker', '...'], // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
+          // or
+          // node: false, // disable __dirname, __filename, etc.
+          worker: ["default from web-worker", "..."], // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
         },
       },
     ],
@@ -1293,11 +1302,11 @@ If a module source size is less than `maxSize` then module will be injected into
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
-        //...
+        // ...
         parser: {
           dataUrlCondition: {
             maxSize: 4 * 1024,
@@ -1315,15 +1324,15 @@ When a function is given, returning `true` tells webpack to inject the module in
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
-        //...
+        // ...
         parser: {
           dataUrlCondition: (source, { filename, module }) => {
             const content = source.toString();
-            return content.includes('some marker');
+            return content.includes("some marker");
           },
         },
       },
@@ -1347,15 +1356,15 @@ When `Rule.generator.dataUrl` is used as an object, you can configure two proper
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
-        //...
+        // ...
         generator: {
           dataUrl: {
-            encoding: 'base64',
-            mimetype: 'mimetype/png',
+            encoding: "base64",
+            mimetype: "mimetype/png",
           },
         },
       },
@@ -1368,15 +1377,16 @@ When used as a function, it executes for every module and must return a data URI
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
-        //...
+        // ...
         generator: {
           dataUrl: (content) => {
-            const svgToMiniDataURI = require('mini-svg-data-uri');
-            if (typeof content !== 'string') {
+            const svgToMiniDataURI = require("mini-svg-data-uri");
+
+            if (typeof content !== "string") {
               content = content.toString();
             }
             return svgToMiniDataURI(content);
@@ -1403,7 +1413,7 @@ Opt out of writing assets from [Asset Modules](/guides/asset-modules/), you migh
       rules: [
         {
           test: /\.png$/i,
-          type: 'asset/resource',
+          type: "asset/resource",
           generator: {
             emit: false,
           },
@@ -1421,21 +1431,21 @@ The same as [`output.assetModuleFilename`](/configuration/output/#outputassetmod
 
 ```js
 module.exports = {
-  //...
+  // ...
   output: {
-    assetModuleFilename: 'images/[hash][ext][query]',
+    assetModuleFilename: "images/[hash][ext][query]",
   },
   module: {
     rules: [
       {
         test: /\.png$/,
-        type: 'asset/resource',
+        type: "asset/resource",
       },
       {
         test: /\.html$/,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          filename: 'static/[hash][ext]',
+          filename: "static/[hash][ext]",
         },
       },
     ],
@@ -1452,17 +1462,17 @@ Customize `publicPath` for specific Asset Modules.
 
 ```js
 module.exports = {
-  //...
+  // ...
   output: {
-    publicPath: 'static/',
+    publicPath: "static/",
   },
   module: {
     rules: [
       {
         test: /\.png$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          publicPath: 'assets/',
+          publicPath: "assets/",
         },
       },
     ],
@@ -1479,18 +1489,18 @@ Emit the asset in the specified folder relative to 'output.path'. This should on
 
 ```js
 module.exports = {
-  //...
+  // ...
   output: {
-    publicPath: 'static/',
+    publicPath: "static/",
   },
   module: {
     rules: [
       {
         test: /\.png$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-          publicPath: 'https://cdn/assets/',
-          outputPath: 'cdn-assets/',
+          publicPath: "https://cdn/assets/",
+          outputPath: "cdn-assets/",
         },
       },
     ],
@@ -1510,13 +1520,13 @@ A [`Condition`](#condition) matched with the resource query. This option is used
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.css$/,
         resourceQuery: /inline/,
-        type: 'asset/inline',
+        type: "asset/inline",
       },
     ],
   },
@@ -1532,15 +1542,15 @@ If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a func
 **webpack.config.js**
 
 ```javascript
-const toml = require('toml');
+const toml = require("toml");
 
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.toml/,
-        type: 'json',
+        type: "json",
         parser: {
           parse: toml.parse,
         },
@@ -1570,8 +1580,8 @@ module.exports = {
   module: {
     rules: [
       {
-        scheme: 'data',
-        type: 'asset/resource',
+        scheme: "data",
+        type: "asset/resource",
       },
     ],
   },
@@ -1600,14 +1610,14 @@ Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
-      //...
+      // ...
       {
         test: /\.json$/,
-        type: 'javascript/auto',
-        loader: 'custom-json-loader',
+        type: "javascript/auto",
+        loader: "custom-json-loader",
       },
     ],
   },
@@ -1624,8 +1634,8 @@ See use case of `css/auto` module type [here](https://github.com/webpack/webpack
 
 ```js
 module.exports = {
-  target: 'web',
-  mode: 'development',
+  target: "web",
+  mode: "development",
   experiments: {
     css: true,
   },
@@ -1633,8 +1643,8 @@ module.exports = {
     rules: [
       {
         test: /\.less$/,
-        use: 'less-loader',
-        type: 'css/auto',
+        use: "less-loader",
+        type: "css/auto",
       },
     ],
   },
@@ -1659,21 +1669,21 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
-        //...
+        // ...
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 1,
             },
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               noIeCompat: true,
             },
@@ -1702,16 +1712,16 @@ The same shortcut as an array can be used for the return value (i.e. `use: [ 'st
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         use: (info) => [
           {
-            loader: 'custom-svg-loader',
+            loader: "custom-svg-loader",
           },
           {
-            loader: 'svgo-loader',
+            loader: "svgo-loader",
             options: {
               plugins: [
                 {
@@ -1743,20 +1753,21 @@ For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/d
 **./src/index.js**
 
 ```javascript
-import footer from 'footer';
+import footer from "footer";
+
 console.log(footer);
 ```
 
 **./src/footer/default.js**
 
 ```javascript
-export default 'default footer';
+export default "default footer";
 ```
 
 **./src/footer/overridden.js**
 
 ```javascript
-export default 'overridden footer';
+export default "overridden footer";
 ```
 
 **webpack.js.org**
@@ -1765,7 +1776,7 @@ export default 'overridden footer';
 module.exports = {
   resolve: {
     alias: {
-      footer: './footer/default.js',
+      footer: "./footer/default.js",
     },
   },
 };
@@ -1779,7 +1790,7 @@ When creating a bundle with this configuration, `console.log(footer)` will outpu
 module.exports = {
   resolve: {
     alias: {
-      footer: './footer/default.js',
+      footer: "./footer/default.js",
     },
   },
   module: {
@@ -1787,7 +1798,7 @@ module.exports = {
       {
         resolve: {
           alias: {
-            footer: './footer/overridden.js',
+            footer: "./footer/overridden.js",
           },
         },
       },
@@ -1839,8 +1850,8 @@ module.exports = {
     rules: [
       {
         // Handles imports with the condition "with { type: 'json' }"
-        with: { type: 'json' },
-        loader: require.resolve('./loader-assert.js'),
+        with: { type: "json" },
+        loader: require.resolve("./loader-assert.js"),
       },
     ],
   },
@@ -1850,7 +1861,7 @@ module.exports = {
 **index.js**
 
 ```javascript
-import one from './pkg-1.json' with { type: 'json' };
+import one from "./pkg-1.json" with { type: "json" };
 ```
 
 In this example, `Rule.with` is used to apply `loader-assert.js` to any module imported with the condition `with { type: "json" }`.
@@ -1874,10 +1885,10 @@ Conditions can be one of these:
 **Example:**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
@@ -1885,9 +1896,9 @@ module.exports = {
         include: [
           // will include any paths relative to the current directory starting with `app/styles`
           // e.g. `app/styles.css`, `app/styles/styles.css`, `app/stylesheet.css`
-          path.resolve(__dirname, 'app/styles'),
+          path.resolve(__dirname, "app/styles"),
           // add an extra slash to only include the content of the directory `vendor/styles/`
-          path.join(__dirname, 'vendor/styles/'),
+          path.join(__dirname, "vendor/styles/"),
         ],
       },
     ],
@@ -1915,11 +1926,11 @@ It also breaks if the options object cannot be stringified (i.e. circular JSON).
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: true,
         },
@@ -1944,14 +1955,14 @@ The `info` object parameter has the following fields:
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.svg$/,
-        type: 'asset',
+        type: "asset",
         use: (info) => ({
-          loader: 'svgo-loader',
+          loader: "svgo-loader",
           options: {
             plugins: [
               {
@@ -1982,16 +1993,16 @@ Here are the available options with their [defaults](https://github.com/webpack/
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   module: {
     exprContextCritical: true,
     exprContextRecursive: true,
     exprContextRegExp: false,
-    exprContextRequest: '.',
+    exprContextRequest: ".",
     unknownContextCritical: true,
     unknownContextRecursive: true,
     unknownContextRegExp: false,
-    unknownContextRequest: '.',
+    unknownContextRequest: ".",
     wrappedContextCritical: false,
     wrappedContextRecursive: true,
     wrappedContextRegExp: /.*/,

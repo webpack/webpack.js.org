@@ -1,22 +1,22 @@
-import Url from 'url';
-import PropTypes from 'prop-types';
+import Url from "node:url";
+import PropTypes from "prop-types";
 
-const baseURL = 'https://github.com/webpack/webpack.js.org/edit/main/';
-
-PageLinks.propTypes = {
-  page: PropTypes.shape({
-    repo: PropTypes.string,
-  }),
-};
+const baseURL = "https://github.com/webpack/webpack.js.org/edit/main/";
 
 function Separator() {
   return <span className="mx-5 text-black font-bold dark:text-white">·</span>;
 }
 
 const classes =
-  'text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline';
+  "text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline";
+
+function _handlePrintClick(event) {
+  event.preventDefault();
+  window.print();
+}
 
 export default function PageLinks({ page = {} }) {
+  // eslint-disable-next-line n/no-deprecated-api
   const editLink = page.edit || Url.resolve(baseURL, page.path);
 
   return (
@@ -40,7 +40,8 @@ export default function PageLinks({ page = {} }) {
   );
 }
 
-function _handlePrintClick(e) {
-  e.preventDefault();
-  window.print();
-}
+PageLinks.propTypes = {
+  page: PropTypes.shape({
+    repo: PropTypes.string,
+  }),
+};

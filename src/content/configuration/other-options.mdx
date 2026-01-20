@@ -36,7 +36,7 @@ Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will di
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   amd: {
     jQuery: true,
   },
@@ -60,7 +60,7 @@ Fail out on the first error instead of tolerating it. By default webpack will lo
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   bail: true,
 };
 ```
@@ -87,14 +87,14 @@ Remember that current configuration will not compile until its dependencies are 
 ```js
 module.exports = [
   {
-    name: 'client',
-    target: 'web',
+    name: "client",
+    target: "web",
     // …
   },
   {
-    name: 'server',
-    target: 'node',
-    dependencies: ['client'],
+    name: "server",
+    target: "node",
+    dependencies: ["client"],
   },
 ];
 ```
@@ -113,7 +113,7 @@ Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a c
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   ignoreWarnings: [
     {
       module: /module2\.js\?[34]/, // A RegExp
@@ -171,8 +171,8 @@ Name of the configuration. Used when loading multiple configurations.
 
 ```javascript
 module.exports = {
-  //...
-  name: 'admin-app',
+  // ...
+  name: "admin-app",
 };
 ```
 
@@ -205,12 +205,12 @@ Specify where the records should be written. The following example shows how you
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
-  recordsInputPath: path.join(__dirname, 'records.json'),
-  recordsOutputPath: path.join(__dirname, 'newRecords.json'),
+  // ...
+  recordsInputPath: path.join(__dirname, "records.json"),
+  recordsOutputPath: path.join(__dirname, "newRecords.json"),
 };
 ```
 
@@ -223,11 +223,11 @@ Use this option to generate a JSON file containing webpack "records" – pieces 
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
-  recordsPath: path.join(__dirname, 'records.json'),
+  // ...
+  recordsPath: path.join(__dirname, "records.json"),
 };
 ```
 
@@ -246,11 +246,12 @@ W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOut
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
+
 module.exports = {
   // ...
   snapshot: {
-    managedPaths: [path.resolve(__dirname, '../node_modules')],
+    managedPaths: [path.resolve(__dirname, "../node_modules")],
     immutablePaths: [],
     unmanagedPaths: [],
     buildDependencies: {

@@ -32,12 +32,12 @@ Apply loaders to the minimal number of modules necessary. Instead of:
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
     ],
   },
@@ -47,16 +47,16 @@ module.exports = {
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src'),
-        loader: 'babel-loader',
+        include: path.resolve(__dirname, "src"),
+        loader: "babel-loader",
       },
     ],
   },
@@ -212,7 +212,7 @@ module.exports = {
   test: /\.tsx?$/,
   use: [
     {
-      loader: 'ts-loader',
+      loader: "ts-loader",
       options: {
         transpileOnly: true,
       },

@@ -43,10 +43,10 @@ Triggered before a module build has started, can be used to modify the module.
 
 ```js
 compilation.hooks.buildModule.tap(
-  'SourceMapDevToolModuleOptionsPlugin',
+  "SourceMapDevToolModuleOptionsPlugin",
   (module) => {
     module.useSourceMap = true;
-  }
+  },
 );
 ```
 
@@ -381,14 +381,14 @@ Create additional assets for the compilation. This hook can be used to download
 an image, for example:
 
 ```js
-compilation.hooks.additionalAssets.tapAsync('MyPlugin', (callback) => {
-  download('https://img.shields.io/npm/v/webpack.svg', function (resp) {
+compilation.hooks.additionalAssets.tapAsync("MyPlugin", (callback) => {
+  download("https://img.shields.io/npm/v/webpack.svg", (resp) => {
     if (resp.status === 200) {
-      compilation.assets['webpack-version.svg'] = toAsset(resp);
+      compilation.assets["webpack-version.svg"] = toAsset(resp);
       callback();
     } else {
       callback(
-        new Error('[webpack-example-plugin] Unable to download the image')
+        new Error("[webpack-example-plugin] Unable to download the image"),
       );
     }
   });
@@ -411,20 +411,20 @@ Here's an example that adds a banner to each chunk.
 
 ```js
 compilation.hooks.optimizeChunkAssets.tapAsync(
-  'MyPlugin',
+  "MyPlugin",
   (chunks, callback) => {
-    chunks.forEach((chunk) => {
-      chunk.files.forEach((file) => {
+    for (const chunk of chunks) {
+      for (const file of chunk.files) {
         compilation.assets[file] = new ConcatSource(
-          '/**Sweet Banner**/',
-          '\n',
-          compilation.assets[file]
+          "/**Sweet Banner**/",
+          "\n",
+          compilation.assets[file],
         );
-      });
-    });
+      }
+    }
 
     callback();
-  }
+  },
 );
 ```
 
@@ -441,14 +441,14 @@ The chunk assets have been optimized.
 Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
 
 ```js
-compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
-  chunks.forEach((chunk) => {
+compilation.hooks.afterOptimizeChunkAssets.tap("MyPlugin", (chunks) => {
+  for (const chunk of chunks) {
     console.log({
       id: chunk.id,
       name: chunk.name,
       includes: chunk.getModules().map((module) => module.request),
     });
-  });
+  }
 });
 ```
 
@@ -493,15 +493,15 @@ Asset processing.
 ```js
 compilation.hooks.processAssets.tap(
   {
-    name: 'MyPlugin',
+    name: "MyPlugin",
     stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS, // see below for more stages
   },
   (assets) => {
-    console.log('List of assets and their sizes:');
-    Object.entries(assets).forEach(([pathname, source]) => {
+    console.log("List of assets and their sizes:");
+    for (const [pathname, source] of Object.entries(assets)) {
       console.log(`— ${pathname}: ${source.size()} bytes`);
-    });
-  }
+    }
+  },
 );
 ```
 
@@ -516,13 +516,13 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
    ```js
    compilation.hooks.processAssets.tap(
      {
-       name: 'MyPlugin',
+       name: "MyPlugin",
        stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
        additionalAssets: true,
      },
      (assets) => {
        // this function will be called multiple times with each bulk of assets
-     }
+     },
    );
    ```
 
@@ -531,7 +531,7 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
    ```js
    compilation.hooks.processAssets.tap(
      {
-       name: 'MyPlugin',
+       name: "MyPlugin",
        stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
        additionalAssets: (assets) => {
          // this function potentially could be called multiple times for assets added on later stages
@@ -539,7 +539,7 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
      },
      (assets) => {
        // this function will be called once with assets added by plugins on prior stages
-     }
+     },
    );
    ```
 
@@ -575,11 +575,11 @@ compilation.hooks.processAssets.tap(
     /** … */
   },
   (assets) => {
-    Object.entries(assets).forEach(([pathname, source]) => {
+    for (const [pathname, source] of Object.entries(assets)) {
       const assetInfo = compilation.assetsInfo.get(pathname);
       // @todo: do something with "pathname", "source" and "assetInfo"
-    });
-  }
+    }
+  },
 );
 ```
 
@@ -662,7 +662,7 @@ This HookMap is like a list of actions that gets triggered when a preset is used
 Here's an illustrative plugin example:
 
 ```js
-compilation.hooks.statsPreset.for('my-preset').tap('MyPlugin', (options) => {
+compilation.hooks.statsPreset.for("my-preset").tap("MyPlugin", (options) => {
   if (options.all === undefined) options.all = true;
 });
 ```
@@ -680,7 +680,7 @@ This hook is used to transform an options object into a consistent format that c
 Here's an illustrative plugin example:
 
 ```js
-compilation.hooks.statsNormalize.tap('MyPlugin', (options) => {
+compilation.hooks.statsNormalize.tap("MyPlugin", (options) => {
   if (options.myOption === undefined) options.myOption = [];
 
   if (!Array.isArray(options.myOption)) options.myOptions = [options.myOptions];
@@ -706,10 +706,10 @@ This hook provides access to the [`StatsFactory` class](https://github.com/webpa
 Example:
 
 ```js
-compilation.hooks.statsFactory.tap('MyPlugin', (statsFactory, options) => {
+compilation.hooks.statsFactory.tap("MyPlugin", (statsFactory, options) => {
   statsFactory.hooks.extract
-    .for('compilation')
-    .tap('MyPlugin', (object, compilation) => {
+    .for("compilation")
+    .tap("MyPlugin", (object, compilation) => {
       object.customProperty = MyPlugin.getCustomValue(compilation);
     });
 });

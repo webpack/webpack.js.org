@@ -1,4 +1,4 @@
-@import 'functions';
+@import "functions";
 
 .support {
   display: flex;
@@ -15,7 +15,7 @@
     text-transform: capitalize;
 
     &:after {
-      content: ' ';
+      content: " ";
     }
   }
 

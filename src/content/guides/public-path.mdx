@@ -21,10 +21,10 @@ In development for example, we might have an `assets/` folder that lives on the 
 To approach this problem you can easily use a good old environment variable. Let's say we have a variable `ASSET_PATH`:
 
 ```js
-import webpack from 'webpack';
+import webpack from "webpack";
 
 // Try the environment variable, otherwise use root
-const ASSET_PATH = process.env.ASSET_PATH || '/';
+const ASSET_PATH = process.env.ASSET_PATH || "/";
 
 export default {
   output: {
@@ -34,7 +34,7 @@ export default {
   plugins: [
     // This makes it possible for us to safely use env vars on our code
     new webpack.DefinePlugin({
-      'process.env.ASSET_PATH': JSON.stringify(ASSET_PATH),
+      "process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
     }),
   ],
 };
@@ -56,8 +56,8 @@ W> Be aware that if you use ES6 module imports in your entry file the `__webpack
 
 ```js
 // entry.js
-import './public-path';
-import './app';
+import "./public-path";
+import "./app";
 ```
 
 ### Automatic publicPath
@@ -69,7 +69,7 @@ There are chances that you don't know what the publicPath will be in advance, an
 ```js
 module.exports = {
   output: {
-    publicPath: 'auto',
+    publicPath: "auto",
   },
 };
 ```

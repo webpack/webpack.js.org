@@ -16,7 +16,7 @@ contributors:
   - Roberto14
   - hai-x
 related:
-  - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
+  - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
@@ -32,7 +32,7 @@ Tells webpack to check the incompatible types of WebAssembly modules when they a
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     checkWasmTypes: false,
   },
@@ -62,9 +62,9 @@ The following string values are supported:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
-    chunkIds: 'named',
+    chunkIds: "named",
   },
 };
 ```
@@ -75,7 +75,7 @@ By default, a minimum length of 3 digits is used when `optimization.chunkIds` is
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     chunkIds: false,
   },
@@ -98,7 +98,7 @@ By default `optimization.concatenateModules` is enabled in `production` [mode](/
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     concatenateModules: true,
   },
@@ -115,7 +115,7 @@ Use the `optimization.emitOnErrors` to emit assets whenever there are errors whi
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     emitOnErrors: true,
   },
@@ -140,7 +140,7 @@ By default, `optimization.avoidEntryIife` is enabled in `production` [mode](/con
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     avoidEntryIife: true,
   },
@@ -159,7 +159,7 @@ Tells webpack to determine and flag chunks which are subsets of other chunks in 
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     flagIncludedChunks: true,
   },
@@ -176,7 +176,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     innerGraph: false,
   },
@@ -204,7 +204,7 @@ The following values are supported:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     mangleExports: true,
   },
@@ -221,7 +221,7 @@ When set to `true` tells webpack to reduce the size of WASM by changing imports 
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     mangleWasmImports: true,
   },
@@ -238,7 +238,7 @@ Tells webpack to merge chunks which contain the same modules. Setting `optimizat
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     mergeDuplicateChunks: false,
   },
@@ -255,7 +255,7 @@ Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-web
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     minimize: false,
   },
@@ -273,7 +273,7 @@ Allows you to override the default minimizer by providing a different one or mor
 **webpack.config.js**
 
 ```js
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   optimization: {
@@ -296,7 +296,8 @@ module.exports = {
   optimization: {
     minimizer: [
       (compiler) => {
-        const TerserPlugin = require('terser-webpack-plugin');
+        const TerserPlugin = require("terser-webpack-plugin");
+
         new TerserPlugin({
           /* your config */
         }).apply(compiler);
@@ -313,7 +314,8 @@ By default, webpack would set `optimization.minimizer` to [the following value](
   {
     apply: (compiler) => {
       // Lazy load the Terser plugin
-      const TerserPlugin = require('terser-webpack-plugin');
+      const TerserPlugin = require("terser-webpack-plugin");
+
       new TerserPlugin({
         terserOptions: {
           compress: {
@@ -323,7 +325,7 @@ By default, webpack would set `optimization.minimizer` to [the following value](
       }).apply(compiler);
     },
   },
-]; // eslint-disable-line
+];
 ```
 
 Which can be accessed with `'...'` in case you want to keep it when customizing `optimization.minimizer`:
@@ -331,7 +333,7 @@ Which can be accessed with `'...'` in case you want to keep it when customizing 
 ```js
 module.exports = {
   optimization: {
-    minimizer: [new CssMinimizer(), '...'],
+    minimizer: [new CssMinimizer(), "..."],
   },
 };
 ```
@@ -357,9 +359,9 @@ The following string values are supported:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
-    moduleIds: 'deterministic',
+    moduleIds: "deterministic",
   },
 };
 ```
@@ -370,7 +372,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     moduleIds: false,
   },
@@ -401,9 +403,9 @@ Possible values:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
-    nodeEnv: 'production',
+    nodeEnv: "production",
   },
 };
 ```
@@ -422,7 +424,7 @@ By default `optimization.portableRecords` is disabled. Automatically enabled if 
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     portableRecords: true,
   },
@@ -439,7 +441,7 @@ Tells webpack to figure out which exports are provided by modules to generate mo
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     providedExports: false,
   },
@@ -456,7 +458,7 @@ Adds an additional hash compilation pass after the assets have been processed to
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     realContentHash: false,
   },
@@ -473,7 +475,7 @@ Tells webpack to detect and remove modules from chunks when these modules are al
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     removeAvailableModules: true,
   },
@@ -492,7 +494,7 @@ Tells webpack to detect and remove chunks which are empty. Setting `optimization
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     removeEmptyChunks: false,
   },
@@ -509,7 +511,7 @@ Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     runtimeChunk: {
       name: (entrypoint) => `runtime~${entrypoint.name}`,
@@ -524,10 +526,10 @@ The value `'single'` instead creates a runtime file to be shared for all generat
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     runtimeChunk: {
-      name: 'runtime',
+      name: "runtime",
     },
   },
 };
@@ -543,7 +545,7 @@ W> Imported modules are initialized for each runtime chunk separately, so if you
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     runtimeChunk: {
       name: (entrypoint) => `runtimechunk~${entrypoint.name}`,
@@ -576,7 +578,7 @@ T> Please note that `sideEffects` should be in the npm module's `package.json` f
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     sideEffects: true,
   },
@@ -587,9 +589,9 @@ To only use the manual flag and do not analyse source code:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
-    sideEffects: 'flag',
+    sideEffects: "flag",
   },
 };
 ```
@@ -615,7 +617,7 @@ Dead code elimination in minimizers will benefit from this and can remove unused
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
     usedExports: false,
   },
@@ -626,9 +628,9 @@ To opt-out from used exports analysis per runtime:
 
 ```js
 module.exports = {
-  //...
+  // ...
   optimization: {
-    usedExports: 'global',
+    usedExports: "global",
   },
 };
 ```

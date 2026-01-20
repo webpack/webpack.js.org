@@ -2,14 +2,10 @@
  * based on https://github.com/seeden/react-g-analytics
  * refactored against new version of react/react-router-dom
  */
-import { BrowserRouter, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-AnalyticsRouter.propTypes = {
-  id: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  set: PropTypes.object,
-};
+import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { BrowserRouter, useLocation } from "react-router-dom";
+
 export default function AnalyticsRouter(props) {
   const { id, set, children } = props;
 
@@ -22,13 +18,19 @@ export default function AnalyticsRouter(props) {
   );
 }
 
-function loadScript() {
-  const gads = document.createElement('script');
-  gads.async = true;
-  gads.type = 'text/javascript';
-  gads.src = '//www.google-analytics.com/analytics.js';
+AnalyticsRouter.propTypes = {
+  id: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  set: PropTypes.object,
+};
 
-  const head = document.getElementsByTagName('head')[0];
+function loadScript() {
+  const gads = document.createElement("script");
+  gads.async = true;
+  gads.type = "text/javascript";
+  gads.src = "//www.google-analytics.com/analytics.js";
+
+  const [head] = document.getElementsByTagName("head");
   head.appendChild(gads);
 }
 
@@ -37,45 +39,38 @@ function initGoogleAnalytics(id, set) {
     return;
   }
 
-  window.ga =
-    window.ga ||
-    function () {
-      (ga.q = ga.q || []).push(arguments); // eslint-disable-line
-    };
+  window.ga ||= function ga() {
+    (ga.q = ga.q || []).push(arguments); // eslint-disable-line
+  };
   ga.l = +new Date(); // eslint-disable-line
 
   loadScript();
 
-  window.ga('create', id, 'auto');
+  window.ga("create", id, "auto");
 
   if (set) {
-    Object.keys(set).forEach((key) => {
-      window.ga('set', key, set[key]);
-    });
+    for (const key of Object.keys(set)) {
+      window.ga("set", key, set[key]);
+    }
   }
 }
-GoogleAnalytics.propTypes = {
-  id: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  set: PropTypes.object,
-};
 
 function googleAnalyticsCommand(what, options, ...args) {
   if (!window.ga) {
-    throw new Error('Google analytics is not initialized');
+    throw new Error("Google analytics is not initialized");
   }
 
-  if (typeof options === 'string') {
+  if (typeof options === "string") {
     return window.ga(what, options, ...args);
   }
 
   return window.ga(what, options);
 }
 function googleAnalyticsSet(...options) {
-  return googleAnalyticsCommand('set', ...options);
+  return googleAnalyticsCommand("set", ...options);
 }
 function googleAnalyticsSend(...options) {
-  return googleAnalyticsCommand('send', ...options);
+  return googleAnalyticsCommand("send", ...options);
 }
 
 function GoogleAnalytics(props) {
@@ -97,9 +92,15 @@ function GoogleAnalytics(props) {
     });
 
     googleAnalyticsSend({
-      hitType: 'pageview',
+      hitType: "pageview",
     });
   }, [location]);
 
   return <>{children}</>;
 }
+
+GoogleAnalytics.propTypes = {
+  id: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  set: PropTypes.object,
+};

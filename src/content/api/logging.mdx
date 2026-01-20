@@ -31,17 +31,18 @@ W> **Avoid noise in the log!** Keep in mind that multiple plugins and loaders ar
 **my-webpack-plugin.js**
 
 ```js
-const PLUGIN_NAME = 'my-webpack-plugin';
+const PLUGIN_NAME = "my-webpack-plugin";
+
 export class MyWebpackPlugin {
   apply(compiler) {
     // you can access Logger from compiler
     const logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
-    logger.log('log from compiler');
+    logger.log("log from compiler");
 
     compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
       // you can also access Logger from compilation
       const logger = compilation.getLogger(PLUGIN_NAME);
-      logger.info('log from compilation');
+      logger.info("log from compilation");
     });
   }
 }
@@ -52,8 +53,8 @@ export class MyWebpackPlugin {
 ```js
 export default function (source) {
   // you can get Logger with `this.getLogger` in your webpack loaders
-  const logger = this.getLogger('my-webpack-loader');
-  logger.info('hello Logger');
+  const logger = this.getLogger("my-webpack-loader");
+  logger.info("hello Logger");
   return source;
 }
 ```
@@ -89,9 +90,10 @@ Runtime logger API is only intended to be used as a development tool, it is not 
 - `logging.configureDefaultLogger(...)`: to override the default logger.
 
 ```javascript
-import logging from 'webpack/lib/logging/runtime';
+import logging from "webpack/lib/logging/runtime";
+
 logging.configureDefaultLogger({
-  level: 'log',
+  level: "log",
   debug: /something/,
 });
 ```

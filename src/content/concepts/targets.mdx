@@ -22,7 +22,7 @@ To set the `target` property, you set the target value in your webpack config:
 
 ```javascript
 module.exports = {
-  target: 'node',
+  target: "node",
 };
 ```
 
@@ -39,23 +39,24 @@ Although webpack does **not** support multiple strings being passed into the `ta
 **webpack.config.js**
 
 ```javascript
-const path = require('path');
+const path = require("node:path");
+
 const serverConfig = {
-  target: 'node',
+  target: "node",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'lib.node.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "lib.node.js",
   },
-  //…
+  // …
 };
 
 const clientConfig = {
-  target: 'web', // <=== can be omitted as default is 'web'
+  target: "web", // <=== can be omitted as default is 'web'
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'lib.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "lib.js",
   },
-  //…
+  // …
 };
 
 module.exports = [serverConfig, clientConfig];

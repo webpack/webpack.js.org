@@ -37,7 +37,7 @@ Available options:
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   experiments: {
     asyncWebAssembly: true,
     buildHttp: true,
@@ -57,7 +57,7 @@ Enable backward-compat layer with deprecation warnings for many webpack 4 APIs.
 
 ```js
 module.exports = {
-  //...
+  // ...
   experiments: {
     backCompat: true,
   },
@@ -91,7 +91,7 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
   ```javascript
   // webpack.config.js
   module.exports = {
-    //...
+    // ...
     experiments: {
       buildHttp: true,
     },
@@ -100,7 +100,8 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
 
   ```js
   // src/index.js
-  import pMap1 from 'https://cdn.skypack.dev/p-map';
+  import pMap1 from "https://cdn.skypack.dev/p-map";
+
   // with `buildHttp` enabled, webpack will build pMap1 like a regular local module
   console.log(pMap1);
   ```
@@ -115,12 +116,12 @@ A list of allowed URIs.
   ```javascript
   // webpack.config.js
   module.exports = {
-    //...
+    // ...
     experiments: {
       buildHttp: {
         allowedUris: [
-          'http://localhost:9990/',
-          'https://raw.githubusercontent.com/',
+          "http://localhost:9990/",
+          "https://raw.githubusercontent.com/",
         ],
       },
     },
@@ -139,7 +140,7 @@ Define the location for caching remote resources.
   ```javascript
   // webpack.config.js
   module.exports = {
-    //...
+    // ...
     experiments: {
       buildHttp: {
         cacheLocation: false,
@@ -220,13 +221,15 @@ This feature requires the runtime environment to have [`Proxy`](https://develope
 
 Enables the following syntaxes:
 
+{/* eslint-skip */}
+
 ```js
-import defer * as module from 'module-name';
-import * as module2 from /* webpackDefer: true */ 'module-name2';
+import defer * as module from "module-name";
+import * as module2 from /* webpackDefer: true */ "module-name2";
 
 // Or using dynamic import
-import.defer('module-name3');
-import(/* webpackDefer: true */ 'module-name4');
+import.defer("module-name3");
+import(/* webpackDefer: true */ "module-name4");
 
 export function f() {
   // module-name is evaluated synchronously, then call doSomething() on it.
@@ -240,9 +243,11 @@ It's suggested to put the magic comment after the `from` keyword. Other position
 
 Putting the magic comment after the `import` keyword is incompatible with the filesystem cache.
 
+{/* eslint-skip */}
+
 ```js
-import /* webpackDefer: true */ * as ns from '...'; // known broken
-import * as ns from /* webpackDefer: true */ '...'; // recommended
+import /* webpackDefer: true */ * as ns from "..."; // known broken
+import * as ns from /* webpackDefer: true */ "..."; // recommended
 ```
 
 You should make sure your loaders do not remove the magic comment.
@@ -263,7 +268,7 @@ Use defaults of the next major webpack and show warnings in any problematic plac
 
 ```js
 module.exports = {
-  //...
+  // ...
   experiments: {
     futureDefaults: true,
   },

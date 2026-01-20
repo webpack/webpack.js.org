@@ -34,10 +34,10 @@ You can override this property by passing your own function in:
 
 ```js
 module.exports = {
-  //...
+  // ...
   performance: {
-    assetFilter: function (assetFilename) {
-      return assetFilename.endsWith('.js');
+    assetFilter(assetFilename) {
+      return assetFilename.endsWith(".js");
     },
   },
 };
@@ -55,7 +55,7 @@ Given an asset is created that is over 250kb:
 
 ```js
 module.exports = {
-  //...
+  // ...
   performance: {
     hints: false,
   },
@@ -66,9 +66,9 @@ No hint warnings or errors are shown.
 
 ```js
 module.exports = {
-  //...
+  // ...
   performance: {
-    hints: 'warning',
+    hints: "warning",
   },
 };
 ```
@@ -77,9 +77,9 @@ A warning will be displayed notifying you of a large asset. We recommend somethi
 
 ```js
 module.exports = {
-  //...
+  // ...
   performance: {
-    hints: 'error',
+    hints: "error",
   },
 };
 ```
@@ -94,7 +94,7 @@ An asset is any emitted file from webpack. This option controls when webpack emi
 
 ```js
 module.exports = {
-  //...
+  // ...
   performance: {
     maxAssetSize: 100000,
   },
@@ -109,7 +109,7 @@ An entry point represents all assets that would be utilized during initial load 
 
 ```js
 module.exports = {
-  //...
+  // ...
   performance: {
     maxEntrypointSize: 400000,
   },

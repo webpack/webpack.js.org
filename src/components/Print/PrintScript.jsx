@@ -6,6 +6,7 @@ window.matchMedia('print').addListener(function(mql) {
 });
 window.print();
 `;
+
 export default function PrintScript() {
   return <script dangerouslySetInnerHTML={{ __html: printScript }}></script>;
 }

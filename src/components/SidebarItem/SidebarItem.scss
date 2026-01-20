@@ -1,5 +1,5 @@
-@import 'mixins';
-@import 'functions';
+@import "mixins";
+@import "functions";
 
 .sidebar-item {
   position: relative;
@@ -44,7 +44,7 @@
     line-height: 19px;
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       height: calc(100% - 0.6em);
       top: 0;
@@ -67,7 +67,7 @@
       margin-bottom: 0;
     }
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       width: 0.5em;
       left: 0;

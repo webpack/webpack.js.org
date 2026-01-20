@@ -14,11 +14,11 @@ contributors:
   - burhanuday
   - RexSkz
 related:
-  - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
+  - title: "Webpack 5 Module Federation: A game-changer in JavaScript architecture"
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
-  - title: 'Explanations and Examples'
+  - title: "Explanations and Examples"
     url: https://github.com/module-federation/module-federation-examples
-  - title: 'Module Federation YouTube Playlist'
+  - title: "Module Federation YouTube Playlist"
     url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
 ---
 
@@ -114,11 +114,11 @@ It can be leveraged to connect remote containers to a host container dynamically
 ```js
 (async () => {
   // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
-  await __webpack_init_sharing__('default');
-  const container = window.someContainer; // or get the container somewhere else
+  await __webpack_init_sharing__("default");
+  const container = globalThis.someContainer; // or get the container somewhere else
   // Initialize the container, it may provide shared modules
   await container.init(__webpack_share_scopes__.default);
-  const module = await container.get('./module');
+  const module = await container.get("./module");
 })();
 ```
 
@@ -136,7 +136,7 @@ Example:
 function loadComponent(scope, module) {
   return async () => {
     // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
-    await __webpack_init_sharing__('default');
+    await __webpack_init_sharing__("default");
     const container = window[scope]; // or get the container somewhere else
     // Initialize the container, it may provide shared modules
     await container.init(__webpack_share_scopes__.default);
@@ -146,7 +146,7 @@ function loadComponent(scope, module) {
   };
 }
 
-loadComponent('abtests', 'test123');
+loadComponent("abtests", "test123");
 ```
 
 [See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
@@ -159,9 +159,9 @@ Generally, remotes are configured using URL's like in this example:
 module.exports = {
   plugins: [
     new ModuleFederationPlugin({
-      name: 'host',
+      name: "host",
       remotes: {
-        app1: 'app1@http://localhost:3001/remoteEntry.js',
+        app1: "app1@http://localhost:3001/remoteEntry.js",
       },
     }),
   ],
@@ -174,7 +174,7 @@ But you can also pass in a promise to this remote, which will be resolved at run
 module.exports = {
   plugins: [
     new ModuleFederationPlugin({
-      name: 'host',
+      name: "host",
       remotes: {
         app1: `promise new Promise(resolve => {
       const urlParams = new URLSearchParams(window.location.search)
@@ -231,12 +231,12 @@ Example:
 ```js
 module.exports = {
   entry: {
-    remote: './public-path',
+    remote: "./public-path",
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'remote', // this name needs to match with the entry name
-      exposes: ['./public-path'],
+      name: "remote", // this name needs to match with the entry name
+      exposes: ["./public-path"],
       // ...
     }),
   ],
@@ -254,8 +254,8 @@ export function set(value) {
 **src/index.js (host)**
 
 ```ts
-const publicPath = await import('remote/public-path');
-publicPath.set('/your-public-path');
+const publicPath = await import("remote/public-path");
+publicPath.set("/your-public-path");
 
 //bootstrap app  e.g. import('./bootstrap.js')
 ```
@@ -271,11 +271,11 @@ Example:
 ```js
 module.exports = {
   entry: {
-    remote: './setup-public-path',
+    remote: "./setup-public-path",
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'remote', // this name needs to match with the entry name
+      name: "remote", // this name needs to match with the entry name
       // ...
     }),
   ],
@@ -286,7 +286,7 @@ module.exports = {
 
 ```js
 // derive the publicPath with your own logic and set it with the __webpack_public_path__ API
-__webpack_public_path__ = document.currentScript.src + '/../';
+__webpack_public_path__ = `${document.currentScript.src}/../`;
 ```
 
 T> There is also an `'auto'` value available to [`output.publicPath`](/configuration/output/#outputpublicpath) which automatically determines the publicPath for you.
@@ -305,11 +305,12 @@ For example, your entry looked like this:
 
 **index.js**
 
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-ReactDOM.render(<App />, document.getElementById('root'));
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
 Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:

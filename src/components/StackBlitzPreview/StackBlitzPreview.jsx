@@ -1,15 +1,10 @@
-import PropTypes from 'prop-types';
-import openButton from '../../assets/open-in-stackblitz-button.svg';
-
-StackBlitzPreview.propTypes = {
-  description: PropTypes.string,
-  example: PropTypes.string,
-};
+import PropTypes from "prop-types";
+import openButton from "../../assets/open-in-stackblitz-button.svg";
 
 export default function StackBlitzPreview(props = {}) {
   const {
-    example = '',
-    description = 'Check out this guide live on StackBlitz.',
+    example = "",
+    description = "Check out this guide live on StackBlitz.",
   } = props;
 
   const url = `https://stackblitz.com/github/webpack/webpack.js.org/tree/main/examples/${example}`;
@@ -24,3 +19,8 @@ export default function StackBlitzPreview(props = {}) {
     </aside>
   );
 }
+
+StackBlitzPreview.propTypes = {
+  description: PropTypes.string,
+  example: PropTypes.string,
+};

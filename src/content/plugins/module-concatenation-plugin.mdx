@@ -43,23 +43,6 @@ As the article explains, webpack attempts to achieve partial scope hoisting. It 
 The following pseudo JavaScript explains the algorithm:
 
 ```js
-modules.forEach((module) => {
-  const group = new ModuleGroup({
-    root: module,
-  });
-  module.dependencies.forEach((dependency) => {
-    tryToAdd(group, dependency);
-  });
-  if (group.modules.length > 1) {
-    orderedModules = topologicalSort(group.modules);
-    concatenatedModule = new ConcatenatedModule(orderedModules);
-    chunk.add(concatenatedModule);
-    orderedModules.forEach((groupModule) => {
-      chunk.remove(groupModule);
-    });
-  }
-});
-
 function tryToAdd(group, module) {
   if (group.has(module)) {
     return true;
@@ -68,17 +51,35 @@ function tryToAdd(group, module) {
     return false;
   }
   const nextGroup = group;
-  const result = module.dependents.reduce((check, dependent) => {
-    return check && tryToAdd(nextGroup, dependent);
-  }, true);
+  const result = module.dependents.reduce(
+    (check, dependent) => check && tryToAdd(nextGroup, dependent),
+    true,
+  );
   if (!result) {
     return false;
   }
-  module.dependencies.forEach((dependency) => {
+  for (const dependency of module.dependencies) {
     tryToAdd(group, dependency);
-  });
+  }
   group.merge(nextGroup);
   return true;
+}
+
+for (const module of modules) {
+  const group = new ModuleGroup({
+    root: module,
+  });
+  for (const dependency of module.dependencies) {
+    tryToAdd(group, dependency);
+  }
+  if (group.modules.length > 1) {
+    orderedModules = topologicalSort(group.modules);
+    concatenatedModule = new ConcatenatedModule(orderedModules);
+    chunk.add(concatenatedModule);
+    for (const groupModule of orderedModules) {
+      chunk.remove(groupModule);
+    }
+  }
 }
 ```
 
@@ -88,7 +89,7 @@ When using the webpack CLI, the `--stats-optimization-bailout` flag will display
 
 ```js
 module.exports = {
-  //...
+  // ...
   stats: {
     // Display bailout reasons
     optimizationBailout: true,

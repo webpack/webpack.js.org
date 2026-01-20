@@ -23,17 +23,17 @@ To test a single loader, you can use `path` to `resolve` a local file within a r
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.js$/,
         use: [
           {
-            loader: path.resolve('path/to/loader.js'),
+            loader: path.resolve("path/to/loader.js"),
             options: {
               /* ... */
             },
@@ -50,12 +50,12 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 **webpack.config.js**
 
 ```js
-const path = require('path');
+const path = require("node:path");
 
 module.exports = {
-  //...
+  // ...
   resolveLoader: {
-    modules: ['node_modules', path.resolve(__dirname, 'loaders')],
+    modules: ["node_modules", path.resolve(__dirname, "loaders")],
   },
 };
 ```
@@ -86,12 +86,12 @@ In the following example, the `foo-loader` would be passed the raw resource and 
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.js/,
-        use: ['bar-loader', 'foo-loader'],
+        use: ["bar-loader", "foo-loader"],
       },
     ],
   },
@@ -144,14 +144,14 @@ Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) 
 **loader.js**
 
 ```js
-import { urlToRequest } from 'loader-utils';
-import { validate } from 'schema-utils';
+import { urlToRequest } from "loader-utils";
+import { validate } from "schema-utils";
 
 const schema = {
-  type: 'object',
+  type: "object",
   properties: {
     test: {
-      type: 'string',
+      type: "string",
     },
   },
 };
@@ -160,11 +160,11 @@ export default function (source) {
   const options = this.getOptions();
 
   validate(schema, options, {
-    name: 'Example Loader',
-    baseDataPath: 'options',
+    name: "Example Loader",
+    baseDataPath: "options",
   });
 
-  console.log('The request path', urlToRequest(this.resourcePath));
+  console.log("The request path", urlToRequest(this.resourcePath));
 
   // Apply some transformations to the source...
 
@@ -195,17 +195,17 @@ If a loader uses external resources (i.e. by reading from filesystem), they **mu
 **loader.js**
 
 ```js
-import path from 'path';
+import path from "node:path";
 
 export default function (source) {
-  var callback = this.async();
-  var headerPath = path.resolve('header.js');
+  const callback = this.async();
+  const headerPath = path.resolve("header.js");
 
   this.addDependency(headerPath);
 
-  fs.readFile(headerPath, 'utf-8', function (err, header) {
+  fs.readFile(headerPath, "utf8", (err, header) => {
     if (err) return callback(err);
-    callback(null, header + '\n' + source);
+    callback(null, `${header}\n${source}`);
   });
 }
 ```
@@ -232,7 +232,7 @@ Avoid generating common code in every module the loader processes. Instead, crea
 **src/loader-runtime.js**
 
 ```js
-const { someOtherModule } = require('./some-other-module');
+const { someOtherModule } = require("./some-other-module");
 
 module.exports = function runtime(params) {
   const x = params.y * 2;
@@ -244,7 +244,7 @@ module.exports = function runtime(params) {
 **src/loader.js**
 
 ```js
-import runtime from './loader-runtime.js';
+import runtime from "./loader-runtime.js";
 
 export default function loader(source) {
   // Custom loader logic
@@ -265,8 +265,8 @@ Don't insert absolute paths into the module code as they break hashing when the 
 JSON.stringify(
   loaderContext.utils.contextify(
     loaderContext.context || loaderContext.rootContext,
-    request
-  )
+    request,
+  ),
 );
 ```
 
@@ -298,10 +298,10 @@ npm install --save-dev jest babel-jest @babel/core @babel/preset-env
 module.exports = {
   presets: [
     [
-      '@babel/preset-env',
+      "@babel/preset-env",
       {
         targets: {
-          node: 'current',
+          node: "current",
         },
       },
     ],
@@ -317,7 +317,7 @@ Our loader will process `.txt` files and replace any instance of `[name]` with t
 export default function loader(source) {
   const options = this.getOptions();
 
-  source = source.replace(/\[name\]/g, options.name);
+  source = source.replaceAll(/\[name\]/, options.name);
 
   return `export default ${JSON.stringify(source)}`;
 }
@@ -340,9 +340,9 @@ npm install --save-dev webpack memfs
 **test/compiler.js**
 
 ```js
-import path from 'path';
-import webpack from 'webpack';
-import { createFsFromVolume, Volume } from 'memfs';
+import path from "node:path";
+import { Volume, createFsFromVolume } from "memfs";
+import webpack from "webpack";
 
 export default (fixture, options = {}) => {
   const compiler = webpack({
@@ -350,14 +350,14 @@ export default (fixture, options = {}) => {
     entry: `./${fixture}`,
     output: {
       path: path.resolve(__dirname),
-      filename: 'bundle.js',
+      filename: "bundle.js",
     },
     module: {
       rules: [
         {
           test: /\.txt$/,
           use: {
-            loader: path.resolve(__dirname, '../src/loader.js'),
+            loader: path.resolve(__dirname, "../src/loader.js"),
             options,
           },
         },
@@ -389,10 +389,10 @@ And now, finally, we can write our test and add an npm script to run it:
 /**
  * @jest-environment node
  */
-import compiler from './compiler.js';
+import compiler from "./compiler.js";
 
-test('Inserts name and outputs JavaScript', async () => {
-  const stats = await compiler('example.txt', { name: 'Alice' });
+test("Inserts name and outputs JavaScript", async () => {
+  const stats = await compiler("example.txt", { name: "Alice" });
   const output = stats.toJson({ source: true }).modules[0].source;
 
   expect(output).toBe('export default "Hey Alice!\\n"');

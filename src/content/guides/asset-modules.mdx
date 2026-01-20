@@ -89,21 +89,21 @@ By default, under the hood, the `asset` type does `__webpack_public_path__ + imp
 If you set the `__webpack_public_path__` in code, the way you need to achieve it so as not to break the `asset` loading logic is to make sure you run it as the first code in your app and not use a function to do so. An example of this would be having a file called `publicPath.js` with contents
 
 ```javascript
-__webpack_public_path__ = 'https://cdn.url.com';
+__webpack_public_path__ = "https://cdn.url.com";
 ```
 
 And then in your `webpack.config.js` updating your `entry` field to look like
 
 ```javascript
 module.exports = {
-  entry: ['./publicPath.js', './App.js'],
+  entry: ["./publicPath.js", "./App.js"],
 };
 ```
 
 Alternatively, you can do the following in your `App.js` without modifying your webpack config. The only downside is you have to enforce ordering here and that can collide with some linting tools.
 
 ```javascript
-import './publicPath.js';
+import "./publicPath.js";
 ```
 
 ## Resource type
@@ -133,7 +133,7 @@ module.exports = {
 **src/index.js**
 
 ```js
-import mainImage from './images/main.png';
+import mainImage from "./images/main.png";
 
 img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 ```
@@ -203,7 +203,7 @@ With this configuration all the `html` files will be emitted into a `static` dir
 
 **webpack.config.js**
 
-```js
+```diff
 const path = require('path');
 
 module.exports = {
@@ -226,7 +226,7 @@ module.exports = {
 **src/index.js**
 
 ```js
-import metroMap from './images/metro.svg';
+import metroMap from "./images/metro.svg";
 
 block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 ```
@@ -305,7 +305,7 @@ Hello world
 **src/index.js**
 
 ```js
-import exampleText from './example.txt';
+import exampleText from "./example.txt";
 
 block.textContent = exampleText; // 'Hello world';
 ```
@@ -315,7 +315,7 @@ Alternative usage:
 **src/index.js**
 
 ```js
-import exampleText from './example.txt' with { type: 'text' };
+import exampleText from "./example.txt" with { type: "text" };
 
 block.textContent = exampleText; // 'Hello world';
 ```
@@ -331,7 +331,7 @@ T> You don't need to add rules when using `const file = new URL('./file.ext', im
 **src/index.js**
 
 ```js
-const logo = new URL('./logo.svg', import.meta.url);
+const logo = new URL("./logo.svg", import.meta.url);
 ```
 
 Depending on the [`target`](/configuration/target/) in your configuration, webpack would compile the above code into a different result:
@@ -339,17 +339,17 @@ Depending on the [`target`](/configuration/target/) in your configuration, webpa
 ```js
 // target: web
 new URL(
-  __webpack_public_path__ + 'logo.svg',
-  document.baseURI || self.location.href
+  `${__webpack_public_path__}logo.svg`,
+  document.baseURI || self.location.href,
 );
 
 // target: webworker
-new URL(__webpack_public_path__ + 'logo.svg', self.location);
+new URL(`${__webpack_public_path__}logo.svg`, self.location);
 
 // target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
 new URL(
-  __webpack_public_path__ + 'logo.svg',
-  require('url').pathToFileUrl(__filename)
+  `${__webpack_public_path__}logo.svg`,
+  require("node:url").pathToFileUrl(__filename),
 );
 ```
 
@@ -358,10 +358,10 @@ As of webpack 5.38.0, [Data URLs](https://developer.mozilla.org/en-US/docs/Web/H
 **src/index.js**
 
 ```js
-const url = new URL('data:,', import.meta.url);
-console.log(url.href === 'data:,');
-console.log(url.protocol === 'data:');
-console.log(url.pathname === ',');
+const url = new URL("data:,", import.meta.url);
+console.log(url.href === "data:,");
+console.log(url.protocol === "data:");
+console.log(url.pathname === ",");
 ```
 
 ## Asset type
@@ -456,9 +456,9 @@ Hello world
 **src/index.js**
 
 ```js
-import exampleText from './example.txt';
+import exampleText from "./example.txt";
 
-const decoder = new TextDecoder('utf-8');
+const decoder = new TextDecoder("utf-8");
 const textString = decoder.decode(exampleText); // 'Uint8Array'
 
 block.textContent = exampleText; // 'Hello world';
@@ -469,9 +469,9 @@ Alternative usage:
 **src/index.js**
 
 ```js
-import exampleText from './example.txt' with { type: 'bytes' };
+import exampleText from "./example.txt" with { type: "bytes" };
 
-const decoder = new TextDecoder('utf-8');
+const decoder = new TextDecoder("utf-8");
 const textString = decoder.decode(exampleText); // 'Uint8Array'
 
 block.textContent = exampleText; // 'Hello world';
@@ -556,7 +556,7 @@ module.exports = {
     rules: [
       {
         test: /\.png$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
           emit: false,
         },

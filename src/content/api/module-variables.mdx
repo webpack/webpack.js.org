@@ -60,9 +60,9 @@ export const someValue = 42;
 export const anObject = {
   x: 123,
 };
-export const aFunction = function doSomething() {
+export function doSomething() {
   // Do something
-};
+}
 ```
 
 ## global (NodeJS)
@@ -138,8 +138,8 @@ Returns the same value as `require.context` but only for `javascript/auto` and `
       prefetch?: boolean | number;
       chunkName?: string;
       exports?: string | string[][];
-      mode?: 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once';
-    }
+      mode?: "sync" | "eager" | "weak" | "lazy" | "lazy-once";
+    },
   ) => webpack.Context;
   ```
 
@@ -147,10 +147,10 @@ Returns the same value as `require.context` but only for `javascript/auto` and `
 - Example:
 
   ```js
-  const contextRequire = import.meta.webpackContext('.', {
+  const contextRequire = import.meta.webpackContext(".", {
     recursive: false,
     regExp: /two/,
-    mode: 'weak',
+    mode: "weak",
     exclude: /three/,
   });
   ```
@@ -170,13 +170,13 @@ If used inside an expression that is parsed by the Parser, the configuration opt
 The resource query of the current module. If the following `import` call was made, then the query string would be available in `file.js`.
 
 ```javascript
-import 'file.js?test';
+import "file.js?test";
 ```
 
 **file.js**
 
 ```javascript
-__resourceQuery === '?test';
+__resourceQuery === "?test";
 ```
 
 ## \_\_webpack_public_path\_\_ (webpack-specific)
@@ -197,20 +197,20 @@ Example to load chunks from alternate public path when one failed:
 
 ```js
 const originalLoad = __webpack_chunk_load__;
-const publicPaths = ['a', 'b', 'c'];
+const publicPaths = ["a", "b", "c"];
 __webpack_chunk_load__ = async (id) => {
   let error;
   for (const path of publicPaths) {
     __webpack_public_path__ = path;
     try {
       return await originalLoad(id);
-    } catch (e) {
-      error = e;
+    } catch (err) {
+      error = err;
     }
   }
   throw error;
 };
-import('./module-a').then((moduleA) => {
+import("./module-a").then((moduleA) => {
   // now webpack will use the custom __webpack_chunk_load__ to load chunk
 });
 ```
@@ -248,7 +248,7 @@ const oldFn = __webpack_get_script_filename__;
 
 __webpack_get_script_filename__ = (chunkId) => {
   const filename = oldFn(chunkId);
-  return filename + '.changed';
+  return `${filename}.changed`;
 };
 ```
 
@@ -287,7 +287,7 @@ In modules, `__webpack_exports_info__` is available to allow exports introspecti
 Test whether or not the given module is bundled by webpack.
 
 ```js
-if (__webpack_is_included__('./module-a.js')) {
+if (__webpack_is_included__("./module-a.js")) {
   // do something
 }
 ```
@@ -301,7 +301,7 @@ Change base URI at runtime.
 - Example:
 
   ```js
-  __webpack_base_uri__ = 'https://example.com';
+  __webpack_base_uri__ = "https://example.com";
   ```
 
 ## \_\_webpack_runtime_id\_\_
@@ -313,7 +313,7 @@ This is a webpack specific feature and it's available since webpack 5.25.0.
 **src/index.js**
 
 ```js
-console.log(__webpack_runtime_id__ === 'main');
+console.log(__webpack_runtime_id__ === "main");
 ```
 
 ## DEBUG (webpack-specific)

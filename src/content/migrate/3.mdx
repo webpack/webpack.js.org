@@ -320,7 +320,8 @@ If you abused the CLI to pass custom arguments to the configuration like so:
 
 ```js
 // webpack.config.js
-var customStuff = process.argv.indexOf('--custom-stuff') >= 0;
+const customStuff = process.argv.includes("--custom-stuff");
+
 /* ... */
 module.exports = config;
 ```
@@ -333,7 +334,7 @@ Instead there is an interface for passing arguments to the configuration. This s
 
 ```js
 module.exports = function (env) {
-  var customStuff = env.customStuff;
+  const { customStuff } = env;
   /* ... */
   return config;
 };
@@ -353,12 +354,12 @@ You can _no longer_ configure a loader with a custom property in the `webpack.co
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
       },
     ],
   },
@@ -373,12 +374,12 @@ Good question. Well, strictly speaking it's 2 possible things; both ways to conf
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader?' + JSON.stringify({ transpileOnly: false }),
+        loader: `ts-loader?${JSON.stringify({ transpileOnly: false })}`,
       },
     ],
   },
@@ -389,12 +390,12 @@ But it can also be a separately specified object that's supplied alongside a loa
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
         options: { transpileOnly: false },
       },
     ],
@@ -440,8 +441,8 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 In webpack 1, you could use [`require.ensure()`](/api/module-methods/#requireensure) as a method to lazily-load chunks for your application:
 
 ```javascript
-require.ensure([], function (require) {
-  var foo = require('./module');
+require.ensure([], (require) => {
+  const foo = require("./module");
 });
 ```
 
@@ -449,12 +450,10 @@ The ES2015 Loader spec defines [`import()`](/api/module-methods/#import-1) as me
 
 ```js
 function onClick() {
-  import('./module')
-    .then((module) => {
-      return module.default;
-    })
+  import("./module")
+    .then((module) => module.default)
     .catch((err) => {
-      console.log('Chunk loading failed');
+      console.log("Chunk loading failed");
     });
 }
 ```
@@ -470,7 +469,7 @@ It's possible to pass a partial expression to `import()`. This is handled simila
 ```js
 function route(path, query) {
   return import(`./routes/${path}/route`).then(
-    (route) => new route.Route(query)
+    (route) => new route.Route(query),
   );
 }
 // This creates a separate chunk for each possible route
@@ -482,20 +481,25 @@ As for AMD and CommonJS you can freely mix all three module types (even within t
 
 ```javascript
 // CommonJS consuming ES2015 Module
-var book = require('./book');
+const book = require("./book");
 
 book.currentPage;
 book.readPage();
-book.default === 'This is a book';
+book.default === "This is a book";
 ```
 
 ```javascript
 // ES2015 Module consuming CommonJS
-import fs from 'fs'; // module.exports map to default
-import { readFileSync } from 'fs'; // named exports are read from returned object+
+import fs from "node:fs"; // module.exports map to default
 
-typeof fs.readFileSync === 'function';
-typeof readFileSync === 'function';
+typeof fs.readFileSync === "function";
+```
+
+```javascript
+// ES2015 Module consuming CommonJS
+import { readFileSync } from "node:fs"; // named exports are read from returned object+
+
+typeof readFileSync === "function";
 ```
 
 It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or `babel-loader` options.
@@ -530,7 +534,7 @@ Webpack now supports returning a `Promise` from the configuration file. This all
 ```js
 module.exports = function () {
   return fetchLangs().then((lang) => ({
-    entry: '...',
+    entry: "...",
     // ...
     plugins: [new DefinePlugin({ LANGUAGE: lang })],
   }));
@@ -543,7 +547,7 @@ Webpack now supports more things to match on for loaders.
 
 ```js
 module.exports = {
-  //...
+  // ...
   module: {
     rules: [
       {

@@ -182,45 +182,46 @@ To enable HMR, you also need to modify your webpack configuration object to incl
 **dev-server.js**
 
 ```javascript
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const webpack = require('webpack');
-const webpackDevServer = require('webpack-dev-server');
+const path = require("node:path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const WebpackDevServer = require("webpack-dev-server");
 
 const config = {
-  mode: 'development',
+  mode: "development",
   entry: [
     // Runtime code for hot module replacement
-    'webpack/hot/dev-server.js',
+    "webpack/hot/dev-server.js",
     // Dev server client for web socket transport, hot and live reload logic
-    'webpack-dev-server/client/index.js?hot=true&live-reload=true',
+    "webpack-dev-server/client/index.js?hot=true&live-reload=true",
     // Your entry
-    './src/index.js',
+    "./src/index.js",
   ],
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   plugins: [
     // Plugin for hot module replacement
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Hot Module Replacement',
+      title: "Hot Module Replacement",
     }),
   ],
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
 };
 const compiler = webpack(config);
 
 // `hot` and `client` options are disabled because we added them manually
-const server = new webpackDevServer({ hot: false, client: false }, compiler);
+const server = new WebpackDevServer({ hot: false, client: false }, compiler);
 
-(async () => {
+try {
   await server.start();
-  console.log('dev server is running');
-})();
+  console.log("dev server is running");
+} catch (err) {
+  throw new Error(`Failed to start dev server: ${err.message}`, { cause: err });
+}
 ```
 
 See the [full documentation of `webpack-dev-server` Node.js API](/api/webpack-dev-server/).

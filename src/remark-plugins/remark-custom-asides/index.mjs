@@ -2,16 +2,16 @@
  * based on https://github.com/montogeek/remark-custom-blockquotes
  */
 
-import { visit } from 'unist-util-visit';
-export default function customAsides(
+import { visit } from "unist-util-visit";
+
+export default function remarkCustomAsides(
   options = {
     mapping: {},
-  }
+  },
 ) {
   const { mapping } = options;
+
   return function transformer(tree) {
-    // looking for `paragraph` node
-    visit(tree, 'paragraph', visitor);
     function visitor(node) {
       const { children } = node;
       const textNode = children[0].value;
@@ -23,12 +23,12 @@ export default function customAsides(
       const className = mapping[textNode.slice(0, 2)];
       // >This is a joke <- ignore this
       // >T hi there
-      const hasPostfixWhitespace = textNode.indexOf(' ') === 2;
+      const hasPostfixWhitespace = textNode.indexOf(" ") === 2;
       if (className && hasPostfixWhitespace) {
         // use `aside` element instead of `blockquote`
         // which I believe is more suitable as per https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside
         node.data = {
-          hName: 'aside',
+          hName: "aside",
           hProperties: {
             className,
           },
@@ -37,7 +37,7 @@ export default function customAsides(
         // remove custom characters from paragraph
         node.children = [
           {
-            type: 'heading',
+            type: "heading",
             depth: 6,
             data: {
               // see https://github.com/syntax-tree/mdast-util-to-hast#hname
@@ -48,13 +48,13 @@ export default function customAsides(
             },
             children: [
               {
-                type: 'text',
+                type: "text",
                 value: `${className}`,
               },
             ],
           },
           {
-            type: 'paragraph',
+            type: "paragraph",
             children: [
               {
                 ...children[0],
@@ -66,5 +66,8 @@ export default function customAsides(
         ];
       }
     }
+
+    // looking for `paragraph` node
+    visit(tree, "paragraph", visitor);
   };
 }
