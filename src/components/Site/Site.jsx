@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 // Import Utilities
+/* eslint import/no-unresolved: ["error", { ignore: ["_content\.json$"] }] */
 import Content from "../../_content.json";
 import OgImage from "../../assets/icon-pwa-512x512.png";
 import Logo from "../../assets/logo-on-white-bg.svg";

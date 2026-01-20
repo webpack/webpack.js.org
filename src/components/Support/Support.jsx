@@ -7,6 +7,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import SmallIcon from "../../assets/icon-square-small-slack.png";
 import Tooltip from "../Tooltip/Tooltip.jsx";
 import Additional from "./AdditionalSupporters.mjs";
+/* eslint import/no-unresolved: ["error", { ignore: ["_supporters\.json$"] }] */
 import Backers from "./_supporters.json";
 
 // Load Styling
