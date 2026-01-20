@@ -73,6 +73,8 @@
     "eval": "^0.1.5"
   },
   "dependencies": {
+    "@docsearch/core": "^4.5.0",
+    "@docsearch/css": "^4.5.0",
     "@docsearch/react": "^4.5.0",
     "@react-spring/web": "^10.0.3",
     "path-browserify": "^1.0.1",
