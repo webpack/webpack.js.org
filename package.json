@@ -68,6 +68,7 @@
     ]
   },
   "resolutions": {
+    "sitemap-static/minimist": "1.2.5",
     "eval": "^0.1.5"
   },
   "dependencies": {
