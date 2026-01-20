@@ -44,7 +44,7 @@ self.addEventListener("install", (event) => {
           } catch (err) {
             console.warn("[sw] Failed to precache:", url, err);
           }
-        })
+        }),
       );
     })(),
   );
@@ -55,11 +55,11 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
       return cache.keys().then((keys) => {
-        keys.forEach((request) => {
+       for (const request of keys) {
           if (!manifestURLs.includes(request.url)) {
             cache.delete(request);
           }
-        })
+        }
       });
     }),
   );
