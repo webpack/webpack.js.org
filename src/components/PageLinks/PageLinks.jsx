@@ -1,4 +1,5 @@
-import Url from "node:url";
+// eslint-disable-next-line n/prefer-node-protocol
+import Url from "url";
 import PropTypes from "prop-types";
 
 const baseURL = "https://github.com/webpack/webpack.js.org/edit/main/";

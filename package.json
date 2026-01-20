@@ -41,6 +41,7 @@
     "serve-dist": "http-server --port 4200 dist/",
     "test": "npm run lint",
     "lint": "run-s lint:*",
+    "lint:prettier": "prettier --cache --list-different --ignore-unknown .",
     "lint:js": "eslint --cache --cache-location .cache/.eslintcache .",
     "lint:markdown": "markdownlint --config ./.markdownlint.json '**/*.{md,mdx}'",
     "lint:prose": "vale --config='.vale.ini' src/content",
@@ -60,7 +61,7 @@
       "npm run lint:js"
     ],
     "*.{md,mdx}": [
-      "npm run lint-markdown"
+      "npm run lint:markdown"
     ],
     "*.{js,mjs,jsx,css,scss,md,mdx,json}": [
       "prettier --write"

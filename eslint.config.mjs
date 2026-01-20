@@ -10,6 +10,7 @@ export default defineConfig([
     "**/examples/",
     "src/content/loaders/_*.mdx",
     "src/content/plugins/_*.mdx",
+    "src/content/contribute/Governance-*.mdx",
     ".github/**/*.md",
     "**/README.md",
     "src/mdx-components.mjs",
