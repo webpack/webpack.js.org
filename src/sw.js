@@ -31,7 +31,7 @@ const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
 });
 self.addEventListener("install", (event) => {
   event.waitUntil(
-   (async () => {
+    (async () => {
       const cache = await caches.open(cacheName);
 
       await Promise.all(
@@ -48,14 +48,15 @@ self.addEventListener("install", (event) => {
       );
     })(),
   );
-  });
+});
+
 
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
       return cache.keys().then((keys) => {
-       for (const request of keys) {
+        for (const request of keys) {
           if (!manifestURLs.includes(request.url)) {
             cache.delete(request);
           }
@@ -64,6 +65,7 @@ self.addEventListener("activate", (event) => {
     }),
   );
 });
+
 
 registerRoute(
   ({ url }) => manifestURLs.includes(url.href),
