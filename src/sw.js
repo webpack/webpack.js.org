@@ -2,6 +2,7 @@
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { cacheNames } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";
+
 import {
   registerRoute,
   setCatchHandler,
@@ -12,7 +13,6 @@ import {
   NetworkOnly,
   StaleWhileRevalidate,
 } from "workbox-strategies";
-/* eslint-enable import/no-extraneous-dependencies */
 
 const cacheName = cacheNames.runtime;
 
@@ -25,13 +25,21 @@ const otherManifest = [
     url: "/app-shell/index.html",
   },
 ];
-const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
-  const url = new URL(entry.url, self.location);
-  return url.href;
-});
+const manifestURLs = [
+  ...new Set(
+    [...manifest, ...otherManifest].map((entry) => {
+      const url = new URL(entry.url, self.location);
+      return url.href;
+    }),
+  ),
+];
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(manifestURLs)),
+    (async () => {
+      const cache = await caches.open(cacheName);
+
+      await Promise.allSettled(manifestURLs.map((url) => cache.add(url)));
+    })(),
   );
 });
 
