@@ -120,7 +120,7 @@
     "jest": "^30.2.0",
     "lightningcss": "^1.31.0",
     "lint-staged": "^16.2.7",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "markdownlint-cli": "^0.47.0",
     "mdast-util-to-string": "^4.0.0",
     "mini-css-extract-plugin": "^2.10.0",
