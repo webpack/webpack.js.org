@@ -8,8 +8,8 @@ Webpack 5.105 brings several improvements, both in code generation and bug fixes
 
 - [Automatic Module Resolution for Web Workers](#automatic-module-resolution-for-web-workers)
 - [Preserving Custom `import.meta` Properties](#preserving-custom-importmeta-properties)
-- [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
 - [Better control of your source maps in `devtool`](#better-control-of-your-source-maps-in-devtool)
+- [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
 
 ---
 
@@ -72,10 +72,6 @@ module.exports = {
 
 This way, even without `output.module: true`, any custom import.meta property, such as `import.meta.customProp`, will be preserved in the build.
 
-## Cleaner ESM output for Node.js and modern builds
-
-This improvement in Webpack optimizes the handling and representation of Node.js native modules (such as `fs`, `path`, or `crypto`) during bundling, especially when using the [`output.module`](/configuration/output/#outputmodule) option in the configuration. When `output.module: true` is enabled, Webpack now generates imports of native modules using ES module syntax `import ... from "module"` instead of CommonJS `require("module")`, regardless of whether the code will run in a web or Node.js environment.
-
 ## Better control of your source maps in `devtool`
 
 Webpack now allows the `devtool` option to accept both a **string** and an array of objects for advanced configurations.
@@ -112,6 +108,10 @@ In this example, standard source maps are applied to all modules, and inline sou
 This new option is especially useful if you are using Webpack’s [experimental CSS compilation feature](/configuration/experiments/#experimentscss), as it gives you greater control over the debugging process and improves integration with external tools.
 
 It’s worth noting that the classic string syntax, like `devtool: "source-map"`, remains fully valid and supported.
+
+## Cleaner ESM output for Node.js and modern builds
+
+This improvement in Webpack optimizes the handling and representation of Node.js native modules (such as `fs`, `path`, or `crypto`) during bundling, especially when using the [`output.module`](/configuration/output/#outputmodule) option in the configuration. When `output.module: true` is enabled, Webpack now generates imports of native modules using ES module syntax `import ... from "module"` instead of CommonJS `require("module")`, regardless of whether the code will run in a web or Node.js environment.
 
 ## Other improvements
 
