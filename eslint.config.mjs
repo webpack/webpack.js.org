@@ -83,6 +83,7 @@ export default defineConfig([
       "import/no-amd": "off",
       "import/extensions": "off",
       "import/default": "off",
+      "unicorn/relative-url-style": "off",
       "unicorn/prefer-top-level-await": "off",
     },
   },

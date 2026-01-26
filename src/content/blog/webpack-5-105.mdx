@@ -6,16 +6,43 @@ contributors:
 
 Webpack 5.105 brings several improvements, both in code generation and bug fixes.
 
+- [Automatic Module Resolution for Web Workers](#automatic-module-resolution-for-web-workers)
 - [`import.meta` is now more flexible and handles dynamic properties at runtime](#importmeta-is-now-more-flexible-and-handles-dynamic-properties-at-runtime)
-- [Webpack improves Worker resolution](#webpack-improves-worker-resolution)
 - [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
 - [Better control of your source maps in `devtool`](#better-control-of-your-source-maps-in-devtool)
 
 ---
 
-## `import.meta` is now more flexible and handles dynamic properties at runtime
+## Automatic Module Resolution for Web Workers
 
-## Webpack improves Worker resolution
+When importing a package specifically to be used in a Web Worker in Webpack, module resolution can prioritize files like `index.worker.js` over `index.js` when using [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) defined in the `exports` field of `package.json`.
+
+This means that if you define conditions such as `"worker"` in your package's exports, Webpack will automatically select the appropriate version, like `index.worker.js`, whenever the package is imported inside a worker context. There’s no need to modify the `resolve.conditionNames` option or make additional Webpack configuration changes; you just need to specify the conditions correctly in `package.json`.
+
+For example, in `package.json`:
+
+```json
+{
+  "name": "foo",
+  "exports": {
+    ".": {
+      "worker": "./index.worker.js",
+      "default": "./index.js"
+    }
+  }
+}
+```
+
+Now, when importing the `foo` package inside a Worker, Webpack will automatically choose the `index.worker.js` file according to the export conditions:
+
+```js
+// This import is inside a Worker context, so Webpack uses index.worker.js
+const worker = new Worker(new URL("foo", import.meta.url), {
+  type: "module",
+});
+```
+
+## `import.meta` is now more flexible and handles dynamic properties at runtime
 
 ## Cleaner ESM output for Node.js and modern builds
 
