@@ -46,6 +46,8 @@ const worker = new Worker(new URL("foo", import.meta.url), {
 
 ## Cleaner ESM output for Node.js and modern builds
 
+This improvement in Webpack optimizes the handling and representation of Node.js native modules (such as `fs`, `path`, or `crypto`) during bundling, especially when using the [`output.module`](/configuration/output/#outputmodule) option in the configuration. When `output.module: true` is enabled, Webpack now generates imports of native modules using ES module syntax `import ... from "module"` instead of CommonJS `require("module")`, regardless of whether the code will run in a web or Node.js environment.
+
 ## Better control of your source maps in `devtool`
 
 ## Other improvements
