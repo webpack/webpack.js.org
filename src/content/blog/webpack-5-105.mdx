@@ -7,7 +7,7 @@ contributors:
 Webpack 5.105 brings several improvements, both in code generation and bug fixes.
 
 - [Automatic Module Resolution for Web Workers](#automatic-module-resolution-for-web-workers)
-- [`import.meta` is now more flexible and handles dynamic properties at runtime](#importmeta-is-now-more-flexible-and-handles-dynamic-properties-at-runtime)
+- [Preserving Custom `import.meta` Properties](#preserving-custom-importmeta-properties)
 - [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
 - [Better control of your source maps in `devtool`](#better-control-of-your-source-maps-in-devtool)
 
@@ -42,7 +42,35 @@ const worker = new Worker(new URL("foo", import.meta.url), {
 });
 ```
 
-## `import.meta` is now more flexible and handles dynamic properties at runtime
+## Preserving Custom `import.meta` Properties
+
+Webpack now preserves custom `import.meta` properties during bundling when [`output.module`](/configuration/output/#outputmodule) is enabled. Previously, Webpack would remove any unknown `import.meta` properties (such as `import.meta.customProp`), causing the loss of contextual or tool-specific information in the build.
+
+With this change, any non-standard property you add to `import.meta` will remain intact in the generated code, allowing the use of custom meta-information or additional signals in modern applications.
+
+```js
+if (!import.meta.UNKNOWN_PROPERTY) {
+  // runtime assignment
+  import.meta.UNKNOWN_PROPERTY = "HELLO";
+}
+```
+
+If `output.module` is not enabled, Webpack will continue to remove unknown properties unless you explicitly indicate otherwise. To preserve them manually, you can configure [`module.parser.javascript.importMeta`](http://localhost:3000/configuration/module/#moduleparserjavascriptimportmeta) as 'preserve-unknown' in your webpack.config.js:
+
+```js
+// webpack.config.js
+module.exports = {
+  module: {
+    parser: {
+      javascript: {
+        importMeta: "preserve-unknown",
+      },
+    },
+  },
+};
+```
+
+This way, even without `output.module: true`, any custom import.meta property, such as `import.meta.customProp`, will be preserved in the build.
 
 ## Cleaner ESM output for Node.js and modern builds
 
