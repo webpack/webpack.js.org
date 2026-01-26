@@ -8,15 +8,17 @@ Webpack 5.105 brings several improvements, both in code generation and bug fixes
 
 ## `import.meta` is now more flexible and handles dynamic properties at runtime
 
+## Webpack improves Worker resolution
+
 ## Cleaner ESM output for Node.js and modern builds
 
 ## Better control of your source maps in `devtool`
 
 ## Other improvements
 
-- TODO: Webpack-dev-server
-- TODO: Cambios en webpack-bundle-analyzer
-- TODO: Cambios en mini-css-extract-plugin
+- Webpack-dev-server has released a new version to update dependencies that had reported transitive vulnerabilities, so updating is recommended. Additionally, the option to close the error overlay by pressing the ESC key has been added, and several bugs have been fixed. Check the [release for more information](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
+- Webpack-bundle-analyzer has received important improvements and fixes for the user experience. Visual issues with tooltips in dark mode have been resolved, and the analysis of bundles using IIFE has been made more robust, preventing errors. Additionally, support for Zstandard compression has been added, available only on Node.js 22.15 or higher. Check the [changelog for more information](https://github.com/webpack/webpack-bundle-analyzer/blob/main/CHANGELOG.md)
+- Mini-css-extract-plugin introduces new features and bug fixes. Among the main changes, the plugin now respects the `output.cssFilename` and `output.cssChunkFilename` options, allowing more precise control over the names of the generated CSS files. Additionally, a bug was fixed that prevented the generation of the `contentHash` for a chunk when the CSS module set had zero size, thus avoiding unnecessary hashes in those cases. Check the [release for more information](https://github.com/webpack/mini-css-extract-plugin/releases/tag/v2.10.0)
 
 ## Bug fixes
 
