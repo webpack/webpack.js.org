@@ -78,6 +78,41 @@ This improvement in Webpack optimizes the handling and representation of Node.js
 
 ## Better control of your source maps in `devtool`
 
+Webpack now allows the `devtool` option to accept both a **string** and an array of objects for advanced configurations.
+
+Each object in the array can include:
+
+- `type`: which can be `"all"`, `"css"`, or `"javascript"`.
+- `use`: where you define the type of source map to generate.
+
+This enables specifying different types of source maps for different resources in your project. For example:
+
+```js
+// webpack.config.js
+module.exports = {
+  target: ["web", "node"],
+  experiments: {
+    css: true,
+  },
+  devtool: [
+    {
+      type: "javascript",
+      use: "source-map",
+    },
+    {
+      type: "css",
+      use: "inline-source-map",
+    },
+  ],
+};
+```
+
+In this example, standard source maps are applied to all modules, and inline source maps are used specifically for CSS files.
+
+This new option is especially useful if you are using Webpack’s [experimental CSS compilation feature](/configuration/experiments/#experimentscss), as it gives you greater control over the debugging process and improves integration with external tools.
+
+It’s worth noting that the classic string syntax, like `devtool: "source-map"`, remains fully valid and supported.
+
 ## Other improvements
 
 - Webpack-dev-server has released a new version to update dependencies that had reported transitive vulnerabilities, so updating is recommended. Additionally, the option to close the error overlay by pressing the ESC key has been added, and several bugs have been fixed. Check the [release for more information](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
