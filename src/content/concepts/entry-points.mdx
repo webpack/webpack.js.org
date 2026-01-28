@@ -51,6 +51,22 @@ module.exports = {
     filename: "bundle.js",
   },
 };
+
+When an array is provided for an entry point, webpack still creates a **single entry chunk**.
+All modules in the array are loaded in the given order and combined into the same dependency graph.
+
+This pattern is commonly used to inject additional code before the main application entry,
+such as polyfills or development-only tools, without manually importing them in the application source.
+
+**Example: Injecting a polyfill**
+
+```js
+module.exports = {
+  entry: {
+    main: ['@babel/polyfill', './src/index.js'],
+  },
+};
+
 ```
 
 Single Entry Syntax is a great choice when you are looking to quickly set up a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
@@ -211,4 +227,4 @@ module.exports = {
 
 **Why?** In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do things like using [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increases.
 
-T> As a rule of thumb: Use exactly one entry point for each HTML document. See the issue [described here](https://bundlers.tooling.report/code-splitting/multi-entry/#webpack) for more details.
+
