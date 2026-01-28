@@ -1,0 +1,129 @@
+---
+title: Webpack 5.105 (2026-01-30)
+contributors:
+  - bjohansebas
+---
+
+Webpack 5.105 brings several improvements, both in code generation and bug fixes.
+
+- [Automatic Module Resolution for Web Workers](#automatic-module-resolution-for-web-workers)
+- [Preserving Custom `import.meta` Properties](#preserving-custom-importmeta-properties)
+- [Better control of your source maps in `devtool`](#better-control-of-your-source-maps-in-devtool)
+- [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
+
+---
+
+## Automatic Module Resolution for Web Workers
+
+When importing a package specifically to be used in a Web Worker in Webpack, module resolution can prioritize files like `index.worker.js` over `index.js` when using [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) defined in the `exports` field of `package.json`.
+
+This means that if you define conditions such as `"worker"` in your package's exports, Webpack will automatically select the appropriate version, like `index.worker.js`, whenever the package is imported inside a worker context. There’s no need to modify the `resolve.conditionNames` option or make additional Webpack configuration changes; you just need to specify the conditions correctly in `package.json`.
+
+For example, in `package.json`:
+
+```json
+{
+  "name": "foo",
+  "exports": {
+    ".": {
+      "worker": "./index.worker.js",
+      "default": "./index.js"
+    }
+  }
+}
+```
+
+Now, when importing the `foo` package inside a Worker, Webpack will automatically choose the `index.worker.js` file according to the export conditions:
+
+```js
+// This import is inside a Worker context, so Webpack uses index.worker.js
+const worker = new Worker(new URL("foo", import.meta.url), {
+  type: "module",
+});
+```
+
+## Preserving Custom `import.meta` Properties
+
+Webpack now preserves custom `import.meta` properties during bundling when [`output.module`](/configuration/output/#outputmodule) is enabled. Previously, Webpack would remove any unknown `import.meta` properties (such as `import.meta.customProp`), causing the loss of contextual or tool-specific information in the build.
+
+With this change, any non-standard property you add to `import.meta` will remain intact in the generated code, allowing the use of custom meta-information or additional signals in modern applications.
+
+```js
+if (!import.meta.UNKNOWN_PROPERTY) {
+  // runtime assignment
+  import.meta.UNKNOWN_PROPERTY = "HELLO";
+}
+```
+
+If `output.module` is not enabled, Webpack will continue to remove unknown properties unless you explicitly indicate otherwise. To preserve them manually, you can configure [`module.parser.javascript.importMeta`](http://localhost:3000/configuration/module/#moduleparserjavascriptimportmeta) as 'preserve-unknown' in your webpack.config.js:
+
+```js
+// webpack.config.js
+module.exports = {
+  module: {
+    parser: {
+      javascript: {
+        importMeta: "preserve-unknown",
+      },
+    },
+  },
+};
+```
+
+This way, even without `output.module: true`, any custom import.meta property, such as `import.meta.customProp`, will be preserved in the build.
+
+## Better control of your source maps in `devtool`
+
+Webpack now allows the `devtool` option to accept both a **string** and an array of objects for advanced configurations.
+
+Each object in the array can include:
+
+- `type`: which can be `"all"`, `"css"`, or `"javascript"`.
+- `use`: where you define the type of source map to generate.
+
+This enables specifying different types of source maps for different resources in your project. For example:
+
+```js
+// webpack.config.js
+module.exports = {
+  target: ["web", "node"],
+  experiments: {
+    css: true,
+  },
+  devtool: [
+    {
+      type: "javascript",
+      use: "source-map",
+    },
+    {
+      type: "css",
+      use: "inline-source-map",
+    },
+  ],
+};
+```
+
+In this example, standard source maps are applied to all modules, and inline source maps are used specifically for CSS files.
+
+This new option is especially useful if you are using Webpack’s [experimental CSS compilation feature](/configuration/experiments/#experimentscss), as it gives you greater control over the debugging process and improves integration with external tools.
+
+It’s worth noting that the classic string syntax, like `devtool: "source-map"`, remains fully valid and supported.
+
+## Cleaner ESM output for Node.js and modern builds
+
+This improvement in Webpack optimizes the handling and representation of Node.js native modules (such as `fs`, `path`, or `crypto`) during bundling, especially when using the [`output.module`](/configuration/output/#outputmodule) option in the configuration. When `output.module: true` is enabled, Webpack now generates imports of native modules using ES module syntax `import ... from "module"` instead of CommonJS `require("module")`, regardless of whether the code will run in a web or Node.js environment.
+
+## Other improvements
+
+- Webpack-dev-server has released a new version to update dependencies that had reported transitive vulnerabilities, so updating is recommended. Additionally, the option to close the error overlay by pressing the ESC key has been added, and several bugs have been fixed. Check the [release for more information](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
+- Webpack-bundle-analyzer has received important improvements and fixes for the user experience. Visual issues with tooltips in dark mode have been resolved, and the analysis of bundles using IIFE has been made more robust, preventing errors. Additionally, support for Zstandard compression has been added, available only on Node.js 22.15 or higher. Check the [changelog for more information](https://github.com/webpack/webpack-bundle-analyzer/blob/main/CHANGELOG.md)
+- Mini-css-extract-plugin introduces new features and bug fixes. Among the main changes, the plugin now respects the `output.cssFilename` and `output.cssChunkFilename` options, allowing more precise control over the names of the generated CSS files. Additionally, a bug was fixed that prevented the generation of the `contentHash` for a chunk when the CSS module set had zero size, thus avoiding unnecessary hashes in those cases. Check the [release for more information](https://github.com/webpack/mini-css-extract-plugin/releases/tag/v2.10.0)
+
+## Bug fixes
+
+Several bug fixes have been resolved since version [5.104](https://github.com/webpack/webpack/releases/tag/v5.104.0). Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for more details
+
+## Thanks
+
+Many thanks to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring) for helping make Webpack 5.105 possible, whether by
+contributing code, documentation, or supporting us as sponsors.
