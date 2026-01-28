@@ -31,26 +31,37 @@ const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
 });
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(manifestURLs)),
+    (async () => {
+      const cache = await caches.open(cacheName);
+
+      await Promise.all(
+        manifestURLs.map(async (url) => {
+          try {
+            const response = await fetch(url, { cache: "no-store" });
+            if (response && response.ok) {
+              await cache.put(url, response);
+            }
+          } catch (err) {
+            console.warn("[sw] Failed to precache:", url, err);
+          }
+        }),
+      );
+    })(),
   );
 });
-
 self.addEventListener("activate", (event) => {
-  // - [x] clean up outdated runtime cache
   event.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      // clean up those who are not listed in manifestURLs
+    caches.open(cacheName).then((cache) =>
       cache.keys().then((keys) => {
         for (const request of keys) {
           if (!manifestURLs.includes(request.url)) {
             cache.delete(request);
           }
         }
-      });
-    }),
+      }),
+    ),
   );
 });
-
 registerRoute(
   ({ url }) => manifestURLs.includes(url.href),
   new NetworkFirst({
