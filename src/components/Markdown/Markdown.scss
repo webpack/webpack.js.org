@@ -190,10 +190,12 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       > .warning__prefix,
       > .preview__prefix,
       > .todo__prefix {
-        text-transform: capitalize;
-        font-weight: 700;
-        color: #000;
-        font-size: getFontSize(1);
+         display: block;
+         margin-bottom: 0.25em;
+         text-transform: capitalize;
+          font-weight: 600;       // slightly bold but not heading-level
+          font-size: 0.95rem;     // equivalent to body text, NOT a heading
+          color: #1a1a1a;
       }
     }
 
