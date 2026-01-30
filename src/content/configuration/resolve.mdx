@@ -19,6 +19,7 @@ contributors:
   - jamesgeorge007
   - snitin315
   - sapenlei
+  - Mazen050
 ---
 
 These options change how modules are resolved. Webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -645,9 +646,16 @@ module.exports = {
 
 ### resolve.plugins
 
-[`[Plugin]`](/plugins/)
+[`[Plugin | Function]`](/plugins/)
 
-A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
+A list of additional resolve plugins which should be applied.
+
+Each entry can be either:
+
+- A plugin object with an `apply(resolver)` method
+- Or a function plugin, which will be called with the resolver as both `this` and the first argument
+
+It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
 **webpack.config.js**
 
@@ -655,7 +663,19 @@ A list of additional resolve plugins which should be applied. It allows plugins 
 module.exports = {
   // ...
   resolve: {
-    plugins: [new DirectoryNamedWebpackPlugin()],
+    plugins: [
+      // Object-style plugin
+      {
+        apply(resolver) {
+          // custom logic
+        },
+      },
+
+      // Function-style plugin
+      function (resolver) {
+        // `this` is also the resolver
+      },
+    ],
   },
 };
 ```
