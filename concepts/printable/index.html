@@ -98,6 +98,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h1><span id="entry-points"></span>Entry Points<a href="#entry-points" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>As mentioned in <a href="/guides/getting-started/#using-a-configuration">Getting Started</a>, there are multiple ways to define the <code>entry</code> property in your webpack configuration. We will show you the ways you <strong>can</strong> configure the <code>entry</code> property, in addition to explaining why it may be useful to you.</p>
+<p>In simple terms, an entry point tells webpack where to start building
+its internal dependency graph. Starting from this file, webpack
+recursively follows all imported modules and assets to determine
+what should be included in the final bundle.</p>
+<p>The result of this process is later written to disk according to the
+<code>output</code> configuration, which controls where and how the bundled
+files are emitted.</p>
 <h2><span id="single-entry-shorthand-syntax"></span>Single Entry (Shorthand) Syntax<a href="#single-entry-shorthand-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Usage: <code>entry: string | [string]</code></p>
 <p><strong>webpack.config.js</strong></p>
