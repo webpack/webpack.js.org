@@ -4082,13 +4082,31 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="resolveplugins"></span>resolve.plugins<a href="#resolveplugins" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p><a href="/plugins/"><code>[Plugin]</code></a></p>
-<p>A list of additional resolve plugins which should be applied. It allows plugins such as <a href="https://www.npmjs.com/package/directory-named-webpack-plugin"><code>DirectoryNamedWebpackPlugin</code></a>.</p>
+<p><a href="/plugins/"><code>[Plugin | Function]</code></a></p>
+<p>A list of additional resolve plugins which should be applied.</p>
+<p>Each entry can be either:</p>
+<ul>
+<li>A plugin object with an <code>apply(resolver)</code> method</li>
+<li>Or a function plugin, which will be called with the resolver as both <code>this</code> and the first argument</li>
+</ul>
+<p>It allows plugins such as <a href="https://www.npmjs.com/package/directory-named-webpack-plugin"><code>DirectoryNamedWebpackPlugin</code></a>.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
-    plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">DirectoryNamedWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token comment">// Object-style plugin</span>
+      <span class="token punctuation">{</span>
+        <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">resolver</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// custom logic</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// Function-style plugin</span>
+      <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">resolver</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// `this` is also the resolver</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="resolvepreferabsolute"></span>resolve.preferAbsolute<a href="#resolvepreferabsolute" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
