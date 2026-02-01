@@ -1,17 +1,44 @@
 ---
-title: Webpack 5.105 (2026-01-30)
+title: Webpack 5.105 (2026-02-02)
 contributors:
   - bjohansebas
 ---
 
 Webpack 5.105 brings several improvements, both in code generation and bug fixes.
 
+- [Two Low-Severity CVEs Fixed in Webpack](#two-low-severity-cves-fixed-in-webpack)
 - [Automatic Module Resolution for Web Workers](#automatic-module-resolution-for-web-workers)
 - [Preserving Custom `import.meta` Properties](#preserving-custom-importmeta-properties)
-- [Better control of your source maps in `devtool`](#better-control-of-your-source-maps-in-devtool)
+- [Better Control of Source Maps in `devtool`](#better-control-of-source-maps-in-devtool)
 - [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
+- [Other Improvements and Bug Fixes](#other-improvements-and-bug-fixes)
 
 ---
+
+## Two Low-Severity CVEs Fixed in Webpack
+
+Two new low-severity CVEs in Webpack have been fixed and published.
+By default, you are safe; these issues only affect users of the experimental
+`experiments.buildHttp` option.
+
+### Affected CVEs:
+
+#### CVE-2025-68157
+
+- For more details, see the advisory: [GHSA-38r7-794h-5758](https://github.com/webpack/webpack/security/advisories/GHSA-38r7-794h-5758)
+- Affected versions: `>=5.49.0 <5.104.0`
+
+#### CVE-2025-68458
+
+- For more details, see the advisory: [GHSA-8fgc-7cc6-rx7x](https://github.com/webpack/webpack/security/advisories/GHSA-8fgc-7cc6-rx7x)
+- Affected versions: `>=5.49.0 <5.104.1`
+
+Even though these are low-severity CVEs, it’s still a good idea to
+update if you use the affected versions.
+
+For more information on reporting security vulnerabilities,
+see the [Webpack Security Policy](https://github.com/webpack/webpack/security/policy)
+.
 
 ## Automatic Module Resolution for Web Workers
 
@@ -72,7 +99,7 @@ module.exports = {
 
 This way, even without `output.module: true`, any custom import.meta property, such as `import.meta.customProp`, will be preserved in the build.
 
-## Better control of your source maps in `devtool`
+## Better Control of Source Maps in `devtool`
 
 Webpack now allows the `devtool` option to accept both a **string** and an array of objects for advanced configurations.
 
@@ -109,21 +136,19 @@ This new option is especially useful if you are using Webpack’s [experimental 
 
 It’s worth noting that the classic string syntax, like `devtool: "source-map"`, remains fully valid and supported.
 
-## Cleaner ESM output for Node.js and modern builds
+## Cleaner ESM Output for Node.js and Modern Builds
 
 This improvement in Webpack optimizes the handling and representation of Node.js native modules (such as `fs`, `path`, or `crypto`) during bundling, especially when using the [`output.module`](/configuration/output/#outputmodule) option in the configuration. When `output.module: true` is enabled, Webpack now generates imports of native modules using ES module syntax `import ... from "module"` instead of CommonJS `require("module")`, regardless of whether the code will run in a web or Node.js environment.
 
-## Other improvements
+## Other Improvements and Bug Fixes
 
-- Webpack-dev-server has released a new version to update dependencies that had reported transitive vulnerabilities, so updating is recommended. Additionally, the option to close the error overlay by pressing the ESC key has been added, and several bugs have been fixed. Check the [release for more information](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
-- Webpack-bundle-analyzer has received important improvements and fixes for the user experience. Visual issues with tooltips in dark mode have been resolved, and the analysis of bundles using IIFE has been made more robust, preventing errors. Additionally, support for Zstandard compression has been added, available only on Node.js 22.15 or higher. Check the [changelog for more information](https://github.com/webpack/webpack-bundle-analyzer/blob/main/CHANGELOG.md)
-- Mini-css-extract-plugin introduces new features and bug fixes. Among the main changes, the plugin now respects the `output.cssFilename` and `output.cssChunkFilename` options, allowing more precise control over the names of the generated CSS files. Additionally, a bug was fixed that prevented the generation of the `contentHash` for a chunk when the CSS module set had zero size, thus avoiding unnecessary hashes in those cases. Check the [release for more information](https://github.com/webpack/mini-css-extract-plugin/releases/tag/v2.10.0)
-
-## Bug fixes
+- **Webpack-dev-server** has released a new version to update dependencies that had reported transitive vulnerabilities, so updating is recommended. Additionally, the option to close the error overlay by pressing the ESC key has been added, and several bugs have been fixed. Check the [release for more information](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
+- **Webpack-bundle-analyzer** has received important improvements and fixes for the user experience. Visual issues with tooltips in dark mode have been resolved, and the analysis of bundles using IIFE has been made more robust, preventing errors. Additionally, support for Zstandard compression has been added, available only on Node.js 22.15 or higher. Check the [changelog for more information](https://github.com/webpack/webpack-bundle-analyzer/blob/main/CHANGELOG.md)
+- **Mini-css-extract-plugin** introduces new features and bug fixes. Among the main changes, the plugin now respects the `output.cssFilename` and `output.cssChunkFilename` options, allowing more precise control over the names of the generated CSS files. Additionally, a bug was fixed that prevented the generation of the `contentHash` for a chunk when the CSS module set had zero size, thus avoiding unnecessary hashes in those cases. Check the [release for more information](https://github.com/webpack/mini-css-extract-plugin/releases/tag/v2.10.0)
 
 Several bug fixes have been resolved since version [5.104](https://github.com/webpack/webpack/releases/tag/v5.104.0). Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for more details
 
 ## Thanks
 
-Many thanks to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring) for helping make Webpack 5.105 possible, whether by
-contributing code, documentation, or supporting us as sponsors.
+A big thank you to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring)
+who made Webpack 5.105 possible. Your support, whether through code contributions, documentation, or financial sponsorship, helps keep Webpack evolving and improving for everyone.
