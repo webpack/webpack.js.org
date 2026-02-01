@@ -62,12 +62,16 @@ For example, in `package.json`:
 
 Now, when importing the `foo` package inside a Worker, Webpack will automatically choose the `index.worker.js` file according to the export conditions:
 
+{/* eslint-disable */}
+
 ```js
 // This import is inside a Worker context, so Webpack uses index.worker.js
 const worker = new Worker(new URL("foo", import.meta.url), {
   type: "module",
 });
 ```
+
+{/* eslint-enable */}
 
 ## Preserving Custom `import.meta` Properties
 
