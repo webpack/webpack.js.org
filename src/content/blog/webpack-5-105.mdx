@@ -76,7 +76,7 @@ const worker = new Worker(new URL("foo", import.meta.url), {
 
 ## Support Import Specifier Guard
 
-Support for import specifier guards has been added, an improvement that helps the bundler better understand a very common pattern checking whether an export exists before using it. Previously, even if the code was correctly guarded by an if, the access could be interpreted as unconditional and result in warnings like “export … was not found”.
+Support for import specifier guards has been added, an improvement that helps the bundler better understand a common pattern checking whether an export exists before using it. Previously, even if the code was correctly guarded by an if, the access could be interpreted as unconditional and result in warnings like “export … was not found”.
 
 With this change, those checks are recognized as a signal that the access is conditional, and the analysis is adjusted accordingly. In practice, this makes it possible to write code that is more compatible across different versions of the same library, where an export may or may not exist, without unnecessary noise during compilation.
 
