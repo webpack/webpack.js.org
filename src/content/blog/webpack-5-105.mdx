@@ -81,11 +81,12 @@ Support for import specifier guards has been added, an improvement that helps th
 With this change, those checks are recognized as a signal that the access is conditional, and the analysis is adjusted accordingly. In practice, this makes it possible to write code that is more compatible across different versions of the same library, where an export may or may not exist, without unnecessary noise during compilation.
 
 ```js
-import * as React from "react"
+import * as React from "react";
 
-if(React.useId){ // create guard for `React` => ns: ["", "useId"].
-	React.useId; // React->"useId" is in guard.
-	React; //  React->"" is in guard.
+if (React.useId) {
+  // create guard for `React` => userId: ["", "useId"].
+  React.useId; // React -> "useId" is in guard.
+  React; //  React -> "" is in guard.
 }
 ```
 
