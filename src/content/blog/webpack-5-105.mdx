@@ -54,10 +54,10 @@ In the webpack configuration, the `resolve.resolver.tsconfig` option is used to 
 module.exports = {
   resolve: {
     resolver: {
-      tsconfig: "./tsconfig.json" // Can be `false` (disabled), `true` (use the default tsconfig.json), a path to a `tsconfig.json` file, or an object with configFile and references options.
-    }
- ` }
-}
+      tsconfig: "./tsconfig.json", // Can be `false` (disabled), `true` (use the default tsconfig.json), a path to a `tsconfig.json` file, or an object with configFile and references options.
+    },
+  },
+};
 ```
 
 Example of aliases in tsconfig.json:
@@ -75,7 +75,7 @@ Example of aliases in tsconfig.json:
 
 And then in the code:
 
-```
+```ts
 import Button from "@/components/Button";
 ```
 
@@ -134,10 +134,14 @@ if (React.useId) {
 
 Webpack now supports `import.defer()` even when the import is a context module (that is, when the import path is built dynamically and webpack needs to include a set of possible files). In practice, this makes it much easier to defer the loading of a module selected at runtime, even when that module comes from a dynamic expression pointing to a directory. This enables patterns like “choose between a.js or b.js and load it only when needed”, with webpack generating the appropriate context so that import.defer() works correctly.
 
-```js
+{/* eslint-disable */}
+
+```text
 const file = Math.random() > 0.5 ? "a.js" : "b.js";
 import.defer("./dir/" + file);
 ```
+
+{/* eslint-enabled */}
 
 ## Preserving Custom `import.meta` Properties
 
