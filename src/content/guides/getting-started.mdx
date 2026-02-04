@@ -28,6 +28,7 @@ contributors:
   - snitin315
   - Etheryen
   - zowiebeha
+  - Brennvo
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -250,13 +251,9 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
 **webpack.config.js**
 
 ```javascript
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+const path = require("path");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default {
+module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "main.js",
