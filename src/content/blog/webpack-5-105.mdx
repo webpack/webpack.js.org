@@ -47,7 +47,7 @@ see the [Webpack Security Policy](https://github.com/webpack/webpack/security/po
 
 Module resolution can be configured to read `compilerOptions.baseUrl` and `compilerOptions.paths` from `tsconfig.json` and apply those aliases when resolving imports. As a result, it is no longer necessary to install and configure the external `tsconfig-paths-webpack-plugin` just to make TypeScript path aliases work during bundling.
 
-In the webpack configuration, the `resolve.resolver.tsconfig` option is used to specify which tsconfig file should be used as the source (which is also useful in monorepos or setups with multiple tsconfig files):
+In the webpack configuration, the `resolve.tsconfig` option is used to specify which tsconfig file should be used as the source (which is also useful in monorepos or setups with multiple tsconfig files):
 
 ```js
 // webpack.config.js
