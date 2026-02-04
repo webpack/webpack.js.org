@@ -1,0 +1,53 @@
+---
+title: Roadmap 2026 (2026-02-04)
+sort: -9999999
+contributors:
+  - evenstensberg
+---
+
+Hello from the webpack Technical Steering Commitee member [Even](http://x.com/evenstensberg)!
+
+The different contributors in the organization are working hard to ensure that webpack is still a good alternative to building your web applications. Even though there has emerged a lot of different tools lately, we hope that using webpack as a stable choice is still an option for you. 
+Our work this year is not only focused on improving existing functionality, but also work on some new things that might be beneficial in other ways. 
+
+## So what is on our agenda this year? Let me walk you through it!
+
+- **CSS modules** - adding built-in CSS solution into webpack (90% done) - Native CSS support [webpack#14893](https://github.com/webpack/webpack/issues/14893), as you can see many of them in TODO, ETA - end of February/March
+
+- **Universal target** - when you code will work in any environments - NodeJS, browser, deno, bun, etc (98% done), what need to be finished - wrapper to load commmonjs modules, adding own `target: "universal"` and more tests, note - universal target supported only ECMA modules output and your code should be written like you wrote it for any environments (example - `const myFs = isNodeJs ? require("fs") : require("memory-fs-which-will work-in-browser")`)
+
+- **Typescript built-in support** - almost ready to implement: [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) already supports [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html), we need to add wrapper to `module.javascript.parse` and parse typescript files using NodeJS API, improve `resolver` option to support `ts/cts/mts` extensions and also add `extensionAlias` to mapping ts files to js and versa vice, and tests.
+
+- **HTML modules** - including support HTML generation to replace https://github.com/jantimon/html-webpack-plugin/, support HTML modules (`import html from "file.html"`) and supports HTML entrypoints (these two are the same). GOOD for GSoC, we should start with HTML modules and entrypoints. Use a HTML file as an entry point? [webpack#536](https://github.com/webpack/webpack/issues/536)
+
+- **ECMA modules** - fixes and improvements. ESM Module Output [webpack#17121](https://github.com/webpack/webpack/issues/17121)
+
+- **Webpack everywhere** - compile webpack to ensure we can compile own code to node and web targets (universal too when was implemented), less nodejs internals and no buffer, adding playground on site.
+
+- **Adding support for deno and bun** - deno already work, need tests, bun not tested.
+
+- **Lazy-barrel** - look at rspack solution
+
+- **webpack-dev-server**, **webpack-dev-middleware**, **webpack-hot-middleware** - union webpack-dev-middleware and webpack-hot-middleware into one middleware, extract overlay from dev server and union overlay and websocket (and event source) logic with extracted code from `webpack-hot-middleware` and reuse it inside dev server. Plugin support for dev server.
+
+- **webpack-cli** - Deprecate Some Packages [webpack-cli#4619](https://github.com/webpack/webpack-cli/issues/4619) - avoid extra packages by union them into code, refactor help, refactor subcommand logic.
+
+- **Documentation and Site** - auto-generation of documentation - name, description, type and default value (do we need more? maybe when option was added, anything else?), here we should write a function inside webpack itself which takes our schemes and types and generate JSON, then site will generate markdown from these JSON. Also new site, but the auto-generation of documentation is the high priority and should be resolved as soon as possible, currently our documentation does not reflect all the options, which has a negative impact on developer experience.
+
+- **Avoid extra packages** - union terser-webpack-plugin, css-minimizer-webpack-plugin, html-minimizer-webpack-plugin and json-minimizer-webpack-plugin into one `minimizer-webpack-plugin`, all these packages have almost identical code, they also support all popular minimizers out of the box, we just need merge these code into one. in future we can more tasks here.
+
+- **Multithreading API** - we have https://github.com/webpack/thread-loader as an example, but we need to move this into core, it is a difficult task and requires discussion
+
+## Other tasks
+
+- move `loader-runner` into core, we don't need an extra package here and also our logic around loader context is divided by two packages - webpack itself and loader-runner, let's improve this
+- Fewer TODOs in webpack code to prepare for the future of webpack@6,
+- Improve coverage of code,
+- Improve types coverages (less `any/unknown/EXPECTED_ANY/EXPECTED_FUNCTION/EXPECTED_OBJECT/etc` types)
+- Add more benchmarks to webpack (maybe merge with https://github.com/webpack/benchmark) + extra github actions to test it between different version like we have in https://github.com/webpack/benchmark)
+
+## Final remarks
+
+I hope that you found this list useful and that you are excited for 2026, we are! One of the most important parts of our work now, is to get enough donations to keep the project sustainable. We use our resources on payouts for all contributors once they reach a certain threshold. In addition to that, we want to make sure that over time, the project has some left-over resources so that we can save when times are hard. We also want to give back to our maintainers working hard to make the project great in terms of merch (aka swag). This year we will try something new, which is so have dedicated sections where firms/individuals that contribute a significant amount will have a place to showcase their product/thing. 
+
+If you are interested in contributing to the organization either finanically or through code/etc, please reach out to us! 💙
