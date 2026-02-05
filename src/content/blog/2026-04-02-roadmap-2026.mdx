@@ -25,9 +25,7 @@ Regardless of whether you use CommonJS modules in your application,
 webpack will be able to wrap them, and all the resulting code will be pure ESM,
 making it runtime-agnostic.
 
-There has already been significant progress on this,
-but tests still need to be added, CommonJS wrapper functionality needs to be completed,
-and there’s still much more to do
+There has already been significant progress toward this goal, but ESM output is not fully finished yet. Additional fixes and improvements are still required (see [webpack#17121](https://github.com/webpack/webpack/issues/17121)), along with adding missing tests and completing the CommonJS wrapper functionality.
 
 ### Support for building TypeScript without loaders
 
@@ -37,8 +35,6 @@ eliminating the need to use a plugin (tsconfig-paths-webpack-plugin), Now we wan
 ### Import HTML files and use them as entry points without the need for plugins
 
 Currently, to import HTML files and use them as entry points, it’s necessary to use a plugin (html-webpack-plugin). The idea is to integrate that plugin into the core, similar to how CSS Modules are being handled, and remove the need for a plugin for such a common task. Like CSS Modules, this would be introduced as an experimental option so that in webpack 6 you’ll be able to remove that dependency. You can follow the idea and its progress in [webpack#536](https://github.com/webpack/webpack/issues/536).
-
-- **ESM output** — fixes and improvements. See [webpack#17121](https://github.com/webpack/webpack/issues/17121).
 
 ### Webpack Everywhere (Node, Deno, and Bun, Web)
 
