@@ -80,7 +80,13 @@ Webpack currently relies on multiple separate minimizer plugins, such as `terser
 
 The idea is to combine all of these into a single `minimizer-webpack-plugin`, providing a more unified and consistent minimization experience. This would simplify configuration, reduce duplication, and make it easier to extend and maintain minimization logic across different asset types.
 
-- **Multithreading API** — bring ideas from [`thread-loader`](https://github.com/webpack/thread-loader) into core; needs design discussion.
+### Multithreading API
+
+Webpack is exploring a Multithreading API, inspired by thread-loader, to bring better parallel processing capabilities into the core.
+
+The goal is to allow webpack to take advantage of multi-core systems, improving build performance for large projects. This effort is still in the design and discussion phase, aiming to create a solution that is flexible, maintainable, and easy to use.
+
+By integrating multithreading in a more formal way, webpack hopes to provide developers with faster builds while keeping the configuration and internal logic clean and scalable. This work reflects ongoing exploration rather than a finalized feature, and thread-loader remains the current community-supported solution for parallelization.
 
 ### Design and Visual Identity
 
