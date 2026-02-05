@@ -46,9 +46,21 @@ Currently, Deno support is missing proper tests, while Bun still lacks required 
 
 - **Lazy barrel** — evaluate Rspack’s approach.
 
-- **Dev tooling** — merge `webpack-dev-middleware` and `webpack-hot-middleware`. Extract overlay from dev-server and consolidate overlay + WS/EventSource logic for reuse. Add plugin support to dev-server.
+### Streamlining Webpack’s Dev Experience
 
-- **CLI** — consolidate packages, refactor help and subcommand logic. See [webpack-cli#4619](https://github.com/webpack/webpack-cli/issues/4619).
+Webpack’s development and CLI tools are being improved to enhance maintainability while also introducing new features for contributors and users alike.
+
+#### Dev Tooling
+
+Efforts in dev tooling focus on improving webpack’s internal development workflow and making it easier to extend and maintain. This includes merging webpack-dev-middleware and webpack-hot-middleware, extracting the overlay from dev-server, and consolidating overlay + WebSocket/EventSource logic for reuse.
+
+Additionally, plugin support will be added to the dev-server, enabling more flexibility and reducing duplication. These improvements streamline development for contributors while keeping webpack flexible and reliable for users.
+
+#### CLI Improvements
+
+The CLI is being refined to simplify maintenance and improve usability. Work includes consolidating packages, refactoring help and subcommand logic, and improving the overall developer experience (see [webpack-cli#4619](https://github.com/webpack/webpack-cli/issues/4619))
+
+These changes make it easier for contributors to maintain the CLI while also providing practical enhancements for developers working with webpack in their projects.
 
 ### Accurate and Reliable Documentation
 
