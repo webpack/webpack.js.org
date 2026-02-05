@@ -44,7 +44,13 @@ The goal is to build webpack so it can run everywhere: in Node.js, in web enviro
 
 Currently, Deno support is missing proper tests, while Bun still lacks required assets and corresponding tests. In addition, this effort includes adding a site playground to validate and showcase webpack running across different environments.
 
-- **Lazy barrel** — evaluate Rspack’s approach.
+### Evaluating Lazy Barrel Optimization
+
+One interesting idea to explore is **lazy barrel optimization**, inspired by how _Rspack_ handles certain module patterns. In Rspack, _lazy barrel_ is an optimization that **skips building unused re-exported modules in side‑effect‑free barrel files until they’re actually needed**. This can significantly reduce build work, especially in large codebases with lots of grouped exports.
+
+Barrel files are modules that re‑export other modules to create a convenient API surface. For example, a `components/index.js` that exports every component from a directory. While useful for organizing code, traditional bundlers often build _all_ the re‑exported modules even if only one is used, which can hurt performance. With lazy barrel optimization in Rspack, only the modules actually referenced get built, skipping the rest and improving overall build speed.
+
+Evaluating Rspack’s approach gives us an opportunity to see whether a similar strategy could benefit webpack, improving performance around commonly used barrel patterns without requiring developers to restructure their exports manually. It’s an example of looking outward at innovations in the ecosystem to inform possible future enhancements for webpack.
 
 ### Streamlining Webpack’s Dev Experience
 
