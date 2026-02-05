@@ -248,9 +248,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  &lt;/body&gt;
 </span><span class="token prefix unchanged"> </span><span class="token line">&lt;/html&gt;</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    filename: &#x27;main.js&#x27;,
@@ -262,9 +266,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>In order to <code>import</code> a CSS file from within a JavaScript module, you need to install and add the <a href="/loaders/style-loader">style-loader</a> and <a href="/loaders/css-loader">css-loader</a> to your <a href="/configuration/module"><code>module</code> configuration</a>:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev style-loader css-loader</code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;bundle.js&#x27;,
@@ -337,9 +345,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <h2><span id="loading-images"></span>Loading Images<a href="#loading-images" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>So now we&#x27;re pulling in our CSS, but what about our images like backgrounds and icons? As of webpack 5, using the built-in <a href="/guides/asset-modules/">Asset Modules</a> we can easily incorporate those in our system as well:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;bundle.js&#x27;,
@@ -425,9 +437,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <h2><span id="loading-fonts"></span>Loading Fonts<a href="#loading-fonts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>So what about other assets like fonts? The Asset Modules will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let&#x27;s update our <code>webpack.config.js</code> to handle font files:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;bundle.js&#x27;,
@@ -512,9 +528,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning <code>import Data from &#x27;./data.json&#x27;</code> will work by default. To import CSVs, TSVs, and XML you could use the <a href="https://github.com/theplatapi/csv-loader">csv-loader</a> and <a href="https://github.com/gisikw/xml-loader">xml-loader</a>. Let&#x27;s handle loading all three:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev csv-loader xml-loader</code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;bundle.js&#x27;,
@@ -650,12 +670,16 @@ Likes tater tots and beer.&quot;,
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> toml yamljs json5 --save-dev</code></pre></div>
 <p>And configure them in your webpack configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">const toml = require(&#x27;toml&#x27;);
-</span><span class="token prefix inserted">+</span><span class="token line">const yaml = require(&#x27;yamljs&#x27;);
-</span><span class="token prefix inserted">+</span><span class="token line">const json5 = require(&#x27;json5&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">import toml from &#x27;toml&#x27;;
+</span><span class="token prefix inserted">+</span><span class="token line">import yaml from &#x27;yamljs&#x27;;
+</span><span class="token prefix inserted">+</span><span class="token line">import json5 from &#x27;json5&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;bundle.js&#x27;,
@@ -781,12 +805,16 @@ Likes tater tots and beer.&quot;,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
 </span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">const toml = require(&#x27;toml&#x27;);
-</span><span class="token prefix deleted">-</span><span class="token line">const yaml = require(&#x27;yamljs&#x27;);
-</span><span class="token prefix deleted">-</span><span class="token line">const json5 = require(&#x27;json5&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">import toml from &#x27;toml&#x27;;
+</span><span class="token prefix deleted">-</span><span class="token line">import yaml from &#x27;yamljs&#x27;;
+</span><span class="token prefix deleted">-</span><span class="token line">import json5 from &#x27;json5&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;bundle.js&#x27;,
