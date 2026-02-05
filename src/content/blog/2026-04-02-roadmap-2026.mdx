@@ -7,12 +7,15 @@ contributors:
 
 Hello from the webpack Technical Steering Commitee member [Even](http://x.com/evenstensberg)!
 
-The different contributors in the organization are working hard to ensure that webpack is still a good alternative to building your web applications. Even though there has emerged a lot of different tools lately, we hope that using webpack as a stable choice is still an option for you. 
-Our work this year is not only focused on improving existing functionality, but also work on some new things that might be beneficial in other ways. 
+The different contributors in the organization are working hard to ensure that webpack is still a good alternative to building your web applications. Even though there has emerged a lot of different tools lately, we hope that using webpack as a stable choice is still an option for you.
+Our work this year is not only focused on improving existing functionality, but also work on some new things that might be beneficial in other ways.
 
 ## So what is on our agenda this year? Let me walk you through it!
 
-- **CSS modules** — built-in CSS support in webpack (≈90%). Native CSS support [webpack#14893](https://github.com/webpack/webpack/issues/14893). ETA: Feb–Mar.
+### Support for CSS Modules without the need for plugins.
+
+There is currently an `experimental.css` option, which enables native CSS support without the need to add plugins to your configuration, as was previously required with plugins like `mini-css-extract-plugin`. The development is already quite advanced, with the possibility of finishing the inclusion into webpack core around February/March. After that, the support would remain experimental for a while to gather bug reports, but in **webpack 6** it will no longer be experimental and plugins for this task will no longer be necessary.
+
 
 - **Universal target** — works across Node.js, browsers, Deno, and Bun (≈98%). Finish CommonJS wrapper, add `target: "universal"`, and expand tests. Outputs ESM only; write environment-agnostic code.
 
@@ -57,7 +60,7 @@ Our work this year is not only focused on improving existing functionality, but 
 
 ## Final remarks
 
-I hope that you found this list useful and that you are excited for 2026, we are! One of the most important parts of our work now, is to get enough donations to keep the project sustainable. We use our resources on payouts for all contributors once they reach a certain threshold. In addition to that, we want to make sure that over time, the project has some left-over resources so that we can save when times are hard. We also want to give back to our maintainers working hard to make the project great in terms of merch (aka swag). This year we will try something new, which is so have dedicated sections where companies/individuals that contribute a significant amount will have a place to showcase their product/thing. 
+I hope that you found this list useful and that you are excited for 2026, we are! One of the most important parts of our work now, is to get enough donations to keep the project sustainable. We use our resources on payouts for all contributors once they reach a certain threshold. In addition to that, we want to make sure that over time, the project has some left-over resources so that we can save when times are hard. We also want to give back to our maintainers working hard to make the project great in terms of merch (aka swag). This year we will try something new, which is so have dedicated sections where companies/individuals that contribute a significant amount will have a place to showcase their product/thing.
 
 If you are interested in contributing to the organization either finanically or whatnot, please reach out to us! 💙
 
