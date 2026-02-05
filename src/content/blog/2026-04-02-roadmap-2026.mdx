@@ -118,13 +118,23 @@ Growing donations and sponsorships is crucial because the more funding available
 
 Support through donations not only helps sustain ongoing maintenance but also enables contributors to focus on new features, bug fixes, and improving the ecosystem overall. By contributing financially, the community directly helps ensure webpack remains healthy and actively developed.
 
-## Other tasks
+### Preparing for Webpack 6
 
-- Move `loader-runner` into core to unify loader context logic.
-- Reduce internal TODOs in preparation for webpack@6.
-- Improve test coverage.
-- Strengthen type coverage (fewer `any/unknown/...`).
-- Add more benchmarks (potentially merge with [`webpack/benchmark`](https://github.com/webpack/benchmark)) and CI to compare versions.
+All the efforts covered in this blog, from enhancing runtime support (Node, Deno, Bun, and universal targets), improving documentation and developer tooling, mentoring new contributors through GSoC, to exploring multithreading and optimizations like lazy barrel, are paving the way toward webpack 6.
+
+#### Core and Loader Improvements
+
+To prepare for webpack@6 and simplify internal logic, efforts include moving loader-runner into core to unify loader context handling. This helps reduce duplication, improves maintainability, and lays the groundwork for future enhancements.
+
+Additionally, reducing internal TODOs across the codebase ensures a cleaner foundation and makes it easier for contributors to work efficiently.
+
+#### Testing and Type Coverage
+
+Improving test coverage and strengthening type coverage are key priorities. By reducing the use of any, unknown, and other loose types, webpack becomes more reliable and easier to maintain. Strong types and thorough tests help catch issues earlier and improve confidence for contributors making changes.
+
+#### Benchmarks and Performance
+
+To measure progress and maintain high performance standards, webpack plans to add more benchmarks. Integrating these benchmarks into CI pipelines allows comparisons across versions, ensuring that optimizations continue to deliver tangible improvements for developers.
 
 ## Final remarks
 
