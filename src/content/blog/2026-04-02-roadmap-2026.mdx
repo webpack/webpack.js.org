@@ -42,7 +42,9 @@ Currently, to import HTML files and use them as entry points, it’s necessary t
 
 - **Webpack everywhere** — build webpack for Node and web (including universal), reduce Node internals and Buffer usage, add a site playground.
 
-- **Deno & Bun** — Deno supported; add tests. Bun: assess and test.
+## Support for Deno and Bun
+
+Node.js is still the default runtime for many projects, but times have changed and it’s no longer the only JavaScript runtime. New options like Deno and Bun now exist, both with a lot of popularity these days. We want to add native support for these runtimes. To do so, it’s necessary to add tests, stop relying so heavily on Node.js internals, and start being more agnostic. Currently, Deno is missing tests, and for Bun there are still missing assets and the corresponding tests need to be added.
 
 - **Lazy barrel** — evaluate Rspack’s approach.
 
