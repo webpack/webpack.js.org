@@ -12,6 +12,7 @@ contributors:
   - wizardofhogwarts
   - astonizer
   - snitin315
+  - Brennvo
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -44,9 +45,13 @@ Let's make a minor change to our project before we get started:
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
 -    filename: 'main.js',
@@ -67,9 +72,13 @@ npm install --save-dev style-loader css-loader
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'bundle.js',
@@ -171,9 +180,13 @@ So now we're pulling in our CSS, but what about our images like backgrounds and 
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'bundle.js',
@@ -284,9 +297,13 @@ So what about other assets like fonts? The Asset Modules will take any file you 
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'bundle.js',
@@ -395,9 +412,13 @@ npm install --save-dev csv-loader xml-loader
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'bundle.js',
@@ -581,12 +602,16 @@ And configure them in your webpack configuration:
 **webpack.config.js**
 
 ```diff
- const path = require('path');
-+const toml = require('toml');
-+const yaml = require('yamljs');
-+const json5 = require('json5');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
++import toml from 'toml';
++import yaml from 'yamljs';
++import json5 from 'json5';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'bundle.js',
@@ -734,12 +759,16 @@ For the next guides we won't be using all the different assets we've used in thi
 **webpack.config.js**
 
 ```diff
- const path = require('path');
--const toml = require('toml');
--const yaml = require('yamljs');
--const json5 = require('json5');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+-import toml from 'toml';
+-import yaml from 'yamljs';
+-import json5 from 'json5';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'bundle.js',
