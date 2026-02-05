@@ -29,7 +29,10 @@ There has already been significant progress on this,
 but tests still need to be added, CommonJS wrapper functionality needs to be completed,
 and there’s still much more to do
 
-- **TypeScript** — built-in support. [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) honors [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). Add parser wrapper to `module.javascript.parse`, improve resolver for `ts/cts/mts`, support `extensionAlias`, and add tests.
+### Support for building TypeScript without loaders
+
+Recently, in version 5.105 we included support for resolving the paths defined in the TypeScript configuration,
+eliminating the need to use a plugin (tsconfig-paths-webpack-plugin), Now we want to further expand TypeScript support by removing the need to use a loader (the most common one being ts-loader) to transpile TypeScript directly in webpack, which would also reduce your project’s dependencies
 
 ### Import HTML files and use them as entry points without the need for plugins
 
