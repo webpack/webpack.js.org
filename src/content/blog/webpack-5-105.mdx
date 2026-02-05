@@ -7,8 +7,10 @@ contributors:
 Webpack 5.105 brings several improvements, both in code generation and bug fixes.
 
 - [Two Low-Severity CVEs Fixed in Webpack](#two-low-severity-cves-fixed-in-webpack)
+- [`tsconfig.json` Alias Resolution Without Requiring plugins](#tsconfigjson-alias-resolution-without-requiring-plugins)
 - [Automatic Module Resolution for Web Workers](#automatic-module-resolution-for-web-workers)
 - [Support Import Specifier Guard](#support-import-specifier-guard)
+- [Support `import.defer()` for Context Module](#support-importdefer-for-context-module)
 - [Preserving Custom `import.meta` Properties](#preserving-custom-importmeta-properties)
 - [Better Control of Source Maps in `devtool`](#better-control-of-source-maps-in-devtool)
 - [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
@@ -40,6 +42,42 @@ update if you use the affected versions.
 For more information on reporting security vulnerabilities,
 see the [Webpack Security Policy](https://github.com/webpack/webpack/security/policy)
 .
+
+## `tsconfig.json` Alias Resolution Without Requiring plugins
+
+Module resolution can be configured to read `compilerOptions.baseUrl` and `compilerOptions.paths` from `tsconfig.json` and apply those aliases when resolving imports. As a result, it is no longer necessary to install and configure the external `tsconfig-paths-webpack-plugin` just to make TypeScript path aliases work during bundling.
+
+In the webpack configuration, the `resolve.tsconfig` option is used to specify which tsconfig file should be used as the source (which is also useful in monorepos or setups with multiple tsconfig files):
+
+```js
+// webpack.config.js
+module.exports = {
+  resolve: {
+    tsconfig: "./tsconfig.json", // Can be `false` (disabled), `true` (use the default tsconfig.json), a path to a `tsconfig.json` file, or an object with configFile and references options.
+  },
+};
+```
+
+Example of aliases in tsconfig.json:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
+```
+
+And then in the code:
+
+```ts
+import Button from "@/components/Button";
+```
+
+This way, `@/components/Button` can be resolved according to the rules defined in `tsconfig.json`, avoiding the need to duplicate aliases in `resolve.alias` and reducing discrepancies between what TypeScript understands and what the bundler resolves.
 
 ## Automatic Module Resolution for Web Workers
 
@@ -89,6 +127,19 @@ if (React.useId) {
   React; //  React -> "" is in guard.
 }
 ```
+
+## Support `import.defer()` for Context Module
+
+Webpack now supports `import.defer()` even when the import is a context module (that is, when the import path is built dynamically and webpack needs to include a set of possible files). In practice, this makes it much easier to defer the loading of a module selected at runtime, even when that module comes from a dynamic expression pointing to a directory. This enables patterns like “choose between a.js or b.js and load it only when needed”, with webpack generating the appropriate context so that import.defer() works correctly.
+
+{/* eslint-disable */}
+
+```text
+const file = Math.random() > 0.5 ? "a.js" : "b.js";
+import.defer("./dir/" + file);
+```
+
+{/* eslint-enabled */}
 
 ## Preserving Custom `import.meta` Properties
 
