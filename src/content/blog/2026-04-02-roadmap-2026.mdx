@@ -56,7 +56,11 @@ Currently, Deno support is missing proper tests, while Bun still lacks required 
 
 - **Docs & site** — auto-generate options docs from webpack schemas/types into JSON, then render Markdown on the site. Priority: accurate, complete docs.
 
-- **Minimizers** — combine `terser-webpack-plugin`, `css-minimizer-webpack-plugin`, `html-minimizer-webpack-plugin`, and `json-minimizer-webpack-plugin` into one `minimizer-webpack-plugin`.
+## Simplifying Asset Minimization in Webpack
+
+Webpack currently relies on multiple separate minimizer plugins, such as `terser-webpack-plugin`, `css-minimizer-webpack-plugin`, `html-minimizer-webpack-plugin`, and `json-minimizer-webpack-plugin`. While each one works well on its own, managing them individually adds extra configuration and maintenance overhead.
+
+The idea is to combine all of these into a single `minimizer-webpack-plugin`, providing a more unified and consistent minimization experience. This would simplify configuration, reduce duplication, and make it easier to extend and maintain minimization logic across different asset types.
 
 - **Multithreading API** — bring ideas from [`thread-loader`](https://github.com/webpack/thread-loader) into core; needs design discussion.
 
