@@ -36,7 +36,8 @@ Currently, to import HTML files and use them as entry points, it’s necessary t
 
 Node.js is still the **default runtime** for many projects, but times have changed and it’s no longer the only JavaScript runtime. New options like **Deno** and **Bun** have gained significant popularity, and webpack should work seamlessly across all of them.
 
-The goal is to build webpack so it can run **everywhere**: in Node.js, in web environments, and in alternative runtimes like Deno and Bun.
+The goal is to build webpack so it can run **everywhere**: in Node.js, in web environments, and in alternative runtimes like Deno and Bun. Even when using modules traditionally tied to Node.js, such as `node:fs`, webpack will intelligently handle them, enabling code that depends on these modules to **run in the browser** or other environments where these modules don’t exist.
+
 To achieve this, we need to **reduce reliance on Node.js internals** and _Buffer usage_, move toward a **more runtime-agnostic architecture**, and expand test coverage.
 
 Currently, **Deno support is missing proper tests**, while **Bun still lacks required assets and corresponding tests**. In addition, this effort includes adding a **site playground** to validate and showcase webpack running across different environments.
