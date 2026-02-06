@@ -94,9 +94,13 @@ Now adjust the config. We'll be adding our `src/print.js` as a new entry point (
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
 -  entry: './src/index.js',
 +  entry: {
 +    index: './src/index.js',
@@ -140,10 +144,14 @@ npm install --save-dev html-webpack-plugin
 **webpack.config.js**
 
 ```diff
- const path = require('path');
-+const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
++import HtmlWebpackPlugin from 'html-webpack-plugin';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: {
      index: './src/index.js',
      print: './src/print.js',
@@ -189,10 +197,14 @@ In general it's good practice to clean the `/dist` folder before each build, so 
 **webpack.config.js**
 
 ```diff
- const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    entry: {
      index: './src/index.js',
      print: './src/print.js',
