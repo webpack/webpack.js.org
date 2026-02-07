@@ -1432,9 +1432,13 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>_<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;Another&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;loaded!&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  mode: &#x27;development&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">  entry: {
@@ -1468,9 +1472,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <h3><span id="entry-dependencies"></span>Entry dependencies<a href="#entry-dependencies" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>The <a href="/configuration/entry-context/#dependencies"><code>dependOn</code> option</a> allows to share the modules between the chunks:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: &#x27;development&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    index: &#x27;./src/index.js&#x27;,
@@ -1492,9 +1500,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>If we&#x27;re going to use multiple entry points on a single HTML page, <code>optimization.runtimeChunk: &#x27;single&#x27;</code> is needed too, otherwise we could get into trouble described <a href="https://bundlers.tooling.report/code-splitting/multi-entry/">here</a>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: &#x27;development&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    index: {
@@ -1536,9 +1548,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <h3><span id="splitchunksplugin"></span>SplitChunksPlugin<a href="#splitchunksplugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>The <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let&#x27;s use this to de-duplicate the <code>lodash</code> dependency from the previous example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">   mode: &#x27;development&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     index: &#x27;./src/index.js&#x27;,
@@ -1578,9 +1594,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <aside class="warning"><h6 class="warning__prefix">warning</h6><p><code>import()</code> calls use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a> internally. If you use <code>import()</code> with older browsers (e.g., IE 11), remember to shim <code>Promise</code> using a polyfill such as <a href="https://github.com/stefanpenner/es6-promise">es6-promise</a> or <a href="https://github.com/taylorhakes/promise-polyfill">promise-polyfill</a>.</p></aside>
 <p>Before we start, let&#x27;s remove the extra <a href="/concepts/entry-points/"><code>entry</code></a> and <a href="/plugins/split-chunks-plugin"><code>optimization.splitChunks</code></a> from our configuration in the above example as they won&#x27;t be needed for this next demonstration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: &#x27;development&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    index: &#x27;./src/index.js&#x27;,
