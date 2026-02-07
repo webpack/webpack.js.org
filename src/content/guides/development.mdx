@@ -17,6 +17,7 @@ contributors:
   - maxloh
   - snitin315
   - f3ndot
+  - Brennvo
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -30,10 +31,14 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
 **webpack.config.js**
 
 ```diff
- const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
 +  mode: 'development',
    entry: {
      index: './src/index.js',
@@ -66,10 +71,14 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
 **webpack.config.js**
 
 ```diff
- const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    mode: 'development',
    entry: {
      index: './src/index.js',
@@ -203,10 +212,14 @@ Change your configuration file to tell the dev server where to look for files:
 **webpack.config.js**
 
 ```diff
- const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    mode: 'development',
    entry: {
      index: './src/index.js',
@@ -292,10 +305,14 @@ Now we need to make some adjustments to our webpack configuration file in order 
 **webpack.config.js**
 
 ```diff
- const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    mode: 'development',
    entry: {
      index: './src/index.js',
