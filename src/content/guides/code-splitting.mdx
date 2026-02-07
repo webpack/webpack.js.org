@@ -35,6 +35,7 @@ contributors:
   - atesgoral
   - snitin315
   - artem-malko
+  - Brennvo
 related:
   - title: <link rel="prefetch/preload" /> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -83,9 +84,13 @@ console.log(_.join(["Another", "module", "loaded!"], " "));
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
 -  entry: './src/index.js',
 +  mode: 'development',
 +  entry: {
@@ -131,9 +136,13 @@ The [`dependOn` option](/configuration/entry-context/#dependencies) allows to sh
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    mode: 'development',
    entry: {
 -    index: './src/index.js',
@@ -160,9 +169,13 @@ If we're going to use multiple entry points on a single HTML page, `optimization
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    mode: 'development',
    entry: {
      index: {
@@ -216,9 +229,13 @@ The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract co
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
+  import path from 'node:path';
+  import { fileURLToPath } from 'node:url';
 
-  module.exports = {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
     mode: 'development',
     entry: {
       index: './src/index.js',
@@ -271,9 +288,13 @@ Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [
 **webpack.config.js**
 
 ```diff
- const path = require('path');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
 
- module.exports = {
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
    mode: 'development',
    entry: {
      index: './src/index.js',
