@@ -446,6 +446,144 @@ import { footer, header } from "./styles.module.css";
 
 By enabling `namedExports`, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.
 
+#### module.parser.css.animation
+
+<Badge text="5.104.0+" />
+
+Enable or disable renaming of `@keyframes` animation names in CSS modules.
+
+- Type: `boolean`
+- Default: `true`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      css: {
+        animation: true, // Enable @keyframes renaming
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.container
+
+<Badge text="5.104.0+" />
+
+Enable or disable renaming of `@container` names in CSS modules.
+
+- Type: `boolean`
+- Default: `true`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      css: {
+        container: true, // Enable @container renaming
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.customIdents
+
+<Badge text="5.104.0+" />
+
+Enable or disable renaming of custom identifiers in CSS modules.
+
+- Type: `boolean`
+- Default: `true`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      css: {
+        customIdents: true, // Enable custom identifier renaming
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.dashedIdents
+
+<Badge text="5.104.0+" />
+
+Enable or disable renaming of dashed identifiers, such as CSS custom properties (e.g., `--my-variable`).
+
+- Type: `boolean`
+- Default: `true`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      css: {
+        dashedIdents: true, // Enable dashed identifier renaming
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.function
+
+<Badge text="5.104.0+" />
+
+Enable or disable renaming of `@function` names in CSS modules.
+
+- Type: `boolean`
+- Default: `true`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      css: {
+        function: true, // Enable @function renaming
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.grid
+
+<Badge text="5.104.0+" />
+
+Enable or disable renaming of grid identifiers in CSS modules.
+
+- Type: `boolean`
+- Default: `true`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      css: {
+        grid: true, // Enable grid identifier renaming
+      },
+    },
+  },
+};
+```
+
 ### module.parser.css.exportType
 
 Configure how CSS content will be exported.

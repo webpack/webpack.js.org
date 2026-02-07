@@ -22,9 +22,33 @@ Use the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin) for a mo
 
 ## devtool
 
-`string = 'eval'` `false`
+`string = 'eval'` `Array<{ type: "all" | "javascript" | "css", use: string }>` `false`
 
 Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-source-maps) to enhance the debugging process. These values can affect build and rebuild speed dramatically.
+
+<Badge text="5.105.0+" />
+
+You can also provide an array of objects to configure different source map styles for different asset types:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  devtool: [
+    { type: "javascript", use: "source-map" },
+    { type: "css", use: "inline-source-map" },
+  ],
+};
+```
+
+The `type` field specifies which asset type should receive the devtool value:
+
+- `"all"` - applies to all asset types (JavaScript and CSS)
+- `"javascript"` - applies only to JavaScript files
+- `"css"` - applies only to CSS files
+
+When using an array, each entry will be processed in order. If you provide a string value, it will be treated as `{ type: "all", use: "your-string-value" }`.
 
 T> The webpack repository contains an [example showing the effect of all `devtool` variants](https://github.com/webpack/webpack/tree/master/examples/source-map). Those examples will likely help you to understand the differences.
 

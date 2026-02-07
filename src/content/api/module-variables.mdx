@@ -155,6 +155,94 @@ Returns the same value as `require.context` but only for `javascript/auto` and `
   });
   ```
 
+### import.meta.main
+
+<Badge text="5.103.0+" />
+
+Returns a boolean indicating whether the current module is an entry point.
+
+**src/index.js** (entry point)
+
+```javascript
+console.log(import.meta.main); // true
+```
+
+**src/utils.js** (not an entry point)
+
+```javascript
+console.log(import.meta.main); // false
+```
+
+This is useful for conditional logic that should only run in entry modules, similar to Node.js's `require.main === module` check.
+
+### import.meta.env
+
+<Badge text="5.103.0+" />
+
+Access environment variables from multiple sources. `import.meta.env` is an object that behaves similarly to `process.env`, allowing you to access environment variables defined through various webpack plugins and configuration options.
+
+**webpack.config.js**
+
+```js
+const webpack = require("webpack");
+
+module.exports = {
+  mode: "production", // NODE_ENV is automatically set to "production"
+  dotenv: {
+    prefix: "WEBPACK_", // Only expose variables with WEBPACK_ prefix
+  },
+  plugins: [
+    // EnvironmentPlugin exposes variables from process.env
+    new webpack.EnvironmentPlugin({
+      API_URL: "https://api.example.com",
+    }),
+    // DefinePlugin allows custom definitions
+    new webpack.DefinePlugin({
+      "import.meta.env.CUSTOM_VAR": JSON.stringify("custom_value"),
+    }),
+  ],
+};
+```
+
+**src/index.js**
+
+```js
+// Access environment variables
+console.log(import.meta.env.NODE_ENV); // "production" (from mode)
+console.log(import.meta.env.API_URL); // Value from EnvironmentPlugin or process.env
+console.log(import.meta.env.CUSTOM_VAR); // "custom_value" (from DefinePlugin)
+
+// Type checking
+console.log(typeof import.meta.env); // "object"
+
+// Truthy check
+if (import.meta.env) {
+  // import.meta.env is truthy
+}
+
+// Accessing non-existent properties returns undefined
+if (!import.meta.env.NOT_EXIST) {
+  // NOT_EXIST is undefined/falsy
+}
+
+// Destructuring assignment
+const { NODE_ENV, API_URL } = import.meta.env;
+```
+
+**Sources of environment variables:**
+
+1. **`mode` option**: Automatically sets `import.meta.env.NODE_ENV` based on the webpack mode (`development`, `production`, or `none`).
+
+2. **[`EnvironmentPlugin`](/plugins/environment-plugin)**: Exposes variables from `process.env` or provides default values.
+
+3. **[`DotenvPlugin`](/configuration/dotenv)**: Loads variables from `.env` files. Only variables with the specified prefix (default: `WEBPACK_`) are exposed.
+
+4. **[`DefinePlugin`](/plugins/define-plugin)**: Allows custom definitions using the `"import.meta.env.*"` pattern.
+
+T> Variables from different sources are merged together. If the same variable is defined in multiple sources, the order of precedence depends on plugin execution order.
+
+T> `import.meta.env` behaves like `process.env` - it's an object, supports `typeof` checks, and accessing non-existent properties returns `undefined`.
+
 ## \_\_filename (NodeJS)
 
 Depending on the configuration option `node.__filename`:
@@ -186,6 +274,8 @@ Equals the configuration option's `output.publicPath`.
 ## \_\_webpack_require\_\_ (webpack-specific)
 
 The raw require function. This expression isn't parsed by the Parser for dependencies.
+
+W> When webpack bundles are bundled again (e.g., when a previously bundled output is used as input), the [`CompatibilityPlugin`](/plugins/internal-plugins/#compatibilityplugin) will rename `__webpack_require__` from the previous bundle to avoid conflicts (e.g., `__nested_webpack_require_*`). In such cases, use [`__webpack_global__`](#__webpack_global__-webpack-specific) instead, which ensures you can always access the current compilation's `__webpack_require__` function.
 
 ## \_\_webpack_chunk_load\_\_ (webpack-specific)
 
@@ -255,6 +345,18 @@ __webpack_get_script_filename__ = (chunkId) => {
 ## \_\_non_webpack_require\_\_ (webpack-specific)
 
 Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
+
+## \_\_webpack_global\_\_ (webpack-specific)
+
+<Badge text="5.104.0+" />
+
+An alias for [`__webpack_require__`](#__webpack_require__-webpack-specific). When webpack bundles are bundled again (e.g., when a previously bundled output is used as input), the [`CompatibilityPlugin`](/plugins/internal-plugins/#compatibilityplugin) will rename `__webpack_require__` from the previous bundle to avoid conflicts. `__webpack_global__` ensures you can always access the current compilation's `__webpack_require__` function.
+
+**src/module.js**
+
+```js
+__webpack_global__.myProperty = "value";
+```
 
 ## \_\_webpack_exports_info\_\_ (webpack-specific)
 

@@ -744,6 +744,31 @@ module.exports = {
 
 The encoding to use when generating the hash. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/buffer.html#buffers-and-character-encodings) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
 
+<Badge text="5.104.0+" />
+
+In addition to the standard Node.js encodings, webpack also supports the following custom digest algorithms for generating shorter or URL-safe hash values:
+
+- `'base64url'` - URL-safe base64 encoding (RFC 4648), recommended for filenames
+- `'base62'` - Base62 encoding (0-9, A-Z, a-z)
+- `'base58'` - Base58 encoding (Bitcoin alphabet)
+- `'base52'` - Base52 encoding (A-Z, a-z)
+- `'base49'` - Base49 encoding
+- `'base36'` - Base36 encoding (0-9, A-Z)
+- `'base32'` - Base32 encoding (RFC 4648)
+- `'base25'` - Base25 encoding
+
+These custom encodings are particularly useful for generating shorter hash values in filenames while maintaining URL safety.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  output: {
+    hashDigest: "base64url", // URL-safe encoding for filenames
+  },
+};
+```
+
 ## output.hashDigestLength
 
 `number = 20`

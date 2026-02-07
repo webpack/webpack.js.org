@@ -190,6 +190,38 @@ Enable native CSS support. Note that it's an experimental feature still under de
 Experimental features:
 
 - CSS Modules support: webpack will generate a unique name for each CSS class. Use the `.module.css` extension for CSS Modules.
+
+  <Badge text="5.103.0+" />
+
+  Webpack natively supports the CSS Modules `composes` property, allowing you to compose classes from the same file, other CSS modules, or global classes:
+
+  ```css
+  /* styles.module.css */
+  .base {
+    color: blue;
+  }
+
+  .button {
+    composes: base;
+    padding: 10px;
+  }
+
+  .primary {
+    composes: button;
+    background: blue;
+  }
+
+  /* Compose from another CSS module */
+  .composed {
+    composes: className from "./other.module.css";
+  }
+
+  /* Compose from global classes */
+  .globalComposed {
+    composes: global-class from global;
+  }
+  ```
+
 - <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json`
   files: webpack will look for `style` field in `package.json` files and use
   that if it exists for imports inside CSS files.
@@ -256,9 +288,9 @@ TypeScript, Babel, SWC, and Flow.js can be configured to preserve the magic comm
 
 Esbuild is _not_ compatible with this feature (see [evanw/esbuild#1439](https://github.com/evanw/esbuild/issues/1439) and [evanw/esbuild#309](https://github.com/evanw/esbuild/issues/309)), but it may support this in the future.
 
-#### Not implemented
+<Badge text="5.105.0+" />
 
-import.defer() is not yet supported for ContextModule (the import path is a dynamic expression).
+`import.defer()` is now supported for ContextModule (the import path is a dynamic expression). See the [lazy loading guide](/guides/lazy-loading/#defer-import-example) for examples.
 
 ### experiments.futureDefaults
 

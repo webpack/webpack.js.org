@@ -218,6 +218,22 @@ This is similar to the CommonJS style of lazy loading:
   document.body.appendChild(component());
 ```
 
+### Using import.defer() with Context Modules
+
+<Badge text="5.105.0+" />
+
+`import.defer()` now supports context modules (dynamic import paths). This is useful when you need to defer evaluation of modules loaded through dynamic expressions.
+
+**src/index.js**
+
+```js
+import _ from "lodash";
+
+// const modules = import.defer("./locale/" + language + ".js");
+```
+
+In this example, the locale module is loaded and parsed, but its evaluation is deferred until you access the namespace object. This allows you to load multiple locale files without executing them immediately.
+
 ## Frameworks
 
 Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:

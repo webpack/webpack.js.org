@@ -854,6 +854,86 @@ module.exports = {
 };
 ```
 
+### resolve.tsconfig
+
+<Badge text="5.105.0+" />
+
+`boolean` `string` `object`
+
+TypeScript config for paths mapping. This option replaces the need for `tsconfig-paths-webpack-plugin`. It reads `compilerOptions.baseUrl` and `compilerOptions.paths` from `tsconfig.json` and applies those aliases when resolving imports.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  resolve: {
+    tsconfig: true, // Use default tsconfig.json
+  },
+};
+```
+
+**Options:**
+
+- `false` - Disable TypeScript path mapping
+- `true` - Use the default `tsconfig.json` file (searches for it automatically)
+- `string` - Path to a `tsconfig.json` file (relative or absolute)
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  resolve: {
+    tsconfig: "./tsconfig.app.json", // Custom path
+  },
+};
+```
+
+- `object` - Object with `configFile` and `references` options
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  resolve: {
+    tsconfig: {
+      configFile: "./tsconfig.json",
+      references: "auto", // or array of paths
+    },
+  },
+};
+```
+
+**Object options:**
+
+- `configFile` (`string`): A path to the tsconfig file (relative or absolute)
+- `references` (`"auto"` | `string[]`): References to other tsconfig files. `"auto"` inherits from TypeScript config, or an array of relative/absolute paths
+
+**Example tsconfig.json:**
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "components/*": ["src/components/*"]
+    }
+  }
+}
+```
+
+Then in your code:
+
+```ts
+import Button from "@/components/Button";
+import Header from "components/Header";
+```
+
+T> This option is also available in `resolveLoader` with the same configuration options.
+
 ## resolveLoader
 
 `object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
