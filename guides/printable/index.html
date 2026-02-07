@@ -1083,10 +1083,14 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <aside class="warning"><h6 class="warning__prefix">warning</h6><p>The tools in this guide are <strong>only meant for development</strong>, please <strong>avoid</strong> using them in production!</p></aside>
 <p>Let&#x27;s start by setting <a href="/configuration/mode/#mode-development"><code>mode</code> to <code>&#x27;development&#x27;</code></a> and <code>title</code> to <code>&#x27;Development&#x27;</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  mode: &#x27;development&#x27;,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  entry: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    index: &#x27;./src/index.js&#x27;,
@@ -1110,10 +1114,14 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>There are a lot of <a href="/configuration/devtool">different options</a> available when it comes to source maps. Be sure to check them out so you can configure them to your needs.</p>
 <p>For this guide, let&#x27;s use the <code>inline-source-map</code> option, which is good for illustrative purposes (though not for production):</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: &#x27;development&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    index: &#x27;./src/index.js&#x27;,
@@ -1204,10 +1212,14 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack-dev-server</code></pre></div>
 <p>Change your configuration file to tell the dev server where to look for files:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: &#x27;development&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    index: &#x27;./src/index.js&#x27;,
@@ -1270,10 +1282,14 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev express webpack-dev-middleware</code></pre></div>
 <p>Now we need to make some adjustments to our webpack configuration file in order to make sure the middleware will function correctly:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: &#x27;development&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    index: &#x27;./src/index.js&#x27;,
