@@ -1759,24 +1759,28 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
 </span></span>|- /node_modules</code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">       title: &#x27;Output Management&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">       title: &#x27;Caching&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     }),
-</span><span class="token prefix unchanged"> </span><span class="token line">   ],
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">     filename: &#x27;bundle.js&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     filename: &#x27;[name].[contenthash].js&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
+</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
+</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">      title: &#x27;Output Management&#x27;,
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">      title: &#x27;Caching&#x27;,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    }),
+</span><span class="token prefix unchanged"> </span><span class="token line">  ],
+</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    filename: &#x27;bundle.js&#x27;,
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
+</span><span class="token prefix unchanged"> </span><span class="token line">  },
+</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>Running our build script, <code>npm run build</code>, with this configuration should produce the following output:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token punctuation">..</span>.
                        Asset       Size  Chunks                    Chunk Names
@@ -1794,25 +1798,29 @@ main.205199ab45963f6a62ec.js     <span class="token number">544</span> kB       
 <h2><span id="extracting-boilerplate"></span>Extracting Boilerplate<a href="#extracting-boilerplate" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>As we learned in <a href="/guides/code-splitting">code splitting</a>, the <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> can be used to split modules out into separate bundles. Webpack provides an optimization feature to split runtime code into a separate chunk using the <a href="/configuration/optimization/#optimizationruntimechunk"><code>optimization.runtimeChunk</code></a> option. Set it to <code>single</code> to create a single runtime bundle for all chunks:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">     title: &#x27;Caching&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     }),
-</span><span class="token prefix unchanged"> </span><span class="token line">   ],
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;[name].[contenthash].js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   optimization: {
-</span><span class="token prefix inserted">+</span><span class="token line">     runtimeChunk: &#x27;single&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">   },
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
+</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
+</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
+</span><span class="token prefix unchanged"> </span><span class="token line">      title: &#x27;Caching&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    }),
+</span><span class="token prefix unchanged"> </span><span class="token line">  ],
+</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
+</span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
+</span><span class="token prefix unchanged"> </span><span class="token line">  },
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  optimization: {
+</span><span class="token prefix inserted">+</span><span class="token line">    runtimeChunk: &#x27;single&#x27;,
+</span><span class="token prefix inserted">+</span><span class="token line">  },
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>Let&#x27;s run another build to see the extracted <code>runtime</code> bundle:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">Hash: 82c9c385607b2150fab2
 Version: webpack <span class="token number">4.12</span>.0
@@ -1828,34 +1836,38 @@ runtime.cc17ae2a94ec771e9221.js   <span class="token number">1.42</span> KiB    
 <p>It&#x27;s also good practice to extract third-party libraries, such as <code>lodash</code> or <code>react</code>, to a separate <code>vendor</code> chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date.
 This can be done by using the <a href="/plugins/split-chunks-plugin/#splitchunkscachegroups"><code>cacheGroups</code></a> option of the <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> demonstrated in <a href="/plugins/split-chunks-plugin/#split-chunks-example-2">Example 2 of SplitChunksPlugin</a>. Lets add <code>optimization.splitChunks</code> with <code>cacheGroups</code> with next params and build:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">     title: &#x27;Caching&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     }),
-</span><span class="token prefix unchanged"> </span><span class="token line">   ],
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;[name].[contenthash].js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line">   optimization: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     runtimeChunk: &#x27;single&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     splitChunks: {
-</span><span class="token prefix inserted">+</span><span class="token line">       cacheGroups: {
-</span><span class="token prefix inserted">+</span><span class="token line">         vendor: {
-</span><span class="token prefix inserted">+</span><span class="token line">           test: /[\\/]node_modules[\\/]/,
-</span><span class="token prefix inserted">+</span><span class="token line">           name: &#x27;vendors&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">           chunks: &#x27;all&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">         },
-</span><span class="token prefix inserted">+</span><span class="token line">       },
-</span><span class="token prefix inserted">+</span><span class="token line">     },
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
+</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
+</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
+</span><span class="token prefix unchanged"> </span><span class="token line">      title: &#x27;Caching&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    }),
+</span><span class="token prefix unchanged"> </span><span class="token line">  ],
+</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
+</span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
+</span><span class="token prefix unchanged"> </span><span class="token line">  },
+</span><span class="token prefix unchanged"> </span><span class="token line">  optimization: {
+</span><span class="token prefix unchanged"> </span><span class="token line">    runtimeChunk: &#x27;single&#x27;,
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    splitChunks: {
+</span><span class="token prefix inserted">+</span><span class="token line">      cacheGroups: {
+</span><span class="token prefix inserted">+</span><span class="token line">        vendor: {
+</span><span class="token prefix inserted">+</span><span class="token line">          test: /[\\/]node_modules[\\/]/,
+</span><span class="token prefix inserted">+</span><span class="token line">          name: &#x27;vendors&#x27;,
+</span><span class="token prefix inserted">+</span><span class="token line">          chunks: &#x27;all&#x27;,
+</span><span class="token prefix inserted">+</span><span class="token line">        },
+</span><span class="token prefix inserted">+</span><span class="token line">      },
+</span><span class="token prefix inserted">+</span><span class="token line">    },
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  },
+</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>Let&#x27;s run another build to see our new <code>vendor</code> bundle:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token punctuation">..</span>.
                           Asset       Size  Chunks             Chunk Names
@@ -1912,35 +1924,39 @@ vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB    
 </ul>
 <p>The first and last are expected, it&#x27;s the <code>vendor</code> hash we want to fix. Let&#x27;s use <a href="/configuration/optimization/#optimizationmoduleids"><code>optimization.moduleIds</code></a> with <code>&#x27;deterministic&#x27;</code> option:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">       title: &#x27;Caching&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     }),
-</span><span class="token prefix unchanged"> </span><span class="token line">   ],
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;[name].[contenthash].js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line">   optimization: {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     moduleIds: &#x27;deterministic&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     runtimeChunk: &#x27;single&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     splitChunks: {
-</span><span class="token prefix unchanged"> </span><span class="token line">       cacheGroups: {
-</span><span class="token prefix unchanged"> </span><span class="token line">         vendor: {
-</span><span class="token prefix unchanged"> </span><span class="token line">           test: /[\\/]node_modules[\\/]/,
-</span><span class="token prefix unchanged"> </span><span class="token line">           name: &#x27;vendors&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">           chunks: &#x27;all&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">         },
-</span><span class="token prefix unchanged"> </span><span class="token line">       },
-</span><span class="token prefix unchanged"> </span><span class="token line">     },
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
+</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
+</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
+</span><span class="token prefix unchanged"> </span><span class="token line">      title: &#x27;Caching&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    }),
+</span><span class="token prefix unchanged"> </span><span class="token line">  ],
+</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
+</span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
+</span><span class="token prefix unchanged"> </span><span class="token line">  },
+</span><span class="token prefix unchanged"> </span><span class="token line">  optimization: {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    moduleIds: &#x27;deterministic&#x27;,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    runtimeChunk: &#x27;single&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    splitChunks: {
+</span><span class="token prefix unchanged"> </span><span class="token line">      cacheGroups: {
+</span><span class="token prefix unchanged"> </span><span class="token line">        vendor: {
+</span><span class="token prefix unchanged"> </span><span class="token line">          test: /[\\/]node_modules[\\/]/,
+</span><span class="token prefix unchanged"> </span><span class="token line">          name: &#x27;vendors&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">          chunks: &#x27;all&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">        },
+</span><span class="token prefix unchanged"> </span><span class="token line">      },
+</span><span class="token prefix unchanged"> </span><span class="token line">    },
+</span><span class="token prefix unchanged"> </span><span class="token line">  },
+</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>Now, despite any new local dependencies, our <code>vendor</code> hash should stay consistent between builds:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token punctuation">..</span>.
                           Asset       Size  Chunks             Chunk Names
