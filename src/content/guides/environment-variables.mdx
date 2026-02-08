@@ -9,6 +9,7 @@ contributors:
   - byzyk
   - jceipek
   - snitin315
+  - Brennvo
 ---
 
 To disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production) you may use environment variables.
@@ -23,14 +24,18 @@ npx webpack --env goal=local --env production --progress
 
 T> Setting up your `env` variable without assignment, `--env production` sets `env.production` to `true` by default. There are also other syntaxes that you can use. See the [webpack CLI](/api/cli/#environment-options) documentation for more information.
 
-There is one change that you will have to make to your webpack config. Typically, `module.exports` points to the configuration object. To use the `env` variable, you must convert `module.exports` to a function:
+There is one change that you will have to make to your webpack config. Typically, `export default` points to the configuration object. To use the `env` variable, you must make `export default` a function:
 
 **webpack.config.js**
 
 ```js
-const path = require("node:path");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-module.exports = (env) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default (env) => {
   // Use env.<YOUR VARIABLE> here:
   console.log("Goal:", env.goal); // 'local'
   console.log("Production:", env.production); // true
