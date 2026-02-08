@@ -6,6 +6,7 @@ contributors:
   - chrisVillanueva
   - byzyk
   - wizardofhogwarts
+  - Brennvo
 ---
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
@@ -29,7 +30,13 @@ npm install --save-dev webpack webpack-cli @webpack-cli/serve webpack-dev-server
 Make sure to have a `webpack.config.js` file. If you haven't already, use this as a minimal example to get started:
 
 ```js
-module.exports = {
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   context: __dirname,
   entry: "./app.js",
 };
