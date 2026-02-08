@@ -47,24 +47,28 @@ webpack-demo
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-  module.exports = {
-    entry: './src/index.js',
-    plugins: [
-      new HtmlWebpackPlugin({
--       title: 'Output Management',
-+       title: 'Caching',
-      }),
-    ],
-    output: {
--     filename: 'bundle.js',
-+     filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist'),
-      clean: true,
-    },
-  };
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: './src/index.js',
+   plugins: [
+     new HtmlWebpackPlugin({
+-      title: 'Output Management',
++      title: 'Caching',
+     }),
+   ],
+   output: {
+-    filename: 'bundle.js',
++    filename: '[name].[contenthash].js',
+     path: path.resolve(__dirname, 'dist'),
+     clean: true,
+   },
+ };
 ```
 
 Running our build script, `npm run build`, with this configuration should produce the following output:
@@ -98,25 +102,29 @@ As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlug
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-  module.exports = {
-    entry: './src/index.js',
-    plugins: [
-      new HtmlWebpackPlugin({
-      title: 'Caching',
-      }),
-    ],
-    output: {
-      filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist'),
-      clean: true,
-    },
-+   optimization: {
-+     runtimeChunk: 'single',
-+   },
-  };
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: './src/index.js',
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: 'Caching',
+     }),
+   ],
+   output: {
+     filename: '[name].[contenthash].js',
+     path: path.resolve(__dirname, 'dist'),
+     clean: true,
+   },
++  optimization: {
++    runtimeChunk: 'single',
++  },
+ };
 ```
 
 Let's run another build to see the extracted `runtime` bundle:
@@ -141,34 +149,38 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-  module.exports = {
-    entry: './src/index.js',
-    plugins: [
-      new HtmlWebpackPlugin({
-      title: 'Caching',
-      }),
-    ],
-    output: {
-      filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist'),
-      clean: true,
-    },
-    optimization: {
-      runtimeChunk: 'single',
-+     splitChunks: {
-+       cacheGroups: {
-+         vendor: {
-+           test: /[\\/]node_modules[\\/]/,
-+           name: 'vendors',
-+           chunks: 'all',
-+         },
-+       },
-+     },
-    },
-  };
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: './src/index.js',
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: 'Caching',
+     }),
+   ],
+   output: {
+     filename: '[name].[contenthash].js',
+     path: path.resolve(__dirname, 'dist'),
+     clean: true,
+   },
+   optimization: {
+     runtimeChunk: 'single',
++    splitChunks: {
++      cacheGroups: {
++        vendor: {
++          test: /[\\/]node_modules[\\/]/,
++          name: 'vendors',
++          chunks: 'all',
++        },
++      },
++    },
+   },
+ };
 ```
 
 Let's run another build to see our new `vendor` bundle:
@@ -253,35 +265,39 @@ The first and last are expected, it's the `vendor` hash we want to fix. Let's us
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
+ import path from 'node:path';
+ import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-  module.exports = {
-    entry: './src/index.js',
-    plugins: [
-      new HtmlWebpackPlugin({
-        title: 'Caching',
-      }),
-    ],
-    output: {
-      filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist'),
-      clean: true,
-    },
-    optimization: {
-+     moduleIds: 'deterministic',
-      runtimeChunk: 'single',
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
-        },
-      },
-    },
-  };
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: './src/index.js',
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: 'Caching',
+     }),
+   ],
+   output: {
+     filename: '[name].[contenthash].js',
+     path: path.resolve(__dirname, 'dist'),
+     clean: true,
+   },
+   optimization: {
++    moduleIds: 'deterministic',
+     runtimeChunk: 'single',
+     splitChunks: {
+       cacheGroups: {
+         vendor: {
+           test: /[\\/]node_modules[\\/]/,
+           name: 'vendors',
+           chunks: 'all',
+         },
+       },
+     },
+   },
+ };
 ```
 
 Now, despite any new local dependencies, our `vendor` hash should stay consistent between builds:
