@@ -2061,9 +2061,13 @@ Entrypoint main <span class="token operator">=</span> runtime.725a1a51ede5ae0cfd
 <h2><span id="webpack-configuration"></span>Webpack Configuration<a href="#webpack-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Let&#x27;s start with this basic webpack configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">,</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -2074,14 +2078,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="expose-the-library"></span>Expose the Library<a href="#expose-the-library" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>So far everything should be the same as bundling an application, and here comes the different part – we need to expose exports from the entry point through <a href="/configuration/output/#outputlibrary"><code>output.library</code></a> option.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;webpack-numbers.js&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     library: &quot;webpackNumbers&quot;,
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     library: &#x27;webpackNumbers&#x27;,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
 <p>We exposed the entry point as <code>webpackNumbers</code> so users can use it through script tag:</p>
@@ -2124,9 +2132,13 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 </li>
 </ul>
 <p>Let&#x27;s update the <code>output.library</code> option with its <code>type</code> set to <a href="/configuration/output/#type-umd"><code>&#x27;umd&#x27;</code></a>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
@@ -2145,16 +2157,20 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 <p>Now, if you run <code>npx webpack</code>, you will find that a largish bundle is created. If you inspect the file, you&#x27;ll see that lodash has been bundled along with your code. In this case, we&#x27;d prefer to treat <code>lodash</code> as a <em>peer dependency</em>. Meaning that the consumer should already have <code>lodash</code> installed. Hence you would want to give up control of this external library to the consumer of your library.</p>
 <p>This can be done using the <a href="/configuration/externals/"><code>externals</code></a> configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;webpack-numbers.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">     library: {
-</span><span class="token prefix unchanged"> </span><span class="token line">       name: &quot;webpackNumbers&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">       type: &quot;umd&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">       name: &#x27;webpackNumbers&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">       type: &#x27;umd&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">     },
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   externals: {
@@ -2174,7 +2190,7 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 
 <span class="token comment">// ...</span></code></pre></div>
 <p>You won&#x27;t be able to exclude them from the bundle by specifying <code>library</code> in the externals. You&#x27;ll either need to exclude them one by one or by using a regular expression.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   externals<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token string">&quot;library/one&quot;</span><span class="token punctuation">,</span>
