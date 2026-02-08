@@ -2440,7 +2440,13 @@ https://trusted.cdn.com;</code></pre></div>
 <p>Next, install <code>webpack</code>, <code>webpack-cli</code>, <code>@webpack-cli/serve</code>, and <code>webpack-dev-server</code> in your project;</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack webpack-cli @webpack-cli/serve webpack-dev-server</code></pre></div>
 <p>Make sure to have a <code>webpack.config.js</code> file. If you haven&#x27;t already, use this as a minimal example to get started:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   context<span class="token operator">:</span> __dirname<span class="token punctuation">,</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
