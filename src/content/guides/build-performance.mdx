@@ -38,7 +38,7 @@ export default {
     rules: [
       {
         test: /\.js$/i,
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
     ],
   },
@@ -48,8 +48,8 @@ export default {
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
 
 ```js
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -60,8 +60,8 @@ export default {
     rules: [
       {
         test: /\.js$/i,
-        include: path.resolve(__dirname, 'src'),
-        loader: 'babel-loader',
+        include: path.resolve(__dirname, "src"),
+        loader: "babel-loader",
       },
     ],
   },
@@ -217,7 +217,7 @@ export default {
   test: /\.tsx?$/,
   use: [
     {
-      loader: 'ts-loader',
+      loader: "ts-loader",
       options: {
         transpileOnly: true,
       },
