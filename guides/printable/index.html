@@ -2254,7 +2254,7 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <p>Staying up-to-date with <strong>Node.js</strong> can also help with performance. On top of this, keeping your package manager (e.g. <code>npm</code> or <code>yarn</code>) up-to-date can also help. Newer versions create more efficient module trees and increase resolving speed.</p>
 <h3><span id="loaders"></span>Loaders<a href="#loaders" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Apply loaders to the minimal number of modules necessary. Instead of:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -2266,9 +2266,13 @@ module<span class="token punctuation">.</span><span class="token function-variab
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Use the <code>include</code> field to only apply the loader modules that actually need to be transformed by it:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -2345,7 +2349,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="minimal-entry-chunk"></span>Minimal Entry Chunk<a href="#minimal-entry-chunk" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, <code>[name]</code>/<code>[chunkhash]</code>/<code>[contenthash]</code> in <code>output.chunkFilename</code>, <code>[fullhash]</code>) the entry chunk is invalidated in addition to the changed chunks.</p>
 <p>Make sure the entry chunk is cheap to emit by keeping it small. The following configuration creates an additional chunk for the runtime code, so it&#x27;s cheap to generate:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     runtimeChunk<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -2353,7 +2357,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="avoid-extra-optimization-steps"></span>Avoid Extra Optimization Steps<a href="#avoid-extra-optimization-steps" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Webpack does extra algorithmic work to optimize the output for size and load performance. These optimizations are performant for smaller codebases, but can be costly in larger ones:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     removeAvailableModules<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -2363,7 +2367,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="output-without-path-info"></span>Output Without Path Info<a href="#output-without-path-info" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Webpack has the ability to generate path info in the output bundle. However, this puts garbage collection pressure on projects that bundle thousands of modules. Turn this off in the <code>options.output.pathinfo</code> setting:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     pathinfo<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -2374,7 +2378,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Earlier and later Node.js versions are not affected.</p>
 <h3><span id="typescript-loader"></span>TypeScript Loader<a href="#typescript-loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>To improve the build time when using <code>ts-loader</code>, use the <code>transpileOnly</code> loader option. On its own, this option turns off type checking. To gain type checking again, use the <a href="https://www.npmjs.com/package/fork-ts-checker-webpack-plugin"><code>ForkTsCheckerWebpackPlugin</code></a>. This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   test<span class="token operator">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
   use<span class="token operator">:</span> <span class="token punctuation">[</span>
