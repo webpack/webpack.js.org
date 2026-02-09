@@ -16,7 +16,7 @@ In 2026, our focus goes beyond maintaining existing features. We’re investing 
 
 Below, we’ll walk through the main areas we’re actively working on and the ideas we plan to develop throughout the year.
 
-### Support for CSS Modules without the need for plugins
+### [webpack#14893](https://github.com/webpack/webpack/issues/14893) - Support for CSS Modules without the need for plugins
 
 There is currently an [`experimental.css`](/configuration/experiments/#experimentscss) option, which enables **native CSS support** without the need to add plugins to your configuration, as was previously required with plugins like [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin).
 
@@ -25,7 +25,7 @@ The development is already quite advanced, with the possibility of finishing the
 You can follow the discussion about [experimental CSS support](https://github.com/webpack/webpack/issues/14893)
 to stay updated and contribute ideas.
 
-### A universal target to make your code compatible across runtimes
+### [webpack#6525](https://github.com/webpack/webpack/issues/6525) - A universal target to make your code compatible across runtimes
 
 The idea is to add a new target called **universal**, which will compile your code so it can run across **different runtimes**, including Node, the web, Bun, Deno, etc.
 Regardless of whether you use **CommonJS modules** in your application, webpack will be able to wrap them, and all the resulting code will be **pure ESM**, making it _runtime-agnostic_.
@@ -38,7 +38,7 @@ You can also join the discussion about [universal target](https://github.com/web
 
 Recently, in version [5.105](/blog/webpack-5-105/) we included support for **resolving the paths defined in the TypeScript configuration**, eliminating the need to use a plugin ([tsconfig-paths-webpack-plugin](https://www.npmjs.com/package/tsconfig-paths-webpack-plugin)). Now we want to further expand TypeScript support by **removing the need to use a loader** (the most common one being _ts-loader_) to transpile TypeScript directly in webpack, which would also **reduce your project’s dependencies**.
 
-### Import HTML files and use them as entry points without the need for plugins
+### [webpack#536](https://github.com/webpack/webpack/issues/536) - Import HTML files and use them as entry points without the need for plugins
 
 Currently, to import HTML files and use them as entry points, it’s necessary to use a plugin ([_html-webpack-plugin_](/plugins/html-webpack-plugin)). The idea is to **integrate that plugin into the core**, similar to how CSS Modules are being handled, and remove the need for a plugin for such a common task. Like CSS Modules, this would be introduced as an _experimental option_, so that in **webpack 6** you’ll be able to remove that dependency.
 
