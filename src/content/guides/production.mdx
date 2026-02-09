@@ -23,6 +23,7 @@ contributors:
   - aholzner
   - EugeneHlushko
   - snitin315
+  - Brennvo
 ---
 
 In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
@@ -61,10 +62,14 @@ npm install --save-dev webpack-merge
 **webpack.common.js**
 
 ```diff
-+ const path = require('path');
-+ const HtmlWebpackPlugin = require('html-webpack-plugin');
++ import path from 'node:path';
++ import { fileURLToPath } from 'node:url';
++ import HtmlWebpackPlugin from 'html-webpack-plugin';
 +
-+ module.exports = {
++ const __filename = fileURLToPath(import.meta.url);
++ const __dirname = path.dirname(__filename);
++
++ export default {
 +   entry: {
 +     app: './src/index.js',
 +   },
@@ -84,10 +89,10 @@ npm install --save-dev webpack-merge
 **webpack.dev.js**
 
 ```diff
-+ const { merge } = require('webpack-merge');
-+ const common = require('./webpack.common.js');
++ import { merge } from 'webpack-merge';
++ import common from './webpack.common.js';
 +
-+ module.exports = merge(common, {
++ export default merge(common, {
 +   mode: 'development',
 +   devtool: 'inline-source-map',
 +   devServer: {
@@ -99,10 +104,10 @@ npm install --save-dev webpack-merge
 **webpack.prod.js**
 
 ```diff
-+ const { merge } = require('webpack-merge');
-+ const common = require('./webpack.common.js');
++ import { merge } from 'webpack-merge';
++ import common from './webpack.common.js';
 +
-+ module.exports = merge(common, {
++ export default merge(common, {
 +   mode: 'production',
 + });
 ```
@@ -157,10 +162,10 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 **webpack.prod.js**
 
 ```diff
-  const { merge } = require('webpack-merge');
-  const common = require('./webpack.common.js');
+  import { merge } from 'webpack-merge';
+  import common from './webpack.common.js';
 
-  module.exports = merge(common, {
+  export default merge(common, {
     mode: 'production',
   });
 ```
@@ -209,10 +214,10 @@ We encourage you to have source maps enabled in production, as they are useful f
 **webpack.prod.js**
 
 ```diff
-  const { merge } = require('webpack-merge');
-  const common = require('./webpack.common.js');
+  import { merge } from 'webpack-merge';
+  import common from './webpack.common.js';
 
-  module.exports = merge(common, {
+  export default merge(common, {
     mode: 'production',
 +   devtool: 'source-map',
   });
