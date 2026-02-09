@@ -44,6 +44,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
+     // clean up those who are not listed in manifestURLs
     caches.open(cacheName).then((cache) =>
       // clean up those who are not listed in manifestURLs
       cache
