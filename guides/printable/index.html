@@ -3333,10 +3333,14 @@ module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   |- math.js
 </span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
 <p><strong>webpack.common.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const path = require(&#x27;path&#x27;);
-</span><span class="token prefix inserted">+</span><span class="token line"> const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import path from &#x27;node:path&#x27;;
+</span><span class="token prefix inserted">+</span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
+</span><span class="token prefix inserted">+</span><span class="token line"> import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
 </span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line"> module.exports = {
+</span><span class="token prefix inserted">+</span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
+</span><span class="token prefix inserted">+</span><span class="token line"> const __dirname = path.dirname(__filename);
+</span><span class="token prefix inserted">+</span><span class="token line">
+</span><span class="token prefix inserted">+</span><span class="token line"> export default {
 </span><span class="token prefix inserted">+</span><span class="token line">   entry: {
 </span><span class="token prefix inserted">+</span><span class="token line">     app: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">   },
@@ -3352,10 +3356,10 @@ module.exports = {
 </span><span class="token prefix inserted">+</span><span class="token line">   },
 </span><span class="token prefix inserted">+</span><span class="token line"> };</span></span></code></pre></div>
 <p><strong>webpack.dev.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const { merge } = require(&#x27;webpack-merge&#x27;);
-</span><span class="token prefix inserted">+</span><span class="token line"> const common = require(&#x27;./webpack.common.js&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import { merge } from &#x27;webpack-merge&#x27;;
+</span><span class="token prefix inserted">+</span><span class="token line"> import common from &#x27;./webpack.common.js&#x27;;
 </span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line"> module.exports = merge(common, {
+</span><span class="token prefix inserted">+</span><span class="token line"> export default merge(common, {
 </span><span class="token prefix inserted">+</span><span class="token line">   mode: &#x27;development&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">   devtool: &#x27;inline-source-map&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">   devServer: {
@@ -3363,10 +3367,10 @@ module.exports = {
 </span><span class="token prefix inserted">+</span><span class="token line">   },
 </span><span class="token prefix inserted">+</span><span class="token line"> });</span></span></code></pre></div>
 <p><strong>webpack.prod.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const { merge } = require(&#x27;webpack-merge&#x27;);
-</span><span class="token prefix inserted">+</span><span class="token line"> const common = require(&#x27;./webpack.common.js&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import { merge } from &#x27;webpack-merge&#x27;;
+</span><span class="token prefix inserted">+</span><span class="token line"> import common from &#x27;./webpack.common.js&#x27;;
 </span><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line"> module.exports = merge(common, {
+</span><span class="token prefix inserted">+</span><span class="token line"> export default merge(common, {
 </span><span class="token prefix inserted">+</span><span class="token line">   mode: &#x27;production&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line"> });</span></span></code></pre></div>
 <p>In <code>webpack.common.js</code>, we now have setup our <code>entry</code> and <code>output</code> configuration and we&#x27;ve included any plugins that are required for both environments. In <code>webpack.dev.js</code>, we&#x27;ve set <code>mode</code> to <code>development</code>. Also, we&#x27;ve added the recommended <code>devtool</code> for that environment (strong source mapping), as well as our <code>devServer</code> configuration. Finally, in <code>webpack.prod.js</code>,<code>mode</code> is set to <code>production</code> which loads <a href="/plugins/terser-webpack-plugin/"><code>TerserPlugin</code></a>, which was first introduced by the <a href="/guides/tree-shaking/">tree shaking</a> guide.</p>
@@ -3406,10 +3410,10 @@ module.exports = {
 <h2><span id="specify-the-mode"></span>Specify the Mode<a href="#specify-the-mode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Many libraries will key off the <code>process.env.NODE_ENV</code> variable to determine what should be included in the library. For example, when <code>process.env.NODE_ENV</code> is not set to <code>&#x27;production&#x27;</code> some libraries may add additional logging and testing to make debugging easier. However, with <code>process.env.NODE_ENV</code> set to <code>&#x27;production&#x27;</code> they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying <a href="/configuration/mode/"><code>mode</code></a> automatically configures <code>process.env.NODE_ENV</code> for you through <a href="https://github.com/webpack/webpack/blob/fcccd192ce550210186f84a7ca59ee4cd47a8b2d/lib/WebpackOptionsApply.js#L565"><code>DefinePlugin</code></a>:</p>
 <p><strong>webpack.prod.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const { merge } = require(&#x27;webpack-merge&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const common = require(&#x27;./webpack.common.js&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import { merge } from &#x27;webpack-merge&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line"> import common from &#x27;./webpack.common.js&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = merge(common, {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default merge(common, {
 </span><span class="token prefix unchanged"> </span><span class="token line">   mode: &#x27;production&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line"> });</span></span></code></pre></div>
 <aside class="tip"><h6 class="tip__prefix">tip</h6><p>Technically, <code>NODE_ENV</code> is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, <code>process.env.NODE_ENV</code> is not set <strong>within</strong> the build script <code>webpack.config.js</code> automatically when running webpack. Thus, conditionals like <code>process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;[name].[contenthash].bundle.js&#x27; : &#x27;[name].bundle.js&#x27;</code> won&#x27;t work in webpack configurations unless you specify <code>NODE_ENV</code> explicitly with <code>NODE_ENV=production</code> through CLI.</p></aside>
@@ -3443,10 +3447,10 @@ module.exports = {
 <h2><span id="source-mapping"></span>Source Mapping<a href="#source-mapping" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that&#x27;s recommended for production use (see <a href="/configuration/devtool"><code>devtool</code></a>). For this guide, we&#x27;ll use the <code>source-map</code> option in the <em>production</em> as opposed to the <code>inline-source-map</code> we used in the <em>development</em>:</p>
 <p><strong>webpack.prod.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const { merge } = require(&#x27;webpack-merge&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const common = require(&#x27;./webpack.common.js&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import { merge } from &#x27;webpack-merge&#x27;;
+</span><span class="token prefix unchanged"> </span><span class="token line"> import common from &#x27;./webpack.common.js&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = merge(common, {
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default merge(common, {
 </span><span class="token prefix unchanged"> </span><span class="token line">   mode: &#x27;production&#x27;,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   devtool: &#x27;source-map&#x27;,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> });</span></span></code></pre></div>
