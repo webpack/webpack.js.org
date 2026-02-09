@@ -21,6 +21,7 @@ contributors:
   - wizardofhogwarts
   - aholzner
   - snitin315
+  - Brennvo
 
 related:
   - title: Concepts - Hot Module Replacement
@@ -46,10 +47,14 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  import path from 'node:path';
+  import { fileURLToPath } from 'node:url';
+  import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-  module.exports = {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
     entry: {
        app: './src/index.js',
 -      print: './src/print.js',
@@ -77,11 +82,15 @@ you can also provide manual entry points for HMR:
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-+ const webpack = require("webpack");
+  import path from 'node:path';
+  import { fileURLToPath } from 'node:url';
+  import HtmlWebpackPlugin from 'html-webpack-plugin';
++ import webpack from 'webpack';
 
-  module.exports = {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
     entry: {
        app: './src/index.js',
 -      print: './src/print.js',
@@ -182,10 +191,14 @@ To enable HMR, you also need to modify your webpack configuration object to incl
 **dev-server.js**
 
 ```javascript
-const path = require("node:path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
-const WebpackDevServer = require("webpack-dev-server");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import webpack from "webpack";
+import WebpackDevServer from "webpack-dev-server";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const config = {
   mode: "development",
@@ -288,10 +301,14 @@ Now let's update the configuration file to make use of the loader.
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  import path from 'node:path';
+  import { fileURLToPath } from 'node:url';
+  import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-  module.exports = {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
     entry: {
       app: './src/index.js',
     },
