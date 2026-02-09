@@ -41,9 +41,9 @@ Recently, in version [5.105](/blog/webpack-5-105/) we included support for **res
 
 ### [webpack#536](https://github.com/webpack/webpack/issues/536) - Import HTML files and use them as entry points without the need for plugins
 
-Currently, to import HTML files and use them as entry points, it’s necessary to use a plugin ([_html-webpack-plugin_](/plugins/html-webpack-plugin)). The idea is to **integrate that plugin into the core**, similar to how CSS Modules are being handled, and remove the need for a plugin for such a common task. Like CSS Modules, this would be introduced as an _experimental option_, so that in **webpack 6** you’ll be able to remove that dependency.
+Currently, to import HTML files and use them as entry points, it’s necessary to use a plugin ([_html-webpack-plugin_](/plugins/html-webpack-plugin)). The idea is to **integrate that plugin into the core of webpack itself**, similar to how CSS Modules are being handled, and remove the need for a plugin for such a common task. Like CSS Modules, this would be introduced as an _experimental option_, so that in **webpack 6** you’ll be able to remove that dependency.
 
-You can follow the idea and its progress in [webpack#536](https://github.com/webpack/webpack/issues/536).
+You can follow the idea and its progress in the related issue ([#536](https://github.com/webpack/webpack/issues/536)).
 
 ### Webpack Everywhere (Node, Deno, and Bun, Web)
 
@@ -57,7 +57,7 @@ Currently, **Deno support is missing proper tests**, while **Bun still lacks req
 
 ### Evaluating Lazy Barrel Optimization
 
-One interesting idea to explore is **lazy barrel optimization**, inspired by how _Rspack_ handles certain module patterns. In Rspack, _lazy barrel_ is an optimization that **skips building unused re-exported modules in side‑effect‑free barrel files until they’re actually needed**. This can significantly reduce build work, especially in **large codebases** with lots of grouped exports.
+One interesting idea to explore is **lazy barrel optimization**, inspired by how _Rspack_ handles certain module patterns. In Rspack, _lazy barrel_ is an optimization that **skips building unused re-exported modules in side‑effect‑free barrel files until they’re actually needed**. This can significantly reduce build time, especially in **large codebases** with lots of grouped exports.
 
 Barrel files are modules that **re-export other modules** to create a convenient API surface. For example, a `components/index.js` that exports every component from a directory. While useful for organizing code, traditional bundlers often build _all_ the re-exported modules even if only one is used, which can hurt performance. With _lazy barrel optimization_ in Rspack, **only the modules actually referenced get built**, skipping the rest and improving overall build speed.
 
@@ -75,7 +75,7 @@ Webpack’s **development and CLI tools** are being improved to enhance maintain
 
 #### Dev Tooling
 
-Efforts in dev tooling focus on **improving webpack’s internal development workflow** and making it easier to extend and maintain. This includes **merging webpack-dev-middleware and webpack-hot-middleware**, **extracting the overlay from dev-server**, and **consolidating overlay + WebSocket/EventSource logic for reuse**.
+Efforts in development tooling focus on **improving webpack’s internal development workflow** and making it easier to extend and maintain. This includes **merging webpack-dev-middleware and webpack-hot-middleware**, **extracting the overlay from dev-server**, and **consolidating overlay + WebSocket/EventSource logic for reuse**.
 
 Additionally, **plugin support** will be added to the dev-server, enabling more flexibility and reducing duplication. These improvements streamline development for contributors while keeping webpack **flexible and reliable** for users.
 
@@ -89,13 +89,13 @@ You can follow the [webpack-cli improvements](https://github.com/webpack/webpack
 
 ### Accurate and Reliable Documentation
 
-The idea is to **enable automatic generation of all API and configuration documentation** directly from webpack’s **types and schemas**, ensuring the documentation **always matches the actual behavior** of the code.
+The idea is to **enable automatic generation of all API and configuration documentation** directly from webpack’s **types and schemas**, ensuring the documentation **always matches the actual behavior** of the code (new api options, deprecations, types etc).
 
-This approach addresses long-standing problems with **incomplete, outdated, or inconsistent documentation** on the webpack website, and makes it easier to maintain. The goal is to provide developers with **accurate, reliable, and up-to-date references** they can trust.
+This approach addresses long-standing problems with **incomplete, or inconsistent documentation** on the webpack website, and makes it easier to maintain. The goal is to provide developers with **accurate, reliable, and up-to-date references** that gives users a easy way to interact with webpack.
 
 ### Community Outreach and Engagement
 
-Following improvements to documentation and the site, another key focus is **building and strengthening the webpack community**. This year, the effort began with a **new blog launched for webpack 5.105**, and the idea is to continue expanding it through **articles, conference talks, and other public channels**.
+Following improvements to documentation and active maintenance, another key focus is **building and strengthening the webpack community**. This year, the effort began with a **new blog launched for webpack 5.105**, and the idea is to continue expanding our outreach through **articles, conference talks, and other public channels**.
 
 By engaging the community, webpack can **grow adoption**, receive **valuable input**, and create stronger connections between the project and its users. Outreach efforts also help ensure that improvements, tutorials, and best practices reach a **wider audience**, making the ecosystem more vibrant and sustainable.
 
@@ -151,10 +151,10 @@ To measure progress and maintain **high performance standards**, webpack plans t
 
 ## Final remarks
 
-I hope that you found this list useful and that you are **excited for 2026**, we are too! One of the most important parts of our work now, is to **get enough donations** to keep the project sustainable. We use our resources to **pay contributors** once they reach a certain threshold. In addition to that, we want to make sure that over time, the project has **some left-over resources** so that we can save when times are hard. We also want to give back to our **maintainers working hard** to make the project great in terms of **merch (aka swag)**.
+I hope that you found this list useful and that you are **excited for 2026**, we are too! One of the most important parts of our work now, is to **get enough donations** to keep the project sustainable. We use our resources to **pay contributors** once they reach a certain threshold. In addition to that, we want to make sure that over time, the project has **some left-over resources** that we can save for when times are hard.
 
-This year we will try something new, which is to have **dedicated sections** where **companies/individuals that contribute a significant amount** will have a place to **showcase their product, project or similar**.
+This year we will try something new, which is to have **allocated sections** where **companies/individuals that contribute a significant amount** will have a spot to **showcase their product/project/promotion**.
 
-If you are interested in contributing to the organization either **financially** or otherwise, please **reach out to us!** 💙
+Thank you for the attention and for being interested in our roadmap for 2026. If you are interested in contributing to the organization either **financially** or otherwise, send us a private or public message in [Discord](https://discord.com/invite/webpack), reach us through [email](webpack-security@openjsf.org) or contact one of the [TSC members](https://github.com/webpack/webpack?tab=readme-ov-file#tsc-technical-steering-committee).
 
-~ webpack TSC
+~ webpack TSC 💙
