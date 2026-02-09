@@ -19,6 +19,7 @@ contributors:
   - rahul3v
   - snitin315
   - vansh5632
+  - Brennvo
 related:
   - title: Debugging Optimization Bailouts
     url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
@@ -69,9 +70,13 @@ Set the `mode` configuration option to [development](/configuration/mode/#mode-d
 **webpack.config.js**
 
 ```diff
-const path = require('path');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
@@ -517,9 +522,13 @@ So we've cued up our "dead code" to be dropped by using the `import` and `export
 **webpack.config.js**
 
 ```diff
-const path = require('path');
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
