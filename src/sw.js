@@ -44,7 +44,6 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
-    // clean up those who are not listed in manifestURLs
     caches.open(cacheName).then((cache) =>
       // clean up those who are not listed in manifestURLs
       cache
@@ -93,6 +92,6 @@ setCatchHandler(({ event }) => {
     case "document":
       return caches.match("/app-shell/index.html");
     default:
-      return Response.error();
+      return fetch(event.request);
   }
 });
