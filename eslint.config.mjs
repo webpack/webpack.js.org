@@ -8,6 +8,7 @@ export default defineConfig([
   globalIgnores([
     "**/dist/",
     "**/examples/",
+    "**/printable.mdx",
     "src/content/loaders/_*.mdx",
     "src/content/plugins/_*.mdx",
     "src/content/contribute/Governance-*.mdx",

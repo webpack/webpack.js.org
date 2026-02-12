@@ -8,32 +8,29 @@ const BASE_URL = "https://webpack.js.org";
 
 function escapeXml(text) {
   return String(text)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }
 
 function extractPubDate(node) {
   const name = node.name || "";
 
-  // 1. Filename pattern YYYY-MM-DD-*
   const filenameDateMatch = name.match(/^(\d{4}-\d{2}-\d{2})-/);
   if (filenameDateMatch) {
-    const d = new Date(filenameDateMatch[1]);
-    if (!Number.isNaN(d.getTime())) return d;
+    const date = new Date(filenameDateMatch[1]);
+    if (!Number.isNaN(date.getTime())) return date;
   }
 
-  // 2. Parse from title (YYYY-MM-DD)
   const title = node.title || "";
   const titleDateMatch = title.match(/\((\d{4}-\d{2}-\d{2})\)/);
   if (titleDateMatch) {
-    const d = new Date(titleDateMatch[1]);
-    if (!Number.isNaN(d.getTime())) return d;
+    const date = new Date(titleDateMatch[1]);
+    if (!Number.isNaN(date.getTime())) return date;
   }
 
-  // 3. Fallback: file mtime
   const filePath = path.resolve(ROOT, node.path);
   try {
     const stat = fs.statSync(filePath);
@@ -56,8 +53,7 @@ function main() {
   );
 
   if (!blogSection?.children) {
-    console.error("generate-rss: blog section not found in content tree");
-    process.exit(1);
+    throw new Error("generate-rss: blog section not found in content tree");
   }
 
   const posts = blogSection.children
@@ -75,7 +71,7 @@ function main() {
       pubDate: extractPubDate(node),
       description: node.description || node.title || "Untitled",
     }))
-    .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+    .toSorted((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 
   const lastBuildDate = formatRfc2822(new Date());
 
