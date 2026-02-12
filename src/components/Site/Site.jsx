@@ -199,6 +199,12 @@ function Site(props) {
             location.pathname,
           )}`}
         />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="webpack Blog"
+          href="https://webpack.js.org/feed.xml"
+        />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="icon" sizes="192x192" href="/icon_192x192.png" />
         <link rel="icon" sizes="512x512" href="/icon_512x512.png" />
