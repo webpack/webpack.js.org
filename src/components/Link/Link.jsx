@@ -16,7 +16,7 @@ const Link = ({ to = "", url, ...props }) => {
 };
 
 Link.propTypes = {
-  isActive: PropTypes.boolean,
+  isActive: PropTypes.bool,
   to: PropTypes.string,
   url: PropTypes.string,
 };
