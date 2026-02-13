@@ -4,7 +4,10 @@ import { fileURLToPath } from "node:url";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect } from "@jest/globals";
 import {
+  extractPages,
+  extractSections,
   findInContent,
+  flattenContent,
   getPageDescription,
   getPageTitle,
 } from "./content-utils.mjs";
@@ -56,5 +59,87 @@ describe("getPageTitle", () => {
   it("should return title for get-started", () => {
     const title = getPageTitle(content, "/guides/getting-started/");
     expect(title).toBe("Getting Started | webpack");
+  });
+});
+
+describe("flattenContent", () => {
+  it("should return a flat array of leaf nodes", () => {
+    const tree = {
+      children: [
+        { title: "A" },
+        {
+          children: [{ title: "B" }, { children: [{ title: "C" }] }],
+        },
+        { title: "D" },
+      ],
+    };
+    const flatArray = flattenContent(tree);
+    expect(flatArray).toEqual([
+      { title: "A" },
+      { title: "B" },
+      { title: "C" },
+      { title: "D" },
+    ]);
+  });
+});
+
+describe("extractSections", () => {
+  it("should return array of immediate items having directory property", () => {
+    const tree = {
+      children: [
+        { title: "A", type: "file" },
+        {
+          title: "B",
+          type: "directory",
+          children: [
+            { title: "C", type: "file" },
+            { title: "D ", type: "directory", children: [{ title: "E" }] },
+          ],
+        },
+        { title: "F", type: "file" },
+      ],
+    };
+    const sections = extractSections(tree);
+    expect(sections).toEqual([
+      {
+        title: "B",
+        type: "directory",
+        children: [
+          { title: "C", type: "file" },
+          { title: "D ", type: "directory", children: [{ title: "E" }] },
+        ],
+      },
+    ]);
+  });
+});
+
+describe("extractPages", () => {
+  it("should return array of leaf items having file property", () => {
+    const tree = {
+      children: [
+        { title: "A", type: "file", extension: ".md" },
+        {
+          title: "B",
+          type: "directory",
+          children: [
+            { title: "C", type: "file", extension: ".mdx" },
+            {
+              title: "D",
+              type: "directory",
+              children: [{ title: "E", type: "file", extension: ".md" }],
+            },
+          ],
+        },
+        { title: "F", type: "file", extension: ".mdx" },
+      ],
+    };
+
+    const pages = extractPages(tree);
+    expect(pages).toEqual([
+      { title: "A", type: "file", extension: ".md" },
+      { title: "C", type: "file", extension: ".mdx" },
+      { title: "E", type: "file", extension: ".md" },
+      { title: "F", type: "file", extension: ".mdx" },
+    ]);
   });
 });
