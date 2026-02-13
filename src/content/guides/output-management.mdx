@@ -136,7 +136,7 @@ But what would happen if we changed the name of one of our entry points, or even
 T> If you inspected `print.bundle.js`, you might have noticed that it did not contain the `printMe` function. Instead, it contained only an [IIFE](/concepts/why-webpack/#iifes---immediately-invoked-function-expressions) with no observable side effects.<br /><br />
 This is because in our current setup, webpack treats each entry point as a standalone program that runs when the bundle is loaded. Because `print.js` only exports a function and never calls `printMe()`, executing it as its own entry does not require any executable runtime code. Thus, [webpack is able to omit that code as an optimization](/guides/tree-shaking/) since it would have no observable effect.<br /><br />
 However, since `index.js` imports and uses `printMe`, webpack includes that function directly in `index.bundle.js`. Remember that webpack is a module _bundler_, so `index.bundle.js` contains all the code it needs to run rather than unresolved import statements.<br /><br />
-Multiple entry points are used here solely to demonstrate output management and the `HtmlWebpackPlugin`. In a real project, you would typically avoid creating a separate entry point for utility modules like this.
+Multiple entry points are used here solely to demonstrate output management and the `HtmlWebpackPlugin`. In a real project, you would typically avoid creating a separate entry point for utility modules like this. If you do have multiple entry points that share dependencies, see [Prevent Duplication](/guides/code-splitting/#prevent-duplication) in the Code Splitting guide.
 
 ## Setting up HtmlWebpackPlugin
 
