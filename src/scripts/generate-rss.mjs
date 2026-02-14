@@ -61,9 +61,12 @@ function main() {
       (child) =>
         child.type === "file" &&
         (child.extension === ".mdx" || child.extension === ".md") &&
-        child.name !== "index" &&
-        child.name !== "printable" &&
-        child.url !== "/blog/",
+        child.name !== "index.mdx" &&
+        child.name !== "index.md" &&
+        child.name !== "printable.mdx" &&
+        child.name !== "printable.md" &&
+        child.url !== "/blog/" &&
+        !child.url?.includes("/printable"),
     )
     .map((node) => ({
       title: node.title || "Untitled",
