@@ -1,19 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { Feed } from "feed";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "../..");
 const BASE_URL = "https://webpack.js.org";
-
-function escapeXml(text) {
-  return String(text)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&apos;");
-}
 
 function extractPubDate(node) {
   const name = node.name || "";
@@ -38,10 +30,6 @@ function extractPubDate(node) {
   } catch {
     return new Date();
   }
-}
-
-function formatRfc2822(date) {
-  return date.toUTCString();
 }
 
 function main() {
@@ -71,39 +59,35 @@ function main() {
     .map((node) => ({
       title: node.title || "Untitled",
       link: `${BASE_URL}${node.url}`,
-      pubDate: extractPubDate(node),
+      date: extractPubDate(node),
       description: node.description || node.title || "Untitled",
     }))
-    .toSorted((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+    .toSorted((a, b) => b.date.getTime() - a.date.getTime());
 
-  const lastBuildDate = formatRfc2822(new Date());
+  const feed = new Feed({
+    title: "webpack Blog",
+    description: "Announcements and updates from the webpack team",
+    id: `${BASE_URL}/blog/`,
+    link: `${BASE_URL}/blog/`,
+    language: "en",
+    updated: new Date(),
+    feedLinks: {
+      rss: `${BASE_URL}/feed.xml`,
+    },
+  });
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>webpack Blog</title>
-    <link>${BASE_URL}/blog/</link>
-    <description>Announcements and updates from the webpack team</description>
-    <language>en</language>
-    <lastBuildDate>${escapeXml(lastBuildDate)}</lastBuildDate>
-    <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
-${posts
-  .map(
-    (post) => `    <item>
-      <title>${escapeXml(post.title)}</title>
-      <link>${escapeXml(post.link)}</link>
-      <description>${escapeXml(post.description)}</description>
-      <pubDate>${escapeXml(formatRfc2822(post.pubDate))}</pubDate>
-      <guid isPermaLink="true">${escapeXml(post.link)}</guid>
-    </item>`,
-  )
-  .join("\n")}
-  </channel>
-</rss>
-`;
+  for (const post of posts) {
+    feed.addItem({
+      title: post.title,
+      link: post.link,
+      description: post.description,
+      date: post.date,
+      id: post.link,
+    });
+  }
 
   const distPath = path.resolve(ROOT, "dist/feed.xml");
-  fs.writeFileSync(distPath, xml, "utf8");
+  fs.writeFileSync(distPath, feed.rss2(), "utf8");
   console.log(`Successfully generated RSS feed at ${distPath}`);
 }
 

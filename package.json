@@ -106,6 +106,7 @@
     "cypress": "^15.9.0",
     "directory-tree": "^3.6.0",
     "directory-tree-webpack-plugin": "^1.0.3",
+    "feed": "^5.0.0",
     "duplexer": "^0.1.1",
     "eslint": "^9.39.2",
     "eslint-config-webpack": "^4.9.3",
