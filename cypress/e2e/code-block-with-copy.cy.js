@@ -1,37 +1,45 @@
 "use strict";
 
+const visitWithClipboardSpy = (url) => {
+  // Load page with a controllable clipboard implementation for this test run.
+  cy.visit(url, {
+    onBeforeLoad(win) {
+      Object.defineProperty(win, "isSecureContext", {
+        value: true,
+        configurable: true,
+      });
+
+      Object.defineProperty(win.navigator, "clipboard", {
+        value: {
+          writeText: () => Promise.resolve(),
+        },
+        configurable: true,
+      });
+    },
+  });
+
+  // Stub clipboard writes so tests can assert exact copied text.
+  cy.window().then((win) => {
+    cy.stub(win.navigator.clipboard, "writeText")
+      .as("clipboardWriteText")
+      .resolves();
+  });
+};
+
+const getFirstWebpackConfigBlock = (aliasName) => {
+  cy.contains("strong", "webpack.config.js")
+    .first()
+    .parent()
+    .next(".code-block-wrapper")
+    .as(aliasName);
+};
+
 describe("CodeBlockWithCopy", () => {
   it("copies diff code blocks without removed lines or diff prefixes", () => {
-    // Load the page and provide a controllable clipboard API for the test run.
-    cy.visit("/guides/output-management/", {
-      onBeforeLoad(win) {
-        Object.defineProperty(win, "isSecureContext", {
-          value: true,
-          configurable: true,
-        });
-
-        Object.defineProperty(win.navigator, "clipboard", {
-          value: {
-            writeText: () => Promise.resolve(),
-          },
-          configurable: true,
-        });
-      },
-    });
-
-    // Stub clipboard writes so we can inspect the exact copied payload.
-    cy.window().then((win) => {
-      cy.stub(win.navigator.clipboard, "writeText")
-        .as("clipboardWriteText")
-        .resolves();
-    });
+    visitWithClipboardSpy("/guides/output-management/");
 
     // Select the first webpack.config.js diff example and its copy wrapper.
-    cy.contains("strong", "webpack.config.js")
-      .first()
-      .parent()
-      .next(".code-block-wrapper")
-      .as("diffCodeBlock");
+    getFirstWebpackConfigBlock("diffCodeBlock");
 
     // Trigger copy for that specific diff code block.
     cy.get("@diffCodeBlock").find("code.language-diff").should("exist");
@@ -54,36 +62,10 @@ describe("CodeBlockWithCopy", () => {
   });
 
   it("copies non-diff code blocks without altering content", () => {
-    // Load the page and provide a controllable clipboard API for the test run.
-    cy.visit("/concepts/", {
-      onBeforeLoad(win) {
-        Object.defineProperty(win, "isSecureContext", {
-          value: true,
-          configurable: true,
-        });
-
-        Object.defineProperty(win.navigator, "clipboard", {
-          value: {
-            writeText: () => Promise.resolve(),
-          },
-          configurable: true,
-        });
-      },
-    });
-
-    // Stub clipboard writes so we can inspect the exact copied payload.
-    cy.window().then((win) => {
-      cy.stub(win.navigator.clipboard, "writeText")
-        .as("clipboardWriteText")
-        .resolves();
-    });
+    visitWithClipboardSpy("/concepts/");
 
     // Select the first webpack.config.js example and its copy wrapper.
-    cy.contains("strong", "webpack.config.js")
-      .first()
-      .parent()
-      .next(".code-block-wrapper")
-      .as("standardCodeBlock");
+    getFirstWebpackConfigBlock("standardCodeBlock");
 
     // Capture the rendered source text and trigger copy from this non-diff snippet.
     cy.get("@standardCodeBlock").find("code.language-diff").should("not.exist");
