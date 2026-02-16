@@ -5,6 +5,28 @@ import "./CodeBlockWithCopy.scss";
 export default function CodeBlockWithCopy({ children }) {
   const preRef = useRef(null);
   const [copyStatus, setCopyStatus] = useState("copy");
+  const codeClassName =
+    typeof children?.props?.className === "string"
+      ? children.props.className
+      : "";
+  const isDiffLanguage = codeClassName.split(/\s+/).includes("language-diff");
+
+  const getCodeText = (codeElement) => {
+    if (!isDiffLanguage) {
+      return codeElement.textContent || "";
+    }
+
+    const clonedCodeElement = codeElement.cloneNode(true);
+
+    // Exclude +/-/unchanged tokens and removed lines
+    for (const element of clonedCodeElement.querySelectorAll(
+      ".token.prefix.inserted, .token.prefix.unchanged, .token.deleted-sign.deleted",
+    )) {
+      element.remove();
+    }
+
+    return clonedCodeElement.textContent || "";
+  };
 
   const handleCopy = async () => {
     if (!preRef.current) return;
@@ -12,7 +34,14 @@ export default function CodeBlockWithCopy({ children }) {
     const codeElement = preRef.current.querySelector("code");
     if (!codeElement) return;
 
-    const codeText = codeElement.textContent;
+    const codeText = getCodeText(codeElement);
+
+    if (!codeText) {
+      setCopyStatus("error");
+      setTimeout(() => setCopyStatus("copy"), 2000);
+      return;
+    }
+
     let successfulCopy = false;
 
     // Try modern API (navigator.clipboard) -> as document.execCommand() deprecated
