@@ -4102,12 +4102,17 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <p>See <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">TypeScript&#x27;s documentation</a> to learn more about <code>tsconfig.json</code> configuration options.</p>
 <p>To learn more about webpack configuration, see the <a href="/concepts/configuration/">configuration concepts</a>.</p>
 <p>Now let&#x27;s configure webpack to handle TypeScript:</p>
-<p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>First, install the required dependencies:</p>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev ts-node @types/node</code></pre></div>
+<p><strong>webpack.config.ts</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> webpack <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span>
+<span class="token comment">// in case you run into any TypeScript error when configuring `devServer`</span>
+<span class="token keyword">import</span> <span class="token string">&quot;webpack-dev-server&quot;</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token keyword">const</span> config<span class="token operator">:</span> webpack<span class="token punctuation">.</span>Configuration <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./src/index.ts&quot;</span><span class="token punctuation">,</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token keyword">module</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
@@ -4123,7 +4128,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     filename<span class="token operator">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
     path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> config<span class="token punctuation">;</span></code></pre></div>
+<blockquote>
+<p>For further refrence on how to write configuration in <a href="https://webpack.js.org/configuration/configuration-languages/#typescript">Typescript file</a></p>
+</blockquote>
 <p>This will direct webpack to <em>enter</em> through <code>./index.ts</code>, <em>load</em> all <code>.ts</code> and <code>.tsx</code> files through the <code>ts-loader</code>, and <em>output</em> a <code>bundle.js</code> file in our current directory.</p>
 <p>Now lets change the import of <code>lodash</code> in our <code>./index.ts</code> due to the fact that there is no default export present in <code>lodash</code> definitions.</p>
 <p><strong>./index.ts</strong></p>
