@@ -113,6 +113,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
       <header className="bg-blue-800 dark:bg-gray-900">
         <div className="flex items-center py-10 px-[16px] justify-between md:px-[24px] md:max-w-[1024px] md:mx-auto md:justify-start">
           <button
+            aria-label="Open navigation menu"
             className="bg-transparent border-none md:hidden"
             onClick={toggleSidebar}
           >
