@@ -34,7 +34,7 @@ export default function Sidebar({ className = "", pages, currentPage }) {
             Select webpack version
           </label>
           <select
-            id="docs-version"
+            aria-label="Select webpack version"
             className="text-gray-600 text-14 px-5 py-5 appearance-none box-border border border-gray-200 border-solid flex-col flex w-full rounded-none bg-transparent bg-none"
             value={version}
             onChange={(event) => {
