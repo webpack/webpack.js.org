@@ -65,7 +65,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 <li><a href="/configuration/module/#ruleoptions--rulequery"><code>Rule.query</code></a> (deprecated since v3) → <code>Rule.options</code>/<code>UseEntry.options</code></li>
 <li><code>Rule.loaders</code> → <a href="/configuration/module/#ruleuse"><code>Rule.use</code></a></li>
 </ul>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Checkout the detailed changes in the configuration options <a href="/blog/2020-10-10-webpack-5-release/#changes-to-the-configuration">here</a>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Checkout the detailed changes in the configuration options <a href="/blog/2020-10-10-webpack-5-release/#changes-to-the-configuration">here</a>.</p></aside>
 <h3><span id="test-webpack-5-compatibility"></span>Test webpack 5 compatibility<a href="#test-webpack-5-compatibility" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Try to set the following options in your webpack 4 configuration and check if build still works correctly.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -76,7 +76,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>You have to remove these options again when upgrading your configuration for webpack 5.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>webpack 5 removes these options from the configuration schema and will always use <code>false</code>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>webpack 5 removes these options from the configuration schema and will always use <code>false</code>.</p></aside>
 <h2><span id="upgrade-webpack-to-5"></span>Upgrade webpack to 5<a href="#upgrade-webpack-to-5" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Now let&#x27;s upgrade webpack to version 5:</p>
 <ul>
@@ -361,7 +361,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // ...
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  mode: &#x27;production&#x27;,
 </span></span>}</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>The purpose of <code>&#x27;development&#x27;</code> mode and <code>&#x27;production&#x27;</code> mode is different. You can use <code>webpack-merge</code> as shown in <a href="/guides/production/#setup">production guide</a> to optimize configurations.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The purpose of <code>&#x27;development&#x27;</code> mode and <code>&#x27;production&#x27;</code> mode is different. You can use <code>webpack-merge</code> as shown in <a href="/guides/production/#setup">production guide</a> to optimize configurations.</p></aside>
 <h2><span id="deprecatedremoved-plugins"></span>Deprecated/Removed plugins<a href="#deprecatedremoved-plugins" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>These plugins can be removed from configuration as they are default in production mode:</p>
 <p><strong>webpack.config.js</strong></p>
@@ -394,7 +394,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2><span id="commonschunkplugin"></span>CommonsChunkPlugin<a href="#commonschunkplugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The <code>CommonsChunkPlugin</code> was removed. Instead the <a href="/configuration/optimization/#optimizationsplitchunks"><code>optimization.splitChunks</code></a> options can be used.</p>
 <p>See documentation of the <a href="/configuration/optimization/#optimizationsplitchunks"><code>optimization.splitChunks</code></a> for more details. The default configuration may already suit your needs.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>When generating the HTML from the stats you can use <code>optimization.splitChunks.chunks: &quot;all&quot;</code> which is the optimal configuration in most cases.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>When generating the HTML from the stats you can use <code>optimization.splitChunks.chunks: &quot;all&quot;</code> which is the optimal configuration in most cases.</p></aside>
 <h2><span id="import-and-commonjs"></span>import() and CommonJS<a href="#import-and-commonjs" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When using <code>import()</code> to load non-ESM the result has changed in webpack 4. Now you need to access the <code>default</code> property to get the value of <code>module.exports</code>.</p>
 <p><strong>non-esm.js</strong></p>
@@ -439,7 +439,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h1><span id="to-v2-or-v3-from-v1"></span>To v2 or v3 from v1<a href="#to-v2-or-v3-from-v1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>The following sections describe the major changes from webpack 1 to 2.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that there were far fewer changes between 2 and 3, so that migration shouldn&#x27;t be too bad. If you are running into issues, please see <a href="https://github.com/webpack/webpack/releases">the changelog</a> for details.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Note that there were far fewer changes between 2 and 3, so that migration shouldn&#x27;t be too bad. If you are running into issues, please see <a href="https://github.com/webpack/webpack/releases">the changelog</a> for details.</p></aside>
 <h2><span id="resolveroot-resolvefallback-resolvemodulesdirectories"></span>resolve.root, resolve.fallback, resolve.modulesDirectories<a href="#resolveroot-resolvefallback-resolvemodulesdirectories" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>These options were replaced by a single option <code>resolve.modules</code>. See <a href="/configuration/resolve">resolving</a> for more usage.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> resolve: {
@@ -638,7 +638,7 @@ Thus make sure to remove the plugin from your configuration:</p>
 <h2><span id="full-dynamic-requires-now-fail-by-default"></span>Full dynamic requires now fail by default<a href="#full-dynamic-requires-now-fail-by-default" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>A dependency with only an expression (i. e. <code>require(expr)</code>) will now create an empty context instead of the context of the complete directory.</p>
 <p>Code like this should be refactored as it won&#x27;t work with ES2015 modules. If this is not possible you can use the <code>ContextReplacementPlugin</code> to hint the compiler towards the correct resolving.</p>
-<aside class="todo"><h6 class="todo__prefix">todo</h6><p>Link to an article about dynamic dependencies.</p></aside>
+<aside class="todo"><p class="todo__prefix">todo</p><p>Link to an article about dynamic dependencies.</p></aside>
 <h3><span id="using-custom-arguments-in-cli-and-configuration"></span>Using custom arguments in CLI and configuration<a href="#using-custom-arguments-in-cli-and-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>If you abused the CLI to pass custom arguments to the configuration like so:</p>
 <p><code>webpack --custom-stuff</code></p>

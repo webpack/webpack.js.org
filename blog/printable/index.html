@@ -52,7 +52,7 @@ This could lead to less generated code and would avoid the function wrapping in 
 <h4><span id="esm-exports"></span>ESM exports<a href="#esm-exports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Currently it&#x27;s not possible to generate ESM exports for a bundle via <code>output.library.type: &quot;module&quot;</code>.
 This can be useful when integrating webpack bundles into ESM loading environments or inline scripts.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>For webpack 4 there is actually a plugin, but native support would be preferable.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>For webpack 4 there is actually a plugin, but native support would be preferable.</p></aside>
 <h4><span id="esm-externals-import"></span>ESM externals (import)<a href="#esm-externals-import" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Webpack allows to define <code>externals</code> which are modules that are not bundled but exist at runtime.
 There are many types of externals ranging from globals over CommonJs/AMD/System to loading from classic script tag.
@@ -70,7 +70,7 @@ The default has been choosing to seamlessly add support for ESM externals withou
     <span class="token string">&quot;react-dom&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://esm.sh/[react,react-dom]/react-dom&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Using multiple different ESM CDNs will not work. This is only an example.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Using multiple different ESM CDNs will not work. This is only an example.</p></aside>
 <h4><span id="esm-library"></span>ESM library<a href="#esm-library" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>When ESM exports and import are supported people might think bundling a library makes sense, and that&#x27;s probably true in some cases, but in many cases natively bundling will result in worse results.
 The biggest problem is the <code>&quot;sideEffects&quot;: false</code> flag. It affects modules on per file base to skip whole modules. When concatenating multiple side-effect-free modules it&#x27;s no longer possible to skip the individual modules, which leads to worse optimization when not all exports of the library are used.</p>
@@ -809,7 +809,7 @@ See <a href="https://github.com/webpack/webpack/pull/10017">PR</a> for details</
 <p><code>getResolve(options)</code> in the loader API will merge options in a different way, see <code>module.rules</code> <code>resolve</code>.</p>
 <p>As webpack 5 differs between different issuing dependencies so it might make sense to pass a <code>dependencyType</code> as option (e.g. <code>&quot;esm&quot;</code>, <code>&quot;commonjs&quot;</code>, or others).</p>
 <h2><span id="major-internal-changes"></span>Major Internal Changes<a href="#major-internal-changes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<aside class="todo"><h6 class="todo__prefix">todo</h6><p>This section might need a bit more refinement</p></aside>
+<aside class="todo"><p class="todo__prefix">todo</p><p>This section might need a bit more refinement</p></aside>
 <p>The following changes are only relevant for plugin authors:</p>
 <h3><span id="new-plugin-order"></span>New plugin order<a href="#new-plugin-order" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Plugins in webpack 5 are now applies <strong>before</strong> the configuration defaults has been applied.

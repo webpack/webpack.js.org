@@ -2,11 +2,11 @@
 <!-- -->
 <p>This section contains guides for understanding and mastering the wide variety of tools and features that webpack offers. The first is a guide that takes you through <a href="/guides/getting-started/">getting started</a>.</p>
 <p>The guides get more advanced as you go on. Most serve as a starting point, and once completed you should feel more comfortable diving into the actual <a href="/configuration/">documentation</a>.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>The output shown from running webpack in the guides may differ slightly from the output of newer versions. This is to be expected. As long as the bundles look similar and run correctly, then there shouldn&#x27;t be any issues. If you do come across an example that seems to be broken by a new version, please <a href="https://github.com/webpack/webpack.js.org/issues/new/choose">create an issue</a> and we will do our best to resolve the discrepancy.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>The output shown from running webpack in the guides may differ slightly from the output of newer versions. This is to be expected. As long as the bundles look similar and run correctly, then there shouldn&#x27;t be any issues. If you do come across an example that seems to be broken by a new version, please <a href="https://github.com/webpack/webpack.js.org/issues/new/choose">create an issue</a> and we will do our best to resolve the discrepancy.</p></aside>
 <h1><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>Webpack is used to compile JavaScript modules. Once <a href="/guides/installation">installed</a>, you can interact with webpack either from its <a href="/api/cli">CLI</a> or <a href="/api/node">API</a>. If you&#x27;re still new to webpack, please read through the <a href="/concepts">core concepts</a> and <a href="/comparison">this comparison</a> to learn why you might use it over the other tools that are out in the community.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>The minimum supported Node.js version to run webpack 5 is 10.13.0 (LTS)</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>The minimum supported Node.js version to run webpack 5 is 10.13.0 (LTS)</p></aside>
 <aside class="preview"><h6 class="preview__prefix">live preview</h6><p>Check out this guide live on StackBlitz.</p><a href="https://stackblitz.com/github/webpack/webpack.js.org/tree/main/examples/getting-started?terminal=" target="_blank" rel="noopener noreferrer"><img src="/open-in-stackblitz-button.d5768454f28617a0.svg" alt="Open in StackBlitz"/></a></aside>
 <h2><span id="basic-setup"></span>Basic Setup<a href="#basic-setup" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>First let&#x27;s create a directory, initialize npm, <a href="/guides/installation/#local-installation">install webpack locally</a>, and install the <a href="https://github.com/webpack/webpack-cli"><code>webpack-cli</code></a> (the tool used to run webpack on the command line):</p>
@@ -50,7 +50,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code></pre></div>
 <p>We also need to adjust our <code>package.json</code> file in order to make sure we mark our package as <code>private</code>, as well as removing the <code>main</code> entry. This is to prevent an accidental publish of your code.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If you want to learn more about the inner workings of <code>package.json</code>, then we recommend reading the <a href="https://docs.npmjs.com/files/package.json">npm documentation</a>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If you want to learn more about the inner workings of <code>package.json</code>, then we recommend reading the <a href="https://docs.npmjs.com/files/package.json">npm documentation</a>.</p></aside>
 <p><strong>package.json</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">{
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;name&quot;: &quot;webpack-demo&quot;,
@@ -88,10 +88,10 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> |- index.html
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /src
 </span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>You may have noticed that <code>index.html</code> was created manually, even though it is now placed in the <code>dist</code> directory. Later on in <a href="/guides/output-management/#setting-up-htmlwebpackplugin">another guide</a>, we will generate <code>index.html</code> rather than edit it manually. Once this is done, it should be safe to empty the <code>dist</code> directory and to regenerate all the files within it.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>You may have noticed that <code>index.html</code> was created manually, even though it is now placed in the <code>dist</code> directory. Later on in <a href="/guides/output-management/#setting-up-htmlwebpackplugin">another guide</a>, we will generate <code>index.html</code> rather than edit it manually. Once this is done, it should be safe to empty the <code>dist</code> directory and to regenerate all the files within it.</p></aside>
 <p>To bundle the <code>lodash</code> dependency with <code>index.js</code>, we&#x27;ll need to install the library locally:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save lodash</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>When installing a package that will be bundled into your production bundle, you should use <code>npm install --save</code>. If you&#x27;re installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use <code>npm install --save-dev</code>. More information can be found in the <a href="https://docs.npmjs.com/cli/install">npm documentation</a>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>When installing a package that will be bundled into your production bundle, you should use <code>npm install --save</code>. If you&#x27;re installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use <code>npm install --save-dev</code>. More information can be found in the <a href="https://docs.npmjs.com/cli/install">npm documentation</a>.</p></aside>
 <p>Now, let&#x27;s import <code>lodash</code> in our script:</p>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">import _ from &#x27;lodash&#x27;;
@@ -121,7 +121,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    &lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  &lt;/body&gt;
 </span><span class="token prefix unchanged"> </span><span class="token line">&lt;/html&gt;</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>A couple other script loading strategies exist. Deferred loading is one such alternative to the above, where instead scripts are consolidated into the <code>&lt;head&gt;</code> and are given the <code>defer</code> attribute. This strategy downloads the external script resource(s) in parallel with document parsing, and will execute the scripts in order of document appearance after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource synchronously. To learn more about this process, MDN has a nice <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script#async_and_defer"><code>reference guide</code></a>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>A couple other script loading strategies exist. Deferred loading is one such alternative to the above, where instead scripts are consolidated into the <code>&lt;head&gt;</code> and are given the <code>defer</code> attribute. This strategy downloads the external script resource(s) in parallel with document parsing, and will execute the scripts in order of document appearance after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource synchronously. To learn more about this process, MDN has a nice <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script#async_and_defer"><code>reference guide</code></a>.</p></aside>
 <p>In this setup, <code>index.js</code> explicitly requires <code>lodash</code> to be present, and binds it as <code>_</code> (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.</p>
 <p>With that said, let&#x27;s run <code>npx webpack</code>, which will take our script at <code>src/index.js</code> as the <a href="/concepts/entry-points">entry point</a>, and will generate <code>dist/main.js</code> as the <a href="/concepts/output">output</a>. The <code>npx</code> command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (<code>./node_modules/.bin/webpack</code>) of the webpack package we installed in the beginning:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">$ npx webpack
@@ -132,7 +132,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
 webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1851</span> ms</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Your output may vary a bit, but if the build is successful then you are good to go.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Your output may vary a bit, but if the build is successful then you are good to go.</p></aside>
 <p>Open <code>index.html</code> from the <code>dist</code> directory in your browser and, if everything went right, you should see the following text: <code>&#x27;Hello webpack&#x27;</code>.</p>
 <h2><span id="modules"></span>Modules<a href="#modules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import"><code>import</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export"><code>export</code></a> statements have been standardized in <a href="https://babeljs.io/docs/en/learn/">ES2015</a>. They are supported in most of the browsers at this moment, however there are some browsers that don&#x27;t recognize the new syntax. But don&#x27;t worry, webpack does support them out of the box.</p>
@@ -172,7 +172,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
 webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1934</span> ms</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If a <code>webpack.config.js</code> is present, the <code>webpack</code> command picks it up by default. We use the <code>--config</code> option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If a <code>webpack.config.js</code> is present, the <code>webpack</code> command picks it up by default. We use the <code>--config</code> option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.</p></aside>
 <p>A configuration file allows far more flexibility than CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the <a href="/configuration">configuration documentation</a> to learn more.</p>
 <h2><span id="npm-scripts"></span>NPM Scripts<a href="#npm-scripts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Given it&#x27;s not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let&#x27;s adjust our <em>package.json</em> by adding an <a href="https://docs.npmjs.com/misc/scripts">npm script</a>:</p>
@@ -211,7 +211,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
 webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1940</span> ms</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Custom parameters can be passed to webpack by adding two dashes between the <code>npm run build</code> command and your parameters, e.g. <code>npm run build -- --color</code>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Custom parameters can be passed to webpack by adding two dashes between the <code>npm run build</code> command and your parameters, e.g. <code>npm run build -- --color</code>.</p></aside>
 <h2><span id="conclusion"></span>Conclusion<a href="#conclusion" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Now that you have a basic build together you should move on to the next guide <a href="/guides/asset-management"><code>Asset Management</code></a> to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:</p>
 <p><strong>project</strong></p>
@@ -225,7 +225,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span>|- /src
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
 </span></span>|- /node_modules</code></pre></div>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the web browsers of the end users of your application.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the web browsers of the end users of your application.</p></aside>
 <p>If you want to learn more about webpack&#x27;s design, you can check out the <a href="/concepts">basic concepts</a> and <a href="/configuration">configuration</a> pages. Furthermore, the <a href="/api">API</a> section digs into the various interfaces webpack offers.</p>
 <h1><span id="asset-management"></span>Asset Management<a href="#asset-management" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
@@ -289,7 +289,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain.</p>
 <p>The above order of loaders should be maintained: <a href="/loaders/style-loader"><code>&#x27;style-loader&#x27;</code></a> comes first and followed by <a href="/loaders/css-loader"><code>&#x27;css-loader&#x27;</code></a>. If this convention is not followed, webpack is likely to throw errors.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case, any file that ends with <code>.css</code> will be served to the <code>style-loader</code> and the <code>css-loader</code>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case, any file that ends with <code>.css</code> will be served to the <code>style-loader</code> and the <code>css-loader</code>.</p></aside>
 <p>This enables you to <code>import &#x27;./style.css&#x27;</code> into the file that depends on that styling. Now, when that module is run, a <code>&lt;style&gt;</code> tag with the stringified css will be inserted into the <code>&lt;head&gt;</code> of your html file.</p>
 <p>Let&#x27;s try it out by adding a new <code>style.css</code> file to our project and import it in our <code>index.js</code>:</p>
 <p><strong>project</strong></p>
@@ -626,8 +626,8 @@ Autumn,Lindsey,Letter,I miss you
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p>Re-run the <code>npm run build</code> command and open <code>dist/index.html</code>. If you look at the console in your developer tools, you should be able to see your imported data being logged to the console!</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This can be especially helpful when implementing some sort of data visualization using a tool like <a href="https://github.com/d3">d3</a>. Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.</p></aside>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Only the default export of JSON modules can be used without warning.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This can be especially helpful when implementing some sort of data visualization using a tool like <a href="https://github.com/d3">d3</a>. Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Only the default export of JSON modules can be used without warning.</p></aside>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// No warning</span>
 <span class="token keyword">import</span> data <span class="token keyword">from</span> <span class="token string">&quot;./data.json&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// Warning shown, this is not allowed by the spec.</span>
@@ -915,7 +915,7 @@ Likes tater tots and beer.&quot;,
 </ul>
 <h1><span id="output-management"></span>Output Management<a href="#output-management" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide extends on code examples found in the <a href="/guides/asset-management"><code>Asset Management</code></a> guide.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This guide extends on code examples found in the <a href="/guides/asset-management"><code>Asset Management</code></a> guide.</p></aside>
 <p>So far we&#x27;ve manually included all our assets in our <code>index.html</code> file, but as your application grows and once you start <a href="/guides/caching">using hashes in filenames</a> and outputting <a href="/guides/code-splitting">multiple bundles</a>, it will be difficult to keep managing your <code>index.html</code> file manually. However, a few plugins exist that will make this process much easier to manage.</p>
 <h2><span id="preparation"></span>Preparation<a href="#preparation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>First, let&#x27;s adjust our project a little bit:</p>
@@ -1002,7 +1002,7 @@ cacheable modules <span class="token number">530</span> KiB
 webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1996</span> ms</code></pre></div>
 <p>We can see that webpack generates our <code>print.bundle.js</code> and <code>index.bundle.js</code> files, which we also specified in our <code>index.html</code> file. if you open <code>index.html</code> in your browser, you can see what happens when you click the button.</p>
 <p>But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our <code>index.html</code> file would still reference the old names. Let&#x27;s fix that with the <a href="/plugins/html-webpack-plugin"><code>HtmlWebpackPlugin</code></a>.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If you inspected <code>print.bundle.js</code>, you might have noticed that it did not contain the <code>printMe</code> function. Instead, it contained only an <a href="/concepts/why-webpack/#iifes---immediately-invoked-function-expressions">IIFE</a> with no observable side effects.<br/><br/>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If you inspected <code>print.bundle.js</code>, you might have noticed that it did not contain the <code>printMe</code> function. Instead, it contained only an <a href="/concepts/why-webpack/#iifes---immediately-invoked-function-expressions">IIFE</a> with no observable side effects.<br/><br/>
 This is because in our current setup, webpack treats each entry point as a standalone program that runs when the bundle is loaded. Because <code>print.js</code> only exports a function and never calls <code>printMe()</code>, executing it as its own entry does not require any executable runtime code. Thus, <a href="/guides/tree-shaking/">webpack is able to omit that code as an optimization</a> since it would have no observable effect.<br/><br/>
 In contrast, since <code>index.js</code> imports and uses <code>printMe</code>, webpack includes that function directly in <code>index.bundle.js</code>. Remember that webpack is a module <em>bundler</em>, so <code>index.bundle.js</code> contains all the code it needs to run rather than unresolved import statements.<br/><br/>
 Multiple entry points are used here solely to demonstrate output management and the <code>HtmlWebpackPlugin</code>. In a real project, you would typically avoid creating a separate entry point for utility modules like this. If you do have multiple entry points that share dependencies, see <a href="/guides/code-splitting/#prevent-duplication">Prevent Duplication</a> in the Code Splitting guide.</p></aside>
@@ -1082,9 +1082,9 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Now that you&#x27;ve learned about dynamically adding bundles to your HTML, let&#x27;s dive into the <a href="/guides/development">development guide</a>. Or, if you want to dig into more advanced topics, we would recommend heading over to the <a href="/guides/code-splitting">code splitting guide</a>.</p>
 <h1><span id="development"></span>Development<a href="#development" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide extends on code examples found in the <a href="/guides/output-management">Output Management</a> guide.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This guide extends on code examples found in the <a href="/guides/output-management">Output Management</a> guide.</p></aside>
 <p>If you&#x27;ve been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let&#x27;s look into setting up a development environment to make our lives a little easier.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>The tools in this guide are <strong>only meant for development</strong>, please <strong>avoid</strong> using them in production!</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>The tools in this guide are <strong>only meant for development</strong>, please <strong>avoid</strong> using them in production!</p></aside>
 <p>Let&#x27;s start by setting <a href="/configuration/mode/#mode-development"><code>mode</code> to <code>&#x27;development&#x27;</code></a> and <code>title</code> to <code>&#x27;Development&#x27;</code>.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
@@ -1166,7 +1166,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
    at HTMLButtonElement.printMe <span class="token punctuation">(</span>print.js:2<span class="token punctuation">)</span></code></pre></div>
 <p>We can see that the error also contains a reference to the file (<code>print.js</code>) and line number (2) where the error occurred. This is great because now we know exactly where to look in order to fix the issue.</p>
 <h2><span id="choosing-a-development-tool"></span>Choosing a Development Tool<a href="#choosing-a-development-tool" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Some text editors have a &quot;safe write&quot; function that might interfere with some of the following tools. Read <a href="#adjusting-your-text-editor">Adjusting Your Text Editor</a> for a solution to these issues.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Some text editors have a &quot;safe write&quot; function that might interfere with some of the following tools. Read <a href="#adjusting-your-text-editor">Adjusting Your Text Editor</a> for a solution to these issues.</p></aside>
 <p>It quickly becomes a hassle to manually run <code>npm run build</code> every time you want to compile your code.</p>
 <p>There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:</p>
 <ol>
@@ -1248,9 +1248,9 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 </span><span class="token prefix inserted">+</span><span class="token line">  },
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>This tells <code>webpack-dev-server</code> to serve the files from the <code>dist</code> directory on <code>localhost:8080</code>.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>The <code>optimization.runtimeChunk: &#x27;single&#x27;</code> was added because in this example we have more than one entrypoint on a single HTML page. Without this, we could get into trouble described <a href="https://bundlers.tooling.report/code-splitting/multi-entry/">here</a>. Read the <a href="/guides/code-splitting/">Code Splitting</a> chapter for more details.</p></aside>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p><code>webpack-dev-server</code> serves bundled files from the directory defined in <a href="/configuration/output/#outputpath"><code>output.path</code></a>, i.e., files will be available under <code>http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]</code>.</p></aside>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>webpack-dev-server doesn&#x27;t write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server&#x27;s root path. If your page expects to find the bundle files on a different path, you can change this with the <a href="/configuration/dev-server/#devserverdevmiddleware"><code>devMiddleware.publicPath</code></a> option in the dev server&#x27;s configuration.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The <code>optimization.runtimeChunk: &#x27;single&#x27;</code> was added because in this example we have more than one entrypoint on a single HTML page. Without this, we could get into trouble described <a href="https://bundlers.tooling.report/code-splitting/multi-entry/">here</a>. Read the <a href="/guides/code-splitting/">Code Splitting</a> chapter for more details.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p><code>webpack-dev-server</code> serves bundled files from the directory defined in <a href="/configuration/output/#outputpath"><code>output.path</code></a>, i.e., files will be available under <code>http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]</code>.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>webpack-dev-server doesn&#x27;t write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server&#x27;s root path. If your page expects to find the bundle files on a different path, you can change this with the <a href="/configuration/dev-server/#devserverdevmiddleware"><code>devMiddleware.publicPath</code></a> option in the dev server&#x27;s configuration.</p></aside>
 <p>Let&#x27;s add a script to easily run the dev server as well:</p>
 <p><strong>package.json</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">{
@@ -1279,7 +1279,7 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
 <p>Now we can run <code>npm start</code> from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!</p>
 <p>The <code>webpack-dev-server</code> comes with many configurable options. Head over to the <a href="/configuration/dev-server">documentation</a> to learn more.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Now that your server is working, you might want to give <a href="/guides/hot-module-replacement">Hot Module Replacement</a> a try!</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Now that your server is working, you might want to give <a href="/guides/hot-module-replacement">Hot Module Replacement</a> a try!</p></aside>
 <h3><span id="using-webpack-dev-middleware"></span>Using webpack-dev-middleware<a href="#using-webpack-dev-middleware" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>webpack-dev-middleware</code> is a wrapper that will emit files processed by webpack to a server. This is used in <code>webpack-dev-server</code> internally, however it&#x27;s available as a separate package to allow more custom setups if desired. We&#x27;ll take a look at an example that combines <code>webpack-dev-middleware</code> with an express server.</p>
 <p>Let&#x27;s install <code>express</code> and <code>webpack-dev-middleware</code> so we can get started:</p>
@@ -1398,7 +1398,7 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">19</span> ms
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> <span class="token punctuation">[</span>webpack-dev-middleware<span class="token punctuation">]</span> Compiled successfully.</code></pre></div>
 <p>Now fire up your browser and go to <code>http://localhost:3000</code>. You should see your webpack app running and functioning!</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If you would like to know more about how Hot Module Replacement works, we recommend you read the <a href="/guides/hot-module-replacement/">Hot Module Replacement</a> guide.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If you would like to know more about how Hot Module Replacement works, we recommend you read the <a href="/guides/hot-module-replacement/">Hot Module Replacement</a> guide.</p></aside>
 <h2><span id="adjusting-your-text-editor"></span>Adjusting Your Text Editor<a href="#adjusting-your-text-editor" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When using automatic compilation of your code, you could run into issues when saving your files. Some editors have a &quot;safe write&quot; feature that can potentially interfere with recompilation.</p>
 <p>To disable this feature in some common editors, see the list below:</p>
@@ -1411,7 +1411,7 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <p>Now that you&#x27;ve learned how to automatically compile your code and run a development server, you can check out the next guide, which will cover <a href="/guides/code-splitting/">Code Splitting</a>.</p>
 <h1><span id="code-splitting"></span>Code Splitting<a href="#code-splitting" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide extends the example provided in <a href="/guides/getting-started">Getting Started</a>. Please make sure you are at least familiar with the example provided there and the <a href="/guides/output-management/">Output Management</a> chapter.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This guide extends the example provided in <a href="/guides/getting-started">Getting Started</a>. Please make sure you are at least familiar with the example provided there and the <a href="/guides/output-management/">Output Management</a> chapter.</p></aside>
 <p>Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.</p>
 <p>There are three general approaches to code splitting available:</p>
 <ul>
@@ -1595,7 +1595,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </ul>
 <h2><span id="dynamic-imports"></span>Dynamic Imports<a href="#dynamic-imports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and recommended approach is to use the <a href="/api/module-methods/#import-1"><code>import()</code> syntax</a> that conforms to the <a href="https://github.com/tc39/proposal-dynamic-import">ECMAScript proposal</a> for dynamic imports. The legacy, webpack-specific approach is to use <a href="/api/module-methods/#requireensure"><code>require.ensure</code></a>. Let&#x27;s try using the first of these two approaches...</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><code>import()</code> calls use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a> internally. If you use <code>import()</code> with older browsers (e.g., IE 11), remember to shim <code>Promise</code> using a polyfill such as <a href="https://github.com/stefanpenner/es6-promise">es6-promise</a> or <a href="https://github.com/taylorhakes/promise-polyfill">promise-polyfill</a>.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><code>import()</code> calls use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a> internally. If you use <code>import()</code> with older browsers (e.g., IE 11), remember to shim <code>Promise</code> using a polyfill such as <a href="https://github.com/stefanpenner/es6-promise">es6-promise</a> or <a href="https://github.com/taylorhakes/promise-polyfill">promise-polyfill</a>.</p></aside>
 <p>Before we start, let&#x27;s remove the extra <a href="/concepts/entry-points/"><code>entry</code></a> and <a href="/plugins/split-chunks-plugin"><code>optimization.splitChunks</code></a> from our configuration in the above example as they won&#x27;t be needed for this next demonstration:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
@@ -1691,7 +1691,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">getComponent().then((component) =&gt; {
 </span><span class="token prefix unchanged"> </span><span class="token line">  document.body.appendChild(component);
 </span><span class="token prefix unchanged"> </span><span class="token line">});</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>It is possible to provide a <a href="/api/module-methods/#dynamic-expressions-in-import">dynamic expression</a> to <code>import()</code> when you might need to import specific module based on a computed variable later.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>It is possible to provide a <a href="/api/module-methods/#dynamic-expressions-in-import">dynamic expression</a> to <code>import()</code> when you might need to import specific module based on a computed variable later.</p></aside>
 <h2><span id="prefetchingpreloading-modules"></span>Prefetching/Preloading modules<a href="#prefetchingpreloading-modules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Webpack 4.6.0+ adds support for prefetching and preloading.</p>
 <p>Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that for:</p>
@@ -1704,7 +1704,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// ...</span>
 <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackPrefetch: true */</span> <span class="token string">&quot;./path/to/LoginModal.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>This will result in <code>&lt;link rel=&quot;prefetch&quot; href=&quot;login-modal-chunk.js&quot;&gt;</code> being appended in the head of the page, which will instruct the browser to prefetch in idle time the <code>login-modal-chunk.js</code> file.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>webpack will add the prefetch hint once the parent chunk has been loaded.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>webpack will add the prefetch hint once the parent chunk has been loaded.</p></aside>
 <p>Preload directive has a bunch of differences compared to prefetch:</p>
 <ul>
 <li>A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finishes loading.</li>
@@ -1718,7 +1718,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// ...</span>
 <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token comment">/* webpackPreload: true */</span> <span class="token string">&quot;ChartingLibrary&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>When a page which uses the <code>ChartComponent</code> is requested, the charting-library-chunk is also requested via <code>&lt;link rel=&quot;preload&quot;&gt;</code>. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a <code>LoadingIndicator</code>, until the already requested <code>charting-library-chunk</code> finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Using <code>webpackPreload</code> incorrectly can actually hurt performance, so be careful when using it.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Using <code>webpackPreload</code> incorrectly can actually hurt performance, so be careful when using it.</p></aside>
 <p>Sometimes you need to have your own control over preload. For example, preload of any dynamic import can be done via async script. This can be useful in case of streaming server side rendering.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> <span class="token function-variable function">lazyComp</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
   <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;DynamicComponent&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
@@ -1747,7 +1747,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>See <a href="/guides/lazy-loading/">Lazy Loading</a> for a more concrete example of how <code>import()</code> can be used in a real application and <a href="/guides/caching/">Caching</a> to learn how to split code more effectively.</p>
 <h1><span id="caching"></span>Caching<a href="#caching" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>The examples in this guide stem from <a href="/guides/getting-started">getting started</a>, <a href="/guides/output-management">output management</a> and <a href="/guides/code-splitting">code splitting</a>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The examples in this guide stem from <a href="/guides/getting-started">getting started</a>, <a href="/guides/output-management">output management</a> and <a href="/guides/code-splitting">code splitting</a>.</p></aside>
 <p>So we&#x27;re using webpack to bundle our modular application which yields a deployable <code>/dist</code> directory. Once the contents of <code>/dist</code> have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called <a href="https://en.wikipedia.org/wiki/Cache_(computing)">caching</a>. This allows sites to load faster with less unnecessary network traffic. However, it can also cause headaches when you need new code to be picked up.</p>
 <p>This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their content has changed.</p>
 <h2><span id="output-filenames"></span>Output Filenames<a href="#output-filenames" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -1798,7 +1798,7 @@ main.205199ab45963f6a62ec.js     <span class="token number">544</span> kB       
                   index.html  <span class="token number">197</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.</p></aside>
 <h2><span id="extracting-boilerplate"></span>Extracting Boilerplate<a href="#extracting-boilerplate" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>As we learned in <a href="/guides/code-splitting">code splitting</a>, the <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> can be used to split modules out into separate bundles. Webpack provides an optimization feature to split runtime code into a separate chunk using the <a href="/configuration/optimization/#optimizationruntimechunk"><code>optimization.runtimeChunk</code></a> option. Set it to <code>single</code> to create a single runtime bundle for all chunks:</p>
 <p><strong>webpack.config.js</strong></p>
@@ -2156,7 +2156,7 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>Now webpack will bundle a library that can work with CommonJS, AMD, and script tag.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that the <code>library</code> setup is tied to the <code>entry</code> configuration. For most libraries, specifying a single entry point is sufficient. While <a href="https://github.com/webpack/webpack/tree/master/examples/multi-part-library">multi-part libraries</a> are possible, it is more straightforward to expose partial exports through an <a href="https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file">index script</a> that serves as a single entry point. Using an <code>array</code> as an <code>entry</code> point for a library is <strong>not recommended</strong>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Note that the <code>library</code> setup is tied to the <code>entry</code> configuration. For most libraries, specifying a single entry point is sufficient. While <a href="https://github.com/webpack/webpack/tree/master/examples/multi-part-library">multi-part libraries</a> are possible, it is more straightforward to expose partial exports through an <a href="https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file">index script</a> that serves as a single entry point. Using an <code>array</code> as an <code>entry</code> point for a library is <strong>not recommended</strong>.</p></aside>
 <h2><span id="externalize-lodash"></span>Externalize Lodash<a href="#externalize-lodash" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Now, if you run <code>npx webpack</code>, you will find that a largish bundle is created. If you inspect the file, you&#x27;ll see that lodash has been bundled along with your code. In this case, we&#x27;d prefer to treat <code>lodash</code> as a <em>peer dependency</em>. Meaning that the consumer should already have <code>lodash</code> installed. Hence you would want to give up control of this external library to the consumer of your library.</p>
 <p>This can be done using the <a href="/configuration/externals/"><code>externals</code></a> configuration:</p>
@@ -2218,16 +2218,16 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
   ...
 <span class="token punctuation">}</span></code></pre></div>
 <p>The key <code>main</code> refers to the <a href="https://docs.npmjs.com/files/package.json#main">standard from <code>package.json</code></a>, and <code>module</code> to <a href="https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md">a</a> <a href="https://github.com/rollup/rollup/wiki/pkg.module">proposal</a> to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>The <code>module</code> property should point to a script that utilizes ES2015 module syntax but no other syntax features that aren&#x27;t yet supported by browsers or node. This enables webpack to parse the module syntax itself, allowing for lighter bundles via <a href="https://webpack.js.org/guides/tree-shaking/">tree shaking</a> if users are only consuming certain parts of the library.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>The <code>module</code> property should point to a script that utilizes ES2015 module syntax but no other syntax features that aren&#x27;t yet supported by browsers or node. This enables webpack to parse the module syntax itself, allowing for lighter bundles via <a href="https://webpack.js.org/guides/tree-shaking/">tree shaking</a> if users are only consuming certain parts of the library.</p></aside>
 <p>Now you can <a href="https://docs.npmjs.com/getting-started/publishing-npm-packages">publish it as an npm package</a> and find it at <a href="https://unpkg.com/#/">unpkg.com</a> to distribute it to your users.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>To expose stylesheets associated with your library, the <a href="/plugins/mini-css-extract-plugin"><code>MiniCssExtractPlugin</code></a> should be used. Users can then consume and load these as they would any other stylesheet.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>To expose stylesheets associated with your library, the <a href="/plugins/mini-css-extract-plugin"><code>MiniCssExtractPlugin</code></a> should be used. Users can then consume and load these as they would any other stylesheet.</p></aside>
 <h1><span id="environment-variables"></span>Environment Variables<a href="#environment-variables" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>To disambiguate in your <code>webpack.config.js</code> between <a href="/guides/development">development</a> and <a href="/guides/production">production builds</a> you may use environment variables.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>webpack&#x27;s environment variables are different from the <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variables</a> of operating system shells like <code>bash</code> and <code>CMD.exe</code></p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>webpack&#x27;s environment variables are different from the <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variables</a> of operating system shells like <code>bash</code> and <code>CMD.exe</code></p></aside>
 <p>The webpack command line <a href="/api/cli/#environment-options">environment option</a> <code>--env</code> allows you to pass in as many environment variables as you like. Environment variables will be made accessible in your <code>webpack.config.js</code>. For example, <code>--env production</code> or <code>--env goal=local</code>.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">npx webpack --env <span class="token assign-left variable">goal</span><span class="token operator">=</span>local --env production --progress</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Setting up your <code>env</code> variable without assignment, <code>--env production</code> sets <code>env.production</code> to <code>true</code> by default. There are also other syntaxes that you can use. See the <a href="/api/cli/#environment-options">webpack CLI</a> documentation for more information.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Setting up your <code>env</code> variable without assignment, <code>--env production</code> sets <code>env.production</code> to <code>true</code> by default. There are also other syntaxes that you can use. See the <a href="/api/cli/#environment-options">webpack CLI</a> documentation for more information.</p></aside>
 <p>There is one change that you will have to make to your webpack config. Typically, <code>export default</code> points to the configuration object. To use the <code>env</code> variable, you must make <code>export default</code> a function:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
@@ -2249,7 +2249,7 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Webpack CLI offers some <a href="/api/cli/#cli-environment-variables">built-in environment variables</a> which you can access inside a webpack configuration.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Webpack CLI offers some <a href="/api/cli/#cli-environment-variables">built-in environment variables</a> which you can access inside a webpack configuration.</p></aside>
 <h1><span id="build-performance"></span>Build Performance<a href="#build-performance" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>This guide contains some useful tips for improving build/compilation performance.</p>
@@ -2314,10 +2314,10 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 </ul>
 <h3><span id="worker-pool"></span>Worker Pool<a href="#worker-pool" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>The <code>thread-loader</code> can be used to offload expensive loaders to a worker pool.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Don&#x27;t use too many workers, as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Don&#x27;t use too many workers, as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive.</p></aside>
 <h3><span id="persistent-cache"></span>Persistent cache<a href="#persistent-cache" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Use <a href="/configuration/cache"><code>cache</code></a> option in webpack configuration. Clear cache directory on <code>&quot;postinstall&quot;</code> in <code>package.json</code>.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>We support yarn PnP version 3 <a href="https://yarnpkg.com/features/pnp"><code>yarn 2 berry</code></a> for persistent caching.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>We support yarn PnP version 3 <a href="https://yarnpkg.com/features/pnp"><code>yarn 2 berry</code></a> for persistent caching.</p></aside>
 <h3><span id="custom-pluginsloaders"></span>Custom plugins/loaders<a href="#custom-pluginsloaders" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Profile them to not introduce a performance problem here.</p>
 <h3><span id="progress-plugin"></span>Progress plugin<a href="#progress-plugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -2344,7 +2344,7 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 <li>The <code>cheap-source-map</code> variants are more performant if you can live with the slightly worse mapping quality.</li>
 <li>Use a <code>eval-source-map</code> variant for incremental builds.</li>
 </ul>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>In most cases, <code>eval-cheap-module-source-map</code> is the best option.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>In most cases, <code>eval-cheap-module-source-map</code> is the best option.</p></aside>
 <h3><span id="avoid-production-specific-tooling"></span>Avoid Production Specific Tooling<a href="#avoid-production-specific-tooling" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn&#x27;t make sense to minify and mangle your code with the <code>TerserPlugin</code> while in development. These tools should typically be excluded in development:</p>
 <ul>
@@ -2398,11 +2398,11 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>There is a <a href="https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin">full example</a> on the <code>ts-loader</code> GitHub repository.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>There is a <a href="https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin">full example</a> on the <code>ts-loader</code> GitHub repository.</p></aside>
 <hr/>
 <h2><span id="production"></span>Production<a href="#production" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The following steps are especially useful in <em>production</em>.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><strong>Don&#x27;t sacrifice the quality of your application for small performance gains!</strong> Keep in mind that optimization quality is, in most cases, more important than build performance.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><strong>Don&#x27;t sacrifice the quality of your application for small performance gains!</strong> Keep in mind that optimization quality is, in most cases, more important than build performance.</p></aside>
 <h3><span id="source-maps"></span>Source Maps<a href="#source-maps" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Source maps are really expensive. Do you really need them?</p>
 <hr/>
@@ -2555,7 +2555,7 @@ too, and a regular expression to match files against.</p>
 <span class="token comment">// a context with files from the test directory that can be required with a request ending with `.test.js`.</span></code></pre></div>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">require<span class="token punctuation">.</span><span class="token function">context</span><span class="token punctuation">(</span><span class="token string">&quot;../&quot;</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token regex">/\.stories\.js$/</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// a context with all files in the parent folder and descending folders ending with `.stories.js`.</span></code></pre></div>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>The arguments passed to <code>require.context</code> must be literals!</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>The arguments passed to <code>require.context</code> must be literals!</p></aside>
 <h3><span id="context-module-api"></span>context module API<a href="#context-module-api" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>A context module exports a (require) function that takes one argument: the request.</p>
 <p>The exported function has 3 properties: <code>resolve</code>, <code>keys</code>, <code>id</code>.</p>
@@ -2593,33 +2593,33 @@ too, and a regular expression to match files against.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack
 <span class="token comment"># or specific version</span>
 <span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack@<span class="token operator">&lt;</span>version<span class="token operator">&gt;</span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Whether to use <code>--save-dev</code> or not depends on your use cases. Say you&#x27;re using webpack only for bundling, then it&#x27;s suggested that you install it with <code>--save-dev</code> option since you&#x27;re not going to include webpack in your production build. Otherwise you can ignore <code>--save-dev</code>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Whether to use <code>--save-dev</code> or not depends on your use cases. Say you&#x27;re using webpack only for bundling, then it&#x27;s suggested that you install it with <code>--save-dev</code> option since you&#x27;re not going to include webpack in your production build. Otherwise you can ignore <code>--save-dev</code>.</p></aside>
 <p>If you&#x27;re using webpack v4 or later and want to call <code>webpack</code> from the command line, you&#x27;ll also need to install the <a href="/api/cli/">CLI</a>.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack-cli</code></pre></div>
 <p>Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more <a href="https://docs.npmjs.com/misc/scripts">npm scripts</a> which will look for a webpack installation in your local <code>node_modules</code> directory:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
   <span class="token property">&quot;build&quot;</span><span class="token operator">:</span> <span class="token string">&quot;webpack --config webpack.config.js&quot;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>To run the local installation of webpack you can access its binary version as <code>node_modules/.bin/webpack</code>. Alternatively, if you are using npm v5.2.0 or greater, you can run <code>npx webpack</code> to do it.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>To run the local installation of webpack you can access its binary version as <code>node_modules/.bin/webpack</code>. Alternatively, if you are using npm v5.2.0 or greater, you can run <code>npx webpack</code> to do it.</p></aside>
 <h2><span id="global-installation"></span>Global Installation<a href="#global-installation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The following NPM installation will make <code>webpack</code> available globally:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --global webpack</code></pre></div>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Note that this is <strong>not a recommended practice</strong>. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Note that this is <strong>not a recommended practice</strong>. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.</p></aside>
 <h2><span id="bleeding-edge"></span>Bleeding Edge<a href="#bleeding-edge" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>If you are enthusiastic about using the latest that webpack has to offer, you can install beta versions or even directly from the webpack repository using the following commands:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack@next
 <span class="token comment"># or a specific tag/branch</span>
 <span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack/webpack<span class="token comment">#&lt;tagname/branchname&gt;</span></code></pre></div>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Take caution when installing these bleeding edge releases! They may still contain bugs and therefore should not be used in production.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Take caution when installing these bleeding edge releases! They may still contain bugs and therefore should not be used in production.</p></aside>
 <h1><span id="hot-module-replacement"></span>Hot Module Replacement<a href="#hot-module-replacement" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide extends on code examples found in the <a href="/guides/development">Development</a> guide.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This guide extends on code examples found in the <a href="/guides/development">Development</a> guide.</p></aside>
 <p>Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows all kinds of modules to be updated at runtime without the need for a full refresh. This page focuses on <strong>implementation</strong> while the <a href="/concepts/hot-module-replacement">concepts page</a> gives more details on how it works and why it&#x27;s useful.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><strong>HMR</strong> is not intended for use in production, meaning it should only be used in development. See the <a href="/guides/production">building for production guide</a> for more information.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><strong>HMR</strong> is not intended for use in production, meaning it should only be used in development. See the <a href="/guides/production">building for production guide</a> for more information.</p></aside>
 <h2><span id="enabling-hmr"></span>Enabling HMR<a href="#enabling-hmr" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>This feature is great for productivity. All we need to do is update our <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration, and use webpack&#x27;s built-in HMR plugin. We&#x27;ll also remove the entry point for <code>print.js</code> as it will now be consumed by the <code>index.js</code> module.</p>
 <p>Since <code>webpack-dev-server</code> v4.0.0, Hot Module Replacement is enabled by default.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If you took the route of using <code>webpack-dev-middleware</code> instead of <code>webpack-dev-server</code>, please use the <a href="https://github.com/webpack/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom server or application.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If you took the route of using <code>webpack-dev-middleware</code> instead of <code>webpack-dev-server</code>, please use the <a href="https://github.com/webpack/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom server or application.</p></aside>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
 </span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
@@ -2688,7 +2688,7 @@ too, and a regular expression to match files against.</p>
 </span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>You can use the CLI to modify the <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration with the following command: <code>webpack serve --hot-only</code>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>You can use the CLI to modify the <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration with the following command: <code>webpack serve --hot-only</code>.</p></aside>
 <p>Now let&#x27;s update the <code>index.js</code> file so that when a change inside <code>print.js</code> is detected we tell webpack to accept the updated module.</p>
 <p><strong>index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import _ from &#x27;lodash&#x27;;
@@ -2782,7 +2782,7 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
   <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Failed to start dev server: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>err<span class="token punctuation">.</span>message<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span> cause<span class="token operator">:</span> err <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>See the <a href="/api/webpack-dev-server/">full documentation of <code>webpack-dev-server</code> Node.js API</a>.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If you&#x27;re <a href="/guides/development/#using-webpack-dev-middleware">using <code>webpack-dev-middleware</code></a>, check out the <a href="https://github.com/webpack/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom dev server.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If you&#x27;re <a href="/guides/development/#using-webpack-dev-middleware">using <code>webpack-dev-middleware</code></a>, check out the <a href="https://github.com/webpack/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom dev server.</p></aside>
 <h2><span id="gotchas"></span>Gotchas<a href="#gotchas" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Hot Module Replacement can be tricky. To show this, let&#x27;s go back to our working example. If you go ahead and click the button on the example page, you will realize the console is printing the old <code>printMe</code> function.</p>
 <p>This is happening because the button&#x27;s <code>onclick</code> event handler is still bound to the original <code>printMe</code> function.</p>
@@ -2921,12 +2921,12 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 <li><a href="https://angular.io/cli/serve">Angular HMR</a>: No loader necessary! HMR support is built in the Angular CLI, add the <code>--hmr</code> flag to you <code>ng serve</code> command.</li>
 <li><a href="https://github.com/sveltejs/svelte-loader">Svelte Loader</a>: This loader supports HMR for Svelte components out of the box.</li>
 </ul>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If you know of any other loaders or plugins that help with or enhance HMR, please submit a pull request to add them to this list!</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If you know of any other loaders or plugins that help with or enhance HMR, please submit a pull request to add them to this list!</p></aside>
 <h1><span id="tree-shaking"></span>Tree Shaking<a href="#tree-shaking" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p><em>Tree shaking</em> is a term commonly used in the JavaScript context for dead-code elimination. It relies on the <a href="http://exploringjs.com/es6/ch_modules.html#static-module-structure">static structure</a> of ES2015 module syntax, i.e. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import"><code>import</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export"><code>export</code></a>. The name and concept have been popularized by the ES2015 module bundler <a href="https://github.com/rollup/rollup">rollup</a>.</p>
 <p>The webpack 2 release came with built-in support for ES2015 modules (alias <em>harmony modules</em>) as well as unused module export detection. The new webpack 4 release expands on this capability with a way to provide hints to the compiler via the <code>&quot;sideEffects&quot;</code> <code>package.json</code> property to denote which files in your project are &quot;pure&quot; and therefore safe to prune if unused.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>The remainder of this guide will stem from <a href="/guides/getting-started">Getting Started</a>. If you haven&#x27;t read through that guide already, please do so now.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The remainder of this guide will stem from <a href="/guides/getting-started">Getting Started</a>. If you haven&#x27;t read through that guide already, please do so now.</p></aside>
 <h2><span id="add-a-utility"></span>Add a Utility<a href="#add-a-utility" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Let&#x27;s add a new utility file to our project, <code>src/math.js</code>, that exports two functions:</p>
 <p><strong>project</strong></p>
@@ -3014,14 +3014,14 @@ export default {
   <span class="token property">&quot;sideEffects&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>All the code noted above does not contain side effects, so we can mark the property as <code>false</code> to inform webpack that it can safely prune unused exports.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>A &quot;side effect&quot; is defined as code that performs a special behavior when imported, other than exposing one or more exports. An example of this are polyfills, which affect the global scope and usually do not provide an export.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>A &quot;side effect&quot; is defined as code that performs a special behavior when imported, other than exposing one or more exports. An example of this are polyfills, which affect the global scope and usually do not provide an export.</p></aside>
 <p>If your code did have some side effects though, an array can be provided instead:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;your-project&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;sideEffects&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./src/some-side-effectful-file.js&quot;</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>The array accepts simple glob patterns to the relevant files. It uses <a href="https://github.com/fitzgen/glob-to-regexp">glob-to-regexp</a> under the hood (Supports: <code>*</code>, <code>**</code>, <code>{a,b}</code>, <code>[a-z]</code>). Patterns like <code>*.css</code>, which do not include a <code>/</code>, will be treated like <code>**/*.css</code>.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that any imported file is subject to tree shaking. This means if you use something like <code>css-loader</code> in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Note that any imported file is subject to tree shaking. This means if you use something like <code>css-loader</code> in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:</p></aside>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;your-project&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;sideEffects&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./src/some-side-effectful-file.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;*.css&quot;</span><span class="token punctuation">]</span>
@@ -3300,10 +3300,10 @@ export default {
 </span><span class="token prefix deleted">-</span><span class="token line"> }
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> mode: &#x27;production&#x27;,
 </span></span>};</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that the <code>--optimize-minimize</code> flag can be used to enable <code>TerserPlugin</code> as well.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Note that the <code>--optimize-minimize</code> flag can be used to enable <code>TerserPlugin</code> as well.</p></aside>
 <p>With that squared away, we can run another <code>npm run build</code> and see if anything has changed.</p>
 <p>Notice anything different about <code>dist/bundle.js</code>? The whole bundle is now minified and mangled, but, if you look carefully, you won&#x27;t see the <code>square</code> function included but will see a mangled version of the <code>cube</code> function (<code>function r(e){return e*e*e}n.a=r</code>). With minification and tree shaking, our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p><a href="/plugins/module-concatenation-plugin/"><code>ModuleConcatenationPlugin</code></a> is needed for the tree shaking to work. It is added by <code>mode: &#x27;production&#x27;</code>. If you are not using it, remember to add the <a href="/plugins/module-concatenation-plugin/"><code>ModuleConcatenationPlugin</code></a> manually.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p><a href="/plugins/module-concatenation-plugin/"><code>ModuleConcatenationPlugin</code></a> is needed for the tree shaking to work. It is added by <code>mode: &#x27;production&#x27;</code>. If you are not using it, remember to add the <a href="/plugins/module-concatenation-plugin/"><code>ModuleConcatenationPlugin</code></a> manually.</p></aside>
 <h2><span id="common-pitfalls-with-side-effects"></span>Common Pitfalls with Side Effects<a href="#common-pitfalls-with-side-effects" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When working with tree shaking and the <code>sideEffects</code> flag, there are several common pitfalls to avoid:</p>
 <h3><span id="1-over-optimistic-sideeffects-false"></span>1. Over-optimistic <code>sideEffects: false</code><a href="#1-over-optimistic-sideeffects-false" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -3341,7 +3341,7 @@ export default {
 <h1><span id="production"></span>Production<a href="#production" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>In this guide, we&#x27;ll dive into some of the best practices and utilities for building a production site or application.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This walkthrough stems from <a href="/guides/tree-shaking">Tree Shaking</a> and <a href="/guides/development">Development</a>. Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This walkthrough stems from <a href="/guides/tree-shaking">Tree Shaking</a> and <a href="/guides/development">Development</a>. Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.</p></aside>
 <h2><span id="setup"></span>Setup<a href="#setup" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The goals of <em>development</em> and <em>production</em> builds differ greatly. In <em>development</em>, we want strong source mapping and a localhost server with live reloading or hot module replacement. In <em>production</em>, our goals shift to a focus on minified bundles, lighter weight source maps, and optimized assets to improve load time. With this logical separation at hand, we typically recommend writing <strong>separate webpack configurations</strong> for each environment.</p>
 <p>While we will separate the <em>production</em> and <em>development</em> specific bits out, note that we&#x27;ll still maintain a &quot;common&quot; configuration to keep things DRY. In order to merge these configurations together, we&#x27;ll use a utility called <a href="https://github.com/survivejs/webpack-merge"><code>webpack-merge</code></a>. With the &quot;common&quot; configuration in place, we won&#x27;t have to duplicate code within the environment-specific configurations.</p>
@@ -3444,7 +3444,7 @@ export default {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default merge(common, {
 </span><span class="token prefix unchanged"> </span><span class="token line">   mode: &#x27;production&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line"> });</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Technically, <code>NODE_ENV</code> is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, <code>process.env.NODE_ENV</code> is not set <strong>within</strong> the build script <code>webpack.config.js</code> automatically when running webpack. Thus, conditionals like <code>process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;[name].[contenthash].bundle.js&#x27; : &#x27;[name].bundle.js&#x27;</code> won&#x27;t work in webpack configurations unless you specify <code>NODE_ENV</code> explicitly with <code>NODE_ENV=production</code> through CLI.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Technically, <code>NODE_ENV</code> is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, <code>process.env.NODE_ENV</code> is not set <strong>within</strong> the build script <code>webpack.config.js</code> automatically when running webpack. Thus, conditionals like <code>process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;[name].[contenthash].bundle.js&#x27; : &#x27;[name].bundle.js&#x27;</code> won&#x27;t work in webpack configurations unless you specify <code>NODE_ENV</code> explicitly with <code>NODE_ENV=production</code> through CLI.</p></aside>
 <p>If you&#x27;re using a library like <a href="https://reactjs.org/"><code>react</code></a>, you should actually see a significant drop in bundle size after adding <code>DefinePlugin</code>. Also, note that any of our local <code>/src</code> code can key off of this as well, so the following check would be valid:</p>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import { cube } from &#x27;./math.js&#x27;;
@@ -3482,7 +3482,7 @@ export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">   mode: &#x27;production&#x27;,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   devtool: &#x27;source-map&#x27;,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> });</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Avoid <code>inline-***</code> and <code>eval-***</code> use in production as they can increase bundle size and reduce the overall performance.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Avoid <code>inline-***</code> and <code>eval-***</code> use in production as they can increase bundle size and reduce the overall performance.</p></aside>
 <h2><span id="minimize-css"></span>Minimize CSS<a href="#minimize-css" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>It is crucial to minimize your CSS for production. Please see the <a href="/plugins/mini-css-extract-plugin/#minimizing-for-production">Minimizing for Production</a> section.</p>
 <h2><span id="cli-alternatives"></span>CLI Alternatives<a href="#cli-alternatives" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -3490,7 +3490,7 @@ export default {
 <p>While these shorthand methods are useful, we recommend setting these options in a webpack configuration file for more configurability.</p>
 <h1><span id="lazy-loading"></span>Lazy Loading<a href="#lazy-loading" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide is a small follow-up to <a href="/guides/code-splitting">Code Splitting</a>. If you have not yet read through that guide, please do so now.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This guide is a small follow-up to <a href="/guides/code-splitting">Code Splitting</a>. If you have not yet read through that guide, please do so now.</p></aside>
 <p>Lazy, or &quot;on demand&quot;, loading is a great way to optimize your site or application. This practice essentially involves splitting your code at logical breakpoints, and then loading it once the user has done something that requires, or will require, a new block of code. This speeds up the initial load of the application and lightens its overall weight as some blocks may never even be loaded.</p>
 <h2><span id="dynamic-import-example"></span>Dynamic Import Example<a href="#dynamic-import-example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Let&#x27;s take the example from <a href="/guides/code-splitting/#dynamic-imports">Code Splitting</a> and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, <code>lodash.bundle.js</code>, to be generated and technically &quot;lazy-loads&quot; it as soon as the script is run. The trouble is that no user interaction is required to load the bundle – meaning that every time the page is loaded, the request will fire. This doesn&#x27;t help us too much and will impact performance negatively.</p>
@@ -3543,7 +3543,7 @@ export default {
 </span><span class="token prefix deleted">-</span><span class="token line">   document.body.appendChild(component);
 </span><span class="token prefix deleted">-</span><span class="token line"> });
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> document.body.appendChild(component());</span></span></code></pre></div>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Note that when using <code>import()</code> on ES6 modules you must reference the <code>.default</code> property as it&#x27;s the actual <code>module</code> object that will be returned when the promise is resolved.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Note that when using <code>import()</code> on ES6 modules you must reference the <code>.default</code> property as it&#x27;s the actual <code>module</code> object that will be returned when the promise is resolved.</p></aside>
 <p>Now let&#x27;s run webpack and check out our new lazy-loading functionality:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token punctuation">..</span>.
           Asset       Size  Chunks                    Chunk Names
@@ -3552,7 +3552,7 @@ index.bundle.js     <span class="token number">548</span> kB       <span class="
      index.html  <span class="token number">189</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre></div>
 <h2><span id="defer-import-example"></span>Defer Import Example<a href="#defer-import-example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>This feature does not lazily &quot;load&quot; a module, but it lazily &quot;evaluates&quot; a module. This means that the module is still downloaded and parsed, but its evaluation is lazy.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>This feature does not lazily &quot;load&quot; a module, but it lazily &quot;evaluates&quot; a module. This means that the module is still downloaded and parsed, but its evaluation is lazy.</p></aside>
 <p>In some cases, it might be annoying or hard to convert all uses of a module to asynchronous, since it enforces the unnecessary asyncification of all functions, without providing the ability to only defer the synchronous evaluation work.</p>
 <p>The TC39 proposal <a href="https://github.com/tc39/proposal-defer-import-eval">Deferring Module Evaluation</a> is to solve this problem.</p>
 <blockquote>
@@ -3560,7 +3560,7 @@ index.bundle.js     <span class="token number">548</span> kB       <span class="
 <p><em>Only when accessing a property of this module, would the execution operations be performed (if needed).</em></p>
 </blockquote>
 <p>This feature is available by enabling <a href="/configuration/experiments/#experimentsdeferimport">experiments.deferImport</a>.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>This feature is still in the experimental stage and may change in future versions of webpack.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>This feature is still in the experimental stage and may change in future versions of webpack.</p></aside>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">webpack-demo
 |- package.json
@@ -3716,17 +3716,17 @@ Setting <code>&quot;type&quot;: &quot;commonjs&quot;</code> will instead force t
 <p>In DataURIs using the <code>text/javascript</code> or <code>application/javascript</code> mime type will also force module type to ESM.</p>
 <p>In addition to the module format, flagging modules as ESM also affect the resolving logic, interop logic and the available symbols in modules.</p>
 <p>Imports in ESM are resolved more strictly. Relative requests must include a filename and file extension (e.g. <code>*.js</code> or <code>*.mjs</code>) unless you have the behaviour disabled with <a href="/configuration/module/#resolvefullyspecified"><code>fullySpecified=false</code></a>.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Requests to packages e.g. <code>import &quot;lodash&quot;</code> are still supported.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Requests to packages e.g. <code>import &quot;lodash&quot;</code> are still supported.</p></aside>
 <p>Only the &quot;default&quot; export can be imported from non-ESM. Named exports are not available.</p>
 <p>CommonJs Syntax is not available: <code>require</code>, <code>module</code>, <code>exports</code>, <code>__filename</code>, <code>__dirname</code>.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>HMR can be used with <a href="/api/module-variables/#importmetawebpackhot"><code>import.meta.webpackHot</code></a> instead of <a href="/api/module-variables/#modulehot-webpack-specific"><code>module.hot</code></a>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>HMR can be used with <a href="/api/module-variables/#importmetawebpackhot"><code>import.meta.webpackHot</code></a> instead of <a href="/api/module-variables/#modulehot-webpack-specific"><code>module.hot</code></a>.</p></aside>
 <h1><span id="shimming"></span>Shimming<a href="#shimming" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>The <code>webpack</code> compiler can understand modules written as ES2015 modules, CommonJS or AMD. However, some third party libraries may expect global dependencies (e.g. <code>$</code> for <code>jQuery</code>). The libraries might also create globals which need to be exported. These &quot;broken modules&quot; are one instance where <em>shimming</em> comes into play.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><strong>We don&#x27;t recommend using globals!</strong> The whole concept behind webpack is to allow more modular front-end development. This means writing isolated modules that are well contained and do not rely on hidden dependencies (e.g. globals). Please use these features only when necessary.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><strong>We don&#x27;t recommend using globals!</strong> The whole concept behind webpack is to allow more modular front-end development. This means writing isolated modules that are well contained and do not rely on hidden dependencies (e.g. globals). Please use these features only when necessary.</p></aside>
 <p>Another instance where <em>shimming</em> can be useful is when you want to <a href="https://en.wikipedia.org/wiki/Polyfill_%28programming%29">polyfill</a> browser functionality to support more users. In this case, you may only want to deliver those polyfills to the browsers that need patching (i.e. load them on demand).</p>
 <p>The following article will walk through both of these use cases.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>For simplicity, this guide stems from the examples in <a href="/guides/getting-started">Getting Started</a>. Please make sure you are familiar with the setup there before moving on.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>For simplicity, this guide stems from the examples in <a href="/guides/getting-started">Getting Started</a>. Please make sure you are familiar with the setup there before moving on.</p></aside>
 <h2><span id="shimming-globals"></span>Shimming Globals<a href="#shimming-globals" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Let&#x27;s start with the first use case of shimming global variables. Before we do anything let&#x27;s take another look at our project:</p>
 <p><strong>project</strong></p>
@@ -3928,7 +3928,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">}
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that we aren&#x27;t binding the <code>import</code> to a variable. This is because polyfills run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Note that we aren&#x27;t binding the <code>import</code> to a variable. This is because polyfills run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.</p></aside>
 <p>Note that this approach prioritizes correctness over bundle size. To be safe and robust, polyfills/shims must run <strong>before all other code</strong>, and thus either need to load synchronously, or, all app code needs to load after all polyfills/shims load.
 There are many misconceptions in the community, as well, that modern browsers &quot;don&#x27;t need&quot; polyfills, or that polyfills/shims merely serve to add missing features - in fact, they often <em>repair broken implementations</em>, even in the most modern of browsers.
 The best practice thus remains to unconditionally and synchronously load all polyfills/shims, despite the bundle size cost this incurs.</p>
@@ -4063,11 +4063,11 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <h2><span id="other-utilities"></span>Other Utilities<a href="#other-utilities" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>There are a few other tools that can help when dealing with legacy modules.</p>
 <p>When there is no AMD/CommonJS version of the module and you want to include the <code>dist</code>, you can flag this module in <a href="/configuration/module/#modulenoparse"><code>noParse</code></a>. This will cause webpack to include the module without parsing it or resolving <code>require()</code> and <code>import</code> statements. This practice is also used to improve the build performance.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Any feature requiring the AST, like the <code>ProvidePlugin</code>, will not work.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Any feature requiring the AST, like the <code>ProvidePlugin</code>, will not work.</p></aside>
 <p>Lastly, there are some modules that support multiple <a href="/concepts/modules">module styles</a>; e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for <code>define</code> and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting <code>additionalCode=var%20define%20=%20false;</code> via the <a href="/loaders/imports-loader/"><code>imports-loader</code></a>.</p>
 <h1><span id="typescript"></span>TypeScript<a href="#typescript" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide stems from the <a href="/guides/getting-started/"><em>Getting Started</em></a> guide.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This guide stems from the <a href="/guides/getting-started/"><em>Getting Started</em></a> guide.</p></aside>
 <p><a href="https://www.typescriptlang.org">TypeScript</a> is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.</p>
 <h2><span id="basic-setup"></span>Basic Setup<a href="#basic-setup" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>First install the TypeScript compiler and loader by running:</p>
@@ -4149,7 +4149,7 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 </span><span class="token prefix unchanged"> </span><span class="token line"> }
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> document.body.appendChild(component());</span></span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>To make imports do this by default and keep <code>import _ from &#x27;lodash&#x27;;</code> syntax in TypeScript, set <code>&quot;allowSyntheticDefaultImports&quot; : true</code> and <code>&quot;esModuleInterop&quot; : true</code> in your <strong>tsconfig.json</strong> file. This is related to TypeScript configuration and mentioned in our guide only for your information.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>To make imports do this by default and keep <code>import _ from &#x27;lodash&#x27;;</code> syntax in TypeScript, set <code>&quot;allowSyntheticDefaultImports&quot; : true</code> and <code>&quot;esModuleInterop&quot; : true</code> in your <strong>tsconfig.json</strong> file. This is related to TypeScript configuration and mentioned in our guide only for your information.</p></aside>
 <h2><span id="ways-to-use-typescript-in-webpackconfigts"></span>Ways to Use TypeScript in <code>webpack.config.ts</code><a href="#ways-to-use-typescript-in-webpackconfigts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>There are 5 ways to use TypeScript in <code>webpack.config.ts</code>:</p>
 <ol>
@@ -4178,7 +4178,7 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <h2><span id="loader"></span>Loader<a href="#loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><a href="https://github.com/TypeStrong/ts-loader"><code>ts-loader</code></a></p>
 <p>We use <code>ts-loader</code> in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><code>ts-loader</code> uses <code>tsc</code>, the TypeScript compiler, and relies on your <code>tsconfig.json</code> configuration. Make sure to avoid setting <a href="https://www.typescriptlang.org/tsconfig#module"><code>module</code></a> to &quot;CommonJS&quot;, or webpack won&#x27;t be able to <a href="/guides/tree-shaking">tree-shake your code</a>.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><code>ts-loader</code> uses <code>tsc</code>, the TypeScript compiler, and relies on your <code>tsconfig.json</code> configuration. Make sure to avoid setting <a href="https://www.typescriptlang.org/tsconfig#module"><code>module</code></a> to &quot;CommonJS&quot;, or webpack won&#x27;t be able to <a href="/guides/tree-shaking">tree-shake your code</a>.</p></aside>
 <p>Note that if you&#x27;re already using <a href="https://github.com/babel/babel-loader"><code>babel-loader</code></a> to transpile your code, you can use <a href="https://babeljs.io/docs/en/babel-preset-typescript"><code>@babel/preset-typescript</code></a> and let Babel handle both your JavaScript and TypeScript files instead of using an additional loader. Keep in mind that, contrary to <code>ts-loader</code>, the underlying <a href="https://babeljs.io/docs/en/babel-plugin-transform-typescript"><code>@babel/plugin-transform-typescript</code></a> plugin does not perform any type checking.</p>
 <h2><span id="source-maps"></span>Source Maps<a href="#source-maps" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>To learn more about source maps, see the <a href="/guides/development">development guide</a>.</p>
@@ -4247,7 +4247,7 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <span class="token punctuation">}</span></code></pre></div>
 <p>Here we declare a new module for SVGs by specifying any import that ends in <code>.svg</code> and defining the module&#x27;s <code>content</code> as <code>any</code>. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.</p>
 <h2><span id="build-performance"></span>Build Performance<a href="#build-performance" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>This may degrade build performance.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>This may degrade build performance.</p></aside>
 <p>See the <a href="/guides/build-performance/">Build Performance</a> guide on build tooling.</p>
 <h1><span id="web-workers"></span>Web Workers<a href="#web-workers" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
@@ -4277,7 +4277,7 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// Inside a worker file</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> someFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;my-package&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>Webpack will automatically resolve to <code>index.worker.js</code> when the module is used in a worker context, without requiring any additional configuration.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Using a variable in the <code>Worker</code> constructor is not supported by webpack. For example, the following code will not work: <code>const url = new URL(&#x27;./path/to/worker.ts&#x27;, import.meta.url); const worker = new Worker(url);</code>. This is because webpack cannot analyse the syntax statically. It is important to be aware of this limitation when using <code>Worker</code> syntax with webpack.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Using a variable in the <code>Worker</code> constructor is not supported by webpack. For example, the following code will not work: <code>const url = new URL(&#x27;./path/to/worker.ts&#x27;, import.meta.url); const worker = new Worker(url);</code>. This is because webpack cannot analyse the syntax statically. It is important to be aware of this limitation when using <code>Worker</code> syntax with webpack.</p></aside>
 <h2><span id="example"></span>Example<a href="#example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> worker <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;./deep-thought.js&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -4317,7 +4317,7 @@ worker<span class="token punctuation">.</span><span class="token function">postM
 <p>Note that this is only available in ESM. <code>Worker</code> in CommonJS syntax is not supported by either webpack or Node.js.</p>
 <h1><span id="progressive-web-application"></span>Progressive Web Application<a href="#progressive-web-application" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide extends on code examples found in the <a href="/guides/output-management">Output Management</a> guide.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This guide extends on code examples found in the <a href="/guides/output-management">Output Management</a> guide.</p></aside>
 <p>Progressive Web Applications (or PWAs) are web apps that deliver an experience similar to native applications. There are many things that can contribute to that. Of these, the most significant is the ability for an app to be able to function when <strong>offline</strong>. This is achieved through the use of a web technology called <a href="https://developers.google.com/web/fundamentals/primers/service-workers/">Service Workers</a>.</p>
 <p>This section will focus on adding an offline experience to our app. We&#x27;ll achieve this using a Google project called <a href="https://github.com/GoogleChrome/workbox">Workbox</a> which provides tools that help make offline support for web apps easier to setup.</p>
 <h2><span id="we-dont-work-offline-now"></span>We Don&#x27;t Work Offline Now<a href="#we-dont-work-offline-now" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -4438,7 +4438,7 @@ precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  <span class="token number
 <p>That&#x27;s all you need. Since we&#x27;re already using the <code>DefinePlugin</code> on our
 configuration, <code>process.env.ASSET_PATH</code> will always be defined so we can safely
 do that.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Be aware that if you use ES6 module imports in your entry file the <code>__webpack_public_path__</code> assignment will be done after the imports. In such cases, you&#x27;ll have to move the public path assignment to its own dedicated module and then import it on top of your entry.js:</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Be aware that if you use ES6 module imports in your entry file the <code>__webpack_public_path__</code> assignment will be done after the imports. In such cases, you&#x27;ll have to move the public path assignment to its own dedicated module and then import it on top of your entry.js:</p></aside>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// entry.js</span>
 <span class="token keyword">import</span> <span class="token string">&quot;./public-path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">&quot;./app&quot;</span><span class="token punctuation">;</span></code></pre></div>
@@ -4790,7 +4790,7 @@ module.exports = {
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   ],
 </span><span class="token prefix unchanged"> </span><span class="token line"> },
 </span></span>};</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>You don&#x27;t need to add rules when using <code>import text from &#x27;./file.txt&#x27; with { type: &quot;text&quot; };</code> syntax.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>You don&#x27;t need to add rules when using <code>import text from &#x27;./file.txt&#x27; with { type: &quot;text&quot; };</code> syntax.</p></aside>
 <p><strong>src/example.txt</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-text">Hello world
 </code></pre></div>
@@ -4806,7 +4806,7 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 <p>All <code>.txt</code> files will be injected into the bundles as is.</p>
 <h2><span id="url-assets"></span>URL assets<a href="#url-assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When using <code>new URL(&#x27;./path/to/asset&#x27;, import.meta.url)</code>, webpack creates an asset module too.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>You don&#x27;t need to add rules when using <code>const file = new URL(&#x27;./file.ext&#x27;, import.meta.url);</code> syntax.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>You don&#x27;t need to add rules when using <code>const file = new URL(&#x27;./file.ext&#x27;, import.meta.url);</code> syntax.</p></aside>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> logo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;./logo.svg&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Depending on the <a href="/configuration/target/"><code>target</code></a> in your configuration, webpack would compile the above code into a different result:</p>
@@ -4894,7 +4894,7 @@ module.exports = {
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   ],
 </span><span class="token prefix unchanged"> </span><span class="token line"> },
 </span></span>};</code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>You don&#x27;t need to add rules when using <code>import data from &#x27;./file.ext&#x27; with { type: &quot;bytes&quot; };</code> syntax.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>You don&#x27;t need to add rules when using <code>import data from &#x27;./file.ext&#x27; with { type: &quot;bytes&quot; };</code> syntax.</p></aside>
 <p><strong>src/example.txt</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-text">Hello world
 </code></pre></div>
@@ -5014,7 +5014,7 @@ In such a scenario this list is tried in order and the first valid result will b
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>Here <code>package/things/apple</code> might be found in <code>.../package/good-things/apple</code> or in <code>.../package/bad-things/apple</code>.</p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>As of version 5.94.0, webpack&#x27;s behavior has been updated to align with Node&#x27;s behavior. It now selects the first valid path without attempting further resolutions and throws an error if the path cannot be resolved.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>As of version 5.94.0, webpack&#x27;s behavior has been updated to align with Node&#x27;s behavior. It now selects the first valid path without attempting further resolutions and throws an error if the path cannot be resolved.</p></aside>
 <p>For example, given the following configuration:</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>

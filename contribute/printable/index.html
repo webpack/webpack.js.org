@@ -326,11 +326,11 @@ choose to participate in any vote through abstention. Votes are needed to add ne
 </blockquote>
 <h4><span id="tip"></span>Tip<a href="#tip" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong>Syntax: T&gt;</strong></p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>This is a tip.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>This is a tip.</p></aside>
 <p><strong>Syntax: W&gt;</strong></p>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>This is a warning.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>This is a warning.</p></aside>
 <p><strong>Syntax: ?&gt;</strong></p>
-<aside class="todo"><h6 class="todo__prefix">todo</h6><p>This is a todo.</p></aside>
+<aside class="todo"><p class="todo__prefix">todo</p><p>This is a todo.</p></aside>
 <h3><span id="assumptions-and-simplicity"></span>Assumptions and simplicity<a href="#assumptions-and-simplicity" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Do not make assumptions when writing the documentation.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> You might already know how to optimize bundle for production...
@@ -372,7 +372,7 @@ choose to participate in any vote through abstention. Votes are needed to add ne
 <li><code>madeUp</code> (<code>boolean = true</code>): short description</li>
 <li><code>shortText</code> (<code>string = &#x27;i am text&#x27;</code>): another short description</li>
 </ul>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><code>:</code> is not a necessity here, note the property, type and default.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><code>:</code> is not a necessity here, note the property, type and default.</p></aside>
 <p>An example can be found on the <a href="/plugins/eval-source-map-dev-tool-plugin/#options"><code>options</code> section of the EvalSourceMapDevToolPlugin&#x27;s page</a>.</p>
 <h3><span id="adding-links"></span>Adding links<a href="#adding-links" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Please use relative URLs (such as <code>/concepts/mode/</code>) to link our own content instead of absolute URLs (such as <code>https://webpack.js.org/concepts/mode/</code>).</p>
@@ -462,7 +462,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>By the way, if you&#x27;ve already created a separate repository and package for your loader, you could <a href="https://docs.npmjs.com/cli/link"><code>npm link</code></a> it to the project in which you&#x27;d like to test it out.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>You can use <a href="https://github.com/webpack-contrib/webpack-defaults"><code>webpack-defaults</code> package</a> to generate boilerplate code necessary to start writing your loader.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>You can use <a href="https://github.com/webpack-contrib/webpack-defaults"><code>webpack-defaults</code> package</a> to generate boilerplate code necessary to start writing your loader.</p></aside>
 <h2><span id="simple-usage"></span>Simple Usage<a href="#simple-usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When a single loader is applied to the resource, the loader is called with only one parameter – a string containing the content of the resource file.</p>
 <p>Synchronous loaders can <code>return</code> a single value representing the transformed module. In more complex cases, the loader can return any number of values by using the <code>this.callback(err, values...)</code> function. Errors are either passed to the <code>this.callback</code> function or thrown in a sync loader.</p>
@@ -511,7 +511,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li><code>apply-loader</code>: Executes the function with loader options and returns raw HTML.</li>
 <li><code>html-loader</code>: Accepts HTML and outputs a valid JavaScript module.</li>
 </ul>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>The fact that loaders can be chained also means they don&#x27;t necessarily have to output JavaScript. As long as the next loader in the chain can handle its output, the loader can return any type of module.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The fact that loaders can be chained also means they don&#x27;t necessarily have to output JavaScript. As long as the next loader in the chain can handle its output, the loader can return any type of module.</p></aside>
 <h3><span id="modular"></span>Modular<a href="#modular" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Keep the output modular. Loader generated modules should respect the same design principles as normal modules.</p>
 <h3><span id="stateless"></span>Stateless<a href="#stateless" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -580,7 +580,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <p>The <code>css-loader</code> is a good example of the first approach. It transforms dependencies to <code>require</code>s, by replacing <code>@import</code> statements with a <code>require</code> to the other stylesheet and <code>url(...)</code> with a <code>require</code> to the referenced file.</p>
 <p>In the case of the <code>less-loader</code>, it cannot transform each <code>@import</code> to a <code>require</code> because all <code>.less</code> files must be compiled in one pass for variables and mixin tracking. Therefore, the <code>less-loader</code> extends the less compiler with custom path resolving logic. It then takes advantage of the second approach, <code>this.resolve</code>, to resolve the dependency through webpack.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>If the language only accepts relative urls (e.g. <code>url(file)</code> always refers to <code>./file</code>), you can use the <code>~</code> convention to specify references to installed modules (e.g. those in <code>node_modules</code>). In the case of <code>url</code>, that would look something like <code>url(&#x27;~some-library/image.jpg&#x27;)</code>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If the language only accepts relative urls (e.g. <code>url(file)</code> always refers to <code>./file</code>), you can use the <code>~</code> convention to specify references to installed modules (e.g. those in <code>node_modules</code>). In the case of <code>url</code>, that would look something like <code>url(&#x27;~some-library/image.jpg&#x27;)</code>.</p></aside>
 <h3><span id="common-code"></span>Common Code<a href="#common-code" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a <code>require</code> to that shared module:</p>
 <p><strong>src/loader-runtime.js</strong></p>
@@ -687,7 +687,7 @@ module<span class="token punctuation">.</span><span class="token function-variab
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>In this case, we&#x27;ve inlined our webpack configuration but you can also accept a configuration as a parameter to the exported function. This would allow you to test multiple setups using the same compiler module.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>In this case, we&#x27;ve inlined our webpack configuration but you can also accept a configuration as a parameter to the exported function. This would allow you to test multiple setups using the same compiler module.</p></aside>
 <p>And now, finally, we can write our test and add an npm script to run it:</p>
 <p><strong>test/loader.test.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">/**
@@ -1217,8 +1217,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 - main.js
 - index.html
 </code></pre></div>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>We are using synchronous <code>tap()</code> method to tap into the <code>processAssets</code> hook because we don&#x27;t need to perform any asynchronous operations in the example above. However, the <code>processAssets</code> hook is an asynchronous one, so you can also use <code>tapPromise()</code> or <code>tapAsync()</code> if you actually need to.</p></aside>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>The <a href="/api/compilation-hooks/#processassets"><code>processAssets</code></a> hook also supports the <code>additionalAssets</code> property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are fine with using the <code>SUMMARIZE</code> stage to capture all the assets generated on previous stages (this should account for all assets in general case).</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>We are using synchronous <code>tap()</code> method to tap into the <code>processAssets</code> hook because we don&#x27;t need to perform any asynchronous operations in the example above. However, the <code>processAssets</code> hook is an asynchronous one, so you can also use <code>tapPromise()</code> or <code>tapAsync()</code> if you actually need to.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The <a href="/api/compilation-hooks/#processassets"><code>processAssets</code></a> hook also supports the <code>additionalAssets</code> property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are fine with using the <code>SUMMARIZE</code> stage to capture all the assets generated on previous stages (this should account for all assets in general case).</p></aside>
 <h2><span id="different-plugin-shapes"></span>Different Plugin Shapes<a href="#different-plugin-shapes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into is generally specified in <code>this.hooks</code> property.</p>
 <p>For example:</p>
@@ -1530,12 +1530,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <ul>
 <li><code>compilation.modules</code>: A set of modules (built inputs) in the compilation. Each module manages the build of a raw file from your source library.</li>
 </ul>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><strong>Deprecation warning</strong>: Array functions will still work.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><strong>Deprecation warning</strong>: Array functions will still work.</p></aside>
 <ul>
 <li><code>module.fileDependencies</code>: An array of source file paths included into a module. This includes the source JavaScript file itself (ex: <code>index.js</code>), and all dependency asset files (stylesheets, images, etc) that it has required. Reviewing dependencies is useful for seeing what source files belong to a module.</li>
 <li><code>compilation.chunks</code>: A set of chunks (build outputs) in the compilation. Each chunk manages the composition of a final rendered assets.</li>
 </ul>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p><strong>Deprecation warning</strong>: Array functions will still work.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><strong>Deprecation warning</strong>: Array functions will still work.</p></aside>
 <ul>
 <li><code>chunk.getModules()</code>: An array of modules that are included into a chunk. By extension, you may look through each module&#x27;s dependencies to see what raw source files fed into a chunk.</li>
 <li><code>chunk.files</code>: A Set of output filenames generated by the chunk. You may access these asset sources from the <code>compilation.assets</code> table.</li>
@@ -1564,8 +1564,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
 <p>You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Add valid file paths into the <code>compilation.fileDependencies</code> <code>Set</code> to add them to the watched files.</p>
-<aside class="tip"><h6 class="tip__prefix">tip</h6><p>The <code>fileDependencies</code> <code>Set</code> is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.</p></aside>
-<aside class="warning"><h6 class="warning__prefix">warning</h6><p>Since webpack 5, <code>compilation.fileDependencies</code>, <code>compilation.contextDependencies</code> and <code>compilation.missingDependencies</code> are now a <code>Set</code> instead of a <code>Sortable Set</code> and thus no longer sorted.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The <code>fileDependencies</code> <code>Set</code> is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>Since webpack 5, <code>compilation.fileDependencies</code>, <code>compilation.contextDependencies</code> and <code>compilation.missingDependencies</code> are now a <code>Set</code> instead of a <code>Sortable Set</code> and thus no longer sorted.</p></aside>
 <h2><span id="changed-chunks"></span>Changed chunks<a href="#changed-chunks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Similar to the watch graph, you can monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
