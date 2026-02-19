@@ -116,7 +116,6 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
             aria-label="Open navigation menu"
             className="bg-transparent border-none md:hidden"
             onClick={toggleSidebar}
-            aria-label="Toggle navigation menu"
           >
             <Hamburger
               width={20}
