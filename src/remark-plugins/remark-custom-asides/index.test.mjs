@@ -20,7 +20,7 @@ W> hello world
         (err, { value: contents }) => {
           expect(err).toBeUndefined();
           expect(contents).toContain('<aside class="warning"');
-          expect(contents).toContain('<h6 class="warning__prefix"');
+          expect(contents).toContain('<p class="warning__prefix"');
           expect(contents).toContain("warning");
           expect(contents).toMatchSnapshot();
         },
