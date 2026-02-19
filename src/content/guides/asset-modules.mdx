@@ -320,7 +320,7 @@ import exampleText from "./example.txt" with { type: "text" };
 block.textContent = exampleText; // 'Hello world';
 ```
 
-All `.txt` files will be injected into the bundles as is.
+All `.txt` files will be injected into the bundles as UTF-8 strings.
 
 ## URL assets
 
@@ -459,9 +459,9 @@ Hello world
 import exampleText from "./example.txt";
 
 const decoder = new TextDecoder("utf-8");
-const textString = decoder.decode(exampleText); // 'Uint8Array'
+const textString = decoder.decode(exampleText);
 
-block.textContent = exampleText; // 'Hello world';
+block.textContent = textString; // 'Hello world';
 ```
 
 Alternative usage:
@@ -472,12 +472,12 @@ Alternative usage:
 import exampleText from "./example.txt" with { type: "bytes" };
 
 const decoder = new TextDecoder("utf-8");
-const textString = decoder.decode(exampleText); // 'Uint8Array'
+const textString = decoder.decode(exampleText);
 
-block.textContent = exampleText; // 'Hello world';
+block.textContent = textString; // 'Hello world';
 ```
 
-All `.txt` files will be injected into the bundles as is.
+All `.txt` files will be injected into the bundles as raw bytes (Uint8Array), without any text encoding or transformation.
 
 ## Replacing Inline Loader Syntax
 
