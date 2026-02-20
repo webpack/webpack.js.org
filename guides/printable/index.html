@@ -3755,7 +3755,7 @@ Setting <code>&quot;type&quot;: &quot;commonjs&quot;</code> will instead force t
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
@@ -3799,7 +3799,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
@@ -3832,7 +3832,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p>This becomes a problem when the module is executed in a CommonJS context where <code>this</code> is equal to <code>module.exports</code>. In this case you can override <code>this</code> using the <a href="/loaders/imports-loader/"><code>imports-loader</code></a>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
@@ -3879,7 +3879,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Now, while you&#x27;d likely never do this in your own source code, you may encounter a dated library you&#x27;d like to use that contains similar code to what&#x27;s shown above. In this case, we can use <a href="/loaders/exports-loader/"><code>exports-loader</code></a>, to export that global variable as a normal module export. For instance, in order to export <code>file</code> as <code>file</code> and <code>helpers.parse</code> as <code>parse</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
@@ -3965,7 +3965,7 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;babel-polyfill&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">&quot;whatwg-fetch&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
@@ -4198,7 +4198,7 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
 <p>Now we need to tell webpack to extract these source maps and include in our final bundle:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require(&quot;node:path&quot;);
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.ts&#x27;,
@@ -4657,7 +4657,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;./publicPath.js&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="resource-type"></span>Resource type<a href="#resource-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -4683,7 +4683,7 @@ img<span class="token punctuation">.</span>src <span class="token operator">=</s
 <p>By default, <code>asset/resource</code> modules are emitting with <code>[hash][ext][query]</code> filename into output directory.</p>
 <p>You can modify this template by setting <a href="/configuration/output/#outputassetmodulefilename"><code>output.assetModuleFilename</code></a> in your webpack configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -4702,7 +4702,7 @@ module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line"> },
 </span></span>};</code></pre></div>
 <p>Another case to customize output filename is to emit some kind of assets to a specified directory:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -4727,7 +4727,7 @@ module.exports = {
 <p><code>Rule.generator.filename</code> is the same as <a href="/configuration/output/#outputassetmodulefilename"><code>output.assetModuleFilename</code></a> and works only with <code>asset</code> and <code>asset/resource</code> module types.</p>
 <h2><span id="inlining-assets"></span>Inlining assets<a href="#inlining-assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -4753,7 +4753,7 @@ block<span class="token punctuation">.</span>style<span class="token punctuation
 <p>By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.</p>
 <p>If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 <span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const svgToMiniDataURI = require(&#x27;mini-svg-data-uri&#x27;);
 </span></span>
 module.exports = {
@@ -4780,7 +4780,7 @@ module.exports = {
 <p>Now all <code>.svg</code> files will be encoded by <code>mini-svg-data-uri</code> package.</p>
 <h2><span id="source-type"></span>Source type<a href="#source-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -4839,7 +4839,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>pathname <span class="token operator">===</span> <span class="token string">&quot;,&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="asset-type"></span>Asset type<a href="#asset-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -4859,7 +4859,7 @@ module.exports = {
 <p>Now webpack will automatically choose between <code>resource</code> and <code>inline</code> by following a default condition: a file with size less than 8kb will be treated as a <code>inline</code> module type and <code>resource</code> module type otherwise.</p>
 <p>You can change this condition by setting a <a href="/configuration/module/#ruleparserdataurlcondition"><code>Rule.parser.dataUrlCondition.maxSize</code></a> option on the module rule level of your webpack configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -4884,7 +4884,7 @@ module.exports = {
 <p>Also you can <a href="/configuration/module/#ruleparserdataurlcondition">specify a function</a> to decide to inlining a module or not.</p>
 <h2><span id="bytes-type"></span>Bytes type<a href="#bytes-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&#x27;path&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
