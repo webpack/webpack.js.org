@@ -4309,7 +4309,14 @@ worker<span class="token punctuation">.</span><span class="token function-variab
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> worker <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;./worker.js&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 worker<span class="token punctuation">.</span><span class="token function">postMessage</span><span class="token punctuation">(</span><span class="token punctuation">{</span> publicPath<span class="token operator">:</span> globalThis<span class="token punctuation">.</span>__MY_GLOBAL_PUBLIC_PATH_VAR__ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p><strong>When to use this:</strong></p>
+<p>This pattern is only required when a worker needs to load additional chunks and the asset base URL is determined at runtime (for example, when using a CDN or a multi-domain deployment).</p>
+<p>Since workers run in an isolated global scope, the automatically detected public path may differ from the one used by the main thread. In such cases, the public path (<code>__webpack_public_path__</code>) must be explicitly passed to the worker and set inside the worker runtime.</p>
+<blockquote>
+<p>Note: This is an advanced use case. If your worker does not load additional chunks or your assets are served from a static, same-origin path, you typically do not need to set <code>__webpack_public_path__</code> manually.</p>
+</blockquote>
 <h2><span id="nodejs"></span>Node.js<a href="#nodejs" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
+<p>This section describes using Web Workers in a Node.js environment via the <code>worker_threads</code> module.</p>
 <p>Similar syntax is supported in Node.js (&gt;= 12.17.0):</p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Worker <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:worker_threads&quot;</span><span class="token punctuation">;</span>
 
