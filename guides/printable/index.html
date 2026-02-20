@@ -4803,7 +4803,7 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span> <span class="token keyword">with</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;text&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> exampleText<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
-<p>All <code>.txt</code> files will be injected into the bundles as is.</p>
+<p>All <code>.txt</code> files will be injected into the bundles as UTF-8 strings.</p>
 <h2><span id="url-assets"></span>URL assets<a href="#url-assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When using <code>new URL(&#x27;./path/to/asset&#x27;, import.meta.url)</code>, webpack creates an asset module too.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You don&#x27;t need to add rules when using <code>const file = new URL(&#x27;./file.ext&#x27;, import.meta.url);</code> syntax.</p></aside>
@@ -4902,18 +4902,18 @@ module.exports = {
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> decoder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TextDecoder</span><span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> textString <span class="token operator">=</span> decoder<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>exampleText<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x27;Uint8Array&#x27;</span>
+<span class="token keyword">const</span> textString <span class="token operator">=</span> decoder<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>exampleText<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> exampleText<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
+block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> textString<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
 <p>Alternative usage:</p>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span> <span class="token keyword">with</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;bytes&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> decoder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TextDecoder</span><span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> textString <span class="token operator">=</span> decoder<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>exampleText<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x27;Uint8Array&#x27;</span>
+<span class="token keyword">const</span> textString <span class="token operator">=</span> decoder<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>exampleText<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> exampleText<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
-<p>All <code>.txt</code> files will be injected into the bundles as is.</p>
+block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> textString<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
+<p>All <code>.txt</code> files will be injected into the bundles as raw bytes (Uint8Array), without any text encoding or transformation.</p>
 <h2><span id="replacing-inline-loader-syntax"></span>Replacing Inline Loader Syntax<a href="#replacing-inline-loader-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Before Asset Modules and Webpack 5, it was possible to use <a href="https://webpack.js.org/concepts/loaders/#inline">inline syntax</a> with the legacy loaders mentioned above.</p>
 <p>It is now recommended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.</p>
