@@ -65,9 +65,9 @@ npm install workbox-webpack-plugin --save-dev
 **webpack.config.js**
 
 ```diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-+ const WorkboxPlugin = require('workbox-webpack-plugin');
+  import path from "node:path";
+  import HtmlWebpackPlugin from "html-webpack-plugin";
++ import WorkboxPlugin from "workbox-webpack-plugin";
 
   module.exports = {
     entry: {
