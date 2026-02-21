@@ -99,7 +99,7 @@ document.body.appendChild(component());
 </html>
 ```
 
-We also need to adjust our `package.json` file in order to make sure we mark our package as `private`, as well as removing the `main` entry. This is to prevent an accidental publish of your code.
+We also need to adjust our `package.json` file in order to make sure we mark our package as `private`, as well as removing the `main` entry. We also add `"type": "module"` so that Node.js knows to process our configuration files as ES Modules. This is to prevent an accidental publish of your code, as well as enabling ES Module support for our scripts.
 
 T> If you want to learn more about the inner workings of `package.json`, then we recommend reading the [npm documentation](https://docs.npmjs.com/files/package.json).
 
@@ -112,6 +112,7 @@ T> If you want to learn more about the inner workings of `package.json`, then we
    "description": "",
 -  "main": "index.js",
 +  "private": true,
++  "type": "module",
    "scripts": {
      "test": "echo \"Error: no test specified\" && exit 1"
    },
