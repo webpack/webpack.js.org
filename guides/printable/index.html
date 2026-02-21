@@ -3758,10 +3758,16 @@ Setting <code>&quot;type&quot;: &quot;commonjs&quot;</code> will instead force t
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &quot;node:path&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;url&#x27;;
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">import webpack from &quot;webpack&quot;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;main.js&#x27;,
@@ -3802,10 +3808,14 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &quot;node:path&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import webpack from &quot;webpack&quot;;
+</span></span>import { fileURLToPath } from &#x27;url&#x27;;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;main.js&#x27;,
@@ -3835,10 +3845,14 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p>This becomes a problem when the module is executed in a CommonJS context where <code>this</code> is equal to <code>module.exports</code>. In this case you can override <code>this</code> using the <a href="/loaders/imports-loader/"><code>imports-loader</code></a>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &quot;node:path&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import webpack from &quot;webpack&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">exports default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;main.js&#x27;,
@@ -3882,10 +3896,14 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Now, while you&#x27;d likely never do this in your own source code, you may encounter a dated library you&#x27;d like to use that contains similar code to what&#x27;s shown above. In this case, we can use <a href="/loaders/exports-loader/"><code>exports-loader</code></a>, to export that global variable as a normal module export. For instance, in order to export <code>file</code> as <code>file</code> and <code>helpers.parse</code> as <code>parse</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &quot;node:path&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import webpack from &quot;webpack&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;main.js&#x27;,
@@ -3968,10 +3986,14 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;babel-polyfill&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">&quot;whatwg-fetch&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require(&quot;node:path&quot;);
-</span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require(&#x27;webpack&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &quot;node:path&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import webpack from &quot;webpack&quot;;
+</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;url&#x27;;
 </span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  entry: {
 </span><span class="token prefix inserted">+</span><span class="token line">    polyfills: &#x27;./src/polyfills&#x27;,
