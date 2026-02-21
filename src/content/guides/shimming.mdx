@@ -76,9 +76,15 @@ The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a va
 
 ```diff
  import path from "node:path";
+ import { fileURLToPath } from 'url';
 +import webpack from "webpack";
 
- module.exports = {
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'main.js',
@@ -134,8 +140,12 @@ We can also use the `ProvidePlugin` to expose a single export of a module by con
 ```diff
  import path from "node:path";
  import webpack from "webpack";
+import { fileURLToPath } from 'url';
 
- module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'main.js',
@@ -178,8 +188,12 @@ This becomes a problem when the module is executed in a CommonJS context where `
 ```diff
  import path from "node:path";
  import webpack from "webpack";
+ import { fileURLToPath } from 'url';
 
- module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+ exports default = {
    entry: './src/index.js',
    output: {
      filename: 'main.js',
@@ -240,8 +254,12 @@ Now, while you'd likely never do this in your own source code, you may encounter
 ```diff
  import path from "node:path";
  import webpack from "webpack";
+ import { fileURLToPath } from 'url';
 
- module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+ export default = {
    entry: './src/index.js',
    output: {
      filename: 'main.js',
@@ -360,8 +378,12 @@ import "whatwg-fetch";
 ```diff
  import path from "node:path";
  import webpack from "webpack";
+ import { fileURLToPath } from 'url';
 
- module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+ export default {
 -  entry: './src/index.js',
 +  entry: {
 +    polyfills: './src/polyfills',
