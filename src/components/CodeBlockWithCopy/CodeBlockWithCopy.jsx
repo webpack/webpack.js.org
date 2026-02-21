@@ -81,7 +81,11 @@ export default function CodeBlockWithCopy({ children }) {
 
   return (
     <div className="code-block-wrapper">
-      <button onClick={handleCopy} className={`copy-button ${copyStatus}`}>
+      <button
+        onClick={handleCopy}
+        className={`copy-button ${copyStatus}`}
+        aria-label="Copy code to clipboard"
+      >
         {copyStatus === "copied"
           ? "Copied!"
           : copyStatus === "error"
