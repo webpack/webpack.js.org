@@ -4577,9 +4577,9 @@ mocha-webpack <span class="token string">&#x27;test/**/*.js&#x27;</span></code><
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-scss"><span class="token comment">// account page individual styles</span></code></pre></div>
 <p>We will use <a href="/plugins/mini-css-extract-plugin/"><code>MiniCssExtractPlugin</code></a> in <code>production</code> mode for css as a best practice.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> MiniCssExtractPlugin <span class="token keyword">from</span> <span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   mode<span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span><span class="token punctuation">,</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     home<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./home.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./home.scss&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
