@@ -75,8 +75,8 @@ The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a va
 **webpack.config.js**
 
 ```diff
- const path = require("node:path");
-+const webpack = require('webpack');
+ import path from "node:path";
++import webpack from "webpack";
 
  module.exports = {
    entry: './src/index.js',
@@ -132,8 +132,8 @@ We can also use the `ProvidePlugin` to expose a single export of a module by con
 **webpack.config.js**
 
 ```diff
- const path = require("node:path");
- const webpack = require('webpack');
+ import path from "node:path";
+ import webpack from "webpack";
 
  module.exports = {
    entry: './src/index.js',
@@ -176,8 +176,8 @@ This becomes a problem when the module is executed in a CommonJS context where `
 **webpack.config.js**
 
 ```diff
- const path = require("node:path");
- const webpack = require('webpack');
+ import path from "node:path";
+ import webpack from "webpack";
 
  module.exports = {
    entry: './src/index.js',
@@ -238,8 +238,8 @@ Now, while you'd likely never do this in your own source code, you may encounter
 **webpack.config.js**
 
 ```diff
- const path = require("node:path");
- const webpack = require('webpack');
+ import path from "node:path";
+ import webpack from "webpack";
 
  module.exports = {
    entry: './src/index.js',
@@ -358,8 +358,8 @@ import "whatwg-fetch";
 **webpack.config.js**
 
 ```diff
- const path = require("node:path");
- const webpack = require('webpack');
+ import path from "node:path";
+ import webpack from "webpack";
 
  module.exports = {
 -  entry: './src/index.js',
