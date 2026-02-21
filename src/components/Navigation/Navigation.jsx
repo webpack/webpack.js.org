@@ -260,8 +260,6 @@ Navigation.propTypes = {
   hash: PropTypes.string,
   links: PropTypes.array,
   toggleSidebar: PropTypes.func,
-  theme: PropTypes.string,
-  switchTheme: PropTypes.func,
 };
 
 export default Navigation;
