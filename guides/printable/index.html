@@ -153,6 +153,9 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
+<span class="token comment">// In Node.js versions prior to native support for import.meta.dirname,</span>
+<span class="token comment">// derive __dirname from import.meta.url.</span>
+<span class="token comment">// (Node 20.11+ supports import.meta.dirname and import.meta.filename.)</span>
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
