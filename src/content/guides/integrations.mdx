@@ -34,7 +34,7 @@ Then register a configuration and load the task:
 **Gruntfile.js**
 
 ```js
-const webpackConfig = require("./webpack.config.js");
+import webpackConfig from "./webpack.config.js";
 
 module.exports = function (grunt) {
   grunt.initConfig({
@@ -66,8 +66,8 @@ You can `require('webpack-stream')` instead of `webpack` and optionally pass it 
 **gulpfile.js**
 
 ```js
-const gulp = require("gulp");
-const webpack = require("webpack-stream");
+import gulp from "gulp";
+import webpack from "webpack-stream";
 
 gulp.task("default", () =>
   gulp
