@@ -8,19 +8,19 @@
 <p>Exports HTML as string. HTML is minimized when the compiler demands.</p>
 <h2><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>To begin, you&#x27;ll need to install <code>html-loader</code>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">npm install --save-dev html-loader
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">npm install --save-dev html-loader
 </code></pre></div>
 <p>or</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">yarn add -D html-loader
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">yarn add -D html-loader
 </code></pre></div>
 <p>or</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">pnpm add -D html-loader
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">pnpm add -D html-loader
 </code></pre></div>
 <p>Then add the loader to your <code>webpack</code> configuration. For example:</p>
 <p><strong>file.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> html <span class="token keyword">from</span> <span class="token string">&quot;./file.html&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> html <span class="token keyword">from</span> <span class="token string">&quot;./file.html&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -40,7 +40,7 @@
 </ul>
 <h3><span id="sources"></span><code>sources</code><a href="#sources" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">sources</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">sources</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">boolean</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       list<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -95,7 +95,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 <li>false: Disables processing entirely</li>
 </ul>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -113,7 +113,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 <p>Allows you to specify which tags and attributes to process, filter them, filter URLs and process sources starting with <code>/</code>.</p>
 <p>For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -154,7 +154,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="list"></span><code>list</code><a href="#list" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">list</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">list</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
   tag<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   attribute<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   <span class="token keyword">type</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
@@ -170,7 +170,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 <p>Using <code>...</code> syntax allows you to extend <a href="#sources">default supported tags and attributes</a>.</p>
 <p>For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -236,7 +236,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 </blockquote>
 <p>For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -269,7 +269,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Filter can also be used to extend the supported elements and attributes.</p>
 <p>For example, filter can help process meta tags that reference assets:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -306,7 +306,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 </blockquote>
 <p>Filter can be used to disable default sources.</p>
 <p>For example:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -331,7 +331,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="urlfilter"></span><code>urlFilter</code><a href="#urlfilter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">urlFilter</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">urlFilter</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
   attribute<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
   value<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
   resourcePath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
@@ -339,7 +339,7 @@ You may need to specify loaders for images in your configuration (recommended <a
 <p>Default: <code>undefined</code></p>
 <p>Allow to filter URLs. All filtered URLs will not be resolved (left in the code as they were written).
 Non-requestable sources (for example <code>&lt;img src=&quot;javascript:void(0)&quot;/&gt;</code>) are not handled by default.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -366,13 +366,13 @@ Non-requestable sources (for example <code>&lt;img src=&quot;javascript:void(0)&
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="scriptingenabled"></span><code>scriptingEnabled</code><a href="#scriptingenabled" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">scriptingEnabled</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">scriptingEnabled</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>true</code></p>
 <p>By default, the parser in <code>html-loader</code> interprets content inside <code>&lt;noscript&gt;</code> tags as plain <code>#text</code>, so processing of content inside these tags will is ignored during processing.</p>
 <p>In order to enable processing inside <code>&lt;noscript&gt;</code> for content recognition by the parser as <code>#AST</code>, set this option to: <code>false</code></p>
 <p>Additional information: <a href="https://parse5.js.org/interfaces/parse5.ParserOptions.html#scriptingenabled">scriptingEnabled</a></p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -390,7 +390,7 @@ Non-requestable sources (for example <code>&lt;img src=&quot;javascript:void(0)&
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="preprocessor"></span><code>preprocessor</code><a href="#preprocessor" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">preprocessor</span> <span class="token operator">=</span> <span class="token punctuation">(</span>content<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">preprocessor</span> <span class="token operator">=</span> <span class="token punctuation">(</span>content<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Allows pre-processing of content before handling by the loader.</p>
 <blockquote>
@@ -398,7 +398,7 @@ Non-requestable sources (for example <code>&lt;img src=&quot;javascript:void(0)&
 <p>You should always return valid HTML.</p>
 </blockquote>
 <p><strong>file.hbs</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-hbs">&lt;div&gt;
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-hbs">&lt;div&gt;
   &lt;p&gt;{{firstname}} {{lastname}}&lt;/p&gt;
   &lt;img src=&quot;image.png&quot; alt=&quot;alt&quot; /&gt;
 &lt;div&gt;
@@ -406,7 +406,7 @@ Non-requestable sources (for example <code>&lt;img src=&quot;javascript:void(0)&
 <h4><span id="function"></span><code>function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>You can set the <code>preprocessor</code> option as a <code>function</code> instance.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -439,7 +439,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You can also set the <code>preprocessor</code> option as an asynchronous function instance.</p>
 <p>For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -471,11 +471,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="postprocessor"></span><code>postprocessor</code><a href="#postprocessor" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">postprocessor</span> <span class="token operator">=</span> <span class="token punctuation">(</span>content<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">postprocessor</span> <span class="token operator">=</span> <span class="token punctuation">(</span>content<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Allows post-processing of content after replacing all attributes (like <code>src</code>/<code>srcset</code>/etc).</p>
 <p><strong>file.html</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image.png<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image.png<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&lt;%= <span class="token punctuation">&#x27;</span>Hello <span class="token punctuation">&#x27;</span> + (1+1) %/&gt;<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&lt;%= require(<span class="token punctuation">&#x27;</span>./image.png<span class="token punctuation">&#x27;</span>) %&gt;<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&lt;%= new URL(<span class="token punctuation">&#x27;</span>./image.png<span class="token punctuation">&#x27;</span>, import.meta.url) %&gt;<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
@@ -483,7 +483,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h4><span id="function-1"></span><code>function</code><a href="#function-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>You can set the <code>postprocessor</code> option as a <code>function</code> instance.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -508,7 +508,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You can also set the <code>postprocessor</code> option as an asynchronous <code>function</code> instance.</p>
 <p>For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -534,7 +534,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="minimize"></span><code>minimize</code><a href="#minimize" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minimize</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minimize</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">boolean</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       caseSensitive<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
@@ -552,7 +552,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Use this option to enable or customize HTML minimization with <code>html-loader</code>.</p>
 <h4><span id="boolean-1"></span><code>boolean</code><a href="#boolean-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>The enabled rules for minimizing by default are the following ones:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token punctuation">(</span><span class="token punctuation">{</span>
   caseSensitive<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   collapseWhitespace<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   conservativeCollapse<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -565,7 +565,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   removeStyleLinkTypeAttributes<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -583,7 +583,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>See <a href="https://github.com/DanielRuf/html-minifier-terser">html-minifier-terser</a>&#x27;s documentation for more information on the available options.</p>
 <p>The default rules can be overridden using the following options in your <code>webpack.config.js</code></p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -601,7 +601,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The default rules can be extended:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> defaultMinimizerOptions <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> defaultMinimizerOptions <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -622,13 +622,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="esmodule"></span><code>esModule</code><a href="#esmodule" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">esModule</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">esModule</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>true</code></p>
 <p>By default, <code>html-loader</code> generates JS modules that use the ES modules syntax.
 There are some cases in which using ES modules is beneficial, such as <a href="/plugins/module-concatenation-plugin/">module concatenation</a> and <a href="/guides/tree-shaking/">tree shaking</a>.</p>
 <p>If you want to generate CommonJS modules instead (e.g., <code>module.exports =</code>), set:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -644,7 +644,7 @@ There are some cases in which using ES modules is beneficial, such as <a href="/
 <h2><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="disable-url-resolving-using-the----webpackignore-true----comment"></span>Disable URL resolving using the <code>&lt;!-- webpackIgnore: true --&gt;</code> comment<a href="#disable-url-resolving-using-the----webpackignore-true----comment" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Use the <code>&lt;!-- webpackIgnore: true --&gt;</code> comment to prevent html-loader from processing URLs for the next HTML tag. This is useful when you don’t want Webpack to handle asset imports automatically.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token comment">&lt;!-- Disabled url handling for the src attribute --&gt;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token comment">&lt;!-- Disabled url handling for the src attribute --&gt;</span>
 <span class="token comment">&lt;!-- webpackIgnore: true --&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image.png<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
 
@@ -666,7 +666,7 @@ There are some cases in which using ES modules is beneficial, such as <a href="/
 <h3><span id="roots"></span>roots<a href="#roots" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>With <a href="/configuration/resolve/#resolveroots"><code>resolve.roots</code></a> one can specify a list of directories where requests of server-relative URLs (starting with &#x27;/&#x27;) are resolved.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   context<span class="token operator">:</span> __dirname<span class="token punctuation">,</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -686,11 +686,11 @@ There are some cases in which using ES modules is beneficial, such as <a href="/
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>file.html</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>/image.jpg<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// =&gt; image.jpg in __dirname/fixtures will be resolved</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>/image.jpg<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// =&gt; image.jpg in __dirname/fixtures will be resolved</span></code></pre></div>
 <h3><span id="cdn"></span>CDN<a href="#cdn" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -708,26 +708,26 @@ There are some cases in which using ES modules is beneficial, such as <a href="/
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>file.html</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image.jpg<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image2x.png<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image.jpg<span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image2x.png<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span></code></pre></div>
 <p><strong>index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-loader!./file.html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// =&gt; &#x27;&lt;img src=&quot;http://cdn.example.com/49eba9f/a992ca.jpg&quot; data-src=&quot;image2x.png&quot;/&gt;&#x27;</span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;html-loader?{&quot;sources&quot;:{&quot;list&quot;:[{&quot;tag&quot;:&quot;img&quot;,&quot;attribute&quot;:&quot;data-src&quot;,&quot;type&quot;:&quot;src&quot;}]}}!./file.html&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;html-loader?{&quot;sources&quot;:{&quot;list&quot;:[{&quot;tag&quot;:&quot;img&quot;,&quot;attribute&quot;:&quot;data-src&quot;,&quot;type&quot;:&quot;src&quot;}]}}!./file.html&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// =&gt; &#x27;&lt;img src=&quot;image.jpg&quot; data-src=&quot;data:image/png;base64,...&quot; /&gt;&#x27;</span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;html-loader?{&quot;sources&quot;:{&quot;list&quot;:[{&quot;tag&quot;:&quot;img&quot;,&quot;attribute&quot;:&quot;src&quot;,&quot;type&quot;:&quot;src&quot;},{&quot;tag&quot;:&quot;img&quot;,&quot;attribute&quot;:&quot;data-src&quot;,&quot;type&quot;:&quot;src&quot;}]}}!./file.html&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;html-loader?{&quot;sources&quot;:{&quot;list&quot;:[{&quot;tag&quot;:&quot;img&quot;,&quot;attribute&quot;:&quot;src&quot;,&quot;type&quot;:&quot;src&quot;},{&quot;tag&quot;:&quot;img&quot;,&quot;attribute&quot;:&quot;data-src&quot;,&quot;type&quot;:&quot;src&quot;}]}}!./file.html&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// =&gt; &#x27;&lt;img src=&quot;http://cdn.example.com/49eba9f/a992ca.jpg&quot; data-src=&quot;data:image/png;base64,...&quot; /&gt;&#x27;</span></code></pre></div>
 <h3><span id="process-script-and-link-tags"></span>Process <code>script</code> and <code>link</code> tags<a href="#process-script-and-link-tags" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>script.file.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>style.file.css</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-css"><span class="token selector">a</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-css"><span class="token selector">a</span> <span class="token punctuation">{</span>
   <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p><strong>file.html</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token name">doctype</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token name">doctype</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>UTF-8<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
@@ -740,7 +740,7 @@ There are some cases in which using ES modules is beneficial, such as <a href="/
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -779,13 +779,13 @@ There are some cases in which using ES modules is beneficial, such as <a href="/
 <p>You can use any templating engine by leveraging the preprocessor option in html-loader. The preprocessor function receives the file content and the loader context, allowing you to transform the HTML before it’s processed by webpack.</p>
 <p>Below is an example for <a href="https://handlebarsjs.com/">handlebars</a>.</p>
 <p><strong>file.hbs</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-hbs">&lt;div&gt;
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-hbs">&lt;div&gt;
   &lt;p&gt;{{firstname}} {{lastname}}&lt;/p&gt;
   &lt;img src=&quot;image.png&quot; alt=&quot;alt&quot; /&gt;
 &lt;div&gt;
 </code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> Handlebars <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;handlebars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -820,9 +820,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You can use <a href="https://github.com/posthtml/posthtml">PostHTML</a> to transform HTML before it&#x27;s processed, without needing additional loaders.
 This is useful for tasks like converting image formats, adding attributes, or restructuring markup.</p>
 <p><strong>file.html</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image.jpg<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>image.jpg<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> posthtml <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;posthtml&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> posthtml <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;posthtml&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> posthtmlWebp <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;posthtml-webp&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -858,7 +858,7 @@ expect. The extract loader will parse the javascript back into a proper html
 file, ensuring images are required and point to proper path, and the <a href="/guides/asset-modules/"><code>asset modules</code></a>
 will write the <em>.html</em> file for you. Example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     assetModuleFilename<span class="token operator">:</span> <span class="token string">&quot;[name][ext]&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -883,4 +883,4 @@ will write the <em>.html</em> file for you. Example:</p>
 If you&#x27;re new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.</p>
 <p><a href="https://github.com/webpack/html-loader?tab=contributing-ov-file#contributing">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack/html-loader/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/html-loader/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/html-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/expose-loader/">expose-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/imports-loader/">imports-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.4d2e1dd51f0fb269.js"></script></body>
+<p><a href="https://github.com/webpack/html-loader/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/html-loader/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/html-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/expose-loader/">expose-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/imports-loader/">imports-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.0bc9448bd6aeb6c5.js"></script></body>

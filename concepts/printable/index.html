@@ -23,7 +23,7 @@
 <p>An <strong>entry point</strong> indicates which module webpack should use to begin building out its internal <a href="/concepts/dependency-graph/">dependency graph</a>. Webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).</p>
 <p>By default its value is <code>./src/index.js</code>, but you can specify a different (or multiple) entry points by setting an <a href="/configuration/entry-context/#entry"><code>entry</code> property in the webpack configuration</a>. For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Learn more in the <a href="/concepts/entry-points">entry points</a> section.</p></aside>
@@ -31,7 +31,7 @@
 <p>The <strong>output</strong> property tells webpack where to emit the <em>bundles</em> it creates and how to name these files. It defaults to <code>./dist/main.js</code> for the main output file and to the <code>./dist</code> folder for any other generated file.</p>
 <p>You can configure this part of the process by specifying an <code>output</code> field in your configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
@@ -51,7 +51,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>The <code>use</code> property indicates which loader should be used to do the transforming.</li>
 </ol>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -73,7 +73,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <aside class="tip"><p class="tip__prefix">tip</p><p>Check out the <a href="/api/plugins">plugin interface</a> and how to use it to extend webpack&#x27;s capabilities.</p></aside>
 <p>In order to use a plugin, you need to <code>require()</code> it and add it to the <code>plugins</code> array. Most plugins are customizable through options. Since you can use a plugin multiple times in a configuration for different purposes, you need to create an instance of it by calling it with the <code>new</code> operator.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> HtmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> HtmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// to access built-in plugins</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -87,7 +87,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Using plugins in your webpack configuration is straightforward. However, there are many use cases that are worth further exploration. <a href="/concepts/plugins">Learn more about them here</a>.</p>
 <h2><span id="mode"></span>Mode<a href="#mode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>By setting the <code>mode</code> parameter to either <code>development</code>, <code>production</code> or <code>none</code>, you can enable webpack&#x27;s built-in optimizations that correspond to each environment. The default value is <code>production</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   mode<span class="token operator">:</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Learn more about the <a href="/configuration/mode">mode configuration here</a> and what optimizations take place on each value.</p>
@@ -108,19 +108,19 @@ files are emitted.</p>
 <h2><span id="single-entry-shorthand-syntax"></span>Single Entry (Shorthand) Syntax<a href="#single-entry-shorthand-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Usage: <code>entry: string | [string]</code></p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The single entry syntax for the <code>entry</code> property is a shorthand for:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     main<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>We can also pass an array of file paths to the <code>entry</code> property which creates what is known as a <strong>&quot;multi-main entry&quot;</strong>. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one &quot;chunk&quot;.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./src/file_1.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./src/file_2.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
@@ -130,7 +130,7 @@ files are emitted.</p>
 <h2><span id="object-syntax"></span>Object Syntax<a href="#object-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Usage: <code>entry: { &lt;entryChunkName&gt; string | [string] } | {}</code></p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     app<span class="token operator">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
     adminApp<span class="token operator">:</span> <span class="token string">&quot;./src/adminApp.js&quot;</span><span class="token punctuation">,</span>
@@ -162,7 +162,7 @@ files are emitted.</p>
 </li>
 </ul>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     a2<span class="token operator">:</span> <span class="token string">&quot;dependingfile.js&quot;</span><span class="token punctuation">,</span>
     b2<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -173,7 +173,7 @@ files are emitted.</p>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><code>runtime</code> and <code>dependOn</code> should not be used together on a single entry, so the following config is invalid and would throw an error:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     a2<span class="token operator">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
     b2<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -184,7 +184,7 @@ files are emitted.</p>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Make sure <code>runtime</code> must not point to an existing entry point name, for example the below config would throw an error:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     a1<span class="token operator">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
     b1<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -194,7 +194,7 @@ files are emitted.</p>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Also <code>dependOn</code> must not be circular, the following example again would throw an error:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     a3<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
@@ -210,20 +210,20 @@ files are emitted.</p>
 <p>Below is a list of entry configurations and their real-world use cases:</p>
 <h3><span id="separate-app-and-vendor-entries"></span>Separate App and Vendor Entries<a href="#separate-app-and-vendor-entries" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     main<span class="token operator">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
     vendor<span class="token operator">:</span> <span class="token string">&quot;./src/vendor.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.prod.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token string">&quot;[name].[contenthash].bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.dev.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -233,7 +233,7 @@ files are emitted.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>In webpack version &lt; 4 it was common to add vendors as a separate entry point to compile it as a separate file (in combination with the <code>CommonsChunkPlugin</code>). <br/><br/> This is discouraged in webpack 4. Instead, the <a href="/configuration/optimization/#optimizationsplitchunks"><code>optimization.splitChunks</code></a> option takes care of separating vendors and app modules and creating a separate file. <strong>Do not</strong> create an entry for vendors or other stuff that is not the starting point of execution.</p></aside>
 <h3><span id="multi-page-application"></span>Multi-Page Application<a href="#multi-page-application" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     pageOne<span class="token operator">:</span> <span class="token string">&quot;./src/pageOne/index.js&quot;</span><span class="token punctuation">,</span>
     pageTwo<span class="token operator">:</span> <span class="token string">&quot;./src/pageTwo/index.js&quot;</span><span class="token punctuation">,</span>
@@ -249,7 +249,7 @@ files are emitted.</p>
 <h2><span id="usage"></span>Usage<a href="#usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The minimum requirement for the <code>output</code> property in your webpack configuration is to set its value to an object and provide an <a href="/configuration/output/#outputfilename"><code>output.filename</code></a> to use for the output file(s):</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     filename<span class="token operator">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -257,7 +257,7 @@ files are emitted.</p>
 <p>This configuration would output a single <code>bundle.js</code> file into the <code>dist</code> directory.</p>
 <h2><span id="multiple-entry-points"></span>Multiple Entry Points<a href="#multiple-entry-points" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>If your configuration creates more than a single &quot;chunk&quot; (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use <a href="/configuration/output/#outputfilename">substitutions</a> to ensure that each file has a unique name.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -274,7 +274,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="advanced"></span>Advanced<a href="#advanced" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Here&#x27;s a more complicated example of using a CDN and hashes for assets:</p>
 <p><strong>config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
     path<span class="token operator">:</span> <span class="token string">&quot;/home/proj/cdn/assets/[fullhash]&quot;</span><span class="token punctuation">,</span>
@@ -282,7 +282,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In cases where the eventual <code>publicPath</code> of output files isn&#x27;t known at compile time, it can be left blank and set dynamically at runtime via the <code>__webpack_public_path__</code> variable in the entry point file:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath<span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath<span class="token punctuation">;</span>
 
 <span class="token comment">// rest of your application entry</span></code></pre></div>
 <h1><span id="loaders"></span>Loaders<a href="#loaders" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
@@ -290,10 +290,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Loaders are transformations that are applied to the source code of a module. They allow you to pre-process files as you <code>import</code> or “load” them. Thus, loaders are kind of like “tasks” in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or load inline images as data URLs. Loaders even allow you to do things like <code>import</code> CSS files directly from your JavaScript modules!</p>
 <h2><span id="example"></span>Example<a href="#example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev css-loader ts-loader</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev css-loader ts-loader</code></pre></div>
 <p>And then instruct webpack to use the <a href="/loaders/css-loader"><code>css-loader</code></a> for every <code>.css</code> file and the <a href="https://github.com/TypeStrong/ts-loader"><code>ts-loader</code></a> for all <code>.ts</code> files:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span> test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -312,7 +312,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><a href="/configuration/module/#modulerules"><code>module.rules</code></a> allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.</p>
 <p>Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See <a href="/concepts/loaders/#loader-features">&quot;Loader Features&quot;</a> for more information about loaders order.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -333,20 +333,20 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="inline"></span>Inline<a href="#inline" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>It&#x27;s possible to specify loaders in an <code>import</code> statement, or any <a href="/api/module-methods">equivalent &quot;importing&quot; method</a>. Separate loaders from the resource with <code>!</code>. Each part is resolved relative to the current directory.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>It&#x27;s possible to override any loaders, preLoaders and postLoaders from the <a href="/configuration">configuration</a> by prefixing the inline <code>import</code> statement:</p>
 <ul>
 <li>
 <p>Prefixing with <code>!</code> will disable all configured normal loaders</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;!style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;!style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 <li>
 <p>Prefixing with <code>!!</code> will disable all configured loaders (preLoaders, loaders, postLoaders)</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;!!style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;!!style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 <li>
 <p>Prefixing with <code>-!</code> will disable all configured preLoaders and loaders but not postLoaders</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;-!style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;-!style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 </ul>
 <p>Options can be passed with a query parameter, e.g. <code>?key=value&amp;foo=bar</code>, or a JSON object, e.g. <code>?{&quot;key&quot;:&quot;value&quot;,&quot;foo&quot;:&quot;bar&quot;}</code>.</p>
@@ -373,7 +373,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 <h2><span id="anatomy"></span>Anatomy<a href="#anatomy" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>A webpack <strong>plugin</strong> is a JavaScript object that has an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply"><code>apply</code></a> method. This <code>apply</code> method is called by the webpack compiler, giving access to the <strong>entire</strong> compilation lifecycle.</p>
 <p><strong>ConsoleLogOnBuildWebpackPlugin.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> pluginName <span class="token operator">=</span> <span class="token string">&quot;ConsoleLogOnBuildWebpackPlugin&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> pluginName <span class="token operator">=</span> <span class="token string">&quot;ConsoleLogOnBuildWebpackPlugin&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">class</span> <span class="token class-name">ConsoleLogOnBuildWebpackPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -390,7 +390,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Depending on how you are using webpack, there are multiple ways to use plugins.</p>
 <h3><span id="configuration"></span>Configuration<a href="#configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> HtmlWebpackPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;html-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// to access built-in plugins</span>
 
@@ -417,7 +417,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="node-api"></span>Node API<a href="#node-api" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>When using the Node API, you can also pass plugins via the <code>plugins</code> property in the configuration.</p>
 <p><strong>some-node-script.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// to access webpack runtime</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// to access webpack runtime</span>
 <span class="token keyword">const</span> configuration <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./webpack.config.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> compiler <span class="token operator">=</span> <span class="token function">webpack</span><span class="token punctuation">(</span>configuration<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -450,7 +450,7 @@ compiler<span class="token punctuation">.</span><span class="token function">run
 <p>The examples below describe how webpack&#x27;s configuration can be both expressive and configurable because <em>it is code</em>:</p>
 <h2><span id="introductory-configuration"></span>Introductory Configuration<a href="#introductory-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   mode<span class="token operator">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
@@ -511,7 +511,7 @@ The webpack community has built <em>loaders</em> for a wide variety of popular l
 <!-- -->
 <p>A resolver is a library which helps in locating a module by its absolute path.
 A module can be required as a dependency from another module as:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> foo <span class="token keyword">from</span> <span class="token string">&quot;path/to/module&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> foo <span class="token keyword">from</span> <span class="token string">&quot;path/to/module&quot;</span><span class="token punctuation">;</span>
 
 <span class="token comment">// or</span>
 
@@ -523,16 +523,16 @@ webpack uses <a href="https://github.com/webpack/enhanced-resolve">enhanced-reso
 <p>Using <code>enhanced-resolve</code>, webpack can resolve three kinds of file paths:</p>
 <h3><span id="absolute-paths"></span>Absolute paths<a href="#absolute-paths" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <!-- -->
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&quot;/home/me/file&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&quot;/home/me/file&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token string">&quot;C:\\Users\\me\\file&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>Since we already have the absolute path to the file, no further resolution is required.</p>
 <h3><span id="relative-paths"></span>Relative paths<a href="#relative-paths" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&quot;../src/file1&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&quot;../src/file1&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">&quot;./file2&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>In this case, the directory of the source file where the <code>import</code> or <code>require</code> occurs is taken to be the context directory. The relative path specified in the <code>import/require</code> is joined to this context path to produce the absolute path to the module.</p>
 <h3><span id="module-paths"></span>Module paths<a href="#module-paths" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&quot;my-module&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&quot;my-module&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">&quot;my-module/lib/file&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>Modules are searched for inside all directories specified in <a href="/configuration/resolve/#resolvemodules"><code>resolve.modules</code></a>.
 You can replace the original module path by an alternate path by creating an alias for it using the <a href="/configuration/resolve/#resolvealias"><code>resolve.alias</code></a> configuration option.</p>
@@ -627,7 +627,7 @@ You can replace the original module path by an alternate path by creating an ali
 <code>init</code> is an <code>async</code> compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
 It can be leveraged to connect remote containers to a host container dynamically at runtime.</p>
 <p><strong>init.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment">// Initializes the shared scope. Fills it with known provided modules from this build and all remotes</span>
   <span class="token keyword">await</span> <span class="token function">__webpack_init_sharing__</span><span class="token punctuation">(</span><span class="token string">&quot;default&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">const</span> container <span class="token operator">=</span> globalThis<span class="token punctuation">.</span>someContainer<span class="token punctuation">;</span> <span class="token comment">// or get the container somewhere else</span>
@@ -640,7 +640,7 @@ It can be leveraged to connect remote containers to a host container dynamically
 <aside class="tip"><p class="tip__prefix">tip</p><p>Ensure you have loaded the container before attempting to dynamically connect a remote container.</p></aside>
 <p>Example:</p>
 <p><strong>init.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">loadComponent</span><span class="token punctuation">(</span><span class="token parameter">scope<span class="token punctuation">,</span> module</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">loadComponent</span><span class="token punctuation">(</span><span class="token parameter">scope<span class="token punctuation">,</span> module</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token comment">// Initializes the shared scope. Fills it with known provided modules from this build and all remotes</span>
     <span class="token keyword">await</span> <span class="token function">__webpack_init_sharing__</span><span class="token punctuation">(</span><span class="token string">&quot;default&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -657,7 +657,7 @@ It can be leveraged to connect remote containers to a host container dynamically
 <p><a href="https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes">See full implementation</a></p>
 <h2><span id="promise-based-dynamic-remotes"></span>Promise Based Dynamic Remotes<a href="#promise-based-dynamic-remotes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Generally, remotes are configured using URL&#x27;s like in this example:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       name<span class="token operator">:</span> <span class="token string">&quot;host&quot;</span><span class="token punctuation">,</span>
@@ -668,7 +668,7 @@ It can be leveraged to connect remote containers to a host container dynamically
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the <code>get/init</code> interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       name<span class="token operator">:</span> <span class="token string">&quot;host&quot;</span><span class="token punctuation">,</span>
@@ -714,7 +714,7 @@ It can be leveraged to connect remote containers to a host container dynamically
 <code>https://foo-app.com</code> is expected to be accessible via <code>https://my-host.com/app/foo-app</code> and <code>https://my-host.com/app/foo-app/*</code> requests are redirected to <code>https://foo-app.com/*</code> via a proxy.</p>
 <p>Example:</p>
 <p><strong>webpack.config.js (remote)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     remote<span class="token operator">:</span> <span class="token string">&quot;./public-path&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -727,11 +727,11 @@ It can be leveraged to connect remote containers to a host container dynamically
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>public-path.js (remote)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   __webpack_public_path__ <span class="token operator">=</span> value<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p><strong>src/index.js (host)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">const</span> publicPath <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;remote/public-path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">const</span> publicPath <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;remote/public-path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 publicPath<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">&quot;/your-public-path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">//bootstrap app  e.g. import(&#x27;./bootstrap.js&#x27;)</span></code></pre></div>
@@ -739,7 +739,7 @@ publicPath<span class="token punctuation">.</span><span class="token keyword">se
 <p>One could infer the publicPath from the script tag from <code>document.currentScript.src</code> and set it with the <a href="/api/module-variables/#__webpack_public_path__-webpack-specific"><code>__webpack_public_path__</code></a> module variable at runtime.</p>
 <p>Example:</p>
 <p><strong>webpack.config.js (remote)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     remote<span class="token operator">:</span> <span class="token string">&quot;./setup-public-path&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -751,7 +751,7 @@ publicPath<span class="token punctuation">.</span><span class="token keyword">se
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>setup-public-path.js (remote)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// derive the publicPath with your own logic and set it with the __webpack_public_path__ API</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// derive the publicPath with your own logic and set it with the __webpack_public_path__ API</span>
 __webpack_public_path__ <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>document<span class="token punctuation">.</span>currentScript<span class="token punctuation">.</span>src<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/../</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>There is also an <code>&#x27;auto&#x27;</code> value available to <a href="/configuration/output/#outputpublicpath"><code>output.publicPath</code></a> which automatically determines the publicPath for you.</p></aside>
 <h2><span id="troubleshooting"></span>Troubleshooting<a href="#troubleshooting" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -761,7 +761,7 @@ __webpack_public_path__ <span class="token operator">=</span> <span class="token
 <p>We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.</p>
 <p>For example, your entry looked like this:</p>
 <p><strong>index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-jsx">import React from &quot;react&quot;;
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-jsx">import React from &quot;react&quot;;
 import ReactDOM from &quot;react-dom&quot;;
 import App from &quot;./App&quot;;
 
@@ -769,20 +769,20 @@ ReactDOM.render(&lt;App /&gt;, document.getElementById(&quot;root&quot;));
 </code></pre></div>
 <p>Let&#x27;s create <code>bootstrap.js</code> file and move contents of the entry into it, and import that bootstrap into the entry:</p>
 <p><strong>index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import(&#x27;./bootstrap&#x27;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import(&#x27;./bootstrap&#x27;);
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import React from &#x27;react&#x27;;
 </span><span class="token prefix deleted">-</span><span class="token line"> import ReactDOM from &#x27;react-dom&#x27;;
 </span><span class="token prefix deleted">-</span><span class="token line"> import App from &#x27;./App&#x27;;
 </span><span class="token prefix deleted">-</span><span class="token line"> ReactDOM.render(&lt;App /&gt;, document.getElementById(&#x27;root&#x27;));</span></span></code></pre></div>
 <p><strong>bootstrap.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import React from &#x27;react&#x27;;
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import React from &#x27;react&#x27;;
 </span><span class="token prefix inserted">+</span><span class="token line"> import ReactDOM from &#x27;react-dom&#x27;;
 </span><span class="token prefix inserted">+</span><span class="token line"> import App from &#x27;./App&#x27;;
 </span><span class="token prefix inserted">+</span><span class="token line"> ReactDOM.render(&lt;App /&gt;, document.getElementById(&#x27;root&#x27;));</span></span></code></pre></div>
 <p>This method works but can have limitations or drawbacks.</p>
 <p>Setting <code>eager: true</code> for dependency via the <code>ModuleFederationPlugin</code></p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// ...</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// ...</span>
 <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
   shared<span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token operator">...</span>deps<span class="token punctuation">,</span>
@@ -794,7 +794,7 @@ ReactDOM.render(&lt;App /&gt;, document.getElementById(&quot;root&quot;));
 <h3><span id="uncaught-error-module-button-does-not-exist-in-container"></span><code>Uncaught Error: Module &quot;./Button&quot; does not exist in container.</code><a href="#uncaught-error-module-button-does-not-exist-in-container" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>It likely does not say <code>&quot;./Button&quot;</code>, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.</p>
 <p>Within ModuleFederationPlugin. Change the exposes from:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">new ModuleFederationPlugin({
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">new ModuleFederationPlugin({
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> exposes: {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   &#x27;Button&#x27;: &#x27;./src/Button&#x27;
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   &#x27;./Button&#x27;:&#x27;./src/Button&#x27;
@@ -818,7 +818,7 @@ Starting from these <a href="/concepts/entry-points/"><em>entry points</em></a>,
 <h2><span id="usage"></span>Usage<a href="#usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>To set the <code>target</code> property, you set the target value in your webpack config:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   target<span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In the example above, using <code>node</code> webpack will compile for usage in a Node.js-like environment (uses Node.js <code>require</code> to load chunks and not touch any built in modules like <code>fs</code> or <code>path</code>).</p>
@@ -827,7 +827,7 @@ Starting from these <a href="/concepts/entry-points/"><em>entry points</em></a>,
 <h2><span id="multiple-targets"></span>Multiple Targets<a href="#multiple-targets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Although webpack does <strong>not</strong> support multiple strings being passed into the <code>target</code> property, you can create an isomorphic library by bundling two separate configurations:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> serverConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
   target<span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
@@ -948,22 +948,22 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="the-main-parts"></span>The main parts<a href="#the-main-parts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Every file used in your project is a <a href="/concepts/modules/">Module</a></p>
 <p><strong>./index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> app <span class="token keyword">from</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> app <span class="token keyword">from</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>./app.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token string">&quot;the app&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token string">&quot;the app&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>By using each other, the modules form a graph (<code>ModuleGraph</code>).</p>
 <p>During the bundling process, modules are combined into chunks.
 Chunks combine into chunk groups and form a graph (<code>ChunkGraph</code>) interconnected through modules.
 When you describe an entry point - under the hood, you create a chunk group with one chunk.</p>
 <p><strong>./webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./index.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>One chunk group with the <code>main</code> name created (<code>main</code> is the default name for an entry point).
 This chunk group contains <code>./index.js</code> module. As the parser handles imports inside <code>./index.js</code> new modules are added into this chunk.</p>
 <p>Another example:</p>
 <p><strong>./webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     home<span class="token operator">:</span> <span class="token string">&quot;./home.js&quot;</span><span class="token punctuation">,</span>
     about<span class="token operator">:</span> <span class="token string">&quot;./about.js&quot;</span><span class="token punctuation">,</span>
@@ -982,11 +982,11 @@ Each of them has a chunk with a module - <code>./home.js</code> for <code>home</
 </ul>
 <p>Each chunk has a corresponding <strong>asset</strong>. The assets are the output files - the result of bundling.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./src/index.jsx&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>./src/index.jsx</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-jsx">import React from &quot;react&quot;;
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-jsx">import React from &quot;react&quot;;
 import ReactDOM from &quot;react-dom&quot;;
 
 import(&quot;./app.jsx&quot;).then((App) =&gt; {
@@ -1008,7 +1008,7 @@ import(&quot;./app.jsx&quot;).then((App) =&gt; {
 </ul>
 <p>By default, there is no name for <code>non-initial</code> chunks so that a unique ID is used instead of a name.
 When using dynamic import we may specify a chunk name explicitly by using a <a href="/api/module-methods/#magic-comments">&quot;magic&quot; comment</a>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-jsx">import(
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-jsx">import(
   /* webpackChunkName: &quot;app&quot; */
   &quot;./app.jsx&quot;
 ).then((App) =&gt; {

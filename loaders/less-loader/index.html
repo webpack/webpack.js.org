@@ -8,17 +8,17 @@
 <p>A Less loader for webpack that compiles Less files into CSS.</p>
 <h2><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>To begin, you&#x27;ll need to install <code>less</code> and <code>less-loader</code>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">npm install less less-loader --save-dev
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">npm install less less-loader --save-dev
 </code></pre></div>
 <p>or</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">yarn add -D less less-loader
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">yarn add -D less less-loader
 </code></pre></div>
 <p>or</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">pnpm add -D less less-loader
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">pnpm add -D less less-loader
 </code></pre></div>
 <p>Then add the loader to your <code>webpack</code> configuration. For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -45,14 +45,14 @@
 </ul>
 <h3><span id="lessoptions"></span><code>lessOptions</code><a href="#lessoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">lessOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;less&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>options <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;less&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>options<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">lessOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;less&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>options <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&#x27;less&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>options<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre></div>
 <p>Default: <code>{ relativeUrls: true }</code></p>
 <p>You can pass any Less specific options to the <code>less-loader</code> through the <code>lessOptions</code> property in the <a href="/configuration/module/#ruleoptions--rulequery">loader options</a>. See the <a href="http://lesscss.org/usage/#command-line-usage-options">Less documentation</a> for all available options in dash-case.</p>
 <p>Since we&#x27;re passing these options to Less programmatically, you need to pass them in camelCase here:</p>
 <h4><span id="object"></span><code>object</code><a href="#object" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Use an object to pass options directly to Less.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -79,7 +79,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="function"></span><code>function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Allows setting the Less options dynamically based on the loader context.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -114,7 +114,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="additionaldata"></span><code>additionalData</code><a href="#additionaldata" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">additionalData</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">additionalData</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>content<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> loaderContext<span class="token operator">:</span> LoaderContext<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
@@ -125,7 +125,7 @@ In this case, the <code>less-loader</code> will not override the source but just
 <p>Since you&#x27;re injecting code, this will break the source mappings in your entry file. Often there&#x27;s a simpler solution than this, like multiple Less entry files.</p>
 </blockquote>
 <h4><span id="string"></span><code>string</code><a href="#string" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -146,7 +146,7 @@ In this case, the <code>less-loader</code> will not override the source but just
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="function-1"></span><code>function</code><a href="#function-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <h5><span id="sync"></span><code>Sync</code><a href="#sync" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -176,7 +176,7 @@ In this case, the <code>less-loader</code> will not override the source but just
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h5><span id="async"></span><code>Async</code><a href="#async" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -207,12 +207,12 @@ In this case, the <code>less-loader</code> will not override the source but just
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="sourcemap"></span><code>sourceMap</code><a href="#sourcemap" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">sourceMap</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">sourceMap</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: depends on the <code>compiler.devtool</code> value</p>
 <p>By default generation of source maps depends on the <a href="/configuration/devtool/"><code>devtool</code></a> option.
 All values enable source map generation except <code>eval</code> and <code>false</code> value.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -238,12 +238,12 @@ All values enable source map generation except <code>eval</code> and <code>false
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="webpackimporter"></span><code>webpackImporter</code><a href="#webpackimporter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">webpackImporter</span> <span class="token operator">=</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token string">&quot;only&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">webpackImporter</span> <span class="token operator">=</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token string">&quot;only&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>true</code></p>
 <p>Enables or disables the default <code>webpack</code> importer.</p>
 <p>This can improve performance in some cases. Use it with caution because aliases and <code>@import</code> from <a href="/configuration/resolve/#resolvemodules"><code>node_modules</code></a> will not work.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -264,7 +264,7 @@ All values enable source map generation except <code>eval</code> and <code>false
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="implementation"></span><code>implementation</code><a href="#implementation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">implementation</span> <span class="token operator">=</span> object <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">implementation</span> <span class="token operator">=</span> object <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <blockquote>
 <p>less-loader compatible with both Less 3 and 4 versions</p>
 </blockquote>
@@ -273,7 +273,7 @@ All values enable source map generation except <code>eval</code> and <code>false
 <h4><span id="object-1"></span><code>object</code><a href="#object-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Example using a Less instance:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -295,7 +295,7 @@ All values enable source map generation except <code>eval</code> and <code>false
 <h4><span id="string-1"></span><code>string</code><a href="#string-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Example using a resolved Less module path:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -316,17 +316,17 @@ All values enable source map generation except <code>eval</code> and <code>false
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="lesslogaswarnorerr"></span><code>lessLogAsWarnOrErr</code><a href="#lesslogaswarnorerr" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">lessLogAsWarnOrErr</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">lessLogAsWarnOrErr</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>false</code></p>
 <p><code>Less</code> warnings and errors will be treated as webpack warnings and errors, instead of being logged silently.</p>
 <p><strong>warning.less</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-less">div {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-less">div {
   &amp;:extend(.body1);
 }
 </code></pre></div>
 <p>If <code>lessLogAsWarnOrErr</code> is set to <code>false</code> it will be just a log and webpack will compile successfully, but if you set this option to <code>true</code> webpack will compile fail with a warning(or error), and can break the build if configured accordingly.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -349,7 +349,7 @@ All values enable source map generation except <code>eval</code> and <code>false
 <h3><span id="normal-usage"></span>Normal usage<a href="#normal-usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Chain the <code>less-loader</code> with <a href="/loaders/css-loader/"><code>css-loader</code></a> and <a href="/loaders/style-loader/"><code>style-loader</code></a> to immediately apply all styles to the DOM.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -373,7 +373,7 @@ All values enable source map generation except <code>eval</code> and <code>false
 <h3><span id="source-maps"></span>Source maps<a href="#source-maps" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>To enable sourcemaps for CSS, you&#x27;ll need to pass the <code>sourceMap</code> property in the loader&#x27;s options. If this is not passed, the loader will respect the setting for webpack source maps, set in <code>devtool</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   devtool<span class="token operator">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span> <span class="token comment">// any &quot;source-map&quot;-like devtool is possible</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -407,12 +407,12 @@ All values enable source map generation except <code>eval</code> and <code>false
 <p><code>webpack</code> provides an <a href="/configuration/resolve/">advanced mechanism to resolve files</a>.
 <code>less-loader</code> applies a Less plugin that passes all queries to the webpack resolver if <code>less</code> could not resolve <code>@import</code>.
 Thus you can import your Less modules from <code>node_modules</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-css"><span class="token atrule"><span class="token rule">@import</span> <span class="token string">&quot;bootstrap/less/bootstrap&quot;</span><span class="token punctuation">;</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-css"><span class="token atrule"><span class="token rule">@import</span> <span class="token string">&quot;bootstrap/less/bootstrap&quot;</span><span class="token punctuation">;</span></span></code></pre></div>
 <p>Using <code>~</code> prefix (e.g., @import &quot;~bootstrap/less/bootstrap&quot;;) is deprecated and can be removed from your code (<strong>we recommend it</strong>), but we still support it for historical reasons.
 Why you can removed it? The loader will first try to resolve <code>@import</code> as relative, if it cannot be resolved, the loader will try to resolve <code>@import</code> inside <a href="/configuration/resolve/#resolvemodules"><code>node_modules</code></a>.</p>
 <p>Default resolver options can be modified by <a href="/configuration/resolve/#resolvebydependency"><code>resolve.byDependency</code></a>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   devtool<span class="token operator">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span> <span class="token comment">// any &quot;source-map&quot;-like devtool is possible</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -434,7 +434,7 @@ Why you can removed it? The loader will first try to resolve <code>@import</code
 <h4><span id="less-resolver"></span>Less Resolver<a href="#less-resolver" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>If you specify the <code>paths</code> option, modules will be searched in the given <code>paths</code>. This is <code>less</code> default behavior. <code>paths</code> should be an array with absolute paths:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -462,7 +462,7 @@ Why you can removed it? The loader will first try to resolve <code>@import</code
 <h3><span id="plugins"></span>Plugins<a href="#plugins" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>In order to use <a href="http://lesscss.org/usage/#plugins">Less plugins</a>, simply set the <code>plugins</code> option like this:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> CleanCSSPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;less-plugin-clean-css&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> CleanCSSPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;less-plugin-clean-css&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token operator">...</span>
@@ -482,7 +482,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>[!NOTE]</p>
 <p>Access to the <a href="/api/loaders/#the-loader-context">loader context</a> inside a custom plugin can be done using the <code>pluginManager.webpackLoaderContext</code> property.</p>
 </blockquote>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token function">install</span><span class="token punctuation">(</span><span class="token parameter">less<span class="token punctuation">,</span> pluginManager<span class="token punctuation">,</span> functions</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     functions<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>
       <span class="token string">&quot;pi&quot;</span><span class="token punctuation">,</span>
@@ -509,4 +509,4 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 If you&#x27;re new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.</p>
 <p><a href="https://github.com/webpack/less-loader?tab=contributing-ov-file#contributing">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack/less-loader/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/less-loader/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/less-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/css-loader/">css-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/postcss-loader/">postcss-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.4d2e1dd51f0fb269.js"></script></body>
+<p><a href="https://github.com/webpack/less-loader/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/less-loader/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/less-loader">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/loaders/css-loader/">css-loader</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/loaders/postcss-loader/">postcss-loader</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.0bc9448bd6aeb6c5.js"></script></body>

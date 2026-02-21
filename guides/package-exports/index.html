@@ -12,7 +12,7 @@ For the examples above the following properties could be used:
 Properties ending with a <code>/</code> will forward a request with this prefix to the old file system lookup algorithm.
 For properties ending with <code>*</code>, <code>*</code> may take any value and any <code>*</code> in the property value is replaced with the taken value.</p>
 <p>An example:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;.&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./main.js&quot;</span><span class="token punctuation">,</span>
     <span class="token property">&quot;./sub/path&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./secondary.js&quot;</span><span class="token punctuation">,</span>
@@ -27,7 +27,7 @@ For properties ending with <code>*</code>, <code>*</code> may take any value and
 In such a scenario this list is tried in order and the first valid result will be used.</p>
 <p>Note: Only the first valid result will be used, not all valid results.</p>
 <p>Example:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;./things/&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./good-things/&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./bad-things/&quot;</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
@@ -35,7 +35,7 @@ In such a scenario this list is tried in order and the first valid result will b
 <p>Here <code>package/things/apple</code> might be found in <code>.../package/good-things/apple</code> or in <code>.../package/bad-things/apple</code>.</p>
 <aside class="warning"><p class="warning__prefix">warning</p><p>As of version 5.94.0, webpack&#x27;s behavior has been updated to align with Node&#x27;s behavior. It now selects the first valid path without attempting further resolutions and throws an error if the path cannot be resolved.</p></aside>
 <p>For example, given the following configuration:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;.&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;-bad-specifier-&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./non-existent.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./existent.js&quot;</span><span class="token punctuation">]</span>
   <span class="token punctuation">}</span>
@@ -51,7 +51,7 @@ Conditions might be nested to create a logical AND.
 The last condition in the object might be the special <code>&quot;default&quot;</code> condition,
 which is always matched.</p>
 <p>Example:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;.&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token property">&quot;red&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">,</span>
@@ -65,7 +65,7 @@ which is always matched.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>This translates to something like:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">if</span> <span class="token punctuation">(</span>red <span class="token operator">&amp;&amp;</span> <span class="token function">valid</span><span class="token punctuation">(</span><span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">if</span> <span class="token punctuation">(</span>red <span class="token operator">&amp;&amp;</span> <span class="token function">valid</span><span class="token punctuation">(</span><span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span>yellow <span class="token operator">&amp;&amp;</span> <span class="token function">valid</span><span class="token punctuation">(</span><span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span> <span class="token punctuation">(</span>green<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span>free <span class="token operator">&amp;&amp;</span> <span class="token function">valid</span><span class="token punctuation">(</span><span class="token string">&quot;./drive.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token string">&quot;./drive.js&quot;</span><span class="token punctuation">;</span>
@@ -76,10 +76,10 @@ which is always matched.</p>
 <p>The available conditions vary depending on the module system and tool used.</p>
 <h2><span id="abbreviation"></span>Abbreviation<a href="#abbreviation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When only a single entry (<code>&quot;.&quot;</code>) into the package should be supported the <code>{ &quot;.&quot;: ... }</code> object nesting can be omitted:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./index.mjs&quot;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;red&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./stop.js&quot;</span><span class="token punctuation">,</span>
     <span class="token property">&quot;green&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./drive.js&quot;</span>
@@ -217,7 +217,7 @@ They can be adapted to the individual packages.</p>
 <h3><span id="target-environment-independent-packages"></span>Target environment independent packages<a href="#target-environment-independent-packages" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>These patterns make sense for packages that do not use environment specific APIs.</p>
 <h4><span id="providing-only-an-esm-version"></span>Providing only an ESM version<a href="#providing-only-an-esm-version" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./index.js&quot;</span>
 <span class="token punctuation">}</span></code></pre></div>
@@ -225,7 +225,7 @@ They can be adapted to the individual packages.</p>
 Such a package would only work in Node.js &gt;= 14 and only when using <code>import</code>.
 It won&#x27;t work with <code>require()</code>.</p>
 <h4><span id="providing-commonjs-and-esm-version-stateless"></span>Providing CommonJs and ESM version (stateless)<a href="#providing-commonjs-and-esm-version-stateless" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;node&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -246,7 +246,7 @@ This is technically optional, but bundlers would include the package source code
 JSON is consumable from CommonJs and ESM without polluting the graph with the other module system.</p>
 <p>Note that here stateless also means class instances are not tested with <code>instanceof</code> as there can be two different classes because of the double module instantiation.</p>
 <h4><span id="providing-commonjs-and-esm-version-stateful"></span>Providing CommonJs and ESM version (stateful)<a href="#providing-commonjs-and-esm-version-stateful" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;node&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -258,7 +258,7 @@ JSON is consumable from CommonJs and ESM without polluting the graph with the ot
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <!-- -->
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// wrapper.js</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// wrapper.js</span>
 <span class="token keyword">import</span> cjs <span class="token keyword">from</span> <span class="token string">&quot;./index.cjs&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">A</span> <span class="token operator">=</span> cjs<span class="token punctuation">.</span><span class="token constant">A</span><span class="token punctuation">;</span>
@@ -268,13 +268,13 @@ JSON is consumable from CommonJs and ESM without polluting the graph with the ot
 For Node.js we always use the CommonJs version and expose named exports in the ESM with a ESM wrapper.</p>
 <p>We use the <code>module</code> condition as optimization again.</p>
 <h4><span id="providing-only-a-commonjs-version"></span>Providing only a CommonJs version<a href="#providing-only-a-commonjs-version" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./index.js&quot;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>Providing <code>&quot;type&quot;: &quot;commonjs&quot;</code> helps to statically detect CommonJs files.</p>
 <h4><span id="providing-a-bundled-script-version-for-direct-browser-consumption"></span>Providing a bundled script version for direct browser consumption<a href="#providing-a-bundled-script-version-for-direct-browser-consumption" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;script&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./dist-bundle.js&quot;</span><span class="token punctuation">,</span>
@@ -287,7 +287,7 @@ It should use globals to allow direct consumption as script tag.</p>
 <p>These patterns make sense when a package contains two versions, one for development and one for production.
 E. g. the development version could include additional code for better error message or additional warnings.</p>
 <h4><span id="without-nodejs-runtime-detection"></span>Without Node.js runtime detection<a href="#without-nodejs-runtime-detection" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;development&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./index-with-devtools.js&quot;</span><span class="token punctuation">,</span>
@@ -297,7 +297,7 @@ E. g. the development version could include additional code for better error mes
 <p>When the <code>development</code> condition is supported we use the version enhanced for development.
 Otherwise, in production or when mode is unknown, we use the optimized version.</p>
 <h4><span id="with-nodejs-runtime-detection"></span>With Node.js runtime detection<a href="#with-nodejs-runtime-detection" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;development&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./index-with-devtools.js&quot;</span><span class="token punctuation">,</span>
@@ -306,7 +306,7 @@ Otherwise, in production or when mode is unknown, we use the optimized version.<
     <span class="token property">&quot;default&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./index-optimized.js&quot;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// wrapper-process-env.cjs</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// wrapper-process-env.cjs</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span>
   process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">&quot;development&quot;</span>
     <span class="token operator">?</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./index-optimized.cjs&quot;</span><span class="token punctuation">)</span>
@@ -318,7 +318,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>A fallback environment should be chosen that makes sense for the package to support future environments.
 In general a browser-like environment should be assumed.</p>
 <h4><span id="providing-nodejs-webworker-and-browser-versions"></span>Providing Node.js, WebWorker and browser versions<a href="#providing-nodejs-webworker-and-browser-versions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;node&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./index-node.js&quot;</span><span class="token punctuation">,</span>
@@ -327,7 +327,7 @@ In general a browser-like environment should be assumed.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h4><span id="providing-nodejs-browser-and-electron-versions"></span>Providing Node.js, browser and electron versions<a href="#providing-nodejs-browser-and-electron-versions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;electron&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -341,7 +341,7 @@ In general a browser-like environment should be assumed.</p>
 <h3><span id="combining-patterns"></span>Combining patterns<a href="#combining-patterns" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <h4><span id="example-1"></span>Example 1<a href="#example-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>This is an example for a package that has optimizations for production and development usage with runtime detection for <code>process.env</code> and also ships a CommonJs and ESM version</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;node&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -364,7 +364,7 @@ In general a browser-like environment should be assumed.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <h4><span id="example-2"></span>Example 2<a href="#example-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>This is an example for a package that supports Node.js, browser and electron, has optimizations for production and development usage with runtime detection for <code>process.env</code> and also ships a CommonJs and ESM version.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;exports&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token property">&quot;electron&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -422,4 +422,4 @@ In general a browser-like environment should be assumed.</p>
 <li>other absolute or server-relative requests are not supported by default, but they might be supported by some tools or environments.</li>
 </ul>
 </li>
-</ul></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://nodejs.org/api/packages.html#packages_package_entry_points" target="_blank" rel="noopener noreferrer">Package entry points in Node.js</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/package-exports.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/entry-advanced/">Advanced entry</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">1<!-- --> <!-- -->Contributor</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.4d2e1dd51f0fb269.js"></script></body>
+</ul></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://nodejs.org/api/packages.html#packages_package_entry_points" target="_blank" rel="noopener noreferrer">Package entry points in Node.js</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/package-exports.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/entry-advanced/">Advanced entry</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">1<!-- --> <!-- -->Contributor</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.0bc9448bd6aeb6c5.js"></script></body>

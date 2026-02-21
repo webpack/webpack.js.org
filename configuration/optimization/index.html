@@ -3,7 +3,7 @@
 <p><code>boolean</code></p>
 <p>Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported. By default <code>optimization.checkWasmTypes</code> is enabled in <code>production</code> <a href="/configuration/mode/">mode</a> and disabled elsewise.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     checkWasmTypes<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -19,7 +19,7 @@
 <p>The following string values are supported:</p>
 <table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td data-th="Option"><span><code>&#x27;natural&#x27;</code></span></td><td data-th="Description"><span>Numeric ids in order of usage.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;named&#x27;</code></span></td><td data-th="Description"><span>Readable ids for better debugging.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;deterministic&#x27;</code></span></td><td data-th="Description"><span>Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;size&#x27;</code></span></td><td data-th="Description"><span>Numeric ids focused on minimal initial download size.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;total-size&#x27;</code></span></td><td data-th="Description"><span>numeric ids focused on minimal total download size.</span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     chunkIds<span class="token operator">:</span> <span class="token string">&quot;named&quot;</span><span class="token punctuation">,</span>
@@ -27,7 +27,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>By default, a minimum length of 3 digits is used when <code>optimization.chunkIds</code> is set to <code>&#x27;deterministic&#x27;</code>. To override the default behaviour, set <code>optimization.chunkIds</code> to <code>false</code> and use the <code>webpack.ids.DeterministicChunkIdsPlugin</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     chunkIds<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -43,7 +43,7 @@
 <p>Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on <a href="#optimizationprovidedexports"><code>optimization.providedExports</code></a> and <a href="#optimizationusedexports"><code>optimization.usedExports</code></a>.
 By default <code>optimization.concatenateModules</code> is enabled in <code>production</code> <a href="/configuration/mode/">mode</a> and disabled elsewise.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     concatenateModules<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -53,7 +53,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>boolean = false</code></p>
 <p>Use the <code>optimization.emitOnErrors</code> to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     emitOnErrors<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -67,7 +67,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p>Currently, <code>optimization.avoidEntryIife</code> can only optimize a single entry module along with other modules.</p>
 <p>By default, <code>optimization.avoidEntryIife</code> is enabled in <code>production</code> <a href="/configuration/mode/">mode</a> and disabled otherwise.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     avoidEntryIife<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -78,7 +78,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>boolean</code></p>
 <p>Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default <code>optimization.flagIncludedChunks</code> is enabled in <code>production</code> <a href="/configuration/mode/">mode</a> and disabled elsewise.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     flagIncludedChunks<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -88,7 +88,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>boolean = true</code></p>
 <p><code>optimization.innerGraph</code> tells webpack whether to conduct inner graph analysis for unused exports.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     innerGraph<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -101,7 +101,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p>The following values are supported:</p>
 <table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td data-th="Option"><span><code>&#x27;size&#x27;</code></span></td><td data-th="Description"><span>Short names - usually a single char - focused on minimal download size.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;deterministic&#x27;</code></span></td><td data-th="Description"><span>Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching.</span></td></tr><tr><td data-th="Option"><span><code>true</code></span></td><td data-th="Description"><span>Same as <code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Option"><span><code>false</code></span></td><td data-th="Description"><span>Keep original name. Good for readability and debugging.</span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     mangleExports<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -111,7 +111,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>boolean = false</code></p>
 <p>When set to <code>true</code> tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     mangleWasmImports<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -121,7 +121,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>boolean = true</code></p>
 <p>Tells webpack to merge chunks which contain the same modules. Setting <code>optimization.mergeDuplicateChunks</code> to <code>false</code> will disable this optimization.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     mergeDuplicateChunks<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -131,7 +131,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>boolean = true</code></p>
 <p>Tell webpack to minimize the bundle using the <a href="/plugins/terser-webpack-plugin/">TerserPlugin</a> or the plugin(s) specified in <a href="#optimizationminimizer"><code>optimization.minimizer</code></a>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -142,7 +142,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>[TerserPlugin]</code> and or <code>[function (compiler)]</code> or <code>undefined | null | 0 | false | &quot;&quot;</code></p>
 <p>Allows you to override the default minimizer by providing a different one or more customized <a href="/plugins/terser-webpack-plugin/">TerserPlugin</a> instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> TerserPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;terser-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> TerserPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;terser-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -157,7 +157,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Or, as function:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
@@ -171,7 +171,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>By default, webpack would set <code>optimization.minimizer</code> to <a href="https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L1160-L1174">the following value</a>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token punctuation">[</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token punctuation">[</span>
   <span class="token punctuation">{</span>
     <span class="token function-variable function">apply</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token comment">// Lazy load the Terser plugin</span>
@@ -188,7 +188,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>Which can be accessed with <code>&#x27;...&#x27;</code> in case you want to keep it when customizing <code>optimization.minimizer</code>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">CssMinimizer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;...&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -200,7 +200,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>The following string values are supported:</p>
 <table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td data-th="Option"><span><code>natural</code></span></td><td data-th="Description"><span>Numeric ids in order of usage.</span></td></tr><tr><td data-th="Option"><span><code>named</code></span></td><td data-th="Description"><span>Readable ids for better debugging.</span></td></tr><tr><td data-th="Option"><span><code>deterministic</code></span></td><td data-th="Description"><span>Module names are hashed into small numeric values.</span></td></tr><tr><td data-th="Option"><span><code>size</code></span></td><td data-th="Description"><span>Numeric ids focused on minimal initial download size.</span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     moduleIds<span class="token operator">:</span> <span class="token string">&quot;deterministic&quot;</span><span class="token punctuation">,</span>
@@ -208,7 +208,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><code>deterministic</code> option is useful for long term caching, but still results in smaller bundles compared to <code>hashed</code>. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when <code>optimization.moduleIds</code> is set to <code>deterministic</code>. To override the default behaviour set <code>optimization.moduleIds</code> to <code>false</code> and use the <code>webpack.ids.DeterministicModuleIdsPlugin</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     moduleIds<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -230,7 +230,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>false: do not modify/set the value of <code>process.env.NODE_ENV</code>.</li>
 </ul>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     nodeEnv<span class="token operator">:</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">,</span>
@@ -242,7 +242,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>optimization.portableRecords</code> tells webpack to generate records with relative paths to be able to move the context folder.</p>
 <p>By default <code>optimization.portableRecords</code> is disabled. Automatically enabled if at least one of the records options provided to webpack config: <a href="/configuration/other-options/#recordspath"><code>recordsPath</code></a>, <a href="/configuration/other-options/#recordsinputpath"><code>recordsInputPath</code></a>, <a href="/configuration/other-options/#recordsoutputpath"><code>recordsOutputPath</code></a>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     portableRecords<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -252,7 +252,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>boolean</code></p>
 <p>Tells webpack to figure out which exports are provided by modules to generate more efficient code for <code>export * from ...</code>. By default <code>optimization.providedExports</code> is enabled.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     providedExports<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -262,7 +262,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>boolean</code></p>
 <p>Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If <code>realContentHash</code> is set to <code>false</code>, internal data is used to calculate the hash and it can change when assets are identical. By default <code>optimization.realContentHash</code> is enabled in production <a href="/configuration/mode/">mode</a> and disabled otherwise.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     realContentHash<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -272,7 +272,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>boolean = false</code></p>
 <p>Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting <code>optimization.removeAvailableModules</code> to <code>true</code> will enable this optimization.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     removeAvailableModules<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -283,7 +283,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>boolean = true</code></p>
 <p>Tells webpack to detect and remove chunks which are empty. Setting <code>optimization.removeEmptyChunks</code> to <code>false</code> will disable this optimization.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     removeEmptyChunks<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -293,7 +293,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>object</code> <code>string</code> <code>boolean</code></p>
 <p>Setting <code>optimization.runtimeChunk</code> to <code>true</code> or <code>&#x27;multiple&#x27;</code> adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     runtimeChunk<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -303,7 +303,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The value <code>&#x27;single&#x27;</code> instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     runtimeChunk<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -315,7 +315,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Default is <code>false</code>: each entry chunk embeds runtime.</p>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Imported modules are initialized for each runtime chunk separately, so if you include multiple entry points on a page, beware of this behavior. You will probably want to set it to <code>single</code> or use another configuration that allows you to only have one runtime instance.</p></aside>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     runtimeChunk<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -327,7 +327,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><code>boolean = true</code> <code>string: &#x27;flag&#x27;</code></p>
 <p>Tells webpack to recognise the <a href="https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md"><code>sideEffects</code></a> flag in <code>package.json</code> or rules to skip over modules which are flagged to contain no side effects when exports are not used.</p>
 <p><strong>package.json</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;awesome npm module&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.0.0&quot;</span><span class="token punctuation">,</span>
   <span class="token property">&quot;sideEffects&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
@@ -335,14 +335,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <aside class="tip"><p class="tip__prefix">tip</p><p>Please note that <code>sideEffects</code> should be in the npm module&#x27;s <code>package.json</code> file and doesn&#x27;t mean that you need to set <code>sideEffects</code> to <code>false</code> in your own project&#x27;s <code>package.json</code> which requires that big module.</p></aside>
 <p><code>optimization.sideEffects</code> depends on <a href="#optimizationprovidedexports"><code>optimization.providedExports</code></a> to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     sideEffects<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>To only use the manual flag and do not analyse source code:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     sideEffects<span class="token operator">:</span> <span class="token string">&quot;flag&quot;</span><span class="token punctuation">,</span>
@@ -358,16 +358,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Tells webpack to determine used exports for each module. This depends on <a href="#optimizationprovidedexports"><code>optimization.providedExports</code></a>. Information collected by <code>optimization.usedExports</code> is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     usedExports<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>To opt-out from used exports analysis per runtime:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     usedExports<span class="token operator">:</span> <span class="token string">&quot;global&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366" target="_blank" rel="noopener noreferrer">webpack 4: Code Splitting, chunk graph and the splitChunks optimization</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/optimization.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/resolve/">Resolve</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/plugins/">Plugins</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">13<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jeremenichelli"><img width="45" height="45" alt="jeremenichelli" title="jeremenichelli" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/simon04"><img width="45" height="45" alt="simon04" title="simon04" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/madhavarshney"><img width="45" height="45" alt="madhavarshney" title="madhavarshney" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dhurlburtusa"><img width="45" height="45" alt="dhurlburtusa" title="dhurlburtusa" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anikethsaha"><img width="45" height="45" alt="anikethsaha" title="anikethsaha" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pixel-ray"><img width="45" height="45" alt="pixel-ray" title="pixel-ray" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Roberto14"><img width="45" height="45" alt="Roberto14" title="Roberto14" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/hai-x"><img width="45" height="45" alt="hai-x" title="hai-x" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.4d2e1dd51f0fb269.js"></script></body>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366" target="_blank" rel="noopener noreferrer">webpack 4: Code Splitting, chunk graph and the splitChunks optimization</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/optimization.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/resolve/">Resolve</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/plugins/">Plugins</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">13<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jeremenichelli"><img width="45" height="45" alt="jeremenichelli" title="jeremenichelli" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/simon04"><img width="45" height="45" alt="simon04" title="simon04" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/madhavarshney"><img width="45" height="45" alt="madhavarshney" title="madhavarshney" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dhurlburtusa"><img width="45" height="45" alt="dhurlburtusa" title="dhurlburtusa" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anikethsaha"><img width="45" height="45" alt="anikethsaha" title="anikethsaha" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pixel-ray"><img width="45" height="45" alt="pixel-ray" title="pixel-ray" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Roberto14"><img width="45" height="45" alt="Roberto14" title="Roberto14" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/hai-x"><img width="45" height="45" alt="hai-x" title="hai-x" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.0bc9448bd6aeb6c5.js"></script></body>

@@ -32,7 +32,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 <p>To assist with the upgrade from webpack v4 to v5, <a href="https://github.com/codemod-com/codemod">Codemod</a> provides open-source community codemods that can help automate most of the migration process.</p>
 <p>Please note that these are not official webpack codemods, and while it aims to streamline the migration, it may not cover all cases. You may still need to perform additional manual steps to fully complete the upgrade.</p>
 <p>Run the <a href="https://go.codemod.com/webpack-v5-recipe">webpack v5 migration codemods</a>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod@latest webpack/v5/migration-recipe</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod@latest webpack/v5/migration-recipe</code></pre></div>
 <p>This will run the following codemods from <a href="https://codemod.com/registry">Codemod registry</a>:</p>
 <ul>
 <li><a href="https://go.codemod.com/webpack-set-target-false"><code>webpack/v5/set-target-to-false-and-update-plugins</code></a></li>
@@ -43,7 +43,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 <h3><span id="make-sure-your-build-has-no-errors-or-warnings"></span>Make sure your build has no errors or warnings<a href="#make-sure-your-build-has-no-errors-or-warnings" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>There might be new errors or warnings because of the upgraded versions of <code>webpack</code>, <code>webpack-cli</code>, Plugins and Loaders. Keep an eye for deprecation warnings during the build.</p>
 <p>You can invoke <code>webpack</code> this way to get stack traces for deprecation warnings to figure out which Plugins and Loaders are responsible.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">node --trace-deprecation node_modules/webpack/bin/webpack.js</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-bash">node --trace-deprecation node_modules/webpack/bin/webpack.js</code></pre></div>
 <p>As webpack 5 removes all deprecated features, make sure there&#x27;s no webpack deprecation warnings during the build in order to proceed.</p>
 <h3><span id="make-sure-to-use-mode"></span>Make sure to use <code>mode</code><a href="#make-sure-to-use-mode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Set <code>mode</code> to either <a href="/configuration/mode/#mode-production"><code>production</code></a> or <a href="/configuration/mode/#mode-development"><code>development</code></a> to make sure that corresponding defaults are set.</p>
@@ -68,7 +68,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 <aside class="tip"><p class="tip__prefix">tip</p><p>Checkout the detailed changes in the configuration options <a href="/blog/2020-10-10-webpack-5-release/#changes-to-the-configuration">here</a>.</p></aside>
 <h3><span id="test-webpack-5-compatibility"></span>Test webpack 5 compatibility<a href="#test-webpack-5-compatibility" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Try to set the following options in your webpack 4 configuration and check if build still works correctly.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   node<span class="token operator">:</span> <span class="token punctuation">{</span>
     Buffer<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -113,7 +113,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 </li>
 <li>
 <p>If you have <code>target</code> set to a function, update it to <code>false</code> and apply that function within <code>plugins</code> option. See example below:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token comment">// for webpack 4</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token comment">// for webpack 4</span>
 <span class="token punctuation">{</span>
     target<span class="token operator">:</span> WebExtensionTarget(nodeConfig)
 <span class="token punctuation">}</span>
@@ -127,13 +127,13 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 <span class="token punctuation">}</span></code></pre></div>
 <blockquote>
 <p><strong>Note</strong>: Codemod for this change:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod webpack/v5/set-target-to-false-and-update-plugins</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod webpack/v5/set-target-to-false-and-update-plugins</code></pre></div>
 <p>(See the <a href="https://codemod.com/registry/webpack-v5-set-target-to-false-and-update-plugins">registry here</a>.)</p>
 </blockquote>
 </li>
 <li>
 <p>If you have output.library or output.libraryTarget defined, change the property names: (output.libraryTarget -&gt; output.library.type, output.library -&gt; output.library.name). Example</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token comment">// for webpack 4</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token comment">// for webpack 4</span>
 <span class="token punctuation">{</span>
     output<span class="token operator">:</span> <span class="token punctuation">{</span>
       library<span class="token operator">:</span> &#x27;MyLibrary&#x27;<span class="token punctuation">,</span>
@@ -152,7 +152,7 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 <span class="token punctuation">}</span></code></pre></div>
 <blockquote>
 <p><strong>Note</strong>: Codemod for this change:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod webpack/v5/migrate-library-target-to-library-object</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod webpack/v5/migrate-library-target-to-library-object</code></pre></div>
 <p>(See the <a href="https://codemod.com/registry/webpack-v5-migrate-library-target-to-library-object">registry here</a>.)</p>
 </blockquote>
 </li>
@@ -202,16 +202,16 @@ Make sure to read release notes of each individual plugin/loader when upgrading 
 </ul>
 <h4><span id="using-named-exports-from-json-modules"></span>Using named exports from JSON modules<a href="#using-named-exports-from-json-modules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>This is not supported by the new specification and you will get a warning. Instead of:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> version <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./package.json&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> version <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./package.json&quot;</span><span class="token punctuation">;</span>
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>version<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>use:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> pkg <span class="token keyword">from</span> <span class="token string">&quot;./package.json&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> pkg <span class="token keyword">from</span> <span class="token string">&quot;./package.json&quot;</span><span class="token punctuation">;</span>
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>pkg<span class="token punctuation">.</span>version<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <blockquote>
 <p><strong>Note</strong>: Codemod for this change:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod webpack/v5/json-imports-to-default-imports</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-bash">npx codemod webpack/v5/json-imports-to-default-imports</code></pre></div>
 <p>(See the <a href="https://codemod.com/registry/webpack-v5-json-imports-to-default-imports">registry here</a>.)</p>
 </blockquote>
 <h4><span id="cleanup-the-build-code"></span>Cleanup the build code<a href="#cleanup-the-build-code" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
@@ -357,7 +357,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2><span id="mode"></span>mode<a href="#mode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Add the new <a href="/configuration/mode/"><code>mode</code></a> option to your configuration. Set it to <code>&#x27;production&#x27;</code>, <code>&#x27;development&#x27;</code> or <code>&#x27;none&#x27;</code> depending on your configuration type.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // ...
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  mode: &#x27;production&#x27;,
 </span></span>}</code></pre></div>
@@ -365,7 +365,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2><span id="deprecatedremoved-plugins"></span>Deprecated/Removed plugins<a href="#deprecatedremoved-plugins" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>These plugins can be removed from configuration as they are default in production mode:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // ...
 </span><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    new NoEmitOnErrorsPlugin(),
@@ -376,7 +376,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </span></span>}</code></pre></div>
 <p>These plugins are default in development mode</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // ...
 </span><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    new NamedModulesPlugin()
@@ -384,7 +384,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </span></span>}</code></pre></div>
 <p>These plugins were deprecated and are now removed:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // ...
 </span><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    new NoErrorsPlugin(),
@@ -398,13 +398,13 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2><span id="import-and-commonjs"></span>import() and CommonJS<a href="#import-and-commonjs" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When using <code>import()</code> to load non-ESM the result has changed in webpack 4. Now you need to access the <code>default</code> property to get the value of <code>module.exports</code>.</p>
 <p><strong>non-esm.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token function-variable function">sayHello</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;hello world&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>example.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">function</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">function</span> <span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;./non-esm.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">module</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     module<span class="token punctuation">.</span>default<span class="token punctuation">.</span><span class="token function">sayHello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -412,7 +412,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <h2><span id="json-and-loaders"></span>json and loaders<a href="#json-and-loaders" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When using a custom loader to transform <code>.json</code> files you now need to change the module <code>type</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // ...
 </span><span class="token prefix unchanged"> </span><span class="token line"> rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   {
@@ -425,7 +425,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </span></span>};</code></pre></div>
 <p>When still using the <code>json-loader</code>, it can be removed:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // ...
 </span><span class="token prefix unchanged"> </span><span class="token line"> rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   {
@@ -442,7 +442,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <aside class="tip"><p class="tip__prefix">tip</p><p>Note that there were far fewer changes between 2 and 3, so that migration shouldn&#x27;t be too bad. If you are running into issues, please see <a href="https://github.com/webpack/webpack/releases">the changelog</a> for details.</p></aside>
 <h2><span id="resolveroot-resolvefallback-resolvemodulesdirectories"></span>resolve.root, resolve.fallback, resolve.modulesDirectories<a href="#resolveroot-resolvefallback-resolvemodulesdirectories" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>These options were replaced by a single option <code>resolve.modules</code>. See <a href="/configuration/resolve">resolving</a> for more usage.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> resolve: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> resolve: {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   root: path.join(__dirname, &quot;src&quot;)
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   modules: [
 </span><span class="token prefix inserted">+</span><span class="token line">     path.join(__dirname, &quot;src&quot;),
@@ -457,7 +457,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>The old loader configuration was superseded by a more powerful rules system, which allows configuration of loaders and more.
 For compatibility reasons, the old <code>module.loaders</code> syntax is still valid and the old names are parsed.
 The new naming conventions are easier to understand and are a good reason to upgrade the configuration to using <code>module.rules</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   loaders: [
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   rules: [
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     {
@@ -490,7 +490,7 @@ The new naming conventions are easier to understand and are a good reason to upg
 <p>Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the <a href="/configuration/module/#ruleuse">rule.use</a>
 configuration option, <code>use</code> can be set to an array of loaders.
 In webpack 1, loaders were commonly chained with <code>!</code>. This style is only supported using the legacy option <code>module.loaders</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   loaders: [{
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   rules: [{
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     test: /\.less$/,
@@ -504,7 +504,7 @@ In webpack 1, loaders were commonly chained with <code>!</code>. This style is o
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
 <h2><span id="automatic--loader-module-name-extension-removed"></span>Automatic <code>-loader</code> module name extension removed<a href="#automatic--loader-module-name-extension-removed" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>It is not possible anymore to omit the <code>-loader</code> extension when referencing loaders:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">     {
 </span><span class="token prefix unchanged"> </span><span class="token line">       use: [
@@ -519,14 +519,14 @@ In webpack 1, loaders were commonly chained with <code>!</code>. This style is o
 </span><span class="token prefix unchanged"> </span><span class="token line">   ]
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
 <p>You can still opt-in to the old behavior with the <code>resolveLoader.moduleExtensions</code> configuration option, but this is not recommended.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> resolveLoader: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> resolveLoader: {
 </span><span class="token prefix inserted">+</span><span class="token line">   moduleExtensions: [&quot;-loader&quot;]
 </span><span class="token prefix inserted">+</span><span class="token line"> }</span></span></code></pre></div>
 <p>See <a href="https://github.com/webpack/webpack/issues/2986">#2986</a> for the reason behind this change.</p>
 <h2><span id="json-loader-is-not-required-anymore"></span>json-loader is not required anymore<a href="#json-loader-is-not-required-anymore" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
 file with the <a href="https://github.com/webpack-contrib/json-loader"><code>json-loader</code></a>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">     {
 </span><span class="token prefix deleted">-</span><span class="token line">       test: /\.json/,
@@ -540,7 +540,7 @@ between webpack, node.js and browserify.</p>
 <p>In <strong>webpack 1</strong>, configured loaders resolve relative to the matched file. However, in <strong>webpack 2</strong>, configured loaders resolve relative to the <code>context</code> option.</p>
 <p>This solves some problems with duplicate modules caused by loaders when using <code>npm link</code> or referencing modules outside of the <code>context</code>.</p>
 <p>You may remove some hacks to work around this:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">     {
 </span><span class="token prefix unchanged"> </span><span class="token line">       // ...
@@ -553,7 +553,7 @@ between webpack, node.js and browserify.</p>
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   root: path.resolve(__dirname, &quot;node_modules&quot;)
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
 <h2><span id="modulepreloaders-and-modulepostloaders-were-removed"></span>module.preLoaders and module.postLoaders were removed:<a href="#modulepreloaders-and-modulepostloaders-were-removed" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   preLoaders: [
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   rules: [
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     {
@@ -565,7 +565,7 @@ between webpack, node.js and browserify.</p>
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
 <h2><span id="uglifyjsplugin-sourcemap"></span>UglifyJsPlugin sourceMap<a href="#uglifyjsplugin-sourcemap" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The <code>sourceMap</code> option of the <code>UglifyJsPlugin</code> now defaults to <code>false</code> instead of <code>true</code>. This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set <code>sourceMap: true</code> for <code>UglifyJsPlugin</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> devtool: &quot;source-map&quot;,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> devtool: &quot;source-map&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   new UglifyJsPlugin({
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     sourceMap: true
@@ -574,7 +574,7 @@ between webpack, node.js and browserify.</p>
 <h2><span id="uglifyjsplugin-warnings"></span>UglifyJsPlugin warnings<a href="#uglifyjsplugin-warnings" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The <code>compress.warnings</code> option of the <code>UglifyJsPlugin</code> now defaults to <code>false</code> instead of <code>true</code>.
 This means that if you want to see uglifyjs warnings, you need to set <code>compress.warnings</code> to <code>true</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> devtool: &quot;source-map&quot;,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> devtool: &quot;source-map&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   new UglifyJsPlugin({
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     compress: {
@@ -586,7 +586,7 @@ This means that if you want to see uglifyjs warnings, you need to set <code>comp
 <p><code>UglifyJsPlugin</code> no longer switches loaders into minimize mode. The <code>minimize: true</code> setting needs to be passed via loader options in the long-term. See loader documentation for relevant options.</p>
 <p>The minimize mode for loaders will be removed in webpack 3 or later.</p>
 <p>To keep compatibility with old loaders, loaders can be switched to minimize mode via plugin:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   new webpack.LoaderOptionsPlugin({
 </span><span class="token prefix inserted">+</span><span class="token line">     minimize: true
 </span><span class="token prefix inserted">+</span><span class="token line">   })
@@ -595,14 +595,14 @@ This means that if you want to see uglifyjs warnings, you need to set <code>comp
 <p><code>webpack.optimize.DedupePlugin</code> isn&#x27;t needed anymore. Remove it from your configuration.</p>
 <h2><span id="bannerplugin---breaking-change"></span>BannerPlugin - breaking change<a href="#bannerplugin---breaking-change" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>BannerPlugin</code> no longer accepts two parameters, but a single options object.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    new webpack.BannerPlugin(&#x27;Banner&#x27;, {raw: true, entryOnly: true});
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    new webpack.BannerPlugin({banner: &#x27;Banner&#x27;, raw: true, entryOnly: true});
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> ]</span></span></code></pre></div>
 <h2><span id="occurrenceorderplugin-is-now-on-by-default"></span>OccurrenceOrderPlugin is now on by default<a href="#occurrenceorderplugin-is-now-on-by-default" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The <code>OccurrenceOrderPlugin</code> is now enabled by default and has been renamed (<code>OccurenceOrderPlugin</code> in webpack 1).
 Thus make sure to remove the plugin from your configuration:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   // webpack 1
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   new webpack.optimize.OccurenceOrderPlugin()
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   // webpack 2
@@ -613,7 +613,7 @@ Thus make sure to remove the plugin from your configuration:</p>
 <p><code>npm install --save-dev extract-text-webpack-plugin</code></p>
 <p>The configuration changes for this plugin are mainly syntactical.</p>
 <h3><span id="extracttextpluginextract"></span>ExtractTextPlugin.extract<a href="#extracttextpluginextract" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   {
 </span><span class="token prefix unchanged"> </span><span class="token line">     test: /.css$/,
@@ -627,7 +627,7 @@ Thus make sure to remove the plugin from your configuration:</p>
 </span><span class="token prefix unchanged"> </span><span class="token line"> ]
 </span></span>}</code></pre></div>
 <h3><span id="new-extracttextpluginoptions"></span><code>new ExtractTextPlugin({options})</code><a href="#new-extracttextpluginoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">plugins: [
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">plugins: [
 <span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  new ExtractTextPlugin(&quot;bundle.css&quot;, { allChunks: true, disable: false })
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  new ExtractTextPlugin({
 </span><span class="token prefix inserted">+</span><span class="token line">    filename: &quot;bundle.css&quot;,
@@ -642,7 +642,7 @@ Thus make sure to remove the plugin from your configuration:</p>
 <h3><span id="using-custom-arguments-in-cli-and-configuration"></span>Using custom arguments in CLI and configuration<a href="#using-custom-arguments-in-cli-and-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>If you abused the CLI to pass custom arguments to the configuration like so:</p>
 <p><code>webpack --custom-stuff</code></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
 <span class="token keyword">const</span> customStuff <span class="token operator">=</span> process<span class="token punctuation">.</span>argv<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;--custom-stuff&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">/* ... */</span>
@@ -650,7 +650,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>You may notice that this is no longer allowed. The CLI is more strict now.</p>
 <p>Instead there is an interface for passing arguments to the configuration. This should be used instead. Future tools may rely on this.</p>
 <p><code>webpack --env.customStuff</code></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">env</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">env</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> <span class="token punctuation">{</span> customStuff <span class="token punctuation">}</span> <span class="token operator">=</span> env<span class="token punctuation">;</span>
   <span class="token comment">/* ... */</span>
   <span class="token keyword">return</span> config<span class="token punctuation">;</span>
@@ -661,7 +661,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong><code>require.ensure</code> now depends upon native <code>Promise</code>s. If using <code>require.ensure</code> in an environment that lacks them then you will need a polyfill.</strong></p>
 <h2><span id="loader-configuration-is-through-options"></span>Loader configuration is through <code>options</code><a href="#loader-configuration-is-through-options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>You can <em>no longer</em> configure a loader with a custom property in the <code>webpack.config.js</code>. It must be done through the <code>options</code>. The following configuration with the <code>ts</code> property is no longer valid with webpack 2:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -676,7 +676,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="what-are-options"></span>What are <code>options</code>?<a href="#what-are-options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Good question. Well, strictly speaking it&#x27;s 2 possible things; both ways to configure a webpack loader. Classically <code>options</code> was called <code>query</code> and was a string which could be appended to the name of the loader. Much like a query string but actually with <a href="https://github.com/webpack/loader-utils#parsequery">greater powers</a>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -688,7 +688,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>But it can also be a separately specified object that&#x27;s supplied alongside a loader:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -703,7 +703,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="loaderoptionsplugin-context"></span>LoaderOptionsPlugin context<a href="#loaderoptionsplugin-context" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Some loaders need context information and read them from the configuration. This needs to be passed via loader options in the long-term. See loader documentation for relevant options.</p>
 <p>To keep compatibility with old loaders, this information can be passed via plugin:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   new webpack.LoaderOptionsPlugin({
 </span><span class="token prefix inserted">+</span><span class="token line">     options: {
 </span><span class="token prefix inserted">+</span><span class="token line">       context: __dirname
@@ -714,7 +714,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>The <code>debug</code> option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.</p>
 <p>The debug mode for loaders will be removed in webpack 3 or later.</p>
 <p>To keep compatibility with old loaders, loaders can be switched to debug mode via a plugin:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> debug: true,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> debug: true,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> plugins: [
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   new webpack.LoaderOptionsPlugin({
 </span><span class="token prefix inserted">+</span><span class="token line">     debug: true
@@ -722,11 +722,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> ]</span></span></code></pre></div>
 <h2><span id="code-splitting-with-es2015"></span>Code Splitting with ES2015<a href="#code-splitting-with-es2015" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>In webpack 1, you could use <a href="/api/module-methods/#requireensure"><code>require.ensure()</code></a> as a method to lazily-load chunks for your application:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">require<span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">require</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">require<span class="token punctuation">.</span><span class="token function">ensure</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">require</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> foo <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./module&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>The ES2015 Loader spec defines <a href="/api/module-methods/#import-1"><code>import()</code></a> as method to load ES2015 Modules dynamically on runtime. Webpack treats <code>import()</code> as a split-point and puts the requested module in a separate chunk. <code>import()</code> takes the module name as argument and returns a Promise.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">onClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">onClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;./module&quot;</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">module</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> module<span class="token punctuation">.</span>default<span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
@@ -737,7 +737,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="dynamic-expressions"></span>Dynamic expressions<a href="#dynamic-expressions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>It&#x27;s possible to pass a partial expression to <code>import()</code>. This is handled similar to expressions in CommonJS (webpack creates a <a href="/plugins/context-replacement-plugin/">context</a> with all possible files).</p>
 <p><code>import()</code> creates a separate chunk for each possible module.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">route</span><span class="token punctuation">(</span><span class="token parameter">path<span class="token punctuation">,</span> query</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">route</span><span class="token punctuation">(</span><span class="token parameter">path<span class="token punctuation">,</span> query</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">./routes/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>path<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/route</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
     <span class="token punctuation">(</span><span class="token parameter">route</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">new</span> <span class="token class-name">route<span class="token punctuation">.</span>Route</span><span class="token punctuation">(</span>query<span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -745,35 +745,35 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token comment">// This creates a separate chunk for each possible route</span></code></pre></div>
 <h2><span id="mixing-es2015-with-amd-and-commonjs"></span>Mixing ES2015 with AMD and CommonJS<a href="#mixing-es2015-with-amd-and-commonjs" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>As for AMD and CommonJS you can freely mix all three module types (even within the same file). Webpack behaves similar to babel and node-eps in this case:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// CommonJS consuming ES2015 Module</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// CommonJS consuming ES2015 Module</span>
 <span class="token keyword">const</span> book <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./book&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 book<span class="token punctuation">.</span>currentPage<span class="token punctuation">;</span>
 book<span class="token punctuation">.</span><span class="token function">readPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 book<span class="token punctuation">.</span>default <span class="token operator">===</span> <span class="token string">&quot;This is a book&quot;</span><span class="token punctuation">;</span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// ES2015 Module consuming CommonJS</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// ES2015 Module consuming CommonJS</span>
 <span class="token keyword">import</span> fs <span class="token keyword">from</span> <span class="token string">&quot;node:fs&quot;</span><span class="token punctuation">;</span> <span class="token comment">// module.exports map to default</span>
 
 <span class="token keyword">typeof</span> fs<span class="token punctuation">.</span>readFileSync <span class="token operator">===</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">;</span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// ES2015 Module consuming CommonJS</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token comment">// ES2015 Module consuming CommonJS</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> readFileSync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:fs&quot;</span><span class="token punctuation">;</span> <span class="token comment">// named exports are read from returned object+</span>
 
 <span class="token keyword">typeof</span> readFileSync <span class="token operator">===</span> <span class="token string">&quot;function&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your <code>.babelrc</code> or <code>babel-loader</code> options.</p>
 <p><strong>.babelrc</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-json"><span class="token punctuation">{</span>
   <span class="token property">&quot;presets&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">&quot;es2015&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> <span class="token property">&quot;modules&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h2><span id="hints"></span>Hints<a href="#hints" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>No need to change something, but opportunities</p>
 <h3><span id="template-strings"></span>Template strings<a href="#template-strings" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Webpack now supports template strings in expressions. This means you can start using them in webpack constructs:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> require(&quot;./templates/&quot; + name);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> require(&quot;./templates/&quot; + name);
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> require(`./templates/${name}`);</span></span></code></pre></div>
 <h3><span id="configuration-promise"></span>Configuration Promise<a href="#configuration-promise" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Webpack now supports returning a <code>Promise</code> from the configuration file. This allows async processing in your configuration file.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token function">fetchLangs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">lang</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
     entry<span class="token operator">:</span> <span class="token string">&quot;...&quot;</span><span class="token punctuation">,</span>
     <span class="token comment">// ...</span>
@@ -782,7 +782,7 @@ book<span class="token punctuation">.</span>default <span class="token operator"
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="advanced-loader-matching"></span>Advanced loader matching<a href="#advanced-loader-matching" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Webpack now supports more things to match on for loaders.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -805,12 +805,12 @@ book<span class="token punctuation">.</span>default <span class="token operator"
 <p>Changes only relevant for loader authors.</p>
 <h3><span id="cacheable"></span>Cacheable<a href="#cacheable" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Loaders are now cacheable by default. Loaders must opt-out if they are not cacheable.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // Cacheable loader
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // Cacheable loader
 </span><span class="token prefix unchanged"> </span><span class="token line"> module.exports = function(source) {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   this.cacheable();
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return source;
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // Not cacheable loader
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> // Not cacheable loader
 </span><span class="token prefix unchanged"> </span><span class="token line"> module.exports = function(source) {
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   this.cacheable(false);
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return source;
@@ -819,7 +819,7 @@ book<span class="token punctuation">.</span>default <span class="token operator"
 <p><strong>webpack 1</strong> only supports <code>JSON.stringify</code>-able options for loaders.</p>
 <p><strong>webpack 2</strong> now supports any JS object as loader options.</p>
 <p>Before webpack <a href="https://github.com/webpack/webpack/releases/tag/v2.2.1">2.2.1</a> (i.e. from 2.0.0 through 2.2.0), using complex options required using <code>ident</code> for the <code>options</code> object to allow its reference from other loaders. <strong>This was removed in 2.2.1</strong> and thus current migrations do not require any use of the <code>ident</code> key.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">{
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">{
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> test: /\.ext/
 </span><span class="token prefix unchanged"> </span><span class="token line"> use: {
 </span><span class="token prefix unchanged"> </span><span class="token line">   loader: &#x27;...&#x27;,

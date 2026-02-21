@@ -8,17 +8,17 @@
 <p>Copies existing individual files or entire directories to the build directory.</p>
 <h2><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>To begin, you&#x27;ll need to install <code>copy-webpack-plugin</code>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">npm install copy-webpack-plugin --save-dev
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">npm install copy-webpack-plugin --save-dev
 </code></pre></div>
 <p>or</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">yarn add -D copy-webpack-plugin
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">yarn add -D copy-webpack-plugin
 </code></pre></div>
 <p>or</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-console">pnpm add -D copy-webpack-plugin
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-console">pnpm add -D copy-webpack-plugin
 </code></pre></div>
 <p>Then add the plugin to your <code>webpack</code> configuration. For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -49,7 +49,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <p>The plugin&#x27;s usage:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> CopyPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;copy-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -81,7 +81,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h4><span id="from"></span><code>from</code><a href="#from" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token keyword">from</span></span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name"><span class="token keyword">from</span></span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Glob or path from where we copy files.
 Globs follow the <a href="https://github.com/mrmlnc/fast-glob#pattern-syntax">fast-glob pattern-syntax</a>.
@@ -93,7 +93,7 @@ On Windows, both forward slashes and backslashes act as separators.
 Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -116,7 +116,7 @@ Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to no
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h5><span id="for-windows"></span><code>For windows</code><a href="#for-windows" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>If you&#x27;re using an absolute file or folder path in the <code>from</code> option on <code>Windows</code>, you can use windows path segment (<code>\\</code>)</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -129,7 +129,7 @@ Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to no
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>However, when writing <code>glob</code> expressions, always use forward slashes.
 See the <a href="https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-windows">fast-glob manual</a> for more details.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -148,7 +148,7 @@ See the <a href="https://github.com/mrmlnc/fast-glob#how-to-write-patterns-on-wi
 See more <a href="#examples"><code>examples</code></a>.</p>
 <h4><span id="to"></span><code>to</code><a href="#to" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">to</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">to</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>pathData<span class="token operator">:</span> <span class="token punctuation">{</span> context<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span> absoluteFilename<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>compiler.options.output</code></p>
@@ -161,7 +161,7 @@ On Windows, both forward slashes and backslashes act as separators.
 Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -190,7 +190,7 @@ On Windows, both forward slashes and backslashes act as separators.
 Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -205,7 +205,7 @@ Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to no
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -221,7 +221,7 @@ Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to no
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="context"></span><code>context</code><a href="#context" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">context</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">context</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>options.context|compiler.options.context</code></p>
 <p>Defines the base directory used for two purposes:</p>
 <ol>
@@ -239,7 +239,7 @@ On Windows, both forward slashes and backslashes act as separators.
 Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to normalize paths.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -269,12 +269,12 @@ Use <code>/</code> instead, or use Node&#x27;s <code>path</code> utilities to no
 <p>The <em>onlyDirectories</em> does not work because the plugin is designed to copy files, not directories alone.</p>
 </blockquote>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;tinyglobby&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>GlobOptions<span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">globOptions</span> <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;tinyglobby&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>GlobOptions<span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Allows you to configure the glob pattern matching library used by the plugin. <a href="https://github.com/SuperchupuDev/tinyglobby#options">See the list of supported options</a>
 To exclude files from being copied, use the <a href="https://github.com/mrmlnc/fast-glob#ignore">globOptions.ignore option</a></p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -292,14 +292,14 @@ To exclude files from being copied, use the <a href="https://github.com/mrmlnc/f
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="filter"></span><code>filter</code><a href="#filter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">filter</span> <span class="token operator">=</span> <span class="token punctuation">(</span>filepath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">filter</span> <span class="token operator">=</span> <span class="token punctuation">(</span>filepath<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <blockquote>
 <p>[!NOTE]</p>
 <p>To ignore files by path (e.g., by extension or name), prefer using the [<code>globOptions.ignore</code>] option.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:fs&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>promise<span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:fs&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>promise<span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -324,7 +324,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="totype"></span><code>toType</code><a href="#totype" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">toType</span> <span class="token operator">=</span> <span class="token string">&quot;dir&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;file&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;template&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">toType</span> <span class="token operator">=</span> <span class="token string">&quot;dir&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;file&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;template&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Determines the type of the <code>to</code> option — whether it&#x27;s a directory, file, or template.
 Sometimes it is hard to say what is <code>to</code>, example <code>path/to/dir-with.ext</code>.
@@ -333,7 +333,7 @@ In most cases, the plugin will automatically determine the correct <code>type</c
 <table><thead><tr><th style="text-align:center">Name</th><th style="text-align:center">Type</th><th style="text-align:center">Default</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#dir"><code>&#x27;dir&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Used <code>to</code> has no extension or ends with a <code>&#x27;/&#x27;</code>.</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#file"><code>&#x27;file&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Used when <code>to</code> is a file path that is not a directory or template.</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#template"><code>&#x27;template&#x27;</code></a></strong></span></td><td data-th="Type" style="text-align:center"><span><code>string</code></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Used when <code>to</code> contains <a href="/configuration/output/#template-strings">a template pattern</a></span></td></tr></tbody></table>
 <h5><span id="dir"></span><code>&#x27;dir&#x27;</code><a href="#dir" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -348,7 +348,7 @@ In most cases, the plugin will automatically determine the correct <code>type</c
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h5><span id="file"></span><code>&#x27;file&#x27;</code><a href="#file" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -363,7 +363,7 @@ In most cases, the plugin will automatically determine the correct <code>type</c
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h5><span id="template"></span><code>&#x27;template&#x27;</code><a href="#template" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -378,11 +378,11 @@ In most cases, the plugin will automatically determine the correct <code>type</c
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="force"></span><code>force</code><a href="#force" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">force</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">force</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>false</code></p>
 <p>Overwrites files that already exist in <code>compilation.assets</code> (typically added by other plugins or loaders).</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -397,13 +397,13 @@ In most cases, the plugin will automatically determine the correct <code>type</c
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="priority"></span><code>priority</code><a href="#priority" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">priority</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">priority</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>0</code></p>
 <p>Allows to specify the priority of copying files with the same destination name.
 Files for patterns with higher priority will be copied later.
 To enable overwriting, the <a href="#force"><code>force</code></a> option must be set to <code>true</code>.
 <strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -426,7 +426,7 @@ To enable overwriting, the <a href="#force"><code>force</code></a> option must b
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="transform"></span><code>transform</code><a href="#transform" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">transform</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">transform</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       <span class="token function-variable function">transformer</span><span class="token operator">:</span> <span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span> <span class="token operator">|</span> Buffer<span class="token punctuation">;</span>
       cache<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> TransformerCacheObject <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
@@ -436,7 +436,7 @@ To enable overwriting, the <a href="#force"><code>force</code></a> option must b
 <p>Allows you to modify the contents of a file before it is written to the output directory.</p>
 <h5><span id="function-1"></span><code>function</code><a href="#function-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -457,10 +457,10 @@ To enable overwriting, the <a href="#force"><code>force</code></a> option must b
 <table><thead><tr><th style="text-align:center">Name</th><th style="text-align:center">Default</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#transformer"><code>transformer</code></a></strong></span></td><td data-th="Default" style="text-align:center"><span><code>undefined</code></span></td><td data-th="Description" style="text-align:left"><span>Allows you to modify the contents of the file.</span></td></tr><tr><td data-th="Name" style="text-align:center"><span><strong><a href="#cache"><code>cache</code></a></strong></span></td><td data-th="Default" style="text-align:center"><span><code>false</code></span></td><td data-th="Description" style="text-align:left"><span>Enables caching for <code>transform</code>. You can use <code>transform: { cache: { key: &#x27;my-cache-key&#x27; } }</code> to manually invalidate the cache when needed.</span></td></tr></tbody></table>
 <h6><span id="transformer"></span><code>transformer</code><a href="#transformer" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h6>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">transformer</span> <span class="token operator">=</span> <span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">transformer</span> <span class="token operator">=</span> <span class="token punctuation">(</span>input<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -480,7 +480,7 @@ To enable overwriting, the <a href="#force"><code>force</code></a> option must b
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -499,7 +499,7 @@ To enable overwriting, the <a href="#force"><code>force</code></a> option must b
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h6><span id="cache"></span><code>cache</code><a href="#cache" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h6>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">cache</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">cache</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">boolean</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       keys<span class="token operator">:</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
@@ -518,7 +518,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <h6><span id="boolean"></span><code>boolean</code><a href="#boolean" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h6>
 <p>Enables/Disable <code>transform</code> caching.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -539,7 +539,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <h5><span id="object-1"></span><code>object</code><a href="#object-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>Enables <code>transform</code> caching and setup invalidation keys.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -566,7 +566,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <p>You can setup invalidation keys using a function.</p>
 <p>Simple function:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -595,7 +595,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Async function:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -624,7 +624,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="transformall"></span><code>transformAll</code><a href="#transformall" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">transformAll</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">transformAll</span> <span class="token operator">=</span> <span class="token punctuation">(</span>
   data<span class="token operator">:</span> <span class="token punctuation">{</span>
     data<span class="token operator">:</span> Buffer<span class="token punctuation">;</span>
     sourceFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
@@ -638,7 +638,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <p>The <code>to</code> option must be specified and point to a file. Only the <code>[contenthash]</code> and <code>[fullhash]</code> template strings are allowed in the filename.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -665,10 +665,10 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="noerroronmissing"></span><code>noErrorOnMissing</code><a href="#noerroronmissing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">noErrorOnMissing</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">noErrorOnMissing</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>false</code></p>
 <p>Doesn&#x27;t generate an error if file(s) are missing.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -682,7 +682,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="info"></span><code>info</code><a href="#info" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">info</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">info</span> <span class="token operator">=</span>
   <span class="token operator">|</span> Record<span class="token operator">&lt;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">any</span><span class="token operator">&gt;</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>item<span class="token operator">:</span> <span class="token punctuation">{</span>
       absoluteFilename<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
@@ -693,7 +693,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <p>Default: <code>undefined</code></p>
 <p>Allows to add assets info.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -708,7 +708,7 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -728,11 +728,11 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 </ul>
 <h4><span id="concurrency"></span><code>concurrency</code><a href="#concurrency" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">concurrency</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">concurrency</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>100</code></p>
 <p>Limits the number of simultaneous requests to fs.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span>patterns<span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -743,13 +743,13 @@ By default, the cache directory is located at: <code>node_modules/.cache/copy-we
 <h3><span id="examples"></span>Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <h4><span id="different-variants-of-from-glob-file-or-dir"></span>Different variants of <code>from</code> (<code>glob</code>, <code>file</code> or <code>dir</code>).<a href="#different-variants-of-from-glob-file-or-dir" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Consider the following file structure:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code>src/directory-nested/deep-nested/deepnested-file.txt
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code>src/directory-nested/deep-nested/deepnested-file.txt
 src/directory-nested/nested-file.txt
 </code></pre></div>
 <h5><span id="from-is-a-glob"></span>From is a Glob<a href="#from-is-a-glob" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p>Everything that you specify in <code>from</code> will be included in the result:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -761,12 +761,12 @@ src/directory-nested/nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">src/directory-nested/deep-nested/deepnested-file.txt,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">src/directory-nested/deep-nested/deepnested-file.txt,
 src/directory-nested/nested-file.txt
 </code></pre></div>
 <p>If you don&#x27;t want the result paths to start with <code>src/directory-nested/</code>, then you should move <code>src/directory-nested/</code> to <code>context</code>, such that only the glob pattern <code>**/*</code> remains in <code>from</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -779,12 +779,12 @@ src/directory-nested/nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">deep-nested/deepnested-file.txt,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">deep-nested/deepnested-file.txt,
 nested-file.txt
 </code></pre></div>
 <h5><span id="from-is-a-dir"></span>From is a Dir<a href="#from-is-a-dir" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -796,12 +796,12 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">deep-nested/deepnested-file.txt,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">deep-nested/deepnested-file.txt,
 nested-file.txt
 </code></pre></div>
 <p>Technically, this is equivalent to using <code>**/*</code> with a predefined context set to the specified directory</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -814,11 +814,11 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">deep-nested/deepnested-file.txt,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">deep-nested/deepnested-file.txt,
 nested-file.txt
 </code></pre></div>
 <h5><span id="from-is-a-file"></span>From is a File<a href="#from-is-a-file" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h5>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -835,11 +835,11 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">nested-file.txt
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">nested-file.txt
 </code></pre></div>
 <p>Technically, this is a filename with a predefined context equal to the file&#x27;s directory <code>path.dirname(pathToFile)</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -852,11 +852,11 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">nested-file.txt
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">nested-file.txt
 </code></pre></div>
 <h4><span id="ignoring-files"></span>Ignoring files<a href="#ignoring-files" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -885,7 +885,7 @@ nested-file.txt
 <p>If files have the same name, the result is non-deterministic.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -898,13 +898,13 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">file-1.txt
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">file-1.txt
 file-2.txt
 nested-file.txt
 </code></pre></div>
 <h4><span id="copy-in-new-directory"></span>Copy in new directory<a href="#copy-in-new-directory" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -921,7 +921,7 @@ nested-file.txt
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-txt">&quot;newdirectory/file-1.txt&quot;,
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-txt">&quot;newdirectory/file-1.txt&quot;,
 &quot;newdirectory/nestedfile.txt&quot;,
 &quot;newdirectory/nested/deep-nested/deepnested.txt&quot;,
 &quot;newdirectory/nested/nestedfile.txt&quot;,
@@ -929,7 +929,7 @@ nested-file.txt
 <h4><span id="skip-running-javascript-files-through-a-minimizer"></span>Skip running JavaScript files through a minimizer<a href="#skip-running-javascript-files-through-a-minimizer" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Useful if you need to simply copy <code>*.js</code> files to destination &quot;as is&quot; without evaluating and minimizing them using Terser.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -947,7 +947,7 @@ nested-file.txt
 <p>When using <code>yarn workspaces</code> or<code> monorepos</code>, relative copy paths from <code>node_modules</code> can be broken due to the way packages are hoisting.
 To avoid this, you should explicitly specify where to copy the files from; by using <code>require.resolve</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -966,4 +966,4 @@ To avoid this, you should explicitly specify where to copy the files from; by us
 <p>If you are new here, please take a moment to review our contributing guidelines before submitting issues or pull requests.</p>
 <p><a href="https://github.com/webpack/copy-webpack-plugin?tab=contributing-ov-file#contributing">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack/copy-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/copy-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/copy-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/compression-webpack-plugin/">CompressionWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/css-minimizer-webpack-plugin/">CssMinimizerWebpackPlugin</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.4d2e1dd51f0fb269.js"></script></body>
+<p><a href="https://github.com/webpack/copy-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/copy-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/copy-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/compression-webpack-plugin/">CompressionWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/css-minimizer-webpack-plugin/">CssMinimizerWebpackPlugin</a></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.0bc9448bd6aeb6c5.js"></script></body>

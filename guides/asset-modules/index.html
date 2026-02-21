@@ -15,7 +15,7 @@
 </ul>
 <p>When using the old assets loaders (i.e. <code>file-loader</code>/<code>url-loader</code>/<code>raw-loader</code>) along with Asset Modules in webpack 5, you might want to stop Asset Modules from processing your assets again as that would result in asset duplication. This can be done by setting the asset&#x27;s module type to <code>&#x27;javascript/auto&#x27;</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span><span class="token prefix unchanged"> </span><span class="token line">  rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">     {
@@ -35,7 +35,7 @@
 </span></span>}</code></pre></div>
 <p>To exclude assets that came from new URL calls from the asset loaders add <code>dependency: { not: [&#x27;url&#x27;] }</code> to the loader configuration.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module: {
 </span><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">     {
@@ -57,16 +57,16 @@
 <p>By default, under the hood, the <code>asset</code> type does <code>__webpack_public_path__ + import.meta</code>. This means that setting the <code>output.publicPath</code> in your config will allow you to override the URL from which the <code>asset</code> loads.</p>
 <h3><span id="on-the-fly-override"></span>On The Fly Override<a href="#on-the-fly-override" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>If you set the <code>__webpack_public_path__</code> in code, the way you need to achieve it so as not to break the <code>asset</code> loading logic is to make sure you run it as the first code in your app and not use a function to do so. An example of this would be having a file called <code>publicPath.js</code> with contents</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">__webpack_public_path__ <span class="token operator">=</span> <span class="token string">&quot;https://cdn.url.com&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">__webpack_public_path__ <span class="token operator">=</span> <span class="token string">&quot;https://cdn.url.com&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>And then in your <code>webpack.config.js</code> updating your <code>entry</code> field to look like</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./publicPath.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./App.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Alternatively, you can do the following in your <code>App.js</code> without modifying your webpack config. The only downside is you have to enforce ordering here and that can collide with some linting tools.</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;./publicPath.js&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;./publicPath.js&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="resource-type"></span>Resource type<a href="#resource-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -84,7 +84,7 @@ module.exports = {
 </span><span class="token prefix inserted">+</span><span class="token line"> },
 </span></span>};</code></pre></div>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> mainImage <span class="token keyword">from</span> <span class="token string">&quot;./images/main.png&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> mainImage <span class="token keyword">from</span> <span class="token string">&quot;./images/main.png&quot;</span><span class="token punctuation">;</span>
 
 img<span class="token punctuation">.</span>src <span class="token operator">=</span> mainImage<span class="token punctuation">;</span> <span class="token comment">// &#x27;/dist/151cfcfa1bd74779aadb.png&#x27;</span></code></pre></div>
 <p>All <code>.png</code> files will be emitted to the output directory and their paths will be injected into the bundles, besides, you can customize <a href="/configuration/module/#rulegeneratoroutputpath"><code>outputPath</code></a> and <a href="/configuration/module/#rulegeneratorpublicpath"><code>publicPath</code></a> for them.</p>
@@ -92,7 +92,7 @@ img<span class="token punctuation">.</span>src <span class="token operator">=</s
 <p>By default, <code>asset/resource</code> modules are emitting with <code>[hash][ext][query]</code> filename into output directory.</p>
 <p>You can modify this template by setting <a href="/configuration/output/#outputassetmodulefilename"><code>output.assetModuleFilename</code></a> in your webpack configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -111,7 +111,7 @@ module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line"> },
 </span></span>};</code></pre></div>
 <p>Another case to customize output filename is to emit some kind of assets to a specified directory:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -136,7 +136,7 @@ module.exports = {
 <p><code>Rule.generator.filename</code> is the same as <a href="/configuration/output/#outputassetmodulefilename"><code>output.assetModuleFilename</code></a> and works only with <code>asset</code> and <code>asset/resource</code> module types.</p>
 <h2><span id="inlining-assets"></span>Inlining assets<a href="#inlining-assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -154,7 +154,7 @@ module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line"> },
 </span></span>};</code></pre></div>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> metroMap <span class="token keyword">from</span> <span class="token string">&quot;./images/metro.svg&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> metroMap <span class="token keyword">from</span> <span class="token string">&quot;./images/metro.svg&quot;</span><span class="token punctuation">;</span>
 
 block<span class="token punctuation">.</span>style<span class="token punctuation">.</span>background <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">url(</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>metroMap<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span> <span class="token comment">// url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)</span></code></pre></div>
 <p>All <code>.svg</code> files will be injected into the bundles as data URI.</p>
@@ -162,7 +162,7 @@ block<span class="token punctuation">.</span>style<span class="token punctuation
 <p>By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.</p>
 <p>If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 <span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const svgToMiniDataURI = require(&#x27;mini-svg-data-uri&#x27;);
 </span></span>
 module.exports = {
@@ -189,7 +189,7 @@ module.exports = {
 <p>Now all <code>.svg</code> files will be encoded by <code>mini-svg-data-uri</code> package.</p>
 <h2><span id="source-type"></span>Source type<a href="#source-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -208,15 +208,15 @@ module.exports = {
 </span></span>};</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You don&#x27;t need to add rules when using <code>import text from &#x27;./file.txt&#x27; with { type: &quot;text&quot; };</code> syntax.</p></aside>
 <p><strong>src/example.txt</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-text">Hello world
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-text">Hello world
 </code></pre></div>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span><span class="token punctuation">;</span>
 
 block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> exampleText<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
 <p>Alternative usage:</p>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span> <span class="token keyword">with</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;text&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span> <span class="token keyword">with</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;text&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> exampleText<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
 <p>All <code>.txt</code> files will be injected into the bundles as UTF-8 strings.</p>
@@ -224,9 +224,9 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 <p>When using <code>new URL(&#x27;./path/to/asset&#x27;, import.meta.url)</code>, webpack creates an asset module too.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You don&#x27;t need to add rules when using <code>const file = new URL(&#x27;./file.ext&#x27;, import.meta.url);</code> syntax.</p></aside>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> logo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;./logo.svg&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> logo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;./logo.svg&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Depending on the <a href="/configuration/target/"><code>target</code></a> in your configuration, webpack would compile the above code into a different result:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// target: web</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token comment">// target: web</span>
 <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span>
   <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>__webpack_public_path__<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">logo.svg</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
   document<span class="token punctuation">.</span>baseURI <span class="token operator">||</span> self<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token punctuation">,</span>
@@ -242,13 +242,13 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>As of webpack 5.38.0, <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs">Data URLs</a> are supported in <code>new URL()</code> as well:</p>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;data:,&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">const</span> url <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;data:,&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>href <span class="token operator">===</span> <span class="token string">&quot;data:,&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>protocol <span class="token operator">===</span> <span class="token string">&quot;data:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>pathname <span class="token operator">===</span> <span class="token string">&quot;,&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="asset-type"></span>Asset type<a href="#asset-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -268,7 +268,7 @@ module.exports = {
 <p>Now webpack will automatically choose between <code>resource</code> and <code>inline</code> by following a default condition: a file with size less than 8kb will be treated as a <code>inline</code> module type and <code>resource</code> module type otherwise.</p>
 <p>You can change this condition by setting a <a href="/configuration/module/#ruleparserdataurlcondition"><code>Rule.parser.dataUrlCondition.maxSize</code></a> option on the module rule level of your webpack configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -293,7 +293,7 @@ module.exports = {
 <p>Also you can <a href="/configuration/module/#ruleparserdataurlcondition">specify a function</a> to decide to inlining a module or not.</p>
 <h2><span id="bytes-type"></span>Bytes type<a href="#bytes-type" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">const path = require(&quot;node:path&quot;);
 
 module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
@@ -312,10 +312,10 @@ module.exports = {
 </span></span>};</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You don&#x27;t need to add rules when using <code>import data from &#x27;./file.ext&#x27; with { type: &quot;bytes&quot; };</code> syntax.</p></aside>
 <p><strong>src/example.txt</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-text">Hello world
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-text">Hello world
 </code></pre></div>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> decoder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TextDecoder</span><span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> textString <span class="token operator">=</span> decoder<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>exampleText<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -323,7 +323,7 @@ module.exports = {
 block<span class="token punctuation">.</span>textContent <span class="token operator">=</span> textString<span class="token punctuation">;</span> <span class="token comment">// &#x27;Hello world&#x27;;</span></code></pre></div>
 <p>Alternative usage:</p>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span> <span class="token keyword">with</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;bytes&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> exampleText <span class="token keyword">from</span> <span class="token string">&quot;./example.txt&quot;</span> <span class="token keyword">with</span> <span class="token punctuation">{</span> type<span class="token operator">:</span> <span class="token string">&quot;bytes&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> decoder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TextDecoder</span><span class="token punctuation">(</span><span class="token string">&quot;utf-8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> textString <span class="token operator">=</span> decoder<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>exampleText<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -334,10 +334,10 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 <p>Before Asset Modules and Webpack 5, it was possible to use <a href="https://webpack.js.org/concepts/loaders/#inline">inline syntax</a> with the legacy loaders mentioned above.</p>
 <p>It is now recommended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.</p>
 <p>For example, in the case of replacing <code>raw-loader</code> with <code>asset/source</code> type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import myModule from &#x27;raw-loader!my-module&#x27;;
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import myModule from &#x27;raw-loader!my-module&#x27;;
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import myModule from &#x27;my-module?raw&#x27;;</span></span></code></pre></div>
 <p>and in the webpack configuration:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   // ...
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     {
@@ -347,7 +347,7 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   ]
 </span><span class="token prefix unchanged"> </span><span class="token line"> },</span></span></code></pre></div>
 <p>and if you&#x27;d like to exclude raw assets from being processed by other loaders, use a negative condition:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   // ...
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     {
@@ -362,7 +362,7 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 </span><span class="token prefix unchanged"> </span><span class="token line">   ]
 </span><span class="token prefix unchanged"> </span><span class="token line"> },</span></span></code></pre></div>
 <p>or a <code>oneOf</code> list of rules. Here only the first matching rule will be applied:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff">module: {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   // ...
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     { oneOf: [
@@ -379,7 +379,7 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
 </span><span class="token prefix unchanged"> </span><span class="token line"> },</span></span></code></pre></div>
 <h2><span id="disable-emitting-assets"></span>Disable emitting assets<a href="#disable-emitting-assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>For use cases like Server side rendering, you might want to disable emitting assets, which is feasible with <a href="/configuration/module/#rulegeneratoremit"><code>emit</code></a> option under <code>Rule.generator</code>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// …</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -392,4 +392,4 @@ block<span class="token punctuation">.</span>textContent <span class="token oper
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://dev.to/smelukov/webpack-5-asset-modules-2o3h" target="_blank" rel="noopener noreferrer">webpack 5 - Asset Modules</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/asset-modules.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/integrations/">Integrations</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/entry-advanced/">Advanced entry</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">8<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/smelukov"><img width="45" height="45" alt="smelukov" title="smelukov" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anshumanv"><img width="45" height="45" alt="anshumanv" title="anshumanv" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/spence-s"><img width="45" height="45" alt="spence-s" title="spence-s" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dkdk225"><img width="45" height="45" alt="dkdk225" title="dkdk225" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/alexander-akait"><img width="45" height="45" alt="alexander-akait" title="alexander-akait" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/GreenUpOu"><img width="45" height="45" alt="GreenUpOu" title="GreenUpOu" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.4d2e1dd51f0fb269.js"></script></body>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://dev.to/smelukov/webpack-5-asset-modules-2o3h" target="_blank" rel="noopener noreferrer">webpack 5 - Asset Modules</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/asset-modules.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/integrations/">Integrations</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/entry-advanced/">Advanced entry</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">8<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/smelukov"><img width="45" height="45" alt="smelukov" title="smelukov" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anshumanv"><img width="45" height="45" alt="anshumanv" title="anshumanv" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/spence-s"><img width="45" height="45" alt="spence-s" title="spence-s" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dkdk225"><img width="45" height="45" alt="dkdk225" title="dkdk225" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/alexander-akait"><img width="45" height="45" alt="alexander-akait" title="alexander-akait" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/GreenUpOu"><img width="45" height="45" alt="GreenUpOu" title="GreenUpOu" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></section></div><footer class="footer"><div class="container footer__inner"><section class="footer__left"><a class="footer__link" href="/guides/getting-started/">Get Started</a><a class="footer__link" href="/comparison/">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle"><a class="footer__icon" href="/"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/">Awesome webpack</a><a class="footer__link" href="/glossary/">Glossary</a><a class="footer__link" href="/branding/">Branding</a><a href="https://discord.com/invite/5sxFZPdx2k" target="_blank" rel="noopener noreferrer" class="footer__link">Discord</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.1fef42ba6d6669ac.js"></script><script src="/index.0bc9448bd6aeb6c5.js"></script></body>
