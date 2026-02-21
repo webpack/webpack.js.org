@@ -34,9 +34,9 @@ Then register a configuration and load the task:
 **Gruntfile.js**
 
 ```js
-import webpackConfig from "./webpack.config.js";
+const webpackConfig = require("./webpack.config.js");
 
-export default function (grunt) {
+module.exports = function (grunt) {
   grunt.initConfig({
     webpack: {
       options: {
@@ -48,7 +48,7 @@ export default function (grunt) {
   });
 
   grunt.loadNpmTasks("grunt-webpack");
-}
+};
 ```
 
 For more information, please visit the [repository](https://github.com/danez/grunt-webpack).
