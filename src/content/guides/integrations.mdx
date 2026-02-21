@@ -36,7 +36,7 @@ Then register a configuration and load the task:
 ```js
 import webpackConfig from "./webpack.config.js";
 
-module.exports = function (grunt) {
+export default function (grunt) {
   grunt.initConfig({
     webpack: {
       options: {
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
   });
 
   grunt.loadNpmTasks("grunt-webpack");
-};
+}
 ```
 
 For more information, please visit the [repository](https://github.com/danez/grunt-webpack).
@@ -105,7 +105,7 @@ npm install --save-dev webpack karma karma-webpack
 **karma.conf.js**
 
 ```js
-module.exports = function (config) {
+export default function (config) {
   config.set({
     frameworks: ["webpack"],
     files: [
@@ -121,7 +121,7 @@ module.exports = function (config) {
     },
     plugins: ["karma-webpack"],
   });
-};
+}
 ```
 
 For more information, please visit the [repository](https://github.com/webpack-contrib/karma-webpack).
