@@ -32,7 +32,7 @@ export default function Print(props) {
   }
 
   return (
-    <div className="sidebar-item sidebar-item--disabled`">
+    <div className="sidebar-item sidebar-item--disabled">
       <BarIcon
         className="sidebar-item__toggle"
         width={15}
