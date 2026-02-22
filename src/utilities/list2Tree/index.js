@@ -1,6 +1,4 @@
-"use strict";
-
-const findTopLevel = require("./findTopLevel");
+import findTopLevel from "./findTopLevel";
 
 /**
  * @param {string} parent the parent menu text for anchors
@@ -35,4 +33,4 @@ function list2Tree(parent, anchors, topLevel = findTopLevel(anchors)) {
   }
 }
 
-module.exports = list2Tree;
+export default list2Tree;

@@ -1,9 +1,7 @@
-"use strict";
-
 /**
  * Find the minimum level in the anchors
  */
-module.exports = function findTopLevel(anchors = []) {
+export default function findTopLevel(anchors = []) {
   if (anchors.length === 0) return;
   let result = 99;
   for (const anchor of anchors) {
@@ -12,4 +10,4 @@ module.exports = function findTopLevel(anchors = []) {
     }
   }
   return result;
-};
+}

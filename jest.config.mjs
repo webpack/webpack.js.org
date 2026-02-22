@@ -1,6 +1,5 @@
 export default {
   verbose: true,
-  transform: {},
   moduleFileExtensions: [
     "js",
     "mjs",

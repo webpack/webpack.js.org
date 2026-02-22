@@ -1,6 +1,4 @@
-"use strict";
-
-const findTopLevel = require("./findTopLevel");
+import findTopLevel from "./findTopLevel";
 
 describe("findTopLevel", () => {
   it("should return level 1", () => {

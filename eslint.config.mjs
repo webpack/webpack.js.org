@@ -28,6 +28,7 @@ export default defineConfig([
     files: [
       "src/components/**/*.{js,jsx}",
       "src/utilities/test-local-storage.js",
+      "src/utilities/list2Tree/**/*.js",
       "src/*.jsx",
       "src/sw.js",
     ],

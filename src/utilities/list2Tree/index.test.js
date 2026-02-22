@@ -1,6 +1,4 @@
-"use strict";
-
-const list2Tree = require("./index");
+import list2Tree from "./index";
 
 describe("list2Tree", () => {
   it("should return data without any children", () => {
