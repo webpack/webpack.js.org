@@ -1,9 +1,9 @@
 "use strict";
 
 // grab .css files from ssg run
-const fs = require("node:fs");
+import fs from "node:fs";
 
-module.exports = function findFilesInDist(fileSuffixes = []) {
+export default function findFilesInDist(fileSuffixes = []) {
   const filesInDist = fs.readdirSync("./dist");
   return fileSuffixes.length
     ? filesInDist.filter((file) =>

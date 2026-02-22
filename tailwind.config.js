@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = {
+export default {
   content: ["./src/components/**/*.{js,jsx}"],
   darkMode: "class", // or 'media' or 'class'
   theme: {

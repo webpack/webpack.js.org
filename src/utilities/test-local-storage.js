@@ -4,7 +4,7 @@
  * {@link https://github.com/Modernizr/Modernizr/blob/master/feature-detects/storage/localstorage.js}
  * @return {undefined | boolean} Returns false on error.
  */
-module.exports = function testLolcalStorage() {
+export function testLolcalStorage() {
   const test = "localStorageTest";
   try {
     localStorage.setItem(test, test);

@@ -2,4 +2,4 @@
 
 const isClient = globalThis !== undefined && globalThis.document !== undefined;
 
-module.exports = isClient;
+export default isClient;
