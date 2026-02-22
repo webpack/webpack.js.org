@@ -55,6 +55,26 @@ Run `git config user.email` to see your Git email, and verify it with your [GitH
 The [.editorconfig][6] in the root should ensure consistent formatting. Please make sure
 you've [installed the plugin][7] if your text editor needs one.
 
+## Testing
+
+Run the full test suite (lint + Jest) with:
+
+```bash
+yarn test
+```
+
+To run only Jest tests:
+
+```bash
+yarn jest
+```
+
+To update snapshots after intentional UI changes:
+
+```bash
+NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.mjs --updateSnapshot
+```
+
 ## Branching Your Changes
 
 Making a branch in your fork for your contribution is helpful in the following ways:

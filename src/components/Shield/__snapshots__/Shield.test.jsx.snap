@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Shield renders correctly with content and label props 1`] = `
+<img
+  alt="webpack shield"
+  src="https://img.shields.io/npm/v/webpack.svg?label=npm&style=flat-square&maxAge=3600"
+/>
+`;

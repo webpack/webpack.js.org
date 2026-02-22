@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`PageNotFound renders correctly 1`] = `
+<div
+  className="page markdown"
+>
+  <h1>
+    Page Not Found
+  </h1>
+  <p>
+    Oops! The page you are looking for has been removed or relocated.
+  </p>
+  <a
+    className="button"
+    href="/"
+    onClick={[Function]}
+  >
+    Go to Homepage
+  </a>
+</div>
+`;
