@@ -6,9 +6,16 @@
   flex: 0 0 auto;
 }
 
+.footer > p {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .footer__inner {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 40px;
   justify-content: space-between;
   align-content: center;
   padding: 0.4em 0;
@@ -91,4 +98,8 @@
     height: 100%;
     margin-left: 1px;
   }
+}
+
+.footer > p + p {
+  margin-top: 12px;
 }

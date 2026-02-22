@@ -5,8 +5,35 @@ import Container from "../Container/Container.jsx";
 import Link from "../Link/Link.jsx";
 import "./Footer.scss";
 
+const PROJECT_NAME = "webpack";
 const Footer = () => (
   <footer className="footer">
+    <p>
+      Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and{" "}
+      {PROJECT_NAME} contributors. All rights reserved. The{" "}
+      <a href="https://openjsf.org">OpenJS Foundation</a> has registered
+      trademarks and uses trademarks. For a list of trademarks of the{" "}
+      <a href="https://openjsf.org">OpenJS Foundation</a>, please see our{" "}
+      <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and{" "}
+      <a href="https://trademark-list.openjsf.org">Trademark List</a>.
+      Trademarks and logos not indicated on the{" "}
+      <a href="https://trademark-list.openjsf.org">
+        list of OpenJS Foundation trademarks
+      </a>{" "}
+      are trademarks&trade; or registered&reg; trademarks of their respective
+      holders. Use of them does not imply any affiliation with or endorsement by
+      them.
+    </p>
+    <p>
+      <a href="https://openjsf.org">The OpenJS Foundation</a> |{" "}
+      <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |{" "}
+      <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |{" "}
+      <a href="https://bylaws.openjsf.org">Bylaws</a> |{" "}
+      <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |{" "}
+      <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |{" "}
+      <a href="https://trademark-list.openjsf.org">Trademark List</a> |{" "}
+      <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a>
+    </p>
     <Container className="footer__inner">
       <section className="footer__left">
         <Link className="footer__link" to="/guides/getting-started/">
