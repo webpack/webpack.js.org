@@ -49,7 +49,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>./src/index.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code></pre></div>
-<p>We also need to adjust our <code>package.json</code> file in order to make sure we mark our package as <code>private</code>, as well as removing the <code>main</code> entry. This is to prevent an accidental publish of your code.</p>
+<p>We also need to adjust our <code>package.json</code> file in order to make sure we mark our package as <code>private</code>, as well as removing the <code>main</code> entry. We also add <code>&quot;type&quot;: &quot;module&quot;</code> so that Node.js knows to process our configuration files as ES Modules. This is to prevent an accidental publish of your code, as well as enabling ES Module support for our scripts.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>If you want to learn more about the inner workings of <code>package.json</code>, then we recommend reading the <a href="https://docs.npmjs.com/files/package.json">npm documentation</a>.</p></aside>
 <p><strong>package.json</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">{
@@ -58,6 +58,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;description&quot;: &quot;&quot;,
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  &quot;main&quot;: &quot;index.js&quot;,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  &quot;private&quot;: true,
+</span><span class="token prefix inserted">+</span><span class="token line">  &quot;type&quot;: &quot;module&quot;,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  &quot;scripts&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
