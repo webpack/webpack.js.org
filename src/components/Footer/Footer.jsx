@@ -6,10 +6,10 @@ import Link from "../Link/Link.jsx";
 import "./Footer.scss";
 
 const Footer = () => (
-<footer className="footer">
+  <footer className="footer">
     <p>
-      Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and{" "}
-      webpack contributors. All rights reserved. The{" "}
+      Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack
+      contributors. All rights reserved. The{" "}
       <a href="https://openjsf.org">OpenJS Foundation</a> has registered
       trademarks and uses trademarks. For a list of trademarks of the{" "}
       <a href="https://openjsf.org">OpenJS Foundation</a>, please see our{" "}
