@@ -1332,14 +1332,12 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 </span><span class="token prefix unchanged"> </span><span class="token line">   |- print.js
 </span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
 <p><strong>server.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;express&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> webpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> webpackDevMiddleware <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;webpack-dev-middleware&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> express <span class="token keyword">from</span> <span class="token string">&quot;express&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> webpack <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> webpackDevMiddleware <span class="token keyword">from</span> <span class="token string">&quot;webpack-dev-middleware&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> config <span class="token keyword">from</span> <span class="token string">&quot;./webpack.config.js&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./webpack.config.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 <span class="token keyword">const</span> compiler <span class="token operator">=</span> <span class="token function">webpack</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// Tell express to use the webpack-dev-middleware and use the webpack.config.js</span>
