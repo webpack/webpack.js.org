@@ -5,12 +5,11 @@ import Container from "../Container/Container.jsx";
 import Link from "../Link/Link.jsx";
 import "./Footer.scss";
 
-const PROJECT_NAME = "webpack";
 const Footer = () => (
-  <footer className="footer">
+<footer className="footer">
     <p>
       Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and{" "}
-      {PROJECT_NAME} contributors. All rights reserved. The{" "}
+      webpack contributors. All rights reserved. The{" "}
       <a href="https://openjsf.org">OpenJS Foundation</a> has registered
       trademarks and uses trademarks. For a list of trademarks of the{" "}
       <a href="https://openjsf.org">OpenJS Foundation</a>, please see our{" "}
