@@ -605,7 +605,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><a href="https://github.com/webpack/compression-webpack-plugin/main/LICENSE">MIT</a></p>
 <h1><span id="contextexclusionplugin"></span>ContextExclusionPlugin<a href="#contextexclusionplugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<p><em>Context</em> refers to a <a href="/guides/dependency-management/#require-with-expression">require with an expression</a> such as <code>require(&#x27;./locale/&#x27; + name + &#x27;.json&#x27;)</code>.</p>
+<p><em>Context</em> refers to <a href="/guides/dependency-management/#dynamic-expressions-in-import-or-require">dynamic expressions in import() or require()</a> such as <code>require(&#x27;./locale/&#x27; + name + &#x27;.json&#x27;)</code>.</p>
 <p>The <code>ContextExclusionPlugin</code> allows you to exclude context. Provide RegExp as an argument when initializing the Plugin to exclude all context that matches it.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -613,7 +613,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h1><span id="contextreplacementplugin"></span>ContextReplacementPlugin<a href="#contextreplacementplugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
-<p><em>Context</em> refers to a <a href="/guides/dependency-management/#require-with-expression">require with an expression</a> such as <code>require(&#x27;./locale/&#x27; + name + &#x27;.json&#x27;)</code>. When encountering such an expression, webpack infers the directory (<code>&#x27;./locale/&#x27;</code>) and a regular expression (<code>/^.*\.json$/</code>). Since the <code>name</code> is not known at compile time, webpack includes every file as module in the bundle.</p>
+<p><em>Context</em> refers to <a href="/guides/dependency-management/#dynamic-expressions-in-import-or-require">dynamic expressions in import() or require()</a> such as <code>require(&#x27;./locale/&#x27; + name + &#x27;.json&#x27;)</code>. When encountering such an expression, webpack infers the directory (<code>&#x27;./locale/&#x27;</code>) and a regular expression (<code>/^.*\.json$/</code>). Since the <code>name</code> is not known at compile time, webpack includes every file as module in the bundle.</p>
 <p>The <code>ContextReplacementPlugin</code> allows you to override the inferred information. There are various ways to configure the plugin:</p>
 <h2><span id="usage"></span>Usage<a href="#usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-typescript"><span class="token keyword">new</span> <span class="token class-name">webpack</span><span class="token punctuation">.</span><span class="token function">ContextReplacementPlugin</span><span class="token punctuation">(</span>
