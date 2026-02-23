@@ -23,13 +23,13 @@ bundles in the body using `script` tags. Add the plugin to your webpack
 configuration as follows:
 
 ```javascript
-const path = require("node:path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+import path from "node:path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
-module.exports = {
+export default {
   entry: "index.js",
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(import.meta.dirname, "./dist"),
     filename: "index_bundle.js",
   },
   plugins: [new HtmlWebpackPlugin()],

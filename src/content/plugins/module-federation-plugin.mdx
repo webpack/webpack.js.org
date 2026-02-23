@@ -15,8 +15,11 @@ related:
 The `ModuleFederationPlugin` allows a build to provide or consume modules with other independent builds at runtime.
 
 ```ts
-const { ModuleFederationPlugin } = require("webpack").container;
-module.exports = {
+import webpack from "webpack";
+
+const { ModuleFederationPlugin } = webpack.container;
+
+export default {
   plugins: [
     new ModuleFederationPlugin({
       // options' typings in typescript
@@ -40,9 +43,11 @@ Create a new runtime chunk with the specified name.
 **webpack.config.js**
 
 ```js
-const { ModuleFederationPlugin } = require("webpack").container;
+import webpack from "webpack";
 
-module.exports = {
+const { ModuleFederationPlugin } = webpack.container;
+
+export default {
   plugins: [
     new ModuleFederationPlugin({
       runtime: "my-runtime-name",
@@ -56,9 +61,11 @@ module.exports = {
 With the `shared` key in the configuration you can define libraries that are shared between your federated modules. The package name is the same as the one found in the `dependencies` section of your package.json. However, by default webpack will only share the root level of a library.
 
 ```js
-const { ModuleFederationPlugin } = require("webpack").container;
+import webpack from "webpack";
 
-module.exports = {
+const { ModuleFederationPlugin } = webpack.container;
+
+export default {
   plugins: [
     new ModuleFederationPlugin({
       // adds date-fns as shared module
@@ -80,9 +87,11 @@ and webpack will automatically share `date-fns` between all your federated modul
 However, if you want to access something that is not located at the root level of the package, for example `date-fns/locale/en-GB/index.js`, you need to append `/` to the package name in your `shared` configuration:
 
 ```js
-const { ModuleFederationPlugin } = require("webpack").container;
+import webpack from "webpack";
 
-module.exports = {
+const { ModuleFederationPlugin } = webpack.container;
+
+export default {
   plugins: [
     new ModuleFederationPlugin({
       // adds date-fns as shared module
@@ -104,9 +113,11 @@ There are three ways to specify the versions of shared libraries.
 This syntax allows you to share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given that libraries like `react` and `react-dom` will require additional requirements.
 
 ```js
-const { ModuleFederationPlugin } = require("webpack").container;
+import webpack from "webpack";
 
-module.exports = {
+const { ModuleFederationPlugin } = webpack.container;
+
+export default {
   plugins: [
     new ModuleFederationPlugin({
       // adds lodash as shared module
@@ -124,7 +135,7 @@ module.exports = {
 This syntax provides you more control over each shared library in which you can define package name as the key and version ([semver](https://semver.org/)) as the value.
 
 ```js
-module.exports = {
+export default {
   plugins: [
     new ModuleFederationPlugin({
       shared: {
@@ -143,9 +154,13 @@ module.exports = {
 This syntax allows you to provide additional [hints](#sharing-hints) to each shared package where you define the package name as the key, and the value as an object containing hints to modify sharing behavior.
 
 ```js
-const deps = require("./package.json").dependencies;
+import { readFileSync } from "node:fs";
 
-module.exports = {
+const deps = JSON.parse(
+  readFileSync(new URL("./package.json", import.meta.url)),
+).dependencies;
+
+export default {
   plugins: [
     new ModuleFederationPlugin({
       shared: {
@@ -223,7 +238,7 @@ By default, webpack uses the version from the `package.json` file of the depende
 #### **Additional examples**
 
 ```js
-module.exports = {
+export default {
   plugins: [
     new ModuleFederationPlugin({
       // adds vue as shared module
@@ -241,7 +256,7 @@ module.exports = {
 ```
 
 ```js
-module.exports = {
+export default {
   plugins: [
     new ModuleFederationPlugin({
       // adds vue as shared module
@@ -259,7 +274,7 @@ module.exports = {
 ```
 
 ```js
-module.exports = {
+export default {
   plugins: [
     new ModuleFederationPlugin({
       // adds vue as shared module
@@ -278,7 +293,7 @@ module.exports = {
 ```
 
 ```js
-module.exports = {
+export default {
   plugins: [
     new ModuleFederationPlugin({
       shared: {

@@ -60,7 +60,7 @@ The following examples demonstrate some common use cases for this plugin.
 You can use the following code to replace the configuration option `devtool: eval-source-map` with an equivalent custom plugin configuration:
 
 ```js
-module.exports = {
+export default {
   // ...
   devtool: false,
   plugins: [new webpack.EvalSourceMapDevToolPlugin({})],

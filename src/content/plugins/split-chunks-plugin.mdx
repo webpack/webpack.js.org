@@ -58,7 +58,7 @@ This configuration object represents the default behavior of the `SplitChunksPlu
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -107,7 +107,7 @@ Note that it is applied to the fallback cache group as well (`splitChunks.fallba
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -121,7 +121,7 @@ module.exports = {
 Alternatively, you may provide a function for more control. The return value will indicate whether to include each chunk.
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -137,7 +137,7 @@ module.exports = {
 If you are using webpack version 5.86.0 or later, you can also pass a regular expression:
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -277,7 +277,7 @@ console.log(_.join(["Hello", "webpack"], " "));
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -321,7 +321,7 @@ Cache groups can inherit and/or override any options from `splitChunks.*`; but `
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -348,7 +348,7 @@ If the current chunk contains modules already split out from the main bundle, it
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -371,7 +371,7 @@ Allows to assign modules to a cache group by module type.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -398,7 +398,9 @@ Providing a function to`{cacheGroup}.test`:
 **webpack.config.js**
 
 ```js
-module.exports = {
+import path from "node:path";
+
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -407,7 +409,6 @@ module.exports = {
           test(module) {
             // `module.resource` contains the absolute path of the file on disk.
             // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
-            const path = require("node:path");
 
             return (
               module.resource &&
@@ -434,7 +435,7 @@ Providing a `RegExp` to `{cacheGroup}.test`:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -461,7 +462,7 @@ W> This option can also be set globally in `splitChunks.filename`, but this isn'
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -480,7 +481,7 @@ And as a function:
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -501,7 +502,7 @@ It is possible to create a folder structure by providing path prefixing the file
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -524,7 +525,7 @@ Tells webpack to ignore [`splitChunks.minSize`](#splitchunksminsize), [`splitChu
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -547,7 +548,7 @@ Sets the hint for chunk id. It will be added to chunk's filename.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -632,7 +633,7 @@ Create a `commons` chunk, which includes all code shared between entry points.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -657,7 +658,7 @@ Create a `vendors` chunk, which includes all code from `node_modules` in the who
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
@@ -682,7 +683,7 @@ Create a `custom vendor` chunk, which contains certain `node_modules` packages m
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   optimization: {
     splitChunks: {
