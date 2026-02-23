@@ -86,6 +86,8 @@ module.exports = {
 
 It's possible to specify loaders in an `import` statement, or any [equivalent "importing" method](/api/module-methods). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
 
+T> The `loader1!loader2!./file` syntax is shown for illustration. In most projects, prefer configuring loaders via `module.rules` and importing styles for their side effects (e.g. `import "./styles.css"`).
+
 ```js
 import * as styles from "style-loader!css-loader?modules!./styles.css";
 ```

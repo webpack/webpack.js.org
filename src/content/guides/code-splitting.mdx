@@ -405,6 +405,20 @@ As `import()` returns a promise, it can be used with [`async` functions](https:/
 
 T> It is possible to provide a [dynamic expression](/api/module-methods/#dynamic-expressions-in-import) to `import()` when you might need to import specific module based on a computed variable later.
 
+### Understanding ChunkLoadError
+
+When using dynamic `import()` or code splitting, webpack may throw a `ChunkLoadError` if a chunk fails to load at runtime.
+
+This error typically indicates that the requested chunk could not be executed or resolved properly. In some cases, the browser’s underlying network or script loading error may not be fully reflected in the `ChunkLoadError` message itself.
+
+If you encounter this error:
+
+- Verify that the chunk file is accessible via the network.
+- Check that the `publicPath` is correctly configured.
+- Inspect the browser console for additional script or network errors.
+
+For more context, see related discussion in the webpack issue tracker.
+
 ## Prefetching/Preloading modules
 
 Webpack 4.6.0+ adds support for prefetching and preloading.

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Logo renders correctly 1`] = `
+<img
+  alt="webpack logo"
+  className="logo"
+  height={35}
+  src="svg-mock"
+  width={122}
+/>
+`;

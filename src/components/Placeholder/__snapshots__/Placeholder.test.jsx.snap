@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`PlaceholderComponent renders correctly 1`] = `
+<div
+  className="placeholder"
+>
+  <p>
+     
+  </p>
+  <p>
+     
+  </p>
+  <p>
+     
+  </p>
+</div>
+`;
