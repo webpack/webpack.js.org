@@ -432,10 +432,10 @@ compiler<span class="token punctuation">.</span><span class="token function">run
 <h1><span id="configuration"></span>Configuration<a href="#configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>You may have noticed that few webpack configurations look exactly alike. This is because <strong>webpack&#x27;s configuration file is a JavaScript file that exports a webpack <a href="/configuration/">configuration</a>.</strong> This configuration is then processed by webpack based upon its defined properties.</p>
-<p>Because it&#x27;s a standard Node.js CommonJS module, you <strong>can do the following</strong>:</p>
+<p>Because it&#x27;s a standard Node.js module, you <strong>can do the following</strong>:</p>
 <ul>
-<li>Import other files via <code>require(...)</code></li>
-<li>use utilities on npm via <code>require(...)</code></li>
+<li>Import other files via <code>require(...)</code> <strong>or</strong> <code>import</code></li>
+<li>Use utilities on npm via <code>require(...)</code> <strong>or</strong> <code>import</code></li>
 <li>use JavaScript control flow expressions, e.g. the <code>?:</code> operator</li>
 <li>use constants or variables for often used values</li>
 <li>write and execute functions to generate a part of the configuration</li>
@@ -451,9 +451,14 @@ compiler<span class="token punctuation">.</span><span class="token function">run
 <p>The examples below describe how webpack&#x27;s configuration can be both expressive and configurable because <em>it is code</em>:</p>
 <h2><span id="introductory-configuration"></span>Introductory Configuration<a href="#introductory-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token comment">// For compatibility with older Node.js versions</span>
+<span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   mode<span class="token operator">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./foo.js&quot;</span><span class="token punctuation">,</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
