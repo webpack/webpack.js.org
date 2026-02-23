@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`OfflineBanner renders the offline banner when offline 1`] = `
+<div
+  aria-live="polite"
+  className="offline-banner"
+  data-testid="offline-banner"
+  role="status"
+>
+  <span
+    aria-hidden="true"
+    className="offline-banner__icon"
+  >
+    ⚠
+  </span>
+  <span
+    className="offline-banner__text"
+  >
+    You are offline. Some features may be unavailable.
+  </span>
+</div>
+`;
+
+exports[`OfflineBanner shows banner when window goes offline 1`] = `
+<div
+  aria-live="polite"
+  className="offline-banner"
+  data-testid="offline-banner"
+  role="status"
+>
+  <span
+    aria-hidden="true"
+    className="offline-banner__icon"
+  >
+    ⚠
+  </span>
+  <span
+    className="offline-banner__text"
+  >
+    You are offline. Some features may be unavailable.
+  </span>
+</div>
+`;

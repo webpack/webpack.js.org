@@ -1,0 +1,28 @@
+.offline-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #fef3cd;
+  color: #856404;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  border-bottom: 1px solid #ffc107;
+
+  &__icon {
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+
+  &__text {
+    font-weight: 500;
+  }
+}
+
+:global(.dark) .offline-banner {
+  background-color: #3b3015;
+  color: #ffc107;
+  border-bottom-color: #665d1e;
+}

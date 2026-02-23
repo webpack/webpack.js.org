@@ -29,6 +29,7 @@ import isClient from "../../utilities/is-client.js";
 import Container from "../Container/Container.jsx";
 import Footer from "../Footer/Footer.jsx";
 import Navigation from "../Navigation/Navigation.jsx";
+import OfflineBanner from "../OfflineBanner/OfflineBanner.jsx";
 import Page from "../Page/Page.jsx";
 import PageNotFound from "../PageNotFound/PageNotFound.jsx";
 import Sidebar from "../Sidebar/Sidebar.jsx";
@@ -245,6 +246,8 @@ function Site(props) {
           ]}
         />
       </div>
+
+      <OfflineBanner />
 
       {isClient ? (
         <SidebarMobile
