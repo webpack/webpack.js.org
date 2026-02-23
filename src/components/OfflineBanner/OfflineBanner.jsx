@@ -31,12 +31,14 @@ export default function OfflineBanner() {
       aria-live="polite"
       data-testid="offline-banner"
     >
-      <span className="offline-banner__icon" aria-hidden="true">
-        ⚠
-      </span>
-      <span className="offline-banner__text">
-        You are offline. Some features may be unavailable.
-      </span>
+      <div className="offline-banner__content">
+        <span className="offline-banner__icon" aria-hidden="true">
+          📡
+        </span>
+        <span className="offline-banner__text">
+          You're currently offline. Some features may be unavailable.
+        </span>
+      </div>
     </div>
   );
 }

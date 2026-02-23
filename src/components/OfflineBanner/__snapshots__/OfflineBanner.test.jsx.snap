@@ -7,17 +7,21 @@ exports[`OfflineBanner renders the offline banner when offline 1`] = `
   data-testid="offline-banner"
   role="status"
 >
-  <span
-    aria-hidden="true"
-    className="offline-banner__icon"
+  <div
+    className="offline-banner__content"
   >
-    ⚠
-  </span>
-  <span
-    className="offline-banner__text"
-  >
-    You are offline. Some features may be unavailable.
-  </span>
+    <span
+      aria-hidden="true"
+      className="offline-banner__icon"
+    >
+      📡
+    </span>
+    <span
+      className="offline-banner__text"
+    >
+      You're currently offline. Some features may be unavailable.
+    </span>
+  </div>
 </div>
 `;
 
@@ -28,16 +32,20 @@ exports[`OfflineBanner shows banner when window goes offline 1`] = `
   data-testid="offline-banner"
   role="status"
 >
-  <span
-    aria-hidden="true"
-    className="offline-banner__icon"
+  <div
+    className="offline-banner__content"
   >
-    ⚠
-  </span>
-  <span
-    className="offline-banner__text"
-  >
-    You are offline. Some features may be unavailable.
-  </span>
+    <span
+      aria-hidden="true"
+      className="offline-banner__icon"
+    >
+      📡
+    </span>
+    <span
+      className="offline-banner__text"
+    >
+      You're currently offline. Some features may be unavailable.
+    </span>
+  </div>
 </div>
 `;

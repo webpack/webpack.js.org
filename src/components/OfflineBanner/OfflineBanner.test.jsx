@@ -54,7 +54,7 @@ describe("OfflineBanner", () => {
     const { root } = renderer.create(<OfflineBanner />);
     const textEl = root.findByProps({ className: "offline-banner__text" });
     expect(textEl.children).toContain(
-      "You are offline. Some features may be unavailable.",
+      "You're currently offline. Some features may be unavailable.",
     );
   });
 
