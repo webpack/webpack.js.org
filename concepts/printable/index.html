@@ -333,6 +333,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="inline"></span>Inline<a href="#inline" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>It&#x27;s possible to specify loaders in an <code>import</code> statement, or any <a href="/api/module-methods">equivalent &quot;importing&quot; method</a>. Separate loaders from the resource with <code>!</code>. Each part is resolved relative to the current directory.</p>
+<aside class="tip"><p class="tip__prefix">tip</p><p>The <code>loader1!loader2!./file</code> syntax is shown for illustration. In most projects, prefer configuring loaders via <code>module.rules</code> and importing styles for their side effects (e.g. <code>import &quot;./styles.css&quot;</code>).</p></aside>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> styles <span class="token keyword">from</span> <span class="token string">&quot;style-loader!css-loader?modules!./styles.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>It&#x27;s possible to override any loaders, preLoaders and postLoaders from the <a href="/configuration">configuration</a> by prefixing the inline <code>import</code> statement:</p>
 <ul>
