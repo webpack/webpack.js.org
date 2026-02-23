@@ -9,13 +9,7 @@ contributors:
   - AnayaDesign
 ---
 
-> es6 modules
-
-> commonjs
-
-> amd
-
-## require with expression
+## Dynamic expressions in import() or require()
 
 A context is created if your request contains expressions, so the **exact** module is not known on compile time.
 
@@ -32,13 +26,14 @@ example_directory
 │       │   another.ejs
 ```
 
-When following `require()` call is evaluated:
+When following `import()` or `require()` call is evaluated:
 
 ```javascript
+import(`./template/${name}.ejs`);
 require(`./template/${name}.ejs`);
 ```
 
-Webpack parses the `require()` call and extracts some information:
+Webpack parses the `import()` or `require()` call and extracts some information:
 
 ```code
 Directory: ./template
@@ -61,7 +56,21 @@ Example map:
 
 The context module also contains some runtime logic to access the map.
 
-This means dynamic requires are supported but will cause all matching modules to be included in the bundle.
+This means dynamic calls are supported but will cause all matching modules to be included in the bundle.
+
+## import.meta.webpackContext
+
+The ESM equivalent of `require.context` is `import.meta.webpackContext`.
+
+```javascript
+import.meta.webpackContext(directory, {
+  recursive: true,
+  regExp: /^\.\/.*$/,
+  mode: "sync",
+});
+```
+
+W> The arguments passed to `import.meta.webpackContext` must be literals!
 
 ## require.context
 
@@ -115,7 +124,12 @@ function importAll(r) {
   r.keys().forEach(r);
 }
 
-importAll(require.context("../components/", true, /\.js$/));
+importAll(
+  import.meta.webpackContext("../components/", {
+    recursive: true,
+    regExp: /\.js$/,
+  }),
+);
 ```
 
 ```javascript
@@ -125,8 +139,13 @@ function importAll(r) {
   for (const key of r.keys()) cache[key] = r(key);
 }
 
-importAll(require.context("../components/", true, /\.js$/));
+importAll(
+  import.meta.webpackContext("../components/", {
+    recursive: true,
+    regExp: /\.js$/,
+  }),
+);
 // At build-time cache will be populated with all required modules.
 ```
 
-- `id` is the module id of the context module. This may be useful for `module.hot.accept`.
+- `id` is the module id of the context module. This may be useful for `import.meta.webpackHot.accept` or `module.hot.accept`.

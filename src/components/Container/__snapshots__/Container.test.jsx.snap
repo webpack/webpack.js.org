@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Container renders correctly with children and className 1`] = `
+<div
+  className="container test-class"
+>
+  <p>
+    Child content
+  </p>
+</div>
+`;
+
+exports[`Container renders correctly without className 1`] = `
+<div
+  className="container "
+>
+  <span>
+    Simple child
+  </span>
+</div>
+`;

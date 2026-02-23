@@ -3,6 +3,7 @@ title: Extends
 sort: 12
 contributors:
   - burhanuday
+  - tusharthakur04
 ---
 
 ## extends
@@ -132,6 +133,90 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
     filename: "[name].bundle.js",
   },
+};
+```
+
+## Concatinating rules and plugins
+
+While primitive values (such as strings) are overridden, array fields are concatenated instead of replaced. This behavior comes from webpack-merge, which Webpack uses internally when processing extends.
+
+**base.webpack.config.js**
+
+```javascript
+const webpack = require("webpack");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: "babel-loader",
+      },
+    ],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      __DEV__: false,
+    }),
+  ],
+};
+```
+
+**webpack.config.js**
+
+```javascript
+const path = require("node:path");
+const webpack = require("webpack");
+
+module.exports = {
+  extends: path.resolve(__dirname, "./base.webpack.config.js"),
+
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+};
+```
+
+**Result after merging**
+
+Instead of module being replaced the rules and plugins array got concatenated
+
+```javascript
+const webpack = require("webpack");
+
+module.exports = {
+  module: {
+    rules: [
+      // From base.webpack.config.js
+      {
+        test: /\.js$/,
+        use: "babel-loader",
+      },
+
+      // From webpack.config.js (appended)
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+
+  plugins: [
+    // From base.webpack.config.js
+    new webpack.DefinePlugin({
+      __DEV__: false,
+    }),
+
+    // From webpack.config.js (appended)
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
 ```
 
