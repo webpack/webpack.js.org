@@ -101,9 +101,14 @@ Virtualize the routing file
 
 ```javascript
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import webpack from "webpack";
 
-const watchDir = path.join(import.meta.dirname, "./src/routes");
+// For compatibility with older Node.js versions
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const watchDir = path.join(__dirname, "./src/routes");
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
   routes: {

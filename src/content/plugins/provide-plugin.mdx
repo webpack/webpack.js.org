@@ -33,9 +33,14 @@ It is also possible to specify full path:
 
 ```javascript
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+// For compatibility with older Node.js versions
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 new webpack.ProvidePlugin({
-  identifier: path.resolve(path.join(import.meta.dirname, "src/module1")),
+  identifier: path.resolve(path.join(__dirname, "src/module1")),
   // ...
 });
 ```

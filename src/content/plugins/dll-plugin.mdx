@@ -85,11 +85,16 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
 ```javascript
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+// For compatibility with older Node.js versions
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 new webpack.DllPlugin({
   context: import.meta.dirname,
   name: "[name]_[fullhash]",
-  path: path.join(import.meta.dirname, "manifest.json"),
+  path: path.join(__dirname, "manifest.json"),
 });
 ```
 
@@ -97,10 +102,15 @@ new webpack.DllPlugin({
 
 ```javascript
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+// For compatibility with older Node.js versions
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 new webpack.DllReferencePlugin({
-  context: import.meta.dirname,
-  manifest: path.join(import.meta.dirname, "manifest.json"),
+  context: __dirname,
+  manifest: path.join(__dirname, "manifest.json"),
   scope: "xyz",
   sourceType: "commonjs2",
 });

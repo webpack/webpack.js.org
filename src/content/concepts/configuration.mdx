@@ -36,12 +36,17 @@ The examples below describe how webpack's configuration can be both expressive a
 
 ```javascript
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+// For compatibility with older Node.js versions
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   mode: "development",
   entry: "./foo.js",
   output: {
-    path: path.resolve(import.meta.dirname, "dist"),
+    path: path.resolve(__dirname, "dist"),
     filename: "foo.bundle.js",
   },
 };
