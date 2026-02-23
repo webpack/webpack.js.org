@@ -36,7 +36,7 @@ export default function OfflineBanner() {
           📡
         </span>
         <span className="offline-banner__text">
-          You're currently offline. Some features may be unavailable.
+          You&apos;re currently offline. Some features may be unavailable.
         </span>
       </div>
     </div>
