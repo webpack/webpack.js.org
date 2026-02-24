@@ -12,7 +12,7 @@ const Footer = () => (
       <div className="footer__openjs">
         <a href="https://openjsf.org" target="_blank" rel="noopener noreferrer">
           <img
-            className="OpenJSLogo"
+            className="footer-openjsf-logo"
             src={OpenJSLogo}
             alt="OpenJS Foundation Logo"
             width={110}
