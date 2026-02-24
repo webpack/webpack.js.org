@@ -218,6 +218,7 @@ function Site(props) {
         <meta name="msapplication-TileColor" content="#465e69" />
       </Helmet>
       <div className="site__header">
+        <OfflineBanner />
         <Navigation
           pathname={location.pathname}
           hash={location.hash}
@@ -246,8 +247,6 @@ function Site(props) {
           ]}
         />
       </div>
-
-      <OfflineBanner />
 
       {isClient ? (
         <SidebarMobile
