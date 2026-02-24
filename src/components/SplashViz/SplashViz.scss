@@ -59,3 +59,16 @@
     z-index: 1;
   }
 }
+@media (max-width: 768px) {
+  .splash-viz {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+
+    &__cube {
+      position: relative; // IMPORTANT: remove absolute positioning
+      grid-row: 2 / 4; // span row 2 to 3
+      align-self: center;
+      justify-self: center;
+    }
+  }
+}
