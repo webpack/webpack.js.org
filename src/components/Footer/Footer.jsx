@@ -11,7 +11,12 @@ const Footer = () => (
     <Container className="footer__top">
       <div className="footer__openjs">
         <a href="https://openjsf.org" target="_blank" rel="noopener noreferrer">
-          <img src={OpenJSLogo} alt="OpenJS Foundation Logo" width={110} />
+          <img
+            className="OpenJSLogo"
+            src={OpenJSLogo}
+            alt="OpenJS Foundation Logo"
+            width={110}
+          />
         </a>
       </div>
       <p>
