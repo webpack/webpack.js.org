@@ -98,6 +98,8 @@
     "@octokit/rest": "^22.0.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@svgr/webpack": "^8.1.0",
+    "ajv": "^8.18.0",
+    "ajv-keywords": "^5.1.0",
     "autoprefixer": "^10.4.24",
     "babel-loader": "^10.0.0",
     "copy-webpack-plugin": "^13.0.1",
