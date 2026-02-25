@@ -120,10 +120,17 @@ files are emitted.</p>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>We can also pass an array of file paths to the <code>entry</code> property which creates what is known as a <strong>&quot;multi-main entry&quot;</strong>. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one &quot;chunk&quot;.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./src/file_1.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./src/file_2.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>When an array is provided for an entry point, webpack still creates a <strong>single entry chunk</strong>.
+All modules in the array are loaded in the given order and combined into the same dependency graph.</p>
+<p>This pattern is commonly used to inject additional code before the main application entry,
+such as polyfills or development-only tools, without manually importing them in the application source.</p>
+<p><strong>Example: Injecting a polyfill</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
+    main<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;@babel/polyfill&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Single Entry Syntax is a great choice when you are looking to quickly set up a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.</p>
