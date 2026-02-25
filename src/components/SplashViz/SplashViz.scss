@@ -5,7 +5,7 @@
 .splash-viz {
   position: relative;
   height: calc(100vh - 56px);
-  min-height: 320px;
+  min-height: 450px;
   max-height: 720px;
   background: getColor(elephant);
   display: grid;
@@ -39,12 +39,10 @@
     display: none;
     grid-row: 2/3;
     @include break {
-      display: block; // Get height of its child svg
+      display: block;
     }
 
     img {
-      // Padding is needed to center align
-      // webpack icon with the module image
       padding-top: 1rem;
       width: 100%;
       height: 100%;
