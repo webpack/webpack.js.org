@@ -2444,7 +2444,7 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 __webpack_nonce__ <span class="token operator">=</span> <span class="token string">&quot;c29tZSBjb29sIHN0cmluZyB3aWxsIHBvcCB1cCAxMjM=&quot;</span><span class="token punctuation">;</span>
 <span class="token comment">// ...</span></code></pre></div>
 <h2><span id="enabling-csp"></span>Enabling CSP<a href="#enabling-csp" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>Please note that CSPs are not enabled by default. A corresponding header <code>Content-Security-Policy</code> or meta tag <code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; ...&gt;</code> needs to be sent with the document to instruct the browser to enable the CSP. Here&#x27;s an example of what a CSP header including a CDN white-listed URL might look like:</p>
+<p>Please note that CSPs are not enabled by default. A corresponding header <code>Content-Security-Policy</code> or meta tag <code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; ...&gt;</code> needs to be sent with the document to instruct the browser to enable the CSP. Here&#x27;s an example of what a CSP header including a CDN allow-listed URL might look like:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre class="code-block"><code class="hljs language-html">Content-Security-Policy: default-src &#x27;self&#x27;; script-src &#x27;self&#x27;
 https://trusted.cdn.com;</code></pre></div>
 <p>For more information on CSP and <code>nonce</code> attribute, please refer to <strong>Further Reading</strong> section at the bottom of this page.</p>
