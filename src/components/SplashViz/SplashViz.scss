@@ -4,21 +4,23 @@
 
 .splash-viz {
   position: relative;
-  display: flex;
-  height: calc(100vh - 55px);
+  height: calc(100vh - 56px);
   min-height: 320px;
   max-height: 720px;
   background: getColor(elephant);
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   overflow: hidden;
+  padding-bottom: 4rem;
 
   &__heading {
     color: getColor(white);
     font-size: getFontSize(4);
     text-align: center;
     font-weight: 200;
-    margin-top: 130px;
+    margin-top: 80px;
 
+    grid-row: 1/2;
     @include break {
       font-size: getFontSize(5);
       margin-top: 110px;
@@ -29,13 +31,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 75vw;
+    width: 60vw;
     min-width: 550px;
-    max-width: map-get($screens, large);
+    max-width: map-get($screens, medium);
     margin: 0 auto;
     transform: translate(-50%, -50%);
     display: none;
-
+    grid-row: 2/3;
     @include break {
       display: block; // Get height of its child svg
     }
@@ -43,7 +45,7 @@
     img {
       // Padding is needed to center align
       // webpack icon with the module image
-      padding-top: 1.5em;
+      padding-top: em;
       width: 100%;
       height: 100%;
     }
@@ -57,18 +59,15 @@
     bottom: 0;
     margin: auto;
     z-index: 1;
+    grid-row: 2/3;
   }
 }
 @media (max-width: 768px) {
   .splash-viz {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-
+    padding: 1rem;
     &__cube {
-      position: relative; // IMPORTANT: remove absolute positioning
-      grid-row: 2 / 4; // span row 2 to 3
-      align-self: center;
-      justify-self: center;
+      position: relative;
+      grid-row: 2 / 3;
     }
   }
 }
