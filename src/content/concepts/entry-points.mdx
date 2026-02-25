@@ -48,9 +48,7 @@ We can also pass an array of file paths to the `entry` property which creates wh
 module.exports = {
   entry: ["./src/file_1.js", "./src/file_2.js"],
 };
-
-
-
+```
 
 When an array is provided for an entry point, webpack still creates a **single entry chunk**.
 All modules in the array are loaded in the given order and combined into the same dependency graph.
