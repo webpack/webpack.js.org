@@ -93,9 +93,7 @@ export default function CodeBlockWithCopy({ children }) {
             : "Copy"}
       </button>
 
-      <pre ref={preRef} className="code-block">
-        {children}
-      </pre>
+      <pre ref={preRef}>{children}</pre>
     </div>
   );
 }
