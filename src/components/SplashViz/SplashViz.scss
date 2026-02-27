@@ -4,9 +4,9 @@
 
 .splash-viz {
   position: relative;
-  height: calc(100vh - 56px);
+  // height: calc(100vh - 56px);
   min-height: 650px;
-  max-height: 720px;
+  height: clamp(500px, calc(100vh - 56px), 700px);
   background: getColor(elephant);
   display: grid;
   grid-template-rows: auto 1fr;
@@ -65,7 +65,6 @@
 @media (max-width: 1024px) {
   .splash-viz {
     min-height: 480px;
-    max-height: 680px;
   }
 }
 
