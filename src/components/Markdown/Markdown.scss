@@ -359,13 +359,15 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   }
 
   pre {
-    background-color: rgba(238, 238, 238, 0.35);
-    background-color: getColor(elephant);
-    font-size: 13px;
-    line-height: 19px;
-    overflow: auto;
-    padding: 15px 16px;
+    background-color: #2d3748;
+    color: #e2e8f0;
+    padding: 1rem;
+    padding-right: 3.5rem;
     border-radius: 3px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    overflow: auto;
 
     code {
       margin: 0;
@@ -375,6 +377,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       background: transparent;
       text-shadow: 0 1px 0 transparentize(darken(getColor(elephant), 10%), 0.5);
       color: desaturate(getColor(malibu), 40%);
+      font-family: monospace;
 
       .code-details-summary-span {
         margin-left: -15px;
