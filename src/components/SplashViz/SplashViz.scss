@@ -5,7 +5,7 @@
 .splash-viz {
   position: relative;
   height: calc(100vh - 56px);
-  min-height: 425px;
+  min-height: 650px;
   max-height: 720px;
   background: getColor(elephant);
   display: grid;
@@ -24,7 +24,7 @@
     grid-row: 1/2;
     @include break {
       font-size: getFontSize(5);
-      margin-top: 110px;
+      margin-top: 90px;
     }
   }
 
@@ -51,7 +51,7 @@
   }
 
   &__cube {
-    position: relative; // changed from absolute
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -59,5 +59,18 @@
     margin: auto;
     z-index: 1;
     grid-row: 2/3;
+  }
+}
+
+@media (max-width: 1024px) {
+  .splash-viz {
+    min-height: 480px;
+    max-height: 680px;
+  }
+}
+
+@media (max-width: 425px) {
+  .splash-viz {
+    min-height: 570px;
   }
 }
