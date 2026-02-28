@@ -2357,7 +2357,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </code></pre></div>
 <blockquote>
 <p>[!NOTE]</p>
-<p>You also need to install <code>eslint &gt;= 8</code> from npm, if you haven&#x27;t already:</p>
+<p>You also need to install <code>eslint &gt;= 9</code> from npm, if you haven&#x27;t already:</p>
 </blockquote>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-console">npm install eslint --save-dev
 </code></pre></div>
@@ -2376,16 +2376,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token comment">// ...</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>You can pass <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions">ESLint Node.js API options</a>.</p>
+<p>You can pass <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslintoptions">ESLint Node.js API options</a>.</p>
 <blockquote>
 <p>[!NOTE]</p>
 <p>The config option you provide will be passed to the <code>ESLint</code> class.
-This is a different set of options than what you&#x27;d specify in <code>package.json</code> or <code>eslint.config.js</code> (since ESLint v9.0.0, formerly <code>.eslintrc</code>).
-See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions">ESlint docs</a> for more details.</p>
-</blockquote>
-<blockquote>
-<p>[!WARNING]</p>
-<p>In eslint-webpack-plugin version 1 the options were passed to the now-deprecated <a href="https://eslint.org/docs/developer-guide/nodejs-api#cliengine">CLIEngine</a>.</p>
+See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslintoptions">ESlint docs</a> for more details.</p>
 </blockquote>
 <h3><span id="cache"></span><code>cache</code><a href="#cache" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <ul>
@@ -2415,10 +2410,10 @@ See the <a href="https://eslint.org/docs/developer-guide/nodejs-api#-new-eslinto
 </ul>
 <p>Specify the type of configuration to use with ESLint.</p>
 <ul>
-<li><code>eslintrc</code> is the classic configuration format available in most ESLint versions.</li>
-<li><code>flat</code> is the new format introduced in ESLint 8.21.0.</li>
+<li><code>flat</code> is the current standard configuration format.</li>
+<li><code>eslintrc</code> is the legacy configuration format and has been officially deprecated.</li>
 </ul>
-<p>The new configuration format is explained in its <a href="https://eslint.org/docs/latest/use/configure/configuration-files-new">own documentation</a>.</p>
+<p>The new configuration format is explained in its <a href="https://eslint.org/docs/latest/use/configure/configuration-files">own documentation</a>.</p>
 <h3><span id="context"></span><code>context</code><a href="#context" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <ul>
 <li>Type:</li>
@@ -2484,7 +2479,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Default: <code>false</code></li>
 </ul>
-<p>Will enable <a href="https://eslint.org/docs/developer-guide/nodejs-api#-eslintoutputfixesresults">ESLint autofix feature</a>.</p>
+<p>Will enable <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-eslintoutputfixesresults">ESLint autofix feature</a>.</p>
 <p><strong>Be careful: this option will modify source files.</strong></p>
 <h3><span id="formatter"></span><code>formatter</code><a href="#formatter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <ul>
