@@ -4,9 +4,7 @@
 
 .splash-viz {
   position: relative;
-  // height: calc(100vh - 56px);
-  min-height: 650px;
-  height: clamp(500px, calc(100vh - 56px), 700px);
+  height: clamp(35rem, calc(100vh - 80px), 45rem);
   background: getColor(elephant);
   display: grid;
   grid-template-rows: auto 1fr;
@@ -64,12 +62,12 @@
 
 @media (max-width: 1024px) {
   .splash-viz {
-    min-height: 480px;
+    height: clamp(30rem, calc(100vh - 80px), 35rem);
   }
 }
 
 @media (max-width: 425px) {
   .splash-viz {
-    min-height: 570px;
+    min-height: clamp(40rem, calc(100vh - 80px), 50rem);
   }
 }
