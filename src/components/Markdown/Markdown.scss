@@ -357,7 +357,11 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   a code {
     color: $text-color-highlight;
   }
-
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
   pre {
     background-color: #2d3748;
     color: #e2e8f0;
