@@ -228,7 +228,7 @@ function Site(props) {
               content: "Documentation",
               ariaLabel: "webpack documentation",
               url: "/concepts/",
-              isactive: (_, location) =>
+              isActive: (_, location) =>
                 /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
                   location.pathname,
                 ),

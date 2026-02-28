@@ -19,17 +19,23 @@ import Tooltip from "../Tooltip/Tooltip.jsx";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "@docsearch/css";
 
-function NavigationItem({ children, url, isactive, ariaLabel }) {
-  let obj = {};
-  // decide if the link is active or not by providing a function
-  // otherwise we'll let react-dom makes the decision for us
-  if (isactive) {
-    obj = {
-      isactive,
-    };
-  }
+function NavigationItem({
+  children,
+  url,
+  isActive: isCustomActive,
+  ariaLabel,
+}) {
+  const location = useLocation();
   const classes =
     "text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200";
+
+  const getActiveState = (isNavLinkActive) => {
+    if (isCustomActive) {
+      return isCustomActive({}, location);
+    }
+    return isNavLinkActive;
+  };
+
   if (url.startsWith("http") || url.startsWith("//")) {
     return (
       <a
@@ -45,9 +51,8 @@ function NavigationItem({ children, url, isactive, ariaLabel }) {
   }
   return (
     <NavLink
-      {...obj}
-      className={({ isActive }) =>
-        isActive ? `${classes} !text-blue-200` : classes
+      className={({ isActive: isNavLinkActive }) =>
+        getActiveState(isNavLinkActive) ? `${classes} !text-blue-200` : classes
       }
       to={url}
       aria-label={ariaLabel}
@@ -60,7 +65,7 @@ function NavigationItem({ children, url, isactive, ariaLabel }) {
 NavigationItem.propTypes = {
   children: PropTypes.node.isRequired,
   url: PropTypes.string.isRequired,
-  isactive: PropTypes.func,
+  isActive: PropTypes.func,
   ariaLabel: PropTypes.string,
 };
 
@@ -211,8 +216,8 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
           )
           .map((link) => {
             if (
-              link.isactive && // hide the children if the link is not active
-              !link.isactive({}, location)
+              link.isActive && // hide the children if the link is not active
+              !link.isActive({}, location)
             ) {
               return null;
             }
