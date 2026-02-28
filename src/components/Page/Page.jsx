@@ -44,6 +44,7 @@ export default function Page(props) {
   }, [props.content]);
 
   const { hash, pathname } = useLocation();
+  const isBlogIndex = pathname === "/blog/";
 
   useEffect(() => {
     let observer;
@@ -129,7 +130,7 @@ export default function Page(props) {
 
         <PageLinks page={rest} />
 
-        {(previous || next) && (
+        {!isBlogIndex && (previous || next) && (
           <AdjacentPages previous={previous} next={next} />
         )}
 
