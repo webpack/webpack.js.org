@@ -26,6 +26,7 @@ export default class SidebarMobile extends Component {
 
     return (
       <nav
+        aria-label="Mobile"
         className={`sidebar-mobile${openMod}`}
         ref={(ref) => (this._container = ref)}
         onTouchStart={this._handleTouchStart}

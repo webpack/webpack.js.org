@@ -255,45 +255,46 @@ function Site(props) {
           toggle={_toggleSidebar}
         />
       ) : null}
-
-      <Routes>
-        <Route index element={<Splash />} />
-        <Route
-          element={
-            <Container className="site__content">
-              <Outlet />
-            </Container>
-          }
-        >
-          <Route path="app-shell" element={<Fragment />} />
-          {pages.map((page) => {
-            const path = page.path.replace("src/content/", "");
-            const { previous, next } = getAdjacentPages(
-              sidebarPages,
-              page,
-              "url",
-            );
-            return (
-              <Route
-                key={page.url}
-                path={page.url}
-                element={
-                  <PageElement
-                    currentPage={location.pathname}
-                    sidebarPages={sidebarPages}
-                    page={page}
-                    next={next}
-                    previous={previous}
-                    import={props.import}
-                    path={path}
-                  />
-                }
-              />
-            );
-          })}
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
+      <main>
+        <Routes>
+          <Route index element={<Splash />} />
+          <Route
+            element={
+              <Container className="site__content">
+                <Outlet />
+              </Container>
+            }
+          >
+            <Route path="app-shell" element={<Fragment />} />
+            {pages.map((page) => {
+              const path = page.path.replace("src/content/", "");
+              const { previous, next } = getAdjacentPages(
+                sidebarPages,
+                page,
+                "url",
+              );
+              return (
+                <Route
+                  key={page.url}
+                  path={page.url}
+                  element={
+                    <PageElement
+                      currentPage={location.pathname}
+                      sidebarPages={sidebarPages}
+                      page={page}
+                      next={next}
+                      previous={previous}
+                      import={props.import}
+                      path={path}
+                    />
+                  }
+                />
+              );
+            })}
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+        </Routes>
+      </main>
       <Footer />
     </div>
   );
