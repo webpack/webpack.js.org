@@ -316,7 +316,13 @@ function PageElement(props) {
         currentPage={currentPage}
         pages={sidebarPages}
       />
-      <Page {...page} content={content} previous={previous} next={next} />
+      <Page
+        {...page}
+        content={content}
+        previous={previous}
+        next={next}
+        pages={sidebarPages}
+      />
     </Fragment>
   );
 }
