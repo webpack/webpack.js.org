@@ -132,8 +132,9 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
             <Logo />
           </Link>
           <nav
-          aria-label="Primary"
-          className="hidden md:inline-grid md:grid-flow-col md:gap-x-[18px] md:items-center">
+            aria-label="Primary"
+            className="hidden md:inline-grid md:grid-flow-col md:gap-x-[18px] md:items-center"
+          >
             {links.map(({ content, url, isActive, ariaLabel }) => (
               <NavigationItem
                 key={url}
