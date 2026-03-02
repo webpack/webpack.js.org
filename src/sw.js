@@ -25,34 +25,40 @@ const otherManifest = [
     url: "/app-shell/index.html",
   },
 ];
-const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
-  const url = new URL(entry.url, self.location);
-  return url.href;
-});
+
+const allManifestURLs = [
+  new Set(
+    [...manifest, ...otherManifest].map(
+      (entry) => new URL(entry.url, self.location).href,
+    ),
+  ),
+];
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(manifestURLs)),
+    (async () => {
+      const cache = await caches.open(cacheName);
+
+      // Optional assets: don't fail SW install if these fail
+      await Promise.allSettled(allManifestURLs.map((url) => cache.add(url)));
+    })(),
   );
 });
-
 self.addEventListener("activate", (event) => {
-  // - [x] clean up outdated runtime cache
   event.waitUntil(
-    caches.open(cacheName).then((cache) => {
+    (async () => {
+      const cache = await caches.open(cacheName);
       // clean up those who are not listed in manifestURLs
-      cache.keys().then((keys) => {
-        for (const request of keys) {
-          if (!manifestURLs.includes(request.url)) {
-            cache.delete(request);
-          }
+      const keys = await cache.keys();
+      for (const request of keys) {
+        if (!allManifestURLs.includes(request.url)) {
+          await cache.delete(request);
         }
-      });
-    }),
+      }
+    })(),
   );
 });
-
 registerRoute(
-  ({ url }) => manifestURLs.includes(url.href),
+  ({ url }) => allManifestURLs.includes(url.href),
   new NetworkFirst({
     cacheName,
   }),
