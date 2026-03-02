@@ -359,16 +359,14 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   }
   p a,
   li a {
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-thickness: 1px;
+    text-decoration: none;
+    font-weight: 600;
   }
 
-  p a:hover,
   p a:focus-visible,
-  li a:hover,
   li a:focus-visible {
-    text-decoration-thickness: 2px;
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
   pre {
     background-color: rgba(238, 238, 238, 0.35);
