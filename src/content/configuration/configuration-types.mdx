@@ -12,6 +12,7 @@ contributors:
   - dhurlburtusa
   - anshumanv
   - thorn0
+  - tusharthakur04
 ---
 
 Besides exporting a single configuration object, there are a few more ways that cover other needs as well.
@@ -24,8 +25,8 @@ Eventually you will find the need to disambiguate in your `webpack.config.js` be
 - An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-path`](/api/cli/#flags) and [`mode`](/api/cli/#flags).
 
 ```diff
--module.exports = {
-+module.exports = function(env, argv) {
+-export default {
++export default function(env, argv) {
 +  return {
 +    mode: env.production ? 'production' : 'development',
 +    devtool: env.production ? 'source-map' : 'eval',
@@ -47,7 +48,7 @@ Webpack will run the function exported by the configuration file and wait for a 
 T> It is possible to export multiple promises by wrapping them into `Promise.all([/* Your promises */]).`
 
 ```js
-module.exports = () =>
+export default () =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
@@ -65,7 +66,7 @@ W> Returning a `Promise` only works when using webpack via CLI. [`webpack()`](/a
 Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output/#outputlibrarytarget) such as AMD and CommonJS:
 
 ```js
-module.exports = [
+export default [
   {
     output: {
       filename: "./dist-amd.js",
@@ -96,7 +97,7 @@ In case you have a configuration that depends on the output of another configura
 **webpack.config.js**
 
 ```js
-module.exports = [
+export default [
   {
     name: "client",
     target: "web",
@@ -120,7 +121,7 @@ In case you export multiple configurations, you can use the `parallelism` option
 **webpack.config.js**
 
 ```javascript
-module.exports = [
+const config = [
   {
     // config-1
   },
@@ -128,5 +129,8 @@ module.exports = [
     // config-2
   },
 ];
-module.exports.parallelism = 1;
+
+config.parallelism = 1;
+
+export default config;
 ```
