@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link as ReactDOMLink, NavLink, useLocation } from "react-router-dom";
 
 // Import Components
+import DiscordIcon from "../../styles/icons/discord.svg";
 import GithubIcon from "../../styles/icons/github.svg";
 import Hamburger from "../../styles/icons/hamburger.svg";
 import StackOverflowIcon from "../../styles/icons/stack-overflow.svg";
@@ -157,6 +158,11 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
                 to: "https://stackoverflow.com/questions/tagged/webpack",
                 title: "StackOverflow",
                 children: <StackOverflowIcon {...navigationIconProps} />,
+              },
+              {
+                to: "https://discord.com/invite/webpack",
+                title: "Discord",
+                children: <DiscordIcon {...navigationIconProps} />,
               },
             ].map(({ to, title, children }) => (
               <NavigationIcon key={to} to={to} title={title}>
