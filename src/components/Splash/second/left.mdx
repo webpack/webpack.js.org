@@ -1,9 +1,13 @@
 Start without a configuration file, or provide a custom **webpack.config.js**:
 
 ```js
-const path = require("node:path");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
