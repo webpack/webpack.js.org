@@ -61,11 +61,11 @@ Now we'll create the following directory structure, files and their contents:
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-+ |- index.html
-+ |- /src
-+   |- index.js
+  ├── package.json
+  ├── package-lock.json
++ ├── index.html
++ └── src/
++    └── index.js
 ```
 
 **src/index.js**
@@ -144,13 +144,13 @@ First we'll tweak our directory structure slightly, separating the "source" code
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-+ |- /dist
-+   |- index.html
-- |- index.html
-  |- /src
-    |- index.js
+   ├── package.json
+   ├── package-lock.json
++  ├── /dist
++  │   └── index.html
+-  ├── index.html
+   └── /src
+       └── index.js
 ```
 
 T> You may have noticed that `index.html` was created manually, even though it is now placed in the `dist` directory. Later on in [another guide](/guides/output-management/#setting-up-htmlwebpackplugin), we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and to regenerate all the files within it.
@@ -241,13 +241,13 @@ Webpack configuration files can be written using either CommonJS or ECMAScript m
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-+ |- webpack.config.js
-  |- /dist
-    |- index.html
-  |- /src
-    |- index.js
+   ├── package.json
+   ├── package-lock.json
++  ├── webpack.config.js
+   ├── /dist
+   │   └── index.html
+   └── /src
+       └── index.js
 ```
 
 **webpack.config.js**
@@ -346,15 +346,15 @@ Now that you have a basic build together you should move on to the next guide [`
 
 ```diff
 webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-  |- main.js
-  |- index.html
-|- /src
-  |- index.js
-|- /node_modules
+ ├── package.json
+ ├── package-lock.json
+ ├── webpack.config.js
+ ├── /dist
+ │   ├── main.js
+ │   └── index.html
+ ├── /src
+ │   └── index.js
+ └── /node_modules
 ```
 
 W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the web browsers of the end users of your application.
