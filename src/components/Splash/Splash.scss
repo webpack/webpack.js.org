@@ -59,6 +59,11 @@
     }
   }
 
+  &__install {
+    max-width: 400px;
+    margin: auto;
+  }
+
   &__left,
   &__right {
     width: 100%;
