@@ -181,8 +181,8 @@ export default (
 <li>An environment as the first parameter. See the <a href="/api/cli/#environment-options">environment options CLI documentation</a> for syntax examples.</li>
 <li>An options map (<code>argv</code>) as the second parameter. This describes the options passed to webpack, with keys such as <a href="/api/cli/#flags"><code>output-path</code></a> and <a href="/api/cli/#flags"><code>mode</code></a>.</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">module.exports = {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">module.exports = function(env, argv) {
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">export default {
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">export default function(env, argv) {
 </span><span class="token prefix inserted">+</span><span class="token line">  return {
 </span><span class="token prefix inserted">+</span><span class="token line">    mode: env.production ? &#x27;production&#x27; : &#x27;development&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">    devtool: env.production ? &#x27;source-map&#x27; : &#x27;eval&#x27;,
@@ -198,7 +198,7 @@ export default (
 <h2><span id="exporting-a-promise"></span>Exporting a Promise<a href="#exporting-a-promise" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>It is possible to export multiple promises by wrapping them into <code>Promise.all([/* Your promises */]).</code></p></aside>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
   <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -210,7 +210,7 @@ export default (
 <aside class="warning"><p class="warning__prefix">warning</p><p>Returning a <code>Promise</code> only works when using webpack via CLI. <a href="/api/node/#webpack"><code>webpack()</code></a> expects an object.</p></aside>
 <h2><span id="exporting-multiple-configurations"></span>Exporting multiple configurations<a href="#exporting-multiple-configurations" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for <a href="/guides/author-libraries">bundling a library</a> for multiple <a href="/configuration/output/#outputlibrarytarget">targets</a> such as AMD and CommonJS:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">[</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">[</span>
   <span class="token punctuation">{</span>
     output<span class="token operator">:</span> <span class="token punctuation">{</span>
       filename<span class="token operator">:</span> <span class="token string">&quot;./dist-amd.js&quot;</span><span class="token punctuation">,</span>
@@ -234,7 +234,7 @@ export default (
 <h3><span id="dependencies"></span>dependencies<a href="#dependencies" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>In case you have a configuration that depends on the output of another configuration, you can specify a list of dependencies using the <a href="/configuration/other-options/#dependencies"><code>dependencies</code></a> array.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">[</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">[</span>
   <span class="token punctuation">{</span>
     name<span class="token operator">:</span> <span class="token string">&quot;client&quot;</span><span class="token punctuation">,</span>
     target<span class="token operator">:</span> <span class="token string">&quot;web&quot;</span><span class="token punctuation">,</span>
@@ -253,7 +253,7 @@ export default (
 <li>Available: 5.22.0+</li>
 </ul>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">[</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">[</span>
   <span class="token punctuation">{</span>
     <span class="token comment">// config-1</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -261,7 +261,10 @@ export default (
     <span class="token comment">// config-2</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span>
-module<span class="token punctuation">.</span>exports<span class="token punctuation">.</span>parallelism <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span></code></pre></div>
+
+config<span class="token punctuation">.</span>parallelism <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> config<span class="token punctuation">;</span></code></pre></div>
 <h1><span id="entry-and-context"></span>Entry and Context<a href="#entry-and-context" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.</p>
