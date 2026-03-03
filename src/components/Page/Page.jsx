@@ -52,13 +52,15 @@ export default function Page(props) {
         const target = document.querySelector("#md-content");
         // two cases here
         // 1. server side rendered page, so hash target is already there
-        if (document.querySelector(hash)) {
-          document.querySelector(hash).scrollIntoView();
+        // Note: Why this change because we use getElementById instead of querySelector(hash) here because
+        // CSS selectors cannot start with a digit (e.g. #11-in-scope is invalid)
+        if (document.getElementById(hash.slice(1))) {
+          document.getElementById(hash.slice(1)).scrollIntoView();
         } else {
           // 2. dynamic loaded content
           // we need to observe the dom change to tell if hash exists
           observer = new MutationObserver(() => {
-            const element = document.querySelector(hash);
+            const element = document.getElementById(hash.slice(1));
             if (element) {
               element.scrollIntoView();
             }
