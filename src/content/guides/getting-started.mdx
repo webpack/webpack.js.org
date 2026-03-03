@@ -31,6 +31,7 @@ contributors:
 ---
 
 ## Quick Start (Minimal Working Example)
+
 If you just want to confirm webpack works with a minimal setup (before going through the full tutorial), follow these steps.
 
 ### 1. Create a project
@@ -71,12 +72,12 @@ console.log("Hello webpack");
 + |- webpack.config.js
   |- /src
     |- index.js
-```    
+```
 
 **webpack.config.js**
 
 ```js
-const path = require("path");
+const path = require("node:path");
 
 module.exports = {
   mode: "development",
