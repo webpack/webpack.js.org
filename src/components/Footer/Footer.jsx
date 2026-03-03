@@ -80,12 +80,6 @@ const Footer = () => (
         </Link>
         <Link
           className="footer__link"
-          to="https://discord.com/invite/5sxFZPdx2k"
-        >
-          Discord
-        </Link>
-        <Link
-          className="footer__link"
           to="https://github.com/webpack/webpack/releases"
         >
           Changelog
