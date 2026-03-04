@@ -4,11 +4,11 @@ link: https://doi.org/10.1007/s43681-023-00380-w
 level: warning
 ignorecase: true
 swap:
-  'guinea pig': test subject
-  'sacred cow': unquestioned belief
-  'sacred cows': unquestioned beliefs
-  'scapegoat(?:ed|ing)?': wrongly blamed
-  'dog-eat-dog': ruthlessly competitive
-  'dog eat dog': ruthlessly competitive
-  'rat race': competitive grind
-  'red herring': false lead
+  "guinea pig": test subject
+  "sacred cow": unquestioned belief
+  "sacred cows": unquestioned beliefs
+  "scapegoat(?:ed|ing)?": wrongly blamed
+  "dog-eat-dog": ruthlessly competitive
+  "dog eat dog": ruthlessly competitive
+  "rat race": competitive grind
+  "red herring": false lead

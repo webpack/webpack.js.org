@@ -49,13 +49,7 @@ export const enhance = (tree, options) => {
       .use(extractAnchors, { anchors, levels: 3 })
       .use(remarkRemoveHeadingId)
       .use(remarkHtml)
-      .process(content, (err) => {
-        if (err) {
-          throw err;
-        }
-      });
-
-    tree.anchors = anchors;
+      .processSync(content);
 
     Object.assign(
       tree,
@@ -64,6 +58,34 @@ export const enhance = (tree, options) => {
       },
       attributes,
     );
+
+    tree.anchors = anchors;
+
+    // Set default sort and preview for blog posts
+    if (tree.url.startsWith("/blog/")) {
+      const dateInTitle = tree.title?.match(/\d{4}-\d{2}-\d{2}/)?.[0];
+      const dateInUrl = tree.url.match(/\d{4}-\d{2}-\d{2}/)?.[0];
+      const dateStr = dateInTitle || dateInUrl;
+
+      if (tree.url === "/blog/") {
+        tree.sort = -999999999;
+      } else if (dateStr) {
+        // Match existing pattern -YYYYMMDD0 for consistency
+        tree.sort = -Number.parseInt(dateStr.replaceAll("-", ""), 10) * 10;
+        tree.date = dateStr;
+      }
+
+      const textContent = content
+        .replace(/---[\s\S]*?---/, "") // remove frontmatter
+        .replaceAll(/^\s*#+.*$/gm, "") // remove headings
+        .replaceAll(/!\[.*?\]\(.*?\)/g, "") // remove images
+        .replaceAll(/<[\s\S]*?>/g, "") // remove HTML
+        .replaceAll(/\[(.*?)\]\(.*?\)/g, "$1") // remove link syntax, keep text
+        .replaceAll(/[#*`]/g, "") // remove generic md chars
+        .replaceAll(/\s+/g, " ") // normalize whitespace
+        .trim();
+      tree.preview = textContent.slice(0, 300);
+    }
   }
 };
 

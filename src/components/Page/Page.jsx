@@ -21,6 +21,7 @@ export default function Page(props) {
     related = [],
     previous,
     next,
+    sidebarPages = [],
     ...rest
   } = props;
 
@@ -114,7 +115,35 @@ export default function Page(props) {
           </div>
         ) : null}
 
-        <div id="md-content">{contentRender}</div>
+        <div id="md-content">
+          {contentRender}
+          {props.url === "/blog/" && (
+            <div className="blog-list mt-8">
+              {[...sidebarPages]
+                .filter((pageItem) => pageItem.url !== "/blog/")
+                // eslint-disable-next-line unicorn/no-array-sort
+                .sort((a, b) => (a.sort || 0) - (b.sort || 0))
+                .map((post) => (
+                  <div
+                    key={post.url}
+                    className="blog-post-preview mb-[3rem] pb-[2rem] border-b border-solid border-[rgba(0,0,0,0.249)] last:border-b-0"
+                  >
+                    <h2 className="!mt-0 !mb-2">
+                      <Link to={post.url}>{post.title}</Link>
+                    </h2>
+                    <div className="text-gray-400 italic mb-4">{post.date}</div>
+                    <p className="mb-4">{post.preview}...</p>
+                    <Link
+                      to={post.url}
+                      className="text-blue-900 hover:underline font-medium"
+                    >
+                      Read more →
+                    </Link>
+                  </div>
+                ))}
+            </div>
+          )}
+        </div>
 
         {loadRelated && (
           <div className="print:hidden">
@@ -162,4 +191,6 @@ Page.propTypes = {
       default: PropTypes.string,
     }),
   ]),
+  sidebarPages: PropTypes.array,
+  url: PropTypes.string,
 };

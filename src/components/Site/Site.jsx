@@ -76,15 +76,29 @@ function Site(props) {
     }
 
     return array
-      .map(({ title, name, url, group, sort, anchors, children }) => ({
-        title: title || name,
-        content: title || name,
-        url,
-        group,
-        sort,
-        anchors,
-        children: children ? _strip(children) : [],
-      }))
+      .map(
+        ({
+          title,
+          name,
+          url,
+          group,
+          sort,
+          anchors,
+          preview,
+          date,
+          children,
+        }) => ({
+          title: title || name,
+          content: title || name,
+          url,
+          group,
+          sort,
+          anchors,
+          preview,
+          date,
+          children: children ? _strip(children) : [],
+        }),
+      )
       .filter(
         (page) =>
           page.title !== "printable.mdx" && !page.content.includes("Printable"),
@@ -123,8 +137,16 @@ function Site(props) {
     }
   }, []);
 
+  // As github pages uses trailing slash, we need to provide it to canonicals for consistency
+  // between canonical href and final url served by github pages.
+  function enforceTrailingSlash(url) {
+    return url.replace(/\/?$/, "/");
+  }
+
   const sections = extractSections(Content);
-  const section = sections.find(({ url }) => location.pathname.startsWith(url));
+  const section = sections.find(({ url }) =>
+    enforceTrailingSlash(location.pathname).startsWith(url),
+  );
   const pages = extractPages(Content);
   const sidebarPages = _strip(
     section
@@ -145,12 +167,6 @@ function Site(props) {
 
   function isPrintPage(url) {
     return url.includes("/printable");
-  }
-
-  // As github pages uses trailing slash, we need to provide it to canonicals for consistency
-  // between canonical href and final url served by github pages.
-  function enforceTrailingSlash(url) {
-    return url.replace(/\/?$/, "/");
   }
 
   // Enable client side redirection
@@ -316,7 +332,13 @@ function PageElement(props) {
         currentPage={currentPage}
         pages={sidebarPages}
       />
-      <Page {...page} content={content} previous={previous} next={next} />
+      <Page
+        {...page}
+        sidebarPages={sidebarPages}
+        content={content}
+        previous={previous}
+        next={next}
+      />
     </Fragment>
   );
 }
