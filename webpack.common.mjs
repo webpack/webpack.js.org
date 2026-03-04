@@ -12,6 +12,7 @@ import refractor from "remark-refractor";
 import webpack from "webpack";
 import cleanup from "./src/remark-plugins/remark-cleanup-readme/index.mjs";
 import aside from "./src/remark-plugins/remark-custom-asides/index.mjs";
+import remarkRemoveDuplicateH1 from "./src/remark-plugins/remark-remove-duplicate-h1/index.mjs";
 import remarkRemoveHeadingId from "./src/remark-plugins/remark-remove-heading-id/index.mjs";
 import remarkResponsiveTable from "./src/remark-plugins/remark-responsive-table/remark-responsive-table.mjs";
 import slug from "./src/remark-plugins/remark-slug/index.mjs";
@@ -75,7 +76,11 @@ export default ({ ssg = false }) => ({
             loader: "@mdx-js/loader",
             /** @type {import('@mdx-js/loader').Options} */
             options: {
-              remarkPlugins: [...mdPlugins, [frontmatter]],
+              remarkPlugins: [
+                ...mdPlugins,
+                [frontmatter],
+                remarkRemoveDuplicateH1,
+              ],
               providerImportSource: path.resolve("./src/mdx-components.mjs"),
             },
           },
