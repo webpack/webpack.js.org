@@ -608,6 +608,48 @@ module.exports = {
 };
 ```
 
+#### Hoisting with Dynamic Imports
+
+When using `externalsType: "module-import"`, externals are emitted as **static ESM imports**. Because ESM imports participate in the **module linking phase**, they are treated as **build-level dependencies** rather than chunk-level runtime dependencies.
+
+As a result, if an external is referenced only inside a dynamically imported module, Webpack may still hoist the generated `import` statement into the entry chunk. This ensures correct ESM linking semantics, even though the execution dependency exists only in an async chunk.
+
+This differs from normal module dependencies, which follow chunk boundaries during code splitting.
+
+**Example:**
+
+```javascript
+// entry.js
+import { someUtil } from "lodash";
+
+async function loadFeature() {
+  const featureModule = await import("./feature.js");
+  featureModule.run();
+}
+```
+
+```javascript
+// feature.js
+import { someHelper } from "lodash";
+
+export function run() {
+  someHelper();
+}
+```
+
+**With `externalsType: "module-import"`:**
+
+```javascript
+module.exports = {
+  externalsType: "module-import",
+  externals: {
+    lodash: "lodash",
+  },
+};
+```
+
+Even though `lodash` is only directly used in `entry.js`, the `import "lodash"` statement will be present in the output. This is because `module-import` externals must be statically available at module linking time.
+
 ### externalsType.node-commonjs
 
 Specify the default type of externals as `'node-commonjs'`. Webpack will import [`createRequire`](https://nodejs.org/api/module.html#module_module_createrequire_filename) from `'module'` to construct a require function for loading externals used in a module.
