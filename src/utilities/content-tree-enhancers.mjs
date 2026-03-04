@@ -76,9 +76,10 @@ export const enhance = (tree, options) => {
       const teaser = (body || "")
         .split("\n")
         .filter((line) => line.trim() && !line.trim().startsWith("#"))
-        .slice(0, 2)
+        .slice(0, 3) // Increased to 3 lines
         .join(" ")
-        .slice(0, 160);
+        .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Strip markdown links but keep text
+        .slice(0, 240); // Increased character limit
       tree.teaser = `${teaser}...`;
     }
 
