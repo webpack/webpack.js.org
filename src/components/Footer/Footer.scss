@@ -115,3 +115,12 @@
 .footer__top p + p {
   margin-top: 18px;
 }
+
+.footer__top p a {
+  color: getColor(denim);
+  text-decoration: underline;
+
+  &:hover {
+    color: getColor(elephant);
+  }
+}

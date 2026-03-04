@@ -51,6 +51,7 @@ export default class Dropdown extends Component {
 
     return (
       <nav
+        aria-label="Secondary"
         className={`dropdown ${className}`}
         ref={(el) => (this.dropdown = el)}
         onMouseOver={this._toggle.bind(this, true)}

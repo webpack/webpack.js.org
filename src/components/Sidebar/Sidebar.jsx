@@ -28,7 +28,7 @@ export default function Sidebar({ className = "", pages, currentPage }) {
   let group;
 
   return (
-    <nav className={`sidebar ${className}`}>
+    <nav aria-label="Documentation" className={`sidebar ${className}`}>
       <div className="sidebar__inner">
         <div className="relative z-0 bg-white dark:bg-gray-100 ">
           <label htmlFor="docs-version" className="sr-only">

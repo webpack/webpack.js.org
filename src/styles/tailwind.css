@@ -10,7 +10,7 @@
   @apply bg-transparent lg:bg-gray-500 transition duration-200 !important;
 }
 .DocSearch-Button-Placeholder {
-  @apply hidden lg:font-light lg:text-sm lg:block lg:text-gray-200 lg:dark:text-gray-300 transition duration-200 !important;
+  @apply hidden lg:font-light lg:text-sm lg:block lg:text-gray-100 lg:dark:text-gray-300 transition duration-200 !important;
 }
 .DocSearch-Button:hover .DocSearch-Button-Placeholder {
   @apply lg:text-gray-100 !important;
