@@ -1,12 +1,13 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
+  - package-ecosystem: npm
     directory: "/"
-    open-pull-requests-limit: 10
     schedule:
       interval: "weekly"
+    open-pull-requests-limit: 20
     labels:
-      - "dependencies"
+      - dependencies
+    versioning-strategy: widen
     ignore:
       - dependency-name: "react"
       - dependency-name: "react-dom"
@@ -17,6 +18,9 @@ updates:
       dependencies:
         patterns:
           - "*"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
