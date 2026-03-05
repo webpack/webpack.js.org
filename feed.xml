@@ -4,38 +4,38 @@
         <title>webpack Blog</title>
         <link>https://webpack.js.org/blog/</link>
         <description>Announcements and updates from the webpack team</description>
-        <lastBuildDate>Thu, 05 Mar 2026 14:08:55 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 05 Mar 2026 18:38:17 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <atom:link href="https://webpack.js.org/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
-            <title><![CDATA[Roadmap 2026 (2026-02-04)]]></title>
-            <link>https://webpack.js.org/blog/2026-04-02-roadmap-2026/</link>
-            <guid isPermaLink="false">https://webpack.js.org/blog/2026-04-02-roadmap-2026/</guid>
-            <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[Roadmap 2026 (2026-02-04)]]></description>
+            <title><![CDATA[Roadmap 2026]]></title>
+            <link>https://webpack.js.org/blog/2026-02-04-roadmap-2026/</link>
+            <guid isPermaLink="false">https://webpack.js.org/blog/2026-02-04-roadmap-2026/</guid>
+            <pubDate>Wed, 04 Feb 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Roadmap 2026]]></description>
         </item>
         <item>
-            <title><![CDATA[Webpack 5.105 (2026-02-03)]]></title>
-            <link>https://webpack.js.org/blog/webpack-5-105/</link>
-            <guid isPermaLink="false">https://webpack.js.org/blog/webpack-5-105/</guid>
+            <title><![CDATA[Webpack 5.105]]></title>
+            <link>https://webpack.js.org/blog/2026-02-03-webpack-5-105/</link>
+            <guid isPermaLink="false">https://webpack.js.org/blog/2026-02-03-webpack-5-105/</guid>
             <pubDate>Tue, 03 Feb 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[Webpack 5.105 (2026-02-03)]]></description>
+            <description><![CDATA[Webpack 5.105]]></description>
         </item>
         <item>
-            <title><![CDATA[Roadmap 2021 (2020-12-08)]]></title>
+            <title><![CDATA[Roadmap 2021]]></title>
             <link>https://webpack.js.org/blog/2020-12-08-roadmap-2021/</link>
             <guid isPermaLink="false">https://webpack.js.org/blog/2020-12-08-roadmap-2021/</guid>
             <pubDate>Tue, 08 Dec 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Roadmap 2021 (2020-12-08)]]></description>
+            <description><![CDATA[Roadmap 2021]]></description>
         </item>
         <item>
-            <title><![CDATA[Webpack 5 release (2020-10-10)]]></title>
+            <title><![CDATA[Webpack 5 release]]></title>
             <link>https://webpack.js.org/blog/2020-10-10-webpack-5-release/</link>
             <guid isPermaLink="false">https://webpack.js.org/blog/2020-10-10-webpack-5-release/</guid>
             <pubDate>Sat, 10 Oct 2020 00:00:00 GMT</pubDate>
-            <description><![CDATA[Webpack 5 release (2020-10-10)]]></description>
+            <description><![CDATA[Webpack 5 release]]></description>
         </item>
     </channel>
 </rss>
