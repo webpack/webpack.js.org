@@ -38,6 +38,14 @@ export const enhance = (tree, options) => {
     const content = fs.readFileSync(tree.path, "utf8");
     const { attributes, body } = frontMatter(content);
 
+    if (attributes.date) {
+      const dateStr =
+        attributes.date instanceof Date
+          ? attributes.date.toISOString()
+          : String(attributes.date);
+      [attributes.date] = dateStr.split("T");
+    }
+
     // remove underscore from fetched files
     if (tree.name[0] === "_") {
       tree.name = tree.name.replace("_", "");
