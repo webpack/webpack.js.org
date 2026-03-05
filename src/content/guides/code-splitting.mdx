@@ -318,14 +318,14 @@ We'll also update our project to remove the now unused files:
 
 ```diff
 webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-  |- index.js
-- |- another-module.js
-|- /node_modules
+ ├── package.json
+ ├── package-lock.json
+ ├── webpack.config.js
+ ├── /dist
+ ├── /src
+ │   ├── index.js
+-│   └── another-module.js
+ └── /node_modules
 ```
 
 Now, instead of statically importing `lodash`, we'll use dynamic importing to separate a chunk:

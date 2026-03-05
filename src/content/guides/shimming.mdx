@@ -41,14 +41,14 @@ Let's start with the first use case of shimming global variables. Before we do a
 
 ```diff
 webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-  |- index.html
-|- /src
-  |- index.js
-|- /node_modules
+ ├── package.json
+ ├── package-lock.json
+ ├── webpack.config.js
+ ├── /dist
+ │   └── index.html
+ ├── /src
+ │   └── index.js
+ └── /node_modules
 ```
 
 Remember that `lodash` package we were using? For demonstration purposes, let's say we wanted to instead provide this as a global throughout our application. To do this, we can use `ProvidePlugin`.
@@ -223,14 +223,14 @@ Let's say a library creates a global variable that it expects its consumers to u
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-  |- webpack.config.js
-  |- /dist
-  |- /src
-    |- index.js
-+   |- globals.js
-  |- /node_modules
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  ├── /src
+  │   ├── index.js
++ │   ├── globals.js
+  └── /node_modules
 ```
 
 **src/globals.js**
@@ -355,15 +355,15 @@ npm install --save whatwg-fetch
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-  |- webpack.config.js
-  |- /dist
-  |- /src
-    |- index.js
-    |- globals.js
-+   |- polyfills.js
-  |- /node_modules
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  ├── /src
+  │   ├── index.js
+  │   ├── globals.js
++ │   └── polyfills.js
+  └── /node_modules
 ```
 
 **src/polyfills.js**
