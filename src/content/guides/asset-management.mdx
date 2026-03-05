@@ -109,16 +109,16 @@ Let's try it out by adding a new `style.css` file to our project and import it i
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-  |- webpack.config.js
-  |- /dist
-    |- bundle.js
-    |- index.html
-  |- /src
-+   |- style.css
-    |- index.js
-  |- /node_modules
+   ├── package.json
+   ├── package-lock.json
+   ├── webpack.config.js
+   ├── /dist
+   │   ├── bundle.js
+   │   └── index.html
+   ├── /src
++  │   ├── style.css
+   │   └── index.js
+   └── /node_modules
 ```
 
 **src/style.css**
@@ -215,17 +215,17 @@ Let's add an image to our project and see how this works, you can use any image 
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-  |- webpack.config.js
-  |- /dist
-    |- bundle.js
-    |- index.html
-  |- /src
-+   |- icon.png
-    |- style.css
-    |- index.js
-  |- /node_modules
+   ├── package.json
+   ├── package-lock.json
+   ├── webpack.config.js
+   ├── /dist
+   │   ├── bundle.js
+   │   └── index.html
+   ├── /src
++  │   ├── icon.png
+   │   ├── style.css
+   │   └── index.js
+   └── /node_modules
 ```
 
 **src/index.js**
@@ -334,19 +334,19 @@ Add some font files to your project:
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-  |- webpack.config.js
-  |- /dist
-    |- bundle.js
-    |- index.html
-  |- /src
-+   |- my-font.woff
-+   |- my-font.woff2
-    |- icon.png
-    |- style.css
-    |- index.js
-  |- /node_modules
+   ├── package.json
+   ├── package-lock.json
+   ├── webpack.config.js
+   ├── /dist
+   │   ├── bundle.js
+   │   └── index.html
+   ├── /src
++  │   ├── my-font.woff
++  │   ├── my-font.woff2
+   │   ├── icon.png
+   │   ├── style.css
+   │   └── index.js
+   └── /node_modules
 ```
 
 With the loader configured and fonts in place, you can incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack, as it was with the image:
@@ -457,21 +457,21 @@ Add some data files to your project:
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-  |- webpack.config.js
-  |- /dist
-    |- bundle.js
-    |- index.html
-  |- /src
-+   |- data.xml
-+   |- data.csv
-    |- my-font.woff
-    |- my-font.woff2
-    |- icon.png
-    |- style.css
-    |- index.js
-  |- /node_modules
+   ├── package.json
+   ├── package-lock.json
+   ├── webpack.config.js
+   ├── /dist
+   │   ├── bundle.js
+   │   └── index.html
+   ├── /src
++  │   ├── data.xml
++  │   ├── data.csv
+   │   ├── my-font.woff
+   │   ├── my-font.woff2
+   │   ├── icon.png
+   │   ├── style.css
+   │   └── index.js
+   └── /node_modules
 ```
 
 **src/data.xml**
@@ -715,13 +715,13 @@ Re-run the `npm run build` command and open `dist/index.html`. You should be abl
 The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be useful:
 
 ```diff
-- |- /assets
-+ |– /components
-+ |  |– /my-component
-+ |  |  |– index.jsx
-+ |  |  |– index.css
-+ |  |  |– icon.svg
-+ |  |  |– img.png
+- ├── /assets
++ └── /components
++     └── /my-component
++         ├── index.jsx
++         ├── index.css
++         ├── icon.svg
++         └── img.png
 ```
 
 This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let's say you want to use `/my-component` in another project, copy or move it into the `/components` directory over there. As long as you've installed any _external dependencies_ and your _configuration has the same loaders_ defined, you should be good to go.
@@ -736,24 +736,24 @@ For the next guides we won't be using all the different assets we've used in thi
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-  |- webpack.config.js
-  |- /dist
-    |- bundle.js
-    |- index.html
-  |- /src
--   |- data.csv
--   |- data.json5
--   |- data.toml
--   |- data.xml
--   |- data.yaml
--   |- icon.png
--   |- my-font.woff
--   |- my-font.woff2
--   |- style.css
-    |- index.js
-  |- /node_modules
+   ├── package.json
+   ├── package-lock.json
+   ├── webpack.config.js
+   ├── /dist
+   │   ├── bundle.js
+   │   └── index.html
+   ├── /src
+-  │   ├── data.csv
+-  │   ├── data.json5
+-  │   ├── data.toml
+-  │   ├── data.xml
+-  │   ├── data.yaml
+-  │   ├── icon.png
+-  │   ├── my-font.woff
+-  │   ├── my-font.woff2
+-  │   ├── style.css
+   │   └── index.js
+   └── /node_modules
 ```
 
 **webpack.config.js**
