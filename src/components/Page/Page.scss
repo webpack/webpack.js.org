@@ -43,9 +43,12 @@
     }
 
     .blog-post-date {
-      color: #999;
-      font-size: 1.1rem;
-      margin-bottom: -0.5rem;
+      color: #666;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 0.25rem;
+      margin-bottom: 1rem;
+      font-style: italic;
     }
 
     p {
@@ -80,7 +83,7 @@
       }
 
       .blog-post-date {
-        color: #999;
+        color: #bbb;
       }
 
       p {

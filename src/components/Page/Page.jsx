@@ -105,6 +105,9 @@ export default function Page(props) {
     <main id="main-content" className="page">
       <Markdown>
         <h1>{title}</h1>
+        {rest.date && pathname.startsWith("/blog/") && !isBlogIndex && (
+          <div className="blog-post-date">{rest.date}</div>
+        )}
 
         {rest.thirdParty ? (
           <div className="italic my-[20px]">
