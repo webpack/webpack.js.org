@@ -44,6 +44,7 @@ export default function Page(props) {
   }, [props.content]);
 
   const { hash, pathname } = useLocation();
+  const isBlogIndex = pathname === "/blog/";
 
   useEffect(() => {
     let observer;
@@ -104,6 +105,9 @@ export default function Page(props) {
     <main id="main-content" className="page">
       <Markdown>
         <h1>{title}</h1>
+        {rest.date && pathname.startsWith("/blog/") && !isBlogIndex && (
+          <div className="blog-post-date">{rest.date}</div>
+        )}
 
         {rest.thirdParty ? (
           <div className="italic my-[20px]">
@@ -115,6 +119,27 @@ export default function Page(props) {
         ) : null}
 
         <div id="md-content">{contentRender}</div>
+
+        {rest.url === "/blog/" && (
+          <div className="blog-list">
+            {(props.pages || [])
+              .filter((post) => post.url !== "/blog/")
+              .map((post) => (
+                <div key={post.url} className="blog-post-item">
+                  <h2>
+                    <Link to={post.url}>{post.title}</Link>
+                  </h2>
+                  {post.date && (
+                    <div className="blog-post-date">{post.date}</div>
+                  )}
+                  <p>{post.teaser}</p>
+                  <Link to={post.url} className="read-more">
+                    Read More &rarr;
+                  </Link>
+                </div>
+              ))}
+          </div>
+        )}
 
         {loadRelated && (
           <div className="print:hidden">
@@ -131,7 +156,7 @@ export default function Page(props) {
 
         <PageLinks page={rest} />
 
-        {(previous || next) && (
+        {!isBlogIndex && (previous || next) && (
           <AdjacentPages previous={previous} next={next} />
         )}
 
@@ -155,6 +180,7 @@ Page.propTypes = {
   related: PropTypes.array,
   previous: PropTypes.object,
   next: PropTypes.object,
+  pages: PropTypes.array,
   content: PropTypes.oneOfType([
     PropTypes.shape({
       // eslint-disable-next-line unicorn/no-thenable

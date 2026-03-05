@@ -76,15 +76,29 @@ function Site(props) {
     }
 
     return array
-      .map(({ title, name, url, group, sort, anchors, children }) => ({
-        title: title || name,
-        content: title || name,
-        url,
-        group,
-        sort,
-        anchors,
-        children: children ? _strip(children) : [],
-      }))
+      .map(
+        ({
+          title,
+          name,
+          url,
+          group,
+          sort,
+          anchors,
+          children,
+          date,
+          teaser,
+        }) => ({
+          title: title || name,
+          content: title || name,
+          url,
+          group,
+          sort,
+          anchors,
+          date,
+          teaser,
+          children: children ? _strip(children) : [],
+        }),
+      )
       .filter(
         (page) =>
           page.title !== "printable.mdx" && !page.content.includes("Printable"),
@@ -316,7 +330,13 @@ function PageElement(props) {
         currentPage={currentPage}
         pages={sidebarPages}
       />
-      <Page {...page} content={content} previous={previous} next={next} />
+      <Page
+        {...page}
+        content={content}
+        previous={previous}
+        next={next}
+        pages={sidebarPages}
+      />
     </Fragment>
   );
 }
@@ -324,6 +344,7 @@ function PageElement(props) {
 PageElement.propTypes = {
   currentPage: PropTypes.string,
   sidebarPages: PropTypes.array,
+  pages: PropTypes.array,
   previous: PropTypes.object,
   next: PropTypes.object,
   page: PropTypes.object,
