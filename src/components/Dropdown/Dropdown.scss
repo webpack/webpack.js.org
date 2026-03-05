@@ -33,8 +33,10 @@
   right: 0;
   font-size: getFontSize(-1);
   margin: auto;
-  background-color: #2b3a42;
-  z-index: 1;
+  background-color: #526b78;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
 
   ul {
     padding-top: 0.25em;
