@@ -1,5 +1,5 @@
 import { isValidElement, Component } from 'react';
-import Popover from 'react-tiny-popover';
+import { Popover } from 'react-tiny-popover';
 import './Configuration.scss';
 import PropTypes from 'prop-types';
 
@@ -78,7 +78,7 @@ export class Details extends Component {
     return (
       <Popover
         isOpen={open}
-        position={['right', 'top']}
+        positions={['right', 'top']}
         padding={0}
         onClickOutside={this.clickOutsideHandler}
         containerClassName={'shadow'}

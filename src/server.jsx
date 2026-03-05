@@ -45,5 +45,12 @@ export default (locals) => {
     .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
     .join('');
 
-  return `<!DOCTYPE html><html ${helmet.htmlAttributes.toString()}><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${css}</head>${renderedHtml}`;
+  // react-helmet-async v3 + React 19: helmet context is not populated because
+  // React 19 renders <title>/<meta>/<link> as native elements directly in the tree.
+  const htmlAttributes = helmet ? helmet.htmlAttributes.toString() : '';
+  const title = helmet ? helmet.title.toString() : '';
+  const meta = helmet ? helmet.meta.toString() : '';
+  const link = helmet ? helmet.link.toString() : '';
+
+  return `<!DOCTYPE html><html ${htmlAttributes}><head>${title}${meta}${link}${css}</head>${renderedHtml}`;
 };
