@@ -1,7 +1,6 @@
 // Import External Dependencies
 import PropTypes from "prop-types";
 import { Component } from "react";
-import VisibilitySensor from "react-visibility-sensor";
 
 // Import Data
 import SmallIcon from "../../assets/icon-square-small-slack.png";
@@ -104,12 +103,31 @@ export default class Support extends Component {
     inView: false,
   };
 
-  handleInView = (inView) => {
-    if (!inView || this.state.inView) {
-      return;
+  containerRef = null;
+
+  observer = null;
+
+  componentDidMount() {
+    this.observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !this.state.inView) {
+          this.setState({ inView: true });
+          this.observer.disconnect();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (this.containerRef) {
+      this.observer.observe(this.containerRef);
     }
-    this.setState({ inView });
-  };
+  }
+
+  componentWillUnmount() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
 
   render() {
     const { rank, type } = this.props;
@@ -185,99 +203,90 @@ export default class Support extends Component {
                   type === "monthly" ? "Monthly " : ""
                 }Sponsors`}
         </h2>
-        <VisibilitySensor
-          delayedCall
-          partialVisibility
-          intervalDelay={300}
-          onChange={this.handleInView}
-        >
-          <div className="support">
-            <div className="support__description">
-              {rank === "backer" ? (
-                <p>
-                  The following <b>Backers</b> are individuals who have
-                  contributed various amounts of money in order to help support
-                  webpack. Every little bit helps, and we appreciate even the
-                  smallest contributions. This list shows {random} randomly
-                  chosen backers:
-                </p>
-              ) : rank === "latest" ? (
-                <p>
-                  The following persons/organizations made their first donation
-                  in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days
-                  (limited to the top {limit}).
-                </p>
-              ) : (
-                <p>
-                  <b className="support__rank">
-                    {type === "monthly" ? `${rank} monthly` : rank} sponsors
-                  </b>
-                  {type === "monthly" ? (
-                    <span>
-                      are those who are currently pledging{" "}
-                      {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
-                      {maximum ? `to $${formatMoney(maximum)}` : "or more"}{" "}
-                      monthly to webpack.
-                    </span>
-                  ) : (
-                    <span>
-                      are those who have contributed{" "}
-                      {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
-                      {maximum ? `to $${formatMoney(maximum)}` : "or more"} to
-                      webpack.
-                    </span>
-                  )}
-                </p>
-              )}
-            </div>
-
-            {supporters.map((supporter, index) => (
-              <Tooltip
-                key={supporter.slug || index}
-                content={`$${formatMoney(supporter.totalDonations / 100)} by ${
-                  supporter.name || supporter.slug
-                } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
-              >
-                <a
-                  className="support__item"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  href={
-                    supporter.website ||
-                    `https://opencollective.com/${supporter.slug}`
-                  }
-                >
-                  {
-                    <img
-                      className={`support__${rank}-avatar`}
-                      src={
-                        inView && supporter.avatar
-                          ? supporter.avatar
-                          : SmallIcon
-                      }
-                      alt={
-                        supporter.alt ||
-                        (supporter.name || supporter.slug
-                          ? `${supporter.name || supporter.slug}'s avatar`
-                          : "avatar")
-                      }
-                      onError={this._handleImgError}
-                    />
-                  }
-                </a>
-              </Tooltip>
-            ))}
-
-            <div className="support__bottom">
-              <a
-                className="support__button"
-                href="https://opencollective.com/webpack#support"
-              >
-                Become a {rank === "backer" ? "backer" : "sponsor"}
-              </a>
-            </div>
+        <div ref={(el) => (this.containerRef = el)} className="support">
+          <div className="support__description">
+            {rank === "backer" ? (
+              <p>
+                The following <b>Backers</b> are individuals who have
+                contributed various amounts of money in order to help support
+                webpack. Every little bit helps, and we appreciate even the
+                smallest contributions. This list shows {random} randomly chosen
+                backers:
+              </p>
+            ) : rank === "latest" ? (
+              <p>
+                The following persons/organizations made their first donation in
+                the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days
+                (limited to the top {limit}).
+              </p>
+            ) : (
+              <p>
+                <b className="support__rank">
+                  {type === "monthly" ? `${rank} monthly` : rank} sponsors
+                </b>
+                {type === "monthly" ? (
+                  <span>
+                    are those who are currently pledging{" "}
+                    {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
+                    {maximum ? `to $${formatMoney(maximum)}` : "or more"}{" "}
+                    monthly to webpack.
+                  </span>
+                ) : (
+                  <span>
+                    are those who have contributed{" "}
+                    {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
+                    {maximum ? `to $${formatMoney(maximum)}` : "or more"} to
+                    webpack.
+                  </span>
+                )}
+              </p>
+            )}
           </div>
-        </VisibilitySensor>
+
+          {supporters.map((supporter, index) => (
+            <Tooltip
+              key={supporter.slug || index}
+              content={`$${formatMoney(supporter.totalDonations / 100)} by ${
+                supporter.name || supporter.slug
+              } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
+            >
+              <a
+                className="support__item"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                href={
+                  supporter.website ||
+                  `https://opencollective.com/${supporter.slug}`
+                }
+              >
+                {
+                  <img
+                    className={`support__${rank}-avatar`}
+                    src={
+                      inView && supporter.avatar ? supporter.avatar : SmallIcon
+                    }
+                    alt={
+                      supporter.alt ||
+                      (supporter.name || supporter.slug
+                        ? `${supporter.name || supporter.slug}'s avatar`
+                        : "avatar")
+                    }
+                    onError={this._handleImgError}
+                  />
+                }
+              </a>
+            </Tooltip>
+          ))}
+
+          <div className="support__bottom">
+            <a
+              className="support__button"
+              href="https://opencollective.com/webpack#support"
+            >
+              Become a {rank === "backer" ? "backer" : "sponsor"}
+            </a>
+          </div>
+        </div>
       </>
     );
   }

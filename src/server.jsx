@@ -1,8 +1,7 @@
 // Import External Dependencies
 import ReactDOMServer from "react-dom/server";
 import { HelmetProvider } from "react-helmet-async";
-import { StaticRouter } from "react-router-dom/server";
-
+import { StaticRouter } from "react-router";
 // Import Components
 // eslint-disable-next-line import/no-unresolved
 import assets from "../dist/prod-assets-manifest.json";
@@ -38,12 +37,18 @@ export default (locals) => {
       </StaticRouter>
     </HelmetProvider>,
   );
-
   const { helmet } = helmetContext;
+
+  console.log("helmetContext:", JSON.stringify(helmetContext));
+
+  const htmlAttrs = helmet?.htmlAttributes?.toString() ?? "";
+  const title = helmet?.title?.toString() ?? "";
+  const meta = helmet?.meta?.toString() ?? "";
+  const link = helmet?.link?.toString() ?? "";
 
   const css = assets.css
     .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
     .join("");
 
-  return `<!DOCTYPE html><html ${helmet.htmlAttributes.toString()}><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${css}</head>${renderedHtml}`;
+  return `<!DOCTYPE html><html ${htmlAttrs}><head>${title}${meta}${link}${css}</head>${renderedHtml}`;
 };

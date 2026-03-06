@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
-import VisibilitySensor from "react-visibility-sensor";
+import { useEffect, useRef, useState } from "react";
 import SmallIcon from "../../assets/icon-square-small-slack.png";
 import { contributorsNotFound } from "./404.js";
 
@@ -28,40 +27,47 @@ Contributor.propTypes = {
 
 export default function Contributors({ contributors }) {
   const [inView, setInView] = useState(false);
-  const handleInView = (inView) => {
-    if (!inView) {
-      return;
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect(); // only trigger once
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-    setInView(inView);
-  };
+
+    return () => observer.disconnect();
+  }, []);
+
   if (!contributors.length) {
     return <noscript />;
   }
 
   return (
-    <VisibilitySensor
-      delayedCall
-      partialVisibility
-      intervalDelay={300}
-      onChange={handleInView}
-    >
-      <div>
-        <div className="grid gap-[10px] lg:gap-[15px] grid-cols-contributors">
-          {contributors
-            .filter(
-              (contributor) =>
-                contributorsNotFound.includes(contributor) === false,
-            )
-            .map((contributor) => (
-              <Contributor
-                key={contributor}
-                contributor={contributor}
-                inView={inView}
-              />
-            ))}
-        </div>
+    <div ref={ref}>
+      <div className="grid gap-[10px] lg:gap-[15px] grid-cols-contributors">
+        {contributors
+          .filter(
+            (contributor) =>
+              contributorsNotFound.includes(contributor) === false,
+          )
+          .map((contributor) => (
+            <Contributor
+              key={contributor}
+              contributor={contributor}
+              inView={inView}
+            />
+          ))}
       </div>
-    </VisibilitySensor>
+    </div>
   );
 }
 
