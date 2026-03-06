@@ -357,7 +357,17 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   a code {
     color: $text-color-highlight;
   }
+  p a,
+  li a {
+    text-decoration: none;
+    font-weight: 600;
+  }
 
+  p a:focus-visible,
+  li a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
   pre {
     background-color: #2d3748;
     color: #e2e8f0;
