@@ -304,7 +304,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev css-loader ts-loader</code></pre></div>
 <p>And then instruct webpack to use the <a href="/loaders/css-loader"><code>css-loader</code></a> for every <code>.css</code> file and the <a href="https://github.com/TypeStrong/ts-loader"><code>ts-loader</code></a> for all <code>.ts</code> files:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span> test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -323,7 +323,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><a href="/configuration/module/#modulerules"><code>module.rules</code></a> allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.</p>
 <p>Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See <a href="/concepts/loaders/#loader-features">&quot;Loader Features&quot;</a> for more information about loaders order.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
