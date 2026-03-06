@@ -14,10 +14,8 @@ function isPrintPage(url) {
 
 // Export method for `SSGPlugin`
 export default (locals) => {
-  const helmetContext = {};
-
   const renderedHtml = ReactDOMServer.renderToString(
-    <HelmetProvider context={helmetContext}>
+    <HelmetProvider>
       <StaticRouter location={locals.path}>
         <body>
           <div id="root">
@@ -37,18 +35,13 @@ export default (locals) => {
       </StaticRouter>
     </HelmetProvider>,
   );
-  const { helmet } = helmetContext;
-
-  console.log("helmetContext:", JSON.stringify(helmetContext));
-
-  const htmlAttrs = helmet?.htmlAttributes?.toString() ?? "";
-  const title = helmet?.title?.toString() ?? "";
-  const meta = helmet?.meta?.toString() ?? "";
-  const link = helmet?.link?.toString() ?? "";
 
   const css = assets.css
     .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
     .join("");
 
-  return `<!DOCTYPE html><html ${htmlAttrs}><head>${title}${meta}${link}${css}</head>${renderedHtml}`;
+  // React 19 automatically hoists <title>, <meta>, <link> from the component
+  // tree into <head> during renderToString, so manual helmet context
+  // extraction is no longer needed.
+  return `<!DOCTYPE html><html><head>${css}</head>${renderedHtml}`;
 };
