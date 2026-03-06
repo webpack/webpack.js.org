@@ -10,6 +10,7 @@ contributors:
   - AnayaDesign
   - tapanprakasht
   - snitin315
+  - ThierryRakotomanana
 related:
   - title: Lazy Loading ES2015 Modules in the Browser
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
@@ -31,14 +32,14 @@ Let's try something different. We'll add an interaction to log some text to the 
 
 ```diff
 webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-  |- index.js
-+ |- print.js
-|- /node_modules
+ ├── package.json
+ ├── package-lock.json
+ ├── webpack.config.js
+ ├── /dist
+ ├── /src
+ │   ├── index.js
++│   └── print.js
+ └── /node_modules
 ```
 
 **src/print.js**
@@ -119,15 +120,15 @@ W> This feature is still in the experimental stage and may change in future vers
 **project**
 
 ```diff
-webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-  |- index.js
-+ |- print.js
-|- /node_modules
+ webpack-demo
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  ├── /src
+  │   ├── index.js
++ │   └── print.js
+  └── /node_modules
 ```
 
 **src/print.js**

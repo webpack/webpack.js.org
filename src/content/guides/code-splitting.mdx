@@ -36,6 +36,7 @@ contributors:
   - snitin315
   - artem-malko
   - Brennvo
+  - ThierryRakotomanana
 related:
   - title: <link rel="prefetch/preload" /> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -62,15 +63,15 @@ This is by far the easiest and most intuitive way to split code. However, it is 
 **project**
 
 ```diff
-webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-  |- index.js
-+ |- another-module.js
-|- /node_modules
+ webpack-demo
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  ├── /src
+  │   ├── index.js
++ │   └── another-module.js
+  └── /node_modules
 ```
 
 **another-module.js**
@@ -317,15 +318,15 @@ We'll also update our project to remove the now unused files:
 **project**
 
 ```diff
-webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-  |- index.js
-- |- another-module.js
-|- /node_modules
+ webpack-demo
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  ├── /src
+  │   ├── index.js
+- │   └── another-module.js
+  └── /node_modules
 ```
 
 Now, instead of statically importing `lodash`, we'll use dynamic importing to separate a chunk:

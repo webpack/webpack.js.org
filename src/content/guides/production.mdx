@@ -24,6 +24,7 @@ contributors:
   - EugeneHlushko
   - snitin315
   - Brennvo
+  - ThierryRakotomanana
 ---
 
 In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
@@ -46,17 +47,17 @@ npm install --save-dev webpack-merge
 
 ```diff
   webpack-demo
-  |- package.json
-  |- package-lock.json
-- |- webpack.config.js
-+ |- webpack.common.js
-+ |- webpack.dev.js
-+ |- webpack.prod.js
-  |- /dist
-  |- /src
-    |- index.js
-    |- math.js
-  |- /node_modules
+  ├── package.json
+  ├── package-lock.json
+- ├── webpack.config.js
++ ├── webpack.common.js
++ ├── webpack.dev.js
++ ├── webpack.prod.js
+  ├── /dist
+  ├── /src
+  │   ├── index.js
+  │   └── math.js
+  └── /node_modules
 ```
 
 **webpack.common.js**
