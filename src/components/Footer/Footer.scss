@@ -73,23 +73,29 @@
   color: getColor(dusty-grey);
   @include fontantialias(false);
 
-  &:not(:last-child) {
-    margin-right: 1.5em;
-  }
-
+  // Margin is removed here and moved to the parent container below
   &:hover {
     color: getColor(mine-shaft);
+  }
+}
+
+// Ensure all items in the footer sides have equal spacing
+.footer__left > *,
+.footer__right > * {
+  &:not(:last-child) {
+    margin-right: 1.5em;
   }
 }
 
 .footer__license {
   display: inline-block;
   height: 25px;
+  vertical-align: middle;
 
   img {
     width: auto;
     height: 100%;
-    margin-left: 1px;
+    margin-left: 1rem; 
   }
 }
 
