@@ -973,14 +973,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 Chunks combine into chunk groups and form a graph (<code>ChunkGraph</code>) interconnected through modules.
 When you describe an entry point - under the hood, you create a chunk group with one chunk.</p>
 <p><strong>./webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./index.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>One chunk group with the <code>main</code> name created (<code>main</code> is the default name for an entry point).
 This chunk group contains <code>./index.js</code> module. As the parser handles imports inside <code>./index.js</code> new modules are added into this chunk.</p>
 <p>Another example:</p>
 <p><strong>./webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token punctuation">{</span>
     home<span class="token operator">:</span> <span class="token string">&quot;./home.js&quot;</span><span class="token punctuation">,</span>
     about<span class="token operator">:</span> <span class="token string">&quot;./about.js&quot;</span><span class="token punctuation">,</span>
@@ -999,7 +999,7 @@ Each of them has a chunk with a module - <code>./home.js</code> for <code>home</
 </ul>
 <p>Each chunk has a corresponding <strong>asset</strong>. The assets are the output files - the result of bundling.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./src/index.jsx&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>./src/index.jsx</strong></p>
