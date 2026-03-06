@@ -3,6 +3,7 @@ import ReactDOMServer from "react-dom/server";
 import { HelmetProvider } from "react-helmet-async";
 import { StaticRouter } from "react-router";
 // Import Components
+// eslint-disable-next-line import/no-unresolved
 import assets from "../dist/prod-assets-manifest.json";
 import PrintScript from "./components/Print/PrintScript.jsx";
 import Site from "./components/Site/Site.jsx";

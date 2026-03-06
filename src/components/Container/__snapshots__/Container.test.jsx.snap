@@ -2,7 +2,7 @@
 
 exports[`Container renders correctly with children and className 1`] = `
 <div
-  className="container test-class"
+  class="container test-class"
 >
   <p>
     Child content
@@ -12,7 +12,7 @@ exports[`Container renders correctly with children and className 1`] = `
 
 exports[`Container renders correctly without className 1`] = `
 <div
-  className="container "
+  class="container "
 >
   <span>
     Simple child
