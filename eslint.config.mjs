@@ -85,6 +85,7 @@ export default defineConfig([
       "import/extensions": "off",
       "import/default": "off",
       "unicorn/prefer-top-level-await": "off",
+      "react/no-deprecated": "off",
     },
   },
 ]);
