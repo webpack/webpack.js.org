@@ -82,7 +82,7 @@ describe("CodeBlockWithCopy", () => {
 
       cy.get("@expectedCopiedText").then((expectedCopiedText) => {
         expect(copiedText).to.eq(expectedCopiedText);
-        expect(copiedText).to.include("module.exports = {");
+        expect(copiedText).to.include("export default {");
         expect(copiedText).to.include('entry: "./path/to/my/entry/file.js",');
       });
     });
