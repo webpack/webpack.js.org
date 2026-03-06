@@ -21,11 +21,11 @@
 <p>Now we&#x27;ll create the following directory structure, files and their contents:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- index.html
-</span><span class="token prefix inserted">+</span><span class="token line"> |- /src
-</span><span class="token prefix inserted">+</span><span class="token line">   |- index.js</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> ├── index.html
+</span><span class="token prefix inserted">+</span><span class="token line"> └── src/
+</span><span class="token prefix inserted">+</span><span class="token line">    └── index.js</span></span></code></pre></div>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">function</span> <span class="token function">component</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> element <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;div&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -82,13 +82,13 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <p>First we&#x27;ll tweak our directory structure slightly, separating the &quot;source&quot; code (<code>./src</code>) from our &quot;distribution&quot; code (<code>./dist</code>). The &quot;source&quot; code is the code that we&#x27;ll write and edit. The &quot;distribution&quot; code is the minimized and optimized <code>output</code> of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- /dist
-</span><span class="token prefix inserted">+</span><span class="token line">   |- index.html
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> |- index.html
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  ├── /dist
+</span><span class="token prefix inserted">+</span><span class="token line">  │   └── index.html
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  ├── index.html
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  └── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">      └── index.js</span></span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You may have noticed that <code>index.html</code> was created manually, even though it is now placed in the <code>dist</code> directory. Later on in <a href="/guides/output-management/#setting-up-htmlwebpackplugin">another guide</a>, we will generate <code>index.html</code> rather than edit it manually. Once this is done, it should be safe to empty the <code>dist</code> directory and to regenerate all the files within it.</p></aside>
 <p>To bundle the <code>lodash</code> dependency with <code>index.js</code>, we&#x27;ll need to install the library locally:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save lodash</code></pre></div>
@@ -144,13 +144,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Webpack configuration files can be written using either CommonJS or ECMAScript modules. The examples below use modern ESM syntax.</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- webpack.config.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  ├── webpack.config.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">  └── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">      └── index.js</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
@@ -221,15 +221,15 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Now that you have a basic build together you should move on to the next guide <a href="/guides/asset-management"><code>Asset Management</code></a> to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- main.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- index.html
-</span></span>|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span>|- /node_modules</code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">│   ├── main.js
+</span><span class="token prefix unchanged"> </span><span class="token line">│   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">│   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">└── /node_modules</span></span></code></pre></div>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the web browsers of the end users of your application.</p></aside>
 <p>If you want to learn more about webpack&#x27;s design, you can check out the <a href="/concepts">basic concepts</a> and <a href="/configuration">configuration</a> pages. Furthermore, the <a href="/api">API</a> section digs into the various interfaces webpack offers.</p>
 <h1><span id="asset-management"></span>Asset Management<a href="#asset-management" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
@@ -299,16 +299,16 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Let&#x27;s try it out by adding a new <code>style.css</code> file to our project and import it in our <code>index.js</code>:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- style.css
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /src
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  │   ├── style.css
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  └── /node_modules</span></span></code></pre></div>
 <p><strong>src/style.css</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-css"><span class="token selector">.hello</span> <span class="token punctuation">{</span>
   <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
@@ -379,17 +379,17 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Let&#x27;s add an image to our project and see how this works, you can use any image you like:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- icon.png
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   |- style.css
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /src
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  │   ├── icon.png
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  │   ├── style.css
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  └── /node_modules</span></span></code></pre></div>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import _ from &#x27;lodash&#x27;;
 </span><span class="token prefix unchanged"> </span><span class="token line">import &#x27;./style.css&#x27;;
@@ -474,19 +474,19 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Add some font files to your project:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- my-font.woff
-</span><span class="token prefix inserted">+</span><span class="token line">   |- my-font.woff2
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   |- icon.png
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- style.css
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /src
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  │   ├── my-font.woff
+</span><span class="token prefix inserted">+</span><span class="token line">  │   ├── my-font.woff2
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  │   ├── icon.png
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── style.css
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  └── /node_modules</span></span></code></pre></div>
 <p>With the loader configured and fonts in place, you can incorporate them via an <code>@font-face</code> declaration. The local <code>url(...)</code> directive will be picked up by webpack, as it was with the image:</p>
 <p><strong>src/style.css</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">@font-face {
@@ -573,21 +573,21 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Add some data files to your project:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- data.xml
-</span><span class="token prefix inserted">+</span><span class="token line">   |- data.csv
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   |- my-font.woff
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- my-font.woff2
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- icon.png
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- style.css
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /src
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  │   ├── data.xml
+</span><span class="token prefix inserted">+</span><span class="token line">  │   ├── data.csv
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  │   ├── my-font.woff
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── my-font.woff2
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── icon.png
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── style.css
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  └── /node_modules</span></span></code></pre></div>
 <p><strong>src/data.xml</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-xml"><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>note</span><span class="token punctuation">&gt;</span></span>
@@ -778,37 +778,37 @@ Likes tater tots and beer.&quot;,
 <p>Re-run the <code>npm run build</code> command and open <code>dist/index.html</code>. You should be able to see your imported data being logged to the console!</p>
 <h2><span id="global-assets"></span>Global Assets<a href="#global-assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets in a more intuitive way. Instead of relying on a global <code>/assets</code> directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be useful:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> |- /assets
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |– /components
-</span><span class="token prefix inserted">+</span><span class="token line"> |  |– /my-component
-</span><span class="token prefix inserted">+</span><span class="token line"> |  |  |– index.jsx
-</span><span class="token prefix inserted">+</span><span class="token line"> |  |  |– index.css
-</span><span class="token prefix inserted">+</span><span class="token line"> |  |  |– icon.svg
-</span><span class="token prefix inserted">+</span><span class="token line"> |  |  |– img.png</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> ├── /assets
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> └── /components
+</span><span class="token prefix inserted">+</span><span class="token line">     └── /my-component
+</span><span class="token prefix inserted">+</span><span class="token line">         ├── index.jsx
+</span><span class="token prefix inserted">+</span><span class="token line">         ├── index.css
+</span><span class="token prefix inserted">+</span><span class="token line">         ├── icon.svg
+</span><span class="token prefix inserted">+</span><span class="token line">         └── img.png</span></span></code></pre></div>
 <p>This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let&#x27;s say you want to use <code>/my-component</code> in another project, copy or move it into the <code>/components</code> directory over there. As long as you&#x27;ve installed any <em>external dependencies</em> and your <em>configuration has the same loaders</em> defined, you should be good to go.</p>
 <p>However, let&#x27;s say you&#x27;re locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It&#x27;s still possible to store these assets in a base directory and even use <a href="/configuration/resolve/#resolvealias">aliasing</a> to make them easier to <code>import</code>.</p>
 <h2><span id="wrapping-up"></span>Wrapping up<a href="#wrapping-up" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>For the next guides we won&#x27;t be using all the different assets we&#x27;ve used in this guide, so let&#x27;s do some cleanup so we&#x27;re prepared for the next piece of the guides <a href="https://webpack.js.org/guides/output-management/">Output Management</a>:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   |- data.csv
-</span><span class="token prefix deleted">-</span><span class="token line">   |- data.json5
-</span><span class="token prefix deleted">-</span><span class="token line">   |- data.toml
-</span><span class="token prefix deleted">-</span><span class="token line">   |- data.xml
-</span><span class="token prefix deleted">-</span><span class="token line">   |- data.yaml
-</span><span class="token prefix deleted">-</span><span class="token line">   |- icon.png
-</span><span class="token prefix deleted">-</span><span class="token line">   |- my-font.woff
-</span><span class="token prefix deleted">-</span><span class="token line">   |- my-font.woff2
-</span><span class="token prefix deleted">-</span><span class="token line">   |- style.css
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /src
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  │   ├── data.csv
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── data.json5
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── data.toml
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── data.xml
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── data.yaml
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── icon.png
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── my-font.woff
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── my-font.woff2
+</span><span class="token prefix deleted">-</span><span class="token line">  │   ├── style.css
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  │   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  └── /node_modules</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
 </span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
@@ -926,14 +926,14 @@ Likes tater tots and beer.&quot;,
 <p>First, let&#x27;s adjust our project a little bit:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- print.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   ├── print.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p>Let&#x27;s add some logic to our <code>src/print.js</code> file:</p>
 <p><strong>src/print.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">printMe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1323,15 +1323,15 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 <p>The <code>publicPath</code> will be used within our server script as well in order to make sure files are served correctly on <code>http://localhost:3000</code>. We&#x27;ll specify the port number later. The next step is setting up our custom <code>express</code> server:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- server.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- print.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── webpack.config.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  ├── server.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">  ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   ├── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  │   └── print.js
+</span><span class="token prefix unchanged"> </span><span class="token line">  └── /node_modules</span></span></code></pre></div>
 <p><strong>server.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> express <span class="token keyword">from</span> <span class="token string">&quot;express&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> webpack <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span>
@@ -1425,15 +1425,15 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <h2><span id="entry-points"></span>Entry Points<a href="#entry-points" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>This is by far the easiest and most intuitive way to split code. However, it is more manual and has some pitfalls we will go over. Let&#x27;s take a look at how we might split another module from the main bundle:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- another-module.js
-</span></span>|- /node_modules</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">webpack-demo
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   └── another-module.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p><strong>another-module.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> _ <span class="token keyword">from</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">;</span>
 
@@ -1625,15 +1625,15 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
 <p>We&#x27;ll also update our project to remove the now unused files:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> |- another-module.js
-</span></span>|- /node_modules</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">webpack-demo
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> │   └── another-module.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p>Now, instead of statically importing <code>lodash</code>, we&#x27;ll use dynamic importing to separate a chunk:</p>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">import _ from &#x27;lodash&#x27;;
@@ -1768,13 +1768,13 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 <p>Let&#x27;s get our project set up using the example from <a href="/guides/getting-started">getting started</a> with the <code>plugins</code> from <a href="/guides/output-management">output management</a>, so we don&#x27;t have to deal with maintaining our <code>index.html</code> file manually:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span>|- /node_modules</code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">│   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">└── /node_modules</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
 </span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
@@ -1898,14 +1898,14 @@ vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB    
 <p>Let&#x27;s add another module, <code>print.js</code>, to our project:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- print.js
-</span></span>|- /node_modules</code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">│   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">│   └── print.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">└── /node_modules</span></span></code></pre></div>
 <p><strong>print.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> export default function print(text) {
 </span><span class="token prefix inserted">+</span><span class="token line">   console.log(text);
@@ -2020,11 +2020,11 @@ Entrypoint main <span class="token operator">=</span> runtime.725a1a51ede5ae0cfd
 <p>Let&#x27;s assume that we are writing a small library, <code>webpack-numbers</code>, that allows users to convert the numbers 1 through 5 from their numeric representation to a textual one and vice-versa, e.g. 2 to &#x27;two&#x27;.</p>
 <p>The basic project structure would look like this:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  |- webpack.config.js
-</span><span class="token prefix inserted">+</span><span class="token line">  |- package.json
-</span><span class="token prefix inserted">+</span><span class="token line">  |- /src
-</span><span class="token prefix inserted">+</span><span class="token line">    |- index.js
-</span><span class="token prefix inserted">+</span><span class="token line">    |- ref.json</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix inserted">+</span><span class="token line"> ├── package.json
+</span><span class="token prefix inserted">+</span><span class="token line"> └── /src
+</span><span class="token prefix inserted">+</span><span class="token line">     ├── index.js
+</span><span class="token prefix inserted">+</span><span class="token line">     └── ref.json</span></span></code></pre></div>
 <p>Initialize the project with npm, then install <code>webpack</code>, <code>webpack-cli</code> and <code>lodash</code>:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> init -y
 <span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack webpack-cli lodash</code></pre></div>
@@ -2519,13 +2519,11 @@ The <code>--client-web-socket-url</code> flag makes sure the script knows where 
 <p>A context is created if your request contains expressions, so the <strong>exact</strong> module is not known on compile time.</p>
 <p>Example, given we have the following folder structure including <code>.ejs</code> files:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">example_directory
-│
-└───template
-│   │   table.ejs
-│   │   table-row.ejs
-│   │
-│   └───directory
-│       │   another.ejs</code></pre></div>
+└── template/
+    ├── table.ejs
+    ├── table-row.ejs
+    └── directory/
+        └── another.ejs</code></pre></div>
 <p>When following <code>import()</code> or <code>require()</code> call is evaluated:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">./template/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.ejs</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">require</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">./template/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>name<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.ejs</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
@@ -2886,14 +2884,14 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 <p>Hot loading stylesheets can be done by importing them into a module:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> | - package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> | - webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> | - /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   | - bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> | - /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   | - index.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   | - print.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   | - styles.css</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   └── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> └── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">     ├── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">     ├── print.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     └── styles.css</span></span></code></pre></div>
 <p><strong>styles.css</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-css"><span class="token selector">body</span> <span class="token punctuation">{</span>
   <span class="token property">background</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
@@ -2953,17 +2951,17 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 <h2><span id="add-a-utility"></span>Add a Utility<a href="#add-a-utility" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Let&#x27;s add a new utility file to our project, <code>src/math.js</code>, that exports two functions:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- index.html
-</span></span>|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- math.js
-</span></span>|- /node_modules</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">webpack-demo
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   └── math.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p><strong>src/math.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">square</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
@@ -3165,22 +3163,22 @@ export default {
 <p>Our example package looks like this:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">awesome-ui/
 ├── package.json
-├── dist/
-│   ├── index.js
-│   ├── components/
-│   │   ├── index.js
-│   │   ├── Button/
-│   │   │   ├── index.js
-│   │   │   └── Button.css
-│   │   ├── Card/
-│   │   │   ├── index.js
-│   │   │   └── Card.css
-│   │   └── Modal/
-│   │       ├── index.js
-│   │       └── Modal.css
-│   └── theme/
-│       ├── index.js
-│       └── defaultTheme.css</code></pre></div>
+└── dist/
+    ├── index.js
+    ├── components/
+    │   ├── index.js
+    │   ├── Button/
+    │   │   ├── index.js
+    │   │   └── Button.css
+    │   ├── Card/
+    │   │   ├── index.js
+    │   │   └── Card.css
+    │   └── Modal/
+    │       ├── index.js
+    │       └── Modal.css
+    └── theme/
+        ├── index.js
+        └── defaultTheme.css</code></pre></div>
 <h3><span id="package-files-content"></span>Package Files Content<a href="#package-files-content" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>package.json</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-json"><span class="token punctuation">{</span>
@@ -3372,17 +3370,17 @@ export default {
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack-merge</code></pre></div>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> |- webpack.config.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- webpack.common.js
-</span><span class="token prefix inserted">+</span><span class="token line"> |- webpack.dev.js
-</span><span class="token prefix inserted">+</span><span class="token line"> |- webpack.prod.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- math.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> ├── webpack.config.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> ├── webpack.common.js
+</span><span class="token prefix inserted">+</span><span class="token line"> ├── webpack.dev.js
+</span><span class="token prefix inserted">+</span><span class="token line"> ├── webpack.prod.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   └── math.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p><strong>webpack.common.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import path from &#x27;node:path&#x27;;
 </span><span class="token prefix inserted">+</span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
@@ -3520,14 +3518,14 @@ export default {
 <p>Let&#x27;s try something different. We&#x27;ll add an interaction to log some text to the console when the user clicks a button. However, we&#x27;ll wait to load that code (<code>print.js</code>) until the interaction occurs for the first time. To do this we&#x27;ll go back and rework the <a href="/guides/code-splitting/#dynamic-imports">final <em>Dynamic Imports</em> example</a> from <em>Code Splitting</em> and leave <code>lodash</code> in the main chunk.</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- print.js
-</span></span>|- /node_modules</code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">│   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">│   └── print.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">└── /node_modules</span></span></code></pre></div>
 <p><strong>src/print.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>
   <span class="token string">&quot;The print.js module has loaded! See the network tab in dev tools...&quot;</span><span class="token punctuation">,</span>
@@ -3585,15 +3583,15 @@ index.bundle.js     <span class="token number">548</span> kB       <span class="
 <p>This feature is available by enabling <a href="/configuration/experiments/#experimentsdeferimport">experiments.deferImport</a>.</p>
 <aside class="warning"><p class="warning__prefix">warning</p><p>This feature is still in the experimental stage and may change in future versions of webpack.</p></aside>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- print.js
-</span></span>|- /node_modules</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">webpack-demo
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   └── print.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p><strong>src/print.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>
   <span class="token string">&quot;The print.js module has loaded! See the network tab in dev tools...&quot;</span><span class="token punctuation">,</span>
@@ -3754,14 +3752,14 @@ Setting <code>&quot;type&quot;: &quot;commonjs&quot;</code> will instead force t
 <p>Let&#x27;s start with the first use case of shimming global variables. Before we do anything let&#x27;s take another look at our project:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.html
-</span></span>|- /src
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
-</span></span>|- /node_modules</code></pre></div>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line">├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line">│   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line">├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line">│   └── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line">└── /node_modules</span></span></code></pre></div>
 <p>Remember that <code>lodash</code> package we were using? For demonstration purposes, let&#x27;s say we wanted to instead provide this as a global throughout our application. To do this, we can use <code>ProvidePlugin</code>.</p>
 <p>The <a href="/plugins/provide-plugin"><code>ProvidePlugin</code></a> makes a package available as a variable in every module compiled through webpack. If webpack sees that variable used, it will include the given package in the final bundle. Let&#x27;s go ahead by removing the <code>import</code> statement for <code>lodash</code> and instead provide it via the plugin:</p>
 <p><strong>src/index.js</strong></p>
@@ -3896,14 +3894,14 @@ const __dirname = path.dirname(__filename);
 <p>Let&#x27;s say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- globals.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   ├── globals.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p><strong>src/globals.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> file <span class="token operator">=</span> <span class="token string">&quot;blah.txt&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> helpers <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -3993,15 +3991,15 @@ Let&#x27;s move our <code>import</code> to a new file and add the <a href="https
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre></div>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- globals.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- polyfills.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── globals.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   └── polyfills.js
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p><strong>src/polyfills.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;babel-polyfill&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">&quot;whatwg-fetch&quot;</span><span class="token punctuation">;</span></code></pre></div>
@@ -4119,18 +4117,18 @@ const __dirname = path.dirname(__filename);
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev typescript ts-loader</code></pre></div>
 <p>Now we&#x27;ll modify the directory structure &amp; the configuration files:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- package-lock.json
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> |- tsconfig.json
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> |- /src
-</span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   |- index.ts
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">webpack-demo
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> ├── tsconfig.json
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── bundle.js
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   └── index.html
+</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
+</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   └── index.ts
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
 <p><strong>tsconfig.json</strong></p>
 <p>Let&#x27;s set up a configuration to support JSX and compile TypeScript down to ES5...</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-json"><span class="token punctuation">{</span>
