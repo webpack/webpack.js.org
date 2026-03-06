@@ -15,33 +15,28 @@ function isPrintPage(url) {
 // Export method for `SSGPlugin`
 export default (locals) => {
   const renderedHtml = ReactDOMServer.renderToString(
-    <HelmetProvider>
-      <StaticRouter location={locals.path}>
-        <body>
-          <div id="root">
-            <Site
-              // note that here we use require instead of import
-              // i.e., can't  reuse App.jsx
-              // eslint-disable-next-line no-undef
-              import={(path) => require(`./content/${path}`)}
-            />
-          </div>
-          {isPrintPage(locals.path) ? (
-            <PrintScript />
-          ) : (
-            assets.js.map((path) => <script key={path} src={path} />)
-          )}
-        </body>
-      </StaticRouter>
-    </HelmetProvider>,
+    <StaticRouter location={locals.path}>
+      <HelmetProvider>
+        <Site
+          // note that here we use require instead of import
+          // i.e., can't  reuse App.jsx
+          // eslint-disable-next-line no-undef
+          import={(path) => require(`./content/${path}`)}
+        />
+      </HelmetProvider>
+    </StaticRouter>,
   );
 
   const css = assets.css
     .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
     .join("");
 
+  const scripts = isPrintPage(locals.path)
+    ? ReactDOMServer.renderToStaticMarkup(<PrintScript />)
+    : assets.js.map((path) => `<script src="${path}"></script>`).join("");
+
   // React 19 automatically hoists <title>, <meta>, <link> from the component
   // tree into <head> during renderToString, so manual helmet context
   // extraction is no longer needed.
-  return `<!DOCTYPE html><html><head>${css}</head>${renderedHtml}`;
+  return `<!DOCTYPE html><html><head>${css}</head><body><div id="root">${renderedHtml}</div>${scripts}</body></html>`;
 };
