@@ -38,16 +38,18 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
-    caches.open(cacheName).then((cache) => {
+    caches.open(cacheName).then((cache) =>
       // clean up those who are not listed in manifestURLs
-      cache.keys().then((keys) => {
-        for (const request of keys) {
-          if (!manifestURLs.includes(request.url)) {
-            cache.delete(request);
-          }
-        }
-      });
-    }),
+      cache
+        .keys()
+        .then((keys) =>
+          Promise.all(
+            keys
+              .filter((request) => !manifestURLs.includes(request.url))
+              .map((request) => cache.delete(request)),
+          ),
+        ),
+    ),
   );
 });
 
