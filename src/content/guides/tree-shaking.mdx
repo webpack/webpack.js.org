@@ -20,6 +20,7 @@ contributors:
   - snitin315
   - vansh5632
   - Brennvo
+  - ThierryRakotomanana
 related:
   - title: Debugging Optimization Bailouts
     url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
@@ -40,17 +41,17 @@ Let's add a new utility file to our project, `src/math.js`, that exports two fun
 **project**
 
 ```diff
-webpack-demo
-|- package.json
-|- package-lock.json
-|- webpack.config.js
-|- /dist
-  |- bundle.js
-  |- index.html
-|- /src
-  |- index.js
-+ |- math.js
-|- /node_modules
+ webpack-demo
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  │   ├── bundle.js
+  │   └── index.html
+  ├── /src
+  │   ├── index.js
++ │   └── math.js
+  └── /node_modules
 ```
 
 **src/math.js**
@@ -335,22 +336,22 @@ Our example package looks like this:
 ```bash
 awesome-ui/
 ├── package.json
-├── dist/
-│   ├── index.js
-│   ├── components/
-│   │   ├── index.js
-│   │   ├── Button/
-│   │   │   ├── index.js
-│   │   │   └── Button.css
-│   │   ├── Card/
-│   │   │   ├── index.js
-│   │   │   └── Card.css
-│   │   └── Modal/
-│   │       ├── index.js
-│   │       └── Modal.css
-│   └── theme/
-│       ├── index.js
-│       └── defaultTheme.css
+└── dist/
+    ├── index.js
+    ├── components/
+    │   ├── index.js
+    │   ├── Button/
+    │   │   ├── index.js
+    │   │   └── Button.css
+    │   ├── Card/
+    │   │   ├── index.js
+    │   │   └── Card.css
+    │   └── Modal/
+    │       ├── index.js
+    │       └── Modal.css
+    └── theme/
+        ├── index.js
+        └── defaultTheme.css
 ```
 
 ### Package Files Content

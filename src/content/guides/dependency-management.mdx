@@ -7,6 +7,7 @@ contributors:
   - sokra
   - byzyk
   - AnayaDesign
+  - ThierryRakotomanana
 ---
 
 ## Dynamic expressions in import() or require()
@@ -17,13 +18,11 @@ Example, given we have the following folder structure including `.ejs` files:
 
 ```bash
 example_directory
-│
-└───template
-│   │   table.ejs
-│   │   table-row.ejs
-│   │
-│   └───directory
-│       │   another.ejs
+└── template/
+    ├── table.ejs
+    ├── table-row.ejs
+    └── directory/
+        └── another.ejs
 ```
 
 When following `import()` or `require()` call is evaluated:
