@@ -43,7 +43,6 @@ export default function Print(props) {
         className="sidebar-item__title sidebar-link__print"
         href={printUrl}
         rel="nofollow noopener noreferrer"
-        alt="Print"
         title="Print"
         target="_blank"
       >
