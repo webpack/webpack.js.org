@@ -9,6 +9,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - snitin315
+  - moshams272
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -24,9 +25,17 @@ compiler.hooks.normalModuleFactory.tap("MyPlugin", (factory) => {
   factory.hooks.parser
     .for("javascript/auto")
     .tap("MyPlugin", (parser, options) => {
-      parser.hooks.someHook.tap("MyPlugin", (data) => {
-        // ...
-      });
+      // The `parser` provides many hooks, which are explained in detail below.
+      // Here is a practical example using the `call` hook to detect and warn
+      // about a deprecated API function when a developer calls it
+      // (e.g., `myCustomApiFunction()`):
+      parser.hooks.call
+        .for("myCustomApiFunction")
+        .tap("MyPlugin", (expression) => {
+          console.warn(
+            `Warning: 'myCustomApiFunction' is deprecated. Found call at line ${expression.loc.start.line}.`,
+          );
+        });
     });
 });
 ```
