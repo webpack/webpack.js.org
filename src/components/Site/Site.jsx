@@ -137,6 +137,42 @@ function Site(props) {
     }
   }, []);
 
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production") {
+      const GA_ID = "UA-46921629-2";
+
+      if (!window.ga) {
+        window.ga ||= function ga() {
+          (ga.q = ga.q || []).push(arguments); // eslint-disable-line
+        };
+        ga.l = +new Date(); // eslint-disable-line
+
+        const gads = document.createElement("script");
+        gads.async = true;
+        gads.type = "text/javascript";
+        gads.src = "//www.google-analytics.com/analytics.js";
+        const [head] = document.getElementsByTagName("head");
+        head.appendChild(gads);
+
+        window.ga("create", GA_ID, "auto");
+      }
+
+      const path = location.pathname + location.search;
+      window.ga("set", {
+        page: path,
+        title: document.title,
+        location: document.location,
+      });
+      window.ga("send", { hitType: "pageview" });
+    }
+  }, [location]);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const sections = extractSections(Content);
   const section = sections.find(({ url }) => location.pathname.startsWith(url));
   const pages = extractPages(Content);
@@ -262,7 +298,7 @@ function Site(props) {
         />
       </div>
 
-      {isClient ? (
+      {mounted ? (
         <SidebarMobile
           isOpen={mobileSidebarOpen}
           sections={_strip(Content.children)}
