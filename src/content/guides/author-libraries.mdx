@@ -36,10 +36,11 @@ Initialize the project with npm, then install `webpack`, `webpack-cli` and `loda
 
 ```bash
 npm init -y
-npm install --save-dev webpack webpack-cli lodash
+npm install --save-dev webpack webpack-cli
+npm install --save lodash
 ```
 
-We install `lodash` as `devDependencies` instead of `dependencies` because we don't want to bundle it into our library, or our library could be easily bloated.
+We install `lodash` as a `dependency` because our library directly imports it — any `import` or `require` of a package means it is a direct dependency. We will use the [`externals`](/configuration/externals/) configuration later to avoid bundling it into our library output.
 
 **src/ref.json**
 
@@ -221,7 +222,7 @@ T> Note that the `library` setup is tied to the `entry` configuration. For most 
 
 ## Externalize Lodash
 
-Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a _peer dependency_. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
+Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to _externalize_ `lodash`, meaning it won't be included in the output bundle. Instead, the consumer of your library is expected to have `lodash` available in their environment. Since `lodash` is listed in your library's `dependencies`, it will be automatically installed when a user installs your library, and their bundler can deduplicate it with other versions.
 
 This can be done using the [`externals`](/configuration/externals/) configuration:
 
