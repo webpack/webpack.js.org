@@ -30,6 +30,75 @@ contributors:
   - zowiebeha
 ---
 
+## Quick Start (Minimal Working Example)
+
+If you just want to confirm webpack works with a minimal setup (before going through the full tutorial), follow these steps.
+
+### 1. Create a project
+
+```bash
+mkdir webpack-demo
+cd webpack-demo
+npm init -y
+npm install webpack webpack-cli --save-dev
+```
+
+### 2. Create a source file
+
+**project**
+
+```diff
+  webpack-demo
+  |- package.json
+  |- package-lock.json
++ |- /src
++   |- index.js
+```
+
+**src/index.js**
+
+```js
+console.log("Hello webpack");
+```
+
+### 3. Add a minimal configuration
+
+**project**
+
+```diff
+  webpack-demo
+  |- package.json
+  |- package-lock.json
++ |- webpack.config.js
+  |- /src
+    |- index.js
+```
+
+**webpack.config.js**
+
+```js
+const path = require("node:path");
+
+module.exports = {
+  mode: "development",
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+};
+```
+
+### 4. Build
+
+```bash
+npx webpack
+```
+
+If everything worked, webpack will generate `dist/main.js`.
+
+T> `src/` is where you write your source code. `dist/` is generated output — you typically don’t edit files in `dist/` by hand.
+
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
 
 W> The minimum supported Node.js version to run webpack 5 is 10.13.0 (LTS)
