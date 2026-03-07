@@ -9,6 +9,8 @@ describe("Open page in new tab", { scrollBehavior: false }, () => {
         cy.stub(win, "scrollTo");
       },
     });
+    // wait for page content to load before asserting scroll
+    cy.get(".page").should("exist");
     // there's one call in Page.jsx when componentDidMount
     cy.window().then((win) => {
       expect(win.scrollTo).to.be.calledOnce;
