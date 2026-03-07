@@ -15,7 +15,7 @@ contributors:
 
 They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do. Webpack provides [many such plugins](/plugins/) out of the box.
 
-T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, use `import { sources } from "webpack"` instead of importing from `webpack-sources` to avoid version conflicts for persistent caching.
+T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, prefer `compiler.webpack.sources` instead of importing from `webpack` or `webpack-sources` to avoid version conflicts for persistent caching.
 
 ## Anatomy
 
