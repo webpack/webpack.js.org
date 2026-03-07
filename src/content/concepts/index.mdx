@@ -20,6 +20,7 @@ contributors:
   - muhmushtaha
   - chenxsan
   - RyanGreyling2
+  - saishankar404
 ---
 
 At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) from one or more _entry points_ and then combines every module your project needs into one or more _bundles_, which are static assets to serve your content from.
@@ -58,6 +59,8 @@ export default {
   entry: "./path/to/my/entry/file.js",
 };
 ```
+
+T> When running webpack without a configuration file, the entry defaults to `'./src/index.js'`. If that file does not exist — even if your `src/` directory does — webpack will throw: <br /> **`ERROR in Entry module not found: Error: Can't resolve './src'`** <br /><br /> The error says `'./src'` rather than `'./src/index.js'` because webpack resolves the directory first and then fails to find the default `index.js` inside it. To use a different entry filename, add a `webpack.config.js` as shown in the example above.
 
 T> Learn more in the [entry points](/concepts/entry-points) section.
 
