@@ -15,7 +15,7 @@ contributors:
 
 They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do. Webpack provides [many such plugins](/plugins/) out of the box.
 
-T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, use `require('webpack').sources` instead of `require('webpack-sources')` to avoid version conflicts for persistent caching.
+T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, prefer `compiler.webpack.sources` instead of importing from `webpack` or `webpack-sources` to avoid version conflicts for persistent caching.
 
 ## Anatomy
 
@@ -34,7 +34,7 @@ class ConsoleLogOnBuildWebpackPlugin {
   }
 }
 
-module.exports = ConsoleLogOnBuildWebpackPlugin;
+export default ConsoleLogOnBuildWebpackPlugin;
 ```
 
 It is recommended that the first parameter of the tap method of the compiler hook should be a camelized version of the plugin name. It is advisable to use a constant for this so it can be reused in all hooks.
@@ -50,11 +50,15 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack"); // to access built-in plugins
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import webpack from "webpack"; // to access built-in plugins
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: "./path/to/my/entry/file.js",
   output: {
     filename: "my-first-webpack.bundle.js",
@@ -84,8 +88,8 @@ When using the Node API, you can also pass plugins via the `plugins` property in
 **some-node-script.js**
 
 ```javascript
-const webpack = require("webpack"); // to access webpack runtime
-const configuration = require("./webpack.config.js");
+import webpack from "webpack"; // to access webpack runtime
+import configuration from "./webpack.config.js";
 
 const compiler = webpack(configuration);
 
