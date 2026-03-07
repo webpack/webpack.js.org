@@ -35,8 +35,12 @@ export default (locals) => {
     ? ReactDOMServer.renderToStaticMarkup(<PrintScript />)
     : assets.js.map((path) => `<script src="${path}"></script>`).join("");
 
-  // React 19 automatically hoists <title>, <meta>, <link> from the component
-  // tree into <head> during renderToString, so manual helmet context
-  // extraction is no longer needed.
-  return `<!DOCTYPE html><html><head>${css}</head><body><div id="root">${renderedHtml}</div>${scripts}</body></html>`;
+  // React 19 hoists head tags into the start of renderedHtml — extract and move to <head>
+  const headTagsMatch = renderedHtml.match(
+    /^((?:<(?:meta|link|base)[^>]*\/?>|<title>[^<]*<\/title>|<style[^>]*>[\s\S]*?<\/style>|<noscript[^>]*>[\s\S]*?<\/noscript>)*)/,
+  );
+  const hoistedTags = headTagsMatch ? headTagsMatch[1] : "";
+  const bodyHtml = renderedHtml.slice(hoistedTags.length);
+
+  return `<!DOCTYPE html><html><head>${css}${hoistedTags}</head><body><div id="root">${bodyHtml}</div>${scripts}</body></html>`;
 };
