@@ -38,7 +38,6 @@ function buildContentTree(source, output) {
 
     console.log(`Successfully built content tree file at ${output}`);
   } catch (error) {
-    // Use console.error for actual exceptions
     console.error("scripts/build-content-tree:", error);
   }
 }
