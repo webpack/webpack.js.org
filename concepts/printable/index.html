@@ -835,7 +835,7 @@ Starting from these <a href="/concepts/entry-points/"><em>entry points</em></a>,
 <h2><span id="usage"></span>Usage<a href="#usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>To set the <code>target</code> property, you set the target value in your webpack config:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   target<span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In the example above, using <code>node</code> webpack will compile for usage in a Node.js-like environment (uses Node.js <code>require</code> to load chunks and not touch any built in modules like <code>fs</code> or <code>path</code>).</p>
@@ -844,7 +844,11 @@ Starting from these <a href="/concepts/entry-points/"><em>entry points</em></a>,
 <h2><span id="multiple-targets"></span>Multiple Targets<a href="#multiple-targets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Although webpack does <strong>not</strong> support multiple strings being passed into the <code>target</code> property, you can create an isomorphic library by bundling two separate configurations:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:path&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> serverConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
   target<span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
@@ -864,7 +868,7 @@ Starting from these <a href="/concepts/entry-points/"><em>entry points</em></a>,
   <span class="token comment">// …</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">[</span>serverConfig<span class="token punctuation">,</span> clientConfig<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">[</span>serverConfig<span class="token punctuation">,</span> clientConfig<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>The example above will create a <code>lib.js</code> and <code>lib.node.js</code> file in your <code>dist</code> folder.</p>
 <h2><span id="resources"></span>Resources<a href="#resources" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>As seen from the options above, there are multiple deployment <em>targets</em> that you can choose from. Below is a list of examples and resources that you can refer to.</p>
