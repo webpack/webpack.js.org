@@ -1,4 +1,5 @@
 // this plugin was first based on https://github.com/montogeek/remark-responsive-tables
+import { toString } from "mdast-util-to-string";
 import { visit } from "unist-util-visit";
 
 export default function remarkResponsiveTable() {
@@ -29,11 +30,8 @@ export default function remarkResponsiveTable() {
           const th = thead.children[index];
           td.data = {
             hProperties: {
-              dataTh:
-                // td in th could be empty
-                th.children.length > 0 ? th.children[0].value : "",
-              // FIXME what if td in th contains complex markdown??
-              // e.g. "`code` and something else", then data-th would be wrong.
+              // td in th could be empty
+              dataTh: th.children.length > 0 ? toString(th) : "",
             },
           };
         }
