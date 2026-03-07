@@ -3111,9 +3111,17 @@ more work to access:</p>
   factory<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>parser
     <span class="token punctuation">.</span><span class="token function">for</span><span class="token punctuation">(</span><span class="token string">&quot;javascript/auto&quot;</span><span class="token punctuation">)</span>
     <span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">parser<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      parser<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>someHook<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-        <span class="token comment">// ...</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// The `parser` provides many hooks, which are explained in detail below.</span>
+      <span class="token comment">// Here is a practical example using the `call` hook to detect and warn</span>
+      <span class="token comment">// about a deprecated API function when a developer calls it</span>
+      <span class="token comment">// (e.g., `myCustomApiFunction()`):</span>
+      parser<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>call
+        <span class="token punctuation">.</span><span class="token function">for</span><span class="token punctuation">(</span><span class="token string">&quot;myCustomApiFunction&quot;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">expression</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          console<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span>
+            <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Warning: &#x27;myCustomApiFunction&#x27; is deprecated. Found call at line </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>expression<span class="token punctuation">.</span>loc<span class="token punctuation">.</span>start<span class="token punctuation">.</span>line<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+          <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>As with the <code>compiler</code>, <code>tapAsync</code> and <code>tapPromise</code> may also be available
