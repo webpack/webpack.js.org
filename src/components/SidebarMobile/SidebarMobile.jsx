@@ -136,7 +136,7 @@ export default class SidebarMobile extends Component {
    */
   _handleBodyClick = (event) => {
     const { isOpen, toggle } = this.props;
-    if (isOpen && !this._container.contains(event.target)) {
+    if (isOpen && this._container && !this._container.contains(event.target)) {
       toggle(false);
     }
   };
