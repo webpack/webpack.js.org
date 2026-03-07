@@ -9,10 +9,6 @@ updates:
       - dependencies
     versioning-strategy: widen
     ignore:
-      - dependency-name: "react"
-      - dependency-name: "react-dom"
-      - dependency-name: "react-router-dom"
-      - dependency-name: "@docsearch/react"
       - dependency-name: "tailwindcss"
     groups:
       dependencies:
