@@ -26,6 +26,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<aside class="tip"><p class="tip__prefix">tip</p><p>When running webpack without a configuration file, the entry defaults to <code>&#x27;./src/index.js&#x27;</code>. If that file does not exist — even if your <code>src/</code> directory does — webpack will throw: <br/> <strong><code>ERROR in Entry module not found: Error: Can&#x27;t resolve &#x27;./src&#x27;</code></strong> <br/><br/> The error says <code>&#x27;./src&#x27;</code> rather than <code>&#x27;./src/index.js&#x27;</code> because webpack resolves the directory first and then fails to find the default <code>index.js</code> inside it. To use a different entry filename, add a <code>webpack.config.js</code> as shown in the example above.</p></aside>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Learn more in the <a href="/concepts/entry-points">entry points</a> section.</p></aside>
 <h2><span id="output"></span>Output<a href="#output" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>The <strong>output</strong> property tells webpack where to emit the <em>bundles</em> it creates and how to name these files. It defaults to <code>./dist/main.js</code> for the main output file and to the <code>./dist</code> folder for any other generated file.</p>
@@ -109,6 +110,7 @@ what should be included in the final bundle.</p>
 <p>The result of this process is later written to disk according to the
 <code>output</code> configuration, which controls where and how the bundled
 files are emitted.</p>
+<aside class="tip"><p class="tip__prefix">tip</p><p>When running webpack without a configuration file, the entry defaults to <code>&#x27;./src/index.js&#x27;</code>. If that file is missing — even if your <code>src/</code> directory exists — webpack will throw: <br/> <strong><code>ERROR in Entry module not found: Error: Can&#x27;t resolve &#x27;./src&#x27;</code></strong> <br/><br/> The error says <code>&#x27;./src&#x27;</code> rather than <code>&#x27;./src/index.js&#x27;</code> because webpack resolves the directory first, then fails to find <code>index.js</code> inside it. To use a different entry filename, configure the <code>entry</code> option as shown in the sections below.</p></aside>
 <h2><span id="single-entry-shorthand-syntax"></span>Single Entry (Shorthand) Syntax<a href="#single-entry-shorthand-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Usage: <code>entry: string | [string]</code></p>
 <p><strong>webpack.config.js</strong></p>
