@@ -1,6 +1,6 @@
 // Import External Dependencies
 import PropTypes from "prop-types";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, Suspense, use, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import {
   Outlet,
@@ -328,15 +328,17 @@ function Site(props) {
                 key={page.url}
                 path={page.url}
                 element={
-                  <PageElement
-                    currentPage={location.pathname}
-                    sidebarPages={sidebarPages}
-                    page={page}
-                    next={next}
-                    previous={previous}
-                    import={props.import}
-                    path={path}
-                  />
+                  <Suspense fallback={<div />}>
+                    <PageElement
+                      currentPage={location.pathname}
+                      sidebarPages={sidebarPages}
+                      page={page}
+                      next={next}
+                      previous={previous}
+                      import={props.import}
+                      path={path}
+                    />
+                  </Suspense>
                 }
               />
             );
@@ -357,7 +359,8 @@ export default Site;
 
 function PageElement(props) {
   const { currentPage, sidebarPages, page, previous, next } = props;
-  const content = props.import(props.path);
+  const rawContent = props.import(props.path);
+  const content = rawContent instanceof Promise ? use(rawContent) : rawContent;
   return (
     <Fragment>
       <Sponsors />
