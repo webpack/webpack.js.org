@@ -42,6 +42,13 @@ export default function Page(props) {
         .catch(() => setContent("Error loading content."));
     }
   }, [props.content]);
+  useEffect(() => {
+    if (!(props.content instanceof Promise)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setContent(() => props.content.default || props.content);
+      setContentLoaded(true);
+    }
+  }, [props.content]);
 
   const { hash, pathname } = useLocation();
   const isBlogIndex = pathname === "/blog/";
