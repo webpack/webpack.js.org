@@ -25,11 +25,13 @@ export default function Page(props) {
   } = props;
 
   const isDynamicContent = props.content instanceof Promise;
-  const [content, setContent] = useState(
-    isDynamicContent
-      ? placeholderString()
-      : () => props.content.default || props.content,
+  const [dynamicContent, setContent] = useState(
+    isDynamicContent ? placeholderString() : null,
   );
+  const content = isDynamicContent
+    ? dynamicContent
+    : props.content.default || props.content;
+
   const [contentLoaded, setContentLoaded] = useState(!isDynamicContent);
 
   useEffect(() => {
@@ -40,13 +42,6 @@ export default function Page(props) {
           setContentLoaded(true);
         })
         .catch(() => setContent("Error loading content."));
-    }
-  }, [props.content]);
-  useEffect(() => {
-    if (!(props.content instanceof Promise)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setContent(() => props.content.default || props.content);
-      setContentLoaded(true);
     }
   }, [props.content]);
 
