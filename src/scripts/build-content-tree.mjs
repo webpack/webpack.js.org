@@ -19,30 +19,27 @@ function buildContentTree(source, output) {
   }
   if (!output) {
     return console.error(
-      "build-content-tree: you must provide a output file name",
+      "build-content-tree: you must provide an output file name",
     );
   }
 
-  let content = directoryTree(source, {
-    extensions: /\.(md|mdx)/,
-    attributes: ["size", "type", "extension"],
-  });
+  try {
+    // Keep processing inside the try block to catch logic or permission errors
+    let content = directoryTree(source, {
+      extensions: /\.(md|mdx)/,
+      attributes: ["size", "type", "extension"],
+    });
 
-  content = restructure(content, {
-    dir: source,
-  });
+    content = restructure(content, {
+      dir: source,
+    });
 
-  fs.writeFileSync(
-    path.resolve(output),
-    JSON.stringify(content, null, 2),
-    (error) => {
-      if (error) {
-        console.log("scripts/build-content-tree", error);
-      } else {
-        console.log(`Successfully built content tree file at ${output}`);
-      }
-    },
-  );
+    fs.writeFileSync(path.resolve(output), JSON.stringify(content, null, 2));
+
+    console.log(`Successfully built content tree file at ${output}`);
+  } catch (error) {
+    console.error("scripts/build-content-tree:", error);
+  }
 }
 
 function main() {
