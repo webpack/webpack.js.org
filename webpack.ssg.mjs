@@ -15,7 +15,7 @@ import common from "./webpack.common.mjs";
 const contentTree = JSON.parse(fs.readFileSync("./src/_content.json", "utf8"));
 
 // content tree to path array
-const paths = [...flattenContentTree(contentTree), "/app-shell"];
+const paths = [...flattenContentTree(contentTree), "/app-shell", "/404.html"];
 
 export default (env) =>
   merge(common(env), {
