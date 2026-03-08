@@ -56,12 +56,14 @@ export default function Sidebar({ className = "", pages, currentPage }) {
               className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
               width={20}
               height={20}
+              aria-hidden="true"
             />
           ) : (
             <DownIcon
               className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
               width={20}
               height={20}
+              aria-hidden="true"
             />
           )}
         </div>
@@ -75,7 +77,7 @@ export default function Sidebar({ className = "", pages, currentPage }) {
           return (
             <div key={page.url}>
               {displayGroup ? (
-                <h4 className="sidebar__group">{group}</h4>
+                <h3 className="sidebar__group">{group}</h3>
               ) : null}
 
               <SidebarItem

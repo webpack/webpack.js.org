@@ -38,6 +38,7 @@ export default function Print(props) {
         width={15}
         height={17}
         fill="#175d96"
+        aria-hidden="true"
       />
       <a
         className="sidebar-item__title sidebar-link__print"

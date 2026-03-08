@@ -26,7 +26,7 @@ export default function PageLinks({ page = {} }) {
         Edit this page
       </a>
       <Separator />
-      <a className={classes} onClick={_handlePrintClick}>
+      <a className={classes} href="#" onClick={_handlePrintClick}>
         Print this page
       </a>
       {page.repo ? (

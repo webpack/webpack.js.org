@@ -40,13 +40,13 @@ export default class SidebarMobile extends Component {
         />
 
         <div className="sidebar-mobile__content">
-          <span
-            role="button"
+          <button
             className="sidebar-mobile__close"
+            aria-label="Close navigation menu"
             onClick={toggle.bind(null, false)}
           >
-            <CloseIcon fill="#fff" width={20} />
-          </span>
+            <CloseIcon fill="#fff" width={20} aria-hidden="true" />
+          </button>
 
           {this._getSections()}
         </div>
@@ -88,7 +88,7 @@ export default class SidebarMobile extends Component {
             to={section.url}
             onClick={this.props.toggle.bind(null, false)}
           >
-            <h3>{section.title || section.url}</h3>
+            <span className="sidebar-mobile__section-title">{section.title || section.url}</span>
           </Link>
 
           {this._getPages(section.children)}

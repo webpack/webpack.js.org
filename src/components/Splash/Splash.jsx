@@ -20,22 +20,22 @@ const Support = lazy(() => import("../Support/Support.jsx"));
 
 const SponsorsPlaceholder = () => (
   <>
-    <h2>Latest Sponsors</h2>
+    <h3>Latest Sponsors</h3>
     <PlaceholderComponent />
 
-    <h2>Platinum Sponsors</h2>
+    <h3>Platinum Sponsors</h3>
     <PlaceholderComponent />
 
-    <h2>Gold Sponsors</h2>
+    <h3>Gold Sponsors</h3>
     <PlaceholderComponent />
 
-    <h2>Silver Sponsors</h2>
+    <h3>Silver Sponsors</h3>
     <PlaceholderComponent />
 
-    <h2>Bronze Sponsors</h2>
+    <h3>Bronze Sponsors</h3>
     <PlaceholderComponent />
 
-    <h2>Backers</h2>
+    <h3>Backers</h3>
     <PlaceholderComponent />
   </>
 );

@@ -127,6 +127,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               width={20}
               height={20}
               className="fill-current text-white"
+              aria-hidden="true"
             />
           </button>
           <Link to="/" className="md:mr-auto">

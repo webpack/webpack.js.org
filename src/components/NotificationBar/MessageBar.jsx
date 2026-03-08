@@ -34,10 +34,11 @@ export default function MessageBar(props) {
               type="button"
               className="px-20 self-stretch inline-flex items-center cursor-pointer"
               style={{ background: "none", border: "none" }}
+              aria-label="Dismiss"
               onClick={close}
             >
               <CloseIcon
-                aria-label="Dismiss"
+                aria-hidden="true"
                 className="fill-current text-gray-300 dark:text-white transform duration-200 hover:text-gray-700"
                 width={25}
               />

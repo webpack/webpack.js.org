@@ -66,6 +66,7 @@ export default class Dropdown extends Component {
           <svg
             viewBox="0 0 610 560"
             xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
             className="dropdown__language text-gray-100 hover:text-blue-200 transition-colors duration-200"
           >
             <path d="m304.8 99.2-162.5-57.3v353.6l162.5-52.6z" />

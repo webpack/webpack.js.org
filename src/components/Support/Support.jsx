@@ -176,7 +176,7 @@ export default class Support extends Component {
 
     return (
       <>
-        <h2>
+        <h3>
           {rank === "backer"
             ? "Backers"
             : rank === "latest"
@@ -184,7 +184,7 @@ export default class Support extends Component {
               : `${rank[0].toUpperCase()}${rank.slice(1)} ${
                   type === "monthly" ? "Monthly " : ""
                 }Sponsors`}
-        </h2>
+        </h3>
         <VisibilitySensor
           delayedCall
           partialVisibility
