@@ -67,7 +67,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;MIT&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.38.1&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^4.7.2&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
 <p>In this example, there are implicit dependencies between the <code>&lt;script&gt;</code> tags. Our <code>index.js</code> file depends on <code>lodash</code> being included in the page before it runs. This is because <code>index.js</code> never explicitly declared a need for <code>lodash</code>; it assumes that the global variable <code>_</code> exists.</p>
@@ -197,7 +197,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^4.2.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
@@ -1198,9 +1198,9 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^4.5.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.0.0&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^4.2.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
@@ -1273,10 +1273,10 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^4.5.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.0.0&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^4.2.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^3.11.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^5.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
@@ -1372,11 +1372,11 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;express&quot;: &quot;^4.17.1&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^4.5.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.0.0&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^4.2.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-middleware&quot;: &quot;^4.0.2&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^3.11.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^5.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
