@@ -10,9 +10,9 @@ describe("Open page in new tab", { scrollBehavior: false }, () => {
       },
     });
     // wait for page content to load before asserting scroll
-    cy.get("#md-content p").should("exist");
+    cy.get('.sidebar-item__title[href="/concepts/plugins/"]').should("exist");
     // there's one call in Page.jsx when componentDidMount
-    cy.window().then((win) => {
+    cy.window().should((win) => {
       expect(win.scrollTo).to.be.calledOnce;
     });
 
@@ -20,7 +20,7 @@ describe("Open page in new tab", { scrollBehavior: false }, () => {
 
     // we click the menu
     cy.get(selector).click();
-    cy.window().then((win) => {
+    cy.window().should((win) => {
       // we don't know whether user has scrolled the page or not although no pathname changed
       expect(win.scrollTo).to.be.calledTwice;
     });
@@ -30,7 +30,7 @@ describe("Open page in new tab", { scrollBehavior: false }, () => {
         metaKey: true,
       });
       // no scrollTo should be called
-      cy.window().then((win) => {
+      cy.window().should((win) => {
         expect(win.scrollTo).to.be.calledTwice;
       });
     } else if (Cypress.platform === "win32" || Cypress.platform === "linux") {
@@ -39,14 +39,14 @@ describe("Open page in new tab", { scrollBehavior: false }, () => {
         ctrlKey: true,
       });
       // no scrollTo should be called
-      cy.window().then((win) => {
+      cy.window().should((win) => {
         expect(win.scrollTo).to.be.calledTwice;
       });
     }
 
     // we click the menu again, scroll to top again
     cy.get(selector).click();
-    cy.window().then((win) => {
+    cy.window().should((win) => {
       expect(win.scrollTo).to.be.calledThrice;
     });
   });
