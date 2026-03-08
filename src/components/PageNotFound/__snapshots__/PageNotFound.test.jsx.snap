@@ -2,7 +2,7 @@
 
 exports[`PageNotFound renders correctly 1`] = `
 <div
-  className="page markdown"
+  class="page markdown"
 >
   <h1>
     Page Not Found
@@ -11,9 +11,9 @@ exports[`PageNotFound renders correctly 1`] = `
     Oops! The page you are looking for has been removed or relocated.
   </p>
   <a
-    className="button"
+    class="button"
+    data-discover="true"
     href="/"
-    onClick={[Function]}
   >
     Go to Homepage
   </a>

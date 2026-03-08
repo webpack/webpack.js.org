@@ -107,12 +107,17 @@ const navigationIconProps = {
 
 function Navigation({ links, pathname, hash = "", toggleSidebar }) {
   const [locationHash, setLocationHash] = useState(hash);
+  const [mounted, setMounted] = useState(false);
 
   const location = useLocation();
 
   useEffect(() => {
     setLocationHash(hash);
   }, [hash]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <>
@@ -169,7 +174,6 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
                 {children}
               </NavigationIcon>
             ))}
-
             <Dropdown
               className=""
               items={[
@@ -192,39 +196,34 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
           </nav>
           <div className="inline-flex items-center ml-[18px]">
             <HelloDarkness />
-            <DocSearch
-              appId="BH4D9OD16A"
-              apiKey={"fac401d1a5f68bc41f01fb6261661490"}
-              indexName="webpack-js-org"
-              disableUserPersonalization={true}
-              placeholder="Search webpack documentation"
-              transformItems={(items) =>
-                items.map(({ url, ...others }) => {
-                  const { origin } = new URL(url);
-                  return {
-                    ...others,
-                    url: url.replace(new RegExp(`^${origin}`), ""),
-                  };
-                })
-              }
-              hitComponent={({ hit, children }) => (
-                <ReactDOMLink to={hit.url}>{children}</ReactDOMLink>
-              )}
-            />
+            {mounted && (
+              <DocSearch
+                appId="BH4D9OD16A"
+                apiKey={"fac401d1a5f68bc41f01fb6261661490"}
+                indexName="webpack-js-org"
+                disableUserPersonalization={true}
+                placeholder="Search webpack documentation"
+                transformItems={(items) =>
+                  items.map(({ url, ...others }) => {
+                    const { origin } = new URL(url);
+                    return {
+                      ...others,
+                      url: url.replace(new RegExp(`^${origin}`), ""),
+                    };
+                  })
+                }
+                hitComponent={({ hit, children }) => (
+                  <ReactDOMLink to={hit.url}>{children}</ReactDOMLink>
+                )}
+              />
+            )}
           </div>
         </div>
         {/* sub navigation */}
         {links
-          .filter(
-            (link) =>
-              // only those with children are displayed
-              link.children,
-          )
+          .filter((link) => link.children)
           .map((link) => {
-            if (
-              link.isActive && // hide the children if the link is not active
-              !link.isActive({}, location)
-            ) {
+            if (link.isActive && !link.isActive({}, location)) {
               return null;
             }
             return (

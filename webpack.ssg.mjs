@@ -1,16 +1,20 @@
 // Import External Dependencies
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import RedirectWebpackPlugin from "redirect-webpack-plugin";
 import SSGPlugin from "static-site-generator-webpack-plugin";
+
 import { merge } from "webpack-merge";
 import WebpackPwaManifest from "webpack-pwa-manifest";
 import flattenContentTree from "./src/utilities/flatten-content-tree.mjs";
 
 // Load Common Configuration
 import common from "./webpack.common.mjs";
+
+const require = createRequire(import.meta.url);
 
 const contentTree = JSON.parse(fs.readFileSync("./src/_content.json", "utf8"));
 
@@ -49,6 +53,9 @@ export default (env) =>
           window: {
             __ssgrun: true,
           },
+          TextEncoder: require("node:util").TextEncoder,
+          TextDecoder: require("node:util").TextDecoder,
+          TransformStream: require("node:stream/web").TransformStream,
         },
         paths,
         locals: {

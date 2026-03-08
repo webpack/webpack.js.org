@@ -73,6 +73,7 @@ describe("CodeBlockWithCopy", () => {
       .find("code")
       .invoke("text")
       .as("expectedCopiedText");
+    cy.get("@standardCodeBlock").find("button.copy-button").should("exist");
     cy.get("@standardCodeBlock").find("button.copy-button").click();
 
     // Assert copied output is unchanged for regular code blocks.

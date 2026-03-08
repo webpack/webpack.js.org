@@ -3,7 +3,6 @@ import { Suspense, lazy, useEffect, useState } from "react";
 
 // Import Components
 import SplashContent from "../../content/index.mdx";
-import isClient from "../../utilities/is-client.js";
 import Container from "../Container/Container.jsx";
 import Markdown from "../Markdown/Markdown.jsx";
 import { PlaceholderComponent } from "../Placeholder/Placeholder.jsx";
@@ -42,12 +41,11 @@ const SponsorsPlaceholder = () => (
 
 const Splash = () => {
   const [showSponsors, setShowSponsors] = useState(false);
-  const [supportType, setSupportType] = useState(() =>
-    Math.random() < 0.33 ? "monthly" : "total",
-  );
+  const [supportType, setSupportType] = useState("total");
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (isClient) setShowSponsors(true);
+    setSupportType(Math.random() < 0.33 ? "monthly" : "total");
+    setShowSponsors(true);
   }, []);
   return (
     <div className="splash">

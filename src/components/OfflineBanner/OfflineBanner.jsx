@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import isClient from "../../utilities/is-client.js";
 import "./OfflineBanner.scss";
 
 export default function OfflineBanner() {
-  const [online, setOnline] = useState(() =>
-    isClient ? navigator.onLine : true,
-  );
+  const [online, setOnline] = useState(true);
 
   useEffect(() => {
     const goOnline = () => setOnline(true);

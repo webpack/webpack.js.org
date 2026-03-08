@@ -25,11 +25,13 @@ export default function Page(props) {
   } = props;
 
   const isDynamicContent = props.content instanceof Promise;
-  const [content, setContent] = useState(
-    isDynamicContent
-      ? placeholderString()
-      : () => props.content.default || props.content,
+  const [dynamicContent, setContent] = useState(
+    isDynamicContent ? placeholderString() : null,
   );
+  const content = isDynamicContent
+    ? dynamicContent
+    : props.content.default || props.content;
+
   const [contentLoaded, setContentLoaded] = useState(!isDynamicContent);
 
   useEffect(() => {
@@ -118,7 +120,9 @@ export default function Page(props) {
           </div>
         ) : null}
 
-        <div id="md-content">{contentRender}</div>
+        <div id="md-content" suppressHydrationWarning>
+          {contentRender}
+        </div>
 
         {rest.url === "/blog/" && (
           <div className="blog-list">
