@@ -1522,7 +1522,7 @@ export default {
         // ...
         generator: {
           dataUrl: (content) => {
-            import svgToMiniDataURI from "mini-svg-data-uri";
+            const svgToMiniDataURI = require("mini-svg-data-uri");
 
             if (typeof content !== "string") {
               content = content.toString();

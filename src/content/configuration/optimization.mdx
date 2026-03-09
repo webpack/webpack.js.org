@@ -296,7 +296,7 @@ export default {
   optimization: {
     minimizer: [
       (compiler) => {
-        import TerserPlugin from "terser-webpack-plugin";
+        const TerserPlugin = require("terser-webpack-plugin");
 
         new TerserPlugin({
           /* your config */
@@ -314,7 +314,7 @@ By default, webpack would set `optimization.minimizer` to [the following value](
   {
     apply: (compiler) => {
       // Lazy load the Terser plugin
-      import TerserPlugin from "terser-webpack-plugin";
+      const TerserPlugin = require("terser-webpack-plugin");
 
       new TerserPlugin({
         terserOptions: {

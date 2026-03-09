@@ -289,7 +289,7 @@ export default {
 
 // or
 
-export default {
+module.exports = {
   // ...
   output: {
     clean: {
@@ -1460,7 +1460,7 @@ And finally the output is:
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
-    export default factory();
+    module.exports = factory();
   } else if (typeof define === "function" && define.amd) {
     define([], factory);
   } else if (typeof exports === "object") {
@@ -1487,7 +1487,7 @@ The output will be:
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
-    export default factory();
+    module.exports = factory();
   } else if (typeof define === "function" && define.amd) {
     define([], factory);
   } else {
@@ -1659,7 +1659,7 @@ which will yield the following:
 (function webpackUniversalModuleDefinition(root, factory) {
   // Test Comment
   if (typeof exports === "object" && typeof module === "object") {
-    export default factory();
+    module.exports = factory();
   }
   // Test Comment
   else if (typeof define === "function" && define.amd) {
@@ -1993,7 +1993,7 @@ And finally the output is:
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
-    export default factory();
+    module.exports = factory();
   } else if (typeof define === "function" && define.amd) {
     define([], factory);
   } else if (typeof exports === "object") {
@@ -2023,7 +2023,7 @@ The output will be:
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
-    export default factory();
+    module.exports = factory();
   } else if (typeof define === "function" && define.amd) {
     define([], factory);
   } else {
