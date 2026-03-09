@@ -32,6 +32,7 @@ import Navigation from "../Navigation/Navigation.jsx";
 import OfflineBanner from "../OfflineBanner/OfflineBanner.jsx";
 import Page from "../Page/Page.jsx";
 import PageNotFound from "../PageNotFound/PageNotFound.jsx";
+import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import SidebarMobile from "../SidebarMobile/SidebarMobile.jsx";
 import Splash from "../Splash/Splash.jsx";
@@ -344,6 +345,7 @@ function Site(props) {
           <Route path="*" element={<PageNotFound />} />
         </Route>
       </Routes>
+      <ScrollToTop />
       <Footer />
     </div>
   );
