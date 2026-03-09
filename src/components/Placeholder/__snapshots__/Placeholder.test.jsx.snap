@@ -2,7 +2,7 @@
 
 exports[`PlaceholderComponent renders correctly 1`] = `
 <div
-  className="placeholder"
+  class="placeholder"
 >
   <p>
      

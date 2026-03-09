@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { useLocalStorage } from "react-use";
 import { THEME_LOCAL_STORAGE_KEY, Theme } from "../constants/theme.mjs";
 import Tooltip from "./Tooltip/Tooltip.jsx";
@@ -7,41 +7,38 @@ import Tooltip from "./Tooltip/Tooltip.jsx";
 const { DARK, LIGHT } = Theme;
 
 export default function HelloDarkness() {
-  const [theme, setTheme] = useLocalStorage(
-    THEME_LOCAL_STORAGE_KEY,
-    Theme.LIGHT,
+  const [theme, setTheme] = useLocalStorage(THEME_LOCAL_STORAGE_KEY, LIGHT);
+  const activeTheme = useSyncExternalStore(
+    () => () => {},
+    () => theme,
+    () => LIGHT,
   );
-  const applyTheme = (theme) => {
-    document.documentElement.setAttribute("data-theme", theme);
-    if (theme === Theme.DARK) {
-      document.documentElement.classList.add(Theme.DARK);
-    } else {
-      document.documentElement.classList.remove(Theme.DARK);
-    }
-  };
   useEffect(() => {
-    applyTheme(theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    if (theme === DARK) {
+      document.documentElement.classList.add(DARK);
+    } else {
+      document.documentElement.classList.remove(DARK);
+    }
   }, [theme]);
-
-  const switchTheme = (theme) => {
-    setTheme(theme);
-  };
-  const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
+  const themeSwitcher = () => setTheme(theme === DARK ? LIGHT : DARK);
   return (
     <Tooltip
       content={
-        theme === DARK ? "Switch to light theme" : "Switch to dark theme"
+        activeTheme === DARK ? "Switch to light theme" : "Switch to dark theme"
       }
     >
       <button
         aria-label={
-          theme === DARK ? "Switch to light theme" : "Switch to dark theme"
+          activeTheme === DARK
+            ? "Switch to light theme"
+            : "Switch to dark theme"
         }
         className="bg-transparent border-none cursor-pointer text-[16px] p-0 inline-flex items-center text-gray-100 hover:text-blue-200 transition-colors duration-200"
         onClick={themeSwitcher}
         data-testid="hello-darkness"
       >
-        {theme === DARK ? (
+        {activeTheme === DARK ? (
           <span className="inline-flex items-center justify-center">
             <svg
               width="16"

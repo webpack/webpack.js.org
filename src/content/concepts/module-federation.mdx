@@ -306,11 +306,11 @@ For example, your entry looked like this:
 **index.js**
 
 ```jsx
-import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
 ```
 
 Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
@@ -319,19 +319,20 @@ Let's create `bootstrap.js` file and move contents of the entry into it, and imp
 
 ```diff
 + import('./bootstrap');
-- import React from 'react';
-- import ReactDOM from 'react-dom';
+- import { createRoot } from 'react-dom/client';
 - import App from './App';
-- ReactDOM.render(<App />, document.getElementById('root'));
+
+- const root = createRoot(document.getElementById('root'));
+- root.render(<App />);
 ```
 
 **bootstrap.js**
 
 ```diff
-+ import React from 'react';
-+ import ReactDOM from 'react-dom';
++ import { createRoot } from 'react-dom/client';
 + import App from './App';
-+ ReactDOM.render(<App />, document.getElementById('root'));
++ const root = createRoot(document.getElementById('root'));
++ root.render(<App />);
 ```
 
 This method works but can have limitations or drawbacks.

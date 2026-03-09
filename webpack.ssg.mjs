@@ -1,10 +1,12 @@
 // Import External Dependencies
 import fs from "node:fs";
 import path from "node:path";
+import { TransformStream } from "node:stream/web";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import RedirectWebpackPlugin from "redirect-webpack-plugin";
 import SSGPlugin from "static-site-generator-webpack-plugin";
+
 import { merge } from "webpack-merge";
 import WebpackPwaManifest from "webpack-pwa-manifest";
 import flattenContentTree from "./src/utilities/flatten-content-tree.mjs";
@@ -15,7 +17,7 @@ import common from "./webpack.common.mjs";
 const contentTree = JSON.parse(fs.readFileSync("./src/_content.json", "utf8"));
 
 // content tree to path array
-const paths = [...flattenContentTree(contentTree), "/app-shell"];
+const paths = [...flattenContentTree(contentTree), "/app-shell", "/404.html"];
 
 export default (env) =>
   merge(common(env), {
@@ -49,6 +51,9 @@ export default (env) =>
           window: {
             __ssgrun: true,
           },
+          TextEncoder,
+          TextDecoder,
+          TransformStream,
         },
         paths,
         locals: {

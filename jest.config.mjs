@@ -1,6 +1,7 @@
 export default {
   verbose: true,
   testEnvironment: "node",
+  setupFiles: ["./src/setupTests.js"],
   transform: {
     "^.+\\.jsx?$": "babel-jest",
   },

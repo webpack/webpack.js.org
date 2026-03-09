@@ -1,18 +1,11 @@
 // Import External Dependencies
-import { Suspense, lazy, useEffect, useState } from "react";
-
+import { Suspense, lazy, useState, useSyncExternalStore } from "react";
 // Import Components
 import SplashContent from "../../content/index.mdx";
-import isClient from "../../utilities/is-client.js";
 import Container from "../Container/Container.jsx";
 import Markdown from "../Markdown/Markdown.jsx";
 import { PlaceholderComponent } from "../Placeholder/Placeholder.jsx";
 import SplashViz from "../SplashViz/SplashViz.jsx";
-
-// Import helpers
-
-// Import Demo Content
-
 // Load Styling
 import "./Splash.scss";
 
@@ -39,16 +32,19 @@ const SponsorsPlaceholder = () => (
     <PlaceholderComponent />
   </>
 );
-
 const Splash = () => {
-  const [showSponsors, setShowSponsors] = useState(false);
   const [supportType, setSupportType] = useState(() =>
-    Math.random() < 0.33 ? "monthly" : "total",
+    typeof window !== "undefined"
+      ? Math.random() < 0.33
+        ? "monthly"
+        : "total"
+      : "total",
   );
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (isClient) setShowSponsors(true);
-  }, []);
+  const showSponsors = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   return (
     <div className="splash">
       <SplashViz />

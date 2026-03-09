@@ -4,7 +4,8 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { afterEach, beforeEach, describe, expect, it } from "@jest/globals";
-import renderer from "react-test-renderer";
+
+import { act, render, screen } from "@testing-library/react";
 import OfflineBanner from "./OfflineBanner.jsx";
 
 /**
@@ -38,66 +39,78 @@ describe("OfflineBanner", () => {
   });
 
   it("renders nothing when online", () => {
-    setNavigatorOnLine(true);
-    const tree = renderer.create(<OfflineBanner />).toJSON();
-    expect(tree).toBeNull();
+    const { container } = render(<OfflineBanner />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  it("renders the offline banner snapshot", () => {
+    const { container } = render(<OfflineBanner />);
+    act(() => {
+      window.dispatchEvent(new Event("offline"));
+    });
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it("renders the offline banner when offline", () => {
-    setNavigatorOnLine(false);
-    const tree = renderer.create(<OfflineBanner />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("shows the correct offline message text", () => {
-    setNavigatorOnLine(false);
-    const { root } = renderer.create(<OfflineBanner />);
-    const textEl = root.findByProps({ className: "offline-banner__text" });
-    expect(textEl.children).toContain(
-      "You are currently offline. Some features may be unavailable.",
-    );
-  });
-
-  it("has accessible role and aria-live attributes", () => {
-    setNavigatorOnLine(false);
-    const { root } = renderer.create(<OfflineBanner />);
-    const banner = root.findByProps({ "data-testid": "offline-banner" });
-    expect(banner.props.role).toBe("status");
-    expect(banner.props["aria-live"]).toBe("polite");
-  });
-
-  it("shows banner when window goes offline", () => {
-    setNavigatorOnLine(true);
-    let component;
-    renderer.act(() => {
-      component = renderer.create(<OfflineBanner />);
-    });
-    // Initially online — nothing rendered
-    expect(component.toJSON()).toBeNull();
-
-    // Simulate going offline
-    renderer.act(() => {
+    const { container } = render(<OfflineBanner />);
+    act(() => {
       setNavigatorOnLine(false);
       window.dispatchEvent(new Event("offline"));
     });
-    expect(component.toJSON()).not.toBeNull();
-    expect(component.toJSON()).toMatchSnapshot();
+    expect(container.firstChild).not.toBeNull();
+  });
+
+  it("shows the correct offline message text", () => {
+    render(<OfflineBanner />);
+    act(() => {
+      setNavigatorOnLine(false);
+      window.dispatchEvent(new Event("offline"));
+    });
+    expect(
+      screen.getByText(
+        "You are currently offline. Some features may be unavailable.",
+      ),
+    ).toBeTruthy();
+  });
+
+  it("has accessible role and aria-live attributes", () => {
+    render(<OfflineBanner />);
+    act(() => {
+      setNavigatorOnLine(false);
+      window.dispatchEvent(new Event("offline"));
+    });
+    const banner = screen.getByTestId("offline-banner");
+    expect(banner.getAttribute("role")).toBe("status");
+    expect(banner.getAttribute("aria-live")).toBe("polite");
+  });
+
+  it("shows banner when window goes offline", () => {
+    const { container } = render(<OfflineBanner />);
+    // Initially online — nothing rendered
+    expect(container.firstChild).toBeNull();
+
+    // Simulate going offline
+    act(() => {
+      setNavigatorOnLine(false);
+      window.dispatchEvent(new Event("offline"));
+    });
+    expect(container.firstChild).not.toBeNull();
   });
 
   it("hides banner when window comes back online", () => {
-    setNavigatorOnLine(false);
-    let component;
-    renderer.act(() => {
-      component = renderer.create(<OfflineBanner />);
-    });
+    const { container } = render(<OfflineBanner />);
     // Initially offline — banner shown
-    expect(component.toJSON()).not.toBeNull();
+    act(() => {
+      setNavigatorOnLine(false);
+      window.dispatchEvent(new Event("offline"));
+    });
+    expect(container.firstChild).not.toBeNull();
 
     // Simulate going online
-    renderer.act(() => {
+    act(() => {
       setNavigatorOnLine(true);
       window.dispatchEvent(new Event("online"));
     });
-    expect(component.toJSON()).toBeNull();
+    expect(container.firstChild).toBeNull();
   });
 });

@@ -15,6 +15,7 @@ export default defineConfig([
     ".github/**/*.md",
     "**/README.md",
     "src/mdx-components.mjs",
+    "**/setupTests.js",
   ]),
   {
     extends: [configs.recommended],
