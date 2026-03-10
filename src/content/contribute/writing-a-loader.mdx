@@ -10,6 +10,7 @@ contributors:
   - chenxsan
   - dev-itsheng
   - evenstensberg
+  - hagemaruwu
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -231,7 +232,7 @@ T> If the language only accepts relative urls (e.g. `url(file)` always refers to
 
 ### Common Code
 
-Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module:
+Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and `import` it as a shared module:
 
 **src/loader-runtime.js**
 
