@@ -1,4 +1,5 @@
 // Import External Dependencies
+import DOMPurify from "dompurify";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -98,7 +99,7 @@ export default function Page(props) {
     contentRender = (
       <div
         dangerouslySetInnerHTML={{
-          __html: content,
+          __html: DOMPurify.sanitize(content),
         }}
       />
     );

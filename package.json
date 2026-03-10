@@ -75,6 +75,7 @@
   "dependencies": {
     "@docsearch/react": "^4.6.0",
     "@react-spring/web": "^10.0.3",
+    "dompurify": "^3.3.2",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.8.1",
     "react": "^19.2.4",
