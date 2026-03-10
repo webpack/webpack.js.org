@@ -47,7 +47,7 @@ const Footer = () => (
       </p>
     </Container>
     <Container className="footer__inner">
-      <section className="footer__left">
+      <section className="footer__left" aria-label="Quick links">
         <Link className="footer__link" to="/guides/getting-started/">
           Get Started
         </Link>
@@ -59,13 +59,13 @@ const Footer = () => (
         </Link>
       </section>
 
-      <section className="footer__middle">
+      <section className="footer__middle" aria-label="Home">
         <Link to="/" className="footer__icon">
           <img src={Icon} alt="webpack icon" width={35} height={35} />
         </Link>
       </section>
 
-      <section className="footer__right">
+      <section className="footer__right" aria-label="Resources and links">
         <Link className="footer__link" to="https://webpack.threadless.com/">
           Swag Store
         </Link>
