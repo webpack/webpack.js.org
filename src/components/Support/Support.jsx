@@ -85,12 +85,7 @@ const monthlyRanks = {
 };
 
 function formatMoney(number) {
-  let str = `${Math.round(number)}`;
-
-  if (str.length > 3) {
-    str = `${str.slice(0, -3)},${str.slice(-3)}`;
-  }
-  return str;
+  return Math.round(number).toLocaleString("en-US");
 }
 
 export default class Support extends Component {
