@@ -474,6 +474,9 @@ echo &#x27;{ &quot;presets&quot;: [&quot;@babel/env&quot;] }&#x27; &gt; .babelrc
 <p>or</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-console">pnpm add -D css-loader
 </code></pre></div>
+<p>In the example configuration below, <code>style-loader</code> is used to inject the processed CSS into the DOM during runtime. You may need to install it as well:</p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-console">npm install --save-dev style-loader
+</code></pre></div>
 <p>Then, add the loader to your <code>webpack</code> configuration. For example:</p>
 <p><strong>file.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> css <span class="token keyword">from</span> <span class="token string">&quot;file.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
