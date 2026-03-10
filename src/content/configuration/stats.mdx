@@ -370,9 +370,9 @@ export default {
 The stats base directory, an **absolute path** for shortening the request information.
 
 ```javascript
-import path from "node:path";
+const path = require("node:path");
 
-export default {
+module.exports {
   // ...
   stats: {
     context: path.resolve(__dirname, "src/components"),

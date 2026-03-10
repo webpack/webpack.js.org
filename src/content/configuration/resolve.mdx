@@ -51,9 +51,9 @@ Create aliases to `import` or `require` certain modules more easily. For example
 **webpack.config.js**
 
 ```js
-import path from "node:path";
+const path = require("node:path");
 
-export default {
+module.exports {
   // ...
   resolve: {
     alias: {
@@ -81,9 +81,9 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 **webpack.config.js**
 
 ```js
-import path from "node:path";
+const path = require("node:path");
 
-export default {
+module.exports {
   // ...
   resolve: {
     alias: {
@@ -105,7 +105,7 @@ You can also use wildcards (`*`) in your alias configuration to create more flex
 **webpack.config.js**
 
 ```js
-export default {
+module.exports {
   // ...
   resolve: {
     alias: {
@@ -151,7 +151,7 @@ W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated
 W> `[string]` values are supported since webpack 5.
 
 ```js
-export default {
+module.exports {
   // ...
   resolve: {
     alias: {
@@ -469,7 +469,7 @@ Redirect module requests when normal resolving fails.
 **webpack.config.js**
 
 ```js
-export default {
+module.exports {
   // ...
   resolve: {
     fallback: {
@@ -637,9 +637,9 @@ If you want to add a directory to search in that takes precedence over `node_mod
 **webpack.config.js**
 
 ```js
-import path from "node:path";
+const path = require("node:path");
 
-export default {
+module.exports {
   // ...
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
@@ -761,7 +761,7 @@ A list of directories where requests of server-relative URLs (starting with '/')
 ```js
 const fixtures = path.resolve(__dirname, "fixtures");
 
-export default {
+module.exports {
   // ...
   resolve: {
     roots: [__dirname, fixtures],

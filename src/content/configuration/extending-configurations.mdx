@@ -44,7 +44,7 @@ export default {
 **webpack.config.js**
 
 ```javascript
-export default {
+module.exports {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
   entry: "./src/index.js",
   output: {
@@ -94,7 +94,7 @@ export default {
 **webpack.config.js**
 
 ```javascript
-export default {
+module.exports {
   extends: [
     path.resolve(__dirname, "./js.webpack.config.js"),
     path.resolve(__dirname, "./css.webpack.config.js"),
@@ -114,7 +114,7 @@ You can override configurations from the extended configuration by passing the s
 **base.webpack.config.js**
 
 ```javascript
-export default {
+module.exports {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -125,7 +125,7 @@ export default {
 **webpack.config.js**
 
 ```javascript
-export default {
+module.exports {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
   entry: "./src/index.js",
   // overriding the output path and filename
@@ -165,10 +165,10 @@ export default {
 **webpack.config.js**
 
 ```javascript
-import path from "node:path";
-import webpack from "webpack";
+const path = require("node:path");
+const webpack = require("webpack");
 
-export default {
+module.exports {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
 
   module: {
@@ -227,7 +227,7 @@ You can also load configuration from third-party packages by passing the package
 **webpack.config.js**
 
 ```javascript
-export default {
+module.exports {
   extends: require.resolve("webpack-config-foo"),
   entry: "./src/index.js",
   output: {

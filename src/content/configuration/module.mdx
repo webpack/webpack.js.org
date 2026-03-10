@@ -1396,7 +1396,7 @@ However, parser plugins may accept more than only a boolean. For example, the in
 **Examples** (parser options by the default plugins):
 
 ```js
-export default {
+module.exports {
   // ...
   module: {
     rules: [
@@ -2023,9 +2023,9 @@ Conditions can be one of these:
 **Example:**
 
 ```javascript
-import path from "node:path";
+const path = require("node:path");
 
-export default {
+module.exports {
   // ...
   module: {
     rules: [
