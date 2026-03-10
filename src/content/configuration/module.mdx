@@ -1396,6 +1396,10 @@ However, parser plugins may accept more than only a boolean. For example, the in
 **Examples** (parser options by the default plugins):
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 export default {
   // ...
   module: {
@@ -2024,6 +2028,9 @@ Conditions can be one of these:
 
 ```javascript
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   // ...

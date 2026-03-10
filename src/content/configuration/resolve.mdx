@@ -52,6 +52,9 @@ Create aliases to `import` or `require` certain modules more easily. For example
 
 ```js
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   // ...
@@ -82,6 +85,9 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 
 ```js
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   // ...
@@ -105,6 +111,10 @@ You can also use wildcards (`*`) in your alias configuration to create more flex
 **webpack.config.js**
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 export default {
   // ...
   resolve: {
@@ -151,6 +161,10 @@ W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated
 W> `[string]` values are supported since webpack 5.
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 export default {
   // ...
   resolve: {
@@ -469,6 +483,10 @@ Redirect module requests when normal resolving fails.
 **webpack.config.js**
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 export default {
   // ...
   resolve: {
@@ -638,6 +656,9 @@ If you want to add a directory to search in that takes precedence over `node_mod
 
 ```js
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default {
   // ...
@@ -759,6 +780,10 @@ A list of directories where requests of server-relative URLs (starting with '/')
 **webpack.config.js**
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const fixtures = path.resolve(__dirname, "fixtures");
 
 export default {
