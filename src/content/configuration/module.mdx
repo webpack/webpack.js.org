@@ -1396,7 +1396,7 @@ However, parser plugins may accept more than only a boolean. For example, the in
 **Examples** (parser options by the default plugins):
 
 ```js
-module.exports {
+module.exports = {
   // ...
   module: {
     rules: [
@@ -2025,7 +2025,7 @@ Conditions can be one of these:
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   module: {
     rules: [
@@ -2160,3 +2160,4 @@ A few use cases:
 - Set the inner regular expression for partial dynamic dependencies : `wrappedContextRegExp: /\\.\\*/`
 
 W> `strictExportPresence` is deprecated in favor of [`exportsPresence`](#moduleparserjavascriptexportspresence) option.
+

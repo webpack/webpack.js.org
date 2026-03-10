@@ -26,7 +26,7 @@ The base directory, an **absolute path**, for resolving entry points and loaders
 ```js
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   context: path.resolve(__dirname, "app"),
 };
@@ -225,3 +225,4 @@ export default {
   },
 };
 ```
+

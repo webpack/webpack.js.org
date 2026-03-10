@@ -2154,7 +2154,7 @@ The output directory as an **absolute** path.
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   output: {
     path: path.resolve(__dirname, "dist/assets"),
@@ -2208,7 +2208,7 @@ A rule to consider: The URL of your [`output.path`](#outputpath) from the view o
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   output: {
     path: path.resolve(__dirname, "public/assets"),
@@ -2602,3 +2602,4 @@ export default {
   },
 };
 ```
+

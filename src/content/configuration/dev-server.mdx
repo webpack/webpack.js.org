@@ -42,7 +42,7 @@ This set of options is picked up by [webpack-dev-server](https://github.com/webp
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: {
@@ -878,7 +878,7 @@ You can also listen to a different socket with:
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     ipc: path.join(__dirname, "my-socket.sock"),
@@ -1354,7 +1354,7 @@ It also allows you to set additional [TLS options](https://nodejs.org/api/tls.ht
 const fs = require("node:fs");
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     server: {
@@ -1523,7 +1523,7 @@ Tell the server where to serve the content from. This is only necessary if you w
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: {
@@ -1540,7 +1540,7 @@ Provide an array of objects in case you have multiple static folders:
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: [
@@ -1589,7 +1589,7 @@ Tell the server at which URL to serve [`static.directory`](#directory) content. 
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: {
@@ -1607,7 +1607,7 @@ Provide an array of objects in case you have multiple static folders:
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: [
@@ -1637,7 +1637,7 @@ Tell dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) 
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: {
@@ -1671,7 +1671,7 @@ Tell dev-server to watch the files served by the [`static.directory`](#directory
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: {
@@ -1701,7 +1701,7 @@ It is possible to configure advanced options for watching static files from [`st
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   devServer: {
     static: {
@@ -1802,3 +1802,4 @@ export default {
   },
 };
 ```
+

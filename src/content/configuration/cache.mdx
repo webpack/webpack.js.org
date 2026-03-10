@@ -79,7 +79,7 @@ Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   cache: {
     type: "filesystem",
@@ -101,7 +101,7 @@ Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.n
 ```javascript
 const path = require("node:path");
 
-module.exports {
+module.exports = {
   // ...
   cache: {
     type: "filesystem",
@@ -495,3 +495,4 @@ build-job:
     restore-keys: |
       main-webpack-build
 ```
+
