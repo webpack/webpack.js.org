@@ -99,7 +99,49 @@ export default function Page(props) {
     contentRender = (
       <div
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(content),
+          __html: DOMPurify.sanitize(content, {
+            ALLOWED_TAGS: [
+              "h1",
+              "h2",
+              "h3",
+              "h4",
+              "h5",
+              "h6",
+              "p",
+              "a",
+              "em",
+              "strong",
+              "b",
+              "i",
+              "code",
+              "pre",
+              "div",
+              "span",
+              "ul",
+              "ol",
+              "li",
+              "table",
+              "thead",
+              "tbody",
+              "tr",
+              "td",
+              "th",
+              "blockquote",
+              "hr",
+              "br",
+              "img",
+              "button",
+            ],
+            ALLOWED_ATTR: [
+              "href",
+              "title",
+              "src",
+              "alt",
+              "class",
+              "id",
+              "data-clipboard-text",
+            ],
+          }),
         }}
       />
     );
