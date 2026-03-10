@@ -23,9 +23,9 @@ To test a single loader, you can use `path` to `resolve` a local file within a r
 **webpack.config.js**
 
 ```js
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -50,9 +50,13 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 **webpack.config.js**
 
 ```js
-const path = require("node:path");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   // ...
   resolveLoader: {
     modules: ["node_modules", path.resolve(__dirname, "loaders")],
@@ -85,7 +89,7 @@ In the following example, the `foo-loader` would be passed the raw resource and 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -232,13 +236,13 @@ Avoid generating common code in every module the loader processes. Instead, crea
 **src/loader-runtime.js**
 
 ```js
-const { someOtherModule } = require("./some-other-module");
+import { someOtherModule } from "./some-other-module.js";
 
-module.exports = function runtime(params) {
+export default function runtime(params) {
   const x = params.y * 2;
 
   return someOtherModule(params, x);
-};
+}
 ```
 
 **src/loader.js**
@@ -341,8 +345,12 @@ npm install --save-dev webpack memfs
 
 ```js
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { Volume, createFsFromVolume } from "memfs";
 import webpack from "webpack";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default (fixture, options = {}) => {
   const compiler = webpack({
