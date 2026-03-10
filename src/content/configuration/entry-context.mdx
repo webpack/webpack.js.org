@@ -24,9 +24,9 @@ The entry object is where webpack looks to start building the bundle. The contex
 The base directory, an **absolute path**, for resolving entry points and loaders from the configuration.
 
 ```js
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   context: path.resolve(__dirname, "app"),
 };

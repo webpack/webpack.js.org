@@ -112,9 +112,9 @@ export default {
 In addition, you can specify an absolute path:
 
 ```js
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   watchOptions: {
     ignored: [path.posix.resolve(__dirname, "./ignored-dir")],

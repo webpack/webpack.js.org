@@ -2152,9 +2152,9 @@ The output directory as an **absolute** path.
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   output: {
     path: path.resolve(__dirname, "dist/assets"),
@@ -2206,9 +2206,9 @@ A rule to consider: The URL of your [`output.path`](#outputpath) from the view o
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   output: {
     path: path.resolve(__dirname, "public/assets"),

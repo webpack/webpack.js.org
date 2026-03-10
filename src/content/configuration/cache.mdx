@@ -77,9 +77,9 @@ Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   cache: {
     type: "filesystem",
@@ -99,9 +99,9 @@ Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.n
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   cache: {
     type: "filesystem",

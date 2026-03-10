@@ -205,9 +205,9 @@ Specify where the records should be written. The following example shows how you
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   recordsInputPath: path.join(__dirname, "records.json"),
   recordsOutputPath: path.join(__dirname, "newRecords.json"),
@@ -223,9 +223,9 @@ Use this option to generate a JSON file containing webpack "records" – pieces 
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   recordsPath: path.join(__dirname, "records.json"),
 };
@@ -246,9 +246,9 @@ W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOut
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   snapshot: {
     managedPaths: [path.resolve(__dirname, "../node_modules")],
