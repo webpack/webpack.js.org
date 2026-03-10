@@ -1499,7 +1499,7 @@ import.defer(&quot;./dir/&quot; + file);
   <span class="token comment">// runtime assignment</span>
   <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token constant">UNKNOWN_PROPERTY</span> <span class="token operator">=</span> <span class="token string">&quot;HELLO&quot;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<p>If <code>output.module</code> is not enabled, Webpack will continue to remove unknown properties unless you explicitly indicate otherwise. To preserve them manually, you can configure <a href="http://localhost:3000/configuration/module/#moduleparserjavascriptimportmeta"><code>module.parser.javascript.importMeta</code></a> as &#x27;preserve-unknown&#x27; in your <code>webpack.config.js</code>:</p>
+<p>If <code>output.module</code> is not enabled, Webpack will continue to remove unknown properties unless you explicitly indicate otherwise. To preserve them manually, you can configure <a href="/configuration/module/#moduleparserjavascriptimportmeta" data-discover="true"><code>module.parser.javascript.importMeta</code></a> as &#x27;preserve-unknown&#x27; in your <code>webpack.config.js</code>:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
