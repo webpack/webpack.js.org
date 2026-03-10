@@ -6,117 +6,117 @@
 <p>Since <code>webpack-dev-server</code> v4.0.0, Hot Module Replacement is enabled by default.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>If you took the route of using <code>webpack-dev-middleware</code> instead of <code>webpack-dev-server</code>, please use the <a href="https://github.com/webpack/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom server or application.</p></aside>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: {
-</span><span class="token prefix unchanged"> </span><span class="token line">      app: &#x27;./src/index.js&#x27;,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">      print: &#x27;./src/print.js&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line">   devtool: &#x27;inline-source-map&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   devServer: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     static: &#x27;./dist&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     hot: true,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">       title: &#x27;Hot Module Replacement&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     }),
-</span><span class="token prefix unchanged"> </span><span class="token line">   ],
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;[name].bundle.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import path from &#x27;node:path&#x27;;
+  import { fileURLToPath } from &#x27;node:url&#x27;;
+  import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
+    entry: {
+       app: &#x27;./src/index.js&#x27;,
+<span class="token deleted">-      print: &#x27;./src/print.js&#x27;,</span>
+    },
+    devtool: &#x27;inline-source-map&#x27;,
+    devServer: {
+      static: &#x27;./dist&#x27;,
+<span class="token inserted">+     hot: true,</span>
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: &#x27;Hot Module Replacement&#x27;,
+      }),
+    ],
+    output: {
+      filename: &#x27;[name].bundle.js&#x27;,
+      path: path.resolve(__dirname, &#x27;dist&#x27;),
+      clean: true,
+    },
+  };</code></pre></div>
 <p>you can also provide manual entry points for HMR:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import webpack from &#x27;webpack&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: {
-</span><span class="token prefix unchanged"> </span><span class="token line">      app: &#x27;./src/index.js&#x27;,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">      print: &#x27;./src/print.js&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">      // Runtime code for hot module replacement
-</span><span class="token prefix inserted">+</span><span class="token line">      hot: &#x27;webpack/hot/dev-server.js&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">      // Dev server client for web socket transport, hot and live reload logic
-</span><span class="token prefix inserted">+</span><span class="token line">      client: &#x27;webpack-dev-server/client/index.js?hot=true&amp;live-reload=true&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line">   devtool: &#x27;inline-source-map&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   devServer: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     static: &#x27;./dist&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     // Dev server client for web socket transport, hot and live reload logic
-</span><span class="token prefix inserted">+</span><span class="token line">     hot: false,
-</span><span class="token prefix inserted">+</span><span class="token line">     client: false,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">       title: &#x27;Hot Module Replacement&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     }),
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     // Plugin for hot module replacement
-</span><span class="token prefix inserted">+</span><span class="token line">     new webpack.HotModuleReplacementPlugin(),
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   ],
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;[name].bundle.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import path from &#x27;node:path&#x27;;
+  import { fileURLToPath } from &#x27;node:url&#x27;;
+  import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
+<span class="token inserted">+ import webpack from &#x27;webpack&#x27;;</span>
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
+    entry: {
+       app: &#x27;./src/index.js&#x27;,
+<span class="token deleted">-      print: &#x27;./src/print.js&#x27;,</span>
+<span class="token inserted">+      // Runtime code for hot module replacement</span>
+<span class="token inserted">+      hot: &#x27;webpack/hot/dev-server.js&#x27;,</span>
+<span class="token inserted">+      // Dev server client for web socket transport, hot and live reload logic</span>
+<span class="token inserted">+      client: &#x27;webpack-dev-server/client/index.js?hot=true&amp;live-reload=true&#x27;,</span>
+    },
+    devtool: &#x27;inline-source-map&#x27;,
+    devServer: {
+      static: &#x27;./dist&#x27;,
+<span class="token inserted">+     // Dev server client for web socket transport, hot and live reload logic</span>
+<span class="token inserted">+     hot: false,</span>
+<span class="token inserted">+     client: false,</span>
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: &#x27;Hot Module Replacement&#x27;,
+      }),
+<span class="token inserted">+     // Plugin for hot module replacement</span>
+<span class="token inserted">+     new webpack.HotModuleReplacementPlugin(),</span>
+    ],
+    output: {
+      filename: &#x27;[name].bundle.js&#x27;,
+      path: path.resolve(__dirname, &#x27;dist&#x27;),
+      clean: true,
+    },
+  };</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You can use the CLI to modify the <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration with the following command: <code>webpack serve --hot-only</code>.</p></aside>
 <p>Now let&#x27;s update the <code>index.js</code> file so that when a change inside <code>print.js</code> is detected we tell webpack to accept the updated module.</p>
 <p><strong>index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import _ from &#x27;lodash&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import printMe from &#x27;./print.js&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> function component() {
-</span><span class="token prefix unchanged"> </span><span class="token line">   const element = document.createElement(&#x27;div&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">   const btn = document.createElement(&#x27;button&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   btn.innerHTML = &#x27;Click me and check the console!&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">   btn.onclick = printMe;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   element.appendChild(btn);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return element;
-</span><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> document.body.appendChild(component());
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
-</span><span class="token prefix inserted">+</span><span class="token line"> if (module.hot) {
-</span><span class="token prefix inserted">+</span><span class="token line">   module.hot.accept(&#x27;./print.js&#x27;, function() {
-</span><span class="token prefix inserted">+</span><span class="token line">     console.log(&#x27;Accepting the updated printMe module!&#x27;);
-</span><span class="token prefix inserted">+</span><span class="token line">     printMe();
-</span><span class="token prefix inserted">+</span><span class="token line">   })
-</span><span class="token prefix inserted">+</span><span class="token line"> }</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import _ from &#x27;lodash&#x27;;
+  import printMe from &#x27;./print.js&#x27;;
+
+  function component() {
+    const element = document.createElement(&#x27;div&#x27;);
+    const btn = document.createElement(&#x27;button&#x27;);
+
+    element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
+
+    btn.innerHTML = &#x27;Click me and check the console!&#x27;;
+    btn.onclick = printMe;
+
+    element.appendChild(btn);
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+<span class="token inserted">+</span>
+<span class="token inserted">+ if (module.hot) {</span>
+<span class="token inserted">+   module.hot.accept(&#x27;./print.js&#x27;, function() {</span>
+<span class="token inserted">+     console.log(&#x27;Accepting the updated printMe module!&#x27;);</span>
+<span class="token inserted">+     printMe();</span>
+<span class="token inserted">+   })</span>
+<span class="token inserted">+ }</span></code></pre></div>
 <p>Start changing the <code>console.log</code> statement in <code>print.js</code>, and you should see the following output in the browser console (don&#x27;t worry about that <code>button.onclick = printMe</code> output for now, we will also update that part later).</p>
 <p><strong>print.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default function printMe() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   console.log(&#x27;I get called from print.js!&#x27;);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   console.log(&#x27;Updating print.js...&#x27;);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  export default function printMe() {
+<span class="token deleted">-   console.log(&#x27;I get called from print.js!&#x27;);</span>
+<span class="token inserted">+   console.log(&#x27;Updating print.js...&#x27;);</span>
+  }</code></pre></div>
 <p><strong>console</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">[HMR] Waiting for update signal from WDS...
 main.js:4395 [WDS] Hot Module Replacement enabled.
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> 2main.js:4395 [WDS] App updated. Recompiling...
-</span><span class="token prefix inserted">+</span><span class="token line"> main.js:4395 [WDS] App hot update...
-</span><span class="token prefix inserted">+</span><span class="token line"> main.js:4330 [HMR] Checking for updates on the server...
-</span><span class="token prefix inserted">+</span><span class="token line"> main.js:10024 Accepting the updated printMe module!
-</span><span class="token prefix inserted">+</span><span class="token line"> 0.4b8ee77….hot-update.js:10 Updating print.js...
-</span><span class="token prefix inserted">+</span><span class="token line"> main.js:4330 [HMR] Updated modules:
-</span><span class="token prefix inserted">+</span><span class="token line"> main.js:4330 [HMR]  - 20</span></span></code></pre></div>
+<span class="token inserted">+ 2main.js:4395 [WDS] App updated. Recompiling...</span>
+<span class="token inserted">+ main.js:4395 [WDS] App hot update...</span>
+<span class="token inserted">+ main.js:4330 [HMR] Checking for updates on the server...</span>
+<span class="token inserted">+ main.js:10024 Accepting the updated printMe module!</span>
+<span class="token inserted">+ 0.4b8ee77….hot-update.js:10 Updating print.js...</span>
+<span class="token inserted">+ main.js:4330 [HMR] Updated modules:</span>
+<span class="token inserted">+ main.js:4330 [HMR]  - 20</span></code></pre></div>
 <h2><span id="via-the-nodejs-api"></span>Via the Node.js API<a href="#via-the-nodejs-api" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>When using Webpack Dev Server with the Node.js API, don&#x27;t put the dev server options on the webpack configuration object. Instead, pass them as a second parameter upon creation. For example:</p>
 <p><code>new WebpackDevServer(options, compiler)</code></p>
@@ -132,8 +132,8 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
-  mode<span class="token operator">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">[</span>
+  mode<span class="token punctuation">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// Runtime code for hot module replacement</span>
     <span class="token string">&quot;webpack/hot/dev-server.js&quot;</span><span class="token punctuation">,</span>
     <span class="token comment">// Dev server client for web socket transport, hot and live reload logic</span>
@@ -141,30 +141,30 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
     <span class="token comment">// Your entry</span>
     <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
-  devtool<span class="token operator">:</span> <span class="token string">&quot;inline-source-map&quot;</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devtool<span class="token punctuation">:</span> <span class="token string">&quot;inline-source-map&quot;</span><span class="token punctuation">,</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// Plugin for hot module replacement</span>
     <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>HotModuleReplacementPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      title<span class="token operator">:</span> <span class="token string">&quot;Hot Module Replacement&quot;</span><span class="token punctuation">,</span>
+      title<span class="token punctuation">:</span> <span class="token string">&quot;Hot Module Replacement&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span><span class="token punctuation">,</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    clean<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    clean<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> compiler <span class="token operator">=</span> <span class="token function">webpack</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// `hot` and `client` options are disabled because we added them manually</span>
-<span class="token keyword">const</span> server <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebpackDevServer</span><span class="token punctuation">(</span><span class="token punctuation">{</span> hot<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> client<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> server <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebpackDevServer</span><span class="token punctuation">(</span><span class="token punctuation">{</span> hot<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> client<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">try</span> <span class="token punctuation">{</span>
   <span class="token keyword">await</span> server<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;dev server is running&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Failed to start dev server: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>err<span class="token punctuation">.</span>message<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span> cause<span class="token operator">:</span> err <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">err</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`Failed to start dev server: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>err<span class="token punctuation">.</span>message<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span> cause<span class="token punctuation">:</span> err <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>See the <a href="/api/webpack-dev-server/" data-discover="true">full documentation of <code>webpack-dev-server</code> Node.js API</a>.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>If you&#x27;re <a href="/guides/development/#using-webpack-dev-middleware" data-discover="true">using <code>webpack-dev-middleware</code></a>, check out the <a href="https://github.com/webpack/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom dev server.</p></aside>
@@ -173,36 +173,36 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 <p>This is happening because the button&#x27;s <code>onclick</code> event handler is still bound to the original <code>printMe</code> function.</p>
 <p>To make this work with HMR we need to update that binding to the new <code>printMe</code> function using <code>module.hot.accept</code>:</p>
 <p><strong>index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import _ from &#x27;lodash&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import printMe from &#x27;./print.js&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> function component() {
-</span><span class="token prefix unchanged"> </span><span class="token line">   const element = document.createElement(&#x27;div&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">   const btn = document.createElement(&#x27;button&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   btn.innerHTML = &#x27;Click me and check the console!&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">   btn.onclick = printMe;  // onclick event is bind to the original printMe function
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   element.appendChild(btn);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return element;
-</span><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span>
-<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> document.body.appendChild(component());
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> let element = component(); // Store the element to re-render on print.js changes
-</span><span class="token prefix inserted">+</span><span class="token line"> document.body.appendChild(element);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> if (module.hot) {
-</span><span class="token prefix unchanged"> </span><span class="token line">   module.hot.accept(&#x27;./print.js&#x27;, function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">     console.log(&#x27;Accepting the updated printMe module!&#x27;);
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">     printMe();
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     document.body.removeChild(element);
-</span><span class="token prefix inserted">+</span><span class="token line">     element = component(); // Re-render the &quot;component&quot; to update the click handler
-</span><span class="token prefix inserted">+</span><span class="token line">     document.body.appendChild(element);
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   })
-</span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import _ from &#x27;lodash&#x27;;
+  import printMe from &#x27;./print.js&#x27;;
+
+  function component() {
+    const element = document.createElement(&#x27;div&#x27;);
+    const btn = document.createElement(&#x27;button&#x27;);
+
+    element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
+
+    btn.innerHTML = &#x27;Click me and check the console!&#x27;;
+    btn.onclick = printMe;  // onclick event is bind to the original printMe function
+
+    element.appendChild(btn);
+
+    return element;
+  }
+
+<span class="token deleted">- document.body.appendChild(component());</span>
+<span class="token inserted">+ let element = component(); // Store the element to re-render on print.js changes</span>
+<span class="token inserted">+ document.body.appendChild(element);</span>
+
+  if (module.hot) {
+    module.hot.accept(&#x27;./print.js&#x27;, function() {
+      console.log(&#x27;Accepting the updated printMe module!&#x27;);
+<span class="token deleted">-     printMe();</span>
+<span class="token inserted">+     document.body.removeChild(element);</span>
+<span class="token inserted">+     element = component(); // Re-render the &quot;component&quot; to update the click handler</span>
+<span class="token inserted">+     document.body.appendChild(element);</span>
+    })
+  }</code></pre></div>
 <p>This is only one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.</p>
 <h2><span id="hmr-with-stylesheets"></span>HMR with Stylesheets<a href="#hmr-with-stylesheets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Hot Module Replacement with CSS is actually fairly straightforward with the help of the <code>style-loader</code>. This loader uses <code>module.hot.accept</code> behind the scenes to patch <code>&lt;style&gt;</code> tags when CSS dependencies are updated.</p>
@@ -210,93 +210,93 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev style-loader css-loader</code></pre></div>
 <p>Now let&#x27;s update the configuration file to make use of the loader.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     app: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line">   devtool: &#x27;inline-source-map&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   devServer: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     static: &#x27;./dist&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     hot: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   module: {
-</span><span class="token prefix inserted">+</span><span class="token line">     rules: [
-</span><span class="token prefix inserted">+</span><span class="token line">       {
-</span><span class="token prefix inserted">+</span><span class="token line">         test: /\.css$/,
-</span><span class="token prefix inserted">+</span><span class="token line">         use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;],
-</span><span class="token prefix inserted">+</span><span class="token line">       },
-</span><span class="token prefix inserted">+</span><span class="token line">     ],
-</span><span class="token prefix inserted">+</span><span class="token line">   },
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">       title: &#x27;Hot Module Replacement&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     }),
-</span><span class="token prefix unchanged"> </span><span class="token line">   ],
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;[name].bundle.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import path from &#x27;node:path&#x27;;
+  import { fileURLToPath } from &#x27;node:url&#x27;;
+  import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
+    entry: {
+      app: &#x27;./src/index.js&#x27;,
+    },
+    devtool: &#x27;inline-source-map&#x27;,
+    devServer: {
+      static: &#x27;./dist&#x27;,
+      hot: true,
+    },
+<span class="token inserted">+   module: {</span>
+<span class="token inserted">+     rules: [</span>
+<span class="token inserted">+       {</span>
+<span class="token inserted">+         test: /\.css$/,</span>
+<span class="token inserted">+         use: [&#x27;style-loader&#x27;, &#x27;css-loader&#x27;],</span>
+<span class="token inserted">+       },</span>
+<span class="token inserted">+     ],</span>
+<span class="token inserted">+   },</span>
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: &#x27;Hot Module Replacement&#x27;,
+      }),
+    ],
+    output: {
+      filename: &#x27;[name].bundle.js&#x27;,
+      path: path.resolve(__dirname, &#x27;dist&#x27;),
+      clean: true,
+    },
+  };</code></pre></div>
 <p>Hot loading stylesheets can be done by importing them into a module:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
-</span><span class="token prefix unchanged"> </span><span class="token line"> │   └── bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> └── /src
-</span><span class="token prefix unchanged"> </span><span class="token line">     ├── index.js
-</span><span class="token prefix unchanged"> </span><span class="token line">     ├── print.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     └── styles.css</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  webpack-demo
+  ├── package.json
+  ├── webpack.config.js
+  ├── /dist
+  │   └── bundle.js
+  └── /src
+      ├── index.js
+      ├── print.js
+<span class="token inserted">+     └── styles.css</span></code></pre></div>
 <p><strong>styles.css</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-css"><span class="token selector">body</span> <span class="token punctuation">{</span>
   <span class="token property">background</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p><strong>index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import _ from &#x27;lodash&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import printMe from &#x27;./print.js&#x27;;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import &#x27;./styles.css&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> function component() {
-</span><span class="token prefix unchanged"> </span><span class="token line">   const element = document.createElement(&#x27;div&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">   const btn = document.createElement(&#x27;button&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   btn.innerHTML = &#x27;Click me and check the console!&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">   btn.onclick = printMe;  // onclick event is bind to the original printMe function
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   element.appendChild(btn);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return element;
-</span><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> let element = component();
-</span><span class="token prefix unchanged"> </span><span class="token line"> document.body.appendChild(element);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> if (module.hot) {
-</span><span class="token prefix unchanged"> </span><span class="token line">   module.hot.accept(&#x27;./print.js&#x27;, function() {
-</span><span class="token prefix unchanged"> </span><span class="token line">     console.log(&#x27;Accepting the updated printMe module!&#x27;);
-</span><span class="token prefix unchanged"> </span><span class="token line">     document.body.removeChild(element);
-</span><span class="token prefix unchanged"> </span><span class="token line">     element = component(); // Re-render the &quot;component&quot; to update the click handler
-</span><span class="token prefix unchanged"> </span><span class="token line">     document.body.appendChild(element);
-</span><span class="token prefix unchanged"> </span><span class="token line">   })
-</span><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import _ from &#x27;lodash&#x27;;
+  import printMe from &#x27;./print.js&#x27;;
+<span class="token inserted">+ import &#x27;./styles.css&#x27;;</span>
+
+  function component() {
+    const element = document.createElement(&#x27;div&#x27;);
+    const btn = document.createElement(&#x27;button&#x27;);
+
+    element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
+
+    btn.innerHTML = &#x27;Click me and check the console!&#x27;;
+    btn.onclick = printMe;  // onclick event is bind to the original printMe function
+
+    element.appendChild(btn);
+
+    return element;
+  }
+
+  let element = component();
+  document.body.appendChild(element);
+
+  if (module.hot) {
+    module.hot.accept(&#x27;./print.js&#x27;, function() {
+      console.log(&#x27;Accepting the updated printMe module!&#x27;);
+      document.body.removeChild(element);
+      element = component(); // Re-render the &quot;component&quot; to update the click handler
+      document.body.appendChild(element);
+    })
+  }
+</code></pre></div>
 <p>Change the style on <code>body</code> to <code>background: red;</code> and you should immediately see the page&#x27;s background color change without a full refresh.</p>
 <p><strong>styles.css</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> body {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   background: blue;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   background: red;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  body {
+<span class="token deleted">-   background: blue;</span>
+<span class="token inserted">+   background: red;</span>
+  }</code></pre></div>
 <h2><span id="other-code-and-frameworks"></span>Other Code and Frameworks<a href="#other-code-and-frameworks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>There are many other loaders and examples out in the community to make HMR interact smoothly with a variety of frameworks and libraries...</p>
 <ul>
@@ -306,4 +306,4 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 <li><a href="https://angular.io/cli/serve">Angular HMR</a>: No loader necessary! HMR support is built in the Angular CLI, add the <code>--hmr</code> flag to you <code>ng serve</code> command.</li>
 <li><a href="https://github.com/sveltejs/svelte-loader">Svelte Loader</a>: This loader supports HMR for Svelte components out of the box.</li>
 </ul>
-<aside class="tip"><p class="tip__prefix">tip</p><p>If you know of any other loaders or plugins that help with or enhance HMR, please submit a pull request to add them to this list!</p></aside></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="/concepts/hot-module-replacement" data-discover="true">Concepts - Hot Module Replacement</a></li><li><a href="/api/hot-module-replacement" data-discover="true">API - Hot Module Replacement</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/hot-module-replacement.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/installation/" data-discover="true">Installation</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/tree-shaking/" data-discover="true">Tree Shaking</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">20<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/jmreidy"><img width="45" height="45" alt="jmreidy" title="jmreidy" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jhnns"><img width="45" height="45" alt="jhnns" title="jhnns" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/sararubin"><img width="45" height="45" alt="sararubin" title="sararubin" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/rohannair"><img width="45" height="45" alt="rohannair" title="rohannair" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/joshsantos"><img width="45" height="45" alt="joshsantos" title="joshsantos" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/drpicox"><img width="45" height="45" alt="drpicox" title="drpicox" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/sbaidon"><img width="45" height="45" alt="sbaidon" title="sbaidon" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/gdi2290"><img width="45" height="45" alt="gdi2290" title="gdi2290" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/bdwain"><img width="45" height="45" alt="bdwain" title="bdwain" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/caryli"><img width="45" height="45" alt="caryli" title="caryli" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/xgirma"><img width="45" height="45" alt="xgirma" title="xgirma" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/aviyacohen"><img width="45" height="45" alt="aviyacohen" title="aviyacohen" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dhruvdutt"><img width="45" height="45" alt="dhruvdutt" title="dhruvdutt" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/aholzner"><img width="45" height="45" alt="aholzner" title="aholzner" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Brennvo"><img width="45" height="45" alt="Brennvo" title="Brennvo" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<aside class="tip"><p class="tip__prefix">tip</p><p>If you know of any other loaders or plugins that help with or enhance HMR, please submit a pull request to add them to this list!</p></aside></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="/concepts/hot-module-replacement" data-discover="true">Concepts - Hot Module Replacement</a></li><li><a href="/api/hot-module-replacement" data-discover="true">API - Hot Module Replacement</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/hot-module-replacement.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/installation/" data-discover="true">Installation</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/tree-shaking/" data-discover="true">Tree Shaking</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">20<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/jmreidy"><img width="45" height="45" alt="jmreidy" title="jmreidy" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jhnns"><img width="45" height="45" alt="jhnns" title="jhnns" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/sararubin"><img width="45" height="45" alt="sararubin" title="sararubin" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/rohannair"><img width="45" height="45" alt="rohannair" title="rohannair" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/joshsantos"><img width="45" height="45" alt="joshsantos" title="joshsantos" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/drpicox"><img width="45" height="45" alt="drpicox" title="drpicox" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/sbaidon"><img width="45" height="45" alt="sbaidon" title="sbaidon" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/gdi2290"><img width="45" height="45" alt="gdi2290" title="gdi2290" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/bdwain"><img width="45" height="45" alt="bdwain" title="bdwain" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/caryli"><img width="45" height="45" alt="caryli" title="caryli" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/xgirma"><img width="45" height="45" alt="xgirma" title="xgirma" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/aviyacohen"><img width="45" height="45" alt="aviyacohen" title="aviyacohen" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dhruvdutt"><img width="45" height="45" alt="dhruvdutt" title="dhruvdutt" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/aholzner"><img width="45" height="45" alt="aholzner" title="aholzner" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Brennvo"><img width="45" height="45" alt="Brennvo" title="Brennvo" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

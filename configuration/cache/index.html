@@ -4,7 +4,7 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>While setting <code>cache.type</code> to <code>&#x27;filesystem&#x27;</code> opens up more options for configuration.</p>
 <h3><span id="cacheallowcollectingmemory"></span>cache.allowCollectingMemory<a href="#cacheallowcollectingmemory" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -21,9 +21,9 @@
 </ul>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    allowCollectingMemory<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    allowCollectingMemory<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachebuilddependencies"></span>cache.buildDependencies<a href="#cachebuilddependencies" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -33,10 +33,10 @@
 <aside class="tip"><p class="tip__prefix">tip</p><p>It&#x27;s recommended to set <code>cache.buildDependencies.config: [__filename]</code> in your webpack configuration to get the latest configuration and all dependencies.</p></aside>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    buildDependencies<span class="token operator">:</span> <span class="token punctuation">{</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    buildDependencies<span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token comment">// This makes all dependencies of this file - build dependencies</span>
-      config<span class="token operator">:</span> <span class="token punctuation">[</span>__filename<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      config<span class="token punctuation">:</span> <span class="token punctuation">[</span>__filename<span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token comment">// By default webpack and loaders are build dependencies</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -54,9 +54,9 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    cacheDirectory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;.temp_cache&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    cacheDirectory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;.temp_cache&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="warning"><p class="warning__prefix">warning</p><p>The final location of the cache is a combination of <code>cache.cacheDirectory</code> + <code>cache.name</code>.</p></aside>
@@ -72,9 +72,9 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    cacheLocation<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;.test_cache&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    cacheLocation<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;.test_cache&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachecacheunaffected"></span>cache.cacheUnaffected<a href="#cachecacheunaffected" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -86,9 +86,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;memory&quot;</span><span class="token punctuation">,</span>
-    cacheUnaffected<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;memory&quot;</span><span class="token punctuation">,</span>
+    cacheUnaffected<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachecompression"></span>cache.compression<a href="#cachecompression" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -99,9 +99,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    compression<span class="token operator">:</span> <span class="token string">&quot;gzip&quot;</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    compression<span class="token punctuation">:</span> <span class="token string">&quot;gzip&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachehashalgorithm"></span>cache.hashAlgorithm<a href="#cachehashalgorithm" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -111,9 +111,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    hashAlgorithm<span class="token operator">:</span> <span class="token string">&quot;md4&quot;</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    hashAlgorithm<span class="token punctuation">:</span> <span class="token string">&quot;md4&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cacheidletimeout"></span>cache.idleTimeout<a href="#cacheidletimeout" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -123,9 +123,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ..</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    idleTimeout<span class="token operator">:</span> <span class="token number">60000</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    idleTimeout<span class="token punctuation">:</span> <span class="token number">60000</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cacheidletimeoutafterlargechanges"></span>cache.idleTimeoutAfterLargeChanges<a href="#cacheidletimeoutafterlargechanges" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -136,9 +136,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ..</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    idleTimeoutAfterLargeChanges<span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    idleTimeoutAfterLargeChanges<span class="token punctuation">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cacheidletimeoutforinitialstore"></span>cache.idleTimeoutForInitialStore<a href="#cacheidletimeoutforinitialstore" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -148,9 +148,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ..</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    idleTimeoutForInitialStore<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    idleTimeoutForInitialStore<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachemanagedpaths"></span>cache.managedPaths<a href="#cachemanagedpaths" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -165,9 +165,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    maxAge<span class="token operator">:</span> <span class="token number">5184000000</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    maxAge<span class="token punctuation">:</span> <span class="token number">5184000000</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachemaxgenerations"></span>cache.maxGenerations<a href="#cachemaxgenerations" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -186,9 +186,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;memory&quot;</span><span class="token punctuation">,</span>
-    maxGenerations<span class="token operator">:</span> <span class="token number">Infinity</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;memory&quot;</span><span class="token punctuation">,</span>
+    maxGenerations<span class="token punctuation">:</span> <span class="token number">Infinity</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachemaxmemorygenerations"></span>cache.maxMemoryGenerations<a href="#cachemaxmemorygenerations" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -213,9 +213,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    maxMemoryGenerations<span class="token operator">:</span> <span class="token number">Infinity</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    maxMemoryGenerations<span class="token punctuation">:</span> <span class="token number">Infinity</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachememorycacheunaffected"></span>cache.memoryCacheUnaffected<a href="#cachememorycacheunaffected" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -227,9 +227,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    memoryCacheUnaffected<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    memoryCacheUnaffected<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachename"></span>cache.name<a href="#cachename" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -239,9 +239,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    name<span class="token operator">:</span> <span class="token string">&quot;AppBuildCache&quot;</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    name<span class="token punctuation">:</span> <span class="token string">&quot;AppBuildCache&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cacheprofile"></span>cache.profile<a href="#cacheprofile" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -250,9 +250,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    profile<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    profile<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachereadonly"></span>cache.readonly<a href="#cachereadonly" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -260,10 +260,10 @@
 <p>Prevent webpack from storing cache into file system. Only available when <code>cache.type === &quot;filesystem&quot;</code> and <code>cache.store === &#x27;pack&#x27;</code>.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    store<span class="token operator">:</span> <span class="token string">&quot;pack&quot;</span><span class="token punctuation">,</span>
-    readonly<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    store<span class="token punctuation">:</span> <span class="token string">&quot;pack&quot;</span><span class="token punctuation">,</span>
+    readonly<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachestore"></span>cache.store<a href="#cachestore" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -277,9 +277,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    store<span class="token operator">:</span> <span class="token string">&quot;pack&quot;</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    store<span class="token punctuation">:</span> <span class="token string">&quot;pack&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cachetype"></span>cache.type<a href="#cachetype" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -288,8 +288,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;memory&quot;</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;memory&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="cacheversion"></span>cache.version<a href="#cacheversion" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -299,9 +299,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
-    version<span class="token operator">:</span> <span class="token string">&quot;your_version&quot;</span><span class="token punctuation">,</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    version<span class="token punctuation">:</span> <span class="token string">&quot;your_version&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Don&#x27;t share the cache between calls with different options.</p></aside>
@@ -320,7 +320,7 @@
 <span class="token comment"># this is webpack build job</span>
 <span class="token key atrule">build-job</span><span class="token punctuation">:</span>
   <span class="token key atrule">cache</span><span class="token punctuation">:</span>
-    <span class="token key atrule">key</span><span class="token punctuation">:</span> <span class="token string">&quot;$CI_COMMIT_REF_SLUG&quot;</span> <span class="token comment"># branch/tag name</span>
+    <span class="token key atrule">key</span><span class="token punctuation">:</span> &quot;$CI_COMMIT_REF_SLUG&quot; <span class="token comment"># branch/tag name</span>
     <span class="token key atrule">paths</span><span class="token punctuation">:</span>
       <span class="token comment"># cache directory</span>
       <span class="token comment"># make sure that you don&#x27;t run &quot;npm ci&quot; in this job or change default cache directory</span>
@@ -334,4 +334,4 @@
     <span class="token key atrule">key</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> GITHUB_REF_NAME <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">-</span>webpack<span class="token punctuation">-</span>build
     <span class="token comment"># fallback to use &quot;main&quot; branch cache</span>
     <span class="token key atrule">restore-keys</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
-      main-webpack-build</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/cache.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/dev-server/" data-discover="true">DevServer</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/devtool/" data-discover="true">Devtool</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">2<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+      main-webpack-build</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/cache.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/dev-server/" data-discover="true">DevServer</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/devtool/" data-discover="true">Devtool</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">2<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

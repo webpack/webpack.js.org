@@ -5,15 +5,15 @@
 <p>For example, to include <a href="https://jquery.com/">jQuery</a> from a CDN instead of bundling it:</p>
 <p><strong>index.html</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span>
-  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>https://code.jquery.com/jquery-3.1.0.js<span class="token punctuation">&quot;</span></span>
-  <span class="token attr-name">integrity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=<span class="token punctuation">&quot;</span></span>
-  <span class="token attr-name">crossorigin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>anonymous<span class="token punctuation">&quot;</span></span>
-<span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre></div>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://code.jquery.com/jquery-3.1.0.js<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">integrity</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=<span class="token punctuation">&quot;</span></span>
+  <span class="token attr-name">crossorigin</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>anonymous<span class="token punctuation">&quot;</span></span>
+<span class="token punctuation">&gt;</span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>This leaves any dependent modules unchanged, i.e. the code shown below will still work:</p>
@@ -27,28 +27,28 @@
 <p>You can also use the shortcut syntax if you&#x27;re defining only 1 external:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>equals to</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>You can specify the <a href="#externalstype">external library type</a> to the external with the <code>${externalsType} ${libraryName}</code> syntax. It will override the default external library type specified in the <a href="#externalstype">externalsType</a> option.</p>
 <p>For example, if the external library is a <a href="#externalstypecommonjs">CommonJS module</a>, you can specify</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;commonjs jquery&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;commonjs jquery&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="string-1"></span>[string]<a href="#string-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    subtract<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    subtract<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><code>subtract: [&#x27;./math&#x27;, &#x27;subtract&#x27;]</code> allows you select part of a module, where <code>./math</code> is the module and your bundle only requires the subset under the <code>subtract</code> variable.</p>
@@ -56,8 +56,8 @@
 <p>Similar to the <a href="#string">string syntax</a>, you can specify the external library type with the <code>${externalsType} ${libraryName}</code> syntax, in the first item of the array, for example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    subtract<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;commonjs ./math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    subtract<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;commonjs ./math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="object"></span>object<a href="#object" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -65,27 +65,27 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token comment">// or</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    react<span class="token operator">:</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    react<span class="token punctuation">:</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token comment">// or</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    lodash<span class="token operator">:</span> <span class="token punctuation">{</span>
-      commonjs<span class="token operator">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
-      amd<span class="token operator">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
-      root<span class="token operator">:</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">,</span> <span class="token comment">// indicates global variable</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    lodash<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      commonjs<span class="token punctuation">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
+      amd<span class="token punctuation">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
+      root<span class="token punctuation">:</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">,</span> <span class="token comment">// indicates global variable</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token comment">// or</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    subtract<span class="token operator">:</span> <span class="token punctuation">{</span>
-      root<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    subtract<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      root<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -118,11 +118,11 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
-    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> context<span class="token punctuation">,</span> request <span class="token punctuation">}</span><span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> context<span class="token punctuation">,</span> request <span class="token punctuation">}</span><span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/^yourregex$/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// Externalize to a commonjs module using the request path</span>
-        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
 
       <span class="token comment">// Continue without externalizing the import</span>
@@ -133,8 +133,8 @@
 <p>Other examples using different module formats:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
-    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment">// The external is a `commonjs2` module located in `@scope/library`</span>
       <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&quot;@scope/library&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;commonjs2&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -142,8 +142,8 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
-    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment">// The external is a global variable called `nameOfGlobal`.</span>
       <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&quot;nameOfGlobal&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -151,8 +151,8 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
-    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment">// The external is a named export in the `@scope/library` module.</span>
       <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">&quot;@scope/library&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;namedexport&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -160,14 +160,14 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
-    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token comment">// The external is a UMD module</span>
       <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-        root<span class="token operator">:</span> <span class="token string">&quot;componentsGlobal&quot;</span><span class="token punctuation">,</span>
-        commonjs<span class="token operator">:</span> <span class="token string">&quot;@scope/components&quot;</span><span class="token punctuation">,</span>
-        commonjs2<span class="token operator">:</span> <span class="token string">&quot;@scope/components&quot;</span><span class="token punctuation">,</span>
-        amd<span class="token operator">:</span> <span class="token string">&quot;components&quot;</span><span class="token punctuation">,</span>
+        root<span class="token punctuation">:</span> <span class="token string">&quot;componentsGlobal&quot;</span><span class="token punctuation">,</span>
+        commonjs<span class="token punctuation">:</span> <span class="token string">&quot;@scope/components&quot;</span><span class="token punctuation">,</span>
+        commonjs2<span class="token punctuation">:</span> <span class="token string">&quot;@scope/components&quot;</span><span class="token punctuation">,</span>
+        amd<span class="token punctuation">:</span> <span class="token string">&quot;components&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -177,7 +177,7 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token regex">/^(jquery|\$)$/i</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token regex">/^(jquery|\$)$/i</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In this case, any dependency named <code>jQuery</code>, capitalized or not, or <code>$</code> would be externalized.</p>
 <h3><span id="combining-syntaxes"></span>Combining syntaxes<a href="#combining-syntaxes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -185,23 +185,23 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">{</span>
       <span class="token comment">// String</span>
-      react<span class="token operator">:</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span>
+      react<span class="token punctuation">:</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span>
       <span class="token comment">// Object</span>
-      lodash<span class="token operator">:</span> <span class="token punctuation">{</span>
-        commonjs<span class="token operator">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
-        amd<span class="token operator">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
-        root<span class="token operator">:</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">,</span> <span class="token comment">// indicates global variable</span>
+      lodash<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        commonjs<span class="token punctuation">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
+        amd<span class="token punctuation">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
+        root<span class="token punctuation">:</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">,</span> <span class="token comment">// indicates global variable</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token comment">// [string]</span>
-      subtract<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      subtract<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./math&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;subtract&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token comment">// Function</span>
-    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> context<span class="token punctuation">,</span> request <span class="token punctuation">}</span><span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> context<span class="token punctuation">,</span> request <span class="token punctuation">}</span><span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/^yourregex$/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
       <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -216,10 +216,10 @@
 <p>Specify externals by layer.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    byLayer<span class="token operator">:</span> <span class="token punctuation">{</span>
-      layer<span class="token operator">:</span> <span class="token punctuation">{</span>
-        external1<span class="token operator">:</span> <span class="token string">&quot;var 43&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    byLayer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      layer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        external1<span class="token punctuation">:</span> <span class="token string">&quot;var 43&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -254,7 +254,7 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;promise&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;promise&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="externalstypecommonjs"></span>externalsType.commonjs<a href="#externalstypecommonjs" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Specify the default type of externals as <code>&#x27;commonjs&#x27;</code>. Webpack will generate code like <code>const X = require(&#x27;...&#x27;)</code> for externals used in a module.</p>
@@ -263,9 +263,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token string">&quot;fs-extra&quot;</span><span class="token operator">:</span> <span class="token string">&quot;fs-extra&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;fs-extra&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;fs-extra&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like:</p>
@@ -280,12 +280,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;global&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;global&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    globalObject<span class="token operator">:</span> <span class="token string">&quot;global&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    globalObject<span class="token punctuation">:</span> <span class="token string">&quot;global&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
@@ -301,18 +301,18 @@
 <span class="token function">jq</span><span class="token punctuation">(</span><span class="token string">&quot;.my-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
-    outputModule<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  experiments<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    outputModule<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> __WEBPACK_EXTERNAL_MODULE_jquery__ <span class="token keyword">from</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">const</span> jq <span class="token operator">=</span> __WEBPACK_EXTERNAL_MODULE_jquery__<span class="token punctuation">.</span>default<span class="token punctuation">;</span>
+<span class="token keyword">const</span> jq <span class="token operator">=</span> __WEBPACK_EXTERNAL_MODULE_jquery__<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">;</span>
 <span class="token function">jq</span><span class="token punctuation">(</span><span class="token string">&quot;.my-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Note that there will be an <code>import</code> statement in the output bundle.</p>
 <h3><span id="externalstypeimport"></span>externalsType.import<a href="#externalstypeimport" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -325,14 +325,14 @@
 <span class="token punctuation">}</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;import&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;import&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate something like below:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">const</span> __webpack_modules__ <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token function-variable function">jQuery</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">module</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  jQuery<span class="token punctuation">:</span> <span class="token punctuation">(</span>module<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -341,7 +341,7 @@
 
 <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> jq <span class="token operator">=</span> <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token comment">/* import() */</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
-    <span class="token function">__webpack_require__</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>__webpack_require__<span class="token punctuation">,</span> <span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    __webpack_require__<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>__webpack_require__<span class="token punctuation">,</span> <span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">jq</span><span class="token punctuation">(</span><span class="token string">&quot;.my-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
@@ -359,10 +359,10 @@
 <span class="token punctuation">}</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;module-import&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
-    lodash<span class="token operator">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;module-import&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
+    lodash<span class="token punctuation">:</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate something like below:</p>
@@ -371,7 +371,7 @@
 <span class="token keyword">const</span> lodash <span class="token operator">=</span> __WEBPACK_EXTERNAL_MODULE_jquery__<span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __webpack_modules__ <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token function-variable function">jQuery</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">module</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  jQuery<span class="token punctuation">:</span> <span class="token punctuation">(</span>module<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -380,18 +380,18 @@
 
 <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> jq <span class="token operator">=</span> <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token comment">/* import() */</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>
-    <span class="token function">__webpack_require__</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>__webpack_require__<span class="token punctuation">,</span> <span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    __webpack_require__<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>__webpack_require__<span class="token punctuation">,</span> <span class="token string">&quot;jQuery&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> lodash<span class="token punctuation">.</span>attempt<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">jq</span><span class="token punctuation">(</span><span class="token string">&quot;.my-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>Note that the output bundle will have an <code>import</code> or <code>import()</code> statement.</p>
 <p>When a module is not imported via <code>import</code> or <code>import()</code>, webpack will use the <code>&quot;module&quot;</code> externals type as a fallback. If you want to use a different kind of externals as a fallback, you can specify it with a function in the <code>externals</code> option. For example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;module-import&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
-    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> request<span class="token punctuation">,</span> dependencyType <span class="token punctuation">}</span><span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;module-import&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> request<span class="token punctuation">,</span> dependencyType <span class="token punctuation">}</span><span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span>dependencyType <span class="token operator">===</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">node-commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`node-commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
       <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -404,13 +404,13 @@
 
 <span class="token function">jq</span><span class="token punctuation">(</span><span class="token string">&quot;.my-element&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">animate</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>export <span class="token operator">=</span> <span class="token punctuation">{</span>
-  experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
-    outputModule<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span><span class="token keyword">export</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  experiments<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    outputModule<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;node-commonjs&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;node-commonjs&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;jquery&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
@@ -422,18 +422,18 @@
 <p>This is useful when dependencies rely on Node.js built-in modules or require a CommonJS-style <code>require</code> function to preserve prototypes, which is necessary for functions like <a href="https://nodejs.org/api/util.html#utilinheritsconstructor-superconstructor"><code>util.inherits</code></a>. Refer to <a href="https://github.com/webpack/webpack.js.org/issues/7446">this issue</a> for more details.</p>
 <p>For code that relies on prototype structures, like:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">ChunkStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token function">Stream</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  Stream<span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 util<span class="token punctuation">.</span><span class="token function">inherits</span><span class="token punctuation">(</span>ChunkStream<span class="token punctuation">,</span> Stream<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>You can use <code>node-commonjs</code> to ensure that the prototype chain is preserved:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> builtinModules <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:module&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  experiments<span class="token operator">:</span> <span class="token punctuation">{</span> outputModule<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;node-commonjs&quot;</span><span class="token punctuation">,</span>
-  <span class="token function-variable function">externals</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> request <span class="token punctuation">}</span><span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  experiments<span class="token punctuation">:</span> <span class="token punctuation">{</span> outputModule<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;node-commonjs&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> request <span class="token punctuation">}</span><span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>request<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">&quot;node:&quot;</span><span class="token punctuation">)</span> <span class="token operator">||</span> builtinModules<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">node-commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`node-commonjs </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>request<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -444,7 +444,7 @@ util<span class="token punctuation">.</span><span class="token function">inherit
 
 <span class="token keyword">const</span> __webpack_modules__ <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  <span class="token comment">/***/</span> <span class="token number">2613</span><span class="token operator">:</span> <span class="token comment">/***/</span> <span class="token punctuation">(</span><span class="token parameter">module</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">/***/</span> <span class="token number">2613</span><span class="token punctuation">:</span> <span class="token comment">/***/</span> <span class="token punctuation">(</span>module<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">__WEBPACK_EXTERNAL_createRequire</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token string">&quot;stream&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment">/***/</span>
@@ -461,9 +461,9 @@ util<span class="token punctuation">.</span><span class="token function">inherit
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;promise&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;promise&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
@@ -479,9 +479,9 @@ util<span class="token punctuation">.</span><span class="token function">inherit
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;self&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;self&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
@@ -492,9 +492,9 @@ util<span class="token punctuation">.</span><span class="token function">inherit
 <p>Specify the default type of externals as <code>&#x27;script&#x27;</code>. Webpack will load the external as a script exposing predefined global variables with HTML <code>&lt;script&gt;</code> element. The <code>&lt;script&gt;</code> tag would be removed after the script has been loaded.</p>
 <h4><span id="syntax"></span>Syntax<a href="#syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    packageName<span class="token operator">:</span> <span class="token punctuation">[</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    packageName<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token string">&quot;http://example.com/script.js&quot;</span><span class="token punctuation">,</span>
       <span class="token string">&quot;global&quot;</span><span class="token punctuation">,</span>
       <span class="token string">&quot;property&quot;</span><span class="token punctuation">,</span>
@@ -504,9 +504,9 @@ util<span class="token punctuation">.</span><span class="token function">inherit
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>You can also use the shortcut syntax if you&#x27;re not going to specify any properties:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    packageName<span class="token operator">:</span> <span class="token string">&quot;global@http://example.com/script.js&quot;</span><span class="token punctuation">,</span> <span class="token comment">// no properties here</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    packageName<span class="token punctuation">:</span> <span class="token string">&quot;global@http://example.com/script.js&quot;</span><span class="token punctuation">,</span> <span class="token comment">// no properties here</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Note that <a href="/configuration/output/#outputpublicpath" data-discover="true"><code>output.publicPath</code></a> won&#x27;t be added to the provided URL.</p>
@@ -515,9 +515,9 @@ util<span class="token punctuation">.</span><span class="token function">inherit
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    lodash<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    lodash<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;_&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Then use it in code:</p>
@@ -527,9 +527,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>Here&#x27;s how we specify properties for the above example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    lodash<span class="token operator">:</span> <span class="token punctuation">[</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;script&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    lodash<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token string">&quot;https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js&quot;</span><span class="token punctuation">,</span>
       <span class="token string">&quot;_&quot;</span><span class="token punctuation">,</span>
       <span class="token string">&quot;head&quot;</span><span class="token punctuation">,</span>
@@ -554,9 +554,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;this&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;this&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
@@ -572,9 +572,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;var&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;var&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
@@ -590,9 +590,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;window&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    jquery<span class="token operator">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;window&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    jquery<span class="token punctuation">:</span> <span class="token string">&quot;$&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Will generate into something like</p>
@@ -609,7 +609,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externalsPresets<span class="token operator">:</span> <span class="token punctuation">{</span>
-    node<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  externalsPresets<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    node<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/externals.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/watch/" data-discover="true">Watch and WatchOptions</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/dotenv/" data-discover="true">Dotenv</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">18<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pksjce"><img width="45" height="45" alt="pksjce" title="pksjce" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/fadysamirsadek"><img width="45" height="45" alt="fadysamirsadek" title="fadysamirsadek" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/zefman"><img width="45" height="45" alt="zefman" title="zefman" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Mistyyyy"><img width="45" height="45" alt="Mistyyyy" title="Mistyyyy" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/tanhauhau"><img width="45" height="45" alt="tanhauhau" title="tanhauhau" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/beejunk"><img width="45" height="45" alt="beejunk" title="beejunk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pranshuchittora"><img width="45" height="45" alt="pranshuchittora" title="pranshuchittora" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/kinetifex"><img width="45" height="45" alt="kinetifex" title="kinetifex" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anshumanv"><img width="45" height="45" alt="anshumanv" title="anshumanv" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/SaulSilver"><img width="45" height="45" alt="SaulSilver" title="SaulSilver" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/fi3ework"><img width="45" height="45" alt="fi3ework" title="fi3ework" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/externals.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/watch/" data-discover="true">Watch and WatchOptions</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/dotenv/" data-discover="true">Dotenv</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">18<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pksjce"><img width="45" height="45" alt="pksjce" title="pksjce" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/fadysamirsadek"><img width="45" height="45" alt="fadysamirsadek" title="fadysamirsadek" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/zefman"><img width="45" height="45" alt="zefman" title="zefman" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Mistyyyy"><img width="45" height="45" alt="Mistyyyy" title="Mistyyyy" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/tanhauhau"><img width="45" height="45" alt="tanhauhau" title="tanhauhau" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/beejunk"><img width="45" height="45" alt="beejunk" title="beejunk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pranshuchittora"><img width="45" height="45" alt="pranshuchittora" title="pranshuchittora" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/kinetifex"><img width="45" height="45" alt="kinetifex" title="kinetifex" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anshumanv"><img width="45" height="45" alt="anshumanv" title="anshumanv" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/SaulSilver"><img width="45" height="45" alt="SaulSilver" title="SaulSilver" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/fi3ework"><img width="45" height="45" alt="fi3ework" title="fi3ework" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

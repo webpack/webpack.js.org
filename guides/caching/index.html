@@ -6,170 +6,170 @@
 <p>Let&#x27;s get our project set up using the example from <a href="/guides/getting-started" data-discover="true">getting started</a> with the <code>plugins</code> from <a href="/guides/output-management" data-discover="true">output management</a>, so we don&#x27;t have to deal with maintaining our <code>index.html</code> file manually:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">├── package.json
-</span><span class="token prefix unchanged"> </span><span class="token line">├── package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line">├── webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line">├── /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">├── /src
-</span><span class="token prefix unchanged"> </span><span class="token line">│   └── index.js
-</span><span class="token prefix unchanged"> </span><span class="token line">└── /node_modules</span></span></code></pre></div>
+ ├── package.json
+ ├── package-lock.json
+ ├── webpack.config.js
+ ├── /dist
+ ├── /src
+ │   └── index.js
+ └── /node_modules</code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">      title: &#x27;Output Management&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">      title: &#x27;Caching&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    }),
-</span><span class="token prefix unchanged"> </span><span class="token line">  ],
-</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    filename: &#x27;bundle.js&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"> import path from &#x27;node:path&#x27;;
+ import { fileURLToPath } from &#x27;node:url&#x27;;
+ import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
+
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: &#x27;./src/index.js&#x27;,
+   plugins: [
+     new HtmlWebpackPlugin({
+<span class="token deleted">-      title: &#x27;Output Management&#x27;,</span>
+<span class="token inserted">+      title: &#x27;Caching&#x27;,</span>
+     }),
+   ],
+   output: {
+<span class="token deleted">-    filename: &#x27;bundle.js&#x27;,</span>
+<span class="token inserted">+    filename: &#x27;[name].[contenthash].js&#x27;,</span>
+     path: path.resolve(__dirname, &#x27;dist&#x27;),
+     clean: true,
+   },
+ };</code></pre></div>
 <p>Running our build script, <code>npm run build</code>, with this configuration should produce the following output:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                        Asset       Size  Chunks                    Chunk Names
-main.7e2c49a622975ebd9b7e.js     <span class="token number">544</span> kB       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
-                  index.html  <span class="token number">197</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+main.7e2c49a622975ebd9b7e.js     544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+                  index.html  197 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>As you can see the bundle&#x27;s name now reflects its content (via the hash). If we run another build without making any changes, we&#x27;d expect that filename to stay the same. However, if we were to run it again, we may find that this is not the case:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                        Asset       Size  Chunks                    Chunk Names
-main.205199ab45963f6a62ec.js     <span class="token number">544</span> kB       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
-                  index.html  <span class="token number">197</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+main.205199ab45963f6a62ec.js     544 kB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
+                  index.html  197 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.</p>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.</p></aside>
 <h2><span id="extracting-boilerplate"></span>Extracting Boilerplate<a href="#extracting-boilerplate" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>As we learned in <a href="/guides/code-splitting" data-discover="true">code splitting</a>, the <a href="/plugins/split-chunks-plugin/" data-discover="true"><code>SplitChunksPlugin</code></a> can be used to split modules out into separate bundles. Webpack provides an optimization feature to split runtime code into a separate chunk using the <a href="/configuration/optimization/#optimizationruntimechunk" data-discover="true"><code>optimization.runtimeChunk</code></a> option. Set it to <code>single</code> to create a single runtime bundle for all chunks:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">      title: &#x27;Caching&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    }),
-</span><span class="token prefix unchanged"> </span><span class="token line">  ],
-</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  optimization: {
-</span><span class="token prefix inserted">+</span><span class="token line">    runtimeChunk: &#x27;single&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">  },
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"> import path from &#x27;node:path&#x27;;
+ import { fileURLToPath } from &#x27;node:url&#x27;;
+ import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
+
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: &#x27;./src/index.js&#x27;,
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: &#x27;Caching&#x27;,
+     }),
+   ],
+   output: {
+     filename: &#x27;[name].[contenthash].js&#x27;,
+     path: path.resolve(__dirname, &#x27;dist&#x27;),
+     clean: true,
+   },
+<span class="token inserted">+  optimization: {</span>
+<span class="token inserted">+    runtimeChunk: &#x27;single&#x27;,</span>
+<span class="token inserted">+  },</span>
+ };</code></pre></div>
 <p>Let&#x27;s run another build to see the extracted <code>runtime</code> bundle:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">Hash: 82c9c385607b2150fab2
-Version: webpack <span class="token number">4.12</span>.0
+Version: webpack 4.12.0
 Time: 3027ms
                           Asset       Size  Chunks             Chunk Names
-runtime.cc17ae2a94ec771e9221.js   <span class="token number">1.42</span> KiB       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
-   main.e81de2cf758ada72f306.js   <span class="token number">69.5</span> KiB       <span class="token number">1</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
-                     index.html  <span class="token number">275</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
-<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js <span class="token number">497</span> bytes <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js <span class="token number">489</span> bytes <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> ./src/index.js <span class="token number">309</span> bytes <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
-    + <span class="token number">1</span> hidden module</code></pre></div>
+runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
+   main.e81de2cf758ada72f306.js   69.5 KiB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
+                     index.html  275 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/module.js 497 bytes <span class="token punctuation">{</span>1<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>2<span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js 489 bytes <span class="token punctuation">{</span>1<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+<span class="token punctuation">[</span>3<span class="token punctuation">]</span> ./src/index.js 309 bytes <span class="token punctuation">{</span>1<span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
+    + 1 hidden module</code></pre></div>
 <p>It&#x27;s also good practice to extract third-party libraries, such as <code>lodash</code> or <code>react</code>, to a separate <code>vendor</code> chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date.
 This can be done by using the <a href="/plugins/split-chunks-plugin/#splitchunkscachegroups" data-discover="true"><code>cacheGroups</code></a> option of the <a href="/plugins/split-chunks-plugin/" data-discover="true"><code>SplitChunksPlugin</code></a> demonstrated in <a href="/plugins/split-chunks-plugin/#split-chunks-example-2" data-discover="true">Example 2 of SplitChunksPlugin</a>. Lets add <code>optimization.splitChunks</code> with <code>cacheGroups</code> with next params and build:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">      title: &#x27;Caching&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    }),
-</span><span class="token prefix unchanged"> </span><span class="token line">  ],
-</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">  optimization: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    runtimeChunk: &#x27;single&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    splitChunks: {
-</span><span class="token prefix inserted">+</span><span class="token line">      cacheGroups: {
-</span><span class="token prefix inserted">+</span><span class="token line">        vendor: {
-</span><span class="token prefix inserted">+</span><span class="token line">          test: /[\\/]node_modules[\\/]/,
-</span><span class="token prefix inserted">+</span><span class="token line">          name: &#x27;vendors&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">          chunks: &#x27;all&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">        },
-</span><span class="token prefix inserted">+</span><span class="token line">      },
-</span><span class="token prefix inserted">+</span><span class="token line">    },
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"> import path from &#x27;node:path&#x27;;
+ import { fileURLToPath } from &#x27;node:url&#x27;;
+ import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
+
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: &#x27;./src/index.js&#x27;,
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: &#x27;Caching&#x27;,
+     }),
+   ],
+   output: {
+     filename: &#x27;[name].[contenthash].js&#x27;,
+     path: path.resolve(__dirname, &#x27;dist&#x27;),
+     clean: true,
+   },
+   optimization: {
+     runtimeChunk: &#x27;single&#x27;,
+<span class="token inserted">+    splitChunks: {</span>
+<span class="token inserted">+      cacheGroups: {</span>
+<span class="token inserted">+        vendor: {</span>
+<span class="token inserted">+          test: /[\\/]node_modules[\\/]/,</span>
+<span class="token inserted">+          name: &#x27;vendors&#x27;,</span>
+<span class="token inserted">+          chunks: &#x27;all&#x27;,</span>
+<span class="token inserted">+        },</span>
+<span class="token inserted">+      },</span>
+<span class="token inserted">+    },</span>
+   },
+ };</code></pre></div>
 <p>Let&#x27;s run another build to see our new <code>vendor</code> bundle:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                           Asset       Size  Chunks             Chunk Names
-runtime.cc17ae2a94ec771e9221.js   <span class="token number">1.42</span> KiB       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
-vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB       <span class="token number">1</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  vendors
-   main.abf44fedb7d11d4312d7.js  <span class="token number">240</span> bytes       <span class="token number">2</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
-                     index.html  <span class="token number">353</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
+vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  vendors
+   main.abf44fedb7d11d4312d7.js  240 bytes       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
+                     index.html  353 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>We can now see that our <code>main</code> bundle does not contain <code>vendor</code> code from <code>node_modules</code> directory and is down in size to <code>240 bytes</code>!</p>
 <h2><span id="module-identifiers"></span>Module Identifiers<a href="#module-identifiers" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Let&#x27;s add another module, <code>print.js</code>, to our project:</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">webpack-demo
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">├── package.json
-</span><span class="token prefix unchanged"> </span><span class="token line">├── package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line">├── webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line">├── /dist
-</span><span class="token prefix unchanged"> </span><span class="token line">├── /src
-</span><span class="token prefix unchanged"> </span><span class="token line">│   ├── index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">│   └── print.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">└── /node_modules</span></span></code></pre></div>
+ ├── package.json
+ ├── package-lock.json
+ ├── webpack.config.js
+ ├── /dist
+ ├── /src
+ │   ├── index.js
+<span class="token inserted">+│   └── print.js</span>
+ └── /node_modules</code></pre></div>
 <p><strong>print.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> export default function print(text) {
-</span><span class="token prefix inserted">+</span><span class="token line">   console.log(text);
-</span><span class="token prefix inserted">+</span><span class="token line"> };</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted">+ export default function print(text) {</span>
+<span class="token inserted">+   console.log(text);</span>
+<span class="token inserted">+ };</span></code></pre></div>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import _ from &#x27;lodash&#x27;;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import Print from &#x27;./print&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> function component() {
-</span><span class="token prefix unchanged"> </span><span class="token line">   const element = document.createElement(&#x27;div&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   // Lodash, now imported by this script
-</span><span class="token prefix unchanged"> </span><span class="token line">   element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   element.onclick = Print.bind(null, &#x27;Hello webpack!&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return element;
-</span><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> document.body.appendChild(component());</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import _ from &#x27;lodash&#x27;;
+<span class="token inserted">+ import Print from &#x27;./print&#x27;;</span>
+
+  function component() {
+    const element = document.createElement(&#x27;div&#x27;);
+
+    // Lodash, now imported by this script
+    element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
+<span class="token inserted">+   element.onclick = Print.bind(null, &#x27;Hello webpack!&#x27;);</span>
+
+    return element;
+  }
+
+  document.body.appendChild(component());</code></pre></div>
 <p>Running another build, we would expect only our <code>main</code> bundle&#x27;s hash to change, however...</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                            Asset       Size  Chunks                    Chunk Names
-  runtime.1400d5af64fc1b7b3a45.js    <span class="token number">5.85</span> kB      <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         runtime
-  vendor.a7561fb0e9a071baadb9.js     <span class="token number">541</span> kB       <span class="token number">1</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
-    main.b746e3eb72875af2caa9.js    <span class="token number">1.22</span> kB       <span class="token number">2</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
-                      index.html  <span class="token number">352</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+  runtime.1400d5af64fc1b7b3a45.js    5.85 kB      0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         runtime
+  vendor.a7561fb0e9a071baadb9.js     541 kB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
+                      index.html  352 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>... we can see that all three have. This is because each <a href="/api/module-variables/#moduleid-commonjs" data-discover="true"><code>module.id</code></a> is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. To recap:</p>
 <ul>
@@ -179,75 +179,75 @@ vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB    
 </ul>
 <p>The first and last are expected, it&#x27;s the <code>vendor</code> hash we want to fix. Let&#x27;s use <a href="/configuration/optimization/#optimizationmoduleids" data-discover="true"><code>optimization.moduleIds</code></a> with <code>&#x27;deterministic&#x27;</code> option:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">      title: &#x27;Caching&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    }),
-</span><span class="token prefix unchanged"> </span><span class="token line">  ],
-</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;[name].[contenthash].js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">  optimization: {
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    moduleIds: &#x27;deterministic&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    runtimeChunk: &#x27;single&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    splitChunks: {
-</span><span class="token prefix unchanged"> </span><span class="token line">      cacheGroups: {
-</span><span class="token prefix unchanged"> </span><span class="token line">        vendor: {
-</span><span class="token prefix unchanged"> </span><span class="token line">          test: /[\\/]node_modules[\\/]/,
-</span><span class="token prefix unchanged"> </span><span class="token line">          name: &#x27;vendors&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">          chunks: &#x27;all&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">        },
-</span><span class="token prefix unchanged"> </span><span class="token line">      },
-</span><span class="token prefix unchanged"> </span><span class="token line">    },
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"> import path from &#x27;node:path&#x27;;
+ import { fileURLToPath } from &#x27;node:url&#x27;;
+ import HtmlWebpackPlugin from &#x27;html-webpack-plugin&#x27;;
+
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: &#x27;./src/index.js&#x27;,
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: &#x27;Caching&#x27;,
+     }),
+   ],
+   output: {
+     filename: &#x27;[name].[contenthash].js&#x27;,
+     path: path.resolve(__dirname, &#x27;dist&#x27;),
+     clean: true,
+   },
+   optimization: {
+<span class="token inserted">+    moduleIds: &#x27;deterministic&#x27;,</span>
+     runtimeChunk: &#x27;single&#x27;,
+     splitChunks: {
+       cacheGroups: {
+         vendor: {
+           test: /[\\/]node_modules[\\/]/,
+           name: &#x27;vendors&#x27;,
+           chunks: &#x27;all&#x27;,
+         },
+       },
+     },
+   },
+ };</code></pre></div>
 <p>Now, despite any new local dependencies, our <code>vendor</code> hash should stay consistent between builds:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                           Asset       Size  Chunks             Chunk Names
-   main.216e852f60c8829c2289.js  <span class="token number">340</span> bytes       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
-vendors.55e79e5927a639d21a1b.js   <span class="token number">69.5</span> KiB       <span class="token number">1</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  vendors
-runtime.725a1a51ede5ae0cfde0.js   <span class="token number">1.42</span> KiB       <span class="token number">2</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
-                     index.html  <span class="token number">353</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+   main.216e852f60c8829c2289.js  340 bytes       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
+vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  vendors
+runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
+                     index.html  353 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 Entrypoint main <span class="token operator">=</span> runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.216e852f60c8829c2289.js
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>And let&#x27;s modify our <code>src/index.js</code> to temporarily remove that extra dependency:</p>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import _ from &#x27;lodash&#x27;;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import Print from &#x27;./print&#x27;;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> // import Print from &#x27;./print&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> function component() {
-</span><span class="token prefix unchanged"> </span><span class="token line">   const element = document.createElement(&#x27;div&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   // Lodash, now imported by this script
-</span><span class="token prefix unchanged"> </span><span class="token line">   element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   element.onclick = Print.bind(null, &#x27;Hello webpack!&#x27;);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   // element.onclick = Print.bind(null, &#x27;Hello webpack!&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return element;
-</span><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> document.body.appendChild(component());</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import _ from &#x27;lodash&#x27;;
+<span class="token deleted">- import Print from &#x27;./print&#x27;;</span>
+<span class="token inserted">+ // import Print from &#x27;./print&#x27;;</span>
+
+  function component() {
+    const element = document.createElement(&#x27;div&#x27;);
+
+    // Lodash, now imported by this script
+    element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
+<span class="token deleted">-   element.onclick = Print.bind(null, &#x27;Hello webpack!&#x27;);</span>
+<span class="token inserted">+   // element.onclick = Print.bind(null, &#x27;Hello webpack!&#x27;);</span>
+
+    return element;
+  }
+
+  document.body.appendChild(component());</code></pre></div>
 <p>And finally run our build again:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                           Asset       Size  Chunks             Chunk Names
-   main.ad717f2466ce655fff5c.js  <span class="token number">274</span> bytes       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
-vendors.55e79e5927a639d21a1b.js   <span class="token number">69.5</span> KiB       <span class="token number">1</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  vendors
-runtime.725a1a51ede5ae0cfde0.js   <span class="token number">1.42</span> KiB       <span class="token number">2</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
-                     index.html  <span class="token number">353</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
+   main.ad717f2466ce655fff5c.js  274 bytes       0  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  main
+vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  vendors
+runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  runtime
+                     index.html  353 bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 Entrypoint main <span class="token operator">=</span> runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.ad717f2466ce655fff5c.js
 <span class="token punctuation">..</span>.</code></pre></div>
 <p>We can see that both builds yielded <code>55e79e5927a639d21a1b</code> in the <code>vendor</code> bundle&#x27;s filename.</p>
 <h2><span id="conclusion"></span>Conclusion<a href="#conclusion" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the <em>Further Reading</em> section below to learn more.</p></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://github.com/webpack/webpack.js.org/issues/652" target="_blank" rel="noopener noreferrer">Issue 652</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/caching.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/code-splitting/" data-discover="true">Code Splitting</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/author-libraries/" data-discover="true">Authoring Libraries</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">12<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/okonet"><img width="45" height="45" alt="okonet" title="okonet" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jouni-kantola"><img width="45" height="45" alt="jouni-kantola" title="jouni-kantola" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dannycjones"><img width="45" height="45" alt="dannycjones" title="dannycjones" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/fadysamirsadek"><img width="45" height="45" alt="fadysamirsadek" title="fadysamirsadek" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/afontcu"><img width="45" height="45" alt="afontcu" title="afontcu" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/rosavage"><img width="45" height="45" alt="rosavage" title="rosavage" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/saiprasad2595"><img width="45" height="45" alt="saiprasad2595" title="saiprasad2595" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/aholzner"><img width="45" height="45" alt="aholzner" title="aholzner" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<p>Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the <em>Further Reading</em> section below to learn more.</p></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://github.com/webpack/webpack.js.org/issues/652" target="_blank" rel="noopener noreferrer">Issue 652</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/caching.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/code-splitting/" data-discover="true">Code Splitting</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/author-libraries/" data-discover="true">Authoring Libraries</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">12<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/okonet"><img width="45" height="45" alt="okonet" title="okonet" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jouni-kantola"><img width="45" height="45" alt="jouni-kantola" title="jouni-kantola" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dannycjones"><img width="45" height="45" alt="dannycjones" title="dannycjones" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/fadysamirsadek"><img width="45" height="45" alt="fadysamirsadek" title="fadysamirsadek" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/afontcu"><img width="45" height="45" alt="afontcu" title="afontcu" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/rosavage"><img width="45" height="45" alt="rosavage" title="rosavage" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/saiprasad2595"><img width="45" height="45" alt="saiprasad2595" title="saiprasad2595" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/aholzner"><img width="45" height="45" alt="aholzner" title="aholzner" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

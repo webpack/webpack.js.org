@@ -3,11 +3,11 @@
 <p>Let&#x27;s assume that we are writing a small library, <code>webpack-numbers</code>, that allows users to convert the numbers 1 through 5 from their numeric representation to a textual one and vice-versa, e.g. 2 to &#x27;two&#x27;.</p>
 <p>The basic project structure would look like this:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> ├── webpack.config.js
-</span><span class="token prefix inserted">+</span><span class="token line"> ├── package.json
-</span><span class="token prefix inserted">+</span><span class="token line"> └── /src
-</span><span class="token prefix inserted">+</span><span class="token line">     ├── index.js
-</span><span class="token prefix inserted">+</span><span class="token line">     └── ref.json</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted">+ ├── webpack.config.js</span>
+<span class="token inserted">+ ├── package.json</span>
+<span class="token inserted">+ └── /src</span>
+<span class="token inserted">+     ├── index.js</span>
+<span class="token inserted">+     └── ref.json</span></code></pre></div>
 <p>Initialize the project with npm, then install <code>webpack</code>, <code>webpack-cli</code> and <code>lodash</code>:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> init -y
 <span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack webpack-cli lodash</code></pre></div>
@@ -43,18 +43,18 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> _ <span class="token keyword">from</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> numRef <span class="token keyword">from</span> <span class="token string">&quot;./ref.json&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">numToWord</span><span class="token punctuation">(</span><span class="token parameter">num</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">numToWord</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> _<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span>
     numRef<span class="token punctuation">,</span>
-    <span class="token punctuation">(</span><span class="token parameter">accum<span class="token punctuation">,</span> ref</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>ref<span class="token punctuation">.</span>num <span class="token operator">===</span> num <span class="token operator">?</span> ref<span class="token punctuation">.</span>word <span class="token operator">:</span> accum<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span>accum<span class="token punctuation">,</span> ref<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>ref<span class="token punctuation">.</span>num <span class="token operator">===</span> num <span class="token operator">?</span> ref<span class="token punctuation">.</span>word <span class="token punctuation">:</span> accum<span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">wordToNum</span><span class="token punctuation">(</span><span class="token parameter">word</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">wordToNum</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> _<span class="token punctuation">.</span><span class="token function">reduce</span><span class="token punctuation">(</span>
     numRef<span class="token punctuation">,</span>
-    <span class="token punctuation">(</span><span class="token parameter">accum<span class="token punctuation">,</span> ref</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>ref<span class="token punctuation">.</span>word <span class="token operator">===</span> word <span class="token operator">&amp;&amp;</span> word<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> ref<span class="token punctuation">.</span>num <span class="token operator">:</span> accum<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span>accum<span class="token punctuation">,</span> ref<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>ref<span class="token punctuation">.</span>word <span class="token operator">===</span> word <span class="token operator">&amp;&amp;</span> word<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> ref<span class="token punctuation">.</span>num <span class="token punctuation">:</span> accum<span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>
   <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
@@ -68,35 +68,35 @@
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;webpack-numbers.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;webpack-numbers.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In the above example, we&#x27;re telling webpack to bundle <code>src/index.js</code> into <code>dist/webpack-numbers.js</code>.</p>
 <h2><span id="expose-the-library"></span>Expose the Library<a href="#expose-the-library" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>So far everything should be the same as bundling an application, and here comes the different part – we need to expose exports from the entry point through <a href="/configuration/output/#outputlibrary" data-discover="true"><code>output.library</code></a> option.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;webpack-numbers.js&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     library: &#x27;webpackNumbers&#x27;,
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
-</span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import path from &#x27;node:path&#x27;;
+  import { fileURLToPath } from &#x27;node:url&#x27;;
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
+    entry: &#x27;./src/index.js&#x27;,
+    output: {
+      path: path.resolve(__dirname, &#x27;dist&#x27;),
+      filename: &#x27;webpack-numbers.js&#x27;,
+<span class="token inserted">+     library: &#x27;webpackNumbers&#x27;,</span>
+    },
+  };</code></pre></div>
 <p>We exposed the entry point as <code>webpackNumbers</code> so users can use it through script tag:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>https://example.org/webpack-numbers.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://example.org/webpack-numbers.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
   window<span class="token punctuation">.</span>webpackNumbers<span class="token punctuation">.</span><span class="token function">wordToNum</span><span class="token punctuation">(</span><span class="token string">&quot;Five&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre></div>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></code></pre></div>
 <p>However it only works when it&#x27;s referenced through script tag, it can&#x27;t be used in other environments like CommonJS, AMD, Node.js, etc.</p>
 <p>As a library author, we want it to be compatible in different environments, i.e., users should be able to consume the bundled library in multiple ways listed below:</p>
 <ul>
@@ -109,79 +109,79 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 </li>
 <li>
 <p><strong>AMD module require</strong>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;webpackNumbers&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">webpackNumbers</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;webpackNumbers&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>webpackNumbers<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   webpackNumbers<span class="token punctuation">.</span><span class="token function">wordToNum</span><span class="token punctuation">(</span><span class="token string">&quot;Two&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 </li>
 <li>
 <p><strong>script tag</strong>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-html"><span class="token doctype">&lt;!DOCTYPE html&gt;</span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
   ...
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>https://example.org/webpack-numbers.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>https://example.org/webpack-numbers.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script language-javascript">
     <span class="token comment">// ...</span>
     <span class="token comment">// Global variable</span>
     webpackNumbers<span class="token punctuation">.</span><span class="token function">wordToNum</span><span class="token punctuation">(</span><span class="token string">&quot;Five&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// Property in the window object</span>
     window<span class="token punctuation">.</span>webpackNumbers<span class="token punctuation">.</span><span class="token function">wordToNum</span><span class="token punctuation">(</span><span class="token string">&quot;Five&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// ...</span>
-  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code></pre></div>
 </li>
 </ul>
 <p>Let&#x27;s update the <code>output.library</code> option with its <code>type</code> set to <a href="/configuration/output/#type-umd" data-discover="true"><code>&#x27;umd&#x27;</code></a>:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line">import { fileURLToPath } from &#x27;node:url&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line">const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">  entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">    filename: &#x27;webpack-numbers.js&#x27;,
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    library: &#x27;webpackNumbers&#x27;,
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    globalObject: &#x27;this&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">    library: {
-</span><span class="token prefix inserted">+</span><span class="token line">      name: &#x27;webpackNumbers&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">      type: &#x27;umd&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">    },
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"> import path from &#x27;node:path&#x27;;
+ import { fileURLToPath } from &#x27;node:url&#x27;;
+
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
+
+ export default {
+   entry: &#x27;./src/index.js&#x27;,
+   output: {
+     path: path.resolve(__dirname, &#x27;dist&#x27;),
+     filename: &#x27;webpack-numbers.js&#x27;,
+<span class="token deleted">-    library: &#x27;webpackNumbers&#x27;,</span>
+<span class="token inserted">+    globalObject: &#x27;this&#x27;,</span>
+<span class="token inserted">+    library: {</span>
+<span class="token inserted">+      name: &#x27;webpackNumbers&#x27;,</span>
+<span class="token inserted">+      type: &#x27;umd&#x27;,</span>
+<span class="token inserted">+    },</span>
+   },
+ };</code></pre></div>
 <p>Now webpack will bundle a library that can work with CommonJS, AMD, and script tag.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Note that the <code>library</code> setup is tied to the <code>entry</code> configuration. For most libraries, specifying a single entry point is sufficient. While <a href="https://github.com/webpack/webpack/tree/master/examples/multi-part-library">multi-part libraries</a> are possible, it is more straightforward to expose partial exports through an <a href="https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file">index script</a> that serves as a single entry point. Using an <code>array</code> as an <code>entry</code> point for a library is <strong>not recommended</strong>.</p></aside>
 <h2><span id="externalize-lodash"></span>Externalize Lodash<a href="#externalize-lodash" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Now, if you run <code>npx webpack</code>, you will find that a largish bundle is created. If you inspect the file, you&#x27;ll see that lodash has been bundled along with your code. In this case, we&#x27;d prefer to treat <code>lodash</code> as a <em>peer dependency</em>. Meaning that the consumer should already have <code>lodash</code> installed. Hence you would want to give up control of this external library to the consumer of your library.</p>
 <p>This can be done using the <a href="/configuration/externals/" data-discover="true"><code>externals</code></a> configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import path from &#x27;node:path&#x27;;
-</span><span class="token prefix unchanged"> </span><span class="token line"> import { fileURLToPath } from &#x27;node:url&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const __filename = fileURLToPath(import.meta.url);
-</span><span class="token prefix unchanged"> </span><span class="token line"> const __dirname = path.dirname(__filename);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> export default {
-</span><span class="token prefix unchanged"> </span><span class="token line">   entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line">     filename: &#x27;webpack-numbers.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     library: {
-</span><span class="token prefix unchanged"> </span><span class="token line">       name: &#x27;webpackNumbers&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">       type: &#x27;umd&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     },
-</span><span class="token prefix unchanged"> </span><span class="token line">   },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   externals: {
-</span><span class="token prefix inserted">+</span><span class="token line">     lodash: {
-</span><span class="token prefix inserted">+</span><span class="token line">       commonjs: &#x27;lodash&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">       commonjs2: &#x27;lodash&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">       amd: &#x27;lodash&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">       root: &#x27;_&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">     },
-</span><span class="token prefix inserted">+</span><span class="token line">   },
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">  import path from &#x27;node:path&#x27;;
+  import { fileURLToPath } from &#x27;node:url&#x27;;
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
+    entry: &#x27;./src/index.js&#x27;,
+    output: {
+      path: path.resolve(__dirname, &#x27;dist&#x27;),
+      filename: &#x27;webpack-numbers.js&#x27;,
+      library: {
+        name: &#x27;webpackNumbers&#x27;,
+        type: &#x27;umd&#x27;,
+      },
+    },
+<span class="token inserted">+   externals: {</span>
+<span class="token inserted">+     lodash: {</span>
+<span class="token inserted">+       commonjs: &#x27;lodash&#x27;,</span>
+<span class="token inserted">+       commonjs2: &#x27;lodash&#x27;,</span>
+<span class="token inserted">+       amd: &#x27;lodash&#x27;,</span>
+<span class="token inserted">+       root: &#x27;_&#x27;,</span>
+<span class="token inserted">+     },</span>
+<span class="token inserted">+   },</span>
+  };</code></pre></div>
 <p>This means that your library expects a dependency named <code>lodash</code> to be available in the consumer&#x27;s environment.</p>
 <h3><span id="external-limitations"></span>External Limitations<a href="#external-limitations" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>For libraries that use several files from a dependency:</p>
@@ -192,7 +192,7 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 <p>You won&#x27;t be able to exclude them from the bundle by specifying <code>library</code> in the externals. You&#x27;ll either need to exclude them one by one or by using a regular expression.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">[</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token string">&quot;library/one&quot;</span><span class="token punctuation">,</span>
     <span class="token string">&quot;library/two&quot;</span><span class="token punctuation">,</span>
     <span class="token comment">// Everything that starts with &quot;library/&quot;</span>
@@ -216,4 +216,4 @@ webpackNumbers<span class="token punctuation">.</span><span class="token functio
 <p>The key <code>main</code> refers to the <a href="https://docs.npmjs.com/files/package.json#main">standard from <code>package.json</code></a>, and <code>module</code> to <a href="https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md">a</a> <a href="https://github.com/rollup/rollup/wiki/pkg.module">proposal</a> to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.</p>
 <aside class="warning"><p class="warning__prefix">warning</p><p>The <code>module</code> property should point to a script that utilizes ES2015 module syntax but no other syntax features that aren&#x27;t yet supported by browsers or node. This enables webpack to parse the module syntax itself, allowing for lighter bundles via <a href="https://webpack.js.org/guides/tree-shaking/">tree shaking</a> if users are only consuming certain parts of the library.</p></aside>
 <p>Now you can <a href="https://docs.npmjs.com/getting-started/publishing-npm-packages">publish it as an npm package</a> and find it at <a href="https://unpkg.com/#/">unpkg.com</a> to distribute it to your users.</p>
-<aside class="tip"><p class="tip__prefix">tip</p><p>To expose stylesheets associated with your library, the <a href="/plugins/mini-css-extract-plugin" data-discover="true"><code>MiniCssExtractPlugin</code></a> should be used. Users can then consume and load these as they would any other stylesheet.</p></aside></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/author-libraries.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/caching/" data-discover="true">Caching</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/environment-variables/" data-discover="true">Environment Variables</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">10<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/pksjce"><img width="45" height="45" alt="pksjce" title="pksjce" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/johnstew"><img width="45" height="45" alt="johnstew" title="johnstew" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/simon04"><img width="45" height="45" alt="simon04" title="simon04" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/5angel"><img width="45" height="45" alt="5angel" title="5angel" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/marioacc"><img width="45" height="45" alt="marioacc" title="marioacc" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<aside class="tip"><p class="tip__prefix">tip</p><p>To expose stylesheets associated with your library, the <a href="/plugins/mini-css-extract-plugin" data-discover="true"><code>MiniCssExtractPlugin</code></a> should be used. Users can then consume and load these as they would any other stylesheet.</p></aside></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/author-libraries.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/caching/" data-discover="true">Caching</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/environment-variables/" data-discover="true">Environment Variables</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">10<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/pksjce"><img width="45" height="45" alt="pksjce" title="pksjce" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/johnstew"><img width="45" height="45" alt="johnstew" title="johnstew" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/simon04"><img width="45" height="45" alt="simon04" title="simon04" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/5angel"><img width="45" height="45" alt="5angel" title="5angel" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/marioacc"><img width="45" height="45" alt="marioacc" title="marioacc" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/chenxsan"><img width="45" height="45" alt="chenxsan" title="chenxsan" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

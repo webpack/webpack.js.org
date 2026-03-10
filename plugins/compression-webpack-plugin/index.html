@@ -21,7 +21,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> CompressionPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;compression-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Finally, run <code>webpack</code> using the method you normally use (e.g., via CLI or an npm script).</p>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -38,69 +38,69 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h3><span id="test"></span><code>test</code><a href="#test" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">test</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> test <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Include all assets that pass test assertion.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      test<span class="token operator">:</span> <span class="token regex">/\.js(\?.*)?$/i</span><span class="token punctuation">,</span>
+      test<span class="token punctuation">:</span> <span class="token regex">/\.js(\?.*)?$/i</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="include"></span><code>include</code><a href="#include" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">include</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> include <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Include all assets matching any of these conditions.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      include<span class="token operator">:</span> <span class="token regex">/\/includes/</span><span class="token punctuation">,</span>
+      include<span class="token punctuation">:</span> <span class="token regex">/\/includes/</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="exclude"></span><code>exclude</code><a href="#exclude" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> exclude <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token builtin">string</span> <span class="token operator">|</span> RegExp<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>undefined</code></p>
 <p>Exclude all assets matching any of these conditions.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      exclude<span class="token operator">:</span> <span class="token regex">/\/excludes/</span><span class="token punctuation">,</span>
+      exclude<span class="token punctuation">:</span> <span class="token regex">/\/excludes/</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="algorithm"></span><code>algorithm</code><a href="#algorithm" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">algorithm</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> algorithm <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-      input<span class="token operator">:</span> Buffer<span class="token punctuation">,</span>
-      options<span class="token operator">:</span> CompressionOptions<span class="token punctuation">,</span>
-      <span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span>
-        error<span class="token operator">:</span> Error <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
-        result<span class="token operator">:</span>
+      input<span class="token punctuation">:</span> Buffer<span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> CompressionOptions<span class="token punctuation">,</span>
+      callback<span class="token punctuation">:</span> <span class="token punctuation">(</span>
+        error<span class="token punctuation">:</span> Error <span class="token operator">|</span> <span class="token keyword">null</span> <span class="token operator">|</span> undefined<span class="token punctuation">,</span>
+        result<span class="token punctuation">:</span>
           <span class="token operator">|</span> <span class="token builtin">string</span>
           <span class="token operator">|</span> ArrayBuffer
           <span class="token operator">|</span> SharedArrayBuffer
           <span class="token operator">|</span> Uint8Array
-          <span class="token operator">|</span> <span class="token keyword">readonly</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+          <span class="token operator">|</span> readonly <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
           <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ArrayBuffer <span class="token operator">|</span> SharedArrayBuffer<span class="token punctuation">;</span>
+              <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> ArrayBuffer <span class="token operator">|</span> SharedArrayBuffer<span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
           <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> Uint8Array <span class="token operator">|</span> <span class="token keyword">readonly</span> <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+              <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> Uint8Array <span class="token operator">|</span> readonly <span class="token builtin">number</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
           <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+              <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
           <span class="token operator">|</span> <span class="token punctuation">{</span>
-              <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span>hint<span class="token operator">:</span><span class="token operator">%</span><span class="token number">20</span><span class="token operator">%</span><span class="token number">22</span><span class="token builtin">string</span><span class="token operator">%</span><span class="token number">22</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+              <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span>hint<span class="token punctuation">:</span><span class="token operator">%</span><span class="token number">20</span><span class="token operator">%</span><span class="token number">22</span><span class="token builtin">string</span><span class="token operator">%</span><span class="token number">22</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
@@ -113,9 +113,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>The algorithm is based on the Node.js <a href="https://nodejs.org/api/zlib.html">zlib</a> module.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      algorithm<span class="token operator">:</span> <span class="token string">&quot;gzip&quot;</span><span class="token punctuation">,</span>
+      algorithm<span class="token punctuation">:</span> <span class="token string">&quot;gzip&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -123,9 +123,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Allow you to specify a custom compression function.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      <span class="token function">algorithm</span><span class="token punctuation">(</span><span class="token parameter">input<span class="token punctuation">,</span> compressionOptions<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">algorithm</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> compressionOptions<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> <span class="token function">compressionFunction</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> compressionOptions<span class="token punctuation">,</span> callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -134,16 +134,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="compressionoptions"></span><code>compressionOptions</code><a href="#compressionoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">interface</span> <span class="token class-name">compressionOptions</span> <span class="token punctuation">{</span>
-  flush<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  finishFlush<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  chunkSize<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  windowBits<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  level<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  memLevel<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  strategy<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
-  dictionary<span class="token operator">?</span><span class="token operator">:</span> Buffer <span class="token operator">|</span> TypedArray <span class="token operator">|</span> DataView <span class="token operator">|</span> ArrayBuffer<span class="token punctuation">;</span>
-  info<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
-  maxOutputLength<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  flush<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  finishFlush<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  chunkSize<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  windowBits<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  level<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  memLevel<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  strategy<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  dictionary<span class="token operator">?</span><span class="token punctuation">:</span> Buffer <span class="token operator">|</span> TypedArray <span class="token operator">|</span> DataView <span class="token operator">|</span> ArrayBuffer<span class="token punctuation">;</span>
+  info<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  maxOutputLength<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>Default: <code>{ level: 9 }</code></p>
 <p>Compression options for <code>algorithm</code>.</p>
@@ -154,28 +154,28 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      compressionOptions<span class="token operator">:</span> <span class="token punctuation">{</span> level<span class="token operator">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      compressionOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span> level<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="threshold"></span><code>threshold</code><a href="#threshold" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">threshold</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> threshold <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>0</code></p>
 <p>Only assets larger than this size (in bytes) are processed.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      threshold<span class="token operator">:</span> <span class="token number">8192</span><span class="token punctuation">,</span>
+      threshold<span class="token punctuation">:</span> <span class="token number">8192</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="minratio"></span><code>minRatio</code><a href="#minratio" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">minRatio</span> <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> minRatio <span class="token operator">=</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>0.8</code></p>
 <p>Only assets that compress better than this ratio are processed (<code>minRatio = Compressed Size / Original Size</code>).
 For example, if you have a <code>image.png</code> file with a size of 1024 bytes, and its compressed version is of 768 bytes, the <code>minRatio</code> is <code>0.75</code>.
@@ -185,7 +185,7 @@ In other words, assets will be processed only when the ratio of <code>Compressed
 <p>Use a value of <code>Number.MAX_SAFE_INTEGER</code> to process all assets even if they are larger than the original size, excluding assets with their original size is <code>0</code> bytes.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       <span class="token comment">// Compress all assets, including files with `0` bytes size</span>
       <span class="token comment">// minRatio: Infinity</span>
@@ -193,13 +193,13 @@ In other words, assets will be processed only when the ratio of <code>Compressed
       <span class="token comment">// Compress all assets, excluding files with `0` bytes size</span>
       <span class="token comment">// minRatio: Number.MAX_SAFE_INTEGER</span>
 
-      minRatio<span class="token operator">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
+      minRatio<span class="token punctuation">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="filename"></span><code>filename</code><a href="#filename" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">filename</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>pathdata<span class="token operator">:</span> PathData<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> filename <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>pathdata<span class="token punctuation">:</span> PathData<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>&quot;[path][base].gz&quot;</code></p>
 <p>The target asset filename.</p>
 <h4><span id="string-1"></span><code>string</code><a href="#string-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
@@ -213,18 +213,18 @@ In other words, assets will be processed only when the ratio of <code>Compressed
 <p><code>[fragment]</code> is replaced with the fragment (in the concept of URL it is called <code>hash</code>) of the original asset (<code>#hash</code>).</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      filename<span class="token operator">:</span> <span class="token string">&quot;[path][base].gz&quot;</span><span class="token punctuation">,</span>
+      filename<span class="token punctuation">:</span> <span class="token string">&quot;[path][base].gz&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="function-1"></span><code>function</code><a href="#function-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      <span class="token function">filename</span><span class="token punctuation">(</span><span class="token parameter">pathData</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">filename</span><span class="token punctuation">(</span>pathData<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// The `pathData` argument contains all placeholders - `path`/`name`/`ext`/etc</span>
         <span class="token comment">// Available properties described above, for the `String` notation</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/\.svg$/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>pathData<span class="token punctuation">.</span>filename<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -238,10 +238,10 @@ In other words, assets will be processed only when the ratio of <code>Compressed
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="deleteoriginalassets"></span><code>deleteOriginalAssets</code><a href="#deleteoriginalassets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Type:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">deleteOriginalAssets</span> <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> deleteOriginalAssets <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">boolean</span>
   <span class="token operator">|</span> <span class="token string">&quot;keep-source-map&quot;</span>
-  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>name<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>Default: <code>false</code></p>
 <p>Determines whether the original (uncompressed) assets should be deleted after compression.</p>
 <ul>
@@ -257,9 +257,9 @@ In other words, assets will be processed only when the ratio of <code>Compressed
 </ul>
 <p>Example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      <span class="token function-variable function">deleteOriginalAssets</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">assetName</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+      deleteOriginalAssets<span class="token punctuation">:</span> <span class="token punctuation">(</span>assetName<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
         <span class="token comment">// Delete all assets except images</span>
         <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.png&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>assetName<span class="token punctuation">.</span><span class="token function">endsWith</span><span class="token punctuation">(</span><span class="token string">&quot;.jpg&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -267,27 +267,27 @@ In other words, assets will be processed only when the ratio of <code>Compressed
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      deleteOriginalAssets<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      deleteOriginalAssets<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>To exclude sourcemaps from compression:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      exclude<span class="token operator">:</span> <span class="token regex">/.map$/</span><span class="token punctuation">,</span>
-      deleteOriginalAssets<span class="token operator">:</span> <span class="token string">&quot;keep-source-map&quot;</span><span class="token punctuation">,</span>
+      exclude<span class="token punctuation">:</span> <span class="token regex">/.map$/</span><span class="token punctuation">,</span>
+      deleteOriginalAssets<span class="token punctuation">:</span> <span class="token string">&quot;keep-source-map&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Using a custom function:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      exclude<span class="token operator">:</span> <span class="token regex">/.map$/</span><span class="token punctuation">,</span>
-      <span class="token function-variable function">deleteOriginalAssets</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      exclude<span class="token punctuation">:</span> <span class="token regex">/.map$/</span><span class="token punctuation">,</span>
+      deleteOriginalAssets<span class="token punctuation">:</span> <span class="token punctuation">(</span>name<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/\.js$/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
           <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
@@ -311,12 +311,12 @@ In other words, assets will be processed only when the ratio of <code>Compressed
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> zopfli <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;@gfx/zopfli&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      compressionOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-        numiterations<span class="token operator">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
+      compressionOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        numiterations<span class="token punctuation">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token function">algorithm</span><span class="token punctuation">(</span><span class="token parameter">input<span class="token punctuation">,</span> compressionOptions<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">algorithm</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> compressionOptions<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">return</span> zopfli<span class="token punctuation">.</span><span class="token function">gzip</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> compressionOptions<span class="token punctuation">,</span> callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -330,19 +330,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      filename<span class="token operator">:</span> <span class="token string">&quot;[path][base].br&quot;</span><span class="token punctuation">,</span>
-      algorithm<span class="token operator">:</span> <span class="token string">&quot;brotliCompress&quot;</span><span class="token punctuation">,</span>
-      test<span class="token operator">:</span> <span class="token regex">/\.(js|css|html|svg)$/</span><span class="token punctuation">,</span>
-      compressionOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-        params<span class="token operator">:</span> <span class="token punctuation">{</span>
-          <span class="token punctuation">[</span>zlib<span class="token punctuation">.</span>constants<span class="token punctuation">.</span><span class="token constant">BROTLI_PARAM_QUALITY</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+      filename<span class="token punctuation">:</span> <span class="token string">&quot;[path][base].br&quot;</span><span class="token punctuation">,</span>
+      algorithm<span class="token punctuation">:</span> <span class="token string">&quot;brotliCompress&quot;</span><span class="token punctuation">,</span>
+      test<span class="token punctuation">:</span> <span class="token regex">/\.(js|css|html|svg)$/</span><span class="token punctuation">,</span>
+      compressionOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        params<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token punctuation">[</span>zlib<span class="token punctuation">.</span>constants<span class="token punctuation">.</span><span class="token constant">BROTLI_PARAM_QUALITY</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      threshold<span class="token operator">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
-      minRatio<span class="token operator">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
-      deleteOriginalAssets<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      threshold<span class="token punctuation">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
+      minRatio<span class="token punctuation">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
+      deleteOriginalAssets<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -356,19 +356,19 @@ You can find all Brotli’s options in <a href="https://nodejs.org/api/zlib.html
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      filename<span class="token operator">:</span> <span class="token string">&quot;[path][base].zst&quot;</span><span class="token punctuation">,</span>
-      algorithm<span class="token operator">:</span> <span class="token string">&quot;zstdCompress&quot;</span><span class="token punctuation">,</span>
-      test<span class="token operator">:</span> <span class="token regex">/\.(js|css|html|svg)$/</span><span class="token punctuation">,</span>
-      compressionOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-        params<span class="token operator">:</span> <span class="token punctuation">{</span>
-          <span class="token punctuation">[</span>zlib<span class="token punctuation">.</span>constants<span class="token punctuation">.</span>ZSTD_c_compressionLevel<span class="token punctuation">]</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+      filename<span class="token punctuation">:</span> <span class="token string">&quot;[path][base].zst&quot;</span><span class="token punctuation">,</span>
+      algorithm<span class="token punctuation">:</span> <span class="token string">&quot;zstdCompress&quot;</span><span class="token punctuation">,</span>
+      test<span class="token punctuation">:</span> <span class="token regex">/\.(js|css|html|svg)$/</span><span class="token punctuation">,</span>
+      compressionOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        params<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token punctuation">[</span>zlib<span class="token punctuation">.</span>constants<span class="token punctuation">.</span>ZSTD_c_compressionLevel<span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      threshold<span class="token operator">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
-      minRatio<span class="token operator">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
-      deleteOriginalAssets<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      threshold<span class="token punctuation">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
+      minRatio<span class="token punctuation">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
+      deleteOriginalAssets<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -378,25 +378,25 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> zlib <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;node:zlib&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      filename<span class="token operator">:</span> <span class="token string">&quot;[path][base].gz&quot;</span><span class="token punctuation">,</span>
-      algorithm<span class="token operator">:</span> <span class="token string">&quot;gzip&quot;</span><span class="token punctuation">,</span>
-      test<span class="token operator">:</span> <span class="token regex">/\.js$|\.css$|\.html$/</span><span class="token punctuation">,</span>
-      threshold<span class="token operator">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
-      minRatio<span class="token operator">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
+      filename<span class="token punctuation">:</span> <span class="token string">&quot;[path][base].gz&quot;</span><span class="token punctuation">,</span>
+      algorithm<span class="token punctuation">:</span> <span class="token string">&quot;gzip&quot;</span><span class="token punctuation">,</span>
+      test<span class="token punctuation">:</span> <span class="token regex">/\.js$|\.css$|\.html$/</span><span class="token punctuation">,</span>
+      threshold<span class="token punctuation">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
+      minRatio<span class="token punctuation">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token keyword">new</span> <span class="token class-name">CompressionPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      filename<span class="token operator">:</span> <span class="token string">&quot;[path][base].br&quot;</span><span class="token punctuation">,</span>
-      algorithm<span class="token operator">:</span> <span class="token string">&quot;brotliCompress&quot;</span><span class="token punctuation">,</span>
-      test<span class="token operator">:</span> <span class="token regex">/\.(js|css|html|svg)$/</span><span class="token punctuation">,</span>
-      compressionOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-        params<span class="token operator">:</span> <span class="token punctuation">{</span>
-          <span class="token punctuation">[</span>zlib<span class="token punctuation">.</span>constants<span class="token punctuation">.</span><span class="token constant">BROTLI_PARAM_QUALITY</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+      filename<span class="token punctuation">:</span> <span class="token string">&quot;[path][base].br&quot;</span><span class="token punctuation">,</span>
+      algorithm<span class="token punctuation">:</span> <span class="token string">&quot;brotliCompress&quot;</span><span class="token punctuation">,</span>
+      test<span class="token punctuation">:</span> <span class="token regex">/\.(js|css|html|svg)$/</span><span class="token punctuation">,</span>
+      compressionOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        params<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          <span class="token punctuation">[</span>zlib<span class="token punctuation">.</span>constants<span class="token punctuation">.</span><span class="token constant">BROTLI_PARAM_QUALITY</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      threshold<span class="token operator">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
-      minRatio<span class="token operator">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
+      threshold<span class="token punctuation">:</span> <span class="token number">10240</span><span class="token punctuation">,</span>
+      minRatio<span class="token punctuation">:</span> <span class="token number">0.8</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -405,4 +405,4 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p>
 <p><a href="https://github.com/webpack/compression-webpack-plugin?tab=contributing-ov-file#contributing">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack/compression-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/compression-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/compression-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/watch-ignore-plugin/" data-discover="true">WatchIgnorePlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/copy-webpack-plugin/" data-discover="true">CopyWebpackPlugin</a></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<p><a href="https://github.com/webpack/compression-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/compression-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/compression-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/watch-ignore-plugin/" data-discover="true">WatchIgnorePlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/copy-webpack-plugin/" data-discover="true">CopyWebpackPlugin</a></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

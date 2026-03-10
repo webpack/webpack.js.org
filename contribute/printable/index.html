@@ -294,8 +294,8 @@ choose to participate in any vote through abstention. Votes are needed to add ne
 <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="quotation"></span>Quotation<a href="#quotation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Use single quotes in code snippets and project files (<code>.jsx</code>, <code>.scss</code> etc):</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import webpack from &quot;webpack&quot;;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import webpack from &#x27;webpack&#x27;;</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted">- import webpack from &quot;webpack&quot;;</span>
+<span class="token inserted">+ import webpack from &#x27;webpack&#x27;;</span></code></pre></div>
 <p>And in inline backticks:</p>
 <p><strong>correct</strong></p>
 <p>Set value to <code>&#x27;index.md&#x27;</code>...</p>
@@ -333,11 +333,11 @@ choose to participate in any vote through abstention. Votes are needed to add ne
 <aside class="todo"><p class="todo__prefix">todo</p><p>This is a todo.</p></aside>
 <h3><span id="assumptions-and-simplicity"></span>Assumptions and simplicity<a href="#assumptions-and-simplicity" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Do not make assumptions when writing the documentation.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> You might already know how to optimize bundle for production...
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> As we&#x27;ve learned in [production guide](/guides/production/)...</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted">- You might already know how to optimize bundle for production...</span>
+<span class="token inserted">+ As we&#x27;ve learned in [production guide](/guides/production/)...</span></code></pre></div>
 <p>Please do not assume things are simple. Avoid words like &#x27;just&#x27;, &#x27;simply&#x27;.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> Simply run command...
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> Run the `command-name` command...</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted">- Simply run command...</span>
+<span class="token inserted">+ Run the `command-name` command...</span></code></pre></div>
 <h3><span id="configuration-defaults-and-types"></span>Configuration defaults and types<a href="#configuration-defaults-and-types" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:</p>
 <p><strong>configuration.example.option</strong></p>
@@ -435,14 +435,14 @@ which outlines the process of making an official complaint.</p>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;path/to/loader.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+            loader<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;path/to/loader.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
               <span class="token comment">/* ... */</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -457,8 +457,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  resolveLoader<span class="token operator">:</span> <span class="token punctuation">{</span>
-    modules<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">,</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;loaders&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  resolveLoader<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    modules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">,</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;loaders&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>By the way, if you&#x27;ve already created a separate repository and package for your loader, you could <a href="https://docs.npmjs.com/cli/link"><code>npm link</code></a> it to the project in which you&#x27;d like to test it out.</p>
@@ -478,11 +478,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.js/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;bar-loader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;foo-loader&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.js/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;bar-loader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;foo-loader&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -523,35 +523,35 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token keyword">import</span> <span class="token punctuation">{</span> validate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;schema-utils&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> schema <span class="token operator">=</span> <span class="token punctuation">{</span>
-  type<span class="token operator">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
-  properties<span class="token operator">:</span> <span class="token punctuation">{</span>
-    test<span class="token operator">:</span> <span class="token punctuation">{</span>
-      type<span class="token operator">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
+  type<span class="token punctuation">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+  properties<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    test<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>source<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getOptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token function">validate</span><span class="token punctuation">(</span>schema<span class="token punctuation">,</span> options<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-    name<span class="token operator">:</span> <span class="token string">&quot;Example Loader&quot;</span><span class="token punctuation">,</span>
-    baseDataPath<span class="token operator">:</span> <span class="token string">&quot;options&quot;</span><span class="token punctuation">,</span>
+    name<span class="token punctuation">:</span> <span class="token string">&quot;Example Loader&quot;</span><span class="token punctuation">,</span>
+    baseDataPath<span class="token punctuation">:</span> <span class="token string">&quot;options&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;The request path&quot;</span><span class="token punctuation">,</span> <span class="token function">urlToRequest</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>resourcePath<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token comment">// Apply some transformations to the source...</span>
 
-  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">export default </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`export default </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h3><span id="data-sharing"></span>Data Sharing<a href="#data-sharing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>In webpack, loaders can be chained together and share data with subsequent loaders in the chain. To achieve this, you can pass data along with the content (source code) using the <code>this.callback</code> method in raw loaders. In the default exported function of a raw loader, you can pass data using the fourth argument of <code>this.callback</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>source<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token function">getOptions</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token comment">// Pass data using the fourth argument of this.callback</span>
-  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">export default </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-    some<span class="token operator">:</span> data<span class="token punctuation">,</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`export default </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    some<span class="token punctuation">:</span> data<span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>In the example above, <code>some</code> property in the fourth argument of <code>this.callback</code> is used to pass data to the next chained loader.</p>
@@ -560,15 +560,15 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>loader.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> callback <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">async</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>source<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> callback <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token keyword">async</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">const</span> headerPath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;header.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addDependency</span><span class="token punctuation">(</span>headerPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>headerPath<span class="token punctuation">,</span> <span class="token string">&quot;utf8&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> header</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>headerPath<span class="token punctuation">,</span> <span class="token string">&quot;utf8&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>err<span class="token punctuation">,</span> header<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token function">callback</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>header<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>source<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>header<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>source<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h3><span id="module-dependencies"></span>Module Dependencies<a href="#module-dependencies" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -586,7 +586,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>src/loader-runtime.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span> someOtherModule <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./some-other-module&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">runtime</span><span class="token punctuation">(</span><span class="token parameter">params</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token function">runtime</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> x <span class="token operator">=</span> params<span class="token punctuation">.</span>y <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
 
   <span class="token keyword">return</span> <span class="token function">someOtherModule</span><span class="token punctuation">(</span>params<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -594,13 +594,13 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <p><strong>src/loader.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> runtime <span class="token keyword">from</span> <span class="token string">&quot;./loader-runtime.js&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">loader</span><span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">loader</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// Custom loader logic</span>
 
-  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">runtime</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token function">runtime</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
     source<span class="token punctuation">,</span>
-    y<span class="token operator">:</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+    y<span class="token punctuation">:</span> Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">)}`</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h3><span id="absolute-paths"></span>Absolute Paths<a href="#absolute-paths" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Don&#x27;t insert absolute paths into the module code as they break hashing when the root for the project is moved. You can use below code to convert absolute paths to relative ones.</p>
@@ -624,12 +624,12 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev jest babel-jest @babel/core @babel/preset-env</code></pre></div>
 <p><strong>babel.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  presets<span class="token operator">:</span> <span class="token punctuation">[</span>
+  presets<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">[</span>
       <span class="token string">&quot;@babel/preset-env&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        targets<span class="token operator">:</span> <span class="token punctuation">{</span>
-          node<span class="token operator">:</span> <span class="token string">&quot;current&quot;</span><span class="token punctuation">,</span>
+        targets<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          node<span class="token punctuation">:</span> <span class="token string">&quot;current&quot;</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -637,12 +637,12 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Our loader will process <code>.txt</code> files and replace any instance of <code>[name]</code> with the <code>name</code> option given to the loader. Then it will output a valid JavaScript module containing the text as its default export:</p>
 <p><strong>src/loader.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">loader</span><span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">loader</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getOptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   source <span class="token operator">=</span> source<span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token regex">/\[name\]/</span><span class="token punctuation">,</span> options<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token keyword">return</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">export default </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token template-string"><span class="token string">`export default </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>We&#x27;ll use this loader to process the following file:</p>
 <p><strong>test/example.txt</strong></p>
@@ -654,20 +654,20 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <span class="token keyword">import</span> <span class="token punctuation">{</span> Volume<span class="token punctuation">,</span> createFsFromVolume <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;memfs&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> webpack <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token parameter">fixture<span class="token punctuation">,</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span>fixture<span class="token punctuation">,</span> options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> compiler <span class="token operator">=</span> <span class="token function">webpack</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    context<span class="token operator">:</span> __dirname<span class="token punctuation">,</span>
-    entry<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">./</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fixture<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-    output<span class="token operator">:</span> <span class="token punctuation">{</span>
-      path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">)</span><span class="token punctuation">,</span>
-      filename<span class="token operator">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
+    context<span class="token punctuation">:</span> __dirname<span class="token punctuation">,</span>
+    entry<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`./</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>fixture<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span>
+    output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">)</span><span class="token punctuation">,</span>
+      filename<span class="token punctuation">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    module<span class="token operator">:</span> <span class="token punctuation">{</span>
-      rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+    module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span>
-          test<span class="token operator">:</span> <span class="token regex">/\.txt$/</span><span class="token punctuation">,</span>
-          use<span class="token operator">:</span> <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;../src/loader.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          test<span class="token punctuation">:</span> <span class="token regex">/\.txt$/</span><span class="token punctuation">,</span>
+          use<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            loader<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;../src/loader.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             options<span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -676,10 +676,10 @@ module<span class="token punctuation">.</span><span class="token function-variab
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
   compiler<span class="token punctuation">.</span>outputFileSystem <span class="token operator">=</span> <span class="token function">createFsFromVolume</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Volume</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  compiler<span class="token punctuation">.</span>outputFileSystem<span class="token punctuation">.</span>join <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  compiler<span class="token punctuation">.</span>outputFileSystem<span class="token punctuation">.</span>join <span class="token operator">=</span> path<span class="token punctuation">.</span>join<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-    compiler<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> stats</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> stats<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span>stats<span class="token punctuation">.</span><span class="token function">hasErrors</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token function">reject</span><span class="token punctuation">(</span>stats<span class="token punctuation">.</span><span class="token function">toJson</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>errors<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -696,8 +696,8 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <span class="token keyword">import</span> compiler <span class="token keyword">from</span> <span class="token string">&quot;./compiler.js&quot;</span><span class="token punctuation">;</span>
 
 <span class="token function">test</span><span class="token punctuation">(</span><span class="token string">&quot;Inserts name and outputs JavaScript&quot;</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-  <span class="token keyword">const</span> stats <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">compiler</span><span class="token punctuation">(</span><span class="token string">&quot;example.txt&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">&quot;Alice&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> output <span class="token operator">=</span> stats<span class="token punctuation">.</span><span class="token function">toJson</span><span class="token punctuation">(</span><span class="token punctuation">{</span> source<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>modules<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>source<span class="token punctuation">;</span>
+  <span class="token keyword">const</span> stats <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">compiler</span><span class="token punctuation">(</span><span class="token string">&quot;example.txt&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">&quot;Alice&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> output <span class="token operator">=</span> stats<span class="token punctuation">.</span><span class="token function">toJson</span><span class="token punctuation">(</span><span class="token punctuation">{</span> source<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>modules<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>source<span class="token punctuation">;</span>
 
   <span class="token function">expect</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBe</span><span class="token punctuation">(</span><span class="token string">&#x27;export default &quot;Hey Alice!\\n&quot;&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
@@ -714,11 +714,11 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"> PASS  test/loader.test.js
   ✓ Inserts name and outputs JavaScript <span class="token punctuation">(</span>229ms<span class="token punctuation">)</span>
 
-Test Suites: <span class="token number">1</span> passed, <span class="token number">1</span> total
-Tests:       <span class="token number">1</span> passed, <span class="token number">1</span> total
-Snapshots:   <span class="token number">0</span> total
-Time:        <span class="token number">1</span>.853s, estimated 2s
-Ran all <span class="token builtin class-name">test</span> suites.</code></pre></div>
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.853s, estimated 2s
+Ran all <span class="token function">test</span> suites.</code></pre></div>
 <p>It worked! At this point you should be ready to start developing, testing, and deploying your own loaders. We hope that you&#x27;ll share your creations with the rest of the community!</p>
 <h1><span id="moderation-policy"></span>Moderation Policy<a href="#moderation-policy" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
@@ -1001,11 +1001,11 @@ any proposed change, a TSC vote in favor of the change is required.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token comment">// A JavaScript class.</span>
 <span class="token keyword">class</span> <span class="token class-name">MyExampleWebpackPlugin</span> <span class="token punctuation">{</span>
   <span class="token comment">// Define `apply` as its prototype method which is supplied with compiler as its argument</span>
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Specify the event hook to attach to</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span>
       <span class="token string">&quot;MyExampleWebpackPlugin&quot;</span><span class="token punctuation">,</span>
-      <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;This is an example plugin!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>
           <span class="token string">&quot;Here’s the `compilation` object which represents a single build of assets:&quot;</span><span class="token punctuation">,</span>
@@ -1023,7 +1023,7 @@ any proposed change, a TSC vote in favor of the change is required.</p>
 <h2><span id="basic-plugin-architecture"></span>Basic plugin architecture<a href="#basic-plugin-architecture" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Plugins are instantiated objects with an <code>apply</code> method on their prototype. This <code>apply</code> method is called once by the webpack compiler while installing the plugin. The <code>apply</code> method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A plugin is structured as follows:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloWorldPlugin</span> <span class="token punctuation">{</span>
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>done<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>
       <span class="token string">&quot;Hello World Plugin&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">(</span>
@@ -1042,37 +1042,37 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ... configuration settings here ...</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">HelloWorldPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> options<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">HelloWorldPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> options<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Use <a href="https://github.com/webpack/schema-utils"><code>schema-utils</code></a> in order to validate the options being passed through the plugin options. Here is an example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> validate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;schema-utils&quot;</span><span class="token punctuation">;</span>
 
 <span class="token comment">// schema for options object</span>
 <span class="token keyword">const</span> schema <span class="token operator">=</span> <span class="token punctuation">{</span>
-  type<span class="token operator">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
-  properties<span class="token operator">:</span> <span class="token punctuation">{</span>
-    test<span class="token operator">:</span> <span class="token punctuation">{</span>
-      type<span class="token operator">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
+  type<span class="token punctuation">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+  properties<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    test<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">HelloWorldPlugin</span> <span class="token punctuation">{</span>
-  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">validate</span><span class="token punctuation">(</span>schema<span class="token punctuation">,</span> options<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-      name<span class="token operator">:</span> <span class="token string">&quot;Hello World Plugin&quot;</span><span class="token punctuation">,</span>
-      baseDataPath<span class="token operator">:</span> <span class="token string">&quot;options&quot;</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">&quot;Hello World Plugin&quot;</span><span class="token punctuation">,</span>
+      baseDataPath<span class="token punctuation">:</span> <span class="token string">&quot;options&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre></div>
 <h2><span id="compiler-and-compilation"></span>Compiler and Compilation<a href="#compiler-and-compilation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Among the two most important resources while developing plugins are the <a href="/api/node/#compiler-instance" data-discover="true"><code>compiler</code></a> and <a href="/api/compilation-hooks/" data-discover="true"><code>compilation</code></a> objects. Understanding their roles is an important first step in extending the webpack engine.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloCompilationPlugin</span> <span class="token punctuation">{</span>
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Tap into compilation hook which gives compilation as argument to the callback function</span>
-    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>compilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">&quot;HelloCompilationPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>compilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">&quot;HelloCompilationPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>compilation<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token comment">// Now we can tap into various hooks available through compilation</span>
       compilation<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>optimize<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">&quot;HelloCompilationPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Assets are being optimized.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1088,10 +1088,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h3><span id="tapasync"></span>tapAsync<a href="#tapasync" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>When we use <code>tapAsync</code> method to tap into plugins, we need to call the callback function which is supplied as the last argument to our function.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloAsyncPlugin</span> <span class="token punctuation">{</span>
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span>
       <span class="token string">&quot;HelloAsyncPlugin&quot;</span><span class="token punctuation">,</span>
-      <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
         <span class="token comment">// Do something async...</span>
         <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Done with async work...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1106,12 +1106,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h4><span id="tappromise"></span>tapPromise<a href="#tappromise" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>When we use <code>tapPromise</code> method to tap into plugins, we need to return a promise which resolves when our asynchronous task is completed.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloAsyncPlugin</span> <span class="token punctuation">{</span>
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapPromise</span><span class="token punctuation">(</span>
       <span class="token string">&quot;HelloAsyncPlugin&quot;</span><span class="token punctuation">,</span>
-      <span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+      <span class="token punctuation">(</span>compilation<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
         <span class="token comment">// return a Promise that resolves when we are done...</span>
-        <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">resolve<span class="token punctuation">,</span> reject</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Done with async work...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1127,19 +1127,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Let&#x27;s write an example plugin that generates a new build file called <code>assets.md</code>, the contents of which will list all of the asset files in our build. This plugin might look something like this:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">FileListPlugin</span> <span class="token punctuation">{</span>
   <span class="token keyword">static</span> defaultOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
-    outputFile<span class="token operator">:</span> <span class="token string">&quot;assets.md&quot;</span><span class="token punctuation">,</span>
+    outputFile<span class="token punctuation">:</span> <span class="token string">&quot;assets.md&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
   <span class="token comment">// Any options should be passed in the constructor of your plugin,</span>
   <span class="token comment">// (this is a public API of your plugin).</span>
-  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span>options <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Applying user-specified options over the default options</span>
     <span class="token comment">// and making merged options further available to the plugin methods.</span>
     <span class="token comment">// You should probably validate all the options here as well.</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span>FileListPlugin<span class="token punctuation">.</span>defaultOptions<span class="token punctuation">,</span> <span class="token operator">...</span>options <span class="token punctuation">}</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> pluginName <span class="token operator">=</span> FileListPlugin<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
 
     <span class="token comment">// webpack module instance can be accessed from the compiler object,</span>
@@ -1156,26 +1156,26 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
     <span class="token comment">// Tapping to the &quot;thisCompilation&quot; hook in order to further tap</span>
     <span class="token comment">// to the compilation process on an earlier stage.</span>
-    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>thisCompilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>pluginName<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>thisCompilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>pluginName<span class="token punctuation">,</span> <span class="token punctuation">(</span>compilation<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token comment">// Tapping to the assets processing pipeline on a specific stage.</span>
       compilation<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>processAssets<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>
         <span class="token punctuation">{</span>
-          name<span class="token operator">:</span> pluginName<span class="token punctuation">,</span>
+          name<span class="token punctuation">:</span> pluginName<span class="token punctuation">,</span>
 
           <span class="token comment">// Using one of the later asset processing stages to ensure</span>
           <span class="token comment">// that all assets were already added to the compilation by other plugins.</span>
-          stage<span class="token operator">:</span> Compilation<span class="token punctuation">.</span><span class="token constant">PROCESS_ASSETS_STAGE_SUMMARIZE</span><span class="token punctuation">,</span>
+          stage<span class="token punctuation">:</span> Compilation<span class="token punctuation">.</span><span class="token constant">PROCESS_ASSETS_STAGE_SUMMARIZE</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">(</span><span class="token parameter">assets</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token punctuation">(</span>assets<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           <span class="token comment">// &quot;assets&quot; is an object that contains all assets</span>
           <span class="token comment">// in the compilation, the keys of the object are pathnames of the assets</span>
           <span class="token comment">// and the values are file sources.</span>
 
           <span class="token comment">// Iterating over all the assets and</span>
           <span class="token comment">// generating content for our Markdown file.</span>
-          <span class="token keyword">const</span> content <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string"># In this build:\n\n</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>assets<span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">filename</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">- </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+          <span class="token keyword">const</span> content <span class="token operator">=</span> <span class="token template-string"><span class="token string">`# In this build:\n\n${Object.keys(assets)
+            .map((filename) =&gt; `</span></span><span class="token operator">-</span> $<span class="token punctuation">{</span>filename<span class="token punctuation">}</span><span class="token template-string"><span class="token string">`)
+            .join(&quot;\n&quot;)}`</span></span><span class="token punctuation">;</span>
 
           <span class="token comment">// Adding new asset to the compilation, so it would be automatically</span>
           <span class="token comment">// generated by the webpack in the output directory.</span>
@@ -1197,7 +1197,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// …</span>
 
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// Adding the plugin with the default options</span>
     <span class="token keyword">new</span> <span class="token class-name">FileListPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 
@@ -1205,7 +1205,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
     <span class="token comment">// You can choose to pass any supported options to it:</span>
     <span class="token keyword">new</span> <span class="token class-name">FileListPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      outputFile<span class="token operator">:</span> <span class="token string">&quot;my-assets.md&quot;</span><span class="token punctuation">,</span>
+      outputFile<span class="token punctuation">:</span> <span class="token string">&quot;my-assets.md&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -1222,7 +1222,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into is generally specified in <code>this.hooks</code> property.</p>
 <p>For example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>hooks <span class="token operator">=</span> <span class="token punctuation">{</span>
-  shouldEmit<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">SyncBailHook</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;compilation&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  shouldEmit<span class="token punctuation">:</span> <span class="token keyword">new</span> <span class="token class-name">SyncBailHook</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;compilation&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>It represents that the only hook supported is <code>shouldEmit</code> which is a hook of <code>SyncBailHook</code> type and the only parameter which will be passed to any plugin that taps into <code>shouldEmit</code> hook is <code>compilation</code>.</p>
 <p>Various types of hooks supported are :</p>
@@ -1498,8 +1498,8 @@ maintenance of the webpack bundler and its technical direction.</p>
 <h2><span id="exploring-assets-chunks-modules-and-dependencies"></span>Exploring assets, chunks, modules, and dependencies<a href="#exploring-assets-chunks-modules-and-dependencies" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>After a compilation is sealed, all structures within the compilation may be traversed.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token comment">// Explore each chunk (build output):</span>
       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> chunk <span class="token keyword">of</span> compilation<span class="token punctuation">.</span>chunks<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// Explore each module within the chunk (built inputs):</span>
@@ -1547,12 +1547,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token keyword">this</span><span class="token punctuation">.</span>prevTimestamps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token keyword">const</span> changedFiles <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>compilation<span class="token punctuation">.</span>fileTimestamps<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>
-        <span class="token punctuation">(</span><span class="token parameter">watchfile</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
-          <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>prevTimestamps<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>watchfile<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>startTime<span class="token punctuation">)</span> <span class="token operator">&lt;</span>
-          <span class="token punctuation">(</span>compilation<span class="token punctuation">.</span>fileTimestamps<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>watchfile<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token number">Infinity</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">(</span>watchfile<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+          <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>prevTimestamps<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>watchfile<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token keyword">this</span><span class="token punctuation">.</span>startTime<span class="token punctuation">)</span> <span class="token operator">&lt;</span>
+          <span class="token punctuation">(</span>compilation<span class="token punctuation">.</span>fileTimestamps<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>watchfile<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token number">Infinity</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
 
       <span class="token keyword">this</span><span class="token punctuation">.</span>prevTimestamps <span class="token operator">=</span> compilation<span class="token punctuation">.</span>fileTimestamps<span class="token punctuation">;</span>
@@ -1572,9 +1572,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      <span class="token keyword">const</span> changedChunks <span class="token operator">=</span> compilation<span class="token punctuation">.</span>chunks<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">const</span> changedChunks <span class="token operator">=</span> compilation<span class="token punctuation">.</span>chunks<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
         <span class="token keyword">const</span> oldVersion <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions<span class="token punctuation">[</span>chunk<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
         <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions<span class="token punctuation">[</span>chunk<span class="token punctuation">.</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> chunk<span class="token punctuation">.</span>hash<span class="token punctuation">;</span>
         <span class="token keyword">return</span> chunk<span class="token punctuation">.</span>hash <span class="token operator">!==</span> oldVersion<span class="token punctuation">;</span>
@@ -1621,7 +1621,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">node --inspect ./node_modules/webpack/bin/webpack.js</code></pre></div>
 <p>Which should output something like:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">Debugger listening on ws://127.0.0.1:9229/c624201a-250f-416e-a018-300bbec7be2c
-For <span class="token builtin class-name">help</span> see https://nodejs.org/en/docs/inspector</code></pre></div>
+For <span class="token function">help</span> see https://nodejs.org/en/docs/inspector</code></pre></div>
 <p>Now jump to <code>chrome://inspect</code> in the browser and you should see any active scripts you&#x27;ve inspected under the <em>Remote Target</em> header. Click the &quot;inspect&quot; link under each script to open a dedicated debugger or the <em>Open dedicated DevTools for Node</em> link for a session that will connect automatically. You can also check out the <a href="https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj">NiM extension</a>, a handy Chrome plugin that will automatically open a DevTools tab every time you <code>--inspect</code> a script.</p>
 <p>We recommend using the <code>--inspect-brk</code> flag which will break on the first statement of the script allowing you to go through the source to set breakpoints and start/stop the build as you please. Also, don&#x27;t forget that you can still pass arguments to the script. For example, if you have multiple configuration files you could pass <code>--config webpack.prod.js</code> to specify the configuration you&#x27;d like to debug.</p>
 <h1><span id="ai-policy"></span>Ai Policy<a href="#ai-policy" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>

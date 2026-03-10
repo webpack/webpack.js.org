@@ -23,21 +23,21 @@
 <span class="token keyword">const</span> MiniCssExtractPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;mini-css-extract-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.s?css$/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span>MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.s?css$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span>MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token comment">// For webpack v5, you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line // `...`,</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <blockquote>
 <p>[!NOTE]</p>
@@ -47,9 +47,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// [...]</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token comment">// [...]</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Finally, run Webpack using your preferred method.</p>
@@ -70,11 +70,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <p>Test to match files against.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.foo\.css$/i</span><span class="token punctuation">,</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.foo\.css$/i</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -87,11 +87,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Files to include.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        include<span class="token operator">:</span> <span class="token regex">/\/includes/</span><span class="token punctuation">,</span>
+        include<span class="token punctuation">:</span> <span class="token regex">/\/includes/</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -104,11 +104,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>Files to exclude.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        exclude<span class="token operator">:</span> <span class="token regex">/\/excludes/</span><span class="token punctuation">,</span>
+        exclude<span class="token punctuation">:</span> <span class="token regex">/\/excludes/</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -128,11 +128,11 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <p>Enable or disable multi-process parallel running.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        parallel<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        parallel<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -141,11 +141,11 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <p>Enable multi-process parallel running and specify the number of concurrent runs.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        parallel<span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+        parallel<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -176,18 +176,18 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <h4><span id="function"></span><code>Function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          level<span class="token operator">:</span> <span class="token punctuation">{</span>
-            <span class="token number">1</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-              roundingPrecision<span class="token operator">:</span> <span class="token string">&quot;all=3,px=5&quot;</span><span class="token punctuation">,</span>
+        minimizerOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          level<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token number">1</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              roundingPrecision<span class="token punctuation">:</span> <span class="token string">&quot;all=3,px=5&quot;</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -197,25 +197,25 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <p>The function index in the <code>minify</code> array corresponds to the options object with the same index in the <code>minimizerOptions</code> array.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">[</span>
+        minimizerOptions<span class="token punctuation">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// Options for the first function (CssMinimizerPlugin.cssnanoMinify),</span>
           <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// Options for the second function (CssMinimizerPlugin.cleanCssMinify),</span>
           <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// Options for the third function</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-        minify<span class="token operator">:</span> <span class="token punctuation">[</span>
+        minify<span class="token punctuation">:</span> <span class="token punctuation">[</span>
           CssMinimizerPlugin<span class="token punctuation">.</span>cssnanoMinify<span class="token punctuation">,</span>
           CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
-          <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> inputMap<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+          <span class="token keyword">async</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> inputMap<span class="token punctuation">,</span> minimizerOptions<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
             <span class="token comment">//  Custom minifier function</span>
             <span class="token punctuation">(</span><span class="token punctuation">{</span>
-              code<span class="token operator">:</span> <span class="token string">&quot;a{color: red}&quot;</span><span class="token punctuation">,</span>
-              map<span class="token operator">:</span> <span class="token string">&#x27;{&quot;version&quot;: &quot;3&quot;, ...}&#x27;</span><span class="token punctuation">,</span>
-              warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-              errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+              code<span class="token punctuation">:</span> <span class="token string">&quot;a{color: red}&quot;</span><span class="token punctuation">,</span>
+              map<span class="token punctuation">:</span> <span class="token string">&#x27;{&quot;version&quot;: &quot;3&quot;, ...}&#x27;</span><span class="token punctuation">,</span>
+              warnings<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+              errors<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -230,15 +230,15 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <p>Cssnano optimisations <a href="https://cssnano.github.io/cssnano/docs/what-are-optimisations/#what-are-optimisations">options</a>.</p>
 <h4><span id="object"></span><code>Object</code><a href="#object" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          preset<span class="token operator">:</span> <span class="token punctuation">[</span>
+        minimizerOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          preset<span class="token punctuation">:</span> <span class="token punctuation">[</span>
             <span class="token string">&quot;default&quot;</span><span class="token punctuation">,</span>
             <span class="token punctuation">{</span>
-              discardComments<span class="token operator">:</span> <span class="token punctuation">{</span> removeAll<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              discardComments<span class="token punctuation">:</span> <span class="token punctuation">{</span> removeAll<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -253,12 +253,12 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <p>If parallelization is enabled, the packages in <code>minimizerOptions</code> must be referenced via strings (<code>packageName</code> or <code>require.resolve(packageName)</code>). In this case, we shouldn&#x27;t use <code>require</code>/<code>import</code>.</p>
 </blockquote>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          preset<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;cssnano-preset-simple&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        minimizerOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          preset<span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;cssnano-preset-simple&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -278,14 +278,14 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> sugarss <span class="token keyword">from</span> <span class="token string">&quot;sugarss&quot;</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        parallel<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          processorOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-            parser<span class="token operator">:</span> sugarss<span class="token punctuation">,</span>
+        parallel<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        minimizerOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          processorOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            parser<span class="token punctuation">:</span> sugarss<span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -293,13 +293,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          processorOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-            parser<span class="token operator">:</span> <span class="token string">&quot;sugarss&quot;</span><span class="token punctuation">,</span>
+        minimizerOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          processorOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            parser<span class="token punctuation">:</span> <span class="token string">&quot;sugarss&quot;</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -319,11 +319,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token function-variable function">warningsFilter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">warning<span class="token punctuation">,</span> file<span class="token punctuation">,</span> source</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        warningsFilter<span class="token punctuation">:</span> <span class="token punctuation">(</span>warning<span class="token punctuation">,</span> file<span class="token punctuation">,</span> source<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token regex">/Dropping unreachable code/i</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>warning<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span>
@@ -348,35 +348,35 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">const</span> CssMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;css-minimizer-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  devtool<span class="token operator">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devtool<span class="token punctuation">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.s?css$/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.s?css$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
           MiniCssExtractPlugin<span class="token punctuation">.</span>loader<span class="token punctuation">,</span>
-          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> options<span class="token operator">:</span> <span class="token punctuation">{</span> sourceMap<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span> options<span class="token operator">:</span> <span class="token punctuation">{</span> sourceMap<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token punctuation">{</span> sourceMap<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token punctuation">{</span> sourceMap<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">MiniCssExtractPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="remove-all-comments"></span>Remove all comments<a href="#remove-all-comments" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Remove all comments, including those starting with <code>/*!</code>.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          preset<span class="token operator">:</span> <span class="token punctuation">[</span>
+        minimizerOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          preset<span class="token punctuation">:</span> <span class="token punctuation">[</span>
             <span class="token string">&quot;default&quot;</span><span class="token punctuation">,</span>
             <span class="token punctuation">{</span>
-              discardComments<span class="token operator">:</span> <span class="token punctuation">{</span> removeAll<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              discardComments<span class="token punctuation">:</span> <span class="token punctuation">{</span> removeAll<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -389,11 +389,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// Uncomment if you need source maps</span>
   <span class="token comment">// devtool: &quot;source-map&quot;,</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>cssoMinify<span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>cssoMinify<span class="token punctuation">,</span>
         <span class="token comment">// Uncomment this line for options</span>
         <span class="token comment">// minimizerOptions: { restructure: false },</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -405,11 +405,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// Uncomment if you need source maps</span>
   <span class="token comment">// devtool: &quot;source-map&quot;,</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
         <span class="token comment">// Uncomment this line for options</span>
         <span class="token comment">// minimizerOptions: { compatibility: &#x27;ie11,-properties.merging&#x27; },</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -421,11 +421,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// Uncomment if you need source maps</span>
   <span class="token comment">// devtool: &quot;source-map&quot;,</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>esbuildMinify<span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>esbuildMinify<span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -434,11 +434,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// devtool: &quot;source-map&quot;, // Uncomment for source maps</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>lightningCssMinify<span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>lightningCssMinify<span class="token punctuation">,</span>
         <span class="token comment">// Uncomment this line for options</span>
         <span class="token comment">// minimizerOptions: { targets: { ie: 11 }, drafts: { nesting: true } },</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -449,11 +449,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// devtool: &quot;source-map&quot;, // Uncomment for source maps</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>swcMinify<span class="token punctuation">,</span>
+        minify<span class="token punctuation">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>swcMinify<span class="token punctuation">,</span>
         <span class="token comment">// Uncomment this line for options</span>
         <span class="token comment">// minimizerOptions: {},</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -465,4 +465,4 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>If you&#x27;re new here, please take a moment to review our contributing guidelines.</p>
 <p><a href="https://github.com/webpack/css-minimizer-webpack-plugin?tab=contributing-ov-file#contributing">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack/css-minimizer-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/css-minimizer-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/css-minimizer-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/copy-webpack-plugin/" data-discover="true">CopyWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/eslint-webpack-plugin/" data-discover="true">EslintWebpackPlugin</a></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<p><a href="https://github.com/webpack/css-minimizer-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/css-minimizer-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/css-minimizer-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/copy-webpack-plugin/" data-discover="true">CopyWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/eslint-webpack-plugin/" data-discover="true">EslintWebpackPlugin</a></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

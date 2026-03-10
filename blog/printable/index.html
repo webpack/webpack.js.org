@@ -200,7 +200,7 @@ Now writing to stderr during building modules is throttled to 500ms.</p>
 <p>The profiling mode also got an upgrade and will display timings of nested progress messages.
 This makes it easier to figure out which plugin is causing performance problems.</p>
 <p>A newly added <code>percentBy</code>-option tells <code>ProgressPlugin</code> how to calculate progress percentage.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>ProgressPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> percentBy<span class="token operator">:</span> <span class="token string">&quot;entries&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>ProgressPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> percentBy<span class="token punctuation">:</span> <span class="token string">&quot;entries&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>To make progress percentage more accurate <code>ProgressPlugin</code> caches the last known total modules count and reuses this value on the next build. The first build will warm the cache but the following builds will use and update this value.</p>
 <h3><span id="automatic-unique-naming"></span>Automatic unique naming<a href="#automatic-unique-naming" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>In webpack 4 multiple webpack runtimes could conflict on the same HTML page, because they use the same global variable for chunk loading. To fix that it was needed to provide a custom name to the <code>output.jsonpFunction</code> configuration.</p>
@@ -342,11 +342,11 @@ This target is also used by default when there is a browserslist config availabl
 <p>The SplitChunksPlugin now knows how to handle these different sizes and uses them for <code>minSize</code> and <code>maxSize</code>.
 By default, only <code>javascript</code> size is handled, but you can now pass multiple values to manage them:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
-    splitChunks<span class="token operator">:</span> <span class="token punctuation">{</span>
-      minSize<span class="token operator">:</span> <span class="token punctuation">{</span>
-        javascript<span class="token operator">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
-        webassembly<span class="token operator">:</span> <span class="token number">50000</span><span class="token punctuation">,</span>
+  optimization<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    splitChunks<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      minSize<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        javascript<span class="token punctuation">:</span> <span class="token number">30000</span><span class="token punctuation">,</span>
+        webassembly<span class="token punctuation">:</span> <span class="token number">50000</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -357,13 +357,13 @@ By default, only <code>javascript</code> size is handled, but you can now pass m
 <h3><span id="persistent-caching"></span>Persistent Caching<a href="#persistent-caching" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>There is now a filesystem cache. It&#x27;s opt-in and can be enabled with the following configuration:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  cache<span class="token operator">:</span> <span class="token punctuation">{</span>
+  cache<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token comment">// 1. Set cache type to filesystem</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;filesystem&quot;</span><span class="token punctuation">,</span>
 
-    buildDependencies<span class="token operator">:</span> <span class="token punctuation">{</span>
+    buildDependencies<span class="token punctuation">:</span> <span class="token punctuation">{</span>
       <span class="token comment">// 2. Add your config as buildDependency to get cache invalidation on config change</span>
-      config<span class="token operator">:</span> <span class="token punctuation">[</span>__filename<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      config<span class="token punctuation">:</span> <span class="token punctuation">[</span>__filename<span class="token punctuation">]</span><span class="token punctuation">,</span>
 
       <span class="token comment">// 3. If you have other things the build depends on you can add them here</span>
       <span class="token comment">// Note that webpack, loaders and all modules referenced from your config are automatically added</span>
@@ -701,9 +701,9 @@ This allows plugins to apply their own defaults, or act as configuration presets
 <h3><span id="entry-point-descriptor"></span>Entry point descriptor<a href="#entry-point-descriptor" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>If an object is passed as entry point the value might be a string, array of strings or a descriptor:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    catalog<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./catalog.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    catalog<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./catalog.js&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -711,33 +711,33 @@ This allows plugins to apply their own defaults, or act as configuration presets
 <h4><span id="entry-point-output-filename"></span>Entry point output filename<a href="#entry-point-output-filename" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>By default, the output filename for the entry chunk is extracted from <code>output.filename</code> but you can specify a custom output filename for a specific entry:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    about<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./about.js&quot;</span><span class="token punctuation">,</span> filename<span class="token operator">:</span> <span class="token string">&quot;pages/[name][ext]&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    about<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./about.js&quot;</span><span class="token punctuation">,</span> filename<span class="token punctuation">:</span> <span class="token string">&quot;pages/[name][ext]&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="entry-point-dependency"></span>Entry point dependency<a href="#entry-point-dependency" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>By default, every entry chunk stores all the modules that it uses. With <code>dependOn</code>-option you can share the modules from one entry chunk to another:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    app<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">,</span> dependOn<span class="token operator">:</span> <span class="token string">&quot;react-vendors&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token string">&quot;react-vendors&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;react-dom&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;prop-types&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">,</span> dependOn<span class="token punctuation">:</span> <span class="token string">&quot;react-vendors&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;react-vendors&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;react-dom&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;prop-types&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The app chunk will not contain the modules that <code>react-vendors</code> has.</p>
 <h4><span id="entry-point-library"></span>Entry point library<a href="#entry-point-library" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>The entry descriptor allows to pass a different <code>library</code> option for each entrypoint.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    commonjs<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./lib.js&quot;</span><span class="token punctuation">,</span>
-      library<span class="token operator">:</span> <span class="token punctuation">{</span>
-        type<span class="token operator">:</span> <span class="token string">&quot;commonjs-module&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    commonjs<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./lib.js&quot;</span><span class="token punctuation">,</span>
+      library<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        type<span class="token punctuation">:</span> <span class="token string">&quot;commonjs-module&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    amd<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./lib.js&quot;</span><span class="token punctuation">,</span>
-      library<span class="token operator">:</span> <span class="token punctuation">{</span>
-        type<span class="token operator">:</span> <span class="token string">&quot;amd&quot;</span><span class="token punctuation">,</span>
+    amd<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./lib.js&quot;</span><span class="token punctuation">,</span>
+      library<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        type<span class="token punctuation">:</span> <span class="token string">&quot;amd&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -748,10 +748,10 @@ When specified a chunk with this name is created which contains only the runtime
 When multiple entries specify the same <code>runtime</code>, that chunk will contain a common runtime for all these entry.
 This means they could be used together on the same HTML page.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    app<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">,</span>
-      runtime<span class="token operator">:</span> <span class="token string">&quot;app-runtime&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">,</span>
+      runtime<span class="token punctuation">:</span> <span class="token string">&quot;app-runtime&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -759,13 +759,13 @@ This means they could be used together on the same HTML page.</p>
 <p>The entry descriptor allows to specify a <code>chunkLoading</code> per entry.
 The runtime for this entry will use this to load chunks.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    app<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./app.js&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    worker<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./worker.js&quot;</span><span class="token punctuation">,</span>
-      chunkLoading<span class="token operator">:</span> <span class="token string">&quot;importScripts&quot;</span><span class="token punctuation">,</span>
+    worker<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./worker.js&quot;</span><span class="token punctuation">,</span>
+      chunkLoading<span class="token punctuation">:</span> <span class="token string">&quot;importScripts&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -892,17 +892,17 @@ So they can never have referenced modules or influence exports/imports.</p>
 <p><a href="https://github.com/webpack-contrib/null-loader"><code>null-loader</code></a></p>
 <p>It will be deprecated. Use</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
-    alias<span class="token operator">:</span> <span class="token punctuation">{</span>
-      xyz$<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  resolve<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    alias<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      xyz$<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>or use an absolute path</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
-    alias<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token punctuation">[</span>path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;....&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  resolve<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    alias<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">[</span>path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;....&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -1314,12 +1314,12 @@ The default has been choosing to seamlessly add support for ESM externals withou
 <p>Absolute URLs in <code>import</code>s can make sense e.g. when using external services that offer their API as ESM: <code>import { event } from &quot;https://analytics.company.com/api/v1.js&quot;</code> (<code>import(&quot;https://analytics.company.com/api/v1.js&quot;)</code> might make more sense to gracefully handle errors when depending on this external service, but errors could also be caught higher in module graph).</p>
 <p>As usual the <code>externals</code> configuration allows to map any module name to externals:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  externalsType<span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
-  externals<span class="token operator">:</span> <span class="token punctuation">{</span>
-    analytics<span class="token operator">:</span> <span class="token string">&quot;https://analytics.company.com/api/v1.js&quot;</span><span class="token punctuation">,</span>
-    svelte<span class="token operator">:</span> <span class="token string">&quot;https://jspm.dev/svelte@3&quot;</span><span class="token punctuation">,</span>
-    react<span class="token operator">:</span> <span class="token string">&quot;https://cdn.skypack.dev/preact@10&quot;</span><span class="token punctuation">,</span>
-    <span class="token string">&quot;react-dom&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://esm.sh/[react,react-dom]/react-dom&quot;</span><span class="token punctuation">,</span>
+  externalsType<span class="token punctuation">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    analytics<span class="token punctuation">:</span> <span class="token string">&quot;https://analytics.company.com/api/v1.js&quot;</span><span class="token punctuation">,</span>
+    svelte<span class="token punctuation">:</span> <span class="token string">&quot;https://jspm.dev/svelte@3&quot;</span><span class="token punctuation">,</span>
+    react<span class="token punctuation">:</span> <span class="token string">&quot;https://cdn.skypack.dev/preact@10&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;react-dom&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;https://esm.sh/[react,react-dom]/react-dom&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Using multiple different ESM CDNs will not work. This is only an example.</p></aside>
@@ -1439,8 +1439,8 @@ see the <a href="https://github.com/webpack/webpack/security/policy">Webpack Sec
 <p>In the webpack configuration, the <code>resolve.tsconfig</code> option is used to specify which tsconfig file should be used as the source (which is also useful in monorepos or setups with multiple tsconfig files):</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
-    tsconfig<span class="token operator">:</span> <span class="token string">&quot;./tsconfig.json&quot;</span><span class="token punctuation">,</span> <span class="token comment">// Can be `false` (disabled), `true` (use the default tsconfig.json), a path to a `tsconfig.json` file, or an object with configFile and references options.</span>
+  resolve<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    tsconfig<span class="token punctuation">:</span> <span class="token string">&quot;./tsconfig.json&quot;</span><span class="token punctuation">,</span> <span class="token comment">// Can be `false` (disabled), `true` (use the default tsconfig.json), a path to a `tsconfig.json` file, or an object with configFile and references options.</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Example of aliases in tsconfig.json:</p>
@@ -1472,7 +1472,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <!-- -->
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// This import is inside a Worker context, so Webpack uses index.worker.js</span>
 <span class="token keyword">const</span> worker <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Worker</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">URL</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">,</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-  type<span class="token operator">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
+  type<span class="token punctuation">:</span> <span class="token string">&quot;module&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <!-- -->
 <h2><span id="support-import-specifier-guard"></span>Support Import Specifier Guard<a href="#support-import-specifier-guard" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -1502,10 +1502,10 @@ import.defer(&quot;./dir/&quot; + file);
 <p>If <code>output.module</code> is not enabled, Webpack will continue to remove unknown properties unless you explicitly indicate otherwise. To preserve them manually, you can configure <a href="/configuration/module/#moduleparserjavascriptimportmeta" data-discover="true"><code>module.parser.javascript.importMeta</code></a> as &#x27;preserve-unknown&#x27; in your <code>webpack.config.js</code>:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    parser<span class="token operator">:</span> <span class="token punctuation">{</span>
-      javascript<span class="token operator">:</span> <span class="token punctuation">{</span>
-        importMeta<span class="token operator">:</span> <span class="token string">&quot;preserve-unknown&quot;</span><span class="token punctuation">,</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    parser<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      javascript<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        importMeta<span class="token punctuation">:</span> <span class="token string">&quot;preserve-unknown&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1521,18 +1521,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>This enables specifying different types of source maps for different resources in your project. For example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  target<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;web&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
-    css<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  target<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;web&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  experiments<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    css<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  devtool<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devtool<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">{</span>
-      type<span class="token operator">:</span> <span class="token string">&quot;javascript&quot;</span><span class="token punctuation">,</span>
-      use<span class="token operator">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span>
+      type<span class="token punctuation">:</span> <span class="token string">&quot;javascript&quot;</span><span class="token punctuation">,</span>
+      use<span class="token punctuation">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">{</span>
-      type<span class="token operator">:</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">,</span>
-      use<span class="token operator">:</span> <span class="token string">&quot;inline-source-map&quot;</span><span class="token punctuation">,</span>
+      type<span class="token punctuation">:</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">,</span>
+      use<span class="token punctuation">:</span> <span class="token string">&quot;inline-source-map&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>

@@ -13,12 +13,12 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    compress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    port<span class="token operator">:</span> <span class="token number">9000</span><span class="token punctuation">,</span>
+    compress<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    port<span class="token punctuation">:</span> <span class="token number">9000</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>When the server is started, there will be a message prior to the list of resolved modules:</p>
@@ -49,8 +49,8 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token function-variable function">app</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="devserverallowedhosts"></span>devServer.allowedHosts<a href="#devserverallowedhosts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -59,8 +59,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    allowedHosts<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    allowedHosts<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token string">&quot;host.com&quot;</span><span class="token punctuation">,</span>
       <span class="token string">&quot;subdomain.host.com&quot;</span><span class="token punctuation">,</span>
       <span class="token string">&quot;subdomain2.host.com&quot;</span><span class="token punctuation">,</span>
@@ -72,11 +72,11 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token comment">// this achieves the same effect as the first example</span>
     <span class="token comment">// with the bonus of not having to update your config</span>
     <span class="token comment">// if new subdomains need to access the dev server</span>
-    allowedHosts<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;.host.com&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;host2.com&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    allowedHosts<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;.host.com&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;host2.com&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -85,8 +85,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    allowedHosts<span class="token operator">:</span> <span class="token string">&quot;all&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    allowedHosts<span class="token punctuation">:</span> <span class="token string">&quot;all&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -95,8 +95,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    allowedHosts<span class="token operator">:</span> <span class="token string">&quot;auto&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    allowedHosts<span class="token punctuation">:</span> <span class="token string">&quot;auto&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -107,8 +107,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    bonjour<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    bonjour<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -119,10 +119,10 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    bonjour<span class="token operator">:</span> <span class="token punctuation">{</span>
-      type<span class="token operator">:</span> <span class="token string">&quot;http&quot;</span><span class="token punctuation">,</span>
-      protocol<span class="token operator">:</span> <span class="token string">&quot;udp&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    bonjour<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">&quot;http&quot;</span><span class="token punctuation">,</span>
+      protocol<span class="token punctuation">:</span> <span class="token string">&quot;udp&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -133,9 +133,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      logging<span class="token operator">:</span> <span class="token string">&quot;info&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      logging<span class="token punctuation">:</span> <span class="token string">&quot;info&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -147,9 +147,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      overlay<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      overlay<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -164,12 +164,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      overlay<span class="token operator">:</span> <span class="token punctuation">{</span>
-        errors<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        warnings<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-        runtimeErrors<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      overlay<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        errors<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        warnings<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        runtimeErrors<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -181,10 +181,10 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      overlay<span class="token operator">:</span> <span class="token punctuation">{</span>
-        <span class="token function-variable function">runtimeErrors</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      overlay<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        runtimeErrors<span class="token punctuation">:</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           <span class="token keyword">if</span> <span class="token punctuation">(</span>error <span class="token keyword">instanceof</span> <span class="token class-name">DOMException</span> <span class="token operator">&amp;&amp;</span> error<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">&quot;AbortError&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
           <span class="token punctuation">}</span>
@@ -201,9 +201,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      progress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      progress<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -218,9 +218,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      reconnect<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      reconnect<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -229,9 +229,9 @@
 <p>When set to <code>false</code> it will not try to reconnect.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      reconnect<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      reconnect<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -240,14 +240,14 @@
 <p>You can also specify the exact number of times the client should try to reconnect.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      reconnect<span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      reconnect<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --client-reconnect <span class="token number">5</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --client-reconnect 5</code></pre></div>
 <h3><span id="websockettransport"></span>webSocketTransport<a href="#websockettransport" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>&#x27;ws&#x27; | &#x27;sockjs&#x27;</code> <code>string</code></p>
 <p>This option allows us either to choose the current <code>devServer</code> transport mode for clients individually or to provide custom client implementation. This allows specifying how the browser or other client communicates with the <code>devServer</code>.</p>
@@ -255,11 +255,11 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      webSocketTransport<span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      webSocketTransport<span class="token punctuation">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    webSocketServer<span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
+    webSocketServer<span class="token punctuation">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -270,22 +270,22 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      webSocketTransport<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      webSocketTransport<span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    webSocketServer<span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
+    webSocketServer<span class="token punctuation">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Using custom, compatible WebSocket client and server implementations:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      webSocketTransport<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      webSocketTransport<span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    webSocketServer<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    webSocketServer<span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="websocketurl"></span>webSocketURL<a href="#websocketurl" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -294,9 +294,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      webSocketURL<span class="token operator">:</span> <span class="token string">&quot;ws://0.0.0.0:8080/ws&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      webSocketURL<span class="token punctuation">:</span> <span class="token string">&quot;ws://0.0.0.0:8080/ws&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -314,15 +314,15 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      webSocketURL<span class="token operator">:</span> <span class="token punctuation">{</span>
-        hostname<span class="token operator">:</span> <span class="token string">&quot;0.0.0.0&quot;</span><span class="token punctuation">,</span>
-        pathname<span class="token operator">:</span> <span class="token string">&quot;/ws&quot;</span><span class="token punctuation">,</span>
-        password<span class="token operator">:</span> <span class="token string">&quot;dev-server&quot;</span><span class="token punctuation">,</span>
-        port<span class="token operator">:</span> <span class="token number">8080</span><span class="token punctuation">,</span>
-        protocol<span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
-        username<span class="token operator">:</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      webSocketURL<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        hostname<span class="token punctuation">:</span> <span class="token string">&quot;0.0.0.0&quot;</span><span class="token punctuation">,</span>
+        pathname<span class="token punctuation">:</span> <span class="token string">&quot;/ws&quot;</span><span class="token punctuation">,</span>
+        password<span class="token punctuation">:</span> <span class="token string">&quot;dev-server&quot;</span><span class="token punctuation">,</span>
+        port<span class="token punctuation">:</span> <span class="token number">8080</span><span class="token punctuation">,</span>
+        protocol<span class="token punctuation">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
+        username<span class="token punctuation">:</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -334,8 +334,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    compress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    compress<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -347,13 +347,13 @@
 <p>Provide options to <a href="https://github.com/webpack/webpack-dev-middleware">webpack-dev-middleware</a> which handles webpack assets.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    devMiddleware<span class="token operator">:</span> <span class="token punctuation">{</span>
-      index<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-      mimeTypes<span class="token operator">:</span> <span class="token punctuation">{</span> phtml<span class="token operator">:</span> <span class="token string">&quot;text/html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      publicPath<span class="token operator">:</span> <span class="token string">&quot;/publicPathForDevServe&quot;</span><span class="token punctuation">,</span>
-      serverSideRender<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-      writeToDisk<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    devMiddleware<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      index<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      mimeTypes<span class="token punctuation">:</span> <span class="token punctuation">{</span> phtml<span class="token punctuation">:</span> <span class="token string">&quot;text/html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      publicPath<span class="token punctuation">:</span> <span class="token string">&quot;/publicPathForDevServe&quot;</span><span class="token punctuation">,</span>
+      serverSideRender<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      writeToDisk<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -363,9 +363,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    headers<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token string">&quot;X-Custom-Foo&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    headers<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">&quot;X-Custom-Foo&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -373,15 +373,15 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    headers<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    headers<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        key<span class="token operator">:</span> <span class="token string">&quot;X-Custom&quot;</span><span class="token punctuation">,</span>
-        value<span class="token operator">:</span> <span class="token string">&quot;foo&quot;</span><span class="token punctuation">,</span>
+        key<span class="token punctuation">:</span> <span class="token string">&quot;X-Custom&quot;</span><span class="token punctuation">,</span>
+        value<span class="token punctuation">:</span> <span class="token string">&quot;foo&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        key<span class="token operator">:</span> <span class="token string">&quot;Y-Custom&quot;</span><span class="token punctuation">,</span>
-        value<span class="token operator">:</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">,</span>
+        key<span class="token punctuation">:</span> <span class="token string">&quot;Y-Custom&quot;</span><span class="token punctuation">,</span>
+        value<span class="token punctuation">:</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -389,8 +389,8 @@
 <p>You can also pass a function:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token function-variable function">headers</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;X-Bar&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;key1=value1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;key2=value2&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    headers<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string">&quot;X-Bar&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;key1=value1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;key2=value2&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="devserverhistoryapifallback"></span>devServer.historyApiFallback<a href="#devserverhistoryapifallback" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -399,8 +399,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    historyApiFallback<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    historyApiFallback<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -411,12 +411,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    historyApiFallback<span class="token operator">:</span> <span class="token punctuation">{</span>
-      rewrites<span class="token operator">:</span> <span class="token punctuation">[</span>
-        <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token operator">:</span> <span class="token regex">/^\/$/</span><span class="token punctuation">,</span> to<span class="token operator">:</span> <span class="token string">&quot;/views/landing.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token operator">:</span> <span class="token regex">/^\/subpage/</span><span class="token punctuation">,</span> to<span class="token operator">:</span> <span class="token string">&quot;/views/subpage.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token operator">:</span> <span class="token regex">/./</span><span class="token punctuation">,</span> to<span class="token operator">:</span> <span class="token string">&quot;/views/404.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    historyApiFallback<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      rewrites<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token regex">/^\/$/</span><span class="token punctuation">,</span> to<span class="token punctuation">:</span> <span class="token string">&quot;/views/landing.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token regex">/^\/subpage/</span><span class="token punctuation">,</span> to<span class="token punctuation">:</span> <span class="token string">&quot;/views/subpage.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token punctuation">:</span> <span class="token regex">/./</span><span class="token punctuation">,</span> to<span class="token punctuation">:</span> <span class="token string">&quot;/views/404.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -425,9 +425,9 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    historyApiFallback<span class="token operator">:</span> <span class="token punctuation">{</span>
-      disableDotRule<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    historyApiFallback<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      disableDotRule<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -438,12 +438,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    host<span class="token operator">:</span> <span class="token string">&quot;0.0.0.0&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    host<span class="token punctuation">:</span> <span class="token string">&quot;0.0.0.0&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --host <span class="token number">0.0</span>.0.0</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --host 0.0.0.0</code></pre></div>
 <p>This also works with IPv6:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --host ::</code></pre></div>
 <h3><span id="local-ip"></span>local-ip<a href="#local-ip" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -461,8 +461,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    hot<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    hot<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -473,8 +473,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    hot<span class="token operator">:</span> <span class="token string">&quot;only&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    hot<span class="token punctuation">:</span> <span class="token string">&quot;only&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -487,8 +487,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    ipc<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    ipc<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -503,8 +503,8 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    ipc<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;my-socket.sock&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    ipc<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;my-socket.sock&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="devserverlivereload"></span>devServer.liveReload<a href="#devserverlivereload" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -513,8 +513,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    liveReload<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    liveReload<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -528,8 +528,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token function">onListening</span><span class="token punctuation">(</span><span class="token parameter">devServer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">onListening</span><span class="token punctuation">(</span>devServer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>devServer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;webpack-dev-server is not defined&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
@@ -545,8 +545,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    open<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    open<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -557,8 +557,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    open<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/my-page&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    open<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/my-page&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -567,8 +567,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    open<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/my-page&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/another-page&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    open<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/my-page&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/another-page&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -577,10 +577,10 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    open<span class="token operator">:</span> <span class="token punctuation">{</span>
-      app<span class="token operator">:</span> <span class="token punctuation">{</span>
-        name<span class="token operator">:</span> <span class="token string">&quot;google-chrome&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    open<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      app<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">&quot;google-chrome&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -591,12 +591,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    open<span class="token operator">:</span> <span class="token punctuation">{</span>
-      target<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;first.html&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;http://localhost:8080/second.html&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-      app<span class="token operator">:</span> <span class="token punctuation">{</span>
-        name<span class="token operator">:</span> <span class="token string">&quot;google-chrome&quot;</span><span class="token punctuation">,</span>
-        arguments<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;--incognito&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;--new-window&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    open<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      target<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;first.html&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;http://localhost:8080/second.html&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      app<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">&quot;google-chrome&quot;</span><span class="token punctuation">,</span>
+        arguments<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;--incognito&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;--new-window&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -608,18 +608,18 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    port<span class="token operator">:</span> <span class="token number">8080</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    port<span class="token punctuation">:</span> <span class="token number">8080</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --port <span class="token number">8080</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --port 8080</code></pre></div>
 <p><code>port</code> option can&#x27;t be <code>null</code> or an empty string, to automatically use a free port please use <code>port: &#x27;auto&#x27;</code>:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    port<span class="token operator">:</span> <span class="token string">&quot;auto&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    port<span class="token punctuation">:</span> <span class="token string">&quot;auto&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -632,11 +632,11 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    proxy<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        context<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        target<span class="token operator">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
+        context<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -646,12 +646,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    proxy<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        context<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        target<span class="token operator">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
-        pathRewrite<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;^/api&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        context<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
+        pathRewrite<span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">&quot;^/api&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -660,12 +660,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    proxy<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        context<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        target<span class="token operator">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
-        secure<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        context<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
+        secure<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -681,12 +681,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    proxy<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        context<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        target<span class="token operator">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
-        <span class="token function">bypass</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> proxyOptions</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        context<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
+        <span class="token function">bypass</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> proxyOptions<span class="token punctuation">)</span> <span class="token punctuation">{</span>
           <span class="token keyword">if</span> <span class="token punctuation">(</span>req<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>accept<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span><span class="token string">&quot;html&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Skipping proxy for browser request.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">return</span> <span class="token string">&quot;/index.html&quot;</span><span class="token punctuation">;</span>
@@ -701,11 +701,11 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    proxy<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        context<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/auth&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        target<span class="token operator">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
+        context<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/auth&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -714,14 +714,14 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    devMiddleware<span class="token operator">:</span> <span class="token punctuation">{</span>
-      index<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// specify to enable root proxying</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    devMiddleware<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      index<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// specify to enable root proxying</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    proxy<span class="token operator">:</span> <span class="token punctuation">[</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        <span class="token function-variable function">context</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-        target<span class="token operator">:</span> <span class="token string">&quot;http://localhost:1234&quot;</span><span class="token punctuation">,</span>
+        context<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:1234&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -730,12 +730,12 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    proxy<span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    proxy<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        context<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        target<span class="token operator">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
-        changeOrigin<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        context<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/api&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        target<span class="token punctuation">:</span> <span class="token string">&quot;http://localhost:3000&quot;</span><span class="token punctuation">,</span>
+        changeOrigin<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -747,8 +747,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    server<span class="token operator">:</span> <span class="token string">&quot;http&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    server<span class="token punctuation">:</span> <span class="token string">&quot;http&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -757,8 +757,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    server<span class="token operator">:</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    server<span class="token punctuation">:</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -767,8 +767,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    server<span class="token operator">:</span> <span class="token string">&quot;spdy&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    server<span class="token punctuation">:</span> <span class="token string">&quot;spdy&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via the CLI:</p>
@@ -778,16 +778,16 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    server<span class="token operator">:</span> <span class="token punctuation">{</span>
-      type<span class="token operator">:</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">,</span>
-      options<span class="token operator">:</span> <span class="token punctuation">{</span>
-        ca<span class="token operator">:</span> <span class="token string">&quot;./path/to/server.pem&quot;</span><span class="token punctuation">,</span>
-        pfx<span class="token operator">:</span> <span class="token string">&quot;./path/to/server.pfx&quot;</span><span class="token punctuation">,</span>
-        key<span class="token operator">:</span> <span class="token string">&quot;./path/to/server.key&quot;</span><span class="token punctuation">,</span>
-        cert<span class="token operator">:</span> <span class="token string">&quot;./path/to/server.crt&quot;</span><span class="token punctuation">,</span>
-        passphrase<span class="token operator">:</span> <span class="token string">&quot;webpack-dev-server&quot;</span><span class="token punctuation">,</span>
-        requestCert<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    server<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        ca<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/server.pem&quot;</span><span class="token punctuation">,</span>
+        pfx<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/server.pfx&quot;</span><span class="token punctuation">,</span>
+        key<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/server.key&quot;</span><span class="token punctuation">,</span>
+        cert<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/server.crt&quot;</span><span class="token punctuation">,</span>
+        passphrase<span class="token punctuation">:</span> <span class="token string">&quot;webpack-dev-server&quot;</span><span class="token punctuation">,</span>
+        requestCert<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -805,17 +805,17 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    server<span class="token operator">:</span> <span class="token punctuation">{</span>
-      type<span class="token operator">:</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">,</span>
-      options<span class="token operator">:</span> <span class="token punctuation">{</span>
-        minVersion<span class="token operator">:</span> <span class="token string">&quot;TLSv1.1&quot;</span><span class="token punctuation">,</span>
-        key<span class="token operator">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./server.key&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        pfx<span class="token operator">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./server.pfx&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        cert<span class="token operator">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./server.crt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        ca<span class="token operator">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./ca.pem&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        passphrase<span class="token operator">:</span> <span class="token string">&quot;webpack-dev-server&quot;</span><span class="token punctuation">,</span>
-        requestCert<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    server<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      type<span class="token punctuation">:</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        minVersion<span class="token punctuation">:</span> <span class="token string">&quot;TLSv1.1&quot;</span><span class="token punctuation">,</span>
+        key<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./server.key&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        pfx<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./server.pfx&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        cert<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./server.crt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        ca<span class="token punctuation">:</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./ca.pem&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        passphrase<span class="token punctuation">:</span> <span class="token string">&quot;webpack-dev-server&quot;</span><span class="token punctuation">,</span>
+        requestCert<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -826,8 +826,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    setupExitSignals<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    setupExitSignals<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="devserversetupmiddlewares"></span>devServer.setupMiddlewares<a href="#devserversetupmiddlewares" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -837,23 +837,23 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token function-variable function">setupMiddlewares</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">middlewares<span class="token punctuation">,</span> devServer</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    setupMiddlewares<span class="token punctuation">:</span> <span class="token punctuation">(</span>middlewares<span class="token punctuation">,</span> devServer<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>devServer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span><span class="token string">&quot;webpack-dev-server is not defined&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
 
-      devServer<span class="token punctuation">.</span>app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;/setup-middleware/some/path&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">_<span class="token punctuation">,</span> response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      devServer<span class="token punctuation">.</span>app<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">&quot;/setup-middleware/some/path&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>_<span class="token punctuation">,</span> response<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
         response<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&quot;setup-middlewares option GET&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
       <span class="token comment">// Use the `unshift` method if you want to run a middleware before all other middlewares</span>
       <span class="token comment">// or when you are migrating from the `onBeforeSetupMiddleware` option</span>
       middlewares<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        name<span class="token operator">:</span> <span class="token string">&quot;first-in-array&quot;</span><span class="token punctuation">,</span>
+        name<span class="token punctuation">:</span> <span class="token string">&quot;first-in-array&quot;</span><span class="token punctuation">,</span>
         <span class="token comment">// `path` is optional</span>
-        path<span class="token operator">:</span> <span class="token string">&quot;/foo/path&quot;</span><span class="token punctuation">,</span>
-        <span class="token function-variable function">middleware</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        path<span class="token punctuation">:</span> <span class="token string">&quot;/foo/path&quot;</span><span class="token punctuation">,</span>
+        middleware<span class="token punctuation">:</span> <span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&quot;Foo!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -861,15 +861,15 @@
       <span class="token comment">// Use the `push` method if you want to run a middleware after all other middlewares</span>
       <span class="token comment">// or when you are migrating from the `onAfterSetupMiddleware` option</span>
       middlewares<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        name<span class="token operator">:</span> <span class="token string">&quot;hello-world-test-one&quot;</span><span class="token punctuation">,</span>
+        name<span class="token punctuation">:</span> <span class="token string">&quot;hello-world-test-one&quot;</span><span class="token punctuation">,</span>
         <span class="token comment">// `path` is optional</span>
-        path<span class="token operator">:</span> <span class="token string">&quot;/foo/bar&quot;</span><span class="token punctuation">,</span>
-        <span class="token function-variable function">middleware</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        path<span class="token punctuation">:</span> <span class="token string">&quot;/foo/bar&quot;</span><span class="token punctuation">,</span>
+        middleware<span class="token punctuation">:</span> <span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
           res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&quot;Foo Bar!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-      middlewares<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      middlewares<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
         res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&quot;Hello World!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -883,8 +883,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via CLI:</p>
@@ -895,8 +895,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;assets&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;assets&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via CLI:</p>
@@ -905,8 +905,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;assets&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;assets&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Usage via CLI:</p>
@@ -923,9 +923,9 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -939,13 +939,13 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;assets&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;assets&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -957,10 +957,10 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      staticOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-        redirect<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      staticOptions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        redirect<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -977,10 +977,10 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;assets&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      publicPath<span class="token operator">:</span> <span class="token string">&quot;/serve-public-path-url&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;assets&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      publicPath<span class="token punctuation">:</span> <span class="token string">&quot;/serve-public-path-url&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -994,15 +994,15 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;assets&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        publicPath<span class="token operator">:</span> <span class="token string">&quot;/serve-public-path-url&quot;</span><span class="token punctuation">,</span>
+        directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;assets&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        publicPath<span class="token punctuation">:</span> <span class="token string">&quot;/serve-public-path-url&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
-        directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        publicPath<span class="token operator">:</span> <span class="token string">&quot;/other-serve-public-path-url&quot;</span><span class="token punctuation">,</span>
+        directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;css&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        publicPath<span class="token punctuation">:</span> <span class="token string">&quot;/other-serve-public-path-url&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1020,10 +1020,10 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      serveIndex<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      serveIndex<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -1043,10 +1043,10 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      watch<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      watch<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -1064,12 +1064,12 @@
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      directory<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-      watch<span class="token operator">:</span> <span class="token punctuation">{</span>
-        ignored<span class="token operator">:</span> <span class="token string">&quot;*.txt&quot;</span><span class="token punctuation">,</span>
-        usePolling<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      directory<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;public&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      watch<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        ignored<span class="token punctuation">:</span> <span class="token string">&quot;*.txt&quot;</span><span class="token punctuation">,</span>
+        usePolling<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1080,19 +1080,19 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    watchFiles<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;src/**/*.php&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;public/**/*&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    watchFiles<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;src/**/*.php&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;public/**/*&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>It is possible to configure advanced options for watching files. See the <a href="https://github.com/paulmillr/chokidar"><code>chokidar</code></a> documentation for the possible options.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    watchFiles<span class="token operator">:</span> <span class="token punctuation">{</span>
-      paths<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;src/**/*.php&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;public/**/*&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-      options<span class="token operator">:</span> <span class="token punctuation">{</span>
-        usePolling<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    watchFiles<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      paths<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;src/**/*.php&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;public/**/*&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        usePolling<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1104,8 +1104,8 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    webSocketServer<span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    webSocketServer<span class="token punctuation">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>To create a custom server implementation, create a class that extends <a href="https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js"><code>BaseServer</code></a>.</p>
@@ -1113,21 +1113,21 @@
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      webSocketTransport<span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      webSocketTransport<span class="token punctuation">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    webSocketServer<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    webSocketServer<span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Using custom, compatible WebSocket client and server implementations:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    client<span class="token operator">:</span> <span class="token punctuation">{</span>
-      webSocketTransport<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  devServer<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    client<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      webSocketTransport<span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    webSocketServer<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    webSocketServer<span class="token punctuation">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/dev-server.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/plugins/" data-discover="true">Plugins</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/cache/" data-discover="true">Cache</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">21<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/spacek33z"><img width="45" height="45" alt="spacek33z" title="spacek33z" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/charlespwd"><img width="45" height="45" alt="charlespwd" title="charlespwd" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/orteth01"><img width="45" height="45" alt="orteth01" title="orteth01" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Yiidiir"><img width="45" height="45" alt="Yiidiir" title="Yiidiir" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Loonride"><img width="45" height="45" alt="Loonride" title="Loonride" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dmohns"><img width="45" height="45" alt="dmohns" title="dmohns" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EslamHiko"><img width="45" height="45" alt="EslamHiko" title="EslamHiko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/digitaljohn"><img width="45" height="45" alt="digitaljohn" title="digitaljohn" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/bhavya9107"><img width="45" height="45" alt="bhavya9107" title="bhavya9107" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/g100g"><img width="45" height="45" alt="g100g" title="g100g" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anikethsaha"><img width="45" height="45" alt="anikethsaha" title="anikethsaha" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Biki-das"><img width="45" height="45" alt="Biki-das" title="Biki-das" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/SaulSilver"><img width="45" height="45" alt="SaulSilver" title="SaulSilver" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/malcolm-kee"><img width="45" height="45" alt="malcolm-kee" title="malcolm-kee" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/dev-server.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/plugins/" data-discover="true">Plugins</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/cache/" data-discover="true">Cache</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">21<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/spacek33z"><img width="45" height="45" alt="spacek33z" title="spacek33z" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/charlespwd"><img width="45" height="45" alt="charlespwd" title="charlespwd" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/orteth01"><img width="45" height="45" alt="orteth01" title="orteth01" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Yiidiir"><img width="45" height="45" alt="Yiidiir" title="Yiidiir" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Loonride"><img width="45" height="45" alt="Loonride" title="Loonride" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dmohns"><img width="45" height="45" alt="dmohns" title="dmohns" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EslamHiko"><img width="45" height="45" alt="EslamHiko" title="EslamHiko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/digitaljohn"><img width="45" height="45" alt="digitaljohn" title="digitaljohn" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/bhavya9107"><img width="45" height="45" alt="bhavya9107" title="bhavya9107" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/g100g"><img width="45" height="45" alt="g100g" title="g100g" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anikethsaha"><img width="45" height="45" alt="anikethsaha" title="anikethsaha" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Biki-das"><img width="45" height="45" alt="Biki-das" title="Biki-das" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/SaulSilver"><img width="45" height="45" alt="SaulSilver" title="SaulSilver" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/malcolm-kee"><img width="45" height="45" alt="malcolm-kee" title="malcolm-kee" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>

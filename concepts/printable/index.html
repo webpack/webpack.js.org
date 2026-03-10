@@ -24,7 +24,7 @@
 <p>By default its value is <code>./src/index.js</code>, but you can specify a different (or multiple) entry points by setting an <a href="/configuration/entry-context/#entry" data-discover="true"><code>entry</code> property in the webpack configuration</a>. For example:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>When running webpack without a configuration file, the entry defaults to <code>&#x27;./src/index.js&#x27;</code>. If that file does not exist — even if your <code>src/</code> directory does — webpack will throw: <br/> <strong><code>ERROR in Entry module not found: Error: Can&#x27;t resolve &#x27;./src&#x27;</code></strong> <br/><br/> The error says <code>&#x27;./src&#x27;</code> rather than <code>&#x27;./src/index.js&#x27;</code> because webpack resolves the directory first and then fails to find the default <code>index.js</code> inside it. To use a different entry filename, add a <code>webpack.config.js</code> as shown in the example above.</p></aside>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Learn more in the <a href="/concepts/entry-points" data-discover="true">entry points</a> section.</p></aside>
@@ -39,10 +39,10 @@
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;my-first-webpack.bundle.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;my-first-webpack.bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In the example above, we use the <code>output.filename</code> and the <code>output.path</code> properties to tell webpack the name of our bundle and where we want it to be emitted to. In case you&#x27;re wondering about the path module being imported at the top, it is a core <a href="https://nodejs.org/api/modules.html">Node.js module</a> that gets used to manipulate file paths.</p>
@@ -59,11 +59,11 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;my-first-webpack.bundle.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;my-first-webpack.bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> test<span class="token operator">:</span> <span class="token regex">/\.txt$/</span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">&quot;raw-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.txt$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&quot;raw-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The configuration above has defined a <code>rules</code> property for a single module with two required properties: <code>test</code> and <code>use</code>. This tells webpack&#x27;s compiler the following:</p>
@@ -82,10 +82,10 @@
 <span class="token keyword">import</span> webpack <span class="token keyword">from</span> <span class="token string">&quot;webpack&quot;</span><span class="token punctuation">;</span> <span class="token comment">// to access built-in plugins</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> test<span class="token operator">:</span> <span class="token regex">/\.txt$/</span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">&quot;raw-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.txt$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&quot;raw-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> template<span class="token operator">:</span> <span class="token string">&quot;./src/index.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> template<span class="token punctuation">:</span> <span class="token string">&quot;./src/index.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In the example above, the <code>html-webpack-plugin</code> generates an HTML file for your application and automatically injects all your generated bundles into this file.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>There are many plugins that webpack provides out of the box! Check out the <a href="/plugins" data-discover="true">list of plugins</a>.</p></aside>
@@ -93,7 +93,7 @@
 <h2><span id="mode"></span>Mode<a href="#mode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>By setting the <code>mode</code> parameter to either <code>development</code>, <code>production</code> or <code>none</code>, you can enable webpack&#x27;s built-in optimizations that correspond to each environment. The default value is <code>production</code>.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  mode<span class="token operator">:</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">,</span>
+  mode<span class="token punctuation">:</span> <span class="token string">&quot;production&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Learn more about the <a href="/configuration/mode" data-discover="true">mode configuration here</a> and what optimizations take place on each value.</p>
 <h2><span id="browser-compatibility"></span>Browser Compatibility<a href="#browser-compatibility" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -115,19 +115,19 @@ files are emitted.</p>
 <p>Usage: <code>entry: string | [string]</code></p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The single entry syntax for the <code>entry</code> property is a shorthand for:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    main<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    main<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>We can also pass an array of file paths to the <code>entry</code> property which creates what is known as a <strong>&quot;multi-main entry&quot;</strong>. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one &quot;chunk&quot;.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./src/file_1.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./src/file_2.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./src/file_1.js&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./src/file_2.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>When an array is provided for an entry point, webpack still creates a <strong>single entry chunk</strong>.
 All modules in the array are loaded in the given order and combined into the same dependency graph.</p>
@@ -135,8 +135,8 @@ All modules in the array are loaded in the given order and combined into the sam
 such as polyfills or development-only tools, without manually importing them in the application source.</p>
 <p><strong>Example: Injecting a polyfill</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    main<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;@babel/polyfill&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    main<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;@babel/polyfill&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;./src/index.js&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Single Entry Syntax is a great choice when you are looking to quickly set up a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.</p>
@@ -144,9 +144,9 @@ such as polyfills or development-only tools, without manually importing them in 
 <p>Usage: <code>entry: { &lt;entryChunkName&gt; string | [string] } | {}</code></p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    app<span class="token operator">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
-    adminApp<span class="token operator">:</span> <span class="token string">&quot;./src/adminApp.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
+    adminApp<span class="token punctuation">:</span> <span class="token string">&quot;./src/adminApp.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The object syntax is more verbose. However, this is the most scalable way of defining entry/entries in your application.</p>
@@ -176,46 +176,46 @@ such as polyfills or development-only tools, without manually importing them in 
 </ul>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    a2<span class="token operator">:</span> <span class="token string">&quot;dependingfile.js&quot;</span><span class="token punctuation">,</span>
-    b2<span class="token operator">:</span> <span class="token punctuation">{</span>
-      dependOn<span class="token operator">:</span> <span class="token string">&quot;a2&quot;</span><span class="token punctuation">,</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    a2<span class="token punctuation">:</span> <span class="token string">&quot;dependingfile.js&quot;</span><span class="token punctuation">,</span>
+    b2<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      dependOn<span class="token punctuation">:</span> <span class="token string">&quot;a2&quot;</span><span class="token punctuation">,</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><code>runtime</code> and <code>dependOn</code> should not be used together on a single entry, so the following config is invalid and would throw an error:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    a2<span class="token operator">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
-    b2<span class="token operator">:</span> <span class="token punctuation">{</span>
-      runtime<span class="token operator">:</span> <span class="token string">&quot;x2&quot;</span><span class="token punctuation">,</span>
-      dependOn<span class="token operator">:</span> <span class="token string">&quot;a2&quot;</span><span class="token punctuation">,</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./b&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    a2<span class="token punctuation">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
+    b2<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      runtime<span class="token punctuation">:</span> <span class="token string">&quot;x2&quot;</span><span class="token punctuation">,</span>
+      dependOn<span class="token punctuation">:</span> <span class="token string">&quot;a2&quot;</span><span class="token punctuation">,</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./b&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Make sure <code>runtime</code> must not point to an existing entry point name, for example the below config would throw an error:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    a1<span class="token operator">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
-    b1<span class="token operator">:</span> <span class="token punctuation">{</span>
-      runtime<span class="token operator">:</span> <span class="token string">&quot;a1&quot;</span><span class="token punctuation">,</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./b&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    a1<span class="token punctuation">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
+    b1<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      runtime<span class="token punctuation">:</span> <span class="token string">&quot;a1&quot;</span><span class="token punctuation">,</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./b&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Also <code>dependOn</code> must not be circular, the following example again would throw an error:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    a3<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
-      dependOn<span class="token operator">:</span> <span class="token string">&quot;b3&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    a3<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./a&quot;</span><span class="token punctuation">,</span>
+      dependOn<span class="token punctuation">:</span> <span class="token string">&quot;b3&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    b3<span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token keyword">import</span><span class="token operator">:</span> <span class="token string">&quot;./b&quot;</span><span class="token punctuation">,</span>
-      dependOn<span class="token operator">:</span> <span class="token string">&quot;a3&quot;</span><span class="token punctuation">,</span>
+    b3<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token keyword">import</span><span class="token punctuation">:</span> <span class="token string">&quot;./b&quot;</span><span class="token punctuation">,</span>
+      dependOn<span class="token punctuation">:</span> <span class="token string">&quot;a3&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -224,21 +224,21 @@ such as polyfills or development-only tools, without manually importing them in 
 <h3><span id="separate-app-and-vendor-entries"></span>Separate App and Vendor Entries<a href="#separate-app-and-vendor-entries" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    main<span class="token operator">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
-    vendor<span class="token operator">:</span> <span class="token string">&quot;./src/vendor.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    main<span class="token punctuation">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
+    vendor<span class="token punctuation">:</span> <span class="token string">&quot;./src/vendor.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.prod.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;[name].[contenthash].bundle.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;[name].[contenthash].bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.dev.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>What does this do?</strong> We are telling webpack that we would like 2 separate entry points (like the above example).</p>
@@ -247,10 +247,10 @@ such as polyfills or development-only tools, without manually importing them in 
 <h3><span id="multi-page-application"></span>Multi-Page Application<a href="#multi-page-application" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    pageOne<span class="token operator">:</span> <span class="token string">&quot;./src/pageOne/index.js&quot;</span><span class="token punctuation">,</span>
-    pageTwo<span class="token operator">:</span> <span class="token string">&quot;./src/pageTwo/index.js&quot;</span><span class="token punctuation">,</span>
-    pageThree<span class="token operator">:</span> <span class="token string">&quot;./src/pageThree/index.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    pageOne<span class="token punctuation">:</span> <span class="token string">&quot;./src/pageOne/index.js&quot;</span><span class="token punctuation">,</span>
+    pageTwo<span class="token punctuation">:</span> <span class="token string">&quot;./src/pageTwo/index.js&quot;</span><span class="token punctuation">,</span>
+    pageThree<span class="token punctuation">:</span> <span class="token string">&quot;./src/pageThree/index.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>What does this do?</strong> We are telling webpack that we would like 3 separate dependency graphs (like the above example).</p>
@@ -263,8 +263,8 @@ such as polyfills or development-only tools, without manually importing them in 
 <p>The minimum requirement for the <code>output</code> property in your webpack configuration is to set its value to an object and provide an <a href="/configuration/output/#outputfilename" data-discover="true"><code>output.filename</code></a> to use for the output file(s):</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>This configuration would output a single <code>bundle.js</code> file into the <code>dist</code> directory.</p>
@@ -277,13 +277,13 @@ such as polyfills or development-only tools, without manually importing them in 
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    app<span class="token operator">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
-    search<span class="token operator">:</span> <span class="token string">&quot;./src/search.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token string">&quot;./src/app.js&quot;</span><span class="token punctuation">,</span>
+    search<span class="token punctuation">:</span> <span class="token string">&quot;./src/search.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;[name].js&quot;</span><span class="token punctuation">,</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;[name].js&quot;</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;./dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
@@ -293,9 +293,9 @@ such as polyfills or development-only tools, without manually importing them in 
 <p><strong>config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    path<span class="token operator">:</span> <span class="token string">&quot;/home/proj/cdn/assets/[fullhash]&quot;</span><span class="token punctuation">,</span>
-    publicPath<span class="token operator">:</span> <span class="token string">&quot;https://cdn.example.com/assets/[fullhash]/&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> <span class="token string">&quot;/home/proj/cdn/assets/[fullhash]&quot;</span><span class="token punctuation">,</span>
+    publicPath<span class="token punctuation">:</span> <span class="token string">&quot;https://cdn.example.com/assets/[fullhash]/&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In cases where the eventual <code>publicPath</code> of output files isn&#x27;t known at compile time, it can be left blank and set dynamically at runtime via the <code>__webpack_public_path__</code> variable in the entry point file:</p>
@@ -311,10 +311,10 @@ such as polyfills or development-only tools, without manually importing them in 
 <p>And then instruct webpack to use the <a href="/loaders/css-loader" data-discover="true"><code>css-loader</code></a> for every <code>.css</code> file and the <a href="https://github.com/TypeStrong/ts-loader"><code>ts-loader</code></a> for all <code>.ts</code> files:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span> test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span> test<span class="token operator">:</span> <span class="token regex">/\.ts$/</span><span class="token punctuation">,</span> use<span class="token operator">:</span> <span class="token string">&quot;ts-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.ts$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&quot;ts-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
@@ -330,19 +330,19 @@ such as polyfills or development-only tools, without manually importing them in 
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.</p>
 <p>Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See <a href="/concepts/loaders/#loader-features" data-discover="true">&quot;Loader Features&quot;</a> for more information about loaders order.</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span>
-          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;style-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&quot;style-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              modules<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+            loader<span class="token punctuation">:</span> <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              modules<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">{</span> loader<span class="token operator">:</span> <span class="token string">&quot;sass-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&quot;sass-loader&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -394,8 +394,8 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">const</span> pluginName <span class="token operator">=</span> <span class="token string">&quot;ConsoleLogOnBuildWebpackPlugin&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">class</span> <span class="token class-name">ConsoleLogOnBuildWebpackPlugin</span> <span class="token punctuation">{</span>
-  <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>run<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>pluginName<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>run<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>pluginName<span class="token punctuation">,</span> <span class="token punctuation">(</span>compilation<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;The webpack build process is starting!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
@@ -417,22 +417,22 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;my-first-webpack.bundle.js&quot;</span><span class="token punctuation">,</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;my-first-webpack.bundle.js&quot;</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  module<span class="token operator">:</span> <span class="token punctuation">{</span>
-    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\.(js|jsx)$/</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token string">&quot;babel-loader&quot;</span><span class="token punctuation">,</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.(js|jsx)$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token string">&quot;babel-loader&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>ProgressPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> template<span class="token operator">:</span> <span class="token string">&quot;./src/index.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword">new</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> template<span class="token punctuation">:</span> <span class="token string">&quot;./src/index.html&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The <code>ProgressPlugin</code> is used to customize how progress should be reported during compilation, and <code>HtmlWebpackPlugin</code> will generate a HTML file including the <code>my-first-webpack.bundle.js</code> file using a <code>script</code> tag.</p>
@@ -446,7 +446,7 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 
 <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>ProgressPlugin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-compiler<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> stats</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+compiler<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">(</span>err<span class="token punctuation">,</span> stats<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Did you know: The example seen above is extremely similar to the <a href="https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292">webpack runtime itself!</a> There are lots of great usage examples hiding in the <a href="https://github.com/webpack/webpack">webpack source code</a> that you can apply to your own configurations and scripts!</p></aside>
@@ -480,11 +480,11 @@ compiler<span class="token punctuation">.</span><span class="token function">run
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  mode<span class="token operator">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./foo.js&quot;</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;foo.bundle.js&quot;</span><span class="token punctuation">,</span>
+  mode<span class="token punctuation">:</span> <span class="token string">&quot;development&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./foo.js&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;foo.bundle.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><em>See</em>: <a href="/configuration/" data-discover="true">Configuration section</a> for all supported configuration options</p>
@@ -659,22 +659,22 @@ It can be leveraged to connect remote containers to a host container dynamically
   <span class="token keyword">await</span> <span class="token function">__webpack_init_sharing__</span><span class="token punctuation">(</span><span class="token string">&quot;default&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">const</span> container <span class="token operator">=</span> globalThis<span class="token punctuation">.</span>someContainer<span class="token punctuation">;</span> <span class="token comment">// or get the container somewhere else</span>
   <span class="token comment">// Initialize the container, it may provide shared modules</span>
-  <span class="token keyword">await</span> container<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>__webpack_share_scopes__<span class="token punctuation">.</span>default<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">const</span> module <span class="token operator">=</span> <span class="token keyword">await</span> container<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;./module&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> container<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>__webpack_share_scopes__<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> module <span class="token operator">=</span> <span class="token keyword">await</span> container<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">&quot;./module&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.</p>
 <p>This way you could dynamically load an A/B test which provides a different version of a shared module.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Ensure you have loaded the container before attempting to dynamically connect a remote container.</p></aside>
 <p>Example:</p>
 <p><strong>init.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">loadComponent</span><span class="token punctuation">(</span><span class="token parameter">scope<span class="token punctuation">,</span> module</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">loadComponent</span><span class="token punctuation">(</span>scope<span class="token punctuation">,</span> module<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
     <span class="token comment">// Initializes the shared scope. Fills it with known provided modules from this build and all remotes</span>
     <span class="token keyword">await</span> <span class="token function">__webpack_init_sharing__</span><span class="token punctuation">(</span><span class="token string">&quot;default&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">const</span> container <span class="token operator">=</span> window<span class="token punctuation">[</span>scope<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// or get the container somewhere else</span>
     <span class="token comment">// Initialize the container, it may provide shared modules</span>
-    <span class="token keyword">await</span> container<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>__webpack_share_scopes__<span class="token punctuation">.</span>default<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> factory <span class="token operator">=</span> <span class="token keyword">await</span> window<span class="token punctuation">[</span>scope<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>module<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> container<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>__webpack_share_scopes__<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> factory <span class="token operator">=</span> <span class="token keyword">await</span> window<span class="token punctuation">[</span>scope<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>module<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">const</span> Module <span class="token operator">=</span> <span class="token function">factory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> Module<span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -685,22 +685,22 @@ It can be leveraged to connect remote containers to a host container dynamically
 <h2><span id="promise-based-dynamic-remotes"></span>Promise Based Dynamic Remotes<a href="#promise-based-dynamic-remotes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Generally, remotes are configured using URL&#x27;s like in this example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      name<span class="token operator">:</span> <span class="token string">&quot;host&quot;</span><span class="token punctuation">,</span>
-      remotes<span class="token operator">:</span> <span class="token punctuation">{</span>
-        app1<span class="token operator">:</span> <span class="token string">&quot;app1@http://localhost:3001/remoteEntry.js&quot;</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">&quot;host&quot;</span><span class="token punctuation">,</span>
+      remotes<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        app1<span class="token punctuation">:</span> <span class="token string">&quot;app1@http://localhost:3001/remoteEntry.js&quot;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the <code>get/init</code> interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      name<span class="token operator">:</span> <span class="token string">&quot;host&quot;</span><span class="token punctuation">,</span>
-      remotes<span class="token operator">:</span> <span class="token punctuation">{</span>
-        app1<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">promise new Promise(resolve =&gt; {
+      name<span class="token punctuation">:</span> <span class="token string">&quot;host&quot;</span><span class="token punctuation">,</span>
+      remotes<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        app1<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`promise new Promise(resolve =&gt; {
       const urlParams = new URLSearchParams(window.location.search)
       const version = urlParams.get(&#x27;app1VersionParam&#x27;)
       // This part depends on how you plan on hosting and versioning your federated modules
@@ -725,7 +725,7 @@ It can be leveraged to connect remote containers to a host container dynamically
       // inject this script with the src set to the versioned remoteEntry.js
       document.head.appendChild(script);
     })
-    </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+    `</span></span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token comment">// ...</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -742,19 +742,19 @@ It can be leveraged to connect remote containers to a host container dynamically
 <p>Example:</p>
 <p><strong>webpack.config.js (remote)</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    remote<span class="token operator">:</span> <span class="token string">&quot;./public-path&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    remote<span class="token punctuation">:</span> <span class="token string">&quot;./public-path&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      name<span class="token operator">:</span> <span class="token string">&quot;remote&quot;</span><span class="token punctuation">,</span> <span class="token comment">// this name needs to match with the entry name</span>
-      exposes<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./public-path&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> <span class="token string">&quot;remote&quot;</span><span class="token punctuation">,</span> <span class="token comment">// this name needs to match with the entry name</span>
+      exposes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;./public-path&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token comment">// ...</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>public-path.js (remote)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token keyword">set</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   __webpack_public_path__ <span class="token operator">=</span> value<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p><strong>src/index.js (host)</strong></p>
@@ -767,19 +767,19 @@ publicPath<span class="token punctuation">.</span><span class="token keyword">se
 <p>Example:</p>
 <p><strong>webpack.config.js (remote)</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    remote<span class="token operator">:</span> <span class="token string">&quot;./setup-public-path&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    remote<span class="token punctuation">:</span> <span class="token string">&quot;./setup-public-path&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-      name<span class="token operator">:</span> <span class="token string">&quot;remote&quot;</span><span class="token punctuation">,</span> <span class="token comment">// this name needs to match with the entry name</span>
+      name<span class="token punctuation">:</span> <span class="token string">&quot;remote&quot;</span><span class="token punctuation">,</span> <span class="token comment">// this name needs to match with the entry name</span>
       <span class="token comment">// ...</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>setup-public-path.js (remote)</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// derive the publicPath with your own logic and set it with the __webpack_public_path__ API</span>
-__webpack_public_path__ <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>document<span class="token punctuation">.</span>currentScript<span class="token punctuation">.</span>src<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/../</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span></code></pre></div>
+__webpack_public_path__ <span class="token operator">=</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>document<span class="token punctuation">.</span>currentScript<span class="token punctuation">.</span>src<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/../`</span></span><span class="token punctuation">;</span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>There is also an <code>&#x27;auto&#x27;</code> value available to <a href="/configuration/output/#outputpublicpath" data-discover="true"><code>output.publicPath</code></a> which automatically determines the publicPath for you.</p></aside>
 <h2><span id="troubleshooting"></span>Troubleshooting<a href="#troubleshooting" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="uncaught-error-shared-module-is-not-available-for-eager-consumption"></span><code>Uncaught Error: Shared module is not available for eager consumption</code><a href="#uncaught-error-shared-module-is-not-available-for-eager-consumption" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -796,26 +796,26 @@ root.render(&lt;App /&gt;);
 </code></pre></div>
 <p>Let&#x27;s create <code>bootstrap.js</code> file and move contents of the entry into it, and import that bootstrap into the entry:</p>
 <p><strong>index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import(&#x27;./bootstrap&#x27;);
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import { createRoot } from &#x27;react-dom/client&#x27;;
-</span><span class="token prefix deleted">-</span><span class="token line"> import App from &#x27;./App&#x27;;
-</span></span>
-<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> const root = createRoot(document.getElementById(&#x27;root&#x27;));
-</span><span class="token prefix deleted">-</span><span class="token line"> root.render(&lt;App /&gt;);</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted">+ import(&#x27;./bootstrap&#x27;);</span>
+<span class="token deleted">- import { createRoot } from &#x27;react-dom/client&#x27;;</span>
+<span class="token deleted">- import App from &#x27;./App&#x27;;</span>
+
+<span class="token deleted">- const root = createRoot(document.getElementById(&#x27;root&#x27;));</span>
+<span class="token deleted">- root.render(&lt;App /&gt;);</span></code></pre></div>
 <p><strong>bootstrap.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import { createRoot } from &#x27;react-dom/client&#x27;;
-</span><span class="token prefix inserted">+</span><span class="token line"> import App from &#x27;./App&#x27;;
-</span><span class="token prefix inserted">+</span><span class="token line"> const root = createRoot(document.getElementById(&#x27;root&#x27;));
-</span><span class="token prefix inserted">+</span><span class="token line"> root.render(&lt;App /&gt;);</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted">+ import { createRoot } from &#x27;react-dom/client&#x27;;</span>
+<span class="token inserted">+ import App from &#x27;./App&#x27;;</span>
+<span class="token inserted">+ const root = createRoot(document.getElementById(&#x27;root&#x27;));</span>
+<span class="token inserted">+ root.render(&lt;App /&gt;);</span></code></pre></div>
 <p>This method works but can have limitations or drawbacks.</p>
 <p>Setting <code>eager: true</code> for dependency via the <code>ModuleFederationPlugin</code></p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// ...</span>
 <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  shared<span class="token operator">:</span> <span class="token punctuation">{</span>
+  shared<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     <span class="token operator">...</span>deps<span class="token punctuation">,</span>
-    react<span class="token operator">:</span> <span class="token punctuation">{</span>
-      eager<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    react<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      eager<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
@@ -823,11 +823,11 @@ root.render(&lt;App /&gt;);
 <p>It likely does not say <code>&quot;./Button&quot;</code>, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.</p>
 <p>Within ModuleFederationPlugin. Change the exposes from:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff">new ModuleFederationPlugin({
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> exposes: {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   &#x27;Button&#x27;: &#x27;./src/Button&#x27;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   &#x27;./Button&#x27;:&#x27;./src/Button&#x27;
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span>});</code></pre></div>
+  exposes: {
+<span class="token deleted">-   &#x27;Button&#x27;: &#x27;./src/Button&#x27;</span>
+<span class="token inserted">+   &#x27;./Button&#x27;:&#x27;./src/Button&#x27;</span>
+  }
+});</code></pre></div>
 <h3><span id="uncaught-typeerror-fn-is-not-a-function"></span><code>Uncaught TypeError: fn is not a function</code><a href="#uncaught-typeerror-fn-is-not-a-function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>You are likely missing the remote container, make sure it&#x27;s added.
 If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container&#x27;s remote container file to the HTML as well.</p>
@@ -847,7 +847,7 @@ Starting from these <a href="/concepts/entry-points/" data-discover="true"><em>e
 <p>To set the <code>target</code> property, you set the target value in your webpack config:</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  target<span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
+  target<span class="token punctuation">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>In the example above, using <code>node</code> webpack will compile for usage in a Node.js-like environment (uses Node.js <code>require</code> to load chunks and not touch any built in modules like <code>fs</code> or <code>path</code>).</p>
 <p>Each <em>target</em> has a variety of deployment/environment specific additions, support to fit its needs. See what <a href="/configuration/target/" data-discover="true">targets are available</a>.</p>
@@ -862,19 +862,19 @@ Starting from these <a href="/concepts/entry-points/" data-discover="true"><em>e
 <span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> serverConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
-  target<span class="token operator">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;lib.node.js&quot;</span><span class="token punctuation">,</span>
+  target<span class="token punctuation">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;lib.node.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token comment">// …</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> clientConfig <span class="token operator">=</span> <span class="token punctuation">{</span>
-  target<span class="token operator">:</span> <span class="token string">&quot;web&quot;</span><span class="token punctuation">,</span> <span class="token comment">// &lt;=== can be omitted as default is &#x27;web&#x27;</span>
-  output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    filename<span class="token operator">:</span> <span class="token string">&quot;lib.js&quot;</span><span class="token punctuation">,</span>
+  target<span class="token punctuation">:</span> <span class="token string">&quot;web&quot;</span><span class="token punctuation">,</span> <span class="token comment">// &lt;=== can be omitted as default is &#x27;web&#x27;</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;dist&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&quot;lib.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token comment">// …</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -989,16 +989,16 @@ Chunks combine into chunk groups and form a graph (<code>ChunkGraph</code>) inte
 When you describe an entry point - under the hood, you create a chunk group with one chunk.</p>
 <p><strong>./webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./index.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./index.js&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>One chunk group with the <code>main</code> name created (<code>main</code> is the default name for an entry point).
 This chunk group contains <code>./index.js</code> module. As the parser handles imports inside <code>./index.js</code> new modules are added into this chunk.</p>
 <p>Another example:</p>
 <p><strong>./webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token punctuation">{</span>
-    home<span class="token operator">:</span> <span class="token string">&quot;./home.js&quot;</span><span class="token punctuation">,</span>
-    about<span class="token operator">:</span> <span class="token string">&quot;./about.js&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    home<span class="token punctuation">:</span> <span class="token string">&quot;./home.js&quot;</span><span class="token punctuation">,</span>
+    about<span class="token punctuation">:</span> <span class="token string">&quot;./about.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Two chunk groups with names <code>home</code> and <code>about</code> are created.
@@ -1015,7 +1015,7 @@ Each of them has a chunk with a module - <code>./home.js</code> for <code>home</
 <p>Each chunk has a corresponding <strong>asset</strong>. The assets are the output files - the result of bundling.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
-  entry<span class="token operator">:</span> <span class="token string">&quot;./src/index.jsx&quot;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&quot;./src/index.jsx&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>./src/index.jsx</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-jsx">import { createRoot } from &quot;react-dom/client&quot;;

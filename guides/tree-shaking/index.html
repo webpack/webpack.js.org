@@ -4,23 +4,23 @@
 <h2><span id="add-a-utility"></span>Add a Utility<a href="#add-a-utility" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Let&#x27;s add a new utility file to our project, <code>src/math.js</code>, that exports two functions:</p>
 <p><strong>project</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">webpack-demo
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── package-lock.json
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── webpack.config.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /dist
-</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── bundle.js
-</span><span class="token prefix unchanged"> </span><span class="token line"> │   └── index.html
-</span><span class="token prefix unchanged"> </span><span class="token line"> ├── /src
-</span><span class="token prefix unchanged"> </span><span class="token line"> │   ├── index.js
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> │   └── math.js
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> └── /node_modules</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"> webpack-demo
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  │   ├── bundle.js
+  │   └── index.html
+  ├── /src
+  │   ├── index.js
+<span class="token inserted">+ │   └── math.js</span>
+  └── /node_modules</code></pre></div>
 <p><strong>src/math.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">square</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">square</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">cube</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">cube</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> x <span class="token operator">*</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
 <p>Set the <code>mode</code> configuration option to <a href="/configuration/mode/#mode-development" data-discover="true">development</a> to make sure that the bundle is not minified:</p>
@@ -32,50 +32,50 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line"> output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">   filename: &#x27;bundle.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line"> },
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> mode: &#x27;development&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line"> optimization: {
-</span><span class="token prefix inserted">+</span><span class="token line">   usedExports: true,
-</span><span class="token prefix inserted">+</span><span class="token line"> },
-</span></span>};</code></pre></div>
+  entry: &#x27;./src/index.js&#x27;,
+  output: {
+    filename: &#x27;bundle.js&#x27;,
+    path: path.resolve(__dirname, &#x27;dist&#x27;),
+  },
+<span class="token inserted">+ mode: &#x27;development&#x27;,</span>
+<span class="token inserted">+ optimization: {</span>
+<span class="token inserted">+   usedExports: true,</span>
+<span class="token inserted">+ },</span>
+};</code></pre></div>
 <p>With that in place, let&#x27;s update our entry script to utilize one of these new methods and remove <code>lodash</code> for simplicity:</p>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import _ from &#x27;lodash&#x27;;
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import { cube } from &#x27;./math.js&#x27;;
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> function component() {
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   const element = document.createElement(&#x27;div&#x27;);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   const element = document.createElement(&#x27;pre&#x27;);
-</span></span>
-<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">   // Lodash, now imported by this script
-</span><span class="token prefix deleted">-</span><span class="token line">   element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   element.innerHTML = [
-</span><span class="token prefix inserted">+</span><span class="token line">     &#x27;Hello webpack!&#x27;,
-</span><span class="token prefix inserted">+</span><span class="token line">     &#x27;5 cubed is equal to &#x27; + cube(5)
-</span><span class="token prefix inserted">+</span><span class="token line">   ].join(&#x27;\n\n&#x27;);
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   return element;
-</span><span class="token prefix unchanged"> </span><span class="token line"> }
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> document.body.appendChild(component());</span></span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted">- import _ from &#x27;lodash&#x27;;</span>
+<span class="token inserted">+ import { cube } from &#x27;./math.js&#x27;;</span>
+
+  function component() {
+<span class="token deleted">-   const element = document.createElement(&#x27;div&#x27;);</span>
+<span class="token inserted">+   const element = document.createElement(&#x27;pre&#x27;);</span>
+
+<span class="token deleted">-   // Lodash, now imported by this script</span>
+<span class="token deleted">-   element.innerHTML = _.join([&#x27;Hello&#x27;, &#x27;webpack&#x27;], &#x27; &#x27;);</span>
+<span class="token inserted">+   element.innerHTML = [</span>
+<span class="token inserted">+     &#x27;Hello webpack!&#x27;,</span>
+<span class="token inserted">+     &#x27;5 cubed is equal to &#x27; + cube(5)</span>
+<span class="token inserted">+   ].join(&#x27;\n\n&#x27;);</span>
+
+    return element;
+  }
+
+  document.body.appendChild(component());</code></pre></div>
 <p>Note that we <strong>did not <code>import</code> the <code>square</code> method</strong> from the <code>src/math.js</code> module. That function is what&#x27;s known as &quot;dead code&quot;, meaning an unused <code>export</code> that should be dropped. Now let&#x27;s run our npm script, <code>npm run build</code>, and inspect the output bundle:</p>
 <p><strong>dist/bundle.js (around lines 90 - 100)</strong></p>
 <!-- -->
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">/* 1 */</span>
-<span class="token comment">/***/</span> <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">module<span class="token punctuation">,</span> __webpack_exports__<span class="token punctuation">,</span> __webpack_require__</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token comment">/***/</span> <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>module<span class="token punctuation">,</span> __webpack_exports__<span class="token punctuation">,</span> __webpack_require__<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token string">&quot;use strict&quot;</span><span class="token punctuation">;</span>
 
   <span class="token comment">/* unused harmony export square */</span>
   <span class="token comment">/* harmony export (immutable) */</span> __webpack_exports__<span class="token punctuation">.</span>a <span class="token operator">=</span> cube<span class="token punctuation">;</span>
-  <span class="token keyword">function</span> <span class="token function">square</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">square</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 
-  <span class="token keyword">function</span> <span class="token function">cube</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">function</span> <span class="token function">cube</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> x <span class="token operator">*</span> x <span class="token operator">*</span> x<span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
@@ -111,7 +111,7 @@ export default {
 <!-- -->
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> hoistStatics <span class="token keyword">from</span> <span class="token string">&quot;hoist-non-react-statics&quot;</span><span class="token punctuation">;</span>
 
-<span class="token keyword">function</span> <span class="token function">Button</span><span class="token punctuation">(</span><span class="token parameter">_ref</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">function</span> <span class="token function">Button</span><span class="token punctuation">(</span>_ref<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
 <span class="token punctuation">}</span>
 
@@ -119,7 +119,7 @@ export default {
   <span class="token keyword">const</span> _final <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
   <span class="token keyword">for</span> <span class="token punctuation">(</span>
-    <span class="token keyword">let</span> _len <span class="token operator">=</span> arguments<span class="token punctuation">.</span>length<span class="token punctuation">,</span> objs <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token punctuation">{</span> length<span class="token operator">:</span> _len <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> _key <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> _len <span class="token operator">=</span> arguments<span class="token punctuation">.</span>length<span class="token punctuation">,</span> objs <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span><span class="token punctuation">{</span> length<span class="token punctuation">:</span> _len <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> _key <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     _key <span class="token operator">&lt;</span> _len<span class="token punctuation">;</span>
     _key<span class="token operator">++</span>
   <span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -135,17 +135,17 @@ export default {
 <span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">withAppProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">addProvider</span><span class="token punctuation">(</span><span class="token parameter">WrappedComponent</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token function">addProvider</span><span class="token punctuation">(</span>WrappedComponent<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">const</span> WithProvider <span class="token operator">=</span>
       <span class="token comment">/*#__PURE__*/</span>
-      <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">_React$Component</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span>_React$Component<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token comment">// ...</span>
         <span class="token keyword">return</span> WithProvider<span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Component<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     WithProvider<span class="token punctuation">.</span>contextTypes <span class="token operator">=</span> WrappedComponent<span class="token punctuation">.</span>contextTypes
       <span class="token operator">?</span> <span class="token function">merge</span><span class="token punctuation">(</span>WrappedComponent<span class="token punctuation">.</span>contextTypes<span class="token punctuation">,</span> polarisAppProviderContextTypes<span class="token punctuation">)</span>
-      <span class="token operator">:</span> polarisAppProviderContextTypes<span class="token punctuation">;</span>
+      <span class="token punctuation">:</span> polarisAppProviderContextTypes<span class="token punctuation">;</span>
     <span class="token keyword">const</span> FinalComponent <span class="token operator">=</span> <span class="token function">hoistStatics</span><span class="token punctuation">(</span>WithProvider<span class="token punctuation">,</span> WrappedComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> FinalComponent<span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -177,14 +177,14 @@ export default {
 <span class="token keyword">export</span> <span class="token punctuation">{</span> <span class="token keyword">default</span> <span class="token keyword">as</span> ButtonGroup <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./ButtonGroup&quot;</span><span class="token punctuation">;</span>
 <span class="token comment">// ...</span></code></pre></div>
 <p><strong>package.json</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-json"><span class="token comment">// ...</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-json">// ...
 <span class="token property">&quot;sideEffects&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
   <span class="token string">&quot;**/*.css&quot;</span><span class="token punctuation">,</span>
   <span class="token string">&quot;**/*.scss&quot;</span><span class="token punctuation">,</span>
   <span class="token string">&quot;./esnext/index.js&quot;</span><span class="token punctuation">,</span>
   <span class="token string">&quot;./esnext/configure.js&quot;</span>
 <span class="token punctuation">]</span><span class="token punctuation">,</span>
-<span class="token comment">// ...</span></code></pre></div>
+// ...</code></pre></div>
 <p>For <code>import { Button } from &quot;@shopify/polaris&quot;;</code> this has the following implications:</p>
 <ul>
 <li>include it: include the module, evaluate it and continue analysing dependencies</li>
@@ -250,10 +250,10 @@ export default {
 <p><strong>dist/components/Button/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;./Button.css&quot;</span><span class="token punctuation">;</span> <span class="token comment">// This has a side effect - it applies styles when imported!</span>
 
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Button</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">Button</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// Button component implementation</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
-    type<span class="token operator">:</span> <span class="token string">&quot;button&quot;</span><span class="token punctuation">,</span>
+    type<span class="token punctuation">:</span> <span class="token string">&quot;button&quot;</span><span class="token punctuation">,</span>
     <span class="token operator">...</span>props<span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
@@ -271,9 +271,9 @@ export default {
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">&quot;./defaultTheme.css&quot;</span><span class="token punctuation">;</span> <span class="token comment">// This has a side effect!</span>
 
 <span class="token keyword">export</span> <span class="token keyword">const</span> themeColors <span class="token operator">=</span> <span class="token punctuation">{</span>
-  primary<span class="token operator">:</span> <span class="token string">&quot;#0078d7&quot;</span><span class="token punctuation">,</span>
-  secondary<span class="token operator">:</span> <span class="token string">&quot;#f3f2f1&quot;</span><span class="token punctuation">,</span>
-  danger<span class="token operator">:</span> <span class="token string">&quot;#d13438&quot;</span><span class="token punctuation">,</span>
+  primary<span class="token punctuation">:</span> <span class="token string">&quot;#0078d7&quot;</span><span class="token punctuation">,</span>
+  secondary<span class="token punctuation">:</span> <span class="token string">&quot;#f3f2f1&quot;</span><span class="token punctuation">,</span>
+  danger<span class="token punctuation">:</span> <span class="token string">&quot;#d13438&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="what-happens-when-consuming-this-package"></span>What Happens When Consuming This Package?<a href="#what-happens-when-consuming-this-package" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Now, imagine a consumer application that only wants to use the Button component:</p>
@@ -363,17 +363,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> entry: &#x27;./src/index.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line"> output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">   filename: &#x27;bundle.js&#x27;,
-</span><span class="token prefix unchanged"> </span><span class="token line">   path: path.resolve(__dirname, &#x27;dist&#x27;),
-</span><span class="token prefix unchanged"> </span><span class="token line"> },
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> mode: &#x27;development&#x27;,
-</span><span class="token prefix deleted">-</span><span class="token line"> optimization: {
-</span><span class="token prefix deleted">-</span><span class="token line">   usedExports: true,
-</span><span class="token prefix deleted">-</span><span class="token line"> }
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> mode: &#x27;production&#x27;,
-</span></span>};</code></pre></div>
+  entry: &#x27;./src/index.js&#x27;,
+  output: {
+    filename: &#x27;bundle.js&#x27;,
+    path: path.resolve(__dirname, &#x27;dist&#x27;),
+  },
+<span class="token deleted">- mode: &#x27;development&#x27;,</span>
+<span class="token deleted">- optimization: {</span>
+<span class="token deleted">-   usedExports: true,</span>
+<span class="token deleted">- }</span>
+<span class="token inserted">+ mode: &#x27;production&#x27;,</span>
+};</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Note that the <code>--optimize-minimize</code> flag can be used to enable <code>TerserPlugin</code> as well.</p></aside>
 <p>With that squared away, we can run another <code>npm run build</code> and see if anything has changed.</p>
 <p>Notice anything different about <code>dist/bundle.js</code>? The whole bundle is now minified and mangled, but, if you look carefully, you won&#x27;t see the <code>square</code> function included but will see a mangled version of the <code>cube</code> function (<code>function r(e){return e*e*e}n.a=r</code>). With minification and tree shaking, our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.</p>
@@ -411,4 +411,4 @@ export default {
 <li>Make sure you set a correct value for <a href="/configuration/devtool/#devtool" data-discover="true"><code>devtool</code></a> as some of them can&#x27;t be used in <code>production</code> mode.</li>
 </ul>
 <p>You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.</p>
-<p>If you are interested in more ways to optimize your output, please jump to the next guide for details on building for <a href="/guides/production" data-discover="true">production</a>.</p></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts" target="_blank" rel="noopener noreferrer">Debugging Optimization Bailouts</a></li><li><a href="https://github.com/webpack/webpack/issues/6074" target="_blank" rel="noopener noreferrer">Issue 6074 - Add support for more complex selectors for sideEffects</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/tree-shaking.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/hot-module-replacement/" data-discover="true">Hot Module Replacement</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/production/" data-discover="true">Production</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">19<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/simon04"><img width="45" height="45" alt="simon04" title="simon04" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/zacanger"><img width="45" height="45" alt="zacanger" title="zacanger" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/alexjoverm"><img width="45" height="45" alt="alexjoverm" title="alexjoverm" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/avant1"><img width="45" height="45" alt="avant1" title="avant1" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dmitriid"><img width="45" height="45" alt="dmitriid" title="dmitriid" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/probablyup"><img width="45" height="45" alt="probablyup" title="probablyup" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/gish"><img width="45" height="45" alt="gish" title="gish" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/lumo10"><img width="45" height="45" alt="lumo10" title="lumo10" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pnevares"><img width="45" height="45" alt="pnevares" title="pnevares" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/torifat"><img width="45" height="45" alt="torifat" title="torifat" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/rahul3v"><img width="45" height="45" alt="rahul3v" title="rahul3v" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/vansh5632"><img width="45" height="45" alt="vansh5632" title="vansh5632" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Brennvo"><img width="45" height="45" alt="Brennvo" title="Brennvo" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/ThierryRakotomanana"><img width="45" height="45" alt="ThierryRakotomanana" title="ThierryRakotomanana" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.0f09394e5495392e.js"></script></body></html>
+<p>If you are interested in more ways to optimize your output, please jump to the next guide for details on building for <a href="/guides/production" data-discover="true">production</a>.</p></div><div class="print:hidden"><h2>Further Reading</h2><ul><li><a href="https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts" target="_blank" rel="noopener noreferrer">Debugging Optimization Bailouts</a></li><li><a href="https://github.com/webpack/webpack/issues/6074" target="_blank" rel="noopener noreferrer">Issue 6074 - Add support for more complex selectors for sideEffects</a></li></ul></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/guides/tree-shaking.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/guides/hot-module-replacement/" data-discover="true">Hot Module Replacement</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/guides/production/" data-discover="true">Production</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">19<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/simon04"><img width="45" height="45" alt="simon04" title="simon04" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/zacanger"><img width="45" height="45" alt="zacanger" title="zacanger" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/alexjoverm"><img width="45" height="45" alt="alexjoverm" title="alexjoverm" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/avant1"><img width="45" height="45" alt="avant1" title="avant1" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dmitriid"><img width="45" height="45" alt="dmitriid" title="dmitriid" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/probablyup"><img width="45" height="45" alt="probablyup" title="probablyup" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/gish"><img width="45" height="45" alt="gish" title="gish" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/lumo10"><img width="45" height="45" alt="lumo10" title="lumo10" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pnevares"><img width="45" height="45" alt="pnevares" title="pnevares" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/AnayaDesign"><img width="45" height="45" alt="AnayaDesign" title="AnayaDesign" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/torifat"><img width="45" height="45" alt="torifat" title="torifat" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/rahul3v"><img width="45" height="45" alt="rahul3v" title="rahul3v" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/vansh5632"><img width="45" height="45" alt="vansh5632" title="vansh5632" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Brennvo"><img width="45" height="45" alt="Brennvo" title="Brennvo" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/ThierryRakotomanana"><img width="45" height="45" alt="ThierryRakotomanana" title="ThierryRakotomanana" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons License" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.5b1442322e791c94.js"></script></body></html>
