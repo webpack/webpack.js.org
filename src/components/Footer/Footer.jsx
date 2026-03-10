@@ -84,13 +84,9 @@ const Footer = () => (
         >
           Changelog
         </Link>
-        <Link
-          aria-label="Creative Commons Attribution 4.0 License"
-          className="footer__link footer__license"
-          to="/license"
-        >
-          <img alt="" src={CC} width={25} height={25} />
-          <img alt="" src={BY} width={25} height={25} />
+        <Link className="footer__link footer__license" to="/license">
+          <img alt="Creative Commons license" src={CC} width={25} height={25} />
+          <img alt="Attribution required icon" src={BY} width={25} height={25} />
         </Link>
       </section>
     </Container>
