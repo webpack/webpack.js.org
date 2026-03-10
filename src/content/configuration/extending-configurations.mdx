@@ -45,8 +45,12 @@ export default {
 
 ```javascript
 import path from "node:path";
-import { fileURLToPath } from "node:url";`n`nconst __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);`n`nexport default {
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
   entry: "./src/index.js",
   output: {
@@ -97,8 +101,12 @@ export default {
 
 ```javascript
 import path from "node:path";
-import { fileURLToPath } from "node:url";`n`nconst __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);`n`nexport default {
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: [
     path.resolve(__dirname, "./js.webpack.config.js"),
     path.resolve(__dirname, "./css.webpack.config.js"),
@@ -119,8 +127,12 @@ You can override configurations from the extended configuration by passing the s
 
 ```javascript
 import path from "node:path";
-import { fileURLToPath } from "node:url";`n`nconst __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);`n`nexport default {
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -132,8 +144,12 @@ const __dirname = path.dirname(__filename);`n`nexport default {
 
 ```javascript
 import path from "node:path";
-import { fileURLToPath } from "node:url";`n`nconst __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);`n`nexport default {
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
   entry: "./src/index.js",
   // overriding the output path and filename
@@ -174,7 +190,10 @@ export default {
 
 ```javascript
 import path from "node:path";
-import { fileURLToPath } from "node:url";`nimport webpack from "webpack";`n`nconst __filename = fileURLToPath(import.meta.url);
+import { fileURLToPath } from "node:url";
+import webpack from "webpack";
+
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
@@ -237,8 +256,12 @@ You can also load configuration from third-party packages by passing the package
 
 ```javascript
 import path from "node:path";
-import { fileURLToPath } from "node:url";`n`nconst __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);`n`nexport default {
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: require.resolve("webpack-config-foo"),
   entry: "./src/index.js",
   output: {
