@@ -85,7 +85,12 @@ const Footer = () => (
           Changelog
         </Link>
         <Link className="footer__link footer__license" to="/license">
-          <img alt="Creative Commons License (CC)" src={CC} width={25} height={25} />
+          <img
+            alt="Creative Commons License (CC)"
+            src={CC}
+            width={25}
+            height={25}
+          />
           <img
             alt="Creative Commons Attribution (CC BY)"
             src={BY}
