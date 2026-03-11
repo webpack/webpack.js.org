@@ -35,12 +35,7 @@ export default (env) =>
           },
         },
       },
-      minimizer: [
-        "...",
-        new CssMinimizerPlugin({
-          minify: CssMinimizerPlugin.lightningCssMinify,
-        }),
-      ],
+      minimizer: ["...", new CssMinimizerPlugin()],
     },
     plugins: [
       new InjectManifest({

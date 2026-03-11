@@ -112,20 +112,12 @@
   .footer__inner {
     border-color: #252525;
   }
-  a,
-  button.as-link {
-    color: #69a8ee;
-  }
   .page-links__gap {
     color: #999;
   }
   .sidebar-item__toggle,
   .sidebar-item--disabled .sidebar-item__toggle {
     color: #69a8ee;
-  }
-  .sidebar-item__anchor a:hover,
-  a:hover {
-    color: #82b7f6;
   }
   .site {
     background: #121212 !important;
@@ -172,5 +164,19 @@
 
   .footer p {
     color: white;
+  }
+}
+
+@layer base {
+  [data-theme="dark"] a,
+  [data-theme="dark"] button.as-link {
+    color: #69a8ee;
+  }
+}
+
+@layer base {
+  [data-theme="dark"] .sidebar-item__anchor a:hover,
+  [data-theme="dark"] a:hover {
+    color: #82b7f6;
   }
 }

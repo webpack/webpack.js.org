@@ -125,6 +125,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   ul,
   ol {
     padding-left: 30px;
+    list-style: revert;
 
     &:first-child {
       margin-top: 0;
