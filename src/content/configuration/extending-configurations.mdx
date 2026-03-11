@@ -19,7 +19,7 @@ W> **This option is not supported via the Node API**: Extends will have no effec
 **base.webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -44,7 +44,13 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
   entry: "./src/index.js",
   output: {
@@ -63,7 +69,7 @@ Configurations from the `extends` property are merged from right to left, meanin
 **js.webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -79,7 +85,7 @@ module.exports = {
 **css.webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -94,7 +100,13 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: [
     path.resolve(__dirname, "./js.webpack.config.js"),
     path.resolve(__dirname, "./css.webpack.config.js"),
@@ -114,7 +126,13 @@ You can override configurations from the extended configuration by passing the s
 **base.webpack.config.js**
 
 ```javascript
-module.exports = {
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -125,7 +143,13 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
   entry: "./src/index.js",
   // overriding the output path and filename
@@ -143,9 +167,9 @@ While primitive values (such as strings) are overridden, array fields are concat
 **base.webpack.config.js**
 
 ```javascript
-const webpack = require("webpack");
+import webpack from "webpack";
 
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -165,10 +189,14 @@ module.exports = {
 **webpack.config.js**
 
 ```javascript
-const path = require("node:path");
-const webpack = require("webpack");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import webpack from "webpack";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
 
   module: {
@@ -189,9 +217,9 @@ module.exports = {
 Instead of module being replaced the rules and plugins array got concatenated
 
 ```javascript
-const webpack = require("webpack");
+import webpack from "webpack";
 
-module.exports = {
+export default {
   module: {
     rules: [
       // From base.webpack.config.js
@@ -227,7 +255,13 @@ You can also load configuration from third-party packages by passing the package
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   extends: require.resolve("webpack-config-foo"),
   entry: "./src/index.js",
   output: {

@@ -33,7 +33,7 @@ function assetFilter(assetFilename) {
 You can override this property by passing your own function in:
 
 ```js
-module.exports = {
+export default {
   // ...
   performance: {
     assetFilter(assetFilename) {
@@ -54,7 +54,7 @@ Turns hints on/off. In addition, tells webpack to throw either an error or a war
 Given an asset is created that is over 250kb:
 
 ```js
-module.exports = {
+export default {
   // ...
   performance: {
     hints: false,
@@ -65,7 +65,7 @@ module.exports = {
 No hint warnings or errors are shown.
 
 ```js
-module.exports = {
+export default {
   // ...
   performance: {
     hints: "warning",
@@ -76,7 +76,7 @@ module.exports = {
 A warning will be displayed notifying you of a large asset. We recommend something like this for development environments.
 
 ```js
-module.exports = {
+export default {
   // ...
   performance: {
     hints: "error",
@@ -93,7 +93,7 @@ An error will be displayed notifying you of a large asset. We recommend using `h
 An asset is any emitted file from webpack. This option controls when webpack emits a performance hint based on individual asset size in bytes.
 
 ```js
-module.exports = {
+export default {
   // ...
   performance: {
     maxAssetSize: 100000,
@@ -108,7 +108,7 @@ module.exports = {
 An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size in bytes.
 
 ```js
-module.exports = {
+export default {
   // ...
   performance: {
     maxEntrypointSize: 400000,

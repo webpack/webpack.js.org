@@ -35,7 +35,7 @@ An array of rules applied by default for modules.
 See [source code](https://github.com/webpack/webpack/blob/dc4d97429b2013f7770ba785721b65cf82c2ef04/lib/config/defaults.js#L608) for details.
 
 ```js
-module.exports = {
+export default {
   module: {
     defaultRules: [
       "...", // you can use "..." to reference those rules applied by webpack by default
@@ -49,7 +49,7 @@ Starting with webpack 5.87.0, falsy values including `0`, `""`, `false`, `null` 
 {/* eslint-disable */}
 
 ```js
-module.exports = {
+export default {
   module: {
     defaultRules: [
       false &&
@@ -70,7 +70,7 @@ It's possible to configure all generators' options in one place with a `module.g
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     generator: {
       asset: {
@@ -213,7 +213,7 @@ Similar to the [`module.generator`](#modulegenerator), you can configure all par
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       asset: {
@@ -309,7 +309,7 @@ module.exports = {
 Configure options for the CSS parser.
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       css: {
@@ -330,7 +330,7 @@ This option enables the handling of `@import` at-rules in CSS files. When set to
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         css: {
@@ -369,7 +369,7 @@ This option enables or disables the handling of URLs in functions such as `url()
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         css: {
@@ -402,7 +402,7 @@ This option enables the use of ES modules named export for CSS exports. When set
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         css: {
@@ -458,7 +458,7 @@ Enable or disable renaming of `@keyframes` animation names in CSS modules.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       css: {
@@ -481,7 +481,7 @@ Enable or disable renaming of `@container` names in CSS modules.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       css: {
@@ -504,7 +504,7 @@ Enable or disable renaming of custom identifiers in CSS modules.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       css: {
@@ -527,7 +527,7 @@ Enable or disable renaming of dashed identifiers, such as CSS custom properties 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       css: {
@@ -550,7 +550,7 @@ Enable or disable renaming of `@function` names in CSS modules.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       css: {
@@ -573,7 +573,7 @@ Enable or disable renaming of grid identifiers in CSS modules.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       css: {
@@ -593,7 +593,7 @@ Configure how CSS content will be exported.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         css: {
@@ -616,7 +616,7 @@ Possible values: `'link' | 'text' | 'css-style-sheet'
 Configure options for JavaScript parser.
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       javascript: {
@@ -639,7 +639,7 @@ Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJ
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -665,7 +665,7 @@ Specify the global [fetchPriority](https://developer.mozilla.org/en-US/docs/Web/
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -685,7 +685,7 @@ Specifies global mode for dynamic import.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -705,7 +705,7 @@ Specifies global prefetch for dynamic import.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -725,7 +725,7 @@ Specifies global preload for dynamic import.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -745,7 +745,7 @@ Specifies the behavior of invalid export names in `\"import ... from ...\"` and 
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -765,7 +765,7 @@ Specifies the behavior of invalid export names in `\"import ... from ...\"`.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -785,7 +785,7 @@ Enable or disable evaluating `import.meta`.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -805,7 +805,7 @@ Enable/disable evaluating [`import.meta.webpackContext`](/api/module-variables/#
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -825,7 +825,7 @@ Set the module to `'strict'` or `'non-strict'` mode. This can affect the module'
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -845,7 +845,7 @@ Specifies the behavior of invalid export names in `\"export ... from ...\"`. Thi
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -864,7 +864,7 @@ Enable parsing of `new URL()` syntax.
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -904,7 +904,7 @@ Return `ast`, `comments`, and `semicolons` to ensure webpack’s AST analysis wo
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     module: {
       parser: {
         javascript: {
@@ -937,7 +937,7 @@ Return `ast`, `comments`, and `semicolons` to ensure webpack’s AST analysis wo
 Configure options for json parser.
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       json: {
@@ -957,7 +957,7 @@ The depth of json dependency flagged as `exportInfo`. By default, it is set to `
 - Example:
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       json: {
@@ -987,7 +987,7 @@ Allow named exports for json of object type.
 - Example:
 
 ```js
-module.exports = {
+export default {
   module: {
     parser: {
       json: {
@@ -1010,9 +1010,9 @@ Function to parser content and return JSON.
 - Example:
 
 ```js
-const json5 = require("json5");
+import json5 from "json5";
 
-module.exports = {
+export default {
   module: {
     parser: {
       json: {
@@ -1037,7 +1037,7 @@ T> You may need to use `[\\/]` in regex to match `\` on Windows and `/` on Mac/L
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     noParse: /jquery|lodash|src[\\/]vendor[\\/]somelib/,
@@ -1046,7 +1046,7 @@ module.exports = {
 ```
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     noParse: (content) =>
@@ -1067,7 +1067,7 @@ Cache the resolution of module requests. There are a couple of defaults for `mod
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     unsafeCache: false,
@@ -1141,7 +1141,7 @@ A [`Condition`](#condition) that allows you to match the import assertion of a d
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1172,7 +1172,7 @@ A [`Condition`](#condition) that allows you to match the child compiler name.
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   name: "compiler",
   module: {
@@ -1257,7 +1257,7 @@ Allows to filter/match by layer of the issuer.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1278,7 +1278,7 @@ Specify the layer in which the module should be placed in. A group of modules co
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1300,7 +1300,7 @@ Extracts existing source map data from files (from their `//# sourceMappingURL` 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1330,7 +1330,7 @@ You can match config rules to data uri with `mimetype`.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1352,7 +1352,7 @@ An array of [`Rules`](#rule) from which only the first matching Rule is used whe
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1396,7 +1396,13 @@ However, parser plugins may accept more than only a boolean. For example, the in
 **Examples** (parser options by the default plugins):
 
 ```js
-module.exports = {
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   // ...
   module: {
     rules: [
@@ -1439,7 +1445,7 @@ If a module source size is less than `maxSize` then module will be injected into
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1461,7 +1467,7 @@ When a function is given, returning `true` tells webpack to inject the module in
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1493,7 +1499,7 @@ When `Rule.generator.dataUrl` is used as an object, you can configure two proper
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1514,7 +1520,7 @@ module.exports = {
 When used as a function, it executes for every module and must return a data URI string.
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1545,7 +1551,7 @@ Opt out of writing assets from [Asset Modules](/guides/asset-modules/), you migh
 - Example:
 
   ```js
-  module.exports = {
+  export default {
     // …
     module: {
       rules: [
@@ -1568,7 +1574,7 @@ The same as [`output.assetModuleFilename`](/configuration/output/#outputassetmod
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   output: {
     assetModuleFilename: "images/[hash][ext][query]",
@@ -1599,7 +1605,7 @@ Customize `publicPath` for specific Asset Modules.
 - Available: <Badge text='5.28.0+' />
 
 ```js
-module.exports = {
+export default {
   // ...
   output: {
     publicPath: "static/",
@@ -1626,7 +1632,7 @@ Emit the asset in the specified folder relative to 'output.path'. This should on
 - Available: <Badge text='5.67.0+' />
 
 ```js
-module.exports = {
+export default {
   // ...
   output: {
     publicPath: "static/",
@@ -1657,7 +1663,7 @@ A [`Condition`](#condition) matched with the resource query. This option is used
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1680,9 +1686,9 @@ If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a func
 **webpack.config.js**
 
 ```javascript
-const toml = require("toml");
+import toml from "toml";
 
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1714,7 +1720,7 @@ Match the used schema, e.g., `data`, `http`.
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   module: {
     rules: [
       {
@@ -1747,7 +1753,7 @@ Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1771,7 +1777,7 @@ module.exports = {
 See use case of `css/auto` module type [here](https://github.com/webpack/webpack/issues/16572). Make sure to enable [`experiments.css`](/configuration/experiments/#experimentscss) to use `css/auto`.
 
 ```js
-module.exports = {
+export default {
   target: "web",
   mode: "development",
   experiments: {
@@ -1806,7 +1812,7 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1849,7 +1855,7 @@ The same shortcut as an array can be used for the return value (i.e. `use: [ 'st
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1911,7 +1917,7 @@ export default "overridden footer";
 **webpack.js.org**
 
 ```javascript
-module.exports = {
+export default {
   resolve: {
     alias: {
       footer: "./footer/default.js",
@@ -1925,7 +1931,7 @@ When creating a bundle with this configuration, `console.log(footer)` will outpu
 **webpack.js.org**
 
 ```javascript
-module.exports = {
+export default {
   resolve: {
     alias: {
       footer: "./footer/default.js",
@@ -1956,7 +1962,7 @@ When enabled, you should provide the file extension when `import`ing a module in
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -1982,7 +1988,7 @@ A [`Condition`](#condition) that allows you to match the imports based on specif
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -2023,9 +2029,13 @@ Conditions can be one of these:
 **Example:**
 
 ```javascript
-const path = require("node:path");
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   // ...
   module: {
     rules: [
@@ -2063,7 +2073,7 @@ It also breaks if the options object cannot be stringified (i.e. circular JSON).
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -2092,7 +2102,7 @@ The `info` object parameter has the following fields:
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -2130,7 +2140,7 @@ Here are the available options with their [defaults](https://github.com/webpack/
 **webpack.config.js**
 
 ```javascript
-module.exports = {
+export default {
   // ...
   module: {
     exprContextCritical: true,

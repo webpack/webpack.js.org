@@ -171,6 +171,64 @@ There are 5 ways to use TypeScript in `webpack.config.ts`:
    NODE_OPTIONS='--no-experimental-strip-types --import tsx' webpack --disable-interpret -c ./webpack.config.ts
    ```
 
+## TypeScript Path Aliases
+
+<Badge text="5.105.0+" />
+
+If you use [`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig#paths) or `compilerOptions.baseUrl` in your `tsconfig.json` to create import aliases, starting with webpack 5.105, webpack can read these aliases directly via [`resolve.tsconfig`](/configuration/resolve/#resolvetsconfig). This replaces [`tsconfig-paths-webpack-plugin`](https://www.npmjs.com/package/tsconfig-paths-webpack-plugin), which should no longer be used.
+
+`resolve.tsconfig` accepts `boolean | string | object`:
+
+**webpack.config.js**
+
+```js
+export default {
+  resolve: {
+    tsconfig: true, // automatically find tsconfig.json
+  },
+};
+```
+
+Pass a string to point at a specific file (useful in monorepos):
+
+```js
+export default {
+  resolve: {
+    tsconfig: "./tsconfig.app.json",
+  },
+};
+```
+
+Pass an object to also resolve [TypeScript project references](https://www.typescriptlang.org/docs/handbook/project-references.html):
+
+```js
+export default {
+  resolve: {
+    tsconfig: {
+      configFile: "./tsconfig.json",
+      references: "auto", // inherit references from tsconfig, or pass an array of paths
+    },
+  },
+};
+```
+
+**tsconfig.json**
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
+```
+
+With the above, `@/components/Button` resolves to `src/components/Button` without any additional plugins or duplicating aliases in `resolve.alias`.
+
+W> `resolve.tsconfig` only handles module resolution — it does not transpile TypeScript. You still need `ts-loader`, `babel-loader` with `@babel/preset-typescript`, or another transpilation step.
+
 ## Loader
 
 [`ts-loader`](https://github.com/TypeStrong/ts-loader)
