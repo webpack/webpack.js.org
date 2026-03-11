@@ -3669,12 +3669,22 @@ index.bundle.js     548 kB       1  <span class="token punctuation">[</span>emit
   document.body.appendChild(component());</code></pre></div>
 <h3><span id="using-importdefer-with-context-modules"></span>Using import.defer() with Context Modules<a href="#using-importdefer-with-context-modules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <span class="badge">5.105.0+</span>
-<p><code>import.defer()</code> now supports context modules (dynamic import paths). This is useful when you need to defer evaluation of modules loaded through dynamic expressions.</p>
+<p><code>import.defer()</code> also works with context modules - the import path can be a dynamic expression. Webpack includes all matching modules in the module graph, but evaluation of the selected module is deferred until a property on the namespace object is first accessed.</p>
+<p>The following example demonstrates deferred evaluation of locale modules using a dynamic context path:</p>
+<p><strong>src/locales/en.js</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">const</span> greeting <span class="token operator">=</span> <span class="token string">&quot;Hello&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<p><strong>src/locales/fr.js</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">const</span> greeting <span class="token operator">=</span> <span class="token string">&quot;Bonjour&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>src/index.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> _ <span class="token keyword">from</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-text">const language = navigator.language.split(&quot;-&quot;)[0]; // &quot;en&quot;, &quot;fr&quot;, etc.
+const locale = import.defer(&quot;./locales/&quot; + language + &quot;.js&quot;);
 
-<span class="token comment">// const modules = import.defer(&quot;./locale/&quot; + language + &quot;.js&quot;);</span></code></pre></div>
-<p>In this example, the locale module is loaded and parsed, but its evaluation is deferred until you access the namespace object. This allows you to load multiple locale files without executing them immediately.</p>
+document.getElementById(&quot;btn&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+  // The locale module is evaluated here, on first property access.
+  document.getElementById(&quot;output&quot;).textContent = locale.greeting;
+});
+</code></pre></div>
+<p>Webpack prepares all matching locale modules so they are ready for execution, but the selected module is only evaluated when <code>locale.greeting</code> is first accessed. This allows you to load multiple locale files without executing them immediately.</p>
 <h2><span id="frameworks"></span>Frameworks<a href="#frameworks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:</p>
 <ul>
