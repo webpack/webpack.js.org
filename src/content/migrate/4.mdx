@@ -39,7 +39,7 @@ Add the new [`mode`](/configuration/mode/) option to your configuration. Set it 
 **webpack.config.js**
 
 ```diff
-module.exports = {
+export default {
   // ...
 +  mode: 'production',
 }
@@ -54,7 +54,7 @@ These plugins can be removed from configuration as they are default in productio
 **webpack.config.js**
 
 ```diff
-module.exports = {
+export default {
   // ...
   plugins: [
 -    new NoEmitOnErrorsPlugin(),
@@ -70,7 +70,7 @@ These plugins are default in development mode
 **webpack.config.js**
 
 ```diff
-module.exports = {
+export default {
   // ...
   plugins: [
 -    new NamedModulesPlugin()
@@ -83,7 +83,7 @@ These plugins were deprecated and are now removed:
 **webpack.config.js**
 
 ```diff
-module.exports = {
+export default {
   // ...
   plugins: [
 -    new NoErrorsPlugin(),
@@ -131,7 +131,7 @@ When using a custom loader to transform `.json` files you now need to change the
 **webpack.config.js**
 
 ```diff
-module.exports = {
+export default {
   // ...
   rules: [
     {
@@ -149,7 +149,7 @@ When still using the `json-loader`, it can be removed:
 **webpack.config.js**
 
 ```diff
-module.exports = {
+export default {
   // ...
   rules: [
     {
