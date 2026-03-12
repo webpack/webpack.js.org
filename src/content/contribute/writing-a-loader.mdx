@@ -346,7 +346,7 @@ npm install --save-dev webpack memfs
 
 ```js
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { Volume, createFsFromVolume } from "memfs";
 import webpack from "webpack";
 
 const __dirname = import.meta.dirname;
