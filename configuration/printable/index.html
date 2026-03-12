@@ -2761,16 +2761,26 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </li>
 </ul>
 <h4><span id="moduleparserjavascriptimportmeta"></span>module.parser.javascript.importMeta<a href="#moduleparserjavascriptimportmeta" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
-<p>Enable or disable evaluating <code>import.meta</code>.</p>
+<p>Controls how webpack evaluates <code>import.meta</code> expressions during bundling.</p>
+<ul>
+<li>Type: <code>boolean | &#x27;preserve-unknown&#x27;</code></li>
+<li>Default: <code>true</code></li>
+<li>Available: 5.68.0+</li>
+</ul>
+<p>Accepted values:</p>
 <ul>
 <li>
-<p>Type: <code>boolean = true</code></p>
+<p><code>true</code> - webpack evaluates known <code>import.meta</code> properties (e.g. <code>import.meta.url</code>, <code>import.meta.webpackHot</code>); behavior of unknown properties depends on other configuration (e.g. <code>output.module</code>).</p>
 </li>
 <li>
-<p>Available: 5.68.0+</p>
+<p><code>false</code> - disables all <code>import.meta</code> evaluation; webpack leaves expressions as-is.</p>
 </li>
 <li>
-<p>Example:</p>
+<p><code>&#x27;preserve-unknown&#x27;</code> <span class="badge">5.105.0+</span> - evaluates known properties as usual but <strong>preserves</strong> any non-standard properties verbatim in the output instead of removing them.</p>
+<aside class="warning"><p class="warning__prefix">warning</p><p>When <code>output.module</code> is <code>true</code>, unknown <code>import.meta</code> properties are preserved automatically without this option.</p></aside>
+</li>
+<li>
+<p>Example - disable <code>import.meta</code> evaluation entirely:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
     parser<span class="token punctuation">:</span> <span class="token punctuation">{</span>
@@ -2780,6 +2790,24 @@ console<span class="token punctuation">.</span><span class="token function">log<
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+</li>
+<li>
+<p>Example - preserve custom <code>import.meta</code> properties without enabling <code>output.module</code>:</p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    parser<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      javascript<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        importMeta<span class="token punctuation">:</span> <span class="token string">&quot;preserve-unknown&quot;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>With this configuration, custom properties on <code>import.meta</code> set by the build tool or runtime are preserved in the generated output:</p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// import.meta.customProp is set externally (e.g. by a build tool or runtime)</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>customProp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>customProp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 </li>
 </ul>
 <h4><span id="moduleparserjavascriptimportmetacontext"></span>module.parser.javascript.importMetaContext<a href="#moduleparserjavascriptimportmetacontext" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
