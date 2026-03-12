@@ -367,21 +367,22 @@ Webpack applies configuration defaults after plugins defaults are applied. This 
 
 ### Example: AssetLoggerPlugin
 
-The following example shows a minimal Webpack plugin that logs all generated assets during compilation.
+The following example shows a minimal Webpack plugin that logs all generated assets using Webpack’s logger interface.
 
 ```js
 class AssetLoggerPlugin {
   apply(compiler) {
     compiler.hooks.thisCompilation.tap("AssetLoggerPlugin", (compilation) => {
+      const logger = compilation.getLogger("AssetLoggerPlugin");
       compilation.hooks.processAssets.tap(
         {
           name: "AssetLoggerPlugin",
           stage: compilation.constructor.PROCESS_ASSETS_STAGE_SUMMARIZE,
         },
         (assets) => {
-          console.log("Generated assets:");
+          logger.info("Generated assets:");
           for (const assetName of Object.keys(assets)) {
-            console.log(assetName);
+            logger.info(assetName);
           }
         },
       );
