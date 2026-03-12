@@ -369,7 +369,7 @@ Webpack applies configuration defaults after plugins defaults are applied. This 
 
 The following example shows a minimal Webpack plugin that logs all generated assets during compilation.
 
-```javascript
+```js
 class AssetLoggerPlugin {
   apply(compiler) {
     compiler.hooks.emit.tap("AssetLoggerPlugin", (compilation) => {
