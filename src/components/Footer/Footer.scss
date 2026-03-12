@@ -1,3 +1,5 @@
+@use "../../styles/partials/vars" as *;
+@use "sass:color";
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/functions" as *;
 
@@ -102,6 +104,9 @@
 }
 
 .footer__top {
+  a {
+    color: $text-color-highlight;
+  }
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
