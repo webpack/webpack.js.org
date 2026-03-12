@@ -8,7 +8,6 @@ updates:
     labels:
       - dependencies
     versioning-strategy: widen
-    ignore:
     groups:
       dependencies:
         patterns:
