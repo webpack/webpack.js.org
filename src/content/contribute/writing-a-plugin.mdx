@@ -380,10 +380,10 @@ class AssetLoggerPlugin {
         },
         (assets) => {
           console.log("Generated assets:");
-          Object.keys(assets).forEach((assetName) => {
+          for (const assetName of Object.keys(assets)) {
             console.log(assetName);
-          });
-        }
+          }
+        },
       );
     });
   }
