@@ -372,11 +372,19 @@ The following example shows a minimal Webpack plugin that logs all generated ass
 ```js
 class AssetLoggerPlugin {
   apply(compiler) {
-    compiler.hooks.emit.tap("AssetLoggerPlugin", (compilation) => {
-      console.log("Generated assets:");
-      for (const assetName of Object.keys(compilation.assets)) {
-        console.log(assetName);
-      }
+    compiler.hooks.thisCompilation.tap("AssetLoggerPlugin", (compilation) => {
+      compilation.hooks.processAssets.tap(
+        {
+          name: "AssetLoggerPlugin",
+          stage: compilation.constructor.PROCESS_ASSETS_STAGE_SUMMARIZE,
+        },
+        (assets) => {
+          console.log("Generated assets:");
+          Object.keys(assets).forEach((assetName) => {
+            console.log(assetName);
+          });
+        }
+      );
     });
   }
 }
