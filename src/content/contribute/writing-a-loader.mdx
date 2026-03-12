@@ -230,7 +230,9 @@ T> If the language only accepts relative urls (e.g. `url(file)` always refers to
 
 ### Common Code
 
-Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and `import` it as a shared module:
+- Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and `import` (or `require`) it as a shared module:
+
+W> While CommonJS syntax (`require`) is completely supported, we highly recommend using ECMAScript Modules (`import`) for new loaders.
 
 **src/loader-runtime.js**
 
