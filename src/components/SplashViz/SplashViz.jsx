@@ -26,7 +26,9 @@ export default class SplashViz extends Component {
         </h1>
         <div
           className="splash-viz__modules"
-          dangerouslySetInnerHTML={{ __html: HomeSVG.body }}
+          dangerouslySetInnerHTML={{
+            __html: HomeSVG?.body || "<!-- SVG not available -->",
+          }}
         ></div>
         <Cube
           className="splash-viz__cube"
