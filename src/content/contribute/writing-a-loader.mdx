@@ -52,10 +52,8 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 
 ```js
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = import.meta.dirname;
 
 export default {
   // ...
@@ -347,11 +345,9 @@ npm install --save-dev webpack memfs
 ```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { Volume, createFsFromVolume } from "memfs";
 import webpack from "webpack";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = import.meta.dirname;
 
 export default (fixture, options = {}) => {
   const compiler = webpack({
