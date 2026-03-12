@@ -9,7 +9,6 @@ updates:
       - dependencies
     versioning-strategy: widen
     ignore:
-      - dependency-name: "tailwindcss"
     groups:
       dependencies:
         patterns:
