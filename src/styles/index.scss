@@ -2,7 +2,6 @@
 @use "partials/vars" as *;
 @use "partials/functions" as *;
 @use "partials/mixins" as *;
-@use "./reset";
 @use "dark";
 
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@600&display=swap");
@@ -32,36 +31,38 @@ body {
 [aria-hidden="true"]:hover .header-link {
   visibility: visible;
 }
-a,
-button.as-link {
-  color: $text-color-highlight;
-  text-decoration: none;
-  transition: color 250ms;
+@layer base {
+  a,
+  button.as-link {
+    color: $text-color-highlight;
+    text-decoration: none;
+    transition: color 250ms;
 
-  &.icon-link {
-    display: inline-block;
-    font-size: 0.7em;
-    margin-left: 16px;
-    transform: rotate(-45deg);
+    &.icon-link {
+      display: inline-block;
+      font-size: 0.7em;
+      margin-left: 16px;
+      transform: rotate(-45deg);
 
-    color: color.adjust(getColor(dusty-grey), $lightness: 10%);
+      color: color.adjust(getColor(dusty-grey), $lightness: 10%);
+      &:hover {
+        color: $text-color-highlight;
+      }
+    }
+
     &:hover {
-      color: $text-color-highlight;
+      color: color.adjust(getColor(denim), $lightness: -5%);
     }
   }
 
-  &:hover {
-    color: color.adjust(getColor(denim), $lightness: -5%);
+  ::selection {
+    background: color.adjust(getColor(malibu), $alpha: -0.65);
   }
-}
 
-::selection {
-  background: color.adjust(getColor(malibu), $alpha: -0.65);
-}
-
-.language-diff {
-  .token.prefix.inserted,
-  .token.prefix.deleted {
-    user-select: none;
+  .language-diff {
+    .token.prefix.inserted,
+    .token.prefix.deleted {
+      user-select: none;
+    }
   }
 }

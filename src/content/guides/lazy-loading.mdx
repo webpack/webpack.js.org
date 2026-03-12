@@ -223,17 +223,35 @@ This is similar to the CommonJS style of lazy loading:
 
 <Badge text="5.105.0+" />
 
-`import.defer()` now supports context modules (dynamic import paths). This is useful when you need to defer evaluation of modules loaded through dynamic expressions.
+`import.defer()` also works with context modules - the import path can be a dynamic expression. Webpack includes all matching modules in the module graph, but evaluation of the selected module is deferred until a property on the namespace object is first accessed.
+
+The following example demonstrates deferred evaluation of locale modules using a dynamic context path:
+
+**src/locales/en.js**
+
+```js
+export const greeting = "Hello";
+```
+
+**src/locales/fr.js**
+
+```js
+export const greeting = "Bonjour";
+```
 
 **src/index.js**
 
-```js
-import _ from "lodash";
+```text
+const language = navigator.language.split("-")[0]; // "en", "fr", etc.
+const locale = import.defer("./locales/" + language + ".js");
 
-// const modules = import.defer("./locale/" + language + ".js");
+document.getElementById("btn").addEventListener("click", () => {
+  // The locale module is evaluated here, on first property access.
+  document.getElementById("output").textContent = locale.greeting;
+});
 ```
 
-In this example, the locale module is loaded and parsed, but its evaluation is deferred until you access the namespace object. This allows you to load multiple locale files without executing them immediately.
+Webpack prepares all matching locale modules so they are ready for execution, but the selected module is only evaluated when `locale.greeting` is first accessed. This allows you to load multiple locale files without executing them immediately.
 
 ## Frameworks
 

@@ -1,3 +1,5 @@
+@use "../../styles/partials/vars" as *;
+@use "sass:color";
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/functions" as *;
 
@@ -63,6 +65,7 @@
 
   img {
     width: auto;
+    display: inline-block;
     height: 100%;
   }
 }
@@ -94,12 +97,16 @@
 
   img {
     width: auto;
+    display: inline-block;
     height: 100%;
     margin-left: 1rem;
   }
 }
 
 .footer__top {
+  a {
+    color: $text-color-highlight;
+  }
   max-width: 900px;
   margin: 0 auto;
   text-align: center;

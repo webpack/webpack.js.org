@@ -1,23 +1,52 @@
-@import "tailwindcss/base";
-/* @import "tailwindcss/components"; */
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+@layer base {
+  @import "../styles/reset.css";
+}
+
+@theme {
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --text-14: 14px;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-transparent: transparent;
+  --color-blue-200: #8dd6f9;
+  --color-blue-400: #1d78c1;
+  --color-blue-600: #465e69;
+  --color-blue-800: #2b3a42;
+  --color-gray-100: #f2f2f2;
+  --color-gray-200: #dedede;
+  --color-gray-300: #999;
+  --color-gray-500: #666;
+  --color-gray-600: #535353;
+  --color-gray-700: #333;
+  --color-gray-800: #222;
+  --color-gray-900: #101619;
+  --spacing-5: 5px;
+  --spacing-10: 10px;
+  --spacing-20: 20px;
+  --grid-template-columns-contributors: repeat(auto-fit, 36px);
+}
+
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@variant hover (&:hover);
 
 /* doc search */
 :root {
   --docsearch-primary-color: #1d78c1 !important;
 }
 .DocSearch-Button {
-  @apply bg-transparent lg:bg-gray-500 transition duration-200 lg:rounded-full !important;
+  @apply bg-transparent! lg:bg-gray-500! transition! duration-200! lg:rounded-full!;
 }
 .DocSearch-Button-Placeholder {
-  @apply hidden lg:font-light lg:text-sm lg:block lg:text-gray-200 lg:dark:text-gray-300 transition duration-200 !important;
+  @apply hidden! lg:font-light! lg:text-sm! lg:block! lg:text-gray-200! lg:dark:text-gray-300! transition! duration-200!;
 }
 .DocSearch-Button:hover .DocSearch-Button-Placeholder {
-  @apply lg:text-gray-100 !important;
+  @apply lg:text-gray-100!;
 }
 .DocSearch-Button-Keys {
-  @apply hidden lg:flex !important;
+  @apply hidden! lg:flex!;
 }
 .DocSearch-Button .DocSearch-Search-Icon {
-  @apply text-white lg:text-gray-100 !important;
+  @apply text-white! lg:text-gray-100!;
 }
