@@ -213,23 +213,33 @@ export default {
 };
 ```
 
-## output.chunkLoadingGlobal
+### output.chunkLoadingGlobal
 
 `string = 'webpackChunkwebpack'`
 
-The global variable is used by webpack for loading chunks.
+The global variable used by webpack for loading chunks asynchronously (e.g. via code splitting and dynamic `import()`).
+
+In webpack 4, this was called `output.jsonpFunction`.
+
+**Why does this matter?**
+
+When multiple independent webpack builds are loaded on the same page, they all default to the same global variable name. This causes conflicts and can produce errors like:
+```
+TypeError: webpack_modules[moduleId] is not a function
+```
+
+To avoid this, assign a unique `chunkLoadingGlobal` to each build:
 
 **webpack.config.js**
-
-```javascript
+```js
 export default {
-  // ...
   output: {
-    // ...
-    chunkLoadingGlobal: "myCustomFunc",
+    chunkLoadingGlobal: 'myAppWebpackChunks',
   },
 };
 ```
+
+T> If you have multiple entry points within a **single** webpack config, they already share the same runtime — no conflict will occur. You only need a unique `chunkLoadingGlobal` when running completely **separate** webpack instances on the same page.
 
 ## output.chunkLoading
 
