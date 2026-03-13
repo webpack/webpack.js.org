@@ -26,6 +26,11 @@ A plugin for webpack consists of:
 - Manipulates webpack internal instance specific data.
 - Invokes webpack provided callback after functionality is complete.
 
+> **Note:** Some examples in this guide use the `emit` hook for simplicity.
+> In modern Webpack plugin development, asset processing is often handled
+> using `compilation.hooks.processAssets`, which provides more granular
+> control over asset processing stages.
+
 ```javascript
 // A JavaScript class.
 class MyExampleWebpackPlugin {
