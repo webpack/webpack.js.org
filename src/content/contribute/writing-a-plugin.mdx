@@ -32,22 +32,25 @@ class MyExampleWebpackPlugin {
   // Define `apply` as its prototype method which is supplied with compiler as its argument
   apply(compiler) {
     // Hook into the compilation
-    compiler.hooks.thisCompilation.tap("MyExampleWebpackPlugin", (compilation) => {
-      // Specify the asset processing hook
-      compilation.hooks.processAssets.tap(
-        {
-          name: "MyExampleWebpackPlugin",
-          stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
-        },
-        (assets) => {
-          console.log("This is an example plugin!");
-          console.log(
-            "Here’s the `compilation` object which represents a single build of assets:",
-            compilation
-          );
-        }
-      );
-    });
+    compiler.hooks.thisCompilation.tap(
+      "MyExampleWebpackPlugin",
+      (compilation) => {
+        // Specify the asset processing hook
+        compilation.hooks.processAssets.tap(
+          {
+            name: "MyExampleWebpackPlugin",
+            stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+          },
+          (assets) => {
+            console.log("This is an example plugin!");
+            console.log(
+              "Here’s the `compilation` object which represents a single build of assets:",
+              compilation,
+            );
+          },
+        );
+      },
+    );
   }
 }
 ```
