@@ -66,6 +66,7 @@ export default function Page(props) {
             const element = document.getElementById(hash.slice(1));
             if (element) {
               element.scrollIntoView();
+              observer.disconnect();
             }
           });
           observer.observe(target, {
