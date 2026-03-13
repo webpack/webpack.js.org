@@ -100,13 +100,14 @@ export default function CodeBlockWithCopy({ children }) {
     scheduleResetStatus();
   };
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       if (resetStatusTimeoutRef.current) {
         clearTimeout(resetStatusTimeoutRef.current);
       }
-    };
-  }, []);
+    },
+    [],
+  );
 
   return (
     <div className="code-block-wrapper">
