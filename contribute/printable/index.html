@@ -1011,20 +1011,24 @@ any proposed change, a TSC vote in favor of the change is required.</p>
 <span class="token keyword">class</span> <span class="token class-name">MyExampleWebpackPlugin</span> <span class="token punctuation">{</span>
   <span class="token comment">// Define `apply` as its prototype method which is supplied with compiler as its argument</span>
   <span class="token function">apply</span><span class="token punctuation">(</span>compiler<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment">// Specify the event hook to attach to</span>
-    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span>
+    <span class="token comment">// Hook into the compilation</span>
+    compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>thisCompilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>
       <span class="token string">&quot;MyExampleWebpackPlugin&quot;</span><span class="token punctuation">,</span>
-      <span class="token punctuation">(</span>compilation<span class="token punctuation">,</span> callback<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;This is an example plugin!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>
-          <span class="token string">&quot;Here’s the `compilation` object which represents a single build of assets:&quot;</span><span class="token punctuation">,</span>
-          compilation<span class="token punctuation">,</span>
+      <span class="token punctuation">(</span>compilation<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Specify the asset processing hook</span>
+        compilation<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>processAssets<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>
+          <span class="token punctuation">{</span>
+            name<span class="token punctuation">:</span> <span class="token string">&quot;MyExampleWebpackPlugin&quot;</span><span class="token punctuation">,</span>
+            stage<span class="token punctuation">:</span> compiler<span class="token punctuation">.</span>webpack<span class="token punctuation">.</span>Compilation<span class="token punctuation">.</span><span class="token constant">PROCESS_ASSETS_STAGE_ADDITIONS</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">(</span>assets<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;This is an example plugin!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>
+              <span class="token string">&quot;Here’s the `compilation` object which represents a single build of assets:&quot;</span><span class="token punctuation">,</span>
+              compilation<span class="token punctuation">,</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token comment">// Manipulate the build using the plugin API provided by webpack</span>
-        compilation<span class="token punctuation">.</span><span class="token function">addModule</span><span class="token punctuation">(</span><span class="token comment">/* ... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
