@@ -137,38 +137,34 @@ T> To make imports do this by default and keep `import _ from 'lodash';` syntax 
 
 ## Ways to Use TypeScript in `webpack.config.ts`
 
-There are 5 ways to use TypeScript in `webpack.config.ts`:
+There are 3 ways to use TypeScript in `webpack.config.ts`:
 
-1. **Using webpack with TypeScript config:**
+1. **Using webpack with built-in Node.js type stripping feature (recommended):**
 
    ```bash
    webpack -c ./webpack.config.ts
    ```
 
-   (Not all things are supported due to limitations of `rechoir` and `interpret`.)
+   Will attempt to load the configuration using Node.js's built-in [type-stripping](https://nodejs.org/api/typescript.html#type-stripping), and then attempt to load the configuration file using `interpret` and `rechoir` (in this case you need to install `tsx` or `ts-node` or other tools).
 
-2. **Using custom `--import` for Node.js:**
+2. **Using custom `--import`/`--require` for Node.js:**
 
    ```bash
-   NODE_OPTIONS='--import tsx'  webpack --disable-interpret -c ./webpack.config.ts
+   NODE_OPTIONS='--import=tsx --no-experimental-strip-types'  webpack -c ./webpack.config.ts
    ```
 
-3. **Using built-in TypeScript module for Node.js v22.7.0 ≥ YOUR NODE.JS VERSION < v23.6.0:**
-
    ```bash
-   NODE_OPTIONS='--experimental-strip-types' webpack --disable-interpret -c ./webpack.config.ts
+   NODE_OPTIONS='--require=ts-node/register --no-experimental-strip-types'  webpack -c ./webpack.config.ts
    ```
 
-4. **Using built-in TypeScript module for Node.js ≥ v22.6.0:**
+   > The `--no-experimental-strip-types` flag is required starting with Node.js version 22.7.0.
+
+3. **Using built-in Node.js transform types feature for Node.js ≥ v22.7.0:**
+
+  To enable the transformation of non erasable TypeScript syntax, which requires JavaScript code generation, such as enum declarations, parameter properties.
 
    ```bash
-   webpack --disable-interpret -c ./webpack.config.ts
-   ```
-
-5. **Using a tsx for Node.js ≥ v22.6.0:**
-
-   ```bash
-   NODE_OPTIONS='--no-experimental-strip-types --import tsx' webpack --disable-interpret -c ./webpack.config.ts
+   NODE_OPTIONS='--experimental-transform-types' webpack --disable-interpret -c ./webpack.config.ts
    ```
 
 ## TypeScript Path Aliases

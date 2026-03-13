@@ -148,7 +148,6 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
       .then(async (response) => {
         if (response.headers.get("content-type").includes("json")) {
           const json = await response.json();
-          console.log("json", json);
           if (json.error) {
             // when rate limit exceeded, api won't return headers data like x-ratelimit-limit, etc.
             remaining = 0;
