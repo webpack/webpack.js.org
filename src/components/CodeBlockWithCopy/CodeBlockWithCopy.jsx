@@ -25,7 +25,12 @@ export default function CodeBlockWithCopy({ children }) {
       element.remove();
     }
 
-    // Strip leading '+' from inserted lines
+    // Remove diff prefix tokens ('+', '-', ' ') — Prism renders these as separate spans
+    for (const element of clonedCodeElement.querySelectorAll(".token.prefix")) {
+      element.remove();
+    }
+
+    // Fallback: if no .token.prefix spans, strip leading '+' directly from inserted spans
     for (const element of clonedCodeElement.querySelectorAll(
       ".token.inserted",
     )) {
