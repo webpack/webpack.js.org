@@ -26,32 +26,28 @@ A plugin for webpack consists of:
 - Manipulates webpack internal instance specific data.
 - Invokes webpack provided callback after functionality is complete.
 
-> **Note:** Some examples in this guide use the `emit` hook for simplicity.
-> In modern Webpack plugin development, asset processing is often handled
-> using `compilation.hooks.processAssets`, which provides more granular
-> control over asset processing stages.
-
 ```javascript
 // A JavaScript class.
 class MyExampleWebpackPlugin {
   // Define `apply` as its prototype method which is supplied with compiler as its argument
   apply(compiler) {
-    // Specify the event hook to attach to
-    compiler.hooks.emit.tapAsync(
-      "MyExampleWebpackPlugin",
-      (compilation, callback) => {
-        console.log("This is an example plugin!");
-        console.log(
-          "Here’s the `compilation` object which represents a single build of assets:",
-          compilation,
-        );
-
-        // Manipulate the build using the plugin API provided by webpack
-        compilation.addModule(/* ... */);
-
-        callback();
-      },
-    );
+    // Hook into the compilation
+    compiler.hooks.thisCompilation.tap("MyExampleWebpackPlugin", (compilation) => {
+      // Specify the asset processing hook
+      compilation.hooks.processAssets.tap(
+        {
+          name: "MyExampleWebpackPlugin",
+          stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+        },
+        (assets) => {
+          console.log("This is an example plugin!");
+          console.log(
+            "Here’s the `compilation` object which represents a single build of assets:",
+            compilation
+          );
+        }
+      );
+    });
   }
 }
 ```
