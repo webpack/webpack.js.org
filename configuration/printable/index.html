@@ -9127,21 +9127,64 @@ As it happens, the AMD support in webpack ignores the defined name anyways.</p>
 <h2><span id="name"></span>name<a href="#name" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>string</code></p>
 <p>Name of the configuration. Used when loading multiple configurations.</p>
+<p>This is especially useful when exporting an array of configurations. webpack uses <code>name</code> to identify each config in logs and stats output.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   name<span class="token punctuation">:</span> <span class="token string">&quot;admin-app&quot;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>For multi-configuration builds:</p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">&quot;client&quot;</span><span class="token punctuation">,</span>
+    target<span class="token punctuation">:</span> <span class="token string">&quot;web&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// ...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">&quot;server&quot;</span><span class="token punctuation">,</span>
+    target<span class="token punctuation">:</span> <span class="token string">&quot;node&quot;</span><span class="token punctuation">,</span>
+    <span class="token comment">// ...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="parallelism"></span>parallelism<a href="#parallelism" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>number = 100</code></p>
 <p>Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.</p>
+<p>Lower values reduce concurrent work and memory pressure, but may increase total build time. Higher values can improve throughput on powerful machines.</p>
+<p><strong>webpack.config.js</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  parallelism<span class="token punctuation">:</span> <span class="token number">50</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>Use cases:</p>
+<ul>
+<li>Reduce <code>parallelism</code> when builds hit memory limits (for example in constrained CI runners).</li>
+<li>Increase it when you have enough CPU and memory and want to maximize build throughput.</li>
+</ul>
 <h2><span id="profile"></span>profile<a href="#profile" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code></p>
 <p>Capture a &quot;profile&quot; of the application, including statistics and hints, which can then be dissected using the <a href="https://webpack.github.io/analyse/">Analyze</a> tool. It will also log out a summary of module timings.</p>
+<p><strong>webpack.config.js</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  profile<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Combine <code>profile: true</code> with <code>parallelism: 1</code> to get correct timings. Note that this will slow down the build as well.</p></aside>
 <h2><span id="recordsinputpath"></span>recordsInputPath<a href="#recordsinputpath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>string</code></p>
 <p>Specify the file from which to read the last set of records. This can be used to rename a records file. See the example below.</p>
+<p>When this option is set, webpack reads previously generated records from this path and uses them as input for stable module/chunk id tracking.</p>
+<p><strong>webpack.config.js</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> __dirname <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>__filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  recordsInputPath<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;records.json&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  recordsOutputPath<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&quot;records-next.json&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="recordsoutputpath"></span>recordsOutputPath<a href="#recordsoutputpath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>string</code></p>
 <p>Specify where the records should be written. The following example shows how you might use this option in combination with <code>recordsInputPath</code> to rename a records file:</p>
