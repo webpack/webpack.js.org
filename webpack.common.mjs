@@ -2,16 +2,16 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import hastscript from "hastscript";
+import { h as hastscript } from "hastscript";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import autolink from "remark-autolink-headings";
 import remarkEmoji from "remark-emoji";
 import frontmatter from "remark-frontmatter";
 import gfm from "remark-gfm";
-import refractor from "remark-refractor";
 import webpack from "webpack";
 import cleanup from "./src/remark-plugins/remark-cleanup-readme/index.mjs";
 import aside from "./src/remark-plugins/remark-custom-asides/index.mjs";
+import refractor from "./src/remark-plugins/remark-refractor/index.mjs";
 import remarkRemoveDuplicateH1 from "./src/remark-plugins/remark-remove-duplicate-h1/index.mjs";
 import remarkRemoveHeadingId from "./src/remark-plugins/remark-remove-heading-id/index.mjs";
 import remarkResponsiveTable from "./src/remark-plugins/remark-responsive-table/remark-responsive-table.mjs";
