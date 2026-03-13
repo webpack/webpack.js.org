@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./CodeBlockWithCopy.scss";
 
 export default function CodeBlockWithCopy({ children }) {
   const preRef = useRef(null);
+  const resetStatusTimeoutRef = useRef(null);
   const [copyStatus, setCopyStatus] = useState("copy");
+
   const codeClassName =
     typeof children?.props?.className === "string"
       ? children.props.className
@@ -37,6 +39,16 @@ export default function CodeBlockWithCopy({ children }) {
     return clonedCodeElement.textContent || "";
   };
 
+  const scheduleResetStatus = () => {
+    if (resetStatusTimeoutRef.current) {
+      clearTimeout(resetStatusTimeoutRef.current);
+    }
+
+    resetStatusTimeoutRef.current = setTimeout(() => {
+      setCopyStatus("copy");
+    }, 2000);
+  };
+
   const handleCopy = async () => {
     if (!preRef.current) return;
 
@@ -47,13 +59,13 @@ export default function CodeBlockWithCopy({ children }) {
 
     if (!codeText) {
       setCopyStatus("error");
-      setTimeout(() => setCopyStatus("copy"), 2000);
+      scheduleResetStatus();
       return;
     }
 
     let successfulCopy = false;
 
-    // Try modern API (navigator.clipboard) -> as document.execCommand() deprecated
+    // Try modern API (navigator.clipboard)
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(codeText);
@@ -85,8 +97,16 @@ export default function CodeBlockWithCopy({ children }) {
     }
 
     setCopyStatus(successfulCopy ? "copied" : "error");
-    setTimeout(() => setCopyStatus("copy"), 2000);
+    scheduleResetStatus();
   };
+
+  useEffect(() => {
+    return () => {
+      if (resetStatusTimeoutRef.current) {
+        clearTimeout(resetStatusTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="code-block-wrapper">
