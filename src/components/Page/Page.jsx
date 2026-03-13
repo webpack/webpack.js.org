@@ -184,10 +184,12 @@ Page.propTypes = {
   next: PropTypes.object,
   pages: PropTypes.array,
   content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
     PropTypes.shape({
       // eslint-disable-next-line unicorn/no-thenable
-      then: PropTypes.func.isRequired,
-      default: PropTypes.string,
+      then: PropTypes.func,
+      default: PropTypes.any,
     }),
   ]),
 };
