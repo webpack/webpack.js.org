@@ -64,13 +64,19 @@ export default class SidebarItem extends Component {
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
         {anchors.length > 0 ? (
-          <ChevronRightIcon
-            width={15}
-            height={17}
-            fill="#175d96"
-            className={`${block}__toggle`}
+          <button
+            className={`${block}__toggle-button`}
             onClick={this._toggle.bind(this)}
-          />
+            aria-label={`Toggle ${title} section`}
+            aria-expanded={this.state.open}
+          >
+            <ChevronRightIcon
+              width={15}
+              height={17}
+              fill="#175d96"
+              className={`${block}__toggle`}
+            />
+          </button>
         ) : (
           <BarIcon
             className={`${block}__toggle`}

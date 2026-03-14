@@ -40,13 +40,13 @@ export default class SidebarMobile extends Component {
         />
 
         <div className="sidebar-mobile__content">
-          <span
-            role="button"
+          <button
             className="sidebar-mobile__close"
             onClick={toggle.bind(null, false)}
+            aria-label="Close navigation menu"
           >
             <CloseIcon fill="#fff" width={20} />
-          </span>
+          </button>
 
           {this._getSections()}
         </div>
