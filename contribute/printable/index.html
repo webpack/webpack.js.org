@@ -288,8 +288,8 @@ choose to participate in any vote through abstention. Votes are needed to add ne
 </ul>
 <h2><span id="formatting"></span>Formatting<a href="#formatting" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <h3><span id="code"></span>Code<a href="#code" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p><strong>Syntax: ```javascript … ```</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<p><strong>Syntax: ```js … ```</strong></p>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token string">&quot;bar&quot;</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 
@@ -551,7 +551,7 @@ which outlines the process of making an official complaint.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <h3><span id="data-sharing"></span>Data Sharing<a href="#data-sharing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>In webpack, loaders can be chained together and share data with subsequent loaders in the chain. To achieve this, you can pass data along with the content (source code) using the <code>this.callback</code> method in raw loaders. In the default exported function of a raw loader, you can pass data using the fourth argument of <code>this.callback</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token function">getOptions</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token comment">// Pass data using the fourth argument of this.callback</span>
   <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">callback</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">export default </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
@@ -630,7 +630,7 @@ which outlines the process of making an official complaint.</p>
 <p>So you&#x27;ve written a loader, followed the guidelines above, and have it set up to run locally. What&#x27;s next? Let&#x27;s go through a unit testing example to ensure our loader is working the way we expect. We&#x27;ll be using the <a href="https://jestjs.io/">Jest</a> framework to do this. We&#x27;ll also install <code>babel-jest</code> and some presets that will allow us to use the <code>import</code> / <code>export</code> and <code>async</code> / <code>await</code>. Let&#x27;s start by installing and saving these as a <code>devDependencies</code>:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev jest babel-jest @babel/core @babel/preset-env</code></pre></div>
 <p><strong>babel.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">presets</span><span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">[</span>
       <span class="token string">&quot;@babel/preset-env&quot;</span><span class="token punctuation">,</span>
@@ -1007,7 +1007,7 @@ any proposed change, a TSC vote in favor of the change is required.</p>
 <li>Manipulates webpack internal instance specific data.</li>
 <li>Invokes webpack provided callback after functionality is complete.</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token comment">// A JavaScript class.</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// A JavaScript class.</span>
 <span class="token keyword">class</span> <span class="token class-name">MyExampleWebpackPlugin</span> <span class="token punctuation">{</span>
   <span class="token comment">// Define `apply` as its prototype method which is supplied with compiler as its argument</span>
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1035,7 +1035,7 @@ any proposed change, a TSC vote in favor of the change is required.</p>
 <span class="token punctuation">}</span></code></pre></div>
 <h2><span id="basic-plugin-architecture"></span>Basic plugin architecture<a href="#basic-plugin-architecture" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Plugins are instantiated objects with an <code>apply</code> method on their prototype. This <code>apply</code> method is called once by the webpack compiler while installing the plugin. The <code>apply</code> method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A plugin is structured as follows:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloWorldPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">HelloWorldPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>done<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>
       <span class="token string">&quot;Hello World Plugin&quot;</span><span class="token punctuation">,</span>
@@ -1048,17 +1048,17 @@ any proposed change, a TSC vote in favor of the change is required.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> HelloWorldPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> HelloWorldPlugin<span class="token punctuation">;</span></code></pre></div>
 <p>Then to use the plugin, include an instance in your webpack configuration <code>plugins</code> array:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token comment">// webpack.config.js</span>
-<span class="token keyword">const</span> HelloWorldPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;hello-world&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token comment">// webpack.config.js</span>
+<span class="token keyword">import</span> HelloWorldPlugin <span class="token keyword">from</span> <span class="token string">&quot;hello-world&quot;</span><span class="token punctuation">;</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ... configuration settings here ...</span>
   <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">HelloWorldPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token literal-property property">options</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Use <a href="https://github.com/webpack/schema-utils"><code>schema-utils</code></a> in order to validate the options being passed through the plugin options. Here is an example:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span> validate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;schema-utils&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> validate <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;schema-utils&quot;</span><span class="token punctuation">;</span>
 
 <span class="token comment">// schema for options object</span>
 <span class="token keyword">const</span> schema <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -1082,7 +1082,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span></code></pre></div>
 <h2><span id="compiler-and-compilation"></span>Compiler and Compilation<a href="#compiler-and-compilation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Among the two most important resources while developing plugins are the <a href="/api/node/#compiler-instance" data-discover="true"><code>compiler</code></a> and <a href="/api/compilation-hooks/" data-discover="true"><code>compilation</code></a> objects. Understanding their roles is an important first step in extending the webpack engine.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloCompilationPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">HelloCompilationPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment">// Tap into compilation hook which gives compilation as argument to the callback function</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>compilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span><span class="token string">&quot;HelloCompilationPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
@@ -1094,13 +1094,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> HelloCompilationPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> HelloCompilationPlugin<span class="token punctuation">;</span></code></pre></div>
 <p>For the list of hooks available on <code>compiler</code>, <code>compilation</code>, and other important objects, see the <a href="/api/plugins/" data-discover="true">plugins API</a> docs.</p>
 <h2><span id="async-event-hooks"></span>Async event hooks<a href="#async-event-hooks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Some plugin hooks are asynchronous. To tap into them, we can use <code>tap</code> method which will behave in synchronous manner or use one of <code>tapAsync</code> method or <code>tapPromise</code> method which are asynchronous methods.</p>
 <h3><span id="tapasync"></span>tapAsync<a href="#tapasync" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>When we use <code>tapAsync</code> method to tap into plugins, we need to call the callback function which is supplied as the last argument to our function.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloAsyncPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">HelloAsyncPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span>
       <span class="token string">&quot;HelloAsyncPlugin&quot;</span><span class="token punctuation">,</span>
@@ -1115,10 +1115,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> HelloAsyncPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> HelloAsyncPlugin<span class="token punctuation">;</span></code></pre></div>
 <h4><span id="tappromise"></span>tapPromise<a href="#tappromise" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>When we use <code>tapPromise</code> method to tap into plugins, we need to return a promise which resolves when our asynchronous task is completed.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">HelloAsyncPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">HelloAsyncPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapPromise</span><span class="token punctuation">(</span>
       <span class="token string">&quot;HelloAsyncPlugin&quot;</span><span class="token punctuation">,</span>
@@ -1134,11 +1134,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> HelloAsyncPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> HelloAsyncPlugin<span class="token punctuation">;</span></code></pre></div>
 <h2><span id="example"></span>Example<a href="#example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Once we can latch onto the webpack compiler and each individual compilations, the possibilities become endless for what we can do with the engine itself. We can reformat existing files, create derivative files, or fabricate entirely new assets.</p>
 <p>Let&#x27;s write an example plugin that generates a new build file called <code>assets.md</code>, the contents of which will list all of the asset files in our build. This plugin might look something like this:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">FileListPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">FileListPlugin</span> <span class="token punctuation">{</span>
   <span class="token keyword">static</span> defaultOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">outputFile</span><span class="token operator">:</span> <span class="token string">&quot;assets.md&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -1202,12 +1202,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span> FileListPlugin <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> FileListPlugin<span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">const</span> <span class="token punctuation">{</span> FileListPlugin <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;./file-list-plugin.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> FileListPlugin <span class="token keyword">from</span> <span class="token string">&quot;./file-list-plugin.js&quot;</span><span class="token punctuation">;</span>
 
 <span class="token comment">// Use the plugin in your webpack configuration:</span>
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// …</span>
 
   <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1233,7 +1233,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <h2><span id="different-plugin-shapes"></span>Different Plugin Shapes<a href="#different-plugin-shapes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into is generally specified in <code>this.hooks</code> property.</p>
 <p>For example:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>hooks <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">this</span><span class="token punctuation">.</span>hooks <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">shouldEmit</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">SyncBailHook</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">&quot;compilation&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>It represents that the only hook supported is <code>shouldEmit</code> which is a hook of <code>SyncBailHook</code> type and the only parameter which will be passed to any plugin that taps into <code>shouldEmit</code> hook is <code>compilation</code>.</p>
@@ -1331,7 +1331,7 @@ This plugin pattern is expected for events like <code>before-resolve</code> and 
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> AssetLoggerPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> AssetLoggerPlugin<span class="token punctuation">;</span></code></pre></div>
 <p>This plugin taps into the <code>emit</code> hook of the Webpack compiler and prints the names of all generated assets to the console. It demonstrates how plugins can interact with the compilation process using Webpack hooks.</p>
 <p>For example, when running a Webpack build, the output may look like:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-text">Generated assets:
@@ -1537,7 +1537,7 @@ maintenance of the webpack bundler and its technical direction.</p>
 <p>Plugins grant unlimited opportunity to perform customizations within the webpack build system. This allows you to create custom asset types, perform unique build modifications, or even enhance the webpack runtime while using middleware. The following are some features of webpack that become useful while writing plugins.</p>
 <h2><span id="exploring-assets-chunks-modules-and-dependencies"></span>Exploring assets, chunks, modules, and dependencies<a href="#exploring-assets-chunks-modules-and-dependencies" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>After a compilation is sealed, all structures within the compilation may be traversed.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
       <span class="token comment">// Explore each chunk (build output):</span>
@@ -1565,7 +1565,7 @@ maintenance of the webpack bundler and its technical direction.</p>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li><code>compilation.modules</code>: A set of modules (built inputs) in the compilation. Each module manages the build of a raw file from your source library.</li>
 </ul>
@@ -1581,7 +1581,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </ul>
 <h3><span id="monitoring-the-watch-graph"></span>Monitoring the watch graph<a href="#monitoring-the-watch-graph" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>While running webpack middleware, each compilation includes a <code>fileDependencies</code> <code>Set</code> (what files are being watched) and a <code>fileTimestamps</code> <code>Map</code> that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>startTime <span class="token operator">=</span> Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>prevTimestamps <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1601,13 +1601,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
 <p>You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Add valid file paths into the <code>compilation.fileDependencies</code> <code>Set</code> to add them to the watched files.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>The <code>fileDependencies</code> <code>Set</code> is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.</p></aside>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Since webpack 5, <code>compilation.fileDependencies</code>, <code>compilation.contextDependencies</code> and <code>compilation.missingDependencies</code> are now a <code>Set</code> instead of a <code>Sortable Set</code> and thus no longer sorted.</p></aside>
 <h2><span id="changed-chunks"></span>Changed chunks<a href="#changed-chunks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Similar to the watch graph, you can monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
@@ -1624,7 +1624,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
+<span class="token keyword">export</span> <span class="token keyword">default</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
 <h1><span id="release-process"></span>Release Process<a href="#release-process" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>The release process for deploying webpack is actually quite painless. Read through the following steps, so you have a clear understanding of how it&#x27;s done.</p>

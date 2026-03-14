@@ -13,7 +13,7 @@
 <aside class="tip"><p class="tip__prefix">tip</p><p>All of the options in the stats configuration object are optional.</p></aside>
 <h3><span id="statsall"></span>stats.all<a href="#statsall" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>A fallback value for stats options when an option is not defined. It has precedence over local webpack defaults.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">all</span><span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
@@ -22,7 +22,7 @@
 <h3><span id="statsassets"></span>stats.assets<a href="#statsassets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to show the asset information. Set <code>stats.assets</code> to <code>false</code> to hide it.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">assets</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -31,7 +31,7 @@
 <h3><span id="statsassetssort"></span>stats.assetsSort<a href="#statsassetssort" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>string = &#x27;id&#x27;</code></p>
 <p>Tells <code>stats</code> to sort the assets by a given field. All of the <a href="#sorting-fields">sorting fields</a> are allowed to be used as values for <code>stats.assetsSort</code>. Use <code>!</code> prefix in the value to reverse the sort order by a given field.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">assetsSort</span><span class="token operator">:</span> <span class="token string">&quot;!size&quot;</span><span class="token punctuation">,</span>
@@ -40,7 +40,7 @@
 <h3><span id="statsassetsspace"></span>stats.assetsSpace<a href="#statsassetsspace" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>number = 15</code></p>
 <p>Tells <code>stats</code> how many items of assets should be displayed (groups will be collapsed to fit this space).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">assetsSpace</span><span class="token operator">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
@@ -49,7 +49,7 @@
 <h3><span id="statsbuiltat"></span>stats.builtAt<a href="#statsbuiltat" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add the build date and the build time information. Set <code>stats.builtAt</code> to <code>false</code> to hide it.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">builtAt</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -60,7 +60,7 @@
 <h3><span id="statscachedassets"></span>stats.cachedAssets<a href="#statscachedassets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the cached assets. Setting <code>stats.cachedAssets</code> to <code>false</code> will tell <code>stats</code> to only show the emitted files (not the ones that were built).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">cachedAssets</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -69,7 +69,7 @@
 <h3><span id="statscachedmodules"></span>stats.cachedModules<a href="#statscachedmodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about cached (not built) modules.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">cachedModules</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -78,7 +78,7 @@
 <h3><span id="statschildren"></span>stats.children<a href="#statschildren" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the children.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">children</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -87,7 +87,7 @@
 <h3><span id="statschunkgroupauxiliary"></span>stats.chunkGroupAuxiliary<a href="#statschunkgroupauxiliary" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Display auxiliary assets in chunk groups.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkGroupAuxiliary</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -96,7 +96,7 @@
 <h3><span id="statschunkgroupchildren"></span>stats.chunkGroupChildren<a href="#statschunkgroupchildren" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkGroupChildren</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -105,7 +105,7 @@
 <h3><span id="statschunkgroupmaxassets"></span>stats.chunkGroupMaxAssets<a href="#statschunkgroupmaxassets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>number</code></p>
 <p>Limit of assets displayed in chunk groups.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkGroupMaxAssets</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
@@ -114,7 +114,7 @@
 <h3><span id="statschunkgroups"></span>stats.chunkGroups<a href="#statschunkgroups" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the <code>namedChunkGroups</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkGroups</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -123,7 +123,7 @@
 <h3><span id="statschunkmodules"></span>stats.chunkModules<a href="#statschunkmodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the built modules to information about the chunk.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkModules</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -132,7 +132,7 @@
 <h3><span id="statschunkmodulesspace"></span>stats.chunkModulesSpace<a href="#statschunkmodulesspace" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>number = 10</code></p>
 <p>Tells <code>stats</code> how many items of chunk modules should be displayed (groups will be collapsed to fit this space).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkModulesSpace</span><span class="token operator">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
@@ -141,7 +141,7 @@
 <h3><span id="statschunkorigins"></span>stats.chunkOrigins<a href="#statschunkorigins" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the origins of chunks and chunk merging.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkOrigins</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -150,7 +150,7 @@
 <h3><span id="statschunkrelations"></span>stats.chunkRelations<a href="#statschunkrelations" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> to display chunk parents, children and siblings.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunkRelations</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -159,7 +159,7 @@
 <h3><span id="statschunks"></span>stats.chunks<a href="#statschunks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the chunk. Setting <code>stats.chunks</code> to <code>false</code> results in a less verbose output.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunks</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -168,7 +168,7 @@
 <h3><span id="statschunkssort"></span>stats.chunksSort<a href="#statschunkssort" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>string = &#x27;id&#x27;</code></p>
 <p>Tells <code>stats</code> to sort the chunks by a given field. All of the <a href="#sorting-fields">sorting fields</a> are allowed to be used as values for <code>stats.chunksSort</code>. Use <code>!</code> prefix in the value to reverse the sort order by a given field.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">chunksSort</span><span class="token operator">:</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span>
@@ -177,7 +177,7 @@
 <h3><span id="statscolors"></span>stats.colors<a href="#statscolors" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code> <code>{ bold?: string, cyan?: string, green?: string, magenta?: string, red?: string, yellow?: string }</code></p>
 <p>Tells <code>stats</code> whether to output in the different colors.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">colors</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -197,7 +197,7 @@
 <h3><span id="statscontext"></span>stats.context<a href="#statscontext" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>string</code></p>
 <p>The stats base directory, an <strong>absolute path</strong> for shortening the request information.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -213,7 +213,7 @@
 <h3><span id="statsdependentmodules"></span>stats.dependentModules<a href="#statsdependentmodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to show chunk modules that are dependencies of other modules of the chunk.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">dependentModules</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -222,7 +222,7 @@
 <h3><span id="statsdepth"></span>stats.depth<a href="#statsdepth" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> whether to display the distance from the entry point for each module.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">depth</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -231,7 +231,7 @@
 <h3><span id="statsentrypoints"></span>stats.entrypoints<a href="#statsentrypoints" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code> <code>&quot;auto&quot;</code></p>
 <p>Tells <code>stats</code> whether to display the entry points with the corresponding bundles.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">entrypoints</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -241,7 +241,7 @@
 <h3><span id="statsenv"></span>stats.env<a href="#statsenv" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> whether to display the <code>--env</code> information.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">env</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -250,7 +250,7 @@
 <h3><span id="statserrorcause"></span>stats.errorCause<a href="#statserrorcause" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code> <code>&quot;auto&quot;</code></p>
 <p>Tells <code>stats</code> whether to include the <a href="https://nodejs.org/en/blog/release/v16.9.0/#error-cause"><code>cause</code></a> property of errors in the output. It defaults to <code>true</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">errorCause</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -259,7 +259,7 @@
 <h3><span id="statserrordetails"></span>stats.errorDetails<a href="#statserrordetails" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code> <code>&quot;auto&quot;</code></p>
 <p>Tells <code>stats</code> whether to add the details to the errors. It defaults to <code>&#x27;auto&#x27;</code> which will show error details when there&#x27;re only 2 or less errors.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">errorDetails</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -269,7 +269,7 @@
 <p><code>boolean</code> <code>&quot;auto&quot;</code></p>
 <p>Tells <code>stats</code> whether to include the errors array from <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError"><code>AggregateError</code></a> instances in the output. It defaults to <code>true</code>.</p>
 <p>Useful when a single error is composed of multiple underlying errors, providing deeper visibility into grouped error structures.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">errorErrors</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -278,7 +278,7 @@
 <h3><span id="statserrorstack"></span>stats.errorStack<a href="#statserrorstack" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to show stack trace of errors.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">errorStack</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -287,7 +287,7 @@
 <h3><span id="statserrors"></span>stats.errors<a href="#statserrors" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to display the errors.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">errors</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -296,7 +296,7 @@
 <h3><span id="statserrorscount"></span>stats.errorsCount<a href="#statserrorscount" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Add errors count.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">errorsCount</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -306,7 +306,7 @@
 <span class="badge">5.80.0+</span>
 <p><code>number</code></p>
 <p>Tells <code>stats</code> to limit the number of lines to allocate for displaying an error.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">errorsSpace</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
@@ -317,7 +317,7 @@
 <h3><span id="statsexcludeassets"></span>stats.excludeAssets<a href="#statsexcludeassets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>array = []: string | RegExp | function (assetName) =&gt; boolean</code> <code>string</code> <code>RegExp</code> <code>function (assetName) =&gt; boolean</code></p>
 <p>Tells <code>stats</code> to exclude the matching assets information. This can be done with a <code>string</code>, a <code>RegExp</code>, a <code>function</code> that is getting the assets name as an argument and returns a <code>boolean</code>. <code>stats.excludeAssets</code> can be an <code>array</code> of any of the above.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">excludeAssets</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -330,14 +330,14 @@
 <h3><span id="statsexcludemodules"></span>stats.excludeModules<a href="#statsexcludemodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>array = []: string | RegExp | function (assetName) =&gt; boolean</code> <code>string</code> <code>RegExp</code> <code>function (assetName) =&gt; boolean</code> <code>boolean: false</code></p>
 <p>Tells <code>stats</code> to exclude the matching modules information. This can be done with a <code>string</code>, a <code>RegExp</code>, a <code>function</code> that is getting the module&#x27;s source as an argument and returns a <code>boolean</code>. <code>stats.excludeModules</code> can be an <code>array</code> of any of the above. <code>stats.excludeModules</code>&#x27;s configuration <a href="https://github.com/webpack/webpack/blob/main/lib/Stats.js#L215">is merged</a> with the <code>stats.exclude</code>&#x27;s configuration value.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">excludeModules</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;filter&quot;</span><span class="token punctuation">,</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">filter</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">moduleSource</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token boolean">true</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Setting <code>stats.excludeModules</code> to <code>false</code> will disable the exclude behaviour.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">excludeModules</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -346,7 +346,7 @@
 <h3><span id="statsgroupassetsbychunk"></span>stats.groupAssetsByChunk<a href="#statsgroupassetsbychunk" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group assets by how their are related to chunks.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupAssetsByChunk</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -355,7 +355,7 @@
 <h3><span id="statsgroupassetsbyemitstatus"></span>stats.groupAssetsByEmitStatus<a href="#statsgroupassetsbyemitstatus" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group assets by their status (emitted, compared for emit or cached).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupAssetsByEmitStatus</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -364,7 +364,7 @@
 <h3><span id="statsgroupassetsbyextension"></span>stats.groupAssetsByExtension<a href="#statsgroupassetsbyextension" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group assets by their extension.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupAssetsByExtension</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -373,7 +373,7 @@
 <h3><span id="statsgroupassetsbyinfo"></span>stats.groupAssetsByInfo<a href="#statsgroupassetsbyinfo" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupAssetsByInfo</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -382,7 +382,7 @@
 <h3><span id="statsgroupassetsbypath"></span>stats.groupAssetsByPath<a href="#statsgroupassetsbypath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group assets by their asset path.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupAssetsByPath</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -391,7 +391,7 @@
 <h3><span id="statsgroupmodulesbyattributes"></span>stats.groupModulesByAttributes<a href="#statsgroupmodulesbyattributes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupModulesByAttributes</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -400,7 +400,7 @@
 <h3><span id="statsgroupmodulesbycachestatus"></span>stats.groupModulesByCacheStatus<a href="#statsgroupmodulesbycachestatus" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group modules by their cache status (cached or built and cacheable).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupModulesByCacheStatus</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -409,7 +409,7 @@
 <h3><span id="statsgroupmodulesbyextension"></span>stats.groupModulesByExtension<a href="#statsgroupmodulesbyextension" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group modules by their extension.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupModulesByExtension</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -418,7 +418,7 @@
 <h3><span id="statsgroupmodulesbylayer"></span>stats.groupModulesByLayer<a href="#statsgroupmodulesbylayer" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group modules by their layer.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupModulesByLayer</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -427,7 +427,7 @@
 <h3><span id="statsgroupmodulesbypath"></span>stats.groupModulesByPath<a href="#statsgroupmodulesbypath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group modules by their path.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupModulesByPath</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -436,7 +436,7 @@
 <h3><span id="statsgroupmodulesbytype"></span>stats.groupModulesByType<a href="#statsgroupmodulesbytype" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to group modules by their type.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupModulesByType</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -446,7 +446,7 @@
 <p><code>boolean</code></p>
 <span class="badge">5.46.0+</span>
 <p>Group <a href="#statsreasons"><code>reasons</code></a> by their origin module to avoid large set of reasons.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">groupReasonsByOrigin</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -455,7 +455,7 @@
 <h3><span id="statshash"></span>stats.hash<a href="#statshash" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the hash of the compilation.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">hash</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -464,7 +464,7 @@
 <h3><span id="statsids"></span>stats.ids<a href="#statsids" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> to add IDs of modules and chunks.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">ids</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -481,7 +481,7 @@
 <li><code>&#x27;log&#x27;</code>, <code>true</code> - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.</li>
 <li><code>&#x27;verbose&#x27;</code> - log everything except debug and trace. Collapsed groups are displayed in expanded state.</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">logging</span><span class="token operator">:</span> <span class="token string">&quot;verbose&quot;</span><span class="token punctuation">,</span>
@@ -490,7 +490,7 @@
 <h3><span id="statsloggingdebug"></span>stats.loggingDebug<a href="#statsloggingdebug" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>array = []: string | RegExp | function (name) =&gt; boolean</code> <code>string</code> <code>RegExp</code> <code>function (name) =&gt; boolean</code></p>
 <p>Tells <code>stats</code> to include the debug information of the specified loggers such as Plugins or Loaders. When <a href="#statslogging"><code>stats.logging</code></a> is set to <code>false</code>, <code>stats.loggingDebug</code> option is ignored.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">loggingDebug</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -504,7 +504,7 @@
 <h3><span id="statsloggingtrace"></span>stats.loggingTrace<a href="#statsloggingtrace" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Enable stack traces in the logging output for errors, warnings and traces. Set <code>stats.loggingTrace</code> to hide the trace.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">loggingTrace</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -513,7 +513,7 @@
 <h3><span id="statsmoduleassets"></span>stats.moduleAssets<a href="#statsmoduleassets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about assets inside modules. Set <code>stats.moduleAssets</code> to <code>false</code> to hide it.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">moduleAssets</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -522,7 +522,7 @@
 <h3><span id="statsmoduletrace"></span>stats.moduleTrace<a href="#statsmoduletrace" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to show dependencies and the origin of warnings/errors. <code>stats.moduleTrace</code> is available since webpack 2.5.0.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">moduleTrace</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -531,7 +531,7 @@
 <h3><span id="statsmodules"></span>stats.modules<a href="#statsmodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about the built modules.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">modules</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -540,7 +540,7 @@
 <h3><span id="statsmodulessort"></span>stats.modulesSort<a href="#statsmodulessort" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>string = &#x27;id&#x27;</code></p>
 <p>Tells <code>stats</code> to sort the modules by a given field. All of the <a href="#sorting-fields">sorting fields</a> are allowed to be used as values for <code>stats.modulesSort</code>. Use <code>!</code> prefix in the value to reverse the sort order by a given field.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">modulesSort</span><span class="token operator">:</span> <span class="token string">&quot;size&quot;</span><span class="token punctuation">,</span>
@@ -549,7 +549,7 @@
 <h3><span id="statsmodulesspace"></span>stats.modulesSpace<a href="#statsmodulesspace" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>number = 15</code></p>
 <p>Tells <code>stats</code> how many items of modules should be displayed (groups will be collapsed to fit this space).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">modulesSpace</span><span class="token operator">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
@@ -558,7 +558,7 @@
 <h3><span id="statsnestedmodules"></span>stats.nestedModules<a href="#statsnestedmodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> whether to add information about modules nested in other modules (like with module concatenation).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">nestedModules</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -567,7 +567,7 @@
 <h3><span id="statsnestedmodulesspace"></span>stats.nestedModulesSpace<a href="#statsnestedmodulesspace" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>number = 10</code></p>
 <p>Tells <code>stats</code> how many items of nested modules should be displayed (groups will be collapsed to fit this space).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">nestedModulesSpace</span><span class="token operator">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
@@ -576,7 +576,7 @@
 <h3><span id="statsoptimizationbailout"></span>stats.optimizationBailout<a href="#statsoptimizationbailout" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean</code></p>
 <p>Tells <code>stats</code> to show the reasons why optimization bailed out for modules.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">optimizationBailout</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -585,7 +585,7 @@
 <h3><span id="statsorphanmodules"></span>stats.orphanModules<a href="#statsorphanmodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> whether to hide <code>orphan</code> modules. A module is an <code>orphan</code> if it is not included in any chunk. Orphan modules are hidden by default in <code>stats</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">orphanModules</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -594,7 +594,7 @@
 <h3><span id="statsoutputpath"></span>stats.outputPath<a href="#statsoutputpath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to show the <code>outputPath</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">outputPath</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -603,7 +603,7 @@
 <h3><span id="statsperformance"></span>stats.performance<a href="#statsperformance" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to show performance hint when the file size exceeds <a href="/configuration/performance/#performancemaxassetsize" data-discover="true"><code>performance.maxAssetSize</code></a>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">performance</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -612,7 +612,7 @@
 <h3><span id="statspreset"></span>stats.preset<a href="#statspreset" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>string</code> <code>boolean: false</code></p>
 <p>Sets the <a href="/configuration/stats/#stats-presets" data-discover="true">preset</a> for the type of information that gets displayed. It is useful for <a href="/configuration/stats/#extending-stats-behaviours" data-discover="true">extending stats behaviours</a>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">preset</span><span class="token operator">:</span> <span class="token string">&quot;minimal&quot;</span><span class="token punctuation">,</span>
@@ -622,7 +622,7 @@
 <h3><span id="statsprovidedexports"></span>stats.providedExports<a href="#statsprovidedexports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> to show the exports of the modules.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">providedExports</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -631,7 +631,7 @@
 <h3><span id="statspublicpath"></span>stats.publicPath<a href="#statspublicpath" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to show the <code>publicPath</code>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">publicPath</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -640,7 +640,7 @@
 <h3><span id="statsreasons"></span>stats.reasons<a href="#statsreasons" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to add information about the reasons of why modules are included.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">reasons</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -650,7 +650,7 @@
 <p><code>number</code></p>
 <span class="badge">5.46.0+</span>
 <p>Space to display <a href="#statsreasons"><code>reasons</code></a> (groups will be collapsed to fit this space).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">reasonsSpace</span><span class="token operator">:</span> <span class="token number">1000</span><span class="token punctuation">,</span>
@@ -660,7 +660,7 @@
 <h3><span id="statsrelatedassets"></span>stats.relatedAssets<a href="#statsrelatedassets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> whether to add information about assets that are related to other assets (like SourceMaps for assets).</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">relatedAssets</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -669,7 +669,7 @@
 <h3><span id="statsruntimemodules"></span>stats.runtimeModules<a href="#statsruntimemodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> whether to add information about runtime modules.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">runtimeModules</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -678,7 +678,7 @@
 <h3><span id="statssource"></span>stats.source<a href="#statssource" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> to add the source code of modules.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">source</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -687,7 +687,7 @@
 <h3><span id="statstimings"></span>stats.timings<a href="#statstimings" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to add the timing information.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">timings</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -696,7 +696,7 @@
 <h3><span id="statsusedexports"></span>stats.usedExports<a href="#statsusedexports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = false</code></p>
 <p>Tells <code>stats</code> whether to show which exports of a module are used.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">usedExports</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -705,7 +705,7 @@
 <h3><span id="statsversion"></span>stats.version<a href="#statsversion" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to add information about the webpack version used.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">version</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -714,7 +714,7 @@
 <h3><span id="statswarnings"></span>stats.warnings<a href="#statswarnings" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Tells <code>stats</code> to add warnings.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">warnings</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -723,7 +723,7 @@
 <h3><span id="statswarningscount"></span>stats.warningsCount<a href="#statswarningscount" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>boolean = true</code></p>
 <p>Add warnings count.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">warningsCount</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -732,7 +732,7 @@
 <h3><span id="statswarningsfilter"></span>stats.warningsFilter<a href="#statswarningsfilter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>array = []: string | RegExp | function (warning) =&gt; boolean</code> <code>string</code> <code>RegExp</code> <code>function (warning) =&gt; boolean</code></p>
 <p>Tells <code>stats</code> to exclude the warnings that are matching given filters. This can be done with a <code>string</code>, a <code>RegExp</code>, a <code>function</code> that is getting a warning as an argument and returns a <code>boolean</code>. <code>stats.warningsFilter</code> can be an <code>array</code> of any of the above.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">warningsFilter</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;filter&quot;</span><span class="token punctuation">,</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">filter</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">warning</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token boolean">true</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -743,7 +743,7 @@
 <span class="badge">5.80.0+</span>
 <p><code>number</code></p>
 <p>Tells <code>stats</code> to limit the number of lines to allocate for displaying a warning.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">warningsSpace</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
@@ -775,11 +775,11 @@
 <h3><span id="extending-stats-behaviours"></span>Extending stats behaviours<a href="#extending-stats-behaviours" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>If you want to use one of the presets e.g. <code>&#x27;minimal&#x27;</code> but still override some of the rules: specify the desired <code>stats.preset</code> and add the customized or additional rules afterwards.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ..</span>
   <span class="token literal-property property">stats</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">preset</span><span class="token operator">:</span> <span class="token string">&quot;minimal&quot;</span><span class="token punctuation">,</span>
     <span class="token literal-property property">moduleTrace</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token literal-property property">errorDetails</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/stats.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><button type="button" class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</button></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/node/" data-discover="true">Node</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/experiments/" data-discover="true">Experiments</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">15<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/SpaceK33z"><img width="45" height="45" alt="SpaceK33z" title="SpaceK33z" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/sallar"><img width="45" height="45" alt="sallar" title="sallar" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jungomi"><img width="45" height="45" alt="jungomi" title="jungomi" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/ldrick"><img width="45" height="45" alt="ldrick" title="ldrick" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jasonblanchard"><img width="45" height="45" alt="jasonblanchard" title="jasonblanchard" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/renjithspace"><img width="45" height="45" alt="renjithspace" title="renjithspace" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Raiondesu"><img width="45" height="45" alt="Raiondesu" title="Raiondesu" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/grgur"><img width="45" height="45" alt="grgur" title="grgur" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anshumanv"><img width="45" height="45" alt="anshumanv" title="anshumanv" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pixel-ray"><img width="45" height="45" alt="pixel-ray" title="pixel-ray" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/u01jmg3"><img width="45" height="45" alt="u01jmg3" title="u01jmg3" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License (CC)" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons Attribution (CC BY)" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.595128c1f0593713.js"></script></body></html>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/stats.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><button type="button" class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</button></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/node/" data-discover="true">Node</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/experiments/" data-discover="true">Experiments</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">15<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/SpaceK33z"><img width="45" height="45" alt="SpaceK33z" title="SpaceK33z" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/sallar"><img width="45" height="45" alt="sallar" title="sallar" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jungomi"><img width="45" height="45" alt="jungomi" title="jungomi" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/ldrick"><img width="45" height="45" alt="ldrick" title="ldrick" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jasonblanchard"><img width="45" height="45" alt="jasonblanchard" title="jasonblanchard" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/renjithspace"><img width="45" height="45" alt="renjithspace" title="renjithspace" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Raiondesu"><img width="45" height="45" alt="Raiondesu" title="Raiondesu" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/grgur"><img width="45" height="45" alt="grgur" title="grgur" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anshumanv"><img width="45" height="45" alt="anshumanv" title="anshumanv" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/pixel-ray"><img width="45" height="45" alt="pixel-ray" title="pixel-ray" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/u01jmg3"><img width="45" height="45" alt="u01jmg3" title="u01jmg3" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License (CC)" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons Attribution (CC BY)" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.e74b29f8d0dc3e06.js"></script></body></html>

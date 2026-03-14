@@ -5,7 +5,7 @@
 <p><code>object</code></p>
 <p>This set of options is picked up by <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> and can be used to change its behavior in various ways. Here&#x27;s a rudimentary example that gzips and serves everything from our <code>public/</code> directory in the project root:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -45,7 +45,7 @@
 <p><code>function</code></p>
 <p>Allows you to use custom server applications, such as <code>connect</code>, <code>fastify</code>, etc. The default application used is <code>express</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> connect <span class="token keyword">from</span> <span class="token string">&quot;connect&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> connect <span class="token keyword">from</span> <span class="token string">&quot;connect&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -57,7 +57,7 @@
 <p><code>&#x27;auto&#x27; | &#x27;all&#x27;</code> <code>[string]</code></p>
 <p>This option allows you to allowlist services that are allowed to access the dev server.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">allowedHosts</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -70,7 +70,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Mimicking Django&#x27;s <code>ALLOWED_HOSTS</code>, a value beginning with <code>.</code> can be used as a subdomain wildcard. <code>.host.com</code> will match <code>host.com</code>, <code>www.host.com</code>, and any other subdomain of <code>host.com</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token comment">// this achieves the same effect as the first example</span>
@@ -83,7 +83,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --allowed-hosts .host.com --allowed-hosts host2.com</code></pre></div>
 <p>When set to <code>&#x27;all&#x27;</code> this option bypasses host checking. <strong>THIS IS NOT RECOMMENDED</strong> as apps that do not check the host are vulnerable to DNS rebinding attacks.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">allowedHosts</span><span class="token operator">:</span> <span class="token string">&quot;all&quot;</span><span class="token punctuation">,</span>
@@ -93,7 +93,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --allowed-hosts all</code></pre></div>
 <p>When set to <code>&#x27;auto&#x27;</code> this option always allows <code>localhost</code>, <a href="#devserverhost"><code>host</code></a>, and <a href="#websocketurl"><code>client.webSocketURL.hostname</code></a>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">allowedHosts</span><span class="token operator">:</span> <span class="token string">&quot;auto&quot;</span><span class="token punctuation">,</span>
@@ -105,7 +105,7 @@
 <p><code>boolean = false</code> <code>object</code></p>
 <p>This option broadcasts the server via <a href="http://www.zeroconf.org/">ZeroConf</a> networking on start.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">bonjour</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -117,7 +117,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --no-bonjour</code></pre></div>
 <p>You can also pass <a href="https://github.com/watson/bonjour#initializing">custom options</a> to bonjour, for example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">bonjour</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -131,7 +131,7 @@
 <p><code>&#x27;log&#x27; | &#x27;info&#x27; | &#x27;warn&#x27; | &#x27;error&#x27; | &#x27;none&#x27; | &#x27;verbose&#x27;</code></p>
 <p>Allows to set log level in the browser, e.g. before reloading, before an error or when <a href="/concepts/hot-module-replacement/" data-discover="true">Hot Module Replacement</a> is enabled.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -145,7 +145,7 @@
 <p><code>boolean = true</code> <code>object</code></p>
 <p>Shows a full-screen overlay in the browser when there are compiler errors or warnings.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -162,7 +162,7 @@
 <p>All properties are optional and default to <code>true</code> when not provided.</p>
 <p>For example, to disable compilation warnings, you can provide the following configuration:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -179,7 +179,7 @@
 <p>To filter based on the thrown error, you can pass a function that accepts an <code>error</code> parameter and returns a boolean.</p>
 <p>For example, to ignore errors thrown by <a href="https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort"><code>AbortController.abort()</code></a>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -199,7 +199,7 @@
 <p><code>boolean</code></p>
 <p>Prints compilation progress in percentage in the browser.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -216,7 +216,7 @@
 <span class="badge">v4.4.0+</span>
 <p>Tells dev-server the number of times it should try to reconnect the client. When <code>true</code> it will try to reconnect unlimited times.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -227,7 +227,7 @@
 <p>Usage via the CLI:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --client-reconnect</code></pre></div>
 <p>When set to <code>false</code> it will not try to reconnect.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -238,7 +238,7 @@
 <p>Usage via the CLI:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --no-client-reconnect</code></pre></div>
 <p>You can also specify the exact number of times the client should try to reconnect.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -253,7 +253,7 @@
 <p>This option allows us either to choose the current <code>devServer</code> transport mode for clients individually or to provide custom client implementation. This allows specifying how the browser or other client communicates with the <code>devServer</code>.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Providing <code>&#x27;ws&#x27;</code> or <code>&#x27;sockjs&#x27;</code> to <a href="#devserverwebsocketserver"><code>webSocketServer</code></a> is a shortcut to setting both <code>devServer.client.webSocketTransport</code> and <code>devServer.webSocketServer</code> to the given value.</p></aside>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -268,31 +268,31 @@
 <p>To create a custom client implementation, create a class that extends <a href="https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js"><code>BaseClient</code></a>.</p>
 <p>Using path to <code>CustomClient.js</code>, a custom WebSocket client implementation, along with the compatible <code>&#x27;ws&#x27;</code> server:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token literal-property property">webSocketTransport</span><span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">webSocketTransport</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Using custom, compatible WebSocket client and server implementations:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token literal-property property">webSocketTransport</span><span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">webSocketTransport</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer.js&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="websocketurl"></span>webSocketURL<a href="#websocketurl" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p><code>string</code> <code>object</code></p>
 <p>This option allows specifying URL to web socket server (useful when you&#x27;re proxying dev server and client script does not always know where to connect to).</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -312,7 +312,7 @@
 <li><code>username</code>: Tells clients connected to devServer to use the provided username to authenticate.</li>
 </ul>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -332,7 +332,7 @@
 <p><code>boolean = true</code></p>
 <p>Enable <a href="https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/">gzip compression</a> for everything served:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">compress</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -346,7 +346,7 @@
 <p><code>object</code></p>
 <p>Provide options to <a href="https://github.com/webpack/webpack-dev-middleware">webpack-dev-middleware</a> which handles webpack assets.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">devMiddleware</span><span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token literal-property property">index</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -361,7 +361,7 @@
 <p><code>array</code> <code>function</code> <code>object</code></p>
 <p>Adds headers to all responses:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">headers</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -371,7 +371,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>You can also pass an array:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">headers</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -387,7 +387,7 @@
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>You can also pass a function:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token function-variable function">headers</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token string-property property">&quot;X-Bar&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;key1=value1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;key2=value2&quot;</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -397,7 +397,7 @@
 <p><code>boolean = false</code> <code>object</code></p>
 <p>When using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/History">HTML5 History API</a>, the <code>index.html</code> page will likely have to be served in place of any <code>404</code> responses. Enable <code>devServer.historyApiFallback</code> by setting it to <code>true</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">historyApiFallback</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -409,7 +409,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --no-history-api-fallback</code></pre></div>
 <p>By providing an object this behavior can be controlled further using options like <code>rewrites</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">historyApiFallback</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -423,7 +423,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>When using dots in your path (common with Angular), you may need to use the <code>disableDotRule</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">historyApiFallback</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -436,7 +436,7 @@
 <p><code>&#x27;local-ip&#x27; | &#x27;local-ipv4&#x27; | &#x27;local-ipv6&#x27;</code> <code>string</code></p>
 <p>Specify a host to use. If you want your server to be accessible externally, specify it like this:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">host</span><span class="token operator">:</span> <span class="token string">&quot;0.0.0.0&quot;</span><span class="token punctuation">,</span>
@@ -459,7 +459,7 @@
 <p><code>&#x27;only&#x27;</code> <code>boolean = true</code></p>
 <p>Enable webpack&#x27;s <a href="/concepts/hot-module-replacement/" data-discover="true">Hot Module Replacement</a> feature:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">hot</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -471,7 +471,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --no-hot</code></pre></div>
 <p>To enable Hot Module Replacement without page refresh as a fallback in case of build failures, use <code>hot: &#x27;only&#x27;</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">hot</span><span class="token operator">:</span> <span class="token string">&quot;only&quot;</span><span class="token punctuation">,</span>
@@ -485,7 +485,7 @@
 <p>The Unix socket to listen to (instead of a <a href="#devserverhost"><code>host</code></a>).</p>
 <p>Setting it to <code>true</code> will listen to a socket at <code>/your-os-temp-dir/webpack-dev-server.sock</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">ipc</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -495,7 +495,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve <span class="token parameter variable">--ipc</span></code></pre></div>
 <p>You can also listen to a different socket with:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -511,7 +511,7 @@
 <p><code>boolean = true</code></p>
 <p>By default, the dev-server will reload/refresh the page when file changes are detected. <a href="#devserverhot"><code>devServer.hot</code></a> option must be disabled or <a href="#devserverwatchfiles"><code>devServer.watchFiles</code></a> option must be enabled in order for <code>liveReload</code> to take effect. Disable <code>devServer.liveReload</code> by setting it to <code>false</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">liveReload</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -526,7 +526,7 @@
 <p><code>function (devServer)</code></p>
 <p>Provides the ability to execute a custom function when webpack-dev-server starts listening for connections on a port.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token function">onListening</span><span class="token punctuation">(</span><span class="token parameter">devServer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -543,7 +543,7 @@
 <p><code>boolean</code> <code>string</code> <code>object</code> <code>[string, object]</code></p>
 <p>Tells dev-server to open the browser after server had been started. Set it to <code>true</code> to open your default browser.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">open</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -555,7 +555,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --no-open</code></pre></div>
 <p>To open a specified page in a browser:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">open</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/my-page&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -565,7 +565,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve <span class="token parameter variable">--open</span> /my-page</code></pre></div>
 <p>To open multiple specified pages in browser:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">open</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;/my-page&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;/another-page&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -575,7 +575,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve <span class="token parameter variable">--open</span> /my-page <span class="token parameter variable">--open</span> /another-page</code></pre></div>
 <p>Provide browser name to use instead of the default one:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">open</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -589,7 +589,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --open-app-name <span class="token string">&#x27;google-chrome&#x27;</span></code></pre></div>
 <p>The object accepts all <a href="https://www.npmjs.com/package/open">open</a> options:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">open</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -606,7 +606,7 @@
 <p><code>&#x27;auto&#x27;</code> <code>string</code> <code>number</code></p>
 <p>Specify a port number to listen for requests on:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">port</span><span class="token operator">:</span> <span class="token number">8080</span><span class="token punctuation">,</span>
@@ -616,7 +616,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve <span class="token parameter variable">--port</span> <span class="token number">8080</span></code></pre></div>
 <p><code>port</code> option can&#x27;t be <code>null</code> or an empty string, to automatically use a free port please use <code>port: &#x27;auto&#x27;</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">port</span><span class="token operator">:</span> <span class="token string">&quot;auto&quot;</span><span class="token punctuation">,</span>
@@ -630,7 +630,7 @@
 <p>The dev-server makes use of the powerful <a href="https://github.com/chimurai/http-proxy-middleware">http-proxy-middleware</a> package. Check out its <a href="https://github.com/chimurai/http-proxy-middleware#options">documentation</a> for more advanced usages. Note that some of <code>http-proxy-middleware</code>&#x27;s features do not require a <code>target</code> key, e.g. its <code>router</code> feature, but you will still need to include a <code>target</code> key in your configuration here, otherwise <code>webpack-dev-server</code> won&#x27;t pass it along to <code>http-proxy-middleware</code>.</p>
 <p>With a backend on <code>localhost:3000</code>, you can use this to enable proxying:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">proxy</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -644,7 +644,7 @@
 <p>A request to <code>/api/users</code> will now proxy the request to <code>http://localhost:3000/api/users</code>.</p>
 <p>If you don&#x27;t want <code>/api</code> to be passed along, we need to rewrite the path:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">proxy</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -658,7 +658,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your configuration like this:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">proxy</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -679,7 +679,7 @@
 </ul>
 <p>E.g. for a browser request, you want to serve an HTML page, but for an API request, you want to proxy it. You could do something like this:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">proxy</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -699,7 +699,7 @@
 <aside class="warning"><p class="warning__prefix">warning</p><p>The <code>bypass</code> option is deprecated for proxy in favor of the <code>router</code> and the <code>context</code> options. <a href="https://github.com/chimurai/http-proxy-middleware/tree/v2.0.6#http-proxy-middleware-options">Read more here</a>.</p></aside>
 <p>If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a <code>context</code> property:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">proxy</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -712,7 +712,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Note that requests to root won&#x27;t be proxied by default. To enable root proxying, the <a href="#devserverdevmiddleware"><code>devMiddleware.index</code></a> option should be specified as a falsy value:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">devMiddleware</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -728,7 +728,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The origin of the host header is kept when proxying by default, you can set <code>changeOrigin</code> to <code>true</code> to override this behaviour. It is useful in some cases like using <a href="https://en.wikipedia.org/wiki/Virtual_hosting#Name-based">name-based virtual hosted sites</a>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">proxy</span><span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -745,7 +745,7 @@
 <span class="badge">v4.4.0+</span>
 <p>Allows to set server and options (by default &#x27;http&#x27;).</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">server</span><span class="token operator">:</span> <span class="token string">&quot;http&quot;</span><span class="token punctuation">,</span>
@@ -755,7 +755,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --server-type http</code></pre></div>
 <p>To serve over <code>HTTPS</code> with a self-signed certificate:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">server</span><span class="token operator">:</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">,</span>
@@ -765,7 +765,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --server-type https</code></pre></div>
 <p>To serve over <code>HTTP/2</code> using <a href="https://www.npmjs.com/package/spdy">spdy</a> with a self-signed certificate:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">server</span><span class="token operator">:</span> <span class="token string">&quot;spdy&quot;</span><span class="token punctuation">,</span>
@@ -776,7 +776,7 @@
 <aside class="warning"><p class="warning__prefix">warning</p><p>This option is ignored for Node 15.0.0 and above, as <a href="https://github.com/spdy-http2/node-spdy/issues/380">spdy is broken for those versions</a>. The dev server will migrate over to Node&#x27;s built-in HTTP/2 once <a href="https://expressjs.com/">Express</a> supports it.</p></aside>
 <p>Use the object syntax to provide your own certificate:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">server</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -796,7 +796,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --server-type https --server-options-key ./path/to/server.key --server-options-cert ./path/to/server.crt --server-options-ca ./path/to/ca.pem --server-options-passphrase webpack-dev-server</code></pre></div>
 <p>It also allows you to set additional <a href="https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options">TLS options</a> like <code>minVersion</code> and you can directly pass the contents of respective files:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> fs <span class="token keyword">from</span> <span class="token string">&quot;node:fs&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> fs <span class="token keyword">from</span> <span class="token string">&quot;node:fs&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
@@ -824,7 +824,7 @@
 <p><code>boolean = true</code></p>
 <p>Allows to close dev server and exit the process on <code>SIGINT</code> and <code>SIGTERM</code> signals.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">setupExitSignals</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -835,7 +835,7 @@
 <span class="badge">v4.7.0+</span>
 <p>Provides the ability to execute a custom function and apply custom middleware(s).</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token function-variable function">setupMiddlewares</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">middlewares<span class="token punctuation">,</span> devServer</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
@@ -881,7 +881,7 @@
 <p><code>boolean</code> <code>string</code> <code>object</code> <code>[string, object]</code></p>
 <p>This option allows configuring options for serving static files from the directory (by default &#x27;public&#x27; directory). To disable set it to <code>false</code>:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token keyword">static</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
@@ -915,7 +915,7 @@
 <p><code>string = path.join(process.cwd(), &#x27;public&#x27;)</code></p>
 <p>Tell the server where to serve the content from. This is only necessary if you want to serve static files. <a href="#publicpath"><code>static.publicPath</code></a> will be used to determine where the bundles should be served from and takes precedence.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -931,7 +931,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Provide an array of objects in case you have multiple static folders:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -955,7 +955,7 @@
 <p><code>object</code></p>
 <p>It is possible to configure advanced options for serving static files from <a href="#directory"><code>static.directory</code></a>. See the <a href="http://expressjs.com/en/4x/api.html#express.static">Express documentation</a> for the possible options.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token keyword">static</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -969,7 +969,7 @@
 <p><code>string = &#x27;/&#x27;</code> <code>[string]</code></p>
 <p>Tell the server at which URL to serve <a href="#directory"><code>static.directory</code></a> content. For example to serve a file <code>assets/manifest.json</code> at <code>/serve-public-path-url/manifest.json</code>, your configurations should be as following:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -986,7 +986,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Provide an array of objects in case you have multiple static folders:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1012,7 +1012,7 @@
 <p>Tell dev-server to use <a href="https://github.com/expressjs/serve-index"><code>serveIndex</code></a> middleware when enabled.</p>
 <p><a href="https://github.com/expressjs/serve-index"><code>serveIndex</code></a> middleware generates directory listings on viewing directories that don&#x27;t have an <code>index.html</code> file.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1035,7 +1035,7 @@
 <p><code>boolean</code> <code>object</code></p>
 <p>Tell dev-server to watch the files served by the <a href="#directory"><code>static.directory</code></a> option. It is enabled by default, and file changes will trigger a full page reload. This can be disabled by setting the <code>watch</code> option to <code>false</code>.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1056,7 +1056,7 @@
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx webpack serve --no-static-watch</code></pre></div>
 <p>It is possible to configure advanced options for watching static files from <a href="#directory"><code>static.directory</code></a>. See the <a href="https://github.com/paulmillr/chokidar"><code>chokidar</code></a> documentation for the possible options.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">&quot;node:path&quot;</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token punctuation">{</span> fileURLToPath <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;node:url&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> __filename <span class="token operator">=</span> <span class="token function">fileURLToPath</span><span class="token punctuation">(</span><span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1078,7 +1078,7 @@
 <p><code>string</code> <code>object</code> <code>[string, object]</code></p>
 <p>This option allows you to configure a list of globs/directories/files to watch for file changes. For example:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">watchFiles</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;src/**/*.php&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;public/**/*&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1086,7 +1086,7 @@
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>It is possible to configure advanced options for watching files. See the <a href="https://github.com/paulmillr/chokidar"><code>chokidar</code></a> documentation for the possible options.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">watchFiles</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -1102,7 +1102,7 @@
 <p>This option allows us either to choose the current web-socket server or to provide custom web-socket server implementation.</p>
 <p>The current default mode is <code>&#x27;ws&#x27;</code>. This mode uses <a href="https://www.npmjs.com/package/ws"><code>ws</code></a> as a server, and native WebSockets on the client.</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
@@ -1111,23 +1111,23 @@
 <p>To create a custom server implementation, create a class that extends <a href="https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js"><code>BaseServer</code></a>.</p>
 <p>Using path to <code>CustomServer.js</code>, a custom WebSocket server implementation, along with the compatible <code>&#x27;ws&#x27;</code> client:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token literal-property property">webSocketTransport</span><span class="token operator">:</span> <span class="token string">&quot;ws&quot;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Using custom, compatible WebSocket client and server implementations:</p>
 <p><strong>webpack.config.js</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
   <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">client</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token literal-property property">webSocketTransport</span><span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">webSocketTransport</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomClient&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">webSocketServer</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">.</span>meta<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">&quot;./CustomServer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/dev-server.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><button type="button" class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</button></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/plugins/" data-discover="true">Plugins</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/cache/" data-discover="true">Cache</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">21<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/spacek33z"><img width="45" height="45" alt="spacek33z" title="spacek33z" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/charlespwd"><img width="45" height="45" alt="charlespwd" title="charlespwd" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/orteth01"><img width="45" height="45" alt="orteth01" title="orteth01" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Yiidiir"><img width="45" height="45" alt="Yiidiir" title="Yiidiir" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Loonride"><img width="45" height="45" alt="Loonride" title="Loonride" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dmohns"><img width="45" height="45" alt="dmohns" title="dmohns" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EslamHiko"><img width="45" height="45" alt="EslamHiko" title="EslamHiko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/digitaljohn"><img width="45" height="45" alt="digitaljohn" title="digitaljohn" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/bhavya9107"><img width="45" height="45" alt="bhavya9107" title="bhavya9107" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/g100g"><img width="45" height="45" alt="g100g" title="g100g" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anikethsaha"><img width="45" height="45" alt="anikethsaha" title="anikethsaha" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Biki-das"><img width="45" height="45" alt="Biki-das" title="Biki-das" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/SaulSilver"><img width="45" height="45" alt="SaulSilver" title="SaulSilver" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/malcolm-kee"><img width="45" height="45" alt="malcolm-kee" title="malcolm-kee" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License (CC)" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons Attribution (CC BY)" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.595128c1f0593713.js"></script></body></html>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/webpack.js.org/edit/main/src/content/configuration/dev-server.mdx">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><button type="button" class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</button></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/configuration/plugins/" data-discover="true">Plugins</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/configuration/cache/" data-discover="true">Cache</a></div></div><div data-testid="contributors" class="print:hidden"><h2 class="!font-sans !font-normal">21<!-- --> <!-- -->Contributors</h2><div><div class="grid gap-[10px] lg:gap-[15px] grid-cols-contributors"><a href="https://github.com/sokra"><img width="45" height="45" alt="sokra" title="sokra" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/skipjack"><img width="45" height="45" alt="skipjack" title="skipjack" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/spacek33z"><img width="45" height="45" alt="spacek33z" title="spacek33z" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/charlespwd"><img width="45" height="45" alt="charlespwd" title="charlespwd" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/orteth01"><img width="45" height="45" alt="orteth01" title="orteth01" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/byzyk"><img width="45" height="45" alt="byzyk" title="byzyk" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EugeneHlushko"><img width="45" height="45" alt="EugeneHlushko" title="EugeneHlushko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Yiidiir"><img width="45" height="45" alt="Yiidiir" title="Yiidiir" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Loonride"><img width="45" height="45" alt="Loonride" title="Loonride" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/dmohns"><img width="45" height="45" alt="dmohns" title="dmohns" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/EslamHiko"><img width="45" height="45" alt="EslamHiko" title="EslamHiko" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/digitaljohn"><img width="45" height="45" alt="digitaljohn" title="digitaljohn" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/bhavya9107"><img width="45" height="45" alt="bhavya9107" title="bhavya9107" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/wizardofhogwarts"><img width="45" height="45" alt="wizardofhogwarts" title="wizardofhogwarts" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/jamesgeorge007"><img width="45" height="45" alt="jamesgeorge007" title="jamesgeorge007" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/g100g"><img width="45" height="45" alt="g100g" title="g100g" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/anikethsaha"><img width="45" height="45" alt="anikethsaha" title="anikethsaha" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/snitin315"><img width="45" height="45" alt="snitin315" title="snitin315" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/Biki-das"><img width="45" height="45" alt="Biki-das" title="Biki-das" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/SaulSilver"><img width="45" height="45" alt="SaulSilver" title="SaulSilver" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a><a href="https://github.com/malcolm-kee"><img width="45" height="45" alt="malcolm-kee" title="malcolm-kee" class="w-full rounded-full shadow" src="/icon-square-small-slack.1c7f4f7a52c41f94.png"/></a></div></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License (CC)" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons Attribution (CC BY)" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.e74b29f8d0dc3e06.js"></script></body></html>
