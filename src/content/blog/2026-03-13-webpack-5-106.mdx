@@ -76,3 +76,16 @@ module.exports = {
   },
 };
 ```
+
+## Better Tree Shaking for CommonJS Destructuring
+
+Webpack can now statically analyze **destructuring assignments directly from CommonJS `require`** (and `module.require`) and treat only the destructured properties as “referenced exports”, instead of conservatively assuming the whole `exports` object is used. This improves dead-code elimination in optimized builds and can reduce bundle size in codebases that still consume CommonJS modules.
+
+**Examples**
+```js
+// Only `a` is considered referenced
+const { a } = require("./module");
+
+// Also supported
+const { a, b } = module.require("./module");
+```
