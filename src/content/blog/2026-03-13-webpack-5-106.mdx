@@ -1,0 +1,31 @@
+---
+title: Webpack 5.106
+sort: 20260313
+contributors:
+  - bjohansebas
+---
+
+## CSS Modules with Runtime Style Injection
+
+Webpack now supports `exportType: "style"` for CSS Modules (when `experiments.css: true` is enabled), which allows CSS to be injected into the DOM as a `<style>` (`HTMLStyleElement`) directly from the webpack runtime. This covers the typical use case of `style-loader`, so it is no longer necessary to use `style-loader` to inject styles when using this mode.
+
+Additionally, the CSS Module exports are preserved (for example, the class name mapping in `*.module.css`).
+
+For CSP compatibility, when a nonce has been configured in the webpack runtime (`__webpack_require__.nc`), the `<style>` injected by this mode receives the same nonce via the `nonce` attribute (webpack reuses the nonce provided by the application; it does not generate one automatically).
+
+```js
+module.exports = {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        type: "css/module",
+        parser: {
+          exportType: "style",
+        },
+      },
+    ],
+  },
+};
+```
