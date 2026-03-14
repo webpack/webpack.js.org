@@ -89,3 +89,40 @@ const { a } = require("./module");
 // Also supported
 const { a, b } = module.require("./module");
 ```
+
+## Context Support for VirtualUrlPlugin
+
+`VirtualUrlPlugin` (via `webpack.experiments.schemes.VirtualUrlPlugin`) now supports a `context` option that defines the **base directory used to resolve relative imports inside virtual modules**. This feature is currently **experimental**, as it is part of the `experiments.schemes` API.
+
+This makes virtual modules behave more like real files: code such as `import "./utils"` resolves consistently instead of falling back to `compiler.context` and potentially resolving incorrectly.
+
+`context` can be set per virtual module (inside the module definition) or as a plugin level default. It defaults to `"auto"`, which tries to infer the context from the virtual module id or path; otherwise it falls back to `compiler.context`. Conceptually, when you set `context` for a module, webpack treats that virtual module *as if it lived inside that directory* for resolving relative paths.
+
+For example, if you define a virtual module id `virtual/table.js` with `context: path.join(__dirname, "src/components")`, then its internal `import "./utils"` is resolved as if the file were `src/components/table.js` importing `src/components/utils.js`.
+
+```js
+const path = require("path");
+const webpack = require("webpack");
+
+module.exports = {
+  plugins: [
+    new webpack.experiments.schemes.VirtualUrlPlugin(
+      {
+        "src/components/button.js": {
+          context: "auto",
+          source() {
+            return "import { trim } from './utils'; export const button = trim('button ');";
+          }
+        },
+        "virtual/table.js": {
+          context: path.join(__dirname, "src/components"),
+          source() {
+            return "import { trim } from './utils'; export const table = trim('table ');";
+          }
+        }
+      },
+      { context: "auto" }
+    )
+  ]
+};
+```
