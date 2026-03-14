@@ -5,6 +5,53 @@ contributors:
   - bjohansebas
 ---
 
+## Plugin Validation with `compiler.hooks.validate`
+
+Webpack adds a new top level `validate` option to enable or disable schema validation for webpack configuration, plugin options, and loader options. When validation is disabled, webpack skips these checks, which can reduce overhead in some scenarios, but it also removes important guardrails. Invalid options may only fail later or lead to unexpected behavior.
+
+This change also introduces an internal API so plugins can register validation through `compiler.hooks.validate` and run it with `compiler.validate(...)`, allowing validation behavior to be consistently controlled by the single `validate` flag.
+
+**Defaults**
+
+- In development mode, `validate` defaults to `true`.
+- In production mode, `validate` also defaults to `true`. However, if `experiments.futureDefaults` is enabled, it defaults to `false`.
+
+**Config example**
+
+```js
+module.exports = {
+  // Disable schema validation (webpack config, plugins, and loaders)
+  validate: false,
+
+  // ...rest of config
+};
+```
+
+**Plugin authoring example (respecting `validate: false`)**
+
+```js
+class MyPlugin {
+  constructor(options = {}) {
+    this.options = options;
+  }
+
+  apply(compiler) {
+    compiler.hooks.validate.tap("MyPlugin", () => {
+      compiler.validate(
+        () => require("./schema/MyPlugin.json"),
+        this.options,
+        { name: "My Plugin", baseDataPath: "options" },
+        (options) => require("./schema/MyPlugin.check")(options),
+      );
+    });
+
+    // ...normal plugin logic here...
+  }
+}
+
+module.exports = MyPlugin;
+```
+
 ## CSS Modules with Runtime Style Injection
 
 Webpack now supports `exportType: "style"` for CSS Modules (when `experiments.css: true` is enabled), which allows CSS to be injected into the DOM as a `<style>` (`HTMLStyleElement`) directly from the webpack runtime. This covers the typical use case of `style-loader`, so it is no longer necessary to use `style-loader` to inject styles when using this mode.
