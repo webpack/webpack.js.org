@@ -190,8 +190,8 @@ This becomes a problem when the module is executed in a CommonJS context where `
  import webpack from "webpack";
  import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
 
  exports default {
    entry: './src/index.js',
@@ -256,8 +256,8 @@ Now, while you'd likely never do this in your own source code, you may encounter
  import webpack from "webpack";
  import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
@@ -501,7 +501,7 @@ Node built-ins, like `process`, can be polyfilled right directly from your confi
 
 There are a few other tools that can help when dealing with legacy modules.
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `import` and `require()` statements. This practice is also used to improve the build performance.
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 

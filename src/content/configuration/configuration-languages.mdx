@@ -48,7 +48,7 @@ const config: webpack.Configuration = {
   },
 };
 
-module.exports config;
+export default config;
 ```
 
 **tsconfig.json**
@@ -152,9 +152,13 @@ and then proceed to write your configuration:
 **webpack.config.coffee**
 
 ```coffeescript
-HtmlWebpackPlugin = require('html-webpack-plugin')
-webpack = require('webpack')
-path = require("node:path")
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import webpack from 'webpack'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+__filename = fileURLToPath(import.meta.url)
+__dirname = path.dirname(__filename)
 
 config =
   mode: 'production'
@@ -162,15 +166,18 @@ config =
   output:
     path: path.resolve(__dirname, 'dist')
     filename: 'my-first-webpack.bundle.js'
-  module: rules: [ {
-    test: /\.(js|jsx)$/
-    use: 'babel-loader'
-  } ]
+  module:
+    rules: [
+      {
+        test: /\.(js|jsx)$/
+        use: 'babel-loader'
+      }
+    ]
   plugins: [
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
 
-module.exports config
+export default config
 ```
 
 ## Babel and JSX

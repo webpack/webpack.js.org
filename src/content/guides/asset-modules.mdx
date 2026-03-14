@@ -379,6 +379,11 @@ new URL(
 );
 ```
 
+```js
+// any targets when ECMA modules output enabled
+new URL(`${__webpack_public_path__}logo.svg`, import.meta.url);
+```
+
 As of webpack 5.38.0, [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) are supported in `new URL()` as well:
 
 **src/index.js**

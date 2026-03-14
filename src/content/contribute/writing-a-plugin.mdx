@@ -73,16 +73,16 @@ class HelloWorldPlugin {
   }
 }
 
-module.exports = HelloWorldPlugin;
+export default HelloWorldPlugin;
 ```
 
 Then to use the plugin, include an instance in your webpack configuration `plugins` array:
 
 ```javascript
 // webpack.config.js
-const HelloWorldPlugin = require("hello-world");
+import HelloWorldPlugin from "hello-world";
 
-module.exports = {
+export default {
   // ... configuration settings here ...
   plugins: [new HelloWorldPlugin({ options: true })],
 };
@@ -132,7 +132,7 @@ class HelloCompilationPlugin {
   }
 }
 
-module.exports = HelloCompilationPlugin;
+export default HelloCompilationPlugin;
 ```
 
 For the list of hooks available on `compiler`, `compilation`, and other important objects, see the [plugins API](/api/plugins/) docs.
@@ -161,7 +161,7 @@ class HelloAsyncPlugin {
   }
 }
 
-module.exports = HelloAsyncPlugin;
+export default HelloAsyncPlugin;
 ```
 
 #### tapPromise
@@ -185,7 +185,7 @@ class HelloAsyncPlugin {
   }
 }
 
-module.exports = HelloAsyncPlugin;
+export default HelloAsyncPlugin;
 ```
 
 ## Example
@@ -259,16 +259,16 @@ class FileListPlugin {
   }
 }
 
-module.exports = { FileListPlugin };
+export default FileListPlugin;
 ```
 
 **webpack.config.js**
 
 ```javascript
-const { FileListPlugin } = require("./file-list-plugin.js");
+import FileListPlugin from "./file-list-plugin.js";
 
 // Use the plugin in your webpack configuration:
-module.exports = {
+export default {
   // …
 
   plugins: [
@@ -394,7 +394,7 @@ class AssetLoggerPlugin {
   }
 }
 
-module.exports = AssetLoggerPlugin;
+export default AssetLoggerPlugin;
 ```
 
 This plugin taps into the `emit` hook of the Webpack compiler and prints the names of all generated assets to the console. It demonstrates how plugins can interact with the compilation process using Webpack hooks.

@@ -51,6 +51,10 @@ The `resourceRegExp` parameter passed to `IgnorePlugin` is not tested against th
 Rather, because `moment` imports with this code:
 
 ```js
+import(`./locale/${name}`);
+
+// or
+
 require(`./locale/${name}`);
 ```
 

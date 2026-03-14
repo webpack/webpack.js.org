@@ -42,7 +42,7 @@ class MyPlugin {
   }
 }
 
-module.exports = MyPlugin;
+export default MyPlugin;
 ```
 
 - `compilation.modules`: A set of modules (built inputs) in the compilation. Each module manages the build of a raw file from your source library.
@@ -82,7 +82,7 @@ class MyPlugin {
   }
 }
 
-module.exports = MyPlugin;
+export default MyPlugin;
 ```
 
 You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Add valid file paths into the `compilation.fileDependencies` `Set` to add them to the watched files.
@@ -113,5 +113,5 @@ class MyPlugin {
   }
 }
 
-module.exports = MyPlugin;
+export default MyPlugin;
 ```

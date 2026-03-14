@@ -175,7 +175,7 @@ It is important to mention that `import { calculateTax } from './tax';` will als
 
 `ProvidePlugin(name, request)`
 
-If `name` is used in a module it is filled by a module loaded by `require(<request>)`.
+If `name` is used in a module it is filled by a module loaded by `import ... from <request>`/`import(<request>)`/`require(<request>)`.
 
 ### NodeStuffPlugin
 

@@ -184,9 +184,9 @@ Access environment variables from multiple sources. `import.meta.env` is an obje
 **webpack.config.js**
 
 ```js
-const webpack = require("webpack");
+import webpack from "webpack";
 
-module.exports = {
+export default {
   mode: "production", // NODE_ENV is automatically set to "production"
   dotenv: {
     prefix: "WEBPACK_", // Only expose variables with WEBPACK_ prefix
