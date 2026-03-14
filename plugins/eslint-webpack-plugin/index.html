@@ -36,7 +36,7 @@
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
-  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">ESLintPlugin</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">plugins</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">ESLintPlugin</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token comment">// ...</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -50,7 +50,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> cache <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">cache</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>true</code></li>
 </ul>
@@ -59,7 +59,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> cacheLocation <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">cacheLocation</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>node_modules/.cache/eslint-webpack-plugin/.eslintcache</code></li>
 </ul>
@@ -68,7 +68,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> configType <span class="token operator">=</span> <span class="token string">&quot;flat&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;eslintrc&quot;</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">configType</span> <span class="token operator">=</span> <span class="token string">&quot;flat&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;eslintrc&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>flat</code></li>
 </ul>
@@ -82,7 +82,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> context <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">context</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>compiler.context</code></li>
 </ul>
@@ -91,7 +91,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> eslintPath <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">eslintPath</span> <span class="token operator">=</span> <span class="token builtin">string</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>eslint</code></li>
 </ul>
@@ -101,7 +101,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> extensions <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">extensions</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>&#x27;js&#x27;</code></li>
 </ul>
@@ -110,7 +110,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> exclude <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">exclude</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>&#x27;node_modules&#x27;</code></li>
 </ul>
@@ -119,7 +119,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> resourceQueryExclude <span class="token operator">=</span> RegExp <span class="token operator">|</span> RegExp<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">resourceQueryExclude</span> <span class="token operator">=</span> RegExp <span class="token operator">|</span> RegExp<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>[]</code></li>
 </ul>
@@ -128,7 +128,7 @@ See the <a href="https://eslint.org/docs/latest/integrate/nodejs-api#-new-eslint
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> files <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">files</span> <span class="token operator">=</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>null</code></li>
 </ul>
@@ -139,7 +139,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> fix <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">fix</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>false</code></li>
 </ul>
@@ -149,11 +149,11 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> formatter <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">formatter</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">string</span>
   <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-      results<span class="token punctuation">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-      data<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> undefined<span class="token punctuation">,</span>
+      results<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      data<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
     <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>&#x27;stylish&#x27;</code></li>
@@ -164,7 +164,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> lintDirtyModulesOnly <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">lintDirtyModulesOnly</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>false</code></li>
 </ul>
@@ -173,7 +173,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> threads <span class="token operator">=</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">threads</span> <span class="token operator">=</span> <span class="token builtin">boolean</span> <span class="token operator">|</span> <span class="token builtin">number</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>false</code></li>
 </ul>
@@ -185,7 +185,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> emitError <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">emitError</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>true</code></li>
 </ul>
@@ -194,7 +194,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> emitWarning <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">emitWarning</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>true</code></li>
 </ul>
@@ -203,7 +203,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> failOnError <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">failOnError</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>true</code></li>
 </ul>
@@ -212,7 +212,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> failOnWarning <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">failOnWarning</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>false</code></li>
 </ul>
@@ -221,7 +221,7 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> quiet <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">quiet</span> <span class="token operator">=</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>false</code></li>
 </ul>
@@ -230,19 +230,19 @@ File and glob patterns ignore <code>options.extensions</code>.</p>
 <ul>
 <li>Type:</li>
 </ul>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> outputReport <span class="token operator">=</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">outputReport</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token builtin">boolean</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
-      filePath<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> undefined<span class="token punctuation">;</span>
-      formatter<span class="token operator">?</span><span class="token punctuation">:</span>
+      filePath<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+      formatter<span class="token operator">?</span><span class="token operator">:</span>
         <span class="token operator">|</span> <span class="token punctuation">(</span>
             <span class="token operator">|</span> <span class="token builtin">string</span>
             <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-                results<span class="token punctuation">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                data<span class="token operator">?</span><span class="token punctuation">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> undefined<span class="token punctuation">,</span>
+                results<span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResult<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                data<span class="token operator">?</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;eslint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>ESLint<span class="token punctuation">.</span>LintResultData <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>
               <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">string</span><span class="token punctuation">)</span>
           <span class="token punctuation">)</span>
-        <span class="token operator">|</span> undefined<span class="token punctuation">;</span>
+        <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <ul>
 <li>Default: <code>false</code></li>
@@ -260,4 +260,4 @@ if none is passed in the default/configured formatter will be used.</li>
 <p>If you&#x27;re new here, please take a moment to review our contributing guidelines.</p>
 <p><a href="https://github.com/webpack/eslint-webpack-plugin?tab=contributing-ov-file#contributing">CONTRIBUTING</a></p>
 <h2><span id="license"></span>License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><a href="https://github.com/webpack/eslint-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/eslint-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><button type="button" class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</button><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/eslint-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/css-minimizer-webpack-plugin/" data-discover="true">CssMinimizerWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/html-minimizer-webpack-plugin/" data-discover="true">HtmlMinimizerWebpackPlugin</a></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License (CC)" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons Attribution (CC BY)" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.b63f4a9736db3ffe.js"></script></body></html>
+<p><a href="https://github.com/webpack/eslint-webpack-plugin/main/LICENSE">MIT</a></p></div><div class="print:hidden mt-20"><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/eslint-webpack-plugin/edit/main/README.md">Edit this page</a><span class="mx-5 text-black font-bold dark:text-white">·</span><button type="button" class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline">Print this page</button><span class="mx-5 text-black font-bold dark:text-white">·</span><a class="text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline" href="https://github.com/webpack/eslint-webpack-plugin">Jump to repository</a></div><div class="adjacent-links print:hidden"><div class="adjacent-links__prev"><div>« Previous</div><a class="adjacent-links__link" href="/plugins/css-minimizer-webpack-plugin/" data-discover="true">CssMinimizerWebpackPlugin</a></div><div class="adjacent-links__next"><div class="adjacent-links__label--next">Next »</div><a class="adjacent-links__link" href="/plugins/html-minimizer-webpack-plugin/" data-discover="true">HtmlMinimizerWebpackPlugin</a></div></div></div></main></div><div class="scroll-to-top"></div><footer class="footer"><div class="container footer__top"><div class="footer__openjs"><a href="https://openjsf.org" target="_blank" rel="noopener noreferrer"><img class="footer-openjsf-logo" src="/openjs-logo.de5f5dbf59d26318.png" alt="OpenJS Foundation Logo" width="110"/></a></div><p>Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and webpack contributors. All rights reserved. The<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a> has registered trademarks and uses trademarks. For a list of trademarks of the<!-- --> <a href="https://openjsf.org">OpenJS Foundation</a>, please see our<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a>. Trademarks and logos not indicated on the<!-- --> <a href="https://trademark-list.openjsf.org">list of OpenJS Foundation trademarks</a> <!-- -->are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.</p><p><a href="https://openjsf.org">The OpenJS Foundation</a> |<!-- --> <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |<!-- --> <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |<!-- --> <a href="https://bylaws.openjsf.org">Bylaws</a> |<!-- --> <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |<!-- --> <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |<!-- --> <a href="https://trademark-list.openjsf.org">Trademark List</a> |<!-- --> <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a></p></div><div class="container footer__inner"><section class="footer__left" aria-label="Quick links"><a class="footer__link" href="/guides/getting-started/" data-discover="true">Get Started</a><a class="footer__link" href="/comparison/" data-discover="true">Comparison</a><a href="https://privacy-policy.openjsf.org/" target="_blank" rel="noopener noreferrer" class="footer__link">Privacy Policy</a></section><section class="footer__middle" aria-label="Home"><a class="footer__icon" href="/" data-discover="true"><img src="/icon-square-small.9e8aff7a67a5dd20.svg" alt="webpack icon" width="35" height="35"/></a></section><section class="footer__right" aria-label="Resources and links"><a href="https://webpack.threadless.com/" target="_blank" rel="noopener noreferrer" class="footer__link">Swag Store</a><a class="footer__link" href="/awesome-webpack/" data-discover="true">Awesome webpack</a><a class="footer__link" href="/glossary/" data-discover="true">Glossary</a><a class="footer__link" href="/branding/" data-discover="true">Branding</a><a href="https://github.com/webpack/webpack/releases" target="_blank" rel="noopener noreferrer" class="footer__link">Changelog</a><a class="footer__link footer__license" href="/license" data-discover="true"><img alt="Creative Commons License (CC)" src="/cc.185f5779f354f6e9.svg" width="25" height="25"/><img alt="Creative Commons Attribution (CC BY)" src="/by.d2da85793ea9d7bd.svg" width="25" height="25"/></a></section></div></footer></div></div><script src="/vendor.84e8b55b5cc3f91e.js"></script><script src="/index.9c9da19693f54897.js"></script></body></html>
