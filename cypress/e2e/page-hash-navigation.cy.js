@@ -1,9 +1,11 @@
 "use strict";
 
 describe("Page hash navigation", () => {
-  it("scrolls to element when hash is present", () => {
-    cy.visit("/concepts/entry-points/#single-entry-shorthand");
+  it("scrolls to the hash target element", () => {
+    cy.visit("/guides/getting-started/#basic-setup");
 
-    cy.get("#single-entry-shorthand").should("exist");
+    cy.location("hash").should("eq", "#basic-setup");
+
+    cy.get("#basic-setup", { timeout: 10000 }).should("be.visible");
   });
 });
