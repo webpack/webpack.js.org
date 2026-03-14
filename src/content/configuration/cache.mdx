@@ -14,7 +14,7 @@ Cache the generated webpack modules and chunks to improve build speed. `cache` i
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: false,
@@ -54,7 +54,12 @@ T> It's recommended to set `cache.buildDependencies.config: [__filename]` in you
 
 **webpack.config.js**
 
-```javascript
+```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+
 export default {
   cache: {
     buildDependencies: {
@@ -76,7 +81,7 @@ Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -102,7 +107,7 @@ Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.n
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -127,7 +132,7 @@ Cache computation of modules which are unchanged and reference only unchanged mo
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -149,7 +154,7 @@ Compression type used for the cache files. By default it is `false`.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -169,7 +174,7 @@ Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -189,7 +194,7 @@ Time in milliseconds. `cache.idleTimeout` denotes the time period after which th
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ..
   cache: {
@@ -211,7 +216,7 @@ Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period af
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ..
   cache: {
@@ -231,7 +236,7 @@ Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period afte
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ..
   cache: {
@@ -261,7 +266,7 @@ The amount of time in milliseconds that unused cache entries are allowed to stay
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -287,7 +292,7 @@ Define the lifespan of unused cache entries in the memory cache.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -317,7 +322,7 @@ Define the lifespan of unused cache entries in the memory cache.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -336,7 +341,7 @@ Cache computation of modules which are unchanged and reference only unchanged mo
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -356,7 +361,7 @@ Name for the cache. Different names will lead to different coexisting caches. De
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -374,7 +379,7 @@ Track and log detailed timing information for individual cache items of type `'f
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -415,7 +420,7 @@ W> `pack` is the only supported mode since webpack 5.0.x
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -433,7 +438,7 @@ Sets the `cache` type to either in memory or on the file system. The `memory` op
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {
@@ -452,7 +457,7 @@ Version of the cache data. Different versions won't allow to reuse the cache and
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   cache: {

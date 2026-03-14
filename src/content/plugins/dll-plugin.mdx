@@ -29,7 +29,7 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 - `entryOnly` (boolean = true): if `true`, only entry points will be exposed
 - `type`: type of the dll bundle
 
-```javascript
+```js
 new webpack.DllPlugin(options);
 ```
 
@@ -53,7 +53,7 @@ This plugin is used in the primary webpack config, it references the dll-only-bu
 - `scope` (optional): prefix which is used for accessing the content of the dll
 - `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#outputlibrarytarget))
 
-```javascript
+```js
 new webpack.DllReferencePlugin(options);
 ```
 
@@ -83,7 +83,7 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
 **webpack.vendor.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -99,7 +99,7 @@ new webpack.DllPlugin({
 
 **webpack.app.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 

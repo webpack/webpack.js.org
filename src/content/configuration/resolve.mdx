@@ -509,6 +509,10 @@ export default {
 Webpack 5 no longer polyfills Node.js core modules automatically which means if you use them in your code running in browsers or alike, you will have to install compatible modules from npm and include them yourself. Here is a list of polyfills webpack has used before webpack 5:
 
 ```js
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+
 export default {
   // ...
   resolve: {

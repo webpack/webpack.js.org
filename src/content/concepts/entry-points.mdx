@@ -34,7 +34,7 @@ Usage: `entry: string | [string]`
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: "./path/to/my/entry/file.js",
 };
@@ -44,7 +44,7 @@ The single entry syntax for the `entry` property is a shorthand for:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: {
     main: "./path/to/my/entry/file.js",
@@ -86,7 +86,7 @@ Usage: `entry: { <entryChunkName> string | [string] } | {}`
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: {
     app: "./src/app.js",
@@ -115,7 +115,7 @@ An object of entry point description. You can specify the following properties.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: {
     a2: "dependingfile.js",
@@ -131,7 +131,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: {
     a2: "./a",
@@ -146,7 +146,7 @@ export default {
 
 Make sure `runtime` must not point to an existing entry point name, for example the below config would throw an error:
 
-```javascript
+```js
 export default {
   entry: {
     a1: "./a",
@@ -160,7 +160,7 @@ export default {
 
 Also `dependOn` must not be circular, the following example again would throw an error:
 
-```javascript
+```js
 export default {
   entry: {
     a3: {
@@ -183,7 +183,7 @@ Below is a list of entry configurations and their real-world use cases:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: {
     main: "./src/app.js",
@@ -194,7 +194,7 @@ export default {
 
 **webpack.prod.js**
 
-```javascript
+```js
 export default {
   output: {
     filename: "[name].[contenthash].bundle.js",
@@ -204,7 +204,7 @@ export default {
 
 **webpack.dev.js**
 
-```javascript
+```js
 export default {
   output: {
     filename: "[name].bundle.js",
@@ -222,7 +222,7 @@ T> In webpack version < 4 it was common to add vendors as a separate entry point
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: {
     pageOne: "./src/pageOne/index.js",

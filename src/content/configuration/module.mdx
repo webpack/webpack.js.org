@@ -1070,7 +1070,7 @@ T> You may need to use `[\\/]` in regex to match `\` on Windows and `/` on Mac/L
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1079,7 +1079,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1100,7 +1100,7 @@ Cache the resolution of module requests. There are a couple of defaults for `mod
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1174,7 +1174,7 @@ A [`Condition`](#condition) that allows you to match the import assertion of a d
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1182,7 +1182,7 @@ export default {
       {
         // Handles imports with the assertion "assert { type: 'json' }"
         assert: { type: "json" },
-        loader: require.resolve("./loader-assert.js"),
+        loader: import.meta.resolve("./loader-assert.js"),
       },
     ],
   },
@@ -1193,7 +1193,7 @@ export default {
 
 {/* eslint-skip */}
 
-```javascript
+```js
 import one from "./pkg-1.json" assert { type: "json" };
 ```
 
@@ -1205,7 +1205,7 @@ A [`Condition`](#condition) that allows you to match the child compiler name.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   name: "compiler",
@@ -1247,17 +1247,17 @@ All normal and pre loaders can be omitted (overridden) by prefixing `-!` in the 
 
 All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` in the request.
 
-```javascript
+```js
 // Disable normal loaders
 import { a } from "!./file1.js";
 ```
 
-```javascript
+```js
 // Disable preloaders and normal loaders
 import { b } from "-!./file2.js";
 ```
 
-```javascript
+```js
 // Disable all loaders
 import { c } from "!!./file3.js";
 ```
@@ -1278,7 +1278,7 @@ A [`Condition`](#condition) to match against the module that issued the request.
 
 **index.js**
 
-```javascript
+```js
 import A from "./a.js";
 ```
 
@@ -1385,7 +1385,7 @@ An array of [`Rules`](#rule) from which only the first matching Rule is used whe
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1696,7 +1696,7 @@ A [`Condition`](#condition) matched with the resource query. This option is used
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1719,7 +1719,7 @@ If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a func
 
 **webpack.config.js**
 
-```javascript
+```js
 import toml from "toml";
 
 export default {
@@ -1786,7 +1786,7 @@ Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1845,7 +1845,7 @@ Loaders can be chained by passing multiple loaders, which will be applied from r
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1888,7 +1888,7 @@ The same shortcut as an array can be used for the return value (i.e. `use: [ 'st
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -1930,7 +1930,7 @@ For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/d
 
 **./src/index.js**
 
-```javascript
+```js
 import footer from "footer";
 
 console.log(footer);
@@ -1938,19 +1938,19 @@ console.log(footer);
 
 **./src/footer/default.js**
 
-```javascript
+```js
 export default "default footer";
 ```
 
 **./src/footer/overridden.js**
 
-```javascript
+```js
 export default "overridden footer";
 ```
 
 **webpack.js.org**
 
-```javascript
+```js
 export default {
   resolve: {
     alias: {
@@ -1964,7 +1964,7 @@ When creating a bundle with this configuration, `console.log(footer)` will outpu
 
 **webpack.js.org**
 
-```javascript
+```js
 export default {
   resolve: {
     alias: {
@@ -2021,7 +2021,7 @@ A [`Condition`](#condition) that allows you to match the imports based on specif
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -2029,7 +2029,7 @@ export default {
       {
         // Handles imports with the condition "with { type: 'json' }"
         with: { type: "json" },
-        loader: require.resolve("./loader-assert.js"),
+        loader: import.meta.resolve("./loader-assert.js"),
       },
     ],
   },
@@ -2038,7 +2038,7 @@ export default {
 
 **index.js**
 
-```javascript
+```js
 import one from "./pkg-1.json" with { type: "json" };
 ```
 
@@ -2062,7 +2062,7 @@ Conditions can be one of these:
 
 **Example:**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -2106,7 +2106,7 @@ It also breaks if the options object cannot be stringified (i.e. circular JSON).
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -2135,7 +2135,7 @@ The `info` object parameter has the following fields:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -2173,7 +2173,7 @@ Here are the available options with their [defaults](https://github.com/webpack/
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   module: {

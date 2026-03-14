@@ -12,7 +12,7 @@ The built-in `ManifestPlugin` generates one asset manifest for your build. Port 
 
 **webpack.config.js**
 
-```javascript
+```js
 new webpack.ManifestPlugin({
   // options...
 });
@@ -30,7 +30,7 @@ When `entrypoints` is enabled and one entry uses `dependOn`
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   entry: {
     entry1: {
@@ -97,7 +97,7 @@ Receives the manifest object and returns the manifest string.
 
 Use `serialize` to output other formats, for example YAML:
 
-```javascript
+```js
 new webpack.ManifestPlugin({
   serialize(manifest) {
     return YAML.stringify(manifest, 4);

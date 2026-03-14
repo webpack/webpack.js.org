@@ -43,7 +43,7 @@
     "lint": "run-s lint:*",
     "lint:prettier": "prettier --cache --list-different --ignore-unknown .",
     "lint:js": "eslint --cache --cache-location .cache/.eslintcache .",
-    "lint:markdown": "markdownlint --config ./.markdownlint.json '**/*.{md,mdx}'",
+    "lint:markdown": "markdownlint --config ./.markdownlint.json --rules ./src/utilities/markdown-lint-enforce-lang-aliases.js '**/*.{md,mdx}'",
     "lint:prose": "vale --config='.vale.ini' src/content",
     "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --internal --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip /contribute/Governance --skip https:// --skip http:// --skip sw.js --skip /vendor > internal-links.tap; cat internal-links.tap | tap-spot",
     "sitemap": "cd dist && sitemap-static --ignore-file=../sitemap-ignore.json --pretty --prefix=https://webpack.js.org/ > sitemap.xml",

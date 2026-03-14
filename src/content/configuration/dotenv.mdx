@@ -20,7 +20,7 @@ Enable and configure the built-in Dotenv plugin to load environment variables fr
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: true,
@@ -29,7 +29,7 @@ export default {
 
 Setting `dotenv` to `true` enables the plugin with default options. For custom configuration, pass an options object:
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {
@@ -52,7 +52,7 @@ Only expose environment variables that start with the specified prefix(es). This
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {
@@ -63,7 +63,7 @@ export default {
 
 **Multiple prefixes:**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {
@@ -88,7 +88,7 @@ The directory from which `.env` files are loaded.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {
@@ -99,7 +99,7 @@ export default {
 
 **Disable loading:**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {
@@ -120,7 +120,7 @@ Files are loaded in the order specified, with later files overriding earlier one
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   mode: "production",
@@ -132,7 +132,7 @@ export default {
 
 **Custom patterns:**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {
@@ -174,7 +174,7 @@ WEBPACK_PORT=${WEBPACK_PORT:-3000}  # Use WEBPACK_PORT from process.env, or 3000
 
 **In your code:**
 
-```javascript
+```js
 console.log(process.env.WEBPACK_API_URL); // "https://api.example.com/v1"
 console.log(process.env.WEBPACK_PORT); // Value of process.env.WEBPACK_PORT if set, otherwise "3000"
 ```
@@ -211,7 +211,7 @@ SECRET_KEY=should-not-be-exposed  # Won't be exposed (no WEBPACK_ prefix)
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: true, // Uses default prefix "WEBPACK_"
@@ -220,7 +220,7 @@ export default {
 
 **In your application:**
 
-```javascript
+```js
 console.log(process.env.WEBPACK_API_URL); // "https://api.example.com"
 console.log(process.env.WEBPACK_FEATURE_FLAG); // "true"
 console.log(process.env.SECRET_KEY); // undefined (not exposed)
@@ -269,7 +269,7 @@ PRIVATE_KEY=secret  # Won't be exposed
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {
@@ -284,7 +284,7 @@ Load environment files from a custom location with custom naming:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   dotenv: {

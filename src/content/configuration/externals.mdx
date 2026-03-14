@@ -44,7 +44,7 @@ For example, to include [jQuery](https://jquery.com/) from a CDN instead of bund
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externals: {
@@ -55,7 +55,7 @@ export default {
 
 This leaves any dependent modules unchanged, i.e. the code shown below will still work:
 
-```javascript
+```js
 import $ from "jquery";
 
 $(".my-element").animate(/* ... */);
@@ -71,7 +71,7 @@ Depending on the [externalsType](#externalstype), this could be the name of the 
 
 You can also use the shortcut syntax if you're defining only 1 external:
 
-```javascript
+```js
 export default {
   // ...
   externals: "jquery",
@@ -80,7 +80,7 @@ export default {
 
 equals to
 
-```javascript
+```js
 export default {
   // ...
   externals: {
@@ -93,7 +93,7 @@ You can specify the [external library type](#externalstype) to the external with
 
 For example, if the external library is a [CommonJS module](#externalstypecommonjs), you can specify
 
-```javascript
+```js
 export default {
   // ...
   externals: {
@@ -104,7 +104,7 @@ export default {
 
 ### [string]
 
-```javascript
+```js
 export default {
   // ...
   externals: {
@@ -119,7 +119,7 @@ When the `externalsType` is `commonjs`, this example would translate to `require
 
 Similar to the [string syntax](#string), you can specify the external library type with the `${externalsType} ${libraryName}` syntax, in the first item of the array, for example:
 
-```javascript
+```js
 export default {
   // ...
   externals: {
@@ -132,7 +132,7 @@ export default {
 
 W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) and [`externalsType: 'umd'`](#externalstype). It's not allowed for other library targets.
 
-```javascript
+```js
 export default {
   // ...
   // or
@@ -196,7 +196,7 @@ As an example, to externalize all imports where the import path matches a regula
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externals: [
@@ -217,7 +217,7 @@ Other examples using different module formats:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   externals: [
     function (ctx, callback) {
@@ -230,7 +230,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   externals: [
     function (ctx, callback) {
@@ -243,7 +243,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   externals: [
     function (ctx, callback) {
@@ -256,7 +256,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   externals: [
     function (ctx, callback) {
@@ -278,7 +278,7 @@ Every dependency that matches the given regular expression will be excluded from
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externals: /^(jquery|\$)$/i,
@@ -293,7 +293,7 @@ Sometimes you may want to use a combination of the above syntaxes. This can be d
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externals: [
@@ -334,7 +334,7 @@ Specify externals by layer.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   externals: {
     byLayer: {
@@ -378,7 +378,7 @@ Supported types:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "promise",
@@ -391,13 +391,13 @@ Specify the default type of externals as `'commonjs'`. Webpack will generate cod
 
 #### Example
 
-```javascript
+```js
 import fs from "fs-extra";
 ```
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "commonjs",
@@ -409,7 +409,7 @@ export default {
 
 Will generate into something like:
 
-```javascript
+```js
 import fs from "fs-extra";
 ```
 
@@ -421,7 +421,7 @@ Specify the default type of externals as `'global'`. Webpack will read the exter
 
 #### Example
 
-```javascript
+```js
 import jq from "jquery";
 
 jq(".my-element").animate(/* ... */);
@@ -429,7 +429,7 @@ jq(".my-element").animate(/* ... */);
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "global",
@@ -444,7 +444,7 @@ export default {
 
 Will generate into something like
 
-```javascript
+```js
 const jq = globalThis.$;
 
 jq(".my-element").animate(/* ... */);
@@ -458,7 +458,7 @@ Make sure to enable [`experiments.outputModule`](/configuration/experiments/#exp
 
 #### Example
 
-```javascript
+```js
 import jq from "jquery";
 
 jq(".my-element").animate(/* ... */);
@@ -480,7 +480,7 @@ export default {
 
 Will generate into something like
 
-```javascript
+```js
 import * as __WEBPACK_EXTERNAL_MODULE_jquery__ from "jquery";
 
 const jq = __WEBPACK_EXTERNAL_MODULE_jquery__.default;
@@ -497,7 +497,7 @@ Specify the default type of externals as `'import'`. Webpack will generate code 
 
 #### Example
 
-```javascript
+```js
 async function foo() {
   const jq = await import("jQuery");
   jq(".my-element").animate(/* ... */);
@@ -517,7 +517,7 @@ export default {
 
 Will generate something like below:
 
-```javascript
+```js
 const __webpack_modules__ = {
   jQuery: (module) => {
     module.exports = import("jQuery");
@@ -546,7 +546,7 @@ Ensure to enable [`experiments.outputModule`](/configuration/experiments/#experi
 
 #### Example
 
-```javascript
+```js
 import { attempt } from "lodash";
 
 async function foo() {
@@ -569,7 +569,7 @@ export default {
 
 Will generate something like below:
 
-```javascript
+```js
 import * as __WEBPACK_EXTERNAL_MODULE_lodash__ from "lodash";
 
 const lodash = __WEBPACK_EXTERNAL_MODULE_jquery__;
@@ -636,7 +636,7 @@ module.export = {
 
 Will generate into something like
 
-```javascript
+```js
 import { createRequire } from "node:module";
 
 const jq = createRequire(import.meta.url)("jquery");
@@ -701,7 +701,7 @@ Specify the default type of externals as `'promise'`. Webpack will read the exte
 
 #### Example
 
-```javascript
+```js
 import jq from "jquery";
 
 jq(".my-element").animate(/* ... */);
@@ -709,7 +709,7 @@ jq(".my-element").animate(/* ... */);
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "promise",
@@ -721,7 +721,7 @@ export default {
 
 Will generate into something like
 
-```javascript
+```js
 const jq = await $;
 
 jq(".my-element").animate(/* ... */);
@@ -733,7 +733,7 @@ Specify the default type of externals as `'self'`. Webpack will read the externa
 
 #### Example
 
-```javascript
+```js
 import jq from "jquery";
 
 jq(".my-element").animate(/* ... */);
@@ -741,7 +741,7 @@ jq(".my-element").animate(/* ... */);
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "self",
@@ -753,7 +753,7 @@ export default {
 
 Will generate into something like
 
-```javascript
+```js
 const jq = globalThis.$;
 
 jq(".my-element").animate(/* ... */);
@@ -765,7 +765,7 @@ Specify the default type of externals as `'script'`. Webpack will load the exter
 
 #### Syntax
 
-```javascript
+```js
 export default {
   externalsType: "script",
   externals: {
@@ -781,7 +781,7 @@ export default {
 
 You can also use the shortcut syntax if you're not going to specify any properties:
 
-```javascript
+```js
 export default {
   externalsType: "script",
   externals: {
@@ -855,7 +855,7 @@ Specify the default type of externals as `'this'`. Webpack will read the externa
 
 #### Example
 
-```javascript
+```js
 import jq from "jquery";
 
 jq(".my-element").animate(/* ... */);
@@ -863,7 +863,7 @@ jq(".my-element").animate(/* ... */);
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "this",
@@ -875,7 +875,7 @@ export default {
 
 Will generate into something like
 
-```javascript
+```js
 const jq = this.$;
 
 jq(".my-element").animate(/* ... */);
@@ -887,7 +887,7 @@ Specify the default type of externals as `'var'`. Webpack will read the external
 
 #### Example
 
-```javascript
+```js
 import jq from "jquery";
 
 jq(".my-element").animate(/* ... */);
@@ -895,7 +895,7 @@ jq(".my-element").animate(/* ... */);
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "var",
@@ -907,7 +907,7 @@ export default {
 
 Will generate into something like
 
-```javascript
+```js
 const jq = $;
 
 jq(".my-element").animate(/* ... */);
@@ -919,7 +919,7 @@ Specify the default type of externals as `'window'`. Webpack will read the exter
 
 #### Example
 
-```javascript
+```js
 import jq from "jquery";
 
 jq(".my-element").animate(/* ... */);
@@ -927,7 +927,7 @@ jq(".my-element").animate(/* ... */);
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   externalsType: "window",
@@ -939,7 +939,7 @@ export default {
 
 Will generate into something like
 
-```javascript
+```js
 const jq = globalThis.$;
 
 jq(".my-element").animate(/* ... */);

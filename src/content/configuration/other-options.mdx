@@ -34,7 +34,7 @@ Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will di
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   amd: {
@@ -58,7 +58,7 @@ Fail out on the first error instead of tolerating it. By default webpack will lo
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   bail: true,
@@ -111,7 +111,7 @@ Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a c
 
 `ignoreWarnings` must be an `array` of any or all of the above.
 
-```javascript
+```js
 export default {
   // ...
   ignoreWarnings: [
@@ -138,7 +138,7 @@ For example, you can define a new variable in the loader context:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   loader: {
@@ -151,7 +151,7 @@ Then use `this.answer` to get its value in the loader:
 
 **custom-loader.js**
 
-```javascript
+```js
 export default function (source) {
   // ...
   console.log(this.answer); // will log `42` here
@@ -171,7 +171,7 @@ This is especially useful when exporting an array of configurations. webpack use
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   name: "admin-app",
@@ -180,7 +180,7 @@ export default {
 
 For multi-configuration builds:
 
-```javascript
+```js
 export default [
   {
     name: "client",
@@ -205,7 +205,7 @@ Lower values reduce concurrent work and memory pressure, but may increase total 
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   parallelism: 50,
@@ -225,7 +225,7 @@ Capture a "profile" of the application, including statistics and hints, which ca
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   profile: true,
@@ -244,7 +244,7 @@ When this option is set, webpack reads previously generated records from this pa
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -266,7 +266,7 @@ Specify where the records should be written. The following example shows how you
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -288,7 +288,7 @@ Use this option to generate a JSON file containing webpack "records" – pieces 
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -315,7 +315,7 @@ W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOut
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 

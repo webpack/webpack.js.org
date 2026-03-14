@@ -23,7 +23,7 @@ A webpack **plugin** is a JavaScript object that has an [`apply`](https://develo
 
 **ConsoleLogOnBuildWebpackPlugin.js**
 
-```javascript
+```js
 const pluginName = "ConsoleLogOnBuildWebpackPlugin";
 
 class ConsoleLogOnBuildWebpackPlugin {
@@ -49,7 +49,7 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
@@ -87,7 +87,7 @@ When using the Node API, you can also pass plugins via the `plugins` property in
 
 **some-node-script.js**
 
-```javascript
+```js
 import webpack from "webpack"; // to access webpack runtime
 import configuration from "./webpack.config.js";
 

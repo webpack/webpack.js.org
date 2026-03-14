@@ -29,7 +29,7 @@ Say you have a configuration file `some/path/config.development.module.js` and a
 
 Add the following plugin when building for production:
 
-```javascript
+```js
 new webpack.NormalModuleReplacementPlugin(
   /some\/path\/config\.development\.js/,
   "./config.production.js",
@@ -42,7 +42,7 @@ Conditional build depending on an [specified environment](/configuration/configu
 
 Say you want a configuration with specific values for different build targets.
 
-```javascript
+```js
 export default (env) => {
   const appTarget = env.APP_TARGET || "VERSION_A";
   return {
@@ -66,7 +66,7 @@ Create the two configuration files:
 
 **app/config-VERSION_A.js**
 
-```javascript
+```js
 export default {
   title: "I am version A",
 };
@@ -74,7 +74,7 @@ export default {
 
 **app/config-VERSION_B.js**
 
-```javascript
+```js
 export default {
   title: "I am version B",
 };
@@ -82,7 +82,7 @@ export default {
 
 Then import that configuration using the keyword you're looking for in the regexp:
 
-```javascript
+```js
 import config from "app/config-APP_TARGET";
 
 console.log(config.title);
