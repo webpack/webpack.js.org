@@ -82,10 +82,13 @@ module.exports = {
 Webpack can now statically analyze **destructuring assignments directly from CommonJS `require`** (and `module.require`) and treat only the destructured properties as “referenced exports”, instead of conservatively assuming the whole `exports` object is used. This improves dead-code elimination in optimized builds and can reduce bundle size in codebases that still consume CommonJS modules.
 
 **Examples**
+
 ```js
 // Only `a` is considered referenced
 const { a } = require("./module");
+```
 
+```js
 // Also supported
 const { a, b } = module.require("./module");
 ```
@@ -96,12 +99,12 @@ const { a, b } = module.require("./module");
 
 This makes virtual modules behave more like real files: code such as `import "./utils"` resolves consistently instead of falling back to `compiler.context` and potentially resolving incorrectly.
 
-`context` can be set per virtual module (inside the module definition) or as a plugin level default. It defaults to `"auto"`, which tries to infer the context from the virtual module id or path; otherwise it falls back to `compiler.context`. Conceptually, when you set `context` for a module, webpack treats that virtual module *as if it lived inside that directory* for resolving relative paths.
+`context` can be set per virtual module (inside the module definition) or as a plugin level default. It defaults to `"auto"`, which tries to infer the context from the virtual module id or path; otherwise it falls back to `compiler.context`. Conceptually, when you set `context` for a module, webpack treats that virtual module _as if it lived inside that directory_ for resolving relative paths.
 
 For example, if you define a virtual module id `virtual/table.js` with `context: path.join(__dirname, "src/components")`, then its internal `import "./utils"` is resolved as if the file were `src/components/table.js` importing `src/components/utils.js`.
 
 ```js
-const path = require("path");
+const path = require("node:path");
 const webpack = require("webpack");
 
 module.exports = {
@@ -112,17 +115,53 @@ module.exports = {
           context: "auto",
           source() {
             return "import { trim } from './utils'; export const button = trim('button ');";
-          }
+          },
         },
         "virtual/table.js": {
           context: path.join(__dirname, "src/components"),
           source() {
             return "import { trim } from './utils'; export const table = trim('table ');";
-          }
-        }
+          },
+        },
       },
-      { context: "auto" }
-    )
-  ]
+      { context: "auto" },
+    ),
+  ],
 };
 ```
+
+## Experimental JavaScript Parsing with `oxc-parser`
+
+Webpack now includes an example demonstrating how to replace the default JavaScript parser with **`oxc-parser`**. This integration should be considered **purely experimental** and is **not recommended for production use**.
+
+Instead, it is intended for **development environments** or **benchmark branches**, allowing the community to experiment with alternative parsing strategies in real projects. This helps evaluate potential improvements in **parse time and build performance**, as well as identify possible **compatibility issues**.
+
+**Example**
+
+The following configuration limits the custom parser to `.js` files:
+
+```js
+"use strict";
+
+const oxcParse = require("./internals/oxc-parse");
+
+/** @type {import("webpack").Configuration} */
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  module: {
+    rules: [
+      {
+        // Apply the custom parser only to JavaScript files
+        test: /\.js$/,
+        parser: {
+          parse: oxcParse,
+        },
+      },
+    ],
+  },
+};
+```
+
+You can find the full example in the webpack repository:
+[https://github.com/webpack/webpack/blob/main/examples/custom-javascript-parser/webpack.config.js](https://github.com/webpack/webpack/blob/main/examples/custom-javascript-parser/webpack.config.js)
