@@ -53,6 +53,7 @@ const mdPlugins = [
 
 export default ({ ssg = false }) => ({
   context: path.resolve(__dirname, "./src"),
+  performance: false,
   cache: {
     type: "filesystem",
     buildDependencies: {
