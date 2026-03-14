@@ -56,8 +56,6 @@ for (const [type, collection] of Object.entries(fetch)) {
 
         const repos = await paginate(organization);
 
-        console.log(repos);
-
         return repos
           .map((repo) => repo.full_name)
           .filter((name) => suffixes.some((suffix) => name.endsWith(suffix)))
