@@ -87,7 +87,6 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -104,7 +103,6 @@ new webpack.DllPlugin({
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

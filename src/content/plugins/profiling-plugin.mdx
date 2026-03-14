@@ -24,6 +24,12 @@ new webpack.debug.ProfilingPlugin();
 ## Usage: custom `outputPath`
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 new webpack.debug.ProfilingPlugin({
   outputPath: path.join(__dirname, "profiling/profileEvents.json"),
 });
