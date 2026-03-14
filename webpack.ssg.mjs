@@ -128,6 +128,10 @@ export default (env) =>
             from: "./assets/robots.txt",
             to: "./",
           },
+          {
+            from: "./assets/analytics.txt",
+            to: "./",
+          },
           "CNAME",
         ],
       }),
