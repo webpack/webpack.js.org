@@ -373,6 +373,40 @@ new ModuleFederationPlugin({
 You are likely missing the remote container, make sure it's added.
 If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
 
-### Collision between modules from different remotes
+### Setting `output.uniqueName`
 
-If you're going to load multiple modules from different remotes, it's advised to set the [`output.uniqueName`](/configuration/output/#outputuniquename) option for your remote builds to avoid collisions between multiple webpack runtimes.
+In a Module Federation setup, both the host and each remote must have a globally unique `output.uniqueName`. Webpack derives this value from the `name` field in `package.json` by default. This means two builds that share the same `package.json` `name` (a common pattern when splitting a remote out of an existing project) can silently collide at runtime.
+
+Always set `output.uniqueName` explicitly in each webpack config:
+
+**webpack.config.js (host)**
+
+```js
+module.exports = {
+  output: {
+    uniqueName: "my-host-app",
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      // ...
+    }),
+  ],
+};
+```
+
+**webpack.config.js (remote)**
+
+```js
+module.exports = {
+  output: {
+    uniqueName: "my-remote-app", // must differ from host and all other remotes
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      // ...
+    }),
+  ],
+};
+```
+
+The value can be any string, as long as it is unique across every federated build loaded on the same page.
