@@ -118,10 +118,6 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
 
   const location = useLocation();
 
-  // Disable DocSearch when running Cypress tests to prevent Algolia
-  // network errors (e.g., "Unreachable hosts") in CI environments
-  const isCypress = typeof window !== "undefined" && window.Cypress;
-
   useEffect(() => {
     setLocationHash(hash);
   }, [hash]);
@@ -210,8 +206,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
           </nav>
           <div className="inline-flex items-center gap-x-[18px] ml-[18px]">
             <HelloDarkness />
-
-            {mounted && !isCypress && (
+            {mounted && (
               <DocSearch
                 appId={DOCSEARCH_APP_ID}
                 apiKey={DOCSEARCH_API_KEY}

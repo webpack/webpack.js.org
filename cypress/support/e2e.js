@@ -20,3 +20,10 @@
 
 // Alternatively you can use CommonJS syntax:
 require("./commands");
+
+// Ignore Algolia DocSearch network errors during Cypress tests
+Cypress.on("uncaught:exception", (err) => {
+  if (err.message && err.message.includes("Unreachable hosts")) {
+    return false;
+  }
+});
