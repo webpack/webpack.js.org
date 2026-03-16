@@ -46,19 +46,19 @@ If for some reason you want to use a different configuration file depending on c
 
 W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
 
-Webpack has a huge set of options which might be overwhelming to you, please take advantage of `webpack-cli` starting from version v6.0.0 new tool [create-new-webpack-app](https://github.com/webpack/webpack-cli/) which could rapidly generate webpack application with specific configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.
+Webpack has a huge set of options which might be overwhelming to you, please take advantage of `webpack-cli` starting from version v6.0.0 new tool [create-webpack-app](https://github.com/webpack/webpack-cli/) which could rapidly generate webpack application with specific configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.
 
 ```bash
-npx create-new-webpack-app [command] [options]
+npx create-webpack-app [command] [options]
 ```
 
-npx might prompt you to install `create-new-webpack-app` if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the new webpack application generation.
+npx might prompt you to install `create-webpack-app` if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the new webpack application generation.
 
 ```bash
-$ npx create-new-webpack-app init
+$ npx create-webpack-app init
 
 Need to install the following packages:
-create-new-webpack-app@1.1.1
+create-webpack-app@2.0.0
 Ok to proceed? (y)
 
 ? Which of the following JS solutions do you want to use? Typescript
