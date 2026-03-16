@@ -75,6 +75,27 @@ To update snapshots after intentional UI changes:
 NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.mjs --updateSnapshot
 ```
 
+### Running locally
+
+After completing the setup steps, start the development server:
+
+```bash
+npm start
+```
+
+If you encounter a `Module not found: Can't resolve './_supporters.json'` error, create the following file locally:
+
+`src/components/Support/_supporters.json`
+
+with this content:
+
+```json
+[]
+```
+
+This file is generated during production builds and is not included in the repository, so a local stub is required for development.
+
+
 ## Branching Your Changes
 
 Making a branch in your fork for your contribution is helpful in the following ways:
