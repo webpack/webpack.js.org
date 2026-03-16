@@ -181,6 +181,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               className=""
               items={[
                 {
+                  lang: "en",
                   title: "English",
                   url: `https://webpack.js.org${pathname}${locationHash}`,
                 },
