@@ -271,7 +271,15 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
 Navigation.propTypes = {
   pathname: PropTypes.string,
   hash: PropTypes.string,
-  links: PropTypes.array,
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      content: PropTypes.node.isRequired,
+      url: PropTypes.string.isRequired,
+      isActive: PropTypes.func,
+      ariaLabel: PropTypes.string,
+      children: PropTypes.arrayOf(PropTypes.object),
+    }),
+  ).isRequired,
   toggleSidebar: PropTypes.func,
 };
 
