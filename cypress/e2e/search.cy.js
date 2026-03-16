@@ -2,7 +2,8 @@
 
 describe("Search", () => {
   beforeEach(() => {
-    cy.intercept("POST", "**algolia.net/**", {
+    // Mock Algolia search request
+    cy.intercept("POST", "https://*.algolia.net/**", {
       statusCode: 200,
       body: {
         results: [
