@@ -118,6 +118,10 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
 
   const location = useLocation();
 
+  // Disable DocSearch when running Cypress tests to prevent Algolia
+  // network errors (e.g., "Unreachable hosts") in CI environments
+  const isCypress = typeof window !== "undefined" && window.Cypress;
+
   useEffect(() => {
     setLocationHash(hash);
   }, [hash]);
