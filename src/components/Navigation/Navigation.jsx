@@ -206,7 +206,8 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
           </nav>
           <div className="inline-flex items-center gap-x-[18px] ml-[18px]">
             <HelloDarkness />
-            {mounted && (
+
+            {mounted && !isCypress && (
               <DocSearch
                 appId={DOCSEARCH_APP_ID}
                 apiKey={DOCSEARCH_API_KEY}
