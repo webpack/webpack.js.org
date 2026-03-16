@@ -377,7 +377,9 @@ If you have the container loaded for the remote you are trying to consume, but s
 
 In a Module Federation setup, both the host and each remote must have a globally unique `output.uniqueName`. Webpack derives this value from the `name` field in `package.json` by default. This means two builds that share the same `package.json` `name` (a common pattern when splitting a remote out of an existing project) can silently collide at runtime.
 
-Always set `output.uniqueName` explicitly in each webpack config:
+One solution is to use a separate `package.json` with a distinct name for each configuration.
+
+Alternatively, you can set `output.uniqueName` explicitly in each webpack config:
 
 **webpack.config.js (host)**
 
