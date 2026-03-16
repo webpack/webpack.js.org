@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link as ReactDOMLink, NavLink, useLocation } from "react-router-dom";
 
 // Import Internal Config
-const {
+import {
   DOCSEARCH_API_KEY,
   DOCSEARCH_APP_ID,
   DOCSEARCH_INDEX_NAME,
-} = require("../../config/docsearch");
+} from "../../config/docsearch.js";
 
 // Import Components
 import DiscordIcon from "../../styles/icons/discord.svg";

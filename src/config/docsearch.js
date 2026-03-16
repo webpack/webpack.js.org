@@ -1,3 +1,5 @@
+"use strict";
+
 // DocSearch configuration
 // Set DOCSEARCH_API_KEY in your environment (e.g., .env file or build system)
 
