@@ -1,0 +1,37 @@
+---
+title: MergeDuplicateChunksPlugin
+group: webpack
+contributors:
+  - shivxmsharma
+---
+
+Merges chunks that contain the same modules. This plugin is enabled by default as part of webpack's internal optimizations. Exporting it publicly allows developers to configure the `stage` at which merging occurs — useful when chunk merging needs to run after [`SplitChunksPlugin`](/plugins/split-chunks-plugin).
+
+```js
+new webpack.optimize.MergeDuplicateChunksPlugin({
+  // Options...
+});
+```
+
+## Options
+
+### stage
+
+`number`
+
+Controls the optimization stage at which duplicate chunk merging runs. By default, merging occurs before `SplitChunksPlugin`. Setting a higher `stage` value causes merging to run _after_ other optimizations such as `SplitChunksPlugin`.
+
+**webpack.config.js**
+
+```js
+import webpack from "webpack";
+
+export default {
+  // ...
+  plugins: [
+    new webpack.optimize.MergeDuplicateChunksPlugin({
+      stage: 10, // run after SplitChunksPlugin
+    }),
+  ],
+};
+```
