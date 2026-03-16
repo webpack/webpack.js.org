@@ -457,14 +457,14 @@ compiler<span class="token punctuation">.</span><span class="token function">run
 <ul>
 <li>Import other files via <code>require(...)</code> <strong>or</strong> <code>import</code></li>
 <li>Use utilities on npm via <code>require(...)</code> <strong>or</strong> <code>import</code></li>
-<li>use JavaScript control flow expressions, e.g. the <code>?:</code> operator</li>
-<li>use constants or variables for often used values</li>
-<li>write and execute functions to generate a part of the configuration</li>
+<li>Use JavaScript control flow expressions (e.g. <code>?:</code>, <code>if</code>, <code>for</code>, etc.)</li>
+<li>Use constants or variables for often used values</li>
+<li>Write and execute functions to generate a part of the configuration</li>
 </ul>
 <p>Use these features when appropriate.</p>
 <p>While they are technically feasible, <strong>the following practices should be avoided</strong>:</p>
 <ul>
-<li>Access CLI arguments, when using the webpack CLI (instead write your own CLI, or <a href="/api/cli/#env" data-discover="true">use <code>--env</code></a>)</li>
+<li>Access CLI arguments, when using the webpack CLI. This can make your configuration non-portable and harder to maintain. Instead, write your own CLI, or <a href="/api/cli/#env" data-discover="true">use <code>--env</code></a> to pass environment variables.</li>
 <li>Export non-deterministic values (calling webpack twice should result in the same output files)</li>
 <li>Write long configurations (instead split the configuration into multiple files)</li>
 </ul>
