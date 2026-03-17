@@ -75,14 +75,6 @@ To update snapshots after intentional UI changes:
 NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.mjs --updateSnapshot
 ```
 
-### Running locally
-
-After completing the setup steps, start the development server:
-
-```bash
-npm start
-```
-
 ## Branching Your Changes
 
 Making a branch in your fork for your contribution is helpful in the following ways:
