@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Component } from "react";
 import "./SidebarItem.scss";
 import { NavLink } from "react-router-dom";
-import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
+import GraphIcon from "../../styles/icons/graph.svg";
 import BarIcon from "../../styles/icons/vertical-bar.svg";
 import list2Tree from "../../utilities/list2Tree/index.js";
 
@@ -57,6 +57,7 @@ export default class SidebarItem extends Component {
     const { title, anchors = [] } = this.props;
     const openMod = this.state.open ? `${block}--open` : "";
     const disabledMod = anchors.length === 0 ? `${block}--disabled` : "";
+    const isDependencyGraph = title === "Dependency Graph";
 
     const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
     const tree = list2Tree(title, filteredAnchors);
@@ -64,12 +65,19 @@ export default class SidebarItem extends Component {
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
         {anchors.length > 0 ? (
-          <ChevronRightIcon
+          <GraphIcon
             width={15}
             height={17}
             fill="#175d96"
-            className={`${block}__toggle`}
+            className={`${block}__toggle ${block}__toggle--graph`}
             onClick={this._toggle.bind(this)}
+          />
+        ) : isDependencyGraph ? (
+          <GraphIcon
+            className={`${block}__toggle ${block}__toggle--static`}
+            width={15}
+            height={17}
+            fill="#175d96"
           />
         ) : (
           <BarIcon
