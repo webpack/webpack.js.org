@@ -34,7 +34,7 @@
     "fetch:supporters": "node src/utilities/fetch-supporters.mjs",
     "fetch:governance": "node src/utilities/fetch-governance.mjs",
     "fetch-all": "run-s fetch-repos fetch",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && node src/scripts/ensureFile.mjs",
     "build": "run-s fetch-repos fetch content && webpack --config webpack.prod.mjs --config-node-env production && run-s printable content && webpack --config webpack.ssg.mjs --config-node-env production --env ssg",
     "postbuild": "npm run sitemap && npm run rss",
     "build-test": "npm run build && http-server --port 3000 dist/",
