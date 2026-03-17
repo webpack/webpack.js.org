@@ -75,7 +75,7 @@
       border-bottom-color: #222;
 
       h2 a {
-        color: #9ab3c0 !important;
+        color: getColor(dusty-blue) !important;
 
         &:hover {
           color: #8dd6f9 !important;

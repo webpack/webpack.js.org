@@ -17,7 +17,7 @@
     h4,
     h5,
     h6 {
-      color: #9ab3c0;
+      color: getColor(dusty-blue);
     }
     code,
     tt {
@@ -128,7 +128,7 @@
   }
   .contributor .contributor__name {
     background-color: #121212;
-    color: #9ab3c0;
+    color: getColor(dusty-blue);
   }
   .placeholder h2,
   .placeholder p {
