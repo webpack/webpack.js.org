@@ -2,13 +2,19 @@
  * @jest-environment jsdom
  */
 
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Page from "../Page";
+import Page from "../Page.jsx";
 
-jest.mock("../../Contributors/Contributors.jsx", () => () => <div />);
-jest.mock("../../PageLinks/PageLinks.jsx", () => () => <div />);
+jest.mock("../../Contributors/Contributors.jsx", () => {
+  const MockContributors = () => <div />;
+  return MockContributors;
+});
+
+jest.mock("../../PageLinks/PageLinks.jsx", () => {
+  const MockPageLinks = () => <div />;
+  return MockPageLinks;
+});
 
 jest.mock("react-router-dom", () => {
   const actual = jest.requireActual("react-router-dom");
