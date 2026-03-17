@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 
 $sponsor-text-color-dark: #cecece;
-$sponsor-text-color-light: #535353;
+$sponsor-text-color-light: getColor(emperor);
 $background-color-hover: rgb(50, 50, 50);
 $link-wrapper-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
 $link-wrapper-shadow-dark: 0 3px 10px 0px rgba(255, 255, 255, 0.2);

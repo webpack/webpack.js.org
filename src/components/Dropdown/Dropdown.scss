@@ -5,7 +5,7 @@
 
   button {
     cursor: pointer;
-    color: #fff;
+    color: getColor(white);
     border: none;
     background-color: transparent;
     margin: 0;
@@ -48,13 +48,13 @@
   ul li {
     padding: 0.25em 0.5em;
     list-style: none;
-    color: #fff;
+    color: getColor(white);
     transition: all 250ms;
 
     a:link,
     a:visited,
     a:hover {
-      color: #fff;
+      color: getColor(white);
     }
 
     &:hover {

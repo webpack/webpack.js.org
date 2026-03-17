@@ -1,3 +1,5 @@
+@use "../../styles/partials/functions" as *;
+
 // Scroll to Top Button Styles
 .scroll-to-top {
   position: fixed;
@@ -19,8 +21,8 @@
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background-color: #2b3a42;
-    color: #fff;
+    background-color: getColor(elephant);
+    color: getColor(white);
     border: 5px solid #1c78c0;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -33,7 +35,7 @@
       transform: translateY(-2px);
 
       .scroll-to-top__icon {
-        color: #ffffff;
+        color: getColor(white);
       }
     }
 
@@ -44,7 +46,7 @@
     // Dark mode support
     @media (prefers-color-scheme: dark) {
       background-color: #f5f5f5;
-      color: #2b3a42;
+      color: getColor(elephant);
       border-color: #1c78c0;
 
       &:hover {

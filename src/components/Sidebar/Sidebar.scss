@@ -48,8 +48,8 @@
 }
 
 .sidebar__docs-version {
-  color: #535353;
-  border-top: 1px solid #f2f2f2;
+  color: getColor(emperor);
+  border-top: 1px solid getColor(concrete);
   margin-top: 12px;
   padding-top: 12px;
   font-size: 15px;
