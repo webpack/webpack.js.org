@@ -316,13 +316,13 @@ The base conditions always include:
 
 Additional conditions are appended depending on the [`target`](/configuration/target/):
 
-| Target property  | Condition    |
-| ---------------- | ------------ |
-| `webworker`      | `"worker"`   |
-| `node`           | `"node"`     |
-| `web`            | `"browser"`  |
-| `electron`       | `"electron"` |
-| `nwjs`           | `"nwjs"`     |
+| Target property | Condition    |
+| --------------- | ------------ |
+| `webworker`     | `"worker"`   |
+| `node`          | `"node"`     |
+| `web`           | `"browser"`  |
+| `electron`      | `"electron"` |
+| `nwjs`          | `"nwjs"`     |
 
 For example, with `target: "web"` (the default) and `mode: "production"`, the base `conditionNames` defaults to `["webpack", "production", "browser"]`.
 
@@ -330,12 +330,12 @@ For example, with `target: "web"` (the default) and `mode: "production"`, the ba
 
 Webpack further adjusts `conditionNames` through [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) depending on how a module is imported. The `"..."` token inherits from the base conditions above.
 
-| Dependency type                    | `conditionNames`                    | Used for                                        |
-| ---------------------------------- | ----------------------------------- | ----------------------------------------------- |
-| `esm`, `wasm`, `loaderImport`      | `["import", "module", "..."]`       | ESM `import` statements, WebAssembly, loader imports |
-| `commonjs`, `amd`, `loader`, `unknown`, `undefined` | `["require", "module", "..."]` | `require()` calls, AMD, and other dependency types |
-| `worker`                           | `["worker", "import", "module", "..."]` | `new Worker()` expressions                  |
-| `css-import`                       | `["webpack", <mode>, "style"]`      | CSS `@import` statements                        |
+| Dependency type                                     | `conditionNames`                        | Used for                                             |
+| --------------------------------------------------- | --------------------------------------- | ---------------------------------------------------- |
+| `esm`, `wasm`, `loaderImport`                       | `["import", "module", "..."]`           | ESM `import` statements, WebAssembly, loader imports |
+| `commonjs`, `amd`, `loader`, `unknown`, `undefined` | `["require", "module", "..."]`          | `require()` calls, AMD, and other dependency types   |
+| `worker`                                            | `["worker", "import", "module", "..."]` | `new Worker()` expressions                           |
+| `css-import`                                        | `["webpack", <mode>, "style"]`          | CSS `@import` statements                             |
 
 For instance, when a file uses `import` in a project with `target: "web"` and `mode: "production"`, the final resolved conditions are `["import", "module", "webpack", "production", "browser"]`.
 
