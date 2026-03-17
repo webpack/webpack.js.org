@@ -12,14 +12,20 @@ import Page from "../Page";
 jest.mock("../../Contributors/Contributors.jsx", () => () => <div />);
 jest.mock("../../PageLinks/PageLinks.jsx", () => () => <div />);
 
-// Mock react-router hook used inside Page
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useLocation: () => ({ pathname: "/test", hash: "" }),
-}));
+// Stable mock for react-router-dom (CI safe)
+jest.mock("react-router-dom", () => {
+  const actual = jest.requireActual("react-router-dom");
+  return {
+    ...actual,
+    useLocation: () => ({ pathname: "/test", hash: "" }),
+  };
+});
 
-// Mock scrollTo (jsdom doesn't support it)
-window.scrollTo = jest.fn();
+// Mock scrollTo properly (CI safe)
+Object.defineProperty(window, "scrollTo", {
+  value: jest.fn(),
+  writable: true,
+});
 
 describe("Page component", () => {
   it("renders error message when content.__error exists", async () => {
@@ -34,9 +40,8 @@ describe("Page component", () => {
       </MemoryRouter>,
     );
 
-    const errorElement = await screen.findByText(
-      /failed to load page content/i,
-    );
-    expect(errorElement).toBeInTheDocument();
+    expect(
+      await screen.findByText(/failed to load page content/i),
+    ).toBeInTheDocument();
   });
 });
