@@ -834,7 +834,7 @@ If you have the container loaded for the remote you are trying to consume, but s
 <p>One solution is to use a separate <code>package.json</code> with a distinct name for each configuration.</p>
 <p>Alternatively, you can set <code>output.uniqueName</code> explicitly in each webpack config:</p>
 <p><strong>webpack.config.js (host)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">uniqueName</span><span class="token operator">:</span> <span class="token string">&quot;my-host-app&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -845,7 +845,7 @@ If you have the container loaded for the remote you are trying to consume, but s
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>webpack.config.js (remote)</strong></p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token literal-property property">uniqueName</span><span class="token operator">:</span> <span class="token string">&quot;my-remote-app&quot;</span><span class="token punctuation">,</span> <span class="token comment">// must differ from host and all other remotes</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
