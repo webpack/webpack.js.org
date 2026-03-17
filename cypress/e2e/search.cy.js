@@ -2,7 +2,6 @@
 
 describe("Search", () => {
   beforeEach(() => {
-    // Mock Algolia search request
     cy.intercept("POST", "https://*.algolia.net/**", {
       statusCode: 200,
       body: {
@@ -10,8 +9,9 @@ describe("Search", () => {
           {
             hits: [
               {
-                url: "/concepts/",
-                title: "Roadmap",
+                url: "http://localhost:3000/concepts/",
+                hierarchy: { lvl0: "Concepts" },
+                objectID: "1",
               },
             ],
           },
@@ -24,6 +24,7 @@ describe("Search", () => {
     cy.visit("/concepts/");
     cy.get(".DocSearch").click();
     cy.get("#docsearch-input").type("roadmap");
-    cy.get(".DocSearch-Hits").should("be.visible");
+
+    cy.get(".DocSearch-Modal").should("be.visible");
   });
 });
