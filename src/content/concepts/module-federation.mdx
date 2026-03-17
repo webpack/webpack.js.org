@@ -384,7 +384,7 @@ Alternatively, you can set `output.uniqueName` explicitly in each webpack config
 **webpack.config.js (host)**
 
 ```js
-module.exports = {
+export default {
   output: {
     uniqueName: "my-host-app",
   },
@@ -399,7 +399,7 @@ module.exports = {
 **webpack.config.js (remote)**
 
 ```js
-module.exports = {
+export default {
   output: {
     uniqueName: "my-remote-app", // must differ from host and all other remotes
   },
