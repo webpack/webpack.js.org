@@ -9,7 +9,7 @@ Allow creating virtual modules of any type, such as `.ts`, `.json`, `.css`, etc.
 
 <Badge text="5.100.0+" />
 
-```javascript
+```js
 import webpack from "webpack";
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
@@ -19,7 +19,7 @@ new webpack.experiments.schemes.VirtualUrlPlugin({
 
 **src/app.js**
 
-```javascript
+```js
 import { msg } from "virtual:myModule";
 
 console.log(msg);
@@ -29,7 +29,7 @@ console.log(msg);
 
 Create a virtual module that generates build information
 
-```javascript
+```js
 import webpack from "webpack";
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
@@ -44,7 +44,7 @@ new webpack.experiments.schemes.VirtualUrlPlugin({
 
 **src/app.js**
 
-```javascript
+```js
 import { buildTime } from "virtual:buildInfo";
 
 console.log(`App version: ${buildTime}`);
@@ -52,7 +52,7 @@ console.log(`App version: ${buildTime}`);
 
 Use custom schema
 
-```javascript
+```js
 import webpack from "webpack";
 
 new webpack.experiments.schemes.VirtualUrlPlugin(
@@ -65,7 +65,7 @@ new webpack.experiments.schemes.VirtualUrlPlugin(
 
 **src/app.js**
 
-```javascript
+```js
 import { msg } from "v:myModule";
 
 console.log(msg);
@@ -75,7 +75,7 @@ console.log(msg);
 
 Create multiple virtual modules of different types
 
-```javascript
+```js
 import webpack from "webpack";
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
@@ -92,19 +92,18 @@ new webpack.experiments.schemes.VirtualUrlPlugin({
 
 **src/app.js**
 
-```javascript
+```js
 import json from "virtual:myJsonModule";
 import "virtual:myCssModule";
 ```
 
 Virtualize the routing file
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import webpack from "webpack";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -129,7 +128,7 @@ new webpack.experiments.schemes.VirtualUrlPlugin({
 
 **src/app.js**
 
-```javascript
+```js
 import { routes } from "virtual:routes";
 ```
 

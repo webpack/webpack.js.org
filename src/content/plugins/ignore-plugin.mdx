@@ -21,7 +21,7 @@ T> This plugin works with both JavaScript and CSS, allowing you to ignore specif
 - `resourceRegExp`: A RegExp to test the resource against.
 - `contextRegExp`: (optional) A RegExp to test the context (directory) against.
 
-```javascript
+```js
 new webpack.IgnorePlugin({ resourceRegExp, contextRegExp });
 ```
 
@@ -29,7 +29,7 @@ new webpack.IgnorePlugin({ resourceRegExp, contextRegExp });
 
 - `checkResource (resource, context)` A Filter function that receives `resource` and `context` as arguments, must return boolean.
 
-```javascript
+```js
 new webpack.IgnorePlugin({
   checkResource(resource) {
     // do something with resource
@@ -51,12 +51,16 @@ The `resourceRegExp` parameter passed to `IgnorePlugin` is not tested against th
 Rather, because `moment` imports with this code:
 
 ```js
+import(`./locale/${name}`);
+
+// or
+
 require(`./locale/${name}`);
 ```
 
 ...your first regexp must match that `'./locale/'` string. The second `contextRegExp` parameter is then used to select specific directories from where the import took place. The following will cause those locale files to be ignored:
 
-```javascript
+```js
 new webpack.IgnorePlugin({
   resourceRegExp: /^\.\/locale$/,
   contextRegExp: /moment$/,

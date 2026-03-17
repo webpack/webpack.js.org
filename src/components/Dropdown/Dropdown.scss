@@ -11,6 +11,8 @@
     margin: 0;
     padding: 0;
     font-size: inherit;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -21,6 +23,7 @@
 }
 
 .dropdown__arrow {
+  line-height: 1;
   &:before {
     content: "\25be";
   }

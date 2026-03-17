@@ -45,6 +45,7 @@ jobs:
 
       - run: yarn --frozen-lockfile
       - run: yarn lint:js
+      - run: yarn lint:prettier
       - run: yarn lint:markdown
 
   proseLint:

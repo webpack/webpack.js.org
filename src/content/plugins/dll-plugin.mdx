@@ -29,7 +29,7 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 - `entryOnly` (boolean = true): if `true`, only entry points will be exposed
 - `type`: type of the dll bundle
 
-```javascript
+```js
 new webpack.DllPlugin(options);
 ```
 
@@ -53,7 +53,7 @@ This plugin is used in the primary webpack config, it references the dll-only-bu
 - `scope` (optional): prefix which is used for accessing the content of the dll
 - `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#outputlibrarytarget))
 
-```javascript
+```js
 new webpack.DllReferencePlugin(options);
 ```
 
@@ -75,7 +75,7 @@ T> [See an example use of scope](https://github.com/webpack/webpack/tree/master/
 
 The content of the dll is mapped to the current directory. If a required file matches a file in the dll (after resolving), then the file from the dll is used instead.
 
-Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `require('lodash')` and `require('./abc')` will be used from the dll, rather than building them into the main bundle.
+Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `import _ from "lodash"`/`require('lodash')` and `import abs from "./abc"`/`require('./abc')` will be used from the dll, rather than building them into the main bundle.
 
 ## Usage
 
@@ -83,11 +83,10 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
 **webpack.vendor.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -100,11 +99,10 @@ new webpack.DllPlugin({
 
 **webpack.app.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

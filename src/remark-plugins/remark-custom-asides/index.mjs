@@ -40,7 +40,7 @@ export default function remarkCustomAsides(
             type: "paragraph",
             data: {
               // see https://github.com/syntax-tree/mdast-util-to-hast#hname
-              // add a className to heading
+              // add a className to paragraph
               hName: "p",
               hProperties: {
                 className: `${className}__prefix`,

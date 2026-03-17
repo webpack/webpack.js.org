@@ -57,7 +57,7 @@ T> All of the options in the stats configuration object are optional.
 
 A fallback value for stats options when an option is not defined. It has precedence over local webpack defaults.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -72,7 +72,7 @@ export default {
 
 Tells `stats` whether to show the asset information. Set `stats.assets` to `false` to hide it.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -87,7 +87,7 @@ export default {
 
 Tells `stats` to sort the assets by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.assetsSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -102,7 +102,7 @@ export default {
 
 Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -117,7 +117,7 @@ export default {
 
 Tells `stats` whether to add the build date and the build time information. Set `stats.builtAt` to `false` to hide it.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -136,7 +136,7 @@ Old version of `stats.cachedModules`.
 
 Tells `stats` whether to add information about the cached assets. Setting `stats.cachedAssets` to `false` will tell `stats` to only show the emitted files (not the ones that were built).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -151,7 +151,7 @@ export default {
 
 Tells `stats` whether to add information about cached (not built) modules.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -166,7 +166,7 @@ export default {
 
 Tells `stats` whether to add information about the children.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -181,7 +181,7 @@ export default {
 
 Display auxiliary assets in chunk groups.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -196,7 +196,7 @@ export default {
 
 Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -211,7 +211,7 @@ export default {
 
 Limit of assets displayed in chunk groups.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -226,7 +226,7 @@ export default {
 
 Tells `stats` whether to add information about the `namedChunkGroups`.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -241,7 +241,7 @@ export default {
 
 Tells `stats` whether to add information about the built modules to information about the chunk.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -256,7 +256,7 @@ export default {
 
 Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -271,7 +271,7 @@ export default {
 
 Tells `stats` whether to add information about the origins of chunks and chunk merging.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -286,7 +286,7 @@ export default {
 
 Tells `stats` to display chunk parents, children and siblings.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -301,7 +301,7 @@ export default {
 
 Tells `stats` whether to add information about the chunk. Setting `stats.chunks` to `false` results in a less verbose output.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -316,7 +316,7 @@ export default {
 
 Tells `stats` to sort the chunks by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.chunksSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -331,7 +331,7 @@ export default {
 
 Tells `stats` whether to output in the different colors.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -369,7 +369,7 @@ export default {
 
 The stats base directory, an **absolute path** for shortening the request information.
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -392,7 +392,7 @@ By default, the value of [`context`](/configuration/entry-context/#context) or t
 
 Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -407,7 +407,7 @@ export default {
 
 Tells `stats` whether to display the distance from the entry point for each module.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -422,7 +422,7 @@ export default {
 
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -439,7 +439,7 @@ When `stats.entrypoints` is set to `'auto'`, webpack will decide automatically w
 
 Tells `stats` whether to display the `--env` information.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -454,7 +454,7 @@ export default {
 
 Tells `stats` whether to include the [`cause`](https://nodejs.org/en/blog/release/v16.9.0/#error-cause) property of errors in the output. It defaults to `true`.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -469,7 +469,7 @@ export default {
 
 Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -486,7 +486,7 @@ Tells `stats` whether to include the errors array from [`AggregateError`](https:
 
 Useful when a single error is composed of multiple underlying errors, providing deeper visibility into grouped error structures.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -501,7 +501,7 @@ export default {
 
 Tells `stats` whether to show stack trace of errors.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -516,7 +516,7 @@ export default {
 
 Tells `stats` whether to display the errors.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -531,7 +531,7 @@ export default {
 
 Add errors count.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -548,7 +548,7 @@ export default {
 
 Tells `stats` to limit the number of lines to allocate for displaying an error.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -567,7 +567,7 @@ See [`stats.excludeModules`](#statsexcludemodules).
 
 Tells `stats` to exclude the matching assets information. This can be done with a `string`, a `RegExp`, a `function` that is getting the assets name as an argument and returns a `boolean`. `stats.excludeAssets` can be an `array` of any of the above.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -586,7 +586,7 @@ export default {
 
 Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, a `function` that is getting the module's source as an argument and returns a `boolean`. `stats.excludeModules` can be an `array` of any of the above. `stats.excludeModules`'s configuration [is merged](https://github.com/webpack/webpack/blob/main/lib/Stats.js#L215) with the `stats.exclude`'s configuration value.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -597,7 +597,7 @@ export default {
 
 Setting `stats.excludeModules` to `false` will disable the exclude behaviour.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -612,7 +612,7 @@ export default {
 
 Tells `stats` whether to group assets by how their are related to chunks.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -627,7 +627,7 @@ export default {
 
 Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -642,7 +642,7 @@ export default {
 
 Tells `stats` whether to group assets by their extension.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -657,7 +657,7 @@ export default {
 
 Tells `stats` whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -672,7 +672,7 @@ export default {
 
 Tells `stats` whether to group assets by their asset path.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -687,7 +687,7 @@ export default {
 
 Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -702,7 +702,7 @@ export default {
 
 Tells `stats` whether to group modules by their cache status (cached or built and cacheable).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -717,7 +717,7 @@ export default {
 
 Tells `stats` whether to group modules by their extension.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -732,7 +732,7 @@ export default {
 
 Tells `stats` whether to group modules by their layer.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -747,7 +747,7 @@ export default {
 
 Tells `stats` whether to group modules by their path.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -762,7 +762,7 @@ export default {
 
 Tells `stats` whether to group modules by their type.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -779,7 +779,7 @@ export default {
 
 Group [`reasons`](#statsreasons) by their origin module to avoid large set of reasons.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -794,7 +794,7 @@ export default {
 
 Tells `stats` whether to add information about the hash of the compilation.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -809,7 +809,7 @@ export default {
 
 Tells `stats` to add IDs of modules and chunks.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -831,7 +831,7 @@ Tells `stats` whether to add logging output.
 - `'log'`, `true` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
 - `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -846,7 +846,7 @@ export default {
 
 Tells `stats` to include the debug information of the specified loggers such as Plugins or Loaders. When [`stats.logging`](#statslogging) is set to `false`, `stats.loggingDebug` option is ignored.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -866,7 +866,7 @@ export default {
 
 Enable stack traces in the logging output for errors, warnings and traces. Set `stats.loggingTrace` to hide the trace.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -881,7 +881,7 @@ export default {
 
 Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -896,7 +896,7 @@ export default {
 
 Tells `stats` to show dependencies and the origin of warnings/errors. `stats.moduleTrace` is available since webpack 2.5.0.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -911,7 +911,7 @@ export default {
 
 Tells `stats` whether to add information about the built modules.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -926,7 +926,7 @@ export default {
 
 Tells `stats` to sort the modules by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.modulesSort`. Use `!` prefix in the value to reverse the sort order by a given field.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -941,7 +941,7 @@ export default {
 
 Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -956,7 +956,7 @@ export default {
 
 Tells `stats` whether to add information about modules nested in other modules (like with module concatenation).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -971,7 +971,7 @@ export default {
 
 Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -986,7 +986,7 @@ export default {
 
 Tells `stats` to show the reasons why optimization bailed out for modules.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1001,7 +1001,7 @@ export default {
 
 Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphan modules are hidden by default in `stats`.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1016,7 +1016,7 @@ export default {
 
 Tells `stats` to show the `outputPath`.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1031,7 +1031,7 @@ export default {
 
 Tells `stats` to show performance hint when the file size exceeds [`performance.maxAssetSize`](/configuration/performance/#performancemaxassetsize).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1046,7 +1046,7 @@ export default {
 
 Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1063,7 +1063,7 @@ Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats 
 
 Tells `stats` to show the exports of the modules.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1078,7 +1078,7 @@ export default {
 
 Tells `stats` to show the `publicPath`.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1093,7 +1093,7 @@ export default {
 
 Tells `stats` to add information about the reasons of why modules are included.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1110,7 +1110,7 @@ export default {
 
 Space to display [`reasons`](#statsreasons) (groups will be collapsed to fit this space).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1127,7 +1127,7 @@ T> The [`detailed preset`](#stats-presets) limits [`modulesSpace`](#statsmodules
 
 Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1142,7 +1142,7 @@ export default {
 
 Tells `stats` whether to add information about runtime modules.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1157,7 +1157,7 @@ export default {
 
 Tells `stats` to add the source code of modules.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1172,7 +1172,7 @@ export default {
 
 Tells `stats` to add the timing information.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1187,7 +1187,7 @@ export default {
 
 Tells `stats` whether to show which exports of a module are used.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1202,7 +1202,7 @@ export default {
 
 Tells `stats` to add information about the webpack version used.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1217,7 +1217,7 @@ export default {
 
 Tells `stats` to add warnings.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1232,7 +1232,7 @@ export default {
 
 Add warnings count.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1247,7 +1247,7 @@ export default {
 
 Tells `stats` to exclude the warnings that are matching given filters. This can be done with a `string`, a `RegExp`, a `function` that is getting a warning as an argument and returns a `boolean`. `stats.warningsFilter` can be an `array` of any of the above.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1266,7 +1266,7 @@ W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configur
 
 Tells `stats` to limit the number of lines to allocate for displaying a warning.
 
-```javascript
+```js
 export default {
   // ...
   stats: {
@@ -1305,7 +1305,7 @@ If you want to use one of the presets e.g. `'minimal'` but still override some o
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ..
   stats: {

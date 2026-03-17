@@ -28,7 +28,7 @@ export default (locals) => {
   );
 
   const css = assets.css
-    .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
+    .map((path) => `<link rel="stylesheet" href="${path}" />`)
     .join("");
 
   const scripts = isPrintPage(locals.path)

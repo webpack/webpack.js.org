@@ -325,21 +325,21 @@ Webpack is now able to track access to nested properties of exports. This can im
 
 **inner.js**
 
-```javascript
+```js
 export const a = 1;
 export const b = 2;
 ```
 
 **module.js**
 
-```javascript
+```js
 export * as inner from "./inner";
 // or import * as inner from './inner'; export { inner };
 ```
 
 **user.js**
 
-```javascript
+```js
 import * as module from "./module";
 
 console.log(module.inner.a);

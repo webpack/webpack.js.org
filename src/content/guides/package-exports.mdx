@@ -499,8 +499,9 @@ Otherwise, in production or when mode is unknown, we use the optimized version.
 }
 ```
 
+**wrapper-process-env.cjs**
+
 ```js
-// wrapper-process-env.cjs
 module.exports =
   process.env.NODE_ENV !== "development"
     ? require("./index-optimized.cjs")

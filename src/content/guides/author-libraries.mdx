@@ -12,6 +12,7 @@ contributors:
   - AnayaDesign
   - chenxsan
   - wizardofhogwarts
+  - Debraj2024
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -118,6 +119,36 @@ export default {
 ```
 
 In the above example, we're telling webpack to bundle `src/index.js` into `dist/webpack-numbers.js`.
+
+### Adding Source Maps
+
+When bundling a library, it is recommended to generate source maps. Source maps
+allow consumers of your library to debug your original source code rather than
+the minified bundle. This can be done using the
+[`devtool`](/configuration/devtool/) option:
+
+**webpack.config.js**
+
+```diff
+  import path from 'node:path';
+  import { fileURLToPath } from 'node:url';
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  export default {
+    entry: './src/index.js',
++   devtool: 'source-map',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'webpack-numbers.js',
+    },
+  };
+```
+
+T> Using `'source-map'` as the `devtool` value generates a separate `.map` file
+alongside your bundle. Make sure to also publish this `.map` file so consumers
+can use it for debugging.
 
 ## Expose the Library
 

@@ -56,7 +56,7 @@ Let's add a new utility file to our project, `src/math.js`, that exports two fun
 
 **src/math.js**
 
-```javascript
+```js
 export function square(x) {
   return x * x;
 }
@@ -189,7 +189,7 @@ The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`
 
 Let's make an example:
 
-```javascript
+```js
 import { Button } from "@shopify/polaris";
 ```
 
@@ -197,7 +197,7 @@ The pre-bundled version looks like this:
 
 {/* eslint-disable @stylistic/spaced-comment, prefer-rest-params */}
 
-```javascript
+```js
 import hoistStatics from "hoist-non-react-statics";
 
 function Button(_ref) {
@@ -254,7 +254,7 @@ Terser actually tries to figure it out, but it doesn't know for sure in many cas
 
 But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a small change would make it possible to tree-shake the code:
 
-```javascript
+```js
 const Button$1 = /* #__PURE__ */ withAppProvider()(Button);
 ```
 
@@ -268,7 +268,7 @@ In the Shopify's Polaris example, original modules look like this:
 
 **index.js**
 
-```javascript
+```js
 import "./configure";
 
 export * from "./types";
@@ -277,7 +277,7 @@ export * from "./components";
 
 **components/index.js**
 
-```javascript
+```js
 // ...
 export { default as Breadcrumbs } from "./Breadcrumbs";
 export { buttonFrom, buttonsFrom, default as Button } from "./Button";
@@ -369,14 +369,14 @@ awesome-ui/
 
 **dist/index.js**
 
-```javascript
+```js
 export * from "./components";
 export * from "./theme";
 ```
 
 **dist/components/index.js**
 
-```javascript
+```js
 export { default as Button } from "./Button";
 export { default as Card } from "./Card";
 export { default as Modal } from "./Modal";
@@ -384,7 +384,7 @@ export { default as Modal } from "./Modal";
 
 **dist/components/Button/index.js**
 
-```javascript
+```js
 import "./Button.css"; // This has a side effect - it applies styles when imported!
 
 export default function Button(props) {
@@ -413,7 +413,7 @@ export default function Button(props) {
 
 **dist/theme/index.js**
 
-```javascript
+```js
 import "./defaultTheme.css"; // This has a side effect!
 
 export const themeColors = {
@@ -427,7 +427,7 @@ export const themeColors = {
 
 Now, imagine a consumer application that only wants to use the Button component:
 
-```javascript
+```js
 import { Button } from "awesome-ui";
 
 // Use the Button component
@@ -512,7 +512,7 @@ This behavior is enabled when [`optimization.innerGraph`](/configuration/optimiz
 
 **file.js**
 
-```javascript
+```js
 /* #__PURE__ */ double(55);
 ```
 
@@ -568,7 +568,7 @@ Setting `sideEffects: false` in your package.json is tempting for optimal tree s
 
 Consider this pattern:
 
-```javascript
+```js
 // This file has side effects that might be skipped
 import "./polyfill";
 

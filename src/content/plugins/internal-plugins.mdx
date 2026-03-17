@@ -157,7 +157,7 @@ There are multiple optimizations in production mode regarding dead branches:
 
 Webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. Webpack can't do constant folding unless the compiler knows it. For example:
 
-```javascript
+```js
 import { calculateTax } from "./tax";
 
 const FOO = 1;
@@ -175,7 +175,7 @@ It is important to mention that `import { calculateTax } from './tax';` will als
 
 `ProvidePlugin(name, request)`
 
-If `name` is used in a module it is filled by a module loaded by `require(<request>)`.
+If `name` is used in a module it is filled by a module loaded by `import ... from <request>`/`import(<request>)`/`require(<request>)`.
 
 ### NodeStuffPlugin
 

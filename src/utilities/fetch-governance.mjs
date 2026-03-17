@@ -92,7 +92,7 @@ try {
   }
 
   console.log(
-    "\nGovernance content generated successfully with Capitalized prefix!",
+    "Governance content generated successfully with Capitalized prefix!",
   );
 } catch (error) {
   console.error("Error fetching governance files:", error.message);

@@ -13,7 +13,7 @@ Plugins grant unlimited opportunity to perform customizations within the webpack
 
 After a compilation is sealed, all structures within the compilation may be traversed.
 
-```javascript
+```js
 class MyPlugin {
   apply(compiler) {
     compiler.hooks.emit.tapAsync("MyPlugin", (compilation, callback) => {
@@ -42,7 +42,7 @@ class MyPlugin {
   }
 }
 
-module.exports = MyPlugin;
+export default MyPlugin;
 ```
 
 - `compilation.modules`: A set of modules (built inputs) in the compilation. Each module manages the build of a raw file from your source library.
@@ -61,7 +61,7 @@ W> **Deprecation warning**: Array functions will still work.
 
 While running webpack middleware, each compilation includes a `fileDependencies` `Set` (what files are being watched) and a `fileTimestamps` `Map` that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:
 
-```javascript
+```js
 class MyPlugin {
   constructor() {
     this.startTime = Date.now();
@@ -82,7 +82,7 @@ class MyPlugin {
   }
 }
 
-module.exports = MyPlugin;
+export default MyPlugin;
 ```
 
 You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Add valid file paths into the `compilation.fileDependencies` `Set` to add them to the watched files.
@@ -95,7 +95,7 @@ W> Since webpack 5, `compilation.fileDependencies`, `compilation.contextDependen
 
 Similar to the watch graph, you can monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.
 
-```javascript
+```js
 class MyPlugin {
   constructor() {
     this.chunkVersions = {};
@@ -113,5 +113,5 @@ class MyPlugin {
   }
 }
 
-module.exports = MyPlugin;
+export default MyPlugin;
 ```

@@ -14,21 +14,18 @@ export default class Dropdown extends Component {
   };
 
   componentDidMount() {
-    document.addEventListener(
-      "keyup",
-      this._closeDropdownOnEsc.bind(this),
-      true,
-    );
-    document.addEventListener(
-      "focus",
-      this._closeDropdownIfFocusLost.bind(this),
-      true,
-    );
-    document.addEventListener(
-      "click",
-      this._closeDropdownIfFocusLost.bind(this),
-      true,
-    );
+    this._boundCloseOnEsc = this._closeDropdownOnEsc.bind(this);
+    this._boundCloseLostFocus = this._closeDropdownIfFocusLost.bind(this);
+
+    document.addEventListener("keyup", this._boundCloseOnEsc, true);
+    document.addEventListener("focus", this._boundCloseLostFocus, true);
+    document.addEventListener("click", this._boundCloseLostFocus, true);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this._boundCloseOnEsc, true);
+    document.removeEventListener("focus", this._boundCloseLostFocus, true);
+    document.removeEventListener("click", this._boundCloseLostFocus, true);
   }
 
   _closeDropdownOnEsc(event) {

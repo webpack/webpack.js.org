@@ -51,7 +51,7 @@ Create async chunks that are loaded on demand.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -71,7 +71,7 @@ When used in tandem with [`output.library`](#outputlibrary) and [`output.library
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -87,7 +87,7 @@ which will yield the following:
 
 **someLibName.js**
 
-```javascript
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   // Test Comment
   if (typeof exports === "object" && typeof module === "object") {
@@ -114,7 +114,7 @@ For fine-grained control over each `libraryTarget` comment, pass an object:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -149,7 +149,7 @@ By default `[id].js` is used or a value inferred from [`output.filename`](#outpu
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -163,7 +163,7 @@ Usage as a function:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -185,7 +185,7 @@ T> The default value of this option depends on the [`target`](/configuration/tar
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -203,7 +203,7 @@ The Number of milliseconds before chunk request expires. This option is supporte
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -221,7 +221,7 @@ The global variable is used by webpack for loading chunks.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -241,7 +241,7 @@ T> The default value of this option depends on the [`target`](/configuration/tar
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -257,7 +257,7 @@ export default {
 
 `boolean` `{ dry?: boolean, keep?: RegExp | string | ((filename: string) => boolean) }`
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -266,7 +266,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -277,7 +277,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -286,10 +286,10 @@ export default {
     },
   },
 };
+```
 
-// or
-
-module.exports = {
+```js
+export default {
   // ...
   output: {
     clean: {
@@ -303,7 +303,7 @@ module.exports = {
 
 You can also use it with hook:
 
-```javascript
+```js
 webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
   "Test",
   (asset) => {
@@ -320,7 +320,7 @@ Tells webpack to check if to be emitted file already exists and has the same con
 
 W> webpack will not write output file when file already exists on disk with the same content.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -372,7 +372,7 @@ Customize the names used in each source map's `sources` array. This can be done 
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -397,7 +397,7 @@ The following substitutions are available in template strings (via webpack's int
 
 When using a function, the same options are available camel-cased via the `info` parameter:
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -421,7 +421,7 @@ You can use template strings like `[name]` to dynamically generate namespaces ba
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -441,7 +441,7 @@ List of chunk loading types enabled for use by entry points. Will be automatical
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -457,7 +457,7 @@ export default {
 
 List of library types enabled for use by entry points.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -472,7 +472,7 @@ export default {
 
 List of wasm loading types enabled for use by entry points.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -485,7 +485,7 @@ export default {
 
 Tell webpack what kind of ES-features may be used in the generated runtime-code.
 
-```javascript
+```js
 export default {
   output: {
     environment: {
@@ -537,7 +537,7 @@ For a single [`entry`](/configuration/entry-context/#entry) point, this can be a
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -552,7 +552,7 @@ Using entry name:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -565,7 +565,7 @@ Using internal chunk id:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -578,7 +578,7 @@ Using hashes generated from the generated content:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -591,7 +591,7 @@ Combining multiple substitutions:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -604,7 +604,7 @@ Using the function to return the filename:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -681,7 +681,7 @@ If using a function for this option, the function will be passed an object conta
 Substitutions will be applied to the returned string too.
 The passed object will have this type: (properties available depending on context)
 
-```typescript
+```ts
 type PathData = {
   hash: string;
   hashWithLength: (number) => string;
@@ -724,7 +724,7 @@ For example:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -783,7 +783,7 @@ T> For `webpack v5.65.0+`, `16` will be used as the default value for the `hashD
 
 The hashing algorithm to use. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -810,7 +810,7 @@ The only placeholders allowed here are `[id]` and `[fullhash]`, the default bein
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -845,7 +845,7 @@ T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
 Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -864,7 +864,7 @@ Hide warnings from the browser console in production. This option does not affec
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -881,7 +881,7 @@ The name of the native `import()` function. Can be used for polyfilling, e.g. wi
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -898,7 +898,7 @@ The name of the native `import.meta` object (can be exchanged for a polyfill).
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1090,7 +1090,7 @@ export default {
 
 When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
-```javascript
+```js
 const MyLibrary = _entry_return_;
 
 // In a separate script with `MyLibrary` loaded…
@@ -1113,7 +1113,7 @@ export default {
 
 This will generate an implied global which has the potential to reassign an existing value (use with caution):
 
-```javascript
+```js
 MyLibrary = _entry_return_;
 ```
 
@@ -1173,7 +1173,7 @@ export default {
 
 The **return value of your entry point** will be assigned to `this` under the property named by `output.library.name`. The meaning of `this` is up to you:
 
-```javascript
+```js
 this.MyLibrary = _entry_return_;
 
 // In a separate script...
@@ -1197,7 +1197,7 @@ export default {
 
 The **return value of your entry point** will be assigned to the `window` object using the `output.library.name` value.
 
-```javascript
+```js
 globalThis.MyLibrary = _entry_return_;
 
 globalThis.MyLibrary.doSomething();
@@ -1219,7 +1219,7 @@ export default {
 
 The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Depending on the [`target`](/configuration/target/) value, the global object could change respectively, e.g., `self`, `global` or `globalThis`.
 
-```javascript
+```js
 globalThis.MyLibrary = _entry_return_;
 
 globalThis.MyLibrary.doSomething();
@@ -1241,7 +1241,7 @@ export default {
 
 The **return value of your entry point** will be assigned to the `exports` object using the `output.library.name` value. As the name implies, this is used in CommonJS environments.
 
-```javascript
+```js
 exports.MyLibrary = _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -1313,7 +1313,7 @@ export default {
 
 The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in Node.js (CommonJS) environments:
 
-```javascript
+```js
 export default _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -1347,13 +1347,13 @@ Individual exports will be set as properties on `module.exports`. The "static" i
 
 Input:
 
-```javascript
+```js
 export function doSomething() {}
 ```
 
 Output:
 
-```javascript
+```js
 function doSomething() {}
 
 // …
@@ -1363,13 +1363,13 @@ exports.doSomething = __webpack_exports__.doSomething;
 
 Consumption (CommonJS):
 
-```javascript
+```js
 const { doSomething } = require("./output.cjs"); // doSomething => [Function: doSomething]
 ```
 
 Consumption (ESM):
 
-```javascript
+```js
 import { doSomething } from "./output.cjs"; // doSomething => [Function: doSomething]
 ```
 
@@ -1383,7 +1383,7 @@ AMD modules require that the entry chunk (e.g. the first script loaded by the `<
 
 With the following configuration...
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1397,13 +1397,13 @@ export default {
 
 The generated output will be defined with the name `"MyLibrary"`, i.e.:
 
-```javascript
+```js
 define("MyLibrary", [], () => _entry_return_);
 ```
 
 The bundle can be included as part of a script tag, and the bundle can be invoked like so:
 
-```javascript
+```js
 require(["MyLibrary"], (MyLibrary) => {
   // Do something with the library...
 });
@@ -1411,7 +1411,7 @@ require(["MyLibrary"], (MyLibrary) => {
 
 If `output.library.name` is undefined, the following is generated instead.
 
-```javascript
+```js
 define(() => _entry_return_);
 ```
 
@@ -1419,7 +1419,7 @@ This bundle will not work as expected, or not work at all (in the case of the al
 
 ##### type: 'amd-require'
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1443,7 +1443,7 @@ This exposes your library under all the module definitions, allowing it to work 
 
 In this case, you need the `library.name` property to name your module:
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1457,7 +1457,7 @@ export default {
 
 And finally the output is:
 
-```javascript
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
     module.exports = factory();
@@ -1473,7 +1473,7 @@ And finally the output is:
 
 Note that omitting `library.name` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1484,7 +1484,7 @@ export default {
 
 The output will be:
 
-```javascript
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
     module.exports = factory();
@@ -1499,7 +1499,7 @@ The output will be:
 
 You may specify an object for `library.name` for differing names per targets:
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1521,7 +1521,7 @@ This will expose your library as a [`System.register`](https://github.com/system
 
 System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1534,7 +1534,7 @@ export default {
 
 Output:
 
-```javascript
+```js
 System.register([], (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) => ({
   execute() {
     // ...
@@ -1544,7 +1544,7 @@ System.register([], (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) => ({
 
 By adding `output.library.name` to configuration in addition to having `output.library.type` set to `system`, the output bundle will have the library name as an argument to `System.register`:
 
-```javascript
+```js
 System.register(
   "MyLibrary",
   [],
@@ -1576,7 +1576,7 @@ This will wrap the return value of your entry point into a jsonp wrapper.
 
 {/* eslint-disable new-cap */}
 
-```javascript
+```js
 MyLibrary(_entry_return_);
 ```
 
@@ -1703,7 +1703,7 @@ export default {
 
 When using `output.library.type: "umd"`, setting `output.library.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise, an anonymous `define` is used.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1734,26 +1734,26 @@ The following configurations are supported:
 
 `libraryExport: 'default'` - The **default export of your entry point** will be assigned to the library target:
 
-```javascript
+```js
 // if your entry has a default export of `MyDefaultModule`
 const MyDefaultModule = _entry_return_.default;
 ```
 
 `libraryExport: 'MyModule'` - The **specified module** will be assigned to the library target:
 
-```javascript
+```js
 const { MyModule } = _entry_return_;
 ```
 
 `libraryExport: ['MyModule', 'MySubModule']` - The array is interpreted as a **path to a module** to be assigned to the library target:
 
-```javascript
+```js
 const { MySubModule } = _entry_return_.MyModule;
 ```
 
 With the `libraryExport` configurations specified above, the resulting libraries could be utilized as such:
 
-```javascript
+```js
 MyDefaultModule.doSomething();
 MyModule.doSomething();
 MySubModule.doSomething();
@@ -1779,7 +1779,7 @@ W> Prefer to use [`output.library.type: 'var'`](#type-var).
 
 When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
-```javascript
+```js
 const MyLibrary = _entry_return_;
 
 // In a separate script...
@@ -1792,7 +1792,7 @@ W> Prefer to use [`output.library.type: 'assign'`](#type-assign).
 
 This will generate an implied global which has the potential to reassign an existing value (use with caution):
 
-```javascript
+```js
 MyLibrary = _entry_return_;
 ```
 
@@ -1830,7 +1830,7 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
 
-```javascript
+```js
 (function (e, a) {
   for (const i in a) {
     e[i] = a[i];
@@ -1846,7 +1846,7 @@ W> Prefer to use [`output.library.type: 'this'`](#type-this).
 
 The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
 
-```javascript
+```js
 this.MyLibrary = _entry_return_;
 
 // In a separate script...
@@ -1860,7 +1860,7 @@ W> Prefer to use [`output.library.type: 'window'`](#type-window).
 
 The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
 
-```javascript
+```js
 globalThis.MyLibrary = _entry_return_;
 
 globalThis.MyLibrary.doSomething();
@@ -1872,7 +1872,7 @@ W> Prefer to use [`output.library.type: 'global'`](#type-global).
 
 The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
 
-```javascript
+```js
 globalThis.MyLibrary = _entry_return_;
 
 globalThis.MyLibrary.doSomething();
@@ -1884,7 +1884,7 @@ W> Prefer to use [`output.library.type: 'commonjs'`](#type-commonjs).
 
 The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
 
-```javascript
+```js
 exports.MyLibrary = _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -1908,7 +1908,7 @@ W> Prefer to use [`output.library.type: 'commonjs2'`](#type-commonjs2).
 
 The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
 
-```javascript
+```js
 export default _entry_return_;
 
 require("MyLibrary").doSomething();
@@ -1928,7 +1928,7 @@ AMD modules require that the entry chunk (e.g. the first script loaded by the `<
 
 With the following configuration...
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1940,13 +1940,13 @@ export default {
 
 The generated output will be defined with the name "MyLibrary", i.e.
 
-```javascript
+```js
 define("MyLibrary", [], () => _entry_return_);
 ```
 
 The bundle can be included as part of a script tag, and the bundle can be invoked like so:
 
-```javascript
+```js
 require(["MyLibrary"], (MyLibrary) => {
   // Do something with the library...
 });
@@ -1954,7 +1954,7 @@ require(["MyLibrary"], (MyLibrary) => {
 
 If `output.library` is undefined, the following is generated instead.
 
-```javascript
+```js
 define([], () => _entry_return_);
 ```
 
@@ -1978,7 +1978,7 @@ This exposes your library under all the module definitions, allowing it to work 
 
 In this case, you need the `library` property to name your module:
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -1990,7 +1990,7 @@ export default {
 
 And finally the output is:
 
-```javascript
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
     module.exports = factory();
@@ -2009,7 +2009,7 @@ And finally the output is:
 
 Note that omitting the `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2020,7 +2020,7 @@ export default {
 
 The output will be:
 
-```javascript
+```js
 (function webpackUniversalModuleDefinition(root, factory) {
   if (typeof exports === "object" && typeof module === "object") {
     module.exports = factory();
@@ -2038,7 +2038,7 @@ The output will be:
 
 Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2060,7 +2060,7 @@ This will expose your library as a [`System.register`](https://github.com/system
 
 System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2071,7 +2071,7 @@ export default {
 
 Output:
 
-```javascript
+```js
 System.register([], (_export) => ({
   setters: [],
   execute() {
@@ -2082,7 +2082,7 @@ System.register([], (_export) => ({
 
 By adding `output.library` to configuration in addition to having `output.libraryTarget` set to `system`, the output bundle will have the library name as an argument to `System.register`:
 
-```javascript
+```js
 System.register("my-library", [], (_export) => ({
   setters: [],
   execute() {
@@ -2093,7 +2093,7 @@ System.register("my-library", [], (_export) => ({
 
 You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
 
-```javascript
+```js
 // Log the URL of the current SystemJS module
 console.log(__system_context__.meta.url);
 
@@ -2113,7 +2113,7 @@ This will wrap the return value of your entry point into a jsonp wrapper.
 
 {/* eslint-disable new-cap */}
 
-```javascript
+```js
 MyLibrary(_entry_return_);
 ```
 
@@ -2129,7 +2129,7 @@ When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output
 
 If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
 
-```javascript
+```js
 export default {
   // ...
   experiments: {
@@ -2151,7 +2151,7 @@ The output directory as an **absolute** path.
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -2180,7 +2180,7 @@ W> While the data these comments can provide is useful during development when r
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2209,7 +2209,7 @@ A rule to consider: The URL of your [`output.path`](#outputpath) from the view o
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -2229,7 +2229,7 @@ For this configuration:
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2259,7 +2259,7 @@ Note that `[fullhash]` in this parameter will be replaced with a hash of the com
 
 Examples (one of the below):
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2269,7 +2269,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2279,7 +2279,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2289,7 +2289,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2299,7 +2299,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2309,7 +2309,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2319,7 +2319,7 @@ export default {
 };
 ```
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2331,7 +2331,7 @@ export default {
 
 In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
-```javascript
+```js
 __webpack_public_path__ = myRuntimePublicPath;
 
 // rest of your application entry
@@ -2347,7 +2347,7 @@ This option allows loading asynchronous chunks with a custom script type, such a
 
 T> If [`output.module`](#outputmodule) is set to `true`, `output.scriptType` will default to `'module'` instead of `false`.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2372,7 +2372,7 @@ Change the prefix for each line in the output bundles.
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2392,7 +2392,7 @@ Handle error in module loading as per EcmaScript Modules spec at a performance c
 - Type: `boolean`
 - Available: 5.25.0+
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2416,13 +2416,13 @@ When set to `false`, the module is not removed from cache, which results in the 
 
 For instance, consider `module.js`:
 
-```javascript
+```js
 throw new Error("error");
 ```
 
 With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
 
-```javascript
+```js
 // with strictModuleExceptionHandling = false
 require("node:module"); // <- throws
 require("node:module"); // <- doesn't throw
@@ -2430,7 +2430,7 @@ require("node:module"); // <- doesn't throw
 
 Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
 
-```javascript
+```js
 // with strictModuleExceptionHandling = true
 require("node:module"); // <- throws
 require("node:module"); // <- also throws
@@ -2452,7 +2452,7 @@ It is disabled by default (no compatibility, script URLs are strings).
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2472,7 +2472,7 @@ export default {
 
 Determine whether to proceed with loading in anticipation that [`require-trusted-types-for 'script'`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) has not been enforced or to immediately fail when the call to `trustedTypes.createPolicy(...)` fails due to the policy name being absent from the CSP `trusted-types` list or being a duplicate.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2493,7 +2493,7 @@ W> Prefer to use [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine)
 
 When using `libraryTarget: "umd"`, setting `output.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2514,7 +2514,7 @@ A unique name of the webpack build to avoid multiple webpack runtimes to conflic
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2534,7 +2534,7 @@ The default value can be affected by different [`target`](/configuration/target/
 - Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'`, `'electron-renderer'` or `'node-webkit'`.
 - Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2549,7 +2549,7 @@ export default {
 
 Specifies the filename of WebAssembly modules. It should be provided as a relative path within the `output.path` directory
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2568,7 +2568,7 @@ T> The default value of this option depends on the [`target`](/configuration/tar
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2585,7 +2585,7 @@ Set a public path for Worker, defaults to value of [output.publicPath](#outputpu
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {
@@ -2602,7 +2602,7 @@ Option to set the method of loading WebAssembly Modules in workers, defaults to 
 
 **webpack.config.js**
 
-```javascript
+```js
 export default {
   // ...
   output: {

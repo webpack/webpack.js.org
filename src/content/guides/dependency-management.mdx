@@ -16,7 +16,7 @@ A context is created if your request contains expressions, so the **exact** modu
 
 Example, given we have the following folder structure including `.ejs` files:
 
-```bash
+```text
 example_directory
 └── template/
     ├── table.ejs
@@ -27,14 +27,14 @@ example_directory
 
 When following `import()` or `require()` call is evaluated:
 
-```javascript
+```js
 import(`./template/${name}.ejs`);
 require(`./template/${name}.ejs`);
 ```
 
 Webpack parses the `import()` or `require()` call and extracts some information:
 
-```code
+```text
 Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
@@ -61,7 +61,7 @@ This means dynamic calls are supported but will cause all matching modules to be
 
 The ESM equivalent of `require.context` is `import.meta.webpackContext`.
 
-```javascript
+```js
 import.meta.webpackContext(directory, {
   recursive: true,
   regExp: /^\.\/.*$/,
@@ -82,7 +82,7 @@ Webpack parses for `require.context()` in the code while building.
 
 The syntax is as follows:
 
-```javascript
+```js
 require.context(
   directory,
   (useSubdirectories = true),
@@ -93,12 +93,12 @@ require.context(
 
 Examples:
 
-```javascript
+```js
 require.context("./test", false, /\.test\.js$/);
 // a context with files from the test directory that can be required with a request ending with `.test.js`.
 ```
 
-```javascript
+```js
 require.context("../", true, /\.stories\.js$/);
 // a context with all files in the parent folder and descending folders ending with `.stories.js`.
 ```
@@ -118,7 +118,7 @@ This can be useful if you want to require all files in a directory or matching a
 
 {/* eslint-disable */}
 
-```javascript
+```js
 function importAll(r) {
   r.keys().forEach(r);
 }
@@ -131,7 +131,7 @@ importAll(
 );
 ```
 
-```javascript
+```js
 const cache = {};
 
 function importAll(r) {

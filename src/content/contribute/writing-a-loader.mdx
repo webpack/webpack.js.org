@@ -10,6 +10,7 @@ contributors:
   - chenxsan
   - dev-itsheng
   - evenstensberg
+  - hagemaruwu
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -23,9 +24,9 @@ To test a single loader, you can use `path` to `resolve` a local file within a r
 **webpack.config.js**
 
 ```js
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -50,9 +51,11 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 **webpack.config.js**
 
 ```js
-const path = require("node:path");
+import path from "node:path";
 
-module.exports = {
+const __dirname = import.meta.dirname;
+
+export default {
   // ...
   resolveLoader: {
     modules: ["node_modules", path.resolve(__dirname, "loaders")],
@@ -85,7 +88,7 @@ In the following example, the `foo-loader` would be passed the raw resource and 
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   // ...
   module: {
     rules: [
@@ -176,7 +179,7 @@ export default function (source) {
 
 In webpack, loaders can be chained together and share data with subsequent loaders in the chain. To achieve this, you can pass data along with the content (source code) using the `this.callback` method in raw loaders. In the default exported function of a raw loader, you can pass data using the fourth argument of `this.callback`.
 
-```javascript
+```js
 export default function (source) {
   const options = getOptions(this);
   // Pass data using the fourth argument of this.callback
@@ -227,18 +230,20 @@ T> If the language only accepts relative urls (e.g. `url(file)` always refers to
 
 ### Common Code
 
-Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module:
+- Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and `import` (or `require`) it as a shared module:
+
+W> While CommonJS syntax (`require`) is completely supported, we highly recommend using ECMAScript Modules (`import`) for new loaders.
 
 **src/loader-runtime.js**
 
 ```js
-const { someOtherModule } = require("./some-other-module");
+import { someOtherModule } from "./some-other-module.js";
 
-module.exports = function runtime(params) {
+export default function runtime(params) {
   const x = params.y * 2;
 
   return someOtherModule(params, x);
-};
+}
 ```
 
 **src/loader.js**
@@ -295,7 +300,7 @@ npm install --save-dev jest babel-jest @babel/core @babel/preset-env
 **babel.config.js**
 
 ```js
-module.exports = {
+export default {
   presets: [
     [
       "@babel/preset-env",
@@ -343,6 +348,8 @@ npm install --save-dev webpack memfs
 import path from "node:path";
 import { Volume, createFsFromVolume } from "memfs";
 import webpack from "webpack";
+
+const __dirname = import.meta.dirname;
 
 export default (fixture, options = {}) => {
   const compiler = webpack({

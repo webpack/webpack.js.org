@@ -66,6 +66,7 @@ export default function Page(props) {
             const element = document.getElementById(hash.slice(1));
             if (element) {
               element.scrollIntoView();
+              observer.disconnect();
             }
           });
           observer.observe(target, {
@@ -184,10 +185,12 @@ Page.propTypes = {
   next: PropTypes.object,
   pages: PropTypes.array,
   content: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
     PropTypes.shape({
       // eslint-disable-next-line unicorn/no-thenable
       then: PropTypes.func.isRequired,
-      default: PropTypes.string,
+      default: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     }),
   ]),
 };

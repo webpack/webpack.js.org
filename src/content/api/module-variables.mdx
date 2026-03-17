@@ -35,7 +35,7 @@ Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replaceme
 
 The ID of the current module.
 
-```javascript
+```js
 console.log(import.meta.url);
 ```
 
@@ -43,7 +43,7 @@ console.log(import.meta.url);
 
 Defines the value that will be returned when a consumer makes a `import` call to the module (defaults to a new object).
 
-```javascript
+```js
 export default function doSomething() {
   // Do something...
 }
@@ -55,7 +55,7 @@ W> This CANNOT be used in an asynchronous function.
 
 Named exports allow you to export multiple variables, functions, or objects from a single module. Unlike a default export, you must use the exact name when importing these values.
 
-```javascript
+```js
 export const someValue = 42;
 export const anObject = {
   x: 123,
@@ -102,7 +102,7 @@ Returns the absolute `file:` URL of the module.
 
 **src/index.js**
 
-```javascript
+```js
 console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
 ```
 
@@ -112,7 +112,7 @@ Returns the webpack version.
 
 **src/index.js**
 
-```javascript
+```js
 console.log(import.meta.webpack); // output `5` for webpack 5
 ```
 
@@ -163,13 +163,13 @@ Returns a boolean indicating whether the current module is an entry point.
 
 **src/index.js** (entry point)
 
-```javascript
+```js
 console.log(import.meta.main); // true
 ```
 
 **src/utils.js** (not an entry point)
 
-```javascript
+```js
 console.log(import.meta.main); // false
 ```
 
@@ -184,9 +184,9 @@ Access environment variables from multiple sources. `import.meta.env` is an obje
 **webpack.config.js**
 
 ```js
-const webpack = require("webpack");
+import webpack from "webpack";
 
-module.exports = {
+export default {
   mode: "production", // NODE_ENV is automatically set to "production"
   dotenv: {
     prefix: "WEBPACK_", // Only expose variables with WEBPACK_ prefix
@@ -257,13 +257,13 @@ If used inside an expression that is parsed by the Parser, the configuration opt
 
 The resource query of the current module. If the following `import` call was made, then the query string would be available in `file.js`.
 
-```javascript
+```js
 import "file.js?test";
 ```
 
 **file.js**
 
-```javascript
+```js
 __resourceQuery === "?test";
 ```
 

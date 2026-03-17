@@ -32,6 +32,7 @@ import Navigation from "../Navigation/Navigation.jsx";
 import OfflineBanner from "../OfflineBanner/OfflineBanner.jsx";
 import Page from "../Page/Page.jsx";
 import PageNotFound from "../PageNotFound/PageNotFound.jsx";
+import ReadingProgress from "../ReadingProgress/ReadingProgress.jsx";
 import ScrollToTop from "../ScrollToTop/ScrollToTop.jsx";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import SidebarMobile from "../SidebarMobile/SidebarMobile.jsx";
@@ -140,33 +141,35 @@ function Site(props) {
 
   useEffect(() => {
     if (process.env.NODE_ENV === "production") {
-      const GA_ID = "UA-46921629-2";
+      const GA4_ID = "G-KGQCZQ8B8H";
 
-      if (!window.ga) {
-        window.ga ||= function ga() {
-          (ga.q = ga.q || []).push(arguments); // eslint-disable-line
+      if (!window.gtag) {
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
+        document.head.appendChild(script);
+
+        window.dataLayer ||= [];
+        window.gtag = function gtag() {
+          // eslint-disable-next-line prefer-rest-params
+          window.dataLayer.push(arguments);
         };
-        ga.l = +new Date(); // eslint-disable-line
 
-        const gads = document.createElement("script");
-        gads.async = true;
-        gads.type = "text/javascript";
-        gads.src = "//www.google-analytics.com/analytics.js";
-        const [head] = document.getElementsByTagName("head");
-        head.appendChild(gads);
-
-        window.ga("create", GA_ID, "auto");
+        window.gtag("js", new Date());
+        window.gtag("config", GA4_ID, {
+          // eslint-disable-next-line camelcase
+          send_page_view: false,
+        });
       }
 
-      const path = location.pathname + location.search;
-      window.ga("set", {
-        page: path,
-        title: document.title,
-        location: document.location,
+      window.gtag("event", "page_view", {
+        // eslint-disable-next-line camelcase
+        page_path: location.pathname + location.search,
+        // eslint-disable-next-line camelcase
+        page_title: document.title,
       });
-      window.ga("send", { hitType: "pageview" });
     }
-  }, [location]);
+  }, [location.pathname, location.search]);
 
   const [mounted, setMounted] = useState(false);
 
@@ -297,6 +300,7 @@ function Site(props) {
             { content: "Blog", url: "/blog/", ariaLabel: "webpack blog" },
           ]}
         />
+        {location.pathname !== "/" && <ReadingProgress />}
       </div>
 
       {mounted ? (

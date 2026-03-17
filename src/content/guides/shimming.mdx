@@ -190,8 +190,8 @@ This becomes a problem when the module is executed in a CommonJS context where `
  import webpack from "webpack";
  import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
 
  exports default {
    entry: './src/index.js',
@@ -202,7 +202,7 @@ const __dirname = path.dirname(__filename);
 +  module: {
 +    rules: [
 +      {
-+        test: require.resolve('./src/index.js'),
++        test: import.meta.resolve('./src/index.js'),
 +        use: 'imports-loader?wrapper=window',
 +      },
 +    ],
@@ -256,8 +256,8 @@ Now, while you'd likely never do this in your own source code, you may encounter
  import webpack from "webpack";
  import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
@@ -268,11 +268,11 @@ const __dirname = path.dirname(__filename);
    module: {
      rules: [
        {
-         test: require.resolve('./src/index.js'),
+         test: import.meta.resolve('./src/index.js'),
          use: 'imports-loader?wrapper=window',
        },
 +      {
-+        test: require.resolve('./src/globals.js'),
++        test: import.meta.resolve('./src/globals.js'),
 +        use:
 +          'exports-loader?type=commonjs&exports=file,multiple|helpers.parse|parse',
 +      },
@@ -368,7 +368,7 @@ npm install --save whatwg-fetch
 
 **src/polyfills.js**
 
-```javascript
+```js
 import "babel-polyfill";
 import "whatwg-fetch";
 ```
@@ -380,8 +380,8 @@ import "whatwg-fetch";
  import webpack from "webpack";
  import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+ const __filename = fileURLToPath(import.meta.url);
+ const __dirname = path.dirname(__filename);
 
  export default {
 -  entry: './src/index.js',
@@ -397,11 +397,11 @@ const __dirname = path.dirname(__filename);
    module: {
      rules: [
        {
-         test: require.resolve('./src/index.js'),
+         test: fileURLToPath(import.meta.resolve('./src/index.js')),
          use: 'imports-loader?wrapper=window',
        },
        {
-         test: require.resolve('./src/globals.js'),
+         test: fileURLToPath(import.meta.resolve('./src/globals.js')),
          use:
            'exports-loader?type=commonjs&exports[]=file&exports[]=multiple|helpers.parse|parse',
        },
@@ -501,7 +501,7 @@ Node built-ins, like `process`, can be polyfilled right directly from your confi
 
 There are a few other tools that can help when dealing with legacy modules.
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `import` and `require()` statements. This practice is also used to improve the build performance.
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 

@@ -89,13 +89,13 @@ By default, under the hood, the `asset` type does `__webpack_public_path__ + imp
 
 If you set the `__webpack_public_path__` in code, the way you need to achieve it so as not to break the `asset` loading logic is to make sure you run it as the first code in your app and not use a function to do so. An example of this would be having a file called `publicPath.js` with contents
 
-```javascript
+```js
 __webpack_public_path__ = "https://cdn.url.com";
 ```
 
 And then in your `webpack.config.js` updating your `entry` field to look like
 
-```javascript
+```js
 export default {
   entry: ["./publicPath.js", "./App.js"],
 };
@@ -103,7 +103,7 @@ export default {
 
 Alternatively, you can do the following in your `App.js` without modifying your webpack config. The only downside is you have to enforce ordering here and that can collide with some linting tools.
 
-```javascript
+```js
 import "./publicPath.js";
 ```
 
@@ -377,6 +377,11 @@ new URL(
   `${__webpack_public_path__}logo.svg`,
   require("node:url").pathToFileUrl(__filename),
 );
+```
+
+```js
+// any targets when ECMA modules output enabled
+new URL(`${__webpack_public_path__}logo.svg`, import.meta.url);
 ```
 
 As of webpack 5.38.0, [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) are supported in `new URL()` as well:

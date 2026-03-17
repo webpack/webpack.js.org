@@ -31,11 +31,10 @@ By default, module resolution path is current folder (`./**)` and `node_modules`
 
 It is also possible to specify full path:
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -53,7 +52,7 @@ For importing the default export of an ES2015 module, you have to specify the de
 
 To automatically load `jquery` we can point both variables it exposes to the corresponding node module:
 
-```javascript
+```js
 new webpack.ProvidePlugin({
   $: "jquery",
   jQuery: "jquery",
@@ -62,7 +61,7 @@ new webpack.ProvidePlugin({
 
 Then in any of our source code:
 
-```javascript
+```js
 // in a module
 $("#item"); // <= works
 jQuery("#item"); // <= also works
@@ -73,7 +72,7 @@ jQuery("#item"); // <= also works
 
 Angular looks for `window.jQuery` in order to determine whether jQuery is present, see the [source code](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
 
-```javascript
+```js
 new webpack.ProvidePlugin({
   "window.jQuery": "jquery",
 });
@@ -81,7 +80,7 @@ new webpack.ProvidePlugin({
 
 ## Usage: Lodash Map
 
-```javascript
+```js
 new webpack.ProvidePlugin({
   _map: ["lodash", "map"],
 });
@@ -89,7 +88,7 @@ new webpack.ProvidePlugin({
 
 ### Usage: Vue.js
 
-```javascript
+```js
 new webpack.ProvidePlugin({
   Vue: ["vue/dist/vue.esm.js", "default"],
 });

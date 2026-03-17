@@ -181,6 +181,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               className=""
               items={[
                 {
+                  lang: "en",
                   title: "English",
                   url: `https://webpack.js.org${pathname}${locationHash}`,
                 },
@@ -240,7 +241,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
                 >
                   {link.children.map((child) => {
                     const classNames =
-                      "text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white";
+                      "text-blue-400 dark:text-[#69a8ee] py-5 text-sm capitalize hover:text-black dark:hover:text-white";
                     const isActive = location.pathname.startsWith(child.url);
                     return (
                       <NavLink
@@ -271,7 +272,15 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
 Navigation.propTypes = {
   pathname: PropTypes.string,
   hash: PropTypes.string,
-  links: PropTypes.array,
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      content: PropTypes.node.isRequired,
+      url: PropTypes.string.isRequired,
+      isActive: PropTypes.func,
+      ariaLabel: PropTypes.string,
+      children: PropTypes.arrayOf(PropTypes.object),
+    }),
+  ).isRequired,
   toggleSidebar: PropTypes.func,
 };
 

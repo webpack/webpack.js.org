@@ -42,7 +42,7 @@ Version 2 of webpack supports ES6 module syntax natively, meaning you can use `i
 
 Statically `import` the `export`s of another module.
 
-```javascript
+```js
 import MyModule from "./my-module.js";
 import { NamedExport } from "./other-module.js";
 ```
@@ -51,7 +51,7 @@ W> The keyword here is **statically**. A normal `import` statement cannot be use
 
 You can also `import` Data URI:
 
-```javascript
+```js
 import "data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7";
 import {
   fn,
@@ -63,7 +63,7 @@ import {
 
 Export anything as a `default` or named export.
 
-```javascript
+```js
 // Named exports
 export const Count = 5;
 export function Multiply(a, b) {
@@ -84,7 +84,7 @@ Dynamically load modules. Calls to `import()` are treated as split points, meani
 
 T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
 
-```javascript
+```js
 if (module.hot) {
   import("lodash").then((_) => {
     // Do something with lodash (a.k.a '_')...
@@ -101,7 +101,7 @@ It is not possible to use a fully dynamic import statement, such as `import(foo)
 The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included.
 For example, ``import(`./locale/${language}.json`)`` will only bundle all `.json` files in the `./locale` directory and subdirectories into the new chunk and exclude files with other file extensions. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
 
-```javascript
+```js
 // imagine we had a method to get language from cookies or other storage
 const language = detectVisitorLanguage();
 import(`./locale/${language}.json`).then((module) => {
@@ -241,13 +241,13 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 
 ### require
 
-```typescript
+```ts
 require(dependency: String);
 ```
 
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
 
-```javascript
+```js
 import $ from "jquery";
 import myModule from "my-module";
 ```
@@ -258,7 +258,7 @@ W> Using it asynchronously may not have the expected effect.
 
 ### require.resolve
 
-```typescript
+```ts
 require.resolve(dependency: String);
 ```
 
@@ -274,7 +274,7 @@ Multiple requires of the same module result in only one module execution and onl
 
 W> This is only needed in rare cases for compatibility!
 
-```javascript
+```js
 import d1 from "dependency";
 
 // In ESM, module caching is handled automatically.
@@ -286,7 +286,7 @@ if (import.meta.webpackHot) {
 }
 ```
 
-```javascript
+```js
 // in file.js
 // In ESM, manual cache manipulation is not supported.
 // Webpack handles module caching internally.
@@ -309,7 +309,7 @@ Split out the given `dependencies` to a separate bundle that will be loaded asyn
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `require.ensure` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-```javascript
+```js
 const a = require("normal-dep");
 
 if (module.hot) {
@@ -346,7 +346,7 @@ If `dependencies` are provided, `factoryMethod` will be called with the exports 
 
 W> Note that webpack ignores the `name` argument.
 
-```javascript
+```js
 define(["jquery", "my-module"], ($, myModule) =>
   // Do something with $ and myModule...
 
@@ -366,7 +366,7 @@ define(value: !Function)
 
 This will export the provided `value`. The `value` here can be anything except a function.
 
-```javascript
+```js
 define({
   answer: 42,
 });
@@ -384,7 +384,7 @@ Similar to `require.ensure`, this will split the given `dependencies` into a sep
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use AMD with older browsers (e.g. Internet Explorer 11), remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-```javascript
+```js
 import("b").then((b) => {
   import("c").then((c) => {
     // b और c का इस्तेमाल करें
@@ -449,7 +449,7 @@ require.context(
 
 Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be resolved later on:
 
-```javascript
+```js
 const context = import.meta.webpackContext("components", {
   recursive: true,
   regExp: /\.html$/,
@@ -459,7 +459,7 @@ const componentA = context.resolve("componentA");
 
 If `mode` is set to `'lazy'`, the underlying modules will be loaded asynchronously:
 
-```javascript
+```js
 const context = import.meta.webpackContext("locales", {
   recursive: true,
   regExp: /\.json$/,
@@ -480,7 +480,7 @@ require.include((dependency: String));
 
 Include a `dependency` without executing it. This can be used for optimizing the position of a module in the output chunks.
 
-```javascript
+```js
 import("a");
 import("b");
 import("c").then((moduleC) => {
@@ -500,7 +500,7 @@ Without `require.include('a')` it would be duplicated in both anonymous chunks.
 
 Similar to `require.resolve`, but this won't pull the `module` into the bundle. It's what is considered a "weak" dependency.
 
-```javascript
+```js
 if (__webpack_modules__[require.resolveWeak("module")]) {
   // Do something when module is available...
 }
@@ -522,7 +522,7 @@ If the module source contains a require that cannot be statically analyzed, crit
 
 Example code:
 
-```javascript
+```js
 someFn(require);
 require.bind(null);
 require(variable);

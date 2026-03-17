@@ -144,7 +144,7 @@ export function restructure(item, options) {
   if (item.children) {
     for (const child of item.children) restructure(child, options);
 
-    item.children.filter(filter);
+    item.children = item.children.filter(filter);
     item.children.sort(sort);
   }
 

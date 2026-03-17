@@ -125,6 +125,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   ul,
   ol {
     padding-left: 30px;
+    list-style: revert;
 
     &:first-child {
       margin-top: 0;
@@ -192,9 +193,12 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       > .preview__prefix,
       > .todo__prefix {
         text-transform: capitalize;
-        font-weight: 700;
-        color: #000;
-        font-size: getFontSize(1);
+        font-weight: 600; // slightly bold but not heading-level
+        color: #1a1a1a;
+        font-size: getFontSize(0);
+        display: block;
+        margin-bottom: 0.25em;
+        color: #1a1a1a;
       }
     }
 
@@ -358,7 +362,11 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   a code {
     color: $text-color-highlight;
   }
-
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
   pre {
     background-color: #2d3748;
     color: #e2e8f0;

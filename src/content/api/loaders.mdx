@@ -47,7 +47,7 @@ Either `return` or `this.callback` can be used to return the transformed `conten
 
 **sync-loader.js**
 
-```javascript
+```js
 export default function syncLoader(content, map, meta) {
   return someSyncOperation(content);
 }
@@ -59,7 +59,7 @@ The `this.callback` method is more flexible as you pass multiple arguments inste
 
 {/* eslint-disable no-useless-return */}
 
-```javascript
+```js
 export default function syncLoaderWithMultipleResults(content, map, meta) {
   this.callback(null, someSyncOperation(content), map, meta);
   return; // always return undefined when calling callback()
@@ -72,7 +72,7 @@ For asynchronous loaders, you can return the transformed `content` from an `asyn
 
 **async-loader.js**
 
-```javascript
+```js
 export default async function asyncLoader(content, map, meta) {
   const result = await someAsyncOperation(content);
   return result;
@@ -83,7 +83,7 @@ Or you can use [`this.async`](#thisasync) to retrieve the `callback` function:
 
 **async-loader-with-callback.js**
 
-```javascript
+```js
 export default function asyncLoaderWithCallback(content, map, meta) {
   const callback = this.async();
   someAsyncOperation(content, (err, result) => {
@@ -95,7 +95,7 @@ export default function asyncLoaderWithCallback(content, map, meta) {
 
 **async-loader-with-multiple-results.js**
 
-```javascript
+```js
 export default function asyncLoaderWithMultipleResults(content, map, meta) {
   const callback = this.async();
   someAsyncOperation(content, (err, result, sourceMaps, meta) => {
@@ -113,7 +113,7 @@ By default, the resource file is converted to a UTF-8 string and passed to the l
 
 **raw-loader.js**
 
-```javascript
+```js
 export default function rawLoader(content) {
   assert(content instanceof Buffer);
   return someSyncOperation(content);
@@ -131,7 +131,7 @@ T> Loaders may be added inline in requests and disabled via inline prefixes, whi
 
 For the following configuration of [`use`](/configuration/module/#ruleuse):
 
-```javascript
+```js
 export default {
   // ...
   module: {
@@ -161,7 +161,7 @@ So why might a loader take advantage of the "pitching" phase?
 
 First, the `data` passed to the `pitch` method is exposed in the execution phase as well under `this.data` and could be useful for capturing and sharing information from earlier in the cycle.
 
-```javascript
+```js
 export default function myLoaderName(content) {
   return someSyncOperation(content, this.data.value);
 }
@@ -173,7 +173,7 @@ export function pitch(remainingRequest, precedingRequest, data) {
 
 Second, if a loader delivers a result in the `pitch` method, the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
 
-```javascript
+```js
 export default function myLoaderName(content) {
   return someSyncOperation(content);
 }
@@ -203,13 +203,13 @@ Given the following example, this require call is used:
 
 In `/abc/file.js`:
 
-```javascript
+```js
 import "./loader1?xyz!loader2!./resource?rrr";
 ```
 
 ### this.addContextDependency
 
-```typescript
+```ts
 addContextDependency(directory: string)
 ```
 
@@ -217,7 +217,7 @@ Add a directory as dependency of the loader result.
 
 ### this.addDependency
 
-```typescript
+```ts
 addDependency(file: string)
 dependency(file: string) // shortcut
 ```
@@ -226,7 +226,7 @@ Add an existing file as a dependency of the loader result in order to make them 
 
 ### this.addMissingDependency
 
-```typescript
+```ts
 addMissingDependency(file: string)
 ```
 
@@ -240,7 +240,7 @@ Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loa
 
 A function that sets the cacheable flag:
 
-```typescript
+```ts
 cacheable(flag = true: boolean)
 ```
 
@@ -272,7 +272,7 @@ In case this function is called, you should return undefined to avoid ambiguous 
 
 ### this.clearDependencies
 
-```typescript
+```ts
 clearDependencies();
 ```
 
@@ -290,7 +290,7 @@ A data object shared between the pitch and the normal phase.
 
 ### this.emitError
 
-```typescript
+```ts
 emitError(error: Error)
 ```
 
@@ -307,7 +307,7 @@ T> Unlike throwing an Error directly, it will NOT interrupt the compilation proc
 
 ### this.emitFile
 
-```typescript
+```ts
 emitFile(name: string, content: Buffer|string, sourceMap: {...})
 ```
 
@@ -315,7 +315,7 @@ Emit a file. This is webpack-specific.
 
 ### this.emitWarning
 
-```typescript
+```ts
 emitWarning(warning: Error)
 ```
 
@@ -375,7 +375,7 @@ T> Since webpack 5, `this.getOptions` is available in loader context. It substit
 
 ### this.getResolve
 
-```typescript
+```ts
 getResolve(options: ResolveOptions): resolve
 
 resolve(context: string, request: string, callback: function(err, result: string))
@@ -394,7 +394,7 @@ All dependencies of the resolving operation are automatically added as dependenc
 
 Information about HMR for loaders.
 
-```javascript
+```js
 export default function (source) {
   console.log(this.hot); // true if HMR is enabled via --hot flag or webpack configuration
   return source;
@@ -466,12 +466,12 @@ export default {
 **a-pitching-loader.js**
 
 ```js
-module.exports.pitch = async function pitch(remaining) {
+export async function pitch(remaining) {
   const result = await this.importModule(
     `${this.resourcePath}.webpack[javascript/auto]!=!${remaining}`,
   );
   return result.default || result;
-};
+}
 ```
 
 **src/stylesheet.js**
@@ -512,7 +512,7 @@ In [the example](#example-for-the-loader-context): in loader1: `0`, in loader2: 
 
 ### this.loadModule
 
-```typescript
+```ts
 loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
@@ -530,7 +530,7 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 In [the example](#example-for-the-loader-context):
 
-```javascript
+```js
 [
   {
     request: "/abc/loader1.js?xyz",
@@ -566,7 +566,7 @@ In [the example](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/no
 
 ### this.resolve
 
-```typescript
+```ts
 resolve(context: string, request: string, callback: function(err, result: string))
 ```
 
@@ -701,7 +701,7 @@ For example:
 
 **./src/index.js**
 
-```javascript
+```js
 import "./loader!./lib";
 ```
 
@@ -709,7 +709,7 @@ Throwing an error from loader:
 
 **./src/loader.js**
 
-```javascript
+```js
 export default function (source) {
   throw new Error("This is a Fatal Error!");
 }
@@ -719,7 +719,7 @@ Or pass an error to the callback in async mode:
 
 **./src/loader.js**
 
-```javascript
+```js
 export default function (source) {
   const callback = this.async();
   // ...
@@ -779,7 +779,7 @@ Example:
 
 **file.js**
 
-```javascript
+```js
 /* STYLE: body { background: red; } */
 console.log("yep");
 ```
@@ -788,7 +788,7 @@ A loader could transform the file into the following file and use the `matchReso
 
 **file.js** (transformed by loader)
 
-```javascript
+```js
 import "./file.js.css!=!extract-style-loader/getStyles!./file.js";
 
 console.log("yep");
@@ -800,7 +800,7 @@ The loader could look like this:
 
 **extract-style-loader/index.js**
 
-```javascript
+```js
 import getStylesLoader from "./getStyles";
 
 export default function (source) {
@@ -819,7 +819,7 @@ export default function (source) {
 
 **extract-style-loader/getStyles.js**
 
-```javascript
+```js
 export default function (source) {
   const match = source.match(STYLES_REGEXP);
   return match[0];

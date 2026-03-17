@@ -33,11 +33,16 @@ and then proceed to write your configuration:
 
 **webpack.config.ts**
 
-```typescript
-import path from "path";
+```ts
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import webpack from "webpack";
 // in case you run into any typescript error when configuring `devServer`
 import "webpack-dev-server";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const config: webpack.Configuration = {
   mode: "production",
@@ -48,7 +53,7 @@ const config: webpack.Configuration = {
   },
 };
 
-module.exports config;
+export default config;
 ```
 
 **tsconfig.json**
@@ -56,17 +61,29 @@ module.exports config;
 ```json
 {
   "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    // Allows you to write `import ... from './file.ts';`
+    "rewriteRelativeImportExtensions": true
   }
 }
 ```
 
 The above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
 
-Note that you'll also need to check your `tsconfig.json` file. If the `module` in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
+We support configuration in both `CommonJS` and `ESM` format.
 
-There are three solutions to this issue:
+Starting with v22.18.0 Node.js supports built-in [type stripping](https://nodejs.org/api/typescript.html#type-stripping), so the additional settings described below are only required for older versions.
+
+> To enable the transformation of non erasable TypeScript syntax, which requires JavaScript code generation, such as enum declarations, parameter properties use the flag [--experimental-transform-types](https://nodejs.org/api/cli.html#experimental-transform-types).
+
+If you are using an older version of Node.js that does not support the `typescript` format, or want to set `module` in `compilerOptions` in `tsconfig.json` to `commonjs` there are three solutions to this issue:
 
 - Modify `tsconfig.json`.
 - Modify `tsconfig.json` and add settings for `ts-node`.
@@ -140,9 +157,13 @@ and then proceed to write your configuration:
 **webpack.config.coffee**
 
 ```coffeescript
-HtmlWebpackPlugin = require('html-webpack-plugin')
-webpack = require('webpack')
-path = require("node:path")
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import webpack from 'webpack'
+
+__filename = fileURLToPath(import.meta.url)
+__dirname = path.dirname(__filename)
 
 config =
   mode: 'production'
@@ -150,15 +171,18 @@ config =
   output:
     path: path.resolve(__dirname, 'dist')
     filename: 'my-first-webpack.bundle.js'
-  module: rules: [ {
-    test: /\.(js|jsx)$/
-    use: 'babel-loader'
-  } ]
+  module:
+    rules: [
+      {
+        test: /\.(js|jsx)$/
+        use: 'babel-loader'
+      }
+    ]
   plugins: [
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
 
-module.exports config
+export default config
 ```
 
 ## Babel and JSX

@@ -106,7 +106,7 @@ When using `import()` to load non-ESM the result has changed in webpack 4. Now y
 
 **non-esm.js**
 
-```javascript
+```js
 module.exports = {
   sayHello: () => {
     console.log("hello world");
@@ -116,7 +116,7 @@ module.exports = {
 
 **example.js**
 
-```javascript
+```js
 function sayHello() {
   import("./non-esm.js").then((module) => {
     module.default.sayHello();

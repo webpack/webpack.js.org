@@ -22,12 +22,11 @@ The plugin will generate an HTML5 file for you that includes all your webpack
 bundles in the body using `script` tags. Add the plugin to your webpack
 configuration as follows:
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

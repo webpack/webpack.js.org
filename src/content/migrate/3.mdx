@@ -440,7 +440,7 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
 
 In webpack 1, you could use [`require.ensure()`](/api/module-methods/#requireensure) as a method to lazily-load chunks for your application:
 
-```javascript
+```js
 require.ensure([], (require) => {
   const foo = require("./module");
 });
@@ -479,7 +479,7 @@ function route(path, query) {
 
 As for AMD and CommonJS you can freely mix all three module types (even within the same file). Webpack behaves similar to babel and node-eps in this case:
 
-```javascript
+```js
 // CommonJS consuming ES2015 Module
 const book = require("./book");
 
@@ -488,14 +488,14 @@ book.readPage();
 book.default === "This is a book";
 ```
 
-```javascript
+```js
 // ES2015 Module consuming CommonJS
 import fs from "node:fs"; // module.exports map to default
 
 typeof fs.readFileSync === "function";
 ```
 
-```javascript
+```js
 // ES2015 Module consuming CommonJS
 import { readFileSync } from "node:fs"; // named exports are read from returned object+
 

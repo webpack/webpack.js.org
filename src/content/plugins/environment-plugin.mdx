@@ -14,13 +14,13 @@ The `EnvironmentPlugin` is shorthand for using the [`DefinePlugin`](/plugins/def
 
 The `EnvironmentPlugin` accepts either an array of keys or an object mapping its keys to their default values.
 
-```javascript
+```js
 new webpack.EnvironmentPlugin(["NODE_ENV", "DEBUG"]);
 ```
 
 This is equivalent to the following `DefinePlugin` application:
 
-```javascript
+```js
 new webpack.DefinePlugin({
   "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
   "process.env.DEBUG": JSON.stringify(process.env.DEBUG),
@@ -33,7 +33,7 @@ W> `EnvironmentPlugin` checks `process.env` for the specified variable. If it’
 
 Alternatively, the `EnvironmentPlugin` supports an object, which maps keys to their default values. The default value for a key is taken if the key is undefined in `process.env`.
 
-```javascript
+```js
 new webpack.EnvironmentPlugin({
   NODE_ENV: "development", // use 'development' unless process.env.NODE_ENV is defined
   DEBUG: false,
@@ -50,7 +50,7 @@ T> Default values of `null` and `undefined` behave differently. Use `undefined` 
 
 Let's investigate the result when running the previous `EnvironmentPlugin` configuration on a test file `entry.js`:
 
-```javascript
+```js
 if (process.env.NODE_ENV === "production") {
   console.log("Welcome to production");
 }
@@ -63,7 +63,7 @@ When executing `NODE_ENV=production webpack` in the terminal to build, `entry.js
 
 {/* eslint-disable no-self-compare, no-constant-condition */}
 
-```javascript
+```js
 if ("production" === "production") {
   // <-- 'production' from NODE_ENV is taken
   console.log("Welcome to production");
@@ -78,7 +78,7 @@ Running `DEBUG=false webpack` yields:
 
 {/* eslint-disable no-self-compare, no-constant-condition */}
 
-```javascript
+```js
 if ("development" === "production") {
   // <-- default value is taken
   console.log("Welcome to production");
@@ -93,7 +93,7 @@ if ("false") {
 
 The following `EnvironmentPlugin` configuration provides `process.env.GIT_VERSION` (such as "v5.4.0-2-g25139f57f") and `process.env.GIT_AUTHOR_DATE` (such as "2020-11-04T12:25:16+01:00") corresponding to the last Git commit of the repository:
 
-```javascript
+```js
 import childProcess from "node:child_process";
 
 function git(command) {
@@ -117,7 +117,7 @@ DB_PASS=foobar
 S3_API=mysecretkey
 ```
 
-```javascript
+```js
 new Dotenv({
   path: "./.env", // Path to .env file (this is the default)
   safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)

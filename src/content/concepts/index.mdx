@@ -72,10 +72,9 @@ You can configure this part of the process by specifying an `output` field in yo
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 
-// For compatibility with older Node.js versions
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -105,7 +104,7 @@ At a high level, **loaders** have two properties in your webpack configuration:
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 
 export default {
@@ -138,7 +137,7 @@ In order to use a plugin, you need to `import` it and add it to the `plugins` ar
 
 **webpack.config.js**
 
-```javascript
+```js
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import webpack from "webpack"; // to access built-in plugins
 
@@ -160,7 +159,7 @@ Using plugins in your webpack configuration is straightforward. However, there a
 
 By setting the `mode` parameter to either `development`, `production` or `none`, you can enable webpack's built-in optimizations that correspond to each environment. The default value is `production`.
 
-```javascript
+```js
 export default {
   mode: "production",
 };

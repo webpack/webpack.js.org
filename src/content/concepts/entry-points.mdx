@@ -34,8 +34,8 @@ Usage: `entry: string | [string]`
 
 **webpack.config.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: "./path/to/my/entry/file.js",
 };
 ```
@@ -44,8 +44,8 @@ The single entry syntax for the `entry` property is a shorthand for:
 
 **webpack.config.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     main: "./path/to/my/entry/file.js",
   },
@@ -57,7 +57,7 @@ We can also pass an array of file paths to the `entry` property which creates wh
 **webpack.config.js**
 
 ```js
-module.exports = {
+export default {
   entry: ["./src/file_1.js", "./src/file_2.js"],
 };
 ```
@@ -71,7 +71,7 @@ such as polyfills or development-only tools, without manually importing them in 
 **Example: Injecting a polyfill**
 
 ```js
-module.exports = {
+export default {
   entry: {
     main: ["@babel/polyfill", "./src/index.js"],
   },
@@ -86,8 +86,8 @@ Usage: `entry: { <entryChunkName> string | [string] } | {}`
 
 **webpack.config.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     app: "./src/app.js",
     adminApp: "./src/adminApp.js",
@@ -115,8 +115,8 @@ An object of entry point description. You can specify the following properties.
 
 **webpack.config.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     a2: "dependingfile.js",
     b2: {
@@ -131,8 +131,8 @@ module.exports = {
 
 **webpack.config.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     a2: "./a",
     b2: {
@@ -146,8 +146,8 @@ module.exports = {
 
 Make sure `runtime` must not point to an existing entry point name, for example the below config would throw an error:
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     a1: "./a",
     b1: {
@@ -160,8 +160,8 @@ module.exports = {
 
 Also `dependOn` must not be circular, the following example again would throw an error:
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     a3: {
       import: "./a",
@@ -183,8 +183,8 @@ Below is a list of entry configurations and their real-world use cases:
 
 **webpack.config.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     main: "./src/app.js",
     vendor: "./src/vendor.js",
@@ -194,8 +194,8 @@ module.exports = {
 
 **webpack.prod.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   output: {
     filename: "[name].[contenthash].bundle.js",
   },
@@ -204,8 +204,8 @@ module.exports = {
 
 **webpack.dev.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   output: {
     filename: "[name].bundle.js",
   },
@@ -222,8 +222,8 @@ T> In webpack version < 4 it was common to add vendors as a separate entry point
 
 **webpack.config.js**
 
-```javascript
-module.exports = {
+```js
+export default {
   entry: {
     pageOne: "./src/pageOne/index.js",
     pageTwo: "./src/pageTwo/index.js",

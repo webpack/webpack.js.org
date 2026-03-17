@@ -26,25 +26,29 @@ A plugin for webpack consists of:
 - Manipulates webpack internal instance specific data.
 - Invokes webpack provided callback after functionality is complete.
 
-```javascript
+```js
 // A JavaScript class.
 class MyExampleWebpackPlugin {
   // Define `apply` as its prototype method which is supplied with compiler as its argument
   apply(compiler) {
-    // Specify the event hook to attach to
-    compiler.hooks.emit.tapAsync(
+    // Hook into the compilation
+    compiler.hooks.thisCompilation.tap(
       "MyExampleWebpackPlugin",
-      (compilation, callback) => {
-        console.log("This is an example plugin!");
-        console.log(
-          "Here’s the `compilation` object which represents a single build of assets:",
-          compilation,
+      (compilation) => {
+        // Specify the asset processing hook
+        compilation.hooks.processAssets.tap(
+          {
+            name: "MyExampleWebpackPlugin",
+            stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+          },
+          (assets) => {
+            console.log("This is an example plugin!");
+            console.log(
+              "Here’s the `compilation` object which represents a single build of assets:",
+              compilation,
+            );
+          },
         );
-
-        // Manipulate the build using the plugin API provided by webpack
-        compilation.addModule(/* ... */);
-
-        callback();
       },
     );
   }
@@ -55,7 +59,7 @@ class MyExampleWebpackPlugin {
 
 Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A plugin is structured as follows:
 
-```javascript
+```js
 class HelloWorldPlugin {
   apply(compiler) {
     compiler.hooks.done.tap(
@@ -69,16 +73,16 @@ class HelloWorldPlugin {
   }
 }
 
-module.exports = HelloWorldPlugin;
+export default HelloWorldPlugin;
 ```
 
 Then to use the plugin, include an instance in your webpack configuration `plugins` array:
 
-```javascript
+```js
 // webpack.config.js
-const HelloWorldPlugin = require("hello-world");
+import HelloWorldPlugin from "hello-world";
 
-module.exports = {
+export default {
   // ... configuration settings here ...
   plugins: [new HelloWorldPlugin({ options: true })],
 };
@@ -86,7 +90,7 @@ module.exports = {
 
 Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
 
-```javascript
+```js
 import { validate } from "schema-utils";
 
 // schema for options object
@@ -115,7 +119,7 @@ export default class HelloWorldPlugin {
 
 Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
 
-```javascript
+```js
 class HelloCompilationPlugin {
   apply(compiler) {
     // Tap into compilation hook which gives compilation as argument to the callback function
@@ -128,7 +132,7 @@ class HelloCompilationPlugin {
   }
 }
 
-module.exports = HelloCompilationPlugin;
+export default HelloCompilationPlugin;
 ```
 
 For the list of hooks available on `compiler`, `compilation`, and other important objects, see the [plugins API](/api/plugins/) docs.
@@ -141,7 +145,7 @@ Some plugin hooks are asynchronous. To tap into them, we can use `tap` method wh
 
 When we use `tapAsync` method to tap into plugins, we need to call the callback function which is supplied as the last argument to our function.
 
-```javascript
+```js
 class HelloAsyncPlugin {
   apply(compiler) {
     compiler.hooks.emit.tapAsync(
@@ -157,14 +161,14 @@ class HelloAsyncPlugin {
   }
 }
 
-module.exports = HelloAsyncPlugin;
+export default HelloAsyncPlugin;
 ```
 
 #### tapPromise
 
 When we use `tapPromise` method to tap into plugins, we need to return a promise which resolves when our asynchronous task is completed.
 
-```javascript
+```js
 class HelloAsyncPlugin {
   apply(compiler) {
     compiler.hooks.emit.tapPromise(
@@ -181,7 +185,7 @@ class HelloAsyncPlugin {
   }
 }
 
-module.exports = HelloAsyncPlugin;
+export default HelloAsyncPlugin;
 ```
 
 ## Example
@@ -190,7 +194,7 @@ Once we can latch onto the webpack compiler and each individual compilations, th
 
 Let's write an example plugin that generates a new build file called `assets.md`, the contents of which will list all of the asset files in our build. This plugin might look something like this:
 
-```javascript
+```js
 class FileListPlugin {
   static defaultOptions = {
     outputFile: "assets.md",
@@ -255,16 +259,16 @@ class FileListPlugin {
   }
 }
 
-module.exports = { FileListPlugin };
+export default FileListPlugin;
 ```
 
 **webpack.config.js**
 
-```javascript
-const { FileListPlugin } = require("./file-list-plugin.js");
+```js
+import FileListPlugin from "./file-list-plugin.js";
 
 // Use the plugin in your webpack configuration:
-module.exports = {
+export default {
   // …
 
   plugins: [
@@ -301,7 +305,7 @@ A plugin can be classified into types based on the event hooks it taps into. Eve
 
 For example:
 
-```javascript
+```js
 this.hooks = {
   shouldEmit: new SyncBailHook(["compilation"]),
 };
@@ -364,3 +368,42 @@ Various types of hooks supported are :
 ### Configuration defaults
 
 Webpack applies configuration defaults after plugins defaults are applied. This allows plugins to feature their own defaults and provides a way to create configuration preset plugins.
+
+### Example: AssetLoggerPlugin
+
+The following example shows a minimal Webpack plugin that logs all generated assets using Webpack’s logger interface.
+
+```js
+class AssetLoggerPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap("AssetLoggerPlugin", (compilation) => {
+      const logger = compilation.getLogger("AssetLoggerPlugin");
+      compilation.hooks.processAssets.tap(
+        {
+          name: "AssetLoggerPlugin",
+          stage: compilation.constructor.PROCESS_ASSETS_STAGE_SUMMARIZE,
+        },
+        (assets) => {
+          logger.info("Generated assets:");
+          for (const assetName of Object.keys(assets)) {
+            logger.info(assetName);
+          }
+        },
+      );
+    });
+  }
+}
+
+export default AssetLoggerPlugin;
+```
+
+This plugin taps into the `emit` hook of the Webpack compiler and prints the names of all generated assets to the console. It demonstrates how plugins can interact with the compilation process using Webpack hooks.
+
+For example, when running a Webpack build, the output may look like:
+
+```text
+Generated assets:
+main.js
+vendor.js
+styles.css
+```

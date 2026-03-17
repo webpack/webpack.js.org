@@ -18,7 +18,7 @@ W> **This option is not supported via the Node API**: Extends will have no effec
 
 **base.webpack.config.js**
 
-```javascript
+```js
 export default {
   module: {
     rules: [
@@ -43,7 +43,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -68,7 +68,7 @@ Configurations from the `extends` property are merged from right to left, meanin
 
 **js.webpack.config.js**
 
-```javascript
+```js
 export default {
   module: {
     rules: [
@@ -84,7 +84,7 @@ export default {
 
 **css.webpack.config.js**
 
-```javascript
+```js
 export default {
   module: {
     rules: [
@@ -99,7 +99,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -125,7 +125,7 @@ You can override configurations from the extended configuration by passing the s
 
 **base.webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -142,7 +142,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -166,7 +166,7 @@ While primitive values (such as strings) are overridden, array fields are concat
 
 **base.webpack.config.js**
 
-```javascript
+```js
 import webpack from "webpack";
 
 export default {
@@ -188,7 +188,7 @@ export default {
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import webpack from "webpack";
@@ -216,7 +216,7 @@ export default {
 
 Instead of module being replaced the rules and plugins array got concatenated
 
-```javascript
+```js
 import webpack from "webpack";
 
 export default {
@@ -254,7 +254,7 @@ You can also load configuration from third-party packages by passing the package
 
 **webpack.config.js**
 
-```javascript
+```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -262,7 +262,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  extends: require.resolve("webpack-config-foo"),
+  extends: import.meta.resolve("webpack-config-foo"),
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),

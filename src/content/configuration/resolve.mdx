@@ -396,7 +396,7 @@ export default {
 
 `boolean = false`
 
-If `true`, it will not allow extension-less files. So by default `require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `require('./foo.js')` will work.
+If `true`, it will not allow extension-less files. So by default `import foo from "./foo";`/`require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `import foo from "./foo.js"`/`require('./foo.js')` will work.
 
 **webpack.config.js**
 
@@ -509,6 +509,10 @@ export default {
 Webpack 5 no longer polyfills Node.js core modules automatically which means if you use them in your code running in browsers or alike, you will have to install compatible modules from npm and include them yourself. Here is a list of polyfills webpack has used before webpack 5:
 
 ```js
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+
 export default {
   // ...
   resolve: {
