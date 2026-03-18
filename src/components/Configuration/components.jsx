@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Component, isValidElement } from "react";
 import Popover from "react-tiny-popover";
-import "./Configuration.scss";
 
 const DEFAULT_CHILDREN_SIZE = 4;
 
@@ -18,8 +17,8 @@ const addLink = (child, i, url) =>
     child
   );
 const Card = ({ body }) => (
-  <div className="markdown">
-    <pre className="inline">
+  <div className="markdown max-h-[48vh] overflow-auto">
+    <pre className="inline !m-0 block !p-0 !pr-[15px]">
       <code>{body}</code>
     </pre>
   </div>
@@ -83,7 +82,7 @@ export class Details extends Component {
         position={["right", "top"]}
         padding={0}
         onClickOutside={this.clickOutsideHandler}
-        containerClassName={"shadow"}
+        containerClassName="overflow-visible rounded-[4px] shadow-[-1px_1px_10px_0_rgba(255,255,255,0.44)]"
         content={<Card body={content} />}
       >
         <span
