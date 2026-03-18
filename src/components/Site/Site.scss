@@ -1,8 +1,10 @@
+@use "../../styles/partials/functions" as *;
+
 .site {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #ffffff;
+  background: getColor(white);
 
   &__header {
     z-index: 100;

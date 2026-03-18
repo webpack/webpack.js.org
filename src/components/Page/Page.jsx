@@ -30,7 +30,9 @@ export default function Page(props) {
   );
   const content = isDynamicContent
     ? dynamicContent
-    : props.content.default || props.content;
+    : props.content && props.content.default !== undefined
+      ? props.content.default
+      : props.content;
 
   const [contentLoaded, setContentLoaded] = useState(!isDynamicContent);
 
@@ -41,7 +43,13 @@ export default function Page(props) {
           setContent(() => mod.default || mod);
           setContentLoaded(true);
         })
-        .catch(() => setContent("Error loading content."));
+        .catch(() => {
+          setContent({
+            __error: true,
+            message: "Failed to load page content.",
+          });
+          setContentLoaded(true);
+        });
     }
   }, [props.content]);
 
@@ -95,6 +103,10 @@ export default function Page(props) {
 
   if (typeof content === "function") {
     contentRender = content({}).props.children;
+  } else if (content && content.__error) {
+    contentRender = (
+      <div className="text-red-600 font-bold">{content.message}</div>
+    );
   } else {
     contentRender = (
       <div
