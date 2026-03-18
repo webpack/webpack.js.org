@@ -69,7 +69,7 @@ export default function Sidebar({ className = "", pages, currentPage }) {
 
         {pages.map((page, index) => {
           const displayGroup = group !== page.group && page.group !== "-";
-          //   eslint-disable-next-line react-hooks/immutability
+          // eslint-disable-next-line react-hooks/immutability
           group = page.group;
 
           return (
