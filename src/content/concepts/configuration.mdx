@@ -54,19 +54,27 @@ export default {
 
 _See_: [Configuration section](/configuration/) for all supported configuration options
 
-## Avoid multiple configurations when possible
+## Using multiple configurations
 
-Using multiple configuration objects can make builds harder to understand and maintain, especially for beginners.
+Webpack supports exporting multiple configuration objects, which can be useful when building different targets or outputs (for example, separate client and server bundles).
 
-For most use cases, a single configuration file is sufficient and easier to debug.
+While a single configuration is sufficient for many projects, multiple configurations can help organize more complex setups.
 
 ```js
-module.exports = {
-  entry: "./src/index.js",
-  output: {
-    filename: "bundle.js",
+module.exports = [
+  {
+    entry: "./src/client.js",
+    output: {
+      filename: "client.bundle.js",
+    },
   },
-};
+  {
+    entry: "./src/server.js",
+    output: {
+      filename: "server.bundle.js",
+    },
+  },
+];
 ```
 
 ## Multiple Targets
