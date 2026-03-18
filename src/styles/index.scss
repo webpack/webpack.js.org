@@ -62,6 +62,7 @@ body {
   .language-diff {
     .token.prefix.inserted,
     .token.prefix.deleted {
+      -webkit-user-select: none;
       user-select: none;
     }
   }
