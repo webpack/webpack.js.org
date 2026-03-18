@@ -1,32 +1,33 @@
-import "./Placeholder.scss";
+const baseLineClass =
+  "my-3 animate-pulse overflow-hidden bg-gray-100 font-sans text-transparent";
 
 // Placeholder string
 const placeholderString = () => `
-  <div class="placeholder">
-    <p class="placeholder__medium">&nbsp;</p>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__small">&nbsp;</p>
-    <h2 class="placeholder__xsmall">&nbsp;</h2>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__small">&nbsp;</p>
-    <p class="placeholder__medium">&nbsp;</p>
-    <h2 class="placeholder__small">&nbsp;</h2>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__medium">&nbsp;</p>
-    <p class="placeholder__xsmall">&nbsp;</p>
-    <h2 class="placeholder__xsmall">&nbsp;</h2>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__small">&nbsp;</p>
-    <p class="placeholder__medium">&nbsp;</p>
+  <div>
+    <p class="${baseLineClass} w-[75%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[85%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[50%]">&nbsp;</p>
+    <h2 class="${baseLineClass} w-[35%]">&nbsp;</h2>
+    <p class="${baseLineClass} w-[85%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[50%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[75%]">&nbsp;</p>
+    <h2 class="${baseLineClass} w-[50%]">&nbsp;</h2>
+    <p class="${baseLineClass} w-[85%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[75%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[35%]">&nbsp;</p>
+    <h2 class="${baseLineClass} w-[35%]">&nbsp;</h2>
+    <p class="${baseLineClass} w-[85%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[50%]">&nbsp;</p>
+    <p class="${baseLineClass} w-[75%]">&nbsp;</p>
   </div>
 `;
 
 function PlaceholderComponent() {
   return (
-    <div className="placeholder">
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
+    <div>
+      <p className={`${baseLineClass} w-[75%]`}>&nbsp;</p>
+      <p className={`${baseLineClass} w-[85%]`}>&nbsp;</p>
+      <p className={`${baseLineClass} w-[50%]`}>&nbsp;</p>
     </div>
   );
 }
