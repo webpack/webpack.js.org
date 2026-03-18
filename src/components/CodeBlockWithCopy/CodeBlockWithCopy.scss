@@ -1,3 +1,5 @@
+@use "../../styles/partials/functions" as *;
+
 .code-block-wrapper {
   position: relative;
   margin-bottom: 1.5rem;
@@ -25,7 +27,7 @@
   /* visible on hover */
   opacity: 0;
 
-  background-color: #175d96;
+  background-color: getColor(denim);
   color: #e2e8f0;
 
   transition:

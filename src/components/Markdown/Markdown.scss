@@ -215,7 +215,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     }
 
     &.preview {
-      background-color: #f2f2f2;
+      background-color: getColor(concrete);
       color: #716b53;
       border-left-color: #1e72b3;
     }
@@ -308,7 +308,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     border-right: none;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1px solid getColor(concrete);
     text-align: left;
     &::before {
       content: attr(data-th);

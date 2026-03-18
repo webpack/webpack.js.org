@@ -33,7 +33,7 @@
       line-height: 1.2;
 
       a {
-        color: #2b3a42;
+        color: getColor(elephant);
         text-decoration: none;
 
         &:hover {
@@ -43,7 +43,7 @@
     }
 
     .blog-post-date {
-      color: #666;
+      color: getColor(dove-grey);
       font-size: 1.2rem;
       font-weight: 600;
       margin-top: 0.25rem;
@@ -52,7 +52,7 @@
     }
 
     p {
-      color: #535353;
+      color: getColor(emperor);
       line-height: 1.4;
       margin-bottom: 1rem;
     }
@@ -78,7 +78,7 @@
         color: getColor(dusty-blue) !important;
 
         &:hover {
-          color: #8dd6f9 !important;
+          color: getColor(malibu) !important;
         }
       }
 
@@ -87,11 +87,11 @@
       }
 
       p {
-        color: #dedede;
+        color: getColor(alto);
       }
 
       .read-more {
-        color: #8dd6f9;
+        color: getColor(malibu);
       }
     }
   }
