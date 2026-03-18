@@ -79,6 +79,7 @@ pre[class*="lang-"] {
 
 .token.deleted {
   color: #f79494;
+  -webkit-user-select: none;
   user-select: none;
 }
 

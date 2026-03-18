@@ -1,4 +1,4 @@
-import "./Placeholder.scss";
+import "./Placeholder.css";
 
 // Placeholder string
 const placeholderString = () => `

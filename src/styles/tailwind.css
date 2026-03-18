@@ -4,6 +4,7 @@
 }
 
 @theme {
+  --breakpoint-xlarge: 1525px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --text-14: 14px;
@@ -14,6 +15,11 @@
   --color-blue-400: #1d78c1;
   --color-blue-600: #465e69;
   --color-blue-800: #2b3a42;
+  --color-malibu: #8dd6f9;
+  --color-dusty-blue: #9ab3c0;
+  --color-denim: #175d96;
+  --color-fiord: #465e69;
+  --color-elephant: #2b3a42;
   --color-gray-100: #f2f2f2;
   --color-gray-200: #dedede;
   --color-gray-300: #999;

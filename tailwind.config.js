@@ -1,10 +1,11 @@
 "use strict";
 
 module.exports = {
-  content: ["./src/components/**/*.{js,jsx}"],
+  content: ["./src/**/*.{js,jsx,mjs,mdx,html}"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
     screens: {
+      xlarge: "1525px",
       md: "768px",
       lg: "1024px",
       print: { raw: "print" },

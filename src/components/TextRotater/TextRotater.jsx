@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Children, PureComponent, cloneElement } from "react";
 
 // Load Styling
-import "./TextRotater.scss";
+import "./TextRotater.css";
 
 export default class TextRotater extends PureComponent {
   static defaultProps = {

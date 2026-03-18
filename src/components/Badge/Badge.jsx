@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Badge.scss";
+import "./Badge.css";
 
 export default function Badge(props) {
   return <span className="badge">{props.text}</span>;
