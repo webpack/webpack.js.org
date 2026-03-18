@@ -54,6 +54,21 @@ export default {
 
 _See_: [Configuration section](/configuration/) for all supported configuration options
 
+## Avoid multiple configurations when possible
+
+Using multiple configuration objects can make builds harder to understand and maintain, especially for beginners.
+
+For most use cases, a single configuration file is sufficient and easier to debug.
+
+```js
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.js",
+  },
+};
+```
+
 ## Multiple Targets
 
 Along with exporting a single configuration as an object, [function](/configuration/configuration-types/#exporting-a-function) or [Promise](/configuration/configuration-types/#exporting-a-promise), you can export multiple configurations.
