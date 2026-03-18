@@ -19,6 +19,14 @@
     &:hover {
       color: getColor(mine-shaft);
     }
+
+    &--static {
+      cursor: default;
+
+      &:hover {
+        color: getColor(denim);
+      }
+    }
   }
 
   &__title {
@@ -89,7 +97,7 @@
       display: flex;
     }
 
-    .sidebar-item__toggle {
+    .sidebar-item__toggle--graph {
       transform-origin: center center;
       transform: rotate(90deg);
     }
