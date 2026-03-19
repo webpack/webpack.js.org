@@ -2,9 +2,6 @@
 import PropTypes from "prop-types";
 import { Component } from "react";
 
-// Load Styling
-import "./Cube.scss";
-
 export default class Cube extends Component {
   static propTypes = {
     hover: PropTypes.bool,
@@ -35,7 +32,7 @@ export default class Cube extends Component {
 
     return (
       <div
-        className={`cube__container ${className}`}
+        className={`flex items-center justify-center relative ${className}`}
         style={{
           width: `${depth * 1.5}px`,
           height: `${depth * 1.5}px`,
@@ -44,36 +41,28 @@ export default class Cube extends Component {
       >
         <span
           ref={(ref) => (this.container = ref)}
-          className={`cube cube--${theme}`}
+          className={`block relative ${theme === "dark" ? "bg-gray-900" : "bg-white"} shadow-lg rounded-lg`}
           style={{
             width: `${depth}px`,
             paddingBottom: `${depth * 0.5}px`,
           }}
         >
           <figure
-            className="cube__outer"
+            className="absolute left-1/2 top-0"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
-              transform: `translateX(-50%)
-            scale3d(1,1,1)
-            rotateX(${x}deg)
-            rotateY(${y}deg)
-            rotateZ(${z}deg)`,
+              transform: `translateX(-50%) scale3d(1,1,1) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`,
             }}
           >
             {this._getFaces("outer")}
           </figure>
           <figure
-            className="cube__inner"
+            className="absolute left-1/2 top-0"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
-              transform: `translateX(-50%) translateY(2px)
-            scale3d(0.5,0.5,0.5)
-            rotateX(${-x}deg)
-            rotateY(${-y}deg)
-            rotateZ(${-z}deg)`,
+              transform: `translateX(-50%) translateY(2px) scale3d(0.5,0.5,0.5) rotateX(${-x}deg) rotateY(${-y}deg) rotateZ(${-z}deg)`,
             }}
           >
             {this._getFaces("inner")}
@@ -193,7 +182,10 @@ export default class Cube extends Component {
       return (
         <section
           key={i}
-          className="cube__face"
+          className={
+            `absolute bg-transparent border-solid border-gray-400` +
+            ` ${type === "outer" ? "" : "border"}`
+          }
           style={{
             transform: `${rotation} translateZ(${this.props.depth / 2}px)`,
             ...borderStyles,
