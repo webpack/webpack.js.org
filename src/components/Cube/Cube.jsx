@@ -120,9 +120,7 @@ export default class Cube extends Component {
    */
   _getFaces(type) {
     const { iteration } = this.state;
-
-    // Keep the thicker border on
-    // the outside on each iteration
+    // Keep the thicker border on the outside on each iteration
     const borderWidthMap = {
       0: {
         left: [1, 1, 1, 6],
@@ -191,7 +189,7 @@ export default class Cube extends Component {
       return (
         <section
           key={i}
-          className={`absolute bg-transparent border-solid border-gray-400${type === "outer" ? "" : " border"}`}
+          className={`absolute bg-transparent border-solid border-gray-400 ${type !== "outer" ? "border" : ""}`}
           style={{
             transform: `${rotation} translateZ(${this.props.depth / 2}px)`,
             ...borderStyles,
