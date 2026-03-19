@@ -32,25 +32,107 @@ related:
 
 For proper usage and easier distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the configuration file.
 
+## ⚡ Quick Start
+
+Most commonly used commands:
+
+- **Production build**
+
+  ```bash
+  npx webpack --mode production
+  ```
+
+- **Start development server**
+
+  ```bash
+  npx webpack serve --open
+  ```
+
+- **Watch for file changes**
+
+  ```bash
+  npx webpack --watch
+  ```
+
+- **Run with config file**
+
+  ```bash
+  npx webpack --config webpack.config.js
+  ```
+
+💡 Tip: Use `serve` during development instead of `watch` for live reload.
+
 Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
-W> `webpack-cli` v7.0.0+ requires node >= v20.9.0, `webpack >= v5.101.0`, and `webpack-dev-server >= v5.0.0`.
+> ⚠️ **Requirements**
+>
+> - Node.js >= 20.9.0
+> - webpack >= 5.101.0
+> - webpack-dev-server >= 5.0.0
 
 W> If you want to run webpack using `npx` please make sure you have `webpack-cli` installed.
 
+---
+
 ## Commands
 
-webpack-cli offers a variety of commands to make working with webpack easier. By default webpack ships with
+webpack-cli offers a variety of commands to make working with webpack easier.
 
-| Command                     | Usage                                     | Description                                                                                        |
-| --------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [`build`](#build)           | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                                     |
-| [`configtest`](#configtest) | `configtest\|t [config-path]`             | Validate a webpack configuration.                                                                  |
-| [`help`](#help)             | `help\|h [command] [option]`              | Display help for commands and options.                                                             |
-| [`info`](#info)             | `info\|i [options]`                       | Outputs information about your system.                                                             |
-| [`serve`](#serve)           | `serve\|server\|s [options]`              | Run the `webpack-dev-server`.                                                                      |
-| [`version`](#version)       | `version\|v [commands...]`                | Output the version number of 'webpack', 'webpack-cli' and 'webpack-dev-server' and other packages. |
-| [`watch`](#watch)           | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                                           |
+### Execution Commands
+
+By default webpack ships with the following commands:
+
+| Command    | Purpose                          |
+| ---------- | -------------------------------- |
+| build      | Create production bundle         |
+| serve      | Start dev server (hot reload)    |
+| watch      | Rebuild on file changes          |
+| info       | Show system/debug info           |
+| configtest | Validate config                  |
+| version    | Show package versions            |
+| help       | Show help for commands and flags |
+
+### Project Scaffolding
+
+These commands use the `create-webpack-app` package.
+
+> ℹ️ These commands may prompt you to install `create-webpack-app` if not already installed.
+
+Scaffolding-related commands:
+
+| Command  | Usage                              | Description                                                  |
+| -------- | ---------------------------------- | ------------------------------------------------------------ |
+| `init`   | `init [generation-path] [options]` | Initialize a new webpack project using `create-webpack-app`. |
+| `loader` | `loader [output-path] [options]`   | Scaffold a loader.                                           |
+| `plugin` | `plugin [output-path] [options]`   | Scaffold a plugin.                                           |
+
+## When should I use each command?
+
+- **build** → Create a production-ready bundle
+- **serve** → Run development server with live reload
+- **watch** → Rebuild automatically without dev server
+- **configtest** → Validate configuration file
+- **info** → Debug environment issues
+
+## Common Use Cases
+
+### Build for production
+
+```bash
+npx webpack --mode production
+```
+
+### Development with live reload
+
+```bash
+npx webpack serve --mode development --open
+```
+
+### Debug configuration
+
+````bash
+npx webpack configtest
+```                                                        |
 
 ### Build
 
@@ -58,7 +140,7 @@ Run webpack (default command, can be omitted).
 
 ```bash
 npx webpack build [options]
-```
+````
 
 **example**
 
@@ -253,9 +335,56 @@ npx webpack watch [options]
 npx webpack watch --mode development
 ```
 
+---
+
 ## Flags
 
-By default webpack ships with the following flags:
+### Basic Flags
+
+| Flag             | Description                        |
+| ---------------- | ---------------------------------- |
+| `--mode`         | Set development or production mode |
+| `--config`, `-c` | Specify config file                |
+| `--watch`, `-w`  | Enable watch mode                  |
+| `--progress`     | Show build progress                |
+
+### Input / Output
+
+| Flag                  | Description      |
+| --------------------- | ---------------- |
+| `--entry`             | Entry point      |
+| `--output-path`, `-o` | Output directory |
+| `--target`, `-t`      | Build target     |
+
+### Development & Debugging
+
+| Flag              | Description          |
+| ----------------- | -------------------- |
+| `--devtool`, `-d` | Source maps          |
+| `--stats`         | Control output stats |
+| `--json`, `-j`    | Output JSON stats    |
+| `--analyze`       | Analyze bundle       |
+
+### Advanced
+
+| Flag              | Description                |
+| ----------------- | -------------------------- |
+| `--env`           | Pass environment variables |
+| `--config-name`   | Select config              |
+| `--merge`, `-m`   | Merge configs              |
+| `--extends`, `-e` | Extend config              |
+
+### CLI Behavior
+
+| Flag              | Description   |
+| ----------------- | ------------- |
+| `--color`         | Enable colors |
+| `--help`          | Show help     |
+| `--version`, `-v` | Show version  |
+
+### Full flag reference
+
+By default webpack also ships with the following flags:
 
 | Flag / Alias                            | Type            | Description                                                               |
 | --------------------------------------- | --------------- | ------------------------------------------------------------------------- |
@@ -306,6 +435,30 @@ For example if you want to enable performance hints in your project you'd use [t
 npx webpack --performance-hints warning
 ```
 
+---
+
+## How CLI maps to configuration
+
+Most CLI options map directly to `webpack.config.js`.
+
+**example**
+
+```bash
+npx webpack --output-path dist
+```
+
+Equivalent config:
+
+```js
+module.exports = {
+  output: {
+    path: "dist",
+  },
+};
+```
+
+---
+
 ## Usage
 
 ### With configuration file
@@ -350,6 +503,24 @@ npx webpack --entry-reset --entry ./first-entry.js ./other-entry.js
 ```
 
 W> The `--entry-reset` option is required to replace the existing [entry](/configuration/entry-context/#entry) option, without it the `--entry` option will add another entry to the existing entries.
+
+### Example: Before vs After
+
+Without `--entry-reset`:
+
+```bash
+npx webpack --entry ./new.js
+```
+
+Adds to existing entries.
+
+With `--entry-reset`:
+
+```bash
+npx webpack --entry-reset ./new.js
+```
+
+Replaces all previous entries.
 
 T> Use `webpack [command] --entry-reset [entries...] [option]` syntax because some options can accept multiple values so `webpack --target node ./entry.js` means `target: ['node', './entry.js']`
 
@@ -407,9 +578,7 @@ This is the lookup priority in increasing order
 > example - config file lookup will be in order of webpack.config.js > .webpack/webpack.config.js > .webpack/webpackfile.js
 
 ```text
-'webpack.config',
-'.webpack/webpack.config',
-'.webpack/webpackfile',
+'webpack.config','.webpack/webpack.config','.webpack/webpackfile',
 ```
 
 ## Common Options
@@ -567,6 +736,8 @@ In every other case, webpack prints out a set of stats showing bundle, chunk and
 
 T> See the [stats data api](/api/stats) to read more about the stats generated here.
 
+---
+
 ## Environment Options
 
 When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
@@ -577,15 +748,21 @@ When the webpack configuration [exports a function](/configuration/configuration
 npx webpack --env production    # env.production = true
 ```
 
+Result:
+
+```js
+env.production = true;
+```
+
 The `--env` argument accepts multiple values:
 
-| Invocation                                                       | Resulting environment                          |
-| ---------------------------------------------------------------- | ---------------------------------------------- |
-| `npx webpack --env prod`                                         | `{ prod: true }`                               |
-| `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
-| `npx webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
-| `npx webpack --env foo=bar=app`                                  | `{ foo: "bar=app"}`                            |
-| `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
+| Invocation                                                       | Resulting environment                           |
+| ---------------------------------------------------------------- | ----------------------------------------------- |
+| `npx webpack --env prod`                                         | `{ prod: true }`                                |
+| `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                     |
+| `npx webpack --env platform=app --env production`                | `{ platform: "app", production: true }`         |
+| `npx webpack --env foo=bar=app`                                  | `{ foo: "bar=app"}`                             |
+| `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }}` |
 
 T> If you want to explicitly set a variable to empty string (`""`), you may need to escape characters on terminal like `npx webpack --env foo=\"\"`
 
@@ -619,7 +796,7 @@ npx webpack --config-node-env production   # process.env.NODE_ENV = 'production'
 
 When the `mode` option is not specified in the configuration, you can use the `--config-node-env` option to set the `mode`. For example, using `--config-node-env production` will set both `process.env.NODE_ENV` and `mode` to `'production'`.
 
-If your configuration exports a function, the value of `--config-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--config-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
+If your configuration exports a function, the value of `--config-node-env` is assigned to `mode` after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--config-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
 
 ```js
 export default (env, argv) => {
@@ -666,13 +843,13 @@ npx webpack --progress=profile
 
 To pass arguments directly to Node.js process, you can use the `NODE_OPTIONS` option.
 
-For example, to increase the memory limit of Node.js process to 4 GB
+For example, to increase the memory limit of Node.js process to 4 GB:
 
 ```bash
 NODE_OPTIONS="--max-old-space-size=4096" webpack
 ```
 
-Also, you can pass multiple options to Node.js process
+You can also pass multiple options to Node.js process:
 
 ```bash
 NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
@@ -724,7 +901,11 @@ To use `webpack v5.32.0`:
 WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
 
-## Troubleshooting
+---
+
+## Using Webpack with TypeScript & ESM
+
+Node.js requires a loader hook to understand `.ts` files when using ESM.
 
 ### TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for ./webpack.config.ts
 
