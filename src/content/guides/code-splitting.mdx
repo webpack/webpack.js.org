@@ -376,6 +376,17 @@ cacheable modules 530 KiB
 webpack 5.4.0 compiled successfully in 268 ms
 ```
 
+T> You can also use magic comment `webpackExports` with `import()` to expose specific exports from a dynamically imported module:
+
+```js
+import(
+  /* webpackExports: ["default", "namedExport"] */
+  "./module"
+);
+```
+
+This can help webpack tree shake other unused exports. See [Magic Comments](/api/module-methods/#magic-comments) for details.
+
 As `import()` returns a promise, it can be used with [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). Here's how it would simplify the code:
 
 **src/index.js**
