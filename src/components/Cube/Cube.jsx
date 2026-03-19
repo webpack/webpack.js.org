@@ -160,15 +160,6 @@ export default class Cube extends Component {
       },
     };
 
-    // Base classes applied to all faces
-    const baseFaceClasses = "absolute w-full h-full border-white";
-
-    // Distinguish styles for inner vs outer faces natively via Tailwind
-    const isOuter = type === "outer";
-    const variantClasses = isOuter
-      ? "border bg-blue-200/50 transition-[border-width] duration-200 delay-200"
-      : "border-2 bg-blue-400";
-
     return [
       "rotateX(0deg)",
       "rotateX(-90deg)",
@@ -177,14 +168,15 @@ export default class Cube extends Component {
       "rotateY(90deg)",
       "rotateY(180deg)",
     ].map((rotation, i) => {
-      const borderStyles = isOuter
-        ? {
-            borderTopWidth: borderWidthMap[i].top[iteration],
-            borderRightWidth: borderWidthMap[i].right[iteration],
-            borderBottomWidth: borderWidthMap[i].bottom[iteration],
-            borderLeftWidth: borderWidthMap[i].left[iteration],
-          }
-        : {};
+      const borderStyles =
+        type === "outer"
+          ? {
+              borderTopWidth: borderWidthMap[i].top[iteration],
+              borderRightWidth: borderWidthMap[i].right[iteration],
+              borderBottomWidth: borderWidthMap[i].bottom[iteration],
+              borderLeftWidth: borderWidthMap[i].left[iteration],
+            }
+          : {};
 
       return (
         <section
