@@ -183,8 +183,8 @@ export default class Cube extends Component {
         <section
           key={i}
           className={
-            `absolute bg-transparent border-solid border-gray-400` +
-            ` ${type === "outer" ? "" : "border"}`
+            "absolute bg-transparent border-solid border-gray-400" +
+            (type === "outer" ? "" : " border")
           }
           style={{
             transform: `${rotation} translateZ(${this.props.depth / 2}px)`,
