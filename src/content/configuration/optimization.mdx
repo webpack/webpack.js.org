@@ -45,8 +45,13 @@ export default {
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for `optimization.chunkIds`:
 
-- Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
-- if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
+The default value of `optimization.chunkIds` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default           |
+| ------------- | ----------------- |
+| `development` | `'named'`         |
+| `production`  | `'deterministic'` |
+| `none`        | `'natural'`       |
 
 The following string values are supported:
 
@@ -344,6 +349,14 @@ Basically, `'...'` is [a shortcut to access the default configuration value](htt
 `boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
 Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
+
+The default value of `optimization.moduleIds` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default           |
+| ------------- | ----------------- |
+| `development` | `'named'`         |
+| `production`  | `'deterministic'` |
+| `none`        | `'natural'`       |
 
 The following string values are supported:
 
