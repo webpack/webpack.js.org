@@ -2,7 +2,7 @@
   "name": "webpack.js.org",
   "version": "0.1.2",
   "private": true,
-  "description": "The main site for all things webpack.",
+  "description": "The main site for all things webpack. - CI fixes applied",
   "keywords": [
     "webpack",
     "documentation",
