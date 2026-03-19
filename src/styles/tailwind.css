@@ -50,3 +50,24 @@
 .DocSearch-Button .DocSearch-Search-Icon {
   @apply text-white! lg:text-gray-100!;
 }
+
+/* Reading Progress – keyframes for scroll-driven animation */
+@keyframes grow-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade-in-progress {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Custom utility: scroll-driven animation timeline */
+.animation-timeline-scroll {
+  animation-timeline: scroll(root block);
+}
