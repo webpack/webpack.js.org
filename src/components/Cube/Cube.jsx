@@ -2,9 +2,6 @@
 import PropTypes from "prop-types";
 import { Component } from "react";
 
-// Load Styling
-import "./Cube.scss";
-
 export default class Cube extends Component {
   static propTypes = {
     hover: PropTypes.bool,
@@ -44,14 +41,15 @@ export default class Cube extends Component {
       >
         <span
           ref={(ref) => (this.container = ref)}
-          className={`cube cube--${theme}`}
+          className={`cube cube--${theme} relative block [transform-style:preserve-3d]`}
           style={{
             width: `${depth}px`,
             paddingBottom: `${depth * 0.5}px`,
+            transform: "rotateX(-35.5deg) rotateY(45deg)",
           }}
         >
           <figure
-            className="cube__outer"
+            className="cube__outer inline-block [transform-style:preserve-3d] transition-transform duration-1000"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
@@ -65,7 +63,7 @@ export default class Cube extends Component {
             {this._getFaces("outer")}
           </figure>
           <figure
-            className="cube__inner"
+            className="cube__inner absolute -top-[2px] left-0 inline-block [transform-style:preserve-3d] transition-transform duration-1000"
             style={{
               width: `${depth}px`,
               height: `${depth}px`,
@@ -172,6 +170,15 @@ export default class Cube extends Component {
       },
     };
 
+    // Base classes applied to all faces
+    const baseFaceClasses = "absolute w-full h-full border-white";
+
+    // Distinguish styles for inner vs outer faces natively via Tailwind
+    const isOuter = type === "outer";
+    const variantClasses = isOuter
+      ? "border bg-blue-200/50 transition-[border-width] duration-200 delay-200"
+      : "border-2 bg-blue-400";
+
     return [
       "rotateX(0deg)",
       "rotateX(-90deg)",
@@ -180,20 +187,19 @@ export default class Cube extends Component {
       "rotateY(90deg)",
       "rotateY(180deg)",
     ].map((rotation, i) => {
-      const borderStyles =
-        type === "outer"
-          ? {
-              borderTopWidth: borderWidthMap[i].top[iteration],
-              borderRightWidth: borderWidthMap[i].right[iteration],
-              borderBottomWidth: borderWidthMap[i].bottom[iteration],
-              borderLeftWidth: borderWidthMap[i].left[iteration],
-            }
-          : {};
+      const borderStyles = isOuter
+        ? {
+            borderTopWidth: borderWidthMap[i].top[iteration],
+            borderRightWidth: borderWidthMap[i].right[iteration],
+            borderBottomWidth: borderWidthMap[i].bottom[iteration],
+            borderLeftWidth: borderWidthMap[i].left[iteration],
+          }
+        : {};
 
       return (
         <section
           key={i}
-          className="cube__face"
+          className={`cube__face ${baseFaceClasses} ${variantClasses}`}
           style={{
             transform: `${rotation} translateZ(${this.props.depth / 2}px)`,
             ...borderStyles,

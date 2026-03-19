@@ -8,7 +8,10 @@ const Link = ({ to = "", url, ...props }) => {
 
   if (to.startsWith("http") || to.startsWith("//")) {
     return (
-      <a href={to} target="_blank" rel="noopener noreferrer" {...others} />
+      <a href={to} target="_blank" rel="noopener noreferrer" {...others}>
+        {others.children}
+        <span className="screen-reader-only">(opens in a new tab)</span>
+      </a>
     );
   }
 
