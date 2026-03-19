@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+
 import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import { cacheNames } from "workbox-core";
 import { ExpirationPlugin } from "workbox-expiration";

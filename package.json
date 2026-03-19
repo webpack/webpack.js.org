@@ -85,6 +85,8 @@
     "react-tiny-popover": "^8.1.6",
     "react-use": "^17.6.0",
     "webpack-pwa-manifest": "^4.3.0",
+    "workbox-cacheable-response": "^7.4.0",
+    "workbox-expiration": "^7.4.0",
     "workbox-window": "^7.4.0"
   },
   "devDependencies": {
