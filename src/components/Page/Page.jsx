@@ -142,7 +142,7 @@ export default function Page(props) {
               .map((post) => (
                 <div
                   key={post.url}
-                  className="blog-post-item mb-[3rem] pb-[2rem] border-b border-gray-100 last:border-b-0 [[data-theme='dark']_&]:border-gray-800"
+                  className="mb-[3rem] pb-[2rem] border-b border-gray-100 last:border-b-0 [[data-theme='dark']_&]:border-gray-800"
                 >
                   <h2 className="mt-0 mb-[0.5rem] text-[1.8rem] font-bold leading-[1.2]">
                     <Link
