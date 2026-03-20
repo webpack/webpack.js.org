@@ -1677,6 +1677,12 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">434</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
 webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">268</span> ms</code></pre></div>
+<aside class="tip"><p class="tip__prefix">tip</p><p>You can also use magic comment <code>webpackExports</code> with <code>import()</code> to expose specific exports from a dynamically imported module:</p></aside>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span><span class="token punctuation">(</span>
+  <span class="token comment">/* webpackExports: [&quot;default&quot;, &quot;namedExport&quot;] */</span>
+  <span class="token string">&quot;./module&quot;</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>This can help webpack tree shake other unused exports. See <a href="/api/module-methods/#magic-comments" data-discover="true">Magic Comments</a> for details.</p>
 <p>As <code>import()</code> returns a promise, it can be used with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"><code>async</code> functions</a>. Here&#x27;s how it would simplify the code:</p>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">function getComponent() {
@@ -3080,6 +3086,7 @@ export default {
 <p>The <a href="/configuration/optimization/#optimizationsideeffects" data-discover="true"><code>sideEffects</code></a> and <a href="/configuration/optimization/#optimizationusedexports" data-discover="true"><code>usedExports</code></a> (more known as tree shaking) optimizations are two different things.</p>
 <p><strong><code>sideEffects</code> is much more effective</strong> since it allows to skip whole modules/files and the complete subtree.</p>
 <p><code>usedExports</code> relies on <a href="https://github.com/terser-js/terser">terser</a> to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straightforward <code>sideEffects</code> flag. It also can&#x27;t skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React&#x27;s Higher Order Components (HOC) are problematic in this regard.</p>
+<p>If you&#x27;re using dynamic <code>import()</code>, you can also use the <code>webpackExports</code> magic comment to specify the exports that should be exposed, allowing webpack to tree shake the others. See <a href="/api/module-methods/#magic-comments" data-discover="true">Magic Comments</a>.</p>
 <p>Let&#x27;s make an example:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> Button <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@shopify/polaris&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>The pre-bundled version looks like this:</p>
