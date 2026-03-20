@@ -18,8 +18,18 @@
 <p>First let&#x27;s create a directory, initialize npm, <a href="/guides/installation/#local-installation" data-discover="true">install webpack locally</a>, and install the <a href="https://github.com/webpack/webpack-cli"><code>webpack-cli</code></a> (the tool used to run webpack on the command line):</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">mkdir</span> webpack-demo
 <span class="token builtin class-name">cd</span> webpack-demo
+
+<span class="token comment"># npm</span>
 <span class="token function">npm</span> init <span class="token parameter variable">-y</span>
-<span class="token function">npm</span> <span class="token function">install</span> webpack webpack-cli --save-dev</code></pre></div>
+<span class="token function">npm</span> <span class="token function">install</span> webpack webpack-cli --save-dev
+
+<span class="token comment"># yarn</span>
+<span class="token function">yarn</span> init <span class="token parameter variable">-y</span>
+<span class="token function">yarn</span> <span class="token function">add</span> webpack webpack-cli <span class="token parameter variable">--dev</span>
+
+<span class="token comment"># pnpm</span>
+<span class="token function">pnpm</span> init
+<span class="token function">pnpm</span> <span class="token function">add</span> webpack webpack-cli <span class="token parameter variable">-D</span></code></pre></div>
 <p>Throughout the Guides we will use <strong><code>diff</code></strong> blocks to show you what changes we&#x27;re making to directories, files, and code. For instance:</p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> this is a new line you shall copy into your code
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> and this is a line to be removed from your code
@@ -97,7 +107,14 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span><span class="token prefix unchanged"> </span><span class="token line">      └── index.js</span></span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You may have noticed that <code>index.html</code> was created manually, even though it is now placed in the <code>dist</code> directory. Later on in <a href="/guides/output-management/#setting-up-htmlwebpackplugin" data-discover="true">another guide</a>, we will generate <code>index.html</code> rather than edit it manually. Once this is done, it should be safe to empty the <code>dist</code> directory and to regenerate all the files within it.</p></aside>
 <p>To bundle the <code>lodash</code> dependency with <code>index.js</code>, we&#x27;ll need to install the library locally:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--save</span> lodash</code></pre></div>
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
+<span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--save</span> lodash
+
+<span class="token comment"># yarn</span>
+<span class="token function">yarn</span> <span class="token function">add</span> lodash
+
+<span class="token comment"># pnpm</span>
+<span class="token function">pnpm</span> <span class="token function">add</span> lodash</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>When installing a package that will be bundled into your production bundle, you should use <code>npm install --save</code>. If you&#x27;re installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use <code>npm install --save-dev</code>. More information can be found in the <a href="https://docs.npmjs.com/cli/install">npm documentation</a>.</p></aside>
 <p>Now, let&#x27;s import <code>lodash</code> in our script:</p>
 <p><strong>src/index.js</strong></p>
@@ -131,7 +148,15 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <aside class="tip"><p class="tip__prefix">tip</p><p>A couple other script loading strategies exist. Deferred loading is one such alternative to the above, where instead scripts are consolidated into the <code>&lt;head&gt;</code> and are given the <code>defer</code> attribute. This strategy downloads the external script resource(s) in parallel with document parsing, and will execute the scripts in order of document appearance after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource synchronously. To learn more about this process, MDN has a nice <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script#async_and_defer"><code>reference guide</code></a>.</p></aside>
 <p>In this setup, <code>index.js</code> explicitly requires <code>lodash</code> to be present, and binds it as <code>_</code> (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.</p>
 <p>With that said, let&#x27;s run <code>npx webpack</code> from the project root. If webpack is installed locally, <code>npx</code> will run the local binary from <code>node_modules/.bin</code>; otherwise, it may download and execute it. This command takes our script at <code>src/index.js</code> as the <a href="/concepts/entry-points" data-discover="true">entry point</a> and generates <code>dist/main.js</code> as the <a href="/concepts/output" data-discover="true">output</a>.</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">$ npx webpack
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
+npx webpack
+
+<span class="token comment"># yarn</span>
+<span class="token function">yarn</span> webpack
+
+<span class="token comment"># pnpm</span>
+<span class="token function">pnpm</span> <span class="token builtin class-name">exec</span> webpack
+
 <span class="token punctuation">[</span>webpack-cli<span class="token punctuation">]</span> Compilation finished
 asset main.js <span class="token number">69.3</span> KiB <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span> <span class="token punctuation">[</span>minimized<span class="token punctuation">]</span> <span class="token punctuation">(</span>name: main<span class="token punctuation">)</span> <span class="token number">1</span> related asset
 runtime modules <span class="token number">1000</span> bytes <span class="token number">5</span> modules
@@ -175,7 +200,15 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Now, let&#x27;s run the build again but instead using our new configuration file:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">$ npx webpack <span class="token parameter variable">--config</span> webpack.config.js
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
+npx webpack <span class="token parameter variable">--config</span> webpack.config.js
+
+<span class="token comment"># yarn</span>
+<span class="token function">yarn</span> webpack <span class="token parameter variable">--config</span> webpack.config.js
+
+<span class="token comment"># pnpm</span>
+<span class="token function">pnpm</span> <span class="token builtin class-name">exec</span> webpack <span class="token parameter variable">--config</span> webpack.config.js
+
 <span class="token punctuation">[</span>webpack-cli<span class="token punctuation">]</span> Compilation finished
 asset main.js <span class="token number">69.3</span> KiB <span class="token punctuation">[</span>compared <span class="token keyword">for</span> emit<span class="token punctuation">]</span> <span class="token punctuation">[</span>minimized<span class="token punctuation">]</span> <span class="token punctuation">(</span>name: main<span class="token punctuation">)</span> <span class="token number">1</span> related asset
 runtime modules <span class="token number">1000</span> bytes <span class="token number">5</span> modules
@@ -211,8 +244,14 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
 <p>Now the <code>npm run build</code> command can be used in place of the <code>npx</code> command we used earlier. Note that within <code>scripts</code> we can reference locally installed npm packages by name the same way we did with <code>npx</code>. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts.</p>
 <p>Now run the following command and see if your script alias works:</p>
-<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">$ <span class="token function">npm</span> run build
+<div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
+<span class="token function">npm</span> run build
 
+<span class="token comment"># yarn</span>
+<span class="token function">yarn</span> build
+
+<span class="token comment"># pnpm</span>
+<span class="token function">pnpm</span> run build
 <span class="token punctuation">..</span>.
 
 <span class="token punctuation">[</span>webpack-cli<span class="token punctuation">]</span> Compilation finished
