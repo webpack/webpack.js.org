@@ -11,9 +11,6 @@ import PageLinks from "../PageLinks/PageLinks.jsx";
 import { placeholderString } from "../Placeholder/Placeholder.jsx";
 import AdjacentPages from "./AdjacentPages.jsx";
 
-// Load Styling
-import "./Page.scss";
-
 export default function Page(props) {
   const {
     title,
@@ -117,7 +114,10 @@ export default function Page(props) {
     );
   }
   return (
-    <main id="main-content" className="page">
+    <main
+      id="main-content"
+      className="relative overflow-x-hidden flex-[1_1_auto] px-[1rem] py-[1.5rem] min-[960px]:flex-[3] min-[960px]:p-[1.5rem]"
+    >
       <Markdown>
         <h1>{title}</h1>
         {rest.date && pathname.startsWith("/blog/") && !isBlogIndex && (
@@ -136,19 +136,34 @@ export default function Page(props) {
         <div id="md-content">{contentRender}</div>
 
         {rest.url === "/blog/" && (
-          <div className="blog-list">
+          <div className="blog-list mt-[2rem]">
             {(props.pages || [])
               .filter((post) => post.url !== "/blog/")
               .map((post) => (
-                <div key={post.url} className="blog-post-item">
-                  <h2>
-                    <Link to={post.url}>{post.title}</Link>
+                <div
+                  key={post.url}
+                  className="blog-post-item mb-[3rem] pb-[2rem] border-b border-gray-100 last:border-b-0 [[data-theme='dark']_&]:border-gray-800"
+                >
+                  <h2 className="mt-0 mb-[0.5rem] text-[1.8rem] font-bold leading-[1.2]">
+                    <Link
+                      to={post.url}
+                      className="text-[#334155] no-underline hover:text-[#0284c7] [[data-theme='dark']_&]:!text-blue-200 [[data-theme='dark']_&]:hover:!text-[#38bdf8]"
+                    >
+                      {post.title}
+                    </Link>
                   </h2>
                   {post.date && (
-                    <div className="blog-post-date">{post.date}</div>
+                    <div className="blog-post-date text-[1.2rem] font-semibold mt-[0.25rem] mb-[1rem] italic text-[#6b7280] [[data-theme='dark']_&]:text-[#bbb]">
+                      {post.date}
+                    </div>
                   )}
-                  <p>{post.teaser}</p>
-                  <Link to={post.url} className="read-more">
+                  <p className="text-[#374151] leading-[1.4] mb-[1rem] [[data-theme='dark']_&]:text-[#d1d5db]">
+                    {post.teaser}
+                  </p>
+                  <Link
+                    to={post.url}
+                    className="read-more text-[#0284c7] font-semibold no-underline hover:underline [[data-theme='dark']_&]:text-[#38bdf8]"
+                  >
                     Read More &rarr;
                   </Link>
                 </div>
