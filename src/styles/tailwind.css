@@ -47,6 +47,12 @@
 .DocSearch-Button-Keys {
   @apply hidden! lg:flex!;
 }
+.DocSearch-Button-Key {
+  @apply text-gray-700! bg-gray-100! border-gray-300!;
+}
+[data-theme="dark"] .DocSearch-Button-Key {
+  @apply text-gray-100! bg-olive-700! border-gray-500!;
+}
 .DocSearch-Button .DocSearch-Search-Icon {
   @apply text-white! lg:text-gray-100!;
 }
