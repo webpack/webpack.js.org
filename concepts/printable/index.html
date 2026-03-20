@@ -112,6 +112,10 @@ files are emitted.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>When running webpack without a configuration file, the entry defaults to <code>&#x27;./src/index.js&#x27;</code>. If that file is missing — even if your <code>src/</code> directory exists — webpack will throw: <br/> <strong><code>ERROR in Entry module not found: Error: Can&#x27;t resolve &#x27;./src&#x27;</code></strong> <br/><br/> The error says <code>&#x27;./src&#x27;</code> rather than <code>&#x27;./src/index.js&#x27;</code> because webpack resolves the directory first, then fails to find <code>index.js</code> inside it. To use a different entry filename, configure the <code>entry</code> option as shown in the sections below.</p></aside>
 <h2><span id="single-entry-shorthand-syntax"></span>Single Entry (Shorthand) Syntax<a href="#single-entry-shorthand-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Usage: <code>entry: string | [string]</code></p>
+<ul>
+<li><code>string</code>: a single entry file</li>
+<li><code>[string]</code>: multiple entry files</li>
+</ul>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">entry</span><span class="token operator">:</span> <span class="token string">&quot;./path/to/my/entry/file.js&quot;</span><span class="token punctuation">,</span>
@@ -141,6 +145,12 @@ such as polyfills or development-only tools, without manually importing them in 
 <p>Single Entry Syntax is a great choice when you are looking to quickly set up a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.</p>
 <h2><span id="object-syntax"></span>Object Syntax<a href="#object-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Usage: <code>entry: { &lt;entryChunkName&gt; string | [string] } | {}</code></p>
+<ul>
+<li><code>&lt;entryChunkName&gt;</code>: name of the entry chunk</li>
+<li><code>string</code>: single entry file</li>
+<li><code>[string]</code>: multiple entry files</li>
+<li><code>{}</code>: empty object</li>
+</ul>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">entry</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -228,16 +238,18 @@ such as polyfills or development-only tools, without manually importing them in 
     <span class="token literal-property property">vendor</span><span class="token operator">:</span> <span class="token string">&quot;./src/vendor.js&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>When building in <code>production</code> mode:</p>
 <p><strong>webpack.prod.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">&quot;[name].[contenthash].bundle.js&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">&quot;[name].[contenthash].bundle.js&quot;</span><span class="token punctuation">,</span> <span class="token comment">// eg: main.abc123.bundle.js, vendor.abc123.bundle.js</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>When building in <code>development</code> mode:</p>
 <p><strong>webpack.dev.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token literal-property property">output</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">filename</span><span class="token operator">:</span> <span class="token string">&quot;[name].bundle.js&quot;</span><span class="token punctuation">,</span> <span class="token comment">// eg: main.bundle.js, vendor.bundle.js</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p><strong>What does this do?</strong> We are telling webpack that we would like 2 separate entry points (like the above example).</p>
