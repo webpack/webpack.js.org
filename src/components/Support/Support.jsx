@@ -136,7 +136,7 @@ export default class Support extends Component {
 
     const { inView } = this.state;
 
-    let supporters = [...SUPPORTERS];
+    let supporters = SUPPORTERS;
     let minimum;
     let maximum;
     let maxAge;
