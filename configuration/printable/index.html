@@ -4553,8 +4553,20 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="optimizationchunkids"></span>optimization.chunkIds<a href="#optimizationchunkids" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = false</code> <code>string: &#x27;natural&#x27; | &#x27;named&#x27; | &#x27;size&#x27; | &#x27;total-size&#x27; | &#x27;deterministic&#x27;</code></p>
-<p>Tells webpack which algorithm to use when choosing chunk ids. Setting <code>optimization.chunkIds</code> to <code>false</code> tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for <code>optimization.chunkIds</code>:</p>
+<p><code>boolean</code> | <code>natural</code> | <code>named</code> | <code>size</code> | <code>total-size</code> | <code>deterministic</code></p>
+<ul>
+<li><code>false</code>: disable webpack&#x27;s built-in chunk id algorithm</li>
+<li>one of the following values:<!-- -->
+<ul>
+<li><code>&#x27;natural&#x27;</code></li>
+<li><code>&#x27;named&#x27;</code></li>
+<li><code>&#x27;size&#x27;</code></li>
+<li><code>&#x27;total-size&#x27;</code></li>
+<li><code>&#x27;deterministic&#x27;</code></li>
+</ul>
+</li>
+</ul>
+<p>Tells Webpack which algorithm to use for chunk IDs. Setting <code>optimization.chunkIds</code> to <code>false</code> tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for <code>optimization.chunkIds</code>:</p>
 <p>The default value of <code>optimization.chunkIds</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
 <table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>development</code></span></td><td data-th="Default"><span><code>&#x27;named&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>production</code></span></td><td data-th="Default"><span><code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>none</code></span></td><td data-th="Default"><span><code>&#x27;natural&#x27;</code></span></td></tr></tbody></table>
 <p>The following string values are supported:</p>
@@ -4604,6 +4616,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <h2><span id="optimizationavoidentryiife"></span>optimization.avoidEntryIife<a href="#optimizationavoidentryiife" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean = false</code></p>
 <span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.95.0+</span>
+<aside class="tip"><p class="tip__prefix">tip</p><p>IIFE (Immediately Invoked Function Expression) is a function that runs immediately after it is created. Webpack uses it to wrap code and avoid variable conflicts.</p></aside>
 <p>Use <code>optimization.avoidEntryIife</code> to avoid wrapping the entry module in an IIFE when it is required (search for <code>&quot;This entry needs to be wrapped in an IIFE because&quot;</code> in <a href="https://github.com/webpack/webpack/blob/main/lib/javascript/JavascriptModulesPlugin.js">JavascriptModulesPlugin</a>). This approach helps optimize performance for JavaScript engines and enables tree shaking when building ESM libraries.</p>
 <p>Currently, <code>optimization.avoidEntryIife</code> can only optimize a single entry module along with other modules.</p>
 <p>By default, <code>optimization.avoidEntryIife</code> is enabled in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> and disabled otherwise.</p>
