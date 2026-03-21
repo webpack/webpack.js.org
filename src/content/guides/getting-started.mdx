@@ -56,8 +56,18 @@ First let's create a directory, initialize npm, [install webpack locally](/guide
 ```bash
 mkdir webpack-demo
 cd webpack-demo
+
+# npm
 npm init -y
 npm install webpack webpack-cli --save-dev
+
+# yarn
+yarn init -y
+yarn add webpack webpack-cli --dev
+
+# pnpm
+pnpm init
+pnpm add webpack webpack-cli -D
 ```
 
 Throughout the Guides we will use **`diff`** blocks to show you what changes we're making to directories, files, and code. For instance:
@@ -171,7 +181,14 @@ T> You may have noticed that `index.html` was created manually, even though it i
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
 
 ```bash
+# npm
 npm install --save lodash
+
+# yarn
+yarn add lodash
+
+# pnpm
+pnpm add lodash
 ```
 
 T> When installing a package that will be bundled into your production bundle, you should use `npm install --save`. If you're installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
@@ -222,7 +239,15 @@ In this setup, `index.js` explicitly requires `lodash` to be present, and binds 
 With that said, let's run `npx webpack` from the project root. If webpack is installed locally, `npx` will run the local binary from `node_modules/.bin`; otherwise, it may download and execute it. This command takes our script at `src/index.js` as the [entry point](/concepts/entry-points) and generates `dist/main.js` as the [output](/concepts/output).
 
 ```bash
-$ npx webpack
+# npm
+npx webpack
+
+# yarn
+yarn webpack
+
+# pnpm
+pnpm exec webpack
+
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
@@ -287,7 +312,15 @@ export default {
 Now, let's run the build again but instead using our new configuration file:
 
 ```bash
-$ npx webpack --config webpack.config.js
+# npm
+npx webpack --config webpack.config.js
+
+# yarn
+yarn webpack --config webpack.config.js
+
+# pnpm
+pnpm exec webpack --config webpack.config.js
+
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
@@ -336,8 +369,14 @@ Now the `npm run build` command can be used in place of the `npx` command we use
 Now run the following command and see if your script alias works:
 
 ```bash
-$ npm run build
+# npm
+npm run build
 
+# yarn
+yarn build
+
+# pnpm
+pnpm run build
 ...
 
 [webpack-cli] Compilation finished

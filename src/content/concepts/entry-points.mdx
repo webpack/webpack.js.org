@@ -32,6 +32,9 @@ T> When running webpack without a configuration file, the entry defaults to `'./
 
 Usage: `entry: string | [string]`
 
+- `string`: a single entry file
+- `[string]`: multiple entry files
+
 **webpack.config.js**
 
 ```js
@@ -83,6 +86,11 @@ Single Entry Syntax is a great choice when you are looking to quickly set up a w
 ## Object Syntax
 
 Usage: `entry: { <entryChunkName> string | [string] } | {}`
+
+- `<entryChunkName>`: name of the entry chunk
+- `string`: single entry file
+- `[string]`: multiple entry files
+- `{}`: empty object
 
 **webpack.config.js**
 
@@ -192,22 +200,26 @@ export default {
 };
 ```
 
+When building in `production` mode:
+
 **webpack.prod.js**
 
 ```js
 export default {
   output: {
-    filename: "[name].[contenthash].bundle.js",
+    filename: "[name].[contenthash].bundle.js", // eg: main.abc123.bundle.js, vendor.abc123.bundle.js
   },
 };
 ```
+
+When building in `development` mode:
 
 **webpack.dev.js**
 
 ```js
 export default {
   output: {
-    filename: "[name].bundle.js",
+    filename: "[name].bundle.js", // eg: main.bundle.js, vendor.bundle.js
   },
 };
 ```

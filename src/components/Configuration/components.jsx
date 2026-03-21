@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { Component, isValidElement } from "react";
 import Popover from "react-tiny-popover";
-import "./Configuration.scss";
 
 const DEFAULT_CHILDREN_SIZE = 4;
 
@@ -17,9 +16,14 @@ const addLink = (child, i, url) =>
   ) : (
     child
   );
+
 const Card = ({ body }) => (
-  <div className="markdown">
-    <pre className="inline">
+  // Applied .shadow > .markdown styles: max-height and overflow
+  <div className="markdown max-h-[48vh] overflow-auto">
+    {/* Combined .inline and .shadow pre.inline styles: 
+      display: block, margin: 0, padding: 0 with right-padding override 
+    */}
+    <pre className="block m-0 p-0 pr-[15px]">
       <code>{body}</code>
     </pre>
   </div>
@@ -83,7 +87,8 @@ export class Details extends Component {
         position={["right", "top"]}
         padding={0}
         onClickOutside={this.clickOutsideHandler}
-        containerClassName={"shadow"}
+        // Replaced .shadow with Tailwind equivalents, including the custom rgba box-shadow
+        containerClassName="overflow-visible rounded shadow-[-1px_1px_10px_0_rgba(255,255,255,0.44)]"
         content={<Card body={content} />}
       >
         <span

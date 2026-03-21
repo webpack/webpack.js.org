@@ -1,32 +1,36 @@
-import "./Placeholder.scss";
-
 // Placeholder string
 const placeholderString = () => `
   <div class="placeholder">
-    <p class="placeholder__medium">&nbsp;</p>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__small">&nbsp;</p>
-    <h2 class="placeholder__xsmall">&nbsp;</h2>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__small">&nbsp;</p>
-    <p class="placeholder__medium">&nbsp;</p>
-    <h2 class="placeholder__small">&nbsp;</h2>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__medium">&nbsp;</p>
-    <p class="placeholder__xsmall">&nbsp;</p>
-    <h2 class="placeholder__xsmall">&nbsp;</h2>
-    <p class="placeholder__large">&nbsp;</p>
-    <p class="placeholder__small">&nbsp;</p>
-    <p class="placeholder__medium">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-3/4">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[85%]">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-1/2">&nbsp;</p>
+    <h2 class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[35%]">&nbsp;</h2>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[85%]">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-1/2">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-3/4">&nbsp;</p>
+    <h2 class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-1/2">&nbsp;</h2>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[85%]">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-3/4">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[35%]">&nbsp;</p>
+    <h2 class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[35%]">&nbsp;</h2>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[85%]">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-1/2">&nbsp;</p>
+    <p class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-3/4">&nbsp;</p>
   </div>
 `;
 
 function PlaceholderComponent() {
   return (
     <div className="placeholder">
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
+      <p className="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-3/4">
+        &nbsp;
+      </p>
+      <p className="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[85%]">
+        &nbsp;
+      </p>
+      <p className="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-1/2">
+        &nbsp;
+      </p>
     </div>
   );
 }

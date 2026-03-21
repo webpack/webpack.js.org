@@ -74,7 +74,7 @@ export default function Sidebar({ className = "", pages, currentPage }) {
           return (
             <div key={page.url}>
               {displayGroup ? (
-                <h4 className="mt-6 ml-1 capitalize text-lg font-bold text-slate-800">
+                <h4 className="mt-6 ml-1 capitalize text-lg font-bold text-slate-800 dark:text-slate-100">
                   {group}
                 </h4>
               ) : null}

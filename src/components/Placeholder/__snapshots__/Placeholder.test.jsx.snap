@@ -4,13 +4,19 @@ exports[`PlaceholderComponent renders correctly 1`] = `
 <div
   class="placeholder"
 >
-  <p>
+  <p
+    class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-3/4"
+  >
      
   </p>
-  <p>
+  <p
+    class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[85%]"
+  >
      
   </p>
-  <p>
+  <p
+    class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-1/2"
+  >
      
   </p>
 </div>
