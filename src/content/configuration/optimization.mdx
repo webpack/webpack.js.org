@@ -152,7 +152,7 @@ export default {
 };
 ```
 
-W> The `⁠optimization.avoidEntryIife` option can negatively affect build performance, if you prioritize build performance over these optimizations, consider disabling this option.
+W> The `optimization.avoidEntryIife` option can negatively affect build performance. If you prioritize build performance over these optimizations, consider disabling this option.
 
 ## optimization.flagIncludedChunks
 
@@ -378,7 +378,7 @@ export default {
 };
 ```
 
-`deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
+The `deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
 
 **webpack.config.js**
 

@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import { Component } from "react";
 
-import "./Dropdown.scss";
-
 export default class Dropdown extends Component {
   static propTypes = {
     className: PropTypes.string,
@@ -41,11 +39,10 @@ export default class Dropdown extends Component {
 
   render() {
     const { className = "", items = [] } = this.props;
-    const activeMod = this.state.active ? "dropdown__list--active" : "";
 
     return (
       <nav
-        className={`dropdown ${className}`}
+        className={`relative ${className}`}
         ref={(el) => (this.dropdown = el)}
         onMouseOver={this._handleMouseOver}
         onMouseLeave={this._handleMouseLeave}
@@ -56,11 +53,12 @@ export default class Dropdown extends Component {
           aria-expanded={String(this.state.active)}
           aria-label="Select language"
           onClick={this._handleClick}
+          className="cursor-pointer text-white border-none bg-transparent m-0 p-0 text-[length:inherit] flex items-center"
         >
           <svg
             viewBox="0 0 610 560"
             xmlns="http://www.w3.org/2000/svg"
-            className="dropdown__language text-gray-100 hover:text-blue-200 transition-colors duration-200"
+            className="w-20 h-20 align-middle text-gray-100 hover:text-blue-200 transition-colors duration-200"
           >
             <path d="m304.8 99.2-162.5-57.3v353.6l162.5-52.6z" />
             <path
@@ -88,12 +86,19 @@ export default class Dropdown extends Component {
           </svg>
           {/* Commented out until media breakpoints are in place
           <span>{ items[0].title }</span> */}
-          <i aria-hidden="true" className="dropdown__arrow" />
+          <i aria-hidden="true" className="leading-none before:content-['▾']" />
         </button>
-        <div className={`dropdown__list ${activeMod}`}>
-          <ul>
+        <div
+          className={`${
+            this.state.active ? "block" : "hidden"
+          } absolute top-full right-0 text-[13px] bg-[#526b78] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.4)] z-[9999]`}
+        >
+          <ul className="pt-1">
             {items.map((item, i) => (
-              <li key={item.title}>
+              <li
+                key={item.title}
+                className="py-1 px-2 list-none text-white transition-all duration-[250ms] hover:bg-[#175d96]"
+              >
                 <a
                   onKeyDown={(event) =>
                     this._handleArrowKeys(i, items.length - 1, event)
@@ -102,9 +107,11 @@ export default class Dropdown extends Component {
                     this.links ? this.links.push(node) : (this.links = [node])
                   }
                   href={item.url}
-                  className="px-5 block"
+                  className="px-5 block text-white visited:text-white hover:text-white"
                 >
-                  <span lang={item.lang}>{item.title}</span>
+                  <span lang={item.lang} className="align-top text-left">
+                    {item.title}
+                  </span>
                 </a>
               </li>
             ))}
