@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "../../utilities/cn.mjs";
 
 export default function CodeBlockWithCopy({ children }) {
   const preRef = useRef(null);
@@ -113,32 +114,23 @@ export default function CodeBlockWithCopy({ children }) {
     [],
   );
 
-  const buttonClass = [
-    // Base styles
-    "absolute top-2 right-2 z-10",
-    "px-[0.7rem] py-[0.4rem] rounded-[0.35rem]",
-    "border-none cursor-pointer",
-    "text-xs font-medium",
-    "text-slate-200",
-    // Hover reveal
-    "opacity-0 group-hover:opacity-100",
-    // Transitions
-    "transition-[background-color,transform,opacity] duration-200",
-    "active:scale-95",
-    "focus-visible:outline-none focus-visible:opacity-100",
-    // State-based background
-    copyStatus === "copied"
-      ? "bg-green-600 hover:bg-green-700"
-      : copyStatus === "error"
-        ? "bg-red-500 hover:bg-red-700"
-        : "bg-[#175d96] hover:bg-[#2f85d0]",
-  ].join(" ");
-
   return (
-    <div className="relative mb-6 group">
+    <div className="code-block-wrapper relative mb-6 group">
       <button
         onClick={handleCopy}
-        className={buttonClass}
+        className={cn(
+          "copy-button",
+          "absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200",
+          "opacity-0 group-hover:opacity-100",
+          "transition-[background-color,transform,opacity] duration-200",
+          "active:scale-95",
+          "focus-visible:outline-none focus-visible:opacity-100",
+          copyStatus === "copied"
+            ? "bg-green-600 hover:bg-green-700"
+            : copyStatus === "error"
+              ? "bg-red-500 hover:bg-red-700"
+              : "bg-[#175d96] hover:bg-[#2f85d0]",
+        )}
         aria-label="Copy code to clipboard"
       >
         {copyStatus === "copied"
