@@ -1533,7 +1533,7 @@ Here is a Warning<span class="token operator">!</span>
 <p>This boolean is set to true when this is compiled by webpack.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Loaders were originally designed to also work as Babel transforms. Therefore, if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.</p></aside>
 <h2><span id="webpack-specific-properties"></span>Webpack specific properties<a href="#webpack-specific-properties" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>The loader interface provides all module relate information. However in rare cases you might need access to the compiler api itself.</p>
+<p>The loader interface provides all module relate information. However, in rare cases you might need access to the compiler API itself.</p>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Please note that using these webpack specific properties will have a negative impact on your loaders compatibility.</p></aside>
 <p>Therefore you should only use them as a last resort. Using them will reduce the portability of your loader.</p>
 <h3><span id="this_compilation"></span>this._compilation<a href="#this_compilation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>

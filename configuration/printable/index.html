@@ -4614,7 +4614,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
     <span class="token literal-property property">avoidEntryIife</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<aside class="warning"><p class="warning__prefix">warning</p><p>The <code>⁠optimization.avoidEntryIife</code> option can negatively affect build performance, if you prioritize build performance over these optimizations, consider disabling this option.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>The <code>optimization.avoidEntryIife</code> option can negatively affect build performance. If you prioritize build performance over these optimizations, consider disabling this option.</p></aside>
 <h2><span id="optimizationflagincludedchunks"></span>optimization.flagIncludedChunks<a href="#optimizationflagincludedchunks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code></p>
 <p>Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default <code>optimization.flagIncludedChunks</code> is enabled in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> and disabled elsewise.</p>
@@ -4748,7 +4748,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
     <span class="token literal-property property">moduleIds</span><span class="token operator">:</span> <span class="token string">&quot;deterministic&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<p><code>deterministic</code> option is useful for long term caching, but still results in smaller bundles compared to <code>hashed</code>. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when <code>optimization.moduleIds</code> is set to <code>deterministic</code>. To override the default behaviour set <code>optimization.moduleIds</code> to <code>false</code> and use the <code>webpack.ids.DeterministicModuleIdsPlugin</code>.</p>
+<p>The <code>deterministic</code> option is useful for long term caching, but still results in smaller bundles compared to <code>hashed</code>. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when <code>optimization.moduleIds</code> is set to <code>deterministic</code>. To override the default behaviour set <code>optimization.moduleIds</code> to <code>false</code> and use the <code>webpack.ids.DeterministicModuleIdsPlugin</code>.</p>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper"><button class="copy-button copy" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
