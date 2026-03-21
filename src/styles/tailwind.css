@@ -50,6 +50,9 @@
 .DocSearch-Button .DocSearch-Search-Icon {
   @apply text-white! lg:text-gray-100!;
 }
+.text-rotater--slide-up {
+  @apply transition-transform duration-[1000ms] ease-[cubic-bezier(0.7,0,0.3,1)] -translate-y-full;
+}
 
 /* Reading Progress – keyframes for scroll-driven animation */
 @keyframes grow-progress {
