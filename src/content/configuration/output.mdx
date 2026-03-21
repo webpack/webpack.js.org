@@ -1604,13 +1604,19 @@ export default {
     },
   },
 };
-In this case, the default export of your entry module is assigned to the library name:
+```
 
+In this case, the entry module's `default export` is assigned to the library name.
+
+```js
 const MyLibrary = _entry_return_.default;
-Example: exporting a nested property
+```
+
+### Example: exporting a nested property
 
 You can also pass an array to define a path to a specific export:
 
+```js
 export default {
   output: {
     library: {
@@ -1620,7 +1626,12 @@ export default {
     },
   },
 };
+```
+
+```js
 const MyLibrary = _entry_return_.default.subModule;
+```
+
 ### output.library.auxiliaryComment
 
 Add a comment in the UMD wrapper.

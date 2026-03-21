@@ -155,7 +155,6 @@ Please do not assume things are simple. Avoid words like 'just', 'simply'.
 
 ### Configuration defaults and types
 
-
 Webpack configuration defaults can vary depending on the selected mode. The two used are `development` and `production`, and each applies different default optimizations.
 
 #### Development mode defaults
@@ -178,8 +177,9 @@ Webpack configuration defaults can vary depending on the selected mode. The two 
 module.exports = {
   mode: "development",
 };
+```
 
-Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
+Always provide types and defaults for all documented options to keep the documentation clear and accessible. Types and defaults should be added after introducing the option.
 
 **configuration.example.option**
 
@@ -247,3 +247,7 @@ An example can be found on the [`options` section of the EvalSourceMapDevToolPlu
 ### Adding links
 
 Please use relative URLs (such as `/concepts/mode/`) to link our own content instead of absolute URLs (such as `https://webpack.js.org/concepts/mode/`).
+
+```js
+
+```
