@@ -48,10 +48,7 @@ export default class TextRotater extends PureComponent {
         "
       >
         <div
-          className="
-            text-rotater__wrap
-            inline-flex flex-col text-left
-          "
+          className="inline-flex flex-col text-left"
           ref={(trw) => (this.textRotatorWrap = trw)}
           onTransitionEnd={this._handleTransitionEnd}
           style={{ height: contentHeight, width: maxWidth }}
