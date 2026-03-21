@@ -1586,11 +1586,13 @@ T> Read the [authoring libraries guide](/guides/author-libraries/) guide for mor
 
 ### output.library.export
 
-Specify which export should be exposed as a library.
+Specify which part of your module should be exposed as the library when it is consumed by other applications.
+
+By default, the entire module (namespace object) is exposed. However, in many cases, you may want to expose only a specific export, such as the default export or a particular function.
 
 - Type: `string | string[]`
 
-It is `undefined` by default, which will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using [`output.library.type: 'var'`](#type-var).
+#### Example: exporting the default export
 
 ```js
 export default {
@@ -1602,18 +1604,13 @@ export default {
     },
   },
 };
-```
+In this case, the default export of your entry module is assigned to the library name:
 
-The default export of your entry point will be assigned to the library name:
-
-```js
-// if your entry has a default export
 const MyLibrary = _entry_return_.default;
-```
+Example: exporting a nested property
 
-You can pass an array to `output.library.export` as well, it will be interpreted as a path to a module to be assigned to the library name:
+You can also pass an array to define a path to a specific export:
 
-```js
 export default {
   output: {
     library: {
@@ -1623,14 +1620,7 @@ export default {
     },
   },
 };
-```
-
-And here's the library code:
-
-```js
 const MyLibrary = _entry_return_.default.subModule;
-```
-
 ### output.library.auxiliaryComment
 
 Add a comment in the UMD wrapper.
