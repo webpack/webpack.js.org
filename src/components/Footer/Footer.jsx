@@ -6,7 +6,7 @@ import Container from "../Container/Container.jsx";
 import Link from "../Link/Link.jsx";
 
 const footerLinkClasses =
-  "text-[11px] uppercase text-[#777676] hover:text-[#333333]";
+  "text-[11px] uppercase text-[#777676] dark:text-[#cccccc] hover:text-[#333333] dark:hover:text-[#ffffff]";
 
 const Footer = () => (
   <footer className="w-full flex-[0_0_auto] print:hidden">
@@ -14,13 +14,13 @@ const Footer = () => (
       <div className="mb-[24px] flex justify-center">
         <a href="https://openjsf.org" target="_blank" rel="noopener noreferrer">
           <img
-            className="h-[40px] w-auto"
+            className="h-[40px] w-auto dark:invert"
             src={OpenJSLogo}
             alt="OpenJS Foundation Logo"
           />
         </a>
       </div>
-      <p className="mx-auto text-[15px] leading-[1.6] text-[#333333]">
+      <p className="mx-auto text-[15px] leading-[1.6] text-[#333333] dark:text-[#e0e0e0]">
         Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and
         webpack contributors. All rights reserved. The{" "}
         <a href="https://openjsf.org">OpenJS Foundation</a> has registered
@@ -36,7 +36,7 @@ const Footer = () => (
         holders. Use of them does not imply any affiliation with or endorsement
         by them.
       </p>
-      <p className="mx-auto mt-[18px] text-[15px] leading-[1.6] text-[#333333]">
+      <p className="mx-auto mt-[18px] text-[15px] leading-[1.6] text-[#333333] dark:text-[#e0e0e0]">
         <a href="https://openjsf.org">The OpenJS Foundation</a> |{" "}
         <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |{" "}
         <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |{" "}
