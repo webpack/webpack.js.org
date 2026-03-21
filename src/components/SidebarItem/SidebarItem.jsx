@@ -1,12 +1,9 @@
 import PropTypes from "prop-types";
 import { Component } from "react";
-import "./SidebarItem.scss";
 import { NavLink } from "react-router-dom";
 import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
 import BarIcon from "../../styles/icons/vertical-bar.svg";
 import list2Tree from "../../utilities/list2Tree/index.js";
-
-const block = "sidebar-item";
 
 export default class SidebarItem extends Component {
   static propTypes = {
@@ -34,19 +31,26 @@ export default class SidebarItem extends Component {
     }
   }
 
-  renderAnchors(anchors) {
+  renderAnchors(anchors, isOpen) {
     return (
-      <ul className={`${block}__anchors`}>
+      <ul
+        className={`relative my-[0.35em] basis-full list-none flex-wrap overflow-hidden pl-6 leading-[19px] before:absolute before:left-6 before:top-0 before:h-[calc(100%-0.6em)] before:border-l before:border-dashed before:border-[#999999] before:content-[''] ${
+          isOpen ? "flex" : "hidden"
+        }`}
+      >
         {anchors.map((anchor) => (
           <li
             key={this._generateAnchorURL(anchor)}
-            className={`${block}__anchor`}
+            className="relative my-[0.25em] basis-full truncate pl-4 first:mt-0 last:mb-0 before:absolute before:left-0 before:top-[10px] before:w-[0.5em] before:border-b before:border-dashed before:border-[#999999] before:content-['']"
             title={anchor.title}
           >
-            <NavLink to={this._generateAnchorURL(anchor)}>
+            <NavLink
+              to={this._generateAnchorURL(anchor)}
+              className="text-slate-700 hover:text-[#175d96]"
+            >
               {anchor.title2}
             </NavLink>
-            {anchor.children && this.renderAnchors(anchor.children)}
+            {anchor.children && this.renderAnchors(anchor.children, isOpen)}
           </li>
         ))}
       </ul>
@@ -55,48 +59,54 @@ export default class SidebarItem extends Component {
 
   render() {
     const { title, anchors = [] } = this.props;
-    const openMod = this.state.open ? `${block}--open` : "";
-    const disabledMod = anchors.length === 0 ? `${block}--disabled` : "";
+    const isOpen = this.state.open;
+    const hasAnchors = anchors.length > 0;
 
     const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
     const tree = list2Tree(title, filteredAnchors);
 
     return (
-      <div className={`${block} ${openMod} ${disabledMod}`}>
-        {anchors.length > 0 ? (
+      <div className="relative my-[0.6em] flex flex-wrap text-[15px]">
+        {hasAnchors ? (
           <button
-            className={`${block}__toggle-button`}
+            className="flex items-center border-0 bg-transparent p-0"
             onClick={this._toggle.bind(this)}
             aria-label={`Toggle ${title} section`}
-            aria-expanded={this.state.open}
+            aria-expanded={isOpen}
           >
             <ChevronRightIcon
               width={15}
               height={17}
               fill="#175d96"
-              className={`${block}__toggle`}
+              className={`mr-2 mt-[0.125em] basis-auto shrink-0 cursor-pointer text-[#175d96] transition-all duration-[250ms] hover:text-[#333333] ${
+                isOpen ? "origin-center rotate-90" : ""
+              }`}
             />
           </button>
         ) : (
           <BarIcon
-            className={`${block}__toggle`}
+            className="mr-2 mt-[0.125em] basis-auto shrink-0 cursor-pointer text-[#aaaaaa]"
             width={15}
             height={17}
-            fill="#175d96"
+            fill="#aaaaaa"
           />
         )}
 
         <NavLink
           end
           key={this.props.url}
-          className={`${block}__title`}
+          className={({ isActive }) =>
+            `max-w-[85%] basis-auto grow truncate text-slate-700 ${
+              isActive ? "font-semibold text-[#333333]" : ""
+            }`
+          }
           to={this.props.url}
           onClick={this.scrollTop}
         >
           {title}
         </NavLink>
 
-        {anchors.length > 0 ? this.renderAnchors(tree) : null}
+        {hasAnchors ? this.renderAnchors(tree, isOpen) : null}
       </div>
     );
   }
