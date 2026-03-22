@@ -252,7 +252,15 @@ T> Note that the `library` setup is tied to the `entry` configuration. For most 
 
 ## Externalize Lodash
 
-Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a _peer dependency_. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
+Now, if you run `npx webpack`, you will find that a largish bundle is created because `lodash` is bundled directly into your code. 
+
+To prevent duplicate bundles, you can externalize `lodash` in your webpack config. How you classify `lodash` in your `package.json` then depends entirely on your library's architecture:
+
+* **`peerDependencies`**: Use this if your library expects the host application to provide a single, shared instance of `lodash` at runtime (standard for UI components and singletons).
+* **`dependencies`**: Use this if you are not pre-bundling the library, and instead rely strictly on the consumer's package manager (npm/yarn) to resolve the dependency tree.
+* **`devDependencies`**: Use this if you are intentionally compiling a standalone, fully-bundled artifact where `lodash` is swallowed inside your final output file.
+
+For this guide's scenario, where we want to externalize the utility to prevent consumer bundle bloat, we will classify it as a `peerDependency`.
 
 This can be done using the [`externals`](/configuration/externals/) configuration:
 
