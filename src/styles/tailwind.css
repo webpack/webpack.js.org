@@ -71,3 +71,23 @@
 .animation-timeline-scroll {
   animation-timeline: scroll(root block);
 }
+
+/* splash layout */
+.splash__wrap {
+  @apply block md:-mx-7.5 before:content-[''] before:table after:content-[''] after:table after:clear-both;
+}
+.splash__install {
+  @apply max-w-100 m-auto;
+}
+.splash__left {
+  @apply w-full float-left md:w-1/2 md:px-3.75;
+}
+.splash__left p {
+  @apply text-left;
+}
+.splash__right {
+  @apply w-full float-left md:w-1/2 md:px-3.75 mb-[1em];
+}
+.splash__right p {
+  @apply text-left;
+}
