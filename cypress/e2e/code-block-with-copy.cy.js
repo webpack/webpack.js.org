@@ -92,3 +92,73 @@ describe("CodeBlockWithCopy", () => {
     });
   });
 });
+import React, { useState } from "react";
+
+const CodeBlockWithCopy = ({ title, children, className = "" }) => {
+  const [copied, setCopied] = useState(false);
+
+  const isDiff = className.includes("language-diff");
+
+  const getTextToCopy = () => {
+    if (!children) return "";
+
+    let rawText = "";
+
+    if (typeof children === "string") {
+      rawText = children;
+    } else if (Array.isArray(children)) {
+      rawText = children.join("");
+    } else if (children.props?.children) {
+      rawText = children.props.children;
+    }
+
+    if (isDiff) {
+      return rawText
+        .split("\n")
+        .filter((line) => !line.startsWith("-")) // remove deleted lines
+        .map((line) => line.replace(/^\+/, "")) // remove "+" prefix
+        .join("\n");
+    }
+
+    return rawText;
+  };
+
+  const handleCopy = async () => {
+    const text = getTextToCopy();
+
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error("Copy failed", err);
+    }
+  };
+
+  return (
+    <>
+      {/* REQUIRED for Cypress */}
+      <div>
+        <strong>{title}</strong>
+      </div>
+
+      {/* MUST be NEXT sibling */}
+      <div className="code-block-wrapper relative group bg-gray-900 rounded-lg overflow-hidden">
+        {/* Copy Button */}
+        <button
+          className="copy-button absolute top-2 right-2 text-xs px-2 py-1 bg-gray-700 text-white rounded opacity-0 group-hover:opacity-100 transition"
+          onClick={handleCopy}
+        >
+          {copied ? "Copied" : "Copy"}
+        </button>
+
+        {/* Code Block */}
+        <pre className="p-4 overflow-x-auto text-sm">
+          <code className={className}>{children}</code>
+        </pre>
+      </div>
+    </>
+  );
+};
+
+export default CodeBlockWithCopy;
