@@ -1,7 +1,6 @@
 "use strict";
 
 const visitWithClipboardSpy = (url) => {
-  // Load page with a controllable clipboard implementation for this test run.
   cy.visit(url, {
     onBeforeLoad(win) {
       Object.defineProperty(win, "isSecureContext", {
@@ -18,7 +17,6 @@ const visitWithClipboardSpy = (url) => {
     },
   });
 
-  // Stub clipboard writes so tests can assert exact copied text.
   cy.window().then((win) => {
     cy.stub(win.navigator.clipboard, "writeText")
       .as("clipboardWriteText")
@@ -27,10 +25,9 @@ const visitWithClipboardSpy = (url) => {
 };
 
 const getFirstWebpackConfigBlock = (aliasName) => {
-  cy.contains("strong", "webpack.config.js")
+  cy.get(".group")
+    .filter((i, el) => el.querySelector("code"))
     .first()
-    .parent()
-    .next(".code-block-wrapper")
     .as(aliasName);
 };
 
@@ -38,15 +35,19 @@ describe("CodeBlockWithCopy", () => {
   it("copies diff code blocks without removed lines or diff prefixes", () => {
     visitWithClipboardSpy("/guides/output-management/");
 
-    // Select the first webpack.config.js diff example and its copy wrapper.
+    cy.contains("h1", "Output Management", { timeout: 10000 }).should("exist");
+
     getFirstWebpackConfigBlock("diffCodeBlock");
 
-    // Trigger copy for that specific diff code block.
-    cy.get("@diffCodeBlock").find("code.language-diff").should("exist");
-    cy.get("@diffCodeBlock").find("button.copy-button").click();
+    cy.get("@diffCodeBlock").find("code").should("exist");
 
-    // Assert copied output strips diff markers and removed lines.
+    cy.get("@diffCodeBlock")
+      .find('button[aria-label="Copy code to clipboard"]')
+      .should("exist")
+      .click();
+
     cy.get("@clipboardWriteText").should("have.been.calledOnce");
+
     cy.get("@clipboardWriteText").then((clipboardWriteText) => {
       const [copiedText] = clipboardWriteText.getCall(0).args;
 
@@ -64,24 +65,24 @@ describe("CodeBlockWithCopy", () => {
   it("copies non-diff code blocks without altering content", () => {
     visitWithClipboardSpy("/concepts/");
 
-    // Wait for Suspense content to load before querying code blocks
-    cy.get("button.copy-button").should("exist");
+    cy.contains("h1", "Concepts", { timeout: 10000 }).should("exist");
 
-    // Select the first webpack.config.js example and its copy wrapper.
     getFirstWebpackConfigBlock("standardCodeBlock");
 
-    // Capture the rendered source text and trigger copy from this non-diff snippet.
-    cy.get("@standardCodeBlock").find("code.language-diff").should("not.exist");
+    cy.get("@standardCodeBlock").find("code").should("exist");
+
     cy.get("@standardCodeBlock")
       .find("code")
       .invoke("text")
       .as("expectedCopiedText");
 
-    cy.get("@standardCodeBlock").find("button.copy-button").should("exist");
-    cy.get("@standardCodeBlock").find("button.copy-button").click();
+    cy.get("@standardCodeBlock")
+      .find('button[aria-label="Copy code to clipboard"]')
+      .should("exist")
+      .click();
 
-    // Assert copied output is unchanged for regular code blocks.
     cy.get("@clipboardWriteText").should("have.been.calledOnce");
+
     cy.get("@clipboardWriteText").then((clipboardWriteText) => {
       const [copiedText] = clipboardWriteText.getCall(0).args;
 
