@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import "./CodeBlockWithCopy.scss";
+// Tailwind CSS is now used for styling. Custom SCSS removed.
 
 export default function CodeBlockWithCopy({ children }) {
   const preRef = useRef(null);
@@ -115,11 +115,19 @@ export default function CodeBlockWithCopy({ children }) {
   );
 
   return (
-    <div className="code-block-wrapper">
+    <div className="relative mb-6 group">
       <button
         onClick={handleCopy}
-        className={`copy-button ${copyStatus}`}
         aria-label="Copy code to clipboard"
+        className={`absolute top-2 right-2 z-10 px-3 py-1.5 rounded-md border-none cursor-pointer text-xs font-medium opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-300
+          ${
+            copyStatus === "copied"
+              ? "bg-green-600 hover:bg-green-700 text-gray-100"
+              : copyStatus === "error"
+                ? "bg-red-600 hover:bg-red-700 text-gray-100"
+                : "bg-blue-700 hover:bg-blue-600 text-blue-100"
+          }
+          active:scale-95 focus:outline-none`}
       >
         {copyStatus === "copied"
           ? "Copied!"
