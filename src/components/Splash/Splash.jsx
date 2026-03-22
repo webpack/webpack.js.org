@@ -47,7 +47,7 @@ const Splash = () => {
     <div className="relative overflow-hidden [&_h1]:justify-center [&_h2]:justify-center">
       <SplashViz />
 
-      <div className="relative text-center bg-[#f3f3f3] page__content [&_p]:my-[1em]! [&_p]:mx-auto! [&_p]:max-w-200 [&_pre]:text-left [&_.icon-link]:hidden">
+      <div className="relative text-center bg-[#f3f3f3] dark:bg-[#202020] page__content [&_p]:my-[1em]! [&_p]:mx-auto! [&_p]:max-w-200 [&_pre]:text-left [&_.icon-link]:hidden">
         <Container className="py-[5em] px-[1em] md:px-[1.5em]">
           <Markdown>
             <SplashContent />
