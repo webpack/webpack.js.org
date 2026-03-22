@@ -78,14 +78,14 @@ export default class SidebarItem extends Component {
               width={15}
               height={17}
               fill="#175d96"
-              className={`mr-2 mt-[0.125em] basis-auto shrink-0 cursor-pointer text-[#175d96] transition-all duration-[250ms] hover:text-[#333333] ${
+              className={`mr-2 basis-auto shrink-0 self-center text-[#175d96] transition-all duration-[250ms] hover:text-[#333333] ${
                 isOpen ? "origin-center rotate-90" : ""
               }`}
             />
           </button>
         ) : (
           <BarIcon
-            className="mr-2 mt-[0.125em] basis-auto shrink-0 cursor-pointer text-[#aaaaaa]"
+            className="mr-2 basis-auto shrink-0 self-center text-[#aaaaaa]"
             width={15}
             height={17}
             fill="#aaaaaa"
@@ -96,7 +96,7 @@ export default class SidebarItem extends Component {
           end
           key={this.props.url}
           className={({ isActive }) =>
-            `max-w-[85%] basis-auto grow truncate text-slate-700 ${
+            `min-w-0 flex-1 truncate text-slate-700 ${
               isActive ? "font-semibold text-[#333333]" : ""
             }`
           }
