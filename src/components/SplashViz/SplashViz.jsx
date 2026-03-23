@@ -14,9 +14,9 @@ import HomeSVG from "./SplashVizSVG.mjs";
 export default class SplashViz extends Component {
   render() {
     return (
-      <section className="relative grid grid-rows-[auto_1fr] overflow-hidden pt-32 pb-16 px-4 min-h-[40rem] h-[clamp(35rem,100vh-80px,45rem)] bg-[#2b3a42] dark:bg-gray-900 md:h-[clamp(30rem,100vh-80px,35rem)] sm:min-h-[clamp(40rem,100vh-80px,50rem)]">
+      <section className="relative grid grid-rows-[auto_1fr] overflow-hidden p-4 pb-16 bg-[#2b3a42] dark:bg-gray-900 h-[clamp(35rem,calc(100vh-80px),45rem)] md:h-[clamp(30rem,calc(100vh-80px),35rem)] sm:min-h-[clamp(40rem,calc(100vh-80px),50rem)]">
         <h1
-          className="text-white text-center font-light text-4xl md:text-5xl"
+          className="text-white text-center font-light text-3xl md:text-4xl mt-[80px] md:mt-[90px]"
           style={{ gridRow: "1/2" }}
         >
           <span> bundle your</span>
