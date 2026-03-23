@@ -361,8 +361,23 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   }
   p a,
   li a {
+    color: #1f5fbf;
     text-decoration: none;
     font-weight: 600;
+  }
+  p a:hover,
+  li a:hover {
+    color: #174ea6;
+  }
+
+  .dark p a,
+  .dark li a {
+    color: #58a6ff;
+  }
+
+  .dark p a:hover,
+  .dark li a:hover {
+    color: #79c0ff;
   }
 
   p a:focus-visible,
