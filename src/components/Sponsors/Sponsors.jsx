@@ -1,39 +1,68 @@
 import AGChartsLogo from "../../assets/ag-charts-logo.png";
+import AGChartsLogoDark from "../../assets/ag-charts-logo-dark.png";
 import AGLogo from "../../assets/ag-grid-logo.png";
+import AGLogoDark from "../../assets/ag-grid-logo-dark.png";
 import WebpackIcon from "../../assets/icon-square-small.svg";
 import Link from "../Link/Link.jsx";
-// Tailwind CSS is now used for styling. Custom SCSS removed.
+
+// Tailwind CSS is used for styling
 
 const Sponsors = () => (
   <div className="absolute h-full w-[250px] ml-[-250px] mr-2.5">
-    <div className="sticky hidden xl:flex flex-wrap justify-center items-start border-r-2 border-gray-200 my-6 py-0 px-6 pb-12 overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-250 top-24">
+    <div className="sticky hidden xl:flex flex-wrap justify-center items-start border-r-2 border-gray-200 my-6 px-6 pb-12 overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-200 top-24">
+      {/* AG Grid */}
       <div className="bg-gray-900 dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-700 hover:scale-105">
         <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
+          {/* Light mode */}
           <img
-            className="dark:content-[url('../../assets/ag-grid-logo-dark.png')]"
             src={AGLogo}
             alt="ag grid"
             width={220}
             loading="lazy"
+            className="block dark:hidden"
+          />
+
+          {/* Dark mode */}
+          <img
+            src={AGLogoDark}
+            alt="ag grid dark"
+            width={220}
+            loading="lazy"
+            className="hidden dark:block"
           />
         </Link>
       </div>
+
+      {/* AG Charts */}
       <div className="bg-gray-900 dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-700 hover:scale-105">
         <Link to="https://charts.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
+          {/* Light mode */}
           <img
-            className="dark:content-[url('../../assets/ag-charts-logo-dark.png')]"
             src={AGChartsLogo}
             alt="ag charts"
             width={220}
             loading="lazy"
+            className="block dark:hidden"
+          />
+
+          {/* Dark mode */}
+          <img
+            src={AGChartsLogoDark}
+            alt="ag charts dark"
+            width={220}
+            loading="lazy"
+            className="hidden dark:block"
           />
         </Link>
       </div>
+
+      {/* Webpack Sponsor */}
       <div className="bg-gray-900 dark:bg-gray-800 shadow-lg rounded-lg m-2 flex flex-col items-center transition-transform duration-200 hover:bg-gray-700 hover:scale-105">
         <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
           <div className="text-2xl text-gray-700 dark:text-gray-300 my-4 text-center">
             Datagrid and Charting for Enterprise Applications
           </div>
+
           <div className="flex justify-center w-full">
             <img
               src={WebpackIcon}
@@ -43,6 +72,7 @@ const Sponsors = () => (
               loading="lazy"
             />
           </div>
+
           <div className="italic text-xl text-gray-700 dark:text-gray-300 my-4 text-center">
             Proud to partner with webpack
           </div>
