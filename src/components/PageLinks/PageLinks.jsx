@@ -13,7 +13,7 @@ function Separator() {
 }
 
 const classes =
-  "text-gray-400 dark:text-gray-200 text-sm cursor-pointer font-sans hover:underline hover:text-gray-500 dark:hover:text-white transition-colors";
+  "text-gray-500 dark:text-gray-200 text-sm cursor-pointer font-sans hover:underline hover:text-gray-500 dark:hover:text-white transition-colors";
 
 function _handlePrintClick(event) {
   event.preventDefault();
