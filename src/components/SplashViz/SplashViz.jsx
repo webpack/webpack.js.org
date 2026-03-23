@@ -16,7 +16,7 @@ export default class SplashViz extends Component {
     return (
       <section className="relative grid grid-rows-[auto_1fr] overflow-hidden p-4 pb-16 bg-[#2b3a42] dark:bg-gray-900 h-[clamp(35rem,calc(100vh-80px),45rem)] md:h-[clamp(30rem,calc(100vh-80px),35rem)] sm:min-h-[clamp(40rem,calc(100vh-80px),50rem)]">
         <h1
-          className="text-white text-center font-light text-3xl md:text-4xl mt-[80px] md:mt-[90px]"
+          className="text-white text-center font-light text-[30px] md:text-[40px] mt-[80px] md:mt-[90px]"
           style={{ gridRow: "1/2" }}
         >
           <span> bundle your</span>
