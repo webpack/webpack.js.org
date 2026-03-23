@@ -26,7 +26,9 @@ First install the TypeScript compiler and loader by running:
 npm install --save-dev typescript ts-loader
 ```
 
-Now we'll modify the directory structure & the configuration files:
+Now we'll modify the directory structure & the configuration files, we need to swap our JavaScript files over to TypeScript. Rename the core files by changing their extensions from .js to .ts as shown below:
+`.src/index.js` to `./src/index.ts`
+and `webpack.config.js` to `webpack.config.ts`
 
 **project**
 
@@ -35,7 +37,7 @@ Now we'll modify the directory structure & the configuration files:
   ├── package.json
   ├── package-lock.json
 + ├── tsconfig.json
-- ├── webpack.config.ts
+- ├── webpack.config.js
 + ├── webpack.config.ts
   ├── /dist
   │   ├── bundle.js
@@ -116,7 +118,14 @@ export default config;
 
 This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
 
-Now lets change the import of `lodash` in our `./index.ts` due to the fact that there is no default export present in `lodash` definitions.
+Next, we need to adjust how we import `lodash` in our `./index.ts`. Since the lodash definitions don't include a default export, we'll need to update our import statement.
+First, make sure to install the [TypeScript definitions](#using-third-party-libraries):
+
+```bash
+npm install --save-dev @types/lodash
+```
+
+Then, update your import at the top of the file:
 
 **./index.ts**
 
@@ -320,7 +329,7 @@ To enable the types for the whole project, add `webpack/module` to `compilerOpti
 
 When installing third party libraries from npm, it is important to remember to install the typing definition for that library.
 
-For example, if we want to install lodash we can run the following command to get the typings for it:
+For example, if we want to use lodash, we should run the following command to install its type definitions:
 
 ```bash
 npm install --save-dev @types/lodash
