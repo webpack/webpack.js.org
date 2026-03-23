@@ -68,7 +68,7 @@ export default class SidebarMobile extends Component {
   _getSections() {
     let pathname = "";
 
-    if (window && window.location !== undefined) {
+    if (typeof window !== "undefined" && window.location) {
       pathname = window.location.pathname;
     }
 
@@ -106,7 +106,7 @@ export default class SidebarMobile extends Component {
   _getPages(pages) {
     let pathname = "";
 
-    if (window.location !== undefined) {
+    if (typeof window !== "undefined" && window.location) {
       pathname = window.location.pathname;
     }
 
