@@ -12,6 +12,7 @@ Explore what's new in this release:
 - [**Plugin Validation with `compiler.hooks.validate`**](#plugin-validation-with-compilerhooksvalidate)
 - [**CSS Modules with Runtime Style Injection**](#css-modules-with-runtime-style-injection)
 - [**Better Tree Shaking for CommonJS Destructuring**](#better-tree-shaking-for-commonjs-destructuring)
+- [**Getting Started with `create-webpack-app`**](#getting-started-with-create-webpack-app)
 - [**Context Support for VirtualUrlPlugin**](#context-support-for-virtualurlplugin)
 - [**Experimental JavaScript Parsing with `oxc-parser`**](#experimental-javascript-parsing-with-oxc-parser)
 - [**Ecosystem Updates**](#ecosystem-updates)
@@ -138,6 +139,57 @@ This also works with `module.require`:
 
 ```js
 const { a, b } = module.require("./module");
+```
+
+## Getting Started with `create-webpack-app`
+
+[`create-webpack-app`](https://www.npmjs.com/package/create-webpack-app) is now the recommended way to scaffold a new webpack project. Previously, this functionality lived inside `webpack-cli` as the `webpack init` command, but it has been extracted into its own standalone package with the release of webpack-cli 7.
+
+This means you can now create a new webpack project with a single command, without needing to install `webpack-cli` first:
+
+```bash
+npx create-webpack-app
+```
+
+The CLI walks you through an interactive setup where you choose the pieces that fit your project:
+
+```bash
+$ npx create-webpack-app
+
+? Which of the following JS solutions do you want to use? Typescript
+? Do you want to use webpack-dev-server? Yes
+? Do you want to simplify the creation of HTML files for your bundle? Yes
+? Do you want to add PWA support? No
+? Which of the following CSS solutions do you want to use? CSS only
+? Will you be using PostCSS in your project? Yes
+? Do you want to extract CSS for every file? Only for Production
+? Which package manager do you want to use? npm
+
+[create-webpack] ℹ️  Initializing a new Webpack project...
+[create-webpack] ✅ Project dependencies installed successfully!
+```
+
+The generated project includes a working `webpack.config.js`, dev server configuration, and the loader/plugin setup for the options you selected. From there, you can start developing immediately:
+
+```bash
+cd my-project
+npm start
+```
+
+This approach follows the same pattern popularized by tools like `create-react-app` and `create-vite`: a single `npx` command that gets you from zero to a working project without manual configuration.
+
+You can also use the `init` subcommand if you prefer the explicit form:
+
+```bash
+npx create-webpack-app init
+```
+
+Beyond project scaffolding, `create-webpack-app` can also generate the boilerplate for custom loaders and plugins:
+
+```bash
+npx create-webpack-app loader
+
+npx create-webpack-app plugin
 ```
 
 ## Context Support for VirtualUrlPlugin
