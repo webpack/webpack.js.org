@@ -3808,6 +3808,7 @@ It&#x27;s supported by all modern browsers and the recommended way of writing mo
 <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> module <span class="token keyword">from</span> <span class="token string">&quot;./module.js&quot;</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span><span class="token function">fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
+<p>When importing a namespace object from an ECMAScript Module, webpack follows the ESM convention of setting <code>Symbol.toStringTag</code> to &quot;Module&quot; on the namespace object.</p>
 <h2><span id="flagging-modules-as-esm"></span>Flagging modules as ESM<a href="#flagging-modules-as-esm" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>By default webpack will automatically detect whether a file is an ESM or a different module system.</p>
 <p>Node.js established a way of explicitly setting the module type of files by using a property in the <code>package.json</code>.
