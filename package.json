@@ -75,6 +75,7 @@
   "dependencies": {
     "@docsearch/react": "^4.6.0",
     "@react-spring/web": "^10.0.3",
+    "clsx": "^2.1.1",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.8.1",
     "react": "^19.2.4",
@@ -84,6 +85,7 @@
     "react-router-dom": "^7.13.1",
     "react-tiny-popover": "^8.1.6",
     "react-use": "^17.6.0",
+    "tailwind-merge": "^3.5.0",
     "webpack-pwa-manifest": "^4.3.0",
     "workbox-window": "^7.4.0"
   },

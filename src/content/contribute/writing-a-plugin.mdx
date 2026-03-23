@@ -62,6 +62,7 @@ Plugins are instantiated objects with an `apply` method on their prototype. This
 ```js
 class HelloWorldPlugin {
   apply(compiler) {
+    // This hook runs when the build process is fully completed
     compiler.hooks.done.tap(
       "Hello World Plugin",
       (

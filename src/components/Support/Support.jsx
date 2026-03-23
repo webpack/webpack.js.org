@@ -9,9 +9,6 @@ import Additional from "./AdditionalSupporters.mjs";
 /* eslint import/no-unresolved: ["error", { ignore: ["_supporters\.json$"] }] */
 import Backers from "./_supporters.json";
 
-// Load Styling
-import "./Support.scss";
-
 const SUPPORTERS = [...Backers];
 
 // Merge or add additional backers/sponsors
@@ -87,6 +84,16 @@ const monthlyRanks = {
 function formatMoney(number) {
   return Math.round(number).toLocaleString("en-US");
 }
+
+const AVATAR_CLASSES = {
+  backer:
+    "inline-block w-[31px] h-[31px] rounded-full border border-white shadow-[0_0_0_1px_rgb(112,202,10)] overflow-hidden align-middle",
+  latest: "max-h-16 max-w-48 align-middle",
+  bronze: "max-h-8 max-w-24 align-middle",
+  silver: "max-h-16 max-w-48 align-middle",
+  gold: "max-h-24 max-w-72 align-middle",
+  platinum: "max-h-32 max-w-full min-[400px]:max-w-96 align-middle",
+};
 
 export default class Support extends Component {
   static propTypes = {
@@ -198,8 +205,11 @@ export default class Support extends Component {
                   type === "monthly" ? "Monthly " : ""
                 }Sponsors`}
         </h2>
-        <div ref={(el) => (this.containerRef = el)} className="support">
-          <div className="support__description">
+        <div
+          ref={(el) => (this.containerRef = el)}
+          className="flex flex-wrap justify-center px-2 pb-4"
+        >
+          <div className="w-full mb-4">
             {rank === "backer" ? (
               <p>
                 The following <b>Backers</b> are individuals who have
@@ -216,7 +226,7 @@ export default class Support extends Component {
               </p>
             ) : (
               <p>
-                <b className="support__rank">
+                <b className="capitalize mr-1">
                   {type === "monthly" ? `${rank} monthly` : rank} sponsors
                 </b>
                 {type === "monthly" ? (
@@ -246,7 +256,7 @@ export default class Support extends Component {
               } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
             >
               <a
-                className="support__item"
+                className="relative mx-0.5 mb-0.5 dark:bg-white"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 href={
@@ -256,7 +266,7 @@ export default class Support extends Component {
               >
                 {
                   <img
-                    className={`support__${rank}-avatar`}
+                    className={AVATAR_CLASSES[rank]}
                     src={
                       inView && supporter.avatar ? supporter.avatar : SmallIcon
                     }
@@ -273,9 +283,9 @@ export default class Support extends Component {
             </Tooltip>
           ))}
 
-          <div className="support__bottom">
+          <div className="w-full mt-4">
             <a
-              className="support__button"
+              className="inline-block py-[0.4em] px-[1em] uppercase text-[#175d96] border border-[#175d96] rounded-4xl transition-all duration-[250ms] hover:bg-[#175d96] hover:text-white"
               href="https://opencollective.com/webpack#support"
             >
               Become a {rank === "backer" ? "backer" : "sponsor"}

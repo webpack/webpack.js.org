@@ -39,20 +39,14 @@ export default function Print(props) {
         fill="#175d96"
       />
       <a
-        className="sidebar-item__title flex flex-nowrap items-center"
+        className="sidebar-item__title flex items-center flex-nowrap"
         href={printUrl}
         rel="nofollow noopener noreferrer"
         title="Print"
         target="_blank"
       >
         Print Section
-        <img
-          className="h-20 mr-0.5"
-          src={icon}
-          width={27}
-          height={20}
-          alt="Printer Icon"
-        />
+        <img src={icon} alt="Printer Icon" className="h-[20px] w-[27px]" />
       </a>
     </div>
   );
