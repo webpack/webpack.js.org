@@ -6,7 +6,7 @@ contributors:
 ---
 
 Webpack 5.106 introduces plugin validation hooks, runtime style injection for CSS Modules, improved tree shaking for CommonJS, and experimental support for alternative JavaScript parsers.
- 
+
 - [Plugin Validation with `compiler.hooks.validate`](#plugin-validation-with-compilerhooksvalidate)
 - [CSS Modules with Runtime Style Injection](#css-modules-with-runtime-style-injection)
 - [Better Tree Shaking for CommonJS Destructuring](#better-tree-shaking-for-commonjs-destructuring)
@@ -23,8 +23,14 @@ This change also introduces an internal API so plugins can register validation t
 
 **Defaults**
 
-- In development mode, `validate` defaults to `true`.
-- In production mode, `validate` also defaults to `true`. However, if `experiments.futureDefaults` is enabled, it defaults to `false`.
+The default value of `validate` depends on the build mode and whether `experiments.futureDefaults` is enabled:
+
+| Mode        | `experiments.futureDefaults` | Default `validate` |
+| ----------- | :--------------------------: | :----------------: |
+| development |           `false`            |       `true`       |
+| development |            `true`            |       `true`       |
+| production  |           `false`            |       `true`       |
+| production  |            `true`            |      `false`       |
 
 **Config example**
 
@@ -175,15 +181,17 @@ module.exports = {
 
 You can find the full example in the webpack repository:
 [https://github.com/webpack/webpack/blob/main/examples/custom-javascript-parser/webpack.config.js](https://github.com/webpack/webpack/blob/main/examples/custom-javascript-parser/webpack.config.js)
- 
+
 ## Ecosystem Updates
- 
-- **Webpack-cli** has released a new major version, [7.0.0](https://github.com/webpack/webpack-cli/releases/tag/webpack-cli%407.0.0). The minimum supported Node.js version is now `20.9.0`, and configuration files are loaded via dynamic `import()` by default, which enables native TypeScript configuration support through Node.js type stripping without needing external loaders. The `--node-env` argument has been replaced by `--config-node-env`, and the deprecated programmatic API has been removed. Additionally, configuration freezing is now allowed, graceful shutdown has been improved when file system cache is enabled, and general performance improvements have been made. Check the [release for more information](https://github.com/webpack/webpack-cli/releases/tag/webpack-cli%407.0.0). 
-- **Webpack-dev-middleware** has released a new major version, [8.0.0](https://github.com/webpack/webpack-dev-middleware/releases/tag/v8.0.0). The minimum supported Node.js version is now `20.9.0` and the minimum webpack version is `5.101.0`. The `getFilenameFromUrl` function is now asynchronous, immutable asset caching (`cacheImmutable`) is enabled by default, and a new `forwardError` option allows forwarding errors to the next middleware. Support for plugin usage has also been added, and general performance improvements have been made. Check the [release for more information](https://github.com/webpack/webpack-dev-middleware/releases/tag/v8.0.0). 
+
+- **Webpack-cli** has released a new major version, [7.0.0](https://github.com/webpack/webpack-cli/releases/tag/webpack-cli%407.0.0). The minimum supported Node.js version is now `20.9.0`, and configuration files are loaded via dynamic `import()` by default, which enables native TypeScript configuration support through Node.js type stripping without needing external loaders.
+  The `--node-env` argument has been replaced by `--config-node-env`, and the deprecated programmatic API has been removed. Additionally, configuration freezing is now allowed, graceful shutdown has been improved when file system cache is enabled, and general performance improvements have been made. Check the [release for more information](https://github.com/webpack/webpack-cli/releases/tag/webpack-cli%407.0.0).
+- **Webpack-dev-middleware** has released a new major version, [8.0.0](https://github.com/webpack/webpack-dev-middleware/releases/tag/v8.0.0). The minimum supported Node.js version is now `20.9.0` and the minimum webpack version is `5.101.0`. The `getFilenameFromUrl` function is now asynchronous, immutable asset caching (`cacheImmutable`) is enabled by default, and a new `forwardError` option allows forwarding errors to the next middleware.
+  Support for plugin usage has also been added, and general performance improvements have been made. Check the [release for more information](https://github.com/webpack/webpack-dev-middleware/releases/tag/v8.0.0).
 - **Compression-webpack-plugin**, **html-minimizer-webpack-plugin**, **css-minimizer-webpack-plugin**, **image-minimizer-webpack-plugin**, and other plugins have released new major versions to align their minimum supported Node.js version to `20.9.0`, keeping consistency across the webpack ecosystem alongside the recent major releases of webpack-cli 7 and webpack-dev-middleware 8.
- 
+
 ## Other Improvements and Bug Fixes
- 
+
 Several bug fixes have been resolved since version [5.104](https://github.com/webpack/webpack/releases/tag/v5.104.0). Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for more details.
 
 ## Thanks
