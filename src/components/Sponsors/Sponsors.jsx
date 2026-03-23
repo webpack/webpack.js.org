@@ -11,7 +11,7 @@ const Sponsors = () => (
   <div className="absolute h-full w-[250px] ml-[-250px] mr-2.5">
     <div className="sticky hidden xl:flex flex-wrap justify-center items-start border-r-2 border-gray-200 my-6 px-6 pb-12 overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-200 top-24">
       {/* AG Grid */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-200 dark:hover:bg-gray-700 hover:scale-105">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105">
         <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
           {/* Light mode */}
           <img
@@ -34,7 +34,7 @@ const Sponsors = () => (
       </div>
 
       {/* AG Charts */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-200 dark:hover:bg-gray-700 hover:scale-105">
+      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105">
         <Link to="https://charts.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
           {/* Light mode */}
           <img
