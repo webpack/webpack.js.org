@@ -6,7 +6,7 @@ export default function Container(props = {}) {
   const { className = "" } = props;
 
   return (
-    <div className={`w-full max-w-[1024px] mx-auto ${className}`}>
+    <div className={`w-full max-w-screen-lg mx-auto ${className}`}>
       {props.children}
     </div>
   );
