@@ -367,6 +367,32 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     text-underline-offset: 2px;
     text-decoration-thickness: 1px;
   }
+  p a,
+  li a {
+    color: #1f5fbf;
+    font-weight: 600;
+  }
+
+  p a:hover,
+  li a:hover {
+    color: #174ea6;
+  }
+
+  .dark p a,
+  .dark li a {
+    color: #58a6ff;
+  }
+
+  .dark p a:hover,
+  .dark li a:hover {
+    color: #79c0ff;
+  }
+
+  p a:focus-visible,
+  li a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
   pre {
     background-color: #2d3748;
     color: #e2e8f0;
