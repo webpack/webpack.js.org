@@ -95,17 +95,48 @@ module.exports = {
 
 ## Better Tree Shaking for CommonJS Destructuring
 
-Webpack can now statically analyze **destructuring assignments directly from CommonJS `require`** (and `module.require`) and treat only the destructured properties as “referenced exports”, instead of conservatively assuming the whole `exports` object is used. This improves dead-code elimination in optimized builds and can reduce bundle size in codebases that still consume CommonJS modules.
+Webpack can now statically analyze **destructuring assignments directly from CommonJS `require`** (and `module.require`) and treat only the destructured properties as "referenced exports", instead of conservatively assuming the whole `exports` object is used. This improves dead-code elimination in optimized builds and can reduce bundle size in codebases that still consume CommonJS modules.
 
-**Examples**
+Consider a module that exports multiple functions, and a consumer that only destructures one of them:
 
 ```js
-// Only `a` is considered referenced
-const { a } = require("./module");
+// math.js
+exports.add = (a, b) => a + b;
+exports.divide = (a, b) => a / b;
+exports.multiply = (a, b) => a * b;
+exports.subtract = (a, b) => a - b;
 ```
 
 ```js
-// Also supported
+// app.js
+const { add } = require("./math");
+
+console.log(add(2, 3));
+```
+
+In previous versions, webpack treated `require("./math")` as referencing the entire exports object. All four functions were included in the bundle even though only `add` is used:
+
+```js
+// Bundled output (5.105 — simplified)
+const math = {
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b,
+  multiply: (a, b) => a * b,
+  divide: (a, b) => a / b,
+};
+```
+
+Starting with 5.106, webpack recognizes the destructuring pattern and marks only `add` as referenced. The unused exports are eliminated during optimization:
+
+```js
+// Bundled output (5.106 — simplified)
+const math_add = (a, b) => a + b;
+// subtract, multiply, divide - tree-shaken away
+```
+
+This also works with `module.require`:
+
+```js
 const { a, b } = module.require("./module");
 ```
 
