@@ -1,7 +1,7 @@
-import AGChartsLogo from "../../assets/ag-charts-logo.png";
 import AGChartsLogoDark from "../../assets/ag-charts-logo-dark.png";
-import AGLogo from "../../assets/ag-grid-logo.png";
+import AGChartsLogo from "../../assets/ag-charts-logo.png";
 import AGLogoDark from "../../assets/ag-grid-logo-dark.png";
+import AGLogo from "../../assets/ag-grid-logo.png";
 import WebpackIcon from "../../assets/icon-square-small.svg";
 import Link from "../Link/Link.jsx";
 
