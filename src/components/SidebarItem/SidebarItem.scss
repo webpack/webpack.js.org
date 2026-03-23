@@ -7,6 +7,8 @@
   flex-wrap: wrap;
   font-size: 15px;
   margin: 0.6em 0;
+  align-items: center;
+  min-height: 40px;
 
   &__toggle {
     flex: 0 0 auto;
@@ -25,14 +27,20 @@
     background: none;
     border: none;
     padding: 0;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
   }
 
   &__title {
     flex: 1 1 auto;
     color: getColor(elephant);
     max-width: 85%;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
     @include control-overflow;
     &.active {
       font-weight: 600;
