@@ -1,9 +1,0 @@
-@use "../../styles/partials/vars" as *;
-@use "../../styles/partials/mixins" as *;
-@use "sass:map";
-
-.container {
-  width: 100%;
-  max-width: map.get($screens, large);
-  margin: 0 auto;
-}

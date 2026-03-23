@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 
-import "./Container.scss";
-
 export default function Container(props = {}) {
   const { className = "" } = props;
 
-  return <div className={`container ${className}`}>{props.children}</div>;
+  return (
+    <div className={`w-full max-w-5xl mx-auto ${className}`}>
+      {props.children}
+    </div>
+  );
 }
 
 Container.propTypes = {
