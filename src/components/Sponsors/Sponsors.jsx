@@ -8,14 +8,17 @@ import Link from "../Link/Link.jsx";
 
 const useDarkMode = () => {
   const [isDark, setIsDark] = useState(
-    document.documentElement.getAttribute("data-theme") === "dark"
+    document.documentElement.getAttribute("data-theme") === "dark",
   );
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
     });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
     return () => observer.disconnect();
   }, []);
 
@@ -55,19 +58,16 @@ const Sponsors = () => {
               Datagrid and Charting for Enterprise Applications
             </div>
             <div className="flex justify-center">
-              <img
-                src={WebpackIcon}
-                alt="ag grid"
-                width={220}
-                loading="lazy"
-              />
+              <img src={WebpackIcon} alt="ag grid" width={220} loading="lazy" />
             </div>
-            <div className="text-center italic text-[1.7em] my-[1rem] mx-[0] text-[#535353] dark:text-[#f2f2f2]">Proud to partner with webpack</div>
+            <div className="text-center italic text-[1.7em] my-[1rem] mx-[0] text-[#535353] dark:text-[#f2f2f2]">
+              Proud to partner with webpack
+            </div>
           </Link>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Sponsors;
