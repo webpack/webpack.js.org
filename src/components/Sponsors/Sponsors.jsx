@@ -8,10 +8,12 @@ import Link from "../Link/Link.jsx";
 
 const useDarkMode = () => {
   const [isDark, setIsDark] = useState(
-    document.documentElement.getAttribute("data-theme") === "dark",
+    typeof document !== "undefined" &&
+      document.documentElement.getAttribute("data-theme") === "dark",
   );
 
   useEffect(() => {
+    if (typeof document === "undefined") return;
     const observer = new MutationObserver(() => {
       setIsDark(document.documentElement.getAttribute("data-theme") === "dark");
     });
