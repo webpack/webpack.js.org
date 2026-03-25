@@ -285,7 +285,7 @@ export default class Support extends Component {
 
           <div className="w-full mt-4">
             <a
-              className="inline-block py-[0.4em] px-[1em] uppercase text-[#175d96] border border-[#175d96] rounded-4xl transition-all duration-[250ms] hover:bg-[#175d96] hover:text-white"
+              className="inline-block py-[0.4em] px-[1em] uppercase text-[#175d96] border border-[#175d96] rounded-4xl transition-all duration-[250ms] hover:bg-[#175d96] hover:text-white dark:text-[#4fa8ff] dark:border-[#4fa8ff] dark:hover:bg-[#4fa8ff] dark:hover:text-[#04131f]"
               href="https://opencollective.com/webpack#support"
             >
               Become a {rank === "backer" ? "backer" : "sponsor"}
