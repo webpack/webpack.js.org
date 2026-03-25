@@ -181,6 +181,32 @@ module.exports = {
 
 Always provide types and defaults for all documented options to keep the documentation clear and accessible. Types and defaults should be added after introducing the option.
 
+Webpack configuration defaults can vary depending on the selected mode. The two used are `development` and `production`, and each applies different default optimizations.
+
+#### Development mode defaults
+
+- Optimized for debugging
+- Includes useful warnings and error messages
+- Output is readable and not minified
+- Faster incremental builds
+
+#### Production mode defaults
+
+- Optimized for performance
+- Output is minified and optimized
+- Removes unnecessary code (e.g. dead code elimination)
+- Smaller bundle size
+
+#### Example
+
+```js
+module.exports = {
+  mode: "development",
+};
+```
+
+Always provide types and defaults for all documented options to keep the documentation clear and accessible. Types and defaults should be added after introducing the option.
+
 **configuration.example.option**
 
 `string = 'none'`
