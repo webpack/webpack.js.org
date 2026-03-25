@@ -48,7 +48,7 @@ const Splash = () => {
       <SplashViz />
 
       <div className="relative text-center bg-[#f3f3f3] dark:bg-[#202020] page__content [&_p]:my-[1em]! [&_p]:mx-auto! [&_p]:max-w-200 [&_pre]:text-left [&_.icon-link]:hidden">
-        <Container className="py-[5em] px-[1em] md:px-[1.5em]">
+        <Container className="py-[1em] px-[1em] md:px-[1.5em]">
           <Markdown>
             <SplashContent />
           </Markdown>
