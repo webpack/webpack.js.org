@@ -35,6 +35,33 @@
 :root {
   --docsearch-primary-color: #1d78c1 !important;
 }
+
+[data-theme="dark"] .DocSearch-Modal {
+  --docsearch-text-color: #d8dee9;
+  --docsearch-container-background: rgba(4, 6, 12, 0.78);
+  --docsearch-modal-background: #060a14;
+  --docsearch-modal-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  --docsearch-searchbox-background: #090f1c;
+  --docsearch-searchbox-focus-background: #0f172a;
+  --docsearch-hit-background: #0a1020;
+  --docsearch-hit-color: #d1d5db;
+  --docsearch-hit-shadow: none;
+  --docsearch-footer-background: #090f1c;
+  --docsearch-footer-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  --docsearch-muted-color: #9aa5bb;
+  --docsearch-logo-color: #f8fafc;
+}
+
+[data-theme="dark"] .DocSearch-Modal .DocSearch-Commands-Key {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+
+[data-theme="dark"] .DocSearch-Modal .DocSearch-Escape-Key {
+  color: #000000;
+}
+
 .DocSearch-Button {
   @apply bg-transparent! lg:bg-gray-500! transition! duration-200! lg:rounded-full!;
 }
@@ -48,7 +75,7 @@
   @apply hidden! lg:flex!;
 }
 .DocSearch-Button-Key {
-  @apply text-gray-700! bg-gray-100! border-gray-300! dark:text-gray-900! dark:bg-gray-200! dark:border-gray-400!;
+  @apply text-gray-700! bg-gray-100! border-gray-300! dark:text-black! dark:bg-white! dark:border-white!;
 }
 .DocSearch-Button .DocSearch-Search-Icon {
   @apply text-white! lg:text-gray-100!;
