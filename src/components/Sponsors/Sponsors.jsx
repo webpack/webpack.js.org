@@ -9,9 +9,9 @@ import Link from "../Link/Link.jsx";
 
 const Sponsors = () => (
   <div className="absolute h-full w-[250px] ml-[-250px] mr-2.5">
-    <div className="sticky hidden xl:flex flex-wrap justify-center items-start border-r-2 border-gray-200 my-6 px-6 pb-12 overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-200 top-24">
+    <div className="sticky hidden xl:flex flex-wrap justify-center items-start border-r-2 border-gray-200 my-6 px-6 pb-12 overflow-hidden bg-transparent transition-colors duration-200 top-24">
       {/* AG Grid */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105">
+      <div className="bg-white dark:bg-black shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105 dark:shadow-[0_0_40px_rgba(255,255,255,0.18)]">
         <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
           {/* Light mode */}
           <img
@@ -34,7 +34,7 @@ const Sponsors = () => (
       </div>
 
       {/* AG Charts */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105">
+      <div className="bg-white dark:bg-black shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105 dark:shadow-[0_0_40px_rgba(255,255,255,0.18)]">
         <Link to="https://charts.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
           {/* Light mode */}
           <img
@@ -57,9 +57,9 @@ const Sponsors = () => (
       </div>
 
       {/* Webpack Sponsor */}
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg m-2 flex flex-col items-center transition-transform duration-200">
+      <div className="m-5 flex flex-col items-center transition-transform duration-200">
         <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
-          <div className="text-2xl text-gray-700 dark:text-gray-300 my-4 text-center">
+          <div className="text-3xl font-normal text-gray-600 dark:text-gray-400 my-4 text-center leading-snug">
             Datagrid and Charting for Enterprise Applications
           </div>
 
@@ -73,7 +73,7 @@ const Sponsors = () => (
             />
           </div>
 
-          <div className="italic text-xl text-gray-700 dark:text-gray-300 my-4 text-center">
+          <div className="italic text-2xl text-gray-600 dark:text-gray-400 my-4 text-center">
             Proud to partner with webpack
           </div>
         </Link>
