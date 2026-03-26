@@ -1,5 +1,6 @@
 // Import External Dependencies
 import { Component } from "react";
+import clsx from "clsx";
 
 // Load Images
 
@@ -14,7 +15,15 @@ import HomeSVG from "./SplashVizSVG.mjs";
 export default class SplashViz extends Component {
   render() {
     return (
-      <section className="relative grid grid-rows-[auto_1fr] overflow-hidden p-4 pb-16 bg-[#2b3a42] dark:bg-gray-900 h-[clamp(35rem,calc(100vh-80px),45rem)] md:h-[clamp(30rem,calc(100vh-80px),35rem)] sm:min-h-[clamp(40rem,calc(100vh-80px),50rem)]">
+      <section
+        className={clsx(
+          "relative grid grid-rows-[auto_1fr] overflow-hidden p-4 pb-16",
+          "bg-[#2b3a42] dark:bg-gray-900",
+          "h-[clamp(35rem,calc(100vh-80px),45rem)]",
+          "md:h-[clamp(30rem,calc(100vh-80px),35rem)]",
+          "sm:min-h-[clamp(40rem,calc(100vh-80px),50rem)]",
+        )}
+      >
         <h1 className="text-white text-center font-normal font-[Source_Sans_Pro] text-[30px] md:text-[40px] mt-[80px] md:mt-[90px] leading-[36px] md:leading-[48px] tracking-[0]">
           <span>bundle your</span>
           <span className="inline-block w-[120px] text-left">
