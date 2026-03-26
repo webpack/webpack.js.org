@@ -1,6 +1,6 @@
 // Import External Dependencies
+import { clsx } from "clsx";
 import { Component } from "react";
-import clsx from "clsx";
 
 // Load Images
 
