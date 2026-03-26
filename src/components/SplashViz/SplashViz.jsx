@@ -17,7 +17,7 @@ export default class SplashViz extends Component {
       <section className="relative overflow-hidden px-4 pb-16 pt-0 bg-[#2b3a42] dark:bg-gray-900 h-[clamp(33rem,calc(100vh-80px),43rem)] md:h-[clamp(29rem,calc(100vh-80px),33rem)] sm:min-h-[clamp(37rem,calc(100vh-80px),45rem)]">
         {/* TOP TEXT */}
         <h1 className="text-white text-center font-normal font-[Source_Sans_Pro] text-[30px] md:text-[40px] pt-[100px] md:pt-[110px] mb-8 md:mb-10 leading-[36px] md:leading-[48px]">
-          <span> bundle your </span>
+          <span> bundle your</span>
           <span className="inline-block w-[120px] text-left">
             <TextRotater delay={2000}>
               <span>assets</span>
