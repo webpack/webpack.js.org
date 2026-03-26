@@ -26,18 +26,16 @@ export default class SplashViz extends Component {
             </TextRotater>
           </span>
         </h1>
-        <div
-          className="absolute top-1/2 left-1/2 w-[60vw] min-w-[550px] max-w-[768px] -translate-x-1/2 -translate-y-1/2 hidden md:block"
-          style={{ gridRow: "2/3" }}
-          dangerouslySetInnerHTML={{ __html: HomeSVG.body }}
-        ></div>
+        <div className="absolute top-1/2 left-1/2 w-[60vw] min-w-[550px] max-w-[768px] -translate-x-1/2 -translate-y-1/2 hidden md:block">
+          <div dangerouslySetInnerHTML={{ __html: HomeSVG.body }} />
 
-        <Cube
-          className="absolute left-0 right-0 top-0 bottom-0 m-auto z-10"
-          depth={120}
-          repeatDelay={5000}
-          continuous
-        />
+          <Cube
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+            depth={120}
+            repeatDelay={5000}
+            continuous
+          />
+        </div>
       </section>
     );
   }
