@@ -1,9 +1,6 @@
 // Import External Dependencies
 import { Component } from "react";
 
-// Global styles / fonts
-import "@fontsource/source-sans-pro/300.css";
-
 // Load Images
 
 // Import Components
