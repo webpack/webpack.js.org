@@ -9,6 +9,7 @@ import TextRotator from "../TextRotater/TextRotater.jsx";
 import HomeSVG from "./SplashVizSVG.mjs";
 
 
+
 export default class SplashViz extends Component {
   render() {
     return (
