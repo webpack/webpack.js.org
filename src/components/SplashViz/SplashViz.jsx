@@ -8,8 +8,6 @@ import Cube from "../Cube/Cube.jsx";
 import TextRotator from "../TextRotater/TextRotater.jsx";
 import HomeSVG from "./SplashVizSVG.mjs";
 
-// Load Styling
-import "./SplashViz.scss";
 
 export default class SplashViz extends Component {
   render() {
