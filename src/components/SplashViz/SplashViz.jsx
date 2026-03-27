@@ -12,13 +12,10 @@ import HomeSVG from "./SplashVizSVG.mjs";
 export default class SplashViz extends Component {
   render() {
     return (
-      <section className="splash-viz relative grid grid-rows-[auto_1fr] overflow-hidden p-4 pb-16 bg-[#2b3a42] dark:bg-gray-900! 
-        h-[clamp(35rem,calc(100vh-80px),45rem)] 
-        max-lg:h-[clamp(30rem,calc(100vh-80px),35rem)] 
-        max-[425px]:min-h-[clamp(40rem,calc(100vh-80px),50rem)]">
-        
-        <h1 className="splash-viz__heading mt-[80px] row-start-1 row-end-2 text-center font-extralight text-white 
-          text-[2rem] lg:text-[2.5rem] lg:mt-[90px]">
+      <section
+        className="splash-viz relative grid grid-rows-[auto_1fr] overflow-hidden p-4 pb-16 bg-[#2b3a42] h-[clamp(35rem,calc(100vh-80px),45rem)] max-lg:h-[clamp(30rem,calc(100vh-80px),35rem)] max-[425px]:min-h-[clamp(40rem,calc(100vh-80px),50rem)] dark:bg-gray-900!"
+      >
+        <h1 className="splash-viz__heading mt-[80px] row-start-1 row-end-2 text-center font-extralight text-white text-[2rem] lg:text-[2.5rem] lg:mt-[90px]">
           <span> bundle your</span>
           <TextRotator delay={5000} repeatDelay={5000} maxWidth={110}>
             <span> assets </span>
