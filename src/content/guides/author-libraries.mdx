@@ -33,14 +33,15 @@ The basic project structure would look like this:
 +     └── ref.json
 ```
 
-Initialize the project with npm, then install `webpack`, `webpack-cli` and `lodash`:
+Initialize the project with npm, then install `webpack`, `webpack-cli` as dev dependencies, and `lodash` as a regular dependency:
 
 ```bash
 npm init -y
-npm install --save-dev webpack webpack-cli lodash
+npm install --save-dev webpack webpack-cli
+npm install lodash
 ```
 
-We install `lodash` as `devDependencies` instead of `dependencies` because we don't want to bundle it into our library, or our library could be easily bloated.
+We install `lodash` as a regular `dependency` because our library uses it in its code. However, we don't want to bundle it into our output bundle because users of our library will likely have their own copy of lodash, and bundling it would create unnecessary duplication and bloat.
 
 **src/ref.json**
 
@@ -252,7 +253,9 @@ T> Note that the `library` setup is tied to the `entry` configuration. For most 
 
 ## Externalize Lodash
 
-Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a _peer dependency_. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
+Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. To avoid this, we can externalize lodash using the [`externals`](/configuration/externals/) configuration. This tells webpack not to bundle lodash, but instead to expect it to be provided by the consumer's environment.
+
+In practice, when users bundle their own applications with webpack or another bundler, they will have their own copy of lodash installed. The bundler will automatically deduplicate and reuse the version they're already using, eliminating the need for multiple copies. If the consumer is using your library via a script tag, they will need to ensure lodash is available separately in the global scope.
 
 This can be done using the [`externals`](/configuration/externals/) configuration:
 
@@ -286,7 +289,7 @@ This can be done using the [`externals`](/configuration/externals/) configuratio
   };
 ```
 
-This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
+This configuration tells webpack not to bundle lodash. Instead, it will be resolved at runtime from the consumer's environment — either from their own node_modules (when using a module bundler) or from the global scope (when using a script tag).
 
 ### External Limitations
 
