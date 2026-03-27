@@ -70,3 +70,15 @@ _Vercel_ has given us a Pro account.
 [release-url]: https://github.com/conventional-changelog/standard-version
 [translate-url]: https://github.com/webpack/webpack.js.org/tree/translation
 [writer-guide-url]: https://webpack.js.org/contribute/writers-guide
+
+## Setup Note
+
+If you encounter an error related to a missing `_supporters.json` file while running the project locally, create the file manually:
+
+Path:
+src/components/Support/\_supporters.json
+
+Content:
+[]
+
+This prevents build failures during local development.
