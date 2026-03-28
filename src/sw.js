@@ -88,10 +88,7 @@ setDefaultHandler(new NetworkOnly());
 
 // fallback to app-shell for document request
 setCatchHandler(({ event }) => {
-  switch (event.request.destination) {
-    case "document":
-      return caches.match("/app-shell/index.html");
-    default:
-      return fetch(event.request);
+  if (event.request.destination === "document") {
+    return caches.match("/app-shell/index.html");
   }
 });
