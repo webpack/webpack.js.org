@@ -40,12 +40,6 @@ export default class TextRotater extends PureComponent {
       <div
         className="
           relative inline-block overflow-hidden align-bottom px-[0.3em]
-          before:content-[''] before:absolute before:left-0 before:w-full before:h-[3px]
-          before:bottom-0 before:z-10
-          before:bg-linear-to-t before:from-[#2b3a42] before:to-transparent
-          after:content-[''] after:absolute after:left-0 after:w-full after:h-[3px]
-          after:top-0
-          after:bg-linear-to-b after:from-[#2b3a42] after:to-transparent
         "
       >
         <div
