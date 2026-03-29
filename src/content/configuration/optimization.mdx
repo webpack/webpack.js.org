@@ -26,7 +26,9 @@ Webpack runs optimizations for you depending on the chosen [`mode`](/configurati
 
 `boolean`
 
-Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported. By default `optimization.checkWasmTypes` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported. By default `optimization.minimize` is:
+- `true` in `production` mode
+- `false` in `development` mode.
 
 **webpack.config.js**
 
