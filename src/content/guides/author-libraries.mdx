@@ -40,7 +40,10 @@ npm init -y
 npm install --save-dev webpack webpack-cli lodash
 ```
 
-We install `lodash` as `devDependencies` instead of `dependencies` because we don't want to bundle it into our library, or our library could be easily bloated.
+We install lodash as a dependency because it is directly used in the library code. 
+
+If you want to avoid bundling it, you should configure it as an external dependency in webpack instead of incorrectly placing it in devDependencies.
+Using devDependencies for runtime dependencies can lead to missing modules in production environments.
 
 **src/ref.json**
 
