@@ -55,12 +55,15 @@ Let's set up a configuration to support JSX and compile TypeScript down to ES5..
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node"
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
 ```
 
@@ -258,12 +261,15 @@ To enable source maps, we must configure TypeScript to output inline source maps
       "outDir": "./dist/",
 +     "sourceMap": true,
       "noImplicitAny": true,
-      "module": "commonjs",
-      "target": "es5",
-      "jsx": "react",
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "target": "esnext",
+      "jsx": "react-jsx",
       "allowJs": true,
-      "moduleResolution": "node",
-    }
+      "moduleResolution": "node"
+  },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
   }
 ```
 
