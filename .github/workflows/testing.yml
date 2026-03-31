@@ -96,7 +96,7 @@ jobs:
         uses: ./.github/actions/webpack-persistent-cache
 
       - name: Cypress run
-        uses: cypress-io/github-action@4c06c48f3ffea349b7189aa06dfcda47a9fa7b92 # v7.1.8
+        uses: cypress-io/github-action@783cb3f07983868532cabaedaa1e6c00ff4786a8 # v7.1.9
         with:
           browser: chrome
           config-file: cypress.config.js
