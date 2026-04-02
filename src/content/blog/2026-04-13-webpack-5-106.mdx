@@ -5,13 +5,14 @@ contributors:
   - bjohansebas
 ---
 
-**Webpack 5.106 introduces plugin validation hooks, built-in runtime style injection for CSS Modules, smarter tree shaking for CommonJS destructuring, and an experimental integration with `oxc-parser` for faster JavaScript parsing.**
+**Webpack 5.106 introduces plugin validation hooks, built-in runtime style injection for CSS Modules, smarter tree shaking for CommonJS destructuring, source-phase imports for WebAssembly modules, and an experimental integration with `oxc-parser` for faster JavaScript parsing.**
 
 Explore what's new in this release:
 
 - [**Plugin Validation with `compiler.hooks.validate`**](#plugin-validation-with-compilerhooksvalidate)
 - [**CSS Modules with Runtime Style Injection**](#css-modules-with-runtime-style-injection)
 - [**Better Tree Shaking for CommonJS Destructuring**](#better-tree-shaking-for-commonjs-destructuring)
+- [**Source Phase Imports for WebAssembly (Experimental)**](#source-phase-imports-for-webassembly-experimental)
 - [**Getting Started with `create-webpack-app`**](#getting-started-with-create-webpack-app)
 - [**Context Support for VirtualUrlPlugin**](#context-support-for-virtualurlplugin)
 - [**Experimental JavaScript Parsing with `oxc-parser`**](#experimental-javascript-parsing-with-oxc-parser)
@@ -140,6 +141,38 @@ This also works with `module.require`:
 ```js
 const { a, b } = module.require("./module");
 ```
+
+## Source Phase Imports for WebAssembly (Experimental)
+
+Webpack now includes experimental support for TC39 [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports) when importing WebAssembly modules.
+
+The proposal is currently at **Stage 3** and introduces a way to import a module at the _source phase_ instead of immediately evaluating it. In practical terms for WebAssembly, this means you can obtain a compiled `WebAssembly.Module` first, and instantiate it later with your own imports.
+
+Enable the feature with `experiments.sourceImport`:
+
+```js
+module.exports = {
+  experiments: {
+    asyncWebAssembly: true,
+    sourceImport: true,
+  },
+};
+```
+
+Then use either static or dynamic source-phase syntax:
+
+```js
+// Static form
+import source wasmModule from "./module.wasm";
+
+// Dynamic form
+const wasmModule2 = await import.source("./module.wasm");
+
+const instance = await WebAssembly.instantiate(wasmModule);
+```
+
+You can also see an end-to-end example in webpack's repository:
+[https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase](https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase)
 
 ## Getting Started with `create-webpack-app`
 
