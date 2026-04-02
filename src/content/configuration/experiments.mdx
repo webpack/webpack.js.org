@@ -29,6 +29,7 @@ Available options:
 - [`futureDefaults`](#experimentsfuturedefaults)
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
+- [`sourceImport`](#experimentssourceimport)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
 - `layers`: Enable module and chunk layers, removed and works without additional options since `5.102.0`.
 - `topLevelAwait`: Transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0` (however, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`), this feature is enabled by default, removed and works without additional options since `5.102.0`.
@@ -43,6 +44,7 @@ export default {
     buildHttp: true,
     lazyCompilation: true,
     outputModule: true,
+    sourceImport: true,
     syncWebAssembly: true,
     topLevelAwait: true,
   },
@@ -277,6 +279,29 @@ export function f() {
 It's suggested to put the magic comment after the `from` keyword. Other positions may work, but have not been tested.
 
 Putting the magic comment after the `import` keyword is incompatible with the filesystem cache.
+
+### experiments.sourceImport
+
+Enable support for the tc39 proposal [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports).
+
+- Type: `boolean`
+
+This feature enables importing modules at the source phase via `import source ...` and `import.source(...)`.
+
+<Badge text="5.106.0+" />
+
+{/* eslint-skip */}
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  experiments: {
+    asyncWebAssembly: true,
+    sourceImport: true,
+  },
+};
+```
 
 {/* eslint-skip */}
 
