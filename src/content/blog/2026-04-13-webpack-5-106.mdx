@@ -95,7 +95,7 @@ module.exports = {
 };
 ```
 
-T> CSS support is more than ready, and it is expected to be fully finalized in the next minor release, as planned in the roadmap. As part of this transition, `css-loader`, `style-loader`, and `mini-css-extract-plugin` will be deprecated.
+W> CSS support has matured significantly and is expected to be fully finalized in the next minor release, as planned in the roadmap. As part of this transition, `css-loader`, `style-loader`, and `mini-css-extract-plugin` are planned for deprecation.
 
 ## Better Tree Shaking for CommonJS Destructuring
 
@@ -149,6 +149,8 @@ const { a, b } = module.require("./module");
 Webpack now includes experimental support for TC39 [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports) when importing WebAssembly modules.
 
 The proposal is currently at **Stage 3** and introduces a way to import a module at the _source phase_ instead of immediately evaluating it. In practical terms for WebAssembly, this means you can obtain a compiled `WebAssembly.Module` first, and instantiate it later with your own imports.
+
+In webpack 5.106, this experimental support is focused on WebAssembly source imports under `experiments.sourceImport`. In the next minor release, the focus is expected to shift toward JavaScript support.
 
 Enable the feature with `experiments.sourceImport`:
 
