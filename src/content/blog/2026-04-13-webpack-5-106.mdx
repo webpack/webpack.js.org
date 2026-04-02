@@ -95,6 +95,8 @@ module.exports = {
 };
 ```
 
+T> CSS support is more than ready, and it is expected to be fully finalized in the next minor release, as planned in the roadmap. As part of this transition, `css-loader`, `style-loader`, and `mini-css-extract-plugin` will be deprecated.
+
 ## Better Tree Shaking for CommonJS Destructuring
 
 Webpack can now statically analyze **destructuring assignments directly from CommonJS `require`** (and `module.require`) and treat only the destructured properties as "referenced exports", instead of conservatively assuming the whole `exports` object is used. This improves dead-code elimination in optimized builds and can reduce bundle size in codebases that still consume CommonJS modules.
@@ -161,7 +163,7 @@ module.exports = {
 
 Then use either static or dynamic source-phase syntax:
 
-```js
+```text
 // Static form
 import source wasmModule from "./module.wasm";
 
