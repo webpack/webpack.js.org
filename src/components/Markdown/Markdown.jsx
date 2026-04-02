@@ -1,4 +1,4 @@
-import "./Markdown.scss";
+import "./Markdown.css";
 import PropTypes from "prop-types";
 
 const Markdown = (props) => <div className="markdown">{props.children}</div>;

@@ -1,40 +1,36 @@
-@use "sass:color";
-@use "../../styles/partials/vars" as *;
-@use "../../styles/partials/functions" as *;
-@use "../../styles/partials/mixins" as *;
-@use "prism-theme";
+@reference "tailwindcss";
+@import "./prism-theme.css";
 
-$bannerHeight: 56px;
-$navigationHeight: 56px;
-$navigationSubHeight: 28px;
-$someExtraHeight: 10px;
-
-$topHeightDesktop: $navigationHeight + $navigationSubHeight + $someExtraHeight;
-$topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
-
-$topHeightMobile: $navigationHeight;
-$topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
+/*
+  Local constants (previously Sass variables):
+  $bannerHeight: 56px
+  $navigationHeight: 56px
+  $navigationSubHeight: 28px
+  $someExtraHeight: 10px
+  $topHeightDesktop: 94px  (56 + 28 + 10)
+  $topHeightMobile: 56px
+*/
 
 .markdown {
-  line-height: 1.5em;
+  @apply leading-normal;
 
   h1 {
-    font-size: getFontSize(4);
+    font-size: 33.178px;
   }
   h2 {
-    font-size: getFontSize(3);
+    font-size: 27.648px;
   }
   h3 {
-    font-size: getFontSize(2);
+    font-size: 23.04px;
   }
   h4 {
-    font-size: getFontSize(1);
+    font-size: 19.2px;
   }
   h5 {
-    font-size: getFontSize(0);
+    font-size: 16px;
   }
   h6 {
-    font-size: getFontSize(-1);
+    font-size: 13.331px;
   }
 
   h2,
@@ -43,16 +39,12 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   h5,
   h6 {
     > span[id] {
-      position: absolute;
-      width: 0;
-      display: block;
-      visibility: hidden;
-      pointer-events: none;
-      padding-top: $topHeightMobile;
-      margin-top: -#{$topHeightMobile};
-      @include break {
-        padding-top: $topHeightDesktop;
-        margin-top: -#{$topHeightDesktop};
+      @apply absolute w-0 block invisible pointer-events-none;
+      padding-top: 56px;
+      margin-top: -56px;
+      @media (min-width: 768px) {
+        padding-top: 94px;
+        margin-top: -94px;
       }
     }
   }
@@ -63,12 +55,13 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   h4,
   h5,
   h6 {
-    display: block;
-    font-family: $font-stack-heading;
-    font-weight: 600;
+    @apply block font-semibold;
+    font-family:
+      "Source Serif Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times,
+      serif;
     line-height: 1.4;
     margin: 0 0 0.25em;
-    color: color.adjust(getColor(fiord), $lightness: -10%);
+    color: #32434a;
     word-break: break-word;
 
     tt,
@@ -81,14 +74,12 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       margin-left: 8px;
       font-size: 0.8em;
       height: 1em;
-      opacity: 0;
-      visibility: hidden;
+      @apply opacity-0 invisible;
       transition: all 250ms;
     }
 
     &:hover a[aria-hidden="true"] {
-      opacity: 1;
-      visibility: visible;
+      @apply opacity-100 visible;
     }
   }
 
@@ -116,8 +107,8 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   }
 
   hr {
-    border: none;
-    background-color: getColor(alto);
+    @apply border-none;
+    background-color: #dedede;
     height: 3px;
     margin: 2em 0;
   }
@@ -137,9 +128,8 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
 
   dl {
     dt {
-      font-size: getFontSize(0);
-      font-weight: bold;
-      font-style: italic;
+      font-size: 16px;
+      @apply font-bold italic;
       margin: 15px 0 5px;
 
       &:first-child {
@@ -166,7 +156,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   aside {
     border-left: 4px solid #dddddd;
     padding: 0.75em 1em;
-    color: getColor(dove-grey);
+    color: #666666;
     > :first-child {
       margin-top: 0;
     }
@@ -181,7 +171,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       border-left-style: solid;
 
       .tip-content {
-        font-style: italic;
+        @apply italic;
       }
 
       code {
@@ -192,30 +182,27 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       > .warning__prefix,
       > .preview__prefix,
       > .todo__prefix {
-        text-transform: capitalize;
-        font-weight: 600; // slightly bold but not heading-level
+        @apply capitalize font-semibold block;
         color: #1a1a1a;
-        font-size: getFontSize(0);
-        display: block;
+        font-size: 16px;
         margin-bottom: 0.25em;
-        color: #1a1a1a;
       }
     }
 
     &.tip {
       background-color: #eaf8ff;
       color: #4e7182;
-      border-left-color: color.adjust(#eaf8ff, $lightness: -40%);
+      border-left-color: #1eb4ff;
     }
 
     &.warning {
       background-color: #fdf5d8;
       color: #716b53;
-      border-left-color: color.adjust(#fdf5d8, $lightness: -40%);
+      border-left-color: #f3c316;
     }
 
     &.preview {
-      background-color: getColor(concrete);
+      background-color: #f2f2f2;
       color: #716b53;
       border-left-color: #1e72b3;
     }
@@ -223,7 +210,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     &.todo {
       background-color: #fbddcd;
       color: #907a6e;
-      border-left-color: color.adjust(#fbddcd, $lightness: -40%);
+      border-left-color: #e95d13;
 
       .tip-content::before {
         content: "[TODO]: ";
@@ -235,8 +222,8 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   blockquote {
     border-left: 4px solid #dddddd;
     padding: 0.75em 1em;
-    color: getColor(dove-grey);
-    font-style: italic;
+    color: #666666;
+    @apply italic;
 
     > :first-child {
       margin-top: 0;
@@ -249,10 +236,8 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   table {
     margin: 1em 0;
 
-    @include break {
-      display: block;
-      overflow-x: auto;
-      overflow-y: hidden;
+    @media (min-width: 768px) {
+      @apply block overflow-x-auto overflow-y-hidden;
     }
 
     p {
@@ -265,17 +250,16 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   }
 
   thead {
-    display: none;
-    @include break {
+    @apply hidden;
+    @media (min-width: 768px) {
       display: table-header-group;
     }
   }
 
   th {
-    font-weight: bold;
-    text-align: left;
+    @apply font-bold text-left;
     padding: 6px 12px;
-    background: color.adjust(#f4f6f6, $lightness: -1%);
+    background: #f1f4f4;
     border-right: 1px solid #cccccc;
 
     &:last-child {
@@ -294,10 +278,10 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       border-bottom: 1px solid #cccccc;
     }
 
-    display: block;
+    @apply block;
     margin-bottom: 10px;
 
-    @include break {
+    @media (min-width: 768px) {
       margin-bottom: 0;
       display: table-row;
     }
@@ -306,18 +290,17 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   td {
     padding: 4px 12px;
     border-right: none;
-    display: grid;
+    @apply grid text-left;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-bottom: 1px solid getColor(concrete);
-    text-align: left;
+    border-bottom: 1px solid #f2f2f2;
     &::before {
       content: attr(data-th);
-      font-weight: bold;
+      @apply font-bold;
     }
     &:last-child {
       border-bottom: none;
     }
-    @include break {
+    @media (min-width: 768px) {
       display: table-cell;
       padding: 14px 22px;
       text-align: unset;
@@ -333,8 +316,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   }
 
   img:not([class*="support__"]) {
-    max-width: 100%;
-    height: auto;
+    @apply max-w-full h-auto;
   }
 
   b,
@@ -344,23 +326,24 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
 
   i,
   em {
-    font-style: italic;
+    @apply italic;
   }
 
   code,
   tt {
-    font-family: $font-stack-code;
+    font-family:
+      "Source Code Pro", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     font-size: 90%;
     margin: 0 2px;
     padding: 2px 6px;
     white-space: normal;
-    background-color: color.adjust(getColor(fiord), $alpha: -0.95);
+    background-color: rgba(70, 94, 105, 0.05);
     border-radius: 3px;
-    text-shadow: 0 1px 0 color.adjust(getColor(white), $alpha: -0.4);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
   a code {
-    color: $text-color-highlight;
+    color: #1a6bac;
   }
   a {
     text-decoration: underline;
@@ -376,46 +359,41 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 0.875rem;
     line-height: 1.5;
-    overflow: auto;
+    @apply overflow-auto;
 
     code {
       margin: 0;
       padding: 0;
       white-space: pre;
-      border: none;
+      @apply border-none;
       background: transparent;
-      text-shadow: 0 1px 0
-        color.adjust(
-          color.adjust(getColor(elephant), $lightness: -10%),
-          $alpha: -0.5
-        );
-      color: color.adjust(getColor(malibu), $saturation: -40%);
+      text-shadow: 0 1px 0 rgba(22, 31, 35, 0.5);
+      color: #a5cee1;
       font-family: monospace;
 
       .code-details-summary-span {
         margin-left: -15px;
-        cursor: pointer;
+        @apply cursor-pointer;
 
         &::after {
           content: "›";
-          float: left;
-          position: relative;
+          @apply float-left relative;
           left: -2px;
           text-align: center;
-          color: color.adjust(getColor(denim), $lightness: 10%);
+          color: #1e78c2;
           font-size: 16px;
         }
       }
 
       a {
-        border-bottom: 1px dotted getColor(denim);
+        border-bottom: 1px dotted #175d96;
       }
 
       .code-link {
-        position: relative;
+        @apply relative;
 
         &:hover {
-          color: color.adjust(getColor(denim), $lightness: 15%);
+          color: #2186d8;
         }
       }
     }
@@ -423,16 +401,15 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     code,
     tt {
       background-color: transparent;
-      border: none;
+      @apply border-none;
     }
   }
 
   p {
     code,
     tt {
-      max-width: 100%;
+      @apply max-w-full overflow-auto;
       line-height: initial;
-      overflow: auto;
       margin: 0;
     }
   }
