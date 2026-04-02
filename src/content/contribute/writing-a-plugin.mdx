@@ -89,7 +89,7 @@ export default {
 };
 ```
 
-For webpack versions **before `5.106`**, a familiar pattern is to validate plugin options with [`schema-utils`](https://github.com/webpack/schema-utils) in the constructor:
+A familiar way to validate plugin options in webpack versions **before `5.106`** is to use [`schema-utils`](https://github.com/webpack/schema-utils) in the constructor:
 
 ```js
 import { validate } from "schema-utils";
@@ -116,7 +116,7 @@ export default class HelloWorldPlugin {
 }
 ```
 
-In webpack `5.106` and later, the same plugin can validate those options from `apply()` by tapping `compiler.hooks.validate` and calling `compiler.validate(...)`:
+Starting in webpack `5.106`, you can move that validation into `apply()` by tapping `compiler.hooks.validate` and calling `compiler.validate(...)` instead:
 
 ```js
 export default class HelloWorldPlugin {
@@ -135,7 +135,7 @@ export default class HelloWorldPlugin {
 }
 ```
 
-W> This validation flow is disabled when webpack is configured with `validate: false`.
+W> This validation flow is skipped when webpack is configured with `validate: false`. With `experiments.futureDefaults`, validation is enabled by default in development mode and disabled by default in production mode.
 
 ## Compiler and Compilation
 
