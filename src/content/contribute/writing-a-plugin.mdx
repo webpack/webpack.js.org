@@ -89,7 +89,7 @@ export default {
 };
 ```
 
-Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
+For webpack versions **before `5.106`**, a familiar pattern is to validate plugin options with [`schema-utils`](https://github.com/webpack/schema-utils) in the constructor:
 
 ```js
 import { validate } from "schema-utils";
@@ -115,6 +115,27 @@ export default class HelloWorldPlugin {
   apply(compiler) {}
 }
 ```
+
+In webpack `5.106` and later, the same plugin can validate those options from `apply()` by tapping `compiler.hooks.validate` and calling `compiler.validate(...)`:
+
+```js
+export default class HelloWorldPlugin {
+  constructor(options = {}) {
+    this.options = options;
+  }
+
+  apply(compiler) {
+    compiler.hooks.validate.tap("HelloWorldPlugin", () => {
+      compiler.validate(
+        () => require("./schema/hello-world-plugin.json"),
+        this.options,
+      );
+    });
+  }
+}
+```
+
+W> This validation flow is disabled when webpack is configured with `validate: false`.
 
 ## Compiler and Compilation
 

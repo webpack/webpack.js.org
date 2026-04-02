@@ -89,6 +89,27 @@ Triggered after resolver setup is complete.
 
 - Callback Parameters: `compiler`
 
+### validate
+
+`SyncHook`
+
+<Badge text="5.106.0+" />
+
+Called to register validation work for webpack configuration, plugins, and loaders. Plugin authors can tap this hook and use `compiler.validate(...)` to participate in webpack's built-in validation flow.
+
+W> The hook is always available. `compiler.validate(...)` skips validation when `validate: false` is set. With `experiments.futureDefaults`, webpack keeps validation enabled by default in development and disables it by default in production.
+
+```js
+compiler.hooks.validate.tap("MyPlugin", () => {
+  compiler.validate(
+    () => require("./schema/MyPlugin.json"),
+    options,
+    { name: "My Plugin", baseDataPath: "options" },
+    (validatedOptions) => require("./schema/MyPlugin.check")(validatedOptions),
+  );
+});
+```
+
 ### initialize
 
 `SyncHook`
