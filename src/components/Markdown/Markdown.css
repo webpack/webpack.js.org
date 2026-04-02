@@ -15,22 +15,22 @@
   @apply leading-normal;
 
   h1 {
-    font-size: 33.178px;
+    @apply text-[33.178px];
   }
   h2 {
-    font-size: 27.648px;
+    @apply text-[27.648px];
   }
   h3 {
-    font-size: 23.04px;
+    @apply text-[23.04px];
   }
   h4 {
-    font-size: 19.2px;
+    @apply text-[19.2px];
   }
   h5 {
-    font-size: 16px;
+    @apply text-base;
   }
   h6 {
-    font-size: 13.331px;
+    @apply text-[13.331px];
   }
 
   h2,
@@ -39,12 +39,9 @@
   h5,
   h6 {
     > span[id] {
-      @apply absolute w-0 block invisible pointer-events-none;
-      padding-top: 56px;
-      margin-top: -56px;
+      @apply absolute w-0 block invisible pointer-events-none pt-14 -mt-14;
       @media (min-width: 768px) {
-        padding-top: 94px;
-        margin-top: -94px;
+        @apply pt-[94px] -mt-[94px];
       }
     }
   }
@@ -55,13 +52,11 @@
   h4,
   h5,
   h6 {
-    @apply block font-semibold;
+    @apply block font-semibold text-[#32434a] leading-[1.4];
     font-family:
       "Source Serif Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times,
       serif;
-    line-height: 1.4;
     margin: 0 0 0.25em;
-    color: #32434a;
     word-break: break-word;
 
     tt,
@@ -71,10 +66,7 @@
     }
 
     a[aria-hidden="true"] {
-      margin-left: 8px;
-      font-size: 0.8em;
-      height: 1em;
-      @apply opacity-0 invisible;
+      @apply ml-2 text-[0.8em] h-[1em] opacity-0 invisible;
       transition: all 250ms;
     }
 
@@ -85,7 +77,7 @@
 
   h1:first-child {
     margin: 0;
-    line-height: 1;
+    @apply leading-none;
   }
 
   p,
@@ -93,29 +85,26 @@
   aside,
   table,
   pre {
-    margin: 1em 0;
+    @apply my-[1em];
   }
 
   ul,
   ol,
   dl {
-    margin: 0.5em 0 1em;
+    @apply mt-[0.5em] mb-[1em];
   }
 
   li {
-    margin: 0.5em 0;
+    @apply my-[0.5em];
   }
 
   hr {
-    @apply border-none;
-    background-color: #dedede;
-    height: 3px;
-    margin: 2em 0;
+    @apply border-none bg-gray-200 h-[3px] my-[2em];
   }
 
   ul,
   ol {
-    padding-left: 30px;
+    @apply pl-[30px];
     list-style: revert;
 
     &:first-child {
@@ -128,9 +117,7 @@
 
   dl {
     dt {
-      font-size: 16px;
-      @apply font-bold italic;
-      margin: 15px 0 5px;
+      @apply text-base font-bold italic mt-[15px] mb-[5px];
 
       &:first-child {
         padding: 0;
@@ -138,8 +125,7 @@
     }
 
     dd {
-      margin: 0 0 15px;
-      padding: 0 15px;
+      @apply mb-[15px] px-[15px];
     }
 
     dt,
@@ -154,9 +140,7 @@
   }
 
   aside {
-    border-left: 4px solid #dddddd;
-    padding: 0.75em 1em;
-    color: #666666;
+    @apply border-l-4 border-solid border-l-[#dddddd] py-[0.75em] px-[1em] text-gray-500;
     > :first-child {
       margin-top: 0;
     }
@@ -167,8 +151,7 @@
     &.warning,
     &.preview,
     &.todo {
-      border-left-width: 3px;
-      border-left-style: solid;
+      @apply border-l-[3px];
 
       .tip-content {
         @apply italic;
@@ -182,35 +165,24 @@
       > .warning__prefix,
       > .preview__prefix,
       > .todo__prefix {
-        @apply capitalize font-semibold block;
-        color: #1a1a1a;
-        font-size: 16px;
-        margin-bottom: 0.25em;
+        @apply capitalize font-semibold block text-base text-[#1a1a1a] mb-[0.25em];
       }
     }
 
     &.tip {
-      background-color: #eaf8ff;
-      color: #4e7182;
-      border-left-color: #1eb4ff;
+      @apply bg-[#eaf8ff] text-[#4e7182] border-l-[#1eb4ff];
     }
 
     &.warning {
-      background-color: #fdf5d8;
-      color: #716b53;
-      border-left-color: #f3c316;
+      @apply bg-[#fdf5d8] text-[#716b53] border-l-[#f3c316];
     }
 
     &.preview {
-      background-color: #f2f2f2;
-      color: #716b53;
-      border-left-color: #1e72b3;
+      @apply bg-gray-100 text-[#716b53] border-l-[#1e72b3];
     }
 
     &.todo {
-      background-color: #fbddcd;
-      color: #907a6e;
-      border-left-color: #e95d13;
+      @apply bg-[#fbddcd] text-[#907a6e] border-l-[#e95d13];
 
       .tip-content::before {
         content: "[TODO]: ";
@@ -220,10 +192,7 @@
   }
 
   blockquote {
-    border-left: 4px solid #dddddd;
-    padding: 0.75em 1em;
-    color: #666666;
-    @apply italic;
+    @apply border-l-4 border-solid border-l-[#dddddd] py-[0.75em] px-[1em] text-gray-500 italic;
 
     > :first-child {
       margin-top: 0;
@@ -234,7 +203,7 @@
   }
 
   table {
-    margin: 1em 0;
+    @apply my-[1em];
 
     @media (min-width: 768px) {
       @apply block overflow-x-auto overflow-y-hidden;
@@ -257,60 +226,49 @@
   }
 
   th {
-    @apply font-bold text-left;
-    padding: 6px 12px;
-    background: #f1f4f4;
-    border-right: 1px solid #cccccc;
+    @apply font-bold text-left py-1.5 px-3 bg-[#f1f4f4] border-r border-solid border-r-[#cccccc];
 
     &:last-child {
-      border-right: none;
+      @apply border-r-0;
     }
   }
 
   tr {
-    border: 1px solid #cccccc;
+    @apply border border-solid border-[#cccccc] block mb-2.5;
 
     &:nth-child(2n) {
-      background-color: #f8f8f8;
+      @apply bg-[#f8f8f8];
     }
 
     &:last-child {
-      border-bottom: 1px solid #cccccc;
+      @apply border-b border-b-[#cccccc];
     }
 
-    @apply block;
-    margin-bottom: 10px;
-
     @media (min-width: 768px) {
-      margin-bottom: 0;
+      @apply mb-0;
       display: table-row;
     }
   }
 
   td {
-    padding: 4px 12px;
-    border-right: none;
-    @apply grid text-left;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-bottom: 1px solid #f2f2f2;
+    @apply py-1 px-3 border-r-0 grid grid-cols-2 text-left border-b border-solid border-b-gray-100;
     &::before {
       content: attr(data-th);
       @apply font-bold;
     }
     &:last-child {
-      border-bottom: none;
+      @apply border-b-0;
     }
     @media (min-width: 768px) {
       display: table-cell;
-      padding: 14px 22px;
+      @apply py-3.5 px-[22px];
       text-align: unset;
       &::before {
         content: none;
       }
-      border-right: 1px solid #cccccc;
-      border-bottom: none;
+      @apply border-r border-r-[#cccccc] border-b-0;
       &:last-child {
-        border-right: none;
+        @apply border-r-0;
       }
     }
   }
@@ -333,17 +291,12 @@
   tt {
     font-family:
       "Source Code Pro", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 90%;
-    margin: 0 2px;
-    padding: 2px 6px;
-    white-space: normal;
-    background-color: rgba(70, 94, 105, 0.05);
-    border-radius: 3px;
+    @apply text-[90%] mx-0.5 py-0.5 px-1.5 whitespace-normal bg-[rgba(70,94,105,0.05)] rounded-[3px];
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
   a code {
-    color: #1a6bac;
+    @apply text-[#1a6bac];
   }
   a {
     text-decoration: underline;
@@ -351,57 +304,40 @@
     text-decoration-thickness: 1px;
   }
   pre {
-    background-color: #2d3748;
-    color: #e2e8f0;
-    padding: 1rem;
-    padding-right: 3.5rem;
-    border-radius: 3px;
+    @apply bg-[#2d3748] text-[#e2e8f0] p-4 pr-14 rounded-[3px] text-sm leading-normal overflow-auto;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 0.875rem;
-    line-height: 1.5;
-    @apply overflow-auto;
 
     code {
-      margin: 0;
-      padding: 0;
-      white-space: pre;
-      @apply border-none;
-      background: transparent;
-      text-shadow: 0 1px 0 rgba(22, 31, 35, 0.5);
-      color: #a5cee1;
+      @apply m-0 p-0 whitespace-pre border-none bg-transparent text-[#a5cee1];
       font-family: monospace;
+      text-shadow: 0 1px 0 rgba(22, 31, 35, 0.5);
 
       .code-details-summary-span {
-        margin-left: -15px;
-        @apply cursor-pointer;
+        @apply -ml-[15px] cursor-pointer;
 
         &::after {
           content: "›";
-          @apply float-left relative;
-          left: -2px;
-          text-align: center;
-          color: #1e78c2;
-          font-size: 16px;
+          @apply float-left relative -left-0.5 text-center text-[#1e78c2] text-base;
         }
       }
 
       a {
-        border-bottom: 1px dotted #175d96;
+        border-bottom: 1px dotted;
+        @apply border-b-[#175d96];
       }
 
       .code-link {
         @apply relative;
 
         &:hover {
-          color: #2186d8;
+          @apply text-[#2186d8];
         }
       }
     }
 
     code,
     tt {
-      background-color: transparent;
-      @apply border-none;
+      @apply bg-transparent border-none;
     }
   }
 
@@ -417,20 +353,20 @@
   span {
     code,
     tt {
-      white-space: pre-line;
+      @apply whitespace-pre-line;
     }
   }
 
   h2 {
-    margin-top: 2em;
+    @apply mt-[2em];
   }
   h2:first-child {
-    margin-top: 1em;
+    @apply mt-[1em];
   }
   h2 + h3 {
-    margin-top: 0.5em;
+    @apply mt-[0.5em];
   }
   h3 {
-    margin-top: 1.5em;
+    @apply mt-[1.5em];
   }
 }
