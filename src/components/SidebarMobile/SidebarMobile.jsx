@@ -18,9 +18,24 @@ export default class SidebarMobile extends Component {
     sections: PropTypes.array,
   };
 
+  componentDidMount() {
+    if (this.props.isOpen) {
+      this._toggleBodyListener(true);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isOpen !== this.props.isOpen) {
+      this._toggleBodyListener(this.props.isOpen);
+    }
+  }
+
+  componentWillUnmount() {
+    this._toggleBodyListener(false);
+  }
+
   render() {
     const { isOpen, toggle } = this.props;
-    this._toggleBodyListener(isOpen);
 
     return (
       <nav
