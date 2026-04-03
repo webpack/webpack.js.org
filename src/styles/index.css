@@ -1,0 +1,67 @@
+@reference "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:wght@600&display=swap");
+@import "./dark.css";
+
+* {
+  box-sizing: inherit;
+}
+
+html {
+  @apply box-border;
+}
+
+body {
+  font:
+    400 1rem "Source Sans Pro",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+  @apply text-blue-800;
+}
+
+.header-link {
+  @apply inline-block w-[22px] h-[22px] bg-no-repeat bg-center bg-contain;
+  background-image: url("../assets/link.svg");
+}
+
+[aria-hidden="true"]:hover .header-link {
+  @apply visible;
+}
+
+@layer base {
+  a,
+  button.as-link {
+    @apply text-[#1a6bac] no-underline;
+    transition: color 250ms;
+
+    &.icon-link {
+      @apply inline-block text-[0.7em] ml-[16px] -rotate-45 text-[#909090];
+
+      &:hover {
+        @apply text-[#1a6bac];
+      }
+    }
+
+    &:hover {
+      @apply text-[#144f80];
+    }
+  }
+
+  ::selection {
+    @apply bg-[rgba(141,214,249,0.35)];
+  }
+
+  .language-diff {
+    .token.prefix.inserted,
+    .token.prefix.deleted {
+      user-select: none;
+    }
+  }
+}
+
+.screen-reader-only {
+  @apply sr-only;
+}

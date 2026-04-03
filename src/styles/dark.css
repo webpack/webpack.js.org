@@ -1,0 +1,150 @@
+@reference "tailwindcss";
+
+[data-theme="dark"] {
+  body {
+    @apply bg-[#121212] text-[#e0e0e0];
+  }
+
+  .splash__section--dark {
+    @apply bg-[#202020];
+  }
+
+  .markdown {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-[#9ab3c0];
+    }
+
+    code,
+    tt {
+      text-shadow: none;
+      @apply bg-[rgba(70,94,105,0.45)];
+    }
+
+    blockquote {
+      @apply border-l-[#343434] text-[#a3a3a3];
+    }
+
+    blockquote.tip {
+      @apply bg-[#192429] text-[#7da2b4];
+    }
+
+    blockquote.warning {
+      @apply bg-[#27220a] text-[#a49d83];
+    }
+
+    blockquote.todo {
+      @apply bg-[#402b1f] text-[#998478];
+    }
+
+    hr {
+      @apply bg-[#343434];
+    }
+
+    th {
+      @apply bg-[#121212] border-[#252525];
+    }
+
+    tr,
+    tr:last-child {
+      @apply border-[#252525];
+    }
+
+    tr:nth-child(2n) {
+      @apply bg-[#202020];
+    }
+
+    td {
+      @apply border-[#252525];
+    }
+
+    pre {
+      @apply bg-[#131b1f];
+
+      code {
+        @apply bg-transparent;
+      }
+    }
+
+    a code {
+      @apply text-[#69a8ee];
+
+      &:hover {
+        @apply text-[#82b7f6];
+      }
+    }
+
+    aside.tip,
+    aside.warning,
+    aside.preview,
+    aside.todo {
+      @apply bg-[#222222] text-white;
+    }
+
+    aside.tip > .tip__prefix,
+    aside.warning > .warning__prefix,
+    aside.preview > .preview__prefix,
+    aside.todo > .todo__prefix {
+      @apply text-white;
+    }
+  }
+
+  .gitter__button {
+    @apply bg-[#1c3b39];
+  }
+
+  .sponsors__content,
+  .footer__inner {
+    @apply border-[#252525];
+  }
+
+  .page-links__gap {
+    @apply text-gray-300;
+  }
+
+  .site {
+    background: #121212 !important;
+  }
+
+  .sidebar__docs-version {
+    @apply border-[#252525] text-[#b8b8b8];
+  }
+
+  .contributor .contributor__name {
+    @apply bg-[#121212] text-[#9ab3c0];
+  }
+
+  .placeholder h2,
+  .placeholder p {
+    @apply bg-[#252525];
+
+    &:after {
+      background: linear-gradient(90deg, #252525, #121212, #252525);
+    }
+  }
+
+  .footer-openjsf-logo {
+    @apply invert;
+  }
+
+  .footer p {
+    @apply text-white;
+  }
+}
+
+@layer base {
+  [data-theme="dark"] a,
+  [data-theme="dark"] button.as-link {
+    @apply text-[#69a8ee];
+  }
+}
+
+@layer base {
+  [data-theme="dark"] a:hover {
+    @apply text-[#82b7f6];
+  }
+}

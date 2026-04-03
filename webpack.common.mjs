@@ -62,7 +62,7 @@ export default ({ ssg = false }) => ({
     cacheDirectory: path.resolve(__dirname, "node_modules/.cache/webpack"),
   },
   resolve: {
-    extensions: [".js", ".jsx", ".scss"],
+    extensions: [".js", ".jsx"],
     fallback: {
       path: require.resolve("path-browserify"),
     },
@@ -95,22 +95,6 @@ export default ({ ssg = false }) => ({
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              sassOptions: {
-                loadPaths: [path.join("./src/styles/partials")],
-              },
-            },
-          },
-        ],
       },
       {
         test: /\.woff2?$/,

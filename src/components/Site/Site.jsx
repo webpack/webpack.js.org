@@ -40,7 +40,7 @@ import Splash from "../Splash/Splash.jsx";
 import Sponsors from "../Sponsors/Sponsors.jsx";
 
 // Load Styling
-import "../../styles/index.scss";
+import "../../styles/index.css";
 
 // Load Content Tree
 

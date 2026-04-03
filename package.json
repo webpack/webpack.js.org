@@ -64,13 +64,14 @@
     "*.{md,mdx}": [
       "npm run lint:markdown"
     ],
-    "*.{js,mjs,jsx,css,scss,md,mdx,json}": [
+    "*.{js,mjs,jsx,css,md,mdx,json}": [
       "prettier --write"
     ]
   },
   "resolutions": {
     "sitemap-static/minimist": "1.2.5",
-    "eval": "^0.1.5"
+    "eval": "^0.1.5",
+    "lodash": "4.17.21"
   },
   "dependencies": {
     "@docsearch/react": "^4.6.0",
@@ -133,7 +134,6 @@
     "mdast-util-to-string": "^4.0.0",
     "mini-css-extract-plugin": "^2.10.1",
     "mkdirp": "^3.0.1",
-    "modularscale-sass": "^3.0.3",
     "npm-run-all": "^4.1.1",
     "postcss": "^8.5.8",
     "postcss-loader": "^8.2.0",
@@ -150,8 +150,6 @@
     "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1",
     "rimraf": "^6.1.2",
-    "sass": "^1.97.3",
-    "sass-loader": "^16.0.6",
     "sirv-cli": "^3.0.1",
     "sitemap-static": "^0.4.2",
     "static-site-generator-webpack-plugin": "^3.4.1",
