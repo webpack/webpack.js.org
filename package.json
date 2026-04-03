@@ -71,7 +71,7 @@
   "resolutions": {
     "sitemap-static/minimist": "1.2.5",
     "eval": "^0.1.5",
-    "lodash": "4.17.21"
+    "lodash": "4.18.1"
   },
   "dependencies": {
     "@docsearch/react": "^4.6.0",
