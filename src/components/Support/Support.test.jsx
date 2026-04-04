@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 
 jest.mock("./AdditionalSupporters.mjs", () => []);
+jest.mock("./_supporters.json", () => [], { virtual: true });
 
 // eslint-disable-next-line import/first
 import Support from "./Support.jsx";
