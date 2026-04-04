@@ -1,4 +1,5 @@
 @reference "tailwindcss";
+@reference "../../styles/theme.css";
 @import "./prism-theme.css";
 
 /*
@@ -52,7 +53,7 @@
   h4,
   h5,
   h6 {
-    @apply block font-semibold text-[#32434a] leading-[1.4];
+    @apply block font-semibold text-heading-dark leading-[1.4];
     font-family:
       "Source Serif Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times,
       serif;
@@ -140,7 +141,7 @@
   }
 
   aside {
-    @apply border-l-4 border-solid border-l-[#dddddd] py-[0.75em] px-[1em] text-gray-500;
+    @apply border-l-4 border-solid border-l-aside-border py-[0.75em] px-[1em] text-gray-500;
     > :first-child {
       margin-top: 0;
     }
@@ -165,24 +166,24 @@
       > .warning__prefix,
       > .preview__prefix,
       > .todo__prefix {
-        @apply capitalize font-semibold block text-base text-[#1a1a1a] mb-[0.25em];
+        @apply capitalize font-semibold block text-base text-aside-prefix mb-[0.25em];
       }
     }
 
     &.tip {
-      @apply bg-[#eaf8ff] text-[#4e7182] border-l-[#1eb4ff];
+      @apply bg-aside-tip-bg text-aside-tip-text border-l-aside-tip-border;
     }
 
     &.warning {
-      @apply bg-[#fdf5d8] text-[#716b53] border-l-[#f3c316];
+      @apply bg-aside-warning-bg text-aside-warning-text border-l-aside-warning-border;
     }
 
     &.preview {
-      @apply bg-gray-100 text-[#716b53] border-l-[#1e72b3];
+      @apply bg-gray-100 text-aside-warning-text border-l-brand-blue;
     }
 
     &.todo {
-      @apply bg-[#fbddcd] text-[#907a6e] border-l-[#e95d13];
+      @apply bg-aside-todo-bg text-aside-todo-text border-l-aside-todo-border;
 
       .tip-content::before {
         content: "[TODO]: ";
@@ -192,7 +193,7 @@
   }
 
   blockquote {
-    @apply border-l-4 border-solid border-l-[#dddddd] py-[0.75em] px-[1em] text-gray-500 italic;
+    @apply border-l-4 border-solid border-l-aside-border py-[0.75em] px-[1em] text-gray-500 italic;
 
     > :first-child {
       margin-top: 0;
@@ -226,7 +227,7 @@
   }
 
   th {
-    @apply font-bold text-left py-1.5 px-3 bg-[#f1f4f4] border-r border-solid border-r-[#cccccc];
+    @apply font-bold text-left py-1.5 px-3 bg-table-header-bg border-r border-solid border-r-table-border;
 
     &:last-child {
       @apply border-r-0;
@@ -234,14 +235,14 @@
   }
 
   tr {
-    @apply border border-solid border-[#cccccc] block mb-2.5;
+    @apply border border-solid border-table-border block mb-2.5;
 
     &:nth-child(2n) {
-      @apply bg-[#f8f8f8];
+      @apply bg-table-row-alt;
     }
 
     &:last-child {
-      @apply border-b border-b-[#cccccc];
+      @apply border-b border-b-table-border;
     }
 
     @media (min-width: 768px) {
@@ -266,7 +267,7 @@
       &::before {
         content: none;
       }
-      @apply border-r border-r-[#cccccc] border-b-0;
+      @apply border-r border-r-table-border border-b-0;
       &:last-child {
         @apply border-r-0;
       }
@@ -296,7 +297,7 @@
   }
 
   a code {
-    @apply text-[#1a6bac];
+    @apply text-brand-link;
   }
   a {
     text-decoration: underline;
@@ -304,11 +305,11 @@
     text-decoration-thickness: 1px;
   }
   pre {
-    @apply bg-[#2d3748] text-[#e2e8f0] p-4 pr-14 rounded-[3px] text-sm leading-normal overflow-auto;
+    @apply bg-code-pre-bg text-code-pre-text p-4 pr-14 rounded-[3px] text-sm leading-normal overflow-auto;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 
     code {
-      @apply m-0 p-0 whitespace-pre border-none bg-transparent text-[#a5cee1];
+      @apply m-0 p-0 whitespace-pre border-none bg-transparent text-code-token;
       font-family: monospace;
       text-shadow: 0 1px 0 rgba(22, 31, 35, 0.5);
 
@@ -317,20 +318,20 @@
 
         &::after {
           content: "›";
-          @apply float-left relative -left-0.5 text-center text-[#1e78c2] text-base;
+          @apply float-left relative -left-0.5 text-center text-code-link text-base;
         }
       }
 
       a {
         border-bottom: 1px dotted;
-        @apply border-b-[#175d96];
+        @apply border-b-code-anchor-border;
       }
 
       .code-link {
         @apply relative;
 
         &:hover {
-          @apply text-[#2186d8];
+          @apply text-code-link-hover;
         }
       }
     }

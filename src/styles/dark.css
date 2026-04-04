@@ -2,11 +2,11 @@
 
 [data-theme="dark"] {
   body {
-    @apply bg-[#121212] text-[#e0e0e0];
+    @apply bg-dark-bg text-dark-text;
   }
 
   .splash__section--dark {
-    @apply bg-[#202020];
+    @apply bg-dark-surface;
   }
 
   .markdown {
@@ -16,54 +16,54 @@
     h4,
     h5,
     h6 {
-      @apply text-[#9ab3c0];
+      @apply text-dark-heading;
     }
 
     code,
     tt {
       text-shadow: none;
-      @apply bg-[rgba(70,94,105,0.45)];
+      @apply bg-dark-code-inline-bg;
     }
 
     blockquote {
-      @apply border-l-[#343434] text-[#a3a3a3];
+      @apply border-l-dark-section-border text-dark-muted;
     }
 
     blockquote.tip {
-      @apply bg-[#192429] text-[#7da2b4];
+      @apply bg-dark-aside-tip-bg text-dark-aside-tip-text;
     }
 
     blockquote.warning {
-      @apply bg-[#27220a] text-[#a49d83];
+      @apply bg-dark-aside-warning-bg text-dark-aside-warning-text;
     }
 
     blockquote.todo {
-      @apply bg-[#402b1f] text-[#998478];
+      @apply bg-dark-aside-todo-bg text-dark-aside-todo-text;
     }
 
     hr {
-      @apply bg-[#343434];
+      @apply bg-dark-section-border;
     }
 
     th {
-      @apply bg-[#121212] border-[#252525];
+      @apply bg-dark-bg border-dark-border;
     }
 
     tr,
     tr:last-child {
-      @apply border-[#252525];
+      @apply border-dark-border;
     }
 
     tr:nth-child(2n) {
-      @apply bg-[#202020];
+      @apply bg-dark-surface;
     }
 
     td {
-      @apply border-[#252525];
+      @apply border-dark-border;
     }
 
     pre {
-      @apply bg-[#131b1f];
+      @apply bg-dark-code-bg;
 
       code {
         @apply bg-transparent;
@@ -71,10 +71,10 @@
     }
 
     a code {
-      @apply text-[#69a8ee];
+      @apply text-dark-link;
 
       &:hover {
-        @apply text-[#82b7f6];
+        @apply text-dark-link-hover;
       }
     }
 
@@ -82,7 +82,7 @@
     aside.warning,
     aside.preview,
     aside.todo {
-      @apply bg-[#222222] text-white;
+      @apply bg-dark-surface-2 text-white;
     }
 
     aside.tip > .tip__prefix,
@@ -99,11 +99,11 @@
 
   .sponsors__content,
   .footer__inner {
-    @apply border-[#252525];
+    @apply border-dark-border;
   }
 
   .page-links__gap {
-    @apply text-gray-300;
+    @apply text-dark-muted;
   }
 
   .site {
@@ -111,11 +111,11 @@
   }
 
   .sidebar__docs-version {
-    @apply border-[#252525] text-[#b8b8b8];
+    @apply border-dark-border text-dark-sidebar-version;
   }
 
   .contributor .contributor__name {
-    @apply bg-[#121212] text-[#9ab3c0];
+    @apply bg-dark-bg text-dark-heading;
   }
 
   .footer-openjsf-logo {
@@ -130,12 +130,12 @@
 @layer base {
   [data-theme="dark"] a,
   [data-theme="dark"] button.as-link {
-    @apply text-[#69a8ee];
+    @apply text-dark-link;
   }
 }
 
 @layer base {
   [data-theme="dark"] a:hover {
-    @apply text-[#82b7f6];
+    @apply text-dark-link-hover;
   }
 }
