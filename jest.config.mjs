@@ -3,11 +3,12 @@ export default {
   testEnvironment: "node",
   setupFiles: ["./src/setupTests.js"],
   transform: {
-    "^.+\\.jsx?$": "babel-jest",
+    "^.+\\.(m|c)?jsx?$": "babel-jest",
   },
   moduleNameMapper: {
     "\\.(scss|css)$": "<rootDir>/src/components/__mocks__/styleMock.js",
     "\\.svg$": "<rootDir>/src/components/__mocks__/svgMock.js",
+    "\\.(png|jpg|jpeg|ico)$": "<rootDir>/src/components/__mocks__/fileMock.js",
   },
   moduleFileExtensions: [
     "js",
