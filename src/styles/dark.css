@@ -118,15 +118,6 @@
     @apply bg-[#121212] text-[#9ab3c0];
   }
 
-  .placeholder h2,
-  .placeholder p {
-    @apply bg-[#252525];
-
-    &:after {
-      background: linear-gradient(90deg, #252525, #121212, #252525);
-    }
-  }
-
   .footer-openjsf-logo {
     @apply invert;
   }
