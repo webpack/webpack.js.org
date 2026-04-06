@@ -1676,7 +1676,11 @@ maintenance of the webpack bundler and its technical direction.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>The <code>fileDependencies</code> <code>Set</code> is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.</p></aside>
 <aside class="warning"><p class="warning__prefix">warning</p><p>Since webpack 5, <code>compilation.fileDependencies</code>, <code>compilation.contextDependencies</code> and <code>compilation.missingDependencies</code> are now a <code>Set</code> instead of a <code>Sortable Set</code> and thus no longer sorted.</p></aside>
 <h2><span id="changed-chunks"></span>Changed chunks<a href="#changed-chunks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>Similar to the watch graph, you can monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.</p>
+<p>Similar to the watch graph, you can monitor changed chunks within a compilation by tracking their content hashes.</p>
+<aside class="warning"><p class="warning__prefix">warning</p><p><code>compilation.chunks</code> is a <code>Set</code>, not an array. Calling <code>.filter()</code> or <code>.map()</code> directly on it throws a <code>TypeError</code>.
+Use <code>for...of</code> or spread it into an array first.</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p><code>chunk.hash</code> is not defined on chunk objects. Use <code>chunk.contentHash.javascript</code> instead.
+Accessing <code>chunk.hash</code> returns <code>undefined</code>, causing every chunk to appear changed on every rebuild.</p></aside>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">class</span> <span class="token class-name">MyPlugin</span> <span class="token punctuation">{</span>
   <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -1684,17 +1688,37 @@ maintenance of the webpack bundler and its technical direction.</p>
 
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>emit<span class="token punctuation">.</span><span class="token function">tapAsync</span><span class="token punctuation">(</span><span class="token string">&quot;MyPlugin&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation<span class="token punctuation">,</span> callback</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-      <span class="token keyword">const</span> changedChunks <span class="token operator">=</span> compilation<span class="token punctuation">.</span>chunks<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-        <span class="token keyword">const</span> oldVersion <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions<span class="token punctuation">[</span>chunk<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions<span class="token punctuation">[</span>chunk<span class="token punctuation">.</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> chunk<span class="token punctuation">.</span>hash<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> chunk<span class="token punctuation">.</span>hash <span class="token operator">!==</span> oldVersion<span class="token punctuation">;</span>
-      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> changedChunks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+      <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> chunk <span class="token keyword">of</span> compilation<span class="token punctuation">.</span>chunks<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> key <span class="token operator">=</span> chunk<span class="token punctuation">.</span>id <span class="token operator">??</span> chunk<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+        <span class="token keyword">const</span> currentHash <span class="token operator">=</span> chunk<span class="token punctuation">.</span>contentHash<span class="token punctuation">.</span>javascript<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>currentHash <span class="token operator">===</span> <span class="token keyword">undefined</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> oldHash <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>chunkVersions<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> currentHash<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>currentHash <span class="token operator">!==</span> oldHash<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          changedChunks<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>changedChunks<span class="token punctuation">.</span>length <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>
+          <span class="token string">&quot;Changed chunks:&quot;</span><span class="token punctuation">,</span>
+          changedChunks<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> chunk<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
       <span class="token function">callback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
 <span class="token keyword">export</span> <span class="token keyword">default</span> MyPlugin<span class="token punctuation">;</span></code></pre></div>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Use <code>chunk.id ?? chunk.name</code> as the tracking key. Some chunks have an <code>id</code> but no <code>name</code>, so relying on <code>chunk.name</code> alone can miss changes.
+CSS or other non-JS chunks may not have a <code>javascript</code> key in <code>contentHash</code> — the <code>continue</code> guard skips those safely.</p></aside>
 <h1><span id="release-process"></span>Release Process<a href="#release-process" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
 <p>The release process for deploying webpack is actually quite painless. Read through the following steps, so you have a clear understanding of how it&#x27;s done.</p>
