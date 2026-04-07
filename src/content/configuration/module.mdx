@@ -24,6 +24,7 @@ contributors:
   - vabushkevich
   - ahabhgk
   - hai-x
+  - shivxmsharma
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -984,7 +985,15 @@ export default {
 
 ### module.parser.json.exportsDepth
 
-The depth of json dependency flagged as `exportInfo`. By default, it is set to `Infinity` in production mode, and `1` in development mode.
+The depth of json dependency flagged as `exportInfo`.
+
+The default value of `module.parser.json.exportsDepth` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default    |
+| --------------- | ---------- |
+| `"production"`  | `Infinity` |
+| `"development"` | `1`        |
+| `"none"`        | `Infinity` |
 
 - Type: `number`
 - Available: <Badge text='5.98.0+' />

@@ -7,6 +7,7 @@ contributors:
   - byzyk
   - madhavarshney
   - EugeneHlushko
+  - shivxmsharma
 ---
 
 These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
@@ -47,9 +48,17 @@ The example above will only give you performance hints based on `.js` files.
 
 ### performance.hints
 
-`string = 'warning': 'error' | 'warning'` `boolean: false`
+`string: 'error' | 'warning'` `boolean: false`
 
 Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found.
+
+The default value of `performance.hints` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default     |
+| --------------- | ----------- |
+| `"production"`  | `'warning'` |
+| `"development"` | `false`     |
+| `"none"`        | `false`     |
 
 Given an asset is created that is over 250kb:
 

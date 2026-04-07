@@ -31,6 +31,7 @@ contributors:
   - long76
   - ahabhgk
   - tanyabouman
+  - shivxmsharma
 ---
 
 The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
@@ -2172,9 +2173,17 @@ W> The path must not contain an exclamation mark (`!`) as it is reserved by webp
 
 ## output.pathinfo
 
-`boolean=true` `string: 'verbose'`
+`boolean` `string: 'verbose'`
 
-Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively. `'verbose'` shows more information like exports, runtime requirements and bailouts.
+Tells webpack to include comments in bundles with information about the contained modules. `'verbose'` shows more information like exports, runtime requirements and bailouts.
+
+The default value of `output.pathinfo` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default |
+| --------------- | ------- |
+| `"production"`  | `false` |
+| `"development"` | `true`  |
+| `"none"`        | `false` |
 
 W> While the data these comments can provide is useful during development when reading the generated code, it **should not** be used in production.
 

@@ -4,6 +4,7 @@ sort: 1
 contributors:
   - pranshuchittora
   - EugeneHlushko
+  - shivxmsharma
 ---
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
@@ -204,6 +205,34 @@ When object's key can have multiple types, use `|` to list them. Here is an exam
 `object = { prop1 string = 'none': 'none' | 'development' | 'production' | [string]}`
 
 This allows us to display the defaults, enumeration and other information.
+
+When an option has different defaults depending on the [`mode`](/configuration/mode/), use a defaults table instead of the inline `= value` syntax:
+
+**configuration.example.option**
+
+`string: 'natural' | 'named' | 'deterministic'`
+
+The default value of `configuration.example.option` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default           |
+| --------------- | ----------------- |
+| `"production"`  | `'deterministic'` |
+| `"development"` | `'named'`         |
+| `"none"`        | `'natural'`       |
+
+If an option has a boolean default that varies by mode:
+
+**configuration.example.flag**
+
+`boolean`
+
+The default value of `configuration.example.flag` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default |
+| --------------- | ------- |
+| `"production"`  | `true`  |
+| `"development"` | `false` |
+| `"none"`        | `false` |
 
 If the object's key is dynamic, user-defined, use `<key>` to describe it:
 

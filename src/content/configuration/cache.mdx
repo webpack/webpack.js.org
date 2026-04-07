@@ -4,13 +4,22 @@ sort: 12
 contributors:
   - snitin315
   - chenxsan
+  - shivxmsharma
 ---
 
 ## cache
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/configuration/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+Cache the generated webpack modules and chunks to improve build speed. `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+
+The default value of `cache` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default              |
+| --------------- | -------------------- |
+| `"production"`  | `false`              |
+| `"development"` | `{ type: 'memory' }` |
+| `"none"`        | `false`              |
 
 **webpack.config.js**
 
@@ -28,7 +37,15 @@ While setting `cache.type` to `'filesystem'` opens up more options for configura
 Collect unused memory allocated during deserialization, only available when [`cache.type`](#cachetype) is set to `'filesystem'`. This requires copying data into smaller buffers and has a performance cost.
 
 - Type: `boolean`
-  - It defaults to `false` in production mode and `true` in development mode.
+
+The default value of `cache.allowCollectingMemory` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default |
+| --------------- | ------- |
+| `"production"`  | `false` |
+| `"development"` | `true`  |
+| `"none"`        | `false` |
+
 - <Badge text="5.35.0+" />
 
 **webpack.config.js**
@@ -316,9 +333,13 @@ Define the lifespan of unused cache entries in the memory cache.
 
 - `cache.maxMemoryGenerations`: small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
 
-- `cache.maxMemoryGenerations`: defaults to 10 in `development` mode and to `Infinity` in `production` mode.
+The default value of `cache.maxMemoryGenerations` depends on the [`mode`](/configuration/mode/):
 
-`cache.maxMemoryGenerations` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+| Mode            | Default    |
+| --------------- | ---------- |
+| `"production"`  | `Infinity` |
+| `"development"` | `10`       |
+| `"none"`        | `Infinity` |
 
 **webpack.config.js**
 
