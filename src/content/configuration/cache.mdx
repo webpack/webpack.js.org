@@ -4,13 +4,22 @@ sort: 12
 contributors:
   - snitin315
   - chenxsan
+  - shivxmsharma
 ---
 
 ## cache
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/configuration/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+Cache the generated webpack modules and chunks to improve build speed. `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+
+The default value of `cache` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default              |
+| ------------- | -------------------- |
+| `development` | `{ type: 'memory' }` |
+| `production`  | `false`              |
+| `none`        | `false`              |
 
 **webpack.config.js**
 

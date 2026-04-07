@@ -15,6 +15,7 @@ contributors:
   - chenxsan
   - Roberto14
   - hai-x
+  - shivxmsharma
 related:
   - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -26,7 +27,15 @@ Webpack runs optimizations for you depending on the chosen [`mode`](/configurati
 
 `boolean`
 
-Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported. By default `optimization.checkWasmTypes` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported.
+
+The default value of `optimization.checkWasmTypes` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -106,7 +115,14 @@ export default {
 `boolean`
 
 Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
-By default `optimization.concatenateModules` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+The default value of `optimization.concatenateModules` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -121,9 +137,17 @@ export default {
 
 ## optimization.emitOnErrors
 
-`boolean = false`
+`boolean`
 
 Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
+
+The default value of `optimization.emitOnErrors` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `false` |
+| `development` | `true`  |
+| `none`        | `true`  |
 
 **webpack.config.js**
 
@@ -140,17 +164,23 @@ W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit 
 
 ## optimization.avoidEntryIife
 
-`boolean = false`
+`boolean`
 
 <Badge text="5.95.0+" />
 
-T> IIFE (Immediately Invoked Function Expression) is a function that runs immediately after it is created. Webpack uses it to wrap code and avoid variable conflicts.
+T> IIFE ...
 
-Use `optimization.avoidEntryIife` to avoid wrapping the entry module in an IIFE when it is required (search for `"This entry needs to be wrapped in an IIFE because"` in [JavascriptModulesPlugin](https://github.com/webpack/webpack/blob/main/lib/javascript/JavascriptModulesPlugin.js)). This approach helps optimize performance for JavaScript engines and enables tree shaking when building ESM libraries.
+Use `optimization.avoidEntryIife` ...
 
 Currently, `optimization.avoidEntryIife` can only optimize a single entry module along with other modules.
 
-By default, `optimization.avoidEntryIife` is enabled in `production` [mode](/configuration/mode/) and disabled otherwise.
+The default value of `optimization.avoidEntryIife` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -169,7 +199,15 @@ W> The `optimization.avoidEntryIife` option can negatively affect build performa
 
 `boolean`
 
-Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don't have to be loaded when the bigger chunk has been already loaded.
+
+The default value of `optimization.flagIncludedChunks` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -184,9 +222,17 @@ export default {
 
 ## optimization.innerGraph
 
-`boolean = true`
+`boolean`
 
 `optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
+
+The default value of `optimization.innerGraph` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -205,7 +251,13 @@ export default {
 
 `optimization.mangleExports` allows to control export mangling.
 
-By default `optimization.mangleExports: 'deterministic'` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+The default value of `optimization.mangleExports` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 The following values are supported:
 
@@ -263,9 +315,17 @@ export default {
 
 ## optimization.minimize
 
-`boolean = true`
+`boolean`
 
 Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
+
+The default value of `optimization.minimize` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -413,9 +473,17 @@ W> `moduleIds: total-size` has been removed in webpack 5.
 
 ## optimization.nodeEnv
 
-`boolean = false` `string`
+`boolean: false` `string`
 
-Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` **defaults** to [mode](/configuration/mode/) if set, else falls back to `'production'`.
+Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`.
+
+The default value of `optimization.nodeEnv` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default         |
+| ------------- | --------------- |
+| `production`  | `'production'`  |
+| `development` | `'development'` |
+| `none`        | `false`         |
 
 Possible values:
 
@@ -475,7 +543,15 @@ export default {
 
 `boolean`
 
-Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical. By default `optimization.realContentHash` is enabled in production [mode](/configuration/mode/) and disabled otherwise.
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+
+The default value of `optimization.realContentHash` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -579,7 +655,7 @@ export default {
 
 ## optimization.sideEffects
 
-`boolean = true` `string: 'flag'`
+`boolean` `string: 'flag'`
 
 Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
@@ -596,6 +672,14 @@ Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpac
 T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
 
 `optimization.sideEffects` depends on [`optimization.providedExports`](#optimizationprovidedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
+
+The default value of `optimization.sideEffects` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default  |
+| ------------- | -------- |
+| `production`  | `true`   |
+| `development` | `'flag'` |
+| `none`        | `'flag'` |
 
 **webpack.config.js**
 
@@ -619,8 +703,6 @@ export default {
 };
 ```
 
-The `'flag'` value is used by default in non-production builds.
-
 T> `optimization.sideEffects` will also flag modules as side effect free when they contain only side effect free statements.
 
 ## optimization.splitChunks
@@ -631,10 +713,18 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 ## optimization.usedExports
 
-`boolean = true` `string: 'global'`
+`boolean` `string: 'global'`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationprovidedexports). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
+
+The default value of `optimization.usedExports` depends on the [`mode`](/configuration/mode/):
+
+| Mode          | Default |
+| ------------- | ------- |
+| `production`  | `true`  |
+| `development` | `false` |
+| `none`        | `false` |
 
 **webpack.config.js**
 
