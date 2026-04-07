@@ -1,6 +1,6 @@
 @theme {
   /* Brand link colors */
-  --color-brand-link: #1a6bac;
+  --color-brand-link: #1d78c1;
   --color-brand-link-hover: #144f80;
   --color-brand-link-dark: #69a8ee;
   --color-brand-link-dark-hover: #82b7f6;
@@ -73,7 +73,7 @@
 
 /* Explicit runtime CSS custom properties so var(--color-*) works without @import "tailwindcss" */
 :root {
-  --color-brand-link: #1a6bac;
+  --color-brand-link: #1d78c1;
   --color-brand-link-hover: #144f80;
   --color-brand-link-dark: #69a8ee;
   --color-brand-link-dark-hover: #82b7f6;
