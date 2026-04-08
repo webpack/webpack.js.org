@@ -4,6 +4,7 @@ import Icon from "../../assets/icon-square-small.svg";
 import OpenJSLogo from "../../assets/openjs-logo.png";
 import Container from "../Container/Container.jsx";
 import Link from "../Link/Link.jsx";
+import footerLegal from './_footer-legal.json';
 
 const footerLinkClasses =
   "text-[11px] uppercase text-[#777676] dark:text-[#cccccc] hover:text-[#333333] dark:hover:text-[#ffffff]";
@@ -36,19 +37,14 @@ const Footer = () => (
         holders. Use of them does not imply any affiliation with or endorsement
         by them.
       </p>
-      <p className="mx-auto mt-[18px] text-[15px] leading-[1.6] text-[#333333] dark:text-[#e0e0e0]">
-        <a href="https://openjsf.org">The OpenJS Foundation</a> |{" "}
-        <a href="https://ai-coding-assistants-policy.openjsf.org/">
-          AI Coding Assistants Policy
-        </a> |{" "}
-        <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |{" "}
-        <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |{" "}
-        <a href="https://bylaws.openjsf.org">Bylaws</a> |{" "}
-        <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |{" "}
-        <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |{" "}
-        <a href="https://trademark-list.openjsf.org">Trademark List</a> |{" "}
-        <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a>
-      </p>
+<p className="mx-auto mt-[18px] text-[15px] leading-[1.6] text-[#333333] dark:text-[#e0e0e0]">
+  {footerLegal.links.map((link, i) => (
+                  <span key={link.url}>
+                    {i > 0 && ' | '}
+                                    <a href={link.url}>{link.label}</a>a>
+                  </span>span>
+                ))}
+</p>
     </Container>
     <Container className="flex flex-wrap justify-center gap-y-4 content-center border-t border-[#f2f2f2] px-0 py-[0.4em] md:flex-row md:justify-between">
       <section
