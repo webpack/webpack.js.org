@@ -42,7 +42,7 @@ const Footer = () => (
                   <span key={link.url}>
                     {i > 0 && ' | '}
                                     <a href={link.url}>{link.label}</a>a>
-                  </span>span>
+                  </span>
                 ))}
 </p>
     </Container>
