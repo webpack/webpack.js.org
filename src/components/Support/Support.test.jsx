@@ -57,6 +57,18 @@ describe("Support", () => {
     ).toBeTruthy();
   });
 
+  it("renders a heading for platinum rank", () => {
+    render(<Support rank="platinum" type="total" />);
+    expect(
+      screen.getByRole("heading", { name: "Platinum Sponsors" }),
+    ).toBeTruthy();
+  });
+
+  it("renders monthly description text", () => {
+    render(<Support rank="gold" type="monthly" />);
+    expect(screen.getByText(/pledging/i)).toBeTruthy();
+  });
+
   it("renders the become a sponsor link for sponsor ranks", () => {
     render(<Support rank="gold" type="total" />);
     expect(
