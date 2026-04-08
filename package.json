@@ -32,6 +32,7 @@
     "fetch": "run-p fetch:*",
     "fetch:readmes": "node src/utilities/fetch-package-readmes.mjs",
     "fetch:supporters": "node src/utilities/fetch-supporters.mjs",
+    "fetch:footer": "node src/utilities/fetch-footer.mjs",
     "fetch:governance": "node src/utilities/fetch-governance.mjs",
     "fetch-all": "run-s fetch-repos fetch",
     "prebuild": "npm run clean",
