@@ -21,7 +21,7 @@ Explore what's new in this release:
 
 ## Plugin Validation with `compiler.hooks.validate`
 
-Webpack adds a new top-level `validate` option and a `compiler.hooks.validate` hook that standardize how schema validation works across webpack configuration, plugins, and loaders.
+Webpack adds a new top-level `validate` option and a [`compiler.hooks.validate`](/api/compiler-hooks/#validate) hook that standardize how schema validation works across webpack configuration, plugins, and loaders.
 
 Until now, there was no unified way for plugins to integrate schema validation into the webpack build lifecycle. Each plugin handled validation on its own. The new `compiler.hooks.validate` hook gives plugin authors a standard API to register their validation logic, and `compiler.validate(...)` to run it. This means all validation from webpack's core config to every plugin that adopts the hook is controlled by a single `validate` flag and follows the same patterns:
 
