@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`SidebarItem matches snapshot 1`] = `
+<div
+  class="group/item relative flex flex-wrap text-[15px] my-[0.6em]"
+>
+  <button
+    aria-expanded="false"
+    aria-label="Toggle Getting Started section"
+    class="bg-transparent border-none p-0 flex items-center"
+  >
+    <svg-mock
+      class="flex-none mt-[0.125em] mr-2 cursor-pointer text-[#175d96] dark:text-[#69a8ee] transition-all duration-250 hover:text-[#333] "
+      fill="#175d96"
+      height="17"
+      width="15"
+    />
+  </button>
+  <a
+    class="flex-1 max-w-[85%] overflow-hidden whitespace-nowrap text-ellipsis text-[#2b3a42] dark:text-[#b8b8b8]"
+    data-discover="true"
+    data-testid="sidebar-item-title"
+    href="/guides/getting-started/"
+  >
+    Getting Started
+  </a>
+  <ul
+    class="relative hidden flex-[0_0_100%] flex-wrap my-[0.35em] pl-6 overflow-hidden list-none leading-[19px] before:content-[''] before:absolute before:h-[calc(100%-0.6em)] before:top-0 before:left-6 before:border-l before:border-dashed before:border-[#777676] group-data-[open]/item:flex"
+  >
+    <li
+      class="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
+      title="Step 1"
+    >
+      <a
+        class="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+        data-discover="true"
+        href="/guides/getting-started/#step-1"
+      >
+        Step 1
+      </a>
+    </li>
+  </ul>
+</div>
+`;

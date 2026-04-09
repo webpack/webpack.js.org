@@ -112,14 +112,14 @@ export default {
     filename: "my-first-webpack.bundle.js",
   },
   module: {
-    rules: [{ test: /\.txt$/, use: "raw-loader" }],
+    rules: [{ test: /\.js$/, use: "babel-loader" }],
   },
 };
 ```
 
 The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
 
-> "Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a `require()`/`import` statement, **use** the `raw-loader` to transform it before you add it to the bundle."
+> "Hey webpack compiler, when you come across a path that resolves to a '.js' file inside of a `require()`/`import` statement, **use** the `babel-loader` to transform it before you add it to the bundle."
 
 W> It is important to remember that when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. For your benefit, webpack will warn you if this is done incorrectly.
 
@@ -143,7 +143,7 @@ import webpack from "webpack"; // to access built-in plugins
 
 export default {
   module: {
-    rules: [{ test: /\.txt$/, use: "raw-loader" }],
+    rules: [{ test: /\.js$/, use: "babel-loader" }],
   },
   plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
 };

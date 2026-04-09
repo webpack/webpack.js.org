@@ -7,7 +7,8 @@ describe("Click menu", () => {
     // note that there's no hash in url
     cy.get('[data-testid="contributors"]').scrollIntoView();
 
-    const selector = '.sidebar-item__title[href="/concepts/modules/"]';
+    const selector =
+      '[data-testid="sidebar-item-title"][href="/concepts/modules/"]';
 
     cy.get(selector).click();
     cy.window().then((win) => {

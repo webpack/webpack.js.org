@@ -5,17 +5,17 @@ exports[`PlaceholderComponent renders correctly 1`] = `
   class="placeholder"
 >
   <p
-    class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-3/4"
+    class="bg-gray-100 dark:bg-gray-800 font-sans overflow-hidden relative animate-pulse w-3/4"
   >
      
   </p>
   <p
-    class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-[85%]"
+    class="bg-gray-100 dark:bg-gray-800 font-sans overflow-hidden relative animate-pulse w-[85%]"
   >
      
   </p>
   <p
-    class="bg-gray-100 font-sans overflow-hidden relative animate-pulse w-1/2"
+    class="bg-gray-100 dark:bg-gray-800 font-sans overflow-hidden relative animate-pulse w-1/2"
   >
      
   </p>

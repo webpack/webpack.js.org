@@ -5,6 +5,7 @@ contributors:
   - nveenjain
   - EugeneHlushko
   - benglynn
+  - raj-sapalya
 ---
 
 Plugins grant unlimited opportunity to perform customizations within the webpack build system. This allows you to create custom asset types, perform unique build modifications, or even enhance the webpack runtime while using middleware. The following are some features of webpack that become useful while writing plugins.
@@ -93,7 +94,13 @@ W> Since webpack 5, `compilation.fileDependencies`, `compilation.contextDependen
 
 ## Changed chunks
 
-Similar to the watch graph, you can monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.
+Similar to the watch graph, you can monitor changed chunks within a compilation by tracking their content hashes.
+
+W> `compilation.chunks` is a `Set`, not an array. Calling `.filter()` or `.map()` directly on it throws a `TypeError`.
+Use `for...of` or spread it into an array first.
+
+W> `chunk.hash` is not defined on chunk objects. Use `chunk.contentHash.javascript` instead.
+Accessing `chunk.hash` returns `undefined`, causing every chunk to appear changed on every rebuild.
 
 ```js
 class MyPlugin {
@@ -103,11 +110,29 @@ class MyPlugin {
 
   apply(compiler) {
     compiler.hooks.emit.tapAsync("MyPlugin", (compilation, callback) => {
-      const changedChunks = compilation.chunks.filter((chunk) => {
-        const oldVersion = this.chunkVersions[chunk.name];
-        this.chunkVersions[chunk.name] = chunk.hash;
-        return chunk.hash !== oldVersion;
-      });
+      const changedChunks = [];
+
+      for (const chunk of compilation.chunks) {
+        const key = chunk.id ?? chunk.name;
+        const currentHash = chunk.contentHash.javascript;
+
+        if (currentHash === undefined) continue;
+
+        const oldHash = this.chunkVersions[key];
+        this.chunkVersions[key] = currentHash;
+
+        if (currentHash !== oldHash) {
+          changedChunks.push(chunk);
+        }
+      }
+
+      if (changedChunks.length > 0) {
+        console.log(
+          "Changed chunks:",
+          changedChunks.map((chunk) => chunk.id),
+        );
+      }
+
       callback();
     });
   }
@@ -115,3 +140,6 @@ class MyPlugin {
 
 export default MyPlugin;
 ```
+
+T> Use `chunk.id ?? chunk.name` as the tracking key. Some chunks have an `id` but no `name`, so relying on `chunk.name` alone can miss changes.
+CSS or other non-JS chunks may not have a `javascript` key in `contentHash` — the `continue` guard skips those safely.

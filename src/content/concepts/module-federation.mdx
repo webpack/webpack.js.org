@@ -122,6 +122,8 @@ It can be leveraged to connect remote containers to a host container dynamically
 })();
 ```
 
+T> A **container** is the remote container entry object exposed by a federated build, usually through that remote's `remoteEntry.js`. It provides the `get` and `init` methods shown here. In examples like `window[scope]` or `globalThis.someContainer`, the container is expected to exist only once the remote container script has already loaded.
+
 The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
 
 This way you could dynamically load an A/B test which provides a different version of a shared module.
@@ -137,7 +139,7 @@ function loadComponent(scope, module) {
   return async () => {
     // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
     await __webpack_init_sharing__("default");
-    const container = window[scope]; // or get the container somewhere else
+    const container = window[scope]; // the remote container exposed by the loaded remoteEntry.js script
     // Initialize the container, it may provide shared modules
     await container.init(__webpack_share_scopes__.default);
     const factory = await window[scope].get(module);

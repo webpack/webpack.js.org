@@ -10,13 +10,16 @@ describe("Open page in new tab", { scrollBehavior: false }, () => {
       },
     });
     // wait for page content to load before asserting scroll
-    cy.get('.sidebar-item__title[href="/concepts/plugins/"]').should("exist");
+    cy.get(
+      '[data-testid="sidebar-item-title"][href="/concepts/plugins/"]',
+    ).should("exist");
     // there's one call in Page.jsx when componentDidMount
     cy.window().should((win) => {
       expect(win.scrollTo).to.be.calledOnce;
     });
 
-    const selector = '.sidebar-item__title[href="/concepts/plugins/"]';
+    const selector =
+      '[data-testid="sidebar-item-title"][href="/concepts/plugins/"]';
 
     // we click the menu
     cy.get(selector).click();

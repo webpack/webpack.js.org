@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
 
-import "./Container.scss";
+// Tailwind CSS is now used for styling. Custom SCSS removed.
 
 export default function Container(props = {}) {
   const { className = "" } = props;
 
-  return <div className={`container ${className}`}>{props.children}</div>;
+  return (
+    <div className={`w-full max-w-screen-lg mx-auto ${className}`}>
+      {props.children}
+    </div>
+  );
 }
 
 Container.propTypes = {

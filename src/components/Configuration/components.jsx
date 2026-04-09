@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Component, isValidElement } from "react";
+import { isValidElement, useState } from "react";
 import Popover from "react-tiny-popover";
 
 const DEFAULT_CHILDREN_SIZE = 4;
@@ -20,8 +20,8 @@ const addLink = (child, i, url) =>
 const Card = ({ body }) => (
   // Applied .shadow > .markdown styles: max-height and overflow
   <div className="markdown max-h-[48vh] overflow-auto">
-    {/* Combined .inline and .shadow pre.inline styles: 
-      display: block, margin: 0, padding: 0 with right-padding override 
+    {/* Combined .inline and .shadow pre.inline styles:
+      display: block, margin: 0, padding: 0 with right-padding override
     */}
     <pre className="block m-0 p-0 pr-[15px]">
       <code>{body}</code>
@@ -33,71 +33,53 @@ Card.propTypes = {
   body: PropTypes.node,
 };
 
-export class Details extends Component {
-  static propTypes = {
-    url: PropTypes.string,
-    myChilds: PropTypes.arrayOf(PropTypes.node),
-  };
+export function Details({ url, myChilds }) {
+  const [open, setOpen] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-  }
+  // Find the index of </default>
+  const closeDefaultTagIndex = myChilds.findIndex((child) => {
+    if (isValidElement(child)) {
+      return (
+        child.props.className.includes("tag") &&
+        child.props.children.length === DEFAULT_CHILDREN_SIZE
+      );
+    }
 
-  clickOutsideHandler = () => {
-    this.setState({ open: false });
-  };
+    return false;
+  });
 
-  toggleVisibility = () => {
-    this.setState({ open: !this.state.open });
-  };
+  const content = [...myChilds];
 
-  render() {
-    const { myChilds, url } = this.props;
+  // Summary is the part of the snippet that would be shown in the code snippet,
+  // to get it we need to cut the <default></default> enclosing tags
+  const summary = content
+    .splice(2, closeDefaultTagIndex - 3)
+    .map(removeSpaces)
+    .map((child, i) => addLink(child, i, url));
 
-    // Find the index of </default>
-    const closeDefaultTagIndex = myChilds.findIndex((child) => {
-      if (isValidElement(child)) {
-        return (
-          child.props.className.includes("tag") &&
-          child.props.children.length === DEFAULT_CHILDREN_SIZE
-        );
-      }
+  content.splice(0, DEFAULT_CHILDREN_SIZE); // Remove <default></default> information
 
-      return false;
-    });
-
-    const content = [...myChilds];
-
-    // Summary is the part of the snippet that would be shown in the code snippet,
-    // to get it we need to cut the <default></default> enclosing tags
-    const summary = content
-      .splice(2, closeDefaultTagIndex - 3)
-      .map(removeSpaces)
-      .map((child, i) => addLink(child, i, url));
-
-    content.splice(0, DEFAULT_CHILDREN_SIZE); // Remove <default></default> information
-
-    const { open } = this.state;
-    return (
-      <Popover
-        isOpen={open}
-        position={["right", "top"]}
-        padding={0}
-        onClickOutside={this.clickOutsideHandler}
-        // Replaced .shadow with Tailwind equivalents, including the custom rgba box-shadow
-        containerClassName="overflow-visible rounded shadow-[-1px_1px_10px_0_rgba(255,255,255,0.44)]"
-        content={<Card body={content} />}
+  return (
+    <Popover
+      isOpen={open}
+      position={["right", "top"]}
+      padding={0}
+      onClickOutside={() => setOpen(false)}
+      // Replaced .shadow with Tailwind equivalents, including the custom rgba box-shadow
+      containerClassName="overflow-visible rounded shadow-[-1px_1px_10px_0_rgba(255,255,255,0.44)]"
+      content={<Card body={content} />}
+    >
+      <span
+        className="code-details-summary-span"
+        onClick={() => setOpen((prev) => !prev)}
       >
-        <span
-          className="code-details-summary-span"
-          onClick={this.toggleVisibility}
-        >
-          {summary}
-        </span>
-      </Popover>
-    );
-  }
+        {summary}
+      </span>
+    </Popover>
+  );
 }
+
+Details.propTypes = {
+  url: PropTypes.string,
+  myChilds: PropTypes.arrayOf(PropTypes.node),
+};

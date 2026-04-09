@@ -1,7 +1,3 @@
-@use "../../styles/partials/functions" as *;
-@use "../../styles/partials/mixins" as *;
-@use "sass:color";
-
 code[class*="lang-"],
 pre[class*="lang-"] {
   text-align: left;
@@ -12,12 +8,14 @@ pre[class*="lang-"] {
   line-height: 1.5;
   tab-size: 4;
   hyphens: none;
-  color: color.adjust(getColor(malibu), $saturation: -40%);
-  @include fontantialias(false);
+  color: #a5cee1;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+}
 
-  a {
-    color: inherit;
-  }
+code[class*="lang-"] a,
+pre[class*="lang-"] a {
+  color: inherit;
 }
 
 /* Code blocks */
@@ -25,7 +23,7 @@ pre[class*="lang-"] {
   padding: 0.4em 0.8em;
   margin: 0.5em 0;
   overflow: auto;
-  background-color: getColor(elephant);
+  background-color: #2b3a42;
 }
 
 /* Inline code */
@@ -57,10 +55,7 @@ pre[class*="lang-"] {
 .token.number,
 .token.constant,
 .token.symbol {
-  color: color.adjust(
-    color.adjust(getColor(malibu), $lightness: -15%),
-    $saturation: -15%
-  );
+  color: #53b7e6;
 }
 
 .token.selector,
@@ -70,7 +65,7 @@ pre[class*="lang-"] {
 .token.regex,
 .token.attr-value,
 .token.important {
-  color: color.adjust(#2dd271, $saturation: -23%);
+  color: #4ab576;
 }
 
 .token.inserted {
@@ -94,10 +89,7 @@ pre[class*="lang-"] {
 .token.attr-name,
 .token.keyword,
 .token.function {
-  color: color.adjust(
-    color.adjust(getColor(malibu), $lightness: -15%),
-    $saturation: -30%
-  );
+  color: #62b1d8;
 }
 
 .token.important,

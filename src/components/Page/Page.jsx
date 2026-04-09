@@ -12,7 +12,6 @@ import { placeholderString } from "../Placeholder/Placeholder.jsx";
 import AdjacentPages from "./AdjacentPages.jsx";
 
 // Load Styling
-import "./Page.scss";
 
 export default function Page(props) {
   const {
@@ -117,7 +116,10 @@ export default function Page(props) {
     );
   }
   return (
-    <main id="main-content" className="page">
+    <main
+      id="main-content"
+      className="flex-auto relative overflow-x-hidden py-[1.5em] px-[1em] md:flex-[3] md:p-[1.5em]"
+    >
       <Markdown>
         <h1>{title}</h1>
         {rest.date && pathname.startsWith("/blog/") && !isBlogIndex && (
@@ -136,19 +138,34 @@ export default function Page(props) {
         <div id="md-content">{contentRender}</div>
 
         {rest.url === "/blog/" && (
-          <div className="blog-list">
+          <div className="mt-8">
             {(props.pages || [])
               .filter((post) => post.url !== "/blog/")
               .map((post) => (
-                <div key={post.url} className="blog-post-item">
-                  <h2>
-                    <Link to={post.url}>{post.title}</Link>
+                <div
+                  key={post.url}
+                  className="mb-[3rem] pb-[2rem] border-b border-gray-100 last:border-b-0 dark:border-gray-800"
+                >
+                  <h2 className="mt-0 mb-[0.5rem] text-[1.8rem] font-bold leading-[1.2]">
+                    <Link
+                      to={post.url}
+                      className="text-blue-800 no-underline hover:text-blue-400 dark:!text-[#9ab3c0] dark:hover:!text-blue-200"
+                    >
+                      {post.title}
+                    </Link>
                   </h2>
                   {post.date && (
-                    <div className="blog-post-date">{post.date}</div>
+                    <div className="text-gray-500 text-[1.2rem] font-semibold mt-[0.25rem] mb-[1rem] italic dark:text-[#bbb]">
+                      {post.date}
+                    </div>
                   )}
-                  <p>{post.teaser}</p>
-                  <Link to={post.url} className="read-more">
+                  <p className="text-gray-600 leading-[1.4] mb-[1rem] dark:text-gray-200">
+                    {post.teaser}
+                  </p>
+                  <Link
+                    to={post.url}
+                    className="text-blue-400 font-semibold no-underline hover:underline dark:text-blue-200"
+                  >
                     Read More &rarr;
                   </Link>
                 </div>

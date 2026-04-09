@@ -11,6 +11,7 @@ contributors:
   - snitin315
   - tusharthakur04
   - ThierryRakotomanana
+  - valentina-buoro
 ---
 
 T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide.
@@ -34,12 +35,13 @@ Now we'll modify the directory structure & the configuration files:
   ├── package.json
   ├── package-lock.json
 + ├── tsconfig.json
-  ├── webpack.config.js
+- ├── webpack.config.js
++ ├── webpack.config.ts
   ├── /dist
   │   ├── bundle.js
   │   └── index.html
   ├── /src
-  │   ├── index.js
+- │   ├── index.js
 + │   └── index.ts
   └── /node_modules
 ```
@@ -53,12 +55,14 @@ Let's set up a configuration to support JSX and compile TypeScript down to ES5..
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": true,
-    "moduleResolution": "node"
-  }
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "allowJs": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
 ```
 
@@ -114,7 +118,14 @@ export default config;
 
 This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
 
-Now lets change the import of `lodash` in our `./index.ts` due to the fact that there is no default export present in `lodash` definitions.
+Next, we need to adjust how we import `lodash` in our `./index.ts`. Since the lodash definitions don't include a default export, we'll need to update our import statement.
+First, make sure to install the [TypeScript definitions](#using-third-party-libraries):
+
+```bash
+npm install --save-dev @types/lodash
+```
+
+Then, update your import at the top of the file:
 
 **./index.ts**
 
@@ -175,7 +186,7 @@ If you use [`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig#pat
 
 `resolve.tsconfig` accepts `boolean | string | object`:
 
-**webpack.config.js**
+**webpack.config.ts**
 
 ```js
 export default {
@@ -249,18 +260,20 @@ To enable source maps, we must configure TypeScript to output inline source maps
       "outDir": "./dist/",
 +     "sourceMap": true,
       "noImplicitAny": true,
-      "module": "commonjs",
-      "target": "es5",
-      "jsx": "react",
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "target": "esnext",
+      "jsx": "react-jsx",
       "allowJs": true,
-      "moduleResolution": "node",
-    }
+  },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
   }
 ```
 
 Now we need to tell webpack to extract these source maps and include in our final bundle:
 
-**webpack.config.js**
+**webpack.config.ts**
 
 ```diff
  import path from "node:path";
@@ -318,7 +331,7 @@ To enable the types for the whole project, add `webpack/module` to `compilerOpti
 
 When installing third party libraries from npm, it is important to remember to install the typing definition for that library.
 
-For example, if we want to install lodash we can run the following command to get the typings for it:
+For example, if we want to use lodash, we should run the following command to install its type definitions:
 
 ```bash
 npm install --save-dev @types/lodash
