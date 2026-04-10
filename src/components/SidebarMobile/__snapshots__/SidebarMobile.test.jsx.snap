@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`SidebarMobile matches snapshot when closed 1`] = `
+<nav
+  class="sidebar-mobile fixed w-[300px] h-screen z-[100] top-0 overflow-y-auto overflow-x-hidden [-webkit-overflow-scrolling:touch] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden [transform:translate3d(calc(-100%+5px),0,0)]"
+>
+  <div
+    class="absolute top-[45px] bottom-0 w-[32px] left-[285px]"
+  />
+  <div
+    class="relative w-[285px] h-screen overflow-x-hidden py-1 bg-white dark:bg-[#121212] shadow-[0_0_15px_rgba(0,0,0,0.2)]"
+  >
+    <button
+      aria-label="Close navigation menu"
+      class="sidebar-mobile__close absolute cursor-pointer border-none right-[22px] top-[10px] text-[1.3em] bg-[#175d96] text-white w-[30px] h-[30px] flex items-center justify-center rounded-full transition-colors duration-150 [-webkit-tap-highlight-color:transparent] hover:bg-[#135d96]"
+    >
+      <svg-mock
+        fill="#fff"
+        width="20"
+      />
+    </button>
+    <div
+      class="border-l-2 pb-[0.5em] border-transparent"
+    >
+      <a
+        class="uppercase pt-[0.75em] px-4 pb-[0.25em] font-semibold block text-[1.1rem] text-[#2B3A42] dark:text-[#cadbe6]"
+        data-discover="true"
+        href="/guides/"
+      >
+        <h3>
+          Guides
+        </h3>
+      </a>
+      <a
+        class="block py-[0.5em] px-[17px] capitalize [-webkit-tap-highlight-color:transparent] ml-[20px] text-gray-600 dark:text-[#a3a3a3] hover:text-gray-600 active:text-gray-900 active:font-semibold active:bg-[#f1f4f4] dark:active:bg-[#222424] dark:active:text-white"
+        data-discover="true"
+        href="/guides/getting-started/"
+      >
+        Getting Started
+      </a>
+      <a
+        class="block py-[0.5em] px-[17px] capitalize [-webkit-tap-highlight-color:transparent] ml-[20px] text-gray-600 dark:text-[#a3a3a3] hover:text-gray-600 active:text-gray-900 active:font-semibold active:bg-[#f1f4f4] dark:active:bg-[#222424] dark:active:text-white"
+        data-discover="true"
+        href="/guides/installation/"
+      >
+        Installation
+      </a>
+    </div>
+    <div
+      class="border-l-2 pb-[0.5em] border-transparent"
+    >
+      <a
+        class="uppercase pt-[0.75em] px-4 pb-[0.25em] font-semibold block text-[1.1rem] text-[#2B3A42] border-t border-gray-200 dark:border-[#343434] dark:text-[#cadbe6]"
+        data-discover="true"
+        href="/concepts/"
+      >
+        <h3>
+          Concepts
+        </h3>
+      </a>
+      <a
+        class="block py-[0.5em] px-[17px] capitalize [-webkit-tap-highlight-color:transparent] ml-[20px] text-gray-600 dark:text-[#a3a3a3] hover:text-gray-600 active:text-gray-900 active:font-semibold active:bg-[#f1f4f4] dark:active:bg-[#222424] dark:active:text-white"
+        data-discover="true"
+        href="/concepts/entry-points/"
+      >
+        Entry Points
+      </a>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`SidebarMobile matches snapshot when open 1`] = `
+<nav
+  class="sidebar-mobile fixed w-[300px] h-screen z-[100] top-0 overflow-y-auto overflow-x-hidden [-webkit-overflow-scrolling:touch] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] md:hidden sidebar-mobile--visible translate-x-0"
+>
+  <div
+    class="absolute top-[45px] bottom-0 w-[32px] left-[285px] hidden"
+  />
+  <div
+    class="relative w-[285px] h-screen overflow-x-hidden py-1 bg-white dark:bg-[#121212] shadow-[0_0_15px_rgba(0,0,0,0.2)]"
+  >
+    <button
+      aria-label="Close navigation menu"
+      class="sidebar-mobile__close absolute cursor-pointer border-none right-[22px] top-[10px] text-[1.3em] bg-[#175d96] text-white w-[30px] h-[30px] flex items-center justify-center rounded-full transition-colors duration-150 [-webkit-tap-highlight-color:transparent] hover:bg-[#135d96]"
+    >
+      <svg-mock
+        fill="#fff"
+        width="20"
+      />
+    </button>
+    <div
+      class="border-l-2 pb-[0.5em] border-transparent"
+    >
+      <a
+        class="uppercase pt-[0.75em] px-4 pb-[0.25em] font-semibold block text-[1.1rem] text-[#2B3A42] dark:text-[#cadbe6]"
+        data-discover="true"
+        href="/guides/"
+      >
+        <h3>
+          Guides
+        </h3>
+      </a>
+      <a
+        class="block py-[0.5em] px-[17px] capitalize [-webkit-tap-highlight-color:transparent] ml-[20px] text-gray-600 dark:text-[#a3a3a3] hover:text-gray-600 active:text-gray-900 active:font-semibold active:bg-[#f1f4f4] dark:active:bg-[#222424] dark:active:text-white"
+        data-discover="true"
+        href="/guides/getting-started/"
+      >
+        Getting Started
+      </a>
+      <a
+        class="block py-[0.5em] px-[17px] capitalize [-webkit-tap-highlight-color:transparent] ml-[20px] text-gray-600 dark:text-[#a3a3a3] hover:text-gray-600 active:text-gray-900 active:font-semibold active:bg-[#f1f4f4] dark:active:bg-[#222424] dark:active:text-white"
+        data-discover="true"
+        href="/guides/installation/"
+      >
+        Installation
+      </a>
+    </div>
+    <div
+      class="border-l-2 pb-[0.5em] border-transparent"
+    >
+      <a
+        class="uppercase pt-[0.75em] px-4 pb-[0.25em] font-semibold block text-[1.1rem] text-[#2B3A42] border-t border-gray-200 dark:border-[#343434] dark:text-[#cadbe6]"
+        data-discover="true"
+        href="/concepts/"
+      >
+        <h3>
+          Concepts
+        </h3>
+      </a>
+      <a
+        class="block py-[0.5em] px-[17px] capitalize [-webkit-tap-highlight-color:transparent] ml-[20px] text-gray-600 dark:text-[#a3a3a3] hover:text-gray-600 active:text-gray-900 active:font-semibold active:bg-[#f1f4f4] dark:active:bg-[#222424] dark:active:text-white"
+        data-discover="true"
+        href="/concepts/entry-points/"
+      >
+        Entry Points
+      </a>
+    </div>
+  </div>
+</nav>
+`;

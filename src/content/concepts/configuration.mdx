@@ -54,6 +54,29 @@ export default {
 
 _See_: [Configuration section](/configuration/) for all supported configuration options
 
+## Using multiple configurations
+
+Webpack supports exporting multiple configuration objects, which can be useful when building different targets or outputs (for example, separate client and server bundles).
+
+While a single configuration is sufficient for many projects, multiple configurations can help organize more complex setups.
+
+```js
+module.exports = [
+  {
+    entry: "./src/client.js",
+    output: {
+      filename: "client.bundle.js",
+    },
+  },
+  {
+    entry: "./src/server.js",
+    output: {
+      filename: "server.bundle.js",
+    },
+  },
+];
+```
+
 ## Multiple Targets
 
 Along with exporting a single configuration as an object, [function](/configuration/configuration-types/#exporting-a-function) or [Promise](/configuration/configuration-types/#exporting-a-promise), you can export multiple configurations.

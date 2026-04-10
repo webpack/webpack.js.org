@@ -1,0 +1,141 @@
+@reference "tailwindcss";
+
+[data-theme="dark"] {
+  body {
+    @apply bg-dark-bg text-dark-text;
+  }
+
+  .splash__section--dark {
+    @apply bg-dark-surface;
+  }
+
+  .markdown {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      @apply text-dark-heading;
+    }
+
+    code,
+    tt {
+      text-shadow: none;
+      @apply bg-dark-code-inline-bg;
+    }
+
+    blockquote {
+      @apply border-l-dark-section-border text-dark-muted;
+    }
+
+    blockquote.tip {
+      @apply bg-dark-aside-tip-bg text-dark-aside-tip-text;
+    }
+
+    blockquote.warning {
+      @apply bg-dark-aside-warning-bg text-dark-aside-warning-text;
+    }
+
+    blockquote.todo {
+      @apply bg-dark-aside-todo-bg text-dark-aside-todo-text;
+    }
+
+    hr {
+      @apply bg-dark-section-border;
+    }
+
+    th {
+      @apply bg-dark-bg border-dark-border;
+    }
+
+    tr,
+    tr:last-child {
+      @apply border-dark-border;
+    }
+
+    tr:nth-child(2n) {
+      @apply bg-dark-surface;
+    }
+
+    td {
+      @apply border-dark-border;
+    }
+
+    pre {
+      @apply bg-dark-code-bg;
+
+      code {
+        @apply bg-transparent;
+      }
+    }
+
+    a code {
+      @apply text-dark-link;
+
+      &:hover {
+        @apply text-dark-link-hover;
+      }
+    }
+
+    aside.tip,
+    aside.warning,
+    aside.preview,
+    aside.todo {
+      @apply bg-dark-surface-2 text-white;
+    }
+
+    aside.tip > .tip__prefix,
+    aside.warning > .warning__prefix,
+    aside.preview > .preview__prefix,
+    aside.todo > .todo__prefix {
+      @apply text-white;
+    }
+  }
+
+  .gitter__button {
+    @apply bg-[#1c3b39];
+  }
+
+  .sponsors__content,
+  .footer__inner {
+    @apply border-dark-border;
+  }
+
+  .page-links__gap {
+    @apply text-dark-muted;
+  }
+
+  .site {
+    background: #121212 !important;
+  }
+
+  .sidebar__docs-version {
+    @apply border-dark-border text-dark-sidebar-version;
+  }
+
+  .contributor .contributor__name {
+    @apply bg-dark-bg text-dark-heading;
+  }
+
+  .footer-openjsf-logo {
+    @apply invert;
+  }
+
+  .footer p {
+    @apply text-white;
+  }
+}
+
+@layer base {
+  [data-theme="dark"] a,
+  [data-theme="dark"] button.as-link {
+    @apply text-dark-link;
+  }
+}
+
+@layer base {
+  [data-theme="dark"] a:hover {
+    @apply text-dark-link-hover;
+  }
+}

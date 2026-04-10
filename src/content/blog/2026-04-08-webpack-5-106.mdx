@@ -1,0 +1,320 @@
+---
+title: Webpack 5.106
+sort: 20260408
+contributors:
+  - bjohansebas
+---
+
+**Webpack 5.106 introduces plugin validation hooks, built-in runtime style injection for CSS Modules, smarter tree shaking for CommonJS destructuring, source-phase imports for WebAssembly modules, and an experimental integration with `oxc-parser` for faster JavaScript parsing.**
+
+Explore what's new in this release:
+
+- [**Plugin Validation with `compiler.hooks.validate`**](#plugin-validation-with-compilerhooksvalidate)
+- [**CSS Modules with Runtime Style Injection**](#css-modules-with-runtime-style-injection)
+- [**Better Tree Shaking for CommonJS Destructuring**](#better-tree-shaking-for-commonjs-destructuring)
+- [**Source Phase Imports for WebAssembly (Experimental)**](#source-phase-imports-for-webassembly-experimental)
+- [**Getting Started with `create-webpack-app`**](#getting-started-with-create-webpack-app)
+- [**Context Support for VirtualUrlPlugin**](#context-support-for-virtualurlplugin)
+- [**Experimental JavaScript Parsing with `oxc-parser`**](#experimental-javascript-parsing-with-oxc-parser)
+- [**Ecosystem Updates**](#ecosystem-updates)
+- [**Bug Fixes**](#bug-fixes)
+
+## Plugin Validation with `compiler.hooks.validate`
+
+Webpack adds a new top-level `validate` option and a [`compiler.hooks.validate`](/api/compiler-hooks/#validate) hook that standardize how schema validation works across webpack configuration, plugins, and loaders.
+
+Until now, there was no unified way for plugins to integrate schema validation into the webpack build lifecycle. Each plugin handled validation on its own. The new `compiler.hooks.validate` hook gives plugin authors a standard API to register their validation logic, and `compiler.validate(...)` to run it. This means all validation from webpack's core config to every plugin that adopts the hook is controlled by a single `validate` flag and follows the same patterns:
+
+```js
+module.exports = {
+  // Disable schema validation (webpack config, plugins, and loaders)
+  validate: false,
+};
+```
+
+The default value depends on the build mode:
+
+| Mode        | `experiments.futureDefaults` | Default `validate` |
+| ----------- | :--------------------------: | :----------------: |
+| development |           `false`            |       `true`       |
+| development |            `true`            |       `true`       |
+| production  |           `false`            |       `true`       |
+| production  |            `true`            |      `false`       |
+
+For plugin authors, integrating validation is straightforward. Register a tap on `compiler.hooks.validate`, and webpack takes care of the rest, including skipping validation entirely when the user sets `validate: false`:
+
+```js
+class MyPlugin {
+  constructor(options = {}) {
+    this.options = options;
+  }
+
+  apply(compiler) {
+    compiler.hooks.validate.tap("MyPlugin", () => {
+      compiler.validate(
+        () => require("./schema/MyPlugin.json"),
+        this.options,
+        { name: "My Plugin", baseDataPath: "options" },
+        (options) => require("./schema/MyPlugin.check")(options),
+      );
+    });
+
+    // ...normal plugin logic here...
+  }
+}
+
+module.exports = MyPlugin;
+```
+
+When `validate` is `true` and something is wrong, webpack throws a clear error at compile time.
+
+When `validate` is `false`, that check is skipped entirely. The build may still fail later with a less obvious error, so use this option with care.
+
+## CSS Modules with Runtime Style Injection
+
+Webpack now supports `exportType: "style"` for CSS Modules (when `experiments.css: true` is enabled), which allows CSS to be injected into the DOM as a `<style>` (`HTMLStyleElement`) directly from the webpack runtime. This covers the typical use case of `style-loader`, so it is no longer necessary to use `style-loader` to inject styles when using this mode.
+
+Additionally, the CSS Module exports are preserved (for example, the class name mapping in `*.module.css`).
+
+For CSP compatibility, when a nonce has been configured in the webpack runtime (`__webpack_require__.nc`), the `<style>` injected by this mode receives the same nonce via the `nonce` attribute (webpack reuses the nonce provided by the application; it does not generate one automatically).
+
+```js
+module.exports = {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        type: "css/module",
+        parser: {
+          exportType: "style",
+        },
+      },
+    ],
+  },
+};
+```
+
+W> CSS support has matured significantly and is expected to be fully finalized in the next minor release, as planned in the roadmap. As part of this transition, `css-loader`, `style-loader`, and `mini-css-extract-plugin` are planned for deprecation.
+
+## Better Tree Shaking for CommonJS Destructuring
+
+Webpack can now statically analyze **destructuring assignments directly from CommonJS `require`** (and `module.require`) and treat only the destructured properties as "referenced exports", instead of conservatively assuming the whole `exports` object is used. This improves dead-code elimination in optimized builds and can reduce bundle size in codebases that still consume CommonJS modules.
+
+Consider a module that exports multiple functions, and a consumer that only destructures one of them:
+
+```js
+// math.js
+exports.add = (a, b) => a + b;
+exports.divide = (a, b) => a / b;
+exports.multiply = (a, b) => a * b;
+exports.subtract = (a, b) => a - b;
+```
+
+```js
+// app.js
+const { add } = require("./math");
+
+console.log(add(2, 3));
+```
+
+In previous versions, webpack treated `require("./math")` as referencing the entire exports object. All four functions were included in the bundle even though only `add` is used:
+
+```js
+// Bundled output (5.105 — simplified)
+const math = {
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b,
+  multiply: (a, b) => a * b,
+  divide: (a, b) => a / b,
+};
+```
+
+Starting with 5.106, webpack recognizes the destructuring pattern and marks only `add` as referenced. The unused exports are eliminated during optimization:
+
+```js
+// Bundled output (5.106 — simplified)
+const math_add = (a, b) => a + b;
+// subtract, multiply, divide - tree-shaken away
+```
+
+This also works with `module.require`:
+
+```js
+const { a, b } = module.require("./module");
+```
+
+## Source Phase Imports for WebAssembly (Experimental)
+
+Webpack now includes experimental support for TC39 [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports) when importing WebAssembly modules.
+
+The proposal is currently at **Stage 3** and introduces a way to import a module at the _source phase_ instead of immediately evaluating it. In practical terms for WebAssembly, this means you can obtain a compiled `WebAssembly.Module` first, and instantiate it later with your own imports.
+
+In webpack 5.106, this experimental support is focused on WebAssembly source imports under `experiments.sourceImport`. In the next minor release, the focus is expected to shift toward JavaScript support.
+
+Enable the feature with `experiments.sourceImport`:
+
+```js
+module.exports = {
+  experiments: {
+    asyncWebAssembly: true,
+    sourceImport: true,
+  },
+};
+```
+
+Then use either static or dynamic source-phase syntax:
+
+```text
+// Static form
+import source wasmModule from "./module.wasm";
+
+// Dynamic form
+const wasmModule2 = await import.source("./module.wasm");
+
+const instance = await WebAssembly.instantiate(wasmModule);
+```
+
+You can also see an end-to-end example in webpack's repository:
+[https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase](https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase)
+
+## Getting Started with `create-webpack-app`
+
+[`create-webpack-app`](https://www.npmjs.com/package/create-webpack-app) is now the recommended way to scaffold a new webpack project. Previously, this functionality lived inside `webpack-cli` as the `webpack init` command, but it has been extracted into its own standalone package with the release of webpack-cli 7.
+
+This means you can now create a new webpack project with a single command, without needing to install `webpack-cli` first:
+
+```bash
+npx create-webpack-app
+```
+
+The CLI walks you through an interactive setup where you choose the pieces that fit your project:
+
+```bash
+$ npx create-webpack-app
+
+? Which of the following JS solutions do you want to use? Typescript
+? Do you want to use webpack-dev-server? Yes
+? Do you want to simplify the creation of HTML files for your bundle? Yes
+? Do you want to add PWA support? No
+? Which of the following CSS solutions do you want to use? CSS only
+? Will you be using PostCSS in your project? Yes
+? Do you want to extract CSS for every file? Only for Production
+? Which package manager do you want to use? npm
+
+[create-webpack] ℹ️  Initializing a new Webpack project...
+[create-webpack] ✅ Project dependencies installed successfully!
+```
+
+The generated project includes a working `webpack.config.js`, dev server configuration, and the loader/plugin setup for the options you selected. From there, you can start developing immediately:
+
+```bash
+cd my-project
+npm start
+```
+
+This approach follows the same pattern popularized by tools like `create-react-app` and `create-vite`: a single `npx` command that gets you from zero to a working project without manual configuration.
+
+You can also use the `init` subcommand if you prefer the explicit form:
+
+```bash
+npx create-webpack-app init
+```
+
+Beyond project scaffolding, `create-webpack-app` can also generate the boilerplate for custom loaders and plugins:
+
+```bash
+npx create-webpack-app loader
+
+npx create-webpack-app plugin
+```
+
+## Context Support for VirtualUrlPlugin
+
+`VirtualUrlPlugin` (via `webpack.experiments.schemes.VirtualUrlPlugin`) now supports a `context` option that defines the **base directory used to resolve relative imports inside virtual modules**. This feature is currently **experimental**, as it is part of the `experiments.schemes` API.
+
+This makes virtual modules behave more like real files: code such as `import "./utils"` resolves consistently instead of falling back to `compiler.context` and potentially resolving incorrectly.
+
+`context` can be set per virtual module (inside the module definition) or as a plugin level default. It defaults to `"auto"`, which tries to infer the context from the virtual module id or path; otherwise it falls back to `compiler.context`. Conceptually, when you set `context` for a module, webpack treats that virtual module _as if it lived inside that directory_ for resolving relative paths.
+
+For example, if you define a virtual module id `virtual/table.js` with `context: path.join(__dirname, "src/components")`, then its internal `import "./utils"` is resolved as if the file were `src/components/table.js` importing `src/components/utils.js`.
+
+```js
+const path = require("node:path");
+const webpack = require("webpack");
+
+module.exports = {
+  plugins: [
+    new webpack.experiments.schemes.VirtualUrlPlugin(
+      {
+        "src/components/button.js": {
+          context: "auto",
+          source() {
+            return "import { trim } from './utils'; export const button = trim('button ');";
+          },
+        },
+        "virtual/table.js": {
+          context: path.join(__dirname, "src/components"),
+          source() {
+            return "import { trim } from './utils'; export const table = trim('table ');";
+          },
+        },
+      },
+      { context: "auto" },
+    ),
+  ],
+};
+```
+
+## Experimental JavaScript Parsing with `oxc-parser`
+
+Webpack now includes an example demonstrating how to replace the default JavaScript parser with **`oxc-parser`**. This integration should be considered **purely experimental** and is **not recommended for production use**.
+
+Instead, it is intended for **development environments** or **benchmark branches**, allowing the community to experiment with alternative parsing strategies in real projects. This helps evaluate potential improvements in **parse time and build performance**, as well as identify possible **compatibility issues**.
+
+**Example**
+
+The following configuration limits the custom parser to `.js` files:
+
+```js
+"use strict";
+
+const oxcParse = require("./internals/oxc-parse");
+
+/** @type {import("webpack").Configuration} */
+module.exports = {
+  mode: "production",
+  entry: "./src/index.js",
+  module: {
+    rules: [
+      {
+        // Apply the custom parser only to JavaScript files
+        test: /\.js$/,
+        parser: {
+          parse: oxcParse,
+        },
+      },
+    ],
+  },
+};
+```
+
+You can find the full example in the webpack repository:
+[https://github.com/webpack/webpack/blob/main/examples/custom-javascript-parser/webpack.config.js](https://github.com/webpack/webpack/blob/main/examples/custom-javascript-parser/webpack.config.js)
+
+## Ecosystem Updates
+
+- **Webpack-cli** has released a new major version, [7.0.0](https://github.com/webpack/webpack-cli/releases/tag/webpack-cli%407.0.0). The minimum supported Node.js version is now `20.9.0`, and configuration files are loaded via dynamic `import()` by default, which enables native TypeScript configuration support through Node.js type stripping without needing external loaders.
+  The `--node-env` argument has been replaced by `--config-node-env`, and the deprecated programmatic API has been removed. Additionally, configuration freezing is now allowed, graceful shutdown has been improved when file system cache is enabled, and general performance improvements have been made. Check the [release for more information](https://github.com/webpack/webpack-cli/releases/tag/webpack-cli%407.0.0).
+- **Webpack-dev-middleware** has released a new major version, [8.0.0](https://github.com/webpack/webpack-dev-middleware/releases/tag/v8.0.0). The minimum supported Node.js version is now `20.9.0` and the minimum webpack version is `5.101.0`. The `getFilenameFromUrl` function is now asynchronous, immutable asset caching (`cacheImmutable`) is enabled by default, and a new `forwardError` option allows forwarding errors to the next middleware.
+  Support for plugin usage has also been added, and general performance improvements have been made. Check the [release for more information](https://github.com/webpack/webpack-dev-middleware/releases/tag/v8.0.0).
+- **Compression-webpack-plugin**, **html-minimizer-webpack-plugin**, **css-minimizer-webpack-plugin**, **image-minimizer-webpack-plugin**, and other plugins have released new major versions to align their minimum supported Node.js version to `20.9.0`, keeping consistency across the webpack ecosystem alongside the recent major releases of webpack-cli 7 and webpack-dev-middleware 8.
+
+## Bug Fixes
+
+Several bug fixes have been resolved since version [5.105](https://github.com/webpack/webpack/releases/tag/v5.105.0). Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for all the details.
+
+## Thanks
+
+A big thank you to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring)
+who made Webpack 5.106 possible. Your support, whether through code contributions, documentation, or financial sponsorship, helps keep Webpack evolving and improving for everyone.

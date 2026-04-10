@@ -305,6 +305,44 @@ export default {
 
 Webpack will match [export conditions](https://nodejs.org/api/packages.html#conditional-exports) that are listed within the `resolve.conditionNames` array.
 
+#### Default values
+
+The default `conditionNames` are composed dynamically based on the [`mode`](/configuration/mode/) and [`target`](/configuration/target/) configuration:
+
+The base conditions always include:
+
+- `"webpack"` — always present.
+- `"production"` or `"development"` — based on the current [`mode`](/configuration/mode/) (`"production"` is used when mode is `"none"` or `"production"`).
+
+Additional conditions are appended depending on the [`target`](/configuration/target/):
+
+| Target property | Condition    |
+| --------------- | ------------ |
+| `webworker`     | `"worker"`   |
+| `node`          | `"node"`     |
+| `web`           | `"browser"`  |
+| `electron`      | `"electron"` |
+| `nwjs`          | `"nwjs"`     |
+
+For example, with `target: "web"` (the default) and `mode: "production"`, the base `conditionNames` defaults to `["webpack", "production", "browser"]`.
+
+#### Per-dependency type conditions
+
+Webpack further adjusts `conditionNames` through [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) depending on how a module is imported. The `"..."` token inherits from the base conditions above.
+
+| Dependency type                                     | `conditionNames`                        | Used for                                             |
+| --------------------------------------------------- | --------------------------------------- | ---------------------------------------------------- |
+| `esm`, `wasm`, `loaderImport`                       | `["import", "module", "..."]`           | ESM `import` statements, WebAssembly, loader imports |
+| `commonjs`, `amd`, `loader`, `unknown`, `undefined` | `["require", "module", "..."]`          | `require()` calls, AMD, and other dependency types   |
+| `worker`                                            | `["worker", "import", "module", "..."]` | `new Worker()` expressions                           |
+| `css-import`                                        | `["webpack", <mode>, "style"]`          | CSS `@import` statements                             |
+
+For instance, when a file uses `import` in a project with `target: "web"` and `mode: "production"`, the final resolved conditions are `["import", "module", "webpack", "production", "browser"]`.
+
+T> The `resolveLoader` option uses different defaults for `conditionNames`: `["loader", "require", "node"]`. See [resolveLoader](#resolveloader).
+
+#### Condition matching
+
 The key order in the `exports` field is significant. During condition matching, earlier entries have higher priority and take precedence over later entries.
 
 For example,
@@ -348,6 +386,8 @@ importing
 - `'foo'` will resolve to `'foo/index-require.js'`
 - `'foo/bar'` will resolve to `'foo/bar-node.js'` as the `"node"` key comes before `"require"` key in the conditional exports object.
 - `'foo/baz'` will resolve to `'foo/baz-node.js'`
+
+#### Custom conditions
 
 If you want to add your custom field names while still retaining the default Webpack values, you can use `"..."`:
 

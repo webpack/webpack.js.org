@@ -62,6 +62,7 @@ Plugins are instantiated objects with an `apply` method on their prototype. This
 ```js
 class HelloWorldPlugin {
   apply(compiler) {
+    // This hook runs when the build process is fully completed
     compiler.hooks.done.tap(
       "Hello World Plugin",
       (
@@ -88,7 +89,7 @@ export default {
 };
 ```
 
-Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
+A familiar way to validate plugin options in webpack versions **before `5.106`** is to use [`schema-utils`](https://github.com/webpack/schema-utils) in the constructor:
 
 ```js
 import { validate } from "schema-utils";
@@ -114,6 +115,27 @@ export default class HelloWorldPlugin {
   apply(compiler) {}
 }
 ```
+
+Starting in webpack `5.106`, you can move that validation into `apply()` by tapping `compiler.hooks.validate` and calling `compiler.validate(...)` instead:
+
+```js
+export default class HelloWorldPlugin {
+  constructor(options = {}) {
+    this.options = options;
+  }
+
+  apply(compiler) {
+    compiler.hooks.validate.tap("HelloWorldPlugin", () => {
+      compiler.validate(
+        () => require("./schema/hello-world-plugin.json"),
+        this.options,
+      );
+    });
+  }
+}
+```
+
+W> This validation flow is skipped when webpack is configured with `validate: false`. With `experiments.futureDefaults`, validation is enabled by default in development mode and disabled by default in production mode.
 
 ## Compiler and Compilation
 
@@ -298,6 +320,82 @@ This will generate a markdown file with chosen name that looks like this:
 T> We are using synchronous `tap()` method to tap into the `processAssets` hook because we don't need to perform any asynchronous operations in the example above. However, the `processAssets` hook is an asynchronous one, so you can also use `tapPromise()` or `tapAsync()` if you actually need to.
 
 T> The [`processAssets`](/api/compilation-hooks/#processassets) hook also supports the `additionalAssets` property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are fine with using the `SUMMARIZE` stage to capture all the assets generated on previous stages (this should account for all assets in general case).
+
+## Watching for file changes
+
+When webpack runs in watch mode (`webpack --watch` or `webpack serve`),
+it creates a new compilation for each rebuild triggered by file changes.
+
+The `compiler.modifiedFiles` Set lets your plugin know **which specific
+files triggered the rebuild**, so you can skip expensive work for unrelated files.
+
+This is useful for plugins that need to react only to specific file changes
+(e.g., regenerating assets, reprocessing templates, or invalidating caches).
+
+```js
+class WatchNotifierPlugin {
+  apply(compiler) {
+    compiler.hooks.watchRun.tap("WatchNotifierPlugin", (compiler) => {
+      if (compiler.modifiedFiles) {
+        const changedFiles = [...compiler.modifiedFiles]
+          .map((file) => `  • ${file}`)
+          .join("\n");
+
+        console.log(`\nFiles changed:\n${changedFiles}`);
+      }
+    });
+  }
+}
+
+export default WatchNotifierPlugin;
+```
+
+> **Note**:
+>
+> - `compiler.modifiedFiles` is a `Set`, not an array
+> - It is `undefined` on the first (cold) build
+> - It is only populated during watch rebuilds
+
+### Adding custom file dependencies
+
+If your plugin reads external files (config files, templates, etc.)
+that webpack does not track by default, you must tell webpack to watch them.
+
+You can tell webpack to watch different types of dependencies:
+
+- `compilation.fileDependencies` is used to track individual files that your plugin depends on, so webpack can trigger a rebuild when those files change
+
+- `compilation.contextDependencies` is used to watch directories, so any change inside them triggers a rebuild
+
+- `compilation.missingDependencies` is used to track files that are currently missing, so webpack can trigger a rebuild when they are created
+
+```js
+import path from "node:path";
+
+class TemplateWatchPlugin {
+  apply(compiler) {
+    compiler.hooks.compilation.tap("TemplateWatchPlugin", (compilation) => {
+      const templatePath = path.resolve(__dirname, "my-template.html");
+
+      // Ensure webpack watches this file
+      compilation.fileDependencies.add(templatePath);
+
+      // Watch a directory (context dependency)
+      const templatesDir = path.resolve(__dirname, "templates");
+      compilation.contextDependencies.add(templatesDir);
+
+      // Example: mark a missing dependency
+      const missingFile = path.resolve(__dirname, "missing-file.txt");
+      compilation.missingDependencies.add(missingFile);
+    });
+  }
+}
+
+export default TemplateWatchPlugin;
+```
+
+Without calling `fileDependencies.add()`, webpack will not trigger
+a rebuild when the file changes — even if your plugin depends on it.
 
 ## Different Plugin Shapes
 

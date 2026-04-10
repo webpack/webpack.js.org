@@ -3,7 +3,7 @@
 exports[`Logo renders correctly 1`] = `
 <img
   alt="webpack logo"
-  class="logo"
+  class="float-left h-[35px] w-auto opacity-90 transition-opacity duration-200 hover:opacity-100"
   height="35"
   src="svg-mock"
   width="122"

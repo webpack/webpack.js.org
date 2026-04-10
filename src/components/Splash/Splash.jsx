@@ -6,8 +6,6 @@ import Container from "../Container/Container.jsx";
 import Markdown from "../Markdown/Markdown.jsx";
 import { PlaceholderComponent } from "../Placeholder/Placeholder.jsx";
 import SplashViz from "../SplashViz/SplashViz.jsx";
-// Load Styling
-import "./Splash.scss";
 
 const Support = lazy(() => import("../Support/Support.jsx"));
 
@@ -46,19 +44,19 @@ const Splash = () => {
     () => false,
   );
   return (
-    <div className="splash">
+    <div className="relative overflow-hidden [&_h1]:justify-center [&_h2]:justify-center">
       <SplashViz />
 
-      <div className="splash__section splash__section--dark page__content">
-        <Container>
+      <div className="relative text-center bg-[#f3f3f3] dark:bg-[#202020] page__content [&_p]:my-[1em]! [&_p]:mx-auto! [&_p]:max-w-200 [&_pre]:text-left [&_.icon-link]:hidden">
+        <Container className="py-[1em] px-[1em] md:px-[1.5em]">
           <Markdown>
             <SplashContent />
           </Markdown>
         </Container>
       </div>
 
-      <div className="splash__section page__content">
-        <Container>
+      <div className="relative text-center page__content [&_p]:my-[1em]! [&_p]:mx-auto! [&_p]:max-w-200 [&_pre]:text-left [&_.icon-link]:hidden">
+        <Container className="py-[5em] px-[1em] md:px-[1.5em]">
           <Markdown>
             <h1 id="sponsors">Support the Team</h1>
 

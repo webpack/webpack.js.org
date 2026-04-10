@@ -187,6 +187,8 @@ The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`
 
 `usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straightforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React's Higher Order Components (HOC) are problematic in this regard.
 
+If you're using dynamic `import()`, you can also use the `webpackExports` magic comment to specify the exports that should be exposed, allowing webpack to tree shake the others. See [Magic Comments](/api/module-methods/#magic-comments).
+
 Let's make an example:
 
 ```js

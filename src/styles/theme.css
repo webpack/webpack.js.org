@@ -1,0 +1,129 @@
+@theme {
+  /* Brand link colors */
+  --color-brand-link: #1d78c1;
+  --color-brand-link-hover: #144f80;
+  --color-brand-link-dark: #69a8ee;
+  --color-brand-link-dark-hover: #82b7f6;
+
+  /* Brand button/UI blue */
+  --color-brand-blue: #175d96;
+  --color-brand-blue-hover: #135d96;
+
+  /* Heading color */
+  --color-heading-dark: #32434a;
+
+  /* Aside/callout colors */
+  --color-aside-border: #dddddd;
+  --color-aside-tip-bg: #eaf8ff;
+  --color-aside-tip-text: #4e7182;
+  --color-aside-tip-border: #1eb4ff;
+  --color-aside-warning-bg: #fdf5d8;
+  --color-aside-warning-text: #716b53;
+  --color-aside-warning-border: #f3c316;
+  --color-aside-todo-bg: #fbddcd;
+  --color-aside-todo-text: #907a6e;
+  --color-aside-todo-border: #e95d13;
+  --color-aside-prefix: #1a1a1a;
+
+  /* Table colors */
+  --color-table-header-bg: #f1f4f4;
+  --color-table-border: #cccccc;
+  --color-table-row-alt: #f8f8f8;
+
+  /* Code colors */
+  --color-code-pre-bg: #2d3748;
+  --color-code-pre-text: #e2e8f0;
+  --color-code-token: #a5cee1;
+  --color-code-link: #1e78c2;
+  --color-code-link-hover: #2186d8;
+  --color-code-anchor-border: #175d96;
+
+  /* Dark mode surface colors */
+  --color-dark-bg: #121212;
+  --color-dark-surface: #202020;
+  --color-dark-border: #252525;
+  --color-dark-surface-2: #222222;
+  --color-dark-heading: #9ab3c0;
+  --color-dark-text: #e0e0e0;
+  --color-dark-muted: #a3a3a3;
+  --color-dark-sidebar-version: #b8b8b8;
+  --color-dark-link: #69a8ee;
+  --color-dark-link-hover: #82b7f6;
+  --color-dark-code-bg: #131b1f;
+  --color-dark-code-inline-bg: rgba(70, 94, 105, 0.45);
+  --color-dark-aside-tip-bg: #192429;
+  --color-dark-aside-tip-text: #7da2b4;
+  --color-dark-aside-warning-bg: #27220a;
+  --color-dark-aside-warning-text: #a49d83;
+  --color-dark-aside-todo-bg: #402b1f;
+  --color-dark-aside-todo-text: #998478;
+  --color-dark-active-bg: #222424;
+  --color-dark-section-border: #343434;
+  --color-dark-sidebar-text: #cadbe6;
+  --color-dark-active-text: #465e69;
+
+  /* Sidebar/nav */
+  --color-nav-bg: #526b78;
+
+  /* Sponsor button */
+  --color-sponsor-text-dark: #4fa8ff;
+  --color-sponsor-hover-bg-dark: #4fa8ff;
+  --color-sponsor-hover-text-dark: #04131f;
+}
+
+/* Explicit runtime CSS custom properties so var(--color-*) works without @import "tailwindcss" */
+:root {
+  --color-brand-link: #1d78c1;
+  --color-brand-link-hover: #144f80;
+  --color-brand-link-dark: #69a8ee;
+  --color-brand-link-dark-hover: #82b7f6;
+  --color-brand-blue: #175d96;
+  --color-brand-blue-hover: #135d96;
+  --color-heading-dark: #32434a;
+  --color-aside-border: #dddddd;
+  --color-aside-tip-bg: #eaf8ff;
+  --color-aside-tip-text: #4e7182;
+  --color-aside-tip-border: #1eb4ff;
+  --color-aside-warning-bg: #fdf5d8;
+  --color-aside-warning-text: #716b53;
+  --color-aside-warning-border: #f3c316;
+  --color-aside-todo-bg: #fbddcd;
+  --color-aside-todo-text: #907a6e;
+  --color-aside-todo-border: #e95d13;
+  --color-aside-prefix: #1a1a1a;
+  --color-table-header-bg: #f1f4f4;
+  --color-table-border: #cccccc;
+  --color-table-row-alt: #f8f8f8;
+  --color-code-pre-bg: #2d3748;
+  --color-code-pre-text: #e2e8f0;
+  --color-code-token: #a5cee1;
+  --color-code-link: #1e78c2;
+  --color-code-link-hover: #2186d8;
+  --color-code-anchor-border: #175d96;
+  --color-dark-bg: #121212;
+  --color-dark-surface: #202020;
+  --color-dark-border: #252525;
+  --color-dark-surface-2: #222222;
+  --color-dark-heading: #9ab3c0;
+  --color-dark-text: #e0e0e0;
+  --color-dark-muted: #a3a3a3;
+  --color-dark-sidebar-version: #b8b8b8;
+  --color-dark-link: #69a8ee;
+  --color-dark-link-hover: #82b7f6;
+  --color-dark-code-bg: #131b1f;
+  --color-dark-code-inline-bg: rgba(70, 94, 105, 0.45);
+  --color-dark-aside-tip-bg: #192429;
+  --color-dark-aside-tip-text: #7da2b4;
+  --color-dark-aside-warning-bg: #27220a;
+  --color-dark-aside-warning-text: #a49d83;
+  --color-dark-aside-todo-bg: #402b1f;
+  --color-dark-aside-todo-text: #998478;
+  --color-dark-active-bg: #222424;
+  --color-dark-section-border: #343434;
+  --color-dark-sidebar-text: #cadbe6;
+  --color-dark-active-text: #465e69;
+  --color-nav-bg: #526b78;
+  --color-sponsor-text-dark: #4fa8ff;
+  --color-sponsor-hover-bg-dark: #4fa8ff;
+  --color-sponsor-hover-text-dark: #04131f;
+}

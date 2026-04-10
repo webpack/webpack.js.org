@@ -3,16 +3,16 @@
 exports[`OfflineBanner renders the offline banner snapshot 1`] = `
 <div
   aria-live="polite"
-  class="offline-banner"
+  class="flex items-center justify-center px-20 py-[8px] bg-blue-600 text-white text-14 font-medium text-center border-b border-blue-800"
   data-testid="offline-banner"
   role="status"
 >
   <div
-    class="offline-banner__content"
+    class="flex items-center gap-[8px]"
   >
     <svg
       aria-hidden="true"
-      class="offline-banner__icon"
+      class="shrink-0 w-[16px] h-[16px] fill-blue-200"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -21,7 +21,7 @@ exports[`OfflineBanner renders the offline banner snapshot 1`] = `
       />
     </svg>
     <span
-      class="offline-banner__text"
+      class="tracking-[0.01em]"
     >
       You are currently offline. Some features may be unavailable.
     </span>

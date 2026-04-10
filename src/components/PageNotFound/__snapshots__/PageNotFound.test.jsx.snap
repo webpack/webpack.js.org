@@ -11,7 +11,7 @@ exports[`PageNotFound renders correctly 1`] = `
     Oops! The page you are looking for has been removed or relocated.
   </p>
   <a
-    class="button"
+    class="no-underline inline-block py-[3px] px-[5px] text-[1.1rem] rounded-[5px] w-auto border border-[#175d96] text-[#175d96] hover:bg-[#175d96] hover:text-white"
     data-discover="true"
     href="/"
   >
