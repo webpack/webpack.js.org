@@ -9,7 +9,7 @@ contributors:
   - madhavarshney
   - dhurlburtusa
   - jamesgeorge007
-  - anikethsaha    
+  - anikethsaha
   - snitin315
   - pixel-ray
   - chenxsan
@@ -32,7 +32,7 @@ Tells webpack to check the incompatible types of WebAssembly modules when they a
 | ------------- | ----------------- |
 | `development` | `false` |
 | `production` | `true` |
-| `none` | `false` |.
+| `none` | `false` |
 
 **webpack.config.js**
 
@@ -151,7 +151,7 @@ Use `optimization.avoidEntryIife` to avoid wrapping the entry module in an IIFE 
 
 Currently, `optimization.avoidEntryIife` can only optimize a single entry module along with other modules.
 
- The default value of `optimization.avoidEntryIife` depends on the [`mode`](/configuration/mode/):
+The default value of `optimization.avoidEntryIife` depends on the [`mode`](/configuration/mode/):
 
 | Mode | Default |
 | ------------- | ----------------- |
@@ -170,7 +170,7 @@ export default {
 };
 ```
 
-W> The `⁠optimization.avoidEntryIife` option can negatively affect build performance, if you prioritize build performance over these optimizations, consider disabling this option.
+W> The `optimization.avoidEntryIife` option can negatively affect build performance, if you prioritize build performance over these optimizations, consider disabling this option.
 
 ## optimization.flagIncludedChunks
 
