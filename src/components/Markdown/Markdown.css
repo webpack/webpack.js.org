@@ -293,6 +293,7 @@
     font-family:
       "Source Code Pro", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     @apply text-[90%] mx-0.5 py-0.5 px-1.5 whitespace-normal bg-[rgba(70,94,105,0.05)] rounded-[3px];
+    color: #2b3a42;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
@@ -454,4 +455,12 @@
 .dark .markdown aside.preview > .preview__prefix,
 .dark .markdown aside.todo > .todo__prefix {
   @apply text-white;
+}
+
+.markdown aside.tip a {
+  color: #465e69;
+}
+
+.markdown aside.tip a:hover {
+  color: #2b3a42;
 }
