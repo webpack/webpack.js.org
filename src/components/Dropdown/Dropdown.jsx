@@ -126,14 +126,11 @@ export default function Dropdown({ className = "", items = [] }) {
       <div
         className={`${
           active ? "block" : "hidden"
-        } absolute top-full right-0 text-[13px] bg-[#526b78] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.4)] z-[9999]`}
+        } absolute top-full left-1/2 -translate-x-1/2 overflow-hidden text-[13px] bg-[#526b78] rounded-md shadow-[0_4px_12px_rgba(0,0,0,0.4)] z-[9999]`}
       >
-        <ul className="pt-1">
+        <ul>
           {items.map((item, i) => (
-            <li
-              key={item.title}
-              className="py-1 px-2 list-none text-white transition-all duration-[250ms] hover:bg-[#175d96]"
-            >
+            <li key={item.title} className="list-none">
               <a
                 onKeyDown={(event) =>
                   handleArrowKeys(i, items.length - 1, event)
@@ -142,7 +139,7 @@ export default function Dropdown({ className = "", items = [] }) {
                   linksRef.current[i] = node;
                 }}
                 href={item.url}
-                className="px-5 block text-white visited:text-white hover:text-white"
+                className="block min-w-[88px] px-3 py-1 text-center text-white transition-colors duration-[200ms] visited:text-white hover:bg-[#175d96] hover:text-white focus:bg-[#175d96] focus:text-white"
               >
                 <span lang={item.lang} className="align-top text-left">
                   {item.title}
