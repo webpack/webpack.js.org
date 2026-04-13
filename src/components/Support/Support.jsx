@@ -108,7 +108,7 @@ export default function Support({ rank, type }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !inView) {
+        if (entry.isIntersecting) {
           setInView(true);
           observer.disconnect();
         }
@@ -121,7 +121,7 @@ export default function Support({ rank, type }) {
     }
 
     return () => observer.disconnect();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const { supporters, minimum, maximum, maxAge, limit, random } =
     useMemo(() => {
