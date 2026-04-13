@@ -13,7 +13,7 @@ const items = [
 ];
 
 function getListWrapper(container) {
-  return container.querySelector("ul").closest("div").className;
+  return container.querySelector("ul").closest("div");
 }
 
 describe("Dropdown", () => {
@@ -30,7 +30,7 @@ describe("Dropdown", () => {
 
   it("hides the dropdown by default", () => {
     const { container } = render(<Dropdown items={items} />);
-    expect(getListWrapper(container)).toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(true);
   });
 
   it("shows the dropdown on hover", () => {
@@ -38,7 +38,7 @@ describe("Dropdown", () => {
     const nav = container.querySelector("nav");
 
     fireEvent.mouseOver(nav);
-    expect(getListWrapper(container)).not.toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
   });
 
   it("hides the dropdown on mouse leave", () => {
@@ -47,7 +47,7 @@ describe("Dropdown", () => {
 
     fireEvent.mouseOver(nav);
     fireEvent.mouseLeave(nav);
-    expect(getListWrapper(container)).toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(true);
   });
 
   it("toggles dropdown on button click", () => {
@@ -55,10 +55,10 @@ describe("Dropdown", () => {
     const button = screen.getByRole("button", { name: /select language/i });
 
     fireEvent.click(button);
-    expect(getListWrapper(container)).not.toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
 
     fireEvent.click(button);
-    expect(getListWrapper(container)).toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(true);
   });
 
   it("sets aria-expanded correctly", () => {
@@ -82,7 +82,7 @@ describe("Dropdown", () => {
     const button = screen.getByRole("button", { name: /select language/i });
 
     fireEvent.click(button);
-    expect(getListWrapper(container)).not.toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
 
     act(() => {
       document.dispatchEvent(
@@ -90,7 +90,7 @@ describe("Dropdown", () => {
       );
     });
 
-    expect(getListWrapper(container)).toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(true);
   });
 
   it("closes when clicking outside", () => {
@@ -98,13 +98,13 @@ describe("Dropdown", () => {
     const button = screen.getByRole("button", { name: /select language/i });
 
     fireEvent.click(button);
-    expect(getListWrapper(container)).not.toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
 
     act(() => {
       document.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
 
-    expect(getListWrapper(container)).toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(true);
   });
 
   it("does not close dropdown when arrow keys are pressed", () => {
@@ -114,10 +114,10 @@ describe("Dropdown", () => {
 
     const links = screen.getAllByRole("link");
     fireEvent.keyDown(links[0], { key: "ArrowDown" });
-    expect(getListWrapper(container)).not.toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
 
     fireEvent.keyDown(links[links.length - 1], { key: "ArrowDown" });
-    expect(getListWrapper(container)).not.toContain("hidden");
+    expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
   });
 
   it("matches snapshot", () => {
