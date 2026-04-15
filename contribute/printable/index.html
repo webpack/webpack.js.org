@@ -366,6 +366,16 @@ choose to participate in any vote through abstention. Votes are needed to add ne
 <p>When object&#x27;s key can have multiple types, use <code>|</code> to list them. Here is an example, where <code>prop1</code> can be both a string and an array of strings:</p>
 <p><code>object = { prop1 string = &#x27;none&#x27;: &#x27;none&#x27; | &#x27;development&#x27; | &#x27;production&#x27; | [string]}</code></p>
 <p>This allows us to display the defaults, enumeration and other information.</p>
+<p>When an option has different defaults depending on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>, use a defaults table instead of the inline <code>= value</code> syntax:</p>
+<p><strong>configuration.example.option</strong></p>
+<p><code>string: &#x27;natural&#x27; | &#x27;named&#x27; | &#x27;deterministic&#x27;</code></p>
+<p>The default value of <code>configuration.example.option</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>&#x27;named&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>&#x27;natural&#x27;</code></span></td></tr></tbody></table>
+<p>If an option has a boolean default that varies by mode:</p>
+<p><strong>configuration.example.flag</strong></p>
+<p><code>boolean</code></p>
+<p>The default value of <code>configuration.example.flag</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p>If the object&#x27;s key is dynamic, user-defined, use <code>&lt;key&gt;</code> to describe it:</p>
 <p><code>object = { &lt;key&gt; string }</code></p>
 <h3><span id="options-shortlists-and-their-typing"></span>Options shortlists and their typing<a href="#options-shortlists-and-their-typing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>

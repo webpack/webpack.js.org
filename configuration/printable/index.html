@@ -1824,8 +1824,10 @@ __system_context__<span class="token punctuation">.</span><span class="token fun
 <p>Note that <code>[fullhash]</code> in this parameter will be replaced with a hash of the compilation. See the <a href="/guides/caching/" data-discover="true">Caching guide</a> for details.</p>
 <aside class="warning"><p class="warning__prefix">warning</p><p>The path must not contain an exclamation mark (<code>!</code>) as it is reserved by webpack for <a href="/concepts/loaders/#inline" data-discover="true">loader syntax</a>.</p></aside>
 <h2><span id="outputpathinfo"></span>output.pathinfo<a href="#outputpathinfo" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean=true</code> <code>string: &#x27;verbose&#x27;</code></p>
-<p>Tells webpack to include comments in bundles with information about the contained modules. This option defaults to <code>true</code> in <code>development</code> and <code>false</code> in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> respectively. <code>&#x27;verbose&#x27;</code> shows more information like exports, runtime requirements and bailouts.</p>
+<p><code>boolean</code> <code>string: &#x27;verbose&#x27;</code></p>
+<p>Tells webpack to include comments in bundles with information about the contained modules. <code>&#x27;verbose&#x27;</code> shows more information like exports, runtime requirements and bailouts.</p>
+<p>The default value of <code>output.pathinfo</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <aside class="warning"><p class="warning__prefix">warning</p><p>While the data these comments can provide is useful during development when reading the generated code, it <strong>should not</strong> be used in production.</p></aside>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
@@ -2983,7 +2985,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h3><span id="moduleparserjsonexportsdepth"></span>module.parser.json.exportsDepth<a href="#moduleparserjsonexportsdepth" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p>The depth of json dependency flagged as <code>exportInfo</code>. By default, it is set to <code>Infinity</code> in production mode, and <code>1</code> in development mode.</p>
+<p>The depth of json dependency flagged as <code>exportInfo</code>.</p>
+<p>The default value of <code>module.parser.json.exportsDepth</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>Infinity</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>1</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>Infinity</code></span></td></tr></tbody></table>
 <ul>
 <li>Type: <code>number</code></li>
 <li>Available: <span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.98.0+</span></li>
@@ -4544,7 +4548,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>Webpack runs optimizations for you depending on the chosen <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>, still all optimizations are available for manual configuration and overrides.</p>
 <h2><span id="optimizationcheckwasmtypes"></span>optimization.checkWasmTypes<a href="#optimizationcheckwasmtypes" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code></p>
-<p>Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported. By default <code>optimization.checkWasmTypes</code> is enabled in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> and disabled elsewise.</p>
+<p>Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported.</p>
+<p>The default value of <code>optimization.checkWasmTypes</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4569,7 +4575,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </ul>
 <p>Tells Webpack which algorithm to use for chunk IDs. Setting <code>optimization.chunkIds</code> to <code>false</code> tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for <code>optimization.chunkIds</code>:</p>
 <p>The default value of <code>optimization.chunkIds</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
-<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>development</code></span></td><td data-th="Default"><span><code>&#x27;named&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>production</code></span></td><td data-th="Default"><span><code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>none</code></span></td><td data-th="Default"><span><code>&#x27;natural&#x27;</code></span></td></tr></tbody></table>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>&#x27;named&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>&#x27;natural&#x27;</code></span></td></tr></tbody></table>
 <p>The following string values are supported:</p>
 <table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td data-th="Option"><span><code>&#x27;natural&#x27;</code></span></td><td data-th="Description"><span>Numeric ids in order of usage.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;named&#x27;</code></span></td><td data-th="Description"><span>Readable ids for better debugging.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;deterministic&#x27;</code></span></td><td data-th="Description"><span>Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;size&#x27;</code></span></td><td data-th="Description"><span>Numeric ids focused on minimal initial download size.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;total-size&#x27;</code></span></td><td data-th="Description"><span>numeric ids focused on minimal total download size.</span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
@@ -4594,8 +4600,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="optimizationconcatenatemodules"></span>optimization.concatenateModules<a href="#optimizationconcatenatemodules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code></p>
-<p>Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on <a href="#optimizationprovidedexports"><code>optimization.providedExports</code></a> and <a href="#optimizationusedexports"><code>optimization.usedExports</code></a>.
-By default <code>optimization.concatenateModules</code> is enabled in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> and disabled elsewise.</p>
+<p>Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on <a href="#optimizationprovidedexports"><code>optimization.providedExports</code></a> and <a href="#optimizationusedexports"><code>optimization.usedExports</code></a>.</p>
+<p>The default value of <code>optimization.concatenateModules</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4604,8 +4611,10 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="optimizationemitonerrors"></span>optimization.emitOnErrors<a href="#optimizationemitonerrors" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = false</code></p>
+<p><code>boolean</code></p>
 <p>Use the <code>optimization.emitOnErrors</code> to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.</p>
+<p>The default value of <code>optimization.emitOnErrors</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4615,12 +4624,13 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <aside class="warning"><p class="warning__prefix">warning</p><p>If you are using webpack <a href="/api/cli/" data-discover="true">CLI</a>, the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to &quot;fail&quot; when using the CLI, please check out the <a href="/api/cli/#advanced-options" data-discover="true"><code>bail</code> option</a>.</p></aside>
 <h2><span id="optimizationavoidentryiife"></span>optimization.avoidEntryIife<a href="#optimizationavoidentryiife" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = false</code></p>
+<p><code>boolean</code></p>
 <span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.95.0+</span>
-<aside class="tip"><p class="tip__prefix">tip</p><p>IIFE (Immediately Invoked Function Expression) is a function that runs immediately after it is created. Webpack uses it to wrap code and avoid variable conflicts.</p></aside>
-<p>Use <code>optimization.avoidEntryIife</code> to avoid wrapping the entry module in an IIFE when it is required (search for <code>&quot;This entry needs to be wrapped in an IIFE because&quot;</code> in <a href="https://github.com/webpack/webpack/blob/main/lib/javascript/JavascriptModulesPlugin.js">JavascriptModulesPlugin</a>). This approach helps optimize performance for JavaScript engines and enables tree shaking when building ESM libraries.</p>
+<aside class="tip"><p class="tip__prefix">tip</p><p>IIFE ...</p></aside>
+<p>Use <code>optimization.avoidEntryIife</code> ...</p>
 <p>Currently, <code>optimization.avoidEntryIife</code> can only optimize a single entry module along with other modules.</p>
-<p>By default, <code>optimization.avoidEntryIife</code> is enabled in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> and disabled otherwise.</p>
+<p>The default value of <code>optimization.avoidEntryIife</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4631,7 +4641,9 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <aside class="warning"><p class="warning__prefix">warning</p><p>The <code>optimization.avoidEntryIife</code> option can negatively affect build performance. If you prioritize build performance over these optimizations, consider disabling this option.</p></aside>
 <h2><span id="optimizationflagincludedchunks"></span>optimization.flagIncludedChunks<a href="#optimizationflagincludedchunks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code></p>
-<p>Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default <code>optimization.flagIncludedChunks</code> is enabled in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> and disabled elsewise.</p>
+<p>Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don&#x27;t have to be loaded when the bigger chunk has been already loaded.</p>
+<p>The default value of <code>optimization.flagIncludedChunks</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4640,8 +4652,10 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="optimizationinnergraph"></span>optimization.innerGraph<a href="#optimizationinnergraph" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = true</code></p>
+<p><code>boolean</code></p>
 <p><code>optimization.innerGraph</code> tells webpack whether to conduct inner graph analysis for unused exports.</p>
+<p>The default value of <code>optimization.innerGraph</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4652,7 +4666,8 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <h2><span id="optimizationmangleexports"></span>optimization.mangleExports<a href="#optimizationmangleexports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code> <code>string: &#x27;deterministic&#x27; | &#x27;size&#x27;</code></p>
 <p><code>optimization.mangleExports</code> allows to control export mangling.</p>
-<p>By default <code>optimization.mangleExports: &#x27;deterministic&#x27;</code> is enabled in <code>production</code> <a href="/configuration/mode/" data-discover="true">mode</a> and disabled elsewise.</p>
+<p>The default value of <code>optimization.mangleExports</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p>The following values are supported:</p>
 <table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td data-th="Option"><span><code>&#x27;size&#x27;</code></span></td><td data-th="Description"><span>Short names - usually a single char - focused on minimal download size.</span></td></tr><tr><td data-th="Option"><span><code>&#x27;deterministic&#x27;</code></span></td><td data-th="Description"><span>Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching.</span></td></tr><tr><td data-th="Option"><span><code>true</code></span></td><td data-th="Description"><span>Same as <code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Option"><span><code>false</code></span></td><td data-th="Description"><span>Keep original name. Good for readability and debugging.</span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
@@ -4683,8 +4698,10 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="optimizationminimize"></span>optimization.minimize<a href="#optimizationminimize" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = true</code></p>
+<p><code>boolean</code></p>
 <p>Tell webpack to minimize the bundle using the <a href="/plugins/terser-webpack-plugin/" data-discover="true">TerserPlugin</a> or the plugin(s) specified in <a href="#optimizationminimizer"><code>optimization.minimizer</code></a>.</p>
+<p>The default value of <code>optimization.minimize</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4752,7 +4769,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <p><code>boolean: false</code> <code>string: &#x27;natural&#x27; | &#x27;named&#x27; | &#x27;deterministic&#x27; | &#x27;size&#x27;</code></p>
 <p>Tells webpack which algorithm to use when choosing module ids. Setting <code>optimization.moduleIds</code> to <code>false</code> tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.</p>
 <p>The default value of <code>optimization.moduleIds</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
-<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>development</code></span></td><td data-th="Default"><span><code>&#x27;named&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>production</code></span></td><td data-th="Default"><span><code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>none</code></span></td><td data-th="Default"><span><code>&#x27;natural&#x27;</code></span></td></tr></tbody></table>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>&#x27;deterministic&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>&#x27;named&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>&#x27;natural&#x27;</code></span></td></tr></tbody></table>
 <p>The following string values are supported:</p>
 <table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td data-th="Option"><span><code>natural</code></span></td><td data-th="Description"><span>Numeric ids in order of usage.</span></td></tr><tr><td data-th="Option"><span><code>named</code></span></td><td data-th="Description"><span>Readable ids for better debugging.</span></td></tr><tr><td data-th="Option"><span><code>deterministic</code></span></td><td data-th="Description"><span>Module names are hashed into small numeric values.</span></td></tr><tr><td data-th="Option"><span><code>size</code></span></td><td data-th="Description"><span>Numeric ids focused on minimal initial download size.</span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
@@ -4778,8 +4795,10 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <aside class="warning"><p class="warning__prefix">warning</p><p><code>moduleIds: &#x27;deterministic&#x27;</code> was added in webpack 5 and <code>moduleIds: &#x27;hashed&#x27;</code> is deprecated in favor of it.</p></aside>
 <aside class="warning"><p class="warning__prefix">warning</p><p><code>moduleIds: total-size</code> has been removed in webpack 5.</p></aside>
 <h2><span id="optimizationnodeenv"></span>optimization.nodeEnv<a href="#optimizationnodeenv" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = false</code> <code>string</code></p>
-<p>Tells webpack to set <code>process.env.NODE_ENV</code> to a given string value. <code>optimization.nodeEnv</code> uses <a href="/plugins/define-plugin/" data-discover="true">DefinePlugin</a> unless set to <code>false</code>. <code>optimization.nodeEnv</code> <strong>defaults</strong> to <a href="/configuration/mode/" data-discover="true">mode</a> if set, else falls back to <code>&#x27;production&#x27;</code>.</p>
+<p><code>boolean: false</code> <code>string</code></p>
+<p>Tells webpack to set <code>process.env.NODE_ENV</code> to a given string value. <code>optimization.nodeEnv</code> uses <a href="/plugins/define-plugin/" data-discover="true">DefinePlugin</a> unless set to <code>false</code>.</p>
+<p>The default value of <code>optimization.nodeEnv</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>&#x27;production&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>&#x27;development&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p>Possible values:</p>
 <ul>
 <li>any string: the value to set <code>process.env.NODE_ENV</code> to.</li>
@@ -4816,7 +4835,9 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="optimizationrealcontenthash"></span>optimization.realContentHash<a href="#optimizationrealcontenthash" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code></p>
-<p>Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If <code>realContentHash</code> is set to <code>false</code>, internal data is used to calculate the hash and it can change when assets are identical. By default <code>optimization.realContentHash</code> is enabled in production <a href="/configuration/mode/" data-discover="true">mode</a> and disabled otherwise.</p>
+<p>Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If <code>realContentHash</code> is set to <code>false</code>, internal data is used to calculate the hash and it can change when assets are identical.</p>
+<p>The default value of <code>optimization.realContentHash</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4880,7 +4901,7 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h2><span id="optimizationsideeffects"></span>optimization.sideEffects<a href="#optimizationsideeffects" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = true</code> <code>string: &#x27;flag&#x27;</code></p>
+<p><code>boolean</code> <code>string: &#x27;flag&#x27;</code></p>
 <p>Tells webpack to recognise the <a href="https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md"><code>sideEffects</code></a> flag in <code>package.json</code> or rules to skip over modules which are flagged to contain no side effects when exports are not used.</p>
 <p><strong>package.json</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-json"><span class="token punctuation">{</span>
@@ -4890,6 +4911,8 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
 <span class="token punctuation">}</span></code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Please note that <code>sideEffects</code> should be in the npm module&#x27;s <code>package.json</code> file and doesn&#x27;t mean that you need to set <code>sideEffects</code> to <code>false</code> in your own project&#x27;s <code>package.json</code> which requires that big module.</p></aside>
 <p><code>optimization.sideEffects</code> depends on <a href="#optimizationprovidedexports"><code>optimization.providedExports</code></a> to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.</p>
+<p>The default value of <code>optimization.sideEffects</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>&#x27;flag&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>&#x27;flag&#x27;</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -4904,15 +4927,16 @@ By default <code>optimization.concatenateModules</code> is enabled in <code>prod
     <span class="token literal-property property">sideEffects</span><span class="token operator">:</span> <span class="token string">&quot;flag&quot;</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
-<p>The <code>&#x27;flag&#x27;</code> value is used by default in non-production builds.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p><code>optimization.sideEffects</code> will also flag modules as side effect free when they contain only side effect free statements.</p></aside>
 <h2><span id="optimizationsplitchunks"></span>optimization.splitChunks<a href="#optimizationsplitchunks" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>object</code></p>
 <p>By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the <a href="/plugins/split-chunks-plugin/" data-discover="true">SplitChunksPlugin</a> page.</p>
 <h2><span id="optimizationusedexports"></span>optimization.usedExports<a href="#optimizationusedexports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p><code>boolean = true</code> <code>string: &#x27;global&#x27;</code></p>
+<p><code>boolean</code> <code>string: &#x27;global&#x27;</code></p>
 <p>Tells webpack to determine used exports for each module. This depends on <a href="#optimizationprovidedexports"><code>optimization.providedExports</code></a>. Information collected by <code>optimization.usedExports</code> is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.</p>
+<p>The default value of <code>optimization.usedExports</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -6104,7 +6128,9 @@ Dead code elimination in minimizers will benefit from this and can remove unused
 <!-- -->
 <h2><span id="cache"></span>cache<a href="#cache" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p><code>boolean</code> <code>object</code></p>
-<p>Cache the generated webpack modules and chunks to improve build speed. <code>cache</code> is set to <code>type: &#x27;memory&#x27;</code> in <a href="/configuration/mode/#mode-development" data-discover="true"><code>development</code> mode</a> and disabled in <a href="/configuration/mode/#mode-production" data-discover="true"><code>production</code> mode</a>. <code>cache: true</code> is an alias to <code>cache: { type: &#x27;memory&#x27; }</code>. To disable caching pass <code>false</code>:</p>
+<p>Cache the generated webpack modules and chunks to improve build speed. <code>cache: true</code> is an alias to <code>cache: { type: &#x27;memory&#x27; }</code>. To disable caching pass <code>false</code>:</p>
+<p>The default value of <code>cache</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>{ type: &#x27;memory&#x27; }</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -6114,11 +6140,11 @@ Dead code elimination in minimizers will benefit from this and can remove unused
 <h3><span id="cacheallowcollectingmemory"></span>cache.allowCollectingMemory<a href="#cacheallowcollectingmemory" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Collect unused memory allocated during deserialization, only available when <a href="#cachetype"><code>cache.type</code></a> is set to <code>&#x27;filesystem&#x27;</code>. This requires copying data into smaller buffers and has a performance cost.</p>
 <ul>
-<li>Type: <code>boolean</code>
-<ul>
-<li>It defaults to <code>false</code> in production mode and <code>true</code> in development mode.</li>
+<li>Type: <code>boolean</code></li>
 </ul>
-</li>
+<p>The default value of <code>cache.allowCollectingMemory</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>true</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
+<ul>
 <li>
 <span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.35.0+</span>
 </li>
@@ -6314,11 +6340,9 @@ Dead code elimination in minimizers will benefit from this and can remove unused
 <li>
 <p><code>cache.maxMemoryGenerations</code>: small numbers &gt; 0 will have a performance cost for the GC operation. It gets lower as the number increases.</p>
 </li>
-<li>
-<p><code>cache.maxMemoryGenerations</code>: defaults to 10 in <code>development</code> mode and to <code>Infinity</code> in <code>production</code> mode.</p>
-</li>
 </ul>
-<p><code>cache.maxMemoryGenerations</code> option is only available when <a href="#cachetype"><code>cache.type</code></a> is set to <code>&#x27;filesystem&#x27;</code>.</p>
+<p>The default value of <code>cache.maxMemoryGenerations</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>Infinity</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>5</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>Infinity</code></span></td></tr></tbody></table>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -9032,8 +9056,10 @@ This feature was inspired by the idea of <a href="https://github.com/webpack/web
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>The example above will only give you performance hints based on <code>.js</code> files.</p>
 <h3><span id="performancehints"></span>performance.hints<a href="#performancehints" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
-<p><code>string = &#x27;warning&#x27;: &#x27;error&#x27; | &#x27;warning&#x27;</code> <code>boolean: false</code></p>
+<p><code>string: &#x27;error&#x27; | &#x27;warning&#x27;</code> <code>boolean: false</code></p>
 <p>Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found.</p>
+<p>The default value of <code>performance.hints</code> depends on the <a href="/configuration/mode/" data-discover="true"><code>mode</code></a>:</p>
+<table><thead><tr><th>Mode</th><th>Default</th></tr></thead><tbody><tr><td data-th="Mode"><span><code>&quot;production&quot;</code></span></td><td data-th="Default"><span><code>&#x27;warning&#x27;</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;development&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr><tr><td data-th="Mode"><span><code>&quot;none&quot;</code></span></td><td data-th="Default"><span><code>false</code></span></td></tr></tbody></table>
 <p>Given an asset is created that is over 250kb:</p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
