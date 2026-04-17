@@ -350,11 +350,20 @@ webpack <span class="token number">5</span>.x.x compiled successfully <span clas
 </span><span class="token prefix inserted">+</span><span class="token line">    ],
 </span><span class="token prefix inserted">+</span><span class="token line">  },
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre></div>
-<p>Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain.</p>
-<p>The above order of loaders should be maintained: <a href="/loaders/style-loader" data-discover="true"><code>&#x27;style-loader&#x27;</code></a> comes first and followed by <a href="/loaders/css-loader" data-discover="true"><code>&#x27;css-loader&#x27;</code></a>. If this convention is not followed, webpack is likely to throw errors.</p>
-<aside class="tip"><p class="tip__prefix">tip</p><p>webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case, any file that ends with <code>.css</code> will be served to the <code>style-loader</code> and the <code>css-loader</code>.</p></aside>
-<p>This enables you to <code>import &#x27;./style.css&#x27;</code> into the file that depends on that styling. Now, when that module is run, a <code>&lt;style&gt;</code> tag with the stringified css will be inserted into the <code>&lt;head&gt;</code> of your html file.</p>
-<p>Let&#x27;s try it out by adding a new <code>style.css</code> file to our project and import it in our <code>index.js</code>:</p>
+<p>Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order (right to left).</p>
+<p>For example, given the following rule:</p>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">module</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">rules</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token literal-property property">test</span><span class="token operator">:</span> <span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\.scss$</span><span class="token regex-delimiter">/</span><span class="token regex-flags">i</span></span><span class="token punctuation">,</span>
+        <span class="token literal-property property">use</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;postcss-loader&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;sass-loader&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>Even though <code>postcss-loader</code> appears before <code>sass-loader</code> in the <code>use</code> array, webpack runs <code>sass-loader</code> first (compiling Sass into CSS), then runs <code>postcss-loader</code> on the result.</p>
+<p>If this order is not maintained, webpack may throw errors.</p>
 <p><strong>project</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
 </span><span class="token prefix unchanged"> </span><span class="token line">  ├── package.json
