@@ -97,7 +97,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <li>If a dependency is missing, or included in the wrong order, the application will not function properly.</li>
 <li>If a dependency is included but not used, the browser will be forced to download unnecessary code.</li>
 </ul>
-<p>Let&#x27;s use webpack to manage these scripts instead.</p>
+<p>Webpack solves these issues by explicitly declaring dependencies and bundling them together. This removes reliance on global variables and ensures scripts are executed in the correct order.</p>
 <h2><span id="creating-a-bundle"></span>Creating a Bundle<a href="#creating-a-bundle" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>First we&#x27;ll tweak our directory structure slightly, separating the &quot;source&quot; code (<code>./src</code>) from our &quot;distribution&quot; code (<code>./dist</code>). The &quot;source&quot; code is the code that we&#x27;ll write and edit. The &quot;distribution&quot; code is the minimized and optimized <code>output</code> of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:</p>
 <p><strong>project</strong></p>
