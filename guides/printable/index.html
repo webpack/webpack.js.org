@@ -5,18 +5,21 @@
 <aside class="warning"><p class="warning__prefix">warning</p><p>The output shown from running webpack in the guides may differ slightly from the output of newer versions. This is to be expected. As long as the bundles look similar and run correctly, then there shouldn&#x27;t be any issues. If you do come across an example that seems to be broken by a new version, please <a href="https://github.com/webpack/webpack.js.org/issues/new/choose">create an issue</a> and we will do our best to resolve the discrepancy.</p></aside>
 <h1><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <!-- -->
+<p>Webpack is a good fit when your application needs a customizable build pipeline: bundling JavaScript modules, processing assets, integrating loaders and plugins, and shaping output for different environments. For a very small page with one or two scripts, a bundler may be unnecessary at first; for an application with shared dependencies, npm packages, assets, and production builds, webpack gives you explicit control over how everything is assembled.</p>
 <p>Webpack is used to efficiently compile JavaScript modules. Once <a href="/guides/installation" data-discover="true">installed</a>, you can interact with webpack either from its <a href="/api/cli" data-discover="true">CLI</a> or <a href="/api/node" data-discover="true">API</a>. If you&#x27;re still new to webpack, please read through the <a href="/concepts" data-discover="true">core concepts</a> and <a href="/comparison" data-discover="true">this comparison</a> to learn why you might use it over the other tools that are out in the community.</p>
-<aside class="warning"><p class="warning__prefix">warning</p><p>The minimum supported Node.js version to run webpack 5 is 10.13.0 (LTS)</p></aside>
+<aside class="warning"><p class="warning__prefix">warning</p><p>The examples in this guide use <code>webpack-cli</code> 7, which requires Node.js 20.9.0 or later.</p></aside>
 <aside class="preview"><h6 class="preview__prefix">live preview</h6><p>Check out this guide live on StackBlitz.</p><a href="https://stackblitz.com/github/webpack/webpack.js.org/tree/main/examples/getting-started?terminal=" target="_blank" rel="noopener noreferrer"><img src="/open-in-stackblitz-button.d5768454f28617a0.svg" alt="Open in StackBlitz"/></a></aside>
 <h2><span id="quick-start-minimal-working-example"></span>Quick Start (Minimal Working Example)<a href="#quick-start-minimal-working-example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>If you just want to get a working webpack project up and running quickly, the easiest way is to scaffold one using <code>create-webpack-app</code>.</p>
+<p>If you want to get a working webpack project up and running quickly, the easiest way is to scaffold one using <code>create-webpack-app</code>.</p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">npx create-webpack-app webpack-demo
 <span class="token builtin class-name">cd</span> webpack-demo</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Need a CLI-based project setup or templates? See the <a href="/api/cli/#init" data-discover="true">Init command</a> for webpack&#x27;s scaffolding flow.</p></aside>
 <aside class="tip"><p class="tip__prefix">tip</p><p>This command generates a ready-to-use webpack project with a sensible default configuration. Continue below if you&#x27;d like to understand how to set up webpack manually step by step.</p></aside>
 <h2><span id="basic-setup"></span>Basic Setup<a href="#basic-setup" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>First let&#x27;s create a directory, initialize npm, <a href="/guides/installation/#local-installation" data-discover="true">install webpack locally</a>, and install the <a href="https://github.com/webpack/webpack-cli"><code>webpack-cli</code></a> (the tool used to run webpack on the command line):</p>
-<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token function">mkdir</span> webpack-demo
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># Run the commands for one package manager only.</span>
+
+<span class="token function">mkdir</span> webpack-demo
 <span class="token builtin class-name">cd</span> webpack-demo
 
 <span class="token comment"># npm</span>
@@ -59,13 +62,14 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>utf-8<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Getting Started<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>https://unpkg.com/lodash@4.17.20<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>https://unpkg.com/lodash@4.17.21<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>./src/index.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></code></pre></div>
-<p>We also need to adjust our <code>package.json</code> file in order to make sure we mark our package as <code>private</code>, as well as removing the <code>main</code> entry. We also add <code>&quot;type&quot;: &quot;module&quot;</code> so that Node.js knows to process our configuration files as ES Modules. This is to prevent an accidental publish of your code, as well as enabling ES Module support for our scripts.</p>
+<p>We also need to adjust our <code>package.json</code> file in order to make sure we mark our package as <code>private</code>, as well as removing the <code>main</code> entry. This is to prevent an accidental publish of your code.</p>
+<p>We also add <code>&quot;type&quot;: &quot;module&quot;</code> so that Node.js treats <code>.js</code> files in this project as ES modules. That setting applies project-wide, including future Node.js scripts and webpack configuration files. If you would rather keep Node&#x27;s default CommonJS behavior, omit <code>&quot;type&quot;: &quot;module&quot;</code> and write the configuration later in this guide with <code>require(...)</code> and <code>module.exports</code> instead of <code>import</code> and <code>export default</code>.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>If you want to learn more about the inner workings of <code>package.json</code>, then we recommend reading the <a href="https://docs.npmjs.com/files/package.json">npm documentation</a>.</p></aside>
 <p><strong>package.json</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">{
@@ -82,11 +86,11 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;MIT&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.38.1&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.105.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^7.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
-<p>In this example, there are implicit dependencies between the <code>&lt;script&gt;</code> tags. Our <code>index.js</code> file depends on <code>lodash</code> being included in the page before it runs. This is because <code>index.js</code> never explicitly declared a need for <code>lodash</code>; it assumes that the global variable <code>_</code> exists.</p>
+<p>In this example, there are implicit dependencies between the <code>&lt;script&gt;</code> tags. Our <code>index.js</code> file depends on <code>lodash</code> being included in the page before it runs. This creates an implicit dependency on a global variable (<code>_</code>), making script execution order critical and harder to maintain.</p>
 <p>There are problems with managing JavaScript projects this way:</p>
 <ul>
 <li>It is not immediately apparent that the script depends on an external library.</li>
@@ -105,17 +109,19 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  ├── index.html
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  └── /src
 </span><span class="token prefix unchanged"> </span><span class="token line">      └── index.js</span></span></code></pre></div>
-<aside class="tip"><p class="tip__prefix">tip</p><p>You may have noticed that <code>index.html</code> was created manually, even though it is now placed in the <code>dist</code> directory. Later on in <a href="/guides/output-management/#setting-up-htmlwebpackplugin" data-discover="true">another guide</a>, we will generate <code>index.html</code> rather than edit it manually. Once this is done, it should be safe to empty the <code>dist</code> directory and to regenerate all the files within it.</p></aside>
+<p>The <code>dist</code> directory is build output, so you usually do not hand-edit files there in a mature project. We are moving <code>index.html</code> into <code>dist</code> for now only as temporary scaffolding, so the browser has an HTML file that loads the first generated bundle. Later on in <a href="/guides/output-management/#setting-up-htmlwebpackplugin" data-discover="true">another guide</a>, we will generate <code>index.html</code> rather than edit it manually. Once this is done, it should be safe to empty the <code>dist</code> directory and regenerate all the files within it.</p>
 <p>To bundle the <code>lodash</code> dependency with <code>index.js</code>, we&#x27;ll need to install the library locally:</p>
-<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
-<span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--save</span> lodash
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># Run the command for one package manager only.</span>
+
+<span class="token comment"># npm</span>
+<span class="token function">npm</span> <span class="token function">install</span> lodash
 
 <span class="token comment"># yarn</span>
 <span class="token function">yarn</span> <span class="token function">add</span> lodash
 
 <span class="token comment"># pnpm</span>
 <span class="token function">pnpm</span> <span class="token function">add</span> lodash</code></pre></div>
-<aside class="tip"><p class="tip__prefix">tip</p><p>When installing a package that will be bundled into your production bundle, you should use <code>npm install --save</code>. If you&#x27;re installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use <code>npm install --save-dev</code>. More information can be found in the <a href="https://docs.npmjs.com/cli/install">npm documentation</a>.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>With npm 5 and later, packages installed with <code>npm install &lt;package&gt;</code> are saved to <code>dependencies</code> by default. If you&#x27;re installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use <code>npm install --save-dev</code>. More information can be found in the <a href="https://docs.npmjs.com/cli/install">npm documentation</a>.</p></aside>
 <p>Now, let&#x27;s import <code>lodash</code> in our script:</p>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">import _ from &#x27;lodash&#x27;;
@@ -138,7 +144,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 </span><span class="token prefix unchanged"> </span><span class="token line">  &lt;head&gt;
 </span><span class="token prefix unchanged"> </span><span class="token line">    &lt;meta charset=&quot;utf-8&quot; /&gt;
 </span><span class="token prefix unchanged"> </span><span class="token line">    &lt;title&gt;Getting Started&lt;/title&gt;
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    &lt;script src=&quot;https://unpkg.com/lodash@4.17.20&quot;&gt;&lt;/script&gt;
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    &lt;script src=&quot;https://unpkg.com/lodash@4.17.21&quot;&gt;&lt;/script&gt;
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  &lt;/head&gt;
 </span><span class="token prefix unchanged"> </span><span class="token line">  &lt;body&gt;
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    &lt;script src=&quot;./src/index.js&quot;&gt;&lt;/script&gt;
@@ -148,7 +154,9 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 <aside class="tip"><p class="tip__prefix">tip</p><p>A couple other script loading strategies exist. Deferred loading is one such alternative to the above, where instead scripts are consolidated into the <code>&lt;head&gt;</code> and are given the <code>defer</code> attribute. This strategy downloads the external script resource(s) in parallel with document parsing, and will execute the scripts in order of document appearance after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource synchronously. To learn more about this process, MDN has a nice <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script#async_and_defer"><code>reference guide</code></a>.</p></aside>
 <p>In this setup, <code>index.js</code> explicitly requires <code>lodash</code> to be present, and binds it as <code>_</code> (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.</p>
 <p>With that said, let&#x27;s run <code>npx webpack</code> from the project root. If webpack is installed locally, <code>npx</code> will run the local binary from <code>node_modules/.bin</code>; otherwise, it may download and execute it. This command takes our script at <code>src/index.js</code> as the <a href="/concepts/entry-points" data-discover="true">entry point</a> and generates <code>dist/main.js</code> as the <a href="/concepts/output" data-discover="true">output</a>.</p>
-<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># Run the command for one package manager only.</span>
+
+<span class="token comment"># npm</span>
 npx webpack
 
 <span class="token comment"># yarn</span>
@@ -163,12 +171,13 @@ runtime modules <span class="token number">1000</span> bytes <span class="token 
 cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1851</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">1851</span> ms</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Your output may vary a bit, but if the build is successful then you are good to go.</p></aside>
+<aside class="tip"><p class="tip__prefix">tip</p><p>Webpack runs in production mode by default when no mode is set, so the output above includes <code>[minimized]</code> and the generated <code>dist/main.js</code> will be optimized for browsers rather than easy reading. While learning, you can run <code>npx webpack --mode development</code>, <code>yarn webpack --mode development</code>, or <code>pnpm exec webpack --mode development</code> to produce a more readable bundle.</p></aside>
 <p>Open <code>index.html</code> from the <code>dist</code> directory in your browser and, if everything went right, you should see the following text: <code>&#x27;Hello webpack&#x27;</code>.</p>
 <h2><span id="modules"></span>Modules<a href="#modules" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
-<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import"><code>import</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export"><code>export</code></a> statements have been standardized in <a href="https://babeljs.io/docs/en/learn/">ES2015</a>. They are supported in most of the browsers at this moment, however there are some browsers that don&#x27;t recognize the new syntax. But don&#x27;t worry, webpack does support them out of the box.</p>
-<p>Behind the scenes, webpack actually &quot;<strong>transpiles</strong>&quot; the code so that older browsers can also run it. If you inspect <code>dist/main.js</code>, you might be able to see how webpack does this, it&#x27;s quite ingenious! Besides <code>import</code> and <code>export</code>, webpack supports various other module syntaxes as well, see <a href="/api/module-methods" data-discover="true">Module API</a> for more information.</p>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import"><code>import</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export"><code>export</code></a> statements have been standardized in <a href="https://babeljs.io/docs/en/learn/">ES2015</a>. They are supported in most browsers at this moment, however there are some browsers that don&#x27;t recognize the new syntax. But don&#x27;t worry, webpack does support them out of the box.</p>
+<p>Behind the scenes, webpack analyzes your module graph and bundles the modules into code that the browser can load in the right order. It handles module syntax such as <code>import</code> and <code>export</code>, and supports various other module syntaxes as well. See <a href="/api/module-methods" data-discover="true">Module API</a> for more information.</p>
 <p>Note that webpack will not alter any code other than <code>import</code> and <code>export</code> statements. If you are using other <a href="http://es6-features.org/">ES2015 features</a>, make sure to <a href="/loaders/#transpiling" data-discover="true">use a transpiler</a> such as <a href="https://babeljs.io/">Babel</a> via webpack&#x27;s <a href="/concepts/loaders/" data-discover="true">loader system</a>.</p>
 <h2><span id="using-a-configuration"></span>Using a Configuration<a href="#using-a-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>As of version 4, webpack doesn&#x27;t require any configuration, but most projects will need a more complex setup, which is why webpack supports a <a href="/concepts/configuration" data-discover="true">configuration file</a>. This is much more efficient than having to manually type in a lot of commands in the terminal, so let&#x27;s create one:</p>
@@ -200,7 +209,9 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>Now, let&#x27;s run the build again but instead using our new configuration file:</p>
-<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># Run the command for one package manager only.</span>
+
+<span class="token comment"># npm</span>
 npx webpack <span class="token parameter variable">--config</span> webpack.config.js
 
 <span class="token comment"># yarn</span>
@@ -215,7 +226,7 @@ runtime modules <span class="token number">1000</span> bytes <span class="token 
 cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1934</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">1934</span> ms</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>If a <code>webpack.config.js</code> is present, the <code>webpack</code> command picks it up by default. We use the <code>--config</code> option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.</p></aside>
 <p>A configuration file allows far more flexibility than CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the <a href="/configuration" data-discover="true">configuration documentation</a> to learn more.</p>
 <h2><span id="npm-scripts"></span>NPM Scripts<a href="#npm-scripts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -235,16 +246,18 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.105.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^7.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.21&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
 <p>Now the <code>npm run build</code> command can be used in place of the <code>npx</code> command we used earlier. Note that within <code>scripts</code> we can reference locally installed npm packages by name the same way we did with <code>npx</code>. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts.</p>
 <p>Now run the following command and see if your script alias works:</p>
-<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># npm</span>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash"><span class="token comment"># Run the command for one package manager only.</span>
+
+<span class="token comment"># npm</span>
 <span class="token function">npm</span> run build
 
 <span class="token comment"># yarn</span>
@@ -260,7 +273,7 @@ runtime modules <span class="token number">1000</span> bytes <span class="token 
 cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1940</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">1940</span> ms</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>Custom parameters can be passed to webpack by adding two dashes between the <code>npm run build</code> command and your parameters, e.g. <code>npm run build -- --color</code>.</p></aside>
 <h2><span id="conclusion"></span>Conclusion<a href="#conclusion" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Now that you have a basic build together, you should move on to the next guide <a href="/guides/asset-management" data-discover="true"><code>Asset Management</code></a> to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:</p>
@@ -389,7 +402,7 @@ cacheable modules <span class="token number">539</span> KiB
   modules by path ./src/ <span class="token number">965</span> bytes
     ./src/index.js + <span class="token number">1</span> modules <span class="token number">639</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
     ./node_modules/css-loader/dist/cjs.js<span class="token operator">!</span>./src/style.css <span class="token number">326</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">2231</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">2231</span> ms</code></pre></div>
 <p>Open up <code>dist/index.html</code> in your browser again and you should see that <code>Hello webpack</code> is now styled in red. To see what webpack did, inspect the page (don&#x27;t view the page source, as it won&#x27;t show you the result, because the <code>&lt;style&gt;</code> tag is dynamically created by JavaScript) and look at the page&#x27;s head tags. It should contain the style block that we imported in <code>index.js</code>.</p>
 <p>Note that you can, and in most cases should, <a href="/plugins/mini-css-extract-plugin/#minimizing-for-production" data-discover="true">minimize css</a> for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of – <a href="/loaders/postcss-loader" data-discover="true">postcss</a>, <a href="/loaders/sass-loader" data-discover="true">sass</a>, and <a href="/loaders/less-loader" data-discover="true">less</a> to name a few.</p>
 <h2><span id="loading-images"></span>Loading Images<a href="#loading-images" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -482,7 +495,7 @@ cacheable modules <span class="token number">540</span> KiB <span class="token p
     ./src/index.js + <span class="token number">1</span> modules <span class="token number">794</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
     ./src/icon.png <span class="token number">42</span> bytes <span class="token punctuation">(</span>javascript<span class="token punctuation">)</span> <span class="token number">9.88</span> KiB <span class="token punctuation">(</span>asset<span class="token punctuation">)</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
     ./node_modules/css-loader/dist/cjs.js<span class="token operator">!</span>./src/style.css <span class="token number">648</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1972</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">1972</span> ms</code></pre></div>
 <p>If all went well, you should now see your icon as a repeating background, as well as an <code>img</code> element beside our <code>Hello webpack</code> text. If you inspect this element, you&#x27;ll see that the actual filename has changed to something like <code>29822eaa871e8eadeaa4.png</code>. This means webpack found our file in the <code>src</code> folder and processed it!</p>
 <h2><span id="loading-fonts"></span>Loading Fonts<a href="#loading-fonts" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>So what about other assets like fonts? The Asset Modules will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let&#x27;s update our <code>webpack.config.js</code> to handle font files:</p>
@@ -572,7 +585,7 @@ cacheable modules <span class="token number">541</span> KiB <span class="token p
     ./src/icon.png <span class="token number">42</span> bytes <span class="token punctuation">(</span>javascript<span class="token punctuation">)</span> <span class="token number">9.88</span> KiB <span class="token punctuation">(</span>asset<span class="token punctuation">)</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
     ./src/my-font.woff2 <span class="token number">42</span> bytes <span class="token punctuation">(</span>javascript<span class="token punctuation">)</span> <span class="token number">14.5</span> KiB <span class="token punctuation">(</span>asset<span class="token punctuation">)</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
     ./src/my-font.woff <span class="token number">42</span> bytes <span class="token punctuation">(</span>javascript<span class="token punctuation">)</span> <span class="token number">18.8</span> KiB <span class="token punctuation">(</span>asset<span class="token punctuation">)</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">2142</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">2142</span> ms</code></pre></div>
 <p>Open up <code>dist/index.html</code> again and see if our <code>Hello webpack</code> text has changed to the new font. If all is well, you should see the changes.</p>
 <h2><span id="loading-data"></span>Loading Data<a href="#loading-data" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
 <p>Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning <code>import Data from &#x27;./data.json&#x27;</code> will work by default. To import CSVs, TSVs, and XML you could use the <a href="https://github.com/theplatapi/csv-loader">csv-loader</a> and <a href="https://github.com/gisikw/xml-loader">xml-loader</a>. Let&#x27;s handle loading all three:</p>
@@ -1049,7 +1062,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">406</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/print.js <span class="token number">83</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">1996</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">1996</span> ms</code></pre></div>
 <p>We can see that webpack generates our <code>print.bundle.js</code> and <code>index.bundle.js</code> files, which we also specified in our <code>index.html</code> file. if you open <code>index.html</code> in your browser, you can see what happens when you click the button.</p>
 <p>But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our <code>index.html</code> file would still reference the old names. Let&#x27;s fix that with the <a href="/plugins/html-webpack-plugin" data-discover="true"><code>HtmlWebpackPlugin</code></a>.</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>If you inspected <code>print.bundle.js</code>, you might have noticed that it did not contain the <code>printMe</code> function. Instead, it contained only an <a href="/concepts/why-webpack/#iifes---immediately-invoked-function-expressions" data-discover="true">IIFE</a> with no observable side effects.<br/><br/>
@@ -1093,7 +1106,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">406</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/print.js <span class="token number">83</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">2189</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">2189</span> ms</code></pre></div>
 <p>If you open <code>index.html</code> in your code editor, you&#x27;ll see that the <code>HtmlWebpackPlugin</code> has created an entirely new file for you and that all the bundles are automatically added.</p>
 <p>If you want to learn more about all the features and options that the <code>HtmlWebpackPlugin</code> provides, then you should read up on it on the <a href="https://github.com/jantimon/html-webpack-plugin"><code>HtmlWebpackPlugin</code></a> repo.</p>
 <h2><span id="cleaning-up-the-dist-folder"></span>Cleaning up the <code>/dist</code> folder<a href="#cleaning-up-the-dist-folder" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2>
@@ -1210,7 +1223,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">406</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/print.js <span class="token number">83</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">706</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">706</span> ms</code></pre></div>
 <p>Now open the resulting <code>index.html</code> file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:</p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-bash">Uncaught ReferenceError: cosnole is not defined
    at HTMLButtonElement.printMe <span class="token punctuation">(</span>print.js:2<span class="token punctuation">)</span></code></pre></div>
@@ -1243,12 +1256,12 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.0.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.6.6&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.105.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^7.0.0&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.21&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
 <p>Now run <code>npm run watch</code> from the command line and see how webpack compiles your code.
@@ -1318,13 +1331,13 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.0.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^5.0.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.6.6&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.105.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^7.0.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^5.2.3&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.21&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
 <p>Now we can run <code>npm start</code> from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!</p>
@@ -1416,15 +1429,15 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;express&quot;: &quot;^4.17.1&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.0.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.4.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^6.0.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-middleware&quot;: &quot;^4.0.2&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^5.0.0&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;express&quot;: &quot;^5.2.1&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;html-webpack-plugin&quot;: &quot;^5.6.6&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack&quot;: &quot;^5.105.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-cli&quot;: &quot;^7.0.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-middleware&quot;: &quot;^8.0.3&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;webpack-dev-server&quot;: &quot;^5.2.3&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  &quot;dependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.20&quot;
+</span><span class="token prefix unchanged"> </span><span class="token line">    &quot;lodash&quot;: &quot;^4.17.21&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre></div>
 <p>Now in your terminal run <code>npm run server</code>, it should give you an output similar to this:</p>
@@ -1438,12 +1451,12 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span>   ./src/index.js <span class="token number">406</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span>   ./src/print.js <span class="token number">83</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span>   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-<span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">709</span> ms
+<span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">709</span> ms
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> <span class="token punctuation">[</span>webpack-dev-middleware<span class="token punctuation">]</span> Compiled successfully.
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> <span class="token punctuation">[</span>webpack-dev-middleware<span class="token punctuation">]</span> Compiling<span class="token punctuation">..</span>.
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> <span class="token punctuation">[</span>webpack-dev-middleware<span class="token punctuation">]</span> assets by status <span class="token number">1.38</span> MiB <span class="token punctuation">[</span>cached<span class="token punctuation">]</span> <span class="token number">2</span> assets
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> cached modules <span class="token number">530</span> KiB <span class="token punctuation">(</span>javascript<span class="token punctuation">)</span> <span class="token number">1.9</span> KiB <span class="token punctuation">(</span>runtime<span class="token punctuation">)</span> <span class="token punctuation">[</span>cached<span class="token punctuation">]</span> <span class="token number">12</span> modules
-<span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">19</span> ms
+<span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">19</span> ms
 <span class="token operator">&lt;</span>i<span class="token operator">&gt;</span> <span class="token punctuation">[</span>webpack-dev-middleware<span class="token punctuation">]</span> Compiled successfully.</code></pre></div>
 <p>Now fire up your browser and go to <code>http://localhost:3000</code>. You should see your webpack app running and functioning!</p>
 <aside class="tip"><p class="tip__prefix">tip</p><p>If you would like to know more about how Hot Module Replacement works, we recommend you read the <a href="/guides/hot-module-replacement/" data-discover="true">Hot Module Replacement</a> guide.</p></aside>
@@ -1513,7 +1526,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/another-module.js <span class="token number">84</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">245</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">245</span> ms</code></pre></div>
 <p>As mentioned there are some pitfalls to this approach:</p>
 <ul>
 <li>If there are any duplicated modules between entry chunks they will be included in both bundles.</li>
@@ -1594,7 +1607,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/another-module.js <span class="token number">84</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">249</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">249</span> ms</code></pre></div>
 <p>As you can see there&#x27;s another <code>runtime.bundle.js</code> file generated besides <code>shared.bundle.js</code>, <code>index.bundle.js</code> and <code>another.bundle.js</code>.</p>
 <p>Although using multiple entry points per page is allowed in webpack, it should be avoided when possible in favor of an entry point with multiple imports: <code>entry: { page: [&#x27;./analytics&#x27;, &#x27;./app&#x27;] }</code>. This results in a better optimization and consistent execution order when using <code>async</code> script tags.</p>
 <h3><span id="splitchunksplugin"></span>SplitChunksPlugin<a href="#splitchunksplugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
@@ -1636,7 +1649,7 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">257</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/another-module.js <span class="token number">84</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">241</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">241</span> ms</code></pre></div>
 <p>Here are some other useful plugins and loaders provided by the community for splitting code:</p>
 <ul>
 <li><a href="/plugins/mini-css-extract-plugin" data-discover="true"><code>mini-css-extract-plugin</code></a>: Useful for splitting CSS out from the main application.</li>
@@ -1715,7 +1728,7 @@ runtime modules <span class="token number">7.37</span> KiB <span class="token nu
 cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">434</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">268</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">268</span> ms</code></pre></div>
 <aside class="tip"><p class="tip__prefix">tip</p><p>You can also use magic comment <code>webpackExports</code> with <code>import()</code> to expose specific exports from a dynamically imported module:</p></aside>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span><span class="token punctuation">(</span>
   <span class="token comment">/* webpackExports: [&quot;default&quot;, &quot;namedExport&quot;] */</span>
@@ -3516,16 +3529,16 @@ export default {
 </span><span class="token prefix unchanged"> </span><span class="token line">   &quot;author&quot;: &quot;&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">   &quot;license&quot;: &quot;ISC&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">   &quot;devDependencies&quot;: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;css-loader&quot;: &quot;^0.28.4&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;csv-loader&quot;: &quot;^2.1.1&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;express&quot;: &quot;^4.15.3&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;file-loader&quot;: &quot;^0.11.2&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;html-webpack-plugin&quot;: &quot;^2.29.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;style-loader&quot;: &quot;^0.18.2&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack&quot;: &quot;^4.30.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack-dev-middleware&quot;: &quot;^1.12.0&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack-dev-server&quot;: &quot;^2.9.1&quot;,
-</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack-merge&quot;: &quot;^4.1.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;css-loader&quot;: &quot;^7.1.3&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;csv-loader&quot;: &quot;^3.0.5&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;express&quot;: &quot;^5.2.1&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;html-webpack-plugin&quot;: &quot;^5.6.6&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;style-loader&quot;: &quot;^4.0.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack&quot;: &quot;^5.105.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack-cli&quot;: &quot;^7.0.0&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack-dev-middleware&quot;: &quot;^8.0.3&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack-dev-server&quot;: &quot;^5.2.3&quot;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     &quot;webpack-merge&quot;: &quot;^6.0.1&quot;,
 </span><span class="token prefix unchanged"> </span><span class="token line">     &quot;xml-loader&quot;: &quot;^1.2.1&quot;
 </span><span class="token prefix unchanged"> </span><span class="token line">   }
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre></div>
@@ -3896,7 +3909,7 @@ runtime modules <span class="token number">344</span> bytes <span class="token n
 cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">191</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">2910</span> ms</code></pre></div>
+webpack <span class="token number">5</span>.x.x compiled successfully <span class="token keyword">in</span> <span class="token number">2910</span> ms</code></pre></div>
 <p>We can also use the <code>ProvidePlugin</code> to expose a single export of a module by configuring it with an &quot;array path&quot; (e.g. <code>[module, child, ...children?]</code>). So let&#x27;s imagine we only wanted to provide the <code>join</code> method from <code>lodash</code> wherever it&#x27;s invoked:</p>
 <p><strong>src/index.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function component() {
