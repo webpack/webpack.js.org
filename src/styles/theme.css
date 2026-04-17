@@ -4,6 +4,9 @@
   --color-brand-link-hover: #144f80;
   --color-brand-link-dark: #69a8ee;
   --color-brand-link-dark-hover: #82b7f6;
+  /* Accessible link colors (a11y fix) */
+  --color-link-accessible: #144f80;
+  --color-link-accessible-hover: #144f80;
 
   /* Brand button/UI blue */
   --color-brand-blue: #175d96;
@@ -37,6 +40,7 @@
   --color-code-link: #1e78c2;
   --color-code-link-hover: #2186d8;
   --color-code-anchor-border: #175d96;
+  --color-code-inline-text: #144f80;
 
   /* Dark mode surface colors */
   --color-dark-bg: #121212;
@@ -61,6 +65,8 @@
   --color-dark-section-border: #343434;
   --color-dark-sidebar-text: #cadbe6;
   --color-dark-active-text: #465e69;
+  --color-link-accessible-dark: #8dd6f9;
+  --color-dark-code-inline-text: #e2e8f0;
 
   /* Sidebar/nav */
   --color-nav-bg: #526b78;

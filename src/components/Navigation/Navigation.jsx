@@ -248,7 +248,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
                 >
                   {link.children.map((child) => {
                     const classNames =
-                      "text-[#465E69] dark:text-[#8dd6f9] py-5 text-sm capitalize hover:text-[#2B3A42] dark:hover:text-white";
+                      "text-[var(--color-link-accessible)] dark:text-[var(--color-link-accessible-dark)] py-5 text-sm capitalize hover:text-[var(--color-link-accessible-hover)] dark:hover:text-white";
                     const isActive = location.pathname.startsWith(child.url);
                     return (
                       <NavLink

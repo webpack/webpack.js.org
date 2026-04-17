@@ -10,7 +10,7 @@ const footerLinkClasses =
 
 const Footer = () => (
   <footer className="w-full flex-[0_0_auto] print:hidden">
-    <Container className="mx-auto max-w-[900px] px-5 pb-[30px] pt-[40px] text-center [&_a]:text-[#465E69] [&_a:hover]:text-[#2B3A42] dark:[&_a]:text-[#8dd6f9] dark:[&_a:hover]:text-white">
+    <Container className="mx-auto max-w-[900px] px-5 pb-[30px] pt-[40px] text-center [&_a]:text-[var(--color-link-accessible)] [&_a:hover]:text-[var(--color-link-accessible-hover)] dark:[&_a]:text-[var(--color-link-accessible-dark)] dark:[&_a:hover]:text-white">
       <div className="mb-[24px] flex justify-center">
         <a href="https://openjsf.org" target="_blank" rel="noopener noreferrer">
           <img

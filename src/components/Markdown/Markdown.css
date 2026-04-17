@@ -293,8 +293,8 @@
     font-family:
       "Source Code Pro", Consolas, "Liberation Mono", Menlo, Courier, monospace;
     @apply text-[90%] mx-0.5 py-0.5 px-1.5 whitespace-normal bg-[rgba(70,94,105,0.05)] rounded-[3px];
-    color: #2b3a42;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+    color: var(--color-code-inline-text);
+    text-shadow: none;
   }
 
   a {
@@ -457,10 +457,34 @@
   @apply text-white;
 }
 
+.markdown a > code,
+.markdown a > tt {
+  color: var(--color-link-accessible) !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  text-shadow: none !important;
+}
+
+.dark .markdown a > code,
+.dark .markdown a > tt {
+  color: var(--color-link-accessible-dark) !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  text-shadow: none !important;
+}
+
 .markdown aside.tip a {
-  color: #465e69;
+  color: var(--color-link-accessible) !important;
 }
 
 .markdown aside.tip a:hover {
-  color: #2b3a42;
+  color: var(--color-link-accessible-hover) !important;
+}
+
+.dark .markdown aside.tip a {
+  color: var(--color-link-accessible-dark) !important;
 }
