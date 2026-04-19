@@ -66,3 +66,15 @@ body {
 .screen-reader-only {
   @apply sr-only;
 }
+
+.footer-legal-links a {
+  @apply text-[#3b7eb5] transition-colors duration-[250ms];
+}
+
+.footer-legal-links a:hover {
+  color: var(--color-brand-link-hover);
+}
+
+.dark .footer-legal-links a:hover {
+  color: var(--color-dark-link-hover);
+}
