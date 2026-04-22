@@ -1,10 +1,10 @@
 /**
  * @jest-environment jsdom
  */
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import SmallIcon from "../../assets/icon-square-small-slack.png";
+
+import Support from "./Support.jsx";
 
 // Data must be inline - jest.mock is hoisted before const declarations (TDZ)
 jest.mock("./AdditionalSupporters.mjs", () => []);
@@ -24,9 +24,6 @@ jest.mock(
   ],
   { virtual: true },
 );
-
-// eslint-disable-next-line import/first
-import Support from "./Support.jsx";
 
 const AVATAR_URL = "https://example.com/avatar.png";
 

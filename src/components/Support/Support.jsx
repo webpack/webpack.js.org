@@ -101,6 +101,25 @@ function handleImgError(event) {
   imgNode.setAttribute("src", SmallIcon);
 }
 
+function filterByAge(result, age) {
+  const now = Date.now();
+  return result.filter(
+    (item) =>
+      item.firstDonation && now - new Date(item.firstDonation).getTime() < age,
+  );
+}
+
+function shuffleSlice(arr, n) {
+  const result = [...arr];
+  for (let i = 0; i < n; i++) {
+    const other = Math.floor(Math.random() * (result.length - i));
+    const temp = result[other];
+    result[other] = result[i];
+    result[i] = temp;
+  }
+  return result.slice(0, n);
+}
+
 export default function Support({ rank, type }) {
   const [inView, setInView] = useState(false);
   const containerRef = useRef(null);
@@ -156,13 +175,7 @@ export default function Support({ rank, type }) {
       }
 
       if (typeof age === "number") {
-        // eslint-disable-next-line react-hooks/purity
-        const now = Date.now();
-        result = result.filter(
-          (item) =>
-            item.firstDonation &&
-            now - new Date(item.firstDonation).getTime() < age,
-        );
+        result = filterByAge(result, age);
       }
 
       if (typeof lim === "number") {
@@ -170,16 +183,7 @@ export default function Support({ rank, type }) {
       }
 
       if (typeof rand === "number" && result.length >= rand) {
-        // Pick n random items
-        result = [...result];
-        for (let i = 0; i < rand; i++) {
-          // eslint-disable-next-line react-hooks/purity
-          const other = Math.floor(Math.random() * (result.length - i));
-          const temp = result[other];
-          result[other] = result[i];
-          result[i] = temp;
-        }
-        result = result.slice(0, rand);
+        result = shuffleSlice(result, rand);
       }
 
       // resort to keep order
