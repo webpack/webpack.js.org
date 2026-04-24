@@ -9055,7 +9055,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><a href="https://github.com/swc-project/swc"><code>swc</code></a> is a super-fast compiler written in <code>Rust</code>, producing widely supported JavaScript from modern standards and TypeScript.</p>
 <blockquote>
 <p><strong>Warning</strong></p>
-<p>The <code>extractComments</code> option is not supported, and all comments will be removed by default. This will be fixed in future</p>
+<p><code>extractComments</code> is supported with <code>@swc/core &gt;= 1.15.30</code>.
+Only serializable extract conditions are supported: booleans, <code>&quot;some&quot;</code>, <code>&quot;all&quot;</code>, string patterns, <code>RegExp</code> values without flags, or object conditions that resolve to those forms.
+Function conditions and flagged regular expressions are not supported.</p>
 </blockquote>
 <p><strong>webpack.config.js</strong></p>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
