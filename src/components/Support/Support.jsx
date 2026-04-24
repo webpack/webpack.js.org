@@ -289,7 +289,7 @@ export default function Support({ rank, type }) {
 
         <div className="w-full mt-4">
           <a
-            className="inline-block py-[0.4em] px-[1em] uppercase text-[#175d96] border border-[#175d96] rounded-4xl transition-all duration-[250ms] hover:bg-[#175d96] hover:text-white dark:text-[#4fa8ff] dark:border-[#4fa8ff] dark:hover:bg-[#4fa8ff] dark:hover:text-[#04131f]"
+            className="inline-block py-[0.4em] px-[1em] uppercase text-[#175d96] border border-[#175d96] rounded-4xl transition-all duration-[250ms] hover:border-[#2f78c4] hover:bg-[#2f78c4] hover:text-white hover:shadow-[0_8px_18px_rgba(47,120,196,0.28)] dark:text-[#4fa8ff] dark:border-[#4fa8ff] dark:hover:border-[#4fa8ff] dark:hover:bg-[#2f78c4] dark:hover:text-white"
             href="https://opencollective.com/webpack#support"
           >
             Become a {rank === "backer" ? "backer" : "sponsor"}
