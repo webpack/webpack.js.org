@@ -14,6 +14,43 @@ contributors:
   - chenxsan
 ---
 
+<div
+  style={{
+    padding: "1.5rem",
+    backgroundColor: "#f8f9fa",
+    borderLeft: "6px solid #1d71b8",
+    borderRadius: "8px",
+    margin: "2rem 0",
+    color: "#212529",
+    fontSize: "0.95rem",
+    lineHeight: "1.6",
+  }}
+>
+  <h3 style={{ marginTop: 0, color: "#1d71b8", fontSize: "1.25rem" }}>
+    The Power of Plugins
+  </h3>
+  <p>
+    Plugins are the backbone of webpack. They serve the purpose of doing
+    anything else that a <strong>loader</strong> cannot do. Webpack itself is
+    built on the same plugin system that you use in your configuration.
+  </p>
+  <ul style={{ marginBottom: 0 }}>
+    <li>
+      <strong>Extensibility:</strong> Plugins can hook into the entire
+      compilation lifecycle to perform complex tasks.
+    </li>
+    <li>
+      <strong>Optimization:</strong> Use plugins for bundle minification, asset
+      management, and environment variable injection.
+    </li>
+    <li>
+      <strong>Built-in vs Third-party:</strong> Webpack provides many internal
+      plugins (like <code>DefinePlugin</code>), but the community offers
+      thousands more for specialized needs.
+    </li>
+  </ul>
+</div>
+
 Webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack **flexible**.
 
 | Name                                                                            | Description                                                                            |

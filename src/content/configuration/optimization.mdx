@@ -28,11 +28,11 @@ Webpack runs optimizations for you depending on the chosen [`mode`](/configurati
 
 Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported. The default value of `optimization.checkWasmTypes` depends on the [`mode`](/configuration/mode/):
 
-| Mode | Default |
-| ------------- | ----------------- |
+| Mode          | Default |
+| ------------- | ------- |
 | `development` | `false` |
-| `production` | `true` |
-| `none` | `false` |
+| `production`  | `true`  |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -114,11 +114,11 @@ export default {
 Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
 The default value of `optimization.concatenateModules` depends on the [`mode`](/configuration/mode/):
 
-| Mode | Default |
-| ------------- | ----------------- |
+| Mode          | Default |
+| ------------- | ------- |
 | `development` | `false` |
-| `production` | `true` |
-| `none` | `false` |
+| `production`  | `true`  |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -164,11 +164,11 @@ Currently, `optimization.avoidEntryIife` can only optimize a single entry module
 
 The default value of `optimization.avoidEntryIife` depends on the [`mode`](/configuration/mode/):
 
-| Mode | Default |
-| ------------- | ----------------- |
+| Mode          | Default |
+| ------------- | ------- |
 | `development` | `false` |
-| `production` | `true` |
-| `none` | `false` |
+| `production`  | `true`  |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -189,11 +189,11 @@ W> The `optimization.avoidEntryIife` option can negatively affect build performa
 
 Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. The default value of `optimization.flagIncludedChunks` depends on the [`mode`](/configuration/mode/):
 
-| Mode | Default |
-| ------------- | ----------------- |
+| Mode          | Default |
+| ------------- | ------- |
 | `development` | `false` |
-| `production` | `true` |
-| `none` | `false` |
+| `production`  | `true`  |
+| `none`        | `false` |
 
 **webpack.config.js**
 
@@ -231,11 +231,11 @@ export default {
 
 The default value of `optimization.mangleExports` depends on the [`mode`](/configuration/mode/):
 
-| Mode | Default |
+| Mode          | Default           |
 | ------------- | ----------------- |
-| `development` | `false` |
-| `production` | `'deterministic'` |
-| `none` | `false` |
+| `development` | `false`           |
+| `production`  | `'deterministic'` |
+| `none`        | `false`           |
 
 The following values are supported:
 
@@ -397,7 +397,7 @@ The default value of `optimization.moduleIds` depends on the [`mode`](/configura
 | ------------- | ----------------- |
 | `development` | `'named'`         |
 | `production`  | `'deterministic'` |
-| `none`        | `'natural'`       |  
+| `none`        | `'natural'`       |
 | `none`        | `'natural'`       |
 
 The following string values are supported:
@@ -508,11 +508,11 @@ export default {
 
 Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical. The default value of `optimization.realContentHash` depends on the [`mode`](/configuration/mode/):
 
-| Mode | Default |
-| ------------- | ----------------- |
+| Mode          | Default |
+| ------------- | ------- |
 | `development` | `false` |
-| `production` | `true` |
-| `none` | `false` |
+| `production`  | `true`  |
+| `none`        | `false` |
 
 **webpack.config.js**
 

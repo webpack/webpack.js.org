@@ -23,6 +23,46 @@ contributors:
   - saishankar404
 ---
 
+<div
+  style={{
+    padding: "1.5rem",
+    backgroundColor: "#f8f9fa",
+    borderLeft: "6px solid #1d71b8",
+    borderRadius: "8px",
+    margin: "2rem 0",
+    color: "#212529",
+    fontSize: "0.95rem",
+    lineHeight: "1.6",
+  }}
+>
+  <h3 style={{ marginTop: 0, color: "#1d71b8", fontSize: "1.25rem" }}>
+    Core Concepts Overview
+  </h3>
+  <p>
+    At its core, <strong>webpack</strong> is a static module bundler for modern
+    JavaScript applications. It processes your project and builds a dependency
+    graph which maps every module your project needs.
+  </p>
+  <ul style={{ marginBottom: 0 }}>
+    <li>
+      <strong>Entry:</strong> Indicates which module webpack should use to begin
+      building out its internal dependency graph.
+    </li>
+    <li>
+      <strong>Output:</strong> Tells webpack where to emit the bundles it
+      creates and how to name these files.
+    </li>
+    <li>
+      <strong>Loaders:</strong> Allows webpack to process other types of files
+      and convert them into valid modules (e.g., CSS, Images, TypeScript).
+    </li>
+    <li>
+      <strong>Plugins:</strong> Leverages a wide range of tasks like bundle
+      optimization, asset management, and environment variable injection.
+    </li>
+  </ul>
+</div>
+
 At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) from one or more _entry points_ and then combines every module your project needs into one or more _bundles_, which are static assets to serve your content from.
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).

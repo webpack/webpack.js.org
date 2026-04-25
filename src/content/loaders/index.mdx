@@ -13,6 +13,25 @@ contributors:
   - chenxsan
 ---
 
+<div style={{ 
+  padding: '1.5rem', 
+  backgroundColor: '#f8f9fa', 
+  borderLeft: '6px solid #1d71b8', 
+  borderRadius: '8px', 
+  margin: '2rem 0',
+  color: '#212529',
+  fontSize: '0.95rem',
+  lineHeight: '1.6'
+}}>
+  <h3 style={{ marginTop: 0, color: '#1d71b8', fontSize: '1.25rem' }}>Understanding Loaders</h3>
+  <p>Loaders are transformations that are applied to the source code of a module. They allow you to pre-process files as you <code>import</code> or "load" them.</p>
+  <ul style={{ marginBottom: 0 }}>
+    <li><strong>Transformation:</strong> Loaders can convert files from a different language (like TypeScript) to JavaScript.</li>
+    <li><strong>Assets:</strong> They allow you to include resources like images or CSS directly in your JavaScript dependency graph.</li>
+    <li><strong>Chaining:</strong> You can chain multiple loaders together (e.g., <code>sass-loader</code> -> <code>css-loader</code> -> <code>style-loader</code>).</li>
+  </ul>
+</div>
+
 Webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
 Loaders are separate packages that extend webpack's capabilities and are maintained within the broader ecosystem.
 Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`/`require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders/#configuration).

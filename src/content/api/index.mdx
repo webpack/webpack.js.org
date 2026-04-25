@@ -5,6 +5,38 @@ contributors:
   - tbroadley
 ---
 
+<div
+  style={{
+    padding: "1.5rem",
+    backgroundColor: "#fff3e0",
+    borderLeft: "6px solid #e65100",
+    borderRadius: "8px",
+    margin: "2rem 0",
+    color: "#4e342e",
+    fontSize: "0.95rem",
+  }}
+>
+  <h3 style={{ marginTop: 0, color: "#e65100" }}>API Reference Overview</h3>
+  <p>
+    The webpack API provides a set of low-level interfaces to interact with the
+    compiler. This is intended for advanced users and plugin/loader developers.
+  </p>
+  <ul style={{ marginBottom: 0 }}>
+    <li>
+      <strong>Compiler API:</strong> For external control over the webpack
+      execution.
+    </li>
+    <li>
+      <strong>Internal Hooks:</strong> Access the tapping system used by
+      plugins.
+    </li>
+    <li>
+      <strong>Stability:</strong> Use these interfaces to build custom tooling
+      on top of webpack.
+    </li>
+  </ul>
+</div>
+
 A variety of interfaces are available to customize the compilation process.
 Some features overlap between interfaces, e.g. a configuration option may be
 available via a CLI flag, while others exist only through a single interface.

@@ -22,6 +22,43 @@ contributors:
   - chenxsan
 ---
 
+<div
+  style={{
+    padding: "1.5rem",
+    backgroundColor: "#f8f9fa",
+    borderLeft: "6px solid #1d71b8",
+    borderRadius: "8px",
+    margin: "2rem 0",
+    color: "#212529",
+    fontSize: "0.95rem",
+    lineHeight: "1.6",
+  }}
+>
+  <h3 style={{ marginTop: 0, color: "#1d71b8", fontSize: "1.25rem" }}>
+    Configuration Essentials
+  </h3>
+  <p>
+    Webpack's flexibility comes from its <strong>configuration-driven</strong>{" "}
+    nature. While it works out-of-the-box for simple projects, the configuration
+    file allows you to fine-tune how your assets are processed.
+  </p>
+  <ul style={{ marginBottom: 0 }}>
+    <li>
+      <strong>Structure:</strong> Typically defined in a{" "}
+      <code>webpack.config.js</code> file using CommonJS or ES Modules.
+    </li>
+    <li>
+      <strong>Environment:</strong> You can export configuration as an object, a
+      function, or multiple configurations for different environments (Dev vs.
+      Prod).
+    </li>
+    <li>
+      <strong>Extensibility:</strong> It acts as the central hub where you
+      register your Loaders and Plugins.
+    </li>
+  </ul>
+</div>
+
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
 
 Usually, your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
