@@ -457,34 +457,40 @@
   @apply text-white;
 }
 
-.markdown a > code,
-.markdown a > tt {
-  color: var(--color-link-accessible) !important;
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  text-shadow: none !important;
+.markdown aside.tip p a,
+.markdown aside.tip li a {
+  @apply text-link-accessible;
 }
 
-.dark .markdown a > code,
-.dark .markdown a > tt {
-  color: var(--color-link-accessible-dark) !important;
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  text-shadow: none !important;
+.markdown aside.tip p a:hover,
+.markdown aside.tip li a:hover {
+  @apply text-link-accessible-hover;
 }
 
-.markdown aside.tip a {
-  color: var(--color-link-accessible) !important;
+.dark .markdown aside.tip p a,
+.dark .markdown aside.tip li a {
+  @apply text-link-accessible-dark;
 }
 
-.markdown aside.tip a:hover {
-  color: var(--color-link-accessible-hover) !important;
+.markdown p a > code,
+.markdown li a > code,
+.markdown aside a > code,
+.markdown p a > tt,
+.markdown li a > tt,
+.markdown aside a > tt {
+  @apply text-link-accessible;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  text-shadow: none;
 }
 
-.dark .markdown aside.tip a {
-  color: var(--color-link-accessible-dark) !important;
+.dark .markdown p a > code,
+.dark .markdown li a > code,
+.dark .markdown aside a > code,
+.dark .markdown p a > tt,
+.dark .markdown li a > tt,
+.dark .markdown aside a > tt {
+  @apply text-link-accessible-dark;
 }
