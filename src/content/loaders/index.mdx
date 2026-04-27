@@ -13,22 +13,23 @@ contributors:
   - chenxsan
 ---
 
-<div style={{ 
-  padding: '1.5rem', 
-  backgroundColor: '#f8f9fa', 
-  borderLeft: '6px solid #1d71b8', 
-  borderRadius: '8px', 
-  margin: '2rem 0',
-  color: '#212529',
-  fontSize: '0.95rem',
-  lineHeight: '1.6'
-}}>
-  <h3 style={{ marginTop: 0, color: '#1d71b8', fontSize: '1.25rem' }}>Understanding Loaders</h3>
-  <p>Loaders are transformations that are applied to the source code of a module. They allow you to pre-process files as you <code>import</code> or "load" them.</p>
-  <ul style={{ marginBottom: 0 }}>
-    <li><strong>Transformation:</strong> Loaders can convert files from a different language (like TypeScript) to JavaScript.</li>
-    <li><strong>Assets:</strong> They allow you to include resources like images or CSS directly in your JavaScript dependency graph.</li>
-    <li><strong>Chaining:</strong> You can chain multiple loaders together (e.g., <code>sass-loader</code> -> <code>css-loader</code> -> <code>style-loader</code>).</li>
+<div className="my-8 p-6 bg-indigo-50 border-l-8 border-indigo-600 rounded-lg text-indigo-950 text-sm leading-relaxed">
+  <h3 className="mt-0 text-indigo-600 text-xl font-bold">
+    Understanding Loaders
+  </h3>
+  <p className="mb-4">
+    Loaders are transformations that are applied to the source code of a module. They allow you to pre-process files as you <code>import</code> or "load" them.
+  </p>
+  <ul className="mb-0 list-disc list-inside space-y-2">
+    <li>
+      <span className="font-bold">Transformation:</span> Loaders can convert files from a different language (like TypeScript) to JavaScript.
+    </li>
+    <li>
+      <span className="font-bold">Assets:</span> They allow you to include resources like images or CSS directly in your JavaScript dependency graph.
+    </li>
+    <li>
+      <span className="font-bold">Chaining:</span> You can chain multiple loaders together (e.g., <code>sass-loader</code> → <code>css-loader</code> → <code>style-loader</code>).
+    </li>
   </ul>
 </div>
 

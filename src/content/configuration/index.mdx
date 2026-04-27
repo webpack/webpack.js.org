@@ -22,39 +22,23 @@ contributors:
   - chenxsan
 ---
 
-<div
-  style={{
-    padding: "1.5rem",
-    backgroundColor: "#f8f9fa",
-    borderLeft: "6px solid #1d71b8",
-    borderRadius: "8px",
-    margin: "2rem 0",
-    color: "#212529",
-    fontSize: "0.95rem",
-    lineHeight: "1.6",
-  }}
->
-  <h3 style={{ marginTop: 0, color: "#1d71b8", fontSize: "1.25rem" }}>
+<div className="my-8 p-6 bg-amber-50 border-l-8 border-amber-600 rounded-lg text-amber-950 text-sm leading-relaxed">
+  <h3 className="mt-0 text-amber-600 text-xl font-bold">
     Configuration Essentials
   </h3>
-  <p>
-    Webpack's flexibility comes from its <strong>configuration-driven</strong>{" "}
-    nature. While it works out-of-the-box for simple projects, the configuration
+  <p className="mb-4">
+    Webpack's flexibility comes from its <span className="font-bold">configuration-driven</span> nature. While it works out-of-the-box for simple projects, the configuration
     file allows you to fine-tune how your assets are processed.
   </p>
-  <ul style={{ marginBottom: 0 }}>
+  <ul className="mb-0 list-disc list-inside space-y-2">
     <li>
-      <strong>Structure:</strong> Typically defined in a{" "}
-      <code>webpack.config.js</code> file using CommonJS or ES Modules.
+      <span className="font-bold">Structure:</span> Typically defined in a <code>webpack.config.js</code> file using CommonJS or ES Modules.
     </li>
     <li>
-      <strong>Environment:</strong> You can export configuration as an object, a
-      function, or multiple configurations for different environments (Dev vs.
-      Prod).
+      <span className="font-bold">Environment:</span> You can export configuration as an object, a function, or multiple configurations for different environments (Dev vs. Prod).
     </li>
     <li>
-      <strong>Extensibility:</strong> It acts as the central hub where you
-      register your Loaders and Plugins.
+      <span className="font-bold">Extensibility:</span> It acts as the central hub where you register your Loaders and Plugins.
     </li>
   </ul>
 </div>

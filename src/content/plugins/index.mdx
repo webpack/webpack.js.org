@@ -14,37 +14,26 @@ contributors:
   - chenxsan
 ---
 
-<div
-  style={{
-    padding: "1.5rem",
-    backgroundColor: "#f8f9fa",
-    borderLeft: "6px solid #1d71b8",
-    borderRadius: "8px",
-    margin: "2rem 0",
-    color: "#212529",
-    fontSize: "0.95rem",
-    lineHeight: "1.6",
-  }}
->
-  <h3 style={{ marginTop: 0, color: "#1d71b8", fontSize: "1.25rem" }}>
+<div className="my-8 p-6 bg-slate-50 border-l-8 border-blue-600 rounded-lg text-slate-900 text-sm leading-relaxed">
+  <h3 className="mt-0 text-blue-600 text-xl font-bold">
     The Power of Plugins
   </h3>
-  <p>
+  <p className="mb-4">
     Plugins are the backbone of webpack. They serve the purpose of doing
-    anything else that a <strong>loader</strong> cannot do. Webpack itself is
+    anything else that a <span className="font-bold">loader</span> cannot do. Webpack itself is
     built on the same plugin system that you use in your configuration.
   </p>
-  <ul style={{ marginBottom: 0 }}>
+  <ul className="mb-0 list-disc list-inside space-y-2">
     <li>
-      <strong>Extensibility:</strong> Plugins can hook into the entire
+      <span className="font-bold">Extensibility:</span> Plugins can hook into the entire
       compilation lifecycle to perform complex tasks.
     </li>
     <li>
-      <strong>Optimization:</strong> Use plugins for bundle minification, asset
+      <span className="font-bold">Optimization:</span> Use plugins for bundle minification, asset
       management, and environment variable injection.
     </li>
     <li>
-      <strong>Built-in vs Third-party:</strong> Webpack provides many internal
+      <span className="font-bold">Built-in vs Third-party:</span> Webpack provides many internal
       plugins (like <code>DefinePlugin</code>), but the community offers
       thousands more for specialized needs.
     </li>

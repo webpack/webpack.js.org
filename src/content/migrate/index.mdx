@@ -5,37 +5,26 @@ contributors:
   - EugeneHlushko
 ---
 
-<div
-  style={{
-    padding: "1.5rem",
-    backgroundColor: "#fce4ec",
-    borderLeft: "6px solid #c2185b",
-    borderRadius: "8px",
-    margin: "2rem 0",
-    color: "#880e4f",
-    fontSize: "0.95rem",
-    lineHeight: "1.6",
-  }}
->
-  <h3 style={{ marginTop: 0, color: "#c2185b", fontSize: "1.25rem" }}>
+<div className="my-8 p-6 bg-pink-50 border-l-8 border-pink-700 rounded-lg text-pink-950 text-sm leading-relaxed">
+  <h3 className="mt-0 text-pink-700 text-xl font-bold">
     Migration Strategy
   </h3>
-  <p>
+  <p className="mb-4">
     Moving between major versions of webpack requires careful planning. This
     guide helps you navigate breaking changes and leverage performance
     improvements in the latest releases.
   </p>
-  <ul style={{ marginBottom: 0 }}>
+  <ul className="mb-0 list-disc list-inside space-y-2">
     <li>
-      <strong>Version 5 Focus:</strong> Improved build performance through
+      <span className="font-bold">Version 5 Focus:</span> Improved build performance through
       persistent caching and better tree shaking.
     </li>
     <li>
-      <strong>Breaking Changes:</strong> Learn how to handle deprecated
+      <span className="font-bold">Breaking Changes:</span> Learn how to handle deprecated
       configuration options and updated internal APIs.
     </li>
     <li>
-      <strong>Validation:</strong> Use this guide as a checklist to ensure your
+      <span className="font-bold">Validation:</span> Use this guide as a checklist to ensure your
       build remains stable during the transition.
     </li>
   </ul>
