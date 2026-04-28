@@ -1105,24 +1105,24 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-1.0.0.tgz#f75c08f88cfd9eb8d9b062284d5bbcc60c41bf2a"
   integrity sha512-dDlz3W405VMFO4w5kIP9DOmELBcvFQGmLoKSdIRstBDubKFYwaNHV1NnlzMCQpXQFGWVALmeMORAuiLx18AvZQ==
 
-"@docsearch/core@4.6.2":
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/@docsearch/core/-/core-4.6.2.tgz#0a6fdc13b1eb12153cb19316f911479b67f7bd58"
-  integrity sha512-/S0e6Dj7Zcm8m9Rru49YEX49dhU11be68c+S/BCyN8zQsTTgkKzXlhRbVL5mV6lOLC2+ZRRryaTdcm070Ug2oA==
+"@docsearch/core@4.6.3":
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/@docsearch/core/-/core-4.6.3.tgz#9954c75c3ae28418e06f8e7537a920d6cd2bc22e"
+  integrity sha512-rUOujwIpxJRgD7+kicVsI3D5sqBvdiRTquzWBpTEXZs8ZXfGbfzpus5HqumaNYTppN2HvH8E2yNuRwYdHJeOlA==
 
-"@docsearch/css@4.6.2":
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/@docsearch/css/-/css-4.6.2.tgz#986776619dccbf798176c75e858cc22f5e710bb4"
-  integrity sha512-fH/cn8BjEEdM2nJdjNMHIvOVYupG6AIDtFVDgIZrNzdCSj4KXr9kd+hsehqsNGYjpUjObeKYKvgy/IwCb1jZYQ==
+"@docsearch/css@4.6.3":
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/@docsearch/css/-/css-4.6.3.tgz#a94065af4a996dd927dc5dda383395e583dbd638"
+  integrity sha512-nlOwcXcsNAptQl4vlL4MA78qNJKO0Qlds5GuBjCoePgkebTXLSf8Qt1oyZ3YBshYupKXG9VRGEsk1zr23d+bzQ==
 
 "@docsearch/react@^4.6.0":
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/@docsearch/react/-/react-4.6.2.tgz#e6c65fb87fb943eefaa936debe6d31bb51b25056"
-  integrity sha512-/BbtGFtqVOGwZx0dw/UfhN/0/DmMQYnulY4iv0tPRhC2JCXv0ka/+izwt3Jzo1ZxXS/2eMvv9zHsBJOK1I9f/w==
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/@docsearch/react/-/react-4.6.3.tgz#80df785f9c5e484c960b914a22ea2a3e4c7210ad"
+  integrity sha512-Bg2wdDsoQVlNCcEKuEJAU04tvHCqgx8rIu+uIoM4pRtcx3TBKJuXutJik3LTA8LRc9YEyHkrYUrmcC0D7BYf+g==
   dependencies:
     "@algolia/autocomplete-core" "1.19.2"
-    "@docsearch/core" "4.6.2"
-    "@docsearch/css" "4.6.2"
+    "@docsearch/core" "4.6.3"
+    "@docsearch/css" "4.6.3"
 
 "@emnapi/core@^1.4.3", "@emnapi/core@^1.7.1", "@emnapi/core@^1.8.1":
   version "1.8.1"
@@ -6008,9 +6008,9 @@ eslint-module-utils@^2.12.1:
     debug "^3.2.7"
 
 eslint-plugin-cypress@^6.1.0:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-6.3.1.tgz#b0a4ce9073f39412c3f2b5b8b452a75c1885fec1"
-  integrity sha512-iTJtdIZbyCUlagEI4YlVcwgPFV7X379Qi/upujaD4kvOaQkMvzmpt90vfSnaqgqprp/HPIvhnzv3fdI7mYV4QQ==
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-6.4.0.tgz#50ed33b4e18d9910ae34fffc9411a6f1690a380a"
+  integrity sha512-zdGXFSmTH4w2A+2aU/Abna2s8Vcz5mDxDsnAXP5Vl+pERWRQxlSE2qrrmriNUEKZ62tlOA87b9AOnJX49tOhAQ==
   dependencies:
     globals "^17.5.0"
 
@@ -11459,9 +11459,9 @@ postcss@^5.0.8, postcss@^5.2.4:
     supports-color "^3.2.3"
 
 postcss@^8.3.10, postcss@^8.4.40, postcss@^8.5.6, postcss@^8.5.8:
-  version "8.5.10"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.10.tgz#8992d8c30acf3f12169e7c09514a12fed7e48356"
-  integrity sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==
+  version "8.5.12"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.12.tgz#cd0c0f667f7cb0521e2313234ea6e707a9ec1ddb"
+  integrity sha512-W62t/Se6rA0Az3DfCL0AqJwXuKwBeYg6nOaIgzP+xZ7N5BFCI7DYi1qs6ygUYT6rvfi6t9k65UMLJC+PHZpDAA==
   dependencies:
     nanoid "^3.3.11"
     picocolors "^1.1.1"
