@@ -22,9 +22,9 @@
   "main": "n/a",
   "scripts": {
     "clean-dist": "rimraf ./dist",
-    "clean-printable": "rimraf \"src/content/**/printable.mdx\"",
+    "clean-printable": "node -e \"const fs = require('fs'); const path = require('path'); function rm(dir) { try { const files = fs.readdirSync(dir); files.forEach(f => { const p = path.join(dir, f); const stat = fs.statSync(p); if (stat.isDirectory()) rm(p); else if (f === 'printable.mdx') fs.unlinkSync(p); }); } catch (e) {} } rm('src/content');\"",
     "preclean": "run-s clean-dist clean-printable",
-    "clean": "rimraf \"src/content/**/_*.mdx\" \"src/**/_*.json\" \"repositories/*.json\"",
+    "clean": "node -e \"const fs = require('fs'); const path = require('path'); function rm(dir, pattern) { try { const files = fs.readdirSync(dir); files.forEach(f => { const p = path.join(dir, f); const stat = fs.statSync(p); if (stat.isDirectory()) rm(p, pattern); else if (pattern(f)) fs.unlinkSync(p); }); } catch (e) {} } rm('src', f => f.startsWith('_') && f.endsWith('.json')); rm('repositories', f => f.endsWith('.json')); rm('src/content', f => f.startsWith('_') && f.endsWith('.mdx'));\"",
     "start": "npm run clean-dist && webpack serve --config webpack.dev.mjs --env dev --progress --config-node-env development",
     "content": "node src/scripts/build-content-tree.mjs ./src/content ./src/_content.json",
     "bundle-analyze": "run-s clean fetch content && webpack --config webpack.prod.mjs --config-node-env production && run-s printable content && webpack --config webpack.ssg.mjs --config-node-env production --env ssg --profile --json > stats.json && webpack-bundle-analyzer stats.json",
@@ -161,6 +161,11 @@
     "webpack-cli": "^7.0.0",
     "webpack-dev-server": "^5.2.3",
     "webpack-merge": "^6.0.1",
+    "workbox-cacheable-response": "^7.4.0",
+    "workbox-core": "^7.4.0",
+    "workbox-expiration": "^7.4.0",
+    "workbox-routing": "^7.4.0",
+    "workbox-strategies": "^7.4.0",
     "workbox-webpack-plugin": "^7.4.0",
     "yarn-deduplicate": "^6.0.2"
   },

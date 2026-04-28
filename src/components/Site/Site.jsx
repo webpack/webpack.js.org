@@ -1,6 +1,6 @@
 // Import External Dependencies
 import PropTypes from "prop-types";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import {
   Outlet,
@@ -172,8 +172,8 @@ function Site(props) {
 
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
+  useLayoutEffect(() => {
+    setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
 
   const sections = extractSections(Content);

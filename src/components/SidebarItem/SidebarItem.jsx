@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
 import BarIcon from "../../styles/icons/vertical-bar.svg";
@@ -72,8 +72,8 @@ Anchors.propTypes = {
 export default function SidebarItem({ title, anchors = [], url, currentPage }) {
   const [open, setOpen] = useState(() => isOpen(currentPage, url));
 
-  useEffect(() => {
-    setOpen(isOpen(currentPage, url));
+  useLayoutEffect(() => {
+    setOpen(isOpen(currentPage, url)); // eslint-disable-line react-hooks/set-state-in-effect
   }, [currentPage, url]);
 
   const toggle = useCallback(() => {

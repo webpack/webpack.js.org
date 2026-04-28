@@ -1,7 +1,7 @@
 // Import External Dependencies
 import { DocSearch } from "@docsearch/react";
 import PropTypes from "prop-types";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Link as ReactDOMLink, NavLink, useLocation } from "react-router-dom";
 
 // Import Internal Config
@@ -113,17 +113,12 @@ const navigationIconProps = {
 };
 
 function Navigation({ links, pathname, hash = "", toggleSidebar }) {
-  const [locationHash, setLocationHash] = useState(hash);
   const [mounted, setMounted] = useState(false);
 
   const location = useLocation();
 
-  useEffect(() => {
-    setLocationHash(hash);
-  }, [hash]);
-
-  useEffect(() => {
-    setMounted(true);
+  useLayoutEffect(() => {
+    setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
 
   return (
@@ -190,17 +185,17 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
                 {
                   lang: "en",
                   title: "English",
-                  url: `https://webpack.js.org${pathname}${locationHash}`,
+                  url: `https://webpack.js.org${pathname}${hash}`,
                 },
                 {
                   lang: "zh",
                   title: "中文",
-                  url: `https://webpack.docschina.org${pathname}${locationHash}`,
+                  url: `https://webpack.docschina.org${pathname}${hash}`,
                 },
                 {
                   lang: "ko",
                   title: "한국어",
-                  url: `https://webpack.kr${pathname}${locationHash}`,
+                  url: `https://webpack.kr${pathname}${hash}`,
                 },
               ]}
             />
