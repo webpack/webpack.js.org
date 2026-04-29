@@ -33,14 +33,14 @@ The basic project structure would look like this:
 +     └── ref.json
 ```
 
-Initialize the project with npm, then install `webpack`, `webpack-cli` and `lodash`:
+Initialize the project with npm, then install `webpack`, `webpack-cli`, and `lodash` as development dependencies:
 
 ```bash
 npm init -y
 npm install --save-dev webpack webpack-cli lodash
 ```
 
-We install `lodash` as `devDependencies` instead of `dependencies` because we don't want to bundle it into our library, or our library could be easily bloated.
+We install `lodash` as a `devDependency` because we will initially bundle it into our library. Since it is included in the final output, consumers of our library won't need to install it themselves.
 
 **src/ref.json**
 
@@ -252,7 +252,7 @@ T> Note that the `library` setup is tied to the `entry` configuration. For most 
 
 ## Externalize Lodash
 
-Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a _peer dependency_. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
+Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. To avoid bundling `lodash` and bloating our library, we can configure webpack to treat it as an external module. Since we are no longer bundling it, the consumer will need to provide it. Therefore, you should move `lodash` from `devDependencies` to `dependencies` (or `peerDependencies`) so package managers will install it automatically for consumers of your library.
 
 This can be done using the [`externals`](/configuration/externals/) configuration:
 
