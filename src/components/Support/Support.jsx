@@ -7,9 +7,15 @@ import SmallIcon from "../../assets/icon-square-small-slack.png";
 import Tooltip from "../Tooltip/Tooltip.jsx";
 import Additional from "./AdditionalSupporters.mjs";
 /* eslint import/no-unresolved: ["error", { ignore: ["_supporters\.json$"] }] */
-import Backers from "./_supporters.json";
+let supporters = [];
 
-const SUPPORTERS = [...Backers];
+try {
+  supporters = require("./_supporters.json");
+} catch (error) {
+  console.warn("_supporters.json not found, using empty list");
+}
+
+const SUPPORTERS = [...supporters];
 
 // Merge or add additional backers/sponsors
 for (const additional of Additional) {
