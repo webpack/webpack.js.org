@@ -910,7 +910,7 @@ export default {
 
 ## output.library
 
-Output a library exposing the exports of your entry point.
+`output.library` defines how your bundle is exposed to consumers, for example by attaching it to the global `window` object or exporting it as a module depending on the configured library type.
 
 - Type: `string | string[] | object`
 
@@ -1063,7 +1063,7 @@ Specify a name for the library.
 
 ### output.library.type
 
-Configure how the library will be exposed.
+Configure the module format or environment where your library will be exposed (such as a global variable, CommonJS module, or AMD module).
 
 - Type: `string`
 
@@ -1073,7 +1073,7 @@ For the following examples, we'll use `_entry_return_` to indicate the values re
 
 #### Expose a Variable
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
+These options assign the return value of your entry point (such as exported functions or objects) to a variable name defined by [`output.library.name`](#outputlibraryname). This makes your library accessible in the environment where the bundle is loaded.
 
 ##### type: 'var'
 
@@ -1772,7 +1772,7 @@ T> Note that `_entry_return_` in the example code below is the value returned by
 
 ### Expose a Variable
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library`](#outputlibrary) at whatever scope the bundle was included at.
+These options assign the return value of your entry point (such as exported functions or objects) to a variable name defined by [`output.library`](#outputlibrary). This makes your library accessible in the environment where the bundle is loaded.
 
 #### libraryTarget: 'var'
 
