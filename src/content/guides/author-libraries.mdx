@@ -33,15 +33,14 @@ The basic project structure would look like this:
 +     └── ref.json
 ```
 
-Initialize the project with npm, then install `webpack` and `webpack-cli` as development dependencies, and `lodash` as a runtime dependency:
+Initialize the project with npm, then install `webpack`, `webpack-cli`, and `lodash` as development dependencies:
 
 ```bash
 npm init -y
-npm install --save-dev webpack webpack-cli
-npm install lodash
+npm install --save-dev webpack webpack-cli lodash
 ```
 
-We install `lodash` as a `dependency` because it is required at runtime by our library. However, to prevent our library from becoming bloated, we will configure webpack to treat it as an external module rather than bundling it.
+We install `lodash` as a `devDependency` because we will initially bundle it into our library. Since it is included in the final output, consumers of our library won't need to install it themselves.
 
 **src/ref.json**
 
@@ -253,7 +252,7 @@ T> Note that the `library` setup is tied to the `entry` configuration. For most 
 
 ## Externalize Lodash
 
-Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. Since `lodash` is listed as a `dependency` in your `package.json`, package managers will install it automatically for consumers of your library. This means you can rely on the consumer's environment to provide it, rather than bundling it directly.
+Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. To avoid bundling `lodash` and bloating our library, we can configure webpack to treat it as an external module. Since we are no longer bundling it, the consumer will need to provide it. Therefore, you should move `lodash` from `devDependencies` to `dependencies` (or `peerDependencies`) so package managers will install it automatically for consumers of your library.
 
 This can be done using the [`externals`](/configuration/externals/) configuration:
 
