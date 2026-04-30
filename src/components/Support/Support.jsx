@@ -35,7 +35,7 @@ const totalRanks = {
     random: 100,
   },
   latest: {
-    maxAge: 14 * 24 * 60 * 60 * 1000,
+    maxAge: 21 * 24 * 60 * 60 * 1000,
     limit: 30,
   },
   bronze: {
@@ -61,8 +61,8 @@ const monthlyRanks = {
     random: 100,
   },
   latest: {
-    maxAge: 14 * 24 * 60 * 60 * 1000,
-    limit: 10,
+    maxAge: 21 * 24 * 60 * 60 * 1000,
+    limit: 30,
   },
   bronze: {
     minimum: 10,
