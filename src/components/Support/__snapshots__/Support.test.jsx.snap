@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Support matches snapshot for backer rank 1`] = `
+<h2>
+  Backers
+</h2>
+`;
