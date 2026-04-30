@@ -4,6 +4,7 @@ dist
 !examples/**/dist
 src/**/_*.json
 src/**/_*.mdx
+src/content/contribute/Governance-*.mdx
 .vscode
 .idea
 .DS_Store

@@ -36,7 +36,7 @@ const totalRanks = {
   },
   latest: {
     maxAge: 14 * 24 * 60 * 60 * 1000,
-    limit: 10,
+    limit: 30,
   },
   bronze: {
     minimum: 200,
