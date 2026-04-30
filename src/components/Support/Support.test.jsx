@@ -42,6 +42,17 @@ describe("Support", () => {
     ).toBeTruthy();
   });
 
+  it("renders maxAge days and limit in latest description", () => {
+    render(<Support rank="latest" type="total" />);
+    expect(screen.getByText(/last 14 days/i)).toBeTruthy();
+    expect(screen.getByText(/top 10/i)).toBeTruthy();
+  });
+
+  it("renders no supporter images when latest data is empty", () => {
+    render(<Support rank="latest" type="total" />);
+    expect(screen.queryAllByRole("img")).toHaveLength(0);
+  });
+
   it("renders a heading for gold rank", () => {
     render(<Support rank="gold" type="total" />);
     expect(screen.getByRole("heading", { name: "Gold Sponsors" })).toBeTruthy();
