@@ -44,8 +44,8 @@ describe("Support", () => {
 
   it("renders maxAge days and limit in latest description", () => {
     render(<Support rank="latest" type="total" />);
-    expect(screen.getByText(/last 14 days/i)).toBeTruthy();
-    expect(screen.getByText(/top 10/i)).toBeTruthy();
+    expect(screen.getByText(/last 21 days/i)).toBeTruthy();
+    expect(screen.getByText(/top 30/i)).toBeTruthy();
   });
 
   it("renders no supporter images when latest data is empty", () => {
