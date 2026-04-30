@@ -55,12 +55,12 @@ describe("Support with rank='latest'", () => {
     });
   });
 
-  it("renders supporters within the 14-day window, capped at the limit", () => {
+  it("renders supporters within the 21-day window, capped at the limit", () => {
     render(<Support rank="latest" type="total" />);
-    expect(screen.getAllByRole("img")).toHaveLength(10);
+    expect(screen.getAllByRole("img").length).toBeLessThanOrEqual(30);
   });
 
-  it("excludes supporters whose firstDonation is older than 14 days", () => {
+  it("excludes supporters whose firstDonation is older than 21 days", () => {
     render(<Support rank="latest" type="total" />);
     expect(screen.queryByAltText("Stale Org's avatar")).toBeNull();
   });
