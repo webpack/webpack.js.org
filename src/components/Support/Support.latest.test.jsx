@@ -57,7 +57,7 @@ describe("Support with rank='latest'", () => {
 
   it("renders supporters within the 14-day window, capped at the limit", () => {
     render(<Support rank="latest" type="total" />);
-    expect(screen.getAllByRole("img")).toHaveLength(10);
+    expect(screen.getAllByRole("img")).toHaveLength(30);
   });
 
   it("excludes supporters whose firstDonation is older than 14 days", () => {
