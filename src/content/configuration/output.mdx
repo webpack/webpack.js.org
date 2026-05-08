@@ -2126,7 +2126,7 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 Output JavaScript files as module type. Disabled by default as it's an experimental feature.
 
-When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally.
+When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `minimizerOptions.module` to `true` internally.
 
 If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
 
