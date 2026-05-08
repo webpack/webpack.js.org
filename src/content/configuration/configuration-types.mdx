@@ -31,8 +31,8 @@ Eventually you will find the need to disambiguate in your `webpack.config.js` be
 +    mode: env.production ? 'production' : 'development',
 +    devtool: env.production ? 'source-map' : 'eval',
      plugins: [
-       new TerserPlugin({
-         terserOptions: {
+       new MinimizerPlugin({
+         minimizerOptions: {
 +          compress: argv.mode === 'production' // only if `--mode production` was passed
          }
        })

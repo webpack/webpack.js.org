@@ -317,7 +317,7 @@ export default {
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
+Tell webpack to minimize the bundle using the [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
 
 The default value of `optimization.minimize` depends on the [`mode`](/configuration/mode/):
 
@@ -342,22 +342,22 @@ T> Learn how [mode](/configuration/mode/) works.
 
 ## optimization.minimizer
 
-`[TerserPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
+`[MinimizerPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
 
-Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.
+Allows you to override the default minimizer by providing a different one or more customized [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.
 
 **webpack.config.js**
 
 ```js
-import TerserPlugin from "terser-webpack-plugin";
+import MinimizerPlugin from "minimizer-webpack-plugin";
 
 export default {
   optimization: {
     minimizer: [
-      new TerserPlugin({
+      new MinimizerPlugin({
         parallel: true,
-        terserOptions: {
-          // https://github.com/webpack/terser-webpack-plugin#terseroptions
+        minimizerOptions: {
+          // https://github.com/webpack/minimizer-webpack-plugin#minimizeroptions
         },
       }),
     ],
@@ -368,13 +368,13 @@ export default {
 Or, as function:
 
 ```js
-import TerserPlugin from "terser-webpack-plugin";
+import MinimizerPlugin from "minimizer-webpack-plugin";
 
 export default {
   optimization: {
     minimizer: [
       (compiler) => {
-        new TerserPlugin({
+        new MinimizerPlugin({
           /* your config */
         }).apply(compiler);
       },
@@ -386,13 +386,13 @@ export default {
 By default, webpack would set `optimization.minimizer` to [the following value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L1160-L1174):
 
 ```js
-import TerserPlugin from "terser-webpack-plugin";
+import MinimizerPlugin from "minimizer-webpack-plugin";
 
 const minimizer = [
   {
     apply: (compiler) => {
-      new TerserPlugin({
-        terserOptions: {
+      new MinimizerPlugin({
+        minimizerOptions: {
           compress: {
             passes: 2,
           },
