@@ -13413,9 +13413,9 @@ synckit@^0.11.12, synckit@^0.11.8:
     "@pkgr/core" "^0.2.9"
 
 systeminformation@^5.31.1:
-  version "5.31.3"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.31.3.tgz#82840c71e8cf7ee5a5bdaf40e45d085eda6ceb06"
-  integrity sha512-vX0eeI7oGIr79NLiJRWnK8SyxDjyiNOEanaQnHRNyb5ep8QcpD8QMDvrukdrxV4pV4AKjwUDfaypXnWHMC/65A==
+  version "5.31.6"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.31.6.tgz#2da4979a7262974fd068a3a306ded30aed6127c0"
+  integrity sha512-Uv2b2uGGM6ns+26czgW2cYRabYdnswM0ddSOOlryHOaelzsmDSet1iM/NT7VOYxW8x/BW+HkY+b1Ve2pLTSGSA==
 
 table-layout@^1.0.1:
   version "1.0.2"
