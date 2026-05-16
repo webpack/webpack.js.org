@@ -156,6 +156,20 @@ export default {
 };
 ```
 
+### Example: Using Polyfills with Webpack
+
+If you need to support older browsers, you can include polyfills in your entry configuration.
+
+```js
+export default {
+  entry: {
+    main: ["core-js/stable", "regenerator-runtime/runtime", "./src/index.js"],
+  },
+};
+```
+
+This ensures that modern JavaScript features are available in environments that do not support them natively.
+
 ### Dynamic entry
 
 If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
