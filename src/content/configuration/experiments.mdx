@@ -282,15 +282,15 @@ Putting the magic comment after the `import` keyword is incompatible with the fi
 
 ### experiments.sourceImport
 
+<Badge text="5.106.0+" />
+
 Enable support for the tc39 proposal [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports).
+
+This proposal introduces a way to import a module at the _source phase_ instead of immediately evaluating it. In webpack, this experimental support is currently implemented for **WebAssembly modules**: you obtain a compiled [`WebAssembly.Module`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Module) first and instantiate it later with your own imports. Support for JavaScript source imports is planned for a future release.
 
 - Type: `boolean`
 
-This feature enables importing modules at the source phase via `import source ...` and `import.source(...)`.
-
-<Badge text="5.106.0+" />
-
-{/* eslint-skip */}
+Enable it alongside `asyncWebAssembly`:
 
 ```js
 // webpack.config.js
@@ -302,6 +302,20 @@ export default {
   },
 };
 ```
+
+Then use either the static or dynamic source-phase syntax with a `.wasm` import:
+
+```text
+// Static form
+import source wasmModule from "./module.wasm";
+
+// Dynamic form
+const wasmModule2 = await import.source("./module.wasm");
+
+const instance = await WebAssembly.instantiate(wasmModule);
+```
+
+A full example is available in the webpack repository: [examples/wasm-simple-source-phase](https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase).
 
 {/* eslint-skip */}
 
