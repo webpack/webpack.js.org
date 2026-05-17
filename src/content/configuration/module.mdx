@@ -167,8 +167,8 @@ export default {
         exportsOnly: true,
 
         // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
-        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
-        // available since webpack 5.90.4
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string | string[])
+        // available since webpack 5.90.4; the function form may return string[] since 5.107.0
         exportsConvention: "camel-case-only",
       },
       "css/auto": {
@@ -179,8 +179,8 @@ export default {
         exportsOnly: true,
 
         // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
-        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
-        // available since webpack 5.90.4
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string | string[])
+        // available since webpack 5.90.4; the function form may return string[] since 5.107.0
         exportsConvention: "camel-case-only",
 
         // Customize the format of the local class names generated for css modules.
@@ -203,6 +203,35 @@ export default {
     },
   },
 };
+```
+
+### Multiple aliases via `exportsConvention`
+
+<Badge text="5.107.0+" />
+
+When `exportsConvention` is a function, it may return either a `string` or a `string[]`. Returning an array exports the local class under every name in the array, matching `css-loader`'s behavior. This is useful when you want to expose the same class under several aliases without writing two rules.
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    generator: {
+      "css/module": {
+        // expose each class under both its original name and an uppercase alias
+        exportsConvention: (name) => [name, name.toUpperCase()],
+      },
+    },
+  },
+};
+```
+
+```js
+import styles from "./button.module.css";
+
+console.log(styles.btn); // hashed class
+console.log(styles.BTN); // same hashed class, uppercase alias
 ```
 
 ## module.parser
