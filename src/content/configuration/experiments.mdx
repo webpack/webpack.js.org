@@ -236,6 +236,31 @@ Experimental features:
 - CSS imports: webpack will inline CSS imports into the generated CSS file.
 - Hot Module Reload (HMR): webpack supports HMR for CSS files. This means that changes made to CSS files will be reflected in the browser without a full page reload.
 
+- <Badge text="5.107.0+" /> Scope hoisting (module concatenation) for CSS
+  Modules. When
+  [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)
+  is enabled, CSS Modules whose `exportType` is `text`, `css-style-sheet`,
+  `style`, or `link` are concatenated into a single module instance instead of
+  being kept as separate runtime instances. This reduces overhead and produces
+  smaller output for CSS-heavy bundles.
+
+- <Badge text="5.107.0+" /> `@value` identifiers can be used as the path
+  argument to `@import` and inside `url()` references, so shared paths and
+  assets can be defined once and reused across stylesheets. Both quoted
+  (`"./x"`, `'./x'`) and bare (`./x`) forms are accepted and resolved through
+  webpack's normal asset pipeline.
+
+  ```css
+  @value path: "./other.module.css";
+  @import path;
+
+  @value bg: "./image.png";
+
+  .a {
+    background: url(bg);
+  }
+  ```
+
 ### experiments.cacheUnaffected
 
 Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
