@@ -29,6 +29,7 @@ Available options:
 - [`futureDefaults`](#experimentsfuturedefaults)
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
+- [`sourceImport`](#experimentssourceimport)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
 - `layers`: Enable module and chunk layers, removed and works without additional options since `5.102.0`.
 - `topLevelAwait`: Transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0` (however, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`), this feature is enabled by default, removed and works without additional options since `5.102.0`.
@@ -43,6 +44,7 @@ export default {
     buildHttp: true,
     lazyCompilation: true,
     outputModule: true,
+    sourceImport: true,
     syncWebAssembly: true,
     topLevelAwait: true,
   },
@@ -277,6 +279,43 @@ export function f() {
 It's suggested to put the magic comment after the `from` keyword. Other positions may work, but have not been tested.
 
 Putting the magic comment after the `import` keyword is incompatible with the filesystem cache.
+
+### experiments.sourceImport
+
+<Badge text="5.106.0+" />
+
+Enable support for the tc39 proposal [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports).
+
+This proposal introduces a way to import a module at the _source phase_ instead of immediately evaluating it. In webpack, this experimental support is currently implemented for **WebAssembly modules**: you obtain a compiled [`WebAssembly.Module`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Module) first and instantiate it later with your own imports. Support for JavaScript source imports is planned for a future release.
+
+- Type: `boolean`
+
+Enable it alongside `asyncWebAssembly`:
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  experiments: {
+    asyncWebAssembly: true,
+    sourceImport: true,
+  },
+};
+```
+
+Then use either the static or dynamic source-phase syntax with a `.wasm` import:
+
+```text
+// Static form
+import source wasmModule from "./module.wasm";
+
+// Dynamic form
+const wasmModule2 = await import.source("./module.wasm");
+
+const instance = await WebAssembly.instantiate(wasmModule);
+```
+
+A full example is available in the webpack repository: [examples/wasm-simple-source-phase](https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase).
 
 {/* eslint-skip */}
 
