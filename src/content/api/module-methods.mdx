@@ -183,6 +183,22 @@ We support `webpackIgnore` in the following cases:
 
 T> For other CSS scenarios, [`css-loader` fully supports `webpackIgnore`](/loaders/css-loader/#disable-url-resolving-using-the--webpackignore-true--comment), allowing more flexibility if needed.
 
+**HTML Usage**
+
+<Badge text="5.107.0+" />
+
+When [`experiments.html`](/configuration/experiments/#experimentshtml) is enabled, `webpackIgnore` can be placed as an HTML comment immediately before a tag to skip URL resolution for that tag's `src`, `href`, `srcset`, and similar attributes. The tag is left untouched in the emitted HTML. This mirrors the behavior provided by `html-loader`.
+
+```html
+<!-- webpackIgnore: true -->
+<img src="https://cdn.example.com/logo.png" />
+
+<!-- webpackIgnore: true -->
+<script src="/legacy/external.js"></script>
+```
+
+The magic-comment value is parsed with the same context used by the JS and CSS parsers; non-boolean values emit an `UnsupportedFeatureWarning`.
+
 ##### webpackChunkName
 
 A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively. Adding this comment will cause our separate chunk to be named [my-chunk-name].js instead of [id].js.
