@@ -8860,6 +8860,30 @@ that if it exists for imports inside CSS files.</p>
 <li>
 <p>Hot Module Reload (HMR): webpack supports HMR for CSS files. This means that changes made to CSS files will be reflected in the browser without a full page reload.</p>
 </li>
+<li>
+<p><span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.107.0+</span> Scope hoisting (module concatenation) for CSS
+Modules. When
+<a href="/configuration/optimization/#optimizationconcatenatemodules" data-discover="true"><code>optimization.concatenateModules</code></a>
+is enabled, CSS Modules whose <code>exportType</code> is <code>text</code>, <code>css-style-sheet</code>,
+<code>style</code>, or <code>link</code> are concatenated into a single module instance instead of
+being kept as separate runtime instances. This reduces overhead and produces
+smaller output for CSS-heavy bundles.</p>
+</li>
+<li>
+<p><span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.107.0+</span> <code>@value</code> identifiers can be used as the path
+argument to <code>@import</code> and inside <code>url()</code> references, so shared paths and
+assets can be defined once and reused across stylesheets. Both quoted
+(<code>&quot;./x&quot;</code>, <code>&#x27;./x&#x27;</code>) and bare (<code>./x</code>) forms are accepted and resolved through
+webpack&#x27;s normal asset pipeline.</p>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-css"><span class="token atrule"><span class="token rule">@value</span> <span class="token property">path</span><span class="token punctuation">:</span> <span class="token string">&quot;./other.module.css&quot;</span><span class="token punctuation">;</span></span>
+<span class="token atrule"><span class="token rule">@import</span> path<span class="token punctuation">;</span></span>
+
+<span class="token atrule"><span class="token rule">@value</span> <span class="token property">bg</span><span class="token punctuation">:</span> <span class="token string">&quot;./image.png&quot;</span><span class="token punctuation">;</span></span>
+
+<span class="token selector">.a</span> <span class="token punctuation">{</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>bg<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+</li>
 </ul>
 <h3><span id="experimentscacheunaffected"></span>experiments.cacheUnaffected<a href="#experimentscacheunaffected" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3>
 <p>Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.</p>
