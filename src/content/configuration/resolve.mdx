@@ -330,14 +330,20 @@ For example, with `target: "web"` (the default) and `mode: "production"`, the ba
 
 Webpack further adjusts `conditionNames` through [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) depending on how a module is imported. The `"..."` token inherits from the base conditions above.
 
-| Dependency type                                     | `conditionNames`                        | Used for                                             |
-| --------------------------------------------------- | --------------------------------------- | ---------------------------------------------------- |
-| `esm`, `wasm`, `loaderImport`                       | `["import", "module", "..."]`           | ESM `import` statements, WebAssembly, loader imports |
-| `commonjs`, `amd`, `loader`, `unknown`, `undefined` | `["require", "module", "..."]`          | `require()` calls, AMD, and other dependency types   |
-| `worker`                                            | `["worker", "import", "module", "..."]` | `new Worker()` expressions                           |
-| `css-import`                                        | `["webpack", <mode>, "style"]`          | CSS `@import` statements                             |
+| Dependency type                                     | `conditionNames`                                       | Used for                                             |
+| --------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------- |
+| `esm`, `wasm`, `loaderImport`                       | `["import", "module-sync", "module", "..."]`           | ESM `import` statements, WebAssembly, loader imports |
+| `commonjs`, `amd`, `loader`, `unknown`, `undefined` | `["require", "module-sync", "module", "..."]`          | `require()` calls, AMD, and other dependency types   |
+| `worker`                                            | `["worker", "import", "module-sync", "module", "..."]` | `new Worker()` expressions                           |
+| `css-import`                                        | `["webpack", <mode>, "style"]`                         | CSS `@import` statements                             |
 
-For instance, when a file uses `import` in a project with `target: "web"` and `mode: "production"`, the final resolved conditions are `["import", "module", "webpack", "production", "browser"]`.
+<Badge text="5.107.0+" /> `"module-sync"` is included in the default conditions
+to align with Node.js, which exposes the `module-sync` community condition for
+synchronously-loadable ESM. Packages that publish a `module-sync` export in
+their `package.json` are picked up automatically without additional
+configuration.
+
+For instance, when a file uses `import` in a project with `target: "web"` and `mode: "production"`, the final resolved conditions are `["import", "module-sync", "module", "webpack", "production", "browser"]`.
 
 T> The `resolveLoader` option uses different defaults for `conditionNames`: `["loader", "require", "node"]`. See [resolveLoader](#resolveloader).
 
