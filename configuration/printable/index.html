@@ -2481,6 +2481,40 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token punctuation">}</span></code></pre></div>
 <div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> footer<span class="token punctuation">,</span> header <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./styles.module.css&quot;</span><span class="token punctuation">;</span></code></pre></div>
 <p>By enabling <code>namedExports</code>, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.</p>
+<h4><span id="moduleparsercsspure"></span>module.parser.css.pure<a href="#moduleparsercsspure" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
+<span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.107.0+</span>
+<p>Enable strict pure mode for CSS Modules. Every selector must contain at least one local class or id selector; otherwise webpack emits a build error. This mirrors the pure mode of <a href="https://github.com/css-modules/postcss-modules-local-by-default"><code>postcss-modules-local-by-default</code></a> and helps catch accidentally global selectors early.</p>
+<ul>
+<li>Type: <code>boolean</code></li>
+<li>Default: <code>false</code></li>
+<li>Available for: <code>css/module</code> and <code>css/auto</code> (not exposed for <code>css/global</code>, where global-by-default is the intended semantic).</li>
+</ul>
+<p><strong>webpack.config.js</strong></p>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">experiments</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token literal-property property">css</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">module</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">parser</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">&quot;css/module&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">pure</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
+<p>Two comments opt out of the check when needed.</p>
+<p><code>/* cssmodules-pure-ignore */</code> placed directly before a rule suppresses the check for that single rule. The suppression is per-rule and is not propagated to children.</p>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-css"><span class="token comment">/* cssmodules-pure-ignore */</span>
+<span class="token selector">a</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* suppressed only for this rule */</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p><code>/* cssmodules-pure-no-check */</code> placed among the leading comments of a file (before any rule) disables the check for the whole file.</p>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-css"><span class="token comment">/* cssmodules-pure-no-check */</span>
+
+<span class="token selector">a</span> <span class="token punctuation">{</span>
+  <span class="token comment">/* would normally fail under pure mode */</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
+<p>Some constructs are exempt by design: nested rules inside a local-bearing ancestor are treated as pure-compliant, <code>&amp;</code> resolves to the parent rule&#x27;s purity, and <code>@keyframes</code> and <code>@counter-style</code> body contents are not checked.</p>
 <h4><span id="moduleparsercssanimation"></span>module.parser.css.animation<a href="#moduleparsercssanimation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.104.0+</span>
 <p>Enable or disable renaming of <code>@keyframes</code> animation names in CSS modules.</p>
