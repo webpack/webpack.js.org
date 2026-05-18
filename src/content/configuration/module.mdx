@@ -447,6 +447,56 @@ import { footer, header } from "./styles.module.css";
 
 By enabling `namedExports`, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.
 
+#### module.parser.css.pure
+
+<Badge text="5.107.0+" />
+
+Enable strict pure mode for CSS Modules. Every selector must contain at least one local class or id selector; otherwise webpack emits a build error. This mirrors the pure mode of [`postcss-modules-local-by-default`](https://github.com/css-modules/postcss-modules-local-by-default) and helps catch accidentally global selectors early.
+
+- Type: `boolean`
+- Default: `false`
+- Available for: `css/module` and `css/auto` (not exposed for `css/global`, where global-by-default is the intended semantic).
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/module": {
+        pure: true,
+      },
+    },
+  },
+};
+```
+
+Two comments opt out of the check when needed.
+
+`/* cssmodules-pure-ignore */` placed directly before a rule suppresses the check for that single rule. The suppression is per-rule and is not propagated to children.
+
+```css
+/* cssmodules-pure-ignore */
+a {
+  /* suppressed only for this rule */
+  color: blue;
+}
+```
+
+`/* cssmodules-pure-no-check */` placed among the leading comments of a file (before any rule) disables the check for the whole file.
+
+```css
+/* cssmodules-pure-no-check */
+
+a {
+  /* would normally fail under pure mode */
+  color: red;
+}
+```
+
+Some constructs are exempt by design: nested rules inside a local-bearing ancestor are treated as pure-compliant, `&` resolves to the parent rule's purity, and `@keyframes` and `@counter-style` body contents are not checked.
+
 #### module.parser.css.animation
 
 <Badge text="5.104.0+" />
