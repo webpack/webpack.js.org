@@ -2678,6 +2678,25 @@ console<span class="token punctuation">.</span><span class="token function">log<
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <p>It&#x27;s allowed to configure those options in <a href="/configuration/module/#ruleparser" data-discover="true"><code>Rule.parser</code></a> as well to target specific modules.</p>
+<h4><span id="moduleparserjavascriptanonymousdefaultexportname"></span>module.parser.javascript.anonymousDefaultExportName<a href="#moduleparserjavascriptanonymousdefaultexportname" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
+<span class="relative -top-1 bg-blue-400 px-1 text-14 text-white">5.107.0+</span>
+<p>Controls whether webpack sets <code>.name</code> to <code>&quot;default&quot;</code> for anonymous default-export functions and classes, matching the ES spec for native ESM. When enabled, webpack injects a small runtime helper (<code>__webpack_require__.dn</code>) that calls <code>Object.defineProperty(...)</code> on the export to set the <code>.name</code> value.</p>
+<ul>
+<li>Type: <code>boolean</code></li>
+<li>Default: <code>true</code> for applications, <code>false</code> for libraries (when <a href="/configuration/output/#outputlibrary" data-discover="true"><code>output.library</code></a> is set).</li>
+</ul>
+<p>Applications stay spec-compliant by default. Libraries skip the helper to keep bundle size small, since library consumers rarely rely on <code>.name === &quot;default&quot;</code>.</p>
+<p>To override the default explicitly:</p>
+<p><strong>webpack.config.js</strong></p>
+<div class="code-block-wrapper relative mb-6 group"><button class="copy-button absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200 opacity-0 group-hover:opacity-100 transition-[background-color,transform,opacity] duration-200 active:scale-95 focus-visible:outline-none focus-visible:opacity-100 bg-[#175d96] hover:bg-[#2f85d0]" aria-label="Copy code to clipboard">Copy</button><pre><code class="hljs language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token literal-property property">module</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">parser</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token literal-property property">javascript</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token literal-property property">anonymousDefaultExportName</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></div>
 <h4><span id="moduleparserjavascriptcommonjsmagiccomments"></span>module.parser.javascript.commonjsMagicComments<a href="#moduleparserjavascriptcommonjsmagiccomments" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4>
 <p>Enable <a href="/api/module-methods/#magic-comments" data-discover="true">magic comments</a> support for CommonJS.</p>
 <ul>
