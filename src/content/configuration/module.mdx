@@ -710,6 +710,33 @@ export default {
 
 It's allowed to configure those options in [`Rule.parser`](/configuration/module/#ruleparser) as well to target specific modules.
 
+#### module.parser.javascript.anonymousDefaultExportName
+
+<Badge text="5.107.0+" />
+
+Controls whether webpack sets `.name` to `"default"` for anonymous default-export functions and classes, matching the ES spec for native ESM. When enabled, webpack injects a small runtime helper (`__webpack_require__.dn`) that calls `Object.defineProperty(...)` on the export to set the `.name` value.
+
+- Type: `boolean`
+- Default: `true` for applications, `false` for libraries (when [`output.library`](/configuration/output/#outputlibrary) is set).
+
+Applications stay spec-compliant by default. Libraries skip the helper to keep bundle size small, since library consumers rarely rely on `.name === "default"`.
+
+To override the default explicitly:
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      javascript: {
+        anonymousDefaultExportName: false,
+      },
+    },
+  },
+};
+```
+
 #### module.parser.javascript.commonjsMagicComments
 
 Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJS.
