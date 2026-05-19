@@ -5,11 +5,11 @@ contributors:
   - bjohansebas
 ---
 
-Webpack 5.107 is out, and the headline of this release is the very first step toward handling `.html` files natively in webpack core. For years, building a webpack project with a real HTML entry point has meant pulling in `html-webpack-plugin` and `html-loader`. This release starts replacing both of them with first-class support, in the same way `experiments.css` is gradually replacing `css-loader`, `style-loader`, and `mini-css-extract-plugin`.
+Webpack 5.107 is out. The headline of this release is the first step toward handling `.html` files natively in webpack core: importing an HTML file from JS now resolves its `<img src>`, `<link href>`, inline `<style>`, and `<script src>` references through the normal webpack pipeline, replacing the role `html-loader` has played for years. HTML entry points (the `html-webpack-plugin` part of the story) are not in 5.107 yet, they are planned for the next minor release.
 
 This release also lands experimental TypeScript support that leans on Node.js's built-in type-stripping, so simple TypeScript projects can compile without `ts-loader` or `swc-loader`.
 
-The HTML and TypeScript pieces are experimental and live behind opt-in flags, but the direction is clear: you should eventually be able to build a complete web app with zero extra loaders or plugins for HTML, CSS, and basic TypeScript.
+Both pieces are experimental and live behind opt-in flags, but the direction is clear: you should eventually be able to build a complete web app with zero extra loaders or plugins for HTML, CSS, and basic TypeScript.
 
 Alongside the experimental work, this release also continues maturing the built-in CSS pipeline, and ships a handful of improvements for tree shaking, deferred imports, and module resolution.
 
@@ -36,11 +36,11 @@ Explore what's new:
 
 ## HTML Modules (Experimental)
 
-W> **This feature is experimental.** The API, configuration, and behavior may change in any release. Please don't depend on it in production yet. What ships in 5.107 is the foundation for native HTML entry-point support targeted at webpack 6, tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+W> **This feature is experimental and partial.** Webpack 5.107 only implements the `html-loader` side of the story: importing an HTML file from JavaScript runs its tag references through the webpack pipeline. **HTML entry points** (using a `.html` file directly as `entry`, the `html-webpack-plugin` part) are **not supported yet** and are planned for the next minor release. The full story is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
 
 A real-world webpack setup that needs an HTML entry point has historically required at least two extra dependencies. The first is `html-webpack-plugin`, which generates or emits the HTML file and injects the right bundle URLs into it. The second is `html-loader`, which lets webpack walk through `<img src>`, `<link href>`, `<script src>`, and friends so those references go through the normal resolver and asset pipeline.
 
-Both of these have served the community well for a long time, but they live outside the core. Webpack 5.107 starts bringing that responsibility inward.
+Both of these have served the community well for a long time, but they live outside the core. Webpack 5.107 starts bringing the `html-loader` side of that work inward.
 
 ### `experiments.html` Flag
 
@@ -52,18 +52,26 @@ module.exports = {
   experiments: {
     html: true,
   },
-  entry: "./src/index.html",
 };
 ```
 
-With the flag enabled, an `.html` file becomes a valid webpack entry point on its own. No plugin or loader is needed to bring it in. The architecture mirrors `experiments.css`: a single boolean that unlocks an entire pipeline.
+You then import the HTML file from JavaScript. The default export is the processed HTML as a string, with all asset references resolved through webpack:
+
+```js
+// src/index.js
+import page from "./page.html";
+
+document.documentElement.innerHTML = page;
+```
+
+This is the same shape `html-loader` produces, so existing code that imports HTML should keep working. The pipeline does the work the loader used to do: tag references are resolved, hashed filenames are rewritten back into the HTML string, and the result lands in your JS bundle. Using an `.html` file directly as a webpack `entry` is **not** supported in 5.107.
 
 ### Inline `<style>` Tags
 
-When webpack finds a `<style>` block inside an HTML module, it routes the CSS body through the same CSS pipeline you'd use for a `.css` file. The block is treated as a virtual CSS module with `exportType: "text"`, so any `url()` references and `@import` statements inside the style are resolved relative to the HTML file. Once processing finishes, the transformed CSS is written back into the original `<style>` tag.
+When webpack finds a `<style>` block inside an HTML module, it routes the CSS body through the same CSS pipeline you'd use for a `.css` file. The block is treated as a virtual CSS module with `exportType: "text"`, so any `url()` references and `@import` statements inside the style are resolved relative to the HTML file. Once processing finishes, the transformed CSS is written back into the original `<style>` tag in the emitted HTML string.
 
 ```html
-<!-- src/index.html -->
+<!-- src/page.html -->
 <!doctype html>
 <html>
   <head>
@@ -85,10 +93,10 @@ When webpack finds a `<style>` block inside an HTML module, it routes the CSS bo
 
 ### `<script src>` and `<link rel="modulepreload">`
 
-The other big chunk of `html-webpack-plugin`'s job is wiring HTML to the bundles webpack emits. In 5.107, that responsibility starts moving into core too. Both `<script src>` and `<link rel="modulepreload">` references inside an HTML module now become real webpack entries, and the emitted chunk URL is rewritten back into the HTML so hashed filenames stay correct.
+`<script src>` and `<link rel="modulepreload">` references inside an HTML module become real webpack entries, and the emitted chunk URL is rewritten back into the HTML string so hashed filenames stay correct.
 
 ```html
-<!-- src/index.html -->
+<!-- src/page.html -->
 <!doctype html>
 <html>
   <head>
@@ -113,16 +121,11 @@ A few behaviors are worth knowing about:
 The familiar `webpackIgnore: true` magic comment now works inside HTML modules. Place an HTML comment with the directive right before a tag and webpack will leave that tag's URLs untouched in the output. This is exactly how `html-loader` handles the same case.
 
 ```html
-<!doctype html>
-<html>
-  <body>
-    <!-- webpackIgnore: true -->
-    <img src="https://cdn.example.com/logo.png" />
+<!-- webpackIgnore: true -->
+<img src="https://cdn.example.com/logo.png" />
 
-    <!-- webpackIgnore: true -->
-    <script src="/legacy/external.js"></script>
-  </body>
-</html>
+<!-- webpackIgnore: true -->
+<script src="/legacy/external.js"></script>
 ```
 
 The comment value is parsed with the same context the JS and CSS parsers use, so non-boolean values raise an `UnsupportedFeatureWarning`.
