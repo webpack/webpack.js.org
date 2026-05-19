@@ -493,7 +493,7 @@ Note that there will be an `import` statement in the output bundle.
 
 <Badge text="5.107.0+" />
 
-The `defer` and `source` import phase keywords are preserved on `module` externals the same way [import attributes](/configuration/module/#ruleparserimportattributes) are. A static `import defer * as ns from "mod"` against a `module` external is emitted as a native `import defer * as ...` statement, and `import source v from "mod"` becomes `import source ... from "mod"`. The same external imported with two different phases produces distinct `ExternalModule` instances, so neither phase is silently dropped.
+The `defer` and `source` import phase keywords are preserved on `module` externals the same way [import attributes](https://github.com/tc39/proposal-import-attributes) are. A static `import defer * as ns from "mod"` against a `module` external is emitted as a native `import defer * as ...` statement, and `import source v from "mod"` becomes `import source ... from "mod"`. The same external imported with two different phases produces distinct `ExternalModule` instances, so neither phase is silently dropped.
 
 {/* eslint-skip */}
 
