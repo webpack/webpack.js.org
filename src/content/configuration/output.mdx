@@ -2,53 +2,24 @@
 title: Output
 sort: 6
 contributors:
-  - sokra
-  - skipjack
-  - tomasAlabes
-  - mattce
-  - irth
-  - fvgs
-  - dhurlburtusa
-  - MagicDuck
-  - fadysamirsadek
-  - byzyk
-  - madhavarshney
-  - harshwardhansingh
-  - eemeli
-  - EugeneHlushko
-  - g-plane
-  - smelukov
-  - Neob91
-  - anikethsaha
-  - jamesgeorge007
-  - hiroppy
-  - chenxsan
-  - snitin315
-  - QC-L
-  - anshumanv
-  - mrzalyaul
-  - JakobJingleheimer
-  - long76
-  - ahabhgk
-  - tanyabouman
-  - shivxmsharma
+  - RlxChap2
 ---
 
-The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
+يحتوي مفتاح المستوى الأعلى `output` على مجموعة خيارات ترشد webpack إلى كيفية ومكان إخراج bundles وassets، وأي شيء آخر تعمل له bundle أو تحمّله عبر webpack.
 
 ## output.assetModuleFilename
 
 `string = '[hash][ext][query]'` `function (pathData, assetInfo) => string`
 
-The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/).
+نفس [`output.filename`](#outputfilename) ولكن بالنسبة لـ [Asset Modules](/guides/asset-modules/).
 
-`[name]`, `[file]`, `[query]`, `[fragment]`, `[base]`, and `[path]` are set to an empty string for the assets built from data URI replacements.
+تُضبط `[name]`، و`[file]`، و`[query]`، و`[fragment]`، و`[base]`، و`[path]` على string فارغ عند بناء assets من بدائل data URI.
 
 ## output.asyncChunks
 
 `boolean = true`
 
-Create async chunks that are loaded on demand.
+أنشئ async chunks تُحمّل عند الطلب.
 
 **webpack.config.js**
 
@@ -64,11 +35,11 @@ export default {
 
 ## output.auxiliaryComment
 
-W> Prefer to use [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment) instead.
+W> يُفضل استخدام [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment) بدلاً من ذلك.
 
 `string` `object`
 
-When used in tandem with [`output.library`](#outputlibrary) and [`output.libraryTarget`](#outputlibrarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, set `auxiliaryComment` to a string:
+عند استخدامه جنبًا إلى جنب مع [`output.library`](#outputlibrary) و[`output.libraryTarget`](#outputlibrarytarget)، يتيح هذا الخيار للمستخدمين إدراج التعليقات داخل غلاف التصدير. لإدراج نفس التعليق لكل نوع `libraryTarget`، اضبط `auxiliaryComment` على string:
 
 **webpack.config.js**
 
@@ -84,25 +55,25 @@ export default {
 };
 ```
 
-which will yield the following:
+وسينتج عنه ما يلي:
 
 **someLibName.js**
 
 ```js
 (function webpackUniversalModuleDefinition(root, factory) {
-  // Test Comment
+  // تعليق الاختبار
   if (typeof exports === "object" && typeof module === "object") {
     module.exports = factory(require("lodash"));
   }
-  // Test Comment
+  // تعليق الاختبار
   else if (typeof define === "function" && define.amd) {
     define(["lodash"], factory);
   }
-  // Test Comment
+  // تعليق الاختبار
   else if (typeof exports === "object") {
     exports.someLibName = factory(require("lodash"));
   }
-  // Test Comment
+  // تعليق الاختبار
   else {
     root.someLibName = factory(root._);
   }
@@ -111,7 +82,7 @@ which will yield the following:
 });
 ```
 
-For fine-grained control over each `libraryTarget` comment, pass an object:
+للتحكم الدقيق في كل تعليق `libraryTarget`، مرّر object:
 
 **webpack.config.js**
 
@@ -134,19 +105,19 @@ export default {
 
 `boolean = true`
 
-Tells webpack to add `charset="utf-8"` to the HTML `<script>` tag.
+يخبر webpack بإضافة `charset="utf-8"` إلى HTML `<script>` tag.
 
-T> Although the `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
+T> على الرغم من أن السمة `charset` في `<script>` tag كانت [مهملة](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes)، إلا أن webpack لا تزال تضيفها افتراضيًا للتوافق مع browsers غير الحديثة.
 
 ## output.chunkFilename
 
 `string = '[id].js'` `function (pathData, assetInfo) => string`
 
-This option determines the name of non-initial chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
+يحدد هذا الخيار اسم ملفات chunk غير الأولية. راجع الخيار [`output.filename`](#outputfilename) للحصول على تفاصيل حول القيم المحتملة.
 
-Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
+لاحظ أنه يجب إنشاء أسماء الملفات هذه في runtime لإرسال طلبات chunks. ولهذا السبب، تحتاج العناصر النائبة مثل `[name]` و`[chunkhash]` إلى إضافة تعيين من معرف chunk إلى قيمة العنصر النائب إلى output bundle مع webpack runtime. يؤدي هذا إلى زيادة الحجم وقد يؤدي إلى إبطال bundle عند تغيير قيمة العنصر النائب لأي chunk.
 
-By default `[id].js` is used or a value inferred from [`output.filename`](#outputfilename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
+افتراضيًا، يتم استخدام `[id].js` أو يتم استنتاج قيمة من [`output.filename`](#outputfilename) (يتم استبدال `[name]` بـ `[id]` أو يتم إضافة `[id].` مسبقًا).
 
 **webpack.config.js**
 
@@ -160,7 +131,7 @@ export default {
 };
 ```
 
-Usage as a function:
+الاستخدام كـ function:
 
 **webpack.config.js**
 
@@ -174,15 +145,15 @@ export default {
 };
 ```
 
-T> If the `output.filename` is defined as a string containing placeholder such as `[name]`, `[id]`, [`contenthash`], or [`chunkhash`], the default value for `output.chunkFilename` will be derived from the `output.filename`. Otherwise, `[id].js` will be used as the default value.
+T> إذا تم تعريف `output.filename` على أنه string يحتوي على عنصر نائب مثل `[name]`، `[id]`، [`contenthash`]، أو [`chunkhash`]، فسيتم اشتقاق القيمة الافتراضية لـ `output.chunkFilename` من `output.filename`. وإلا، سيتم استخدام `[id].js` كقيمة افتراضية.
 
 ## output.chunkFormat
 
 `false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
 
-The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), `'module'` (ESM), but others might be added by plugins).
+تنسيق chunks (التنسيقات المضمنة افتراضيًا هي `'array-push'` (web/WebWorker)، `'commonjs'` (node.js)، `'module'` (ESM)، ولكن يمكن إضافة تنسيقات أخرى بواسطة plugins).
 
-T> The default value of this option depends on the [`target`](/configuration/target/) and [`output.module`](#outputmodule) setting. For more details, search for `"chunkFormat"` [in the webpack defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
+T> تعتمد القيمة الافتراضية لهذا الخيار على الإعداد [`target`](/configuration/target/) و[`output.module`](#outputmodule). لمزيد من التفاصيل، ابحث عن `"chunkFormat"` [في إعدادات webpack الافتراضية](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
 
 **webpack.config.js**
 
@@ -200,7 +171,7 @@ export default {
 
 `number = 120000`
 
-The Number of milliseconds before chunk request expires. This option is supported since webpack 2.6.0.
+عدد المللي ثانية قبل انتهاء صلاحية طلب chunk. هذا الخيار مدعوم منذ webpack 2.6.0.
 
 **webpack.config.js**
 
@@ -218,7 +189,7 @@ export default {
 
 `string = 'webpackChunkwebpack'`
 
-The global variable is used by webpack for loading chunks.
+يستخدم webpack المتغيّر global لتحميل chunks.
 
 **webpack.config.js**
 
@@ -236,9 +207,9 @@ export default {
 
 `false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
-The method to load chunks (methods included by default are `'jsonp'` (web), `'import'` (ESM), `'importScripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
+طريقة تحميل chunks. الطرق المضمّنة افتراضياً هي `'jsonp'` (web)، و`'import'` (ESM)، و`'importScripts'` (WebWorker)، و`'require'` (sync Node.js)، و`'async-node'` (async Node.js)، ويمكن أن تضيف plugins طرقاً أخرى.
 
-T> The default value of this option depends on the [`target`](/configuration/target/) and [`chunkFormat `](#outputchunkformat) setting. For more details, search for `"chunkLoading"` [in the webpack defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
+T> تعتمد القيمة الافتراضية لهذا الخيار على الإعداد [`target`](/configuration/target/) و[`chunkFormat `](#outputchunkformat). لمزيد من التفاصيل، ابحث عن `"chunkLoading"` [في إعدادات webpack الافتراضية](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
 
 **webpack.config.js**
 
@@ -302,7 +273,7 @@ export default {
 };
 ```
 
-You can also use it with hook:
+يمكنك أيضًا استخدامه مع الخطاف:
 
 ```js
 webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
@@ -317,9 +288,9 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 
 `boolean = true`
 
-Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
+يخبر webpack بالتحقق مما إذا كان الملف المطلوب إرساله موجود بالفعل ويحتوي على نفس المحتوى قبل الكتابة إلى نظام الملفات output.
 
-W> webpack will not write output file when file already exists on disk with the same content.
+W> webpack لن يكتب ملف output عندما يكون الملف موجودًا بالفعل على القرص بنفس المحتوى.
 
 ```js
 export default {
@@ -334,42 +305,42 @@ export default {
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
-Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. Only takes effect when the [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks, by adding script tags.
+يطلب من webpack تمكين تحميل [الأصل المتقاطع](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) لـ chunks. يسري مفعوله فقط عند تعيين [`target`](/configuration/target/) على `'web'`، والذي يستخدم JSONP لتحميل chunks عند الطلب، عن طريق إضافة `<script>` tags.
 
-- `'anonymous'` - Enable cross-origin loading **without credentials**
-- `'use-credentials'` - Enable cross-origin loading **with credentials**
+- `'anonymous'` - تمكين التحميل عبر الأصل **بدون بيانات اعتماد**
+- `'use-credentials'` - تمكين التحميل المشترك **ببيانات الاعتماد**
 
 ## output.cssChunkFilename
 
 `string` `function (pathData, assetInfo) => string`
 
-This option determines the name of non-initial CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
+يحدد هذا الخيار اسم الملفات غير الأولية CSS output الموجودة على القرص. راجع الخيار [`output.filename`](#outputfilename) للحصول على تفاصيل حول القيم المحتملة.
 
-You **must not** specify an absolute path here. However, feel free to include folders separated by `'/'`. This specified path combines with the [`output.path`](#outputpath) value to pinpoint the location on the disk.
+**لا يجب عليك** تحديد مسار مطلق هنا. ومع ذلك، لا تتردد في تضمين المجلدات المفصولة بـ `'/'`. يتم دمج هذا المسار المحدد مع القيمة [`output.path`](#outputpath) لتحديد الموقع على القرص.
 
 ## output.cssFilename
 
 `string` `function (pathData, assetInfo) => string`
 
-This option determines the name of CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
+يحدد هذا الخيار اسم ملفات CSS output الموجودة على القرص. راجع الخيار [`output.filename`](#outputfilename) للحصول على تفاصيل حول القيم المحتملة.
 
-You **must not** specify an absolute path here. However, feel free to include folders separated by `'/'`. This specified path combines with the [`output.path`](#outputpath) value to pinpoint the location on the disk.
+**لا يجب عليك** تحديد مسار مطلق هنا. ومع ذلك، لا تتردد في تضمين المجلدات المفصولة بـ `'/'`. يتم دمج هذا المسار المحدد مع القيمة [`output.path`](#outputpath) لتحديد الموقع على القرص.
 
 ## output.devtoolFallbackModuleFilenameTemplate
 
 `string` `function (info)`
 
-A fallback is used when the template string or function above yields duplicates.
+يتم استخدام البديل عندما ينتج عن القالب string أو function أعلاه نسخ مكررة.
 
-See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
+راجع [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
 
 ## output.devtoolModuleFilenameTemplate
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
-This option is only used when [`devtool`](/configuration/devtool) uses an option that requires module names.
+يتم استخدام هذا الخيار فقط عندما يستخدم [`devtool`](/configuration/devtool) خيارًا يتطلب أسماء module.
 
-Customize the names used in each source map's `sources` array. This can be done by passing a template string or function. For example, when using `devtool: 'eval'`.
+قم بتخصيص الأسماء المستخدمة في كل خريطة مصدر `sources` array. يمكن القيام بذلك عن طريق تمرير القالب string أو function. على سبيل المثال، عند استخدام `devtool: 'eval'`.
 
 **webpack.config.js**
 
@@ -383,20 +354,20 @@ export default {
 };
 ```
 
-The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/main/lib/ModuleFilenameHelpers.js)):
+البدائل التالية متاحة في سلاسل القالب (عبر webpack الداخلي [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/main/lib/ModuleFilenameHelpers.js)):
 
-| Template                 | Description                                                                                         |
+| القالب                 | الوصف                                                                                         |
 | ------------------------ | --------------------------------------------------------------------------------------------------- |
-| [absolute-resource-path] | The absolute filename                                                                               |
-| [all-loaders]            | Automatic and explicit loaders and params up to the name of the first loader                        |
-| [hash]                   | The hash of the module identifier                                                                   |
-| [id]                     | The module identifier                                                                               |
-| [loaders]                | Explicit loaders and params up to the name of the first loader                                      |
-| [resource]               | The path used to resolve the file and any query params used on the first loader                     |
-| [resource-path]          | The path used to resolve the file without any query params                                          |
-| [namespace]              | The modules namespace. This is usually the library name when building as a library, empty otherwise |
+| [مسار المورد المطلق] | اسم الملف المطلق                                                                               |
+| [الكل-loaders]            | تلقائية وصريحة loaders ومعلمات تصل إلى الاسم الأول loader                        |
+| [hash]                   | hash للمعرف module                                                                   |
+| [id]                     | المعرف module                                                                               |
+| [loaders]                | صريح loaders ومعلمات تصل إلى اسم loader الأول                                      |
+| [المصدر]               | المسار المستخدم لـ resolve الملف وأي معلمات استعلام مستخدمة في loader الأول                     |
+| [مسار المورد]          | المسار المستخدم لـ resolve الملف بدون أي معلمات استعلام                                          |
+| [مساحة الاسم]              | مساحة الاسم modules. عادةً ما يكون هذا هو الاسم library عند البناء كـ library، وإلا فإنه يكون فارغًا |
 
-When using a function, the same options are available camel-cased via the `info` parameter:
+عند استخدام function، تتوفر نفس الخيارات في علبة الجمل عبر المعلمة `info`:
 
 ```js
 export default {
@@ -408,17 +379,17 @@ export default {
 };
 ```
 
-If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) is used instead for these modules.
+إذا كان modules المتعدد سيؤدي إلى نفس الاسم، فسيتم استخدام [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) بدلاً من ذلك لـ modules.
 
 ## output.devtoolNamespace
 
 `string`
 
-This option determines the module's namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.uniqueName`](#outputuniquename). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+يحدد هذا الخيار مساحة الاسم module المستخدمة مع [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). عند عدم التحديد، سيتم تعيينه افتراضيًا على القيمة: [`output.uniqueName`](#outputuniquename). يتم استخدامه لمنع تصادمات مسار الملف المصدر في Source Maps عند تحميل مكتبات متعددة تم إنشاؤها باستخدام webpack.
 
-For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
+على سبيل المثال، إذا كان لديك مكتبتان، بمساحات الأسماء `library1` و`library2`، وكلاهما يحتوي على ملف `./src/index.js` (مع محتويات محتملة مختلفة)، فسوف يعرضان هذه الملفات على أنها `webpack://library1/./src/index.js` و`webpack://library2/./src/index.js`.
 
-You can use template strings like `[name]` to dynamically generate namespaces based on the build context, providing additional flexibility.
+يمكنك استخدام سلاسل القالب مثل `[name]` لإنشاء مساحات أسماء ديناميكيًا استنادًا إلى سياق build، مما يوفر مرونة إضافية.
 
 **webpack.config.js**
 
@@ -438,7 +409,7 @@ export default {
 
 `[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
 
-List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
+قائمة أنواع التحميل chunk الممكّنة للاستخدام بواسطة entry points. سيتم ملؤه تلقائيًا بواسطة webpack. مطلوب فقط عند استخدام خيار function كخيار entry وإرجاع خيارchunkLoading من هناك.
 
 **webpack.config.js**
 
@@ -456,7 +427,7 @@ export default {
 
 `[string]`
 
-List of library types enabled for use by entry points.
+قائمة أنواع library الممكّنة للاستخدام بواسطة entry points.
 
 ```js
 export default {
@@ -471,7 +442,7 @@ export default {
 
 `[string]`
 
-List of wasm loading types enabled for use by entry points.
+قائمة أنواع تحميل Wasm المُمكّنة للاستخدام بواسطة entry points.
 
 ```js
 export default {
@@ -484,44 +455,44 @@ export default {
 
 ## output.environment
 
-Tell webpack what kind of ES-features may be used in the generated runtime-code.
+أخبر webpack ما هو نوع ميزات ES التي يمكن استخدامها في كود runtime الذي تم إنشاؤه.
 
 ```js
 export default {
   output: {
     environment: {
-      // The environment supports arrow functions ('() => { ... }').
+      // تدعم البيئة وظائف الأسهم ('() => { ... }').
       arrowFunction: true,
-      // The environment supports async function and await ('async function () { await ... }').
+      // تدعم البيئة المزامنة function والانتظار ('async function () { انتظار ... }').
       asyncFunction: true,
-      // The environment supports BigInt as literal (123n).
+      // تدعم البيئة BigInt بشكل حرفي (123n).
       bigIntLiteral: false,
-      // The environment supports const and let for variable declarations.
+      // تدعم البيئة const وتسمح للإعلانات المتغيرة.
       const: true,
-      // The environment supports destructuring ('{ a, b } = obj').
+      // تدعم البيئة التدمير ('{ a, b } = obj').
       destructuring: true,
-      // The environment supports 'document' variable.
+      // تدعم البيئة متغير "المستند".
       document: true,
-      // The environment supports an async import() function to import EcmaScript modules.
+      // تدعم البيئة عملية `import()` غير المتزامن لاستيراد ECMAScript modules.
       dynamicImport: false,
-      // The environment supports an async import() when creating a worker, only for web targets at the moment.
+      // تدعم البيئة عملية الاستيراد غير المتزامنة () عند إنشاء worker، فقط للويب targets في الوقت الحالي.
       dynamicImportInWorker: false,
-      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+      // تدعم البيئة التكرار "for of" ("for (const x of array) { ... }").
       forOf: true,
-      // The environment supports 'globalThis'.
+      // البيئة تدعم "globalThis".
       globalThis: true,
-      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+      // تدعم البيئة بناء الجملة ECMAScript Module لاستيراد ECMAScript modules (استيراد ... من '...').
       module: false,
-      // The environment supports object method shorthand ('{ module() {} }').
+      // تدعم البيئة اختصار أسلوب object ('{ module() {} }').
       methodShorthand: true,
-      // Determines if the node: prefix is generated for core module imports in environments that support it.
-      // This is only applicable to Webpack runtime code.
+      // يحدد ما إذا تم إنشاء بادئة `node:` لاستيرادات module الأساسية في البيئات التي تدعمها.
+      // ينطبق هذا فقط على كود webpack runtime.
       nodePrefixForCoreModules: false,
-      // The environment supports optional chaining ('obj?.a' or 'obj?.()').
+      // تدعم البيئة التسلسل الاختياري ("obj?.a" أو "obj?.()").
       optionalChaining: true,
-      // The environment supports template literals.
+      // تدعم البيئة القيم الحرفية للقالب.
       templateLiteral: true,
-      // The environment supports `import.meta.dirname` and `import.meta.filename`.
+      // تدعم البيئة `import.meta.dirname` و`import.meta.filename`.
       importMetaDirnameAndFilename: false,
     },
   },
@@ -532,9 +503,9 @@ export default {
 
 `string` `function (pathData, assetInfo) => string`
 
-This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
+يحدد هذا الخيار اسم كل output bundle. تتم كتابة bundle إلى الدليل المحدد بواسطة الخيار [`output.path`](#outputpath).
 
-For a single [`entry`](/configuration/entry-context/#entry) point, this can be a static name.
+بالنسبة لنقطة [`entry`](/configuration/entry-context/#entry) واحدة، يمكن أن يكون هذا اسمًا ثابتًا.
 
 **webpack.config.js**
 
@@ -547,9 +518,9 @@ export default {
 };
 ```
 
-However, when creating multiple bundles via more than one entry point, code splitting, or various plugins, you should use one of the following substitutions to give each bundle a unique name...
+ومع ذلك، عند إنشاء عدة bundles عبر أكثر من entry point، أو تقسيم الكود، أو plugins مختلف، يجب عليك استخدام أحد البدائل التالية لمنح كل bundle اسمًا فريدًا...
 
-Using entry name:
+باستخدام اسم entry:
 
 **webpack.config.js**
 
@@ -562,7 +533,7 @@ export default {
 };
 ```
 
-Using internal chunk id:
+باستخدام معرف chunk الداخلي:
 
 **webpack.config.js**
 
@@ -575,7 +546,7 @@ export default {
 };
 ```
 
-Using hashes generated from the generated content:
+استخدام التجزئة التي تم إنشاؤها من المحتوى الذي تم إنشاؤه:
 
 **webpack.config.js**
 
@@ -588,7 +559,7 @@ export default {
 };
 ```
 
-Combining multiple substitutions:
+الجمع بين البدائل المتعددة:
 
 **webpack.config.js**
 
@@ -601,7 +572,7 @@ export default {
 };
 ```
 
-Using the function to return the filename:
+استخدام function لإرجاع اسم الملف:
 
 **webpack.config.js**
 
@@ -615,72 +586,72 @@ export default {
 };
 ```
 
-Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than only setting this option.
+تأكد من قراءة [Caching الدليل](/guides/caching) للحصول على التفاصيل. هناك خطوات أكثر من مجرد تعيين هذا الخيار.
 
-Note this option is called filename but you are still allowed to use something like `'js/[name]/bundle.js'` to create a folder structure.
+لاحظ أن هذا الخيار يسمى اسم الملف ولكن لا يزال مسموحًا لك باستخدام شيء مثل `'js/[name]/bundle.js'` لإنشاء بنية المجلد.
 
-T> Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files, the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case, you would have to try the specific loader's available options.
+T> لاحظ أن هذا الخيار لا يؤثر على ملفات output الخاصة بـ chunks المحملة حسب الطلب. إنه يؤثر فقط على ملفات output التي تم تحميلها في البداية. بالنسبة لملفات chunk المحملة حسب الطلب، يتم استخدام الخيار [`output.chunkFilename`](#outputchunkfilename). ولا تتأثر أيضًا الملفات التي تم إنشاؤها بواسطة loaders. في هذه الحالة، سيكون عليك تجربة الخيارات المتاحة لـ loader المحددة.
 
-### Template strings
+### سلاسل القالب
 
-The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js)):
+البدائل التالية متاحة في سلاسل القالب (عبر webpack الداخلي [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js)):
 
-Substitutions available on Compilation-level:
+البدائل المتاحة على مستوى Compilation:
 
-| Template   | Description                  |
+| القالب   | الوصف                  |
 | ---------- | ---------------------------- |
-| [fullhash] | The full hash of compilation |
-| [hash]     | Same, but deprecated         |
+| [fullhash] | كامل hash من compilation |
+| [hash]     | نفسه، ولكن إهماله         |
 
-Substitutions available on Chunk-level:
+البدائل المتاحة على مستوى Chunk:
 
-| Template      | Description                                                                                                      |
+| القالب      | الوصف                                                                                                      |
 | ------------- | ---------------------------------------------------------------------------------------------------------------- |
-| [id]          | The ID of the chunk                                                                                              |
-| [name]        | The name of the chunk, if set, otherwise the ID of the chunk                                                     |
-| [chunkhash]   | The hash of the chunk, including all elements of the chunk                                                       |
-| [contenthash] | The hash of the chunk, including only elements of this content type (affected by `optimization.realContentHash`) |
+| [id]          | معرف chunk                                                                                              |
+| [الاسم]        | اسم chunk، إذا تم تعيينه، وإلا معرف chunk                                                     |
+| [chunkhash]   | hash لـ chunk، بما في ذلك جميع عناصر chunk                                                       |
+| [contenthash] | hash الخاص بـ chunk، بما في ذلك عناصر نوع المحتوى هذا فقط (المتأثرة بـ `optimization.realContentHash`) |
 
-Substitutions available on Module-level:
+البدائل المتاحة على مستوى Module:
 
-| Template      | Description                           |
+| القالب      | الوصف                           |
 | ------------- | ------------------------------------- |
-| [id]          | The ID of the module                  |
-| [moduleid]    | Same, but deprecated                  |
-| [hash]        | The hash of the module                |
-| [modulehash]  | Same, but deprecated                  |
-| [contenthash] | The hash of the content of the module |
+| [id]          | معرف module                  |
+| [مودوليد]    | نفسه، ولكن إهماله                  |
+| [hash]        | hash من module                |
+| [مودولهاش]  | نفسه، ولكن إهماله                  |
+| [contenthash] | hash لمحتوى module |
 
-Substitutions available on File-level:
+البدائل المتاحة على مستوى الملف:
 
-| Template   | Description                                                                       |
+| القالب   | الوصف                                                                       |
 | ---------- | --------------------------------------------------------------------------------- |
-| [file]     | Filename and path, without query or fragment                                      |
-| [query]    | Query with leading `?`                                                            |
-| [fragment] | Fragment with leading `#`                                                         |
-| [base]     | Only filename (including extensions), without path                                |
-| [filebase] | Same, but deprecated                                                              |
-| [path]     | Only path, without filename                                                       |
-| [name]     | Only filename without extension or path                                           |
-| [ext]      | Extension with leading `.` (not available for [output.filename](#outputfilename)) |
+| [ملف]     | اسم الملف والمسار، بدون استعلام أو جزء                                      |
+| [استعلام]    | الاستعلام باستخدام البادئة `?`                                                            |
+| [جزء] | جزء ذو مسافة بادئة `#`                                                         |
+| [قاعدة]     | اسم الملف فقط (بما في ذلك الامتدادات)، بدون مسار                                |
+| [قاعدة الملفات] | نفسه، ولكن إهماله                                                              |
+| [المسار]     | المسار الوحيد، بدون اسم الملف                                                       |
+| [الاسم]     | اسم الملف فقط بدون ملحق أو مسار                                           |
+| [تحويلة]      | الامتداد بالبادئة `.` (غير متوفر لـ [output.filename](#outputfilename)) |
 
-Substitutions available on URL-level:
+البدائل المتاحة على مستوى URL:
 
-| Template | Description |
+| القالب | الوصف |
 | -------- | ----------- |
-| [url]    | URL         |
+| [رابط]    | عنوان URL         |
 
-T> `[file]` equals `[path][base]`. `[base]` equals `[name][ext]`. The full path is `[path][name][ext][query][fragment]` or `[path][base][query][fragment]` or `[file][query][fragment]`.
+T> `[file]` يساوي `[path][base]`. `[base]` يساوي `[name][ext]`. المسار الكامل هو `[path][name][ext][query][fragment]` أو `[path][base][query][fragment]` أو `[file][query][fragment]`.
 
-The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
+يمكن تحديد طول التجزئات (`[hash]`، `[contenthash]` أو `[chunkhash]`) باستخدام `[hash:16]` (القيمة الافتراضية هي 20). وبدلاً من ذلك، حدد [`output.hashDigestLength`](#outputhashdigestlength) لتخصيص الطول بشكل عام.
 
-It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
+من الممكن تصفية استبدال العنصر النائب عندما تريد استخدام أحد العناصر النائبة في اسم الملف الفعلي. على سبيل المثال، بالنسبة إلى output ملف `[name].js`، يجب عليك الهروب من العنصر النائب `[name]` عن طريق إضافة خطوط مائلة عكسية بين الأقواس. بحيث يُنشئ `[\name\]` `[name]` بدلاً من استبداله بـ `name` الخاص بـ asset.
 
-Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
+على سبيل المثال: يُنشئ `[\id\]` `[id]` بدلاً من استبداله بـ `id`.
 
-If using a function for this option, the function will be passed an object containing data for the substitutions in the table above.
-Substitutions will be applied to the returned string too.
-The passed object will have this type: (properties available depending on context)
+في حالة استخدام function لهذا الخيار، سيتم تمرير function إلى object يحتوي على بيانات للبدائل في الجدول أعلاه.
+سيتم تطبيق البدائل على string الذي تم إرجاعه أيضًا.
+سيكون للـ object الذي تم تمريره هذا النوع: (الخصائص المتاحة حسب السياق)
 
 ```ts
 type PathData = {
@@ -711,17 +682,17 @@ type ModulePathData = {
 };
 ```
 
-T> In some contexts properties will use JavaScript code expressions instead of raw values. In these cases, the `WithLength` variant is available and should be used instead of slicing the original value.
+T> في بعض السياقات، ستستخدم الخصائص تعبيرات التعليمات البرمجية JavaScript بدلاً من القيم الأولية. في هذه الحالات، يكون المتغير `WithLength` متاحًا ويجب استخدامه بدلاً من تقسيم القيمة الأصلية.
 
 ## output.globalObject
 
 `string = 'self'`
 
-When targeting a library, especially when `library.type` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
+عند استهداف library، خاصة عندما يكون `library.type` هو `'umd'`، يشير هذا الخيار إلى ما هو object العام الذي سيتم استخدامه لتركيب library. لجعل UMD build متاحًا على كل من browsers وNode.js، اضبط خيار `output.globalObject` على `'this'`. الإعدادات الافتراضية هي `self` لـ targets المشابه للويب.
 
-The return value of your entry point will be assigned to the global object using the value of `output.library.name`. Depending on the value of the `type` option, the global object could change respectively, e.g., `self`, `global`, or `globalThis`.
+سيتم تعيين قيمة الإرجاع الخاصة بـ entry point إلى object العامة باستخدام قيمة `output.library.name`. اعتمادًا على قيمة الخيار `type`، يمكن أن يتغير object العام على التوالي، على سبيل المثال، `self`، `global`، أو `globalThis`.
 
-For example:
+على سبيل المثال:
 
 **webpack.config.js**
 
@@ -743,22 +714,22 @@ export default {
 
 `string = 'hex'`
 
-The encoding to use when generating the hash. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/buffer.html#buffers-and-character-encodings) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
+الترميز الذي سيتم استخدامه عند إنشاء hash. جميع الترميزات من Node.JS '[`hash.digest`](https://nodejs.org/api/buffer.html#buffers-and-character-encodings) مدعومة. قد يكون استخدام `'base64'` لأسماء الملفات مشكلة نظرًا لأنه يحتوي على الحرف `/` في أبجديته. وبالمثل، يمكن أن يحتوي `'latin1'` على أي حرف.
 
 <Badge text="5.104.0+" />
 
-In addition to the standard Node.js encodings, webpack also supports the following custom digest algorithms for generating shorter or URL-safe hash values:
+بالإضافة إلى ترميزات Node.js القياسية، يدعم webpack أيضًا خوارزميات الملخص المخصصة التالية لإنشاء قيم hash أقصر أو آمنة لعنوان URL:
 
-- `'base64url'` - URL-safe base64 encoding (RFC 4648), recommended for filenames
-- `'base62'` - Base62 encoding (0-9, A-Z, a-z)
-- `'base58'` - Base58 encoding (Bitcoin alphabet)
-- `'base52'` - Base52 encoding (A-Z, a-z)
-- `'base49'` - Base49 encoding
-- `'base36'` - Base36 encoding (0-9, A-Z)
-- `'base32'` - Base32 encoding (RFC 4648)
-- `'base25'` - Base25 encoding
+- `'base64url'` - ترميز base64 الآمن لعنوان URL (RFC 4648)، يوصى به لأسماء الملفات
+- `'base62'` - ترميز Base62 (0-9، A-Z، a-z)
+- `'base58'` - ترميز Base58 (أبجدية Bitcoin)
+- `'base52'` - ترميز Base52 (A-Z، a-z)
+- `'base49'` - ترميز Base49
+- `'base36'` - ترميز Base36 (0-9، A-Z)
+- `'base32'` - ترميز Base32 (RFC 4648)
+- `'base25'` - ترميز Base25
 
-These custom encodings are particularly useful for generating shorter hash values in filenames while maintaining URL safety.
+تعد هذه الترميزات المخصصة مفيدة بشكل خاص لإنشاء قيم hash أقصر في أسماء الملفات مع الحفاظ على أمان URL.
 
 **webpack.config.js**
 
@@ -774,15 +745,15 @@ export default {
 
 `number = 20`
 
-The prefix length of the hash digest to use.
+طول البادئة للملخص hash المطلوب استخدامه.
 
-T> For `webpack v5.65.0+`, `16` will be used as the default value for the `hashDigestLength` option when [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled.
+T> بالنسبة إلى `webpack v5.65.0+`، سيتم استخدام `16` كقيمة افتراضية للخيار `hashDigestLength` عند تمكين [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults).
 
 ## output.hashFunction
 
 `string = 'md4'` `function`
 
-The hashing algorithm to use. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
+خوارزمية التجزئة المستخدمة. جميع الوظائف من Node.JS '[`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) مدعومة. منذ `4.0.0-alpha2`، يمكن أن يكون `hashFunction` الآن مُنشئًا لـ hash function مخصص. يمكنك تقديم hash function غير مشفر لأسباب performance.
 
 ```js
 export default {
@@ -793,21 +764,21 @@ export default {
 };
 ```
 
-Make sure that the hashing function will have an `update` and `digest` methods available.
+تأكد من أن التجزئة function ستحتوي على طريقتين `update` و`digest` متاحة.
 
-T> Since `webpack v5.54.0+`, `hashFunction` supports `xxhash64` as a faster algorithm, which will be used as default when [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled.
+T> نظرًا لأن `webpack v5.54.0+`، فإن `hashFunction` يدعم `xxhash64` كخوارزمية أسرع، والتي سيتم استخدامها كخوارزمية افتراضية عند تمكين [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults).
 
 ## output.hashSalt
 
-An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding).
+ملح اختياري لتحديث hash عبر Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding).
 
 ## output.hotUpdateChunkFilename
 
 `string = '[id].[fullhash].hot-update.js'`
 
-Customize the filenames of hot update chunks. See [`output.filename`](#outputfilename) option for details on the possible values.
+قم بتخصيص أسماء ملفات التحديث الساخن chunks. راجع الخيار [`output.filename`](#outputfilename) للحصول على تفاصيل حول القيم المحتملة.
 
-The only placeholders allowed here are `[id]` and `[fullhash]`, the default being:
+العناصر النائبة الوحيدة المسموح بها هنا هي `[id]` و`[fullhash]`، والعنصر الافتراضي هو:
 
 **webpack.config.js**
 
@@ -820,31 +791,31 @@ export default {
 };
 ```
 
-T> Typically you don't need to change `output.hotUpdateChunkFilename`.
+T> عادةً لا تحتاج إلى تغيير `output.hotUpdateChunkFilename`.
 
 ## output.hotUpdateGlobal
 
 `string`
 
-Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading hot updates.
+يُستخدم فقط عند ضبط [`target`](/configuration/target/) على `'web'`، والذي يستخدم JSONP لتحميل التحديثات الساخنة.
 
-A JSONP function is used to asynchronously load hot-update chunks.
+يتم استخدام JSONP function لتحميل التحديث السريع chunks بشكل غير متزامن.
 
-For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
+للحصول على تفاصيل، راجع [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
 ## output.hotUpdateMainFilename
 
 `string = '[runtime].[fullhash].hot-update.json'` `function`
 
-Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
+تخصيص اسم ملف التحديث الساخن الرئيسي. `[fullhash]` و`[runtime]` متاحان كعنصر نائب.
 
-T> Typically you don't need to change `output.hotUpdateMainFilename`.
+T> عادةً لا تحتاج إلى تغيير `output.hotUpdateMainFilename`.
 
 ## output.iife
 
 `boolean = true`
 
-Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
+يخبر webpack بإضافة غلاف [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) حول الكود المنبعث.
 
 ```js
 export default {
@@ -861,7 +832,7 @@ export default {
 
 `boolean = false`
 
-Hide warnings from the browser console in production. This option does not affect the terminal/console output.
+إخفاء التحذيرات من وحدة التحكم browser في الإنتاج. لا يؤثر هذا الخيار على الوحدة الطرفية/وحدة التحكم output.
 
 **webpack.config.js**
 
@@ -878,7 +849,7 @@ export default {
 
 `string = 'import'`
 
-The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+اسم الموطن الأصلي `import()` function. يمكن استخدامها للحشو المتعدد، على سبيل المثال، مع [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
 
 **webpack.config.js**
 
@@ -895,7 +866,7 @@ export default {
 
 `string`
 
-The name of the native `import.meta` object (can be exchanged for a polyfill).
+الاسم الأصلي `import.meta` object (يمكن استبداله بـ polyfill).
 
 **webpack.config.js**
 
@@ -910,11 +881,11 @@ export default {
 
 ## output.library
 
-Output a library exposing the exports of your entry point.
+Output a library يعرض صادرات entry point.
 
-- Type: `string | string[] | object`
+- النوع: `string | string[] | object`
 
-Let's take a look at an example.
+دعونا نلقي نظرة على مثال.
 
 **webpack.config.js**
 
@@ -928,7 +899,7 @@ export default {
 };
 ```
 
-Say you have exported a function in your `src/index.js` entry:
+لنفترض أنك قمت بتصدير function في `src/index.js` entry:
 
 ```js
 export function hello(name) {
@@ -936,7 +907,7 @@ export function hello(name) {
 }
 ```
 
-Now the variable `MyLibrary` will be bound with the exports of your entry file, and here's how to consume the webpack bundled library:
+الآن سيتم ربط المتغير `MyLibrary` بصادرات ملف entry الخاص بك، وإليك كيفية استهلاك webpack المجمعة library:
 
 ```html
 <script src="https://example.org/path/to/my-library.js"></script>
@@ -945,9 +916,9 @@ Now the variable `MyLibrary` will be bound with the exports of your entry file, 
 </script>
 ```
 
-In the above example, we're passing a single entry file to `entry`, however, webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, or an `object`.
+في المثال أعلاه، نقوم بتمرير ملف entry واحد إلى `entry`، ومع ذلك، يمكن أن يقبل webpack [العديد من أنواع entry point](/configuration/entry-context/#entry)، على سبيل المثال، `array`، أو `object`.
 
-1. If you provide an `array` as the `entry` point, only the last one in the array will be exposed.
+1. إذا قمت بتوفير `array` كنقطة `entry`، فسيتم عرض النقطة الأخيرة فقط في array.
 
    ```js
    export default {
@@ -959,7 +930,7 @@ In the above example, we're passing a single entry file to `entry`, however, web
    };
    ```
 
-2. If an `object` is provided as the `entry` point, all entries can be exposed using the `array` syntax of `library`:
+2. إذا تم توفير `object` كنقطة `entry`، فيمكن كشف جميع الإدخالات باستخدام بناء جملة `array` لـ `library`:
 
    ```js
    export default {
@@ -975,7 +946,7 @@ In the above example, we're passing a single entry file to `entry`, however, web
    };
    ```
 
-   Assuming that both `a.js` and `b.js` export a function `hello`, here's how to consume the libraries:
+بافتراض أن كلا من `a.js` و`b.js` يقومان بتصدير function `hello`، فإليك كيفية استهلاك المكتبات:
 
    ```html
    <script src="https://example.org/path/to/a.js"></script>
@@ -986,9 +957,9 @@ In the above example, we're passing a single entry file to `entry`, however, web
    </script>
    ```
 
-   See [this example](https://github.com/webpack/webpack/tree/main/examples/multi-part-library) for more.
+راجع [هذا المثال](https://github.com/webpack/webpack/tree/main/examples/multi-part-library) للمزيد.
 
-   Note that the above configuration won't work as expected if you're going to configure library options per entry point. Here is how to do it [under each of your entries](/concepts/entry-points/#entrydescription-object):
+لاحظ أن التخصيص أعلاه لن يعمل كما هو متوقع إذا كنت ستقوم بتخصيص خيارات library لكل entry point. إليك كيفية القيام بذلك [تحت كل إدخال من إدخالاتك](/concepts/entry-points/#entrydescription-object):
 
    ```js
    export default {
@@ -997,7 +968,7 @@ In the above example, we're passing a single entry file to `entry`, however, web
        main: {
          import: "./src/index.js",
          library: {
-           // all options under `output.library` can be used here
+           // يمكن استخدام جميع الخيارات ضمن `output.library` هنا
            name: "MyLibrary",
            type: "umd",
            umdNamedDefine: true,
@@ -1018,9 +989,9 @@ In the above example, we're passing a single entry file to `entry`, however, web
 
 <Badge text="5.78.0+" />
 
-Use a container(defined in global space) for calling `define`/`require` functions in an AMD module.
+استخدم حاوية (محددة في المساحة العالمية) للاتصال بوظائف `define`/`require` في AMD module.
 
-W> Note that the value of `amdContainer` **must be** set as a global variable.
+W> لاحظ أنه يجب تعيين قيمة `amdContainer` **كمتغير عام.
 
 ```js
 export default {
@@ -1034,7 +1005,7 @@ export default {
 };
 ```
 
-Which will result in the following bundle:
+مما سيؤدي إلى ما يلي bundle:
 
 ```js
 globalThis.clientContainer.define(/* define args */); // or 'amd-require' window['clientContainer'].require(/*require args*/);
@@ -1053,9 +1024,9 @@ export default {
 };
 ```
 
-Specify a name for the library.
+حدد اسمًا لـ library.
 
-- Type:
+- النوع:
 
   ```ts
   string | string[] | {amd?: string, commonjs?: string, root?: string | string[]}
@@ -1063,19 +1034,19 @@ Specify a name for the library.
 
 ### output.library.type
 
-Configure how the library will be exposed.
+قم بتخصيص كيفية عرض library.
 
-- Type: `string`
+- النوع: `string`
 
-  Types included by default are `'var'`, `'module'`, `'modern-module'`, `'assign'`, `'assign-properties'`, `'this'`, `'window'`, `'self'`, `'global'`, `'commonjs'`, `'commonjs2'`, `'commonjs-module'`, `'commonjs-static'`, `'amd'`, `'amd-require'`, `'umd'`, `'umd2'`, `'jsonp'` and `'system'`, but others might be added by plugins.
+الأنواع المضمنة افتراضيًا هي `'var'`، `'module'`، `'modern-module'`، `'assign'`، `'assign-properties'`، `'this'`، `'window'`، `'self'`، `'global'`، `'commonjs'`، `'commonjs2'`، `'commonjs-module'`، `'commonjs-static'`، `'amd'`، `'amd-require'`، `'umd'`، `'umd2'`، `'jsonp'` و`'system'`، ولكن يمكن إضافة أشياء أخرى بواسطة plugins.
 
-For the following examples, we'll use `_entry_return_` to indicate the values returned by the entry point.
+بالنسبة للأمثلة التالية، سنستخدم `_entry_return_` للإشارة إلى القيم التي يتم إرجاعها بواسطة entry point.
 
-#### Expose a Variable
+#### فضح متغير
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
+تقوم هذه الخيارات بتعيين القيمة المرجعة لـ entry point (على سبيل المثال، مهما كان entry point الذي تم تصديره) إلى الاسم المقدم بواسطة [`output.library.name`](#outputlibraryname) في أي نطاق تم تضمين bundle فيه.
 
-##### type: 'var'
+##### النوع: "فار"
 
 ```js
 export default {
@@ -1089,16 +1060,16 @@ export default {
 };
 ```
 
-When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+عندما يتم تحميل library، سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى متغير:
 
 ```js
 const MyLibrary = _entry_return_;
 
-// In a separate script with `MyLibrary` loaded…
+// في برنامج نصي منفصل مع تحميل `MyLibrary`...
 MyLibrary.doSomething();
 ```
 
-##### type: 'assign'
+##### النوع: "تعيين"
 
 ```js
 export default {
@@ -1112,15 +1083,15 @@ export default {
 };
 ```
 
-This will generate an implied global which has the potential to reassign an existing value (use with caution):
+سيؤدي هذا إلى إنشاء عمومية ضمنية لديها القدرة على إعادة تعيين قيمة موجودة (استخدمها بحذر):
 
 ```js
 MyLibrary = _entry_return_;
 ```
 
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+انتبه إلى أنه إذا لم يتم تعريف `MyLibrary` مسبقًا، فسيتم تعيين library في النطاق العام.
 
-##### type: 'assign-properties'
+##### النوع: 'assign-properties'
 
 <Badge text="5.16.0+" />
 
@@ -1136,29 +1107,29 @@ export default {
 };
 ```
 
-Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse `MyLibrary` if it already exists:
+يشبه [`type: 'assign'`](#type-assign) ولكنه خيار أكثر أمانًا لأنه سيعيد استخدام `MyLibrary` إذا كان موجودًا بالفعل:
 
 ```js
-// only create MyLibrary if it doesn't exist
+// قم بإنشاء MyLibrary فقط إذا لم يكن موجودًا
 MyLibrary = typeof MyLibrary === "undefined" ? {} : MyLibrary;
-// then copy the return value to MyLibrary
-// similarly to what Object.assign does
+// ثم انسخ القيمة المرجعة إلى MyLibrary
+// بشكل مشابه لما يفعله Object.assistant
 
-// for instance, you export a `hello` function in your entry as follow
+// على سبيل المثال، يمكنك تصدير `hello` function في entry الخاص بك على النحو التالي
 export function hello(name) {
   console.log(`Hello ${name}`);
 }
 
-// In another script with MyLibrary loaded
-// you can run `hello` function like so
+// في برنامج نصي آخر مع MyLibrary تحميلها
+// يمكنك تشغيل `hello` function بهذه الطريقة
 MyLibrary.hello("World");
 ```
 
-#### Expose Via Object Assignment
+#### فضح عبر Object المهمة
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by [`output.library.name`](#outputlibraryname).
+تقوم هذه الخيارات بتعيين القيمة المرجعة لـ entry point (على سبيل المثال، مهما كان entry point الذي تم تصديره) إلى object محدد تحت الاسم المحدد بواسطة [`output.library.name`](#outputlibraryname).
 
-##### type: 'this'
+##### اكتب: "هذا"
 
 ```js
 export default {
@@ -1172,17 +1143,17 @@ export default {
 };
 ```
 
-The **return value of your entry point** will be assigned to `this` under the property named by `output.library.name`. The meaning of `this` is up to you:
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `this` ضمن الخاصية المسماة بواسطة `output.library.name`. معنى `this` متروك لك:
 
 ```js
 this.MyLibrary = _entry_return_;
 
-// In a separate script...
+// في نص منفصل...
 this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // if `this` is window
 ```
 
-##### type: 'window'
+##### النوع: "نافذة"
 
 ```js
 export default {
@@ -1196,7 +1167,7 @@ export default {
 };
 ```
 
-The **return value of your entry point** will be assigned to the `window` object using the `output.library.name` value.
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `window` object باستخدام القيمة `output.library.name`.
 
 ```js
 globalThis.MyLibrary = _entry_return_;
@@ -1204,7 +1175,7 @@ globalThis.MyLibrary = _entry_return_;
 globalThis.MyLibrary.doSomething();
 ```
 
-##### type: 'global'
+##### النوع: "عالمي"
 
 ```js
 export default {
@@ -1218,7 +1189,7 @@ export default {
 };
 ```
 
-The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Depending on the [`target`](/configuration/target/) value, the global object could change respectively, e.g., `self`, `global` or `globalThis`.
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى object العامة باستخدام القيمة `output.library.name`. اعتمادًا على قيمة [`target`](/configuration/target/)، يمكن أن تتغير القيمة العامة object على التوالي، على سبيل المثال، `self` أو `global` أو `globalThis`.
 
 ```js
 globalThis.MyLibrary = _entry_return_;
@@ -1226,7 +1197,7 @@ globalThis.MyLibrary = _entry_return_;
 globalThis.MyLibrary.doSomething();
 ```
 
-##### type: 'commonjs'
+##### النوع: "كومونجس"
 
 ```js
 export default {
@@ -1240,7 +1211,7 @@ export default {
 };
 ```
 
-The **return value of your entry point** will be assigned to the `exports` object using the `output.library.name` value. As the name implies, this is used in CommonJS environments.
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `exports` object باستخدام القيمة `output.library.name`. كما يوحي الاسم، يتم استخدام هذا في بيئات CommonJS.
 
 ```js
 exports.MyLibrary = _entry_return_;
@@ -1248,13 +1219,13 @@ exports.MyLibrary = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-W> Note that not setting a `output.library.name` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
+W> لاحظ أن عدم تعيين `output.library.name` سيؤدي إلى تعيين جميع الخصائص التي يتم إرجاعها بواسطة entry point إلى object المحدد؛ لا توجد عمليات فحص ضد أسماء الممتلكات الموجودة.
 
-#### Module Definition Systems
+#### Module أنظمة التعريف
 
-These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library.name` option will take on a different meaning under the following `output.library.type` options.
+ستؤدي هذه الخيارات إلى bundle الذي يأتي مع رأس كامل لضمان التوافق مع أنظمة module المختلفة. سيأخذ خيار `output.library.name` معنى مختلفًا ضمن خيارات `output.library.type` التالية.
 
-##### type: 'module'
+##### النوع: 'module'
 
 ```js
 export default {
@@ -1264,18 +1235,18 @@ export default {
   },
   output: {
     library: {
-      // do not specify a `name` here
+      // لا تحدد `name` هنا
       type: "module",
     },
   },
 };
 ```
 
-Output ES Module.
+Output كـ ES module.
 
-However this feature is still experimental and not fully supported yet, so make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand. In addition, you can track the development progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+ومع ذلك، لا تزال هذه الميزة تجريبية وغير مدعومة بشكل كامل حتى الآن، لذا تأكد من تمكين [experiments.outputModule](/configuration/experiments/) مسبقًا. بالإضافة إلى ذلك، يمكنك تتبع تقدم التطوير في [هذا الموضوع](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
-##### type: 'modern-module'
+##### النوع: "حديث-module"
 
 <Badge text="v5.93.0+" />
 
@@ -1287,32 +1258,32 @@ export default {
   },
   output: {
     library: {
-      // do not specify a `name` here
+      // لا تحدد `name` هنا
       type: "modern-module",
     },
   },
 };
 ```
 
-This configuration generates tree-shakable output for ES Modules.
+ينشئ هذا التخصيص output شجرة قابلة للاهتزاز لـ ES Modules.
 
-However this feature is still experimental and not fully supported yet, so make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
+ومع ذلك، لا تزال هذه الميزة تجريبية وغير مدعومة بشكل كامل حتى الآن، لذا تأكد من تمكين [experiments.outputModule](/configuration/experiments/) مسبقًا.
 
-##### type: 'commonjs2'
+##### النوع: "commonjs2"
 
 ```js
 export default {
   // …
   output: {
     library: {
-      // note there's no `name` here
+      // لاحظ أنه لا يوجد `name` هنا
       type: "commonjs2",
     },
   },
 };
 ```
 
-The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in Node.js (CommonJS) environments:
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `module.exports`. كما يوحي الاسم، يُستخدم هذا في بيئات Node.js (CommonJS):
 
 ```js
 export default _entry_return_;
@@ -1320,15 +1291,15 @@ export default _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-If we specify `output.library.name` with `type: commonjs2`, the return value of your entry point will be assigned to the `module.exports.[output.library.name]`.
+إذا قمنا بتحديد `output.library.name` مع `type: commonjs2`، فسيتم تعيين القيمة المرجعة لـ entry point إلى `module.exports.[output.library.name]`.
 
-T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
+T> هل تتساءل عن الفرق بين CommonJS وCommonJS2؟ على الرغم من أنها متشابهة، إلا أن هناك بعض الاختلافات الدقيقة بينهما والتي لا تكون ذات صلة عادةً بسياق webpack. (لمزيد من التفاصيل، يرجى [قراءة هذا العدد](https://github.com/webpack/webpack/issues/1114).)
 
-##### type: 'commonjs-module'
+##### النوع: "commonjs-module"
 
-`commonjs-module` is equivalent to [`commonjs2`](#type-commonjs2). We may remove `commonjs-module` in future versions.
+`commonjs-module` يعادل [`commonjs2`](#type-commonjs2). قد نقوم بإزالة `commonjs-module` في الإصدارات المستقبلية.
 
-##### type: 'commonjs-static'
+##### النوع: "commonjs-static"
 
 <Badge text="5.66.0+" />
 
@@ -1337,16 +1308,16 @@ export default {
   // …
   output: {
     library: {
-      // note there's no `name` here
+      // لاحظ أنه لا يوجد `name` هنا
       type: "commonjs-static",
     },
   },
 };
 ```
 
-Individual exports will be set as properties on `module.exports`. The "static" in the name refers to the output being statically analysable, and thus named exports are importable into ESM via Node.js:
+سيتم تعيين الصادرات الفردية كخصائص على `module.exports`. تشير كلمة "ثابت" في الاسم إلى أن output قابل للتحليل بشكل ثابت، وبالتالي فإن الصادرات المسماة قابلة للاستيراد إلى ESM عبر Node.js:
 
-Input:
+الإدخال:
 
 ```js
 export function doSomething() {}
@@ -1362,27 +1333,27 @@ function doSomething() {}
 exports.doSomething = __webpack_exports__.doSomething;
 ```
 
-Consumption (CommonJS):
+الاستهلاك (CommonJS):
 
 ```js
 const { doSomething } = require("./output.cjs"); // doSomething => [Function: doSomething]
 ```
 
-Consumption (ESM):
+الاستهلاك (ESM):
 
 ```js
 import { doSomething } from "./output.cjs"; // doSomething => [Function: doSomething]
 ```
 
-T> This is useful when source code is written in ESM and the output should be compatible with both CJS and ESM. For further details, please [read this issue](https://github.com/webpack/webpack/issues/14998) or [this article](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed) (specifically, [this section](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed#publish-only-a-cjs-distribution-with-property-exports)).
+T> يكون هذا مفيدًا عند كتابة كود المصدر باللغة ESM ويجب أن يكون output متوافقًا مع كل من CJS وESM. لمزيد من التفاصيل، يرجى [قراءة هذه المشكلة](https://github.com/webpack/webpack/issues/14998) أو [هذه المقالة](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed) (على وجه التحديد، [هذا القسم](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed#publish-only-a-cjs-distribution-with-property-exports)).
 
-##### type: 'amd'
+##### النوع: "أيه إم دي"
 
-This will expose your library as an AMD module.
+سيؤدي هذا إلى كشف library باعتباره AMD module.
 
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as to `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
+AMD modules يتطلب تعريف entry chunk (على سبيل المثال، أول script الذي تم تحميله بواسطة علامة `<script>`) بخصائص محددة، مثل `define` و`require` والتي يتم توفيرها عادةً بواسطة RequireJS أو أي loaders متوافق (مثل almond). وإلا فإن تحميل AMD bundle الناتج مباشرة سيؤدي إلى خطأ مثل `define is not defined`.
 
-With the following configuration...
+بالتخصيص التالي...
 
 ```js
 export default {
@@ -1396,29 +1367,29 @@ export default {
 };
 ```
 
-The generated output will be defined with the name `"MyLibrary"`, i.e.:
+سيتم تعريف output الذي تم إنشاؤه بالاسم `"MyLibrary"`، أي:
 
 ```js
 define("MyLibrary", [], () => _entry_return_);
 ```
 
-The bundle can be included as part of a script tag, and the bundle can be invoked like so:
+يمكن تضمين bundle كجزء من `<script>` tag، ويمكن استدعاء bundle كما يلي:
 
 ```js
 require(["MyLibrary"], (MyLibrary) => {
-  // Do something with the library...
+  // افعل شيئًا باستخدام library...
 });
 ```
 
-If `output.library.name` is undefined, the following is generated instead.
+إذا كان `output.library.name` غير محدد، فسيتم إنشاء ما يلي بدلاً من ذلك.
 
 ```js
 define(() => _entry_return_);
 ```
 
-This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
+لن يعمل bundle كما هو متوقع، أو لن يعمل على الإطلاق (في حالة almond loader) إذا تم تحميله مباشرة بعلامة `<script>`. سيعمل فقط من خلال RequireJS غير المتزامن المتوافق module loader من خلال المسار الفعلي لهذا الملف، لذلك في هذه الحالة، قد يصبح `output.path` و`output.filename` مهمًا لهذا الإعداد المحدد إذا تم عرضهما مباشرة على server.
 
-##### type: 'amd-require'
+##### النوع: "يتطلب AMD"
 
 ```js
 export default {
@@ -1432,17 +1403,17 @@ export default {
 };
 ```
 
-This packages your output with an immediately executed AMD `require(dependencies, factory)` wrapper.
+هذا packages الخاص بك output مع غلاف AMD `require(dependencies, factory)` الذي تم تنفيذه على الفور.
 
-The `'amd-require'` type allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` type, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
+يسمح النوع `'amd-require'` باستخدام AMD dependencies دون الحاجة إلى استدعاء لاحق منفصل. كما هو الحال مع النوع `'amd'`، يعتمد هذا على توفر [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) المناسب في البيئة التي يتم فيها تحميل webpack output.
 
-With this type, the library name can't be used.
+مع هذا النوع، لا يمكن استخدام الاسم library.
 
-##### type: 'umd'
+##### النوع: "أومد"
 
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD, and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
+يؤدي هذا إلى كشف library الخاص بك تحت جميع تعريفات module، مما يسمح له بالعمل مع CommonJS، AMD، وكمتغير عام. ألقِ نظرة على [UMD المستودع](https://github.com/umdjs/umd) لمعرفة المزيد.
 
-In this case, you need the `library.name` property to name your module:
+في هذه الحالة، أنت بحاجة إلى الخاصية `library.name` لتسمية module الخاص بك:
 
 ```js
 export default {
@@ -1456,7 +1427,7 @@ export default {
 };
 ```
 
-And finally the output is:
+وأخيرًا output هو:
 
 ```js
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1472,7 +1443,7 @@ And finally the output is:
 })(globalThis, () => _entry_return_);
 ```
 
-Note that omitting `library.name` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
+لاحظ أن حذف `library.name` سيؤدي إلى تعيين كافة الخصائص التي يتم إرجاعها بواسطة entry point مباشرة إلى الجذر object، كما هو موثق ضمن [object قسم التعيين](#expose-via-object-assignment). مثال:
 
 ```js
 export default {
@@ -1483,7 +1454,7 @@ export default {
 };
 ```
 
-The output will be:
+سيكون output:
 
 ```js
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1498,7 +1469,7 @@ The output will be:
 })(globalThis, () => _entry_return_);
 ```
 
-You may specify an object for `library.name` for differing names per targets:
+يمكنك تحديد object لـ `library.name` للأسماء المختلفة لكل targets:
 
 ```js
 export default {
@@ -1516,11 +1487,11 @@ export default {
 };
 ```
 
-##### type: 'system'
+##### النوع: "النظام"
 
-This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+سيؤدي هذا إلى كشف library كـ [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. تم إصدار هذه الميزة لأول مرة في [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
 
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
+يتطلب النظام modules وجود global variable `System` في browser عند تنفيذ webpack bundle. يتيح لك التجميع إلى تنسيق `System.register` إمكانية `System.import('/bundle.js')` بدون تخصيص إضافي ويتم تحميل webpack bundle في سجل النظام module.
 
 ```js
 export default {
@@ -1543,7 +1514,7 @@ System.register([], (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) => ({
 }));
 ```
 
-By adding `output.library.name` to configuration in addition to having `output.library.type` set to `system`, the output bundle will have the library name as an argument to `System.register`:
+بإضافة `output.library.name` إلى التخصيص بالإضافة إلى تعيين `output.library.type` على `system`، سيكون للـ output bundle اسم library كوسيطة لـ `System.register`:
 
 ```js
 System.register(
@@ -1557,9 +1528,9 @@ System.register(
 );
 ```
 
-#### Other Types
+#### أنواع أخرى
 
-##### type: 'jsonp'
+##### النوع: "jsonp"
 
 ```js
 export default {
@@ -1573,7 +1544,7 @@ export default {
 };
 ```
 
-This will wrap the return value of your entry point into a jsonp wrapper.
+سيؤدي هذا إلى تغليف القيمة المرجعة لـ entry point في غلاف jsonp.
 
 {/* eslint-disable new-cap */}
 
@@ -1581,17 +1552,17 @@ This will wrap the return value of your entry point into a jsonp wrapper.
 MyLibrary(_entry_return_);
 ```
 
-The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+سيتم تحديد dependencies لـ library من خلال التخصيص [`externals`](/configuration/externals/).
 
-T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library.name` as well as `output.library.type`.
+T> اقرأ دليل [دليل مكتبات التأليف](/guides/author-libraries/) لمزيد من المعلومات حول `output.library.name` بالإضافة إلى `output.library.type`.
 
 ### output.library.export
 
-Specify which export should be exposed as a library.
+حدد التصدير الذي يجب عرضه كـ library.
 
-- Type: `string | string[]`
+- النوع: `string | string[]`
 
-It is `undefined` by default, which will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using [`output.library.type: 'var'`](#type-var).
+إنه `undefined` افتراضيًا، والذي سيقوم بتصدير (مساحة الاسم) بالكامل object. توضح الأمثلة أدناه تأثير هذا التخصيص عند استخدام [`output.library.type: 'var'`](#type-var).
 
 ```js
 export default {
@@ -1605,14 +1576,14 @@ export default {
 };
 ```
 
-The default export of your entry point will be assigned to the library name:
+سيتم تعيين التصدير الافتراضي لـ entry point إلى الاسم library:
 
 ```js
-// if your entry has a default export
+// إذا كان entry الخاص بك يحتوي على تصدير افتراضي
 const MyLibrary = _entry_return_.default;
 ```
 
-You can pass an array to `output.library.export` as well, it will be interpreted as a path to a module to be assigned to the library name:
+يمكنك تمرير array إلى `output.library.export` أيضًا، وسيتم تفسيره على أنه مسار إلى module ليتم تخصيصه لاسم library:
 
 ```js
 export default {
@@ -1626,7 +1597,7 @@ export default {
 };
 ```
 
-And here's the library code:
+وإليك الكود library:
 
 ```js
 const MyLibrary = _entry_return_.default.subModule;
@@ -1634,11 +1605,11 @@ const MyLibrary = _entry_return_.default.subModule;
 
 ### output.library.auxiliaryComment
 
-Add a comment in the UMD wrapper.
+أضف تعليقًا في غلاف UMD.
 
-- Type: `string | { amd?: string, commonjs?: string, commonjs2?: string, root?: string }`
+- النوع: `string | { amd?: string, commonjs?: string, commonjs2?: string, root?: string }`
 
-To insert the same comment for each `umd` type, set `auxiliaryComment` to a string:
+لإدراج نفس التعليق لكل نوع `umd`، اضبط `auxiliaryComment` على string:
 
 ```js
 export default {
@@ -1654,30 +1625,30 @@ export default {
 };
 ```
 
-which will yield the following:
+وسينتج عنه ما يلي:
 
 ```js
 (function webpackUniversalModuleDefinition(root, factory) {
-  // Test Comment
+  // تعليق الاختبار
   if (typeof exports === "object" && typeof module === "object") {
     module.exports = factory();
   }
-  // Test Comment
+  // تعليق الاختبار
   else if (typeof define === "function" && define.amd) {
     define([], factory);
   }
-  // Test Comment
+  // تعليق الاختبار
   else if (typeof exports === "object") {
     exports.MyLibrary = factory();
   }
-  // Test Comment
+  // تعليق الاختبار
   else {
     root.MyLibrary = factory();
   }
 })(globalThis, () => _entry_return_);
 ```
 
-For fine-grained control, pass an object:
+للتحكم الدقيق، مرّر object:
 
 ```js
 export default {
@@ -1702,7 +1673,7 @@ export default {
 
 `boolean`
 
-When using `output.library.type: "umd"`, setting `output.library.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise, an anonymous `define` is used.
+عند استخدام `output.library.type: "umd"`، سيؤدي ضبط `output.library.umdNamedDefine` إلى `true` إلى تسمية AMD module لـ UMD build. وبخلاف ذلك، يتم استخدام `define` مجهول.
 
 ```js
 export default {
@@ -1717,7 +1688,7 @@ export default {
 };
 ```
 
-The AMD module will be:
+AMD module سيكون:
 
 ```js
 define("MyLibrary", [], factory);
@@ -1725,34 +1696,34 @@ define("MyLibrary", [], factory);
 
 ## output.libraryExport
 
-W> We might drop support for this, so prefer to use [output.library.export](#outputlibraryexport) which works the same as `libraryExport`.
+W> قد نتوقف عن دعم هذا الأمر، لذا نفضل استخدام [output.library.export](#outputlibraryexport) الذي يعمل بنفس طريقة `libraryExport`.
 
 `string` `[string]`
 
-Configure which module or modules will be exposed via the `libraryTarget`. It is `undefined` by default, same behaviour will be applied if you set `libraryTarget` to an empty string e.g. `''` it will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using `libraryTarget: 'var'`.
+قم بتخصيص module أو modules الذي سيتم عرضه عبر `libraryTarget`. إنه `undefined` بشكل افتراضي، وسيتم تطبيق نفس السلوك إذا قمت بتعيين `libraryTarget` إلى string فارغ، على سبيل المثال، `''` سيتم تصدير (مساحة الاسم) بالكامل object. توضح الأمثلة أدناه تأثير هذا التخصيص عند استخدام `libraryTarget: 'var'`.
 
-The following configurations are supported:
+يتم دعم التخصيصات التالية:
 
-`libraryExport: 'default'` - The **default export of your entry point** will be assigned to the library target:
+`libraryExport: 'default'` - سيتم تعيين **التصدير الافتراضي لـ entry point** إلى library target:
 
 ```js
-// if your entry has a default export of `MyDefaultModule`
+// إذا كان entry يحتوي على تصدير افتراضي لـ `MyDefaultModule`
 const MyDefaultModule = _entry_return_.default;
 ```
 
-`libraryExport: 'MyModule'` - The **specified module** will be assigned to the library target:
+`libraryExport: 'MyModule'` - سيتم تعيين **module** المحدد إلى library target:
 
 ```js
 const { MyModule } = _entry_return_;
 ```
 
-`libraryExport: ['MyModule', 'MySubModule']` - The array is interpreted as a **path to a module** to be assigned to the library target:
+`libraryExport: ['MyModule', 'MySubModule']` - يتم تفسير array على أنه **مسار إلى module** ليتم تخصيصه إلى library target:
 
 ```js
 const { MySubModule } = _entry_return_.MyModule;
 ```
 
-With the `libraryExport` configurations specified above, the resulting libraries could be utilized as such:
+مع تخصيصات `libraryExport` المحددة أعلاه، يمكن استخدام المكتبات الناتجة على هذا النحو:
 
 ```js
 MyDefaultModule.doSomething();
@@ -1764,72 +1735,72 @@ MySubModule.doSomething();
 
 `string = 'var'`
 
-W> Please use [`output.library.type`](#outputlibrarytype) instead as we might drop support for `output.libraryTarget` in the future.
+W> الرجاء استخدام [`output.library.type`](#outputlibrarytype) بدلاً من ذلك لأننا قد نتوقف عن دعم `output.libraryTarget` في المستقبل.
 
-Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library`](#outputlibrary). For the following examples, it is assumed that the value of [`output.library`](#outputlibrary) is configured as `MyLibrary`.
+قم بتخصيص كيفية عرض library. يمكن استخدام أي من الخيارات التالية. يرجى ملاحظة أن هذا الخيار يعمل مع القيمة المخصصة لـ [`output.library`](#outputlibrary). بالنسبة للأمثلة التالية، من المفترض أن قيمة [`output.library`](#outputlibrary) تم تخصيصها كـ `MyLibrary`.
 
-T> Note that `_entry_return_` in the example code below is the value returned by the entry point. In the bundle itself, it is the output of the function that is generated by webpack from the entry point.
+T> لاحظ أن `_entry_return_` في رمز المثال أدناه هي القيمة التي يتم إرجاعها بواسطة entry point. في bundle نفسه، يتم إنشاء output لـ function بواسطة webpack من entry point.
 
-### Expose a Variable
+### فضح متغير
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library`](#outputlibrary) at whatever scope the bundle was included at.
+تقوم هذه الخيارات بتعيين القيمة المرجعة لـ entry point (على سبيل المثال، مهما كان entry point الذي تم تصديره) إلى الاسم المقدم بواسطة [`output.library`](#outputlibrary) في أي نطاق تم تضمين bundle فيه.
 
-#### libraryTarget: 'var'
+#### libraryTarget: "فار"
 
-W> Prefer to use [`output.library.type: 'var'`](#type-var).
+W> يُفضل استخدام [`output.library.type: 'var'`](#type-var).
 
-When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+عندما يتم تحميل library، سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى متغير:
 
 ```js
 const MyLibrary = _entry_return_;
 
-// In a separate script...
+// في نص منفصل...
 MyLibrary.doSomething();
 ```
 
-#### libraryTarget: 'assign'
+#### libraryTarget: "تعيين"
 
-W> Prefer to use [`output.library.type: 'assign'`](#type-assign).
+W> يُفضل استخدام [`output.library.type: 'assign'`](#type-assign).
 
-This will generate an implied global which has the potential to reassign an existing value (use with caution):
+سيؤدي هذا إلى إنشاء عمومية ضمنية لديها القدرة على إعادة تعيين قيمة موجودة (استخدمها بحذر):
 
 ```js
 MyLibrary = _entry_return_;
 ```
 
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in the global scope.
+انتبه إلى أنه إذا لم يتم تعريف `MyLibrary` مسبقًا، فسيتم تعيين library في النطاق العام.
 
-#### libraryTarget: 'assign-properties'
+#### libraryTarget: 'تعيين الخصائص'
 
 <Badge text="5.16.0+" />
 
-W> Prefer to use [output.library.type: 'assign-properties'`](#type-assign-properties).
+W> يُفضل استخدام [output.library.type: 'تعيين الخصائص''](#type-assign-properties).
 
-Copy the return value to a target object if it exists, otherwise create the target object first:
+انسخ القيمة المرجعة إلى target object إذا كانت موجودة، وإلا قم بإنشاء target object أولاً:
 
 ```js
-// create the target object if it doesn't exist
+// أنشئ target object إذا لم يكن موجودًا
 MyLibrary = typeof MyLibrary === "undefined" ? {} : MyLibrary;
-// then copy the return value to MyLibrary
-// similarly to what Object.assign does
+// ثم انسخ القيمة المرجعة إلى MyLibrary
+// بشكل مشابه لما يفعله Object.assistant
 
-// for instance, you export a `hello` function in your entry as follow
+// على سبيل المثال، يمكنك تصدير `hello` function في entry الخاص بك على النحو التالي
 export function hello(name) {
   console.log(`Hello ${name}`);
 }
 
-// In another script running MyLibrary
-// you can run `hello` function like so
+// في برنامج نصي آخر يقوم بتشغيل MyLibrary
+// يمكنك تشغيل `hello` function بهذه الطريقة
 MyLibrary.hello("World");
 ```
 
-W> An empty string for the [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
+W> إن string الفارغ لـ [`output.library`](#outputlibrary) غير صالح، تأكد من تحديد معرف صالح يمكن تعيينه.
 
-### Expose Via Object Assignment
+### فضح عبر Object المهمة
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by `output.library`.
+تقوم هذه الخيارات بتعيين القيمة المرجعة لـ entry point (على سبيل المثال، مهما كان entry point الذي تم تصديره) إلى object محدد تحت الاسم المحدد بواسطة `output.library`.
 
-If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
+إذا لم يتم تعيين `output.library` إلى string غير فارغ، فإن السلوك الافتراضي هو أن جميع الخصائص التي يتم إرجاعها بواسطة entry point سيتم تعيينها إلى object كما هو محدد لـ `output.libraryTarget` المعين، عبر جزء التعليمات البرمجية التالي:
 
 ```js
 (function (e, a) {
@@ -1839,27 +1810,27 @@ If `output.library` is not assigned a non-empty string, the default behavior is 
 })(output.libraryTarget, _entry_return_);
 ```
 
-W> Note that not setting a `output.library` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
+W> لاحظ أن عدم تعيين `output.library` سيؤدي إلى تعيين جميع الخصائص التي يتم إرجاعها بواسطة entry point إلى object المحدد؛ لا توجد عمليات فحص ضد أسماء الممتلكات الموجودة.
 
-#### libraryTarget: 'this'
+#### libraryTarget: "هذا"
 
-W> Prefer to use [`output.library.type: 'this'`](#type-this).
+W> يُفضل استخدام [`output.library.type: 'this'`](#type-this).
 
-The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى هذا ضمن الخاصية المسماة بواسطة `output.library`. معنى `this` متروك لك:
 
 ```js
 this.MyLibrary = _entry_return_;
 
-// In a separate script...
+// في نص منفصل...
 this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // if this is window
 ```
 
-#### libraryTarget: 'window'
+#### libraryTarget: "نافذة"
 
-W> Prefer to use [`output.library.type: 'window'`](#type-window).
+W> يُفضل استخدام [`output.library.type: 'window'`](#type-window).
 
-The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `window` object باستخدام القيمة `output.library`.
 
 ```js
 globalThis.MyLibrary = _entry_return_;
@@ -1867,11 +1838,11 @@ globalThis.MyLibrary = _entry_return_;
 globalThis.MyLibrary.doSomething();
 ```
 
-#### libraryTarget: 'global'
+#### libraryTarget: "عالمي"
 
-W> Prefer to use [`output.library.type: 'global'`](#type-global).
+W> يُفضل استخدام [`output.library.type: 'global'`](#type-global).
 
-The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `global` object باستخدام القيمة `output.library`.
 
 ```js
 globalThis.MyLibrary = _entry_return_;
@@ -1881,9 +1852,9 @@ globalThis.MyLibrary.doSomething();
 
 #### libraryTarget: 'commonjs'
 
-W> Prefer to use [`output.library.type: 'commonjs'`](#type-commonjs).
+W> يُفضل استخدام [`output.library.type: 'commonjs'`](#type-commonjs).
 
-The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `exports` object باستخدام القيمة `output.library`. كما يوحي الاسم، يتم استخدام هذا في بيئات CommonJS.
 
 ```js
 exports.MyLibrary = _entry_return_;
@@ -1891,23 +1862,23 @@ exports.MyLibrary = _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-### Module Definition Systems
+### Module أنظمة التعريف
 
-These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
+ستؤدي هذه الخيارات إلى bundle الذي يأتي مع رأس كامل لضمان التوافق مع أنظمة module المختلفة. سيأخذ خيار `output.library` معنى مختلفًا ضمن خيارات `output.libraryTarget` التالية.
 
 #### libraryTarget: 'module'
 
-W> Prefer to use [`output.library.type: 'module'`](#type-module).
+W> يُفضل استخدام [`output.library.type: 'module'`](#type-module).
 
-Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
+Output كـ ES module. تأكد من تمكين [experiments.outputModule](/configuration/experiments/) مسبقًا.
 
-Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+لاحظ أن هذه الميزة غير مدعومة بشكل كامل حتى الآن، يرجى تتبع التقدم في [هذا الموضوع](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
 #### libraryTarget: 'commonjs2'
 
-W> Prefer to use [`output.library.type: 'commonjs2'`](#type-commonjs2).
+W> يُفضل استخدام [`output.library.type: 'commonjs2'`](#type-commonjs2).
 
-The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
+سيتم تعيين **قيمة الإرجاع الخاصة بـ entry point** إلى `module.exports`. كما يوحي الاسم، يُستخدم هذا في بيئات CommonJS:
 
 ```js
 export default _entry_return_;
@@ -1915,19 +1886,19 @@ export default _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-Note that `output.library` can't be used with this particular `output.libraryTarget`, for further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).
+لاحظ أنه لا يمكن استخدام `output.library` مع هذا `output.libraryTarget` بالتحديد، لمزيد من التفاصيل، يرجى [قراءة هذه المشكلة](https://github.com/webpack/webpack/issues/11800).
 
-T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
+T> هل تتساءل عن الفرق بين CommonJS وCommonJS2؟ على الرغم من أنها متشابهة، إلا أن هناك بعض الاختلافات الدقيقة بينهما والتي لا تكون ذات صلة عادةً بسياق webpack. (لمزيد من التفاصيل، يرجى [قراءة هذا العدد](https://github.com/webpack/webpack/issues/1114).)
 
-#### libraryTarget: 'amd'
+#### libraryTarget: 'أمد'
 
-W> Prefer to use [`output.library.type: 'amd'`](#type-amd).
+W> يُفضل استخدام [`output.library.type: 'amd'`](#type-amd).
 
-This will expose your library as an AMD module.
+سيؤدي هذا إلى كشف library باعتباره AMD module.
 
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as to `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
+AMD modules يتطلب تعريف entry chunk (على سبيل المثال، أول script الذي تم تحميله بواسطة علامة `<script>`) بخصائص محددة، مثل `define` و`require` والتي يتم توفيرها عادةً بواسطة RequireJS أو أي loaders متوافق (مثل almond). وإلا فإن تحميل AMD bundle الناتج مباشرة سيؤدي إلى خطأ مثل `define is not defined`.
 
-With the following configuration...
+بالتخصيص التالي...
 
 ```js
 export default {
@@ -1939,45 +1910,45 @@ export default {
 };
 ```
 
-The generated output will be defined with the name "MyLibrary", i.e.
+سيتم تعريف output الذي تم إنشاؤه بالاسم "MyLibrary"، أي.
 
 ```js
 define("MyLibrary", [], () => _entry_return_);
 ```
 
-The bundle can be included as part of a script tag, and the bundle can be invoked like so:
+يمكن تضمين bundle كجزء من `<script>` tag، ويمكن استدعاء bundle كما يلي:
 
 ```js
 require(["MyLibrary"], (MyLibrary) => {
-  // Do something with the library...
+  // افعل شيئًا باستخدام library...
 });
 ```
 
-If `output.library` is undefined, the following is generated instead.
+إذا كان `output.library` غير محدد، فسيتم إنشاء ما يلي بدلاً من ذلك.
 
 ```js
 define([], () => _entry_return_);
 ```
 
-This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
+لن يعمل bundle كما هو متوقع، أو لن يعمل على الإطلاق (في حالة almond loader) إذا تم تحميله مباشرة بعلامة `<script>`. سيعمل فقط من خلال RequireJS غير المتزامن المتوافق module loader من خلال المسار الفعلي لهذا الملف، لذلك في هذه الحالة، قد يصبح `output.path` و`output.filename` مهمًا لهذا الإعداد المحدد إذا تم عرضهما مباشرة على server.
 
-#### libraryTarget: 'amd-require'
+#### libraryTarget: "يتطلب AMD"
 
-W> Prefer to use [`output.library.type: 'amd-require'`](#type-amd-require).
+W> يُفضل استخدام [`output.library.type: 'amd-require'`](#type-amd-require).
 
-This packages your output with an immediately executed AMD `require(dependencies, factory)` wrapper.
+هذا packages الخاص بك output مع غلاف AMD `require(dependencies, factory)` الذي تم تنفيذه على الفور.
 
-The `'amd-require'` target allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
+يسمح `'amd-require'` target باستخدام AMD dependencies دون الحاجة إلى استدعاء لاحق منفصل. كما هو الحال مع `'amd'` target، يعتمد هذا على توفر [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) المناسب في البيئة التي يتم فيها تحميل webpack output.
 
-With this target, the library name is ignored.
+مع هذا target، يتم تجاهل الاسم library.
 
-#### libraryTarget: 'umd'
+#### libraryTarget: "أومد"
 
-W> Prefer to use [`output.library.type: 'umd'`](#type-umd).
+W> يُفضل استخدام [`output.library.type: 'umd'`](#type-umd).
 
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as a global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
+يؤدي هذا إلى كشف library الخاص بك تحت جميع تعريفات module، مما يسمح له بالعمل مع CommonJS، AMD وكمتغير عام. ألقِ نظرة على [UMD المستودع](https://github.com/umdjs/umd) لمعرفة المزيد.
 
-In this case, you need the `library` property to name your module:
+في هذه الحالة، أنت بحاجة إلى الخاصية `library` لتسمية module الخاص بك:
 
 ```js
 export default {
@@ -1989,7 +1960,7 @@ export default {
 };
 ```
 
-And finally the output is:
+وأخيرًا output هو:
 
 ```js
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -2008,7 +1979,7 @@ And finally the output is:
 );
 ```
 
-Note that omitting the `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
+لاحظ أن حذف `library` سيؤدي إلى تعيين كافة الخصائص التي يتم إرجاعها بواسطة entry point مباشرةً إلى الجذر object، كما هو موثق ضمن [object قسم التعيين](#expose-via-object-assignment). مثال:
 
 ```js
 export default {
@@ -2019,7 +1990,7 @@ export default {
 };
 ```
 
-The output will be:
+سيكون output:
 
 ```js
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -2037,7 +2008,7 @@ The output will be:
 );
 ```
 
-Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
+منذ webpack 3.1.0، يمكنك تحديد object لـ `library` للأسماء المختلفة لكل targets:
 
 ```js
 export default {
@@ -2053,13 +2024,13 @@ export default {
 };
 ```
 
-#### libraryTarget: 'system'
+#### libraryTarget: "النظام"
 
-W> Prefer to use [`output.library.type: 'system'`](#type-system).
+W> يُفضل استخدام [`output.library.type: 'system'`](#type-system).
 
-This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+سيؤدي هذا إلى كشف library كـ [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. تم إصدار هذه الميزة لأول مرة في [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
 
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
+يتطلب النظام modules وجود global variable `System` في browser عند تنفيذ webpack bundle. يتيح لك التجميع إلى تنسيق `System.register` إمكانية `System.import('/bundle.js')` بدون تخصيص إضافي ويتم تحميل webpack bundle في سجل النظام module.
 
 ```js
 export default {
@@ -2081,7 +2052,7 @@ System.register([], (_export) => ({
 }));
 ```
 
-By adding `output.library` to configuration in addition to having `output.libraryTarget` set to `system`, the output bundle will have the library name as an argument to `System.register`:
+بإضافة `output.library` إلى التخصيص بالإضافة إلى تعيين `output.libraryTarget` على `system`، سيكون للـ output bundle اسم library كوسيطة لـ `System.register`:
 
 ```js
 System.register("my-library", [], (_export) => ({
@@ -2092,25 +2063,25 @@ System.register("my-library", [], (_export) => ({
 }));
 ```
 
-You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
+يمكنك الوصول إلى [SystemJS السياق](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) عبر `__system_context__`:
 
 ```js
-// Log the URL of the current SystemJS module
+// قم بتسجيل عنوان URL الحالي SystemJS module
 console.log(__system_context__.meta.url);
 
-// Import a SystemJS module, with the current SystemJS module's url as the parentUrl
+// قم باستيراد SystemJS module، باستخدام عنوان URL الحالي لـ SystemJS module باعتباره الأصل
 __system_context__.import("./other-file.js").then((m) => {
   console.log(m);
 });
 ```
 
-### Other Targets
+### أخرى Targets
 
 #### libraryTarget: 'jsonp'
 
-W> Prefer to use [`output.library.type: 'jsonp'`](#type-jsonp).
+W> يُفضل استخدام [`output.library.type: 'jsonp'`](#type-jsonp).
 
-This will wrap the return value of your entry point into a jsonp wrapper.
+سيؤدي هذا إلى تغليف القيمة المرجعة لـ entry point في غلاف jsonp.
 
 {/* eslint-disable new-cap */}
 
@@ -2118,17 +2089,17 @@ This will wrap the return value of your entry point into a jsonp wrapper.
 MyLibrary(_entry_return_);
 ```
 
-The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+سيتم تحديد dependencies لـ library من خلال التخصيص [`externals`](/configuration/externals/).
 
 ## output.module
 
 `boolean = false`
 
-Output JavaScript files as module type. Disabled by default as it's an experimental feature.
+Output JavaScript الملفات كنوع module. يتم تعطيله افتراضيًا لأنه ميزة تجريبية.
 
-When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `minimizerOptions.module` to `true` internally.
+عند التمكين، سيقوم webpack بتعيين [`output.iife`](#outputiife) إلى `false`، [`output.scriptType`](#outputscripttype) إلى `'module'` و`minimizerOptions.module` إلى `true` داخليًا.
 
-If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
+إذا كنت تستخدم webpack لتجميع library ليستهلكه الآخرون، فتأكد من ضبط [`output.libraryTarget`](#librarytarget-module) على `'module'` عندما يكون `output.module` هو `true`.
 
 ```js
 export default {
@@ -2142,13 +2113,13 @@ export default {
 };
 ```
 
-W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`. [One of the known problems](https://github.com/webpack/webpack/issues/11277#issuecomment-992565287) is that such a library can't be consumed by webpack4-based (and possibly other too) applications.
+W> `output.module` هي ميزة تجريبية ولا يمكن تمكينها إلا عن طريق ضبط [`experiments.outputModule`](/configuration/experiments/#experiments) على `true`. [إحدى المشكلات المعروفة](https://github.com/webpack/webpack/issues/11277#issuecomment-992565287) هي أن مثل هذا library لا يمكن استهلاكه بواسطة التطبيقات المستندة إلى webpack4 (وربما تطبيقات أخرى أيضًا).
 
 ## output.path
 
 `string = path.join(process.cwd(), 'dist')`
 
-The output directory as an **absolute** path.
+الدليل output كمسار **مطلق**.
 
 **webpack.config.js**
 
@@ -2167,25 +2138,25 @@ export default {
 };
 ```
 
-Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching/) for details.
+لاحظ أنه سيتم استبدال `[fullhash]` في هذه المعلمة بـ hash من compilation. راجع [Caching الدليل](/guides/caching/) للحصول على التفاصيل.
 
-W> The path must not contain an exclamation mark (`!`) as it is reserved by webpack for [loader syntax](/concepts/loaders/#inline).
+W> يجب ألا يحتوي المسار على علامة تعجب (`!`) لأنه محجوز بواسطة webpack لـ [loader بناء الجملة](/concepts/loaders/#inline).
 
 ## output.pathinfo
 
 `boolean` `string: 'verbose'`
 
-Tells webpack to include comments in bundles with information about the contained modules. `'verbose'` shows more information like exports, runtime requirements and bailouts.
+يخبر webpack بتضمين التعليقات في bundles مع معلومات حول المحتوى المتضمن modules. يعرض `'verbose'` مزيدًا من المعلومات مثل الصادرات ومتطلبات runtime وعمليات الإنقاذ.
 
-The default value of `output.pathinfo` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `output.pathinfo` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
+| Mode            | الافتراضي |
 | --------------- | ------- |
-| `"production"`  | `false` |
-| `"development"` | `true`  |
-| `"none"`        | `false` |
+| `"production"` | `false` |
+| `"development"` | `true` |
+| `"none"` | `false` |
 
-W> While the data these comments can provide is useful during development when reading the generated code, it **should not** be used in production.
+W> على الرغم من أن البيانات التي يمكن أن توفرها هذه التعليقات مفيدة أثناء التطوير عند قراءة التعليمات البرمجية التي تم إنشاؤها، إلا أنه **لا**** يجب استخدامها في الإنتاج.
 
 **webpack.config.js**
 
@@ -2198,23 +2169,23 @@ export default {
 };
 ```
 
-T> It also adds some info about tree shaking to the generated bundle.
+T> كما أنه يضيف بعض المعلومات حول اهتزاز الشجرة إلى bundle الذي تم إنشاؤه.
 
 ## output.publicPath
 
-- Type:
+- النوع:
   - `function`
   - `string`
 
-    `output.publicPath` defaults to `'auto'` with `web` and `web-worker` targets, see [this guide](/guides/public-path/#automatic-publicpath) for its use cases.
+الإعدادات الافتراضية لـ `output.publicPath` هي `'auto'` مع `web` و`web-worker` targets، راجع [هذا الدليل](/guides/public-path/#automatic-publicpath) للتعرف على حالات الاستخدام الخاصة به.
 
-This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
+يعد هذا خيارًا مهمًا عند استخدام التحميل حسب الطلب أو تحميل موارد external مثل الصور والملفات وما إلى ذلك. إذا تم تحديد قيمة غير صحيحة، فستتلقى أخطاء 404 أثناء تحميل هذه الموارد.
 
-This option specifies the **public URL** of the output directory when referenced in a browser. A relative URL is resolved relative to the HTML page (or `<base>` tag). Server-relative URLs, protocol-relative URLs or absolute URLs are also possible and sometimes required, i. e. when hosting assets on a CDN.
+يحدد هذا الخيار **عنوان URL العام** للدليل output عند الإشارة إليه في browser. يتم حل عنوان URL النسبي بالنسبة إلى صفحة HTML (أو علامة `<base>`). Server-عناوين URL النسبية أو عناوين URL ذات الصلة بالبروتوكول أو عناوين URL المطلقة ممكنة أيضًا ومطلوبة في بعض الأحيان، مثلاً عند استضافة assets على CDN.
 
-The value of the option is prefixed to every URL created by the runtime or loaders. Because of this **the value of this option ends with `/`** in most cases.
+تكون قيمة الخيار مسبوقة بكل عنوان URL تم إنشاؤه بواسطة runtime أو loaders. ولهذا السبب **تنتهي قيمة هذا الخيار بـ `/`** في معظم الحالات.
 
-A rule to consider: The URL of your [`output.path`](#outputpath) from the view of the HTML page.
+قاعدة يجب مراعاتها: عنوان URL الخاص بـ [`output.path`](#outputpath) من عرض صفحة HTML.
 
 **webpack.config.js**
 
@@ -2234,7 +2205,7 @@ export default {
 };
 ```
 
-For this configuration:
+لهذا التخصيص:
 
 **webpack.config.js**
 
@@ -2248,31 +2219,31 @@ export default {
 };
 ```
 
-A request to a chunk will look like `/assets/4.chunk.js`.
+سيبدو الطلب إلى chunk بالشكل `/assets/4.chunk.js`.
 
-A loader outputting HTML might emit something like this:
+قد يُصدر إخراج loader HTML شيئًا مثل هذا:
 
 ```html
 <link href="/assets/spinner.gif" />
 ```
 
-or when loading an image in CSS:
+أو عند تحميل صورة في CSS:
 
 ```css
 background-image: url(/assets/spinner.gif);
 ```
 
-The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
+يأخذ webpack-dev-server أيضًا تلميحًا من `publicPath`، ويستخدمه لتحديد مكان خدمة ملفات output منه.
 
-Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching) for details.
+لاحظ أنه سيتم استبدال `[fullhash]` في هذه المعلمة بـ hash من compilation. راجع [Caching الدليل](/guides/caching) للحصول على التفاصيل.
 
-Examples (one of the below):
+أمثلة (واحد مما يلي):
 
 ```js
 export default {
   // ...
   output: {
-    // It automatically determines the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
+    // فهو يحدد تلقائيًا المسار العام من `import.meta.url` أو `document.currentScript` أو `<script />` أو `self.location`.
     publicPath: "auto",
   },
 };
@@ -2282,7 +2253,7 @@ export default {
 export default {
   // ...
   output: {
-    // CDN (always HTTPS)
+    // CDN (HTTPS دائمًا)
     publicPath: "https://cdn.example.com/assets/",
   },
 };
@@ -2292,7 +2263,7 @@ export default {
 export default {
   // ...
   output: {
-    // CDN (same protocol)
+    // CDN (نفس البروتوكول)
     publicPath: "//cdn.example.com/assets/",
   },
 };
@@ -2302,7 +2273,7 @@ export default {
 export default {
   // ...
   output: {
-    // server-relative
+    // server-نسبي
     publicPath: "/assets/", // server-relative
   },
 };
@@ -2312,7 +2283,7 @@ export default {
 export default {
   // ...
   output: {
-    // relative to HTML page
+    // نسبة إلى صفحة HTML
     publicPath: "assets/",
   },
 };
@@ -2322,7 +2293,7 @@ export default {
 export default {
   // ...
   output: {
-    // relative to HTML page
+    // نسبة إلى صفحة HTML
     publicPath: "../assets/",
   },
 };
@@ -2332,29 +2303,29 @@ export default {
 export default {
   // ...
   output: {
-    // relative to HTML page (same directory)
+    // نسبة إلى صفحة HTML (نفس الدليل)
     publicPath: "",
   },
 };
 ```
 
-In cases where the `publicPath` of output files can't be known at compile time, it can be left blank and set dynamically at runtime in the entry file using the [free variable](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
+في الحالات التي لا يمكن فيها معرفة `publicPath` لملفات output في وقت الترجمة، يمكن تركها فارغة وتعيينها ديناميكيًا عند runtime في ملف entry باستخدام [المتغير الحر](https://stackoverflow.com/questions/12934929/what-are-free-variables) `__webpack_public_path__`.
 
 ```js
 __webpack_public_path__ = myRuntimePublicPath;
 
-// rest of your application entry
+// بقية طلبك entry
 ```
 
-See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) for more information on `__webpack_public_path__`.
+راجع [هذه المناقشة](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) لمزيد من المعلومات حول `__webpack_public_path__`.
 
 ## output.scriptType
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
-This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
+يسمح هذا الخيار بتحميل chunks غير المتزامن بنوع برنامج نصي مخصص، مثل `<script type="module" ...>`.
 
-T> If [`output.module`](#outputmodule) is set to `true`, `output.scriptType` will default to `'module'` instead of `false`.
+T> إذا تم تعيين [`output.module`](#outputmodule) على `true`، فسيتم تعيين `output.scriptType` افتراضيًا على `'module'` بدلاً من `false`.
 
 ```js
 export default {
@@ -2369,15 +2340,15 @@ export default {
 
 `string = '[file].map[query]'`
 
-Configure how source maps are named. Only takes effect when [`devtool`](/configuration/devtool/) is set to `'source-map'`, which writes an output file.
+تخصيص كيفية تسمية Source Maps. يسري مفعوله فقط عند ضبط [`devtool`](/configuration/devtool/) على `'source-map'`، والذي يكتب ملف output.
 
-The `[name]`, `[id]`, `[fullhash]` and `[chunkhash]` substitutions from [`output.filename`](#outputfilename) can be used. In addition to those, you can use substitutions listed under Filename-level in [Template strings](/configuration/output/#template-strings).
+يمكن استخدام البدائل `[name]`، `[id]`، `[fullhash]` و`[chunkhash]` من [`output.filename`](#outputfilename). بالإضافة إلى تلك البدائل، يمكنك استخدام البدائل المدرجة ضمن مستوى اسم الملف في [سلاسل القالب](/configuration/output/#template-strings).
 
 ## output.sourcePrefix
 
 `string = ''`
 
-Change the prefix for each line in the output bundles.
+قم بتغيير البادئة لكل سطر في output bundles.
 
 **webpack.config.js**
 
@@ -2390,16 +2361,16 @@ export default {
 };
 ```
 
-T> Using some kind of indentation makes bundles look prettier, but will cause issues with multi-line strings.
+T> يؤدي استخدام نوع ما من المسافة البادئة إلى جعل bundles يبدو أجمل، ولكنه سيتسبب في حدوث مشكلات مع السلاسل متعددة الأسطر.
 
-T> Typically you don't need to change `output.sourcePrefix`.
+T> عادةً لا تحتاج إلى تغيير `output.sourcePrefix`.
 
 ## output.strictModuleErrorHandling
 
-Handle error in module loading as per EcmaScript Modules spec at a performance cost.
+تعامل مع الخطأ في تحميل module وفقًا لمواصفات ECMAScript Modules بتكلفة performance.
 
-- Type: `boolean`
-- Available: 5.25.0+
+- النوع: `boolean`
+- متاح: 5.25.0+
 
 ```js
 export default {
@@ -2412,35 +2383,35 @@ export default {
 
 ## output.strictModuleExceptionHandling
 
-W> Deprecated, use
-[`output.strictModuleErrorHandling`](#outputstrictmoduleerrorhandling) instead.
+W> إهمال، استخدام
+[`output.strictModuleErrorHandling`](#outputstrictmoduleerrorhandling) بدلاً من ذلك.
 
 `boolean = false`
 
-Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
+اطلب من webpack إزالة module من مثيل module cache (`require.cache`) إذا ألقى استثناءً عندما يكون `require`d.
 
-It defaults to `false` for performance reasons.
+يتم تعيينه افتراضيًا على `false` لأسباب performance.
 
-When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
+عند التعيين على `false`، لا تتم إزالة module من cache، مما يؤدي إلى طرح الاستثناء فقط عند استدعاء `require` الأول (مما يجعله غير متوافق مع Node.js).
 
-For instance, consider `module.js`:
+على سبيل المثال، فكر في `module.js`:
 
 ```js
 throw new Error("error");
 ```
 
-With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
+مع ضبط `strictModuleExceptionHandling` على `false`، فإن `require` الأول فقط يطرح استثناءً:
 
 ```js
-// with strictModuleExceptionHandling = false
+// مع الصارمModuleExceptionHandling = false
 require("node:module"); // <- throws
 require("node:module"); // <- doesn't throw
 ```
 
-Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
+بدلاً من ذلك، مع تعيين `strictModuleExceptionHandling` على `true`، ستطرح جميع `require`s في module استثناءً:
 
 ```js
-// with strictModuleExceptionHandling = true
+// with الصارمModuleExceptionHandling = true
 require("node:module"); // <- throws
 require("node:module"); // <- also throws
 ```
@@ -2451,13 +2422,13 @@ require("node:module"); // <- also throws
 
 <Badge text="5.37.0+" />
 
-Controls [Trusted Types](https://web.dev/trusted-types) compatibility. When enabled, webpack will detect Trusted Types support and, if they are supported, use Trusted Types policies to create script URLs it loads dynamically. Use when the application runs under a [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) Content Security Policy directive.
+التحكم في التوافق [Trusted Types](https://web.dev/trusted-types). عند التمكين، سيكتشف webpack دعم Trusted Types، وإذا كان مدعومًا، استخدم سياسات Trusted Types لإنشاء عناوين URL للبرنامج النصي الذي يتم تحميله ديناميكيًا. يُستخدم عند تشغيل التطبيق بموجب التوجيه [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) Content Security Policy.
 
-It is disabled by default (no compatibility, script URLs are strings).
+يتم تعطيله افتراضيًا (لا يوجد توافق، عناوين URL للبرنامج النصي عبارة عن سلاسل).
 
-- When set to `true`, webpack will use [`output.uniqueName`](#outputuniquename) as the Trusted Types policy name.
-- When set to a non-empty string, its value will be used as a policy name.
-- When set to an object, the policy name is taken from the object's `policyName` property.
+- عند التعيين على `true`، سيستخدم webpack [`output.uniqueName`](#outputuniquename) كاسم السياسة Trusted Types.
+- عند التعيين على string غير فارغ، سيتم استخدام قيمته كاسم سياسة.
+- عند التعيين على object، يتم أخذ اسم السياسة من خاصية `policyName` الخاصة بـ object.
 
 **webpack.config.js**
 
@@ -2479,7 +2450,7 @@ export default {
 
 <Badge text="5.82.0+" />
 
-Determine whether to proceed with loading in anticipation that [`require-trusted-types-for 'script'`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) has not been enforced or to immediately fail when the call to `trustedTypes.createPolicy(...)` fails due to the policy name being absent from the CSP `trusted-types` list or being a duplicate.
+حدد ما إذا كنت تريد متابعة التحميل تحسبًا لعدم فرض [`require-trusted-types-for 'script'`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) أو الفشل فورًا عند فشل استدعاء `trustedTypes.createPolicy(...)` بسبب غياب اسم السياسة من قائمة CSP `trusted-types` أو كونه مكررًا.
 
 ```js
 export default {
@@ -2496,11 +2467,11 @@ export default {
 
 ## output.umdNamedDefine
 
-W> Prefer to use [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine) instead.
+W> يُفضل استخدام [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine) بدلاً من ذلك.
 
 `boolean`
 
-When using `libraryTarget: "umd"`, setting `output.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
+عند استخدام `libraryTarget: "umd"`، سيؤدي ضبط `output.umdNamedDefine` إلى `true` إلى تسمية AMD module لـ UMD build. وإلا فسيتم استخدام `define` مجهول.
 
 ```js
 export default {
@@ -2515,9 +2486,9 @@ export default {
 
 `string`
 
-A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
+اسم فريد لـ webpack build لتجنب تعارض أوقات تشغيل webpack المتعددة عند استخدام العناصر العالمية. يتم تعيينه افتراضيًا على اسم [`output.library`](/configuration/output/#outputlibrary) أو اسم package من `package.json` في السياق، وإذا لم يتم العثور على كليهما، فسيتم تعيينه على `''`.
 
-`output.uniqueName` will be used to generate unique globals for:
+سيتم استخدام `output.uniqueName` لإنشاء عوالم فريدة من أجل:
 
 - [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
@@ -2536,12 +2507,12 @@ export default {
 
 `false` `'fetch' | 'async-node'` `string`
 
-Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
+خيار لضبط طريقة التحميل WebAssembly Modules. الأساليب المضمنة افتراضيًا هي `'fetch'` (web/WebWorker)، `'async-node'` (Node.js)، ولكن يمكن إضافة طرق أخرى بواسطة plugins.
 
-The default value can be affected by different [`target`](/configuration/target/):
+يمكن أن تتأثر القيمة الافتراضية بـ [`target`](/configuration/target/) مختلفة:
 
-- Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'`, `'electron-renderer'` or `'node-webkit'`.
-- Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
+- الافتراضي هو `'fetch'` إذا تم ضبط [`target`](/configuration/target/) على `'web'` أو `'webworker'` أو `'electron-renderer'` أو `'node-webkit'`.
+- الافتراضي هو `'async-node'` إذا تم ضبط [`target`](/configuration/target/) على `'node'` أو `'async-node'` أو `'electron-main'` أو `'electron-preload'`.
 
 ```js
 export default {
@@ -2556,7 +2527,7 @@ export default {
 
 `string = '[hash].module.wasm'`
 
-Specifies the filename of WebAssembly modules. It should be provided as a relative path within the `output.path` directory
+يحدد اسم الملف WebAssembly modules. يجب توفيره كمسار نسبي داخل الدليل `output.path`
 
 ```js
 export default {
@@ -2571,9 +2542,9 @@ export default {
 
 `string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 
-The new option `workerChunkLoading` controls the chunk loading of workers.
+يتحكم الخيار الجديد `workerChunkLoading` في تحميل chunk لـ workers.
 
-T> The default value of this option depends on the [`target`](/configuration/target/) setting. For more details, search for `"workerChunkLoading"` [in the webpack defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
+T> تعتمد القيمة الافتراضية لهذا الخيار على الإعداد [`target`](/configuration/target/). لمزيد من التفاصيل، ابحث عن `"workerChunkLoading"` [في إعدادات webpack الافتراضية](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
 
 **webpack.config.js**
 
@@ -2590,7 +2561,7 @@ export default {
 
 `string`
 
-Set a public path for Worker, defaults to value of [output.publicPath](#outputpublicpath). Only use this option if your worker scripts are located in a different path from your other scripts.
+قم بتعيين مسار عام لـ Worker، القيمة الافتراضية هي [output.publicPath](#outputpublicpath). استخدم هذا الخيار فقط إذا كانت worker scripts موجودة في مسار مختلف عن البرامج النصية الأخرى.
 
 **webpack.config.js**
 
@@ -2607,7 +2578,7 @@ export default {
 
 `false` `'fetch-streaming' | 'fetch' | 'async-node'` `string`
 
-Option to set the method of loading WebAssembly Modules in workers, defaults to the value of [output.wasmLoading](#outputwasmloading).
+خيار لضبط طريقة التحميل WebAssembly Modules في workers، القيمة الافتراضية هي [output.wasmLoading](#outputwasmloading).
 
 **webpack.config.js**
 

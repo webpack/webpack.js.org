@@ -2,24 +2,22 @@
 title: Cache
 sort: 12
 contributors:
-  - snitin315
-  - chenxsan
-  - shivxmsharma
+  - RlxChap2
 ---
 
 ## cache
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+يُخزِّن وحدات webpack و chunks المُولَّدة في الذاكرة المؤقَّتة لتحسين سرعة البناء. `cache: true` اختصارٌ لـ `cache: { type: 'memory' }`. ولتعطيل التخزين المؤقَّت مرِّر `false`:
 
-The default value of `cache` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `cache` على [`mode`](/configuration/mode/):
 
-| Mode            | Default              |
+| Mode            | الافتراضي               |
 | --------------- | -------------------- |
-| `"production"`  | `false`              |
+| `"production"` | `false` |
 | `"development"` | `{ type: 'memory' }` |
-| `"none"`        | `false`              |
+| `"none"` | `false` |
 
 **webpack.config.js**
 
@@ -30,21 +28,21 @@ export default {
 };
 ```
 
-While setting `cache.type` to `'filesystem'` opens up more options for configuration.
+أمّا ضبط `cache.type` على `'filesystem'` فيفتح أمامك خيارات تخصيص أكثر.
 
 ### cache.allowCollectingMemory
 
-Collect unused memory allocated during deserialization, only available when [`cache.type`](#cachetype) is set to `'filesystem'`. This requires copying data into smaller buffers and has a performance cost.
+اجمع الذاكرة غير المستعمَلة التي خُصِّصت أثناء فكّ التسلسل (deserialization)، وهو خيار لا يتوفّر إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`. ويتطلّب نسخ البيانات إلى buffers أصغر، وله تكلفته على الأداء.
 
-- Type: `boolean`
+- النوع: `boolean`
 
-The default value of `cache.allowCollectingMemory` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `cache.allowCollectingMemory` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
+| Mode            | الافتراضي |
 | --------------- | ------- |
-| `"production"`  | `false` |
-| `"development"` | `true`  |
-| `"none"`        | `false` |
+| `"production"` | `false` |
+| `"development"` | `true` |
+| `"none"` | `false` |
 
 - <Badge text="5.35.0+" />
 
@@ -63,11 +61,11 @@ export default {
 
 `object`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. Webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+`cache.buildDependencies` كائن يحوي مصفوفات من اعتماديات الشيفرة الإضافية للبناء. يستعمل webpack hash لكلّ عنصر منها مع كلّ اعتمادياتها لإبطال الذاكرة المؤقَّتة على نظام الملفّات.
 
-Defaults to `webpack/lib` to get all dependencies of webpack.
+القيمة الافتراضية هي `webpack/lib` لجلب كلّ اعتماديات webpack.
 
-T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+T> يُستحسَن ضبط `cache.buildDependencies.config: [__filename]` في تخصيصك حتى تحصل دائماً على أحدث تخصيص وكلّ اعتمادياته.
 
 **webpack.config.js**
 
@@ -80,9 +78,9 @@ const __filename = fileURLToPath(import.meta.url);
 export default {
   cache: {
     buildDependencies: {
-      // This makes all dependencies of this file - build dependencies
+      // هذا يجعل كلّ اعتماديات هذا الملفّ اعتماديات بناء
       config: [__filename],
-      // By default webpack and loaders are build dependencies
+      // افتراضياً، يُعدّ webpack والـ loaders اعتماديات بناء
     },
   },
 };
@@ -92,9 +90,9 @@ export default {
 
 `string`
 
-Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
+المجلَّد الأساسي للذاكرة المؤقَّتة. القيمة الافتراضية هي `node_modules/.cache/webpack`.
 
-`cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.cacheDirectory` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -114,13 +112,13 @@ export default {
 };
 ```
 
-W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
+W> الموقع النهائي للذاكرة المؤقَّتة هو حصيلة جمع `cache.cacheDirectory` و `cache.name`.
 
 ### cache.cacheLocation
 
 `string`
 
-Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+موقع الذاكرة المؤقَّتة. القيمة الافتراضية هي `path.resolve(cache.cacheDirectory, cache.name)`.
 
 **webpack.config.js**
 
@@ -142,9 +140,9 @@ export default {
 
 ### cache.cacheUnaffected
 
-Cache computation of modules which are unchanged and reference only unchanged modules. It can only be used along with [`cache.type`](#cachetype) of `'memory'`, besides, [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) must be enabled to use it.
+يُخزِّن في الذاكرة المؤقَّتة حساب الوحدات التي لم تتغيّر، والتي تُشير إلى وحدات لم تتغيّر هي الأخرى. ولا يمكن استعماله إلا مع [`cache.type`](#cachetype) المضبوطة على `'memory'`، فضلاً عن ذلك يلزم تفعيل [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) قبل استعماله.
 
-- Type: `boolean`
+- النوع: `boolean`
 - v5.54.0+
 
 **webpack.config.js**
@@ -165,9 +163,9 @@ export default {
 
 <Badge text="5.42.0+" />
 
-Compression type used for the cache files. By default it is `false`.
+نوع الضغط المستعمَل لملفّات الذاكرة المؤقَّتة. القيمة الافتراضية `false`.
 
-`cache.compression` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.compression` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -185,9 +183,9 @@ export default {
 
 `string`
 
-Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
+الخوارزمية المستعمَلة لتوليد الـ hash. اطّلع على [Node.js crypto](https://nodejs.org/api/crypto.html) لمزيد من التفاصيل. القيمة الافتراضية `md4`.
 
-`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.hashAlgorithm` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -205,9 +203,9 @@ export default {
 
 `number = 60000`
 
-Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+الزمن بالميلي ثانية. يُحدِّد `cache.idleTimeout` المدّة التي يتمّ بعدها حفظ الذاكرة المؤقَّتة.
 
-`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.idleTimeout` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -227,9 +225,9 @@ export default {
 
 <Badge text="5.41.0+" />
 
-Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period after which the cache storing should happen when larger changes have been detected.
+الزمن بالميلي ثانية. `cache.idleTimeoutAfterLargeChanges` هو المدّة التي يتمّ بعدها حفظ الذاكرة المؤقَّتة عند رصد تغييرات كبيرة.
 
-`cache.idleTimeoutAfterLargeChanges` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.idleTimeoutAfterLargeChanges` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -247,9 +245,9 @@ export default {
 
 `number = 5000`
 
-Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
+الزمن بالميلي ثانية. `cache.idleTimeoutForInitialStore` هو المدّة التي يتمّ بعدها حفظ الذاكرة المؤقَّتة الأوّل.
 
-`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.idleTimeoutForInitialStore` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -267,9 +265,9 @@ export default {
 
 `[string] = ['./node_modules']`
 
-W> Moved to [snapshot.managedPaths](/configuration/other-options/#managedpaths)
+W> نُقل إلى [snapshot.managedPaths](/configuration/other-options/#managedpaths)
 
-`cache.managedPaths` is an array of package-manager only managed paths. Webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+`cache.managedPaths` مصفوفة من المسارات التي لا يديرها سوى مدير حزم. وسيتجنّب webpack عمل hash أو timestamp لها، ويفترض أنّ الإصدار فريد، وسيستعمله بوصفه لقطة (سواء للذاكرة المؤقَّتة في الذاكرة أو على نظام الملفّات).
 
 ### cache.maxAge
 
@@ -277,9 +275,9 @@ W> Moved to [snapshot.managedPaths](/configuration/other-options/#managedpaths)
 
 <Badge text="5.30.0+" />
 
-The amount of time in milliseconds that unused cache entries are allowed to stay in the filesystem cache; defaults to one month.
+المدّة بالميلي ثانية التي يُسمح فيها لمدخلات الذاكرة المؤقَّتة غير المستعمَلة بالبقاء في ذاكرة نظام الملفّات؛ القيمة الافتراضية شهر واحد.
 
-`cache.maxAge` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.maxAge` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -299,13 +297,12 @@ export default {
 
 <Badge text="5.30.0+" />
 
-Define the lifespan of unused cache entries in the memory cache.
+عرِّف عمر مدخلات الذاكرة المؤقَّتة غير المستعمَلة في ذاكرة الـ memory.
 
-- `cache.maxGenerations: 1`: Cache entries are removed after being unused for a single compilation.
+- `cache.maxGenerations: 1`: تُحذَف مدخلات الذاكرة المؤقَّتة بعد عدم استعمالها لعملية تصريف واحدة.
+- `cache.maxGenerations: Infinity`: تُحفظ المدخلات إلى الأبد.
 
-- `cache.maxGenerations: Infinity`: Cache entries are kept forever.
-
-`cache.maxGenerations` option is only available when [`cache.type`](#cachetype) is set to `'memory'`.
+لا يتوفّر الخيار `cache.maxGenerations` إلا حين يُضبط [`cache.type`](#cachetype) على `'memory'`.
 
 **webpack.config.js**
 
@@ -325,21 +322,19 @@ export default {
 
 <Badge text="5.30.0+" />
 
-Define the lifespan of unused cache entries in the memory cache.
+عرِّف عمر مدخلات الذاكرة المؤقَّتة غير المستعمَلة في ذاكرة الـ memory.
 
-- `cache.maxMemoryGenerations: 0`: Persistent cache will not use an additional memory cache. It will only cache items in memory until they are serialized to disk. Once serialized the next read will deserialize them from the disk again. This mode will minimize memory usage but introduce a performance cost.
+- `cache.maxMemoryGenerations: 0`: لن تستعمل الذاكرة المؤقَّتة الدائمة (persistent cache) ذاكرة memory إضافية. ولن تُخزِّن العناصر في الذاكرة إلا إلى حين تسلسلها (serialize) إلى القرص. وحين تُقرأ مجدَّداً ستُفكّ من القرص. هذا الوضع يُقلِّص استعمال الذاكرة إلى أدنى حدّ، لكنه يأتي بكلفة على الأداء.
+- `cache.maxMemoryGenerations: 1`: سيُنظِّف العناصر من ذاكرة الـ memory بمجرّد تسلسلها وعدم استعمالها لعملية تصريف واحدة على الأقلّ. وحين تُستعمَل مجدَّداً، ستُفكّ من القرص. هذا الوضع يُقلِّص استعمال الذاكرة مع الإبقاء على العناصر النشطة في ذاكرة الـ memory.
+- `cache.maxMemoryGenerations`: الأرقام الصغيرة الأكبر من 0 ستحمل كلفة على الأداء بسبب عملية الـ GC. وتقلّ هذه الكلفة كلّما زاد الرقم.
 
-- `cache.maxMemoryGenerations: 1`: This will purge items from the memory cache once they are serialized and unused for at least one compilation. When they are used again they will be deserialized from the disk. This mode will minimize memory usage while still keeping active items in the memory cache.
+تعتمد القيمة الافتراضية لـ `cache.maxMemoryGenerations` على [`mode`](/configuration/mode/):
 
-- `cache.maxMemoryGenerations`: small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
-
-The default value of `cache.maxMemoryGenerations` depends on the [`mode`](/configuration/mode/):
-
-| Mode            | Default    |
+| Mode            | الافتراضي    |
 | --------------- | ---------- |
-| `"production"`  | `Infinity` |
-| `"development"` | `5`        |
-| `"none"`        | `Infinity` |
+| `"production"` | `Infinity` |
+| `"development"` | `5` |
+| `"none"` | `Infinity` |
 
 **webpack.config.js**
 
@@ -355,9 +350,9 @@ export default {
 
 ### cache.memoryCacheUnaffected
 
-Cache computation of modules which are unchanged and reference only unchanged modules in memory. It can only be used along with [`cache.type`](#cachetype) of `'filesystem'`, besides, [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) must be enabled to use it.
+يُخزِّن في ذاكرة الـ memory حساب الوحدات التي لم تتغيّر، والتي تُشير إلى وحدات لم تتغيّر هي الأخرى. ولا يمكن استعماله إلا مع [`cache.type`](#cachetype) المضبوطة على `'filesystem'`، فضلاً عن ذلك يلزم تفعيل [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) قبل استعماله.
 
-- Type: `boolean`
+- النوع: `boolean`
 - v5.54.0+
 
 **webpack.config.js**
@@ -376,9 +371,9 @@ export default {
 
 `string`
 
-Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
+اسم الذاكرة المؤقَّتة. الأسماء المختلفة تؤدّي إلى ذاكرات مؤقَّتة متعايشة. القيمة الافتراضية هي `${config.name}-${config.mode}`. ويُجدي `cache.name` نفعاً حين يكون لديك عدّة تخصيصات ينبغي أن يكون لكلّ منها ذاكرة مؤقَّتة مستقلّة.
 
-`cache.name` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.name` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -396,7 +391,7 @@ export default {
 
 `boolean = false`
 
-Track and log detailed timing information for individual cache items of type `'filesystem'`.
+يتعقّب ويُسجِّل معلومات زمنية تفصيلية لكلّ عنصر في الذاكرة المؤقَّتة من نوع `'filesystem'`.
 
 **webpack.config.js**
 
@@ -414,7 +409,7 @@ export default {
 
 `boolean` <Badge text='5.85.0' />
 
-Prevent webpack from storing cache into file system. Only available when `cache.type === "filesystem"` and `cache.store === 'pack'`.
+يمنع webpack من حفظ الذاكرة المؤقَّتة في نظام الملفّات. لا يتوفّر إلا حين تكون `cache.type === "filesystem"` و `cache.store === 'pack'`.
 
 ```js
 export default {
@@ -431,13 +426,13 @@ export default {
 
 `string = 'pack': 'pack'`
 
-`cache.store` tells webpack when to store data on the file system.
+يُخبر `cache.store` webpack متى يحفظ البيانات في نظام الملفّات.
 
-- `'pack'`: Store data when compiler is idle in a single file for all cached items
+- `'pack'`: احفظ البيانات حين يكون المُصرِّف خاملاً في ملفّ واحد يضمّ كلّ العناصر المُخزَّنة مؤقَّتاً.
 
-`cache.store` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.store` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
-W> `pack` is the only supported mode since webpack 5.0.x
+W> الوضع `pack` هو الوضع الوحيد المدعوم منذ webpack 5.0.x
 
 **webpack.config.js**
 
@@ -455,7 +450,7 @@ export default {
 
 `string: 'memory' | 'filesystem'`
 
-Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+يضبط نوع `cache` ليكون في الذاكرة أو على نظام الملفّات. الخيار `memory` بسيط ومباشر، فهو يُخبر webpack بحفظ الذاكرة المؤقَّتة في الذاكرة، ولا يسمح بأيّ تخصيص إضافي:
 
 **webpack.config.js**
 
@@ -472,9 +467,9 @@ export default {
 
 `string = ''`
 
-Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
+إصدار بيانات الذاكرة المؤقَّتة. لا تسمح الإصدارات المختلفة بإعادة استعمال الذاكرة المؤقَّتة، وتكتب فوق المحتوى القائم. حدِّث الإصدار حين يتغيّر تخصيصك تغيُّراً لا يسمح بإعادة استعمال الذاكرة المؤقَّتة، وهو ما يُبطل الذاكرة المؤقَّتة.
 
-`cache.version` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+لا يتوفّر الخيار `cache.version` إلا حين يُضبط [`cache.type`](#cachetype) على `'filesystem'`.
 
 **webpack.config.js**
 
@@ -488,44 +483,44 @@ export default {
 };
 ```
 
-W> Don't share the cache between calls with different options.
+W> لا تُشارك الذاكرة المؤقَّتة بين استدعاءات بخيارات مختلفة.
 
-## Setup cache in CI/CD system
+## ضبط الذاكرة المؤقَّتة في أنظمة CI/CD
 
-Filesystem cache allows to share cache between builds in CI. To setup cache:
+تتيح ذاكرة نظام الملفّات المؤقَّتة مشاركة الذاكرة المؤقَّتة بين البُنى في CI. ولضبطها:
 
-- CI should have an option to share cache between builds.
-- CI should run job in the same absolute path. This is important since webpack cache files store absolute paths.
+- يجب أن يدعم نظام الـ CI خيار مشاركة الذاكرة المؤقَّتة بين البُنى.
+- يجب أن يُشغِّل الـ CI المهمّة في نفس المسار المطلق، إذ أنّ ملفّات الذاكرة المؤقَّتة في webpack تحفظ مسارات مطلقة.
 
 ### GitLab CI/CD
 
-Common config could looks like
+قد يبدو التخصيص المعتاد كالآتي:
 
 ```yaml
 variables:
-  # fallback to use "main" branch cache, requires GitLab Runner 13.4
+  # العودة إلى ذاكرة فرع "main" المؤقَّتة، تتطلّب GitLab Runner 13.4
   CACHE_FALLBACK_KEY: main
 
-# this is webpack build job
+# هذه مهمّة بناء webpack
 build-job:
   cache:
-    key: "$CI_COMMIT_REF_SLUG" # branch/tag name
+    key: "$CI_COMMIT_REF_SLUG" # اسم الفرع أو الوسم
     paths:
-      # cache directory
-      # make sure that you don't run "npm ci" in this job or change default cache directory
-      # otherwise "npm ci" will prune cache files
+      # مجلَّد الذاكرة المؤقَّتة
+      # تأكّد ألا تُشغِّل "npm ci" في هذه المهمّة ولا أن تُغيِّر مجلَّد الذاكرة المؤقَّتة الافتراضي
+      # وإلا فإنّ "npm ci" سيحذف ملفّات الذاكرة المؤقَّتة
       - node_modules/.cache/webpack/
 ```
 
-### Github actions
+### إجراءات جيثب
 
 ```yaml
 - uses: actions/cache@v3
   with:
-    # cache directory
+    # مجلَّد الذاكرة المؤقَّتة
     path: node_modules/.cache/webpack/
     key: ${{ GITHUB_REF_NAME }}-webpack-build
-    # fallback to use "main" branch cache
+    # العودة إلى ذاكرة فرع "main" المؤقَّتة
     restore-keys: |
       main-webpack-build
 ```
