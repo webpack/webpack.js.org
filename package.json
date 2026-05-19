@@ -72,7 +72,8 @@
     "sitemap-static": {
       "minimist": "1.2.5"
     },
-    "eval": "^0.1.5"
+    "eval": "^0.1.5",
+    "eslint-plugin-react-hooks": "7.0.1"
   },
   "dependencies": {
     "@docsearch/react": "^4.6.0",
@@ -89,6 +90,11 @@
     "react-use": "^17.6.0",
     "tailwind-merge": "^3.5.0",
     "webpack-pwa-manifest": "^4.3.0",
+    "workbox-cacheable-response": "^7.4.0",
+    "workbox-core": "^7.4.0",
+    "workbox-expiration": "^7.4.0",
+    "workbox-routing": "^7.4.0",
+    "workbox-strategies": "^7.4.0",
     "workbox-window": "^7.4.0"
   },
   "devDependencies": {
