@@ -7,9 +7,11 @@ contributors:
 
 Webpack 5.107 is out, and the headline of this release is the very first step toward handling `.html` files natively in webpack core. For years, building a webpack project with a real HTML entry point has meant pulling in `html-webpack-plugin` and `html-loader`. This release starts replacing both of them with first-class support, in the same way `experiments.css` is gradually replacing `css-loader`, `style-loader`, and `mini-css-extract-plugin`.
 
-The HTML pieces are experimental and live behind a new opt-in flag, but the direction is clear: you should eventually be able to build a complete web app with zero extra loaders or plugins for HTML and CSS.
+This release also lands experimental TypeScript support that leans on Node.js's built-in type-stripping, so simple TypeScript projects can compile without `ts-loader` or `swc-loader`.
 
-Alongside the HTML work, this release also continues maturing the built-in CSS pipeline, and ships a handful of improvements for tree shaking, deferred imports, and module resolution.
+The HTML and TypeScript pieces are experimental and live behind opt-in flags, but the direction is clear: you should eventually be able to build a complete web app with zero extra loaders or plugins for HTML, CSS, and basic TypeScript.
+
+Alongside the experimental work, this release also continues maturing the built-in CSS pipeline, and ships a handful of improvements for tree shaking, deferred imports, and module resolution.
 
 Explore what's new:
 
@@ -18,6 +20,7 @@ Explore what's new:
   - [Inline `<style>` Tags](#inline-style-tags)
   - [`<script src>` and `<link rel="modulepreload">`](#script-src-and-link-relmodulepreload)
   - [`webpackIgnore` Magic Comment](#webpackignore-magic-comment)
+- [**TypeScript Support (Experimental)**](#typescript-support-experimental)
 - [**CSS Improvements**](#css-improvements)
   - [Scope Hoisting for CSS Modules](#scope-hoisting-for-css-modules)
   - [Pure Mode for CSS Modules](#pure-mode-for-css-modules)
@@ -123,6 +126,28 @@ The familiar `webpackIgnore: true` magic comment now works inside HTML modules. 
 ```
 
 The comment value is parsed with the same context the JS and CSS parsers use, so non-boolean values raise an `UnsupportedFeatureWarning`.
+
+## TypeScript Support (Experimental)
+
+W> **This feature is experimental and depends on a recent Node.js.** It requires Node.js 22.6 or later for the stable `module.stripTypeScriptTypes` API. The transform handles only erasable TypeScript syntax (see limitations below). For anything else, keep using `ts-loader` or `swc-loader`.
+
+Webpack 5.107 adds first-class TypeScript support behind a new `experiments.typescript` flag. With it enabled, webpack compiles `.ts`, `.cts`, and `.mts` files directly through Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options), no external loader required. The flag is also turned on automatically by [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults).
+
+```js
+// webpack.config.js
+export default {
+  experiments: {
+    typescript: true,
+  },
+  entry: "./src/index.ts",
+};
+```
+
+Enabling the flag also wires up sensible defaults: rules for `.ts` / `.cts` / `.mts`, `.ts` added to extension resolution before `.js`, `extensionAlias` so `import "./foo.js"` also tries `./foo.ts`, `tsconfig.json` resolution, and the `"typescript"` conditional-exports key for monorepos that ship `.ts` sources.
+
+The transform only **erases types**: no type checking, no JSX / `.tsx`, and no non-erasable syntax (`enum`, `namespace`, parameter-property constructors, decorator metadata). These are the same constraints TypeScript enforces with [`erasableSyntaxOnly`](https://www.typescriptlang.org/tsconfig/#erasableSyntaxOnly). For type checking, pair the flag with `tsc --noEmit` or [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin). For JSX or non-erasable syntax, keep using `ts-loader` or `swc-loader`.
+
+See [`examples/typescript`](https://github.com/webpack/webpack/tree/main/examples/typescript) for the built-in setup and [`examples/typescript-non-erasable`](https://github.com/webpack/webpack/tree/main/examples/typescript-non-erasable) for the `ts-loader` fallback.
 
 ## CSS Improvements
 
