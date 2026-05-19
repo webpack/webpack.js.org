@@ -8,8 +8,7 @@ page please create an issue first.
 
 Start by ensuring that you have Node.js installed and forking the repository:
 
-- Install [Node.js][1] if you have not already.
-- Install [Yarn][13] if you have not already. Yarn is an alternative to npm, and it is required for building the site as we use `yarn` specific features like `resolutions` which are not available in other package managers like `pnpm`.
+- Install [Node.js][1] if you have not already. npm ships with Node.js, so no separate package manager installation is required.
 - Fork the **webpack.js.org** repo from [the main repository][2].
 - `git clone <your-clone-url> && cd webpack.js.org`
 
@@ -21,18 +20,18 @@ Start by ensuring that you have Node.js installed and forking the repository:
 
 Once you are in the project directory, run the following commands:
 
-- `yarn` to pull all dependencies.
-- `GITHUB_TOKEN=<your-token-here> yarn fetch-all` - Fetches all updated website content from GitHub.
-- `yarn build` to create a production version of the site.
-- `yarn start` to develop on a local webpack-dev-server: [localhost:3000][3].
+- `npm install` to pull all dependencies.
+- `GITHUB_TOKEN=<your-token-here> npm run fetch-all` - Fetches all updated website content from GitHub.
+- `npm run build` to create a production version of the site.
+- `npm start` to develop on a local webpack-dev-server: [localhost:3000][3].
 
 **Note:** The `fetch` and `fetch-repos` commands must be run before building the site as they populate necessary data for the build process.
 
-> NOTE: run `yarn fetch-repos` and then `yarn fetch` before running `yarn start` command for the first time
+> NOTE: run `npm run fetch-repos` and then `npm run fetch` before running `npm start` command for the first time
 
-- `yarn fetch` to retrieve external documentation/data.
+- `npm run fetch` to retrieve external documentation/data.
 
-The final command, `yarn fetch`, is optional as both `yarn build` and `yarn start`
+The final command, `npm run fetch`, is optional as both `npm run build` and `npm start`
 will do this automatically. This step pulls in documentation for loaders/plugins hosted
 in separate repositories such as the ones found in the [webpack-contrib][4] organization.
 See the `package.json` for the full list of `scripts`.
@@ -60,13 +59,13 @@ you've [installed the plugin][7] if your text editor needs one.
 Run the full test suite (lint + Jest) with:
 
 ```bash
-yarn test
+npm test
 ```
 
 To run only Jest tests:
 
 ```bash
-yarn jest
+npm run jest
 ```
 
 To update snapshots after intentional UI changes:
@@ -148,5 +147,4 @@ any time spent fixing typos or clarifying sections in the documentation.
 [9]: https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/
 [10]: http://conventionalcommits.org/
 [11]: https://github.com/conventional-changelog/standard-version
-[13]: https://yarnpkg.com/lang/en/docs/install
 [14]: https://dev.to/matks/what-it-means-to-rebase-a-pull-request-submitted-on-github-5717

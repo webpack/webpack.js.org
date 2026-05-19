@@ -13,7 +13,7 @@ runs:
       id: build-webpack-persistent-cache
       with:
         path: node_modules/.cache
-        key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+        key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |-
-          build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+          build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/package-lock.json') }}
           build-${{ hashFiles('**/webpack.*.mjs') }}-
