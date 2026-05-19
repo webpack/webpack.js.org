@@ -2,35 +2,21 @@
 title: Other Options
 sort: 22
 contributors:
-  - sokra
-  - skipjack
-  - terinjokes
-  - byzyk
-  - liorgreenb
-  - vansosnin
-  - EugeneHlushko
-  - skovy
-  - rishabh3112
-  - niravasher
-  - Neob91
-  - chenxsan
-  - u01jmg3
-  - jamesgeorge007
-  - snitin315
+  - RlxChap2
 related:
-  - title: Using Records
+  - title: "استخدام Records"
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
 ---
 
-These are the remaining configuration options supported by webpack.
+هذه هي خيارات التخصيص المتبقّية التي يدعمها webpack.
 
-W> Help Wanted: This page is still a work in progress. If you are familiar with any of the options for which the description or examples are incomplete, please create an issue and submit a PR at the [docs repo](https://github.com/webpack/webpack.js.org)!
+W> نحتاج إلى مُساهَمات: لا تزال هذه الصفحة قيد الإنجاز. فإن كنت ضليعاً في أيّ من الخيارات التي بقي وصفها أو أمثلتها ناقصاً، فأنشئ Issue وقدِّم PR في [مستودع التوثيق](https://github.com/webpack/webpack.js.org)!
 
-## amd
+## ايه ام دي
 
 `object` `boolean: false`
 
-Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
+اضبط قيمة `require.amd` أو `define.amd`. وإذا ضبطت `amd` على `false`، فسيُعطَّل دعم AMD في webpack.
 
 **webpack.config.js**
 
@@ -43,18 +29,17 @@ export default {
 };
 ```
 
-Certain popular modules written for AMD, most notably jQuery versions 1.7.0 to 1.9.1, will only register as an AMD module if the loader indicates it has taken [special allowances](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD) for multiple versions being included on a page.
+ثمّة وحدات مكتوبة لـ AMD ذائعة الانتشار، أبرزها إصدارات jQuery من 1.7.0 إلى 1.9.1، لا تُسجِّل نفسها بوصفها وحدة AMD إلا إن أشار الـ loader إلى أنّه قد اتّخذ [تنازلات خاصّة](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD) لإدراج إصدارات متعدّدة في الصفحة الواحدة.
 
-The allowances were the ability to restrict registrations to a specific version or to support different sandboxes with different defined modules.
+وتمثَّلت هذه التنازلات في إمكانية قصر التسجيلات على إصدار بعينه، أو في دعم بيئات معزولة (sandboxes) مختلفة تحوي وحدات مُعرَّفة مختلفة.
 
-This option allows you to set the key your module looks for to a truthy value.
-As it happens, the AMD support in webpack ignores the defined name anyways.
+ويُتيح لك هذا الخيار أن تضبط المفتاح الذي تبحث عنه وحدتك على قيمة صادقة (truthy). وعلى أيّ حال، فإنّ دعم AMD في webpack يتجاهل الاسم المُعرَّف.
 
-## bail
+## الكفالة
 
 `boolean = false`
 
-Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
+يفشل عند أوّل خطأ بدلاً من التجاوز عنه. افتراضياً، يُسجِّل webpack هذه الأخطاء بلون أحمر في الطرفية، وكذلك في وحدة تحكّم المتصفّح عند استعمال HMR، لكنه يتابع الحزم. ولتفعيله:
 
 **webpack.config.js**
 
@@ -65,22 +50,22 @@ export default {
 };
 ```
 
-This will force webpack to exit its bundling process.
+سيُجبر هذا webpack على إنهاء عملية الحزم.
 
-W> Avoid using `bail` option in [`watch`](/configuration/watch) mode, as it will force webpack to exit as soon as possible when an error is found.
+W> تجنّب استعمال الخيار `bail` في وضع [`watch`](/configuration/watch)، لأنّه سيُجبر webpack على الخروج في أقرب فرصة عند العثور على خطأ.
 
 ## dependencies
 
 `[string]`
 
-A list of [`name`](#name) defining all sibling configurations it depends on. Dependent configurations need to be compiled first.
+قائمة [`name`](#name) تُعرِّف كلّ التخصيصات المُجاورة التي يعتمد عليها هذا التخصيص. ولا بدّ أن تُصرَّف التخصيصات المُعتمَد عليها أوّلاً.
 
-In watch mode dependencies will invalidate the compiler when:
+في وضع المراقبة، تُبطل الاعتماديات (invalidate) عملَ المُصرِّف حين:
 
-1.  the dependency has changed
-2.  a dependency is currently compiling or invalid
+1. تتغيّر الاعتمادية.
+2. تكون الاعتمادية قيد التصريف أو في حالة إبطال.
 
-Remember that current configuration will not compile until its dependencies are done.
+تذكَّر أنّ التخصيص الحالي لن يُصرَّف حتى تنتهي اعتمادياته.
 
 **webpack.config.js**
 
@@ -99,24 +84,24 @@ export default [
 ];
 ```
 
-## ignoreWarnings
+## تجاهل التحذيرات
 
 `[RegExp, function (WebpackError, Compilation) => boolean, {module?: RegExp, file?: RegExp, message?: RegExp}]`
 
-Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+يُخبر webpack أن يتجاهل تحذيرات بعينها. ويمكن أن يكون ذلك عبر `RegExp`، أو عبر `function` مخصَّصة تختار التحذيرات استناداً إلى نسخة التحذير الخام، وتتلقّى `WebpackError` و `Compilation` بوصفهما وسيطين، وتُرجع قيمة `boolean`، أو عبر `object` يحمل الخصائص الآتية:
 
-- `file` : A RegExp to select the origin file for the warning.
-- `message` : A RegExp to select the warning message.
-- `module` : A RegExp to select the origin module for the warning.
+- `file` — RegExp لانتقاء الملفّ الذي صدر منه التحذير.
+- `message` — RegExp لانتقاء رسالة التحذير.
+- `module` — RegExp لانتقاء الوحدة التي صدر منها التحذير.
 
-`ignoreWarnings` must be an `array` of any or all of the above.
+يجب أن يكون `ignoreWarnings` `array` يحوي أيّاً من القيم السابقة أو كلّها.
 
 ```js
 export default {
   // ...
   ignoreWarnings: [
     {
-      module: /module2\.js\?[34]/, // A RegExp
+      module: /module2\.js\?[34]/, // RegExp
     },
     {
       module: /[13]/,
@@ -132,9 +117,9 @@ export default {
 
 `object`
 
-Expose custom values into the [loader context](/api/loaders/#the-loader-context).
+اكشف قيماً مخصَّصة داخل [سياق الـ loader](/api/loaders/#the-loader-context).
 
-For example, you can define a new variable in the loader context:
+فمثلاً، يمكنك تعريف متغيّر جديد ضمن سياق الـ loader:
 
 **webpack.config.js**
 
@@ -147,27 +132,27 @@ export default {
 };
 ```
 
-Then use `this.answer` to get its value in the loader:
+ثمّ تستعمل `this.answer` للوصول إلى قيمته داخل الـ loader:
 
 **custom-loader.js**
 
 ```js
 export default function (source) {
   // ...
-  console.log(this.answer); // will log `42` here
+  console.log(this.answer); // ستُطبَع هنا `42`
   return source;
 }
 ```
 
-T> You can override properties in the loader context as webpack copies all properties that are defined in the `loader` to the loader context.
+T> يمكنك تجاوز الخصائص في سياق الـ loader، لأنّ webpack ينسخ كلّ ما يُعرَّف في `loader` إلى سياق الـ loader.
 
-## name
+## اسم
 
 `string`
 
-Name of the configuration. Used when loading multiple configurations.
+اسم التخصيص. يُستعمَل عند تحميل عدّة تخصيصات.
 
-This is especially useful when exporting an array of configurations. webpack uses `name` to identify each config in logs and stats output.
+وهذا مفيد بوجه خاصّ عند تصدير مصفوفة تخصيصات، إذ يستعمل webpack `name` للتمييز بين كلّ تخصيص في السجلّات وفي مخرَجات stats.
 
 **webpack.config.js**
 
@@ -178,7 +163,7 @@ export default {
 };
 ```
 
-For multi-configuration builds:
+ولبُنى متعدّدة التخصيص:
 
 ```js
 export default [
@@ -195,13 +180,13 @@ export default [
 ];
 ```
 
-## parallelism
+## التوازي
 
 `number = 100`
 
-Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
+يُحدِّد سقفاً لعدد الوحدات التي تُعالَج بالتوازي. ويمكن استعماله لضبط الأداء بدقّة أو للحصول على نتائج profiling أكثر موثوقية.
 
-Lower values reduce concurrent work and memory pressure, but may increase total build time. Higher values can improve throughput on powerful machines.
+تُقلِّل القيم المنخفضة العمل المتزامن والضغط على الذاكرة، لكنها قد تُطيل زمن البناء الإجمالي. أمّا القيم المرتفعة فقد تُحسِّن الإنتاجية على الأجهزة القوية.
 
 **webpack.config.js**
 
@@ -212,16 +197,16 @@ export default {
 };
 ```
 
-Use cases:
+حالات الاستخدام:
 
-- Reduce `parallelism` when builds hit memory limits (for example in constrained CI runners).
-- Increase it when you have enough CPU and memory and want to maximize build throughput.
+- قلِّل `parallelism` حين تصطدم بُناك بحدود الذاكرة (كما في مُشغِّلات CI المُقيَّدة).
+- ارفعه حين تتوفّر لك معالجة وذاكرة كافيتان وتريد أن تُعظِّم إنتاجية البناء.
 
-## profile
+## الملف الشخصي
 
 `boolean`
 
-Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool. It will also log out a summary of module timings.
+التقط "profile" للتطبيق، يشمل إحصاءات وتلميحات يمكن تحليلها لاحقاً عبر أداة [Analyze](https://webpack.github.io/analyse/). كما أنّه سيُسجِّل ملخّصاً عن أزمنة الوحدات.
 
 **webpack.config.js**
 
@@ -232,15 +217,15 @@ export default {
 };
 ```
 
-T> Combine `profile: true` with `parallelism: 1` to get correct timings. Note that this will slow down the build as well.
+T> اجمع بين `profile: true` و `parallelism: 1` للحصول على أزمنة صحيحة. لاحظ أنّ هذا سيُبطئ البناء أيضاً.
 
-## recordsInputPath
+## RecordsInputPath
 
 `string`
 
-Specify the file from which to read the last set of records. This can be used to rename a records file. See the example below.
+حدِّد الملفّ الذي يقرأ منه webpack آخر مجموعة من السجلّات. وهذا يُستعمَل لإعادة تسمية ملفّ السجلّات. انظر المثال أدناه.
 
-When this option is set, webpack reads previously generated records from this path and uses them as input for stable module/chunk id tracking.
+حين يُضبط هذا الخيار، يقرأ webpack السجلّات المُولَّدة سابقاً من هذا المسار، ويُوظِّفها مدخلاً لتعقّب معرّفات الوحدات والـ chunks تعقّباً مستقرّاً.
 
 **webpack.config.js**
 
@@ -258,11 +243,11 @@ export default {
 };
 ```
 
-## recordsOutputPath
+## RecordsOutputPath
 
 `string`
 
-Specify where the records should be written. The following example shows how you might use this option in combination with `recordsInputPath` to rename a records file:
+حدِّد المسار الذي تُكتَب فيه السجلّات. يُبيِّن المثال الآتي كيف يمكن أن تستعمل هذا الخيار مع `recordsInputPath` لإعادة تسمية ملفّ السجلّات:
 
 **webpack.config.js**
 
@@ -280,11 +265,11 @@ export default {
 };
 ```
 
-## recordsPath
+## RecordsPath
 
 `string`
 
-Use this option to generate a JSON file containing webpack "records" – pieces of data used to store module identifiers across multiple builds. You can use this file to track how modules change between builds. To generate one, specify a location:
+استعمل هذا الخيار لتوليد ملفّ JSON يحوي "records" خاصّة بـ webpack، وهي قطع بيانات تُستعمَل لحفظ معرّفات الوحدات عبر بُنى متعدّدة. ويمكنك توظيف هذا الملفّ لتعقّب كيف تتغيّر الوحدات بين البُنى. ولتوليده، حدِّد موقعاً:
 
 **webpack.config.js**
 
@@ -301,17 +286,17 @@ export default {
 };
 ```
 
-Records are particularly useful if you have a complex setup that leverages [Code Splitting](/guides/code-splitting). The data can be used to ensure the split bundles are achieving the [caching](/guides/caching) behavior you need.
+تكون الـ records مفيدة بوجه خاص حين يكون لديك إعداد معقَّد يعتمد [تقسيم الشيفرة (Code Splitting)](/guides/code-splitting). وتُستعمَل بياناتها لضمان أنّ الحزم المُقسَّمة تحقِّق سلوك [التخزين المؤقَّت (caching)](/guides/caching) الذي تنشده.
 
-T> Note that although this file is generated by the compiler, you may still want to track it in source control to keep a history of how it has changed over time.
+T> لاحظ أنّه على الرغم من أنّ هذا الملفّ يُولِّده المُصرِّف، فقد تودّ تتبّعه في نظام التحكّم بالإصدار للاحتفاظ بسجلّ تاريخي يبيِّن كيف تغيّر عبر الزمن.
 
-W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOutputPath` to the same location. This is usually all that's necessary unless you decide to change the name of the file containing the records. See below for an example.
+W> ضبط `recordsPath` يضبط عملياً كلاً من `recordsInputPath` و `recordsOutputPath` على المسار ذاته. وعادةً ما يكفيك هذا، إلا إن قرّرت تغيير اسم ملفّ السجلّات. انظر المثال أدناه.
 
-## snapshot
+## لقطة
 
 `object`
 
-`snapshot` options decide how the file system snapshots are created and invalidated.
+تُحدِّد خيارات `snapshot` كيفية إنشاء لقطات نظام الملفّات وكيفية إبطالها.
 
 **webpack.config.js**
 
@@ -350,42 +335,42 @@ export default {
 };
 ```
 
-### buildDependencies
+### buildDependeency
 
 `object = { hash boolean = true, timestamp boolean = true }`
 
-Snapshots for build dependencies when using the persistent cache.
+اللقطات الخاصّة باعتماديات البناء حين تُستعمَل ذاكرة التخزين المؤقَّت الدائمة.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash` — قارِن hashes المحتوى لتقرير الإبطال (أبهظ من `timestamp`، لكنه يتغيّر بوتيرة أقلّ).
+- `timestamp` — قارِن الطوابع الزمنية لتقرير الإبطال.
 
-Both `hash` and `timestamp` are optional.
+كلاهما اختياريّ.
 
-- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
-- `{ timestamp: true }`: Good for local development caching.
-- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+- `{ hash: true }` — مناسب لـ CI caching مع checkout جديد لا يحفظ الطوابع الزمنية ويعتمد على hashes.
+- `{ timestamp: true }` — مناسب للتخزين المؤقَّت في التطوير المحلي.
+- `{ timestamp: true, hash: true }` — مناسب لكلتا الحالتين أعلاه. تُقارَن الطوابع الزمنية أوّلاً، وهو ما يكون رخيصاً لأنّ webpack لا يحتاج إلى قراءة الملفّات لحساب hashes لها. ثمّ تُقارَن hashes المحتوى لاحقاً حين تتطابق الطوابع الزمنية فقط، وهو ما يُكلِّف خسارة طفيفة في الأداء عند البناء الأوّل.
 
 ### immutablePaths
 
 `(RegExp | string)[]`
 
-An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
+مصفوفة من المسارات التي يُديرها مدير حزم، وتتضمّن إصداراً أو hash في مساراتها بحيث تكون جميع ملفّاتها غير قابلة للتغيير.
 
-Make sure to wrap the path in a capture group if you use regular expressions.
+تأكّد من تغليف المسار في مجموعة التقاط (capture group) إن استعملت تعابير نمطية.
 
-### managedPaths
+### ManagedPaths
 
 `(RegExp | string)[]`
 
-An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+مصفوفة من المسارات التي يُديرها مدير حزم ويمكن الثقة بأنها لن تُعدَّل بطرق أخرى.
 
-Make sure you wrap the path in a capture group if you are using regular expressions so webpack can extract the path, for example, here's a RegExp webpack internally uses to match the `node_modules` directory:
+تأكّد من تغليف المسار في مجموعة التقاط (capture group) إن استعملت تعابير نمطية حتى يستطيع webpack استخراج المسار. ومن أمثلة ذلك RegExp التي يستعملها webpack داخلياً لمطابقة مجلَّد `node_modules`:
 
 ```text
 /^(.+?[\\/]node_modules)[\\/]/
 ```
 
-A common use case for `managedPaths` would be to exclude some folders from `node_modules`, e.g. you want webpack to know that files in the `node_modules/@azure/msal-browser` folder are expected to change, which can be done with a regular expression like the one below:
+ومن حالات الاستخدام الشائعة لـ `managedPaths` استثناء بعض المجلَّدات من `node_modules`، فمثلاً قد ترغب في أن يعلم webpack أنّ الملفّات في مجلَّد `node_modules/@azure/msal-browser` يُتوقَّع تغيُّرها، وذلك يمكن إنجازه بتعبير نمطي كالآتي:
 
 ```js
 export default {
@@ -397,48 +382,48 @@ export default {
 };
 ```
 
-### unmanagedPaths
+### مسارات غير مُدارة
 
 <Badge text="5.90.0+" />
 
 `(RegExp | string)[]`
 
-An array of paths that are not managed by a package manager and the contents are subject to change.
+مصفوفة من المسارات التي لا يُديرها مدير حزم، ومحتوياتها قابلة للتغيُّر.
 
-Make sure to wrap the path in a capture group if you use regular expressions.
+تأكّد من تغليف المسار في مجموعة التقاط (capture group) إن استعملت تعابير نمطية.
 
 ### module
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for building modules.
+اللقطات الخاصّة ببناء الوحدات.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash` — قارِن hashes المحتوى لتقرير الإبطال (أبهظ من `timestamp`، لكنه يتغيّر بوتيرة أقلّ).
+- `timestamp` — قارِن الطوابع الزمنية لتقرير الإبطال.
 
 ### contextModule
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for building context modules.
+اللقطات الخاصّة ببناء وحدات السياق (context modules).
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash` — قارِن hashes المحتوى لتقرير الإبطال (أبهظ من `timestamp`، لكنه يتغيّر بوتيرة أقلّ).
+- `timestamp` — قارِن الطوابع الزمنية لتقرير الإبطال.
 
 ### resolve
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for resolving of requests.
+اللقطات الخاصّة بتحليل الطلبات.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash` — قارِن hashes المحتوى لتقرير الإبطال (أبهظ من `timestamp`، لكنه يتغيّر بوتيرة أقلّ).
+- `timestamp` — قارِن الطوابع الزمنية لتقرير الإبطال.
 
-### resolveBuildDependencies
+### ResolveBuildDependeency
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for resolving of build dependencies when using the persistent cache.
+اللقطات الخاصّة بتحليل اعتماديات البناء حين تُستعمَل ذاكرة التخزين المؤقَّت الدائمة.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash` — قارِن hashes المحتوى لتقرير الإبطال (أبهظ من `timestamp`، لكنه يتغيّر بوتيرة أقلّ).
+- `timestamp` — قارِن الطوابع الزمنية لتقرير الإبطال.

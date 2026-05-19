@@ -2,28 +2,22 @@
 title: Performance
 sort: 21
 contributors:
-  - thelarkinn
-  - tbroadley
-  - byzyk
-  - madhavarshney
-  - EugeneHlushko
-  - shivxmsharma
+  - RlxChap2
 ---
 
-These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
-This feature was inspired by the idea of [webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216).
+تتيح لك هذه الخيارات التحكّم بالكيفية التي يُنبّهك بها webpack حين تتجاوز الـ assets أو نقاط الدخول حدّاً معيّناً من الحجم. وقد استوحينا هذه الميزة من فكرة [ميزانيات الأداء في webpack](https://github.com/webpack/webpack/issues/3216).
 
 ## `performance`
 
 `object`
 
-Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifying you of this.
+اضبط من هنا الطريقة التي تَظهر بها تلميحات الأداء. مثلاً، إن كان لديك asset يتجاوز 250 كيلوبايت، فإنّ webpack سيُطلق تحذيراً يُنبّهك إلى ذلك.
 
 ### performance.assetFilter
 
 `function(assetFilename) => boolean`
 
-This property allows webpack to control what files are used to calculate performance hints. The default function is:
+تمنح هذه الخاصية webpack القدرة على تحديد الملفات التي تدخل في حساب تلميحات الأداء. والدالّة الافتراضية هي:
 
 ```js
 function assetFilter(assetFilename) {
@@ -31,7 +25,7 @@ function assetFilter(assetFilename) {
 }
 ```
 
-You can override this property by passing your own function in:
+ويمكنك تجاوز هذه الخاصية بتمرير دالّتك الخاصة:
 
 ```js
 export default {
@@ -44,23 +38,23 @@ export default {
 };
 ```
 
-The example above will only give you performance hints based on `.js` files.
+في المثال السابق، لن تُعطى تلميحات الأداء إلا بناءً على ملفّات `.js` وحدها.
 
 ### performance.hints
 
 `string: 'error' | 'warning'` `boolean: false`
 
-Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found.
+يُفعّل التلميحات أو يُعطّلها. كذلك يُخبر webpack هل ينبغي إطلاق خطأ أم تحذير عند العثور على ما يستوجب تلميحاً.
 
-The default value of `performance.hints` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `performance.hints` على [`mode`](/configuration/mode/):
 
-| Mode            | Default     |
+| Mode            | الافتراضي    |
 | --------------- | ----------- |
-| `"production"`  | `'warning'` |
-| `"development"` | `false`     |
-| `"none"`        | `false`     |
+| `"production"` | `'warning'` |
+| `"development"` | `false` |
+| `"none"` | `false` |
 
-Given an asset is created that is over 250kb:
+لنفترض أنّ هناك asset حجمه يتعدّى 250 كيلوبايت:
 
 ```js
 export default {
@@ -71,7 +65,7 @@ export default {
 };
 ```
 
-No hint warnings or errors are shown.
+عندها لن تظهر تحذيرات ولا أخطاء.
 
 ```js
 export default {
@@ -82,7 +76,7 @@ export default {
 };
 ```
 
-A warning will be displayed notifying you of a large asset. We recommend something like this for development environments.
+سيُعرض تحذير يُنبّهك إلى أنّ هناك asset كبير الحجم. ونحن ننصح بهذا الإعداد في بيئات التطوير.
 
 ```js
 export default {
@@ -93,13 +87,13 @@ export default {
 };
 ```
 
-An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance.
+سيُعرض خطأ يُنبّهك إلى أنّ هناك asset ضخماً. ونحن نُفضّل أن تستخدم `hints: "error"` في بُنى الإنتاج، تجنّباً لنشر حزم إنتاج كبيرة الحجم تُؤثّر سلباً في أداء الصفحة.
 
 ### performance.maxAssetSize
 
 `number = 250000`
 
-An asset is any emitted file from webpack. This option controls when webpack emits a performance hint based on individual asset size in bytes.
+الـ asset هو أي ملف يُخرجه webpack. ويتحكّم هذا الخيار في اللحظة التي يُطلق فيها webpack تلميح أداء بناءً على حجم الـ asset الفردي بالبايتات.
 
 ```js
 export default {
@@ -114,7 +108,7 @@ export default {
 
 `number = 250000`
 
-An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size in bytes.
+تُمثّل نقطة الدخول مجموع الـ assets التي ستُستخدم في وقت التحميل الأوّل لتلك النقطة بعينها. ويتحكّم هذا الخيار في اللحظة التي يُطلق فيها webpack تلميحات الأداء استناداً إلى الحدّ الأقصى لحجم نقطة الدخول بالبايتات.
 
 ```js
 export default {

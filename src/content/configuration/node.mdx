@@ -2,22 +2,14 @@
 title: Node
 sort: 17
 contributors:
-  - sokra
-  - skipjack
-  - oneforwonder
-  - Rob--W
-  - byzyk
-  - EugeneHlushko
-  - anikethsaha
-  - chenxsan
-  - snitin315
+  - RlxChap2
 ---
 
-The following Node.js options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html).
+تُحدِّد خيارات Node.js الآتية ما إذا كان webpack سيُوفِّر polyfill أو مُحاكاة (mock) لبعض [المتغيّرات العالميّة في Node.js](https://nodejs.org/docs/latest/api/globals.html).
 
-This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/main/lib/NodeStuffPlugin.js) plugin.
+هذه الميزة يُوفّرها plugin داخلي في webpack هو [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/main/lib/NodeStuffPlugin.js).
 
-W> As of webpack 5, You can configure only `global`, `__filename`/`import.meta.filename` or `__dirname`/`import.meta.dirname` under `node` option. If you're looking for how to polyfill `fs` alike in Node.js under webpack 5, please check [resolve.fallback](/configuration/resolve/#resolvefallback) for help.
+W> منذ webpack 5، لم يعد بإمكانك ضبط شيء تحت الخيار `node` سوى `global` و`__filename`/`import.meta.filename` و`__dirname`/`import.meta.dirname`. وإن كنت تبحث عن طريقة لعمل polyfill لـ `fs` ونظائرها في Node.js على webpack 5، فاستعِن بـ [resolve.fallback](/configuration/resolve/#resolvefallback).
 
 ## node
 
@@ -36,54 +28,54 @@ export default {
 };
 ```
 
-The `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` plugin.
+يمكنك ضبط الخيار `node` على `false` لتُعطّل plugin الـ `NodeStuffPlugin` تماماً.
 
 ## node.global
 
 `boolean` `'warn'`
 
-T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`.
+T> إن كنت تستخدم وحدة (module) تحتاج إلى متغيّرات عالميّة داخلها، فاستخدم `ProvidePlugin` بدلاً من `global`.
 
-See [the Node.js documentation](https://nodejs.org/api/globals.html#globals_global) for the exact behavior of this object.
+اطّلع على [توثيق Node.js](https://nodejs.org/api/globals.html#globals_global) لمعرفة السلوك التفصيلي لهذا الكائن.
 
-Options:
+الخيارات:
 
-- `true`: Provide a polyfill or using `globalThis` if supported by your environment, see the [`environment`](/configuration/output/#outputenvironment) option.
-- `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`.
-- `'warn'`: Show a warning when using `global`.
+- `true`: يُوفِّر polyfill أو يستعمل `globalThis` إن كانت بيئتك تدعمها، انظر الخيار [`environment`](/configuration/output/#outputenvironment).
+- `false`: لا يُوفِّر شيئاً. وقد تنهار الشيفرة التي تنتظر وجود هذا الكائن مُطلقةً `ReferenceError`.
+- `'warn'`: يُظهر تحذيراً عند استخدام `global`.
 
 ## node.\_\_filename
 
 `boolean` `'mock' | 'warn-mock' | 'node-module' | 'eval-only'`
 
-Options:
+الخيارات:
 
-- `true`: The filename of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`: Webpack won't touch your `__filename` and `import.meta.filename` code, which means you have the regular Node.js `__filename` and `import.meta.filename` behavior. The filename of the **output** file when run in a Node.js environment.
-- `'mock'`: The fixed value `'/index.js'`.
-- `'warn-mock'`: Use the fixed value of `'/index.js'` but show a warning.
-- `'node-module'`: Replace `__filename` in CommonJS modules and `import.meta.filename` code in ES modules to `fileURLToPath(import.meta.url)` when `output.module` is enabled.
-- `'eval-only'`: Defer the resolution of `__filename`/`import.meta.filename` to the Node.js runtime at execution time, but evaluate them in construction like `require`/`import` to properly resolve modules. Replace `__filename` with `import.meta.filename` and vice versa depending on the `output.module` option (if your environment does not support `import.meta.filename`, the fallback will be used using `import.meta.url` to get this value).
+- `true`: اسم ملفّ الإدخال (**input**) نسبةً إلى [خيار `context`](/configuration/entry-context/#context).
+- `false`: لن يمسّ webpack شيفرتك التي تستعمل `__filename` و`import.meta.filename`، أي ستحظى بالسلوك الاعتيادي لـ Node.js لهذين المتغيّرين. ويكون الاسم اسمَ ملفّ الإخراج (**output**) حين تُنفَّذ الشيفرة في بيئة Node.js.
+- `'mock'`: قيمة ثابتة `'/index.js'`.
+- `'warn-mock'`: يستعمل القيمة الثابتة `'/index.js'` لكن مع إظهار تحذير.
+- `'node-module'`: يستبدل `__filename` في وحدات CommonJS، و`import.meta.filename` في وحدات ES، بـ `fileURLToPath(import.meta.url)` حين يكون `output.module` مفعَّلاً.
+- `'eval-only'`: يُؤجِّل تحليل `__filename`/`import.meta.filename` إلى وقت التنفيذ ضمن Node.js، لكنه يُقيّمها أثناء البناء كما يفعل مع `require`/`import` من أجل تحليل الوحدات تحليلاً صحيحاً. كما يستبدل `__filename` بـ `import.meta.filename` والعكس بحسب الخيار `output.module` (وإن لم تكن بيئتك تدعم `import.meta.filename`، فسيُستعمَل البديل عبر `import.meta.url` للحصول على هذه القيمة).
 
-The default value can be affected by different [`target`](/configuration/target/):
+قد تتأثّر القيمة الافتراضية باختلاف [`target`](/configuration/target/):
 
-- Defaults to `'eval-only'` if [`target`](/configuration/target/) is set to `'node'` or node-like environments (`async-node`, `electron`) or mixed targets (`web` and `node` together).
-- Defaults to `'mock'` if [`target`](/configuration/target/) is set to `'web'` or web-like environments.
+- تكون افتراضياً `'eval-only'` إن كان [`target`](/configuration/target/) مضبوطاً على `'node'` أو على بيئات شبيهة بـ node (مثل `async-node` و`electron`) أو على أهداف مختلطة (مثل `web` و`node` معاً).
+- وتكون افتراضياً `'mock'` إن كان [`target`](/configuration/target/) مضبوطاً على `'web'` أو على بيئات شبيهة بالويب.
 
 ## node.\_\_dirname
 
 `boolean` `'mock' | 'warn-mock' | 'node-module' | 'eval-only'`
 
-Options:
+الخيارات:
 
-- `true`: The dirname of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`: Webpack won't touch your `__dirname` and `import.meta.dirname` code, which means you have the regular Node.js `__dirname` and `import.meta.dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
-- `'mock'`: The fixed value `'/'`.
-- `'warn-mock'`: Use the fixed value of `'/'` but show a warning.
-- `'node-module'`: Replace `__dirname` in CommonJS modules to `fileURLToPath(import.meta.url + "/..")` when `output.module` is enabled.
-- `'eval-only'`: Defer the resolution of `__dirname`/`import.meta.dirname` to the Node.js runtime at execution time, but evaluate them in construction like `require`/`import` to properly resolve modules. Replace `__dirname` with `import.meta.dirname` and vice versa depending on the `output.module` option (if your environment does not support `import.meta.filename`, the fallback will be used using `import.meta.url` to get this value).
+- `true`: اسم مجلَّد ملفّ الإدخال (**input**) نسبةً إلى [خيار `context`](/configuration/entry-context/#context).
+- `false`: لن يمسّ webpack شيفرتك التي تستعمل `__dirname` و`import.meta.dirname`، أي ستحظى بالسلوك الاعتيادي لـ Node.js لهذين المتغيّرين. ويكون الاسم اسمَ مجلَّد ملفّ الإخراج (**output**) حين تُنفَّذ الشيفرة في بيئة Node.js.
+- `'mock'`: قيمة ثابتة `'/'`.
+- `'warn-mock'`: يستعمل القيمة الثابتة `'/'` لكن مع إظهار تحذير.
+- `'node-module'`: يستبدل `__dirname` في وحدات CommonJS بـ `fileURLToPath(import.meta.url + "/..")` حين يكون `output.module` مفعَّلاً.
+- `'eval-only'`: يُؤجِّل تحليل `__dirname`/`import.meta.dirname` إلى وقت التنفيذ ضمن Node.js، لكنه يُقيّمها أثناء البناء كما يفعل مع `require`/`import` من أجل تحليل الوحدات تحليلاً صحيحاً. كما يستبدل `__dirname` بـ `import.meta.dirname` والعكس بحسب الخيار `output.module` (وإن لم تكن بيئتك تدعم `import.meta.filename`، فسيُستعمَل البديل عبر `import.meta.url` للحصول على هذه القيمة).
 
-The default value can be affected by different [`target`](/configuration/target/):
+قد تتأثّر القيمة الافتراضية باختلاف [`target`](/configuration/target/):
 
-- Defaults to `'eval-only'` if [`target`](/configuration/target/) is set to `'node'` or node-like environments (`async-node`, `electron`) or mixed targets (`web` and `node` together).
-- Defaults to `'mock'` if [`target`](/configuration/target/) is set to `'web'` or web-like environments.
+- تكون افتراضياً `'eval-only'` إن كان [`target`](/configuration/target/) مضبوطاً على `'node'` أو على بيئات شبيهة بـ node (مثل `async-node` و`electron`) أو على أهداف مختلطة (مثل `web` و`node` معاً).
+- وتكون افتراضياً `'mock'` إن كان [`target`](/configuration/target/) مضبوطاً على `'web'` أو على بيئات شبيهة بالويب.

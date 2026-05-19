@@ -2,28 +2,14 @@
 title: Stats
 sort: 18
 contributors:
-  - SpaceK33z
-  - sallar
-  - jungomi
-  - ldrick
-  - jasonblanchard
-  - byzyk
-  - renjithspace
-  - Raiondesu
-  - EugeneHlushko
-  - grgur
-  - anshumanv
-  - pixel-ray
-  - snitin315
-  - u01jmg3
-  - grrizzly
+  - RlxChap2
 ---
 
 `object` `string`
 
-The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
+يتيح لك خيار `stats` التحكم الدقيق في المعلومات التي يتم عرضها bundle. يمكن أن يكون هذا حلاً وسطًا جيدًا إذا كنت لا تريد استخدام `quiet` أو `noInfo` لأنك تريد بعض معلومات bundle، ولكن ليس كلها.
 
-W> This option does not have any effect when using the [Node.js API](/api/node). You need to pass the stats options to the `stats.toString()` resp. `stats.toJson()` calls instead.
+W> ليس لهذا الخيار أي تأثير عند استخدام [Node.js API](/api/node). تحتاج إلى تمرير خيارات stats إلى `stats.toString()`. `stats.toJson()` يدعو بدلاً من ذلك.
 
 ```js
 export default {
@@ -32,30 +18,30 @@ export default {
 };
 ```
 
-## Stats Presets
+## Stats الإعدادات المسبقة
 
-Webpack comes with certain presets available for the stats output:
+يأتي webpack مزودًا ببعض الإعدادات المسبقة المتاحة لـ stats output:
 
-| Preset              | Alternative | Description                                                    |
+| محددة مسبقا              | بديل | الوصف                                                    |
 | ------------------- | ----------- | -------------------------------------------------------------- |
-| `'errors-only'`     | _none_      | Only output when errors happen                                 |
-| `'errors-warnings'` | _none_      | Only output errors and warnings happen                         |
-| `'minimal'`         | _none_      | Only output when errors or new compilation happen              |
-| `'none'`            | `false`     | Output nothing                                                 |
-| `'normal'`          | `true`      | Standard output                                                |
-| `'verbose'`         | _none_      | Output everything                                              |
-| `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
-| `'summary'`         | _none_      | Output webpack version, warnings count and errors count        |
+| `'errors-only'`     | _لا شيء_      | فقط output عند حدوث أخطاء                                 |
+| `'errors-warnings'` | _لا شيء_      | تحدث أخطاء وتحذيرات output فقط                         |
+| `'minimal'`         | _لا شيء_      | فقط output عند حدوث أخطاء أو compilation جديدة              |
+| `'none'`            | `false`     | Output لا شيء                                                 |
+| `'normal'`          | `true`      | قياسي output                                                |
+| `'verbose'`         | _لا شيء_      | Output كل شيء                                              |
+| `'detailed'`        | _لا شيء_      | Output كل شيء ما عدا `chunkModules` و`chunkRootModules` |
+| `'summary'`         | _لا شيء_      | Output webpack الإصدار، عدد التحذيرات وعدد الأخطاء        |
 
-## Stats Options
+## Stats الخيارات
 
-It is possible to specify which information you want to see in the stats output.
+من الممكن تحديد المعلومات التي تريد رؤيتها في stats output.
 
-T> All of the options in the stats configuration object are optional.
+T> جميع الخيارات الموجودة في تخصيص stats object اختيارية.
 
 ### stats.all
 
-A fallback value for stats options when an option is not defined. It has precedence over local webpack defaults.
+قيمة احتياطية لخيارات stats عندما لا يتم تعريف الخيار. له الأسبقية على الإعدادات الافتراضية webpack المحلية.
 
 ```js
 export default {
@@ -70,7 +56,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to show the asset information. Set `stats.assets` to `false` to hide it.
+يخبر `stats` ما إذا كان سيتم عرض معلومات asset أم لا. اضبط `stats.assets` على `false` لإخفائه.
 
 ```js
 export default {
@@ -85,7 +71,7 @@ export default {
 
 `string = 'id'`
 
-Tells `stats` to sort the assets by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.assetsSort`. Use `!` prefix in the value to reverse the sort order by a given field.
+يخبر `stats` بفرز assets حسب حقل معين. يُسمح باستخدام كافة [حقول الفرز](#sorting-fields) كقيم لـ `stats.assetsSort`. استخدم البادئة `!` في القيمة لعكس ترتيب الفرز حسب حقل معين.
 
 ```js
 export default {
@@ -100,7 +86,7 @@ export default {
 
 `number = 15`
 
-Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
+يخبر `stats` بعدد عناصر assets التي يجب عرضها (سيتم طي المجموعات لتناسب هذه المساحة).
 
 ```js
 export default {
@@ -115,7 +101,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add the build date and the build time information. Set `stats.builtAt` to `false` to hide it.
+يخبر `stats` ما إذا كان يجب إضافة التاريخ build ومعلومات الوقت build. اضبط `stats.builtAt` على `false` لإخفائه.
 
 ```js
 export default {
@@ -128,13 +114,13 @@ export default {
 
 ### stats.cached
 
-Old version of `stats.cachedModules`.
+الإصدار القديم من `stats.cachedModules`.
 
 ### stats.cachedAssets
 
 `boolean = true`
 
-Tells `stats` whether to add information about the cached assets. Setting `stats.cachedAssets` to `false` will tell `stats` to only show the emitted files (not the ones that were built).
+يخبر `stats` ما إذا كان سيتم إضافة معلومات حول المخزن المؤقت assets. سيؤدي ضبط `stats.cachedAssets` إلى `false` إلى مطالبة `stats` بإظهار الملفات المنبعثة فقط (وليس تلك التي تم إنشاؤها).
 
 ```js
 export default {
@@ -149,7 +135,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about cached (not built) modules.
+يخبر `stats` ما إذا كان سيتم إضافة معلومات حول ذاكرة التخزين المؤقت (غير المضمنة) modules.
 
 ```js
 export default {
@@ -164,7 +150,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about the children.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول الأطفال.
 
 ```js
 export default {
@@ -179,7 +165,7 @@ export default {
 
 `boolean = true`
 
-Display auxiliary assets in chunk groups.
+عرض المساعد assets في مجموعات chunk.
 
 ```js
 export default {
@@ -194,7 +180,7 @@ export default {
 
 `boolean = true`
 
-Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
+عرض مجموعات فرعية من chunk (على سبيل المثال، chunks وassets التي تم جلبها مسبقًا، وassets).
 
 ```js
 export default {
@@ -209,7 +195,7 @@ export default {
 
 `number`
 
-Limit of assets displayed in chunk groups.
+حد assets المعروض في مجموعات chunk.
 
 ```js
 export default {
@@ -224,7 +210,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about the `namedChunkGroups`.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول `namedChunkGroups`.
 
 ```js
 export default {
@@ -239,7 +225,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about the built modules to information about the chunk.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول modules المدمج إلى معلومات حول chunk.
 
 ```js
 export default {
@@ -254,7 +240,7 @@ export default {
 
 `number = 10`
 
-Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
+يخبر `stats` عدد عناصر chunk modules التي يجب عرضها (سيتم طي المجموعات لتناسب هذه المساحة).
 
 ```js
 export default {
@@ -269,7 +255,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about the origins of chunks and chunk merging.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول أصول الدمج chunks وchunk.
 
 ```js
 export default {
@@ -284,7 +270,7 @@ export default {
 
 `boolean = false`
 
-Tells `stats` to display chunk parents, children and siblings.
+يخبر `stats` لعرض chunk الآباء والأطفال والأشقاء.
 
 ```js
 export default {
@@ -299,7 +285,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about the chunk. Setting `stats.chunks` to `false` results in a less verbose output.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول chunk. يؤدي ضبط `stats.chunks` إلى `false` إلى output أقل تفصيلاً.
 
 ```js
 export default {
@@ -314,7 +300,7 @@ export default {
 
 `string = 'id'`
 
-Tells `stats` to sort the chunks by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.chunksSort`. Use `!` prefix in the value to reverse the sort order by a given field.
+يخبر `stats` بفرز chunks حسب حقل معين. يُسمح باستخدام كافة [حقول الفرز](#sorting-fields) كقيم لـ `stats.chunksSort`. استخدم البادئة `!` في القيمة لعكس ترتيب الفرز حسب حقل معين.
 
 ```js
 export default {
@@ -329,7 +315,7 @@ export default {
 
 `boolean = false` `{ bold?: string, cyan?: string, green?: string, magenta?: string, red?: string, yellow?: string }`
 
-Tells `stats` whether to output in the different colors.
+يخبر `stats` ما إذا كان يجب output بألوان مختلفة.
 
 ```js
 export default {
@@ -340,19 +326,19 @@ export default {
 };
 ```
 
-It is also available as a CLI flag:
+وهو متوفر أيضًا كعلامة CLI:
 
 ```bash
 npx webpack --stats-colors
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack --no-stats-colors
 ```
 
-You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
+يمكنك تحديد ألوان output الطرفية الخاصة بك باستخدام [تسلسلات الهروب ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code)
 
 ```js
 export default {
@@ -367,7 +353,7 @@ export default {
 
 `string`
 
-The stats base directory, an **absolute path** for shortening the request information.
+الدليل الأساسي stats، **المسار المطلق** لتقصير معلومات الطلب.
 
 ```js
 import path from "node:path";
@@ -384,13 +370,13 @@ export default {
 };
 ```
 
-By default, the value of [`context`](/configuration/entry-context/#context) or the Node.js current working directory is used.
+افتراضيًا، يتم استخدام قيمة [`context`](/configuration/entry-context/#context) أو دليل العمل الحالي Node.js.
 
 ### stats.dependentModules
 
 `boolean`
 
-Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
+يخبر `stats` ما إذا كان سيتم إظهار chunk modules التي هي dependencies من modules أخرى من chunk.
 
 ```js
 export default {
@@ -405,7 +391,7 @@ export default {
 
 `boolean = false`
 
-Tells `stats` whether to display the distance from the entry point for each module.
+يخبر `stats` ما إذا كان سيتم عرض المسافة من entry point لكل module.
 
 ```js
 export default {
@@ -420,7 +406,7 @@ export default {
 
 `boolean = true` `"auto"`
 
-Tells `stats` whether to display the entry points with the corresponding bundles.
+يخبر `stats` ما إذا كان سيتم عرض entry points مع bundles المقابل.
 
 ```js
 export default {
@@ -431,13 +417,13 @@ export default {
 };
 ```
 
-When `stats.entrypoints` is set to `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
+عند ضبط `stats.entrypoints` على `'auto'`، سيقرر webpack تلقائيًا ما إذا كان سيتم عرض entry points في stats output.
 
 ### stats.env
 
 `boolean = false`
 
-Tells `stats` whether to display the `--env` information.
+يخبر `stats` ما إذا كان سيتم عرض معلومات `--env` أم لا.
 
 ```js
 export default {
@@ -452,7 +438,7 @@ export default {
 
 `boolean` `"auto"`
 
-Tells `stats` whether to include the [`cause`](https://nodejs.org/en/blog/release/v16.9.0/#error-cause) property of errors in the output. It defaults to `true`.
+يخبر `stats` ما إذا كان سيتم تضمين خاصية [`cause`](https://nodejs.org/en/blog/release/v16.9.0/#error-cause) للأخطاء في output. الافتراضي هو `true`.
 
 ```js
 export default {
@@ -467,7 +453,7 @@ export default {
 
 `boolean` `"auto"`
 
-Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
+يخبر `stats` ما إذا كان يجب إضافة التفاصيل إلى الأخطاء أم لا. يتم تعيينه افتراضيًا على `'auto'` والذي سيعرض تفاصيل الخطأ عند وجود خطأين فقط أو أقل.
 
 ```js
 export default {
@@ -482,9 +468,9 @@ export default {
 
 `boolean` `"auto"`
 
-Tells `stats` whether to include the errors array from [`AggregateError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) instances in the output. It defaults to `true`.
+يخبر `stats` ما إذا كان سيتم تضمين الأخطاء array من مثيلات [`AggregateError`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) في output. الافتراضي هو `true`.
 
-Useful when a single error is composed of multiple underlying errors, providing deeper visibility into grouped error structures.
+يكون مفيدًا عندما يتكون خطأ واحد من عدة أخطاء أساسية، مما يوفر رؤية أعمق لهياكل الأخطاء المجمعة.
 
 ```js
 export default {
@@ -499,7 +485,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to show stack trace of errors.
+يخبر `stats` ما إذا كان سيتم إظهار تتبع مكدس الأخطاء.
 
 ```js
 export default {
@@ -514,7 +500,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to display the errors.
+يخبر `stats` ما إذا كان سيتم عرض الأخطاء أم لا.
 
 ```js
 export default {
@@ -529,7 +515,7 @@ export default {
 
 `boolean = true`
 
-Add errors count.
+إضافة عدد الأخطاء.
 
 ```js
 export default {
@@ -546,7 +532,7 @@ export default {
 
 `number`
 
-Tells `stats` to limit the number of lines to allocate for displaying an error.
+يخبر `stats` بتحديد number للأسطر المخصصة لعرض الخطأ.
 
 ```js
 export default {
@@ -559,13 +545,13 @@ export default {
 
 ### stats.exclude
 
-See [`stats.excludeModules`](#statsexcludemodules).
+راجع [`stats.excludeModules`](#statsexcludemodules).
 
 ### stats.excludeAssets
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
 
-Tells `stats` to exclude the matching assets information. This can be done with a `string`, a `RegExp`, a `function` that is getting the assets name as an argument and returns a `boolean`. `stats.excludeAssets` can be an `array` of any of the above.
+يخبر `stats` باستبعاد معلومات assets المطابقة. يمكن القيام بذلك باستخدام `string`، و`RegExp`، و`function` الذي يحصل على اسم assets كوسيطة ويعيد `boolean`. `stats.excludeAssets` يمكن أن يكون `array` لأي مما سبق.
 
 ```js
 export default {
@@ -584,7 +570,7 @@ export default {
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean` `boolean: false`
 
-Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, a `function` that is getting the module's source as an argument and returns a `boolean`. `stats.excludeModules` can be an `array` of any of the above. `stats.excludeModules`'s configuration [is merged](https://github.com/webpack/webpack/blob/main/lib/Stats.js#L215) with the `stats.exclude`'s configuration value.
+يخبر `stats` باستبعاد معلومات modules المطابقة. يمكن القيام بذلك باستخدام `string`، و`RegExp`، و`function` الذي يحصل على مصدر module كوسيطة ويعيد `boolean`. `stats.excludeModules` يمكن أن يكون `array` لأي مما سبق. تخصيص `stats.excludeModules` [تم دمجه](https://github.com/webpack/webpack/blob/main/lib/Stats.js#L215) مع قيمة تخصيص `stats.exclude`.
 
 ```js
 export default {
@@ -595,7 +581,7 @@ export default {
 };
 ```
 
-Setting `stats.excludeModules` to `false` will disable the exclude behaviour.
+سيؤدي ضبط `stats.excludeModules` على `false` إلى تعطيل سلوك الاستبعاد.
 
 ```js
 export default {
@@ -610,7 +596,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group assets by how their are related to chunks.
+يخبر `stats` ما إذا كان سيتم تجميع assets من خلال مدى ارتباطهم بـ chunks.
 
 ```js
 export default {
@@ -625,7 +611,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
+يخبر `stats` ما إذا كان سيتم تجميع assets حسب حالته (المنبعث، أو مقارنة بالإصدار، أو المخزن مؤقتًا).
 
 ```js
 export default {
@@ -640,7 +626,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group assets by their extension.
+يخبر `stats` ما إذا كان سيتم تجميع assets حسب امتداده.
 
 ```js
 export default {
@@ -655,7 +641,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).
+يخبر `stats` ما إذا كان سيتم تجميع assets حسب معلومات asset الخاصة بهم (غير قابلة للتغيير، التطوير، hotModuleReplacement، إلخ).
 
 ```js
 export default {
@@ -670,7 +656,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group assets by their asset path.
+يخبر `stats` ما إذا كان سيتم تجميع assets حسب مسار asset الخاص بهم.
 
 ```js
 export default {
@@ -685,7 +671,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
+يخبر `stats` ما إذا كان سيتم تجميع modules حسب سماتها (أخطاء، تحذيرات، assets، اختياري، معزول، أو تابع).
 
 ```js
 export default {
@@ -700,7 +686,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group modules by their cache status (cached or built and cacheable).
+يخبر `stats` ما إذا كان سيتم تجميع modules حسب حالتهم cache (مخزنة مؤقتًا أو مدمجة وقابلة للتخزين المؤقت).
 
 ```js
 export default {
@@ -715,7 +701,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group modules by their extension.
+يخبر `stats` ما إذا كان سيتم تجميع modules حسب امتداده.
 
 ```js
 export default {
@@ -730,7 +716,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group modules by their layer.
+يخبر `stats` ما إذا كان سيتم تجميع modules حسب طبقته.
 
 ```js
 export default {
@@ -745,7 +731,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group modules by their path.
+يخبر `stats` ما إذا كان سيتم تجميع modules حسب مساره.
 
 ```js
 export default {
@@ -760,7 +746,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to group modules by their type.
+يخبر `stats` ما إذا كان سيتم تجميع modules حسب نوعها.
 
 ```js
 export default {
@@ -777,7 +763,7 @@ export default {
 
 <Badge text="5.46.0+" />
 
-Group [`reasons`](#statsreasons) by their origin module to avoid large set of reasons.
+قم بتجميع [`reasons`](#statsreasons) حسب مصدرها module لتجنب مجموعة كبيرة من الأسباب.
 
 ```js
 export default {
@@ -792,7 +778,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about the hash of the compilation.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول hash لـ compilation.
 
 ```js
 export default {
@@ -807,7 +793,7 @@ export default {
 
 `boolean = false`
 
-Tells `stats` to add IDs of modules and chunks.
+يخبر `stats` بإضافة معرفات modules وchunks.
 
 ```js
 export default {
@@ -822,14 +808,14 @@ export default {
 
 `string = 'info': 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'` `boolean`
 
-Tells `stats` whether to add logging output.
+يخبر `stats` ما إذا كان سيتم إضافة التسجيل output.
 
-- `'none'`, `false` - disable logging
-- `'error'` - errors only
-- `'warn'` - errors and warnings only
-- `'info'` - errors, warnings, and info messages
-- `'log'`, `true` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
-- `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
+- `'none'`، `false` - تعطيل التسجيل
+- `'error'` - الأخطاء فقط
+- `'warn'` - الأخطاء والتحذيرات فقط
+- `'info'` - الأخطاء والتحذيرات ورسائل المعلومات
+- `'log'`، `true` - الأخطاء والتحذيرات ورسائل المعلومات ورسائل السجل والمجموعات والمسح. يتم عرض المجموعات المطوية في حالة مطوية.
+- `'verbose'` - قم بتسجيل كل شيء باستثناء التصحيح والتتبع. يتم عرض المجموعات المطوية في الحالة الموسعة.
 
 ```js
 export default {
@@ -844,7 +830,7 @@ export default {
 
 `array = []: string | RegExp | function (name) => boolean` `string` `RegExp` `function (name) => boolean`
 
-Tells `stats` to include the debug information of the specified loggers such as Plugins or Loaders. When [`stats.logging`](#statslogging) is set to `false`, `stats.loggingDebug` option is ignored.
+يخبر `stats` بتضمين معلومات التصحيح الخاصة بالمسجلين المحددين مثل Plugins أو loaders. عند ضبط [`stats.logging`](#statslogging) على `false`، يتم تجاهل الخيار `stats.loggingDebug`.
 
 ```js
 export default {
@@ -864,7 +850,7 @@ export default {
 
 `boolean = true`
 
-Enable stack traces in the logging output for errors, warnings and traces. Set `stats.loggingTrace` to hide the trace.
+تمكين تتبعات المكدس في التسجيل output للأخطاء والتحذيرات والتتبعات. اضبط `stats.loggingTrace` لإخفاء الأثر.
 
 ```js
 export default {
@@ -879,7 +865,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول assets داخل modules. اضبط `stats.moduleAssets` على `false` لإخفائه.
 
 ```js
 export default {
@@ -894,7 +880,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to show dependencies and the origin of warnings/errors. `stats.moduleTrace` is available since webpack 2.5.0.
+يخبر `stats` لإظهار dependencies وأصل التحذيرات/الأخطاء. `stats.moduleTrace` متاح منذ webpack 2.5.0.
 
 ```js
 export default {
@@ -909,7 +895,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about the built modules.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول modules المدمج.
 
 ```js
 export default {
@@ -924,7 +910,7 @@ export default {
 
 `string = 'id'`
 
-Tells `stats` to sort the modules by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.modulesSort`. Use `!` prefix in the value to reverse the sort order by a given field.
+يخبر `stats` بفرز modules حسب حقل معين. يُسمح باستخدام كافة [حقول الفرز](#sorting-fields) كقيم لـ `stats.modulesSort`. استخدم البادئة `!` في القيمة لعكس ترتيب الفرز حسب حقل معين.
 
 ```js
 export default {
@@ -939,7 +925,7 @@ export default {
 
 `number = 15`
 
-Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
+يخبر `stats` بعدد عناصر modules التي يجب عرضها (سيتم طي المجموعات لتناسب هذه المساحة).
 
 ```js
 export default {
@@ -954,7 +940,7 @@ export default {
 
 `boolean`
 
-Tells `stats` whether to add information about modules nested in other modules (like with module concatenation).
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول modules متداخلة في modules أخرى (مثل سلسلة module).
 
 ```js
 export default {
@@ -969,7 +955,7 @@ export default {
 
 `number = 10`
 
-Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
+يخبر `stats` عدد عناصر modules المتداخلة التي يجب عرضها (سيتم طي المجموعات لتناسب هذه المساحة).
 
 ```js
 export default {
@@ -984,7 +970,7 @@ export default {
 
 `boolean`
 
-Tells `stats` to show the reasons why optimization bailed out for modules.
+يخبر `stats` لإظهار أسباب إنقاذ optimization لـ modules.
 
 ```js
 export default {
@@ -999,7 +985,7 @@ export default {
 
 `boolean = false`
 
-Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphan modules are hidden by default in `stats`.
+يخبر `stats` ما إذا كان سيتم إخفاء `orphan` modules. module هو `orphan` إذا لم يتم تضمينه في أي chunk. يتم إخفاء اليتيم modules بشكل افتراضي في `stats`.
 
 ```js
 export default {
@@ -1014,7 +1000,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to show the `outputPath`.
+يخبر `stats` لإظهار `outputPath`.
 
 ```js
 export default {
@@ -1029,7 +1015,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to show performance hint when the file size exceeds [`performance.maxAssetSize`](/configuration/performance/#performancemaxassetsize).
+يخبر `stats` بإظهار performance تلميح عندما يتجاوز حجم الملف [`performance.maxAssetSize`](/configuration/performance/#performancemaxassetsize).
 
 ```js
 export default {
@@ -1044,7 +1030,7 @@ export default {
 
 `string` `boolean: false`
 
-Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
+يضبط [الإعداد المسبق](/configuration/stats/#stats-presets) لنوع المعلومات التي يتم عرضها. إنه مفيد لـ [توسيع سلوكيات stats](/configuration/stats/#extending-stats-behaviours).
 
 ```js
 export default {
@@ -1055,13 +1041,13 @@ export default {
 };
 ```
 
-Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
+يؤدي ضبط قيمة `stats.preset` إلى `false` إلى إخبار webpack باستخدام `'none'` [stats الإعداد المسبق](/configuration/stats/#stats-presets).
 
 ### stats.providedExports
 
 `boolean = false`
 
-Tells `stats` to show the exports of the modules.
+يخبر `stats` لإظهار صادرات modules.
 
 ```js
 export default {
@@ -1076,7 +1062,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to show the `publicPath`.
+يخبر `stats` لإظهار `publicPath`.
 
 ```js
 export default {
@@ -1091,7 +1077,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to add information about the reasons of why modules are included.
+يخبر `stats` بإضافة معلومات حول أسباب تضمين modules.
 
 ```js
 export default {
@@ -1108,7 +1094,7 @@ export default {
 
 <Badge text="5.46.0+" />
 
-Space to display [`reasons`](#statsreasons) (groups will be collapsed to fit this space).
+مساحة للعرض [`reasons`](#statsreasons) (سيتم طي المجموعات لتناسب هذه المساحة).
 
 ```js
 export default {
@@ -1119,13 +1105,13 @@ export default {
 };
 ```
 
-T> The [`detailed preset`](#stats-presets) limits [`modulesSpace`](#statsmodulesspace), [`assetsSpace`](#statsassetsspace), and [`reasonsSpace`](#statsreasonsspace) to 1000 by default.
+T> يحد [`detailed preset`](#stats-presets) [`modulesSpace`](#statsmodulesspace)، [`assetsSpace`](#statsassetsspace)، و[`reasonsSpace`](#statsreasonsspace) إلى 1000 بشكل افتراضي.
 
 ### stats.relatedAssets
 
 `boolean = false`
 
-Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول assets المرتبطة بـ assets أخرى (مثل Source Maps لـ assets).
 
 ```js
 export default {
@@ -1140,7 +1126,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` whether to add information about runtime modules.
+يخبر `stats` ما إذا كان يجب إضافة معلومات حول runtime modules.
 
 ```js
 export default {
@@ -1155,7 +1141,7 @@ export default {
 
 `boolean = false`
 
-Tells `stats` to add the source code of modules.
+يخبر `stats` بإضافة الكود المصدري لـ modules.
 
 ```js
 export default {
@@ -1170,7 +1156,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to add the timing information.
+يخبر `stats` بإضافة معلومات التوقيت.
 
 ```js
 export default {
@@ -1185,7 +1171,7 @@ export default {
 
 `boolean = false`
 
-Tells `stats` whether to show which exports of a module are used.
+يخبر `stats` ما إذا كان سيتم إظهار عمليات تصدير module المستخدمة أم لا.
 
 ```js
 export default {
@@ -1200,7 +1186,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to add information about the webpack version used.
+يخبر `stats` بإضافة معلومات حول إصدار webpack المستخدم.
 
 ```js
 export default {
@@ -1215,7 +1201,7 @@ export default {
 
 `boolean = true`
 
-Tells `stats` to add warnings.
+يخبر `stats` بإضافة تحذيرات.
 
 ```js
 export default {
@@ -1230,7 +1216,7 @@ export default {
 
 `boolean = true`
 
-Add warnings count.
+إضافة عدد التحذيرات.
 
 ```js
 export default {
@@ -1245,7 +1231,7 @@ export default {
 
 `array = []: string | RegExp | function (warning) => boolean` `string` `RegExp` `function (warning) => boolean`
 
-Tells `stats` to exclude the warnings that are matching given filters. This can be done with a `string`, a `RegExp`, a `function` that is getting a warning as an argument and returns a `boolean`. `stats.warningsFilter` can be an `array` of any of the above.
+يخبر `stats` باستبعاد التحذيرات التي تطابق المرشحات المحددة. يمكن القيام بذلك باستخدام `string`، و`RegExp`، و`function` الذي يحصل على تحذير كوسيطة ويعيد `boolean`. `stats.warningsFilter` يمكن أن يكون `array` لأي مما سبق.
 
 ```js
 export default {
@@ -1256,7 +1242,7 @@ export default {
 };
 ```
 
-W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
+W> تم إهمال `stats.warningsFilter` لصالح [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
 
 ### stats.warningsSpace
 
@@ -1264,7 +1250,7 @@ W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configur
 
 `number`
 
-Tells `stats` to limit the number of lines to allocate for displaying a warning.
+يخبر `stats` بتحديد number للأسطر المخصصة لعرض التحذير.
 
 ```js
 export default {
@@ -1275,33 +1261,33 @@ export default {
 };
 ```
 
-### Sorting fields
+### فرز الحقول
 
-For `assetsSort`, `chunksSort`, and `modulesSort` there are several possible fields that you can sort items by:
+بالنسبة إلى `assetsSort` و`chunksSort` و`modulesSort` هناك العديد من الحقول المحتملة التي يمكنك فرز العناصر حسبها:
 
-- `'id'` - the item's id,
-- `'name'` - the item's name that was assigned to it upon importing,
-- `'size'` - the size of item in bytes,
-- `'chunks'` - what chunks the item originates from (for example, if there are multiple subchunks for one chunk: the subchunks will be grouped according to their main chunk),
-- `'errors'` - number of errors in items,
-- `'warnings'` - number of warnings in items,
-- `'failed'` - whether the item has failed compilation,
-- `'cacheable'` - whether the item is cacheable,
-- `'built'` - whether the asset has been built,
-- `'prefetched'` - whether the asset will be prefetched,
-- `'optional'` - whether the asset is optional.
-- `'identifier'` - identifier of the item.
-- `'index'` - item's processing index.
+- `'id'` - معرف العنصر،
+- `'name'` - اسم العنصر الذي تم تخصيصه له عند الاستيراد،
+- `'size'` - حجم العنصر بالبايت،
+- `'chunks'` - ما chunks الذي ينشأ منه العنصر (على سبيل المثال، إذا كان هناك عدة أجزاء فرعية لواحد chunk: سيتم تجميع الأجزاء الفرعية وفقًا لـ chunk الرئيسي)،
+- `'errors'` - number من الأخطاء في العناصر،
+- `'warnings'` - number من التحذيرات في العناصر،
+- `'failed'` - ما إذا كان العنصر قد فشل compilation،
+- `'cacheable'` - ما إذا كان العنصر قابلاً للتخزين المؤقت،
+- `'built'` - ما إذا كان قد تم بناء asset أم لا،
+- `'prefetched'` - ما إذا كان سيتم جلب asset مسبقًا أم لا،
+- `'optional'` - ما إذا كان asset اختياريًا.
+- `'identifier'` - معرف العنصر.
+- `'index'` - فهرس معالجة العنصر.
 - `'index2'`
 - `'profile'`
-- `'issuer'` - an identifier of the issuer.
-- `'issuerId'` - an id of the issuer.
-- `'issuerName'` - a name of the issuer.
-- `'issuerPath'` - a full issuer object. There's no real need to sort by this field.
+- `'issuer'` - معرف جهة الإصدار.
+- `'issuerId'` - معرف جهة الإصدار.
+- `'issuerName'` - اسم المُصدر.
+- `'issuerPath'` - مُصدر كامل object. ليست هناك حاجة حقيقية للفرز حسب هذا الحقل.
 
-### Extending stats behaviours
+### توسيع سلوكيات stats
 
-If you want to use one of the presets e.g. `'minimal'` but still override some of the rules: specify the desired `stats.preset` and add the customized or additional rules afterwards.
+إذا كنت تريد استخدام أحد الإعدادات المسبقة على سبيل المثال، `'minimal'` ولكن لا يزال يتجاوز بعض القواعد: حدد `stats.preset` المطلوب وأضف القواعد المخصصة أو الإضافية بعد ذلك.
 
 **webpack.config.js**
 
