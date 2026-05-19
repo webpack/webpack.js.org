@@ -1,100 +1,101 @@
 ---
-title: Roadmap 2021
+title: خارطة طريق 2021
 sort: 20201208
 contributors:
-  - sokra
+  - ameencfw
+  - RlxChap2
 ---
 
-It has been nearly 2 months since webpack 5 was officially released. Due to the sponsoring situation, we couldn't devote as much time to webpack as we would like to. Speaking only for myself (@sokra), I enjoyed the little break and have worked on a few side projects. Ironically, while I was using webpack 5 and all its bleeding-edge features (asset modules, worker support, persistent caching), I discovered a few more bugs in webpack 5 that people are likely to run into when upgrading their projects to webpack 5, which led to a lot of work going into bug fixing. Here is a little summary:
+لقد مر ما يقرب من شهرين منذ أن تم إصدار webpack 5 رسميًا. نظرًا لحالة الرعاية، لم نتمكن من تكريس الكثير من الوقت لـ webpack كما كنا نود. متحدثًا عن نفسي فقط (@sokra)، لقد استمتعت بالاستراحة القصيرة وعملت على بعض المشاريع الجانبية. ومن المفارقات، أثناء استخدامي لـ webpack 5 وجميع ميزاته المتطورة (asset modules، worker support، persistent caching)، اكتشفت بضعة أخطاء إضافية في webpack 5 من المحتمل أن يواجهها الأشخاص عند ترقية مشاريعهم إلى webpack 5، مما أدى إلى تخصيص الكثير من العمل لإصلاح الأخطاء. إليك ملخص صغير:
 
-## What happened so far?
+## ماذا حدث حتى الآن؟
 
-A few more things have been exposed from webpack, both typings-wise and runtime-wise. A few low-handling performance improvements have been made. Code without semicolons used to generate some invalid/incorrect code in some cases, which has been corrected. The combination of side-effect-free code + concatenated modules + reexports has led to some edge cases, which have been fixed (at least the known ones).
+تم الكشف عن بعض الأشياء الإضافية من webpack، سواء من حيث الأنواع (typings) أو من حيث وقت التشغيل (runtime). تم إجراء عدد قليل من تحسينات الأداء سهلة التنفيذ. كان الكود الخالي من الفواصل المنقوطة (semicolons) يولد كودًا غير صالح/غير صحيح في بعض الحالات، وقد تم تصحيح ذلك. أدى الجمع بين الكود الخالي من الآثار الجانبية + الوحدات المتسلسلة (concatenated modules) + إعادة التصدير (reexports) إلى بعض الحالات الطرفية (edge cases)، والتي تم إصلاحها (على الأقل المعروفة منها).
 
-But one bug reported by a user has led to the need for a completely new internal feature. You can skip it and go to the next chapter if you find webpack internals boring or too complex.
+ولكن أحد الأخطاء التي أبلغ عنها مستخدم أدى إلى الحاجة إلى ميزة داخلية جديدة تمامًا. يمكنك تخطي هذا والذهاب إلى الفصل التالي إذا كنت تجد الأجزاء الداخلية لـ webpack مملة أو معقدة للغاية.
 
-To trigger the bug we need three ingredients:
+لإطلاق الخطأ، نحتاج إلى ثلاثة مكونات:
 
-- Since webpack 5 the optimization in `production` mode will run the used exports analysis (Tree Shaking) against each runtime (which is often identical to the entrypoints), which means webpack can optimize each runtime (resp. entrypoint) individually.
-- A custom `optimization.splitChunks` configuration allows to forcefully merge modules into a single chunk. This is done by passing the `name` option. E.g. `{ test: /node_modules/, name: "vendors" }` merges modules from `node_modules` into a single chunk. While this is not recommended in general, it's possible and probably makes sense in some cases. The whole thing is about trade-offs anyway and choosing to merge all vendors into a single chunk can be good for long term caching this chunk for repeated visits or between multiple entrypoints.
-- When exports of a side-effect-free module are not used, the whole module is omitted from the module graph and the `import`-statement generates no runtime code at all.
+- منذ إصدار webpack 5، سيقوم التحسين (optimization) في وضع `production` (الإنتاج) بتشغيل تحليل الصادرات المستخدمة (Tree Shaking) ضد كل بيئة تشغيل (runtime) (والتي غالبًا ما تكون مطابقة لنقاط الدخول entrypoints)، مما يعني أن webpack يمكنه تحسين كل وقت تشغيل (أو نقطة دخول) على حدة.
+- يسمح تكوين `optimization.splitChunks` المخصص بدمج الوحدات بالقوة في حزمة (chunk) واحدة. يتم ذلك عن طريق تمرير الخيار `name`. على سبيل المثال `{ test: /node_modules/, name: "vendors" }` يدمج الوحدات من `node_modules` في حزمة واحدة. على الرغم من أن هذا غير موصى به بشكل عام، إلا أنه ممكن وربما يكون منطقيًا في بعض الحالات. الأمر برمته يتعلق بالمقايضات (trade-offs) على أي حال، واختيار دمج جميع الموردين (vendors) في حزمة واحدة يمكن أن يكون مفيدًا للتخزين المؤقت طويل المدى لهذه الحزمة للزيارات المتكررة أو بين نقاط الدخول المتعددة.
+- عندما لا يتم استخدام صادرات الوحدة الخالية من الآثار الجانبية، يتم حذف الوحدة بأكملها من رسم بياني الوحدة (module graph) ولا تُولد عبارة `import` أي كود وقت تشغيل (runtime code) على الإطلاق.
 
-A problem happens in an edge case where modules from two entrypoints are merged into a single chunk and they reference a side-effect-free module which is not in the shared chunk since only one of the entrypoints uses exports from the side-effect-free module. Modules in the shared chunk are used by both entrypoint, thus they need to include the exports that are used by any of the entrypoints.
-That means it will generate code referencing the side-effect-free module that is not available at runtime for the other entrypoint in the aforementioned edge case, which leads to an `undefined is not a function` or `cannot read property 'call' of undefined` error at runtime.
+تحدث مشكلة في حالة طرفية (edge case) حيث يتم دمج الوحدات من نقطتي دخول في حزمة واحدة وتشير إلى وحدة خالية من الآثار الجانبية ليست في الحزمة المشتركة لأن إحدى نقطتي الدخول فقط هي التي تستخدم صادرات من الوحدة الخالية من الآثار الجانبية. الوحدات الموجودة في الحزمة المشتركة تُستخدم من قبل كلتا نقطتي الدخول، وبالتالي فإنها تحتاج إلى تضمين الصادرات التي تستخدمها أي من نقطتي الدخول.
+هذا يعني أنها ستولد كودًا يشير إلى الوحدة الخالية من الآثار الجانبية والتي لا تتوفر في وقت التشغيل لنقطة الدخول الأخرى في الحالة الطرفية المذكورة أعلاه، مما يؤدي إلى حدوث خطأ `undefined is not a function` أو `cannot read property 'call' of undefined` في وقت التشغيل.
 
-A potential fix would be to include the side-effect-free module in all entrypoints, but as this module isn't really needed, that would be a waste of bundle size.
-So we went another route, which required the development of a new feature: `runtime-dependent code generation`.
-This allows to generate code which behaves differently depending on which runtime it executes.
+سيكون الإصلاح المحتمل هو تضمين الوحدة الخالية من الآثار الجانبية في جميع نقاط الدخول، ولكن نظرًا لأن هذه الوحدة ليست مطلوبة حقًا، فإن ذلك سيكون إهدارًا لحجم الحزمة.
+لذلك سلكنا طريقًا آخر، مما تطلب تطوير ميزة جديدة: `runtime-dependent code generation` (توليد الكود المعتمد على وقت التشغيل).
+يسمح هذا بتوليد كود يتصرف بشكل مختلف اعتمادًا على وقت التشغيل الذي يتم تنفيذه فيه.
 
-To put it another way, we are wrapping some generated code in `if`-blocks, so they only execute in one runtime.
-In this example, this would affect the `import`-statement which references the side-effect-free module.
-The import is only executed for one of the entrypoints.
-This avoids to include unnecessary modules, and it also avoids executing unnecessary code even if it would be available.
-So even if you are merging all code into a single chunk, only the code that is really used is executed.
+وبعبارة أخرى، نقوم بتغليف بعض الكود المولد في كتل `if`، بحيث يتم تنفيذها فقط في وقت تشغيل واحد.
+في هذا المثال، سيؤثر هذا على عبارة `import` التي تشير إلى الوحدة الخالية من الآثار الجانبية.
+يتم تنفيذ الاستيراد فقط لإحدى نقطتي الدخول.
+هذا يتجنب تضمين وحدات غير ضرورية، كما يتجنب تنفيذ كود غير ضروري حتى لو كان متاحًا.
+لذلك حتى إذا كنت تدمج كل التعليمات البرمجية في حزمة واحدة، سيتم تنفيذ الكود المُستخدم حقًا فقط.
 
-So far for the excurse, I hope it wasn't that boring...
+هذا كل شيء بخصوص هذه الاستطرادة، أتمنى ألا تكون مملة جدًا...
 
-## Roadmap 2021
+## خارطة طريق 2021
 
-So assuming we can sort out our sponsoring situation, the following is planned for 2021:
+بافتراض أنه يمكننا تسوية وضع الرعاية الخاص بنا، فإنه من المخطط القيام بما يلي في عام 2021:
 
-### Further stabilizing
+### المزيد من الاستقرار
 
-Our top-priority stays stabilizing webpack 5.
-So far the situation looks pretty good.
-Most critical bugs reported in the last time, affect some edge cases.
-So I guess webpack 5 should work for the general cases.
-But handling edge cases is (and should stay) one of webpack strength, so we want to continue to work hard fixing these.
-We think that many many webpack users need custom things for their build and that's something webpack offers via configurability and its rich plugin system.
+تبقى أولويتنا القصوى هي استقرار webpack 5.
+حتى الآن يبدو الوضع جيدًا جدًا.
+تؤثر معظم الأخطاء الحرجة التي تم الإبلاغ عنها في المرة الأخيرة على بعض الحالات الطرفية.
+لذلك أعتقد أن webpack 5 يجب أن يعمل بشكل جيد للحالات العامة.
+ولكن التعامل مع الحالات الطرفية هو (ويجب أن يبقى) أحد نقاط قوة webpack، لذلك نريد الاستمرار في العمل بجد لإصلاحها.
+نعتقد أن الكثير من مستخدمي webpack يحتاجون إلى أشياء مخصصة لعمليات البناء الخاصة بهم وهذا شيء يقدمه webpack من خلال إمكانية التكوين (configurability) ونظام الإضافات (plugin system) الغني الخاص به.
 
-### EcmaScript Modules
+### وحدات EcmaScript (EcmaScript Modules)
 
-EcmaScript Modules (ESM) are slowly gaining wide-spread adoption.
-On authoring side they are already the de facto standard to write code.
-On browser support it also looks pretty ok (except for IE11 and a few older mobile browsers).
-Browsers are still a bit lacking in supporting ESM for WebWorkers.
+تكتسب وحدات EcmaScript (ESM) تدريجيًا تبنيًا واسع النطاق.
+من جانب الكتابة، أصبحت بالفعل المعيار الفعلي لكتابة التعليمات البرمجية.
+من حيث دعم المتصفحات، يبدو الوضع جيدًا أيضًا (باستثناء IE11 وعدد قليل من متصفحات الهواتف المحمولة القديمة).
+لا تزال المتصفحات تفتقر إلى حد ما في دعم ESM لـ WebWorkers.
 
-One can also generate bundles that run in a `type=module` script tag, but that has few benefits currently.
+يمكن للمرء أيضًا إنشاء حزم تعمل في علامة نصية `<script type="module">`، ولكن هذا له فوائد قليلة في الوقت الحالي.
 
-There are multiple areas in webpack where ESM support can be improved:
+هناك مجالات متعددة في webpack حيث يمكن تحسين دعم ESM:
 
-#### ESM as chunk loading mechanism
+#### ESM كآلية لتحميل الحزم (chunk loading mechanism)
 
-When targeting the web webpack loads chunks via `script` tags.
-When targeting node.js webpack loads chunks via `require` or `fs` + `vm`.
-When targeting WebWorkers webpack loads chunk via `importScripts`.
+عند استهداف الويب، يقوم webpack بتحميل الحزم (chunks) عبر علامات `script`.
+عند استهداف node.js، يقوم webpack بتحميل الحزم عبر `require` أو `fs` + `vm`.
+عند استهداف WebWorkers، يقوم webpack بتحميل الحزمة عبر `importScripts`.
 
-In a not-so-far future, all these environments support ESM and more importantly the dynamic `import()` function.
-So a chunk loading mechanism based on `import()` can unify all these environments, while even needing less runtime code.
+في مستقبل ليس ببعيد، ستدعم جميع هذه البيئات ESM والأهم من ذلك دالة `import()` الديناميكية.
+وبالتالي يمكن لآلية تحميل الحزم المعتمدة على `import()` توحيد جميع هذه البيئات، بينما تتطلب كود وقت تشغيل (runtime code) أقل.
 
-#### Self-executed chunks
+#### الحزم ذاتية التنفيذ (Self-executed chunks)
 
-Currently on-demand-loaded chunks in webpack are always containers for module and never execute module code directly.
-When writing `import("./module")` in modules, this will compile to something like `__webpack_load_chunk__("chunk-containing-module.js").then(() => __webpack_require__("./module"))`.
-There are many cases where this can't be changed (e.g. when loading multiple chunks or loading CSS too), but there are some cases where webpack could generate a chunk that directly executes the contained module.
-This could lead to less generated code and would avoid the function wrapping in the chunk.
+حاليًا، دائمًا ما تكون الحزم التي يتم تحميلها عند الطلب في webpack عبارة عن حاويات للوحدات ولا تنفذ أبدًا كود الوحدة مباشرة.
+عند كتابة `import("./module")` في الوحدات، سيتم تحويل ذلك إلى شيء مثل `__webpack_load_chunk__("chunk-containing-module.js").then(() => __webpack_require__("./module"))`.
+هناك العديد من الحالات التي لا يمكن فيها تغيير هذا (مثل عند تحميل حزم متعددة أو تحميل CSS أيضًا)، ولكن هناك بعض الحالات التي يمكن فيها لـ webpack إنشاء حزمة تنفذ الوحدة المضمنة مباشرة.
+قد يؤدي هذا إلى تقليل التعليمات البرمجية المولدة وتجنب تغليف الدالة في الحزمة.
 
-Currently I'm not yet sure if this is worth it, but it's at least worth looking into that.
+حاليًا لست متأكدًا بعد مما إذا كان هذا يستحق العناء، ولكن الأمر يستحق على الأقل النظر فيه.
 
-#### ESM exports
+#### صادرات ESM
 
-Currently it's not possible to generate ESM exports for a bundle via `output.library.type: "module"`.
-This can be useful when integrating webpack bundles into ESM loading environments or inline scripts.
+حاليًا لا يمكن إنشاء صادرات ESM لحزمة عبر `output.library.type: "module"`.
+يمكن أن يكون هذا مفيدًا عند دمج حزم webpack في بيئات تحميل ESM أو نصوص مضمنة (inline scripts).
 
-T> For webpack 4 there is actually a plugin, but native support would be preferable.
+T> بالنسبة لـ webpack 4، توجد بالفعل إضافة (plugin)، ولكن الدعم الأصلي سيكون مفضلًا.
 
-#### ESM externals (import)
+#### استيرادات خارجية ESM (ESM externals)
 
-Webpack allows to define `externals` which are modules that are not bundled but exist at runtime.
-There are many types of externals ranging from globals over CommonJs/AMD/System to loading from classic script tag.
-Even `import()` (`type: "import"`) can be used to load an external, but `import` (`type: "module"`) can't be used yet.
+يسمح Webpack بتعريف `externals` (العناصر الخارجية) وهي عبارة عن وحدات لم يتم تحزيمها ولكنها موجودة في وقت التشغيل.
+هناك العديد من أنواع العناصر الخارجية بدءًا من globals مرورًا بـ CommonJs/AMD/System ووصولًا إلى التحميل من علامة script التقليدية.
+حتى `import()` (`type: "import"`) يمكن استخدامها لتحميل عنصر خارجي، لكن `import` (`type: "module"`) لا يمكن استخدامه بعد.
 
-Interestingly even while `type: "module"` isn't supported yet, webpack already uses it as default when writing e.g. `import x from "https://example.com/module.js"`.
-The default has been choosing to seamlessly add support for ESM externals without introducing a breaking change.
+من المثير للاهتمام، على الرغم من أن `type: "module"` غير مدعوم حتى الآن، إلا أن webpack يستخدمه بالفعل كإعداد افتراضي عند كتابة مثلاً `import x from "https://example.com/module.js"`.
+كان الافتراضي هو اختيار إضافة دعم بسلاسة للعناصر الخارجية ESM دون إدخال تغيير جذري (breaking change).
 
-Absolute URLs in `import`s can make sense e.g. when using external services that offer their API as ESM: `import { event } from "https://analytics.company.com/api/v1.js"` (`import("https://analytics.company.com/api/v1.js")` might make more sense to gracefully handle errors when depending on this external service, but errors could also be caught higher in module graph).
+قد تكون عناوين URL المطلقة في الـ `import`s منطقية، على سبيل المثال، عند استخدام خدمات خارجية تقدم واجهة برمجة التطبيقات (API) الخاصة بها كـ ESM: `import { event } from "https://analytics.company.com/api/v1.js"` (قد يكون استخدام `import("https://analytics.company.com/api/v1.js")` أكثر منطقية للتعامل بشكل رشيق مع الأخطاء عند الاعتماد على هذه الخدمة الخارجية، ولكن يمكن أيضًا التقاط الأخطاء في مستوى أعلى من الرسم البياني للوحدات).
 
-As usual the `externals` configuration allows to map any module name to externals:
+كالعادة، يسمح تكوين `externals` بربط أي اسم وحدة بعناصر خارجية:
 
 ```js
 export default {
@@ -108,125 +109,125 @@ export default {
 };
 ```
 
-W> Using multiple different ESM CDNs will not work. This is only an example.
+W> استخدام شبكات CDN متعددة لـ ESM لن يعمل. هذا مجرد مثال.
 
-#### ESM library
+#### مكتبة ESM (ESM library)
 
-When ESM exports and import are supported people might think bundling a library makes sense, and that's probably true in some cases, but in many cases natively bundling will result in worse results.
-The biggest problem is the `"sideEffects": false` flag. It affects modules on per file base to skip whole modules. When concatenating multiple side-effect-free modules it's no longer possible to skip the individual modules, which leads to worse optimization when not all exports of the library are used.
+عند دعم صادرات واستيرادات ESM، قد يعتقد الناس أن تحزيم مكتبة أمر منطقي، ومن المحتمل أن يكون ذلك صحيحًا في بعض الحالات، ولكن في كثير من الحالات سيؤدي التحزيم الأصلي إلى نتائج أسوأ.
+أكبر مشكلة هي علامة `"sideEffects": false`. فهي تؤثر على الوحدات على أساس كل ملف لتخطي وحدات بأكملها. عند تسلسل وحدات متعددة خالية من الآثار الجانبية، لم يعد من الممكن تخطي الوحدات الفردية، مما يؤدي إلى تحسين أسوأ عندما لا يتم استخدام جميع صادرات المكتبة.
 
-When the output should be a library that will be processed by a bundler later, this needs to be considered.
+عندما يجب أن يكون الناتج مكتبة ستتم معالجتها بواسطة أداة تحزيم لاحقًا، فيجب أخذ ذلك في الاعتبار.
 
-I could think of a special mode, which does not apply chunking and instead, emit the raw (processed) modules connected via ESM imports and exports (or also CommonJS `require`).
-So this means loaders, module graph, and asset optimizations run, but no chunk graph is created and each module in the module graph is emitted as a separate file.
+يمكنني التفكير في وضع خاص، والذي لا يطبق التحزيم (chunking) وبدلاً من ذلك، يُصدر الوحدات الخام (المُعالجة) المتصلة عبر استيرادات وصادرات ESM (أو أيضًا `require` في CommonJS).
+لذلك يعني هذا أن المحملات (loaders)، والرسم البياني للوحدات، وتحسينات الأصول قيد التشغيل، ولكن لا يتم إنشاء رسم بياني للحزم (chunk graph) ويتم إصدار كل وحدة في الرسم البياني للوحدات كملف منفصل.
 
-#### Strict mode warnings
+#### تحذيرات الوضع الصارم (Strict mode warnings)
 
-When generating an ESM bundle, all contained code will be forced to strict mode.
-For many modules, this isn't an issue, but there are a few older packages that might have trouble with the different semantic.
-We want to show warnings for these cases.
+عند إنشاء حزمة ESM، سيُجبر كل الكود المضمن على استخدام الوضع الصارم (strict mode).
+بالنسبة للعديد من الوحدات، لا يمثل هذا مشكلة، ولكن هناك بضع حزم أقدم قد تواجه صعوبة مع دلالات مختلفة (different semantic).
+نريد إظهار تحذيرات لهذه الحالات.
 
-### More first-class citizen
+### المزيد من المواطنين من الدرجة الأولى (first-class citizen)
 
-Webpack 4 and 5 did a lot of work to support non-JS module types, and webpack 5 already supports some module types by default: JS (ESM/CJS/AMD), JSON, WebAssembly, Asset.
-Since webpack 5 one of our long term goals is to become a web-app optimizer, with the goal of supporting everything the browser supports.
-So technically a vanilla web app should work out-of-the-box with webpack, but being optimized on the go.
+قام webpack 4 و 5 بالكثير من العمل لدعم أنواع الوحدات غير JS، ويدعم webpack 5 بالفعل بعض أنواع الوحدات افتراضيًا: JS (ESM/CJS/AMD)، و JSON، و WebAssembly، والأصول (Asset).
+منذ إصدار webpack 5، كان أحد أهدافنا طويلة المدى هو أن نصبح مُحسِّنًا لتطبيقات الويب (web-app optimizer)، مع هدف دعم كل ما يدعمه المتصفح.
+لذلك من الناحية الفنية، يجب أن يعمل تطبيق الويب العادي مباشرة من الصندوق مع webpack، مع تحسينه أثناء التنقل.
 
-The initial webpack 5 release already did some major steps in this direction: `new Worker` is supported natively. `new URL(...)` is supported natively (assets).
+لقد اتخذ الإصدار الأولي من webpack 5 بالفعل بعض الخطوات الكبيرة في هذا الاتجاه: يتم دعم `new Worker` محليًا. يتم دعم `new URL(...)` محليًا (assets).
 
-WebAssembly and JSON is already supported, even while the proposals are not finished yet.
+يتم دعم WebAssembly و JSON بالفعل، على الرغم من أن المقترحات لم تنته بعد.
 
-But two resource types are still missing for the complete story: HTML and CSS.
+لكن لا يزال هناك نوعان من الموارد مفقودان للقصة الكاملة: HTML و CSS.
 
-#### CSS as modules
+#### CSS كوحدات (CSS as modules)
 
-Currently webpack supports CSS via `css-loader`, `style-loader` or `mini-css-extract-plugin`.
-This is working pretty well, but I think we can do more by supporting CSS as a native module type in webpack.
+يدعم webpack حاليًا CSS عبر `css-loader`، أو `style-loader` أو `mini-css-extract-plugin`.
+هذا يعمل بشكل جيد جدًا، لكنني أعتقد أنه يمكننا بذل المزيد من خلال دعم CSS كنوع وحدة أصلي (native module type) في webpack.
 
-A major benefit would be the developer experience: The `mini-css-extract-plugin` configuration is not the easiest and getting rid of it would simplify a lot for the developer.
-That doesn't mean you can add additional customization on top of that.
-I see many developers not using raw CSS, but using preprocessors on top of that (with native CSS support this would look like that: `{ test: /\.sass$/, type: "stylesheet", use: "sass-loader" }`).
+ستكون الفائدة الكبرى في تجربة المطور (developer experience): تكوين `mini-css-extract-plugin` ليس الأسهل والتخلص منه من شأنه تبسيط الكثير للمطور.
+لا يعني ذلك أنه لا يمكنك إضافة تخصيص إضافي فوق ذلك.
+أرى العديد من المطورين لا يستخدمون CSS الخام، بل يستخدمون معالجات مسبقة (preprocessors) فوق ذلك (مع دعم CSS الأصلي، سيبدو هذا هكذا: `{ test: /\.sass$/, type: "stylesheet", use: "sass-loader" }`).
 
-As of [State of CSS 2020](https://2020.stateofcss.com/en-US/technologies/css-in-js/) CSS Modules is a popular way of writing modular CSS and it being a native module type in webpack allows to benefit from module graph optimization like Tree Shaking (Used Exports Optimization and Side-Effects optimization). When using CSS Modules this means the resulting CSS will only contain CSS rules that are referenced from the application (as one is used to from JS Tree Shaking).
+وفقًا لتقرير [State of CSS 2020](https://2020.stateofcss.com/en-US/technologies/css-in-js/)، تعد وحدات CSS طريقة شائعة لكتابة CSS معياري، وكونها نوع وحدة أصلي في webpack يسمح بالاستفادة من تحسين رسم بياني الوحدة مثل إزالة الأكواد غير المستخدمة (Used Exports Optimization وتحسين Side-Effects). عند استخدام وحدات CSS، هذا يعني أن CSS الناتج سيحتوي فقط على قواعد CSS التي يُشار إليها من التطبيق (كما هو معتاد من Tree Shaking في JS).
 
-There are some potential CSS Modules specific optimizations which are possible with the global knowledge of the application webpack has: CSS rules can be split into smaller rules to avoid repeating common properties. This can result in a much smaller payload as the output CSS contains fewer repeated properties (Atomic CSS).
+هناك بعض التحسينات المحتملة الخاصة بوحدات CSS الممكنة من خلال المعرفة العالمية للتطبيق الذي يمتلكه webpack: يمكن تقسيم قواعد CSS إلى قواعد أصغر لتجنب تكرار الخصائص الشائعة. هذا يمكن أن يؤدي إلى حجم تحميل أصغر بكثير لأن مخرجات CSS تحتوي على خصائص متكررة أقل (Atomic CSS).
 
-But there is a big "BUT" here: There is work towards a different "CSS Modules" proposal in the WebComponents community, which is planned to become natively supported by browsers.
-At least that's the goal of the proposal.
-Sadly this proposal is different from what's currently used in the Frontend ecosystem but uses similar syntax.
-Usually, webpack would align with proposals, so that's something to consider here.
-We have to check whether it's possible to avoid potential conflicts.
+ولكن هناك "لكن" كبيرة هنا: هناك عمل نحو اقتراح "وحدات CSS" (CSS Modules) مختلف في مجتمع WebComponents، والذي من المخطط أن يصبح مدعومًا بشكل أصلي من قبل المتصفحات.
+على الأقل هذا هو هدف الاقتراح.
+للأسف، هذا الاقتراح مختلف عما يُستخدم حاليًا في نظام الواجهة الأمامية البيئي (Frontend ecosystem) ولكنه يستخدم بناء جملة مشابه.
+عادة، يصطف webpack مع الاقتراحات (proposals)، لذلك هذا شيء يجب مراعاته هنا.
+علينا التحقق مما إذا كان من الممكن تجنب النزاعات المحتملة.
 
-#### HTML as entrypoint
+#### HTML كنقطة دخول (HTML as entrypoint)
 
-Following Parcels example, we also want to support HTML natively as entrypoints.
-Supporting that would be inline with the goal as web app optimizer, as web apps usually start with an HTML document.
-It is also a huge developer experience improvement for beginners as many things can be inferred from the HTML.
+باتباع مثال Parcel، نريد أيضًا دعم HTML أصليًا كنقاط دخول (entrypoints).
+سيكون دعم ذلك يتماشى مع الهدف كمُحسِّن تطبيقات الويب (web app optimizer)، حيث تبدأ تطبيقات الويب عادةً بمستند HTML.
+إنه أيضًا تحسين ضخم لتجربة المطورين للمبتدئين حيث يمكن استنتاج العديد من الأشياء من HTML.
 
-Being in control of the generated HTML does also allow to optimize more aggressively by default.
-Currently, we prevent renaming or splitting initial chunks by default, as this requires additional infrastructure for the HTML generation.
+يسمح لك التحكم في HTML المولد بالتحسين بشكل أكثر قوة افتراضيًا.
+حاليًا، نمنع إعادة التسمية أو تقسيم الحزم الأولية (initial chunks) افتراضيًا، لأن هذا يتطلب بنية تحتية إضافية لتوليد HTML.
 
-HTML entrypoints also benefit from CSS as modules and Asset modules, as these resources can be referenced from HTML too (e.g. `<link rel=stylesheet />`, `<img src="..." />`, `<link rel=icon />`).
+تستفيد نقاط دخول HTML أيضًا من CSS كوحدات ووحدات الأصول (Asset modules)، حيث يمكن الإشارة إلى هذه الموارد من HTML أيضًا (مثل `<link rel=stylesheet />`، `<img src="..." />`، `<link rel=icon />`).
 
-#### HTML modules
+#### وحدات HTML (HTML modules)
 
-There is also a proposal about native support of importing HTML in browsers, that's something we will follow, especially as there is a huge overlap with HTML entrypoints.
+هناك أيضًا اقتراح بشأن الدعم الأصلي لاستيراد HTML في المتصفحات، وهذا شيء سنتابعه، خاصة نظرًا لوجود تداخل كبير مع نقاط دخول HTML.
 
-### SourceMap performance
+### أداء خرائط المصدر (SourceMap performance)
 
-Using (full) SourceMaps with webpack is currently quite expensive with webpack, as performance for SourceMap processing isn't the best.
-This is something we want to look into for webpack, but also for terser, which is used by webpack as minimizer by default.
+يعد استخدام خرائط المصدر (الكاملة) مع webpack حاليًا مكلفًا للغاية مع webpack، لأن الأداء لمعالجة خرائط المصدر ليس الأفضل.
+هذا شيء نريد التحقيق فيه بالنسبة لـ webpack، ولكن أيضًا بالنسبة لـ terser، الذي يستخدمه webpack كمُصغِّر (minimizer) افتراضيًا.
 
-### `exports`/`imports` package.json field
+### حقل `exports`/`imports` في package.json
 
-Node.js 14 has added support for the `exports` field in package.json to allow to define entrypoints of a package.
-Webpack 5 followed this, and even added additional conditions like `production/development`.
+أضاف Node.js 14 دعمًا لحقل `exports` في package.json للسماح بتحديد نقاط الدخول للحزمة.
+حذا webpack 5 حذوه، وحتى أضاف شروطًا إضافية مثل `production/development`.
 
-Shortly after that Node.js made further additions to that, e.g. they also added an `imports` field for private imports.
+بعد فترة وجيزة من ذلك أجرى Node.js إضافات أخرى لذلك، مثل إضافة حقل `imports` للاستيرادات الخاصة.
 
-That's something we also want to add.
+هذا شيء نريد إضافته أيضًا.
 
-### Improve CommonJS analysis
+### تحسين تحليل CommonJS
 
-While ESM is the future, there are still a lot of CommonJS packages in npm and in use.
-Webpack 5 added analysis for CommonJS modules to allow Tree Shaking for most of these modules.
+في حين أن ESM هو المستقبل، لا يزال هناك الكثير من حزم CommonJS في npm وقيد الاستخدام.
+أضاف Webpack 5 التحليل لوحدات CommonJS للسماح بـ Tree Shaking لمعظم هذه الوحدات.
 
-But we can do more. While many exporting patterns are supported, only a few importing patterns are supported.
-We want to add support for more patterns to allow more optimizations for CommonJS modules too.
+لكن يمكننا أن نفعل المزيد. في حين يتم دعم العديد من أنماط التصدير (exporting patterns)، يتم دعم عدد قليل فقط من أنماط الاستيراد.
+نريد إضافة دعم لمزيد من الأنماط للسماح بمزيد من التحسينات لوحدات CommonJS أيضًا.
 
-### Hot Module Replacement for Module Federation
+### استبدال الوحدة الساخنة (Hot Module Replacement) لـ Module Federation
 
-Webpack 5 added a new feature called "Module Federation" which allows integrating multiple builds together at runtime.
-Currently, Hot Module Replacement (HMR) supports only a single build at a time and updates can't bubble between builds.
-We want to improve here and allow HMR updates to bubble between different builds, which would improve developing federation applications.
+أضاف Webpack 5 ميزة جديدة تسمى "Module Federation" والتي تسمح بدمج عمليات بناء متعددة معًا في وقت التشغيل.
+حاليًا، يدعم Hot Module Replacement (HMR) بنية واحدة فقط في كل مرة ولا يمكن أن تنتقل التحديثات بين البنيات (builds).
+نريد التحسين هنا والسماح لتحديثات HMR بالانتقال بين عمليات البناء المختلفة، مما سيحسن تطوير تطبيقات الفيدرالية (federation applications).
 
-### Hinting system
+### نظام التلميحات (Hinting system)
 
-Currently, webpack displays warnings and errors to the user.
-During the build, there are quite a few cases where we could tell the user something, like potential footguns or optimization opportunities, but they don't fit into warnings or errors and we don't want to spam the output with all this information.
-So we want to add another category: Hints.
-We want to collect all hints during builds (plugins could also emit some), but only display a limited number of them in the output (by default only one).
-This should lead to some kind of "Did you know" experience for the user.
+حاليًا، يعرض webpack التحذيرات والأخطاء للمستخدم.
+أثناء البناء، هناك عدد قليل من الحالات التي يمكننا فيها إخبار المستخدم بشيء ما، مثل مشاكل محتملة (footguns) أو فرص تحسين، لكنها لا تتناسب مع التحذيرات أو الأخطاء ولا نريد الإغراق في المخرجات بكل هذه المعلومات.
+لذلك نريد إضافة فئة أخرى: التلميحات (Hints).
+نريد جمع كل التلميحات أثناء عمليات البناء (يمكن أن تصدر الإضافات (plugins) بعضًا منها أيضًا)، ولكننا لا نعرض سوى عدد محدود منها في المخرجات (افتراضيًا واحد فقط).
+يجب أن يؤدي هذا إلى نوع من تجربة "هل تعلم" (Did you know) للمستخدم.
 
-### Multi-Threading
+### تعدد مؤشرات الترابط (Multi-Threading)
 
-While Persistent Caching makes cached build "blazing" fast, initial builds without Persistent Cache have still a bit of room for improvement.
-Javascript execution in Node.js is single-threaded by default, but recent additions allow to use `worker_threads`, which is an API similar to WebWorkers.
+بينما يجعل التخزين المؤقت المستمر (Persistent Caching) البناء المخزن مؤقتًا "سريعًا للغاية"، لا يزال هناك مجال للتحسين لعمليات البناء الأولية بدون Persistent Cache.
+تنفيذ Javascript في Node.js أحادي مؤشر الترابط (single-threaded) افتراضيًا، لكن الإضافات الحديثة تسمح باستخدام `worker_threads`، وهي واجهة برمجة تطبيقات (API) تشبه WebWorkers.
 
-This can be used distribute work across all CPUs. There has already been some preparations in webpack 5 for that: e.g. serializing of internal data structures is possible and the work queues support plugins. But some parts of that are still unclear and require experimentation.
+يمكن استخدام هذا لتوزيع العمل عبر جميع وحدات المعالجة المركزية (CPUs). كانت هناك بالفعل بعض الاستعدادات في webpack 5 لذلك: على سبيل المثال يمكن تسلسل هياكل البيانات الداخلية (serializing of internal data structures) وتدعم قوائم انتظار العمل (work queues) الإضافات (plugins). لكن بعض أجزاء ذلك لا تزال غير واضحة وتتطلب التجريب.
 
-This is in our voting list for a while, but not many have voted on that. Is this really something people need?
+كان هذا في قائمة التصويت لدينا لفترة من الوقت، لكن لم يصوت الكثيرون على ذلك. هل هذا حقًا شيء يحتاجه الناس؟
 
 ### WebAssembly
 
-Currently, WebAssembly is experimental and not enabled by default.
-Once the proposal reaches Stage 4 we can enable it by default.
+حاليًا، لا يزال WebAssembly في المرحلة التجريبية (experimental) وليس مُفعّلًا افتراضيًا.
+بمجرد وصول الاقتراح إلى المرحلة 4 (Stage 4)، يمكننا تمكينه افتراضيًا.
 
-This might also lead to a wider adoption of WebAssembly in the ecosystem.
-I think we might see more in this field in 2021.
+قد يؤدي هذا أيضًا إلى تبني أوسع لـ WebAssembly في النظام البيئي (ecosystem).
+أعتقد أننا قد نرى المزيد في هذا المجال في 2021.
 
-## Disclaimer
+## تنويه (Disclaimer)
 
-This list is not set in stone.
-The web ecosystem changes so fast that we probably end up implementing totally different things, that we might not even aware of at this time.
-We do not even know how much time we can invest in webpack, considering our current sponsoring situation.
+هذه القائمة ليست مكتوبة على حجر.
+يتغير نظام الويب البيئي (web ecosystem) بسرعة كبيرة لدرجة أننا ربما ينتهي بنا الأمر بتنفيذ أشياء مختلفة تمامًا، والتي ربما لا نكون حتى على دراية بها في هذا الوقت.
+نحن لا نعرف حتى مقدار الوقت الذي يمكننا استثماره في webpack، بالنظر إلى وضع الرعاية الحالي لدينا.

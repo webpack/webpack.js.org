@@ -2,326 +2,326 @@
 title: Webpack 5 release
 sort: 20201010
 contributors:
-  - sokra
-  - chenxsan
+  - ameencfw
+  - RlxChap2
 ---
 
-Webpack 4 was released in February 2018.
-Since then we shipped a lot of features without breaking changes.
-We know that people dislike major changes with breaking changes.
-Especially with webpack, which people usually only touch twice a year, and the remaining time it "just works".
-But shipping features without breaking changes also has a cost:
-We can't do major API or architectural improvements.
+تم إصدار Webpack 4 في فبراير 2018.
+منذ ذلك الحين قمنا بشحن الكثير من المميزات دون إحداث تغييرات جذرية (breaking changes).
+نحن نعلم أن الناس يكرهون التغييرات الكبيرة التي تصاحبها تغييرات جذرية.
+خاصة مع webpack، الذي عادة ما يتعامل معه الناس مرتين فقط في السنة، وفي بقية الوقت "يعمل ببساطة".
+لكن شحن الميزات دون تغييرات جذرية له تكلفة أيضًا:
+لا يمكننا إجراء تحسينات كبيرة على واجهة برمجة التطبيقات (API) أو البنية المعمارية.
 
-So from time to time, there is a point where the difficulties pile up and we are forced to do breaking changes to not mess everything up.
-That's the time for a new major version.
-So webpack 5 contains these architectural improvements and the features that were not possible to implement without them.
+لذا من وقت لآخر، نصل إلى نقطة تتراكم فيها الصعوبات ونُجبر على إجراء تغييرات جذرية لتجنب إفساد كل شيء.
+هذا هو الوقت المناسب لإصدار رئيسي جديد (major version).
+لذلك يحتوي webpack 5 على هذه التحسينات المعمارية والميزات التي لم يكن من الممكن تنفيذها بدونها.
 
-The major version was also the chance to revise some of the defaults and to align with proposals and specifications that come up in the meantime.
+كان الإصدار الرئيسي أيضًا فرصة لمراجعة بعض الإعدادات الافتراضية ومواءمتها مع المقترحات والمواصفات التي ظهرت في غضون ذلك.
 
-So today (2020-10-10) webpack 5.0.0 is released, but this doesn't mean it's done, bugfree or even feature-complete.
-As with webpack 4 we continue development by fixing problems and adding features.
-In the next days there will probably be a lot bugfixes. Features will come later.
+لذا تم اليوم (2020-10-10) إطلاق webpack 5.0.0، لكن هذا لا يعني أنه مكتمل، أو خالٍ من الأخطاء، أو حتى مكتمل الميزات.
+كما حدث مع webpack 4، نواصل التطوير من خلال إصلاح المشاكل وإضافة الميزات.
+في الأيام القادمة من المحتمل أن يكون هناك الكثير من إصلاحات الأخطاء. ستأتي الميزات لاحقًا.
 
-## Common Questions
+## أسئلة شائعة
 
-### So what does the release mean?
+### إذن ماذا يعني هذا الإصدار؟
 
-It means we finished doing breaking changes.
-Many refactorings have been done to up-level the architecture and create a good base for future features (and current features).
+يعني أننا انتهينا من إجراء التغييرات الجذرية.
+تم إجراء العديد من عمليات إعادة الهيكلة (refactoring) لرفع مستوى البنية وإنشاء قاعدة جيدة للميزات المستقبلية (والميزات الحالية).
 
-### So when is the time to upgrade?
+### إذن متى يحين وقت الترقية؟
 
-It depends. There is a good chance that upgrading fails and you would need to give it a second or 3rd try.
-If you are open to that, try to upgrade now and provide feedback to webpack, plugins and loaders.
-We are eager to fix those problems. Someone has to start and you would be one of the first ones benefiting from it.
+يعتمد الأمر. هناك فرصة جيدة أن تفشل الترقية وقد تحتاج إلى المحاولة للمرة الثانية أو الثالثة.
+إذا كنت منفتحًا على ذلك، فحاول الترقية الآن وقدم ملاحظاتك إلى webpack والإضافات (plugins) والمحملات (loaders).
+نحن حريصون على إصلاح تلك المشاكل. يجب أن يبدأ شخص ما وستكون أنت من أوائل المستفيدين منه.
 
-## Sponsoring Update
+## تحديث الرعاية (Sponsoring Update)
 
-Webpack is fully based upon [sponsoring](https://opencollective.com/webpack).
-It's not tied to (and paid by) a big company like some other Open Source projects.
-99% of the earnings from sponsoring are distributed towards contributors and maintainers based on the contributions they do.
-We believe in investing the money towards making webpack better.
+يعتمد Webpack بالكامل على [الرعاية](https://opencollective.com/webpack).
+إنه غير مرتبط (أو مدفوع الأجر) بشركة كبيرة مثل بعض مشاريع المصادر المفتوحة الأخرى.
+يتم توزيع 99% من أرباح الرعاية على المساهمين والمشرفين بناءً على المساهمات التي يقومون بها.
+نحن نؤمن باستثمار الأموال نحو جعل webpack أفضل.
 
-But there is a pandemic, and companies ain't that much open to sponsoring anymore.
-Webpack is suffering under these circumstances too (like many other companies and people).
+ولكن هناك جائحة، والشركات لم تعد منفتحة كثيرًا على الرعاية كما كانت.
+يعاني Webpack في ظل هذه الظروف أيضًا (مثل العديد من الشركات والأشخاص الآخرين).
 
-We were never able to pay our contributors the amount we think they deserve, but now we only have half of the money available, so we need to make a more serious cut.
-Until the situation improves we will only pay contributors and maintainers the first 10 days of each month.
-The remaining days they could work voluntarily, paid by their employer, work on something else, or take some days off.
-This allows us to pay for their work in the first 10 days more equivalent to the invested time.
+لم نتمكن أبدًا من الدفع لمساهمينا المبلغ الذي نعتقد أنهم يستحقونه، ولكن الآن ليس لدينا سوى نصف الأموال المتاحة، لذا نحن بحاجة إلى إجراء خفض أكثر جدية.
+حتى يتحسن الوضع، سندفع فقط للمساهمين والمشرفين عن الأيام العشرة الأولى من كل شهر.
+أما الأيام المتبقية فيمكنهم العمل بشكل تطوعي، أو بأجر من صاحب عملهم، أو العمل على شيء آخر، أو أخذ بعض أيام الإجازة.
+يتيح لنا ذلك الدفع مقابل عملهم في الأيام العشرة الأولى بما يعادل بشكل أكبر الوقت المستثمر.
 
-The biggest "Thank You" goes to [trivago](https://tech.trivago.com/opensource) which has been sponsoring webpack a huge amount for the last 3 years.
-Sadly they are unable to continue their sponsorship this year, as they have been hit hard by Covid-19.
-I hope some other company steps up and follows these (gigantic) footsteps.
+أكبر كلمة "شكرًا" تذهب إلى [trivago](https://tech.trivago.com/opensource) التي كانت ترعى webpack بمبلغ ضخم على مدار السنوات الثلاث الماضية.
+للأسف هم غير قادرين على الاستمرار في رعايتهم هذا العام، حيث تضرروا بشدة من Covid-19.
+آمل أن تتقدم شركة أخرى وتحذو حذو هذه الخطوات (العملاقة).
 
-Thanks to [all the sponsors](/#sponsors).
+شكرًا لـ [جميع الرعاة](/#sponsors).
 
-## General direction
+## الاتجاه العام
 
-This release focus on the following:
+يركز هذا الإصدار على ما يلي:
 
-- Improve build performance with Persistent Caching.
-- Improve Long Term Caching with better algorithms and defaults.
-- Improve bundle size with better Tree Shaking and Code Generation.
-- Improve compatibility with the web platform.
-- Clean up internal structures that were left in a weird state while implementing features in v4 without introducing any breaking changes.
-- Prepare for future features by introducing breaking changes now, allowing us to stay on v5 for as long as possible.
+- تحسين أداء البناء باستخدام التخزين المؤقت المستمر (Persistent Caching).
+- تحسين التخزين المؤقت طويل المدى (Long Term Caching) بخوارزميات وافتراضيات أفضل.
+- تحسين حجم الحزمة (bundle size) بفضل Tree Shaking وتوليد أكواد أفضل.
+- تحسين التوافق مع منصة الويب.
+- تنظيف الهياكل الداخلية التي تُركت في حالة غريبة أثناء تنفيذ الميزات في الإصدار 4 دون إدخال أي تغييرات جذرية.
+- التحضير للميزات المستقبلية عن طريق إدخال تغييرات جذرية الآن، مما يسمح لنا بالبقاء على الإصدار 5 لأطول فترة ممكنة.
 
-## **Migration** Guide
+## دليل **الترحيل** (Migration Guide)
 
-[See here for a **migration** guide](/migrate/5)
+[انظر هنا للحصول على دليل **الترحيل**](/migrate/5)
 
-## Major Changes: Removals
+## تغييرات رئيسية: الإزالات
 
-### Removed Deprecated Items
+### إزالة العناصر المهملة (Deprecated Items)
 
-All items deprecated in v4 were removed.
+تمت إزالة جميع العناصر التي تم إهمالها في الإصدار 4.
 
-**MIGRATION**: Make sure that your webpack 4 build does not print deprecation warnings.
+**الترحيل**: تأكد من أن بناء webpack 4 الخاص بك لا يطبع تحذيرات الإهمال (deprecation warnings).
 
-Here are a few things that were removed but did not have deprecation warnings in v4:
+إليك بعض الأشياء التي تمت إزالتها ولكن لم تكن تحتوي على تحذيرات إهمال في الإصدار 4:
 
-- IgnorePlugin and BannerPlugin must now be passed only one argument that can be an object, string or function.
+- يجب الآن تمرير وسيط واحد فقط لـ IgnorePlugin و BannerPlugin، يمكن أن يكون كائنًا (object)، أو سلسلة نصية (string)، أو دالة (function).
 
-### Deprecation codes
+### رموز الإهمال (Deprecation codes)
 
-New deprecations include a deprecation code so they are easier to reference.
+تتضمن الإهمالات الجديدة رمز إهمال بحيث يسهل الإشارة إليها.
 
-### Syntax deprecated
+### بنية جمل مهملة (Syntax deprecated)
 
-`require.include` has been deprecated and will emit a warning by default when used.
+تم إهمال `require.include` وسيصدر تحذيرًا بشكل افتراضي عند استخدامه.
 
-Behavior can be changed with `Rule.parser.requireInclude` to allowed, deprecated or disabled.
+يمكن تغيير السلوك باستخدام `Rule.parser.requireInclude` إلى مسموح به (allowed)، مهمل (deprecated)، أو معطل (disabled).
 
-### Automatic Node.js Polyfills Removed
+### إزالة تعويضات Node.js التلقائية (Automatic Node.js Polyfills Removed)
 
-In the early days, webpack's aim was to allow running most Node.js modules in the browser, but the module landscape changed and many module uses are now written mainly for frontend purposes. Webpack &lt;= 4 ships with polyfills for many of the Node.js core modules, which are automatically applied once a module uses any of the core modules (i.e. the `crypto` module).
+في الأيام الأولى، كان هدف webpack هو السماح بتشغيل معظم وحدات Node.js في المتصفح، ولكن المشهد تغير وأصبحت العديد من الوحدات تُكتب الآن بشكل أساسي لأغراض الواجهة الأمامية. يأتي Webpack &lt;= 4 مع تعويضات (polyfills) للعديد من الوحدات الأساسية لـ Node.js، والتي يتم تطبيقها تلقائيًا بمجرد استخدام أي وحدة من الوحدات الأساسية (مثل وحدة `crypto`).
 
-While this makes using modules written for Node.js easier, it adds these huge polyfills to the bundle. In many cases these polyfills are unnecessary.
+في حين أن هذا يجعل استخدام الوحدات المكتوبة لـ Node.js أسهل، إلا أنه يضيف هذه التعويضات الضخمة إلى الحزمة. في كثير من الحالات، تكون هذه التعويضات غير ضرورية.
 
-Webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal is to improve compatibility with the web platform, where Node.js core modules are not available.
+يتوقف Webpack 5 عن إضافة التعويضات لهذه الوحدات الأساسية تلقائيًا ويركز على الوحدات المتوافقة مع الواجهة الأمامية. هدفنا هو تحسين التوافق مع منصة الويب، حيث لا تتوفر الوحدات الأساسية لـ Node.js.
 
-**MIGRATION**:
+**الترحيل**:
 
-- Try to use frontend-compatible modules whenever possible.
-- It's possible to manually add a polyfill for a Node.js core module. An error message will give a hint on how to achieve that.
-- Package authors: Use the `browser` field in `package.json` to make a package frontend-compatible. Provide alternative implementations/dependencies for the browser.
+- حاول استخدام الوحدات المتوافقة مع الواجهة الأمامية كلما أمكن ذلك.
+- من الممكن إضافة تعويض (polyfill) يدويًا لوحدة أساسية في Node.js. ستعطي رسالة الخطأ تلميحًا حول كيفية تحقيق ذلك.
+- لمؤلفي الحزم: استخدم حقل `browser` في `package.json` لجعل الحزمة متوافقة مع الواجهة الأمامية. قدم تطبيقات/تبعيات (implementations/dependencies) بديلة للمتصفح.
 
-## Major Changes: Long Term Caching
+## تغييرات رئيسية: التخزين المؤقت طويل المدى (Long Term Caching)
 
-### Deterministic Chunk, Module IDs and Export names
+### الحزم، ومعرفات الوحدات، وأسماء الصادرات الحتمية (Deterministic)
 
-New algorithms were added for long term caching. These are enabled by default in production mode.
+تمت إضافة خوارزميات جديدة للتخزين المؤقت طويل المدى. تم تمكينها بشكل افتراضي في وضع الإنتاج (production mode).
 
 `chunkIds: "deterministic"`
 `moduleIds: "deterministic"`
 `mangleExports: "deterministic"`
 
-The algorithms assign short (3 or 5 digits) numeric IDs to modules and chunks and short (2 characters) names to exports in a deterministic way.
-This is a trade-off between bundle size and long term caching.
+تقوم الخوارزميات بتعيين معرفات رقمية قصيرة (3 أو 5 أرقام) للوحدات والحزم، وأسماء قصيرة (حرفان) للصادرات بطريقة حتمية (deterministic).
+هذا يمثل مقايضة (trade-off) بين حجم الحزمة والتخزين المؤقت طويل المدى.
 
-`moduleIds/chunkIds/mangleExports: false` disables the default behavior and one can provide a custom algorithm via plugin. Note that in webpack 4 `moduleIds/chunkIds: false` without custom plugin resulted in a working build, while in webpack 5 you must provide a custom plugin.
+يقوم `moduleIds/chunkIds/mangleExports: false` بتعطيل السلوك الافتراضي ويمكن للمرء توفير خوارزمية مخصصة عبر إضافة (plugin). لاحظ أنه في webpack 4، كان استخدام `moduleIds/chunkIds: false` بدون إضافة مخصصة يؤدي إلى بناء يعمل، بينما في webpack 5 يجب عليك توفير إضافة مخصصة.
 
-**MIGRATION**: Best use the default values for `chunkIds`, `moduleIds` and `mangleExports`. You can also opt-in to the old defaults `chunkIds: "size", moduleIds: "size", mangleExports: "size"`, this will generate smaller bundles, but invalidate them more often for caching.
+**الترحيل**: من الأفضل استخدام القيم الافتراضية لـ `chunkIds` و `moduleIds` و `mangleExports`. يمكنك أيضًا اختيار الافتراضيات القديمة `chunkIds: "size", moduleIds: "size", mangleExports: "size"`، سيؤدي هذا إلى إنشاء حزم أصغر، ولكنه سيبطل صلاحيتها (invalidate) بشكل متكرر عند التخزين المؤقت.
 
-Note: In webpack 4 hashed module ids yielded reduced gzip performance. This was related to changed module order and has been fixed.
+ملاحظة: في webpack 4، أدت معرفات الوحدات المجزأة (hashed module ids) إلى انخفاض أداء gzip. كان هذا مرتبطًا بتغير ترتيب الوحدات وتم إصلاحه.
 
-Note: In webpack 5, `deterministic` Ids are enabled by default in production mode
+ملاحظة: في webpack 5، تم تفعيل المعرفات `deterministic` بشكل افتراضي في وضع الإنتاج.
 
-### Real Content Hash
+### التجزئة الحقيقية للمحتوى (Real Content Hash)
 
-Webpack 5 will use a real hash of the file content when using `[contenthash]` now. Before it "only" used a hash of the internal structure.
-This can be positive impact on long term caching when only comments are changed or variables are renamed. These changes are not visible after minimizing.
+سيستخدم Webpack 5 تجزئة (hash) حقيقية لمحتوى الملف عند استخدام `[contenthash]` الآن. في السابق كان يستخدم "فقط" تجزئة للبنية الداخلية.
+يمكن أن يكون لهذا تأثير إيجابي على التخزين المؤقت طويل المدى عندما يتم تغيير التعليقات فقط أو إعادة تسمية المتغيرات. هذه التغييرات غير مرئية بعد التصغير (minimizing).
 
-## Major Changes: Development Support
+## تغييرات رئيسية: دعم التطوير (Development Support)
 
-### Named Chunk IDs
+### معرفات الحزم المسماة (Named Chunk IDs)
 
-A new named chunk id algorithm enabled by default in development mode gives chunks (and filenames) human-readable names.
-A Module ID is determined by its path, relative to the `context`.
-A Chunk ID is determined by the chunk's content.
+تم تمكين خوارزمية جديدة لمعرف الحزمة المسمى بشكل افتراضي في وضع التطوير (development mode) لمنح الحزم (وأسماء الملفات) أسماء قابلة للقراءة البشرية.
+يتم تحديد معرف الوحدة (Module ID) من خلال مسارها بالنسبة إلى الـ `context`.
+يتم تحديد معرف الحزمة (Chunk ID) من خلال محتوى الحزمة.
 
-So you no longer need to use `import(/* webpackChunkName: "name" */ "module")` for debugging.
-But it would still make sense if you want to control the filenames for production environments.
+لذلك لم تعد بحاجة إلى استخدام `import(/* webpackChunkName: "name" */ "module")` لأغراض تصحيح الأخطاء (debugging).
+ولكن سيظل من المنطقي استخدامها إذا كنت ترغب في التحكم في أسماء الملفات لبيئات الإنتاج.
 
-It's possible to use `chunkIds: "named"` in production, but make sure not to accidentally expose sensitive information about module names.
+من الممكن استخدام `chunkIds: "named"` في الإنتاج، ولكن تأكد من عدم الكشف عن معلومات حساسة حول أسماء الوحدات عن طريق الخطأ.
 
-**MIGRATION**: If you dislike the filenames being changed in development, you can pass `chunkIds: "natural"` to use the old numeric mode.
+**الترحيل**: إذا كنت تكره تغيير أسماء الملفات في التطوير، يمكنك تمرير `chunkIds: "natural"` لاستخدام الوضع الرقمي القديم.
 
 ### Module Federation
 
-Webpack 5 adds a new feature called "Module Federation", which allows multiple webpack builds to work together.
-From runtime perspective modules from multiple builds will behave like a huge connected module graph.
-From developer perspective modules can be imported from specified remote builds and used with minimal restrictions.
+يضيف Webpack 5 ميزة جديدة تسمى "Module Federation"، والتي تسمح لعدة بنيات (builds) webpack بالعمل معًا.
+من منظور وقت التشغيل (runtime)، ستتصرف الوحدات من عمليات البناء المتعددة وكأنها رسم بياني متصل ضخم للوحدات.
+من منظور المطور، يمكن استيراد الوحدات من عمليات بناء بعيدة (remote) محددة واستخدامها بأقل قدر من القيود.
 
-For more details see [this separate guide](/concepts/module-federation).
+لمزيد من التفاصيل انظر [هذا الدليل المنفصل](/concepts/module-federation).
 
-## Major Changes: New Web Platform Features
+## تغييرات رئيسية: ميزات منصة الويب الجديدة
 
-### JSON modules
+### وحدات JSON (JSON modules)
 
-JSON modules now align with the proposal and emit a warning when a non-default export is used.
-JSON modules no longer have named exports when importing from a strict ECMAScript module.
+تتوافق وحدات JSON الآن مع الاقتراح وتصدر تحذيرًا عند استخدام تصدير غير افتراضي (non-default export).
+لم يعد لوحدات JSON صادرات مسماة (named exports) عند الاستيراد من وحدة ECMAScript صارمة.
 
-**MIGRATION**: Use the default export.
+**الترحيل**: استخدم التصدير الافتراضي (`default export`).
 
-Even when using the default export, unused properties are dropped by the `optimization.usedExports` optimization and properties are mangled by the `optimization.mangleExports` optimization.
+حتى عند استخدام التصدير الافتراضي، يتم إسقاط الخصائص غير المستخدمة بواسطة تحسين `optimization.usedExports` ويتم تغيير الخصائص (mangled) بواسطة تحسين `optimization.mangleExports`.
 
-It's possible to specify a custom JSON parser in `Rule.parser.parse` to import JSON-like files (e.g. for toml, yaml, json5, etc.).
+من الممكن تحديد محلل JSON مخصص في `Rule.parser.parse` لاستيراد ملفات تشبه JSON (مثل toml، yaml، json5، إلخ).
 
 ### import.meta
 
-- `import.meta.webpackHot` is an alias for `module.hot` which is also available in strict ESM
-- `import.meta.webpack` is the webpack major version as number
-- `import.meta.url` is the `file:` url of the current file (similar to `__filename` but as file url)
+- `import.meta.webpackHot` هو اسم مستعار لـ `module.hot` المتاح أيضًا في ESM الصارم.
+- `import.meta.webpack` هو الإصدار الرئيسي لـ webpack كـ رقم.
+- `import.meta.url` هو رابط `file:` للملف الحالي (على غرار `__filename` ولكن كرابط ملف).
 
-### Asset modules
+### وحدات الأصول (Asset modules)
 
-Webpack 5 has now native support for modules representing assets.
-These modules will either emit a file into the output folder or inject a DataURI into the javascript bundle.
-Either way they give a URL to work with.
+يتمتع Webpack 5 الآن بدعم محلي للوحدات التي تمثل الأصول (assets).
+ستقوم هذه الوحدات إما بإخراج ملف إلى مجلد المخرجات (output folder) أو حقن DataURI في حزمة javascript.
+في كلتا الحالتين تمنحك رابط URL للعمل به.
 
-They can be used via multiple ways:
+يمكن استخدامها عبر طرق متعددة:
 
-- `import url from "./image.png"` and setting `type: "asset"` in `module.rules` when matching such import. (old way)
-- `new URL("./image.png", import.meta.url)` (new way)
+- `import url from "./image.png"` وتعيين `type: "asset"` في `module.rules` عند مطابقة مثل هذا الاستيراد. (الطريقة القديمة)
+- `new URL("./image.png", import.meta.url)` (الطريقة الجديدة)
 
-The "new way" syntax was chosen to allow running code without bundler too. This syntax is also available in native ECMAScript modules in the browser.
+تم اختيار بنية "الطريقة الجديدة" للسماح بتشغيل الكود بدون محزم (bundler) أيضًا. تتوفر هذه البنية أيضًا في وحدات ECMAScript المحلية في المتصفح.
 
-### Native Worker support
+### دعم Worker المحلي
 
-When combining `new URL` for assets with `new Worker`/`new SharedWorker`/`navigator.serviceWorker.register` webpack will automatically create a new entrypoint for a web worker.
+عند الجمع بين `new URL` للأصول مع `new Worker`/`new SharedWorker`/`navigator.serviceWorker.register` سيقوم webpack تلقائيًا بإنشاء نقطة دخول جديدة لـ web worker.
 
 `new Worker(new URL("./worker.js", import.meta.url))`
 
-The syntax was chosen to allow running code without bundler too. This syntax is also available in native ECMAScript modules in the browser.
+تم اختيار البنية للسماح بتشغيل الكود بدون محزم أيضًا. تتوفر هذه البنية أيضًا في وحدات ECMAScript المحلية في المتصفح.
 
-### URIs
+### المعرفات المنتظمة (URIs)
 
-Webpack 5 supports handling of protocols in requests.
+يدعم Webpack 5 التعامل مع البروتوكولات في الطلبات (requests).
 
-- `data:` is supported. Base64 or raw encoding is supported. Mimetype can be mapped to loaders and module type in `module.rules`. Example: `import x from "data:text/javascript,export default 42"`
-- `file:` is supported.
-- `http(s):` is supported, but requires opt-in via `new webpack.experiments.schemesHttp(s)UriPlugin()`
-  - By default when targeting "web", these URIs result in requests to external resource (they are externals)
+- `data:` مدعوم. يدعم تشفير Base64 أو الخام (raw). يمكن تعيين Mimetype للمحملات ونوع الوحدة في `module.rules`. مثال: `import x from "data:text/javascript,export default 42"`
+- `file:` مدعوم.
+- `http(s):` مدعوم، لكنه يتطلب التفعيل عبر `new webpack.experiments.schemesHttp(s)UriPlugin()`
+  - افتراضيًا عند استهداف "web"، تؤدي عناوين URI هذه إلى طلبات لموارد خارجية (وهي externals).
 
-Fragments in requests are supported: Example: `./file.js#fragment`
+الأجزاء (Fragments) في الطلبات مدعومة: مثال: `./file.js#fragment`
 
-### Async modules
+### الوحدات غير المتزامنة (Async modules)
 
-Webpack 5 supports so called "async modules".
-That are modules that do not evaluate synchronously, but are async and Promise-based instead.
+يدعم Webpack 5 ما يسمى "الوحدات غير المتزامنة".
+هي الوحدات التي لا يتم تقييمها بشكل متزامن، بل هي غير متزامنة وتعتمد على الوعود (Promise-based).
 
-Importing them via `import` is automatically handled and no additional syntax is needed and difference is hardly notice-able.
+يتم التعامل مع استيرادها عبر `import` تلقائيًا ولا يلزم وجود بنية إضافية والفرق بالكاد يمكن ملاحظته.
 
-Importing them via `require()` will return a Promise that resolves to the exports.
+استيرادها عبر `require()` سيعيد Promise يحل للصادرات (exports).
 
-In webpack there are multiple ways to have async modules:
+في webpack، هناك عدة طرق لامتلاك وحدات غير متزامنة:
 
-- async externals
-- WebAssembly Modules in the new spec
-- ECMAScript Modules that are using Top-Level-Await
+- externals غير متزامنة
+- وحدات WebAssembly في المواصفات الجديدة
+- وحدات ECMAScript التي تستخدم Top-Level-Await
 
-### Externals
+### الخارجيون (Externals)
 
-Webpack 5 adds additional external types to cover more applications:
+يضيف Webpack 5 أنواعًا إضافية للخارجيين لتغطية المزيد من التطبيقات:
 
-`promise`: An expression that evaluates to a Promise. The external module is an async module and the resolved value is used as module exports.
+`promise`: تعبير يتم تقييمه كـ Promise. الوحدة الخارجية هي وحدة غير متزامنة وتُستخدم القيمة التي تم حلها كصادرات للوحدة.
 
-`import`: Native `import()` is used to load the specified request. The external module is an async module.
+`import`: تُستخدم `import()` المحلية لتحميل الطلب المحدد. الوحدة الخارجية هي وحدة غير متزامنة.
 
-`module`: Not implemented yet, but planned to load modules via `import x from "..."`.
+`module`: لم يتم تنفيذها بعد، ولكن من المخطط تحميل الوحدات عبر `import x from "..."`.
 
-`script`: Loads a url via `<script>` tag and gets the exports from a global variable (and optionally properties of it). The external module is an async module.
+`script`: تقوم بتحميل عنوان url عبر علامة `<script>` وتحصل على الصادرات من متغير عام (واختياريًا خصائص منه). الوحدة الخارجية هي وحدة غير متزامنة.
 
-## Major Changes: New Node.js Ecosystem Features
+## تغييرات رئيسية: ميزات نظام Node.js البيئي الجديد
 
-### Resolving
+### التحليل (Resolving)
 
-The `exports` and `imports` field in package.json is now supported.
+حقل `exports` و `imports` في package.json مدعوم الآن.
 
-Yarn PnP is supported natively.
+Yarn PnP مدعوم محليًا.
 
-See more details in [package exports](/guides/package-exports/).
+انظر لمزيد من التفاصيل في [صادرات الحزمة (package exports)](/guides/package-exports/).
 
-## Major Changes: Development Experience
+## تغييرات رئيسية: تجربة التطوير (Development Experience)
 
-### Improved target
+### هدف (target) محسن
 
-Webpack 5 allows to pass a list of targets and also support versions of target.
+يسمح Webpack 5 بتمرير قائمة بالأهداف (targets) ويدعم أيضًا إصدارات الهدف.
 
-Examples: `target: "node14"` `target: ["web", "es2020"]`
+أمثلة: `target: "node14"` `target: ["web", "es2020"]`
 
-This enables us to provide webpack all the information it needs to determine:
+هذا يمكننا من تزويد webpack بجميع المعلومات التي يحتاجها لتحديد:
 
-- chunk loading mechanism, and
-- supported syntax like arrow functions
+- آلية تحميل الحزمة (chunk loading mechanism)، و
+- البنية المدعومة مثل الدوال السهمية (arrow functions)
 
-### Stats
+### الإحصائيات (Stats)
 
-The Stats test format has been improved regarding readability and verbosity. The defaults have been improved to be less verbose and also suitable for large builds.
+تم تحسين تنسيق الإحصائيات من حيث قابلية القراءة والإسهاب. تم تحسين الإعدادات الافتراضية لتكون أقل إسهابًا ومناسبة أيضًا لعمليات البناء الكبيرة.
 
-- Chunk relations are hidden by default now. This can be toggled with `stats.chunkRelations`.
-- Stats differentiate between `files` and `auxiliaryFiles` now.
-- Stats hide module and chunk ids by default now. This can be toggled with `stats.ids`.
-- The list of all modules is sorted by distance to entrypoint now. This can be changed with `stats.modulesSort`.
-- The list of chunk modules is sorted by module name now. This can be changed with `stats.chunkModulesSort`.
-- The list of nested modules in concatenated modules is sorted topologically now. This can be changed with `stats.nestedModulesSort`.
-- Chunks and Assets show chunk id hints now.
-- Assets and modules will display in a tree instead of a list/table.
-- General information is shown in a summary at the end now. It shows webpack version, config name and warnings/errors count.
-- Hash is hidden by default now. This can be changed with `stats.hash`.
-- Timestamp of build is no longer shown by default. This can be enabled with `stats.builtAt`. It will show the timestamp in the summary.
-- Child compilations will no longer shown by default. They can be displayed with `stats.children`.
+- يتم إخفاء علاقات الحزم (Chunk relations) افتراضيًا الآن. يمكن تبديل هذا باستخدام `stats.chunkRelations`.
+- تميز الإحصائيات الآن بين `files` (الملفات) و `auxiliaryFiles` (الملفات المساعدة).
+- تخفي الإحصائيات معرفات الوحدات والحزم افتراضيًا الآن. يمكن تبديل هذا باستخدام `stats.ids`.
+- يتم الآن فرز قائمة بجميع الوحدات حسب المسافة إلى نقطة الدخول (entrypoint). يمكن تغيير ذلك باستخدام `stats.modulesSort`.
+- يتم الآن فرز قائمة وحدات الحزمة حسب اسم الوحدة. يمكن تغيير ذلك باستخدام `stats.chunkModulesSort`.
+- يتم الآن فرز قائمة الوحدات المتداخلة في الوحدات المتسلسلة (concatenated modules) طوبولوجيًا. يمكن تغيير ذلك باستخدام `stats.nestedModulesSort`.
+- تُظهر الحزم والأصول تلميحات لمعرف الحزمة الآن.
+- سيتم عرض الأصول والوحدات في شجرة بدلاً من قائمة/جدول.
+- يتم عرض المعلومات العامة في ملخص في النهاية الآن. يعرض إصدار webpack، واسم التكوين، وعدد التحذيرات/الأخطاء.
+- يتم إخفاء التجزئة (Hash) افتراضيًا الآن. يمكن تغيير ذلك باستخدام `stats.hash`.
+- لم يعد يظهر الطابع الزمني (Timestamp) للبناء بشكل افتراضي. يمكن تفعيله باستخدام `stats.builtAt`. سيُظهر الطابع الزمني في الملخص.
+- لن يتم عرض التجميعات الفرعية (Child compilations) بشكل افتراضي. يمكن عرضها باستخدام `stats.children`.
 
-### Progress
+### التقدم (Progress)
 
-A few improvements have been done to the `ProgressPlugin` which is used for `--progress` by the CLI, but can also be used manually as plugin.
+تم إجراء بعض التحسينات على `ProgressPlugin` والذي يُستخدم من أجل `--progress` بواسطة واجهة سطر الأوامر (CLI)، ولكن يمكن استخدامه أيضًا يدويًا كإضافة (plugin).
 
-It used to only count the processed modules. Now it can count `entries` `dependencies` and `modules`.
-All of them are shown by default now.
+كانت تقوم فقط بحساب الوحدات المعالجة. الآن يمكنها حساب الـ `entries` (المدخلات)، `dependencies` (التبعيات)، و `modules` (الوحدات).
+يتم عرضها جميعًا بشكل افتراضي الآن.
 
-It used to display the currently processed module. This caused much stderr output and yielded a performance problem on some consoles.
-This is now disabled by default (`activeModules` option). This also reduces the amount of spam on the console.
-Now writing to stderr during building modules is throttled to 500ms.
+كانت تقوم بعرض الوحدة التي تتم معالجتها حاليًا. تسبب هذا في الكثير من مخرجات الخطأ القياسي (stderr output) وأسفر عن مشكلة في الأداء على بعض الطرفيات (consoles).
+تم تعطيل هذا الآن بشكل افتراضي (خيار `activeModules`). وهذا يقلل أيضًا من كمية الرسائل المزعجة على الطرفية.
+الآن يتم تقييد الكتابة إلى الخطأ القياسي (stderr) أثناء بناء الوحدات إلى 500 مللي ثانية.
 
-The profiling mode also got an upgrade and will display timings of nested progress messages.
-This makes it easier to figure out which plugin is causing performance problems.
+حصل وضع ملفات التعريف (profiling mode) أيضًا على ترقية وسيعرض توقيتات رسائل التقدم المتداخلة.
+هذا يجعل من السهل معرفة أي إضافة تسبب مشاكل في الأداء.
 
-A newly added `percentBy`-option tells `ProgressPlugin` how to calculate progress percentage.
+يخبر الخيار المُضاف حديثًا `percentBy` إضافة `ProgressPlugin` بكيفية حساب نسبة التقدم.
 
 ```js
 new webpack.ProgressPlugin({ percentBy: "entries" });
 ```
 
-To make progress percentage more accurate `ProgressPlugin` caches the last known total modules count and reuses this value on the next build. The first build will warm the cache but the following builds will use and update this value.
+لجعل نسبة التقدم أكثر دقة، تقوم `ProgressPlugin` بتخزين آخر عدد إجمالي معروف للوحدات وتعيد استخدام هذه القيمة في البناء التالي. سيقوم البناء الأول بتسخين ذاكرة التخزين المؤقت ولكن البنيات التالية ستستخدم وتُحدّث هذه القيمة.
 
-### Automatic unique naming
+### التسمية الفريدة التلقائية (Automatic unique naming)
 
-In webpack 4 multiple webpack runtimes could conflict on the same HTML page, because they use the same global variable for chunk loading. To fix that it was needed to provide a custom name to the `output.jsonpFunction` configuration.
+في webpack 4، كان بإمكان أوقات تشغيل (runtimes) webpack المتعددة أن تتعارض في نفس صفحة HTML، لأنها تستخدم نفس المتغير العام (global variable) لتحميل الحزم. لإصلاح ذلك، كان من الضروري توفير اسم مخصص في تكوين `output.jsonpFunction`.
 
-Webpack 5 does automatically infer a unique name for the build from `package.json` `name` and uses this as default for `output.uniqueName`.
+يقوم Webpack 5 تلقائيًا باستنتاج اسم فريد للبناء من `name` في `package.json` ويستخدم هذا كإعداد افتراضي لـ `output.uniqueName`.
 
-This value is used to make all potential conflicting globals unique.
+تُستخدم هذه القيمة لجعل جميع المتغيرات العامة المتعارضة المحتملة فريدة من نوعها.
 
-**MIGRATION**: Remove `output.jsonpFunction` in favor of a unique name in your `package.json`.
+**الترحيل**: أزل `output.jsonpFunction` لصالح اسم فريد في `package.json`.
 
-### Automatic public path
+### المسار العام التلقائي (Automatic public path)
 
-Webpack 5 will determine the `output.publicPath` automatically when possible.
+سيقوم Webpack 5 بتحديد `output.publicPath` تلقائيًا كلما أمكن ذلك.
 
-### Typescript typings
+### أنواع Typescript (Typescript typings)
 
-Webpack 5 generates typescript typings from source code and exposes them via the npm package.
+يقوم Webpack 5 بتوليد أنواع typescript من الكود المصدري ويعرضها عبر حزمة npm.
 
-**MIGRATION**: Remove `@types/webpack`. Update references when names differ.
+**الترحيل**: أزل `@types/webpack`. قم بتحديث المراجع (references) عندما تختلف الأسماء.
 
-## Major Changes: Optimization
+## تغييرات رئيسية: التحسين (Optimization)
 
-### Nested tree-shaking
+### اهتزاز الشجرة المتداخل (Nested tree-shaking)
 
-Webpack is now able to track access to nested properties of exports. This can improve Tree Shaking (Unused export elimination and export mangling) when reexporting namespace objects.
+أصبح Webpack الآن قادرًا على تتبع الوصول إلى الخصائص المتداخلة للصادرات. يمكن أن يؤدي ذلك إلى تحسين Tree Shaking (إزالة الصادرات غير المستخدمة وتغيير أسماء الصادرات) عند إعادة تصدير كائنات مساحات الأسماء (namespace objects).
 
 **inner.js**
 
@@ -334,7 +334,7 @@ export const b = 2;
 
 ```js
 export * as inner from "./inner";
-// or import * as inner from './inner'; export { inner };
+// أو import * as inner from './inner'; export { inner };
 ```
 
 **user.js**
@@ -345,13 +345,13 @@ import * as module from "./module";
 console.log(module.inner.a);
 ```
 
-In this example, the export `b` can be removed in production mode.
+في هذا المثال، يمكن إزالة التصدير `b` في وضع الإنتاج.
 
-### Inner-module tree-shaking
+### اهتزاز الشجرة للوحدة الداخلية (Inner-module tree-shaking)
 
-Webpack 4 didn't analyze dependencies between exports and imports of a module. Webpack 5 has a new option `optimization.innerGraph`, which is enabled by default in production mode, that runs an analysis on symbols in a module to figure out dependencies from exports to imports.
+لم يقم Webpack 4 بتحليل التبعيات بين صادرات واستيرادات الوحدة. يمتلك Webpack 5 خيارًا جديدًا `optimization.innerGraph`، وهو مفعل افتراضيًا في وضع الإنتاج، والذي يُجري تحليلاً على الرموز في وحدة لمعرفة التبعيات من الصادرات إلى الاستيرادات.
 
-In a module like this:
+في وحدة مثل هذه:
 
 ```js
 import { something } from "./something";
@@ -365,143 +365,143 @@ export function test() {
 }
 ```
 
-The inner graph algorithm will figure out that `something` is only used when the `test` export is used. This allows to flag more exports as unused and to omit more code from the bundle.
+سيكتشف خوارزمية الرسم البياني الداخلي (inner graph) أن `something` يُستخدم فقط عند استخدام التصدير `test`. يتيح هذا وضع علامة على المزيد من الصادرات على أنها غير مستخدمة وحذف المزيد من التعليمات البرمجية من الحزمة.
 
-When `"sideEffects": false` is set, this allows to omit even more modules. In this example `./something` will be omitted when the `test` export is unused.
+عند ضبط `"sideEffects": false`، يسمح هذا بحذف المزيد من الوحدات. في هذا المثال سيتم حذف `./something` عندما يكون التصدير `test` غير مستخدم.
 
-To get the information about unused exports `optimization.usedExports` is required. To remove side-effect-free modules `optimization.sideEffects` is required.
+للحصول على معلومات حول الصادرات غير المستخدمة، يلزم وجود `optimization.usedExports`. ولإزالة الوحدات الخالية من الآثار الجانبية، يلزم وجود `optimization.sideEffects`.
 
-The following symbols can be analysed:
+يمكن تحليل الرموز التالية:
 
-- function declarations
-- class declarations
-- `export default` with or variable declarations with
-  - function expressions
-  - class expressions
-  - sequence expressions
-  - `/*#__PURE__*/` expressions
-  - local variables
-  - imported bindings
+- تصريحات الدوال (function declarations)
+- تصريحات الفئات (class declarations)
+- `export default` مع المتغيرات أو تصريحات المتغيرات مع:
+  - تعبيرات الدوال (function expressions)
+  - تعبيرات الفئات (class expressions)
+  - التعبيرات المتسلسلة (sequence expressions)
+  - تعبيرات `/*#__PURE__*/`
+  - المتغيرات المحلية (local variables)
+  - الروابط المستوردة (imported bindings)
 
-**FEEDBACK**: If you find something missing in this analysis, please report an issue and we consider adding it.
+**ملاحظاتك (FEEDBACK)**: إذا وجدت شيئًا مفقودًا في هذا التحليل، يرجى الإبلاغ عن مشكلة وسننظر في إضافتها.
 
-Using `eval()` will bail-out this optimization for a module, because evaled code could reference any symbol in scope.
+سيؤدي استخدام `eval()` إلى الخروج من هذا التحسين للوحدة، لأن الكود الذي يتم تقييمه (evaled code) يمكن أن يشير إلى أي رمز في النطاق (scope).
 
-This optimization is also known as Deep Scope Analysis.
+يُعرف هذا التحسين أيضًا باسم Deep Scope Analysis (تحليل النطاق العميق).
 
-### CommonJs Tree Shaking
+### اهتزاز شجرة CommonJs (CommonJs Tree Shaking)
 
-Webpack used to opt-out from used exports analysing for CommonJs exports and `require()` calls.
+كان Webpack ينسحب من تحليل الصادرات المستخدمة لصادرات CommonJs واستدعاءات `require()`.
 
-Webpack 5 adds support for some CommonJs constructs, allows to eliminate unused CommonJs exports and track referenced export names from `require()` calls.
+يضيف Webpack 5 دعمًا لبعض هياكل CommonJs، ويسمح بالتخلص من صادرات CommonJs غير المستخدمة وتتبع أسماء التصدير المشار إليها من استدعاءات `require()`.
 
-The following constructs are supported:
+الهياكل التالية مدعومة:
 
 - `exports|this|module.exports.xxx = ...`
-- `exports|this|module.exports = require("...")` (reexport)
-- `exports|this|module.exports.xxx = require("...").xxx` (reexport)
+- `exports|this|module.exports = require("...")` (إعادة تصدير)
+- `exports|this|module.exports.xxx = require("...").xxx` (إعادة تصدير)
 - `Object.defineProperty(exports|this|module.exports, "xxx", ...)`
 - `require("abc").xxx`
 - `require("abc").xxx()`
-- importing from ESM
-- `require()` a ESM
-- flagged exportType (special handling for non-strict ESM import):
+- الاستيراد من ESM
+- `require()` لـ ESM
+- flagged exportType (معالجة خاصة لاستيراد ESM غير الصارم):
   - `Object.defineProperty(exports|this|module.exports, "__esModule", { value: true|!0 })`
   - `exports|this|module.exports.__esModule = true|!0`
-- It's planned to support more constructs in future
+- من المخطط دعم المزيد من الهياكل في المستقبل
 
-When detecting not analysable code, webpack bails out and doesn't track export information at all for these modules (for performance reasons).
+عند اكتشاف كود غير قابل للتحليل، ينسحب webpack ولا يتتبع معلومات التصدير على الإطلاق لهذه الوحدات (لأسباب تتعلق بالأداء).
 
-### Side-Effect analysis
+### تحليل الآثار الجانبية (Side-Effect analysis)
 
-The `"sideEffects"` flag in package.json allows to manually flag modules as side-effect-free, which allows to drop them when unused.
+تسمح علامة `"sideEffects"` في `package.json` بوضع علامة يدويًا على الوحدات بأنها خالية من الآثار الجانبية، مما يسمح بحذفها عند عدم استخدامها.
 
-Webpack 5 can also automatically flag modules as side-effect-free according to a static analysis of the source code.
+يمكن لـ Webpack 5 أيضًا وضع علامة تلقائيًا على الوحدات كخالية من الآثار الجانبية وفقًا للتحليل الثابت للكود المصدري.
 
-### Optimization per runtime
+### التحسين لكل وقت تشغيل (Optimization per runtime)
 
-Webpack 5 is now able (and does by default) to analyse and optimize modules per runtime (A runtime is often equal to an entrypoint).
-This allows to only exports in these entrypoints where they are really needed.
-Entrypoints doesn't affect each other (as long as using a runtime per entrypoint)
+أصبح Webpack 5 الآن قادرًا (ويفعل ذلك افتراضيًا) على تحليل وتحسين الوحدات لكل وقت تشغيل (غالبًا ما يكون وقت التشغيل مساويًا لنقطة الدخول entrypoint).
+هذا يسمح بتصديرها فقط في نقاط الدخول هذه حيث تكون هناك حاجة فعلية إليها.
+لا تؤثر نقاط الدخول على بعضها البعض (طالما تم استخدام وقت تشغيل لكل نقطة دخول).
 
-### Module Concatenation
+### تسلسل الوحدات (Module Concatenation)
 
-Module Concatenation also works per runtime to allow different concatenation for each runtime.
+يعمل تسلسل الوحدات أيضًا لكل وقت تشغيل للسماح بتسلسل مختلف لكل وقت تشغيل.
 
-Module Concatenation has become a first class citizen and any module and dependency is now allowed to implement it.
-Initially webpack 5 already added support for ExternalModules and json modules, more will likely ship soonish.
+أصبح تسلسل الوحدات مواطنًا من الدرجة الأولى ويُسمح الآن لأي وحدة وتابعية (dependency) بتنفيذه.
+مبدئيًا أضاف webpack 5 بالفعل دعمًا للوحدات الخارجية (ExternalModules) ووحدات json، ومن المحتمل أن يتم شحن المزيد قريبًا.
 
-### General Tree Shaking improvements
+### تحسينات Tree Shaking العامة (General Tree Shaking improvements)
 
-`export *` has been improved to track more info and do no longer flag the `default` export as used.
+تم تحسين `export *` لتتبع المزيد من المعلومات ولم يعد يضع علامة على التصدير `default` كمستخدم.
 
-`export *` will now show warnings when webpack is sure that there are conflicting exports.
+سيُظهر `export *` الآن تحذيرات عندما يتأكد webpack من وجود صادرات متعارضة.
 
-`import()` allows to manually tree shake the module via `/* webpackExports: ["abc", "default"] */` magic comment.
+تسمح `import()` باهتزاز الشجرة للوحدة يدويًا عبر التعليق السحري `/* webpackExports: ["abc", "default"] */`.
 
-### Development Production Similarity
+### التشابه بين التطوير والإنتاج (Development Production Similarity)
 
-We try to find a good trade-off between build performance in development mode and avoiding production-only problems by improving the similarity between both modes.
+نحاول إيجاد توازن جيد بين أداء البناء في وضع التطوير وتجنب المشاكل الخاصة بالإنتاج فقط عن طريق تحسين التشابه بين كلا الوضعين.
 
-Webpack 5 enables the `sideEffects` optimization by default in both modes. In webpack 4 this optimization lead to some production-only errors because of an incorrect `"sideEffects"` flag in package.json. Enabling this optimization in development allows to find these problems faster and easier.
+يُفعل Webpack 5 تحسين `sideEffects` افتراضيًا في كلا الوضعين. في webpack 4، أدى هذا التحسين إلى بعض الأخطاء الخاصة بالإنتاج فقط بسبب علامة `"sideEffects"` غير صحيحة في package.json. يتيح تفعيل هذا التحسين في التطوير العثور على هذه المشاكل بشكل أسرع وأسهل.
 
-In many cases development and production happen on different OS with different case-sensitivity of filesystem, so webpack 5 adds a few more warnings/errors when there is something weird casing-wise.
+في كثير من الحالات، يحدث التطوير والإنتاج على أنظمة تشغيل مختلفة مع حساسية مختلفة لحالة الأحرف (case-sensitivity) في نظام الملفات، لذا يضيف webpack 5 المزيد من التحذيرات/الأخطاء عندما يكون هناك شيء غريب فيما يتعلق بحالة الأحرف.
 
-### Improved Code Generation
+### توليد الكود المحسن (Improved Code Generation)
 
-Webpack detects when ASI happens and generates shorter code when no semicolons are inserted. `Object(...)` -> `(0, ...)`
+يكتشف Webpack متى يحدث الإدراج التلقائي للفواصل المنقوطة (ASI) ويولد كودًا أقصر عند عدم إدراج فواصل منقوطة. `Object(...)` -> `(0, ...)`
 
-Webpack merges multiple export getters into a single runtime function call: `r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`
+يدمج Webpack وظائف الحصول على الصادرات (export getters) المتعددة في استدعاء وظيفة وقت تشغيل واحدة: `r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`
 
-There are additional options in `output.environment` now.
-They allows specifying which ECMAScript feature can be used for runtime code generated by webpack.
+هناك خيارات إضافية في `output.environment` الآن.
+تسمح بتحديد ميزة ECMAScript التي يمكن استخدامها لرمز وقت التشغيل المُنشأ بواسطة webpack.
 
-One usually do not specify this option directly, but would use the `target` option instead.
+عادة لا يحدد المرء هذا الخيار مباشرة، ولكنه يستخدم خيار `target` بدلاً من ذلك.
 
-Webpack 4 used to only emit ES5 code.
-Webpack 5 can generate both ES5 and ES6/ES2015 code now.
+كان Webpack 4 يصدر كود ES5 فقط.
+يمكن لـ Webpack 5 الآن توليد كل من كود ES5 و ES6/ES2015.
 
-Supporting only modern browsers will generate shorter code using arrow functions and more spec-conform code using `const` declarations with TDZ for `export default`.
+سيؤدي دعم المتصفحات الحديثة فقط إلى إنشاء رمز أقصر باستخدام الدوال السهمية (arrow functions) وكود أكثر توافقًا مع المواصفات باستخدام تصريحات `const` مع TDZ لـ `export default`.
 
-### Improved `target` option
+### خيار `target` المحسن
 
-In webpack 4 the `target` was a rough choice between `"web"` and `"node"` (and a few others).
-Webpack 5 gives you more options here.
+في webpack 4 كان `target` خيارًا تقريبيًا بين `"web"` و `"node"` (وبضعة خيارات أخرى).
+يمنحك Webpack 5 المزيد من الخيارات هنا.
 
-The `target` option now influences more things about the generated code than before:
+يؤثر خيار `target` الآن على أشياء أكثر حول الكود المُنشأ عما سبق:
 
-- method of chunk loading
-- format of chunks
-- method of wasm loading
-- method of chunk and wasm loading in workers
-- global object used
-- if publicPath should be determined automatically
-- ECMAScript features/syntax used in the generated code
-- `externals` enabled by default
-- Behavior of some Node.js compat layers (`global`, `__filename`, `__dirname`)
-- Resolving of modules (`browser` field, `exports` and `imports` conditions)
-- Some loaders might change behavior based on that
+- طريقة تحميل الحزمة
+- تنسيق الحزم
+- طريقة تحميل wasm
+- طريقة تحميل الحزمة و wasm في العمال (workers)
+- الكائن العام (global object) المستخدم
+- ما إذا كان يجب تحديد publicPath تلقائيًا
+- ميزات/بناء جملة ECMAScript المستخدمة في الكود المُنشأ
+- `externals` مُمَكّنة بشكل افتراضي
+- سلوك بعض طبقات التوافق (compat layers) الخاصة بـ Node.js مثل (`global`، `__filename`، `__dirname`)
+- تحليل الوحدات (حقل `browser`، وشروط `exports` و `imports`)
+- قد تغير بعض المحملات (loaders) سلوكها بناءً على ذلك
 
-For some of these things the choice between `"web"` and `"node"` is too rough and we need more information.
-Therefore we allow to specify the minimum version e.g. like `"node10.13"` and infer more properties about the target environment.
+بالنسبة لبعض هذه الأشياء، يكون الاختيار بين `"web"` و `"node"` تقريبيًا للغاية ونحتاج إلى مزيد من المعلومات.
+لذلك نسمح بتحديد الحد الأدنى للإصدار مثل `"node10.13"` واستنتاج المزيد من الخصائص حول بيئة الهدف.
 
-It's now also allowed to combined multiple targets with an array and webpack will determine the minimum properties of all targets. Using an array is also useful when using targets that doesn't give full information like `"web"` or `"node"` (without version number). E. g. `["web", "es2020"]` combines these two partial targets.
+يُسمح الآن أيضًا بدمج عدة أهداف مع مصفوفة وسيقوم webpack بتحديد الحد الأدنى من خصائص جميع الأهداف. استخدام مصفوفة مفيد أيضًا عند استخدام أهداف لا تعطي معلومات كاملة مثل `"web"` أو `"node"` (بدون رقم إصدار). على سبيل المثال `["web", "es2020"]` يجمع بين هذين الهدفين الجزئيين.
 
-There is a target `"browserslist"` which will use browserslist data to determine properties of the environment.
-This target is also used by default when there is a browserslist config available in the project. When none such config is available, the `"web"` target will be used by default.
+هناك هدف `"browserslist"` والذي سيستخدم بيانات browserslist لتحديد خصائص البيئة.
+يُستخدم هذا الهدف أيضًا بشكل افتراضي عندما يكون هناك تكوين browserslist متاح في المشروع. في حالة عدم توفر مثل هذا التكوين، سيتم استخدام هدف `"web"` بشكل افتراضي.
 
-Some combinations and features are not yet implemented and will result in errors. They are preparations for future features. Examples:
+لم يتم تنفيذ بعض المجموعات والميزات بعد وستؤدي إلى أخطاء. إنها تحضيرات لميزات مستقبلية. أمثلة:
 
-- `["web", "node"]` will lead to an universal chunk loading method, which is not implemented yet
-- `["web", "node"]` + `output.module: true` will lead to a module chunk loading method, which is not implemented yet
-- `"web"` will lead to `http(s):` imports being treated as `module` externals, which are not implemented yet (Workaround: `externalsPresets: { web: false, webAsync: true }`, which will use `import()` instead).
+- `["web", "node"]` سيؤدي إلى طريقة تحميل حزمة عالمية (universal chunk loading method)، والتي لم يتم تنفيذها بعد
+- `["web", "node"]` + `output.module: true` سيؤدي إلى طريقة تحميل حزمة وحدة (module chunk loading method)، والتي لم يتم تنفيذها بعد
+- `"web"` سيؤدي إلى معاملة استيرادات `http(s):` كعناصر خارجية (externals) من النوع `module`، والتي لم يتم تنفيذها بعد (حل بديل: `externalsPresets: { web: false, webAsync: true }`، والذي سيستخدم `import()` بدلاً من ذلك).
 
-### SplitChunks and Module Sizes
+### تقسيم الحزم وأحجام الوحدات (SplitChunks and Module Sizes)
 
-Modules now express size in a better way than a single number. There are different types of sizes now.
+تُعبّر الوحدات الآن عن الحجم بطريقة أفضل من رقم واحد. هناك أنواع مختلفة من الأحجام الآن.
 
-The SplitChunksPlugin now knows how to handle these different sizes and uses them for `minSize` and `maxSize`.
-By default, only `javascript` size is handled, but you can now pass multiple values to manage them:
+يعرف SplitChunksPlugin الآن كيفية التعامل مع هذه الأحجام المختلفة ويستخدمها لـ `minSize` و `maxSize`.
+بشكل افتراضي، يتم التعامل مع حجم `javascript` فقط، ولكن يمكنك الآن تمرير قيم متعددة لإدارتها:
 
 ```js
 module.exports = {
@@ -516,15 +516,15 @@ module.exports = {
 };
 ```
 
-You can still use a single number for sizes. In this case webpack will automatically use the default size types.
+لا يزال بإمكانك استخدام رقم واحد للأحجام. في هذه الحالة، سيستخدم webpack أنواع الأحجام الافتراضية تلقائيًا.
 
-The `mini-css-extract-plugin` uses `css/mini-extra` as size type, and adds this size type to the default types automatically.
+يستخدم `mini-css-extract-plugin` نوع الحجم `css/mini-extra`، ويضيف نوع الحجم هذا إلى الأنواع الافتراضية تلقائيًا.
 
-## Major Changes: Performance
+## تغييرات رئيسية: الأداء (Performance)
 
-### Persistent Caching
+### التخزين المؤقت المستمر (Persistent Caching)
 
-There is now a filesystem cache. It's opt-in and can be enabled with the following configuration:
+يوجد الآن نظام تخزين مؤقت على نظام الملفات (filesystem cache). يتطلب الاشتراك (opt-in) ويمكن تفعيله باستخدام التكوين التالي:
 
 ```js
 module.exports = {
@@ -543,114 +543,114 @@ module.exports = {
 };
 ```
 
-Important notes:
+ملاحظات هامة:
 
-By default, webpack assumes that the `node_modules` directory, which webpack is inside of, is **only** modified by a package manager. Hashing and timestamping is skipped for `node_modules`.
-Instead, only the package name and version is used for performance reasons.
-Symlinks (i. e. `npm/yarn link`) are fine as long `resolve.symlinks: false` is not specified (avoid that anyway).
-Do not edit files in `node_modules` directly unless you opt-out of this optimization with `snapshot.managedPaths: []`.
-When using Yarn PnP webpack assumes that the yarn cache is immutable (which it usually is).
-You can opt-out of this optimization with `snapshot.immutablePaths: []`
+افتراضيًا، يفترض webpack أن مجلد `node_modules`، الذي يتواجد بداخله webpack، يتم تعديله **فقط** بواسطة مدير الحزم (package manager). يتم تخطي حساب التجزئة (Hashing) والطابع الزمني (timestamping) لمجلد `node_modules`.
+بدلاً من ذلك، يتم استخدام اسم الحزمة وإصدارها فقط لأسباب تتعلق بالأداء.
+الروابط الرمزية (Symlinks) (أي `npm/yarn link`) لا بأس بها طالما لم يتم تحديد `resolve.symlinks: false` (تجنب ذلك على أي حال).
+لا تقم بتعديل الملفات في `node_modules` مباشرة إلا إذا انسحبت (opt-out) من هذا التحسين باستخدام `snapshot.managedPaths: []`.
+عند استخدام Yarn PnP، يفترض webpack أن التخزين المؤقت لـ yarn غير قابل للتغيير (وهو ما يكون عليه عادةً).
+يمكنك الانسحاب من هذا التحسين باستخدام `snapshot.immutablePaths: []`
 
-The cache will be stored into `node_modules/.cache/webpack` (when using node_modules) resp. `.yarn/.cache/webpack` (when using Yarn PnP) by default.
-You probably never have to delete it manually, when all plugins handle caching correctly.
+سيتم حفظ ذاكرة التخزين المؤقت في `node_modules/.cache/webpack` (عند استخدام node_modules) أو في `.yarn/.cache/webpack` (عند استخدام Yarn PnP) بشكل افتراضي.
+من المحتمل أنك لن تضطر أبدًا إلى حذفه يدويًا، عندما تتعامل جميع الإضافات مع التخزين المؤقت بشكل صحيح.
 
-Many internal plugins will use the Persistent Cache too. Examples: `SourceMapDevToolPlugin` (to cache the SourceMap generation) or `ProgressPlugin` (to cache the number of modules)
+العديد من الإضافات الداخلية ستستخدم "التخزين المؤقت المستمر" أيضًا. أمثلة: `SourceMapDevToolPlugin` (لتخزين توليد خريطة المصدر مؤقتًا) أو `ProgressPlugin` (لتخزين عدد الوحدات مؤقتًا)
 
-The Persistent Cache will automatically create multiple cache files depending on usage to optimize read and write access to and from the cache.
+سيقوم التخزين المؤقت المستمر تلقائيًا بإنشاء ملفات ذاكرة تخزين مؤقت متعددة اعتمادًا على الاستخدام لتحسين الوصول للقراءة والكتابة من وإلى ذاكرة التخزين المؤقت.
 
-By default timestamps will be used for snapshotting in development mode and file hashes in production mode.
-File hashes allow to use Persistent Caching on CI too.
+بشكل افتراضي، سيتم استخدام الطوابع الزمنية (timestamps) لأخذ اللقطات (snapshotting) في وضع التطوير (development mode) وتجزئة الملفات (file hashes) في وضع الإنتاج.
+تسمح تجزئة الملفات باستخدام التخزين المؤقت المستمر في عمليات التكامل المستمر (CI) أيضًا.
 
-#### Compiler Idle and Close
+#### خمول المترجم وإغلاقه (Compiler Idle and Close)
 
-Compilers now need to be closed after being used. Compilers now enter and leave the idle state and have hooks for these states. Plugins may use these hooks to do unimportant work. (i. e. the Persistent cache slowly stores the cache to disk). On compiler close - All remaining work should be finished as fast as possible. A callback signals the closing as done.
+تحتاج المترجمات (Compilers) الآن إلى الإغلاق بعد استخدامها. المترجمات تدخل الآن وتترك حالة الخمول (idle state) ولها خطافات (hooks) لهذه الحالات. قد تستخدم الإضافات هذه الخطافات للقيام بأعمال غير مهمة. (أي أن التخزين المؤقت المستمر يقوم ببطء بتخزين ذاكرة التخزين المؤقت على القرص). عند إغلاق المترجم - يجب الانتهاء من جميع الأعمال المتبقية في أسرع وقت ممكن. تشير دالة استدعاء (callback) إلى الانتهاء من الإغلاق.
 
-Plugins and their respective authors should expect that some users may forget to close the Compiler. So, all work should eventually be finishing while in idle too. Processes should be prevented from exiting when the work is being done.
+يجب أن تتوقع الإضافات ومؤلفوها أن بعض المستخدمين قد ينسون إغلاق المترجم. لذلك، يجب أن تنتهي كل الأعمال في النهاية أثناء الخمول أيضًا. يجب منع العمليات من الخروج عند إنجاز العمل.
 
-The `webpack()` façade automatically calls `close` when being passed a callback.
+تستدعي واجهة `webpack()` تلقائيًا `close` عند تمرير دالة استدعاء.
 
-**MIGRATION**: While using the Node.js API, make sure to call `Compiler.close` when done.
+**الترحيل**: أثناء استخدام Node.js API، تأكد من استدعاء `Compiler.close` عند الانتهاء.
 
-### File Emitting
+### إصدار الملف (File Emitting)
 
-Webpack used to always emit all output files during the first build but skipped writing unchanged files during incremental (watch) builds.
-It is assumed that nothing else changes output files while webpack is running.
+كان Webpack يقوم دائمًا بإصدار جميع ملفات الإخراج أثناء البناء الأول ولكنه يتخطى كتابة الملفات غير المتغيرة أثناء عمليات البناء المتزايدة (بناء المراقب - watch builds).
+يُفترض أنه لا يوجد شيء آخر يغير ملفات المخرجات أثناء تشغيل webpack.
 
-With Persistent Caching added a watch-like experience should be given even when restarting the webpack process, but it would be a too strong assumption to think that nothing else changes the output directory even when webpack is not running.
+مع إضافة "التخزين المؤقت المستمر"، يجب إعطاء تجربة تشبه المراقبة (watch-like) حتى عند إعادة تشغيل عملية webpack، ولكن سيكون من الافتراض القوي جدًا الاعتقاد بأنه لا يوجد شيء آخر يغير دليل المخرجات حتى عندما لا يكون webpack قيد التشغيل.
 
-So webpack will now check existing files in the output directory and compares their content with the output file in memory. It will only write the file when it has been changed.
-This is only done on the first build. Any incremental build will always write the file when a new asset has been generated in the running webpack process.
+لذا سيقوم webpack الآن بفحص الملفات الموجودة في دليل المخرجات ويقارن محتواها مع ملف المخرجات في الذاكرة. سيقوم بكتابة الملف فقط عندما يكون قد تم تغييره.
+يتم ذلك فقط في البناء الأول. ستقوم أي عملية بناء متزايدة دائمًا بكتابة الملف عند إنشاء أصل جديد في عملية webpack قيد التشغيل.
 
-We assume that webpack and plugins only generate new assets when content has been changed. Caching should be used to ensure that no new asset is generated when input is equal.
-Not following this advice will degrade performance.
+نحن نفترض أن webpack والإضافات تقوم فقط بإنشاء أصول جديدة عند تغيير المحتوى. يجب استخدام التخزين المؤقت للتأكد من عدم إنشاء أصل جديد عندما تكون المدخلات متساوية.
+عدم اتباع هذه النصيحة سيؤدي إلى انخفاض الأداء.
 
-Files that are flagged as `[immutable]` (including a content hash), will never be written when a file with the same name already exists.
-We assume that the content hash will change when file content changes.
-This is true in general, but might not be always true during webpack or plugin development.
+الملفات التي تم تمييزها بعلامة `[immutable]` (بما في ذلك تجزئة المحتوى)، لن يتم كتابتها أبدًا عند وجود ملف بنفس الاسم بالفعل.
+نفترض أن تجزئة المحتوى ستتغير عندما يتغير محتوى الملف.
+هذا صحيح بشكل عام، ولكنه قد لا يكون صحيحًا دائمًا أثناء تطوير webpack أو الإضافة.
 
-## Major Changes: Long outstanding problems
+## تغييرات رئيسية: مشاكل بارزة منذ فترة طويلة (Long outstanding problems)
 
-### Code Splitting for single-file-targets
+### تقسيم الكود لأهداف الملف الواحد (Code Splitting for single-file-targets)
 
-Targets that only allow to startup a single file (like node, WebWorker, electron main) now supports loading the dependent pieces required for bootstrapping automatically by the runtime.
+الأهداف التي تسمح فقط ببدء تشغيل ملف واحد (مثل node، و WebWorker، و electron main) تدعم الآن تحميل الأجزاء التابعة المطلوبة لعملية التهيئة (bootstrapping) تلقائيًا بواسطة وقت التشغيل (runtime).
 
-This allows using `optimization.splitChunks` for these targets with `chunks: "all"` and also `optimization.runtimeChunk`
+يسمح هذا باستخدام `optimization.splitChunks` لهذه الأهداف باستخدام `chunks: "all"` وأيضًا `optimization.runtimeChunk`.
 
-Note that with targets where chunk loading is async, this makes initial evaluation async too. This can be an issue when using `output.library`, since the exported value is a Promise now.
+لاحظ أنه مع الأهداف التي يكون فيها تحميل الحزمة غير متزامن، يجعل هذا التقييم الأولي (initial evaluation) غير متزامن أيضًا. يمكن أن يمثل هذا مشكلة عند استخدام `output.library`، حيث أن القيمة المُصدّرة هي Promise الآن.
 
-### Updated Resolver
+### المحلل المحدث (Updated Resolver)
 
-`enhanced-resolve` was updated to v5. This has the following improvements:
+تم تحديث `enhanced-resolve` إلى v5. هذا يحتوي على التحسينات التالية:
 
-- The resolve tracks more dependencies, like missing files
-- aliasing may have multiple alternatives
-- aliasing to `false` is possible now
-- support for features like `exports` and `imports` fields
-- Increased performance
+- يتتبع المحلل المزيد من التبعيات، مثل الملفات المفقودة
+- قد يكون للأسماء المستعارة (aliasing) بدائل متعددة
+- يمكن الآن استخدام الأسماء المستعارة إلى `false`
+- دعم ميزات مثل حقول `exports` و `imports`
+- زيادة الأداء
 
-### Chunks without JS
+### حزم بدون JS
 
-Chunks that contain no JS code, will no longer generate a JS file.
-This allows to have chunks that contain only CSS.
+الحزم التي لا تحتوي على كود JS، لن تُولد بعد الآن ملف JS.
+يسمح هذا بالحصول على حزم تحتوي على CSS فقط.
 
-## Major Changes: Future
+## تغييرات رئيسية: المستقبل (Future)
 
-### Experiments
+### تجارب (Experiments)
 
-Not all features are stable from the beginning. In webpack 4 we added experimental features and noted in the changelog that they are experimental, but it was not always clear from the configuration that these features are experimental.
+ليست كل الميزات مستقرة منذ البداية. في webpack 4 أضفنا ميزات تجريبية وأشرنا في سجل التغيير (changelog) إلى أنها تجريبية، ولكن لم يكن من الواضح دائمًا من التكوين أن هذه الميزات تجريبية.
 
-In webpack 5 there is a new `experiments` config option which allows to enable experimental features. This makes it clear which ones are enabled/used.
+في webpack 5، يوجد خيار تكوين جديد `experiments` يسمح بتمكين الميزات التجريبية. هذا يوضح ماهية الميزات التي يتم تمكينها/استخدامها.
 
-While webpack follows semantic versioning, it will make an exception for experimental features. Experimental features might contain breaking changes in minor webpack versions. When this happens we will add a clear note into the changelog. This will allow us to iterate faster for experimental features, while also allowing us to stay longer on a major version for stable features.
+في حين يتبع webpack نظام تحديد الإصدارات الدلالي (semantic versioning)، فإنه سيستثني الميزات التجريبية. قد تحتوي الميزات التجريبية على تغييرات جذرية في إصدارات webpack الثانوية. عندما يحدث هذا سنضيف ملاحظة واضحة إلى سجل التغيير. سيتيح لنا هذا تكرار الميزات التجريبية بشكل أسرع، مع السماح لنا أيضًا بالبقاء لفترة أطول في إصدار رئيسي للميزات المستقرة.
 
-The following experiments will ship with webpack 5:
+سيتم شحن التجارب التالية مع webpack 5:
 
-- Old WebAssembly support like in webpack 4 (`experiments.syncWebAssembly`)
-- New WebAssembly support according to the [updated spec](https://github.com/WebAssembly/esm-integration) (`experiments.asyncWebAssembly`)
-  - This makes a WebAssembly module an async module
-- [Top Level Await](https://github.com/tc39/proposal-top-level-await) Stage 3 proposal (`experiments.topLevelAwait`)
-  - Using `await` on top-level makes the module an async module
-- Emitting bundle as module (`experiments.outputModule`)
-  - This removed the wrapper IIFE from the bundle, enforces strict mode, lazy loads via `<script type="module">` and minimized in module mode
+- دعم WebAssembly القديم مثلما في webpack 4 (`experiments.syncWebAssembly`)
+- دعم WebAssembly الجديد وفقًا لـ [المواصفة المحدثة](https://github.com/WebAssembly/esm-integration) (`experiments.asyncWebAssembly`)
+  - هذا يجعل وحدة WebAssembly وحدة غير متزامنة (async module)
+- اقتراح المرحلة 3 من [الانتظار في المستوى الأعلى (Top Level Await)](https://github.com/tc39/proposal-top-level-await) (`experiments.topLevelAwait`)
+  - استخدام `await` في المستوى الأعلى يجعل الوحدة وحدة غير متزامنة
+- إصدار الحزمة كوحدة (`experiments.outputModule`)
+  - هذا يزيل التغليف IIFE من الحزمة، ويفرض وضع strict، ويقوم بالتحميل البطيء (lazy loads) عبر `<script type="module">` وتصغيره في وضع الوحدة
 
-Note that this also means WebAssembly support is now disabled by default.
+لاحظ أن هذا يعني أيضًا أن دعم WebAssembly معطل الآن بشكل افتراضي.
 
-### Minimum Node.js Version
+### الحد الأدنى لإصدار Node.js
 
-The minimum supported Node.js version has increased from 6 to 10.13.0(LTS).
+تمت زيادة الحد الأدنى لإصدار Node.js المدعوم من 6 إلى 10.13.0(LTS).
 
-**MIGRATION**: Upgrade to the latest Node.js version available.
+**الترحيل**: الترقية إلى أحدث إصدار متاح من Node.js.
 
-## Changes to the Configuration
+## تغييرات على التكوين (Configuration)
 
-### Changes to the Structure
+### تغييرات على الهيكل (Structure)
 
-- `entry: {}` allows an empty object now (to allow to use plugins to add entries)
-- `target` supports an array, versions and browserslist
-- `cache: Object` removed: Setting to a memory-cache object is no longer possible
-- `cache.type` added: It's now possible to choose between `"memory"` and `"filesystem"`
-- New configuration options for `cache.type = "filesystem"` added:
+- `entry: {}` يسمح بكائن فارغ الآن (للسماح باستخدام الإضافات لإضافة إدخالات)
+- يدعم `target` مصفوفة (array) وإصدارات و browserslist
+- إزالة `cache: Object`: لم يعد الإعداد إلى كائن ذاكرة تخزين مؤقت في الذاكرة ممكنًا
+- إضافة `cache.type`: أصبح من الممكن الآن الاختيار بين `"memory"` و `"filesystem"`
+- إضافة خيارات تكوين جديدة لـ `cache.type = "filesystem"`:
   - `cache.cacheDirectory`
   - `cache.name`
   - `cache.version`
@@ -659,233 +659,233 @@ The minimum supported Node.js version has increased from 6 to 10.13.0(LTS).
   - `cache.idleTimeout`
   - `cache.idleTimeoutForInitialStore`
   - `cache.buildDependencies`
-- `snapshot.resolveBuildDependencies` added
-- `snapshot.resolve` added
-- `snapshot.module` added
-- `snapshot.managedPaths` added
-- `snapshot.immutablePaths` added
-- `resolve.cache` added: Allows to disable/enable the safe resolve cache
-- `resolve.concord` removed
-- `resolve.moduleExtensions` removed
-- `resolve.alias` values can be arrays or `false` now
-- `resolve.restrictions` added: Allows to restrict potential resolve results
-- `resolve.fallback` added: Allow to alias requests that failed to resolve
-- `resolve.preferRelative` added: Allows to resolve modules requests are relative requests too
-- Automatic polyfills for native Node.js modules were removed
-  - `node.Buffer` removed
-  - `node.console` removed
-  - `node.process` removed
-  - `node.*` (Node.js native module) removed
-  - **MIGRATION**: `resolve.alias` and `ProvidePlugin`. Errors will give hints. (Refer to [node-libs-browser](https://github.com/webpack/node-libs-browser) for polyfills & mocks used in v4)
-- `output.filename` can now be a function
-- `output.assetModuleFilename` added
-- `output.jsonpScriptType` renamed to `output.scriptType`
-- `devtool` is more strict
-  - Format: `false | eval | [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`
-- `optimization.chunkIds: "deterministic"` added
-- `optimization.moduleIds: "deterministic"` added
-- `optimization.moduleIds: "hashed"` deprecated
-- `optimization.moduleIds: "total-size"` removed
-- Deprecated flags for module and chunk ids were removed
-  - `optimization.hashedModuleIds` removed
-  - `optimization.namedChunks` removed (`NamedChunksPlugin` too)
-  - `optimization.namedModules` removed (`NamedModulesPlugin` too)
-  - `optimization.occurrenceOrder` removed
-  - **MIGRATION**: Use `chunkIds` and `moduleIds`
-- `optimization.splitChunks` `test` no longer matches chunk name
-  - **MIGRATION**: Use a test function
+- إضافة `snapshot.resolveBuildDependencies`
+- إضافة `snapshot.resolve`
+- إضافة `snapshot.module`
+- إضافة `snapshot.managedPaths`
+- إضافة `snapshot.immutablePaths`
+- إضافة `resolve.cache`: يسمح بتعطيل/تفعيل ذاكرة التخزين المؤقت الآمنة للتحليل (resolve cache)
+- إزالة `resolve.concord`
+- إزالة `resolve.moduleExtensions`
+- يمكن أن تكون قيم `resolve.alias` الآن مصفوفات (arrays) أو `false`
+- إضافة `resolve.restrictions`: يسمح بتقييد نتائج التحليل المحتملة
+- إضافة `resolve.fallback`: السماح بإنشاء اسم مستعار للطلبات التي فشل تحليلها
+- إضافة `resolve.preferRelative`: السماح بتحليل طلبات الوحدات كطلبات نسبية أيضًا
+- تمت إزالة التعويضات (polyfills) التلقائية لوحدات Node.js المحلية
+  - إزالة `node.Buffer`
+  - إزالة `node.console`
+  - إزالة `node.process`
+  - إزالة `node.*` (وحدات Node.js المحلية)
+  - **الترحيل**: `resolve.alias` و `ProvidePlugin`. ستعطي الأخطاء تلميحات. (راجع [node-libs-browser](https://github.com/webpack/node-libs-browser) للتعويضات والبدائل (mocks) المستخدمة في الإصدار 4)
+- يمكن أن يكون `output.filename` الآن دالة (function)
+- إضافة `output.assetModuleFilename`
+- إعادة تسمية `output.jsonpScriptType` إلى `output.scriptType`
+- أصبحت `devtool` أكثر صرامة
+  - التنسيق: `false | eval | [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`
+- إضافة `optimization.chunkIds: "deterministic"`
+- إضافة `optimization.moduleIds: "deterministic"`
+- تم إهمال `optimization.moduleIds: "hashed"`
+- إزالة `optimization.moduleIds: "total-size"`
+- تمت إزالة العلامات المهملة (Deprecated flags) لمعرفات الوحدات والحزم
+  - إزالة `optimization.hashedModuleIds`
+  - إزالة `optimization.namedChunks` (وكذلك `NamedChunksPlugin`)
+  - إزالة `optimization.namedModules` (وكذلك `NamedModulesPlugin`)
+  - إزالة `optimization.occurrenceOrder`
+  - **الترحيل**: استخدم `chunkIds` و `moduleIds`
+- لم تعد مطابقة (test) لـ `optimization.splitChunks` تتطابق مع اسم الحزمة
+  - **الترحيل**: استخدم دالة مطابقة (test function)
     `(module, { chunkGraph }) => chunkGraph.getModuleChunks(module).some(chunk => chunk.name === "name")`
-- `optimization.splitChunks` `minRemainingSize` was added
-- `optimization.splitChunks` `filename` can now be a function
-- `optimization.splitChunks` sizes can now be objects with a size per source type
+- إضافة `optimization.splitChunks` `minRemainingSize`
+- يمكن أن يكون `optimization.splitChunks` `filename` الآن دالة (function)
+- يمكن أن تكون أحجام `optimization.splitChunks` الآن كائنات مع حجم لكل نوع مصدر (source type)
   - `minSize`
   - `minRemainingSize`
   - `maxSize`
   - `maxAsyncSize`
   - `maxInitialSize`
-- `optimization.splitChunks` `maxAsyncSize` and `maxInitialSize` added next to `maxSize`: allows to specify different max sizes for initial and async chunks
-- `optimization.splitChunks` `name: true` removed: Automatic names are no longer supported
-  - **MIGRATION**: Use the default. `chunkIds: "named"` will give your files useful names for debugging
-- `optimization.splitChunks.cacheGroups[].idHint` added: Gives a hint how the named chunk id should be chosen
-- `optimization.splitChunks` `automaticNamePrefix` removed
-  - **MIGRATION**: Use `idHint` instead
-- `optimization.splitChunks` `filename` is no longer restricted to initial chunks
-- `optimization.splitChunks` `usedExports` added to include used exports when comparing modules
-- `optimization.splitChunks.defaultSizeTypes` added: Specified the size types when using numbers for sizes
-- `optimization.mangleExports` added
-- `optimization.minimizer` `"..."` can be used to reference the defaults
-- `optimization.usedExports` `"global"` value added to allow to disable the analysis per runtime and instead do it globally (better performance)
-- `optimization.noEmitOnErrors` renamed to `optimization.emitOnErrors` and logic inverted
-- `optimization.realContentHash` added
-- `output.devtoolLineToLine` removed
-  - **MIGRATION**: No replacement
-- `output.chunkFilename: Function` is now allowed
-- `output.hotUpdateChunkFilename: Function` is now forbidden: It never worked anyway.
-- `output.hotUpdateMainFilename: Function` is now forbidden: It never worked anyway.
-- `output.importFunctionName: string` specifies the name used as replacement for `import()` to allow polyfilling for non-supported environments
-- `output.charset` added: setting it to false omit the `charset` property on script tags
-- `output.hotUpdateFunction` renamed to `output.hotUpdateGlobal`
-- `output.jsonpFunction` renamed to `output.chunkLoadingGlobal`
-- `output.chunkCallbackFunction` renamed to `output.chunkLoadingGlobal`
-- `output.chunkLoading` added
-- `output.enabledChunkLoadingTypes` added
-- `output.chunkFormat` added
-- `module.rules` `resolve` and `parser` will merge in a different way (objects are deeply merged, array may include `"..."` to reference to prev value)
-- `module.rules` `parser.worker` added: Allows to configure the worker supported
-- `module.rules` `query` and `loaders` were removed
-- `module.rules` `options` passing a string is deprecated
-  - **MIGRATION**: Pass an options object instead, open an issue on the loader when this is not supported
-- `module.rules` `mimetype` added: allows to match a mimetype of a DataURI
-- `module.rules` `descriptionData` added: allows to match a data from package.json
-- `module.defaultRules` `"..."` can be used to reference the defaults
-- `stats.chunkRootModules` added: Show root modules for chunks
-- `stats.orphanModules` added: Show modules which are not emitted
-- `stats.runtime` added: Show runtime modules
-- `stats.chunkRelations` added: Show parent/children/sibling chunks
-- `stats.errorStack` added: Show webpack-internal stack trace of errors
-- `stats.preset` added: select a preset
-- `stats.relatedAssets` added: show assets that are related to other assets (e.g. SourceMaps)
-- `stats.warningsFilter` deprecated in favor of `ignoreWarnings`
-- `BannerPlugin.banner` signature changed
-  - `data.basename` removed
-  - `data.query` removed
-  - **MIGRATION**: extract from `filename`
-- `SourceMapDevToolPlugin` `lineToLine` removed
-  - **MIGRATION**: No replacement
-- `[hash]` as hash for the full compilation is now deprecated
-  - **MIGRATION**: Use `[fullhash]` instead or better use another hash option
-- `[modulehash]` is deprecated
-  - **MIGRATION**: Use `[hash]` instead
-- `[moduleid]` is deprecated
-  - **MIGRATION**: Use `[id]` instead
-- `[filebase]` removed
-  - **MIGRATION**: Use `[base]` instead
-- New placeholders for file-based templates (i. e. SourceMapDevToolPlugin)
+- تمت إضافة `maxAsyncSize` و `maxInitialSize` في `optimization.splitChunks` بجوار `maxSize`: يسمح بتحديد أحجام قصوى مختلفة للحزم الأولية وغير المتزامنة
+- تمت إزالة `name: true` من `optimization.splitChunks`: لم تعد الأسماء التلقائية مدعومة
+  - **الترحيل**: استخدم الافتراضي. سيعطي `chunkIds: "named"` ملفاتك أسماء مفيدة لتصحيح الأخطاء
+- إضافة `optimization.splitChunks.cacheGroups[].idHint`: يعطي تلميحًا حول كيفية اختيار معرف الحزمة المسماة
+- تمت إزالة `automaticNamePrefix` من `optimization.splitChunks`
+  - **الترحيل**: استخدم `idHint` بدلاً من ذلك
+- لم يعد `filename` في `optimization.splitChunks` مقصورًا على الحزم الأولية
+- إضافة `usedExports` في `optimization.splitChunks` لتضمين الصادرات المستخدمة عند مقارنة الوحدات
+- إضافة `optimization.splitChunks.defaultSizeTypes`: تحدد أنواع الأحجام عند استخدام الأرقام للأحجام
+- إضافة `optimization.mangleExports`
+- يمكن استخدام `"..."` في `optimization.minimizer` للإشارة إلى الافتراضيات
+- إضافة القيمة `"global"` إلى `optimization.usedExports` للسماح بتعطيل التحليل لكل وقت تشغيل والقيام بذلك بشكل عام (أداء أفضل)
+- إعادة تسمية `optimization.noEmitOnErrors` إلى `optimization.emitOnErrors` وعكس المنطق
+- إضافة `optimization.realContentHash`
+- إزالة `output.devtoolLineToLine`
+  - **الترحيل**: لا يوجد بديل
+- أصبح `output.chunkFilename: Function` مسموحًا به الآن
+- أصبح `output.hotUpdateChunkFilename: Function` محظورًا الآن: لم ينجح الأمر أبدًا على أي حال.
+- أصبح `output.hotUpdateMainFilename: Function` محظورًا الآن: لم ينجح الأمر أبدًا على أي حال.
+- تحدد `output.importFunctionName: string` الاسم المستخدم كبديل لـ `import()` للسماح بالتعويض (polyfilling) للبيئات غير المدعومة
+- إضافة `output.charset`: إعداده إلى false يحذف الخاصية `charset` من علامات (tags) `script`
+- إعادة تسمية `output.hotUpdateFunction` إلى `output.hotUpdateGlobal`
+- إعادة تسمية `output.jsonpFunction` إلى `output.chunkLoadingGlobal`
+- إعادة تسمية `output.chunkCallbackFunction` إلى `output.chunkLoadingGlobal`
+- إضافة `output.chunkLoading`
+- إضافة `output.enabledChunkLoadingTypes`
+- إضافة `output.chunkFormat`
+- ستندمج (merge) `resolve` و `parser` في `module.rules` بطريقة مختلفة (يتم دمج الكائنات (objects) بعمق، وقد تتضمن المصفوفة (array) `"..."` للإشارة إلى القيمة السابقة)
+- إضافة `module.rules` `parser.worker`: يسمح بتكوين الـ worker المدعوم
+- إزالة `query` و `loaders` من `module.rules`
+- تم إهمال تمرير سلسلة نصية (string) لـ `options` في `module.rules`
+  - **الترحيل**: قم بتمرير كائن خيارات (options object) بدلاً من ذلك، افتح مشكلة على المحمل (loader) عندما لا يكون هذا مدعومًا
+- إضافة `module.rules` `mimetype`: يسمح بمطابقة نوع MIME (mimetype) الخاص بـ DataURI
+- إضافة `module.rules` `descriptionData`: يسمح بمطابقة بيانات من package.json
+- يمكن استخدام `"..."` في `module.defaultRules` للإشارة إلى الافتراضيات
+- إضافة `stats.chunkRootModules`: عرض وحدات الجذر (root modules) للحزم
+- إضافة `stats.orphanModules`: إظهار الوحدات التي لا يتم إصدارها
+- إضافة `stats.runtime`: عرض وحدات وقت التشغيل
+- إضافة `stats.chunkRelations`: عرض علاقات الحزم الأم/الأبناء/الإخوة (parent/children/sibling chunks)
+- إضافة `stats.errorStack`: عرض تتبع التكدس الداخلي للأخطاء في webpack (webpack-internal stack trace of errors)
+- إضافة `stats.preset`: تحديد الإعداد المسبق (preset)
+- إضافة `stats.relatedAssets`: إظهار الأصول (assets) المرتبطة بأصول أخرى (مثل SourceMaps)
+- تم إهمال `stats.warningsFilter` لصالح `ignoreWarnings`
+- تغيير توقيع (signature) `BannerPlugin.banner`
+  - إزالة `data.basename`
+  - إزالة `data.query`
+  - **الترحيل**: الاستخراج من `filename`
+- إزالة `lineToLine` من `SourceMapDevToolPlugin`
+  - **الترحيل**: لا يوجد بديل
+- أصبح استخدام `[hash]` كتجزئة للتجميع (compilation) بالكامل مهملًا الآن
+  - **الترحيل**: استخدم `[fullhash]` بدلاً من ذلك، أو من الأفضل استخدام خيار تجزئة آخر
+- إهمال `[modulehash]`
+  - **الترحيل**: استخدم `[hash]` بدلاً من ذلك
+- إهمال `[moduleid]`
+  - **الترحيل**: استخدم `[id]` بدلاً من ذلك
+- إزالة `[filebase]`
+  - **الترحيل**: استخدم `[base]` بدلاً من ذلك
+- عناصر نائبة (placeholders) جديدة للقوالب القائمة على الملفات (أي SourceMapDevToolPlugin)
   - `[name]`
   - `[base]`
   - `[path]`
   - `[ext]`
-- `externals` when passing a function, it has now a different signature `({ context, request }, callback)`
-  - **MIGRATION**: Change signature
-- `externalsPresets` added
-- `experiments` added (see Experiments section above)
-- `watchOptions.followSymlinks` added
-- `watchOptions.ignored` can now be a RegExp
-- `webpack.util.serialization` is now exposed.
+- `externals` عند تمرير دالة (function)، أصبح لها الآن توقيع مختلف `({ context, request }, callback)`
+  - **الترحيل**: تغيير التوقيع
+- إضافة `externalsPresets`
+- إضافة `experiments` (راجع قسم التجارب - Experiments أعلاه)
+- إضافة `watchOptions.followSymlinks`
+- يمكن أن يكون `watchOptions.ignored` الآن تعبيرًا نمطيًا (RegExp)
+- تم الآن عرض (exposed) `webpack.util.serialization`.
 
-### Changes to the Defaults
+### التغييرات على الافتراضيات (Changes to the Defaults)
 
-- `target` is now `"browserslist"` by default when a browserslist config is available
-- `module.unsafeCache` is now only enabled for `node_modules` by default
-- `optimization.moduleIds` defaults to `deterministic` in production mode, instead of `size`
-- `optimization.chunkIds` defaults to `deterministic` in production mode, instead of `total-size`
-- `optimization.nodeEnv` defaults to `false` in `none` mode
-- `optimization.splitChunks.minSize` defaults to `20k` in production
-- `optimization.splitChunks.enforceSizeThreshold` defaults to `50k` in production
-- `optimization.splitChunks` `minRemainingSize` defaults to `minSize`
-  - This will lead to less splitted chunks created in cases where the remaining part would be too small
-- `optimization.splitChunks` `maxAsyncRequests` and `maxInitialRequests` defaults was been increased to 30
-- `optimization.splitChunks.cacheGroups.vendors` has be renamed to `optimization.splitChunks.cacheGroups.defaultVendors`
-- `optimization.splitChunks.cacheGroups.defaultVendors.reuseExistingChunk` now defaults to `true`
-- `optimization.minimizer` target default uses `compress.passes: 2` in terser options now
-- `resolve(Loader).cache` defaults to `true` when `cache` is used
-- `resolve(Loader).cacheWithContext` defaults to `false`
-- `resolveLoader.extensions` remove `.json`
-- `node.global` `node.__filename` and `node.__dirname` defaults to `false` in node-`target`s
-- `stats.errorStack` defaults to `false`
+- أصبح `target` الآن `"browserslist"` افتراضيًا عندما يكون تكوين browserslist متاحًا
+- يتم الآن تفعيل `module.unsafeCache` فقط لـ `node_modules` بشكل افتراضي
+- يتم افتراضيًا ضبط `optimization.moduleIds` على `deterministic` في وضع الإنتاج، بدلاً من `size`
+- يتم افتراضيًا ضبط `optimization.chunkIds` على `deterministic` في وضع الإنتاج، بدلاً من `total-size`
+- يتم افتراضيًا ضبط `optimization.nodeEnv` على `false` في وضع `none`
+- يتم افتراضيًا ضبط `optimization.splitChunks.minSize` على `20k` في الإنتاج
+- يتم افتراضيًا ضبط `optimization.splitChunks.enforceSizeThreshold` على `50k` في الإنتاج
+- يتم افتراضيًا ضبط `optimization.splitChunks` `minRemainingSize` على `minSize`
+  - سيؤدي هذا إلى إنشاء حزم مقسمة (splitted chunks) أقل في الحالات التي يكون فيها الجزء المتبقي صغيرًا جدًا
+- تمت زيادة القيمة الافتراضية لكل من `maxAsyncRequests` و `maxInitialRequests` في `optimization.splitChunks` إلى 30
+- تمت إعادة تسمية `optimization.splitChunks.cacheGroups.vendors` إلى `optimization.splitChunks.cacheGroups.defaultVendors`
+- يُعيّن `optimization.splitChunks.cacheGroups.defaultVendors.reuseExistingChunk` افتراضيًا الآن إلى `true`
+- يستخدم الإعداد الافتراضي لهدف `optimization.minimizer` الآن `compress.passes: 2` في خيارات terser
+- يعيّن `resolve(Loader).cache` افتراضيًا إلى `true` عند استخدام `cache`
+- يعيّن `resolve(Loader).cacheWithContext` افتراضيًا إلى `false`
+- إزالة `.json` من `resolveLoader.extensions`
+- يتم افتراضيًا ضبط `node.global`، `node.__filename` و `node.__dirname` على `false` في أهداف node (`node-targets`)
+- يتم افتراضيًا ضبط `stats.errorStack` على `false`
 
-## Loader related Changes
+## التغييرات المتعلقة بالمحمل (Loader related Changes)
 
 ### `this.getOptions`
 
-This new API should simplify the usage for options in loaders.
-It allows to pass a JSON schema for validation.
-See [PR](https://github.com/webpack/webpack/pull/10017) for details
+يجب أن تعمل واجهة برمجة التطبيقات (API) الجديدة هذه على تبسيط استخدام الخيارات في المحملات.
+يسمح بتمرير مخطط JSON (JSON schema) للتحقق من الصحة.
+راجع [PR](https://github.com/webpack/webpack/pull/10017) للتفاصيل.
 
 ### `this.exec`
 
-This has been removed from loader context
+تمت إزالة هذا من سياق المحمل (loader context)
 
-**MIGRATION**: This can be implemented in the loader itself
+**الترحيل**: يمكن تنفيذ هذا في المحمل نفسه
 
 ### `this.getResolve`
 
-`getResolve(options)` in the loader API will merge options in a different way, see `module.rules` `resolve`.
+ستقوم `getResolve(options)` في واجهة المحمل بدمج الخيارات بطريقة مختلفة، راجع `resolve` في `module.rules`.
 
-As webpack 5 differs between different issuing dependencies so it might make sense to pass a `dependencyType` as option (e.g. `"esm"`, `"commonjs"`, or others).
+حيث يختلف webpack 5 بين تبعيات الإصدار المختلفة، لذلك قد يكون من المنطقي تمرير `dependencyType` كخيار (مثل `"esm"`، `"commonjs"`، أو غيرها).
 
-## Major Internal Changes
+## تغييرات داخلية رئيسية (Major Internal Changes)
 
-?> This section might need a bit more refinement
+?> قد يحتاج هذا القسم إلى مزيد من التنقيح
 
-The following changes are only relevant for plugin authors:
+التغييرات التالية ذات صلة فقط لمؤلفي الإضافات (plugin authors):
 
-### New plugin order
+### ترتيب الإضافات الجديد (New plugin order)
 
-Plugins in webpack 5 are now applies **before** the configuration defaults has been applied.
-This allows plugins to apply their own defaults, or act as configuration presets.
+يتم الآن تطبيق الإضافات في webpack 5 **قبل** تطبيق الافتراضيات الخاصة بالتكوين.
+يسمح هذا للإضافات بتطبيق الافتراضيات الخاصة بها، أو العمل كإعدادات مسبقة للتكوين (configuration presets).
 
-But this is also a breaking change as plugins can't rely on configuration values to be set when they are applied.
+ولكن هذا يمثل أيضًا تغييرًا جذريًا لأن الإضافات لا يمكنها الاعتماد على قيم التكوين التي يتم تعيينها عند تطبيقها.
 
-**MIGRATION**: Access configuration only in plugin hooks. Or best avoid accessing configuration at all and take options via constructor.
+**الترحيل**: يمكنك الوصول إلى التكوين فقط في خطافات (hooks) الإضافات. أو من الأفضل تجنب الوصول إلى التكوين على الإطلاق وأخذ الخيارات عبر المُنشئ (constructor).
 
-### Runtime Modules
+### وحدات وقت التشغيل (Runtime Modules)
 
-A large part of the runtime code was moved into the so-called "runtime modules". These special modules are in-charge of adding runtime code. They can be added into any chunk, but are currently always added to the runtime chunk. "Runtime Requirements" control which runtime modules (or core runtime parts) are added to the bundle. This ensures that only runtime code that is used is added to the bundle. In the future, runtime modules could also be added to an on-demand-loaded chunk, to load runtime code when needed.
+تم نقل جزء كبير من كود وقت التشغيل إلى ما يسمى بـ "وحدات وقت التشغيل". هذه الوحدات الخاصة مسؤولة عن إضافة كود وقت التشغيل. يمكن إضافتها إلى أي حزمة، ولكنها حاليًا تُضاف دائمًا إلى حزمة وقت التشغيل (runtime chunk). تتحكم "متطلبات وقت التشغيل (Runtime Requirements)" في وحدات وقت التشغيل (أو أجزاء وقت التشغيل الأساسية) التي تُضاف إلى الحزمة. يضمن هذا إضافة كود وقت التشغيل المستخدم فقط إلى الحزمة. في المستقبل، يمكن أيضًا إضافة وحدات وقت التشغيل إلى حزمة يتم تحميلها عند الطلب، لتحميل كود وقت التشغيل عند الحاجة.
 
-In most cases, the core runtime allows to inline the entry module instead of calling it with `__webpack_require__`. If there is no other module in the bundle, no `__webpack_require__` is needed at all. This combines well with Module Concatenation where multiple modules are concatenated into a single module.
+في معظم الحالات، يسمح وقت التشغيل الأساسي (core runtime) بتضمين وحدة الدخول (inlining the entry module) بدلاً من استدعائها باستخدام `__webpack_require__`. إذا لم تكن هناك وحدة أخرى في الحزمة، فلن تكون هناك حاجة إلى `__webpack_require__` على الإطلاق. يتحد هذا بشكل جيد مع تسلسل الوحدات (Module Concatenation) حيث يتم ربط وحدات متعددة في وحدة واحدة.
 
-In the best case, no runtime code is needed at all.
+في أفضل الحالات، لن تكون هناك حاجة إلى كود وقت التشغيل على الإطلاق.
 
-**MIGRATION**: If you are injecting runtime code into the webpack runtime in a plugin, consider using RuntimeModules instead.
+**الترحيل**: إذا كنت تقوم بحقن كود وقت التشغيل في وقت تشغيل webpack داخل إضافة (plugin)، ففكر في استخدام وحدات وقت التشغيل (RuntimeModules) بدلاً من ذلك.
 
-### Serialization
+### التسلسل (Serialization)
 
-A serialization mechanism was added to allow serialization of complex objects in webpack. It has an opt-in semantic, so classes that should be serialized need to be explicitly flagged (and their serialization implemented). This has been done for most Modules, all Dependencies and some Errors.
+تمت إضافة آلية تسلسل للسماح بتسلسل الكائنات المعقدة في webpack. يحتوي على دلالات اختيارية (opt-in)، لذلك يجب وضع علامة واضحة على الفئات التي يجب أن تكون متسلسلة (وتنفيذ التسلسل الخاص بها). تم القيام بذلك لمعظم الوحدات (Modules)، وجميع التبعيات (Dependencies) وبعض الأخطاء (Errors).
 
-**MIGRATION**: When using custom Modules or Dependencies, it is recommended to make them serializable to benefit from persistent caching.
+**الترحيل**: عند استخدام وحدات أو تبعيات مخصصة، يوصى بجعلها قابلة للتسلسل (serializable) للاستفادة من التخزين المؤقت المستمر.
 
-### Plugins for Caching
+### إضافات للتخزين المؤقت (Plugins for Caching)
 
-A `Cache` class with a plugin interface has been added. This class can be used to write and read to the cache. Depending on the configuration, different plugins can add functionality to the cache. The `MemoryCachePlugin` adds in-memory caching. The `FileCachePlugin` adds persistent (file-system) caching.
+تمت إضافة فئة `Cache` مع واجهة إضافة. يمكن استخدام هذه الفئة للكتابة والقراءة من ذاكرة التخزين المؤقت. اعتمادًا على التكوين، يمكن للإضافات المختلفة إضافة وظائف إلى التخزين المؤقت. تضيف إضافة `MemoryCachePlugin` التخزين المؤقت داخل الذاكرة (in-memory). تضيف إضافة `FileCachePlugin` التخزين المؤقت المستمر (Persistent) (على نظام الملفات).
 
-The `FileCachePlugin` uses the serialization mechanism to persist and restore cached items to/from the disk.
+يستخدم `FileCachePlugin` آلية التسلسل للحفاظ على العناصر المخزنة مؤقتًا واستعادتها من/إلى القرص.
 
-### Hook Object Frozen
+### تجميد كائن الخطاف (Hook Object Frozen)
 
-Classes with `hooks` have their `hooks` object frozen, so adding custom hooks is no longer possible this way.
+تم تجميد (frozen) كائن `hooks` للفئات (Classes) التي تحتوي على `hooks`، لذا لم يعد من الممكن إضافة خطافات مخصصة (custom hooks) بهذه الطريقة.
 
-**MIGRATION**: The recommended way to add custom hooks is using a WeakMap and a static `getXXXHooks(XXX)` (i. e. `getCompilationHook(compilation)`) method. Internal classes use the same mechanism used for custom hooks.
+**الترحيل**: الطريقة الموصى بها لإضافة خطافات مخصصة هي استخدام `WeakMap` وطريقة ثابتة `getXXXHooks(XXX)` (أي `getCompilationHook(compilation)`). تستخدم الفئات الداخلية نفس الآلية المستخدمة للخطافات المخصصة.
 
-### Tapable Upgrade
+### ترقية Tapable (Tapable Upgrade)
 
-The compat layer for webpack 3 plugins has been removed. It had already been deprecated for webpack 4.
+تمت إزالة طبقة التوافق (compat layer) لإضافات webpack 3. وقد تم إهمالها بالفعل في webpack 4.
 
-Some less used tapable APIs were removed or deprecated.
+تمت إزالة أو إهمال بعض واجهات برمجة تطبيقات (APIs) tapable الأقل استخدامًا.
 
-**MIGRATION**: Use the new tapable API.
+**الترحيل**: استخدم واجهة برمجة تطبيقات tapable الجديدة.
 
-### Staged Hooks
+### الخطافات المرحلية (Staged Hooks)
 
-For several steps in the sealing process, there had been multiple hooks for different stages. i. e. `optimizeDependenciesBasic` `optimizeDependencies` and `optimizeDependenciesAdvanced`. These have been removed in favor of a single hook which can be used with a `stage` option. See `OptimizationStages` for possible stage values.
+بالنسبة لعدة خطوات في عملية الختم (sealing process)، كانت هناك خطافات متعددة لمراحل مختلفة. مثل `optimizeDependenciesBasic` و `optimizeDependencies` و `optimizeDependenciesAdvanced`. تمت إزالتها لصالح خطاف واحد يمكن استخدامه مع خيار `stage`. راجع `OptimizationStages` لقيم المرحلة الممكنة.
 
-**MIGRATION**: Hook into the remaining hook instead. You may add a `stage` option.
+**الترحيل**: اربط (Hook into) بالخطاف المتبقي بدلاً من ذلك. يمكنك إضافة خيار `stage`.
 
-### Main/Chunk/ModuleTemplate deprecation
+### إهمال Main/Chunk/ModuleTemplate
 
-Bundle templating has been refactored. MainTemplate/ChunkTemplate/ModuleTemplate were deprecated and the JavascriptModulesPlugin takes care of JS templating now.
+تمت إعادة هيكلة قوالب الحزم (Bundle templating). تم إهمال `MainTemplate`/`ChunkTemplate`/`ModuleTemplate` وتتولى `JavascriptModulesPlugin` مسؤولية قوالب JS الآن.
 
-Before that refactoring, JS output was handled by Main/ChunkTemplate while another output (i. e. WASM, CSS) was handled by plugins. This looks like JS is first class, while another output is second class. The refactoring changes that and all output is handled by their plugins.
+قبل إعادة الهيكلة هذه، كان يتم التعامل مع مخرجات JS بواسطة `Main`/`ChunkTemplate` بينما كان يتم التعامل مع المخرجات الأخرى (مثل WASM، CSS) بواسطة الإضافات. يبدو هذا وكأن JS من الدرجة الأولى، بينما المخرجات الأخرى من الدرجة الثانية. أدت إعادة الهيكلة إلى تغيير ذلك ويتم التعامل مع جميع المخرجات بواسطة إضافاتها الخاصة.
 
-It's still possible to hook into parts of the templating. The hooks are in JavascriptModulesPlugin instead of Main/ChunkTemplate now. (Yes plugins can have hooks too. I call them attached hooks.)
+لا يزال من الممكن الربط (hook into) بأجزاء من القوالب. الخطافات موجودة في `JavascriptModulesPlugin` بدلاً من `Main`/`ChunkTemplate` الآن. (نعم يمكن أن تحتوي الإضافات على خطافات أيضًا. أسميها الخطافات المرفقة - attached hooks).
 
-There is a compat-layer, so Main/Chunk/ModuleTemplate still exist, but only delegate tap calls to the new hook locations.
+توجد طبقة توافق (compat-layer)، لذا لا يزال `Main`/`Chunk`/`ModuleTemplate` موجودين، لكنهم يقومون فقط بتفويض (delegate) استدعاءات `tap` إلى مواقع الخطافات الجديدة.
 
-**MIGRATION**: Follow the advice in the deprecation messages. Mostly pointing to hooks at different locations.
+**الترحيل**: اتبع النصائح الموجودة في رسائل الإهمال. وهي في الغالب تشير إلى الخطافات في مواقع مختلفة.
 
-### Entry point descriptor
+### واصف نقطة الدخول (Entry point descriptor)
 
-If an object is passed as entry point the value might be a string, array of strings or a descriptor:
+إذا تم تمرير كائن (object) كنقطة دخول، فقد تكون القيمة سلسلة نصية (string)، أو مصفوفة من السلاسل النصية (array of strings)، أو واصفًا (descriptor):
 
 ```js
 module.exports = {
@@ -897,11 +897,11 @@ module.exports = {
 };
 ```
 
-Descriptor syntax might be used to pass additional options to an entry point.
+يمكن استخدام بناء جملة الواصف (Descriptor syntax) لتمرير خيارات إضافية إلى نقطة الدخول.
 
-#### Entry point output filename
+#### اسم ملف المخرجات لنقطة الدخول (Entry point output filename)
 
-By default, the output filename for the entry chunk is extracted from `output.filename` but you can specify a custom output filename for a specific entry:
+بشكل افتراضي، يتم استخراج اسم ملف الإخراج للحزمة الأولية (entry chunk) من `output.filename` ولكن يمكنك تحديد اسم ملف إخراج مخصص لإدخال (entry) معين:
 
 ```js
 module.exports = {
@@ -911,9 +911,9 @@ module.exports = {
 };
 ```
 
-#### Entry point dependency
+#### تبعية نقطة الدخول (Entry point dependency)
 
-By default, every entry chunk stores all the modules that it uses. With `dependOn`-option you can share the modules from one entry chunk to another:
+افتراضيًا، تخزن كل حزمة أولية (entry chunk) جميع الوحدات التي تستخدمها. باستخدام خيار `dependOn` يمكنك مشاركة الوحدات من حزمة أولية إلى أخرى:
 
 ```js
 module.exports = {
@@ -924,11 +924,11 @@ module.exports = {
 };
 ```
 
-The app chunk will not contain the modules that `react-vendors` has.
+لن تحتوي حزمة `app` على الوحدات الموجودة في `react-vendors`.
 
-#### Entry point library
+#### مكتبة نقطة الدخول (Entry point library)
 
-The entry descriptor allows to pass a different `library` option for each entrypoint.
+يسمح واصف الإدخال (entry descriptor) بتمرير خيار `library` مختلف لكل نقطة دخول.
 
 ```js
 module.exports = {
@@ -949,12 +949,12 @@ module.exports = {
 };
 ```
 
-#### Entry point runtime
+#### وقت تشغيل نقطة الدخول (Entry point runtime)
 
-The entry descriptor allows to specify a `runtime` per entry.
-When specified a chunk with this name is created which contains only the runtime code for the entry.
-When multiple entries specify the same `runtime`, that chunk will contain a common runtime for all these entry.
-This means they could be used together on the same HTML page.
+يسمح واصف الإدخال بتحديد `runtime` لكل إدخال.
+عند تحديده، يتم إنشاء حزمة بهذا الاسم والتي تحتوي فقط على كود وقت التشغيل للإدخال.
+عندما تحدد مدخلات متعددة نفس الـ `runtime`، ستحتوي تلك الحزمة على وقت تشغيل مشترك (common runtime) لجميع هذه المدخلات.
+وهذا يعني أنه يمكن استخدامهم معًا في نفس صفحة HTML.
 
 ```js
 module.exports = {
@@ -967,10 +967,10 @@ module.exports = {
 };
 ```
 
-#### Entry point chunk loading
+#### تحميل حزمة نقطة الدخول (Entry point chunk loading)
 
-The entry descriptor allows to specify a `chunkLoading` per entry.
-The runtime for this entry will use this to load chunks.
+يسمح واصف الإدخال بتحديد `chunkLoading` لكل إدخال.
+سيستخدم وقت التشغيل لهذا الإدخال هذا الخيار لتحميل الحزم.
 
 ```js
 module.exports = {
@@ -986,82 +986,81 @@ module.exports = {
 };
 ```
 
-### Order and IDs
+### الترتيب والمعرفات (Order and IDs)
 
-Webpack used to order modules and chunks in the Compilation phase, in a specific way, to assign IDs in incremental order. This is no longer the case. The order will no longer be used for id generation, instead, the full control of ID generation is in the plugin.
+كان Webpack يقوم بترتيب الوحدات والحزم في مرحلة التجميع (Compilation phase)، بطريقة معينة، لتعيين المعرفات (IDs) بترتيب تزايدي. لم يعد هذا هو الحال. لن يتم استخدام الترتيب لتوليد المعرف (id) بعد الآن، بدلاً من ذلك، أصبح التحكم الكامل في توليد الـ ID موجودًا في الإضافة (plugin).
 
-Hooks to optimize the order of module and chunks have been removed.
+تمت إزالة الخطافات (Hooks) المستخدمة لتحسين ترتيب الوحدات والحزم.
 
-**MIGRATION**: You cannot rely on the order of modules and chunks in the compilation phase no more.
+**الترحيل**: لا يمكنك الاعتماد على ترتيب الوحدات والحزم في مرحلة التجميع بعد الآن.
 
-### Arrays to Sets
+### من مصفوفات إلى مجموعات (Arrays to Sets)
 
-- Compilation.modules is now a Set
-- Compilation.chunks is now a Set
-- Chunk.files is now a Set
+- أصبح `Compilation.modules` الآن `Set` (مجموعة)
+- أصبح `Compilation.chunks` الآن `Set`
+- أصبح `Chunk.files` الآن `Set`
 
-There is a compat-layer which prints deprecation warnings.
+هناك طبقة توافق (compat-layer) تطبع تحذيرات إهمال.
 
-**MIGRATION**: Use Set methods instead of Array methods.
+**الترحيل**: استخدم طرق `Set` (Set methods) بدلاً من طرق المصفوفة (Array methods).
 
 ### Compilation.fileSystemInfo
 
-This new class can be used to access information about the filesystem in a cached way. Currently, it allows asking for both file and directory timestamps. Information about timestamps is transferred from the watcher if possible, otherwise determined by filesystem access.
+يمكن استخدام هذه الفئة الجديدة للوصول إلى معلومات حول نظام الملفات بطريقة مخزنة مؤقتًا (cached way). تتيح حاليًا طلب طوابع زمنية (timestamps) لكل من الملف والدليل (directory). يتم نقل المعلومات حول الطوابع الزمنية من المراقب (watcher) إن أمكن، وإلا يتم تحديدها عن طريق الوصول إلى نظام الملفات.
 
-In the future, asking for file content hashes will be added and modules will be able to check validity with file contents instead of file hashes.
+في المستقبل، ستتم إضافة السؤال عن تجزئة محتوى الملف (file content hashes) وستتمكن الوحدات من التحقق من الصلاحية (validity) باستخدام محتويات الملف بدلاً من تجزئة الملف.
 
-**MIGRATION**: Instead of using `file/contextTimestamps` use the `compilation.fileSystemInfo` API instead.
+**الترحيل**: بدلاً من استخدام `file/contextTimestamps` استخدم واجهة `compilation.fileSystemInfo` بدلاً من ذلك.
 
-Timestamping for directories is possible now, which allows serialization of ContextModules.
+أصبح وضع الطوابع الزمنية (Timestamping) للأدلة (directories) ممكنًا الآن، مما يسمح بتسلسل (serialization) وحدات `ContextModules`.
 
-`Compiler.modifiedFiles` has been added (next to `Compiler.removedFiles`) to make it easier to reference the changed files.
+تمت إضافة `Compiler.modifiedFiles` (بجوار `Compiler.removedFiles`) لتسهيل الإشارة إلى الملفات المتغيرة.
 
-### Filesystems
+### أنظمة الملفات (Filesystems)
 
-Next to `compiler.inputFileSystem` and `compiler.outputFileSystem` there is a new `compiler.intermediateFileSystem` for all fs actions that are not considered as input or output, like writing records, cache or profiling output.
+بجوار `compiler.inputFileSystem` و `compiler.outputFileSystem` يوجد `compiler.intermediateFileSystem` جديد لجميع إجراءات نظام الملفات (fs) التي لا تعتبر كإدخال أو إخراج، مثل كتابة السجلات، وذاكرة التخزين المؤقت أو مخرجات التنميط (profiling output).
 
-The filesystems have now the `fs` interface and do no longer demand additional methods like `join` or `mkdirp`. But if they have methods like `join` or `dirname` they are used.
+أنظمة الملفات لديها الآن واجهة `fs` ولم تعد تتطلب طرقًا إضافية مثل `join` أو `mkdirp`. ولكن إذا كان لديهم طرق مثل `join` أو `dirname` يتم استخدامها.
 
-### Hot Module Replacement
+### الاستبدال الساخن للوحدة (Hot Module Replacement)
 
-HMR runtime has been refactored to Runtime Modules. `HotUpdateChunkTemplate` has been merged into `ChunkTemplate`. ChunkTemplates and plugins should also handle `HotUpdateChunk`s now.
+تمت إعادة هيكلة وقت تشغيل HMR إلى وحدات وقت تشغيل (Runtime Modules). تم دمج `HotUpdateChunkTemplate` في `ChunkTemplate`. يجب أن تتعامل `ChunkTemplates` والإضافات (plugins) مع `HotUpdateChunk`s الآن أيضًا.
 
-The javascript part of HMR runtime has been separated from the core HMR runtime. Other module types can now also handle HMR in their own way. In the future, this will allow i. e. HMR for the mini-css-extract-plugin or for WASM modules.
+تم فصل جزء javascript من وقت تشغيل HMR عن وقت تشغيل HMR الأساسي. يمكن للأنواع الأخرى من الوحدات الآن التعامل مع HMR بطريقتها الخاصة. في المستقبل، سيسمح هذا بـ HMR لإضافة mini-css-extract-plugin أو لوحدات WASM على سبيل المثال.
 
-**MIGRATION**: As this is a newly introduced functionality, there is nothing to migrate.
+**الترحيل**: نظرًا لأن هذه وظيفة تم تقديمها حديثًا، فلا يوجد شيء لترحيله.
 
-`import.meta.webpackHot` exposes the same API as `module.hot`. This is also usable from strict ESM modules (.mjs, type: "module" in package.json) which do not have access to `module`.
+يعرض `import.meta.webpackHot` نفس واجهة برمجة التطبيقات مثل `module.hot`. يمكن استخدام هذا أيضًا من وحدات ESM الصارمة (strict ESM modules) (`.mjs`، النوع `type: "module"` في `package.json`) التي ليس لها حق الوصول إلى `module`.
 
-### Work Queues
+### طوابير العمل (Work Queues)
 
-Webpack used to handle module processing by functions calling functions, and a `semaphore` which limits parallelism. The `Compilation.semaphore` has been removed and async queues now handle work queuing and processing. Each step has a separate queue:
+كان Webpack يتعامل مع معالجة الوحدة عن طريق وظائف (functions) تستدعي وظائف، وإشارة (semaphore) تحد من التوازي (parallelism). تمت إزالة `Compilation.semaphore` وتقوم الطوابير غير المتزامنة (async queues) الآن بمعالجة طوابير العمل والمعالجة. لكل خطوة طابور منفصل:
 
-- `Compilation.factorizeQueue`: calling the module factory for a group of dependencies.
-- `Compilation.addModuleQueue`: adding the module to the compilation queue (may restore module from cache).
-- `Compilation.buildQueue`: building the module if necessary (may stores module to cache).
-- `Compilation.rebuildQueue`: building a module again if manually triggered.
-- `Compilation.processDependenciesQueue`: processing dependencies of a module.
+- `Compilation.factorizeQueue`: استدعاء مصنع الوحدات (module factory) لمجموعة من التبعيات (dependencies).
+- `Compilation.addModuleQueue`: إضافة الوحدة إلى طابور التجميع (compilation queue) (قد يستعيد الوحدة من ذاكرة التخزين المؤقت).
+- `Compilation.buildQueue`: بناء الوحدة إذا لزم الأمر (قد يخزن الوحدة في ذاكرة التخزين المؤقت).
+- `Compilation.rebuildQueue`: بناء وحدة مرة أخرى إذا تم تشغيلها يدويًا.
+- `Compilation.processDependenciesQueue`: معالجة التبعيات الخاصة بالوحدة.
 
-These queues have some hooks to watch and intercept job processing.
+تحتوي هذه الطوابير على بعض الخطافات (hooks) لمشاهدة واعتراض معالجة الوظيفة (job processing).
 
-In the future, multiple compilers may work together and job orchestration can be done by intercepting these queues.
+في المستقبل، قد تعمل مترجمات متعددة معًا ويمكن إجراء تنسيق الوظائف (job orchestration) عن طريق اعتراض هذه الطوابير.
 
-**MIGRATION**: As this is a newly introduced functionality, there is nothing to migrate.
+**الترحيل**: نظرًا لأن هذه وظيفة تم تقديمها حديثًا، فلا يوجد شيء لترحيله.
 
-### Logging
+### التسجيل (Logging)
+تتضمن تصميمات webpack الداخلية بعض التسجيل (logging) الآن.
+يمكن استخدام خيارات `stats.logging` و `infrastructureLogging` لتمكين هذه الرسائل.
 
-Webpack internals includes some logging now.
-`stats.logging` and `infrastructureLogging` options can be used to enabled these messages.
+### رسم بياني للوحدة والحزمة (Module and Chunk Graph)
 
-### Module and Chunk Graph
+كان Webpack يقوم بتخزين الوحدة المحللة (resolved module) في التبعية، وتخزين الوحدات المضمنة في الحزمة (chunk). لم يعد هذا هو الحال. يتم الآن تخزين جميع المعلومات حول كيفية توصيل الوحدات في الرسم البياني للوحدة (module graph) في فئة `ModuleGraph`. يتم الآن تخزين جميع المعلومات حول كيفية توصيل الوحدات بالحزم في فئة `ChunkGraph`. المعلومات التي تعتمد على سبيل المثال على الرسم البياني للحزمة، يتم تخزينها أيضًا في الفئة ذات الصلة.
 
-Webpack used to store a resolved module in the dependency, and store the contained modules in the chunk. This is no longer the case. All information about how modules are connected in the module graph are now stored in a ModuleGraph class. All information about how modules are connected with chunks are now stored in the ChunkGraph class. The information which depends on i. e. the chunk graph, is also stored in the related class.
-
-That means the following information about modules has been moved:
+هذا يعني أنه تم نقل المعلومات التالية حول الوحدات:
 
 - Module connections -> ModuleGraph
 - Module issuer -> ModuleGraph
-- Module optimization bailout -> ModuleGraph (TODO: check if it should ChunkGraph instead)
+- Module optimization bailout -> ModuleGraph (ملاحظة: تحقق مما إذا كان يجب أن يكون ChunkGraph بدلاً من ذلك)
 - Module usedExports -> ModuleGraph
 - Module providedExports -> ModuleGraph
 - Module pre order index -> ModuleGraph
@@ -1076,96 +1075,96 @@ That means the following information about modules has been moved:
 - Module is runtime module in chunk -> ChunkGraph
 - Chunk runtime requirements -> ChunkGraph
 
-Webpack used to disconnect modules from the graph when restored from the cache. This is no longer necessary. A Module stores no info about the graph and can technically be used in multiple graphs. This makes caching easier.
+كان Webpack يقوم بفصل الوحدات عن الرسم البياني عند استعادتها من ذاكرة التخزين المؤقت. لم يعد هذا ضروريًا. لا تقوم الوحدة (Module) بتخزين أي معلومات حول الرسم البياني ويمكن استخدامها تقنيًا في رسوم بيانية متعددة. هذا يجعل التخزين المؤقت أسهل.
 
-There is a compat-layer for most of these changes, which prints a deprecation warning when used.
+هناك طبقة توافق لمعظم هذه التغييرات، والتي تطبع تحذير إهمال عند استخدامها.
 
-**MIGRATION**: Use the new APIs on ModuleGraph and ChunkGraph
+**الترحيل**: استخدم واجهات برمجة التطبيقات (APIs) الجديدة على `ModuleGraph` و `ChunkGraph`
 
 ### Init Fragments
 
-`DependenciesBlockVariables` has been removed in favor of InitFragments. `DependencyTemplates` can now add `InitFragments` to inject code to the top of the module's source. `InitFragments` allows deduplication.
+تمت إزالة `DependenciesBlockVariables` لصالح `InitFragments`. يمكن الآن لـ `DependencyTemplates` إضافة `InitFragments` لحقن التعليمات البرمجية في أعلى مصدر الوحدة. تسمح `InitFragments` بإلغاء التكرار (deduplication).
 
-**MIGRATION**: Use `InitFragments` instead of inserting something at a negative index into the source.
+**الترحيل**: استخدم `InitFragments` بدلاً من إدراج شيء ما في فهرس سالب (negative index) داخل المصدر.
 
-### Module Source Types
+### أنواع مصادر الوحدة (Module Source Types)
 
-Modules now have to define which source types they support via `Module.getSourceTypes()`. Depending on that, different plugins call `source()` with these types. i. e. for source type `javascript` the `JavascriptModulesPlugin` embeds the source code into the bundle. Source type `webassembly` will make the `WebAssemblyModulesPlugin` emit a wasm file. Custom source types are also supported, i. e. the mini-css-extract-plugin will probably use the source type `stylesheet` to embed the source code into a css file.
+يجب على الوحدات الآن تحديد أنواع المصادر (source types) التي تدعمها عبر `Module.getSourceTypes()`. اعتمادًا على ذلك، تستدعي الإضافات المختلفة `source()` باستخدام هذه الأنواع. على سبيل المثال، بالنسبة لنوع المصدر `javascript`، تقوم إضافة `JavascriptModulesPlugin` بتضمين الكود المصدري في الحزمة. سيؤدي نوع المصدر `webassembly` إلى قيام إضافة `WebAssemblyModulesPlugin` بإصدار ملف wasm. يتم دعم أنواع المصادر المخصصة أيضًا، على سبيل المثال من المحتمل أن تستخدم إضافة mini-css-extract-plugin نوع المصدر `stylesheet` لتضمين كود المصدر في ملف css.
 
-There is no relationship between module type and source type. i. e. module type `json` also uses source type `javascript` and module type `webassembly/experimental` uses source types `javascript` and `webassembly`.
+لا توجد علاقة بين نوع الوحدة (module type) ونوع المصدر (source type). أي أن نوع الوحدة `json` يستخدم أيضًا نوع المصدر `javascript` ويستخدم نوع الوحدة `webassembly/experimental` أنواع المصدر `javascript` و `webassembly`.
 
-**MIGRATION**: Custom modules need to implement these new interface methods.
+**الترحيل**: تحتاج الوحدات المخصصة إلى تنفيذ طرق الواجهة الجديدة هذه.
 
-### Plugins for Stats
+### إضافات الإحصائيات (Plugins for Stats)
 
-Stats `preset`, `default`, `json` and `toString` are now baked in by a plugin system. Converted the current Stats into plugins.
+الإحصائيات `preset`، `default`، `json` و `toString` مدمجة الآن بواسطة نظام إضافة (plugin system). تم تحويل الإحصائيات الحالية إلى إضافات.
 
-**MIGRATION**: Instead of replacing the whole Stats functionality, you can now customize it. Extra information can now be added to the stats json instead of writing a separate file.
+**الترحيل**: بدلاً من استبدال وظيفة الإحصائيات بالكامل، يمكنك الآن تخصيصها. يمكن الآن إضافة معلومات إضافية إلى إحصائيات json بدلاً من كتابة ملف منفصل.
 
-### New Watching
+### مراقبة جديدة (New Watching)
 
-The watcher used by webpack was refactored. It was previously using `chokidar` and the native dependency `fsevents` (only on macOS). Now it's only based on native Node.js `fs`. This means there is no native dependency left in webpack.
+تمت إعادة هيكلة المراقب (watcher) الذي يستخدمه webpack. كان يستخدم سابقًا `chokidar` والتبعية الأصلية `fsevents` (فقط على نظام macOS). الآن يعتمد فقط على `fs` الخاص بـ Node.js الأصلي. هذا يعني أنه لم يتبق أي تبعية أصلية في webpack.
 
-It also captures more information about filesystem while watching. It now captures mtimes and watches event times, as well as information about missing files. For this, the `WatchFileSystem` API changed a little bit. While on it we also converted Arrays to Sets and Objects to Maps.
+كما أنه يلتقط المزيد من المعلومات حول نظام الملفات أثناء المراقبة. يلتقط الآن أوقات التعديل (mtimes) ويراقب أوقات الأحداث (event times)، بالإضافة إلى معلومات حول الملفات المفقودة. لهذا الغرض، تغيرت واجهة `WatchFileSystem` قليلاً. أثناء القيام بذلك، قمنا أيضًا بتحويل المصفوفات (Arrays) إلى `Sets` والكائنات (Objects) إلى `Maps`.
 
-### SizeOnlySource after emit
+### SizeOnlySource بعد الإصدار
 
-Webpack now replaces the Sources in `Compilation.assets` with `SizeOnlySource` variants to reduce memory usage.
+يستبدل Webpack الآن المصادر (Sources) في `Compilation.assets` بمتغيرات `SizeOnlySource` لتقليل استخدام الذاكرة.
 
-### Emitting assets multiple times
+### إصدار الأصول مرات متعددة
 
-The warning `Multiple assets emit different content to the same filename` has been made an error.
+تم تحويل التحذير (warning) `Multiple assets emit different content to the same filename` (محتوى مختلف لعدة أصول يتم إصداره بنفس اسم الملف) إلى خطأ (error).
 
 ### ExportsInfo
 
-The way how information about exports of modules is stored has been refactored. The ModuleGraph now features an `ExportsInfo` for each `Module`, which stores information per export. It also stores information about unknown exports and if the module is used in a side-effect-only way.
+تمت إعادة هيكلة الطريقة التي يتم بها تخزين المعلومات حول صادرات الوحدات (exports of modules). يحتوي `ModuleGraph` الآن على `ExportsInfo` لكل `Module`، والذي يقوم بتخزين المعلومات لكل تصدير. كما يقوم بتخزين معلومات حول الصادرات غير المعروفة وما إذا كانت الوحدة تُستخدم بطريقة لا تحتوي إلا على تأثيرات جانبية (side-effect-only).
 
-For each export the following information is stored:
+بالنسبة لكل تصدير، يتم تخزين المعلومات التالية:
 
-- Is the export used? yes, no, not statically known, not determined. (see also `optimization.usedExports`)
-- Is the export provided? yes, no, not statically known, not determined. (see also `optimization.providedExports`)
-- Can be export name be renamed? yes, no, not determined.
-- The new name, if the export has been renamed. (see also `optimization.mangleExports`)
-- Nested ExportsInfo, if the export is an object with information attached itself
-  - Used for reexporting namespace objects: `import * as X from "..."; export { X };`
-  - Used for representing structure in JSON modules
+- هل التصدير مستخدم؟ نعم، لا، غير معروف بشكل ثابت (statically known)، غير محدد. (راجع أيضًا `optimization.usedExports`)
+- هل التصدير مُقدم (provided)؟ نعم، لا، غير معروف بشكل ثابت، غير محدد. (راجع أيضًا `optimization.providedExports`)
+- هل يمكن إعادة تسمية اسم التصدير؟ نعم، لا، غير محدد.
+- الاسم الجديد، إذا تمت إعادة تسمية التصدير. (راجع أيضًا `optimization.mangleExports`)
+- `ExportsInfo` المتداخلة، إذا كان التصدير عبارة عن كائن به معلومات مرفقة به
+  - يُستخدم لإعادة تصدير كائنات مساحات الأسماء: `import * as X from "..."; export { X };`
+  - يُستخدم لتمثيل البنية في وحدات JSON
 
-### Code Generation Phase
+### مرحلة توليد الكود (Code Generation Phase)
 
-The Compilation features Code Generation as separate compilation phase now. It no longer runs hidden in `Module.source()` or `Module.getRuntimeRequirements()`.
+تتميز عملية التجميع (Compilation) بتوليد الكود كمرحلة تجميع منفصلة الآن. لم تعد تعمل بشكل مخفي في `Module.source()` أو `Module.getRuntimeRequirements()`.
 
-This should make the flow much cleaner. It also allows to report progress for this phase and makes Code Generation more visible when profiling.
+يجب أن يجعل هذا التدفق أكثر نظافة. كما يسمح بالإبلاغ عن التقدم المحرز في هذه المرحلة ويجعل توليد الكود أكثر وضوحًا عند إنشاء ملفات التعريف (profiling).
 
-**MIGRATION**: `Module.source()` and `Module.getRuntimeRequirements()` are deprecated now. Use `Module.codeGeneration()` instead.
+**الترحيل**: تم إهمال `Module.source()` و `Module.getRuntimeRequirements()` الآن. استخدم `Module.codeGeneration()` بدلاً من ذلك.
 
-### DependencyReference
+### مرجع التبعية (DependencyReference)
 
-Webpack used to have a single method and type to represent references of dependencies (`Compilation.getDependencyReference` returning a `DependencyReference`).
-This type used to include all information about this reference like the referenced Module, which exports have been imported, if it's a weak reference and also some ordering related information.
+كان لدى Webpack طريقة ونوع واحد لتمثيل مراجع التبعيات (تقوم `Compilation.getDependencyReference` بإرجاع `DependencyReference`).
+كان هذا النوع يتضمن جميع المعلومات حول هذا المرجع مثل الوحدة (Module) المُشار إليها، وأسماء الصادرات التي تم استيرادها، وما إذا كان مرجعًا ضعيفًا (weak reference) وكذلك بعض المعلومات المتعلقة بالترتيب.
 
-Bundling all these information together makes getting the reference expensive and it's also called often (every time somebody needs one piece of information).
+يؤدي تجميع كل هذه المعلومات معًا إلى جعل الحصول على المرجع أمرًا مكلفًا ويتم استدعاؤه بشكل متكرر (في كل مرة يحتاج فيها شخص ما إلى معلومة واحدة).
 
-In webpack 5 this part of the codebase was refactored and the method has been split up.
+في webpack 5، تمت إعادة هيكلة هذا الجزء من قاعدة الكود وتم تقسيم الطريقة (method).
 
-- The referenced module can be read from the ModuleGraphConnection
-- The imported export names can be get via `Dependency.getReferencedExports()`
-- There is a `weak` flag on the `Dependency` class
-- Ordering is only relevant to `HarmonyImportDependencies` and can be get via `sourceOrder` property
+- يمكن قراءة الوحدة المشار إليها من `ModuleGraphConnection`
+- يمكن الحصول على أسماء الصادرات المستوردة عبر `Dependency.getReferencedExports()`
+- توجد علامة `weak` (ضعيف) على فئة `Dependency`
+- الترتيب وثيق الصلة فقط بـ `HarmonyImportDependencies` ويمكن الحصول عليه عبر خاصية `sourceOrder`
 
-### Presentational Dependencies
+### تبعيات العرض (Presentational Dependencies)
 
-There is now a new type of dependency in `NormalModules`: Presentational Dependencies
+يوجد الآن نوع جديد من التبعية في `NormalModules`: التبعيات التقديمية (Presentational Dependencies)
 
-These dependencies are only used during the Code Generation phase but are not used during Module Graph building.
-So they can never have referenced modules or influence exports/imports.
+تُستخدم هذه التبعيات فقط أثناء مرحلة "توليد الكود" (Code Generation) ولكن لا تُستخدم أثناء بناء الرسم البياني للوحدة (Module Graph).
+لذا لا يمكن أن يكون لديها وحدات مرجعية أو تؤثر على الصادرات/الواردات.
 
-These dependencies are cheaper to process and webpack uses them when possible
+هذه التبعيات أرخص في المعالجة ويستخدمها webpack عندما يكون ذلك ممكنًا.
 
-### Deprecated loaders
+### محملات مهملة (Deprecated loaders)
 
 - [`null-loader`](https://github.com/webpack-contrib/null-loader)
 
-  It will be deprecated. Use
+  سيتم إهماله. استخدم
 
   ```js
   module.exports = {
@@ -1177,7 +1176,7 @@ These dependencies are cheaper to process and webpack uses them when possible
   };
   ```
 
-  or use an absolute path
+  أو استخدم مسارًا مطلقًا (absolute path)
 
   ```js
   module.exports = {
@@ -1189,254 +1188,254 @@ These dependencies are cheaper to process and webpack uses them when possible
   };
   ```
 
-## Minor Changes
+## تغييرات طفيفة (Minor Changes)
 
-- `Compiler.name`: When generating a compiler name with absolute paths, make sure to separate them with `|` or `!` on both parts of the name.
-  - Using space as a separator is now deprecated. (Paths could contain spaces)
-  - Hint: `|` is replaced with space in Stats string output.
-- `SystemPlugin` is now disabled by default.
-  - **MIGRATION**: Avoid using it as the spec has been removed. You can re-enable it with `Rule.parser.system: true`
-- `ModuleConcatenationPlugin`: concatenation is no longer prevented by `DependencyVariables` as they have been removed
-  - This means it can now concatenate in cases of `module`, `global`, `process` or the ProvidePlugin
-- `Stats.presetToOptions` removed
-  - **MIGRATION**: Use `compilation.createStatsOptions` instead
-- `SingleEntryPlugin` and `SingleEntryDependency` removed
-  - **MIGRATION**: use `EntryPlugin` and `EntryDependency`
-- Chunks can now have multiple entry modules
-- `ExtendedAPIPlugin` removed
-  - **MIGRATION**: No longer needed, `__webpack_hash__` and `__webpack_chunkname__` can always be used and runtime code is injected where needed.
-- `ProgressPlugin` no longer uses tapable context for `reportProgress`
-  - **MIGRATION**: Use `ProgressPlugin.getReporter(compiler)` instead
-- `ProvidePlugin` is now re-enabled for `.mjs` files
-- `Stats` json `errors` and `warnings` no longer contain strings but objects with information splitted into properties.
-  - **MIGRATION**: Access the information on the properties. i. e. `message`
-- `Compilation.hooks.normalModuleLoader` is deprecated
-  - **MIGRATION**: Use `NormalModule.getCompilationHooks(compilation).loader` instead
-- Changed hooks in `NormalModuleFactory` from waterfall to bailing, changed and renamed hooks that return waterfall functions
-- Removed `compilationParams.compilationDependencies`
-  - Plugins can add dependencies to the compilation by adding to `compilation.file/context/missingDependencies`
-  - Compat layer will delegate `compilationDependencies.add` to `fileDependencies.add`
-- `stats.assetsByChunkName[x]` is now always an array
-- `__webpack_get_script_filename__` function added to get the filename of a script file
-- `"sideEffects"` in package.json will be handled by `glob-to-regex` instead of `micromatch`
-  - This may have changed semantics in edge-cases
-- `checkContext` was removed from `IgnorePlugin`
-- New `__webpack_exports_info__` API allows export usage introspection
-- SourceMapDevToolPlugin applies to non-chunk assets too now
-- EnvironmentPlugin shows an error now when referenced env variable is missing and has no fallback
-- Remove `serve` property from schema
+- `Compiler.name`: عند إنشاء اسم مترجم (compiler name) بمسارات مطلقة، تأكد من فصلها باستخدام `|` أو `!` في كلا جزأي الاسم.
+  - أصبح استخدام المسافة (space) كفاصل مهملًا الآن. (يمكن أن تحتوي المسارات على مسافات)
+  - تلميح: يتم استبدال `|` بمسافة في إخراج سلسلة الإحصائيات (Stats string output).
+- يتم الآن تعطيل `SystemPlugin` افتراضيًا.
+  - **الترحيل**: تجنب استخدامه حيث تمت إزالة المواصفات (spec). يمكنك إعادة تمكينه باستخدام `Rule.parser.system: true`
+- `ModuleConcatenationPlugin`: لم يعد التسلسل (concatenation) يُمنع بواسطة `DependencyVariables` حيث تمت إزالتها
+  - هذا يعني أنه يمكن الآن التسلسل في حالات `module`، `global`، `process` أو الـ `ProvidePlugin`
+- إزالة `Stats.presetToOptions`
+  - **الترحيل**: استخدم `compilation.createStatsOptions` بدلاً من ذلك
+- إزالة `SingleEntryPlugin` و `SingleEntryDependency`
+  - **الترحيل**: استخدم `EntryPlugin` و `EntryDependency`
+- يمكن أن تحتوي الحزم (Chunks) الآن على وحدات دخول (entry modules) متعددة
+- إزالة `ExtendedAPIPlugin`
+  - **الترحيل**: لم يعد هناك حاجة إليها، يمكن دائمًا استخدام `__webpack_hash__` و `__webpack_chunkname__` ويتم حقن كود وقت التشغيل عند الحاجة.
+- لم يعد `ProgressPlugin` يستخدم سياق tapable لـ `reportProgress`
+  - **الترحيل**: استخدم `ProgressPlugin.getReporter(compiler)` بدلاً من ذلك
+- تمت إعادة تفعيل `ProvidePlugin` الآن لملفات `.mjs`
+- لم تعد الأخطاء والتحذيرات في ملفات الإحصائيات (`Stats` json `errors` and `warnings`) تحتوي على سلاسل نصية (strings) بل أصبحت تحتوي على كائنات بمعلومات مقسمة إلى خصائص.
+  - **الترحيل**: قم بالوصول إلى المعلومات على الخصائص. مثل `message`
+- إهمال `Compilation.hooks.normalModuleLoader`
+  - **الترحيل**: استخدم `NormalModule.getCompilationHooks(compilation).loader` بدلاً من ذلك
+- تغيير الخطافات في `NormalModuleFactory` من المتتالية (waterfall) إلى المنسحبة (bailing)، وتغيير وإعادة تسمية الخطافات التي تُرجع وظائف متتالية (waterfall functions)
+- إزالة `compilationParams.compilationDependencies`
+  - يمكن للإضافات إضافة تبعيات إلى التجميع (compilation) عن طريق إضافتها إلى `compilation.file/context/missingDependencies`
+  - ستقوم طبقة التوافق بتفويض `compilationDependencies.add` إلى `fileDependencies.add`
+- أصبح `stats.assetsByChunkName[x]` الآن دائمًا مصفوفة (array)
+- تمت إضافة دالة `__webpack_get_script_filename__` للحصول على اسم ملف نص برمجي (script file)
+- سيتم التعامل مع `"sideEffects"` في package.json بواسطة `glob-to-regex` بدلاً من `micromatch`
+  - قد يؤدي هذا إلى تغيير الدلالات (semantics) في الحالات القصوى (edge-cases)
+- تمت إزالة `checkContext` من `IgnorePlugin`
+- واجهة برمجة تطبيقات (API) جديدة `__webpack_exports_info__` تتيح استبطان (introspection) استخدام التصدير
+- تُطبق إضافة `SourceMapDevToolPlugin` على الأصول غير الحزمية (non-chunk assets) الآن أيضًا
+- تعرض `EnvironmentPlugin` خطأ الآن عند فقدان متغير البيئة المُشار إليه وعدم وجود بديل له (no fallback)
+- إزالة خاصية `serve` من المخطط (schema)
 
-## Other Minor Changes
+## تغييرات طفيفة أخرى (Other Minor Changes)
 
-- removed builtin directory and replaced builtins with runtime modules
-- Removed deprecated features
-  - BannerPlugin now only support one argument that can be an object, string or function
-- removed `CachePlugin`
-- `Chunk.entryModule` is deprecated, use ChunkGraph instead
-- `Chunk.hasEntryModule` is deprecated
-- `Chunk.addModule` is deprecated
-- `Chunk.removeModule` is deprecated
-- `Chunk.getNumberOfModules` is deprecated
-- `Chunk.modulesIterable` is deprecated
-- `Chunk.compareTo` is deprecated
-- `Chunk.containsModule` is deprecated
-- `Chunk.getModules` is deprecated
-- `Chunk.remove` is deprecated
-- `Chunk.moveModule` is deprecated
-- `Chunk.integrate` is deprecated
-- `Chunk.canBeIntegrated` is deprecated
-- `Chunk.isEmpty` is deprecated
-- `Chunk.modulesSize` is deprecated
-- `Chunk.size` is deprecated
-- `Chunk.integratedSize` is deprecated
+- إزالة الدليل المُدمج (builtin directory) واستبدال المدمجات (builtins) بوحدات وقت التشغيل
+- إزالة الميزات المهملة
+  - تدعم `BannerPlugin` الآن وسيطًا واحدًا فقط يمكن أن يكون كائنًا (object) أو سلسلة نصية (string) أو دالة (function)
+- إزالة `CachePlugin`
+- تم إهمال `Chunk.entryModule`، استخدم `ChunkGraph` بدلاً من ذلك
+- إهمال `Chunk.hasEntryModule`
+- إهمال `Chunk.addModule`
+- إهمال `Chunk.removeModule`
+- إهمال `Chunk.getNumberOfModules`
+- إهمال `Chunk.modulesIterable`
+- إهمال `Chunk.compareTo`
+- إهمال `Chunk.containsModule`
+- إهمال `Chunk.getModules`
+- إهمال `Chunk.remove`
+- إهمال `Chunk.moveModule`
+- إهمال `Chunk.integrate`
+- إهمال `Chunk.canBeIntegrated`
+- إهمال `Chunk.isEmpty`
+- إهمال `Chunk.modulesSize`
+- إهمال `Chunk.size`
+- إهمال `Chunk.integratedSize`
 - `Chunk.getChunkModuleMaps` is deprecated
-- `Chunk.hasModuleInGraph` is deprecated
-- `Chunk.updateHash` signature changed
-- `Chunk.getChildIdsByOrders` signature changed (TODO: consider moving to `ChunkGraph`)
-- `Chunk.getChildIdsByOrdersMap` signature changed (TODO: consider moving to `ChunkGraph`)
-- `Chunk.getChunkModuleMaps` removed
-- `Chunk.setModules` removed
-- deprecated Chunk methods removed
-- `ChunkGraph` added
-- `ChunkGroup.setParents` removed
-- `ChunkGroup.containsModule` removed
-- `Compilation.cache` was removed in favor of `Compilation.getCache()`
-- `ChunkGroup.remove` no longer disconnected the group from block
-- `ChunkGroup.compareTo` signature changed
-- `ChunkGroup.getChildrenByOrders` signature changed
-- `ChunkGroup` index and index renamed to pre/post order index
-  - old getter is deprecated
-- `ChunkTemplate.hooks.modules` signature changed
-- `ChunkTemplate.hooks.render` signature changed
-- `ChunkTemplate.updateHashForChunk` signature changed
-- `Compilation.hooks.optimizeChunkOrder` removed
-- `Compilation.hooks.optimizeModuleOrder` removed
-- `Compilation.hooks.advancedOptimizeModuleOrder` removed
-- `Compilation.hooks.optimizeDependenciesBasic` removed
-- `Compilation.hooks.optimizeDependenciesAdvanced` removed
-- `Compilation.hooks.optimizeModulesBasic` removed
-- `Compilation.hooks.optimizeModulesAdvanced` removed
-- `Compilation.hooks.optimizeChunksBasic` removed
-- `Compilation.hooks.optimizeChunksAdvanced` removed
-- `Compilation.hooks.optimizeChunkModulesBasic` removed
-- `Compilation.hooks.optimizeChunkModulesAdvanced` removed
-- `Compilation.hooks.optimizeExtractedChunksBasic` removed
-- `Compilation.hooks.optimizeExtractedChunks` removed
-- `Compilation.hooks.optimizeExtractedChunksAdvanced` removed
-- `Compilation.hooks.afterOptimizeExtractedChunks` removed
-- `Compilation.hooks.stillValidModule` added
-- `Compilation.hooks.statsPreset` added
-- `Compilation.hooks.statsNormalize` added
-- `Compilation.hooks.statsFactory` added
-- `Compilation.hooks.statsPrinter` added
-- `Compilation.fileDependencies`, `Compilation.contextDependencies` and `Compilation.missingDependencies` are now LazySets
-- `Compilation.entries` removed
-  - **MIGRATION**: Use `Compilation.entryDependencies` instead
-- `Compilation._preparedEntrypoints` removed
-- `dependencyTemplates` is now a `DependencyTemplates` class instead of a raw `Map`
-- `Compilation.fileTimestamps` and `contextTimestamps` removed
-  - **MIGRATION**: Use `Compilation.fileSystemInfo` instead
-- `Compilation.waitForBuildingFinished` removed
-  - **MIGRATION**: Use the new queues
-- `Compilation.addModuleDependencies` removed
-- `Compilation.prefetch` removed
-- `Compilation.hooks.beforeHash` is now called after the hashes of modules are created
-  - **MIGRATION**: Use `Compilation.hooks.beforeModuleHash` instead
-- `Compilation.applyModuleIds` removed
-- `Compilation.applyChunkIds` removed
-- `Compiler.root` added, which points to the root compiler
-  - it can be used to cache data in WeakMaps instead of statically scoped
-- `Compiler.hooks.afterDone` added
-- `Source.emitted` is no longer set by the Compiler
-  - **MIGRATION**: Check `Compilation.emittedAssets` instead
-- `Compiler/Compilation.compilerPath` added: It's a unique name of the compiler in the compiler tree. (Unique to the root compiler scope)
-- `Module.needRebuild` deprecated
-  - **MIGRATION**: use `Module.needBuild` instead
-- `Dependency.getReference` signature changed
-- `Dependency.getExports` signature changed
-- `Dependency.getWarnings` signature changed
-- `Dependency.getErrors` signature changed
-- `Dependency.updateHash` signature changed
-- `Dependency.module` removed
-- There is now a base class for `DependencyTemplate`
-- `MultiEntryDependency` removed
-- `EntryDependency` added
-- `EntryModuleNotFoundError` removed
-- `SingleEntryPlugin` removed
-- `EntryPlugin` added
-- `Generator.getTypes` added
-- `Generator.getSize` added
-- `Generator.generate` signature changed
-- `HotModuleReplacementPlugin.getParserHooks` added
-- `Parser` was moved to `JavascriptParser`
-- `ParserHelpers` was moved to `JavascriptParserHelpers`
-- `MainTemplate.hooks.moduleObj` removed
-- `MainTemplate.hooks.currentHash` removed
-- `MainTemplate.hooks.addModule` removed
-- `MainTemplate.hooks.requireEnsure` removed
-- `MainTemplate.hooks.globalHashPaths` removed
-- `MainTemplate.hooks.globalHash` removed
-- `MainTemplate.hooks.hotBootstrap` removed
-- `MainTemplate.hooks` some signatures changed
-- `Module.hash` deprecated
-- `Module.renderedHash` deprecated
-- `Module.reasons` removed
-- `Module.id` deprecated
-- `Module.index` deprecated
-- `Module.index2` deprecated
-- `Module.depth` deprecated
-- `Module.issuer` deprecated
-- `Module.profile` removed
-- `Module.prefetched` removed
-- `Module.built` removed
-- `Module.used` removed
-  - **MIGRATION**: Use `Module.getUsedExports` instead
-- Module.usedExports deprecated
-  - **MIGRATION**: Use `Module.getUsedExports` instead
-- `Module.optimizationBailout` deprecated
-- `Module.exportsArgument` removed
-- `Module.optional` deprecated
-- `Module.disconnect` removed
-- `Module.unseal` removed
-- `Module.setChunks` removed
-- `Module.addChunk` deprecated
-- `Module.removeChunk` deprecated
-- `Module.isInChunk` deprecated
-- `Module.isEntryModule` deprecated
-- `Module.getChunks` deprecated
-- `Module.getNumberOfChunks` deprecated
-- `Module.chunksIterable` deprecated
-- `Module.hasEqualsChunks` removed
-- `Module.useSourceMap` moved to `NormalModule`
-- `Module.addReason` removed
-- `Module.removeReason` removed
-- `Module.rewriteChunkInReasons` removed
-- `Module.isUsed` removed
-  - **MIGRATION**: Use `isModuleUsed`, `isExportUsed` and `getUsedName` instead
-- `Module.updateHash` signature changed
-- `Module.sortItems` removed
-- `Module.unbuild` removed
-  - **MIGRATION**: Use `invalidateBuild` instead
-- `Module.getSourceTypes` added
-- `Module.getRuntimeRequirements` added
-- `Module.size` signature changed
-- `ModuleFilenameHelpers.createFilename` signature changed
-- `ModuleProfile` class added with more data
-- `ModuleReason` removed
-- `ModuleTemplate.hooks` signatures changed
-- `ModuleTemplate.render` signature changed
-- `Compiler.dependencies` removed
-  - **MIGRATION**: Use `MultiCompiler.setDependencies` instead
-- `MultiModule` removed
-- `MultiModuleFactory` removed
-- `NormalModuleFactory.fileDependencies`, `NormalModuleFactory.contextDependencies` and `NormalModuleFactory.missingDependencies` are now LazySets
-- `RuntimeTemplate` methods now take `runtimeRequirements` arguments
-- `serve` property is removed
-- `Stats.jsonToString` removed
-- `Stats.filterWarnings` removed
-- `Stats.getChildOptions` removed
-- `Stats` helper methods removed
-- `Stats.toJson` signature changed (second argument removed)
-- `ExternalModule.external` removed
-- `HarmonyInitDependency` removed
-- `Dependency.getInitFragments` deprecated
-  - **MIGRATION**: Use `apply` `initFragments` instead
-- DependencyReference now takes a function to a module instead of a Module
-- HarmonyImportSpecifierDependency.redirectedId removed
-  - **MIGRATION**: Use `setId` instead
-- acorn 5 -> 8
-- Testing
-  - HotTestCases now runs for multiple targets `async-node` `node` `web` `webworker`
-  - TestCases now also runs for filesystem caching with `store: "instant"` and `store: "pack"`
-  - TestCases now also runs for deterministic module ids
-- Tooling added to order the imports (checked in CI)
-- Chunk name mapping in runtime no longer contains entries when chunk name equals chunk id
-- add `resolvedModuleId` `resolvedModuleIdentifier` and `resolvedModule` to reasons in Stats which point to the module before optimizations like scope hoisting
-- show `resolvedModule` in Stats toString output
-- loader-runner was upgraded: https://github.com/webpack/loader-runner/releases/tag/v3.0.0
-- `file/context/missingDependencies` in `Compilation` are no longer sorted for performance reasons
-  - Do not rely on the order
-- webpack-sources was upgraded to version 2: https://github.com/webpack/webpack-sources/releases/tag/v2.0.1
-- webpack-command support was removed
-- Use schema-utils@2 for schema validation
-- `Compiler.assetEmitted` has an improved second argument with more information
-- BannerPlugin omits trailing whitespace
-- removed `minChunkSize` option from `LimitChunkCountPlugin`
-- reorganize from javascript related files into sub-directory
+- إهمال `Chunk.hasModuleInGraph`
+- تغيير توقيع (signature) `Chunk.updateHash`
+- تغيير توقيع `Chunk.getChildIdsByOrders` (ملاحظة: فكر في نقله إلى `ChunkGraph`)
+- تغيير توقيع `Chunk.getChildIdsByOrdersMap` (ملاحظة: فكر في نقله إلى `ChunkGraph`)
+- إزالة `Chunk.getChunkModuleMaps`
+- إزالة `Chunk.setModules`
+- إزالة طرق Chunk المهملة (deprecated Chunk methods)
+- إضافة `ChunkGraph`
+- إزالة `ChunkGroup.setParents`
+- إزالة `ChunkGroup.containsModule`
+- تمت إزالة `Compilation.cache` لصالح `Compilation.getCache()`
+- لم يعد `ChunkGroup.remove` يفصل المجموعة عن الكتلة (block)
+- تغيير توقيع `ChunkGroup.compareTo`
+- تغيير توقيع `ChunkGroup.getChildrenByOrders`
+- تم تغيير اسم index و index في `ChunkGroup` إلى index للترتيب المسبق/اللاحق (pre/post order index)
+  - تم إهمال المسترد (getter) القديم
+- تغيير توقيع `ChunkTemplate.hooks.modules`
+- تغيير توقيع `ChunkTemplate.hooks.render`
+- تغيير توقيع `ChunkTemplate.updateHashForChunk`
+- إزالة `Compilation.hooks.optimizeChunkOrder`
+- إزالة `Compilation.hooks.optimizeModuleOrder`
+- إزالة `Compilation.hooks.advancedOptimizeModuleOrder`
+- إزالة `Compilation.hooks.optimizeDependenciesBasic`
+- إزالة `Compilation.hooks.optimizeDependenciesAdvanced`
+- إزالة `Compilation.hooks.optimizeModulesBasic`
+- إزالة `Compilation.hooks.optimizeModulesAdvanced`
+- إزالة `Compilation.hooks.optimizeChunksBasic`
+- إزالة `Compilation.hooks.optimizeChunksAdvanced`
+- إزالة `Compilation.hooks.optimizeChunkModulesBasic`
+- إزالة `Compilation.hooks.optimizeChunkModulesAdvanced`
+- إزالة `Compilation.hooks.optimizeExtractedChunksBasic`
+- إزالة `Compilation.hooks.optimizeExtractedChunks`
+- إزالة `Compilation.hooks.optimizeExtractedChunksAdvanced`
+- إزالة `Compilation.hooks.afterOptimizeExtractedChunks`
+- إضافة `Compilation.hooks.stillValidModule`
+- إضافة `Compilation.hooks.statsPreset`
+- إضافة `Compilation.hooks.statsNormalize`
+- إضافة `Compilation.hooks.statsFactory`
+- إضافة `Compilation.hooks.statsPrinter`
+- أصبحت `Compilation.fileDependencies`، `Compilation.contextDependencies` و `Compilation.missingDependencies` الآن `LazySets`
+- إزالة `Compilation.entries`
+  - **الترحيل**: استخدم `Compilation.entryDependencies` بدلاً من ذلك
+- إزالة `Compilation._preparedEntrypoints`
+- أصبح `dependencyTemplates` الآن فئة (class) `DependencyTemplates` بدلاً من `Map` خام
+- إزالة `Compilation.fileTimestamps` و `contextTimestamps`
+  - **الترحيل**: استخدم `Compilation.fileSystemInfo` بدلاً من ذلك
+- إزالة `Compilation.waitForBuildingFinished`
+  - **الترحيل**: استخدم الطوابير (queues) الجديدة
+- إزالة `Compilation.addModuleDependencies`
+- إزالة `Compilation.prefetch`
+- يتم الآن استدعاء `Compilation.hooks.beforeHash` بعد إنشاء التجزئات (hashes) الخاصة بالوحدات
+  - **الترحيل**: استخدم `Compilation.hooks.beforeModuleHash` بدلاً من ذلك
+- إزالة `Compilation.applyModuleIds`
+- إزالة `Compilation.applyChunkIds`
+- تمت إضافة `Compiler.root`، والذي يشير إلى المترجم الأساسي (root compiler)
+  - يمكن استخدامه لتخزين البيانات مؤقتًا في `WeakMaps` بدلاً من أن يكون نطاقها ثابتًا (statically scoped)
+- إضافة `Compiler.hooks.afterDone`
+- لم يعد `Source.emitted` يتم تعيينه بواسطة المترجم (Compiler)
+  - **الترحيل**: تحقق من `Compilation.emittedAssets` بدلاً من ذلك
+- إضافة `Compiler/Compilation.compilerPath`: إنه اسم فريد للمترجم في شجرة المترجمين. (فريد لنطاق المترجم الأساسي - root compiler scope)
+- إهمال `Module.needRebuild`
+  - **الترحيل**: استخدم `Module.needBuild` بدلاً من ذلك
+- تغيير توقيع `Dependency.getReference`
+- تغيير توقيع `Dependency.getExports`
+- تغيير توقيع `Dependency.getWarnings`
+- تغيير توقيع `Dependency.getErrors`
+- تغيير توقيع `Dependency.updateHash`
+- إزالة `Dependency.module`
+- يوجد الآن فئة أساسية (base class) لـ `DependencyTemplate`
+- إزالة `MultiEntryDependency`
+- إضافة `EntryDependency`
+- إزالة `EntryModuleNotFoundError`
+- إزالة `SingleEntryPlugin`
+- إضافة `EntryPlugin`
+- إضافة `Generator.getTypes`
+- إضافة `Generator.getSize`
+- تغيير توقيع `Generator.generate`
+- إضافة `HotModuleReplacementPlugin.getParserHooks`
+- تم نقل `Parser` إلى `JavascriptParser`
+- تم نقل `ParserHelpers` إلى `JavascriptParserHelpers`
+- إزالة `MainTemplate.hooks.moduleObj`
+- إزالة `MainTemplate.hooks.currentHash`
+- إزالة `MainTemplate.hooks.addModule`
+- إزالة `MainTemplate.hooks.requireEnsure`
+- إزالة `MainTemplate.hooks.globalHashPaths`
+- إزالة `MainTemplate.hooks.globalHash`
+- إزالة `MainTemplate.hooks.hotBootstrap`
+- تغيير بعض التوقيعات لـ `MainTemplate.hooks`
+- إهمال `Module.hash`
+- إهمال `Module.renderedHash`
+- إزالة `Module.reasons`
+- إهمال `Module.id`
+- إهمال `Module.index`
+- إهمال `Module.index2`
+- إهمال `Module.depth`
+- إهمال `Module.issuer`
+- إزالة `Module.profile`
+- إزالة `Module.prefetched`
+- إزالة `Module.built`
+- إزالة `Module.used`
+  - **الترحيل**: استخدم `Module.getUsedExports` بدلاً من ذلك
+- إهمال Module.usedExports
+  - **الترحيل**: استخدم `Module.getUsedExports` بدلاً من ذلك
+- إهمال `Module.optimizationBailout`
+- إزالة `Module.exportsArgument`
+- إهمال `Module.optional`
+- إزالة `Module.disconnect`
+- إزالة `Module.unseal`
+- إزالة `Module.setChunks`
+- إهمال `Module.addChunk`
+- إهمال `Module.removeChunk`
+- إهمال `Module.isInChunk`
+- إهمال `Module.isEntryModule`
+- إهمال `Module.getChunks`
+- إهمال `Module.getNumberOfChunks`
+- إهمال `Module.chunksIterable`
+- إزالة `Module.hasEqualsChunks`
+- تم نقل `Module.useSourceMap` إلى `NormalModule`
+- إزالة `Module.addReason`
+- إزالة `Module.removeReason`
+- إزالة `Module.rewriteChunkInReasons`
+- إزالة `Module.isUsed`
+  - **الترحيل**: استخدم `isModuleUsed`، `isExportUsed` و `getUsedName` بدلاً من ذلك
+- تغيير توقيع `Module.updateHash`
+- إزالة `Module.sortItems`
+- إزالة `Module.unbuild`
+  - **الترحيل**: استخدم `invalidateBuild` بدلاً من ذلك
+- إضافة `Module.getSourceTypes`
+- إضافة `Module.getRuntimeRequirements`
+- تغيير توقيع `Module.size`
+- تغيير توقيع `ModuleFilenameHelpers.createFilename`
+- إضافة فئة `ModuleProfile` مع مزيد من البيانات
+- إزالة `ModuleReason`
+- تغيير توقيعات `ModuleTemplate.hooks`
+- تغيير توقيع `ModuleTemplate.render`
+- إزالة `Compiler.dependencies`
+  - **الترحيل**: استخدم `MultiCompiler.setDependencies` بدلاً من ذلك
+- إزالة `MultiModule`
+- إزالة `MultiModuleFactory`
+- أصبحت `NormalModuleFactory.fileDependencies`، `NormalModuleFactory.contextDependencies` و `NormalModuleFactory.missingDependencies` الآن `LazySets`
+- تأخذ طرق `RuntimeTemplate` الآن وسطاء (arguments) `runtimeRequirements`
+- تمت إزالة خاصية `serve`
+- إزالة `Stats.jsonToString`
+- إزالة `Stats.filterWarnings`
+- إزالة `Stats.getChildOptions`
+- إزالة الطرق المساعدة (helper methods) لـ `Stats`
+- تغيير توقيع `Stats.toJson` (تمت إزالة الوسيط الثاني)
+- إزالة `ExternalModule.external`
+- إزالة `HarmonyInitDependency`
+- إهمال `Dependency.getInitFragments`
+  - **الترحيل**: استخدم `apply` `initFragments` بدلاً من ذلك
+- يأخذ `DependencyReference` الآن دالة لوحدة (function to a module) بدلاً من `Module`
+- إزالة `HarmonyImportSpecifierDependency.redirectedId`
+  - **الترحيل**: استخدم `setId` بدلاً من ذلك
+- acorn من الإصدار 5 -> 8
+- الاختبار (Testing)
+  - تعمل HotTestCases الآن لأهداف متعددة `async-node` `node` `web` `webworker`
+  - تعمل TestCases الآن أيضًا للتخزين المؤقت لنظام الملفات باستخدام `store: "instant"` و `store: "pack"`
+  - تعمل TestCases الآن أيضًا لمعرفات الوحدات الحتمية (deterministic module ids)
+- تمت إضافة أدوات لترتيب الواردات (imports) (يتم التحقق منها في CI)
+- لم يعد تعيين اسم الحزمة في وقت التشغيل (Chunk name mapping in runtime) يحتوي على إدخالات (entries) عندما يساوي اسم الحزمة معرف الحزمة
+- إضافة `resolvedModuleId`، `resolvedModuleIdentifier` و `resolvedModule` إلى الأسباب (reasons) في الإحصائيات (Stats) والتي تشير إلى الوحدة قبل التحسينات مثل رفع النطاق (scope hoisting)
+- عرض `resolvedModule` في إخراج `Stats` toString
+- تمت ترقية loader-runner: https://github.com/webpack/loader-runner/releases/tag/v3.0.0
+- لم تعد `file/context/missingDependencies` في `Compilation` مفروزة لأسباب تتعلق بالأداء
+  - لا تعتمد على الترتيب
+- تمت ترقية webpack-sources إلى الإصدار 2: https://github.com/webpack/webpack-sources/releases/tag/v2.0.1
+- تمت إزالة دعم webpack-command
+- استخدم schema-utils@2 للتحقق من صحة المخطط (schema validation)
+- يحتوي `Compiler.assetEmitted` على وسيط ثانٍ مُحسن بمزيد من المعلومات
+- يقوم `BannerPlugin` بحذف المسافات الزائدة (trailing whitespace)
+- تمت إزالة خيار `minChunkSize` من `LimitChunkCountPlugin`
+- إعادة التنظيم من الملفات المتعلقة بجافا سكريبت إلى دليل فرعي (sub-directory)
   - `webpack.JavascriptModulesPlugin` -> `webpack.javascript.JavascriptModulesPlugin`
-- Logger.getChildLogger added
-- change the default of entryOnly of the DllPlugin to true
-- remove special request shortening logic and use single relative paths for readable module names
-- allow webpack:// urls in SourceMaps to provided paths relative to webpack root context
-- add API to generate and process CLI arguments targeting webpack configuration
-- add `__system_context__` as context from System.js when using System.js as libraryTarget
-- add bigint support for the DefinePlugin
-- add bigint support for basic evaluations like maths
-- remove ability to modify the compilation hash after the hash has been created
-- remove HotModuleReplacementPlugin multiStep mode
-- `assetInfo` from `emitAsset` will now merge when nested objects or arrays are used
-- `[query]` is now a valid placeholder when for paths based on a `filename` like assets
-- add `Compilation.deleteAsset` to correctly delete an assets and non-shared related assets
-- expose `require("webpack-sources")` as `require("webpack").sources`
+- إضافة Logger.getChildLogger
+- تغيير الإعداد الافتراضي لـ `entryOnly` في DllPlugin إلى `true`
+- إزالة منطق تقصير الطلب الخاص (special request shortening logic) واستخدام مسارات نسبية مفردة (single relative paths) لأسماء وحدات قابلة للقراءة
+- السماح لعناوين webpack:// urls في SourceMaps بالمسارات المقدمة المتعلقة بالسياق الأساسي لـ webpack (webpack root context)
+- إضافة واجهة برمجة تطبيقات (API) لإنشاء ومعالجة وسيطات CLI التي تستهدف تكوين webpack
+- إضافة `__system_context__` كسياق (context) من System.js عند استخدام System.js كـ libraryTarget
+- إضافة دعم bigint لإضافة DefinePlugin
+- إضافة دعم bigint للتقييمات الأساسية (basic evaluations) مثل الرياضيات
+- إزالة القدرة على تعديل تجزئة التجميع (compilation hash) بعد إنشاء التجزئة
+- إزالة وضع الخطوات المتعددة (multiStep mode) لإضافة HotModuleReplacementPlugin
+- سوف تندمج الآن `assetInfo` من `emitAsset` عند استخدام الكائنات أو المصفوفات المتداخلة (nested objects or arrays)
+- يعد `[query]` الآن عنصرًا نائبًا (placeholder) صالحًا للمسارات بناءً على `filename` مثل الأصول (assets)
+- إضافة `Compilation.deleteAsset` لحذف الأصول (assets) والأصول غير المشتركة ذات الصلة بشكل صحيح
+- عرض `require("webpack-sources")` على هيئة `require("webpack").sources`
 - terser 5
-- Webpack can be written with a capital W when at the start of a sentence
+- يمكن كتابة Webpack بحرف W كبير عندما يكون في بداية جملة
