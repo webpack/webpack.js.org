@@ -28,6 +28,7 @@ Explore what's new:
   - [`@value` in URLs and `@import`](#value-in-urls-and-import)
   - [Multiple Aliases via `exportsConvention`](#multiple-aliases-via-exportsconvention)
   - [`linkInsert` Hook](#linkinsert-hook)
+  - [`orderModules` Hook](#ordermodules-hook)
 - [**JavaScript and ESM**](#javascript-and-esm)
   - [Anonymous Default Export Naming](#anonymous-default-export-naming)
   - [Preserving `defer` and `source` Phase on Externals](#preserving-defer-and-source-phase-on-externals)
@@ -319,6 +320,43 @@ module.exports = {
 ```
 
 The hook is a `SyncWaterfallHook<[string, Chunk]>`. Return the default `source` to keep the original behavior, or return your own JS to override where (and how) the link is attached.
+
+### `orderModules` Hook
+
+When a chunk pulls in CSS from several files, webpack's default ordering is a topological sort of their import graph. That's the right call in most cases, but on real-world projects the import graph can be ambiguous enough to trigger the "Conflicting order between CSS …" warning, with no clean way out short of restructuring imports.
+
+A new `orderModules` hook on `CssModulesPlugin.getCompilationHooks(compilation)` gives plugin authors a deterministic escape hatch. It runs once per CSS source type (`CSS_IMPORT_TYPE` and `CSS_TYPE`) with the chunk's modules pre-sorted by full module name. Return an ordered `Module[]` to override the default, or return `undefined` to fall through to webpack's existing import-order topological sort.
+
+```js
+const webpack = require("webpack");
+
+class CssOrderByPathPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap(
+      "CssOrderByPathPlugin",
+      (compilation) => {
+        const hooks =
+          webpack.css.CssModulesPlugin.getCompilationHooks(compilation);
+
+        // Modules arrive pre-sorted by full module name; return as-is for
+        // a deterministic file-path order that side-steps the conflicting
+        // order warning.
+        hooks.orderModules.tap(
+          "CssOrderByPathPlugin",
+          (_chunk, modules) => modules,
+        );
+      },
+    );
+  }
+}
+
+module.exports = {
+  experiments: { css: true },
+  plugins: [new CssOrderByPathPlugin()],
+};
+```
+
+The hook is a `SyncBailHook<[Chunk, Module[], Compilation], Module[] | undefined>`. The first tap to return a non-`undefined` value wins.
 
 ## JavaScript and ESM
 
