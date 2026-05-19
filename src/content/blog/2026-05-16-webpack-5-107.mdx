@@ -18,6 +18,7 @@ Explore what's new:
 - [**HTML Modules (Experimental)**](#html-modules-experimental)
   - [`experiments.html` Flag](#experimentshtml-flag)
   - [Inline `<style>` Tags](#inline-style-tags)
+  - [Inline `<script>` Tags](#inline-script-tags)
   - [`<script src>` and `<link rel="modulepreload">`](#script-src-and-link-relmodulepreload)
   - [`webpackIgnore` Magic Comment](#webpackignore-magic-comment)
 - [**TypeScript Support (Experimental)**](#typescript-support-experimental)
@@ -90,6 +91,33 @@ When webpack finds a `<style>` block inside an HTML module, it routes the CSS bo
 ```
 
 `<style type="text/css">` and `<style>` with no `type` attribute are processed. Anything with a non-CSS `type` is passed through untouched. This covers the inline-style behavior of `html-loader` without needing it in the pipeline.
+
+### Inline `<script>` Tags
+
+Inline `<script>` bodies are routed through the same entry pipeline that already handles `<script src>`. Each `<script>` body becomes its own webpack entry: classic inline scripts are bundled as CommonJS, and `<script type="module">` bodies are bundled as ESM. The tag in the emitted HTML is rewritten to `<script src="…">` pointing at the generated chunk, with the body cleared.
+
+```html
+<!-- src/page.html -->
+<!doctype html>
+<html>
+  <body>
+    <script type="module">
+      import { greet } from "./lib.js";
+      greet("world");
+    </script>
+
+    <script>
+      console.log("classic inline script");
+    </script>
+  </body>
+</html>
+```
+
+The same behaviors that apply to external `<script src>` apply here too:
+
+- When `output.module` is enabled, classic inline `<script>` tags are auto-upgraded to `type="module"`, matching the auto-upgrade for `<script src>`.
+- `webpackIgnore` works on inline `<script>` tags as well, leaving the original body untouched.
+- Non-JS `type` values like `application/ld+json` and `importmap` pass through unchanged.
 
 ### `<script src>` and `<link rel="modulepreload">`
 
