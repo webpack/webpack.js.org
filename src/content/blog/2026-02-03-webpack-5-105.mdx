@@ -2,64 +2,64 @@
 title: Webpack 5.105
 sort: 20260203
 contributors:
-  - bjohansebas
+  - ameencfw
+  - RlxChap2
 ---
 
-Webpack 5.105 brings several improvements, both in code generation and bug fixes.
+يجلب Webpack 5.105 عدة تحسينات، سواء في توليد الأكواد أو إصلاح الأخطاء.
 
-- [Two Low-Severity CVEs Fixed in Webpack](#two-low-severity-cves-fixed-in-webpack)
-- [`tsconfig.json` Alias Resolution Without Requiring plugins](#tsconfigjson-alias-resolution-without-requiring-plugins)
-- [Automatic Module Resolution for Web Workers](#automatic-module-resolution-for-web-workers)
-- [Support Import Specifier Guard](#support-import-specifier-guard)
-- [Support `import.defer()` for Context Module](#support-importdefer-for-context-module)
-- [Preserving Custom `import.meta` Properties](#preserving-custom-importmeta-properties)
-- [Better Control of Source Maps in `devtool`](#better-control-of-source-maps-in-devtool)
-- [Cleaner ESM output for Node.js and modern builds](#cleaner-esm-output-for-nodejs-and-modern-builds)
-- [Other Improvements and Bug Fixes](#other-improvements-and-bug-fixes)
+- [إصلاح ثغرتين أمنيتين (CVEs) منخفضتي الخطورة في Webpack](#two-low-severity-cves-fixed-in-webpack)
+- [تحليل الأسماء المستعارة في `tsconfig.json` دون الحاجة إلى إضافات (plugins)](#tsconfigjson-alias-resolution-without-requiring-plugins)
+- [تحليل الوحدات (Module Resolution) التلقائي لـ Web Workers](#automatic-module-resolution-for-web-workers)
+- [دعم حارس محدد الاستيراد (Import Specifier Guard)](#support-import-specifier-guard)
+- [دعم `import.defer()` لوحدة السياق (Context Module)](#support-importdefer-for-context-module)
+- [الحفاظ على الخصائص المخصصة في `import.meta`](#preserving-custom-importmeta-properties)
+- [تحكم أفضل في خرائط المصدر (Source Maps) في `devtool`](#better-control-of-source-maps-in-devtool)
+- [مخرجات ESM أنظف لـ Node.js وعمليات البناء الحديثة](#cleaner-esm-output-for-nodejs-and-modern-builds)
+- [تحسينات وإصلاحات أخرى](#other-improvements-and-bug-fixes)
 
 ---
 
-## Two Low-Severity CVEs Fixed in Webpack
+## إصلاح ثغرتين أمنيتين (CVEs) منخفضتي الخطورة في Webpack
 
-Two new low-severity CVEs in Webpack have been fixed and published.
-By default, you are safe; these issues only affect users of the experimental
-[`experiments.buildHttp`](/configuration/experiments/#experimentsbuildhttp) option.
+تم إصلاح ونشر ثغرتين أمنيتين (CVEs) جديدتين منخفضتي الخطورة في Webpack.
+بشكل افتراضي، أنت في أمان؛ هذه المشاكل تؤثر فقط على مستخدمي الخيار التجريبي
+[`experiments.buildHttp`](/configuration/experiments/#experimentsbuildhttp).
 
-### Affected CVEs:
+### الثغرات (CVEs) المتأثرة:
 
 #### CVE-2025-68157
 
-- For more details, see the advisory: [GHSA-38r7-794h-5758](https://github.com/webpack/webpack/security/advisories/GHSA-38r7-794h-5758)
-- Affected versions: `>=5.49.0 <5.104.0`
+- لمزيد من التفاصيل، راجع الاستشارة: [GHSA-38r7-794h-5758](https://github.com/webpack/webpack/security/advisories/GHSA-38r7-794h-5758)
+- الإصدارات المتأثرة: `>=5.49.0 <5.104.0`
 
 #### CVE-2025-68458
 
-- For more details, see the advisory: [GHSA-8fgc-7cc6-rx7x](https://github.com/webpack/webpack/security/advisories/GHSA-8fgc-7cc6-rx7x)
-- Affected versions: `>=5.49.0 <5.104.1`
+- لمزيد من التفاصيل، راجع الاستشارة: [GHSA-8fgc-7cc6-rx7x](https://github.com/webpack/webpack/security/advisories/GHSA-8fgc-7cc6-rx7x)
+- الإصدارات المتأثرة: `>=5.49.0 <5.104.1`
 
-Even though these are low-severity CVEs, it’s still a good idea to
-update if you use the affected versions.
+على الرغم من أن هذه الثغرات منخفضة الخطورة، إلا أنه من الجيد دائمًا
+التحديث إذا كنت تستخدم الإصدارات المتأثرة.
 
-For more information on reporting security vulnerabilities,
-see the [Webpack Security Policy](https://github.com/webpack/webpack/security/policy)
-.
+لمزيد من المعلومات حول الإبلاغ عن الثغرات الأمنية،
+راجع [سياسة أمان Webpack](https://github.com/webpack/webpack/security/policy).
 
-## `tsconfig.json` Alias Resolution Without Requiring plugins
+## تحليل الأسماء المستعارة في `tsconfig.json` دون الحاجة إلى إضافات (plugins)
 
-Module resolution can be configured to read `compilerOptions.baseUrl` and `compilerOptions.paths` from `tsconfig.json` and apply those aliases when resolving imports. As a result, it is no longer necessary to install and configure the external `tsconfig-paths-webpack-plugin` just to make TypeScript path aliases work during bundling.
+يمكن الآن تكوين تحليل الوحدات (Module resolution) لقراءة `compilerOptions.baseUrl` و `compilerOptions.paths` من ملف `tsconfig.json` وتطبيق تلك الأسماء المستعارة عند تحليل الواردات (imports). نتيجة لذلك، لم يعد من الضروري تثبيت وتكوين الإضافة الخارجية `tsconfig-paths-webpack-plugin` فقط لجعل الأسماء المستعارة لمسارات TypeScript تعمل أثناء الحزم (bundling).
 
-In the webpack configuration, the `resolve.tsconfig` option is used to specify which tsconfig file should be used as the source (which is also useful in monorepos or setups with multiple tsconfig files):
+في تكوين webpack، يُستخدم الخيار `resolve.tsconfig` لتحديد ملف tsconfig الذي يجب استخدامه كمصدر (وهو مفيد أيضًا في المستودعات الأحادية monorepos أو الإعدادات التي تحتوي على ملفات tsconfig متعددة):
 
 ```js
 // webpack.config.js
 module.exports = {
   resolve: {
-    tsconfig: "./tsconfig.json", // Can be `false` (disabled), `true` (use the default tsconfig.json), a path to a `tsconfig.json` file, or an object with configFile and references options.
+    tsconfig: "./tsconfig.json", // يمكن أن يكون `false` (معطل)، `true` (استخدام tsconfig.json الافتراضي)، أو مسارًا إلى ملف `tsconfig.json`، أو كائنًا بخيارات configFile و references.
   },
 };
 ```
 
-Example of aliases in tsconfig.json:
+مثال على الأسماء المستعارة في tsconfig.json:
 
 ```json
 {
@@ -72,21 +72,21 @@ Example of aliases in tsconfig.json:
 }
 ```
 
-And then in the code:
+وبعد ذلك في الكود:
 
 ```ts
 import Button from "@/components/Button";
 ```
 
-This way, `@/components/Button` can be resolved according to the rules defined in `tsconfig.json`, avoiding the need to duplicate aliases in `resolve.alias` and reducing discrepancies between what TypeScript understands and what the bundler resolves.
+بهذه الطريقة، يمكن تحليل `@/components/Button` وفقًا للقواعد المحددة في `tsconfig.json`، مما يتجنب الحاجة إلى تكرار الأسماء المستعارة في `resolve.alias` ويقلل من التناقضات بين ما يفهمه TypeScript وما يقوم المحزم (bundler) بتحليله.
 
-## Automatic Module Resolution for Web Workers
+## تحليل الوحدات (Module Resolution) التلقائي لـ Web Workers
 
-When importing a package specifically to be used in a Web Worker in Webpack, module resolution can prioritize files like `index.worker.js` over `index.js` when using [conditional exports](https://nodejs.org/api/packages.html#conditional-exports) defined in the `exports` field of `package.json`.
+عند استيراد حزمة مخصصة لاستخدامها في Web Worker في Webpack، يمكن لتحليل الوحدات إعطاء الأولوية لملفات مثل `index.worker.js` بدلاً من `index.js` عند استخدام [الصادرات المشروطة (conditional exports)](https://nodejs.org/api/packages.html#conditional-exports) المعرفة في حقل `exports` في `package.json`.
 
-This means that if you define conditions such as `"worker"` in your package's exports, Webpack will automatically select the appropriate version, like `index.worker.js`, whenever the package is imported inside a worker context. There’s no need to modify the `resolve.conditionNames` option or make additional Webpack configuration changes; you just need to specify the conditions correctly in `package.json`.
+هذا يعني أنه إذا قمت بتحديد شروط مثل `"worker"` في صادرات حزمتك، سيقوم Webpack تلقائيًا بتحديد الإصدار المناسب، مثل `index.worker.js`، كلما تم استيراد الحزمة داخل سياق الـ worker. لا حاجة لتعديل خيار `resolve.conditionNames` أو إجراء تغييرات إضافية في تكوين Webpack؛ تحتاج فقط إلى تحديد الشروط بشكل صحيح في `package.json`.
 
-For example, in `package.json`:
+على سبيل المثال، في `package.json`:
 
 ```json
 {
@@ -100,12 +100,12 @@ For example, in `package.json`:
 }
 ```
 
-Now, when importing the `foo` package inside a Worker, Webpack will automatically choose the `index.worker.js` file according to the export conditions:
+الآن، عند استيراد حزمة `foo` داخل Worker، سيختار Webpack تلقائيًا ملف `index.worker.js` وفقًا لشروط التصدير:
 
 {/* eslint-disable */}
 
 ```js
-// This import is inside a Worker context, so Webpack uses index.worker.js
+// هذا الاستيراد موجود داخل سياق Worker، لذا يستخدم Webpack ملف index.worker.js
 const worker = new Worker(new URL("foo", import.meta.url), {
   type: "module",
 });
@@ -113,25 +113,25 @@ const worker = new Worker(new URL("foo", import.meta.url), {
 
 {/* eslint-enable */}
 
-## Support Import Specifier Guard
+## دعم حارس محدد الاستيراد (Import Specifier Guard)
 
-Support for import specifier guards has been added, an improvement that helps the bundler better understand a common pattern checking whether an export exists before using it. Previously, even if the code was correctly guarded by an if, the access could be interpreted as unconditional and result in warnings like “export … was not found”.
+تمت إضافة دعم لحراس محدد الاستيراد (import specifier guards)، وهو تحسين يساعد المحزم (bundler) على فهم النمط الشائع بشكل أفضل عند التحقق مما إذا كان التصدير موجودًا قبل استخدامه. في السابق، حتى لو كان الكود محميًا بشكل صحيح بواسطة عبارة if، كان من الممكن تفسير الوصول على أنه غير مشروط ويؤدي إلى تحذيرات مثل "export … was not found" (التصدير ... غير موجود).
 
-With this change, those checks are recognized as a signal that the access is conditional, and the analysis is adjusted accordingly. In practice, this makes it possible to write code that is more compatible across different versions of the same library, where an export may or may not exist, without unnecessary noise during compilation.
+مع هذا التغيير، يُعترف بهذه التحققات كإشارة على أن الوصول مشروط، ويتم تعديل التحليل وفقًا لذلك. من الناحية العملية، يجعل هذا من الممكن كتابة كود متوافق بشكل أكبر عبر الإصدارات المختلفة لنفس المكتبة، حيث قد يوجد التصدير أو لا يوجد، دون تشويش غير ضروري أثناء التحويل البرمجي (compilation).
 
 ```js
 import * as React from "react";
 
 if (React.useId) {
-  // create guard for `React` => userId: ["", "useId"].
+  // إنشاء حارس لـ `React` => userId: ["", "useId"].
   React.useId; // React -> "useId" is in guard.
   React; //  React -> "" is in guard.
 }
 ```
 
-## Support `import.defer()` for Context Module
+## دعم `import.defer()` لوحدة السياق (Context Module)
 
-Webpack now supports `import.defer()` even when the import is a context module (that is, when the import path is built dynamically and webpack needs to include a set of possible files). In practice, this makes it much easier to defer the loading of a module selected at runtime, even when that module comes from a dynamic expression pointing to a directory. This enables patterns like “choose between a.js or b.js and load it only when needed”, with webpack generating the appropriate context so that import.defer() works correctly.
+يدعم Webpack الآن `import.defer()` حتى عندما يكون الاستيراد وحدة سياق (context module) (أي عندما يتم بناء مسار الاستيراد ديناميكيًا ويحتاج webpack إلى تضمين مجموعة من الملفات المحتملة). عمليًا، يجعل هذا من الأسهل بكثير تأجيل تحميل الوحدة المحددة في وقت التشغيل، حتى عندما تأتي تلك الوحدة من تعبير ديناميكي يشير إلى مجلد. ويتيح هذا أنماطًا مثل "اختر بين a.js أو b.js وقم بتحميله فقط عند الحاجة"، مع توليد webpack للسياق المناسب لضمان عمل import.defer() بشكل صحيح.
 
 {/* eslint-disable */}
 
@@ -142,20 +142,20 @@ import.defer("./dir/" + file);
 
 {/* eslint-enabled */}
 
-## Preserving Custom `import.meta` Properties
+## الحفاظ على الخصائص المخصصة في `import.meta`
 
-Webpack now preserves custom `import.meta` properties during bundling when [`output.module`](/configuration/output/#outputmodule) is enabled. Previously, Webpack would remove any unknown `import.meta` properties (such as `import.meta.customProp`), causing the loss of contextual or tool-specific information in the build.
+يحافظ Webpack الآن على الخصائص المخصصة لـ `import.meta` أثناء الحزم عند تفعيل [`output.module`](/configuration/output/#outputmodule). في السابق، كان Webpack يقوم بإزالة أي خصائص `import.meta` غير معروفة (مثل `import.meta.customProp`)، مما يتسبب في فقدان المعلومات السياقية أو الخاصة بالأدوات في البناء.
 
-With this change, any non-standard property you add to `import.meta` will remain intact in the generated code, allowing the use of custom meta-information or additional signals in modern applications.
+مع هذا التغيير، ستبقى أي خاصية غير قياسية تضيفها إلى `import.meta` سليمة في الكود المُولد، مما يسمح باستخدام المعلومات الوصفية (meta-information) المخصصة أو الإشارات الإضافية في التطبيقات الحديثة.
 
 ```js
 if (!import.meta.UNKNOWN_PROPERTY) {
-  // runtime assignment
+  // تخصيص وقت التشغيل (runtime assignment)
   import.meta.UNKNOWN_PROPERTY = "HELLO";
 }
 ```
 
-If `output.module` is not enabled, Webpack will continue to remove unknown properties unless you explicitly indicate otherwise. To preserve them manually, you can configure [`module.parser.javascript.importMeta`](/configuration/module/#moduleparserjavascriptimportmeta) as 'preserve-unknown' in your `webpack.config.js`:
+إذا لم يكن `output.module` مُفعلاً، سيستمر Webpack في إزالة الخصائص غير المعروفة ما لم تشر صراحةً إلى خلاف ذلك. للحفاظ عليها يدويًا، يمكنك تكوين [`module.parser.javascript.importMeta`](/configuration/module/#moduleparserjavascriptimportmeta) كـ 'preserve-unknown' في ملف `webpack.config.js`:
 
 ```js
 // webpack.config.js
@@ -170,18 +170,18 @@ module.exports = {
 };
 ```
 
-This way, even without `output.module: true`, any custom import.meta property, such as `import.meta.customProp`, will be preserved in the build.
+بهذه الطريقة، حتى بدون `output.module: true`، سيتم الحفاظ على أي خاصية مخصصة لـ import.meta، مثل `import.meta.customProp`، في البناء.
 
-## Better Control of Source Maps in `devtool`
+## تحكم أفضل في خرائط المصدر (Source Maps) في `devtool`
 
-Webpack now allows the `devtool` option to accept both a **string** and an array of objects for advanced configurations.
+يسمح Webpack الآن لخيار `devtool` بقبول كل من **سلسلة نصية (string)** ومصفوفة من الكائنات (array of objects) للتكوينات المتقدمة.
 
-Each object in the array can include:
+يمكن أن يتضمن كل كائن في المصفوفة:
 
-- `type`: which can be `"all"`, `"css"`, or `"javascript"`.
-- `use`: where you define the type of source map to generate.
+- `type`: والذي يمكن أن يكون `"all"`, `"css"`, أو `"javascript"`.
+- `use`: حيث تحدد نوع خريطة المصدر التي سيتم توليدها.
 
-This enables specifying different types of source maps for different resources in your project. For example:
+يتيح هذا تحديد أنواع مختلفة من خرائط المصدر للموارد المختلفة في مشروعك. على سبيل المثال:
 
 ```js
 // webpack.config.js
@@ -203,25 +203,24 @@ module.exports = {
 };
 ```
 
-In this example, standard source maps are applied to all modules, and inline source maps are used specifically for CSS files.
+في هذا المثال، يتم تطبيق خرائط المصدر القياسية على جميع الوحدات، وتُستخدم خرائط المصدر المُضمنة (inline) بشكل خاص لملفات CSS.
 
-This new option is especially useful if you are using Webpack’s [experimental CSS compilation feature](/configuration/experiments/#experimentscss), as it gives you greater control over the debugging process and improves integration with external tools.
+هذا الخيار الجديد مفيد بشكل خاص إذا كنت تستخدم [ميزة تحويل CSS التجريبية](/configuration/experiments/#experimentscss) الخاصة بـ Webpack، حيث تمنحك تحكمًا أكبر في عملية تصحيح الأخطاء (debugging) وتحسّن التكامل مع الأدوات الخارجية.
 
-It’s worth noting that the classic string syntax, like `devtool: "source-map"`, remains fully valid and supported.
+الجدير بالذكر أن الصياغة النصية الكلاسيكية، مثل `devtool: "source-map"`، تظل صالحة تمامًا ومدعومة.
 
-## Cleaner ESM Output for Node.js and Modern Builds
+## مخرجات ESM أنظف لـ Node.js وعمليات البناء الحديثة
 
-This improvement in Webpack optimizes the handling and representation of Node.js native modules (such as `fs`, `path`, or `crypto`) during bundling, especially when using the [`output.module`](/configuration/output/#outputmodule) option in the configuration. When `output.module: true` is enabled, Webpack now generates imports of native modules using ES module syntax `import ... from "module"` instead of CommonJS `require("module")`, regardless of whether the code will run in a web or Node.js environment.
+يحسّن هذا التحسين في Webpack معالجة وتمثيل وحدات Node.js الأصلية (مثل `fs`, `path`, أو `crypto`) أثناء عملية الحزم، وخاصة عند استخدام الخيار [`output.module`](/configuration/output/#outputmodule) في التكوين. عند تفعيل `output.module: true`، يقوم Webpack الآن بتوليد استيرادات للوحدات الأصلية باستخدام صياغة ES module أي `import ... from "module"` بدلاً من `require("module")` الخاصة بـ CommonJS، بغض النظر عما إذا كان الكود سيعمل في بيئة الويب أو Node.js.
 
-## Other Improvements and Bug Fixes
+## تحسينات وإصلاحات أخرى
 
-- **Webpack-dev-server** has released a new version to update dependencies that had reported transitive vulnerabilities, so updating is recommended. Additionally, the option to close the error overlay by pressing the ESC key has been added, and several bugs have been fixed. Check the [release for more information](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
-- **Webpack-bundle-analyzer** has received important improvements and fixes for the user experience. Visual issues with tooltips in dark mode have been resolved, and the analysis of bundles using IIFE has been made more robust, preventing errors. Additionally, support for Zstandard compression has been added, available only on Node.js 22.15 or higher. Check the [changelog for more information](https://github.com/webpack/webpack-bundle-analyzer/blob/main/CHANGELOG.md)
-- **Mini-css-extract-plugin** introduces new features and bug fixes. Among the main changes, the plugin now respects the `output.cssFilename` and `output.cssChunkFilename` options, allowing more precise control over the names of the generated CSS files. Additionally, a bug was fixed that prevented the generation of the `contentHash` for a chunk when the CSS module set had zero size, thus avoiding unnecessary hashes in those cases. Check the [release for more information](https://github.com/webpack/mini-css-extract-plugin/releases/tag/v2.10.0)
+- أصدر **Webpack-dev-server** إصدارًا جديدًا لتحديث التبعيات (dependencies) التي أُبلغ عن وجود ثغرات انتقالية بها، لذا يوصى بالتحديث. بالإضافة إلى ذلك، تمت إضافة خيار لإغلاق تراكب الخطأ (error overlay) بالضغط على مفتاح ESC، وتم إصلاح العديد من الأخطاء. تحقق من [الإصدار لمزيد من المعلومات](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
+- تلقى **Webpack-bundle-analyzer** تحسينات وإصلاحات مهمة لتجربة المستخدم. تم حل المشكلات البصرية المتعلقة بـ tooltips في الوضع المظلم، وأصبح تحليل الحزم باستخدام IIFE أكثر قوة، مما يمنع الأخطاء. بالإضافة إلى ذلك، تمت إضافة دعم لضغط Zstandard، وهو متاح فقط في Node.js 22.15 أو أعلى. تحقق من [سجل التغييرات لمزيد من المعلومات](https://github.com/webpack/webpack-bundle-analyzer/blob/main/CHANGELOG.md).
+- يقدم **Mini-css-extract-plugin** ميزات جديدة وإصلاحات للأخطاء. من بين التغييرات الرئيسية، أصبحت الإضافة الآن تحترم الخيارين `output.cssFilename` و `output.cssChunkFilename`، مما يسمح بتحكم أدق في أسماء ملفات CSS المولدة. بالإضافة إلى ذلك، تم إصلاح خلل كان يمنع توليد `contentHash` للـ chunk عندما يكون حجم مجموعة وحدات CSS صفراً، مما يتجنب التجزئة (hashes) غير الضرورية في تلك الحالات. تحقق من [الإصدار لمزيد من المعلومات](https://github.com/webpack/mini-css-extract-plugin/releases/tag/v2.10.0).
 
-Several bug fixes have been resolved since version [5.104](https://github.com/webpack/webpack/releases/tag/v5.104.0). Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for more details
+تم حل العديد من الأخطاء منذ الإصدار [5.104](https://github.com/webpack/webpack/releases/tag/v5.104.0). تحقق من [سجل التغييرات (changelog)](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) لمزيد من التفاصيل.
 
-## Thanks
+## شكر
 
-A big thank you to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring)
-who made Webpack 5.105 possible. Your support, whether through code contributions, documentation, or financial sponsorship, helps keep Webpack evolving and improving for everyone.
+شكر كبير لجميع المساهمين و[الرعاة](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring) الذين جعلوا Webpack 5.105 ممكنًا. دعمكم، سواء كان عبر المساهمة بالكود، أو التوثيق، أو الرعاية المالية، يساعد في استمرار تطور وتحسن Webpack للجميع.

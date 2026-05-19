@@ -1,38 +1,21 @@
 ---
-title: Configuration
+title: التخصيص
 sort: 1
 contributors:
-  - sokra
-  - skipjack
-  - grgur
-  - bondz
-  - sricc
-  - terinjokes
-  - mattce
-  - kbariotis
-  - sterlingvix
-  - jeremenichelli
-  - dasarianudeep
-  - lukasgeiter
-  - EugeneHlushko
-  - bigdawggi
-  - anshumanv
-  - textbook
-  - coly010
-  - chenxsan
+  - RlxChap2
 ---
 
-Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
+خارج الصندوق، لا يُلزمك webpack باستخدام ملف تكوين. غير أنّه سيفترض أنّ نقطة الدخول لمشروعك هي `src/index.js`، وسيُخرج الناتج في `dist/main.js` مُصغَّراً ومُحسَّناً للإنتاج.
 
-Usually, your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
+عادةً ما تحتاج مشاريعك إلى توسيع هذه الوظائف، ولهذا يمكنك إنشاء ملف `webpack.config.js` في المجلد الجذر، وسيلتقطه webpack تلقائياً.
 
-All the available configuration options are specified below.
+كل خيارات التخصيص المتاحة موضّحة في الأسفل.
 
-T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
+T> هل أنت جديد على webpack؟ ألقِ نظرة على دليلنا حول [المفاهيم الأساسية](/concepts) لتبدأ منه!
 
-## Use a different configuration file
+## استخدام ملف تكوين مختلف
 
-If for some reason you want to use a different configuration file depending on certain situations, you can change this via command line by using the `--config` flag.
+إن أردت لسبب ما استخدام ملف تكوين مختلف بحسب الموقف، يمكنك تغيير ذلك من سطر الأوامر عبر الراية `--config`.
 
 **package.json**
 
@@ -42,17 +25,17 @@ If for some reason you want to use a different configuration file depending on c
 }
 ```
 
-## Set up a new webpack project
+## تجهيز مشروع webpack جديد
 
-W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
+W> يُطبّق webpack القيم الافتراضية للتكوين بعد تطبيق [القيم الافتراضية للـ plugins](/contribute/writing-a-plugin/#configuration-defaults).
 
-Webpack has a huge set of options which might be overwhelming to you, please take advantage of `webpack-cli` starting from version v6.0.0 new tool [create-webpack-app](https://github.com/webpack/webpack-cli/) which could rapidly generate webpack application with specific configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.
+يحتوي webpack على مجموعة ضخمة من الخيارات قد تكون مربكة بالنسبة لك، لذا استفد من الأداة الجديدة [create-webpack-app](https://github.com/webpack/webpack-cli/) التي يقدّمها `webpack-cli` ابتداءً من الإصدار v6.0.0، وهي تُولّد لك تطبيق webpack بسرعة، بملفات تكوين تناسب متطلبات مشروعك. ستطرح عليك بضعة أسئلة قبل أن تُنشئ ملف التخصيص.
 
 ```bash
 npx create-webpack-app [command] [options]
 ```
 
-npx might prompt you to install `create-webpack-app` if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the new webpack application generation.
+قد يطلب منك npx تثبيت `create-webpack-app` إن لم يكن مثبَّتاً في المشروع أو على المستوى العام. وقد تُضاف إلى مشروعك حزم إضافية تبعاً للخيارات التي ستختارها أثناء توليد التطبيق الجديد.
 
 ```bash
 $ npx create-webpack-app init
