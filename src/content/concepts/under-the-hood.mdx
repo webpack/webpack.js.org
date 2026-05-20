@@ -2,21 +2,18 @@
 title: Under The Hood
 sort: 14
 contributors:
-  - smelukov
-  - EugeneHlushko
-  - chenxsan
-  - amirsaeed671
+  - RlxChap2
 ---
 
-> This section describes webpack internals and can be useful for plugin developers
+> يصف هذا القسم التفاصيل الداخلية لـ webpack، ويمكن أن يكون مفيدًا لمطوري الإضافات.
 
-The bundling is a function that takes some files and emits others.
+التجميع هو دالة تأخذ بعض الملفات وتصدر ملفات أخرى.
 
-But between input and output, it also has [modules](/concepts/modules/), [entry points](/concepts/entry-points/), chunks, chunk groups, and many other intermediate parts.
+لكن بين الإدخال والإخراج، توجد أيضًا [وحدات](/concepts/modules/) و[نقاط دخول](/concepts/entry-points/) و chunks و chunk groups وأجزاء وسيطة أخرى كثيرة.
 
-## The main parts
+## الأجزاء الرئيسية
 
-Every file used in your project is a [Module](/concepts/modules/)
+كل ملف مستخدم في مشروعك هو [وحدة](/concepts/modules/).
 
 **./index.js**
 
@@ -30,11 +27,11 @@ import app from "./app.js";
 export default "the app";
 ```
 
-By using each other, the modules form a graph (`ModuleGraph`).
+من خلال استخدام الوحدات لبعضها، تشكّل هذه الوحدات مخططًا (`ModuleGraph`).
 
-During the bundling process, modules are combined into chunks.
-Chunks combine into chunk groups and form a graph (`ChunkGraph`) interconnected through modules.
-When you describe an entry point - under the hood, you create a chunk group with one chunk.
+أثناء عملية التجميع، تُدمج الوحدات في chunks.
+وتُدمج chunks في chunk groups وتشكل مخططًا (`ChunkGraph`) مترابطًا عبر الوحدات.
+عندما تصف نقطة دخول، فأنت داخليًا تنشئ chunk group يحتوي chunk واحدًا.
 
 **./webpack.config.js**
 
@@ -44,10 +41,10 @@ export default {
 };
 ```
 
-One chunk group with the `main` name created (`main` is the default name for an entry point).
-This chunk group contains `./index.js` module. As the parser handles imports inside `./index.js` new modules are added into this chunk.
+يُنشأ chunk group واحد باسم `main`، وهو الاسم الافتراضي لنقطة الدخول.
+يحتوي هذا chunk group على وحدة `./index.js`. وبينما يعالج parser الاستيرادات داخل `./index.js`، تُضاف وحدات جديدة إلى هذا chunk.
 
-Another example:
+مثال آخر:
 
 **./webpack.config.js**
 
@@ -60,19 +57,19 @@ export default {
 };
 ```
 
-Two chunk groups with names `home` and `about` are created.
-Each of them has a chunk with a module - `./home.js` for `home` and `./about.js` for `about`
+يُنشأ chunk groupان باسمين `home` و `about`.
+لكل واحد منهما chunk يحتوي وحدة: `./home.js` لـ `home` و `./about.js` لـ `about`.
 
-> There might be more than one chunk in a chunk group. For example [SplitChunksPlugin](/plugins/split-chunks-plugin/) splits a chunk into one or more chunks.
+> قد يوجد أكثر من chunk داخل chunk group واحد. على سبيل المثال، يقوم [SplitChunksPlugin](/plugins/split-chunks-plugin/) بتقسيم chunk إلى chunk واحد أو أكثر.
 
 ## Chunks
 
-Chunks come in two forms:
+تأتي chunks في شكلين:
 
-- `initial` is the main chunk for the entry point. This chunk contains all the modules and their dependencies that you specify for an entry point.
-- `non-initial` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunksPlugin](/plugins/split-chunks-plugin/) is being used.
+- `initial`: هو chunk الرئيسي لنقطة الدخول. يحتوي هذا chunk على كل الوحدات وتبعياتها التي تحددها لنقطة دخول.
+- `non-initial`: هو chunk يمكن تحميله كسولًا. قد يظهر عند استخدام [dynamic import](/guides/code-splitting/#dynamic-imports) أو [SplitChunksPlugin](/plugins/split-chunks-plugin/).
 
-Each chunk has a corresponding **asset**. The assets are the output files - the result of bundling.
+لكل chunk **أصل** مقابل. الأصول هي ملفات الإخراج الناتجة عن التجميع.
 
 **webpack.config.js**
 
@@ -93,23 +90,23 @@ import("./app.jsx").then((App) => {
 });
 ```
 
-Initial chunk with name `main` is created. It contains:
+يُنشأ chunk ابتدائي باسم `main`. يحتوي على:
 
 - `./src/index.jsx`
 - `react`
 - `react-dom`
 
-and all their dependencies, except `./app.jsx`
+وكل تبعياتها، باستثناء `./app.jsx`.
 
-Non-initial chunk for `./app.jsx` is created as this module is imported dynamically.
+يُنشأ chunk غير ابتدائي لـ `./app.jsx` لأن هذه الوحدة مستوردة ديناميكيًا.
 
-**Output:**
+**الإخراج:**
 
-- `/dist/main.js` - an `initial` chunk
-- `/dist/394.js` - `non-initial` chunk
+- `/dist/main.js`: chunk من نوع `initial`
+- `/dist/394.js`: chunk من نوع `non-initial`
 
-By default, there is no name for `non-initial` chunks so that a unique ID is used instead of a name.
-When using dynamic import we may specify a chunk name explicitly by using a ["magic" comment](/api/module-methods/#magic-comments):
+افتراضيًا، لا يوجد اسم لـ chunks من نوع `non-initial`، لذلك يُستخدم معرف فريد بدلًا من الاسم.
+عند استخدام dynamic import يمكننا تحديد اسم chunk صراحة باستخدام تعليق ["سحري"](/api/module-methods/#magic-comments):
 
 ```jsx
 import(
@@ -121,21 +118,21 @@ import(
 });
 ```
 
-**Output:**
+**الإخراج:**
 
-- `/dist/main.js` - an `initial` chunk
-- `/dist/app.js` - `non-initial` chunk
+- `/dist/main.js`: chunk من نوع `initial`
+- `/dist/app.js`: chunk من نوع `non-initial`
 
-## Output
+## الإخراج
 
-The names of the output files are affected by the two fields in the config:
+تتأثر أسماء ملفات الإخراج بحقلين في التكوين:
 
-- [`output.filename`](/configuration/output/#outputfilename) - for `initial` chunk files
-- [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - for `non-initial` chunk files
-- In some cases chunks are used `initial` and `non-initial`. In those cases `output.filename` is used.
+- [`output.filename`](/configuration/output/#outputfilename): لملفات chunks من نوع `initial`
+- [`output.chunkFilename`](/configuration/output/#outputchunkfilename): لملفات chunks من نوع `non-initial`
+- في بعض الحالات تُستخدم chunks كـ `initial` و `non-initial`. في هذه الحالات يُستخدم `output.filename`.
 
-A [few placeholders](/configuration/output/#template-strings) are available in these fields. Most often:
+توجد [عدة placeholders](/configuration/output/#template-strings) متاحة في هذه الحقول. الأكثر استخدامًا:
 
-- `[id]` - chunk id (e.g. `[id].js` -> `485.js`)
-- `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will be used
-- `[contenthash]` - md4-hash of the output file content (e.g. `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`)
+- `[id]`: معرف chunk، مثل `[id].js` -> `485.js`
+- `[name]`: اسم chunk، مثل `[name].js` -> `app.js`. إذا لم يكن للـ chunk اسم، فسيُستخدم معرفه.
+- `[contenthash]`: هاش md4 لمحتوى ملف الإخراج، مثل `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`

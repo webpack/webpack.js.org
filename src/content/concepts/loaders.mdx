@@ -2,34 +2,20 @@
 title: Loaders
 sort: 3
 contributors:
-  - manekinekko
-  - evenstensberg
-  - SpaceK33z
-  - gangachris
-  - TheLarkInn
-  - simon04
-  - jhnns
-  - byzyk
-  - debs-obrien
-  - EugeneHlushko
-  - wizardofhogwarts
-  - lukasgeiter
-  - furkle
-  - jamesgeorge007
-  - textbook
+  - RlxChap2
 ---
 
-Loaders are transformations that are applied to the source code of a module. They allow you to pre-process files as you `import` or “load” them. Thus, loaders are kind of like “tasks” in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or load inline images as data URLs. Loaders even allow you to do things like `import` CSS files directly from your JavaScript modules!
+المحمّلات هي تحويلات تُطبق على الكود المصدري للوحدة. تسمح لك بمعالجة الملفات مسبقًا أثناء `import` لها أو "تحميلها". لذلك تشبه المحمّلات "المهام" في أدوات البناء الأخرى، وتوفر طريقة قوية للتعامل مع خطوات بناء الواجهة الأمامية. يمكن للمحمّلات تحويل الملفات من لغة أخرى، مثل TypeScript، إلى JavaScript، أو تحميل الصور المضمنة كعناوين data URLs. بل تسمح لك المحمّلات بأشياء مثل `import` ملفات CSS مباشرة من وحدات JavaScript.
 
-## Example
+## مثال
 
-For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:
+على سبيل المثال، يمكنك استخدام المحمّلات لإخبار webpack بتحميل ملف CSS أو تحويل TypeScript إلى JavaScript. للقيام بذلك، تبدأ بتثبيت المحمّلات التي تحتاجها:
 
 ```bash
 npm install --save-dev css-loader ts-loader
 ```
 
-And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for every `.css` file and the [`ts-loader`](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
+ثم تطلب من webpack استخدام [`css-loader`](/loaders/css-loader) لكل ملف `.css` و [`ts-loader`](https://github.com/TypeStrong/ts-loader) لكل ملفات `.ts`:
 
 **webpack.config.js**
 
@@ -44,23 +30,25 @@ export default {
 };
 ```
 
-T> While in the previous examples we used a loader to load CSS files, webpack has an experimental option ([`experiments.css`](https://webpack.js.org/configuration/experiments/)) that allows webpack to process CSS and automatically inject the styles into the webpage.
+T> في الأمثلة السابقة استخدمنا محمّلًا لتحميل ملفات CSS، لكن webpack يملك خيارًا تجريبيًا ([`experiments.css`](https://webpack.js.org/configuration/experiments/)) يسمح له بمعالجة CSS وحقن التنسيقات تلقائيًا في صفحة الويب.
 
-## Using Loaders
+## استخدام المحمّلات
 
-There are two ways to use loaders in your application:
+توجد طريقتان لاستخدام المحمّلات في تطبيقك:
 
-- [Configuration](#configuration) (recommended): Specify them in your **webpack.config.js** file.
-- [Inline](#inline): Specify them explicitly in each `import` statement.
+- [التكوين](#configuration) (موصى به): تحديدها في ملف **webpack.config.js**.
+- [Inline](#inline): تحديدها صراحة في كل تعليمة `import`.
 
-Note that loaders can be used from CLI under webpack v4, but the feature was deprecated in webpack v5.
+لاحظ أن المحمّلات يمكن استخدامها من CLI في webpack v4، لكن هذه الميزة أُهملت في webpack v5.
 
-### Configuration
+<a id="configuration"></a>
 
-[`module.rules`](/configuration/module/#modulerules) allows you to specify several loaders within your webpack configuration.
-This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
+### التكوين
 
-Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
+تسمح لك [`module.rules`](/configuration/module/#modulerules) بتحديد عدة محمّلات داخل تكوين webpack.
+هذه طريقة موجزة لعرض المحمّلات، وتساعد على الحفاظ على كود نظيف. كما تمنحك نظرة كاملة على كل محمّل.
+
+تُقيّم أو تُنفذ المحمّلات من اليمين إلى اليسار، أو من الأسفل إلى الأعلى. في المثال أدناه يبدأ التنفيذ بـ sass-loader، ثم يستمر مع css-loader، وينتهي أخيرًا بـ style-loader. راجع ["ميزات المحمّلات"](/concepts/loaders/#loader-features) لمزيد من المعلومات حول ترتيب المحمّلات.
 
 ```js
 export default {
@@ -84,54 +72,60 @@ export default {
 };
 ```
 
+<a id="inline"></a>
+
 ### Inline
 
-It's possible to specify loaders in an `import` statement, or any [equivalent "importing" method](/api/module-methods). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
+يمكن تحديد المحمّلات داخل تعليمة `import` أو أي [طريقة "استيراد" مكافئة](/api/module-methods). افصل المحمّلات عن المورد باستخدام `!`. يُحل كل جزء نسبيًا إلى المجلد الحالي.
 
-T> The `loader1!loader2!./file` syntax is shown for illustration. In most projects, prefer configuring loaders via `module.rules` and importing styles for their side effects (e.g. `import "./styles.css"`).
+T> صيغة `loader1!loader2!./file` معروضة للتوضيح. في معظم المشاريع، يفضل تكوين المحمّلات عبر `module.rules` واستيراد التنسيقات من أجل آثارها الجانبية، مثل `import "./styles.css"`.
 
 ```js
 import * as styles from "style-loader!css-loader?modules!./styles.css";
 ```
 
-It's possible to override any loaders, preLoaders and postLoaders from the [configuration](/configuration) by prefixing the inline `import` statement:
+يمكن تجاوز أي محمّلات و preLoaders و postLoaders من [التكوين](/configuration) عبر بادئة في تعليمة `import` inline:
 
-- Prefixing with `!` will disable all configured normal loaders
+- البادئة `!` تعطل كل المحمّلات العادية المكوّنة.
 
   ```js
   import * as styles from "!style-loader!css-loader?modules!./styles.css";
   ```
 
-- Prefixing with `!!` will disable all configured loaders (preLoaders, loaders, postLoaders)
+- البادئة `!!` تعطل كل المحمّلات المكوّنة، بما في ذلك preLoaders و loaders و postLoaders.
 
   ```js
   import * as styles from "!!style-loader!css-loader?modules!./styles.css";
   ```
 
-- Prefixing with `-!` will disable all configured preLoaders and loaders but not postLoaders
+- البادئة `-!` تعطل كل preLoaders و loaders المكوّنة، لكنها لا تعطل postLoaders.
 
   ```js
   import * as styles from "-!style-loader!css-loader?modules!./styles.css";
   ```
 
-Options can be passed with a query parameter, e.g. `?key=value&foo=bar`, or a JSON object, e.g. `?{"key":"value","foo":"bar"}`.
+يمكن تمرير الخيارات باستخدام query parameter مثل `?key=value&foo=bar`، أو كائن JSON مثل `?{"key":"value","foo":"bar"}`.
 
-T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allow you to debug or locate a loader faster if something goes south.
+T> استخدم `module.rules` كلما أمكن، لأن ذلك يقلل التكرار في كودك المصدري ويسهل تصحيح محمّل أو العثور عليه عندما يحدث شيء غير متوقع.
 
-## Loader Features
+<a id="loader-features"></a>
 
-- Loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain.
-- Loaders can be synchronous or asynchronous.
-- Loaders run in Node.js and can do everything that’s possible there.
-- Loaders can be configured with an `options` object (using `query` parameters to set options is still supported but has been deprecated).
-- Normal modules can export a loader in addition to the normal `main` via `package.json` with the `loader` field.
-- Plugins can give loaders more features.
-- Loaders can emit additional arbitrary files.
+## ميزات المحمّلات
 
-Loaders provide a way to customize the output through their preprocessing functions. Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
+- يمكن ربط المحمّلات في سلسلة. يطبق كل محمّل في السلسلة تحويلات على المورد الجاري معالجته. تُنفذ السلسلة بترتيب عكسي. يمرر أول محمّل نتيجته، أي المورد بعد تطبيق التحويلات، إلى المحمّل التالي، وهكذا. وفي النهاية يتوقع webpack أن يعيد آخر محمّل في السلسلة JavaScript.
+- يمكن أن تكون المحمّلات متزامنة أو غير متزامنة.
+- تعمل المحمّلات في Node.js ويمكنها فعل كل ما هو ممكن هناك.
+- يمكن تكوين المحمّلات باستخدام كائن `options`؛ ما زال استخدام معاملات `query` لضبط الخيارات مدعومًا لكنه أُهمل.
+- يمكن للوحدات العادية تصدير محمّل إضافة إلى `main` العادي عبر حقل `loader` في `package.json`.
+- يمكن للإضافات أن تمنح المحمّلات ميزات أكثر.
+- يمكن للمحمّلات إصدار ملفات إضافية عشوائية.
 
-## Resolving Loaders
+توفر المحمّلات طريقة لتخصيص الإخراج عبر دوال المعالجة المسبقة. أصبح لدى المستخدمين مرونة أكبر لإدراج منطق دقيق مثل الضغط والتغليف وترجمات اللغة و[المزيد](/loaders).
 
-Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases it will be loaded from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
+<a id="resolving-loaders"></a>
 
-A loader module is expected to export a function and be written in Node.js compatible JavaScript. They are most commonly managed with npm, but you can also have custom loaders as files within your application. By convention, loaders are usually named `xxx-loader` (e.g. `json-loader`). See ["Writing a Loader"](/contribute/writing-a-loader/) for more information.
+## حلّ المحمّلات
+
+تتبع المحمّلات آلية [حلّ الوحدات](/concepts/module-resolution/) القياسية. في معظم الحالات ستُحمّل من [مسار الوحدة](/concepts/module-resolution/#module-paths)، مثل `npm install` و `node_modules`.
+
+من المتوقع أن تصدر وحدة المحمّل دالة وأن تُكتب بلغة JavaScript متوافقة مع Node.js. غالبًا تُدار هذه المحمّلات باستخدام npm، لكن يمكنك أيضًا امتلاك محمّلات مخصصة كملفات داخل تطبيقك. وبحسب العرف، تُسمى المحمّلات عادة بالشكل `xxx-loader`، مثل `json-loader`. راجع ["كتابة محمّل"](/contribute/writing-a-loader/) لمزيد من المعلومات.
