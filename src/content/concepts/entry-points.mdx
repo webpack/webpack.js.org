@@ -2,38 +2,23 @@
 title: Entry Points
 sort: 1
 contributors:
-  - TheLarkInn
-  - chrisVillanueva
-  - byzyk
-  - sokra
-  - EugeneHlushko
-  - Zearin
-  - chenxsan
-  - adyjs
-  - anshumanv
-  - ritikbanger
-  - saishankar404
+  - RlxChap2
 ---
 
-As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
+كما ذُكر في [دليل البدء](/guides/getting-started/#using-a-configuration)، توجد عدة طرق لتعريف خاصية `entry` في تكوين webpack. سنعرض الطرق التي **يمكنك** بها ضبط خاصية `entry`، إلى جانب شرح سبب فائدتها لك.
 
-In simple terms, an entry point tells webpack where to start building
-its internal dependency graph. Starting from this file, webpack
-recursively follows all imported modules and assets to determine
-what should be included in the final bundle.
+ببساطة، تخبر نقطة الدخول webpack من أين يبدأ بناء مخطط التبعيات الداخلي. انطلاقًا من هذا الملف، يتتبع webpack بشكل تكراري كل الوحدات والأصول المستوردة لتحديد ما يجب تضمينه في الحزمة النهائية.
 
-The result of this process is later written to disk according to the
-`output` configuration, which controls where and how the bundled
-files are emitted.
+تُكتب نتيجة هذه العملية لاحقًا إلى القرص وفقًا لتكوين `output`، الذي يتحكم في مكان وكيفية إصدار الملفات المجمعة.
 
-T> When running webpack without a configuration file, the entry defaults to `'./src/index.js'`. If that file is missing — even if your `src/` directory exists — webpack will throw: <br /> **`ERROR in Entry module not found: Error: Can't resolve './src'`** <br /><br /> The error says `'./src'` rather than `'./src/index.js'` because webpack resolves the directory first, then fails to find `index.js` inside it. To use a different entry filename, configure the `entry` option as shown in the sections below.
+T> عند تشغيل webpack بدون ملف تكوين، تكون نقطة الدخول الافتراضية هي `'./src/index.js'`. إذا كان هذا الملف غير موجود، حتى لو كان مجلد `src/` موجودًا، سيرمي webpack الخطأ: <br /> **`ERROR in Entry module not found: Error: Can't resolve './src'`** <br /><br /> تظهر الرسالة `'./src'` بدلًا من `'./src/index.js'` لأن webpack يحاول أولًا حلّ المجلد، ثم يفشل في إيجاد `index.js` داخله. لاستخدام اسم ملف دخول مختلف، اضبط خيار `entry` كما هو موضح في الأقسام التالية.
 
-## Single Entry (Shorthand) Syntax
+## صيغة نقطة دخول واحدة (مختصرة)
 
-Usage: `entry: string | [string]`
+الاستخدام: `entry: string | [string]`
 
-- `string`: a single entry file
-- `[string]`: multiple entry files
+- `string`: ملف دخول واحد
+- `[string]`: عدة ملفات دخول
 
 **webpack.config.js**
 
@@ -43,7 +28,7 @@ export default {
 };
 ```
 
-The single entry syntax for the `entry` property is a shorthand for:
+صيغة نقطة الدخول الواحدة لخاصية `entry` هي اختصار لما يلي:
 
 **webpack.config.js**
 
@@ -55,7 +40,7 @@ export default {
 };
 ```
 
-We can also pass an array of file paths to the `entry` property which creates what is known as a **"multi-main entry"**. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
+يمكننا أيضًا تمرير مصفوفة من مسارات الملفات إلى خاصية `entry`، وهذا ينشئ ما يُعرف باسم **"multi-main entry"**. يكون ذلك مفيدًا عندما تريد حقن عدة ملفات مترابطة معًا ورسم تبعياتها داخل "chunk" واحد.
 
 **webpack.config.js**
 
@@ -65,13 +50,12 @@ export default {
 };
 ```
 
-When an array is provided for an entry point, webpack still creates a **single entry chunk**.
-All modules in the array are loaded in the given order and combined into the same dependency graph.
+عند توفير مصفوفة لنقطة الدخول، لا يزال webpack ينشئ **entry chunk واحدًا**.
+تُحمّل كل الوحدات الموجودة في المصفوفة بالترتيب المعطى وتُدمج في مخطط التبعيات نفسه.
 
-This pattern is commonly used to inject additional code before the main application entry,
-such as polyfills or development-only tools, without manually importing them in the application source.
+يُستخدم هذا النمط غالبًا لحقن كود إضافي قبل نقطة دخول التطبيق الرئيسية، مثل polyfills أو أدوات خاصة بالتطوير، بدون استيرادها يدويًا في مصدر التطبيق.
 
-**Example: Injecting a polyfill**
+**مثال: حقن polyfill**
 
 ```js
 export default {
@@ -81,16 +65,16 @@ export default {
 };
 ```
 
-Single Entry Syntax is a great choice when you are looking to quickly set up a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
+تُعد صيغة نقطة الدخول الواحدة خيارًا جيدًا عندما تريد إعداد تكوين webpack بسرعة لتطبيق أو أداة ذات نقطة دخول واحدة، مثل مكتبة. لكن هذه الصيغة لا تمنح مرونة كبيرة عند توسيع التكوين أو جعله قابلًا للنمو.
 
-## Object Syntax
+## صيغة الكائن
 
-Usage: `entry: { <entryChunkName> string | [string] } | {}`
+الاستخدام: `entry: { <entryChunkName> string | [string] } | {}`
 
-- `<entryChunkName>`: name of the entry chunk
-- `string`: single entry file
-- `[string]`: multiple entry files
-- `{}`: empty object
+- `<entryChunkName>`: اسم entry chunk
+- `string`: ملف دخول واحد
+- `[string]`: عدة ملفات دخول
+- `{}`: كائن فارغ
 
 **webpack.config.js**
 
@@ -103,23 +87,22 @@ export default {
 };
 ```
 
-The object syntax is more verbose. However, this is the most scalable way of defining entry/entries in your application.
+صيغة الكائن أكثر تفصيلًا، لكنها الطريقة الأكثر قابلية للتوسع لتعريف نقطة أو نقاط الدخول في تطبيقك.
 
-T> **"Scalable webpack configurations"** are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target, and runtime. They are then merged using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
+T> **"تكوينات webpack القابلة للتوسع"** هي التكوينات التي يمكن إعادة استخدامها ودمجها مع تكوينات جزئية أخرى. هذه تقنية شائعة لفصل الاهتمامات حسب البيئة وهدف البناء ووقت التشغيل. بعد ذلك تُدمج باستخدام أدوات متخصصة مثل [webpack-merge](https://github.com/survivejs/webpack-merge).
 
-T> You can pass empty object `{}` to `entry` when you have only entry points generated by plugins.
+T> يمكنك تمرير كائن فارغ `{}` إلى `entry` عندما تكون لديك نقاط دخول يولدها plugins فقط.
 
-### EntryDescription object
+### كائن EntryDescription
 
-An object of entry point description. You can specify the following properties.
+هو كائن يصف نقطة الدخول. يمكنك تحديد الخصائص الآتية:
 
-- `dependOn`: The entry points that the current entry point depends on. They must be loaded before this entry point is loaded.
-- `filename`: Specifies the name of each output file on disk.
-- `import`: Module(s) that are loaded upon startup.
-- `library`: Specify [library options](/configuration/output/#outputlibrary) to bundle a library from current entry.
-- `runtime`: The name of the runtime chunk. When set, a new runtime chunk will be created. It can be set to `false` to avoid a new runtime chunk since webpack 5.43.0.
-
-- `publicPath`: Specify a public URL address for the output files of this entry when they are referenced in a browser. Also, see [output.publicPath](/configuration/output/#outputpublicpath).
+- `dependOn`: نقاط الدخول التي تعتمد عليها نقطة الدخول الحالية. يجب تحميلها قبل تحميل نقطة الدخول الحالية.
+- `filename`: يحدد اسم كل ملف إخراج على القرص.
+- `import`: الوحدة أو الوحدات التي تُحمّل عند بدء التشغيل.
+- `library`: يحدد [خيارات المكتبة](/configuration/output/#outputlibrary) لتجميع مكتبة من نقطة الدخول الحالية.
+- `runtime`: اسم runtime chunk. عند تعيينه، يُنشأ runtime chunk جديد. ويمكن تعيينه إلى `false` لتجنب إنشاء runtime chunk جديد منذ webpack 5.43.0.
+- `publicPath`: يحدد عنوان URL عام لملفات الإخراج الخاصة بنقطة الدخول هذه عندما يُشار إليها في المتصفح. راجع أيضًا [output.publicPath](/configuration/output/#outputpublicpath).
 
 **webpack.config.js**
 
@@ -135,7 +118,7 @@ export default {
 };
 ```
 
-`runtime` and `dependOn` should not be used together on a single entry, so the following config is invalid and would throw an error:
+لا ينبغي استخدام `runtime` و `dependOn` معًا في نقطة دخول واحدة، لذلك يكون التكوين التالي غير صالح وسيرمي خطأ:
 
 **webpack.config.js**
 
@@ -152,7 +135,7 @@ export default {
 };
 ```
 
-Make sure `runtime` must not point to an existing entry point name, for example the below config would throw an error:
+تأكد من أن `runtime` لا يشير إلى اسم نقطة دخول موجودة. على سبيل المثال، سيرمي التكوين التالي خطأ:
 
 ```js
 export default {
@@ -166,7 +149,7 @@ export default {
 };
 ```
 
-Also `dependOn` must not be circular, the following example again would throw an error:
+كذلك يجب ألا يكون `dependOn` دائريًا. المثال التالي سيرمي خطأ أيضًا:
 
 ```js
 export default {
@@ -183,11 +166,11 @@ export default {
 };
 ```
 
-## Scenarios
+## سيناريوهات
 
-Below is a list of entry configurations and their real-world use cases:
+فيما يلي قائمة بتكوينات entry واستخداماتها الواقعية:
 
-### Separate App and Vendor Entries
+### فصل مدخل التطبيق ومدخل vendor
 
 **webpack.config.js**
 
@@ -200,7 +183,7 @@ export default {
 };
 ```
 
-When building in `production` mode:
+عند البناء في وضع `production`:
 
 **webpack.prod.js**
 
@@ -212,7 +195,7 @@ export default {
 };
 ```
 
-When building in `development` mode:
+عند البناء في وضع `development`:
 
 **webpack.dev.js**
 
@@ -224,13 +207,13 @@ export default {
 };
 ```
 
-**What does this do?** We are telling webpack that we would like 2 separate entry points (like the above example).
+**ماذا يفعل هذا؟** نخبر webpack أننا نريد نقطتي دخول منفصلتين، كما في المثال أعلاه.
 
-**Why?** With this, you can import required libraries or files that aren't modified (e.g. Bootstrap, jQuery, images, etc) inside `vendor.js` and they will be bundled together into their own chunk. Content hash remains the same, which allows the browser to cache them separately thereby reducing load time.
+**لماذا؟** بهذه الطريقة يمكنك استيراد المكتبات أو الملفات المطلوبة التي لا تتغير كثيرًا، مثل Bootstrap و jQuery والصور وغيرها، داخل `vendor.js`، وسيتم تجميعها معًا في chunk خاص بها. يبقى content hash كما هو، مما يسمح للمتصفح بتخزينها مؤقتًا بشكل منفصل وبالتالي تقليل وقت التحميل.
 
-T> In webpack version < 4 it was common to add vendors as a separate entry point to compile it as a separate file (in combination with the `CommonsChunkPlugin`). <br /><br /> This is discouraged in webpack 4. Instead, the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) option takes care of separating vendors and app modules and creating a separate file. **Do not** create an entry for vendors or other stuff that is not the starting point of execution.
+T> في إصدارات webpack الأقل من 4 كان من الشائع إضافة vendors كنقطة دخول منفصلة لترجمتها كملف مستقل، غالبًا مع `CommonsChunkPlugin`. <br /><br /> لا يُنصح بذلك في webpack 4. بدلًا من ذلك، يتولى خيار [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) فصل وحدات vendors ووحدات التطبيق وإنشاء ملف منفصل. **لا** تنشئ نقطة دخول لـ vendors أو لأي شيء آخر ليس نقطة بدء للتنفيذ.
 
-### Multi-Page Application
+### تطبيق متعدد الصفحات
 
 **webpack.config.js**
 
@@ -244,8 +227,8 @@ export default {
 };
 ```
 
-**What does this do?** We are telling webpack that we would like 3 separate dependency graphs (like the above example).
+**ماذا يفعل هذا؟** نخبر webpack أننا نريد ثلاثة مخططات تبعيات منفصلة، كما في المثال أعلاه.
 
-**Why?** In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do things like using [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increases.
+**لماذا؟** في التطبيق متعدد الصفحات، سيجلب الخادم مستند HTML جديدًا لك. تعيد الصفحة تحميل هذا المستند الجديد وتُحمّل الأصول مرة أخرى. لكن هذا يمنحنا فرصة مميزة لاستخدام أشياء مثل [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) لإنشاء حزم من كود التطبيق المشترك بين كل صفحة. التطبيقات متعددة الصفحات التي تعيد استخدام قدر كبير من الكود أو الوحدات بين نقاط الدخول يمكن أن تستفيد كثيرًا من هذه التقنيات مع زيادة عدد نقاط الدخول.
 
-T> As a rule of thumb: Use exactly one entry point for each HTML document. See the issue [described here](https://bundlers.tooling.report/code-splitting/multi-entry/#webpack) for more details.
+T> كقاعدة عامة: استخدم نقطة دخول واحدة بالضبط لكل مستند HTML. راجع المشكلة [الموضحة هنا](https://bundlers.tooling.report/code-splitting/multi-entry/#webpack) لمزيد من التفاصيل.

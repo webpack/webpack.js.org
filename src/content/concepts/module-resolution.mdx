@@ -2,15 +2,11 @@
 title: Module Resolution
 sort: 7
 contributors:
-  - pksjce
-  - pastelsky
-  - byzyk
-  - EugeneHlushko
-  - wizardofhogwarts
+  - RlxChap2
 ---
 
-A resolver is a library which helps in locating a module by its absolute path.
-A module can be required as a dependency from another module as:
+المحلّل resolver هو مكتبة تساعد في العثور على وحدة من خلال مسارها المطلق.
+يمكن طلب وحدة تبعية من وحدة أخرى بهذا الشكل:
 
 ```js
 import foo from "path/to/module";
@@ -20,15 +16,14 @@ import foo from "path/to/module";
 require("path/to/module");
 ```
 
-The dependency module can be from the application code or a third-party library. The resolver helps
-webpack find the module code that needs to be included in the bundle for every such `require`/`import` statement.
-webpack uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
+يمكن أن تأتي وحدة التبعية من كود التطبيق أو من مكتبة خارجية. يساعد resolver webpack في العثور على كود الوحدة الذي يجب تضمينه في الحزمة لكل تعليمة `require` أو `import`.
+يستخدم webpack مكتبة [enhanced-resolve](https://github.com/webpack/enhanced-resolve) لحل مسارات الملفات أثناء تجميع الوحدات.
 
-## Resolving rules in webpack
+## قواعد الحل في webpack
 
-Using `enhanced-resolve`, webpack can resolve three kinds of file paths:
+باستخدام `enhanced-resolve`، يستطيع webpack حل ثلاثة أنواع من مسارات الملفات:
 
-### Absolute paths
+### المسارات المطلقة
 
 {/* eslint-skip */}
 
@@ -38,48 +33,50 @@ import "/home/me/file";
 import "C:\\Users\\me\\file";
 ```
 
-Since we already have the absolute path to the file, no further resolution is required.
+بما أننا نملك المسار المطلق إلى الملف بالفعل، فلا حاجة إلى حل إضافي.
 
-### Relative paths
+### المسارات النسبية
 
 ```js
 import "../src/file1";
 import "./file2";
 ```
 
-In this case, the directory of the source file where the `import` or `require` occurs is taken to be the context directory. The relative path specified in the `import/require` is joined to this context path to produce the absolute path to the module.
+في هذه الحالة، يُعتبر مجلد الملف المصدري الذي تظهر فيه تعليمة `import` أو `require` هو مجلد السياق. يُدمج المسار النسبي المحدد في `import/require` مع مسار السياق هذا لإنتاج المسار المطلق للوحدة.
 
-### Module paths
+<a id="module-paths"></a>
+
+### مسارات الوحدات
 
 ```js
 import "my-module";
 import "my-module/lib/file";
 ```
 
-Modules are searched for inside all directories specified in [`resolve.modules`](/configuration/resolve/#resolvemodules).
-You can replace the original module path by an alternate path by creating an alias for it using the [`resolve.alias`](/configuration/resolve/#resolvealias) configuration option.
+يُبحث عن الوحدات داخل كل المجلدات المحددة في [`resolve.modules`](/configuration/resolve/#resolvemodules).
+يمكنك استبدال مسار الوحدة الأصلي بمسار بديل عبر إنشاء alias له باستخدام خيار التكوين [`resolve.alias`](/configuration/resolve/#resolvealias).
 
-- If the package contains a `package.json` file, then fields specified in [`resolve.exportsFields`](/configuration/resolve/#resolveexportsfields) configuration options are looked up in order, and the first such field in `package.json` determines the available exports from the package according to the [package exports guideline](/guides/package-exports/).
+- إذا كانت الحزمة تحتوي ملف `package.json`، فسيُبحث في الحقول المحددة في خيار [`resolve.exportsFields`](/configuration/resolve/#resolveexportsfields) بالترتيب، وأول حقل من هذا النوع داخل `package.json` يحدد الصادرات المتاحة من الحزمة وفقًا لـ [دليل package exports](/guides/package-exports/).
 
-Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:
+بعد حل المسار بناءً على القواعد أعلاه، يتحقق resolver مما إذا كان المسار يشير إلى ملف أو مجلد. إذا كان المسار يشير إلى ملف:
 
-- If the path has a file extension, then the file is bundled straightaway.
-- Otherwise, the file extension is resolved using the [`resolve.extensions`](/configuration/resolve/#resolveextensions) option, which tells the resolver which extensions are acceptable for resolution e.g. `.js`, `.jsx`.
+- إذا كان المسار يحتوي امتداد ملف، فسيُجمع الملف مباشرة.
+- وإلا، يُحل امتداد الملف باستخدام خيار [`resolve.extensions`](/configuration/resolve/#resolveextensions)، الذي يخبر resolver بالامتدادات المقبولة للحل، مثل `.js` و `.jsx`.
 
-If the path points to a folder, then the following steps are taken to find the right file with the right extension:
+إذا كان المسار يشير إلى مجلد، تُتبع الخطوات الآتية للعثور على الملف الصحيح بالامتداد الصحيح:
 
-- If the folder contains a `package.json` file, then fields specified in [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) configuration option are looked up in order, and the first such field in `package.json` determines the file path.
-- If there is no `package.json` or if the [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) do not return a valid path, file names specified in the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles) configuration option are looked for in order, to see if a matching filename exists in the imported/required directory.
-- The file extension is then resolved in a similar way using the [`resolve.extensions`](/configuration/resolve/#resolveextensions) option.
+- إذا كان المجلد يحتوي ملف `package.json`، فسيُبحث في الحقول المحددة في خيار [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) بالترتيب، وأول حقل من هذا النوع داخل `package.json` يحدد مسار الملف.
+- إذا لم يوجد `package.json` أو لم تُرجع [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) مسارًا صالحًا، فسيُبحث عن أسماء الملفات المحددة في خيار [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles) بالترتيب لمعرفة ما إذا كان يوجد اسم ملف مطابق داخل المجلد المستورد أو المطلوب.
+- بعد ذلك يُحل امتداد الملف بالطريقة نفسها باستخدام خيار [`resolve.extensions`](/configuration/resolve/#resolveextensions).
 
-Webpack provides reasonable [defaults](/configuration/resolve) for these options depending on your build target.
+يوفر webpack [قيمًا افتراضية](/configuration/resolve) معقولة لهذه الخيارات بحسب هدف البناء.
 
-## Resolving Loaders
+## حلّ المحمّلات
 
-This follows the same rules as those specified for file resolution. But the [`resolveLoader`](/configuration/resolve/#resolveloader) configuration option can be used to have separate resolution rules for loaders.
+يتبع ذلك القواعد نفسها المحددة لحل الملفات. لكن يمكن استخدام خيار التكوين [`resolveLoader`](/configuration/resolve/#resolveloader) لتوفير قواعد حل منفصلة للمحمّلات.
 
-## Caching
+## التخزين المؤقت
 
-Every filesystem access is cached so that multiple parallel or serial requests to the same file occur faster. In [watch mode](/configuration/watch/#watch), only modified files are evicted from the cache. If watch mode is off, then the cache gets purged before every compilation.
+يُخزن كل وصول إلى نظام الملفات مؤقتًا حتى تتم الطلبات المتوازية أو المتسلسلة المتعددة إلى الملف نفسه بسرعة أكبر. في [وضع المراقبة](/configuration/watch/#watch)، تُخرج الملفات المعدلة فقط من cache. إذا كان وضع المراقبة معطلًا، فسيُفرغ cache قبل كل عملية ترجمة.
 
-See [Resolve API](/configuration/resolve) to learn more about the configuration options mentioned above.
+راجع [Resolve API](/configuration/resolve) لتتعلم المزيد عن خيارات التكوين المذكورة أعلاه.

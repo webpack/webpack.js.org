@@ -2,8 +2,7 @@
 title: Dependency Graph
 sort: 9
 contributors:
-  - TheLarkInn
-  - EugeneHlushko
+  - RlxChap2
 related:
   - title: HTTP2 Aggressive Splitting Example
     url: https://github.com/webpack/webpack/tree/master/examples/http2-aggressive-splitting
@@ -11,9 +10,9 @@ related:
     url: https://medium.com/webpack/webpack-http-2-7083ec3f3ce6
 ---
 
-Any time one file depends on another, webpack treats this as a _dependency_. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as _dependencies_ for your application.
+كلما اعتمد ملف على ملف آخر، يتعامل webpack مع ذلك على أنه _تبعية_. يسمح هذا لـ webpack بأخذ أصول غير برمجية، مثل الصور أو خطوط الويب، وتقديمها أيضًا على أنها _تبعيات_ لتطبيقك.
 
-When webpack processes your application, it starts from a list of modules defined on the command line or in its configuration file.
-Starting from these [_entry points_](/concepts/entry-points/), webpack recursively builds a _dependency graph_ that includes every module your application needs, then bundles all of those modules into a small number of _bundles_ - often, only one - to be loaded by the browser.
+عندما يعالج webpack تطبيقك، يبدأ من قائمة وحدات معرّفة في سطر الأوامر أو في ملف التكوين.
+وانطلاقًا من [_نقاط الدخول_](/concepts/entry-points/)، يبني webpack بشكل تكراري _مخطط تبعيات_ يتضمن كل وحدة يحتاجها تطبيقك، ثم يجمع كل هذه الوحدات في عدد قليل من _الحزم_، وغالبًا في حزمة واحدة فقط، ليحمّلها المتصفح.
 
-T> Bundling your application is especially powerful for _HTTP/1.1_ clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For _HTTP/2_, you can also use [Code Splitting](/guides/code-splitting/) to achieve best results.
+T> تجميع تطبيقك في حزم قوي خصوصًا لعملاء _HTTP/1.1_ لأنه يقلل عدد المرات التي ينتظر فيها التطبيق بدء المتصفح لطلب جديد. أما مع _HTTP/2_، فيمكنك أيضًا استخدام [تقسيم الكود](/guides/code-splitting/) للوصول إلى أفضل النتائج.
