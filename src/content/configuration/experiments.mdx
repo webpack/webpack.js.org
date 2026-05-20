@@ -2,25 +2,20 @@
 title: Experiments
 sort: 19
 contributors:
-  - EugeneHlushko
-  - wizardofhogwarts
-  - chenxsan
-  - anshumanv
-  - snitin315
-  - burhanuday
+  - RlxChap2
 ---
 
-## experiments
+## التجارب
 
 `boolean: false`
 
-`experiments` option was introduced in webpack 5 to empower users with the ability to activate and try out experimental features.
+أُدخل الخيار `experiments` في webpack 5 ليُتيح للمستخدمين تفعيل الميزات التجريبية وتجربتها.
 
-W> Because experimental features have relaxed semantic versioning and might contain breaking changes, make sure to fix webpack's version to minor e.g. `webpack: ~5.4.3` instead of `webpack: ^5.4.3` or use a lockfile when using `experiments`.
+W> لمّا كانت الميزات التجريبية تتساهل مع semantic versioning وقد تأتي بتغييرات كاسرة، تأكّد من تثبيت إصدار webpack عند المستوى الثانوي مثل `webpack: ~5.4.3` بدلاً من `webpack: ^5.4.3`، أو استعمل lockfile حين تستخدم `experiments`.
 
-Available options:
+الخيارات المتاحة:
 
-- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
+- `asyncWebAssembly`: يدعم WebAssembly الجديد وفق [المواصفة المحدَّثة](https://github.com/WebAssembly/esm-integration)، فيجعل وحدة WebAssembly وحدةً غير متزامنة. وهو مُفعَّل افتراضياً حين يُضبط [`experiments.futureDefaults`](#experimentsfuturedefaults) على `true`.
 - [`backCompat`](#experimentsbackcompat)
 - [`buildHttp`](#experimentsbuildhttp)
 - [`cacheUnaffected`](#experimentscacheunaffected)
@@ -31,9 +26,9 @@ Available options:
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
 - [`sourceImport`](#experimentssourceimport)
-- `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
-- `layers`: Enable module and chunk layers, removed and works without additional options since `5.102.0`.
-- `topLevelAwait`: Transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0` (however, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`), this feature is enabled by default, removed and works without additional options since `5.102.0`.
+- `syncWebAssembly`: يدعم WebAssembly القديم كما في webpack 4.
+- `layers`: يُفعِّل طبقات الوحدات والـ chunks، أُزيل ويعمل بلا خيارات إضافية منذ `5.102.0`.
+- `topLevelAwait`: يُحوِّل الوحدة إلى وحدة `async` حين يُستعمَل `await` على المستوى الأعلى. ابتداءً من webpack `5.83.0` (أمّا في الإصدارات السابقة فيمكنك تفعيله بضبط `experiments.topLevelAwait` على `true`)، صارت هذه الميزة مُفعَّلة افتراضياً، وأُزيلت وصارت تعمل بلا خيارات إضافية منذ `5.102.0`.
 
 **webpack.config.js**
 
@@ -54,9 +49,9 @@ export default {
 
 ### experiments.backCompat
 
-Enable backward-compat layer with deprecation warnings for many webpack 4 APIs.
+فعِّل طبقة التوافق العكسي مع تحذيرات الإهمال (deprecation warnings) لكثير من واجهات webpack 4 البرمجية.
 
-- Type: `boolean`
+- النوع: `boolean`
 
 ```js
 export default {
@@ -69,12 +64,12 @@ export default {
 
 ### experiments.buildHttp
 
-When enabled, webpack can build remote resources that begin with the `http(s):` protocol.
+حين يُفعَّل هذا الخيار، يستطيع webpack بناء الموارد البعيدة التي تبدأ بـ `http(s):`.
 
-- Type:
+- النوع:
   - `(string | RegExp | ((uri: string) => boolean))[]`
 
-    A shortcut for [`experiments.buildHttp.allowedUris`](#experimentsbuildhttpalloweduris).
+    اختصارٌ لـ [`experiments.buildHttp.allowedUris`](#experimentsbuildhttpalloweduris).
 
   - `HttpUriOptions`
 
@@ -88,8 +83,8 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
     }
     ```
 
-- Available: 5.49.0+
-- Example
+- متاح: 5.49.0+
+- مثال
 
   **webpack.config.js**
 
@@ -106,16 +101,16 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
   // src/index.js
   import pMap1 from "https://cdn.skypack.dev/p-map";
 
-  // with `buildHttp` enabled, webpack will build pMap1 like a regular local module
+  // مع تفعيل `buildHttp`، سيبني webpack pMap1 كأنّها وحدة محلية اعتيادية
   console.log(pMap1);
   ```
 
 #### experiments.buildHttp.allowedUris
 
-A list of allowed URIs.
+قائمة بالعناوين المسموح بها (URIs).
 
-- Type: `(string|RegExp|(uri: string) => boolean)[]`
-- Example
+- النوع: `(string|RegExp|(uri: string) => boolean)[]`
+- مثال
 
   **webpack.config.js**
 
@@ -135,12 +130,12 @@ A list of allowed URIs.
 
 #### experiments.buildHttp.cacheLocation
 
-Define the location for caching remote resources.
+حدِّد موقع التخزين المؤقَّت للموارد البعيدة.
 
-- Type
+- النوع
   - `string`
   - `false`
-- Example
+- مثال
 
   **webpack.config.js**
 
@@ -155,51 +150,51 @@ Define the location for caching remote resources.
   };
   ```
 
-By default webpack would use `<compiler-name.>webpack.lock.data/` for caching, but you can disable it by setting its value to `false`.
+افتراضياً يستعمل webpack `<compiler-name.>webpack.lock.data/` للتخزين المؤقَّت، غير أنّ بإمكانك تعطيله بضبط قيمته على `false`.
 
-Note that you should commit files under `experiments.buildHttp.cacheLocation` into a version control system as no network requests will be made during the `production` build.
+لاحظ أنّه ينبغي إيداع الملفّات الموجودة تحت `experiments.buildHttp.cacheLocation` في نظام التحكّم بالإصدار، إذ لن يجري أيّ طلب شبكي أثناء بناء `production`.
 
 #### experiments.buildHttp.frozen
 
-Freeze the remote resources and lockfile. Any modification to the lockfile or resource contents will result in an error.
+جمِّد الموارد البعيدة وملفّ القفل (lockfile). أيّ تعديل على lockfile أو على محتوى المورد سيُفضي إلى خطأ.
 
-- Type: `boolean`
+- النوع: `boolean`
 
 #### experiments.buildHttp.lockfileLocation
 
-Define the location to store the lockfile.
+حدِّد موقع تخزين lockfile.
 
-- Type: `string`
+- النوع: `string`
 
-By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make sure to commit it into a version control system. During the `production` build, webpack will build those modules beginning with `http(s):` protocol from the lockfile and caches under [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
+افتراضياً يُولِّد webpack ملفّ `<compiler-name.>webpack.lock`. تأكّد من إيداعه في نظام التحكّم بالإصدار. وأثناء بناء `production`، سيبني webpack تلك الوحدات التي تبدأ بـ `http(s):` انطلاقاً من lockfile ومن الذاكرة المؤقَّتة الموجودة في [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
 
 #### experiments.buildHttp.proxy
 
-Specify the proxy server to use for fetching remote resources.
+حدِّد خادوم البروكسي المستعمَل لجلب الموارد البعيدة.
 
-- Type: `string`
+- النوع: `string`
 
-By default, Webpack would imply the proxy server to use for fetching remote resources from the `http_proxy` (case insensitive) environment variable. However, you can also specify one through the `proxy` option.
+افتراضياً، سيستنتج webpack خادوم البروكسي من متغيّر البيئة `http_proxy` (لا يميِّز بين الحالة الصغيرة والكبيرة). كما تستطيع تحديده صراحةً عبر الخيار `proxy`.
 
 #### experiments.buildHttp.upgrade
 
-Detect changes to remote resources and upgrade them automatically.
+اكتشف التغيّرات في الموارد البعيدة وحدِّثها تلقائياً.
 
-- Type: `boolean`
+- النوع: `boolean`
 
 ### experiments.css
 
-Enable native CSS support. Note that it's an experimental feature still under development and will be enabled by default in webpack v6, however you can track the progress on [GitHub](https://github.com/webpack/webpack/issues/14893).
+يُفعِّل دعم CSS الأصلي. لاحظ أنّها ميزة تجريبية لا تزال قيد التطوير، وستُفعَّل افتراضياً في webpack v6، لكن بإمكانك تتبّع تقدّمها على [GitHub](https://github.com/webpack/webpack/issues/14893).
 
-- Type: `boolean`
+- النوع: `boolean`
 
-Experimental features:
+الميزات التجريبية:
 
-- CSS Modules support: webpack will generate a unique name for each CSS class. Use the `.module.css` extension for CSS Modules.
+- دعم CSS Modules: سيُولِّد webpack اسماً فريداً لكلّ صنف CSS. استعمل الامتداد `.module.css` لتفعيل CSS Modules.
 
   <Badge text="5.103.0+" />
 
-  Webpack natively supports the CSS Modules `composes` property, allowing you to compose classes from the same file, other CSS modules, or global classes:
+  يدعم webpack بشكل أصلي خاصية `composes` الخاصة بـ CSS Modules، فيسمح لك بتركيب الأصناف من الملفّ نفسه، أو من وحدات CSS أخرى، أو من أصناف عامة (global):
 
   ```css
   /* styles.module.css */
@@ -217,41 +212,29 @@ Experimental features:
     background: blue;
   }
 
-  /* Compose from another CSS module */
+  /* تركيب من وحدة CSS أخرى */
   .composed {
     composes: className from "./other.module.css";
   }
 
-  /* Compose from global classes */
+  /* تركيب من أصناف عامة */
   .globalComposed {
     composes: global-class from global;
   }
   ```
 
-- <Badge text="5.87.0+" /> Style-specific fields resolution in `package.json`
-  files: webpack will look for `style` field in `package.json` files and use
-  that if it exists for imports inside CSS files.
+- <Badge text="5.87.0+" /> تحليل الحقول الخاصّة بـ style في ملفّات `package.json`: سيبحث webpack عن حقل `style` في ملفّات `package.json` ويستعمله إن وُجد للاستيراد داخل ملفّات CSS.
 
-  For example, if you add `@import 'bootstrap';` to your CSS file, webpack will look for `bootstrap` in `node_modules` and use the `style` field in `package.json` from there. If `style` field is not found, webpack will use the `main` field instead to preserve backward compatibility.
+  فمثلاً، إن أضفت `@import 'bootstrap';` إلى ملفّ CSS لديك، فسيبحث webpack عن `bootstrap` في `node_modules` ويستعمل حقل `style` من `package.json` هناك. وإن لم يجد حقل `style`، فسيستعمل حقل `main` بدلاً منه حفاظاً على التوافق العكسي.
 
-- Content hash for CSS files: webpack will generate a content hash for CSS files and use it in the filename. This is useful for long-term caching.
-- CSS extraction: webpack will extract CSS into a separate file. This functionality replaces the need for `mini-css-extract-plugin` and `css-loader`, as it provides native support.
-- CSS imports: webpack will inline CSS imports into the generated CSS file.
-- Hot Module Reload (HMR): webpack supports HMR for CSS files. This means that changes made to CSS files will be reflected in the browser without a full page reload.
+- Content hash لملفّات CSS: سيُولِّد webpack content hash لملفّات CSS ويستعمله في اسم الملفّ، وهذا مفيد للتخزين المؤقَّت طويل الأمد.
+- استخراج CSS: سيستخرج webpack الـ CSS إلى ملفّ منفصل. وتُغني هذه الإمكانية عن الحاجة إلى `mini-css-extract-plugin` و `css-loader`، إذ أنّها توفِّر دعماً أصلياً.
+- استيرادات CSS: سيُضمِّن webpack استيرادات CSS داخل ملفّ CSS المُولَّد.
+- إعادة التحميل الساخن (HMR): يدعم webpack الـ HMR لملفّات CSS، أي أنّ التغييرات في ملفّات CSS ستظهر في المتصفّح من دون إعادة تحميل كاملة للصفحة.
 
-- <Badge text="5.107.0+" /> Scope hoisting (module concatenation) for CSS
-  Modules. When
-  [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)
-  is enabled, CSS Modules whose `exportType` is `text`, `css-style-sheet`,
-  `style`, or `link` are concatenated into a single module instance instead of
-  being kept as separate runtime instances. This reduces overhead and produces
-  smaller output for CSS-heavy bundles.
+- <Badge text="5.107.0+" /> Scope hoisting (module concatenation) لـ CSS Modules. حين يُفعَّل [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)، فإنّ وحدات CSS التي يكون `exportType` لها `text` أو `css-style-sheet` أو `style` أو `link` تُدمَج في نسخة واحدة من الوحدة بدلاً من إبقائها نسخاً منفصلة عند الـ runtime. وهذا يُقلِّل الـ overhead ويُنتج مخرَجات أصغر للحزم الثقيلة بـ CSS.
 
-- <Badge text="5.107.0+" /> `@value` identifiers can be used as the path
-  argument to `@import` and inside `url()` references, so shared paths and
-  assets can be defined once and reused across stylesheets. Both quoted
-  (`"./x"`, `'./x'`) and bare (`./x`) forms are accepted and resolved through
-  webpack's normal asset pipeline.
+- <Badge text="5.107.0+" /> يمكن استعمال معرّفات `@value` بوصفها مسارَ معامل لـ `@import` وداخل مراجع `url()`، حتى يُعرَّف المسار أو الـ asset المشترك مرّة واحدة ويُعاد استعماله عبر عدّة أوراق أنماط. وتُقبل الصيغة المُغلَّفة بعلامتي اقتباس (`"./x"`, `'./x'`) والصيغة المُجرَّدة (`./x`)، وتُحلّ كلتاهما عبر مسار الـ assets الاعتيادي في webpack.
 
   ```css
   @value path: "./other.module.css";
@@ -266,23 +249,23 @@ Experimental features:
 
 ### experiments.cacheUnaffected
 
-Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
+يُفعِّل تخزيناً مؤقَّتاً إضافياً في الذاكرة (in-memory) للوحدات التي لم تتغيّر، والتي لا تُشير إلا إلى وحدات لم تتغيّر هي الأخرى.
 
-- Type: `boolean`
+- النوع: `boolean`
 
-Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
+القيمة الافتراضية مأخوذة من قيمة [`futureDefaults`](#experimentsfuturedefaults).
 
 ### experiments.deferImport
 
-Enable support of the tc39 proposal [the `import defer` proposal](https://github.com/tc39/proposal-defer-import-eval).
-This allows deferring the evaluation of a module until its first use.
-This is useful to synchronously defer code execution when it's not possible to use `import()` due to its asynchronous nature.
+فعِّل دعم اقتراح tc39 [اقتراح `import defer`](https://github.com/tc39/proposal-defer-import-eval).
+وهو يتيح تأجيل تقييم الوحدة إلى حين أوّل استعمال لها.
+وهذا مفيد لتأجيل تنفيذ الشيفرة بشكل متزامن حين لا يكون استعمال `import()` ممكناً بسبب طبيعته غير المتزامنة.
 
-- Type: `boolean`
+- النوع: `boolean`
 
-This feature requires the runtime environment to have [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) (ES6) support.
+تستلزم هذه الميزة أن تدعم بيئة الـ runtime [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) (ES6).
 
-Enables the following syntaxes:
+يُفعِّل الصياغات الآتية:
 
 {/* eslint-skip */}
 
@@ -290,33 +273,33 @@ Enables the following syntaxes:
 import defer * as module from "module-name";
 import * as module2 from /* webpackDefer: true */ "module-name2";
 
-// Or using dynamic import
+// أو باستعمال الاستيراد الديناميكي
 import.defer("module-name3");
 import(/* webpackDefer: true */ "module-name4");
 
 export function f() {
-  // module-name is evaluated synchronously, then call doSomething() on it.
+  // module-name تُقيَّم بشكل متزامن، ثمّ تُستدعى عليها doSomething().
   module.doSomething();
 }
 ```
 
-#### Limitations of magic comments (`/* webpackDefer: true */`)
+#### قيود التعليقات السحرية (`/* webpackDefer: true */`)
 
-It's suggested to put the magic comment after the `from` keyword. Other positions may work, but have not been tested.
+يُستحسَن وضع التعليق السحري بعد الكلمة المفتاحية `from`. قد تعمل المواضع الأخرى، غير أنّها لم تُختبر.
 
-Putting the magic comment after the `import` keyword is incompatible with the filesystem cache.
+ووضع التعليق السحري بعد الكلمة المفتاحية `import` غير متوافق مع filesystem cache.
 
 ### experiments.sourceImport
 
 <Badge text="5.106.0+" />
 
-Enable support for the tc39 proposal [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports).
+فعِّل دعم اقتراح tc39 [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports).
 
-This proposal introduces a way to import a module at the _source phase_ instead of immediately evaluating it. In webpack, this experimental support is currently implemented for **WebAssembly modules**: you obtain a compiled [`WebAssembly.Module`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Module) first and instantiate it later with your own imports. Support for JavaScript source imports is planned for a future release.
+يُقدِّم هذا الاقتراح طريقة لاستيراد وحدةٍ في _مرحلة المصدر_ بدلاً من تقييمها فوراً. وفي webpack، هذا الدعم التجريبي مُطبَّق حالياً على **وحدات WebAssembly**: تحصل أوّلاً على [`WebAssembly.Module`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Module) مُصرَّفة، ثمّ تُنشئ منها instance لاحقاً مع imports خاصّة بك. أمّا دعم استيرادات المصدر في JavaScript فمخطَّط له في إصدار قادم.
 
-- Type: `boolean`
+- النوع: `boolean`
 
-Enable it alongside `asyncWebAssembly`:
+فعِّله إلى جانب `asyncWebAssembly`:
 
 ```js
 // webpack.config.js
@@ -329,40 +312,40 @@ export default {
 };
 ```
 
-Then use either the static or dynamic source-phase syntax with a `.wasm` import:
+ثمّ استعمل صياغة source-phase الساكنة أو الديناميكية مع استيراد `.wasm`:
 
 ```text
-// Static form
+// الصيغة الساكنة
 import source wasmModule from "./module.wasm";
 
-// Dynamic form
+// الصيغة الديناميكية
 const wasmModule2 = await import.source("./module.wasm");
 
 const instance = await WebAssembly.instantiate(wasmModule);
 ```
 
-A full example is available in the webpack repository: [examples/wasm-simple-source-phase](https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase).
+ثمّة مثال كامل في مستودع webpack: [examples/wasm-simple-source-phase](https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase).
 
 {/* eslint-skip */}
 
 ```js
-import /* webpackDefer: true */ * as ns from "..."; // known broken
-import * as ns from /* webpackDefer: true */ "..."; // recommended
+import /* webpackDefer: true */ * as ns from "..."; // معلوم أنّه لا يعمل
+import * as ns from /* webpackDefer: true */ "..."; // الموصى به
 ```
 
-You should make sure your loaders do not remove the magic comment.
+تأكّد من أنّ الـ loaders لديك لا تحذف التعليق السحري.
 
-TypeScript, Babel, SWC, and Flow.js can be configured to preserve the magic comment.
+ويمكن ضبط TypeScript و Babel و SWC و Flow.js للحفاظ على التعليق السحري.
 
-Esbuild is _not_ compatible with this feature (see [evanw/esbuild#1439](https://github.com/evanw/esbuild/issues/1439) and [evanw/esbuild#309](https://github.com/evanw/esbuild/issues/309)), but it may support this in the future.
+أمّا Esbuild فهو _غير_ متوافق مع هذه الميزة (انظر [evanw/esbuild#1439](https://github.com/evanw/esbuild/issues/1439) و [evanw/esbuild#309](https://github.com/evanw/esbuild/issues/309))، وإن كان قد يدعمها في المستقبل.
 
 <Badge text="5.105.0+" />
 
-`import.defer()` is now supported for ContextModule (the import path is a dynamic expression). See the [lazy loading guide](/guides/lazy-loading/#defer-import-example) for examples.
+`import.defer()` صار مدعوماً الآن لـ ContextModule (حين يكون مسار الاستيراد تعبيراً ديناميكياً). انظر [دليل التحميل الكسول](/guides/lazy-loading/#defer-import-example) للأمثلة.
 
 ### experiments.futureDefaults
 
-Use defaults of the next major webpack and show warnings in any problematic places.
+استعمل القيم الافتراضية لإصدار webpack الرئيسي القادم، واعرض تحذيرات في أيّ موضع قد يكون إشكالياً.
 
 **webpack.config.js**
 
@@ -489,15 +472,15 @@ Placing an HTML `<!-- webpackIgnore: true -->` comment immediately before a tag 
 
 ### experiments.lazyCompilation
 
-Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
+صرِّف نقاط الدخول و `import` الديناميكية فقط حين تكون مستعملة. يمكن استعماله للويب أو لـ Node.js.
 
-- Type
+- النوع
   - `boolean`
   - `object`
 
     ```ts
     {
-      // define a custom backend
+      // عرِّف backend مخصَّصاً
       backend?: ((
         compiler: Compiler,
         callback: (err?: Error, api?: BackendApi) => void
@@ -505,22 +488,22 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
         | ((compiler: Compiler) => Promise<BackendApi>)
         | {
           /**
-           * A custom client.
+           * عميل مخصَّص.
            */
           client?: string;
 
           /**
-           * Specify where to listen to from the server.
+           * حدِّد المنفذ الذي يستمع إليه الخادوم.
            */
           listen?: number | ListenOptions | ((server: Server) => void);
 
           /**
-           * Specify the protocol the client should use to connect to the server.
+           * حدِّد البروتوكول الذي يستعمله العميل للاتصال بالخادوم.
            */
           protocol?: "http" | "https";
 
           /**
-           * Specify how to create the server handling the EventSource requests.
+           * حدِّد طريقة إنشاء الخادوم الذي يُعالج طلبات EventSource.
            */
           server?: ServerOptionsImport | ServerOptionsHttps | (() => Server);
         },
@@ -530,13 +513,13 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
     }
     ```
 
-    - `backend`: Customize the backend.
-    - `entries`: Enable lazy compilation for entries.
-    - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
-    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
+    - `backend`: خصِّص الـ backend.
+    - `entries`: فعِّل التصريف الكسول لنقاط الدخول.
+    - `imports` <Badge text='5.20.0+' />: فعِّل التصريف الكسول للاستيرادات الديناميكية.
+    - `test` <Badge text='5.20.0+' />: حدِّد أيّ الوحدات المستوردة ينبغي تصريفها كسولياً.
 
-- Available: 5.17.0+
-- Example 1:
+- متاح: 5.17.0+
+- مثال 1:
 
   ```js
   export default {
@@ -547,20 +530,20 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
   };
   ```
 
-- Example 2:
+- مثال 2:
 
   ```js
   export default {
     // …
     experiments: {
       lazyCompilation: {
-        // disable lazy compilation for dynamic imports
+        // عطِّل التصريف الكسول للاستيرادات الديناميكية
         imports: false,
 
-        // disable lazy compilation for entries
+        // عطِّل التصريف الكسول لنقاط الدخول
         entries: false,
 
-        // do not lazily compile moduleB
+        // لا تُصرِّف moduleB كسولياً
         test: (module) => !/moduleB/.test(module.nameForCondition()),
       },
     },
@@ -571,7 +554,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
 
 `boolean`
 
-Once enabled, webpack will output ECMAScript module syntax whenever possible. For instance, `import()` to load chunks, ESM exports to expose chunk data, among others.
+حين يُفعَّل هذا الخيار، سيُخرج webpack صياغة وحدات ECMAScript كلّما كان ذلك ممكناً. فعلى سبيل المثال، يستعمل `import()` لتحميل الـ chunks، و ESM exports لكشف بيانات الـ chunk، وغير ذلك.
 
 ```js
 export default {
