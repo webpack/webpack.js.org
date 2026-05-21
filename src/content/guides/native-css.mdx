@@ -1,17 +1,17 @@
 ---
-title: Native CSS
+title: CSS الأصلي
 sort: 27
 contributors:
-  - phoekerson
+  - arabpolice
 ---
 
-This guide shows how to use webpack native CSS handling with `experiments.css`.
+يوضح هذا الدليل كيفية استخدام معالجة CSS الأصلية في webpack عبر `experiments.css`.
 
-T> `experiments.css` is still experimental. It is expected to become the default in webpack v6, but behavior can still change while development continues.
+T> ما يزال `experiments.css` تجريبيًا. من المتوقع أن يصبح السلوك الافتراضي في webpack v6، لكن قد يستمر السلوك في التغير أثناء متابعة التطوير.
 
-## Getting Started
+## البدء
 
-Enable native CSS support in your webpack configuration:
+فعّل دعم CSS الأصلي في إعدادات webpack:
 
 **webpack.config.js**
 
@@ -23,11 +23,11 @@ export default {
 };
 ```
 
-With this option enabled, webpack can process CSS without adding `css-loader` and `mini-css-extract-plugin` for the basic flow.
+مع تفعيل هذا الخيار، يستطيع webpack معالجة CSS دون إضافة `css-loader` و `mini-css-extract-plugin` في المسار الأساسي.
 
-## Importing CSS
+## استيراد CSS
 
-After enabling the experiment, import `.css` files directly from JavaScript:
+بعد تفعيل التجربة، استورد ملفات `.css` مباشرة من JavaScript:
 
 **src/index.js**
 
@@ -47,14 +47,14 @@ h1 {
 }
 ```
 
-Webpack will process the CSS and include it in the build output.
+سيعالج Webpack ملف CSS ويضمّنه في مخرجات البناء.
 
 ## CSS Modules
 
-Native CSS support also includes CSS Modules. The recommended approach is:
+يتضمن دعم CSS الأصلي أيضًا CSS Modules. الأسلوب الموصى به هو:
 
-- keep `type: "css/auto"` for mixed CSS handling,
-- use `.module.css` (or `.modules.css`) naming for CSS Modules files.
+- الإبقاء على `type: "css/auto"` لمعالجة CSS المختلطة،
+- استخدام تسمية `.module.css` (أو `.modules.css`) لملفات CSS Modules.
 
 **src/button.module.css**
 
@@ -79,9 +79,9 @@ button.textContent = "Click me";
 document.body.appendChild(button);
 ```
 
-T> CSS Modules class names are exported. By default, named exports are enabled for CSS modules.
+T> يتم تصدير أسماء الأصناف في CSS Modules. افتراضيًا، تكون الصادرات المسمّاة مفعّلة لوحدات CSS.
 
-You can customize CSS Modules behavior using parser and generator options:
+يمكنك تخصيص سلوك CSS Modules باستخدام خيارات parser و generator:
 
 **webpack.config.js**
 
@@ -106,32 +106,32 @@ export default {
 };
 ```
 
-## Production Build
+## بناء الإنتاج
 
-With `experiments.css: true`, webpack provides native CSS extraction and content hashing for CSS assets in production builds.
+مع `experiments.css: true`، يوفر webpack استخراج CSS أصليًا وتجزئة محتوى لملفات CSS في بناءات الإنتاج.
 
-Compared to the classic setup:
+بالمقارنة مع الإعداد الكلاسيكي:
 
-- Traditional approach: `css-loader` + `mini-css-extract-plugin`
-- Native approach: `experiments.css` with built-in extraction behavior
+- الأسلوب التقليدي: `css-loader` + `mini-css-extract-plugin`
+- الأسلوب الأصلي: `experiments.css` مع سلوك استخراج مضمّن
 
-This reduces configuration and keeps the CSS pipeline closer to webpack core features.
+يقلل هذا من حجم الإعدادات ويبقي مسار معالجة CSS أقرب إلى ميزات webpack الأساسية.
 
-## Experimental Status & Known Limitations
+## الحالة التجريبية والقيود المعروفة
 
-`experiments.css` is explicitly experimental, so treat it as opt-in and test carefully before broad rollout.
+يُعد `experiments.css` تجريبيًا صراحةً، لذلك تعامل معه كميزة اختيارية واختبره بعناية قبل تعميمه على نطاق واسع.
 
-Known points to keep in mind:
+نقاط معروفة يجب أخذها في الحسبان:
 
-- APIs and behavior may still evolve before webpack v6 defaults.
-- Some loader-specific options are not part of native CSS behavior (for example, loader-specific filters).
-- If your project relies on advanced loader chains, validate each part before migrating fully.
+- قد تستمر واجهات API والسلوك في التطور قبل أن تصبح افتراضية في webpack v6.
+- بعض الخيارات الخاصة بالـ loaders ليست جزءًا من سلوك CSS الأصلي (مثل المرشحات الخاصة بـ loader معين).
+- إذا كان مشروعك يعتمد على سلاسل loaders متقدمة، فتحقق من كل جزء قبل الانتقال الكامل.
 
-## Migration Guide
+## دليل الترحيل
 
-If you currently use `css-loader`, `mini-css-extract-plugin`, and `style-loader`, migrate in small steps.
+إذا كنت تستخدم حاليًا `css-loader` و `mini-css-extract-plugin` و `style-loader`، فانتقل على خطوات صغيرة.
 
-### 1) Start from a classic setup
+### 1) ابدأ من إعداد كلاسيكي
 
 **webpack.config.js**
 
@@ -151,7 +151,7 @@ export default {
 };
 ```
 
-### 2) Switch to native CSS
+### 2) انتقل إلى CSS الأصلي
 
 **webpack.config.js**
 
@@ -163,9 +163,9 @@ export default {
 };
 ```
 
-### 3) Migrate `css-loader` options first
+### 3) انقل خيارات `css-loader` أولًا
 
-Most CSS Modules-related options should move to native parser/generator config.
+ينبغي نقل معظم الخيارات المرتبطة بـ CSS Modules إلى إعدادات parser/generator الأصلية.
 
 **webpack.config.js**
 
@@ -194,17 +194,17 @@ export default {
 };
 ```
 
-Notes:
+ملاحظات:
 
-- `import` and `url` are native parser switches for CSS handling.
-- `namedExports` controls CSS Modules exports behavior.
-- `exportsConvention` and `localIdentName` provide class export/name shaping.
-- `localIdentName` supports hash placeholders (for example `[hash:base64:6]`); you can tune hashing globally with [`output.hashFunction`](/configuration/output/#outputhashfunction), [`output.hashDigest`](/configuration/output/#outputhashdigest), [`output.hashDigestLength`](/configuration/output/#outputhashdigestlength), and [`output.hashSalt`](/configuration/output/#outputhashsalt).
-- `css-loader` filter-style options are not available as direct equivalents; use webpack mechanisms such as `IgnorePlugin` when needed.
+- `import` و `url` هما مفتاحا parser أصليان لمعالجة CSS.
+- يتحكم `namedExports` في سلوك صادرات CSS Modules.
+- يوفر `exportsConvention` و `localIdentName` تشكيلًا لتصدير الأصناف وأسمائها.
+- يدعم `localIdentName` مواضع hash (مثل `[hash:base64:6]`)؛ يمكنك ضبط التجزئة عالميًا باستخدام [`output.hashFunction`](/configuration/output/#outputhashfunction) و [`output.hashDigest`](/configuration/output/#outputhashdigest) و [`output.hashDigestLength`](/configuration/output/#outputhashdigestlength) و [`output.hashSalt`](/configuration/output/#outputhashsalt).
+- لا تتوفر خيارات `css-loader` الشبيهة بالمرشحات كمكافئات مباشرة؛ استخدم آليات webpack مثل `IgnorePlugin` عند الحاجة.
 
-### 4) Replace `mini-css-extract-plugin`
+### 4) استبدل `mini-css-extract-plugin`
 
-When `experiments.css` is enabled, webpack provides native CSS extraction and content hash handling for CSS output files, so you can drop both `mini-css-extract-plugin` and `css-loader` from this basic setup.
+عند تفعيل `experiments.css`، يوفر webpack استخراج CSS أصليًا ومعالجة hash للمحتوى في ملفات CSS الناتجة، لذلك يمكنك إزالة كل من `mini-css-extract-plugin` و `css-loader` من هذا الإعداد الأساسي.
 
 **webpack.config.js**
 
@@ -219,14 +219,14 @@ When `experiments.css` is enabled, webpack provides native CSS extraction and co
  };
 ```
 
-You can remove:
+يمكنك إزالة:
 
-- the CSS loader chain (including `css-loader`) from `module.rules`,
-- the `new MiniCssExtractPlugin()` plugin instance.
+- سلسلة loaders الخاصة بـ CSS (بما في ذلك `css-loader`) من `module.rules`،
+- نسخة الملحق `new MiniCssExtractPlugin()`.
 
-### 5) Replace `style-loader` with `exportType: "style"`
+### 5) استبدل `style-loader` بـ `exportType: "style"`
 
-If you used `style-loader` for runtime style injection, keep `css/auto` and use module naming (`.module.css` or `.modules.css`), then set `exportType: "style"`:
+إذا كنت تستخدم `style-loader` لحقن الأنماط أثناء وقت التشغيل، فأبقِ `css/auto` واستخدم تسمية الوحدات (`.module.css` أو `.modules.css`)، ثم عيّن `exportType: "style"`:
 
 **webpack.config.js**
 
@@ -249,23 +249,23 @@ export default {
 };
 ```
 
-This mode injects a `<style>` element from the webpack runtime and covers the typical `style-loader` use case.
+يحقن هذا الوضع عنصر `<style>` من وقت تشغيل webpack ويغطي حالة الاستخدام المعتادة لـ `style-loader`.
 
-If you cannot rename files to the CSS Modules naming convention, you can use `type: "css/module"` directly for the relevant rule.
+إذا لم تستطع إعادة تسمية الملفات وفق اصطلاح تسمية CSS Modules، يمكنك استخدام `type: "css/module"` مباشرة للقاعدة المعنية.
 
-### 6) Keep imports unchanged
+### 6) أبقِ الاستيرادات دون تغيير
 
-Your JS imports can stay the same:
+يمكن أن تبقى استيرادات JS كما هي:
 
 ```js
 import "./styles.css";
 import * as styles from "./button.module.css";
 ```
 
-### 7) Validate output in development and production
+### 7) تحقق من المخرجات في التطوير والإنتاج
 
-Check that:
+تحقق مما يلي:
 
-- styles are applied correctly in development,
-- generated CSS files are emitted for production,
-- CSS Modules exports match your existing usage.
+- يتم تطبيق الأنماط بشكل صحيح في التطوير،
+- يتم إصدار ملفات CSS المولّدة للإنتاج،
+- تتطابق صادرات CSS Modules مع استخدامك الحالي.

@@ -1,64 +1,30 @@
 ---
-title: Code Splitting
+title: تقسيم الكود
 sort: 5
 contributors:
-  - pksjce
-  - pastelsky
-  - simon04
-  - jonwheeler
-  - johnstew
-  - shinxi
-  - tomtasche
-  - levy9527
-  - rahulcs
-  - chrisVillanueva
-  - rafde
-  - bartushek
-  - shaunwallace
-  - skipjack
-  - jakearchibald
-  - TheDutchCoder
-  - rouzbeh84
-  - shaodahong
-  - sudarsangp
-  - kcolton
-  - efreitasn
-  - EugeneHlushko
-  - Tiendo1011
-  - byzyk
-  - AnayaDesign
-  - wizardofhogwarts
-  - maximilianschmelzer
-  - smelukov
-  - chenxsan
-  - Adarah
-  - atesgoral
-  - snitin315
-  - artem-malko
-  - Brennvo
-  - ThierryRakotomanana
+  - arabpolice
 related:
-  - title: <link rel="prefetch/preload" /> in webpack
+  - title: <link rel="prefetch/preload" /> في webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
-  - title: Preload, Prefetch And Priorities in Chrome
+  - title: التحميل المسبق (Preload)، والجلب المسبق (Prefetch)، والأولويات في Chrome
     url: https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
-  - title: Preloading content with <link rel="preload" />
+  - title: التحميل المسبق للمحتوى باستخدام <link rel="preload" />
     url: https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 ---
 
-T> This guide extends the example provided in [Getting Started](/guides/getting-started). Please make sure you are at least familiar with the example provided there and the [Output Management](/guides/output-management/) chapter.
+T> هذا الدليل يوسّع المثال المقدم في [البدء](/guides/getting-started). يرجى التأكد من أنك على الأقل على دراية بالمثال المقدم هناك وبفصل [إدارة المخرجات](/guides/output-management/).
 
-Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.
+يُعد تقسيم الكود (Code Splitting) أحد أكثر ميزات webpack قوة وإقناعًا. تتيح لك هذه الميزة تقسيم الكود إلى حزم متعددة يمكن تحميلها عند الطلب أو بشكل متوازٍ. يمكن استخدام ذلك لتحقيق حزم أصغر والتحكم في أولوية تحميل الموارد، مما قد يكون له تأثير كبير على وقت التحميل إذا استُخدم بشكل صحيح.
 
-There are three general approaches to code splitting available:
+هناك ثلاث طرق عامة متاحة لتقسيم الكود:
 
-- **Entry Points**: Manually split code using [`entry`](/configuration/entry-context) configuration.
-- **Prevent Duplication**: Use [Entry dependencies](/configuration/entry-context/#dependencies) or [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) to dedupe and split chunks.
-- **Dynamic Imports**: Split code via inline function calls within modules.
+- **نقاط الإدخال (Entry Points)**: تقسيم الكود يدويًا باستخدام إعداد [`entry`](/configuration/entry-context).
+- **منع التكرار (Prevent Duplication)**: استخدام [اعتماديات الإدخال](/configuration/entry-context/#dependencies) أو [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) لإزالة التكرار وتقسيم الأجزاء.
+- **الاستيراد الديناميكي (Dynamic Imports)**: تقسيم الكود عبر استدعاءات دوال مضمّنة داخل الوحدات.
 
-## Entry Points
+## نقاط الإدخال
 
-This is by far the easiest and most intuitive way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
+تُعد هذه أبسط وأكثر الطرق وضوحًا لتقسيم الكود. ومع ذلك فهي أكثر يدوية ولها بعض العيوب التي سنستعرضها. دعونا نلقِ نظرة على كيفية تقسيم وحدة أخرى من الحزمة الرئيسية:
 
 **project**
 
@@ -72,7 +38,7 @@ This is by far the easiest and most intuitive way to split code. However, it is 
   │   ├── index.js
 + │   └── another-module.js
   └── /node_modules
-```
+````
 
 **another-module.js**
 
@@ -106,7 +72,7 @@ console.log(_.join(["Another", "module", "loaded!"], " "));
  };
 ```
 
-This will yield the following build result:
+سينتج عن ذلك نتيجة البناء التالية:
 
 ```bash
 ...
@@ -121,18 +87,18 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 245 ms
 ```
 
-As mentioned there are some pitfalls to this approach:
+كما ذُكر، توجد بعض العيوب في هذا الأسلوب:
 
-- If there are any duplicated modules between entry chunks they will be included in both bundles.
-- It isn't as flexible and can't be used to dynamically split code with the core application logic.
+* إذا كانت هناك وحدات مكررة بين أجزاء الإدخال، فسيتم تضمينها في كلتا الحزمتين.
+* ليس مرنًا جدًا ولا يمكن استخدامه لتقسيم الكود ديناميكيًا مع منطق التطبيق الأساسي.
 
-The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication in next section.
+النقطة الأولى من هاتين النقطتين تُعد مشكلة فعلية في مثالنا، لأن `lodash` تم استيراده أيضًا داخل `./src/index.js` وبالتالي سيتم تكراره في كلتا الحزمتين. دعونا نزيل هذا التكرار في القسم التالي.
 
-## Prevent Duplication
+## منع التكرار
 
-### Entry dependencies
+### اعتماديات الإدخال
 
-The [`dependOn` option](/configuration/entry-context/#dependencies) allows to share the modules between the chunks:
+يسمح خيار [`dependOn`](/configuration/entry-context/#dependencies) بمشاركة الوحدات بين الأجزاء:
 
 **webpack.config.js**
 
@@ -165,7 +131,7 @@ The [`dependOn` option](/configuration/entry-context/#dependencies) allows to sh
  };
 ```
 
-If we're going to use multiple entry points on a single HTML page, `optimization.runtimeChunk: 'single'` is needed too, otherwise we could get into trouble described [here](https://bundlers.tooling.report/code-splitting/multi-entry/).
+إذا كنا سنستخدم عدة نقاط إدخال في صفحة HTML واحدة، فسنحتاج أيضًا إلى `optimization.runtimeChunk: 'single'`، وإلا فقد نواجه المشكلة الموضحة [هنا](https://bundlers.tooling.report/code-splitting/multi-entry/).
 
 **webpack.config.js**
 
@@ -199,7 +165,7 @@ If we're going to use multiple entry points on a single HTML page, `optimization
  };
 ```
 
-And here's the result of build:
+وهنا نتيجة البناء:
 
 ```bash
 ...
@@ -219,13 +185,13 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 249 ms
 ```
 
-As you can see there's another `runtime.bundle.js` file generated besides `shared.bundle.js`, `index.bundle.js` and `another.bundle.js`.
+كما ترى، تم إنشاء ملف إضافي باسم `runtime.bundle.js` بجانب `shared.bundle.js` و `index.bundle.js` و `another.bundle.js`.
 
-Although using multiple entry points per page is allowed in webpack, it should be avoided when possible in favor of an entry point with multiple imports: `entry: { page: ['./analytics', './app'] }`. This results in a better optimization and consistent execution order when using `async` script tags.
+على الرغم من أن استخدام عدة نقاط إدخال في الصفحة الواحدة مسموح به في webpack، فإنه يُفضل تجنبه متى أمكن لصالح نقطة إدخال واحدة تحتوي على عدة استيرادات: `entry: { page: ['./analytics', './app'] }`. ينتج عن ذلك تحسين أفضل وترتيب تنفيذ متسق عند استخدام وسوم `script` مع `async`.
 
 ### SplitChunksPlugin
 
-The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
+تسمح لنا [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) باستخراج الاعتماديات المشتركة إلى جزء إدخال موجود أو إلى جزء جديد بالكامل. دعونا نستخدمها لإزالة تكرار اعتماد `lodash` من المثال السابق:
 
 **webpack.config.js**
 
@@ -254,9 +220,9 @@ The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract co
   };
 ```
 
-With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimizationsplitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. However, it's important to note that common dependencies are only extracted into a separate chunk if they meet the [size thresholds](/plugins/split-chunks-plugin/#splitchunksminsize) specified by webpack.
+بعد إضافة إعداد [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimizationsplitchunks)، ينبغي الآن إزالة الاعتماد المكرر من `index.bundle.js` و `another.bundle.js`. يجب أن يلاحظ الملحق أننا فصلنا `lodash` إلى جزء مستقل ويزيل الوزن الزائد من الحزمة الرئيسية. ومع ذلك، من المهم ملاحظة أن الاعتماديات المشتركة لن تُستخرج إلى جزء منفصل إلا إذا استوفت [حدود الحجم](/plugins/split-chunks-plugin/#splitchunksminsize) التي يحددها webpack.
 
-Let's do an `npm run build` to see if it worked:
+دعونا ننفذ `npm run build` لنرى إن كان ذلك قد نجح:
 
 ```bash
 ...
@@ -274,17 +240,17 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 241 ms
 ```
 
-Here are some other useful plugins and loaders provided by the community for splitting code:
+إليك بعض الملحقات والمحملات الأخرى المفيدة المقدمة من المجتمع لتقسيم الكود:
 
-- [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
+* [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): مفيد لفصل CSS عن التطبيق الرئيسي.
 
-## Dynamic Imports
+## الاستيراد الديناميكي
 
-Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and recommended approach is to use the [`import()` syntax](/api/module-methods/#import-1) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods/#requireensure). Let's try using the first of these two approaches...
+يدعم webpack تقنيتين متشابهتين لتقسيم الكود الديناميكي. الطريقة الأولى والمُوصى بها هي استخدام صيغة [`import()`](/api/module-methods/#import-1) المتوافقة مع [اقتراح ECMAScript](https://github.com/tc39/proposal-dynamic-import) للاستيراد الديناميكي. الطريقة القديمة الخاصة بـ webpack هي استخدام [`require.ensure`](/api/module-methods/#requireensure). دعونا نجرب الطريقة الأولى...
 
-W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers (e.g., IE 11), remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+W> تستخدم استدعاءات `import()` [الوعود (Promises)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) داخليًا. إذا كنت تستخدم `import()` مع المتصفحات القديمة (مثل IE 11)، فتذكر تضمين `Promise` باستخدام polyfill مثل [es6-promise](https://github.com/stefanpenner/es6-promise) أو [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`optimization.splitChunks`](/plugins/split-chunks-plugin) from our configuration in the above example as they won't be needed for this next demonstration:
+قبل أن نبدأ، دعونا نزيل [`entry`](/concepts/entry-points/) الإضافي و [`optimization.splitChunks`](/plugins/split-chunks-plugin) من إعداداتنا في المثال السابق لأننا لن نحتاجهما في هذا العرض التالي:
 
 **webpack.config.js**
 
@@ -313,7 +279,7 @@ Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [
  };
 ```
 
-We'll also update our project to remove the now unused files:
+سنقوم أيضًا بتحديث مشروعنا لإزالة الملفات غير المستخدمة الآن:
 
 **project**
 
@@ -329,7 +295,7 @@ We'll also update our project to remove the now unused files:
   └── /node_modules
 ```
 
-Now, instead of statically importing `lodash`, we'll use dynamic importing to separate a chunk:
+الآن، بدلًا من استيراد `lodash` بشكل ثابت، سنستخدم الاستيراد الديناميكي لفصل جزء مستقل:
 
 **src/index.js**
 
@@ -351,7 +317,7 @@ Now, instead of statically importing `lodash`, we'll use dynamic importing to se
 -  return element;
 +      return element;
 +    })
-+    .catch((error) => 'An error occurred while loading the component');
++    .catch((error) => 'حدث خطأ أثناء تحميل المكوّن');
  }
 
 -document.body.appendChild(component());
@@ -360,9 +326,9 @@ Now, instead of statically importing `lodash`, we'll use dynamic importing to se
 +});
 ```
 
-The reason we need `default` is that since webpack 4, when importing a CommonJS module, the import will no longer resolve to the value of `module.exports`, it will instead create an artificial namespace object for the CommonJS module. For more information on the reason behind this, read [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655).
+السبب في حاجتنا إلى `default` هو أنه منذ webpack 4، عند استيراد وحدة CommonJS، لن يتم حل الاستيراد إلى قيمة `module.exports` مباشرة، بل سيتم إنشاء كائن namespace اصطناعي لوحدة CommonJS. لمزيد من المعلومات حول سبب ذلك، اقرأ [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655).
 
-Let's run webpack to see `lodash` separated out to a separate bundle:
+دعونا نشغّل webpack لنرى `lodash` منفصلة في حزمة مستقلة:
 
 ```bash
 ...
@@ -376,7 +342,7 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 268 ms
 ```
 
-T> You can also use magic comment `webpackExports` with `import()` to expose specific exports from a dynamically imported module:
+T> يمكنك أيضًا استخدام التعليق السحري `webpackExports` مع `import()` لكشف صادرات محددة من وحدة تم استيرادها ديناميكيًا:
 
 ```js
 import(
@@ -385,9 +351,9 @@ import(
 );
 ```
 
-This can help webpack tree shake other unused exports. See [Magic Comments](/api/module-methods/#magic-comments) for details.
+يمكن أن يساعد ذلك webpack في إزالة الصادرات غير المستخدمة (tree shaking). راجع [Magic Comments](/api/module-methods/#magic-comments) للمزيد من التفاصيل.
 
-As `import()` returns a promise, it can be used with [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). Here's how it would simplify the code:
+وبما أن `import()` تُرجع Promise، فيمكن استخدامها مع [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). إليك كيف يمكن أن تُبسّط الكود:
 
 **src/index.js**
 
@@ -415,32 +381,32 @@ As `import()` returns a promise, it can be used with [`async` functions](https:/
  });
 ```
 
-T> It is possible to provide a [dynamic expression](/api/module-methods/#dynamic-expressions-in-import) to `import()` when you might need to import specific module based on a computed variable later.
+T> من الممكن تمرير [تعبير ديناميكي](/api/module-methods/#dynamic-expressions-in-import) إلى `import()` عندما تحتاج إلى استيراد وحدة محددة بناءً على متغير محسوب لاحقًا.
 
-### Understanding ChunkLoadError
+### فهم ChunkLoadError
 
-When using dynamic `import()` or code splitting, webpack may throw a `ChunkLoadError` if a chunk fails to load at runtime.
+عند استخدام `import()` الديناميكي أو تقسيم الكود، قد يرمي webpack خطأ `ChunkLoadError` إذا فشل تحميل جزء أثناء وقت التشغيل.
 
-This error typically indicates that the requested chunk could not be executed or resolved properly. In some cases, the browser’s underlying network or script loading error may not be fully reflected in the `ChunkLoadError` message itself.
+يشير هذا الخطأ عادةً إلى أن الجزء المطلوب لم يتمكن من التنفيذ أو الحل بشكل صحيح. وفي بعض الحالات، قد لا ينعكس خطأ الشبكة أو تحميل السكربت الأساسي من المتصفح بالكامل داخل رسالة `ChunkLoadError` نفسها.
 
-If you encounter this error:
+إذا واجهت هذا الخطأ:
 
-- Verify that the chunk file is accessible via the network.
-- Check that the `publicPath` is correctly configured.
-- Inspect the browser console for additional script or network errors.
+* تحقق من أن ملف الجزء يمكن الوصول إليه عبر الشبكة.
+* تحقق من أن `publicPath` تم إعداده بشكل صحيح.
+* افحص وحدة التحكم في المتصفح للحصول على أخطاء إضافية تتعلق بالسكربت أو الشبكة.
 
-For more context, see related discussion in the webpack issue tracker.
+للمزيد من التفاصيل، راجع النقاش ذي الصلة في متتبع مشاكل webpack.
 
-## Prefetching/Preloading modules
+## الجلب المسبق/التحميل المسبق للوحدات
 
-Webpack 4.6.0+ adds support for prefetching and preloading.
+أضاف webpack 4.6.0+ دعمًا للجلب المسبق (prefetching) والتحميل المسبق (preloading).
 
-Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that for:
+يسمح استخدام هذه التعليمات المضمّنة أثناء تعريف الاستيرادات لـ webpack بإخراج “Resource Hint” يُخبر المتصفح بما يلي:
 
-- **prefetch**: resource is probably needed for some navigation in the future
-- **preload**: resource will also be needed during the current navigation
+* **prefetch**: من المحتمل أن يكون المورد مطلوبًا لبعض التنقلات المستقبلية.
+* **preload**: سيكون المورد مطلوبًا أيضًا أثناء التنقل الحالي.
 
-An example of this is having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
+مثال على ذلك وجود مكوّن `HomePage` يعرض مكوّن `LoginButton` الذي يقوم عند الطلب بتحميل مكوّن `LoginModal` بعد النقر عليه.
 
 **LoginButton.js**
 
@@ -449,20 +415,20 @@ An example of this is having a `HomePage` component, which renders a `LoginButto
 import(/* webpackPrefetch: true */ "./path/to/LoginModal.js");
 ```
 
-This will result in `<link rel="prefetch" href="login-modal-chunk.js">` being appended in the head of the page, which will instruct the browser to prefetch in idle time the `login-modal-chunk.js` file.
+سينتج عن ذلك إضافة `<link rel="prefetch" href="login-modal-chunk.js">` داخل رأس الصفحة، مما يوجّه المتصفح لجلب ملف `login-modal-chunk.js` مسبقًا أثناء وقت الخمول.
 
-T> webpack will add the prefetch hint once the parent chunk has been loaded.
+T> سيضيف webpack تلميح prefetch بمجرد تحميل الجزء الأب.
 
-Preload directive has a bunch of differences compared to prefetch:
+يوجد عدة اختلافات بين preload و prefetch:
 
-- A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finishes loading.
-- A preloaded chunk has medium priority and is instantly downloaded. A prefetched chunk is downloaded while the browser is idle.
-- A preloaded chunk should be instantly requested by the parent chunk. A prefetched chunk can be used anytime in the future.
-- Browser support is different.
+* يبدأ تحميل الجزء المحمّل مسبقًا بالتوازي مع الجزء الأب. بينما يبدأ تحميل الجزء المجلوِب مسبقًا بعد انتهاء تحميل الجزء الأب.
+* يمتلك الجزء المحمّل مسبقًا أولوية متوسطة ويتم تنزيله فورًا. بينما يتم تنزيل الجزء المجلوِب مسبقًا عندما يكون المتصفح في وضع الخمول.
+* يجب أن يُطلب الجزء المحمّل مسبقًا فورًا من قبل الجزء الأب. بينما يمكن استخدام الجزء المجلوِب مسبقًا في أي وقت مستقبلًا.
+* يختلف دعم المتصفحات بينهما.
 
-An example of this can be having a `Component` which always depends on a big library that should be in a separate chunk.
+يمكن أن يكون مثال ذلك وجود مكوّن `Component` يعتمد دائمًا على مكتبة ضخمة يجب وضعها في جزء منفصل.
 
-Let's imagine a component `ChartComponent` which needs a huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
+لنتخيل مكوّنًا باسم `ChartComponent` يحتاج إلى مكتبة ضخمة اسمها `ChartingLibrary`. يعرض `LoadingIndicator` عند التصيير ويقوم مباشرة باستيراد `ChartingLibrary` عند الطلب:
 
 **ChartComponent.js**
 
@@ -471,23 +437,23 @@ Let's imagine a component `ChartComponent` which needs a huge `ChartingLibrary`.
 import(/* webpackPreload: true */ "ChartingLibrary");
 ```
 
-When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.
+عندما يتم طلب صفحة تستخدم `ChartComponent`، سيتم أيضًا طلب جزء charting-library عبر `<link rel="preload">`. وبافتراض أن جزء الصفحة أصغر وينتهي تحميله أسرع، فسيتم عرض الصفحة مع `LoadingIndicator` حتى ينتهي تحميل `charting-library-chunk` الذي تم طلبه مسبقًا. هذا يعطي تحسينًا بسيطًا في وقت التحميل لأنه يحتاج إلى رحلة اتصال واحدة بدلًا من اثنتين، خاصة في البيئات ذات زمن الوصول العالي.
 
-T> Using `webpackPreload` incorrectly can actually hurt performance, so be careful when using it.
+T> قد يؤدي استخدام `webpackPreload` بشكل غير صحيح إلى الإضرار بالأداء، لذا كن حذرًا عند استخدامه.
 
-Sometimes you need to have your own control over preload. For example, preload of any dynamic import can be done via async script. This can be useful in case of streaming server side rendering.
+أحيانًا قد تحتاج إلى تحكمك الخاص في preload. على سبيل المثال، يمكن تنفيذ preload لأي استيراد ديناميكي عبر سكربت async. قد يكون هذا مفيدًا في حالة التصيير من جهة الخادم بشكل متدفق (streaming server side rendering).
 
 ```js
 const lazyComp = () =>
   import("DynamicComponent").catch((error) => {
-    // Do something with the error.
-    // For example, we can retry the request in case of any net error
+    // افعل شيئًا مع الخطأ.
+    // على سبيل المثال، يمكننا إعادة المحاولة في حال حدوث خطأ شبكي
   });
 ```
 
-If the script loading will fail before webpack starts loading of that script by itself (webpack creates a script tag to load its code, if that script is not on a page), that catch handler won't start till [chunkLoadTimeout](/configuration/output/#outputchunkloadtimeout) is not passed. This behavior can be unexpected. But it's explainable — webpack can not throw any error, cause webpack doesn't know, that script failed. Webpack will add onerror handler to the script right after the error has happen.
+إذا فشل تحميل السكربت قبل أن يبدأ webpack بتحميله بنفسه (يقوم webpack بإنشاء وسم script لتحميل الكود إذا لم يكن السكربت موجودًا في الصفحة)، فلن يبدأ معالج `catch` حتى انتهاء مدة [chunkLoadTimeout](/configuration/output/#outputchunkloadtimeout). قد يكون هذا السلوك غير متوقع. لكنه قابل للتفسير — لأن webpack لا يستطيع رمي أي خطأ، إذ إنه لا يعلم أن السكربت قد فشل. سيضيف webpack معالج onerror للسكربت بعد حدوث الخطأ بالفعل.
 
-To prevent such problem you can add your own onerror handler, which removes the script in case of any error:
+لمنع هذه المشكلة يمكنك إضافة معالج onerror خاص بك يقوم بإزالة السكربت في حالة حدوث أي خطأ:
 
 ```html
 <script
@@ -497,19 +463,20 @@ To prevent such problem you can add your own onerror handler, which removes the 
 ></script>
 ```
 
-In that case, errored script will be removed. Webpack will create its own script and any error will be processed without any timeouts.
+في هذه الحالة، سيتم إزالة السكربت الذي حدث به خطأ. وسيقوم webpack بإنشاء سكربته الخاص وستتم معالجة أي خطأ بدون أي مهلات زمنية.
 
-## Bundle Analysis
+## تحليل الحزم
 
-Once you start splitting your code, it can be useful to analyze the output to check where modules have ended up. The [official analyze tool](https://github.com/webpack/analyse) is a good place to start. There are some other community-supported options out there as well:
+بمجرد أن تبدأ بتقسيم الكود، قد يكون من المفيد تحليل المخرجات لمعرفة أين انتهت الوحدات. تُعد [أداة التحليل الرسمية](https://github.com/webpack/analyse) مكانًا جيدًا للبدء. كما توجد بعض الخيارات الأخرى المدعومة من المجتمع:
 
-- [webpack-chart](https://alexkuz.github.io/webpack-chart/): Interactive pie chart for webpack stats.
-- [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): Visualize and analyze your bundles to see which modules are taking up space and which might be duplicates.
-- [webpack-bundle-analyzer](https://github.com/webpack/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as a convenient interactive zoomable treemap.
-- [webpack bundle optimize helper](https://webpack.jakoblind.no/optimize): This tool will analyze your bundle and give you actionable suggestions on what to improve to reduce your bundle size.
-- [bundle-stats](https://github.com/bundle-stats/bundle-stats): Generate a bundle report(bundle size, assets, modules) and compare the results between different builds.
-- [webpack-stats-viewer](https://github.com/moonrailgun/webpack-stats-viewer): A plugin with build for webpack stats. Show more information about webpack bundle detail.
+* [webpack-chart](https://alexkuz.github.io/webpack-chart/): مخطط دائري تفاعلي لإحصائيات webpack.
+* [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): تصور وتحليل الحزم لمعرفة الوحدات التي تستهلك المساحة وأيها قد تكون مكررة.
+* [webpack-bundle-analyzer](https://github.com/webpack/webpack-bundle-analyzer): ملحق وأداة CLI تمثل محتوى الحزمة على شكل خريطة شجرية تفاعلية قابلة للتكبير.
+* [webpack bundle optimize helper](https://webpack.jakoblind.no/optimize): تقوم هذه الأداة بتحليل الحزمة وتقديم اقتراحات عملية لتقليل حجم الحزمة.
+* [bundle-stats](https://github.com/bundle-stats/bundle-stats): إنشاء تقرير عن الحزمة (الحجم، الأصول، الوحدات) ومقارنة النتائج بين البنايات المختلفة.
+* [webpack-stats-viewer](https://github.com/moonrailgun/webpack-stats-viewer): ملحق مدمج لإحصائيات webpack يعرض معلومات أكثر عن تفاصيل الحزمة.
 
-## Next Steps
+## الخطوات التالية
 
-See [Lazy Loading](/guides/lazy-loading/) for a more concrete example of how `import()` can be used in a real application and [Caching](/guides/caching/) to learn how to split code more effectively.
+راجع [التحميل الكسول](/guides/lazy-loading/) للحصول على مثال عملي أكثر حول كيفية استخدام `import()` في تطبيق حقيقي، وراجع [التخزين المؤقت](/guides/caching/) لمعرفة كيفية تقسيم الكود بشكل أكثر فعالية.
+

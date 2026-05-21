@@ -1,25 +1,21 @@
 ---
-title: Progressive Web Application
+title: تطبيق ويب تقدمي
 sort: 22
 contributors:
-  - johnnyreilly
-  - chenxsan
-  - EugeneHlushko
-  - benschac
-  - aholzner
+  - arabpolice
 ---
 
-T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
+T> يوسّع هذا الدليل أمثلة الكود الموجودة في دليل [إدارة المخرجات](/guides/output-management).
 
-Progressive Web Applications (or PWAs) are web apps that deliver an experience similar to native applications. There are many things that can contribute to that. Of these, the most significant is the ability for an app to be able to function when **offline**. This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
+تطبيقات الويب التقدمية (أو PWAs) هي تطبيقات ويب تقدم تجربة مشابهة للتطبيقات الأصلية. هناك عوامل كثيرة قد تساهم في ذلك، وأهمها قدرة التطبيق على العمل عند **انقطاع الاتصال**. يتحقق ذلك باستخدام تقنية ويب تُسمى [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
 
-This section will focus on adding an offline experience to our app. We'll achieve this using a Google project called [Workbox](https://github.com/GoogleChrome/workbox) which provides tools that help make offline support for web apps easier to setup.
+سيركز هذا القسم على إضافة تجربة عمل دون اتصال إلى تطبيقنا. سنحقق ذلك باستخدام مشروع من Google باسم [Workbox](https://github.com/GoogleChrome/workbox)، وهو يوفر أدوات تساعد على تسهيل إعداد دعم العمل دون اتصال لتطبيقات الويب.
 
-## We Don't Work Offline Now
+## لا نعمل دون اتصال حاليًا
 
-So far, we've been viewing the output by going directly to the local file system. Typically though, a real user accesses a web app over a network; their browser talking to a **server** which will serve up the required assets (e.g. `.html`, `.js`, and `.css` files).
+حتى الآن، كنا نعرض المخرجات بالوصول مباشرة إلى نظام الملفات المحلي. لكن عادةً يصل المستخدم الحقيقي إلى تطبيق الويب عبر الشبكة؛ حيث يتواصل المتصفح مع **خادم** يقدّم الملفات المطلوبة (مثل ملفات `.html` و `.js` و `.css`).
 
-So let's test what the current experience is like using a server with more basic features. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`. We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
+لذلك دعنا نختبر التجربة الحالية باستخدام خادم بميزات أساسية. سنستخدم حزمة [http-server](https://www.npmjs.com/package/http-server): `npm install http-server --save-dev`. سنعدّل أيضًا قسم `scripts` في ملف `package.json` لإضافة سكربت `start`:
 
 **package.json**
 
@@ -35,9 +31,9 @@ So let's test what the current experience is like using a server with more basic
 }
 ```
 
-Note: [webpack DevServer](/configuration/dev-server/) writes in-memory by default. We'll need to enable [devserverdevmiddleware.writeToDisk](/configuration/dev-server/#devserverdevmiddleware) option in order for http-server to be able to serve files from `./dist` directory.
+ملاحظة: يكتب [webpack DevServer](/configuration/dev-server/) في الذاكرة افتراضيًا. سنحتاج إلى تفعيل خيار [devserverdevmiddleware.writeToDisk](/configuration/dev-server/#devserverdevmiddleware) حتى يتمكن http-server من خدمة الملفات من مجلد `./dist`.
 
-If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
+إذا لم تكن قد فعلت ذلك سابقًا، فنفّذ الأمر `npm run build` لبناء مشروعك. ثم نفّذ الأمر `npm start`. ينبغي أن ينتج عن ذلك المخرجات التالية:
 
 ```bash
 > http-server dist
@@ -50,13 +46,13 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.
+إذا فتحت المتصفح على `http://localhost:8080` (أي `http://127.0.0.1`) فينبغي أن ترى تطبيق webpack يُخدم من مجلد `dist`. إذا أوقفت الخادم ثم حدّثت الصفحة، فلن يكون تطبيق webpack متاحًا بعد ذلك.
 
-This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
+هذا ما نهدف إلى تغييره. عند الوصول إلى نهاية هذا القسم، ينبغي أن نتمكن من إيقاف الخادم، ثم تحديث الصفحة، ومع ذلك سنظل نرى تطبيقنا.
 
-## Adding Workbox
+## إضافة Workbox
 
-Let's add the Workbox webpack plugin and adjust the `webpack.config.js` file:
+لنضف ملحق Workbox الخاص بـ webpack ونعدّل ملف `webpack.config.js`:
 
 ```bash
 npm install workbox-webpack-plugin --save-dev
@@ -84,8 +80,8 @@ npm install workbox-webpack-plugin --save-dev
 +       title: 'Progressive Web Application',
       }),
 +     new WorkboxPlugin.GenerateSW({
-+       // these options encourage the ServiceWorkers to get in there fast
-+       // and not allow any straggling "old" SWs to hang around
++       // تشجع هذه الخيارات ServiceWorkers على العمل سريعًا
++       // ولا تسمح لأي SWs "قديمة" متأخرة بالبقاء
 +       clientsClaim: true,
 +       skipWaiting: true,
 +     }),
@@ -98,7 +94,7 @@ npm install workbox-webpack-plugin --save-dev
   };
 ```
 
-With that in place, let's see what happens when we do an `npm run build`:
+بعد ذلك، لنرَ ما يحدث عند تنفيذ `npm run build`:
 
 ```bash
 ...
@@ -111,13 +107,13 @@ precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitt
 ...
 ```
 
-As you can see, we now have 2 extra files being generated; `service-worker.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `service-worker.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `service-worker.js` requires so it can run. Your own generated files will likely be different; but you should have a `service-worker.js` file there.
+كما ترى، أصبح لدينا الآن ملفان إضافيان يتم توليدهما: `service-worker.js` والملف الأطول اسمًا `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. ملف `service-worker.js` هو ملف Service Worker، أما `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` فهو ملف يحتاجه `service-worker.js` حتى يعمل. غالبًا ستكون الملفات المولّدة لديك مختلفة، لكن ينبغي أن تجد ملف `service-worker.js` هناك.
 
-So we're now at the happy point of having produced a Service Worker. What's next?
+إذن وصلنا الآن إلى مرحلة إنتاج Service Worker. ما الخطوة التالية؟
 
-## Registering Our Service Worker
+## تسجيل Service Worker الخاص بنا
 
-Let's allow our Service Worker to come out and play by registering it. We'll do that by adding the registration code below:
+لنسمح لـ Service Worker بالعمل عبر تسجيله. سنفعل ذلك بإضافة كود التسجيل التالي:
 
 **index.js**
 
@@ -136,14 +132,14 @@ Let's allow our Service Worker to come out and play by registering it. We'll do 
 + }
 ```
 
-Once more `npm run build` to build a version of the app including the registration code. Then serve it with `npm start`. Navigate to `http://localhost:8080` and take a look at the console. Somewhere in there you should see:
+نفّذ `npm run build` مرة أخرى لبناء نسخة من التطبيق تتضمن كود التسجيل. ثم اخدمها باستخدام `npm start`. انتقل إلى `http://localhost:8080` وألقِ نظرة على وحدة التحكم. ينبغي أن ترى في مكان ما:
 
 ```bash
 SW registered
 ```
 
-Now to test it. Stop your server and refresh your page. If your browser supports Service Workers then you should still be looking at your application. However, it has been served up by your Service Worker and **not** by the server.
+والآن لنختبر ذلك. أوقف الخادم وحدّث الصفحة. إذا كان متصفحك يدعم Service Workers، فينبغي أن تظل ترى تطبيقك. لكنه هذه المرة تم تقديمه بواسطة Service Worker الخاص بك و**ليس** بواسطة الخادم.
 
-## Conclusion
+## الخاتمة
 
-You have built an offline app using the Workbox project. You've started the journey of turning your web app into a PWA. You may now want to think about taking things further. A good resource to help you with that can be found [here](https://web.dev/progressive-web-apps/).
+لقد بنيت تطبيقًا يعمل دون اتصال باستخدام مشروع Workbox. وبدأت رحلة تحويل تطبيق الويب الخاص بك إلى PWA. قد ترغب الآن في التفكير في خطوات أبعد. يمكنك العثور على مورد جيد يساعدك في ذلك [هنا](https://web.dev/progressive-web-apps/).

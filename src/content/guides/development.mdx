@@ -1,32 +1,17 @@
 ---
-title: Development
+title: التطوير
 sort: 4
 contributors:
-  - SpaceK33z
-  - rafde
-  - fvgs
-  - TheDutchCoder
-  - WojciechKo
-  - Calinou
-  - GAumala
-  - EugeneHlushko
-  - byzyk
-  - trivikr
-  - aholzner
-  - chenxsan
-  - maxloh
-  - snitin315
-  - f3ndot
-  - Brennvo
+  - arabpolice
 ---
 
-T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
+T> هذا الدليل يُكمل أمثلة الأكواد الموجودة في دليل [إدارة المخرجات](/guides/output-management).
 
-If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
+إذا كنت تتابع الأدلة، فمن المفترض أن يكون لديك فهم قوي لبعض أساسيات webpack. قبل أن نكمل، دعنا نلقي نظرة على إعداد بيئة تطوير تجعل حياتنا أسهل قليلًا.
 
-W> The tools in this guide are **only meant for development**, please **avoid** using them in production!
+W> الأدوات الموجودة في هذا الدليل مخصصة **للتطوير فقط**، يرجى **تجنب** استخدامها في بيئة الإنتاج!
 
-Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development) and `title` to `'Development'`.
+لنبدأ بتعيين [`mode` إلى `'development'`](/configuration/mode/#mode-development) و `title` إلى `'Development'`.
 
 **webpack.config.js**
 
@@ -56,17 +41,17 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
      clean: true,
    },
  };
-```
+````
 
-## Using source maps
+## استخدام Source Maps
 
-When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
+عندما يقوم webpack بدمج الكود المصدري الخاص بك، قد يصبح من الصعب تتبع الأخطاء والتحذيرات إلى موقعها الأصلي. على سبيل المثال، إذا قمت بدمج ثلاثة ملفات مصدر (`a.js` و `b.js` و `c.js`) داخل ملف واحد (`bundle.js`) وكان أحد الملفات يحتوي على خطأ، فإن الـ stack trace سيشير إلى `bundle.js`. هذا ليس مفيدًا دائمًا لأنك غالبًا تريد معرفة الملف الأصلي الذي جاء منه الخطأ.
 
-In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which map your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
+لتسهيل تتبع الأخطاء والتحذيرات، توفر JavaScript ما يسمى بـ [source maps](http://blog.teamtreehouse.com/introduction-source-maps)، والتي تقوم بربط الكود المترجم بالكود الأصلي. إذا كان الخطأ قادمًا من `b.js`، فإن source map ستخبرك بذلك بالضبط.
 
-There are a lot of [different options](/configuration/devtool) available when it comes to source maps. Be sure to check them out so you can configure them to your needs.
+هناك العديد من [الخيارات المختلفة](/configuration/devtool) المتاحة عندما يتعلق الأمر بالـ source maps. تأكد من الاطلاع عليها حتى تتمكن من ضبطها حسب احتياجاتك.
 
-For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes (though not for production):
+في هذا الدليل، سنستخدم خيار `inline-source-map`، وهو مناسب لأغراض الشرح (لكن ليس للإنتاج):
 
 **webpack.config.js**
 
@@ -98,7 +83,7 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
  };
 ```
 
-Now let's make sure we have something to debug, so let's create an error in our `print.js` file:
+الآن دعنا نتأكد أن لدينا شيئًا لنقوم بتصحيحه، لذلك سنقوم بإنشاء خطأ داخل ملف `print.js`:
 
 **src/print.js**
 
@@ -109,7 +94,7 @@ Now let's make sure we have something to debug, so let's create an error in our 
  }
 ```
 
-Run an `npm run build`, it should compile to something like this:
+قم بتشغيل `npm run build`، ويجب أن يتم البناء بشيء مشابه لهذا:
 
 ```bash
 ...
@@ -125,34 +110,34 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 706 ms
 ```
 
-Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
+الآن افتح ملف `index.html` الناتج داخل المتصفح. اضغط على الزر وانظر إلى الـ console حيث يتم عرض الخطأ. يجب أن يبدو الخطأ كالتالي:
 
 ```bash
 Uncaught ReferenceError: cosnole is not defined
    at HTMLButtonElement.printMe (print.js:2)
 ```
 
-We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great because now we know exactly where to look in order to fix the issue.
+يمكننا أن نرى أن الخطأ يحتوي أيضًا على مرجع إلى الملف (`print.js`) ورقم السطر (2) الذي حدث فيه الخطأ. هذا رائع لأننا نعرف الآن بالضبط أين يجب أن ننظر لإصلاح المشكلة.
 
-## Choosing a Development Tool
+## اختيار أداة تطوير
 
-W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your Text Editor](#adjusting-your-text-editor) for a solution to these issues.
+W> بعض محررات النصوص تحتوي على خاصية "safe write" والتي قد تتداخل مع بعض الأدوات التالية. اقرأ [ضبط محرر النصوص الخاص بك](#adjusting-your-text-editor) للحصول على حل لهذه المشاكل.
 
-It quickly becomes a hassle to manually run `npm run build` every time you want to compile your code.
+سرعان ما يصبح تشغيل `npm run build` يدويًا في كل مرة تريد فيها ترجمة الكود أمرًا مزعجًا.
 
-There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:
+هناك عدة خيارات متاحة في webpack تساعدك على ترجمة الكود تلقائيًا كلما تم تغييره:
 
-1.  webpack's [Watch Mode](/configuration/watch/#watch)
-2.  [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
-3.  [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
+1. [Watch Mode](/configuration/watch/#watch) الخاصة بـ webpack
+2. [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+3. [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
 
-In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
+في أغلب الحالات، ربما سترغب باستخدام `webpack-dev-server`، لكن دعنا نستعرض جميع الخيارات السابقة.
 
-### Using Watch Mode
+### استخدام Watch Mode
 
-You can instruct webpack to "watch" all files within your dependency graph for changes. If one of these files is updated, the code will be recompiled so you don't have to run the full build manually.
+يمكنك توجيه webpack لكي "يراقب" جميع الملفات داخل dependency graph الخاصة بك بحثًا عن التغييرات. إذا تم تعديل أحد هذه الملفات، فسيتم إعادة ترجمة الكود تلقائيًا حتى لا تضطر لتشغيل البناء يدويًا.
 
-Let's add an npm script that will start webpack's Watch Mode:
+دعنا نضيف npm script يقوم بتشغيل Watch Mode الخاصة بـ webpack:
 
 **package.json**
 
@@ -181,10 +166,10 @@ Let's add an npm script that will start webpack's Watch Mode:
  }
 ```
 
-Now run `npm run watch` from the command line and see how webpack compiles your code.
-You can see that it doesn't exit the command line because the script is currently watching your files.
+الآن قم بتشغيل `npm run watch` من سطر الأوامر ولاحظ كيف يقوم webpack بترجمة الكود.
+ستلاحظ أنه لا يغلق سطر الأوامر لأنه يراقب الملفات حاليًا.
 
-Now, while webpack is watching your files, let's remove the error we introduced earlier:
+الآن، بينما webpack يراقب ملفاتك، دعنا نزيل الخطأ الذي أضفناه سابقًا:
 
 **src/print.js**
 
@@ -195,19 +180,19 @@ Now, while webpack is watching your files, let's remove the error we introduced 
  }
 ```
 
-Now save your file and check the terminal window. You should see that webpack automatically recompiles the changed module!
+الآن احفظ الملف وتحقق من نافذة الطرفية. يجب أن ترى أن webpack أعاد ترجمة الملف المعدل تلقائيًا!
 
-The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
+العيب الوحيد هو أنك لا تزال بحاجة إلى تحديث المتصفح يدويًا لرؤية التغييرات. سيكون من الأفضل لو حدث ذلك تلقائيًا أيضًا، لذلك دعنا نجرب `webpack-dev-server` الذي يفعل ذلك بالضبط.
 
-### Using webpack-dev-server
+### استخدام webpack-dev-server
 
-The `webpack-dev-server` provides you with a rudimentary web server and the ability to use live reloading. Let's set it up:
+يوفر لك `webpack-dev-server` خادم ويب بسيط مع إمكانية إعادة التحميل التلقائي (live reloading). دعنا نقوم بإعداده:
 
 ```bash
 npm install --save-dev webpack-dev-server
 ```
 
-Change your configuration file to tell the dev server where to look for files:
+قم بتعديل ملف الإعدادات لإخبار dev server بمكان البحث عن الملفات:
 
 **webpack.config.js**
 
@@ -245,15 +230,15 @@ Change your configuration file to tell the dev server where to look for files:
  };
 ```
 
-This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
+هذا يخبر `webpack-dev-server` بأن يقوم بتقديم الملفات من مجلد `dist` على `localhost:8080`.
 
-T> The `optimization.runtimeChunk: 'single'` was added because in this example we have more than one entrypoint on a single HTML page. Without this, we could get into trouble described [here](https://bundlers.tooling.report/code-splitting/multi-entry/). Read the [Code Splitting](/guides/code-splitting/) chapter for more details.
+T> تمت إضافة `optimization.runtimeChunk: 'single'` لأنه في هذا المثال لدينا أكثر من entrypoint داخل صفحة HTML واحدة. بدون هذا قد نواجه المشاكل الموضحة [هنا](https://bundlers.tooling.report/code-splitting/multi-entry/). اقرأ فصل [Code Splitting](/guides/code-splitting/) لمزيد من التفاصيل.
 
-T> `webpack-dev-server` serves bundled files from the directory defined in [`output.path`](/configuration/output/#outputpath), i.e., files will be available under `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
+T> يقوم `webpack-dev-server` بتقديم الملفات المجمعة من المجلد المحدد في [`output.path`](/configuration/output/#outputpath)، أي أن الملفات ستكون متاحة عبر `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
 
-W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`devMiddleware.publicPath`](/configuration/dev-server/#devserverdevmiddleware) option in the dev server's configuration.
+W> لا يقوم webpack-dev-server بكتابة أي ملفات ناتجة بعد الترجمة. بدلًا من ذلك، يحتفظ بالملفات داخل الذاكرة ويقوم بتقديمها كما لو كانت ملفات حقيقية موجودة في المسار الجذري للسيرفر. إذا كانت صفحتك تتوقع وجود ملفات الـ bundle في مسار مختلف، يمكنك تغيير ذلك باستخدام خيار [`devMiddleware.publicPath`](/configuration/dev-server/#devserverdevmiddleware) في إعدادات dev server.
 
-Let's add a script to easily run the dev server as well:
+دعنا نضيف script لتشغيل dev server بسهولة:
 
 **package.json**
 
@@ -284,23 +269,23 @@ Let's add a script to easily run the dev server as well:
  }
 ```
 
-Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
+الآن يمكننا تشغيل `npm start` من سطر الأوامر وسنرى أن المتصفح يفتح الصفحة تلقائيًا. إذا قمت الآن بتعديل أي من ملفات المصدر وحفظها، فسيقوم خادم الويب بإعادة التحميل تلقائيًا بعد ترجمة الكود. جرّب ذلك!
 
-The `webpack-dev-server` comes with many configurable options. Head over to the [documentation](/configuration/dev-server) to learn more.
+يحتوي `webpack-dev-server` على العديد من الخيارات القابلة للتخصيص. توجّه إلى [التوثيق](/configuration/dev-server) لمعرفة المزيد.
 
-T> Now that your server is working, you might want to give [Hot Module Replacement](/guides/hot-module-replacement) a try!
+T> الآن بعد أن أصبح السيرفر يعمل، قد ترغب في تجربة [Hot Module Replacement](/guides/hot-module-replacement)!
 
-### Using webpack-dev-middleware
+### استخدام webpack-dev-middleware
 
-`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines `webpack-dev-middleware` with an express server.
+`webpack-dev-middleware` هو wrapper يقوم بإرسال الملفات التي يعالجها webpack إلى السيرفر. يتم استخدامه داخليًا داخل `webpack-dev-server`، لكنه متاح أيضًا كحزمة مستقلة للسماح بإعدادات أكثر تخصيصًا عند الحاجة. سنلقي نظرة على مثال يجمع بين `webpack-dev-middleware` وسيرفر express.
 
-Let's install `express` and `webpack-dev-middleware` so we can get started:
+دعنا نثبت `express` و `webpack-dev-middleware` حتى نبدأ:
 
 ```bash
 npm install --save-dev express webpack-dev-middleware
 ```
 
-Now we need to make some adjustments to our webpack configuration file in order to make sure the middleware will function correctly:
+الآن نحتاج إلى إجراء بعض التعديلات على ملف إعدادات webpack لضمان عمل الـ middleware بشكل صحيح:
 
 **webpack.config.js**
 
@@ -336,7 +321,7 @@ Now we need to make some adjustments to our webpack configuration file in order 
  };
 ```
 
-The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`. We'll specify the port number later. The next step is setting up our custom `express` server:
+سيتم استخدام `publicPath` داخل ملف السيرفر أيضًا لضمان تقديم الملفات بشكل صحيح على `http://localhost:3000`. سنحدد رقم المنفذ لاحقًا. الخطوة التالية هي إعداد سيرفر `express` المخصص:
 
 **project**
 
@@ -364,21 +349,21 @@ import config from "./webpack.config.js";
 const app = express();
 const compiler = webpack(config);
 
-// Tell express to use the webpack-dev-middleware and use the webpack.config.js
-// configuration file as a base.
+// أخبر express باستخدام webpack-dev-middleware
+// واستخدام ملف webpack.config.js كأساس للإعدادات.
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
   }),
 );
 
-// Serve the files on port 3000.
+// تقديم الملفات على المنفذ 3000.
 app.listen(3000, () => {
   console.log("Example app listening on port 3000!\n");
 });
 ```
 
-Now add an npm script to make it a little easier to run the server:
+الآن أضف npm script لتسهيل تشغيل السيرفر:
 
 **package.json**
 
@@ -412,7 +397,7 @@ Now add an npm script to make it a little easier to run the server:
  }
 ```
 
-Now in your terminal run `npm run server`, it should give you an output similar to this:
+الآن داخل الطرفية قم بتشغيل `npm run server`، ويجب أن تحصل على مخرجات مشابهة لهذا:
 
 ```bash
 Example app listening on port 3000!
@@ -434,20 +419,22 @@ Example app listening on port 3000!
 <i> [webpack-dev-middleware] Compiled successfully.
 ```
 
-Now fire up your browser and go to `http://localhost:3000`. You should see your webpack app running and functioning!
+الآن افتح متصفحك وانتقل إلى `http://localhost:3000`. يجب أن ترى تطبيق webpack الخاص بك يعمل بشكل صحيح!
 
-T> If you would like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
+T> إذا كنت ترغب في معرفة المزيد حول كيفية عمل Hot Module Replacement، فنوصيك بقراءة دليل [Hot Module Replacement](/guides/hot-module-replacement/).
 
-## Adjusting Your Text Editor
+## ضبط محرر النصوص الخاص بك
 
-When using automatic compilation of your code, you could run into issues when saving your files. Some editors have a "safe write" feature that can potentially interfere with recompilation.
+عند استخدام الترجمة التلقائية للكود، قد تواجه مشاكل عند حفظ الملفات. بعض المحررات تحتوي على ميزة "safe write" والتي قد تتداخل مع إعادة الترجمة.
 
-To disable this feature in some common editors, see the list below:
+لتعطيل هذه الميزة في بعض المحررات الشائعة، راجع القائمة التالية:
 
-- **Sublime Text 3**: Add `atomic_save: 'false'` to your user preferences.
-- **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-- **Vim**: Add `:set backupcopy=yes` to your settings.
+* **Sublime Text 3**: أضف `atomic_save: 'false'` إلى تفضيلات المستخدم الخاصة بك.
+* **JetBrains IDEs (مثل WebStorm)**: قم بإلغاء تحديد "Use safe write" من `Preferences > Appearance & Behavior > System Settings`.
+* **Vim**: أضف `:set backupcopy=yes` إلى إعداداتك.
 
-## Conclusion
+## الخاتمة
 
-Now that you've learned how to automatically compile your code and run a development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).
+الآن بعد أن تعلمت كيفية ترجمة الكود تلقائيًا وتشغيل سيرفر تطوير، يمكنك الانتقال إلى الدليل التالي الذي سيغطي [Code Splitting](/guides/code-splitting/).
+
+```
