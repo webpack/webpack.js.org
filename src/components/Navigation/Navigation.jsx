@@ -141,7 +141,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               className="fill-current text-white"
             />
           </button>
-          <Link to="/" className="md:mr-auto">
+          <Link to="/" className="navigation__brand md:mr-auto">
             <Logo />
           </Link>
           <nav
@@ -205,7 +205,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               ]}
             />
           </nav>
-          <div className="inline-flex items-center gap-x-[18px] ml-[18px]">
+          <div className="navigation__controls inline-flex items-center gap-x-[18px] ml-[18px]">
             <HelloDarkness />
             {mounted && (
               <DocSearch

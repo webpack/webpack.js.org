@@ -10,6 +10,10 @@ html {
   @apply box-border;
 }
 
+html[dir="rtl"] {
+  direction: rtl;
+}
+
 body {
   font:
     400 1rem "Source Sans Pro",
@@ -22,8 +26,117 @@ body {
   @apply text-blue-800;
 }
 
+html[dir="rtl"] body {
+  text-align: right;
+}
+
 .dark body {
   @apply bg-dark-bg text-dark-text;
+}
+
+html[dir="rtl"] pre,
+html[dir="rtl"] code,
+html[dir="rtl"] kbd,
+html[dir="rtl"] samp {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .language-diff {
+  direction: ltr;
+}
+
+html[dir="rtl"] .navigation__brand {
+  margin-right: 0;
+}
+
+@media (min-width: 768px) {
+  html[dir="rtl"] .navigation__brand {
+    margin-left: auto;
+  }
+}
+
+html[dir="rtl"] .navigation__controls {
+  margin-left: 0;
+  margin-right: 18px;
+}
+
+html[dir="rtl"] .sidebar-mobile {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] .sidebar-mobile:not(.sidebar-mobile--visible) {
+  transform: translate3d(calc(100% - 5px), 0, 0) !important;
+}
+
+html[dir="rtl"] .sidebar-mobile > div:first-of-type {
+  left: auto;
+  right: 285px;
+}
+
+html[dir="rtl"] .sidebar-mobile__close {
+  left: 22px;
+  right: auto;
+}
+
+html[dir="rtl"] [class~="group/item"] > button svg,
+html[dir="rtl"] [class~="group/item"] > svg {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+html[dir="rtl"] [class~="group/item"] ul {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+html[dir="rtl"] [class~="group/item"] ul::before {
+  border-left: 0;
+  border-right: 1px dashed #777676;
+  left: auto;
+  right: 1.5rem;
+}
+
+html[dir="rtl"] [class~="group/item"] li {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+html[dir="rtl"] [class~="group/item"] li::before {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] [role="progressbar"] > div {
+  transform-origin: right;
+}
+
+.splash-viz__art,
+.splash-viz__art svg {
+  direction: ltr;
+}
+
+.sponsors-panel {
+  direction: ltr;
+}
+
+html[dir="rtl"] .sponsors-panel {
+  left: calc(50% + 512px + 10px);
+  margin-left: 0;
+  margin-right: 0;
+  right: auto;
+}
+
+html[dir="rtl"] .sponsors-panel > div {
+  display: none;
+}
+
+@media (min-width: 1544px) {
+  html[dir="rtl"] .sponsors-panel > div {
+    display: flex;
+  }
 }
 
 .header-link {
@@ -42,7 +155,8 @@ body {
     @apply transition-colors duration-[250ms];
 
     &.icon-link {
-      @apply inline-block text-[0.7em] ml-[16px] -rotate-45 text-[#909090];
+      @apply inline-block text-[0.7em] -rotate-45 text-[#909090];
+      margin-inline-start: 16px;
 
       &:hover {
         @apply text-brand-link;

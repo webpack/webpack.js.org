@@ -5,6 +5,10 @@ import CloseIcon from "../../styles/icons/cross.svg";
 import Link from "../Link/Link.jsx";
 
 // TODO: Check to make sure all pages are shown and properly sorted
+function isRTL() {
+  return document.documentElement.dir === "rtl";
+}
+
 export default function SidebarMobile({ isOpen, toggle, sections }) {
   const containerRef = useRef(null);
   const openerRef = useRef(null);
@@ -52,22 +56,19 @@ export default function SidebarMobile({ isOpen, toggle, sections }) {
 
   const handleTouchEnd = useCallback((event) => {
     const threshold = 20;
+    const deltaX = lastTouchPosition.current.x - initialTouchPosition.current.x;
+    const shouldClose = isRTL() ? deltaX > threshold : deltaX < -threshold;
+    const shouldOpen = isRTL() ? deltaX < -threshold : deltaX > threshold;
 
     // Free up all the inline styling
     containerRef.current.classList.remove("!duration-0");
     containerRef.current.style.transform = "";
 
     // are we open?
-    if (
-      isOpenRef.current &&
-      initialTouchPosition.current.x - lastTouchPosition.current.x > threshold
-    ) {
+    if (isOpenRef.current && shouldClose) {
       // this is in top level nav callback
       toggleRef.current(false);
-    } else if (
-      !isOpenRef.current &&
-      lastTouchPosition.current.x - initialTouchPosition.current.x > threshold
-    ) {
+    } else if (!isOpenRef.current && shouldOpen) {
       toggleRef.current(true);
       event.preventDefault();
       event.stopPropagation();
@@ -80,28 +81,34 @@ export default function SidebarMobile({ isOpen, toggle, sections }) {
     const opener = openerRef.current;
 
     const handleTouchMove = (event) => {
-      const xDiff = initialTouchPosition.current.x - event.touches[0].pageX;
+      const deltaX = event.touches[0].pageX - initialTouchPosition.current.x;
       const yDiff = initialTouchPosition.current.y - event.touches[0].pageY;
-      const factor = Math.abs(yDiff / xDiff);
+      const xDistance = Math.abs(deltaX);
+      const closeDistance = isRTL() ? deltaX : -deltaX;
+      const factor = xDistance === 0 ? Infinity : Math.abs(yDiff / xDistance);
 
       // Factor makes sure horizontal and vertical scroll dont take place together
-      if (xDiff > 0 && factor < 0.8) {
+      if (closeDistance > 0 && factor < 0.8) {
         event.preventDefault();
-        container.style.transform = `translateX(-${xDiff}px)`;
+        container.style.transform = `translateX(${isRTL() ? closeDistance : -closeDistance}px)`;
         lastTouchPosition.current.x = event.touches[0].pageX;
         lastTouchPosition.current.y = event.touches[0].pageY;
       }
     };
 
     const handleOpenerTouchMove = (event) => {
-      const xDiff = event.touches[0].pageX - initialTouchPosition.current.x;
+      const deltaX = event.touches[0].pageX - initialTouchPosition.current.x;
       const yDiff = initialTouchPosition.current.y - event.touches[0].pageY;
-      const factor = Math.abs(yDiff / xDiff);
+      const xDistance = Math.abs(deltaX);
+      const openDistance = isRTL() ? -deltaX : deltaX;
+      const factor = xDistance === 0 ? Infinity : Math.abs(yDiff / xDistance);
 
       // Factor makes sure horizontal and vertical scroll dont take place together
-      if (xDiff > 0 && xDiff < 295 && factor < 0.8) {
+      if (openDistance > 0 && openDistance < 295 && factor < 0.8) {
         event.preventDefault();
-        container.style.transform = `translateX(calc(-100% + ${xDiff}px))`;
+        container.style.transform = isRTL()
+          ? `translateX(calc(100% - ${openDistance}px))`
+          : `translateX(calc(-100% + ${openDistance}px))`;
         lastTouchPosition.current.x = event.touches[0].pageX;
         lastTouchPosition.current.y = event.touches[0].pageY;
       }
