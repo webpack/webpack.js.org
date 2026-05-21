@@ -15,6 +15,7 @@ import {
 import Content from "../../_content.json";
 import OgImage from "../../assets/icon-pwa-512x512.png";
 import Logo from "../../assets/logo-on-white-bg.svg";
+import { SITE_DIRECTION, SITE_LANGUAGE } from "../../config/site.js";
 import Favicon from "../../favicon.ico";
 import {
   extractPages,
@@ -216,9 +217,12 @@ function Site(props) {
   }, [location, navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
+    <div
+      dir={SITE_DIRECTION}
+      className="flex flex-col min-h-screen bg-white dark:bg-gray-900"
+    >
       <Helmet>
-        <html lang="en" />
+        <html lang={SITE_LANGUAGE} dir={SITE_DIRECTION} />
         <meta charset="utf-8" />
         <meta name="theme-color" content="#2B3A42" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -86,11 +86,11 @@
   @apply w-full float-left md:w-1/2 md:px-3.75;
 }
 .splash__left p {
-  @apply text-left;
+  text-align: start;
 }
 .splash__right {
   @apply w-full float-left md:w-1/2 md:px-3.75 mb-[1em];
 }
 .splash__right p {
-  @apply text-left;
+  text-align: start;
 }

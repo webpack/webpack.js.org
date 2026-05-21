@@ -7,6 +7,7 @@ import { StaticRouter } from "react-router";
 import assets from "../dist/prod-assets-manifest.json";
 import PrintScript from "./components/Print/PrintScript.jsx";
 import Site from "./components/Site/Site.jsx";
+import { SITE_DIRECTION, SITE_LANGUAGE } from "./config/site.js";
 
 function isPrintPage(url) {
   return url.includes("/printable");
@@ -42,5 +43,5 @@ export default (locals) => {
   const hoistedTags = headTagsMatch ? headTagsMatch[1] : "";
   const bodyHtml = renderedHtml.slice(hoistedTags.length);
 
-  return `<!DOCTYPE html><html><head>${css}${hoistedTags}</head><body><div id="root">${bodyHtml}</div>${scripts}</body></html>`;
+  return `<!DOCTYPE html><html lang="${SITE_LANGUAGE}" dir="${SITE_DIRECTION}"><head>${css}${hoistedTags}</head><body><div id="root">${bodyHtml}</div>${scripts}</body></html>`;
 };
