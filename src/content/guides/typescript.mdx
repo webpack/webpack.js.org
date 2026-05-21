@@ -2,53 +2,44 @@
 title: TypeScript
 sort: 21
 contributors:
-  - morsdyce
-  - kkamali
-  - mtrivera
-  - byzyk
-  - EugeneHlushko
-  - chenxsan
-  - snitin315
-  - tusharthakur04
-  - ThierryRakotomanana
-  - valentina-buoro
+  - arabpolice
 ---
 
-T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide.
+T> يستند هذا الدليل إلى دليل [_البدء_](/guides/getting-started/).
 
-[TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
+[TypeScript](https://www.typescriptlang.org) هو مجموعة عليا typed من JavaScript تُصرَّف إلى JavaScript عادية. في هذا الدليل سنتعلم كيفية دمج TypeScript مع webpack.
 
-## Basic Setup
+## الإعداد الأساسي
 
-First install the TypeScript compiler and loader by running:
+أولًا ثبّت مصرّف TypeScript والـ loader بتشغيل:
 
 ```bash
 npm install --save-dev typescript ts-loader
 ```
 
-Now we'll modify the directory structure & the configuration files:
+الآن سنعدّل بنية المجلدات وملفات الإعدادات:
 
 **project**
 
 ```diff
  webpack-demo
-  ├── package.json
-  ├── package-lock.json
-+ ├── tsconfig.json
-- ├── webpack.config.js
-+ ├── webpack.config.ts
-  ├── /dist
-  │   ├── bundle.js
-  │   └── index.html
-  ├── /src
-- │   ├── index.js
-+ │   └── index.ts
-  └── /node_modules
+   ├── package.json
+   ├── package-lock.json
++  ├── tsconfig.json
+-  ├── webpack.config.js
++  ├── webpack.config.ts
+   ├── /dist
+   │   ├── bundle.js
+   │   └── index.html
+   ├── /src
+-  │   ├── index.js
++  │   └── index.ts
+   └── /node_modules
 ```
 
 **tsconfig.json**
 
-Let's set up a configuration to support JSX and compile TypeScript down to ES5...
+دعنا نُعد إعدادًا يدعم JSX ويصرّف TypeScript إلى ES5...
 
 ```json
 {
@@ -66,13 +57,13 @@ Let's set up a configuration to support JSX and compile TypeScript down to ES5..
 }
 ```
 
-See [TypeScript's documentation](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) to learn more about `tsconfig.json` configuration options.
+راجع [توثيق TypeScript](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) لمعرفة المزيد عن خيارات إعداد `tsconfig.json`.
 
-To learn more about webpack configuration, see the [configuration concepts](/concepts/configuration/).
+لمعرفة المزيد عن إعدادات webpack، راجع [مفاهيم الإعدادات](/concepts/configuration/).
 
-Now let's configure webpack to handle TypeScript:
+الآن دعنا نضبط webpack للتعامل مع TypeScript:
 
-First, install the required dependencies:
+أولًا، ثبّت الاعتماديات المطلوبة:
 
 ```bash
 npm install --save-dev ts-node @types/node
@@ -85,7 +76,7 @@ import path from "node:path";
 import { fileURLToPath } from "url";
 import webpack from "webpack";
 
-// in case you run into any TypeScript error when configuring `devServer`
+// في حال واجهت أي خطأ TypeScript عند إعداد `devServer`
 import "webpack-dev-server";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -114,18 +105,18 @@ const config: webpack.Configuration = {
 export default config;
 ```
 
-> For further refrence on how to write configuration in [Typescript file](https://webpack.js.org/configuration/configuration-languages/#typescript)
+> لمزيد من المراجع حول كيفية كتابة الإعدادات في [ملف Typescript](https://webpack.js.org/configuration/configuration-languages/#typescript)
 
-This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
+سيوجّه هذا webpack إلى الدخول عبر `./index.ts`، وتحميل جميع ملفات `.ts` و `.tsx` من خلال `ts-loader`، وإخراج ملف `bundle.js` في المجلد الحالي.
 
-Next, we need to adjust how we import `lodash` in our `./index.ts`. Since the lodash definitions don't include a default export, we'll need to update our import statement.
-First, make sure to install the [TypeScript definitions](#using-third-party-libraries):
+بعد ذلك، نحتاج إلى تعديل طريقة استيراد `lodash` في `./index.ts`. بما أن تعريفات lodash لا تتضمن تصديرًا افتراضيًا، سنحتاج إلى تحديث تعليمة الاستيراد.
+أولًا، تأكد من تثبيت [تعريفات TypeScript](#استخدام-مكتبات-خارجية):
 
 ```bash
 npm install --save-dev @types/lodash
 ```
 
-Then, update your import at the top of the file:
+ثم حدّث الاستيراد في أعلى الملف:
 
 **./index.ts**
 
@@ -144,21 +135,21 @@ Then, update your import at the top of the file:
   document.body.appendChild(component());
 ```
 
-T> To make imports do this by default and keep `import _ from 'lodash';` syntax in TypeScript, set `"allowSyntheticDefaultImports" : true` and `"esModuleInterop" : true` in your **tsconfig.json** file. This is related to TypeScript configuration and mentioned in our guide only for your information.
+T> لجعل الاستيرادات تفعل ذلك افتراضيًا مع الإبقاء على صيغة `import _ from 'lodash';` في TypeScript، عيّن `"allowSyntheticDefaultImports" : true` و `"esModuleInterop" : true` في ملف **tsconfig.json**. هذا متعلق بإعدادات TypeScript ومذكور في دليلنا للعلم فقط.
 
-## Ways to Use TypeScript in `webpack.config.ts`
+## طرق استخدام TypeScript في `webpack.config.ts`
 
-There are 3 ways to use TypeScript in `webpack.config.ts`:
+توجد 3 طرق لاستخدام TypeScript في `webpack.config.ts`:
 
-1. **Using webpack with built-in Node.js type stripping feature (recommended):**
+1. **استخدام webpack مع ميزة Node.js المدمجة لإزالة الأنواع (موصى به):**
 
    ```bash
    webpack -c ./webpack.config.ts
    ```
 
-   Will attempt to load the configuration using Node.js's built-in [type-stripping](https://nodejs.org/api/typescript.html#type-stripping), and then attempt to load the configuration file using `interpret` and `rechoir` (in this case you need to install `tsx` or `ts-node` or other tools).
+   سيحاول تحميل الإعدادات باستخدام [إزالة الأنواع](https://nodejs.org/api/typescript.html#type-stripping) المدمجة في Node.js، ثم سيحاول تحميل ملف الإعدادات باستخدام `interpret` و `rechoir` (في هذه الحالة تحتاج إلى تثبيت `tsx` أو `ts-node` أو أدوات أخرى).
 
-2. **Using custom `--import`/`--require` for Node.js:**
+2. **استخدام `--import`/`--require` مخصصين لـ Node.js:**
 
    ```bash
    NODE_OPTIONS='--import=tsx --no-experimental-strip-types'  webpack -c ./webpack.config.ts
@@ -168,35 +159,35 @@ There are 3 ways to use TypeScript in `webpack.config.ts`:
    NODE_OPTIONS='--require=ts-node/register --no-experimental-strip-types'  webpack -c ./webpack.config.ts
    ```
 
-   > The `--no-experimental-strip-types` flag is required starting with Node.js version 22.7.0.
+   > العلم `--no-experimental-strip-types` مطلوب ابتداءً من إصدار Node.js 22.7.0.
 
-3. **Using built-in Node.js transform types feature for Node.js ≥ v22.7.0:**
+3. **استخدام ميزة Node.js المدمجة لتحويل الأنواع في Node.js â‰¥ v22.7.0:**
 
-   To enable the transformation of non erasable TypeScript syntax, which requires JavaScript code generation, such as enum declarations, parameter properties.
+   لتفعيل تحويل صياغة TypeScript غير القابلة للمحو، والتي تتطلب توليد كود JavaScript، مثل تصريحات enum وخصائص المعاملات.
 
    ```bash
    NODE_OPTIONS='--experimental-transform-types' webpack --disable-interpret -c ./webpack.config.ts
    ```
 
-## TypeScript Path Aliases
+## الأسماء المستعارة لمسارات TypeScript
 
 <Badge text="5.105.0+" />
 
-If you use [`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig#paths) or `compilerOptions.baseUrl` in your `tsconfig.json` to create import aliases, starting with webpack 5.105, webpack can read these aliases directly via [`resolve.tsconfig`](/configuration/resolve/#resolvetsconfig). This replaces [`tsconfig-paths-webpack-plugin`](https://www.npmjs.com/package/tsconfig-paths-webpack-plugin), which should no longer be used.
+إذا كنت تستخدم [`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig#paths) أو `compilerOptions.baseUrl` في `tsconfig.json` لإنشاء أسماء مستعارة للاستيراد، فابتداءً من webpack 5.105 يمكن لـ webpack قراءة هذه الأسماء مباشرةً عبر [`resolve.tsconfig`](/configuration/resolve/#resolvetsconfig). هذا يستبدل [`tsconfig-paths-webpack-plugin`](https://www.npmjs.com/package/tsconfig-paths-webpack-plugin)، والذي لم يعد ينبغي استخدامه.
 
-`resolve.tsconfig` accepts `boolean | string | object`:
+يقبل `resolve.tsconfig` القيم `boolean | string | object`:
 
 **webpack.config.ts**
 
 ```js
 export default {
   resolve: {
-    tsconfig: true, // automatically find tsconfig.json
+    tsconfig: true, // العثور تلقائيًا على tsconfig.json
   },
 };
 ```
 
-Pass a string to point at a specific file (useful in monorepos):
+مرّر string للإشارة إلى ملف محدد (مفيد في monorepos):
 
 ```js
 export default {
@@ -206,14 +197,14 @@ export default {
 };
 ```
 
-Pass an object to also resolve [TypeScript project references](https://www.typescriptlang.org/docs/handbook/project-references.html):
+مرّر كائنًا لحل [مراجع مشاريع TypeScript](https://www.typescriptlang.org/docs/handbook/project-references.html) أيضًا:
 
 ```js
 export default {
   resolve: {
     tsconfig: {
       configFile: "./tsconfig.json",
-      references: "auto", // inherit references from tsconfig, or pass an array of paths
+      references: "auto", // وراثة references من tsconfig، أو تمرير مصفوفة من المسارات
     },
   },
 };
@@ -232,11 +223,11 @@ export default {
 }
 ```
 
-With the above, `@/components/Button` resolves to `src/components/Button` without any additional plugins or duplicating aliases in `resolve.alias`.
+باستخدام ما سبق، يتم حل `@/components/Button` إلى `src/components/Button` دون أي plugins إضافية أو تكرار للأسماء المستعارة في `resolve.alias`.
 
-### Migrating from `tsconfig-paths-webpack-plugin`
+### الترحيل من `tsconfig-paths-webpack-plugin`
 
-If you're currently using `tsconfig-paths-webpack-plugin`, you can drop it in favor of the built-in `resolve.tsconfig` option:
+إذا كنت تستخدم حاليًا `tsconfig-paths-webpack-plugin`، فيمكنك الاستغناء عنه لصالح خيار `resolve.tsconfig` المدمج:
 
 ```diff
 - import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
@@ -244,38 +235,38 @@ If you're currently using `tsconfig-paths-webpack-plugin`, you can drop it in fa
   export default {
     resolve: {
 -     plugins: [new TsconfigPathsPlugin()],
-+     // Auto-find tsconfig.json in the project root
++     // العثور تلقائيًا على tsconfig.json في جذر المشروع
 +     tsconfig: true,
 +
-+     // Or explicitly point to one
++     // أو الإشارة صراحةً إلى ملف محدد
 +     // tsconfig: './tsconfig.app.json'
     },
   };
 ```
 
-You can then remove the package from your project:
+يمكنك بعد ذلك إزالة الحزمة من مشروعك:
 
 ```bash
 npm uninstall tsconfig-paths-webpack-plugin
 ```
 
-W> `resolve.tsconfig` only handles module resolution — it does not transpile TypeScript. You still need `ts-loader`, `babel-loader` with `@babel/preset-typescript`, or another transpilation step.
+W> يتعامل `resolve.tsconfig` مع حل الوحدات فقط، ولا يقوم بتصيير TypeScript. لا تزال بحاجة إلى `ts-loader` أو `babel-loader` مع `@babel/preset-typescript` أو خطوة تصيير أخرى.
 
 ## Loader
 
 [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
-We use `ts-loader` in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.
+نستخدم `ts-loader` في هذا الدليل لأنه يجعل تفعيل ميزات webpack إضافية، مثل استيراد أصول ويب أخرى، أسهل قليلًا.
 
-W> `ts-loader` uses `tsc`, the TypeScript compiler, and relies on your `tsconfig.json` configuration. Make sure to avoid setting [`module`](https://www.typescriptlang.org/tsconfig#module) to "CommonJS", or webpack won't be able to [tree-shake your code](/guides/tree-shaking).
+W> يستخدم `ts-loader` أداة `tsc`، وهي مصرّف TypeScript، ويعتمد على إعدادات `tsconfig.json` لديك. تأكد من تجنب تعيين [`module`](https://www.typescriptlang.org/tsconfig#module) إلى "CommonJS"، وإلا فلن يتمكن webpack من [تنفيذ tree-shake للكود](/guides/tree-shaking).
 
-Note that if you're already using [`babel-loader`](https://github.com/babel/babel-loader) to transpile your code, you can use [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) and let Babel handle both your JavaScript and TypeScript files instead of using an additional loader. Keep in mind that, contrary to `ts-loader`, the underlying [`@babel/plugin-transform-typescript`](https://babeljs.io/docs/en/babel-plugin-transform-typescript) plugin does not perform any type checking.
+لاحظ أنك إذا كنت تستخدم بالفعل [`babel-loader`](https://github.com/babel/babel-loader) لتصيير الكود، فيمكنك استخدام [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) وترك Babel يتعامل مع ملفات JavaScript و TypeScript بدلًا من استخدام loader إضافي. ضع في اعتبارك أنه، بخلاف `ts-loader`، لا ينفذ الملحق الأساسي [`@babel/plugin-transform-typescript`](https://babeljs.io/docs/en/babel-plugin-transform-typescript) أي فحص للأنواع.
 
-## Source Maps
+## خرائط المصدر
 
-To learn more about source maps, see the [development guide](/guides/development).
+لمعرفة المزيد عن خرائط المصدر، راجع [دليل التطوير](/guides/development).
 
-To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our TypeScript configuration:
+لتفعيل خرائط المصدر، يجب أن نضبط TypeScript لإخراج خرائط مصدر inline إلى ملفات JavaScript المصرّفة. يجب إضافة السطر التالي إلى إعدادات TypeScript:
 
 **tsconfig.json**
 
@@ -296,7 +287,7 @@ To enable source maps, we must configure TypeScript to output inline source maps
   }
 ```
 
-Now we need to tell webpack to extract these source maps and include in our final bundle:
+الآن نحتاج إلى إخبار webpack باستخراج خرائط المصدر هذه وتضمينها في الحزمة النهائية:
 
 **webpack.config.ts**
 
@@ -329,18 +320,18 @@ const __dirname = path.dirname(__filename);
   };
 ```
 
-See the [devtool documentation](/configuration/devtool/) for more information.
+راجع [توثيق devtool](/configuration/devtool/) لمزيد من المعلومات.
 
-## Client types
+## أنواع العميل
 
-It's possible to use webpack specific features in your TypeScript code, such as [`import.meta.webpack`](/api/module-variables/#importmetawebpack). And webpack provides types for them as well, add a TypeScript [`reference`](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-types-) directive to declare it:
+من الممكن استخدام ميزات خاصة بـ webpack في كود TypeScript لديك، مثل [`import.meta.webpack`](/api/module-variables/#importmetawebpack). ويوفر webpack أنواعًا لها أيضًا؛ أضف توجيه [`reference`](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-types-) في TypeScript للتصريح بها:
 
 ```ts
 /// <reference types="webpack/module" />
-console.log(import.meta.webpack); // without reference declared above, TypeScript will throw an error
+console.log(import.meta.webpack); // بدون reference المصرّح به أعلاه، سيرمي TypeScript خطأ
 ```
 
-To enable the types for the whole project, add `webpack/module` to `compilerOptions.types` in `tsconfig.json`:
+لتفعيل الأنواع للمشروع كاملًا، أضف `webpack/module` إلى `compilerOptions.types` في `tsconfig.json`:
 
 ```diff
   {
@@ -352,21 +343,21 @@ To enable the types for the whole project, add `webpack/module` to `compilerOpti
   }
 ```
 
-## Using Third Party Libraries
+## استخدام مكتبات خارجية
 
-When installing third party libraries from npm, it is important to remember to install the typing definition for that library.
+عند تثبيت مكتبات خارجية من npm، من المهم تذكّر تثبيت تعريفات الأنواع لتلك المكتبة.
 
-For example, if we want to use lodash, we should run the following command to install its type definitions:
+على سبيل المثال، إذا أردنا استخدام lodash، فيجب تشغيل الأمر التالي لتثبيت تعريفات الأنواع الخاصة بها:
 
 ```bash
 npm install --save-dev @types/lodash
 ```
 
-If the npm package already includes its declaration typings in the package bundle, downloading the corresponding `@types` package is not needed. For more information see the [TypeScript changelog blog](https://github.blog/changelog/2020-12-16-npm-displays-packages-with-bundled-typescript-declarations/).
+إذا كانت حزمة npm تتضمن بالفعل typings التصريحية داخل الحزمة، فلن تكون هناك حاجة إلى تنزيل حزمة `@types` المقابلة. لمزيد من المعلومات، راجع [مدونة سجل تغييرات TypeScript](https://github.blog/changelog/2020-12-16-npm-displays-packages-with-bundled-typescript-declarations/).
 
-## Importing Other Assets
+## استيراد أصول أخرى
 
-To use non-code assets with TypeScript, we need to defer the type for these imports. This requires a `custom.d.ts` file which signifies custom definitions for TypeScript in our project. Let's set up a declaration for `.svg` files:
+لاستخدام أصول غير كودية مع TypeScript، نحتاج إلى إرجاء النوع لهذه الاستيرادات. يتطلب ذلك ملف `custom.d.ts` يعبّر عن تعريفات مخصصة لـ TypeScript في مشروعنا. دعنا نعد تصريحًا لملفات `.svg`:
 
 **custom.d.ts**
 
@@ -377,10 +368,10 @@ declare module "*.svg" {
 }
 ```
 
-Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
+هنا نصرّح عن وحدة جديدة لـ SVGs من خلال تحديد أي استيراد ينتهي بـ `.svg` وتعريف `content` الخاص بالوحدة على أنه `any`. يمكننا أن نكون أكثر صراحة بشأن كونه url عبر تعريف النوع كسلسلة نصية. ينطبق المفهوم نفسه على الأصول الأخرى، بما في ذلك CSS و SCSS و JSON وغيرها.
 
-## Build Performance
+## أداء البناء
 
-W> This may degrade build performance.
+W> قد يؤدي هذا إلى تدهور أداء البناء.
 
-See the [Build Performance](/guides/build-performance/) guide on build tooling.
+راجع دليل [أداء البناء](/guides/build-performance/) حول أدوات البناء.

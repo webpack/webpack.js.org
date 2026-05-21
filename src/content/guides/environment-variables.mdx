@@ -1,30 +1,23 @@
 ---
-title: Environment Variables
+title: متغيرات البيئة
 sort: 8
 contributors:
-  - simon04
-  - grisanu
-  - tbroadley
-  - legalcodes
-  - byzyk
-  - jceipek
-  - snitin315
-  - Brennvo
+  - arabpolice
 ---
 
-To disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production) you may use environment variables.
+للتمييز داخل `webpack.config.js` بين [التطوير](/guides/development) و[بناءات الإنتاج](/guides/production)، يمكنك استخدام متغيرات البيئة.
 
-T> webpack's environment variables are different from the [environment variables](https://en.wikipedia.org/wiki/Environment_variable) of operating system shells like `bash` and `CMD.exe`
+T> تختلف متغيرات البيئة الخاصة بـ webpack عن [متغيرات البيئة](https://en.wikipedia.org/wiki/Environment_variable) الخاصة بأصداف أنظمة التشغيل مثل `bash` و`CMD.exe`.
 
-The webpack command line [environment option](/api/cli/#environment-options) `--env` allows you to pass in as many environment variables as you like. Environment variables will be made accessible in your `webpack.config.js`. For example, `--env production` or `--env goal=local`.
+يسمح لك [خيار البيئة](/api/cli/#environment-options) في سطر أوامر webpack، وهو `--env`، بتمرير أي عدد تريده من متغيرات البيئة. وستصبح هذه المتغيرات متاحة داخل `webpack.config.js`. على سبيل المثال: `--env production` أو `--env goal=local`.
 
 ```bash
 npx webpack --env goal=local --env production --progress
 ```
 
-T> Setting up your `env` variable without assignment, `--env production` sets `env.production` to `true` by default. There are also other syntaxes that you can use. See the [webpack CLI](/api/cli/#environment-options) documentation for more information.
+T> عند إعداد متغير `env` دون إسناد قيمة، فإن `--env production` يعيّن `env.production` إلى `true` افتراضيًا. توجد أيضًا صيغ أخرى يمكنك استخدامها. راجع توثيق [webpack CLI](/api/cli/#environment-options) لمزيد من المعلومات.
 
-There is one change that you will have to make to your webpack config. Typically, `export default` points to the configuration object. To use the `env` variable, you must make `export default` a function:
+هناك تغيير واحد ستحتاج إلى إجرائه في إعدادات webpack. عادةً يشير `export default` إلى كائن الإعدادات. لاستخدام متغير `env`، يجب أن تجعل `export default` دالة:
 
 **webpack.config.js**
 
@@ -36,7 +29,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default (env) => {
-  // Use env.<YOUR VARIABLE> here:
+  // استخدم env.<YOUR VARIABLE> هنا:
   console.log("Goal:", env.goal); // 'local'
   console.log("Production:", env.production); // true
 
@@ -50,4 +43,4 @@ export default (env) => {
 };
 ```
 
-T> Webpack CLI offers some [built-in environment variables](/api/cli/#cli-environment-variables) which you can access inside a webpack configuration.
+T> يوفّر Webpack CLI بعض [متغيرات البيئة المدمجة](/api/cli/#cli-environment-variables) التي يمكنك الوصول إليها داخل إعدادات webpack.

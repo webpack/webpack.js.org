@@ -1,44 +1,39 @@
 ---
-title: Installation
+title: التثبيت
 sort: 13
 contributors:
-  - pksjce
-  - bebraw
-  - simon04
-  - EugeneHlushko
-  - sibiraj-s
-  - chenxsan
+  - arabpolice
 ---
 
-This guide goes through the various methods used to install webpack.
+يستعرض هذا الدليل الطرق المختلفة المستخدمة لتثبيت webpack.
 
-## Prerequisites
+## المتطلبات المسبقة
 
-Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current Long Term Support (LTS) release is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
+قبل أن نبدأ، تأكد من تثبيت إصدار حديث من [Node.js](https://nodejs.org/en/). يُعد إصدار الدعم طويل الأمد (LTS) الحالي نقطة بداية مناسبة. قد تواجه مشكلات مختلفة مع الإصدارات الأقدم، لأنها قد تفتقد وظائف يحتاج إليها webpack و/أو الحزم المرتبطة به.
 
-## Local Installation
+## التثبيت المحلي
 
-The latest webpack release is:
+أحدث إصدار من webpack هو:
 
 [![GitHub release](https://img.shields.io/npm/v/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
-To install the latest release or a specific version, run one of the following commands:
+لتثبيت أحدث إصدار أو إصدار محدد، نفّذ أحد الأوامر التالية:
 
 ```bash
 npm install --save-dev webpack
-# or specific version
+# أو إصدار محدد
 npm install --save-dev webpack@<version>
 ```
 
-T> Whether to use `--save-dev` or not depends on your use cases. Say you're using webpack only for bundling, then it's suggested that you install it with `--save-dev` option since you're not going to include webpack in your production build. Otherwise you can ignore `--save-dev`.
+T> يعتمد استخدام `--save-dev` من عدمه على حالة الاستخدام لديك. إذا كنت تستخدم webpack للتجميع فقط، فمن المقترح تثبيته باستخدام الخيار `--save-dev` لأنك لن تضمّن webpack داخل بناء الإنتاج. بخلاف ذلك يمكنك تجاهل `--save-dev`.
 
-If you're using webpack v4 or later and want to call `webpack` from the command line, you'll also need to install the [CLI](/api/cli/).
+إذا كنت تستخدم webpack v4 أو أحدث وتريد استدعاء `webpack` من سطر الأوامر، فستحتاج أيضًا إلى تثبيت [CLI](/api/cli/).
 
 ```bash
 npm install --save-dev webpack-cli
 ```
 
-Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [npm scripts](https://docs.npmjs.com/misc/scripts) which will look for a webpack installation in your local `node_modules` directory:
+التثبيت المحلي هو ما نوصي به لمعظم المشاريع. فهذا يجعل ترقية المشاريع كلٌّ على حدة أسهل عند إدخال تغييرات كاسرة. عادةً يتم تشغيل webpack عبر واحد أو أكثر من [npm scripts](https://docs.npmjs.com/misc/scripts)، وهي ستبحث عن تثبيت webpack داخل مجلد `node_modules` المحلي:
 
 ```json
 "scripts": {
@@ -46,26 +41,26 @@ Installing locally is what we recommend for most projects. This makes it easier 
 }
 ```
 
-T> To run the local installation of webpack you can access its binary version as `node_modules/.bin/webpack`. Alternatively, if you are using npm v5.2.0 or greater, you can run `npx webpack` to do it.
+T> لتشغيل التثبيت المحلي من webpack يمكنك الوصول إلى الملف التنفيذي الخاص به عبر `node_modules/.bin/webpack`. وبدلًا من ذلك، إذا كنت تستخدم npm v5.2.0 أو أحدث، يمكنك تنفيذ `npx webpack`.
 
-## Global Installation
+## التثبيت العام
 
-The following NPM installation will make `webpack` available globally:
+سيجعل تثبيت NPM التالي الأمر `webpack` متاحًا على مستوى النظام:
 
 ```bash
 npm install --global webpack
 ```
 
-W> Note that this is **not a recommended practice**. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.
+W> لاحظ أن هذه **ليست ممارسة موصى بها**. التثبيت العام يقيّدك بإصدار محدد من webpack وقد يفشل في المشاريع التي تستخدم إصدارًا مختلفًا.
 
-## Bleeding Edge
+## الإصدارات الأحدث قيد التطوير
 
-If you are enthusiastic about using the latest that webpack has to offer, you can install beta versions or even directly from the webpack repository using the following commands:
+إذا كنت متحمسًا لاستخدام أحدث ما يقدمه webpack، يمكنك تثبيت الإصدارات التجريبية أو التثبيت مباشرةً من مستودع webpack باستخدام الأوامر التالية:
 
 ```bash
 npm install --save-dev webpack@next
-# or a specific tag/branch
+# أو وسم/فرع محدد
 npm install --save-dev webpack/webpack#<tagname/branchname>
 ```
 
-W> Take caution when installing these bleeding edge releases! They may still contain bugs and therefore should not be used in production.
+W> توخَّ الحذر عند تثبيت هذه الإصدارات الأحدث قيد التطوير! فقد تظل تحتوي على أخطاء، ولذلك لا ينبغي استخدامها في الإنتاج.

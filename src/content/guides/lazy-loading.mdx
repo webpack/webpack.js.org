@@ -1,32 +1,24 @@
 ---
-title: Lazy Loading
+title: التحميل الكسول
 sort: 18
 contributors:
-  - iammerrick
-  - chrisVillanueva
-  - skipjack
-  - byzyk
-  - EugeneHlushko
-  - AnayaDesign
-  - tapanprakasht
-  - snitin315
-  - ThierryRakotomanana
+  - arabpolice
 related:
-  - title: Lazy Loading ES2015 Modules in the Browser
+  - title: التحميل الكسول لوحدات ES2015 في المتصفح
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
-  - title: Asynchronous vs Deferred JavaScript
+  - title: JavaScript غير المتزامن مقابل المؤجل
     url: https://bitsofco.de/async-vs-defer/
 ---
 
-T> This guide is a small follow-up to [Code Splitting](/guides/code-splitting). If you have not yet read through that guide, please do so now.
+T> هذا الدليل متابعة قصيرة لدليل [تقسيم الكود](/guides/code-splitting). إذا لم تكن قد قرأت ذلك الدليل بعد، فيرجى القيام بذلك الآن.
 
-Lazy, or "on demand", loading is a great way to optimize your site or application. This practice essentially involves splitting your code at logical breakpoints, and then loading it once the user has done something that requires, or will require, a new block of code. This speeds up the initial load of the application and lightens its overall weight as some blocks may never even be loaded.
+يُعد التحميل الكسول، أو التحميل «عند الطلب»، طريقة ممتازة لتحسين موقعك أو تطبيقك. تقوم هذه الممارسة أساسًا على تقسيم الكود عند نقاط فصل منطقية، ثم تحميله عندما ينفذ المستخدم إجراءً يتطلب، أو سيتطلب، كتلة جديدة من الكود. يسرّع ذلك التحميل الأولي للتطبيق ويخفف وزنه الإجمالي، لأن بعض الكتل قد لا تُحمّل أصلًا.
 
-## Dynamic Import Example
+## مثال على الاستيراد الديناميكي
 
-Let's take the example from [Code Splitting](/guides/code-splitting/#dynamic-imports) and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, `lodash.bundle.js`, to be generated and technically "lazy-loads" it as soon as the script is run. The trouble is that no user interaction is required to load the bundle – meaning that every time the page is loaded, the request will fire. This doesn't help us too much and will impact performance negatively.
+لنأخذ المثال من [تقسيم الكود](/guides/code-splitting/#dynamic-imports) ونعدّله قليلًا لتوضيح هذا المفهوم بشكل أكبر. الكود هناك يؤدي فعلًا إلى إنشاء جزء مستقل، `lodash.bundle.js`، ويقوم تقنيًا بتحميله كسولًا بمجرد تشغيل السكربت. المشكلة أن تحميل الحزمة لا يتطلب أي تفاعل من المستخدم، أي أن الطلب سيُرسل في كل مرة تُحمّل فيها الصفحة. هذا لا يفيدنا كثيرًا، وسيؤثر سلبًا في الأداء.
 
-Let's try something different. We'll add an interaction to log some text to the console when the user clicks a button. However, we'll wait to load that code (`print.js`) until the interaction occurs for the first time. To do this we'll go back and rework the [final _Dynamic Imports_ example](/guides/code-splitting/#dynamic-imports) from _Code Splitting_ and leave `lodash` in the main chunk.
+لنجرب شيئًا مختلفًا. سنضيف تفاعلًا يطبع بعض النصوص في الكونسول عندما ينقر المستخدم زرًا. لكننا سنؤجل تحميل ذلك الكود (`print.js`) إلى أن يحدث التفاعل لأول مرة. للقيام بذلك، سنعود إلى [المثال النهائي لـ _الاستيراد الديناميكي_](/guides/code-splitting/#dynamic-imports) من دليل _تقسيم الكود_ ونعيد صياغته، مع إبقاء `lodash` داخل الجزء الرئيسي.
 
 **project**
 
@@ -71,8 +63,8 @@ export default () => {
 +   element.appendChild(br);
 +   element.appendChild(button);
 +
-+   // Note that because a network request is involved, some indication
-+   // of loading would need to be shown in a production-level site/app.
++   // لاحظ أنه بسبب وجود طلب شبكة، سيحتاج الموقع/التطبيق
++   // بمستوى إنتاج إلى إظهار مؤشر تحميل ما.
 +   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
 +     const print = module.default;
 +
@@ -88,9 +80,9 @@ export default () => {
 + document.body.appendChild(component());
 ```
 
-W> Note that when using `import()` on ES6 modules you must reference the `.default` property as it's the actual `module` object that will be returned when the promise is resolved.
+W> لاحظ أنه عند استخدام `import()` مع وحدات ES6، يجب الإشارة إلى الخاصية `.default` لأنها كائن `module` الفعلي الذي سيُعاد عند تحقق الوعد.
 
-Now let's run webpack and check out our new lazy-loading functionality:
+الآن لنشغّل webpack ونتحقق من وظيفة التحميل الكسول الجديدة:
 
 ```bash
 ...
@@ -101,21 +93,21 @@ index.bundle.js     548 kB       1  [emitted]  [big]  index
 ...
 ```
 
-## Defer Import Example
+## مثال على الاستيراد المؤجل
 
-W> This feature does not lazily "load" a module, but it lazily "evaluates" a module. This means that the module is still downloaded and parsed, but its evaluation is lazy.
+W> هذه الميزة لا «تحمّل» الوحدة كسولًا، لكنها «تقيّم» الوحدة كسولًا. هذا يعني أن الوحدة لا تزال تُنزّل وتُحلل، لكن تقييمها يكون مؤجلًا.
 
-In some cases, it might be annoying or hard to convert all uses of a module to asynchronous, since it enforces the unnecessary asyncification of all functions, without providing the ability to only defer the synchronous evaluation work.
+في بعض الحالات، قد يكون تحويل كل استخدامات الوحدة إلى أسلوب غير متزامن مزعجًا أو صعبًا، لأنه يفرض تحويلًا غير ضروري لكل الدوال إلى غير متزامنة، من دون توفير إمكانية تأجيل عمل التقييم المتزامن فقط.
 
-The TC39 proposal [Deferring Module Evaluation](https://github.com/tc39/proposal-defer-import-eval) is to solve this problem.
+يهدف مقترح TC39 بعنوان [Deferring Module Evaluation](https://github.com/tc39/proposal-defer-import-eval) إلى حل هذه المشكلة.
 
-> The proposal is to have a new syntactical import form which will only ever return a namespace exotic object. When used, the module and its dependencies would not be executed, but would be fully loaded to the point of being execution-ready before the module graph is considered loaded.
+> يقترح ذلك وجود صيغة استيراد نحوية جديدة لا تُعيد إلا كائن namespace exotic. عند استخدامها، لن تُنفّذ الوحدة ولا تبعياتها، لكنها ستُحمّل بالكامل إلى حد تصبح فيه جاهزة للتنفيذ قبل اعتبار مخطط الوحدات محمّلًا.
 >
-> _Only when accessing a property of this module, would the execution operations be performed (if needed)._
+> _لا تُنفذ عمليات التنفيذ إلا عند الوصول إلى خاصية من هذه الوحدة، إذا لزم ذلك._
 
-This feature is available by enabling [experiments.deferImport](/configuration/experiments/#experimentsdeferimport).
+تتوفر هذه الميزة بتفعيل [experiments.deferImport](/configuration/experiments/#experimentsdeferimport).
 
-W> This feature is still in the experimental stage and may change in future versions of webpack.
+W> لا تزال هذه الميزة في المرحلة التجريبية وقد تتغير في إصدارات webpack المستقبلية.
 
 **project**
 
@@ -161,12 +153,12 @@ export default () => {
 
 -   // Note that because a network request is involved, some indication
 -   // of loading would need to be shown in a production-level site/app.
-+   // In this example, the print module is downloaded but not evaluated,
-+   // so there is no network request involved after the button is clicked.
++   // في هذا المثال، تُنزّل وحدة print لكنها لا تُقيّم،
++   // لذلك لا يوجد طلب شبكة بعد النقر على الزر.
 -   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
 +   button.onclick = e => {
       const print = module.default;
-+     //                  ^ The module is evaluated here.
++     //                  ^ تُقيّم الوحدة هنا.
 
       print();
 -   });
@@ -181,7 +173,7 @@ export default () => {
   document.body.appendChild(component());
 ```
 
-This is similar to the CommonJS style of lazy loading:
+هذا مشابه لأسلوب CommonJS في التحميل الكسول:
 
 **src/index.js**
 
@@ -199,11 +191,11 @@ This is similar to the CommonJS style of lazy loading:
     element.appendChild(br);
     element.appendChild(button);
 
-    // In this example, the print module is downloaded but not evaluated,
-    // so there is no network request involved after the button is clicked.
+    // في هذا المثال، تُنزّل وحدة print لكنها لا تُقيّم،
+    // لذلك لا يوجد طلب شبكة بعد النقر على الزر.
     button.onclick = e => {
 +     const print = require('./print');
-+     //            ^ The module is evaluated here.
++     //            ^ تُقيّم الوحدة هنا.
       const print = module.default;
 -     //                  ^ The module is evaluated here.
 
@@ -219,13 +211,13 @@ This is similar to the CommonJS style of lazy loading:
   document.body.appendChild(component());
 ```
 
-### Using import.defer() with Context Modules
+### استخدام import.defer() مع وحدات السياق
 
 <Badge text="5.105.0+" />
 
-`import.defer()` also works with context modules - the import path can be a dynamic expression. Webpack includes all matching modules in the module graph, but evaluation of the selected module is deferred until a property on the namespace object is first accessed.
+يعمل `import.defer()` أيضًا مع وحدات السياق؛ إذ يمكن أن يكون مسار الاستيراد تعبيرًا ديناميكيًا. يُضمّن webpack كل الوحدات المطابقة في مخطط الوحدات، لكن تقييم الوحدة المحددة يؤجل إلى أن يُوصل أولًا إلى خاصية على كائن namespace.
 
-The following example demonstrates deferred evaluation of locale modules using a dynamic context path:
+يوضح المثال التالي التقييم المؤجل لوحدات اللغة باستخدام مسار سياق ديناميكي:
 
 **src/locales/en.js**
 
@@ -246,17 +238,17 @@ const language = navigator.language.split("-")[0]; // "en", "fr", etc.
 const locale = import.defer("./locales/" + language + ".js");
 
 document.getElementById("btn").addEventListener("click", () => {
-  // The locale module is evaluated here, on first property access.
+  // تُقيّم وحدة اللغة هنا، عند أول وصول إلى خاصية.
   document.getElementById("output").textContent = locale.greeting;
 });
 ```
 
-Webpack prepares all matching locale modules so they are ready for execution, but the selected module is only evaluated when `locale.greeting` is first accessed. This allows you to load multiple locale files without executing them immediately.
+يُحضّر webpack كل وحدات اللغة المطابقة بحيث تكون جاهزة للتنفيذ، لكن الوحدة المحددة لا تُقيّم إلا عند أول وصول إلى `locale.greeting`. يتيح لك ذلك تحميل عدة ملفات لغة من دون تنفيذها مباشرة.
 
-## Frameworks
+## الأطر
 
-Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:
+لدى كثير من الأطر والمكتبات توصياتها الخاصة حول كيفية إنجاز ذلك ضمن منهجياتها. فيما يلي بعض الأمثلة:
 
-- React: [Code Splitting and Lazy Loading](https://react.dev/learn/build-a-react-app-from-scratch#code-splitting)
-- Vue: [Dynamic Imports in Vue.js for better performance](https://vuedose.tips/tips/dynamic-imports-in-vue-js-for-better-performance/)
-- Angular: [Lazy Loading route configuration](https://angular.io/guide/router#milestone-6-asynchronous-routing) and [AngularJS + webpack = lazyLoad](https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd)
+- React: [تقسيم الكود والتحميل الكسول](https://react.dev/learn/build-a-react-app-from-scratch#code-splitting)
+- Vue: [الاستيرادات الديناميكية في Vue.js لتحسين الأداء](https://vuedose.tips/tips/dynamic-imports-in-vue-js-for-better-performance/)
+- Angular: [إعداد مسارات التحميل الكسول](https://angular.io/guide/router#milestone-6-asynchronous-routing) و[AngularJS + webpack = lazyLoad](https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd)
