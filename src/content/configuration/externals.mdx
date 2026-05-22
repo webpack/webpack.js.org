@@ -268,7 +268,7 @@ export default {
 };
 ```
 
-في هذه الحالة، أي dependency مسمى `jQuery`، سواء كان مكتوبًا بأحرف كبيرة أم لا، أو `في هذه الحالة، أي dependency مسمى `jQuery`، سواء كان مكتوبًا بأحرف كبيرة أم لا، أو  سيتم إضفاء الطابع الخارجي عليه.
+في هذه الحالة، سيتم التعامل مع أي dependency باسم `jQuery` أو `$` كـ external، بغض النظر عن حالة الأحرف.
 
 ### الجمع بين النحو
 
@@ -970,16 +970,16 @@ jq(".my-element").animate(/* ... */);
 
 تمكين الإعدادات المسبقة لـ externals لـ targets محدد.
 
-| الخيار             | الوصف                                                                                                                                                                                                     | نوع الإدخال |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `electron`         | تعامل مع الإلكترون المشترك المدمج modules في السياق الرئيسي وسياق التحميل المسبق مثل `electron` أو `ipc` أو `shell` كـ external وقم بتحميلها عبر `require()` عند الاستخدام.                                                       | boolean    |
-| `electronMain`     | تعامل مع الإلكترون المدمج modules في السياق الرئيسي مثل `app` أو `ipc-main` أو `shell` كـ external وقم بتحميلها عبر `require()` عند استخدامها.                                                                      | boolean    |
-| `electronPreload`  | تعامل مع الإلكترون المدمج modules في سياق التحميل المسبق مثل `web-frame` أو `ipc-renderer` أو `shell` كـ external وقم بتحميلها عبر require() عند استخدامها.                                                           | boolean    |
-| `electronRenderer` | تعامل مع الإلكترون المدمج modules في سياق العارض مثل `web-frame` أو `ipc-renderer` أو `shell` كـ external وقم بتحميلها عبر `require()` عند استخدامها.                                                        | boolean    |
-| `node`             | تعامل مع Node.js المضمنة modules مثل `fs` أو `path` أو `vm` كـ external وقم بتحميلها عبر `require()` عند استخدامها.                                                                                                   | boolean    |
-| `nwjs`             | تعامل مع `NW.js` القديم `nw.gui` module كـ external وقم بتحميله عبر `require()` عند الاستخدام.                                                                                                                         | boolean    |
-| `web`              | تعامل مع الإشارات إلى `http(s)://...` و`std:...` على أنها external وقم بتحميلها عبر `import` عند استخدامها. **(لاحظ أن هذا يغير ترتيب التنفيذ حيث يتم تنفيذ externals قبل أي كود آخر في chunk)**.  | boolean    |
-| `webAsync`         | تعامل مع المراجع إلى `http(s)://...` و`std:...` على أنها external وقم بتحميلها عبر `async import()` عند استخدامها **(لاحظ أن هذا النوع external هو `async` module، والذي له تأثيرات مختلفة على التنفيذ)**. | boolean    |
+| الخيار             | الوصف                                                                                                                                                                                                      | نوع الإدخال |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `electron`         | تعامل مع الإلكترون المشترك المدمج modules في السياق الرئيسي وسياق التحميل المسبق مثل `electron` أو `ipc` أو `shell` كـ external وقم بتحميلها عبر `require()` عند الاستخدام.                                | boolean     |
+| `electronMain`     | تعامل مع الإلكترون المدمج modules في السياق الرئيسي مثل `app` أو `ipc-main` أو `shell` كـ external وقم بتحميلها عبر `require()` عند استخدامها.                                                             | boolean     |
+| `electronPreload`  | تعامل مع الإلكترون المدمج modules في سياق التحميل المسبق مثل `web-frame` أو `ipc-renderer` أو `shell` كـ external وقم بتحميلها عبر require() عند استخدامها.                                                | boolean     |
+| `electronRenderer` | تعامل مع الإلكترون المدمج modules في سياق العارض مثل `web-frame` أو `ipc-renderer` أو `shell` كـ external وقم بتحميلها عبر `require()` عند استخدامها.                                                      | boolean     |
+| `node`             | تعامل مع Node.js المضمنة modules مثل `fs` أو `path` أو `vm` كـ external وقم بتحميلها عبر `require()` عند استخدامها.                                                                                        | boolean     |
+| `nwjs`             | تعامل مع `NW.js` القديم `nw.gui` module كـ external وقم بتحميله عبر `require()` عند الاستخدام.                                                                                                             | boolean     |
+| `web`              | تعامل مع الإشارات إلى `http(s)://...` و`std:...` على أنها external وقم بتحميلها عبر `import` عند استخدامها. **(لاحظ أن هذا يغير ترتيب التنفيذ حيث يتم تنفيذ externals قبل أي كود آخر في chunk)**.          | boolean     |
+| `webAsync`         | تعامل مع المراجع إلى `http(s)://...` و`std:...` على أنها external وقم بتحميلها عبر `async import()` عند استخدامها **(لاحظ أن هذا النوع external هو `async` module، والذي له تأثيرات مختلفة على التنفيذ)**. | boolean     |
 
 لاحظ أنه إذا كنت ستنتقل إلى output ES Modules مع تلك الإعدادات المسبقة المرتبطة بـnode.js، فإن webpack سيعين الإعداد الافتراضي `externalsType` إلى [`node-commonjs`](#externalstypenode-commonjs) والذي سيستخدم `createRequire` لإنشاء طلب function بدلاً من استخدام `require()`.
 
