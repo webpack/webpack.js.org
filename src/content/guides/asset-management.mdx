@@ -30,7 +30,7 @@ contributors:
 +    <script src="bundle.js"></script>
    </body>
  </html>
-````
+```
 
 **webpack.config.js**
 
@@ -152,7 +152,7 @@ export default {
 الآن قم بتشغيل أمر البناء:
 
 ```bash
-$ npm run build
+npm run build
 ```
 
 افتح ملف `dist/index.html` في المتصفح مجددًا، وستلاحظ أن النص `Hello webpack` أصبح باللون الأحمر.
@@ -200,7 +200,7 @@ $ npm run build
 الآن، عندما تقوم بكتابة:
 
 ```js
-import MyImage from './my-image.png'
+import MyImage from "./my-image.png";
 ```
 
 سيقوم webpack بمعالجة الصورة وإضافتها إلى مجلد `output`، كما أن المتغير `MyImage` سيحتوي على الرابط النهائي للصورة بعد المعالجة.
@@ -264,7 +264,7 @@ import MyImage from './my-image.png'
 قم بإعادة البناء وافتح الملف مجددًا:
 
 ```bash
-$ npm run build
+npm run build
 ```
 
 إذا سار كل شيء بشكل صحيح، فسترى الأيقونة كخلفية متكررة، بالإضافة إلى عنصر `img` بجانب النص `Hello webpack`.
@@ -351,7 +351,7 @@ $ npm run build
 دعم JSON مدمج بالفعل داخل webpack، لذلك:
 
 ```js
-import Data from './data.json'
+import Data from "./data.json";
 ```
 
 سيعمل مباشرة.
@@ -378,8 +378,8 @@ npm install --save-dev csv-loader xml-loader
 بعدها يمكنك استيراد البيانات مثل أي ملف آخر:
 
 ```js
-import Data from './data.xml';
-import Notes from './data.csv';
+import Notes from "./data.csv";
+import Data from "./data.xml";
 ```
 
 وستحصل على بيانات JSON جاهزة للاستخدام.
@@ -399,9 +399,9 @@ npm install toml yamljs json5 --save-dev
 بعدها يمكنك الاستيراد بهذه الطريقة:
 
 ```js
-import toml from './data.toml';
-import yaml from './data.yaml';
-import json from './data.json5';
+import json from "./data.json5";
+import toml from "./data.toml";
+import yaml from "./data.yaml";
 ```
 
 وسيتم تحويل البيانات إلى كائنات JavaScript تلقائيًا.
@@ -444,6 +444,4 @@ npm uninstall css-loader csv-loader json5 style-loader toml xml-loader yamljs
 
 ## قراءة إضافية
 
-* [Loading Fonts](https://survivejs.com/webpack/loading/fonts/) على SurviveJS
-
-```
+- [Loading Fonts](https://survivejs.com/webpack/loading/fonts/) على SurviveJS
