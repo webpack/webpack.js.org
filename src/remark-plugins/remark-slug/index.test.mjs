@@ -18,4 +18,20 @@ this is me.
         },
       );
   });
+
+  it("should encode non-ASCII ids", () => {
+    remark()
+      .use(Plugin)
+      .use(remarkHtml)
+      .process(
+        `## الإعداد الأساسي
+
+this is me.
+`,
+        (err, { value: contents }) => {
+          expect(err).toBeUndefined();
+          expect(contents).toMatchSnapshot();
+        },
+      );
+  });
 });

@@ -1,6 +1,10 @@
 "use strict";
 
 const sizes = ["iphone-6", "macbook-15"];
+const basicSetupHash = encodeURI("#الإعداد-الأساسي");
+const compileInMemoryHash = encodeURI("#الترجمة-في-الذاكرة");
+const developmentHash = encodeURI("#التطوير");
+const generalHash = encodeURI("#عام");
 
 describe("Scroll Test", () => {
   for (const size of sizes) {
@@ -10,7 +14,7 @@ describe("Scroll Test", () => {
       // scroll to Contributors section
       cy.get('[data-testid="contributors"]').scrollIntoView();
 
-      cy.isNotInViewport('[id="الإعداد-الأساسي"]');
+      cy.isNotInViewport(`[id="${basicSetupHash.slice(1)}"]`);
 
       cy.visit("/guides/build-performance/");
       cy.isNotInViewport('[data-testid="contributors"]');
@@ -20,10 +24,10 @@ describe("Scroll Test", () => {
       cy.visit("/guides/getting-started");
       cy.get('[data-testid="contributors"]').scrollIntoView();
 
-      cy.visit(`/guides/build-performance/${encodeURI("#التطوير")}`);
+      cy.visit(`/guides/build-performance/${developmentHash}`);
       // since we lazy load notification bar now, #التطوير element is a little out of viewport now
-      cy.isInViewport('[id="الترجمة-في-الذاكرة"]');
-      cy.isNotInViewport('[id="عام"]');
+      cy.isInViewport(`[id="${compileInMemoryHash.slice(1)}"]`);
+      cy.isNotInViewport(`[id="${generalHash.slice(1)}"]`);
     });
   }
 });

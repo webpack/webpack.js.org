@@ -1,8 +1,19 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { describe, expect } from "@jest/globals";
+import { afterEach, describe, expect } from "@jest/globals";
 import { restructure } from "./content-tree-enhancers.mjs";
 
 describe("restructure", () => {
+  const tempDirectories = [];
+
+  afterEach(() => {
+    for (const directory of tempDirectories.splice(0)) {
+      fs.rmSync(directory, { force: true, recursive: true });
+    }
+  });
+
   it("applies filter result back to children array", () => {
     const originalChildren = [
       {
@@ -53,5 +64,34 @@ describe("restructure", () => {
     restructure(root, { dir: "src/content" });
 
     expect(root.children.map((item) => item.title)).toEqual(["API", "Guides"]);
+  });
+
+  it("encodes non-ASCII anchor ids", () => {
+    const directory = fs.mkdtempSync(
+      path.join(os.tmpdir(), "content-tree-enhancers-"),
+    );
+    tempDirectories.push(directory);
+
+    const file = path.join(directory, "getting-started.mdx");
+    fs.writeFileSync(
+      file,
+      `---
+title: Getting Started
+---
+
+## الإعداد الأساسي
+`,
+    );
+
+    const page = {
+      type: "file",
+      path: file,
+      name: "getting-started.mdx",
+      extension: ".mdx",
+    };
+
+    restructure(page, { dir: directory });
+
+    expect(page.anchors[0].id).toBe(encodeURI("الإعداد-الأساسي"));
   });
 });
