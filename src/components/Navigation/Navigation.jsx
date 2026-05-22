@@ -17,8 +17,8 @@ import GithubIcon from "../../styles/icons/github.svg";
 import Hamburger from "../../styles/icons/hamburger.svg";
 import StackOverflowIcon from "../../styles/icons/stack-overflow.svg";
 import XIcon from "../../styles/icons/x.svg";
-import Dropdown from "../Dropdown/Dropdown.jsx";
 import HelloDarkness from "../HelloDarkness.jsx";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher.jsx";
 import Link from "../Link/Link.jsx";
 import Logo from "../Logo/Logo.jsx";
 import Tooltip from "../Tooltip/Tooltip.jsx";
@@ -184,26 +184,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
                 {children}
               </NavigationIcon>
             ))}
-            <Dropdown
-              className=""
-              items={[
-                {
-                  lang: "en",
-                  title: "English",
-                  url: `https://webpack.js.org${pathname}${locationHash}`,
-                },
-                {
-                  lang: "zh",
-                  title: "中文",
-                  url: `https://webpack.docschina.org${pathname}${locationHash}`,
-                },
-                {
-                  lang: "ko",
-                  title: "한국어",
-                  url: `https://webpack.kr${pathname}${locationHash}`,
-                },
-              ]}
-            />
+            <LanguageSwitcher pathname={pathname} hash={locationHash} />
           </nav>
           <div className="navigation__controls inline-flex items-center gap-x-[18px] ml-[18px]">
             <HelloDarkness />
