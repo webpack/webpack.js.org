@@ -19,10 +19,10 @@ related:
 تعتمد القيمة الافتراضية لـ `optimization.checkWasmTypes` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -52,21 +52,21 @@ export default {
 
 تعتمد القيمة الافتراضية لـ `optimization.chunkIds` على [`mode`](/configuration/mode/):
 
-| Mode            | الافتراضي           |
+| Mode            | الافتراضي         |
 | --------------- | ----------------- |
-| `"production"` | `'deterministic'` |
-| `"development"` | `'named'` |
-| `"none"` | `'natural'` |
+| `"production"`  | `'deterministic'` |
+| `"development"` | `'named'`         |
+| `"none"`        | `'natural'`       |
 
 يتم دعم قيم string التالية:
 
-| الخيار            | الوصف                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `'natural'`       | معرفات رقمية حسب ترتيب الاستخدام.                                                                                                        |
-| `'named'`         | معرفات قابلة للقراءة لتحسين التصحيح.                                                                                                    |
+| الخيار            | الوصف                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------- |
+| `'natural'`       | معرفات رقمية حسب ترتيب الاستخدام.                                                                             |
+| `'named'`         | معرفات قابلة للقراءة لتحسين التصحيح.                                                                          |
 | `'deterministic'` | معرفات رقمية قصيرة لن تتغير بين compilation. جيد على المدى الطويل caching. يتم تمكينه افتراضيًا لوضع الإنتاج. |
-| `'size'`          | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الأولي.                                                                                 |
-| `'total-size'`    | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الإجمالي.                                                                                   |
+| `'size'`          | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الأولي.                                                    |
+| `'total-size'`    | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الإجمالي.                                                  |
 
 **webpack.config.js**
 
@@ -106,10 +106,10 @@ export default {
 تعتمد القيمة الافتراضية لـ `optimization.concatenateModules` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -148,10 +148,10 @@ export default {
 تعتمد القيمة الافتراضية لـ `optimization.emitOnErrors` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `false` |
-| `"development"` | `true` |
-| `"none"` | `true` |
+| --------------- | --------- |
+| `"production"`  | `false`   |
+| `"development"` | `true`    |
+| `"none"`        | `true`    |
 
 **webpack.config.js**
 
@@ -181,10 +181,10 @@ T> IIFE ...
 تعتمد القيمة الافتراضية لـ `optimization.avoidEntryIife` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -208,10 +208,10 @@ W> يمكن أن يؤثر خيار `optimization.avoidEntryIife` سلبًا عل
 تعتمد القيمة الافتراضية لـ `optimization.flagIncludedChunks` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -233,10 +233,10 @@ export default {
 تعتمد القيمة الافتراضية لـ `optimization.innerGraph` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -332,19 +332,19 @@ T> Supported guard forms include ternaries (`isDEV ? A : B`), `if` statements, a
 تعتمد القيمة الافتراضية لـ `optimization.mangleExports` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 يتم دعم القيم التالية:
 
-| الخيار            | الوصف                                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `'size'`          | الأسماء المختصرة - عادةً ما تكون عبارة عن حرف واحد - تركز على الحد الأدنى لحجم التنزيل.                                              |
+| الخيار            | الوصف                                                                                                                         |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `'size'`          | الأسماء المختصرة - عادةً ما تكون عبارة عن حرف واحد - تركز على الحد الأدنى لحجم التنزيل.                                       |
 | `'deterministic'` | الأسماء المختصرة - عادةً ما تكون مكونة من حرفين - والتي لن تتغير عند إضافة الصادرات أو إزالتها. جيد على المدى الطويل caching. |
-| `true`            | نفس `'deterministic'`                                                                                            |
-| `false`           | احتفظ بالاسم الأصلي. جيد لسهولة القراءة وتصحيح الأخطاء.                                                              |
+| `true`            | نفس `'deterministic'`                                                                                                         |
+| `false`           | احتفظ بالاسم الأصلي. جيد لسهولة القراءة وتصحيح الأخطاء.                                                                       |
 
 **webpack.config.js**
 
@@ -400,10 +400,10 @@ export default {
 تعتمد القيمة الافتراضية لـ `optimization.minimize` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -501,19 +501,19 @@ export default {
 
 تعتمد القيمة الافتراضية لـ `optimization.moduleIds` على [`mode`](/configuration/mode/):
 
-| Mode            | الافتراضي           |
+| Mode            | الافتراضي         |
 | --------------- | ----------------- |
-| `"production"` | `'deterministic'` |
-| `"development"` | `'named'` |
-| `"none"` | `'natural'` |
+| `"production"`  | `'deterministic'` |
+| `"development"` | `'named'`         |
+| `"none"`        | `'natural'`       |
 
 يتم دعم قيم string التالية:
 
-| الخيار          | الوصف                                           |
-| --------------- | ----------------------------------------------------- |
-| `natural`       | معرفات رقمية حسب ترتيب الاستخدام.                        |
-| `named`         | معرفات قابلة للقراءة لتحسين التصحيح.                    |
-| `deterministic` | يتم تجزئة أسماء Module إلى قيم رقمية صغيرة.    |
+| الخيار          | الوصف                                                      |
+| --------------- | ---------------------------------------------------------- |
+| `natural`       | معرفات رقمية حسب ترتيب الاستخدام.                          |
+| `named`         | معرفات قابلة للقراءة لتحسين التصحيح.                       |
+| `deterministic` | يتم تجزئة أسماء Module إلى قيم رقمية صغيرة.                |
 | `size`          | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الأولي. |
 
 **webpack.config.js**
@@ -557,11 +557,11 @@ W> تمت إزالة `moduleIds: total-size` في webpack 5.
 
 تعتمد القيمة الافتراضية لـ `optimization.nodeEnv` على [`mode`](/configuration/mode/):
 
-| Mode            | الافتراضي         |
+| Mode            | الافتراضي       |
 | --------------- | --------------- |
-| `"production"` | `'production'` |
+| `"production"`  | `'production'`  |
 | `"development"` | `'development'` |
-| `"none"` | `false` |
+| `"none"`        | `false`         |
 
 القيم المحتملة:
 
@@ -626,10 +626,10 @@ export default {
 تعتمد القيمة الافتراضية لـ `optimization.realContentHash` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -753,11 +753,11 @@ T> يرجى ملاحظة أن `sideEffects` يجب أن يكون في ملف `pa
 
 تعتمد القيمة الافتراضية لـ `optimization.sideEffects` على [`mode`](/configuration/mode/):
 
-| Mode            | الافتراضي  |
-| --------------- | -------- |
-| `"production"` | `true` |
-| `"development"` | `'flag'` |
-| `"none"` | `'flag'` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `'flag'`  |
+| `"none"`        | `'flag'`  |
 
 **webpack.config.js**
 
@@ -799,10 +799,10 @@ T> سوف يقوم `optimization.sideEffects` أيضًا بوضع علامة ع�
 تعتمد القيمة الافتراضية لـ `optimization.usedExports` على [`mode`](/configuration/mode/):
 
 | Mode            | الافتراضي |
-| --------------- | ------- |
-| `"production"` | `true` |
-| `"development"` | `false` |
-| `"none"` | `false` |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
