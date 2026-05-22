@@ -57,6 +57,8 @@ import "./app";
 
 ### publicPath التلقائي
 
+<span id="automatic-publicpath"></span>
+
 قد لا تعرف مسبقًا ما ستكون قيمة publicPath، ويمكن لـ webpack التعامل مع ذلك تلقائيًا عبر تحديد المسار العام من متغيرات مثل [`import.meta.url`](/api/module-variables/#importmetaurl)، أو [`document.currentScript`](https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript)، أو `script.src`، أو `self.location`. ما تحتاج إليه هو تعيين [`output.publicPath`](/configuration/output/#outputpublicpath) إلى `'auto'`:
 
 **webpack.config.js**

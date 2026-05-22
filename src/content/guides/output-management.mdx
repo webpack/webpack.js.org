@@ -25,7 +25,7 @@ T> يعتمد هذا الدليل على أمثلة الكود الموجودة 
   │   ├── index.js
 + │   ├── print.js
   └── /node_modules
-````
+```
 
 لنضف بعض المنطق إلى ملف `src/print.js`:
 
@@ -141,6 +141,8 @@ T> إذا قمت بفحص `print.bundle.js`، ربما لاحظت أنه لا ي
 
 ## إعداد HtmlWebpackPlugin
 
+<span id="setting-up-htmlwebpackplugin"></span>
+
 قم أولًا بتثبيت الـ plugin ثم عدّل ملف `webpack.config.js`:
 
 ```bash
@@ -252,6 +254,8 @@ npm run build
 
 ## ملف Manifest
 
+<span id="the-manifest"></span>
+
 قد تتساءل كيف يعرف webpack والـ plugins الخاصة به الملفات التي يتم إنشاؤها.
 
 الإجابة تكمن في ملف الـ manifest الذي يحتفظ به webpack لتتبع العلاقة بين الوحدات (modules) والـ bundles الناتجة.
@@ -267,5 +271,3 @@ npm run build
 الآن بعد أن تعلمت كيفية إضافة الـ bundles إلى HTML بشكل ديناميكي، يمكنك الانتقال إلى [دليل التطوير](/guides/development).
 
 أو إذا كنت ترغب في التعمق أكثر في المواضيع المتقدمة، فنوصي بالانتقال إلى [دليل تقسيم الكود](/guides/code-splitting).
-
-```

@@ -284,11 +284,11 @@ npx webpack serve --no-client-overlay
 
 يمكنك توفير object بالخصائص التالية لمزيد من التحكم الدقيق:
 
-| الملكية        | شرح              |
-| --------------- | ------------------------ |
-| `errors`        | compilation أخطاء       |
+| الملكية         | شرح                           |
+| --------------- | ----------------------------- |
+| `errors`        | compilation أخطاء             |
 | `runtimeErrors` | أخطاء runtime لم تتم معالجتها |
-| `warnings`      | compilation تحذيرات     |
+| `warnings`      | compilation تحذيرات           |
 
 جميع الخصائص اختيارية وتكون افتراضيًا `true` عندما لا يتم توفيرها.
 
@@ -1505,6 +1505,8 @@ npx webpack serve --static assets --static css
 ```
 
 ### الدليل
+
+<span id="directory"></span>
 
 `string = path.join(process.cwd(), 'public')`
 

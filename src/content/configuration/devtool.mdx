@@ -47,49 +47,57 @@ T> يحتوي مستودع webpack على [مثال يوضح تأثير جميع
 
 T> بدلاً من استخدام الخيار `devtool` يمكنك أيضًا استخدام `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` مباشرة لأنه يحتوي على المزيد من الخيارات. لا تستخدم أبدًا الخيارين `devtool` وplugin معًا. يضيف خيار `devtool` plugin داخليًا بحيث ينتهي بك الأمر إلى تطبيق plugin مرتين.
 
-| devtool                                    | performance                                        | الإنتاج | الجودة        | تعليق                                                                               |
-| ------------------------------------------ | -------------------------------------------------- | ---------- | -------------- | ------------------------------------------------------------------------------------- |
-| (لا شيء)                                     | **build**: الأسرع<br /><br />**rebuild**: الأسرع | نعم        | bundle         | الاختيار الموصى به لإصدارات الإنتاج بحد أقصى performance.                    |
-| **`eval`**                                 | **build**: سريع<br /><br />**rebuild**: الأسرع    | no         | ولدت      | يُوصى باختيار التطوير بحد أقصى performance.                   |
-| `eval-cheap-source-map`                    | **build**: ok<br /><br />**rebuild**: سريع         | no         | تحولت    | خيار المقايضة للتنمية يبني.                                               |
-| `eval-cheap-module-source-map`             | **build**: بطيء<br /><br />**rebuild**: سريع       | no         | الخطوط الأصلية | خيار المقايضة للتنمية يبني.                                               |
-| **`eval-source-map`**                      | **build**: الأبطأ<br /><br />**rebuild**: حسنًا      | no         | original       | الاختيار الموصى به للتطوير يبني بجودة عالية Source Maps.               |
-| `cheap-source-map`                         | **build**: ok<br /><br />**rebuild**: بطيء         | no         | تحولت    |                                                                                       |
-| `cheap-module-source-map`                  | **build**: بطيء<br /><br />**rebuild**: بطيء       | no         | الخطوط الأصلية |                                                                                       |
-| **`source-map`**                           | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم        | original       | الاختيار الموصى به للإنتاج يبني بجودة عالية Source Maps.                |
-| `inline-cheap-source-map`                  | **build**: ok<br /><br />**rebuild**: بطيء         | no         | تحولت    |                                                                                       |
-| `inline-cheap-module-source-map`           | **build**: بطيء<br /><br />**rebuild**: بطيء       | no         | الخطوط الأصلية |                                                                                       |
-| `inline-source-map`                        | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | no         | original       | الاختيار المحتمل عند نشر ملف واحد                                         |
-| `eval-nosources-cheap-source-map`          | **build**: ok<br /><br />**rebuild**: سريع         | no         | تحولت    | كود المصدر غير متضمن                                                              |
-| `eval-nosources-cheap-module-source-map`   | **build**: بطيء<br /><br />**rebuild**: سريع       | no         | الخطوط الأصلية | كود المصدر غير متضمن                                                              |
-| `eval-nosources-source-map`                | **build**: الأبطأ<br /><br />**rebuild**: حسنًا      | no         | original       | كود المصدر غير متضمن                                                              |
-| `inline-nosources-cheap-source-map`        | **build**: ok<br /><br />**rebuild**: بطيء         | no         | تحولت    | كود المصدر غير متضمن                                                              |
-| `inline-nosources-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء       | no         | الخطوط الأصلية | كود المصدر غير متضمن                                                              |
-| `inline-nosources-source-map`              | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | no         | original       | كود المصدر غير متضمن                                                              |
-| `nosources-cheap-source-map`               | **build**: ok<br /><br />**rebuild**: بطيء         | no         | تحولت    | كود المصدر غير متضمن                                                              |
-| `nosources-cheap-module-source-map`        | **build**: بطيء<br /><br />**rebuild**: بطيء       | no         | الخطوط الأصلية | كود المصدر غير متضمن                                                              |
-| `nosources-source-map`                     | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم        | original       | كود المصدر غير متضمن                                                              |
-| `hidden-nosources-cheap-source-map`        | **build**: ok<br /><br />**rebuild**: بطيء         | no         | تحولت    | لا يوجد مرجع، كود المصدر غير مدرج                                                |
-| `hidden-nosources-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء       | no         | الخطوط الأصلية | لا يوجد مرجع، كود المصدر غير مدرج                                                |
-| `hidden-nosources-source-map`              | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم        | original       | لا يوجد مرجع، كود المصدر غير مدرج                                                |
-| `hidden-cheap-source-map`                  | **build**: ok<br /><br />**rebuild**: بطيء         | no         | تحولت    | لا مرجع                                                                          |
-| `hidden-cheap-module-source-map`           | **build**: بطيء<br /><br />**rebuild**: بطيء       | no         | الخطوط الأصلية | لا مرجع                                                                          |
-| `hidden-source-map`                        | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم        | original       | لا مرجع. الاختيار المحتمل عند استخدام Source Map فقط لأغراض الإبلاغ عن الأخطاء. |
+{/* prettier-ignore-start */}
 
-| الاختصار                | شرح                                                                                                                                                                                                                                                                                                       |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| performance: build      | كيف يتأثر performance الخاص بـ build الأولي بإعداد devtool؟                                                                                                                                                                                                                                      |
-| performance: rebuild    | كيف يتأثر performance الخاص بـ build المتزايد بإعداد devtool؟ قد تؤدي أدوات التطوير البطيئة إلى تقليل حلقة تعليقات التطوير في وضع watch. يختلف المقياس مقارنةً بـ build performance، حيث يتوقع المرء أن تكون عمليات إعادة البناء أسرع من عمليات الإنشاء.                                             |
-| الإنتاج              | هل يعقل استخدام هذا devtool لبناء الإنتاج؟ عادةً ما يكون `no` عندما يكون لـ devtool تأثير سلبي على تجربة المستخدم.                                                                                                                                                                        |
-| الجودة: المجمعة        | سترى كل التعليمات البرمجية التي تم إنشاؤها لـ chunk في كتلة واحدة من التعليمات البرمجية. هذا هو ملف output الخام بدون أي دعم لتطوير الأدوات                                                                                                                                                                                   |
-| الجودة: ولدت      | سترى الكود الذي تم إنشاؤه، ولكن يتم عرض كل module كملف تعليمات برمجية منفصل في أدوات التطوير browser.                                                                                                                                                                                                              |
-| الجودة: تحولت    | ستشاهد التعليمات البرمجية التي تم إنشاؤها بعد المعالجة المسبقة بواسطة loaders ولكن قبل تحويلات webpack الإضافية. سيتم تعيين خطوط المصدر فقط وسيتم تجاهل معلومات العمود بشكل متكرر. لم يتم إنشاؤها. يؤدي هذا إلى منع تعيين نقاط التوقف في منتصف الأسطر التي لا تعمل مع المصغر. |
-| الجودة: الخطوط الأصلية | سترى الكود الأصلي الذي كتبته، بافتراض أن كل loaders يدعم Source Mapping. سيتم تعيين خطوط المصدر فقط وسيتم تجاهل معلومات العمود بشكل متكرر. لم يتم إنشاؤها. يؤدي هذا إلى منع تعيين نقاط التوقف في منتصف الأسطر التي لا تعمل مع المصغر.                    |
-| الجودة: أصلية       | سترى الكود الأصلي الذي كتبته، بافتراض أن كل loaders يدعم Source Mapping.                                                                                                                                                                                                                        |
-| `eval-*` إضافة       | أنشئ Source Map لكل module وأرفقه عبر التقييم. موصى به للتطوير، بسبب تحسين rebuild performance. لاحظ أن هناك مشكلة في Windows Defender، والتي تسبب تباطؤًا كبيرًا بسبب فحص الفيروسات.                                                                                        |
-| `inline-*` إضافة     | قم بتضمين Source Map في الملف الأصلي بدلاً من إنشاء ملف منفصل.                                                                                                                                                                                                                                    |
-| `hidden-*` إضافة     | لم تتم إضافة أي إشارة إلى Source Map. عندما لا يتم نشر Source Map، ولكن لا يزال يتعين إنشاؤها، مثلاً لأغراض الإبلاغ عن الأخطاء.                                                                                                                                                                           |
-| `nosources-*` إضافة  | لم يتم تضمين كود المصدر في Source Map. يمكن أن يكون هذا مفيدًا عندما يجب الرجوع إلى الملفات الأصلية (تلزم خيارات تخصيص إضافية).                                                                                                                                                                        |
+| devtool | performance | الإنتاج | الجودة | تعليق |
+| --- | --- | --- | --- | --- |
+| (لا شيء) | **build**: الأسرع<br /><br />**rebuild**: الأسرع | نعم | bundle | الاختيار الموصى به لإصدارات الإنتاج بحد أقصى performance. |
+| **`eval`** | **build**: سريع<br /><br />**rebuild**: الأسرع | no | ولدت | يُوصى باختيار التطوير بحد أقصى performance. |
+| `eval-cheap-source-map` | **build**: ok<br /><br />**rebuild**: سريع | no | تحولت | خيار المقايضة للتنمية يبني. |
+| `eval-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: سريع | no | الخطوط الأصلية | خيار المقايضة للتنمية يبني. |
+| **`eval-source-map`** | **build**: الأبطأ<br /><br />**rebuild**: حسنًا | no | original | الاختيار الموصى به للتطوير يبني بجودة عالية Source Maps. |
+| `cheap-source-map` | **build**: ok<br /><br />**rebuild**: بطيء | no | تحولت | |
+| `cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء | no | الخطوط الأصلية | |
+| **`source-map`** | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم | original | الاختيار الموصى به للإنتاج يبني بجودة عالية Source Maps. |
+| `inline-cheap-source-map` | **build**: ok<br /><br />**rebuild**: بطيء | no | تحولت | |
+| `inline-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء | no | الخطوط الأصلية | |
+| `inline-source-map` | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | no | original | الاختيار المحتمل عند نشر ملف واحد |
+| `eval-nosources-cheap-source-map` | **build**: ok<br /><br />**rebuild**: سريع | no | تحولت | كود المصدر غير متضمن |
+| `eval-nosources-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: سريع | no | الخطوط الأصلية | كود المصدر غير متضمن |
+| `eval-nosources-source-map` | **build**: الأبطأ<br /><br />**rebuild**: حسنًا | no | original | كود المصدر غير متضمن |
+| `inline-nosources-cheap-source-map` | **build**: ok<br /><br />**rebuild**: بطيء | no | تحولت | كود المصدر غير متضمن |
+| `inline-nosources-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء | no | الخطوط الأصلية | كود المصدر غير متضمن |
+| `inline-nosources-source-map` | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | no | original | كود المصدر غير متضمن |
+| `nosources-cheap-source-map` | **build**: ok<br /><br />**rebuild**: بطيء | no | تحولت | كود المصدر غير متضمن |
+| `nosources-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء | no | الخطوط الأصلية | كود المصدر غير متضمن |
+| `nosources-source-map` | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم | original | كود المصدر غير متضمن |
+| `hidden-nosources-cheap-source-map` | **build**: ok<br /><br />**rebuild**: بطيء | no | تحولت | لا يوجد مرجع، كود المصدر غير مدرج |
+| `hidden-nosources-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء | no | الخطوط الأصلية | لا يوجد مرجع، كود المصدر غير مدرج |
+| `hidden-nosources-source-map` | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم | original | لا يوجد مرجع، كود المصدر غير مدرج |
+| `hidden-cheap-source-map` | **build**: ok<br /><br />**rebuild**: بطيء | no | تحولت | لا مرجع |
+| `hidden-cheap-module-source-map` | **build**: بطيء<br /><br />**rebuild**: بطيء | no | الخطوط الأصلية | لا مرجع |
+| `hidden-source-map` | **build**: الأبطأ<br /><br />**rebuild**: الأبطأ | نعم | original | لا مرجع. الاختيار المحتمل عند استخدام Source Map فقط لأغراض الإبلاغ عن الأخطاء. |
+
+{/* prettier-ignore-end */}
+
+{/* prettier-ignore-start */}
+
+| الاختصار | شرح |
+| --- | --- |
+| performance: build | كيف يتأثر performance الخاص بـ build الأولي بإعداد devtool؟ |
+| performance: rebuild | كيف يتأثر performance الخاص بـ build المتزايد بإعداد devtool؟ قد تؤدي أدوات التطوير البطيئة إلى تقليل حلقة تعليقات التطوير في وضع watch. يختلف المقياس مقارنةً بـ build performance، حيث يتوقع المرء أن تكون عمليات إعادة البناء أسرع من عمليات الإنشاء. |
+| الإنتاج | هل يعقل استخدام هذا devtool لبناء الإنتاج؟ عادةً ما يكون `no` عندما يكون لـ devtool تأثير سلبي على تجربة المستخدم. |
+| الجودة: المجمعة | سترى كل التعليمات البرمجية التي تم إنشاؤها لـ chunk في كتلة واحدة من التعليمات البرمجية. هذا هو ملف output الخام بدون أي دعم لتطوير الأدوات |
+| الجودة: ولدت | سترى الكود الذي تم إنشاؤه، ولكن يتم عرض كل module كملف تعليمات برمجية منفصل في أدوات التطوير browser. |
+| الجودة: تحولت | ستشاهد التعليمات البرمجية التي تم إنشاؤها بعد المعالجة المسبقة بواسطة loaders ولكن قبل تحويلات webpack الإضافية. سيتم تعيين خطوط المصدر فقط وسيتم تجاهل معلومات العمود بشكل متكرر. لم يتم إنشاؤها. يؤدي هذا إلى منع تعيين نقاط التوقف في منتصف الأسطر التي لا تعمل مع المصغر. |
+| الجودة: الخطوط الأصلية | سترى الكود الأصلي الذي كتبته، بافتراض أن كل loaders يدعم Source Mapping. سيتم تعيين خطوط المصدر فقط وسيتم تجاهل معلومات العمود بشكل متكرر. لم يتم إنشاؤها. يؤدي هذا إلى منع تعيين نقاط التوقف في منتصف الأسطر التي لا تعمل مع المصغر. |
+| الجودة: أصلية | سترى الكود الأصلي الذي كتبته، بافتراض أن كل loaders يدعم Source Mapping. |
+| `eval-*` إضافة | أنشئ Source Map لكل module وأرفقه عبر التقييم. موصى به للتطوير، بسبب تحسين rebuild performance. لاحظ أن هناك مشكلة في Windows Defender، والتي تسبب تباطؤًا كبيرًا بسبب فحص الفيروسات. |
+| `inline-*` إضافة | قم بتضمين Source Map في الملف الأصلي بدلاً من إنشاء ملف منفصل. |
+| `hidden-*` إضافة | لم تتم إضافة أي إشارة إلى Source Map. عندما لا يتم نشر Source Map، ولكن لا يزال يتعين إنشاؤها، مثلاً لأغراض الإبلاغ عن الأخطاء. |
+| `nosources-*` إضافة | لم يتم تضمين كود المصدر في Source Map. يمكن أن يكون هذا مفيدًا عندما يجب الرجوع إلى الملفات الأصلية (تلزم خيارات تخصيص إضافية). |
+
+{/* prettier-ignore-end */}
 
 T> نتوقع نمطًا معينًا عند التحقق من صحة اسم devtool، انتبه ولا تخلط بين تسلسل devtool string. النمط هو: `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`.
 

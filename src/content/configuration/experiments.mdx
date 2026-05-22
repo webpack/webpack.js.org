@@ -7,6 +7,8 @@ contributors:
 
 ## التجارب
 
+<span id="experiments"></span>
+
 `boolean: false`
 
 أُدخل الخيار `experiments` في webpack 5 ليُتيح للمستخدمين تفعيل الميزات التجريبية وتجربتها.
@@ -223,7 +225,9 @@ export default {
   }
   ```
 
-- <Badge text="5.87.0+" /> تحليل الحقول الخاصّة بـ style في ملفّات `package.json`: سيبحث webpack عن حقل `style` في ملفّات `package.json` ويستعمله إن وُجد للاستيراد داخل ملفّات CSS.
+- <Badge text="5.87.0+" /> تحليل الحقول الخاصّة بـ style في ملفّات
+  `package.json`: سيبحث webpack عن حقل `style` في ملفّات `package.json` ويستعمله
+  إن وُجد للاستيراد داخل ملفّات CSS.
 
   فمثلاً، إن أضفت `@import 'bootstrap';` إلى ملفّ CSS لديك، فسيبحث webpack عن `bootstrap` في `node_modules` ويستعمل حقل `style` من `package.json` هناك. وإن لم يجد حقل `style`، فسيستعمل حقل `main` بدلاً منه حفاظاً على التوافق العكسي.
 
@@ -232,9 +236,19 @@ export default {
 - استيرادات CSS: سيُضمِّن webpack استيرادات CSS داخل ملفّ CSS المُولَّد.
 - إعادة التحميل الساخن (HMR): يدعم webpack الـ HMR لملفّات CSS، أي أنّ التغييرات في ملفّات CSS ستظهر في المتصفّح من دون إعادة تحميل كاملة للصفحة.
 
-- <Badge text="5.107.0+" /> Scope hoisting (module concatenation) لـ CSS Modules. حين يُفعَّل [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)، فإنّ وحدات CSS التي يكون `exportType` لها `text` أو `css-style-sheet` أو `style` أو `link` تُدمَج في نسخة واحدة من الوحدة بدلاً من إبقائها نسخاً منفصلة عند الـ runtime. وهذا يُقلِّل الـ overhead ويُنتج مخرَجات أصغر للحزم الثقيلة بـ CSS.
+- <Badge text="5.107.0+" /> Scope hoisting (module concatenation) لـ CSS
+  Modules. حين يُفعَّل
+  [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)،
+  فإنّ وحدات CSS التي يكون `exportType` لها `text` أو `css-style-sheet` أو
+  `style` أو `link` تُدمَج في نسخة واحدة من الوحدة بدلاً من إبقائها نسخاً منفصلة
+  عند الـ runtime. وهذا يُقلِّل الـ overhead ويُنتج مخرَجات أصغر للحزم الثقيلة
+  بـ CSS.
 
-- <Badge text="5.107.0+" /> يمكن استعمال معرّفات `@value` بوصفها مسارَ معامل لـ `@import` وداخل مراجع `url()`، حتى يُعرَّف المسار أو الـ asset المشترك مرّة واحدة ويُعاد استعماله عبر عدّة أوراق أنماط. وتُقبل الصيغة المُغلَّفة بعلامتي اقتباس (`"./x"`, `'./x'`) والصيغة المُجرَّدة (`./x`)، وتُحلّ كلتاهما عبر مسار الـ assets الاعتيادي في webpack.
+- <Badge text="5.107.0+" /> يمكن استعمال معرّفات `@value` بوصفها مسارَ معامل لـ
+  `@import` وداخل مراجع `url()`، حتى يُعرَّف المسار أو الـ asset المشترك مرّة
+  واحدة ويُعاد استعماله عبر عدّة أوراق أنماط. وتُقبل الصيغة المُغلَّفة بعلامتي
+  اقتباس (`"./x"`, `'./x'`) والصيغة المُجرَّدة (`./x`)، وتُحلّ كلتاهما عبر مسار
+  الـ assets الاعتيادي في webpack.
 
   ```css
   @value path: "./other.module.css";

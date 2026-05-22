@@ -20,18 +20,20 @@ export default {
 
 ## Stats الإعدادات المسبقة
 
+<span id="stats-presets"></span>
+
 يأتي webpack مزودًا ببعض الإعدادات المسبقة المتاحة لـ stats output:
 
-| محددة مسبقا              | بديل | الوصف                                                    |
-| ------------------- | ----------- | -------------------------------------------------------------- |
-| `'errors-only'`     | _لا شيء_      | فقط output عند حدوث أخطاء                                 |
-| `'errors-warnings'` | _لا شيء_      | تحدث أخطاء وتحذيرات output فقط                         |
-| `'minimal'`         | _لا شيء_      | فقط output عند حدوث أخطاء أو compilation جديدة              |
-| `'none'`            | `false`     | Output لا شيء                                                 |
-| `'normal'`          | `true`      | قياسي output                                                |
-| `'verbose'`         | _لا شيء_      | Output كل شيء                                              |
-| `'detailed'`        | _لا شيء_      | Output كل شيء ما عدا `chunkModules` و`chunkRootModules` |
-| `'summary'`         | _لا شيء_      | Output webpack الإصدار، عدد التحذيرات وعدد الأخطاء        |
+| محددة مسبقا         | بديل     | الوصف                                                   |
+| ------------------- | -------- | ------------------------------------------------------- |
+| `'errors-only'`     | _لا شيء_ | فقط output عند حدوث أخطاء                               |
+| `'errors-warnings'` | _لا شيء_ | تحدث أخطاء وتحذيرات output فقط                          |
+| `'minimal'`         | _لا شيء_ | فقط output عند حدوث أخطاء أو compilation جديدة          |
+| `'none'`            | `false`  | Output لا شيء                                           |
+| `'normal'`          | `true`   | قياسي output                                            |
+| `'verbose'`         | _لا شيء_ | Output كل شيء                                           |
+| `'detailed'`        | _لا شيء_ | Output كل شيء ما عدا `chunkModules` و`chunkRootModules` |
+| `'summary'`         | _لا شيء_ | Output webpack الإصدار، عدد التحذيرات وعدد الأخطاء      |
 
 ## Stats الخيارات
 
@@ -1263,6 +1265,8 @@ export default {
 
 ### فرز الحقول
 
+<span id="sorting-fields"></span>
+
 بالنسبة إلى `assetsSort` و`chunksSort` و`modulesSort` هناك العديد من الحقول المحتملة التي يمكنك فرز العناصر حسبها:
 
 - `'id'` - معرف العنصر،
@@ -1286,6 +1290,8 @@ export default {
 - `'issuerPath'` - مُصدر كامل object. ليست هناك حاجة حقيقية للفرز حسب هذا الحقل.
 
 ### توسيع سلوكيات stats
+
+<span id="extending-stats-behaviours"></span>
 
 إذا كنت تريد استخدام أحد الإعدادات المسبقة على سبيل المثال، `'minimal'` ولكن لا يزال يتجاوز بعض القواعد: حدد `stats.preset` المطلوب وأضف القواعد المخصصة أو الإضافية بعد ذلك.
 

@@ -9,6 +9,8 @@ contributors:
 
 ## تصدير دالّة
 
+<span id="exporting-a-function"></span>
+
 ستجد عاجلاً أم آجلاً حاجة إلى التمييز داخل `webpack.config.js` بين [بناء التطوير](/guides/development) و[بناء الإنتاج](/guides/production). وثمّة طرق متعددة لذلك. من بينها أن تُصدّر دالّة من ملف تخصيص webpack بدلاً من تصدير كائن. سيتمّ استدعاء هذه الدالّة بمعاملين:
 
 - بيئة (environment) بوصفها المعامل الأول. راجع [توثيق خيارات البيئة في الـ CLI](/api/cli/#environment-options) لأمثلة على الصياغة.
@@ -33,6 +35,8 @@ contributors:
 
 ## تصدير Promise
 
+<span id="exporting-a-promise"></span>
+
 سيُشغّل webpack الدالّة المُصدَّرة من ملف التخصيص، وينتظر منها إرجاع Promise. وهذا مفيد حين تحتاج إلى تحميل متغيّرات التخصيص بشكل غير متزامن.
 
 T> يمكنك تصدير عدّة Promises عبر تغليفها داخل `Promise.all([/* Promises الخاصة بك */])`.
@@ -52,6 +56,8 @@ export default () =>
 W> إرجاع `Promise` يعمل فقط حين تستخدم webpack عبر الـ CLI. أمّا [`webpack()`](/api/node/#webpack) فيتوقّع كائناً.
 
 ## تصدير تخصيصات متعددة
+
+<span id="exporting-multiple-configurations"></span>
 
 عوضاً عن تصدير كائن أو دالّة تخصيص واحدة، يمكنك تصدير عدّة تخصيصات (وقد دُعمت الدوال المتعددة منذ webpack 3.1.0). وعند تشغيل webpack، تُبنى كل التخصيصات معاً. وهذا مفيد مثلاً عند [حزم مكتبة](/guides/author-libraries) لعدّة [أهداف (targets)](/configuration/output/#outputlibrarytarget) كـ AMD و CommonJS:
 
@@ -119,6 +125,8 @@ const config = [
     // التخصيص-2
   },
 ];
+
 config.parallelism = 1;
+
 export default config;
 ```
