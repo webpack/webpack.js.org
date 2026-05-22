@@ -10,15 +10,15 @@ contributors:
 
 اكتشف ما هو الجديد في هذا الإصدار:
 
-- [**التحقق من صحة الإضافات باستخدام `compiler.hooks.validate`**](#plugin-validation-with-compilerhooksvalidate)
-- [**CSS Modules مع حقن النمط في وقت التشغيل**](#css-modules-with-runtime-style-injection)
-- [**Tree Shaking أفضل لتفكيك CommonJS**](#better-tree-shaking-for-commonjs-destructuring)
-- [**استيرادات مرحلة المصدر لـ WebAssembly (تجريبي)**](#source-phase-imports-for-webassembly-experimental)
-- [**البدء مع `create-webpack-app`**](#getting-started-with-create-webpack-app)
-- [**دعم السياق لـ VirtualUrlPlugin**](#context-support-for-virtualurlplugin)
-- [**تحليل JavaScript تجريبي باستخدام `oxc-parser`**](#experimental-javascript-parsing-with-oxc-parser)
-- [**تحديثات النظام البيئي**](#ecosystem-updates)
-- [**إصلاحات الأخطاء**](#bug-fixes)
+- [**التحقق من صحة الإضافات باستخدام `compiler.hooks.validate`**](#التحقق-من-صحة-الإضافات-باستخدام-compilerhooksvalidate)
+- [**CSS Modules مع حقن النمط في وقت التشغيل**](#css-modules-مع-حقن-النمط-في-وقت-التشغيل)
+- [**Tree Shaking أفضل لتفكيك CommonJS**](#tree-shaking-أفضل-لتفكيك-commonjs)
+- [**استيرادات مرحلة المصدر لـ WebAssembly (تجريبي)**](#استيرادات-مرحلة-المصدر-لـ-webassembly-تجريبي)
+- [**البدء مع `create-webpack-app`**](#البدء-مع-create-webpack-app)
+- [**دعم السياق لـ VirtualUrlPlugin**](#دعم-السياق-لـ-virtualurlplugin)
+- [**تحليل JavaScript تجريبي باستخدام `oxc-parser`**](#تحليل-javascript-تجريبي-باستخدام-oxc-parser)
+- [**تحديثات النظام البيئي**](#تحديثات-النظام-البيئي)
+- [**إصلاحات الأخطاء**](#إصلاحات-الأخطاء)
 
 ## التحقق من صحة الإضافات باستخدام `compiler.hooks.validate`
 
@@ -36,11 +36,11 @@ module.exports = {
 تعتمد القيمة الافتراضية على وضع البناء:
 
 | Mode        | `experiments.futureDefaults` | الافتراضي لـ `validate` |
-| ----------- | :--------------------------: | :----------------: |
-| development |           `false`            |       `true`       |
-| development |            `true`            |       `true`       |
-| production  |           `false`            |       `true`       |
-| production  |            `true`            |      `false`       |
+| ----------- | :--------------------------: | :---------------------: |
+| development |           `false`            |         `true`          |
+| development |            `true`            |         `true`          |
+| production  |           `false`            |         `true`          |
+| production  |            `true`            |         `false`         |
 
 بالنسبة لمؤلفي الإضافات، يعد دمج التحقق أمرًا مباشرًا. قم بتسجيل tap على `compiler.hooks.validate`، وسيهتم webpack بالباقي، بما في ذلك تخطي التحقق تمامًا عندما يضبط المستخدم `validate: false`:
 
