@@ -65,7 +65,7 @@ describe("offline", () => {
 
       // click `guides` link
       cy.get('a[title="guides"]').click();
-      cy.get("h1").contains("Guides");
+      cy.get("h1").contains("الأدلة");
     });
 
     it("open print dialog when accessing /printable url", () => {

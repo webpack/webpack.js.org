@@ -10,7 +10,7 @@ describe("Scroll Test", () => {
       // scroll to Contributors section
       cy.get('[data-testid="contributors"]').scrollIntoView();
 
-      cy.isNotInViewport("#basic-setup");
+      cy.isNotInViewport('[id="الإعداد-الأساسي"]');
 
       cy.visit("/guides/build-performance/");
       cy.isNotInViewport('[data-testid="contributors"]');
@@ -20,10 +20,10 @@ describe("Scroll Test", () => {
       cy.visit("/guides/getting-started");
       cy.get('[data-testid="contributors"]').scrollIntoView();
 
-      cy.visit("/guides/build-performance/#development");
-      // since we lazy load notification bar now, #development element is a little out of viewport now
-      cy.isInViewport("#compile-in-memory");
-      cy.isNotInViewport("#general");
+      cy.visit(`/guides/build-performance/${encodeURI("#التطوير")}`);
+      // since we lazy load notification bar now, #التطوير element is a little out of viewport now
+      cy.isInViewport('[id="الترجمة-في-الذاكرة"]');
+      cy.isNotInViewport('[id="عام"]');
     });
   }
 });
