@@ -62,7 +62,7 @@ import Utility from "../../utilities/utility";
 import Utility from "Utilities/utility";
 ```
 
-يمكن أيضًا إضافة `يمكن أيضًا إضافة  زائدة إلى مفاتيح object المحددة للدلالة على التطابق التام:
+يمكن أيضًا إضافة `يمكن أيضًا إضافة زائدة إلى مفاتيح object المحددة للدلالة على التطابق التام:
 
 **webpack.config.js**
 
@@ -120,21 +120,21 @@ import utils from "@utils/helpers";
 
 ويوضح الجدول التالي الحالات الأخرى:
 
-| `alias:` | `import 'xyz'` | `import 'xyz/file.js'` |
+| `alias:`                           | `import 'xyz'`                        | `import 'xyz/file.js'`               |
 | ---------------------------------- | ------------------------------------- | ------------------------------------ |
-| `{}` | `/abc/node_modules/xyz/index.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | خطأ                                |
-| `{ xyz$: '/abc/path/to/file.js' }` | `/abc/path/to/file.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: './dir/file.js' }`         | `/abc/dir/file.js`                    | خطأ                                |
-| `{ xyz$: './dir/file.js' }` | `/abc/dir/file.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: '/some/dir' }` | `/some/dir/index.js` | `/some/dir/file.js` |
-| `{ xyz$: '/some/dir' }` | `/some/dir/index.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: './dir' }` | `/abc/dir/index.js` | `/abc/dir/file.js` |
-| `{ xyz: 'modu' }` | `/abc/node_modules/modu/index.js` | `/abc/node_modules/modu/file.js` |
-| `{ xyz$: 'modu' }` | `/abc/node_modules/modu/index.js` | `/abc/node_modules/xyz/file.js` |
-| `{ xyz: 'modu/some/file.js' }`     | `/abc/node_modules/modu/some/file.js` | خطأ                                |
-| `{ xyz: 'modu/dir' }` | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/modu/dir/file.js` |
-| `{ xyz$: 'modu/dir' }` | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/xyz/file.js` |
+| `{}`                               | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | خطأ                                  |
+| `{ xyz$: '/abc/path/to/file.js' }` | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: './dir/file.js' }`         | `/abc/dir/file.js`                    | خطأ                                  |
+| `{ xyz$: './dir/file.js' }`        | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: '/some/dir' }`             | `/some/dir/index.js`                  | `/some/dir/file.js`                  |
+| `{ xyz$: '/some/dir' }`            | `/some/dir/index.js`                  | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: './dir' }`                 | `/abc/dir/index.js`                   | `/abc/dir/file.js`                   |
+| `{ xyz: 'modu' }`                  | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/modu/file.js`     |
+| `{ xyz$: 'modu' }`                 | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: 'modu/some/file.js' }`     | `/abc/node_modules/modu/some/file.js` | خطأ                                  |
+| `{ xyz: 'modu/dir' }`              | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/modu/dir/file.js` |
+| `{ xyz$: 'modu/dir' }`             | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/xyz/file.js`      |
 
 `index.js` يجوز resolve إلى ملف آخر إذا تم تعريفه في `package.json`.
 
@@ -298,13 +298,13 @@ export default {
 
 يتم إلحاق شروط إضافية بناءً على [`target`](/configuration/target/):
 
-| Target خاصية | الحالة    |
-| --------------- | ------------ |
-| `webworker` | `"worker"` |
-| `node` | `"node"` |
-| `web` | `"browser"` |
-| `electron` | `"electron"` |
-| `nwjs` | `"nwjs"` |
+| Target خاصية | الحالة       |
+| ------------ | ------------ |
+| `webworker`  | `"worker"`   |
+| `node`       | `"node"`     |
+| `web`        | `"browser"`  |
+| `electron`   | `"electron"` |
+| `nwjs`       | `"nwjs"`     |
 
 على سبيل المثال، مع `target: "web"` (الافتراضي) و`mode: "production"`، يكون الإعداد الافتراضي `conditionNames` هو `["webpack", "production", "browser"]`.
 
@@ -312,12 +312,12 @@ export default {
 
 يقوم webpack بضبط `conditionNames` حتى [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) اعتمادًا على كيفية استيراد module. يرث الرمز المميز `"..."` من الشروط الأساسية المذكورة أعلاه.
 
-| Dependency النوع                                     | `conditionNames`                                       | تستخدم ل                                             |
-| --------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------- |
+| Dependency النوع                                    | `conditionNames`                                       | تستخدم ل                                            |
+| --------------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------- |
 | `esm`، `wasm`، `loaderImport`                       | `["import", "module-sync", "module", "..."]`           | ESM `import` البيانات، WebAssembly، loader الواردات |
 | `commonjs`، `amd`، `loader`، `unknown`، `undefined` | `["require", "module-sync", "module", "..."]`          | مكالمات `require()` وAMD وأنواع dependency الأخرى   |
-| `worker`                                            | `["worker", "import", "module-sync", "module", "..."]` | `new Worker()` التعبيرات                           |
-| `css-import`                                        | `["webpack", <mode>, "style"]`                         | CSS `@import` البيانات                             |
+| `worker`                                            | `["worker", "import", "module-sync", "module", "..."]` | `new Worker()` التعبيرات                            |
+| `css-import`                                        | `["webpack", <mode>, "style"]`                         | CSS `@import` البيانات                              |
 
 يتم تضمين <Badge text="5.107.0+" /> `"module-sync"` في الشروط الافتراضية
 للتوافق مع Node.js، مما يعرض حالة مجتمع `module-sync` لـ
@@ -842,7 +842,7 @@ export default {
 
 ما إذا كان سيتم ربط resolve بالارتباطات الرمزية إلى موقع الارتباط الرمزي الخاص بها.
 
-عند التمكين، يتم تحويل الموارد المرتبطة بالرمز إلى مسارها _الحقيقي، وليس إلى موقع الارتباط الرمزي الخاص بها. لاحظ أن هذا قد يتسبب في فشل دقة module عند استخدام الأدوات التي تربط packages (مثل `npm link`).
+عند التمكين، يتم تحويل الموارد المرتبطة بالرمز إلى مسارها \_الحقيقي، وليس إلى موقع الارتباط الرمزي الخاص بها. لاحظ أن هذا قد يتسبب في فشل دقة module عند استخدام الأدوات التي تربط packages (مثل `npm link`).
 
 **webpack.config.js**
 
