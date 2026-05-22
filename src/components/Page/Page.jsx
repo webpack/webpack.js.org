@@ -13,6 +13,16 @@ import AdjacentPages from "./AdjacentPages.jsx";
 
 // Load Styling
 
+function getHashTargetId(hash) {
+  const targetId = hash.slice(1);
+
+  try {
+    return decodeURIComponent(targetId);
+  } catch {
+    return targetId;
+  }
+}
+
 export default function Page(props) {
   const {
     title,
@@ -60,17 +70,18 @@ export default function Page(props) {
     if (contentLoaded) {
       if (hash) {
         const target = document.querySelector("#md-content");
+        const targetId = getHashTargetId(hash);
         // two cases here
         // 1. server side rendered page, so hash target is already there
         // Note: Why this change because we use getElementById instead of querySelector(hash) here because
         // CSS selectors cannot start with a digit (e.g. #11-in-scope is invalid)
-        if (document.getElementById(hash.slice(1))) {
-          document.getElementById(hash.slice(1)).scrollIntoView();
+        if (document.getElementById(targetId)) {
+          document.getElementById(targetId).scrollIntoView();
         } else {
           // 2. dynamic loaded content
           // we need to observe the dom change to tell if hash exists
           observer = new MutationObserver(() => {
-            const element = document.getElementById(hash.slice(1));
+            const element = document.getElementById(targetId);
             if (element) {
               element.scrollIntoView();
               observer.disconnect();
