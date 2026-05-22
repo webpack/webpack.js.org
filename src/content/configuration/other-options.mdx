@@ -86,6 +86,8 @@ export default [
 
 ## تجاهل التحذيرات
 
+<span id="ignorewarnings"></span>
+
 `[RegExp, function (WebpackError, Compilation) => boolean, {module?: RegExp, file?: RegExp, message?: RegExp}]`
 
 يُخبر webpack أن يتجاهل تحذيرات بعينها. ويمكن أن يكون ذلك عبر `RegExp`، أو عبر `function` مخصَّصة تختار التحذيرات استناداً إلى نسخة التحذير الخام، وتتلقّى `WebpackError` و `Compilation` بوصفهما وسيطين، وتُرجع قيمة `boolean`، أو عبر `object` يحمل الخصائص الآتية:
@@ -147,6 +149,8 @@ export default function (source) {
 T> يمكنك تجاوز الخصائص في سياق الـ loader، لأنّ webpack ينسخ كلّ ما يُعرَّف في `loader` إلى سياق الـ loader.
 
 ## اسم
+
+<span id="name"></span>
 
 `string`
 

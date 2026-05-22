@@ -1125,12 +1125,12 @@ W> عندما يكون `output.module` هو `true`، يتم الاحتفاظ ب�
 
 باستخدام هذا التخصيص، يتم الاحتفاظ بالخصائص المخصصة على `import.meta` التي تم تعيينها بواسطة الأداة build أو runtime في output الذي تم إنشاؤه:
 
-  ```js
-  // يتم تعيين import.meta.customProp خارجيًا (على سبيل المثال بواسطة أداة build أو runtime)
-  if (import.meta.customProp) {
-    console.log(import.meta.customProp);
-  }
-  ```
+```js
+// يتم تعيين import.meta.customProp خارجيًا (على سبيل المثال بواسطة أداة build أو runtime)
+if (import.meta.customProp) {
+  console.log(import.meta.customProp);
+}
+```
 
 #### module.parser.javascript.importMetaContext
 
@@ -1411,11 +1411,11 @@ export default {
 
 تعتمد القيمة الافتراضية لـ `module.parser.json.exportsDepth` على [`mode`](/configuration/mode/):
 
-| Mode            | الافتراضي    |
+| Mode            | الافتراضي  |
 | --------------- | ---------- |
-| `"production"` | `Infinity` |
-| `"development"` | `1` |
-| `"none"` | `Infinity` |
+| `"production"`  | `Infinity` |
+| `"development"` | `1`        |
+| `"none"`        | `Infinity` |
 
 - النوع: `number`
 - متاح: <Badge text='5.98.0+' />
@@ -1680,11 +1680,15 @@ array من [القواعد](#rule) والتي تتطابق مع الطلبات �
 
 ## القاعدة
 
+<span id="rule"></span>
+
 `object`
 
 يمكن تقسيم القاعدة إلى ثلاثة أجزاء - الشروط والنتائج والقواعد المتداخلة.
 
 ### شروط القاعدة
+
+<span id="rule-conditions"></span>
 
 هناك قيمتان مدخلتان للشروط:
 
@@ -1718,6 +1722,8 @@ W> كن حذرا! المورد هو المسار _الذي تم حله_ للمل
 تؤثر الخاصية [`parser`](#ruleparser) على خيارات المحلل اللغوي.
 
 ## قواعد متداخلة
+
+<span id="nested-rules"></span>
 
 يمكن تحديد القواعد المتداخلة ضمن الخصائص [`rules`](#rulerules) و[`oneOf`](#ruleoneof).
 
@@ -1901,7 +1907,7 @@ export default {
     rules: [
       {
         test: /\.m?js$/,
-        extractSource Map: true,
+        extractSourceMap: true,
       },
     ],
   },
@@ -2606,6 +2612,8 @@ import one from "./pkg-1.json" with { type: "json" };
 في هذا المثال، يتم استخدام `Rule.with` لتطبيق `loader-assert.js` على أي module مستورد بالشرط `with { type: "json" }`.
 
 ## الحالة
+
+<span id="condition"></span>
 
 الشروط يمكن أن تكون واحدة من هذه:
 

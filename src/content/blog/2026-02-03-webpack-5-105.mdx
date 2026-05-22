@@ -22,6 +22,8 @@ contributors:
 
 ## إصلاح ثغرتين أمنيتين (CVEs) منخفضتي الخطورة في Webpack
 
+<span id="two-low-severity-cves-fixed-in-webpack"></span>
+
 تم إصلاح ونشر ثغرتين أمنيتين (CVEs) جديدتين منخفضتي الخطورة في Webpack.
 بشكل افتراضي، أنت في أمان؛ هذه المشاكل تؤثر فقط على مستخدمي الخيار التجريبي
 [`experiments.buildHttp`](/configuration/experiments/#experimentsbuildhttp).
@@ -45,6 +47,8 @@ contributors:
 راجع [سياسة أمان Webpack](https://github.com/webpack/webpack/security/policy).
 
 ## تحليل الأسماء المستعارة في `tsconfig.json` دون الحاجة إلى إضافات (plugins)
+
+<span id="tsconfigjson-alias-resolution-without-requiring-plugins"></span>
 
 يمكن الآن تكوين تحليل الوحدات (Module resolution) لقراءة `compilerOptions.baseUrl` و `compilerOptions.paths` من ملف `tsconfig.json` وتطبيق تلك الأسماء المستعارة عند تحليل الواردات (imports). نتيجة لذلك، لم يعد من الضروري تثبيت وتكوين الإضافة الخارجية `tsconfig-paths-webpack-plugin` فقط لجعل الأسماء المستعارة لمسارات TypeScript تعمل أثناء الحزم (bundling).
 
@@ -82,6 +86,8 @@ import Button from "@/components/Button";
 
 ## تحليل الوحدات (Module Resolution) التلقائي لـ Web Workers
 
+<span id="automatic-module-resolution-for-web-workers"></span>
+
 عند استيراد حزمة مخصصة لاستخدامها في Web Worker في Webpack، يمكن لتحليل الوحدات إعطاء الأولوية لملفات مثل `index.worker.js` بدلاً من `index.js` عند استخدام [الصادرات المشروطة (conditional exports)](https://nodejs.org/api/packages.html#conditional-exports) المعرفة في حقل `exports` في `package.json`.
 
 هذا يعني أنه إذا قمت بتحديد شروط مثل `"worker"` في صادرات حزمتك، سيقوم Webpack تلقائيًا بتحديد الإصدار المناسب، مثل `index.worker.js`، كلما تم استيراد الحزمة داخل سياق الـ worker. لا حاجة لتعديل خيار `resolve.conditionNames` أو إجراء تغييرات إضافية في تكوين Webpack؛ تحتاج فقط إلى تحديد الشروط بشكل صحيح في `package.json`.
@@ -115,6 +121,8 @@ const worker = new Worker(new URL("foo", import.meta.url), {
 
 ## دعم حارس محدد الاستيراد (Import Specifier Guard)
 
+<span id="support-import-specifier-guard"></span>
+
 تمت إضافة دعم لحراس محدد الاستيراد (import specifier guards)، وهو تحسين يساعد المحزم (bundler) على فهم النمط الشائع بشكل أفضل عند التحقق مما إذا كان التصدير موجودًا قبل استخدامه. في السابق، حتى لو كان الكود محميًا بشكل صحيح بواسطة عبارة if، كان من الممكن تفسير الوصول على أنه غير مشروط ويؤدي إلى تحذيرات مثل "export … was not found" (التصدير ... غير موجود).
 
 مع هذا التغيير، يُعترف بهذه التحققات كإشارة على أن الوصول مشروط، ويتم تعديل التحليل وفقًا لذلك. من الناحية العملية، يجعل هذا من الممكن كتابة كود متوافق بشكل أكبر عبر الإصدارات المختلفة لنفس المكتبة، حيث قد يوجد التصدير أو لا يوجد، دون تشويش غير ضروري أثناء التحويل البرمجي (compilation).
@@ -131,6 +139,8 @@ if (React.useId) {
 
 ## دعم `import.defer()` لوحدة السياق (Context Module)
 
+<span id="support-importdefer-for-context-module"></span>
+
 يدعم Webpack الآن `import.defer()` حتى عندما يكون الاستيراد وحدة سياق (context module) (أي عندما يتم بناء مسار الاستيراد ديناميكيًا ويحتاج webpack إلى تضمين مجموعة من الملفات المحتملة). عمليًا، يجعل هذا من الأسهل بكثير تأجيل تحميل الوحدة المحددة في وقت التشغيل، حتى عندما تأتي تلك الوحدة من تعبير ديناميكي يشير إلى مجلد. ويتيح هذا أنماطًا مثل "اختر بين a.js أو b.js وقم بتحميله فقط عند الحاجة"، مع توليد webpack للسياق المناسب لضمان عمل import.defer() بشكل صحيح.
 
 {/* eslint-disable */}
@@ -143,6 +153,8 @@ import.defer("./dir/" + file);
 {/* eslint-enabled */}
 
 ## الحفاظ على الخصائص المخصصة في `import.meta`
+
+<span id="preserving-custom-importmeta-properties"></span>
 
 يحافظ Webpack الآن على الخصائص المخصصة لـ `import.meta` أثناء الحزم عند تفعيل [`output.module`](/configuration/output/#outputmodule). في السابق، كان Webpack يقوم بإزالة أي خصائص `import.meta` غير معروفة (مثل `import.meta.customProp`)، مما يتسبب في فقدان المعلومات السياقية أو الخاصة بالأدوات في البناء.
 
@@ -173,6 +185,8 @@ module.exports = {
 بهذه الطريقة، حتى بدون `output.module: true`، سيتم الحفاظ على أي خاصية مخصصة لـ import.meta، مثل `import.meta.customProp`، في البناء.
 
 ## تحكم أفضل في خرائط المصدر (Source Maps) في `devtool`
+
+<span id="better-control-of-source-maps-in-devtool"></span>
 
 يسمح Webpack الآن لخيار `devtool` بقبول كل من **سلسلة نصية (string)** ومصفوفة من الكائنات (array of objects) للتكوينات المتقدمة.
 
@@ -211,9 +225,13 @@ module.exports = {
 
 ## مخرجات ESM أنظف لـ Node.js وعمليات البناء الحديثة
 
+<span id="cleaner-esm-output-for-nodejs-and-modern-builds"></span>
+
 يحسّن هذا التحسين في Webpack معالجة وتمثيل وحدات Node.js الأصلية (مثل `fs`, `path`, أو `crypto`) أثناء عملية الحزم، وخاصة عند استخدام الخيار [`output.module`](/configuration/output/#outputmodule) في التكوين. عند تفعيل `output.module: true`، يقوم Webpack الآن بتوليد استيرادات للوحدات الأصلية باستخدام صياغة ES module أي `import ... from "module"` بدلاً من `require("module")` الخاصة بـ CommonJS، بغض النظر عما إذا كان الكود سيعمل في بيئة الويب أو Node.js.
 
 ## تحسينات وإصلاحات أخرى
+
+<span id="other-improvements-and-bug-fixes"></span>
 
 - أصدر **Webpack-dev-server** إصدارًا جديدًا لتحديث التبعيات (dependencies) التي أُبلغ عن وجود ثغرات انتقالية بها، لذا يوصى بالتحديث. بالإضافة إلى ذلك، تمت إضافة خيار لإغلاق تراكب الخطأ (error overlay) بالضغط على مفتاح ESC، وتم إصلاح العديد من الأخطاء. تحقق من [الإصدار لمزيد من المعلومات](https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.3).
 - تلقى **Webpack-bundle-analyzer** تحسينات وإصلاحات مهمة لتجربة المستخدم. تم حل المشكلات البصرية المتعلقة بـ tooltips في الوضع المظلم، وأصبح تحليل الحزم باستخدام IIFE أكثر قوة، مما يمنع الأخطاء. بالإضافة إلى ذلك، تمت إضافة دعم لضغط Zstandard، وهو متاح فقط في Node.js 22.15 أو أعلى. تحقق من [سجل التغييرات لمزيد من المعلومات](https://github.com/webpack/webpack-bundle-analyzer/blob/main/CHANGELOG.md).
