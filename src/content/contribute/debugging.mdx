@@ -1,12 +1,8 @@
 ---
-title: Debugging
+title: تصحيح الأخطاء
 sort: 7
 contributors:
-  - skipjack
-  - tbroadley
-  - madhavarshney
-  - bhavya9107
-  - akaustav
+  - semon009
 related:
   - title: Learn and Debug webpack with Chrome DevTools!
     url: https://medium.com/webpack/webpack-bits-learn-and-debug-webpack-with-chrome-dev-tools-da1c5b19554
@@ -16,43 +12,44 @@ related:
     url: https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27
 ---
 
-When contributing to the core repo, writing a loader/plugin, or even working on a complex project, debugging tools can be central to your workflow. Whether the problem is slow performance on a large project or an unhelpful traceback, the following utilities can make figuring it out less painful.
+عند المساهمة في الـ core repo، أو كتابة loader/plugin، أو حتى العمل على مشروع معقد، تُعدّ أدوات تصحيح الأخطاء أساسية في سير عملك. سواءً أكانت المشكلة بطء الأداء في مشروع كبير أو تتبع أخطاء غير مفيد، فإن الأدوات المساعدة التالية تُسهّل عليك عملية تحديد المشكلة.
 
-- The [`stats` data](/api/stats) made available through [Node](/api/node/#stats-object) and the [CLI](/api/cli/#common-options).
-- Chrome **DevTools** and the latest Node.js version.
+- البيانات [`stats` data](/api/stats) المتاحة من خلال [Node](/api/node/#stats-object) و [CLI](/api/cli/#common-options).
+- **أدوات مطوري** Chrome وأحدث إصدار من Node.js.
 
-## Stats
+## الإحصائيات
 
-Whether you want to sift through [this data](/api/stats) manually or use a tool to process it, the `stats` data can be extremely useful when debugging build issues. We won't go in depth here as there's an [entire page](/api/stats) dedicated to its contents, but know that you can use it to find the following information:
+سواءً أردتَ تحليل هذه [البيانات](/api/stats) يدويًا أو استخدام أداة لمعالجتها، فإن بيانات `stats` تُعدّ مفيدة للغاية عند تصحيح أخطاء البناء. لن نتطرق إلى التفاصيل هنا لوجود صفحة كاملة مخصصة لمحتوياتها [الصفحة الكاملة](/api/stats)، ولكن اعلم أنه يمكنك استخدامها للعثور على المعلومات التالية:
 
-- The contents of every module.
-- The modules contained within every chunk.
-- Per module compilation and resolving stats.
-- Build errors and warnings.
-- The relationships between modules.
-- And much more...
+- محتويات كل module.
+- الـ modules الموجودة داخل كل جزء.
+- إحصائيات تجميع وحل كل module.
+- أخطاء البناء والتحذيرات.
+- العلاقات بين الـ modules.
+- وغير ذلك الكثير...
 
-On top of that, the official [analyze tool](https://github.com/webpack/analyse) and [various others](/guides/code-splitting/#bundle-analysis) will accept this data and visualize it in various ways.
+علاوة على ذلك، فإن [أداة التحليل](https://github.com/webpack/analyse) الرسمية و[أدوات أخرى متنوعة](/guides/code-splitting/#bundle-analysis) ستقبل هذه البيانات وتصورها بطرق مختلفة.
 
-## DevTools
+## أدوات المطورين
 
-While [`console`](https://nodejs.org/api/console.html) statements may work well in straightforward scenarios, sometimes a more robust solution is needed. As most front-end developers already know, Chrome DevTools are a life saver when debugging web applications, _but they don’t have to stop there_. As of Node v6.3.0+, developers can use the built-in `--inspect` flag to debug a node program in DevTools.
+على الرغم من أن عبارات [`console`](https://nodejs.org/api/console.html) قد تكون فعّالة في الحالات البسيطة، إلا أن الحاجة قد تدعو أحيانًا إلى حلول أكثر عملية. وكما يعلم معظم مطوري واجهات المستخدم، تُعد أدوات مطوري Chrome منقذة عند تصحيح أخطاء تطبيقات الويب، _ولكن استخدامها لا يقتصر على ذلك_. فمنذ إصدار Node v6.3.0 والإصدارات الأحدث، يُمكن للمطورين استخدام علامة `--inspect` المدمجة لتصحيح أخطاء برنامج Node في أدوات المطورين.
 
-Let's start by invoking webpack with the `node --inspect`.
+لنبدأ باستدعاء webpack باستخدام `node --inspect`.
 
-Note that we cannot run npm `scripts`, e.g. `npm run build`, so we'll have to specify the full `node_modules` path:
+لاحظ أنه لا يمكننا تشغيل الـ `scripts` الخاصة بـ npm، على سبيل المثال `npm run build`، لذلك سيتعين علينا تحديد المسار الكامل لـ `node_modules`:
 
 ```bash
 node --inspect ./node_modules/webpack/bin/webpack.js
 ```
 
-Which should output something like:
+والذي من المفترض أن يكون الـ Output شيئاً مثل:
 
 ```bash
 Debugger listening on ws://127.0.0.1:9229/c624201a-250f-416e-a018-300bbec7be2c
 For help see https://nodejs.org/en/docs/inspector
 ```
 
-Now jump to `chrome://inspect` in the browser and you should see any active scripts you've inspected under the _Remote Target_ header. Click the "inspect" link under each script to open a dedicated debugger or the _Open dedicated DevTools for Node_ link for a session that will connect automatically. You can also check out the [NiM extension](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj), a handy Chrome plugin that will automatically open a DevTools tab every time you `--inspect` a script.
+ننتقل الآن إلى `chrome://inspect` في المتصفح، وستجد جميع البرامج النصية النشطة التي قمت بفحصها ضمن عنوان "_Remote Target_". انقر على رابط "inspect" أسفل كل برنامج نصي لفتح مصحح أخطاء مخصص، أو انقر على رابط "_فتح أدوات مطوري Node المخصصة_" لجلسة تتصل تلقائيًا. يمكنك أيضًا تجربة إضافة [NiM extension](https://chrome.google.com/webstore/detail/nodejs-v8-inspector-manag/gnhhdgbaldcilmgcpfddgdbkhjohddkj), وهي إضافة مفيدة لمتصفح Chrome تفتح تلقائيًا علامة تبويب أدوات المطورين في كل مرة تستخدم فيها الأمر `--inspect` لفحص برنامج نصي.
 
-We recommend using the `--inspect-brk` flag which will break on the first statement of the script allowing you to go through the source to set breakpoints and start/stop the build as you please. Also, don't forget that you can still pass arguments to the script. For example, if you have multiple configuration files you could pass `--config webpack.prod.js` to specify the configuration you'd like to debug.
+نوصي باستخدام الخيار `--inspect-brk` الذي يُوقف التنفيذ عند أول سطر في البرنامج النصي، مما يسمح لك بتصفح الكود المصدري (The source code) لتعيين نقاط توقف وبدء/إيقاف عملية البناء حسب رغبتك. ولا تنسَ أنه لا يزال بإمكانك تمرير وسائط إلى البرنامج النصي. على سبيل المثال، إذا كان لديك عدة ملفات تهيئة، يمكنك تمرير `--config webpack.prod.js` لتحديد ملف التهيئة الذي ترغب في تصحيحه.
+

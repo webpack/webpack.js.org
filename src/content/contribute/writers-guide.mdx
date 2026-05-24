@@ -2,22 +2,20 @@
 title: Writer's Guide
 sort: 1
 contributors:
-  - pranshuchittora
-  - EugeneHlushko
-  - shivxmsharma
+  - semon009
 ---
 
-The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
+تتضمن الأقسام التالية كل ما تحتاجه حول تعديل (editing) وتنسيق (formatting) المحتوى في هذا الموقع. تأكد من البحث قليلاً قبل البدء بتعديلاتك أو إضافاتك. أحيانا أصعب جزء هو العثور على المكان الصحيح للمحتوى وتحديد ما إذا كان موجودا مسبقا أو لا
 
-## Process
+## الخطوات
 
-1. Check related issue if an article links to one.
-2. Hit `edit` and expand on the structure.
-3. PR changes.
+1. تحقق من الـ `issue` (المشكلة) المرتبطة إذا كان المقال يحتوي على رابط له.
+2. اضغط على `edit` (التعديل) وقم بالتوسع في الهيكلية (`structure`).
+3. افتح `PR` (Pull Request) بالتغييرات.
 
 ## YAML Frontmatter
 
-Each article contains a small section at the top written in [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
+يحتوي كل مقال على قسم صغير في الأعلى مكتوب بصيغة [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
 
 ```yaml
 ---
@@ -32,34 +30,34 @@ related:
 ---
 ```
 
-Let's break these down:
+لنقم بتحليل هذه النقاط:
 
-- `title`: The name of the article.
-- `group`: The name of the sub-section
-- `sort`: The order of the article within its section (or) sub-section if it is present.
-- `contributors`: A list of GitHub usernames who have contributed to this article.
-- `related`: Any related reading or useful examples.
+- `title`: اسم أو عنوان المقال.
+- `group`: اسم القسم الفرعي (sub-section).
+- `sort`: ترتيب المقال داخل القسم الرئيسي، أو داخل القسم الفرعي (في حال وجوده).
+- `contributors`: قائمة بأسماء مستخدمي GitHub (GitHub usernames) الذين ساهموا في هذا المقال.
+- `related`: أي قراءات ذات صلة أو أمثلة مفيدة.
 
-Note that `related` will generate a **Further Reading** section at the bottom of the page and `contributors` will yield a **Contributors** section below it. If you edit an article and would like recognition, don't hesitate to add your GitHub username to the `contributors` list.
+يرجى ملاحظة أن حقل `related` سيقوم بتوليد قسم **"قراءات إضافية" (Further Reading)** في أسفل الصفحة، بينما سيقوم حقل `contributors` بتوليد قسم **"المساهمون" (Contributors)** أسفله مباشرةً. إذا قمت بتعديل مقال وترغب في الحصول على تقدير لجهدك، فلا تتردد في إضافة اسم مستخدم GitHub الخاص بك إلى قائمة الـ `contributors`.
 
-## Article Structure
+## هيكلية المقال (Article Structure)
 
-1. Brief Introduction - a paragraph or two so you get the basic idea about the what and why.
-2. Outline Remaining Content – how the content will be presented.
-3. Main Content - tell what you promised to tell.
-4. Conclusion - tell what you told and recap the main points.
+1. مقدمة موجزة (Brief Introduction): - فقرة أو فقرتان تمنح القارئ فكرة أساسية عن "ماذا" و"لماذا".
+2. مخطط بقية المحتوى (Outline Remaining Content): - توضيح لكيفية عرض وتقديم المحتوى.
+3. المحتوى الرئيسي (Main Content): - تقديم الشرح والمعلومات التي وعدت بتقديمها.
+4. الخاتمة (Conclusion): - تلخيص ما تم شرحه وإعادة تذكير بأهم النقاط.
 
-## Typesetting
+## التنسيق والكتابة (Typesetting)
 
-- Webpack can be written with a capital W at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
-- loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
-- plugins are enclosed in backticks and [camel-cased](https://en.wikipedia.org/wiki/Camel_case): `BannerPlugin`, `NpmInstallWebpackPlugin`, …
-- Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
-- Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
+- يمكن كتابة كلمة Webpack بحرف W كبير (Capital) في بداية الجملة. ([source](https://github.com/webpack/media#name))
+- يتم وضع الـ loaders داخل علامات اقتباس مائلة (backticks) وتُكتب بأسلوب [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
+- يتم وضع الـ plugins داخل علامات اقتباس مائلة (backticks) وتُكتب بأسلوب [camel-cased](https://en.wikipedia.org/wiki/Camel_case): `BannerPlugin`, `NpmInstallWebpackPlugin`, …
+- استخدم "webpack 2" للإشارة إلى إصدار معين من webpack (تجنب كتابتها هكذا: ~~"webpack v2"~~).
+- استخدم المصطلحات ES5 و ES2015 و ES2016... للإشارة إلى معايير ECMAScript تجنب استخدام (~~ES6~~, ~~ES7~~).
 
-## Formatting
+## التنسيق (Formatting)
 
-### Code
+### الكود (Code) :
 
 **Syntax: \`\`\`js … \`\`\`**
 
@@ -71,54 +69,54 @@ function foo() {
 foo();
 ```
 
-#### Quotation
+#### علامات الاقتباس (Quotation)
 
-Use single quotes in code snippets and project files (`.jsx`, `.scss` etc):
+استخدم علامات الاقتباس المفردة (single quotes) في قصاصات البرمجية (code snippets) وملفات المشروع (مثل `.jsx` و `.scss` وغيرها):
 
 ```diff
 - import webpack from "webpack";
 + import webpack from 'webpack';
 ```
 
-And in inline backticks:
+وكذلك داخل علامات الاقتباس المائلة المضمنة (inline backticks):
 
-**correct**
+**صحيح (correct)**
 
-Set value to `'index.md'`...
+اجعل القيمة `'index.md'`...
 
-**incorrect**
+**غير صحيح (incorrect)**
 
-Set value to `"index.md"`...
+اجعل القيمة `"index.md"`...
 
-### Lists
+### القوائم (Lists)
 
 - Boo
 - Foo
 - Zoo
 
-Lists should be ordered alphabetically.
+يجب أن يتم ترتيب القوائم أبجديا (alphabetically).
 
-### Tables
+### الجداول (Tables)
 
-| Parameter  | Explanation                                      | Input Type | Default Value |
-| ---------- | ------------------------------------------------ | ---------- | ------------- |
-| --debug    | Switch loaders to debug mode                     | boolean    | false         |
-| --devtool  | Define source map type for the bundled resources | string     | -             |
-| --progress | Print compilation progress in percentage         | boolean    | false         |
+| المعامل (Parameter)    | الشرح (Explanation)                                          | نوع الإدخال (Input Type) | القيمة الافتراضية(Default Value) |
+| ----------------------- | --------------------------------------------------------------- | --------------------- | --------------------------------- |
+| --debug                 | تحويل الـ loaders إلى وضع التصحيح (debug mode)                |  Boolean              |  false                            |
+| --devtool               | تحديد نوع الـ source map للموارد المجمعة (bundled resources)  |  string               |  -                                |
+| --progress              | طباعة تقدم عملية الـ compilation كنسبة مئوية                  |  boolean              |  false                            |
 
-Tables should also be ordered alphabetically.
+يجب أيضاً ترتيب الجداول أبجديا (alphabetically).
 
-### Configuration Properties
+### خصائص الإعدادات (Configuration Properties)
 
-The [configuration](/configuration) properties should be ordered alphabetically as well:
+يجب أيضا ترتيب خصائص الإعدادات ([configuration](/configuration)) أبجديا:
 
 - `devServer.compress`
 - `devServer.hot`
 - `devServer.static`
 
-### Quotes
+### الاقتباسات (Quotes)
 
-#### Blockquote
+#### الاقتباس المضمن (Blockquote)
 
 **Syntax: \>**
 
@@ -138,81 +136,81 @@ W> This is a warning.
 
 ?> This is a todo.
 
-### Assumptions and simplicity
+### الافتراضات والبساطة (Assumptions and simplicity)
 
-Do not make assumptions when writing the documentation.
+لا تضع افتراضات مسبقة عند كتابة التوثيق.
 
 ```diff
 - You might already know how to optimize bundle for production...
 + As we've learned in [production guide](/guides/production/)...
 ```
 
-Please do not assume things are simple. Avoid words like 'just', 'simply'.
+من فضلك لا تفترض أن الأمور بسيطة. تجنب استخدام كلمات مثل 'فقط' ,'ببساطة'.
 
 ```diff
 - Simply run command...
 + Run the `command-name` command...
 ```
 
-### Configuration defaults and types
+### قيم الإعدادات الافتراضية وأنواعها (Configuration defaults and types)
 
-Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
+احرص دائماً على توفير الأنواع (types) والقيم الافتراضية (defaults) لجميع خيارات التوثيق، وذلك للحفاظ على سهولة الوصول للتوثيق وجودة كتابته. نقوم بإضافة الأنواع والقيم الافتراضية مباشرة بعد عنوان الخيار الموثّق:
 
 **configuration.example.option**
 
 `string = 'none'`
 
-Where `= 'none'` means that the default value is `'none'` for the given option.
+حيث تعني `= 'none'` أن القيمة الافتراضية لهذا الخيار المحدد هي `'none'`.
 
 `string = 'none': 'none' | 'development' | 'production'`
 
-Where `: 'none' | 'development' | 'production'` enumerates the possible type values, in this case, three strings are acceptable: `'none'`, `'development'`, and `'production'`.
+حيث تقوم الصيغة `: 'none' | 'development' | 'production'` بسرد قيم الأنواع المحتملة، وفي هذه الحالة، هناك ثلاث سلاسل نصية (strings) مقبولة: `'none'` و `'development'` و `'production'`.
 
-Use space between types to list all available types for the given option:
+استخدم مسافة (space) بين الأنواع لسرد جميع الأنواع المتاحة للخيار المحدد:
 
 `string = 'none': 'none' | 'development' | 'production'` `boolean`
 
-To mark an array, use square brackets:
+لإيضاح وجود مصفوفة (array)، استخدم الأقواس المربعة (square brackets):
 
 `string` `[string]`
 
-If multiple types are allowed in `array`, use comma:
+إذا كانت المصفوفة (`array`) تسمح بأنواع متعددة، استخدم الفاصلة:
 
 `string` `[string, RegExp, function(arg) => string]`
 
-To mark a function, also list arguments when they are available:
+لإيضاح وجود دالة (function)، قم أيضاً بسرد الوسائط (arguments) عندما تكون متاحة:
 
 `function (compilation, module, path) => boolean`
 
-Where `(compilation, module, path)` lists the arguments that the provided function will receive and `=> boolean` means that the return value of the function must be a `boolean`.
+حيث تسرد الصيغة `(compilation, module, path)` الوسائط التي ستتلقاها الدالة الممررة، وتعني الصيغة `=> boolean` أن القيمة المرجعة (return value) من الدالة يجب أن تكون من نوع `boolean`.
 
-To mark a Plugin as an available option value type, use the camel case title of the `Plugin`:
+لتحديد الـ Plugin كنوع قيمة متاح للخيار، استخدم اسم الـ `Plugin` بأسلوب الـ camel case:
 
 `MinimizerPlugin` `[MinimizerPlugin]`
 
-Which means that the option expects one or few `MinimizerPlugin` instances.
+وهذا يعني أن الخيار يتوقع نسخة واحدة (instance) أو بضع نسخ من `MinimizerPlugin`.
 
-To mark a number, use `number`:
+لتحديد رقم، استخدم `number`:
 
 `number = 15: 5, 15, 30`
 
-To mark an object, use `object`:
+لتحديد (object) استخدم `object`:
 
 `object = { prop1 string = 'none': 'none' | 'development' | 'production', prop2 boolean = false, prop3 function (module) => string }`
 
-When object's key can have multiple types, use `|` to list them. Here is an example, where `prop1` can be both a string and an array of strings:
+عندما يمكن لمفتاح الكائن (object's key) أن يقبل أنواعاً متعددة، استخدم الرمز `|` لسردها. إليك مثالاً يمكن أن تكون فيه الخاصية `prop1` عبارة عن سلسلة نصية (string) ومصفوفة من السلاسل النصية (array of strings) في آن واحد:
 
 `object = { prop1 string = 'none': 'none' | 'development' | 'production' | [string]}`
 
-This allows us to display the defaults, enumeration and other information.
+يسمح لنا هذا الأسلوب بعرض القيم الافتراضية والتعداد (enumeration) وغيرها من المعلومات.
 
-When an option has different defaults depending on the [`mode`](/configuration/mode/), use a defaults table instead of the inline `= value` syntax:
+عندما يمتلك خيار معين قيمًا افتراضية مختلفة بناءً على نمط التشغيل ([`mode`](/configuration/mode/))، استخدم جدول القيم الافتراضية بدلاً من كتابة الصيغة المضمنة `= value`:
 
 **configuration.example.option**
 
 `string: 'natural' | 'named' | 'deterministic'`
 
-The default value of `configuration.example.option` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `configuration.example.option` على نمط التشغيل ([`mode`](/configuration/mode/)):
 
 | Mode            | Default           |
 | --------------- | ----------------- |
@@ -220,13 +218,13 @@ The default value of `configuration.example.option` depends on the [`mode`](/con
 | `"development"` | `'named'`         |
 | `"none"`        | `'natural'`       |
 
-If an option has a boolean default that varies by mode:
+إذا كان الخيار يحتوي على قيمة افتراضية من نوع بولين (`boolean`) تختلف بناء على نمط التشغيل (mode):
 
 **configuration.example.flag**
 
 `boolean`
 
-The default value of `configuration.example.flag` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `configuration.example.flag` على نمط التشغيل ([`mode`](/configuration/mode/)):
 
 | Mode            | Default |
 | --------------- | ------- |
@@ -234,21 +232,21 @@ The default value of `configuration.example.flag` depends on the [`mode`](/confi
 | `"development"` | `false` |
 | `"none"`        | `false` |
 
-If the object's key is dynamic, user-defined, use `<key>` to describe it:
+إذا كان الـ (object's key) ديناميكيا ومحددا من قبل المستخدم (user-defined)، استخدم `<key>` لوصفه:
 
 `object = { <key> string }`
 
-### Options shortlists and their typing
+### القوائم المختصرة للخيارات وأنواعها (Options shortlists and their typing)
 
-Sometimes, we want to describe certain properties of objects and functions in lists. When applicable add typing directly to the list where properties are enlisted:
+في بعض الأحيان نرغب في وصف خصائص معينة للكائنات (objects) والدوال (functions) داخل قوائم عند انطباق ذلك، قم بإضافة النوع (typing) مباشرة إلى القائمة التي تسرد فيها هذه الخصائص:
 
-- `madeUp` (`boolean = true`): short description
-- `shortText` (`string = 'i am text'`): another short description
+- `madeUp` (`boolean = true`): وصف مختصر
+- `shortText` (`string = 'i am text'`): وصف مختصر آخر
 
-W> `:` is not a necessity here, note the property, type and default.
+W> `:` ليس ضروريا هنا انتبه للخاصية (property) والنوع (type) والقيمة الافتراضية (default).
 
-An example can be found on the [`options` section of the EvalSourceMapDevToolPlugin's page](/plugins/eval-source-map-dev-tool-plugin/#options).
+يمكنك العثور على مثال في [قسم الخيارات (`options` section) في صفحة EvalSourceMapDevToolPlugin](/plugins/eval-source-map-dev-tool-plugin/#options).
 
-### Adding links
+### إضافة الروابط (Adding links)
 
-Please use relative URLs (such as `/concepts/mode/`) to link our own content instead of absolute URLs (such as `https://webpack.js.org/concepts/mode/`).
+يرجى استخدام روابط URL نسبية (مثل `/concepts/mode/`) لربط المحتوى الخاص بنا بدلا من استخدام روابط URL مطلقة (مثل `https://webpack.js.org/concepts/mode/`).
