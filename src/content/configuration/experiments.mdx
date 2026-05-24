@@ -30,6 +30,7 @@ Available options:
 - [`html`](#experimentshtml)
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
+- [`typescript`](#experimentstypescript)
 - [`sourceImport`](#experimentssourceimport)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
 - `layers`: Enable module and chunk layers, removed and works without additional options since `5.102.0`.
@@ -580,3 +581,34 @@ export default {
   },
 };
 ```
+
+### experiments.typescript
+
+<Badge text="5.107.0+" />
+
+Enable native TypeScript support. With the flag turned on, webpack compiles `.ts`, `.cts`, and `.mts` files (and the matching `data:text/typescript` and `data:application/typescript` data URIs) directly, without any external loader. Under the hood it calls Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options).
+
+- Type: `boolean`
+- Default: `false` (auto-enabled by [`experiments.futureDefaults`](#experimentsfuturedefaults))
+
+W> Requires Node.js >= 22.6 for the stable `module.stripTypeScriptTypes` API.
+
+```js
+export default {
+  experiments: {
+    typescript: true,
+  },
+  entry: "./src/index.ts",
+};
+```
+
+Enabling the flag also wires up sensible defaults: default rules for `.ts` / `.cts` / `.mts`, `.ts` added to extension resolution (before `.js`), `extensionAlias` so an `import "./foo.js"` also tries `./foo.ts` (and `.cjs` / `.mjs` → `.cts` / `.mts`), [`tsconfig.json` resolution](/configuration/resolve/#resolvetsconfig), and the `"typescript"` conditional-exports key so monorepo packages can ship `.ts` sources via `package.json#exports`.
+
+W> The transform only **erases types**. It does **not** perform type checking, and it does not handle JSX / `.tsx` or non-erasable TypeScript syntax (`enum`, `namespace` with runtime members, parameter-property constructors, `export =`, decorator metadata). These are the same constraints TypeScript enforces with the [`erasableSyntaxOnly`](https://www.typescriptlang.org/tsconfig/#erasableSyntaxOnly) tsconfig option.
+
+For type checking, pair the flag with `tsc --noEmit` or [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin). For JSX or non-erasable TypeScript syntax, keep using `ts-loader` or `swc-loader`.
+
+The webpack repo ships two reference examples:
+
+- [`examples/typescript`](https://github.com/webpack/webpack/tree/main/examples/typescript) for the built-in `experiments.typescript` setup.
+- [`examples/typescript-non-erasable`](https://github.com/webpack/webpack/tree/main/examples/typescript-non-erasable) for the `ts-loader` fallback when non-erasable syntax is required.
