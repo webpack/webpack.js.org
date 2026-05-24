@@ -9,8 +9,6 @@ src/content/contribute/Governance-*.mdx
 .idea
 .DS_Store
 npm-debug.log
-yarn-error.log
-package-lock.json
 .cache
 internal-links.tap
 stats.json

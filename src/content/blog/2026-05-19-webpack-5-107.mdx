@@ -1,0 +1,501 @@
+---
+title: Webpack 5.107
+sort: 20260519
+contributors:
+  - bjohansebas
+---
+
+Webpack 5.107 is out. The headline of this release is the first step toward handling `.html` files natively in webpack core: importing an HTML file from JS now resolves its `<img src>`, `<link href>`, inline `<style>`, and `<script src>` references through the normal webpack pipeline, replacing the role `html-loader` has played for years. HTML entry points (the `html-webpack-plugin` part of the story) are not in 5.107 yet, they are planned for the next minor release.
+
+This release also lands experimental TypeScript support that leans on Node.js's built-in type-stripping, so simple TypeScript projects can compile without `ts-loader` or `swc-loader`.
+
+Both pieces are experimental and live behind opt-in flags, but the direction is clear: you should eventually be able to build a complete web app with zero extra loaders or plugins for HTML, CSS, and basic TypeScript.
+
+Alongside the experimental work, this release also continues maturing the built-in CSS pipeline, and ships a handful of improvements for tree shaking, deferred imports, and module resolution.
+
+Explore what's new:
+
+- [**HTML Modules (Experimental)**](#html-modules-experimental)
+  - [`experiments.html` Flag](#experimentshtml-flag)
+  - [Inline `<style>` Tags](#inline-style-tags)
+  - [Inline `<script>` Tags](#inline-script-tags)
+  - [`<script src>` and `<link rel="modulepreload">`](#script-src-and-link-relmodulepreload)
+  - [`webpackIgnore` Magic Comment](#webpackignore-magic-comment)
+- [**TypeScript Support (Experimental)**](#typescript-support-experimental)
+- [**CSS Improvements**](#css-improvements)
+  - [Scope Hoisting for CSS Modules](#scope-hoisting-for-css-modules)
+  - [Pure Mode for CSS Modules](#pure-mode-for-css-modules)
+  - [`@value` in URLs and `@import`](#value-in-urls-and-import)
+  - [Multiple Aliases via `exportsConvention`](#multiple-aliases-via-exportsconvention)
+  - [`linkInsert` Hook](#linkinsert-hook)
+  - [`orderModules` Hook](#ordermodules-hook)
+- [**JavaScript and ESM**](#javascript-and-esm)
+  - [Anonymous Default Export Naming](#anonymous-default-export-naming)
+  - [Preserving `defer` and `source` Phase on Externals](#preserving-defer-and-source-phase-on-externals)
+  - [`#__NO_SIDE_EFFECTS__` Annotation](#__no_side_effects__-annotation)
+- [**Resolver Updates**](#resolver-updates)
+- [**Bug Fixes**](#bug-fixes)
+
+## HTML Modules (Experimental)
+
+W> **This feature is experimental and partial.** Webpack 5.107 only implements the `html-loader` side of the story: importing an HTML file from JavaScript runs its tag references through the webpack pipeline. **HTML entry points** (using a `.html` file directly as `entry`, the `html-webpack-plugin` part) are **not supported yet** and are planned for the next minor release. The full story is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+
+A real-world webpack setup that needs an HTML entry point has historically required at least two extra dependencies. The first is `html-webpack-plugin`, which generates or emits the HTML file and injects the right bundle URLs into it. The second is `html-loader`, which lets webpack walk through `<img src>`, `<link href>`, `<script src>`, and friends so those references go through the normal resolver and asset pipeline.
+
+Both of these have served the community well for a long time, but they live outside the core. Webpack 5.107 starts bringing the `html-loader` side of that work inward.
+
+### `experiments.html` Flag
+
+Everything else in this section sits behind a single opt-in flag. The new `experiments.html` option registers the `html` module type on `NormalModuleFactory` and turns on the HTML behaviors described below.
+
+```js
+// webpack.config.js
+module.exports = {
+  experiments: {
+    html: true,
+  },
+};
+```
+
+You then import the HTML file from JavaScript. The default export is the processed HTML as a string, with all asset references resolved through webpack:
+
+```js
+// src/index.js
+import page from "./page.html";
+
+document.documentElement.innerHTML = page;
+```
+
+This is the same shape `html-loader` produces, so existing code that imports HTML should keep working. The pipeline does the work the loader used to do: tag references are resolved, hashed filenames are rewritten back into the HTML string, and the result lands in your JS bundle. Using an `.html` file directly as a webpack `entry` is **not** supported in 5.107.
+
+### Inline `<style>` Tags
+
+When webpack finds a `<style>` block inside an HTML module, it routes the CSS body through the same CSS pipeline you'd use for a `.css` file. The block is treated as a virtual CSS module with `exportType: "text"`, so any `url()` references and `@import` statements inside the style are resolved relative to the HTML file. Once processing finishes, the transformed CSS is written back into the original `<style>` tag in the emitted HTML string.
+
+```html
+<!-- src/page.html -->
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @import "./reset.css";
+
+      body {
+        background: url("./bg.png");
+      }
+    </style>
+  </head>
+  <body>
+    ...
+  </body>
+</html>
+```
+
+`<style type="text/css">` and `<style>` with no `type` attribute are processed. Anything with a non-CSS `type` is passed through untouched. This covers the inline-style behavior of `html-loader` without needing it in the pipeline.
+
+### Inline `<script>` Tags
+
+Inline `<script>` bodies are routed through the same entry pipeline that already handles `<script src>`. Each `<script>` body becomes its own webpack entry: classic inline scripts are bundled as CommonJS, and `<script type="module">` bodies are bundled as ESM. The tag in the emitted HTML is rewritten to `<script src="…">` pointing at the generated chunk, with the body cleared.
+
+```html
+<!-- src/page.html -->
+<!doctype html>
+<html>
+  <body>
+    <script type="module">
+      import { greet } from "./lib.js";
+      greet("world");
+    </script>
+
+    <script>
+      console.log("classic inline script");
+    </script>
+  </body>
+</html>
+```
+
+The same behaviors that apply to external `<script src>` apply here too:
+
+- When `output.module` is enabled, classic inline `<script>` tags are auto-upgraded to `type="module"`, matching the auto-upgrade for `<script src>`.
+- `webpackIgnore` works on inline `<script>` tags as well, leaving the original body untouched.
+- Non-JS `type` values like `application/ld+json` and `importmap` pass through unchanged.
+
+### `<script src>` and `<link rel="modulepreload">`
+
+`<script src>` and `<link rel="modulepreload">` references inside an HTML module become real webpack entries, and the emitted chunk URL is rewritten back into the HTML string so hashed filenames stay correct.
+
+```html
+<!-- src/page.html -->
+<!doctype html>
+<html>
+  <head>
+    <link rel="modulepreload" href="./preloaded.js" />
+  </head>
+  <body>
+    <script src="./entry.js"></script>
+    <script src="./second.js"></script>
+  </body>
+</html>
+```
+
+A few behaviors are worth knowing about:
+
+- Multiple `<script src>` tags in the same page share a single runtime. Within each group (classic or `type="module"`), the leader holds the runtime and the rest declare `dependOn` on it.
+- `<link rel="modulepreload">` entries stay independent and are never imported by sibling scripts, so they preload without executing, exactly as the spec requires.
+- When `output.module` is enabled, classic `<script src>` tags are auto-upgraded to `<script type="module" src>` so the emitted ES-module chunks load in the right mode.
+- Non-JS script types like `application/ld+json` or `importmap`, as well as data URIs, flow through unchanged and are not bundled as JS.
+
+### `webpackIgnore` Magic Comment
+
+The familiar `webpackIgnore: true` magic comment now works inside HTML modules. Place an HTML comment with the directive right before a tag and webpack will leave that tag's URLs untouched in the output. This is exactly how `html-loader` handles the same case.
+
+```html
+<!-- webpackIgnore: true -->
+<img src="https://cdn.example.com/logo.png" />
+
+<!-- webpackIgnore: true -->
+<script src="/legacy/external.js"></script>
+```
+
+The comment value is parsed with the same context the JS and CSS parsers use, so non-boolean values raise an `UnsupportedFeatureWarning`.
+
+## TypeScript Support (Experimental)
+
+W> **This feature is experimental and depends on a recent Node.js.** It requires Node.js 22.6 or later for the stable `module.stripTypeScriptTypes` API. The transform handles only erasable TypeScript syntax (see limitations below). For anything else, keep using `ts-loader` or `swc-loader`.
+
+Webpack 5.107 adds first-class TypeScript support behind a new `experiments.typescript` flag. With it enabled, webpack compiles `.ts`, `.cts`, and `.mts` files directly through Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options), no external loader required. The flag is also turned on automatically by [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults).
+
+```js
+// webpack.config.js
+export default {
+  experiments: {
+    typescript: true,
+  },
+  entry: "./src/index.ts",
+};
+```
+
+Enabling the flag also wires up sensible defaults: rules for `.ts` / `.cts` / `.mts`, `.ts` added to extension resolution before `.js`, `extensionAlias` so `import "./foo.js"` also tries `./foo.ts`, `tsconfig.json` resolution, and the `"typescript"` conditional-exports key for monorepos that ship `.ts` sources.
+
+The transform only **erases types**: no type checking, no JSX / `.tsx`, and no non-erasable syntax (`enum`, `namespace`, parameter-property constructors, decorator metadata). These are the same constraints TypeScript enforces with [`erasableSyntaxOnly`](https://www.typescriptlang.org/tsconfig/#erasableSyntaxOnly). For type checking, pair the flag with `tsc --noEmit` or [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin). For JSX or non-erasable syntax, keep using `ts-loader` or `swc-loader`.
+
+See [`examples/typescript`](https://github.com/webpack/webpack/tree/main/examples/typescript) for the built-in setup and [`examples/typescript-non-erasable`](https://github.com/webpack/webpack/tree/main/examples/typescript-non-erasable) for the `ts-loader` fallback.
+
+## CSS Improvements
+
+### Scope Hoisting for CSS Modules
+
+Module concatenation (also known as scope hoisting) used to be a JavaScript-only optimization. Even with `experiments.css` enabled, CSS Modules pulled into a concatenated bundle still produced separate runtime instances. Starting with 5.107, the same optimization applies to CSS Modules whose export type is `text`, `css-style-sheet`, `style`, or `link`. The result is lower runtime overhead and smaller output in CSS-heavy bundles.
+
+```js
+module.exports = {
+  experiments: { css: true },
+  optimization: {
+    concatenateModules: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        type: "css/module",
+        parser: {
+          exportType: "css-style-sheet",
+        },
+      },
+    ],
+  },
+};
+```
+
+### Pure Mode for CSS Modules
+
+A new `pure` parser option for `css/module` and `css/auto` mirrors the strict pure mode of `postcss-modules-local-by-default`. When enabled, every selector must contain at least one local class or id; otherwise webpack raises a build error. The point is to catch accidentally global selectors in CSS Modules before they make it into production.
+
+```js
+module.exports = {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/module": {
+        pure: true,
+      },
+    },
+  },
+};
+```
+
+Two comments offer opt-outs when you need them. The first suppresses the check for a single rule:
+
+```css
+/* cssmodules-pure-ignore */
+a {
+  /* suppressed only for this rule */
+  color: blue;
+}
+```
+
+The second, placed among the leading comments of a file before any rule, disables the check for the entire file:
+
+```css
+/* cssmodules-pure-no-check */
+/* disables pure mode for this file */
+
+a {
+  /* would normally fail under pure mode */
+  color: red;
+}
+```
+
+Nested rules inside a local-bearing ancestor count as pure-compliant, `&` resolves to the parent rule's purity, and `@keyframes` and `@counter-style` bodies are exempt.
+
+### `@value` in URLs and `@import`
+
+CSS Modules `@value` identifiers can now be used as the path argument to `@import` and inside `url()` references. This makes it easy to define shared paths and assets once and reuse them across stylesheets.
+
+```css
+@value path: "./other.module.css";
+@import path;
+
+@value bg: "./image.png";
+
+.a {
+  background: url(bg);
+}
+```
+
+Both quoted (`"./x"`, `'./x'`) and bare (`./x`) forms of the value work. Whichever form you write is unwrapped and resolved as a module request, so the asset flows through the normal webpack resolver and asset pipeline instead of being left as a literal identifier.
+
+### Multiple Aliases via `exportsConvention`
+
+The function form of `generator.exportsConvention` for CSS Modules now accepts `string[]` in addition to `string`. Returning an array exports the local class under every name in the array, matching `css-loader`'s behavior. This is handy when you want to expose multiple aliases for a single class, for example both the original name and an uppercase version.
+
+```js
+module.exports = {
+  experiments: { css: true },
+  module: {
+    generator: {
+      "css/module": {
+        exportsConvention: (name) => [name, name.toUpperCase()],
+      },
+    },
+  },
+};
+```
+
+```js
+// Usage in JS
+import styles from "./button.module.css";
+
+console.log(styles.btn); // hashed class
+console.log(styles.BTN); // same hashed class, uppercase alias
+```
+
+### `linkInsert` Hook
+
+If you've ever wanted to control where webpack inserts a stylesheet `<link>` in the document, you now have a hook for it. `CssLoadingRuntimeModule.getCompilationHooks(compilation)` exposes a new `linkInsert` hook. It receives the default insertion source (`document.head.appendChild(link);`) and the chunk, and returns the JS used to attach the link.
+
+```js
+const webpack = require("webpack");
+
+class MyLinkInsertPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap("MyLinkInsertPlugin", (compilation) => {
+      const hooks =
+        webpack.web.CssLoadingRuntimeModule.getCompilationHooks(compilation);
+
+      // Override the default `document.head.appendChild(link);`
+      hooks.linkInsert.tap(
+        "MyLinkInsertPlugin",
+        (source, chunk) =>
+          'link.setAttribute("data-injected", "true"); document.body.appendChild(link);',
+      );
+    });
+  }
+}
+
+module.exports = {
+  experiments: { css: true },
+  plugins: [new MyLinkInsertPlugin()],
+};
+```
+
+The hook is a `SyncWaterfallHook<[string, Chunk]>`. Return the default `source` to keep the original behavior, or return your own JS to override where (and how) the link is attached.
+
+### `orderModules` Hook
+
+When a chunk pulls in CSS from several files, webpack's default ordering is a topological sort of their import graph. That's the right call in most cases, but on real-world projects the import graph can be ambiguous enough to trigger the "Conflicting order between CSS …" warning, with no clean way out short of restructuring imports.
+
+A new `orderModules` hook on `CssModulesPlugin.getCompilationHooks(compilation)` gives plugin authors a deterministic escape hatch. It runs once per CSS source type (`CSS_IMPORT_TYPE` and `CSS_TYPE`) with the chunk's modules pre-sorted by full module name. Return an ordered `Module[]` to override the default, or return `undefined` to fall through to webpack's existing import-order topological sort.
+
+```js
+const webpack = require("webpack");
+
+class CssOrderByPathPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap(
+      "CssOrderByPathPlugin",
+      (compilation) => {
+        const hooks =
+          webpack.css.CssModulesPlugin.getCompilationHooks(compilation);
+
+        // Modules arrive pre-sorted by full module name; return as-is for
+        // a deterministic file-path order that side-steps the conflicting
+        // order warning.
+        hooks.orderModules.tap(
+          "CssOrderByPathPlugin",
+          (_chunk, modules) => modules,
+        );
+      },
+    );
+  }
+}
+
+module.exports = {
+  experiments: { css: true },
+  plugins: [new CssOrderByPathPlugin()],
+};
+```
+
+The hook is a `SyncBailHook<[Chunk, Module[], Compilation], Module[] | undefined>`. The first tap to return a non-`undefined` value wins.
+
+## JavaScript and ESM
+
+### Anonymous Default Export Naming
+
+Webpack 5.106 introduced a fix-up that sets `.name` to `"default"` for anonymous default exports, matching the ES spec. It works correctly, but it injects unmangleable `Object.defineProperty` calls that inflate the bundle. For library consumers, who rarely rely on `.name === "default"`, that extra runtime helper is pure overhead.
+
+5.107 introduces a new option, `module.parser.javascript.anonymousDefaultExportName`, to control this behavior. It defaults to `true` for applications and `false` for libraries (when `output.library` is set). Apps stay spec-compliant by default; library authors stop paying for the extra runtime helper without having to know about it.
+
+```js
+// input
+export default function () {
+  /* ... */
+}
+
+// with `anonymousDefaultExportName: true` (default for apps)
+// the runtime sets .name = "default" matching native ESM behavior
+```
+
+You can override the default explicitly:
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      javascript: {
+        anonymousDefaultExportName: false,
+      },
+    },
+  },
+};
+```
+
+### Preserving `defer` and `source` Phase on Externals
+
+Webpack now preserves the `defer` and `source` import phase keywords on external dependencies in ESM output, the same way import attributes are already preserved. Previously, the phase keyword was stripped from the emitted statement, so an `import defer * as ns from "x"` against an external lost its deferred semantics in the output.
+
+For static `module` externals, namespace defer imports and single-default source imports are now emitted as native phase syntax at the top of the bundle:
+
+```js
+// webpack.config.js
+module.exports = {
+  output: { module: true },
+  externalsType: "module",
+  externals: { "external-mod": "external-mod" },
+};
+```
+
+```text
+// input
+import defer * as ns from "external-mod";
+import source v from "external-mod";
+
+// emitted output
+import defer * as ns from "external-mod";
+import source v from "external-mod";
+```
+
+For dynamic `import` externals, `import.defer("x")` and `import.source("x")` are emitted directly:
+
+```text
+// input
+const ns = await import.defer("external-mod");
+const src = await import.source("external-mod");
+
+// emitted output
+const ns = await import.defer("external-mod");
+const src = await import.source("external-mod");
+```
+
+One related improvement: the same external imported with two different phases (or attribute sets) no longer collapses into a single `ExternalModule`. Each combination produces its own emit, so neither phase is silently dropped.
+
+### `#__NO_SIDE_EFFECTS__` Annotation
+
+Webpack now supports the [`#__NO_SIDE_EFFECTS__`](https://github.com/javascript-compiler-hints/compiler-notations-spec/blob/main/no-side-effects-notation-spec.md#2-const-variable-declaration) annotation to mark functions as pure for better tree shaking. Calls to functions annotated this way can be eliminated from the bundle when their return value is unused, even if the function body is not statically analyzable as pure.
+
+{/* eslint-disable */}
+
+```js
+// utils.js
+/*#__NO_SIDE_EFFECTS__*/
+export function createLogger(prefix) {
+  return (msg) => console.log(`[${prefix}] ${msg}`);
+}
+
+export function realWork() {
+  // ...
+}
+```
+
+{/* eslint-enable */}
+
+```js
+// app.js
+import { createLogger, realWork } from "./utils";
+
+// dropped, because `createLogger` is annotated and its result is unused
+const unused = createLogger("debug");
+
+realWork();
+```
+
+W> The annotation currently only takes effect **within the module where it is declared**. Cross-module propagation is planned for a future PR.
+
+## Resolver Updates
+
+Webpack now adds `"module-sync"` to the default `conditionNames` for resolver defaults, aligning with Node.js. Node.js exposes the `module-sync` community condition for synchronously-loadable ESM, and this change affects the ESM, CJS, AMD, worker, wasm, and build-dependency resolvers.
+
+Concretely, the resolver defaults now include `module-sync` right before `module` in the condition chain:
+
+```js
+// Before (5.106)
+conditionNames: ["require", "module", "..."]; // CJS deps
+conditionNames: ["import", "module", "..."]; // ESM deps
+
+// After (5.107)
+conditionNames: ["require", "module-sync", "module", "..."];
+conditionNames: ["import", "module-sync", "module", "..."];
+```
+
+This means packages that publish a `module-sync` export condition in their `package.json` will be picked up automatically without any additional configuration:
+
+```json
+{
+  "name": "my-package",
+  "exports": {
+    ".": {
+      "module-sync": "./esm/index.js",
+      "default": "./cjs/index.js"
+    }
+  }
+}
+```
+
+## Bug Fixes
+
+Several bug fixes have been resolved since version [5.106](https://github.com/webpack/webpack/releases/tag/v5.106.0). Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for all the details.
+
+## Thanks
+
+A big thank you to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring)
+who made Webpack 5.107 possible. Your support, whether through code contributions, documentation, or financial sponsorship, helps keep Webpack evolving and improving for everyone.

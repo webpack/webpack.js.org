@@ -744,3 +744,61 @@ This hook is called when a part should be printed.
 This hook is called for the resulting string for a part.
 
 - Callback Parameters: `result` `context`
+
+## CssModulesPlugin.getCompilationHooks(compilation)
+
+When [`experiments.css`](/configuration/experiments/#experimentscss) is enabled, the internal `CssModulesPlugin` exposes a set of per-compilation hooks for plugin authors. Access them via the static `getCompilationHooks(compilation)` method:
+
+```js
+const webpack = require("webpack");
+
+class MyCssPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap("MyCssPlugin", (compilation) => {
+      const hooks =
+        webpack.css.CssModulesPlugin.getCompilationHooks(compilation);
+      // tap into hooks here
+    });
+  }
+}
+```
+
+W> These hooks are only registered when `experiments.css` is enabled and may evolve while the CSS feature is experimental.
+
+### orderModules
+
+<Badge text="5.107.0+" />
+
+`SyncBailHook<[Chunk, Module[], Compilation], Module[] | undefined>`
+
+Called once per CSS source type (CSS imports and CSS modules) with the chunk's modules pre-sorted by full module name. Taps may return an ordered `Module[]` to override webpack's default import-order topological sort, or return `undefined` to keep the default order.
+
+The hook is the recommended escape hatch when webpack's topological sort surfaces a `Conflicting order between css ...` warning that cannot be resolved by restructuring imports. Returning the pre-sorted array (or any deterministic order) lets the build pick a stable order without changing application code.
+
+- Callback Parameters: `chunk` `modules` `compilation`
+
+```js
+const webpack = require("webpack");
+
+class CssOrderByPathPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap(
+      "CssOrderByPathPlugin",
+      (compilation) => {
+        const hooks =
+          webpack.css.CssModulesPlugin.getCompilationHooks(compilation);
+
+        // Modules arrive pre-sorted by full module name; return as-is to
+        // enforce a deterministic file-path order across rebuilds and
+        // side-step the conflicting-order warning.
+        hooks.orderModules.tap(
+          "CssOrderByPathPlugin",
+          (_chunk, modules) => modules,
+        );
+      },
+    );
+  }
+}
+```
+
+The hook is a `SyncBailHook`, so the first tap to return a non-`undefined` value wins. Subsequent taps are not invoked for that call.

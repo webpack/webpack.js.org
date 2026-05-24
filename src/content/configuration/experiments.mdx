@@ -27,9 +27,11 @@ Available options:
 - [`css`](#experimentscss)
 - [`deferImport`](#experimentsdeferimport)
 - [`futureDefaults`](#experimentsfuturedefaults)
+- [`html`](#experimentshtml)
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
 - [`typescript`](#experimentstypescript)
+- [`sourceImport`](#experimentssourceimport)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
 - `layers`: Enable module and chunk layers, removed and works without additional options since `5.102.0`.
 - `topLevelAwait`: Transforms a module into an `async` module when an `await` is used at the top level. Starting from webpack version `5.83.0` (however, in versions prior to that, you can enable it by setting `experiments.topLevelAwait` to `true`), this feature is enabled by default, removed and works without additional options since `5.102.0`.
@@ -44,6 +46,7 @@ export default {
     buildHttp: true,
     lazyCompilation: true,
     outputModule: true,
+    sourceImport: true,
     syncWebAssembly: true,
     topLevelAwait: true,
   },
@@ -237,6 +240,31 @@ Experimental features:
 - CSS imports: webpack will inline CSS imports into the generated CSS file.
 - Hot Module Reload (HMR): webpack supports HMR for CSS files. This means that changes made to CSS files will be reflected in the browser without a full page reload.
 
+- <Badge text="5.107.0+" /> Scope hoisting (module concatenation) for CSS
+  Modules. When
+  [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)
+  is enabled, CSS Modules whose `exportType` is `text`, `css-style-sheet`,
+  `style`, or `link` are concatenated into a single module instance instead of
+  being kept as separate runtime instances. This reduces overhead and produces
+  smaller output for CSS-heavy bundles.
+
+- <Badge text="5.107.0+" /> `@value` identifiers can be used as the path
+  argument to `@import` and inside `url()` references, so shared paths and
+  assets can be defined once and reused across stylesheets. Both quoted
+  (`"./x"`, `'./x'`) and bare (`./x`) forms are accepted and resolved through
+  webpack's normal asset pipeline.
+
+  ```css
+  @value path: "./other.module.css";
+  @import path;
+
+  @value bg: "./image.png";
+
+  .a {
+    background: url(bg);
+  }
+  ```
+
 ### experiments.cacheUnaffected
 
 Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
@@ -279,6 +307,43 @@ It's suggested to put the magic comment after the `from` keyword. Other position
 
 Putting the magic comment after the `import` keyword is incompatible with the filesystem cache.
 
+### experiments.sourceImport
+
+<Badge text="5.106.0+" />
+
+Enable support for the tc39 proposal [Source Phase Imports](https://github.com/tc39/proposal-source-phase-imports).
+
+This proposal introduces a way to import a module at the _source phase_ instead of immediately evaluating it. In webpack, this experimental support is currently implemented for **WebAssembly modules**: you obtain a compiled [`WebAssembly.Module`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Module) first and instantiate it later with your own imports. Support for JavaScript source imports is planned for a future release.
+
+- Type: `boolean`
+
+Enable it alongside `asyncWebAssembly`:
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  experiments: {
+    asyncWebAssembly: true,
+    sourceImport: true,
+  },
+};
+```
+
+Then use either the static or dynamic source-phase syntax with a `.wasm` import:
+
+```text
+// Static form
+import source wasmModule from "./module.wasm";
+
+// Dynamic form
+const wasmModule2 = await import.source("./module.wasm");
+
+const instance = await WebAssembly.instantiate(wasmModule);
+```
+
+A full example is available in the webpack repository: [examples/wasm-simple-source-phase](https://github.com/webpack/webpack/tree/main/examples/wasm-simple-source-phase).
+
 {/* eslint-skip */}
 
 ```js
@@ -310,6 +375,118 @@ export default {
   },
 };
 ```
+
+### experiments.html
+
+<Badge text="5.107.0+" />
+
+Enable native HTML module support. Importing a `.html` file from JavaScript runs its tag references through the normal webpack pipeline, replacing the role `html-loader` has played for years. The flag registers the `html` module type on `NormalModuleFactory` and unlocks the HTML behaviors described below.
+
+- Type: `boolean`
+- Default: `false`
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  experiments: {
+    html: true,
+  },
+};
+```
+
+Then import the HTML file from JavaScript. The default export is the processed HTML as a string, with all asset references resolved through webpack:
+
+```js
+// src/index.js
+import page from "./page.html";
+
+document.documentElement.innerHTML = page;
+```
+
+W> **This feature is experimental and partial.** Webpack 5.107 only implements the `html-loader` side: importing an HTML file from JS runs its tag references through the webpack pipeline. **HTML entry points** (using a `.html` file directly as `entry`, the `html-webpack-plugin` part) are **not supported yet** and are planned for the next minor release. The full story is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+
+#### Inline `<style>` tags
+
+Inline `<style>` blocks inside an HTML module are routed through webpack's CSS pipeline as virtual CSS modules with `exportType: "text"`. `url()` and `@import` references are resolved relative to the HTML file, and the processed CSS text is written back into the original `<style>` tag in the emitted HTML string.
+
+```html
+<!-- src/page.html -->
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @import "./reset.css";
+
+      body {
+        background: url("./bg.png");
+      }
+    </style>
+  </head>
+  <body>
+    ...
+  </body>
+</html>
+```
+
+`<style type="text/css">` and `<style>` with no `type` attribute are processed. Anything with a non-CSS `type` is passed through unchanged.
+
+#### Inline `<script>` tags
+
+Inline `<script>` bodies are routed through the same entry pipeline used for [`<script src>`](#script-src-and-link-relmodulepreload). Each `<script>` body becomes its own webpack entry: classic inline scripts are bundled as CommonJS, and `<script type="module">` bodies are bundled as ESM. The tag in the emitted HTML is rewritten to `<script src="…">` pointing at the generated chunk, with the body cleared.
+
+```html
+<!-- src/page.html -->
+<!doctype html>
+<html>
+  <body>
+    <script type="module">
+      import { greet } from "./lib.js";
+      greet("world");
+    </script>
+
+    <script>
+      console.log("classic inline script");
+    </script>
+  </body>
+</html>
+```
+
+The same behaviors that apply to external `<script src>` apply here too:
+
+- When [`output.module`](/configuration/output/#outputmodule) is enabled, classic inline `<script>` tags are auto-upgraded to `type="module"`, matching the auto-upgrade for `<script src>`.
+- `webpackIgnore` works on inline `<script>` tags as well, leaving the original body untouched.
+- Non-JS `type` values such as `application/ld+json` and `importmap` pass through unchanged.
+
+#### `<script src>` and `<link rel="modulepreload">`
+
+`<script src>` and `<link rel="modulepreload">` references inside an HTML module become real webpack entries. The emitted chunk URL is rewritten back into the HTML string, so hashed filenames work the same way they do for JavaScript imports.
+
+```html
+<!-- src/page.html -->
+<!doctype html>
+<html>
+  <head>
+    <link rel="modulepreload" href="./preloaded.js" />
+  </head>
+  <body>
+    <script src="./entry.js"></script>
+    <script src="./second.js"></script>
+  </body>
+</html>
+```
+
+A few behaviors to keep in mind:
+
+- Multiple `<script src>` tags on the same page share a single runtime. Within each group (classic or `type="module"`), the leader holds the runtime and the rest declare `dependOn` on it.
+- `<link rel="modulepreload">` entries stay independent and are never imported by sibling scripts, preserving "preload without execute" semantics.
+- When [`output.module`](/configuration/output/#outputmodule) is enabled, classic `<script src>` tags are auto-upgraded to `<script type="module" src>` so the emitted ES-module chunks load in the correct mode.
+- Non-JS script types (`application/ld+json`, `importmap`, …) and data URIs flow through unchanged and are not bundled as JS.
+
+#### `webpackIgnore` magic comment
+
+Placing an HTML `<!-- webpackIgnore: true -->` comment immediately before a tag tells webpack to skip URL resolution for that tag's `src`, `href`, `srcset`, and similar attributes. See the full description under [magic comments](/api/module-methods/#webpackignore).
 
 ### experiments.lazyCompilation
 
