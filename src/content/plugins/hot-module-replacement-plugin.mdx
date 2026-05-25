@@ -1,11 +1,8 @@
 ---
-title: HotModuleReplacementPlugin
+title: إضافة تبديل المودل اللحظي
 group: webpack
 contributors:
-  - skipjack
-  - byzyk
-  - chenxsan
-  - snitin315
+  - MohaDev-69
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -13,16 +10,16 @@ related:
     url: /api/hot-module-replacement
 ---
 
-Enables [Hot Module Replacement](/concepts/hot-module-replacement), otherwise known as HMR.
+يُفعل [تبديل المودل اللحظي](/concepts/hot-module-replacement) كما هو معروف ب HMR
 
-W> HMR should **never** be used in production.
+ملاحظة> لا يُنصح بإستخدامه **على الاطلاق** في الإنتاج
 
-## Basic Usage
+## الاستعمال المبدئي
 
-Enabling HMR is straightforward and in most cases no options are necessary.
+تفعيل HMR هو شيء مباشر وفي معظم الحالات لا يتطلب اي خيارات اضافية
 
 ```js
 new webpack.HotModuleReplacementPlugin({
-  // Options...
+  // خيارات...
 });
 ```
