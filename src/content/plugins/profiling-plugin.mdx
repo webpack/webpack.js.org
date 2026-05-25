@@ -1,27 +1,25 @@
 ---
-title: ProfilingPlugin
+title: إضافة البروفايلات
 group: webpack
 contributors:
-  - EugeneHlushko
-  - byzyk
-  - akgupta0777
+  - MohaDev-69
 ---
 
-Generate Chrome profile file which includes timings of plugins execution. Outputs `events.json` file by default. It is possible to provide custom file path using `outputPath` option.
+انشاء ملف كروم يحتوي اوقات تنفيذ الإضافات، يُخرج ملف `events.json` إفتراضياً. من الممكن اضافة ملف مخصص بإستعمال خيار `outputPath`
 
-> Note : ProfilingPlugin accepts only absolute paths.
+> ملاحظة: إضافة البروفايلات تقبل فقط مسارات حتمية
 
-## Options
+## الخيارات
 
-- `outputPath`: An absolute path to a custom output file (json)
+- `outputPath`: مسار حتمي لملف مخصص بصيغة (json)
 
-## Usage: default
+## الاستعمال: إفتراضياً
 
 ```js
 new webpack.debug.ProfilingPlugin();
 ```
 
-## Usage: custom `outputPath`
+## الاستعمال: مخصص `outputPath`
 
 ```js
 import path from "node:path";
@@ -35,10 +33,11 @@ new webpack.debug.ProfilingPlugin({
 });
 ```
 
-In order to view the profile file:
+لعرض ملف البروفايل:
 
-1. Run webpack with `ProfilingPlugin`.
-2. Go to Chrome, open DevTools, and go to the `Performance` tab (formerly `Timeline`).
-3. Drag and drop generated file (`events.json` by default) into the profiler.
+1. شغل webpack مع `ProfilingPlugin`.
+2. افتح متصفح كروم، افتح ادوات المطور، اذهب الى نافذة `الأداء (Performance)` سابقاً (`Timeline`)
+3. اسحب وافلت الملف المولّد  (`events.json`افتراضياً) في ال profiler.
 
-It will then display timeline stats and calls per plugin!
+   سيعرض الجدول الزمني الاحصائيات والاستدعاءات لكل اضافة!
+
