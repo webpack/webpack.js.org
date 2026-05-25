@@ -15,6 +15,7 @@ contributors:
   - chenxsan
   - jamesgeorge007
   - alexeyr
+  - raj-sapalya
 ---
 
 A loader is a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -372,6 +373,36 @@ Access to the `compilation`'s `inputFileSystem` property.
 Extracts given loader options. Optionally, accepts JSON schema as an argument.
 
 T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
+
+You can pass a JSON Schema to validate loader options automatically.
+If a user passes an invalid or unknown option, webpack throws a
+descriptive error at build start rather than failing silently.
+
+```js
+const schema = {
+  type: "object",
+  properties: {
+    prefix: {
+      type: "string",
+      description: "String to prepend to each file.",
+    },
+    minify: {
+      type: "boolean",
+      description: "Whether to minify the output.",
+    },
+  },
+  additionalProperties: false,
+};
+
+export default function (source) {
+  const options = this.getOptions(schema);
+  const prefix = options.prefix ?? "";
+  return `${prefix}\n${source}`;
+}
+```
+
+T> `additionalProperties: false` causes webpack to throw if the user
+passes an unrecognized option, catching misconfiguration at build start.
 
 ### this.getResolve
 
