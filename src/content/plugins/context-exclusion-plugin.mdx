@@ -1,13 +1,12 @@
 ---
-title: ContextExclusionPlugin
+title: إضافه سياق الإستثناء
 group: webpack
 contributors:
-  - jeffin
+  - MohaDev-69
 ---
 
-_Context_ refers to [dynamic expressions in import() or require()](/guides/dependency-management/#dynamic-expressions-in-import-or-require) such as `require('./locale/' + name + '.json')`.
-
-The `ContextExclusionPlugin` allows you to exclude context. Provide RegExp as an argument when initializing the Plugin to exclude all context that matches it.
+_السياق_ يشير الى [التعبيرات المنطقية الديناميكية في import() او require()](/guides/dependency-management/#dynamic-expressions-in-import-or-require) مثل `require('./locale/' + الاسم + '.json')`.
+`ContextExclusionPlugin`: تسمح لك بإستبعاد السياق، ارفق تعبيرات نمطية  كـسبب عند تشغيل الإضافه لتستبعد كل السياق الذي يطابقها
 
 **webpack.config.js**
 
