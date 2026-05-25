@@ -1,11 +1,10 @@
 ---
-title: MergeDuplicateChunksPlugin
+title: إضافة دمج الاجزاء المتكررة
 group: webpack
 contributors:
-  - shivxmsharma
+  - MohaDev-69
 ---
-
-Merges chunks that contain the same modules. This plugin is enabled by default as part of webpack's internal optimizations. Exporting it publicly allows developers to configure the `stage` at which merging occurs — useful when chunk merging needs to run after [`SplitChunksPlugin`](/plugins/split-chunks-plugin).
+دمج الاجزاء التي تحتوي على نفس المودلات، هذه الإضافه مفعلة افتراضياً وهي جزء من تحسينات webpack الداخلية. استخراجها علناً يسمح للمطورين بالتحكم بالـ`مرحلة (stage)` عند ماذا يحصل الدمج — مفيدة عندما تدمج الاجزاء المطلوبة للتشغيل بعد [`إضافة تقسيم الاجزاء`](/plugins/split-chunks-plugin)
 
 ```js
 new webpack.optimize.MergeDuplicateChunksPlugin({
@@ -13,13 +12,13 @@ new webpack.optimize.MergeDuplicateChunksPlugin({
 });
 ```
 
-## Options
+## الخيارات
 
 ### stage
 
-`number`
+`رقم`
 
-Controls the optimization stage at which duplicate chunk merging runs. By default, merging occurs before `SplitChunksPlugin`. Setting a higher `stage` value causes merging to run _after_ other optimizations such as `SplitChunksPlugin`.
+يتحكم بتحسين المرحلة، عند أي مرحلة يتم تشغيل هذه الإضافة، إفتراضياً, يحصل الدمج قبل `إضافه تقسيم الاجزاء`. وضع رقم اعلى للـ`مرحلة (stage)` يجعل الدمج يعمل بعد تحسينات اخرى مثل  `إضافه تقسيم الاجزاء`
 
 **webpack.config.js**
 
@@ -30,7 +29,7 @@ export default {
   // ...
   plugins: [
     new webpack.optimize.MergeDuplicateChunksPlugin({
-      stage: 10, // run after SplitChunksPlugin
+      stage: 10, // يعمل بعد اضافة تقسيم الاجزاء
     }),
   ],
 };
