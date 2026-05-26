@@ -7900,18 +7900,17 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
             <span class="token literal-property property">loader</span><span class="token operator">:</span> <span class="token string">&quot;stylus-loader&quot;</span><span class="token punctuation">,</span>
             <span class="token literal-property property">options</span><span class="token operator">:</span> <span class="token punctuation">{</span>
               <span class="token literal-property property">stylusOptions</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token comment">// eslint-disable-next-line jsdoc/no-restricted-syntax</span>
                 <span class="token comment">/**
                  * Specify Stylus plugins to use. Plugins may be passed as
                  * strings instead of importing them in your Webpack config.
-                 *
-                 * @type {(string|Function)[]}
+                 * @type {(string | (renderer: object) =&gt; void)[]}
                  * @default []
                  */</span>
                 <span class="token literal-property property">use</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;nib&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
 
                 <span class="token comment">/**
                  * Add path(s) to the import lookup paths.
-                 *
                  * @type {string[]}
                  * @default []
                  */</span>
@@ -7919,7 +7918,6 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
 
                 <span class="token comment">/**
                  * Import the specified Stylus files/paths.
-                 *
                  * @type {string[]}
                  * @default []
                  */</span>
@@ -7927,8 +7925,7 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
 
                 <span class="token comment">/**
                  * Define Stylus variables or functions.
-                 *
-                 * @type {Array|Object}
+                 * @type {[string, string | number | boolean, boolean?] | Record&lt;string, string | number | boolean&gt;}
                  * @default {}
                  */</span>
                 <span class="token comment">// Array is the recommended syntax: [key, value, raw]</span>
@@ -7943,8 +7940,7 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
                 <span class="token comment">// },</span>
 
                 <span class="token comment">/**
-                 * Include regular CSS on @import.
-                 *
+                 * Include regular CSS on \@import.
                  * @type {boolean}
                  * @default false
                  */</span>
@@ -7952,10 +7948,8 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
 
                 <span class="token comment">/**
                  * Resolve relative url()&#x27;s inside imported files.
-                 *
                  * @see https://stylus-lang.com/docs/js.html#stylusresolveroptions
-                 *
-                 * @type {boolean|Object}
+                 * @type {boolean | { nocheck?: boolean, paths?: string[] }}
                  * @default { nocheck: true }
                  */</span>
                 <span class="token literal-property property">resolveURL</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -7963,19 +7957,15 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
 
                 <span class="token comment">/**
                  * Emits comments in the generated CSS indicating the corresponding Stylus line.
-                 *
                  * @see https://stylus-lang.com/docs/executable.html
-                 *
                  * @type {boolean}
                  * @default false
                  */</span>
                 <span class="token literal-property property">lineNumbers</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
 
                 <span class="token comment">/**
-                 * Move @import and @charset to the top.
-                 *
+                 * Move \@import and \@charset to the top.
                  * @see https://stylus-lang.com/docs/executable.html
-                 *
                  * @type {boolean}
                  * @default false
                  */</span>
@@ -7984,9 +7974,7 @@ If you&#x27;re new here, please take a moment to review our contributing guideli
                 <span class="token comment">/**
                  * Compress CSS output.
                  * In the &quot;production&quot; mode is `true` by default
-                 *
                  * @see https://stylus-lang.com/docs/executable.html
-                 *
                  * @type {boolean}
                  * @default false
                  */</span>
