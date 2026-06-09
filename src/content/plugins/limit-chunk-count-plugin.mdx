@@ -1,12 +1,12 @@
 ---
-title: إضافة تحديد عدد الاجزاء
+title: LimitChunkCountPlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-عندما تقوم بكتابة الكود، من المحتمل ان تكون بالفعل اضفت الكثير من نقاط الافتراق لتحميل اشياء حسب الحاجة. بعد جمع الكود (compile) ستلاحظ ان بعض الاجزاء صغيرة للغاية - مما ينشئ طلبات HTTP اكبر.
-`LimitChunkCountPlugin` يمكنه معالجة الطلبات بشكل مسبق عن طريق دمج الاجزاء معاً
+عند تقسيم الكود، قد تضيف نقاط فصل كثيرة لتحميل أجزاء عند الحاجة. بعد compilation قد تجد chunks صغيرة جدًا، مما يزيد عدد طلبات HTTP. يساعد `LimitChunkCountPlugin` على تقليل ذلك عبر دمج chunks معًا.
 
 ```js
 new webpack.optimize.LimitChunkCountPlugin({
@@ -16,13 +16,13 @@ new webpack.optimize.LimitChunkCountPlugin({
 
 ## الخيارات
 
-الخيارات ادناه هي المدعومة:
+الخيارات أدناه هي المدعومة:
 
 ### maxChunks
 
-`رقم`
+`number`
 
-تحديد عدد اقصى من الاجزاء بأستعمال قيمة اكبر او تساوي `1` استعمال `1` يمنع اي اجزاء اضافية من اضافتها كأجزاء/مداخل رئيسية وكذلك هي محسوبة في العدد
+يحدد الحد الأقصى لعدد chunks. يجب أن تكون القيمة أكبر من أو تساوي `1`. استخدام `1` يمنع إنشاء chunks إضافية كـ entry chunks أو async chunks.
 
 **webpack.config.js**
 
@@ -41,11 +41,11 @@ export default {
 
 ### minChunkSize
 
-إبقاء عدد الاجزاء فوق الحد المسموح لم يعد ميزة خاصة بهذه الإضافة. استعمل [إضافة الحد الأدنى للاجزاء](/plugins/min-chunk-size-plugin) بدلاً عنها
+لم يعد إبقاء حجم chunks فوق حد معين جزءًا من هذا plugin. استخدم [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) بدلًا منه.
 
-## الاستعمال عن طريق واجهة الأوامر (CLI)
+## الاستخدام عبر CLI
 
-هذه الإضافة وخياراتها يمكن استعمالها عن طريق واجهة الاوامر [CLI](/api/cli/):
+يمكن التحكم بهذا plugin وخياراته عبر [CLI](/api/cli/):
 
 ```bash
 webpack --optimize-max-chunks 15

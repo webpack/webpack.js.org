@@ -17,7 +17,9 @@ related:
 
 تكون قيمته `false` إذا كان module يُنفّذ حاليًا، وتكون `true` إذا اكتمل التنفيذ المتزامن.
 
-## module.hot (webpack-specific)
+<span id="modulehot-webpack-specific"></span>
+
+## module.hot (خاص بـ webpack)
 
 يوضح ما إذا كانت [Hot Module Replacement](/concepts/hot-module-replacement) مفعّلة أم لا، ويوفر واجهة للتعامل معها. راجع صفحة [HMR API](/api/hot-module-replacement) للتفاصيل.
 
@@ -151,13 +153,13 @@ console.log(import.meta.webpack); // يخرج `5` في webpack 5
 
 ترجع boolean يوضح ما إذا كان module الحالي هو entry point.
 
-**src/index.js** (entry point)
+**src/index.js** (نقطة entry)
 
 ```js
 console.log(import.meta.main); // true
 ```
 
-**src/utils.js** (ليس entry point)
+**src/utils.js** (ليس نقطة entry)
 
 ```js
 console.log(import.meta.main); // false
@@ -300,7 +302,9 @@ const icons = import.meta.glob("./icons/*.svg", {
 
 إذا استُخدم داخل expression تتم قراءته بواسطة Parser، فسيتم التعامل مع خيار الإعداد كأنه `true`.
 
-## \_\_resourceQuery (webpack-specific)
+<span id="__resourcequery-webpack-specific"></span>
+
+## \_\_resourceQuery (خاص بـ webpack)
 
 يمثل resource query الخاص بالـ module الحالي. إذا كان لديك الاستدعاء التالي، فستكون query string متاحة داخل `file.js`.
 
@@ -314,17 +318,23 @@ import "file.js?test";
 __resourceQuery === "?test";
 ```
 
-## \_\_webpack_public_path\_\_ (webpack-specific)
+<span id="__webpack_public_path__-webpack-specific"></span>
+
+## \_\_webpack_public_path\_\_ (خاص بـ webpack)
 
 يساوي خيار الإعداد `output.publicPath`.
 
-## \_\_webpack_require\_\_ (webpack-specific)
+<span id="__webpack_require__-webpack-specific"></span>
+
+## \_\_webpack_require\_\_ (خاص بـ webpack)
 
 دالة `require` الخام. لا يقرأ Parser هذا التعبير لاستخراج dependencies.
 
 W> عندما تُحزّم bundles الخاصة بـ webpack مرة أخرى، مثل استخدام output محزّم سابقًا كـ input، سيعيد [`CompatibilityPlugin`](/plugins/internal-plugins/#compatibilityplugin) تسمية `__webpack_require__` القادم من bundle السابق لتجنب التعارضات، مثل `__nested_webpack_require_*`. في هذه الحالات، استخدم [`__webpack_global__`](#__webpack_global__-webpack-specific) بدلًا منه، فهو يضمن الوصول دائمًا إلى دالة `__webpack_require__` الخاصة بالـ compilation الحالي.
 
-## \_\_webpack_chunk_load\_\_ (webpack-specific)
+<span id="__webpack_chunk_load__-webpack-specific"></span>
+
+## \_\_webpack_chunk_load\_\_ (خاص بـ webpack)
 
 دالة تحميل chunk الداخلية. تأخذ argument واحدًا:
 
@@ -352,27 +362,37 @@ import("./module-a").then((moduleA) => {
 });
 ```
 
-## \_\_webpack_module\_\_ (webpack-specific)
+<span id="__webpack_module__-webpack-specific"></span>
+
+## \_\_webpack_module\_\_ (خاص بـ webpack)
 
 <Badge text="5.68.0+" />
 
 يوفر وصولًا إلى `module` الحالي. لا يكون `module` متاحًا داخل strict ESM.
 
-## \_\_webpack_module\_\_.id (webpack-specific)
+<span id="__webpack_module__id-webpack-specific"></span>
+
+## \_\_webpack_module\_\_.id (خاص بـ webpack)
 
 <Badge text="5.68.0+" />
 
 يوفر وصولًا إلى ID الخاص بالـ `module` الحالي، أي `module.id`. لا يكون `module` متاحًا داخل strict ESM.
 
-## \_\_webpack_modules\_\_ (webpack-specific)
+<span id="__webpack_modules__-webpack-specific"></span>
+
+## \_\_webpack_modules\_\_ (خاص بـ webpack)
 
 يوفر وصولًا إلى الكائن الداخلي الذي يحتوي على كل modules.
 
-## \_\_webpack_hash\_\_ (webpack-specific)
+<span id="__webpack_hash__-webpack-specific"></span>
+
+## \_\_webpack_hash\_\_ (خاص بـ webpack)
 
 يوفر وصولًا إلى hash الخاص بالـ compilation.
 
-## \_\_webpack_get_script_filename\_\_ (webpack-specific)
+<span id="__webpack_get_script_filename__-webpack-specific"></span>
+
+## \_\_webpack_get_script_filename\_\_ (خاص بـ webpack)
 
 `function (chunkId)`
 
@@ -389,11 +409,15 @@ __webpack_get_script_filename__ = (chunkId) => {
 };
 ```
 
-## \_\_non_webpack_require\_\_ (webpack-specific)
+<span id="__non_webpack_require__-webpack-specific"></span>
+
+## \_\_non_webpack_require\_\_ (خاص بـ webpack)
 
 ينشئ دالة `require` لا يقرأها webpack. يمكن استخدامها لعمل أشياء متقدمة مع دالة require عامة إذا كانت متاحة.
 
-## \_\_webpack_global\_\_ (webpack-specific)
+<span id="__webpack_global__-webpack-specific"></span>
+
+## \_\_webpack_global\_\_ (خاص بـ webpack)
 
 <Badge text="5.104.0+" />
 
@@ -405,7 +429,9 @@ __webpack_get_script_filename__ = (chunkId) => {
 __webpack_global__.myProperty = "value";
 ```
 
-## \_\_webpack_exports_info\_\_ (webpack-specific)
+<span id="__webpack_exports_info__-webpack-specific"></span>
+
+## \_\_webpack_exports_info\_\_ (خاص بـ webpack)
 
 داخل modules، يكون `__webpack_exports_info__` متاحًا للسماح بفحص معلومات exports:
 
@@ -429,7 +455,9 @@ __webpack_global__.myProperty = "value";
 
 - افحص ما إذا كان يمكن تغيير أسماء exports باستخدام `__webpack_exports_info__.<name>.canMangle`.
 
-## \_\_webpack_is_included\_\_ (webpack-specific)
+<span id="__webpack_is_included__-webpack-specific"></span>
+
+## \_\_webpack_is_included\_\_ (خاص بـ webpack)
 
 <Badge text="5.16.0+" />
 
@@ -441,7 +469,9 @@ if (__webpack_is_included__("./module-a.js")) {
 }
 ```
 
-## \_\_webpack_base_uri\_\_ (webpack-specific)
+<span id="__webpack_base_uri__-webpack-specific"></span>
+
+## \_\_webpack_base_uri\_\_ (خاص بـ webpack)
 
 يغيّر base URI وقت التشغيل.
 
@@ -465,6 +495,8 @@ if (__webpack_is_included__("./module-a.js")) {
 console.log(__webpack_runtime_id__ === "main");
 ```
 
-## DEBUG (webpack-specific)
+<span id="debug-webpack-specific"></span>
+
+## DEBUG (خاص بـ webpack)
 
 يساوي خيار الإعداد `debug`.

@@ -1,13 +1,14 @@
 ---
-title: إضافة إعادة التحميل التلقائي
+title: AutomaticPrefetchPlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-`AutomaticPrefetchPlugin` تستكشف جميع المودلات من التجميعة مسبقاً بينما تنتظر التغييرات ، في محاولة تحسين اوقات البناء كونها في ارتفاع مستمر. مقارنةً ب[`PrefetchPlugin`](/plugins/prefetch-plugin/) التي تستكشف مودل واحد مسبقاً
+يفحص `AutomaticPrefetchPlugin` كل modules من compilation السابقة ويجلبها مسبقًا أثناء انتظار التغييرات، بهدف تحسين أوقات rebuild. يختلف ذلك عن [`PrefetchPlugin`](/plugins/prefetch-plugin/) الذي يجلب module واحدًا مسبقًا.
 
-ملاحظة> من غير المتوقع ان يكون لها فائدة فعلية بالنسبة للاداء كون اوقات البناء التدريجية سريعه.
+T> لا يُتوقع أن يقدم هذا plugin فائدة كبيرة للأداء في أغلب الحالات، لأن أوقات rebuild التزايدية تكون سريعة عادة.
 
 **webpack.config.js**
 

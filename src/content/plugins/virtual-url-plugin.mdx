@@ -1,11 +1,12 @@
 ---
-title: إضافه الرابط الافتراضي
+title: VirtualUrlPlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-يسمح بإنشاء مودلات افتراضية من اي نوع، على سبيل المثال: `.ts`, `.json`, `.css` ، الافتراضي هو `js.`
+يسمح بإنشاء virtual modules من أي نوع، مثل `.ts` و`.json` و`.css`. النوع الافتراضي هو `.js`.
 
 <Badge text="5.100.0+" />
 
@@ -13,7 +14,7 @@ contributors:
 import webpack from "webpack";
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
-  myModule: 'export const msg = "من مودل افتراضي"',
+  myModule: 'export const msg = "من virtual module"',
 });
 ```
 
@@ -25,9 +26,9 @@ import { msg } from "virtual:myModule";
 console.log(msg);
 ```
 
-## مثال مبدئي
+## مثال أساسي
 
-انشاء مودل افتراضي يقوم بإعطاء معلومات البناء (build)
+إنشاء virtual module يصدّر معلومات عن build:
 
 ```js
 import webpack from "webpack";
@@ -50,7 +51,7 @@ import { buildTime } from "virtual:buildInfo";
 console.log(`App version: ${buildTime}`);
 ```
 
-استعمال مخطط خاص
+استخدام scheme مخصص:
 
 ```js
 import webpack from "webpack";
@@ -71,9 +72,9 @@ import { msg } from "v:myModule";
 console.log(msg);
 ```
 
-## مثال متطور
+## مثال متقدم
 
-انشاء عدة مودلات افتراضية بمختلف الانواع
+إنشاء عدة virtual modules بأنواع مختلفة:
 
 ```js
 import webpack from "webpack";
@@ -97,7 +98,7 @@ import json from "virtual:myJsonModule";
 import "virtual:myCssModule";
 ```
 
-محاكاة ملف التوجيه (routing)
+محاكاة ملف routing:
 
 ```js
 import path from "node:path";
@@ -112,7 +113,8 @@ const watchDir = path.join(__dirname, "./src/routes");
 new webpack.experiments.schemes.VirtualUrlPlugin({
   routes: {
     source(loaderContext) {
-      // استعمل addContextDependency لمشاهدة الاضافات او الحذوفات من المحلدات الفرعية في watchDir لتحفيز إعادة بناء المودل الافتراضي
+      // استخدم addContextDependency لمراقبة الإضافات والحذف داخل مجلد routes
+      // حتى يعاد بناء virtual module عند تغير الملفات.
       loaderContext.addContextDependency(watchDir);
 
       const files = fs.readdirSync(watchDir);
@@ -134,11 +136,10 @@ import { routes } from "virtual:routes";
 
 ## الخيارات
 
-- `module.type` (`string`): نوع محتوى المودل الافتراضي
+- `module.type` (`string`): نوع محتوى virtual module.
 
-ملاحظة> تأكد ان هذه الانواع لديها مُحمِل خاص بها عن طريق [module.rules](https://webpack.js.org/configuration/module/#modulerules)
+T> تأكد أن هذه الأنواع لديها loader مناسب عبر [`module.rules`](/configuration/module/#modulerules).
 
-- `module.source` (`string | ((loaderContext: import('webpack').LoaderContext<T>) => Promise<string> | string))`: دالة المصنع لتوليد محتوى المودل الافتراضي
-
-- `module.version`(`boolean | string | () => string`): عند حدوث عملية إبطال ، يتم استدعاء مصدر الدالة مرةً أخرى إذا كانت قيمة الاصدار مختلفة عن القيمه السابقه، تفعيلها سيؤدي الى تحفيزه دائماً
-- `schema` (`string`): مودل افتراضي قابل للتخصيص ، الاعتيادي هو `virtual`
+- `module.source` (`string | ((loaderContext: import("webpack").LoaderContext<T>) => Promise<string> | string)`): دالة factory التي تولد محتوى virtual module.
+- `module.version` (`boolean | string | () => string`): عند حدوث invalidation، يتم استدعاء `source` مرة أخرى إذا كانت قيمة version مختلفة عن القيمة السابقة. تفعيلها يجعل module يعاد بناؤه دائمًا.
+- `schema` (`string`): scheme مخصص للـ virtual module، والقيمة الافتراضية هي `virtual`.

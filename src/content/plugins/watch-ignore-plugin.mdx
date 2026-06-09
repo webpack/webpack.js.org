@@ -1,11 +1,12 @@
 ---
-title: إضافة تجاهل المشاهدة
+title: WatchIgnorePlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-يقوم بتجاهل ملفات محددة، على سبيل المثال هؤلاء الذين يطابقون المسار المُرفق او تعبير نمطي معين، عندما يكونون في [وضع المشاهدة](/configuration/watch).
+يتجاهل ملفات محددة أثناء [watch mode](/configuration/watch)، مثل الملفات التي تطابق مسارًا أو RegExp معينًا.
 
 ```js
 new webpack.WatchIgnorePlugin({ paths });
@@ -13,6 +14,6 @@ new webpack.WatchIgnorePlugin({ paths });
 
 ## الخيارات
 
-- `paths` (`Array<string | RegExp>`): - قائمة من التعبيرات النمطية او مسارات حتمية الى مجلدات او ملفات التي يُفترض ان يتم تجاهلها
+- `paths` (`Array<string | RegExp>`): قائمة RegExp أو مسارات مطلقة إلى مجلدات أو ملفات يجب تجاهلها.
 
-ملاحظة> تم ايقاف هذه الاضافه واستبدالها بخيار [watchOptions.ignored](/configuration/watch/#watchoptionsignored)
+T> تم إهمال هذا plugin واستبداله بخيار [`watchOptions.ignored`](/configuration/watch/#watchoptionsignored).
