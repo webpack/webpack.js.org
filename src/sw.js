@@ -23,16 +23,23 @@ const otherManifest = [
     url: "/app-shell/index.html",
   },
 ];
-const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
-  const url = new URL(entry.url, self.location);
-  return url.href;
-});
+const manifestURLs = [
+  ...new Set(
+    [...manifest, ...otherManifest].map((entry) => {
+      const url = new URL(entry.url, self.location);
+      return url.href;
+    }),
+  ),
+];
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(manifestURLs)),
+    (async () => {
+      const cache = await caches.open(cacheName);
+
+      await Promise.allSettled(manifestURLs.map((url) => cache.add(url)));
+    })(),
   );
 });
-
 self.addEventListener("activate", (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
@@ -50,7 +57,6 @@ self.addEventListener("activate", (event) => {
     ),
   );
 });
-
 registerRoute(
   ({ url }) => manifestURLs.includes(url.href),
   new NetworkFirst({
