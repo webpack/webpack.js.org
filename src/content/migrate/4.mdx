@@ -1,40 +1,38 @@
 ---
-title: To v4 from v3
+title: من v3 إلى v4
 sort: 2
 contributors:
-  - sokra
-  - EugeneHlushko
-  - Kolhar730
+  - RlxChap2
 related:
-  - title: "To v2 or v3 from v1"
+  - title: "من v1 إلى v2 أو v3"
     url: https://webpack.js.org/migrate/3/
-  - title: "RIP CommonChunkPlugin"
+  - title: "نهاية CommonChunkPlugin"
     url: https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
-  - title: "webpack 4: migration guide for plugins/loaders"
+  - title: "webpack 4: دليل ترقية plugins/loaders"
     url: https://medium.com/webpack/webpack-4-migration-guide-for-plugins-loaders-20a79b927202
 ---
 
-This guide only shows major changes that affect end users. For more details please see [the changelog](https://github.com/webpack/webpack/releases).
+يعرض هذا الدليل التغييرات الكبيرة التي تؤثر في المستخدمين مباشرة. لمزيد من التفاصيل، راجع [سجل التغييرات](https://github.com/webpack/webpack/releases).
 
 ## Node.js v4
 
-If you are still using Node.js v4 or lower, you need to upgrade your Node.js installation to Node.js v6 or higher.
+إذا كنت ما زلت تستخدم Node.js v4 أو إصدارًا أقدم، فيجب ترقية Node.js إلى v6 أو أحدث.
 
-Instructions for upgrading your Node.js version can be found [here](https://stackoverflow.com/questions/10075990/upgrading-node-js-to-latest-version).
+يمكنك العثور على تعليمات ترقية Node.js [هنا](https://stackoverflow.com/questions/10075990/upgrading-node-js-to-latest-version).
 
 ## CLI
 
-The CLI has moved to a separate package: webpack-cli. You need to install it before using webpack, see [basic setup](/guides/getting-started/#basic-setup).
+انتقلت CLI إلى حزمة منفصلة اسمها webpack-cli. يجب تثبيتها قبل استخدام webpack. راجع [الإعداد الأساسي](/guides/getting-started/#basic-setup).
 
-The installation guide can be found [here](/guides/installation).
+يمكنك العثور على دليل التثبيت [هنا](/guides/installation).
 
-## Update plugins
+## تحديث plugins
 
-Many 3rd party plugins need to be updated to the latest versions to be compatible with webpack 4. Links to popular plugins can be found [here](/awesome-webpack/#webpack-plugins).
+كثير من plugins الخارجية تحتاج إلى التحديث إلى أحدث الإصدارات حتى تعمل مع webpack 4. يمكنك العثور على روابط plugins الشائعة [هنا](/awesome-webpack/#webpack-plugins).
 
 ## mode
 
-Add the new [`mode`](/configuration/mode/) option to your configuration. Set it to `'production'`, `'development'` or `'none'` depending on your configuration type.
+أضف خيار [`mode`](/configuration/mode/) الجديد إلى الإعدادات. اضبطه على `'production'` أو `'development'` أو `'none'` حسب نوع الإعداد لديك.
 
 **webpack.config.js**
 
@@ -45,11 +43,11 @@ module.exports = {
 }
 ```
 
-T> The purpose of `'development'` mode and `'production'` mode is different. You can use `webpack-merge` as shown in [production guide](/guides/production/#setup) to optimize configurations.
+T> يختلف هدف وضع `'development'` عن هدف وضع `'production'`. يمكنك استخدام `webpack-merge` كما هو موضح في [دليل الإنتاج](/guides/production/#setup) لتحسين الإعدادات.
 
-## Deprecated/Removed plugins
+## plugins المهملة أو المحذوفة
 
-These plugins can be removed from configuration as they are default in production mode:
+يمكنك إزالة هذه plugins من الإعدادات لأنها أصبحت افتراضية في وضع الإنتاج:
 
 **webpack.config.js**
 
@@ -65,7 +63,7 @@ module.exports = {
 }
 ```
 
-These plugins are default in development mode
+هذه plugins أصبحت افتراضية في وضع التطوير:
 
 **webpack.config.js**
 
@@ -78,7 +76,7 @@ module.exports = {
 }
 ```
 
-These plugins were deprecated and are now removed:
+هذه plugins كانت deprecated ثم أُزيلت:
 
 **webpack.config.js**
 
@@ -94,15 +92,15 @@ module.exports = {
 
 ## CommonsChunkPlugin
 
-The `CommonsChunkPlugin` was removed. Instead the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) options can be used.
+أُزيل `CommonsChunkPlugin`. استخدم بدلًا منه خيارات [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks).
 
-See documentation of the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) for more details. The default configuration may already suit your needs.
+راجع توثيق [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) لمزيد من التفاصيل. قد تكون الإعدادات الافتراضية مناسبة لاحتياجك أصلًا.
 
-T> When generating the HTML from the stats you can use `optimization.splitChunks.chunks: "all"` which is the optimal configuration in most cases.
+T> عند إنشاء HTML من stats، يمكنك استخدام `optimization.splitChunks.chunks: "all"`، وهو الإعداد الأفضل في أغلب الحالات.
 
-## import() and CommonJS
+## import() وCommonJS
 
-When using `import()` to load non-ESM the result has changed in webpack 4. Now you need to access the `default` property to get the value of `module.exports`.
+عند استخدام `import()` لتحميل module ليس ESM، تغيّر الناتج في webpack 4. الآن تحتاج إلى الوصول إلى الخاصية `default` للحصول على قيمة `module.exports`.
 
 **non-esm.js**
 
@@ -124,9 +122,9 @@ function sayHello() {
 }
 ```
 
-## json and loaders
+## json وloaders
 
-When using a custom loader to transform `.json` files you now need to change the module `type`:
+عند استخدام loader مخصص لتحويل ملفات `.json`، تحتاج الآن إلى تغيير `type` الخاص بالـ module:
 
 **webpack.config.js**
 
@@ -144,7 +142,7 @@ module.exports = {
 };
 ```
 
-When still using the `json-loader`, it can be removed:
+إذا كنت ما زلت تستخدم `json-loader`، فيمكنك إزالته:
 
 **webpack.config.js**
 
@@ -162,4 +160,4 @@ module.exports = {
 
 ## module.loaders
 
-`module.loaders` were deprecated since webpack 2 and are now removed in favor of [`module.rules`](/configuration/module/#rule).
+أصبحت `module.loaders` deprecated منذ webpack 2، وأُزيلت الآن لصالح [`module.rules`](/configuration/module/#rule).

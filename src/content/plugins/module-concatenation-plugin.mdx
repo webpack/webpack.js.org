@@ -1,46 +1,44 @@
 ---
 title: ModuleConcatenationPlugin
-group: webpack
 contributors:
-  - skipjack
-  - TheLarkInn
-  - byzyk
+  - RlxChap2
+group: webpack
 ---
 
-In the past, one of webpack’s trade-offs when bundling was that each module in your bundle would be wrapped in individual function closures. These wrapper functions made it slower for your JavaScript to execute in the browser. In comparison, tools like Closure Compiler and RollupJS ‘hoist’ or concatenate the scope of all your modules into one closure and allow for your code to have a faster execution time in the browser.
+في الإصدارات القديمة، كان أحد الجوانب السلبية في bundling داخل webpack أن كل module داخل bundle يُغلّف داخل function closure مستقل. هذه الدوال الإضافية تجعل تنفيذ JavaScript أبطأ في المتصفح. بالمقارنة، أدوات مثل Closure Compiler وRollupJS تقوم بما يسمى hoisting أو concatenation لنطاق كل modules داخل closure واحد، وهذا يساعد الكود على التنفيذ بسرعة أعلى في المتصفح.
 
-This plugin will enable the same concatenation behavior in webpack. By default this plugin is already enabled in [production `mode`](/configuration/mode/#mode-production) and disabled otherwise. If you need to override the production `mode` optimization, set the [`optimization.concatenateModules` option](/configuration/optimization/#optimizationconcatenatemodules) to `false`. To enable concatenation behavior in other modes, you can add `ModuleConcatenationPlugin` manually or use the `optimization.concatenateModules` option:
+يفعّل هذا plugin السلوك نفسه داخل webpack. افتراضيًا، يكون هذا plugin مفعّلًا في [وضع `production`](/configuration/mode/#mode-production)، ومعطلًا في غير ذلك. إذا أردت تعطيل هذا التحسين في وضع `production`، اضبط خيار [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules) على `false`. ولتفعيل هذا السلوك في أوضاع أخرى، يمكنك إضافة `ModuleConcatenationPlugin` يدويًا أو استخدام خيار `optimization.concatenateModules`:
 
 ```js
 new webpack.optimize.ModuleConcatenationPlugin();
 ```
 
-> This concatenation behavior is called “scope hoisting.”
+> يُسمى سلوك الدمج هذا "scope hoisting".
 >
-> Scope hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
+> يعتمد scope hoisting تحديدًا على صيغة ECMAScript Modules. لذلك قد يرجع webpack إلى bundling العادي حسب نوع modules التي تستخدمها، وبحسب [شروط أخرى](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
 
-W> Keep in mind that this plugin will only be applied to [ES6 modules](/api/module-methods/#es6-recommended) processed directly by webpack. When using a transpiler, you'll need to disable module processing (e.g. the [`modules`](https://babeljs.io/docs/en/babel-preset-env#modules) option in Babel).
+W> تذكّر أن هذا plugin لا يُطبّق إلا على [ES6 modules](/api/module-methods/#es6-recommended) التي يعالجها webpack مباشرة. إذا كنت تستخدم transpiler مثل Babel، فستحتاج إلى تعطيل معالجة modules فيه، مثل خيار [`modules`](https://babeljs.io/docs/en/babel-preset-env#modules) في Babel.
 
-## Optimization Bailouts
+## حالات إيقاف التحسين
 
-As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means a new module group will be created. The following conditions determine the outcome:
+كما يشرح المقال، يحاول webpack تطبيق scope hoisting جزئيًا. يمكنه دمج modules داخل نطاق واحد، لكنه لا يستطيع فعل ذلك في كل الحالات. إذا لم يستطع webpack دمج module، فهناك نتيجتان محتملتان: Prevent أو Root. تعني Prevent أن module يجب أن يبقى في نطاق مستقل. وتعني Root أن webpack سينشئ مجموعة modules جديدة. تحدد الشروط التالية النتيجة:
 
-| Condition                                     | Outcome |
-| --------------------------------------------- | ------- |
-| Non ES6 Module                                | Prevent |
-| Imported By Non Import                        | Root    |
-| Imported From Other Chunk                     | Root    |
-| Imported By Multiple Other Module Groups      | Root    |
-| Imported With `import()`                      | Root    |
-| Affected By `ProvidePlugin` Or Using `module` | Prevent |
-| HMR Accepted                                  | Root    |
-| Using `eval()`                                | Prevent |
-| In Multiple Chunks                            | Prevent |
-| `export * from "cjs-module"`                  | Prevent |
+| الشرط                                       | النتيجة |
+| ------------------------------------------- | ------- |
+| ليس ES6 Module                              | Prevent |
+| مستورد بواسطة غير import                    | Root    |
+| مستورد من chunk آخر                         | Root    |
+| مستورد بواسطة عدة module groups أخرى        | Root    |
+| مستورد باستخدام `import()`                  | Root    |
+| متأثر بـ `ProvidePlugin` أو يستخدم `module` | Prevent |
+| مقبول من HMR                                | Root    |
+| يستخدم `eval()`                             | Prevent |
+| موجود في عدة chunks                         | Prevent |
+| `export * from "cjs-module"`                | Prevent |
 
-### Module Grouping Algorithm
+### خوارزمية تجميع modules
 
-The following pseudo JavaScript explains the algorithm:
+يوضح pseudo JavaScript التالي الخوارزمية:
 
 ```js
 function tryToAdd(group, module) {
@@ -83,9 +81,9 @@ for (const module of modules) {
 }
 ```
 
-### Debugging Optimization Bailouts
+### تصحيح حالات إيقاف التحسين
 
-When using the webpack CLI, the `--stats-optimization-bailout` flag will display bailout reasons. When using the webpack config, add the following to the `stats` object:
+عند استخدام webpack CLI، يعرض flag `--stats-optimization-bailout` أسباب إيقاف التحسين. وعند استخدام ملف إعدادات webpack، أضف الخيار التالي إلى كائن `stats`:
 
 ```js
 export default {

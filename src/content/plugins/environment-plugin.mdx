@@ -1,24 +1,21 @@
 ---
 title: EnvironmentPlugin
-group: webpack
 contributors:
-  - simon04
-  - einarlove
-  - rouzbeh84
-  - byzyk
+  - RlxChap2
+group: webpack
 ---
 
-The `EnvironmentPlugin` is shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on [`process.env`](https://nodejs.org/api/process.html#process_process_env) keys.
+يُعد `EnvironmentPlugin` اختصارًا لاستخدام [`DefinePlugin`](/plugins/define-plugin) مع مفاتيح [`process.env`](https://nodejs.org/api/process.html#process_process_env).
 
-## Usage
+## الاستخدام
 
-The `EnvironmentPlugin` accepts either an array of keys or an object mapping its keys to their default values.
+يقبل `EnvironmentPlugin` إما array من المفاتيح، أو object يربط كل مفتاح بقيمته الافتراضية.
 
 ```js
 new webpack.EnvironmentPlugin(["NODE_ENV", "DEBUG"]);
 ```
 
-This is equivalent to the following `DefinePlugin` application:
+هذا يعادل استخدام `DefinePlugin` بالشكل التالي:
 
 ```js
 new webpack.DefinePlugin({
@@ -27,11 +24,11 @@ new webpack.DefinePlugin({
 });
 ```
 
-W> `EnvironmentPlugin` checks `process.env` for the specified variable. If it’s missing, it searches for a default value provided in the configuration. If neither the environment variable nor the default value is defined, an error will be thrown: **"`EnvironmentPlugin` - `${key}` environment variable is `undefined`"**.
+W> يبحث `EnvironmentPlugin` عن المتغير المحدد داخل `process.env`. إذا لم يجده، يبحث عن قيمة افتراضية داخل الإعدادات. إذا لم يجد لا المتغير ولا القيمة الافتراضية، فسيظهر خطأ: **"`EnvironmentPlugin` - `${key}` environment variable is `undefined`"**.
 
-## Usage with default values
+## الاستخدام مع القيم الافتراضية
 
-Alternatively, the `EnvironmentPlugin` supports an object, which maps keys to their default values. The default value for a key is taken if the key is undefined in `process.env`.
+يمكنك أيضًا تمرير object إلى `EnvironmentPlugin` يربط المفاتيح بقيمها الافتراضية. تُستخدم القيمة الافتراضية إذا كان المفتاح غير موجود في `process.env`.
 
 ```js
 new webpack.EnvironmentPlugin({
@@ -40,15 +37,15 @@ new webpack.EnvironmentPlugin({
 });
 ```
 
-W> Variables coming from `process.env` are always strings.
+W> القيم القادمة من `process.env` تكون دائمًا strings.
 
-T> Unlike [`DefinePlugin`](/plugins/define-plugin), default values are applied to `JSON.stringify` by the `EnvironmentPlugin`.
+T> بخلاف [`DefinePlugin`](/plugins/define-plugin)، يطبّق `EnvironmentPlugin` دالة `JSON.stringify` على القيم الافتراضية.
 
-T> Default values of `null` and `undefined` behave differently. Use `undefined` for variables that _must_ be provided during bundling, or `null` if they are optional.
+T> القيمتان الافتراضيتان `null` و`undefined` لا تتصرفان بالطريقة نفسها. استخدم `undefined` للمتغيرات التي يجب توفيرها أثناء bundling، واستخدم `null` إذا كانت اختيارية.
 
-**Example:**
+**مثال:**
 
-Let's investigate the result when running the previous `EnvironmentPlugin` configuration on a test file `entry.js`:
+لنرَ ماذا يحدث عند تشغيل إعداد `EnvironmentPlugin` السابق على ملف اختبار اسمه `entry.js`:
 
 ```js
 if (process.env.NODE_ENV === "production") {
@@ -59,7 +56,7 @@ if (process.env.DEBUG) {
 }
 ```
 
-When executing `NODE_ENV=production webpack` in the terminal to build, `entry.js` becomes this:
+عند تنفيذ `NODE_ENV=production webpack` في الطرفية للبناء، يتحول `entry.js` إلى الشكل التالي:
 
 {/* eslint-disable no-self-compare, no-constant-condition */}
 
@@ -74,7 +71,7 @@ if (false) {
 }
 ```
 
-Running `DEBUG=false webpack` yields:
+أما تشغيل `DEBUG=false webpack` فينتج عنه:
 
 {/* eslint-disable no-self-compare, no-constant-condition */}
 
@@ -89,9 +86,9 @@ if ("false") {
 }
 ```
 
-## Use Case: Git Version
+## حالة استخدام: إصدار Git
 
-The following `EnvironmentPlugin` configuration provides `process.env.GIT_VERSION` (such as "v5.4.0-2-g25139f57f") and `process.env.GIT_AUTHOR_DATE` (such as "2020-11-04T12:25:16+01:00") corresponding to the last Git commit of the repository:
+يوفّر إعداد `EnvironmentPlugin` التالي القيمتين `process.env.GIT_VERSION`، مثل "v5.4.0-2-g25139f57f"، و`process.env.GIT_AUTHOR_DATE`، مثل "2020-11-04T12:25:16+01:00"، بناءً على آخر commit في مستودع Git:
 
 ```js
 import childProcess from "node:child_process";
@@ -108,7 +105,7 @@ new webpack.EnvironmentPlugin({
 
 ## DotenvPlugin
 
-The third-party [`DotenvPlugin`](https://github.com/mrsteele/dotenv-webpack) (`dotenv-webpack`) allows you to expose (a subset of) [dotenv variables](https://www.npmjs.com/package/dotenv):
+يسمح plugin خارجي وهو [`DotenvPlugin`](https://github.com/mrsteele/dotenv-webpack) (`dotenv-webpack`) بكشف جزء من [متغيرات dotenv](https://www.npmjs.com/package/dotenv) أو كلها:
 
 ```bash
 // .env

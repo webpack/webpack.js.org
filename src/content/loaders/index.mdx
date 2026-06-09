@@ -2,67 +2,61 @@
 title: Loaders
 sort: -1
 contributors:
-  - simon04
-  - bajras
-  - rhys-vdw
-  - EugeneHlushko
-  - hemal7735
-  - snitin315
-  - anshumanv
-  - jamesgeorge007
-  - chenxsan
+  - RlxChap2
 ---
 
-Webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
-Loaders are separate packages that extend webpack's capabilities and are maintained within the broader ecosystem.
-Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`/`require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders/#configuration).
+يتيح لك webpack استخدام [loaders](/concepts/loaders) لمعالجة الملفات قبل إضافتها إلى الحزمة. بهذه الطريقة لا تكون محدودًا بملفات JavaScript فقط؛ يمكنك إدخال CSS، والصور، والقوالب، وأنواع كثيرة من الموارد الثابتة ضمن عملية البناء. ويمكنك أيضًا كتابة loaders خاصة بك بسهولة باستخدام Node.js.
 
-## Files
+الـ loaders هي حزم مستقلة توسّع قدرات webpack، ويجري تطويرها وصيانتها ضمن مجتمع webpack الأوسع.
 
-- [`ref-loader`](https://www.npmjs.com/package/ref-loader) Create dependencies between any files manually
+يمكن تفعيل loader مباشرة باستخدام بادئة مثل `loadername!` داخل عبارات `import .. from "mod";` أو `require()`، أو يمكن تطبيقه تلقائيًا من إعدادات webpack باستخدام تعبيرات regex. راجع [الإعدادات](/concepts/loaders/#configuration) للتفاصيل.
+
+## الملفات
+
+- [`ref-loader`](https://www.npmjs.com/package/ref-loader) ينشئ علاقات اعتماد بين أي ملفات يدويًا.
 
 ## JSON
 
-- [`cson-loader`](https://github.com/awnist/cson-loader) Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
+- [`cson-loader`](https://github.com/awnist/cson-loader) يحمّل ملف [CSON](https://github.com/bevry/cson#what-is-cson) ويحوّله.
 
-## Transpiling
+## التحويل بين صيغ JavaScript
 
-- [`babel-loader`](/loaders/babel-loader) Loads ES2015+ code and transpiles to ES5 using [Babel](https://babeljs.io/)
-- [`esbuild-loader`](https://github.com/privatenumber/esbuild-loader) Loads ES2015+ code and transpiles to ES6+ using [esbuild](https://esbuild.github.io/)
-- [`buble-loader`](https://github.com/sairion/buble-loader) Loads ES2015+ code and transpiles to ES5 using [Bublé](https://buble.surge.sh/guide/)
-- [`traceur-loader`](https://github.com/jupl/traceur-loader) Loads ES2015+ code and transpiles to ES5 using [Traceur](https://github.com/google/traceur-compiler#readme)
-- [`ts-loader`](https://github.com/TypeStrong/ts-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
-- [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
-- [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
-- [`elm-webpack-loader`](https://github.com/elm-community/elm-webpack-loader) Loads [Elm](https://elm-lang.org/) like JavaScript
+- [`babel-loader`](/loaders/babel-loader) يحمّل كود ES2015+ ويحوّله إلى ES5 باستخدام [Babel](https://babeljs.io/).
+- [`esbuild-loader`](https://github.com/privatenumber/esbuild-loader) يحمّل كود ES2015+ ويحوّله إلى ES6+ باستخدام [esbuild](https://esbuild.github.io/).
+- [`buble-loader`](https://github.com/sairion/buble-loader) يحمّل كود ES2015+ ويحوّله إلى ES5 باستخدام [Bublé](https://buble.surge.sh/guide/).
+- [`traceur-loader`](https://github.com/jupl/traceur-loader) يحمّل كود ES2015+ ويحوّله إلى ES5 باستخدام [Traceur](https://github.com/google/traceur-compiler#readme).
+- [`ts-loader`](https://github.com/TypeStrong/ts-loader) يحمّل [TypeScript](https://www.typescriptlang.org/) 2.0+ ويعامله مثل JavaScript.
+- [`coffee-loader`](/loaders/coffee-loader) يحمّل [CoffeeScript](http://coffeescript.org/) ويعامله مثل JavaScript.
+- [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) يحمّل كود Lua باستخدام [fengari](https://fengari.io/).
+- [`elm-webpack-loader`](https://github.com/elm-community/elm-webpack-loader) يحمّل [Elm](https://elm-lang.org/) ويعامله مثل JavaScript.
 
-## Templating
+## القوالب
 
-- [`html-loader`](/loaders/html-loader) Exports HTML as string, require references to static resources
-- [`pug-loader`](https://github.com/pugjs/pug-loader) Loads Pug and Jade templates and returns a function
-- [`markdown-loader`](https://github.com/peerigon/markdown-loader) Compiles Markdown to HTML
-- [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) Compiles Markdown to a React Component using the markdown-parse parser
-- [`posthtml-loader`](https://github.com/posthtml/posthtml-loader) Loads and transforms a HTML file using [PostHTML](https://github.com/posthtml/posthtml)
-- [`handlebars-loader`](https://github.com/pcardune/handlebars-loader) Compiles Handlebars to HTML
-- [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
-- [`twig-loader`](https://github.com/zimmo-be/twig-loader) Compiles Twig templates and returns a function
-- [`remark-loader`](https://github.com/webpack/remark-loader) Load markdown through `remark` with built-in image resolution
+- [`html-loader`](/loaders/html-loader) يصدّر HTML كنص، ويتعامل مع المراجع إلى الموارد الثابتة.
+- [`pug-loader`](https://github.com/pugjs/pug-loader) يحمّل قوالب Pug وJade ويعيد دالة.
+- [`markdown-loader`](https://github.com/peerigon/markdown-loader) يحوّل Markdown إلى HTML.
+- [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) يحوّل Markdown إلى React Component باستخدام parser الخاص بـ markdown-parse.
+- [`posthtml-loader`](https://github.com/posthtml/posthtml-loader) يحمّل ملف HTML ويحوّله باستخدام [PostHTML](https://github.com/posthtml/posthtml).
+- [`handlebars-loader`](https://github.com/pcardune/handlebars-loader) يحوّل Handlebars إلى HTML.
+- [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) يضمّن ملفات SVG/MathML داخل HTML. يفيد ذلك عند استخدام icon font أو تطبيق CSS animation على SVG.
+- [`twig-loader`](https://github.com/zimmo-be/twig-loader) يحوّل قوالب Twig ويعيد دالة.
+- [`remark-loader`](https://github.com/webpack/remark-loader) يحمّل Markdown عبر `remark` مع حل مراجع الصور تلقائيًا.
 
-## Styling
+## التنسيقات
 
-- [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM
-- [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code
-- [`css-utility-loader`](https://github.com/SahilKhanWDC/css-utility-loader-webpack-.git) - Automatically parses and translates legacy CSS properties into modern utility classes (Tailwind) at build-time.
-- [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
-- [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file
-- [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
-- [`stylus-loader`](/loaders/stylus-loader/) Loads and compiles a Stylus file
+- [`style-loader`](/loaders/style-loader) يضيف صادرات module كـ styles داخل DOM.
+- [`css-loader`](/loaders/css-loader) يحمّل ملف CSS بعد حل imports ويعيد كود CSS.
+- [`css-utility-loader`](https://github.com/SahilKhanWDC/css-utility-loader-webpack-.git) يحلل خصائص CSS القديمة تلقائيًا ويحوّلها إلى utility classes حديثة مثل Tailwind وقت البناء.
+- [`less-loader`](/loaders/less-loader) يحمّل ملف LESS ويحوّله.
+- [`sass-loader`](/loaders/sass-loader) يحمّل ملف SASS/SCSS ويحوّله.
+- [`postcss-loader`](/loaders/postcss-loader) يحمّل ملف CSS/SSS ويحوّله باستخدام [PostCSS](http://postcss.org).
+- [`stylus-loader`](/loaders/stylus-loader/) يحمّل ملف Stylus ويحوّله.
 
-## Frameworks
+## أطر العمل
 
-- [`vue-loader`](https://github.com/vuejs/vue-loader) Loads and compiles [Vue Components](https://vuejs.org/v2/guide/components.html)
-- [`angular2-template-loader`](https://github.com/TheLarkInn/angular2-template-loader) Loads and compiles [Angular](https://angular.io/) Components
+- [`vue-loader`](https://github.com/vuejs/vue-loader) يحمّل [Vue Components](https://vuejs.org/v2/guide/components.html) ويحوّلها.
+- [`angular2-template-loader`](https://github.com/TheLarkInn/angular2-template-loader) يحمّل [Angular](https://angular.io/) Components ويحوّلها.
 
 ## Awesome
 
-For more third-party loaders, see the list from [awesome-webpack](/awesome-webpack/#loaders).
+لمزيد من loaders الخارجية، راجع قائمة [awesome-webpack](/awesome-webpack/#loaders).

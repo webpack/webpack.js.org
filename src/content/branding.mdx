@@ -1,35 +1,32 @@
 ---
-title: Branding Guidelines
+title: إرشادات الهوية البصرية
 sort: 2
 contributors:
-  - jhnns
-  - skipjack
-  - rouzbeh84
-  - byzyk
+  - RlxChap2
 ---
 
 import BrandingSample from "../components/BrandingSample.jsx";
 
-Here you can find **webpack** project brand guidelines, assets, and license. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
+هنا تجد إرشادات الهوية البصرية لمشروع **webpack**، مع الأصول والرخصة. للمزيد من التفاصيل وللعثور على [الرخصة](https://github.com/webpack/media/blob/master/LICENSE) التي تنظّم استخدام هذه الأصول، راجع [مستودع الوسائط الرسمي](https://github.com/webpack/media). يمكنك الضغط على أي صورة لتنزيلها.
 
-## The Name
+## الاسم
 
-Webpack can be written with a capital W when used at the start of a sentence, otherwise it should be written in lower-case letters.
+يمكن كتابة Webpack بحرف W كبير عندما يأتي في بداية الجملة. في غير ذلك، يُفضّل كتابته بحروف صغيرة: webpack.
 
-## Logo
+## الشعار
 
-The webpack logo should be placed on a white background with enough space around it like this:
+يجب وضع شعار webpack على خلفية بيضاء مع مساحة كافية حوله، مثل المثال التالي:
 
 <img
   src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-white-bg.png"
-  alt="webpack logo default with proper spacing on light background"
+  alt="الشعار الافتراضي لـ webpack مع مسافة مناسبة حوله على خلفية فاتحة"
 />
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.jpg)
 
-Double the size of the inner dark blue cube to get an idea how much space the logo should have.
+لأخذ فكرة عن مقدار المساحة المطلوبة حول الشعار، تخيّل أن حجم المكعب الأزرق الداكن الداخلي قد تضاعف.
 
-For dark backgrounds, you can use the negative version of the logo:
+للخلفيات الداكنة، يمكنك استخدام النسخة العكسية من الشعار:
 
 export const style = {
   display: "block",
@@ -39,59 +36,59 @@ export const style = {
 <div style={style}>
   <img
     src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-dark-bg.png"
-    alt="webpack logo default with proper spacing on light background"
+    alt="الشعار الافتراضي لـ webpack مع مسافة مناسبة حوله على خلفية داكنة"
   />
 </div>
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-dark-bg.jpg)
 
-T> Please use the **icon + text** whenever possible.
+T> استخدم نسخة **الأيقونة + النص** كلما كان ذلك ممكنًا.
 
-## Icon only
+## الأيقونة فقط
 
-**The icon is designed to be used in layout-constrained areas. As previously stated, please prefer icon + text.**
+**صُممت الأيقونة للاستخدام في المساحات الضيقة. وكما ذكرنا، الأفضل استخدام الأيقونة مع النص عندما تسمح المساحة بذلك.**
 
 <img
   src="https://raw.githubusercontent.com/webpack/media/master/logo/icon.png"
   width="250"
-  alt="icon example"
+  alt="مثال على الأيقونة"
 />
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon.jpg)
 
-Square-sized icon for bigger areas (like avatars or profile pictures):
+أيقونة مربعة للمساحات الأكبر، مثل avatars أو صور الحسابات:
 
 <img
   src="https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-big.png"
   width="250"
-  alt="icon square big example"
+  alt="مثال على الأيقونة المربعة الكبيرة"
 />
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-big.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-big.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-big.jpg)
 
-Square-sized icon for smaller areas (like favicons):
+أيقونة مربعة للمساحات الأصغر، مثل favicons:
 
 <img
   src="https://raw.githubusercontent.com/webpack/media/master/logo/icon-square-small.png"
   width="50"
-  alt="icon square small example"
+  alt="مثال على الأيقونة المربعة الصغيرة"
 />
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-small.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-small.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-small.jpg)
 
-T> For those of you following our guidelines and have gotten this far, we've made a smaller size image used especially for custom emoji (like in a slack or gitter channel ;))
+T> لمن التزم بالإرشادات ووصل إلى هنا، وفرنا نسخة أصغر مخصصة لاستخدامات custom emoji، مثل Slack أو Gitter.
 
 <img
   src="/assets/icon-square-small-slack.png"
   width="50"
-  alt="icon square small example"
+  alt="مثال على الأيقونة المربعة الصغيرة"
 />
 
-## Color Palette
+## لوحة الألوان
 
-The following colors are used throughout the site in various combinations and on our fancy clothing line launched with the help of [Open Collective](https://opencollective.com/) and [Threadless](https://medium.com/u/840563ee2a56) over at the [official webpack store](https://webpack.threadless.com/collections/the-final-release-collection/)!
+الألوان التالية مستخدمة في الموقع بتركيبات مختلفة، وكذلك في مجموعة الملابس التي أُطلقت بمساعدة [Open Collective](https://opencollective.com/) و[Threadless](https://medium.com/u/840563ee2a56) عبر [متجر webpack الرسمي](https://webpack.threadless.com/collections/the-final-release-collection/).
 
-| Color Name   | HEX Code      | RGB Code             | Sample                             |
+| اسم اللون    | كود HEX       | كود RGB              | عينة                               |
 | ------------ | ------------- | -------------------- | ---------------------------------- |
 | Malibu:      | HEX `#8dd6f9` | `rgb: 141, 214, 249` | <BrandingSample color='#8dd6f9' /> |
 | Denim:       | HEX `#1d78c1` | `rgb: 29, 120, 193`  | <BrandingSample color='#1d78c1' /> |
@@ -105,11 +102,11 @@ The following colors are used throughout the site in various combinations and on
 | Emperor:     | HEX `#535353` | `rgb: 83, 83, 83`    | <BrandingSample color='#535353' /> |
 | Mine Shaft:  | HEX `#333333` | `rgb: 51, 51, 51`    | <BrandingSample color='#333333' /> |
 
-In addition, you can grab the following file types directly from these links:
+بالإضافة إلى ذلك، يمكنك تنزيل هذه الأنواع من الملفات مباشرة من الروابط التالية:
 
 [psd](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.psd) | [png](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.png)
 | [ai](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.ai) | [svg](https://raw.githubusercontent.com/webpack/media/master/design/webpack-palette.svg)
 
-## License
+## الرخصة
 
-The logo and the brand name are **not MIT licensed**. Please check [our LICENSE](https://github.com/webpack/media/blob/master/LICENSE) for usage guidelines.
+الشعار واسم العلامة التجارية **ليسا مرخّصين برخصة MIT**. يرجى مراجعة [LICENSE](https://github.com/webpack/media/blob/master/LICENSE) لمعرفة إرشادات الاستخدام.

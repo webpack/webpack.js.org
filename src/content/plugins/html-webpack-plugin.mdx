@@ -1,26 +1,21 @@
 ---
 title: HtmlWebpackPlugin
-group: Community
 contributors:
-  - ampedandwired
-  - simon04
-  - Sibiraj-S
-  - EugeneHlushko
+  - RlxChap2
+group: Community
 ---
 
-The [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using [lodash templates](https://lodash.com/docs#template), or use your own [loader](/loaders).
+يسهّل [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) إنشاء ملفات HTML التي تحمل bundles الناتجة من webpack. هذا مفيد خصوصًا عندما تحتوي أسماء ملفات bundles على hash يتغير مع كل عملية بناء. يمكنك ترك plugin ينشئ ملف HTML لك، أو تمرير قالب خاص بك باستخدام [lodash templates](https://lodash.com/docs#template)، أو استخدام [loader](/loaders) من اختيارك.
 
-## Installation
+## التثبيت
 
 ```bash
 npm install --save-dev html-webpack-plugin
 ```
 
-## Basic Usage
+## الاستخدام الأساسي
 
-The plugin will generate an HTML5 file for you that includes all your webpack
-bundles in the body using `script` tags. Add the plugin to your webpack
-configuration as follows:
+ينشئ plugin ملف HTML5 يحتوي كل webpack bundles داخل عنصر `body` باستخدام وسوم `script`. أضف plugin إلى إعدادات webpack بهذه الطريقة:
 
 ```js
 import path from "node:path";
@@ -40,7 +35,7 @@ export default {
 };
 ```
 
-This will generate a file `dist/index.html` containing the following:
+سينشئ ذلك ملف `dist/index.html` بالمحتوى التالي:
 
 ```html
 <!DOCTYPE html>
@@ -55,14 +50,14 @@ This will generate a file `dist/index.html` containing the following:
 </html>
 ```
 
-If you have multiple webpack entry points, they will all be included with `<script>` tags in the generated HTML.
+إذا كان لديك أكثر من webpack entry point، فستُضاف كلها إلى ملف HTML الناتج باستخدام وسوم `<script>`.
 
-If you have any CSS assets in webpack's output (for example, CSS extracted with the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/)) then these will be included with `<link>` tags in the `<head>` element of generated HTML.
+إذا كانت مخرجات webpack تحتوي CSS assets، مثل CSS المستخرج باستخدام [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/)، فستُضاف هذه الملفات إلى عنصر `<head>` في HTML الناتج باستخدام وسوم `<link>`.
 
-## Configuration
+## الإعدادات
 
-For all configuration options, please see the [plugin documentation](https://github.com/jantimon/html-webpack-plugin#options).
+للاطلاع على كل خيارات الإعداد، راجع [توثيق plugin](https://github.com/jantimon/html-webpack-plugin#options).
 
-## Third party addons
+## إضافات الطرف الثالث
 
-The plugin supports addons. For a list see the [documentation](https://github.com/jantimon/html-webpack-plugin#plugins).
+يدعم plugin إضافات خارجية. للاطلاع على القائمة، راجع [التوثيق](https://github.com/jantimon/html-webpack-plugin#plugins).
