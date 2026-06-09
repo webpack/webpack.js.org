@@ -1,20 +1,9 @@
 ---
-title: Module Methods
+title: دوال Module
 group: Modules
 sort: 7
 contributors:
-  - skipjack
-  - sokra
-  - fadysamirsadek
-  - byzyk
-  - debs-obrien
-  - wizardofhogwarts
-  - EugeneHlushko
-  - chenxsan
-  - jamesgeorge007
-  - WofWca
-  - snitin315
-  - adriancuadrado
+  - RlxChap2
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -22,34 +11,34 @@ related:
     url: https://en.wikipedia.org/wiki/Asynchronous_module_definition
 ---
 
-This section covers all methods available in code compiled with webpack. When using webpack to bundle your application, you can pick from a variety of module syntax styles including [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015), [CommonJS](https://en.wikipedia.org/wiki/CommonJS), and [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition).
+يغطي هذا القسم كل الدوال المتاحة داخل الكود الذي تم تجميعه بواسطة webpack. عند استخدام webpack لتحزيم تطبيقك، يمكنك الاختيار بين عدة صيغ للـ modules، مثل [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015) و[CommonJS](https://en.wikipedia.org/wiki/CommonJS) و[AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition).
 
-While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Actually webpack would enforce the recommendation for `.mjs` files, `.cjs` files or `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of either `"module"` or `"commonjs"`. Please pay attention to these enforcements before you read on:
+رغم أن webpack يدعم عدة صيغ للـ modules، فإننا نوصي باتباع صيغة واحدة للمحافظة على الاتساق وتجنب السلوكيات الغريبة أو الأخطاء. في الواقع، يفرض webpack هذه التوصية على ملفات `.mjs` وملفات `.cjs` وملفات `.js` عندما يحتوي أقرب ملف `package.json` أب على حقل `"type"` بقيمة `"module"` أو `"commonjs"`. انتبه لهذه القيود قبل المتابعة:
 
-- `.mjs` or `.js` with `"type": "module"` in `package.json`
-  - No CommonJS allowed, for example, you can't use `require`, `module.exports` or `exports`
-  - File extensions are required when importing, e.g, you should use `import './src/App.mjs'` instead of `import './src/App'` (you can disable this enforcement with [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified))
-- `.cjs` or `.js` with `"type": "commonjs"` in `package.json`
-  - Neither `import` nor `export` is available
-- `.wasm` with `"type": "module"` in `package.json`
-  - File extensions are required when importing wasm file
+- ملفات `.mjs` أو `.js` مع `"type": "module"` في `package.json`
+  - لا يُسمح بـ CommonJS، مثل `require` أو `module.exports` أو `exports`.
+  - يجب كتابة امتدادات الملفات عند الاستيراد، مثل استخدام `import './src/App.mjs'` بدل `import './src/App'`. يمكنك تعطيل هذا القيد عبر [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified).
+- ملفات `.cjs` أو `.js` مع `"type": "commonjs"` في `package.json`
+  - لا تتوفر `import` ولا `export`.
+- ملفات `.wasm` مع `"type": "module"` في `package.json`
+  - يجب كتابة امتداد الملف عند استيراد ملف wasm.
 
-## ES6 (Recommended)
+## ES6 (موصى به)
 
-Version 2 of webpack supports ES6 module syntax natively, meaning you can use `import` and `export` without a tool like babel to handle this for you. Keep in mind that you will still probably need babel for other ES6+ features. The following methods are supported by webpack:
+يدعم webpack 2 صيغة ES6 modules بشكل أصلي، وهذا يعني أنك تستطيع استخدام `import` و`export` بدون أداة مثل babel للتعامل مع ذلك. مع ذلك، قد تحتاج إلى babel لميزات ES6+ الأخرى. يدعم webpack الدوال التالية:
 
 ### import
 
-Statically `import` the `export`s of another module.
+يستورد `export`s من module آخر بشكل ثابت.
 
 ```js
 import MyModule from "./my-module.js";
 import { NamedExport } from "./other-module.js";
 ```
 
-W> The keyword here is **statically**. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
+W> الكلمة المهمة هنا هي **ثابت**. لا يمكن استخدام عبارة `import` العادية بشكل ديناميكي داخل منطق آخر أو مع متغيرات. راجع [المواصفة](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) لمزيد من المعلومات، وراجع `import()` أدناه للاستخدام الديناميكي.
 
-You can also `import` Data URI:
+يمكنك أيضًا استيراد Data URI:
 
 ```js
 import "data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7";
@@ -61,7 +50,7 @@ import {
 
 ### export
 
-Export anything as a `default` or named export.
+صدّر أي شيء كـ `default` أو كتصدير مسمى.
 
 ```js
 // Named exports
@@ -80,43 +69,43 @@ export default {
 
 `function(string path):Promise`
 
-Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and its children are split out into a separate chunk.
+يحمّل modules بشكل ديناميكي. يتعامل webpack مع استدعاءات `import()` كنقاط تقسيم، أي أن module المطلوب وأبناءه يُفصلون داخل chunk مستقل.
 
-T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
+T> تعرّف [مواصفة ES2015 Loader](https://whatwg.github.io/loader/) الدالة `import()` كطريقة لتحميل ES2015 modules ديناميكيًا وقت التشغيل.
 
 ```js
 if (module.hot) {
   import("lodash").then((_) => {
-    // Do something with lodash (a.k.a '_')...
+    // افعل شيئًا باستخدام lodash، المعروف أيضًا باسم '_'
   });
 }
 ```
 
-W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+W> تعتمد هذه الميزة داخليًا على [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). إذا استخدمت `import()` مع متصفحات قديمة، فتذكر إضافة shim لـ `Promise` باستخدام polyfill مثل [es6-promise](https://github.com/stefanpenner/es6-promise) أو [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 ### Dynamic expressions in import()
 
-It is not possible to use a fully dynamic import statement, such as `import(foo)`. Because `foo` could potentially be any path to any file in your system or project.
+لا يمكن استخدام عبارة import ديناميكية بالكامل مثل `import(foo)`. السبب أن `foo` قد يكون أي مسار لأي ملف في نظامك أو مشروعك.
 
-The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included.
-For example, ``import(`./locale/${language}.json`)`` will only bundle all `.json` files in the `./locale` directory and subdirectories into the new chunk and exclude files with other file extensions. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
+يجب أن تحتوي `import()` على قدر من المعلومات عن مكان module. يمكن حصر bundling في مجلد محدد أو مجموعة ملفات محددة، بحيث عند استخدام expression ديناميكي يتم تضمين كل module يمكن طلبه عبر `import()`.
+مثلًا، ``import(`./locale/${language}.json`)`` سيحزم فقط كل ملفات `.json` داخل مجلد `./locale` ومجلداته الفرعية داخل chunk الجديد، وسيستبعد الملفات ذات الامتدادات الأخرى. وقت التشغيل، بعد حساب المتغير `language`، سيكون أي ملف مثل `english.json` أو `german.json` متاحًا للاستخدام.
 
 ```js
-// imagine we had a method to get language from cookies or other storage
+// تخيل أن لدينا دالة لمعرفة اللغة من cookies أو تخزين آخر
 const language = detectVisitorLanguage();
 import(`./locale/${language}.json`).then((module) => {
-  // do something with the translations
+  // افعل شيئًا بالترجمات
 });
 ```
 
-T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-comments) options allows you to add regex patterns that reduce the number of files that webpack will bundle for this import.
+T> يسمح استخدام خياري [`webpackInclude` و`webpackExclude`](/api/module-methods/#magic-comments) بإضافة regex patterns تقلل عدد الملفات التي سيحزمها webpack لهذا الاستيراد.
 
 #### Magic Comments
 
-By adding comments to the import, we can do things such as name our chunk or select different modes. For a full list of these magic comments see the code below followed by an explanation of what these comments do.
+عند إضافة comments إلى import، يمكننا فعل أشياء مثل تسمية chunk أو اختيار modes مختلفة. للاطلاع على القائمة الكاملة لهذه magic comments، راجع الكود أدناه ثم شرح وظيفة كل تعليق.
 
 ```js
-// Single target
+// هدف واحد
 import(
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
@@ -125,7 +114,7 @@ import(
   "node:module"
 );
 
-// Multiple possible targets
+// عدة أهداف محتملة
 import(
   /* webpackInclude: /\.json$/ */
   /* webpackExclude: /\.noimport\.json$/ */
@@ -139,15 +128,15 @@ import(
 import(/* webpackIgnore: true */ "ignored-module.js");
 ```
 
-T> Single line comments (`//`) are also supported. JSDoc comments (`/** */`) are not.
+T> التعليقات ذات السطر الواحد (`//`) مدعومة أيضًا. أما تعليقات JSDoc (`/** */`) فليست مدعومة.
 
 ##### webpackIgnore
 
-**JavaScript Usage**
+**استخدام JavaScript**
 
-Disables dynamic import parsing when set to `true`.
+يعطل تحليل dynamic import عند ضبطه على `true`.
 
-When using `import.meta.url`, it does not remain as-is; instead, it gets replaced based on the `baseURI`. For modules, it is replaced with `new URL("./", import.meta.url)`, and for other cases, it defaults to `document.baseURI`. This ensures that relative URLs work correctly, aligning with the base URL context.
+عند استخدام `import.meta.url`، لا يبقى كما هو؛ بل يُستبدل بناءً على `baseURI`. في modules، يُستبدل بـ `new URL("./", import.meta.url)`، وفي الحالات الأخرى تكون القيمة الافتراضية `document.baseURI`. هذا يضمن عمل relative URLs بشكل صحيح، بما يتوافق مع سياق base URL.
 
 ```js
 import(/* webpackIgnore: true */ "ignored-module.js");
@@ -155,14 +144,14 @@ import(/* webpackIgnore: true */ "ignored-module.js");
 new URL(/* webpackIgnore: true */ "./file1.css", import.meta.url);
 ```
 
-W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
+W> لاحظ أن ضبط `webpackIgnore` على `true` يعني الخروج من code splitting.
 
-**CSS Usage**
+**استخدام CSS**
 
-The `webpackIgnore` comment can control whether webpack processes a specific import or URL reference.
-It works in certain cases out of the box but **doesn’t support all cases** by default due to performance reasons.
+يمكن لتعليق `webpackIgnore` التحكم فيما إذا كان webpack سيعالج import أو مرجع URL محددًا.
+يعمل في حالات معينة مباشرة، لكنه **لا يدعم كل الحالات** افتراضيًا لأسباب تتعلق بالأداء.
 
-We support `webpackIgnore` in the following cases:
+ندعم `webpackIgnore` في الحالات التالية:
 
 ```css
 @import /* webpackIgnore: false */ url(./basic.css);
@@ -181,13 +170,13 @@ We support `webpackIgnore` in the following cases:
 }
 ```
 
-T> For other CSS scenarios, [`css-loader` fully supports `webpackIgnore`](/loaders/css-loader/#disable-url-resolving-using-the--webpackignore-true--comment), allowing more flexibility if needed.
+T> في سيناريوهات CSS الأخرى، يدعم [`css-loader` خيار `webpackIgnore` بالكامل](/loaders/css-loader/#disable-url-resolving-using-the--webpackignore-true--comment)، مما يعطيك مرونة أكبر عند الحاجة.
 
-**HTML Usage**
+**استخدام HTML**
 
 <Badge text="5.107.0+" />
 
-When [`experiments.html`](/configuration/experiments/#experimentshtml) is enabled, `webpackIgnore` can be placed as an HTML comment immediately before a tag to skip URL resolution for that tag's `src`, `href`, `srcset`, and similar attributes. The tag is left untouched in the emitted HTML. This mirrors the behavior provided by `html-loader`.
+عند تفعيل [`experiments.html`](/configuration/experiments/#experimentshtml)، يمكن وضع `webpackIgnore` كتعليق HTML مباشرة قبل الوسم لتجاوز حل URL لخصائص مثل `src` و`href` و`srcset` وما شابه. يُترك الوسم كما هو في HTML الصادر. هذا يعكس السلوك الذي يوفره `html-loader`.
 
 ```html
 <!-- webpackIgnore: true -->
@@ -197,17 +186,17 @@ When [`experiments.html`](/configuration/experiments/#experimentshtml) is enable
 <script src="/legacy/external.js"></script>
 ```
 
-The magic-comment value is parsed with the same context used by the JS and CSS parsers; non-boolean values emit an `UnsupportedFeatureWarning`.
+تُقرأ قيمة magic-comment بالسياق نفسه المستخدم في parsers الخاصة بـ JS وCSS؛ القيم غير boolean تصدر `UnsupportedFeatureWarning`.
 
 ##### webpackChunkName
 
-A name for the new chunk. Since webpack 2.6.0, the placeholders `[index]` and `[request]` are supported within the given string to an incremented number or the actual resolved filename respectively. Adding this comment will cause our separate chunk to be named [my-chunk-name].js instead of [id].js.
+اسم chunk الجديد. منذ webpack 2.6.0، يتم دعم placeholders `[index]` و`[request]` داخل النص المعطى، حيث تُستبدل برقم متزايد أو باسم الملف المحلول فعليًا على الترتيب. إضافة هذا التعليق تجعل chunk المنفصل يسمى [my-chunk-name].js بدل [id].js.
 
 ##### webpackFetchPriority
 
 <Badge text="5.87.0+" />
 
-Set [`fetchPriority`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/fetchPriority) for specific dynamic imports. It's also possible to set a global default value for all dynamic imports by using the [`module.parser.javascript.dynamicImportFetchPriority`](/configuration/module/#moduleparserjavascriptdynamicimportfetchpriority) option.
+يضبط [`fetchPriority`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/fetchPriority) لاستيرادات ديناميكية محددة. ويمكن أيضًا ضبط قيمة افتراضية عامة لكل dynamic imports باستخدام خيار [`module.parser.javascript.dynamicImportFetchPriority`](/configuration/module/#moduleparserjavascriptdynamicimportfetchpriority).
 
 ```js
 import(
@@ -218,42 +207,42 @@ import(
 
 ##### webpackMode
 
-Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
+منذ webpack 2.6.0، يمكن تحديد modes مختلفة لحل dynamic imports. الخيارات التالية مدعومة:
 
-- `'lazy'` (default): Generates a lazy-loadable chunk for each `import()`ed module.
-- `'lazy-once'`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where multiple module paths that can potentially be requested.
-- `'eager'`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
-- `'weak'`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
+- `'lazy'` (الافتراضي): يولد chunk قابلًا للتحميل الكسول لكل module يتم استيراده عبر `import()`.
+- `'lazy-once'`: يولد chunk واحدًا قابلًا للتحميل الكسول يكفي كل استدعاءات `import()`. يتم جلب chunk عند أول استدعاء لـ `import()`، وتستخدم الاستدعاءات اللاحقة الاستجابة الشبكية نفسها. هذا لا يكون منطقيًا إلا في حالة عبارة ديناميكية جزئية، مثل ``import(`./locales/${language}.json`)``، حيث توجد عدة مسارات modules يمكن طلبها.
+- `'eager'`: لا يولد chunk إضافيًا. تُضمّن كل modules داخل chunk الحالي ولا تُرسل طلبات شبكة إضافية. ما زالت الدالة ترجع `Promise` لكنها تكون محلولة مسبقًا. بخلاف static import، لا يُنفّذ module إلا عند استدعاء `import()`.
+- `'weak'`: يحاول تحميل module إذا كانت دالة module قد حُمّلت بطريقة أخرى، مثل أن chunk آخر استوردها أو script يحتوي على module تم تحميله. ما زالت الدالة ترجع `Promise`، لكنها لا تنجح إلا إذا كانت chunks موجودة بالفعل على client. إذا لم يكن module متاحًا، تُرفض `Promise`. لن يتم تنفيذ طلب شبكة أبدًا. هذا مفيد لـ universal rendering عندما تكون chunks المطلوبة مقدمة يدويًا دائمًا في الطلبات الأولية، مثل تضمينها داخل الصفحة، لكنه ليس مناسبًا عندما يؤدي تنقل المستخدم داخل التطبيق إلى import لم يكن مقدمًا أوليًا.
 
 ##### webpackPrefetch
 
-Tells the browser that the resource is probably needed for some navigation in the future. Check out the guide for more information on [how webpackPrefetch works](/guides/code-splitting/#prefetchingpreloading-modules).
+يخبر المتصفح أن resource قد تكون مطلوبة غالبًا في تنقل مستقبلي. راجع الدليل لمزيد من المعلومات عن [طريقة عمل webpackPrefetch](/guides/code-splitting/#prefetchingpreloading-modules).
 
 ##### webpackPreload
 
-Tells the browser that the resource might be needed during the current navigation. Check out the guide for more information on [how webpackPreload works](/guides/code-splitting/#prefetchingpreloading-modules).
+يخبر المتصفح أن resource قد تكون مطلوبة أثناء التنقل الحالي. راجع الدليل لمزيد من المعلومات عن [طريقة عمل webpackPreload](/guides/code-splitting/#prefetchingpreloading-modules).
 
-T> Note that all options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is wrapped in a JavaScript object and executed using [node VM](https://nodejs.org/dist/latest-v8.x/docs/api/vm.html). You do not need to add curly brackets.
+T> لاحظ أن كل الخيارات يمكن دمجها هكذا: `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. يتم تغليف ذلك داخل كائن JavaScript وتنفيذه باستخدام [node VM](https://nodejs.org/dist/latest-v8.x/docs/api/vm.html). لا تحتاج إلى إضافة الأقواس `{}`.
 
 ##### webpackInclude
 
-A regular expression that will be matched against during import resolution. Only modules that match **will be bundled**.
+تعبير regular expression تتم مطابقته أثناء حل import. فقط modules المطابقة **سيتم حزمها**.
 
 ##### webpackExclude
 
-A regular expression that will be matched against during import resolution. Any module that matches **will not be bundled**.
+تعبير regular expression تتم مطابقته أثناء حل import. أي module يطابقه **لن يتم حزمها**.
 
-T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
+T> لاحظ أن خياري `webpackInclude` و`webpackExclude` لا يتداخلان مع prefix، مثل: `./locale`.
 
 ##### webpackExports
 
-Tells webpack to only bundle the specified exports of a dynamically `import()`ed module. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
+يخبر webpack بأن يحزم فقط exports المحددة من module المستورد ديناميكيًا عبر `import()`. يمكن أن يقلل حجم output الخاص بـ chunk. متاح منذ [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
-W> `webpackExports` cannot be used with destructuring assignments.
+W> لا يمكن استخدام `webpackExports` مع destructuring assignments.
 
 ## CommonJS
 
-The goal of CommonJS is to specify an ecosystem for JavaScript outside the browser. The following CommonJS methods are supported by webpack:
+هدف CommonJS هو تحديد منظومة JavaScript خارج المتصفح. يدعم webpack دوال CommonJS التالية:
 
 ### require
 
@@ -261,16 +250,16 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 require(dependency: String);
 ```
 
-Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
+يجلب exports من module آخر بشكل متزامن. سيضمن compiler توفر dependency داخل output bundle.
 
 ```js
 import $ from "jquery";
 import myModule from "my-module";
 ```
 
-It's possible to enable magic comments for `require` as well, see [`module.parser.javascript.commonjsMagicComments`](/configuration/module/#moduleparserjavascriptcommonjsmagiccomments) for more.
+يمكن أيضًا تفعيل magic comments لـ `require`. راجع [`module.parser.javascript.commonjsMagicComments`](/configuration/module/#moduleparserjavascriptcommonjsmagiccomments) للمزيد.
 
-W> Using it asynchronously may not have the expected effect.
+W> استخدامه بشكل غير متزامن قد لا يعطي الأثر المتوقع.
 
 ### require.resolve
 
@@ -278,39 +267,39 @@ W> Using it asynchronously may not have the expected effect.
 require.resolve(dependency: String);
 ```
 
-Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. It is recommended to treat it as an opaque value which can only be used with `require.cache[id]` or `__webpack_require__(id)` (best to avoid such usage).
+يجلب ID الخاص بـ module بشكل متزامن. سيضمن compiler توفر dependency داخل output bundle. يُنصح بالتعامل معه كقيمة opaque لا تُستخدم إلا مع `require.cache[id]` أو `__webpack_require__(id)`، والأفضل تجنب هذا الاستخدام.
 
-W> Module ID's type can be a `number` or a `string` depending on the [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) configuration.
+W> يمكن أن يكون نوع Module ID رقمًا أو نصًا بحسب إعداد [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids).
 
-See [`module.id`](/api/module-variables/#moduleid-commonjs) for more information.
+راجع [`module.id`](/api/module-variables/#moduleid-commonjs) لمزيد من المعلومات.
 
 ### require.cache
 
-Multiple requires of the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache causes new module execution and a new export.
+عدة استدعاءات `require` للـ module نفسه تؤدي إلى تنفيذ module مرة واحدة فقط وتصدير واحد فقط. لذلك يوجد cache في runtime. إزالة قيم من هذا cache تؤدي إلى تنفيذ جديد للـ module وتصدير جديد.
 
-W> This is only needed in rare cases for compatibility!
+W> هذا مطلوب فقط في حالات توافق نادرة.
 
 ```js
 import d1 from "dependency";
 
-// In ESM, module caching is handled automatically.
-// Manual cache deletion like in CommonJS is not supported.
+// في ESM، تتم إدارة module caching تلقائيًا.
+// حذف cache يدويًا كما في CommonJS غير مدعوم.
 if (import.meta.webpackHot) {
   import.meta.webpackHot.accept("dependency", (newModule) => {
-    // Handle module update here
+    // تعامل مع تحديث module هنا
   });
 }
 ```
 
 ```js
 // in file.js
-// In ESM, manual cache manipulation is not supported.
-// Webpack handles module caching internally.
+// في ESM، التلاعب اليدوي بالـ cache غير مدعوم.
+// يتعامل webpack مع module caching داخليًا.
 ```
 
 ### require.ensure
 
-W> `require.ensure()` is specific to webpack and superseded by `import()`.
+W> `require.ensure()` خاص بـ webpack واستُبدل عمليًا بـ `import()`.
 
 ```ts
 require.ensure(
@@ -321,9 +310,9 @@ require.ensure(
 )
 ```
 
-Split out the given `dependencies` to a separate bundle that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if certain conditions are met.
+يفصل `dependencies` المحددة إلى bundle مستقل يتم تحميله بشكل غير متزامن. عند استخدام صيغة CommonJS modules، هذه هي الطريقة الوحيدة لتحميل dependencies ديناميكيًا. أي يمكن تشغيل هذا الكود أثناء التنفيذ، ولا تُحمّل `dependencies` إلا إذا تحققت شروط معينة.
 
-W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `require.ensure` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+W> تعتمد هذه الميزة داخليًا على [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). إذا استخدمت `require.ensure` مع متصفحات قديمة، فتذكر إضافة shim لـ `Promise` باستخدام polyfill مثل [es6-promise](https://github.com/stefanpenner/es6-promise) أو [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 ```js
 const a = require("normal-dep");
@@ -331,26 +320,26 @@ const a = require("normal-dep");
 if (module.hot) {
   import("b").then(() => {
     import("c").then((c) => {
-      // Do something special...
+      // افعل شيئًا خاصًا...
     });
   });
 }
 ```
 
-The following parameters are supported in the order specified above:
+parameters التالية مدعومة بالترتيب الموضح أعلاه:
 
-- `dependencies`: An array of strings declaring all modules required for the code in the `callback` to execute.
-- `callback`: A function that webpack will execute once the dependencies are loaded. An implementation of the `require` function is sent as a parameter to this function. The function body can use this to further `require()` modules it needs for execution.
-- `errorCallback`: A function that is executed when webpack fails to load the dependencies.
-- `chunkName`: A name given to the chunk created by this particular `require.ensure()`. By passing the same `chunkName` to various `require.ensure()` calls, we can combine their code into a single chunk, resulting in only one bundle that the browser must load.
+- `dependencies`: array من strings تعلن كل modules المطلوبة لتنفيذ الكود داخل `callback`.
+- `callback`: دالة ينفذها webpack بعد تحميل dependencies. يتم إرسال implementation لدالة `require` كـ parameter إلى هذه الدالة. يمكن لجسم الدالة استخدامه لاستدعاء `require()` لأي modules إضافية يحتاجها للتنفيذ.
+- `errorCallback`: دالة تُنفّذ عندما يفشل webpack في تحميل dependencies.
+- `chunkName`: اسم يُعطى للـ chunk الذي ينشئه استدعاء `require.ensure()` هذا. عبر تمرير `chunkName` نفسه لعدة استدعاءات `require.ensure()`، يمكن دمج كودها داخل chunk واحد، مما ينتج bundle واحدًا فقط يحتاج المتصفح إلى تحميله.
 
-W> Although the implementation of `require` is passed as an argument to the `callback` function, using an arbitrary name e.g. `require.ensure([], function(request) { request('someModule'); })` isn't handled by webpack's static parser. Use `require` instead, e.g. `require.ensure([], function(require) { require('someModule'); })`.
+W> رغم أن implementation الخاص بـ `require` يُمرر كـ argument إلى دالة `callback`، فإن استخدام اسم عشوائي مثل `require.ensure([], function(request) { request('someModule'); })` لا يتعامل معه parser الثابت في webpack. استخدم `require` بدلًا من ذلك، مثل: `require.ensure([], function(require) { require('someModule'); })`.
 
 ## AMD
 
-W> These syntaxes are legacy. We highly recommend using ES6 Modules for modern applications.
+W> هذه الصيغ قديمة. نوصي بشدة باستخدام ES6 Modules في التطبيقات الحديثة.
 
-Asynchronous Module Definition (AMD) is a JavaScript specification that defines an interface for writing and loading modules. The following AMD methods are supported by webpack:
+Asynchronous Module Definition (AMD) هي مواصفة JavaScript تحدد واجهة لكتابة modules وتحميلها. يدعم webpack دوال AMD التالية:
 
 ### define (with factory)
 
@@ -358,21 +347,21 @@ Asynchronous Module Definition (AMD) is a JavaScript specification that defines 
 define([name: String], [dependencies: String[]], factoryMethod: function(...))
 ```
 
-If `dependencies` are provided, `factoryMethod` will be called with the exports of each dependency (in the same order). If `dependencies` are not provided, `factoryMethod` is called with `require`, `exports` and `module` (for compatibility!). If this function returns a value, this value is exported by the module. The compiler ensures that each dependency is available.
+إذا تم توفير `dependencies`، فسيتم استدعاء `factoryMethod` مع exports الخاصة بكل dependency بالترتيب نفسه. إذا لم يتم توفير `dependencies`، فسيتم استدعاء `factoryMethod` مع `require` و`exports` و`module` لأسباب توافقية. إذا أرجعت هذه الدالة قيمة، فسيتم تصدير تلك القيمة من module. يضمن compiler توفر كل dependency.
 
-W> Note that webpack ignores the `name` argument.
+W> لاحظ أن webpack يتجاهل argument المسمى `name`.
 
 ```js
 define(["jquery", "my-module"], ($, myModule) =>
-  // Do something with $ and myModule...
+  // افعل شيئًا باستخدام $ وmyModule...
 
-  // Export a function
+  // صدّر دالة
   function doSomething() {
     // ...
   });
 ```
 
-W> This CANNOT be used in an asynchronous function.
+W> لا يمكن استخدام هذا داخل دالة غير متزامنة.
 
 ### define (with value)
 
@@ -380,7 +369,7 @@ W> This CANNOT be used in an asynchronous function.
 define(value: !Function)
 ```
 
-This will export the provided `value`. The `value` here can be anything except a function.
+سيصدّر هذا `value` المقدمة. يمكن أن تكون `value` هنا أي شيء باستثناء دالة.
 
 ```js
 define({
@@ -388,7 +377,7 @@ define({
 });
 ```
 
-W> This CANNOT be used in an async function.
+W> لا يمكن استخدام هذا داخل دالة async.
 
 ### require (amd-version)
 
@@ -396,49 +385,49 @@ W> This CANNOT be used in an async function.
 require(dependencies: String[], [callback: function(...)])
 ```
 
-Similar to `require.ensure`, this will split the given `dependencies` into a separate bundle that will be loaded asynchronously. The `callback` will be called with the exports of each dependency in the `dependencies` array.
+بشكل مشابه لـ `require.ensure`، ستُفصل `dependencies` المحددة إلى bundle مستقل يتم تحميله بشكل غير متزامن. سيتم استدعاء `callback` مع exports الخاصة بكل dependency داخل array المسماة `dependencies`.
 
-W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use AMD with older browsers (e.g. Internet Explorer 11), remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+W> تعتمد هذه الميزة داخليًا على [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). إذا استخدمت AMD مع متصفحات قديمة، مثل Internet Explorer 11، فتذكر إضافة shim لـ `Promise` باستخدام polyfill مثل [es6-promise](https://github.com/stefanpenner/es6-promise) أو [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 ```js
 import("b").then((b) => {
   import("c").then((c) => {
-    // b और c का इस्तेमाल करें
+    // استخدم b و c
   });
 });
 ```
 
-W> There is no option to provide a chunk name.
+W> لا يوجد خيار لتوفير اسم chunk.
 
 ## Labeled Modules
 
-W> These syntaxes are legacy. We highly recommend using ES6 Modules for modern applications.
+W> هذه الصيغ قديمة. نوصي بشدة باستخدام ES6 Modules في التطبيقات الحديثة.
 
-The internal `LabeledModulesPlugin` enables you to use the following methods for exporting and requiring within your modules:
+يفعّل `LabeledModulesPlugin` الداخلي استخدام الدوال التالية للتصدير والطلب داخل modules:
 
 ### export label
 
-Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
+يصدّر `value` المحددة. يمكن أن تأتي label قبل function declaration أو variable declaration. يكون اسم الدالة أو اسم المتغير هو identifier الذي تُصدر تحته القيمة.
 
 ```ts
 export: const answer = 42;
 export: function method(value) {
-  // Do something...
+  // افعل شيئًا...
 };
 ```
 
-W> Using it in an async function may not have the expected effect.
+W> استخدامه داخل دالة async قد لا يعطي الأثر المتوقع.
 
 ### require label
 
-Make all exports from the dependency available in the current scope. The `require` label can occur before a string. The dependency must export values with the `export` label. CommonJS or AMD modules cannot be consumed.
+يجعل كل exports من dependency متاحة داخل النطاق الحالي. يمكن أن تظهر label الخاصة بـ `require` قبل string. يجب أن تصدّر dependency القيم باستخدام label الخاصة بـ `export`. لا يمكن استهلاك CommonJS أو AMD modules بهذه الطريقة.
 
 **some-dependency.js**
 
 ```ts
 export: const answer = 42;
 export: function method(value) {
-  // Do something...
+  // افعل شيئًا...
 };
 ```
 
@@ -450,20 +439,20 @@ method(...);
 
 ## Webpack
 
-Aside from the module syntaxes described above, webpack also allows a few custom, webpack-specific methods:
+إلى جانب صيغ modules الموضحة أعلاه، يسمح webpack أيضًا بعدة دوال مخصصة خاصة به:
 
 ### require.context
 
 ```ts
 require.context(
   (directory: String),
-  (includeSubdirs: Boolean) /* optional, default true */,
-  (filter: RegExp) /* optional, default /^\.\/.*$/, any file */,
-  (mode: String) /* optional, 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once', default 'sync' */
+  (includeSubdirs: Boolean) /* اختياري، الافتراضي true */,
+  (filter: RegExp) /* اختياري، الافتراضي /^\.\/.*$/ أي ملف */,
+  (mode: String) /* اختياري، 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once'، الافتراضي 'sync' */
 );
 ```
 
-Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be resolved later on:
+حدد مجموعة كاملة من dependencies باستخدام مسار إلى `directory`، وخيار `includeSubdirs`، و`filter` للتحكم الأدق في modules المضمنة، و`mode` لتحديد طريقة التحميل. يمكن بعد ذلك حل modules الأساسية لاحقًا:
 
 ```js
 const context = import.meta.webpackContext("components", {
@@ -473,7 +462,7 @@ const context = import.meta.webpackContext("components", {
 const componentA = context.resolve("componentA");
 ```
 
-If `mode` is set to `'lazy'`, the underlying modules will be loaded asynchronously:
+إذا تم ضبط `mode` على `'lazy'`، فسيتم تحميل modules الأساسية بشكل غير متزامن:
 
 ```js
 const context = import.meta.webpackContext("locales", {
@@ -482,11 +471,11 @@ const context = import.meta.webpackContext("locales", {
   mode: "lazy",
 });
 context("localeA").then((locale) => {
-  // do something with locale
+  // افعل شيئًا باستخدام locale
 });
 ```
 
-The full list of available modes and their behavior is described in [`import()`](#import-1) documentation.
+القائمة الكاملة للـ modes المتاحة وسلوكها موضحة في توثيق [`import()`](#import-1).
 
 ### require.include
 
@@ -494,49 +483,49 @@ The full list of available modes and their behavior is described in [`import()`]
 require.include((dependency: String));
 ```
 
-Include a `dependency` without executing it. This can be used for optimizing the position of a module in the output chunks.
+يضمّن `dependency` بدون تنفيذه. يمكن استخدام ذلك لتحسين موضع module داخل output chunks.
 
 ```js
 import("a");
 import("b");
 import("c").then((moduleC) => {
-  // Use moduleC here
+  // استخدم moduleC هنا
 });
 ```
 
-This will result in the following output:
+سينتج عن ذلك output التالي:
 
-- entry chunk: `file.js` and `a`
-- anonymous chunk: `b`
-- anonymous chunk: `c`
+- entry chunk: `file.js` و`a`.
+- anonymous chunk: `b`.
+- anonymous chunk: `c`.
 
-Without `require.include('a')` it would be duplicated in both anonymous chunks.
+بدون `require.include('a')` كان سيتم تكراره في كلا anonymous chunks.
 
 ### require.resolveWeak
 
-Similar to `require.resolve`, but this won't pull the `module` into the bundle. It's what is considered a "weak" dependency.
+يشبه `require.resolve`، لكنه لا يسحب `module` إلى bundle. هذا ما يُعد dependency "ضعيفًا".
 
 ```js
 if (__webpack_modules__[require.resolveWeak("module")]) {
-  // Do something when module is available...
+  // افعل شيئًا عندما يكون module متاحًا...
 }
 if (require.cache[require.resolveWeak("module")]) {
-  // Do something when module was loaded before...
+  // افعل شيئًا عندما يكون module قد حُمّل سابقًا...
 }
 
-// You can perform dynamic resolves ("context")
-// similarly to other require/import methods.
+// يمكنك تنفيذ resolves ديناميكية "context"
+// بطريقة مشابهة لدوال require/import الأخرى.
 const page = "Foo";
 __webpack_modules__[require.resolveWeak(`./page/${page}`)];
 ```
 
-T> `require.resolveWeak` is the foundation of _universal rendering_ (SSR + Code Splitting), as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on both the server and initial page-loads on the client. It requires that chunks are manually served or somehow available. It's able to require modules without indicating they should be bundled into a chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports.
+T> `require.resolveWeak` هو أساس _universal rendering_، أي SSR + Code Splitting، كما في حزم مثل [react-universal-component](https://github.com/faceyspacey/react-universal-component). يسمح للكود بأن يرندر بشكل متزامن على الخادم وعند أول تحميل للصفحة على العميل. يتطلب أن تكون chunks مقدمة يدويًا أو متاحة بطريقة ما. يستطيع طلب modules بدون الإشارة إلى أنه يجب حزمها داخل chunk. ويُستخدم مع `import()` التي تتولى الأمر عندما يؤدي تنقل المستخدم إلى imports إضافية.
 
 ### warning
 
-If the module source contains a require that cannot be statically analyzed, critical dependencies warning is emitted.
+إذا كان مصدر module يحتوي على require لا يمكن تحليله بشكل ثابت، فسيصدر تحذير critical dependencies.
 
-Example code:
+مثال:
 
 ```js
 someFn(require);

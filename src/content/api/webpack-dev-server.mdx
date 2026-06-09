@@ -2,20 +2,20 @@
 title: webpack-dev-server API
 sort: 3
 contributors:
-  - snitin315
+  - RlxChap2
 ---
 
-`webpack-dev-server` provides a Node.js API which can be used directly in Node.js runtime.
+يوفّر `webpack-dev-server` واجهة Node.js API يمكنك استخدامها مباشرة من داخل بيئة تشغيل Node.js.
 
-## Installation
+## التثبيت
 
-To start using the `webpack-dev-server` Node.js API, first install `webpack` and `webpack-dev-server` if you haven’t yet:
+لاستخدام Node.js API الخاص بـ `webpack-dev-server`، ثبّت أولًا `webpack` و`webpack-dev-server` إذا لم يكونا مثبتين لديك:
 
 ```bash
 npm install --save-dev webpack webpack-dev-server
 ```
 
-Then require the modules in your Node.js script:
+بعد ذلك استورد الحزم داخل سكربت Node.js:
 
 ```js
 import webpack from "webpack";
@@ -24,7 +24,7 @@ import WebpackDevServer from "webpack-dev-server";
 
 ## start
 
-It instructs `webpack-dev-server` instance to start the server.
+تستخدم `start` لتشغيل الخادم من instance الخاص بـ `webpack-dev-server`.
 
 **server.js**
 
@@ -45,7 +45,7 @@ const runServer = async () => {
 runServer();
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -53,7 +53,7 @@ node server.js
 
 ## startCallback(callback)
 
-It instructs `webpack-dev-server` instance to start the server and then run the callback function.
+تستخدم `startCallback(callback)` لتشغيل الخادم، ثم تنفيذ دالة `callback` بعد بدء التشغيل.
 
 **server.js**
 
@@ -71,7 +71,7 @@ server.startCallback(() => {
 });
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -79,7 +79,7 @@ node server.js
 
 ## stop
 
-It instructs `webpack-dev-server` instance to stop the server.
+تستخدم `stop` لإيقاف الخادم من instance الخاص بـ `webpack-dev-server`.
 
 **server.js**
 
@@ -107,7 +107,7 @@ runServer();
 setTimeout(stopServer, 5000);
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -115,7 +115,7 @@ node server.js
 
 ## stopCallback(callback)
 
-It instructs `webpack-dev-server` instance to stop the server and then run the callback function.
+تستخدم `stopCallback(callback)` لإيقاف الخادم، ثم تنفيذ دالة `callback` بعد اكتمال الإيقاف.
 
 **server.js**
 
@@ -140,7 +140,7 @@ const stopServer = () =>
 setTimeout(stopServer, 5000);
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -148,7 +148,7 @@ node server.js
 
 ## internalIP(family: "v4" | "v6")
 
-Returns the internal `IPv4`/`IPv6` address asynchronously.
+ترجع هذه الدالة عنوان `IPv4` أو `IPv6` الداخلي بشكل غير متزامن.
 
 **server.js**
 
@@ -168,7 +168,7 @@ logInternalIPs();
 
 ## internalIPSync(family: "v4" | "v6")
 
-Returns the internal `IPv4`/`IPv6` address synchronously.
+ترجع هذه الدالة عنوان `IPv4` أو `IPv6` الداخلي بشكل متزامن.
 
 **server.js**
 

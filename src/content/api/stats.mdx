@@ -1,184 +1,177 @@
 ---
-title: Stats Data
+title: بيانات Stats
 sort: 3
 contributors:
-  - skipjack
-  - franjohn21
-  - byzyk
-  - EugeneHlushko
-  - superburrito
-  - chenxsan
-  - rahul3v
-  - snitin315
+  - RlxChap2
 ---
 
-When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
+عند تجميع الكود باستخدام webpack، يمكنك إنشاء ملف JSON يحتوي إحصاءات عن modules وchunks وassets. تساعدك هذه البيانات على فهم dependency graph الخاص بالتطبيق، وعلى تحسين سرعة التجميع. غالبًا يُنشأ الملف بالأمر التالي من CLI:
 
 ```bash
 npx webpack --profile --json=compilation-stats.json
 ```
 
-The `--json=compilation-stats.json` flag indicates to webpack that it should emit the `compilation-stats.json` containing the dependency graph and various other build information. Typically, the `--profile` flag is also added so that a `profile` section is added to each [`modules` object](#module-objects) containing module-specific compilation stats.
+يخبر flag `--json=compilation-stats.json` webpack أن ينشئ ملف `compilation-stats.json` وفيه dependency graph ومعلومات أخرى عن عملية البناء. وغالبًا يُضاف flag `--profile` أيضًا حتى يضيف webpack قسم `profile` داخل كل كائن من [`modules`](#كائنات-module)، وفيه إحصاءات خاصة بتجميع ذلك module.
 
-## Structure
+## البنية
 
-The top-level structure of the output JSON file is fairly straightforward but there are a few nested data structures as well. Each nested structure has a dedicated section below to make this document more consumable. Note that you can click links within the top-level structure below to jump to relevant sections and documentation:
+بنية ملف JSON على المستوى الأعلى مباشرة نسبيًا، لكنها تحتوي أيضًا بعض البنى المتداخلة. لكل بنية متداخلة قسم مستقل أدناه حتى يسهل فهم الملف. يمكنك الضغط على الروابط داخل البنية العامة التالية للانتقال إلى الأقسام المرتبطة:
 
 ```json
 {
-  "version": "5.9.0", // Version of webpack used for the compilation
-  "hash": "11593e3b3ac85436984a", // Compilation specific hash
-  "time": 2469, // Compilation time in milliseconds
+  "version": "5.9.0", // إصدار webpack المستخدم في التجميع
+  "hash": "11593e3b3ac85436984a", // hash خاص بعملية التجميع
+  "time": 2469, // وقت التجميع بالميلي ثانية
   "publicPath": "auto",
-  "outputPath": "/", // path to webpack output directory
+  "outputPath": "/", // مسار مجلد إخراج webpack
   "assetsByChunkName": {
-    // Chunk name to emitted asset(s) mapping
+    // ربط اسم chunk بالـ asset أو assets الناتجة عنه
     "main": ["web.js?h=11593e3b3ac85436984a"],
     "named-chunk": ["named-chunk.web.js"],
     "other-chunk": ["other-chunk.js", "other-chunk.css"]
   },
   "assets": [
-    // A list of asset objects
+    // قائمة بكائنات asset
   ],
   "chunks": [
-    // A list of chunk objects
+    // قائمة بكائنات chunk
   ],
   "modules": [
-    // A list of module objects
+    // قائمة بكائنات module
   ],
   "entryPoints": {
-    // A list of entry objects
+    // قائمة بكائنات entry
   },
   "errors": [
-    // A list of error objects
+    // قائمة بكائنات error
   ],
-  "errorsCount": 0, // number of errors
+  "errorsCount": 0, // عدد الأخطاء
   "warnings": [
-    // A list of warning objects
+    // قائمة بكائنات warning
   ],
-  "warningsCount": 0 // nummber of warnings
+  "warningsCount": 0 // عدد التحذيرات
 }
 ```
 
-### Asset Objects
+### كائنات Asset
 
-Each `assets` object represents an `output` file emitted from the compilation. They all follow a similar structure:
+يمثل كل كائن داخل `assets` ملف `output` أنشأته عملية التجميع. تتبع هذه الكائنات بنية متشابهة:
 
 ```json
 {
-  "chunkNames": [], // The chunks this asset contains
-  "chunks": [10, 6], // The chunk IDs this asset contains
-  "comparedForEmit": false, // Indicates whether or not the asset was compared with the same file on the output file system
-  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
-  "name": "10.web.js", // The `output` filename
-  "size": 1058, // The size of the file in bytes
+  "chunkNames": [], // أسماء chunks التي يحتويها هذا asset
+  "chunks": [10, 6], // IDs الخاصة بالـ chunks التي يحتويها هذا asset
+  "comparedForEmit": false, // هل تمت مقارنة asset مع الملف نفسه في نظام ملفات الإخراج
+  "emitted": true, // هل وصل asset إلى مجلد `output`
+  "name": "10.web.js", // اسم ملف `output`
+  "size": 1058, // حجم الملف بالبايت
   "info": {
-    "immutable": true, // A flag telling whether the asset can be long term cached (contains a hash)
-    "size": 1058, // The size in bytes, only becomes available after asset has been emitted
-    "development": true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
-    "hotModuleReplacement": true, // A flag telling whether the asset ships data for updating an existing application (HMR)
-    "sourceFilename": "originalfile.js", // sourceFilename when asset was created from a source file (potentially transformed)
-    "javascriptModule": true // true, when asset is javascript and an ESM
+    "immutable": true, // هل يمكن تخزين asset في cache طويل المدى لأنه يحتوي hash
+    "size": 1058, // الحجم بالبايت، ولا يظهر إلا بعد إخراج asset
+    "development": true, // هل يُستخدم asset للتطوير فقط ولا يُحسب ضمن assets التي يراها المستخدم
+    "hotModuleReplacement": true, // هل يحمل asset بيانات لتحديث تطبيق موجود باستخدام HMR
+    "sourceFilename": "originalfile.js", // اسم ملف المصدر عندما يُنشأ asset من ملف source، وقد يكون محوّلًا
+    "javascriptModule": true // true إذا كان asset ملف JavaScript وبصيغة ESM
   }
 }
 ```
 
-### Chunk Objects
+### كائنات Chunk
 
-Each `chunks` object represents a group of modules known as a [chunk](/glossary/#c). Each object follows the following structure:
+يمثل كل كائن داخل `chunks` مجموعة modules تُسمى [chunk](/glossary/#c). تتبع كل كائنات chunk البنية التالية:
 
 ```json
 {
-  "entry": true, // Indicates whether or not the chunk contains the webpack runtime
+  "entry": true, // هل يحتوي chunk على webpack runtime
   "files": [
-    // An array of filename strings that contain this chunk
+    // array من أسماء الملفات التي تحتوي هذا chunk
   ],
-  "filteredModules": 0, // See the description in the [top-level structure](#structure) above
-  "id": 0, // The ID of this chunk
-  "initial": true, // Indicates whether this chunk is loaded on initial page load or [on demand](/guides/lazy-loading)
+  "filteredModules": 0, // راجع الوصف في [البنية](#البنية) أعلاه
+  "id": 0, // ID الخاص بهذا chunk
+  "initial": true, // هل يُحمّل هذا chunk عند فتح الصفحة لأول مرة أم [عند الطلب](/guides/lazy-loading)
   "modules": [
-    // A list of [module objects](#module-objects)
+    // قائمة [كائنات module](#كائنات-module)
     "web.js?h=11593e3b3ac85436984a"
   ],
   "names": [
-    // An list of chunk names contained within this chunk
+    // قائمة أسماء chunks الموجودة داخل هذا chunk
   ],
   "origins": [
-    // See the description below...
+    // راجع الوصف أدناه
   ],
-  "parents": [], // Parent chunk IDs
-  "rendered": true, // Indicates whether or not the chunk went through Code Generation
-  "size": 188057 // Chunk size in bytes
+  "parents": [], // IDs الخاصة بالـ parent chunks
+  "rendered": true, // هل مر chunk بمرحلة Code Generation
+  "size": 188057 // حجم chunk بالبايت
 }
 ```
 
-The `chunks` object will also contain a list of `origins` describing how the given chunk originated. Each `origins` object follows the following schema:
+يحتوي كائن `chunks` أيضًا قائمة `origins` توضّح كيف نشأ هذا chunk. يتبع كل كائن داخل `origins` الشكل التالي:
 
 ```json
 {
-  "loc": "", // Lines of code that generated this chunk
-  "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
-  "moduleId": 0, // The ID of the module
-  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
-  "moduleName": "./lib/index.web.js", // Relative path to the module
-  "name": "main", // The name of the chunk
+  "loc": "", // أسطر الكود التي أنشأت هذا chunk
+  "module": "(webpack)\\test\\browsertest\\lib\\index.web.js", // مسار module
+  "moduleId": 0, // ID الخاص بالـ module
+  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // مسار module
+  "moduleName": "./lib/index.web.js", // المسار النسبي للـ module
+  "name": "main", // اسم chunk
   "reasons": [
-    // A list of the same `reasons` found in [module objects](#module-objects)
+    // قائمة بنفس كائنات `reasons` الموجودة في [كائنات module](#كائنات-module)
   ]
 }
 ```
 
-### Module Objects
+### كائنات Module
 
-What good would these statistics be without some description of the compiled application's actual modules? Each module in the dependency graph is represented by the following structure:
+لن تكون الإحصاءات مفيدة دون وصف modules الفعلية داخل التطبيق المجمع. يمثل كل module في dependency graph بالبنية التالية:
 
 ```json
 {
   "assets": [
-    // A list of [asset objects](#asset-objects)
+    // قائمة [كائنات asset](#كائنات-asset)
   ],
-  "built": true, // Indicates that the module went through [Loaders](/concepts/loaders), Parsing, and Code Generation
-  "cacheable": true, // Whether or not this module is cacheable
+  "built": true, // هل مر module عبر [Loaders](/concepts/loaders) ثم Parsing ثم Code Generation
+  "cacheable": true, // هل يمكن تخزين هذا module في cache
   "chunks": [
-    // IDs of chunks that contain this module
+    // IDs الخاصة بالـ chunks التي تحتوي هذا module
   ],
-  "errors": 0, // Number of errors when resolving or processing the module
-  "failed": false, // Whether or not compilation failed on this module
-  "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables/#moduleid-commonjs))
-  "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // A unique ID used internally
-  "name": "./lib/index.web.js", // Path to the actual file
-  "optional": false, // All requests to this module are with `try... catch` blocks (irrelevant with ESM)
-  "prefetched": false, // Indicates whether or not the module was [prefetched](/plugins/prefetch-plugin)
+  "errors": 0, // عدد الأخطاء أثناء حل module أو معالجته
+  "failed": false, // هل فشل التجميع عند هذا module
+  "id": 0, // ID الخاص بالـ module، ويشبه [`module.id`](/api/module-variables/#moduleid-commonjs)
+  "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // ID فريد يستخدم داخليًا
+  "name": "./lib/index.web.js", // مسار الملف الفعلي
+  "optional": false, // هل كل requests إلى هذا module داخل كتل `try... catch`، وهذا غير مهم مع ESM
+  "prefetched": false, // هل تم [prefetch](/plugins/prefetch-plugin) لهذا module
   "profile": {
-    // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli/#profiling) (in milliseconds)
-    "building": 73, // Loading and parsing
-    "dependencies": 242, // Building dependencies
-    "factory": 11 // Resolving dependencies
+    // إحصاءات خاصة بتجميع module مرتبطة بـ [`--profile`](/api/cli/#profiling)، بالميلي ثانية
+    "building": 73, // التحميل والتحليل
+    "dependencies": 242, // بناء dependencies
+    "factory": 11 // حل dependencies
   },
   "reasons": [
-    // See the description below...
+    // راجع الوصف أدناه
   ],
-  "size": 3593, // Estimated size of the module in bytes
-  "source": "// Should not break it...\r\nif(typeof...", // The stringified raw source
-  "warnings": 0 // Number of warnings when resolving or processing the module
+  "size": 3593, // الحجم التقديري للـ module بالبايت
+  "source": "// Should not break it...\r\nif(typeof...", // النص الخام للمصدر بعد تحويله إلى string
+  "warnings": 0 // عدد التحذيرات أثناء حل module أو معالجته
 }
 ```
 
-Every module also contains a list of `reasons` objects describing why that module was included in the dependency graph. Each "reason" is similar to the `origins` seen above in the [chunk objects](#chunk-objects) section:
+يحتوي كل module أيضًا قائمة من كائنات `reasons` توضّح سبب تضمين ذلك module في dependency graph. كل "reason" يشبه كائنات `origins` المذكورة في قسم [كائنات chunk](#كائنات-chunk):
 
 ```json
 {
-  "loc": "33:24-93", // Lines of code that caused the module to be included
-  "module": "./lib/index.web.js", // Relative path to the module based on [context](/configuration/entry-context/#context)
-  "moduleId": 0, // The ID of the module
-  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
-  "moduleName": "./lib/index.web.js", // A more readable name for the module (used for "pretty-printing")
-  "type": "require.context", // The [type of request](/api/module-methods) used
-  "userRequest": "../../cases" // Raw string used for the `import` or `require` request
+  "loc": "33:24-93", // أسطر الكود التي جعلت module يُضمّن
+  "module": "./lib/index.web.js", // المسار النسبي للـ module اعتمادًا على [context](/configuration/entry-context/#context)
+  "moduleId": 0, // ID الخاص بالـ module
+  "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // مسار module
+  "moduleName": "./lib/index.web.js", // اسم أسهل قراءة للـ module ويُستخدم عند تنسيق العرض
+  "type": "require.context", // [نوع request](/api/module-methods) المستخدم
+  "userRequest": "../../cases" // النص الخام المستخدم في request الخاص بـ `import` أو `require`
 }
 ```
 
-### Entry Objects
+### كائنات Entry
 
 ```json
 "main": {
@@ -203,9 +196,9 @@ Every module also contains a list of `reasons` objects describing why that modul
 }
 ```
 
-### Errors and Warnings
+### الأخطاء والتحذيرات
 
-The `errors` and `warnings` properties each contain a list of objects. Each object contains a message, a stack trace and various other properties:
+تحتوي الخاصيتان `errors` و`warnings` قائمة كائنات. يحتوي كل كائن رسالة، وstack trace، وخصائص أخرى:
 
 ```json
 {
@@ -247,4 +240,4 @@ The `errors` and `warnings` properties each contain a list of objects. Each obje
 }
 ```
 
-W> Note that the stack traces are removed when `errorStack: false` is passed to the `toJson` method. The `errorStack` option is set to `true` by default.
+W> لاحظ أن stack traces تُزال عند تمرير `errorStack: false` إلى دالة `toJson`. القيمة الافتراضية لخيار `errorStack` هي `true`.

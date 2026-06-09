@@ -3,41 +3,26 @@ title: Compilation Hooks
 group: Plugins
 sort: 10
 contributors:
-  - slavafomin
-  - byzyk
-  - madhavarshney
-  - misterdev
-  - wizardofhogwarts
-  - EugeneHlushko
-  - chenxsan
-  - jamesgeorge007
-  - snitin315
+  - RlxChap2
 ---
 
-The `Compilation` module is used by the `Compiler` to create new compilations
-(or builds). A `compilation` instance has access to all modules and their
-dependencies (most of which are circular references). It is the literal
-compilation of all the modules in the dependency graph of an application.
-During the compilation phase, modules are loaded, sealed, optimized, chunked,
-hashed and restored.
+يستخدم `Compiler` module المسمى `Compilation` لإنشاء compilations جديدة، أو builds جديدة. تملك instance من `compilation` وصولًا إلى كل modules وdependencies الخاصة بها، ومعظمها مراجع دائرية. وهي عمليًا compilation لكل modules الموجودة في dependency graph الخاص بالتطبيق. أثناء مرحلة compilation، يتم تحميل modules، وعمل seal لها، وتحسينها، وتقسيمها إلى chunks، وإنشاء hashes لها، واستعادتها.
 
-The `Compilation` class also extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+يرث الصنف `Compilation` أيضًا من `Tapable` ويوفر lifecycle hooks التالية. يمكن الدخول إليها بالطريقة نفسها المستخدمة مع compiler hooks:
 
 ```js
 compilation.hooks.someHook.tap(/* ... */);
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+وكما هو الحال مع `compiler`، قد تكون `tapAsync` و`tapPromise` متاحتين أيضًا بحسب نوع hook.
 
-W> Since webpack 5, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
+W> منذ webpack 5، لم تعد `hooks` قابلة للتمديد مباشرة. استخدم `WeakMap` لإضافة hooks مخصصة.
 
 ## buildModule
 
 `SyncHook`
 
-Triggered before a module build has started, can be used to modify the module.
+يُطلق قبل بدء build الخاص بـ module، ويمكن استخدامه لتعديل module.
 
 - Callback Parameters: `module`
 
@@ -54,7 +39,7 @@ compilation.hooks.buildModule.tap(
 
 `SyncHook`
 
-Fired before rebuilding a module.
+يُطلق قبل إعادة بناء module.
 
 - Callback Parameters: `module`
 
@@ -62,7 +47,7 @@ Fired before rebuilding a module.
 
 `SyncHook`
 
-Run when a module build has failed.
+يعمل عندما يفشل build الخاص بـ module.
 
 - Callback Parameters: `module` `error`
 
@@ -70,7 +55,7 @@ Run when a module build has failed.
 
 `SyncHook`
 
-Executed when a module has been built successfully.
+يُنفّذ عندما يتم بناء module بنجاح.
 
 - Callback Parameters: `module`
 
@@ -78,7 +63,7 @@ Executed when a module has been built successfully.
 
 `AsyncSeriesHook`
 
-Called when all modules have been built without errors.
+يُستدعى عندما يتم بناء كل modules بدون أخطاء.
 
 - Callback Parameters: `modules`
 
@@ -86,7 +71,7 @@ Called when all modules have been built without errors.
 
 `SyncHook`
 
-Executed when a module has been rebuilt, in case of both success or with errors.
+يُنفّذ عندما تنتهي إعادة بناء module، سواء نجحت أو انتهت بأخطاء.
 
 - Callback Parameters: `module`
 
@@ -94,19 +79,19 @@ Executed when a module has been rebuilt, in case of both success or with errors.
 
 `SyncHook`
 
-Fired when the compilation stops accepting new modules.
+يُطلق عندما يتوقف compilation عن قبول modules جديدة.
 
 ## unseal
 
 `SyncHook`
 
-Fired when a compilation begins accepting new modules.
+يُطلق عندما يبدأ compilation بقبول modules جديدة.
 
 ## optimizeDependencies
 
 `SyncBailHook`
 
-Fired at the beginning of dependency optimization.
+يُطلق في بداية تحسين dependencies.
 
 - Callback Parameters: `modules`
 
@@ -114,7 +99,7 @@ Fired at the beginning of dependency optimization.
 
 `SyncHook`
 
-Fired after the dependency optimization.
+يُطلق بعد تحسين dependencies.
 
 - Callback Parameters: `modules`
 
@@ -124,10 +109,10 @@ Fired after the dependency optimization.
 
 <Badge text="5.83.0+" />
 
-The `afterChunks` hook is invoked following the creation of the chunks and module graph, and prior to their optimization.
-This hook provides an opportunity to examine, analyze, and modify the chunk graph if necessary.
+يُستدعى hook المسمى `afterChunks` بعد إنشاء chunks وmodule graph، وقبل تحسينهما.
+يوفر هذا hook فرصة لفحص chunk graph وتحليله وتعديله عند الحاجة.
 
-Here's [an example](https://github.com/webpack/webpack/blob/10be3f9e3fb34078af8c5841a77025a6722f11bf/lib/wasm-sync/WebAssemblyModulesPlugin.js#L114-L137) of how to utilize the `compilation.hooks.afterChunks` hook.
+هذا [مثال](https://github.com/webpack/webpack/blob/10be3f9e3fb34078af8c5841a77025a6722f11bf/lib/wasm-sync/WebAssemblyModulesPlugin.js#L114-L137) على استخدام hook `compilation.hooks.afterChunks`.
 
 - Callback Parameters: `chunks`
 
@@ -135,13 +120,13 @@ Here's [an example](https://github.com/webpack/webpack/blob/10be3f9e3fb34078af8c
 
 `SyncHook`
 
-Triggered at the beginning of the optimization phase.
+يُطلق في بداية مرحلة optimization.
 
 ## optimizeModules
 
 `SyncBailHook`
 
-Called at the beginning of the module optimization phase. A plugin can tap into this hook to perform optimizations on modules.
+يُستدعى في بداية مرحلة تحسين modules. يمكن لـ plugin الدخول إلى هذا hook لتنفيذ تحسينات على modules.
 
 - Callback Parameters: `modules`
 
@@ -149,7 +134,7 @@ Called at the beginning of the module optimization phase. A plugin can tap into 
 
 `SyncHook`
 
-Called after modules optimization has completed.
+يُستدعى بعد اكتمال تحسين modules.
 
 - Callback Parameters: `modules`
 
@@ -157,7 +142,7 @@ Called after modules optimization has completed.
 
 `SyncBailHook`
 
-Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
+يُستدعى في بداية مرحلة تحسين chunks. يمكن لـ plugin الدخول إلى هذا hook لتنفيذ تحسينات على chunks.
 
 - Callback Parameters: `chunks`
 
@@ -165,7 +150,7 @@ Called at the beginning of the chunk optimization phase. A plugin can tap into t
 
 `SyncHook`
 
-Fired after chunk optimization has completed.
+يُطلق بعد اكتمال تحسين chunks.
 
 - Callback Parameters: `chunks`
 
@@ -173,7 +158,7 @@ Fired after chunk optimization has completed.
 
 `AsyncSeriesHook`
 
-Called before optimizing the dependency tree. A plugin can tap into this hook to perform a dependency tree optimization.
+يُستدعى قبل تحسين dependency tree. يمكن لـ plugin الدخول إلى هذا hook لتنفيذ تحسين على dependency tree.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -181,7 +166,7 @@ Called before optimizing the dependency tree. A plugin can tap into this hook to
 
 `SyncHook`
 
-Called after the dependency tree optimization has completed with success.
+يُستدعى بعد اكتمال تحسين dependency tree بنجاح.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -189,7 +174,7 @@ Called after the dependency tree optimization has completed with success.
 
 `SyncBailHook`
 
-Called after the tree optimization, at the beginning of the chunk modules optimization. A plugin can tap into this hook to perform optimizations of chunk modules.
+يُستدعى بعد تحسين tree، وفي بداية تحسين chunk modules. يمكن لـ plugin الدخول إلى هذا hook لتنفيذ تحسينات على chunk modules.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -197,7 +182,7 @@ Called after the tree optimization, at the beginning of the chunk modules optimi
 
 `SyncHook`
 
-Called after the chunkmodules optimization has completed successfully.
+يُستدعى بعد اكتمال تحسين chunk modules بنجاح.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -205,13 +190,13 @@ Called after the chunkmodules optimization has completed successfully.
 
 `SyncBailHook`
 
-Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed ([`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) and [`recordHash`](#recordhash)).
+يُستدعى لتحديد هل يجب تخزين records أم لا. إرجاع أي شيء `!== false` سيمنع تنفيذ بقية hooks الخاصة بـ records، وهي [`record`](#record) و[`recordModules`](#recordmodules) و[`recordChunks`](#recordchunks) و[`recordHash`](#recordhash).
 
 ## reviveModules
 
 `SyncHook`
 
-Restore module information from records.
+يستعيد معلومات module من records.
 
 - Callback Parameters: `modules` `records`
 
@@ -219,7 +204,7 @@ Restore module information from records.
 
 `SyncHook`
 
-Executed before assigning an `id` to each module.
+يُنفّذ قبل تعيين `id` لكل module.
 
 - Callback Parameters: `modules`
 
@@ -227,7 +212,7 @@ Executed before assigning an `id` to each module.
 
 `SyncHook`
 
-Called to assign an `id` to each module.
+يُستدعى لتعيين `id` لكل module.
 
 - Callback Parameters: `modules`
 
@@ -235,7 +220,7 @@ Called to assign an `id` to each module.
 
 `SyncHook`
 
-Called at the beginning of the modules `id` optimization.
+يُستدعى في بداية تحسين `id` الخاصة بـ modules.
 
 - Callback Parameters: `modules`
 
@@ -243,7 +228,7 @@ Called at the beginning of the modules `id` optimization.
 
 `SyncHook`
 
-Called when the modules `id` optimization phase has completed.
+يُستدعى عندما تكتمل مرحلة تحسين `id` الخاصة بـ modules.
 
 - Callback Parameters: `modules`
 
@@ -251,7 +236,7 @@ Called when the modules `id` optimization phase has completed.
 
 `SyncHook`
 
-Restore chunk information from records.
+يستعيد معلومات chunk من records.
 
 - Callback Parameters: `chunks` `records`
 
@@ -259,7 +244,7 @@ Restore chunk information from records.
 
 `SyncHook`
 
-Executed before assigning an `id` to each chunk.
+يُنفّذ قبل تعيين `id` لكل chunk.
 
 - Callback Parameters: `chunks`
 
@@ -267,7 +252,7 @@ Executed before assigning an `id` to each chunk.
 
 `SyncHook`
 
-Called to assign an `id` to each chunk.
+يُستدعى لتعيين `id` لكل chunk.
 
 - Callback Parameters: `chunks`
 
@@ -275,7 +260,7 @@ Called to assign an `id` to each chunk.
 
 `SyncHook`
 
-Called at the beginning of the chunks `id` optimization phase.
+يُستدعى في بداية مرحلة تحسين `id` الخاصة بـ chunks.
 
 - Callback Parameters: `chunks`
 
@@ -283,7 +268,7 @@ Called at the beginning of the chunks `id` optimization phase.
 
 `SyncHook`
 
-Triggered after chunk `id` optimization has finished.
+يُطلق بعد انتهاء تحسين `id` الخاصة بـ chunk.
 
 - Callback Parameters: `chunks`
 
@@ -291,7 +276,7 @@ Triggered after chunk `id` optimization has finished.
 
 `SyncHook`
 
-Store module info to the records. This is triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+يخزن معلومات module داخل records. يُطلق هذا hook إذا أرجع [`shouldRecord`](#shouldrecord) قيمة truthy.
 
 - Callback Parameters: `modules` `records`
 
@@ -299,7 +284,7 @@ Store module info to the records. This is triggered if [`shouldRecord`](#shouldr
 
 `SyncHook`
 
-Store chunk info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+يخزن معلومات chunk داخل records. لا يُطلق إلا إذا أرجع [`shouldRecord`](#shouldrecord) قيمة truthy.
 
 - Callback Parameters: `chunks` `records`
 
@@ -307,31 +292,31 @@ Store chunk info to the records. This is only triggered if [`shouldRecord`](#sho
 
 `SyncHook`
 
-Called before modules are hashed.
+يُستدعى قبل إنشاء hash للـ modules.
 
 ## afterModuleHash
 
 `syncHook`
 
-Called after modules are hashed.
+يُستدعى بعد إنشاء hash للـ modules.
 
 ## beforeHash
 
 `SyncHook`
 
-Called before the compilation is hashed.
+يُستدعى قبل إنشاء hash للـ compilation.
 
 ## afterHash
 
 `SyncHook`
 
-Called after the compilation is hashed.
+يُستدعى بعد إنشاء hash للـ compilation.
 
 ## recordHash
 
 `SyncHook`
 
-Store information about record hash to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+يخزن معلومات record hash داخل `records`. لا يُطلق إلا إذا أرجع [`shouldRecord`](#shouldrecord) قيمة truthy.
 
 - Callback Parameters: `records`
 
@@ -339,7 +324,7 @@ Store information about record hash to the `records`. This is only triggered if 
 
 `SyncHook`
 
-Store information about the `compilation` to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+يخزن معلومات عن `compilation` داخل `records`. لا يُطلق إلا إذا أرجع [`shouldRecord`](#shouldrecord) قيمة truthy.
 
 - Callback Parameters: `compilation` `records`
 
@@ -347,15 +332,15 @@ Store information about the `compilation` to the `records`. This is only trigger
 
 `SyncHook`
 
-Executed before module assets creation.
+يُنفّذ قبل إنشاء module assets.
 
 ## additionalChunkAssets
 
 `SyncHook`
 
-W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
+W> `additionalChunkAssets` مهمل. استخدم [Compilation.hook.processAssets](#processassets) بدلًا منه، واستخدم إحدى قيم Compilation.PROCESS_ASSETS_STAGE\_\* كخيار stage.
 
-Create additional assets for the chunks.
+ينشئ assets إضافية للـ chunks.
 
 - Callback Parameters: `chunks`
 
@@ -363,22 +348,21 @@ Create additional assets for the chunks.
 
 `SyncBailHook`
 
-Called to determine whether or not generate chunks assets. Returning anything `!== false` will allow chunk assets generation.
+يُستدعى لتحديد هل يجب توليد chunk assets أم لا. إرجاع أي شيء `!== false` سيسمح بتوليد chunk assets.
 
 ## beforeChunkAssets
 
 `SyncHook`
 
-Executed before creating the chunks assets.
+يُنفّذ قبل إنشاء chunk assets.
 
 ## additionalAssets
 
 `AsyncSeriesHook`
 
-W> `additionalAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) hook instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
+W> `additionalAssets` مهمل. استخدم hook [Compilation.hook.processAssets](#processassets) بدلًا منه، واستخدم إحدى قيم Compilation.PROCESS_ASSETS_STAGE\_\* كخيار stage.
 
-Create additional assets for the compilation. This hook can be used to download
-an image, for example:
+ينشئ assets إضافية للـ compilation. يمكن استخدام هذا hook لتنزيل صورة، مثلًا:
 
 ```js
 compilation.hooks.additionalAssets.tapAsync("MyPlugin", (callback) => {
@@ -399,15 +383,13 @@ compilation.hooks.additionalAssets.tapAsync("MyPlugin", (callback) => {
 
 `AsyncSeriesHook`
 
-W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
+W> `optimizeChunkAssets` مهمل. استخدم [Compilation.hook.processAssets](#processassets) بدلًا منه، واستخدم إحدى قيم Compilation.PROCESS_ASSETS_STAGE\_\* كخيار stage.
 
-Optimize any chunk assets. The assets are stored in `compilation.assets`. A
-`Chunk` has a property `files` which points to all files created by a chunk.
-Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
+يحسّن أي chunk assets. يتم تخزين assets داخل `compilation.assets`. يملك `Chunk` خاصية `files` تشير إلى كل الملفات التي أنشأها chunk. وأي chunk assets إضافية تُخزن داخل `compilation.additionalChunkAssets`.
 
 - Callback Parameters: `chunks`
 
-Here's an example that adds a banner to each chunk.
+هذا مثال يضيف banner لكل chunk.
 
 ```js
 compilation.hooks.optimizeChunkAssets.tapAsync(
@@ -432,13 +414,13 @@ compilation.hooks.optimizeChunkAssets.tapAsync(
 
 `SyncHook`
 
-W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
+W> `afterOptimizeChunkAssets` مهمل. استخدم [Compilation.hook.processAssets](#processassets) بدلًا منه، واستخدم إحدى قيم Compilation.PROCESS_ASSETS_STAGE\_\* كخيار stage.
 
-The chunk assets have been optimized.
+تم تحسين chunk assets.
 
 - Callback Parameters: `chunks`
 
-Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
+هذا مثال plugin من [@boopathi](https://github.com/boopathi) يطبع بالضبط ما دخل في كل chunk.
 
 ```js
 compilation.hooks.afterOptimizeChunkAssets.tap("MyPlugin", (chunks) => {
@@ -456,9 +438,9 @@ compilation.hooks.afterOptimizeChunkAssets.tap("MyPlugin", (chunks) => {
 
 `AsyncSeriesHook`
 
-W> `optimizeAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) hook instead)
+W> `optimizeAssets` مهمل. استخدم hook [Compilation.hook.processAssets](#processassets) بدلًا منه.
 
-Optimize all assets stored in `compilation.assets`.
+يحسّن كل assets المخزنة داخل `compilation.assets`.
 
 - Callback Parameters: `assets`
 
@@ -466,9 +448,9 @@ Optimize all assets stored in `compilation.assets`.
 
 `SyncHook`
 
-W> `afterOptimizeAssets` is deprecated (use the [Compilation.hook.afterProcessAssets](#afterprocessassets) hook instead)
+W> `afterOptimizeAssets` مهمل. استخدم hook [Compilation.hook.afterProcessAssets](#afterprocessassets) بدلًا منه.
 
-The assets have been optimized.
+تم تحسين assets.
 
 - Callback Parameters: `assets`
 
@@ -476,25 +458,25 @@ The assets have been optimized.
 
 `AsyncSeriesHook`
 
-Asset processing.
+معالجة assets.
 
 **Hook parameters:**
 
-- `name: string` — a name of the plugin
-- `stage: Stage` — a stage to tap into (see the [list of supported stages](#list-of-asset-processing-stages) below)
-- `additionalAssets?: true | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
+- `name: string` — اسم plugin.
+- `stage: Stage` — المرحلة التي ستدخل إليها. راجع [قائمة المراحل المدعومة](#list-of-asset-processing-stages) أدناه.
+- `additionalAssets?: true | (assets, [callback]) => (void | Promise<void>)` — callback للـ assets الإضافية. راجع [أدناه](#additional-assets).
 
 **Callback parameters:**
 
-- `assets: { [pathname: string]: Source }` — a plain object, where key is the asset's pathname, and the value is data of the asset represented by the [`Source`](https://github.com/webpack/webpack-sources#source).
+- `assets: { [pathname: string]: Source }` — كائن عادي يكون مفتاحه pathname الخاص بالـ asset، وقيمته بيانات asset ممثلة بواسطة [`Source`](https://github.com/webpack/webpack-sources#source).
 
-**Example:**
+**مثال:**
 
 ```js
 compilation.hooks.processAssets.tap(
   {
     name: "MyPlugin",
-    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS, // see below for more stages
+    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS, // راجع أدناه لمراحل أكثر
   },
   (assets) => {
     console.log("List of assets and their sizes:");
@@ -507,11 +489,11 @@ compilation.hooks.processAssets.tap(
 
 ### Additional assets
 
-In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a callback function that receives `assets` as a first argument:
+بالإضافة إلى `name` و`stage`، يمكنك تمرير خيار `additionalAssets` <Badge text='5.8.0+' />، وهو يقبل إما القيمة `true` أو callback يستقبل `assets` كأول argument:
 
-1. `true` — run the provided callback again for assets added later by plugins.
+1. `true` — يشغّل callback المقدم مرة أخرى للـ assets التي تضيفها plugins لاحقًا.
 
-   In this mode, the callback will be called multiple times: once for assets added prior to the specified stage, and additional times for assets added by plugins later (on this or next stages).
+   في هذا الوضع، قد يُستدعى callback عدة مرات: مرة للـ assets المضافة قبل المرحلة المحددة، ومرات إضافية للـ assets التي تضيفها plugins لاحقًا في هذه المرحلة أو المراحل التالية.
 
    ```js
    compilation.hooks.processAssets.tap(
@@ -521,12 +503,12 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
        additionalAssets: true,
      },
      (assets) => {
-       // this function will be called multiple times with each bulk of assets
+       // ستُستدعى هذه الدالة عدة مرات مع كل دفعة من assets
      },
    );
    ```
 
-2. `(assets, [callback]) => (void | Promise<void>)` — run the specified callback against assets added by plugins later (on this or next stages). The callback must respect the type of the tap method used (e.g. when used with `tapPromise()`, it should return a promise).
+2. `(assets, [callback]) => (void | Promise<void>)` — يشغّل callback المحدد على assets التي تضيفها plugins لاحقًا في هذه المرحلة أو المراحل التالية. يجب أن يحترم callback نوع tap method المستخدمة؛ مثلًا عند استخدام `tapPromise()` يجب أن يرجع promise.
 
    ```js
    compilation.hooks.processAssets.tap(
@@ -534,40 +516,40 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
        name: "MyPlugin",
        stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
        additionalAssets: (assets) => {
-         // this function potentially could be called multiple times for assets added on later stages
+         // قد تُستدعى هذه الدالة عدة مرات للـ assets المضافة في مراحل لاحقة
        },
      },
      (assets) => {
-       // this function will be called once with assets added by plugins on prior stages
+       // ستُستدعى هذه الدالة مرة واحدة للـ assets التي أضافتها plugins في مراحل سابقة
      },
    );
    ```
 
 ### List of asset processing stages
 
-Here's a list of supported stages (in the order of processing):
+هذه قائمة بالمراحل المدعومة، مرتبة حسب ترتيب المعالجة:
 
-- `PROCESS_ASSETS_STAGE_ADDITIONAL` — add additional assets to the compilation.
-- `PROCESS_ASSETS_STAGE_PRE_PROCESS` — basic preprocessing of the assets.
-- `PROCESS_ASSETS_STAGE_DERIVED` — derive new assets from the existing assets.
-- `PROCESS_ASSETS_STAGE_ADDITIONS` — add additional sections to the existing assets e.g. banner or initialization code.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE` — optimize existing assets in a general way.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` — optimize the count of existing assets, e.g. by merging them.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` — optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` — optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
-- `PROCESS_ASSETS_STAGE_DEV_TOOLING` — add development tooling to the assets, e.g. by extracting a source map.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> — optimize the numbers of existing assets, e.g. by inlining assets into other assets.
-- `PROCESS_ASSETS_STAGE_SUMMARIZE` — summarize the list of existing assets.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` — optimize the hashes of the assets, e.g. by generating real hashes of the asset content.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` — optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
-- `PROCESS_ASSETS_STAGE_ANALYSE` — analyze the existing assets.
-- `PROCESS_ASSETS_STAGE_REPORT` — creating assets for the reporting purposes.
+- `PROCESS_ASSETS_STAGE_ADDITIONAL` — إضافة assets إضافية إلى compilation.
+- `PROCESS_ASSETS_STAGE_PRE_PROCESS` — معالجة أولية أساسية للـ assets.
+- `PROCESS_ASSETS_STAGE_DERIVED` — اشتقاق assets جديدة من assets الموجودة.
+- `PROCESS_ASSETS_STAGE_ADDITIONS` — إضافة أقسام إضافية إلى assets الموجودة، مثل banner أو كود تهيئة.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE` — تحسين assets الموجودة بشكل عام.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` — تحسين عدد assets الموجودة، مثل دمجها.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` — تحسين توافق assets الموجودة، مثل إضافة polyfills أو vendor prefixes.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` — تحسين حجم assets الموجودة، مثل التصغير أو حذف المسافات.
+- `PROCESS_ASSETS_STAGE_DEV_TOOLING` — إضافة أدوات تطوير إلى assets، مثل استخراج source map.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> — تحسين عدد assets الموجودة، مثل تضمين assets داخل assets أخرى.
+- `PROCESS_ASSETS_STAGE_SUMMARIZE` — تلخيص قائمة assets الموجودة.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` — تحسين hashes الخاصة بـ assets، مثل توليد hashes حقيقية من محتوى asset.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` — تحسين نقل assets الموجودة، مثل تجهيز ملف مضغوط gzip كـ asset منفصل.
+- `PROCESS_ASSETS_STAGE_ANALYSE` — تحليل assets الموجودة.
+- `PROCESS_ASSETS_STAGE_REPORT` — إنشاء assets لأغراض التقارير.
 
 ### Assets info
 
-The "asset info" metadata is not automatically provided for this hook. If needed, you will have to resolve this metadata manually using the compilation instance and the provided asset pathname. This will be improved in a future version of the webpack.
+لا يتم توفير metadata الخاصة بـ "asset info" تلقائيًا لهذا hook. إذا احتجتها، فعليك حل هذه metadata يدويًا باستخدام instance الخاصة بـ compilation وpathname الخاص بالـ asset. سيتم تحسين هذا في إصدار مستقبلي من webpack.
 
-**Example:**
+**مثال:**
 
 ```js
 compilation.hooks.processAssets.tap(
@@ -577,7 +559,7 @@ compilation.hooks.processAssets.tap(
   (assets) => {
     for (const [pathname, source] of Object.entries(assets)) {
       const assetInfo = compilation.assetsInfo.get(pathname);
-      // @todo: do something with "pathname", "source" and "assetInfo"
+      // @todo: افعل شيئًا مع "pathname" و"source" و"assetInfo"
     }
   },
 );
@@ -587,25 +569,25 @@ compilation.hooks.processAssets.tap(
 
 `SyncHook`
 
-Called after the [`processAssets`](#processassets) hook had finished without error.
+يُستدعى بعد انتهاء hook [`processAssets`](#processassets) بدون خطأ.
 
 ## needAdditionalSeal
 
 `SyncBailHook`
 
-Called to determine if the compilation needs to be unsealed to include other files.
+يُستدعى لتحديد هل يحتاج compilation إلى unseal لإضافة ملفات أخرى.
 
 ## afterSeal
 
 `AsyncSeriesHook`
 
-Executed right after `needAdditionalSeal`.
+يُنفّذ مباشرة بعد `needAdditionalSeal`.
 
 ## chunkHash
 
 `SyncHook`
 
-Triggered to emit the hash for each chunk.
+يُطلق لإصدار hash لكل chunk.
 
 - Callback Parameters: `chunk` `chunkHash`
 
@@ -613,7 +595,7 @@ Triggered to emit the hash for each chunk.
 
 `SyncHook`
 
-Called when an asset from a module was added to the compilation.
+يُستدعى عندما تتم إضافة asset من module إلى compilation.
 
 - Callback Parameters: `module` `filename`
 
@@ -621,7 +603,7 @@ Called when an asset from a module was added to the compilation.
 
 `SyncHook`
 
-Triggered when an asset from a chunk was added to the compilation.
+يُطلق عندما تتم إضافة asset من chunk إلى compilation.
 
 - Callback Parameters: `chunk` `filename`
 
@@ -629,7 +611,7 @@ Triggered when an asset from a chunk was added to the compilation.
 
 `SyncWaterfallHook`
 
-Called to determine the path of an asset.
+يُستدعى لتحديد مسار asset.
 
 - Callback Parameters: `path` `options`
 
@@ -637,29 +619,29 @@ Called to determine the path of an asset.
 
 `SyncBailHook`
 
-Called to determine if an asset needs to be processed further after being emitted.
+يُستدعى لتحديد ما إذا كان asset يحتاج معالجة إضافية بعد إصداره.
 
 ## childCompiler
 
 `SyncHook`
 
-Executed after setting up a child compiler.
+يُنفّذ بعد إعداد child compiler.
 
 - Callback Parameters: `childCompiler` `compilerName` `compilerIndex`
 
 ## normalModuleLoader
 
-Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
+منذ webpack v5، تمت إزالة hook المسمى `normalModuleLoader`. للوصول إلى loader الآن، استخدم `NormalModule.getCompilationHooks(compilation).loader` بدلًا منه.
 
 ## statsPreset
 
 `HookMap`
 
-This HookMap is like a list of actions that gets triggered when a preset is used. It takes in an options object. When a plugin manages a preset, it should change settings in this object carefully without replacing existing ones.
+هذا HookMap يشبه قائمة إجراءات تُطلق عند استخدام preset. يستقبل كائن options. عندما يدير plugin preset، يجب أن يغير الإعدادات داخل هذا الكائن بحذر بدون استبدال الإعدادات الموجودة.
 
 - Callback Parameters: `options` `context`
 
-Here's an illustrative plugin example:
+هذا مثال توضيحي لـ plugin:
 
 ```js
 compilation.hooks.statsPreset.for("my-preset").tap("MyPlugin", (options) => {
@@ -667,17 +649,17 @@ compilation.hooks.statsPreset.for("my-preset").tap("MyPlugin", (options) => {
 });
 ```
 
-This plugin ensures that for the preset `'my-preset'`, if the `all` option is undefined, it defaults to true.
+يضمن هذا plugin أنه بالنسبة للـ preset المسمى `'my-preset'`، إذا كان خيار `all` غير معرّف، فستصبح قيمته الافتراضية `true`.
 
 ## statsNormalize
 
 `SyncHook`
 
-This hook is used to transform an options object into a consistent format that can be easily used by subsequent hooks. It also ensures that missing options are set to their default values.
+يُستخدم هذا hook لتحويل كائن options إلى صيغة متسقة يمكن استخدامها بسهولة بواسطة hooks اللاحقة. كما يضمن ضبط الخيارات الناقصة على قيمها الافتراضية.
 
 - Callback Parameters: `options` `context`
 
-Here's an illustrative plugin example:
+هذا مثال توضيحي لـ plugin:
 
 ```js
 compilation.hooks.statsNormalize.tap("MyPlugin", (options) => {
@@ -687,11 +669,11 @@ compilation.hooks.statsNormalize.tap("MyPlugin", (options) => {
 });
 ```
 
-In this plugin, if the `myOption` is missing, it sets it to an empty array. Additionally, it ensures that `myOption` is always an array even if it was originally defined as a single value.
+في هذا plugin، إذا كان `myOption` ناقصًا، يضبطه على array فارغة. كذلك يتأكد من أن `myOption` دائمًا array حتى لو كان معرّفًا في الأصل كقيمة واحدة.
 
 ## statsFactory
 
-This hook provides access to the [`StatsFactory` class](https://github.com/webpack/webpack/blob/main/lib/stats/StatsFactory.js) for specific options.
+يوفر هذا hook وصولًا إلى الصنف [`StatsFactory`](https://github.com/webpack/webpack/blob/main/lib/stats/StatsFactory.js) لخيارات محددة.
 
 - Callback Parameters: `statsFactory` `options`
 
@@ -701,9 +683,9 @@ This hook provides access to the [`StatsFactory` class](https://github.com/webpa
 
 - Callback Parameters: `object` `data` `context`
 
-`data` contains the class. object is an object to which properties should be added. `context` provides contextual information, such as classes on the path.
+تحتوي `data` على الصنف. أما `object` فهو الكائن الذي يجب إضافة الخصائص إليه. ويوفر `context` معلومات سياقية، مثل الأصناف الموجودة في المسار.
 
-Example:
+مثال:
 
 ```js
 compilation.hooks.statsFactory.tap("MyPlugin", (statsFactory, options) => {
@@ -719,13 +701,13 @@ compilation.hooks.statsFactory.tap("MyPlugin", (statsFactory, options) => {
 
 `HookMap`
 
-Called with the result on each level.
+يُستدعى مع النتيجة على كل مستوى.
 
 - Callback Parameters: `result` `context`
 
 ## statsPrinter
 
-This hook provides access to the [`StatsPrinter` class](https://github.com/webpack/webpack/blob/main/lib/stats/StatsPrinter.js) for specific options.
+يوفر هذا hook وصولًا إلى الصنف [`StatsPrinter`](https://github.com/webpack/webpack/blob/main/lib/stats/StatsPrinter.js) لخيارات محددة.
 
 - Callback Parameters: `statsPrinter` `options`
 
@@ -733,7 +715,7 @@ This hook provides access to the [`StatsPrinter` class](https://github.com/webpa
 
 `HookMap`
 
-This hook is called when a part should be printed.
+يُستدعى هذا hook عندما يجب طباعة جزء معين.
 
 - Callback Parameters: `object` `context`
 
@@ -741,13 +723,13 @@ This hook is called when a part should be printed.
 
 `HookMap`
 
-This hook is called for the resulting string for a part.
+يُستدعى هذا hook للنص الناتج عن جزء معين.
 
 - Callback Parameters: `result` `context`
 
 ## CssModulesPlugin.getCompilationHooks(compilation)
 
-When [`experiments.css`](/configuration/experiments/#experimentscss) is enabled, the internal `CssModulesPlugin` exposes a set of per-compilation hooks for plugin authors. Access them via the static `getCompilationHooks(compilation)` method:
+عند تفعيل [`experiments.css`](/configuration/experiments/#experimentscss)، يعرض `CssModulesPlugin` الداخلي مجموعة hooks لكل compilation لمؤلفي plugins. يمكنك الوصول إليها عبر static method باسم `getCompilationHooks(compilation)`:
 
 ```js
 const webpack = require("webpack");
@@ -757,13 +739,13 @@ class MyCssPlugin {
     compiler.hooks.thisCompilation.tap("MyCssPlugin", (compilation) => {
       const hooks =
         webpack.css.CssModulesPlugin.getCompilationHooks(compilation);
-      // tap into hooks here
+      // ادخل إلى hooks هنا
     });
   }
 }
 ```
 
-W> These hooks are only registered when `experiments.css` is enabled and may evolve while the CSS feature is experimental.
+W> لا تُسجل هذه hooks إلا عند تفعيل `experiments.css`، وقد تتغير بينما ميزة CSS ما زالت تجريبية.
 
 ### orderModules
 
@@ -771,9 +753,9 @@ W> These hooks are only registered when `experiments.css` is enabled and may evo
 
 `SyncBailHook<[Chunk, Module[], Compilation], Module[] | undefined>`
 
-Called once per CSS source type (CSS imports and CSS modules) with the chunk's modules pre-sorted by full module name. Taps may return an ordered `Module[]` to override webpack's default import-order topological sort, or return `undefined` to keep the default order.
+يُستدعى مرة واحدة لكل نوع CSS source، أي CSS imports وCSS modules، مع modules الخاصة بالـ chunk مرتبة مسبقًا حسب full module name. يمكن لـ taps إرجاع `Module[]` مرتبة لتجاوز topological sort الافتراضي لترتيب imports في webpack، أو إرجاع `undefined` للإبقاء على الترتيب الافتراضي.
 
-The hook is the recommended escape hatch when webpack's topological sort surfaces a `Conflicting order between css ...` warning that cannot be resolved by restructuring imports. Returning the pre-sorted array (or any deterministic order) lets the build pick a stable order without changing application code.
+هذا hook هو المخرج الموصى به عندما يظهر ترتيب webpack الطوبولوجي تحذير `Conflicting order between css ...` ولا يمكن حله بإعادة هيكلة imports. إرجاع array المرتبة مسبقًا، أو أي ترتيب deterministic، يسمح للـ build باختيار ترتيب ثابت بدون تغيير كود التطبيق.
 
 - Callback Parameters: `chunk` `modules` `compilation`
 
@@ -788,9 +770,9 @@ class CssOrderByPathPlugin {
         const hooks =
           webpack.css.CssModulesPlugin.getCompilationHooks(compilation);
 
-        // Modules arrive pre-sorted by full module name; return as-is to
-        // enforce a deterministic file-path order across rebuilds and
-        // side-step the conflicting-order warning.
+        // تصل modules مرتبة مسبقًا حسب full module name. أرجعها كما هي
+        // لفرض ترتيب deterministic حسب مسار الملف عبر rebuilds
+        // وتجنب تحذير conflicting-order.
         hooks.orderModules.tap(
           "CssOrderByPathPlugin",
           (_chunk, modules) => modules,
@@ -801,4 +783,4 @@ class CssOrderByPathPlugin {
 }
 ```
 
-The hook is a `SyncBailHook`, so the first tap to return a non-`undefined` value wins. Subsequent taps are not invoked for that call.
+الـ hook من نوع `SyncBailHook`، لذلك أول tap يرجع قيمة غير `undefined` يفوز. لا يتم استدعاء taps اللاحقة لذلك الاستدعاء.

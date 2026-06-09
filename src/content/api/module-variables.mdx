@@ -1,19 +1,9 @@
 ---
-title: Module Variables
+title: متغيرات Module
 group: Modules
 sort: 8
 contributors:
-  - skipjack
-  - sokra
-  - ahmehri
-  - tbroadley
-  - byzyk
-  - EugeneHlushko
-  - wizardofhogwarts
-  - anikethsaha
-  - chenxsan
-  - jamesgeorge007
-  - snitin315
+  - RlxChap2
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -21,19 +11,19 @@ related:
     url: https://en.wikipedia.org/wiki/Asynchronous_module_definition
 ---
 
-This section covers all **variables** available in code compiled with webpack. Modules will have access to certain data from the compilation process through `module` and other variables.
+يغطي هذا القسم كل **المتغيرات** المتاحة داخل الكود الذي تم تجميعه بواسطة webpack. تستطيع modules الوصول إلى بعض بيانات عملية compilation عبر `module` ومتغيرات أخرى.
 
 ## module.loaded (NodeJS)
 
-This is `false` if the module is currently executing, and `true` if the sync execution has finished.
+تكون قيمته `false` إذا كان module يُنفّذ حاليًا، وتكون `true` إذا اكتمل التنفيذ المتزامن.
 
 ## module.hot (webpack-specific)
 
-Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replacement) is enabled and provides an interface to the process. See the [HMR API page](/api/hot-module-replacement) for details.
+يوضح ما إذا كانت [Hot Module Replacement](/concepts/hot-module-replacement) مفعّلة أم لا، ويوفر واجهة للتعامل معها. راجع صفحة [HMR API](/api/hot-module-replacement) للتفاصيل.
 
 ## module.id (CommonJS)
 
-The ID of the current module.
+معرّف module الحالي.
 
 ```js
 console.log(import.meta.url);
@@ -41,19 +31,19 @@ console.log(import.meta.url);
 
 ## export default
 
-Defines the value that will be returned when a consumer makes a `import` call to the module (defaults to a new object).
+يحدد القيمة التي سترجع عندما يستورد مستخدم آخر هذا module باستخدام `import`. القيمة الافتراضية تكون كائنًا جديدًا.
 
 ```js
 export default function doSomething() {
-  // Do something...
+  // افعل شيئًا...
 }
 ```
 
-W> This CANNOT be used in an asynchronous function.
+W> لا يمكن استخدام هذا داخل دالة غير متزامنة.
 
 ## exports (CommonJS)
 
-Named exports allow you to export multiple variables, functions, or objects from a single module. Unlike a default export, you must use the exact name when importing these values.
+تسمح named exports بتصدير عدة متغيرات أو دوال أو كائنات من module واحد. بخلاف default export، يجب استخدام الاسم نفسه تمامًا عند استيراد هذه القيم.
 
 ```js
 export const someValue = 42;
@@ -61,70 +51,70 @@ export const anObject = {
   x: 123,
 };
 export function doSomething() {
-  // Do something
+  // افعل شيئًا
 }
 ```
 
 ## global (NodeJS)
 
-See [node.js global](https://nodejs.org/api/globals.html#globals_global).
+راجع [global في node.js](https://nodejs.org/api/globals.html#globals_global).
 
-For compatibility reasons webpack polyfills the `global` variable by default.
+لأسباب توافقية، يضيف webpack polyfill للمتغير `global` افتراضيًا.
 
 ## \_\_dirname (NodeJS)
 
-Depending on the configuration option `node.__dirname`:
+بحسب خيار الإعداد `node.__dirname`:
 
-- `false`: Not defined
-- `mock`: equal to `'/'`
-- `true`: [node.js \_\_dirname](https://nodejs.org/api/globals.html#globals_dirname)
+- `false`: غير معرّف.
+- `mock`: يساوي `'/'`.
+- `true`: [\_\_dirname في node.js](https://nodejs.org/api/globals.html#globals_dirname).
 
-If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
+إذا استُخدم داخل expression تتم قراءته بواسطة Parser، فسيتم التعامل مع خيار الإعداد كأنه `true`.
 
 ## import.meta
 
-The `import.meta` exposes context-specific metadata to a JavaScript module, such as the URL of the module. It is only available in [ESM](/guides/ecma-script-modules/).
+يعرض `import.meta` بيانات وصفية مرتبطة بسياق JavaScript module، مثل URL الخاص بالـ module. وهو متاح فقط في [ESM](/guides/ecma-script-modules/).
 
-Please note that webpack does not support direct access to `import.meta`. Instead, you should access its properties or use destructuring assignment. E.g.,
+انتبه إلى أن webpack لا يدعم الوصول المباشر إلى `import.meta`. بدلًا من ذلك، استخدم خصائصه أو استخدم destructuring assignment. مثلًا:
 
 ```js
-// webpack will warn about this
+// سيعرض webpack تحذيرًا لهذا الاستخدام
 Object.keys(import.meta);
 
-// fine to use
+// هذا الاستخدام صحيح
 console.log(import.meta.url);
 const { url } = import.meta;
 ```
 
 ### import.meta.url
 
-Returns the absolute `file:` URL of the module.
+ترجع URL مطلقًا بصيغة `file:` للـ module.
 
 **src/index.js**
 
 ```js
-console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
+console.log(import.meta.url); // يخرج شيئًا مثل `file:///path/to/your/project/src/index.js`
 ```
 
 ### import.meta.webpack
 
-Returns the webpack version.
+ترجع إصدار webpack.
 
 **src/index.js**
 
 ```js
-console.log(import.meta.webpack); // output `5` for webpack 5
+console.log(import.meta.webpack); // يخرج `5` في webpack 5
 ```
 
 ### import.meta.webpackHot
 
-Webpack specific. An alias for [`module.hot`](#modulehot-webpack-specific), however `import.meta.webpackHot` can be used in [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) while `module.hot` can't.
+خاص بـ webpack. هو alias لـ [`module.hot`](#modulehot-webpack-specific)، لكن يمكن استخدام `import.meta.webpackHot` داخل [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm)، بينما لا يمكن استخدام `module.hot` هناك.
 
 ### import.meta.webpackContext
 
-Returns the same value as `require.context` but only for `javascript/auto` and `javascript/esm`.
+ترجع القيمة نفسها التي ترجعها `require.context`، لكنها تعمل فقط مع `javascript/auto` و`javascript/esm`.
 
-- Type:
+- النوع:
 
   ```ts
   (
@@ -143,8 +133,8 @@ Returns the same value as `require.context` but only for `javascript/auto` and `
   ) => webpack.Context;
   ```
 
-- Available: 5.70.0+
-- Example:
+- متاح منذ: 5.70.0+
+- مثال:
 
   ```js
   const contextRequire = import.meta.webpackContext(".", {
@@ -159,7 +149,7 @@ Returns the same value as `require.context` but only for `javascript/auto` and `
 
 <Badge text="5.103.0+" />
 
-Returns a boolean indicating whether the current module is an entry point.
+ترجع boolean يوضح ما إذا كان module الحالي هو entry point.
 
 **src/index.js** (entry point)
 
@@ -167,19 +157,19 @@ Returns a boolean indicating whether the current module is an entry point.
 console.log(import.meta.main); // true
 ```
 
-**src/utils.js** (not an entry point)
+**src/utils.js** (ليس entry point)
 
 ```js
 console.log(import.meta.main); // false
 ```
 
-This is useful for conditional logic that should only run in entry modules, similar to Node.js's `require.main === module` check.
+هذا مفيد للمنطق الشرطي الذي يجب أن يعمل فقط داخل entry modules، بطريقة تشبه فحص `require.main === module` في Node.js.
 
 ### import.meta.env
 
 <Badge text="5.103.0+" />
 
-Access environment variables from multiple sources. `import.meta.env` is an object that behaves similarly to `process.env`, allowing you to access environment variables defined through various webpack plugins and configuration options.
+تسمح بالوصول إلى environment variables من مصادر متعددة. `import.meta.env` هو object يتصرف بطريقة قريبة من `process.env`، مما يتيح لك الوصول إلى متغيرات البيئة المعرّفة عبر plugins وإعدادات webpack المختلفة.
 
 **webpack.config.js**
 
@@ -187,16 +177,16 @@ Access environment variables from multiple sources. `import.meta.env` is an obje
 import webpack from "webpack";
 
 export default {
-  mode: "production", // NODE_ENV is automatically set to "production"
+  mode: "production", // يتم ضبط NODE_ENV تلقائيًا إلى "production"
   dotenv: {
-    prefix: "WEBPACK_", // Only expose variables with WEBPACK_ prefix
+    prefix: "WEBPACK_", // اكشف فقط المتغيرات التي تبدأ بالبادئة WEBPACK_
   },
   plugins: [
-    // EnvironmentPlugin exposes variables from process.env
+    // يكشف EnvironmentPlugin المتغيرات من process.env
     new webpack.EnvironmentPlugin({
       API_URL: "https://api.example.com",
     }),
-    // DefinePlugin allows custom definitions
+    // يسمح DefinePlugin بتعريفات مخصصة
     new webpack.DefinePlugin({
       "import.meta.env.CUSTOM_VAR": JSON.stringify("custom_value"),
     }),
@@ -207,55 +197,55 @@ export default {
 **src/index.js**
 
 ```js
-// Access environment variables
-console.log(import.meta.env.NODE_ENV); // "production" (from mode)
-console.log(import.meta.env.API_URL); // Value from EnvironmentPlugin or process.env
-console.log(import.meta.env.CUSTOM_VAR); // "custom_value" (from DefinePlugin)
+// الوصول إلى environment variables
+console.log(import.meta.env.NODE_ENV); // "production" من mode
+console.log(import.meta.env.API_URL); // قيمة من EnvironmentPlugin أو process.env
+console.log(import.meta.env.CUSTOM_VAR); // "custom_value" من DefinePlugin
 
-// Type checking
+// فحص النوع
 console.log(typeof import.meta.env); // "object"
 
-// Truthy check
+// فحص truthy
 if (import.meta.env) {
-  // import.meta.env is truthy
+  // import.meta.env قيمته truthy
 }
 
-// Accessing non-existent properties returns undefined
+// الوصول إلى خصائص غير موجودة يرجع undefined
 if (!import.meta.env.NOT_EXIST) {
-  // NOT_EXIST is undefined/falsy
+  // NOT_EXIST تساوي undefined/falsy
 }
 
-// Destructuring assignment
+// destructuring assignment
 const { NODE_ENV, API_URL } = import.meta.env;
 ```
 
-**Sources of environment variables:**
+**مصادر environment variables:**
 
-1. **`mode` option**: Automatically sets `import.meta.env.NODE_ENV` based on the webpack mode (`development`, `production`, or `none`).
+1. **خيار `mode`**: يضبط `import.meta.env.NODE_ENV` تلقائيًا بناءً على وضع webpack، مثل `development` أو `production` أو `none`.
 
-2. **[`EnvironmentPlugin`](/plugins/environment-plugin)**: Exposes variables from `process.env` or provides default values.
+2. **[`EnvironmentPlugin`](/plugins/environment-plugin)**: يكشف المتغيرات من `process.env` أو يوفر قيمًا افتراضية.
 
-3. **[`DotenvPlugin`](/configuration/dotenv)**: Loads variables from `.env` files. Only variables with the specified prefix (default: `WEBPACK_`) are exposed.
+3. **[`DotenvPlugin`](/configuration/dotenv)**: يحمّل المتغيرات من ملفات `.env`. لا تُكشف إلا المتغيرات التي تملك البادئة المحددة، والقيمة الافتراضية هي `WEBPACK_`.
 
-4. **[`DefinePlugin`](/plugins/define-plugin)**: Allows custom definitions using the `"import.meta.env.*"` pattern.
+4. **[`DefinePlugin`](/plugins/define-plugin)**: يسمح بتعريفات مخصصة باستخدام النمط `"import.meta.env.*"`.
 
-T> Variables from different sources are merged together. If the same variable is defined in multiple sources, the order of precedence depends on plugin execution order.
+T> يتم دمج المتغيرات من المصادر المختلفة معًا. إذا عُرّف المتغير نفسه في أكثر من مصدر، فترتيب الأولوية يعتمد على ترتيب تنفيذ plugins.
 
-T> `import.meta.env` behaves like `process.env` - it's an object, supports `typeof` checks, and accessing non-existent properties returns `undefined`.
+T> يتصرف `import.meta.env` مثل `process.env`: هو object، ويدعم فحوصات `typeof`، والوصول إلى خصائص غير موجودة يرجع `undefined`.
 
 ## \_\_filename (NodeJS)
 
-Depending on the configuration option `node.__filename`:
+بحسب خيار الإعداد `node.__filename`:
 
-- `false`: Not defined
-- `mock`: equal to `'/index.js'`
-- `true`: [node.js \_\_filename](https://nodejs.org/api/globals.html#globals_filename)
+- `false`: غير معرّف.
+- `mock`: يساوي `'/index.js'`.
+- `true`: [\_\_filename في node.js](https://nodejs.org/api/globals.html#globals_filename).
 
-If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
+إذا استُخدم داخل expression تتم قراءته بواسطة Parser، فسيتم التعامل مع خيار الإعداد كأنه `true`.
 
 ## \_\_resourceQuery (webpack-specific)
 
-The resource query of the current module. If the following `import` call was made, then the query string would be available in `file.js`.
+يمثل resource query الخاص بالـ module الحالي. إذا كان لديك الاستدعاء التالي، فستكون query string متاحة داخل `file.js`.
 
 ```js
 import "file.js?test";
@@ -269,21 +259,21 @@ __resourceQuery === "?test";
 
 ## \_\_webpack_public_path\_\_ (webpack-specific)
 
-Equals the configuration option's `output.publicPath`.
+يساوي خيار الإعداد `output.publicPath`.
 
 ## \_\_webpack_require\_\_ (webpack-specific)
 
-The raw require function. This expression isn't parsed by the Parser for dependencies.
+دالة `require` الخام. لا يقرأ Parser هذا التعبير لاستخراج dependencies.
 
-W> When webpack bundles are bundled again (e.g., when a previously bundled output is used as input), the [`CompatibilityPlugin`](/plugins/internal-plugins/#compatibilityplugin) will rename `__webpack_require__` from the previous bundle to avoid conflicts (e.g., `__nested_webpack_require_*`). In such cases, use [`__webpack_global__`](#__webpack_global__-webpack-specific) instead, which ensures you can always access the current compilation's `__webpack_require__` function.
+W> عندما تُحزّم bundles الخاصة بـ webpack مرة أخرى، مثل استخدام output محزّم سابقًا كـ input، سيعيد [`CompatibilityPlugin`](/plugins/internal-plugins/#compatibilityplugin) تسمية `__webpack_require__` القادم من bundle السابق لتجنب التعارضات، مثل `__nested_webpack_require_*`. في هذه الحالات، استخدم [`__webpack_global__`](#__webpack_global__-webpack-specific) بدلًا منه، فهو يضمن الوصول دائمًا إلى دالة `__webpack_require__` الخاصة بالـ compilation الحالي.
 
 ## \_\_webpack_chunk_load\_\_ (webpack-specific)
 
-The internal chunk loading function. Takes one argument:
+دالة تحميل chunk الداخلية. تأخذ argument واحدًا:
 
-- `chunkId` The id for the chunk to load.
+- `chunkId` معرّف chunk المطلوب تحميله.
 
-Example to load chunks from alternate public path when one failed:
+مثال لتحميل chunks من public path بديل عند فشل أحد المسارات:
 
 ```js
 const originalLoad = __webpack_chunk_load__;
@@ -301,7 +291,7 @@ __webpack_chunk_load__ = async (id) => {
   throw error;
 };
 import("./module-a").then((moduleA) => {
-  // now webpack will use the custom __webpack_chunk_load__ to load chunk
+  // الآن سيستخدم webpack دالة __webpack_chunk_load__ المخصصة لتحميل chunk
 });
 ```
 
@@ -309,29 +299,29 @@ import("./module-a").then((moduleA) => {
 
 <Badge text="5.68.0+" />
 
-It provides access to the current `module`. `module` is not available in strict ESM.
+يوفر وصولًا إلى `module` الحالي. لا يكون `module` متاحًا داخل strict ESM.
 
 ## \_\_webpack_module\_\_.id (webpack-specific)
 
 <Badge text="5.68.0+" />
 
-It provides access to the ID of current `module` (`module.id`). `module` is not available in strict ESM.
+يوفر وصولًا إلى ID الخاص بالـ `module` الحالي، أي `module.id`. لا يكون `module` متاحًا داخل strict ESM.
 
 ## \_\_webpack_modules\_\_ (webpack-specific)
 
-Access to the internal object of all modules.
+يوفر وصولًا إلى الكائن الداخلي الذي يحتوي على كل modules.
 
 ## \_\_webpack_hash\_\_ (webpack-specific)
 
-It provides access to the hash of the compilation.
+يوفر وصولًا إلى hash الخاص بالـ compilation.
 
 ## \_\_webpack_get_script_filename\_\_ (webpack-specific)
 
 `function (chunkId)`
 
-It provides filename of the chunk by its id.
+يوفر اسم ملف chunk من خلال id الخاص به.
 
-It is assignable, which allows changing the filename used by the runtime. For example, it can be used to determine the final path when loading chunks.
+يمكن إعادة تعيينه، وهذا يسمح بتغيير اسم الملف الذي يستخدمه runtime. مثلًا، يمكن استخدامه لتحديد المسار النهائي عند تحميل chunks.
 
 ```js
 const oldFn = __webpack_get_script_filename__;
@@ -344,13 +334,13 @@ __webpack_get_script_filename__ = (chunkId) => {
 
 ## \_\_non_webpack_require\_\_ (webpack-specific)
 
-Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
+ينشئ دالة `require` لا يقرأها webpack. يمكن استخدامها لعمل أشياء متقدمة مع دالة require عامة إذا كانت متاحة.
 
 ## \_\_webpack_global\_\_ (webpack-specific)
 
 <Badge text="5.104.0+" />
 
-An alias for [`__webpack_require__`](#__webpack_require__-webpack-specific). When webpack bundles are bundled again (e.g., when a previously bundled output is used as input), the [`CompatibilityPlugin`](/plugins/internal-plugins/#compatibilityplugin) will rename `__webpack_require__` from the previous bundle to avoid conflicts. `__webpack_global__` ensures you can always access the current compilation's `__webpack_require__` function.
+هو alias لـ [`__webpack_require__`](#__webpack_require__-webpack-specific). عندما تُحزّم bundles الخاصة بـ webpack مرة أخرى، مثل استخدام output محزّم سابقًا كـ input، سيعيد [`CompatibilityPlugin`](/plugins/internal-plugins/#compatibilityplugin) تسمية `__webpack_require__` القادم من bundle السابق لتجنب التعارضات. يضمن `__webpack_global__` الوصول دائمًا إلى دالة `__webpack_require__` الخاصة بالـ compilation الحالي.
 
 **src/module.js**
 
@@ -360,47 +350,47 @@ __webpack_global__.myProperty = "value";
 
 ## \_\_webpack_exports_info\_\_ (webpack-specific)
 
-In modules, `__webpack_exports_info__` is available to allow exports introspection:
+داخل modules، يكون `__webpack_exports_info__` متاحًا للسماح بفحص معلومات exports:
 
-- `__webpack_exports_info__` is always `true`
+- `__webpack_exports_info__` يساوي دائمًا `true`.
 
-- `__webpack_exports_info__.<exportName>.used` is `false` when the export is known to be unused, `true` otherwise
+- `__webpack_exports_info__.<exportName>.used` تكون `false` عندما يكون export معروفًا أنه غير مستخدم، وتكون `true` في غير ذلك.
 
-- `__webpack_exports_info__.<exportName>.useInfo` is
-  - `false` when the export is known to be unused
-  - `true` when the export is known to be used
-  - `null` when the export usage could depend on runtime conditions
-  - `undefined` when no info is available
+- `__webpack_exports_info__.<exportName>.useInfo` تكون:
+  - `false` عندما يكون export معروفًا أنه غير مستخدم.
+  - `true` عندما يكون export معروفًا أنه مستخدم.
+  - `null` عندما قد يعتمد استخدام export على شروط runtime.
+  - `undefined` عندما لا تتوفر معلومات.
 
-- `__webpack_exports_info__.<exportName>.provideInfo` is
-  - `false` when the export is known to be not provided
-  - `true` when the export is known to be provided
-  - `null` when the export provision could depend on runtime conditions
-  - `undefined` when no info is available
+- `__webpack_exports_info__.<exportName>.provideInfo` تكون:
+  - `false` عندما يكون export معروفًا أنه غير مقدّم.
+  - `true` عندما يكون export معروفًا أنه مقدّم.
+  - `null` عندما قد يعتمد تقديم export على شروط runtime.
+  - `undefined` عندما لا تتوفر معلومات.
 
-- Accessing the info from nested exports is possible: i. e. `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
+- يمكن الوصول إلى معلومات nested exports، مثل: `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`.
 
-- Check whether exports can be mangled with `__webpack_exports_info__.<name>.canMangle`
+- افحص ما إذا كان يمكن تغيير أسماء exports باستخدام `__webpack_exports_info__.<name>.canMangle`.
 
 ## \_\_webpack_is_included\_\_ (webpack-specific)
 
 <Badge text="5.16.0+" />
 
-Test whether or not the given module is bundled by webpack.
+يفحص ما إذا كان module المحدد مضمنًا في bundle بواسطة webpack أم لا.
 
 ```js
 if (__webpack_is_included__("./module-a.js")) {
-  // do something
+  // افعل شيئًا
 }
 ```
 
 ## \_\_webpack_base_uri\_\_ (webpack-specific)
 
-Change base URI at runtime.
+يغيّر base URI وقت التشغيل.
 
-- Type: `string`
-- Available: 5.21.0+
-- Example:
+- النوع: `string`
+- متاح منذ: 5.21.0+
+- مثال:
 
   ```js
   __webpack_base_uri__ = "https://example.com";
@@ -408,9 +398,9 @@ Change base URI at runtime.
 
 ## \_\_webpack_runtime_id\_\_
 
-Access the [runtime](/blog/2020-10-10-webpack-5-release/#entry-point-runtime) id of current entry.
+يوفر وصولًا إلى id الخاص بـ [runtime](/blog/2020-10-10-webpack-5-release/#entry-point-runtime) للـ entry الحالي.
 
-This is a webpack specific feature and it's available since webpack 5.25.0.
+هذه ميزة خاصة بـ webpack، وهي متاحة منذ webpack 5.25.0.
 
 **src/index.js**
 
@@ -420,4 +410,4 @@ console.log(__webpack_runtime_id__ === "main");
 
 ## DEBUG (webpack-specific)
 
-Equals the configuration option `debug`.
+يساوي خيار الإعداد `debug`.

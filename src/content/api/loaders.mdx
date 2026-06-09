@@ -1,29 +1,17 @@
 ---
-title: Loader Interface
+title: واجهة Loader
 sort: 5
 contributors:
-  - TheLarkInn
-  - jhnns
-  - tbroadley
-  - byzyk
-  - sokra
-  - EugeneHlushko
-  - jantimon
-  - superburrito
-  - wizardofhogwarts
-  - snitin315
-  - chenxsan
-  - jamesgeorge007
-  - alexeyr
+  - RlxChap2
 ---
 
-A loader is a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
+الـ loader هو JavaScript module يصدّر دالة. يستدعي [loader runner](https://github.com/webpack/loader-runner) هذه الدالة ويمرر لها نتيجة loader السابق أو ملف resource. يملأ webpack و[loader runner](https://github.com/webpack/loader-runner) سياق `this` داخل الدالة بمجموعة دوال مفيدة تسمح للـ loader، من بين أشياء أخرى، بتغيير أسلوب الاستدعاء إلى async أو قراءة query parameters.
 
-The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as a JSON object) may also be passed.
+يُمرر إلى أول loader argument واحد: محتوى ملف resource. ويتوقع compiler نتيجة من آخر loader. يجب أن تكون النتيجة `String` أو `Buffer`، ويتم تحويل Buffer إلى string، وتمثل كود JavaScript المصدري للـ module. ويمكن أيضًا تمرير SourceMap اختياري ككائن JSON.
 
-A single result can be returned in [sync mode](#synchronous-loaders). For multiple results the `this.callback()` must be called and the loader must return `undefined`.
+يمكن إرجاع نتيجة واحدة في [الوضع المتزامن](#synchronous-loaders). أما النتائج المتعددة فتتطلب استدعاء `this.callback()`، ويجب أن يرجع loader القيمة `undefined`.
 
-In [async mode](#asynchronous-loaders) you can return a single result from an `async function`. Alternatively, you may call `this.async()` to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. In this case the loader must return `undefined` and call that callback. This is the only option for multiple results.
+في [الوضع غير المتزامن](#asynchronous-loaders)، يمكنك إرجاع نتيجة واحدة من `async function`. بدلًا من ذلك، يمكنك استدعاء `this.async()` للإشارة إلى أن [loader runner](https://github.com/webpack/loader-runner) يجب أن ينتظر نتيجة غير متزامنة. ترجع هذه الدالة `this.callback()`. في هذه الحالة يجب أن يرجع loader القيمة `undefined` ويستدعي ذلك callback. وهذا هو الخيار الوحيد عند وجود نتائج متعددة.
 
 ```js
 /**
@@ -33,17 +21,17 @@ In [async mode](#asynchronous-loaders) you can return a single result from an `a
  * @param {any} [meta] Meta data, could be anything
  */
 function webpackLoader(content, map, meta) {
-  // code of your webpack loader
+  // كود webpack loader الخاص بك
 }
 ```
 
-## Examples
+## أمثلة
 
-The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](#thiscallback) below.
+تقدم الأقسام التالية أمثلة أساسية لأنواع loaders المختلفة. لاحظ أن parameters المسماة `map` و`meta` اختيارية. راجع [`this.callback`](#thiscallback) أدناه.
 
 ### Synchronous Loaders
 
-Either `return` or `this.callback` can be used to return the transformed `content` synchronously:
+يمكن استخدام `return` أو `this.callback` لإرجاع `content` بعد تحويله بشكل متزامن:
 
 **sync-loader.js**
 
@@ -53,7 +41,7 @@ export default function syncLoader(content, map, meta) {
 }
 ```
 
-The `this.callback` method is more flexible as you pass multiple arguments instead of using `content` only.
+دالة `this.callback` أكثر مرونة لأنك تستطيع تمرير عدة arguments بدل استخدام `content` فقط.
 
 **sync-loader-with-multiple-results.js**
 
@@ -62,13 +50,13 @@ The `this.callback` method is more flexible as you pass multiple arguments inste
 ```js
 export default function syncLoaderWithMultipleResults(content, map, meta) {
   this.callback(null, someSyncOperation(content), map, meta);
-  return; // always return undefined when calling callback()
+  return; // أرجع undefined دائمًا عند استدعاء callback()
 }
 ```
 
 ### Asynchronous Loaders
 
-For asynchronous loaders, you can return the transformed `content` from an `async function`:
+بالنسبة للـ loaders غير المتزامنة، يمكنك إرجاع `content` بعد تحويله من `async function`:
 
 **async-loader.js**
 
@@ -79,7 +67,7 @@ export default async function asyncLoader(content, map, meta) {
 }
 ```
 
-Or you can use [`this.async`](#thisasync) to retrieve the `callback` function:
+أو يمكنك استخدام [`this.async`](#thisasync) للحصول على دالة `callback`:
 
 **async-loader-with-callback.js**
 
@@ -105,11 +93,11 @@ export default function asyncLoaderWithMultipleResults(content, map, meta) {
 }
 ```
 
-T> Loaders were originally designed to work in synchronous loader pipelines, like Node.js (using [enhanced-require](https://github.com/webpack/enhanced-require)), _and_ asynchronous pipelines, like in webpack. However, since expensive synchronous computations are a bad idea in a single-threaded environment like Node.js, we advise making your loader asynchronous if possible. Synchronous loaders are ok if the amount of computation is trivial.
+T> صُممت loaders في الأصل للعمل داخل pipelines متزامنة مثل Node.js باستخدام [enhanced-require](https://github.com/webpack/enhanced-require)، _وكذلك_ داخل pipelines غير متزامنة كما في webpack. لكن بما أن العمليات المتزامنة المكلفة فكرة سيئة في بيئة single-threaded مثل Node.js، ننصح بجعل loader غير متزامنًا إن أمكن. loaders المتزامنة مقبولة إذا كان حجم الحسابات بسيطًا.
 
 ### "Raw" Loader
 
-By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag to `true`, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as a `String` or as a `Buffer`. The compiler converts them between loaders.
+افتراضيًا، يتم تحويل ملف resource إلى نص UTF-8 ثم تمريره إلى loader. عند ضبط flag المسمى `raw` على `true`، سيستقبل loader الـ `Buffer` الخام. يمكن لأي loader أن يعطي نتيجته كـ `String` أو `Buffer`. يحول compiler بينهما عند تمرير النتيجة بين loaders.
 
 **raw-loader.js**
 
@@ -117,19 +105,19 @@ By default, the resource file is converted to a UTF-8 string and passed to the l
 export default function rawLoader(content) {
   assert(content instanceof Buffer);
   return someSyncOperation(content);
-  // return value can be a `Buffer` too
-  // This is also allowed if loader is not "raw"
+  // يمكن أن تكون قيمة الإرجاع `Buffer` أيضًا
+  // وهذا مسموح حتى لو لم يكن loader "raw"
 }
 export const raw = true;
 ```
 
 ### Pitching Loader
 
-Loaders are **always** called from right to left. There are some instances where the loader only cares about the **metadata** behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from **left to right** before the loaders are actually executed (from right to left).
+تُستدعى loaders **دائمًا** من اليمين إلى اليسار. توجد حالات يهتم فيها loader فقط بـ **metadata** وراء request ويمكنه تجاهل نتائج loader السابق. تُستدعى دالة `pitch` في loaders من **اليسار إلى اليمين** قبل تنفيذ loaders فعليًا من اليمين إلى اليسار.
 
-T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module/#ruleenforce) for more details.
+T> يمكن إضافة loaders inline داخل requests وتعطيلها عبر inline prefixes، وهذا يؤثر في ترتيب "pitch" والتنفيذ. راجع [`Rule.enforce`](/configuration/module/#ruleenforce) لمزيد من التفاصيل.
 
-For the following configuration of [`use`](/configuration/module/#ruleuse):
+في إعداد [`use`](/configuration/module/#ruleuse) التالي:
 
 ```js
 export default {
@@ -145,7 +133,7 @@ export default {
 };
 ```
 
-These steps would occur:
+ستحدث الخطوات التالية:
 
 ```diff
 |- a-loader `pitch`
@@ -157,9 +145,9 @@ These steps would occur:
 |- a-loader normal execution
 ```
 
-So why might a loader take advantage of the "pitching" phase?
+لماذا قد يستفيد loader من مرحلة "pitching"؟
 
-First, the `data` passed to the `pitch` method is exposed in the execution phase as well under `this.data` and could be useful for capturing and sharing information from earlier in the cycle.
+أولًا، `data` التي تُمرر إلى دالة `pitch` تكون متاحة أيضًا في مرحلة التنفيذ تحت `this.data`، وقد تفيد لالتقاط معلومات ومشاركتها من مرحلة مبكرة في الدورة.
 
 ```js
 export default function myLoaderName(content) {
@@ -171,7 +159,7 @@ export function pitch(remainingRequest, precedingRequest, data) {
 }
 ```
 
-Second, if a loader delivers a result in the `pitch` method, the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
+ثانيًا، إذا أعطى loader نتيجة داخل دالة `pitch`، تنعكس العملية ويتم تجاوز loaders المتبقية. في المثال السابق، إذا أرجعت دالة `pitch` الخاصة بـ `b-loader` شيئًا:
 
 ```js
 export default function myLoaderName(content) {
@@ -185,7 +173,7 @@ export function pitch(remainingRequest, precedingRequest, data) {
 }
 ```
 
-The steps above would be shortened to:
+ستُختصر الخطوات السابقة إلى:
 
 ```diff
 |- a-loader `pitch`
@@ -193,15 +181,15 @@ The steps above would be shortened to:
 |- a-loader normal execution
 ```
 
-## The Loader Context
+## سياق Loader
 
-The loader context represents the properties that are available inside of a loader assigned to the `this` property.
+يمثل loader context الخصائص المتاحة داخل loader والمربوطة بالخاصية `this`.
 
 ### Example for the loader context
 
-Given the following example, this require call is used:
+في المثال التالي، يتم استخدام require call هذه:
 
-In `/abc/file.js`:
+داخل `/abc/file.js`:
 
 ```js
 import "./loader1?xyz!loader2!./resource?rrr";
@@ -213,16 +201,16 @@ import "./loader1?xyz!loader2!./resource?rrr";
 addContextDependency(directory: string)
 ```
 
-Add a directory as dependency of the loader result.
+يضيف مجلدًا كاعتماد لنتيجة loader.
 
 ### this.addDependency
 
 ```ts
 addDependency(file: string)
-dependency(file: string) // shortcut
+dependency(file: string) // اختصار
 ```
 
-Add an existing file as a dependency of the loader result in order to make them watchable. For example, [`sass-loader`](https://github.com/webpack/sass-loader), [`less-loader`](https://github.com/webpack/less-loader) uses this to recompile whenever any imported `css` file changes.
+يضيف ملفًا موجودًا كاعتماد لنتيجة loader حتى يصبح قابلًا للمراقبة. مثلًا، يستخدم [`sass-loader`](https://github.com/webpack/sass-loader) و[`less-loader`](https://github.com/webpack/less-loader) ذلك لإعادة compilation كلما تغيّر أي ملف `css` مستورد.
 
 ### this.addMissingDependency
 
@@ -230,27 +218,27 @@ Add an existing file as a dependency of the loader result in order to make them 
 addMissingDependency(file: string)
 ```
 
-Add a non-existing file as a dependency of the loader result in order to make them watchable. Similar to `addDependency`, but handles the creation of files during compilation before watchers are attached correctly.
+يضيف ملفًا غير موجود كاعتماد لنتيجة loader حتى يصبح قابلًا للمراقبة. يشبه `addDependency`، لكنه يتعامل مع إنشاء الملفات أثناء compilation قبل إرفاق watchers بشكل صحيح.
 
 ### this.async
 
-Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.
+يخبر [loader-runner](https://github.com/webpack/loader-runner) أن loader ينوي استدعاء callback بشكل غير متزامن. ترجع `this.callback`.
 
 ### this.cacheable
 
-A function that sets the cacheable flag:
+دالة تضبط cacheable flag:
 
 ```ts
 cacheable(flag = true: boolean)
 ```
 
-By default, loader results are flagged as cacheable. Call this method passing `false` to make the loader's result not cacheable.
+افتراضيًا، تُعلّم نتائج loader على أنها قابلة للتخزين المؤقت. استدعِ هذه الدالة مع `false` لجعل نتيجة loader غير قابلة للتخزين المؤقت.
 
-A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have dependencies other than those specified with `this.addDependency`.
+يجب أن يعطي cacheable loader نتيجة deterministic عندما لا تتغير inputs وdependencies. هذا يعني أن loader لا ينبغي أن يملك dependencies غير تلك المحددة عبر `this.addDependency`.
 
 ### this.callback
 
-A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
+دالة يمكن استدعاؤها بشكل متزامن أو غير متزامن لإرجاع عدة نتائج. arguments المتوقعة هي:
 
 ```ts
 this.callback(
@@ -261,14 +249,14 @@ this.callback(
 );
 ```
 
-1. The first argument must be an `Error` or `null`
-2. The second argument is a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
-3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
-4. Optional: The fourth option, ignored by webpack, can be anything (e.g. some metadata).
+1. يجب أن يكون argument الأول `Error` أو `null`.
+2. argument الثاني هو `string` أو [`Buffer`](https://nodejs.org/api/buffer.html).
+3. اختياري: يجب أن يكون argument الثالث source map يمكن قراءتها بواسطة [هذه الحزمة](https://github.com/mozilla/source-map).
+4. اختياري: argument الرابع، الذي يتجاهله webpack، يمكن أن يكون أي شيء، مثل metadata.
 
-T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
+T> قد يكون من المفيد تمرير abstract syntax tree (AST)، مثل [`ESTree`](https://github.com/estree/estree)، كـ argument رابع (`meta`) لتسريع وقت build إذا أردت مشاركة ASTs مشتركة بين loaders.
 
-In case this function is called, you should return undefined to avoid ambiguous loader results.
+إذا استُدعيت هذه الدالة، فيجب إرجاع undefined لتجنب نتائج loader الغامضة.
 
 ### this.clearDependencies
 
@@ -276,17 +264,17 @@ In case this function is called, you should return undefined to avoid ambiguous 
 clearDependencies();
 ```
 
-Remove all dependencies of the loader result, even initial dependencies and those of other loaders. Consider using `pitch`.
+يزيل كل dependencies الخاصة بنتيجة loader، حتى dependencies الأولية وتلك الخاصة بـ loaders أخرى. فكر في استخدام `pitch`.
 
 ### this.context
 
-**The directory of the module.** Can be used as a context for resolving other stuff.
+**مجلد module.** يمكن استخدامه كـ context لحل أشياء أخرى.
 
-In [the example](#example-for-the-loader-context): `/abc` because `resource.js` is in this directory
+في [المثال](#example-for-the-loader-context): `/abc` لأن `resource.js` موجود داخل هذا المجلد.
 
 ### this.data
 
-A data object shared between the pitch and the normal phase.
+كائن بيانات مشترك بين مرحلة pitch والمرحلة العادية.
 
 ### this.emitError
 
@@ -294,7 +282,7 @@ A data object shared between the pitch and the normal phase.
 emitError(error: Error)
 ```
 
-Emit an error that also can be displayed in the output.
+يصدر خطأ يمكن عرضه أيضًا في output.
 
 ```bash
 ERROR in ./src/lib.js (./src/loader.js!./src/lib.js)
@@ -303,7 +291,7 @@ Here is an Error!
  @ ./src/index.js 1:0-25
 ```
 
-T> Unlike throwing an Error directly, it will NOT interrupt the compilation process of the current module.
+T> بخلاف رمي Error مباشرة، لن يقطع هذا عملية compilation الخاصة بالـ module الحالي.
 
 ### this.emitFile
 
@@ -311,7 +299,7 @@ T> Unlike throwing an Error directly, it will NOT interrupt the compilation proc
 emitFile(name: string, content: Buffer|string, sourceMap: {...})
 ```
 
-Emit a file. This is webpack-specific.
+يصدر ملفًا. هذا خاص بـ webpack.
 
 ### this.emitWarning
 
@@ -319,7 +307,7 @@ Emit a file. This is webpack-specific.
 emitWarning(warning: Error)
 ```
 
-Emit a warning that will be displayed in the output like the following:
+يصدر تحذيرًا سيظهر في output بالشكل التالي:
 
 ```bash
 WARNING in ./src/lib.js (./src/loader.js!./src/lib.js)
@@ -328,50 +316,50 @@ Here is a Warning!
  @ ./src/index.js 1:0-25
 ```
 
-T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
+T> لاحظ أن التحذيرات لن تُعرض إذا تم ضبط `stats.warnings` على `false`، أو إذا استُخدم إعداد omit آخر في `stats` مثل `none` أو `errors-only`. راجع [إعدادات stats presets](/configuration/stats/#stats-presets).
 
 ### this.environment
 
-Check what kind of ES-features may be used in the generated runtime-code.
+يفحص نوع ميزات ES التي يمكن استخدامها في runtime-code المولّد.
 
-E.g.,
+مثال:
 
 ```json
 {
-  // The environment supports arrow functions ('() => { ... }').
+  // تدعم البيئة arrow functions مثل '() => { ... }'
   "arrowFunction": true,
-  // The environment supports BigInt as literal (123n).
+  // تدعم البيئة BigInt كقيمة literal مثل 123n
   "bigIntLiteral": false,
-  // The environment supports const and let for variable declarations.
+  // تدعم البيئة const وlet في تعريف المتغيرات
   "const": true,
-  // The environment supports destructuring ('{ a, b } = obj').
+  // تدعم البيئة destructuring مثل '{ a, b } = obj'
   "destructuring": true,
-  // The environment supports an async import() function to import EcmaScript modules.
+  // تدعم البيئة دالة import() غير متزامنة لاستيراد EcmaScript modules
   "dynamicImport": false,
-  // The environment supports an async import() when creating a worker, only for web targets at the moment.
+  // تدعم البيئة import() غير متزامنة عند إنشاء worker، حاليًا لأهداف web فقط
   "dynamicImportInWorker": false,
-  // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+  // تدعم البيئة for of مثل 'for (const x of array) { ... }'
   "forOf": true,
-  // The environment supports 'globalThis'.
+  // تدعم البيئة 'globalThis'
   "globalThis": true,
-  // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+  // تدعم البيئة صيغة ECMAScript Module لاستيراد modules
   "module": false,
-  // The environment supports optional chaining ('obj?.a' or 'obj?.()').
+  // تدعم البيئة optional chaining مثل 'obj?.a' أو 'obj?.()'
   "optionalChaining": true,
-  // The environment supports template literals.
+  // تدعم البيئة template literals
   "templateLiteral": true
 }
 ```
 
 ### this.fs
 
-Access to the `compilation`'s `inputFileSystem` property.
+وصول إلى خاصية `inputFileSystem` الخاصة بـ `compilation`.
 
 ### this.getOptions(schema)
 
-Extracts given loader options. Optionally, accepts JSON schema as an argument.
+يستخرج خيارات loader المعطاة. ويمكنه اختياريًا استقبال JSON schema كـ argument.
 
-T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
+T> منذ webpack 5، أصبحت `this.getOptions` متاحة في loader context. وهي تستبدل دالة `getOptions` من [loader-utils](https://github.com/webpack/loader-utils#getoptions).
 
 ### this.getResolve
 
@@ -382,21 +370,21 @@ resolve(context: string, request: string, callback: function(err, result: string
 resolve(context: string, request: string): Promise<string>
 ```
 
-Creates a resolve function similar to [`this.resolve`](#thisresolve).
+ينشئ دالة resolve مشابهة لـ [`this.resolve`](#thisresolve).
 
-Any options under webpack [`resolve` options](/configuration/resolve/#resolve) are possible. They are merged with the configured `resolve` options. Note that `"..."` can be used in arrays to extend the value from `resolve` options, e.g. `{ extensions: [".sass", "..."] }`.
+يمكن استخدام أي خيارات تحت إعدادات webpack [`resolve`](/configuration/resolve/#resolve). يتم دمجها مع خيارات `resolve` المعرّفة في الإعدادات. لاحظ أن `"..."` يمكن استخدامها داخل arrays لتمديد القيمة القادمة من خيارات `resolve`، مثل `{ extensions: [".sass", "..."] }`.
 
-`options.dependencyType` is an additional option. It allows us to specify the type of dependency, which is used to resolve `byDependency` from the `resolve` options.
+`options.dependencyType` خيار إضافي. يسمح بتحديد نوع dependency، ويُستخدم لحل `byDependency` من خيارات `resolve`.
 
-All dependencies of the resolving operation are automatically added as dependencies to the current module.
+كل dependencies الخاصة بعملية resolving تُضاف تلقائيًا كـ dependencies إلى module الحالي.
 
 ### this.hot
 
-Information about HMR for loaders.
+معلومات عن HMR للـ loaders.
 
 ```js
 export default function (source) {
-  console.log(this.hot); // true if HMR is enabled via --hot flag or webpack configuration
+  console.log(this.hot); // true إذا كان HMR مفعّلًا عبر --hot flag أو إعدادات webpack
   return source;
 }
 ```
@@ -407,7 +395,7 @@ export default function (source) {
 
 <Badge text="5.95.0+" />
 
-The encoding to use when generating the hash. See [output.hashDigest](/configuration/output/#outputhashdigest).
+الترميز المستخدم عند توليد hash. راجع [output.hashDigest](/configuration/output/#outputhashdigest).
 
 ### this.hashDigestLength
 
@@ -415,7 +403,7 @@ The encoding to use when generating the hash. See [output.hashDigest](/configura
 
 <Badge text="5.95.0+" />
 
-The prefix length of the hash digest to use. See [output.hashDigestLength](/configuration/output/#outputhashdigestlength).
+طول prefix الخاص بـ hash digest المراد استخدامه. راجع [output.hashDigestLength](/configuration/output/#outputhashdigestlength).
 
 ### this.hashFunction
 
@@ -423,7 +411,7 @@ The prefix length of the hash digest to use. See [output.hashDigestLength](/conf
 
 <Badge text="5.95.0+" />
 
-The hashing algorithm to use. See [output.hashFunction](/configuration/output/#outputhashfunction).
+خوارزمية hashing المراد استخدامها. راجع [output.hashFunction](/configuration/output/#outputhashfunction).
 
 ### this.hashSalt
 
@@ -431,7 +419,7 @@ The hashing algorithm to use. See [output.hashFunction](/configuration/output/#o
 
 <Badge text="5.95.0+" />
 
-An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding). See [output.hashSalt](/configuration/output/#outputhashsalt).
+salt اختياري لتحديث hash عبر [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding) في Node.JS. راجع [output.hashSalt](/configuration/output/#outputhashsalt).
 
 ### this.importModule
 
@@ -439,13 +427,13 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 `this.importModule(request, options, [callback]): Promise`
 
-An alternative lightweight solution for the child compiler to compile and execute a request at build time.
+حل بديل خفيف للـ child compiler لتجميع request وتنفيذه وقت build.
 
-- `request`: the request string to load the module from
+- `request`: نص request لتحميل module منه.
 - `options`:
-  - `layer`: specify a layer in which this module is placed/compiled
-  - `publicPath`: the public path used for the built modules
-- `callback`: an optional Node.js style callback returning the exports of the module or a namespace object for ESM. `importModule` will return a Promise if no callback is provided.
+  - `layer`: يحدد layer التي يوضع أو يُجمّع فيها هذا module.
+  - `publicPath`: public path المستخدم للـ modules المبنية.
+- `callback`: callback اختياري بأسلوب Node.js يرجع exports الخاصة بالـ module أو namespace object لـ ESM. سترجع `importModule` كائن Promise إذا لم يتم تمرير callback.
 
 **webpack.config.js**
 
@@ -456,7 +444,7 @@ export default {
       {
         test: /stylesheet\.js$/i,
         use: ["./a-pitching-loader.js"],
-        type: "asset/source", // we set type to 'asset/source' as the loader will return a string
+        type: "asset/source", // نضبط النوع على 'asset/source' لأن loader سيرجع string
       },
     ],
   },
@@ -493,22 +481,22 @@ export const green = "#0f0";
 
 ```js
 import stylesheet from "./stylesheet.js";
-// stylesheet will be a string `body { background: #f00; color: #0f0; }` at build time
+// ستكون stylesheet نصًا `body { background: #f00; color: #0f0; }` وقت build
 ```
 
-You might notice something in the above example:
+قد تلاحظ شيئًا في المثال السابق:
 
-1. We have a [pitching loader](#pitching-loader),
-2. We use `!=!` syntax in that pitching loader to set [matchResource](#inline-matchresource) for the request, i.e., we'll use `this.resourcePath + '.webpack[javascript/auto]'` to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource,
-3. `.webpack[javascript/auto]` is a pseudo extension of the `.webpack[type]` pattern, we use it to specify a default [module type](/configuration/module/#ruletype) when no other module type is specified. It's typically used in conjunction with `!=!` syntax.
+1. لدينا [pitching loader](#pitching-loader).
+2. نستخدم صيغة `!=!` داخل pitching loader لضبط [matchResource](#inline-matchresource) للـ request. أي سنستخدم `this.resourcePath + '.webpack[javascript/auto]'` للمطابقة مع [`module.rules`](/configuration/module/#modulerules) بدل resource الأصلي.
+3. `.webpack[javascript/auto]` امتداد شبه وهمي من نمط `.webpack[type]`. نستخدمه لتحديد [module type](/configuration/module/#ruletype) افتراضي عندما لا يتم تحديد module type آخر. يُستخدم عادةً مع صيغة `!=!`.
 
-Note that the above example is a simplified one, you can check [the full example on webpack repository](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css).
+لاحظ أن المثال السابق مبسط. يمكنك مراجعة [المثال الكامل في مستودع webpack](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css).
 
 ### this.loaderIndex
 
-The index in the loaders array of the current loader.
+الفهرس داخل array الخاصة بـ loaders للـ loader الحالي.
 
-In [the example](#example-for-the-loader-context): in loader1: `0`, in loader2: `1`
+في [المثال](#example-for-the-loader-context): في loader1 تكون `0`، وفي loader2 تكون `1`.
 
 ### this.loadModule
 
@@ -516,19 +504,19 @@ In [the example](#example-for-the-loader-context): in loader1: `0`, in loader2: 
 loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
-Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/main/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
+يحل request المحدد إلى module، ويطبّق كل loaders المعدة، ثم يستدعي callback مع source المولّد وsourceMap وmodule instance، والتي تكون عادةً instance من [`NormalModule`](https://github.com/webpack/webpack/blob/main/lib/NormalModule.js). استخدم هذه الدالة إذا كنت تحتاج معرفة كود المصدر الخاص بـ module آخر لتوليد النتيجة.
 
-`this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e.g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
+تستخدم `this.loadModule` داخل loader context قواعد resolve الخاصة بـ CommonJS افتراضيًا. استخدم `this.getResolve` مع `dependencyType` مناسب، مثل `'esm'` أو `'commonjs'` أو نوع مخصص، قبل استخدام semantics مختلفة.
 
 ### this.loaders
 
-An array of all the loaders. It is writable in the pitch phase.
+array تحتوي على كل loaders. وهي قابلة للكتابة في مرحلة pitch.
 
 ```ts
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
-In [the example](#example-for-the-loader-context):
+في [المثال](#example-for-the-loader-context):
 
 ```js
 [
@@ -549,20 +537,20 @@ In [the example](#example-for-the-loader-context):
 
 ### this.mode
 
-Read in which [`mode`](/configuration/mode/) webpack is running.
+يقرأ [`mode`](/configuration/mode/) الذي يعمل به webpack.
 
-Possible values: `'production'`, `'development'`, `'none'`
+القيم الممكنة: `'production'` و`'development'` و`'none'`.
 
 ### this.query
 
-1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
-2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
+1. إذا كان loader معدًا بكائن [`options`](/configuration/module/#useentry)، فستشير هذه الخاصية إلى ذلك الكائن.
+2. إذا لم يكن لدى loader `options`، لكنه استُدعي بـ query string، فستكون هذه الخاصية نصًا يبدأ بـ `?`.
 
 ### this.request
 
-The resolved request string.
+نص request بعد حله.
 
-In [the example](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+في [المثال](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
 ### this.resolve
 
@@ -570,55 +558,55 @@ In [the example](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/no
 resolve(context: string, request: string, callback: function(err, result: string))
 ```
 
-Resolve a request like a require expression.
+يحل request مثل require expression.
 
-- `context` must be an absolute path to a directory. This directory is used as the starting location for the resolving.
-- `request` is the request to be resolved. Usually either relative requests like `./relative` or module requests like `module/path` are used, but absolute paths like `/some/path` are also possible as requests.
-- `callback` is a normal Node.js-style callback function giving the resolved path.
+- يجب أن يكون `context` مسارًا مطلقًا إلى مجلد. يُستخدم هذا المجلد كنقطة بداية للـ resolving.
+- `request` هو الطلب المراد حله. عادةً تكون الطلبات نسبية مثل `./relative` أو module requests مثل `module/path`، لكن يمكن أيضًا استخدام مسارات مطلقة مثل `/some/path` كـ requests.
+- `callback` دالة callback عادية بأسلوب Node.js تعطي المسار المحلول.
 
-All dependencies of the resolving operation are automatically added as dependencies to the current module.
+كل dependencies الخاصة بعملية resolving تُضاف تلقائيًا كـ dependencies إلى module الحالي.
 
 ### this.resource
 
-The resource part of the request, including query.
+جزء resource من request، مع query.
 
-In [the example](#example-for-the-loader-context): `'/abc/resource.js?rrr'`
+في [المثال](#example-for-the-loader-context): `'/abc/resource.js?rrr'`
 
 ### this.resourcePath
 
-The resource file.
+ملف resource.
 
-In [the example](#example-for-the-loader-context): `'/abc/resource.js'`
+في [المثال](#example-for-the-loader-context): `'/abc/resource.js'`
 
 ### this.resourceQuery
 
-The query of the resource.
+query الخاصة بالـ resource.
 
-In [the example](#example-for-the-loader-context): `'?rrr'`
+في [المثال](#example-for-the-loader-context): `'?rrr'`
 
 ### this.rootContext
 
-Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+منذ webpack 4، أصبحت القيمة التي كانت سابقًا `this.options.context` متاحة باسم `this.rootContext`.
 
 ### this.sourceMap
 
-Tells if source map should be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
+يخبرك هل يجب توليد source map أم لا. لأن توليد source maps قد يكون مكلفًا، يجب فحص هل هي مطلوبة فعلًا.
 
 ### this.target
 
-Target of compilation. Passed from configuration options.
+هدف compilation. يُمرر من خيارات الإعداد.
 
-Example values: `'web'`, `'node'`
+أمثلة للقيم: `'web'` و`'node'`.
 
 ### this.utils
 
 <Badge text="5.27.0+" />
 
-Access to the following utilities.
+وصول إلى الأدوات التالية.
 
-- `absolutify`: Return a new request string using absolute paths when possible.
-- `contextify`: Return a new request string avoiding absolute paths when possible.
-- `createHash`: Return a new Hash object from provided hash function.
+- `absolutify`: يرجع request string جديدًا باستخدام مسارات مطلقة عندما يكون ذلك ممكنًا.
+- `contextify`: يرجع request string جديدًا يتجنب المسارات المطلقة عندما يكون ذلك ممكنًا.
+- `createHash`: يرجع كائن Hash جديدًا من دالة hash المقدمة.
 
 **my-sync-loader.js**
 
@@ -641,63 +629,63 @@ export default function (content) {
 
 ### this.version
 
-**Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
+**إصدار Loader API.** حاليًا `2`. هذا مفيد لتوفير التوافق مع الإصدارات السابقة. باستخدام الإصدار يمكنك تحديد منطق مخصص أو fallbacks للتغييرات الكاسرة.
 
 ### this.webpack
 
-This boolean is set to true when this is compiled by webpack.
+تكون هذه boolean مضبوطة على true عندما يتم التجميع بواسطة webpack.
 
-T> Loaders were originally designed to also work as Babel transforms. Therefore, if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
+T> صُممت loaders في الأصل لتعمل أيضًا كتحويلات Babel. لذلك إذا كتبت loader يعمل في الحالتين، يمكنك استخدام هذه الخاصية لمعرفة هل يوجد وصول إلى loaderContext إضافي وميزات webpack.
 
-## Webpack specific properties
+## خصائص خاصة بـ Webpack
 
-The loader interface provides all module relate information. However, in rare cases you might need access to the compiler API itself.
+توفر واجهة loader كل المعلومات المتعلقة بـ module. لكن في حالات نادرة قد تحتاج إلى الوصول إلى Compiler API نفسها.
 
-W> Please note that using these webpack specific properties will have a negative impact on your loaders compatibility.
+W> لاحظ أن استخدام هذه الخصائص الخاصة بـ webpack سيؤثر سلبًا في توافق loader.
 
-Therefore you should only use them as a last resort. Using them will reduce the portability of your loader.
+لذلك لا تستخدمها إلا كحل أخير. استخدامها يقلل قابلية نقل loader.
 
 ### this.\_compilation
 
-Access to the current Compilation object of webpack.
+وصول إلى كائن Compilation الحالي في webpack.
 
 ### this.\_compiler
 
-Access to the current Compiler object of webpack.
+وصول إلى كائن Compiler الحالي في webpack.
 
-## Deprecated context properties
+## خصائص context مهملة
 
-W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
+W> لا ننصح باستخدام هذه الخصائص لأننا نخطط لإزالتها من context. ما زالت مذكورة هنا لأغراض التوثيق.
 
 ### this.debug
 
-A boolean flag. It is set when in debug mode.
+boolean flag. يتم ضبطه عند العمل في debug mode.
 
 ### this.inputValue
 
-Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
+تُمرر من آخر loader. إذا كنت ستنفذ input argument كـ module، ففكر في قراءة هذا المتغير كاختصار لأسباب أداء.
 
 ### this.minimize
 
-Tells if result should be minimized.
+يخبرك هل يجب تصغير النتيجة أم لا.
 
 ### this.value
 
-Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
+يمرر قيمًا إلى loader التالي. إذا كنت تعرف ماذا ستصدّر النتيجة عند تنفيذها كـ module، فاضبط هذه القيمة هنا، كـ array تحتوي عنصرًا واحدًا فقط.
 
 ### this.\_module
 
-Hacky access to the Module object being loaded.
+وصول غير رسمي إلى كائن Module الجاري تحميله.
 
-## Error Reporting
+## الإبلاغ عن الأخطاء
 
-You can report errors from inside a loader by:
+يمكنك الإبلاغ عن الأخطاء من داخل loader عبر:
 
-- Using [this.emitError](/api/loaders/#thisemiterror). Will report the errors without interrupting module's compilation.
-- Using `throw` (or other uncaught exception). Throwing an error while a loader is running will cause current module compilation failure.
-- Using `callback` (in async mode). Pass an error to the callback will also cause module compilation failure.
+- استخدام [this.emitError](/api/loaders/#thisemiterror). سيبلّغ عن الأخطاء بدون إيقاف compilation الخاص بالـ module.
+- استخدام `throw` أو أي exception غير ممسوكة. رمي خطأ أثناء تشغيل loader سيؤدي إلى فشل compilation للـ module الحالي.
+- استخدام `callback` في الوضع غير المتزامن. تمرير خطأ إلى callback سيؤدي أيضًا إلى فشل compilation للـ module.
 
-For example:
+مثال:
 
 **./src/index.js**
 
@@ -705,7 +693,7 @@ For example:
 import "./loader!./lib";
 ```
 
-Throwing an error from loader:
+رمي خطأ من loader:
 
 **./src/loader.js**
 
@@ -715,7 +703,7 @@ export default function (source) {
 }
 ```
 
-Or pass an error to the callback in async mode:
+أو تمرير خطأ إلى callback في الوضع غير المتزامن:
 
 **./src/loader.js**
 
@@ -727,7 +715,7 @@ export default function (source) {
 }
 ```
 
-The module will get bundled like this:
+سيُحزم module بهذا الشكل:
 
 ```text
 /***/ "./src/loader.js!./src/lib.js":
@@ -742,7 +730,7 @@ throw new Error("Module build failed (from ./src/loader.js):\nError: This is a F
 /***/ })
 ```
 
-Then the build output will also display the error (Similar to `this.emitError`):
+ثم سيعرض build output الخطأ أيضًا، بشكل مشابه لـ `this.emitError`:
 
 ```bash
 ERROR in ./src/lib.js (./src/loader.js!./src/lib.js)
@@ -752,30 +740,30 @@ Error: This is a Fatal Error!
  @ ./src/index.js 1:0-25
 ```
 
-As you can see below, not only error message, but also details about which loader and module are involved:
+كما ترى، لا تعرض الرسالة نص الخطأ فقط، بل تعرض أيضًا تفاصيل عن loader وmodule المعنيين:
 
-- the module path: `ERROR in ./src/lib.js`
-- the request string: `(./src/loader.js!./src/lib.js)`
-- the loader path: `(from ./src/loader.js)`
-- the caller path: `@ ./src/index.js 1:0-25`
+- مسار module: `ERROR in ./src/lib.js`
+- نص request: `(./src/loader.js!./src/lib.js)`
+- مسار loader: `(from ./src/loader.js)`
+- مسار المستدعي: `@ ./src/index.js 1:0-25`
 
-W> The loader path in the error is displayed since webpack 4.12
+W> يُعرض مسار loader داخل الخطأ منذ webpack 4.12.
 
-T> All the errors and warnings will be recorded into `stats`. Please see [Stats Data](/api/stats/#errors-and-warnings).
+T> سيتم تسجيل كل الأخطاء والتحذيرات داخل `stats`. راجع [Stats Data](/api/stats/#errors-and-warnings).
 
 ## Inline matchResource
 
-A new inline request syntax was introduced in webpack v4. Prefixing `<match-resource>!=!` to a request will set the `matchResource` for this request.
+أُضيفت صيغة inline request جديدة في webpack v4. إضافة `<match-resource>!=!` قبل request ستضبط `matchResource` لذلك request.
 
-W> It is not recommended to use this syntax in application code.
-Inline request syntax is intended to only be used by loader generated code.
-Not following this recommendation will make your code webpack-specific and non-standard.
+W> لا يُنصح باستخدام هذه الصيغة داخل كود التطبيق.
+صيغة inline request مخصصة للاستخدام فقط في الكود الذي تولده loaders.
+عدم اتباع هذه التوصية سيجعل كودك خاصًا بـ webpack وغير قياسي.
 
-T> A relative `matchResource` will resolve relative to the current context of the containing module.
+T> يتم حل `matchResource` النسبي نسبة إلى context الحالي للـ module الذي يحتويه.
 
-When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type needs to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#ruleissuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunkscachegroupscachegrouptest).
+عند ضبط `matchResource`، سيُستخدم للمطابقة مع [`module.rules`](/configuration/module/#modulerules) بدل resource الأصلي. يفيد ذلك إذا كان يجب تطبيق loaders إضافية على resource، أو إذا كان نوع module يحتاج إلى تغيير. كما يظهر في stats ويُستخدم لمطابقة [`Rule.issuer`](/configuration/module/#ruleissuer) و[`test` في `splitChunks`](/plugins/split-chunks-plugin/#splitchunkscachegroupscachegrouptest).
 
-Example:
+مثال:
 
 **file.js**
 
@@ -784,9 +772,9 @@ Example:
 console.log("yep");
 ```
 
-A loader could transform the file into the following file and use the `matchResource` to apply the user-specified CSS processing rules:
+يمكن لـ loader تحويل الملف إلى الملف التالي واستخدام `matchResource` لتطبيق قواعد معالجة CSS التي حددها المستخدم:
 
-**file.js** (transformed by loader)
+**file.js** (تم تحويله بواسطة loader)
 
 ```js
 import "./file.js.css!=!extract-style-loader/getStyles!./file.js";
@@ -794,9 +782,9 @@ import "./file.js.css!=!extract-style-loader/getStyles!./file.js";
 console.log("yep");
 ```
 
-This will add a dependency to `extract-style-loader/getStyles!./file.js` and treat the result as `file.js.css`. Because [`module.rules`](/configuration/module/#modulerules) has a rule matching `/\.css$/` and it will apply to this dependency.
+سيضيف هذا dependency إلى `extract-style-loader/getStyles!./file.js` ويعامل النتيجة كأنها `file.js.css`. وبما أن [`module.rules`](/configuration/module/#modulerules) لديها rule تطابق `/\.css$/`، فسيتم تطبيقها على هذا dependency.
 
-The loader could look like this:
+قد يكون loader بهذا الشكل:
 
 **extract-style-loader/index.js**
 
@@ -828,8 +816,8 @@ export default function (source) {
 
 ## Logging
 
-Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#statslogging) and/or when [`infrastructure logging`](/configuration/infrastructureLogging) is enabled, loaders may log messages which will be printed out in the respective logger format (stats, infrastructure).
+واجهة Logging API متاحة منذ webpack 4.37. عند تفعيل `logging` في [إعدادات stats](/configuration/stats/#statslogging)، أو عند تفعيل [`infrastructure logging`](/configuration/infrastructureLogging)، يمكن لـ loaders تسجيل رسائل تُطبع بتنسيق logger المناسب، سواء stats أو infrastructure.
 
-- Loaders should prefer to use `this.getLogger()` for logging which is a shortcut to `compilation.getLogger()` with loader path and processed file. This kind of logging is stored to the Stats and formatted accordingly. It can be filtered and exported by the webpack user.
-- Loaders may use `this.getLogger('name')` to get an independent logger with a child name. Loader path and processed file is still added.
-- Loaders may use specific fallback logic for detecting logging support `this.getLogger ? this.getLogger() : console` to provide a fallback when an older webpack version is used which does not support `getLogger` method.
+- يُفضّل أن تستخدم loaders الدالة `this.getLogger()` للتسجيل، وهي اختصار لـ `compilation.getLogger()` مع مسار loader والملف المعالج. هذا النوع من logging يُخزن داخل Stats ويُنسق بناءً عليها. ويمكن لمستخدم webpack فلترته أو تصديره.
+- يمكن لـ loaders استخدام `this.getLogger('name')` للحصول على logger مستقل باسم فرعي. ما زال مسار loader والملف المعالج يضافان.
+- يمكن لـ loaders استخدام fallback خاص لاكتشاف دعم logging، مثل `this.getLogger ? this.getLogger() : console`، لتوفير fallback عند استخدام إصدار webpack قديم لا يدعم دالة `getLogger`.

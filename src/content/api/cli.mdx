@@ -1,24 +1,8 @@
 ---
-title: Command Line Interface
+title: واجهة سطر الأوامر
 sort: 1
 contributors:
-  - anshumanv
-  - rishabh3112
-  - snitin315
-  - evenstensberg
-  - simon04
-  - tbroadley
-  - chenxsan
-  - rencire
-  - madhavarshney
-  - EugeneHlushko
-  - byzyk
-  - wizardofhogwarts
-  - EslamHiko
-  - smelukov
-  - anikethsaha
-  - jamesgeorge007
-  - burhanuday
+  - RlxChap2
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -30,37 +14,37 @@ related:
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
 
-For proper usage and easier distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the configuration file.
+لاستخدام أسهل وتوزيع أوضح للإعدادات، يمكن ضبط webpack عبر ملف `webpack.config.js`. أي parameters ترسلها إلى CLI سيتم ربطها بالـ parameter المقابل داخل ملف الإعدادات.
 
-Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
+اقرأ [دليل التثبيت](/guides/installation) إذا لم يكن webpack وCLI مثبتين لديك.
 
-W> `webpack-cli` v7.0.0+ requires node >= v20.9.0, `webpack >= v5.101.0`, and `webpack-dev-server >= v5.0.0`.
+W> يتطلب `webpack-cli` v7.0.0+ إصدار node >= v20.9.0، و`webpack >= v5.101.0`، و`webpack-dev-server >= v5.0.0`.
 
-W> If you want to run webpack using `npx` please make sure you have `webpack-cli` installed.
+W> إذا أردت تشغيل webpack باستخدام `npx` فتأكد من تثبيت `webpack-cli`.
 
 ## Commands
 
-webpack-cli offers a variety of commands to make working with webpack easier. By default webpack ships with
+يوفر webpack-cli مجموعة أوامر تجعل العمل مع webpack أسهل. افتراضيًا، يأتي webpack مع الأوامر التالية:
 
-| Command                     | Usage                                     | Description                                                                                        |
-| --------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| [`build`](#build)           | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                                     |
-| [`configtest`](#configtest) | `configtest\|t [config-path]`             | Validate a webpack configuration.                                                                  |
-| [`help`](#help)             | `help\|h [command] [option]`              | Display help for commands and options.                                                             |
-| [`info`](#info)             | `info\|i [options]`                       | Outputs information about your system.                                                             |
-| [`serve`](#serve)           | `serve\|server\|s [options]`              | Run the `webpack-dev-server`.                                                                      |
-| [`version`](#version)       | `version\|v [commands...]`                | Output the version number of 'webpack', 'webpack-cli' and 'webpack-dev-server' and other packages. |
-| [`watch`](#watch)           | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                                           |
+| Command                     | Usage                                     | الوصف                                                              |
+| --------------------------- | ----------------------------------------- | ------------------------------------------------------------------ |
+| [`build`](#build)           | `build\|bundle\|b [entries...] [options]` | يشغّل webpack، وهو الأمر الافتراضي ويمكن حذفه.                     |
+| [`configtest`](#configtest) | `configtest\|t [config-path]`             | يتحقق من إعدادات webpack.                                          |
+| [`help`](#help)             | `help\|h [command] [option]`              | يعرض المساعدة للأوامر والخيارات.                                   |
+| [`info`](#info)             | `info\|i [options]`                       | يطبع معلومات عن نظامك.                                             |
+| [`serve`](#serve)           | `serve\|server\|s [options]`              | يشغّل `webpack-dev-server`.                                        |
+| [`version`](#version)       | `version\|v [commands...]`                | يطبع رقم إصدار webpack وwebpack-cli وwebpack-dev-server وحزم أخرى. |
+| [`watch`](#watch)           | `watch\|w [entries...] [options]`         | يشغّل webpack ويراقب تغييرات الملفات.                              |
 
 ### Build
 
-Run webpack (default command, can be omitted).
+يشغّل webpack، وهو الأمر الافتراضي ويمكن حذفه.
 
 ```bash
 npx webpack build [options]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx webpack build --config ./webpack.config.js --stats verbose
@@ -68,19 +52,19 @@ npx webpack build --config ./webpack.config.js --stats verbose
 
 ### Init
 
-Used to initialize a new webpack project using `create-webpack-app`.
+يُستخدم لتهيئة مشروع webpack جديد باستخدام `create-webpack-app`.
 
 ```bash
 npx create-webpack-app [generation-path] [options]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx create-webpack-app ./my-app --force --template=default
 ```
 
-Alias to:
+اختصار لـ:
 
 ```bash
 npx create-webpack-app init ./my-app --force --template=default
@@ -88,7 +72,7 @@ npx create-webpack-app init ./my-app --force --template=default
 
 #### Generation Path
 
-Location of where to generate the configuration. Defaults to `process.cwd()`.
+المكان الذي سيتم توليد الإعدادات فيه. القيمة الافتراضية هي `process.cwd()`.
 
 #### Options
 
@@ -96,30 +80,30 @@ Location of where to generate the configuration. Defaults to `process.cwd()`.
 
 `string = 'default'`
 
-Name of template to generate.
+اسم القالب المراد توليده.
 
 **`-f`, `--force`**
 
 `boolean`
 
-To generate a project without questions. When enabled, the default answer for each question will be used.
+يولّد مشروعًا بدون أسئلة. عند تفعيله، سيتم استخدام الإجابة الافتراضية لكل سؤال.
 
-#### Templates supported
+#### القوالب المدعومة
 
-- `--template=default` - Default template with basic configuration.
-- `--template=react` - Template with React configuration.
-- `--template=vue` - Template with Vue configuration.
-- `--template=svelte` - Template with Svelte configuration.`
+- `--template=default` - القالب الافتراضي مع إعدادات أساسية.
+- `--template=react` - قالب بإعدادات React.
+- `--template=vue` - قالب بإعدادات Vue.
+- `--template=svelte` - قالب بإعدادات Svelte.
 
 ### Loader
 
-Scaffold a loader.
+ينشئ هيكل loader.
 
 ```bash
 npx create-webpack-app loader [output-path] [options]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx create-webpack-app loader ./my-loader --template=default
@@ -127,7 +111,7 @@ npx create-webpack-app loader ./my-loader --template=default
 
 #### Output Path
 
-Path to the output directory, e.g. `./loader-name`.
+المسار إلى مجلد output، مثل `./loader-name`.
 
 #### Options
 
@@ -135,17 +119,17 @@ Path to the output directory, e.g. `./loader-name`.
 
 `string = 'default'`
 
-Type of template.
+نوع القالب.
 
 ### Plugin
 
-Scaffold a plugin.
+ينشئ هيكل plugin.
 
 ```bash
 npx create-webpack-app plugin [output-path] [options]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx create-webpack-app plugin ./my-plugin --template=default
@@ -153,7 +137,7 @@ npx create-webpack-app plugin ./my-plugin --template=default
 
 #### Output Path
 
-Path to the output directory, e.g. `./plugin-name`.
+المسار إلى مجلد output، مثل `./plugin-name`.
 
 #### Options
 
@@ -161,33 +145,33 @@ Path to the output directory, e.g. `./plugin-name`.
 
 `string = 'default'`
 
-Type of template.
+نوع القالب.
 
-T> See the [full documentation of `create-webpack-app`](https://github.com/webpack/webpack-cli/blob/master/packages/create-webpack-app/README.md).
+T> راجع [التوثيق الكامل لـ `create-webpack-app`](https://github.com/webpack/webpack-cli/blob/master/packages/create-webpack-app/README.md).
 
 ### Info
 
-Outputs information about your system.
+يطبع معلومات عن نظامك.
 
 ```bash
 npx webpack info [options]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx webpack info --output json --addition-package postcss
 ```
 
-#### Options for info
+#### خيارات info
 
 **`-a`, `--additional-package`**
 
 `string`
 
-Adds additional packages to the output.
+يضيف حزمًا إضافية إلى output.
 
-**example**
+**مثال**
 
 ```bash
 npx webpack info --additional-package postcss
@@ -197,9 +181,9 @@ npx webpack info --additional-package postcss
 
 `string : 'json' | 'markdown'`
 
-To get the output in a specified format.
+للحصول على output بتنسيق محدد.
 
-**example**
+**مثال**
 
 ```bash
 npx webpack info --output markdown
@@ -207,13 +191,13 @@ npx webpack info --output markdown
 
 ### Configtest
 
-Validate a webpack configuration.
+يتحقق من إعدادات webpack.
 
 ```bash
 npx webpack configtest [config-path]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx webpack configtest ./webpack.config.js
@@ -221,33 +205,33 @@ npx webpack configtest ./webpack.config.js
 
 #### Config Path
 
-Path to your webpack configuration file. Defaults to `./webpack.config.js`.
+المسار إلى ملف إعدادات webpack. القيمة الافتراضية هي `./webpack.config.js`.
 
 ### Serve
 
-Run the webpack dev server.
+يشغّل webpack dev server.
 
 ```bash
 npx webpack serve [options]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx webpack serve --static --open
 ```
 
-T> See the [full list of options for `webpack serve` command](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) and [related documentation for webpack-dev-server](/configuration/dev-server).
+T> راجع [القائمة الكاملة لخيارات أمر `webpack serve`](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) و[توثيق webpack-dev-server](/configuration/dev-server) المرتبط به.
 
 ### Watch
 
-Run webpack and watch for files changes.
+يشغّل webpack ويراقب تغييرات الملفات.
 
 ```bash
 npx webpack watch [options]
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx webpack watch --mode development
@@ -255,52 +239,52 @@ npx webpack watch --mode development
 
 ## Flags
 
-By default webpack ships with the following flags:
+افتراضيًا، يأتي webpack مع flags التالية:
 
-| Flag / Alias                            | Type            | Description                                                               |
-| --------------------------------------- | --------------- | ------------------------------------------------------------------------- |
-| [`--entry`](#entry)                     | string[]        | The entry point(s) of your application e.g. `./src/main.js`               |
-| [`--config, -c`](#config)               | string[]        | Provide path to a webpack configuration file e.g. `./webpack.config.js`   |
-| [`--config-name`](#config-name)         | string[]        | Name of the configuration to use                                          |
-| `--name`                                | string          | Name of the configuration. Used when loading multiple configurations      |
-| `--color`                               | boolean         | Enable colors on console                                                  |
-| [`--merge, -m`](#merge)                 | boolean         | Merge two or more configurations using `webpack-merge`                    |
-| [`--env`](#env)                         | string[]        | Environment passed to the configuration when it is a function             |
-| [`--config-node-env`](#config-node-env) | string          | Set `process.env.NODE_ENV` to the specified value                         |
-| [`--progress`](#progress)               | boolean, string | Print compilation progress during build                                   |
-| [`--help`](#help)                       | boolean         | Outputs list of supported flags and commands                              |
-| [`--output-path, -o`](#output-path)     | string          | Output location of the file generated by webpack e.g. `./dist`            |
-| `--target, -t`                          | string[]        | Sets the build target                                                     |
-| `--watch, -w`                           | boolean         | Watch for file changes                                                    |
-| `--watch-options-stdin`                 | boolean         | Stop watching when stdin stream has ended                                 |
-| `--devtool, -d`                         | string          | Controls if and how source maps are generated.                            |
-| [`--json, -j`](#json)                   | boolean, string | Prints result as JSON or store it in a file                               |
-| `--mode`                                | string          | Defines the mode to pass to webpack                                       |
-| [`--version, -v`](#version)             | boolean         | Get current version                                                       |
-| `--stats`                               | boolean, string | It instructs webpack on how to treat the stats                            |
-| `--disable-interpret`                   | boolean         | Disable interpret for loading the config file.                            |
-| `--fail-on-warnings`                    | boolean         | Stop webpack-cli process with non-zero exit code on warnings from webpack |
-| [`--analyze`](#analyzing-bundle)        | boolean         | It invokes `webpack-bundle-analyzer` plugin to get bundle information     |
-| [`--extends, -e`](#extends)             | string[]        | Extend an existing configuration                                          |
+| Flag / Alias                            | النوع           | الوصف                                                                  |
+| --------------------------------------- | --------------- | ---------------------------------------------------------------------- |
+| [`--entry`](#entry)                     | string[]        | entry point أو أكثر لتطبيقك، مثل `./src/main.js`.                      |
+| [`--config, -c`](#config)               | string[]        | يحدد مسار ملف إعدادات webpack، مثل `./webpack.config.js`.              |
+| [`--config-name`](#config-name)         | string[]        | اسم الإعداد المراد استخدامه.                                           |
+| `--name`                                | string          | اسم الإعداد. يُستخدم عند تحميل عدة إعدادات.                            |
+| `--color`                               | boolean         | يفعّل الألوان في console.                                              |
+| [`--merge, -m`](#merge)                 | boolean         | يدمج إعدادين أو أكثر باستخدام `webpack-merge`.                         |
+| [`--env`](#env)                         | string[]        | environment تُمرر إلى الإعداد عندما يكون دالة.                         |
+| [`--config-node-env`](#config-node-env) | string          | يضبط `process.env.NODE_ENV` على القيمة المحددة.                        |
+| [`--progress`](#progress)               | boolean, string | يطبع تقدم compilation أثناء build.                                     |
+| [`--help`](#help)                       | boolean         | يطبع قائمة flags والأوامر المدعومة.                                    |
+| [`--output-path, -o`](#output-path)     | string          | مكان إخراج الملف الذي يولده webpack، مثل `./dist`.                     |
+| `--target, -t`                          | string[]        | يحدد هدف build.                                                        |
+| `--watch, -w`                           | boolean         | يراقب تغييرات الملفات.                                                 |
+| `--watch-options-stdin`                 | boolean         | يوقف watch عند انتهاء stdin stream.                                    |
+| `--devtool, -d`                         | string          | يتحكم فيما إذا كانت source maps ستُولّد وكيف ستُولّد.                  |
+| [`--json, -j`](#json)                   | boolean, string | يطبع النتيجة كـ JSON أو يحفظها في ملف.                                 |
+| `--mode`                                | string          | يحدد mode الذي سيُمرر إلى webpack.                                     |
+| [`--version, -v`](#version)             | boolean         | يعرض الإصدار الحالي.                                                   |
+| `--stats`                               | boolean, string | يوجه webpack لطريقة التعامل مع stats.                                  |
+| `--disable-interpret`                   | boolean         | يعطل interpret عند تحميل ملف الإعداد.                                  |
+| `--fail-on-warnings`                    | boolean         | يوقف webpack-cli بكود خروج غير صفري عند ظهور warnings من webpack.      |
+| [`--analyze`](#analyzing-bundle)        | boolean         | يشغّل plugin باسم `webpack-bundle-analyzer` للحصول على معلومات bundle. |
+| [`--extends, -e`](#extends)             | string[]        | يمدد إعدادًا موجودًا.                                                  |
 
 ### Negated Flags
 
-| Flag                       | Description                                                   |
-| -------------------------- | ------------------------------------------------------------- |
-| `--no-color`               | Disables any color on the console                             |
-| `--no-hot`                 | Disables hot reloading if you have it enabled via your config |
-| `--no-stats`               | Disables any compilation stats emitted by webpack             |
-| `--no-watch`               | Do not watch for file changes                                 |
-| `--no-devtool`             | Do not generate source maps                                   |
-| `--no-watch-options-stdin` | Do not stop watching when stdin stream has ended              |
+| Flag                       | الوصف                                           |
+| -------------------------- | ----------------------------------------------- |
+| `--no-color`               | يعطل أي ألوان في console.                       |
+| `--no-hot`                 | يعطل hot reloading إذا كان مفعّلًا من إعداداتك. |
+| `--no-stats`               | يعطل أي compilation stats يصدرها webpack.       |
+| `--no-watch`               | لا يراقب تغييرات الملفات.                       |
+| `--no-devtool`             | لا يولد source maps.                            |
+| `--no-watch-options-stdin` | لا يوقف watch عند انتهاء stdin stream.          |
 
 ### Core Flags
 
-Starting CLI v4 and webpack v5, CLI imports the entire configuration schema from webpack core to allow tuning almost every configuration option from the command line.
+ابتداءً من CLI v4 وwebpack v5، تستورد CLI كامل configuration schema من webpack core، حتى تتيح ضبط معظم خيارات الإعداد تقريبًا من سطر الأوامر.
 
-**Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)**
+**هذه قائمة بكل core flags المدعومة في webpack v5 مع CLI v4 - [الرابط](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)**
 
-For example if you want to enable performance hints in your project you'd use [this](https://webpack.js.org/configuration/performance/#performancehints) option in configuration, with core flags you can do -
+مثلًا، إذا أردت تفعيل performance hints في مشروعك، يمكنك استخدام [هذا](https://webpack.js.org/configuration/performance/#performancehints) الخيار في الإعدادات. ومع core flags يمكنك فعل ذلك بهذا الشكل:
 
 ```bash
 npx webpack --performance-hints warning
@@ -308,21 +292,21 @@ npx webpack --performance-hints warning
 
 ## Usage
 
-### With configuration file
+### مع ملف إعدادات
 
 ```bash
 npx webpack [--config webpack.config.js]
 ```
 
-See [configuration](/configuration) for the options in the configuration file.
+راجع [configuration](/configuration) لمعرفة الخيارات داخل ملف الإعدادات.
 
-### Without configuration file
+### بدون ملف إعدادات
 
 ```bash
 npx webpack --entry <entry> --output-path <output-path>
 ```
 
-**example**
+**مثال**
 
 ```bash
 npx webpack --entry ./first.js --entry ./second.js --output-path /build
@@ -330,8 +314,8 @@ npx webpack --entry ./first.js --entry ./second.js --output-path /build
 
 #### entry
 
-A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup).
-Following are the multiple ways of specifying entry file(s) via CLI -
+اسم ملف أو مجموعة أسماء ملفات تعمل كـ entry point لبناء مشروعك. يمكنك تمرير أكثر من entry، حيث يتم تحميل كل entry عند بدء التشغيل.
+توجد عدة طرق لتحديد ملف أو ملفات entry عبر CLI:
 
 ```bash
 npx webpack --entry-reset ./first-entry.js
@@ -349,17 +333,17 @@ npx webpack --entry-reset ./first-entry.js ./other-entry.js
 npx webpack --entry-reset --entry ./first-entry.js ./other-entry.js
 ```
 
-W> The `--entry-reset` option is required to replace the existing [entry](/configuration/entry-context/#entry) option, without it the `--entry` option will add another entry to the existing entries.
+W> خيار `--entry-reset` مطلوب لاستبدال خيار [entry](/configuration/entry-context/#entry) الموجود. بدونه سيضيف `--entry` entry أخرى إلى entries الموجودة.
 
-T> Use `webpack [command] --entry-reset [entries...] [option]` syntax because some options can accept multiple values so `webpack --target node ./entry.js` means `target: ['node', './entry.js']`
+T> استخدم صيغة `webpack [command] --entry-reset [entries...] [option]` لأن بعض الخيارات تقبل عدة قيم، فمثلًا `webpack --target node ./entry.js` تعني `target: ['node', './entry.js']`.
 
 #### output-path
 
-A path for the bundled file to be saved in. It will be mapped to the configuration options `output.path`.
+مسار حفظ الملف المحزم. يتم ربطه بخيار الإعداد `output.path`.
 
-**Example**
+**مثال**
 
-If your project structure is as follows -
+إذا كانت بنية مشروعك كالتالي:
 
 ```bash
 .
@@ -375,7 +359,7 @@ If your project structure is as follows -
 npx webpack ./src/index.js --output-path dist
 ```
 
-This will bundle your source code with entry as `index.js`, and the output bundle file will have a path of `dist`.
+سيتم تحزيم كود المصدر باستخدام `index.js` كـ entry، وسيكون مسار ملف output bundle هو `dist`.
 
 ```bash
 asset main.js 142 bytes [compared for emit] [minimized] (name: main)
@@ -388,7 +372,7 @@ webpack 5.1.0 compiled successfully in 187 ms
 npx webpack ./src/index.js ./src/others2.js --output-path dist/
 ```
 
-This will form the bundle with both the files as separate entry points.
+سيؤدي هذا إلى إنشاء bundle باستخدام الملفين كـ entry points منفصلة.
 
 ```bash
 asset main.js 142 bytes [compared for emit] [minimized] (name: main)
@@ -400,11 +384,11 @@ webpack 5.1.0 compiled successfully in 198 ms
 
 ## Default Configurations
 
-CLI will look for some default configurations in the path of your project, here are the config files picked up by CLI.
+تبحث CLI عن بعض ملفات الإعدادات الافتراضية داخل مسار مشروعك. هذه هي ملفات الإعداد التي تلتقطها CLI.
 
-This is the lookup priority in increasing order
+ترتيب البحث يكون حسب الأولوية التالية:
 
-> example - config file lookup will be in order of webpack.config.js > .webpack/webpack.config.js > .webpack/webpackfile.js
+> مثال: سيكون ترتيب البحث عن ملف الإعداد هكذا webpack.config.js > .webpack/webpack.config.js > .webpack/webpackfile.js
 
 ```text
 'webpack.config',
@@ -414,29 +398,29 @@ This is the lookup priority in increasing order
 
 ## Common Options
 
-W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
+W> لاحظ أن Command Line Interface لها أولوية أعلى من ملف الإعدادات بالنسبة للـ arguments التي تستخدمها معها. مثلًا، إذا مررت [`--mode="production"`](/configuration/mode/#usage) إلى webpack CLI وكان ملف الإعدادات يستخدم `development`، فسيتم استخدام `production`.
 
 ### help
 
-**List basic commands and flags available on the cli**
+**عرض الأوامر والـ flags الأساسية المتاحة في cli**
 
-Both `webpack help [command] [option]` and `webpack [command] --help` are valid to get help:
+كل من `webpack help [command] [option]` و`webpack [command] --help` صالح للحصول على المساعدة:
 
 ```bash
 npx webpack --help
 
-# or
+# أو
 
 npx webpack help
 ```
 
-**List all supported commands and flags by cli**
+**عرض كل الأوامر والـ flags المدعومة من cli**
 
 ```bash
 npx webpack --help=verbose
 ```
 
-**See help for a specific command or option**
+**عرض المساعدة لأمر أو خيار محدد**
 
 ```bash
 npx webpack help --mode
@@ -444,26 +428,26 @@ npx webpack help --mode
 
 ### version
 
-**Output the version number of 'webpack', 'webpack-cli' and 'webpack-dev-server' and other packages**
+**يطبع رقم إصدار webpack وwebpack-cli وwebpack-dev-server وحزم أخرى**
 
-To inspect the version of `webpack` and `webpack-cli` you are using, run the command:
+لفحص إصدار `webpack` و`webpack-cli` الذي تستخدمه، شغّل:
 
 ```bash
 npx webpack --version
 
-# or
+# أو
 
 npx webpack version
 ```
 
-This will output the following result:
+سيطبع نتيجة مثل:
 
 ```bash
 webpack 5.31.2
 webpack-cli 4.6.0
 ```
 
-It will output the version of `webpack-dev-server` as well if you have it installed:
+وسيظهر إصدار `webpack-dev-server` أيضًا إذا كان مثبتًا لديك:
 
 ```bash
 webpack 5.31.2
@@ -473,9 +457,9 @@ webpack-dev-server 3.11.2
 
 ### config
 
-**Build source using a configuration file**
+**يبني source باستخدام ملف إعدادات**
 
-Specify a different [configuration](/configuration) file other than `webpack.config.js`, which is one of the defaults.
+حدد ملف [configuration](/configuration) مختلفًا عن `webpack.config.js`، وهو أحد الملفات الافتراضية.
 
 ```bash
 npx webpack --config example.config.js
@@ -483,9 +467,9 @@ npx webpack --config example.config.js
 
 ### config-name
 
-In case your configuration file exports multiple configurations, you can use `--config-name` to specify which configuration to run.
+إذا كان ملف الإعدادات يصدّر عدة إعدادات، يمكنك استخدام `--config-name` لتحديد الإعداد الذي تريد تشغيله.
 
-Consider the following `webpack.config.js`:
+تخيل ملف `webpack.config.js` التالي:
 
 ```js
 export default [
@@ -517,13 +501,13 @@ export default [
 ];
 ```
 
-To run only the `second` configuration:
+لتشغيل إعداد `second` فقط:
 
 ```bash
 npx webpack --config-name second
 ```
 
-You can also pass multiple values:
+يمكنك أيضًا تمرير عدة قيم:
 
 ```bash
 npx webpack --config-name first --config-name second
@@ -531,7 +515,7 @@ npx webpack --config-name first --config-name second
 
 ### merge
 
-You can merge two or more different webpack configurations with the help of `--merge`:
+يمكنك دمج إعدادين أو أكثر من إعدادات webpack باستخدام `--merge`:
 
 ```bash
 npx webpack --config ./first.js --config ./second.js --merge
@@ -541,35 +525,35 @@ npx webpack --config ./first.js --config ./second.js --merge
 
 <Badge text="webpack-cli v5.1.0+" />
 
-You can extend existing webpack configurations with the help of `--extends`:
+يمكنك تمديد إعدادات webpack موجودة باستخدام `--extends`:
 
 ```bash
 npx webpack --extends ./base.webpack.config.js
 ```
 
-Read more about it in [extending configurations](/configuration/extending-configurations/).
+اقرأ المزيد في [تمديد الإعدادات](/configuration/extending-configurations/).
 
 ### json
 
-**Print result of webpack as JSON**
+**يطبع نتيجة webpack كـ JSON**
 
 ```bash
 npx webpack --json
 ```
 
-**If you want to store stats as json instead of printing it, you can use -**
+**إذا أردت حفظ stats كـ json بدل طباعتها، يمكنك استخدام:**
 
 ```bash
 npx webpack --json stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option, the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+في الحالات الأخرى، يطبع webpack مجموعة stats تعرض تفاصيل bundle وchunk والتوقيتات. باستخدام هذا الخيار، يمكن أن يكون output كائن JSON. تقبل هذه الاستجابة أداة [analyse](https://webpack.github.io/analyse/) الخاصة بـ webpack، أو [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/) من chrisbateman، أو [webpack-bundle-analyzer](https://github.com/webpack/webpack-bundle-analyzer) من th0r. تأخذ أداة analyse ملف JSON وتعرض كل تفاصيل build بشكل رسومي.
 
-T> See the [stats data api](/api/stats) to read more about the stats generated here.
+T> راجع [stats data api](/api/stats) لقراءة المزيد عن stats التي يتم توليدها هنا.
 
 ## Environment Options
 
-When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
+عندما [تصدّر إعدادات webpack دالة](/configuration/configuration-types/#exporting-a-function)، يمكن تمرير "environment" إليها.
 
 ### env
 
@@ -577,9 +561,9 @@ When the webpack configuration [exports a function](/configuration/configuration
 npx webpack --env production    # env.production = true
 ```
 
-The `--env` argument accepts multiple values:
+يقبل argument المسمى `--env` عدة قيم:
 
-| Invocation                                                       | Resulting environment                          |
+| الاستدعاء                                                        | environment الناتج                             |
 | ---------------------------------------------------------------- | ---------------------------------------------- |
 | `npx webpack --env prod`                                         | `{ prod: true }`                               |
 | `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
@@ -587,19 +571,19 @@ The `--env` argument accepts multiple values:
 | `npx webpack --env foo=bar=app`                                  | `{ foo: "bar=app"}`                            |
 | `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
-T> If you want to explicitly set a variable to empty string (`""`), you may need to escape characters on terminal like `npx webpack --env foo=\"\"`
+T> إذا أردت ضبط متغير صراحةً كنص فارغ (`""`)، فقد تحتاج إلى تهريب بعض الأحرف في terminal مثل `npx webpack --env foo=\"\"`.
 
-T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
+T> راجع دليل [environment variables](/guides/environment-variables/) لمزيد من المعلومات عن الاستخدام.
 
-In addition to the customized `env` showed above, there are some built-in ones under `env` to be used inside your webpack configuration:
+إضافة إلى `env` المخصص الموضح أعلاه، توجد بعض القيم المدمجة تحت `env` لاستخدامها داخل إعدادات webpack:
 
-| Environment Variable | Description                                  |
+| Environment Variable | الوصف                                        |
 | -------------------- | -------------------------------------------- |
-| `WEBPACK_SERVE`      | `true` if `serve\|server\|s` is being used.  |
-| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
-| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
+| `WEBPACK_SERVE`      | `true` إذا كان `serve\|server\|s` مستخدمًا.  |
+| `WEBPACK_BUILD`      | `true` إذا كان `build\|bundle\|b` مستخدمًا.  |
+| `WEBPACK_WATCH`      | `true` إذا كان `--watch\|watch\|w` مستخدمًا. |
 
-Note that you can not access those built-in environment variables inside the bundled code.
+لاحظ أنك لا تستطيع الوصول إلى environment variables المدمجة هذه داخل الكود المحزم.
 
 ```js
 export default (env, argv) => ({
@@ -611,90 +595,90 @@ export default (env, argv) => ({
 
 <Badge text="webpack-cli v6.0.0+" />
 
-Set `process.env.NODE_ENV` for your configuration:
+يضبط `process.env.NODE_ENV` داخل إعداداتك:
 
 ```bash
 npx webpack --config-node-env production   # process.env.NODE_ENV = 'production' in `webpack.config.js`
 ```
 
-When the `mode` option is not specified in the configuration, you can use the `--config-node-env` option to set the `mode`. For example, using `--config-node-env production` will set both `process.env.NODE_ENV` and `mode` to `'production'`.
+عندما لا يكون خيار `mode` محددًا داخل الإعدادات، يمكنك استخدام خيار `--config-node-env` لضبط `mode`. مثلًا، استخدام `--config-node-env production` سيضبط كلًا من `process.env.NODE_ENV` و`mode` على `'production'`.
 
-If your configuration exports a function, the value of `--config-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--config-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
+إذا كانت إعداداتك تصدّر دالة، يتم تعيين قيمة `--config-node-env` إلى mode بعد أن ترجع الدالة. هذا يعني أن `mode` لن يكون متاحًا داخل arguments الخاصة بالدالة، أي `env` و`argv`. لكن قيمة `--config-node-env` يمكن الوصول إليها عبر `argv.nodeEnv` داخل الدالة واستخدامها حسب الحاجة.
 
 ```js
 export default (env, argv) => {
-  console.log(argv.defineProcessEnvNodeEnv); // 'production' if --config-node-env production is used
+  console.log(argv.defineProcessEnvNodeEnv); // 'production' إذا استُخدم --config-node-env production
   return {
-    // your configuration
+    // إعداداتك
   };
 };
 ```
 
 ## Configuration Options
 
-| Parameter       | Explanation                                                    | Input type | Default                                             |
-| --------------- | -------------------------------------------------------------- | ---------- | --------------------------------------------------- |
-| `--config`      | Path to the configuration file                                 | string[]   | [Default Configs](/api/cli/#default-configurations) |
-| `--config-name` | Name of the configuration to use                               | string[]   |                                                     |
-| `--env`         | Environment passed to the configuration, when it is a function | string[]   |                                                     |
+| Parameter       | الشرح                                         | نوع الإدخال | الافتراضي                                           |
+| --------------- | --------------------------------------------- | ----------- | --------------------------------------------------- |
+| `--config`      | مسار ملف الإعدادات                            | string[]    | [Default Configs](/api/cli/#default-configurations) |
+| `--config-name` | اسم الإعداد المراد استخدامه                   | string[]    |                                                     |
+| `--env`         | environment تُمرر إلى الإعداد عندما يكون دالة | string[]    |                                                     |
 
 ## Analyzing Bundle
 
-You can also use `webpack-bundle-analyzer` to analyze your output bundles emitted by webpack. You can use `--analyze` flag to invoke it via CLI.
+يمكنك أيضًا استخدام `webpack-bundle-analyzer` لتحليل output bundles التي يصدرها webpack. يمكنك استخدام flag `--analyze` لتشغيله عبر CLI.
 
 ```bash
 npx webpack --analyze
 ```
 
-W> Make sure you have `webpack-bundle-analyzer` installed in your project else CLI will prompt you to install it.
+W> تأكد من تثبيت `webpack-bundle-analyzer` داخل مشروعك، وإلا ستطلب منك CLI تثبيته.
 
 ## Progress
 
-To check the progress of any webpack compilation you can use the `--progress` flag.
+لفحص تقدم أي webpack compilation، يمكنك استخدام flag `--progress`.
 
 ```bash
 npx webpack --progress
 ```
 
-To collect profile data for progress steps you can pass `profile` as value to `--progress` flag.
+لجمع profile data الخاصة بخطوات التقدم، يمكنك تمرير القيمة `profile` إلى flag `--progress`.
 
 ```bash
 npx webpack --progress=profile
 ```
 
-## Pass CLI arguments to Node.js
+## تمرير CLI arguments إلى Node.js
 
-To pass arguments directly to Node.js process, you can use the `NODE_OPTIONS` option.
+لتمرير arguments مباشرة إلى عملية Node.js، يمكنك استخدام خيار `NODE_OPTIONS`.
 
-For example, to increase the memory limit of Node.js process to 4 GB
+مثلًا، لزيادة حد ذاكرة عملية Node.js إلى 4 GB:
 
 ```bash
 NODE_OPTIONS="--max-old-space-size=4096" webpack
 ```
 
-Also, you can pass multiple options to Node.js process
+ويمكنك أيضًا تمرير عدة خيارات إلى عملية Node.js:
 
 ```bash
 NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 ```
 
-## Exit codes and their meanings
+## أكواد الخروج ومعانيها
 
-| Exit Code | Description                                        |
-| --------- | -------------------------------------------------- |
-| `0`       | Success                                            |
-| `1`       | Errors from webpack                                |
-| `2`       | Configuration/options problem or an internal error |
+| Exit Code | الوصف                                    |
+| --------- | ---------------------------------------- |
+| `0`       | نجاح                                     |
+| `1`       | أخطاء من webpack                         |
+| `2`       | مشكلة في الإعدادات/الخيارات أو خطأ داخلي |
 
 ## CLI Environment Variables
 
-| Environment Variable                  | Description                                                         |
-| ------------------------------------- | ------------------------------------------------------------------- |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`       | when `true` it will skip using the local instance of `webpack-cli`. |
-| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`   | when `true` it will force load the ESM config.                      |
-| [`WEBPACK_PACKAGE`](#webpack_package) | Use a custom webpack version in CLI.                                |
-| `WEBPACK_DEV_SERVER_PACKAGE`          | Use a custom webpack-dev-server version in CLI.                     |
-| `WEBPACK_CLI_HELP_WIDTH`              | Use a custom width for help output.                                 |
+| Environment Variable                  | الوصف                                                                |
+| ------------------------------------- | -------------------------------------------------------------------- |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`       | عندما تكون `true`، سيتم تجاوز استخدام النسخة المحلية من webpack-cli. |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`   | عندما تكون `true`، سيتم إجبار تحميل إعداد ESM.                       |
+| [`WEBPACK_PACKAGE`](#webpack_package) | يستخدم إصدارًا مخصصًا من webpack داخل CLI.                           |
+| `WEBPACK_DEV_SERVER_PACKAGE`          | يستخدم إصدارًا مخصصًا من webpack-dev-server داخل CLI.                |
+| `WEBPACK_CLI_HELP_WIDTH`              | يستخدم عرضًا مخصصًا لناتج help.                                      |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
@@ -702,7 +686,7 @@ WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 
 ### WEBPACK_PACKAGE
 
-Use a custom webpack version in CLI. Considering the following content in your `package.json`:
+يستخدم إصدارًا مخصصًا من webpack داخل CLI. بافتراض وجود المحتوى التالي في `package.json`:
 
 ```json
 {
@@ -712,13 +696,13 @@ Use a custom webpack version in CLI. Considering the following content in your `
 }
 ```
 
-To use `webpack v4.0.0`:
+لاستخدام `webpack v4.0.0`:
 
 ```bash
 npx webpack
 ```
 
-To use `webpack v5.32.0`:
+لاستخدام `webpack v5.32.0`:
 
 ```bash
 WEBPACK_PACKAGE=webpack-5 npx webpack
@@ -728,15 +712,15 @@ WEBPACK_PACKAGE=webpack-5 npx webpack
 
 ### TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for ./webpack.config.ts
 
-You might encounter this error in the case of using native ESM in TypeScript (i.e. `type: "module"` in `package.json`).
+قد تواجه هذا الخطأ عند استخدام ESM الأصلي في TypeScript، أي وجود `type: "module"` داخل `package.json`.
 
-`webpack-cli` supports configuration in both `CommonJS` and `ESM` format, at first it tries to load a configuration using `import()`, once it fails it would try to load the configuration using `require()`.
-However, the `import()` method won't work with `ts-node` without [loader hooks](https://nodejs.org/api/esm.html#esm_experimental_loaders) enabled (described at [`TypeStrong/ts-node#1007`](https://github.com/TypeStrong/ts-node/issues/1007)).
+يدعم `webpack-cli` الإعدادات بصيغتي `CommonJS` و`ESM`. في البداية يحاول تحميل الإعداد باستخدام `import()`، وإذا فشل يحاول تحميله باستخدام `require()`.
+لكن طريقة `import()` لن تعمل مع `ts-node` بدون تفعيل [loader hooks](https://nodejs.org/api/esm.html#esm_experimental_loaders)، كما هو موضح في [`TypeStrong/ts-node#1007`](https://github.com/TypeStrong/ts-node/issues/1007).
 
-To fix the error above use the following command:
+لإصلاح الخطأ السابق، استخدم الأمر التالي:
 
 ```bash
 NODE_OPTIONS="--import=data:text/javascript,import { register } from 'node:module'; import { pathToFileURL } from 'node:url'; register('ts-node/esm', pathToFileURL('./'));" npx webpack --entry ./src/index.js --mode production
 ```
 
-For more information, see our documentation on [writing a webpack configuration in `TypeScript`](/configuration/configuration-languages/#typescript).
+لمزيد من المعلومات، راجع توثيقنا عن [كتابة إعدادات webpack باستخدام `TypeScript`](/configuration/configuration-languages/#typescript).
