@@ -1,13 +1,11 @@
 ---
 title: HashedModuleIdsPlugin
-group: webpack
 contributors:
-  - shaodahong
-  - byzyk
-  - EslamHiko
+  - RlxChap2
+group: webpack
 ---
 
-This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id. Suggested for use in production.
+يجعل هذا plugin قيمة hash مبنية على المسار النسبي للـ module، ثم يستخدم سلسلة من أربعة أحرف كمعرّف للـ module. يُنصح باستخدامه في بيئة الإنتاج.
 
 ```js
 new webpack.ids.HashedModuleIdsPlugin({
@@ -15,23 +13,23 @@ new webpack.ids.HashedModuleIdsPlugin({
 });
 ```
 
-## Options
+## الخيارات
 
-This plugin supports the following options:
+يدعم هذا plugin الخيارات التالية:
 
-- `context`: The context directory (**absolute path**) for creating names.
-- `hashFunction`: The hashing algorithm to use, defaults to `'md4'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported.
-- `hashDigest`: The encoding to use when generating the hash, defaults to `'base64'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+- `context`: مجلد السياق (**مسار مطلق**) الذي تُنشأ منه الأسماء.
+- `hashFunction`: خوارزمية hashing المستخدمة، والقيمة الافتراضية هي `'md4'`. يدعم webpack كل الدوال المتاحة في [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) في Node.js.
+- `hashDigest`: الترميز المستخدم عند إنشاء hash، والقيمة الافتراضية هي `'base64'`. يدعم webpack كل الترميزات المتاحة في [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) في Node.js.
 
   <Badge text="5.104.0+" />
 
-  In addition to standard Node.js encodings, webpack also supports custom digest algorithms: `'base64url'`, `'base62'`, `'base58'`, `'base52'`, `'base49'`, `'base36'`, `'base32'`, and `'base25'`. These are useful for generating shorter or URL-safe hash values.
+  بالإضافة إلى ترميزات Node.js القياسية، يدعم webpack خوارزميات digest مخصصة: `'base64url'` و`'base62'` و`'base58'` و`'base52'` و`'base49'` و`'base36'` و`'base32'` و`'base25'`. تفيد هذه الخيارات عندما تريد قيم hash أقصر أو آمنة للاستخدام داخل URLs.
 
-- `hashDigestLength`: The prefix length of the hash digest to use, defaults to `4`. Note that some generated ids might be longer than specified here, to avoid module id collisions.
+- `hashDigestLength`: طول الجزء المأخوذ من بداية hash digest، والقيمة الافتراضية هي `4`. قد تكون بعض المعرفات الناتجة أطول من هذه القيمة لتجنب تكرار module ids.
 
-## Usage
+## الاستخدام
 
-Here's an example of how this plugin might be used:
+هذا مثال على طريقة استخدام plugin:
 
 ```js
 import path from "node:path";
@@ -48,7 +46,7 @@ new webpack.ids.HashedModuleIdsPlugin({
 });
 ```
 
-**Using URL-safe encoding (5.104.0+):**
+**استخدام ترميز آمن داخل URL (5.104.0+):**
 
 ```js
 import path from "node:path";
