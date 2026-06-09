@@ -1,11 +1,12 @@
 ---
-title: إضافة الإعطاء
+title: ProvidePlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-تحميل المودلات تلقائياً بدلاً من استدعائهم ب `import` أو `require` في كل مكان.
+يحمّل modules تلقائيًا بدل الحاجة إلى كتابة `import` أو `require` لها في كل ملف.
 
 ```js
 new webpack.ProvidePlugin({
@@ -14,7 +15,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-or
+أو
 
 ```js
 new webpack.ProvidePlugin({
@@ -23,9 +24,9 @@ new webpack.ProvidePlugin({
 });
 ```
 
-بشكل افتراضي ، يكون مسار الوحدات في المجلد الحالي هو (`./**)` و `node_modules`.
+بشكل افتراضي، يتم حل module من المجلد الحالي `./**` ومن `node_modules`.
 
-ايضاً بالأمكان تحديد مسار كامل:
+يمكنك أيضًا تحديد مسار كامل:
 
 ```js
 import path from "node:path";
@@ -40,14 +41,13 @@ new webpack.ProvidePlugin({
 });
 ```
 
-عندما يتم مصادفه ال `معرف (identifier)` كمتغير حر في المودل، يتم تحميل `المودل` تلقائياً وال `معرف (identifier)` يكون مملوء بصادرات المودل المحمل (او `الممتلكة` لدعم الصادرات المسماة)
+عندما يصادف webpack `identifier` كمتغير حر داخل module، يحمّل module المحدد تلقائيًا ويملأ `identifier` بصادرات ذلك module. ويمكنك تحديد property معينة لدعم named exports.
 
-For importing the default export of an ES2015 module, you have to specify the default property of module.
-لإستيراد الصادرات الافتراضية لمودل ES2015، يجب عليك ان تحدد الممتلكة الافتراضية للمودل
+لاستيراد default export من ES2015 module، يجب تحديد الخاصية `default` في module.
 
-## الاستعمال : jQuery
+## الاستخدام: jQuery
 
-لتحميل `jquery` بشكل تلقائي يمكننا توجيه كلا المتغيريين اللذين يعرضمها الى مودل node الحالي:
+لتحميل `jquery` تلقائيًا، وجّه المتغيرين `$` و`jQuery` إلى module الخاص بـ `jquery`:
 
 ```js
 new webpack.ProvidePlugin({
@@ -56,19 +56,18 @@ new webpack.ProvidePlugin({
 });
 ```
 
-ثم في اي مكان لدينا في الكود المصدري:
+ثم في أي مكان داخل الكود المصدري:
 
 ```js
-// داخل المودل
+// داخل module
 $("#item"); // <= يعمل
-jQuery("#item"); // <= ايضاً يعمل
-// $ يتم وضعها تلقائياً لصادرات المودل "jquery"
+jQuery("#item"); // <= يعمل أيضًا
+// يتم توفير $ تلقائيًا من exports الخاصة بـ "jquery"
 ```
 
-## الاستعمال: jQuery مع Angular 1
+## الاستخدام: jQuery مع Angular 1
 
-Angular تبحث عن `window.jQuery` ليمكنها تحديد ما اذا كانت Jquery موجودة
-إطلع على [الكود المصدري](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
+يبحث Angular عن `window.jQuery` ليحدد هل jQuery موجودة أم لا. راجع [الكود المصدري](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
 
 ```js
 new webpack.ProvidePlugin({
@@ -76,7 +75,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-## الاستعمال: Lodash Map
+## الاستخدام: Lodash Map
 
 ```js
 new webpack.ProvidePlugin({
@@ -84,7 +83,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-### الاستعمال: Vue.js
+### الاستخدام: Vue.js
 
 ```js
 new webpack.ProvidePlugin({

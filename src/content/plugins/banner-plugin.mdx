@@ -1,20 +1,21 @@
 ---
-title: اضافة البنر
+title: BannerPlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 related:
   - title: banner-plugin-hashing test
     url: https://github.com/webpack/webpack/blob/main/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
 ---
 
-يضيف بنر اعلى كل جزء تم توليده
+يضيف banner في أعلى كل chunk يتم توليده.
 
 ```js
 import webpack from "webpack";
 
 new webpack.BannerPlugin(banner);
-// او
+// أو
 new webpack.BannerPlugin(options);
 ```
 
@@ -22,23 +23,23 @@ new webpack.BannerPlugin(options);
 
 ```ts
 {
-  banner: string | function, // البنر ك سترنق او دالة ، ستكون داخل تعليق
-  raw: boolean, // اذا كانت صحيحة ، البنر لن يكون داخل تعليق
-  entryOnly: boolean, // اذا كانت صحيحة ، سيكون البنر مُضاف الى اجزاء الادخال فقط
-  test: string | RegExp | [string, RegExp], // يتضمن جميع المودلات الذي نجحت في اختبار التأكيد
-  include: string | RegExp | [string, RegExp], // يتضمن جميع المودلات التي تطابق أي من هذه الحالات
-  exclude: string | RegExp | [string, RegExp], // استثناء جميع المولات التي تطابق أي من هذه الحالات
-  footer?: boolean, // اذا كانت صحيحة، سوف يتم وضع البنر في نهاية التجميعة
-  stage?: number, // المرحلة التي يجب فيها اضافة البنر اثناء عملية التجميع
+  banner: string | function, // نص banner أو دالة، وسيتم وضعه داخل تعليق
+  raw: boolean, // إذا كانت true، فلن يضع webpack banner داخل تعليق
+  entryOnly: boolean, // إذا كانت true، فسيضاف banner إلى entry chunks فقط
+  test: string | RegExp | [string, RegExp], // يشمل كل modules التي تطابق الشرط
+  include: string | RegExp | [string, RegExp], // يشمل modules المطابقة لهذه الشروط
+  exclude: string | RegExp | [string, RegExp], // يستبعد modules المطابقة لهذه الشروط
+  footer?: boolean, // إذا كانت true، يوضع banner في نهاية bundle
+  stage?: number, // المرحلة التي يضاف فيها banner أثناء compilation
 }
 ```
 
-## الاستعمال
+## الاستخدام
 
 ```js
 import webpack from "webpack";
 
-// سترنق
+// نص
 new webpack.BannerPlugin({
   banner: "hello world",
 });
@@ -48,17 +49,17 @@ new webpack.BannerPlugin({
   banner: (yourVariable) => `yourVariable: ${yourVariable}`,
 });
 
-// سيتم إضافة رسالة البنر بعد التصغير وأي تعديل على الأصل
+// إضافة رسالة banner بعد التصغير وأي تعديل على asset
 new webpack.BannerPlugin({
   raw: true,
-  banner: "/* البنر عبارة عن سترنق */",
+  banner: "/* banner كنص خام */",
   stage: webpack.Compilation.PROCESS_ASSETS_STAGE_REPORT,
 });
 ```
 
-## المواضع
+## placeholders
 
-منذ webpack 2.5.0, يتم تقييم المواضع في سترنق `banner`
+منذ webpack 2.5.0، يتم تقييم placeholders داخل نص `banner`.
 
 ```js
 import webpack from "webpack";

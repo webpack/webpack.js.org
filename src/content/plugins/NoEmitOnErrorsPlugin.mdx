@@ -1,11 +1,13 @@
 ---
-title: إضافة منع الاصدار عند وجود الاخطاء
+title: NoEmitOnErrorsPlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-`NoEmitOnErrorsPlugin`: تسمح لك بتفادي اضافة الأصول عندما يكون هناك اي أخطاء. مفعلة افتراضياً، يمكنك تعطيلها بأستخدام [`optimization.emitOnErrors`](/configuration/optimization/#optimizationemitonerrors)
+يسمح لك `NoEmitOnErrorsPlugin` بمنع emit للـ assets عند وجود أخطاء. يكون مفعّلًا افتراضيًا، ويمكن تعطيله عبر [`optimization.emitOnErrors`](/configuration/optimization/#optimizationemitonerrors).
+
 **webpack.config.js**
 
 ```js

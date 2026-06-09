@@ -1,21 +1,22 @@
 ---
-title: إضافة الحد الأدنى للاجزاء
+title: MinChunkSizePlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-ابقاء حجم الاجزاء فوق الحد المعين عن طريق دمج الاجزاء التي تكون اصغر من `minChunkSize`.
+يحافظ على حجم chunks فوق الحد المحدد عبر دمج chunks الأصغر من `minChunkSize`.
 
 ```js
 new webpack.optimize.MinChunkSizePlugin({
-  minChunkSize: 10000, // اقل عدد من الحروف
+  minChunkSize: 10000, // أقل حجم مسموح به للـ chunk
 });
 ```
 
-## الأستعمال عن طريق واجهة الاوامر (CLI)
+## الاستخدام عبر CLI
 
-هذه الاضافه واعداداتها يمكن التحكم فيها وادارتها عن طريق واجهة الأوامر [CLI](/api/cli/):
+يمكن التحكم بهذا plugin وخياراته عبر [CLI](/api/cli/):
 
 ```bash
 webpack --optimize-min-chunk-size 10000

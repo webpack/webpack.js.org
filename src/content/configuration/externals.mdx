@@ -472,11 +472,11 @@ jq(".my-element").animate(/* ... */);
 
 لاحظ أنه سيكون هناك عبارة `import` في output bundle.
 
-#### Preserving phase keywords
+#### الحفاظ على phase keywords
 
 <Badge text="5.107.0+" />
 
-The `defer` and `source` import phase keywords are preserved on `module` externals the same way [import attributes](https://github.com/tc39/proposal-import-attributes) are. A static `import defer * as ns from "mod"` against a `module` external is emitted as a native `import defer * as ...` statement, and `import source v from "mod"` becomes `import source ... from "mod"`. The same external imported with two different phases produces distinct `ExternalModule` instances, so neither phase is silently dropped.
+يتم الحفاظ على import phase keywords مثل `defer` و`source` مع `module` externals بالطريقة نفسها التي يتم بها الحفاظ على [import attributes](https://github.com/tc39/proposal-import-attributes). عند استخدام import ثابت مثل `import defer * as ns from "mod"` مع `module` external، يخرجه webpack كعبارة native بالشكل `import defer * as ...`، وتصبح `import source v from "mod"` بالشكل `import source ... from "mod"`. وإذا تم استيراد external نفسه بمرحلتين مختلفتين، فسينتج webpack نسخ `ExternalModule` منفصلة، لذلك لا يتم إسقاط أي phase بصمت.
 
 {/* eslint-skip */}
 
@@ -537,11 +537,11 @@ async function foo() {
 
 لاحظ أن output bundle سيحتوي على عبارة `import()`.
 
-#### Preserving phase keywords
+#### الحفاظ على phase keywords
 
 <Badge text="5.107.0+" />
 
-Dynamic `import.defer(...)` and `import.source(...)` are also preserved on `import` externals when the import function name is the default `"import"`. The phase keyword is emitted in the output instead of being stripped.
+يتم الحفاظ أيضًا على `import.defer(...)` و`import.source(...)` الديناميكية مع `import` externals عندما يكون اسم دالة import هو الاسم الافتراضي `"import"`. يتم إخراج phase keyword في الناتج بدل إزالته.
 
 {/* eslint-skip */}
 

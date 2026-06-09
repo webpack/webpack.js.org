@@ -1,11 +1,12 @@
 ---
-title: إضافة الجلب المسبق
+title: PrefetchPlugin
 group: webpack
 contributors:
   - MohaDev-69
+  - RlxChap2
 ---
 
-جلب مسبق اعتيادي لطلبات المودل، مما يؤدي الى حلها وبنائها قبل حدوث اول عملية `import` او `require` لتلك المودل، استخدام هذه الإضافه يمكن ان يسرع الاداء. حاول تحليل البنية اولاً لتحديد نقاط الجلب المسبق الذكية
+يجلب request الخاص بـ module مسبقًا، بحيث يتم resolve وبناء module قبل أول `import` أو `require` له. قد يسرّع هذا الأداء، لكن يفضل تحليل بنية التطبيق أولًا لتحديد نقاط prefetch المفيدة.
 
 ```js
 import webpack from "webpack";
@@ -15,5 +16,5 @@ new webpack.PrefetchPlugin([context], request);
 
 ## الخيارات
 
-- `context`: مسار حتمي لمجلد
-- `request`: طلب من مودل عادية
+- `context`: مسار مطلق إلى مجلد.
+- `request`: request عادي لـ module.

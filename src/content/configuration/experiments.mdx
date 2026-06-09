@@ -237,8 +237,8 @@ export default {
 - استيرادات CSS: سيُضمِّن webpack استيرادات CSS داخل ملفّ CSS المُولَّد.
 - إعادة التحميل الساخن (HMR): يدعم webpack الـ HMR لملفّات CSS، أي أنّ التغييرات في ملفّات CSS ستظهر في المتصفّح من دون إعادة تحميل كاملة للصفحة.
 
-- <Badge text="5.107.0+" /> Scope hoisting (module concatenation) لـ CSS
-  Modules. حين يُفعَّل
+- <Badge text="5.107.0+" /> تحسين scope hoisting، أو module concatenation، لـ
+  CSS Modules. حين يُفعَّل
   [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)،
   فإنّ وحدات CSS التي يكون `exportType` لها `text` أو `css-style-sheet` أو
   `style` أو `link` تُدمَج في نسخة واحدة من الوحدة بدلاً من إبقائها نسخاً منفصلة
@@ -377,10 +377,10 @@ export default {
 
 <Badge text="5.107.0+" />
 
-Enable native HTML module support. Importing a `.html` file from JavaScript runs its tag references through the normal webpack pipeline, replacing the role `html-loader` has played for years. The flag registers the `html` module type on `NormalModuleFactory` and unlocks the HTML behaviors described below.
+يفعّل الدعم الأصلي لـ HTML modules. عند استيراد ملف `.html` من JavaScript، تمر مراجع الوسوم داخل الملف عبر pipeline العادية في webpack، وهذا يستبدل الدور الذي كان يؤديه `html-loader` لسنوات. يسجل هذا flag نوع module المسمى `html` داخل `NormalModuleFactory` ويفعّل سلوكيات HTML الموضحة أدناه.
 
-- Type: `boolean`
-- Default: `false`
+- النوع: `boolean`
+- الافتراضي: `false`
 
 **webpack.config.js**
 
@@ -393,7 +393,7 @@ export default {
 };
 ```
 
-Then import the HTML file from JavaScript. The default export is the processed HTML as a string, with all asset references resolved through webpack:
+بعد ذلك، استورد ملف HTML من JavaScript. يكون default export هو HTML المعالج كنص، مع حل كل مراجع assets عبر webpack:
 
 ```js
 // src/index.js
@@ -402,11 +402,11 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **This feature is experimental and partial.** Webpack 5.107 only implements the `html-loader` side: importing an HTML file from JS runs its tag references through the webpack pipeline. **HTML entry points** (using a `.html` file directly as `entry`, the `html-webpack-plugin` part) are **not supported yet** and are planned for the next minor release. The full story is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+W> **هذه الميزة تجريبية وجزئية.** في webpack 5.107 تم تنفيذ جانب `html-loader` فقط: عند استيراد ملف HTML من JS، تمر مراجع الوسوم عبر pipeline الخاصة بـ webpack. أما **HTML entry points**، أي استخدام ملف `.html` مباشرة كـ `entry`، وهو الجزء المرتبط بـ `html-webpack-plugin`، فهي **غير مدعومة بعد** ومخطط لها في الإصدار minor التالي. يمكن متابعة التفاصيل الكاملة في issue [#536](https://github.com/webpack/webpack/issues/536).
 
 #### Inline `<style>` tags
 
-Inline `<style>` blocks inside an HTML module are routed through webpack's CSS pipeline as virtual CSS modules with `exportType: "text"`. `url()` and `@import` references are resolved relative to the HTML file, and the processed CSS text is written back into the original `<style>` tag in the emitted HTML string.
+يتم تمرير كتل `<style>` المضمنة داخل HTML module عبر CSS pipeline في webpack كـ CSS modules افتراضية باستخدام `exportType: "text"`. تُحل مراجع `url()` و`@import` نسبة إلى ملف HTML، ثم يُكتب نص CSS المعالج مرة أخرى داخل وسم `<style>` الأصلي في نص HTML الناتج.
 
 ```html
 <!-- src/page.html -->
@@ -427,11 +427,11 @@ Inline `<style>` blocks inside an HTML module are routed through webpack's CSS p
 </html>
 ```
 
-`<style type="text/css">` and `<style>` with no `type` attribute are processed. Anything with a non-CSS `type` is passed through unchanged.
+تتم معالجة `<style type="text/css">` و`<style>` الذي لا يحتوي على الخاصية `type`. أما أي وسم يحمل `type` غير خاص بـ CSS فيمر بدون تغيير.
 
 #### Inline `<script>` tags
 
-Inline `<script>` bodies are routed through the same entry pipeline used for [`<script src>`](#script-src-and-link-relmodulepreload). Each `<script>` body becomes its own webpack entry: classic inline scripts are bundled as CommonJS, and `<script type="module">` bodies are bundled as ESM. The tag in the emitted HTML is rewritten to `<script src="…">` pointing at the generated chunk, with the body cleared.
+يتم تمرير محتوى وسوم `<script>` المضمنة عبر entry pipeline نفسها المستخدمة مع [`<script src>`](#script-src-and-link-relmodulepreload). يصبح كل محتوى داخل `<script>` عبارة عن webpack entry مستقل: scripts الكلاسيكية المضمنة تُحزّم كـ CommonJS، أما محتوى `<script type="module">` فيُحزّم كـ ESM. في HTML الناتج، يُعاد كتابة الوسم إلى `<script src="…">` يشير إلى chunk المولّد، مع تفريغ المحتوى الداخلي.
 
 ```html
 <!-- src/page.html -->
@@ -450,15 +450,15 @@ Inline `<script>` bodies are routed through the same entry pipeline used for [`<
 </html>
 ```
 
-The same behaviors that apply to external `<script src>` apply here too:
+تنطبق هنا السلوكيات نفسها الخاصة بـ `<script src>` الخارجي:
 
-- When [`output.module`](/configuration/output/#outputmodule) is enabled, classic inline `<script>` tags are auto-upgraded to `type="module"`, matching the auto-upgrade for `<script src>`.
-- `webpackIgnore` works on inline `<script>` tags as well, leaving the original body untouched.
-- Non-JS `type` values such as `application/ld+json` and `importmap` pass through unchanged.
+- عند تفعيل [`output.module`](/configuration/output/#outputmodule)، تتم ترقية وسوم `<script>` الكلاسيكية المضمنة تلقائيًا إلى `type="module"`، مثل الترقية التلقائية في `<script src>`.
+- يعمل `webpackIgnore` أيضًا مع وسوم `<script>` المضمنة، ويترك المحتوى الأصلي كما هو.
+- قيم `type` غير الخاصة بـ JS، مثل `application/ld+json` و`importmap`، تمر بدون تغيير.
 
 #### `<script src>` and `<link rel="modulepreload">`
 
-`<script src>` and `<link rel="modulepreload">` references inside an HTML module become real webpack entries. The emitted chunk URL is rewritten back into the HTML string, so hashed filenames work the same way they do for JavaScript imports.
+تصبح مراجع `<script src>` و`<link rel="modulepreload">` داخل HTML module عبارة عن webpack entries حقيقية. ثم يُعاد كتابة URL الخاص بالـ chunk الناتج داخل نص HTML، لذلك تعمل أسماء الملفات التي تحتوي على hash بالطريقة نفسها التي تعمل بها مع JavaScript imports.
 
 ```html
 <!-- src/page.html -->
@@ -474,16 +474,16 @@ The same behaviors that apply to external `<script src>` apply here too:
 </html>
 ```
 
-A few behaviors to keep in mind:
+هناك بعض السلوكيات التي يجب الانتباه لها:
 
-- Multiple `<script src>` tags on the same page share a single runtime. Within each group (classic or `type="module"`), the leader holds the runtime and the rest declare `dependOn` on it.
-- `<link rel="modulepreload">` entries stay independent and are never imported by sibling scripts, preserving "preload without execute" semantics.
-- When [`output.module`](/configuration/output/#outputmodule) is enabled, classic `<script src>` tags are auto-upgraded to `<script type="module" src>` so the emitted ES-module chunks load in the correct mode.
-- Non-JS script types (`application/ld+json`, `importmap`, …) and data URIs flow through unchanged and are not bundled as JS.
+- وسوم `<script src>` المتعددة في الصفحة نفسها تشارك runtime واحدًا. داخل كل مجموعة، سواء كانت classic أو `type="module"`، يحمل العنصر الرئيسي runtime وتعلن بقية العناصر `dependOn` عليه.
+- تبقى entries الخاصة بـ `<link rel="modulepreload">` مستقلة ولا يتم استيرادها من scripts المجاورة، مما يحافظ على معنى "preload without execute".
+- عند تفعيل [`output.module`](/configuration/output/#outputmodule)، تتم ترقية وسوم `<script src>` الكلاسيكية تلقائيًا إلى `<script type="module" src>` حتى تُحمّل chunks الخاصة بـ ES modules بالوضع الصحيح.
+- أنواع scripts غير الخاصة بـ JS، مثل `application/ld+json` و`importmap` وdata URIs، تمر بدون تغيير ولا تُحزّم كـ JS.
 
 #### `webpackIgnore` magic comment
 
-Placing an HTML `<!-- webpackIgnore: true -->` comment immediately before a tag tells webpack to skip URL resolution for that tag's `src`, `href`, `srcset`, and similar attributes. See the full description under [magic comments](/api/module-methods/#webpackignore).
+وضع تعليق HTML بالشكل `<!-- webpackIgnore: true -->` مباشرة قبل وسم معيّن يخبر webpack بتجاوز URL resolution لذلك الوسم في خصائص مثل `src` و`href` و`srcset` وما يشبهها. راجع الشرح الكامل ضمن [magic comments](/api/module-methods/#webpackignore).
 
 ### experiments.lazyCompilation
 
@@ -583,12 +583,12 @@ export default {
 
 <Badge text="5.107.0+" />
 
-Enable native TypeScript support. With the flag turned on, webpack compiles `.ts`, `.cts`, and `.mts` files (and the matching `data:text/typescript` and `data:application/typescript` data URIs) directly, without any external loader. Under the hood it calls Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options).
+يفعّل الدعم الأصلي لـ TypeScript. عند تفعيل هذا flag، يترجم webpack ملفات `.ts` و`.cts` و`.mts` مباشرة، وكذلك data URIs المطابقة مثل `data:text/typescript` و`data:application/typescript`، بدون أي loader خارجي. داخليًا، يستدعي webpack دالة Node.js المدمجة [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options).
 
-- Type: `boolean`
-- Default: `false` (auto-enabled by [`experiments.futureDefaults`](#experimentsfuturedefaults))
+- النوع: `boolean`
+- الافتراضي: `false`، ويتم تفعيله تلقائيًا بواسطة [`experiments.futureDefaults`](#experimentsfuturedefaults).
 
-W> Requires Node.js >= 22.6 for the stable `module.stripTypeScriptTypes` API.
+W> يتطلب Node.js >= 22.6 لاستخدام API المستقر `module.stripTypeScriptTypes`.
 
 ```js
 export default {
@@ -599,13 +599,13 @@ export default {
 };
 ```
 
-Enabling the flag also wires up sensible defaults: default rules for `.ts` / `.cts` / `.mts`, `.ts` added to extension resolution (before `.js`), `extensionAlias` so an `import "./foo.js"` also tries `./foo.ts` (and `.cjs` / `.mjs` → `.cts` / `.mts`), [`tsconfig.json` resolution](/configuration/resolve/#resolvetsconfig), and the `"typescript"` conditional-exports key so monorepo packages can ship `.ts` sources via `package.json#exports`.
+تفعيل هذا flag يضبط أيضًا إعدادات افتراضية مناسبة: rules افتراضية لـ `.ts` و`.cts` و`.mts`، وإضافة `.ts` إلى extension resolution قبل `.js`، وضبط `extensionAlias` بحيث يحاول `import "./foo.js"` أيضًا استخدام `./foo.ts`، وكذلك تحويل `.cjs` / `.mjs` إلى `.cts` / `.mts`، ودعم [`tsconfig.json` resolution](/configuration/resolve/#resolvetsconfig)، وإضافة مفتاح conditional exports باسم `"typescript"` حتى تستطيع packages داخل monorepo نشر مصادر `.ts` عبر `package.json#exports`.
 
-W> The transform only **erases types**. It does **not** perform type checking, and it does not handle JSX / `.tsx` or non-erasable TypeScript syntax (`enum`, `namespace` with runtime members, parameter-property constructors, `export =`, decorator metadata). These are the same constraints TypeScript enforces with the [`erasableSyntaxOnly`](https://www.typescriptlang.org/tsconfig/#erasableSyntaxOnly) tsconfig option.
+W> هذا التحويل **يزيل الأنواع فقط**. لا يقوم بعملية type checking، ولا يتعامل مع JSX / `.tsx` أو صياغات TypeScript التي لا يمكن إزالتها فقط، مثل `enum` و`namespace` التي تحتوي على أعضاء runtime، وparameter-property constructors، و`export =`، وdecorator metadata. هذه هي القيود نفسها التي يفرضها TypeScript عند استخدام خيار tsconfig المسمى [`erasableSyntaxOnly`](https://www.typescriptlang.org/tsconfig/#erasableSyntaxOnly).
 
-For type checking, pair the flag with `tsc --noEmit` or [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin). For JSX or non-erasable TypeScript syntax, keep using `ts-loader` or `swc-loader`.
+لإجراء type checking، استخدم هذا flag مع `tsc --noEmit` أو [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin). أما عند استخدام JSX أو صياغات TypeScript غير قابلة للإزالة فقط، فاستمر في استخدام `ts-loader` أو `swc-loader`.
 
-The webpack repo ships two reference examples:
+يوفر مستودع webpack مثالين مرجعيين:
 
-- [`examples/typescript`](https://github.com/webpack/webpack/tree/main/examples/typescript) for the built-in `experiments.typescript` setup.
-- [`examples/typescript-non-erasable`](https://github.com/webpack/webpack/tree/main/examples/typescript-non-erasable) for the `ts-loader` fallback when non-erasable syntax is required.
+- [`examples/typescript`](https://github.com/webpack/webpack/tree/main/examples/typescript) لإعداد `experiments.typescript` المدمج.
+- [`examples/typescript-non-erasable`](https://github.com/webpack/webpack/tree/main/examples/typescript-non-erasable) لاستخدام `ts-loader` كبديل عندما تكون الصياغة غير القابلة للإزالة فقط مطلوبة.
