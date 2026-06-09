@@ -7,7 +7,8 @@ related:
   - title: banner-plugin-hashing test
     url: https://github.com/webpack/webpack/blob/main/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
 ---
-يضيف بنر  اعلى كل جزء تم توليده
+
+يضيف بنر اعلى كل جزء تم توليده
 
 ```js
 import webpack from "webpack";
@@ -47,8 +48,7 @@ new webpack.BannerPlugin({
   banner: (yourVariable) => `yourVariable: ${yourVariable}`,
 });
 
-// سيتم اضافه رسالة البنر بعد التصغير واي تعديلات على الأصل
-It will add the banner message after minimizers and any asset manipulation
+// سيتم إضافة رسالة البنر بعد التصغير وأي تعديل على الأصل
 new webpack.BannerPlugin({
   raw: true,
   banner: "/* البنر عبارة عن سترنق */",
@@ -58,7 +58,7 @@ new webpack.BannerPlugin({
 
 ## المواضع
 
-منذ webpack 2.5.0, يتم تقييم المواضع في سترنق `banner` 
+منذ webpack 2.5.0, يتم تقييم المواضع في سترنق `banner`
 
 ```js
 import webpack from "webpack";

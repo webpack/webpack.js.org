@@ -4,7 +4,8 @@ group: webpack
 contributors:
   - MohaDev-69
 ---
-يقوم بتجاهل ملفات محددة، على سبيل المثال هؤلاء الذين يطابقون المسار المُرفق  او تعبير نمطي معين، عندما يكونون في [وضع المشاهدة](/configuration/watch).
+
+يقوم بتجاهل ملفات محددة، على سبيل المثال هؤلاء الذين يطابقون المسار المُرفق او تعبير نمطي معين، عندما يكونون في [وضع المشاهدة](/configuration/watch).
 
 ```js
 new webpack.WatchIgnorePlugin({ paths });
@@ -14,4 +15,4 @@ new webpack.WatchIgnorePlugin({ paths });
 
 - `paths` (`Array<string | RegExp>`): - قائمة من التعبيرات النمطية او مسارات حتمية الى مجلدات او ملفات التي يُفترض ان يتم تجاهلها
 
-ملاحظة> تم ايقاف هذه الاضافه واستبدالها بخيار  [watchOptions.ignored](/configuration/watch/#watchoptionsignored)
+ملاحظة> تم ايقاف هذه الاضافه واستبدالها بخيار [watchOptions.ignored](/configuration/watch/#watchoptionsignored)
