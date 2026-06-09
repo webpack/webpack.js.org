@@ -3,29 +3,22 @@ title: Resolvers
 group: Plugins
 sort: 15
 contributors:
-  - EugeneHlushko
-  - chenxsan
+  - RlxChap2
 ---
 
-Resolvers are created using the `enhanced-resolve` package. The `Resolver`
-class extends the `tapable` class and uses `tapable` to provide a few hooks.
-The `enhanced-resolve` package can be used directly to create new resolvers,
-however any [`compiler` instance](/api/node/#compiler-instance) has a few resolver instances that can be
-tapped into.
+تُنشأ resolvers باستخدام حزمة `enhanced-resolve`. ترث class `Resolver` من `tapable` وتستخدمها لتوفير بعض hooks. يمكنك استخدام `enhanced-resolve` مباشرة لإنشاء resolvers جديدة، لكن كل [`compiler` instance](/api/node/#compiler-instance) يحتوي أصلًا على عدة resolver instances يمكنك استخدام hooks الخاصة بها.
 
-Before reading on, make sure to have a look at the
-[`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](/api/plugins/#tapable) documentation.
+قبل المتابعة، من الأفضل مراجعة توثيق [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) وتوثيق [`tapable`](/api/plugins/#tapable).
 
-## Types
+## الأنواع
 
-There are three types of built-in resolvers available on the `compiler` class:
+توجد ثلاثة أنواع مدمجة من resolvers داخل class `compiler`:
 
-- `normal`: Resolves a module via an absolute or relative path.
-- `context`: Resolves a module within a given context.
-- `loader`: Resolves a webpack [loader](/loaders).
+- `normal`: يحل module باستخدام مسار مطلق أو نسبي.
+- `context`: يحل module داخل سياق محدد.
+- `loader`: يحل webpack [loader](/loaders).
 
-Depending on need, any one of these built-in resolvers, that are used by the `compiler`,
-can be customized via plugins:
+حسب حاجتك، يمكنك تخصيص أي resolver مدمج يستخدمه `compiler` عن طريق plugins:
 
 ```js
 compiler.resolverFactory.hooks.resolver
@@ -35,18 +28,14 @@ compiler.resolverFactory.hooks.resolver
   });
 ```
 
-Where `[type]` is one of the three resolvers mentioned above.
+حيث تكون `[type]` واحدًا من resolvers الثلاثة المذكورة أعلاه.
 
-See the [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and their description.
+راجع [توثيق `enhanced-resolve`](https://github.com/webpack/enhanced-resolve) للاطلاع على القائمة الكاملة للـ hooks وشرح كل واحد منها.
 
-## Configuration Options
+## خيارات الإعداد
 
-The resolvers mentioned above can also be customized via a configuration file
-with the [`resolve`](/configuration/resolve/) or [`resolveLoader`](/configuration/resolve/#resolveloader) options. These options allow
-users to change the resolving behavior through a variety of options including
-through resolve `plugins`.
+يمكن أيضًا تخصيص resolvers المذكورة أعلاه من ملف الإعدادات باستخدام خياري [`resolve`](/configuration/resolve/) أو [`resolveLoader`](/configuration/resolve/#resolveloader). تسمح هذه الخيارات بتغيير طريقة حل المسارات بعدة طرق، ومنها استخدام `plugins` داخل `resolve`.
 
-The resolver plugins, e.g. [`DirectoryNamedPlugin`](https://github.com/shaketbaby/directory-named-webpack-plugin), can be included
-directly in `resolve.plugins` rather than using directly in [`plugins` configuration option](/configuration/plugins/#plugins).
+يمكن وضع resolver plugins، مثل [`DirectoryNamedPlugin`](https://github.com/shaketbaby/directory-named-webpack-plugin)، مباشرة داخل `resolve.plugins` بدل استخدامها في خيار الإعداد [`plugins`](/configuration/plugins/#plugins).
 
-T> Note that the `resolve` configuration affects the `normal` and `context` resolvers while `resolveLoader` is used to modify the `loader` resolver.
+T> لاحظ أن إعداد `resolve` يؤثر في resolvers من نوع `normal` و`context`، بينما يُستخدم `resolveLoader` لتعديل resolver الخاص بـ `loader`.

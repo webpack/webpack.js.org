@@ -3,14 +3,12 @@ title: NormalModuleFactory Hooks
 group: Plugins
 sort: 13
 contributors:
-  - iguessitsokay
-  - chenxsan
+  - RlxChap2
 ---
 
-The `NormalModuleFactory` module is used by the `Compiler` to generate modules. Starting with entry points, it resolves each request, parses the content to find further requests, and keeps crawling through files by resolving all and parsing any new files. At last stage, each dependency becomes a Module instance.
+يستخدم `Compiler` الوحدة `NormalModuleFactory` لإنشاء modules. تبدأ العملية من entry points، ثم يحل webpack كل request، ويحلل المحتوى للعثور على requests إضافية، ويستمر في التنقل بين الملفات عبر حل كل request وتحليل أي ملف جديد. في المرحلة الأخيرة، تتحول كل dependency إلى instance من `Module`.
 
-The `NormalModuleFactory` class extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+ترث class `NormalModuleFactory` من `Tapable` وتوفّر lifecycle hooks التالية. يمكنك استخدام `tap` معها بالطريقة نفسها المستخدمة مع compiler hooks:
 
 ```js
 const nmf = NormalModuleFactory.hooks;
@@ -19,7 +17,7 @@ nmf.someHook.tap("MyPlugin", (resolveData) => {
 });
 ```
 
-NormalModuleFactory creates `Parser` and `Generator` instances which can be accessed by HookMaps. Identifier must be passed to tap into these:
+ينشئ `NormalModuleFactory` instances من `Parser` و`Generator`، ويمكن الوصول إليها عبر HookMaps. يجب تمرير identifier لاستخدام `tap` معها:
 
 ```js
 NormalModuleFactory.hooks.parser
@@ -29,56 +27,55 @@ NormalModuleFactory.hooks.parser
   });
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+كما هو الحال مع `compiler`، قد يتوفر `tapAsync` و`tapPromise` أيضًا حسب نوع hook.
 
 ## beforeResolve
 
 `AsyncSeriesBailHook`
 
-Called when a new dependency request is encountered. A dependency can be ignored by returning `false`. Otherwise, it should return `undefined` to proceed.
+يُستدعى عند ظهور dependency request جديد. يمكن تجاهل dependency بإرجاع `false`. وإلا، أرجع `undefined` حتى تستمر العملية.
 
-- Callback Parameters: `resolveData`
+- معاملات callback: `resolveData`
 
 ## factorize
 
 `AsyncSeriesBailHook`
 
-Called before initiating resolve. It should return `undefined` to proceed.
+يُستدعى قبل بدء resolve. يجب إرجاع `undefined` حتى تستمر العملية.
 
-- Callback Parameters: `resolveData`
+- معاملات callback: `resolveData`
 
 ## resolve
 
 `AsyncSeriesBailHook`
 
-Called before the request is resolved. A dependency can be ignored by returning `false`. Returning a Module instance would finalize the process. Otherwise, it should return `undefined` to proceed.
+يُستدعى قبل حل request. يمكن تجاهل dependency بإرجاع `false`. كما أن إرجاع instance من `Module` ينهي العملية. وإلا، أرجع `undefined` حتى تستمر العملية.
 
-- Callback Parameters: `resolveData`
+- معاملات callback: `resolveData`
 
 ## resolveForScheme
 
 `AsyncSeriesBailHook`
 
-Called before a request with scheme (URI) is resolved.
+يُستدعى قبل حل request يحتوي scheme، مثل URI.
 
-- Callback Parameters: `resolveData`
+- معاملات callback: `resolveData`
 
 ## afterResolve
 
 `AsyncSeriesBailHook`
 
-Called after the request is resolved.
+يُستدعى بعد حل request.
 
-- Callback Parameters: `resolveData`
+- معاملات callback: `resolveData`
 
 ## createModule
 
 `AsyncSeriesBailHook`
 
-Called before a `NormalModule` instance is created.
+يُستدعى قبل إنشاء instance من `NormalModule`.
 
-- Callback Parameters: `createData` `resolveData`
+- معاملات callback: `createData` `resolveData`
 
 ## createModuleClass
 
@@ -86,41 +83,41 @@ Called before a `NormalModule` instance is created.
 
 <Badge text="5.81.0+" />
 
-A hook that allows you to override the `NormalModule` class when creating modules. This hook is called after the [`createModule`](#createmodule) hook and before the [`module`](#module) hook.
+يسمح لك هذا hook باستبدال class `NormalModule` عند إنشاء modules. يُستدعى هذا hook بعد [`createModule`](#createmodule) وقبل [`module`](#module).
 
-- Hook Parameters: `identifier`
+- معاملات hook: `identifier`
 
-- Callback Parameters: `createData` `resolveData`
+- معاملات callback: `createData` `resolveData`
 
 ## module
 
 `SyncWaterfallHook`
 
-Called after a `NormalModule` instance is created.
+يُستدعى بعد إنشاء instance من `NormalModule`.
 
-- Callback Parameters: `module` `createData` `resolveData`
+- معاملات callback: `module` `createData` `resolveData`
 
 ## createParser
 
 `HookMap<SyncBailHook>`
 
-Called before a `Parser` instance is created. `parserOptions` is options in [module.parser](/configuration/module/#moduleparser) for the corresponding identifier or an empty object.
+يُستدعى قبل إنشاء instance من `Parser`. تمثل `parserOptions` الخيارات الموجودة في [module.parser](/configuration/module/#moduleparser) للـ identifier المطابق، أو تكون object فارغًا.
 
-- Hook Parameters: `identifier`
+- معاملات hook: `identifier`
 
-- Callback Parameters: `parserOptions`
+- معاملات callback: `parserOptions`
 
 ## parser
 
 `HookMap<SyncHook>`
 
-Fired after a `Parser` instance is created.
+يُستدعى بعد إنشاء instance من `Parser`.
 
-- Hook Parameters: `identifier`
+- معاملات hook: `identifier`
 
-- Callback Parameters: `parser` `parserOptions`
+- معاملات callback: `parser` `parserOptions`
 
-Possible default identifiers:
+القيم الافتراضية الممكنة للـ identifiers:
 
 1. `javascript/auto`
 2. `javascript/dynamic`
@@ -134,23 +131,23 @@ Possible default identifiers:
 
 `HookMap<SyncBailHook>`
 
-Called before a `Generator` instance is created. `generatorOptions` is options in [module.parser](/configuration/module/#modulegenerator) for the corresponding identifier or an empty object.
+يُستدعى قبل إنشاء instance من `Generator`. تمثل `generatorOptions` الخيارات الموجودة في [module.generator](/configuration/module/#modulegenerator) للـ identifier المطابق، أو تكون object فارغًا.
 
-- Hook Parameters: `identifier`
+- معاملات hook: `identifier`
 
-- Callback Parameters: `generatorOptions`
+- معاملات callback: `generatorOptions`
 
 ## generator
 
 `HookMap<SyncHook>`
 
-Called after a `Generator` instance is created.
+يُستدعى بعد إنشاء instance من `Generator`.
 
-- Hook Parameters: `identifier`
+- معاملات hook: `identifier`
 
-- Callback Parameters: `generator` `generatorOptions`
+- معاملات callback: `generator` `generatorOptions`
 
-Possible default identifiers:
+القيم الافتراضية الممكنة للـ identifiers:
 
 1. `json`
 2. `webassembly/sync`
