@@ -23,7 +23,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-بشكل افتراضي ، يكون مسار الوحدات في المجلد الحالي هو  (`./**)` و `node_modules`.
+بشكل افتراضي ، يكون مسار الوحدات في المجلد الحالي هو (`./**)` و `node_modules`.
 
 ايضاً بالأمكان تحديد مسار كامل:
 
@@ -40,7 +40,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-عندما يتم مصادفه ال `معرف (identifier)` كمتغير حر في المودل، يتم تحميل `المودل` تلقائياً وال  `معرف (identifier)` يكون مملوء بصادرات المودل المحمل (او `الممتلكة` لدعم الصادرات المسماة) 
+عندما يتم مصادفه ال `معرف (identifier)` كمتغير حر في المودل، يتم تحميل `المودل` تلقائياً وال `معرف (identifier)` يكون مملوء بصادرات المودل المحمل (او `الممتلكة` لدعم الصادرات المسماة)
 
 For importing the default export of an ES2015 module, you have to specify the default property of module.
 لإستيراد الصادرات الافتراضية لمودل ES2015، يجب عليك ان تحدد الممتلكة الافتراضية للمودل
@@ -67,7 +67,7 @@ jQuery("#item"); // <= ايضاً يعمل
 
 ## الاستعمال: jQuery مع Angular 1
 
-Angular تبحث عن  `window.jQuery` ليمكنها تحديد ما اذا كانت Jquery موجودة
+Angular تبحث عن `window.jQuery` ليمكنها تحديد ما اذا كانت Jquery موجودة
 إطلع على [الكود المصدري](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
 
 ```js
