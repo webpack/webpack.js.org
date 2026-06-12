@@ -39,7 +39,7 @@
   @apply bg-transparent! lg:bg-gray-600! lg:border! lg:border-white/80! transition! duration-200! lg:rounded-full!;
 }
 .DocSearch-Button-Placeholder {
-  @apply hidden! lg:font-light! lg:text-sm! lg:block! lg:text-gray-200 transition! duration-200!;
+  @apply hidden! lg:font-light! lg:text-sm! lg:block! lg:text-gray-200! transition! duration-200!;
 }
 .DocSearch-Button:hover .DocSearch-Button-Placeholder {
   @apply lg:text-white!;
