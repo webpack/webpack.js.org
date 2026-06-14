@@ -2,48 +2,44 @@
 title: Modules
 sort: 6
 contributors:
-  - TheLarkInn
-  - simon04
-  - rouzbeh84
-  - EugeneHlushko
-  - byzyk
+  - RlxChap2
 related:
   - title: JavaScript Module Systems Showdown
     url: https://auth0.com/blog/javascript-module-systems-showdown/
 ---
 
-In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
+في [البرمجة المعيارية](https://en.wikipedia.org/wiki/Modular_programming)، يقسم المطورون البرامج إلى أجزاء مستقلة من الوظائف تسمى _وحدات_.
 
-Each module has a smaller surface area than a full program, making verification, debugging, and testing trivial.
-Well-written _modules_ provide solid abstractions and encapsulation boundaries, so that each module has a coherent design and a clear purpose within the overall application.
+تمتلك كل وحدة مساحة أصغر من البرنامج الكامل، مما يجعل التحقق منها وتصحيحها واختبارها أبسط.
+الوحدات المكتوبة جيدًا تقدم تجريدات متينة وحدود تغليف واضحة، بحيث يكون لكل وحدة تصميم متماسك وغرض واضح داخل التطبيق ككل.
 
-Node.js has supported modular programming almost since its inception.
-On the web, however, support for _modules_ has been slow to arrive.
-Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
-Webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project.
+يدعم Node.js البرمجة المعيارية منذ بداياته تقريبًا.
+أما على الويب، فقد تأخر دعم _الوحدات_ في الوصول.
+توجد أدوات متعددة تدعم JavaScript المعياري على الويب، ولكل منها فوائد وحدود مختلفة.
+يبني webpack على الدروس المستفادة من هذه الأنظمة ويطبق مفهوم _الوحدات_ على أي ملف في مشروعك.
 
-## What is a webpack Module
+## ما هي وحدة webpack
 
-In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
+على عكس [وحدات Node.js](https://nodejs.org/api/modules.html)، يمكن لوحدات webpack التعبير عن _تبعياتها_ بطرق متعددة. من الأمثلة:
 
-- An [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) statement
-- A [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) `require()` statement
-- An [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) `define` and `require` statement
-- An [`@import` statement](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) inside of a css/sass/less file.
-- An image url in a stylesheet `url(...)` or HTML `<img src=...>` file.
+- تعليمة [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+- تعليمة [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) `require()`
+- تعليمات [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) مثل `define` و `require`
+- تعليمة [`@import`](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) داخل ملف css/sass/less.
+- رابط صورة في `url(...)` داخل ملف تنسيقات أو في ملف HTML يحتوي `<img src=...>`.
 
-## Supported Module Types
+## أنواع الوحدات المدعومة
 
-Webpack supports the following module types natively:
+يدعم webpack أنواع الوحدات التالية بشكل أصلي:
 
-- [ECMAScript modules](/guides/ecma-script-modules)
-- CommonJS modules
-- AMD modules
-- [Assets](/guides/asset-modules)
-- WebAssembly modules
+- [وحدات ECMAScript](/guides/ecma-script-modules)
+- وحدات CommonJS
+- وحدات AMD
+- [الأصول](/guides/asset-modules)
+- وحدات WebAssembly
 
-In addition to that webpack supports modules written in a variety of languages and preprocessors via _loaders_. _Loaders_ describe to webpack **how** to process non-native _modules_ and include these _dependencies_ into your _bundles_.
-The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
+بالإضافة إلى ذلك، يدعم webpack الوحدات المكتوبة بلغات ومعالجات مسبقة متعددة عبر _المحمّلات_. تصف _المحمّلات_ لـ webpack **كيف** يعالج _الوحدات_ غير الأصلية ويدرج هذه _التبعيات_ داخل _الحزم_.
+بنى مجتمع webpack _محمّلات_ لمجموعة واسعة من اللغات ومعالجات اللغة الشائعة، ومنها:
 
 - [CoffeeScript](http://coffeescript.org)
 - [TypeScript](https://www.typescriptlang.org)
@@ -53,6 +49,6 @@ The webpack community has built _loaders_ for a wide variety of popular language
 - [Stylus](http://stylus-lang.com)
 - [Elm](https://elm-lang.org/)
 
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **non-opinionated** about your development, testing, and production workflows.
+وغيرها الكثير. عمومًا، يقدم webpack واجهة API قوية وغنية للتخصيص، مما يسمح باستخدامه مع **أي مكدس تقني**، مع بقائه **غير متحيز** لطريقة التطوير أو الاختبار أو الإنتاج لديك.
 
-For a full list, see [**the list of loaders**](/loaders) or [**write your own**](/api/loaders).
+للاطلاع على القائمة الكاملة، راجع [**قائمة المحمّلات**](/loaders) أو [**اكتب محمّلًا خاصًا بك**](/api/loaders).

@@ -2,14 +2,11 @@
 title: ProvidePlugin
 group: webpack
 contributors:
-  - sokra
-  - simon04
-  - re-fort
-  - byzyk
-  - seckin92
+  - MohaDev-69
+  - RlxChap2
 ---
 
-Automatically load modules instead of having to `import` or `require` them everywhere.
+يحمّل modules تلقائيًا بدل الحاجة إلى كتابة `import` أو `require` لها في كل ملف.
 
 ```js
 new webpack.ProvidePlugin({
@@ -18,7 +15,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-or
+أو
 
 ```js
 new webpack.ProvidePlugin({
@@ -27,9 +24,9 @@ new webpack.ProvidePlugin({
 });
 ```
 
-By default, module resolution path is current folder (`./**)` and `node_modules`.
+بشكل افتراضي، يتم حل module من المجلد الحالي `./**` ومن `node_modules`.
 
-It is also possible to specify full path:
+يمكنك أيضًا تحديد مسار كامل:
 
 ```js
 import path from "node:path";
@@ -44,13 +41,13 @@ new webpack.ProvidePlugin({
 });
 ```
 
-Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module` (or `property` in order to support named exports).
+عندما يصادف webpack `identifier` كمتغير حر داخل module، يحمّل module المحدد تلقائيًا ويملأ `identifier` بصادرات ذلك module. ويمكنك تحديد property معينة لدعم named exports.
 
-For importing the default export of an ES2015 module, you have to specify the default property of module.
+لاستيراد default export من ES2015 module، يجب تحديد الخاصية `default` في module.
 
-## Usage: jQuery
+## الاستخدام: jQuery
 
-To automatically load `jquery` we can point both variables it exposes to the corresponding node module:
+لتحميل `jquery` تلقائيًا، وجّه المتغيرين `$` و`jQuery` إلى module الخاص بـ `jquery`:
 
 ```js
 new webpack.ProvidePlugin({
@@ -59,18 +56,18 @@ new webpack.ProvidePlugin({
 });
 ```
 
-Then in any of our source code:
+ثم في أي مكان داخل الكود المصدري:
 
 ```js
-// in a module
-$("#item"); // <= works
-jQuery("#item"); // <= also works
-// $ is automatically set to the exports of module "jquery"
+// داخل module
+$("#item"); // <= يعمل
+jQuery("#item"); // <= يعمل أيضًا
+// يتم توفير $ تلقائيًا من exports الخاصة بـ "jquery"
 ```
 
-## Usage: jQuery with Angular 1
+## الاستخدام: jQuery مع Angular 1
 
-Angular looks for `window.jQuery` in order to determine whether jQuery is present, see the [source code](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
+يبحث Angular عن `window.jQuery` ليحدد هل jQuery موجودة أم لا. راجع [الكود المصدري](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
 
 ```js
 new webpack.ProvidePlugin({
@@ -78,7 +75,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-## Usage: Lodash Map
+## الاستخدام: Lodash Map
 
 ```js
 new webpack.ProvidePlugin({
@@ -86,7 +83,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-### Usage: Vue.js
+### الاستخدام: Vue.js
 
 ```js
 new webpack.ProvidePlugin({

@@ -1,68 +1,62 @@
 ---
 title: SourceMapDevToolPlugin
-group: webpack
 contributors:
-  - johnnyreilly
-  - simon04
-  - neilkennedy
-  - byzyk
-  - EugeneHlushko
-  - chenxsan
-  - snitin315
+  - RlxChap2
+group: webpack
 related:
-  - title: Building Source Maps
+  - title: بناء Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
 ---
 
-This plugin enables more fine grained control of source map generation. It is also enabled automatically by certain settings of the [`devtool`](/configuration/devtool/) configuration option.
+يعطيك هذا plugin تحكمًا أدق في إنشاء source maps. قد يفعّله webpack تلقائيًا عند استخدام بعض قيم خيار الإعداد [`devtool`](/configuration/devtool/).
 
 ```js
 new webpack.SourceMapDevToolPlugin(options);
 ```
 
-## Options
+## الخيارات
 
-The following options are supported:
+يدعم plugin الخيارات التالية:
 
-- `test` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
-- `include` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): Include source maps for module paths that match the given value.
-- `exclude` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp], function (asset) => boolean`): Exclude modules that match the given value from source map generation.
-- `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
-- `append` (`string` `function` `false`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. Since webpack v4.36.0, path parameters are supported: `[chunk]`, `[filename]` and `[contenthash]`. Setting `append` to `false` disables the appending.
+- `test` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): يضمّن source maps للـ modules حسب الامتداد. القيمة الافتراضية تشمل `.js` و`.mjs` و`.css`.
+- `include` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): يضمّن source maps لمسارات modules التي تطابق القيمة المحددة.
+- `exclude` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp], function (asset) => boolean`): يستبعد modules المطابقة من إنشاء source maps.
+- `filename` (`string`): يحدد اسم ملف SourceMap الناتج. إذا لم تحدد قيمة، فسيُضمّن source map داخل الملف.
+- `append` (`string` `function` `false`): يضيف القيمة المحددة إلى asset الأصلي. غالبًا تكون تعليق `#sourceMappingURL`. تُستبدل `[url]` بعنوان URL الخاص بملف source map. منذ webpack v4.36.0، يدعم هذا الخيار معاملات المسار: `[chunk]` و`[filename]` و`[contenthash]`. ضبط `append` على `false` يعطل الإضافة.
 
-  Starting from version 5.84.0, webpack allows the `append` option to be a function that accepts path data and an asset info object as arguments, and returns a string.
+  ابتداءً من الإصدار 5.84.0، يسمح webpack بأن تكون قيمة `append` دالة تستقبل path data وكائن asset info، ثم ترجع string.
 
   ```ts
   (pathData: PathData, assetInfo?: AssetInfo) => string;
   ```
 
-- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
-- `fallbackModuleFilenameTemplate` (`string`): See link above.
-- `ignoreList` (`string` `RegExp` `function (source) => boolean` `[string, RegExp, function (source) => boolean]`): Decide whether to ignore source files that match the specified value in source maps.
-- `module = true` (`boolean`): Indicates whether loaders should generate source maps.
-- `columns = true` (`boolean`): Indicates whether column mappings should be used.
-- `namespace` (`string`): Namespace prefix to allow multiple webpack roots in the devtools. See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
-- `noSources = false` (`boolean`): Prevents the source file content from being included in the source map.
-- `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
-- `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
-- `sourceRoot` (`string`): Provide a custom value for the `sourceRoot` property in the SourceMap.
-- `debugIds` (`boolean`): If `true`, unique ids will be emitted in source and sourcemaps which streamlines identifying sourcemaps across different builds. See the [TC39 sourcemap debug ID proposal](https://github.com/tc39/ecma426/blob/main/proposals/debug-id.md) for more details.
+- `moduleFilenameTemplate` (`string`): راجع [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
+- `fallbackModuleFilenameTemplate` (`string`): راجع الرابط السابق.
+- `ignoreList` (`string` `RegExp` `function (source) => boolean` `[string, RegExp, function (source) => boolean]`): يحدد هل يجب تجاهل ملفات source المطابقة داخل source maps.
+- `module = true` (`boolean`): يحدد هل يجب على loaders إنشاء source maps.
+- `columns = true` (`boolean`): يحدد هل تُستخدم mappings على مستوى الأعمدة.
+- `namespace` (`string`): بادئة namespace تسمح بوجود أكثر من webpack root داخل devtools. راجع [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
+- `noSources = false` (`boolean`): يمنع تضمين محتوى ملفات source داخل source map.
+- `publicPath` (`string`): ينشئ URLs مطلقة مع بادئة public path، مثل `https://example.com/project/`.
+- `fileContext` (`string`): يجعل معامل `[file]` نسبيًا إلى هذا المجلد.
+- `sourceRoot` (`string`): يحدد قيمة مخصصة لخاصية `sourceRoot` داخل SourceMap.
+- `debugIds` (`boolean`): إذا كانت `true`، فسيضيف webpack ids فريدة داخل ملفات source وsourcemaps، مما يسهل ربط sourcemaps بالبناء الصحيح. راجع [اقتراح TC39 الخاص بـ sourcemap debug ID](https://github.com/tc39/ecma426/blob/main/proposals/debug-id.md) لمزيد من التفاصيل.
 
-The `fileContext` option is useful when you want to store source maps in an upper level directory to avoid `../../` appearing in the absolute `[url]`.
+يفيد خيار `fileContext` عندما تريد تخزين source maps في مجلد أعلى بدون ظهور `../../` داخل `[url]` المطلق.
 
-T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
+T> ضبط `module` أو `columns` على `false` يجعل source maps أقل دقة، لكنه يحسّن أداء التجميع بشكل ملحوظ.
 
-T> If you want to use a custom configuration for this plugin in [development mode](/configuration/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
+T> إذا أردت استخدام إعداد مخصص لهذا plugin في [وضع التطوير](/configuration/mode/#mode-development)، عطّل الإعداد الافتراضي أولًا، مثلًا باستخدام `devtool: false`.
 
-W> If the default webpack `minimizer` has been overridden (such as to customise the `MinimizerPlugin` options), make sure to configure its replacement with `sourceMap: true` to enable SourceMap support.
+W> إذا استبدلت webpack `minimizer` الافتراضي، مثلًا لتخصيص خيارات `MinimizerPlugin`، فتأكد من ضبط البديل على `sourceMap: true` لتفعيل دعم SourceMap.
 
-## Examples
+## أمثلة
 
-The following examples demonstrate some common use cases for this plugin.
+تعرض الأمثلة التالية حالات استخدام شائعة لهذا plugin.
 
-### Basic Use Case
+### استخدام أساسي
 
-You can use the following code to replace the configuration option `devtool: inline-source-map` with an equivalent custom plugin configuration:
+يمكنك استخدام الكود التالي لاستبدال خيار الإعداد `devtool: inline-source-map` بإعداد مخصص مكافئ باستخدام plugin:
 
 ```js
 export default {
@@ -72,9 +66,9 @@ export default {
 };
 ```
 
-### Exclude Vendor Maps
+### استبعاد خرائط vendor
 
-The following code would exclude source maps for any modules in the `vendor.js` bundle:
+يستبعد الكود التالي source maps لأي modules داخل bundle باسم `vendor.js`:
 
 ```js
 new webpack.SourceMapDevToolPlugin({
@@ -83,9 +77,9 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-### Host Source Maps Externally
+### استضافة source maps خارجيًا
 
-Set a URL for source maps. Useful for hosting them on a host that requires authorization.
+اضبط URL للـ source maps عندما تريد استضافتها على خادم خارجي، مثل خادم يتطلب صلاحيات وصول.
 
 ```js
 new webpack.SourceMapDevToolPlugin({
@@ -94,7 +88,7 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-And for cases when source maps are stored in the upper level directory:
+وفي الحالات التي تُخزن فيها source maps في مجلد أعلى:
 
 ```text
 project
@@ -105,7 +99,7 @@ project
     |- bundle-[hash].js.map
 ```
 
-With the following config:
+مع الإعداد التالي:
 
 ```js
 new webpack.SourceMapDevToolPlugin({
@@ -115,7 +109,7 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-Will produce the following URL:
+سينتج URL بالشكل التالي:
 
 ```text
 https://example.com/project/sourcemaps/bundle-[hash].js.map

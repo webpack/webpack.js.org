@@ -3,53 +3,26 @@ title: Plugin API
 group: Plugins
 sort: 14
 contributors:
-  - thelarkinn
-  - pksjce
-  - e-cloud
-  - byzyk
-  - EugeneHlushko
-  - wizardofhogwarts
-  - snitin315
-  - evenstensberg
+  - RlxChap2
 ---
 
-Plugins are a key piece of the webpack ecosystem and provide the community with
-a powerful way to tap into webpack's compilation process. A plugin is able to
-[hook](/api/compiler-hooks/#hooks) into key events that are fired throughout each compilation. Every step
-of the way, the plugin will have full access to the `compiler` and, when
-applicable, the current `compilation`.
+تُعد plugins جزءًا أساسيًا من منظومة webpack، فهي تمنح المجتمع طريقة قوية للدخول إلى عملية compilation الخاصة بـ webpack. يستطيع plugin أن يستخدم [hook](/api/compiler-hooks/#hooks) في أحداث مهمة تُطلق خلال كل compilation. وفي كل مرحلة، يحصل plugin على وصول كامل إلى `compiler`، وإلى `compilation` الحالي عندما يكون ذلك مناسبًا.
 
-T> For a high-level introduction to writing plugins, start with
-[writing a plugin](/contribute/writing-a-plugin).
+T> إذا كنت تريد مقدمة عامة عن كتابة plugins، ابدأ من [كتابة Plugin](/contribute/writing-a-plugin).
 
-Let's start by going over `tapable` utility, which provides the backbone of
-webpack's plugin interface.
+لنبدأ بأداة `tapable`، فهي الأساس الذي بُنيت عليه واجهة plugins في webpack.
 
 ## Tapable
 
-This small library is a core utility in webpack but can also be used elsewhere
-to provide a similar plugin interface. Many objects in webpack extend the
-`Tapable` class. The class exposes `tap`, `tapAsync`, and `tapPromise` methods
-which plugins can use to inject custom build steps that will be fired
-throughout a compilation.
+هذه المكتبة الصغيرة أداة محورية داخل webpack، ويمكن استخدامها أيضًا خارج webpack لتوفير واجهة plugins مشابهة. كثير من الكائنات في webpack ترث من الصنف `Tapable`. يوفّر هذا الصنف الدوال `tap` و`tapAsync` و`tapPromise`، وتستخدمها plugins لإضافة خطوات build مخصصة تُنفّذ أثناء compilation.
 
-Please see the [documentation](https://github.com/webpack/tapable) to learn
-more. An understanding of the three `tap` methods, as well as the hooks that
-provide them, is crucial. The objects that extend `Tapable` (e.g. the compiler),
-the hooks they provide, and each hook's type (e.g. the `SyncHook`) will be
-noted.
+راجع [التوثيق](https://github.com/webpack/tapable) لمعرفة المزيد. من المهم فهم دوال `tap` الثلاث، وكذلك أنواع hooks التي توفرها. في التوثيق ستجد الكائنات التي ترث من `Tapable`، مثل compiler، والـ hooks التي توفرها، ونوع كل hook، مثل `SyncHook`.
 
-## Plugin Types
+## أنواع Plugins
 
-Depending on the hooks used and `tap` methods applied, plugins can function in
-a different number of ways. The way this works is closely related to the
-[hooks](https://github.com/webpack/tapable#tapable) provided by `Tapable`. The
-[compiler hooks](/api/compiler-hooks/#hooks) each note the underlying `Tapable` hook indicating which
-`tap` methods are available.
+بحسب hooks التي تستخدمها، وبحسب دوال `tap` التي تعتمد عليها، يمكن أن تعمل plugins بعدة طرق. هذا مرتبط مباشرةً بالـ [hooks](https://github.com/webpack/tapable#tapable) التي توفرها `Tapable`. توضح صفحة [compiler hooks](/api/compiler-hooks/#hooks) نوع hook الأساسي من `Tapable`، وهذا يحدد دوال `tap` المتاحة.
 
-So depending on which event you `tap` into, the plugin may run differently. For
-example, when hooking into the `compile` stage, only the synchronous `tap` method
-can be used:
+لذلك يختلف سلوك plugin حسب الحدث الذي تستخدم معه `tap`. مثلًا، عند الدخول في مرحلة `compile`، يمكنك استخدام `tap` المتزامنة فقط:
 
 ```js
 compiler.hooks.compile.tap("MyPlugin", (params) => {
@@ -57,8 +30,7 @@ compiler.hooks.compile.tap("MyPlugin", (params) => {
 });
 ```
 
-However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
-or `tapPromise` (as well as `tap`):
+أما hook مثل `run`، لأنه يستخدم `AsyncHook`، فيمكنك معه استخدام `tapAsync` أو `tapPromise`، بالإضافة إلى `tap`:
 
 ```js
 compiler.hooks.run.tapAsync(
@@ -88,15 +60,13 @@ compiler.hooks.run.tapPromise(
 );
 ```
 
-The moral of the story is that there are a variety of ways to `hook` into the
-`compiler`, each one allowing your plugin to run as it sees fit.
+الفكرة الأساسية: توجد أكثر من طريقة للدخول إلى `compiler`، وكل طريقة تسمح لـ plugin أن يعمل بالشكل المناسب للمرحلة التي يحتاجها.
 
-## Custom Hooks
+## Hooks مخصصة
 
-In order to offer a custom hook to the compilation for other plugins to `tap` into,
-you need to do the following:
+إذا أردت توفير hook مخصص داخل compilation حتى تتمكن plugins أخرى من استخدام `tap` معه، فاتبع الخطوات التالية:
 
-1. Create a module-scope `WeakMap` for compilation hooks:
+1. أنشئ `WeakMap` على مستوى module لحفظ hooks الخاصة بكل compilation:
 
    ```ts
    const compilationHooks = new WeakMap<Compilation, MyHooks>();
@@ -106,7 +76,7 @@ you need to do the following:
    }
    ```
 
-2. Create a static method on your plugin:
+2. أنشئ static method داخل plugin:
 
    ```ts
    static getCompilationHooks(compilation: Compilation) : MyHooks {
@@ -120,7 +90,7 @@ you need to do the following:
    }
    ```
 
-3. Call hooks like below in your plugin:
+3. استدعِ hooks داخل plugin بهذا الشكل:
 
    ```ts
    const hooks = MyPlugin.getCompilationHooks(compilation);
@@ -128,7 +98,7 @@ you need to do the following:
    hooks.custom.call(1, "hello");
    ```
 
-4. Other plugins can access your custom hooks too:
+4. يمكن لـ plugins أخرى الوصول إلى hooks المخصصة أيضًا:
 
    ```ts
    import MyPlugin from "my-plugin";
@@ -140,16 +110,15 @@ you need to do the following:
    });
    ```
 
-Again, see the [documentation](https://github.com/webpack/tapable) for `tapable` to learn more about the
-different hook classes and how they work.
+مرة أخرى، راجع [توثيق tapable](https://github.com/webpack/tapable) لمعرفة أنواع hook المختلفة وطريقة عملها.
 
-## Reporting Progress
+## الإبلاغ عن التقدم
 
-Plugins can report progress via [`ProgressPlugin`](/plugins/progress-plugin/), which prints progress messages to stderr by default. In order to enable progress reporting, pass a `--progress` argument when running the [webpack CLI](/api/cli/).
+يمكن لـ plugins الإبلاغ عن التقدم عبر [`ProgressPlugin`](/plugins/progress-plugin/)، والذي يطبع رسائل التقدم إلى stderr افتراضيًا. لتفعيل إظهار التقدم، مرّر الخيار `--progress` عند تشغيل [webpack CLI](/api/cli/).
 
-It is possible to customize the printed output by passing different arguments to the `reportProgress` function of [`ProgressPlugin`](/plugins/progress-plugin/).
+يمكن تخصيص النص المطبوع بتمرير arguments مختلفة إلى الدالة `reportProgress` الخاصة بـ [`ProgressPlugin`](/plugins/progress-plugin/).
 
-To report progress, a plugin must `tap` into a hook using the `context: true` option:
+لكي يبلّغ plugin عن التقدم، يجب أن يستخدم `tap` على hook مع الخيار `context: true`:
 
 ```js
 compiler.hooks.emit.tapAsync(
@@ -168,26 +137,25 @@ compiler.hooks.emit.tapAsync(
 );
 ```
 
-The `reportProgress` function may be called with these arguments:
+يمكن استدعاء الدالة `reportProgress` بهذه arguments:
 
 ```js
 reportProgress(percentage, ...args);
 ```
 
-- `percentage`: This argument is unused; instead, [`ProgressPlugin`](/plugins/progress-plugin/) will calculate a percentage based on the current hook.
-- `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
+- `percentage`: هذا argument غير مستخدم مباشرة؛ بدلًا من ذلك يحسب [`ProgressPlugin`](/plugins/progress-plugin/) النسبة بناءً على hook الحالي.
+- `...args`: أي عدد من النصوص، وستُمرر إلى handler الخاص بـ `ProgressPlugin` ليتم عرضها للمستخدم.
 
-Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
+انتبه إلى أن جزءًا فقط من compiler hooks وcompilation hooks يدعم الدالة `reportProgress`. راجع [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) للقائمة الكاملة.
 
-## Logging
+## التسجيل
 
-Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#statslogging) and/or when [`infrastructure logging`](/configuration/infrastructureLogging) is enabled, plugins may log messages which will be printed out in the respective logger format (stats, infrastructure).
+واجهة Logging API متاحة منذ إصدار webpack 4.37. عند تفعيل `logging` في [إعدادات stats](/configuration/stats/#statslogging)، أو عند تفعيل [`infrastructure logging`](/configuration/infrastructureLogging)، يمكن لـ plugins تسجيل رسائل تُطبع بتنسيق logger المناسب، سواء stats أو infrastructure.
 
-- Plugins should prefer to use `compilation.getLogger('PluginName')` for logging. This kind of logging is stored in the Stats and formatted accordingly. It can be filtered and exported by the user.
-- Plugins may use the `compiler.getInfrastructureLogger('PluginName')` for logging. Using `infrastructure` logging is not stored in the Stats and therefore not formatted. It's usually logged to the console/dashboard/GUI directly. It can be filtered by the user.
-- Plugins may use specific fallback logic for detecting logging support `compilation.getLogger ? compilation.getLogger('PluginName') : console` to provide a fallback for cases when an older webpack version is used which does not support `getLogger` method on `compilation` object.
+- يُفضّل أن تستخدم plugins الدالة `compilation.getLogger('PluginName')` للتسجيل. هذا النوع من logging يُخزّن داخل Stats ويُنسّق بناءً عليها. ويمكن للمستخدم فلترته أو تصديره.
+- يمكن لـ plugins استخدام `compiler.getInfrastructureLogger('PluginName')` للتسجيل. تسجيل `infrastructure` لا يُخزّن داخل Stats، ولذلك لا يُنسّق معها. عادةً يُسجّل مباشرةً إلى console أو dashboard أو GUI. ويمكن للمستخدم فلترته.
+- يمكن لـ plugins استخدام fallback خاص لاكتشاف دعم logging، مثل `compilation.getLogger ? compilation.getLogger('PluginName') : console`، لدعم إصدارات webpack القديمة التي لا توفر دالة `getLogger` على كائن `compilation`.
 
-## Next Steps
+## الخطوة التالية
 
-See the [compiler hooks](/api/compiler-hooks/) section for a detailed listing of all the available
-`compiler` hooks and the parameters they make available.
+راجع قسم [compiler hooks](/api/compiler-hooks/) للحصول على قائمة مفصلة بكل `compiler` hooks المتاحة والـ parameters التي توفرها.

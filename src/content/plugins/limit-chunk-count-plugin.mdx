@@ -2,31 +2,27 @@
 title: LimitChunkCountPlugin
 group: webpack
 contributors:
-  - rouzbeh84
-  - skipjack
-  - tbroadley
-  - byzyk
-  - EugeneHlushko
-  - erykpiast
+  - MohaDev-69
+  - RlxChap2
 ---
 
-While writing your code, you may have already added many code split points to load stuff on demand. After compiling you might notice that some chunks are too small - creating larger HTTP overhead. `LimitChunkCountPlugin` can post-process your chunks by merging them.
+عند تقسيم الكود، قد تضيف نقاط فصل كثيرة لتحميل أجزاء عند الحاجة. بعد compilation قد تجد chunks صغيرة جدًا، مما يزيد عدد طلبات HTTP. يساعد `LimitChunkCountPlugin` على تقليل ذلك عبر دمج chunks معًا.
 
 ```js
 new webpack.optimize.LimitChunkCountPlugin({
-  // Options...
+  // خيارات...
 });
 ```
 
-## Options
+## الخيارات
 
-The following options are supported:
+الخيارات أدناه هي المدعومة:
 
 ### maxChunks
 
 `number`
 
-Limit the maximum number of chunks using a value greater than or equal to `1`. Using `1` will prevent any additional chunks from being added as the entry/main chunk is also included in the count.
+يحدد الحد الأقصى لعدد chunks. يجب أن تكون القيمة أكبر من أو تساوي `1`. استخدام `1` يمنع إنشاء chunks إضافية كـ entry chunks أو async chunks.
 
 **webpack.config.js**
 
@@ -45,11 +41,11 @@ export default {
 
 ### minChunkSize
 
-Keeping chunk size above the specified limit is no longer a feature of this plugin. Use [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) instead.
+لم يعد إبقاء حجم chunks فوق حد معين جزءًا من هذا plugin. استخدم [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) بدلًا منه.
 
-## Usage via CLI
+## الاستخدام عبر CLI
 
-This plugin and it's options can also be invoked via the [CLI](/api/cli/):
+يمكن التحكم بهذا plugin وخياراته عبر [CLI](/api/cli/):
 
 ```bash
 webpack --optimize-max-chunks 15

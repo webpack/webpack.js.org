@@ -1,37 +1,30 @@
 ---
-title: Asset Modules
+title: وحدات الأصول
 sort: 25
 contributors:
-  - smelukov
-  - EugeneHlushko
-  - chenxsan
-  - anshumanv
-  - spence-s
-  - dkdk225
-  - alexander-akait
-  - GreenUpOu
+  - arabpolice
 related:
-  - title: webpack 5 - Asset Modules
+  - title: webpack 5 - وحدات الأصول
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
-Asset Modules allow one to use asset files (fonts, icons, etc) without configuring additional loaders.
+تتيح وحدات الأصول (Asset Modules) استخدام ملفات الأصول، مثل الخطوط والأيقونات وغيرها، دون إعداد loaders إضافية.
 
-Prior to webpack 5 it was common to use:
+قبل webpack 5 كان من الشائع استخدام:
 
-- [`raw-loader`](https://v4.webpack.js.org/loaders/raw-loader/) to import a file as a string
-- [`url-loader`](https://v4.webpack.js.org/loaders/url-loader/) to inline a file into the bundle as a data URI
-- [`file-loader`](https://v4.webpack.js.org/loaders/file-loader/) to emit a file into the output directory
+- [`raw-loader`](https://v4.webpack.js.org/loaders/raw-loader/) لاستيراد ملف كسلسلة نصية
+- [`url-loader`](https://v4.webpack.js.org/loaders/url-loader/) لتضمين ملف داخل الحزمة على هيئة data URI
+- [`file-loader`](https://v4.webpack.js.org/loaders/file-loader/) لإخراج ملف إلى مجلد المخرجات
 
-Asset Modules types replace all of these loaders by adding 5 new module types:
+تستبدل أنواع وحدات الأصول كل هذه الـ loaders بإضافة 5 أنواع جديدة من الوحدات:
 
-- `asset/resource` emits a separate file and exports the URL. Previously achievable by using `file-loader`.
-- `asset/inline` exports a data URI of the asset. Previously achievable by using `url-loader`.
-- `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
-- `asset/bytes` exports a [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) view of the asset.
-- `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
+- `asset/resource` يُخرج ملفًا منفصلًا ويُصدّر عنوان URL. كان يمكن تحقيق ذلك سابقًا باستخدام `file-loader`.
+- `asset/inline` يُصدّر data URI للأصل. كان يمكن تحقيق ذلك سابقًا باستخدام `url-loader`.
+- `asset/source` يُصدّر الكود المصدري للأصل. كان يمكن تحقيق ذلك سابقًا باستخدام `raw-loader`.
+- `asset/bytes` يُصدّر منظور [`Uint8Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array) للأصل.
+- `asset` يختار تلقائيًا بين تصدير data URI وإخراج ملف منفصل. كان يمكن تحقيق ذلك سابقًا باستخدام `url-loader` مع حد لحجم الأصل.
 
-When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Modules in webpack 5, you might want to stop Asset Modules from processing your assets again as that would result in asset duplication. This can be done by setting the asset's module type to `'javascript/auto'`.
+عند استخدام loaders الأصول القديمة (أي `file-loader`/`url-loader`/`raw-loader`) مع وحدات الأصول في webpack 5، قد ترغب في منع وحدات الأصول من معالجة أصولك مرة أخرى لأن ذلك سيؤدي إلى تكرار الأصول. يمكن فعل ذلك بتعيين نوع وحدة الأصل إلى `'javascript/auto'`.
 
 **webpack.config.js**
 
@@ -56,7 +49,7 @@ export default {
 }
 ```
 
-To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
+لاستبعاد الأصول القادمة من استدعاءات `new URL` من loaders الأصول، أضف `dependency: { not: ['url'] }` إلى إعدادات الـ loader.
 
 **webpack.config.js**
 
@@ -81,19 +74,19 @@ export default {
 }
 ```
 
-## Public Path
+## المسار العام
 
-By default, under the hood, the `asset` type does `__webpack_public_path__ + import.meta`. This means that setting the `output.publicPath` in your config will allow you to override the URL from which the `asset` loads.
+افتراضيًا، وتحت الغطاء، ينفذ النوع `asset` التعبير `__webpack_public_path__ + import.meta`. هذا يعني أن ضبط `output.publicPath` في إعداداتك يتيح لك تجاوز عنوان URL الذي يُحمّل منه `asset`.
 
-### On The Fly Override
+### التجاوز أثناء التشغيل
 
-If you set the `__webpack_public_path__` in code, the way you need to achieve it so as not to break the `asset` loading logic is to make sure you run it as the first code in your app and not use a function to do so. An example of this would be having a file called `publicPath.js` with contents
+إذا عيّنت `__webpack_public_path__` داخل الكود، فالطريقة المطلوبة لتحقيق ذلك دون كسر منطق تحميل `asset` هي التأكد من تشغيله كأول كود في تطبيقك، وعدم استخدام دالة لفعل ذلك. مثال ذلك وجود ملف باسم `publicPath.js` بالمحتوى التالي:
 
 ```js
 __webpack_public_path__ = "https://cdn.url.com";
 ```
 
-And then in your `webpack.config.js` updating your `entry` field to look like
+ثم تحدّث حقل `entry` في `webpack.config.js` ليبدو كالتالي:
 
 ```js
 export default {
@@ -101,13 +94,13 @@ export default {
 };
 ```
 
-Alternatively, you can do the following in your `App.js` without modifying your webpack config. The only downside is you have to enforce ordering here and that can collide with some linting tools.
+بدلًا من ذلك، يمكنك فعل ما يلي داخل `App.js` دون تعديل إعدادات webpack. العيب الوحيد هو أنك ستحتاج إلى فرض ترتيب التنفيذ هنا، وقد يتعارض ذلك مع بعض أدوات linting.
 
 ```js
 import "./publicPath.js";
 ```
 
-## Resource type
+## نوع المورد
 
 **webpack.config.js**
 
@@ -143,13 +136,13 @@ import mainImage from "./images/main.png";
 img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 ```
 
-All `.png` files will be emitted to the output directory and their paths will be injected into the bundles, besides, you can customize [`outputPath`](/configuration/module/#rulegeneratoroutputpath) and [`publicPath`](/configuration/module/#rulegeneratorpublicpath) for them.
+سيتم إخراج جميع ملفات `.png` إلى مجلد المخرجات وحقن مساراتها داخل الحزم. بالإضافة إلى ذلك، يمكنك تخصيص [`outputPath`](/configuration/module/#rulegeneratoroutputpath) و[`publicPath`](/configuration/module/#rulegeneratorpublicpath) لها.
 
-### Custom output filename
+### اسم ملف مخرجات مخصص
 
-By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory.
+افتراضيًا، تُخرج وحدات `asset/resource` الملفات إلى مجلد المخرجات باسم ملف على النمط `[hash][ext][query]`.
 
-You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
+يمكنك تعديل هذا القالب بتعيين [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) في إعدادات webpack:
 
 **webpack.config.js**
 
@@ -178,7 +171,7 @@ export default {
 };
 ```
 
-Another case to customize output filename is to emit some kind of assets to a specified directory:
+حالة أخرى لتخصيص اسم ملف المخرجات هي إخراج نوع معيّن من الأصول إلى مجلد محدد:
 
 ```diff
 import path from "node:path";
@@ -208,11 +201,11 @@ export default {
 };
 ```
 
-With this configuration all the `html` files will be emitted into a `static` directory within the output directory.
+بهذه الإعدادات، سيتم إخراج جميع ملفات `html` إلى مجلد `static` داخل مجلد المخرجات.
 
-`Rule.generator.filename` is the same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) and works only with `asset` and `asset/resource` module types.
+`Rule.generator.filename` مماثل لـ [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename)، ويعمل فقط مع نوعي الوحدات `asset` و`asset/resource`.
 
-## Inlining assets
+## تضمين الأصول
 
 **webpack.config.js**
 
@@ -248,13 +241,13 @@ import metroMap from "./images/metro.svg";
 block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 ```
 
-All `.svg` files will be injected into the bundles as data URI.
+سيتم حقن جميع ملفات `.svg` داخل الحزم على هيئة data URI.
 
-### Custom data URI generator
+### مولّد data URI مخصص
 
-By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.
+افتراضيًا، تمثل data URI التي يُخرجها webpack محتوى الملف بعد ترميزه باستخدام خوارزمية Base64.
 
-If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:
+إذا أردت استخدام خوارزمية ترميز مخصصة، يمكنك تحديد دالة مخصصة لترميز محتوى الملف:
 
 **webpack.config.js**
 
@@ -290,9 +283,9 @@ export default {
 };
 ```
 
-Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
+الآن سيتم ترميز جميع ملفات `.svg` بواسطة حزمة `mini-svg-data-uri`.
 
-## Source type
+## نوع المصدر
 
 **webpack.config.js**
 
@@ -320,7 +313,7 @@ export default {
 };
 ```
 
-T> You don't need to add rules when using `import text from './file.txt' with { type: "text" };` syntax.
+T> لا تحتاج إلى إضافة rules عند استخدام صيغة `import text from './file.txt' with { type: "text" };`.
 
 **src/example.txt**
 
@@ -336,7 +329,7 @@ import exampleText from "./example.txt";
 block.textContent = exampleText; // 'Hello world';
 ```
 
-Alternative usage:
+استخدام بديل:
 
 **src/index.js**
 
@@ -346,13 +339,13 @@ import exampleText from "./example.txt" with { type: "text" };
 block.textContent = exampleText; // 'Hello world';
 ```
 
-All `.txt` files will be injected into the bundles as UTF-8 strings.
+سيتم حقن جميع ملفات `.txt` داخل الحزم كسلاسل نصية بترميز UTF-8.
 
-## URL assets
+## أصول URL
 
-When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
+عند استخدام `new URL('./path/to/asset', import.meta.url)`، ينشئ webpack وحدة أصول أيضًا.
 
-T> You don't need to add rules when using `const file = new URL('./file.ext', import.meta.url);` syntax.
+T> لا تحتاج إلى إضافة rules عند استخدام صيغة `const file = new URL('./file.ext', import.meta.url);`.
 
 **src/index.js**
 
@@ -360,7 +353,7 @@ T> You don't need to add rules when using `const file = new URL('./file.ext', im
 const logo = new URL("./logo.svg", import.meta.url);
 ```
 
-Depending on the [`target`](/configuration/target/) in your configuration, webpack would compile the above code into a different result:
+اعتمادًا على [`target`](/configuration/target/) في إعداداتك، سيترجم webpack الكود أعلاه إلى نتيجة مختلفة:
 
 ```js
 // target: web
@@ -380,11 +373,11 @@ new URL(
 ```
 
 ```js
-// any targets when ECMA modules output enabled
+// أي targets عند تفعيل مخرجات وحدات ECMA
 new URL(`${__webpack_public_path__}logo.svg`, import.meta.url);
 ```
 
-As of webpack 5.38.0, [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) are supported in `new URL()` as well:
+ابتداءً من webpack 5.38.0، أصبحت [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) مدعومة أيضًا داخل `new URL()`:
 
 **src/index.js**
 
@@ -395,7 +388,7 @@ console.log(url.protocol === "data:");
 console.log(url.pathname === ",");
 ```
 
-## Asset type
+## نوع الأصل
 
 **webpack.config.js**
 
@@ -423,9 +416,9 @@ export default {
 };
 ```
 
-Now webpack will automatically choose between `resource` and `inline` by following a default condition: a file with size less than 8kb will be treated as a `inline` module type and `resource` module type otherwise.
+الآن سيختار webpack تلقائيًا بين `resource` و`inline` وفق شرط افتراضي: الملف الذي يقل حجمه عن 8kb سيُعامل كنوع وحدة `inline`، وإلا فسيُعامل كنوع وحدة `resource`.
 
-You can change this condition by setting a [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) option on the module rule level of your webpack configuration:
+يمكنك تغيير هذا الشرط بتعيين خيار [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) على مستوى قاعدة الوحدة في إعدادات webpack:
 
 **webpack.config.js**
 
@@ -449,7 +442,7 @@ export default {
         type: 'asset',
 +       parser: {
 +         dataUrlCondition: {
-+           maxSize: 4 * 1024, // 4kb
++           maxSize: 4 * 1024, // 4 كيلوبايت
 +         },
 +       },
       },
@@ -458,9 +451,9 @@ export default {
 };
 ```
 
-Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
+يمكنك أيضًا [تحديد دالة](/configuration/module/#ruleparserdataurlcondition) لتقرير ما إذا كان ينبغي تضمين الوحدة أم لا.
 
-## Bytes type
+## نوع البايتات
 
 **webpack.config.js**
 
@@ -488,7 +481,7 @@ export default {
 };
 ```
 
-T> You don't need to add rules when using `import data from './file.ext' with { type: "bytes" };` syntax.
+T> لا تحتاج إلى إضافة rules عند استخدام صيغة `import data from './file.ext' with { type: "bytes" };`.
 
 **src/example.txt**
 
@@ -507,7 +500,7 @@ const textString = decoder.decode(exampleText);
 block.textContent = textString; // 'Hello world';
 ```
 
-Alternative usage:
+استخدام بديل:
 
 **src/index.js**
 
@@ -520,22 +513,22 @@ const textString = decoder.decode(exampleText);
 block.textContent = textString; // 'Hello world';
 ```
 
-All `.txt` files will be injected into the bundles as raw bytes (Uint8Array), without any text encoding or transformation.
+سيتم حقن جميع ملفات `.txt` داخل الحزم كبايتات خام (Uint8Array)، دون أي ترميز نصي أو تحويل.
 
-## Replacing Inline Loader Syntax
+## استبدال صيغة الـ Inline Loader
 
-Before Asset Modules and Webpack 5, it was possible to use [inline syntax](https://webpack.js.org/concepts/loaders/#inline) with the legacy loaders mentioned above.
+قبل وحدات الأصول وWebpack 5، كان من الممكن استخدام [الصيغة المضمنة](https://webpack.js.org/concepts/loaders/#inline) مع الـ loaders القديمة المذكورة أعلاه.
 
-It is now recommended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.
+يوصى الآن بإزالة كل صيغ inline loader واستخدام شرط `resourceQuery` لمحاكاة وظيفة الصيغة المضمنة.
 
-For example, in the case of replacing `raw-loader` with `asset/source` type:
+على سبيل المثال، عند استبدال `raw-loader` بنوع `asset/source`:
 
 ```diff
 - import myModule from 'raw-loader!my-module';
 + import myModule from 'my-module?raw';
 ```
 
-and in the webpack configuration:
+وفي إعدادات webpack:
 
 ```diff
 module: {
@@ -549,7 +542,7 @@ module: {
   },
 ```
 
-and if you'd like to exclude raw assets from being processed by other loaders, use a negative condition:
+وإذا أردت استبعاد الأصول الخام من المعالجة بواسطة loaders أخرى، فاستخدم شرطًا سلبيًا:
 
 ```diff
 module: {
@@ -568,7 +561,7 @@ module: {
   },
 ```
 
-or a `oneOf` list of rules. Here only the first matching rule will be applied:
+أو قائمة قواعد `oneOf`. هنا سيتم تطبيق أول قاعدة مطابقة فقط:
 
 ```diff
 module: {
@@ -588,9 +581,9 @@ module: {
   },
 ```
 
-## Disable emitting assets
+## تعطيل إخراج الأصول
 
-For use cases like Server side rendering, you might want to disable emitting assets, which is feasible with [`emit`](/configuration/module/#rulegeneratoremit) option under `Rule.generator`:
+في حالات استخدام مثل التصيير من جهة الخادم (Server side rendering)، قد ترغب في تعطيل إخراج الأصول، وهذا ممكن باستخدام خيار [`emit`](/configuration/module/#rulegeneratoremit) تحت `Rule.generator`:
 
 ```js
 export default {

@@ -1,14 +1,13 @@
 ---
 title: ManifestPlugin
-group: webpack
 contributors:
-  - hai-x
-  - alexander-akait
+  - RlxChap2
+group: webpack
 ---
 
 <Badge text="5.103.0+" />
 
-The built-in `ManifestPlugin` generates one asset manifest for your build. Port from [`WebpackManifestPlugin`](https://github.com/shellscape/webpack-manifest-plugin).
+ينشئ `ManifestPlugin` المدمج ملف manifest واحدًا للأصول الناتجة من عملية البناء. استخدمه كبديل مدمج عند الانتقال من [`WebpackManifestPlugin`](https://github.com/shellscape/webpack-manifest-plugin).
 
 **webpack.config.js**
 
@@ -18,15 +17,15 @@ new webpack.ManifestPlugin({
 });
 ```
 
-## Options
+## الخيارات
 
 ### `entrypoints`
 
 `boolean = true`
 
-Enables generation of the `entrypoints` section in the manifest.
+يفعّل إنشاء قسم `entrypoints` داخل ملف manifest.
 
-When `entrypoints` is enabled and one entry uses `dependOn`
+عند تفعيل `entrypoints` واستخدام أحد entry points للخيار `dependOn`:
 
 **webpack.config.js**
 
@@ -47,7 +46,7 @@ export default {
 };
 ```
 
-The resulting manifest will contain the parent/child relationship map
+سيحتوي ملف manifest الناتج على خريطة توضّح علاقة الأب والابن بين entry points:
 
 **manifest.json**
 
@@ -69,33 +68,33 @@ The resulting manifest will contain the parent/child relationship map
 
 `string = manifest.json`
 
-Specifies the filename of the output file on disk. By default the plugin will emit `manifest.json` inside the `output.path` directory.
+يحدد اسم ملف الخرج على القرص. افتراضيًا، ينشئ plugin ملف `manifest.json` داخل مجلد `output.path`.
 
 ### `filter`
 
 `(item: ManifestItem) => boolean`
 
-Allows filtering the files which make up the manifest.
+يسمح لك بتصفية الملفات التي ستدخل في manifest.
 
 ### `generate`
 
 `function (manifest: ManifestObject) => ManifestObject`
 
-Receives the manifest object, modifies it, and returns the modified manifest.
+تستقبل هذه الدالة كائن manifest، ثم تعدّله، ثم ترجع النسخة المعدلة.
 
 ### `prefix`
 
 `string = "[publicpath]"`
 
-Specifies a path prefix for all keys in the manifest.
+يحدد بادئة مسار تُضاف إلى كل المفاتيح داخل manifest.
 
 ### serialize
 
 `function (manifest: ManifestObject) => string = (manifest) => JSON.stringify(manifest, null, 2)`
 
-Receives the manifest object and returns the manifest string.
+تستقبل هذه الدالة كائن manifest وترجع النص النهائي للـ manifest.
 
-Use `serialize` to output other formats, for example YAML:
+استخدم `serialize` إذا أردت إخراج manifest بصيغ أخرى، مثل YAML:
 
 ```js
 new webpack.ManifestPlugin({

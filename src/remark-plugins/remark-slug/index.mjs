@@ -11,6 +11,10 @@ import { visit } from "unist-util-visit";
 
 const slugs = new BananaSlug();
 
+function encodeSlug(slug) {
+  return encodeURI(slug);
+}
+
 /**
  * Plugin to add anchors headings using GitHub’s algorithm.
  *
@@ -26,6 +30,7 @@ export default function remarkSlug() {
       let { id } = props;
 
       id = id ? slugs.slug(String(id), true) : slugs.slug(toString(node));
+      id = encodeSlug(id);
 
       data.id = id;
       props.id = id;

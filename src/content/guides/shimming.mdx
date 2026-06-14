@@ -1,41 +1,29 @@
 ---
-title: Shimming
+title: التلاؤم
 sort: 20
 contributors:
-  - pksjce
-  - jhnns
-  - simon04
-  - jeremenichelli
-  - svyandun
-  - byzyk
-  - EugeneHlushko
-  - AnayaDesign
-  - dhurlburtusa
-  - plr108
-  - NicolasLetellier
-  - wizardofhogwarts
-  - snitin315
-  - chenxsan
+  - arabpolice
+  - RlxChap2
 related:
-  - title: Reward modern browser users script
+  - title: سكربت مكافأة مستخدمي المتصفحات الحديثة
     url: https://medium.com/hackernoon/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7
-  - title: useBuiltIns in babel-preset-env
+  - title: useBuiltIns في babel-preset-env
     url: https://babeljs.io/docs/en/babel-preset-env#usebuiltins
 ---
 
-The `webpack` compiler can understand modules written as ES2015 modules, CommonJS or AMD. However, some third party libraries may expect global dependencies (e.g. `$` for `jQuery`). The libraries might also create globals which need to be exported. These "broken modules" are one instance where _shimming_ comes into play.
+يمكن لمصرّف `webpack` فهم الوحدات المكتوبة بصيغة ES2015 modules أو CommonJS أو AMD. ومع ذلك، قد تتوقع بعض المكتبات الخارجية اعتماديات عامة (مثل `$` لـ `jQuery`). وقد تنشئ هذه المكتبات أيضًا متغيرات عامة يجب تصديرها. هذه "الوحدات المكسورة" هي إحدى الحالات التي يظهر فيها دور _shimming_.
 
-W> **We don't recommend using globals!** The whole concept behind webpack is to allow more modular front-end development. This means writing isolated modules that are well contained and do not rely on hidden dependencies (e.g. globals). Please use these features only when necessary.
+W> **لا نوصي باستخدام المتغيرات العامة!** الفكرة الكاملة وراء webpack هي السماح بتطوير واجهات أمامية أكثر modularity. وهذا يعني كتابة وحدات معزولة ومحكمة لا تعتمد على اعتماديات مخفية (مثل المتغيرات العامة). يرجى استخدام هذه الميزات عند الضرورة فقط.
 
-Another instance where _shimming_ can be useful is when you want to [polyfill](https://en.wikipedia.org/wiki/Polyfill_%28programming%29) browser functionality to support more users. In this case, you may only want to deliver those polyfills to the browsers that need patching (i.e. load them on demand).
+هناك حالة أخرى يمكن أن يكون فيها _shimming_ مفيدًا، وهي عندما تريد [polyfill](https://en.wikipedia.org/wiki/Polyfill_%28programming%29) لوظائف المتصفح من أجل دعم عدد أكبر من المستخدمين. في هذه الحالة، قد ترغب في إرسال تلك polyfills فقط إلى المتصفحات التي تحتاج إلى ترقيع (أي تحميلها عند الطلب).
 
-The following article will walk through both of these use cases.
+ستعرض المقالة التالية هاتين الحالتين.
 
-T> For simplicity, this guide stems from the examples in [Getting Started](/guides/getting-started). Please make sure you are familiar with the setup there before moving on.
+T> للتبسيط، يستند هذا الدليل إلى الأمثلة في [البدء](/guides/getting-started). يُرجى التأكد من أنك ملم بالإعداد هناك قبل المتابعة.
 
-## Shimming Globals
+## تلاؤم المتغيرات العامة
 
-Let's start with the first use case of shimming global variables. Before we do anything let's take another look at our project:
+لنبدأ بحالة الاستخدام الأولى، وهي shimming للمتغيرات العامة. قبل أن نفعل أي شيء، دعنا نلقي نظرة أخرى على مشروعنا:
 
 **project**
 
@@ -51,9 +39,9 @@ webpack-demo
  └── /node_modules
 ```
 
-Remember that `lodash` package we were using? For demonstration purposes, let's say we wanted to instead provide this as a global throughout our application. To do this, we can use `ProvidePlugin`.
+تتذكر حزمة `lodash` التي كنا نستخدمها؟ لأغراض العرض، لنفترض أننا أردنا بدلًا من ذلك توفيرها كمتغير عام في كامل تطبيقنا. للقيام بذلك، يمكننا استخدام `ProvidePlugin`.
 
-The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a variable in every module compiled through webpack. If webpack sees that variable used, it will include the given package in the final bundle. Let's go ahead by removing the `import` statement for `lodash` and instead provide it via the plugin:
+يجعل [`ProvidePlugin`](/plugins/provide-plugin) حزمةً ما متاحة كمتغير في كل وحدة يتم تجميعها عبر webpack. إذا رأى webpack استخدام ذلك المتغير، فسيُضمّن الحزمة المحددة في الحزمة النهائية. دعنا نمضي قدمًا بإزالة تعليمة `import` الخاصة بـ `lodash` وتوفيرها بدلًا من ذلك عبر الملحق:
 
 **src/index.js**
 
@@ -98,11 +86,11 @@ const __dirname = path.dirname(__filename);
  };
 ```
 
-What we've essentially done here is tell webpack...
+ما فعلناه فعليًا هنا هو إخبار webpack بما يلي...
 
-> If you encounter at least one instance of the variable `_`, include the `lodash` package and provide it to the modules that need it.
+> إذا صادفت أي استخدام للمتغير `_`، فضمّن حزمة `lodash` ووفّرها للوحدات التي تحتاج إليها.
 
-If we run a build, we should still see the same output:
+إذا شغّلنا البناء، فيجب أن نرى الناتج نفسه:
 
 ```bash
 $ npm run build
@@ -118,7 +106,7 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 2910 ms
 ```
 
-We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's imagine we only wanted to provide the `join` method from `lodash` wherever it's invoked:
+يمكننا أيضًا استخدام `ProvidePlugin` لكشف تصدير واحد من وحدة عبر إعداده باستخدام "مسار مصفوفة" (مثل `[module, child, ...children?]`). لنتخيل أننا نريد فقط توفير دالة `join` من `lodash` أينما تم استدعاؤها:
 
 **src/index.js**
 
@@ -160,11 +148,11 @@ const __dirname = path.dirname(__filename);
  };
 ```
 
-This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of the `lodash` library should get dropped.
+سيتوافق هذا جيدًا مع [Tree Shaking](/guides/tree-shaking)، إذ ينبغي إسقاط بقية مكتبة `lodash`.
 
-## Granular Shimming
+## Shimming دقيق
 
-Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
+تعتمد بعض الوحدات القديمة على أن تكون قيمة `this` هي كائن `window`. دعنا نحدّث `index.js` لدينا بحيث تكون هذه هي الحالة:
 
 ```diff
  function component() {
@@ -172,7 +160,7 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
 
    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-+  // Assume we are in the context of `window`
++  // افترض أننا داخل سياق `window`
 +  this.alert("Hmmm, this probably isn't a great idea...");
 +
    return element;
@@ -181,7 +169,7 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
  document.body.appendChild(component());
 ```
 
-This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](/loaders/imports-loader/):
+يصبح هذا مشكلة عندما يتم تنفيذ الوحدة في سياق CommonJS حيث تكون قيمة `this` مساوية لـ `module.exports`. في هذه الحالة يمكنك تجاوز `this` باستخدام [`imports-loader`](/loaders/imports-loader/):
 
 **webpack.config.js**
 
@@ -215,9 +203,9 @@ This becomes a problem when the module is executed in a CommonJS context where `
  };
 ```
 
-## Global Exports
+## التصديرات العامة
 
-Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
+لنفترض أن مكتبة تنشئ متغيرًا عامًا وتتوقع من المستهلكين استخدامه. يمكننا إضافة وحدة صغيرة إلى إعدادنا لتوضيح ذلك:
 
 **project**
 
@@ -247,7 +235,7 @@ const helpers = {
 };
 ```
 
-Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+الآن، رغم أنك غالبًا لن تفعل هذا أبدًا في كود المصدر الخاص بك، فقد تصادف مكتبة قديمة تريد استخدامها وتحتوي على كود مشابه لما هو موضح أعلاه. في هذه الحالة، يمكننا استخدام [`exports-loader`](/loaders/exports-loader/) لتصدير ذلك المتغير العام كتصدير وحدة عادي. على سبيل المثال، لتصدير `file` باسم `file` و `helpers.parse` باسم `parse`:
 
 **webpack.config.js**
 
@@ -286,19 +274,19 @@ Now, while you'd likely never do this in your own source code, you may encounter
  };
 ```
 
-Now from within our entry script (i.e. `src/index.js`), we could use `const { file, parse } = require('./globals.js');` and all should work smoothly.
+الآن، من داخل سكربت الإدخال لدينا (أي `src/index.js`)، يمكننا استخدام `const { file, parse } = require('./globals.js');` ويجب أن يعمل كل شيء بسلاسة.
 
-## Loading Polyfills
+## تحميل Polyfills
 
-Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: **polyfills**.
+كل ما ناقشناه تقريبًا حتى الآن كان متعلقًا بالتعامل مع الحزم القديمة. دعنا ننتقل إلى موضوعنا الثاني: **polyfills**.
 
-There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) we might:
+توجد طرق كثيرة لتحميل polyfills. على سبيل المثال، لتضمين [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) قد نقوم بما يلي:
 
 ```bash
 npm install --save babel-polyfill
 ```
 
-and `import` it so as to include it in our main bundle:
+ونقوم بـ `import` له لتضمينه في الحزمة الرئيسية:
 
 **src/index.js**
 
@@ -310,7 +298,7 @@ and `import` it so as to include it in our main bundle:
 
    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-   // Assume we are in the context of `window`
+   // افترض أننا داخل سياق `window`
    this.alert("Hmmm, this probably isn't a great idea...");
 
    return element;
@@ -319,14 +307,14 @@ and `import` it so as to include it in our main bundle:
  document.body.appendChild(component());
 ```
 
-T> Note that we aren't binding the `import` to a variable. This is because polyfills run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.
+T> لاحظ أننا لا نربط `import` بمتغير. السبب أن polyfills تعمل وحدها قبل بقية قاعدة الكود، مما يسمح لنا بعد ذلك بافتراض وجود وظائف أصلية معينة.
 
-Note that this approach prioritizes correctness over bundle size. To be safe and robust, polyfills/shims must run **before all other code**, and thus either need to load synchronously, or, all app code needs to load after all polyfills/shims load.
-There are many misconceptions in the community, as well, that modern browsers "don't need" polyfills, or that polyfills/shims merely serve to add missing features - in fact, they often _repair broken implementations_, even in the most modern of browsers.
-The best practice thus remains to unconditionally and synchronously load all polyfills/shims, despite the bundle size cost this incurs.
+لاحظ أن هذا النهج يعطي الأولوية للصحة على حساب حجم الحزمة. لكي تكون polyfills/shims آمنة ومتينة، يجب أن تعمل **قبل كل الكود الآخر**، ولذلك تحتاج إما إلى التحميل بشكل متزامن، أو يجب تحميل كل كود التطبيق بعد اكتمال تحميل جميع polyfills/shims.
+توجد أيضًا مفاهيم خاطئة كثيرة في المجتمع مفادها أن المتصفحات الحديثة "لا تحتاج" إلى polyfills، أو أن polyfills/shims لا تفعل سوى إضافة ميزات مفقودة؛ في الواقع، كثيرًا ما تقوم _بإصلاح تنفيذات معطوبة_، حتى في أحدث المتصفحات.
+لذلك تبقى أفضل ممارسة هي تحميل كل polyfills/shims بلا شروط وبشكل متزامن، رغم تكلفة حجم الحزمة التي يسببها ذلك.
 
-If you feel that you have mitigated these concerns and wish to incur the risk of brokenness, here's one way you might do it:
-Let's move our `import` to a new file and add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill:
+إذا كنت ترى أنك خففت هذه المخاوف وترغب في تحمل خطر التعطل، فإليك طريقة يمكن أن تفعل بها ذلك:
+دعنا ننقل `import` إلى ملف جديد ونضيف polyfill [`whatwg-fetch`](https://github.com/github/fetch):
 
 ```bash
 npm install --save whatwg-fetch
@@ -342,7 +330,7 @@ npm install --save whatwg-fetch
 
    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-   // Assume we are in the context of `window`
+   // افترض أننا داخل سياق `window`
    this.alert("Hmmm, this probably isn't a great idea...");
 
    return element;
@@ -415,7 +403,7 @@ import "whatwg-fetch";
  };
 ```
 
-With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll do some testing to determine whether our polyfills are needed:
+مع وجود ذلك، يمكننا إضافة المنطق لتحميل ملف `polyfills.bundle.js` الجديد شرطيًا. تعتمد طريقة اتخاذ هذا القرار على التقنيات والمتصفحات التي تحتاج إلى دعمها. سنجري بعض الاختبارات لتحديد ما إذا كانت polyfills مطلوبة:
 
 **dist/index.html**
 
@@ -444,7 +432,7 @@ With that in place, we can add the logic to conditionally load our new `polyfill
  </html>
 ```
 
-Now we can `fetch` some data within our entry script:
+الآن يمكننا تنفيذ `fetch` لبعض البيانات داخل سكربت الإدخال:
 
 **src/index.js**
 
@@ -454,7 +442,7 @@ Now we can `fetch` some data within our entry script:
 
    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-   // Assume we are in the context of `window`
+   // افترض أننا داخل سياق `window`
    this.alert("Hmmm, this probably isn't a great idea...");
 
    return element;
@@ -475,11 +463,11 @@ Now we can `fetch` some data within our entry script:
 +  );
 ```
 
-If we run our build, another `polyfills.bundle.js` file will be emitted and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that actually need them.
+إذا شغّلنا البناء، فسيتم إصدار ملف `polyfills.bundle.js` آخر ويجب أن يستمر كل شيء في العمل بسلاسة في المتصفح. لاحظ أن هذا الإعداد يمكن غالبًا تحسينه، لكنه يجب أن يعطيك فكرة جيدة عن كيفية توفير polyfills فقط للمستخدمين الذين يحتاجون إليها فعلًا.
 
-## Further Optimizations
+## تحسينات إضافية
 
-The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the [`useBuiltIns`](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
+تستخدم حزمة `babel-preset-env` مكتبة [browserslist](https://github.com/browserslist/browserslist) لتصيير ما لا تدعمه مصفوفة المتصفحات لديك فقط. يأتي هذا preset مع خيار [`useBuiltIns`](https://babeljs.io/docs/en/babel-preset-env#usebuiltins)، وقيمته الافتراضية `false`، والذي يحوّل استيراد `babel-polyfill` العام لديك إلى نمط `import` أكثر دقة، ميزةً بميزة:
 
 {/* eslint-skip */}
 
@@ -491,18 +479,18 @@ import "core-js/modules/web.immediate";
 import "core-js/modules/web.dom.iterable";
 ```
 
-See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
+راجع [توثيق babel-preset-env](https://babeljs.io/docs/en/babel-preset-env) لمزيد من المعلومات.
 
-## Node Built-Ins
+## المدمجات الخاصة بـ Node
 
-Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
+يمكن عمل polyfill للمدمجات الخاصة بـ Node، مثل `process`، مباشرةً من ملف الإعدادات دون استخدام أي loaders أو plugins خاصة. راجع [صفحة إعدادات node](/configuration/node) لمزيد من المعلومات والأمثلة.
 
-## Other Utilities
+## أدوات أخرى
 
-There are a few other tools that can help when dealing with legacy modules.
+توجد بعض الأدوات الأخرى التي يمكن أن تساعد عند التعامل مع الوحدات القديمة.
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `import` and `require()` statements. This practice is also used to improve the build performance.
+عندما لا توجد نسخة AMD/CommonJS من الوحدة وتريد تضمين `dist`، يمكنك تعليم هذه الوحدة في [`noParse`](/configuration/module/#modulenoparse). سيؤدي ذلك إلى جعل webpack يضمّن الوحدة دون تحليلها أو حل تعليمات `import` و `require()`. تُستخدم هذه الممارسة أيضًا لتحسين أداء البناء.
 
-W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
+W> أي ميزة تتطلب AST، مثل `ProvidePlugin`، لن تعمل.
 
-Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `additionalCode=var%20define%20=%20false;` via the [`imports-loader`](/loaders/imports-loader/).
+أخيرًا، توجد بعض الوحدات التي تدعم عدة [أنماط للوحدات](/concepts/modules)، مثل مزيج من AMD و CommonJS والنمط القديم. في معظم هذه الحالات، تتحقق أولًا من `define` ثم تستخدم كودًا غريبًا بعض الشيء لتصدير الخصائص. في هذه الحالات، قد يساعد إجبار مسار CommonJS عبر تعيين `additionalCode=var%20define%20=%20false;` بواسطة [`imports-loader`](/loaders/imports-loader/).

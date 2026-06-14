@@ -2,50 +2,40 @@
 title: Target
 sort: 13
 contributors:
-  - juangl
-  - sokra
-  - skipjack
-  - SpaceK33z
-  - pastelsky
-  - tbroadley
-  - byzyk
-  - EugeneHlushko
-  - smelukov
-  - chenxsan
-  - JamesHoran
+  - RlxChap2
 ---
 
-Webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets/).
+يستطيع webpack أن يُصرّف لعدّة بيئات أو _targets_. ولفهم المقصود بـ `target` تفصيلاً، اقرأ [صفحة مفهوم الـ targets](/concepts/targets/).
 
 ## target
 
 `string` `[string]` `false`
 
-Instructs webpack to generate runtime code for a specific environment. Note that webpack runtime code is not the same as the user code you write, you should transpile that code with transpilers like Babel if you want to target specific environments, e.g, you have arrow functions in source code and want to run the bundled code in ES5 environments. Webpack won't transpile them automatically with a `target` configured.
+يأمر هذا الخيار webpack بتوليد شيفرة runtime مناسبة لبيئة بعينها. ولاحظ أنّ شيفرة runtime في webpack ليست هي شيفرة المستخدم التي تكتبها أنت، فإن كنت تريد استهداف بيئات معيّنة فعليك أن تُحوِّل شيفرتك بمُحوِّل كـ Babel. فإن كانت شيفرتك المصدرية فيها arrow functions وأردت تنفيذ الحزمة في بيئات ES5، فلن يُحوِّلها webpack تلقائياً لمجرّد أنّك ضبطت `target`.
 
-Defaults to `'browserslist'` or to `'web'` when no browserslist configuration was found.
+القيمة الافتراضية هي `'browserslist'`، أو `'web'` حين لا يُعثر على تخصيص browserslist.
 
 ### string
 
-The following string values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js):
+تُدعَم القيم النصّية الآتية عبر [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js):
 
-| Option                     | Description                                                                                                                                                                                                                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)                                                                                                                                                                                                   |
-| `electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.                                                                                                                                                                                                                                    |
-| `electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.                                       |
-| `electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules. |
-| `node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)                                                                                                                                                                                                              |
-| `node-webkit[[X].Y]`       | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)                                                                                                                             |
-| `nwjs[[X].Y]`              | The same as `node-webkit`                                                                                                                                                                                                                                                                            |
-| `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                                                                        |
-| `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                                                                 |
-| `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.                                                                                                                                                                                                                                     |
-| `browserslist`             | Infer a platform and the ES-features from a browserslist-config **(default if browserslist config is available)**                                                                                                                                                                                    |
+| الخيار                     | الوصف                                                                                                                                                                                                                                                                         |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-node[[X].Y]`        | تصريف للاستعمال في بيئة شبيهة بـ Node.js (تستعمل `fs` و `vm` لتحميل الـ chunks بشكل غير متزامن).                                                                                                                                                                              |
+| `electron[[X].Y]-main`     | تصريف لـ [Electron](https://electronjs.org/) خاصّ بالعملية الرئيسية (main process).                                                                                                                                                                                           |
+| `electron[[X].Y]-renderer` | تصريف لـ [Electron](https://electronjs.org/) خاصّ بعملية العرض (renderer process)، ويُوفِّر هدفاً يستعمل `JsonpTemplatePlugin` و `FunctionModulePlugin` لبيئات المتصفّح، و `NodeTargetPlugin` و `ExternalsPlugin` لوحدات CommonJS ووحدات Electron المدمجة.                    |
+| `electron[[X].Y]-preload`  | تصريف لـ [Electron](https://electronjs.org/) خاصّ بعملية العرض، ويُوفِّر هدفاً يستعمل `NodeTemplatePlugin` مع ضبط `asyncChunkLoading` على `true`، و `FunctionModulePlugin` لبيئات المتصفّح، و `NodeTargetPlugin` و `ExternalsPlugin` لوحدات CommonJS ووحدات Electron المدمجة. |
+| `node[[X].Y]`              | تصريف للاستعمال في بيئة شبيهة بـ Node.js (تستعمل `require` الخاصة بـ Node.js لتحميل الـ chunks).                                                                                                                                                                              |
+| `node-webkit[[X].Y]`       | تصريف للاستعمال في WebKit، ويستعمل JSONP لتحميل الـ chunks. ويُتيح استيراد وحدات Node.js المدمجة و [`nw.gui`](http://docs.nwjs.io/en/latest/) (تجريبي).                                                                                                                       |
+| `nwjs[[X].Y]`              | مثل `node-webkit` تماماً.                                                                                                                                                                                                                                                     |
+| `web`                      | تصريف للاستعمال في بيئة شبيهة بالمتصفّح **(الافتراضي)**.                                                                                                                                                                                                                      |
+| `webworker`                | تصريف بوصفه WebWorker.                                                                                                                                                                                                                                                        |
+| `esX`                      | تصريف لإصدار ECMAScript المُحدَّد. أمثلة: es5، es2020.                                                                                                                                                                                                                        |
+| `browserslist`             | استنتاج المنصّة وميزات ES من تخصيص browserslist **(افتراضي إن كان تخصيص browserslist متاحاً)**.                                                                                                                                                                               |
 
-For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables.
+فمثلاً، حين يكون `target` مضبوطاً على `"electron-main"`، يُضيف webpack عدّة متغيّرات خاصّة بـ electron.
 
-A version of `node` or `electron` may be optionally specified. This is denoted by the `[[X].Y]` in the table above.
+ويمكن اختياراً تحديد إصدار من `node` أو `electron`، وهو ما يُعبَّر عنه بـ `[[X].Y]` في الجدول أعلاه.
 
 **webpack.config.js**
 
@@ -56,26 +46,26 @@ export default {
 };
 ```
 
-It helps determinate ES-features that may be used to generate a runtime-code (all the chunks and modules are wrapped by runtime code).
+وهذا يُعين على تحديد ميزات ES التي قد تُستعمَل في توليد شيفرة runtime (إذ تُغلَّف جميع الـ chunks والوحدات داخل شيفرة runtime).
 
 #### browserslist
 
-If a project has a browserslist config, then webpack will use it for:
+إن كان للمشروع تخصيص browserslist، فإنّ webpack سيُوظِّفه في:
 
-- Determinate ES-features that may be used to generate a runtime-code.
-- Infer an environment (e.g: `last 2 node versions` the same as `target: "node"` with some [`output.environment`](/configuration/output/#outputenvironment) settings).
+- تحديد ميزات ES التي قد تُستعمَل في توليد شيفرة runtime.
+- استنتاج بيئة العمل (مثلاً: `last 2 node versions` تكافئ `target: "node"` مع بعض إعدادات [`output.environment`](/configuration/output/#outputenvironment)).
 
-Supported browserslist values:
+القيم المدعومة لـ browserslist:
 
-- `browserslist` - use automatically resolved browserslist config and environment (from the nearest `package.json` or `BROWSERSLIST` environment variable, see [browserslist documentation](https://github.com/browserslist/browserslist#queries) for details)
-- `browserslist:modern` - use `modern` environment from automatically resolved browserslist config
-- `browserslist:last 2 versions` - use an explicit browserslist query (config will be ignored)
-- `browserslist:/path/to/config` - explicitly specify browserslist config
-- `browserslist:/path/to/config:modern` - explicitly specify browserslist config and an environment
+- `browserslist` — استعمل تخصيص browserslist والبيئة المحلولين تلقائياً (من أقرب `package.json` أو من متغيّر البيئة `BROWSERSLIST`، انظر [توثيق browserslist](https://github.com/browserslist/browserslist#queries) للتفاصيل).
+- `browserslist:modern` — استعمل بيئة `modern` من تخصيص browserslist المحلول تلقائياً.
+- `browserslist:last 2 versions` — استعمل استعلام browserslist صريحاً (وسيُتجاهَل ملفّ التخصيص).
+- `browserslist:/path/to/config` — حدِّد ملفّ تخصيص browserslist صراحةً.
+- `browserslist:/path/to/config:modern` — حدِّد ملفّ تخصيص browserslist وبيئةً صراحةً.
 
 ### [string]
 
-When multiple targets are passed, then common subset of features will be used:
+حين تُمرَّر عدّة أهداف، فلن يُستعمَل إلا المشترك بين الميزات:
 
 **webpack.config.js**
 
@@ -86,9 +76,9 @@ export default {
 };
 ```
 
-Webpack will generate a runtime code for web platform and will use only ES5 features.
+سيُولِّد webpack شيفرة runtime لمنصّة الويب، ولن يستعمل سوى ميزات ES5.
 
-Not all targets may be mixed for now.
+وفي الوقت الحالي، لا يمكن مزج جميع الأهداف بحرّية.
 
 **webpack.config.js**
 
@@ -99,11 +89,11 @@ export default {
 };
 ```
 
-Will cause an error. Webpack does not support universal target for now.
+سيُسبِّب ذلك خطأً، إذ لا يدعم webpack حتى الآن هدفاً عمومياً (universal target).
 
-### false
+### خطأ شنيع
 
-Set `target` to `false` if none of the predefined targets from the list above meet your needs, no plugins will be applied.
+اضبط `target` على `false` إن لم تكفِ احتياجاتك أيّ من الأهداف المعرَّفة مُسبقاً، ولن يُطبَّق عندئذٍ أيّ plugin.
 
 **webpack.config.js**
 
@@ -114,7 +104,7 @@ export default {
 };
 ```
 
-Or you can apply specific plugins you want:
+أو يمكنك تطبيق ما تشاء من plugins بنفسك:
 
 **webpack.config.js**
 
@@ -131,4 +121,4 @@ export default {
 };
 ```
 
-When no information about the target or the [environment](/configuration/output/#outputenvironment) features is provided, then ES2015 will be used.
+وإن لم تُقدَّم أيّ معلومات عن الهدف أو عن ميزات [البيئة](/configuration/output/#outputenvironment)، فستُستعمَل ES2015.

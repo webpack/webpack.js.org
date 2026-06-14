@@ -8,7 +8,7 @@ export default function ReadingProgress() {
       role="progressbar"
       aria-valuemin={0}
       aria-valuemax={100}
-      aria-label="Reading progress"
+      aria-label="تقدم القراءة"
     >
       <div className="h-full w-full bg-[#36393c] dark:bg-[#9ab3c0] [transform-origin:left] will-change-transform [transform:scaleX(0)] [animation:grow-progress_auto_linear_forwards] animation-timeline-scroll" />
     </div>

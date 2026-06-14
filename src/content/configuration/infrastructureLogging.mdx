@@ -2,10 +2,10 @@
 title: InfrastructureLogging
 sort: 20
 contributors:
-  - snitin315
+  - RlxChap2
 ---
 
-Options for infrastructure level logging.
+خيارات التسجيل (logging) على مستوى البنية التحتية.
 
 ## infrastructureLogging.appendOnly
 
@@ -13,7 +13,7 @@ Options for infrastructure level logging.
 
 `boolean`
 
-Append lines to the output instead of updating existing output, useful for status messages. This option is used only when no custom [`console`](#infrastructureloggingconsole) is provided.
+يُلحق السطور بالمخرَجات بدل تحديث المخرَجات القائمة، وهذا مفيد لرسائل الحالة. ولا يُؤخذ هذا الخيار بعين الاعتبار إلا حين لا تكون قد قدّمت كائن [`console`](#infrastructureloggingconsole) خاصاً بك.
 
 **webpack.config.js**
 
@@ -27,7 +27,7 @@ export default {
   plugins: [
     (compiler) => {
       const logger = compiler.getInfrastructureLogger("MyPlugin");
-      logger.status("first output"); // this line won't be overridden with `appendOnly` enabled
+      logger.status("first output"); // لن يُستبدَل هذا السطر طالما أنّ `appendOnly` مُفعَّل
       logger.status("second output");
     },
   ],
@@ -40,7 +40,7 @@ export default {
 
 `boolean`
 
-Enable colorful output for infrastructure level logging. This option is used only when no custom [`console`](#infrastructureloggingconsole) is provided.
+يُفعِّل المخرَجات الملوّنة للتسجيل على مستوى البنية التحتية. ولا يُؤخذ بعين الاعتبار إلا حين لا تكون قد قدّمت كائن [`console`](#infrastructureloggingconsole) خاصاً بك.
 
 **webpack.config.js**
 
@@ -66,7 +66,7 @@ export default {
 
 `Console`
 
-Customize the console used for infrastructure level logging.
+خصِّص كائن الـ console المستخدم في التسجيل على مستوى البنية التحتية.
 
 **webpack.config.js**
 
@@ -83,7 +83,7 @@ export default {
 
 `string` `boolean = false` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
-Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. Defaults to `false`.
+يُمكّن معلومات التنقيح (debug) لمسجِّلات بعينها كالـ plugins أو الـ loaders. وهو مشابه لخيار [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) لكنه يخصّ البنية التحتية. وقيمته الافتراضية `false`.
 
 **webpack.config.js**
 
@@ -101,16 +101,16 @@ export default {
 
 `string = 'info' : 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'`
 
-Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. Defaults to `'info'`.
+يُفعِّل مخرَجات تسجيل البنية التحتية. شبيه بخيار [`stats.logging`](/configuration/stats/#statslogging) لكنه يخصّ البنية التحتية. وقيمته الافتراضية `'info'`.
 
-Possible values:
+القيم الممكنة:
 
-- `'none'` - disable logging
-- `'error'` - errors only
-- `'warn'` - errors and warnings only
-- `'info'` - errors, warnings, and info messages
-- `'log'` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
-- `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
+- `'none'` — تعطيل التسجيل.
+- `'error'` — الأخطاء فقط.
+- `'warn'` — الأخطاء والتحذيرات فقط.
+- `'info'` — الأخطاء والتحذيرات ورسائل المعلومات.
+- `'log'` — الأخطاء والتحذيرات ورسائل المعلومات ورسائل log والمجموعات وأوامر المسح. وتُعرض المجموعات المطويّة في حالتها المطويّة.
+- `'verbose'` — تسجيل كل شيء عدا debug و trace. وتُعرض المجموعات المطويّة في حالتها المفتوحة.
 
 **webpack.config.js**
 
@@ -129,7 +129,7 @@ export default {
 
 `NodeJS.WritableStream = process.stderr`
 
-Stream used for logging output. Defaults to `process.stderr`. This option is used only when no custom [`console`](#infrastructureloggingconsole) is provided.
+التيار (stream) المستخدم في مخرَجات التسجيل. القيمة الافتراضية هي `process.stderr`. ولا يُؤخذ هذا الخيار بعين الاعتبار إلا حين لا تكون قد قدّمت كائن [`console`](#infrastructureloggingconsole) خاصاً بك.
 
 **webpack.config.js**
 
@@ -142,4 +142,4 @@ export default {
 };
 ```
 
-T> In the case of a TTY stream, `colors` is enabled and `appendOnly` is disabled, and vice versa.
+T> إن كان التيار من نوع TTY، فإنّ `colors` يكون مُفعَّلاً و`appendOnly` مُعطَّلاً، والعكس بالعكس.

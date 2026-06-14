@@ -56,7 +56,7 @@ describe("SidebarItem", () => {
     expect(wrapper.getAttribute("data-open")).toBeNull();
 
     const toggleButton = screen.getByRole("button", {
-      name: /toggle getting started section/i,
+      name: /تبديل قسم Getting Started/,
     });
     fireEvent.click(toggleButton);
 

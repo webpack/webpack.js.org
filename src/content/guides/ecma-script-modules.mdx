@@ -1,22 +1,21 @@
 ---
-title: ECMAScript Modules
+title: وحدات ECMAScript
 sort: 19
 contributors:
-  - sokra
-  - ryzrr
+  - arabpolice
 related:
-  - title: ECMAScript Modules in Node.js
+  - title: وحدات ECMAScript في Node.js
     url: https://nodejs.org/api/esm.html
 ---
 
-ECMAScript Modules (ESM) is a [specification](https://tc39.github.io/ecma262/#sec-modules) for using Modules in the Web.
-It's supported by all modern browsers and the recommended way of writing modular code for the Web.
+وحدات ECMAScript (ESM) هي [مواصفة](https://tc39.github.io/ecma262/#sec-modules) لاستخدام الوحدات على الويب.
+وهي مدعومة في جميع المتصفحات الحديثة، وتُعد الطريقة الموصى بها لكتابة كود وحدي للويب.
 
-Webpack supports processing ECMAScript Modules to optimize them.
+يدعم Webpack معالجة وحدات ECMAScript لتحسينها.
 
-## Exporting
+## التصدير
 
-The `export` keyword allows to expose things from an ESM to other modules:
+تتيح الكلمة المفتاحية `export` كشف عناصر من ESM إلى وحدات أخرى:
 
 {/* eslint-disable */}
 
@@ -24,8 +23,8 @@ The `export` keyword allows to expose things from an ESM to other modules:
 export const CONSTANT = 42;
 
 export let variable = 42;
-// only reading is exposed
-// it's not possible to modify the variable from outside
+// لا يُكشف إلا حق القراءة
+// لا يمكن تعديل المتغير من الخارج
 
 export function fun() {
   console.log("fun");
@@ -43,35 +42,37 @@ export { a, b, other as c };
 export default 1 + 2 + 3 + more();
 ```
 
-## Importing
+## الاستيراد
 
-The `import` keyword allows to get references to things from other modules into an ESM:
+تتيح الكلمة المفتاحية `import` الحصول داخل ESM على مراجع لعناصر من وحدات أخرى:
 
 ```js
-// import "bindings" to exports from another module
-// these bindings are live. The values are not copied,
-// instead accessing "variable" will get the current value
-// in the imported module
+// استيراد "ارتباطات" إلى صادرات من وحدة أخرى
+// هذه الارتباطات حية. لا يتم نسخ القيم،
+// بل إن الوصول إلى "variable" سيجلب القيمة الحالية
+// في الوحدة المستوردة
 import { CONSTANT, variable } from "./module.js";
 
-// shortcut to import the "default" export
+// اختصار لاستيراد الصادر "default"
 import theDefaultValue from "./module.js";
 
-// import the "namespace object" which contains all exports
+// استيراد "كائن namespace" الذي يحتوي على كل الصادرات
 import * as module from "./module.js";
 
 module.fun();
 ```
 
-When importing a namespace object from an ECMAScript Module, webpack follows the ESM convention of setting `Symbol.toStringTag` to "Module" on the namespace object.
+عند استيراد كائن namespace من وحدة ECMAScript، يتبع webpack عرف ESM بتعيين `Symbol.toStringTag` إلى "Module" على كائن namespace.
 
-## Flagging modules as ESM
+## تمييز الوحدات كـ ESM
 
-By default webpack will automatically detect whether a file is an ESM or a different module system.
+<span id="flagging-modules-as-esm"></span>
 
-Node.js established a way of explicitly setting the module type of files by using a property in the `package.json`.
-Setting `"type": "module"` in a package.json does force all files below this package.json to be ECMAScript Modules.
-Setting `"type": "commonjs"` will instead force them to be CommonJS Modules.
+افتراضيًا، يكتشف webpack تلقائيًا ما إذا كان الملف ESM أم نظام وحدات مختلفًا.
+
+أرست Node.js طريقة لتعيين نوع وحدة الملفات صراحةً باستخدام خاصية في `package.json`.
+تعيين `"type": "module"` في package.json يفرض أن تكون جميع الملفات الموجودة أسفل ملف package.json هذا وحدات ECMAScript.
+أما تعيين `"type": "commonjs"` فيفرض أن تكون CommonJS Modules بدلًا من ذلك.
 
 ```json
 {
@@ -79,78 +80,77 @@ Setting `"type": "commonjs"` will instead force them to be CommonJS Modules.
 }
 ```
 
-In addition to that, files can set the module type by using `.mjs` or `.cjs` extension. `.mjs` will force them to be ESM, `.cjs` force them to be CommonJs.
+بالإضافة إلى ذلك، يمكن للملفات تعيين نوع الوحدة باستخدام الامتداد `.mjs` أو `.cjs`. الامتداد `.mjs` يفرض أن تكون ESM، بينما يفرض `.cjs` أن تكون CommonJs.
 
-In DataURIs using the `text/javascript` or `application/javascript` mime type will also force module type to ESM.
+في DataURIs، يؤدي استخدام نوع MIME `text/javascript` أو `application/javascript` أيضًا إلى فرض نوع الوحدة على ESM.
 
-In addition to the module format, flagging modules as ESM also affect the resolving logic, interop logic and the available symbols in modules.
+إلى جانب صيغة الوحدة، يؤثر تمييز الوحدات كـ ESM أيضًا في منطق الحل، ومنطق التوافق البيني، والرموز المتاحة داخل الوحدات.
 
-## import.meta in ESM
+## import.meta في ESM
 
-Webpack exposes several `import.meta` properties for use in ESM:
+يكشف Webpack عدة خصائص من `import.meta` لاستخدامها في ESM:
 
-| Property                     | Description                                                                                    |
-| ---------------------------- | ---------------------------------------------------------------------------------------------- |
-| `import.meta.url`            | The URL of the current module file - use it for `new Worker()` or `new URL()`                  |
-| `import.meta.webpack`        | The webpack major version number (e.g. `5`)                                                    |
-| `import.meta.webpackHot`     | Equivalent of `module.hot` - use for HMR in ESM                                                |
-| `import.meta.webpackContext` | [ESM equivalent of `require.context`](/guides/dependency-management/#importmetawebpackcontext) |
+| الخاصية                      | الوصف                                                                                     |
+| ---------------------------- | ----------------------------------------------------------------------------------------- |
+| `import.meta.url`            | عنوان URL لملف الوحدة الحالي - استخدمه مع `new Worker()` أو `new URL()`                   |
+| `import.meta.webpack`        | رقم الإصدار الرئيسي من webpack (مثل `5`)                                                  |
+| `import.meta.webpackHot`     | مكافئ `module.hot` - استخدمه لـ HMR داخل ESM                                              |
+| `import.meta.webpackContext` | [مكافئ ESM لـ `require.context`](/guides/dependency-management/#importmetawebpackcontext) |
 
-**Example - using `import.meta.url` for assets:**
+**مثال - استخدام `import.meta.url` للأصول:**
 
 ```js
-// Resolve a sibling file relative to the current module
+// حل ملف شقيق نسبةً إلى الوحدة الحالية
 const iconUrl = new URL("./icon.png", import.meta.url);
 const img = document.createElement("img");
 img.src = iconUrl.href;
 ```
 
-**Example - HMR in ESM:**
+**مثال - HMR داخل ESM:**
 
 ```js
 if (import.meta.webpackHot) {
   import.meta.webpackHot.accept("./module.js", () => {
-    // handle update
+    // تعامل مع التحديث
   });
 }
 ```
 
-## Top-Level Await
+## Await على المستوى الأعلى
 
-In ESM, you can use `await` at the top level of a module. Webpack treats the module
-as an async module automatically. Enabled by default since 5.83.0; the `experiments.topLevelAwait` option itself was removed in 5.102.0 (it just works).
+في ESM، يمكنك استخدام `await` على المستوى الأعلى من الوحدة. يتعامل webpack مع الوحدة كوحدة غير متزامنة تلقائيًا. هذه الميزة مفعّلة افتراضيًا منذ 5.83.0؛ أما خيار `experiments.topLevelAwait` نفسه فقد أزيل في 5.102.0 (إذ أصبح يعمل مباشرة).
 
-W> Avoid top-level await in your entry point when targeting the **browser**. It delays the entire module graph evaluation. Prefer `import()` for deferred loading. For Node.js, Electron, or Web Worker targets this restriction does not apply.
+W> تجنب استخدام await على المستوى الأعلى في نقطة الدخول عند استهداف **المتصفح**. فهو يؤخر تقييم كامل مخطط الوحدات. فضّل `import()` للتحميل المؤجل. بالنسبة إلى أهداف Node.js أو Electron أو Web Worker، لا ينطبق هذا القيد.
 
 ```js
-// user.js (async ESM module)
+// user.js (وحدة ESM غير متزامنة)
 const response = await fetch("/api/user");
 
 export const user = await response.json();
 ```
 
 ```js
-// index.js - importing an async module works as expected
+// index.js - يعمل استيراد وحدة غير متزامنة كما هو متوقع
 import { user } from "./user.js";
 
 console.log(user.name);
 ```
 
-## Fully Specified Imports
+## الاستيرادات كاملة التحديد
 
-Imports in ESM are resolved more strictly. Relative requests must include a file extension (e.g. `*.js` or `*.mjs`) following the Node.js convention when the file is flagged as ESM:
+تُحل الاستيرادات في ESM بصرامة أكبر. يجب أن تتضمن الطلبات النسبية امتداد الملف (مثل `*.js` أو `*.mjs`) وفق عرف Node.js عندما يكون الملف مميزًا كـ ESM:
 
 ```js
-// will fail - missing extension
+// سيفشل - الامتداد مفقود
 import { helper as missingExt } from "./utils";
 
-// correct in ESM
+// صحيح في ESM
 import { helper } from "./utils.js";
 ```
 
-T> Requests to packages e.g. `import "lodash"` are still supported.
+T> لا تزال طلبات الحزم مثل `import "lodash"` مدعومة.
 
-To disable this check (useful when migrating a large CJS codebase), you can use [`fullySpecified=false`](/configuration/module/#resolvefullyspecified):
+لتعطيل هذا الفحص، وهو مفيد عند ترحيل قاعدة كود CJS كبيرة، يمكنك استخدام [`fullySpecified=false`](/configuration/module/#resolvefullyspecified):
 
 ```js
 // webpack.config.js
@@ -168,62 +168,53 @@ export default {
 };
 ```
 
-## CommonJS Interop
+## التوافق البيني مع CommonJS
 
-CommonJS syntax is not available in ESM: `require`, `module`, `exports`, `__filename`, `__dirname`.
+صيغة CommonJS غير متاحة داخل ESM: `require` و`module` و`exports` و`__filename` و`__dirname`.
 
-When importing from a CommonJS module inside ESM, only the `default` export
-is available (the entire `module.exports` object):
+عند الاستيراد من وحدة CommonJS داخل ESM، لا يتوفر إلا الصادر `default` (كائن `module.exports` بالكامل):
 
 ```js
 // esm-consumer.js (ESM)
 import cjs from "./cjs-module.js";
-// named imports from CJS don't work
+// الاستيرادات المسماة من CJS لا تعمل
 import { foo } from "./cjs-module.js"; // undefined
 
 // cjs-module.js (CommonJS)
 module.exports = { foo: 1, bar: 2 };
 
-console.log(cjs.foo); // works - cjs is the whole exports object
+console.log(cjs.foo); // يعمل - cjs هو كائن الصادرات بالكامل
 ```
 
-This strict behavior applies when webpack treats the **imported** module as CommonJS.
-If that module itself uses ESM `export` syntax, webpack will auto-detect it as ESM
-and named imports will work normally. This commonly affects projects that mix `.js` files
-files in a project that has `"type": "module"` set - webpack may treat some files as
-ESM while third-party packages in `node_modules` remain CommonJS.
+ينطبق هذا السلوك الصارم عندما يتعامل webpack مع الوحدة **المستوردة** على أنها CommonJS.
+إذا كانت تلك الوحدة نفسها تستخدم صيغة `export` الخاصة بـ ESM، فسيكتشفها webpack تلقائيًا كـ ESM وستعمل الاستيرادات المسماة بشكل طبيعي. يحدث هذا كثيرًا في المشاريع التي تمزج ملفات `.js`
+داخل مشروع عُيّن فيه `"type": "module"`؛ فقد يتعامل webpack مع بعض الملفات كـ ESM بينما تبقى حزم الجهات الخارجية داخل `node_modules` على CommonJS.
 
-T> To get named exports from CommonJS modules, consider migrating to ESM
-T> or using [`@babel/plugin-transform-modules-commonjs`](https://babeljs.io/docs/babel-plugin-transform-modules-commonjs).
+T> للحصول على صادرات مسماة من وحدات CommonJS، فكّر في الترحيل إلى ESM
+T> أو استخدام [`@babel/plugin-transform-modules-commonjs`](https://babeljs.io/docs/babel-plugin-transform-modules-commonjs).
 
-## Common Migration Errors
+## أخطاء الترحيل الشائعة
 
 **`ReferenceError: require is not defined`**
 
-When a file is treated as ESM, CommonJS globals (`require`, `module`, `exports`,
-`__filename`, `__dirname`) are unavailable.
+عندما يُعامل ملف كـ ESM، لا تكون عموميات CommonJS (`require` و`module` و`exports` و`__filename` و`__dirname`) متاحة.
 
-_Fix_: Replace `require()` with `import` statements. For conditional or dynamic
-loading, use `import()`.
+_الإصلاح_: استبدل `require()` بتعليمات `import`. وللتحميل الشرطي أو الديناميكي، استخدم `import()`.
 
 ---
 
 **`Must use import to load ES Module`** (Node.js) / **`SyntaxError: Cannot use import
 statement in a module`** (browser)
 
-This happens when a file using ESM `import`/`export` syntax is not flagged as ESM -
-either `"type": "module"` is missing from `package.json`, or the file uses a `.js`
-extension instead of `.mjs`.
+يحدث هذا عندما يستخدم ملف صيغة `import`/`export` الخاصة بـ ESM دون أن يكون مميزًا كـ ESM، إما لأن `"type": "module"` مفقودة من `package.json`، أو لأن الملف يستخدم امتداد `.js` بدلًا من `.mjs`.
 
-_Fix_: Add `"type": "module"` to your `package.json`, or rename the file to `.mjs`.
+_الإصلاح_: أضف `"type": "module"` إلى `package.json`، أو أعد تسمية الملف إلى `.mjs`.
 
 ---
 
 **`Module not found: Error: Can't resolve './utils'` (missing extension)**
 
-In ESM, relative imports must include the file extension. Webpack follows the Node.js
-ESM convention here.
+في ESM، يجب أن تتضمن الاستيرادات النسبية امتداد الملف. يتبع webpack هنا عرف ESM الخاص بـ Node.js.
 
-_Fix_: Change `import { helper } from './utils'` to `import { helper } from './utils.js'`,
-or set [`fullySpecified: false`](/configuration/module/#resolvefullyspecified) in your
-webpack config to disable the check while migrating.
+_الإصلاح_: غيّر `import { helper } from './utils'` إلى `import { helper } from './utils.js'`،
+أو عيّن [`fullySpecified: false`](/configuration/module/#resolvefullyspecified) في إعدادات webpack لتعطيل الفحص أثناء الترحيل.

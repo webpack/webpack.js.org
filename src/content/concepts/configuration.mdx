@@ -2,36 +2,32 @@
 title: Configuration
 sort: 5
 contributors:
-  - TheLarkInn
-  - simon04
-  - EugeneHlushko
-  - byzyk
-  - mr-baraiya
+  - RlxChap2
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because **webpack's configuration file is a JavaScript file that exports a webpack [configuration](/configuration/).** This configuration is then processed by webpack based upon its defined properties.
+ربما لاحظت أن ملفات تكوين webpack نادرًا ما تبدو متطابقة تمامًا. والسبب أن **ملف تكوين webpack هو ملف JavaScript يصدّر [تكوينًا](/configuration/) خاصًا بـ webpack.** بعد ذلك يعالج webpack هذا التكوين بناءً على الخصائص المعرّفة فيه.
 
-Because it's a standard Node.js module, you **can do the following**:
+ولأنه وحدة Node.js قياسية، يمكنك **فعل الآتي**:
 
-- Import other files via `require(...)` **or** `import`
-- Use utilities on npm via `require(...)` **or** `import`
-- Use JavaScript control flow expressions (e.g. `?:`, `if`, `for`, etc.)
-- Use constants or variables for often used values
-- Write and execute functions to generate a part of the configuration
+- استيراد ملفات أخرى باستخدام `require(...)` **أو** `import`
+- استخدام أدوات من npm باستخدام `require(...)` **أو** `import`
+- استخدام تعبيرات التحكم في JavaScript مثل `?:` و `if` و `for` وغيرها
+- استخدام الثوابت أو المتغيرات للقيم التي تتكرر كثيرًا
+- كتابة دوال وتنفيذها لتوليد جزء من التكوين
 
-Use these features when appropriate.
+استخدم هذه الإمكانات عندما تكون مناسبة.
 
-While they are technically feasible, **the following practices should be avoided**:
+مع أنها ممكنة تقنيًا، **ينبغي تجنب الممارسات الآتية**:
 
-- Access CLI arguments, when using the webpack CLI. This can make your configuration non-portable and harder to maintain. Instead, write your own CLI, or [use `--env`](/api/cli/#env) to pass environment variables.
-- Export non-deterministic values (calling webpack twice should result in the same output files)
-- Write long configurations (instead split the configuration into multiple files)
+- الوصول إلى وسائط CLI عند استخدام webpack CLI. قد يجعل ذلك التكوين غير قابل للنقل وأصعب في الصيانة. بدلًا من ذلك، اكتب CLI خاصًا بك، أو [استخدم `--env`](/api/cli/#env) لتمرير متغيرات البيئة.
+- تصدير قيم غير حتمية؛ تشغيل webpack مرتين يجب أن ينتج الملفات نفسها.
+- كتابة تكوينات طويلة؛ من الأفضل تقسيم التكوين إلى عدة ملفات.
 
-T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
+T> أهم ما ينبغي الخروج به من هذه الصفحة هو أن هناك طرقًا كثيرة لتنسيق وكتابة تكوين webpack. المهم هو الالتزام بأسلوب ثابت تستطيع أنت وفريقك فهمه وصيانته.
 
-The examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
+توضح الأمثلة التالية كيف يمكن لتكوين webpack أن يكون معبرًا وقابلًا للضبط لأنه _كود_:
 
-## Introductory Configuration
+## تكوين تمهيدي
 
 **webpack.config.js**
 
@@ -52,13 +48,13 @@ export default {
 };
 ```
 
-_See_: [Configuration section](/configuration/) for all supported configuration options
+_راجع_: [قسم التكوين](/configuration/) للاطلاع على جميع خيارات التكوين المدعومة.
 
-## Using multiple configurations
+## استخدام عدة تكوينات
 
-Webpack supports exporting multiple configuration objects, which can be useful when building different targets or outputs (for example, separate client and server bundles).
+يدعم webpack تصدير عدة كائنات تكوين، وهذا مفيد عند بناء أهداف أو مخرجات مختلفة، مثل حزم منفصلة للعميل والخادم.
 
-While a single configuration is sufficient for many projects, multiple configurations can help organize more complex setups.
+مع أن تكوينًا واحدًا يكفي لكثير من المشاريع، تساعد التكوينات المتعددة على تنظيم الإعدادات الأكثر تعقيدًا.
 
 ```js
 module.exports = [
@@ -77,14 +73,14 @@ module.exports = [
 ];
 ```
 
-## Multiple Targets
+## أهداف متعددة
 
-Along with exporting a single configuration as an object, [function](/configuration/configuration-types/#exporting-a-function) or [Promise](/configuration/configuration-types/#exporting-a-promise), you can export multiple configurations.
+إلى جانب تصدير تكوين واحد على هيئة كائن أو [دالة](/configuration/configuration-types/#exporting-a-function) أو [Promise](/configuration/configuration-types/#exporting-a-promise)، يمكنك تصدير عدة تكوينات.
 
-_See_: [Exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations)
+_راجع_: [تصدير عدة تكوينات](/configuration/configuration-types/#exporting-multiple-configurations)
 
-## Using other Configuration Languages
+## استخدام لغات تكوين أخرى
 
-Webpack accepts configuration files written in multiple programming and data languages.
+يقبل webpack ملفات تكوين مكتوبة بعدة لغات برمجة ولغات بيانات.
 
-_See_: [Configuration Languages](/configuration/configuration-languages/)
+_راجع_: [لغات التكوين](/configuration/configuration-languages/)

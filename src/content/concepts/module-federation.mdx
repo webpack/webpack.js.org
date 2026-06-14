@@ -2,17 +2,7 @@
 title: Module Federation
 sort: 8
 contributors:
-  - sokra
-  - chenxsan
-  - EugeneHlushko
-  - jamesgeorge007
-  - ScriptedAlchemy
-  - snitin315
-  - XiaofengXie16
-  - KyleBastien
-  - Alevale
-  - burhanuday
-  - RexSkz
+  - RlxChap2
 related:
   - title: "Webpack 5 Module Federation: A game-changer in JavaScript architecture"
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -22,92 +12,106 @@ related:
     url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
 ---
 
-## Motivation
+<a id="motivation"></a>
 
-Multiple separate builds should form a single application. These separate builds act like containers and can expose and consume code among themselves, creating a single, unified application.
+## الدافع
 
-This is often known as Micro-Frontends, but is not limited to that.
+ينبغي أن تشكل عدة builds منفصلة تطبيقًا واحدًا. تعمل هذه builds المنفصلة مثل containers، ويمكنها كشف الكود واستهلاكه فيما بينها، مما ينشئ تطبيقًا واحدًا موحدًا.
+
+يُعرف هذا غالبًا باسم Micro-Frontends، لكنه لا يقتصر عليها.
 
 <StackBlitzPreview
   example="module-federation?terminal=start&terminal="
-  description="Check out this live module federation example on StackBlitz."
+  description="تحقق من مثال حي لـ Module Federation على StackBlitz."
 />
 
-## Low-level concepts
+<a id="low-level-concepts"></a>
 
-We distinguish between local and remote modules. Local modules are regular modules that are part of the current build. Remote modules are modules that are not part of the current build but are loaded at runtime from a remote container.
+## مفاهيم منخفضة المستوى
 
-Loading remote modules is considered an asynchronous operation. When using a remote module, these asynchronous operations will be placed in the next chunk loading operation(s) that are between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
+نميز بين الوحدات المحلية والوحدات البعيدة. الوحدات المحلية هي وحدات عادية تُعد جزءًا من build الحالي. أما الوحدات البعيدة فهي وحدات ليست جزءًا من build الحالي، لكنها تُحمّل وقت التشغيل من remote container.
 
-A chunk loading operation is usually an `import()` call, but older constructs like `require.ensure` or `require([...])` are supported as well.
+يُعد تحميل الوحدات البعيدة عملية غير متزامنة. عند استخدام وحدة بعيدة، توضع هذه العمليات غير المتزامنة داخل عملية أو عمليات تحميل chunk التالية الواقعة بين الوحدة البعيدة ونقطة الدخول. لا يمكن استخدام وحدة بعيدة بدون عملية تحميل chunk.
 
-A container is created through a container entry, which exposes asynchronous access to the specific modules. The exposed access is separated into two steps:
+عادةً تكون عملية تحميل chunk عبارة عن استدعاء `import()`، لكن التركيبات الأقدم مثل `require.ensure` أو `require([...])` مدعومة أيضًا.
 
-1. loading the module (asynchronous)
-2. evaluating the module (synchronous).
+يُنشأ container عبر container entry، وهو يتيح وصولًا غير متزامن إلى الوحدات المحددة. ينقسم الوصول المكشوف إلى خطوتين:
 
-Step 1 will be done during the chunk loading. Step 2 will be done during the module evaluation interleaved with other (local and remote) modules. This way, evaluation order is unaffected by converting a module from local to remote or the other way around.
+1. تحميل الوحدة (غير متزامن)
+2. تقييم الوحدة (متزامن).
 
-It is possible to nest containers. Containers can use modules from other containers. Circular dependencies between containers are also possible.
+تتم الخطوة الأولى أثناء تحميل chunk. وتتم الخطوة الثانية أثناء تقييم الوحدة بالتداخل مع الوحدات الأخرى، سواء كانت محلية أو بعيدة. بهذه الطريقة، لا يتأثر ترتيب التقييم عند تحويل وحدة من محلية إلى بعيدة أو العكس.
 
-## High-level concepts
+يمكن تداخل containers. يمكن لـ containers استخدام وحدات من containers أخرى. كما أن التبعيات الدائرية بين containers ممكنة أيضًا.
 
-Each build acts as a container and also consumes other builds as containers. This way, each build is able to access any other exposed module by loading it from its container.
+<a id="high-level-concepts"></a>
 
-Shared modules are modules that are both overridable and provided as overrides to nested containers. They usually point to the same module in each build, e.g., the same library.
+## مفاهيم عالية المستوى
 
-The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
+يعمل كل build كـ container ويستهلك أيضًا builds أخرى بوصفها containers. بهذه الطريقة، يستطيع كل build الوصول إلى أي وحدة مكشوفة أخرى عبر تحميلها من container الخاص بها.
 
-## Building blocks
+الوحدات المشتركة هي وحدات قابلة للتجاوز وتُقدم أيضًا كتجاوزات إلى containers المتداخلة. غالبًا تشير إلى الوحدة نفسها في كل build، مثل المكتبة نفسها.
 
-### ContainerPlugin (low level)
+يسمح خيار `packageName` بتعيين اسم حزمة للبحث عن `requiredVersion`. يُستنتج ذلك تلقائيًا افتراضيًا لطلبات الوحدات، ويمكن تعيين `requiredVersion` إلى `false` عندما تريد تعطيل الاستنتاج التلقائي.
 
-This plugin creates an additional container entry with the specified exposed modules.
+<a id="building-blocks"></a>
 
-### ContainerReferencePlugin (low level)
+## اللبنات الأساسية
 
-This plugin adds specific references to containers as externals and allows to import remote modules from these containers. It also calls the `override` API of these containers to provide overrides to them. Local overrides (via `__webpack_override__` or `override` API when build is also a container) and specified overrides are provided to all referenced containers.
+### ContainerPlugin (منخفض المستوى)
 
-### ModuleFederationPlugin (high level)
+تنشئ هذه الإضافة container entry إضافيًا مع الوحدات المكشوفة المحددة.
 
-[`ModuleFederationPlugin`](/plugins/module-federation-plugin) combines `ContainerPlugin` and `ContainerReferencePlugin`.
+### ContainerReferencePlugin (منخفض المستوى)
 
-## Concept goals
+تضيف هذه الإضافة مراجع محددة إلى containers على هيئة externals، وتسمح باستيراد الوحدات البعيدة من هذه containers. كما تستدعي `override` API لهذه containers لتزويدها بالتجاوزات. تُقدم التجاوزات المحلية، عبر `__webpack_override__` أو `override` API عندما يكون build نفسه container، وكذلك التجاوزات المحددة إلى كل containers المشار إليها.
 
-- It should be possible to expose and consume any module type that webpack supports.
-- Chunk loading should load everything needed in parallel (web: single round-trip to server).
-- Control from consumer to container
-  - Overriding modules is a one-directional operation.
-  - Sibling containers cannot override each other's modules.
-- Concept should be environment-independent.
-  - Usable in web, Node.js, etc.
-- Relative and absolute request in shared:
-  - Will always be provided, even if not used.
-  - Will resolve relative to `config.context`.
-  - Does not use a `requiredVersion` by default.
-- Module requests in shared:
-  - Are only provided when they are used.
-  - Will match all used equal module requests in your build.
-  - Will provide all matching modules.
-  - Will extract `requiredVersion` from package.json at this position in the graph.
-  - Could provide and consume multiple different versions when you have nested node_modules.
-- Module requests with trailing `/` in shared will match all module requests with this prefix.
+### ModuleFederationPlugin (عالي المستوى)
 
-## Use cases
+تجمع [`ModuleFederationPlugin`](/plugins/module-federation-plugin) بين `ContainerPlugin` و `ContainerReferencePlugin`.
 
-### Separate builds per page
+<a id="concept-goals"></a>
 
-Each page of a Single Page Application is exposed from container build in a separate build. The application shell is also a separate build referencing all pages as remote modules. This way each page can be separately deployed. The application shell is deployed when routes are updated or new routes are added. The application shell defines commonly used libraries as shared modules to avoid duplication of them in the page builds.
+## أهداف المفهوم
 
-### Components library as container
+- يجب أن يكون من الممكن كشف واستهلاك أي نوع وحدة يدعمه webpack.
+- يجب أن يحمّل chunk loading كل ما يلزم بالتوازي؛ على الويب يعني ذلك round-trip واحدًا إلى الخادم.
+- التحكم من المستهلك إلى container
+  - تجاوز الوحدات عملية باتجاه واحد.
+  - لا تستطيع sibling containers تجاوز وحدات بعضها.
+- يجب أن يكون المفهوم مستقلًا عن البيئة.
+  - قابل للاستخدام في الويب و Node.js وغيرها.
+- الطلبات النسبية والمطلقة في shared:
+  - ستُقدم دائمًا، حتى لو لم تُستخدم.
+  - ستُحل نسبيًا إلى `config.context`.
+  - لا تستخدم `requiredVersion` افتراضيًا.
+- طلبات الوحدات في shared:
+  - تُقدم فقط عندما تُستخدم.
+  - تطابق كل طلبات الوحدات المتساوية المستخدمة في build لديك.
+  - تقدم كل الوحدات المطابقة.
+  - تستخرج `requiredVersion` من package.json في هذا الموضع من المخطط.
+  - يمكنها تقديم واستهلاك عدة إصدارات مختلفة عندما تكون لديك node_modules متداخلة.
+- طلبات الوحدات التي تنتهي بـ `/` في shared ستطابق كل طلبات الوحدات التي تبدأ بهذه البادئة.
 
-Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
+<a id="use-cases"></a>
+
+## حالات الاستخدام
+
+### builds منفصلة لكل صفحة
+
+تُكشف كل صفحة من تطبيق Single Page Application من container build في build منفصل. كما يكون application shell build منفصلًا يشير إلى كل الصفحات كوحدات بعيدة. بهذه الطريقة يمكن نشر كل صفحة بشكل منفصل. يُنشر application shell عندما تُحدّث المسارات أو تُضاف مسارات جديدة. يعرّف application shell المكتبات المستخدمة عمومًا كوحدات مشتركة لتجنب تكرارها في builds الصفحات.
+
+### مكتبة مكونات كـ container
+
+تشارك كثير من التطبيقات مكتبة مكونات مشتركة يمكن بناؤها كـ container مع كشف كل مكوّن. يستهلك كل تطبيق المكونات من container مكتبة المكونات. يمكن نشر تغييرات مكتبة المكونات بشكل منفصل دون الحاجة إلى إعادة نشر كل التطبيقات. وسيستخدم التطبيق تلقائيًا النسخة الأحدث من مكتبة المكونات.
+
+<a id="dynamic-remote-containers"></a>
 
 ## Dynamic Remote Containers
 
-The container interface supports `get` and `init` methods.
-`init` is an `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
-It can be leveraged to connect remote containers to a host container dynamically at runtime.
+تدعم واجهة container طريقتي `get` و `init`.
+طريقة `init` متوافقة مع `async` وتُستدعى بمعامل واحد: كائن shared scope. يُستخدم هذا الكائن كـ shared scope في remote container ويُملأ بالوحدات المقدمة من host.
+يمكن الاستفادة من ذلك لربط remote containers بـ host container ديناميكيًا وقت التشغيل.
 
 **init.js**
 
@@ -122,15 +126,15 @@ It can be leveraged to connect remote containers to a host container dynamically
 })();
 ```
 
-T> A **container** is the remote container entry object exposed by a federated build, usually through that remote's `remoteEntry.js`. It provides the `get` and `init` methods shown here. In examples like `window[scope]` or `globalThis.someContainer`, the container is expected to exist only once the remote container script has already loaded.
+T> **container** هو كائن remote container entry الذي يكشفه build اتحادي، غالبًا عبر `remoteEntry.js` الخاص بذلك remote. يوفر طريقتي `get` و `init` الموضحتين هنا. في أمثلة مثل `window[scope]` أو `globalThis.someContainer`، يُتوقع أن يكون container موجودًا فقط بعد تحميل سكربت remote container بالفعل.
 
-The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
+يحاول container تقديم الوحدات المشتركة، لكن إذا كانت الوحدة المشتركة قد استُخدمت بالفعل، فسيظهر تحذير وسيتم تجاهل الوحدة المشتركة المقدمة. قد يظل container يستخدمها كخيار احتياطي.
 
-This way you could dynamically load an A/B test which provides a different version of a shared module.
+بهذه الطريقة يمكنك تحميل اختبار A/B ديناميكيًا يقدم إصدارًا مختلفًا من وحدة مشتركة.
 
-T> Ensure you have loaded the container before attempting to dynamically connect a remote container.
+T> تأكد من تحميل container قبل محاولة ربط remote container ديناميكيًا.
 
-Example:
+مثال:
 
 **init.js**
 
@@ -151,11 +155,13 @@ function loadComponent(scope, module) {
 loadComponent("abtests", "test123");
 ```
 
-[See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
+[راجع التنفيذ الكامل](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
 
-## Promise Based Dynamic Remotes
+<a id="promise-based-dynamic-remotes"></a>
 
-Generally, remotes are configured using URL's like in this example:
+## Dynamic Remotes المعتمدة على Promise
+
+عادةً تُكوّن remotes باستخدام عناوين URL كما في هذا المثال:
 
 ```js
 export default {
@@ -170,7 +176,7 @@ export default {
 };
 ```
 
-But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
+لكن يمكنك أيضًا تمرير promise لهذا remote، وسيُحل وقت التشغيل. يجب أن تحل هذا promise بكائن يناسب واجهة `get/init` الموضحة أعلاه. على سبيل المثال، إذا أردت تمرير إصدار الوحدة الاتحادية الذي يجب استخدامه عبر query parameter، فيمكنك فعل شيء مثل الآتي:
 
 ```js
 export default {
@@ -211,22 +217,24 @@ export default {
 };
 ```
 
-Note that when using this API you _have_ to resolve an object which contains the get/init API.
+لاحظ أنك عند استخدام هذه API _يجب_ أن تحل كائنًا يحتوي على API الخاصة بـ get/init.
+
+<a id="dynamic-public-path"></a>
 
 ## Dynamic Public Path
 
-### Offer a host API to set the publicPath
+### تقديم host API لتعيين publicPath
 
-One could allow the host to set the publicPath of a remote module at runtime by exposing a method from that remote module.
+يمكن السماح للـ host بتعيين publicPath لوحدة بعيدة وقت التشغيل عبر كشف طريقة من تلك الوحدة البعيدة.
 
-This approach is particularly helpful when you mount independently deployed child applications on the sub path of the host domain.
+هذا الأسلوب مفيد خصوصًا عندما تركّب تطبيقات فرعية منشورة بشكل مستقل على مسار فرعي من نطاق host.
 
-Scenario:
+السيناريو:
 
-You have a host app hosted on `https://my-host.com/app/*` and a child app hosted on `https://foo-app.com`. The child app is also mounted on the host domain, hence,
-`https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo-app/*` requests are redirected to `https://foo-app.com/*` via a proxy.
+لديك تطبيق host مستضاف على `https://my-host.com/app/*` وتطبيق فرعي مستضاف على `https://foo-app.com`. التطبيق الفرعي مركب أيضًا على نطاق host، ولذلك يُتوقع أن يكون
+`https://foo-app.com` قابلًا للوصول عبر `https://my-host.com/app/foo-app` وأن تُعاد توجيه طلبات `https://my-host.com/app/foo-app/*` إلى `https://foo-app.com/*` عبر proxy.
 
-Example:
+مثال:
 
 **webpack.config.js (remote)**
 
@@ -262,11 +270,11 @@ publicPath.set("/your-public-path");
 //bootstrap app  e.g. import('./bootstrap.js')
 ```
 
-### Infer publicPath from script
+### استنتاج publicPath من السكربت
 
-One could infer the publicPath from the script tag from `document.currentScript.src` and set it with the [`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific) module variable at runtime.
+يمكن استنتاج publicPath من وسم script عبر `document.currentScript.src` وتعيينه باستخدام متغير [`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific) الخاص بالوحدة وقت التشغيل.
 
-Example:
+مثال:
 
 **webpack.config.js (remote)**
 
@@ -291,19 +299,21 @@ export default {
 __webpack_public_path__ = `${document.currentScript.src}/../`;
 ```
 
-T> There is also an `'auto'` value available to [`output.publicPath`](/configuration/output/#outputpublicpath) which automatically determines the publicPath for you.
+T> توجد أيضًا قيمة `'auto'` متاحة لـ [`output.publicPath`](/configuration/output/#outputpublicpath)، وهي تحدد publicPath تلقائيًا نيابة عنك.
 
-## Troubleshooting
+<a id="troubleshooting"></a>
+
+## استكشاف الأخطاء وإصلاحها
 
 ### `Uncaught Error: Shared module is not available for eager consumption`
 
-The application is eagerly executing an application that is operating as an omnidirectional host. There are options to choose from:
+ينفذ التطبيق بشكل eager تطبيقًا يعمل كـ host متعدد الاتجاهات. توجد عدة خيارات:
 
-You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously. This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. It’s recommended to provide it only at one point of your application, e.g. the shell.
+يمكنك تعيين التبعية كـ eager داخل API المتقدمة لـ Module Federation، وهذا لا يضع الوحدات داخل chunk غير متزامن، بل يقدمها بشكل متزامن. يسمح لنا ذلك باستخدام هذه الوحدات المشتركة في chunk الابتدائي. لكن انتبه لأن كل الوحدات المقدمة والاحتياطية ستُحمّل دائمًا. يُوصى بتقديمها في نقطة واحدة فقط من تطبيقك، مثل shell.
 
-We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.
+نوصي بشدة باستخدام حد غير متزامن. سيؤدي ذلك إلى فصل كود التهيئة الخاص بـ chunk أكبر لتجنب أي round trips إضافية وتحسين الأداء عمومًا.
 
-For example, your entry looked like this:
+على سبيل المثال، كانت نقطة الدخول لديك تبدو هكذا:
 
 **index.js**
 
@@ -315,7 +325,7 @@ const root = createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
+لننشئ ملف `bootstrap.js` وننقل محتويات نقطة الدخول إليه، ثم نستورد bootstrap في نقطة الدخول:
 
 **index.js**
 
@@ -337,9 +347,9 @@ Let's create `bootstrap.js` file and move contents of the entry into it, and imp
 + root.render(<App />);
 ```
 
-This method works but can have limitations or drawbacks.
+تعمل هذه الطريقة لكنها قد تملك بعض القيود أو الجوانب السلبية.
 
-Setting `eager: true` for dependency via the `ModuleFederationPlugin`
+تعيين `eager: true` للتبعية عبر `ModuleFederationPlugin`:
 
 **webpack.config.js**
 
@@ -357,9 +367,9 @@ new ModuleFederationPlugin({
 
 ### `Uncaught Error: Module "./Button" does not exist in container.`
 
-It likely does not say `"./Button"`, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.
+غالبًا لن تقول الرسالة `"./Button"` بالضبط، لكنها ستكون مشابهة. تظهر هذه المشكلة عادة عند الترقية من webpack beta.16 إلى webpack beta.17.
 
-Within ModuleFederationPlugin. Change the exposes from:
+داخل ModuleFederationPlugin، غيّر `exposes` من:
 
 ```diff
 new ModuleFederationPlugin({
@@ -372,16 +382,16 @@ new ModuleFederationPlugin({
 
 ### `Uncaught TypeError: fn is not a function`
 
-You are likely missing the remote container, make sure it's added.
-If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
+غالبًا ينقصك remote container، تأكد من إضافته.
+إذا كان container محملًا للـ remote الذي تحاول استهلاكه وما زلت ترى هذا الخطأ، فأضف ملف remote container الخاص بالـ host إلى HTML أيضًا.
 
-### Setting `output.uniqueName`
+### تعيين `output.uniqueName`
 
-In a Module Federation setup, both the host and each remote must have a globally unique `output.uniqueName`. Webpack derives this value from the `name` field in `package.json` by default. This means two builds that share the same `package.json` `name` (a common pattern when splitting a remote out of an existing project) can silently collide at runtime.
+في إعداد Module Federation، يجب أن يكون لكل من host وكل remote قيمة `output.uniqueName` فريدة عالميًا. يشتق webpack هذه القيمة افتراضيًا من حقل `name` في `package.json`. هذا يعني أن buildين يشتركان في قيمة `name` نفسها داخل `package.json`، وهو نمط شائع عند فصل remote من مشروع قائم، يمكن أن يتصادما بصمت وقت التشغيل.
 
-One solution is to use a separate `package.json` with a distinct name for each configuration.
+أحد الحلول هو استخدام ملف `package.json` منفصل باسم مميز لكل تكوين.
 
-Alternatively, you can set `output.uniqueName` explicitly in each webpack config:
+بدلًا من ذلك، يمكنك تعيين `output.uniqueName` صراحة في كل تكوين webpack:
 
 **webpack.config.js (host)**
 
@@ -413,4 +423,4 @@ export default {
 };
 ```
 
-The value can be any string, as long as it is unique across every federated build loaded on a given page.
+يمكن أن تكون القيمة أي سلسلة، ما دامت فريدة بين كل builds الاتحادية المحملة على الصفحة نفسها.

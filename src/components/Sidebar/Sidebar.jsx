@@ -31,10 +31,10 @@ export default function Sidebar({ className = "", pages, currentPage }) {
       <div className="p-6 sticky top-[-1px] overflow-y-auto max-h-screen">
         <div className="relative z-0 bg-white dark:bg-gray-100">
           <label htmlFor="docs-version" className="sr-only">
-            Select webpack version
+            اختر إصدار webpack
           </label>
           <select
-            aria-label="Select webpack version"
+            aria-label="اختر إصدار webpack"
             className="text-gray-600 text-14 px-5 py-5 appearance-none box-border border border-gray-200 border-solid flex-col flex w-full rounded-none bg-transparent bg-none"
             value={version}
             onChange={(event) => {
@@ -52,13 +52,13 @@ export default function Sidebar({ className = "", pages, currentPage }) {
           </select>
           {loading ? (
             <LoadingIcon
-              className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
+              className="absolute end-5 top-5 fill-current text-gray-300 z-[-1]"
               width={20}
               height={20}
             />
           ) : (
             <DownIcon
-              className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
+              className="absolute end-5 top-5 fill-current text-gray-300 z-[-1]"
               width={20}
               height={20}
             />
@@ -74,7 +74,7 @@ export default function Sidebar({ className = "", pages, currentPage }) {
           return (
             <div key={page.url}>
               {displayGroup ? (
-                <h4 className="mt-6 ml-1 capitalize text-lg font-bold text-slate-800 dark:text-slate-100">
+                <h4 className="mt-6 ms-1 text-lg font-bold text-slate-800 dark:text-slate-100">
                   {group}
                 </h4>
               ) : null}

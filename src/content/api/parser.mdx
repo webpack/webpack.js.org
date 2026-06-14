@@ -3,32 +3,22 @@ title: JavascriptParser Hooks
 group: Plugins
 sort: 12
 contributors:
-  - byzyk
-  - DeTeam
-  - misterdev
-  - EugeneHlushko
-  - chenxsan
-  - snitin315
-  - moshams272
+  - RlxChap2
 ---
 
-The `parser` instance, found in the `compiler`, is used to parse each module
-being processed by webpack. The `parser` is yet another webpack class that
-extends `tapable` and provides a variety of `tapable` hooks that can be used by
-plugin authors to customize the parsing process.
+تُستخدم instance المسماة `parser`، والموجودة داخل `compiler`، لتحليل كل module يعالجه webpack. ويُعد `parser` صنفًا آخر من أصناف webpack التي ترث من `tapable`، ويوفر مجموعة متنوعة من `tapable` hooks يستطيع مؤلفو plugins استخدامها لتخصيص عملية parsing.
 
-The `parser` is found within [NormalModuleFactory](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
-more work to access:
+يوجد `parser` داخل [NormalModuleFactory](/api/compiler-hooks/#normalmodulefactory)، لذلك يحتاج الوصول إليه إلى خطوة إضافية بسيطة:
 
 ```js
 compiler.hooks.normalModuleFactory.tap("MyPlugin", (factory) => {
   factory.hooks.parser
     .for("javascript/auto")
     .tap("MyPlugin", (parser, options) => {
-      // The `parser` provides many hooks, which are explained in detail below.
-      // Here is a practical example using the `call` hook to detect and warn
-      // about a deprecated API function when a developer calls it
-      // (e.g., `myCustomApiFunction()`):
+      // يوفر `parser` عدة hooks، وسيتم شرحها بالتفصيل أدناه.
+      // هذا مثال عملي يستخدم hook المسمى `call` لاكتشاف دالة API قديمة
+      // وتحذير المطور عند استدعائها
+      // مثل: `myCustomApiFunction()`
       parser.hooks.call
         .for("myCustomApiFunction")
         .tap("MyPlugin", (expression) => {
@@ -40,21 +30,19 @@ compiler.hooks.normalModuleFactory.tap("MyPlugin", (factory) => {
 });
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+كما هو الحال مع `compiler`، قد تكون `tapAsync` و`tapPromise` متاحتين أيضًا بحسب نوع hook.
 
 ## Hooks
 
-The following lifecycle hooks are exposed by the `parser` and can be accessed
-as such:
+يعرض `parser` hooks التالية ضمن دورة حياته، ويمكن الوصول إليها بهذا الشكل:
 
-W> Since webpack 5, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
+W> منذ webpack 5، لم تعد `hooks` قابلة للتمديد مباشرة. استخدم `WeakMap` لإضافة hooks مخصصة.
 
 ### evaluateTypeof
 
 `SyncBailHook`
 
-Triggered when evaluating an expression consisting in a `typeof` of a free variable
+يُطلق عند تقييم expression مكوّن من `typeof` لمتغير حر.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -68,13 +56,13 @@ parser.hooks.evaluateTypeof.for("myIdentifier").tap(
 );
 ```
 
-This will trigger the `evaluateTypeof` hook:
+هذا الكود سيطلق hook المسمى `evaluateTypeof`:
 
 ```js
 const a = typeof myIdentifier;
 ```
 
-This won't trigger:
+وهذا الكود لن يطلقه:
 
 ```js
 const myIdentifier = 0;
@@ -85,12 +73,12 @@ const b = typeof myIdentifier;
 
 `SyncBailHook`
 
-Called when evaluating an expression.
+يُستدعى عند تقييم expression.
 
 - Hook parameters: `expressionType`
 - Callback parameters: `expression`
 
-For example:
+مثال:
 
 **index.js**
 
@@ -109,7 +97,7 @@ parser.hooks.evaluate.for("NewExpression").tap(
 );
 ```
 
-Where the expressions types are:
+أنواع expressions الممكنة هي:
 
 - `'ArrowFunctionExpression'`
 - `'AssignmentExpression'`
@@ -136,7 +124,7 @@ Where the expressions types are:
 
 `SyncBailHook`
 
-Called when evaluating an identifier that is a free variable.
+يُستدعى عند تقييم identifier يمثل متغيرًا حرًا.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -145,7 +133,7 @@ Called when evaluating an identifier that is a free variable.
 
 `SyncBailHook`
 
-Called when evaluating an identifier that is a defined variable.
+يُستدعى عند تقييم identifier يمثل متغيرًا معرّفًا.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -154,12 +142,12 @@ Called when evaluating an identifier that is a defined variable.
 
 `SyncBailHook`
 
-Called when evaluating a call to a member function of a successfully evaluated expression.
+يُستدعى عند تقييم استدعاء دالة عضو ضمن expression تم تقييمه بنجاح.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression` `param`
 
-This expression will trigger the hook:
+هذا التعبير سيطلق hook:
 
 **index.js**
 
@@ -182,7 +170,7 @@ parser.hooks.evaluateCallExpressionMember.for("myFunc").tap(
 
 `SyncBailHook`
 
-General purpose hook that is called for every parsed statement in a code fragment.
+Hook عام يُستدعى لكل statement يتم تحليلها داخل جزء من الكود.
 
 - Callback Parameters: `statement`
 
@@ -192,7 +180,7 @@ parser.hooks.statement.tap("MyPlugin", (statement) => {
 });
 ```
 
-Where the `statement.type` could be:
+يمكن أن تكون قيمة `statement.type` واحدة من الآتي:
 
 - `'BlockStatement'`
 - `'VariableDeclaration'`
@@ -220,7 +208,7 @@ Where the `statement.type` could be:
 
 `SyncBailHook`
 
-Called when parsing an if statement. Same as the `statement` hook, but triggered only when `statement.type == 'IfStatement'`.
+يُستدعى عند تحليل `if statement`. يشبه hook المسمى `statement`، لكنه لا يُطلق إلا عندما تكون `statement.type == 'IfStatement'`.
 
 - Callback Parameters: `statement`
 
@@ -228,7 +216,7 @@ Called when parsing an if statement. Same as the `statement` hook, but triggered
 
 `SyncBailHook`
 
-Called when parsing statements with a [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label). Those statements have `statement.type === 'LabeledStatement'`.
+يُستدعى عند تحليل statements التي تحتوي على [label](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label). هذه statements تكون لديها `statement.type === 'LabeledStatement'`.
 
 - Hook Parameters: `labelName`
 - Callback Parameters: `statement`
@@ -237,11 +225,11 @@ Called when parsing statements with a [label](https://developer.mozilla.org/en-U
 
 `SyncBailHook`
 
-Called for every import statement in a code fragment. The `source` parameter contains the name of the imported file.
+يُستدعى لكل عبارة import داخل جزء من الكود. يحتوي parameter المسمى `source` على اسم الملف المستورد.
 
 - Callback Parameters: `statement` `source`
 
-The following import statement will trigger the hook once:
+عبارة import التالية ستطلق hook مرة واحدة:
 
 **index.js**
 
@@ -261,11 +249,11 @@ parser.hooks.import.tap("MyPlugin", (statement, source) => {
 
 `SyncBailHook`
 
-Called for every specifier of every `import` statement.
+يُستدعى لكل specifier في كل عبارة `import`.
 
 - Callback Parameters: `statement` `source` `exportName` `identifierName`
 
-The following import statement will trigger the hook twice:
+عبارة import التالية ستطلق hook مرتين:
 
 **index.js**
 
@@ -279,12 +267,12 @@ import _, { has } from "lodash";
 parser.hooks.importSpecifier.tap(
   "MyPlugin",
   (statement, source, exportName, identifierName) => {
-    /* First call
+    /* الاستدعاء الأول
     source == 'lodash'
     exportName == 'default'
     identifierName == '_'
   */
-    /* Second call
+    /* الاستدعاء الثاني
     source == 'lodash'
     exportName == 'has'
     identifierName == 'has'
@@ -297,7 +285,7 @@ parser.hooks.importSpecifier.tap(
 
 `SyncBailHook`
 
-Called for every `export` statement in a code fragment.
+يُستدعى لكل عبارة `export` داخل جزء من الكود.
 
 - Callback Parameters: `statement`
 
@@ -305,7 +293,7 @@ Called for every `export` statement in a code fragment.
 
 `SyncBailHook`
 
-Called for every `export`-import statement eg: `export * from 'otherModule';`.
+يُستدعى لكل عبارة `export` مع import، مثل: `export * from 'otherModule';`.
 
 - Callback Parameters: `statement` `source`
 
@@ -313,14 +301,14 @@ Called for every `export`-import statement eg: `export * from 'otherModule';`.
 
 `SyncBailHook`
 
-Called for every `export` statement exporting a declaration.
+يُستدعى لكل عبارة `export` تصدّر declaration.
 
 - Callback Parameters: `statement` `declaration`
 
-Those exports will trigger this hook:
+هذه exports ستطلق هذا hook:
 
 ```js
-export const myVar = "hello"; // also var, let
+export const myVar = "hello"; // وينطبق أيضًا على var وlet
 export function FunctionName() {}
 export class ClassName {}
 ```
@@ -329,7 +317,7 @@ export class ClassName {}
 
 `SyncBailHook`
 
-Called for every `export` statement exporting an expression e.g.`export default expression;`.
+يُستدعى لكل عبارة `export` تصدّر expression، مثل: `export default expression;`.
 
 - Callback Parameters: `statement` `declaration`
 
@@ -337,7 +325,7 @@ Called for every `export` statement exporting an expression e.g.`export default 
 
 `SyncBailHook`
 
-Called for every specifier of every `export` statement.
+يُستدعى لكل specifier في كل عبارة `export`.
 
 - Callback Parameters: `statement` `identifierName` `exportName` `index`
 
@@ -345,7 +333,7 @@ Called for every specifier of every `export` statement.
 
 `SyncBailHook`
 
-Called for every specifier of every `export`-import statement.
+يُستدعى لكل specifier في كل عبارة `export` مع import.
 
 - Callback Parameters: `statement` `source` `identifierName` `exportName` `index`
 
@@ -353,7 +341,7 @@ Called for every specifier of every `export`-import statement.
 
 `SyncBailHook`
 
-Called when parsing a variable declaration.
+يُستدعى عند تحليل variable declaration.
 
 - Callback Parameters: `declaration`
 
@@ -361,7 +349,7 @@ Called when parsing a variable declaration.
 
 `SyncBailHook`
 
-Called when parsing a variable declaration defined using `let`
+يُستدعى عند تحليل variable declaration مُعرّفة باستخدام `let`.
 
 - Callback Parameters: `declaration`
 
@@ -369,7 +357,7 @@ Called when parsing a variable declaration defined using `let`
 
 `SyncBailHook`
 
-Called when parsing a variable declaration defined using `const`
+يُستدعى عند تحليل variable declaration مُعرّفة باستخدام `const`.
 
 - Callback Parameters: `declaration`
 
@@ -377,7 +365,7 @@ Called when parsing a variable declaration defined using `const`
 
 `SyncBailHook`
 
-Called when parsing a variable declaration defined using `var`
+يُستدعى عند تحليل variable declaration مُعرّفة باستخدام `var`.
 
 - Callback Parameters: `declaration`
 
@@ -385,7 +373,7 @@ Called when parsing a variable declaration defined using `var`
 
 `SyncBailHook`
 
-Triggered before renaming an identifier to determine if the renaming is allowed. This is usually used together with the `rename` hook.
+يُطلق قبل إعادة تسمية identifier لتحديد ما إذا كانت إعادة التسمية مسموحة. يُستخدم غالبًا مع hook المسمى `rename`.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -396,7 +384,7 @@ const a = b;
 parser.hooks.canRename.for("b").tap(
   "MyPlugin",
   (expression) =>
-    // returning true allows renaming
+    // إرجاع true يسمح بإعادة التسمية
     true,
 );
 ```
@@ -405,7 +393,7 @@ parser.hooks.canRename.for("b").tap(
 
 `SyncBailHook`
 
-Triggered when renaming to get the new identifier. This hook will be called only if `canRename` returns `true`.
+يُطلق عند إعادة التسمية للحصول على identifier الجديد. لا يُستدعى هذا hook إلا إذا أرجع `canRename` القيمة `true`.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -416,11 +404,11 @@ const a = b;
 parser.hooks.rename.for("b").tap("MyPlugin", (expression) => {});
 ```
 
-### assign (before parsing assigned expression)
+### assign (قبل parsing التعبير المسند)
 
 `SyncBailHook`
 
-Called when parsing an `AssignmentExpression` before parsing the assigned expression.
+يُستدعى عند تحليل `AssignmentExpression` قبل تحليل expression المسندة.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -429,15 +417,15 @@ Called when parsing an `AssignmentExpression` before parsing the assigned expres
 a += b;
 
 parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
-  // this is called before parsing b
+  // يُستدعى هذا قبل تحليل b
 });
 ```
 
-### assign (before parsing target)
+### assign (قبل parsing الهدف)
 
 `SyncBailHook`
 
-Called when parsing an `AssignmentExpression` before parsing the assign expression.
+يُستدعى عند تحليل `AssignmentExpression` قبل تحليل expression الهدف.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -446,7 +434,7 @@ Called when parsing an `AssignmentExpression` before parsing the assign expressi
 a += b;
 
 parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
-  // this is called before parsing a
+  // يُستدعى هذا قبل تحليل a
 });
 ```
 
@@ -454,7 +442,7 @@ parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
 
 `SyncBailHook`
 
-Triggered when parsing the `typeof` of an identifier
+يُطلق عند تحليل `typeof` الخاص بـ identifier.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -463,7 +451,7 @@ Triggered when parsing the `typeof` of an identifier
 
 `SyncBailHook`
 
-Called when parsing a function call.
+يُستدعى عند تحليل استدعاء دالة.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -480,7 +468,7 @@ parser.hooks.call.for("eval").tap("MyPlugin", (expression) => {});
 
 `SyncBailHook`
 
-Triggered when parsing a call to a member function of an object.
+يُطلق عند تحليل استدعاء دالة عضو من كائن.
 
 - Hook Parameters: `objectIdentifier`
 - Callback Parameters: `expression, properties`
@@ -497,7 +485,7 @@ parser.hooks.callMemberChain
 
 `SyncBailHook`
 
-Invoked when parsing a `new` expression.
+يُستدعى عند تحليل expression من نوع `new`.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -512,7 +500,7 @@ parser.hooks.new.for("MyClass").tap("MyPlugin", (expression) => {});
 
 `SyncBailHook`
 
-Called when parsing an expression.
+يُستدعى عند تحليل expression.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -527,7 +515,7 @@ parser.hooks.expression.for("this").tap("MyPlugin", (expression) => {});
 
 `SyncBailHook`
 
-Called when parsing a `ConditionalExpression` e.g. `condition ? a : b`
+يُستدعى عند تحليل `ConditionalExpression` مثل: `condition ? a : b`.
 
 - Callback Parameters: `expression`
 
@@ -535,6 +523,6 @@ Called when parsing a `ConditionalExpression` e.g. `condition ? a : b`
 
 `SyncBailHook`
 
-Get access to the abstract syntax tree (AST) of a code fragment
+يتيح الوصول إلى abstract syntax tree (AST) الخاص بجزء من الكود.
 
 - Parameters: `ast` `comments`

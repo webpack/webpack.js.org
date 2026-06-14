@@ -64,7 +64,7 @@ function TextRotater({ children, delay = 0, repeatDelay = 3000, maxWidth }) {
     >
       <div
         className={clsx(
-          "inline-flex flex-col text-left",
+          "inline-flex flex-col text-start",
           isAnimating && "text-rotater--slide-up",
         )}
         onTransitionEnd={handleTransitionEnd}

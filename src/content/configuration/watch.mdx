@@ -1,26 +1,17 @@
 ---
-title: Watch and WatchOptions
+title: Watch وWatchOptions
 sort: 14
 contributors:
-  - sokra
-  - skipjack
-  - SpaceK33z
-  - EugeneHlushko
-  - byzyk
-  - spicalous
-  - Neob91
-  - Loonride
-  - snitin315
-  - chenxsan
+  - RlxChap2
 ---
 
-Webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
+يستطيع webpack أن يُراقب الملفّات ويعيد التصريف كلّما تغيّرت. وتشرح لك هذه الصفحة كيف تُفعِّل هذه الميزة، وبعض التعديلات الصغيرة التي قد تحتاج إليها إن لم تعمل المراقبة على ما يُرام.
 
 ## watch
 
 `boolean = false`
 
-Turn on watch mode. This means that after the initial build, webpack will continue to watch for changes in any of the resolved files.
+يُفعِّل وضع المراقبة. أي أنّ webpack، بعد بنائه الأوّل، سيظلّ يُراقب أيّ تغيّر يطرأ على الملفّات التي حلّلها.
 
 **webpack.config.js**
 
@@ -31,13 +22,13 @@ export default {
 };
 ```
 
-T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) watch mode is enabled by default.
+T> في [webpack-dev-server](https://github.com/webpack/webpack-dev-server) و[webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) يكون وضع المراقبة مُفعَّلاً افتراضياً.
 
 ## watchOptions
 
 `object`
 
-A set of options used to customize watch mode:
+مجموعة خيارات تُستعمَل لتطويع وضع المراقبة:
 
 **webpack.config.js**
 
@@ -55,7 +46,7 @@ export default {
 
 `number = 20`
 
-Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
+يُضيف تأخيراً قبل إعادة البناء بعد أوّل تغيّر يطرأ على ملفّ. وذلك حتى يُتاح لـ webpack تجميع التغييرات الأخرى التي تقع خلال هذه المهلة في عملية بناء واحدة. تُمرَّر القيمة بالميلي ثانية:
 
 ```js
 export default {
@@ -70,7 +61,7 @@ export default {
 
 `RegExp` `string` `[string]`
 
-For some systems, watching many files can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules` using a regular expression:
+قد تستنزف مراقبة كثير من الملفّات قدراً ملحوظاً من المعالج أو الذاكرة في بعض الأنظمة. ويمكنك استثناء مجلَّد ضخم كـ `node_modules` بتعبير نمطي:
 
 **webpack.config.js**
 
@@ -83,7 +74,7 @@ export default {
 };
 ```
 
-Alternatively, a glob pattern may be used:
+كما يمكنك استعمال نمط glob:
 
 **webpack.config.js**
 
@@ -96,7 +87,7 @@ export default {
 };
 ```
 
-It is also possible to use multiple glob patterns:
+أو حتى أنماط glob متعدّدة:
 
 **webpack.config.js**
 
@@ -109,7 +100,7 @@ export default {
 };
 ```
 
-In addition, you can specify an absolute path:
+وفضلاً عن ذلك، تستطيع تحديد مسار مطلق:
 
 ```js
 import path from "node:path";
@@ -126,15 +117,15 @@ export default {
 };
 ```
 
-When using glob patterns, we convert them to regular expressions with [`glob-to-regexp`](https://github.com/fitzgen/glob-to-regexp), so make sure to get yourself familiar with it before you use glob patterns for `watchOptions.ignored`.
+عند استعمال أنماط glob، فإننا نُحوِّلها إلى تعابير نمطية عبر [`glob-to-regexp`](https://github.com/fitzgen/glob-to-regexp)، لذا تأكّد من إلمامك بها قبل أن تستعملها في `watchOptions.ignored`.
 
-T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
+T> إن كنت تستعمل `require.context`، فسيُراقب webpack مجلَّدك بأكمله، فستحتاج إلى تجاهل ملفّات أو مجلَّدات حتى لا تستثير التغييرات غير المرغوب فيها عمليّة إعادة بناء.
 
 ### watchOptions.poll
 
 `boolean = false` `number`
 
-Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by passing `true` which would set the default poll interval to [`5007`](https://github.com/webpack/watchpack/blob/a54bcdb95759558ca5a9fc2819c4d71b771c162f/lib/DirectoryWatcher.js#L79), or specifying a poll interval in milliseconds:
+فعِّل [الاستطلاع (polling)](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) بتمرير `true` فيُضبط فاصل الاستطلاع الافتراضي على [`5007`](https://github.com/webpack/watchpack/blob/a54bcdb95759558ca5a9fc2819c4d71b771c162f/lib/DirectoryWatcher.js#L79)، أو حدِّد فاصلاً مخصَّصاً بالميلي ثانية:
 
 **webpack.config.js**
 
@@ -142,19 +133,19 @@ Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by
 export default {
   // ...
   watchOptions: {
-    poll: 1000, // Check for changes every second
+    poll: 1000, // افحص التغيّرات كلّ ثانية
   },
 };
 ```
 
-T> If watching does not work for you, try out this option. This may help issues with NFS and machines in VirtualBox, WSL, Containers, or Docker. In those cases, use a polling interval and ignore large folders like `/node_modules/` to keep CPU usage minimal.
+T> إن كانت المراقبة لا تعمل لديك، فجرّب هذا الخيار. قد يحلّ مشاكل NFS والأجهزة التي تعمل ضمن VirtualBox و WSL والحاويات و Docker. وفي هذه الحالات، يُفضَّل استعمال فاصل استطلاع مع تجاهل المجلَّدات الكبيرة كـ `/node_modules/` حتى يبقى استهلاك المعالج في أدنى مستوياته.
 
 ### watchOptions.followSymlinks
 
-Follow symbolic links while looking for a file. This is usually not needed as webpack already resolves symlinks with [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
+تتبَّع الروابط الرمزية (symbolic links) أثناء البحث عن الملفّ. وهذا الخيار لا يُحتاج إليه عادةً، إذ أنّ webpack يُحلِّل هذه الروابط أصلاً عبر [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
 
-- Type: `boolean`
-- Example:
+- النوع: `boolean`
+- مثال:
 
   ```js
   export default {
@@ -167,10 +158,10 @@ Follow symbolic links while looking for a file. This is usually not needed as we
 
 ### watchOptions.stdin
 
-Stop watching when stdin stream has ended.
+أوقف المراقبة عند انتهاء التيار stdin.
 
-- Type: `boolean`
-- Example:
+- النوع: `boolean`
+- مثال:
 
   ```js
   export default {
@@ -181,44 +172,44 @@ Stop watching when stdin stream has ended.
   };
   ```
 
-## Troubleshooting
+## استكشاف الأخطاء وحلّها
 
-If you are experiencing any issues, please see the following notes. There are a variety of reasons why webpack might miss a file change.
+إن واجهتك أيّ مشكلات، فعُد إلى الملاحظات الآتية، إذ هناك أسباب عدّة قد تجعل webpack يُفوّت تغيّراً في ملفّ.
 
-### Changes Seen But Not Processed
+### تغييرات يراها webpack لكنه لا يُعالجها
 
-Verify that webpack is not being notified of changes by running webpack with the --progress flag. If progress shows on save but no files are outputted, it is likely a configuration issue, not a file watching issue.
+تأكّد من أنّ webpack يصله إشعار بالتغييرات، وذلك بتشغيله مع الراية `--progress`. فإن ظهر التقدّم عند الحفظ ولم يُخرج ملفّات، فالأرجح أنّ المشكلة في التخصيص لا في مراقبة الملفّات.
 
 ```bash
 webpack --watch --progress
 ```
 
-### Not Enough Watchers
+### عدد الـ watchers لا يكفي
 
-Verify that you have enough available watchers in your system. If this value is too low, the file watcher in Webpack won't recognize the changes:
+تأكّد من أنّ لديك عدداً كافياً من الـ watchers المتاحة في نظامك. فإن كانت القيمة منخفضة، لن يلاحظ webpack التغييرات:
 
 ```bash
 cat /proc/sys/fs/inotify/max_user_watches
 ```
 
-Arch users, add `fs.inotify.max_user_watches=524288` to `/etc/sysctl.d/99-sysctl.conf` and then execute `sysctl --system`. Ubuntu users (and possibly others), execute: `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`.
+على مستخدمي Arch، أضف `fs.inotify.max_user_watches=524288` إلى `/etc/sysctl.d/99-sysctl.conf` ثمّ شغِّل `sysctl --system`. وعلى مستخدمي Ubuntu (وربما غيرهم)، شغِّل: `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`.
 
-### macOS fsevents Bug
+### علّة fsevents على macOS
 
-On macOS, folders can get corrupted in certain scenarios. See [this article](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
+على macOS، قد تتلف بعض المجلَّدات في حالات معيّنة. اطّلع على [هذه المقالة](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
 
-### Windows Paths
+### مسارات Windows
 
-Because webpack expects absolute paths for many configuration options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
+لمّا كان webpack ينتظر مسارات مطلقة في كثير من خيارات التخصيص مثل `__dirname + '/app/folder'`، فإنّ فاصل المسارات `\` في Windows قد يُخلّ ببعض الوظائف.
 
-Use the correct separators. I.e. `path.resolve(__dirname, 'app/folder')` or `path.join(__dirname, 'app', 'folder')`.
+استعمل الفواصل الصحيحة، أي `path.resolve(__dirname, 'app/folder')` أو `path.join(__dirname, 'app', 'folder')`.
 
-### Vim
+### همة
 
-On some machines Vim is preconfigured with the [backupcopy option](http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy') set to `auto`. This could potentially cause problems with the system's file watching mechanism. Switching this option to `yes` will make sure a copy of the file is made and the original one overwritten on save.
+في بعض الأجهزة، يكون Vim مضبوطاً مُسبقاً مع الخيار [backupcopy](http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy') على `auto`، وهذا قد يُسبِّب مشكلات مع آلية مراقبة الملفّات في النظام. فبتبديل هذا الخيار إلى `yes` تضمن إنشاء نسخة من الملفّ والكتابة فوق الأصلي عند الحفظ.
 
 `:set backupcopy=yes`
 
-### Saving in WebStorm
+### الحفظ في WebStorm
 
-When using the JetBrains WebStorm IDE, you may find that saving changed files does not trigger the watcher as you might expect. Try disabling the `Back up files before saving` option in the settings, which determines whether files are saved to a temporary location first before the originals are overwritten: uncheck `File > {Settings|Preferences} > Appearance & Behavior > System Settings > Back up files before saving`. On some versions of Webstorm, this option may be called `Use "safe write" (save changes to a temporary file first)`.
+عند استعمال بيئة JetBrains WebStorm، قد تجد أنّ حفظ الملفّات المُعدَّلة لا يُحرِّك المُراقب كما تتوقّع. جرِّب تعطيل خيار `Back up files before saving` في الإعدادات، وهو الخيار الذي يُحدِّد ما إذا كانت الملفّات تُحفظ في موقع مؤقَّت قبل الكتابة فوق الأصلي: ألغِ التأشير عن `File > {Settings|Preferences} > Appearance & Behavior > System Settings > Back up files before saving`. وفي بعض إصدارات WebStorm، قد يُسمَّى هذا الخيار `Use "safe write" (save changes to a temporary file first)`.

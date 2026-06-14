@@ -16,62 +16,73 @@ const Footer = () => (
           <img
             className="h-[40px] w-auto dark:invert"
             src={OpenJSLogo}
-            alt="OpenJS Foundation Logo"
+            alt="شعار OpenJS Foundation"
           />
         </a>
       </div>
       <p className="mx-auto text-[15px] leading-[1.6] text-[#333333] dark:text-[#e0e0e0]">
-        Copyright <a href="https://openjsf.org">OpenJS Foundation</a> and
-        webpack contributors. All rights reserved. The{" "}
-        <a href="https://openjsf.org">OpenJS Foundation</a> has registered
-        trademarks and uses trademarks. For a list of trademarks of the{" "}
-        <a href="https://openjsf.org">OpenJS Foundation</a>, please see our{" "}
-        <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> and{" "}
-        <a href="https://trademark-list.openjsf.org">Trademark List</a>.
-        Trademarks and logos not indicated on the{" "}
-        <a href="https://trademark-list.openjsf.org">
-          list of OpenJS Foundation trademarks
+        حقوق النشر محفوظة لـ <a href="https://openjsf.org">OpenJS Foundation</a>{" "}
+        ومساهمي webpack. جميع الحقوق محفوظة. تمتلك{" "}
+        <a href="https://openjsf.org">OpenJS Foundation</a> علامات تجارية مسجلة
+        وتستخدم علامات تجارية. للاطلاع على قائمة علامات{" "}
+        <a href="https://openjsf.org">OpenJS Foundation</a> التجارية، راجع{" "}
+        <a href="https://trademark-policy.openjsf.org">
+          سياسة العلامات التجارية
         </a>{" "}
-        are trademarks&trade; or registered&reg; trademarks of their respective
-        holders. Use of them does not imply any affiliation with or endorsement
-        by them.
+        و
+        <a href="https://trademark-list.openjsf.org">قائمة العلامات التجارية</a>
+        . العلامات والشعارات غير المذكورة في{" "}
+        <a href="https://trademark-list.openjsf.org">
+          قائمة علامات OpenJS Foundation التجارية
+        </a>{" "}
+        هي علامات تجارية&trade; أو علامات تجارية مسجلة&reg; لمالكيها. استخدام
+        هذه العلامات لا يعني وجود ارتباط أو تأييد من مالكيها.
       </p>
       <p className="mx-auto mt-[18px] text-[15px] leading-[1.6] text-[#333333] dark:text-[#e0e0e0]">
-        <a href="https://openjsf.org">The OpenJS Foundation</a> |{" "}
-        <a href="https://terms-of-use.openjsf.org">Terms of Use</a> |{" "}
-        <a href="https://privacy-policy.openjsf.org">Privacy Policy</a> |{" "}
-        <a href="https://bylaws.openjsf.org">Bylaws</a> |{" "}
-        <a href="https://code-of-conduct.openjsf.org">Code of Conduct</a> |{" "}
-        <a href="https://trademark-policy.openjsf.org">Trademark Policy</a> |{" "}
-        <a href="https://trademark-list.openjsf.org">Trademark List</a> |{" "}
-        <a href="https://www.linuxfoundation.org/cookies">Cookie Policy</a>
+        <a href="https://openjsf.org">OpenJS Foundation</a> |{" "}
+        <a href="https://terms-of-use.openjsf.org">شروط الاستخدام</a> |{" "}
+        <a href="https://privacy-policy.openjsf.org">سياسة الخصوصية</a> |{" "}
+        <a href="https://bylaws.openjsf.org">اللوائح الداخلية</a> |{" "}
+        <a href="https://code-of-conduct.openjsf.org">مدونة السلوك</a> |{" "}
+        <a href="https://trademark-policy.openjsf.org">
+          سياسة العلامات التجارية
+        </a>{" "}
+        |{" "}
+        <a href="https://trademark-list.openjsf.org">قائمة العلامات التجارية</a>{" "}
+        |{" "}
+        <a href="https://www.linuxfoundation.org/cookies">
+          سياسة ملفات تعريف الارتباط
+        </a>
       </p>
     </Container>
     <Container className="flex flex-wrap justify-center gap-y-4 content-center border-t border-[#f2f2f2] px-0 py-[0.4em] md:flex-row md:justify-between">
       <section
-        className="mx-auto flex max-w-full flex-[0_0_auto] flex-wrap items-center justify-center py-[0.25em] md:m-0 md:justify-start md:pl-[1.5em] md:py-0 [&>*:not(:last-child)]:mr-[1.5em]"
-        aria-label="Quick links"
+        className="mx-auto flex max-w-full flex-[0_0_auto] flex-wrap items-center justify-center gap-x-[1.5em] gap-y-2 py-[0.25em] md:m-0 md:justify-start md:ps-[1.5em] md:py-0"
+        aria-label="روابط سريعة"
       >
         <Link className={footerLinkClasses} to="/guides/getting-started/">
-          Get Started
+          البدء
         </Link>
         <Link className={footerLinkClasses} to="/comparison/">
-          Comparison
+          المقارنة
         </Link>
         <Link
           className={footerLinkClasses}
           to="https://privacy-policy.openjsf.org/"
         >
-          Privacy Policy
+          سياسة الخصوصية
         </Link>
       </section>
 
-      <section className="hidden md:block md:flex-[0_0_auto]" aria-label="Home">
+      <section
+        className="hidden md:block md:flex-[0_0_auto]"
+        aria-label="الرئيسية"
+      >
         <Link to="/" className="inline-block h-[35px]">
           <img
             className="inline-block h-full w-auto"
             src={Icon}
-            alt="webpack icon"
+            alt="أيقونة webpack"
             width={35}
             height={35}
           />
@@ -79,42 +90,42 @@ const Footer = () => (
       </section>
 
       <section
-        className="mx-auto flex max-w-full flex-[0_0_auto] flex-wrap items-center justify-center py-[0.25em] md:m-0 md:justify-end md:py-0 md:pr-[1.5em] [&>a:not(:last-child)]:mr-[1.5em]"
-        aria-label="Resources and links"
+        className="mx-auto flex max-w-full flex-[0_0_auto] flex-wrap items-center justify-center gap-x-[1.5em] gap-y-2 py-[0.25em] md:m-0 md:justify-end md:py-0 md:pe-[1.5em]"
+        aria-label="الموارد والروابط"
       >
         <Link
           className={footerLinkClasses}
           to="https://webpack.threadless.com/"
         >
-          Swag Store
+          متجر المنتجات
         </Link>
         <Link className={footerLinkClasses} to="/awesome-webpack/">
           Awesome webpack
         </Link>
         <Link className={footerLinkClasses} to="/glossary/">
-          Glossary
+          مسرد المصطلحات
         </Link>
         <Link className={footerLinkClasses} to="/branding/">
-          Branding
+          الهوية البصرية
         </Link>
         <Link
           className={footerLinkClasses}
           to="https://github.com/webpack/webpack/releases"
         >
-          Changelog
+          سجل التغييرات
         </Link>
         <Link
-          className="inline-block h-[25px] align-middle [&_img]:ml-4 [&_img]:inline-block [&_img]:h-full [&_img]:w-auto"
+          className="inline-flex h-[25px] items-center gap-4 align-middle [&_img]:inline-block [&_img]:h-full [&_img]:w-auto"
           to="/license"
         >
           <img
-            alt="Creative Commons License (CC)"
+            alt="رخصة Creative Commons (CC)"
             src={CC}
             width={25}
             height={25}
           />
           <img
-            alt="Creative Commons Attribution (CC BY)"
+            alt="نَسب Creative Commons (CC BY)"
             src={BY}
             width={25}
             height={25}

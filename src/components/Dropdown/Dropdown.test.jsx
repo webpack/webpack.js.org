@@ -11,6 +11,7 @@ const items = [
   { title: "French", url: "/fr/", lang: "fr" },
   { title: "Spanish", url: "/es/", lang: "es" },
 ];
+const languageButtonName = /اختيار اللغة/;
 
 function getListWrapper(container) {
   return container.querySelector("ul").closest("div");
@@ -24,7 +25,7 @@ describe("Dropdown", () => {
   it("renders the toggle button", () => {
     render(<Dropdown items={items} />);
     expect(
-      screen.getByRole("button", { name: /select language/i }),
+      screen.getByRole("button", { name: languageButtonName }),
     ).toBeTruthy();
   });
 
@@ -52,7 +53,7 @@ describe("Dropdown", () => {
 
   it("toggles dropdown on button click", () => {
     const { container } = render(<Dropdown items={items} />);
-    const button = screen.getByRole("button", { name: /select language/i });
+    const button = screen.getByRole("button", { name: languageButtonName });
 
     fireEvent.click(button);
     expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
@@ -63,7 +64,7 @@ describe("Dropdown", () => {
 
   it("sets aria-expanded correctly", () => {
     render(<Dropdown items={items} />);
-    const button = screen.getByRole("button", { name: /select language/i });
+    const button = screen.getByRole("button", { name: languageButtonName });
 
     expect(button.getAttribute("aria-expanded")).toBe("false");
     fireEvent.click(button);
@@ -79,7 +80,7 @@ describe("Dropdown", () => {
 
   it("closes on Escape key", () => {
     const { container } = render(<Dropdown items={items} />);
-    const button = screen.getByRole("button", { name: /select language/i });
+    const button = screen.getByRole("button", { name: languageButtonName });
 
     fireEvent.click(button);
     expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
@@ -95,7 +96,7 @@ describe("Dropdown", () => {
 
   it("closes when clicking outside", () => {
     const { container } = render(<Dropdown items={items} />);
-    const button = screen.getByRole("button", { name: /select language/i });
+    const button = screen.getByRole("button", { name: languageButtonName });
 
     fireEvent.click(button);
     expect(getListWrapper(container).classList.contains("hidden")).toBe(false);
@@ -109,7 +110,7 @@ describe("Dropdown", () => {
 
   it("does not close dropdown when arrow keys are pressed", () => {
     const { container } = render(<Dropdown items={items} />);
-    const button = screen.getByRole("button", { name: /select language/i });
+    const button = screen.getByRole("button", { name: languageButtonName });
     fireEvent.click(button);
 
     const links = screen.getAllByRole("link");

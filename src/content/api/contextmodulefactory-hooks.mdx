@@ -3,49 +3,47 @@ title: ContextModuleFactory Hooks
 group: Plugins
 sort: 11
 contributors:
-  - iguessitsokay
+  - RlxChap2
 ---
 
-The `ContextModuleFactory` module is used by the `Compiler` to generate dependencies from webpack specific [require.context](/api/module-methods/#requirecontext) API. It resolves the requested directory, generates requests for each file and filters against passed regExp. Matching dependencies then passes through [NormalModuleFactory](/api/normalmodulefactory-hooks).
+يستخدم `Compiler` الوحدة `ContextModuleFactory` لإنشاء dependencies من API الخاص بـ webpack وهو [require.context](/api/module-methods/#requirecontext). تحل هذه الوحدة المجلد المطلوب، ثم تنشئ requests لكل ملف، ثم تطبّق عليها RegExp الممرر. بعد ذلك تمر dependencies المطابقة عبر [NormalModuleFactory](/api/normalmodulefactory-hooks).
 
-The `ContextModuleFactory` class extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+ترث class `ContextModuleFactory` من `Tapable` وتوفّر lifecycle hooks التالية. يمكنك استخدام `tap` معها بالطريقة نفسها المستخدمة مع compiler hooks:
 
 ```js
 ContextModuleFactory.hooks.someHook.tap(/* ... */);
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+كما هو الحال مع `compiler`، قد يتوفر `tapAsync` و`tapPromise` أيضًا حسب نوع hook.
 
 ## beforeResolve
 
 `AsyncSeriesWaterfallHook`
 
-Called before resolving the requested directory. The request can be ignored by returning `false`.
+يُستدعى قبل حل المجلد المطلوب. يمكنك تجاهل request بإرجاع `false`.
 
-- Callback Parameters: `data`
+- معاملات callback: `data`
 
 ## afterResolve
 
 `AsyncSeriesWaterfallHook`
 
-Called after the requested directory resolved.
+يُستدعى بعد حل المجلد المطلوب.
 
-- Callback Parameters: `data`
+- معاملات callback: `data`
 
 ## contextModuleFiles
 
 `SyncWaterfallHook`
 
-Called after directory contents are read. On recursive mode, calls for each sub-directory as well. Callback parameter is an array of all file and folder names in each directory.
+يُستدعى بعد قراءة محتويات المجلد. في الوضع recursive، يُستدعى أيضًا لكل مجلد فرعي. معامل callback هو array تحتوي أسماء كل الملفات والمجلدات داخل كل مجلد.
 
-- Callback Parameters: `fileNames`
+- معاملات callback: `fileNames`
 
 ## alternativeRequests
 
 `AsyncSeriesWaterfallHook`
 
-Called for each file after the request is created but before filtering against regExp.
+يُستدعى لكل ملف بعد إنشاء request وقبل التصفية باستخدام RegExp.
 
-- Callback Parameters: `request` `options`
+- معاملات callback: `request` `options`

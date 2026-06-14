@@ -10,6 +10,14 @@ import remarkHtml from "remark-html";
 import slug from "../../src/remark-plugins/remark-slug/index.mjs";
 import remarkRemoveHeadingId from "../remark-plugins/remark-remove-heading-id/index.mjs";
 
+function encodeAnchorId(id) {
+  try {
+    return encodeURI(decodeURI(id));
+  } catch {
+    return encodeURI(id);
+  }
+}
+
 export const enhance = (tree, options) => {
   // Normalize everything to forward slashes for cross-platform consistency
   const dir = path
@@ -58,7 +66,10 @@ export const enhance = (tree, options) => {
         }
       });
 
-    tree.anchors = anchors;
+    tree.anchors = anchors.map((anchor) => ({
+      ...anchor,
+      id: anchor.id ? encodeAnchorId(anchor.id) : anchor.id,
+    }));
 
     const dateRegex = /\((\d{4}-\d{2}-\d{2})\)/;
     const match = attributes.title ? attributes.title.match(dateRegex) : null;

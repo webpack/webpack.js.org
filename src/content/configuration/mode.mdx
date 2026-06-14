@@ -2,24 +2,19 @@
 title: Mode
 sort: 5
 contributors:
-  - EugeneHlushko
-  - byzyk
-  - mrichmond
-  - Fental
-  - snitin315
-  - chenxsan
+  - RlxChap2
 related:
-  - title: "webpack default options (source code)"
+  - title: "خيارات webpack الافتراضية (الشيفرة المصدرية)"
     url: https://github.com/webpack/webpack/blob/main/lib/config/defaults.js
 ---
 
-Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
+ضبط خيار التخصيص `mode` يُخبر webpack أن يستخدم تحسيناته المدمجة بما يتناسب مع الوضع المُحدَّد.
 
 `string = 'production': 'none' | 'development' | 'production'`
 
-## Usage
+## الاستخدام
 
-Provide the `mode` option in the config:
+اضبط خيار `mode` ضمن ملف التخصيص:
 
 ```js
 export default {
@@ -27,25 +22,25 @@ export default {
 };
 ```
 
-or pass it as a [CLI](/api/cli/) argument:
+أو مرّره بوصفه وسيطاً عبر [الـ CLI](/api/cli/):
 
 ```bash
 webpack --mode=development
 ```
 
-The following string values are supported:
+القيم النصيّة المدعومة كالآتي:
 
-| Option        | Description                                                                                                                                                                                                                                                          |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `development` | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables useful names for modules and chunks.                                                                                                                                                   |
-| `production`  | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables deterministic mangled names for modules and chunks, `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin` and `MinimizerPlugin`. |
-| `none`        | Opts out of any default optimization options                                                                                                                                                                                                                         |
+| الخيار        | الوصف                                                                                                                                                                                                                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `development` | يضبط `process.env.NODE_ENV` على `DefinePlugin` بالقيمة `development`، ويُفعِّل أسماءً وصفيّة مفيدة للوحدات والـ chunks.                                                                                                                                                                     |
+| `production`  | يضبط `process.env.NODE_ENV` على `DefinePlugin` بالقيمة `production`، ويُفعِّل أسماءً مُختصَرة حتميّة (deterministic mangled) للوحدات والـ chunks، إلى جانب `FlagDependencyUsagePlugin` و`FlagIncludedChunksPlugin` و`ModuleConcatenationPlugin` و`NoEmitOnErrorsPlugin` و`MinimizerPlugin`. |
+| `none`        | يصرف النظر عن أي خيارات تحسين افتراضية.                                                                                                                                                                                                                                                     |
 
-If not set, webpack sets `production` as the default value for `mode`.
+إن لم تضبط هذا الخيار، فإنّ webpack يعدّ القيمة `production` هي الافتراضية لـ `mode`.
 
-T> If `mode` is not provided via configuration or CLI, CLI will use any valid `NODE_ENV` value for `mode`.
+T> إن لم يُمَرَّر `mode` لا من خلال التخصيص ولا من خلال الـ CLI، فسيستخدم الـ CLI أي قيمة صالحة لـ `NODE_ENV` ويعدّها قيمة `mode`.
 
-### Mode: development
+### الوضع: التطوير
 
 ```js
 // webpack.development.config.js
@@ -54,7 +49,7 @@ export default {
 };
 ```
 
-### Mode: production
+### الوضع: الإنتاج
 
 ```js
 // webpack.production.config.js
@@ -63,7 +58,7 @@ export default {
 };
 ```
 
-### Mode: none
+### الوضع: لا يوجد
 
 ```js
 // webpack.custom.config.js
@@ -72,7 +67,7 @@ export default {
 };
 ```
 
-If you want to change the behavior according to the **mode** variable inside the _webpack.config.js_, you have to export a function instead of an object:
+إن أردت تغيير السلوك تبعاً للمتغيّر **mode** داخل ملف _webpack.config.js_ نفسه، فعليك أن تُصدِّر دالّة عوضاً عن كائن:
 
 ```js
 const config = {
