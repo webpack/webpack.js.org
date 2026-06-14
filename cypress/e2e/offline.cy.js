@@ -63,8 +63,7 @@ describe("offline", () => {
       cy.visit(url);
       cy.get("h1").contains(text);
 
-      // click `guides` link
-      cy.get('a[title="guides"]').click();
+      cy.get('a[title="الأدلة"]').click();
       cy.get("h1").contains("الأدلة");
     });
 

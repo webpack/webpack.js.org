@@ -25,7 +25,7 @@ describe("server side rendered page", () => {
     cy.get('head meta[name="description"]').should(
       "have.attr",
       "content",
-      "webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.",
+      "webpack هو module bundler. هدفه الأساسي حزم ملفات JavaScript لاستخدامها في المتصفح، ويمكنه كذلك تحويل أي resource أو asset تقريبًا وحزمه أو تجهيزه.",
     );
   });
 
