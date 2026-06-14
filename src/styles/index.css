@@ -87,6 +87,14 @@ html[dir="rtl"] [class~="group/item"] > svg {
   margin-right: 0;
 }
 
+html[dir="rtl"] [class~="group/item"] > button svg {
+  transform: rotate(180deg);
+}
+
+html[dir="rtl"] [class~="group/item"][data-open] > button svg {
+  transform: rotate(90deg);
+}
+
 html[dir="rtl"] [class~="group/item"] ul {
   padding-left: 0;
   padding-right: 1.5rem;
@@ -111,6 +119,21 @@ html[dir="rtl"] [class~="group/item"] li::before {
 
 html[dir="rtl"] [role="progressbar"] > div {
   transform-origin: right;
+}
+
+html[dir="rtl"] .DocSearch-Container,
+html[dir="rtl"] .DocSearch-Modal {
+  direction: rtl;
+}
+
+html[dir="rtl"] .DocSearch-Input {
+  text-align: right;
+}
+
+html[dir="rtl"] .DocSearch-Hit-icon,
+html[dir="rtl"] .DocSearch-Hit-action,
+html[dir="rtl"] .DocSearch-Search-Icon {
+  transform: scaleX(-1);
 }
 
 .splash-viz__art,

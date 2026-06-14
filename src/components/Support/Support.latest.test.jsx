@@ -62,7 +62,7 @@ describe("Support with rank='latest'", () => {
 
   it("excludes supporters whose firstDonation is older than 21 days", () => {
     render(<Support rank="latest" type="total" />);
-    expect(screen.queryByAltText("Stale Org's avatar")).toBeNull();
+    expect(screen.queryByAltText("صورة Stale Org")).toBeNull();
   });
 
   it("shows SmallIcon for every supporter before intersection observer fires", () => {

@@ -23,18 +23,18 @@ export default function PageLinks({ page = {} }) {
 
   return (
     <div className="print:hidden mt-8">
-      <a className={classes} href={editLink}>
-        Edit this page
-      </a>
-      <Separator />
       <button type="button" className={classes} onClick={_handlePrintClick}>
-        Print this page
+        طباعة هذه الصفحة
       </button>
+      <Separator />
+      <a className={classes} href={editLink}>
+        تعديل هذه الصفحة
+      </a>
       {page.repo ? (
         <>
           <Separator />
           <a className={classes} href={page.repo}>
-            Jump to repository
+            افتح المستودع
           </a>
         </>
       ) : null}

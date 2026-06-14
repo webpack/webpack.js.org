@@ -60,7 +60,7 @@ const Sponsors = () => (
       <div className="m-5 flex flex-col items-center transition-transform duration-200">
         <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
           <div className="text-3xl font-normal text-gray-600 dark:text-gray-400 my-4 text-center leading-snug">
-            Datagrid and Charting for Enterprise Applications
+            Data grid وcharting لتطبيقات المؤسسات
           </div>
 
           <div className="flex justify-center w-full">
@@ -74,7 +74,7 @@ const Sponsors = () => (
           </div>
 
           <div className="italic text-2xl text-gray-600 dark:text-gray-400 my-4 text-center">
-            Proud to partner with webpack
+            فخورون بالشراكة مع webpack
           </div>
         </Link>
       </div>

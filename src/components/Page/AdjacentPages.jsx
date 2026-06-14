@@ -4,19 +4,19 @@ import Link from "../Link/Link.jsx";
 export default function AdjacentPages({ previous, next }) {
   if (!previous && !next) return null;
   return (
-    <div className="flex py-[30px] justify-between print:hidden">
+    <div className="flex py-[30px] justify-between gap-x-8 print:hidden">
       {previous && (
-        <div className="mr-auto">
-          <div>« Previous</div>
-          <Link className="text-lg" to={previous.url}>
+        <div className="me-auto max-w-[48%]">
+          <div>السابق ›</div>
+          <Link className="block text-lg break-words" to={previous.url}>
             {previous.title}
           </Link>
         </div>
       )}
       {next && (
-        <div className="ml-auto">
-          <div className="text-right">Next »</div>
-          <Link className="text-lg" to={next.url}>
+        <div className="ms-auto max-w-[48%] text-end">
+          <div>‹ التالي</div>
+          <Link className="block text-lg break-words" to={next.url}>
             {next.title}
           </Link>
         </div>

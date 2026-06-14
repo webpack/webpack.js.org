@@ -142,7 +142,7 @@ export default function SidebarMobile({ isOpen, toggle, sections }) {
         <Link
           key={url}
           className={clsx(
-            "block py-[0.5em] px-[17px] capitalize [-webkit-tap-highlight-color:transparent] ml-[20px]",
+            "block py-[0.5em] px-[17px] [-webkit-tap-highlight-color:transparent] ms-[20px]",
             active
               ? "text-gray-900 font-semibold bg-[#f1f4f4] dark:text-white dark:bg-[#222424]"
               : "text-gray-600 dark:text-[#a3a3a3] hover:text-gray-600 active:text-gray-900 active:font-semibold active:bg-[#f1f4f4] dark:active:bg-[#222424] dark:active:text-white",
@@ -169,7 +169,7 @@ export default function SidebarMobile({ isOpen, toggle, sections }) {
       return (
         <div
           className={clsx(
-            "border-l-2 pb-[0.5em]",
+            "border-s-2 pb-[0.5em]",
             active ? "border-blue-200" : "border-transparent",
           )}
           key={section.url}
@@ -220,7 +220,7 @@ export default function SidebarMobile({ isOpen, toggle, sections }) {
         <button
           className="sidebar-mobile__close absolute cursor-pointer border-none right-[22px] top-[10px] text-[1.3em] bg-[#175d96] text-white w-[30px] h-[30px] flex items-center justify-center rounded-full transition-colors duration-150 [-webkit-tap-highlight-color:transparent] hover:bg-[#135d96]"
           onClick={() => toggle(false)}
-          aria-label="Close navigation menu"
+          aria-label="إغلاق قائمة التنقل"
         >
           <CloseIcon fill="#fff" width={20} />
         </button>
