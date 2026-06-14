@@ -24,14 +24,12 @@ export default function HelloDarkness() {
   return (
     <Tooltip
       content={
-        activeTheme === DARK ? "Switch to light theme" : "Switch to dark theme"
+        activeTheme === DARK ? "التبديل للوضع الفاتح" : "التبديل للوضع الداكن"
       }
     >
       <button
         aria-label={
-          activeTheme === DARK
-            ? "Switch to light theme"
-            : "Switch to dark theme"
+          activeTheme === DARK ? "التبديل للوضع الفاتح" : "التبديل للوضع الداكن"
         }
         className="bg-transparent border-none cursor-pointer text-[16px] p-0 inline-flex items-center text-gray-100 hover:text-blue-200 transition-colors duration-200"
         onClick={themeSwitcher}

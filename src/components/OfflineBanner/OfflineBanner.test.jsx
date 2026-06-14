@@ -8,6 +8,8 @@ import { afterEach, beforeEach, describe, expect, it } from "@jest/globals";
 import { act, render, screen } from "@testing-library/react";
 import OfflineBanner from "./OfflineBanner.jsx";
 
+const offlineMessage = "أنت غير متصل حالياً. قد لا تتوفر بعض الميزات.";
+
 /**
  * Helper to mock navigator.onLine
  */
@@ -66,11 +68,7 @@ describe("OfflineBanner", () => {
       setNavigatorOnLine(false);
       window.dispatchEvent(new Event("offline"));
     });
-    expect(
-      screen.getByText(
-        "You are currently offline. Some features may be unavailable.",
-      ),
-    ).toBeTruthy();
+    expect(screen.getByText(offlineMessage)).toBeTruthy();
   });
 
   it("has accessible role and aria-live attributes", () => {

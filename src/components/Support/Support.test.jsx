@@ -32,20 +32,18 @@ describe("Support", () => {
 
   it("renders a heading for backer rank", () => {
     render(<Support rank="backer" type="total" />);
-    expect(screen.getByRole("heading", { name: "Backers" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "الداعمون" })).toBeTruthy();
   });
 
   it("renders a heading for latest rank", () => {
     render(<Support rank="latest" type="total" />);
-    expect(
-      screen.getByRole("heading", { name: "Latest Sponsors" }),
-    ).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "أحدث الرعاة" })).toBeTruthy();
   });
 
   it("renders maxAge days and limit in latest description", () => {
     render(<Support rank="latest" type="total" />);
-    expect(screen.getByText(/last 21 days/i)).toBeTruthy();
-    expect(screen.getByText(/top 30/i)).toBeTruthy();
+    expect(screen.getByText(/آخر 21 يوماً/)).toBeTruthy();
+    expect(screen.getByText(/أعلى 30/)).toBeTruthy();
   });
 
   it("renders no supporter images when latest data is empty", () => {
@@ -55,38 +53,34 @@ describe("Support", () => {
 
   it("renders a heading for gold rank", () => {
     render(<Support rank="gold" type="total" />);
-    expect(screen.getByRole("heading", { name: "Gold Sponsors" })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "رعاة Gold" })).toBeTruthy();
   });
 
   it("renders a heading for gold monthly rank", () => {
     render(<Support rank="gold" type="monthly" />);
     expect(
-      screen.getByRole("heading", { name: "Gold Monthly Sponsors" }),
+      screen.getByRole("heading", { name: "رعاة Gold الشهريون" }),
     ).toBeTruthy();
   });
 
   it("renders a heading for platinum rank", () => {
     render(<Support rank="platinum" type="total" />);
-    expect(
-      screen.getByRole("heading", { name: "Platinum Sponsors" }),
-    ).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "رعاة Platinum" })).toBeTruthy();
   });
 
   it("renders monthly description text", () => {
     render(<Support rank="gold" type="monthly" />);
-    expect(screen.getByText(/pledging/i)).toBeTruthy();
+    expect(screen.getByText(/شهرياً لدعم webpack/)).toBeTruthy();
   });
 
   it("renders the become a sponsor link for sponsor ranks", () => {
     render(<Support rank="gold" type="total" />);
-    expect(
-      screen.getByRole("link", { name: /become a sponsor/i }),
-    ).toBeTruthy();
+    expect(screen.getByRole("link", { name: /كن راعياً/ })).toBeTruthy();
   });
 
   it("renders the become a backer link for backer rank", () => {
     render(<Support rank="backer" type="total" />);
-    expect(screen.getByRole("link", { name: /become a backer/i })).toBeTruthy();
+    expect(screen.getByRole("link", { name: /كن داعماً/ })).toBeTruthy();
   });
 
   it("sets up IntersectionObserver on mount", () => {

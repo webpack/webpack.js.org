@@ -44,11 +44,11 @@ function scrollTop(event) {
 
 function Anchors({ anchors, url }) {
   return (
-    <ul className="relative hidden flex-[0_0_100%] flex-wrap my-[0.35em] pl-6 overflow-hidden list-none leading-[19px] before:content-[''] before:absolute before:h-[calc(100%-0.6em)] before:top-0 before:left-6 before:border-l before:border-dashed before:border-[#777676] group-data-[open]/item:flex">
+    <ul className="relative hidden flex-[0_0_100%] flex-wrap my-[0.35em] ps-6 overflow-hidden list-none leading-[19px] before:content-[''] before:absolute before:h-[calc(100%-0.6em)] before:top-0 before:start-6 before:border-s before:border-dashed before:border-[#777676] group-data-[open]/item:flex">
       {anchors.map((anchor) => (
         <li
           key={generateAnchorURL(url, anchor)}
-          className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
+          className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 ps-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:start-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
           title={anchor.title}
         >
           <NavLink
@@ -92,19 +92,19 @@ export default function SidebarItem({ title, anchors = [], url, currentPage }) {
         <button
           className="bg-transparent border-none p-0 flex items-center"
           onClick={toggle}
-          aria-label={`Toggle ${title} section`}
+          aria-label={`تبديل قسم ${title}`}
           aria-expanded={open}
         >
           <ChevronRightIcon
             width={15}
             height={17}
             fill="#175d96"
-            className={`flex-none mt-[0.125em] mr-2 cursor-pointer text-[#175d96] dark:text-[#69a8ee] transition-all duration-250 hover:text-[#333] ${open ? "origin-center rotate-90" : ""}`}
+            className={`flex-none mt-[0.125em] me-2 cursor-pointer text-[#175d96] dark:text-[#69a8ee] transition-all duration-250 hover:text-[#333] ${open ? "origin-center rotate-90" : ""}`}
           />
         </button>
       ) : (
         <BarIcon
-          className="flex-none mt-[0.125em] mr-2 text-[#aaa] dark:text-[#69a8ee]"
+          className="flex-none mt-[0.125em] me-2 text-[#aaa] dark:text-[#69a8ee]"
           width={15}
           height={17}
           fill="#175d96"

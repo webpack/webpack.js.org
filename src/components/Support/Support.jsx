@@ -85,6 +85,35 @@ function formatMoney(number) {
   return Math.round(number).toLocaleString("en-US");
 }
 
+const rankLabels = {
+  backer: "الداعمون",
+  latest: "أحدث الرعاة",
+  bronze: "رعاة Bronze",
+  silver: "رعاة Silver",
+  gold: "رعاة Gold",
+  platinum: "رعاة Platinum",
+};
+
+function getRankHeading(rank, type) {
+  if (rank === "backer" || rank === "latest") {
+    return rankLabels[rank];
+  }
+
+  return type === "monthly" ? `${rankLabels[rank]} الشهريون` : rankLabels[rank];
+}
+
+function formatAmountRange(minimum, maximum) {
+  if (minimum && maximum) {
+    return `من $${formatMoney(minimum)} إلى أقل من $${formatMoney(maximum)}`;
+  }
+
+  if (minimum) {
+    return `$${formatMoney(minimum)} أو أكثر`;
+  }
+
+  return "أي مبلغ";
+}
+
 const AVATAR_CLASSES = {
   backer:
     "inline-block w-[31px] h-[31px] rounded-full border border-white shadow-[0_0_0_1px_rgb(112,202,10)] overflow-hidden align-middle",
@@ -201,15 +230,7 @@ export default function Support({ rank, type }) {
 
   return (
     <>
-      <h2>
-        {rank === "backer"
-          ? "Backers"
-          : rank === "latest"
-            ? "Latest Sponsors"
-            : `${rank[0].toUpperCase()}${rank.slice(1)} ${
-                type === "monthly" ? "Monthly " : ""
-              }Sponsors`}
-      </h2>
+      <h2>{getRankHeading(rank, type)}</h2>
       <div
         ref={containerRef}
         className="flex flex-wrap justify-center px-2 pb-4"
@@ -217,34 +238,27 @@ export default function Support({ rank, type }) {
         <div className="w-full mb-4">
           {rank === "backer" ? (
             <p>
-              The following <b>Backers</b> are individuals who have contributed
-              various amounts of money in order to help support webpack. Every
-              little bit helps, and we appreciate even the smallest
-              contributions. This list shows {random} randomly chosen backers:
+              <b>الداعمون</b> التالية أسماؤهم أفراد ساهموا بمبالغ مختلفة لدعم
+              webpack. كل مساهمة تساعدنا، ونقدّر حتى أصغر المساهمات. تعرض هذه
+              القائمة {random} داعماً اختيروا عشوائياً:
             </p>
           ) : rank === "latest" ? (
             <p>
-              The following persons/organizations made their first donation in
-              the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days
-              (limited to the top {limit}).
+              الأشخاص أو الجهات التالية قدمت أول تبرع لها خلال آخر{" "}
+              {Math.round(maxAge / (1000 * 60 * 60 * 24))} يوماً، مع عرض أعلى{" "}
+              {limit} فقط.
             </p>
           ) : (
             <p>
-              <b className="capitalize mr-1">
-                {type === "monthly" ? `${rank} monthly` : rank} sponsors
-              </b>
+              <b className="me-1">{getRankHeading(rank, type)}</b>
               {type === "monthly" ? (
                 <span>
-                  are those who are currently pledging{" "}
-                  {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
-                  {maximum ? `to $${formatMoney(maximum)}` : "or more"} monthly
-                  to webpack.
+                  هم من يتعهدون حالياً بمبلغ{" "}
+                  {formatAmountRange(minimum, maximum)} شهرياً لدعم webpack.
                 </span>
               ) : (
                 <span>
-                  are those who have contributed{" "}
-                  {minimum ? `$${formatMoney(minimum)}` : "up"}{" "}
-                  {maximum ? `to $${formatMoney(maximum)}` : "or more"} to
+                  هم من ساهموا بمبلغ {formatAmountRange(minimum, maximum)} لدعم
                   webpack.
                 </span>
               )}
@@ -255,9 +269,9 @@ export default function Support({ rank, type }) {
         {supporters.map((supporter, index) => (
           <Tooltip
             key={supporter.slug || index}
-            content={`$${formatMoney(supporter.totalDonations / 100)} by ${
+            content={`$${formatMoney(supporter.totalDonations / 100)} بواسطة ${
               supporter.name || supporter.slug
-            } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
+            } ($${formatMoney(supporter.monthlyDonations / 100)} شهرياً)`}
           >
             <a
               className="relative mx-0.5 mb-0.5 dark:bg-white"
@@ -277,8 +291,8 @@ export default function Support({ rank, type }) {
                   alt={
                     supporter.alt ||
                     (supporter.name || supporter.slug
-                      ? `${supporter.name || supporter.slug}'s avatar`
-                      : "avatar")
+                      ? `صورة ${supporter.name || supporter.slug}`
+                      : "صورة داعم")
                   }
                   onError={handleImgError}
                 />
@@ -289,10 +303,10 @@ export default function Support({ rank, type }) {
 
         <div className="w-full mt-4">
           <a
-            className="inline-block py-[0.4em] px-[1em] uppercase text-[#175d96] border border-[#175d96] rounded-4xl transition-all duration-[250ms] hover:border-[#2f78c4] hover:bg-[#2f78c4] hover:text-white hover:shadow-[0_8px_18px_rgba(47,120,196,0.28)] dark:text-[#4fa8ff] dark:border-[#4fa8ff] dark:hover:border-[#4fa8ff] dark:hover:bg-[#2f78c4] dark:hover:text-white"
+            className="inline-block py-[0.4em] px-[1em] text-[#175d96] border border-[#175d96] rounded-4xl transition-all duration-[250ms] hover:border-[#2f78c4] hover:bg-[#2f78c4] hover:text-white hover:shadow-[0_8px_18px_rgba(47,120,196,0.28)] dark:text-[#4fa8ff] dark:border-[#4fa8ff] dark:hover:border-[#4fa8ff] dark:hover:bg-[#2f78c4] dark:hover:text-white"
             href="https://opencollective.com/webpack#support"
           >
-            Become a {rank === "backer" ? "backer" : "sponsor"}
+            كن {rank === "backer" ? "داعماً" : "راعياً"}
           </a>
         </div>
       </div>

@@ -86,7 +86,7 @@ export default function Dropdown({ className = "", items = [] }) {
         ref={dropdownButtonRef}
         aria-haspopup="true"
         aria-expanded={String(active)}
-        aria-label="Select language"
+        aria-label="اختيار اللغة"
         onClick={handleClick}
         className="cursor-pointer text-white border-none bg-transparent m-0 p-0 text-[length:inherit] flex items-center"
       >
@@ -141,7 +141,7 @@ export default function Dropdown({ className = "", items = [] }) {
                 href={item.url}
                 className="block min-w-[88px] px-3 py-1 text-center text-white transition-colors duration-[200ms] visited:text-white hover:bg-[#175d96] hover:text-white focus:bg-[#175d96] focus:text-white"
               >
-                <span lang={item.lang} className="align-top text-left">
+                <span lang={item.lang} className="align-top text-start">
                   {item.title}
                 </span>
               </a>

@@ -23,7 +23,7 @@ exports[`OfflineBanner renders the offline banner snapshot 1`] = `
     <span
       class="tracking-[0.01em]"
     >
-      You are currently offline. Some features may be unavailable.
+      أنت غير متصل حالياً. قد لا تتوفر بعض الميزات.
     </span>
   </div>
 </div>

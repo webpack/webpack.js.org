@@ -87,11 +87,11 @@ function NavigationIcon({ children, to, title }) {
   };
 
   return (
-    <Tooltip content={`webpack on ${title}`} ref={tooltipRef}>
+    <Tooltip content={`webpack على ${title}`} ref={tooltipRef}>
       <Link
         to={to}
         className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
-        aria-label={`webpack on ${title}`}
+        aria-label={`webpack على ${title}`}
         onClick={hideTooltip}
       >
         {children}
@@ -110,6 +110,51 @@ const navigationIconProps = {
   "aria-hidden": true,
   fill: "currentColor",
   width: 16,
+};
+
+const docSearchTranslations = {
+  button: {
+    buttonText: "بحث",
+    buttonAriaLabel: "البحث",
+  },
+  modal: {
+    searchBox: {
+      clearButtonTitle: "مسح البحث",
+      clearButtonAriaLabel: "مسح البحث",
+      closeButtonText: "إغلاق",
+      closeButtonAriaLabel: "إغلاق",
+      placeholderText: "ابحث في توثيق webpack",
+      searchInputLabel: "البحث",
+    },
+    footer: {
+      selectText: "للاختيار",
+      selectKeyAriaLabel: "Enter",
+      navigateText: "للتنقل",
+      navigateUpKeyAriaLabel: "السهم للأعلى",
+      navigateDownKeyAriaLabel: "السهم للأسفل",
+      closeText: "للإغلاق",
+      closeKeyAriaLabel: "Escape",
+      poweredByText: "مدعوم من",
+    },
+    startScreen: {
+      recentSearchesTitle: "عمليات البحث الأخيرة",
+      noRecentSearchesText: "لا توجد عمليات بحث حديثة",
+      saveRecentSearchButtonTitle: "حفظ هذا البحث",
+      removeRecentSearchButtonTitle: "إزالة هذا البحث من السجل",
+      favoriteSearchesTitle: "عمليات البحث المفضلة",
+      removeFavoriteSearchButtonTitle: "إزالة هذا البحث من المفضلة",
+    },
+    noResultsScreen: {
+      noResultsText: "لا توجد نتائج لـ",
+      suggestedQueryText: "جرّب البحث عن",
+      reportMissingResultsText: "هل تعتقد أن هذه الصفحة يجب أن تظهر هنا؟",
+      reportMissingResultsLinkText: "أبلغ عن نتيجة مفقودة",
+    },
+    errorScreen: {
+      titleText: "تعذر جلب النتائج",
+      helpText: "تحقق من اتصالك ثم حاول مرة أخرى.",
+    },
+  },
 };
 
 function Navigation({ links, pathname, hash = "", toggleSidebar }) {
@@ -131,7 +176,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
       <header className="bg-blue-800 dark:bg-gray-900 print:hidden">
         <div className="flex items-center py-10 px-[16px] justify-between md:px-[24px] md:max-w-[1024px] md:mx-auto md:justify-start">
           <button
-            aria-label="Toggle navigation menu"
+            aria-label="فتح قائمة التنقل"
             className="bg-transparent border-none md:hidden"
             onClick={toggleSidebar}
           >
@@ -141,12 +186,12 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               className="fill-current text-white"
             />
           </button>
-          <Link to="/" className="navigation__brand md:mr-auto">
+          <Link to="/" className="navigation__brand md:me-auto">
             <Logo />
           </Link>
           <nav
             className="hidden md:inline-grid md:grid-flow-col md:gap-x-[18px] md:items-center"
-            aria-label="Main navigation"
+            aria-label="التنقل الرئيسي"
           >
             {links.map(({ content, url, isActive, ariaLabel }) => (
               <NavigationItem
@@ -186,7 +231,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
             ))}
             <LanguageSwitcher pathname={pathname} hash={locationHash} />
           </nav>
-          <div className="navigation__controls inline-flex items-center gap-x-[18px] ml-[18px]">
+          <div className="navigation__controls inline-flex items-center gap-x-[18px] ms-[18px]">
             <HelloDarkness />
             {mounted && (
               <DocSearch
@@ -194,7 +239,8 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
                 apiKey={DOCSEARCH_API_KEY}
                 indexName={DOCSEARCH_INDEX_NAME}
                 disableUserPersonalization={true}
-                placeholder="Search webpack documentation"
+                placeholder="ابحث في توثيق webpack"
+                translations={docSearchTranslations}
                 transformItems={(items) =>
                   items.map(({ url, ...others }) => {
                     const { origin } = new URL(url);

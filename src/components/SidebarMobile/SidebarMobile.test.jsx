@@ -67,7 +67,7 @@ describe("SidebarMobile", () => {
   it("calls toggle(false) when close button is clicked", () => {
     const toggle = jest.fn();
     renderSidebar({ toggle });
-    fireEvent.click(screen.getByRole("button", { name: /close navigation/i }));
+    fireEvent.click(screen.getByRole("button", { name: /إغلاق قائمة التنقل/ }));
     expect(toggle).toHaveBeenCalledWith(false);
   });
 
