@@ -88,7 +88,7 @@ export default {
 
 Webpack will generate a runtime code for web platform and will use only ES5 features.
 
-Not all targets may be mixed for now.
+You can also combine platform targets to build universal code that runs in multiple environments:
 
 **webpack.config.js**
 
@@ -99,7 +99,7 @@ export default {
 };
 ```
 
-Will cause an error. Webpack does not support a universal target yet; it is planned for the future under a dedicated name.
+Webpack will generate runtime code that works in both browser and Node.js environments.
 
 ### false
 
