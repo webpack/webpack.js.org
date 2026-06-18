@@ -29,7 +29,17 @@ export default {
 
 ## أهداف متعددة
 
-مع أن webpack **لا** يدعم تمرير عدة سلاسل إلى خاصية `target`، يمكنك إنشاء مكتبة isomorphic عبر تجميع تكوينين منفصلين:
+يدعم webpack تمرير [مصفوفة من السلاسل النصية](/configuration/target/#string) إلى خاصية `target`، وفي هذه الحالة يُستخدم الجزء المشترك من ميزاتها. يتيح لك ذلك بناء كود universal يعمل في عدة بيئات، كأن تجمع بين `web` و`node` مثلاً:
+
+**webpack.config.js**
+
+```js
+export default {
+  target: ["web", "node"],
+};
+```
+
+وبدلاً من ذلك، يمكنك إنشاء مكتبة isomorphic عبر تجميع تكوينين منفصلين:
 
 **webpack.config.js**
 
