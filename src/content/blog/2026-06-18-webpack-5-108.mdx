@@ -1,0 +1,329 @@
+---
+title: Webpack 5.108
+sort: 20260618
+contributors:
+  - bjohansebas
+---
+
+Webpack 5.108 is out, and it pushes two big stories forward. The first continues the native HTML work that started in 5.107: a `.html` file can now be used directly as an `entry`, so webpack covers more of the role `html-webpack-plugin` has played for years, and HTML modules now support Hot Module Replacement. The second is a brand new `universal` target that compiles a single bundle that adapts at runtime to the browser, web workers, Node.js, Electron, and NW.js.
+
+Around those headlines, this release lands a substantial round of tree-shaking improvements (a new `optimization.inlineExports`, cross-module purity, and CommonJS re-export analysis), modernizes the code webpack generates for capable targets, and adds a typed `defineConfig` helper.
+
+Both the HTML and `universal` features are experimental and live behind opt-in flags, but the direction stays the same as 5.107: you should eventually be able to build a complete web app with zero extra loaders or plugins for HTML, CSS, and TypeScript.
+
+Explore what's new:
+
+- [**HTML Modules: Entry Points and HMR**](#html-modules-entry-points-and-hmr)
+  - [HTML as an Entry Point](#html-as-an-entry-point)
+  - [Hot Module Replacement](#hot-module-replacement)
+  - [Customizing the HTML Parser](#customizing-the-html-parser)
+- [**CSS Improvements**](#css-improvements)
+  - [`url()` Inside HTML `style` Attributes](#url-inside-html-style-attributes)
+  - [CSS in Node for Universal Builds](#css-in-node-for-universal-builds)
+- [**The `universal` Target**](#the-universal-target)
+- [**Tree Shaking**](#tree-shaking)
+  - [`optimization.inlineExports`](#optimizationinlineexports)
+  - [Cross-Module Dead-Branch Skipping](#cross-module-dead-branch-skipping)
+  - [Cross-Module Purity](#cross-module-purity)
+  - [CommonJS Re-exports via `Object.defineProperty`](#commonjs-re-exports-via-objectdefineproperty)
+- [**Output and Runtime**](#output-and-runtime)
+  - [Modern Syntax in Generated Code](#modern-syntax-in-generated-code)
+  - [`output.strictModuleResolution`](#outputstrictmoduleresolution)
+  - [`[uniqueName]` Template Placeholder](#uniquename-template-placeholder)
+  - [Worker Chunk Filenames](#worker-chunk-filenames)
+- [**Typed Configuration with `defineConfig`**](#typed-configuration-with-defineconfig)
+- [**Bug Fixes**](#bug-fixes)
+
+## HTML Modules: Entry Points and HMR
+
+W> **This feature is experimental and partial.** Webpack 5.107 implemented the `html-loader` side of the story: importing an HTML file from JavaScript runs its tag references through the webpack pipeline. Webpack 5.108 adds the ability to use a `.html` file as an `entry`. Full parity with `html-webpack-plugin` is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+
+### HTML as an Entry Point
+
+With [`experiments.html`](/configuration/experiments/#experimentshtml) enabled, you can now point `entry` directly at an HTML file. Its `<script src>` and `<link rel="stylesheet">` references go through webpack's pipelines, and the emitted HTML is rewritten to point at the generated JS and CSS chunks.
+
+```js
+// webpack.config.js
+module.exports = {
+  experiments: {
+    html: true,
+    css: true,
+  },
+  entry: {
+    page: "./page.html",
+  },
+};
+```
+
+To make this feel like Vite or Parcel, webpack 5.108 also adds `.html` (and `.css`, when [`experiments.css`](/configuration/experiments/#experimentscss) is enabled) to the default `resolve.extensions`, ahead of the JavaScript extensions. With the HTML experiment on, the default `./src` entry therefore resolves `./src/index.html` over `./src/index.js`:
+
+```js
+// webpack.config.js
+module.exports = {
+  experiments: { html: true },
+  entry: "./src", // resolves to ./src/index.html
+};
+```
+
+These extensions are only added when the matching experiment is enabled, so default builds are unchanged.
+
+### Hot Module Replacement
+
+HTML modules now support [Hot Module Replacement](/concepts/hot-module-replacement/). There's nothing to configure: it activates automatically when HMR is enabled, for example via [`devServer.hot`](/configuration/dev-server/#devserverhot).
+
+For a page extracted to a real `.html` file, each hot update patches `document.body.innerHTML` and `document.title` in place instead of triggering a full reload. Changes to `<head>` beyond the `<title>` (a new `<meta>`, a swapped `<link rel="icon">`, and so on) can't be safely DOM-patched, so the shim falls back to a full page reload.
+
+### Customizing the HTML Parser
+
+Two new options under [`module.parser.html`](/configuration/module/#moduleparserhtml) give you control over how HTML modules are processed.
+
+[`sources`](/configuration/module/#moduleparserhtmlsources) controls which URL-like attributes become webpack dependencies. Set it to `false` to disable extraction entirely, or pass an array to customize which `tag`/`attribute` pairs are treated as URLs. Use the literal string `"..."` to keep the built-in defaults:
+
+```js
+// webpack.config.js
+module.exports = {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        sources: [
+          "...", // keep the built-in defaults
+          { tag: "img", attribute: "data-src", type: "src" },
+          { attribute: "data-href", type: "src" }, // any tag
+        ],
+      },
+    },
+  },
+};
+```
+
+[`template`](/configuration/module/#moduleparserhtmltemplate) transforms the raw HTML source **before** the parser extracts dependencies, so URLs emitted by a templating language (Handlebars, EJS, Eta, …) are still discovered and bundled. It runs synchronously and must return the HTML string to parse:
+
+```js
+// webpack.config.js
+module.exports = {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        template: (source, { resource, addDependency }) => {
+          addDependency(resource);
+          return source
+            .replaceAll("{{title}}", "Hello world")
+            .replaceAll("{{image}}", "./image.png");
+        },
+      },
+    },
+  },
+};
+```
+
+## CSS Improvements
+
+### `url()` Inside HTML `style` Attributes
+
+Webpack can now route an HTML inline `style="..."` attribute through the CSS pipeline, resolving `url()`, `image-set()`, and `@import` relative to the HTML file. This is powered by a new [`module.parser.css.as`](/configuration/module/#moduleparsercssas) option that selects the top-level CSS production to parse: `"stylesheet"` (the default, a full stylesheet) or `"block-contents"` (a declaration list, like the inside of a `style` attribute).
+
+For the common HTML case you don't need to set it manually. Just enable both experiments and `url()` inside `style` attributes resolves automatically:
+
+```js
+// webpack.config.js
+module.exports = {
+  experiments: { html: true, css: true },
+};
+```
+
+### CSS in Node for Universal Builds
+
+For the new `universal` target (below), CSS now runs in Node without crashing and exposes styles for server-side rendering. Styles from `style` injection and `link`-loaded chunks are collected into a registry an SSR host can read at `globalThis["__webpack_css__" + output.uniqueName]`. Single-platform (web-only or node-only) builds emit no extra runtime, so this is scoped entirely to universal output.
+
+## The `universal` Target
+
+Building code that runs in more than one environment used to mean hand-writing `target: ["web", "node"]` and dealing with the rough edges yourself. Webpack 5.108 adds a dedicated [`target: "universal"`](/configuration/target/#universal) preset that combines the `web`, `web worker`, `node`, `electron`, and `nwjs` platforms, leaving each platform flag neutral so the bundle adapts at runtime instead of being locked to one environment.
+
+```js
+// webpack.config.js
+module.exports = {
+  target: "universal",
+};
+```
+
+Universal builds always output ECMAScript modules, so [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) defaults to `true` for this target. Several pieces were made platform-aware so a single bundle behaves correctly everywhere:
+
+- `new Worker(new URL(...))` resolves the `Worker` constructor from `worker_threads` in Node and from the global `Worker` on the web.
+- `commonjs` and `node-commonjs` externals are supported in the ESM output (loaded defensively via `createRequire` from `process.getBuiltinModule`, guarded so they never break the browser), and `global` externals use `globalThis` as the global object.
+- CSS is collected for SSR as described above.
+
+## Tree Shaking
+
+### `optimization.inlineExports`
+
+A new [`optimization.inlineExports`](/configuration/optimization/#optimizationinlineexports) option (on by default in `production`) inlines ESM exports that bind to small primitive constants (a `null`, `undefined`, `boolean`, `number`, or `string` of at most 6 bytes) at every import site, replacing the imported binding with the literal value.
+
+```js
+// flags.js
+export const DEBUG = false;
+```
+
+```js
+// app.js
+import { DEBUG } from "./flags.js";
+
+if (DEBUG) doSomething();
+```
+
+Every reference to `DEBUG` is replaced with `false`. Once no import references it anymore, the export is left unused and dead-code elimination drops it; if `flags.js` has no side effects, the whole module is removed too, and the consuming code can collapse the now-constant branch.
+
+### Cross-Module Dead-Branch Skipping
+
+Building on inline exports, webpack can now skip dependencies that live only in a provably-dead branch gated by an inlined imported constant. When the guarding condition can be evaluated at build time, the import specifiers, `require()` calls, and dynamic `import()` calls in the dead branch are skipped, so the unreachable modules are never bundled.
+
+{/* eslint-disable */}
+
+```js
+// app.js
+import { devOnly } from "./dev-tools";
+import { isDEV } from "./env"; // export const isDEV = false
+import { prodOnly } from "./prod-tools";
+
+export const tools = isDEV ? devOnly : prodOnly;
+```
+
+{/* eslint-enable */}
+
+Because `isDEV` inlines to `false`, the `devOnly` branch is dead and `./dev-tools` is never bundled. Supported guard forms include ternaries, `if` statements, and the `&&`, `||`, `??`, and `!` operators, including nested combinations.
+
+### Cross-Module Purity
+
+In 5.107, the [`#__NO_SIDE_EFFECTS__`](/guides/tree-shaking/#mark-a-function-declaration-as-side-effect-free) annotation only took effect within the module where it was declared. Webpack 5.108 propagates it across module boundaries, so an unused call in an importing module is tree-shaken too.
+
+{/* eslint-disable */}
+
+```js
+// pure.js
+/*#__NO_SIDE_EFFECTS__*/
+export function createThing(x) {
+  return { x };
+}
+```
+
+{/* eslint-enable */}
+
+```js
+// app.js
+import { createThing } from "./pure";
+
+const unused = createThing(1); // dropped: result is never used
+```
+
+When you can't edit the source — for example, a function coming from a dependency — the new [`module.parser.javascript.pureFunctions`](/configuration/module/#moduleparserjavascriptpurefunctions) option marks names as side-effect-free from your config instead:
+
+```js
+// webpack.config.js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /pure-source\.js$/,
+        parser: {
+          pureFunctions: ["createSelector", "styled"],
+        },
+      },
+    ],
+  },
+};
+```
+
+### CommonJS Re-exports via `Object.defineProperty`
+
+Webpack already analyzes CommonJS re-exports such as `exports.foo = require("./foo")` for tree shaking. Webpack 5.108 extends that analysis to re-exports defined with `Object.defineProperty` descriptors, including the lazy getter form used by barrel files:
+
+```js
+// barrel.js
+Object.defineProperty(exports, "foo", {
+  enumerable: true,
+  get: () => require("./foo"),
+});
+```
+
+These re-exports are now treated as structured re-exports, so they participate in exports analysis and tree shaking. Lazy getters keep their deferred semantics in the generated code, and a `{ get, set }` descriptor keeps its setter.
+
+## Output and Runtime
+
+### Modern Syntax in Generated Code
+
+Webpack tailors the syntax of its generated runtime code to the [`output.environment`](/configuration/output/#outputenvironment) capabilities inferred from your `target`. This release adds several capability flags so modern targets get smaller, cleaner runtime code, while older targets keep their exact previous output:
+
+- `let` — emit `let`/`const` instead of `var` where it's safe.
+- `spread` — use `{ ...obj }` and `fn(...args)` instead of `Object.assign` / `concat`.
+- `hasOwn` — use `Object.hasOwn` instead of `Object.prototype.hasOwnProperty.call`.
+- `symbol` — drop the `typeof Symbol !== "undefined"` guard in the namespace helper.
+- `nodeBuiltinModuleGetter` — use `process.getBuiltinModule()` to load Node.js core modules (used by universal builds).
+
+These are normally derived from your `target`; you only set them by hand to override that detection.
+
+### `output.strictModuleResolution`
+
+The runtime guard that throws `MODULE_NOT_FOUND` when a required module id is missing from the bundle now has its own dedicated option, [`output.strictModuleResolution`](/configuration/output/#outputstrictmoduleresolution). It defaults to `true` in development and `false` in production. Previously this guard was tied to `output.pathinfo`; decoupling it lets you, for example, re-enable the check in a production build while debugging.
+
+```js
+// webpack.config.js
+module.exports = {
+  mode: "production",
+  output: {
+    strictModuleResolution: true,
+  },
+};
+```
+
+### `[uniqueName]` Template Placeholder
+
+A new `[uniqueName]` placeholder (with a `[uniquename]` alias) is available in template paths and resolves to [`output.uniqueName`](/configuration/output/#outputuniquename). It works in `output.filename`, `output.chunkFilename`, CSS `localIdentName`, and the other asset-path templates:
+
+```js
+// webpack.config.js
+module.exports = {
+  output: {
+    uniqueName: "my-app",
+    filename: "[uniqueName].[name].js", // -> my-app.main.js
+  },
+};
+```
+
+### Worker Chunk Filenames
+
+You can now name worker chunks independently of regular chunks with [`output.workerChunkFilename`](/configuration/output/#outputworkerchunkfilename), which accepts the same string templates and function form as `output.chunkFilename` and defaults to its value. Entries that webpack creates from `new Worker(new URL(...))` are marked as workers (via a new entry-level `worker` flag) so their output files use it.
+
+```js
+// webpack.config.js
+module.exports = {
+  output: {
+    chunkFilename: "[name].chunk.js",
+    workerChunkFilename: "workers/[name].[contenthash].worker.js",
+  },
+};
+```
+
+## Typed Configuration with `defineConfig`
+
+Webpack now exports a `defineConfig` helper that gives editors type-checking and autocomplete for your configuration without any extra type annotations. It's an identity function (a no-op at runtime that returns the config you pass in), so it works in plain JavaScript configs too, mirroring Vite, Rollup, and Rspack.
+
+```js
+// webpack.config.js
+const { defineConfig } = require("webpack");
+
+module.exports = defineConfig({
+  mode: "none",
+});
+```
+
+It accepts every shape webpack-cli can load: a single configuration object, an array of configurations, a function returning either, an array of such functions, or a `Promise` resolving to any of them.
+
+## Bug Fixes
+
+Several bug fixes have been resolved since version [5.107](https://github.com/webpack/webpack/releases/tag/v5.107.0), along with a large batch of performance improvements across the CSS pipeline, the experimental HTML parser, module concatenation, and the persistent cache. Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for all the details.
+
+## Thanks
+
+A big thank you to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring)
+who made Webpack 5.108 possible. Your support, whether through code contributions, documentation, or financial sponsorship, helps keep Webpack evolving and improving for everyone.
