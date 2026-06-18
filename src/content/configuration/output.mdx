@@ -496,12 +496,16 @@ export default {
       asyncFunction: true,
       // The environment supports BigInt as literal (123n).
       bigIntLiteral: false,
-      // The environment supports const and let for variable declarations.
+      // The environment supports const for variable declarations.
       const: true,
+      // The environment supports let for variable declarations.
+      let: true,
       // The environment supports destructuring ('{ a, b } = obj').
       destructuring: true,
       // The environment supports 'document' variable.
       document: true,
+      // The environment supports 'Object.hasOwn'.
+      hasOwn: true,
       // The environment supports an async import() function to import EcmaScript modules.
       dynamicImport: false,
       // The environment supports an async import() when creating a worker, only for web targets at the moment.
@@ -514,11 +518,17 @@ export default {
       module: false,
       // The environment supports object method shorthand ('{ module() {} }').
       methodShorthand: true,
+      // The environment supports `process.getBuiltinModule()` to synchronously load Node.js core modules.
+      nodeBuiltinModuleGetter: false,
       // Determines if the node: prefix is generated for core module imports in environments that support it.
       // This is only applicable to Webpack runtime code.
       nodePrefixForCoreModules: false,
       // The environment supports optional chaining ('obj?.a' or 'obj?.()').
       optionalChaining: true,
+      // The environment supports spread and rest in array/object literals and calls ('{ ...obj }', 'fn(...args)').
+      spread: true,
+      // The environment supports 'Symbol' (and well-known symbols like 'Symbol.toStringTag').
+      symbol: true,
       // The environment supports template literals.
       templateLiteral: true,
       // The environment supports `import.meta.dirname` and `import.meta.filename`.
@@ -527,6 +537,10 @@ export default {
   },
 };
 ```
+
+These capability flags are normally inferred from your [`target`](/configuration/target/); you only set them manually to override that detection. When a flag is enabled, webpack emits the corresponding modern syntax in its generated runtime code and otherwise falls back to the equivalent legacy output.
+
+T> `let`, `spread`, `hasOwn`, `symbol`, and `nodeBuiltinModuleGetter` were added in webpack 5.108.0. `let` falls back to the value of `const` when the target does not report it separately, `spread` and `symbol` are optimistic (enabled unless the target reports a lack of support), and `hasOwn` is enabled only when the target explicitly reports `Object.hasOwn` support. `nodeBuiltinModuleGetter` reflects support for `process.getBuiltinModule()` and is used by universal builds to load Node.js core modules without breaking the browser.
 
 ## output.filename
 
@@ -627,10 +641,11 @@ The following substitutions are available in template strings (via webpack's int
 
 Substitutions available on Compilation-level:
 
-| Template   | Description                  |
-| ---------- | ---------------------------- |
-| [fullhash] | The full hash of compilation |
-| [hash]     | Same, but deprecated         |
+| Template     | Description                                                                            |
+| ------------ | -------------------------------------------------------------------------------------- |
+| [fullhash]   | The full hash of compilation                                                           |
+| [hash]       | Same, but deprecated                                                                   |
+| [uniqueName] | The value of [`output.uniqueName`](#outputuniquename) (alias `[uniquename]`, 5.108.0+) |
 
 Substitutions available on Chunk-level:
 
@@ -2410,6 +2425,27 @@ export default {
 };
 ```
 
+## output.strictModuleResolution
+
+Emit a runtime check that throws a `MODULE_NOT_FOUND` error when a required module id is missing from the bundle.
+
+- Type: `boolean`
+- Available: 5.108.0+
+
+It defaults to `true` in [`development`](/configuration/mode/#mode-development) mode and `false` in [`production`](/configuration/mode/#mode-production) mode. Set it explicitly to re-enable the guard in production (useful for debugging) or to drop it in development.
+
+```js
+export default {
+  mode: "production",
+  output: {
+    // re-enable the MODULE_NOT_FOUND runtime guard in production
+    strictModuleResolution: true,
+  },
+};
+```
+
+T> Before 5.108.0 this runtime guard was tied to [`output.pathinfo`](#outputpathinfo). It is now controlled by its own dedicated option.
+
 ## output.strictModuleExceptionHandling
 
 W> Deprecated, use
@@ -2566,6 +2602,30 @@ export default {
   },
 };
 ```
+
+## output.workerChunkFilename
+
+`string` `function (pathData, assetInfo) => string`
+
+- Available: 5.108.0+
+
+This option determines the name of non-initial worker chunk files. It accepts the same string templates and function form as [`output.chunkFilename`](#outputchunkfilename), and defaults to the value of `output.chunkFilename`. Setting it lets you give worker chunks their own naming scheme independently of regular chunks.
+
+You must not specify an absolute path here, but the path may contain folders separated by `/`. The specified path is joined with the value of the [`output.path`](#outputpath) option to determine the location on disk.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  output: {
+    chunkFilename: "[name].chunk.js",
+    workerChunkFilename: "workers/[name].[contenthash].worker.js",
+  },
+};
+```
+
+T> `WorkerPlugin` marks the entries it creates from `new Worker(new URL(...))` so their output files use `workerChunkFilename`. See also the entry-level [`worker`](/configuration/entry-context/#entry-descriptor) flag. A `filename` set for a specific worker entry still takes precedence over this option.
 
 ## output.workerChunkLoading
 
