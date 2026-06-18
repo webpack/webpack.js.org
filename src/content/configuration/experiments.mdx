@@ -405,7 +405,9 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **This feature is experimental and partial.** Webpack 5.107 only implements the `html-loader` side: importing an HTML file from JS runs its tag references through the webpack pipeline. **HTML entry points** (using a `.html` file directly as `entry`, the `html-webpack-plugin` part) are **not supported yet** and are planned for the next minor release. The full story is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+W> **This feature is experimental and partial.** Webpack 5.107 implemented the `html-loader` role: importing an HTML file from JS runs its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with `html-webpack-plugin` is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+
+T> The HTML parser can be tuned via [`module.parser.html`](/configuration/module/#moduleparserhtml): use [`sources`](/configuration/module/#moduleparserhtmlsources) to disable or customize URL-attribute extraction, and [`template`](/configuration/module/#moduleparserhtmltemplate) to transform the HTML source before parsing.
 
 #### Inline `<style>` tags
 
@@ -487,6 +489,31 @@ A few behaviors to keep in mind:
 #### `webpackIgnore` magic comment
 
 Placing an HTML `<!-- webpackIgnore: true -->` comment immediately before a tag tells webpack to skip URL resolution for that tag's `src`, `href`, `srcset`, and similar attributes. See the full description under [magic comments](/api/module-methods/#webpackignore).
+
+#### HTML as the default entry
+
+<Badge text="5.108.0+" />
+
+When `experiments.html` is enabled, `.html` is added to the default `resolve.extensions` ahead of the JavaScript extensions, so a directory entry like `entry: "./src"` resolves `./src/index.html` even when `./src/index.js` also exists. This makes the build HTML-first, similar to Vite or Parcel.
+
+```js
+export default {
+  experiments: { html: true },
+  entry: "./src", // resolves to ./src/index.html
+};
+```
+
+When [`experiments.css`](#experimentscss) is enabled, `.css` is likewise appended to the default extensions, so the default entry can fall back to `./src/index.css` when no HTML or JS match is found. These extensions are only added when the respective experiment is on, so default builds are unchanged.
+
+#### Hot Module Replacement
+
+<Badge text="5.108.0+" />
+
+HTML modules support [Hot Module Replacement](/concepts/hot-module-replacement/). No extra configuration is needed. It activates automatically when HMR is enabled (for example via [`devServer.hot`](/configuration/dev-server/#devserverhot)).
+
+For a page extracted to a real `.html` file, each hot update patches `document.body.innerHTML` and `document.title` in place instead of triggering a full reload. Changes to `<head>` beyond the `<title>` (a new `<meta>`, a swapped `<link rel="icon">`, …) cannot be safely DOM-patched, so the shim falls back to a full page reload.
+
+T> [Module concatenation](/configuration/optimization/#optimizationconcatenatemodules) is disabled for HTML modules while HMR is active, because each module needs its own `module.hot` scope to self-accept updates.
 
 ### experiments.lazyCompilation
 
