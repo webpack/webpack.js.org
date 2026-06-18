@@ -2625,7 +2625,7 @@ export default {
 };
 ```
 
-T> `WorkerPlugin` marks the entries it creates from `new Worker(new URL(...))` so their output files use `workerChunkFilename`. See also the entry-level [`worker`](/configuration/entry-context/#entry-descriptor) flag. A `filename` set for a specific worker entry still takes precedence over this option.
+T> Entries that webpack creates automatically from `new Worker(new URL(...))` are marked as workers, so their output files use `workerChunkFilename`. See also the entry-level [`worker`](/configuration/entry-context/#entry-descriptor) flag. A `filename` set for a specific worker entry still takes precedence over this option.
 
 ## output.workerChunkLoading
 
