@@ -299,6 +299,26 @@ Then, because no import references `DEBUG` anymore, the `export const DEBUG` is 
 
 T> Only small primitive constants are inlined: a `null`, `undefined`, `boolean`, `number` or `string` of at most 6 bytes. Objects, arrays and longer strings are left as regular exports.
 
+Inlining also enables **cross-module dead-branch skipping**: when an imported constant is statically inlinable, webpack evaluates the condition that guards a branch and skips the dependencies that live only in the provably-dead branch (ESM import specifiers, `require()` calls, and dynamic `import()` calls), so the unreachable modules are never added to the bundle.
+
+```js
+// env.js
+export const isDEV = false;
+```
+
+```js
+// app.js
+import { devOnly } from "./dev-tools";
+import { isDEV } from "./env";
+import { prodOnly } from "./prod-tools";
+
+export const tools = isDEV ? devOnly : prodOnly;
+```
+
+Because `isDEV` inlines to `false`, the `devOnly` branch is dead, so `./dev-tools` is never bundled. The same holds for `require()` and dynamic `import()` calls that sit only in the dead branch.
+
+T> Supported guard forms include ternaries (`isDEV ? A : B`), `if` statements, and the `&&`, `||`, `??` and `!` operators, including nested combinations.
+
 ## optimization.mangleExports
 
 `boolean` `string: 'deterministic' | 'size'`
