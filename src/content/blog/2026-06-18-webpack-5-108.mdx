@@ -5,7 +5,7 @@ contributors:
   - bjohansebas
 ---
 
-Webpack 5.108 is out, and it pushes two big stories forward. The first continues the native HTML work that started in 5.107: a `.html` file can now be used directly as an `entry`, so webpack covers more of the role `html-webpack-plugin` has played for years, and HTML modules now support Hot Module Replacement. The second is a brand new `universal` target that compiles a single bundle that adapts at runtime to the browser, web workers, Node.js, Electron, and NW.js.
+Webpack 5.108 is out, and it pushes two big stories forward. The headline is a brand-new `universal` target: a single preset that compiles one bundle which adapts at runtime to the browser, web workers, Node.js, Electron, and NW.js, replacing the hand-written `target: ["web", "node"]` setups people have been maintaining for years. The release also continues the native HTML work that started in 5.107 — a `.html` file can now be used directly as an `entry`, webpack can emit an HTML file for plain JavaScript entries, and HTML modules now support Hot Module Replacement.
 
 Around those headlines, this release lands a substantial round of tree-shaking improvements (a new `optimization.inlineExports`, cross-module purity, and CommonJS re-export analysis), modernizes the code webpack generates for capable targets, and adds a typed `defineConfig` helper.
 
@@ -13,6 +13,7 @@ Both the HTML and `universal` features are experimental and live behind opt-in f
 
 Explore what's new:
 
+- [**The `universal` Target**](#the-universal-target)
 - [**HTML Modules: Entry Points and HMR**](#html-modules-entry-points-and-hmr)
   - [HTML as an Entry Point](#html-as-an-entry-point)
   - [HTML Output for JavaScript Entries](#html-output-for-javascript-entries)
@@ -21,7 +22,6 @@ Explore what's new:
 - [**CSS Improvements**](#css-improvements)
   - [`url()` Inside HTML `style` Attributes](#url-inside-html-style-attributes)
   - [CSS in Node for Universal Builds](#css-in-node-for-universal-builds)
-- [**The `universal` Target**](#the-universal-target)
 - [**Tree Shaking**](#tree-shaking)
   - [`optimization.inlineExports`](#optimizationinlineexports)
   - [Cross-Module Dead-Branch Skipping](#cross-module-dead-branch-skipping)
@@ -35,6 +35,29 @@ Explore what's new:
   - [Worker Chunk Filenames](#worker-chunk-filenames)
 - [**Typed Configuration with `defineConfig`**](#typed-configuration-with-defineconfig)
 - [**Bug Fixes**](#bug-fixes)
+
+## The `universal` Target
+
+Building code that runs in more than one environment used to mean hand-writing `target: ["web", "node"]` and then dealing with the rough edges yourself: choosing a chunk format that loads everywhere, wiring up a global object, and guarding every platform-specific API by hand. Webpack 5.108 turns that into a single preset.
+
+```js
+// webpack.config.js
+module.exports = {
+  target: "universal",
+};
+```
+
+[`target: "universal"`](/configuration/target/#universal) combines the `web`, `web worker`, `node`, `electron`, and `nwjs` platforms into one target and leaves each platform flag _neutral_ instead of locking the bundle to a single environment. Rather than compiling separate web and node bundles, you ship one bundle that figures out its surroundings at runtime and uses whatever the current platform provides.
+
+A bundle that has to load equally well in a browser and in Node needs a portable module format, so universal builds always output ECMAScript modules: [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) defaults to `true`, synchronous `require` is turned off, and Node's built-in modules stay available (resolved at runtime through ESM). [`output.globalObject`](/configuration/output/#outputglobalobject) also defaults to `globalThis` so runtime code has one global to reach for on every platform.
+
+To make a single bundle behave correctly everywhere, several pieces were made platform-aware and now branch on feature detection at runtime instead of being fixed at build time:
+
+- **Workers** — `new Worker(new URL(...))` resolves the `Worker` constructor from `worker_threads` in Node and from the global `Worker` on the web, so the same worker entry runs in both.
+- **Externals** — `commonjs` and `node-commonjs` externals work from the ESM output (loaded defensively via `createRequire` obtained from `process.getBuiltinModule`, guarded so they never break in the browser), and `global` externals resolve against `globalThis`. Electron externals use `module-import` when the target supports ESM.
+- **CSS for SSR** — on the server, where there is no DOM to inject into, styles are collected into a registry an SSR host can read (see [CSS in Node for Universal Builds](#css-in-node-for-universal-builds)).
+
+For a complete, runnable setup, see the [`universal` example](https://github.com/webpack/webpack/tree/main/examples/universal) in the webpack repository.
 
 ## HTML Modules: Entry Points and HMR
 
@@ -156,24 +179,7 @@ module.exports = {
 
 ### CSS in Node for Universal Builds
 
-For the new `universal` target (below), CSS now runs in Node without crashing and exposes styles for server-side rendering. Styles from `style` injection and `link`-loaded chunks are collected into a registry an SSR host can read at `globalThis["__webpack_css__" + output.uniqueName]`. Single-platform (web-only or node-only) builds emit no extra runtime, so this is scoped entirely to universal output.
-
-## The `universal` Target
-
-Building code that runs in more than one environment used to mean hand-writing `target: ["web", "node"]` and dealing with the rough edges yourself. Webpack 5.108 adds a dedicated [`target: "universal"`](/configuration/target/#universal) preset that combines the `web`, `web worker`, `node`, `electron`, and `nwjs` platforms, leaving each platform flag neutral so the bundle adapts at runtime instead of being locked to one environment.
-
-```js
-// webpack.config.js
-module.exports = {
-  target: "universal",
-};
-```
-
-Universal builds always output ECMAScript modules, so [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) defaults to `true` for this target. Several pieces were made platform-aware so a single bundle behaves correctly everywhere:
-
-- `new Worker(new URL(...))` resolves the `Worker` constructor from `worker_threads` in Node and from the global `Worker` on the web.
-- `commonjs` and `node-commonjs` externals are supported in the ESM output (loaded defensively via `createRequire` from `process.getBuiltinModule`, guarded so they never break the browser), and `global` externals use `globalThis` as the global object.
-- CSS is collected for SSR as described above.
+For the new [`universal` target](#the-universal-target), CSS now runs in Node without crashing and exposes styles for server-side rendering. Styles from `style` injection and `link`-loaded chunks are collected into a registry an SSR host can read at `globalThis["__webpack_css__" + output.uniqueName]`. Single-platform (web-only or node-only) builds emit no extra runtime, so this is scoped entirely to universal output.
 
 ## Tree Shaking
 
