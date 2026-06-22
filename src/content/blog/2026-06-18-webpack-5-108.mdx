@@ -15,6 +15,7 @@ Explore what's new:
 
 - [**HTML Modules: Entry Points and HMR**](#html-modules-entry-points-and-hmr)
   - [HTML as an Entry Point](#html-as-an-entry-point)
+  - [HTML Output for JavaScript Entries](#html-output-for-javascript-entries)
   - [Hot Module Replacement](#hot-module-replacement)
   - [Customizing the HTML Parser](#customizing-the-html-parser)
 - [**CSS Improvements**](#css-improvements)
@@ -26,6 +27,7 @@ Explore what's new:
   - [Cross-Module Dead-Branch Skipping](#cross-module-dead-branch-skipping)
   - [Cross-Module Purity](#cross-module-purity)
   - [CommonJS Re-exports via `Object.defineProperty`](#commonjs-re-exports-via-objectdefineproperty)
+- [**Automatic ES Module Detection**](#automatic-es-module-detection)
 - [**Output and Runtime**](#output-and-runtime)
   - [Modern Syntax in Generated Code](#modern-syntax-in-generated-code)
   - [`output.strictModuleResolution`](#outputstrictmoduleresolution)
@@ -66,6 +68,25 @@ module.exports = {
 ```
 
 These extensions are only added when the matching experiment is enabled, so default builds are unchanged.
+
+### HTML Output for JavaScript Entries
+
+The previous section starts from an HTML file. [`output.html`](/configuration/output/#outputhtml) covers the opposite case: when your entries are plain JavaScript, webpack emits an HTML file for every non-HTML entrypoint and injects that entrypoint's initial JS (deferred, or `type="module"` for ESM output) and CSS chunks for you. This is the part of `html-webpack-plugin` that scaffolds a document around your bundles, now built in.
+
+```js
+// webpack.config.js
+module.exports = {
+  experiments: { html: true },
+  entry: {
+    main: "./src/main.js",
+  },
+  output: {
+    html: true,
+  },
+};
+```
+
+Shared chunks pulled in through [`dependOn`](/configuration/entry-context/#dependencies) are handled correctly: a dependant entry's page loads its `dependOn` targets' chunks first (transitively, with diamond graphs deduplicated) instead of inlining the shared modules into the dependant's own chunk. Under the hood each entrypoint is wrapped in a synthetic HTML module that flows through the same pipeline as a real `entry: "./index.html"`, so chunk injection, `publicPath`, and the `template` option behave the same way. For per-entry control, the entry descriptor also accepts an `html` field.
 
 ### Hot Module Replacement
 
@@ -248,6 +269,19 @@ Object.defineProperty(exports, "foo", {
 
 These re-exports are now treated as structured re-exports, so they participate in exports analysis and tree shaking. Lazy getters keep their deferred semantics in the generated code, and a `{ get, set }` descriptor keeps its setter.
 
+## Automatic ES Module Detection
+
+Webpack now treats a top-level `await` or a reference to `import.meta` as a marker that a `.js` file is an ES module, matching the syntax detection Node.js uses. A module that uses either feature is recognized as ESM even without an `.mjs` extension, a `"type": "module"` in `package.json`, or an explicit [`module.rules` type](/configuration/module/#ruletype):
+
+```js
+// config.js — detected as an ES module
+const res = await fetch(new URL("./config.json", import.meta.url));
+
+export default await res.json();
+```
+
+This makes mixed CommonJS/ESM codebases work with less configuration, since these unambiguous ESM-only syntax features no longer need to be paired with a manual `type` declaration.
+
 ## Output and Runtime
 
 ### Modern Syntax in Generated Code
@@ -255,6 +289,7 @@ These re-exports are now treated as structured re-exports, so they participate i
 Webpack tailors the syntax of its generated runtime code to the [`output.environment`](/configuration/output/#outputenvironment) capabilities inferred from your `target`. This release adds several capability flags so modern targets get smaller, cleaner runtime code, while older targets keep their exact previous output:
 
 - `let` — emit `let`/`const` instead of `var` where it's safe.
+- `logicalAssignment` — emit `||=` instead of the equivalent `x = x || y` form.
 - `spread` — use `{ ...obj }` and `fn(...args)` instead of `Object.assign` / `concat`.
 - `hasOwn` — use `Object.hasOwn` instead of `Object.prototype.hasOwnProperty.call`.
 - `symbol` — drop the `typeof Symbol !== "undefined"` guard in the namespace helper.
@@ -276,16 +311,16 @@ module.exports = {
 };
 ```
 
-### `[uniqueName]` Template Placeholder
+### `[uniquename]` Template Placeholder
 
-A new `[uniqueName]` placeholder (with a `[uniquename]` alias) is available in template paths and resolves to [`output.uniqueName`](/configuration/output/#outputuniquename). It works in `output.filename`, `output.chunkFilename`, CSS `localIdentName`, and the other asset-path templates:
+A new `[uniquename]` placeholder (a `[uniqueName]` spelling is also accepted) is available in template paths and resolves to [`output.uniqueName`](/configuration/output/#outputuniquename). It works in `output.filename`, `output.chunkFilename`, CSS `localIdentName`, and the other asset-path templates:
 
 ```js
 // webpack.config.js
 module.exports = {
   output: {
     uniqueName: "my-app",
-    filename: "[uniqueName].[name].js", // -> my-app.main.js
+    filename: "[uniquename].[name].js", // -> my-app.main.js
   },
 };
 ```
