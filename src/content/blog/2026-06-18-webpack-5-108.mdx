@@ -274,10 +274,11 @@ These re-exports are now treated as structured re-exports, so they participate i
 Webpack now treats a top-level `await` or a reference to `import.meta` as a marker that a `.js` file is an ES module, matching the syntax detection Node.js uses. A module that uses either feature is recognized as ESM even without an `.mjs` extension, a `"type": "module"` in `package.json`, or an explicit [`module.rules` type](/configuration/module/#ruletype):
 
 ```js
-// config.js — detected as an ES module
+// config.js — no `import`/`export`, yet treated as an ES module
+// (top-level `await` and `import.meta` only parse inside a module)
 const res = await fetch(new URL("./config.json", import.meta.url));
 
-export default await res.json();
+globalThis.appConfig = await res.json();
 ```
 
 This makes mixed CommonJS/ESM codebases work with less configuration, since these unambiguous ESM-only syntax features no longer need to be paired with a manual `type` declaration.
