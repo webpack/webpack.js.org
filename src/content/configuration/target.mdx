@@ -41,6 +41,8 @@ The following string values are supported via [`WebpackOptionsApply`](https://gi
 | `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                                                                        |
 | `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                                                                 |
 | `universal`                | Compile a single bundle that adapts at runtime to browser, web worker, Node.js, Electron and NW.js. Always outputs ECMAScript modules. Available since webpack 5.108.0.                                                                                                                              |
+| `bun`                      | Compile for [Bun](https://bun.sh/). Outputs ECMAScript modules and externalizes `bun:*` and Node.js built-in modules. Available since webpack 5.108.0.                                                                                                                                               |
+| `deno[[X].Y]`              | Compile for [Deno](https://deno.com/). Outputs ECMAScript modules, resolves Node.js built-ins via the required `node:` specifier, and keeps Deno's own import protocols (`npm:`, `jsr:`, `node:`, `http(s)://`) external. Available since webpack 5.108.0.                                           |
 | `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.                                                                                                                                                                                                                                     |
 | `browserslist`             | Infer a platform and the ES-features from a browserslist-config **(default if browserslist config is available)**                                                                                                                                                                                    |
 
@@ -94,6 +96,36 @@ Notes for universal builds:
 - `new Worker(new URL(...))` resolves the `Worker` constructor from `worker_threads` in Node and from the global `Worker` on the web.
 - `commonjs` and `node-commonjs` externals are supported in the ESM output (loaded via `createRequire` from `process.getBuiltinModule`), and `global` externals use `globalThis` as the global object.
 - CSS runs in Node for server-side rendering: styles from `style` injection and `link`-loaded chunks are collected into `globalThis["__webpack_css__" + output.uniqueName]` for an SSR host to read.
+
+#### bun
+
+<Badge text="5.108.0+" />
+
+Compile for [Bun](https://bun.sh/). The bundle is emitted as ECMAScript modules ([`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) defaults to `true`), and Bun's own `bun:*` modules together with the Node.js built-in modules Bun provides are externalized instead of being bundled.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  target: "bun",
+};
+```
+
+#### deno
+
+<Badge text="5.108.0+" />
+
+Compile for [Deno](https://deno.com/). The bundle is emitted as ECMAScript modules ([`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) defaults to `true`). Node.js built-ins are resolved through the `node:` specifier Deno requires, and Deno's own import protocols (`npm:`, `jsr:`, `node:` and `http(s)://` URLs) are kept external so the runtime loads them. A version may be specified, for example `deno2` or `deno1.40`.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  target: "deno", // also "deno2", "deno1.40", ...
+};
+```
 
 ### [string]
 
