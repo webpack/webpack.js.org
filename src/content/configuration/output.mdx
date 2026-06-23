@@ -500,6 +500,8 @@ export default {
       const: true,
       // The environment supports let for variable declarations.
       let: true,
+      // The environment supports logical assignment operators ('a ||= b', 'a &&= b', 'a ??= b').
+      logicalAssignment: true,
       // The environment supports destructuring ('{ a, b } = obj').
       destructuring: true,
       // The environment supports 'document' variable.
@@ -689,6 +691,8 @@ T> `[file]` equals `[path][base]`. `[base]` equals `[name][ext]`. The full path 
 
 The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
+Since webpack 5.108.0, the hash digest encoding can also be set inline as `[<hash>:<digest>:<length>]`, for example `[contenthash:base64:8]`. The digest defaults to [`output.hashDigest`](#outputhashdigest) (`hex`), and the same form works in CSS module [`localIdentName`](/loaders/css-loader/#localidentname) placeholders.
+
 It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
 
 Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
@@ -854,6 +858,51 @@ For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
+
+## output.html
+
+<Badge text="5.108.0+" />
+
+`boolean = false` `object`
+
+Generate an HTML file for each non-HTML [entrypoint](/concepts/entry-points/), injecting that entrypoint's initial JS and CSS output chunks (including chunks shared through [`dependOn`](/configuration/entry-context/#dependencies)). This is the part of `html-webpack-plugin` that scaffolds a document around your bundles, built into webpack core. It relies on the experimental HTML support, so enable [`experiments.html`](/configuration/experiments/#experimentshtml).
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  entry: {
+    main: "./src/main.js",
+  },
+  output: {
+    html: true,
+  },
+};
+```
+
+Set it to an object to configure how the injected `<script>` tags load:
+
+| Option          | Description                                                           |
+| --------------- | --------------------------------------------------------------------- |
+| `scriptLoading` | `'auto'` (default), `'defer'`, or `'blocking'`. See the values below. |
+
+- `'auto'`: emit a module script (`type="module"`) for ES module output and a deferred script otherwise.
+- `'defer'`: force a deferred `<script defer>`.
+- `'blocking'`: emit a plain blocking `<script>`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      scriptLoading: "defer",
+    },
+  },
+};
+```
+
+It can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor) `html` option.
 
 ## output.iife
 
