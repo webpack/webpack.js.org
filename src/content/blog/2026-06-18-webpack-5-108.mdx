@@ -14,6 +14,7 @@ Both the HTML and `universal` features are experimental and live behind opt-in f
 Explore what's new:
 
 - [**The `universal` Target**](#the-universal-target)
+- [**Bun and Deno Targets**](#bun-and-deno-targets)
 - [**HTML Modules: Entry Points and HMR**](#html-modules-entry-points-and-hmr)
   - [HTML as an Entry Point](#html-as-an-entry-point)
   - [HTML Output for JavaScript Entries](#html-output-for-javascript-entries)
@@ -58,6 +59,28 @@ To make a single bundle behave correctly everywhere, several pieces were made pl
 - **CSS for SSR**: on the server, where there is no DOM to inject into, styles are collected into a registry an SSR host can read (see [CSS in Node for Universal Builds](#css-in-node-for-universal-builds)).
 
 For a complete, runnable setup, see the [`universal` example](https://github.com/webpack/webpack/tree/main/examples/universal) in the webpack repository.
+
+## Bun and Deno Targets
+
+Alongside `universal`, webpack 5.108 adds dedicated presets for two newer JavaScript runtimes. Each one configures ESM output and marks the runtime's own built-in modules as externals (so they're left for the runtime to provide instead of being bundled), which previously you had to set up by hand.
+
+[`target: "bun"`](/configuration/target/#string) builds for Bun, externalizing Bun's own `bun:*` modules and the Node.js built-ins it provides instead of bundling them.
+
+```js
+// webpack.config.js
+module.exports = {
+  target: "bun",
+};
+```
+
+[`target: "deno"`](/configuration/target/#string) builds for Deno. It resolves Node.js built-ins through the `node:` specifier that Deno requires, and keeps Deno's own import protocols (`npm:`, `jsr:`, `node:`, and `http(s)://` URLs) external so the runtime loads them. Like webpack's other version-aware targets, it accepts a version such as `deno2` or `deno1.40`.
+
+```js
+// webpack.config.js
+module.exports = {
+  target: "deno", // also "deno2", "deno1.40", ...
+};
+```
 
 ## HTML Modules: Entry Points and HMR
 
@@ -140,6 +163,8 @@ module.exports = {
   },
 };
 ```
+
+The built-in defaults also got broader in 5.108: the parser now extracts more URLs out of the box (including SVG references and various legacy or obsolete attributes), decodes HTML character references, and supports a new `css-url` source type that pulls `url()` references out of CSS-valued attributes.
 
 [`template`](/configuration/module/#moduleparserhtmltemplate) transforms the raw HTML source **before** the parser extracts dependencies, so URLs emitted by a templating language (Handlebars, EJS, Eta, …) are still discovered and bundled. It runs synchronously and must return the HTML string to parse:
 
