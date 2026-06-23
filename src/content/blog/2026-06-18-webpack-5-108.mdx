@@ -62,6 +62,8 @@ To make a single bundle behave correctly everywhere, several pieces were made pl
 - **Externals**: `commonjs` and `node-commonjs` externals work from the ESM output (loaded defensively via `createRequire` obtained from `process.getBuiltinModule`, guarded so they never break in the browser), and `global` externals resolve against `globalThis`. Electron externals use `module-import` when the target supports ESM.
 - **CSS for SSR**: on the server, where there is no DOM to inject into, styles are collected into a registry an SSR host can read (see [CSS in Node for Universal Builds](#css-in-node-for-universal-builds)).
 
+Plugins and loaders can detect a universal build at compile time through `compiler.platform.universal`, which is also `true` for the equivalent `target: ["web", "node"]`.
+
 For a complete, runnable setup, see the [`universal` example](https://github.com/webpack/webpack/tree/main/examples/universal) in the webpack repository.
 
 ## Bun and Deno Targets
