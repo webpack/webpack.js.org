@@ -5,6 +5,10 @@ contributors:
   - bjohansebas
 ---
 
+import banner from "../../assets/blog/webpack-5-108.png";
+
+<img src={banner} alt="webpack 5.108 release" />
+
 Webpack 5.108 is out, and it pushes two big stories forward. The headline is a brand-new `universal` target: a single preset that compiles one bundle which adapts at runtime to the browser, web workers, Node.js, Electron, and NW.js, replacing the hand-written `target: ["web", "node"]` setups people have been maintaining for years. The release also continues the native HTML work that started in 5.107: a `.html` file can now be used directly as an `entry`, webpack can emit an HTML file for plain JavaScript entries, and HTML modules now support Hot Module Replacement.
 
 Around those headlines, this release lands a substantial round of tree-shaking improvements (a new `optimization.inlineExports`, cross-module purity, and CommonJS re-export analysis), modernizes the code webpack generates for capable targets, and adds a typed `defineConfig` helper.
