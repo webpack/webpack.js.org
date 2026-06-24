@@ -2,40 +2,20 @@
 title: DevServer
 sort: 11
 contributors:
-  - sokra
-  - skipjack
-  - spacek33z
-  - charlespwd
-  - orteth01
-  - byzyk
-  - EugeneHlushko
-  - Yiidiir
-  - Loonride
-  - dmohns
-  - EslamHiko
-  - digitaljohn
-  - bhavya9107
-  - wizardofhogwarts
-  - jamesgeorge007
-  - g100g
-  - anikethsaha
-  - snitin315
-  - Biki-das
-  - SaulSilver
-  - malcolm-kee
+  - RlxChap2
 ---
 
-[webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
+يمكن استخدام [webpack-dev-server](https://github.com/webpack/webpack-dev-server) لتطوير التطبيق بسرعة. راجع [دليل التطوير](/guides/development/) للبدء.
 
-This page describes the options that affect the behavior of webpack-dev-server (short: dev-server) <Badge text="version >= 5.0.0" />. Migration guide from `v4` to `v5` can be found [here](https://github.com/webpack/webpack-dev-server/blob/master/migration-v5.md).
+تصف هذه الصفحة الخيارات التي تؤثر على سلوك webpack-dev-server (باختصار: dev-server) <Badge text="version >= 5.0.0" />. يمكن العثور على دليل الترحيل من `v4` إلى `v5` [هنا](https://github.com/webpack/webpack-dev-server/blob/master/migration-v5.md).
 
-W> `webpack-dev-server v5.0.0+` requires `node >= v18.12.0`, `webpack >= v5.0.0` and `webpack-cli >= v4.7.0`, we recommend using the latest version.
+W> `webpack-dev-server v5.0.0+` يتطلب `Node.js >= v18.12.0`، `webpack >= v5.0.0` و`webpack-cli >= v4.7.0`، نوصي باستخدام أحدث إصدار.
 
 ## devServer
 
 `object`
 
-This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a rudimentary example that gzips and serves everything from our `public/` directory in the project root:
+يلتقط [webpack-dev-server](https://github.com/webpack/webpack-dev-server) مجموعة الخيارات هذه، ويمكنك استخدامها لتغيير سلوكه بطرق مختلفة. في المثال البسيط التالي نفعّل ضغط gzip ونخدم كل شيء من دليل `public/` في جذر المشروع:
 
 **webpack.config.js**
 
@@ -58,7 +38,7 @@ export default {
 };
 ```
 
-When the server is started, there will be a message prior to the list of resolved modules:
+عند بدء تشغيل server، ستكون هناك رسالة قبل قائمة الحلول modules:
 
 ```bash
 <i> [webpack-dev-server] Project is running at:
@@ -68,41 +48,41 @@ When the server is started, there will be a message prior to the list of resolve
 <i> [webpack-dev-server] Content not from webpack is served from '/path/to/public' directory
 ```
 
-that will give some background on where the server is located and what it's serving.
+سيعطي ذلك بعض المعلومات الأساسية عن مكان وجود server وما الذي يقدمه.
 
-If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as the first parameter instead: `new WebpackDevServer({...}, compiler)`. [See here](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple) for an example of how to use webpack-dev-server through the Node.js API.
+إذا كنت تستخدم dev-server من خلال Node.js API، فسيتم تجاهل الخيارات الموجودة في `devServer`. قم بتمرير الخيارات كمعلمة أولى بدلاً من ذلك: `new WebpackDevServer({...}, compiler)`. [انظر هنا](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple) للحصول على مثال حول كيفية استخدام webpack-dev-server من خلال Node.js API.
 
-W> You cannot use the second `compiler` argument (a callback) when using `WebpackDevServer`.
+W> لا يمكنك استخدام الوسيطة `compiler` الثانية (رد الاتصال) عند استخدام `WebpackDevServer`.
 
-W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
+W> انتبه إلى أنه عند [تصدير تخصيصات متعددة](/configuration/configuration-types/#exporting-multiple-configurations) سيتم أخذ خيارات `devServer` فقط للتخصيص الأول في الاعتبار واستخدامها لجميع التخصيصات في array.
 
-T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+T> إذا كنت تواجه مشكلة، فإن الانتقال إلى المسار `/webpack-dev-server` سيُظهر مكان تقديم الملفات. على سبيل المثال، `http://localhost:9000/webpack-dev-server`.
 
-T> If you want to manually recompile the bundle, navigating to the `/webpack-dev-server/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, the URL may look like `http://localhost:9000/webpack-dev-server/invalidate`.
+T> إذا كنت تريد إعادة ترجمة bundle يدويًا، فإن الانتقال إلى المسار `/webpack-dev-server/invalidate` سيؤدي إلى [إبطال](/api/node/#invalidate-watching) compilation الحالي لـ bundle وإعادة ترجمته لك عبر [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). اعتمادًا على التخصيص الذي قمت به، قد يبدو عنوان URL بالشكل `http://localhost:9000/webpack-dev-server/invalidate`.
 
-T> HTML template is required to serve the bundle, usually, it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
+T> يلزم وجود HTML template لخدمة bundle، ويكون عادةً ملف `index.html`. تأكد من إضافة مراجع `<script>` إلى HTML؛ فـ webpack-dev-server لا يضيفها تلقائيًا.
 
-### Usage via CLI
+### الاستخدام عبر CLI
 
-You can invoke webpack-dev-server via CLI by:
+يمكنك استدعاء webpack-dev-server عبر CLI عن طريق:
 
 ```bash
 npx webpack serve
 ```
 
-A list of CLI options for `serve` is available [here](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md)
+تتوفر قائمة بخيارات CLI لـ `serve` [هنا](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md)
 
-### Usage via API
+### الاستخدام عبر API
 
-While it's recommended to run `webpack-dev-server` via the CLI, you may also choose to start a server via the API.
+بينما يوصى بتشغيل `webpack-dev-server` عبر CLI، يمكنك أيضًا اختيار بدء server عبر API.
 
-See the related [API documentation for `webpack-dev-server`](/api/webpack-dev-server/).
+راجع وثائق [API ذات الصلة بـ `webpack-dev-server`](/api/webpack-dev-server/).
 
 ## devServer.app
 
 `function`
 
-Allows you to use custom server applications, such as `connect`, `fastify`, etc. The default application used is `express`.
+يسمح لك باستخدام تطبيقات server المخصصة، مثل `connect`، `fastify`، وما إلى ذلك. التطبيق الافتراضي المستخدم هو `express`.
 
 **webpack.config.js**
 
@@ -121,7 +101,7 @@ export default {
 
 `'auto' | 'all'` `[string]`
 
-This option allows you to allowlist services that are allowed to access the dev server.
+يتيح لك هذا الخيار إدراج الخدمات المسموح لها بالوصول إلى server في القائمة المسموح بها.
 
 **webpack.config.js**
 
@@ -139,7 +119,7 @@ export default {
 };
 ```
 
-Mimicking Django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a subdomain wildcard. `.host.com` will match `host.com`, `www.host.com`, and any other subdomain of `host.com`.
+لتقليد `ALLOWED_HOSTS` الخاص بـ Django، يمكن استخدام القيمة التي تبدأ بـ `.` كحرف بدل للنطاق الفرعي. سوف يتطابق `.host.com` مع `host.com` و`www.host.com` وأي نطاق فرعي آخر لـ `host.com`.
 
 **webpack.config.js**
 
@@ -147,21 +127,21 @@ Mimicking Django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a 
 export default {
   // ...
   devServer: {
-    // this achieves the same effect as the first example
-    // with the bonus of not having to update your config
-    // if new subdomains need to access the dev server
+    // وهذا يحقق نفس تأثير المثال الأول
+    // مع ميزة عدم الاضطرار إلى تحديث التخصيص الخاص بك
+    // إذا كانت النطاقات الفرعية الجديدة بحاجة إلى الوصول إلى server dev
     allowedHosts: [".host.com", "host2.com"],
   },
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --allowed-hosts .host.com --allowed-hosts host2.com
 ```
 
-When set to `'all'` this option bypasses host checking. **THIS IS NOT RECOMMENDED** as apps that do not check the host are vulnerable to DNS rebinding attacks.
+عند التعيين على `'all'`، يتجاوز هذا الخيار فحص المضيف. **هذا غير مستحسن** لأن التطبيقات التي لا تتحقق من المضيف تكون عرضة لهجمات إعادة ربط DNS.
 
 **webpack.config.js**
 
@@ -174,13 +154,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --allowed-hosts all
 ```
 
-When set to `'auto'` this option always allows `localhost`, [`host`](#devserverhost), and [`client.webSocketURL.hostname`](#websocketurl):
+عند التعيين على `'auto'`، يسمح هذا الخيار دائمًا بـ `localhost` و[`host`](#devserverhost) و[`client.webSocketURL.hostname`](#websocketurl):
 
 **webpack.config.js**
 
@@ -193,7 +173,7 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --allowed-hosts auto
@@ -203,7 +183,7 @@ npx webpack serve --allowed-hosts auto
 
 `boolean = false` `object`
 
-This option broadcasts the server via [ZeroConf](http://www.zeroconf.org/) networking on start.
+يقوم هذا الخيار ببث server عبر شبكة [ZeroConf](http://www.zeroconf.org/) عند البداية.
 
 **webpack.config.js**
 
@@ -216,19 +196,19 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --bonjour
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-bonjour
 ```
 
-You can also pass [custom options](https://github.com/watson/bonjour#initializing) to bonjour, for example:
+يمكنك أيضًا تمرير [الخيارات المخصصة](https://github.com/watson/bonjour#initializing) إلى صباح الخير، على سبيل المثال:
 
 **webpack.config.js**
 
@@ -246,11 +226,11 @@ export default {
 
 ## devServer.client
 
-### logging
+### تسجيل
 
 `'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'`
 
-Allows to set log level in the browser, e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled.
+يسمح بتعيين مستوى السجل في browser، على سبيل المثال، قبل إعادة التحميل، قبل حدوث خطأ أو عند تمكين [Hot Module Replacement](/concepts/hot-module-replacement/).
 
 **webpack.config.js**
 
@@ -265,17 +245,17 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-logging info
 ```
 
-### overlay
+### تراكب
 
 `boolean = true` `object`
 
-Shows a full-screen overlay in the browser when there are compiler errors or warnings.
+يعرض تراكبًا بملء الشاشة في browser عند وجود أخطاء أو تحذيرات compiler.
 
 **webpack.config.js**
 
@@ -290,29 +270,29 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-overlay
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-client-overlay
 ```
 
-You can provide an object with the following properties for more granular control:
+يمكنك توفير object بالخصائص التالية لمزيد من التحكم الدقيق:
 
-| Property        | Explanation              |
-| --------------- | ------------------------ |
-| `errors`        | compilation errors       |
-| `runtimeErrors` | unhandled runtime errors |
-| `warnings`      | compilation warnings     |
+| الملكية         | شرح                           |
+| --------------- | ----------------------------- |
+| `errors`        | compilation أخطاء             |
+| `runtimeErrors` | أخطاء runtime لم تتم معالجتها |
+| `warnings`      | compilation تحذيرات           |
 
-All properties are optional and default to `true` when not provided.
+جميع الخصائص اختيارية وتكون افتراضيًا `true` عندما لا يتم توفيرها.
 
-For example, to disable compilation warnings, you can provide the following configuration:
+على سبيل المثال، لتعطيل تحذيرات compilation، يمكنك توفير التخصيص التالي:
 
 **webpack.config.js**
 
@@ -331,15 +311,15 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-overlay-errors --no-client-overlay-warnings --client-overlay-runtime-errors
 ```
 
-To filter based on the thrown error, you can pass a function that accepts an `error` parameter and returns a boolean.
+للتصفية بناءً على الخطأ الذي تم طرحه، يمكنك تمرير function الذي يقبل المعلمة `error` ويعيد boolean.
 
-For example, to ignore errors thrown by [`AbortController.abort()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort):
+على سبيل المثال، لتجاهل الأخطاء التي يلقيها [`AbortController.abort()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort):
 
 **webpack.config.js**
 
@@ -361,13 +341,13 @@ export default {
 };
 ```
 
-W> The function will not have access to the variables declared in the outer scope within the configuration file.
+W> لن يتمكن function من الوصول إلى المتغيرات المعلنة في النطاق الخارجي داخل ملف التخصيص.
 
-### progress
+### التقدم
 
 `boolean`
 
-Prints compilation progress in percentage in the browser.
+يطبع compilation التقدم بالنسبة المئوية في browser.
 
 **webpack.config.js**
 
@@ -382,25 +362,25 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-progress
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-client-progress
 ```
 
-### reconnect
+### أعد الاتصال
 
 `boolean = true` `number`
 
 <Badge text="v4.4.0+" />
 
-Tells dev-server the number of times it should try to reconnect the client. When `true` it will try to reconnect unlimited times.
+يخبر dev-server number بالمرات التي يجب أن يحاول فيها إعادة توصيل client. عندما `true` سيحاول إعادة الاتصال مرات غير محدودة.
 
 **webpack.config.js**
 
@@ -415,13 +395,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-reconnect
 ```
 
-When set to `false` it will not try to reconnect.
+عند التعيين على `false`، لن يحاول إعادة الاتصال.
 
 ```js
 export default {
@@ -434,13 +414,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --no-client-reconnect
 ```
 
-You can also specify the exact number of times the client should try to reconnect.
+يمكنك أيضًا تحديد number بالضبط للمرات التي يجب أن يحاول فيها client إعادة الاتصال.
 
 ```js
 export default {
@@ -453,7 +433,7 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-reconnect 5
@@ -463,9 +443,9 @@ npx webpack serve --client-reconnect 5
 
 `'ws' | 'sockjs'` `string`
 
-This option allows us either to choose the current `devServer` transport mode for clients individually or to provide custom client implementation. This allows specifying how the browser or other client communicates with the `devServer`.
+يتيح لنا هذا الخيار إما اختيار وضع النقل `devServer` الحالي للعملاء بشكل فردي أو توفير تنفيذ client مخصص. يسمح هذا بتحديد كيفية اتصال browser أو client الأخرى مع `devServer`.
 
-T> Providing `'ws'` or `'sockjs'` to [`webSocketServer`](#devserverwebsocketserver) is a shortcut to setting both `devServer.client.webSocketTransport` and `devServer.webSocketServer` to the given value.
+T> يعد توفير `'ws'` أو `'sockjs'` إلى [`webSocketServer`](#devserverwebsocketserver) اختصارًا لتعيين كل من `devServer.client.webSocketTransport` و`devServer.webSocketServer` إلى القيمة المحددة.
 
 **webpack.config.js**
 
@@ -481,17 +461,17 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-web-socket-transport ws --web-socket-server-type ws
 ```
 
-T> When providing a custom client and server implementation make sure that they are compatible with one another to communicate successfully.
+T> عند توفير تطبيق مخصص client وserver تأكد من توافقهما مع بعضهما البعض للتواصل بنجاح.
 
-To create a custom client implementation, create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js).
+لإنشاء تطبيق client مخصص، قم بإنشاء فئة تمتد [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js).
 
-Using path to `CustomClient.js`, a custom WebSocket client implementation, along with the compatible `'ws'` server:
+باستخدام المسار إلى `CustomClient.js`، تطبيق WebSocket client المخصص، بالإضافة إلى `'ws'` server المتوافق:
 
 **webpack.config.js**
 
@@ -507,7 +487,7 @@ export default {
 };
 ```
 
-Using custom, compatible WebSocket client and server implementations:
+استخدام تطبيقات WebSocket client وserver المخصصة والمتوافقة:
 
 **webpack.config.js**
 
@@ -527,7 +507,7 @@ export default {
 
 `string` `object`
 
-This option allows specifying URL to web socket server (useful when you're proxying dev server and client script does not always know where to connect to).
+يسمح هذا الخيار بتحديد عنوان URL لـ WebSocket server، وهذا مفيد عندما تضع dev-server خلف proxy ولا يعرف client script دائمًا أين يتصل.
 
 **webpack.config.js**
 
@@ -542,20 +522,20 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --client-web-socket-url ws://0.0.0.0:8080/ws
 ```
 
-You can also specify an object with the following properties:
+يمكنك أيضًا تحديد object بالخصائص التالية:
 
-- `hostname`: Tells clients connected to devServer to use the provided hostname.
-- `pathname`: Tells clients connected to devServer to use the provided path to connect.
-- `password`: Tells clients connected to devServer to use the provided password to authenticate.
-- `port`: Tells clients connected to devServer to use the provided port.
-- `protocol`: Tells clients connected to devServer to use the provided protocol.
-- `username`: Tells clients connected to devServer to use the provided username to authenticate.
+- `hostname`: يخبر العملاء المتصلين بـ devServer لاستخدام اسم المضيف المقدم.
+- `pathname`: يخبر العملاء المتصلين بـ devServer لاستخدام المسار المتوفر للاتصال.
+- `password`: يخبر العملاء المتصلين بـ devServer لاستخدام كلمة المرور المقدمة للمصادقة.
+- `port`: يخبر العملاء المتصلين بـ devServer باستخدام المنفذ المتوفر.
+- `protocol`: يخبر العملاء المتصلين بـ devServer لاستخدام البروتوكول المتوفر.
+- `username`: يخبر العملاء المتصلين بـ devServer لاستخدام اسم المستخدم المقدم للمصادقة.
 
 **webpack.config.js**
 
@@ -577,13 +557,13 @@ export default {
 };
 ```
 
-T> To get `protocol`/`hostname`/`port` from browser use `webSocketURL: 'auto://0.0.0.0:0/ws'`.
+T> للحصول على `protocol`/`hostname`/`port` من browser استخدم `webSocketURL: 'auto://0.0.0.0:0/ws'`.
 
 ## devServer.compress
 
 `boolean = true`
 
-Enable [gzip compression](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/) for everything served:
+تمكين [ضغط gzip](https://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/) لكل ما يتم تقديمه:
 
 **webpack.config.js**
 
@@ -596,13 +576,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --compress
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-compress
@@ -612,7 +592,7 @@ npx webpack serve --no-compress
 
 `object`
 
-Provide options to [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) which handles webpack assets.
+قم بتوفير خيارات لـ [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) الذي يتعامل مع webpack assets.
 
 **webpack.config.js**
 
@@ -634,7 +614,7 @@ export default {
 
 `array` `function` `object`
 
-Adds headers to all responses:
+إضافة رؤوس إلى كافة الردود:
 
 **webpack.config.js**
 
@@ -649,7 +629,7 @@ export default {
 };
 ```
 
-You can also pass an array:
+يمكنك أيضًا تمرير array:
 
 **webpack.config.js**
 
@@ -671,7 +651,7 @@ export default {
 };
 ```
 
-You can also pass a function:
+يمكنك أيضًا تمرير function:
 
 ```js
 export default {
@@ -686,7 +666,7 @@ export default {
 
 `boolean = false` `object`
 
-When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable `devServer.historyApiFallback` by setting it to `true`:
+عند استخدام [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History)، من المحتمل أن يتم عرض صفحة `index.html` بدلاً من أي ردود `404`. قم بتمكين `devServer.historyApiFallback` عن طريق ضبطه على `true`:
 
 **webpack.config.js**
 
@@ -699,19 +679,19 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --history-api-fallback
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-history-api-fallback
 ```
 
-By providing an object this behavior can be controlled further using options like `rewrites`:
+من خلال توفير object يمكن التحكم في هذا السلوك بشكل أكبر باستخدام خيارات مثل `rewrites`:
 
 **webpack.config.js**
 
@@ -730,7 +710,7 @@ export default {
 };
 ```
 
-When using dots in your path (common with Angular), you may need to use the `disableDotRule`:
+عند استخدام النقاط في المسار الخاص بك (الشائعة مع Angular)، قد تحتاج إلى استخدام `disableDotRule`:
 
 **webpack.config.js**
 
@@ -745,13 +725,13 @@ export default {
 };
 ```
 
-For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
+لمزيد من الخيارات والمعلومات، راجع وثائق [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback).
 
 ## devServer.host
 
 `'local-ip' | 'local-ipv4' | 'local-ipv6'` `string`
 
-Specify a host to use. If you want your server to be accessible externally, specify it like this:
+حدد مضيفًا للاستخدام. إذا كنت تريد إمكانية الوصول إلى server خارجيًا، فحدده على النحو التالي:
 
 **webpack.config.js**
 
@@ -764,13 +744,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --host 0.0.0.0
 ```
 
-This also works with IPv6:
+يعمل هذا أيضًا مع IPv6:
 
 ```bash
 npx webpack serve --host ::
@@ -778,7 +758,7 @@ npx webpack serve --host ::
 
 ### local-ip
 
-Specifying `local-ip` as host will try to resolve the host option as your local `IPv4` address if available, if `IPv4` is not available it will try to resolve your local `IPv6` address.
+تحديد `local-ip` كمضيف سيحاول resolve خيار المضيف كعنوان `IPv4` المحلي إذا كان متاحًا، وإذا لم يكن `IPv4` متاحًا، فسيحاول resolve عنوان `IPv6` المحلي الخاص بك.
 
 ```bash
 npx webpack serve --host local-ip
@@ -786,7 +766,7 @@ npx webpack serve --host local-ip
 
 ### local-ipv4
 
-Specifying `local-ipv4` as host will try to resolve the host option as your local `IPv4` address.
+تحديد `local-ipv4` كمضيف سيحاول resolve خيار المضيف كعنوان `IPv4` المحلي الخاص بك.
 
 ```bash
 npx webpack serve --host local-ipv4
@@ -794,7 +774,7 @@ npx webpack serve --host local-ipv4
 
 ### local-ipv6
 
-Specifying local-ipv6 as host will try to resolve the host option as your local IPv6 address.
+سيؤدي تحديد local-ipv6 كمضيف إلى محاولة resolve خيار المضيف كعنوان IPv6 المحلي الخاص بك.
 
 ```bash
 npx webpack serve --host local-ipv6
@@ -804,7 +784,7 @@ npx webpack serve --host local-ipv6
 
 `'only'` `boolean = true`
 
-Enable webpack's [Hot Module Replacement](/concepts/hot-module-replacement/) feature:
+تمكين ميزة [Hot Module Replacement](/concepts/hot-module-replacement/) الخاصة بـ webpack:
 
 **webpack.config.js**
 
@@ -817,19 +797,19 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --hot
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-hot
 ```
 
-To enable Hot Module Replacement without page refresh as a fallback in case of build failures, use `hot: 'only'`:
+لتمكين Hot Module Replacement بدون تحديث الصفحة كإجراء احتياطي في حالة فشل build، استخدم `hot: 'only'`:
 
 **webpack.config.js**
 
@@ -842,21 +822,21 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --hot only
 ```
 
-T> Since webpack-dev-server v4, HMR is enabled by default. It automatically applies [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) which is required to enable HMR. So you don't have to add this plugin to your `webpack.config.js` when `hot` is set to `true` in config or via the CLI option `--hot`. See the [HMR concepts page](/concepts/hot-module-replacement/) for more information.
+T> نظرًا لأن webpack-dev-server v4، يتم تمكين HMR افتراضيًا. يتم تطبيق [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) تلقائيًا وهو أمر مطلوب لتمكين HMR. لذلك لا يتعين عليك إضافة هذا plugin إلى `webpack.config.js` عندما يتم ضبط `hot` على `true` في التخصيص أو عبر خيار CLI `--hot`. راجع [HMR صفحة المفاهيم](/concepts/hot-module-replacement/) لمزيد من المعلومات.
 
 ## devServer.ipc
 
 `true` `string`
 
-The Unix socket to listen to (instead of a [`host`](#devserverhost)).
+مقبس Unix للاستماع إليه (بدلاً من [`host`](#devserverhost)).
 
-Setting it to `true` will listen to a socket at `/your-os-temp-dir/webpack-dev-server.sock`:
+سيؤدي ضبطه على `true` إلى الاستماع إلى المقبس عند `/your-os-temp-dir/webpack-dev-server.sock`:
 
 **webpack.config.js**
 
@@ -869,13 +849,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --ipc
 ```
 
-You can also listen to a different socket with:
+يمكنك أيضًا الاستماع إلى مقبس مختلف باستخدام:
 
 **webpack.config.js**
 
@@ -898,7 +878,7 @@ export default {
 
 `boolean = true`
 
-By default, the dev-server will reload/refresh the page when file changes are detected. [`devServer.hot`](#devserverhot) option must be disabled or [`devServer.watchFiles`](#devserverwatchfiles) option must be enabled in order for `liveReload` to take effect. Disable `devServer.liveReload` by setting it to `false`:
+افتراضيًا، سيقوم dev-server بإعادة تحميل/تحديث الصفحة عند اكتشاف تغييرات في الملف. يجب تعطيل خيار [`devServer.hot`](#devserverhot) أو يجب تمكين خيار [`devServer.watchFiles`](#devserverwatchfiles) حتى يصبح `liveReload` ساري المفعول. قم بتعطيل `devServer.liveReload` عن طريق ضبطه على `false`:
 
 **webpack.config.js**
 
@@ -911,25 +891,25 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --live-reload
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-live-reload
 ```
 
-W> Live reloading works only with web related [targets](/configuration/target/#string) like `web`, `webworker`, `electron-renderer` and `node-webkit`.
+W> تعمل إعادة التحميل المباشر فقط مع [targets](/configuration/target/#string) المرتبطة بالويب مثل `web`، `webworker`، `electron-renderer` و`node-webkit`.
 
 ## devserver.onListening
 
 `function (devServer)`
 
-Provides the ability to execute a custom function when webpack-dev-server starts listening for connections on a port.
+يوفر القدرة على تنفيذ function مخصص عندما يبدأ webpack-dev-server في الاستماع للاتصالات الموجودة على المنفذ.
 
 **webpack.config.js**
 
@@ -953,7 +933,7 @@ export default {
 
 `boolean` `string` `object` `[string, object]`
 
-Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
+يخبر dev-server بفتح browser بعد بدء server. اضبطه على `true` لفتح browser الافتراضي.
 
 **webpack.config.js**
 
@@ -966,19 +946,19 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --open
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-open
 ```
 
-To open a specified page in a browser:
+لفتح صفحة محددة في browser:
 
 **webpack.config.js**
 
@@ -991,13 +971,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --open /my-page
 ```
 
-To open multiple specified pages in browser:
+لفتح عدة صفحات محددة في browser:
 
 **webpack.config.js**
 
@@ -1010,13 +990,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --open /my-page --open /another-page
 ```
 
-Provide browser name to use instead of the default one:
+قم بتوفير اسم browser لاستخدامه بدلاً من الاسم الافتراضي:
 
 **webpack.config.js**
 
@@ -1033,13 +1013,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --open-app-name 'google-chrome'
 ```
 
-The object accepts all [open](https://www.npmjs.com/package/open) options:
+يقبل object جميع خيارات [فتح](https://www.npmjs.com/package/open):
 
 **webpack.config.js**
 
@@ -1058,13 +1038,13 @@ export default {
 };
 ```
 
-T> The browser application name is platform-dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux, and `'chrome'` on Windows.
+T> يعتمد اسم التطبيق browser على النظام الأساسي. لا تقم بترميزها بشكل قابل لإعادة الاستخدام modules. على سبيل المثال، `'Chrome'` هو `'Google Chrome'` على نظام التشغيل macOS، و`'google-chrome'` على نظام Linux، و`'chrome'` على نظام Windows.
 
 ## devServer.port
 
 `'auto'` `string` `number`
 
-Specify a port number to listen for requests on:
+حدد منفذ number للاستماع للطلبات على:
 
 **webpack.config.js**
 
@@ -1077,13 +1057,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --port 8080
 ```
 
-`port` option can't be `null` or an empty string, to automatically use a free port please use `port: 'auto'`:
+لا يمكن أن يكون خيار `port` `null` أو string فارغًا، لاستخدام منفذ مجاني تلقائيًا، يرجى استخدام `port: 'auto'`:
 
 **webpack.config.js**
 
@@ -1096,7 +1076,7 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --port auto
@@ -1106,11 +1086,11 @@ npx webpack serve --port auto
 
 `[object, function]`
 
-Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
+يمكن أن يكون تفويض بعض عناوين URL مفيدًا عندما يكون لديك تطوير خلفي منفصل API server وتريد إرسال طلبات API على نفس النطاق.
 
-The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Check out its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages. Note that some of `http-proxy-middleware`'s features do not require a `target` key, e.g. its `router` feature, but you will still need to include a `target` key in your configuration here, otherwise `webpack-dev-server` won't pass it along to `http-proxy-middleware`.
+يستفيد dev-server من [http-proxy-middleware] القوي (https://github.com/chimurai/http-proxy-middleware) package. تحقق من [الوثائق](https://github.com/chimurai/http-proxy-middleware#options) لمعرفة المزيد من الاستخدامات المتقدمة. لاحظ أن بعض ميزات `http-proxy-middleware` لا تتطلب مفتاح `target`، على سبيل المثال، ميزة `router` الخاصة بها، ولكنك ستظل بحاجة إلى تضمين مفتاح `target` في التخصيص الخاص بك هنا، وإلا فلن يمرره `webpack-dev-server` إلى `http-proxy-middleware`.
 
-With a backend on `localhost:3000`, you can use this to enable proxying:
+مع الواجهة الخلفية على `localhost:3000`، يمكنك استخدام هذا لتمكين الوكيل:
 
 **webpack.config.js**
 
@@ -1128,9 +1108,9 @@ export default {
 };
 ```
 
-A request to `/api/users` will now proxy the request to `http://localhost:3000/api/users`.
+سيؤدي الطلب إلى `/api/users` الآن إلى وكيل الطلب إلى `http://localhost:3000/api/users`.
 
-If you don't want `/api` to be passed along, we need to rewrite the path:
+إذا كنت لا تريد تمرير `/api`، فنحن بحاجة إلى إعادة كتابة المسار:
 
 **webpack.config.js**
 
@@ -1149,7 +1129,7 @@ export default {
 };
 ```
 
-A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your configuration like this:
+لن يتم قبول الواجهة الخلفية server التي تعمل على HTTPS بشهادة غير صالحة افتراضيًا. إذا كنت ترغب في ذلك، قم بتعديل التخصيص الخاص بك مثل هذا:
 
 **webpack.config.js**
 
@@ -1168,15 +1148,15 @@ export default {
 };
 ```
 
-Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
+في بعض الأحيان لا تريد وكيل كل شيء. من الممكن تجاوز الوكيل بناءً على القيمة المرجعة لـ function.
 
-In the function, you get access to the request, response, and proxy options.
+في function، يمكنك الوصول إلى خيارات الطلب والاستجابة والوكيل.
 
-- Return `null` or `undefined` to continue processing the request with proxy.
-- Return `false` to produce a 404 error for the request.
-- Return a path to serve from, instead of continuing to proxy the request.
+- قم بإرجاع `null` أو `undefined` لمواصلة معالجة الطلب بالوكيل.
+- قم بإرجاع `false` لإنتاج خطأ 404 للطلب.
+- قم بإرجاع مسار للعرض منه، بدلاً من الاستمرار في وكيل الطلب.
 
-E.g. for a browser request, you want to serve an HTML page, but for an API request, you want to proxy it. You could do something like this:
+على سبيل المثال بالنسبة لطلب browser، فأنت تريد عرض صفحة HTML، ولكن بالنسبة لطلب API، فأنت تريد إنشاء وكيل لها. يمكنك أن تفعل شيئا مثل هذا:
 
 **webpack.config.js**
 
@@ -1200,9 +1180,9 @@ export default {
 };
 ```
 
-W> The `bypass` option is deprecated for proxy in favor of the `router` and the `context` options. [Read more here](https://github.com/chimurai/http-proxy-middleware/tree/v2.0.6#http-proxy-middleware-options).
+W> تم إهمال الخيار `bypass` للوكيل لصالح الخيارين `router` و`context`. [اقرأ المزيد هنا](https://github.com/chimurai/http-proxy-middleware/tree/v2.0.6#http-proxy-middleware-options).
 
-If you want to proxy multiple, specific paths to the same target, you can use an array of one or more objects with a `context` property:
+إذا كنت تريد إنشاء مسارات متعددة ومحددة لنفس target، فيمكنك استخدام array لكائن واحد أو أكثر مع خاصية `context`:
 
 **webpack.config.js**
 
@@ -1220,7 +1200,7 @@ export default {
 };
 ```
 
-Note that requests to root won't be proxied by default. To enable root proxying, the [`devMiddleware.index`](#devserverdevmiddleware) option should be specified as a falsy value:
+لاحظ أن طلبات الوصول إلى الجذر لن يتم تحويلها إلى وكيل افتراضيًا. لتمكين وكيل الجذر، يجب تحديد الخيار [`devMiddleware.index`](#devserverdevmiddleware) كقيمة زائفة:
 
 **webpack.config.js**
 
@@ -1241,7 +1221,7 @@ export default {
 };
 ```
 
-The origin of the host header is kept when proxying by default, you can set `changeOrigin` to `true` to override this behaviour. It is useful in some cases like using [name-based virtual hosted sites](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
+يتم الاحتفاظ بأصل رأس المضيف عند إنشاء الوكيل افتراضيًا، ويمكنك ضبط `changeOrigin` على `true` لتجاوز هذا السلوك. يكون مفيدًا في بعض الحالات مثل استخدام [المواقع الافتراضية المستضافة القائمة على الاسم](https://en.wikipedia.org/wiki/Virtual_hosting#Name-based).
 
 **webpack.config.js**
 
@@ -1266,7 +1246,7 @@ export default {
 
 <Badge text="v4.4.0+" />
 
-Allows to set server and options (by default 'http').
+يسمح بتعيين server والخيارات (افتراضيًا "http").
 
 **webpack.config.js**
 
@@ -1279,13 +1259,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --server-type http
 ```
 
-To serve over `HTTPS` with a self-signed certificate:
+لخدمة أكثر من `HTTPS` بشهادة موقعة ذاتيًا:
 
 **webpack.config.js**
 
@@ -1298,13 +1278,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --server-type https
 ```
 
-To serve over `HTTP/2` using [spdy](https://www.npmjs.com/package/spdy) with a self-signed certificate:
+للعرض على `HTTP/2` باستخدام [spdy](https://www.npmjs.com/package/spdy) مع شهادة موقعة ذاتيًا:
 
 **webpack.config.js**
 
@@ -1317,15 +1297,15 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --server-type spdy
 ```
 
-W> This option is ignored for Node 15.0.0 and above, as [spdy is broken for those versions](https://github.com/spdy-http2/node-spdy/issues/380). The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
+W> يتم تجاهل هذا الخيار في Node.js 15.0.0 وما بعده، لأن [spdy معطّل لتلك الإصدارات](https://github.com/spdy-http2/node-spdy/issues/380). وسيُنقل dev-server إلى HTTP/2 المدمج في Node.js بمجرد أن يدعمه [Express](https://expressjs.com/).
 
-Use the object syntax to provide your own certificate:
+استخدم بناء الجملة object لتقديم شهادتك الخاصة:
 
 **webpack.config.js**
 
@@ -1348,13 +1328,13 @@ export default {
 };
 ```
 
-Usage via the CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --server-type https --server-options-key ./path/to/server.key --server-options-cert ./path/to/server.crt --server-options-ca ./path/to/ca.pem --server-options-passphrase webpack-dev-server
 ```
 
-It also allows you to set additional [TLS options](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) like `minVersion` and you can directly pass the contents of respective files:
+كما يسمح لك أيضًا بتعيين [خيارات TLS](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) إضافية مثل `minVersion` ويمكنك تمرير محتويات الملفات المعنية مباشرة:
 
 **webpack.config.js**
 
@@ -1389,7 +1369,7 @@ export default {
 
 `boolean = true`
 
-Allows to close dev server and exit the process on `SIGINT` and `SIGTERM` signals.
+يسمح بإغلاق dev server والخروج من العملية عند إشارات `SIGINT` و`SIGTERM`.
 
 **webpack.config.js**
 
@@ -1408,7 +1388,7 @@ export default {
 
 <Badge text="v4.7.0+" />
 
-Provides the ability to execute a custom function and apply custom middleware(s).
+يوفر القدرة على تنفيذ function مخصص وتطبيق البرامج الوسيطة المخصصة.
 
 **webpack.config.js**
 
@@ -1425,8 +1405,8 @@ export default {
         response.send("setup-middlewares option GET");
       });
 
-      // Use the `unshift` method if you want to run a middleware before all other middlewares
-      // or when you are migrating from the `onBeforeSetupMiddleware` option
+      // استخدم الطريقة `unshift` إذا كنت تريد تشغيل برنامج وسيط قبل كافة البرامج الوسيطة الأخرى
+      // أو عند الترحيل من الخيار `onBeforeSetupMiddleware`
       middlewares.unshift({
         name: "first-in-array",
         // `path` is optional
@@ -1436,8 +1416,8 @@ export default {
         },
       });
 
-      // Use the `push` method if you want to run a middleware after all other middlewares
-      // or when you are migrating from the `onAfterSetupMiddleware` option
+      // استخدم الطريقة `push` إذا كنت تريد تشغيل برنامج وسيط بعد كل البرامج الوسيطة الأخرى
+      // أو عند الترحيل من الخيار `onAfterSetupMiddleware`
       middlewares.push({
         name: "hello-world-test-one",
         // `path` is optional
@@ -1461,7 +1441,7 @@ export default {
 
 `boolean` `string` `object` `[string, object]`
 
-This option allows configuring options for serving static files from the directory (by default 'public' directory). To disable set it to `false`:
+يتيح هذا الخيار تخصيص خيارات لخدمة الملفات الثابتة من الدليل (بشكل افتراضي الدليل "العام"). لتعطيله، اضبطه على `false`:
 
 **webpack.config.js**
 
@@ -1474,19 +1454,19 @@ export default {
 };
 ```
 
-Usage via CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --static
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-static
 ```
 
-To watch a single directory:
+إلى watch دليل واحد:
 
 **webpack.config.js**
 
@@ -1499,13 +1479,13 @@ export default {
 };
 ```
 
-Usage via CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --static assets
 ```
 
-To watch multiple static directories:
+إلى watch أدلة ثابتة متعددة:
 
 **webpack.config.js**
 
@@ -1518,17 +1498,19 @@ export default {
 };
 ```
 
-Usage via CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --static assets --static css
 ```
 
-### directory
+### الدليل
+
+<span id="directory"></span>
 
 `string = path.join(process.cwd(), 'public')`
 
-Tell the server where to serve the content from. This is only necessary if you want to serve static files. [`static.publicPath`](#publicpath) will be used to determine where the bundles should be served from and takes precedence.
+أخبر server من أين سيتم تقديم المحتوى. يعد هذا ضروريًا فقط إذا كنت تريد تقديم ملفات ثابتة. سيتم استخدام [`static.publicPath`](#publicpath) لتحديد المكان الذي يجب تقديم bundles منه ويكون له الأولوية.
 
 **webpack.config.js**
 
@@ -1549,7 +1531,7 @@ export default {
 };
 ```
 
-Provide an array of objects in case you have multiple static folders:
+قم بتوفير array من الكائنات في حالة وجود مجلدات ثابتة متعددة:
 
 **webpack.config.js**
 
@@ -1575,13 +1557,13 @@ export default {
 };
 ```
 
-T> It is recommended to use an absolute path.
+T> يوصى باستخدام المسار المطلق.
 
 ### staticOptions
 
 `object`
 
-It is possible to configure advanced options for serving static files from [`static.directory`](#directory). See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options.
+من الممكن تخصيص خيارات متقدمة لخدمة الملفات الثابتة من [`static.directory`](#directory). راجع [الوثائق السريعة](http://expressjs.com/en/4x/api.html#express.static) للتعرف على الخيارات الممكنة.
 
 **webpack.config.js**
 
@@ -1602,7 +1584,7 @@ export default {
 
 `string = '/'` `[string]`
 
-Tell the server at which URL to serve [`static.directory`](#directory) content. For example to serve a file `assets/manifest.json` at `/serve-public-path-url/manifest.json`, your configurations should be as following:
+أخبر server بعنوان URL الذي سيتم عرض محتوى [`static.directory`](#directory) عليه. على سبيل المثال، لعرض ملف `assets/manifest.json` في `/serve-public-path-url/manifest.json`، يجب أن تكون التخصيصات الخاصة بك كما يلي:
 
 **webpack.config.js**
 
@@ -1624,7 +1606,7 @@ export default {
 };
 ```
 
-Provide an array of objects in case you have multiple static folders:
+قم بتوفير array من الكائنات في حالة وجود مجلدات ثابتة متعددة:
 
 **webpack.config.js**
 
@@ -1652,13 +1634,13 @@ export default {
 };
 ```
 
-### serveIndex
+### serverIndex
 
 `boolean` `object = { icons: true }`
 
-Tell dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) middleware when enabled.
+أخبر dev-server باستخدام البرنامج الوسيط [`serveIndex`](https://github.com/expressjs/serve-index) عند تمكينه.
 
-[`serveIndex`](https://github.com/expressjs/serve-index) middleware generates directory listings on viewing directories that don't have an `index.html` file.
+[`serveIndex`](https://github.com/expressjs/serve-index) تنشئ البرامج الوسيطة قوائم الأدلة عند عرض الدلائل التي لا تحتوي على ملف `index.html`.
 
 **webpack.config.js**
 
@@ -1680,13 +1662,13 @@ export default {
 };
 ```
 
-Usage via CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --static-serve-index
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-static-serve-index
@@ -1696,7 +1678,7 @@ npx webpack serve --no-static-serve-index
 
 `boolean` `object`
 
-Tell dev-server to watch the files served by the [`static.directory`](#directory) option. It is enabled by default, and file changes will trigger a full page reload. This can be disabled by setting the `watch` option to `false`.
+أخبر dev-server إلى watch بالملفات التي يقدمها الخيار [`static.directory`](#directory). يتم تمكينه افتراضيًا، وستؤدي تغييرات الملف إلى إعادة تحميل الصفحة بالكامل. يمكن تعطيل ذلك عن طريق ضبط خيار `watch` على `false`.
 
 **webpack.config.js**
 
@@ -1718,19 +1700,19 @@ export default {
 };
 ```
 
-Usage via CLI:
+الاستخدام عبر CLI:
 
 ```bash
 npx webpack serve --static-watch
 ```
 
-To disable:
+للتعطيل:
 
 ```bash
 npx webpack serve --no-static-watch
 ```
 
-It is possible to configure advanced options for watching static files from [`static.directory`](#directory). See the [`chokidar`](https://github.com/paulmillr/chokidar) documentation for the possible options.
+من الممكن تخصيص خيارات متقدمة للملفات الثابتة watching من [`static.directory`](#directory). راجع وثائق [`chokidar`](https://github.com/paulmillr/chokidar) للتعرف على الخيارات الممكنة.
 
 **webpack.config.js**
 
@@ -1759,7 +1741,7 @@ export default {
 
 `string` `object` `[string, object]`
 
-This option allows you to configure a list of globs/directories/files to watch for file changes. For example:
+يتيح لك هذا الخيار تخصيص قائمة من globs/directories/files إلى watch لتغييرات الملف. على سبيل المثال:
 
 **webpack.config.js**
 
@@ -1772,7 +1754,7 @@ export default {
 };
 ```
 
-It is possible to configure advanced options for watching files. See the [`chokidar`](https://github.com/paulmillr/chokidar) documentation for the possible options.
+من الممكن تخصيص خيارات متقدمة لملفات watching. راجع وثائق [`chokidar`](https://github.com/paulmillr/chokidar) للتعرف على الخيارات الممكنة.
 
 **webpack.config.js**
 
@@ -1794,9 +1776,9 @@ export default {
 
 `false | 'sockjs' | 'ws'` `string` `function` `object`
 
-This option allows us either to choose the current web-socket server or to provide custom web-socket server implementation.
+يتيح هذا الخيار اختيار WebSocket server الحالي أو توفير تنفيذ WebSocket server مخصص.
 
-The current default mode is `'ws'`. This mode uses [`ws`](https://www.npmjs.com/package/ws) as a server, and native WebSockets on the client.
+الوضع الافتراضي الحالي هو `'ws'`. يستخدم هذا الوضع [`ws`](https://www.npmjs.com/package/ws) باعتباره server، وWebSockets الأصلي على client.
 
 **webpack.config.js**
 
@@ -1809,9 +1791,9 @@ export default {
 };
 ```
 
-To create a custom server implementation, create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
+لإنشاء تطبيق server مخصص، قم بإنشاء فئة تمتد [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
 
-Using path to `CustomServer.js`, a custom WebSocket server implementation, along with the compatible `'ws'` client:
+باستخدام المسار إلى `CustomServer.js`، تطبيق WebSocket server المخصص، بالإضافة إلى `'ws'` client المتوافق:
 
 **webpack.config.js**
 
@@ -1827,7 +1809,7 @@ export default {
 };
 ```
 
-Using custom, compatible WebSocket client and server implementations:
+استخدام تطبيقات WebSocket client وserver المخصصة والمتوافقة:
 
 **webpack.config.js**
 

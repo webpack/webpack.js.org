@@ -28,6 +28,7 @@ export default defineConfig([
     extends: [configs["browser/recommended-outdated-module"]],
     files: [
       "src/components/**/*.{js,jsx}",
+      "src/config/site.js",
       "src/utilities/test-local-storage.js",
       "src/*.jsx",
       "src/sw.js",

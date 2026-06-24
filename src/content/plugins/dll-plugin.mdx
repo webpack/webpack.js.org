@@ -1,85 +1,77 @@
 ---
 title: DllPlugin
-group: webpack
 contributors:
-  - aretecode
-  - sokra
-  - opiepj
-  - simon04
-  - skipjack
-  - byzyk
-  - EugeneHlushko
-  - EslamHiko
-  - snitin315
+  - RlxChap2
+group: webpack
 related:
   - title: Code Splitting Example
     url: https://github.com/webpack/webpack/blob/main/examples/explicit-vendor-chunk/README.md
 ---
 
-The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance. The term "DLL" stands for Dynamic-link library which was originally introduced by Microsoft.
+يوفر `DllPlugin` و`DllReferencePlugin` طريقة لتقسيم bundles بشكل قد يحسّن أداء وقت البناء بدرجة كبيرة. مصطلح "DLL" اختصار لـ Dynamic-link library، وقد ظهر في الأصل من Microsoft.
 
 ## DllPlugin
 
-This plugin is used in a separate webpack configuration exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](#dllreferenceplugin) to map dependencies.
+يُستخدم هذا plugin داخل إعداد webpack منفصل، وهدفه الوحيد إنشاء bundle خاص بالـ dll. ينشئ ملف `manifest.json`، ويستخدمه [`DllReferencePlugin`](#dllreferenceplugin) لربط dependencies بمعرّفاتها.
 
-- `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
-- `format` (boolean = false): If `true`, manifest json file (output) will be formatted.
-- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js): `[fullhash]`, `[chunkhash]`, `[contenthash]`, & `[name]` )
-- `path`: **absolute path** to the manifest json file (output)
-- `entryOnly` (boolean = true): if `true`, only entry points will be exposed
-- `type`: type of the dll bundle
+- `context` (اختياري): سياق requests داخل ملف manifest. القيمة الافتراضية هي سياق webpack.
+- `format` (boolean = false): إذا كانت `true`، فسيتم تنسيق ملف manifest بصيغة JSON عند إخراجه.
+- `name`: اسم دالة dll التي سيتم كشفها. يدعم [TemplatePaths](https://github.com/webpack/webpack/blob/main/lib/TemplatedPathPlugin.js) مثل: `[fullhash]` و`[chunkhash]` و`[contenthash]` و`[name]`.
+- `path`: **مسار مطلق** إلى ملف manifest بصيغة JSON الذي سيتم إخراجه.
+- `entryOnly` (boolean = true): إذا كانت `true`، فلن يتم كشف إلا entry points.
+- `type`: نوع dll bundle.
 
 ```js
 new webpack.DllPlugin(options);
 ```
 
-W> When webpack output uses [code splitting](/guides/code-splitting), we should use [Template strings](/configuration/output/#template-strings) in `path` to ensure that webpack generates multiple manifest files.
+W> عندما يستخدم output في webpack ميزة [code splitting](/guides/code-splitting)، يجب استخدام [Template strings](/configuration/output/#template-strings) في `path` حتى ينشئ webpack عدة ملفات manifest.
 
-W> We recommend using DllPlugin only with `entryOnly: true`, otherwise tree shaking in the DLL won't work as all the exports might be used.
+W> نوصي باستخدام DllPlugin مع `entryOnly: true` فقط؛ لأن tree shaking داخل DLL لن يعمل إذا كانت كل exports قد تُعد مستخدمة.
 
-Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests to module ids. It is used by the `DllReferencePlugin`.
+ينشئ هذا plugin ملف `manifest.json` ويكتبه في `path` المحدد. يحتوي الملف على ربط بين طلبات `require` و`import` وبين module ids. ويستخدمه `DllReferencePlugin`.
 
-Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
+ادمج هذا plugin مع خيار [`output.library`](/configuration/output/#outputlibrary) لكشف دالة dll، أي جعلها متاحة في global scope.
 
 ## DllReferencePlugin
 
-This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
+يُستخدم هذا plugin داخل إعداد webpack الأساسي، ويشير إلى dll-only-bundle أو عدة bundles حتى يستعمل dependencies المبنية مسبقًا بدل بنائها من جديد.
 
-- `context`: (**absolute path**) context of requests in the manifest (or content property)
-- `extensions`: Extensions used to resolve modules in the dll bundle (only used when using 'scope').
-- `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
-- `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
-- `name` (optional): an identifier where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
-- `scope` (optional): prefix which is used for accessing the content of the dll
-- `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#outputlibrarytarget))
+- `context`: (**مسار مطلق**) سياق requests داخل manifest أو الخاصية `content`.
+- `extensions`: الامتدادات المستخدمة لحل modules داخل dll bundle. تُستخدم فقط عند استخدام `scope`.
+- `manifest`: كائن يحتوي على `content` و`name`، أو نص يمثل المسار المطلق إلى ملف JSON manifest الذي سيُحمّل أثناء compilation.
+- `content` (اختياري): الربط بين request وmodule id. القيمة الافتراضية هي `manifest.content`.
+- `name` (اختياري): معرّف المكان الذي كُشف فيه dll. القيمة الافتراضية هي `manifest.name`. راجع أيضًا [`externals`](/configuration/externals/).
+- `scope` (اختياري): بادئة تُستخدم للوصول إلى محتوى dll.
+- `sourceType` (اختياري): طريقة كشف dll. راجع [libraryTarget](/configuration/output/#outputlibrarytarget).
 
 ```js
 new webpack.DllReferencePlugin(options);
 ```
 
-References a dll manifest file to map dependency names to module ids, then requires them as needed using the internal `__webpack_require__` function.
+يشير إلى ملف dll manifest لربط أسماء dependencies بـ module ids، ثم يطلبها عند الحاجة باستخدام الدالة الداخلية `__webpack_require__`.
 
-W> Keep the `name` consistent with [`output.library`](/configuration/output/#outputlibrary).
+W> حافظ على تطابق `name` مع [`output.library`](/configuration/output/#outputlibrary).
 
-### Modes
+### الأوضاع
 
-This plugin can be used in two different modes, _scoped_ and _mapped_.
+يمكن استخدام هذا plugin بطريقتين: _scoped_ و _mapped_.
 
-#### Scoped Mode
+#### وضع Scoped
 
-The content of the dll is accessible under a module prefix. i.e. with `scope = 'xyz'` a file `abc` in the dll can be access via `require('xyz/abc')`.
+يمكن الوصول إلى محتوى dll تحت بادئة module. مثلًا، إذا كان `scope = 'xyz'`، وكان يوجد ملف `abc` داخل dll، فيمكن الوصول إليه عبر `require('xyz/abc')`.
 
-T> [See an example use of scope](https://github.com/webpack/webpack/tree/master/examples/dll-user)
+T> [راجع مثالًا لاستخدام scope](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
-#### Mapped Mode
+#### وضع Mapped
 
-The content of the dll is mapped to the current directory. If a required file matches a file in the dll (after resolving), then the file from the dll is used instead.
+يتم ربط محتوى dll بالمجلد الحالي. إذا تطابق ملف مطلوب مع ملف داخل dll بعد عملية resolving، فسيُستخدم الملف الموجود في dll بدل إدخاله في bundle الرئيسي.
 
-Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `import _ from "lodash"`/`require('lodash')` and `import abs from "./abc"`/`require('./abc')` will be used from the dll, rather than building them into the main bundle.
+لأن هذا يحدث بعد resolving لكل ملف داخل dll bundle، يجب أن تكون المسارات نفسها متاحة لدى التطبيق الذي يستهلك dll bundle. مثلًا، إذا كان dll يحتوي على `lodash` والملف `abc`، فسيتم أخذ `import _ from "lodash"` أو `require('lodash')`، وكذلك `import abs from "./abc"` أو `require('./abc')`، من dll بدل بنائها داخل bundle الرئيسي.
 
-## Usage
+## الاستخدام
 
-W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
+W> يُستخدم `DllReferencePlugin` و`DllPlugin` في إعدادين _منفصلين_ لـ webpack.
 
 **webpack.vendor.config.js**
 
@@ -114,26 +106,26 @@ new webpack.DllReferencePlugin({
 });
 ```
 
-## Examples
+## أمثلة
 
-[Vendor](https://github.com/webpack/webpack/tree/master/examples/dll) and [User](https://github.com/webpack/webpack/tree/master/examples/dll-user)
+[Vendor](https://github.com/webpack/webpack/tree/master/examples/dll) و[User](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
-_Two separate example folders. Demonstrates scope and context._
+_مجلدان منفصلان للأمثلة. يوضحان scope وcontext._
 
-T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
+T> يمكن استخدام عدة `DllPlugins` وعدة `DllReferencePlugins`.
 
-## References
+## المراجع
 
-### Source
+### المصدر
 
-- [DllPlugin source](https://github.com/webpack/webpack/blob/main/lib/DllPlugin.js)
-- [DllReferencePlugin source](https://github.com/webpack/webpack/blob/main/lib/DllReferencePlugin.js)
-- [DllEntryPlugin source](https://github.com/webpack/webpack/blob/main/lib/DllEntryPlugin.js)
-- [DllModuleFactory source](https://github.com/webpack/webpack/blob/main/lib/DllModuleFactory.js)
-- [ManifestPlugin source](https://github.com/webpack/webpack/blob/main/lib/LibManifestPlugin.js)
+- [مصدر DllPlugin](https://github.com/webpack/webpack/blob/main/lib/DllPlugin.js)
+- [مصدر DllReferencePlugin](https://github.com/webpack/webpack/blob/main/lib/DllReferencePlugin.js)
+- [مصدر DllEntryPlugin](https://github.com/webpack/webpack/blob/main/lib/DllEntryPlugin.js)
+- [مصدر DllModuleFactory](https://github.com/webpack/webpack/blob/main/lib/DllModuleFactory.js)
+- [مصدر ManifestPlugin](https://github.com/webpack/webpack/blob/main/lib/LibManifestPlugin.js)
 
-### Tests
+### الاختبارات
 
-- [DllPlugin creation test](https://github.com/webpack/webpack/blob/main/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
-- [DllPlugin without scope test](https://github.com/webpack/webpack/blob/main/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
-- [DllReferencePlugin use Dll test](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin)
+- [اختبار إنشاء DllPlugin](https://github.com/webpack/webpack/blob/main/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
+- [اختبار DllPlugin بدون scope](https://github.com/webpack/webpack/blob/main/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)
+- [اختبار استخدام DllReferencePlugin مع Dll](https://github.com/webpack/webpack/tree/master/test/configCases/dll-plugin)

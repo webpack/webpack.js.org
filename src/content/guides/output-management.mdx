@@ -1,25 +1,17 @@
 ---
-title: Output Management
+title: إدارة المخرجات (Output Management)
 sort: 3
 contributors:
-  - skipjack
-  - TheDutchCoder
-  - sudarsangp
-  - JGJP
-  - EugeneHlushko
-  - AnayaDesign
-  - chenxsan
-  - snitin315
-  - Brennvo
+  - arabpolice
 ---
 
-T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
+T> يعتمد هذا الدليل على أمثلة الكود الموجودة في دليل [`Asset Management`](/guides/asset-management).
 
-So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, a few plugins exist that will make this process much easier to manage.
+حتى الآن كنا نقوم بإضافة جميع الملفات يدويًا داخل ملف `index.html`، لكن مع نمو التطبيق، وعند البدء في [استخدام الـ hashes داخل أسماء الملفات](/guides/caching)، أو إنشاء [عدة bundles](/guides/code-splitting)، ستصبح إدارة ملف `index.html` يدويًا أمرًا صعبًا. لحسن الحظ، توجد بعض الـ plugins التي تجعل هذه العملية أسهل بكثير.
 
-## Preparation
+## التحضير
 
-First, let's adjust our project a little bit:
+لنقم أولًا بتعديل بسيط على المشروع:
 
 **project**
 
@@ -35,7 +27,7 @@ First, let's adjust our project a little bit:
   └── /node_modules
 ```
 
-Let's add some logic to our `src/print.js` file:
+لنضف بعض المنطق إلى ملف `src/print.js`:
 
 **src/print.js**
 
@@ -45,7 +37,7 @@ export default function printMe() {
 }
 ```
 
-And use that function in our `src/index.js` file:
+ثم نستخدم هذه الدالة داخل `src/index.js`:
 
 **src/index.js**
 
@@ -59,7 +51,7 @@ And use that function in our `src/index.js` file:
 
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
-+  btn.innerHTML = 'Click me and check the console!';
++  btn.innerHTML = 'اضغط هنا وتحقق من الـ console!';
 +  btn.onclick = printMe;
 +
 +  element.appendChild(btn);
@@ -70,7 +62,7 @@ And use that function in our `src/index.js` file:
  document.body.appendChild(component());
 ```
 
-Let's also update our `dist/index.html` file, in preparation for webpack to split out entries:
+دعنا أيضًا نحدّث ملف `dist/index.html` استعدادًا لأن يقوم webpack بفصل الـ entries:
 
 **dist/index.html**
 
@@ -80,7 +72,7 @@ Let's also update our `dist/index.html` file, in preparation for webpack to spli
    <head>
      <meta charset="utf-8" />
 -    <title>Asset Management</title>
-+    <title>Output Management</title>
++    <title>إدارة المخرجات</title>
 +    <script src="./print.bundle.js"></script>
    </head>
    <body>
@@ -90,7 +82,7 @@ Let's also update our `dist/index.html` file, in preparation for webpack to spli
  </html>
 ```
 
-Now adjust the config. We'll be adding our `src/print.js` as a new entry point (`print`) and we'll change the output as well, so that it will dynamically generate bundle names, based on the entry point names:
+والآن لنعدّل ملف الإعدادات. سنضيف `src/print.js` كنقطة دخول جديدة (`print`) وسنغيّر طريقة إنشاء أسماء الـ bundles بحيث يتم إنشاؤها ديناميكيًا اعتمادًا على أسماء نقاط الدخول:
 
 **webpack.config.js**
 
@@ -115,7 +107,13 @@ Now adjust the config. We'll be adding our `src/print.js` as a new entry point (
  };
 ```
 
-Let's run `npm run build` and see what this generates:
+لنقم الآن بتشغيل:
+
+```bash
+npm run build
+```
+
+وسنحصل على ناتج مشابه لهذا:
 
 ```bash
 ...
@@ -130,18 +128,22 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 1996 ms
 ```
 
-We can see that webpack generates our `print.bundle.js` and `index.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
+يمكننا أن نرى أن webpack قام بإنشاء الملفين `print.bundle.js` و `index.bundle.js`، وهما الملفان اللذان قمنا بإضافتهما داخل `index.html`.
 
-But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
+إذا فتحت `index.html` في المتصفح، يمكنك تجربة الضغط على الزر ورؤية ما يحدث.
 
-T> If you inspected `print.bundle.js`, you might have noticed that it did not contain the `printMe` function. Instead, it contained only an [IIFE](/concepts/why-webpack/#iifes---immediately-invoked-function-expressions) with no observable side effects.<br /><br />
-This is because in our current setup, webpack treats each entry point as a standalone program that runs when the bundle is loaded. Because `print.js` only exports a function and never calls `printMe()`, executing it as its own entry does not require any executable runtime code. Thus, [webpack is able to omit that code as an optimization](/guides/tree-shaking/) since it would have no observable effect.<br /><br />
-In contrast, since `index.js` imports and uses `printMe`, webpack includes that function directly in `index.bundle.js`. Remember that webpack is a module _bundler_, so `index.bundle.js` contains all the code it needs to run rather than unresolved import statements.<br /><br />
-Multiple entry points are used here solely to demonstrate output management and the `HtmlWebpackPlugin`. In a real project, you would typically avoid creating a separate entry point for utility modules like this. If you do have multiple entry points that share dependencies, see [Prevent Duplication](/guides/code-splitting/#prevent-duplication) in the Code Splitting guide.
+لكن ماذا سيحدث إذا قمنا بتغيير اسم إحدى نقاط الدخول أو أضفنا نقطة دخول جديدة؟ سيقوم webpack بإعادة تسمية الملفات الناتجة أثناء البناء، لكن `index.html` سيبقى يشير إلى الأسماء القديمة. لحل هذه المشكلة سنستخدم [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
 
-## Setting up HtmlWebpackPlugin
+T> إذا قمت بفحص `print.bundle.js`، ربما لاحظت أنه لا يحتوي على الدالة `printMe` نفسها، بل يحتوي فقط على [IIFE](/concepts/why-webpack/#iifes---immediately-invoked-function-expressions) بدون أي تأثير ظاهر.<br /><br />
+وذلك لأن webpack في الإعداد الحالي يتعامل مع كل entry point على أنها برنامج مستقل يتم تشغيله عند تحميل الـ bundle. وبما أن `print.js` يقوم فقط بتصدير دالة بدون استدعائها، فلا توجد أي تعليمات تنفيذية فعلية يحتاج webpack إلى تضمينها. لذلك يستطيع webpack حذف هذا الكود كنوع من التحسين ([optimization](/guides/tree-shaking/)).<br /><br />
+أما `index.js` فهو يستورد `printMe` ويستخدمها بالفعل، لذلك يقوم webpack بتضمينها داخل `index.bundle.js`.<br /><br />
+تم استخدام عدة entry points هنا فقط لشرح إدارة المخرجات و `HtmlWebpackPlugin`. في المشاريع الحقيقية، عادةً لن تقوم بإنشاء entry point مستقل لوحدات بسيطة كهذه. وإذا كان لديك عدة entry points تشترك في نفس التبعيات، راجع قسم [Prevent Duplication](/guides/code-splitting/#prevent-duplication) في دليل تقسيم الكود.
 
-First install the plugin and adjust the `webpack.config.js` file:
+## إعداد HtmlWebpackPlugin
+
+<span id="setting-up-htmlwebpackplugin"></span>
+
+قم أولًا بتثبيت الـ plugin ثم عدّل ملف `webpack.config.js`:
 
 ```bash
 npm install --save-dev html-webpack-plugin
@@ -174,7 +176,17 @@ npm install --save-dev html-webpack-plugin
  };
 ```
 
-Before we do a build, you should know that the `HtmlWebpackPlugin` by default will generate its own `index.html` file, even though we already have one in the `dist/` folder. This means that it will replace our `index.html` file with a newly generated one. Let's see what happens when we do an `npm run build`:
+قبل تشغيل البناء، يجب أن تعرف أن `HtmlWebpackPlugin` يقوم افتراضيًا بإنشاء ملف `index.html` خاص به، حتى لو كان لدينا ملف موجود مسبقًا داخل `dist/`.
+
+وهذا يعني أنه سيستبدل الملف القديم بملف جديد يتم إنشاؤه تلقائيًا.
+
+لنقم بتشغيل:
+
+```bash
+npm run build
+```
+
+وسيكون الناتج مشابهًا لهذا:
 
 ```bash
 ...
@@ -190,15 +202,19 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 2189 ms
 ```
 
-If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
+إذا فتحت `index.html` داخل محرر الأكواد، ستلاحظ أن `HtmlWebpackPlugin` قام بإنشاء ملف جديد بالكامل وأضاف جميع الـ bundles تلقائيًا.
 
-If you want to learn more about all the features and options that the `HtmlWebpackPlugin` provides, then you should read up on it on the [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) repo.
+إذا أردت معرفة المزيد عن جميع الميزات والإعدادات التي يوفرها `HtmlWebpackPlugin`، يمكنك زيارة مستودعه الرسمي.
 
-## Cleaning up the `/dist` folder
+## تنظيف مجلد `/dist`
 
-As you might have noticed over the past guides and code example, our `/dist` folder has become quite cluttered. Webpack will generate the files and put them in the `/dist` folder for you, but it doesn't keep track of which files are actually in use by your project.
+كما لاحظت في الأدلة السابقة، أصبح مجلد `/dist` مليئًا بالملفات القديمة.
 
-In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that with [`output.clean`](/configuration/output/#outputclean) option.
+Webpack يقوم بإنشاء الملفات داخل `/dist` لكنه لا يحذف الملفات القديمة غير المستخدمة تلقائيًا.
+
+لذلك من الأفضل تنظيف مجلد `/dist` قبل كل عملية build حتى يبقى فقط ما يحتاجه المشروع.
+
+يمكننا فعل ذلك باستخدام الخيار [`output.clean`](/configuration/output/#outputclean).
 
 **webpack.config.js**
 
@@ -228,16 +244,30 @@ In general it's good practice to clean the `/dist` folder before each build, so 
  };
 ```
 
-Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
+الآن قم بتشغيل:
 
-## The Manifest
+```bash
+npm run build
+```
 
-You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`output`](/configuration/output) in other ways, the manifest would be a good place to start.
+ثم افحص مجلد `/dist`، وستلاحظ أن webpack قام بحذف الملفات القديمة وأبقى فقط الملفات الحالية الناتجة عن البناء.
 
-The manifest data can be extracted into a json file for consumption using the [`ManifestPlugin`](/plugins/manifest-plugin/).
+## ملف Manifest
 
-We won't go through a full example of how to use this plugin within your projects, but you can read up on [the concept page](/concepts/manifest) and the [caching guide](/guides/caching) to find out how this ties into long term caching.
+<span id="the-manifest"></span>
 
-## Conclusion
+قد تتساءل كيف يعرف webpack والـ plugins الخاصة به الملفات التي يتم إنشاؤها.
 
-Now that you've learned about dynamically adding bundles to your HTML, let's dive into the [development guide](/guides/development). Or, if you want to dig into more advanced topics, we would recommend heading over to the [code splitting guide](/guides/code-splitting).
+الإجابة تكمن في ملف الـ manifest الذي يحتفظ به webpack لتتبع العلاقة بين الوحدات (modules) والـ bundles الناتجة.
+
+إذا كنت مهتمًا بإدارة [`output`](/configuration/output) بطرق متقدمة، فإن الـ manifest يُعتبر نقطة بداية ممتازة.
+
+يمكن استخراج بيانات الـ manifest إلى ملف JSON باستخدام [`ManifestPlugin`](/plugins/manifest-plugin/).
+
+لن نتعمق هنا في مثال كامل، لكن يمكنك قراءة صفحة [manifest concept](/concepts/manifest) ودليل [caching](/guides/caching) لمعرفة كيف يتم استخدامه مع التخزين المؤقت طويل المدى.
+
+## الخاتمة
+
+الآن بعد أن تعلمت كيفية إضافة الـ bundles إلى HTML بشكل ديناميكي، يمكنك الانتقال إلى [دليل التطوير](/guides/development).
+
+أو إذا كنت ترغب في التعمق أكثر في المواضيع المتقدمة، فنوصي بالانتقال إلى [دليل تقسيم الكود](/guides/code-splitting).

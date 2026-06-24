@@ -2,11 +2,15 @@
 
 describe("Page hash navigation", () => {
   it("scrolls to the element specified by the hash", () => {
-    cy.visit("/guides/getting-started/#basic-setup");
+    const hash = encodeURI("#الإعداد-الأساسي");
 
-    cy.location("hash").should("eq", "#basic-setup");
+    cy.visit(`/guides/getting-started/${hash}`);
 
-    cy.get("#basic-setup", { timeout: 10000 })
+    cy.location("hash").then((locationHash) => {
+      expect(locationHash).to.equal(hash);
+    });
+
+    cy.get(`[id="${hash.slice(1)}"]`, { timeout: 10000 })
       .should("exist")
       .then(($el) => {
         const rect = $el[0].getBoundingClientRect();

@@ -1,31 +1,28 @@
 ---
-title: Package exports
+title: صادرات الحزمة
 sort: 25
 contributors:
-  - sokra
+  - arabpolice
 related:
-  - title: Package entry points in Node.js
+  - title: نقاط إدخال الحزم في Node.js
     url: https://nodejs.org/api/packages.html#packages_package_entry_points
 ---
 
-The `exports` field in the `package.json` of a package allows to declare
-which module should be used when using module requests like `import "package"` or `import "package/sub/path"`.
-It replaces the default implementation that returns `main` field resp. `index.js` files for `"package"` and
-the file system lookup for `"package/sub/path"`.
+يسمح حقل `exports` في ملف `package.json` الخاص بالحزمة بالتصريح بالوحدة التي يجب استخدامها عند استعمال طلبات وحدات مثل `import "package"` أو `import "package/sub/path"`.
+وهو يستبدل السلوك الافتراضي الذي يعيد حقل `main` أو ملفات `index.js` لطلب `"package"`، ويستبدل البحث في نظام الملفات لطلب `"package/sub/path"`.
 
-When the `exports` field is specified, only these module requests are available.
-Any other requests will lead to a ModuleNotFound Error.
+عند تحديد حقل `exports`، ستكون طلبات الوحدات هذه فقط متاحة.
+أي طلبات أخرى ستؤدي إلى خطأ ModuleNotFound.
 
-## General syntax
+## الصيغة العامة
 
-In general the `exports` field should contain an object
-where each properties specifies a sub path of the module request.
-For the examples above the following properties could be used:
-`"."` for `import "package"` and `"./sub/path"` for `import "package/sub/path"`.
-Properties ending with a `/` will forward a request with this prefix to the old file system lookup algorithm.
-For properties ending with `*`, `*` may take any value and any `*` in the property value is replaced with the taken value.
+عمومًا يجب أن يحتوي حقل `exports` على كائن تحدد كل خاصية فيه مسارًا فرعيًا من طلب الوحدة.
+بالنسبة إلى الأمثلة أعلاه يمكن استخدام الخصائص التالية:
+`"."` من أجل `import "package"` و `"./sub/path"` من أجل `import "package/sub/path"`.
+الخصائص التي تنتهي بـ `/` ستمرر الطلب الذي يحمل هذه السابقة إلى خوارزمية البحث القديمة في نظام الملفات.
+أما الخصائص التي تنتهي بـ `*`، فيمكن أن يأخذ `*` أي قيمة، وسيُستبدل كل `*` في قيمة الخاصية بالقيمة المأخوذة.
 
-An example:
+مثال:
 
 ```json
 {
@@ -39,23 +36,23 @@ An example:
 }
 ```
 
-| Module request                      | Result                                           |
+| طلب الوحدة                          | النتيجة                                          |
 | ----------------------------------- | ------------------------------------------------ |
 | `package`                           | `.../package/main.js`                            |
 | `package/sub/path`                  | `.../package/secondary.js`                       |
 | `package/prefix/some/file.js`       | `.../package/directory/some/file.js`             |
 | `package/prefix/deep/file.js`       | `.../package/other-directory/file.js`            |
 | `package/other-prefix/deep/file.js` | `.../package/yet-another/deep/file/deep/file.js` |
-| `package/main.js`                   | Error                                            |
+| `package/main.js`                   | خطأ                                              |
 
-## Alternatives
+## البدائل
 
-Instead of providing a single result, the package author may provide a list of results.
-In such a scenario this list is tried in order and the first valid result will be used.
+بدلًا من تقديم نتيجة واحدة، يمكن لمؤلف الحزمة تقديم قائمة نتائج.
+في هذا السيناريو تُجرَّب هذه القائمة بالترتيب، وستُستخدم أول نتيجة صالحة.
 
-Note: Only the first valid result will be used, not all valid results.
+ملاحظة: ستُستخدم أول نتيجة صالحة فقط، وليس كل النتائج الصالحة.
 
-Example:
+مثال:
 
 ```json
 {
@@ -65,11 +62,11 @@ Example:
 }
 ```
 
-Here `package/things/apple` might be found in `.../package/good-things/apple` or in `.../package/bad-things/apple`.
+هنا قد يُعثر على `package/things/apple` في `.../package/good-things/apple` أو في `.../package/bad-things/apple`.
 
-W> As of version 5.94.0, webpack's behavior has been updated to align with Node's behavior. It now selects the first valid path without attempting further resolutions and throws an error if the path cannot be resolved.
+W> ابتداءً من الإصدار 5.94.0، تم تحديث سلوك webpack ليتوافق مع سلوك Node. فهو الآن يختار أول مسار صالح دون محاولة حلول إضافية، ويرمي خطأ إذا تعذر حل المسار.
 
-For example, given the following configuration:
+على سبيل المثال، عند وجود الإعداد التالي:
 
 ```json
 {
@@ -79,21 +76,21 @@ For example, given the following configuration:
 }
 ```
 
-Webpack 5.94.0+ will now throw an error since `non-existent.js` is not found while the previous behavior would have resolved to `existent.js`.
+سيرمي Webpack 5.94.0+ الآن خطأ لأن `non-existent.js` غير موجود، بينما كان السلوك السابق سيحل الطلب إلى `existent.js`.
 
-## Conditional syntax
+## الصيغة الشرطية
 
-Instead of providing results directly in the `exports` field,
-the package author may let the module system choose one based on conditions about the environment.
+بدلًا من تقديم النتائج مباشرة داخل حقل `exports`،
+يمكن لمؤلف الحزمة أن يترك نظام الوحدات يختار نتيجة بناءً على شروط تخص البيئة.
 
-In this case an object mapping conditions to results should be used.
-Conditions are tried in object order.
-Conditions that contain invalid results are skipped.
-Conditions might be nested to create a logical AND.
-The last condition in the object might be the special `"default"` condition,
-which is always matched.
+في هذه الحالة يجب استخدام كائن يربط الشروط بالنتائج.
+تُجرَّب الشروط حسب ترتيبها داخل الكائن.
+يتم تخطي الشروط التي تحتوي على نتائج غير صالحة.
+يمكن تداخل الشروط لإنشاء AND منطقي.
+وقد يكون الشرط الأخير في الكائن هو الشرط الخاص `"default"`،
+والذي يطابق دائمًا.
 
-Example:
+مثال:
 
 ```json
 {
@@ -111,7 +108,7 @@ Example:
 }
 ```
 
-This translates to something like:
+يمكن ترجمة ذلك إلى ما يشبه:
 
 ```ts
 if (red && valid("./stop.js")) return "./stop.js";
@@ -124,11 +121,11 @@ if (valid("./drive-carefully.js")) return "./drive-carefully.js";
 throw new ModuleNotFoundError();
 ```
 
-The available conditions vary depending on the module system and tool used.
+تختلف الشروط المتاحة بحسب نظام الوحدات والأداة المستخدمة.
 
-## Abbreviation
+## الاختصار
 
-When only a single entry (`"."`) into the package should be supported the `{ ".": ... }` object nesting can be omitted:
+عندما تكون هناك حاجة لدعم إدخال واحد فقط (`"."`) داخل الحزمة، يمكن حذف تداخل الكائن `{ ".": ... }`:
 
 ```json
 {
@@ -145,93 +142,91 @@ When only a single entry (`"."`) into the package should be supported the `{ "."
 }
 ```
 
-## Notes about ordering
+## ملاحظات حول الترتيب
 
-In an object where each key is a condition, order of properties is significant. Conditions are handled in the order they are specified.
+في الكائن الذي يكون كل مفتاح فيه شرطًا، يكون ترتيب الخصائص مهمًا. تُعالَج الشروط بالترتيب الذي حُددت به.
 
-Example: `{ "red": "./stop.js", "green": "./drive.js" }` != `{ "green": "./drive.js", "red": "./stop.js" }` (when both `red` and `green` conditions are set, first property will be used)
+مثال: `{ "red": "./stop.js", "green": "./drive.js" }` != `{ "green": "./drive.js", "red": "./stop.js" }` (عند تعيين الشرطين `red` و `green`، ستُستخدم الخاصية الأولى)
 
-In an object where each key is a subpath, order of properties (subpaths) is not significant. More specific paths are preferred over less specific ones.
+في الكائن الذي يكون كل مفتاح فيه مسارًا فرعيًا، لا يكون ترتيب الخصائص (المسارات الفرعية) مهمًا. تُفضَّل المسارات الأكثر تحديدًا على الأقل تحديدًا.
 
-Example: `{ "./a/": "./x/", "./a/b/": "./y/", "./a/b/c": "./z" }` == `{ "./a/b/c": "./z", "./a/b/": "./y/", "./a/": "./x/" }` (order will always be: `./a/b/c` > `./a/b/` > `./a/`)
+مثال: `{ "./a/": "./x/", "./a/b/": "./y/", "./a/b/c": "./z" }` == `{ "./a/b/c": "./z", "./a/b/": "./y/", "./a/": "./x/" }` (سيكون الترتيب دائمًا: `./a/b/c` > `./a/b/` > `./a/`)
 
-`exports` field is preferred over other package entry fields like `main`, `module`, `browser` or custom ones.
+يُفضَّل حقل `exports` على حقول إدخال الحزمة الأخرى مثل `main` أو `module` أو `browser` أو الحقول المخصصة.
 
-## Support
+## الدعم
 
-| Feature                                | Supported by                                                                           |
-| -------------------------------------- | -------------------------------------------------------------------------------------- |
-| `"."` property                         | Node.js, webpack, rollup, esinstall, wmr                                               |
-| normal property                        | Node.js, webpack, rollup, esinstall, wmr                                               |
-| property ending with `/`               | ~~Node.js<sup>(1)</sup>~~, webpack, rollup, esinstall<sup>(2)</sup>, wmr<sup>(3)</sup> |
-| property ending with `*`               | Node.js, webpack, rollup, esinstall                                                    |
-| Alternatives                           | Node.js, webpack, rollup, <strike>esinstall</strike><sup>(4)</sup>                     |
-| Abbreviation only path                 | Node.js, webpack, rollup, esinstall, wmr                                               |
-| Abbreviation only conditions           | Node.js, webpack, rollup, esinstall, wmr                                               |
-| Conditional syntax                     | Node.js, webpack, rollup, esinstall, wmr                                               |
-| Nested conditional syntax              | Node.js, webpack, rollup, wmr<sup>(5)</sup>                                            |
-| Conditions Order                       | Node.js, webpack, rollup, wmr<sup>(6)</sup>                                            |
-| `"default"` condition                  | Node.js, webpack, rollup, esinstall, wmr                                               |
-| Path Order                             | Node.js, webpack, rollup                                                               |
-| Error when not mapped                  | Node.js, webpack, rollup, esinstall, wmr<sup>(7)</sup>                                 |
-| Error when mixing conditions and paths | Node.js, webpack, rollup                                                               |
+| الميزة                         | مدعومة بواسطة                                                                          |
+| ------------------------------ | -------------------------------------------------------------------------------------- |
+| خاصية `"."`                    | Node.js، webpack، rollup، esinstall، wmr                                               |
+| الخاصية العادية                | Node.js، webpack، rollup، esinstall، wmr                                               |
+| الخاصية التي تنتهي بـ `/`      | ~~Node.js<sup>(1)</sup>~~، webpack، rollup، esinstall<sup>(2)</sup>، wmr<sup>(3)</sup> |
+| الخاصية التي تنتهي بـ `*`      | Node.js، webpack، rollup، esinstall                                                    |
+| البدائل                        | Node.js، webpack، rollup، <strike>esinstall</strike><sup>(4)</sup>                     |
+| اختصار المسار فقط              | Node.js، webpack، rollup، esinstall، wmr                                               |
+| اختصار الشروط فقط              | Node.js، webpack، rollup، esinstall، wmr                                               |
+| الصيغة الشرطية                 | Node.js، webpack، rollup، esinstall، wmr                                               |
+| الصيغة الشرطية المتداخلة       | Node.js، webpack، rollup، wmr<sup>(5)</sup>                                            |
+| ترتيب الشروط                   | Node.js، webpack، rollup، wmr<sup>(6)</sup>                                            |
+| شرط `"default"`                | Node.js، webpack، rollup، esinstall، wmr                                               |
+| ترتيب المسارات                 | Node.js، webpack، rollup                                                               |
+| الخطأ عند عدم وجود تعيين       | Node.js، webpack، rollup، esinstall، wmr<sup>(7)</sup>                                 |
+| الخطأ عند خلط الشروط والمسارات | Node.js، webpack، rollup                                                               |
 
-(1) Removed in Node.js 17. Use `*` instead.
+(1) أُزيلت في Node.js 17. استخدم `*` بدلًا منها.
 
-(2) `"./"` is intentionally ignored as key.
+(2) يتم تجاهل `"./"` عمدًا كمفتاح.
 
-(3) The property value is ignored and property key is used as target. Effectively only allowing mappings with key and value are identical.
+(3) يتم تجاهل قيمة الخاصية ويُستخدم مفتاح الخاصية كهدف. عمليًا يسمح ذلك فقط بالتعيينات التي يكون فيها المفتاح والقيمة متطابقين.
 
-(4) The syntax is supported, but always the first entry is used, which makes it unusable for any practical use case.
+(4) الصيغة مدعومة، لكن يُستخدم الإدخال الأول دائمًا، ما يجعلها غير قابلة للاستخدام في أي حالة عملية.
 
-(5) Fallback to alternative sibling parent conditions is handling incorrectly.
+(5) الرجوع إلى شروط الأصل الشقيقة البديلة يُعالَج بشكل غير صحيح.
 
-(6) For the `require` condition object order is handled incorrectly. This is intentionally as wmr doesn't differ between referencing syntax.
+(6) بالنسبة إلى شرط `require`، تتم معالجة ترتيب الكائن بشكل غير صحيح. هذا مقصود لأن wmr لا يميز بين صيغ الإشارة إلى الوحدة.
 
-(7) When using `"exports": "./file.js"` abbreviation, any request e. g. `package/not-existing` will resolve to that. When not using the abbreviation, direct file access e. g. `package/file.js` will not lead to an error.
+(7) عند استخدام الاختصار `"exports": "./file.js"`، سيُحل أي طلب مثل `package/not-existing` إلى ذلك. وعند عدم استخدام الاختصار، لن يؤدي الوصول المباشر إلى ملف مثل `package/file.js` إلى خطأ.
 
-## Conditions
+## الشروط
 
-### Reference syntax
+### صيغة الإشارة
 
-One of these conditions is set depending on the syntax used to reference the module:
+يُعيَّن أحد هذه الشروط بحسب الصيغة المستخدمة للإشارة إلى الوحدة:
 
-| Condition | Description                                                       | Supported by                                                         |
-| --------- | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `import`  | Request is issued from ESM syntax or similar.                     | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
-| `require` | Request is issued from CommonJs/AMD syntax or similar.            | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
-| `style`   | Request is issued from a stylesheet reference.                    |                                                                      |
-| `sass`    | Request is issued from a sass stylesheet reference.               |                                                                      |
-| `asset`   | Request is issued from a asset reference.                         |                                                                      |
-| `script`  | Request is issued from a normal script tag without module system. |                                                                      |
+| الشرط     | الوصف                                         | مدعوم بواسطة                                                         |
+| --------- | --------------------------------------------- | -------------------------------------------------------------------- |
+| `import`  | يصدر الطلب من صيغة ESM أو ما يشبهها.          | Node.js، webpack، rollup، esinstall<sup>(1)</sup>، wmr<sup>(1)</sup> |
+| `require` | يصدر الطلب من صيغة CommonJs/AMD أو ما يشبهها. | Node.js، webpack، rollup، esinstall<sup>(1)</sup>، wmr<sup>(1)</sup> |
+| `style`   | يصدر الطلب من إشارة داخل ورقة أنماط.          |                                                                      |
+| `sass`    | يصدر الطلب من إشارة داخل ورقة أنماط sass.     |                                                                      |
+| `asset`   | يصدر الطلب من إشارة إلى أصل.                  |                                                                      |
+| `script`  | يصدر الطلب من وسم script عادي دون نظام وحدات. |                                                                      |
 
-These conditions might also be set additionally:
+قد تُعيَّن هذه الشروط أيضًا بشكل إضافي:
 
-| Condition   | Description                                                                                                         | Supported by         |
-| ----------- | ------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| `module`    | All module syntax that allows to reference javascript supports ESM.<br />(only combined with `import` or `require`) | webpack, rollup, wmr |
-| `esmodules` | Always set by supported tools.                                                                                      | wmr                  |
-| `types`     | Request is issued from typescript that is interested in type declarations.                                          |                      |
+- `module`: كل صيغ الوحدات التي تسمح بالإشارة إلى javascript تدعم ESM. يُستخدم فقط مع `import` أو `require`. مدعوم بواسطة webpack وrollup وwmr.
+- `esmodules`: يُعيَّن دائمًا بواسطة الأدوات المدعومة. مدعوم بواسطة wmr.
+- `types`: يصدر الطلب من typescript مهتم بتصريحات الأنواع.
 
-(1) `import` and `require` are both set independent of referencing syntax. `require` has always lower priority.
+(1) يتم تعيين `import` و `require` معًا بغض النظر عن صيغة الإشارة. وتكون أولوية `require` دائمًا أقل.
 
 #### import
 
-The following syntax will set the `import` condition:
+الصيغ التالية ستعيّن شرط `import`:
 
-- ESM `import` declarations in ESM
-- JS `import()` expression
-- HTML `<script type="module">` in HTML
-- HTML `<link rel="preload/prefetch">` in HTML
+- تصريحات ESM `import` داخل ESM
+- تعبير JS `import()`
+- HTML `<script type="module">` داخل HTML
+- HTML `<link rel="preload/prefetch">` داخل HTML
 - JS `new Worker(..., { type: "module" })`
-- WASM `import` section
+- قسم WASM `import`
 - ESM HMR (webpack) `import.hot.accept/decline([...])`
 - JS `Worklet.addModule`
-- Using javascript as entrypoint
+- استخدام javascript كنقطة إدخال
 
 #### require
 
-The following syntax will set the `require` condition:
+الصيغ التالية ستعيّن شرط `require`:
 
 - CommonJs `require(...)`
 - AMD `define()`
@@ -244,14 +239,14 @@ The following syntax will set the `require` condition:
 
 #### style
 
-The following syntax will set the `style` condition:
+الصيغ التالية ستعيّن شرط `style`:
 
 - CSS `@import`
 - HTML `<link rel="stylesheet">`
 
 #### asset
 
-The following syntax will set the `asset` condition:
+الصيغ التالية ستعيّن شرط `asset`:
 
 - CSS `url()`
 - ESM `new URL(..., import.meta.url)`
@@ -259,112 +254,109 @@ The following syntax will set the `asset` condition:
 
 #### script
 
-The following syntax will set the `script` condition:
+الصيغ التالية ستعيّن شرط `script`:
 
 - HTML `<script src="...">`
 
-`script` should only be set when no module system is supported.
-When the script is preprocessed by a system supporting CommonJs
-it should set `require` instead.
+يجب تعيين `script` فقط عندما لا يكون أي نظام وحدات مدعومًا.
+إذا كان السكربت يُعالَج مسبقًا بواسطة نظام يدعم CommonJs،
+فيجب تعيين `require` بدلًا من ذلك.
 
-This condition should be used when looking for a javascript file that can be injected
-as script tag in a HTML page without additional preprocessing.
+يجب استخدام هذا الشرط عند البحث عن ملف javascript يمكن حقنه كوسم script في صفحة HTML دون معالجة مسبقة إضافية.
 
-### Optimizations
+### التحسينات
 
-The following conditions are set for various optimizations:
+تُعيَّن الشروط التالية لتحسينات مختلفة:
 
-| Condition     | Description                                                         | Supported by |
-| ------------- | ------------------------------------------------------------------- | ------------ |
-| `production`  | In a production environment.<br />No devtooling should be included. | webpack      |
-| `development` | In a development environment.<br />Devtooling should be included.   | webpack      |
+- `production`: في بيئة إنتاج. يجب ألا تُضمَّن أدوات التطوير. مدعوم بواسطة webpack.
+- `development`: في بيئة تطوير. يجب تضمين أدوات التطوير. مدعوم بواسطة webpack.
 
-Note: Since `production` and `development` is not supported by everyone, no assumption should be made when none of these is set.
+ملاحظة: بما أن `production` و `development` غير مدعومين من الجميع، يجب عدم افتراض أي شيء عندما لا يكون أي منهما معيّنًا.
 
-### Target environment
+### البيئة المستهدفة
 
-The following conditions are set depending on the target environment:
+تُعيَّن الشروط التالية بحسب البيئة المستهدفة:
 
-| Condition      | Description                                   | Supported by                        |
-| -------------- | --------------------------------------------- | ----------------------------------- |
-| `browser`      | Code will run in a browser.                   | webpack, esinstall, wmr             |
-| `electron`     | Code will run in electron.<sup>(1)</sup>      | webpack                             |
-| `worker`       | Code will run in a (Web)Worker.<sup>(1)</sup> | webpack                             |
-| `worklet`      | Code will run in a Worklet.<sup>(1)</sup>     |                                     |
-| `node`         | Code will run in Node.js.                     | Node.js, webpack, wmr<sup>(2)</sup> |
-| `deno`         | Code will run in Deno.                        |                                     |
-| `react-native` | Code will run in react-native.                |                                     |
+| الشرط          | الوصف                                     | مدعوم بواسطة                        |
+| -------------- | ----------------------------------------- | ----------------------------------- |
+| `browser`      | سيعمل الكود في متصفح.                     | webpack، esinstall، wmr             |
+| `electron`     | سيعمل الكود في electron.<sup>(1)</sup>    | webpack                             |
+| `worker`       | سيعمل الكود في (Web)Worker.<sup>(1)</sup> | webpack                             |
+| `worklet`      | سيعمل الكود في Worklet.<sup>(1)</sup>     |                                     |
+| `node`         | سيعمل الكود في Node.js.                   | Node.js، webpack، wmr<sup>(2)</sup> |
+| `deno`         | سيعمل الكود في Deno.                      |                                     |
+| `react-native` | سيعمل الكود في react-native.              |                                     |
 
-(1) `electron`, `worker` and `worklet` comes combined with either `node` or `browser`, depending on the context.
+(1) تأتي `electron` و `worker` و `worklet` مدمجة إما مع `node` أو `browser` بحسب السياق.
 
-(2) This is set for browser target environment.
+(2) يُعيَّن هذا لبيئة هدف المتصفح.
 
-Since there are multiple versions of each environment the following guidelines apply:
+بما أن لكل بيئة إصدارات متعددة، تنطبق الإرشادات التالية:
 
-- `node`: See `engines` field for compatibility.
-- `browser`: Compatible with current Spec and stage 4 proposals at time of publishing the package. Polyfilling resp. transpiling must be handled on consumer side.
-  - Features that are not possible to polyfill or transpile should be used carefully as it limits the possible usage.
+- `node`: راجع حقل `engines` لمعرفة التوافق.
+- `browser`: متوافق مع المواصفات الحالية ومقترحات المرحلة 4 وقت نشر الحزمة. يجب أن تُعالَج polyfilling أو transpiling من جهة المستهلك.
+  - يجب استخدام الميزات التي لا يمكن توفير polyfill أو transpile لها بحذر، لأنها تحد من إمكانات الاستخدام.
 - `deno`: TBD
 - `react-native`: TBD
 
-### Conditions: Preprocessor and runtimes
+### الشروط: المعالجات المسبقة وبيئات التشغيل
 
-The following conditions are set depending on which tool preprocesses the source code.
+تُعيَّن الشروط التالية بحسب الأداة التي تعالج الكود المصدري مسبقًا.
 
-| Condition | Description           | Supported by |
-| --------- | --------------------- | ------------ |
-| `webpack` | Processed by webpack. | webpack      |
+| الشرط     | الوصف                       | مدعوم بواسطة |
+| --------- | --------------------------- | ------------ |
+| `webpack` | تمت معالجته بواسطة webpack. | webpack      |
 
-Sadly there is no `node-js` condition for Node.js as runtime.
-This would simplify creating exceptions for Node.js.
+للأسف لا يوجد شرط `node-js` لـ Node.js كبيئة تشغيل.
+كان ذلك سيُسهّل إنشاء استثناءات لـ Node.js.
 
-### Conditions: Custom
+### الشروط: المخصصة
 
-The following tools support custom conditions:
+تدعم الأدوات التالية الشروط المخصصة:
 
-| Tool      | Supported | Notes                                                                                                    |
-| --------- | --------- | -------------------------------------------------------------------------------------------------------- |
-| Node.js   | yes       | Use [`--conditions`](https://nodejs.org/api/cli.html#cli_c_condition_conditions_condition) CLI argument. |
-| webpack   | yes       | Use [`resolve.conditionNames`](/configuration/resolve/#resolveconditionnames) configuration option.      |
-| rollup    | yes       | Use `exportConditions` option for `@rollup/plugin-node-resolve`                                          |
-| esinstall | no        |                                                                                                          |
-| wmr       | no        |                                                                                                          |
+| الأداة    | مدعوم | ملاحظات                                                                                                  |
+| --------- | ----- | -------------------------------------------------------------------------------------------------------- |
+| Node.js   | نعم   | استخدم وسيطة CLI [`--conditions`](https://nodejs.org/api/cli.html#cli_c_condition_conditions_condition). |
+| webpack   | نعم   | استخدم خيار الإعداد [`resolve.conditionNames`](/configuration/resolve/#resolveconditionnames).           |
+| rollup    | نعم   | استخدم خيار `exportConditions` في `@rollup/plugin-node-resolve`                                          |
+| esinstall | لا    |                                                                                                          |
+| wmr       | لا    |                                                                                                          |
 
-For custom conditions the following naming schema is recommended:
+يوصى باتباع نمط التسمية التالي للشروط المخصصة:
 
 `<company-name>:<condition-name>`
 
-Examples: `example-corp:beta`, `google:internal`.
+أمثلة: `example-corp:beta`، `google:internal`.
 
-## Common patterns
+## الأنماط الشائعة
 
-All patterns are explained with a single `"."` entry into the package, but they can be extended from multiple entries too, by repeating the pattern for each entry.
+تُشرح كل الأنماط باستخدام إدخال واحد `"."` داخل الحزمة، لكن يمكن توسيعها لتشمل عدة إدخالات أيضًا بتكرار النمط لكل إدخال.
 
-These pattern should be used as guide not as strict ruleset.
-They can be adapted to the individual packages.
+يجب استخدام هذه الأنماط كدليل إرشادي لا كقواعد صارمة.
+يمكن تكييفها مع الحزم الفردية.
 
-These pattern are based on the following list of goals/assumptions:
+تعتمد هذه الأنماط على قائمة الأهداف/الافتراضات التالية:
 
-- Packages are rotting.
-  - We assume at some point packages are no longer being maintained, but they are continued to be used.
-  - `exports` should be written to use fallbacks for unknown future cases. `default` condition can be used for that.
-  - As the future is unknown we assume an environment similar to browsers and module system similar to ESM.
-- Not all conditions are supported by every tool.
-  - Fallbacks should be used to handled these cases.
-  - We assume the following fallback make sense in general:
+- الحزم تتقادم.
+  - نفترض أن بعض الحزم ستتوقف في مرحلة ما عن الصيانة، لكنها ستستمر قيد الاستخدام.
+  - يجب كتابة `exports` بحيث تستخدم fallbacks للحالات المستقبلية غير المعروفة. يمكن استخدام شرط `default` لذلك.
+  - بما أن المستقبل غير معروف، نفترض بيئة مشابهة للمتصفحات ونظام وحدات مشابهًا لـ ESM.
+- ليست كل الشروط مدعومة من كل أداة.
+  - يجب استخدام fallbacks لمعالجة هذه الحالات.
+  - نفترض أن الـ fallback التالي منطقي عمومًا:
     - ESM > CommonJs
     - Production > Development
     - Browser > node.js
 
-Depending on the package intention maybe something else makes sense and in this case the patterns should be adopted to that. Example: For a command line tool a browser-like future and fallback doesn't make a lot of sense, and in this case node.js-like environments and fallbacks should be used instead.
+بحسب غرض الحزمة قد يكون خيار آخر أكثر منطقية، وعندها يجب تعديل الأنماط بما يناسب ذلك. مثال: بالنسبة إلى أداة سطر أوامر، لا يكون افتراض مستقبل مشابه للمتصفح وfallback شبيه به منطقيًا كثيرًا، وفي هذه الحالة يجب استخدام بيئات وfallbacks شبيهة بـ node.js بدلًا من ذلك.
 
-For complex use cases multiple patterns need to be combined by nesting these conditions.
+للحالات المعقدة يجب دمج عدة أنماط عبر تداخل هذه الشروط.
 
-### Target environment independent packages
+### الحزم المستقلة عن البيئة المستهدفة
 
-These patterns make sense for packages that do not use environment specific APIs.
+هذه الأنماط منطقية للحزم التي لا تستخدم واجهات API خاصة ببيئة معينة.
 
-#### Providing only an ESM version
+#### توفير إصدار ESM فقط
 
 ```json
 {
@@ -373,11 +365,11 @@ These patterns make sense for packages that do not use environment specific APIs
 }
 ```
 
-Note: Providing only a ESM comes with restrictions for node.js.
-Such a package would only work in Node.js >= 14 and only when using `import`.
-It won't work with `require()`.
+ملاحظة: توفير ESM فقط يأتي بقيود بالنسبة إلى node.js.
+مثل هذه الحزمة ستعمل فقط في Node.js >= 14 وفقط عند استخدام `import`.
+ولن تعمل مع `require()`.
 
-#### Providing CommonJs and ESM version (stateless)
+#### توفير إصداري CommonJs و ESM (بلا حالة)
 
 ```json
 {
@@ -392,21 +384,21 @@ It won't work with `require()`.
 }
 ```
 
-Most tools get the ESM version.
-Node.js is an exception here.
-It gets a CommonJs version when using `require()`.
-This will lead to two instances of these package when referencing it with `require()` and `import`, but that doesn't hurt as the package doesn't have state.
+تحصل معظم الأدوات على إصدار ESM.
+Node.js هو الاستثناء هنا.
+فهو يحصل على إصدار CommonJs عند استخدام `require()`.
+سيؤدي ذلك إلى وجود نسختين من هذه الحزمة عند الإشارة إليها باستخدام `require()` و `import`، لكن ذلك لا يضر ما دامت الحزمة لا تحتوي على حالة.
 
-The `module` condition is used as optimization when preprocessing node-targeted code with a tool that supports ESM for `require()` (like a bundler, when bundling for Node.js).
-For such a tool the exception is skipped.
-This is technically optional, but bundlers would include the package source code twice otherwise.
+يُستخدم شرط `module` كتحسين عند المعالجة المسبقة لكود يستهدف node بواسطة أداة تدعم ESM مع `require()` (مثل bundler عند التجميع لـ Node.js).
+بالنسبة إلى أداة كهذه، يتم تخطي الاستثناء.
+هذا اختياري من الناحية التقنية، لكن أدوات التجميع ستضمّن الكود المصدري للحزمة مرتين بدونه.
 
-You can also use the stateless pattern if you are able to isolate your package state in JSON files.
-JSON is consumable from CommonJs and ESM without polluting the graph with the other module system.
+يمكنك أيضًا استخدام نمط "بلا حالة" إذا كنت قادرًا على عزل حالة حزمتك في ملفات JSON.
+يمكن استهلاك JSON من CommonJs و ESM دون تلويث الرسم البياني بنظام الوحدات الآخر.
 
-Note that here stateless also means class instances are not tested with `instanceof` as there can be two different classes because of the double module instantiation.
+لاحظ أن "بلا حالة" هنا يعني أيضًا أن نسخ الأصناف لا تُختبر باستخدام `instanceof`، إذ قد توجد فئتان مختلفتان بسبب إنشاء نسختين من الوحدة.
 
-#### Providing CommonJs and ESM version (stateful)
+#### توفير إصداري CommonJs و ESM (مع حالة)
 
 ```json
 {
@@ -432,14 +424,14 @@ export const A = cjs.A;
 export const B = cjs.B;
 ```
 
-In a stateful package we must ensure that the package is never instantiated twice.
+في الحزمة ذات الحالة، يجب أن نضمن ألا تُنشأ الحزمة مرتين أبدًا.
 
-This isn't a problem for most tools, but Node.js is again an exception here.
-For Node.js we always use the CommonJs version and expose named exports in the ESM with a ESM wrapper.
+هذا لا يمثل مشكلة لمعظم الأدوات، لكن Node.js هو الاستثناء مرة أخرى.
+بالنسبة إلى Node.js، نستخدم إصدار CommonJs دائمًا ونكشف الصادرات المسماة في ESM عبر غلاف ESM.
 
-We use the `module` condition as optimization again.
+نستخدم شرط `module` كتحسين مرة أخرى.
 
-#### Providing only a CommonJs version
+#### توفير إصدار CommonJs فقط
 
 ```json
 {
@@ -448,9 +440,9 @@ We use the `module` condition as optimization again.
 }
 ```
 
-Providing `"type": "commonjs"` helps to statically detect CommonJs files.
+يساعد توفير `"type": "commonjs"` على اكتشاف ملفات CommonJs بشكل ساكن.
 
-#### Providing a bundled script version for direct browser consumption
+#### توفير إصدار سكربت مجمّع للاستهلاك المباشر في المتصفح
 
 ```json
 {
@@ -462,15 +454,15 @@ Providing `"type": "commonjs"` helps to statically detect CommonJs files.
 }
 ```
 
-Note that despite using `"type": "module"` and `.js` for `dist-bundle.js` this file is not in ESM format.
-It should use globals to allow direct consumption as script tag.
+لاحظ أنه على الرغم من استخدام `"type": "module"` وامتداد `.js` لـ `dist-bundle.js`، فإن هذا الملف ليس بصيغة ESM.
+يجب أن يستخدم المتغيرات العامة لإتاحة الاستهلاك المباشر كوسم script.
 
-### Providing devtools or production optimizations
+### توفير أدوات تطوير أو تحسينات إنتاج
 
-These patterns make sense when a package contains two versions, one for development and one for production.
-E. g. the development version could include additional code for better error message or additional warnings.
+هذه الأنماط منطقية عندما تحتوي الحزمة على إصدارين، أحدهما للتطوير والآخر للإنتاج.
+مثلًا، يمكن أن يتضمن إصدار التطوير كودًا إضافيًا لرسائل أخطاء أفضل أو تحذيرات إضافية.
 
-#### Without Node.js runtime detection
+#### دون اكتشاف بيئة تشغيل Node.js
 
 ```json
 {
@@ -482,10 +474,10 @@ E. g. the development version could include additional code for better error mes
 }
 ```
 
-When the `development` condition is supported we use the version enhanced for development.
-Otherwise, in production or when mode is unknown, we use the optimized version.
+عندما يكون شرط `development` مدعومًا، نستخدم الإصدار المحسّن للتطوير.
+وإلا، في الإنتاج أو عندما يكون الوضع مجهولًا، نستخدم الإصدار المحسّن.
 
-#### With Node.js runtime detection
+#### مع اكتشاف بيئة تشغيل Node.js
 
 ```json
 {
@@ -508,18 +500,18 @@ module.exports =
     : require("./index-with-devtools.cjs");
 ```
 
-We prefer static detection of production/development mode via the `production` or `development` condition.
+نفضّل الاكتشاف الساكن لوضع الإنتاج/التطوير عبر شرط `production` أو `development`.
 
-Node.js allows to detection production/development mode at runtime via `process.env.NODE_ENV`, so we use that as fallback in Node.js. Sync conditional importing ESM is not possible and we don't want to load the package twice, so we have to use CommonJs for the runtime detection.
+يسمح Node.js باكتشاف وضع الإنتاج/التطوير وقت التشغيل عبر `process.env.NODE_ENV`، لذلك نستخدم ذلك كـ fallback في Node.js. لا يمكن استيراد ESM شرطيًا بشكل متزامن، ولا نريد تحميل الحزمة مرتين، لذلك علينا استخدام CommonJs لاكتشاف وقت التشغيل.
 
-When it's not possible to detect mode we fallback to the production version.
+عندما لا يكون اكتشاف الوضع ممكنًا، نرجع إلى إصدار الإنتاج.
 
-### Providing different versions depending on target environment
+### توفير إصدارات مختلفة بحسب البيئة المستهدفة
 
-A fallback environment should be chosen that makes sense for the package to support future environments.
-In general a browser-like environment should be assumed.
+يجب اختيار بيئة fallback تكون منطقية للحزمة لدعم البيئات المستقبلية.
+عمومًا يجب افتراض بيئة شبيهة بالمتصفح.
 
-#### Providing Node.js, WebWorker and browser versions
+#### توفير إصدارات Node.js و WebWorker والمتصفح
 
 ```json
 {
@@ -532,7 +524,7 @@ In general a browser-like environment should be assumed.
 }
 ```
 
-#### Providing Node.js, browser and electron versions
+#### توفير إصدارات Node.js والمتصفح و electron
 
 ```json
 {
@@ -548,11 +540,11 @@ In general a browser-like environment should be assumed.
 }
 ```
 
-### Combining patterns
+### دمج الأنماط
 
-#### Example 1
+#### المثال 1
 
-This is an example for a package that has optimizations for production and development usage with runtime detection for `process.env` and also ships a CommonJs and ESM version
+هذا مثال لحزمة تحتوي على تحسينات لاستخدام الإنتاج والتطوير مع اكتشاف وقت التشغيل لـ `process.env`، كما أنها توفر إصداري CommonJs و ESM.
 
 ```json
 {
@@ -578,9 +570,9 @@ This is an example for a package that has optimizations for production and devel
 }
 ```
 
-#### Example 2
+#### المثال 2
 
-This is an example for a package that supports Node.js, browser and electron, has optimizations for production and development usage with runtime detection for `process.env` and also ships a CommonJs and ESM version.
+هذا مثال لحزمة تدعم Node.js والمتصفح و electron، وتحتوي على تحسينات لاستخدام الإنتاج والتطوير مع اكتشاف وقت التشغيل لـ `process.env`، كما أنها توفر إصداري CommonJs و ESM.
 
 ```json
 {
@@ -624,17 +616,17 @@ This is an example for a package that supports Node.js, browser and electron, ha
 }
 ```
 
-Looks complex, yes. We were already able to reduce some complexity due to a assumption we can make: Only `node` need a CommonJs version and can detect production/development with `process.env`.
+يبدو معقدًا، نعم. لقد تمكنا بالفعل من تقليل بعض التعقيد بفضل افتراض يمكننا اعتماده: فقط `node` يحتاج إلى إصدار CommonJs ويمكنه اكتشاف الإنتاج/التطوير باستخدام `process.env`.
 
-## Guidelines
+## إرشادات
 
-- Avoid the `default` export. It's handled differently between tooling. Only use named exports.
-- Never provide different APIs or semantics for different conditions.
-- Write your source code as ESM and transpile to CJS via babel, typescript or similar tools.
-- Either use `.cjs` or `type: "commonjs"` in package.json to clearly mark source code as CommonJs. This makes it statically detectable for tools if CommonJs or ESM is used. This is important for tools that only support ESM and no CommonJs.
-- ESM used in packages support the following types of requests:
-  - module requests are supported, pointing to other packages with a package.json.
-  - relative requests are supported, pointing to other files within the package.
-    - They must not point to files outside of the package.
-  - `data:` url requests are supported.
-  - other absolute or server-relative requests are not supported by default, but they might be supported by some tools or environments.
+- تجنب التصدير `default`. فهو يُعالَج بشكل مختلف بين الأدوات. استخدم الصادرات المسماة فقط.
+- لا تقدم أبدًا واجهات API أو دلالات مختلفة لشروط مختلفة.
+- اكتب كودك المصدري بصيغة ESM وحوّله إلى CJS عبر babel أو typescript أو أدوات مشابهة.
+- استخدم إما `.cjs` أو `type: "commonjs"` في package.json لتمييز الكود المصدري بوضوح على أنه CommonJs. هذا يجعله قابلًا للاكتشاف الساكن لدى الأدوات لمعرفة ما إذا كان CommonJs أو ESM مستخدمًا. هذا مهم للأدوات التي تدعم ESM فقط ولا تدعم CommonJs.
+- يدعم ESM المستخدم داخل الحزم أنواع الطلبات التالية:
+  - طلبات الوحدات مدعومة، وتشير إلى حزم أخرى تحتوي على package.json.
+  - الطلبات النسبية مدعومة، وتشير إلى ملفات أخرى داخل الحزمة.
+    - يجب ألا تشير إلى ملفات خارج الحزمة.
+  - طلبات URL من نوع `data:` مدعومة.
+  - الطلبات المطلقة الأخرى أو النسبية إلى الخادم غير مدعومة افتراضيًا، لكنها قد تكون مدعومة في بعض الأدوات أو البيئات.

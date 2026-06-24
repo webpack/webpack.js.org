@@ -1,18 +1,14 @@
 ---
 title: ModuleFederationPlugin
-group: webpack
 contributors:
-  - XiaofengXie16
-  - chenxsan
-  - burhanuday
-  - christian24
-  - KhaledTaymour
+  - RlxChap2
+group: webpack
 related:
   - title: Module Federation
     url: /concepts/module-federation/
 ---
 
-The `ModuleFederationPlugin` allows a build to provide or consume modules with other independent builds at runtime.
+يسمح `ModuleFederationPlugin` لعملية build أن توفّر modules لتطبيقات مستقلة أخرى، أو تستهلك modules منها، وقت التشغيل.
 
 ```ts
 import webpack from "webpack";
@@ -22,7 +18,7 @@ const { ModuleFederationPlugin } = webpack.container;
 export default {
   plugins: [
     new ModuleFederationPlugin({
-      // options' typings in typescript
+      // أنواع الخيارات في TypeScript
       runtime: string | false,
     }),
   ],
@@ -31,14 +27,14 @@ export default {
 
 <StackBlitzPreview
   example="module-federation?terminal=start&terminal="
-  description="Check out this live module federation example on StackBlitz."
+  description="جرّب مثال Module Federation مباشر على StackBlitz."
 />
 
-## Options
+## الخيارات
 
 ### runtime
 
-Create a new runtime chunk with the specified name.
+ينشئ runtime chunk جديدًا بالاسم الذي تحدده.
 
 **webpack.config.js**
 
@@ -56,9 +52,9 @@ export default {
 };
 ```
 
-### Sharing libraries
+### مشاركة المكتبات
 
-With the `shared` key in the configuration you can define libraries that are shared between your federated modules. The package name is the same as the one found in the `dependencies` section of your package.json. However, by default webpack will only share the root level of a library.
+باستخدام المفتاح `shared` في الإعدادات، يمكنك تحديد المكتبات التي ستتم مشاركتها بين modules التابعة لـ Module Federation. اسم الحزمة هو نفسه الموجود في قسم `dependencies` داخل ملف `package.json`. لكن webpack، بشكل افتراضي، يشارك المستوى الجذري فقط من المكتبة.
 
 ```js
 import webpack from "webpack";
@@ -68,14 +64,14 @@ const { ModuleFederationPlugin } = webpack.container;
 export default {
   plugins: [
     new ModuleFederationPlugin({
-      // adds date-fns as shared module
+      // يضيف date-fns كـ shared module
       shared: ["date-fns"],
     }),
   ],
 };
 ```
 
-So in your application you could do something like
+في تطبيقك، يمكن أن تكتب شيئًا مثل:
 
 ```js
 import { format } from "date-fns";
@@ -83,8 +79,9 @@ import { format } from "date-fns";
 format(new Date(2014, 1, 11), "MM/dd/yyyy");
 ```
 
-and webpack will automatically share `date-fns` between all your federated modules that define `date-fns` as a shared library.
-However, if you want to access something that is not located at the root level of the package, for example `date-fns/locale/en-GB/index.js`, you need to append `/` to the package name in your `shared` configuration:
+وسيشارك webpack مكتبة `date-fns` تلقائيًا بين كل modules التابعة لـ Module Federation التي تعرّف `date-fns` كمكتبة مشتركة.
+
+لكن إذا أردت الوصول إلى ملف ليس في جذر الحزمة، مثل `date-fns/locale/en-GB/index.js`، فأضف `/` إلى اسم الحزمة داخل إعداد `shared`:
 
 ```js
 import webpack from "webpack";
@@ -94,23 +91,23 @@ const { ModuleFederationPlugin } = webpack.container;
 export default {
   plugins: [
     new ModuleFederationPlugin({
-      // adds date-fns as shared module
-      // all files of the package will be shared
+      // يضيف date-fns كـ shared module
+      // ستتم مشاركة كل ملفات الحزمة
       shared: ["date-fns/"],
     }),
   ],
 };
 ```
 
-The `/` syntax allows you to access all files of a package. However, it should be used only where necessary, because it has an impact on performance especially in `development` mode.
+صيغة `/` تسمح لك بالوصول إلى كل ملفات الحزمة. استخدمها فقط عند الحاجة، لأنها قد تؤثر في الأداء، خصوصًا في وضع `development`.
 
-#### Specify package versions
+#### تحديد إصدارات الحزم
 
-There are three ways to specify the versions of shared libraries.
+توجد ثلاث طرق لتحديد إصدارات المكتبات المشتركة.
 
-##### Array syntax
+##### صيغة Array
 
-This syntax allows you to share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given that libraries like `react` and `react-dom` will require additional requirements.
+هذه الصيغة تسمح لك بمشاركة المكتبات باسم الحزمة فقط. هي مناسبة للتجارب السريعة، لكنها لا تكفي عادةً عند التوسع إلى بيئة production كبيرة، لأن مكتبات مثل `react` و`react-dom` تحتاج شروطًا إضافية.
 
 ```js
 import webpack from "webpack";
@@ -120,28 +117,28 @@ const { ModuleFederationPlugin } = webpack.container;
 export default {
   plugins: [
     new ModuleFederationPlugin({
-      // adds lodash as shared module
-      // version is inferred from package.json
-      // there is no version check for the required version
-      // so it will always use the higher version found
+      // يضيف lodash كـ shared module
+      // يتم استنتاج الإصدار من package.json
+      // لا يوجد فحص للإصدار المطلوب
+      // لذلك سيستخدم دائمًا أعلى إصدار يجده
       shared: ["lodash"],
     }),
   ],
 };
 ```
 
-##### Object syntax
+##### صيغة Object
 
-This syntax provides you more control over each shared library in which you can define package name as the key and version ([semver](https://semver.org/)) as the value.
+هذه الصيغة تعطيك تحكمًا أكبر في كل مكتبة مشتركة؛ تضع اسم الحزمة كمفتاح، وتضع الإصدار بصيغة [semver](https://semver.org/) كقيمة.
 
 ```js
 export default {
   plugins: [
     new ModuleFederationPlugin({
       shared: {
-        // adds lodash as shared module
-        // version is inferred from package.json
-        // it will use the highest lodash version that is >= 4.17 and < 5
+        // يضيف lodash كـ shared module
+        // يتم استنتاج الإصدار من package.json
+        // سيستخدم أعلى إصدار من lodash يطابق >= 4.17 و < 5
         lodash: "^4.17.0",
       },
     }),
@@ -149,9 +146,9 @@ export default {
 };
 ```
 
-##### Object syntax with sharing hints
+##### صيغة Object مع تلميحات المشاركة
 
-This syntax allows you to provide additional [hints](#sharing-hints) to each shared package where you define the package name as the key, and the value as an object containing hints to modify sharing behavior.
+هذه الصيغة تسمح لك بإضافة [تلميحات](#تلميحات-المشاركة) لكل حزمة مشتركة. تضع اسم الحزمة كمفتاح، وتكون القيمة object يحتوي على تلميحات تغيّر سلوك المشاركة.
 
 ```js
 import { readFileSync } from "node:fs";
@@ -164,7 +161,7 @@ export default {
   plugins: [
     new ModuleFederationPlugin({
       shared: {
-        // adds react as shared module
+        // يضيف react كـ shared module
         react: {
           requiredVersion: deps.react,
           singleton: true,
@@ -175,75 +172,75 @@ export default {
 };
 ```
 
-#### Sharing hints
+#### تلميحات المشاركة
 
 ##### **`eager`**
 
 `boolean`
 
-This hint will allow webpack to include the provided and fallback module directly instead of fetching the library via an asynchronous request. In other words, this allows to use this shared module in the initial chunk. Also, be careful that all provided and fallback modules will always be downloaded when this hint is enabled.
+هذا التلميح يجعل webpack يضمّن module المقدّم وfallback مباشرة بدل جلب المكتبة بطلب غير متزامن. بمعنى آخر، يتيح استخدام هذا shared module داخل initial chunk. انتبه أيضًا إلى أن كل modules المقدّمة وfallback ستُحمّل دائمًا عند تفعيل هذا التلميح.
 
 ##### **`import`**
 
 `false | string`
 
-The provided module that should be placed in the shared scope. This provided module also acts as fallback module if no shared module is found in the shared scope or version isn't valid. (The value for this hint defaults to the property name.)
+الـ module المقدّم الذي يجب وضعه في shared scope. يعمل هذا module أيضًا كـ fallback إذا لم يُعثر على shared module داخل shared scope، أو إذا كان الإصدار غير صالح. القيمة الافتراضية لهذا التلميح هي اسم الخاصية نفسها.
 
 ##### **`packageName`**
 
 `string`
 
-The package name that is used to determine required version from description file. This is only needed when the package name can't be automatically determined from request.
+اسم الحزمة المستخدم لمعرفة الإصدار المطلوب من ملف الوصف. تحتاجه فقط عندما لا يمكن تحديد اسم الحزمة تلقائيًا من request.
 
 ##### **`requiredVersion`**
 
 `false` `string`
 
-This field specifies the required version of the package. It accepts semantic versioning, such as "^1.2.3". Additionally, it retrieves the version if it's provided as a URL, for instance: "git+ssh://git@github.com:foo/bar.git#v1.0.0".
+يحدد هذا الحقل الإصدار المطلوب من الحزمة. يقبل semantic versioning مثل `"^1.2.3"`. ويمكنه أيضًا استخراج الإصدار إذا كان موجودًا ضمن URL، مثل: `"git+ssh://git@github.com:foo/bar.git#v1.0.0"`.
 
 ##### **`shareKey`**
 
 `string`
 
-The requested shared module is looked up under this key from the shared scope.
+يُبحث عن shared module المطلوب تحت هذا المفتاح داخل shared scope.
 
 ##### **`shareScope`**
 
 `string`
 
-The name of the shared scope.
+اسم shared scope.
 
 ##### **`singleton`**
 
 `boolean`
 
-This hint only allows a single version of the shared module in the shared scope (disabled by default). Some libraries use a global internal state (e.g. react, react-dom). Thus, it is critical to have only one instance of the library running at a time.
+هذا التلميح يسمح بوجود إصدار واحد فقط من shared module داخل shared scope، وهو معطّل افتراضيًا. بعض المكتبات تستخدم حالة داخلية عامة، مثل `react` و`react-dom`، لذلك من المهم أن تعمل نسخة واحدة فقط من المكتبة في الوقت نفسه.
 
-In cases where there are multiple versions of the same dependency in the shared scope, the highest semantic version is used.
+إذا وجدت عدة إصدارات من الاعتماد نفسه داخل shared scope، فسيُستخدم أعلى إصدار semantic.
 
 ##### **`strictVersion`**
 
 `boolean`
 
-This hint allows webpack to reject the shared module if version is not valid (defaults to `true` when local fallback module is available and shared module is not a singleton, otherwise `false`, it has no effect if there is no required version specified). Throws a runtime error if the required version is not found.
+هذا التلميح يجعل webpack يرفض shared module إذا كان الإصدار غير صالح. القيمة الافتراضية تكون `true` عندما يكون local fallback module متاحًا والـ shared module ليس singleton، وإلا تكون `false`. ولا يكون له تأثير إذا لم تحدد إصدارًا مطلوبًا. إذا لم يُعثر على الإصدار المطلوب، فسيتم رمي runtime error.
 
 ##### **`version`**
 
 `false | string`
 
-The version of the provided module. It allows webpack to replace lower matching versions, but not higher.
+إصدار module المقدّم. يسمح لـ webpack باستبدال الإصدارات المطابقة الأقل، لكن لا يستبدل الإصدارات الأعلى.
 
-By default, webpack uses the version from the `package.json` file of the dependency.
+افتراضيًا، يستخدم webpack الإصدار الموجود في ملف `package.json` الخاص بالاعتماد.
 
-#### **Additional examples**
+#### **أمثلة إضافية**
 
 ```js
 export default {
   plugins: [
     new ModuleFederationPlugin({
-      // adds vue as shared module
-      // version is inferred from package.json
-      // it will always use the shared version, but print a warning when the shared vue is < 2.6.5 or >= 3
+      // يضيف vue كـ shared module
+      // يتم استنتاج الإصدار من package.json
+      // سيستخدم دائمًا الإصدار المشترك، لكنه يطبع تحذيرًا إذا كان vue المشترك < 2.6.5 أو >= 3
       shared: {
         vue: {
           requiredVersion: "^2.6.5",
@@ -259,9 +256,9 @@ export default {
 export default {
   plugins: [
     new ModuleFederationPlugin({
-      // adds vue as shared module
-      // there is no local version provided
-      // it will emit a warning if the shared vue is < 2.6.5 or >= 3
+      // يضيف vue كـ shared module
+      // لا يوجد إصدار محلي مقدّم
+      // سيصدر تحذيرًا إذا كان vue المشترك < 2.6.5 أو >= 3
       shared: {
         vue: {
           import: false,
@@ -277,9 +274,9 @@ export default {
 export default {
   plugins: [
     new ModuleFederationPlugin({
-      // adds vue as shared module
-      // there is no local version provided
-      // it will throw an error when the shared vue is < 2.6.5 or >= 3
+      // يضيف vue كـ shared module
+      // لا يوجد إصدار محلي مقدّم
+      // سيرمي خطأ إذا كان vue المشترك < 2.6.5 أو >= 3
       shared: {
         vue: {
           import: false,
@@ -298,14 +295,14 @@ export default {
     new ModuleFederationPlugin({
       shared: {
         "my-vue": {
-          // can be referenced by import "my-vue"
-          import: "vue", // the "vue" package will be used as a provided and fallback module
-          shareKey: "shared-vue", // under this name the shared module will be placed in the share scope
-          shareScope: "default", // share scope with this name will be used
-          singleton: true, // only a single version of the shared module is allowed
-          strictVersion: true, // don't use shared version when version isn't valid. Singleton or modules without fallback will throw, otherwise fallback is used
-          version: "1.2.3", // the version of the shared module
-          requiredVersion: "^1.0.0", // the required version of the shared module
+          // يمكن الإشارة إليه عبر import "my-vue"
+          import: "vue", // ستُستخدم حزمة "vue" كـ module مقدّم وfallback
+          shareKey: "shared-vue", // بهذا الاسم سيُوضع shared module داخل share scope
+          shareScope: "default", // سيُستخدم share scope بهذا الاسم
+          singleton: true, // يُسمح بإصدار واحد فقط من shared module
+          strictVersion: true, // لا تستخدم الإصدار المشترك إذا كان غير صالح. يرمي Singleton أو modules بدون fallback خطأ، وإلا يُستخدم fallback
+          version: "1.2.3", // إصدار shared module
+          requiredVersion: "^1.0.0", // الإصدار المطلوب من shared module
         },
       },
     }),

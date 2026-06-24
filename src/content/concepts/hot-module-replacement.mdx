@@ -2,68 +2,63 @@
 title: Hot Module Replacement
 sort: 12
 contributors:
-  - kryptokinght
-  - SpaceK33z
-  - sokra
-  - GRardB
-  - rouzbeh84
-  - skipjack
+  - RlxChap2
 ---
 
-Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/modules/) while an application is running, without a full reload. This can significantly speed up development in a few ways:
+تقوم ميزة Hot Module Replacement أو (HMR) بتبديل [الوحدات](/concepts/modules/) أو إضافتها أو إزالتها أثناء تشغيل التطبيق، بدون إعادة تحميل كاملة. يمكن أن يسرّع ذلك التطوير بشكل ملحوظ بعدة طرق:
 
-- Retain application state which is lost during a full reload.
-- Save valuable development time by only updating what's changed.
-- Instantly update the browser when modifications are made to CSS/JS in the source code, which is almost comparable to changing styles directly in the browser's dev tools.
+- الاحتفاظ بحالة التطبيق التي تضيع عادةً عند إعادة التحميل الكامل.
+- توفير وقت تطوير ثمين عبر تحديث ما تغيّر فقط.
+- تحديث المتصفح فورًا عند إجراء تعديلات على CSS/JS في الكود المصدري، وهو قريب جدًا من تعديل التنسيقات مباشرة داخل أدوات المطور في المتصفح.
 
-## How It Works
+## كيف تعمل
 
-Let's go through some different viewpoints to understand exactly how HMR works...
+لننظر إلى HMR من عدة زوايا لفهم طريقة عملها بدقة.
 
-### In the Application
+### داخل التطبيق
 
-The following steps allow modules to be swapped in and out of an application:
+تسمح الخطوات التالية بتبديل الوحدات داخل التطبيق وخارجه:
 
-1. The application asks the HMR runtime to check for updates.
-2. The runtime asynchronously downloads the updates and notifies the application.
-3. The application then asks the runtime to apply the updates.
-4. The runtime synchronously applies the updates.
+1. يطلب التطبيق من HMR runtime التحقق من وجود تحديثات.
+2. يحمّل runtime التحديثات بشكل غير متزامن ويخطر التطبيق.
+3. يطلب التطبيق بعد ذلك من runtime تطبيق التحديثات.
+4. يطبق runtime التحديثات بشكل متزامن.
 
-You can set up HMR so that this process happens automatically, or you can choose to require user interaction for updates to occur.
+يمكنك إعداد HMR بحيث تحدث هذه العملية تلقائيًا، أو يمكنك اختيار طلب تفاعل المستخدم قبل حدوث التحديثات.
 
-### In the Compiler
+### داخل المترجم
 
-In addition to normal assets, the compiler needs to emit an "update" to allow updating from the previous version to the new version. The "update" consists of two parts:
+إلى جانب الأصول العادية، يحتاج المترجم إلى إصدار "تحديث" يسمح بالانتقال من الإصدار السابق إلى الإصدار الجديد. يتكون "التحديث" من جزأين:
 
-1. The updated [manifest](/concepts/manifest) (JSON)
-2. One or more updated chunks (JavaScript)
+1. [manifest](/concepts/manifest) محدث (JSON)
+2. واحد أو أكثر من chunks المحدثة (JavaScript)
 
-The manifest contains the new compilation hash and a list of all updated chunks. Each of these chunks contains the new code for all updated modules (or a flag indicating that the module was removed).
+يحتوي manifest على هاش الترجمة الجديد وقائمة بجميع chunks المحدثة. يحتوي كل chunk من هذه chunks على الكود الجديد لكل الوحدات المحدثة، أو على علامة تشير إلى إزالة الوحدة.
 
-The compiler ensures that module IDs and chunk IDs are consistent between these builds. It typically stores these IDs in memory (e.g. with [webpack-dev-server](/configuration/dev-server/)), but it's also possible to store them in a JSON file.
+يضمن المترجم ثبات معرفات الوحدات ومعرفات chunks بين هذه البنيات. عادةً يخزن هذه المعرفات في الذاكرة، مثلًا مع [webpack-dev-server](/configuration/dev-server/)، لكن يمكن أيضًا تخزينها في ملف JSON.
 
-### In a Module
+### داخل الوحدة
 
-HMR is an opt-in feature that only affects modules containing HMR code. One example would be patching styling through the [`style-loader`](https://github.com/webpack/style-loader). In order for patching to work, the `style-loader` implements the HMR interface; when it receives an update through HMR, it replaces the old styles with the new ones.
+HMR ميزة اختيارية لا تؤثر إلا في الوحدات التي تحتوي كود HMR. مثال على ذلك تحديث التنسيقات عبر [`style-loader`](https://github.com/webpack/style-loader). لكي يعمل التحديث، ينفذ `style-loader` واجهة HMR؛ وعندما يتلقى تحديثًا عبر HMR، يستبدل التنسيقات القديمة بالجديدة.
 
-Similarly, when implementing the HMR interface in a module, you can describe what should happen when the module is updated. However, in most cases, it's not mandatory to write HMR code in every module. If a module has no HMR handlers, the update bubbles up. This means that a single handler can update a complete module tree. If a single module from the tree is updated, the entire set of dependencies is reloaded.
+وبالمثل، عند تنفيذ واجهة HMR داخل وحدة، يمكنك وصف ما يجب أن يحدث عند تحديث هذه الوحدة. لكن في معظم الحالات، لا يكون من الضروري كتابة كود HMR في كل وحدة. إذا لم تكن لدى الوحدة معالجات HMR، يصعد التحديث إلى الأعلى. هذا يعني أن معالجًا واحدًا يمكنه تحديث شجرة وحدات كاملة. وإذا حُدثت وحدة واحدة من الشجرة، يعاد تحميل مجموعة التبعيات بالكامل.
 
-See the [HMR API page](/api/hot-module-replacement) for details on the `module.hot` interface.
+راجع [صفحة HMR API](/api/hot-module-replacement) للتفاصيل حول واجهة `module.hot`.
 
-### In the Runtime
+### داخل وقت التشغيل
 
-Here things get a bit more technical... if you're not interested in the internals, feel free to jump to the [HMR API page](/api/hot-module-replacement) or [HMR guide](/guides/hot-module-replacement).
+هنا تصبح الأمور أكثر تقنية قليلًا. إذا لم تكن مهتمًا بالتفاصيل الداخلية، يمكنك الانتقال مباشرة إلى [صفحة HMR API](/api/hot-module-replacement) أو [دليل HMR](/guides/hot-module-replacement).
 
-For the module system runtime, additional code is emitted to track module `parents` and `children`. On the management side, the runtime supports two methods: `check` and `apply`.
+بالنسبة إلى runtime الخاص بنظام الوحدات، يُصدر كود إضافي لتتبع `parents` و `children` لكل وحدة. ومن جهة الإدارة، يدعم runtime طريقتين: `check` و `apply`.
 
-A `check` makes an HTTP request to the update manifest. If this request fails, there is no update available. If it succeeds, the list of updated chunks is compared to the list of currently loaded chunks. For each loaded chunk, the corresponding update chunk is downloaded. All module updates are stored in the runtime. When all update chunks have been downloaded and are ready to be applied, the runtime switches into the `ready` state.
+ينفذ `check` طلب HTTP إلى update manifest. إذا فشل الطلب، فهذا يعني عدم توفر تحديث. وإذا نجح، تُقارن قائمة chunks المحدثة بقائمة chunks المحملة حاليًا. لكل chunk محمل، يُحمّل update chunk المقابل. تُخزن كل تحديثات الوحدات في runtime. عندما تُحمّل كل update chunks وتصبح جاهزة للتطبيق، ينتقل runtime إلى حالة `ready`.
 
-The `apply` method flags all updated modules as invalid. For each invalid module, there needs to be an update handler in the module or in its parent(s). Otherwise, the invalid flag bubbles up and invalidates parent(s) as well. Each bubble continues until the app's entry point or a module with an update handler is reached (whichever comes first). If it bubbles up from an entry point, the process fails.
+تضع طريقة `apply` علامة invalid على كل الوحدات المحدثة. ولكل وحدة invalid يجب أن يكون هناك معالج تحديث في الوحدة أو في أحد آبائها. وإلا فإن علامة invalid تصعد إلى الأعلى وتبطل الآباء أيضًا. يستمر هذا الصعود حتى يصل إلى نقطة دخول التطبيق أو إلى وحدة لديها معالج تحديث، أيهما يأتي أولًا. إذا صعد من نقطة دخول، تفشل العملية.
 
-Afterwards, all invalid modules are disposed (via the dispose handler) and unloaded. The current hash is then updated and all `accept` handlers are called. The runtime switches back to the `idle` state and everything continues as normal.
+بعد ذلك، تُزال كل الوحدات invalid عبر dispose handler وتُفرغ من الذاكرة. ثم يُحدّث الهاش الحالي وتُستدعى كل معالجات `accept`. يعود runtime إلى حالة `idle` ويستمر كل شيء كالمعتاد.
 
-## Get Started
+## ابدأ
 
-HMR can be used in development as a LiveReload replacement. [webpack-dev-server](/configuration/dev-server/) supports a `hot` mode in which it tries to update with HMR before trying to reload the whole page. See the [Hot Module Replacement guide](/guides/hot-module-replacement) for details.
+يمكن استخدام HMR أثناء التطوير كبديل لـ LiveReload. يدعم [webpack-dev-server](/configuration/dev-server/) وضع `hot` الذي يحاول التحديث عبر HMR قبل محاولة إعادة تحميل الصفحة بالكامل. راجع [دليل Hot Module Replacement](/guides/hot-module-replacement) للتفاصيل.
 
-T> As with many other features, webpack's power lies in its customizability. There are _many_ ways of configuring HMR depending on the needs of a particular project. However, for most purposes, `webpack-dev-server` is a good fit and will allow you to get started with HMR quickly.
+T> كما هو الحال مع كثير من الميزات الأخرى، تكمن قوة webpack في قابليته للتخصيص. توجد _طرق كثيرة_ لضبط HMR بحسب احتياجات المشروع. لكن في معظم الاستخدامات، يكون `webpack-dev-server` خيارًا مناسبًا يسمح لك بالبدء مع HMR بسرعة.

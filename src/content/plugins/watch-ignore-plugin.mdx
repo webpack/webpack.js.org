@@ -2,19 +2,18 @@
 title: WatchIgnorePlugin
 group: webpack
 contributors:
-  - skipjack
-  - byzyk
-  - EugeneHlushko
+  - MohaDev-69
+  - RlxChap2
 ---
 
-Ignore the specified files, i.e. those matching the provided paths or regular expressions, while in [watch mode](/configuration/watch).
+يتجاهل ملفات محددة أثناء [watch mode](/configuration/watch)، مثل الملفات التي تطابق مسارًا أو RegExp معينًا.
 
 ```js
 new webpack.WatchIgnorePlugin({ paths });
 ```
 
-## Options
+## الخيارات
 
-- `paths` (`Array<string | RegExp>`): A list of RegExps or absolute paths to directories or files that should be ignored.
+- `paths` (`Array<string | RegExp>`): قائمة RegExp أو مسارات مطلقة إلى مجلدات أو ملفات يجب تجاهلها.
 
-W> This plugin is deprecated in favor of [watchOptions.ignored](/configuration/watch/#watchoptionsignored) option.
+T> تم إهمال هذا plugin واستبداله بخيار [`watchOptions.ignored`](/configuration/watch/#watchoptionsignored).

@@ -1,28 +1,20 @@
 ---
-title: Configuration Types
+title: أنواع التخصيص
 sort: 3
 contributors:
-  - sokra
-  - skipjack
-  - kbariotis
-  - simon04
-  - fadysamirsadek
-  - byzyk
-  - EugeneHlushko
-  - dhurlburtusa
-  - anshumanv
-  - thorn0
-  - tusharthakur04
+  - RlxChap2
 ---
 
-Besides exporting a single configuration object, there are a few more ways that cover other needs as well.
+إلى جانب تصدير كائن تخصيص واحد، هناك طرق أخرى تغطّي احتياجات مختلفة.
 
-## Exporting a Function
+## تصدير دالّة
 
-Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). There are multiple ways to do that. One option is to export a function from your webpack configuration instead of exporting an object. The function will be invoked with two arguments:
+<span id="exporting-a-function"></span>
 
-- An environment as the first parameter. See the [environment options CLI documentation](/api/cli/#environment-options) for syntax examples.
-- An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-path`](/api/cli/#flags) and [`mode`](/api/cli/#flags).
+ستجد عاجلاً أم آجلاً حاجة إلى التمييز داخل `webpack.config.js` بين [بناء التطوير](/guides/development) و[بناء الإنتاج](/guides/production). وثمّة طرق متعددة لذلك. من بينها أن تُصدّر دالّة من ملف تخصيص webpack بدلاً من تصدير كائن. سيتمّ استدعاء هذه الدالّة بمعاملين:
+
+- بيئة (environment) بوصفها المعامل الأول. راجع [توثيق خيارات البيئة في الـ CLI](/api/cli/#environment-options) لأمثلة على الصياغة.
+- خريطة خيارات (`argv`) بوصفها المعامل الثاني. تصف هذه الخريطة الخيارات الممرَّرة إلى webpack، بمفاتيح مثل [`output-path`](/api/cli/#flags) و[`mode`](/api/cli/#flags).
 
 ```diff
 -export default {
@@ -33,7 +25,7 @@ Eventually you will find the need to disambiguate in your `webpack.config.js` be
      plugins: [
        new MinimizerPlugin({
          minimizerOptions: {
-+          compress: argv.mode === 'production' // only if `--mode production` was passed
++          compress: argv.mode === 'production' // فقط في حال تمرير `--mode production`
          }
        })
      ]
@@ -41,11 +33,13 @@ Eventually you will find the need to disambiguate in your `webpack.config.js` be
 };
 ```
 
-## Exporting a Promise
+## تصدير Promise
 
-Webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
+<span id="exporting-a-promise"></span>
 
-T> It is possible to export multiple promises by wrapping them into `Promise.all([/* Your promises */]).`
+سيُشغّل webpack الدالّة المُصدَّرة من ملف التخصيص، وينتظر منها إرجاع Promise. وهذا مفيد حين تحتاج إلى تحميل متغيّرات التخصيص بشكل غير متزامن.
+
+T> يمكنك تصدير عدّة Promises عبر تغليفها داخل `Promise.all([/* Promises الخاصة بك */])`.
 
 ```js
 export default () =>
@@ -59,11 +53,13 @@ export default () =>
   });
 ```
 
-W> Returning a `Promise` only works when using webpack via CLI. [`webpack()`](/api/node/#webpack) expects an object.
+W> إرجاع `Promise` يعمل فقط حين تستخدم webpack عبر الـ CLI. أمّا [`webpack()`](/api/node/#webpack) فيتوقّع كائناً.
 
-## Exporting multiple configurations
+## تصدير تخصيصات متعددة
 
-Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output/#outputlibrarytarget) such as AMD and CommonJS:
+<span id="exporting-multiple-configurations"></span>
+
+عوضاً عن تصدير كائن أو دالّة تخصيص واحدة، يمكنك تصدير عدّة تخصيصات (وقد دُعمت الدوال المتعددة منذ webpack 3.1.0). وعند تشغيل webpack، تُبنى كل التخصيصات معاً. وهذا مفيد مثلاً عند [حزم مكتبة](/guides/author-libraries) لعدّة [أهداف (targets)](/configuration/output/#outputlibrarytarget) كـ AMD و CommonJS:
 
 ```js
 export default [
@@ -88,11 +84,11 @@ export default [
 ];
 ```
 
-T> If you pass a name to [`--config-name`](/api/cli/#config-name) flag, webpack will only build that specific configuration.
+T> لو مرّرت اسماً إلى الراية [`--config-name`](/api/cli/#config-name)، فلن يبني webpack إلا التخصيص المطابق لذلك الاسم فقط.
 
 ### dependencies
 
-In case you have a configuration that depends on the output of another configuration, you can specify a list of dependencies using the [`dependencies`](/configuration/other-options/#dependencies) array.
+إن كان لديك تخصيص يعتمد على ناتج تخصيص آخر، فيمكنك تحديد قائمة بالاعتماديات عبر مصفوفة [`dependencies`](/configuration/other-options/#dependencies).
 
 **webpack.config.js**
 
@@ -111,22 +107,22 @@ export default [
 ];
 ```
 
-### parallelism
+### التوازي
 
-In case you export multiple configurations, you can use the `parallelism` option on the configuration array to specify the maximum number of compilers that will compile in parallel.
+عند تصدير تخصيصات متعددة، يمكنك استخدام الخيار `parallelism` على مصفوفة التخصيصات لتحديد الحدّ الأقصى لعدد الـ compilers التي ستعمل بالتوازي.
 
-- Type: `number`
-- Available: 5.22.0+
+- النوع: `number`
+- متاح: 5.22.0+
 
 **webpack.config.js**
 
 ```js
 const config = [
   {
-    // config-1
+    // التخصيص-1
   },
   {
-    // config-2
+    // التخصيص-2
   },
 ];
 

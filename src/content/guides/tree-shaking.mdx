@@ -1,42 +1,24 @@
 ---
-title: Tree Shaking
+title: إزالة الكود غير المستخدم
 sort: 16
 contributors:
-  - simon04
-  - zacanger
-  - alexjoverm
-  - avant1
-  - MijaelWatts
-  - dmitriid
-  - probablyup
-  - gish
-  - lumo10
-  - byzyk
-  - pnevares
-  - EugeneHlushko
-  - AnayaDesign
-  - torifat
-  - rahul3v
-  - snitin315
-  - vansh5632
-  - Brennvo
-  - ThierryRakotomanana
+  - arabpolice
 related:
-  - title: Debugging Optimization Bailouts
+  - title: تتبع أسباب تعطّل التحسينات
     url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
-  - title: Issue 6074 - Add support for more complex selectors for sideEffects
+  - title: Issue 6074 - إضافة دعم لمحددات أكثر تعقيدًا لـ sideEffects
     url: https://github.com/webpack/webpack/issues/6074
 ---
 
-_Tree shaking_ is a term commonly used in the JavaScript context for dead-code elimination. It relies on the [static structure](http://exploringjs.com/es6/ch_modules.html#static-module-structure) of ES2015 module syntax, i.e. [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). The name and concept have been popularized by the ES2015 module bundler [rollup](https://github.com/rollup/rollup).
+_Tree shaking_ مصطلح شائع في سياق JavaScript ويُقصد به إزالة الكود الميت. يعتمد على [البنية الساكنة](http://exploringjs.com/es6/ch_modules.html#static-module-structure) لصيغة وحدات ES2015، أي [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) و [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export). وقد شاع الاسم والمفهوم بفضل أداة تجميع وحدات ES2015 وهي [rollup](https://github.com/rollup/rollup).
 
-The webpack 2 release came with built-in support for ES2015 modules (alias _harmony modules_) as well as unused module export detection. The new webpack 4 release expands on this capability with a way to provide hints to the compiler via the `"sideEffects"` `package.json` property to denote which files in your project are "pure" and therefore safe to prune if unused.
+جاء إصدار webpack 2 بدعم مدمج لوحدات ES2015 (المعروفة أيضًا باسم _harmony modules_)، إضافةً إلى اكتشاف صادرات الوحدات غير المستخدمة. ويوسّع webpack 4 هذه القدرة بطريقة تتيح تقديم تلميحات للمصرّف عبر خاصية `"sideEffects"` في `package.json` لتحديد الملفات "النقية" في مشروعك، وبالتالي الآمنة للحذف إذا لم تكن مستخدمة.
 
-T> The remainder of this guide will stem from [Getting Started](/guides/getting-started). If you haven't read through that guide already, please do so now.
+T> سيبني ما تبقى من هذا الدليل على [دليل البدء](/guides/getting-started). إذا لم تكن قد قرأت ذلك الدليل بعد، فافعل ذلك الآن.
 
-## Add a Utility
+## إضافة أداة مساعدة
 
-Let's add a new utility file to our project, `src/math.js`, that exports two functions:
+لنضف ملف أداة مساعدة جديدًا إلى مشروعنا، `src/math.js`، يصدّر دالتين:
 
 **project**
 
@@ -66,7 +48,7 @@ export function cube(x) {
 }
 ```
 
-Set the `mode` configuration option to [development](/configuration/mode/#mode-development) to make sure that the bundle is not minified:
+عيّن خيار الإعداد `mode` إلى [development](/configuration/mode/#mode-development) للتأكد من أن الحزمة لن تُصغَّر:
 
 **webpack.config.js**
 
@@ -90,7 +72,7 @@ export default {
 };
 ```
 
-With that in place, let's update our entry script to utilize one of these new methods and remove `lodash` for simplicity:
+بعد ذلك، لنحدّث سكربت الإدخال لاستخدام إحدى هاتين الدالتين الجديدتين، ونزيل `lodash` للتبسيط:
 
 **src/index.js**
 
@@ -115,9 +97,9 @@ With that in place, let's update our entry script to utilize one of these new me
   document.body.appendChild(component());
 ```
 
-Note that we **did not `import` the `square` method** from the `src/math.js` module. That function is what's known as "dead code", meaning an unused `export` that should be dropped. Now let's run our npm script, `npm run build`, and inspect the output bundle:
+لاحظ أننا **لم نقم باستيراد الدالة `square`** من الوحدة `src/math.js`. هذه الدالة هي ما يُعرف بـ "الكود الميت"، أي `export` غير مستخدم يفترض إسقاطه. لنشغّل الآن سكربت npm، أي `npm run build`، ونفحص الحزمة الناتجة:
 
-**dist/bundle.js (around lines 90 - 100)**
+**dist/bundle.js (حول الأسطر 90 - 100)**
 
 {/* eslint-disable no-use-before-define */}
 
@@ -138,13 +120,15 @@ Note that we **did not `import` the `square` method** from the `src/math.js` mod
 });
 ```
 
-Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
+لاحظ التعليق `unused harmony export square` أعلاه. إذا نظرت إلى الكود تحته، ستلاحظ أن `square` لا يتم استيرادها، ومع ذلك ما زالت موجودة داخل الحزمة. سنعالج ذلك في القسم التالي.
 
-## Mark the file as side-effect-free
+## وسم الملف بأنه خالٍ من الآثار الجانبية
 
-In a 100% ESM module world, identifying side effects is straightforward. However, we aren't there quite yet, so in the mean time it's necessary to provide hints to webpack's compiler on the "pureness" of your code.
+<span id="mark-the-file-as-side-effect-free"></span>
 
-The way this is accomplished is the `"sideEffects"` package.json property.
+في عالم وحدات ESM بنسبة 100%، يكون تحديد الآثار الجانبية مباشرًا. لكننا لم نصل إلى ذلك تمامًا بعد، لذلك من الضروري في الوقت الحالي تقديم تلميحات إلى مصرّف webpack حول "نقاء" الكود.
+
+تتم هذه العملية عبر خاصية `"sideEffects"` في package.json.
 
 ```json
 {
@@ -153,11 +137,11 @@ The way this is accomplished is the `"sideEffects"` package.json property.
 }
 ```
 
-All the code noted above does not contain side effects, so we can mark the property as `false` to inform webpack that it can safely prune unused exports.
+كل الكود المذكور أعلاه لا يحتوي على آثار جانبية، لذلك يمكننا تعيين الخاصية إلى `false` لإبلاغ webpack بأنه يستطيع حذف الصادرات غير المستخدمة بأمان.
 
-T> A "side effect" is defined as code that performs a special behavior when imported, other than exposing one or more exports. An example of this are polyfills, which affect the global scope and usually do not provide an export.
+T> يُعرَّف "الأثر الجانبي" بأنه كود ينفذ سلوكًا خاصًا عند استيراده، غير كشف صادر واحد أو أكثر. مثال ذلك polyfills، فهي تؤثر في النطاق العام ولا توفر عادةً أي export.
 
-If your code did have some side effects though, an array can be provided instead:
+إذا كان كودك يحتوي على بعض الآثار الجانبية، فيمكن تقديم مصفوفة بدلًا من ذلك:
 
 ```json
 {
@@ -166,9 +150,9 @@ If your code did have some side effects though, an array can be provided instead
 }
 ```
 
-The array accepts simple glob patterns to the relevant files. It uses [glob-to-regexp](https://github.com/fitzgen/glob-to-regexp) under the hood (Supports: `*`, `**`, `{a,b}`, `[a-z]`). Patterns like `*.css`, which do not include a `/`, will be treated like `**/*.css`.
+تقبل المصفوفة أنماط glob بسيطة للملفات المعنية. وهي تستخدم [glob-to-regexp](https://github.com/fitzgen/glob-to-regexp) داخليًا (تدعم: `*`، `**`، `{a,b}`، `[a-z]`). الأنماط مثل `*.css`، التي لا تتضمن `/`، ستُعامل مثل `**/*.css`.
 
-T> Note that any imported file is subject to tree shaking. This means if you use something like `css-loader` in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:
+T> لاحظ أن أي ملف مستورد يخضع لإزالة الكود غير المستخدم. هذا يعني أنك إذا استخدمت شيئًا مثل `css-loader` في مشروعك واستوردت ملف CSS، فيجب إضافته إلى قائمة الآثار الجانبية حتى لا يُحذف بالخطأ في وضع الإنتاج:
 
 ```json
 {
@@ -177,25 +161,25 @@ T> Note that any imported file is subject to tree shaking. This means if you use
 }
 ```
 
-Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#modulerules).
+أخيرًا، يمكن أيضًا تعيين `"sideEffects"` من خيار الإعداد [`module.rules`](/configuration/module/#modulerules).
 
-## Clarifying tree shaking and `sideEffects`
+## توضيح tree shaking و `sideEffects`
 
-The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`usedExports`](/configuration/optimization/#optimizationusedexports) (more known as tree shaking) optimizations are two different things.
+تحسينا [`sideEffects`](/configuration/optimization/#optimizationsideeffects) و [`usedExports`](/configuration/optimization/#optimizationusedexports) (المعروف أكثر باسم tree shaking) شيئان مختلفان.
 
-**`sideEffects` is much more effective** since it allows to skip whole modules/files and the complete subtree.
+**`sideEffects` أكثر فعالية بكثير** لأنه يسمح بتخطي وحدات/ملفات كاملة والشجرة الفرعية كاملة.
 
-`usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straightforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React's Higher Order Components (HOC) are problematic in this regard.
+يعتمد `usedExports` على [terser](https://github.com/terser-js/terser) لاكتشاف الآثار الجانبية في العبارات. وهذه مهمة صعبة في JavaScript وليست بفعالية علم `sideEffects` المباشر. كما أنه لا يستطيع تخطي الشجرة الفرعية/التبعيات لأن المواصفة تقول إن الآثار الجانبية يجب أن تُقيَّم. وبينما يعمل تصدير الدوال جيدًا، فإن مكونات React ذات الرتبة الأعلى (HOC) تمثل مشكلة في هذا السياق.
 
-If you're using dynamic `import()`, you can also use the `webpackExports` magic comment to specify the exports that should be exposed, allowing webpack to tree shake the others. See [Magic Comments](/api/module-methods/#magic-comments).
+إذا كنت تستخدم `import()` الديناميكي، فيمكنك أيضًا استخدام التعليق السحري `webpackExports` لتحديد الصادرات التي يجب كشفها، ما يسمح لـ webpack بإزالة الصادرات الأخرى. راجع [Magic Comments](/api/module-methods/#magic-comments).
 
-Let's make an example:
+لنأخذ مثالًا:
 
 ```js
 import { Button } from "@shopify/polaris";
 ```
 
-The pre-bundled version looks like this:
+تبدو النسخة المجمعة مسبقًا هكذا:
 
 {/* eslint-disable @stylistic/spaced-comment, prefer-rest-params */}
 
@@ -250,23 +234,23 @@ export {
 };
 ```
 
-When `Button` is unused you can effectively remove the `export { Button$1 };` which leaves all the remaining code. So the question is "Does this code have any side effects or can it be safely removed?". Difficult to say, especially because of this line `withAppProvider()(Button)`. `withAppProvider` is called and the return value is also called. Are there any side effects when calling `merge` or `hoistStatics`? Are there side effects when assigning `WithProvider.contextTypes` (Setter?) or when reading `WrappedComponent.contextTypes` (Getter?).
+عندما لا يكون `Button` مستخدمًا، يمكنك فعليًا إزالة `export { Button$1 };`، لكن ذلك يترك كل الكود المتبقي. لذلك يصبح السؤال: "هل لهذا الكود أي آثار جانبية، أم يمكن حذفه بأمان؟". من الصعب الجزم، خصوصًا بسبب هذا السطر `withAppProvider()(Button)`. يتم استدعاء `withAppProvider`، ويتم أيضًا استدعاء القيمة المعادة. هل توجد آثار جانبية عند استدعاء `merge` أو `hoistStatics`؟ هل توجد آثار جانبية عند إسناد `WithProvider.contextTypes` (Setter؟) أو عند قراءة `WrappedComponent.contextTypes` (Getter؟).
 
-Terser actually tries to figure it out, but it doesn't know for sure in many cases. This doesn't mean that terser is not doing its job well because it can't figure it out. It's too difficult to determine it reliably in a dynamic language like JavaScript.
+يحاول Terser فعلًا معرفة ذلك، لكنه لا يعرف على وجه اليقين في كثير من الحالات. هذا لا يعني أن terser لا يؤدي عمله جيدًا لأنه لا يستطيع اكتشاف ذلك. الأمر صعب جدًا لتحديده على نحو موثوق في لغة ديناميكية مثل JavaScript.
 
-But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a small change would make it possible to tree-shake the code:
+لكن يمكننا مساعدة terser باستخدام التعليق `/*#__PURE__*/`. فهو يعلّم العبارة بأنها خالية من الآثار الجانبية. لذلك سيجعل تغيير صغير الكود قابلًا للإزالة عبر tree shaking:
 
 ```js
 const Button$1 = /* #__PURE__ */ withAppProvider()(Button);
 ```
 
-This would allow to remove this piece of code. But there are still questions with the imports which need to be included/evaluated because they could contain side effects.
+سيسمح ذلك بإزالة هذه القطعة من الكود. لكن ما زالت هناك أسئلة حول الاستيرادات التي يجب تضمينها/تقييمها لأنها قد تحتوي على آثار جانبية.
 
-To tackle this, we use the [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) property in `package.json`.
+لمعالجة ذلك، نستخدم خاصية [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) في `package.json`.
 
-It's similar to `/*#__PURE__*/` but on a module level instead of a statement level. It says (`"sideEffects"` property): "If no direct export from a module flagged with no-sideEffects is used, the bundler can skip evaluating the module for side effects.".
+هي مشابهة لـ `/*#__PURE__*/`، لكن على مستوى الوحدة بدلًا من مستوى العبارة. تقول خاصية `"sideEffects"`: "إذا لم يُستخدم أي export مباشر من وحدة موسومة بأنها بلا sideEffects، فيمكن للمجمّع تخطي تقييم الوحدة بحثًا عن آثار جانبية".
 
-In the Shopify's Polaris example, original modules look like this:
+في مثال Shopify Polaris، تبدو الوحدات الأصلية هكذا:
 
 **index.js**
 
@@ -300,40 +284,40 @@ export { default as ButtonGroup } from "./ButtonGroup";
 // ...
 ```
 
-For `import { Button } from "@shopify/polaris";` this has the following implications:
+بالنسبة إلى `import { Button } from "@shopify/polaris";`، يترتب على ذلك ما يلي:
 
-- include it: include the module, evaluate it and continue analysing dependencies
-- skip over: don't include it, don't evaluate it but continue analysing dependencies
-- exclude it: don't include it, don't evaluate it and don't analyse dependencies
+- include it: تضمين الوحدة، وتقييمها، ومتابعة تحليل التبعيات
+- skip over: عدم تضمينها وعدم تقييمها، مع متابعة تحليل التبعيات
+- exclude it: عدم تضمينها وعدم تقييمها وعدم تحليل تبعياتها
 
-Specifically per matching resource(s):
+وبشكل محدد لكل مورد مطابق:
 
-- `index.js`: No direct export is used, but flagged with sideEffects -> include it
-- `configure.js`: No export is used, but flagged with sideEffects -> include it
-- `types/index.js`: No export is used, not flagged with sideEffects -> exclude it
-- `components/index.js`: No direct export is used, not flagged with sideEffects, but reexported exports are used -> skip over
-- `components/Breadcrumbs.js`: No export is used, not flagged with sideEffects -> exclude it. This also excluded all dependencies like `components/Breadcrumbs.css` even if they are flagged with sideEffects.
-- `components/Button.js`: Direct export is used, not flagged with sideEffects -> include it
-- `components/Button.css`: No export is used, but flagged with sideEffects -> include it
+- `index.js`: لا يُستخدم أي export مباشر، لكنه موسوم بـ sideEffects -> تضمينه
+- `configure.js`: لا يُستخدم أي export، لكنه موسوم بـ sideEffects -> تضمينه
+- `types/index.js`: لا يُستخدم أي export، وليس موسومًا بـ sideEffects -> استبعاده
+- `components/index.js`: لا يُستخدم أي export مباشر، وليس موسومًا بـ sideEffects، لكن الصادرات المعاد تصديرها مستخدمة -> تخطيه
+- `components/Breadcrumbs.js`: لا يُستخدم أي export، وليس موسومًا بـ sideEffects -> استبعاده. يؤدي ذلك أيضًا إلى استبعاد كل التبعيات مثل `components/Breadcrumbs.css` حتى لو كانت موسومة بـ sideEffects.
+- `components/Button.js`: export مباشر مستخدم، وليس موسومًا بـ sideEffects -> تضمينه
+- `components/Button.css`: لا يُستخدم أي export، لكنه موسوم بـ sideEffects -> تضمينه
 
-In this case only 4 modules are included into the bundle:
+في هذه الحالة تُضمَّن 4 وحدات فقط في الحزمة:
 
-- `index.js`: pretty much empty
+- `index.js`: شبه فارغ
 - `configure.js`
 - `components/Button.js`
 - `components/Button.css`
 
-After this optimization, other optimizations can still apply. For example: `buttonFrom` and `buttonsFrom` exports from `Button.js` are unused too. `usedExports` optimization will pick it up and terser may be able to drop some statements from the module.
+بعد هذا التحسين، يمكن أن تُطبق تحسينات أخرى أيضًا. على سبيل المثال: الصادرات `buttonFrom` و `buttonsFrom` من `Button.js` غير مستخدمة أيضًا. سيلتقط تحسين `usedExports` ذلك، وقد يتمكن terser من حذف بعض العبارات من الوحدة.
 
-Module Concatenation also applies. So that these 4 modules plus the entry module (and probably more dependencies) can be concatenated. **`index.js` has no code generated in the end**.
+ينطبق Module Concatenation أيضًا. لذلك يمكن دمج هذه الوحدات الأربع مع وحدة الإدخال (وربما مزيد من التبعيات). **في النهاية لا يُولّد أي كود لـ `index.js`**.
 
-## Full Example: Understanding Side Effects with CSS Files
+## مثال كامل: فهم الآثار الجانبية مع ملفات CSS
 
-To better understand the impact of the `sideEffects` flag, let's look at a complete example of an npm package with CSS assets and how they might be affected during tree shaking. We'll create a fictional UI component library called "awesome-ui".
+لفهم تأثير علم `sideEffects` بشكل أفضل، لننظر إلى مثال كامل لحزمة npm تحتوي على أصول CSS وكيف قد تتأثر أثناء tree shaking. سننشئ مكتبة مكونات واجهة وهمية باسم "awesome-ui".
 
-### Package Structure
+### بنية الحزمة
 
-Our example package looks like this:
+تبدو حزمة المثال لدينا هكذا:
 
 ```bash
 awesome-ui/
@@ -356,7 +340,7 @@ awesome-ui/
         └── defaultTheme.css
 ```
 
-### Package Files Content
+### محتوى ملفات الحزمة
 
 **package.json**
 
@@ -387,10 +371,10 @@ export { default as Modal } from "./Modal";
 **dist/components/Button/index.js**
 
 ```js
-import "./Button.css"; // This has a side effect - it applies styles when imported!
+import "./Button.css"; // لهذا الاستيراد أثر جانبي: فهو يطبّق الأنماط عند استيراده!
 
 export default function Button(props) {
-  // Button component implementation
+  // تنفيذ مكوّن Button
   return {
     type: "button",
     ...props,
@@ -411,12 +395,12 @@ export default function Button(props) {
 }
 ```
 
-**dist/components/Card/index.js** and **dist/components/Modal/index.js** would have similar structure.
+سيكون لكل من **dist/components/Card/index.js** و **dist/components/Modal/index.js** بنية مشابهة.
 
 **dist/theme/index.js**
 
 ```js
-import "./defaultTheme.css"; // This has a side effect!
+import "./defaultTheme.css"; // لهذا الاستيراد أثر جانبي!
 
 export const themeColors = {
   primary: "#0078d7",
@@ -425,31 +409,31 @@ export const themeColors = {
 };
 ```
 
-### What Happens When Consuming This Package?
+### ماذا يحدث عند استهلاك هذه الحزمة؟
 
-Now, imagine a consumer application that only wants to use the Button component:
+تخيل الآن تطبيقًا مستهلكًا يريد استخدام مكوّن Button فقط:
 
 ```js
 import { Button } from "awesome-ui";
 
-// Use the Button component
+// استخدام مكوّن Button
 ```
 
-#### With `sideEffects: false` in package.json
+#### مع `sideEffects: false` في package.json
 
-When webpack processes this import with tree shaking enabled:
+عندما يعالج webpack هذا الاستيراد مع تفعيل tree shaking:
 
-1. It sees the import for only Button
-2. It looks at the package.json and sees `sideEffects: false`
-3. It determines it only needs to include the Button component code
-4. Since all files are marked as having no side effects, it will include **only** the JavaScript code for the Button
-5. **The CSS file import gets dropped!** Even though Button.css is imported in Button/index.js, webpack assumes this import has no side effects.
+1. يرى أن الاستيراد يخص Button فقط
+2. ينظر إلى package.json ويرى `sideEffects: false`
+3. يحدد أنه يحتاج إلى تضمين كود مكوّن Button فقط
+4. بما أن كل الملفات موسومة بأنها بلا آثار جانبية، فسيضمّن **فقط** كود JavaScript الخاص بـ Button
+5. **سيُحذف استيراد ملف CSS!** رغم أن Button.css مستورد في Button/index.js، يفترض webpack أن هذا الاستيراد لا يملك آثارًا جانبية.
 
-The result: The Button component will render, but without any styling since Button.css was eliminated during tree shaking.
+النتيجة: سيُصيَّر مكوّن Button، لكن دون أي تنسيق لأن Button.css أُزيل أثناء tree shaking.
 
-#### The Correct Configuration for This Package
+#### الإعداد الصحيح لهذه الحزمة
 
-To fix this, we need to update package.json to properly mark CSS files as having side effects:
+لإصلاح ذلك، يجب تحديث package.json لوسم ملفات CSS بشكل صحيح على أنها ذات آثار جانبية:
 
 ```json
 {
@@ -460,57 +444,57 @@ To fix this, we need to update package.json to properly mark CSS files as having
 }
 ```
 
-With this configuration:
+مع هذا الإعداد:
 
-1. Webpack still identifies that only the Button component is needed
-2. But now it recognizes that CSS files have side effects
-3. So, it includes Button.css when processing Button/index.js
+1. ما زال webpack يحدد أن مكوّن Button فقط مطلوب
+2. لكنه يدرك الآن أن ملفات CSS لها آثار جانبية
+3. لذلك يضمّن Button.css عند معالجة Button/index.js
 
-### The Decision Tree for Side Effects
+### شجرة القرار للآثار الجانبية
 
-Here's how webpack evaluates modules during tree shaking:
+هكذا يقيّم webpack الوحدات أثناء tree shaking:
 
-1. Is the export from this module used directly or indirectly?
-   - If yes: Include the module
-   - If no: Continue to step 2
+1. هل يُستخدم export من هذه الوحدة بشكل مباشر أو غير مباشر؟
+   - إذا نعم: ضمّن الوحدة
+   - إذا لا: انتقل إلى الخطوة 2
 
-2. Is the module marked with side effects?
-   - If yes (`sideEffects` includes this file or is `true`): Include the module
-   - If no (`sideEffects` is `false` or doesn't include this file): Exclude the module and its dependencies
+2. هل الوحدة موسومة بأنها ذات آثار جانبية؟
+   - إذا نعم (`sideEffects` يتضمن هذا الملف أو قيمته `true`): ضمّن الوحدة
+   - إذا لا (`sideEffects` قيمته `false` أو لا يتضمن هذا الملف): استبعد الوحدة وتبعياتها
 
-For our library's files with the proper sideEffects configuration:
+بالنسبة إلى ملفات مكتبتنا مع إعداد sideEffects الصحيح:
 
-- `dist/index.js`: No direct export used, no side effects -> Skip over
-- `dist/components/index.js`: No direct export used, no side effects -> Skip over
-- `dist/components/Button/index.js`: Direct export used -> Include
-- `dist/components/Button/Button.css`: No exports, has side effects -> Include
-- `dist/components/Card/*`: No exports used, no side effects -> Exclude
-- `dist/components/Modal/*`: No exports used, no side effects -> Exclude
-- `dist/theme/*`: No exports used, no side effects -> Exclude
+- `dist/index.js`: لا يُستخدم export مباشر، ولا آثار جانبية -> تخطيه
+- `dist/components/index.js`: لا يُستخدم export مباشر، ولا آثار جانبية -> تخطيه
+- `dist/components/Button/index.js`: export مباشر مستخدم -> تضمينه
+- `dist/components/Button/Button.css`: لا توجد exports، وله آثار جانبية -> تضمينه
+- `dist/components/Card/*`: لا توجد exports مستخدمة، ولا آثار جانبية -> استبعاده
+- `dist/components/Modal/*`: لا توجد exports مستخدمة، ولا آثار جانبية -> استبعاده
+- `dist/theme/*`: لا توجد exports مستخدمة، ولا آثار جانبية -> استبعاده
 
-### Real-World Impact
+### الأثر في العالم الحقيقي
 
-The impact of incorrect side effects configuration can be significant:
+قد يكون تأثير الإعداد الخاطئ للآثار الجانبية كبيرًا:
 
-1. **CSS not being included**: Components render without styles
-2. **Global JavaScript not running**: Polyfills or global configurations don't execute
-3. **Initialization code skipped**: Functions that register components or set up event listeners never run
+1. **عدم تضمين CSS**: تُصيَّر المكونات دون أنماط
+2. **عدم تشغيل JavaScript العام**: لا تُنفذ polyfills أو الإعدادات العامة
+3. **تخطي كود التهيئة**: لا تعمل الدوال التي تسجل المكونات أو تجهّز مستمعي الأحداث
 
-These issues can be particularly hard to debug because they often only appear in production builds when tree shaking is enabled.
+قد تكون هذه المشكلات صعبة التصحيح خصوصًا لأنها لا تظهر غالبًا إلا في بناءات الإنتاج عند تفعيل tree shaking.
 
-### Testing Side Effects Configuration
+### اختبار إعداد الآثار الجانبية
 
-A good way to test if your side effects configuration is correct:
+طريقة جيدة لاختبار صحة إعداد الآثار الجانبية:
 
-1. Create a minimal application that imports just one component
-2. Build it with production settings (with tree shaking enabled)
-3. Check if all necessary styles and behaviors work correctly
-4. Look at the generated bundle to confirm the right files are included
+1. أنشئ تطبيقًا بسيطًا يستورد مكوّنًا واحدًا فقط
+2. ابنِه بإعدادات الإنتاج (مع تفعيل tree shaking)
+3. تحقق من أن كل الأنماط والسلوكيات الضرورية تعمل بشكل صحيح
+4. انظر إلى الحزمة الناتجة للتأكد من تضمين الملفات الصحيحة
 
-## Mark a function call as side-effect-free
+## وسم استدعاء دالة بأنه خالٍ من الآثار الجانبية
 
-It is possible to tell webpack that a function call is side-effect-free (pure) by using the `/*#__PURE__*/` annotation. It can be put in front of function calls to mark them as side-effect-free. Arguments passed to the function are not being marked by the annotation and may need to be marked individually. When the initial value in a variable declaration of an unused variable is considered as side-effect-free (pure), it is getting marked as dead code, not executed and dropped by the minimizer.
-This behavior is enabled when [`optimization.innerGraph`](/configuration/optimization/#optimizationinnergraph) is set to `true`.
+يمكن إخبار webpack بأن استدعاء دالة خالٍ من الآثار الجانبية (نقي) باستخدام التعليق `/*#__PURE__*/`. يمكن وضعه قبل استدعاءات الدوال لوسمها بأنها خالية من الآثار الجانبية. لا تُوسَم الوسائط الممررة إلى الدالة بهذا التعليق وقد تحتاج إلى وسمها بشكل منفصل. عندما تُعد القيمة الابتدائية في تصريح متغير غير مستخدم خالية من الآثار الجانبية (نقية)، تُوسَم ككود ميت، ولا تُنفذ، ويحذفها المصغّر.
+يُفعَّل هذا السلوك عندما تكون [`optimization.innerGraph`](/configuration/optimization/#optimizationinnergraph) مضبوطة على `true`.
 
 **file.js**
 
@@ -518,11 +502,11 @@ This behavior is enabled when [`optimization.innerGraph`](/configuration/optimiz
 /* #__PURE__ */ double(55);
 ```
 
-## Mark a function declaration as side-effect-free
+## وسم تصريح دالة بأنه خالٍ من الآثار الجانبية
 
 <Badge text="5.107.0+" />
 
-Webpack also supports the [`#__NO_SIDE_EFFECTS__`](https://github.com/javascript-compiler-hints/compiler-notations-spec/blob/main/no-side-effects-notation-spec.md) annotation to mark a function declaration as pure. Calls to a function annotated this way can be eliminated from the bundle when their return value is unused, even if the function body is not statically analyzable as pure. This is useful for factory or builder functions whose call sites would otherwise need a `/*#__PURE__*/` annotation each time.
+يدعم Webpack أيضًا التعليق [`#__NO_SIDE_EFFECTS__`](https://github.com/javascript-compiler-hints/compiler-notations-spec/blob/main/no-side-effects-notation-spec.md) لوسم تصريح دالة بأنه نقي. يمكن حذف استدعاءات الدالة الموسومة بهذه الطريقة من الحزمة عندما تكون قيمتها المعادة غير مستخدمة، حتى لو لم يكن جسم الدالة قابلًا للتحليل الساكن على أنه نقي. هذا مفيد لدوال المصنع أو البناء التي كانت مواقع استدعائها ستحتاج بخلاف ذلك إلى تعليق `/*#__PURE__*/` في كل مرة.
 
 {/* eslint-disable */}
 
@@ -540,15 +524,15 @@ export function createLogger(prefix) {
 // app.js
 import { createLogger } from "./utils";
 
-// dropped, because `createLogger` is annotated and its result is unused
+// يُحذف لأن `createLogger` موسومة وقيمتها الناتجة غير مستخدمة
 const unused = createLogger("debug");
 ```
 
-W> The annotation currently only takes effect within the module where it is declared. Cross-module propagation is planned for a future release.
+W> لا يؤثر هذا التعليق حاليًا إلا داخل الوحدة التي صُرّح فيها. من المخطط دعم الانتشار عبر الوحدات في إصدار مستقبلي.
 
-## Minify the Output
+## تصغير المخرجات
 
-So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, set the `mode` configuration option to [`production`](/configuration/mode/#mode-production).
+لقد جهّزنا "الكود الميت" ليُحذف باستخدام صيغتي `import` و `export`، لكن ما زلنا بحاجة إلى حذفه من الحزمة. لفعل ذلك، اضبط خيار الإعداد `mode` على [`production`](/configuration/mode/#mode-production).
 
 **webpack.config.js**
 
@@ -573,60 +557,60 @@ export default {
 };
 ```
 
-T> Note that the `--optimize-minimize` flag can be used to enable `TerserPlugin` as well.
+T> لاحظ أنه يمكن استخدام العلم `--optimize-minimize` لتفعيل `TerserPlugin` أيضًا.
 
-With that squared away, we can run another `npm run build` and see if anything has changed.
+بعد ذلك، يمكننا تشغيل `npm run build` مرة أخرى ومعرفة ما إذا كان أي شيء قد تغير.
 
-Notice anything different about `dist/bundle.js`? The whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking, our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
+هل لاحظت شيئًا مختلفًا في `dist/bundle.js`؟ أصبحت الحزمة كلها مصغّرة ومشوّهة الأسماء، لكن إذا نظرت بعناية فلن ترى دالة `square` مضمنة، وسترى نسخة مشوّهة من دالة `cube` (`function r(e){return e*e*e}n.a=r`). مع التصغير و tree shaking، أصبحت حزمتنا أصغر ببضعة بايتات! قد لا يبدو ذلك كثيرًا في هذا المثال المصطنع، لكن tree shaking يمكن أن يحقق انخفاضًا ملحوظًا في حجم الحزمة عند العمل على تطبيقات أكبر ذات أشجار تبعيات معقدة.
 
-T> [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) is needed for the tree shaking to work. It is added by `mode: 'production'`. If you are not using it, remember to add the [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) manually.
+T> يلزم [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) حتى يعمل tree shaking. تتم إضافته بواسطة `mode: 'production'`. إذا لم تكن تستخدمه، فتذكر إضافة [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) يدويًا.
 
-## Common Pitfalls with Side Effects
+## مشكلات شائعة مع الآثار الجانبية
 
-When working with tree shaking and the `sideEffects` flag, there are several common pitfalls to avoid:
+عند العمل مع tree shaking وعلم `sideEffects`، توجد عدة مشكلات شائعة يجب تجنبها:
 
-### 1. Over-optimistic `sideEffects: false`
+### 1. التفاؤل الزائد مع `sideEffects: false`
 
-Setting `sideEffects: false` in your package.json is tempting for optimal tree shaking, but this can cause problems if your code actually does have side effects. Examples of hidden side effects:
+تعيين `sideEffects: false` في package.json مغرٍ للحصول على tree shaking مثالي، لكن هذا قد يسبب مشكلات إذا كان كودك يحتوي فعلًا على آثار جانبية. أمثلة على آثار جانبية مخفية:
 
-- CSS imports (as demonstrated above)
-- Polyfills that modify global objects
-- Libraries that register global event listeners
-- Code that modifies prototype chains
+- استيرادات CSS (كما أوضحنا أعلاه)
+- Polyfills التي تعدّل الكائنات العامة
+- مكتبات تسجل مستمعي أحداث عامة
+- كود يعدّل سلاسل prototype
 
-### 2. Re-exports with Side Effects
+### 2. إعادة التصدير مع آثار جانبية
 
-Consider this pattern:
+تأمل هذا النمط:
 
 ```js
-// This file has side effects that might be skipped
+// هذا الملف له آثار جانبية قد يتم تخطيها
 import "./polyfill";
 
-// Re-export components
+// إعادة تصدير المكونات
 export * from "./components";
 ```
 
-If a consumer only imports specific components, the polyfill import might be skipped entirely if not properly marked with side effects.
+إذا استورد مستهلك مكونات محددة فقط، فقد يتم تخطي استيراد polyfill بالكامل إذا لم يُوسَم بشكل صحيح بأنه ذو آثار جانبية.
 
-### 3. Forgetting about Nested Dependencies
+### 3. نسيان التبعيات المتداخلة
 
-Your package might correctly mark side effects, but if it depends on third-party packages that incorrectly mark their side effects, you might still encounter issues.
+قد توسِم حزمتك الآثار الجانبية بشكل صحيح، لكن إذا كانت تعتمد على حزم طرف ثالث توسِم آثارها الجانبية بشكل غير صحيح، فقد تظل تواجه مشكلات.
 
-### 4. Testing Only in Development Mode
+### 4. الاختبار في وضع التطوير فقط
 
-Tree shaking typically only fully activates in production mode. Testing only in development can hide tree shaking issues until deployment.
+عادةً لا يتفعّل tree shaking بالكامل إلا في وضع الإنتاج. الاختبار في التطوير فقط قد يخفي مشكلات tree shaking إلى حين النشر.
 
-## Conclusion
+## الخاتمة
 
-What we've learned is that in order to take advantage of _tree shaking_, you must...
+ما تعلمناه هو أنه للاستفادة من _tree shaking_، يجب عليك:
 
-- Use ES2015 module syntax (i.e. `import` and `export`).
-- Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of the popular Babel preset @babel/preset-env - see the [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
-- Add a `"sideEffects"` property to your project's `package.json` file.
-- Be careful about correctly marking files with side effects, especially CSS imports.
-- Use the [`production`](/configuration/mode/#mode-production) `mode` configuration option to enable [various optimizations](/configuration/mode/#usage) including minification and tree shaking (side effects optimization is enabled in development mode using the flag value).
-- Make sure you set a correct value for [`devtool`](/configuration/devtool/#devtool) as some of them can't be used in `production` mode.
+- استخدام صيغة وحدات ES2015 (أي `import` و `export`).
+- التأكد من أن أي مصرّفات لا تحوّل صيغة وحدات ES2015 إلى وحدات CommonJS (هذا هو السلوك الافتراضي للحزمة الشائعة Babel preset @babel/preset-env؛ راجع [التوثيق](https://babeljs.io/docs/en/babel-preset-env#modules) لمزيد من التفاصيل).
+- إضافة خاصية `"sideEffects"` إلى ملف `package.json` الخاص بمشروعك.
+- الحذر عند وسم الملفات ذات الآثار الجانبية بشكل صحيح، خصوصًا استيرادات CSS.
+- استخدام خيار الإعداد [`production`](/configuration/mode/#mode-production) في `mode` لتفعيل [تحسينات متنوعة](/configuration/mode/#usage)، بما في ذلك التصغير و tree shaking (يتم تفعيل تحسين الآثار الجانبية في وضع التطوير باستخدام قيمة العلم).
+- التأكد من تعيين قيمة صحيحة لـ [`devtool`](/configuration/devtool/#devtool)، إذ لا يمكن استخدام بعض القيم في وضع `production`.
 
-You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
+يمكنك تخيل تطبيقك كشجرة. الكود المصدري والمكتبات التي تستخدمها فعلًا تمثل الأوراق الخضراء الحية في الشجرة. ويمثل الكود الميت الأوراق البنية الذابلة التي يستهلكها الخريف. للتخلص من الأوراق الميتة، عليك هز الشجرة لتسقط.
 
-If you are interested in more ways to optimize your output, please jump to the next guide for details on building for [production](/guides/production).
+إذا كنت مهتمًا بمزيد من طرق تحسين المخرجات، فانتقل إلى الدليل التالي لمزيد من التفاصيل حول البناء من أجل [الإنتاج](/guides/production).

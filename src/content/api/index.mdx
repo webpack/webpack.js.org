@@ -1,54 +1,38 @@
 ---
-title: Introduction
+title: مقدمة
 sort: -1
 contributors:
-  - tbroadley
+  - RlxChap2
 ---
 
-A variety of interfaces are available to customize the compilation process.
-Some features overlap between interfaces, e.g. a configuration option may be
-available via a CLI flag, while others exist only through a single interface.
-The following high-level information should get you started.
+يوفّر webpack أكثر من واجهة لتخصيص عملية التجميع. بعض الميزات يمكن الوصول إليها بأكثر من طريقة؛ مثلًا قد تجد خيارًا في ملف الإعدادات وله أيضًا flag في CLI. وفي المقابل توجد ميزات لا تتوفر إلا من واجهة واحدة. هذه الصفحة تعطيك نظرة عامة تساعدك على اختيار الواجهة المناسبة.
 
 ## CLI
 
-The Command Line Interface (CLI) to configure and interact with your build. It
-is especially useful in the case of early prototyping and profiling. For the
-most part, the CLI is used to kick off the process using a configuration
-file and a few flags (e.g. `--env`).
+واجهة سطر الأوامر (CLI) هي الطريقة المباشرة لتشغيل البناء والتعامل معه. تفيدك كثيرًا في التجارب السريعة وقياس الأداء. غالبًا ستستخدمها لتشغيل webpack مع ملف إعدادات وبعض flags مثل `--env`.
 
-[Learn more about the CLI!](/api/cli)
+[تعرّف أكثر على CLI](/api/cli)
 
 ## Module
 
-When processing modules with webpack, it is important to understand the
-different module syntaxes – specifically the [methods](/api/module-methods)
-and [variables](/api/module-variables) – that are supported.
+عند معالجة modules باستخدام webpack، من المهم أن تفهم صيغ modules التي يدعمها، خصوصًا [الدوال](/api/module-methods) و[المتغيرات](/api/module-variables). هذا الفهم يساعدك على معرفة كيف يقرأ webpack الكود وكيف يتعامل مع الاستيراد والتصدير.
 
-[Learn more about modules!](/api/module-methods)
+[تعرّف أكثر على modules](/api/module-methods)
 
 ## Node
 
-While most users can get away with using the CLI along with a
-configuration file, more fine-grained control of the compilation can be
-achieved via the Node interface. This includes passing multiple configurations,
-programmatically running or watching, and collecting stats.
+غالبًا يكفي استخدام CLI مع ملف إعدادات، لكن إذا احتجت تحكمًا أدق في عملية التجميع فاستخدم واجهة Node. من خلالها تستطيع تمرير أكثر من إعداد، أو تشغيل webpack ومراقبته من داخل كود JavaScript، أو جمع إحصاءات البناء برمجيًا.
 
-[Learn more about the Node API!](/api/node)
+[تعرّف أكثر على Node API](/api/node)
 
 ## Loaders
 
-Loaders are transformations that are applied to the source code of a module.
-They are written as functions that accept source code as a parameter and return
-a new version of that code with transformations applied.
+الـ loaders هي تحويلات تُطبّق على كود module قبل أن يدخل في عملية التجميع. عمليًا، الـ loader دالة تستقبل الكود الأصلي وتعيد نسخة جديدة منه بعد التحويل، مثل تحويل TypeScript إلى JavaScript أو معالجة ملفات CSS.
 
-[Learn more about loaders!](/api/loaders)
+[تعرّف أكثر على loaders](/api/loaders)
 
 ## Plugins
 
-The plugin interface allows users to tap directly into the compilation process.
-Plugins can register handlers on lifecycle hooks that run at different points
-throughout a compilation. When each hook is executed, the plugin will have full
-access to the current state of the compilation.
+واجهة plugins تسمح لك بالدخول إلى مراحل التجميع نفسها. يستطيع plugin تسجيل handlers على lifecycle hooks تعمل في نقاط مختلفة أثناء البناء. وعندما يعمل hook معيّن، يحصل plugin على إمكانية الوصول إلى حالة التجميع في تلك اللحظة.
 
-[Learn more about plugins!](/api/plugins)
+[تعرّف أكثر على plugins](/api/plugins)

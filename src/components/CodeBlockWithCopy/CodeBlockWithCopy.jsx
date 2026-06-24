@@ -131,13 +131,13 @@ export default function CodeBlockWithCopy({ children }) {
               ? "bg-red-500 hover:bg-red-700"
               : "bg-[#175d96] hover:bg-[#2f85d0]",
         )}
-        aria-label="Copy code to clipboard"
+        aria-label="نسخ الكود إلى الحافظة"
       >
         {copyStatus === "copied"
-          ? "Copied!"
+          ? "تم النسخ"
           : copyStatus === "error"
-            ? "Error"
-            : "Copy"}
+            ? "تعذر النسخ"
+            : "نسخ"}
       </button>
 
       <pre ref={preRef}>{children}</pre>
