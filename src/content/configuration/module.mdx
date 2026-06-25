@@ -1286,6 +1286,7 @@ Each array entry object accepts:
   - `stylesheet` - a CSS chunk entry, like `<link rel="stylesheet">`.
   - `stylesheet-style` - the attribute value is treated as a full inline stylesheet (like a `<style>` body) and routed through the CSS pipeline.
   - `stylesheet-style-attribute` - the attribute value is treated as a CSS block's contents (like a `style` attribute) and routed through the CSS pipeline.
+  - `css-url` - extract `url()` references from a CSS-valued attribute (for example the SVG `style` presentation attributes). Available since webpack 5.108.0.
 - `tag` (optional) - the tag name to match. Omit to match any element.
 - `filter` (optional) - `(attributes: Map<string, string>) => boolean`; return `false` to skip this entry for a given element.
 
