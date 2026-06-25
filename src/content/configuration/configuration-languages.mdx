@@ -19,6 +19,33 @@ contributors:
 
 Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found in the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
 
+## defineConfig
+
+<Badge text="5.108.0+" />
+
+`defineConfig` is a helper exported from `webpack` that gives editors type-checking and autocomplete for your configuration without any extra type annotations. It is an identity function (a no-op at runtime that simply returns the config you pass in), so it works in plain JavaScript configs too.
+
+**webpack.config.js**
+
+```js
+const { defineConfig } = require("webpack");
+
+module.exports = defineConfig({
+  mode: "none",
+});
+```
+
+It accepts every shape webpack-cli can load: a single configuration object, an array of configurations (multi-compiler), a function returning either of those, an array of such functions, or a `Promise` resolving to any of them.
+
+```js
+const { defineConfig } = require("webpack");
+
+module.exports = defineConfig((env, argv) => ({
+  mode: argv.mode ?? "development",
+  // ...
+}));
+```
+
 ## TypeScript
 
 To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies, i.e., TypeScript and the relevant type definitions from the [DefinitelyTyped](https://definitelytyped.org/) project:

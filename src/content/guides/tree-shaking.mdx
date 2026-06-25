@@ -544,7 +544,9 @@ import { createLogger } from "./utils";
 const unused = createLogger("debug");
 ```
 
-W> The annotation currently only takes effect within the module where it is declared. Cross-module propagation is planned for a future release.
+T> Since webpack 5.108.0 the annotation propagates across module boundaries, so an unused call in an importing module is tree-shaken too. (Before 5.108.0 it only took effect within the module where it was declared.)
+
+T> If you can't edit the source to add the annotation (for example, a function coming from a dependency), you can mark names as side-effect-free from your config with [`module.parser.javascript.pureFunctions`](/configuration/module/#moduleparserjavascriptpurefunctions) (5.108.0+).
 
 ## Minify the Output
 

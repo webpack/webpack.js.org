@@ -88,12 +88,15 @@ export default {
       chunkLoading: "jsonp",
       asyncChunks: true, // Create async chunks that are loaded on demand.
       layer: "name of layer", // set the layer for an entry point
+      worker: true, // mark as a worker entry, available since webpack 5.108.0
     },
   },
 };
 ```
 
 Descriptor syntax might be used to pass additional options to an entry point.
+
+T> The `worker` flag (added in webpack 5.108.0) marks an entry as a worker so its output file uses [`output.workerChunkFilename`](/configuration/output/#outputworkerchunkfilename) instead of the regular chunk filename. webpack sets it automatically for entries it creates from `new Worker(new URL(...))`, so you rarely set it by hand.
 
 ### Output filename
 
