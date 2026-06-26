@@ -904,6 +904,44 @@ export default {
 
 It can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor) `html` option.
 
+## output.htmlFilename
+
+<Badge text="5.107.0+" />
+
+`string = output.filename with '.js' replaced by '.html'` `function (pathData, assetInfo) => string`
+
+The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) (initial chunks). It works like [`output.filename`](#outputfilename) and supports the same [template strings](#template-strings). When unset, it is derived from `output.filename` by swapping the `.js` extension for `.html` (falling back to `[name].html` when `output.filename` is a function), mirroring how `cssFilename` derives from `filename`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    htmlFilename: "[name].html",
+  },
+};
+```
+
+W> You must **not** specify an absolute path here. The path may contain folders separated by `/`, and is joined with [`output.path`](#outputpath) to determine the location on disk.
+
+## output.htmlChunkFilename
+
+<Badge text="5.107.0+" />
+
+`string = output.chunkFilename with '.js' replaced by '.html'` `function (pathData, assetInfo) => string`
+
+The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) for non-initial (on-demand) chunks. It defaults from [`output.chunkFilename`](#outputchunkfilename) the same way `htmlFilename` defaults from `filename`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    htmlChunkFilename: "[name].chunk.html",
+  },
+};
+```
+
 ## output.iife
 
 `boolean = true`
