@@ -73,14 +73,16 @@ export const enhance = (tree, options) => {
 
     const isBlogItem = normalizedPath.includes("/blog/");
     if (isBlogItem) {
-      const teaser = (body || "")
+      const teaserLines = (body || "")
         .split("\n")
-        .filter((line) => line.trim() && !line.trim().startsWith("#"))
+        .filter((line) => line.trim() && !line.trim().startsWith("#"));
+      const teaserText = teaserLines
         .slice(0, 3)
         .join(" ")
-        .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Strip markdown links but keep text
-        .slice(0, 240);
-      tree.teaser = `${teaser}...`;
+        .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, "$1"); // Strip markdown links but keep text
+      const teaser = teaserText.slice(0, 240);
+      const isTruncated = teaserLines.length > 3 || teaserText.length > 240;
+      tree.teaser = isTruncated ? `${teaser}...` : teaser;
     }
 
     Object.assign(

@@ -1,6 +1,9 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { describe, expect } from "@jest/globals";
-import { restructure } from "./content-tree-enhancers.mjs";
+import { enhance, restructure } from "./content-tree-enhancers.mjs";
 
 describe("restructure", () => {
   it("applies filter result back to children array", () => {
@@ -53,5 +56,43 @@ describe("restructure", () => {
     restructure(root, { dir: "src/content" });
 
     expect(root.children.map((item) => item.title)).toEqual(["API", "Guides"]);
+  });
+});
+
+describe("enhance", () => {
+  const createBlogTree = (body) => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "webpack-blog-"));
+    const blogDir = path.join(root, "blog");
+    fs.mkdirSync(blogDir);
+    const filePath = path.join(blogDir, "example.mdx");
+    fs.writeFileSync(filePath, `---\ntitle: Example\n---\n\n${body}`);
+
+    return {
+      root,
+      tree: {
+        type: "file",
+        path: filePath,
+        extension: ".mdx",
+        name: "example.mdx",
+      },
+    };
+  };
+
+  it("does not append an ellipsis to an untruncated blog teaser", () => {
+    const { root, tree } = createBlogTree("Short body.");
+
+    enhance(tree, { dir: root });
+
+    expect(tree.teaser).toBe("Short body.");
+  });
+
+  it("appends an ellipsis when the blog teaser is truncated", () => {
+    const { root, tree } = createBlogTree(
+      ["First line.", "Second line.", "Third line.", "Fourth line."].join("\n"),
+    );
+
+    enhance(tree, { dir: root });
+
+    expect(tree.teaser).toBe("First line. Second line. Third line....");
   });
 });
