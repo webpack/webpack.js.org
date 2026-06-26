@@ -17,7 +17,7 @@ contributors:
   - snitin315
 ---
 
-Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found in the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
+Webpack accepts configuration files written in multiple programming and data languages, so you can author your config in whichever format suits your project — JavaScript, TypeScript, CoffeeScript, or a plain data file like JSON5, YAML or TOML.
 
 ## defineConfig
 
@@ -277,7 +277,7 @@ When your configuration is purely static data — no functions, no `process.env`
 | `.yaml`, `.yml` | `js-yaml`      |
 | `.toml`         | `toml`         |
 
-The parsers are **not bundled** with webpack-cli. Install the one you need for your format — they are declared as optional `peerDependencies`, so they resolve correctly under Yarn PnP. If the parser is missing, webpack-cli exits and tells you exactly which package to install.
+The parser is **not bundled** with webpack-cli — install the one your format needs as a dev dependency. If it is missing, webpack-cli stops and tells you exactly which package to install.
 
 ```bash
 npm install --save-dev json5
