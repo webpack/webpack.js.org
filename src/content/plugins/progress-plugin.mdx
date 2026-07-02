@@ -45,6 +45,9 @@ When providing an `object` to the `ProgressPlugin`, following properties are sup
 - `dependencies` (`boolean = true`): Shows the count of dependencies in progress message.
 - `dependenciesCount` (`number = 10000`): A minimum dependencies count to start with. Takes effect when `dependencies` property is enabled.
 - `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): Tells `ProgressPlugin` how to calculate progress percentage.
+- `progressBar` (`boolean | object = false`) <Badge text="5.107.0+" />: Renders a progress bar in the terminal instead of the plain percentage message. Only takes effect with the default handler, i.e. when no custom `handler` is provided. Pass `true` to enable it with defaults, or an object with the following properties:
+  - `name` (`string = 'Build'`): Name shown before the progress bar.
+  - `color` (`string = 'green'`): Color used for the filled portion of the bar. Falls back to `'green'` when the given color is not supported.
 
 ```js
 new webpack.ProgressPlugin({
@@ -62,6 +65,17 @@ new webpack.ProgressPlugin({
 });
 ```
 
+Rendering a progress bar:
+
+```js
+new webpack.ProgressPlugin({
+  progressBar: {
+    name: "Build",
+    color: "green",
+  },
+});
+```
+
 ### webpack.ProgressPlugin.createDefaultHandler
 
 If the default handler of `ProgressPlugin` does not meet your requirements, you can customize it using the static `ProgressPlugin.createDefaultHandler` method.
@@ -69,7 +83,8 @@ If the default handler of `ProgressPlugin` does not meet your requirements, you 
 ```ts
 static createDefaultHandler: (
   profile: undefined | null | boolean,
-  logger: WebpackLogger
+  logger: WebpackLogger,
+  progressBar?: { name: string, color: string } | false
 ) => (percentage: number, msg: string, ...args: string[]) => void;
 ```
 
