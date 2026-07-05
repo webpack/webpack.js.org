@@ -489,6 +489,24 @@ jq(".my-element").animate(/* ... */);
 
 Note that there will be an `import` statement in the output bundle.
 
+#### Preserving phase keywords
+
+<Badge text="5.107.0+" />
+
+The `defer` and `source` import phase keywords are preserved on `module` externals the same way [import attributes](https://github.com/tc39/proposal-import-attributes) are. A static `import defer * as ns from "mod"` against a `module` external is emitted as a native `import defer * as ...` statement, and `import source v from "mod"` becomes `import source ... from "mod"`. The same external imported with two different phases produces distinct `ExternalModule` instances, so neither phase is silently dropped.
+
+{/* eslint-skip */}
+
+```js
+// input
+import defer * as ns from "external-mod";
+import source v from "external-mod";
+
+// emitted output (with externalsType: "module")
+import defer * as ns from "external-mod";
+import source v from "external-mod";
+```
+
 ### externalsType.import
 
 <Badge text="5.94.0+" />
@@ -535,6 +553,24 @@ async function foo() {
 ```
 
 Note that the output bundle will have an `import()` statement.
+
+#### Preserving phase keywords
+
+<Badge text="5.107.0+" />
+
+Dynamic `import.defer(...)` and `import.source(...)` are also preserved on `import` externals when the import function name is the default `"import"`. The phase keyword is emitted in the output instead of being stripped.
+
+{/* eslint-skip */}
+
+```js
+// input
+const ns = await import.defer("external-mod");
+const src = await import.source("external-mod");
+
+// emitted output (with externalsType: "import")
+const ns = await import.defer("external-mod");
+const src = await import.source("external-mod");
+```
 
 ### externalsType.module-import
 

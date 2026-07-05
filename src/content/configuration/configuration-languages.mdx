@@ -17,7 +17,34 @@ contributors:
   - snitin315
 ---
 
-Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found in the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
+Webpack accepts configuration files written in multiple programming and data languages, so you can author your config in whichever format suits your project — JavaScript, TypeScript, CoffeeScript, or a plain data file like JSON5, YAML or TOML.
+
+## defineConfig
+
+<Badge text="5.108.0+" />
+
+`defineConfig` is a helper exported from `webpack` that gives editors type-checking and autocomplete for your configuration without any extra type annotations. It is an identity function (a no-op at runtime that simply returns the config you pass in), so it works in plain JavaScript configs too.
+
+**webpack.config.js**
+
+```js
+const { defineConfig } = require("webpack");
+
+module.exports = defineConfig({
+  mode: "none",
+});
+```
+
+It accepts every shape webpack-cli can load: a single configuration object, an array of configurations (multi-compiler), a function returning either of those, an array of such functions, or a `Promise` resolving to any of them.
+
+```js
+const { defineConfig } = require("webpack");
+
+module.exports = defineConfig((env, argv) => ({
+  mode: argv.mode ?? "development",
+  // ...
+}));
+```
 
 ## TypeScript
 
@@ -237,3 +264,65 @@ export default (
 ```
 
 W> If you are using Babel elsewhere and have `modules` set to `false`, you will have to either maintain two separate `.babelrc` files or use `const jsxobj = require('jsxobj');` and `module.exports` instead of the new `import` and `export` syntax. This is because while Node does support many new ES6 features, they don't yet support ES6 module syntax.
+
+## Data formats (JSON5, YAML and TOML)
+
+<Badge text="webpack-cli v7.1.0+" />
+
+When your configuration is purely static data — no functions, no `process.env` reads, no computed values — you can write it as a data file instead of JavaScript. webpack-cli parses the following extensions directly:
+
+| Extension       | Parser package |
+| --------------- | -------------- |
+| `.json5`        | `json5`        |
+| `.yaml`, `.yml` | `js-yaml`      |
+| `.toml`         | `toml`         |
+
+The parser is **not bundled** with webpack-cli — install the one your format needs as a dev dependency. If it is missing, webpack-cli stops and tells you exactly which package to install.
+
+```bash
+npm install --save-dev json5
+# or
+npm install --save-dev js-yaml
+# or
+npm install --save-dev toml
+```
+
+Point `--config` at the file, or name it so it is picked up as a [default config](/api/cli/#default-configurations) (e.g. `webpack.config.json5`):
+
+```bash
+npx webpack --config webpack.config.toml
+```
+
+**webpack.config.json5**
+
+```json5
+{
+  // JSON5 allows comments, unquoted keys and trailing commas
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.js",
+  },
+}
+```
+
+**webpack.config.yaml**
+
+```yaml
+mode: production
+entry: ./src/index.js
+output:
+  filename: bundle.js
+```
+
+**webpack.config.toml**
+
+```toml
+mode = "production"
+entry = "./src/index.js"
+
+[output]
+filename = "bundle.js"
+```
+
+T> These formats describe plain data only. When you need dynamic configuration — environment-based branches, plugin instances, or a function form — use a JavaScript or TypeScript config instead.

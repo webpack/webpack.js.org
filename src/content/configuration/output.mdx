@@ -496,12 +496,18 @@ export default {
       asyncFunction: true,
       // The environment supports BigInt as literal (123n).
       bigIntLiteral: false,
-      // The environment supports const and let for variable declarations.
+      // The environment supports const for variable declarations.
       const: true,
+      // The environment supports let for variable declarations.
+      let: true,
+      // The environment supports logical assignment operators ('a ||= b', 'a &&= b', 'a ??= b').
+      logicalAssignment: true,
       // The environment supports destructuring ('{ a, b } = obj').
       destructuring: true,
       // The environment supports 'document' variable.
       document: true,
+      // The environment supports 'Object.hasOwn'.
+      hasOwn: true,
       // The environment supports an async import() function to import EcmaScript modules.
       dynamicImport: false,
       // The environment supports an async import() when creating a worker, only for web targets at the moment.
@@ -514,11 +520,17 @@ export default {
       module: false,
       // The environment supports object method shorthand ('{ module() {} }').
       methodShorthand: true,
+      // The environment supports `process.getBuiltinModule()` to synchronously load Node.js core modules.
+      nodeBuiltinModuleGetter: false,
       // Determines if the node: prefix is generated for core module imports in environments that support it.
       // This is only applicable to Webpack runtime code.
       nodePrefixForCoreModules: false,
       // The environment supports optional chaining ('obj?.a' or 'obj?.()').
       optionalChaining: true,
+      // The environment supports spread and rest in array/object literals and calls ('{ ...obj }', 'fn(...args)').
+      spread: true,
+      // The environment supports 'Symbol' (and well-known symbols like 'Symbol.toStringTag').
+      symbol: true,
       // The environment supports template literals.
       templateLiteral: true,
       // The environment supports `import.meta.dirname` and `import.meta.filename`.
@@ -527,6 +539,10 @@ export default {
   },
 };
 ```
+
+These capability flags are normally inferred from your [`target`](/configuration/target/); you only set them manually to override that detection. When a flag is enabled, webpack emits the corresponding modern syntax in its generated runtime code and otherwise falls back to the equivalent legacy output.
+
+T> `let`, `spread`, `hasOwn`, `symbol`, and `nodeBuiltinModuleGetter` were added in webpack 5.108.0. `let` falls back to the value of `const` when the target does not report it separately, `spread` and `symbol` are optimistic (enabled unless the target reports a lack of support), and `hasOwn` is enabled only when the target explicitly reports `Object.hasOwn` support. `nodeBuiltinModuleGetter` reflects support for `process.getBuiltinModule()` and is used by universal builds to load Node.js core modules without breaking the browser.
 
 ## output.filename
 
@@ -627,10 +643,11 @@ The following substitutions are available in template strings (via webpack's int
 
 Substitutions available on Compilation-level:
 
-| Template   | Description                  |
-| ---------- | ---------------------------- |
-| [fullhash] | The full hash of compilation |
-| [hash]     | Same, but deprecated         |
+| Template     | Description                                                                            |
+| ------------ | -------------------------------------------------------------------------------------- |
+| [fullhash]   | The full hash of compilation                                                           |
+| [hash]       | Same, but deprecated                                                                   |
+| [uniqueName] | The value of [`output.uniqueName`](#outputuniquename) (alias `[uniquename]`, 5.108.0+) |
 
 Substitutions available on Chunk-level:
 
@@ -673,6 +690,8 @@ Substitutions available on URL-level:
 T> `[file]` equals `[path][base]`. `[base]` equals `[name][ext]`. The full path is `[path][name][ext][query][fragment]` or `[path][base][query][fragment]` or `[file][query][fragment]`.
 
 The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
+
+Since webpack 5.108.0, the hash digest encoding can also be set inline as `[<hash>:<digest>:<length>]`, for example `[contenthash:base64:8]`. The digest defaults to [`output.hashDigest`](#outputhashdigest) (`hex`), and the same form works in CSS module [`localIdentName`](/loaders/css-loader/#localidentname) placeholders.
 
 It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
 
@@ -839,6 +858,89 @@ For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
+
+## output.html
+
+<Badge text="5.108.0+" />
+
+`boolean = false` `object`
+
+Generate an HTML file for each non-HTML [entrypoint](/concepts/entry-points/), injecting that entrypoint's initial JS and CSS output chunks (including chunks shared through [`dependOn`](/configuration/entry-context/#dependencies)). This is the part of `html-webpack-plugin` that scaffolds a document around your bundles, built into webpack core. It relies on the experimental HTML support, so enable [`experiments.html`](/configuration/experiments/#experimentshtml).
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  entry: {
+    main: "./src/main.js",
+  },
+  output: {
+    html: true,
+  },
+};
+```
+
+Set it to an object to configure how the injected `<script>` tags load:
+
+| Option          | Description                                                           |
+| --------------- | --------------------------------------------------------------------- |
+| `scriptLoading` | `'auto'` (default), `'defer'`, or `'blocking'`. See the values below. |
+
+- `'auto'`: emit a module script (`type="module"`) for ES module output and a deferred script otherwise.
+- `'defer'`: force a deferred `<script defer>`.
+- `'blocking'`: emit a plain blocking `<script>`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      scriptLoading: "defer",
+    },
+  },
+};
+```
+
+It can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor) `html` option.
+
+## output.htmlFilename
+
+<Badge text="5.107.0+" />
+
+`string = output.filename with '.js' replaced by '.html'` `function (pathData, assetInfo) => string`
+
+The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) (initial chunks). It works like [`output.filename`](#outputfilename) and supports the same [template strings](#template-strings). When unset, it is derived from `output.filename` by swapping the `.js` extension for `.html` (falling back to `[name].html` when `output.filename` is a function), mirroring how `cssFilename` derives from `filename`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    htmlFilename: "[name].html",
+  },
+};
+```
+
+W> You must **not** specify an absolute path here. The path may contain folders separated by `/`, and is joined with [`output.path`](#outputpath) to determine the location on disk.
+
+## output.htmlChunkFilename
+
+<Badge text="5.107.0+" />
+
+`string = output.chunkFilename with '.js' replaced by '.html'` `function (pathData, assetInfo) => string`
+
+The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) for non-initial (on-demand) chunks. It defaults from [`output.chunkFilename`](#outputchunkfilename) the same way `htmlFilename` defaults from `filename`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    htmlChunkFilename: "[name].chunk.html",
+  },
+};
+```
 
 ## output.iife
 
@@ -2126,7 +2228,7 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 Output JavaScript files as module type. Disabled by default as it's an experimental feature.
 
-When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally.
+When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `minimizerOptions.module` to `true` internally.
 
 If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
 
@@ -2410,6 +2512,27 @@ export default {
 };
 ```
 
+## output.strictModuleResolution
+
+Emit a runtime check that throws a `MODULE_NOT_FOUND` error when a required module id is missing from the bundle.
+
+- Type: `boolean`
+- Available: 5.108.0+
+
+It defaults to `true` in [`development`](/configuration/mode/#mode-development) mode and `false` in [`production`](/configuration/mode/#mode-production) mode. Set it explicitly to re-enable the guard in production (useful for debugging) or to drop it in development.
+
+```js
+export default {
+  mode: "production",
+  output: {
+    // re-enable the MODULE_NOT_FOUND runtime guard in production
+    strictModuleResolution: true,
+  },
+};
+```
+
+T> Before 5.108.0 this runtime guard was tied to [`output.pathinfo`](#outputpathinfo). It is now controlled by its own dedicated option.
+
 ## output.strictModuleExceptionHandling
 
 W> Deprecated, use
@@ -2566,6 +2689,30 @@ export default {
   },
 };
 ```
+
+## output.workerChunkFilename
+
+`string` `function (pathData, assetInfo) => string`
+
+- Available: 5.108.0+
+
+This option determines the name of non-initial worker chunk files. It accepts the same string templates and function form as [`output.chunkFilename`](#outputchunkfilename), and defaults to the value of `output.chunkFilename`. Setting it lets you give worker chunks their own naming scheme independently of regular chunks.
+
+You must not specify an absolute path here, but the path may contain folders separated by `/`. The specified path is joined with the value of the [`output.path`](#outputpath) option to determine the location on disk.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  output: {
+    chunkFilename: "[name].chunk.js",
+    workerChunkFilename: "workers/[name].[contenthash].worker.js",
+  },
+};
+```
+
+T> Entries that webpack creates automatically from `new Worker(new URL(...))` are marked as workers, so their output files use `workerChunkFilename`. See also the entry-level [`worker`](/configuration/entry-context/#entry-descriptor) flag. A `filename` set for a specific worker entry still takes precedence over this option.
 
 ## output.workerChunkLoading
 

@@ -16,16 +16,16 @@ jobs:
         node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn
+          cache: npm
 
-      - run: yarn --frozen-lockfile
-      - run: yarn jest
+      - run: npm ci
+      - run: npm run jest
 
   lint:
     name: Lint
@@ -35,18 +35,18 @@ jobs:
         node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn
+          cache: npm
 
-      - run: yarn --frozen-lockfile
-      - run: yarn lint:js
-      - run: yarn lint:prettier
-      - run: yarn lint:markdown
+      - run: npm ci
+      - run: npm run lint:js
+      - run: npm run lint:prettier
+      - run: npm run lint:markdown
 
   proseLint:
     name: Proselint
@@ -56,19 +56,19 @@ jobs:
         node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn
+          cache: npm
 
       - name: Install MDX Parser
         run: npm install -g mdx2vast
 
       - name: Vale
-        uses: errata-ai/vale-action@d89dee975228ae261d22c15adcd03578634d429c # v2.1.1
+        uses: errata-ai/vale-action@85f9f7f2c5f449ac0ae5b66662961bae3f77ca6a # v2.1.2
         with:
           files: src/content
         env:
@@ -82,28 +82,28 @@ jobs:
         node-version: [lts/*]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node-version }}
-          cache: yarn
+          cache: npm
 
-      - run: yarn --frozen-lockfile
+      - run: npm ci
 
       - name: Enable webpack persistent caching
         uses: ./.github/actions/webpack-persistent-cache
 
       - name: Cypress run
-        uses: cypress-io/github-action@783cb3f07983868532cabaedaa1e6c00ff4786a8 # v7.1.9
+        uses: cypress-io/github-action@948d67d3074f1bbb6379c8bdbb04e95d2f8e593f # v7.4.0
         with:
           browser: chrome
           config-file: cypress.config.js
-          build: yarn build
-          start: yarn serve-dist
-          command: yarn cypress:run
+          build: npm run build
+          start: npm run serve-dist
+          command: npm run cypress:run
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - run: yarn lint:links
+      - run: npm run lint:links

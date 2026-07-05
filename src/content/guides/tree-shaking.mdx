@@ -518,6 +518,36 @@ This behavior is enabled when [`optimization.innerGraph`](/configuration/optimiz
 /* #__PURE__ */ double(55);
 ```
 
+## Mark a function declaration as side-effect-free
+
+<Badge text="5.107.0+" />
+
+Webpack also supports the [`#__NO_SIDE_EFFECTS__`](https://github.com/javascript-compiler-hints/compiler-notations-spec/blob/main/no-side-effects-notation-spec.md) annotation to mark a function declaration as pure. Calls to a function annotated this way can be eliminated from the bundle when their return value is unused, even if the function body is not statically analyzable as pure. This is useful for factory or builder functions whose call sites would otherwise need a `/*#__PURE__*/` annotation each time.
+
+{/* eslint-disable */}
+
+```js
+// utils.js
+/*#__NO_SIDE_EFFECTS__*/
+export function createLogger(prefix) {
+  return (msg) => console.log(`[${prefix}] ${msg}`);
+}
+```
+
+{/* eslint-enable */}
+
+```js
+// app.js
+import { createLogger } from "./utils";
+
+// dropped, because `createLogger` is annotated and its result is unused
+const unused = createLogger("debug");
+```
+
+T> Since webpack 5.108.0 the annotation propagates across module boundaries, so an unused call in an importing module is tree-shaken too. (Before 5.108.0 it only took effect within the module where it was declared.)
+
+T> If you can't edit the source to add the annotation (for example, a function coming from a dependency), you can mark names as side-effect-free from your config with [`module.parser.javascript.pureFunctions`](/configuration/module/#moduleparserjavascriptpurefunctions) (5.108.0+).
+
 ## Minify the Output
 
 So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, set the `mode` configuration option to [`production`](/configuration/mode/#mode-production).

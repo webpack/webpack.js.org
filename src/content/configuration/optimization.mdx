@@ -245,6 +245,80 @@ export default {
 };
 ```
 
+## optimization.inlineExports
+
+`boolean`
+
+<Badge text="5.108.0+" />
+
+Inline ESM exports that bind to small primitive constants (a `null`, `undefined`, `boolean`, `number` or `string` of at most 6 bytes) at every import site, replacing the imported binding with the literal value. Once every import is replaced, the import dependency becomes inactive, the export turns unused, and dead-code elimination can drop the export and, if the module is side-effect free, the whole module.
+
+The default value of `optimization.inlineExports` depends on the [`mode`](/configuration/mode/):
+
+| Mode            | Default |
+| --------------- | ------- |
+| `"production"`  | `true`  |
+| `"development"` | `false` |
+| `"none"`        | `false` |
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  optimization: {
+    inlineExports: true,
+  },
+};
+```
+
+This happens in two steps. Given these modules:
+
+```js
+// flags.js
+export const DEBUG = false; // a ≤6-byte boolean
+```
+
+```js
+// app.js
+import { DEBUG } from "./flags.js";
+
+if (DEBUG) doSomething();
+```
+
+First, every reference to the imported binding is replaced with its literal value (inlining):
+
+{/* eslint-skip */}
+
+```js
+// app.js (conceptual result)
+if (false) doSomething();
+```
+
+Then, because no import references `DEBUG` anymore, the `export const DEBUG` is left unused and dead-code elimination drops it. If `flags.js` has no side effects, the whole module is removed too. The consuming code can additionally collapse the now-constant branch (`if (false) ...`).
+
+T> Only small primitive constants are inlined: a `null`, `undefined`, `boolean`, `number` or `string` of at most 6 bytes. Objects, arrays and longer strings are left as regular exports.
+
+Inlining also enables **cross-module dead-branch skipping**: when an imported constant is statically inlinable, webpack evaluates the condition that guards a branch and skips the dependencies that live only in the provably-dead branch (ESM import specifiers, `require()` calls, and dynamic `import()` calls), so the unreachable modules are never added to the bundle.
+
+```js
+// env.js
+export const isDEV = false;
+```
+
+```js
+// app.js
+import { devOnly } from "./dev-tools";
+import { isDEV } from "./env";
+import { prodOnly } from "./prod-tools";
+
+export const tools = isDEV ? devOnly : prodOnly;
+```
+
+Because `isDEV` inlines to `false`, the `devOnly` branch is dead, so `./dev-tools` is never bundled. The same holds for `require()` and dynamic `import()` calls that sit only in the dead branch.
+
+T> Supported guard forms include ternaries (`isDEV ? A : B`), `if` statements, and the `&&`, `||`, `??` and `!` operators, including nested combinations.
+
 ## optimization.mangleExports
 
 `boolean` `string: 'deterministic' | 'size'`
@@ -317,7 +391,7 @@ export default {
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
+Tell webpack to minimize the bundle using the [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
 
 The default value of `optimization.minimize` depends on the [`mode`](/configuration/mode/):
 
@@ -342,22 +416,22 @@ T> Learn how [mode](/configuration/mode/) works.
 
 ## optimization.minimizer
 
-`[TerserPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
+`[MinimizerPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
 
-Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.
+Allows you to override the default minimizer by providing a different one or more customized [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.
 
 **webpack.config.js**
 
 ```js
-import TerserPlugin from "terser-webpack-plugin";
+import MinimizerPlugin from "minimizer-webpack-plugin";
 
 export default {
   optimization: {
     minimizer: [
-      new TerserPlugin({
+      new MinimizerPlugin({
         parallel: true,
-        terserOptions: {
-          // https://github.com/webpack/terser-webpack-plugin#terseroptions
+        minimizerOptions: {
+          // https://github.com/webpack/minimizer-webpack-plugin#minimizeroptions
         },
       }),
     ],
@@ -368,13 +442,13 @@ export default {
 Or, as function:
 
 ```js
-import TerserPlugin from "terser-webpack-plugin";
+import MinimizerPlugin from "minimizer-webpack-plugin";
 
 export default {
   optimization: {
     minimizer: [
       (compiler) => {
-        new TerserPlugin({
+        new MinimizerPlugin({
           /* your config */
         }).apply(compiler);
       },
@@ -386,13 +460,13 @@ export default {
 By default, webpack would set `optimization.minimizer` to [the following value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L1160-L1174):
 
 ```js
-import TerserPlugin from "terser-webpack-plugin";
+import MinimizerPlugin from "minimizer-webpack-plugin";
 
 const minimizer = [
   {
     apply: (compiler) => {
-      new TerserPlugin({
-        terserOptions: {
+      new MinimizerPlugin({
+        minimizerOptions: {
           compress: {
             passes: 2,
           },

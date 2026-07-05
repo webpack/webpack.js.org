@@ -75,6 +75,14 @@ and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/main/lib/Web
 utilities are used by webpack to configure its `Compiler` instance with all the
 built-in plugins.
 
+The `platform` property on a `Compiler` instance describes the target environment
+resolved from [`target`](/configuration/target/). It is a read-only object of
+platform flags (`web`, `browser`, `webworker`, `node`, `electron`, `nwjs`, `deno`,
+`bun` and `universal`), where each flag is `true`, `false`, or `null` when the
+platform is left neutral. Plugins and loaders can read it to adapt to the build
+target. Since webpack 5.108.0, `platform.universal` is `true` for
+`target: "universal"` and for the equivalent `target: ["web", "node"]`.
+
 The `run` method is then used to kickstart all compilation work. Upon
 completion, the given `callback` function is executed. The final logging of
 stats and errors should be done in this `callback` function.

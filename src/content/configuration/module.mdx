@@ -167,8 +167,8 @@ export default {
         exportsOnly: true,
 
         // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
-        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
-        // available since webpack 5.90.4
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string | string[])
+        // available since webpack 5.90.4; the function form may return string[] since 5.107.0
         exportsConvention: "camel-case-only",
       },
       "css/auto": {
@@ -179,13 +179,14 @@ export default {
         exportsOnly: true,
 
         // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
-        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string)
-        // available since webpack 5.90.4
+        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string | string[])
+        // available since webpack 5.90.4; the function form may return string[] since 5.107.0
         exportsConvention: "camel-case-only",
 
         // Customize the format of the local class names generated for css modules.
         // type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].
         // available since webpack 5.90.4
+        // Since webpack 5.108.0, [hash] here resolves to the local ident hash (matching css-loader); use [modulehash] for the module hash. An inline digest/length form is also supported, e.g. [hash:base64:8].
         localIdentName: "[uniqueName]-[id]-[local]",
       },
       "css/global": {
@@ -199,7 +200,72 @@ export default {
         // Use `JSON.parse` when the JSON string is longer than 20 characters.
         parse: JSONParse,
       },
+      html: {
+        // Generator options for html modules, requires `experiments.html`, available since webpack 5.107.0
+
+        // Emit the parsed and URL-rewritten HTML as a standalone .html output file.
+        // type: boolean | 'inline'
+        extract: true,
+      },
       // others…
+    },
+  },
+};
+```
+
+### Multiple aliases via `exportsConvention`
+
+<Badge text="5.107.0+" />
+
+When `exportsConvention` is a function, it may return either a `string` or a `string[]`. Returning an array exports the local class under every name in the array, matching `css-loader`'s behavior. This is useful when you want to expose the same class under several aliases without writing two rules.
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    generator: {
+      "css/module": {
+        // expose each class under both its original name and an uppercase alias
+        exportsConvention: (name) => [name, name.toUpperCase()],
+      },
+    },
+  },
+};
+```
+
+```js
+import styles from "./button.module.css";
+
+console.log(styles.btn); // hashed class
+console.log(styles.BTN); // same hashed class, uppercase alias
+```
+
+### module.generator.html.extract
+
+<Badge text="5.107.0+" />
+
+`boolean = true` `'inline'`
+
+Controls whether an [HTML module](/configuration/experiments/#experimentshtml) emits its parsed and URL-rewritten HTML as a standalone `.html` output file alongside the module's JavaScript export, mirroring the CSS extraction pipeline. Requires [`experiments.html`](/configuration/experiments/#experimentshtml).
+
+- `true` - always emit the `.html` file.
+- `false` - never emit it.
+- `'inline'` - expose the processed HTML for inline write-back (e.g. `<iframe srcdoc>`) without emitting a standalone file.
+
+When unset, extraction defaults to `true` for HTML modules used as compilation entries (HTML entry points) and `false` for HTML modules imported from JavaScript. The emitted filenames follow [`output.htmlFilename`](/configuration/output/#outputhtmlfilename) and [`output.htmlChunkFilename`](/configuration/output/#outputhtmlchunkfilename).
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    generator: {
+      html: {
+        extract: true,
+      },
     },
   },
 };
@@ -264,6 +330,9 @@ export default {
         requireEnsure: true,
         // Set the module to `'strict'` or `'non-strict'` mode. This can affect the module's behavior, as some behaviors differ between strict and non-strict modes.
         overrideStrict: "non-strict",
+        // Mark top-level function names as side-effect-free for tree shaking, available since webpack 5.108.0
+        // type: string[]
+        pureFunctions: ["myPureFn"],
       },
       "javascript/auto": {
         // ditto
@@ -289,6 +358,9 @@ export default {
         // Configure how CSS content is exported
         // type: string
         exportType: "link",
+        // Select the top-level CSS production to parse, available since webpack 5.108.0
+        // type: 'stylesheet' | 'block-contents'
+        as: "stylesheet",
       },
       "css/auto": {
         // ditto
@@ -298,6 +370,16 @@ export default {
       },
       "css/module": {
         // ditto
+      },
+      html: {
+        // Parser options for html modules, requires `experiments.html`, available since webpack 5.108.0
+
+        // Disable or customize URL-attribute extraction
+        // type: boolean | Array<'...' | { tag?: string, attribute: string, type: string, filter?: Function }>
+        sources: true,
+        // Transform the HTML source before it is parsed
+        // type: (source: string, context: HtmlTemplateContext) => string
+        template: undefined,
       },
       // others…
     },
@@ -446,6 +528,56 @@ import { footer, header } from "./styles.module.css";
 ```
 
 By enabling `namedExports`, you adopt a more modular and maintainable approach to managing CSS in JavaScript projects, leveraging ES module syntax for clearer and more explicit imports.
+
+#### module.parser.css.pure
+
+<Badge text="5.107.0+" />
+
+Enable strict pure mode for CSS Modules. Every selector must contain at least one local class or id selector; otherwise webpack emits a build error. This mirrors the pure mode of [`postcss-modules-local-by-default`](https://github.com/css-modules/postcss-modules-local-by-default) and helps catch accidentally global selectors early.
+
+- Type: `boolean`
+- Default: `false`
+- Available for: `css/module` and `css/auto` (not exposed for `css/global`, where global-by-default is the intended semantic).
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/module": {
+        pure: true,
+      },
+    },
+  },
+};
+```
+
+Two comments opt out of the check when needed.
+
+`/* cssmodules-pure-ignore */` placed directly before a rule suppresses the check for that single rule. The suppression is per-rule and is not propagated to children.
+
+```css
+/* cssmodules-pure-ignore */
+a {
+  /* suppressed only for this rule */
+  color: blue;
+}
+```
+
+`/* cssmodules-pure-no-check */` placed among the leading comments of a file (before any rule) disables the check for the whole file.
+
+```css
+/* cssmodules-pure-no-check */
+
+a {
+  /* would normally fail under pure mode */
+  color: red;
+}
+```
+
+Some constructs are exempt by design: nested rules inside a local-bearing ancestor are treated as pure-compliant, `&` resolves to the parent rule's purity, and `@keyframes` and `@counter-style` body contents are not checked.
 
 #### module.parser.css.animation
 
@@ -612,6 +744,34 @@ Possible values: `'link' | 'text' | 'css-style-sheet'
 - `text` - store CSS in JS file and return using default export.
 - `css-style-sheet` - the default export is a constructable stylesheet (i.e. CSSStyleSheet). Useful for custom elements and shadow DOM.
 
+### module.parser.css.as
+
+Select the top-level CSS production to parse.
+
+- Type: `'stylesheet' | 'block-contents'`
+- Available: 5.108.0+
+- Example:
+
+  ```js
+  export default {
+    experiments: { css: true },
+    module: {
+      parser: {
+        css: {
+          as: "block-contents",
+        },
+      },
+    },
+  };
+  ```
+
+Possible values:
+
+- `stylesheet` (default) - parse the source as a full stylesheet.
+- `block-contents` - parse the source as a CSS block's contents (a declaration list), i.e. the inside of an HTML `style="..."` attribute.
+
+T> This option exists so webpack can route an HTML inline `style="..."` attribute through the CSS pipeline (resolving `url()`, `image-set()` and `@import` relative to the HTML file). For the common HTML `style=` case you don't need to set it manually. Just enable `experiments: { html: true, css: true }` and `url()` inside `style` attributes resolves automatically.
+
 ### module.parser.javascript
 
 Configure options for JavaScript parser.
@@ -630,6 +790,33 @@ export default {
 ```
 
 It's allowed to configure those options in [`Rule.parser`](/configuration/module/#ruleparser) as well to target specific modules.
+
+#### module.parser.javascript.anonymousDefaultExportName
+
+<Badge text="5.107.0+" />
+
+Controls whether webpack sets `.name` to `"default"` for anonymous default-export functions and classes, matching the ES spec for native ESM. When enabled, webpack injects a small runtime helper (`__webpack_require__.dn`) that calls `Object.defineProperty(...)` on the export to set the `.name` value.
+
+- Type: `boolean`
+- Default: `true` for applications, `false` for libraries (when [`output.library`](/configuration/output/#outputlibrary) is set).
+
+Applications stay spec-compliant by default. Libraries skip the helper to keep bundle size small, since library consumers rarely rely on `.name === "default"`.
+
+To override the default explicitly:
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      javascript: {
+        anonymousDefaultExportName: false,
+      },
+    },
+  },
+};
+```
 
 #### module.parser.javascript.commonjsMagicComments
 
@@ -871,6 +1058,31 @@ Set the module to `'strict'` or `'non-strict'` mode. This can affect the module'
   };
   ```
 
+#### module.parser.javascript.pureFunctions
+
+Mark the listed top-level function names as side-effect-free, so calls to them whose results are unused can be tree-shaken. This is the explicit-config counterpart of the [`/*#__NO_SIDE_EFFECTS__*/`](/guides/tree-shaking/#mark-a-function-declaration-as-side-effect-free) annotation: instead of annotating the source, you list the names. Use `"default"` to target a default-exported function.
+
+- Type: `string[]`
+- Available: 5.108.0+
+- Example:
+
+  ```js
+  export default {
+    module: {
+      rules: [
+        {
+          test: /pure-source\.js$/,
+          parser: {
+            pureFunctions: ["createSelector", "styled", "default"],
+          },
+        },
+      ],
+    },
+  };
+  ```
+
+T> Best applied per-rule with a `test` so the names are only marked side-effect-free in the intended module. A global form (`module.parser.javascript.pureFunctions`) is also supported.
+
 #### module.parser.javascript.reexportExportsPresence
 
 Specifies the behavior of invalid export names in `\"export ... from ...\"`. This might be useful to disable during the migration from `\"export ... from ...\"` to `\"export type ... from ...\"` when reexporting types in TypeScript.
@@ -1060,6 +1272,99 @@ export default {
     parser: {
       json: {
         parse: json5.parse,
+      },
+    },
+  },
+};
+```
+
+### module.parser.html
+
+<Badge text="5.108.0+" />
+
+Configure options for the HTML parser. These options require the [`experiments.html`](/configuration/experiments/#experimentshtml) flag to be enabled.
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        // ...
+        sources: true,
+      },
+    },
+  },
+};
+```
+
+#### module.parser.html.sources
+
+Controls extraction of URL-like attribute values (`<img src>`, `<link href>`, `<script src>`, …) as webpack dependencies.
+
+- Type: `boolean | Array<'...' | { tag?: string, attribute: string, type: string, filter?: (attributes: Map<string, string>) => boolean }>`
+- Available: 5.108.0+
+
+Possible values:
+
+- `true` (default) - extract URL-like attributes using the built-in source list.
+- `false` - disable extraction entirely. URL-like attributes are left untouched and `<script src>`, `<link rel="modulepreload">` and `<link rel="stylesheet">` no longer become compilation entries. Inline `<script>` and `<style>` bodies are still processed. Use [`webpackIgnore`](/api/module-methods/#magic-comments) comments or the [`IgnorePlugin`](/plugins/ignore-plugin/) to skip individual URLs.
+- An **array** - customize which `tag`/`attribute` pairs are treated as URLs. Include the literal string `"..."` to keep the built-in defaults; an array without `"..."` opts out of the defaults entirely.
+
+Each array entry object accepts:
+
+- `attribute` (required) - the attribute name whose value is a URL.
+- `type` (required) - how the value is parsed and bundled. One of:
+  - `src` - a single URL bundled as a plain asset.
+  - `srcset` - a `srcset`-style candidate list of plain assets.
+  - `script` - a classic chunk entry, like `<script src>`.
+  - `script-module` - an ES-module chunk entry, like `<script type="module" src>`.
+  - `stylesheet` - a CSS chunk entry, like `<link rel="stylesheet">`.
+  - `stylesheet-style` - the attribute value is treated as a full inline stylesheet (like a `<style>` body) and routed through the CSS pipeline.
+  - `stylesheet-style-attribute` - the attribute value is treated as a CSS block's contents (like a `style` attribute) and routed through the CSS pipeline.
+  - `css-url` - extract `url()` references from a CSS-valued attribute (for example the SVG `style` presentation attributes). Available since webpack 5.108.0.
+- `tag` (optional) - the tag name to match. Omit to match any element.
+- `filter` (optional) - `(attributes: Map<string, string>) => boolean`; return `false` to skip this entry for a given element.
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        sources: [
+          "...", // keep the built-in defaults
+          { tag: "img", attribute: "data-src", type: "src" },
+          { tag: "img", attribute: "data-srcset", type: "srcset" },
+          { attribute: "data-href", type: "src" }, // any tag
+        ],
+      },
+    },
+  },
+};
+```
+
+#### module.parser.html.template
+
+Transform the raw HTML source **before** the parser extracts dependencies, so URLs emitted by a templating language (Handlebars, EJS, Eta, …) are still discovered and bundled. The function runs synchronously and must return the HTML string to parse.
+
+- Type: `(source: string, context: HtmlTemplateContext) => string`
+- Available: 5.108.0+
+
+The `context` object provides the current `module`, its `resource` path, build-dependency registration helpers (`addDependency`, `addContextDependency`, `addMissingDependency`, `addBuildDependency`), and `emitWarning` / `emitError`.
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        template: (source, { resource, addDependency }) => {
+          addDependency(resource);
+          return source
+            .replaceAll("{{title}}", "Hello world")
+            .replaceAll("{{image}}", "./image.png");
+        },
       },
     },
   },

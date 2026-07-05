@@ -150,9 +150,9 @@ T> In most cases, `eval-cheap-module-source-map` is the best option.
 
 ### Avoid Production Specific Tooling
 
-Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `TerserPlugin` while in development. These tools should typically be excluded in development:
+Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `MinimizerPlugin` while in development. These tools should typically be excluded in development:
 
-- `TerserPlugin`
+- `MinimizerPlugin`
 - `[fullhash]`/`[chunkhash]`/`[contenthash]`
 - `AggressiveSplittingPlugin`
 - `AggressiveMergingPlugin`
