@@ -91,6 +91,10 @@ const additionalInformation = {
 };
 
 const nodeToSupporter = (node) => {
+  if (!node.account) {
+    return null;
+  }
+
   const { slug } = node.account;
   const info = additionalInformation[slug];
 
@@ -197,6 +201,7 @@ try {
   );
   let supporters = members
     .map(nodeToSupporter)
+    .filter(Boolean)
     .toSorted((a, b) => b.totalDonations - a.totalDonations);
 
   // Deduplicating supporters with multiple orders
