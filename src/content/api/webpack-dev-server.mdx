@@ -3,6 +3,7 @@ title: webpack-dev-server API
 sort: 3
 contributors:
   - snitin315
+  - bjohansebas
 ---
 
 `webpack-dev-server` provides a Node.js API which can be used directly in Node.js runtime.
@@ -21,6 +22,10 @@ Then require the modules in your Node.js script:
 import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 ```
+
+W> `webpack-dev-server@6` requires Node.js `22.15.0` or higher and webpack `5.101.0` or higher.
+
+T> Since version 6, the package source is native ESM. Prefer `import` syntax; CommonJS consumers can still `require("webpack-dev-server")` through the CommonJS build exposed via the `exports` field.
 
 ## start
 
@@ -146,38 +151,60 @@ And then run the server with the following command:
 node server.js
 ```
 
-## internalIP(family: "v4" | "v6")
+## apply(compiler)
 
-Returns the internal `IPv4`/`IPv6` address asynchronously.
+<Badge text="v6.0.0+" />
+
+`webpack-dev-server` can be used as a webpack plugin, without explicitly passing a compiler to the constructor. The server integrates with the compiler lifecycle: it starts once the first compilation in watch mode completes, is not started multiple times on recompilation, and stops cleanly when the compiler is closed. `MultiCompiler` setups are supported as well, where each configuration can run its own plugin server.
 
 **server.js**
 
 ```js
+import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 
-const logInternalIPs = async () => {
-  const localIPv4 = await WebpackDevServer.internalIP("v4");
-  const localIPv6 = await WebpackDevServer.internalIP("v6");
+const compiler = webpack({
+  // ...
+  mode: "development",
+  plugins: [new WebpackDevServer({ port: 8080 })],
+});
 
-  console.log("Local IPv4 address:", localIPv4);
-  console.log("Local IPv6 address:", localIPv6);
-};
-
-logInternalIPs();
+compiler.watch({}, (error) => {
+  if (error) {
+    console.error(error);
+  }
+});
 ```
 
-## internalIPSync(family: "v4" | "v6")
+Alternatively, call `apply` on an existing compiler:
 
-Returns the internal `IPv4`/`IPv6` address synchronously.
+```js
+const server = new WebpackDevServer({ port: 8080 });
+
+server.apply(compiler);
+```
+
+T> In plugin mode the server only starts in watch mode: a one-shot `compiler.run()` build finishes without starting the server.
+
+## findIp(gatewayOrFamily, isInternal)
+
+<Badge text="v5.1.0+" />
+
+Returns the resolved local IP address synchronously, or `undefined` when no matching address is found.
+
+- `gatewayOrFamily`: an IP family (`"v4"` | `"v6"`) or a gateway IP address. When a gateway address is passed, the address of the local interface that belongs to the same subnet is returned.
+- `isInternal`: optional. When set to `false`, only externally reachable (LAN) addresses are considered; when set to `true`, only internal (e.g. loopback) addresses are considered. When omitted, both are considered.
 
 **server.js**
 
 ```js
 import WebpackDevServer from "webpack-dev-server";
 
-const localIPv4 = WebpackDevServer.internalIPSync("v4");
-const localIPv6 = WebpackDevServer.internalIPSync("v6");
+const localIPv4 = WebpackDevServer.findIp("v4", false);
+const localIPv6 = WebpackDevServer.findIp("v6", false);
 
 console.log("Local IPv4 address:", localIPv4);
 console.log("Local IPv6 address:", localIPv6);
 ```
+
+W> The `internalIP(family)` and `internalIPSync(family)` static methods were removed in `webpack-dev-server@6`. Use `findIp(family, false)` to get the same result.
