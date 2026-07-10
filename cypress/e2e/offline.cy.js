@@ -28,13 +28,18 @@ const goOffline = () => {
 // for an activated worker before cutting the network.
 const waitForServiceWorkerReady = () => {
   cy.log("**wait for the service worker to finish precaching**");
-  // `navigator.serviceWorker.ready` resolves only once an activated worker
-  // controls this scope, i.e. after the install handler's precache completes.
-  // Give it a generous timeout — precaching the whole site can take a while.
-  cy.window({ timeout: 60000 }).then(
-    { timeout: 60000 },
-    (win) => win.navigator.serviceWorker.ready,
-  );
+  // Poll the registration until an activated worker exists — that only
+  // happens after the install handler's precache completes. The 60s timeout
+  // on `.invoke` is what the retried `.should` inherits (precaching the whole
+  // site takes longer than the default 4s assertion budget).
+  cy.window()
+    .its("navigator.serviceWorker")
+    .invoke({ timeout: 60000 }, "getRegistration")
+    .should((registration) => {
+      expect(registration, "service worker registration").to.exist;
+      expect(registration.active, "active service worker").to.exist;
+      expect(registration.active.state).to.eq("activated");
+    });
 };
 
 const goOnline = () => {
