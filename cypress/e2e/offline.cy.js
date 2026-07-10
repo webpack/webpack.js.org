@@ -27,15 +27,14 @@ const goOffline = () => {
 // worker never activates and the next navigation has nothing to serve. Wait
 // for an activated worker before cutting the network.
 const waitForServiceWorkerReady = () => {
-  cy.log("**wait for the service worker to activate**");
-  cy.window({ timeout: 60000 })
-    .its("navigator.serviceWorker")
-    .invoke("getRegistration")
-    .should((registration) => {
-      expect(registration, "service worker registration").to.exist;
-      expect(registration.active, "active service worker").to.exist;
-      expect(registration.active.state).to.eq("activated");
-    });
+  cy.log("**wait for the service worker to finish precaching**");
+  // `navigator.serviceWorker.ready` resolves only once an activated worker
+  // controls this scope, i.e. after the install handler's precache completes.
+  // Give it a generous timeout — precaching the whole site can take a while.
+  cy.window({ timeout: 60000 }).then(
+    { timeout: 60000 },
+    (win) => win.navigator.serviceWorker.ready,
+  );
 };
 
 const goOnline = () => {
