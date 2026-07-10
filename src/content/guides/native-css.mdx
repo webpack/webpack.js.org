@@ -116,6 +116,31 @@ export default {
 };
 ```
 
+### Supported CSS Modules features
+
+Native CSS Modules understand the same authoring features as `css-loader`, so most stylesheets migrate unchanged:
+
+- **`composes`** — compose one local class from another (including `composes: foo from "./other.module.css"`); the export resolves to the space-separated list of class names.
+- **`@value`** — declare and import reusable values (`@value primary: #1f6feb;`, `@value primary from "./vars.module.css"`).
+- **`:export`** — expose arbitrary key/value pairs to JavaScript.
+- **`:local()` / `:global()`** — switch scoping inline within any module type.
+
+```css
+/* button.module.css */
+@value brand: #1f6feb;
+
+.base {
+  padding: 8px 12px;
+}
+.primary {
+  composes: base;
+  background: brand;
+}
+:export {
+  brandColor: brand;
+}
+```
+
 ## Output modes (`exportType`)
 
 A single CSS module can be emitted in four ways. The [`exportType`](/configuration/module/#moduleparsercssexporttype) parser option selects which one, and each replaces a different piece of the classic toolchain:
@@ -326,7 +351,11 @@ export default {
 
 T> `localIdentName` supports hash placeholders such as `[hash:base64:6]`. Tune hashing globally with [`output.hashFunction`](/configuration/output/#outputhashfunction), [`output.hashDigest`](/configuration/output/#outputhashdigest), [`output.hashDigestLength`](/configuration/output/#outputhashdigestlength), and [`output.hashSalt`](/configuration/output/#outputhashsalt), or per-module-type with the `localIdentHash*` generator options.
 
-Some `css-loader` options — `getLocalIdent`, `getJSON`, `localIdentRegExp`, filter-style `url`/`import` callbacks — have no native equivalent. For those cases, keep `css-loader` for the affected files or use webpack mechanisms such as [`IgnorePlugin`](/plugins/ignore-plugin/).
+A few `css-loader` options work differently:
+
+- `getLocalIdent` — instead of a custom function, native CSS drives naming through the [`localIdentName`](/configuration/module/#modulegenerator) template, which also accepts a function.
+- `getJSON` — the class-name mapping is exported by the CSS module itself and readable from the compilation's module graph, so a small plugin can serialize it to JSON when a framework needs the file on disk. For server-side rendering, you usually don't need it at all — see [Server-side rendering](#7-server-side-rendering-node--web).
+- `localIdentRegExp` and filter-style `url`/`import` callbacks have no native equivalent; keep `css-loader` for the affected files, or exclude specific requests with [`IgnorePlugin`](/plugins/ignore-plugin/).
 
 ### 5. Replace `style-loader`
 
@@ -389,7 +418,42 @@ export default {
 
 `sass-loader` compiles to CSS, `postcss-loader` post-processes it, and native CSS handles extraction, `url()`, and CSS Modules from there. The same pattern works for `less-loader`, `stylus-loader`, and friends.
 
-### 7. Keep imports unchanged and validate
+### 7. Server-side rendering (node + web)
+
+For SSR you typically build twice — a `web` bundle for the browser and a `node` bundle for the server — and the CSS Modules class names must match so the server-rendered markup hydrates cleanly on the client. This is what `css-loader`'s `getJSON` was often used to round-trip; with native CSS you avoid the round-trip entirely by making `localIdentName` deterministic across targets.
+
+Use a **path-based** template (no compilation-wide hash) so the same class name is produced on every target:
+
+**webpack.config.js**
+
+```js
+const common = {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.module\.css$/i,
+        type: "css/module",
+        generator: {
+          // `[file]__[local]` is stable across targets — no getJSON sync needed.
+          localIdentName: "[file]__[local]",
+        },
+      },
+    ],
+  },
+};
+
+export default [
+  { ...common, name: "web", target: "web" },
+  { ...common, name: "node", target: "node" },
+];
+```
+
+On a `node` target the CSS generator defaults to `exportsOnly: true`, so the server build exports only the class-name mapping and emits no stylesheet — exactly what an SSR renderer needs. The browser build still extracts the real CSS. If you prefer a single config, `target: ["web", "node"]` builds a universal bundle that runs in both environments.
+
+T> Avoid the production default `localIdentName: "[fullhash]"` for SSR — the full compilation hash differs between the web and node builds, so class names won't line up. Pin a deterministic template (path- or `[local]`-based, optionally with a per-file `[hash]`) in both configs.
+
+### 8. Keep imports unchanged and validate
 
 Your JS imports stay the same:
 
@@ -447,6 +511,8 @@ export default {
   },
 };
 ```
+
+T> To leave a single `@import` or `url()` untouched (kept as-is in the output instead of resolved by webpack), add a `/* webpackIgnore: true */` comment before it — handy for CDN URLs or runtime-resolved assets while `import`/`url` stay enabled everywhere else.
 
 ### Generator options
 
@@ -603,6 +669,6 @@ import * as card from "./card.module.css"; // scoped
 `experiments.css` is explicitly experimental — treat it as opt-in and test carefully before a broad rollout.
 
 - APIs and behavior may still evolve before webpack v6 defaults.
-- Some `css-loader` / `style-loader` options have no native equivalent (`getLocalIdent`, `getJSON`, `localIdentRegExp`, `style-loader` `attributes` / `insert` / `styleTagTransform`). Keep the loader for files that need them.
+- A few loader options have no drop-in switch: `css-loader`'s `localIdentRegExp` and filter callbacks, and `style-loader`'s `attributes` / `insert` / `styleTagTransform`. Keep the loader for files that need them. (`getLocalIdent` maps to the `localIdentName` function form, and `getJSON`/SSR is covered by [matching class names across targets](#7-server-side-rendering-node--web).)
 - `importLoaders` has no equivalent — loaders in the chain apply to `@import`ed files automatically.
 - If your project relies on advanced loader chains, validate each part before migrating fully.
