@@ -314,16 +314,27 @@ Most `css-loader` options have a native counterpart under [`module.parser.css`](
 For example, this `css-loader` CSS Modules config:
 
 ```js
-{
-  loader: "css-loader",
-  options: {
-    modules: {
-      localIdentName: "[local]-[hash:base64:6]",
-      exportLocalsConvention: "camel-case-only",
-      namedExport: true,
-    },
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.module\.css$/i,
+        use: [
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[local]-[hash:base64:6]",
+                exportLocalsConvention: "camel-case-only",
+                namedExport: true,
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
-}
+};
 ```
 
 becomes:
@@ -565,7 +576,7 @@ export default {
 **src/index.js**
 
 ```js
-import { primary, largeText } from "./app.module.css";
+import { largeText, primary } from "./app.module.css";
 
 document.body.classList.add(primary, largeText);
 ```
