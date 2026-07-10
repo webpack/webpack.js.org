@@ -29,7 +29,16 @@ const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
 });
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(manifestURLs)),
+    caches.open(cacheName).then((cache) =>
+      // Precache each entry independently. `cache.addAll` is atomic, so a
+      // single failed request (e.g. a connection dropped under the load of
+      // fetching the whole manifest at once) aborts the entire install and
+      // leaves the worker unactivated. Tolerating per-entry failures keeps
+      // the worker installable; missing entries fall back to the network.
+      Promise.all(
+        manifestURLs.map((url) => cache.add(url).catch(() => undefined)),
+      ),
+    ),
   );
 });
 
