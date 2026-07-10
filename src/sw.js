@@ -27,19 +27,33 @@ const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
   const url = new URL(entry.url, self.location);
   return url.href;
 });
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(cacheName).then((cache) =>
-      // Precache each entry independently. `cache.addAll` is atomic, so a
-      // single failed request (e.g. a connection dropped under the load of
-      // fetching the whole manifest at once) aborts the entire install and
-      // leaves the worker unactivated. Tolerating per-entry failures keeps
-      // the worker installable; missing entries fall back to the network.
-      Promise.all(
-        manifestURLs.map((url) => cache.add(url).catch(() => undefined)),
-      ),
+// Precache in bounded batches instead of one big `cache.addAll`. Firing a
+// request for every manifest entry at once floods the network/server, and if
+// some requests never settle the whole install stalls and the worker never
+// activates — breaking offline entirely. Batching keeps install reliable;
+// `addAll` is also atomic, so per-entry failures are tolerated here and simply
+// fall back to the network.
+const PRECACHE_BATCH_SIZE = 10;
+const precacheBatches = Array.from(
+  { length: Math.ceil(manifestURLs.length / PRECACHE_BATCH_SIZE) },
+  (_, index) =>
+    manifestURLs.slice(
+      index * PRECACHE_BATCH_SIZE,
+      index * PRECACHE_BATCH_SIZE + PRECACHE_BATCH_SIZE,
     ),
-  );
+);
+
+const precache = async () => {
+  const cache = await caches.open(cacheName);
+  for (const batch of precacheBatches) {
+    await Promise.all(
+      batch.map((url) => cache.add(url).catch(() => undefined)),
+    );
+  }
+};
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(precache());
 });
 
 self.addEventListener("activate", (event) => {
