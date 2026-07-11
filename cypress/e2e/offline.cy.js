@@ -58,6 +58,23 @@ describe("offline", () => {
       cy.visit(url);
       cy.get("h1").contains(text);
 
+      // DIAGNOSTIC: capture why the worker is/ isn't active (temporary).
+      cy.window({ timeout: 65000 })
+        .its("navigator.serviceWorker")
+        .invoke({ timeout: 65000 }, "getRegistration")
+        .should((reg) => {
+          const state = {
+            hasReg: Boolean(reg),
+            installing: reg && reg.installing && reg.installing.state,
+            waiting: reg && reg.waiting && reg.waiting.state,
+            active: reg && reg.active && reg.active.state,
+          };
+          expect(
+            reg && reg.active,
+            `SW diag: ${JSON.stringify(state)}`,
+          ).to.have.property("state", "activated");
+        });
+
       goOffline();
 
       cy.visit(url);
