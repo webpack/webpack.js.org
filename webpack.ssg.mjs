@@ -129,7 +129,11 @@ export default (env) =>
             to: "./",
           },
           "CNAME",
-          ".well-known/atproto-did"
+          ".nojekyll",
+          {
+            from: ".well-known/atproto-did",
+            to: ".well-known/",
+          },
         ],
       }),
       new WebpackPwaManifest({
