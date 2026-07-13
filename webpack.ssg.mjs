@@ -129,7 +129,6 @@ export default (env) =>
             to: "./",
           },
           "CNAME",
-          ".nojekyll",
           {
             from: ".well-known/atproto-did",
             to: ".well-known/",
