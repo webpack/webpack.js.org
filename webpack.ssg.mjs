@@ -128,7 +128,6 @@ export default (env) =>
             from: "./assets/robots.txt",
             to: "./",
           },
-          "CNAME",
           {
             from: ".well-known/atproto-did",
             to: ".well-known/",
