@@ -128,6 +128,7 @@ export default (env) =>
             from: "./assets/robots.txt",
             to: "./",
           },
+          "googlef7893965f8fb4e95.html",
           {
             from: ".well-known/atproto-did",
             to: ".well-known/",
