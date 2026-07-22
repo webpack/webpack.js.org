@@ -30,6 +30,9 @@ contributors:
 | `nwjs[[X].Y]`              | مثل `node-webkit` تماماً.                                                                                                                                                                                                                                                     |
 | `web`                      | تصريف للاستعمال في بيئة شبيهة بالمتصفّح **(الافتراضي)**.                                                                                                                                                                                                                      |
 | `webworker`                | تصريف بوصفه WebWorker.                                                                                                                                                                                                                                                        |
+| `universal`                | تصريف حزمة واحدة تتكيف في وقت التشغيل مع المتصفح وweb worker وNode.js وElectron وNW.js. تكون المخرجات دائمًا ECMAScript modules. متاح منذ webpack 5.108.0.                                                                                                                    |
+| `bun`                      | تصريف لـ [Bun](https://bun.sh/). تكون المخرجات ECMAScript modules، وتُعامل وحدات `bun:*` ووحدات Node.js المدمجة بوصفها externals. متاح منذ webpack 5.108.0.                                                                                                                   |
+| `deno[[X].Y]`              | تصريف لـ [Deno](https://deno.com/). تكون المخرجات ECMAScript modules، وتُحل وحدات Node.js المدمجة باستخدام بادئة `node:` المطلوبة، بينما تبقى بروتوكولات الاستيراد الخاصة بـ Deno (`npm:` و`jsr:` و`node:` و`http(s)://`) خارج الحزمة. متاح منذ webpack 5.108.0.              |
 | `esX`                      | تصريف لإصدار ECMAScript المُحدَّد. أمثلة: es5، es2020.                                                                                                                                                                                                                        |
 | `browserslist`             | استنتاج المنصّة وميزات ES من تخصيص browserslist **(افتراضي إن كان تخصيص browserslist متاحاً)**.                                                                                                                                                                               |
 
@@ -62,6 +65,57 @@ export default {
 - `browserslist:last 2 versions` — استعمل استعلام browserslist صريحاً (وسيُتجاهَل ملفّ التخصيص).
 - `browserslist:/path/to/config` — حدِّد ملفّ تخصيص browserslist صراحةً.
 - `browserslist:/path/to/config:modern` — حدِّد ملفّ تخصيص browserslist وبيئةً صراحةً.
+
+#### universal
+
+<Badge text="5.108.0+" />
+
+إعداد مسبق واحد يجمع منصات `web` و`web worker` و`node` و`electron` و`nwjs`، ويترك مؤشر كل منصة محايدًا كي تتكيف الحزمة في وقت التشغيل بدل التقيد ببيئة واحدة. وهو بديل مختصر لكتابة `target: ["web", "node"]` يدويًا، وتكون مخرجاته دائمًا ECMAScript modules. القيمة الافتراضية لـ [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) مع هذا الهدف هي `true`.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  target: "universal",
+};
+```
+
+ملاحظات حول عمليات البناء الشاملة:
+
+- يحل `new Worker(new URL(...))` مُنشئ `Worker` من `worker_threads` في Node، ومن `Worker` العام في الويب.
+- تدعم مخرجات ESM عناصر `commonjs` و`node-commonjs` الخارجية، وتُحمّل عبر `createRequire` من `process.getBuiltinModule`. أما العناصر الخارجية من نوع `global` فتستخدم `globalThis` ككائن عام.
+- يعمل CSS في Node لأغراض التصيير من جهة الخادم؛ إذ تُجمع الأنماط المحقونة عبر `style` والـchunks المحمّلة عبر `link` في `globalThis["__webpack_css__" + output.uniqueName]` ليقرأها مضيف SSR.
+
+#### bun
+
+<Badge text="5.108.0+" />
+
+يُصرِّف هذا الهدف الشيفرة لـ[Bun](https://bun.sh/). تخرج الحزمة بصيغة ECMAScript modules، وتكون القيمة الافتراضية لـ[`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) هي `true`. كما يعامل وحدات `bun:*` الخاصة بـBun ووحدات Node.js المدمجة التي يوفرها بوصفها externals بدل تضمينها في الحزمة.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  target: "bun",
+};
+```
+
+#### deno
+
+<Badge text="5.108.0+" />
+
+يُصرِّف هذا الهدف الشيفرة لـ[Deno](https://deno.com/). تخرج الحزمة بصيغة ECMAScript modules، وتكون القيمة الافتراضية لـ[`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) هي `true`. تُحل وحدات Node.js المدمجة باستخدام بادئة `node:` التي يتطلبها Deno، وتبقى بروتوكولات الاستيراد الخاصة بـDeno (`npm:` و`jsr:` و`node:` وعناوين `http(s)://`) خارج الحزمة ليتولى runtime تحميلها. ويمكن تحديد إصدار، مثل `deno2` أو `deno1.40`.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  target: "deno", // أو "deno2" و"deno1.40" وغيرها
+};
+```
 
 ### [string]
 

@@ -80,12 +80,15 @@ export default {
       chunkLoading: "jsonp",
       asyncChunks: true, // إنشاء chunks غير متزامنة تُحمَّل عند الطلب.
       layer: "name of layer", // تعيين الطبقة (layer) لنقطة دخول.
+      worker: true, // تمييزها كنقطة دخول لـ worker؛ متاح منذ webpack 5.108.0.
     },
   },
 };
 ```
 
 تُستعمَل صياغة الواصف لتمرير خيارات إضافية إلى نقطة الدخول.
+
+T> يميز الخيار `worker`، المضاف في webpack 5.108.0، نقطة الدخول بوصفها worker، فيستخدم ملف الإخراج الخاص بها [`output.workerChunkFilename`](/configuration/output/#outputworkerchunkfilename) بدلًا من اسم ملف chunk المعتاد. يضبط webpack هذا الخيار تلقائيًا لنقاط الدخول التي ينشئها عبر `new Worker(new URL(...))`، لذلك نادرًا ما تحتاج إلى ضبطه يدويًا.
 
 ### اسم ملفّ الإخراج
 

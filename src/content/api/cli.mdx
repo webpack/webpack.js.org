@@ -396,6 +396,8 @@ webpack 5.1.0 compiled successfully in 198 ms
 '.webpack/webpackfile',
 ```
 
+Each base name is resolved against the supported extensions — JavaScript and TypeScript variants (`.js`, `.mjs`, `.cjs`, `.ts`, `.cts`, `.mts`), other supported languages such as `.coffee`, and, since webpack-cli 7.1.0, the [data formats](/configuration/configuration-languages/#data-formats-json5-yaml-and-toml) `.json5`, `.yaml`/`.yml` and `.toml`.
+
 ## Common Options
 
 W> لاحظ أن Command Line Interface لها أولوية أعلى من ملف الإعدادات بالنسبة للـ arguments التي تستخدمها معها. مثلًا، إذا مررت [`--mode="production"`](/configuration/mode/#usage) إلى webpack CLI وكان ملف الإعدادات يستخدم `development`، فسيتم استخدام `production`.

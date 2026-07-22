@@ -2,6 +2,8 @@
 title: webpack-dev-server API
 sort: 3
 contributors:
+  - snitin315
+  - bjohansebas
   - RlxChap2
 ---
 
@@ -21,6 +23,10 @@ npm install --save-dev webpack webpack-dev-server
 import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 ```
+
+W> يتطلب `webpack-dev-server@6` الإصدار `22.15.0` أو أحدث من Node.js، والإصدار `5.101.0` أو أحدث من webpack.
+
+T> بدءًا من الإصدار 6، كُتب مصدر الحزمة بصيغة ESM الأصلية، لذا يُفضَّل استخدام صيغة `import`. ويظل بإمكان المشاريع التي تستخدم CommonJS استدعاء `require("webpack-dev-server")` عبر نسخة CommonJS المتاحة في الحقل `exports`.
 
 ## start
 
@@ -146,38 +152,60 @@ setTimeout(stopServer, 5000);
 node server.js
 ```
 
-## internalIP(family: "v4" | "v6")
+## apply(compiler)
 
-ترجع هذه الدالة عنوان `IPv4` أو `IPv6` الداخلي بشكل غير متزامن.
+<Badge text="v6.0.0+" />
+
+يمكن استخدام `webpack-dev-server` بوصفه plugin لـ webpack دون تمرير compiler صراحةً إلى constructor. يندمج الخادم مع دورة حياة compiler؛ فيبدأ بعد اكتمال أول compilation في وضع المراقبة، ولا يبدأ مرة أخرى عند كل recompilation، ويتوقف بصورة سليمة عند إغلاق compiler. كما يدعم إعدادات `MultiCompiler`، بحيث يستطيع كل تخصيص تشغيل خادم plugin مستقل.
 
 **server.js**
 
 ```js
+import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 
-const logInternalIPs = async () => {
-  const localIPv4 = await WebpackDevServer.internalIP("v4");
-  const localIPv6 = await WebpackDevServer.internalIP("v6");
+const compiler = webpack({
+  // ...
+  mode: "development",
+  plugins: [new WebpackDevServer({ port: 8080 })],
+});
 
-  console.log("Local IPv4 address:", localIPv4);
-  console.log("Local IPv6 address:", localIPv6);
-};
-
-logInternalIPs();
+compiler.watch({}, (error) => {
+  if (error) {
+    console.error(error);
+  }
+});
 ```
 
-## internalIPSync(family: "v4" | "v6")
+وبديلًا من ذلك، يمكنك استدعاء `apply` على compiler موجود:
 
-ترجع هذه الدالة عنوان `IPv4` أو `IPv6` الداخلي بشكل متزامن.
+```js
+const server = new WebpackDevServer({ port: 8080 });
+
+server.apply(compiler);
+```
+
+T> عند استخدامه بوصفه plugin، لا يبدأ الخادم إلا في وضع المراقبة؛ إذ تنتهي عملية البناء المفردة التي ينفذها `compiler.run()` دون تشغيل الخادم.
+
+## findIp(gatewayOrFamily, isInternal)
+
+<Badge text="v5.1.0+" />
+
+تعيد هذه الدالة عنوان IP المحلي بعد تحديده بصورة متزامنة، أو تعيد `undefined` إذا لم تجد عنوانًا مطابقًا.
+
+- `gatewayOrFamily`: عائلة عناوين IP (`"v4"` أو `"v6"`) أو عنوان IP لبوابة الشبكة. عند تمرير عنوان بوابة، تعيد الدالة عنوان الواجهة المحلية الواقعة ضمن الشبكة الفرعية نفسها.
+- `isInternal`: خيار اختياري. عند ضبطه على `false`، لا تؤخذ في الحسبان إلا العناوين المتاحة خارجيًا ضمن الشبكة المحلية (LAN). وعند ضبطه على `true`، لا تؤخذ إلا العناوين الداخلية، مثل loopback. أما عند حذفه فتؤخذ الفئتان في الحسبان.
 
 **server.js**
 
 ```js
 import WebpackDevServer from "webpack-dev-server";
 
-const localIPv4 = WebpackDevServer.internalIPSync("v4");
-const localIPv6 = WebpackDevServer.internalIPSync("v6");
+const localIPv4 = WebpackDevServer.findIp("v4", false);
+const localIPv6 = WebpackDevServer.findIp("v6", false);
 
 console.log("Local IPv4 address:", localIPv4);
 console.log("Local IPv6 address:", localIPv6);
 ```
+
+W> أزيلت الدالتان static ‏`internalIP(family)` و`internalIPSync(family)` في `webpack-dev-server@6`. استخدم `findIp(family, false)` للحصول على النتيجة نفسها.

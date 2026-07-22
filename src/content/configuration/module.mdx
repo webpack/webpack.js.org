@@ -164,6 +164,7 @@ export default {
         // قم بتخصيص تنسيق أسماء الفئات المحلية التي تم إنشاؤها لـ CSS modules.
         // النوع: string، إلى جانب البدائل على مستوى الملف ومستوى Module في https://webpack.js.org/configuration/output/#template-strings, تتضمن أيضًا [uniqueName] و[local].
         // متاح منذ webpack 5.90.4
+        // منذ webpack 5.108.0، تشير [hash] هنا إلى hash المعرّف المحلي (كما في css-loader)؛ استخدم [modulehash] للإشارة إلى hash الخاص بالـ module. وتدعم أيضًا صيغة تحديد الترميز والطول ضمن القيمة، مثل [hash:base64:8].
         localIdentName: "[uniqueName]-[id]-[local]",
       },
       "css/global": {
@@ -177,7 +178,14 @@ export default {
         // استخدم `JSON.parse` عندما يكون JSON string أطول من 20 حرفًا.
         parse: JSONParse,
       },
-      // الآخرين…
+      html: {
+        // خيارات generator الخاصة بـ HTML modules؛ تتطلب `experiments.html`، ومتاحة منذ webpack 5.107.0.
+
+        // إخراج HTML بعد تحليله وإعادة كتابة عناوين URL فيه كملف .html مستقل.
+        // النوع: boolean | 'inline'
+        extract: true,
+      },
+      // خيارات أخرى…
     },
   },
 };
@@ -210,6 +218,35 @@ import styles from "./button.module.css";
 
 console.log(styles.btn); // hashed class
 console.log(styles.BTN); // same hashed class, uppercase alias
+```
+
+### module.generator.html.extract
+
+<Badge text="5.107.0+" />
+
+`boolean = true` `'inline'`
+
+Controls whether an [HTML module](/configuration/experiments/#experimentshtml) emits its parsed and URL-rewritten HTML as a standalone `.html` output file alongside the module's JavaScript export, mirroring the CSS extraction pipeline. Requires [`experiments.html`](/configuration/experiments/#experimentshtml).
+
+- `true` - always emit the `.html` file.
+- `false` - never emit it.
+- `'inline'` - expose the processed HTML for inline write-back (e.g. `<iframe srcdoc>`) without emitting a standalone file.
+
+When unset, extraction defaults to `true` for HTML modules used as compilation entries (HTML entry points) and `false` for HTML modules imported from JavaScript. The emitted filenames follow [`output.htmlFilename`](/configuration/output/#outputhtmlfilename) and [`output.htmlChunkFilename`](/configuration/output/#outputhtmlchunkfilename).
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    generator: {
+      html: {
+        extract: true,
+      },
+    },
+  },
+};
 ```
 
 ## module.parser
@@ -271,6 +308,9 @@ export default {
         requireEnsure: true,
         // اضبط الوضع module على `'strict'` أو `'non-strict'`. يمكن أن يؤثر هذا على سلوك module، حيث تختلف بعض السلوكيات بين الوضع الصارم وغير الصارم.
         overrideStrict: "non-strict",
+        // Mark top-level function names as side-effect-free for tree shaking, available since webpack 5.108.0
+        // type: string[]
+        pureFunctions: ["myPureFn"],
       },
       "javascript/auto": {
         // كما سبق
@@ -296,6 +336,9 @@ export default {
         // قم بتخصيص كيفية تصدير محتوى CSS
         // النوع: string
         exportType: "link",
+        // Select the top-level CSS production to parse, available since webpack 5.108.0
+        // type: 'stylesheet' | 'block-contents'
+        as: "stylesheet",
       },
       "css/auto": {
         // كما سبق
@@ -306,7 +349,17 @@ export default {
       "css/module": {
         // كما سبق
       },
-      // الآخرين…
+      html: {
+        // خيارات parser الخاصة بـ HTML modules؛ تتطلب `experiments.html`، ومتاحة منذ webpack 5.108.0.
+
+        // تعطيل استخراج خصائص URL أو تخصيصه.
+        // النوع: boolean | Array<'...' | { tag?: string, attribute: string, type: string, filter?: Function }>
+        sources: true,
+        // تحويل مصدر HTML قبل تحليله.
+        // النوع: (source: string, context: HtmlTemplateContext) => string
+        template: undefined,
+      },
+      // خيارات أخرى…
     },
   },
 };
@@ -635,7 +688,7 @@ export default {
   module: {
     parser: {
       css: {
-        grid: true, // Enable grid identifier renaming
+        grid: true, // فعّل إعادة تسمية معرّفات grid.
       },
     },
   },
@@ -668,6 +721,34 @@ export default {
 - `link` - استخرج CSS في الملف الخاص واستخدم علامات `link` لإدخالها في DOM.
 - `text` - قم بتخزين CSS في ملف JS وإعادته باستخدام التصدير الافتراضي.
 - `css-style-sheet` - التصدير الافتراضي هو ورقة أنماط قابلة للإنشاء (أي CSSStyleSheet). مفيد للعناصر المخصصة وshadow DOM.
+
+### module.parser.css.as
+
+حدّد بنية CSS العليا التي سيحللها parser.
+
+- النوع: `'stylesheet' | 'block-contents'`
+- متاح منذ: 5.108.0+
+- مثال:
+
+  ```js
+  export default {
+    experiments: { css: true },
+    module: {
+      parser: {
+        css: {
+          as: "block-contents",
+        },
+      },
+    },
+  };
+  ```
+
+القيم الممكنة:
+
+- `stylesheet` (الافتراضي): يحلل المصدر كورقة أنماط كاملة.
+- `block-contents`: يحلل المصدر كمحتوى كتلة CSS، أي قائمة تعريفات مثل المحتوى داخل خاصية HTML بالشكل `style="..."`.
+
+T> يتيح هذا الخيار لـwebpack تمرير خاصية HTML المضمنة `style="..."` عبر CSS pipeline، فتُحل `url()` و`image-set()` و`@import` نسبةً إلى ملف HTML. لا تحتاج إلى ضبطه يدويًا عند استخدام خاصية `style=` المعتادة؛ يكفي تفعيل `experiments: { html: true, css: true }` لتُحل `url()` داخل خصائص `style` تلقائيًا.
 
 ### module.parser.javascript
 
@@ -955,6 +1036,31 @@ if (import.meta.customProp) {
   };
   ```
 
+#### module.parser.javascript.pureFunctions
+
+Mark the listed top-level function names as side-effect-free, so calls to them whose results are unused can be tree-shaken. This is the explicit-config counterpart of the [`/*#__NO_SIDE_EFFECTS__*/`](/guides/tree-shaking/#mark-a-function-declaration-as-side-effect-free) annotation: instead of annotating the source, you list the names. Use `"default"` to target a default-exported function.
+
+- Type: `string[]`
+- Available: 5.108.0+
+- Example:
+
+  ```js
+  export default {
+    module: {
+      rules: [
+        {
+          test: /pure-source\.js$/,
+          parser: {
+            pureFunctions: ["createSelector", "styled", "default"],
+          },
+        },
+      ],
+    },
+  };
+  ```
+
+T> Best applied per-rule with a `test` so the names are only marked side-effect-free in the intended module. A global form (`module.parser.javascript.pureFunctions`) is also supported.
+
 #### module.parser.javascript.reexportExportsPresence
 
 يحدد سلوك أسماء التصدير غير الصالحة في `\"export ... from ...\"`. قد يكون من المفيد تعطيل هذا أثناء الترحيل من `\"export ... from ...\"` إلى `\"export type ... from ...\"` عند إعادة تصدير الأنواع في TypeScript.
@@ -1144,6 +1250,99 @@ export default {
     parser: {
       json: {
         parse: json5.parse,
+      },
+    },
+  },
+};
+```
+
+### module.parser.html
+
+<Badge text="5.108.0+" />
+
+اضبط خيارات HTML parser. تتطلب هذه الخيارات تفعيل [`experiments.html`](/configuration/experiments/#experimentshtml).
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        // ...
+        sources: true,
+      },
+    },
+  },
+};
+```
+
+#### module.parser.html.sources
+
+يتحكم في استخراج قيم الخصائص الشبيهة بعناوين URL، مثل `<img src>` و`<link href>` و`<script src>`، بوصفها dependencies في webpack.
+
+- النوع: `boolean | Array<'...' | { tag?: string, attribute: string, type: string, filter?: (attributes: Map<string, string>) => boolean }>`
+- متاح منذ: 5.108.0+
+
+القيم الممكنة:
+
+- `true` (الافتراضي): يستخرج الخصائص الشبيهة بعناوين URL باستخدام قائمة المصادر المدمجة.
+- `false`: يعطل الاستخراج تمامًا. تبقى الخصائص الشبيهة بعناوين URL دون تغيير، ولا تتحول `<script src>` و`<link rel="modulepreload">` و`<link rel="stylesheet">` إلى entries في compilation. ومع ذلك تستمر معالجة محتوى وسوم `<script>` و`<style>` المضمنة. استخدم تعليقات [`webpackIgnore`](/api/module-methods/#magic-comments) أو [`IgnorePlugin`](/plugins/ignore-plugin/) لتجاوز عناوين منفردة.
+- **مصفوفة**: تخصص أزواج `tag` و`attribute` التي تُعامل كعناوين URL. أدرج النص الحرفي `"..."` للاحتفاظ بالقيم الافتراضية المدمجة؛ أما المصفوفة التي لا تتضمنه فتستبدل القيم الافتراضية بالكامل.
+
+يقبل كل كائن في المصفوفة ما يلي:
+
+- `attribute` (مطلوب): اسم الخاصية التي تمثل قيمتها عنوان URL.
+- `type` (مطلوب): كيفية تحليل القيمة وتجميعها. ويكون واحدًا مما يلي:
+  - `src`: عنوان URL واحد يُجمع كـasset عادي.
+  - `srcset`: قائمة مرشحين على غرار `srcset` لعدة assets عادية.
+  - `script`: نقطة دخول chunk تقليدية، مثل `<script src>`.
+  - `script-module`: نقطة دخول chunk من نوع ES module، مثل `<script type="module" src>`.
+  - `stylesheet`: نقطة دخول CSS chunk، مثل `<link rel="stylesheet">`.
+  - `stylesheet-style`: تُعامل قيمة الخاصية كورقة أنماط مضمنة كاملة، مثل محتوى وسم `<style>`، وتُمرر عبر CSS pipeline.
+  - `stylesheet-style-attribute`: تُعامل قيمة الخاصية كمحتوى كتلة CSS، مثل خاصية `style`، وتُمرر عبر CSS pipeline.
+  - `css-url`: يستخرج مراجع `url()` من خاصية تحمل قيمة CSS، مثل خصائص العرض `style` في SVG. متاح منذ webpack 5.108.0.
+- `tag` (اختياري): اسم الوسم المطلوب مطابقته. احذفه لمطابقة أي عنصر.
+- `filter` (اختياري): دالة من النوع `(attributes: Map<string, string>) => boolean`. أعد `false` لتجاوز هذا الإدخال لعنصر معين.
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        sources: [
+          "...", // احتفظ بالقيم الافتراضية المدمجة.
+          { tag: "img", attribute: "data-src", type: "src" },
+          { tag: "img", attribute: "data-srcset", type: "srcset" },
+          { attribute: "data-href", type: "src" }, // أي وسم.
+        ],
+      },
+    },
+  },
+};
+```
+
+#### module.parser.html.template
+
+حوّل مصدر HTML الخام **قبل** أن يستخرج parser الاعتماديات، كي يظل webpack قادرًا على اكتشاف وتجميع عناوين URL التي تولدها لغات القوالب مثل Handlebars وEJS وEta. تعمل الدالة بصورة متزامنة ويجب أن تعيد نص HTML المطلوب تحليله.
+
+- النوع: `(source: string, context: HtmlTemplateContext) => string`
+- متاح منذ: 5.108.0+
+
+يوفر كائن `context` الـ`module` الحالية ومسار `resource` الخاص بها، ودوال تسجيل build dependencies (`addDependency` و`addContextDependency` و`addMissingDependency` و`addBuildDependency`)، إضافة إلى `emitWarning` و`emitError`.
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        template: (source, { resource, addDependency }) => {
+          addDependency(resource);
+          return source
+            .replaceAll("{{title}}", "Hello world")
+            .replaceAll("{{image}}", "./image.png");
+        },
       },
     },
   },

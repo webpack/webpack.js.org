@@ -41,6 +41,9 @@ new webpack.ProgressPlugin(handler);
 - `dependencies` (`boolean = true`): يعرض عدد dependencies داخل رسالة التقدم.
 - `dependenciesCount` (`number = 10000`): أقل عدد dependencies يبدأ منه العرض. يعمل عندما تكون خاصية `dependencies` مفعّلة.
 - `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): يحدد الطريقة التي يستخدمها `ProgressPlugin` لحساب نسبة التقدم.
+- `progressBar` (`boolean | object = false`) <Badge text="5.107.0+" />: يعرض شريط تقدم في الطرفية بدل رسالة النسبة المئوية المعتادة. لا يعمل إلا مع handler الافتراضي، أي عند عدم تمرير `handler` مخصص. مرّر `true` لتفعيله بالإعدادات الافتراضية، أو مرّر كائنًا بالخصائص التالية:
+  - `name` (`string = 'Build'`): الاسم الذي يظهر قبل شريط التقدم.
+  - `color` (`string = 'green'`): لون الجزء المكتمل من الشريط. يعود إلى `'green'` إذا كان اللون المحدد غير مدعوم.
 
 ```js
 new webpack.ProgressPlugin({
@@ -58,6 +61,17 @@ new webpack.ProgressPlugin({
 });
 ```
 
+لعرض شريط تقدم:
+
+```js
+new webpack.ProgressPlugin({
+  progressBar: {
+    name: "Build",
+    color: "green",
+  },
+});
+```
+
 ### webpack.ProgressPlugin.createDefaultHandler
 
 إذا لم يكن handler الافتراضي في `ProgressPlugin` مناسبًا لاحتياجك، يمكنك تخصيصه باستخدام الدالة static `ProgressPlugin.createDefaultHandler`.
@@ -65,7 +79,8 @@ new webpack.ProgressPlugin({
 ```ts
 static createDefaultHandler: (
   profile: undefined | null | boolean,
-  logger: WebpackLogger
+  logger: WebpackLogger,
+  progressBar?: { name: string, color: string } | false
 ) => (percentage: number, msg: string, ...args: string[]) => void;
 ```
 

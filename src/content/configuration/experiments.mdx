@@ -402,7 +402,9 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **هذه الميزة تجريبية وجزئية.** في webpack 5.107 تم تنفيذ جانب `html-loader` فقط: عند استيراد ملف HTML من JS، تمر مراجع الوسوم عبر pipeline الخاصة بـ webpack. أما **HTML entry points**، أي استخدام ملف `.html` مباشرة كـ `entry`، وهو الجزء المرتبط بـ `html-webpack-plugin`، فهي **غير مدعومة بعد** ومخطط لها في الإصدار minor التالي. يمكن متابعة التفاصيل الكاملة في issue [#536](https://github.com/webpack/webpack/issues/536).
+W> **هذه الميزة تجريبية وجزئية.** نفّذ webpack 5.107 دور `html-loader`؛ فعند استيراد ملف HTML من JavaScript تمر مراجع الوسوم عبر pipeline الخاصة بـ webpack. ومنذ الإصدار 5.108 يمكن أيضًا استخدام ملف `.html` كنقطة دخول، كما تُحل نقطة الدخول الافتراضية `./src` إلى `index.html` عند تفعيل هذه التجربة (راجع [HTML كنقطة الدخول الافتراضية](#html-كنقطة-الدخول-الافتراضية) أدناه). لا يزال العمل جاريًا للوصول إلى جميع إمكانات `html-webpack-plugin`، ويمكن متابعة الجهد كاملًا في issue [#536](https://github.com/webpack/webpack/issues/536).
+
+T> يمكنك ضبط محلل HTML عبر [`module.parser.html`](/configuration/module/#moduleparserhtml): استخدم [`sources`](/configuration/module/#moduleparserhtmlsources) لتعطيل استخراج خصائص URL أو تخصيصه، واستخدم [`template`](/configuration/module/#moduleparserhtmltemplate) لتحويل مصدر HTML قبل تحليله.
 
 #### Inline `<style>` tags
 
@@ -484,6 +486,31 @@ W> **هذه الميزة تجريبية وجزئية.** في webpack 5.107 تم 
 #### `webpackIgnore` magic comment
 
 وضع تعليق HTML بالشكل `<!-- webpackIgnore: true -->` مباشرة قبل وسم معيّن يخبر webpack بتجاوز URL resolution لذلك الوسم في خصائص مثل `src` و`href` و`srcset` وما يشبهها. راجع الشرح الكامل ضمن [magic comments](/api/module-methods/#webpackignore).
+
+#### HTML كنقطة الدخول الافتراضية
+
+<Badge text="5.108.0+" />
+
+عند تفعيل `experiments.html`، يُضاف الامتداد `.html` إلى `resolve.extensions` الافتراضية قبل امتدادات JavaScript. وبذلك تُحل نقطة دخول لمجلد، مثل `entry: "./src"`، إلى `./src/index.html` حتى مع وجود `./src/index.js`. وهذا يجعل البناء يبدأ من HTML، على غرار Vite أو Parcel.
+
+```js
+export default {
+  experiments: { html: true },
+  entry: "./src", // تُحل إلى ./src/index.html
+};
+```
+
+وعند تفعيل [`experiments.css`](#experimentscss)، يُضاف الامتداد `.css` أيضًا إلى الامتدادات الافتراضية، فتستطيع نقطة الدخول الافتراضية الرجوع إلى `./src/index.css` إذا لم تجد ملف HTML أو JavaScript مطابقًا. لا تُضاف هذه الامتدادات إلا عند تفعيل التجربة المقابلة لها، ولذلك لا يتغير سلوك عمليات البناء الافتراضية.
+
+#### استبدال الوحدات أثناء التشغيل
+
+<Badge text="5.108.0+" />
+
+تدعم HTML modules ميزة [استبدال الوحدات أثناء التشغيل](/concepts/hot-module-replacement/) (HMR) دون أي تخصيص إضافي. تتفعّل الميزة تلقائيًا عند تفعيل HMR، مثلًا عبر [`devServer.hot`](/configuration/dev-server/#devserverhot).
+
+في الصفحات المستخرجة إلى ملفات `.html` فعلية، يحدّث كل hot update القيمتين `document.body.innerHTML` و`document.title` في موضعهما بدل إعادة تحميل الصفحة بالكامل. أما التغييرات الأخرى داخل `<head>`، مثل إضافة `<meta>` أو تبديل `<link rel="icon">`، فلا يمكن تطبيقها بأمان على DOM؛ لذلك يلجأ shim إلى إعادة تحميل الصفحة كاملةً.
+
+T> يُعطّل [دمج الوحدات](/configuration/optimization/#optimizationconcatenatemodules) في HTML modules أثناء عمل HMR، لأن كل module تحتاج إلى نطاق `module.hot` خاص بها لتقبل تحديثاتها ذاتيًا.
 
 ### experiments.lazyCompilation
 

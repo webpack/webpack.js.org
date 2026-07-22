@@ -469,11 +469,17 @@ export default {
       bigIntLiteral: false,
       // تدعم البيئة const وتسمح للإعلانات المتغيرة.
       const: true,
-      // تدعم البيئة التدمير ('{ a, b } = obj').
+      // تدعم البيئة let لتعريف المتغيرات.
+      let: true,
+      // تدعم البيئة معاملات الإسناد المنطقية ('a ||= b' و'a &&= b' و'a ??= b').
+      logicalAssignment: true,
+      // تدعم البيئة التفكيك ('{ a, b } = obj').
       destructuring: true,
       // تدعم البيئة متغير "المستند".
       document: true,
-      // تدعم البيئة عملية `import()` غير المتزامن لاستيراد ECMAScript modules.
+      // تدعم البيئة 'Object.hasOwn'.
+      hasOwn: true,
+      // تدعم البيئة دالة `import()` غير المتزامنة لاستيراد ECMAScript modules.
       dynamicImport: false,
       // تدعم البيئة عملية الاستيراد غير المتزامنة () عند إنشاء worker، فقط للويب targets في الوقت الحالي.
       dynamicImportInWorker: false,
@@ -485,12 +491,18 @@ export default {
       module: false,
       // تدعم البيئة اختصار أسلوب object ('{ module() {} }').
       methodShorthand: true,
-      // يحدد ما إذا تم إنشاء بادئة `node:` لاستيرادات module الأساسية في البيئات التي تدعمها.
-      // ينطبق هذا فقط على كود webpack runtime.
+      // تدعم البيئة `process.getBuiltinModule()` لتحميل Node.js core modules بصورة متزامنة.
+      nodeBuiltinModuleGetter: false,
+      // يحدد ما إذا كانت بادئة `node:` ستُضاف عند استيراد core modules في البيئات التي تدعمها.
+      // لا ينطبق هذا إلا على شيفرة webpack runtime.
       nodePrefixForCoreModules: false,
       // تدعم البيئة التسلسل الاختياري ("obj?.a" أو "obj?.()").
       optionalChaining: true,
-      // تدعم البيئة القيم الحرفية للقالب.
+      // تدعم البيئة صيغتي spread وrest في المصفوفات والكائنات والاستدعاءات ('{ ...obj }' و'fn(...args)').
+      spread: true,
+      // تدعم البيئة 'Symbol'، بما في ذلك الرموز المعروفة مثل 'Symbol.toStringTag'.
+      symbol: true,
+      // تدعم البيئة template literals.
       templateLiteral: true,
       // تدعم البيئة `import.meta.dirname` و`import.meta.filename`.
       importMetaDirnameAndFilename: false,
@@ -498,6 +510,10 @@ export default {
   },
 };
 ```
+
+يستنتج webpack مؤشرات الإمكانات هذه عادةً من [`target`](/configuration/target/)، ولا تحتاج إلى ضبطها يدويًا إلا لتجاوز ذلك الاستنتاج. عند تفعيل أحد المؤشرات، يستخدم webpack الصيغة الحديثة المقابلة في شيفرة runtime التي ينشئها، وإلا فيرجع إلى المخرجات القديمة المكافئة.
+
+T> `let`, `spread`, `hasOwn`, `symbol`, and `nodeBuiltinModuleGetter` were added in webpack 5.108.0. `let` falls back to the value of `const` when the target does not report it separately, `spread` and `symbol` are optimistic (enabled unless the target reports a lack of support), and `hasOwn` is enabled only when the target explicitly reports `Object.hasOwn` support. `nodeBuiltinModuleGetter` reflects support for `process.getBuiltinModule()` and is used by universal builds to load Node.js core modules without breaking the browser.
 
 ## output.filename
 
@@ -598,10 +614,11 @@ T> لاحظ أن هذا الخيار لا يؤثر على ملفات output ال
 
 البدائل المتاحة على مستوى Compilation:
 
-| القالب     | الوصف                    |
-| ---------- | ------------------------ |
-| [fullhash] | كامل hash من compilation |
-| [hash]     | نفسه، ولكن إهماله        |
+| القالب       | الوصف                                                                                       |
+| ------------ | ------------------------------------------------------------------------------------------- |
+| [fullhash]   | hash الكامل لعملية compilation                                                              |
+| [hash]       | مثل السابق، لكنه مهمل                                                                       |
+| [uniqueName] | قيمة [`output.uniqueName`](#outputuniquename) (وله الاسم البديل `[uniquename]` منذ 5.108.0) |
 
 البدائل المتاحة على مستوى Chunk:
 
@@ -645,7 +662,9 @@ T> `[file]` يساوي `[path][base]`. `[base]` يساوي `[name][ext]`. الم
 
 يمكن تحديد طول التجزئات (`[hash]`، `[contenthash]` أو `[chunkhash]`) باستخدام `[hash:16]` (القيمة الافتراضية هي 20). وبدلاً من ذلك، حدد [`output.hashDigestLength`](#outputhashdigestlength) لتخصيص الطول بشكل عام.
 
-من الممكن تصفية استبدال العنصر النائب عندما تريد استخدام أحد العناصر النائبة في اسم الملف الفعلي. على سبيل المثال، بالنسبة إلى output ملف `[name].js`، يجب عليك الهروب من العنصر النائب `[name]` عن طريق إضافة خطوط مائلة عكسية بين الأقواس. بحيث يُنشئ `[\name\]` `[name]` بدلاً من استبداله بـ `name` الخاص بـ asset.
+بدءًا من webpack 5.108.0، يمكن أيضًا تحديد ترميز hash وطوله ضمن القيمة نفسها بالصيغة `[<hash>:<digest>:<length>]`، مثل `[contenthash:base64:8]`. تكون قيمة الترميز الافتراضية هي [`output.hashDigest`](#outputhashdigest) (`hex`)، وتعمل الصيغة نفسها في العناصر النائبة لخيار [`localIdentName`](/loaders/css-loader/#localidentname) في CSS modules.
+
+يمكن منع استبدال عنصر نائب عندما تريد استخدامه حرفيًا في اسم الملف. فمثلًا، لإخراج ملف باسم `[name].js`، يجب تهريب العنصر النائب `[name]` بإضافة شرطتين مائلتين عكسيتين بين القوسين؛ وبذلك تُنتج `[\name\]` النص `[name]` بدل استبداله بقيمة `name` الخاصة بالـasset.
 
 على سبيل المثال: يُنشئ `[\id\]` `[id]` بدلاً من استبداله بـ `id`.
 
@@ -810,6 +829,89 @@ T> عادةً لا تحتاج إلى تغيير `output.hotUpdateChunkFilename`.
 تخصيص اسم ملف التحديث الساخن الرئيسي. `[fullhash]` و`[runtime]` متاحان كعنصر نائب.
 
 T> عادةً لا تحتاج إلى تغيير `output.hotUpdateMainFilename`.
+
+## output.html
+
+<Badge text="5.108.0+" />
+
+`boolean = false` `object`
+
+ينشئ هذا الخيار ملف HTML لكل [نقطة دخول](/concepts/entry-points/) ليست HTML، ويحقن فيه JS وCSS chunks الأولية الناتجة من نقطة الدخول، بما فيها chunks المشتركة عبر [`dependOn`](/configuration/entry-context/#dependencies). يماثل ذلك الجزء من `html-webpack-plugin` الذي ينشئ هيكل مستند حول الحزم، لكنه مدمج في webpack core. يعتمد الخيار على دعم HTML التجريبي، لذا فعّل [`experiments.html`](/configuration/experiments/#experimentshtml).
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  entry: {
+    main: "./src/main.js",
+  },
+  output: {
+    html: true,
+  },
+};
+```
+
+اضبطه على كائن لتحديد طريقة تحميل وسوم `<script>` المحقونة:
+
+| الخيار          | الوصف                                                          |
+| --------------- | -------------------------------------------------------------- |
+| `scriptLoading` | إحدى القيم `'auto'` (الافتراضية) أو `'defer'` أو `'blocking'`. |
+
+- `'auto'`: يخرج module script بالخاصية `type="module"` مع مخرجات ES modules، ويخرج script مؤجلًا في غير ذلك.
+- `'defer'`: يفرض إخراج `<script defer>` مؤجل.
+- `'blocking'`: يخرج وسم `<script>` عاديًا يحجب التحميل.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      scriptLoading: "defer",
+    },
+  },
+};
+```
+
+يمكن تجاوز هذه القيمة لكل entry على حدة عبر الخيار `html` في [واصف نقطة الدخول](/configuration/entry-context/#entry-descriptor).
+
+## output.htmlFilename
+
+<Badge text="5.107.0+" />
+
+`string = output.filename مع استبدال '.js' بـ'.html'` `function (pathData, assetInfo) => string`
+
+قالب اسم ملفات HTML التي تخرجها [HTML modules المستخرجة](/configuration/module/#modulegeneratorhtmlextract) للـchunks الأولية. يعمل مثل [`output.filename`](#outputfilename) ويدعم [سلاسل القالب](#سلاسل-القالب) نفسها. عند عدم ضبطه، يُشتق من `output.filename` باستبدال الامتداد `.js` بـ`.html`، أو يرجع إلى `[name].html` إذا كانت `output.filename` دالة، على غرار اشتقاق `cssFilename` من `filename`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    htmlFilename: "[name].html",
+  },
+};
+```
+
+W> يجب **ألا** تحدد مسارًا مطلقًا هنا. يمكن أن يحتوي المسار على مجلدات تفصل بينها `/`، ويُضم إلى [`output.path`](#outputpath) لتحديد الموقع على القرص.
+
+## output.htmlChunkFilename
+
+<Badge text="5.107.0+" />
+
+`string = output.chunkFilename مع استبدال '.js' بـ'.html'` `function (pathData, assetInfo) => string`
+
+قالب اسم ملفات HTML التي تخرجها [HTML modules المستخرجة](/configuration/module/#modulegeneratorhtmlextract) للـchunks غير الأولية التي تُحمّل عند الطلب. تُشتق قيمته الافتراضية من [`output.chunkFilename`](#outputchunkfilename) بالطريقة نفسها التي تُشتق بها `htmlFilename` من `filename`.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    htmlChunkFilename: "[name].chunk.html",
+  },
+};
+```
 
 ## output.iife
 
@@ -2411,6 +2513,27 @@ export default {
 };
 ```
 
+## output.strictModuleResolution
+
+Emit a runtime check that throws a `MODULE_NOT_FOUND` error when a required module id is missing from the bundle.
+
+- Type: `boolean`
+- Available: 5.108.0+
+
+It defaults to `true` in [`development`](/configuration/mode/#mode-development) mode and `false` in [`production`](/configuration/mode/#mode-production) mode. Set it explicitly to re-enable the guard in production (useful for debugging) or to drop it in development.
+
+```js
+export default {
+  mode: "production",
+  output: {
+    // re-enable the MODULE_NOT_FOUND runtime guard in production
+    strictModuleResolution: true,
+  },
+};
+```
+
+T> Before 5.108.0 this runtime guard was tied to [`output.pathinfo`](#outputpathinfo). It is now controlled by its own dedicated option.
+
 ## output.strictModuleExceptionHandling
 
 W> إهمال، استخدام
@@ -2567,6 +2690,30 @@ export default {
   },
 };
 ```
+
+## output.workerChunkFilename
+
+`string` `function (pathData, assetInfo) => string`
+
+- Available: 5.108.0+
+
+This option determines the name of non-initial worker chunk files. It accepts the same string templates and function form as [`output.chunkFilename`](#outputchunkfilename), and defaults to the value of `output.chunkFilename`. Setting it lets you give worker chunks their own naming scheme independently of regular chunks.
+
+You must not specify an absolute path here, but the path may contain folders separated by `/`. The specified path is joined with the value of the [`output.path`](#outputpath) option to determine the location on disk.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  output: {
+    chunkFilename: "[name].chunk.js",
+    workerChunkFilename: "workers/[name].[contenthash].worker.js",
+  },
+};
+```
+
+T> Entries that webpack creates automatically from `new Worker(new URL(...))` are marked as workers, so their output files use `workerChunkFilename`. See also the entry-level [`worker`](/configuration/entry-context/#entry-descriptor) flag. A `filename` set for a specific worker entry still takes precedence over this option.
 
 ## output.workerChunkLoading
 

@@ -58,6 +58,16 @@ describe("offline", () => {
       cy.visit(url);
       cy.get("h1").contains(text);
 
+      // Wait for the service worker to finish precaching and activate before
+      // cutting the network — otherwise the offline visit has nothing to
+      // serve. `navigator.serviceWorker.ready` resolves in the browser once an
+      // activated worker controls this scope; awaiting the promise avoids
+      // reading registration properties (unreliable in Cypress' cross-realm
+      // context). Give precaching a generous budget.
+      cy.window({ timeout: 90000 }).then((win) => {
+        cy.wrap(win.navigator.serviceWorker.ready, { timeout: 90000 });
+      });
+
       goOffline();
 
       cy.visit(url);

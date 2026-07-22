@@ -53,7 +53,9 @@ T> يمكنك تمرير array من الإعدادات إلى الدالة `webp
 
 تُستخدم الخاصية `hooks` على instance الخاصة بـ `Compiler` لتسجيل plugin على أي hook event ضمن دورة حياة `Compiler`. ويستخدم webpack الأداتين [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsDefaulter.js) و[`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js) لإعداد instance الخاصة بـ `Compiler` مع كل plugins المدمجة.
 
-تُستخدم الدالة `run` لبدء كل عمل compilation. وبعد الانتهاء، تُنفّذ دالة `callback` التي مررتها. يجب أن يتم تسجيل stats والأخطاء النهائية داخل هذه الدالة.
+تصف الخاصية `platform` في instance من `Compiler` البيئة المستهدفة التي يحددها خيار [`target`](/configuration/target/). وهي كائن للقراءة فقط يضم مؤشرات المنصات (`web` و`browser` و`webworker` و`node` و`electron` و`nwjs` و`deno` و`bun` و`universal`). تكون قيمة كل مؤشر `true` أو `false`، أو `null` إذا لم تُحدَّد المنصة. تستطيع plugins وloaders قراءة هذه الخاصية لتكييف سلوكها مع بيئة البناء المستهدفة. بدءًا من webpack 5.108.0، تكون قيمة `platform.universal` هي `true` عند استخدام `target: "universal"` أو الخيار المكافئ `target: ["web", "node"]`.
+
+تُستخدم الدالة `run` لبدء عملية compilation كاملة. وبعد انتهائها، تُنفَّذ دالة `callback` التي مررتها، وفيها ينبغي تسجيل stats والأخطاء النهائية.
 
 W> تدعم هذه API عملية compilation واحدة فقط في الوقت نفسه. عند استخدام `run` أو `watch`، استدعِ `close` وانتظر انتهاءه قبل استدعاء `run` أو `watch` مرة أخرى. تشغيل compilations متزامنة قد يفسد ملفات output.
 

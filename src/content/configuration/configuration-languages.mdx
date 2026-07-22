@@ -5,7 +5,34 @@ contributors:
   - RlxChap2
 ---
 
-يقبل webpack ملفات تخصيص مكتوبة بعدّة لغات برمجة ولغات بيانات. تجد قائمة بامتدادات الملفات المدعومة في حزمة [node-interpret](https://github.com/gulpjs/interpret). فعبر [node-interpret](https://github.com/gulpjs/interpret)، يستطيع webpack التعامل مع أنواع كثيرة ومختلفة من ملفات التخصيص.
+يقبل webpack ملفات تخصيص مكتوبة بلغات برمجة وتنسيقات بيانات متعددة، لذا يمكنك كتابة التخصيص بالصيغة الأنسب لمشروعك؛ سواء كانت JavaScript أو TypeScript أو CoffeeScript، أو تنسيق بيانات خالصًا مثل JSON5 أو YAML أو TOML.
+
+## defineConfig
+
+<Badge text="5.108.0+" />
+
+`defineConfig` دالة مساعدة يصدّرها `webpack` لتوفير التحقق من الأنواع والإكمال التلقائي في المحرر دون إضافة أي تعريفات للأنواع. وهي دالة محايدة لا تنفذ شيئًا في وقت التشغيل سوى إعادة التخصيص الذي تمرره إليها، ولذلك تعمل أيضًا مع ملفات تخصيص JavaScript العادية.
+
+**webpack.config.js**
+
+```js
+const { defineConfig } = require("webpack");
+
+module.exports = defineConfig({
+  mode: "none",
+});
+```
+
+تقبل الدالة جميع الأشكال التي يستطيع webpack-cli تحميلها: كائن تخصيص واحد، أو مصفوفة تخصيصات (multi-compiler)، أو دالة تعيد أحد هذين الشكلين، أو مصفوفة من هذه الدوال، أو `Promise` تُحل إلى أيٍّ منها.
+
+```js
+const { defineConfig } = require("webpack");
+
+module.exports = defineConfig((env, argv) => ({
+  mode: argv.mode ?? "development",
+  // ...
+}));
+```
 
 ## TypeScript
 
@@ -225,3 +252,65 @@ export default (
 ```
 
 W> إن كنت تستخدم Babel في أماكن أخرى وضبطت `modules` على `false`، فستضطر إمّا للاحتفاظ بملفَّي `.babelrc` منفصلين، أو استخدام `const jsxobj = require('jsxobj');` و `module.exports` بدلاً من صياغة `import` و `export` الجديدة. ذلك أنّ Node يدعم كثيراً من ميزات ES6 الجديدة، لكنه لا يدعم بعدُ صياغة وحدات ES6.
+
+## تنسيقات البيانات (JSON5 وYAML وTOML)
+
+<Badge text="webpack-cli v7.1.0+" />
+
+إذا كان تخصيصك يتكون من بيانات ثابتة فقط، بلا دوال أو قراءة من `process.env` أو قيم محسوبة، فيمكنك كتابته كملف بيانات بدلًا من JavaScript. يحلل webpack-cli الامتدادات التالية مباشرةً:
+
+| الامتداد        | حزمة المحلل |
+| --------------- | ----------- |
+| `.json5`        | `json5`     |
+| `.yaml`, `.yml` | `js-yaml`   |
+| `.toml`         | `toml`      |
+
+المحلل **غير مضمّن** في webpack-cli؛ لذا ثبّت الحزمة التي يحتاجها التنسيق ضمن dev dependencies. إذا كانت الحزمة مفقودة، يتوقف webpack-cli ويخبرك تحديدًا بالحزمة المطلوب تثبيتها.
+
+```bash
+npm install --save-dev json5
+# or
+npm install --save-dev js-yaml
+# or
+npm install --save-dev toml
+```
+
+مرر مسار الملف إلى `--config`، أو سمِّه باسم يتيح اكتشافه بوصفه [تخصيصًا افتراضيًا](/api/cli/#default-configurations)، مثل `webpack.config.json5`:
+
+```bash
+npx webpack --config webpack.config.toml
+```
+
+**webpack.config.json5**
+
+```json5
+{
+  // JSON5 allows comments, unquoted keys and trailing commas
+  mode: "production",
+  entry: "./src/index.js",
+  output: {
+    filename: "bundle.js",
+  },
+}
+```
+
+**webpack.config.yaml**
+
+```yaml
+mode: production
+entry: ./src/index.js
+output:
+  filename: bundle.js
+```
+
+**webpack.config.toml**
+
+```toml
+mode = "production"
+entry = "./src/index.js"
+
+[output]
+filename = "bundle.js"
+```
+
+T> لا تصف هذه التنسيقات إلا بيانات خالصة. إذا احتجت إلى تخصيص ديناميكي، مثل التفرع وفق البيئة أو إنشاء instances من plugins أو استخدام صيغة الدالة، فاستخدم ملف تخصيص JavaScript أو TypeScript بدلًا منها.

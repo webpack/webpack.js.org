@@ -5,7 +5,7 @@ contributors:
   - arabpolice
 ---
 
-يوضح هذا الدليل كيفية استخدام معالجة CSS الأصلية في webpack عبر `experiments.css`.
+يوضح هذا الدليل كيفية استخدام معالجة CSS المدمجة في webpack عبر `experiments.css`، وكيفية ترحيل إعداد قائم بعيدًا عن `css-loader` و`style-loader` و`mini-css-extract-plugin`.
 
 T> ما يزال `experiments.css` تجريبيًا. من المتوقع أن يصبح السلوك الافتراضي في webpack v6، لكن قد يستمر السلوك في التغير أثناء متابعة التطوير.
 
@@ -23,7 +23,7 @@ export default {
 };
 ```
 
-مع تفعيل هذا الخيار، يستطيع webpack معالجة CSS دون إضافة `css-loader` و `mini-css-extract-plugin` في المسار الأساسي.
+بعد تفعيل هذا الخيار، يتعامل webpack مع ملفات `.css` بوصفها modules من الدرجة الأولى؛ فيحلل `@import` و`url()`، ويستخرج أوراق الأنماط، وينشئ content hashes، ويدعم CSS Modules، دون الحاجة إلى `css-loader` أو `style-loader` أو `mini-css-extract-plugin`.
 
 ## استيراد CSS
 
@@ -47,14 +47,24 @@ h1 {
 }
 ```
 
-سيعالج Webpack ملف CSS ويضمّنه في مخرجات البناء.
+يعالج webpack ملف CSS ويضمّنه في مخرجات البناء.
+
+## أنواع CSS modules
+
+تضيف معالجة CSS المدمجة أربع قيم لـ[`Rule.type`](/configuration/module/#ruletype). ومعرفة النوع المناسب خطوة أساسية في الترحيل، لأن كل نوع يقابل وضعًا مختلفًا في `css-loader` ضمن `modules.mode`:
+
+| النوع        | نطاق الأسماء                                                                             | ما يقابله في `css-loader` |
+| ------------ | ---------------------------------------------------------------------------------------- | ------------------------- |
+| `css`        | عام، دون تحليل CSS Modules                                                               | `modules: false`          |
+| `css/global` | تكون المحددات عامة، مع احترام `:local()`                                                 | `modules.mode: 'global'`  |
+| `css/module` | تكون المحددات محلية افتراضيًا، ويُستخدم `:global()` لجعلها عامة                          | `modules.mode: 'local'`   |
+| `css/auto`   | يختار `css/module` لملفات `*.module.css` و`*.modules.css`، ويختار `css/global` لما عداها | `modules.auto: true`      |
+
+القاعدة الافتراضية التي يضيفها webpack للنمط `/\.css$/i` هي `css/auto`؛ ولذلك تصبح ملفات `*.module.css` من نوع CSS Modules، بينما تبقى بقية الملفات عامة. يطابق هذا السلوك أكثر إعدادات `css-loader` شيوعًا دون تخصيص إضافي.
 
 ## CSS Modules
 
-يتضمن دعم CSS الأصلي أيضًا CSS Modules. الأسلوب الموصى به هو:
-
-- الإبقاء على `type: "css/auto"` لمعالجة CSS المختلطة،
-- استخدام تسمية `.module.css` (أو `.modules.css`) لملفات CSS Modules.
+عند استخدام `css/auto`، سمِّ الملف `*.module.css` أو `*.modules.css` لتفعيل CSS Modules له:
 
 **src/button.module.css**
 
@@ -79,9 +89,9 @@ button.textContent = "Click me";
 document.body.appendChild(button);
 ```
 
-T> يتم تصدير أسماء الأصناف في CSS Modules. افتراضيًا، تكون الصادرات المسمّاة مفعّلة لوحدات CSS.
+T> يكون [`namedExports`](/configuration/module/#moduleparsercssnamedexports) مفعّلًا افتراضيًا، لذا استورد الأسماء المحلية ضمن namespace باستخدام `import * as styles` أو استوردها بالاسم باستخدام `import { button } from "./button.module.css"`. اضبطه على `false` للاحتفاظ بكائن default import التقليدي.
 
-يمكنك تخصيص سلوك CSS Modules باستخدام خيارات parser و generator:
+يمكنك تخصيص سلوك CSS Modules عبر خيارات parser وgenerator. راجع [جميع الخيارات مع أمثلة](#جميع-الخيارات-مع-أمثلة) أدناه:
 
 **webpack.config.js**
 
@@ -92,12 +102,12 @@ export default {
   },
   module: {
     parser: {
-      "css/module": {
+      "css/auto": {
         namedExports: true,
       },
     },
     generator: {
-      "css/module": {
+      "css/auto": {
         exportsConvention: "camel-case-only",
         localIdentName: "[uniqueName]-[id]-[local]",
       },
@@ -106,32 +116,97 @@ export default {
 };
 ```
 
-## بناء الإنتاج
+### ميزات CSS Modules المدعومة
 
-مع `experiments.css: true`، يوفر webpack استخراج CSS أصليًا وتجزئة محتوى لملفات CSS في بناءات الإنتاج.
+تفهم CSS Modules المدمجة ميزات التأليف نفسها التي يدعمها `css-loader`، لذا يمكن ترحيل معظم أوراق الأنماط دون تعديل:
 
-بالمقارنة مع الإعداد الكلاسيكي:
+- **`composes`**: يركب class محلية من أخرى، بما في ذلك `composes: foo from "./other.module.css"`، وتكون قيمة التصدير قائمة أسماء classes مفصولة بمسافات.
+- **`@value`**: يعرّف قيمًا قابلة لإعادة الاستخدام ويستوردها، مثل `@value primary: #1f6feb;` و`@value primary from "./vars.module.css"`.
+- **`:export`**: يصدّر أزواج مفاتيح وقيم مخصصة إلى JavaScript.
+- **`:local()` و`:global()`**: يبدلان نطاق الأسماء ضمن السطر في أي نوع من modules.
 
-- الأسلوب التقليدي: `css-loader` + `mini-css-extract-plugin`
-- الأسلوب الأصلي: `experiments.css` مع سلوك استخراج مضمّن
+```css
+/* button.module.css */
+@value brand: #1f6feb;
 
-يقلل هذا من حجم الإعدادات ويبقي مسار معالجة CSS أقرب إلى ميزات webpack الأساسية.
+.base {
+  padding: 8px 12px;
+}
+.primary {
+  composes: base;
+  background: brand;
+}
+:export {
+  brandColor: brand;
+}
+```
 
-## الحالة التجريبية والقيود المعروفة
+## أوضاع الإخراج (`exportType`)
 
-يُعد `experiments.css` تجريبيًا صراحةً، لذلك تعامل معه كميزة اختيارية واختبره بعناية قبل تعميمه على نطاق واسع.
+يمكن إخراج CSS module واحدة بأربع طرائق. يحدد خيار parser المسمى [`exportType`](/configuration/module/#moduleparsercssexporttype) الطريقة المستخدمة، وكل واحدة منها تحل محل جزء مختلف من سلسلة الأدوات التقليدية:
 
-نقاط معروفة يجب أخذها في الحسبان:
+| `exportType`         | السلوك                                                                                                      | ما يحل محله                                  |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `"link"` (الافتراضي) | يستخرج ملف `.css` يُحمّل عبر `<link>`                                                                       | `mini-css-extract-plugin`                    |
+| `"style"`            | يحقن عنصر `<style>` من runtime                                                                              | `style-loader`                               |
+| `"text"`             | يصدّر CSS في صورة string                                                                                    | `css-loader` `exportType: 'string'`          |
+| `"css-style-sheet"`  | يصدّر كائن [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet) قابلًا للإنشاء | `css-loader` `exportType: 'css-style-sheet'` |
 
-- قد تستمر واجهات API والسلوك في التطور قبل أن تصبح افتراضية في webpack v6.
-- بعض الخيارات الخاصة بالـ loaders ليست جزءًا من سلوك CSS الأصلي (مثل المرشحات الخاصة بـ loader معين).
-- إذا كان مشروعك يعتمد على سلاسل loaders متقدمة، فتحقق من كل جزء قبل الانتقال الكامل.
+اضبطه عموميًا لكل نوع من modules:
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/auto": {
+        exportType: "style",
+      },
+    },
+  },
+};
+```
+
+أو اضبطه في قاعدة محددة لمجموعة فرعية من الملفات:
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        type: "css/auto",
+        parser: { exportType: "style" },
+      },
+    ],
+  },
+};
+```
 
 ## دليل الترحيل
 
-إذا كنت تستخدم حاليًا `css-loader` و `mini-css-extract-plugin` و `style-loader`، فانتقل على خطوات صغيرة.
+### نظرة سريعة
 
-### 1) ابدأ من إعداد كلاسيكي
+| الإعداد التقليدي                                           | البديل المدمج                                                                                                                                             |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mini-css-extract-plugin` (`MiniCssExtractPlugin.loader`)  | الاستخراج المدمج (`exportType: "link"` افتراضيًا)                                                                                                         |
+| `MiniCssExtractPlugin` `filename` / `chunkFilename`        | [`output.cssFilename`](/configuration/output/#outputcssfilename) / [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)             |
+| `style-loader`                                             | [`exportType: "style"`](#أوضاع-الإخراج-exporttype)                                                                                                        |
+| `css-loader`                                               | تحليل CSS المدمج (لا حاجة إلى loader)                                                                                                                     |
+| `css-loader` `url` / `import`                              | [`module.parser.css.url`](/configuration/module/#moduleparsercssurl) / [`import`](/configuration/module/#moduleparsercssimport) (كلاهما `true` افتراضيًا) |
+| `css-loader` `modules` (الاكتشاف التلقائي لـ`.module.css`) | نوع module ‏`css/auto`                                                                                                                                    |
+| `css-loader` `modules.mode`                                | النوع `css/module` أو `css/global` مع [`pure`](/configuration/module/#moduleparsercsspure)                                                                |
+| `css-loader` `modules.localIdentName`                      | [generator `localIdentName`](/configuration/module/#modulegenerator)                                                                                      |
+| `css-loader` `modules.exportLocalsConvention`              | [generator `exportsConvention`](/configuration/module/#modulegenerator)                                                                                   |
+| `css-loader` `modules.namedExport`                         | [`module.parser.css.namedExports`](/configuration/module/#moduleparsercssnamedexports) (`true` افتراضيًا)                                                 |
+| `css-loader` `modules.exportOnlyLocals`                    | generator `exportsOnly`                                                                                                                                   |
+| `css-loader` `esModule`                                    | generator `esModule` (`true` افتراضيًا)                                                                                                                   |
+| `css-loader` `exportType: 'string'` / `'css-style-sheet'`  | [`exportType: "text"` / `"css-style-sheet"`](#أوضاع-الإخراج-exporttype)                                                                                   |
+
+رحّل loader واحدة في كل مرة. رُتبت الأقسام التالية بحيث يبقى البناء سليمًا بعد كل خطوة.
+
+### 1. ابدأ بإعداد تقليدي
 
 **webpack.config.js**
 
@@ -151,7 +226,7 @@ export default {
 };
 ```
 
-### 2) انتقل إلى CSS الأصلي
+### 2. فعّل CSS المدمج
 
 **webpack.config.js**
 
@@ -163,48 +238,11 @@ export default {
 };
 ```
 
-### 3) انقل خيارات `css-loader` أولًا
+تتولى القاعدة المدمجة `/\.css$/i` التي تستخدم `css/auto` معالجة استيرادات `.css`. احذف القاعدة المخصصة والـplugin بعد التأكد في الأقسام التالية من وجود بديل لكل خيار تستخدمه.
 
-ينبغي نقل معظم الخيارات المرتبطة بـ CSS Modules إلى إعدادات parser/generator الأصلية.
+### 3. استبدل `mini-css-extract-plugin`
 
-**webpack.config.js**
-
-```js
-export default {
-  experiments: {
-    css: true,
-  },
-  module: {
-    parser: {
-      css: {
-        import: true,
-        url: true,
-      },
-      "css/module": {
-        namedExports: true,
-      },
-    },
-    generator: {
-      "css/module": {
-        exportsConvention: "camel-case-only",
-        localIdentName: "[local]-[hash:base64:6]",
-      },
-    },
-  },
-};
-```
-
-ملاحظات:
-
-- `import` و `url` هما مفتاحا parser أصليان لمعالجة CSS.
-- يتحكم `namedExports` في سلوك صادرات CSS Modules.
-- يوفر `exportsConvention` و `localIdentName` تشكيلًا لتصدير الأصناف وأسمائها.
-- يدعم `localIdentName` مواضع hash (مثل `[hash:base64:6]`)؛ يمكنك ضبط التجزئة عالميًا باستخدام [`output.hashFunction`](/configuration/output/#outputhashfunction) و [`output.hashDigest`](/configuration/output/#outputhashdigest) و [`output.hashDigestLength`](/configuration/output/#outputhashdigestlength) و [`output.hashSalt`](/configuration/output/#outputhashsalt).
-- لا تتوفر خيارات `css-loader` الشبيهة بالمرشحات كمكافئات مباشرة؛ استخدم آليات webpack مثل `IgnorePlugin` عند الحاجة.
-
-### 4) استبدل `mini-css-extract-plugin`
-
-عند تفعيل `experiments.css`، يوفر webpack استخراج CSS أصليًا ومعالجة hash للمحتوى في ملفات CSS الناتجة، لذلك يمكنك إزالة كل من `mini-css-extract-plugin` و `css-loader` من هذا الإعداد الأساسي.
+تستخرج معالجة CSS المدمجة أوراق الأنماط وتضيف إليها content hashes افتراضيًا (`exportType: "link"`)، ولذلك لم تعد بحاجة إلى الـplugin أو loader الخاصة بها:
 
 **webpack.config.js**
 
@@ -215,57 +253,433 @@ export default {
 +  experiments: {
 +    css: true,
 +  },
+-  module: {
+-    rules: [
+-      {
+-        test: /\.css$/i,
+-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+-      },
+-    ],
+-  },
 -  plugins: [new MiniCssExtractPlugin()],
  };
 ```
 
-يمكنك إزالة:
+انقل خيارات الـplugin المتبقية إلى البدائل الآتية:
 
-- سلسلة loaders الخاصة بـ CSS (بما في ذلك `css-loader`) من `module.rules`،
-- نسخة الملحق `new MiniCssExtractPlugin()`.
-
-### 5) استبدل `style-loader` بـ `exportType: "style"`
-
-إذا كنت تستخدم `style-loader` لحقن الأنماط أثناء وقت التشغيل، فأبقِ `css/auto` واستخدم تسمية الوحدات (`.module.css` أو `.modules.css`)، ثم عيّن `exportType: "style"`:
+| `mini-css-extract-plugin` | البديل المدمج                                                                     |
+| ------------------------- | --------------------------------------------------------------------------------- |
+| `filename`                | [`output.cssFilename`](/configuration/output/#outputcssfilename)                  |
+| `chunkFilename`           | [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)        |
+| loader `publicPath`       | [`output.publicPath`](/configuration/output/#outputpublicpath)                    |
+| loader `esModule`         | generator [`esModule`](/configuration/module/#modulegenerator) (`true` افتراضيًا) |
+| `ignoreOrder`             | لا مقابل له؛ فمعالجة CSS المدمجة لا تصدر تحذيرات تعارض الترتيب                    |
 
 **webpack.config.js**
 
 ```js
 export default {
-  experiments: {
-    css: true,
+  experiments: { css: true },
+  output: {
+    cssFilename: "[name].[contenthash].css",
+    cssChunkFilename: "[id].[contenthash].css",
   },
+};
+```
+
+### 4. استبدل `css-loader`
+
+لمعظم خيارات `css-loader` بديل مدمج ضمن [`module.parser.css`](/configuration/module/#moduleparsercss) و[`module.generator.css`](/configuration/module/#modulegenerator). تتطابق القيم الافتراضية الشائعة، أي تفعيل `url` و`import` و`namedExports`، مع إعداد `css-loader` المعتاد، لذا لا تحتاج مشاريع كثيرة إلى تخصيص parser إطلاقًا.
+
+| خيار `css-loader`                | البديل المدمج                                                                      |
+| -------------------------------- | ---------------------------------------------------------------------------------- |
+| `url`                            | `module.parser.css.url` — default `true`                                           |
+| `import`                         | `module.parser.css.import` — default `true`                                        |
+| `importLoaders`                  | لا مقابل له؛ تُطبق loaders في السلسلة تلقائيًا على الملفات المستوردة عبر `@import` |
+| `sourceMap`                      | يتحكم فيه [`devtool`](/configuration/devtool/)، ويدعم إدخال `css` خاصًا بالنوع     |
+| `esModule`                       | `module.generator.css.esModule`، وقيمته الافتراضية `true`                          |
+| `exportType: 'string'`           | parser `exportType: "text"`                                                        |
+| `exportType: 'css-style-sheet'`  | parser `exportType: "css-style-sheet"`                                             |
+| `modules` (اكتشاف تلقائي)        | نوع module المدمج `css/auto`                                                       |
+| `modules.mode: 'local'`          | النوع `css/module`                                                                 |
+| `modules.mode: 'global'`         | النوع `css/global`                                                                 |
+| `modules.mode: 'pure'`           | parser `pure: true`                                                                |
+| `modules.localIdentName`         | generator `localIdentName`                                                         |
+| `modules.exportLocalsConvention` | generator `exportsConvention`                                                      |
+| `modules.namedExport`            | parser `namedExports`، وقيمته الافتراضية `true`                                    |
+| `modules.exportOnlyLocals`       | generator `exportsOnly`                                                            |
+| `modules.localIdentHashSalt`     | generator `localIdentHashSalt`                                                     |
+| `modules.localIdentHashFunction` | generator `localIdentHashFunction`                                                 |
+
+فمثلًا، إعداد CSS Modules التالي في `css-loader`:
+
+```js
+export default {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        type: "css/auto",
-        parser: {
-          exportType: "style",
-        },
+        test: /\.module\.css$/i,
+        use: [
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[local]-[hash:base64:6]",
+                exportLocalsConvention: "camel-case-only",
+                namedExport: true,
+              },
+            },
+          },
+        ],
       },
     ],
   },
 };
 ```
 
-يحقن هذا الوضع عنصر `<style>` من وقت تشغيل webpack ويغطي حالة الاستخدام المعتادة لـ `style-loader`.
+يصبح:
 
-إذا لم تستطع إعادة تسمية الملفات وفق اصطلاح تسمية CSS Modules، يمكنك استخدام `type: "css/module"` مباشرة للقاعدة المعنية.
+**webpack.config.js**
 
-### 6) أبقِ الاستيرادات دون تغيير
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/auto": {
+        namedExports: true,
+      },
+    },
+    generator: {
+      "css/auto": {
+        localIdentName: "[local]-[hash:base64:6]",
+        exportsConvention: "camel-case-only",
+      },
+    },
+  },
+};
+```
 
-يمكن أن تبقى استيرادات JS كما هي:
+T> يدعم `localIdentName` عناصر hash النائبة مثل `[hash:base64:6]`. يمكنك ضبط hash عموميًا عبر [`output.hashFunction`](/configuration/output/#outputhashfunction) و[`output.hashDigest`](/configuration/output/#outputhashdigest) و[`output.hashDigestLength`](/configuration/output/#outputhashdigestlength) و[`output.hashSalt`](/configuration/output/#outputhashsalt)، أو لكل نوع من modules على حدة باستخدام خيارات generator التي تبدأ بـ`localIdentHash`.
+
+تعمل بعض خيارات `css-loader` بطريقة مختلفة:
+
+- `getLocalIdent`: بدلًا من دالة مخصصة، تعتمد معالجة CSS المدمجة على قالب [`localIdentName`](/configuration/module/#modulegenerator) لتوليد الأسماء، وهو يقبل دالة أيضًا.
+- `getJSON`: تصدّر CSS module نفسها خريطة أسماء classes، ويمكن قراءتها من module graph الخاص بـcompilation. لذلك تستطيع plugin صغيرة تحويلها إلى JSON إذا كان إطار العمل يحتاج إلى ملف على القرص. وغالبًا لا تحتاج إليها أصلًا في التصيير من جهة الخادم؛ راجع [التصيير من جهة الخادم](#7-التصيير-من-جهة-الخادم-node-وweb).
+- لا يوجد بديل مدمج لـ`localIdentRegExp` أو دوال التصفية callback في `url` و`import`. احتفظ بـ`css-loader` للملفات المتأثرة، أو استبعد طلبات محددة باستخدام [`IgnorePlugin`](/plugins/ignore-plugin/).
+
+### 5. استبدل `style-loader`
+
+إذا كنت تستخدم `style-loader` لحقن الأنماط في وقت التشغيل بدل استخراج ملف، فاضبط [`exportType: "style"`](#أوضاع-الإخراج-exporttype):
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/auto": {
+        exportType: "style",
+      },
+    },
+  },
+};
+```
+
+يحقن هذا الإعداد عنصر `<style>` من webpack runtime، ويغطي الاستخدام الافتراضي لـ`style-loader` (`injectType: "styleTag"`). قيده بقاعدة واحدة إذا أردت حقن بعض الملفات فقط مع استخراج البقية:
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.inline\.css$/i,
+        type: "css/auto",
+        parser: { exportType: "style" },
+      },
+    ],
+  },
+};
+```
+
+ملاحظات حول خيارات `style-loader`: يقابل `injectType: "linkTag"` القيمة الافتراضية `exportType: "link"`، أي الاستخراج. ولا يوجد بديل مدمج للخيارات `attributes` و`insert` و`styleTagTransform`، لذا احتفظ بـ`style-loader` إذا كنت تعتمد عليها.
+
+### 6. واصل استخدام المعالجات المسبقة (Sass وLess وPostCSS)
+
+تحل معالجة CSS المدمجة محل CSS loaders، لا loaders الخاصة بالمعالجات المسبقة. أبقِ loader المعالج المسبق ضمن `use` واضبط `type` في القاعدة على `css/auto` ليتعامل webpack مع مخرجات loader بوصفها CSS:
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["postcss-loader", "sass-loader"],
+        type: "css/auto",
+      },
+    ],
+  },
+};
+```
+
+يصرّف `sass-loader` الشيفرة إلى CSS، ثم يعالجها `postcss-loader`، وبعد ذلك تتولى معالجة CSS المدمجة الاستخراج و`url()` وCSS Modules. يعمل النمط نفسه مع `less-loader` و`stylus-loader` وما شابههما.
+
+### 7. التصيير من جهة الخادم (node وweb)
+
+يتطلب SSR عادةً عمليتي بناء: حزمة `web` للمتصفح وحزمة `node` للخادم. ويجب أن تتطابق أسماء classes في CSS Modules كي تجري hydration للشيفرة المصيّرة على الخادم بصورة سليمة لدى العميل. كان `getJSON` في `css-loader` يُستخدم غالبًا لمزامنة هذه الأسماء، أما مع CSS المدمج فيمكن تجنب هذه الخطوة تمامًا بجعل `localIdentName` حتميًا ومتطابقًا بين الأهداف.
+
+استخدم قالبًا **مبنيًا على المسار** دون hash على مستوى compilation كاملة، حتى يُنتج اسم class نفسه لكل هدف:
+
+**webpack.config.js**
+
+```js
+const common = {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.module\.css$/i,
+        type: "css/module",
+        generator: {
+          // تبقى `[file]__[local]` ثابتة بين الأهداف، فلا حاجة إلى المزامنة عبر getJSON.
+          localIdentName: "[file]__[local]",
+        },
+      },
+    ],
+  },
+};
+
+export default [
+  { ...common, name: "web", target: "web" },
+  { ...common, name: "node", target: "node" },
+];
+```
+
+عند استخدام هدف `node` تكون القيمة الافتراضية في CSS generator هي `exportsOnly: true`؛ ولذلك يصدّر بناء الخادم خريطة أسماء classes فقط ولا يُخرج ورقة أنماط، وهو ما يحتاجه مصيّر SSR بالضبط. في المقابل، يواصل بناء المتصفح استخراج CSS الفعلي. وإذا فضّلت تخصيصًا واحدًا، فإن `target: ["web", "node"]` ينشئ حزمة شاملة تعمل في البيئتين.
+
+T> تجنب القيمة الافتراضية للإنتاج `localIdentName: "[fullhash]"` عند استخدام SSR، لأن hash الكامل لـcompilation يختلف بين بناء web وبناء node، وبالتالي لن تتطابق أسماء classes. ثبّت قالبًا حتميًا في كلا التخصيصين، مبنيًا على المسار أو `[local]`، ويمكنك إضافة `[hash]` خاص بكل ملف.
+
+### 8. أبقِ الاستيرادات كما هي وتحقق من النتيجة
+
+تبقى استيرادات JavaScript كما هي:
 
 ```js
 import "./styles.css";
 import * as styles from "./button.module.css";
 ```
 
-### 7) تحقق من المخرجات في التطوير والإنتاج
+ثم تحقق مما يلي:
 
-تحقق مما يلي:
+- تُطبق الأنماط بصورة صحيحة في بيئة التطوير.
+- تُخرج ملفات `.css` المستخرجة في بيئة الإنتاج.
+- تتطابق صادرات CSS Modules مع طريقة استخدامها حاليًا.
 
-- يتم تطبيق الأنماط بشكل صحيح في التطوير،
-- يتم إصدار ملفات CSS المولّدة للإنتاج،
-- تتطابق صادرات CSS Modules مع استخدامك الحالي.
+## جميع الخيارات مع أمثلة
+
+اضبط الخيارات لكل نوع من modules ضمن [`module.parser`](/configuration/module/#moduleparser) و[`module.generator`](/configuration/module/#modulegenerator). المفاتيح المتاحة هي `css` و`css/auto` و`css/global` و`css/module`. تستخدم الأمثلة التالية `css/auto` لأنه النوع الذي تعتمد عليه القاعدة الافتراضية.
+
+### خيارات Parser
+
+القيمة الافتراضية لجميع خيارات parser المنطقية التالية هي `true`.
+
+| الخيار                                                               | النوع                                              | الافتراضي      | الوصف                                                                                         |
+| -------------------------------------------------------------------- | -------------------------------------------------- | -------------- | --------------------------------------------------------------------------------------------- |
+| [`import`](/configuration/module/#moduleparsercssimport)             | `boolean`                                          | `true`         | معالجة قواعد `@import`.                                                                       |
+| [`url`](/configuration/module/#moduleparsercssurl)                   | `boolean`                                          | `true`         | معالجة `url()` و`image-set()` و`src()` و`image()`.                                            |
+| [`namedExports`](/configuration/module/#moduleparsercssnamedexports) | `boolean`                                          | `true`         | تصدير الأسماء المحلية في CSS Modules كصادرات مسماة في ES modules.                             |
+| [`exportType`](/configuration/module/#moduleparsercssexporttype)     | `"link" \| "style" \| "text" \| "css-style-sheet"` | `"link"`       | كيفية إخراج CSS؛ راجع [أوضاع الإخراج](#أوضاع-الإخراج-exporttype).                             |
+| [`pure`](/configuration/module/#moduleparsercsspure)                 | `boolean`                                          | `false`        | وضع pure الصارم؛ يجب أن يحتوي كل محدد على class أو id محلي. يخص `css/module` و`css/auto` فقط. |
+| [`as`](/configuration/module/#moduleparsercssas)                     | `"stylesheet" \| "block-contents"`                 | `"stylesheet"` | تحليل المصدر كورقة أنماط كاملة أو كمحتوى كتلة.                                                |
+| `animation`                                                          | `boolean`                                          | `true`         | إعادة تسمية أسماء `@keyframes` المحلية.                                                       |
+| `container`                                                          | `boolean`                                          | `true`         | إعادة تسمية أسماء `@container` المحلية.                                                       |
+| `customIdents`                                                       | `boolean`                                          | `true`         | إعادة تسمية المعرّفات المخصصة.                                                                |
+| `dashedIdents`                                                       | `boolean`                                          | `true`         | إعادة تسمية المعرّفات ذات الشرطات، مثل الخصائص المخصصة.                                       |
+| `function`                                                           | `boolean`                                          | `true`         | إعادة تسمية أسماء `@function` المحلية.                                                        |
+| `grid`                                                               | `boolean`                                          | `true`         | إعادة تسمية معرّفات خطوط grid ومناطقه.                                                        |
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/auto": {
+        import: true,
+        url: true,
+        namedExports: true,
+        exportType: "link",
+        pure: false,
+        // أعد تسمية @keyframes فقط، واترك معرّفات @container وgrid دون تغيير.
+        animation: true,
+        container: false,
+        grid: false,
+      },
+    },
+  },
+};
+```
+
+T> لترك تعليمة `@import` أو `url()` بعينها دون معالجة، بحيث تبقى كما هي في المخرجات بدل أن يحلها webpack، أضف قبلها التعليق `/* webpackIgnore: true */`. يفيد ذلك مع عناوين CDN أو assets التي تُحل في وقت التشغيل، مع إبقاء `import` و`url` مفعّلين في بقية المواضع.
+
+### خيارات Generator
+
+| الخيار                                                        | النوع                                                                                   | الافتراضي                                                          | الوصف                                                 |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------------------------- |
+| [`localIdentName`](/configuration/module/#modulegenerator)    | `string \| function`                                                                    | `"[uniqueName]-[id]-[local]"` (تطوير) / `"[fullhash]"` (إنتاج)     | قالب أسماء classes المحلية المولّدة.                  |
+| [`exportsConvention`](/configuration/module/#modulegenerator) | `"as-is" \| "camel-case" \| "camel-case-only" \| "dashes" \| "dashes-only" \| function` | `"as-is"`                                                          | اصطلاح تسمية الأسماء المحلية المصدّرة.                |
+| `exportsOnly`                                                 | `boolean`                                                                               | `true` للأهداف التي لا تحتوي document مثل `node`، وإلا `false`     | تصدير الأسماء المحلية فقط دون إخراج ورقة أنماط (SSR). |
+| `esModule`                                                    | `boolean`                                                                               | `true`                                                             | استخدام صيغة ES modules في JavaScript المولّدة.       |
+| `localIdentHashFunction`                                      | `string`                                                                                | [`output.hashFunction`](/configuration/output/#outputhashfunction) | دالة hash المستخدمة في `localIdentName`.              |
+| `localIdentHashDigest`                                        | `string`                                                                                | `"base64url"`                                                      | ترميز hash للمعرّفات المحلية.                         |
+| `localIdentHashDigestLength`                                  | `number`                                                                                | `6`                                                                | طول hash للمعرّفات المحلية.                           |
+| `localIdentHashSalt`                                          | `string`                                                                                | [`output.hashSalt`](/configuration/output/#outputhashsalt)         | قيمة salt المستخدمة في hash المعرّفات المحلية.        |
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    generator: {
+      "css/auto": {
+        localIdentName: "[uniqueName]-[id]-[local]",
+        exportsConvention: "camel-case-only",
+        esModule: true,
+        exportsOnly: false,
+        localIdentHashDigest: "base64url",
+        localIdentHashDigestLength: 6,
+      },
+    },
+  },
+};
+```
+
+يقبل `exportsConvention` أيضًا دالة تعيد `string` أو `string[]`. وعند إعادة مصفوفة، يُصدّر الاسم المحلي تحت [عدة أسماء بديلة](/configuration/module/#multiple-aliases-via-exportsconvention)، بما يطابق سلوك `css-loader`.
+
+## أمثلة شائعة
+
+### CSS Modules مع صادرات مسماة
+
+**src/app.module.css**
+
+```css
+.primary {
+  color: #1f6feb;
+}
+.large-text {
+  font-size: 2rem;
+}
+```
+
+**src/index.js**
+
+```js
+import { largeText, primary } from "./app.module.css";
+
+document.body.classList.add(primary, largeText);
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    generator: {
+      "css/auto": {
+        exportsConvention: "camel-case-only",
+      },
+    },
+  },
+};
+```
+
+### استخراج ملفات CSS بأسماء تتضمن hash للإنتاج
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  experiments: { css: true },
+  output: {
+    cssFilename: "css/[name].[contenthash].css",
+    cssChunkFilename: "css/[id].[contenthash].css",
+  },
+};
+```
+
+### حقن وسوم `<style>` في وقت التشغيل على طريقة style-loader
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/auto": {
+        exportType: "style",
+      },
+    },
+  },
+};
+```
+
+### استيراد ورقة أنماط قابلة للإنشاء
+
+**src/index.js**
+
+```js
+import sheet from "./theme.css" with { type: "css" };
+
+document.adoptedStyleSheets = [sheet];
+```
+
+يحوّل webpack سمة الاستيراد `with { type: "css" }` تلقائيًا إلى `exportType: "css-style-sheet"`، ويمنحك instance من [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet).
+
+### استيراد CSS في صورة string
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    parser: {
+      "css/auto": {
+        exportType: "text",
+      },
+    },
+  },
+};
+```
+
+**src/index.js**
+
+```js
+import css from "./styles.css";
+
+const style = new CSSStyleSheet();
+style.replaceSync(css);
+```
+
+### استخدام الأنماط العامة وmodules محددة النطاق معًا
+
+مع قاعدة `css/auto` الافتراضية، تكون ملفات `*.module.css` محددة النطاق وتبقى بقية الملفات عامة، دون أي تخصيص إضافي:
+
+```js
+import "./reset.css"; // عام
+import * as card from "./card.module.css"; // محدد النطاق
+```
+
+## الحالة التجريبية والقيود المعروفة
+
+ما يزال `experiments.css` تجريبيًا؛ تعامل معه كميزة اختيارية واختبره بعناية قبل تعميمه.
+
+- قد تستمر واجهات API والسلوك في التطور قبل اعتمادها افتراضيًا في webpack v6.
+- لا توجد بدائل مباشرة لبعض خيارات loaders: ‏`localIdentRegExp` ودوال التصفية في `css-loader`، وخيارات `attributes` و`insert` و`styleTagTransform` في `style-loader`. احتفظ بالـloader للملفات التي تحتاج إليها. يقابل `getLocalIdent` صيغة الدالة في `localIdentName`، أما `getJSON` وSSR فتغطيهما طريقة [مطابقة أسماء classes بين الأهداف](#7-التصيير-من-جهة-الخادم-node-وweb).
+- لا يوجد بديل لـ`importLoaders`؛ إذ تُطبق loaders في السلسلة تلقائيًا على الملفات المستوردة عبر `@import`.
+- إذا كان مشروعك يعتمد على سلاسل loaders متقدمة، فتحقق من كل جزء قبل إتمام الترحيل.
