@@ -1,27 +1,23 @@
 ---
 title: ProgressPlugin
-group: webpack
 contributors:
-  - elliottsj
-  - EugeneHlushko
-  - byzyk
-  - smelukov
-  - chenxsan
+  - RlxChap2
+group: webpack
 ---
 
-The `ProgressPlugin` provides a way to customize how progress is reported during a compilation.
+يوفّر `ProgressPlugin` طريقة لتخصيص كيفية عرض تقدم عملية التجميع أثناء عمل webpack.
 
-## Usage
+## الاستخدام
 
-Create an instance of `ProgressPlugin` and provide one of the allowed params, besides, there's a static method `createDefaultHandler` which can be used to customize the default handler.
+أنشئ instance من `ProgressPlugin` ومرر له أحد المعاملات المدعومة. توجد أيضًا دالة static باسم `createDefaultHandler` يمكنك استخدامها لتخصيص handler الافتراضي.
 
-### Providing `function`
+### تمرير `function`
 
-Provide a handler function which will be called when hooks report progress. `handler` function arguments:
+يمكنك تمرير handler function تُستدعى عندما ترسل hooks معلومات عن التقدم. تستقبل دالة `handler` المعاملات التالية:
 
-- `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation
-- `message`: a short description of the currently-executing hook
-- `...args`: zero or more additional strings describing the current progress
+- `percentage`: رقم بين 0 و1 يوضح نسبة اكتمال التجميع.
+- `message`: وصف قصير للـ hook الذي يعمل حاليًا.
+- `...args`: صفر أو أكثر من strings إضافية توضّح حالة التقدم الحالية.
 
 ```js
 const handler = (percentage, message, ...args) => {
@@ -32,22 +28,22 @@ const handler = (percentage, message, ...args) => {
 new webpack.ProgressPlugin(handler);
 ```
 
-### Providing `object`
+### تمرير `object`
 
-When providing an `object` to the `ProgressPlugin`, following properties are supported:
+عند تمرير `object` إلى `ProgressPlugin`، تدعم الخصائص التالية:
 
-- `activeModules` (`boolean = false`): Shows active modules count and one active module in progress message.
-- `entries` (`boolean = true`): Shows entries count in progress message.
-- `handler` (See [Providing function](#providing-function))
-- `modules` (`boolean = true`): Shows modules count in progress message.
-- `modulesCount` (`number = 5000`): A minimum modules count to start with. Takes effect when `modules` property is enabled.
-- `profile` (`boolean = false`): Tells `ProgressPlugin` to collect profile data for progress steps.
-- `dependencies` (`boolean = true`): Shows the count of dependencies in progress message.
-- `dependenciesCount` (`number = 10000`): A minimum dependencies count to start with. Takes effect when `dependencies` property is enabled.
-- `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): Tells `ProgressPlugin` how to calculate progress percentage.
-- `progressBar` (`boolean | object = false`) <Badge text="5.107.0+" />: Renders a progress bar in the terminal instead of the plain percentage message. Only takes effect with the default handler, i.e. when no custom `handler` is provided. Pass `true` to enable it with defaults, or an object with the following properties:
-  - `name` (`string = 'Build'`): Name shown before the progress bar.
-  - `color` (`string = 'green'`): Color used for the filled portion of the bar. Falls back to `'green'` when the given color is not supported.
+- `activeModules` (`boolean = false`): يعرض عدد active modules واسم module نشط واحد داخل رسالة التقدم.
+- `entries` (`boolean = true`): يعرض عدد entries داخل رسالة التقدم.
+- `handler`: راجع [تمرير function](#تمرير-function).
+- `modules` (`boolean = true`): يعرض عدد modules داخل رسالة التقدم.
+- `modulesCount` (`number = 5000`): أقل عدد modules يبدأ منه العرض. يعمل عندما تكون خاصية `modules` مفعّلة.
+- `profile` (`boolean = false`): يطلب من `ProgressPlugin` جمع profile data لخطوات التقدم.
+- `dependencies` (`boolean = true`): يعرض عدد dependencies داخل رسالة التقدم.
+- `dependenciesCount` (`number = 10000`): أقل عدد dependencies يبدأ منه العرض. يعمل عندما تكون خاصية `dependencies` مفعّلة.
+- `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): يحدد الطريقة التي يستخدمها `ProgressPlugin` لحساب نسبة التقدم.
+- `progressBar` (`boolean | object = false`) <Badge text="5.107.0+" />: يعرض شريط تقدم في الطرفية بدل رسالة النسبة المئوية المعتادة. لا يعمل إلا مع handler الافتراضي، أي عند عدم تمرير `handler` مخصص. مرّر `true` لتفعيله بالإعدادات الافتراضية، أو مرّر كائنًا بالخصائص التالية:
+  - `name` (`string = 'Build'`): الاسم الذي يظهر قبل شريط التقدم.
+  - `color` (`string = 'green'`): لون الجزء المكتمل من الشريط. يعود إلى `'green'` إذا كان اللون المحدد غير مدعوم.
 
 ```js
 new webpack.ProgressPlugin({
@@ -65,7 +61,7 @@ new webpack.ProgressPlugin({
 });
 ```
 
-Rendering a progress bar:
+لعرض شريط تقدم:
 
 ```js
 new webpack.ProgressPlugin({
@@ -78,7 +74,7 @@ new webpack.ProgressPlugin({
 
 ### webpack.ProgressPlugin.createDefaultHandler
 
-If the default handler of `ProgressPlugin` does not meet your requirements, you can customize it using the static `ProgressPlugin.createDefaultHandler` method.
+إذا لم يكن handler الافتراضي في `ProgressPlugin` مناسبًا لاحتياجك، يمكنك تخصيصه باستخدام الدالة static `ProgressPlugin.createDefaultHandler`.
 
 ```ts
 static createDefaultHandler: (
@@ -88,21 +84,23 @@ static createDefaultHandler: (
 ) => (percentage: number, msg: string, ...args: string[]) => void;
 ```
 
-## Percentage calculation
+## حساب النسبة المئوية
 
-By default, progress percentage is calculated based on built modules count and total modules count: `built / total`
+افتراضيًا، تُحسب نسبة التقدم اعتمادًا على عدد modules التي تم بناؤها مقارنة بإجمالي عدد modules: `built / total`.
 
-The total modules count is unknown in advance and changes during the build. This may cause inaccurate progress percentage.
+عدد modules الإجمالي غير معروف مسبقًا ويتغير أثناء البناء. لهذا السبب قد تكون نسبة التقدم غير دقيقة أحيانًا.
 
-To solve this problem `ProgressPlugin` caches the last known total modules count and reuses this value on the next build. The first build will warm the cache but the following builds will use and update this value.
+لحل هذه المشكلة، يخزن `ProgressPlugin` آخر عدد معروف لإجمالي modules ويعيد استخدام هذه القيمة في البناء التالي. أول عملية بناء تجهّز cache، أما العمليات اللاحقة فتستخدم هذه القيمة وتحدّثها.
 
-> We recommend using `percentBy: 'entries'` setting for projects with [multiple configured entry points](/configuration/entry-context/#entry). Percentage calculation will become more accurate because the amount of entry points is known in advance.
+> نوصي باستخدام الإعداد `percentBy: 'entries'` في المشاريع التي تحتوي [عدة entry points مضبوطة](/configuration/entry-context/#entry). تصبح نسبة التقدم أدق لأن عدد entry points معروف مسبقًا.
 
-## Supported Hooks
+<span id="supported-hooks"></span>
 
-The following hooks report progress information to `ProgressPlugin`.
+## Hooks المدعومة
 
-T> _Hooks marked with \* allow plugins to report progress information using `reportProgress`. For more, see [Plugin API: Reporting Progress](/api/plugins/#reporting-progress)_
+تُرسل hooks التالية معلومات التقدم إلى `ProgressPlugin`.
+
+T> _الـ hooks المعلّمة بـ \* تسمح للـ plugins بإرسال معلومات تقدم باستخدام `reportProgress`. للمزيد، راجع [Plugin API: Reporting Progress](/api/plugins/#reporting-progress)._
 
 **Compiler**
 
@@ -165,6 +163,6 @@ T> _Hooks marked with \* allow plugins to report progress information using `rep
 - afterOptimizeAssets\*
 - afterSeal\*
 
-## Source
+## المصدر
 
-- [`ProgressPlugin` source](https://github.com/webpack/webpack/blob/main/lib/ProgressPlugin.js)
+- [مصدر `ProgressPlugin`](https://github.com/webpack/webpack/blob/main/lib/ProgressPlugin.js)

@@ -2,13 +2,13 @@
 title: AutomaticPrefetchPlugin
 group: webpack
 contributors:
-  - sokra
-  - EugeneHlushko
+  - MohaDev-69
+  - RlxChap2
 ---
 
-The `AutomaticPrefetchPlugin` discovers **all modules** from the previous compilation upfront while watching for changes, trying to improve the incremental build times. Compared to [`PrefetchPlugin`](/plugins/prefetch-plugin/) which discovers a **single module** upfront.
+يفحص `AutomaticPrefetchPlugin` كل modules من compilation السابقة ويجلبها مسبقًا أثناء انتظار التغييرات، بهدف تحسين أوقات rebuild. يختلف ذلك عن [`PrefetchPlugin`](/plugins/prefetch-plugin/) الذي يجلب module واحدًا مسبقًا.
 
-W> May or may not have a performance benefit since the incremental build times are pretty fast.
+T> لا يُتوقع أن يقدم هذا plugin فائدة كبيرة للأداء في أغلب الحالات، لأن أوقات rebuild التزايدية تكون سريعة عادة.
 
 **webpack.config.js**
 

@@ -5,3 +5,9 @@ exports[`remark slug should add id 1`] = `
 <p>this is me.</p>
 "
 `;
+
+exports[`remark slug should encode non-ASCII ids 1`] = `
+"<h2 id="user-content-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF-%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A"><span id="user-content-%D8%A7%D9%84%D8%A5%D8%B9%D8%AF%D8%A7%D8%AF-%D8%A7%D9%84%D8%A3%D8%B3%D8%A7%D8%B3%D9%8A"></span>الإعداد الأساسي</h2>
+<p>this is me.</p>
+"
+`;

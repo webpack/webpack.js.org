@@ -13,6 +13,16 @@ import AdjacentPages from "./AdjacentPages.jsx";
 
 // Load Styling
 
+function getHashTargetIds(hash) {
+  const targetId = hash.slice(1);
+
+  try {
+    return [targetId, decodeURIComponent(targetId)];
+  } catch {
+    return [targetId];
+  }
+}
+
 export default function Page(props) {
   const {
     title,
@@ -45,7 +55,7 @@ export default function Page(props) {
         .catch(() => {
           setContent({
             __error: true,
-            message: "Failed to load page content.",
+            message: "تعذر تحميل محتوى الصفحة.",
           });
           setContentLoaded(true);
         });
@@ -60,17 +70,23 @@ export default function Page(props) {
     if (contentLoaded) {
       if (hash) {
         const target = document.querySelector("#md-content");
+        const targetIds = getHashTargetIds(hash);
         // two cases here
         // 1. server side rendered page, so hash target is already there
         // Note: Why this change because we use getElementById instead of querySelector(hash) here because
         // CSS selectors cannot start with a digit (e.g. #11-in-scope is invalid)
-        if (document.getElementById(hash.slice(1))) {
-          document.getElementById(hash.slice(1)).scrollIntoView();
+        const existingTarget = targetIds
+          .map((targetId) => document.getElementById(targetId))
+          .find(Boolean);
+        if (existingTarget) {
+          existingTarget.scrollIntoView();
         } else {
           // 2. dynamic loaded content
           // we need to observe the dom change to tell if hash exists
           observer = new MutationObserver(() => {
-            const element = document.getElementById(hash.slice(1));
+            const element = targetIds
+              .map((targetId) => document.getElementById(targetId))
+              .find(Boolean);
             if (element) {
               element.scrollIntoView();
               observer.disconnect();
@@ -128,10 +144,9 @@ export default function Page(props) {
 
         {rest.thirdParty ? (
           <div className="italic my-[20px]">
-            <strong className="font-bold">Disclaimer:</strong> {title} is a
-            third-party package maintained by community members, it potentially
-            does not have the same support, security policy or license as
-            webpack, and it is not maintained by webpack.
+            <strong className="font-bold">تنبيه:</strong> {title} حزمة من طرف
+            ثالث يصونها أعضاء من المجتمع. قد لا تملك مستوى الدعم أو سياسة الأمان
+            أو الرخصة نفسها الخاصة بـ webpack، وهي ليست مصانة من فريق webpack.
           </div>
         ) : null}
 
@@ -166,7 +181,7 @@ export default function Page(props) {
                     to={post.url}
                     className="text-blue-400 font-semibold no-underline hover:underline dark:text-blue-200"
                   >
-                    Read More &rarr;
+                    اقرأ المزيد ←
                   </Link>
                 </div>
               ))}
@@ -175,7 +190,7 @@ export default function Page(props) {
 
         {loadRelated && (
           <div className="print:hidden">
-            <h2>Further Reading</h2>
+            <h2>قراءات إضافية</h2>
             <ul>
               {related.map((link, index) => (
                 <li key={index}>
@@ -196,7 +211,7 @@ export default function Page(props) {
           <div data-testid="contributors" className="print:hidden">
             <h2 className="!font-sans !font-normal">
               {numberOfContributors}{" "}
-              {numberOfContributors === 1 ? "Contributor" : "Contributors"}
+              {numberOfContributors === 1 ? "مساهم" : "مساهمون"}
             </h2>
             <Contributors contributors={contributors} />
           </div>

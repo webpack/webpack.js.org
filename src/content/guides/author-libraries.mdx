@@ -1,27 +1,17 @@
 ---
-title: Authoring Libraries
+title: تأليف المكتبات
 sort: 7
 contributors:
-  - pksjce
-  - johnstew
-  - simon04
-  - 5angel
-  - marioacc
-  - byzyk
-  - EugeneHlushko
-  - AnayaDesign
-  - chenxsan
-  - wizardofhogwarts
-  - Debraj2024
+  - arabpolice
 ---
 
-Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
+إلى جانب التطبيقات، يمكن استخدام webpack أيضًا لتجميع مكتبات JavaScript. هذا الدليل موجه لمؤلفي المكتبات الذين يريدون تبسيط استراتيجية التجميع لديهم.
 
-## Authoring a Library
+## تأليف مكتبة
 
-Let's assume that we are writing a small library, `webpack-numbers`, that allows users to convert the numbers 1 through 5 from their numeric representation to a textual one and vice-versa, e.g. 2 to 'two'.
+لنفترض أننا نكتب مكتبة صغيرة باسم `webpack-numbers` تتيح للمستخدمين تحويل الأرقام من 1 إلى 5 من تمثيلها الرقمي إلى تمثيل نصي والعكس، مثل تحويل 2 إلى 'two'.
 
-The basic project structure would look like this:
+ستبدو بنية المشروع الأساسية هكذا:
 
 **project**
 
@@ -33,14 +23,14 @@ The basic project structure would look like this:
 +     └── ref.json
 ```
 
-Initialize the project with npm, then install `webpack`, `webpack-cli`, and `lodash` as development dependencies:
+قم بتهيئة المشروع باستخدام npm، ثم ثبّت `webpack` و`webpack-cli` و`lodash` كتبِعيات تطوير:
 
 ```bash
 npm init -y
 npm install --save-dev webpack webpack-cli lodash
 ```
 
-We install `lodash` as a `devDependency` because we will initially bundle it into our library. Since it is included in the final output, consumers of our library won't need to install it themselves.
+نثبّت `lodash` كـ `devDependency` لأننا سنقوم في البداية بتجميعها داخل مكتبتنا. وبما أنها ستكون مضمنة في المخرج النهائي، فلن يحتاج مستهلكو مكتبتنا إلى تثبيتها بأنفسهم.
 
 **src/ref.json**
 
@@ -96,9 +86,9 @@ export function wordToNum(word) {
 }
 ```
 
-## Webpack Configuration
+## إعدادات Webpack
 
-Let's start with this basic webpack configuration:
+لنبدأ بإعداد webpack الأساسي التالي:
 
 **webpack.config.js**
 
@@ -118,14 +108,11 @@ export default {
 };
 ```
 
-In the above example, we're telling webpack to bundle `src/index.js` into `dist/webpack-numbers.js`.
+في المثال أعلاه، نخبر webpack بتجميع `src/index.js` داخل `dist/webpack-numbers.js`.
 
-### Adding Source Maps
+### إضافة Source Maps
 
-When bundling a library, it is recommended to generate source maps. Source maps
-allow consumers of your library to debug your original source code rather than
-the minified bundle. This can be done using the
-[`devtool`](/configuration/devtool/) option:
+عند تجميع مكتبة، يوصى بتوليد source maps. تسمح source maps لمستهلكي مكتبتك بتصحيح الكود المصدري الأصلي بدلًا من الحزمة المصغّرة. يمكن فعل ذلك باستخدام خيار [`devtool`](/configuration/devtool/):
 
 **webpack.config.js**
 
@@ -146,13 +133,11 @@ the minified bundle. This can be done using the
   };
 ```
 
-T> Using `'source-map'` as the `devtool` value generates a separate `.map` file
-alongside your bundle. Make sure to also publish this `.map` file so consumers
-can use it for debugging.
+T> استخدام `'source-map'` كقيمة لـ `devtool` يولّد ملف `.map` منفصلًا بجانب حزمتك. تأكد أيضًا من نشر ملف `.map` هذا حتى يتمكن المستهلكون من استخدامه في التصحيح.
 
-## Expose the Library
+## كشف المكتبة
 
-So far everything should be the same as bundling an application, and here comes the different part – we need to expose exports from the entry point through [`output.library`](/configuration/output/#outputlibrary) option.
+حتى الآن، يجب أن يكون كل شيء مشابهًا لتجميع تطبيق، وهنا يأتي الجزء المختلف: نحتاج إلى كشف الصادرات من نقطة الدخول عبر خيار [`output.library`](/configuration/output/#outputlibrary).
 
 **webpack.config.js**
 
@@ -173,7 +158,7 @@ So far everything should be the same as bundling an application, and here comes 
   };
 ```
 
-We exposed the entry point as `webpackNumbers` so users can use it through script tag:
+كشفنا نقطة الدخول باسم `webpackNumbers` حتى يتمكن المستخدمون من استخدامها عبر وسم script:
 
 ```html
 <script src="https://example.org/webpack-numbers.js"></script>
@@ -182,11 +167,11 @@ We exposed the entry point as `webpackNumbers` so users can use it through scrip
 </script>
 ```
 
-However it only works when it's referenced through script tag, it can't be used in other environments like CommonJS, AMD, Node.js, etc.
+لكن هذا يعمل فقط عند الإشارة إليها عبر وسم script، ولا يمكن استخدامها في بيئات أخرى مثل CommonJS أو AMD أو Node.js وغيرها.
 
-As a library author, we want it to be compatible in different environments, i.e., users should be able to consume the bundled library in multiple ways listed below:
+بصفتنا مؤلفي مكتبة، نريدها أن تكون متوافقة مع بيئات مختلفة، أي يجب أن يتمكن المستخدمون من استهلاك المكتبة المجمعة بعدة طرق كما يلي:
 
-- **CommonJS module require**:
+- **استدعاء وحدة CommonJS عبر require**:
 
   ```js
   const webpackNumbers = require("webpack-numbers");
@@ -195,7 +180,7 @@ As a library author, we want it to be compatible in different environments, i.e.
   webpackNumbers.wordToNum("Two");
   ```
 
-- **AMD module require**:
+- **استدعاء وحدة AMD عبر require**:
 
   ```js
   require(["webpackNumbers"], (webpackNumbers) => {
@@ -204,7 +189,7 @@ As a library author, we want it to be compatible in different environments, i.e.
   });
   ```
 
-- **script tag**:
+- **وسم script**:
 
   ```html
   <!DOCTYPE html>
@@ -213,16 +198,16 @@ As a library author, we want it to be compatible in different environments, i.e.
     <script src="https://example.org/webpack-numbers.js"></script>
     <script>
       // ...
-      // Global variable
+      // متغير عام
       webpackNumbers.wordToNum("Five");
-      // Property in the window object
+      // خاصية في كائن window
       window.webpackNumbers.wordToNum("Five");
       // ...
     </script>
   </html>
   ```
 
-Let's update the `output.library` option with its `type` set to [`'umd'`](/configuration/output/#type-umd):
+لنحدّث خيار `output.library` مع ضبط `type` الخاص به على [`'umd'`](/configuration/output/#type-umd):
 
 ```diff
  import path from 'node:path';
@@ -246,15 +231,15 @@ Let's update the `output.library` option with its `type` set to [`'umd'`](/confi
  };
 ```
 
-Now webpack will bundle a library that can work with CommonJS, AMD, and script tag.
+الآن سيجمع webpack مكتبة يمكنها العمل مع CommonJS وAMD ووسم script.
 
-T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is more straightforward to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is **not recommended**.
+T> لاحظ أن إعداد `library` مرتبط بإعداد `entry`. بالنسبة إلى معظم المكتبات، يكفي تحديد نقطة دخول واحدة. ومع أن [المكتبات متعددة الأجزاء](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) ممكنة، فإن كشف الصادرات الجزئية عبر [سكربت index](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) يعمل كنقطة دخول واحدة ويكون أوضح. لا يُوصى باستخدام `array` كنقطة `entry` لمكتبة.
 
-## Externalize Lodash
+## جعل Lodash خارجية
 
-Now, if you run `npx webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. To avoid bundling `lodash` and bloating our library, we can configure webpack to treat it as an external module. Since we are no longer bundling it, the consumer will need to provide it. Therefore, you should move `lodash` from `devDependencies` to `dependencies` (or `peerDependencies`) so package managers will install it automatically for consumers of your library.
+الآن، إذا شغّلت `npx webpack`، فستجد أنه تم إنشاء حزمة كبيرة نسبيًا. وإذا فحصت الملف، سترى أن lodash جُمّعت مع كودك. لتجنب تجميع `lodash` وتضخيم مكتبتنا، يمكننا إعداد webpack للتعامل معها كوحدة خارجية. وبما أننا لم نعد نجمعها، سيحتاج المستهلك إلى توفيرها. لذلك، يجب نقل `lodash` من `devDependencies` إلى `dependencies` (أو `peerDependencies`) حتى تثبّتها مديري الحزم تلقائيًا لمستهلكي مكتبتك.
 
-This can be done using the [`externals`](/configuration/externals/) configuration:
+يمكن فعل ذلك باستخدام إعداد [`externals`](/configuration/externals/):
 
 **webpack.config.js**
 
@@ -286,11 +271,11 @@ This can be done using the [`externals`](/configuration/externals/) configuratio
   };
 ```
 
-This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
+هذا يعني أن مكتبتك تتوقع توفر تبعية باسم `lodash` في بيئة المستهلك.
 
-### External Limitations
+### قيود الوحدات الخارجية
 
-For libraries that use several files from a dependency:
+بالنسبة إلى المكتبات التي تستخدم عدة ملفات من تبعية:
 
 ```js
 import A from "library/one";
@@ -299,7 +284,7 @@ import B from "library/two";
 // ...
 ```
 
-You won't be able to exclude them from the bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
+لن تتمكن من استبعادها من الحزمة بتحديد `library` في `externals`. ستحتاج إما إلى استبعادها واحدة تلو الأخرى أو استخدام تعبير منتظم.
 
 ```js
 export default {
@@ -307,15 +292,15 @@ export default {
   externals: [
     "library/one",
     "library/two",
-    // Everything that starts with "library/"
+    // كل ما يبدأ بـ "library/"
     /^library\/.+$/,
   ],
 };
 ```
 
-## Final Steps
+## الخطوات النهائية
 
-Optimize your output for production by following the steps mentioned in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with the `package.json`
+حسّن مخرجاتك للإنتاج باتباع الخطوات المذكورة في [دليل الإنتاج](/guides/production). ولنضف أيضًا مسار الحزمة المولّدة إلى حقل `main` الخاص بالحزمة داخل `package.json`:
 
 **package.json**
 
@@ -327,7 +312,7 @@ Optimize your output for production by following the steps mentioned in the [pro
 }
 ```
 
-Or, to add it as a standard module as per [this guide](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage):
+أو لإضافتها كوحدة قياسية وفقًا لـ [هذا الدليل](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage):
 
 ```json
 {
@@ -337,10 +322,10 @@ Or, to add it as a standard module as per [this guide](https://github.com/dherma
 }
 ```
 
-The key `main` refers to the [standard from `package.json`](https://docs.npmjs.com/files/package.json#main), and `module` to [a](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.
+يشير المفتاح `main` إلى [المعيار من `package.json`](https://docs.npmjs.com/files/package.json#main)، بينما يشير `module` إلى [اقتراح](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [آخر](https://github.com/rollup/rollup/wiki/pkg.module) للسماح لمنظومة JavaScript بالترقية لاستخدام وحدات ES2015 دون كسر التوافق مع الإصدارات السابقة.
 
-W> The `module` property should point to a script that utilizes ES2015 module syntax but no other syntax features that aren't yet supported by browsers or node. This enables webpack to parse the module syntax itself, allowing for lighter bundles via [tree shaking](https://webpack.js.org/guides/tree-shaking/) if users are only consuming certain parts of the library.
+W> يجب أن تشير خاصية `module` إلى سكربت يستخدم صيغة وحدات ES2015، دون أي ميزات صياغية أخرى غير مدعومة بعد في المتصفحات أو node. يتيح ذلك لـ webpack تحليل صيغة الوحدات بنفسه، مما يسمح بحزم أخف عبر [tree shaking](https://webpack.js.org/guides/tree-shaking/) إذا كان المستخدمون يستهلكون أجزاء معينة فقط من المكتبة.
 
-Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
+يمكنك الآن [نشرها كحزمة npm](https://docs.npmjs.com/getting-started/publishing-npm-packages) والعثور عليها في [unpkg.com](https://unpkg.com/#/) لتوزيعها على المستخدمين.
 
-T> To expose stylesheets associated with your library, the [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
+T> لكشف ملفات الأنماط المرتبطة بمكتبتك، يجب استخدام [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin). بعد ذلك يمكن للمستخدمين استهلاكها وتحميلها كما يفعلون مع أي ملف أنماط آخر.

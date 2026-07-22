@@ -57,19 +57,19 @@ function main() {
         !child.url?.includes("/printable"),
     )
     .map((node) => ({
-      title: node.title || "Untitled",
+      title: node.title || "بدون عنوان",
       link: `${BASE_URL}${node.url}`,
       date: extractPubDate(node),
-      description: node.description || node.title || "Untitled",
+      description: node.description || node.title || "بدون عنوان",
     }))
     .toSorted((a, b) => b.date.getTime() - a.date.getTime());
 
   const feed = new Feed({
-    title: "webpack Blog",
-    description: "Announcements and updates from the webpack team",
+    title: "مدونة webpack",
+    description: "إعلانات وتحديثات من فريق webpack",
     id: `${BASE_URL}/blog/`,
     link: `${BASE_URL}/blog/`,
-    language: "en",
+    language: "ar",
     updated: new Date(),
     feedLinks: {
       rss: `${BASE_URL}/feed.xml`,

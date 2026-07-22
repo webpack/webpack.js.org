@@ -67,7 +67,8 @@
     }
 
     a[aria-hidden="true"] {
-      @apply ml-2 text-[0.8em] h-[1em] opacity-0 invisible;
+      @apply text-[0.8em] h-[1em] opacity-0 invisible;
+      margin-inline-start: 0.5rem;
       transition: all 250ms;
     }
 
@@ -105,7 +106,7 @@
 
   ul,
   ol {
-    @apply pl-[30px];
+    padding-inline-start: 30px;
     list-style: revert;
 
     &:first-child {
@@ -141,7 +142,8 @@
   }
 
   aside {
-    @apply border-l-4 border-solid border-l-aside-border py-[0.75em] px-[1em] text-gray-500;
+    @apply border-solid py-[0.75em] px-[1em] text-gray-500;
+    border-inline-start: 4px solid var(--color-aside-border);
     > :first-child {
       margin-top: 0;
     }
@@ -152,7 +154,7 @@
     &.warning,
     &.preview,
     &.todo {
-      @apply border-l-[3px];
+      border-inline-start-width: 3px;
 
       .tip-content {
         @apply italic;
@@ -171,19 +173,23 @@
     }
 
     &.tip {
-      @apply bg-aside-tip-bg text-aside-tip-text border-l-aside-tip-border;
+      @apply bg-aside-tip-bg text-aside-tip-text;
+      border-inline-start-color: var(--color-aside-tip-border);
     }
 
     &.warning {
-      @apply bg-aside-warning-bg text-aside-warning-text border-l-aside-warning-border;
+      @apply bg-aside-warning-bg text-aside-warning-text;
+      border-inline-start-color: var(--color-aside-warning-border);
     }
 
     &.preview {
-      @apply bg-gray-100 text-aside-warning-text border-l-brand-blue;
+      @apply bg-gray-100 text-aside-warning-text;
+      border-inline-start-color: var(--color-brand-blue);
     }
 
     &.todo {
-      @apply bg-aside-todo-bg text-aside-todo-text border-l-aside-todo-border;
+      @apply bg-aside-todo-bg text-aside-todo-text;
+      border-inline-start-color: var(--color-aside-todo-border);
 
       .tip-content::before {
         content: "[TODO]: ";
@@ -193,7 +199,8 @@
   }
 
   blockquote {
-    @apply border-l-4 border-solid border-l-aside-border py-[0.75em] px-[1em] text-gray-500 italic;
+    @apply border-solid py-[0.75em] px-[1em] text-gray-500 italic;
+    border-inline-start: 4px solid var(--color-aside-border);
 
     > :first-child {
       margin-top: 0;
@@ -227,10 +234,12 @@
   }
 
   th {
-    @apply font-bold text-left py-1.5 px-3 bg-table-header-bg border-r border-solid border-r-table-border;
+    @apply font-bold py-1.5 px-3 bg-table-header-bg border-solid;
+    border-inline-end: 1px solid var(--color-table-border);
+    text-align: start;
 
     &:last-child {
-      @apply border-r-0;
+      border-inline-end: 0;
     }
   }
 
@@ -252,7 +261,9 @@
   }
 
   td {
-    @apply py-1 px-3 border-r-0 grid grid-cols-2 text-left border-b border-solid border-b-gray-100;
+    @apply py-1 px-3 grid grid-cols-2 border-b border-solid border-b-gray-100;
+    border-inline-end: 0;
+    text-align: start;
     &::before {
       content: attr(data-th);
       @apply font-bold;
@@ -267,9 +278,10 @@
       &::before {
         content: none;
       }
-      @apply border-r border-r-table-border border-b-0;
+      @apply border-b-0;
+      border-inline-end: 1px solid var(--color-table-border);
       &:last-child {
-        @apply border-r-0;
+        border-inline-end: 0;
       }
     }
   }
@@ -391,7 +403,8 @@
 }
 
 .dark .markdown blockquote {
-  @apply border-l-dark-section-border text-dark-muted;
+  @apply text-dark-muted;
+  border-inline-start-color: var(--color-dark-section-border);
 }
 
 .dark .markdown blockquote.tip {

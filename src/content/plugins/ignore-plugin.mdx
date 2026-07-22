@@ -1,33 +1,26 @@
 ---
 title: IgnorePlugin
-group: webpack
 contributors:
-  - simon04
-  - byzyk
-  - DullReferenceException
-  - EugeneHlushko
-  - FadySamirSadek
-  - iamakulov
-  - chenxsan
-  - snitin315
+  - RlxChap2
+group: webpack
 ---
 
-IgnorePlugin prevents the generation of modules for `import` or `require` calls matching the regular expressions or filter functions.
+يمنع `IgnorePlugin` إنشاء modules لاستدعاءات `import` أو `require` التي تطابق regular expressions أو دوال التصفية التي تحددها.
 
-T> This plugin works with both JavaScript and CSS, allowing you to ignore specific resources in CSS as well.
+T> يعمل هذا plugin مع JavaScript وCSS، لذلك يمكنك تجاهل موارد محددة داخل CSS أيضًا.
 
-## Using regular expressions
+## استخدام regular expressions
 
-- `resourceRegExp`: A RegExp to test the resource against.
-- `contextRegExp`: (optional) A RegExp to test the context (directory) against.
+- `resourceRegExp`: RegExp لاختبار المورد المطلوب.
+- `contextRegExp`: خيار اختياري. RegExp لاختبار السياق، أي المجلد الذي يأتي منه الطلب.
 
 ```js
 new webpack.IgnorePlugin({ resourceRegExp, contextRegExp });
 ```
 
-## Using filter functions
+## استخدام دوال التصفية
 
-- `checkResource (resource, context)` A Filter function that receives `resource` and `context` as arguments, must return boolean.
+- `checkResource (resource, context)`: دالة تصفية تستقبل `resource` و`context` كمعاملين، ويجب أن ترجع قيمة boolean.
 
 ```js
 new webpack.IgnorePlugin({
@@ -38,17 +31,17 @@ new webpack.IgnorePlugin({
 });
 ```
 
-## Example of ignoring Moment Locales
+## مثال: تجاهل ملفات locales في Moment
 
-As of [moment](https://momentjs.com/) 2.18, all locales are bundled together with the core library (see [this GitHub issue](https://github.com/moment/moment/issues/2373)).
+ابتداءً من [moment](https://momentjs.com/) 2.18، تُحزّم كل locales مع المكتبة الأساسية (راجع [هذه المشكلة في GitHub](https://github.com/moment/moment/issues/2373)).
 
-The `resourceRegExp` parameter passed to `IgnorePlugin` is not tested against the resolved file names or absolute module names being imported or required, but rather against the _string_ passed to `require` or `import` _within the source code where the import is taking place_. For example, if you're trying to exclude `node_modules/moment/locale/*.js`, this won't work:
+المعامل `resourceRegExp` الذي تمرره إلى `IgnorePlugin` لا يُختبر على أسماء الملفات بعد حلها، ولا على أسماء modules المطلقة التي يتم استيرادها. بدلًا من ذلك، يُختبر على النص نفسه الذي يمرر إلى `require` أو `import` داخل الكود المصدر الذي يحدث فيه الاستيراد. لذلك، إذا كنت تحاول استبعاد `node_modules/moment/locale/*.js`، فلن يعمل هذا المثال:
 
 ```diff
 -new webpack.IgnorePlugin({ resourceRegExp: /moment\/locale\// });
 ```
 
-Rather, because `moment` imports with this code:
+والسبب أن `moment` يستورد الملفات بهذا الشكل:
 
 ```js
 import(`./locale/${name}`);
@@ -58,7 +51,7 @@ import(`./locale/${name}`);
 require(`./locale/${name}`);
 ```
 
-...your first regexp must match that `'./locale/'` string. The second `contextRegExp` parameter is then used to select specific directories from where the import took place. The following will cause those locale files to be ignored:
+لذلك يجب أن يطابق أول regexp النص `'./locale/'`. بعد ذلك يُستخدم المعامل الثاني `contextRegExp` لتحديد المجلدات التي حدث منها الاستيراد. المثال التالي يجعل webpack يتجاهل ملفات locale هذه:
 
 ```js
 new webpack.IgnorePlugin({
@@ -67,4 +60,4 @@ new webpack.IgnorePlugin({
 });
 ```
 
-...which means "any require statement matching `'./locale'` from any directories ending with `'moment'` will be ignored.
+وهذا يعني: أي استدعاء `require` يطابق `'./locale'` ويأتي من مجلد ينتهي بـ `'moment'` سيتم تجاهله.

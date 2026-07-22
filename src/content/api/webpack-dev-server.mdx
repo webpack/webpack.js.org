@@ -4,32 +4,33 @@ sort: 3
 contributors:
   - snitin315
   - bjohansebas
+  - RlxChap2
 ---
 
-`webpack-dev-server` provides a Node.js API which can be used directly in Node.js runtime.
+يوفّر `webpack-dev-server` واجهة Node.js API يمكنك استخدامها مباشرة من داخل بيئة تشغيل Node.js.
 
-## Installation
+## التثبيت
 
-To start using the `webpack-dev-server` Node.js API, first install `webpack` and `webpack-dev-server` if you haven’t yet:
+لاستخدام Node.js API الخاص بـ `webpack-dev-server`، ثبّت أولًا `webpack` و`webpack-dev-server` إذا لم يكونا مثبتين لديك:
 
 ```bash
 npm install --save-dev webpack webpack-dev-server
 ```
 
-Then require the modules in your Node.js script:
+بعد ذلك استورد الحزم داخل سكربت Node.js:
 
 ```js
 import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 ```
 
-W> `webpack-dev-server@6` requires Node.js `22.15.0` or higher and webpack `5.101.0` or higher.
+W> يتطلب `webpack-dev-server@6` الإصدار `22.15.0` أو أحدث من Node.js، والإصدار `5.101.0` أو أحدث من webpack.
 
-T> Since version 6, the package source is native ESM. Prefer `import` syntax; CommonJS consumers can still `require("webpack-dev-server")` through the CommonJS build exposed via the `exports` field.
+T> بدءًا من الإصدار 6، كُتب مصدر الحزمة بصيغة ESM الأصلية، لذا يُفضَّل استخدام صيغة `import`. ويظل بإمكان المشاريع التي تستخدم CommonJS استدعاء `require("webpack-dev-server")` عبر نسخة CommonJS المتاحة في الحقل `exports`.
 
 ## start
 
-It instructs `webpack-dev-server` instance to start the server.
+تستخدم `start` لتشغيل الخادم من instance الخاص بـ `webpack-dev-server`.
 
 **server.js**
 
@@ -50,7 +51,7 @@ const runServer = async () => {
 runServer();
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -58,7 +59,7 @@ node server.js
 
 ## startCallback(callback)
 
-It instructs `webpack-dev-server` instance to start the server and then run the callback function.
+تستخدم `startCallback(callback)` لتشغيل الخادم، ثم تنفيذ دالة `callback` بعد بدء التشغيل.
 
 **server.js**
 
@@ -76,7 +77,7 @@ server.startCallback(() => {
 });
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -84,7 +85,7 @@ node server.js
 
 ## stop
 
-It instructs `webpack-dev-server` instance to stop the server.
+تستخدم `stop` لإيقاف الخادم من instance الخاص بـ `webpack-dev-server`.
 
 **server.js**
 
@@ -112,7 +113,7 @@ runServer();
 setTimeout(stopServer, 5000);
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -120,7 +121,7 @@ node server.js
 
 ## stopCallback(callback)
 
-It instructs `webpack-dev-server` instance to stop the server and then run the callback function.
+تستخدم `stopCallback(callback)` لإيقاف الخادم، ثم تنفيذ دالة `callback` بعد اكتمال الإيقاف.
 
 **server.js**
 
@@ -145,7 +146,7 @@ const stopServer = () =>
 setTimeout(stopServer, 5000);
 ```
 
-And then run the server with the following command:
+ثم شغّل الخادم بهذا الأمر:
 
 ```bash
 node server.js
@@ -155,7 +156,7 @@ node server.js
 
 <Badge text="v6.0.0+" />
 
-`webpack-dev-server` can be used as a webpack plugin, without explicitly passing a compiler to the constructor. The server integrates with the compiler lifecycle: it starts once the first compilation in watch mode completes, is not started multiple times on recompilation, and stops cleanly when the compiler is closed. `MultiCompiler` setups are supported as well, where each configuration can run its own plugin server.
+يمكن استخدام `webpack-dev-server` بوصفه plugin لـ webpack دون تمرير compiler صراحةً إلى constructor. يندمج الخادم مع دورة حياة compiler؛ فيبدأ بعد اكتمال أول compilation في وضع المراقبة، ولا يبدأ مرة أخرى عند كل recompilation، ويتوقف بصورة سليمة عند إغلاق compiler. كما يدعم إعدادات `MultiCompiler`، بحيث يستطيع كل تخصيص تشغيل خادم plugin مستقل.
 
 **server.js**
 
@@ -176,7 +177,7 @@ compiler.watch({}, (error) => {
 });
 ```
 
-Alternatively, call `apply` on an existing compiler:
+وبديلًا من ذلك، يمكنك استدعاء `apply` على compiler موجود:
 
 ```js
 const server = new WebpackDevServer({ port: 8080 });
@@ -184,16 +185,16 @@ const server = new WebpackDevServer({ port: 8080 });
 server.apply(compiler);
 ```
 
-T> In plugin mode the server only starts in watch mode: a one-shot `compiler.run()` build finishes without starting the server.
+T> عند استخدامه بوصفه plugin، لا يبدأ الخادم إلا في وضع المراقبة؛ إذ تنتهي عملية البناء المفردة التي ينفذها `compiler.run()` دون تشغيل الخادم.
 
 ## findIp(gatewayOrFamily, isInternal)
 
 <Badge text="v5.1.0+" />
 
-Returns the resolved local IP address synchronously, or `undefined` when no matching address is found.
+تعيد هذه الدالة عنوان IP المحلي بعد تحديده بصورة متزامنة، أو تعيد `undefined` إذا لم تجد عنوانًا مطابقًا.
 
-- `gatewayOrFamily`: an IP family (`"v4"` | `"v6"`) or a gateway IP address. When a gateway address is passed, the address of the local interface that belongs to the same subnet is returned.
-- `isInternal`: optional. When set to `false`, only externally reachable (LAN) addresses are considered; when set to `true`, only internal (e.g. loopback) addresses are considered. When omitted, both are considered.
+- `gatewayOrFamily`: عائلة عناوين IP (`"v4"` أو `"v6"`) أو عنوان IP لبوابة الشبكة. عند تمرير عنوان بوابة، تعيد الدالة عنوان الواجهة المحلية الواقعة ضمن الشبكة الفرعية نفسها.
+- `isInternal`: خيار اختياري. عند ضبطه على `false`، لا تؤخذ في الحسبان إلا العناوين المتاحة خارجيًا ضمن الشبكة المحلية (LAN). وعند ضبطه على `true`، لا تؤخذ إلا العناوين الداخلية، مثل loopback. أما عند حذفه فتؤخذ الفئتان في الحسبان.
 
 **server.js**
 
@@ -207,4 +208,4 @@ console.log("Local IPv4 address:", localIPv4);
 console.log("Local IPv6 address:", localIPv6);
 ```
 
-W> The `internalIP(family)` and `internalIPSync(family)` static methods were removed in `webpack-dev-server@6`. Use `findIp(family, false)` to get the same result.
+W> أزيلت الدالتان static ‏`internalIP(family)` و`internalIPSync(family)` في `webpack-dev-server@6`. استخدم `findIp(family, false)` للحصول على النتيجة نفسها.

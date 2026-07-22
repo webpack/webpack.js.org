@@ -2,21 +2,16 @@
 title: Targets
 sort: 10
 contributors:
-  - TheLarkInn
-  - rouzbeh84
-  - johnstew
-  - srilman
-  - byzyk
-  - EugeneHlushko
+  - RlxChap2
 ---
 
-Because JavaScript can be written for both server and browser, webpack offers multiple deployment _targets_ that you can set in your webpack [configuration](/configuration).
+لأن JavaScript يمكن كتابته لكل من الخادم والمتصفح، يوفر webpack عدة _أهداف_ نشر يمكنك ضبطها في [تكوين](/configuration) webpack.
 
-W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/concepts/output/) on the `output` property.
+W> لا ينبغي الخلط بين خاصية `target` في webpack وخاصية `output.libraryTarget`. لمزيد من المعلومات، راجع [دليلنا](/concepts/output/) حول خاصية `output`.
 
-## Usage
+## الاستخدام
 
-To set the `target` property, you set the target value in your webpack config:
+لتعيين خاصية `target`، اضبط قيمة الهدف في تكوين webpack:
 
 **webpack.config.js**
 
@@ -26,15 +21,15 @@ export default {
 };
 ```
 
-In the example above, using `node` webpack will compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks and not touch any built in modules like `fs` or `path`).
+في المثال أعلاه، سيترجم webpack الكود ليعمل في بيئة شبيهة بـ Node.js عند استخدام `node`، أي أنه يستخدم `require` الخاص بـ Node.js لتحميل chunks ولا يلمس الوحدات المدمجة مثل `fs` أو `path`.
 
-Each _target_ has a variety of deployment/environment specific additions, support to fit its needs. See what [targets are available](/configuration/target/).
+لكل _هدف_ إضافات ودعم خاص ببيئة النشر أو التشغيل التي يناسبها. راجع [الأهداف المتاحة](/configuration/target/).
 
-?> Further expansion for other popular target values
+?> توسعة لاحقة لقيم أهداف شائعة أخرى.
 
-## Multiple Targets
+## أهداف متعددة
 
-webpack supports passing an [array of strings](/configuration/target/#string) to the `target` property, in which case the common subset of their features is used. This lets you build universal code that runs in multiple environments — for example, combine `web` and `node`:
+يدعم webpack تمرير [مصفوفة من السلاسل النصية](/configuration/target/#string) إلى خاصية `target`، وفي هذه الحالة يُستخدم الجزء المشترك من ميزاتها. يتيح لك ذلك بناء كود universal يعمل في عدة بيئات، كأن تجمع بين `web` و`node` مثلاً:
 
 **webpack.config.js**
 
@@ -44,7 +39,7 @@ export default {
 };
 ```
 
-Alternatively, you can create an isomorphic library by bundling two separate configurations:
+وبدلاً من ذلك، يمكنك إنشاء مكتبة isomorphic عبر تجميع تكوينين منفصلين:
 
 **webpack.config.js**
 
@@ -76,13 +71,13 @@ const clientConfig = {
 export default [serverConfig, clientConfig];
 ```
 
-The example above will create a `lib.js` and `lib.node.js` file in your `dist` folder.
+سينشئ المثال أعلاه ملفي `lib.js` و `lib.node.js` داخل مجلد `dist`.
 
-## Resources
+## موارد
 
-As seen from the options above, there are multiple deployment _targets_ that you can choose from. Below is a list of examples and resources that you can refer to.
+كما يظهر من الخيارات أعلاه، توجد عدة _أهداف_ نشر يمكنك الاختيار منها. فيما يلي قائمة بأمثلة وموارد يمكن الرجوع إليها.
 
-- **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
-- **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: A good example of a build process for electron's main process and renderer process.
+- **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: مورد ممتاز لاختبار أهداف webpack المختلفة واستعراضها، ومفيد أيضًا عند الإبلاغ عن الأخطاء.
+- **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: مثال جيد على عملية بناء لتطبيق Electron يشمل العملية الرئيسية وعملية العارض.
 
-?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.
+?> نحتاج إلى إيجاد أمثلة محدثة لاستخدام أهداف webpack هذه في كود حي أو قوالب جاهزة.

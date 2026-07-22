@@ -2,45 +2,36 @@
 title: Plugins
 sort: -1
 contributors:
-  - simon04
-  - gonzoyumo
-  - rouzbeh84
-  - aretecode
-  - eko3alpha
-  - refactorized
-  - byzyk
-  - EugeneHlushko
-  - snitin315
-  - chenxsan
+  - RlxChap2
 ---
 
-Webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack **flexible**.
+يمتلك webpack واجهة plugins قوية وغنية. كثير من ميزات webpack الداخلية مبنية على هذه الواجهة نفسها، وهذا ما يجعل webpack **مرنًا** وقابلًا للتوسع.
 
-| Name                                                                            | Description                                                                            |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [`BannerPlugin`](/plugins/banner-plugin)                                        | Add a banner to the top of each generated chunk                                        |
-| [`ChunksWebpackPlugin`](/plugins/chunks-webpack-plugin/)                        | Create HTML files with entrypoints and chunks relations to serve your bundles          |
-| [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)               | Prepare compressed versions of assets to serve them with Content-Encoding              |
-| [`ContextReplacementPlugin`](/plugins/context-replacement-plugin)               | Override the inferred context of a `require` expression                                |
-| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | Copies individual files or entire directories to the build directory                   |
-| [`DefinePlugin`](/plugins/define-plugin)                                        | Allow global constants configured at compile time                                      |
-| [`DllPlugin`](/plugins/dll-plugin)                                              | Split bundles in order to drastically improve build time                               |
-| [`EnvironmentPlugin`](/plugins/environment-plugin)                              | Shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on `process.env` keys |
-| [`EslintWebpackPlugin`](/plugins/eslint-webpack-plugin)                         | A ESLint plugin for webpack                                                            |
-| [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin)          | Enable Hot Module Replacement (HMR)                                                    |
-| [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)                             | Easily create HTML files to serve your bundles                                         |
-| [`IgnorePlugin`](/plugins/ignore-plugin)                                        | Exclude certain modules from bundles                                                   |
-| [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | Set min/max limits for chunking to better control chunking                             |
-| [`MergeDuplicateChunksPlugin`](/plugins/merge-duplicate-chunks-plugin)          | Merge chunks that contain the same modules                                             |
-| [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)                          | Keep chunk size above the specified limit                                              |
-| [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)                      | creates a CSS file per JS file which requires CSS                                      |
-| [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | Skip the emitting phase when there are compilation errors                              |
-| [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)    | Replace resource(s) that matches a regexp                                              |
-| [`ProgressPlugin`](/plugins/progress-plugin)                                    | Report compilation progress                                                            |
-| [`ProvidePlugin`](/plugins/provide-plugin)                                      | Use modules without having to use import/require                                       |
-| [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)                 | Enables a more fine grained control of source maps                                     |
-| [`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)        | Enables a more fine grained control of eval source maps                                |
-| [`SvgChunkWebpackPlugin`](/plugins/svg-chunk-webpack-plugin/)                   | Generate SVG sprites optimized by SVGO based on your entry point dependencies          |
-| [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/)                         | Uses Terser (or other) to minify the JS/CSS/HTML/JSON/etc in your project              |
+| الاسم                                                                           | الوصف                                                                               |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`BannerPlugin`](/plugins/banner-plugin)                                        | يضيف banner أعلى كل chunk يتم إنشاؤه                                                |
+| [`ChunksWebpackPlugin`](/plugins/chunks-webpack-plugin/)                        | ينشئ ملفات HTML تربط entrypoints وchunks حتى تستطيع تقديم bundles                   |
+| [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)               | يجهز نسخًا مضغوطة من assets لتقديمها باستخدام Content-Encoding                      |
+| [`ContextReplacementPlugin`](/plugins/context-replacement-plugin)               | يغيّر context الذي يستنتجه webpack من تعبير `require`                               |
+| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | ينسخ ملفات مفردة أو مجلدات كاملة إلى مجلد البناء                                    |
+| [`DefinePlugin`](/plugins/define-plugin)                                        | يعرّف constants عامة تُحقن وقت التجميع                                              |
+| [`DllPlugin`](/plugins/dll-plugin)                                              | يقسم bundles لتحسين وقت البناء بشكل كبير                                            |
+| [`EnvironmentPlugin`](/plugins/environment-plugin)                              | اختصار لاستخدام [`DefinePlugin`](/plugins/define-plugin) مع مفاتيح `process.env`    |
+| [`EslintWebpackPlugin`](/plugins/eslint-webpack-plugin)                         | plugin لتشغيل ESLint مع webpack                                                     |
+| [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin)          | يفعّل Hot Module Replacement (HMR)                                                  |
+| [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)                             | ينشئ ملفات HTML بسهولة لتقديم bundles                                               |
+| [`IgnorePlugin`](/plugins/ignore-plugin)                                        | يستبعد modules محددة من bundles                                                     |
+| [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | يضع حدًا أدنى أو أعلى لعدد chunks لتحكم أفضل في التقسيم                             |
+| [`MergeDuplicateChunksPlugin`](/plugins/merge-duplicate-chunks-plugin)          | يدمج chunks التي تحتوي modules نفسها                                                |
+| [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)                          | يحافظ على حجم chunk فوق حد معين                                                     |
+| [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)                      | ينشئ ملف CSS لكل ملف JS يحتاج إلى CSS                                               |
+| [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | يتجاوز مرحلة الإخراج عندما توجد أخطاء تجميع                                         |
+| [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)    | يستبدل الموارد التي تطابق regexp                                                    |
+| [`ProgressPlugin`](/plugins/progress-plugin)                                    | يعرض تقدم عملية التجميع                                                             |
+| [`ProvidePlugin`](/plugins/provide-plugin)                                      | يستخدم modules بدون الحاجة إلى `import` أو `require` في كل ملف                      |
+| [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)                 | يوفر تحكمًا أدق في source maps                                                      |
+| [`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin)        | يوفر تحكمًا أدق في eval source maps                                                 |
+| [`SvgChunkWebpackPlugin`](/plugins/svg-chunk-webpack-plugin/)                   | ينشئ SVG sprites محسّنة بواسطة SVGO اعتمادًا على dependencies الخاصة بـ entry point |
+| [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/)                         | يستخدم Terser أو غيره لتصغير JS/CSS/HTML/JSON وغيرها داخل مشروعك                    |
 
-For more third-party plugins, see the list from [awesome-webpack](/awesome-webpack/#webpack-plugins).
+لمزيد من plugins الخارجية، راجع قائمة [awesome-webpack](/awesome-webpack/#webpack-plugins).

@@ -2,40 +2,27 @@
 title: Optimization
 sort: 9
 contributors:
-  - EugeneHlushko
-  - jeremenichelli
-  - simon04
-  - byzyk
-  - madhavarshney
-  - dhurlburtusa
-  - jamesgeorge007
-  - anikethsaha
-  - snitin315
-  - pixel-ray
-  - chenxsan
-  - Roberto14
-  - hai-x
-  - shivxmsharma
+  - RlxChap2
 related:
-  - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
+  - title: "webpack 4: تقسيم code، وchunk graph، وsplitChunks optimization"
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
+يقوم webpack بإجراء تحسينات لك اعتمادًا على [`mode`](/configuration/mode/) الذي تم اختياره، ولا تزال جميع التحسينات متاحة للتخصيص اليدوي والتجاوزات.
 
 ## optimization.checkWasmTypes
 
 `boolean`
 
-Tells webpack to check the incompatible types of WebAssembly modules when they are imported/exported.
+يخبر webpack بالتحقق من الأنواع غير المتوافقة من WebAssembly modules عند استيرادها/تصديرها.
 
-The default value of `optimization.checkWasmTypes` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.checkWasmTypes` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -53,33 +40,33 @@ export default {
 `boolean: false`
 `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
 
-- `false`: disable webpack's built-in chunk id algorithm
-- one of the following values:
+- `false`: تعطيل خوارزمية معرف chunk المضمنة في webpack
+- إحدى القيم التالية:
   - `'natural'`
   - `'named'`
   - `'size'`
   - `'total-size'`
   - `'deterministic'`
 
-Tells Webpack which algorithm to use for chunk IDs. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for `optimization.chunkIds`:
+يخبر webpack أي الخوارزمية يجب استخدامها لمعرفات chunk. يؤدي ضبط `optimization.chunkIds` إلى `false` إلى إخبار webpack بأنه لا ينبغي استخدام أي من الخوارزميات المضمنة، حيث يمكن توفير خوارزمية مخصصة عبر plugin. هناك بضعة إعدادات افتراضية لـ `optimization.chunkIds`:
 
-The default value of `optimization.chunkIds` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.chunkIds` على [`mode`](/configuration/mode/):
 
-| Mode            | Default           |
+| Mode            | الافتراضي         |
 | --------------- | ----------------- |
 | `"production"`  | `'deterministic'` |
 | `"development"` | `'named'`         |
 | `"none"`        | `'natural'`       |
 
-The following string values are supported:
+يتم دعم قيم string التالية:
 
-| Option            | Description                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `'natural'`       | Numeric ids in order of usage.                                                                                                        |
-| `'named'`         | Readable ids for better debugging.                                                                                                    |
-| `'deterministic'` | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode. |
-| `'size'`          | Numeric ids focused on minimal initial download size.                                                                                 |
-| `'total-size'`    | numeric ids focused on minimal total download size.                                                                                   |
+| الخيار            | الوصف                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------- |
+| `'natural'`       | معرفات رقمية حسب ترتيب الاستخدام.                                                                             |
+| `'named'`         | معرفات قابلة للقراءة لتحسين التصحيح.                                                                          |
+| `'deterministic'` | معرفات رقمية قصيرة لن تتغير بين compilation. جيد على المدى الطويل caching. يتم تمكينه افتراضيًا لوضع الإنتاج. |
+| `'size'`          | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الأولي.                                                    |
+| `'total-size'`    | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الإجمالي.                                                  |
 
 **webpack.config.js**
 
@@ -92,7 +79,7 @@ export default {
 };
 ```
 
-By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+افتراضيًا، يتم استخدام الحد الأدنى لطول 3 أرقام عند ضبط `optimization.chunkIds` على `'deterministic'`. لتجاوز السلوك الافتراضي، اضبط `optimization.chunkIds` على `false` واستخدم `webpack.ids.DeterministicChunkIdsPlugin`.
 
 **webpack.config.js**
 
@@ -114,15 +101,15 @@ export default {
 
 `boolean`
 
-Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
+يخبر webpack بالعثور على أجزاء من الرسم البياني module والتي يمكن ربطها بأمان في module واحد. يعتمد على [`optimization.providedExports`](#optimizationprovidedexports) و[`optimization.usedExports`](#optimizationusedexports).
 
-The default value of `optimization.concatenateModules` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.concatenateModules` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -139,15 +126,15 @@ export default {
 
 `boolean`
 
-Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
+استخدم `optimization.emitOnErrors` لإصدار assets عندما تكون هناك أخطاء أثناء التجميع. وهذا يضمن انبعاث الخطأ assets. يتم إصدار أخطاء فادحة في التعليمات البرمجية التي تم إنشاؤها وسوف تسبب أخطاء في runtime.
 
-The default value of `optimization.emitOnErrors` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.emitOnErrors` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `false` |
-| `"development"` | `true`  |
-| `"none"`        | `true`  |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `false`   |
+| `"development"` | `true`    |
+| `"none"`        | `true`    |
 
 **webpack.config.js**
 
@@ -160,7 +147,7 @@ export default {
 };
 ```
 
-W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
+W> إذا كنت تستخدم webpack [CLI](/api/cli/)، فلن يتم الخروج من عملية webpack برمز خطأ أثناء تمكين plugin. إذا كنت تريد أن "يفشل" webpack عند استخدام CLI، فيرجى مراجعة [`bail` الخيار](/api/cli/#advanced-options).
 
 ## optimization.avoidEntryIife
 
@@ -170,17 +157,17 @@ W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit 
 
 T> IIFE ...
 
-Use `optimization.avoidEntryIife` ...
+استخدم `optimization.avoidEntryIife` ...
 
-Currently, `optimization.avoidEntryIife` can only optimize a single entry module along with other modules.
+في الوقت الحالي، يمكن لـ `optimization.avoidEntryIife` فقط تحسين entry module مع modules أخرى.
 
-The default value of `optimization.avoidEntryIife` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.avoidEntryIife` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -193,21 +180,21 @@ export default {
 };
 ```
 
-W> The `optimization.avoidEntryIife` option can negatively affect build performance. If you prioritize build performance over these optimizations, consider disabling this option.
+W> يمكن أن يؤثر خيار `optimization.avoidEntryIife` سلبًا على build performance. إذا أعطيت الأولوية build performance على هذه التحسينات، ففكر في تعطيل هذا الخيار.
 
 ## optimization.flagIncludedChunks
 
 `boolean`
 
-Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don't have to be loaded when the bigger chunk has been already loaded.
+يخبر webpack بتحديد ووضع علامة على chunks وهي مجموعات فرعية من chunks أخرى بطريقة لا يلزم تحميل المجموعات الفرعية عندما يكون chunk الأكبر قد تم تحميله بالفعل.
 
-The default value of `optimization.flagIncludedChunks` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.flagIncludedChunks` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -224,15 +211,15 @@ export default {
 
 `boolean`
 
-`optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
+`optimization.innerGraph` يخبر webpack ما إذا كان سيتم إجراء تحليل الرسم البياني الداخلي للصادرات غير المستخدمة.
 
-The default value of `optimization.innerGraph` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.innerGraph` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -323,24 +310,24 @@ T> Supported guard forms include ternaries (`isDEV ? A : B`), `if` statements, a
 
 `boolean` `string: 'deterministic' | 'size'`
 
-`optimization.mangleExports` allows to control export mangling.
+`optimization.mangleExports` يسمح بالتحكم في تشويه التصدير.
 
-The default value of `optimization.mangleExports` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.mangleExports` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
-The following values are supported:
+يتم دعم القيم التالية:
 
-| Option            | Description                                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `'size'`          | Short names - usually a single char - focused on minimal download size.                                              |
-| `'deterministic'` | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching. |
-| `true`            | Same as `'deterministic'`                                                                                            |
-| `false`           | Keep original name. Good for readability and debugging.                                                              |
+| الخيار            | الوصف                                                                                                                         |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `'size'`          | الأسماء المختصرة - عادةً ما تكون عبارة عن حرف واحد - تركز على الحد الأدنى لحجم التنزيل.                                       |
+| `'deterministic'` | الأسماء المختصرة - عادةً ما تكون مكونة من حرفين - والتي لن تتغير عند إضافة الصادرات أو إزالتها. جيد على المدى الطويل caching. |
+| `true`            | نفس `'deterministic'`                                                                                                         |
+| `false`           | احتفظ بالاسم الأصلي. جيد لسهولة القراءة وتصحيح الأخطاء.                                                                       |
 
 **webpack.config.js**
 
@@ -357,7 +344,7 @@ export default {
 
 `boolean = false`
 
-When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
+عند التعيين على `true`، يطلب من webpack تقليل حجم WASM عن طريق تغيير الواردات إلى سلاسل أقصر. إنه يشوه module ويصدر الأسماء.
 
 **webpack.config.js**
 
@@ -374,7 +361,7 @@ export default {
 
 `boolean = true`
 
-Tells webpack to merge chunks which contain the same modules. Setting `optimization.mergeDuplicateChunks` to `false` will disable this optimization.
+يخبر webpack بدمج chunks التي تحتوي على نفس modules. سيؤدي ضبط `optimization.mergeDuplicateChunks` على `false` إلى تعطيل optimization هذا.
 
 **webpack.config.js**
 
@@ -391,15 +378,15 @@ export default {
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
+أخبر webpack بتصغير bundle باستخدام [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) أو plugin(s) المحددة في [`optimization.minimizer`](#optimizationminimizer).
 
-The default value of `optimization.minimize` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.minimize` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -412,13 +399,13 @@ export default {
 };
 ```
 
-T> Learn how [mode](/configuration/mode/) works.
+T> تعرف على كيفية عمل [الوضع](/configuration/mode/).
 
 ## optimization.minimizer
 
-`[MinimizerPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
+`[MinimizerPlugin]` و أو `[function (compiler)]` أو `undefined | null | 0 | false | ""`
 
-Allows you to override the default minimizer by providing a different one or more customized [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.
+يسمح لك بتجاوز أداة التصغير الافتراضية من خلال توفير مثيلات مختلفة أو أكثر مخصصة من [MinimizerPlugin](/plugins/minimizer-webpack-plugin/). بدءًا من webpack 5.87.0، يمكن استخدام القيم الزائفة لتعطيل أدوات تصغير محددة بشكل مشروط.
 
 **webpack.config.js**
 
@@ -439,7 +426,7 @@ export default {
 };
 ```
 
-Or, as function:
+أو function:
 
 ```js
 import MinimizerPlugin from "minimizer-webpack-plugin";
@@ -457,7 +444,7 @@ export default {
 };
 ```
 
-By default, webpack would set `optimization.minimizer` to [the following value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L1160-L1174):
+افتراضيًا، يقوم webpack بتعيين `optimization.minimizer` على [القيمة التالية](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L1160-L1174):
 
 ```js
 import MinimizerPlugin from "minimizer-webpack-plugin";
@@ -477,7 +464,7 @@ const minimizer = [
 ];
 ```
 
-Which can be accessed with `'...'` in case you want to keep it when customizing `optimization.minimizer`:
+والتي يمكن الوصول إليها باستخدام `'...'` في حالة رغبتك في الاحتفاظ بها عند تخصيص `optimization.minimizer`:
 
 ```js
 export default {
@@ -487,30 +474,30 @@ export default {
 };
 ```
 
-Basically, `'...'` is [a shortcut to access the default configuration value](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L98-L108) webpack would otherwise set for us.
+في الأساس، `'...'` هو [اختصار للوصول إلى قيمة التخصيص الافتراضية](https://github.com/webpack/webpack/blob/4b4ca3bb53f36a5b8fc6bc1bd976ed7af161bd80/lib/config/defaults.js#L98-L108) webpack الذي سيتم تعيينه لنا.
 
 ## optimization.moduleIds
 
 `boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
-Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
+يخبر webpack بالخوارزمية التي يجب استخدامها عند اختيار معرفات module. يؤدي ضبط `optimization.moduleIds` إلى `false` إلى إخبار webpack بأنه لا ينبغي استخدام أي من الخوارزميات المضمنة، حيث يمكن توفير خوارزمية مخصصة عبر plugin.
 
-The default value of `optimization.moduleIds` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.moduleIds` على [`mode`](/configuration/mode/):
 
-| Mode            | Default           |
+| Mode            | الافتراضي         |
 | --------------- | ----------------- |
 | `"production"`  | `'deterministic'` |
 | `"development"` | `'named'`         |
 | `"none"`        | `'natural'`       |
 
-The following string values are supported:
+يتم دعم قيم string التالية:
 
-| Option          | Description                                           |
-| --------------- | ----------------------------------------------------- |
-| `natural`       | Numeric ids in order of usage.                        |
-| `named`         | Readable ids for better debugging.                    |
-| `deterministic` | Module names are hashed into small numeric values.    |
-| `size`          | Numeric ids focused on minimal initial download size. |
+| الخيار          | الوصف                                                      |
+| --------------- | ---------------------------------------------------------- |
+| `natural`       | معرفات رقمية حسب ترتيب الاستخدام.                          |
+| `named`         | معرفات قابلة للقراءة لتحسين التصحيح.                       |
+| `deterministic` | يتم تجزئة أسماء Module إلى قيم رقمية صغيرة.                |
+| `size`          | تركز المعرفات الرقمية على الحد الأدنى لحجم التنزيل الأولي. |
 
 **webpack.config.js**
 
@@ -523,7 +510,7 @@ export default {
 };
 ```
 
-The `deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
+يعد خيار `deterministic` مفيدًا على المدى الطويل caching، ولكنه لا يزال ينتج عنه bundles أصغر مقارنة بـ `hashed`. يتم اختيار طول القيمة الرقمية لملء 80% من مساحة المعرف كحد أقصى. افتراضيًا، يتم استخدام الحد الأدنى لطول 3 أرقام عند ضبط `optimization.moduleIds` على `deterministic`. لتجاوز السلوك الافتراضي، قم بتعيين `optimization.moduleIds` إلى `false` واستخدم `webpack.ids.DeterministicModuleIdsPlugin`.
 
 **webpack.config.js**
 
@@ -541,28 +528,28 @@ export default {
 };
 ```
 
-W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
+W> تمت إضافة `moduleIds: 'deterministic'` في webpack 5 وتم إهمال `moduleIds: 'hashed'` لصالحه.
 
-W> `moduleIds: total-size` has been removed in webpack 5.
+W> تمت إزالة `moduleIds: total-size` في webpack 5.
 
 ## optimization.nodeEnv
 
 `boolean: false` `string`
 
-Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`.
+يخبر webpack بضبط `process.env.NODE_ENV` على قيمة string معينة. يستخدم `optimization.nodeEnv` [DefinePlugin](/plugins/define-plugin/) ما لم يتم ضبطه على `false`.
 
-The default value of `optimization.nodeEnv` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.nodeEnv` على [`mode`](/configuration/mode/):
 
-| Mode            | Default         |
+| Mode            | الافتراضي       |
 | --------------- | --------------- |
 | `"production"`  | `'production'`  |
 | `"development"` | `'development'` |
 | `"none"`        | `false`         |
 
-Possible values:
+القيم المحتملة:
 
-- any string: the value to set `process.env.NODE_ENV` to.
-- false: do not modify/set the value of `process.env.NODE_ENV`.
+- أي string: القيمة المراد ضبط `process.env.NODE_ENV` عليها.
+- خطأ: لا تقم بتعديل/ضبط قيمة `process.env.NODE_ENV`.
 
 **webpack.config.js**
 
@@ -575,15 +562,15 @@ export default {
 };
 ```
 
-T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`.
+T> عند ضبط [الوضع](/configuration/mode/) على `'none'`، يكون `optimization.nodeEnv` افتراضيًا على `false`.
 
 ## optimization.portableRecords
 
 `boolean`
 
-`optimization.portableRecords` tells webpack to generate records with relative paths to be able to move the context folder.
+`optimization.portableRecords` يخبر webpack بإنشاء سجلات ذات مسارات نسبية لتتمكن من نقل مجلد السياق.
 
-By default `optimization.portableRecords` is disabled. Automatically enabled if at least one of the records options provided to webpack config: [`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
+بشكل افتراضي، يتم تعطيل `optimization.portableRecords`. يتم تمكينه تلقائيًا إذا تم توفير خيار واحد على الأقل من خيارات السجلات لتخصيص webpack: [`recordsPath`](/configuration/other-options/#recordspath)، [`recordsInputPath`](/configuration/other-options/#recordsinputpath)، [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
 
 **webpack.config.js**
 
@@ -600,7 +587,7 @@ export default {
 
 `boolean`
 
-Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default `optimization.providedExports` is enabled.
+يخبر webpack بمعرفة عمليات التصدير التي يتم توفيرها بواسطة modules لإنشاء تعليمات برمجية أكثر كفاءة لـ `export * from ...`. بشكل افتراضي، يتم تمكين `optimization.providedExports`.
 
 **webpack.config.js**
 
@@ -617,15 +604,15 @@ export default {
 
 `boolean`
 
-Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+يضيف تمريرة hash compilation إضافية بعد معالجة assets للحصول على تجزئات محتوى asset الصحيحة. إذا تم ضبط `realContentHash` على `false`، فسيتم استخدام البيانات الداخلية لحساب hash ويمكن أن تتغير عندما يكون assets متطابقًا.
 
-The default value of `optimization.realContentHash` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.realContentHash` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -642,7 +629,7 @@ export default {
 
 `boolean = false`
 
-Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `true` will enable this optimization.
+يخبر webpack باكتشاف وإزالة modules من chunks عندما تكون هذه modules مدرجة بالفعل في جميع الآباء. سيؤدي ضبط `optimization.removeAvailableModules` على `true` إلى تمكين optimization هذا.
 
 **webpack.config.js**
 
@@ -655,13 +642,13 @@ export default {
 };
 ```
 
-W> `optimization.removeAvailableModules` reduces the performance of webpack.
+W> `optimization.removeAvailableModules` يقلل performance لـ webpack.
 
 ## optimization.removeEmptyChunks
 
 `boolean = true`
 
-Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
+يخبر webpack باكتشاف وإزالة chunks الفارغة. سيؤدي ضبط `optimization.removeEmptyChunks` على `false` إلى تعطيل optimization هذا.
 
 **webpack.config.js**
 
@@ -678,7 +665,7 @@ export default {
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
+يؤدي ضبط `optimization.runtimeChunk` إلى `true` أو `'multiple'` إلى إضافة chunk إضافي يحتوي على runtime فقط لكل نقطة إدخال. هذا الإعداد هو اسم مستعار لـ:
 
 **webpack.config.js**
 
@@ -693,7 +680,7 @@ export default {
 };
 ```
 
-The value `'single'` instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:
+بدلاً من ذلك، تقوم القيمة `'single'` بإنشاء ملف runtime لمشاركته مع كافة ملفات chunks التي تم إنشاؤها. هذا الإعداد هو اسم مستعار لـ:
 
 **webpack.config.js**
 
@@ -708,11 +695,11 @@ export default {
 };
 ```
 
-By setting `optimization.runtimeChunk` to `object` it is only possible to provide the `name` property which stands for the name or name factory for the runtime chunks.
+من خلال ضبط `optimization.runtimeChunk` على `object`، يكون من الممكن فقط توفير الخاصية `name` التي تمثل الاسم أو مصنع الاسم لـ runtime chunks.
 
-Default is `false`: each entry chunk embeds runtime.
+الافتراضي هو `false`: يقوم كل entry chunk بتضمين runtime.
 
-W> Imported modules are initialized for each runtime chunk separately, so if you include multiple entry points on a page, beware of this behavior. You will probably want to set it to `single` or use another configuration that allows you to only have one runtime instance.
+W> تتم تهيئة modules المستوردة لكل runtime chunk بشكل منفصل، لذلك إذا قمت بتضمين عدة entry points في الصفحة، فاحذر من هذا السلوك. ربما تريد تعيينه على `single` أو استخدام تخصيص آخر يسمح لك بالحصول على مثيل runtime واحد فقط.
 
 **webpack.config.js**
 
@@ -731,7 +718,7 @@ export default {
 
 `boolean` `string: 'flag'`
 
-Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
+يخبر webpack بالتعرف على علامة [`sideEffects`](https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md) في `package.json` أو قواعد التخطي فوق modules التي تم وضع علامة عليها بحيث لا تحتوي على أي آثار جانبية عند عدم استخدام عمليات التصدير.
 
 **package.json**
 
@@ -743,17 +730,17 @@ Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpac
 }
 ```
 
-T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
+T> يرجى ملاحظة أن `sideEffects` يجب أن يكون في ملف `package.json` الخاص بـ npm module ولا يعني ذلك أنك بحاجة إلى تعيين `sideEffects` على `false` في `package.json` الخاص بمشروعك والذي يتطلب هذا الحجم الكبير module.
 
-`optimization.sideEffects` depends on [`optimization.providedExports`](#optimizationprovidedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
+يعتمد `optimization.sideEffects` على [`optimization.providedExports`](#optimizationprovidedexports) ليتم تمكينه. هذا dependency له تكلفة زمنية build، ولكن إزالة modules له تأثير إيجابي على performance بسبب انخفاض توليد التعليمات البرمجية. تأثير هذا optimization يعتمد على قاعدة التعليمات البرمجية الخاصة بك، جربه لاحتمال فوز performance.
 
-The default value of `optimization.sideEffects` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.sideEffects` على [`mode`](/configuration/mode/):
 
-| Mode            | Default  |
-| --------------- | -------- |
-| `"production"`  | `true`   |
-| `"development"` | `'flag'` |
-| `"none"`        | `'flag'` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `'flag'`  |
+| `"none"`        | `'flag'`  |
 
 **webpack.config.js**
 
@@ -766,7 +753,7 @@ export default {
 };
 ```
 
-To only use the manual flag and do not analyse source code:
+لاستخدام العلامة اليدوية فقط وعدم تحليل كود المصدر:
 
 ```js
 export default {
@@ -777,28 +764,28 @@ export default {
 };
 ```
 
-T> `optimization.sideEffects` will also flag modules as side effect free when they contain only side effect free statements.
+T> سوف يقوم `optimization.sideEffects` أيضًا بوضع علامة على modules باعتباره خاليًا من الآثار الجانبية عندما يحتوي فقط على بيانات خالية من الآثار الجانبية.
 
 ## optimization.splitChunks
 
 `object`
 
-By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
+بشكل افتراضي، يوفر webpack v4+ إستراتيجيات chunks مشتركة جديدة خارج الصندوق لـ modules المستوردة ديناميكيًا. راجع الخيارات المتاحة لتخصيص هذا السلوك في صفحة [SplitChunksPlugin](/plugins/split-chunks-plugin/).
 
 ## optimization.usedExports
 
 `boolean` `string: 'global'`
 
-Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationprovidedexports). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
-Dead code elimination in minimizers will benefit from this and can remove unused exports.
+يخبر webpack لتحديد الصادرات المستخدمة لكل module. هذا يعتمد على [`optimization.providedExports`](#optimizationprovidedexports). يتم استخدام المعلومات التي تم جمعها بواسطة `optimization.usedExports` من خلال تحسينات أخرى أو إنشاء تعليمات برمجية، أي أنه لا يتم إنشاء الصادرات للصادرات غير المستخدمة، ويتم تشويه أسماء التصدير إلى معرفات حرف واحد عندما تكون جميع الاستخدامات متوافقة.
+ستستفيد عملية إزالة التعليمات البرمجية الميتة في أدوات التصغير من هذا ويمكنها إزالة عمليات التصدير غير المستخدمة.
 
-The default value of `optimization.usedExports` depends on the [`mode`](/configuration/mode/):
+تعتمد القيمة الافتراضية لـ `optimization.usedExports` على [`mode`](/configuration/mode/):
 
-| Mode            | Default |
-| --------------- | ------- |
-| `"production"`  | `true`  |
-| `"development"` | `false` |
-| `"none"`        | `false` |
+| Mode            | الافتراضي |
+| --------------- | --------- |
+| `"production"`  | `true`    |
+| `"development"` | `false`   |
+| `"none"`        | `false`   |
 
 **webpack.config.js**
 
@@ -811,7 +798,7 @@ export default {
 };
 ```
 
-To opt-out from used exports analysis per runtime:
+لإلغاء الاشتراك في تحليل الصادرات المستخدمة لكل runtime:
 
 ```js
 export default {

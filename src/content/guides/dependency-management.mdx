@@ -1,20 +1,17 @@
 ---
-title: Dependency Management
+title: إدارة التبعيات
 sort: 12
 contributors:
-  - ndelangen
-  - chrisVillanueva
-  - sokra
-  - byzyk
-  - AnayaDesign
-  - ThierryRakotomanana
+  - arabpolice
 ---
 
-## Dynamic expressions in import() or require()
+## التعبيرات الديناميكية في import() أو require()
 
-A context is created if your request contains expressions, so the **exact** module is not known on compile time.
+<span id="dynamic-expressions-in-import-or-require"></span>
 
-Example, given we have the following folder structure including `.ejs` files:
+يتم إنشاء سياق (context) إذا كان الطلب يحتوي على تعبيرات، لأن الوحدة **الدقيقة** لا تكون معروفة أثناء وقت التجميع.
+
+على سبيل المثال، لنفترض أن لدينا بنية المجلدات التالية التي تتضمن ملفات `.ejs`:
 
 ```text
 example_directory
@@ -25,14 +22,14 @@ example_directory
         └── another.ejs
 ```
 
-When following `import()` or `require()` call is evaluated:
+عند تقييم استدعاء `import()` أو `require()` التالي:
 
 ```js
 import(`./template/${name}.ejs`);
 require(`./template/${name}.ejs`);
 ```
 
-Webpack parses the `import()` or `require()` call and extracts some information:
+يقوم Webpack بتحليل استدعاء `import()` أو `require()` واستخراج بعض المعلومات:
 
 ```text
 Directory: ./template
@@ -41,9 +38,9 @@ Regular expression: /^.*\.ejs$/
 
 **context module**
 
-A context module is generated. It contains references to **all modules in that directory** that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
+يتم إنشاء وحدة سياق (context module). تحتوي هذه الوحدة على مراجع إلى **كل الوحدات داخل ذلك المجلد** التي يمكن طلبها بطلب يطابق التعبير النمطي. تحتوي وحدة السياق على خريطة تحوّل الطلبات إلى معرفات الوحدات.
 
-Example map:
+مثال على الخريطة:
 
 ```json
 {
@@ -53,13 +50,13 @@ Example map:
 }
 ```
 
-The context module also contains some runtime logic to access the map.
+تحتوي وحدة السياق أيضًا على بعض منطق وقت التشغيل للوصول إلى الخريطة.
 
-This means dynamic calls are supported but will cause all matching modules to be included in the bundle.
+هذا يعني أن الاستدعاءات الديناميكية مدعومة، لكنها ستؤدي إلى تضمين كل الوحدات المطابقة داخل الحزمة.
 
 ## import.meta.webpackContext
 
-The ESM equivalent of `require.context` is `import.meta.webpackContext`.
+المكافئ في ESM لـ `require.context` هو `import.meta.webpackContext`.
 
 ```js
 import.meta.webpackContext(directory, {
@@ -69,18 +66,17 @@ import.meta.webpackContext(directory, {
 });
 ```
 
-W> The arguments passed to `import.meta.webpackContext` must be literals!
+W> يجب أن تكون الوسائط الممررة إلى `import.meta.webpackContext` قيمًا حرفية!
 
 ## require.context
 
-You can create your own context with the `require.context()` function.
+يمكنك إنشاء سياق خاص بك باستخدام الدالة `require.context()`.
 
-It allows you to pass in a directory to search, a flag indicating whether subdirectories should be searched
-too, and a regular expression to match files against.
+تتيح لك تمرير مجلد للبحث فيه، وعلامة تحدد ما إذا كان ينبغي البحث في المجلدات الفرعية أيضًا، وتعبيرًا نمطيًا لمطابقة الملفات.
 
-Webpack parses for `require.context()` in the code while building.
+يبحث Webpack عن `require.context()` داخل الكود أثناء عملية البناء.
 
-The syntax is as follows:
+الصيغة كما يلي:
 
 ```js
 require.context(
@@ -91,30 +87,30 @@ require.context(
 );
 ```
 
-Examples:
+أمثلة:
 
 ```js
 require.context("./test", false, /\.test\.js$/);
-// a context with files from the test directory that can be required with a request ending with `.test.js`.
+// سياق يحتوي على ملفات من مجلد test يمكن طلبها بطلب ينتهي بـ `.test.js`.
 ```
 
 ```js
 require.context("../", true, /\.stories\.js$/);
-// a context with all files in the parent folder and descending folders ending with `.stories.js`.
+// سياق يحتوي على كل الملفات في المجلد الأب والمجلدات المتفرعة عنه التي تنتهي بـ `.stories.js`.
 ```
 
-W> The arguments passed to `require.context` must be literals!
+W> يجب أن تكون الوسائط الممررة إلى `require.context` قيمًا حرفية!
 
-### context module API
+### واجهة API الخاصة بوحدة السياق
 
-A context module exports a (require) function that takes one argument: the request.
+تصدّر وحدة السياق دالة (require) تأخذ وسيطًا واحدًا: الطلب.
 
-The exported function has 3 properties: `resolve`, `keys`, `id`.
+تحتوي الدالة المصدّرة على ثلاث خصائص: `resolve` و `keys` و `id`.
 
-- `resolve` is a function and returns the module id of the parsed request.
-- `keys` is a function that returns an array of all possible requests that the context module can handle.
+- `resolve` هي دالة تُرجع معرف الوحدة للطلب الذي تم تحليله.
+- `keys` هي دالة تُرجع مصفوفة بكل الطلبات الممكنة التي تستطيع وحدة السياق التعامل معها.
 
-This can be useful if you want to require all files in a directory or matching a pattern, Example:
+قد يكون هذا مفيدًا إذا أردت طلب كل الملفات داخل مجلد أو كل الملفات المطابقة لنمط معين، مثال:
 
 {/* eslint-disable */}
 
@@ -144,7 +140,7 @@ importAll(
     regExp: /\.js$/,
   }),
 );
-// At build-time cache will be populated with all required modules.
+// أثناء وقت البناء سيتم ملء cache بكل الوحدات المطلوبة.
 ```
 
-- `id` is the module id of the context module. This may be useful for `import.meta.webpackHot.accept` or `module.hot.accept`.
+- `id` هو معرف الوحدة الخاص بوحدة السياق. قد يكون هذا مفيدًا مع `import.meta.webpackHot.accept` أو `module.hot.accept`.

@@ -1,24 +1,24 @@
 ---
-title: Modern Web Platform
-description: Web Components, import maps, and PWAs with webpack 5.
+title: منصة الويب الحديثة
+description: مكونات الويب، وخرائط الاستيراد، وتطبيقات PWA باستخدام webpack 5.
 sort: 26
 contributors:
-  - phoekerson
+  - arabpolice
 ---
 
-This guide describes practical webpack patterns for **Web Components**, **Import Maps**, and **Progressive Web Apps** (PWAs) with **Service Workers**. Each section states the problem, shows a minimal configuration you can copy, and notes current limits relative to future webpack improvements.
+يصف هذا الدليل أنماطًا عملية في webpack لكل من **مكونات الويب**، و**خرائط الاستيراد**، و**تطبيقات الويب التقدمية** (PWA) مع **Service Workers**. يوضح كل قسم المشكلة، ويعرض إعدادًا بسيطًا يمكنك نسخه، ثم يذكر الحدود الحالية مقارنة بالتحسينات المستقبلية في webpack.
 
-T> Familiarity with [code splitting](/guides/code-splitting/), [caching](/guides/caching/) (`[contenthash]`), and the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) helps.
+T> تساعدك المعرفة المسبقة بـ [تقسيم الكود](/guides/code-splitting/)، و[التخزين المؤقت](/guides/caching/) (`[contenthash]`)، و[`SplitChunksPlugin`](/plugins/split-chunks-plugin/).
 
-## Web Components with webpack
+## مكونات الويب مع webpack
 
-### Problem
+### المشكلة
 
-If more than one JavaScript bundle executes `customElements.define()` for the same tag name, the browser throws [`DOMException`](https://developer.mozilla.org/en-US/docs/Web/API/DOMException): `Failed to execute 'define' on 'CustomElementRegistry'`. That often happens when the module that registers an element is duplicated: separate entry points or async chunks each contain a copy of the registration code, so two bundles both run `define` for the same tag.
+إذا نفذت أكثر من حزمة JavaScript واحدة `customElements.define()` لاسم الوسم نفسه، فسيطرح المتصفح [`DOMException`](https://developer.mozilla.org/en-US/docs/Web/API/DOMException): `Failed to execute 'define' on 'CustomElementRegistry'`. يحدث ذلك غالبًا عندما تتكرر الوحدة التي تسجل العنصر: فقد تحتوي نقاط إدخال منفصلة أو أجزاء غير متزامنة على نسخة من كود التسجيل، فتشغّل حزمتان `define` للوسم نفسه.
 
-### Approach
+### النهج
 
-Use [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) so the module that defines the element lives in a **single shared chunk** loaded once. Adjust `cacheGroups` so your element definitions (or a dedicated folder such as `src/elements/`) are forced into one chunk. See [Prevent Duplication](/guides/code-splitting/#prevent-duplication) for the general idea.
+استخدم [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) بحيث تعيش الوحدة التي تعرّف العنصر داخل **جزء مشترك واحد** يُحمّل مرة واحدة. عدّل `cacheGroups` بحيث تُفرض تعريفات العناصر لديك، أو مجلد مخصص مثل `src/elements/`، داخل جزء واحد. راجع [منع التكرار](/guides/code-splitting/#prevent-duplication) للفكرة العامة.
 
 **webpack.config.js**
 
@@ -43,7 +43,7 @@ export default {
     splitChunks: {
       chunks: "all",
       cacheGroups: {
-        // Put shared custom element modules in one async chunk.
+        // ضع وحدات العناصر المخصصة المشتركة في جزء غير متزامن واحد.
         customElements: {
           test: /[\\/]src[\\/]elements[\\/]/,
           name: "custom-elements",
@@ -56,21 +56,21 @@ export default {
 };
 ```
 
-Ensure both entries import the same registration module (for example `./elements/my-element.js`) so webpack can emit one `custom-elements.js` chunk instead of inlining duplicate registration in `main` and `admin`.
+تأكد من أن نقطتي الإدخال تستوردان وحدة التسجيل نفسها، مثل `./elements/my-element.js`، حتى يتمكن webpack من إصدار جزء واحد باسم `custom-elements.js` بدلًا من تضمين تسجيل مكرر داخل `main` و`admin`.
 
-### Limitations and future work
+### القيود والعمل المستقبلي
 
-Splitting alone does not change **browser** rules: the tag name must still be registered exactly once per document. Webpack does not yet provide a first-class “register this custom element once” primitive beyond chunk graph control. Native support for deduplicating custom element registration across the build is **planned**; until then, rely on shared chunks and a single registration module.
+لا يغيّر التقسيم وحده قواعد **المتصفح**: يجب أن يُسجل اسم الوسم مرة واحدة بالضبط لكل مستند. لا يوفر webpack حتى الآن بدائية مدمجة من الدرجة الأولى بمعنى «سجّل هذا العنصر المخصص مرة واحدة» خارج التحكم في مخطط الأجزاء. دعم إزالة تكرار تسجيل العناصر المخصصة عبر البناء **مخطط له**؛ وحتى ذلك الحين، اعتمد على الأجزاء المشتركة ووحدة تسجيل واحدة.
 
-## Import Maps with webpack
+## خرائط الاستيراد مع webpack
 
-### Problem
+### المشكلة
 
-[Import maps](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap) let the browser resolve **bare specifiers** (`import "lodash-es"` from `importmap.json` or an inline `<script type="importmap">`). If webpack **bundles** those dependencies, you do not need an import map for them. If you want the **browser** to load a dependency from a URL (CDN or `/vendor/`) while your application code keeps bare imports, mark those modules as [`externals`](/configuration/externals/) so webpack emits `import` statements that match your map.
+تتيح [خرائط الاستيراد](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap) للمتصفح حل **المحددات العارية** (`import "lodash-es"` من `importmap.json` أو من `<script type="importmap">` مضمن). إذا كان webpack **يجمع** تلك التبعيات، فلن تحتاج إلى خريطة استيراد لها. أما إذا أردت أن يحمّل **المتصفح** تبعية من عنوان URL، مثل CDN أو `/vendor/`، مع إبقاء كود التطبيق على الاستيرادات العارية، فميّز تلك الوحدات كـ [`externals`](/configuration/externals/) حتى يصدر webpack تعليمات `import` تطابق خريطتك.
 
-### Approach
+### النهج
 
-Enable [ES module output](/configuration/output/#outputmodule) (`experiments.outputModule` and `output.module`), set [`externalsType: "module"`](/configuration/externals/#externalstypemodule) for static imports, and list each bare specifier in `externals` with the same string the browser will resolve via the import map.
+فعّل [إخراج وحدات ES](/configuration/output/#outputmodule) عبر `experiments.outputModule` و`output.module`، واضبط [`externalsType: "module"`](/configuration/externals/#externalstypemodule) للاستيرادات الساكنة، ثم أدرج كل محدد عارٍ في `externals` بالسلسلة نفسها التي سيحلها المتصفح عبر خريطة الاستيراد.
 
 **webpack.config.js**
 
@@ -100,9 +100,9 @@ export default {
 };
 ```
 
-**importmap.json** (served alongside your HTML; URLs must match your deployment)
+**importmap.json** (يُقدّم بجانب ملف HTML؛ يجب أن تطابق عناوين URL طريقة النشر لديك)
 
-Local vendor file:
+ملف vendor محلي:
 
 ```json
 {
@@ -112,7 +112,7 @@ Local vendor file:
 }
 ```
 
-CDN (no self-hosting required):
+CDN (لا حاجة إلى الاستضافة الذاتية):
 
 ```json
 {
@@ -122,34 +122,34 @@ CDN (no self-hosting required):
 }
 ```
 
-The key `"lodash-es"` must match both the **`externals` key** and the **specifier** in your source (`import … from "lodash-es"`). The value is the URL the browser loads — either a local path or a CDN URL; webpack does not validate that file.
+يجب أن يطابق المفتاح `"lodash-es"` كلًا من **مفتاح `externals`** و**المحدد** في المصدر لديك (`import … from "lodash-es"`). أما القيمة فهي عنوان URL الذي يحمّله المتصفح، إما مسارًا محليًا أو عنوان CDN؛ ولا يتحقق webpack من ذلك الملف.
 
-**index.html** (order matters: import map before your bundle)
+**index.html** (الترتيب مهم: خريطة الاستيراد قبل الحزمة)
 
 ```html
 <script type="importmap" src="/importmap.json"></script>
 <script type="module" src="/dist/main.mjs"></script>
 ```
 
-W> [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) and [`output.module`](/configuration/output/#outputmodule) are still experimental. Check the latest [webpack release notes](https://github.com/webpack/webpack/releases) before relying on them in production.
+W> لا تزال [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) و[`output.module`](/configuration/output/#outputmodule) تجريبيتين. تحقق من أحدث [ملاحظات إصدارات webpack](https://github.com/webpack/webpack/releases) قبل الاعتماد عليهما في الإنتاج.
 
-### Limitations and future work
+### القيود والعمل المستقبلي
 
-Webpack **does not** emit or update `importmap.json` for you. You must maintain the map so specifiers and URLs stay aligned with `externals` and your server layout. Automatic import-map generation is **not** available in webpack 5 today; future tooling may reduce this manual step.
+لا يصدر webpack ملف `importmap.json` ولا يحدّثه نيابة عنك. يجب أن تحافظ على الخريطة بحيث تبقى المحددات وعناوين URL متوافقة مع `externals` وبنية الخادم لديك. إنشاء خرائط الاستيراد تلقائيًا **غير متاح** في webpack 5 اليوم؛ وقد تقلل الأدوات المستقبلية هذه الخطوة اليدوية.
 
-## Progressive Web Apps (PWA) and Service Workers
+## تطبيقات الويب التقدمية (PWA) وService Workers
 
-### Problem
+### المشكلة
 
-Long-lived caching requires **stable URLs** for HTML but **versioned URLs** for scripts and styles. Using [`[contenthash]`](/guides/caching/) in `output.filename` changes those URLs every build. A **service worker** precache list must list the **exact** URLs after each build, or offline shells will point at missing files.
+يتطلب التخزين المؤقت طويل الأمد **عناوين URL ثابتة** لملفات HTML، لكن **عناوين URL ذات إصدارات** للسكربتات والأنماط. يؤدي استخدام [`[contenthash]`](/guides/caching/) في `output.filename` إلى تغيير تلك العناوين في كل بناء. يجب أن تسرد قائمة التخزين المسبق في **service worker** عناوين URL **الدقيقة** بعد كل بناء، وإلا ستشير واجهات العمل دون اتصال إلى ملفات مفقودة.
 
-The [`workbox-webpack-plugin`](/guides/progressive-web-application/) **`GenerateSW`** plugin generates an entire service worker for you. That is convenient, but when you need **full control** over service worker code (custom routing, `skipWaiting` behavior, or coordination with `[contenthash]` and other plugins), **`InjectManifest`** is appropriate: you write the worker, and Workbox injects the precache manifest at build time from webpack’s asset list.
+ينشئ ملحق [`workbox-webpack-plugin`](/guides/progressive-web-application/) **`GenerateSW`** ملف service worker كاملًا نيابة عنك. هذا ملائم، لكن عندما تحتاج إلى **تحكم كامل** في كود service worker، مثل التوجيه المخصص، أو سلوك `skipWaiting`، أو التنسيق مع `[contenthash]` وملحقات أخرى، يكون **`InjectManifest`** مناسبًا: تكتب العامل بنفسك، ويحقن Workbox بيان التخزين المسبق وقت البناء من قائمة أصول webpack.
 
-### Approach
+### النهج
 
-Use `[contenthash]` for emitted assets and add **`InjectManifest`** from `workbox-webpack-plugin`. Your source template imports `workbox-precaching` and calls `precacheAndRoute(self.__WB_MANIFEST)`; the plugin replaces `self.__WB_MANIFEST` with the list of webpack assets (including hashed filenames).
+استخدم `[contenthash]` للأصول الصادرة، وأضف **`InjectManifest`** من `workbox-webpack-plugin`. يستورد قالب المصدر `workbox-precaching` ويستدعي `precacheAndRoute(self.__WB_MANIFEST)`؛ يستبدل الملحق `self.__WB_MANIFEST` بقائمة أصول webpack، بما في ذلك أسماء الملفات ذات الهاش.
 
-Install:
+التثبيت:
 
 ```bash
 npm install workbox-webpack-plugin workbox-precaching --save-dev
@@ -183,17 +183,17 @@ export default {
 };
 ```
 
-**src/service-worker.js** (precache template)
+**src/service-worker.js** (قالب التخزين المسبق)
 
 ```js
 import { precacheAndRoute } from "workbox-precaching";
 
-// Replaced at build time with webpack's precache manifest (hashed asset URLs).
+// يُستبدل وقت البناء ببيان التخزين المسبق الخاص بـ webpack (عناوين أصول ذات هاش).
 precacheAndRoute(globalThis.__WB_MANIFEST);
 ```
 
-Register the emitted `service-worker.js` from your app (for example in `src/index.js`) with `navigator.serviceWorker.register("/service-worker.js")`, served from `dist/` with the correct scope.
+سجّل ملف `service-worker.js` الصادر من تطبيقك، مثلًا في `src/index.js`، باستخدام `navigator.serviceWorker.register("/service-worker.js")`، مع تقديمه من `dist/` بالنطاق الصحيح.
 
-### Limitations and future work
+### القيود والعمل المستقبلي
 
-You must keep **`InjectManifest`** in sync with your output filenames and plugins; `GenerateSW` remains the simpler path when you do not need a custom worker. Webpack does not ship a built-in service worker precache generator; tighter integration with hashed assets may arrive in future releases. Until then, Workbox’s **`InjectManifest`** is a well-supported way to align `[contenthash]` output with precaching.
+يجب أن تبقي **`InjectManifest`** متزامنًا مع أسماء ملفات الإخراج والملحقات لديك؛ ويظل `GenerateSW` الطريق الأبسط عندما لا تحتاج إلى عامل مخصص. لا يشحن webpack مولّد تخزين مسبق مدمجًا لـ service worker؛ وقد يصل تكامل أوثق مع الأصول ذات الهاش في إصدارات مستقبلية. وحتى ذلك الحين، يُعد **`InjectManifest`** من Workbox طريقة مدعومة جيدًا لمواءمة خرج `[contenthash]` مع التخزين المسبق.

@@ -2,12 +2,13 @@
 title: ContextExclusionPlugin
 group: webpack
 contributors:
-  - jeffin
+  - MohaDev-69
+  - RlxChap2
 ---
 
-_Context_ refers to [dynamic expressions in import() or require()](/guides/dependency-management/#dynamic-expressions-in-import-or-require) such as `require('./locale/' + name + '.json')`.
+يشير _context_ إلى [التعابير الديناميكية في `import()` أو `require()`](/guides/dependency-management/#dynamic-expressions-in-import-or-require)، مثل `require("./locale/" + name + ".json")`.
 
-The `ContextExclusionPlugin` allows you to exclude context. Provide RegExp as an argument when initializing the Plugin to exclude all context that matches it.
+يسمح لك `ContextExclusionPlugin` باستبعاد ملفات من context عبر RegExp. مرر RegExp عند إنشاء plugin، وسيتم استبعاد كل request يطابقه.
 
 **webpack.config.js**
 

@@ -2,23 +2,18 @@
 title: Plugins
 sort: 10
 contributors:
-  - sokra
-  - skipjack
-  - yatharthk
-  - byzyk
-  - EugeneHlushko
-  - snitin315
+  - RlxChap2
 ---
 
-The `plugins` option is used to customize the webpack build process in a variety of ways. Webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [Plugins page](/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
+يُستعمل الخيار `plugins` لتطويع عملية البناء في webpack وتشكيلها بطرق متعدّدة. ويأتي webpack مزوَّداً بمجموعة من الـ plugins المدمجة التي يمكن الوصول إليها عبر `webpack.[plugin-name]`. اطّلع على [صفحة Plugins](/plugins) لتجد قائمة بها مع توثيقها، مع ملاحظة أنّ هناك الكثير منها متاحاً ضمن مجتمع webpack.
 
-T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/contribute/writing-a-plugin/).
+T> ملاحظة: هذه الصفحة لا تتناول سوى كيفية استخدام الـ plugins، فإن كنت ترغب بكتابة plugin خاص بك فعُد إلى [كتابة Plugin](/contribute/writing-a-plugin/).
 
 ## plugins
 
 [`[Plugin]`](/plugins/)
 
-An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugin/) allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and release builds. Starting with webpack 5.87.0 falsy values can be used to disable specific plugins conditionally.
+مصفوفة من plugins خاصة بـ webpack. فمثلاً، يتيح لك [`DefinePlugin`](/plugins/define-plugin/) إنشاء ثوابت عالمية يمكن ضبطها أثناء التصريف، وهو ما يُفيدك حين تريد سلوكاً مختلفاً بين بُنى التطوير وبُنى الإصدار. ومنذ webpack 5.87.0، صار بإمكانك استخدام القيم الكاذبة (falsy) لتعطيل plugins بعينها وفق شروط معيّنة.
 
 **webpack.config.js**
 
@@ -29,32 +24,32 @@ export default {
   // ...
   plugins: [
     new webpack.DefinePlugin({
-      // Definitions...
+      // التعريفات...
     }),
-    false && new webpack.IgnorePlugin(), // disabled conditionally
+    false && new webpack.IgnorePlugin(), // مُعطَّل وفق شرط
   ],
 };
 ```
 
-A more complex example, using multiple plugins, might look something like this:
+وفيما يلي مثال أكثر تركيباً يستخدم عدّة plugins:
 
 **webpack.config.js**
 
 ```js
 import webpack from "webpack";
-// importing plugins that do not come by default in webpack
+// استيراد plugins ليست مرفقة افتراضياً مع webpack
 import DashboardPlugin from "webpack-dashboard/plugin";
 
-// adding plugins to your configuration
+// إضافة plugins إلى تخصيصك
 export default {
   // ...
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    // compile time plugins
+    // plugins تعمل وقت التصريف
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": '"production"',
     }),
-    // webpack-dev-server enhancement plugins
+    // plugins خاصة بتعزيز webpack-dev-server
     new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],

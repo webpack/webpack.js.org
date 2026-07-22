@@ -1,27 +1,17 @@
 ---
-title: Entry and Context
+title: Entry وContext
 sort: 4
 contributors:
-  - sokra
-  - skipjack
-  - tarang9211
-  - byzyk
-  - madhavarshney
-  - EugeneHlushko
-  - smelukov
-  - anshumanv
-  - snitin315
-  - hai-x
-  - cengizilhan
+  - RlxChap2
 ---
 
-The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
+كائن `entry` هو المكان الذي ينطلق منه webpack ليبدأ بناء الحزمة. أمّا `context` فهو نصّ يحمل مساراً مطلقاً إلى المجلَّد الذي يحتوي ملفّات نقاط الدخول.
 
 ## context
 
 `string`
 
-The base directory, an **absolute path**, for resolving entry points and loaders from the configuration.
+المجلَّد الأساسي، ويكون **مساراً مطلقاً**، يُستعمل لتحليل نقاط الدخول والـ loaders انطلاقاً من التخصيص.
 
 ```js
 import path from "node:path";
@@ -36,7 +26,7 @@ export default {
 };
 ```
 
-By default, the current working directory of Node.js is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD (current working directory).
+يستخدم webpack افتراضياً مجلَّد العمل الحالي لـ Node.js، غير أنّ من المُستحسَن أن تُمرِّر قيمة صريحة في تخصيصك، فبذلك يصبح تخصيصك مستقلاً عن CWD (مجلَّد العمل الحالي).
 
 ---
 
@@ -44,11 +34,11 @@ By default, the current working directory of Node.js is used, but it's recommend
 
 `string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string, runtime string | false }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string, layer string, runtime string | false })`
 
-The point or points where to start the application bundling process. If an array is passed then all items will be processed.
+النقطة أو النقاط التي ينطلق منها webpack ليبدأ عملية حزم التطبيق. وإن مُرِّرت مصفوفة، فستُعالَج جميع عناصرها.
 
-A dynamically loaded module is **not** an entry point.
+الوحدة المُحمَّلة ديناميكياً ليست نقطة دخول.
 
-A rule to consider: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
+قاعدة جديرة بالاعتبار: نقطة دخول واحدة لكلّ صفحة HTML. فالـ SPA يحتاج إلى نقطة واحدة، أمّا الـ MPA فيحتاج إلى نقاط متعدّدة.
 
 ```js
 export default {
@@ -61,13 +51,15 @@ export default {
 };
 ```
 
-### Naming
+### التسمية
 
-If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entry point for the chunk.
+إن مُرِّر نصّ أو مصفوفة نصوص، فإنّ الـ chunk يحصل على الاسم `main`. وإن مُرِّر كائن، فإنّ كلّ مفتاح فيه يكون اسماً لـ chunk، وقيمته تصف نقطة الدخول الموافقة له.
 
-### Entry descriptor
+### واصف نقطة الدخول
 
-If an object is passed the value might be a string, array of strings, or a descriptor:
+<span id="entry-descriptor"></span>
+
+إن مُرِّر كائن، فقد تكون قيمة كلّ مفتاح نصّاً أو مصفوفة نصوص أو واصفاً:
 
 ```js
 export default {
@@ -79,28 +71,28 @@ export default {
       import: "./catalog.js",
       filename: "pages/catalog.js",
       dependOn: "shared",
-      chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
+      chunkLoading: false, // تعطيل الـ chunks التي تُحمَّل عند الطلب، ووضع كلّ شيء في الـ chunk الرئيسي.
     },
     personal: {
       import: "./personal.js",
       filename: "pages/personal.js",
       dependOn: "shared",
       chunkLoading: "jsonp",
-      asyncChunks: true, // Create async chunks that are loaded on demand.
-      layer: "name of layer", // set the layer for an entry point
-      worker: true, // mark as a worker entry, available since webpack 5.108.0
+      asyncChunks: true, // إنشاء chunks غير متزامنة تُحمَّل عند الطلب.
+      layer: "name of layer", // تعيين الطبقة (layer) لنقطة دخول.
+      worker: true, // تمييزها كنقطة دخول لـ worker؛ متاح منذ webpack 5.108.0.
     },
   },
 };
 ```
 
-Descriptor syntax might be used to pass additional options to an entry point.
+تُستعمَل صياغة الواصف لتمرير خيارات إضافية إلى نقطة الدخول.
 
-T> The `worker` flag (added in webpack 5.108.0) marks an entry as a worker so its output file uses [`output.workerChunkFilename`](/configuration/output/#outputworkerchunkfilename) instead of the regular chunk filename. webpack sets it automatically for entries it creates from `new Worker(new URL(...))`, so you rarely set it by hand.
+T> يميز الخيار `worker`، المضاف في webpack 5.108.0، نقطة الدخول بوصفها worker، فيستخدم ملف الإخراج الخاص بها [`output.workerChunkFilename`](/configuration/output/#outputworkerchunkfilename) بدلًا من اسم ملف chunk المعتاد. يضبط webpack هذا الخيار تلقائيًا لنقاط الدخول التي ينشئها عبر `new Worker(new URL(...))`، لذلك نادرًا ما تحتاج إلى ضبطه يدويًا.
 
-### Output filename
+### اسم ملفّ الإخراج
 
-By default, the output filename for the entry chunk is extracted from [`output.filename`](/configuration/output/#outputfilename) but you can specify a custom output filename for a specific entry:
+افتراضياً، يُؤخذ اسم ملفّ الإخراج لـ chunk نقطة الدخول من [`output.filename`](/configuration/output/#outputfilename)، غير أنّ بإمكانك تحديد اسم إخراج خاص بنقطة دخول بعينها:
 
 ```js
 export default {
@@ -113,11 +105,13 @@ export default {
 };
 ```
 
-Descriptor syntax was used here to pass `filename`-option to the specific entry points.
+استُعملت هنا صياغة الواصف لتمرير الخيار `filename` إلى نقاط دخول بعينها.
 
-### Dependencies
+### الاعتماديات
 
-By default, every entry chunk stores all the modules that it uses. With `dependOn` option you can share the modules from one entry chunk to another:
+<span id="dependencies"></span>
+
+افتراضياً، يحتفظ كلّ chunk من chunks نقاط الدخول بجميع الوحدات التي يستعملها. ومع الخيار `dependOn` تستطيع مشاركة وحدات chunk نقطة دخولٍ مع غيرها:
 
 ```js
 export default {
@@ -129,9 +123,9 @@ export default {
 };
 ```
 
-The `app` chunk will not contain the modules that `react-vendors` have.
+لن يحتوي chunk المُسمَّى `app` على الوحدات التي يحتويها `react-vendors`.
 
-`dependOn` option can also accept an array of strings:
+كما يقبل الخيار `dependOn` مصفوفة نصوص:
 
 ```js
 export default {
@@ -147,7 +141,7 @@ export default {
 };
 ```
 
-Also, you can specify multiple files per entry using an array:
+كما يمكنك تحديد عدّة ملفّات لنقطة دخول واحدة باستعمال مصفوفة:
 
 ```js
 export default {
@@ -159,11 +153,11 @@ export default {
 };
 ```
 
-### Dynamic entry
+### نقطة الدخول الديناميكية
 
-If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
+إن مُرِّرت دالّة، فستُستدعى مع كلّ حدث [make](/api/compiler-hooks/#make).
 
-> Note that the `make` event triggers when webpack starts and for every invalidation when [watching for file changes](/configuration/watch/).
+> لاحظ أنّ حدث `make` يُطلق حين يبدأ webpack وحين يقع كلّ إبطال (invalidation) عند [مراقبة تغيّر الملفّات](/configuration/watch/).
 
 ```js
 export default {
@@ -172,7 +166,7 @@ export default {
 };
 ```
 
-or
+أو
 
 ```js
 export default {
@@ -184,9 +178,9 @@ export default {
 };
 ```
 
-### Multiple Entry Points in Different Folders
+### نقاط دخول متعدّدة في مجلَّدات مختلفة
 
-In some scenarios, you might want to organize your entry points into different folders for better structure and maintainability. Here's how you can define multiple entry points located in different folders:
+أحياناً ترغب في تنظيم نقاط الدخول داخل مجلَّدات منفصلة لتحسين البنية وسهولة الصيانة. وفيما يلي كيفية تعريف عدّة نقاط دخول واقعة في مجلَّدات مختلفة:
 
 ```js
 export default {
@@ -197,25 +191,25 @@ export default {
 };
 ```
 
-For example: you can use dynamic entries to get the actual entries from an external source (remote server, file system content or database):
+ومثال على ذلك: يمكنك استعمال نقاط الدخول الديناميكية للحصول على نقاط الدخول الفعلية من مصدر خارجي (خادوم بعيد، أو نظام ملفّات، أو قاعدة بيانات):
 
 **webpack.config.js**
 
 ```js
 export default {
   entry() {
-    return fetchPathsFromSomeExternalSource(); // returns a promise that will be resolved with something like ['src/main-layout.js', 'src/admin-layout.js']
+    return fetchPathsFromSomeExternalSource(); // يُرجع promise يُحَلّ بقيمة مشابهة لـ ['src/main-layout.js', 'src/admin-layout.js']
   },
 };
 ```
 
-When combining with the [`output.library`](/configuration/output/#outputlibrary) option: If an array is passed only the last item is exported.
+عند الدمج مع الخيار [`output.library`](/configuration/output/#outputlibrary): إن مُرِّرت مصفوفة، فلن يُصدَّر منها إلا العنصر الأخير.
 
 ### Runtime chunk
 
-It allows setting the runtime chunk for an entry point and setting it to `false` to avoid a new runtime chunk since webpack `v5.43.0`.
+تتيح هذه الخاصية تعيين runtime chunk لنقطة دخولٍ ما، وضبطه على `false` لتجنّب إنشاء runtime chunk جديد، وذلك منذ webpack `v5.43.0`.
 
-`optimization.runtimeChunk` allows setting it globally for unspecified entry points.
+ويتيح `optimization.runtimeChunk` ضبطه على المستوى العام لنقاط الدخول التي لم تُحدَّد صراحةً.
 
 ```js
 export default {

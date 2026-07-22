@@ -2,19 +2,18 @@
 title: Extends
 sort: 12
 contributors:
-  - burhanuday
-  - tusharthakur04
+  - RlxChap2
 ---
 
-## extends
+## يمتد
 
 `string | string[]`
 
 <Badge text="webpack v5.82.0+" /> <Badge text="webpack-cli v5.1.0+" />
 
-The `extends` property allows you to extend an existing configuration to use as the base. It internally uses the `webpack-merge` package to merge the configurations and helps you to avoid duplicating configurations between multiple configurations.
+تتيح لك الخاصية `extends` أن توسِّع تخصيصاً قائماً لتجعله أساساً تبني عليه. وهي تعتمد داخلياً على الحزمة `webpack-merge` لدمج التخصيصات، فتُعينك على تجنّب تكرار نفس الإعدادات بين عدّة ملفات تخصيص.
 
-W> **This option is not supported via the Node API**: Extends will have no effect when using the Node API. webpack-cli is required to use this feature.
+W> **لا يدعم هذا الخيار Node API**: لن يُنتج `extends` أيّ أثر إن استخدمت Node API، إذ يلزم وجود webpack-cli لتشتغل هذه الميزة.
 
 **base.webpack.config.js**
 
@@ -60,11 +59,11 @@ export default {
 };
 ```
 
-## Extending multiple configurations
+## توسعة عدّة تخصيصات
 
-You can extend multiple configurations at once by passing an array of configuration paths to the `extends` property.
+يمكنك أن توسِّع عدّة تخصيصات دفعةً واحدة بأن تُمرِّر مصفوفة من مسارات التخصيص إلى الخاصية `extends`.
 
-Configurations from the `extends` property are merged from right to left, meaning that the configuration on the right will be merged into the configuration on the left. Configuration can be overridden by passing the same property in the configuration on the right.
+تُدمَج التخصيصات الواردة في `extends` من اليمين إلى اليسار، بمعنى أنّ التخصيص الواقع على اليمين يندمج داخل التخصيص الواقع على اليسار. ويمكنك تجاوز قيمة ما بأن تُمرِّر نفس الخاصية في التخصيص الواقع على اليمين.
 
 **js.webpack.config.js**
 
@@ -119,9 +118,9 @@ export default {
 };
 ```
 
-## Overriding Configurations
+## تجاوز التخصيصات
 
-You can override configurations from the extended configuration by passing the same property in the configuration that extends it.
+يمكنك تجاوز ما ورد في التخصيص المُوسَّع بأن تُمرِّر نفس الخاصية في التخصيص الذي يوسِّعه.
 
 **base.webpack.config.js**
 
@@ -152,7 +151,7 @@ const __dirname = path.dirname(__filename);
 export default {
   extends: path.resolve(__dirname, "./base.webpack.config.js"),
   entry: "./src/index.js",
-  // overriding the output path and filename
+  // تجاوز مسار الإخراج واسم الملفّ
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "[name].bundle.js",
@@ -160,9 +159,9 @@ export default {
 };
 ```
 
-## Concatinating rules and plugins
+## ضمّ الـ rules والـ plugins
 
-While primitive values (such as strings) are overridden, array fields are concatenated instead of replaced. This behavior comes from webpack-merge, which Webpack uses internally when processing extends.
+في حين أنّ القيم البدائية (كالنصوص) يُكتب فوقها، فإنّ حقول المصفوفات تُضمّ بعضها إلى بعض بدلاً من أن يُستبدل أحدها بالآخر. وهذا السلوك مصدره `webpack-merge` التي يستعملها webpack داخلياً عند معالجة `extends`.
 
 **base.webpack.config.js**
 
@@ -212,9 +211,9 @@ export default {
 };
 ```
 
-**Result after merging**
+**النتيجة بعد الدمج**
 
-Instead of module being replaced the rules and plugins array got concatenated
+بدلاً من أن يُستبدل `module` بكامله، فإنّ مصفوفتي `rules` و`plugins` قد ضُمّتا.
 
 ```js
 import webpack from "webpack";
@@ -222,13 +221,13 @@ import webpack from "webpack";
 export default {
   module: {
     rules: [
-      // From base.webpack.config.js
+      // من base.webpack.config.js
       {
         test: /\.js$/,
         use: "babel-loader",
       },
 
-      // From webpack.config.js (appended)
+      // من webpack.config.js (مُلحَق)
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
@@ -237,20 +236,20 @@ export default {
   },
 
   plugins: [
-    // From base.webpack.config.js
+    // من base.webpack.config.js
     new webpack.DefinePlugin({
       __DEV__: false,
     }),
 
-    // From webpack.config.js (appended)
+    // من webpack.config.js (مُلحَق)
     new webpack.HotModuleReplacementPlugin(),
   ],
 };
 ```
 
-## Loading configuration from external packages
+## تحميل التخصيص من حزم خارجية
 
-You can also load configuration from third-party packages by passing the package name to the `extends` property. The package must export the webpack configuration in package.json.
+يمكنك أيضاً تحميل التخصيص من حزم طرف ثالث بتمرير اسم الحزمة إلى الخاصية `extends`. ويُشترط أن تُصدِّر الحزمة تخصيص webpack ضمن ملف package.json.
 
 **webpack.config.js**
 

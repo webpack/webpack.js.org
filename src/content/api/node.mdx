@@ -1,32 +1,23 @@
 ---
-title: Node Interface
+title: واجهة Node
 sort: 2
 contributors:
-  - sallar
-  - rynclark
-  - byzyk
-  - wizardofhogwarts
-  - EugeneHlushko
-  - lukasgeiter
-  - toshihidetagami
-  - chenxsan
-  - jamesgeorge007
-  - textbook
+  - RlxChap2
 ---
 
-Webpack provides a Node.js API which can be used directly in Node.js runtime.
+يوفر webpack واجهة Node.js API يمكن استخدامها مباشرة داخل بيئة تشغيل Node.js.
 
-The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part. For this reason the [`stats`](/configuration/stats) configuration options will not have any effect in the `webpack()` call.
+تفيد Node.js API عندما تحتاج إلى تخصيص عملية build أو عملية التطوير؛ لأن عرض النتائج ومعالجة الأخطاء يصبحان مسؤوليتك أنت، بينما يتولى webpack جزء compilation فقط. لهذا السبب، لن تؤثر خيارات إعداد [`stats`](/configuration/stats) عند استدعاء `webpack()`.
 
-## Installation
+## التثبيت
 
-To start using the webpack Node.js API, first install webpack if you haven’t yet:
+لبدء استخدام webpack Node.js API، ثبّت webpack أولًا إذا لم يكن مثبتًا لديك:
 
 ```bash
 npm install --save-dev webpack
 ```
 
-Then import the webpack module in your Node.js script:
+ثم استورد module الخاص بـ webpack داخل سكربت Node.js:
 
 ```js
 import webpack from "webpack";
@@ -34,7 +25,7 @@ import webpack from "webpack";
 
 ## webpack()
 
-The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
+تستقبل الدالة `webpack` المستوردة [كائن إعدادات](/configuration/) webpack، وتُشغّل webpack compiler إذا مررت لها callback:
 
 ```js
 import webpack from "webpack";
@@ -43,58 +34,34 @@ webpack({}, (err, stats) => {
   if (err || stats.hasErrors()) {
     // ...
   }
-  // Done processing
+  // انتهت المعالجة
 });
 ```
 
-T> The `err` object **will not** include compilation errors. Those must be handled separately using `stats.hasErrors()`, which will be covered in detail in the [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
+T> كائن `err` **لن** يحتوي على أخطاء compilation. يجب التعامل مع هذه الأخطاء بشكل منفصل عبر `stats.hasErrors()`، وسيتم شرح ذلك بتفصيل أكبر في قسم [معالجة الأخطاء](#معالجة-الأخطاء). يحتوي `err` فقط على مشاكل مرتبطة بـ webpack نفسه، مثل إعدادات غير صحيحة وما شابه.
 
-T> You can provide the `webpack` function with an array of configurations. See
-the [MultiCompiler](#multicompiler) section below for more information.
+T> يمكنك تمرير array من الإعدادات إلى الدالة `webpack`. راجع قسم [MultiCompiler](#multicompiler) أدناه لمزيد من التفاصيل.
 
-## Compiler Instance
+## نسخة Compiler
 
-If you don’t pass the `webpack` runner function a callback, it will return a
-webpack `Compiler` instance. This instance can be used to manually trigger the
-webpack runner or have it build and watch for changes, much like the
-[CLI](/api/cli/). The `Compiler` instance provides the following methods:
+إذا لم تمرر callback إلى دالة تشغيل `webpack`، فسترجع instance من `Compiler` الخاص بـ webpack. يمكن استخدام هذه instance لتشغيل webpack يدويًا، أو لجعله يبني ويراقب التغييرات، بطريقة مشابهة لـ [CLI](/api/cli/). توفر instance الخاصة بـ `Compiler` الدوال التالية:
 
 - `.run(callback)`
 - `.watch(watchOptions, handler)`
 
-Typically, only one master `Compiler` instance is created, although child
-compilers can be created in order to delegate specific tasks. The `Compiler` is
-ultimately a function which performs bare minimum functionality to keep a
-lifecycle running. It delegates all the loading, bundling, and writing work to
-registered plugins.
+عادةً يتم إنشاء instance رئيسية واحدة فقط من `Compiler`، لكن يمكن إنشاء child compilers لتفويض مهام محددة. في النهاية، `Compiler` هو دالة توفر الحد الأدنى اللازم لإبقاء دورة الحياة تعمل. أما عمليات loading وbundling والكتابة فتُفوّض إلى plugins المسجلة.
 
-The `hooks` property on a `Compiler` instance is used to register a plugin to
-any hook event in the `Compiler`'s lifecycle. The
-[`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsDefaulter.js)
-and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js)
-utilities are used by webpack to configure its `Compiler` instance with all the
-built-in plugins.
+تُستخدم الخاصية `hooks` على instance الخاصة بـ `Compiler` لتسجيل plugin على أي hook event ضمن دورة حياة `Compiler`. ويستخدم webpack الأداتين [`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsDefaulter.js) و[`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js) لإعداد instance الخاصة بـ `Compiler` مع كل plugins المدمجة.
 
-The `platform` property on a `Compiler` instance describes the target environment
-resolved from [`target`](/configuration/target/). It is a read-only object of
-platform flags (`web`, `browser`, `webworker`, `node`, `electron`, `nwjs`, `deno`,
-`bun` and `universal`), where each flag is `true`, `false`, or `null` when the
-platform is left neutral. Plugins and loaders can read it to adapt to the build
-target. Since webpack 5.108.0, `platform.universal` is `true` for
-`target: "universal"` and for the equivalent `target: ["web", "node"]`.
+تصف الخاصية `platform` في instance من `Compiler` البيئة المستهدفة التي يحددها خيار [`target`](/configuration/target/). وهي كائن للقراءة فقط يضم مؤشرات المنصات (`web` و`browser` و`webworker` و`node` و`electron` و`nwjs` و`deno` و`bun` و`universal`). تكون قيمة كل مؤشر `true` أو `false`، أو `null` إذا لم تُحدَّد المنصة. تستطيع plugins وloaders قراءة هذه الخاصية لتكييف سلوكها مع بيئة البناء المستهدفة. بدءًا من webpack 5.108.0، تكون قيمة `platform.universal` هي `true` عند استخدام `target: "universal"` أو الخيار المكافئ `target: ["web", "node"]`.
 
-The `run` method is then used to kickstart all compilation work. Upon
-completion, the given `callback` function is executed. The final logging of
-stats and errors should be done in this `callback` function.
+تُستخدم الدالة `run` لبدء عملية compilation كاملة. وبعد انتهائها، تُنفَّذ دالة `callback` التي مررتها، وفيها ينبغي تسجيل stats والأخطاء النهائية.
 
-W> The API only supports a single concurrent compilation at a time. When using `run` or
-`watch`, call `close` and wait for it to finish before calling `run` or `watch`
-again. Concurrent compilations will corrupt the output files.
+W> تدعم هذه API عملية compilation واحدة فقط في الوقت نفسه. عند استخدام `run` أو `watch`، استدعِ `close` وانتظر انتهاءه قبل استدعاء `run` أو `watch` مرة أخرى. تشغيل compilations متزامنة قد يفسد ملفات output.
 
 ## Run
 
-Calling the `run` method on the `Compiler` instance is much like the quick run
-method mentioned above:
+استدعاء الدالة `run` على instance الخاصة بـ `Compiler` يشبه طريقة التشغيل السريعة المذكورة أعلاه:
 
 ```js
 import webpack from "webpack";
@@ -112,13 +79,11 @@ compiler.run((err, stats) => {
 });
 ```
 
-W> Don't forget to close the compiler, so that low-priority work (like persistent caching) have the opportunity to complete.
+W> لا تنس إغلاق compiler حتى تحصل الأعمال ذات الأولوية المنخفضة، مثل persistent caching، على فرصة للاكتمال.
 
 ## Watching
 
-Calling the `watch` method triggers the webpack runner, but then watches for
-changes (much like CLI: `webpack --watch`), as soon as webpack detects a
-change, runs again. Returns an instance of `Watching`.
+استدعاء الدالة `watch` يشغّل webpack runner، ثم يراقب التغييرات بطريقة مشابهة لـ CLI عند استخدام `webpack --watch`. بمجرد أن يكتشف webpack تغييرًا، يعيد التشغيل. وترجع الدالة instance من `Watching`.
 
 ```js
 watch(watchOptions, callback);
@@ -133,29 +98,24 @@ const compiler = webpack({
 
 const watching = compiler.watch(
   {
-    // Example
+    // مثال
     aggregateTimeout: 300,
     poll: undefined,
   },
   (err, stats) => {
-    // Print watch/build result here...
+    // اطبع نتيجة watch/build هنا...
     console.log(stats);
   },
 );
 ```
 
-`Watching` options are covered in detail
-[here](/configuration/watch/#watchoptions).
+خيارات `Watching` مشروحة بتفصيل [هنا](/configuration/watch/#watchoptions).
 
-W> Filesystem inaccuracies may trigger multiple builds for a single change.
-In the example above, the `console.log` statement may fire multiple times for a
-single modification. Users should expect this behavior and may check
-`stats.hash` to see if the file hash has actually changed.
+W> قد تؤدي عدم دقة نظام الملفات إلى تشغيل أكثر من build لتغيير واحد. في المثال السابق، قد تُنفّذ `console.log` أكثر من مرة لتعديل واحد. يجب توقع هذا السلوك، ويمكن فحص `stats.hash` لمعرفة ما إذا كان hash الملف قد تغيّر فعلًا.
 
-### Close `Watching`
+### إغلاق `Watching`
 
-The `watch` method returns a `Watching` instance that exposes
-`.close(callback)` method. Calling this method will end watching:
+ترجع الدالة `watch` instance من `Watching` توفر الدالة `.close(callback)`. استدعاء هذه الدالة ينهي المراقبة:
 
 ```js
 watching.close((closeErr) => {
@@ -163,51 +123,41 @@ watching.close((closeErr) => {
 });
 ```
 
-W> It’s not allowed to watch or run again before the existing watcher has been
-closed or invalidated.
+W> لا يُسمح بتشغيل watch أو run مرة أخرى قبل إغلاق watcher الحالي أو إبطاله.
 
-### Invalidate `Watching`
+### إبطال `Watching`
 
-Using `watching.invalidate`, you can manually invalidate the current compiling
-round, without stopping the watch process:
+باستخدام `watching.invalidate` يمكنك إبطال جولة compilation الحالية يدويًا، بدون إيقاف عملية watch:
 
 ```js
 watching.invalidate();
 ```
 
-## Stats Object
+## كائن Stats
 
-The `stats` object that is passed as a second argument of the
-[`webpack()`](#webpack) callback, is a good source of information about the
-code compilation process. It includes:
+كائن `stats` الذي يُمرر كثاني argument إلى callback الخاصة بـ [`webpack()`](#webpack)، مصدر جيد للمعلومات عن عملية compilation. يحتوي على:
 
-- Errors and Warnings (if any)
-- Timings
-- Module and Chunk information
+- الأخطاء والتحذيرات إن وجدت.
+- التوقيتات.
+- معلومات Module وChunk.
 
-The [webpack CLI](/api/cli) uses this information to display nicely formatted
-output in your console.
+تستخدم [webpack CLI](/api/cli) هذه المعلومات لعرض ناتج منسق بشكل جيد في console.
 
-T> When using the [`MultiCompiler`](#multicompiler), a
-`MultiStats` instance is returned that fulfills the same interface as `stats`,
-i.e. the methods described below.
+T> عند استخدام [`MultiCompiler`](#multicompiler)، يتم إرجاع instance من `MultiStats` تحقق الواجهة نفسها الخاصة بـ `stats`، أي الدوال الموضحة أدناه.
 
-This `stats` object exposes the following methods:
+يعرض كائن `stats` الدوال التالية:
 
 ### stats.hasErrors()
 
-Can be used to check if there were errors while compiling. Returns `true` or
-`false`.
+تُستخدم لمعرفة ما إذا حدثت أخطاء أثناء compilation. ترجع `true` أو `false`.
 
 ### stats.hasWarnings()
 
-Can be used to check if there were warnings while compiling. Returns `true` or
-`false`.
+تُستخدم لمعرفة ما إذا ظهرت تحذيرات أثناء compilation. ترجع `true` أو `false`.
 
 ### stats.toJson(options)
 
-Returns compilation information as a JSON object. `options` can be either a
-string (a preset) or an object for more granular control:
+ترجع معلومات compilation ككائن JSON. يمكن أن تكون `options` نصًا يمثل preset، أو object للتحكم بتفاصيل أكثر:
 
 ```js
 stats.toJson("minimal");
@@ -220,26 +170,25 @@ stats.toJson({
 });
 ```
 
-All available options and presets are described in the stats [documentation](/configuration/stats).
+كل الخيارات والـ presets المتاحة موضحة في [توثيق stats](/configuration/stats).
 
-> Here’s an [example](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)
-> of this function’s output.
+> هذا [مثال](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)
+> على ناتج هذه الدالة.
 
 ### stats.toString(options)
 
-Returns a formatted string of the compilation information (similar to
-[CLI](/api/cli) output).
+ترجع نصًا منسقًا لمعلومات compilation، بشكل مشابه لناتج [CLI](/api/cli).
 
-Options are the same as [`stats.toJson(options)`](/api/node/#statstojsonoptions) with one addition:
+الخيارات هي نفسها خيارات [`stats.toJson(options)`](/api/node/#statstojsonoptions)، مع إضافة واحدة:
 
 ```js
 stats.toString({
-  // Add console colors
+  // أضف ألوان console
   colors: true,
 });
 ```
 
-Here’s an example of `stats.toString()` usage:
+هذا مثال على استخدام `stats.toString()`:
 
 ```js
 import webpack from "webpack";
@@ -256,8 +205,8 @@ webpack(
 
     console.log(
       stats.toString({
-        chunks: false, // Makes the build much quieter
-        colors: true, // Shows colors in the console
+        chunks: false, // يجعل ناتج build أهدأ بكثير
+        colors: true, // يعرض الألوان في console
       }),
     );
   },
@@ -266,10 +215,7 @@ webpack(
 
 ## MultiCompiler
 
-The `MultiCompiler` module allows webpack to run multiple configurations in
-separate compilers. If the `options` parameter in the webpack's NodeJS api is
-an array of options, webpack applies separate compilers and calls the
-`callback` after all compilers have been executed.
+يسمح module المسمى `MultiCompiler` لـ webpack بتشغيل عدة إعدادات داخل compilers منفصلة. إذا كان parameter المسمى `options` في NodeJS API الخاصة بـ webpack عبارة عن array من الخيارات، فسيطبّق webpack compilers منفصلة ويستدعي `callback` بعد تنفيذ كل compilers.
 
 ```js
 import webpack from "webpack";
@@ -285,19 +231,17 @@ webpack(
 );
 ```
 
-W> Multiple configurations will **not be run in parallel**. Each
-configuration is only processed after the previous one has finished
-processing.
+W> الإعدادات المتعددة **لن تعمل بالتوازي**. كل إعداد يُعالج بعد انتهاء الإعداد السابق.
 
-## Error Handling
+## معالجة الأخطاء
 
-For good error handling, you need to account for these three types of errors:
+لمعالجة الأخطاء بشكل جيد، يجب أن تراعي ثلاثة أنواع:
 
-- Fatal webpack errors (wrong configuration, etc)
-- Compilation errors (missing modules, syntax errors, etc)
-- Compilation warnings
+- أخطاء webpack الحرجة، مثل إعدادات خاطئة.
+- أخطاء compilation، مثل modules مفقودة أو أخطاء syntax.
+- تحذيرات compilation.
 
-Here’s an example that does all that:
+هذا مثال يتعامل مع الأنواع كلها:
 
 ```js
 import webpack from "webpack";
@@ -325,20 +269,14 @@ webpack(
       console.warn(info.warnings);
     }
 
-    // Log result...
+    // سجّل النتيجة...
   },
 );
 ```
 
-## Custom File Systems
+## أنظمة ملفات مخصصة
 
-By default, webpack reads files and writes files to disk using a normal file
-system. However, it is possible to change the input or output behavior using a
-different kind of file system (memory, webDAV, etc). To accomplish this, one
-can change the `inputFileSystem` or `outputFileSystem`. For example, you can
-replace the default `outputFileSystem` with
-[`memfs`](https://github.com/streamich/memfs) to write files to memory
-instead of to disk:
+افتراضيًا، يقرأ webpack الملفات ويكتبها على القرص باستخدام نظام الملفات العادي. لكن يمكن تغيير سلوك الإدخال أو الإخراج باستخدام نوع مختلف من أنظمة الملفات، مثل memory أو webDAV وغيرها. لفعل ذلك، يمكن تغيير `inputFileSystem` أو `outputFileSystem`. مثلًا، يمكنك استبدال `outputFileSystem` الافتراضي بـ [`memfs`](https://github.com/streamich/memfs) لكتابة الملفات في الذاكرة بدل القرص:
 
 ```js
 import { Volume, createFsFromVolume } from "memfs";
@@ -351,7 +289,7 @@ const compiler = webpack({
 
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
-  // Read the output later:
+  // اقرأ output لاحقًا:
   const content = fs.readFileSync("...");
   compiler.close((closeErr) => {
     // ...
@@ -359,12 +297,6 @@ compiler.run((err, stats) => {
 });
 ```
 
-Note that this is what
-[webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware),
-used by [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
-and many other packages, uses to mysteriously hide your files but continue
-serving them up to the browser!
+لاحظ أن هذا هو الأسلوب الذي يستخدمه [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)، والذي يستخدمه [webpack-dev-server](https://github.com/webpack/webpack-dev-server) وحزم أخرى كثيرة. لذلك قد تشعر أن ملفاتك "مختفية"، لكنها في الحقيقة تُقدّم للمتصفح من الذاكرة.
 
-T> The output file system you provide needs to be compatible with Node’s own
-[`fs`](https://nodejs.org/api/fs.html) interface, which requires the `mkdirp`
-and `join` helper methods.
+T> يجب أن يكون نظام ملفات output الذي توفره متوافقًا مع واجهة [`fs`](https://nodejs.org/api/fs.html) الخاصة بـ Node، والتي تتطلب دوال مساعدة مثل `mkdirp` و`join`.

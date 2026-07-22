@@ -1,11 +1,8 @@
 ---
 title: ContextReplacementPlugin
-group: webpack
 contributors:
-  - simon04
-  - byzyk
-  - masives
-  - chenxsan
+  - RlxChap2
+group: webpack
 related:
   - title: Issue 2783 - ContextReplacementPlugin Description
     url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
@@ -13,11 +10,11 @@ related:
     url: https://github.com/date-fns/date-fns/blob/master/docs/webpack.md
 ---
 
-_Context_ refers to [dynamic expressions in import() or require()](/guides/dependency-management/#dynamic-expressions-in-import-or-require) such as `require('./locale/' + name + '.json')`. When encountering such an expression, webpack infers the directory (`'./locale/'`) and a regular expression (`/^.*\.json$/`). Since the `name` is not known at compile time, webpack includes every file as module in the bundle.
+يشير _context_ إلى [التعابير الديناميكية داخل import() أو require()](/guides/dependency-management/#dynamic-expressions-in-import-or-require)، مثل `require('./locale/' + name + '.json')`. عندما يقرأ webpack هذا النوع من التعابير، فإنه يستنتج المجلد (`'./locale/'`) وregular expression مثل (`/^.*\.json$/`). وبما أن قيمة `name` غير معروفة وقت التجميع، فسيضمّن webpack كل ملف مطابق كـ module داخل bundle.
 
-The `ContextReplacementPlugin` allows you to override the inferred information. There are various ways to configure the plugin:
+يسمح لك `ContextReplacementPlugin` بتغيير المعلومات التي استنتجها webpack. توجد أكثر من طريقة لإعداد plugin:
 
-## Usage
+## الاستخدام
 
 ```ts
 new webpack.ContextReplacementPlugin(
@@ -28,15 +25,15 @@ new webpack.ContextReplacementPlugin(
 )
 ```
 
-If the resource (directory) matches `resourceRegExp`, the plugin replaces the default resource, recursive flag or generated regular expression with `newContentResource`, `newContentRecursive` or `newContextRegExp` respectively. If `newContentResource` is relative, it is resolved relative to the previous resource.
+إذا طابق المورد، أي المجلد، قيمة `resourceRegExp`، فسيستبدل plugin المورد الافتراضي أو قيمة recursive أو regular expression الناتج بالقيم `newContentResource` أو `newContentRecursive` أو `newContextRegExp` على الترتيب. إذا كانت `newContentResource` مسارًا نسبيًا، فسيُحل نسبة إلى المورد السابق.
 
-Here's a small example to restrict module usage:
+هذا مثال صغير لتقييد modules التي تُستخدم:
 
 ```js
 new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de|fr|hu/);
 ```
 
-The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
+في هذا المثال، يُقيّد context الخاص بـ `moment/locale` ليقبل فقط الملفات المطابقة لـ `/de|fr|hu/`. لذلك لن تُضمّن إلا هذه locales (راجع [هذه المشكلة](https://github.com/moment/moment/issues/2373) لمزيد من التفاصيل).
 
 ## Content Callback
 
@@ -47,9 +44,9 @@ new webpack.ContextReplacementPlugin(
 );
 ```
 
-The `newContentCallback` function is given a [`data` object of the `ContextModuleFactory`](/api/plugins/module-factories/) and is expected to overwrite the `request` attribute of the supplied object.
+تستقبل دالة `newContentCallback` كائن [`data` من `ContextModuleFactory`](/api/plugins/module-factories/)، والمتوقع منها أن تستبدل خاصية `request` في الكائن الممرر.
 
-Using this callback we can dynamically redirect requests to a new location:
+باستخدام هذا callback نستطيع إعادة توجيه requests ديناميكيًا إلى موقع جديد:
 
 ```js
 new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
@@ -62,9 +59,9 @@ new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
 });
 ```
 
-## Other Options
+## خيارات أخرى
 
-The `newContentResource` and `newContentCreateContextMap` parameters are also available:
+يتوفر أيضًا المعاملان `newContentResource` و`newContentCreateContextMap`:
 
 ```ts
 new webpack.ContextReplacementPlugin(
@@ -74,7 +71,7 @@ new webpack.ContextReplacementPlugin(
 );
 ```
 
-These two parameters can be used together to redirect requests in a more targeted way. The `newContentCreateContextMap` allows you to map runtime requests to compile requests in the form of an object:
+يمكن استخدام هذين المعاملين معًا لإعادة توجيه requests بطريقة أدق. يسمح لك `newContentCreateContextMap` بربط runtime requests مع compile-time requests داخل object:
 
 ```js
 new ContextReplacementPlugin(/selector/, "./folder", {

@@ -1,29 +1,17 @@
 ---
-title: Configuration Languages
+title: لغات التخصيص
 sort: 2
 contributors:
-  - piouson
-  - sokra
-  - skipjack
-  - tarang9211
-  - simon04
-  - peterblazejewicz
-  - youta1119
-  - byzyk
-  - Nek-
-  - liyiming22
-  - daimalou
-  - ChocolateLoverRaj
-  - snitin315
+  - RlxChap2
 ---
 
-Webpack accepts configuration files written in multiple programming and data languages, so you can author your config in whichever format suits your project — JavaScript, TypeScript, CoffeeScript, or a plain data file like JSON5, YAML or TOML.
+يقبل webpack ملفات تخصيص مكتوبة بلغات برمجة وتنسيقات بيانات متعددة، لذا يمكنك كتابة التخصيص بالصيغة الأنسب لمشروعك؛ سواء كانت JavaScript أو TypeScript أو CoffeeScript، أو تنسيق بيانات خالصًا مثل JSON5 أو YAML أو TOML.
 
 ## defineConfig
 
 <Badge text="5.108.0+" />
 
-`defineConfig` is a helper exported from `webpack` that gives editors type-checking and autocomplete for your configuration without any extra type annotations. It is an identity function (a no-op at runtime that simply returns the config you pass in), so it works in plain JavaScript configs too.
+`defineConfig` دالة مساعدة يصدّرها `webpack` لتوفير التحقق من الأنواع والإكمال التلقائي في المحرر دون إضافة أي تعريفات للأنواع. وهي دالة محايدة لا تنفذ شيئًا في وقت التشغيل سوى إعادة التخصيص الذي تمرره إليها، ولذلك تعمل أيضًا مع ملفات تخصيص JavaScript العادية.
 
 **webpack.config.js**
 
@@ -35,7 +23,7 @@ module.exports = defineConfig({
 });
 ```
 
-It accepts every shape webpack-cli can load: a single configuration object, an array of configurations (multi-compiler), a function returning either of those, an array of such functions, or a `Promise` resolving to any of them.
+تقبل الدالة جميع الأشكال التي يستطيع webpack-cli تحميلها: كائن تخصيص واحد، أو مصفوفة تخصيصات (multi-compiler)، أو دالة تعيد أحد هذين الشكلين، أو مصفوفة من هذه الدوال، أو `Promise` تُحل إلى أيٍّ منها.
 
 ```js
 const { defineConfig } = require("webpack");
@@ -48,15 +36,15 @@ module.exports = defineConfig((env, argv) => ({
 
 ## TypeScript
 
-To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies, i.e., TypeScript and the relevant type definitions from the [DefinitelyTyped](https://definitelytyped.org/) project:
+لكتابة تخصيص webpack بلغة [TypeScript](http://www.typescriptlang.org/)، ثبّت أوّلاً الاعتماديات اللازمة، وهي TypeScript وتعريفات الأنواع ذات الصلة من مشروع [DefinitelyTyped](https://definitelytyped.org/):
 
 ```bash
 npm install --save-dev typescript ts-node @types/node
-# and, if using webpack-dev-server < v4.7.0
+# وإن كنت تستخدم webpack-dev-server بإصدار أقل من v4.7.0
 npm install --save-dev @types/webpack-dev-server
 ```
 
-and then proceed to write your configuration:
+ثم ابدأ بكتابة التخصيص:
 
 **webpack.config.ts**
 
@@ -65,7 +53,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import webpack from "webpack";
-// in case you run into any typescript error when configuring `devServer`
+// في حال واجهتك أخطاء TypeScript عند تخصيص `devServer`
 import "webpack-dev-server";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -96,31 +84,31 @@ export default config;
     "resolveJsonModule": true,
     "isolatedModules": true,
 
-    // Allows you to write `import ... from './file.ts';`
+    // يتيح لك كتابة `import ... from './file.ts';`
     "rewriteRelativeImportExtensions": true
   }
 }
 ```
 
-The above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
+يفترض المثال السابق أنّك تستخدم إصدار TypeScript رقم 2.7 أو أحدث، مع تفعيل خياري `esModuleInterop` و `allowSyntheticDefaultImports` في ملف `tsconfig.json`.
 
-We support configuration in both `CommonJS` and `ESM` format.
+ندعم التخصيص بصيغة `CommonJS` و `ESM` معاً.
 
-Starting with v22.18.0 Node.js supports built-in [type stripping](https://nodejs.org/api/typescript.html#type-stripping), so the additional settings described below are only required for older versions.
+بدءاً من الإصدار v22.18.0، أصبح Node.js يدعم [إزالة الأنواع (type stripping)](https://nodejs.org/api/typescript.html#type-stripping) بشكل أصلي، ولذلك فإنّ الإعدادات الإضافية الموضّحة أدناه ليست مطلوبة إلا للإصدارات الأقدم.
 
-> To enable the transformation of non erasable TypeScript syntax, which requires JavaScript code generation, such as enum declarations, parameter properties use the flag [--experimental-transform-types](https://nodejs.org/api/cli.html#experimental-transform-types).
+> لتفعيل تحويل صياغات TypeScript غير القابلة للحذف، التي تحتاج إلى توليد شيفرة JavaScript مثل تصريحات `enum` وخصائص المُعاملات (parameter properties)، استخدم الراية [--experimental-transform-types](https://nodejs.org/api/cli.html#experimental-transform-types).
 
-If you are using an older version of Node.js that does not support the `typescript` format, or want to set `module` in `compilerOptions` in `tsconfig.json` to `commonjs` there are three solutions to this issue:
+إذا كنت تستخدم إصداراً أقدم من Node.js لا يدعم صيغة `typescript`، أو أردت ضبط `module` في `compilerOptions` ضمن `tsconfig.json` على `commonjs`، فأمامك ثلاثة حلول لهذه المشكلة:
 
-- Modify `tsconfig.json`.
-- Modify `tsconfig.json` and add settings for `ts-node`.
-- Install `tsconfig-paths`.
+- تعديل `tsconfig.json`.
+- تعديل `tsconfig.json` وإضافة إعدادات خاصة بـ `ts-node`.
+- تثبيت `tsconfig-paths`.
 
-The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
+**الحلّ الأول**: افتح ملف `tsconfig.json` وابحث عن `compilerOptions`، ثم اضبط `target` على `"ES5"` و `module` على `"CommonJS"` (أو احذف خيار `module` تماماً).
 
-The **second option** is to add settings for ts-node:
+**الحلّ الثاني**: أضِف إعدادات خاصة بـ ts-node.
 
-You can keep `"module": "ESNext"` for `tsc`, and if you use webpack, or another build tool, set an override for ts-node. [ts-node config](https://typestrong.org/ts-node/docs/imports/)
+يمكنك إبقاء `"module": "ESNext"` لـ `tsc`، وإن كنت تستعمل webpack أو أداة بناء أخرى، فاضبط قيمة بديلة لـ ts-node. [توثيق إعداد ts-node](https://typestrong.org/ts-node/docs/imports/)
 
 ```json
 {
@@ -135,13 +123,13 @@ You can keep `"module": "ESNext"` for `tsc`, and if you use webpack, or another 
 }
 ```
 
-The **third option** is to install the `tsconfig-paths` package:
+**الحلّ الثالث**: ثبّت حزمة `tsconfig-paths`:
 
 ```bash
 npm install --save-dev tsconfig-paths
 ```
 
-And create a separate TypeScript configuration specifically for your webpack configs:
+ثم أنشئ تخصيصاً مستقلاً لـ TypeScript مخصّصاً لملفات تخصيص webpack:
 
 **tsconfig-for-webpack-config.json**
 
@@ -155,9 +143,9 @@ And create a separate TypeScript configuration specifically for your webpack con
 }
 ```
 
-T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-paths`.
+T> يستطيع `ts-node` تحديد ملف `tsconfig.json` المطلوب عبر متغيّر البيئة الذي توفّره `tsconfig-paths`.
 
-Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-paths` like so:
+ثم اضبط متغيّر البيئة `process.env.TS_NODE_PROJECT` الذي توفّره `tsconfig-paths` على النحو التالي:
 
 **package.json**
 
@@ -169,17 +157,17 @@ Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsc
 }
 ```
 
-W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_NODE_PROJECT" unrecognized command` error. Therefore running it with `cross-env` seems to fix the issue, for more info [see this issue](https://github.com/webpack/webpack.js.org/issues/2733).
+W> وردتنا بلاغات بأن `TS_NODE_PROJECT` قد لا يعمل أحياناً ويُظهر الخطأ `"TS_NODE_PROJECT" unrecognized command`. وقد ظهر أنّ تشغيله عبر `cross-env` يحلّ المشكلة. لمزيد من التفاصيل [راجع هذه القضية](https://github.com/webpack/webpack.js.org/issues/2733).
 
-## CoffeeScript
+## كوفي سكريبت
 
-Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
+بالطريقة نفسها، لاستخدام [CoffeeScript](https://coffeescript.org/)، ثبّت أوّلاً الاعتماديات اللازمة:
 
 ```bash
 npm install --save-dev coffeescript
 ```
 
-and then proceed to write your configuration:
+ثم اكتب التخصيص:
 
 **webpack.config.coffee**
 
@@ -212,13 +200,13 @@ config =
 export default config
 ```
 
-## Babel and JSX
+## Babel و JSX
 
-In the example below JSX (React JavaScript Markup) and Babel are used, to create a JSON configuration that webpack can understand.
+في المثال أدناه، يُستخدم JSX (صياغة JavaScript الخاصة بـ React) مع Babel لإنشاء تخصيص بصيغة JSON يستطيع webpack فهمه.
 
-> Courtesy of [Jason Miller](https://twitter.com/_developit)
+> بفضل من [Jason Miller](https://twitter.com/_developit)
 
-First, install the necessary dependencies:
+ثبّت أوّلاً الاعتماديات اللازمة:
 
 ```bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
@@ -239,7 +227,7 @@ npm install --save-dev babel-register jsxobj babel-preset-es2015
 ```jsx
 import jsxobj from "jsxobj";
 
-// example of an imported plugin
+// مثال على plugin مستورد
 const CustomPlugin = (config) => ({
   ...config,
   name: "custom-plugin",
@@ -263,21 +251,21 @@ export default (
 );
 ```
 
-W> If you are using Babel elsewhere and have `modules` set to `false`, you will have to either maintain two separate `.babelrc` files or use `const jsxobj = require('jsxobj');` and `module.exports` instead of the new `import` and `export` syntax. This is because while Node does support many new ES6 features, they don't yet support ES6 module syntax.
+W> إن كنت تستخدم Babel في أماكن أخرى وضبطت `modules` على `false`، فستضطر إمّا للاحتفاظ بملفَّي `.babelrc` منفصلين، أو استخدام `const jsxobj = require('jsxobj');` و `module.exports` بدلاً من صياغة `import` و `export` الجديدة. ذلك أنّ Node يدعم كثيراً من ميزات ES6 الجديدة، لكنه لا يدعم بعدُ صياغة وحدات ES6.
 
-## Data formats (JSON5, YAML and TOML)
+## تنسيقات البيانات (JSON5 وYAML وTOML)
 
 <Badge text="webpack-cli v7.1.0+" />
 
-When your configuration is purely static data — no functions, no `process.env` reads, no computed values — you can write it as a data file instead of JavaScript. webpack-cli parses the following extensions directly:
+إذا كان تخصيصك يتكون من بيانات ثابتة فقط، بلا دوال أو قراءة من `process.env` أو قيم محسوبة، فيمكنك كتابته كملف بيانات بدلًا من JavaScript. يحلل webpack-cli الامتدادات التالية مباشرةً:
 
-| Extension       | Parser package |
-| --------------- | -------------- |
-| `.json5`        | `json5`        |
-| `.yaml`, `.yml` | `js-yaml`      |
-| `.toml`         | `toml`         |
+| الامتداد        | حزمة المحلل |
+| --------------- | ----------- |
+| `.json5`        | `json5`     |
+| `.yaml`, `.yml` | `js-yaml`   |
+| `.toml`         | `toml`      |
 
-The parser is **not bundled** with webpack-cli — install the one your format needs as a dev dependency. If it is missing, webpack-cli stops and tells you exactly which package to install.
+المحلل **غير مضمّن** في webpack-cli؛ لذا ثبّت الحزمة التي يحتاجها التنسيق ضمن dev dependencies. إذا كانت الحزمة مفقودة، يتوقف webpack-cli ويخبرك تحديدًا بالحزمة المطلوب تثبيتها.
 
 ```bash
 npm install --save-dev json5
@@ -287,7 +275,7 @@ npm install --save-dev js-yaml
 npm install --save-dev toml
 ```
 
-Point `--config` at the file, or name it so it is picked up as a [default config](/api/cli/#default-configurations) (e.g. `webpack.config.json5`):
+مرر مسار الملف إلى `--config`، أو سمِّه باسم يتيح اكتشافه بوصفه [تخصيصًا افتراضيًا](/api/cli/#default-configurations)، مثل `webpack.config.json5`:
 
 ```bash
 npx webpack --config webpack.config.toml
@@ -325,4 +313,4 @@ entry = "./src/index.js"
 filename = "bundle.js"
 ```
 
-T> These formats describe plain data only. When you need dynamic configuration — environment-based branches, plugin instances, or a function form — use a JavaScript or TypeScript config instead.
+T> لا تصف هذه التنسيقات إلا بيانات خالصة. إذا احتجت إلى تخصيص ديناميكي، مثل التفرع وفق البيئة أو إنشاء instances من plugins أو استخدام صيغة الدالة، فاستخدم ملف تخصيص JavaScript أو TypeScript بدلًا منها.

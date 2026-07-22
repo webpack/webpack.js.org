@@ -7,7 +7,7 @@ exports[`Dropdown matches snapshot 1`] = `
   <button
     aria-expanded="false"
     aria-haspopup="true"
-    aria-label="Select language"
+    aria-label="اختيار اللغة"
     class="cursor-pointer text-white border-none bg-transparent m-0 p-0 text-[length:inherit] flex items-center"
   >
     <svg
@@ -62,7 +62,7 @@ exports[`Dropdown matches snapshot 1`] = `
           href="/en/"
         >
           <span
-            class="align-top text-left"
+            class="align-top text-start"
             lang="en"
           >
             English
@@ -77,7 +77,7 @@ exports[`Dropdown matches snapshot 1`] = `
           href="/fr/"
         >
           <span
-            class="align-top text-left"
+            class="align-top text-start"
             lang="fr"
           >
             French
@@ -92,7 +92,7 @@ exports[`Dropdown matches snapshot 1`] = `
           href="/es/"
         >
           <span
-            class="align-top text-left"
+            class="align-top text-start"
             lang="es"
           >
             Spanish

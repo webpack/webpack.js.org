@@ -15,6 +15,7 @@ import {
 import Content from "../../_content.json";
 import OgImage from "../../assets/icon-pwa-512x512.png";
 import Logo from "../../assets/logo-on-white-bg.svg";
+import { SITE_DIRECTION, SITE_LANGUAGE } from "../../config/site.js";
 import Favicon from "../../favicon.ico";
 import {
   extractPages,
@@ -45,6 +46,18 @@ import "../../styles/index.css";
 // Load Content Tree
 
 import clientSideRedirections from "./clientSideRedirections.js";
+
+const SECTION_TITLES = {
+  api: "API",
+  blog: "المدونة",
+  concepts: "المفاهيم",
+  configuration: "التخصيص",
+  contribute: "المساهمة",
+  guides: "الأدلة",
+  loaders: "Loaders",
+  migrate: "الترقية",
+  plugins: "Plugins",
+};
 
 function Site(props) {
   const location = useLocation();
@@ -89,8 +102,8 @@ function Site(props) {
           date,
           teaser,
         }) => ({
-          title: title || name,
-          content: title || name,
+          title: title || SECTION_TITLES[name] || name,
+          content: title || SECTION_TITLES[name] || name,
           url,
           group,
           sort,
@@ -194,7 +207,7 @@ function Site(props) {
 
   const description =
     getPageDescription(Content, location.pathname) ||
-    "webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.";
+    "webpack هو module bundler. هدفه الأساسي حزم ملفات JavaScript لاستخدامها في المتصفح، ويمكنه كذلك تحويل أي resource أو asset تقريبًا وحزمه أو تجهيزه.";
 
   function isPrintPage(url) {
     return url.includes("/printable");
@@ -216,9 +229,12 @@ function Site(props) {
   }, [location, navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
+    <div
+      dir={SITE_DIRECTION}
+      className="flex flex-col min-h-screen bg-white dark:bg-gray-900"
+    >
       <Helmet>
-        <html lang="en" />
+        <html lang={SITE_LANGUAGE} dir={SITE_DIRECTION} />
         <meta charset="utf-8" />
         <meta name="theme-color" content="#2B3A42" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -256,7 +272,7 @@ function Site(props) {
         <link
           rel="alternate"
           type="application/rss+xml"
-          title="webpack Blog"
+          title="مدونة webpack"
           href="https://webpack.js.org/feed.xml"
         />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -278,8 +294,8 @@ function Site(props) {
           toggleSidebar={_toggleSidebar}
           links={[
             {
-              content: "Documentation",
-              ariaLabel: "webpack documentation",
+              content: "التوثيق",
+              ariaLabel: "توثيق webpack",
               url: "/concepts/",
               isActive: (_, location) =>
                 /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
@@ -292,11 +308,11 @@ function Site(props) {
               ),
             },
             {
-              content: "Contribute",
+              content: "المساهمة",
               url: "/contribute/",
-              ariaLabel: "contribute to webpack",
+              ariaLabel: "المساهمة في webpack",
             },
-            { content: "Blog", url: "/blog/", ariaLabel: "webpack blog" },
+            { content: "المدونة", url: "/blog/", ariaLabel: "مدونة webpack" },
           ]}
         />
         {location.pathname !== "/" && <ReadingProgress />}

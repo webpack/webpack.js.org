@@ -1,30 +1,17 @@
 ---
-title: To v2 or v3 from v1
+title: من v1 إلى v2 أو v3
 sort: 3
 contributors:
-  - sokra
-  - jhnns
-  - grgur
-  - domfarolino
-  - johnnyreilly
-  - jouni-kantola
-  - frederikprijck
-  - chrisVillanueva
-  - bebraw
-  - howdy39
-  - selbekk
-  - ndelangen
-  - EugeneHlushko
-  - byzyk
+  - RlxChap2
 ---
 
-The following sections describe the major changes from webpack 1 to 2.
+تشرح الأقسام التالية أهم التغييرات عند الانتقال من webpack 1 إلى 2.
 
-T> Note that there were far fewer changes between 2 and 3, so that migration shouldn't be too bad. If you are running into issues, please see [the changelog](https://github.com/webpack/webpack/releases) for details.
+T> لاحظ أن التغييرات بين 2 و3 كانت أقل بكثير، لذلك لا يفترض أن تكون الترقية صعبة. إذا واجهت مشاكل، راجع [سجل التغييرات](https://github.com/webpack/webpack/releases) للتفاصيل.
 
-## resolve.root, resolve.fallback, resolve.modulesDirectories
+## resolve.root وresolve.fallback وresolve.modulesDirectories
 
-These options were replaced by a single option `resolve.modules`. See [resolving](/configuration/resolve) for more usage.
+تم استبدال هذه الخيارات بخيار واحد هو `resolve.modules`. راجع [resolving](/configuration/resolve) لمزيد من الاستخدامات.
 
 ```diff
   resolve: {
@@ -38,17 +25,17 @@ These options were replaced by a single option `resolve.modules`. See [resolving
 
 ## resolve.extensions
 
-This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
+لم يعد هذا الخيار يحتاج إلى تمرير نص فارغ. تم نقل هذا السلوك إلى `resolve.enforceExtension`. راجع [resolving](/configuration/resolve) لمزيد من الاستخدامات.
 
 ## resolve.\*
 
-Several APIs were changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
+تغيرت عدة APIs هنا. لم تُذكر بالتفصيل لأنها ليست شائعة الاستخدام. راجع [resolving](/configuration/resolve) للتفاصيل.
 
-## module.loaders is now module.rules
+## module.loaders أصبحت module.rules
 
-The old loader configuration was superseded by a more powerful rules system, which allows configuration of loaders and more.
-For compatibility reasons, the old `module.loaders` syntax is still valid and the old names are parsed.
-The new naming conventions are easier to understand and are a good reason to upgrade the configuration to using `module.rules`.
+استُبدلت إعدادات loaders القديمة بنظام rules أقوى، يسمح بإعداد loaders وأشياء أخرى.
+ولأسباب توافقية، ما زالت صيغة `module.loaders` القديمة صالحة، وما زالت الأسماء القديمة تُقرأ.
+لكن اصطلاحات التسمية الجديدة أوضح وأسهل للفهم، وهذا سبب جيد لتحديث الإعدادات إلى `module.rules`.
 
 ```diff
   module: {
@@ -82,11 +69,10 @@ The new naming conventions are easier to understand and are a good reason to upg
   }
 ```
 
-## Chaining loaders
+## ربط loaders كسلسلة
 
-Like in webpack 1, loaders can be chained to pass results from loader to loader. Using the [rule.use](/configuration/module/#ruleuse)
-configuration option, `use` can be set to an array of loaders.
-In webpack 1, loaders were commonly chained with `!`. This style is only supported using the legacy option `module.loaders`.
+كما في webpack 1، يمكن ربط loaders كسلسلة لتمرير الناتج من loader إلى آخر. باستخدام خيار الإعداد [rule.use](/configuration/module/#ruleuse)، يمكن ضبط `use` كـ array من loaders.
+في webpack 1، كان من الشائع ربط loaders باستخدام `!`. هذا الأسلوب لا يزال مدعومًا فقط عبر الخيار القديم `module.loaders`.
 
 ```diff
   module: {
@@ -103,9 +89,9 @@ In webpack 1, loaders were commonly chained with `!`. This style is only support
   }
 ```
 
-## Automatic `-loader` module name extension removed
+## إزالة الإضافة التلقائية `-loader` من أسماء modules
 
-It is not possible anymore to omit the `-loader` extension when referencing loaders:
+لم يعد ممكنًا حذف اللاحقة `-loader` عند الإشارة إلى loaders:
 
 ```diff
   module: {
@@ -124,7 +110,7 @@ It is not possible anymore to omit the `-loader` extension when referencing load
   }
 ```
 
-You can still opt-in to the old behavior with the `resolveLoader.moduleExtensions` configuration option, but this is not recommended.
+ما زال بإمكانك تفعيل السلوك القديم باستخدام خيار الإعداد `resolveLoader.moduleExtensions`، لكن هذا غير موصى به.
 
 ```diff
 + resolveLoader: {
@@ -132,12 +118,11 @@ You can still opt-in to the old behavior with the `resolveLoader.moduleExtension
 + }
 ```
 
-See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
+راجع [#2986](https://github.com/webpack/webpack/issues/2986) لمعرفة سبب هذا التغيير.
 
-## json-loader is not required anymore
+## لم يعد json-loader مطلوبًا
 
-When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
-file with the [`json-loader`](https://github.com/webpack-contrib/json-loader).
+عندما لا يكون هناك loader معدّ لملف JSON، سيحاول webpack تلقائيًا تحميل ملف JSON باستخدام [`json-loader`](https://github.com/webpack-contrib/json-loader).
 
 ```diff
   module: {
@@ -150,16 +135,15 @@ file with the [`json-loader`](https://github.com/webpack-contrib/json-loader).
   }
 ```
 
-[We decided to do this](https://github.com/webpack/webpack/issues/3363) in order to iron out environment differences
-between webpack, node.js and browserify.
+[قررنا فعل ذلك](https://github.com/webpack/webpack/issues/3363) لتقليل الفروقات بين بيئات webpack وnode.js وbrowserify.
 
-## Loaders in configuration resolve relative to context
+## حل loaders في الإعدادات يتم نسبة إلى context
 
-In **webpack 1**, configured loaders resolve relative to the matched file. However, in **webpack 2**, configured loaders resolve relative to the `context` option.
+في **webpack 1**، كانت loaders المعرّفة في الإعدادات تُحل نسبة إلى الملف المطابق. أما في **webpack 2**، فتُحل loaders المعرّفة نسبة إلى خيار `context`.
 
-This solves some problems with duplicate modules caused by loaders when using `npm link` or referencing modules outside of the `context`.
+هذا يحل بعض مشاكل modules المكررة التي تسببها loaders عند استخدام `npm link` أو عند الإشارة إلى modules خارج `context`.
 
-You may remove some hacks to work around this:
+يمكنك إزالة بعض الحلول الالتفافية القديمة:
 
 ```diff
   module: {
@@ -176,7 +160,7 @@ You may remove some hacks to work around this:
   }
 ```
 
-## module.preLoaders and module.postLoaders were removed:
+## إزالة module.preLoaders وmodule.postLoaders
 
 ```diff
   module: {
@@ -191,9 +175,9 @@ You may remove some hacks to work around this:
   }
 ```
 
-## UglifyJsPlugin sourceMap
+## sourceMap في UglifyJsPlugin
 
-The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`. This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
+أصبحت القيمة الافتراضية لخيار `sourceMap` في `UglifyJsPlugin` هي `false` بدل `true`. هذا يعني أنك إذا كنت تستخدم source maps للكود المصغّر، أو تريد أرقام أسطر صحيحة لتحذيرات uglifyjs، فيجب ضبط `sourceMap: true` داخل `UglifyJsPlugin`.
 
 ```diff
   devtool: "source-map",
@@ -204,10 +188,10 @@ The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead o
   ]
 ```
 
-## UglifyJsPlugin warnings
+## warnings في UglifyJsPlugin
 
-The `compress.warnings` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
-This means that if you want to see uglifyjs warnings, you need to set `compress.warnings` to `true`.
+أصبحت القيمة الافتراضية لخيار `compress.warnings` في `UglifyJsPlugin` هي `false` بدل `true`.
+هذا يعني أنك إذا أردت رؤية تحذيرات uglifyjs، فيجب ضبط `compress.warnings` على `true`.
 
 ```diff
   devtool: "source-map",
@@ -220,13 +204,13 @@ This means that if you want to see uglifyjs warnings, you need to set `compress.
   ]
 ```
 
-## UglifyJsPlugin minimize loaders
+## minimize loaders في UglifyJsPlugin
 
-`UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in the long-term. See loader documentation for relevant options.
+لم يعد `UglifyJsPlugin` يحوّل loaders إلى minimize mode. على المدى الطويل، يجب تمرير إعداد `minimize: true` عبر خيارات loader. راجع توثيق loader لمعرفة الخيارات المناسبة.
 
-The minimize mode for loaders will be removed in webpack 3 or later.
+ستتم إزالة minimize mode الخاصة بـ loaders في webpack 3 أو إصدار لاحق.
 
-To keep compatibility with old loaders, loaders can be switched to minimize mode via plugin:
+للحفاظ على التوافق مع loaders القديمة، يمكن تحويل loaders إلى minimize mode عبر plugin:
 
 ```diff
   plugins: [
@@ -236,13 +220,13 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
-## DedupePlugin has been removed
+## تمت إزالة DedupePlugin
 
-`webpack.optimize.DedupePlugin` isn't needed anymore. Remove it from your configuration.
+لم يعد `webpack.optimize.DedupePlugin` مطلوبًا. أزله من إعداداتك.
 
-## BannerPlugin - breaking change
+## BannerPlugin - تغيير كاسر
 
-`BannerPlugin` no longer accepts two parameters, but a single options object.
+لم يعد `BannerPlugin` يقبل parameterين، بل يقبل كائن options واحدًا.
 
 ```diff
   plugins: [
@@ -251,10 +235,10 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
-## OccurrenceOrderPlugin is now on by default
+## OccurrenceOrderPlugin مفعّل افتراضيًا
 
-The `OccurrenceOrderPlugin` is now enabled by default and has been renamed (`OccurenceOrderPlugin` in webpack 1).
-Thus make sure to remove the plugin from your configuration:
+أصبح `OccurrenceOrderPlugin` مفعّلًا افتراضيًا، وتمت إعادة تسميته من `OccurenceOrderPlugin` في webpack 1.
+لذلك تأكد من إزالة plugin من إعداداتك:
 
 ```diff
   plugins: [
@@ -265,13 +249,13 @@ Thus make sure to remove the plugin from your configuration:
   ]
 ```
 
-## ExtractTextWebpackPlugin - breaking change
+## ExtractTextWebpackPlugin - تغيير كاسر
 
-[ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) requires version 2 to work with webpack 2.
+يتطلب [ExtractTextPlugin](https://github.com/webpack/extract-text-webpack-plugin) الإصدار 2 حتى يعمل مع webpack 2.
 
 `npm install --save-dev extract-text-webpack-plugin`
 
-The configuration changes for this plugin are mainly syntactical.
+تغييرات الإعدادات لهذا plugin في الغالب تغييرات في الصيغة.
 
 ### ExtractTextPlugin.extract
 
@@ -304,17 +288,17 @@ plugins: [
 ]
 ```
 
-## Full dynamic requires now fail by default
+## full dynamic requires تفشل افتراضيًا الآن
 
-A dependency with only an expression (i. e. `require(expr)`) will now create an empty context instead of the context of the complete directory.
+الاعتماد الذي يحتوي على expression فقط، مثل `require(expr)`، سينشئ الآن context فارغًا بدل context للمجلد كاملًا.
 
-Code like this should be refactored as it won't work with ES2015 modules. If this is not possible you can use the `ContextReplacementPlugin` to hint the compiler towards the correct resolving.
+يجب إعادة كتابة كود بهذا الشكل لأنه لن يعمل مع ES2015 modules. إذا لم يكن ذلك ممكنًا، يمكنك استخدام `ContextReplacementPlugin` لإعطاء compiler تلميحًا عن resolving الصحيح.
 
-?> Link to an article about dynamic dependencies.
+?> رابط إلى مقال عن dynamic dependencies.
 
-### Using custom arguments in CLI and configuration
+### استخدام arguments مخصصة في CLI والإعدادات
 
-If you abused the CLI to pass custom arguments to the configuration like so:
+إذا كنت تستخدم CLI لتمرير arguments مخصصة إلى الإعدادات بهذا الشكل:
 
 `webpack --custom-stuff`
 
@@ -326,9 +310,9 @@ const customStuff = process.argv.includes("--custom-stuff");
 module.exports = config;
 ```
 
-You may notice that this is no longer allowed. The CLI is more strict now.
+فقد تلاحظ أن هذا لم يعد مسموحًا. أصبحت CLI أكثر صرامة الآن.
 
-Instead there is an interface for passing arguments to the configuration. This should be used instead. Future tools may rely on this.
+بدلًا من ذلك، توجد واجهة مخصصة لتمرير arguments إلى الإعدادات. يجب استخدامها، وقد تعتمد عليها أدوات مستقبلية.
 
 `webpack --env.customStuff`
 
@@ -340,17 +324,17 @@ module.exports = function (env) {
 };
 ```
 
-See [CLI](/api/cli).
+راجع [CLI](/api/cli).
 
-## require.ensure and AMD require are asynchronous
+## require.ensure وAMD require صارت غير متزامنة
 
-These functions are now always asynchronous instead of calling their callback synchronously if the chunk is already loaded.
+أصبحت هذه الدوال دائمًا غير متزامنة، بدل استدعاء callback بشكل متزامن إذا كان chunk محملًا بالفعل.
 
-**`require.ensure` now depends upon native `Promise`s. If using `require.ensure` in an environment that lacks them then you will need a polyfill.**
+**تعتمد `require.ensure` الآن على `Promise` الأصلية. إذا كنت تستخدم `require.ensure` في بيئة لا توفرها، فستحتاج إلى polyfill.**
 
-## Loader configuration is through `options`
+## إعداد Loader يتم عبر `options`
 
-You can _no longer_ configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
+لم يعد بإمكانك إعداد loader بخاصية مخصصة داخل `webpack.config.js`. يجب فعل ذلك عبر `options`. الإعداد التالي الذي يستخدم الخاصية `ts` لم يعد صالحًا مع webpack 2:
 
 ```js
 module.exports = {
@@ -363,14 +347,14 @@ module.exports = {
       },
     ],
   },
-  // does not work with webpack 2
+  // لا يعمل مع webpack 2
   ts: { transpileOnly: false },
 };
 ```
 
-### What are `options`?
+### ما هي `options`؟
 
-Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
+سؤال جيد. بدقة، هي واحدة من طريقتين لإعداد webpack loader. في السابق كانت `options` تُسمى `query`، وكانت نصًا يمكن إضافته إلى اسم loader. تشبه query string، لكنها تملك [قدرات أكبر](https://github.com/webpack/loader-utils#parsequery):
 
 ```js
 module.exports = {
@@ -386,7 +370,7 @@ module.exports = {
 };
 ```
 
-But it can also be a separately specified object that's supplied alongside a loader:
+ويمكن أيضًا أن تكون object مستقلًا يُمرر بجانب loader:
 
 ```js
 module.exports = {
@@ -403,11 +387,11 @@ module.exports = {
 };
 ```
 
-## LoaderOptionsPlugin context
+## context في LoaderOptionsPlugin
 
-Some loaders need context information and read them from the configuration. This needs to be passed via loader options in the long-term. See loader documentation for relevant options.
+بعض loaders تحتاج إلى معلومات context وتقرأها من الإعدادات. على المدى الطويل، يجب تمرير هذه المعلومات عبر خيارات loader. راجع توثيق loader لمعرفة الخيارات المناسبة.
 
-To keep compatibility with old loaders, this information can be passed via plugin:
+للحفاظ على التوافق مع loaders القديمة، يمكن تمرير هذه المعلومات عبر plugin:
 
 ```diff
   plugins: [
@@ -421,11 +405,11 @@ To keep compatibility with old loaders, this information can be passed via plugi
 
 ## debug
 
-The `debug` option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
+كان خيار `debug` يحوّل loaders إلى debug mode في webpack 1. على المدى الطويل، يجب تمريره عبر خيارات loader. راجع توثيق loader لمعرفة الخيارات المناسبة.
 
-The debug mode for loaders will be removed in webpack 3 or later.
+ستتم إزالة debug mode الخاصة بـ loaders في webpack 3 أو إصدار لاحق.
 
-To keep compatibility with old loaders, loaders can be switched to debug mode via a plugin:
+للحفاظ على التوافق مع loaders القديمة، يمكن تحويل loaders إلى debug mode عبر plugin:
 
 ```diff
 - debug: true,
@@ -436,9 +420,9 @@ To keep compatibility with old loaders, loaders can be switched to debug mode vi
   ]
 ```
 
-## Code Splitting with ES2015
+## Code Splitting مع ES2015
 
-In webpack 1, you could use [`require.ensure()`](/api/module-methods/#requireensure) as a method to lazily-load chunks for your application:
+في webpack 1، كان بإمكانك استخدام [`require.ensure()`](/api/module-methods/#requireensure) كطريقة لتحميل chunks بشكل كسول داخل تطبيقك:
 
 ```js
 require.ensure([], (require) => {
@@ -446,7 +430,7 @@ require.ensure([], (require) => {
 });
 ```
 
-The ES2015 Loader spec defines [`import()`](/api/module-methods/#import-1) as method to load ES2015 Modules dynamically on runtime. Webpack treats `import()` as a split-point and puts the requested module in a separate chunk. `import()` takes the module name as argument and returns a Promise.
+تعرّف مواصفة ES2015 Loader الدالة [`import()`](/api/module-methods/#import-1) كطريقة لتحميل ES2015 Modules ديناميكيًا وقت التشغيل. يتعامل webpack مع `import()` كنقطة تقسيم، ويضع module المطلوب في chunk منفصل. تأخذ `import()` اسم module كـ argument وترجع Promise.
 
 ```js
 function onClick() {
@@ -458,13 +442,13 @@ function onClick() {
 }
 ```
 
-Good news: Failure to load a chunk can now be handled because they are `Promise` based.
+الخبر الجيد: يمكن الآن التعامل مع فشل تحميل chunk لأنها مبنية على `Promise`.
 
 ## Dynamic expressions
 
-It's possible to pass a partial expression to `import()`. This is handled similar to expressions in CommonJS (webpack creates a [context](/plugins/context-replacement-plugin/) with all possible files).
+يمكن تمرير expression جزئي إلى `import()`. يتم التعامل مع هذا بطريقة مشابهة للتعابير في CommonJS، حيث ينشئ webpack [context](/plugins/context-replacement-plugin/) يحتوي على كل الملفات الممكنة.
 
-`import()` creates a separate chunk for each possible module.
+تنشئ `import()` chunk منفصلًا لكل module محتمل.
 
 ```js
 function route(path, query) {
@@ -472,15 +456,15 @@ function route(path, query) {
     (route) => new route.Route(query),
   );
 }
-// This creates a separate chunk for each possible route
+// ينشئ هذا chunk منفصلًا لكل route محتمل
 ```
 
-## Mixing ES2015 with AMD and CommonJS
+## خلط ES2015 مع AMD وCommonJS
 
-As for AMD and CommonJS you can freely mix all three module types (even within the same file). Webpack behaves similar to babel and node-eps in this case:
+كما هو الحال مع AMD وCommonJS، يمكنك خلط أنواع modules الثلاثة بحرية، حتى داخل الملف نفسه. يتصرف webpack بطريقة مشابهة لـ babel وnode-eps في هذه الحالة:
 
 ```js
-// CommonJS consuming ES2015 Module
+// CommonJS يستهلك ES2015 Module
 const book = require("./book");
 
 book.currentPage;
@@ -489,20 +473,20 @@ book.default === "This is a book";
 ```
 
 ```js
-// ES2015 Module consuming CommonJS
+// ES2015 Module يستهلك CommonJS
 import fs from "node:fs"; // module.exports map to default
 
 typeof fs.readFileSync === "function";
 ```
 
 ```js
-// ES2015 Module consuming CommonJS
+// ES2015 Module يستهلك CommonJS
 import { readFileSync } from "node:fs"; // named exports are read from returned object+
 
 typeof readFileSync === "function";
 ```
 
-It is important to note that you will want to tell Babel to not parse these module symbols so webpack can use them. You can do this by setting the following in your `.babelrc` or `babel-loader` options.
+من المهم أن تطلب من Babel ألا يقرأ رموز modules هذه حتى يتمكن webpack من استخدامها. يمكنك فعل ذلك عبر الإعداد التالي في `.babelrc` أو خيارات `babel-loader`.
 
 **.babelrc**
 
@@ -512,13 +496,13 @@ It is important to note that you will want to tell Babel to not parse these modu
 }
 ```
 
-## Hints
+## تلميحات
 
-No need to change something, but opportunities
+ليست تغييرات واجبة، لكنها فرص للتحسين.
 
 ### Template strings
 
-Webpack now supports template strings in expressions. This means you can start using them in webpack constructs:
+يدعم webpack الآن template strings داخل expressions. هذا يعني أنه يمكنك استخدامها في constructs الخاصة بـ webpack:
 
 ```diff
 - require("./templates/" + name);
@@ -527,7 +511,7 @@ Webpack now supports template strings in expressions. This means you can start u
 
 ### Configuration Promise
 
-Webpack now supports returning a `Promise` from the configuration file. This allows async processing in your configuration file.
+يدعم webpack الآن إرجاع `Promise` من ملف الإعدادات. هذا يسمح بتنفيذ معالجة غير متزامنة داخل ملف الإعدادات.
 
 **webpack.config.js**
 
@@ -541,9 +525,9 @@ module.exports = function () {
 };
 ```
 
-### Advanced loader matching
+### مطابقة loaders بشكل متقدم
 
-Webpack now supports more things to match on for loaders.
+يدعم webpack الآن أشياء أكثر للمطابقة عند تطبيق loaders.
 
 ```js
 module.exports = {
@@ -551,36 +535,36 @@ module.exports = {
   module: {
     rules: [
       {
-        resource: /filename/, // matches "/path/filename.js"
-        resourceQuery: /^\?querystring$/, // matches "?querystring"
-        issuer: /filename/, // matches "/path/something.js" if requested from "/path/filename.js"
+        resource: /filename/, // يطابق "/path/filename.js"
+        resourceQuery: /^\?querystring$/, // يطابق "?querystring"
+        issuer: /filename/, // يطابق "/path/something.js" إذا طُلب من "/path/filename.js"
       },
     ],
   },
 };
 ```
 
-### More CLI options
+### خيارات CLI إضافية
 
-There are some new CLI options for you to use:
+توجد بعض خيارات CLI الجديدة التي يمكنك استخدامها:
 
-`--define process.env.NODE_ENV="production"` See [`DefinePlugin`](/plugins/define-plugin/).
+`--define process.env.NODE_ENV="production"` راجع [`DefinePlugin`](/plugins/define-plugin/).
 
-`--display-depth` displays the distance to the entry point for each module.
+`--display-depth` يعرض المسافة إلى entry point لكل module.
 
-`--display-used-exports` display info about which exports are used in a module.
+`--display-used-exports` يعرض معلومات عن exports المستخدمة داخل module.
 
-`--display-max-modules` sets the number for modules displayed in the output (defaults to 15).
+`--display-max-modules` يحدد عدد modules المعروضة في output، والقيمة الافتراضية 15.
 
-`-p` also defines `process.env.NODE_ENV` to `"production"` now.
+`-p` يعرّف الآن `process.env.NODE_ENV` بالقيمة `"production"` أيضًا.
 
-## Loader changes
+## تغييرات Loader
 
-Changes only relevant for loader authors.
+تغييرات تهم مؤلفي loaders فقط.
 
 ### Cacheable
 
-Loaders are now cacheable by default. Loaders must opt-out if they are not cacheable.
+أصبحت loaders قابلة للتخزين المؤقت افتراضيًا. يجب على loader تعطيل ذلك بنفسه إذا لم يكن قابلًا للتخزين المؤقت.
 
 ```diff
   // Cacheable loader
@@ -598,13 +582,13 @@ Loaders are now cacheable by default. Loaders must opt-out if they are not cache
   }
 ```
 
-### Complex options
+### خيارات معقدة
 
-**webpack 1** only supports `JSON.stringify`-able options for loaders.
+كان **webpack 1** يدعم فقط خيارات loaders القابلة للتحويل عبر `JSON.stringify`.
 
-**webpack 2** now supports any JS object as loader options.
+أما **webpack 2** فيدعم الآن أي كائن JS كخيارات loader.
 
-Before webpack [2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1) (i.e. from 2.0.0 through 2.2.0), using complex options required using `ident` for the `options` object to allow its reference from other loaders. **This was removed in 2.2.1** and thus current migrations do not require any use of the `ident` key.
+قبل webpack [2.2.1](https://github.com/webpack/webpack/releases/tag/v2.2.1)، أي من 2.0.0 إلى 2.2.0، كان استخدام الخيارات المعقدة يتطلب استخدام `ident` لكائن `options` حتى يمكن الإشارة إليه من loaders أخرى. **تمت إزالة هذا في 2.2.1**، لذلك لا تحتاج عمليات الترقية الحالية إلى استخدام مفتاح `ident`.
 
 ```diff
 {

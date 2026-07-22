@@ -2,7 +2,7 @@
 title: Dotenv
 sort: 16
 contributors:
-  - xiaoxiaojx
+  - RlxChap2
 related:
   - title: dotenv
     url: https://github.com/motdotla/dotenv
@@ -11,12 +11,12 @@ related:
 ---
 
 <Badge text="5.103.0+" />
-The `dotenv` option enables webpack's built-in environment variable loading from
-`.env` files.
+يُفعِّل الخيار `dotenv` ميزة تحميل متغيّرات البيئة المدمجة في webpack من ملفّات
+`.env`.
 
 `boolean` `object`
 
-Enable and configure the built-in Dotenv plugin to load environment variables from `.env` files.
+فعِّل plugin الـ Dotenv المدمج واضبطه ليُحمِّل متغيّرات البيئة من ملفّات `.env`.
 
 **webpack.config.js**
 
@@ -27,7 +27,7 @@ export default {
 };
 ```
 
-Setting `dotenv` to `true` enables the plugin with default options. For custom configuration, pass an options object:
+ضبط `dotenv` على `true` يُفعِّل الـ plugin بخياراته الافتراضية. أمّا إن أردت تخصيصاً أعمق فمرِّر كائن خيارات:
 
 ```js
 export default {
@@ -40,15 +40,15 @@ export default {
 };
 ```
 
-## Options
+## الخيارات
 
 ### `prefix`
 
 `string` `string[]`
 
-**Default:** `'WEBPACK_'`
+**الافتراضي:** `'WEBPACK_'`
 
-Only expose environment variables that start with the specified prefix(es). This prevents accidental exposure of sensitive variables.
+لا تُكشف من متغيّرات البيئة إلا تلك التي تبدأ بالبادئة (أو البادئات) المُحدَّدة. وهذا يحول دون كشفك المتغيّرات الحسّاسة بغير قصد.
 
 **webpack.config.js**
 
@@ -56,35 +56,35 @@ Only expose environment variables that start with the specified prefix(es). This
 export default {
   // ...
   dotenv: {
-    prefix: "APP_", // Only expose APP_* variables
+    prefix: "APP_", // اكشف فقط متغيّرات APP_*
   },
 };
 ```
 
-**Multiple prefixes:**
+**عدّة بادئات:**
 
 ```js
 export default {
   // ...
   dotenv: {
-    prefix: ["APP_", "CONFIG_"], // Expose both APP_* and CONFIG_* variables
+    prefix: ["APP_", "CONFIG_"], // اكشف متغيّرات APP_* و CONFIG_* كلتيهما
   },
 };
 ```
 
-T> For security reasons, an empty string `''` is not allowed as a prefix, as it would expose all environment variables.
+T> لأسباب أمنية، لا يُسمح بالنصّ الفارغ `''` بادئةً، لأنّه سيكشف كلّ متغيّرات البيئة.
 
 ### `dir`
 
 `boolean` `string`
 
-**Default:** `true`
+**الافتراضي:** `true`
 
-The directory from which `.env` files are loaded.
+المجلَّد الذي تُحمَّل منه ملفّات `.env`.
 
-- `true` - Load from the project root (context)
-- `false` - Disable `.env` file loading
-- `string` - Relative path from project root or absolute path
+- `true` — التحميل من جذر المشروع (السياق).
+- `false` — تعطيل تحميل ملفّات `.env`.
+- `string` — مسار نسبي من جذر المشروع، أو مسار مطلق.
 
 **webpack.config.js**
 
@@ -92,18 +92,18 @@ The directory from which `.env` files are loaded.
 export default {
   // ...
   dotenv: {
-    dir: "./config", // Load from ./config directory
+    dir: "./config", // التحميل من مجلَّد ./config
   },
 };
 ```
 
-**Disable loading:**
+**تعطيل التحميل:**
 
 ```js
 export default {
   // ...
   dotenv: {
-    dir: false, // Only use process.env variables
+    dir: false, // الاكتفاء بمتغيّرات process.env
   },
 };
 ```
@@ -112,11 +112,11 @@ export default {
 
 `string[]`
 
-**Default:** `['.env', '.env.local', '.env.[mode]', '.env.[mode].local']`
+**الافتراضي:** `['.env', '.env.local', '.env.[mode]', '.env.[mode].local']`
 
-Template patterns for `.env` file names. Use `[mode]` as a placeholder for the webpack mode (e.g., `development`, `production`).
+أنماط قوالب لأسماء ملفّات `.env`. استعمل `[mode]` بوصفه عنصراً نائباً لـ webpack mode (مثل `development` و `production`).
 
-Files are loaded in the order specified, with later files overriding earlier ones.
+تُحمَّل الملفّات بالترتيب المُحدَّد، والملفّات اللاحقة تُلغي ما سبقها من قيم متطابقة.
 
 **webpack.config.js**
 
@@ -125,12 +125,12 @@ export default {
   // ...
   mode: "production",
   dotenv: {
-    template: [".env", ".env.production"], // Only load these two files
+    template: [".env", ".env.production"], // اكتفِ بتحميل هذين الملفّين فقط
   },
 };
 ```
 
-**Custom patterns:**
+**أنماط مخصَّصة:**
 
 ```js
 export default {
@@ -141,72 +141,72 @@ export default {
       ".env.local",
       ".env.[mode]",
       ".env.[mode].local",
-      ".env.override", // Always loaded last
+      ".env.override", // يُحمَّل دائماً في الأخير
     ],
   },
 };
 ```
 
-T> The `[mode]` placeholder will be replaced with the current webpack mode. For example, in `production` mode, `.env.[mode]` becomes `.env.production`.
+T> سيُستبدَل العنصر النائب `[mode]` بقيمة webpack mode الحالية. فمثلاً، في وضع `production`، يصير `.env.[mode]` هو `.env.production`.
 
-## File Priority
+## أولوية الملفّات
 
-Environment files are loaded in order, with later files having higher priority:
+تُحمَّل ملفّات البيئة بحسب الترتيب، والملفّات اللاحقة لها الأولوية الأعلى:
 
-1. `.env` - Loaded in all modes
-2. `.env.local` - Loaded in all modes, ignored by git (convention)
-3. `.env.[mode]` - Only loaded in specified mode (e.g., `.env.production`)
-4. `.env.[mode].local` - Only loaded in specified mode, ignored by git
+1. `.env` — يُحمَّل في كلّ الأوضاع.
+2. `.env.local` — يُحمَّل في كلّ الأوضاع، ويُتجاهَل من git (عُرفاً).
+3. `.env.[mode]` — لا يُحمَّل إلا في الوضع المُحدَّد (مثل `.env.production`).
+4. `.env.[mode].local` — لا يُحمَّل إلا في الوضع المُحدَّد، ويُتجاهَل من git.
 
-Variables from later files override those from earlier files. Additionally, variables already set in `process.env` take the highest priority.
+تُلغي متغيّرات الملفّات اللاحقة قيمَ الملفّات السابقة. وفوق ذلك، تأخذ المتغيّرات المضبوطة فعلاً في `process.env` الأولوية القصوى.
 
-## Variable Expansion
+## توسيع المتغيّرات
 
-Environment variables are automatically expanded using the [dotenv-expand](https://github.com/motdotla/dotenv-expand) syntax:
+تُوسَّع متغيّرات البيئة تلقائياً وفق صياغة [dotenv-expand](https://github.com/motdotla/dotenv-expand):
 
 **.env**
 
 ```bash
 WEBPACK_API_BASE=https://api.example.com
 WEBPACK_API_URL=${WEBPACK_API_BASE}/v1
-WEBPACK_PORT=${WEBPACK_PORT:-3000}  # Use WEBPACK_PORT from process.env, or 3000 as default
+WEBPACK_PORT=${WEBPACK_PORT:-3000}  # استعمل WEBPACK_PORT من process.env، وإلا اعتمد 3000 افتراضياً
 ```
 
-**In your code:**
+**في شيفرتك:**
 
 ```js
 console.log(process.env.WEBPACK_API_URL); // "https://api.example.com/v1"
-console.log(process.env.WEBPACK_PORT); // Value of process.env.WEBPACK_PORT if set, otherwise "3000"
+console.log(process.env.WEBPACK_PORT); // قيمة process.env.WEBPACK_PORT إن وُجدت، وإلا "3000"
 ```
 
-T> During expansion, you can reference any variable from `process.env` (e.g., `${PORT}`), but only variables with the specified prefix (e.g., `WEBPACK_`) will be exposed in your final bundle. In the example above, `${WEBPACK_PORT:-3000}` references `WEBPACK_PORT` from `process.env` if it exists.
+T> أثناء التوسيع، يمكنك الإشارة إلى أيّ متغيّر من `process.env` (كـ `${PORT}`)، غير أنّه لا يُكشف في الحزمة النهائية إلا المتغيّرات التي تحمل البادئة المُحدَّدة (كـ `WEBPACK_`). في المثال أعلاه، يُشير `${WEBPACK_PORT:-3000}` إلى `WEBPACK_PORT` من `process.env` إن كان موجوداً.
 
-**Expansion behavior example:**
+**مثال على سلوك التوسيع:**
 
 ```bash
-# .env file
+# ملفّ .env
 WEBPACK_API_URL=${API_BASE:-https://default.com}/api
 ```
 
 ```bash
-# Run with environment variable
+# شغِّل مع متغيّر بيئة
 API_BASE=https://custom.com npm run build
 ```
 
-Result: `process.env.WEBPACK_API_URL` will be `"https://custom.com/api"` because `API_BASE` from `process.env` is used during expansion, even though `API_BASE` itself won't be exposed in the bundle (it lacks the `WEBPACK_` prefix).
+النتيجة: ستصبح `process.env.WEBPACK_API_URL` هي `"https://custom.com/api"`، لأنّ `API_BASE` من `process.env` يُستعمَل في أثناء التوسيع، وإن كان `API_BASE` نفسه لن يُكشف في الحزمة (لأنّه لا يحمل البادئة `WEBPACK_`).
 
-## Usage Examples
+## أمثلة على الاستخدام
 
-### Basic Usage
+### الاستخدام الأساسي
 
-Create a `.env` file in your project root:
+أنشئ ملفّ `.env` في جذر مشروعك:
 
 **.env**
 
 ```bash
 WEBPACK_API_URL=https://api.example.com
 WEBPACK_FEATURE_FLAG=true
-SECRET_KEY=should-not-be-exposed  # Won't be exposed (no WEBPACK_ prefix)
+SECRET_KEY=should-not-be-exposed  # لن يُكشف (لا يحمل البادئة WEBPACK_)
 ```
 
 **webpack.config.js**
@@ -214,21 +214,21 @@ SECRET_KEY=should-not-be-exposed  # Won't be exposed (no WEBPACK_ prefix)
 ```js
 export default {
   // ...
-  dotenv: true, // Uses default prefix "WEBPACK_"
+  dotenv: true, // يستعمل البادئة الافتراضية "WEBPACK_"
 };
 ```
 
-**In your application:**
+**في تطبيقك:**
 
 ```js
 console.log(process.env.WEBPACK_API_URL); // "https://api.example.com"
 console.log(process.env.WEBPACK_FEATURE_FLAG); // "true"
-console.log(process.env.SECRET_KEY); // undefined (not exposed)
+console.log(process.env.SECRET_KEY); // undefined (غير مكشوف)
 ```
 
-### Mode-Specific Configuration
+### تخصيص خاصّ بكلّ وضع
 
-Create mode-specific files:
+أنشئ ملفّات خاصّة بكلّ وضع:
 
 **.env**
 
@@ -251,11 +251,11 @@ WEBPACK_API_URL=https://dev-api.example.com
 WEBPACK_DEBUG=true
 ```
 
-When building with `--mode production`, `WEBPACK_API_URL` will be `"https://prod-api.example.com"`.
+حين تبني مع `--mode production`، ستكون `WEBPACK_API_URL` مساوية لـ `"https://prod-api.example.com"`.
 
-### Multiple Prefixes
+### عدّة بادئات
 
-Expose variables with different prefixes:
+اكشف متغيّرات ذات بادئات مختلفة:
 
 **.env**
 
@@ -264,7 +264,7 @@ APP_NAME=MyApp
 APP_VERSION=1.0.0
 CONFIG_TIMEOUT=5000
 CONFIG_RETRY=3
-PRIVATE_KEY=secret  # Won't be exposed
+PRIVATE_KEY=secret  # لن يُكشف
 ```
 
 **webpack.config.js**
@@ -278,9 +278,9 @@ export default {
 };
 ```
 
-### Custom Directory and Template
+### مجلَّد وقالب مخصَّصان
 
-Load environment files from a custom location with custom naming:
+حمِّل ملفّات البيئة من موقع مخصَّص وبأسماء مخصَّصة:
 
 **webpack.config.js**
 
@@ -294,25 +294,25 @@ export default {
 };
 ```
 
-This will load:
+سيُحمَّل من هذا التخصيص:
 
 - `./environments/.env.base`
-- `./environments/.env.production` (in production mode)
+- `./environments/.env.production` (في وضع production)
 
-## Security Considerations
+## اعتبارات أمنية
 
-W> **Never commit sensitive data to version control!**
+W> **لا تُودِع البيانات الحسّاسة في نظام التحكّم بالإصدار أبداً!**
 
-- Use `.gitignore` to exclude `.env.local` and `.env.[mode].local` files
-- Only expose environment variables with specific prefixes
-- Never use an empty string `''` as a prefix
-- Consider using different `.env` files for different environments
-- Store production secrets in your deployment platform's environment variables
+- استعمل `.gitignore` لاستبعاد ملفّات `.env.local` و `.env.[mode].local`.
+- اكشف فقط متغيّرات البيئة ذات البادئات المُحدَّدة.
+- لا تستعمل النصّ الفارغ `''` بادئةً.
+- فكِّر في استعمال ملفّات `.env` منفصلة لكلّ بيئة.
+- خزِّن أسرار الإنتاج في متغيّرات البيئة الخاصّة بمنصّة النشر لديك.
 
 **.gitignore**
 
 ```bash
-# local env files
+# ملفّات البيئة المحلية
 .env.local
 .env.*.local
 ```

@@ -12,7 +12,7 @@ describe("Mobile Sidebar", () => {
       "sidebar-mobile--visible",
     );
 
-    cy.get('button[aria-label="Toggle navigation menu"]').click();
+    cy.get('button[aria-label="فتح قائمة التنقل"]').click();
     cy.get(".sidebar-mobile").should("have.class", "sidebar-mobile--visible");
 
     cy.get(".sidebar-mobile__close").click();
@@ -23,7 +23,7 @@ describe("Mobile Sidebar", () => {
   });
 
   it("should close sidebar when clicking outside", () => {
-    cy.get('button[aria-label="Toggle navigation menu"]').click();
+    cy.get('button[aria-label="فتح قائمة التنقل"]').click();
     // Click to the right of the 300px wide sidebar
     cy.get("body").click(350, 500, { force: true });
     cy.get(".sidebar-mobile").should(
