@@ -102,7 +102,7 @@
     "workbox-window": "^7.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^8.0.1",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
     "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.28.5",
