@@ -123,6 +123,29 @@ export default {
 };
 ```
 
+## infrastructureLogging.progress
+
+<Badge text="5.109.0+" />
+
+`boolean | 'auto' = false`
+
+Show built-in build progress, without adding [`ProgressPlugin`](/plugins/progress-plugin/) manually. `'auto'` shows the progress bar only in interactive terminals (TTY). When [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled, it defaults to `'auto'`.
+
+The progress bar is rendered through the default logging [`stream`](#infrastructureloggingstream), so it has no effect when a custom [`console`](#infrastructureloggingconsole) is provided.
+
+This supersedes third-party progress plugins such as [WebpackBar](https://www.npmjs.com/package/webpackbar).
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  infrastructureLogging: {
+    progress: "auto",
+  },
+};
+```
+
 ## infrastructureLogging.stream
 
 <Badge text="5.31.0+" />

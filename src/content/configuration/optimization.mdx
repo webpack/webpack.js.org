@@ -112,7 +112,7 @@ export default {
 
 ## optimization.concatenateModules
 
-`boolean`
+`boolean` `object`
 
 Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
 
@@ -131,6 +131,23 @@ export default {
   // ...
   optimization: {
     concatenateModules: true,
+  },
+};
+```
+
+Since webpack 5.109.0, CommonJS modules with statically analyzable exports are concatenated as well, and an object form is accepted for advanced options:
+
+- `commonjs` (`boolean = true`): Also concatenate CommonJS modules with statically analyzable exports. Set it to `false` to restrict concatenation to ECMAScript modules, matching the behavior of earlier webpack versions.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  optimization: {
+    concatenateModules: {
+      commonjs: false,
+    },
   },
 };
 ```

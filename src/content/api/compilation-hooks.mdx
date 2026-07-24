@@ -802,3 +802,73 @@ class CssOrderByPathPlugin {
 ```
 
 The hook is a `SyncBailHook`, so the first tap to return a non-`undefined` value wins. Subsequent taps are not invoked for that call.
+
+## HtmlModulesPlugin.getCompilationHooks(compilation)
+
+<Badge text="5.109.0+" />
+
+When [`experiments.html`](/configuration/experiments/#experimentshtml) is enabled, the internal `HtmlModulesPlugin` exposes a set of per-compilation hooks for injecting and transforming the emitted HTML pages. Access them via the static `getCompilationHooks(compilation)` method:
+
+```js
+const webpack = require("webpack");
+
+class MyHtmlPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap("MyHtmlPlugin", (compilation) => {
+      const hooks =
+        webpack.html.HtmlModulesPlugin.getCompilationHooks(compilation);
+      // tap into hooks here
+    });
+  }
+}
+```
+
+W> These hooks are only registered when `experiments.html` is enabled and may evolve while the HTML feature is experimental.
+
+### injectTags
+
+`AsyncSeriesWaterfallHook<[HtmlTagDescriptor[], { outputName, html }]>`
+
+Called with the list of extra tags to inject into each page (initially empty) plus the current HTML. Push descriptors and return the list; webpack serializes and places them. It runs before [`output.html.csp`](/configuration/output/#outputhtmlcsp), so injected inline `<script>` / `<style>` tags are hashed like the page's own.
+
+Each `HtmlTagDescriptor` accepts:
+
+- `tag` (`string`): tag name, e.g. `'script'` / `'link'` / `'meta'`.
+- `attrs` (`object`): attributes; `true` renders a bare boolean attribute, `false` / `undefined` omits it.
+- `children` (`string`): inner content (ignored for void elements like `<link>` / `<meta>`).
+- `injectTo` (`'head' | 'body' | 'head-prepend' | 'body-prepend'`): placement, defaults to `'head'`.
+- `voidTag` (`boolean`): force a void element (no closing tag); inferred from the tag name when omitted.
+
+```js
+hooks.injectTags.tap("MyHtmlPlugin", (tags) => {
+  tags.push({
+    tag: "meta",
+    attrs: { name: "theme-color", content: "#2b3a42" },
+  });
+  return tags;
+});
+```
+
+### transformTags
+
+`AsyncSeriesHook<[HtmlMutableTag[], { outputName, html }]>`
+
+Called with the page's existing `<script>` / `<link>` / `<style>` / `<meta>` tags (webpack's own and any injected) as mutable descriptors. Mutate `attrs` (add a `nonce` / `data-*` attribute, switch `defer` and `async`, ...), set `remove: true`, or change `injectTo` to move a tag between `<head>` and `<body>`; webpack rewrites the changed tags. Add new tags with [`injectTags`](#injecttags) instead, and don't reorder the array itself.
+
+### transformHtml
+
+`AsyncSeriesWaterfallHook<[string, { outputName: string }]>`
+
+Called with each emitted page's final HTML (all placeholders resolved) just before it is written. Return the (possibly transformed) HTML, e.g. to minify it:
+
+```js
+hooks.transformHtml.tapPromise("MyHtmlPlugin", async (html, { outputName }) =>
+  html.replace("<!-- banner -->", "..."),
+);
+```
+
+### htmlEmitted
+
+`AsyncSeriesHook<[{ outputName: string }]>`
+
+Called once each page's HTML asset has been finalized — a post-emit notification.
