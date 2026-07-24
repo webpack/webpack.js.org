@@ -161,11 +161,13 @@ export default {
 
 ### cache.compression
 
-`false | 'gzip' | 'brotli'`
+`false | 'gzip' | 'brotli' | 'zstd'`
 
 <Badge text="5.42.0+" />
 
 Compression type used for the cache files. By default it is `false`.
+
+T> `'zstd'` (Zstandard) is available since webpack 5.109.0 and requires Node.js >= 22.15.0, where the built-in `node:zlib` zstd bindings are available.
 
 `cache.compression` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
