@@ -1,0 +1,314 @@
+---
+title: Webpack 5.109
+sort: 20260724
+contributors:
+  - bjohansebas
+---
+
+import banner from "../../assets/blog/webpack-5-109.png";
+
+<img src={banner} alt="webpack 5.109 release" />
+
+Webpack 5.109 is out, and it is one of the largest minor releases in recent memory. The headline: the built-in CSS, HTML, TypeScript, and async WebAssembly support now defaults to `"auto"`, enabled out of the box unless a loader is already registered for those files, so existing setups keep working unchanged while new projects get the zero-config experience.
+
+Beyond that, the native HTML support takes a big leap toward `html-webpack-plugin` parity, a full resource-hints system lands, and a set of Vite-compatible module APIs arrives (`import.meta.glob`, `import.meta.env` defaults, `import.meta.resolve`, and asset query suffixes), plus CommonJS scope hoisting, a built-in progress bar, and another large batch of performance work.
+
+Explore what's new:
+
+- [**Built-in Support Goes `"auto"`**](#built-in-support-goes-auto)
+- [**Closing the Gap with `html-webpack-plugin`**](#closing-the-gap-with-html-webpack-plugin)
+  - [Head Generation: `title`, `meta`, and `base`](#head-generation-title-meta-and-base)
+  - [Controlling Tag Injection](#controlling-tag-injection)
+  - [Inlining Chunks into HTML](#inlining-chunks-into-html)
+  - [Favicons and Web App Manifest](#favicons-and-web-app-manifest)
+  - [Content-Security-Policy and Subresource Integrity](#content-security-policy-and-subresource-integrity)
+  - [Hooks for Plugins](#hooks-for-plugins)
+  - [A Smarter HTML Parser](#a-smarter-html-parser)
+- [**Resource Hints**](#resource-hints)
+- [**Vite-Compatible Module APIs**](#vite-compatible-module-apis)
+  - [`import.meta.glob`](#importmetaglob)
+  - [`import.meta.env` Defaults](#importmetaenv-defaults)
+  - [`import.meta.resolve`](#importmetaresolve)
+  - [Asset Query Suffixes](#asset-query-suffixes)
+  - [Fine-Grained `import.meta` Options](#fine-grained-importmeta-options)
+- [**CommonJS Module Concatenation**](#commonjs-module-concatenation)
+- [**Built-in Build Progress**](#built-in-build-progress)
+- [**Bundling Worklets**](#bundling-worklets)
+- [**CSS Improvements**](#css-improvements)
+- [**Externals**](#externals)
+- [**Other Improvements**](#other-improvements)
+- [**webpack-dev-server 6**](#webpack-dev-server-6)
+- [**Bug Fixes and Performance**](#bug-fixes-and-performance)
+
+## Built-in Support Goes `"auto"`
+
+The last few releases built native support for CSS, HTML, TypeScript, and WebAssembly into webpack core, all behind opt-in flags. Webpack 5.109 flips those flags to a new `"auto"` default that enables each feature **unless a loader is already registered for those files**:
+
+- [`experiments.css`](/configuration/experiments/#experimentscss) stays off when a rule with a loader matches `.css` or `.module.css` (your `css-loader` / `mini-css-extract-plugin` setup wins).
+- [`experiments.html`](/configuration/experiments/#experimentshtml) stays off when a rule matches `.html` (your `html-loader` setup wins).
+- [`experiments.typescript`](/configuration/experiments/#experimentstypescript) enables the built-in type-stripping when Node.js supports it (>= 22.6) and no rule matches `.ts` / `.mts` / `.cts` (so `ts-loader` and `swc-loader` win).
+- `experiments.asyncWebAssembly` enables the async Wasm support unless `.wasm` is claimed by a rule or by `syncWebAssembly`.
+
+The result: existing configurations behave exactly as before, while a fresh project can import CSS, HTML, TypeScript, and Wasm with **zero loaders and zero configuration**. You can still pin any of these explicitly with `true` or `false`, and [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) resolves them all to `true`.
+
+## Closing the Gap with `html-webpack-plugin`
+
+Webpack 5.107 made HTML importable and 5.108 made it an entry point. This release is about getting closer to `html-webpack-plugin`: most of what the plugin is used for day to day, from head generation to CSP, is now built into webpack core.
+
+W> **This feature is experimental.** The overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+
+### Head Generation: `title`, `meta`, and `base`
+
+[`output.html`](/configuration/output/#outputhtml) can now scaffold the document head for you. [`title`](/configuration/output/#outputhtmltitle) sets the page `<title>`, [`meta`](/configuration/output/#outputhtmlmeta) injects `<meta>` tags (keys starting with `og:` become `property` attributes), and [`base`](/configuration/output/#outputhtmlbase) injects a `<base>` element. Anything the page already declares is left untouched.
+
+```js
+// webpack.config.js
+module.exports = {
+  entry: { main: "./src/main.js" },
+  output: {
+    html: {
+      title: "My App",
+      meta: {
+        viewport: "width=device-width, initial-scale=1",
+        "og:title": "My App",
+      },
+      base: "https://example.com/",
+    },
+  },
+};
+```
+
+### Controlling Tag Injection
+
+[`output.html.inject`](/configuration/output/#outputhtmlinject) decides where the chunk `<script>` / `<link>` tags land: `'body'` (the default for classic output), `'head'` (the default for ESM output), or `false` to suppress sibling-chunk injection entirely. When injecting into `<head>`, stylesheets are placed after `defer` / module scripts and ahead of blocking ones, the same order Vite emits.
+
+### Inlining Chunks into HTML
+
+[`output.html.inline`](/configuration/output/#outputhtmlinline) inlines the content of matching chunks directly into the HTML instead of emitting a separate tag, useful for critical CSS or a tiny runtime chunk. `true` inlines everything, `'script'` only JavaScript, `'style'` only CSS, and an array of regular expressions matches chunk names:
+
+```js
+// webpack.config.js
+module.exports = {
+  output: {
+    html: {
+      inline: [/^runtime/, /critical/],
+    },
+  },
+};
+```
+
+Individual references in an authored page can opt in or out with the `webpackInline` magic comment (`<!-- webpackInline: true -->` before the tag), and the page's `[contenthash]` accounts for the inlined content.
+
+### Favicons and Web App Manifest
+
+[`output.html.favicon`](/configuration/output/#outputhtmlfavicon) links favicons on generated pages, emitting every icon as a hashed asset. It scales from `favicon: "./favicon.svg"` to multiple icons per `rel` with per-icon attributes (`sizes`, `media`, `color`, `type`, `crossorigin`), for example light/dark variants or several sizes.
+
+[`output.html.manifest`](/configuration/output/#outputhtmlmanifest) generates and links a web app manifest: pass a path to an existing `.webmanifest`, or an object that is serialized, emitted hashed, and linked with `<link rel="manifest">`; its `icons` / `screenshots` paths are resolved and emitted as hashed assets too.
+
+### Content-Security-Policy and Subresource Integrity
+
+[`output.html.csp`](/configuration/output/#outputhtmlcsp) injects a `<meta http-equiv="Content-Security-Policy">` into every generated page. `true` applies a strict baseline and appends a hash of every inline `<script>` / `<style>` to `script-src` / `style-src`; the object form merges custom directives and supports a server-side `nonce` placeholder.
+
+[`output.html.integrity`](/configuration/output/#outputhtmlintegrity) adds SRI `integrity` attributes to the injected `<script>` / `<link>` tags, with configurable hash algorithms.
+
+```js
+// webpack.config.js
+module.exports = {
+  output: {
+    html: {
+      csp: true,
+      integrity: true,
+    },
+  },
+};
+```
+
+### Hooks for Plugins
+
+The HTML pipeline is now extensible: `webpack.html.HtmlModulesPlugin` exposes [compilation hooks](/api/compilation-hooks/#htmlmodulesplugingetcompilationhookscompilation) for working with the emitted pages.
+
+#### Tag Hooks: `injectTags` and `transformTags`
+
+`injectTags` adds structured tag descriptors with `injectTo` placement, and `transformTags` mutates, removes, or moves the page's existing `<script>` / `<link>` / `<style>` / `<meta>` tags. Tags injected through `injectTags` are hashed by the CSP support like the page's own inline content.
+
+#### Page Hooks: `transformHtml` and `htmlEmitted`
+
+`transformHtml` transforms the final HTML string just before it is written (e.g. to minify it), and `htmlEmitted` fires after each page is finalized.
+
+### A Smarter HTML Parser
+
+The parser side grew as well:
+
+- A new `html` source type treats a URL as a link to another HTML file bundled as its own emitted page, like Parcel's `<a href="page.html">`, and `<link rel="preload">` / `<link rel="prefetch">` references to scripts and styles are bundled as chunks and rewritten to the built URLs.
+- Built-in sources now cover the `twitter:player:stream` meta content, legacy SVG references (`font-face-uri`, `cursor`, `altGlyph`, `tref`, `glyphRef`), and the icon / screenshot / shortcut URLs inside a `<link rel="manifest">` Web App Manifest.
+- [`module.parser.html.as`](/configuration/module/#moduleparserhtmlas) parses a source as a full document or as an element fragment (e.g. `as: "tbody"` keeps a bare `<tr>` that a document parse would drop).
+- A built-in source can be disabled per `tag` / `attribute` with [`type: false`](/configuration/module/#moduleparserhtmlsources) in `sources`.
+
+## Resource Hints
+
+Webpack can now emit resource hints (`<link rel="preload">`, `prefetch`, `modulepreload`, and `preconnect`) natively through [`output.resourceHints`](/configuration/output/#outputresourcehints). For ES module output it is **on by default**, auto-emitting `<link rel="modulepreload">` for each entry's initial chunks so native `import()` doesn't waterfall, the same behavior Vite ships. Classic output stays opt-in.
+
+Hints land in the extracted HTML `<head>` for HTML entries and are wired through a chunk-startup runtime otherwise. The option accepts a shorthand (`true`, `'prefetch'`, `'preload'`, `'none'`, an array of custom descriptors, or a function receiving the auto hints) or an object form with:
+
+- [`urlHints`](/configuration/output/#outputresourcehintsurlhints): project-wide rules that hint URL-referenced assets (JavaScript `new URL(...)`, CSS `url(...)`, HTML attributes) without magic comments, e.g. preload every `.woff2`.
+- [`preconnect`](/configuration/output/#outputresourcehintspreconnect): warm the origin of a cross-origin `output.publicPath` (your CDN).
+- [`modulePreloadPolyfill`](/configuration/output/#outputresourcehintsmodulepreloadpolyfill): an inline `modulepreload` polyfill for targets without native support.
+- [`manifest`](/configuration/output/#outputresourcehintsmanifest): a JSON manifest of the resolved hints per entrypoint for SSR servers, webpack's analogue of Vite's `build.ssrManifest`.
+
+```js
+// webpack.config.js
+module.exports = {
+  output: {
+    resourceHints: {
+      initial: true,
+      urlHints: [{ test: /\.woff2$/, preload: true, as: "font" }],
+    },
+  },
+};
+```
+
+The parser side pairs with it: [`module.parser.<type>.urlHints`](/configuration/module/#moduleparserjavascripturlhints) scopes hint rules to one parser, [`module.parser.css.fontPreload`](/configuration/module/#moduleparsercssfontpreload) auto-preloads the primary URL of each `@font-face` reachable from an HTML entry's initial CSS, and [`module.parser.javascript.dynamicImportCssPreload`](/configuration/module/#moduleparserjavascriptdynamicimportcsspreload) preloads the CSS of dynamically imported chunks so stylesheets fetch in parallel with the chunk's JavaScript.
+
+The resolved hints are exposed on `stats.entrypoints[name].resourceHints`.
+
+## Vite-Compatible Module APIs
+
+### `import.meta.glob`
+
+Webpack now supports [`import.meta.glob`](/api/module-variables/#importmetaglob), compatible with Vite's glob imports. It maps each matched file to a dynamic import function (split into on-demand chunks), or to the module itself with `eager: true`:
+
+```js
+const modules = import.meta.glob("./pages/*.js");
+// {
+//   "./pages/about.js": () => import("./pages/about.js"),
+//   "./pages/home.js": () => import("./pages/home.js"),
+// }
+```
+
+The supported options are `eager`, `import` (pick a single export for better tree shaking), `query`, `base`, `exhaustive`, and a webpack-specific `caseSensitive`.
+
+### `import.meta.env` Defaults
+
+[`import.meta.env`](/api/module-variables/#importmetaenv) now ships Vite's standard constants by default: `MODE`, `DEV`, `PROD`, `SSR`, and `BASE_URL` (derived from `mode`, the target platform, and `output.publicPath`). Code written against Vite's conventions, and libraries that branch on `import.meta.env.DEV`, work out of the box.
+
+### `import.meta.resolve`
+
+[`import.meta.resolve("./asset")`](/api/module-variables/#importmetaresolve) is resolved at build time to the emitted asset URL, matching the native semantics while flowing through the asset pipeline. It is controlled by the `importMeta.resolve` parser option.
+
+### Asset Query Suffixes
+
+Under [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults), the [asset query suffixes](/guides/asset-modules/#built-in-query-suffixes) `?raw`, `?url`, `?inline`, and `?no-inline` work with no configuration, mapping to `asset/source`, `asset/resource`, and `asset/inline`:
+
+```js
+import source from "./file.txt?raw";
+import dataUri from "./icon.svg?inline";
+import url from "./image.png?url";
+```
+
+They are plain default rules, so your own `module.rules` can still override them.
+
+### Fine-Grained `import.meta` Options
+
+The [`importMeta`](/configuration/module/#moduleparserjavascriptimportmeta) parser option now accepts an object to enable or disable the evaluation of individual fields (`url`, `env`, `resolve`, `webpackContext`, custom fields, and more). As part of this, the standalone `importMetaContext` option is deprecated in favor of `importMeta.webpackContext`.
+
+## CommonJS Module Concatenation
+
+Module concatenation (scope hoisting) was an ESM-only optimization since webpack 3. Webpack 5.109 extends it to CommonJS: modules with statically analyzable exports are concatenated into their consumers, and "weird" CommonJS modules that previously bailed the whole group out are now wrapped into the concatenation instead. Large, CommonJS-heavy dependency trees get flatter bundles with less module-boundary overhead.
+
+This is on wherever concatenation already applies (production mode by default). If you hit an edge case, you can restrict concatenation to ES modules again:
+
+```js
+// webpack.config.js
+module.exports = {
+  optimization: {
+    concatenateModules: { commonjs: false },
+  },
+};
+```
+
+## Built-in Build Progress
+
+A progress bar is now built into webpack itself via [`infrastructureLogging.progress`](/configuration/infrastructureLogging/#infrastructureloggingprogress). Set it to `'auto'` to show the interactive bar only in real terminals (and stay quiet in CI logs); under `experiments.futureDefaults` that is the default. This supersedes third-party progress plugins such as [WebpackBar](https://www.npmjs.com/package/webpackbar).
+
+```js
+// webpack.config.js
+module.exports = {
+  infrastructureLogging: {
+    progress: "auto",
+  },
+};
+```
+
+[`ProgressPlugin`](/plugins/progress-plugin/) itself also learned `progressBar: "auto"`, a configurable bar `width`, an `estimatedTime` display, and a `phaseTimings` breakdown printed when the build completes.
+
+## Bundling Worklets
+
+The new [`module.parser.javascript.worklet`](/configuration/module/#moduleparserjavascriptworklet) option bundles Worklet entries the way workers already are:
+
+```js
+await audioContext.audioWorklet.addModule(
+  new URL("./processor.js", import.meta.url),
+);
+```
+
+Audio, paint, layout, and animation worklets are recognized by default (custom syntax lists are supported). Since worklets, unlike workers, cannot load additional chunks at runtime, ESM output links a worklet's split chunks via native `import`, while classic script output pre-adds them through `addModule` from the calling scope.
+
+## CSS Improvements
+
+Native CSS resolves [`@custom-media`](/configuration/module/#moduleparsercsscustommedia) (including media-type values) and [`@custom-selector`](/configuration/module/#moduleparsercsscustomselectors) at-rules at build time, so these draft-spec features work without PostCSS:
+
+```css
+@custom-media --narrow-window (max-width: 30em);
+@custom-selector :--heading h1, h2, h3;
+
+@media (--narrow-window) {
+  :--heading {
+    font-size: 1.1em;
+  }
+}
+```
+
+CSS Modules also now scope `view-transition-name`, `view-transition-group`, and `view-transition-class` names, along with `::view-transition-*()` pseudo-element references, under the existing `customIdents` behavior, so View Transitions get the same collision-free names as your classes.
+
+## Externals
+
+- A new [`amd-async`](/configuration/externals/#externalstypeamd-async) externals type loads AMD-only externals at runtime through the asynchronous `require([...])` API as an async module, so the bundle itself no longer needs an AMD library wrapper.
+- The object form of an external accepts an [`interop`](/configuration/externals/#interop) hint (`'esModule'` or `'default'`) that pins how a `default` import of a non-ESM external behaves, independent of the importer's strictness, mirroring Rollup's `output.interop`.
+- An object external with no entry for the used externals type now fails the build with an actionable error instead of silently resolving to `undefined` at runtime.
+
+## Other Improvements
+
+- [`cache.compression: 'zstd'`](/configuration/cache/#cachecompression) compresses the filesystem cache with Zstandard on Node.js >= 22.15.
+- [`output.wasmStreamingFallback`](/configuration/output/#outputwasmstreamingfallback) falls back to non-streaming WebAssembly instantiation when the server serves `.wasm` with the wrong MIME type.
+- The new [`strictModeViolations`](/configuration/module/#moduleparserjavascriptstrictmodeviolations) parser option warns (or errors) on constructs that break at runtime in strict mode when emitted as ES module output: `with`, octal literals, `arguments.callee`, assigning to read-only globals, and more.
+- ESM output now emits `new URL(..., import.meta.url)`, worker/worklet URLs, and `import()` with literal specifiers, so downstream bundlers and runtimes can statically analyze webpack's output.
+- Async modules compile to generator-based code on targets without native `async` / `await` support.
+- Dynamic `import(specifier, options)` evaluates and validates its second argument.
+- Custom parsers (via `module.parser.javascript.parse`) no longer need to provide `loc` data or collect inserted semicolons; webpack derives both from node offsets and the source text.
+- Stats output now explains **why** a module was marked as not cacheable.
+- `ChunkLoadError` and `ScriptExternalLoadError` carry the original DOM event as `error.event` for easier debugging.
+- `MultiCompiler` exposes the active `MultiWatching` on `multiCompiler.watching`.
+
+## webpack-dev-server 6
+
+Alongside this release, [`webpack-dev-server@6.0.0`](https://github.com/webpack/webpack-dev-server/releases/tag/v6.0.0) is out. The highlights:
+
+- The source is now native ES modules, with both ESM and CommonJS builds exposed via `exports`.
+- It can be used as a **webpack plugin**, integrating with the compiler lifecycle (no explicit compiler passing, clean shutdown, and `MultiCompiler` support).
+- Express 5, `http-proxy-middleware` v4, `webpack-dev-middleware` v8, and `chokidar` v5 (with glob support in `watchFiles.options.ignored`).
+- Requires Node.js >= 22.15.0 and webpack >= 5.101.0. SockJS, `spdy` (use `node:http2` via the `server` option), the proxy `bypass` option, and the standalone CLI flags were removed.
+
+Check the [release notes](https://github.com/webpack/webpack-dev-server/releases/tag/v6.0.0) for the full list of breaking changes and the migration path.
+
+## Bug Fixes and Performance
+
+Beyond the features, a long list of bugs has been fixed since version [5.108](https://github.com/webpack/webpack/releases/tag/v5.108.0).
+
+The release also continues the parser performance campaign: JavaScript, CSS, and HTML parsing are measurably faster and allocate less memory, snapshot creation and stats generation speed up on large builds, and updated [`webpack-sources`](https://github.com/webpack/webpack-sources/pull/251) / [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/pull/623) dependencies cut peak memory. Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for all the details. A dedicated blog post diving into all this performance work is coming soon.
+
+As a first look at what's next: the coming version will double down on performance, moving the JavaScript syntax parser to a custom Structure-of-Arrays AST (the same design the CSS and HTML parsers already use), which in early measurements cuts end-of-build heap significantly.
+
+## Thanks
+
+A big thank you to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring)
+who made Webpack 5.109 possible. Your support, whether through code contributions, documentation, or financial sponsorship, helps keep Webpack evolving and improving for everyone.

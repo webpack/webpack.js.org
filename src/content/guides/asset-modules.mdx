@@ -588,6 +588,21 @@ module: {
   },
 ```
 
+## Built-in query suffixes
+
+<Badge text="5.109.0+" />
+
+When [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled, webpack registers the rules above for you: the query suffixes `?raw`, `?url`, `?inline` and `?no-inline` work out of the box for any import, similar to Vite's asset queries.
+
+```js
+import source from "./file.txt?raw"; // asset/source - the raw file content as a string
+import dataUri from "./icon.svg?inline"; // asset/inline - a data: URI
+import url from "./image.png?url"; // asset/resource - the emitted file URL
+import fileUrl from "./small.png?no-inline"; // asset/resource - never inlined, even if a rule would inline it
+```
+
+The suffixes are matched anywhere in the query string (`?foo&raw` works too) as a `oneOf` list, so only the first matching suffix wins. Since they are plain default rules, your own `module.rules` take precedence and can override them.
+
 ## Disable emitting assets
 
 For use cases like Server side rendering, you might want to disable emitting assets, which is feasible with [`emit`](/configuration/module/#rulegeneratoremit) option under `Rule.generator`:

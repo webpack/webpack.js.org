@@ -20,7 +20,7 @@ W> Because experimental features have relaxed semantic versioning and might cont
 
 Available options:
 
-- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
+- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module. Since webpack 5.109.0 it defaults to `'auto'`, which enables the built-in support unless a loader is registered for WebAssembly files.
 - [`backCompat`](#experimentsbackcompat)
 - [`buildHttp`](#experimentsbuildhttp)
 - [`cacheUnaffected`](#experimentscacheunaffected)
@@ -192,7 +192,10 @@ Detect changes to remote resources and upgrade them automatically.
 
 Enable native CSS support. Note that it's an experimental feature still under development and will be enabled by default in webpack v6, however you can track the progress on [GitHub](https://github.com/webpack/webpack/issues/14893).
 
-- Type: `boolean`
+- Type: `boolean | 'auto'`
+- Default: `'auto'` <Badge text="5.109.0+" />
+
+Since webpack 5.109.0, the option defaults to `'auto'`: the built-in CSS support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.css` or `.module.css` files, so existing `css-loader`/`mini-css-extract-plugin` setups keep working unchanged. Set it to `true` to force the native support, or `false` to disable it entirely. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
 Experimental features:
 
@@ -382,8 +385,10 @@ export default {
 
 Enable native HTML module support. Importing a `.html` file from JavaScript runs its tag references through the normal webpack pipeline, replacing the role `html-loader` has played for years. The flag registers the `html` module type on `NormalModuleFactory` and unlocks the HTML behaviors described below.
 
-- Type: `boolean`
-- Default: `false`
+- Type: `boolean | 'auto'`
+- Default: `false`, `'auto'` since webpack 5.109.0
+
+Since webpack 5.109.0, the option defaults to `'auto'`: the built-in HTML support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.html` files, so existing `html-loader` setups keep working unchanged. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
 **webpack.config.js**
 
@@ -515,6 +520,12 @@ For a page extracted to a real `.html` file, each hot update patches `document.b
 
 T> [Module concatenation](/configuration/optimization/#optimizationconcatenatemodules) is disabled for HTML modules while HMR is active, because each module needs its own `module.hot` scope to self-accept updates.
 
+#### HtmlModulesPlugin hooks
+
+<Badge text="5.109.0+" />
+
+Plugins can inject and transform the emitted HTML through `webpack.html.HtmlModulesPlugin`, which exposes the `injectTags`, `transformTags`, `transformHtml` and `htmlEmitted` compilation hooks. See [`HtmlModulesPlugin.getCompilationHooks`](/api/compilation-hooks/#htmlmodulesplugingetcompilationhookscompilation) in the API documentation.
+
 ### experiments.lazyCompilation
 
 Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
@@ -615,8 +626,10 @@ export default {
 
 Enable native TypeScript support. With the flag turned on, webpack compiles `.ts`, `.cts`, and `.mts` files (and the matching `data:text/typescript` and `data:application/typescript` data URIs) directly, without any external loader. Under the hood it calls Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options).
 
-- Type: `boolean`
-- Default: `false` (auto-enabled by [`experiments.futureDefaults`](#experimentsfuturedefaults))
+- Type: `boolean | 'auto'`
+- Default: `false`, `'auto'` since webpack 5.109.0
+
+Since webpack 5.109.0, the option defaults to `'auto'`: the built-in TypeScript support is enabled when the running Node.js provides `module.stripTypeScriptTypes` (>= 22.6) and no `module.rules` entry with a loader (e.g. `ts-loader`, `swc-loader`) matches `.ts`/`.mts`/`.cts` files. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
 W> Requires Node.js >= 22.6 for the stable `module.stripTypeScriptTypes` API.
 

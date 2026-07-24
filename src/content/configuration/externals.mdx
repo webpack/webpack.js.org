@@ -132,6 +132,8 @@ export default {
 
 W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) and [`externalsType: 'umd'`](#externalstype). It's not allowed for other library targets.
 
+W> Since webpack 5.109.0, an object external with no entry for the used externals type emits a build error instead of silently resolving to `undefined` at runtime.
+
 ```js
 export default {
   // ...
@@ -169,6 +171,27 @@ export default {
 ```
 
 This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
+
+#### interop
+
+<Badge text="5.109.0+" />
+
+Non-ESM externals (`commonjs`, `amd`, `umd`, ...) are dynamic modules: importing their `default` from a strict ES module (a package with `"type": "module"`) yields the whole exports object, while a non-strict importer unboxes it through the runtime `__esModule` check. The optional `interop` hint on an object external pins this behavior independent of the importer, mirroring Rollup's [`output.interop`](https://rollupjs.org/configuration-options/#output-interop):
+
+- `'esModule'` - treat the external as an ES module namespace, so a `default` import resolves to its `.default` export.
+- `'default'` - treat the external as a CommonJS module, so a `default` import resolves to the whole exports object (Node.js semantics).
+
+```js
+export default {
+  // ...
+  externals: {
+    dep: {
+      amd: "dep",
+      interop: "esModule",
+    },
+  },
+};
+```
 
 ### function
 
@@ -355,6 +378,7 @@ Specify the default type of externals. `amd`, `umd`, `system` and `jsonp` extern
 Supported types:
 
 - `'amd'`
+- [`'amd-async'`](#externalstypeamd-async) - loads the external via the asynchronous AMD `require([...])` API (async module) <Badge text="5.109.0+" />
 - `'amd-require'`
 - `'assign'` - same as `'var'`
 - [`'commonjs'`](#externalstypecommonjs)
@@ -384,6 +408,48 @@ export default {
   externalsType: "promise",
 };
 ```
+
+### externalsType.amd-async
+
+<Badge text="5.109.0+" />
+
+Specify the default type of externals as `'amd-async'`. Like `'amd'`, the external is resolved through an AMD loader, but it is loaded at runtime via the asynchronous `require([...])` API and exposed as an async module. This means the output bundle itself does not need to be wrapped in an AMD library (no matching [`output.library.type`](/configuration/output/#outputlibrarytype) is required), so AMD-only externals can be consumed from any chunk format.
+
+#### Example
+
+```js
+import _ from "lodash";
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  externalsType: "amd-async",
+  externals: {
+    lodash: "lodash",
+  },
+};
+```
+
+The external module resolves to an expression like the following, exposed through webpack's async module runtime:
+
+```js
+new Promise((resolve, reject) => {
+  if (typeof require !== "function") {
+    reject(
+      new Error(
+        "AMD 'require' is not available to load external module lodash",
+      ),
+    );
+    return;
+  }
+  require(["lodash"], (module) => resolve(module), reject);
+});
+```
+
+T> When [`output.library.amdContainer`](/configuration/output/#outputlibraryamdcontainer) is set, the asynchronous `require` call is issued on that container object instead of the global AMD `require`.
 
 ### externalsType.commonjs
 
