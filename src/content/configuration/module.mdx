@@ -634,6 +634,8 @@ Enable or disable renaming of custom identifiers in CSS modules.
 - Type: `boolean`
 - Default: `true`
 
+T> Since webpack 5.109.0 this also scopes `view-transition-name` / `view-transition-group` / `view-transition-class` names and `::view-transition-*()` pseudo-element references.
+
 **webpack.config.js**
 
 ```js
@@ -642,6 +644,68 @@ export default {
     parser: {
       css: {
         customIdents: true, // Enable custom identifier renaming
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.customMedia
+
+<Badge text="5.109.0+" />
+
+Enable or disable resolution of [`@custom-media`](https://drafts.csswg.org/mediaqueries-5/#custom-mq) at-rules in native CSS, a file-local build-time substitution. Media-type values are supported as well.
+
+- Type: `boolean`
+- Default: `true`
+
+```css
+@custom-media --narrow-window (max-width: 30em);
+
+@media (--narrow-window) {
+  /* ... */
+}
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      css: {
+        customMedia: false, // Disable @custom-media resolution
+      },
+    },
+  },
+};
+```
+
+#### module.parser.css.customSelectors
+
+<Badge text="5.109.0+" />
+
+Enable or disable resolution of [`@custom-selector`](https://drafts.csswg.org/css-extensions/#custom-selectors) at-rules in native CSS, a file-local build-time expansion to `:is(...)`.
+
+- Type: `boolean`
+- Default: `true`
+
+```css
+@custom-selector :--heading h1, h2, h3;
+
+:--heading {
+  margin-top: 0;
+}
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      css: {
+        customSelectors: false, // Disable @custom-selector resolution
       },
     },
   },
@@ -693,6 +757,39 @@ export default {
   },
 };
 ```
+
+#### module.parser.css.fontPreload
+
+<Badge text="5.109.0+" />
+
+Auto-emit `<link rel="preload" as="font">` for the primary `src` URL of each `@font-face` reachable from an HTML entry's initial CSS. Only the first URL per `@font-face` is preloaded, since preloading every format would double-download. [`module.parser.css.urlHints`](#moduleparsercssurlhints) rules and per-URL magic comments still override the seeded defaults.
+
+- Type: `boolean`
+- Default: `false`
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      css: {
+        fontPreload: true,
+      },
+    },
+  },
+};
+```
+
+W> Preload links for fonts must match the font's CORS fetch, so set [`output.crossOriginLoading`](/configuration/output/#outputcrossoriginloading) accordingly.
+
+#### module.parser.css.urlHints
+
+<Badge text="5.109.0+" />
+
+Default resource-hint rules for assets referenced via `url(...)` in CSS. Same rule format as [`module.parser.javascript.urlHints`](#moduleparserjavascripturlhints).
+
+- Type: `UrlHintRule[]`
 
 #### module.parser.css.grid
 
@@ -844,6 +941,26 @@ Note that only `webpackIgnore` comment is supported at the moment:
 const x = require(/* webpackIgnore: true */ "x");
 ```
 
+#### module.parser.javascript.dynamicImportCssPreload
+
+Auto-emit `<link rel="preload" as="style">` for the CSS of every dynamically imported (`import()`) chunk, so the stylesheet fetches in parallel with the chunk's JavaScript instead of after it parses. Unlike [`dynamicImportPreload`](#moduleparserjavascriptdynamicimportpreload), the JavaScript itself is not preloaded. `true` uses the default order; a number sets the preload order.
+
+- Type: `number | boolean`
+- Available: 5.109.0+
+- Example:
+
+  ```js
+  export default {
+    module: {
+      parser: {
+        javascript: {
+          dynamicImportCssPreload: true,
+        },
+      },
+    },
+  };
+  ```
+
 #### module.parser.javascript.dynamicImportFetchPriority
 
 Specify the global [fetchPriority](https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement/fetchPriority) for dynamic import.
@@ -968,7 +1085,7 @@ Specifies the behavior of invalid export names in `\"import ... from ...\"`.
 
 Controls how webpack evaluates `import.meta` expressions during bundling.
 
-- Type: `boolean | 'preserve-unknown'`
+- Type: `boolean | 'preserve-unknown' | object`
 - Default: `true`
 - Available: 5.68.0+
 
@@ -979,6 +1096,25 @@ Accepted values:
 - `'preserve-unknown'` <Badge text="5.105.0+" /> - evaluates known properties as usual but **preserves** any non-standard properties verbatim in the output instead of removing them.
 
   W> When `output.module` is `true`, unknown `import.meta` properties are preserved automatically without this option.
+
+- `object` <Badge text="5.109.0+" /> - enable/disable the evaluation of individual `import.meta` fields. Omitted fields stay enabled and unknown fields are preserved. Known keys are `dirname`, `env`, `filename`, `main`, `resolve`, `url`, `webpack`, `webpackContext` and `webpackHot`; custom keys are allowed too and control whether that custom field is evaluated.
+
+  ```js
+  export default {
+    module: {
+      parser: {
+        javascript: {
+          importMeta: {
+            url: true,
+            env: false, // leave `import.meta.env` untouched
+            resolve: true, // resolve `import.meta.resolve("./asset")` to the emitted asset URL
+            webpackContext: true,
+          },
+        },
+      },
+    },
+  };
+  ```
 
 - Example - disable `import.meta` evaluation entirely:
 
@@ -1021,6 +1157,8 @@ Accepted values:
 #### module.parser.javascript.importMetaContext
 
 Enable/disable evaluating [`import.meta.webpackContext`](/api/module-variables/#importmetawebpackcontext).
+
+W> Deprecated since webpack 5.109.0: use the [`importMeta.webpackContext`](#moduleparserjavascriptimportmeta) object option instead.
 
 - Type: `boolean`
 - Available: 5.70.0+
@@ -1103,6 +1241,27 @@ Specifies the behavior of invalid export names in `\"export ... from ...\"`. Thi
   };
   ```
 
+#### module.parser.javascript.strictModeViolations
+
+Specifies the behavior of constructs that break at runtime in strict mode when modules are emitted as ES module output ([`output.module`](/configuration/output/#outputmodule)). This covers strict-mode-only syntax (`delete` of a variable, `with`, octal literals and escapes, duplicate parameters, assigning to `eval`/`arguments`) and semantic hazards (`arguments.callee`/`arguments.caller`, assigning to read-only globals).
+
+- Type: `'error' | 'warn' | false`
+- Default: `'warn'` (`'error'` when [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled)
+- Available: 5.109.0+
+- Example:
+
+  ```js
+  export default {
+    module: {
+      parser: {
+        javascript: {
+          strictModeViolations: "error",
+        },
+      },
+    },
+  };
+  ```
+
 #### module.parser.javascript.url
 
 Enable parsing of `new URL()` syntax.
@@ -1135,6 +1294,77 @@ The `'relative'` value for `module.parser.javascript.url` is available since web
 1. This is useful for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.
 2. Also for static site generators, mini-css-plugin and html-plugin, etc. where server side rendering is commonly needed.
 
+#### module.parser.javascript.urlHints
+
+Default resource-hint rules for URL-referenced assets found by this parser (`new URL("./asset", import.meta.url)`). Matching rules set the same fields a `webpackPrefetch` / `webpackPreload` / `webpackAs` / `webpackType` / `webpackMedia` / `webpackFetchPriority` magic comment would; explicit magic comments on the same URL still win. The emitted hints are part of the [`output.resourceHints`](/configuration/output/#outputresourcehints) pipeline.
+
+Each rule supports:
+
+- `test` / `include` / `exclude`: [Rule conditions](#rule-conditions) matched against the asset's request. Omit all three to apply the rule to every asset.
+- `prefetch` (`boolean`): emit `<link rel="prefetch">` for matching assets.
+- `preload` (`boolean`): emit `<link rel="preload">` for matching assets.
+- `as` (`string`): default `as` attribute (`script` / `style` / `font` / `image` / ...).
+- `type` (`string`): default `type` attribute (e.g. `"font/woff2"`).
+- `media` (`string`): default `media` attribute (e.g. `"(min-width: 800px)"`).
+- `fetchPriority` (`'low' | 'high' | 'auto' | false`): default `fetchpriority` for the emitted links.
+
+The same option also exists for the CSS parser (`url(...)` references) and the HTML parser (`<img src>` / `<link href>` / `<script src>` references), and [`output.resourceHints.urlHints`](/configuration/output/#outputresourcehints) is a project-wide shorthand applying to all three.
+
+- Type: `UrlHintRule[]`
+- Available: 5.109.0+
+- Example:
+
+  ```js
+  export default {
+    module: {
+      parser: {
+        javascript: {
+          urlHints: [{ test: /\.woff2$/, preload: true, as: "font" }],
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.worklet
+
+Disable or configure parsing of Worklet syntax like `context.audioWorklet.addModule()` or `CSS.paintWorklet.addModule()`. When enabled, `addModule(new URL("./worklet.js", import.meta.url))` entries are bundled like Workers. With ES module output the worklet's split chunks are linked via native `import`; with script output they are pre-added via `addModule`, since script worklets cannot load chunks at runtime.
+
+- Type: `boolean | string[]`
+- Default: disabled, enabled with the default syntax list when [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is on
+- Available: 5.109.0+
+
+The default syntax list is:
+
+```js
+[
+  "*context.audioWorklet.addModule()",
+  "*audioWorklet.addModule()",
+  "CSS.paintWorklet.addModule()",
+  "CSS.layoutWorklet.addModule()",
+  "CSS.animationWorklet.addModule()",
+];
+```
+
+An array customizes which syntax is parsed as a Worklet reference, e.g. `'*context.audioWorklet.addModule()'` handles `context.audioWorklet.addModule()` and `'abc()'` handles `abc()`; combinations are also possible.
+
+- Example:
+
+  ```js
+  export default {
+    module: {
+      parser: {
+        javascript: {
+          worklet: [
+            "*audioWorklet.addModule()",
+            "CSS.paintWorklet.addModule()",
+          ],
+        },
+      },
+    },
+  };
+  ```
+
 #### module.parser.javascript.parse
 
 <Badge text="5.103.0+" />
@@ -1146,6 +1376,8 @@ Return `ast`, `comments`, and `semicolons` to ensure webpack’s AST analysis wo
 - `ast` should be ESTree-compatible.
 - `comments` is an array of ESTree comment nodes.
 - `semicolons` is a set of positions where the parser inserted a semicolon.
+
+T> Since webpack 5.109.0, custom parsers no longer need to collect `semicolons` (ASI positions are derived from the source text) and parsers without location APIs are supported: locations are derived from node offsets, so AST nodes don't need to carry `loc`.
 
 - Type: `(code: string, options: ParseOptions) => ParseResult`
 - Example:
@@ -1323,8 +1555,11 @@ Each array entry object accepts:
   - `stylesheet-style` - the attribute value is treated as a full inline stylesheet (like a `<style>` body) and routed through the CSS pipeline.
   - `stylesheet-style-attribute` - the attribute value is treated as a CSS block's contents (like a `style` attribute) and routed through the CSS pipeline.
   - `css-url` - extract `url()` references from a CSS-valued attribute (for example the SVG `style` presentation attributes). Available since webpack 5.108.0.
+  - `srcdoc` - the attribute value is treated as an entity-encoded HTML document (like `<iframe srcdoc>`), bundled through the HTML pipeline. Available since webpack 5.108.0.
+  - `html` <Badge text="5.109.0+" /> - the URL is a link to another HTML file that is bundled as its own emitted page (its assets extracted), and the attribute is rewritten to the page's output filename (like Parcel's `<a href="page.html">`).
+  - `false` <Badge text="5.109.0+" /> - disable a built-in source for this `tag`/`attribute`. Use it together with `"..."` to drop a single default, e.g. stop treating `<img src>` as a URL.
 - `tag` (optional) - the tag name to match. Omit to match any element.
-- `filter` (optional) - `(attributes: Map<string, string>) => boolean`; return `false` to skip this entry for a given element.
+- `filter` (optional) - `(attributes: Map<string, string>, value: string) => boolean`; return `false` to skip this entry for a given element.
 
 ```js
 export default {
@@ -1337,12 +1572,46 @@ export default {
           { tag: "img", attribute: "data-src", type: "src" },
           { tag: "img", attribute: "data-srcset", type: "srcset" },
           { attribute: "data-href", type: "src" }, // any tag
+          { tag: "img", attribute: "src", type: false }, // drop a built-in default
         ],
       },
     },
   },
 };
 ```
+
+Since webpack 5.109.0, the built-in source list also recognizes more asset-bearing HTML: `<link rel="preload">` / `<link rel="prefetch">` links whose scripts and styles are bundled as chunks and rewritten to the built chunk URL, the `twitter:player:stream` meta content, the legacy SVG `font-face-uri`, `cursor`, `altGlyph`, `tref` and `glyphRef` element references, and the `icons` / `screenshots` / `shortcuts` URLs inside a `<link rel="manifest">` Web App Manifest.
+
+#### module.parser.html.as
+
+<Badge text="5.109.0+" />
+
+Configure how the HTML source is parsed.
+
+- Type: `'document' | string`
+- Default: `'document'`
+
+`'document'` parses a full page. Any other value is the tag name of a context element: the source is parsed as that element's inner HTML (a fragment), e.g. `'template'` for a neutral fragment, or `'tbody'` so context-sensitive tags like a bare `<tr>` / `<td>` are kept instead of dropped.
+
+```js
+export default {
+  module: {
+    parser: {
+      html: {
+        as: "template",
+      },
+    },
+  },
+};
+```
+
+#### module.parser.html.urlHints
+
+<Badge text="5.109.0+" />
+
+Default resource-hint rules for assets referenced from HTML attributes (`<img src>`, `<link href>`, `<script src>`). Same rule format as [`module.parser.javascript.urlHints`](#moduleparserjavascripturlhints).
+
+- Type: `UrlHintRule[]`
 
 #### module.parser.html.template
 
