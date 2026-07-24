@@ -11,6 +11,8 @@ contributors:
 
 The `ProgressPlugin` provides a way to customize how progress is reported during a compilation.
 
+T> Since webpack 5.109.0 you can show build progress without adding the plugin manually via [`infrastructureLogging.progress`](/configuration/infrastructureLogging/#infrastructureloggingprogress), which is the recommended replacement for third-party progress plugins such as [WebpackBar](https://www.npmjs.com/package/webpackbar).
+
 ## Usage
 
 Create an instance of `ProgressPlugin` and provide one of the allowed params, besides, there's a static method `createDefaultHandler` which can be used to customize the default handler.
@@ -45,9 +47,12 @@ When providing an `object` to the `ProgressPlugin`, following properties are sup
 - `dependencies` (`boolean = true`): Shows the count of dependencies in progress message.
 - `dependenciesCount` (`number = 10000`): A minimum dependencies count to start with. Takes effect when `dependencies` property is enabled.
 - `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): Tells `ProgressPlugin` how to calculate progress percentage.
-- `progressBar` (`boolean | object = false`) <Badge text="5.107.0+" />: Renders a progress bar in the terminal instead of the plain percentage message. Only takes effect with the default handler, i.e. when no custom `handler` is provided. Pass `true` to enable it with defaults, or an object with the following properties:
+- `progressBar` (`boolean | 'auto' | object = false`) <Badge text="5.107.0+" />: Renders a progress bar in the terminal instead of the plain percentage message. Only takes effect with the default handler, i.e. when no custom `handler` is provided. Pass `true` to enable it with defaults, `'auto'` <Badge text="5.109.0+" /> to enable it only in interactive terminals (TTY), or an object with the following properties:
   - `name` (`string = 'Build'`): Name shown before the progress bar.
   - `color` (`string = 'green'`): Color used for the filled portion of the bar. Falls back to `'green'` when the given color is not supported.
+  - `width` (`number = 25`) <Badge text="5.109.0+" />: Width of the progress bar in characters.
+- `estimatedTime` (`boolean = false`) <Badge text="5.109.0+" />: Shows the estimated time remaining based on build progress.
+- `phaseTimings` (`boolean = false`) <Badge text="5.109.0+" />: Shows a timing breakdown for each build phase when the build completes.
 
 ```js
 new webpack.ProgressPlugin({
