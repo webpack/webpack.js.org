@@ -880,13 +880,15 @@ export default {
 };
 ```
 
-Set it to an object to configure how the injected `<script>` tags load:
+Set it to an object for the options below. It can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor) `html` option.
 
-| Option          | Description                                                           |
-| --------------- | --------------------------------------------------------------------- |
-| `scriptLoading` | `'auto'` (default), `'defer'`, or `'blocking'`. See the values below. |
+### output.html.scriptLoading
 
-- `'auto'`: emit a module script (`type="module"`) for ES module output and a deferred script otherwise.
+`'auto' | 'defer' | 'blocking'`
+
+Configure how the injected `<script>` tags load:
+
+- `'auto'` (default): emit a module script (`type="module"`) for ES module output and a deferred script otherwise.
 - `'defer'`: force a deferred `<script defer>`.
 - `'blocking'`: emit a plain blocking `<script>`.
 
@@ -902,7 +904,235 @@ export default {
 };
 ```
 
-It can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor) `html` option.
+### output.html.title
+
+<Badge text="5.109.0+" />
+
+`string`
+
+Sets the `<title>` of the generated HTML page. Skipped if the HTML already contains a `<title>` element.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      title: "My App",
+    },
+  },
+};
+```
+
+### output.html.meta
+
+<Badge text="5.109.0+" />
+
+`object`
+
+Inject `<meta>` tags into the page `<head>`. Each key is the `name` attribute (or `'charset'` for a charset declaration) and the value is the `content` string. Keys beginning with `og:` use the `property` attribute instead of `name`. A tag is skipped if the HTML already contains a meta with the same name.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      meta: {
+        viewport: "width=device-width, initial-scale=1",
+        "og:title": "My App",
+      },
+    },
+  },
+};
+```
+
+### output.html.base
+
+<Badge text="5.109.0+" />
+
+`string` `object`
+
+Inject a `<base>` element into the page `<head>`. A string sets `href`; an object sets `href` and optionally `target`. Skipped if the HTML already contains a `<base>` element.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      base: { href: "https://example.com/", target: "_blank" },
+    },
+  },
+};
+```
+
+### output.html.inject
+
+<Badge text="5.109.0+" />
+
+`'body' | 'head' | false`
+
+Where to place injected chunk `<script>` tags (and `<link rel="modulepreload">` clones):
+
+- `'body'` (default; `'head'` with [`output.module`](#outputmodule)): keep them next to the entry tag, at the end of `<body>` on generated pages.
+- `'head'`: move them into `<head>`.
+- `false`: suppress sibling-chunk injection; entry tags and resource hints remain.
+
+Stylesheet `<link>` tags for CSS chunks are not affected: they always land in `<head>` when the page has one, ahead of the first blocking script, or after `defer` / module script tags when there is none (the order `html-webpack-plugin` emits).
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      inject: "head",
+    },
+  },
+};
+```
+
+### output.html.inline
+
+<Badge text="5.109.0+" />
+
+`boolean` `'script' | 'style'` `RegExp[]`
+
+Inline the content of matching chunks directly into the HTML instead of emitting a separate `<script>` / `<link>` tag:
+
+- `true`: inline every chunk.
+- `'script'`: inline only JavaScript chunks.
+- `'style'`: inline only CSS chunks.
+- An array of `RegExp` patterns: inline the chunks whose name matches.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      inline: [/^runtime/, /critical/],
+    },
+  },
+};
+```
+
+Individual references inside an authored HTML page can also opt in or out with the `webpackInline` magic comment, e.g. `<!-- webpackInline: true --><script src="./critical.js"></script>`. The HTML page's `[contenthash]` accounts for the inlined chunk content.
+
+### output.html.favicon
+
+<Badge text="5.109.0+" />
+
+`boolean = false` `string` `object` `function`
+
+Favicon(s) for webpack-generated HTML pages (authored pages are left untouched). Every icon is emitted as a hashed asset through the regular asset pipeline:
+
+- `false` (default): inject nothing.
+- `true`: inject the webpack logo.
+- `string`: path to an icon file, linked as `<link rel="icon">`.
+- `object`: maps each `<link rel>` to an icon. Each icon is a path string, an object with the icon `href` plus extra link attributes (`sizes`, `media`, `color`, `type`, `crossorigin`), or an array of these for multiple icons under the same `rel` (e.g. several `sizes`, or light/dark `media` variants).
+- `function`: receives the page name and returns any of the above.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      favicon: {
+        icon: [
+          { href: "./favicon.svg", type: "image/svg+xml" },
+          { href: "./favicon-32.png", sizes: "32x32" },
+        ],
+        "apple-touch-icon": "./apple-touch-icon.png",
+      },
+    },
+  },
+};
+```
+
+### output.html.integrity
+
+<Badge text="5.109.0+" />
+
+`boolean` `string[]` `function`
+
+Add Subresource Integrity (SRI) `integrity` attributes to injected `<script>` / `<link>` tags. `true` uses `['sha384']`; an array sets the hash algorithms (passed to Node.js `crypto.createHash`, e.g. `['sha256', 'sha384']`); a function receives each referenced asset (`{ chunk, filename }`) and returns the algorithms to use, or `false` to skip that asset.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      integrity: true,
+    },
+  },
+};
+```
+
+T> Pair it with [`output.crossOriginLoading`](#outputcrossoriginloading) when assets are served from a different origin, since SRI requires CORS-enabled fetches.
+
+### output.html.csp
+
+<Badge text="5.109.0+" />
+
+`boolean = false` `object`
+
+Inject a `<meta http-equiv="Content-Security-Policy">` into every webpack-emitted HTML page. `true` uses a strict baseline (`script-src 'self'`, `style-src 'self'`, `object-src 'none'`, `base-uri 'self'`) and appends a `sha256` hash of every inline `<script>` / `<style>` to `script-src` / `style-src`. Skipped when the page already declares a CSP.
+
+An object customizes it:
+
+- `policy` (`object`): CSP directives merged over the baseline. Each key is a directive (e.g. `'script-src'`); the value is a source string or a list. Inline hashes and any `nonce` are still appended to `script-src` / `style-src`.
+- `hashFunction` (`'sha256' | 'sha384' | 'sha512'`): hash algorithm used for inline `<script>` / `<style>` sources.
+- `nonce` (`string`): placeholder nonce added to injected `<script>` / `<style>` tags and as a `'nonce-…'` source; rewrite it per request server-side.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      csp: {
+        policy: {
+          "img-src": ["'self'", "data:"],
+          "connect-src": "https://api.example.com",
+        },
+      },
+    },
+  },
+};
+```
+
+### output.html.manifest
+
+<Badge text="5.109.0+" />
+
+`false` `string` `object` `function`
+
+Web app manifest for webpack-generated HTML pages (authored pages are left untouched):
+
+- `false` (default): inject nothing.
+- `string`: path to an existing `.webmanifest` file to link.
+- `object`: the manifest contents; it is serialized, emitted as a hashed `.webmanifest` and linked with `<link rel="manifest">`. Its `icons` / `screenshots` `src` paths resolve like any request and are emitted as hashed assets.
+- `function`: receives the page name and returns any of the above.
+
+```js
+// webpack.config.js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      manifest: {
+        name: "My App",
+        short_name: "App",
+        icons: [{ src: "./icon-512.png", sizes: "512x512" }],
+      },
+    },
+  },
+};
+```
 
 ## output.htmlFilename
 
@@ -2450,6 +2680,154 @@ __webpack_public_path__ = myRuntimePublicPath;
 
 See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) for more information on `__webpack_public_path__`.
 
+## output.resourceHints
+
+<Badge text="5.109.0+" />
+
+`boolean` `'prefetch' | 'preload' | 'none'` `HtmlResourceHint[]` `function` `object`
+
+Controls resource-hint emission (`<link rel="prefetch">` / `<link rel="preload">` / `<link rel="modulepreload">` / `<link rel="preconnect">`) for extracted HTML entries and URL-referenced assets. Hints are emitted into the extracted HTML `<head>` for HTML entries and via a chunk-startup JS runtime otherwise, and `stats.entrypoints[name].resourceHints` exposes the resolved list.
+
+The option accepts the [initial dependency-graph shorthand](#outputresourcehintsinitial) directly (equivalent to `{ initial: <value> }`):
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  output: {
+    resourceHints: true, // same as { initial: true }
+  },
+};
+```
+
+Or the object form with the properties documented below:
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  output: {
+    resourceHints: {
+      initial: true,
+      preconnect: true,
+      manifest: "resource-hints.json",
+      urlHints: [{ test: /\.woff2$/, preload: true, as: "font" }],
+    },
+  },
+};
+```
+
+T> Related parser options: [`module.parser.<type>.urlHints`](/configuration/module/#moduleparserjavascripturlhints), [`module.parser.css.fontPreload`](/configuration/module/#moduleparsercssfontpreload) and [`module.parser.javascript.dynamicImportCssPreload`](/configuration/module/#moduleparserjavascriptdynamicimportcsspreload).
+
+### output.resourceHints.initial
+
+`boolean` `'prefetch' | 'preload' | 'none'` `HtmlResourceHint[]` `function`
+
+Hints for the entry's initial dependency-graph chunks:
+
+- `true`: auto-emit `<link rel="modulepreload">` (ES module output) or `<link rel="preload" as="script">` (classic output) for each of the entry's initial dependency chunks. `'preload'` is an alias.
+- `'prefetch'`: use `<link rel="prefetch">` instead.
+- `false`: disable chunk hints. URL-asset hints from magic comments / `urlHints` still fire.
+- `'none'`: a hard off switch, no `<link>` anywhere, empty stats/manifest.
+- `HtmlResourceHint[]`: replace the auto set with custom descriptors.
+- `function`: receives `{ entryName, entrypoint, hostType: 'html' | 'js', compilation, defaultHints }`, where `defaultHints` are the auto hints (each carrying `hostChunks`), and returns the final list of descriptors.
+
+It defaults to **on** for ES module output ([`output.module`](#outputmodule)), where native `import()` would otherwise waterfall, and **off** for classic output.
+
+Each `HtmlResourceHint` descriptor requires `rel` (`'preload' | 'prefetch' | 'modulepreload' | 'preconnect' | 'dns-prefetch'`) and exactly one target: `href` (a literal URL), `chunk` (a chunk name, resolved to its emitted URL) or `entry` (an entrypoint name, expanded to one hint per initial chunk). Optional attributes: `as`, `type`, `media`, `crossorigin`, `fetchPriority` and `integrity`.
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  output: {
+    resourceHints: {
+      // extend the automatic hints with a custom one
+      initial: ({ defaultHints }) => [
+        ...defaultHints,
+        { rel: "preconnect", href: "https://fonts.example.com" },
+      ],
+    },
+  },
+};
+```
+
+### output.resourceHints.urlHints
+
+`UrlHintRule[]`
+
+Project-wide URL-referenced-asset hint rules, applied as the base [`urlHints`](/configuration/module/#moduleparserjavascripturlhints) of every parser (JavaScript `new URL(...)`, CSS `url(...)`, HTML `<img src>` / `<link href>`). Parser-scoped `module.parser.<type>.urlHints` rules and per-URL magic comments still override these.
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  output: {
+    resourceHints: {
+      urlHints: [
+        { test: /\.woff2$/, preload: true, as: "font" },
+        { test: /hero\./, preload: true, as: "image", fetchPriority: "high" },
+      ],
+    },
+  },
+};
+```
+
+### output.resourceHints.preconnect
+
+`boolean`
+
+Auto-emit `<link rel="preconnect">` for the origin of a cross-origin [`output.publicPath`](#outputpublicpath) (the origin bundles and assets are served from) into extracted HTML entries and the resource-hint stats/manifest. It mirrors [`output.crossOriginLoading`](#outputcrossoriginloading). No-op when `publicPath` is relative or `'auto'`.
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  output: {
+    publicPath: "https://cdn.example.com/assets/",
+    resourceHints: {
+      preconnect: true, // <link rel="preconnect" href="https://cdn.example.com">
+    },
+  },
+};
+```
+
+### output.resourceHints.modulePreloadPolyfill
+
+`boolean`
+
+Inject a tiny inline `<script>` polyfill for `<link rel="modulepreload">` into extracted HTML pages. The default derives from the target's modulepreload support ([`output.environment.modulePreload`](#outputenvironment)): `true` when the environment lacks native support, `false` when it has it. Set it to `false` to never inject the polyfill (the `<link>` tags are still emitted but do nothing on browsers without support), e.g. under a strict CSP that forbids inline scripts.
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  output: {
+    resourceHints: {
+      modulePreloadPolyfill: false,
+    },
+  },
+};
+```
+
+### output.resourceHints.manifest
+
+`string`
+
+Emit a JSON manifest of the resolved resource hints for each entrypoint (the same descriptors as `stats.entrypoints[].resourceHints`) as an output asset at the given path. This lets an SSR server inject the `<link>` tags itself without walking the chunk graph. The manifest is empty when [`initial`](#outputresourcehintsinitial) is `'none'`.
+
+```js
+// webpack.config.js
+export default {
+  // ...
+  output: {
+    resourceHints: {
+      manifest: "resource-hints.json",
+    },
+  },
+};
+```
+
 ## output.scriptType
 
 `string: 'module' | 'text/javascript'` `boolean = false`
@@ -2671,6 +3049,23 @@ export default {
   // ...
   output: {
     wasmLoading: "fetch",
+  },
+};
+```
+
+## output.wasmStreamingFallback
+
+<Badge text="5.109.0+" />
+
+`boolean`
+
+Fall back to non-streaming WebAssembly instantiation when streaming compilation fails because the server does not serve `.wasm` files with the `application/wasm` MIME type.
+
+```js
+export default {
+  // ...
+  output: {
+    wasmStreamingFallback: true,
   },
 };
 ```
