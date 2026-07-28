@@ -505,3 +505,42 @@ main.js
 vendor.js
 styles.css
 ```
+
+## Testing your plugin
+
+Testing plugins is similar to testing any other build tool. The recommended approach is to run a webpack compilation with your plugin enabled and verify that the compilation produces the expected result.
+
+A typical plugin test should:
+
+- Create a webpack configuration that includes your plugin.
+- Run a compilation using the Node.js API.
+- Assert the expected compilation output, generated assets, warnings, or errors depending on the plugin's behavior.
+
+For example, using Jest:
+
+```js
+import webpack from "webpack";
+import MyPlugin from "../src/MyPlugin.js";
+
+test("runs the plugin successfully", (done) => {
+  const compiler = webpack({
+    mode: "development",
+    entry: "./fixtures/index.js",
+    plugins: [new MyPlugin()],
+  });
+
+  compiler.run((err, stats) => {
+    expect(err).toBeNull();
+    expect(stats.hasErrors()).toBe(false);
+
+    // Add assertions that verify your plugin's behavior.
+
+    done();
+  });
+});
+```
+
+The exact assertions depend on what your plugin does. For example, you might verify emitted assets, transformed source code, warnings, errors, or changes made to the compilation.
+
+For real-world examples of plugin tests, browse the webpack repository and webpack ecosystem plugins to see how they compile fixtures and assert the resulting output.
+
