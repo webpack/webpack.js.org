@@ -1,0 +1,94 @@
+# webpack
+
+> webpack is a static module bundler for modern JavaScript applications. When webpack processes your application, it internally builds a dependency graph from one or more entry points and then combines every module your project needs into one or more bundles.
+
+Documentation is versioned; this index covers the current (webpack 5) docs at https://webpack.js.org.
+
+## Getting Started
+
+- [Concepts](https://webpack.js.org/concepts/): Core ideas — entry, output, loaders, plugins, mode.
+- [Why webpack](https://webpack.js.org/concepts/why-webpack/): Motivation and problem webpack solves.
+- [Getting Started](https://webpack.js.org/guides/getting-started/): First bundle walkthrough.
+- [Installation](https://webpack.js.org/guides/installation/): Install webpack and the CLI.
+- [Asset Management](https://webpack.js.org/guides/asset-management/): Bundling images, fonts, and other files.
+- [Output Management](https://webpack.js.org/guides/output-management/): Managing multiple entry/output files.
+- [Development](https://webpack.js.org/guides/development/): Dev workflow, source maps, watch mode.
+- [Hot Module Replacement](https://webpack.js.org/guides/hot-module-replacement/): Live module swapping without a full reload.
+- [Production](https://webpack.js.org/guides/production/): Production build best practices.
+
+## Core Concepts
+
+- [Entry Points](https://webpack.js.org/concepts/entry-points/)
+- [Output](https://webpack.js.org/concepts/output/)
+- [Loaders](https://webpack.js.org/concepts/loaders/)
+- [Plugins](https://webpack.js.org/concepts/plugins/)
+- [Module Resolution](https://webpack.js.org/concepts/module-resolution/)
+- [Module Federation](https://webpack.js.org/concepts/module-federation/)
+- [Manifest](https://webpack.js.org/concepts/manifest/)
+- [Under the Hood](https://webpack.js.org/concepts/under-the-hood/)
+
+## Guides
+
+- [Code Splitting](https://webpack.js.org/guides/code-splitting/)
+- [Tree Shaking](https://webpack.js.org/guides/tree-shaking/)
+- [Lazy Loading](https://webpack.js.org/guides/lazy-loading/)
+- [Caching](https://webpack.js.org/guides/caching/)
+- [Environment Variables](https://webpack.js.org/guides/environment-variables/)
+- [Dependency Management](https://webpack.js.org/guides/dependency-management/)
+- [TypeScript](https://webpack.js.org/guides/typescript/)
+- [Progressive Web Application](https://webpack.js.org/guides/progressive-web-application/)
+- [Build Performance](https://webpack.js.org/guides/build-performance/)
+- [Author Libraries](https://webpack.js.org/guides/author-libraries/)
+- [Shimming](https://webpack.js.org/guides/shimming/)
+- [Web Workers](https://webpack.js.org/guides/web-workers/)
+
+## Configuration
+
+- [Configuration Overview](https://webpack.js.org/configuration/)
+- [Entry and Context](https://webpack.js.org/configuration/entry-context/)
+- [Output](https://webpack.js.org/configuration/output/)
+- [Module](https://webpack.js.org/configuration/module/)
+- [Resolve](https://webpack.js.org/configuration/resolve/)
+- [DevServer](https://webpack.js.org/configuration/dev-server/)
+- [DevTool](https://webpack.js.org/configuration/devtool/)
+- [Optimization](https://webpack.js.org/configuration/optimization/)
+- [Target](https://webpack.js.org/configuration/target/)
+- [Externals](https://webpack.js.org/configuration/externals/)
+- [Stats](https://webpack.js.org/configuration/stats/)
+- [Mode](https://webpack.js.org/configuration/mode/)
+- [Experiments](https://webpack.js.org/configuration/experiments/)
+
+## Loaders and Plugins
+
+- [Loaders Index](https://webpack.js.org/loaders/): Full loader reference.
+- [Plugins Index](https://webpack.js.org/plugins/): Full plugin reference.
+- [DefinePlugin](https://webpack.js.org/plugins/define-plugin/)
+- [HtmlWebpackPlugin](https://webpack.js.org/plugins/html-webpack-plugin/)
+- [SplitChunksPlugin](https://webpack.js.org/plugins/split-chunks-plugin/)
+- [ModuleFederationPlugin](https://webpack.js.org/plugins/module-federation-plugin/)
+- [HotModuleReplacementPlugin](https://webpack.js.org/plugins/hot-module-replacement-plugin/)
+
+## API Reference
+
+- [API Overview](https://webpack.js.org/api/)
+- [Command Line Interface](https://webpack.js.org/api/cli/)
+- [Compiler Hooks](https://webpack.js.org/api/compiler-hooks/)
+- [Compilation Hooks](https://webpack.js.org/api/compilation-hooks/)
+- [Module Methods](https://webpack.js.org/api/module-methods/)
+- [Node.js API](https://webpack.js.org/api/node/)
+- [Stats Data](https://webpack.js.org/api/stats/)
+- [Loader API](https://webpack.js.org/api/loaders/)
+- [Plugin API](https://webpack.js.org/api/plugins/)
+
+## Migration
+
+- [Migration Guides Index](https://webpack.js.org/migrate/)
+- [Migrating to webpack 5](https://webpack.js.org/migrate/5/)
+- [Migrating to webpack 4](https://webpack.js.org/migrate/4/)
+
+## Optional
+
+- [Glossary](https://webpack.js.org/glossary/): Terminology reference.
+- [Comparison](https://webpack.js.org/comparison/): webpack vs. other bundlers.
+- [Contribute](https://webpack.js.org/contribute/): Contributing to webpack docs and core.
+- [Awesome webpack](https://webpack.js.org/awesome-webpack/): Curated list of resources, loaders, and plugins.
