@@ -71,7 +71,7 @@ export default {
         </g>
         <g transform="translate(302, 414.500000) scale(1, -1) translate(-302, -414.500000) translate(182, 404)">
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
             <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
         </g>
         <g transform="translate(116, 391)">
@@ -94,12 +94,12 @@ export default {
         </g>
         <g transform="translate(182, 201)">
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M1,0 L1,3 L21,3 L23,5 L23,107 L25,109 L75,109 L77,111 L77,125"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L21,3 L23,5 L23,107 L25,109 L75,109 L77,111 L77,125"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L21,3 L23,5 L23,107 L25,109 L75,109 L77,111 L77,125"></path>
             <polyline stroke="#BBDBEC" stroke-width="2" points="80 118 77 126.8 74 118"></polyline>
         </g>
         <g transform="translate(182, 189)">
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M1,0 L1,3 L75,3 L77,5 L77,25"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,25"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,25"></path>
             <polyline stroke="#BBDBEC" stroke-width="2" points="80 18 77 26.8000002 74 18"></polyline>
         </g>
         <g transform="translate(116, 167)">
@@ -113,7 +113,7 @@ export default {
         </g>
         <g transform="translate(110, 470.500000) scale(1, -1) translate(-190, -470.500000) translate(150, 460)">
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
             <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
         </g>
         <g transform="translate(4, 447)">
@@ -127,7 +127,7 @@ export default {
         </g>
         <g transform="translate(70, 363)">
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
             <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
         </g>
         <g transform="translate(4, 335)">
@@ -141,17 +141,17 @@ export default {
         </g>
         <g transform="translate(38, 307)">
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M0,23 L3,23 L3,7 L5,3 L68,3"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M0,23 L3,23 L3,7 L5,3 L68,3"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M0,23 L3,23 L3,7 L5,3 L68,3"></path>
             <polyline stroke="#BBDBEC" stroke-width="2" transform="translate(66.400000, 3) rotate(270) translate(-66.400000, -3) " points="69.4000001 -1.4000001 66.4000001 7.4000001 63.4000001 -1.4000001"></polyline>
         </g>
         <g transform="translate(26, 289)">
             <polyline stroke="#BBDBEC" stroke-width="2" points="6 30 3 38.8000002 0 30"></polyline>
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M0,1 L3,1 L3,39"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M0,1 L3,1 L3,39"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M0,1 L3,1 L3,39"></path>
         </g>
         <g transform="translate(110, 246.500000) scale(1, -1) translate(-190, -246.500000) translate(150, 236)">
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M1,0 L1,3 L75,3 L77,5 L77,18"></path>
             <polyline stroke="#BBDBEC" stroke-width="2" points="80 12 77 20.8000002 74 12"></polyline>
         </g>
         <g transform="translate(4, 223)">
@@ -166,7 +166,7 @@ export default {
         <g transform="translate(32, 177)">
             <polyline stroke="#BBDBEC" stroke-width="2" points="6 30 3 38.8000002 0 30"></polyline>
             <path fill="none" stroke="#BBDBEC" stroke-width="2" d="M0,1 L3,1 L3,39"></path>
-            <path fill="none" class="arrow-dot-flow stroke-blue-800 dark:stroke-gray-900" stroke-width="3" stroke-linecap="round" d="M0,1 L3,1 L3,39"></path>
+            <path fill="none" class="arrow-dot-flow" stroke-width="3" stroke-linecap="round" d="M0,1 L3,1 L3,39"></path>
         </g>
         <g transform="translate(4, 111)">
             <g>

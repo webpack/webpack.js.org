@@ -126,6 +126,7 @@
 }
 
 .arrow-dot-flow {
+  @apply stroke-blue-800 dark:stroke-gray-900;
   stroke-dasharray: 2, 30;
   animation: flow 1.5s linear infinite;
 }
