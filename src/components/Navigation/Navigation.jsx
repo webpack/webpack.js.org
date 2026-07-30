@@ -145,7 +145,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
             <Logo />
           </Link>
           <nav
-            className="hidden md:inline-grid md:grid-flow-col md:gap-x-[18px] md:items-center"
+            className="hidden md:inline-grid md:grid-flow-col md:gap-x-8 md:items-center"
             aria-label="Main navigation"
           >
             {links.map(({ content, url, isActive, ariaLabel }) => (
@@ -205,7 +205,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               ]}
             />
           </nav>
-          <div className="inline-flex items-center gap-x-[18px] ml-[18px]">
+          <div className="inline-flex items-center gap-x-6 ml-8">
             <HelloDarkness />
             {mounted && (
               <DocSearch

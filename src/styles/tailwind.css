@@ -45,7 +45,11 @@
   @apply lg:text-gray-100!;
 }
 .DocSearch-Button-Keys {
-  @apply hidden! lg:flex!;
+  @apply hidden! lg:flex! opacity-50!;
+}
+
+.code-block-wrapper pre {
+  @apply rounded-xl!;
 }
 .DocSearch-Button .DocSearch-Search-Icon {
   @apply text-white! lg:text-gray-100!;
@@ -93,4 +97,35 @@
 }
 .splash__right p {
   @apply text-left;
+}
+
+@keyframes flow {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flow-reverse {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+
+.flowing-dash {
+  animation: flow 2s linear infinite;
+}
+
+.flowing-dash-reverse {
+  animation: flow-reverse 2s linear infinite;
+}
+
+.arrow-dot-flow {
+  stroke-dasharray: 2, 30;
+  animation: flow 1.5s linear infinite;
 }

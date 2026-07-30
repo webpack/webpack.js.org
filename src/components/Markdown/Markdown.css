@@ -53,10 +53,7 @@
   h4,
   h5,
   h6 {
-    @apply block font-semibold text-heading-dark leading-[1.4];
-    font-family:
-      "Source Serif Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times,
-      serif;
+    @apply block font-bold text-heading-dark leading-[1.4];
     margin: 0 0 0.25em;
     word-break: break-word;
 

@@ -6,8 +6,8 @@ import HomeSVG from "./SplashVizSVG.mjs";
 export default function SplashViz() {
   return (
     <section className="relative h-[clamp(35rem,calc(100vh-80px),45rem)] bg-blue-800 grid grid-rows-[auto_1fr] overflow-hidden p-4 max-lg:h-[clamp(30rem,calc(100vh-80px),35rem)] max-[425px]:min-h-[clamp(40rem,calc(100vh-80px),50rem)] dark:bg-gray-900!">
-      <h1 className="flex flex-wrap items-center justify-center text-white text-[33.178px] md:text-[39.813px] text-center font-[200] mt-[80px] md:mt-[90px] row-start-1 row-end-2">
-        <span> bundle your</span>
+      <h1 className="flex flex-wrap items-center justify-center text-white text-[33.178px] md:text-[39.813px] text-center font-bold mt-[80px] md:mt-[90px] row-start-1 row-end-2">
+        <span> Bundle your</span>
         <TextRotator delay={5000} repeatDelay={5000} maxWidth={110}>
           <span> assets </span>
           <span> scripts </span>
