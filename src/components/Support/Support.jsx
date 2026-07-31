@@ -132,7 +132,7 @@ export default function Support({ rank, type }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1, rootMargin: "800px" },
     );
 
     if (containerRef.current) {

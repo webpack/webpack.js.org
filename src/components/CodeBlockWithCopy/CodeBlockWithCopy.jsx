@@ -6,6 +6,7 @@ export default function CodeBlockWithCopy({ children }) {
   const preRef = useRef(null);
   const resetStatusTimeoutRef = useRef(null);
   const [copyStatus, setCopyStatus] = useState("copy");
+  const [isSingleLine, setIsSingleLine] = useState(false);
 
   const codeClassName =
     typeof children?.props?.className === "string"
@@ -114,17 +115,27 @@ export default function CodeBlockWithCopy({ children }) {
     [],
   );
 
+  useEffect(() => {
+    if (preRef.current) {
+      const codeElement = preRef.current.querySelector("code");
+      if (codeElement) {
+        const codeText = getCodeText(codeElement);
+        setIsSingleLine(codeText.trim().split("\n").length <= 1);
+      }
+    }
+  }, [children]);
+
   return (
     <div className="code-block-wrapper relative mb-6 group">
       <button
         onClick={handleCopy}
         className={cn(
           "copy-button",
-          "absolute top-2 right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-[0.35rem] border-none cursor-pointer text-xs font-medium text-slate-200",
-          "opacity-0 group-hover:opacity-100",
-          "transition-[background-color,transform,opacity] duration-200",
+          "absolute right-2 z-10 px-[0.7rem] py-[0.4rem] rounded-xl border-none cursor-pointer text-xs font-medium text-slate-200",
+          isSingleLine ? "top-1/2 -translate-y-1/2" : "top-2",
+          "transition-[background-color,transform] duration-200",
           "active:scale-95",
-          "focus-visible:outline-none focus-visible:opacity-100",
+          "focus-visible:outline-none",
           copyStatus === "copied"
             ? "bg-green-600 hover:bg-green-700"
             : copyStatus === "error"

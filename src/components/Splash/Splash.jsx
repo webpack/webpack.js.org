@@ -77,6 +77,7 @@ const Splash = () => {
                     <input
                       id="support-type"
                       type="checkbox"
+                      className="mr-2"
                       checked={supportType === "monthly"}
                       onChange={(event) =>
                         setSupportType(
