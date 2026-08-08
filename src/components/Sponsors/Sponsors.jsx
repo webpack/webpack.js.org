@@ -9,8 +9,11 @@ import { RenderATLCard } from "../RenderATL/RenderATL.jsx";
 // Tailwind CSS is used for styling
 
 const Sponsors = () => (
-  <div className="absolute h-full w-[250px] ml-[-250px] mr-2.5">
-    <div className="sticky hidden xl:flex flex-wrap justify-center items-start border-r-2 border-gray-200 my-6 px-6 pb-12 overflow-hidden bg-transparent transition-colors duration-200 top-24">
+  <div
+    className="absolute h-full right-[100%] mr-2.5 flex justify-end items-start"
+    style={{ maxWidth: "calc(50vw - 520px)" }}
+  >
+    <div className="sticky hidden lg:flex flex-col items-center border-r-2 border-gray-200 my-6 px-2 pb-12 overflow-hidden bg-transparent transition-colors duration-200 top-24 w-[250px] max-w-full">
       {/* AG Grid */}
       <div className="bg-white dark:bg-black shadow-lg rounded-lg m-2 transition-transform duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:scale-105 dark:shadow-[0_0_40px_rgba(255,255,255,0.18)]">
         <Link to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
@@ -20,7 +23,7 @@ const Sponsors = () => (
             alt="ag grid"
             width={220}
             loading="lazy"
-            className="block dark:hidden"
+            className="block dark:hidden max-w-full h-auto"
           />
 
           {/* Dark mode */}
@@ -29,7 +32,7 @@ const Sponsors = () => (
             alt="ag grid dark"
             width={220}
             loading="lazy"
-            className="hidden dark:block"
+            className="hidden dark:block max-w-full h-auto"
           />
         </Link>
       </div>
@@ -43,7 +46,7 @@ const Sponsors = () => (
             alt="ag charts"
             width={220}
             loading="lazy"
-            className="block dark:hidden"
+            className="block dark:hidden max-w-full h-auto"
           />
 
           {/* Dark mode */}
@@ -52,7 +55,7 @@ const Sponsors = () => (
             alt="ag charts dark"
             width={220}
             loading="lazy"
-            className="hidden dark:block"
+            className="hidden dark:block max-w-full h-auto"
           />
         </Link>
       </div>
@@ -73,6 +76,7 @@ const Sponsors = () => (
               width={150}
               height={150}
               loading="lazy"
+              className="max-w-full h-auto"
             />
           </div>
 

@@ -243,7 +243,7 @@ export function RenderATLCard() {
       <Link
         to={TICKETS_URL}
         aria-label="RenderATL 2026, August 12 to 13 in Atlanta — get tickets"
-        className="block w-[220px] overflow-hidden rounded-lg text-blue-800 hover:text-blue-800"
+        className="block w-full max-w-[220px] overflow-hidden rounded-lg text-blue-800 hover:text-blue-800"
       >
         <div className="bg-blue-200 p-[18px]">
           <p
