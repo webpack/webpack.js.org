@@ -54,11 +54,11 @@ h1 {
 
 يضيف CSS الأصلي أربع قيم للخيار [`Rule.type`](/configuration/module/#ruletype). معرفة النوع المناسب أساسية عند الترحيل، لأن كل نوع يقابل وضعًا مختلفًا من `modules.mode` في `css-loader`:
 
-| النوع        | نطاق الأسماء                                                              | ما يقابله في `css-loader` |
-| ------------ | -------------------------------------------------------------------------- | ------------------------- |
-| `css`        | عام، من دون تحليل CSS Modules                                              | `modules: false`          |
-| `css/global` | المحددات عامة، مع احترام `:local()`                                        | `modules.mode: 'global'`  |
-| `css/module` | محلي افتراضيًا، وتتيح `:global()` الخروج إلى النطاق العام                  | `modules.mode: 'local'`   |
+| النوع        | نطاق الأسماء                                                                 | ما يقابله في `css-loader` |
+| ------------ | ---------------------------------------------------------------------------- | ------------------------- |
+| `css`        | عام، من دون تحليل CSS Modules                                                | `modules: false`          |
+| `css/global` | المحددات عامة، مع احترام `:local()`                                          | `modules.mode: 'global'`  |
+| `css/module` | محلي افتراضيًا، وتتيح `:global()` الخروج إلى النطاق العام                    | `modules.mode: 'local'`   |
 | `css/auto`   | يختار `css/module` لملفات `*.module.css` و`*.modules.css`، وإلا `css/global` | `modules.auto: true`      |
 
 القاعدة الافتراضية التي يضيفها webpack للنمط `/\.css$/i` هي `css/auto`. لذلك تصبح ملفات `*.module.css` وحدات CSS، بينما تبقى بقية الملفات عامة، وهو ما يطابق الإعداد الأكثر شيوعًا في `css-loader` من دون تخصيص إضافي.
@@ -142,16 +142,18 @@ export default {
 }
 ```
 
-## أوضاع الإخراج (`exportType`) {#output-modes-exporttype}
+<span id="output-modes-exporttype"></span>
+
+## أوضاع الإخراج (`exportType`)
 
 يمكن إخراج وحدة CSS واحدة بأربع طرائق. يحدد خيار المحلل [`exportType`](/configuration/module/#moduleparsercssexporttype) الطريقة المستخدمة، وكل واحدة منها تحل محل جزء مختلف من سلسلة الأدوات التقليدية:
 
-| `exportType`         | السلوك                                                                                      | يحل محل                                      |
-| -------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| `"link"` _(الافتراضي)_ | استخراج ملف `.css` وتحميله عبر `<link>`                                                     | `mini-css-extract-plugin`                    |
-| `"style"`            | حقن عنصر `<style>` من شيفرة runtime                                                         | `style-loader`                               |
-| `"text"`             | تصدير CSS كسلسلة نصية                                                                       | `css-loader` مع `exportType: 'string'`       |
-| `"css-style-sheet"`  | تصدير كائن [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet) قابل للإنشاء | `css-loader` مع `exportType: 'css-style-sheet'` |
+| `exportType`           | السلوك                                                                                                    | يحل محل                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `"link"` _(الافتراضي)_ | استخراج ملف `.css` وتحميله عبر `<link>`                                                                   | `mini-css-extract-plugin`                       |
+| `"style"`              | حقن عنصر `<style>` من شيفرة runtime                                                                       | `style-loader`                                  |
+| `"text"`               | تصدير CSS كسلسلة نصية                                                                                     | `css-loader` مع `exportType: 'string'`          |
+| `"css-style-sheet"`    | تصدير كائن [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet) قابل للإنشاء | `css-loader` مع `exportType: 'css-style-sheet'` |
 
 يمكنك ضبطه لجميع الملفات التابعة لنوع وحدة معين:
 
@@ -189,21 +191,21 @@ export default {
 
 ### نظرة سريعة
 
-| الإعداد التقليدي                                          | البديل الأصلي                                                                                                                                          |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `mini-css-extract-plugin` (`MiniCssExtractPlugin.loader`) | الاستخراج المدمج (القيمة الافتراضية `exportType: "link"`)                                                                                             |
-| `MiniCssExtractPlugin` وخيارا `filename` و`chunkFilename` | [`output.cssFilename`](/configuration/output/#outputcssfilename) و[`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)           |
-| `style-loader`                                            | [`exportType: "style"`](#output-modes-exporttype)                                                                                                     |
-| `css-loader`                                              | تحليل CSS المدمج، ولا حاجة إلى loader                                                                                                                  |
-| `css-loader` وخيارا `url` و`import`                       | [`module.parser.css.url`](/configuration/module/#moduleparsercssurl) و[`import`](/configuration/module/#moduleparsercssimport)، وكلاهما `true` افتراضيًا |
-| اكتشاف `css-loader` التلقائي لـ`modules`                  | نوع الوحدة `css/auto`                                                                                                                                  |
-| `css-loader` وخيار `modules.mode`                         | النوعان `css/module` و`css/global` مع [`pure`](/configuration/module/#moduleparsercsspure)                                                            |
-| `css-loader` وخيار `modules.localIdentName`               | خيار المولد [`localIdentName`](/configuration/module/#modulegenerator)                                                                                |
-| `css-loader` وخيار `modules.exportLocalsConvention`       | خيار المولد [`exportsConvention`](/configuration/module/#modulegenerator)                                                                             |
-| `css-loader` وخيار `modules.namedExport`                  | [`module.parser.css.namedExports`](/configuration/module/#moduleparsercssnamedexports)، وقيمته الافتراضية `true`                                      |
-| `css-loader` وخيار `modules.exportOnlyLocals`             | خيار المولد `exportsOnly`                                                                                                                              |
-| `css-loader` وخيار `esModule`                             | خيار المولد `esModule`، وقيمته الافتراضية `true`                                                                                                      |
-| `css-loader` مع `exportType: 'string'` أو `'css-style-sheet'` | [`exportType: "text"` أو`"css-style-sheet"`](#output-modes-exporttype)                                                                            |
+| الإعداد التقليدي                                              | البديل الأصلي                                                                                                                                            |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mini-css-extract-plugin` (`MiniCssExtractPlugin.loader`)     | الاستخراج المدمج (القيمة الافتراضية `exportType: "link"`)                                                                                                |
+| `MiniCssExtractPlugin` وخيارا `filename` و`chunkFilename`     | [`output.cssFilename`](/configuration/output/#outputcssfilename) و[`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)             |
+| `style-loader`                                                | [`exportType: "style"`](#output-modes-exporttype)                                                                                                        |
+| `css-loader`                                                  | تحليل CSS المدمج، ولا حاجة إلى loader                                                                                                                    |
+| `css-loader` وخيارا `url` و`import`                           | [`module.parser.css.url`](/configuration/module/#moduleparsercssurl) و[`import`](/configuration/module/#moduleparsercssimport)، وكلاهما `true` افتراضيًا |
+| اكتشاف `css-loader` التلقائي لـ`modules`                      | نوع الوحدة `css/auto`                                                                                                                                    |
+| `css-loader` وخيار `modules.mode`                             | النوعان `css/module` و`css/global` مع [`pure`](/configuration/module/#moduleparsercsspure)                                                               |
+| `css-loader` وخيار `modules.localIdentName`                   | خيار المولد [`localIdentName`](/configuration/module/#modulegenerator)                                                                                   |
+| `css-loader` وخيار `modules.exportLocalsConvention`           | خيار المولد [`exportsConvention`](/configuration/module/#modulegenerator)                                                                                |
+| `css-loader` وخيار `modules.namedExport`                      | [`module.parser.css.namedExports`](/configuration/module/#moduleparsercssnamedexports)، وقيمته الافتراضية `true`                                         |
+| `css-loader` وخيار `modules.exportOnlyLocals`                 | خيار المولد `exportsOnly`                                                                                                                                |
+| `css-loader` وخيار `esModule`                                 | خيار المولد `esModule`، وقيمته الافتراضية `true`                                                                                                         |
+| `css-loader` مع `exportType: 'string'` أو `'css-style-sheet'` | [`exportType: "text"` أو`"css-style-sheet"`](#output-modes-exporttype)                                                                                   |
 
 انقل loader واحدًا في كل خطوة. رُتبت الأقسام التالية بحيث يبقى البناء سليمًا في أثناء الترحيل.
 
@@ -268,13 +270,13 @@ export default {
 
 انقل بقية خيارات الملحق إلى البدائل التالية:
 
-| خيار `mini-css-extract-plugin` | البديل الأصلي                                                                   |
-| ------------------------------ | ------------------------------------------------------------------------------- |
-| `filename`                     | [`output.cssFilename`](/configuration/output/#outputcssfilename)                |
-| `chunkFilename`                | [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)      |
-| خيار loader المسمى `publicPath` | [`output.publicPath`](/configuration/output/#outputpublicpath)                  |
+| خيار `mini-css-extract-plugin`  | البديل الأصلي                                                                       |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| `filename`                      | [`output.cssFilename`](/configuration/output/#outputcssfilename)                    |
+| `chunkFilename`                 | [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)          |
+| خيار loader المسمى `publicPath` | [`output.publicPath`](/configuration/output/#outputpublicpath)                      |
 | خيار loader المسمى `esModule`   | خيار المولد [`esModule`](/configuration/module/#modulegenerator)، وافتراضيًا `true` |
-| `ignoreOrder`                  | لا يوجد؛ CSS الأصلي لا يصدر تحذيرات تعارض ترتيب                                |
+| `ignoreOrder`                   | لا يوجد؛ CSS الأصلي لا يصدر تحذيرات تعارض ترتيب                                     |
 
 **webpack.config.js**
 
@@ -292,25 +294,25 @@ export default {
 
 لمعظم خيارات `css-loader` مقابل أصلي ضمن [`module.parser.css`](/configuration/module/#moduleparsercss) و[`module.generator.css`](/configuration/module/#modulegenerator). وتطابق القيم الافتراضية الشائعة، مثل تفعيل `url` و`import` و`namedExports`، إعداد `css-loader` المعتاد؛ لذلك لا تحتاج مشاريع كثيرة إلى أي تخصيص للمحلل.
 
-| خيار `css-loader`                  | البديل الأصلي                                                                                     |
-| --------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `url`                             | `module.parser.css.url`، وقيمته الافتراضية `true`                                                |
-| `import`                          | `module.parser.css.import`، وقيمته الافتراضية `true`                                             |
-| `importLoaders`                   | لا يوجد؛ تطبق loaders الموجودة في السلسلة تلقائيًا على الملفات المستوردة عبر `@import`           |
-| `sourceMap`                       | يتحكم به [`devtool`](/configuration/devtool/)، ويدعم قيمة `css` خاصة بكل نوع                     |
-| `esModule`                        | `module.generator.css.esModule`، وقيمته الافتراضية `true`                                        |
-| `exportType: 'string'`            | خيار المحلل `exportType: "text"`                                                                |
-| `exportType: 'css-style-sheet'`   | خيار المحلل `exportType: "css-style-sheet"`                                                     |
-| `modules` مع الاكتشاف التلقائي    | نوع الوحدة المدمج `css/auto`                                                                     |
-| `modules.mode: 'local'`           | النوع `css/module`                                                                               |
-| `modules.mode: 'global'`          | النوع `css/global`                                                                               |
-| `modules.mode: 'pure'`            | خيار المحلل `pure: true`                                                                         |
-| `modules.localIdentName`          | خيار المولد `localIdentName`                                                                     |
-| `modules.exportLocalsConvention`  | خيار المولد `exportsConvention`                                                                  |
-| `modules.namedExport`             | خيار المحلل `namedExports`، وقيمته الافتراضية `true`                                             |
-| `modules.exportOnlyLocals`        | خيار المولد `exportsOnly`                                                                        |
-| `modules.localIdentHashSalt`      | خيار المولد `localIdentHashSalt`                                                                 |
-| `modules.localIdentHashFunction`  | خيار المولد `localIdentHashFunction`                                                             |
+| خيار `css-loader`                | البديل الأصلي                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| `url`                            | `module.parser.css.url`، وقيمته الافتراضية `true`                                      |
+| `import`                         | `module.parser.css.import`، وقيمته الافتراضية `true`                                   |
+| `importLoaders`                  | لا يوجد؛ تطبق loaders الموجودة في السلسلة تلقائيًا على الملفات المستوردة عبر `@import` |
+| `sourceMap`                      | يتحكم به [`devtool`](/configuration/devtool/)، ويدعم قيمة `css` خاصة بكل نوع           |
+| `esModule`                       | `module.generator.css.esModule`، وقيمته الافتراضية `true`                              |
+| `exportType: 'string'`           | خيار المحلل `exportType: "text"`                                                       |
+| `exportType: 'css-style-sheet'`  | خيار المحلل `exportType: "css-style-sheet"`                                            |
+| `modules` مع الاكتشاف التلقائي   | نوع الوحدة المدمج `css/auto`                                                           |
+| `modules.mode: 'local'`          | النوع `css/module`                                                                     |
+| `modules.mode: 'global'`         | النوع `css/global`                                                                     |
+| `modules.mode: 'pure'`           | خيار المحلل `pure: true`                                                               |
+| `modules.localIdentName`         | خيار المولد `localIdentName`                                                           |
+| `modules.exportLocalsConvention` | خيار المولد `exportsConvention`                                                        |
+| `modules.namedExport`            | خيار المحلل `namedExports`، وقيمته الافتراضية `true`                                   |
+| `modules.exportOnlyLocals`       | خيار المولد `exportsOnly`                                                              |
+| `modules.localIdentHashSalt`     | خيار المولد `localIdentHashSalt`                                                       |
+| `modules.localIdentHashFunction` | خيار المولد `localIdentHashFunction`                                                   |
 
 على سبيل المثال، إعداد CSS Modules التالي في `css-loader`:
 
@@ -430,7 +432,9 @@ export default {
 
 يحوّل `sass-loader` المصدر إلى CSS، ثم يعالجه `postcss-loader`، وبعد ذلك يتولى CSS الأصلي الاستخراج و`url()` وCSS Modules. وينطبق النمط نفسه على `less-loader` و`stylus-loader` وما شابههما.
 
-### 7. التصيير من جهة الخادم (node وweb) {#7-server-side-rendering-node--web}
+<span id="7-server-side-rendering-node--web"></span>
+
+### 7. التصيير من جهة الخادم (node وweb)
 
 في تطبيقات SSR، تُنشئ عادةً حزمتين: حزمة `web` للمتصفح وحزمة `node` للخادم. ويجب أن تتطابق أسماء أصناف CSS Modules حتى يُرطّب المتصفح الصفحة المصيّرة على الخادم من دون اختلافات. كان `getJSON` في `css-loader` يُستخدم غالبًا لمزامنة هذه الأسماء؛ أما مع CSS الأصلي، فيمكنك الاستغناء عن هذه الخطوة بجعل `localIdentName` حتميًا في الهدفين.
 
@@ -480,7 +484,9 @@ import * as styles from "./button.module.css";
 - تُخرج ملفات `.css` المستخرجة في بناء الإنتاج.
 - تتطابق صادرات CSS Modules مع طريقة استخدام مشروعك لها.
 
-## جميع الخيارات مع أمثلة {#all-options-with-examples}
+<span id="all-options-with-examples"></span>
+
+## جميع الخيارات مع أمثلة
 
 اضبط الخيارات لكل نوع وحدة ضمن [`module.parser`](/configuration/module/#moduleparser) و[`module.generator`](/configuration/module/#modulegenerator). المفاتيح هي `css` و`css/auto` و`css/global` و`css/module`. تستخدم الأمثلة التالية `css/auto` لأنه النوع المستخدم في القاعدة الافتراضية.
 
@@ -488,20 +494,20 @@ import * as styles from "./button.module.css";
 
 القيمة الافتراضية لجميع خيارات المحلل المنطقية التالية هي `true`.
 
-| الخيار                                                               | النوع                                               | القيمة الافتراضية | الوصف                                                                                          |
-| -------------------------------------------------------------------- | -------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------- |
-| [`import`](/configuration/module/#moduleparsercssimport)             | `boolean`                                          | `true`            | معالجة قواعد `@import`.                                                                        |
-| [`url`](/configuration/module/#moduleparsercssurl)                   | `boolean`                                          | `true`            | معالجة `url()` و`image-set()` و`src()` و`image()`.                                              |
-| [`namedExports`](/configuration/module/#moduleparsercssnamedexports) | `boolean`                                          | `true`            | تصدير الأسماء المحلية في CSS Modules كصادرات مسماة لوحدة ES.                                  |
-| [`exportType`](/configuration/module/#moduleparsercssexporttype)     | `"link" \| "style" \| "text" \| "css-style-sheet"` | `"link"`         | كيفية إخراج CSS؛ راجع [أوضاع الإخراج](#output-modes-exporttype).                               |
-| [`pure`](/configuration/module/#moduleparsercsspure)                 | `boolean`                                          | `false`           | وضع نقي صارم؛ يجب أن يحتوي كل محدد على صنف أو معرّف محلي. خاص بـ`css/module` و`css/auto`.       |
-| [`as`](/configuration/module/#moduleparsercssas)                     | `"stylesheet" \| "block-contents"`             | `"stylesheet"`   | تحليل المصدر كورقة أنماط كاملة أو كمحتوى كتلة.                                                 |
-| `animation`                                                          | `boolean`                                          | `true`            | إعادة تسمية أسماء `@keyframes` المحلية.                                                       |
-| `container`                                                          | `boolean`                                          | `true`            | إعادة تسمية أسماء `@container` المحلية.                                                       |
-| `customIdents`                                                       | `boolean`                                          | `true`            | إعادة تسمية المعرّفات المخصصة.                                                                 |
-| `dashedIdents`                                                       | `boolean`                                          | `true`            | إعادة تسمية المعرّفات ذات الشرطات، مثل الخصائص المخصصة.                                       |
-| `function`                                                           | `boolean`                                          | `true`            | إعادة تسمية أسماء `@function` المحلية.                                                       |
-| `grid`                                                               | `boolean`                                          | `true`            | إعادة تسمية معرّفات خطوط الشبكة ومساحاتها.                                                    |
+| الخيار                                                               | النوع                                              | القيمة الافتراضية | الوصف                                                                                     |
+| -------------------------------------------------------------------- | -------------------------------------------------- | ----------------- | ----------------------------------------------------------------------------------------- |
+| [`import`](/configuration/module/#moduleparsercssimport)             | `boolean`                                          | `true`            | معالجة قواعد `@import`.                                                                   |
+| [`url`](/configuration/module/#moduleparsercssurl)                   | `boolean`                                          | `true`            | معالجة `url()` و`image-set()` و`src()` و`image()`.                                        |
+| [`namedExports`](/configuration/module/#moduleparsercssnamedexports) | `boolean`                                          | `true`            | تصدير الأسماء المحلية في CSS Modules كصادرات مسماة لوحدة ES.                              |
+| [`exportType`](/configuration/module/#moduleparsercssexporttype)     | `"link" \| "style" \| "text" \| "css-style-sheet"` | `"link"`          | كيفية إخراج CSS؛ راجع [أوضاع الإخراج](#output-modes-exporttype).                          |
+| [`pure`](/configuration/module/#moduleparsercsspure)                 | `boolean`                                          | `false`           | وضع نقي صارم؛ يجب أن يحتوي كل محدد على صنف أو معرّف محلي. خاص بـ`css/module` و`css/auto`. |
+| [`as`](/configuration/module/#moduleparsercssas)                     | `"stylesheet" \| "block-contents"`                 | `"stylesheet"`    | تحليل المصدر كورقة أنماط كاملة أو كمحتوى كتلة.                                            |
+| `animation`                                                          | `boolean`                                          | `true`            | إعادة تسمية أسماء `@keyframes` المحلية.                                                   |
+| `container`                                                          | `boolean`                                          | `true`            | إعادة تسمية أسماء `@container` المحلية.                                                   |
+| `customIdents`                                                       | `boolean`                                          | `true`            | إعادة تسمية المعرّفات المخصصة.                                                            |
+| `dashedIdents`                                                       | `boolean`                                          | `true`            | إعادة تسمية المعرّفات ذات الشرطات، مثل الخصائص المخصصة.                                   |
+| `function`                                                           | `boolean`                                          | `true`            | إعادة تسمية أسماء `@function` المحلية.                                                    |
+| `grid`                                                               | `boolean`                                          | `true`            | إعادة تسمية معرّفات خطوط الشبكة ومساحاتها.                                                |
 
 ```js
 export default {
@@ -528,16 +534,16 @@ T> إذا أردت إبقاء تعبير `@import` أو `url()` واحد كما 
 
 ### خيارات المولد
 
-| الخيار                                                        | النوع                                                                                    | القيمة الافتراضية                                                     | الوصف                                                 |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------- |
-| [`localIdentName`](/configuration/module/#modulegenerator)    | `string \| function`                                                                    | `"[uniqueName]-[id]-[local]"` في التطوير و`"[fullhash]"` في الإنتاج | قالب أسماء الأصناف المحلية المولدة.                  |
-| [`exportsConvention`](/configuration/module/#modulegenerator) | `"as-is" \| "camel-case" \| "camel-case-only" \| "dashes" \| "dashes-only" \| function` | `"as-is"`                                                           | أسلوب تسمية الأسماء المحلية المصدّرة.                |
-| `exportsOnly`                                                 | `boolean`                                                                               | `true` في الأهداف التي لا تملك document مثل `node`، وإلا `false`     | تصدير الأسماء المحلية فقط من دون إخراج ورقة أنماط.   |
-| `esModule`                                                    | `boolean`                                                                               | `true`                                                                | استخدام صياغة وحدات ES في JavaScript المولد.         |
-| `localIdentHashFunction`                                      | `string`                                                                                | [`output.hashFunction`](/configuration/output/#outputhashfunction)    | دالة التجزئة المستخدمة في `localIdentName`.          |
-| `localIdentHashDigest`                                        | `string`                                                                                | `"base64url"`                                                        | ترميز تجزئة المعرّفات المحلية.                       |
-| `localIdentHashDigestLength`                                  | `number`                                                                                | `6`                                                                   | طول تجزئة المعرّفات المحلية.                         |
-| `localIdentHashSalt`                                          | `string`                                                                                | [`output.hashSalt`](/configuration/output/#outputhashsalt)            | الملح المستخدم في تجزئة المعرّفات المحلية.          |
+| الخيار                                                        | النوع                                                                                   | القيمة الافتراضية                                                   | الوصف                                              |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------- |
+| [`localIdentName`](/configuration/module/#modulegenerator)    | `string \| function`                                                                    | `"[uniqueName]-[id]-[local]"` في التطوير و`"[fullhash]"` في الإنتاج | قالب أسماء الأصناف المحلية المولدة.                |
+| [`exportsConvention`](/configuration/module/#modulegenerator) | `"as-is" \| "camel-case" \| "camel-case-only" \| "dashes" \| "dashes-only" \| function` | `"as-is"`                                                           | أسلوب تسمية الأسماء المحلية المصدّرة.              |
+| `exportsOnly`                                                 | `boolean`                                                                               | `true` في الأهداف التي لا تملك document مثل `node`، وإلا `false`    | تصدير الأسماء المحلية فقط من دون إخراج ورقة أنماط. |
+| `esModule`                                                    | `boolean`                                                                               | `true`                                                              | استخدام صياغة وحدات ES في JavaScript المولد.       |
+| `localIdentHashFunction`                                      | `string`                                                                                | [`output.hashFunction`](/configuration/output/#outputhashfunction)  | دالة التجزئة المستخدمة في `localIdentName`.        |
+| `localIdentHashDigest`                                        | `string`                                                                                | `"base64url"`                                                       | ترميز تجزئة المعرّفات المحلية.                     |
+| `localIdentHashDigestLength`                                  | `number`                                                                                | `6`                                                                 | طول تجزئة المعرّفات المحلية.                       |
+| `localIdentHashSalt`                                          | `string`                                                                                | [`output.hashSalt`](/configuration/output/#outputhashsalt)          | الملح المستخدم في تجزئة المعرّفات المحلية.         |
 
 ```js
 export default {

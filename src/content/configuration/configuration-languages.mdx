@@ -46,6 +46,7 @@ module.exports = defineConfig((env, argv) => ({
   // ...
 }));
 ```
+
 ## TypeScript
 
 لكتابة تخصيص webpack بلغة [TypeScript](http://www.typescriptlang.org/)، ثبّت أوّلاً الاعتماديات اللازمة، وهي TypeScript وتعريفات الأنواع ذات الصلة من مشروع [DefinitelyTyped](https://definitelytyped.org/):
@@ -265,17 +266,19 @@ export default (
 
 W> إن كنت تستخدم Babel في مواضع أخرى وضبطت `modules` على `false`، فستحتاج إما إلى الاحتفاظ بملفَّي `.babelrc` منفصلين، أو استخدام `const jsxobj = require('jsxobj');` و`module.exports` بدلًا من صياغة `import` و`export` الحديثة. والسبب أن Node يدعم كثيرًا من ميزات ES6، لكنه لا يدعم صياغة وحدات ES6 في هذه الحالة.
 
-## صيغ البيانات (JSON5 وYAML وTOML) {#data-formats-json5-yaml-and-toml}
+<span id="data-formats-json5-yaml-and-toml"></span>
+
+## صيغ البيانات (JSON5 وYAML وTOML)
 
 <Badge text="webpack-cli v7.1.0+" />
 
 إذا كان تخصيصك يتكون من بيانات ثابتة فقط، بلا دوال أو قراءة من `process.env` أو قيم محسوبة، فيمكنك كتابته كملف بيانات بدلًا من JavaScript. يحلل webpack-cli الامتدادات التالية مباشرة:
 
-| الامتداد        | حزمة المحلل    |
-| --------------- | -------------- |
-| `.json5`        | `json5`        |
-| `.yaml`, `.yml` | `js-yaml`      |
-| `.toml`         | `toml`         |
+| الامتداد        | حزمة المحلل |
+| --------------- | ----------- |
+| `.json5`        | `json5`     |
+| `.yaml`, `.yml` | `js-yaml`   |
+| `.toml`         | `toml`      |
 
 لا تأتي حزمة المحلل **مدمجة** مع webpack-cli؛ ثبّت الحزمة المناسبة للصيغة التي اخترتها ضمن اعتماديات التطوير. إذا لم تكن مثبتة، فسيتوقف webpack-cli ويخبرك بالحزمة المطلوبة.
 
