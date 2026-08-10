@@ -53,7 +53,7 @@ describe("offline", () => {
 
     it("shows /migrate/ page", () => {
       const url = "/migrate/";
-      const text = "Migrate";
+      const text = "الترقية";
 
       cy.visit(url);
       cy.get("h1").contains(text);
