@@ -1,0 +1,87 @@
+// Socket Community Patch: https://socket.dev
+// Date: Wed, 24 Jun 2026 18:46:05 GMT
+// For more information see https://socket.dev/patch/7142bc0d-cdcb-45a9-94ad-36167de4f4ff
+// This file includes modifications made by Socket, Inc. on Wed, 24 Jun 2026; these modifications are called the "Patch". In some cases, Socket may be required to make the Patch available to you under specific terms, or may be prohibited from restricting certain rights you may have. For example, the terms of another applicable license may require Socket to make the Patch available under specific terms. In those cases, the Patch is made available to you under the required terms, and Socket does not seek to restrict your rights relative to the Patch where prohibited. In all other cases, the Patch is available to you exclusively under the PolyForm Shield License 1.0.0 (https://polyformproject.org/licenses/shield/1.0.0/). The Patch was distributed by Socket with additional information concerning licensing, attribution, and limitation of liability which may be relevant to you and your use of the Patch. As far as the law allows, the Patch and the software including the patch come as is, without any warranty or condition, and Socket will not be liable to you for any damages arising out of the applicable license terms or the use or nature of the Patch or the software including the patch, under any kind of legal claim.
+// Original License: MIT
+
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var parsePath = require("parse-path"),
+    normalizeUrl = require("normalize-url");
+
+// Security hardening for CVE-2022-2900 / GHSA-j9fq-vwqv-2fm2 (SSRF, CWE-918).
+// Fully-anchored git-ssh (scp-like) URL pattern, ported from the upstream
+// parse-url 8.1.0 fix. The vulnerable behaviour delegated git-ssh parsing to
+// parse-path, whose unanchored/permissive matching accepted confusable inputs
+// such as "git@github.com:x?y" and reported a trusted host/resource, allowing
+// SSRF allow/deny checks built on the parsed host/resource to be bypassed. We
+// re-validate scp-like inputs against this anchored pattern and reject anything
+// that does not match exactly (matching 8.1.0's "URL parsing failed." throw).
+var GIT_RE = /^(?:([a-zA-Z_][a-zA-Z0-9_-]*)@|https?:\/\/)([\w\.\-@]+)[\/:]([\~,\.\w,\-,\_,\/]+?(?:\.git|\/)?)$/;
+
+// True for scp-like git-ssh inputs of the form "user@host:path" that do NOT
+// carry an explicit "scheme://" (those are handled by parse-path directly).
+function isScpLikeGitUrl(url) {
+    return /^[^\s:\/?#]+@[^\s:\/?#@]+:/.test(url) && !/^[a-z][a-z0-9+.\-]*:\/\//i.test(url);
+}
+
+/**
+ * parseUrl
+ * Parses the input url.
+ *
+ * **Note**: This *throws* if invalid urls are provided.
+ *
+ * @name parseUrl
+ * @function
+ * @param {String} url The input url.
+ * @param {Boolean|Object} normalize Wheter to normalize the url or not.
+ *                         Default is `false`. If `true`, the url will
+ *                         be normalized. If an object, it will be the
+ *                         options object sent to [`normalize-url`](https://github.com/sindresorhus/normalize-url).
+ *
+ *                         For SSH urls, normalize won't work.
+ *
+ * @return {Object} An object containing the following fields:
+ *
+ *  - `protocols` (Array): An array with the url protocols (usually it has one element).
+ *  - `protocol` (String): The first protocol, `"ssh"` (if the url is a ssh url) or `"file"`.
+ *  - `port` (null|Number): The domain port.
+ *  - `resource` (String): The url domain (including subdomains).
+ *  - `user` (String): The authentication user (usually for ssh urls).
+ *  - `pathname` (String): The url pathname.
+ *  - `hash` (String): The url hash.
+ *  - `search` (String): The url querystring value.
+ *  - `href` (String): The input url.
+ *  - `query` (Object): The url querystring, parsed as object.
+ */
+function parseUrl(url) {
+    var normalize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    if (typeof url !== "string" || !url.trim()) {
+        throw new Error("Invalid url.");
+    }
+    if (normalize) {
+        if ((typeof normalize === "undefined" ? "undefined" : _typeof(normalize)) !== "object") {
+            normalize = {
+                stripHash: false
+            };
+        }
+        url = normalizeUrl(url, normalize);
+    }
+    var parsed = parsePath(url);
+
+    // CVE-2022-2900: reject confusable git-ssh URLs. When the input is a
+    // scp-like git-ssh URL, require it to fully match the anchored GIT_RE.
+    // Malformed inputs (e.g. trailing query strings or other smuggled content)
+    // would otherwise yield a half-parsed object reporting a trusted
+    // host/resource, defeating downstream SSRF allow/deny checks.
+    if (isScpLikeGitUrl(url) && !GIT_RE.test(url)) {
+        throw new Error("URL parsing failed.");
+    }
+
+    return parsed;
+}
+
+module.exports = parseUrl;
