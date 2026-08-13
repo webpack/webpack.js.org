@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Page from "../Page.jsx";
 
@@ -32,28 +32,27 @@ Object.defineProperty(window, "scrollTo", {
 });
 
 describe("Page component", () => {
-  const originalIntersectionObserver = window.IntersectionObserver;
+  const originalRequestAnimationFrame = window.requestAnimationFrame;
+  const originalCancelAnimationFrame = window.cancelAnimationFrame;
   const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
-  let disconnect;
-  let intersectionCallback;
-  let observe;
+
+  const trackedAnchors = [
+    { id: "entry", title: "Entry", title2: "Entry", level: 2 },
+    { id: "output", title: "Output", title2: "Output", level: 3 },
+  ];
 
   beforeEach(() => {
     mockLocation = { pathname: "/test", hash: "" };
-    disconnect = jest.fn();
-    observe = jest.fn();
-    intersectionCallback = undefined;
-
-    Object.defineProperty(window, "IntersectionObserver", {
+    Object.defineProperty(window, "requestAnimationFrame", {
       configurable: true,
       value: jest.fn((callback) => {
-        intersectionCallback = callback;
-
-        return {
-          disconnect,
-          observe,
-        };
+        callback();
+        return 1;
       }),
+    });
+    Object.defineProperty(window, "cancelAnimationFrame", {
+      configurable: true,
+      value: jest.fn(),
     });
     Object.defineProperty(HTMLElement.prototype, "scrollIntoView", {
       configurable: true,
@@ -62,10 +61,15 @@ describe("Page component", () => {
   });
 
   afterEach(() => {
-    if (originalIntersectionObserver) {
-      window.IntersectionObserver = originalIntersectionObserver;
+    if (originalRequestAnimationFrame) {
+      window.requestAnimationFrame = originalRequestAnimationFrame;
     } else {
-      delete window.IntersectionObserver;
+      delete window.requestAnimationFrame;
+    }
+    if (originalCancelAnimationFrame) {
+      window.cancelAnimationFrame = originalCancelAnimationFrame;
+    } else {
+      delete window.cancelAnimationFrame;
     }
     if (originalScrollIntoView) {
       HTMLElement.prototype.scrollIntoView = originalScrollIntoView;
@@ -73,6 +77,7 @@ describe("Page component", () => {
       delete HTMLElement.prototype.scrollIntoView;
     }
 
+    jest.restoreAllMocks();
     jest.clearAllMocks();
   });
 
@@ -94,8 +99,21 @@ describe("Page component", () => {
     expect(errorElement).toBeTruthy();
   });
 
-  it("observes page h2 and h3 headings for active sidebar section tracking", () => {
+  it("sets initial active sidebar section from h2 and h3 heading positions", () => {
     const setActiveSection = jest.fn();
+    jest
+      .spyOn(HTMLElement.prototype, "getBoundingClientRect")
+      .mockImplementation(function getBoundingClientRect() {
+        if (this.id === "entry") {
+          return { top: 80, bottom: 100, height: 20 };
+        }
+
+        if (this.id === "output") {
+          return { top: 420, bottom: 440, height: 20 };
+        }
+
+        return { top: 0, bottom: 0, height: 0 };
+      });
 
     render(
       <MemoryRouter>
@@ -105,34 +123,11 @@ describe("Page component", () => {
           }
           title="Test"
           path="/test"
+          anchors={trackedAnchors}
           setActiveSection={setActiveSection}
         />
       </MemoryRouter>,
     );
-
-    expect(window.IntersectionObserver).toHaveBeenCalledWith(
-      expect.any(Function),
-      {
-        rootMargin: "-100px 0px -60% 0px",
-        threshold: 0,
-      },
-    );
-    expect(observe).toHaveBeenCalledTimes(2);
-    expect(observe).toHaveBeenCalledWith(document.getElementById("entry"));
-    expect(observe).toHaveBeenCalledWith(document.getElementById("output"));
-
-    intersectionCallback([
-      {
-        boundingClientRect: { top: 160 },
-        isIntersecting: true,
-        target: document.getElementById("output"),
-      },
-      {
-        boundingClientRect: { top: 80 },
-        isIntersecting: true,
-        target: document.getElementById("entry"),
-      },
-    ]);
 
     expect(setActiveSection).toHaveBeenCalledWith("entry");
   });
@@ -149,12 +144,104 @@ describe("Page component", () => {
           }
           title="Test"
           path="/test"
+          anchors={trackedAnchors}
           setActiveSection={setActiveSection}
         />
       </MemoryRouter>,
     );
 
     expect(setActiveSection).toHaveBeenCalledWith("output");
+  });
+
+  it("updates active sidebar section from scroll position when no observer heading is visible", () => {
+    const setActiveSection = jest.fn();
+
+    render(
+      <MemoryRouter>
+        <Page
+          content={
+            '<h2 id="entry">Entry</h2><p>Entry content</p><h3 id="output">Output</h3>'
+          }
+          title="Test"
+          path="/test"
+          anchors={trackedAnchors}
+          setActiveSection={setActiveSection}
+        />
+      </MemoryRouter>,
+    );
+
+    Object.defineProperty(
+      document.getElementById("entry"),
+      "getBoundingClientRect",
+      {
+        configurable: true,
+        value: () => ({ top: -200, bottom: -180, height: 20 }),
+      },
+    );
+    Object.defineProperty(
+      document.getElementById("output"),
+      "getBoundingClientRect",
+      {
+        configurable: true,
+        value: () => ({ top: 90, bottom: 110, height: 20 }),
+      },
+    );
+
+    fireEvent.scroll(window);
+
+    expect(setActiveSection).toHaveBeenCalledWith("output");
+  });
+
+  it("tracks only h2 and h3 headings that have matching sidebar anchors", () => {
+    const setActiveSection = jest.fn();
+
+    render(
+      <MemoryRouter>
+        <Page
+          content={
+            '<h2 id="entry">Entry</h2><h3 id="output">Output</h3><h2 id="not-in-sidebar">Ignored</h2>'
+          }
+          title="Test"
+          path="/test"
+          anchors={trackedAnchors}
+          setActiveSection={setActiveSection}
+        />
+      </MemoryRouter>,
+    );
+
+    Object.defineProperty(
+      document.getElementById("not-in-sidebar"),
+      "getBoundingClientRect",
+      {
+        configurable: true,
+        value: () => ({ top: 60, bottom: 80, height: 20 }),
+      },
+    );
+    fireEvent.scroll(window);
+
+    expect(setActiveSection).not.toHaveBeenCalledWith("not-in-sidebar");
+  });
+
+  it("resets the active sidebar section when pathname changes", () => {
+    const setActiveSection = jest.fn();
+    const renderPage = () => (
+      <MemoryRouter>
+        <Page
+          content={'<h2 id="entry">Entry</h2>'}
+          title="Test"
+          path="/test"
+          anchors={[trackedAnchors[0]]}
+          setActiveSection={setActiveSection}
+        />
+      </MemoryRouter>
+    );
+    const { rerender } = render(renderPage());
+
+    setActiveSection.mockClear();
+    mockLocation = { pathname: "/next", hash: "" };
+    rerender(renderPage());
+
+    expect(setActiveSection).toHaveBeenNthCalledWith(1, "");
   });
 
   it("clears active sidebar section when a page has no tracked headings", () => {
@@ -172,6 +259,5 @@ describe("Page component", () => {
     );
 
     expect(setActiveSection).toHaveBeenCalledWith("");
-    expect(window.IntersectionObserver).not.toHaveBeenCalled();
   });
 });

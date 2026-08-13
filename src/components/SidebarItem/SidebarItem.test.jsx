@@ -136,12 +136,59 @@ describe("SidebarItem", () => {
 
     const activeAnchor = screen.getByText("Setup").closest("a");
     expect(activeAnchor.getAttribute("aria-current")).toBe("location");
-    expect(activeAnchor.className).toContain("border-[#175d96]");
-    expect(activeAnchor.className).toContain("bg-[#eef6fc]");
+    expect(activeAnchor.className).toContain("sidebar-anchor--active");
     expect(scrollIntoView).toHaveBeenCalledWith({
       behavior: "smooth",
       block: "nearest",
     });
+  });
+
+  it("does not scroll the sidebar when the active anchor is already visible", () => {
+    const anchors = [
+      { id: "intro", title: "Introduction", title2: "Introduction", level: 2 },
+      { id: "setup", title: "Setup", title2: "Setup", level: 2 },
+    ];
+
+    const { rerender } = renderWithRouter(
+      <nav>
+        <div className="overflow-y-auto">
+          <SidebarItem
+            {...defaultProps}
+            currentPage="/guides/getting-started"
+            anchors={anchors}
+          />
+        </div>
+      </nav>,
+    );
+
+    const setupAnchor = screen.getByText("Setup").closest("a");
+    const scrollContainer = setupAnchor.closest(".overflow-y-auto");
+    Object.defineProperty(scrollContainer, "getBoundingClientRect", {
+      configurable: true,
+      value: () => ({ top: 0, bottom: 300, height: 300 }),
+    });
+    Object.defineProperty(setupAnchor, "getBoundingClientRect", {
+      configurable: true,
+      value: () => ({ top: 100, bottom: 130, height: 30 }),
+    });
+
+    scrollIntoView.mockClear();
+    rerender(
+      <MemoryRouter>
+        <nav>
+          <div className="overflow-y-auto">
+            <SidebarItem
+              {...defaultProps}
+              currentPage="/guides/getting-started"
+              activeSection="setup"
+              anchors={anchors}
+            />
+          </div>
+        </nav>
+      </MemoryRouter>,
+    );
+
+    expect(scrollIntoView).not.toHaveBeenCalled();
   });
 
   it("does not mark duplicate anchor ids as active on non-current pages", () => {
@@ -160,7 +207,7 @@ describe("SidebarItem", () => {
 
     const inactiveAnchor = screen.getByText("Setup").closest("a");
     expect(inactiveAnchor.getAttribute("aria-current")).toBeNull();
-    expect(inactiveAnchor.className).toContain("border-transparent");
+    expect(inactiveAnchor.className).not.toContain("sidebar-anchor--active");
     expect(scrollIntoView).not.toHaveBeenCalled();
   });
 
@@ -181,6 +228,40 @@ describe("SidebarItem", () => {
     fireEvent.click(screen.getByText("Introduction"));
 
     expect(setActiveSection).toHaveBeenCalledWith("intro");
+  });
+
+  it("opens the current page group when an active child anchor is inside it", () => {
+    const anchors = [
+      { id: "intro", title: "Introduction", title2: "Introduction", level: 2 },
+      { id: "setup", title: "Setup", title2: "Setup", level: 2 },
+    ];
+    const { container, rerender } = renderWithRouter(
+      <SidebarItem
+        {...defaultProps}
+        currentPage="/guides/getting-started"
+        anchors={anchors}
+      />,
+    );
+    const wrapper = container.firstChild;
+    const toggleButton = screen.getByRole("button", {
+      name: /toggle getting started section/i,
+    });
+
+    fireEvent.click(toggleButton);
+    expect(wrapper.getAttribute("data-open")).toBeNull();
+
+    rerender(
+      <MemoryRouter>
+        <SidebarItem
+          {...defaultProps}
+          currentPage="/guides/getting-started"
+          activeSection="setup"
+          anchors={anchors}
+        />
+      </MemoryRouter>,
+    );
+
+    expect(wrapper.getAttribute("data-open")).toBe("true");
   });
 
   it("clears the active section when the page title link is clicked", () => {

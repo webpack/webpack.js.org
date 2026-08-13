@@ -52,9 +52,6 @@ function Site(props) {
   const navigate = useNavigate();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  useEffect(() => {
-    setActiveSection("");
-  }, [location.pathname]);
   /**
    * Toggle the mobile sidebar
    *
@@ -406,7 +403,6 @@ function PageElement(props) {
 PageElement.propTypes = {
   currentPage: PropTypes.string,
   sidebarPages: PropTypes.array,
-  pages: PropTypes.array,
   previous: PropTypes.object,
   next: PropTypes.object,
   page: PropTypes.object,

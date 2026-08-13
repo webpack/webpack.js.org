@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
 import BarIcon from "../../styles/icons/vertical-bar.svg";
@@ -14,7 +14,9 @@ import list2Tree from "../../utilities/list2Tree/index.js";
  * @returns {boolean}
  */
 function isOpen(currentPage, url) {
-  return new RegExp(`${currentPage}/?$`).test(url);
+  const normalizePath = (path) => path.replace(/\/+$/, "");
+
+  return normalizePath(currentPage) === normalizePath(url);
 }
 
 /**
@@ -26,6 +28,13 @@ function isOpen(currentPage, url) {
  */
 function generateAnchorURL(url, anchor) {
   return anchor.id ? `${url}#${anchor.id}` : url;
+}
+
+function hasAnchorId(anchors, id) {
+  return anchors.some(
+    (anchor) =>
+      anchor.id === id || (anchor.children && hasAnchorId(anchor.children, id)),
+  );
 }
 
 function scrollTop(event) {
@@ -63,11 +72,11 @@ function Anchors({
               to={generateAnchorURL(url, anchor)}
               onClick={() => setActiveSection?.(anchor.id)}
               aria-current={active ? "location" : undefined}
-              className={`block border-l-2 py-0.5 pl-2 -ml-2 transition-colors duration-200 ${
+              className={
                 active
-                  ? "font-semibold border-[#175d96] bg-[#eef6fc] text-[#175d96] dark:border-[#82b7f6] dark:bg-[#1f2937] dark:text-[#82b7f6]"
-                  : "border-transparent text-[#2b3a42] hover:border-[#9ab3c0] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:border-[#82b7f6] dark:hover:text-[#82b7f6]"
-              }`}
+                  ? "sidebar-anchor sidebar-anchor--active"
+                  : "sidebar-anchor"
+              }
             >
               {anchor.title2}
             </Link>
@@ -106,24 +115,50 @@ export default function SidebarItem({
   const [open, setOpen] = useState(() => isOpen(currentPage, url));
   const itemRef = useRef(null);
   const current = isOpen(currentPage, url);
+  const tree = useMemo(
+    () =>
+      list2Tree(
+        title,
+        anchors.filter((anchor) => anchor.level > 1),
+      ),
+    [anchors, title],
+  );
 
   useEffect(() => {
     setOpen(isOpen(currentPage, url));
   }, [currentPage, url]);
   useEffect(() => {
-    if (current && activeSection && itemRef.current) {
+    if (current && activeSection && hasAnchorId(tree, activeSection)) {
+      setOpen(true);
+    }
+  }, [activeSection, current, tree]);
+  useEffect(() => {
+    if (current && open && activeSection && itemRef.current) {
       const activeAnchor = itemRef.current.querySelector(
         `a[href$="#${activeSection}"]`,
       );
 
       if (activeAnchor) {
-        activeAnchor.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
+        const scrollContainer = itemRef.current
+          .closest("nav")
+          ?.querySelector(".overflow-y-auto");
+        const activeRect = activeAnchor.getBoundingClientRect();
+        const containerRect = scrollContainer?.getBoundingClientRect();
+        const shouldScroll =
+          !containerRect ||
+          containerRect.height === 0 ||
+          activeRect.top < containerRect.top ||
+          activeRect.bottom > containerRect.bottom;
+
+        if (shouldScroll) {
+          activeAnchor.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }
       }
     }
-  }, [activeSection, current]);
+  }, [activeSection, current, open]);
   const toggle = useCallback(() => {
     setOpen((prev) => !prev);
   }, []);
@@ -134,9 +169,6 @@ export default function SidebarItem({
     },
     [setActiveSection],
   );
-
-  const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
-  const tree = list2Tree(title, filteredAnchors);
 
   return (
     <div

@@ -1,6 +1,6 @@
 // Import External Dependencies
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 // Import Components
@@ -20,6 +20,7 @@ export default function Page(props) {
     related = [],
     previous,
     next,
+    anchors = [],
     setActiveSection,
     ...rest
   } = props;
@@ -55,6 +56,12 @@ export default function Page(props) {
 
   const { hash, pathname } = useLocation();
   const isBlogIndex = pathname === "/blog/";
+  const activeSectionRef = useRef("");
+
+  useEffect(() => {
+    activeSectionRef.current = "";
+    setActiveSection?.("");
+  }, [pathname, setActiveSection]);
 
   useEffect(() => {
     let observer;
@@ -94,57 +101,86 @@ export default function Page(props) {
     };
   }, [contentLoaded, pathname, hash]);
   useEffect(() => {
-    if (!contentLoaded || !setActiveSection || !window.IntersectionObserver) {
+    if (!contentLoaded || !setActiveSection) {
       return;
     }
 
     const content = document.getElementById("md-content");
     if (!content) return;
 
-    const headings = [...content.querySelectorAll("h2[id], h3[id]")];
+    const anchorIds = new Set(
+      anchors
+        .filter((anchor) => anchor.level === 2 || anchor.level === 3)
+        .map((anchor) => anchor.id),
+    );
+    const headings = [...content.querySelectorAll("h2[id], h3[id]")].filter(
+      (heading) => anchorIds.has(heading.id),
+    );
     if (headings.length === 0) {
-      setActiveSection("");
+      if (activeSectionRef.current !== "") {
+        activeSectionRef.current = "";
+        setActiveSection("");
+      }
       return;
     }
 
+    const setActiveHeading = (id) => {
+      if (activeSectionRef.current !== id) {
+        activeSectionRef.current = id;
+        setActiveSection(id);
+      }
+    };
+
     const hashId = hash ? decodeURIComponent(hash.slice(1)) : "";
     if (hashId && headings.some((heading) => heading.id === hashId)) {
-      setActiveSection(hashId);
+      setActiveHeading(hashId);
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleHeading = entries.reduce((closestEntry, entry) => {
-          if (!entry.isIntersecting) {
-            return closestEntry;
-          }
+    const getCurrentHeading = () => {
+      const activeOffset = Math.min(window.innerHeight * 0.4, 360);
 
-          if (
-            !closestEntry ||
-            entry.boundingClientRect.top < closestEntry.boundingClientRect.top
-          ) {
-            return entry;
-          }
-
-          return closestEntry;
-        }, null);
-
-        if (visibleHeading) {
-          setActiveSection(visibleHeading.target.id);
+      return headings.reduce((currentHeading, heading) => {
+        if (heading.getBoundingClientRect().top <= activeOffset) {
+          return heading;
         }
-      },
-      {
-        rootMargin: "-100px 0px -60% 0px",
-        threshold: 0,
-      },
-    );
 
-    for (const heading of headings) {
-      observer.observe(heading);
+        return currentHeading;
+      }, headings[0]);
+    };
+
+    let animationFrameId;
+    const updateActiveSection = () => {
+      setActiveHeading(getCurrentHeading().id);
+    };
+    const scheduleActiveSectionUpdate = () => {
+      if (animationFrameId) {
+        return;
+      }
+
+      animationFrameId = window.requestAnimationFrame(() => {
+        animationFrameId = undefined;
+        updateActiveSection();
+      });
+    };
+
+    window.addEventListener("scroll", scheduleActiveSectionUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", scheduleActiveSectionUpdate);
+
+    if (!hashId) {
+      updateActiveSection();
     }
 
-    return () => observer.disconnect();
-  }, [contentLoaded, pathname, hash, setActiveSection]);
+    return () => {
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
+
+      window.removeEventListener("scroll", scheduleActiveSectionUpdate);
+      window.removeEventListener("resize", scheduleActiveSectionUpdate);
+    };
+  }, [anchors, contentLoaded, pathname, hash, setActiveSection]);
 
   const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;
@@ -266,6 +302,7 @@ Page.propTypes = {
   previous: PropTypes.object,
   next: PropTypes.object,
   pages: PropTypes.array,
+  anchors: PropTypes.array,
   setActiveSection: PropTypes.func,
   content: PropTypes.oneOfType([
     PropTypes.string,
