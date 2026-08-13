@@ -32,7 +32,7 @@ exports[`SidebarItem matches snapshot 1`] = `
       title="Step 1"
     >
       <a
-        class="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+        class="block border-l-2 py-0.5 pl-2 -ml-2 transition-colors duration-200 border-transparent text-[#2b3a42] hover:border-[#9ab3c0] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:border-[#82b7f6] dark:hover:text-[#82b7f6]"
         data-discover="true"
         href="/guides/getting-started/#step-1"
       >

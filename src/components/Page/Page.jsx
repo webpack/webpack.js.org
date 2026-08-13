@@ -20,6 +20,7 @@ export default function Page(props) {
     related = [],
     previous,
     next,
+    setActiveSection,
     ...rest
   } = props;
 
@@ -92,6 +93,58 @@ export default function Page(props) {
       }
     };
   }, [contentLoaded, pathname, hash]);
+  useEffect(() => {
+    if (!contentLoaded || !setActiveSection || !window.IntersectionObserver) {
+      return;
+    }
+
+    const content = document.getElementById("md-content");
+    if (!content) return;
+
+    const headings = [...content.querySelectorAll("h2[id], h3[id]")];
+    if (headings.length === 0) {
+      setActiveSection("");
+      return;
+    }
+
+    const hashId = hash ? decodeURIComponent(hash.slice(1)) : "";
+    if (hashId && headings.some((heading) => heading.id === hashId)) {
+      setActiveSection(hashId);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleHeading = entries.reduce((closestEntry, entry) => {
+          if (!entry.isIntersecting) {
+            return closestEntry;
+          }
+
+          if (
+            !closestEntry ||
+            entry.boundingClientRect.top < closestEntry.boundingClientRect.top
+          ) {
+            return entry;
+          }
+
+          return closestEntry;
+        }, null);
+
+        if (visibleHeading) {
+          setActiveSection(visibleHeading.target.id);
+        }
+      },
+      {
+        rootMargin: "-100px 0px -60% 0px",
+        threshold: 0,
+      },
+    );
+
+    for (const heading of headings) {
+      observer.observe(heading);
+    }
+
+    return () => observer.disconnect();
+  }, [contentLoaded, pathname, hash, setActiveSection]);
 
   const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;
@@ -213,6 +266,8 @@ Page.propTypes = {
   previous: PropTypes.object,
   next: PropTypes.object,
   pages: PropTypes.array,
+  activeSection: PropTypes.string,
+  setActiveSection: PropTypes.func,
   content: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,

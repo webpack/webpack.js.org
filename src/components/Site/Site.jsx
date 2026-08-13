@@ -51,7 +51,10 @@ function Site(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-
+  const [activeSection, setActiveSection] = useState("");
+  useEffect(() => {
+    setActiveSection("");
+  }, [location.pathname]);
   /**
    * Toggle the mobile sidebar
    *
@@ -345,6 +348,8 @@ function Site(props) {
                     previous={previous}
                     loadContent={props.loadContent}
                     path={path}
+                    activeSection={activeSection}
+                    setActiveSection={setActiveSection}
                   />
                 }
               />
@@ -366,7 +371,15 @@ Site.propTypes = {
 export default Site;
 
 function PageElement(props) {
-  const { currentPage, sidebarPages, page, previous, next } = props;
+  const {
+    currentPage,
+    sidebarPages,
+    page,
+    previous,
+    next,
+    activeSection,
+    setActiveSection,
+  } = props;
   const content = props.loadContent(props.path);
   return (
     <Fragment>
@@ -375,6 +388,8 @@ function PageElement(props) {
         className="flex-[0_0_280px]"
         currentPage={currentPage}
         pages={sidebarPages}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
       />
       <Page
         {...page}
@@ -382,6 +397,8 @@ function PageElement(props) {
         previous={previous}
         next={next}
         pages={sidebarPages}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
       />
     </Fragment>
   );
@@ -396,4 +413,6 @@ PageElement.propTypes = {
   page: PropTypes.object,
   loadContent: PropTypes.func,
   path: PropTypes.string,
+  activeSection: PropTypes.string,
+  setActiveSection: PropTypes.func,
 };
