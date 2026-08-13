@@ -266,7 +266,6 @@ Page.propTypes = {
   previous: PropTypes.object,
   next: PropTypes.object,
   pages: PropTypes.array,
-  activeSection: PropTypes.string,
   setActiveSection: PropTypes.func,
   content: PropTypes.oneOfType([
     PropTypes.string,

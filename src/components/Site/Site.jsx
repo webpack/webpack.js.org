@@ -397,7 +397,6 @@ function PageElement(props) {
         previous={previous}
         next={next}
         pages={sidebarPages}
-        activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
     </Fragment>
