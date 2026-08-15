@@ -2,34 +2,16 @@
 title: Resolve
 sort: 8
 contributors:
-  - sokra
-  - skipjack
-  - SpaceK33z
-  - pksjce
-  - sebastiandeutsch
-  - tbroadley
-  - byzyk
-  - numb86
-  - jgravois
-  - EugeneHlushko
-  - Aghassi
-  - myshov
-  - anikethsaha
-  - chenxsan
-  - jamesgeorge007
-  - snitin315
-  - sapenlei
-  - Mazen050
-  - tusharthakur04
+  - RlxChap2
 ---
 
-These options change how modules are resolved. Webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
+تتحكم هذه الخيارات في طريقة حل modules. يوفّر webpack إعدادات افتراضية مناسبة، ويمكنك تعديل سلوك resolver بالتفصيل عند الحاجة. راجع [Module Resolution](/concepts/module-resolution) لفهم آلية عمل resolver بشكل أوضح.
 
 ## resolve
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import 'lodash'` in ES2015, the `resolve` options can change where webpack goes to look for `'lodash'` (see [`modules`](#resolvemodules)).
+خصّص طريقة حل modules. على سبيل المثال، عند استخدام `import 'lodash'` في ES2015، تحدد خيارات `resolve` الأماكن التي يبحث فيها webpack عن `'lodash'` (راجع [`modules`](#resolvemodules)).
 
 **webpack.config.js**
 
@@ -37,7 +19,7 @@ Configure how modules are resolved. For example, when calling `import 'lodash'` 
 export default {
   // ...
   resolve: {
-    // configuration options
+    // خيارات التخصيص
   },
 };
 ```
@@ -46,7 +28,7 @@ export default {
 
 `object`
 
-Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
+أنشئ أسماء مستعارة لتسهيل استيراد modules معيّنة عبر `import` أو `require`. على سبيل المثال، يمكنك إنشاء alias لمجموعة من مجلدات `src/` كثيرة الاستخدام:
 
 **webpack.config.js**
 
@@ -68,19 +50,19 @@ export default {
 };
 ```
 
-Now, instead of using relative paths when importing like so:
+الآن، بدلاً من استخدام المسارات النسبية عند الاستيراد بهذه الطريقة:
 
 ```js
 import Utility from "../../utilities/utility";
 ```
 
-you can use the alias:
+يمكنك استخدام الاسم المستعار:
 
 ```js
 import Utility from "Utilities/utility";
 ```
 
-A trailing `$` can also be added to the given object's keys to signify an exact match:
+يمكنك أيضًا إضافة علامة `$` في نهاية مفتاح alias للدلالة على التطابق التام فقط:
 
 **webpack.config.js**
 
@@ -101,14 +83,14 @@ export default {
 };
 ```
 
-which would yield these results:
+ينتج عن ذلك السلوك التالي:
 
 ```js
-import Test1 from "xyz"; // Exact match, so path/to/file.js is resolved and imported
-import Test2 from "xyz/file.js"; // Not an exact match, normal resolution takes place
+import Test1 from "xyz"; // تطابق تام، لذلك يتم حل path/to/file.js واستيراده
+import Test2 from "xyz/file.js"; // ليس تطابقًا تامًا، لذلك تتم عملية resolve العادية
 ```
 
-You can also use wildcards (`*`) in your alias configuration to create more flexible mappings:
+يمكنك أيضًا استخدام أحرف البدل (`*`) في تخصيص الاسم المستعار الخاص بك لإنشاء تعيينات أكثر مرونة:
 
 **webpack.config.js**
 
@@ -123,46 +105,46 @@ export default {
   // ...
   resolve: {
     alias: {
-      "@*": path.resolve(__dirname, "src/*"), // maps @something to path/to/something
+      "@*": path.resolve(__dirname, "src/*"), // يربط @something بالمسار path/to/something
     },
   },
 };
 ```
 
-This allows you to use imports like:
+يتيح لك هذا استخدام عمليات import مثل:
 
 ```js
 import Component from "@components/Button";
 import utils from "@utils/helpers";
 ```
 
-The following table explains other cases:
+ويوضح الجدول التالي الحالات الأخرى:
 
 | `alias:`                           | `import 'xyz'`                        | `import 'xyz/file.js'`               |
 | ---------------------------------- | ------------------------------------- | ------------------------------------ |
 | `{}`                               | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`      |
-| `{ xyz: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | error                                |
+| `{ xyz: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | خطأ                                  |
 | `{ xyz$: '/abc/path/to/file.js' }` | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`      |
-| `{ xyz: './dir/file.js' }`         | `/abc/dir/file.js`                    | error                                |
+| `{ xyz: './dir/file.js' }`         | `/abc/dir/file.js`                    | خطأ                                  |
 | `{ xyz$: './dir/file.js' }`        | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`      |
 | `{ xyz: '/some/dir' }`             | `/some/dir/index.js`                  | `/some/dir/file.js`                  |
 | `{ xyz$: '/some/dir' }`            | `/some/dir/index.js`                  | `/abc/node_modules/xyz/file.js`      |
 | `{ xyz: './dir' }`                 | `/abc/dir/index.js`                   | `/abc/dir/file.js`                   |
 | `{ xyz: 'modu' }`                  | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/modu/file.js`     |
 | `{ xyz$: 'modu' }`                 | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/xyz/file.js`      |
-| `{ xyz: 'modu/some/file.js' }`     | `/abc/node_modules/modu/some/file.js` | error                                |
+| `{ xyz: 'modu/some/file.js' }`     | `/abc/node_modules/modu/some/file.js` | خطأ                                  |
 | `{ xyz: 'modu/dir' }`              | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/modu/dir/file.js` |
 | `{ xyz$: 'modu/dir' }`             | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/xyz/file.js`      |
 
-`index.js` may resolve to another file if defined in the `package.json`.
+يمكن أن يتم resolve لـ `index.js` إلى ملف آخر إذا كان ذلك معرّفًا في `package.json`.
 
-`/abc/node_modules` may resolve in `/node_modules` too.
+قد يتابع webpack البحث من `/abc/node_modules` إلى `/node_modules` أيضًا.
 
-W> `resolve.alias` takes precedence over other module resolutions.
+W> لدى `resolve.alias` أولوية أعلى من قرارات module الأخرى.
 
-W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated in webpack 5. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, './path/to/module')]: false }`
+W> تم إهمال [`null-loader`](https://github.com/webpack-contrib/null-loader) في webpack 5. استخدم `alias: { xyz$: false }` أو المسار المطلق `alias: {[path.resolve(__dirname, './path/to/module')]: false }`
 
-W> `[string]` values are supported since webpack 5.
+W> يدعم webpack قيم `[string]` منذ webpack 5.
 
 ```js
 import path from "node:path";
@@ -184,7 +166,7 @@ export default {
 };
 ```
 
-Setting `resolve.alias` to `false` will tell webpack to ignore a module.
+ضبط `resolve.alias` على `false` يجعل webpack يتجاهل module.
 
 ```js
 export default {
@@ -198,13 +180,13 @@ export default {
 };
 ```
 
-T> To ignore modules based on a regex, you can use [IgnorePlugin](https://webpack.js.org/plugins/ignore-plugin/)
+T> لتجاهل modules بناءً على RegExp، يمكنك استخدام [IgnorePlugin](https://webpack.js.org/plugins/ignore-plugin/).
 
 ### resolve.aliasFields
 
 `[string]: ['browser']`
 
-Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec).
+حدد حقلاً، مثل `browser`، ليتم تحليله وفقًا لـ [هذه المواصفات](https://github.com/defunctzombie/package-browser-field-spec).
 
 **webpack.config.js**
 
@@ -219,10 +201,10 @@ export default {
 
 ### resolve.byDependency
 
-Configure resolve options by the type of module request.
+خصّص خيارات resolve حسب نوع طلب module.
 
-- Type: `[type: string]: ResolveOptions`
-- Example:
+- النوع: `[type: string]: ResolveOptions`
+- مثال:
 
   ```js
   export default {
@@ -248,7 +230,7 @@ Configure resolve options by the type of module request.
 
 `boolean`
 
-Enables caching of successfully resolved requests, allowing cache entries to be revalidated.
+يفعّل caching للطلبات التي تم حلها بنجاح، مما يسمح بإعادة استخدام إدخالات cache والتحقق منها.
 
 **webpack.config.js**
 
@@ -265,7 +247,7 @@ export default {
 
 `function(module) => boolean`
 
-A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. It must return a boolean.
+دالة تقرر هل يجب تخزين الطلب في cache أم لا. يُمرر إليها object يحتوي على الخاصيتين `path` و`request`، ويجب أن ترجع boolean.
 
 **webpack.config.js**
 
@@ -274,7 +256,7 @@ export default {
   // ...
   resolve: {
     cachePredicate: (module) =>
-      // additional logic
+      // منطق إضافي
       true,
   },
 };
@@ -284,13 +266,13 @@ export default {
 
 `boolean`
 
-If unsafe cache is enabled, includes `request.context` in the cache key. This option is taken into account by the [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) module. `context` in resolve caching is ignored when resolve or resolveLoader plugins are provided. This addresses a performance regression.
+إذا كان unsafe cache مفعّلًا، فسيتم تضمين `request.context` داخل مفتاح cache. يأخذ module [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) هذا الخيار في الحسبان. يتم تجاهل `context` في resolve caching عند توفير plugins لـ `resolve` أو `resolveLoader`. يساعد هذا على تجنب تراجع performance.
 
 ### resolve.conditionNames
 
 `string[]`
 
-Condition names for [`exports` field](https://nodejs.org/api/packages.html#packages_exports) which defines entry points of a package.
+أسماء الشروط في حقل [`exports`](https://nodejs.org/api/packages.html#packages_exports)، وهي التي تحدد entry points الخاصة بالـ package.
 
 **webpack.config.js**
 
@@ -303,55 +285,54 @@ export default {
 };
 ```
 
-Webpack will match [export conditions](https://nodejs.org/api/packages.html#conditional-exports) that are listed within the `resolve.conditionNames` array.
+يطابق webpack [شروط التصدير](https://nodejs.org/api/packages.html#conditional-exports) المدرجة داخل array الخاصة بـ `resolve.conditionNames`.
 
-#### Default values
+#### القيم الافتراضية
 
-The default `conditionNames` are composed dynamically based on the [`mode`](/configuration/mode/) and [`target`](/configuration/target/) configuration:
+يضبط webpack القيمة الافتراضية لـ `conditionNames` ديناميكيًا حسب إعدادات [`mode`](/configuration/mode/) و[`target`](/configuration/target/):
 
-The base conditions always include:
+تتضمن الشروط الأساسية دائمًا ما يلي:
 
-- `"webpack"` — always present.
-- `"production"` or `"development"` — based on the current [`mode`](/configuration/mode/) (`"production"` is used when mode is `"none"` or `"production"`).
+- `"webpack"`: موجود دائمًا.
+- `"production"` أو `"development"`: حسب قيمة [`mode`](/configuration/mode/) الحالية. تُستخدم `"production"` عندما يكون الوضع `"none"` أو `"production"`.
 
-Additional conditions are appended depending on the [`target`](/configuration/target/):
+يتم إلحاق شروط إضافية بناءً على [`target`](/configuration/target/):
 
-| Target property | Condition    |
-| --------------- | ------------ |
-| `webworker`     | `"worker"`   |
-| `node`          | `"node"`     |
-| `web`           | `"browser"`  |
-| `electron`      | `"electron"` |
-| `nwjs`          | `"nwjs"`     |
+| قيمة `target` | الشرط        |
+| ------------- | ------------ |
+| `webworker`   | `"worker"`   |
+| `node`        | `"node"`     |
+| `web`         | `"browser"`  |
+| `electron`    | `"electron"` |
+| `nwjs`        | `"nwjs"`     |
 
-For example, with `target: "web"` (the default) and `mode: "production"`, the base `conditionNames` defaults to `["webpack", "production", "browser"]`.
+على سبيل المثال، مع `target: "web"` (الافتراضي) و`mode: "production"`، يكون الإعداد الافتراضي `conditionNames` هو `["webpack", "production", "browser"]`.
 
-#### Per-dependency type conditions
+#### شروط كل نوع dependency
 
-Webpack further adjusts `conditionNames` through [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) depending on how a module is imported. The `"..."` token inherits from the base conditions above.
+يضبط webpack قيمة `conditionNames` عبر [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) حسب طريقة استيراد module. الرمز `"..."` يرث الشروط الأساسية المذكورة أعلاه.
 
-| Dependency type                                     | `conditionNames`                                       | Used for                                             |
-| --------------------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------- |
-| `esm`, `wasm`, `loaderImport`                       | `["import", "module-sync", "module", "..."]`           | ESM `import` statements, WebAssembly, loader imports |
-| `commonjs`, `amd`, `loader`, `unknown`, `undefined` | `["require", "module-sync", "module", "..."]`          | `require()` calls, AMD, and other dependency types   |
-| `worker`                                            | `["worker", "import", "module-sync", "module", "..."]` | `new Worker()` expressions                           |
-| `css-import`                                        | `["webpack", <mode>, "style"]`                         | CSS `@import` statements                             |
+| نوع dependency                                      | `conditionNames`                                       | الاستخدام                                                    |
+| --------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
+| `esm`، `wasm`، `loaderImport`                       | `["import", "module-sync", "module", "..."]`           | عمليات ESM `import`، وWebAssembly، وعمليات import من loaders |
+| `commonjs`، `amd`، `loader`، `unknown`، `undefined` | `["require", "module-sync", "module", "..."]`          | استدعاءات `require()` وAMD وأنواع dependency الأخرى          |
+| `worker`                                            | `["worker", "import", "module-sync", "module", "..."]` | تعابير `new Worker()`                                        |
+| `css-import`                                        | `["webpack", <mode>, "style"]`                         | تعليمات CSS `@import`                                        |
 
-<Badge text="5.107.0+" /> `"module-sync"` is included in the default conditions
-to align with Node.js, which exposes the `module-sync` community condition for
-synchronously-loadable ESM. Packages that publish a `module-sync` export in
-their `package.json` are picked up automatically without additional
-configuration.
+يُدرج <Badge text="5.107.0+" /> الشرط `"module-sync"` ضمن الشروط الافتراضية
+للتوافق مع Node.js. هذا الشرط يعبّر عن حزم ESM التي يمكن تحميلها بشكل متزامن.
+الحزم التي تنشر تصديرًا باسم `module-sync` داخل `package.json` تُلتقط تلقائيًا
+بدون أي إعداد إضافي.
 
-For instance, when a file uses `import` in a project with `target: "web"` and `mode: "production"`, the final resolved conditions are `["import", "module-sync", "module", "webpack", "production", "browser"]`.
+على سبيل المثال، عندما يستخدم ملف `import` في مشروع يحتوي على `target: "web"` و`mode: "production"`، فإن الشروط النهائية التي تم حلها هي `["import", "module-sync", "module", "webpack", "production", "browser"]`.
 
-T> The `resolveLoader` option uses different defaults for `conditionNames`: `["loader", "require", "node"]`. See [resolveLoader](#resolveloader).
+T> يستخدم الخيار `resolveLoader` إعدادات افتراضية مختلفة لـ `conditionNames`: `["loader", "require", "node"]`. راجع [resolveLoader](#resolveloader).
 
-#### Condition matching
+#### مطابقة الشروط
 
-The key order in the `exports` field is significant. During condition matching, earlier entries have higher priority and take precedence over later entries.
+يعد ترتيب المفاتيح في الحقل `exports` مهمًا. أثناء مطابقة الشرط، تتمتع الإدخالات السابقة بأولوية أعلى وتكون لها الأسبقية على الإدخالات اللاحقة.
 
-For example,
+على سبيل المثال،
 
 **package.json**
 
@@ -387,15 +368,15 @@ export default {
 };
 ```
 
-importing
+عمليات import:
 
-- `'foo'` will resolve to `'foo/index-require.js'`
-- `'foo/bar'` will resolve to `'foo/bar-node.js'` as the `"node"` key comes before `"require"` key in the conditional exports object.
-- `'foo/baz'` will resolve to `'foo/baz-node.js'`
+- سيتم resolve لـ `'foo'` إلى `'foo/index-require.js'`.
+- سيتم resolve لـ `'foo/bar'` إلى `'foo/bar-node.js'` لأن المفتاح `"node"` يأتي قبل `"require"` داخل object الخاص بالـ conditional exports.
+- سيتم resolve لـ `'foo/baz'` إلى `'foo/baz-node.js'`.
 
-#### Custom conditions
+#### شروط مخصصة
 
-If you want to add your custom field names while still retaining the default Webpack values, you can use `"..."`:
+إذا كنت تريد إضافة أسماء الحقول المخصصة الخاصة بك مع الاحتفاظ بالقيم الافتراضية webpack، فيمكنك استخدام `"..."`:
 
 **webpack.config.js**
 
@@ -408,7 +389,7 @@ export default {
 };
 ```
 
-Alternatively, to prioritize the default conditions first, then add your custom conditions:
+أو إذا أردت إعطاء الأولوية للشروط الافتراضية أولًا، ثم إضافة شروطك المخصصة:
 
 **webpack.config.js**
 
@@ -425,7 +406,7 @@ export default {
 
 `[string] = ['package.json']`
 
-The JSON files to use for descriptions.
+ملفات JSON المستخدمة للأوصاف.
 
 **webpack.config.js**
 
@@ -442,7 +423,7 @@ export default {
 
 `boolean = false`
 
-If `true`, it will not allow extension-less files. So by default `import foo from "./foo";`/`require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `import foo from "./foo.js"`/`require('./foo.js')` will work.
+إذا كانت القيمة `true`، فلن يسمح webpack بالاستيراد بدون الامتداد الكامل. لذلك يعمل `import foo from "./foo";` أو `require('./foo')` افتراضيًا إذا كان `./foo` يملك امتداد `.js`، لكن عند تفعيل هذا الخيار لن يعمل إلا `import foo from "./foo.js"` أو `require('./foo.js')`.
 
 **webpack.config.js**
 
@@ -459,7 +440,7 @@ export default {
 
 `[string] = ['exports']`
 
-Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
+الحقول الموجودة في `package.json` التي تُستخدم لحل طلبات module. راجع [دليل package exports](/guides/package-exports/) لمزيد من المعلومات.
 
 **webpack.config.js**
 
@@ -476,7 +457,7 @@ export default {
 
 `object`
 
-An object which maps extension to extension aliases.
+object يربط امتدادًا بامتدادات بديلة.
 
 **webpack.config.js**
 
@@ -496,7 +477,7 @@ export default {
 
 `[string] = ['.js', '.json', '.wasm']`
 
-Attempt to resolve these extensions in order. If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
+يحاول webpack resolve هذه الامتدادات بالترتيب. إذا كانت هناك ملفات متعددة لها الاسم نفسه لكن بامتدادات مختلفة، فسيختار webpack الملف صاحب الامتداد المذكور أولًا في array ويتخطى الباقي.
 
 **webpack.config.js**
 
@@ -509,13 +490,13 @@ export default {
 };
 ```
 
-which is what enables users to leave off the extension when importing:
+وهو ما يمكّن المستخدمين من ترك الامتداد عند الاستيراد:
 
 ```js
 import File from "../path/to/file";
 ```
 
-Note that using `resolve.extensions` like above will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. However you can use `'...'` to access the default extensions:
+لاحظ أن استخدام `resolve.extensions` كما في المثال أعلاه **يلغي array الافتراضية**، مما يعني أن webpack لن يحاول resolve modules باستخدام الامتدادات الافتراضية. يمكنك استخدام `'...'` لإبقاء الامتدادات الافتراضية:
 
 ```js
 export default {
@@ -530,7 +511,7 @@ export default {
 
 `object`
 
-Redirect module requests when normal resolving fails.
+يوجّه طلبات module إلى بدائل عند فشل resolve العادي.
 
 **webpack.config.js**
 
@@ -545,14 +526,14 @@ export default {
   // ...
   resolve: {
     fallback: {
-      abc: false, // do not include a polyfill for abc
-      xyz: path.resolve(__dirname, "path/to/file.js"), // include a polyfill for xyz
+      abc: false, // لا تضف polyfill لـ abc
+      xyz: path.resolve(__dirname, "path/to/file.js"), // أضف polyfill لـ xyz
     },
   },
 };
 ```
 
-Webpack 5 no longer polyfills Node.js core modules automatically which means if you use them in your code running in browsers or alike, you will have to install compatible modules from npm and include them yourself. Here is a list of polyfills webpack has used before webpack 5:
+في webpack 5 لم يعد webpack يضيف polyfills تلقائيًا لـ Node.js core modules. إذا كنت تستخدم هذه modules في كود يعمل داخل browser أو بيئة مشابهة، فعليك تثبيت الحزم المتوافقة من npm وإضافتها بنفسك. هذه قائمة بالـ polyfills التي كان webpack يستخدمها قبل webpack 5:
 
 ```js
 import { createRequire } from "node:module";
@@ -595,7 +576,7 @@ export default {
 
 `boolean`
 
-When set to true, this option treats user-specified requests as fully specified. This means that no extensions are automatically added, and the mainFiles within directories are not resolved. It's important to note that this behavior does not affect requests made through `mainFields`, `aliasFields`, or `aliases`.
+عند ضبطه على `true`، يتعامل هذا الخيار مع الطلبات التي يكتبها المستخدم على أنها محددة بالكامل. هذا يعني أنه لا تُضاف امتدادات تلقائيًا، ولا يتم resolve للملفات الرئيسية داخل المجلدات. لاحظ أن هذا السلوك لا يؤثر على الطلبات القادمة من `mainFields` أو `aliasFields` أو `aliases`.
 
 **webpack.config.js**
 
@@ -612,7 +593,7 @@ export default {
 
 `[string]`
 
-Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
+الحقول في `package.json` التي تُستخدم لتوفير الطلبات الداخلية للـ package. الطلبات التي تبدأ بـ `#` تُعد داخلية.
 
 **webpack.config.js**
 
@@ -629,9 +610,9 @@ export default {
 
 `[string]`
 
-When importing from an npm package, e.g. `import * as D3 from 'd3'`, this option will determine which fields in its `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
+عند الاستيراد من npm package، مثل `import * as D3 from 'd3'`، يحدد هذا الخيار أي حقول من `package.json` يستخدمها webpack كنقطة دخول. تختلف القيم الافتراضية حسب [`target`](/concepts/targets) المحدد في إعداد webpack.
 
-When the `target` property is set to `webworker`, `web`, or left unspecified:
+عند ضبط الخاصية `target` على `webworker` أو `web` أو تركها غير محددة:
 
 **webpack.config.js**
 
@@ -644,7 +625,7 @@ export default {
 };
 ```
 
-For any other target (including `node`):
+لأي target آخر، بما في ذلك `node`:
 
 **webpack.config.js**
 
@@ -657,7 +638,7 @@ export default {
 };
 ```
 
-For example, consider an arbitrary library called `upstream` with a `package.json` that contains the following fields:
+على سبيل المثال، افترض وجود library اسمها `upstream` وملف `package.json` الخاص بها يحتوي على الحقول التالية:
 
 ```json
 {
@@ -666,13 +647,13 @@ For example, consider an arbitrary library called `upstream` with a `package.jso
 }
 ```
 
-When we `import * as Upstream from 'upstream'` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
+عند كتابة `import * as Upstream from 'upstream'`، سيتم resolve للاستيراد إلى الملف الموجود في الخاصية `browser`. تحصل الخاصية `browser` على الأولوية لأنها أول عنصر في `mainFields`. وفي المقابل، سيحاول تطبيق Node.js المجمّع بواسطة webpack أن يستخدم الملف الموجود في الحقل `module` أولًا.
 
 ### resolve.mainFiles
 
 `[string] = ['index']`
 
-The filename to be used while resolving directories.
+اسم الملف الذي سيتم استخدامه أثناء حل الدلائل.
 
 **webpack.config.js**
 
@@ -689,13 +670,13 @@ export default {
 
 `[string] = ['node_modules']`
 
-Tell webpack what directories should be searched when resolving modules.
+أخبر webpack بأي مجلدات يبحث فيها عند resolve للـ modules.
 
-Absolute and relative paths can both be used, but be aware that they will behave a bit differently.
+يمكن استخدام كل من المسارات المطلقة والنسبية، لكن انتبه إلى أن سلوكهما سيكون مختلفًا بعض الشيء.
 
-A relative path will be scanned similarly to how Node scans for `node_modules`, by looking through the current directory as well as its ancestors (i.e. `./node_modules`, `../node_modules`, and on).
+سيتم فحص المسار النسبي بشكل مشابه لكيفية فحص Node بحثًا عن `node_modules`، من خلال البحث في الدليل الحالي بالإضافة إلى أسلافه (أي `./node_modules`، `../node_modules`، وما إلى ذلك).
 
-With an absolute path, it will only search in the given directory.
+مع المسار المطلق، سيتم البحث فقط في الدليل المحدد.
 
 **webpack.config.js**
 
@@ -708,7 +689,7 @@ export default {
 };
 ```
 
-If you want to add a directory to search in that takes precedence over `node_modules/`:
+إذا أردت إضافة مجلد بحث تكون له أولوية أعلى من `node_modules/`:
 
 **webpack.config.js**
 
@@ -731,14 +712,14 @@ export default {
 
 [`[Plugin | Function]`](/plugins/)
 
-A list of additional resolve plugins which should be applied.
+قائمة resolve plugins إضافية يجب تطبيقها.
 
-Each entry can be either:
+يمكن أن يكون كل عنصر واحدًا مما يلي:
 
-- A plugin object with an `apply(resolver)` method
-- Or a function plugin, which will be called with the resolver as both `this` and the first argument
+- plugin object يملك الدالة `apply(resolver)`.
+- function plugin تُستدعى ويكون resolver هو قيمة `this` والـ argument الأول.
 
-It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
+يتيح ذلك استخدام plugins مثل [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
 **webpack.config.js**
 
@@ -747,16 +728,16 @@ export default {
   // ...
   resolve: {
     plugins: [
-      // Object-style plugin
+      // plugin بأسلوب object
       {
         apply(resolver) {
-          // custom logic
+          // منطق مخصص
         },
       },
 
-      // Function-style plugin
+      // plugin بأسلوب function
       function (resolver) {
-        // `this` is also the resolver
+        // `this` هو resolver أيضًا
       },
     ],
   },
@@ -769,7 +750,7 @@ export default {
 
 <Badge text="5.13.0+" />
 
-Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
+يفضّل المسارات المطلقة على [`resolve.roots`](#resolveroots) أثناء resolve.
 
 **webpack.config.js**
 
@@ -786,7 +767,7 @@ export default {
 
 `boolean`
 
-When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
+عند تفعيله، يفضّل webpack حل طلبات module كطلبات نسبية بدل استخدام modules من مجلدات `node_modules`.
 
 **webpack.config.js**
 
@@ -804,11 +785,11 @@ export default {
 {/* eslint-disable */}
 
 ```js
-// let's say `src/logo.svg` exists
-import logo1 from "logo.svg"; // this is viable when `preferRelative` enabled
-import logo2 from "./logo.svg"; // otherwise you can only use relative path to resolve logo.svg
+// لنفترض أن `src/logo.svg` موجود
+import logo1 from "logo.svg"; // يعمل هذا عندما يكون `preferRelative` مفعّلًا
+import logo2 from "./logo.svg"; // وإلا فيجب استخدام مسار نسبي لحل logo.svg
 
-// `preferRelative` is enabled by default for `new URL()` case
+// `preferRelative` مفعّل افتراضيًا في حالة `new URL()`
 const b = new URL("module/path", import.meta.url);
 const a = new URL("./module/path", import.meta.url);
 ```
@@ -817,7 +798,7 @@ const a = new URL("./module/path", import.meta.url);
 
 `[string, RegExp]`
 
-A list of resolve restrictions to restrict the paths that a request can be resolved on.
+قائمة قيود تحدد المسارات المسموح للطلبات أن تُحل إليها.
 
 **webpack.config.js**
 
@@ -834,7 +815,7 @@ export default {
 
 `[string]`
 
-A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
+قائمة المجلدات التي تُحل منها طلبات URL المرتبطة بجذر server، وهي الطلبات التي تبدأ بـ `/`. القيمة الافتراضية هي خيار [`context`](/configuration/entry-context/#context). في الأنظمة غير Windows، تُحل هذه الطلبات كمسار مطلق أولًا.
 
 **webpack.config.js**
 
@@ -858,9 +839,9 @@ export default {
 
 `boolean = true`
 
-Whether to resolve symlinks to their symlinked location.
+يحدد هل يتبع resolver الروابط الرمزية إلى المسار الحقيقي للملف.
 
-When enabled, symlinked resources are resolved to their _real_ path, not their symlinked location. Note that this may cause module resolution to fail when using tools that symlink packages (like `npm link`).
+عند تفعيله، تُحوّل الموارد المشار إليها عبر symlink إلى مسارها \_الحقيقي، وليس إلى موقع symlink نفسه. لاحظ أن هذا قد يسبب فشل resolve للـ module عند استخدام أدوات تربط packages، مثل `npm link`.
 
 **webpack.config.js**
 
@@ -877,7 +858,7 @@ export default {
 
 `object` `boolean = true`
 
-Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything.
+يفعّل caching قويًا لكنه **غير آمن** للـ modules. تمرير `true` سيخزّن كل شيء في cache.
 
 **webpack.config.js**
 
@@ -890,22 +871,22 @@ export default {
 };
 ```
 
-When an object is provided, webpack will use it as cache.
+عند تمرير object، سيستخدمه webpack كـ cache.
 
-For example, you can supply a [Proxy object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) instead of a regular one:
+على سبيل المثال، يمكنك تمرير [كائن Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) بدل object عادي:
 
 **webpack.config.js**
 
 ```js
-// copied from discussion here https://github.com/webpack/webpack/discussions/18089
+// منقول من المناقشة هنا https://github.com/webpack/webpack/discussions/18089
 const realUnsafeCache = {};
 const unsafeCacheHandler = {
   get(cache, key) {
     const cachedValue = cache[key];
 
-    // make sure the file exists on disk
+    // تأكد من وجود الملف على القرص
     if (cachedValue && !fs.existsSync(cachedValue.path)) {
-      // and if it doesn't, evict that cache entry.
+      // وإذا لم يكن موجودًا، احذف إدخال cache.
       delete cache[key];
       return undefined;
     }
@@ -923,13 +904,13 @@ export default {
 };
 ```
 
-W> Changes to cached paths may cause failure in rare cases.
+W> قد تؤدي التغييرات في المسارات المخزنة مؤقتًا إلى فشل في حالات نادرة.
 
 ### resolve.useSyncFileSystemCalls
 
 `boolean`
 
-Use synchronous filesystem calls for the resolver.
+يستخدم استدعاءات نظام الملفات المتزامنة داخل resolver.
 
 **webpack.config.js**
 
@@ -948,7 +929,7 @@ export default {
 
 `boolean` `string` `object`
 
-TypeScript config for paths mapping. This option replaces the need for `tsconfig-paths-webpack-plugin`. It reads `compilerOptions.baseUrl` and `compilerOptions.paths` from `tsconfig.json` and applies those aliases when resolving imports.
+إعداد TypeScript لتعيين المسارات. يغني هذا الخيار عن الحاجة إلى `tsconfig-paths-webpack-plugin`. يقرأ `compilerOptions.baseUrl` و`compilerOptions.paths` من `tsconfig.json` ويطبق تلك الأسماء المستعارة أثناء resolve لعمليات import.
 
 **webpack.config.js**
 
@@ -956,16 +937,16 @@ TypeScript config for paths mapping. This option replaces the need for `tsconfig
 export default {
   // ...
   resolve: {
-    tsconfig: true, // Use default tsconfig.json
+    tsconfig: true, // استخدم tsconfig.json الافتراضي
   },
 };
 ```
 
-**Options:**
+**الخيارات:**
 
-- `false` - Disable TypeScript path mapping
-- `true` - Use the default `tsconfig.json` file (searches for it automatically)
-- `string` - Path to a `tsconfig.json` file (relative or absolute)
+- `false` - تعطيل path mapping الخاص بـ TypeScript
+- `true` - استخدم ملف `tsconfig.json` الافتراضي (يبحث عنه تلقائيًا)
+- `string` - المسار إلى ملف `tsconfig.json` (نسبي أو مطلق)
 
 **webpack.config.js**
 
@@ -973,12 +954,12 @@ export default {
 export default {
   // ...
   resolve: {
-    tsconfig: "./tsconfig.app.json", // Custom path
+    tsconfig: "./tsconfig.app.json", // مسار مخصص
   },
 };
 ```
 
-- `object` - Object with `configFile` and `references` options
+- `object` - object يحتوي على خياري `configFile` و`references`
 
 **webpack.config.js**
 
@@ -988,18 +969,18 @@ export default {
   resolve: {
     tsconfig: {
       configFile: "./tsconfig.json",
-      references: "auto", // or array of paths
+      references: "auto", // أو array من المسارات
     },
   },
 };
 ```
 
-**Object options:**
+**خيارات object:**
 
-- `configFile` (`string`): A path to the tsconfig file (relative or absolute)
-- `references` (`"auto"` | `string[]`): References to other tsconfig files. `"auto"` inherits from TypeScript config, or an array of relative/absolute paths
+- `configFile` (`string`): مسار إلى ملف tsconfig (نسبي أو مطلق)
+- `references` (`"auto"` | `string[]`): مراجع لملفات tsconfig الأخرى. `"auto"` يرث من إعداد TypeScript، أو يمكنك تمرير array من المسارات النسبية/المطلقة.
 
-**Example tsconfig.json:**
+**مثال tsconfig.json:**
 
 ```json
 {
@@ -1013,20 +994,20 @@ export default {
 }
 ```
 
-Then in your code:
+ثم في الكود الخاص بك:
 
 ```ts
 import Button from "@/components/Button";
 import Header from "components/Header";
 ```
 
-T> This option is also available in `resolveLoader` with the same configuration options.
+T> يتوفر هذا الخيار أيضًا في `resolveLoader` بنفس خيارات التخصيص.
 
-## resolveLoader
+## ResolveLoader
 
 `object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
 
-This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
+هذه المجموعة من الخيارات تطابق خاصية `resolve` المذكورة أعلاه، لكنها تُستخدم فقط لـ resolve حزم [loaders](/concepts/loaders) الخاصة بـ webpack.
 
 **webpack.config.js**
 
@@ -1041,4 +1022,4 @@ export default {
 };
 ```
 
-T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
+T> لاحظ أنه يمكنك استخدام aliases هنا وبقية ميزات resolve المعتادة. على سبيل المثال، سيجعل `{ txt: 'raw-loader' }` الطلب `txt!templates/demo.txt` يستخدم `raw-loader`.

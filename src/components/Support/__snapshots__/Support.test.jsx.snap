@@ -2,6 +2,6 @@
 
 exports[`Support matches snapshot for backer rank 1`] = `
 <h2>
-  Backers
+  الداعمون
 </h2>
 `;

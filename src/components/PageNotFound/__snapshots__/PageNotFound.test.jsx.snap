@@ -5,17 +5,17 @@ exports[`PageNotFound renders correctly 1`] = `
   class="page markdown"
 >
   <h1>
-    Page Not Found
+    الصفحة غير موجودة
   </h1>
   <p>
-    Oops! The page you are looking for has been removed or relocated.
+    الصفحة التي تبحث عنها أُزيلت أو نُقلت إلى مكان آخر.
   </p>
   <a
     class="no-underline inline-block py-[3px] px-[5px] text-[1.1rem] rounded-[5px] w-auto border border-[#175d96] text-[#175d96] hover:bg-[#175d96] hover:text-white"
     data-discover="true"
     href="/"
   >
-    Go to Homepage
+    العودة للرئيسية
   </a>
 </div>
 `;

@@ -1,9 +1,8 @@
 ---
-title: The Manifest
+title: ملف Manifest
 sort: 11
 contributors:
-  - skipjack
-  - EugeneHlushko
+  - RlxChap2
 related:
   - title: Separating a Manifest
     url: https://survivejs.com/webpack/optimizing/separating-manifest/
@@ -13,28 +12,28 @@ related:
     url: /guides/caching/
 ---
 
-In a typical application or site built with webpack, there are three main types of code:
+في تطبيق أو موقع نموذجي مبني باستخدام webpack، توجد ثلاثة أنواع رئيسية من الكود:
 
-1. The source code you, and maybe your team, have written.
-2. Any third-party library or "vendor" code your source is dependent on.
-3. A webpack runtime and **manifest** that conducts the interaction of all modules.
+1. الكود المصدري الذي كتبته أنت، وربما فريقك.
+2. أي مكتبة خارجية أو كود "vendor" يعتمد عليه كودك المصدري.
+3. webpack runtime و **manifest** الذي يدير تفاعل كل الوحدات.
 
-This article will focus on the last of these three parts: the runtime and, in particular, the manifest.
+سيركز هذا المقال على آخر جزء من هذه الأجزاء الثلاثة: runtime، وبشكل خاص manifest.
 
 ## Runtime
 
-The runtime, along with the manifest data, is all the code webpack needs to connect your modularized application while it's running in the browser. It contains the loading and resolving logic needed to connect your modules as they interact. This includes connecting modules that have already been loaded into the browser as well as logic to lazy-load the ones that haven't.
+runtime، مع بيانات manifest، هو كل الكود الذي يحتاجه webpack لربط تطبيقك المكوّن من وحدات أثناء تشغيله في المتصفح. يحتوي على منطق التحميل والحل اللازم لربط الوحدات أثناء تفاعلها. يشمل ذلك ربط الوحدات التي حُمّلت بالفعل في المتصفح، وكذلك منطق التحميل الكسول للوحدات التي لم تُحمّل بعد.
 
 ## Manifest
 
-Once your application hits the browser in the form of `index.html` file, some bundles and a variety of other assets required by your application must be loaded and linked somehow. That `/src` directory you meticulously laid out is now bundled, minified and maybe even split into smaller chunks for lazy-loading by webpack's [`optimization`](/configuration/optimization/). So how does webpack manage the interaction between all of your required modules? This is where the manifest data comes in...
+عندما يصل تطبيقك إلى المتصفح على هيئة ملف `index.html`، يجب تحميل بعض الحزم ومجموعة من الأصول الأخرى التي يحتاجها تطبيقك وربطها بطريقة ما. مجلد `/src` الذي رتّبته بعناية أصبح الآن مجمعًا ومصغرًا وربما مقسمًا إلى chunks أصغر للتحميل الكسول بواسطة [`optimization`](/configuration/optimization/) في webpack. فكيف يدير webpack التفاعل بين كل الوحدات المطلوبة؟ هنا يأتي دور بيانات manifest.
 
-As the compiler enters, resolves, and maps out your application, it keeps detailed notes on all your modules. This collection of data is called the "Manifest," and it's what the runtime will use to resolve and load modules once they've been bundled and shipped to the browser. No matter which [module syntax](/api/module-methods) you have chosen, those `import` or `require` statements have now become `__webpack_require__` methods that point to module identifiers. Using the data in the manifest, the runtime will be able to find out where to retrieve the modules behind the identifiers.
+بينما يدخل المترجم إلى تطبيقك ويحلّه ويرسم خريطته، يحتفظ بملاحظات تفصيلية حول كل وحداتك. تسمى هذه المجموعة من البيانات "Manifest"، وهي ما سيستخدمه runtime لحلّ الوحدات وتحميلها بعد تجميعها وشحنها إلى المتصفح. أيًا كانت [صيغة الوحدات](/api/module-methods) التي اخترتها، أصبحت تعليمات `import` أو `require` الآن طرق `__webpack_require__` تشير إلى معرفات الوحدات. باستخدام البيانات الموجودة في manifest، سيتمكن runtime من معرفة مكان جلب الوحدات خلف هذه المعرفات.
 
-## The Problem
+## المشكلة
 
-So now you have a little bit of insight about how webpack works behind the scenes. "But, how does this affect me?", you might ask. Most of the time, it doesn't. The runtime will do its thing, utilizing the manifest, and everything will appear to magically work once your application hits the browser. However, if you decide to improve the performance of your projects by utilizing browser caching, this process will all of a sudden become an important thing to understand.
+أصبح لديك الآن تصور بسيط عن طريقة عمل webpack خلف الكواليس. قد تسأل: "لكن كيف يؤثر هذا علي؟" في أغلب الوقت، لا يؤثر. سيقوم runtime بعمله مستخدمًا manifest، وسيبدو كل شيء وكأنه يعمل بسلاسة عندما يصل تطبيقك إلى المتصفح. لكن إذا قررت تحسين أداء مشاريعك باستخدام التخزين المؤقت في المتصفح، فستصبح هذه العملية فجأة شيئًا مهمًا يجب فهمه.
 
-By using content hashes within your bundle file names, you can indicate to the browser when the content of a file has changed, thus invalidating the cache. Once you start doing this though, you'll immediately notice some funny behavior. Certain hashes change even when their content apparently does not. This is caused by the injection of the runtime and manifest, which changes every build.
+باستخدام content hashes داخل أسماء ملفات الحزم، يمكنك إخبار المتصفح متى تغير محتوى ملف ما، وبالتالي إبطال cache. لكن بمجرد أن تبدأ بفعل ذلك، ستلاحظ فورًا سلوكًا غريبًا: بعض الهاشات تتغير حتى عندما لا يبدو أن محتواها تغير. يحدث ذلك بسبب حقن runtime و manifest، وهما يتغيران في كل build.
 
-See [the manifest section](/guides/output-management/#the-manifest) of our _Output management_ guide to learn how to extract the manifest, and read the guides below to learn more about the intricacies of long term caching.
+راجع [قسم manifest](/guides/output-management/#the-manifest) في دليل _إدارة الإخراج_ لتتعلم كيفية استخراج manifest، واقرأ الأدلة أدناه لمعرفة المزيد عن تفاصيل التخزين المؤقت طويل الأمد.

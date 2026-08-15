@@ -6,13 +6,13 @@ describe("server side rendered page", () => {
     cy.get('head meta[name="description"]').should(
       "have.attr",
       "content",
-      "Learn how to bundle a JavaScript application with webpack 5.",
+      "تعلّم كيفية تجميع تطبيق JavaScript باستخدام webpack 5.",
     );
   });
 
   it("should find html tag with lang", () => {
     cy.visit("/");
-    cy.get('html[lang="en"]');
+    cy.get('html[lang="ar"][dir="rtl"]');
   });
 
   it("should find meta charset", () => {
@@ -25,7 +25,7 @@ describe("server side rendered page", () => {
     cy.get('head meta[name="description"]').should(
       "have.attr",
       "content",
-      "webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.",
+      "webpack هو module bundler. هدفه الأساسي حزم ملفات JavaScript لاستخدامها في المتصفح، ويمكنه كذلك تحويل أي resource أو asset تقريبًا وحزمه أو تجهيزه.",
     );
   });
 
@@ -34,6 +34,6 @@ describe("server side rendered page", () => {
     cy.title().should("eq", "webpack");
 
     cy.visit("/guides/getting-started/");
-    cy.title().should("eq", "Getting Started | webpack");
+    cy.title().should("eq", "البدء | webpack");
   });
 });

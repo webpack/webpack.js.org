@@ -1,43 +1,23 @@
 ---
-title: Production
+title: الإنتاج
 sort: 17
 contributors:
-  - henriquea
-  - rajagopal4890
-  - makuzaverite
-  - markerikson
-  - simon04
-  - kisnows
-  - chrisVillanueva
-  - swapnilmishra
-  - bring2dip
-  - redian
-  - skipjack
-  - xgqfrms
-  - kelset
-  - xgirma
-  - mehrdaad
-  - SevenOutman
-  - AnayaDesign
-  - wizardofhogwarts
-  - aholzner
-  - EugeneHlushko
-  - snitin315
-  - Brennvo
-  - ThierryRakotomanana
+  - arabpolice
 ---
 
-In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
+في هذا الدليل، سنتعمق في بعض أفضل الممارسات والأدوات المساعدة لبناء موقع أو تطبيق للإنتاج.
 
-T> This walkthrough stems from [Tree Shaking](/guides/tree-shaking) and [Development](/guides/development). Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.
+T> يعتمد هذا الشرح على دليلي [إزالة الكود غير المستخدم](/guides/tree-shaking) و[التطوير](/guides/development). يرجى التأكد من أنك ملم بالمفاهيم والإعدادات المقدمة في هذين الدليلين قبل المتابعة.
 
-## Setup
+## الإعداد
 
-The goals of _development_ and _production_ builds differ greatly. In _development_, we want strong source mapping and a localhost server with live reloading or hot module replacement. In _production_, our goals shift to a focus on minified bundles, lighter weight source maps, and optimized assets to improve load time. With this logical separation at hand, we typically recommend writing **separate webpack configurations** for each environment.
+<span id="setup"></span>
 
-While we will separate the _production_ and _development_ specific bits out, note that we'll still maintain a "common" configuration to keep things DRY. In order to merge these configurations together, we'll use a utility called [`webpack-merge`](https://github.com/survivejs/webpack-merge). With the "common" configuration in place, we won't have to duplicate code within the environment-specific configurations.
+تختلف أهداف بناءات التطوير والإنتاج كثيرًا. في التطوير نريد خرائط مصدر قوية وخادمًا محليًا مع إعادة تحميل حية أو استبدال الوحدات الساخن. أما في الإنتاج فتتحول أهدافنا إلى التركيز على حزم مصغّرة، وخرائط مصدر أخف وزنًا، وأصول محسّنة لتحسين وقت التحميل. وبوجود هذا الفصل المنطقي، نوصي عادة بكتابة **إعدادات webpack منفصلة** لكل بيئة.
 
-Let's start by installing `webpack-merge` and splitting out the bits we've already worked on in previous guides:
+مع أننا سنفصل الأجزاء الخاصة بالإنتاج والتطوير، لاحظ أننا سنبقي إعدادًا «مشتركًا» للحفاظ على مبدأ DRY. لدمج هذه الإعدادات معًا، سنستخدم أداة مساعدة تسمى [`webpack-merge`](https://github.com/survivejs/webpack-merge). بوجود الإعداد «المشترك»، لن نحتاج إلى تكرار الكود داخل الإعدادات الخاصة بكل بيئة.
+
+لنبدأ بتثبيت `webpack-merge` وفصل الأجزاء التي عملنا عليها بالفعل في الأدلة السابقة:
 
 ```bash
 npm install --save-dev webpack-merge
@@ -113,13 +93,13 @@ npm install --save-dev webpack-merge
 + });
 ```
 
-In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set `mode` to `development`. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our `devServer` configuration. Finally, in `webpack.prod.js`,`mode` is set to `production` which loads [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking/) guide.
+في `webpack.common.js` أصبح لدينا الآن إعدادا `entry` و`output`، وأضفنا أي ملحقات مطلوبة لكلتا البيئتين. في `webpack.dev.js` عيّنا `mode` إلى `development`. كذلك أضفنا خيار `devtool` الموصى به لتلك البيئة، وهو خرائط مصدر قوية، بالإضافة إلى إعداد `devServer`. وأخيرًا، في `webpack.prod.js`، عُيّن `mode` إلى `production`، مما يحمّل [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/) الذي قُدّم أول مرة في دليل [إزالة الكود غير المستخدم](/guides/tree-shaking/).
 
-Note the use of `merge()` calls in the environment-specific configurations to include our common configuration in `webpack.dev.js` and `webpack.prod.js`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
+لاحظ استخدام استدعاءات `merge()` في الإعدادات الخاصة بكل بيئة لتضمين الإعداد المشترك داخل `webpack.dev.js` و`webpack.prod.js`. توفر أداة `webpack-merge` مجموعة من الميزات المتقدمة للدمج، لكننا لن نحتاج إلى أي منها في حالتنا.
 
-## NPM Scripts
+## سكربتات NPM
 
-Now, let's modify our npm scripts to use the new configuration files. For the `start` script, which runs `webpack-dev-server`, we will use `webpack.dev.js`, and for the `build` script, which runs `webpack` to create a production build, we will use `webpack.prod.js`:
+الآن، لنعدّل سكربتات npm لاستخدام ملفات الإعداد الجديدة. بالنسبة إلى سكربت `start`، الذي يشغّل `webpack-dev-server`، سنستخدم `webpack.dev.js`، وبالنسبة إلى سكربت `build`، الذي يشغّل `webpack` لإنشاء بناء إنتاج، سنستخدم `webpack.prod.js`:
 
 **package.json**
 
@@ -154,11 +134,11 @@ Now, let's modify our npm scripts to use the new configuration files. For the `s
   }
 ```
 
-Feel free to run those scripts and see how the output changes as we continue adding to our _production_ configuration.
+يمكنك تشغيل هذه السكربتات وملاحظة كيف يتغير الخرج بينما نواصل الإضافة إلى إعداد _الإنتاج_.
 
-## Specify the Mode
+## تحديد الوضع
 
-Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when `process.env.NODE_ENV` is not set to `'production'` some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV` set to `'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/configuration/mode/) automatically configures `process.env.NODE_ENV` for you through [`DefinePlugin`](https://github.com/webpack/webpack/blob/fcccd192ce550210186f84a7ca59ee4cd47a8b2d/lib/WebpackOptionsApply.js#L565):
+تعتمد كثير من المكتبات على المتغير `process.env.NODE_ENV` لتحديد ما ينبغي تضمينه في المكتبة. على سبيل المثال، عندما لا تكون قيمة `process.env.NODE_ENV` مضبوطة على `'production'`، قد تضيف بعض المكتبات تسجيلًا واختبارات إضافية لتسهيل التصحيح. أما مع ضبط `process.env.NODE_ENV` إلى `'production'`، فقد تحذف أو تضيف أجزاء كبيرة من الكود لتحسين طريقة التشغيل للمستخدمين الفعليين. منذ webpack v4، يؤدي تحديد [`mode`](/configuration/mode/) إلى إعداد `process.env.NODE_ENV` تلقائيًا عبر [`DefinePlugin`](https://github.com/webpack/webpack/blob/fcccd192ce550210186f84a7ca59ee4cd47a8b2d/lib/WebpackOptionsApply.js#L565):
 
 **webpack.prod.js**
 
@@ -171,9 +151,9 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
   });
 ```
 
-T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set **within** the build script `webpack.config.js` automatically when running webpack. Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[contenthash].bundle.js' : '[name].bundle.js'` won't work in webpack configurations unless you specify `NODE_ENV` explicitly with `NODE_ENV=production` through CLI.
+T> من الناحية التقنية، `NODE_ENV` متغير بيئة نظام يعرّضه Node.js للسكربتات قيد التشغيل. ويُستخدم اصطلاحًا لتحديد سلوك التطوير مقابل الإنتاج في أدوات الخادم وسكربتات البناء ومكتبات جهة العميل. وخلافًا لما قد يُتوقع، لا تُضبط `process.env.NODE_ENV` **داخل** سكربت البناء `webpack.config.js` تلقائيًا عند تشغيل webpack. لذلك، لن تعمل الشروط مثل `process.env.NODE_ENV === 'production' ? '[name].[contenthash].bundle.js' : '[name].bundle.js'` داخل إعدادات webpack ما لم تحدد `NODE_ENV` صراحة باستخدام `NODE_ENV=production` عبر CLI.
 
-If you're using a library like [`react`](https://reactjs.org/), you should actually see a significant drop in bundle size after adding `DefinePlugin`. Also, note that any of our local `/src` code can key off of this as well, so the following check would be valid:
+إذا كنت تستخدم مكتبة مثل [`react`](https://reactjs.org/)، فينبغي أن تلاحظ انخفاضًا ملحوظًا في حجم الحزمة بعد إضافة `DefinePlugin`. ولاحظ أيضًا أن أي كود محلي داخل `/src` يمكنه الاعتماد على هذا المتغير كذلك، لذا سيكون الفحص التالي صالحًا:
 
 **src/index.js**
 
@@ -198,19 +178,19 @@ If you're using a library like [`react`](https://reactjs.org/), you should actua
   document.body.appendChild(component());
 ```
 
-## Minification
+## التصغير
 
-Webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
+سيقوم webpack v4+ بتصغير الكود افتراضيًا في [`وضع الإنتاج`](/configuration/mode/#mode-production).
 
-Note that while the [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/) is a great place to start for minification and being used by default, there are other options out there:
+لاحظ أنه مع أن [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/) نقطة بداية ممتازة للتصغير ويُستخدم افتراضيًا، فهناك خيارات أخرى متاحة:
 
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
+إذا قررت تجربة ملحق تصغير آخر، فتأكد من أن اختيارك الجديد يحذف أيضًا الكود الميت كما هو موضح في دليل [إزالة الكود غير المستخدم](/guides/tree-shaking)، وقدّمه عبر [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
-## Source Mapping
+## خرائط المصدر
 
-We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in the _production_ as opposed to the `inline-source-map` we used in the _development_:
+نشجعك على تفعيل خرائط المصدر في الإنتاج، لأنها مفيدة للتصحيح وكذلك لتشغيل اختبارات القياس. ومع ذلك، ينبغي اختيار خيار بسرعة بناء معقولة وموصى به للاستخدام في الإنتاج، راجع [`devtool`](/configuration/devtool). في هذا الدليل سنستخدم خيار `source-map` في _الإنتاج_ بدلًا من `inline-source-map` الذي استخدمناه في _التطوير_:
 
 **webpack.prod.js**
 
@@ -224,14 +204,14 @@ We encourage you to have source maps enabled in production, as they are useful f
   });
 ```
 
-T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
+T> تجنب استخدام `inline-***` و`eval-***` في الإنتاج، لأنها قد تزيد حجم الحزمة وتخفض الأداء العام.
 
-## Minimize CSS
+## تصغير CSS
 
-It is crucial to minimize your CSS for production. Please see the [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
+من المهم جدًا تصغير CSS للإنتاج. يرجى مراجعة قسم [التصغير للإنتاج](/plugins/mini-css-extract-plugin/#minimizing-for-production).
 
-## CLI Alternatives
+## بدائل CLI
 
-Many of the options described above can be set as command line arguments. For example, [`optimization.minimize`](/configuration/optimization/#optimizationminimize) can be set with `--optimization-minimize`, and [`mode`](/configuration/mode/) can be set with `--mode`. Run `npx webpack --help=verbose` for a full list of CLI arguments.
+يمكن تعيين كثير من الخيارات الموضحة أعلاه كوسيطات في سطر الأوامر. على سبيل المثال، يمكن تعيين [`optimization.minimize`](/configuration/optimization/#optimizationminimize) باستخدام `--optimization-minimize`، ويمكن تعيين [`mode`](/configuration/mode/) باستخدام `--mode`. شغّل `npx webpack --help=verbose` للحصول على قائمة كاملة بوسيطات CLI.
 
-While these shorthand methods are useful, we recommend setting these options in a webpack configuration file for more configurability.
+مع أن هذه الطرق المختصرة مفيدة، فإننا نوصي بتعيين هذه الخيارات داخل ملف إعداد webpack للحصول على قابلية ضبط أكبر.

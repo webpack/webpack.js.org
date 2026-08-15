@@ -1,35 +1,21 @@
 ---
-title: Caching
+title: التخزين المؤقت
 sort: 6
 contributors:
-  - okonet
-  - jouni-kantola
-  - skipjack
-  - dannycjones
-  - fadysamirsadek
-  - afontcu
-  - rosavage
-  - saiprasad2595
-  - EugeneHlushko
-  - AnayaDesign
-  - aholzner
-  - snitin315
-related:
-  - title: Issue 652
-    url: https://github.com/webpack/webpack.js.org/issues/652
+  - arabpolice
 ---
 
-T> The examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
+T> الأمثلة الموجودة في هذا الدليل مبنية على [البدء](/guides/getting-started) و[إدارة المخرجات](/guides/output-management) و[تقسيم الكود](/guides/code-splitting).
 
-So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](<https://en.wikipedia.org/wiki/Cache_(computing)>). This allows sites to load faster with less unnecessary network traffic. However, it can also cause headaches when you need new code to be picked up.
+إذًا نحن نستخدم webpack لتجميع تطبيقنا المعياري مما ينتج مجلد `/dist` جاهزًا للنشر. بمجرد نشر محتويات `/dist` على خادم، سيقوم العملاء (عادةً المتصفحات) بالاتصال بهذا الخادم للحصول على الموقع وملفاته. الخطوة الأخيرة قد تستغرق وقتًا، ولهذا تستخدم المتصفحات تقنية تُسمى [التخزين المؤقت](https://en.wikipedia.org/wiki/Cache_%28computing%29). هذا يسمح للمواقع بالتحميل بشكل أسرع مع تقليل حركة الشبكة غير الضرورية. ومع ذلك، قد يسبب ذلك بعض المشاكل عندما تحتاج إلى تحميل كود جديد.
 
-This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their content has changed.
+يركز هذا الدليل على الإعدادات المطلوبة لضمان أن الملفات الناتجة من عملية تجميع webpack تبقى مخزنة مؤقتًا ما لم يتغير محتواها.
 
-## Output Filenames
+## أسماء ملفات المخرجات
 
-We can use the `output.filename` [substitutions](/configuration/output/#outputfilename) setting to define the names of our output files. Webpack provides a method of templating the filenames using bracketed strings called **substitutions**. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
+يمكننا استخدام إعداد `output.filename` الخاص بـ [الاستبدالات](/configuration/output/#outputfilename) لتحديد أسماء ملفات المخرجات. يوفر webpack طريقة لإنشاء قوالب لأسماء الملفات باستخدام سلاسل محاطة بأقواس تُسمى **الاستبدالات**. الاستبدال `[contenthash]` سيضيف قيمة hash فريدة بناءً على محتوى الملف. وعندما يتغير محتوى الملف، فإن `[contenthash]` سيتغير أيضًا.
 
-Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
+لنقم بإعداد مشروعنا باستخدام المثال من [البدء](/guides/getting-started) مع إضافة `plugins` من [إدارة المخرجات](/guides/output-management)، حتى لا نضطر إلى إدارة ملف `index.html` يدويًا:
 
 **project**
 
@@ -71,7 +57,7 @@ webpack-demo
  };
 ```
 
-Running our build script, `npm run build`, with this configuration should produce the following output:
+تشغيل أمر البناء `npm run build` بهذا الإعداد يجب أن ينتج المخرجات التالية:
 
 ```bash
 ...
@@ -81,7 +67,7 @@ main.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  main
 ...
 ```
 
-As you can see the bundle's name now reflects its content (via the hash). If we run another build without making any changes, we'd expect that filename to stay the same. However, if we were to run it again, we may find that this is not the case:
+كما ترى، اسم الحزمة الآن يعكس محتواها (عبر قيمة الـ hash). إذا قمنا بتشغيل البناء مرة أخرى بدون أي تغييرات، فمن المفترض أن يبقى اسم الملف كما هو. ولكن إذا قمنا بالبناء مرة أخرى، فقد نجد أن هذا ليس صحيحًا:
 
 ```bash
 ...
@@ -91,13 +77,13 @@ main.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  main
 ...
 ```
 
-This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.
+هذا لأن webpack يضمّن بعض الشيفرات الأساسية، وبالتحديد الـ runtime والـ manifest، داخل حزمة الإدخال.
 
-W> Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.
+W> قد تختلف المخرجات حسب إصدار webpack الحالي لديك. الإصدارات الأحدث قد لا تعاني من نفس مشاكل الـ hashing الموجودة في الإصدارات القديمة، لكننا لا نزال نوصي بالخطوات التالية لضمان الأمان.
 
-## Extracting Boilerplate
+## استخراج الشيفرات الأساسية
 
-As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. Webpack provides an optimization feature to split runtime code into a separate chunk using the [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk) option. Set it to `single` to create a single runtime bundle for all chunks:
+كما تعلمنا في [تقسيم الكود](/guides/code-splitting)، يمكن استخدام [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) لفصل الوحدات إلى حزم منفصلة. يوفر webpack ميزة تحسين لتقسيم كود الـ runtime إلى حزمة منفصلة باستخدام الخيار [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk). قم بضبطه إلى `single` لإنشاء حزمة runtime واحدة لكل الحزم:
 
 **webpack.config.js**
 
@@ -127,7 +113,7 @@ As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlug
  };
 ```
 
-Let's run another build to see the extracted `runtime` bundle:
+لنقم بتشغيل البناء مرة أخرى لرؤية حزمة `runtime` المستخرجة:
 
 ```bash
 Hash: 82c9c385607b2150fab2
@@ -143,8 +129,8 @@ runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
     + 1 hidden module
 ```
 
-It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date.
-This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#splitchunkscachegroups) option of the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) demonstrated in [Example 2 of SplitChunksPlugin](/plugins/split-chunks-plugin/#split-chunks-example-2). Lets add `optimization.splitChunks` with `cacheGroups` with next params and build:
+من الممارسات الجيدة أيضًا فصل المكتبات الخارجية مثل `lodash` أو `react` إلى حزمة `vendor` منفصلة لأنها أقل عرضة للتغيير مقارنة بالكود المحلي الخاص بنا. هذه الخطوة ستسمح للعملاء بطلب بيانات أقل من الخادم للبقاء محدثين.
+يمكن تنفيذ ذلك باستخدام خيار [`cacheGroups`](/plugins/split-chunks-plugin/#splitchunkscachegroups) الخاص بـ [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) كما هو موضح في [المثال 2 من SplitChunksPlugin](/plugins/split-chunks-plugin/#split-chunks-example-2). لنقم بإضافة `optimization.splitChunks` مع `cacheGroups` بالمعاملات التالية ثم نقوم بالبناء:
 
 **webpack.config.js**
 
@@ -183,7 +169,7 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
  };
 ```
 
-Let's run another build to see our new `vendor` bundle:
+لنقم بالبناء مرة أخرى لرؤية حزمة `vendor` الجديدة:
 
 ```bash
 ...
@@ -195,11 +181,11 @@ vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  [emitted]  vendors
 ...
 ```
 
-We can now see that our `main` bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
+يمكننا الآن ملاحظة أن حزمة `main` لم تعد تحتوي على كود `vendor` من مجلد `node_modules` وأصبح حجمها `240 bytes` فقط!
 
-## Module Identifiers
+## معرفات الوحدات
 
-Let's add another module, `print.js`, to our project:
+لنقم بإضافة وحدة جديدة `print.js` إلى مشروعنا:
 
 **project**
 
@@ -242,7 +228,7 @@ webpack-demo
   document.body.appendChild(component());
 ```
 
-Running another build, we would expect only our `main` bundle's hash to change, however...
+عند تشغيل البناء مرة أخرى، نتوقع أن يتغير hash الخاص بحزمة `main` فقط، ولكن...
 
 ```bash
 ...
@@ -254,13 +240,13 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 ...
 ```
 
-... we can see that all three have. This is because each [`module.id`](/api/module-variables/#moduleid-commonjs) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. To recap:
+... يمكننا رؤية أن الثلاثة جميعًا قد تغيروا. السبب هو أن كل [`module.id`](/api/module-variables/#moduleid-commonjs) يتم زيادته افتراضيًا بناءً على ترتيب التحليل. وهذا يعني أنه عندما يتغير ترتيب التحليل، ستتغير المعرفات أيضًا. للتلخيص:
 
-- The `main` bundle changed because of its new content.
-- The `vendor` bundle changed because its `module.id` was changed.
-- And, the `runtime` bundle changed because it now contains a reference to a new module.
+- حزمة `main` تغيرت بسبب محتواها الجديد.
+- حزمة `vendor` تغيرت لأن `module.id` الخاص بها تغير.
+- وحزمة `runtime` تغيرت لأنها تحتوي الآن على مرجع إلى وحدة جديدة.
 
-The first and last are expected, it's the `vendor` hash we want to fix. Let's use [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) with `'deterministic'` option:
+الأول والأخير متوقعان، لكننا نريد إصلاح hash الخاص بـ `vendor`. لنستخدم [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) مع الخيار `'deterministic'`:
 
 **webpack.config.js**
 
@@ -300,7 +286,7 @@ The first and last are expected, it's the `vendor` hash we want to fix. Let's us
  };
 ```
 
-Now, despite any new local dependencies, our `vendor` hash should stay consistent between builds:
+الآن، مهما أضفنا من تبعيات محلية جديدة، يجب أن يبقى hash الخاص بـ `vendor` ثابتًا بين عمليات البناء:
 
 ```bash
 ...
@@ -313,7 +299,7 @@ Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.j
 ...
 ```
 
-And let's modify our `src/index.js` to temporarily remove that extra dependency:
+والآن لنقم بتعديل `src/index.js` لإزالة تلك التبعية الإضافية مؤقتًا:
 
 **src/index.js**
 
@@ -336,7 +322,7 @@ And let's modify our `src/index.js` to temporarily remove that extra dependency:
   document.body.appendChild(component());
 ```
 
-And finally run our build again:
+وأخيرًا قم بتشغيل البناء مرة أخرى:
 
 ```bash
 ...
@@ -349,8 +335,8 @@ Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.j
 ...
 ```
 
-We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundle's filename.
+يمكننا ملاحظة أن كلا عمليتي البناء استخدمتا القيمة `55e79e5927a639d21a1b` في اسم ملف حزمة `vendor`.
 
-## Conclusion
+## الخلاصة
 
-Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the _Further Reading_ section below to learn more.
+قد يكون التخزين المؤقت معقدًا، لكن الفائدة التي يقدمها لمستخدمي التطبيق أو الموقع تجعل الجهد مستحقًا. راجع قسم _Further Reading_ أدناه لمعرفة المزيد.

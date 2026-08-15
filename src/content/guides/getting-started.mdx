@@ -1,62 +1,39 @@
 ---
-title: Getting Started
-description: Learn how to bundle a JavaScript application with webpack 5.
+title: البدء
+description: تعلّم كيفية تجميع تطبيق JavaScript باستخدام webpack 5.
 sort: 1
 contributors:
-  - bebraw
-  - varunjayaraman
-  - cntanglijun
-  - chrisVillanueva
-  - johnstew
-  - simon04
-  - aaronang
-  - TheDutchCoder
-  - sudarsangp
-  - Vanguard90
-  - chenxsan
-  - EugeneHlushko
-  - ATGardner
-  - ayvarot
-  - bjarki
-  - ztomasze
-  - Spiral90210
-  - byzyk
-  - wizardofhogwarts
-  - myshov
-  - anshumanv
-  - d3lm
-  - snitin315
-  - Etheryen
-  - zowiebeha
+  - arabpolice
+  - semon009
 ---
 
-Webpack is a good fit when your application needs a customizable build pipeline: bundling JavaScript modules, processing assets, integrating loaders and plugins, and shaping output for different environments. For a very small page with one or two scripts, a bundler may be unnecessary at first; for an application with shared dependencies, npm packages, assets, and production builds, webpack gives you explicit control over how everything is assembled.
+يُعتبر Webpack خيارًا ممتازًا عندما يحتاج تطبيقك إلى مسار بناء (Build Pipeline) قابل للتخصيص: مثل تجميع وحدات JavaScript، ومعالجة الملفات (assets)، ودمج الـ loaders والـ plugins، وتشكيل المخرجات لبيئات مختلفة. بالنسبة لصفحة صغيرة جدًا تحتوي على ملف أو ملفين JavaScript فقط، قد لا تحتاج إلى bundler في البداية؛ ولكن في التطبيقات التي تحتوي على تبعيات مشتركة، وحزم npm، وملفات assets، وبناءات للإنتاج (production builds)، فإن webpack يمنحك تحكمًا واضحًا بكيفية تجميع كل شيء.
 
-Webpack is used to efficiently compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
+يُستخدم Webpack لتجميع وحدات JavaScript بكفاءة. بعد [تثبيته](/guides/installation)، يمكنك التعامل معه إما من خلال [واجهة سطر الأوامر CLI](/api/cli) أو من خلال [واجهة API](/api/node). إذا كنت جديدًا على webpack، فننصحك بقراءة [المفاهيم الأساسية](/concepts) و[هذه المقارنة](/comparison) لتفهم لماذا قد تختاره بدلًا من الأدوات الأخرى الموجودة في المجتمع البرمجي.
 
-W> The examples in this guide use `webpack-cli` 7, which requires Node.js 20.9.0 or later.
+W> الأمثلة في هذا الدليل تستخدم `webpack-cli` الإصدار 7، والذي يتطلب Node.js بالإصدار 20.9.0 أو أحدث.
 
 <StackBlitzPreview example="getting-started?terminal=" />
 
-## Quick Start (Minimal Working Example)
+## البداية السريعة (مثال عملي بسيط)
 
-If you want to get a working webpack project up and running quickly, the easiest way is to scaffold one using `create-webpack-app`.
+إذا كنت تريد تشغيل مشروع webpack جاهز بسرعة، فإن أسهل طريقة هي إنشاء مشروع باستخدام `create-webpack-app`.
 
 ```bash
 npx create-webpack-app webpack-demo
 cd webpack-demo
 ```
 
-T> Need a CLI-based project setup or templates? See the [Init command](/api/cli/#init) for webpack's scaffolding flow.
+T> هل تحتاج إلى إعداد مشروع أو قوالب عبر CLI؟ اطلع على أمر [Init](/api/cli/#init) الخاص بإنشاء مشاريع webpack.
 
-T> This command generates a ready-to-use webpack project with a sensible default configuration. Continue below if you'd like to understand how to set up webpack manually step by step.
+T> هذا الأمر يُنشئ مشروع webpack جاهزًا للاستخدام مع إعدادات افتراضية مناسبة. تابع القراءة إذا كنت تريد فهم كيفية إعداد webpack يدويًا خطوة بخطوة.
 
-## Basic Setup
+## الإعداد الأساسي
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the [`webpack-cli`](https://github.com/webpack/webpack-cli) (the tool used to run webpack on the command line):
+لنقم أولًا بإنشاء مجلد للمشروع، ثم تهيئة npm، و[تثبيت webpack محليًا](/guides/installation/#local-installation)، بالإضافة إلى تثبيت [`webpack-cli`](https://github.com/webpack/webpack-cli) (الأداة المستخدمة لتشغيل webpack من سطر الأوامر):
 
 ```bash
-# Run the commands for one package manager only.
+# نفّذ الأوامر الخاصة بمدير الحزم الذي تستخدمه فقط.
 
 mkdir webpack-demo
 cd webpack-demo
@@ -74,15 +51,15 @@ pnpm init
 pnpm add webpack webpack-cli -D
 ```
 
-Throughout the Guides we will use **`diff`** blocks to show you what changes we're making to directories, files, and code. For instance:
+خلال الأدلة سنستخدم كتل **`diff`** لتوضيح التغييرات التي نقوم بها على الملفات والمجلدات والكود. على سبيل المثال:
 
 ```diff
-+ this is a new line you shall copy into your code
-- and this is a line to be removed from your code
-  and this is a line not to touch.
++ هذا سطر جديد يجب عليك إضافته إلى الكود
+- وهذا سطر يجب حذفه من الكود
+  وهذا سطر لا يجب تعديله.
 ```
 
-Now we'll create the following directory structure, files and their contents:
+الآن سننشئ بنية المجلدات والملفات التالية:
 
 **project**
 
@@ -126,11 +103,11 @@ document.body.appendChild(component());
 </html>
 ```
 
-We also need to adjust our `package.json` file in order to make sure we mark our package as `private`, as well as removing the `main` entry. This is to prevent an accidental publish of your code.
+نحتاج أيضًا إلى تعديل ملف `package.json` للتأكد من تعيين الحزمة كـ `private`، بالإضافة إلى إزالة خاصية `main`. الهدف من ذلك هو منع نشر الكود بالخطأ.
 
-We also add `"type": "module"` so that Node.js treats `.js` files in this project as ES modules. That setting applies project-wide, including future Node.js scripts and webpack configuration files. If you would rather keep Node's default CommonJS behavior, omit `"type": "module"` and write the configuration later in this guide with `require(...)` and `module.exports` instead of `import` and `export default`.
+سنضيف أيضًا `"type": "module"` حتى يتعامل Node.js مع ملفات `.js` في المشروع على أنها ES Modules. هذا الإعداد يطبَّق على كامل المشروع، بما في ذلك ملفات إعداد webpack والسكريبتات المستقبلية الخاصة بـ Node.js. إذا كنت تفضل الإبقاء على سلوك CommonJS الافتراضي، يمكنك حذف `"type": "module"` واستخدام `require(...)` و `module.exports` بدلًا من `import` و `export default`.
 
-T> If you want to learn more about the inner workings of `package.json`, then we recommend reading the [npm documentation](https://docs.npmjs.com/files/package.json).
+T> إذا أردت معرفة المزيد عن طريقة عمل `package.json`، فنوصي بقراءة [توثيق npm](https://docs.npmjs.com/files/package.json).
 
 **package.json**
 
@@ -155,19 +132,24 @@ T> If you want to learn more about the inner workings of `package.json`, then we
  }
 ```
 
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This creates an implicit dependency on a global variable (`_`), making script execution order critical and harder to maintain.
+في هذا المثال توجد تبعيات ضمنية بين وسوم `<script>`. ملف `index.js` يعتمد على وجود مكتبة `lodash` داخل الصفحة قبل تشغيله. هذا يُنشئ اعتمادًا ضمنيًا على متغير عام (`_`) مما يجعل ترتيب تنفيذ السكربتات مهمًا وصعب الصيانة.
 
-There are problems with managing JavaScript projects this way:
+هناك عدة مشاكل في إدارة مشاريع JavaScript بهذه الطريقة:
 
-- It is not immediately apparent that the script depends on an external library.
-- If a dependency is missing, or included in the wrong order, the application will not function properly.
-- If a dependency is included but not used, the browser will be forced to download unnecessary code.
+- ليس من الواضح مباشرة أن السكربت يعتمد على مكتبة خارجية.
+- إذا كانت إحدى التبعيات مفقودة أو تم تحميلها بترتيب خاطئ، فلن يعمل التطبيق بشكل صحيح.
+- إذا تم تحميل تبعية غير مستخدمة، سيضطر المتصفح إلى تنزيل كود غير ضروري.
 
-Webpack solves these issues by explicitly declaring dependencies and bundling them together. This removes reliance on global variables and ensures scripts are executed in the correct order.
+يقوم Webpack بحل هذه المشاكل من خلال التصريح بالتبعيات بشكل واضح وتجميعها معًا. هذا يُزيل الاعتماد على المتغيرات العامة ويضمن تنفيذ السكربتات بالترتيب الصحيح.
 
-## Creating a Bundle
+## إنشاء Bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code (`./src`) from our "distribution" code (`./dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
+سنقوم أولًا بتعديل بنية المشروع قليلًا، وذلك بفصل كود المصدر (`./src`) عن كود التوزيع (`./dist`).
+
+- كود المصدر هو الكود الذي سنكتبه ونعدّله.
+- كود التوزيع هو المخرجات النهائية المصغّرة والمحسّنة الناتجة عن عملية البناء والتي سيتم تحميلها في المتصفح.
+
+قم بتعديل بنية المشروع كالتالي:
 
 **project**
 
@@ -182,12 +164,12 @@ First we'll tweak our directory structure slightly, separating the "source" code
        └── index.js
 ```
 
-The `dist` directory is build output, so you usually do not hand-edit files there in a mature project. We are moving `index.html` into `dist` for now only as temporary scaffolding, so the browser has an HTML file that loads the first generated bundle. Later on in [another guide](/guides/output-management/#setting-up-htmlwebpackplugin), we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and regenerate all the files within it.
+مجلد `dist` يحتوي على مخرجات البناء، لذلك عادةً لا يتم تعديل الملفات بداخله يدويًا في المشاريع الحقيقية. نحن ننقل `index.html` إليه مؤقتًا فقط حتى يتمكن المتصفح من تحميل الـ bundle الأول الذي سيتم إنشاؤه. لاحقًا، في [دليل آخر](/guides/output-management/#setting-up-htmlwebpackplugin)، سنجعل webpack ينشئ ملف `index.html` تلقائيًا بدلًا من تعديله يدويًا.
 
-To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
+لكي نقوم بتجميع تبعية `lodash` مع `index.js`، يجب علينا تثبيت المكتبة محليًا:
 
 ```bash
-# Run the command for one package manager only.
+# نفّذ الأمر الخاص بمدير الحزم الذي تستخدمه فقط.
 
 # npm
 npm install lodash
@@ -199,9 +181,9 @@ yarn add lodash
 pnpm add lodash
 ```
 
-T> With npm 5 and later, packages installed with `npm install <package>` are saved to `dependencies` by default. If you're installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
+T> ابتداءً من npm 5، الحزم التي يتم تثبيتها باستخدام `npm install <package>` تُحفظ تلقائيًا داخل `dependencies`. إذا كنت تثبّت حزمة لأغراض التطوير فقط (مثل أدوات lint أو الاختبارات)، استخدم `npm install --save-dev`.
 
-Now, let's import `lodash` in our script:
+الآن لنقم باستيراد `lodash` داخل السكربت:
 
 **src/index.js**
 
@@ -221,7 +203,7 @@ Now, let's import `lodash` in our script:
  document.body.appendChild(component());
 ```
 
-Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `./src` file:
+وبما أننا سنقوم الآن بتجميع السكربتات، يجب علينا تحديث ملف `index.html`. سنقوم بحذف وسم `<script>` الخاص بـ lodash لأننا نستوردها الآن باستخدام `import`، ثم سنعدّل الوسم الآخر ليحمّل الـ bundle بدلًا من ملف `./src` مباشرة:
 
 **dist/index.html**
 
@@ -240,14 +222,14 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
  </html>
 ```
 
-T> A couple other script loading strategies exist. Deferred loading is one such alternative to the above, where instead scripts are consolidated into the `<head>` and are given the `defer` attribute. This strategy downloads the external script resource(s) in parallel with document parsing, and will execute the scripts in order of document appearance after parsing has finished. This is in contrast to the above, in which the parser pauses to download and then execute the external resource synchronously. To learn more about this process, MDN has a nice [`reference guide`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script#async_and_defer).
+T> توجد استراتيجيات أخرى لتحميل السكربتات، مثل استخدام `defer` داخل `<head>`. هذه الطريقة تقوم بتنزيل السكربتات بالتوازي مع تحليل الصفحة، ثم تنفذها بعد انتهاء التحليل. يمكنك قراءة المزيد من خلال دليل MDN المرجعي.
 
-In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
+في هذا الإعداد، يقوم `index.js` بطلب `lodash` بشكل صريح وربطها بالمتغير `_` بدون تلويث الـ global scope. من خلال التصريح بالتبعيات المطلوبة، يستطيع webpack بناء dependency graph ثم استخدامه لإنشاء bundle محسّن يتم تنفيذ السكربتات فيه بالترتيب الصحيح.
 
-With that said, let's run `npx webpack` from the project root. If webpack is installed locally, `npx` will run the local binary from `node_modules/.bin`; otherwise, it may download and execute it. This command takes our script at `src/index.js` as the [entry point](/concepts/entry-points) and generates `dist/main.js` as the [output](/concepts/output).
+الآن لنقم بتشغيل `npx webpack` من داخل مجلد المشروع. إذا كان webpack مثبتًا محليًا، فسيقوم `npx` بتشغيل النسخة الموجودة داخل `node_modules/.bin`.
 
 ```bash
-# Run the command for one package manager only.
+# نفّذ الأمر الخاص بمدير الحزم الذي تستخدمه فقط.
 
 # npm
 npx webpack
@@ -257,35 +239,33 @@ yarn webpack
 
 # pnpm
 pnpm exec webpack
-
-[webpack-cli] Compilation finished
-asset main.js 69.3 KiB [emitted] [minimized] (name: main) 1 related asset
-runtime modules 1000 bytes 5 modules
-cacheable modules 530 KiB
-  ./src/index.js 257 bytes [built] [code generated]
-  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.x.x compiled successfully in 1851 ms
 ```
 
-T> Your output may vary a bit, but if the build is successful then you are good to go.
+سيأخذ webpack الملف `src/index.js` كنقطة دخول ([entry point](/concepts/entry-points)) ويقوم بإنشاء `dist/main.js` كمخرج ([output](/concepts/output)).
 
-T> Webpack runs in production mode by default when no mode is set, so the output above includes `[minimized]` and the generated `dist/main.js` will be optimized for browsers rather than easy reading. While learning, you can run `npx webpack --mode development`, `yarn webpack --mode development`, or `pnpm exec webpack --mode development` to produce a more readable bundle.
+T> قد يختلف الناتج قليلًا لديك، لكن طالما أن البناء نجح فلا توجد مشكلة.
 
-Open `index.html` from the `dist` directory in your browser and, if everything went right, you should see the following text: `'Hello webpack'`.
+T> يعمل Webpack افتراضيًا في وضع الإنتاج (production mode) عند عدم تحديد mode، لذلك يتم تحسين الملفات الناتجة للمتصفحات. أثناء التعلم يمكنك استخدام `--mode development` للحصول على bundle أسهل في القراءة.
 
-## Modules
+افتح ملف `index.html` الموجود داخل `dist` باستخدام المتصفح، وإذا سار كل شيء بشكل صحيح فسترى النص التالي:
 
-The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/docs/en/learn/). They are supported in most browsers at this moment, however there are some browsers that don't recognize the new syntax. But don't worry, webpack does support them out of the box.
+```txt
+Hello webpack
+```
 
-Behind the scenes, webpack analyzes your module graph and bundles the modules into code that the browser can load in the right order. It handles module syntax such as `import` and `export`, and supports various other module syntaxes as well. See [Module API](/api/module-methods) for more information.
+## الوحدات (Modules)
 
-Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) via webpack's [loader system](/concepts/loaders/).
+تم توحيد أوامر [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) و[`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ضمن معيار [ES2015](https://babeljs.io/docs/en/learn/). وهي مدعومة حاليًا في أغلب المتصفحات، لكن بعض المتصفحات القديمة لا تتعرف على هذا الأسلوب الجديد. لا تقلق، webpack يدعمه بشكل افتراضي.
 
-## Using a Configuration
+خلف الكواليس، يقوم webpack بتحليل dependency graph الخاص بالمشروع وتجميع الوحدات بالترتيب الصحيح. كما يدعم عدة أنظمة للوحدات بالإضافة إلى `import` و `export`.
 
-As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
+لاحظ أن webpack لا يقوم بتحويل أي كود آخر غير أوامر `import` و `export`. إذا كنت تستخدم ميزات أخرى من [ES2015](http://es6-features.org/)، فتأكد من [استخدام transpiler](/loaders/#transpiling) مثل [Babel](https://babeljs.io/) من خلال نظام الـ [loaders](/concepts/loaders/).
 
-Webpack configuration files can be written using either CommonJS or ECMAScript modules. The examples below use modern ESM syntax.
+## استخدام ملف إعدادات
+
+ابتداءً من الإصدار 4، لم يعد webpack يتطلب ملف إعدادات، لكن أغلب المشاريع تحتاج إلى إعدادات أكثر تعقيدًا، ولهذا يدعم webpack وجود [ملف إعدادات](/concepts/configuration).
+
+ملفات إعداد webpack يمكن كتابتها باستخدام CommonJS أو ECMAScript Modules. الأمثلة التالية تستخدم صيغة ESM الحديثة.
 
 **project**
 
@@ -321,11 +301,9 @@ export default {
 };
 ```
 
-Now, let's run the build again but instead using our new configuration file:
+الآن دعنا نعيد تشغيل البناء باستخدام ملف الإعدادات الجديد:
 
 ```bash
-# Run the command for one package manager only.
-
 # npm
 npx webpack --config webpack.config.js
 
@@ -334,23 +312,15 @@ yarn webpack --config webpack.config.js
 
 # pnpm
 pnpm exec webpack --config webpack.config.js
-
-[webpack-cli] Compilation finished
-asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
-runtime modules 1000 bytes 5 modules
-cacheable modules 530 KiB
-  ./src/index.js 257 bytes [built] [code generated]
-  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.x.x compiled successfully in 1934 ms
 ```
 
-T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
+T> إذا كان ملف `webpack.config.js` موجودًا، فإن webpack سيستخدمه تلقائيًا. استخدمنا `--config` فقط لتوضيح أنه يمكنك تحديد أي اسم لملف الإعدادات.
 
-A configuration file allows far more flexibility than CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
+يمنحك ملف الإعدادات مرونة أكبر بكثير مقارنة باستخدام CLI فقط، حيث يمكنك تحديد loaders و plugins وخيارات resolve وغير ذلك.
 
-## NPM Scripts
+## سكربتات NPM
 
-Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
+بدلًا من تشغيل webpack يدويًا في كل مرة، يمكننا إنشاء اختصار داخل `package.json` باستخدام [npm scripts](https://docs.npmjs.com/misc/scripts):
 
 **package.json**
 
@@ -378,37 +348,25 @@ Given it's not particularly fun to run a local copy of webpack from the CLI, we 
  }
 ```
 
-Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts.
-
-Now run the following command and see if your script alias works:
+الآن يمكنك استخدام الأمر:
 
 ```bash
-# Run the command for one package manager only.
-
-# npm
 npm run build
-
-# yarn
-yarn build
-
-# pnpm
-pnpm run build
-...
-
-[webpack-cli] Compilation finished
-asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
-runtime modules 1000 bytes 5 modules
-cacheable modules 530 KiB
-  ./src/index.js 257 bytes [built] [code generated]
-  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.x.x compiled successfully in 1940 ms
 ```
 
-T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
+بدلًا من `npx webpack`.
 
-## Conclusion
+T> يمكنك تمرير خيارات إضافية إلى webpack باستخدام شرطتين `--` بعد الأمر، مثل:
 
-Now that you have a basic build together, you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:
+```bash
+npm run build -- --color
+```
+
+## الخاتمة
+
+الآن بعد أن أصبح لديك إعداد بناء أساسي، يمكنك الانتقال إلى الدليل التالي [`Asset Management`](/guides/asset-management) لتتعلم كيفية إدارة الصور والخطوط وبقية الملفات باستخدام webpack.
+
+يجب أن تبدو بنية مشروعك الآن بالشكل التالي:
 
 **project**
 
@@ -425,6 +383,6 @@ webpack-demo
  └── /node_modules
 ```
 
-W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the web browsers of the end users of your application.
+W> لا تقم بتجميع كود غير موثوق باستخدام webpack، لأن ذلك قد يؤدي إلى تنفيذ كود خبيث على جهازك أو على الخوادم أو حتى داخل متصفحات المستخدمين النهائيين.
 
-If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
+إذا كنت تريد معرفة المزيد عن تصميم webpack، يمكنك قراءة صفحات [المفاهيم الأساسية](/concepts) و[الإعدادات](/configuration)، بالإضافة إلى قسم [API](/api) الذي يشرح الواجهات المختلفة التي يوفرها webpack.

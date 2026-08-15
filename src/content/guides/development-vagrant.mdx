@@ -1,19 +1,15 @@
 ---
-title: Development - Vagrant
+title: التطوير - Vagrant
 sort: 11
 contributors:
-  - SpaceK33z
-  - chrisVillanueva
-  - byzyk
-  - wizardofhogwarts
-  - Brennvo
+  - arabpolice
 ---
 
-If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
+إذا كان لديك مشروع أكثر تقدمًا وتستخدم [Vagrant](https://www.vagrantup.com/) لتشغيل بيئة التطوير داخل آلة افتراضية، فغالبًا ستحتاج أيضًا إلى تشغيل webpack داخل الآلة الافتراضية.
 
-## Configuring the Project
+## إعداد المشروع
 
-To start, make sure that the `Vagrantfile` has a static IP;
+للبدء، تأكد من أن ملف `Vagrantfile` يحتوي على عنوان IP ثابت:
 
 ```ruby
 Vagrant.configure("2") do |config|
@@ -21,13 +17,13 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Next, install `webpack`, `webpack-cli`, `@webpack-cli/serve`, and `webpack-dev-server` in your project;
+بعد ذلك، ثبّت `webpack` و`webpack-cli` و`@webpack-cli/serve` و`webpack-dev-server` في مشروعك:
 
 ```bash
 npm install --save-dev webpack webpack-cli @webpack-cli/serve webpack-dev-server
 ```
 
-Make sure to have a `webpack.config.js` file. If you haven't already, use this as a minimal example to get started:
+تأكد من وجود ملف `webpack.config.js`. إذا لم يكن لديك واحد بعد، فاستخدم هذا المثال المصغّر للبدء:
 
 ```js
 import path from "node:path";
@@ -42,7 +38,7 @@ export default {
 };
 ```
 
-And create an `index.html` file. The script tag should point to your bundle. If `output.filename` is not specified in the config, this will be `bundle.js`.
+ثم أنشئ ملف `index.html`. يجب أن يشير وسم script إلى الحزمة الخاصة بك. إذا لم يتم تحديد `output.filename` في الإعدادات، فسيكون ذلك `bundle.js`.
 
 ```html
 <!DOCTYPE html>
@@ -56,30 +52,30 @@ And create an `index.html` file. The script tag should point to your bundle. If 
 </html>
 ```
 
-Note that you also need to create an `app.js` file.
+لاحظ أنك تحتاج أيضًا إلى إنشاء ملف `app.js`.
 
-## Running the Server
+## تشغيل الخادم
 
-Now, let's run the server:
+الآن، دعنا نشغّل الخادم:
 
 ```bash
 webpack serve --host 0.0.0.0 --client-web-socket-url ws://10.10.10.61:8080/ws --watch-options-poll
 ```
 
-By default, the server will only be accessible from localhost. We'll be accessing it from our host PC, so we need to change `--host` to allow this.
+افتراضيًا، لن يكون الخادم متاحًا إلا من localhost. سنصل إليه من جهاز المضيف، لذلك نحتاج إلى تغيير `--host` للسماح بذلك.
 
-`webpack-dev-server` will include a script in your bundle that connects to a WebSocket to reload when a change in any of your files occurs.
-The `--client-web-socket-url` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
+سيضمّن `webpack-dev-server` سكربتًا داخل حزمتك يتصل بـ WebSocket لإعادة التحميل عند حدوث تغيير في أي من ملفاتك.
+يضمن الخيار `--client-web-socket-url` أن يعرف السكربت أين يبحث عن WebSocket. سيستخدم الخادم المنفذ `8080` افتراضيًا، لذلك ينبغي أن نحدده هنا أيضًا.
 
-`--watch-options-poll` makes sure that webpack can detect changes in your files. By default, webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
+يضمن `--watch-options-poll` أن webpack يستطيع اكتشاف التغييرات في ملفاتك. افتراضيًا، يستمع webpack إلى الأحداث التي يطلقها نظام الملفات، لكن VirtualBox لديه مشكلات كثيرة مع ذلك.
 
-The server should be accessible on `http://10.10.10.61:8080` now. If you make a change in `app.js`, it should live reload.
+ينبغي أن يكون الخادم متاحًا الآن على `http://10.10.10.61:8080`. إذا أجريت تغييرًا في `app.js`، فينبغي أن تتم إعادة التحميل مباشرةً.
 
-## Advanced Usage with nginx
+## الاستخدام المتقدم مع nginx
 
-To mimic a more production-like environment, it is also possible to proxy the `webpack-dev-server` with nginx.
+لمحاكاة بيئة أقرب إلى الإنتاج، من الممكن أيضًا تمرير `webpack-dev-server` عبر وكيل nginx.
 
-In your nginx configuration file, add the following:
+أضف ما يلي إلى ملف إعدادات nginx:
 
 ```nginx
 server {
@@ -98,16 +94,16 @@ server {
 }
 ```
 
-The `proxy_set_header` lines are important, because they allow the WebSockets to work correctly.
+أسطر `proxy_set_header` مهمة لأنها تسمح لـ WebSockets بالعمل بشكل صحيح.
 
-The command to start `webpack-dev-server` can then be changed to this:
+بعد ذلك يمكن تغيير أمر تشغيل `webpack-dev-server` إلى الآتي:
 
 ```bash
 webpack serve --client-web-socket-url ws://10.10.10.61:8080/ws --watch-options-poll
 ```
 
-This makes the server only accessible on `127.0.0.1`, which is fine because nginx takes care of making it available on your host PC.
+هذا يجعل الخادم متاحًا فقط على `127.0.0.1`، وهذا مناسب لأن nginx يتولى إتاحته على جهاز المضيف لديك.
 
-## Conclusion
+## الخاتمة
 
-We made the Vagrant box accessible from a static IP, and then made `webpack-dev-server` publicly accessible so it is reachable from a browser. We then tackled a common problem that VirtualBox doesn't send out filesystem events, causing the server to not reload on file changes.
+جعلنا صندوق Vagrant متاحًا من خلال عنوان IP ثابت، ثم جعلنا `webpack-dev-server` متاحًا علنًا بحيث يمكن الوصول إليه من المتصفح. بعد ذلك عالجنا مشكلة شائعة وهي أن VirtualBox لا يرسل أحداث نظام الملفات، مما يؤدي إلى عدم إعادة تحميل الخادم عند تغيّر الملفات.

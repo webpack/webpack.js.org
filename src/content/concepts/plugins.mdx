@@ -2,24 +2,18 @@
 title: Plugins
 sort: 4
 contributors:
-  - TheLarkInn
-  - jhnns
-  - rouzbeh84
-  - johnstew
-  - MisterDev
-  - byzyk
-  - chenxsan
+  - RlxChap2
 ---
 
-**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. Webpack itself is built on the **same plugin system** that you use in your webpack configuration!
+**الإضافات** هي [العمود الفقري](https://github.com/webpack/tapable) لـ webpack. فـ webpack نفسه مبني على **نظام الإضافات نفسه** الذي تستخدمه في تكوين webpack لديك.
 
-They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do. Webpack provides [many such plugins](/plugins/) out of the box.
+كما تؤدي الإضافات غرض تنفيذ **أي شيء آخر** لا يستطيع [المحمّل](/concepts/loaders) فعله. يوفر webpack [كثيرًا من هذه الإضافات](/plugins/) مباشرة.
 
-T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, prefer `compiler.webpack.sources` instead of importing from `webpack` or `webpack-sources` to avoid version conflicts for persistent caching.
+T> عند استخدام حزمة [`webpack-sources`](https://github.com/webpack/webpack-sources) داخل الإضافات، يفضل استخدام `compiler.webpack.sources` بدلًا من الاستيراد من `webpack` أو `webpack-sources` لتجنب تعارض الإصدارات مع التخزين المؤقت الدائم.
 
-## Anatomy
+## التشريح
 
-A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
+إضافة webpack هي كائن JavaScript يحتوي على طريقة [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply). يستدعي مترجم webpack طريقة `apply` هذه، مما يمنحها وصولًا إلى دورة حياة الترجمة **بالكامل**.
 
 **ConsoleLogOnBuildWebpackPlugin.js**
 
@@ -37,15 +31,15 @@ class ConsoleLogOnBuildWebpackPlugin {
 export default ConsoleLogOnBuildWebpackPlugin;
 ```
 
-It is recommended that the first parameter of the tap method of the compiler hook should be a camelized version of the plugin name. It is advisable to use a constant for this so it can be reused in all hooks.
+يوصى بأن يكون المعامل الأول لطريقة tap الخاصة بخطاف المترجم نسخة camelCase من اسم الإضافة. ومن الأفضل استخدام ثابت لهذا الاسم حتى يعاد استخدامه في كل hooks.
 
-## Usage
+## الاستخدام
 
-Since **plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
+بما أن **الإضافات** يمكنها استقبال معاملات أو خيارات، يجب تمرير نسخة `new` إلى خاصية `plugins` في تكوين webpack.
 
-Depending on how you are using webpack, there are multiple ways to use plugins.
+اعتمادًا على طريقة استخدامك لـ webpack، توجد عدة طرق لاستخدام الإضافات.
 
-### Configuration
+### التكوين
 
 **webpack.config.js**
 
@@ -79,11 +73,11 @@ export default {
 };
 ```
 
-The `ProgressPlugin` is used to customize how progress should be reported during compilation, and `HtmlWebpackPlugin` will generate a HTML file including the `my-first-webpack.bundle.js` file using a `script` tag.
+تُستخدم `ProgressPlugin` لتخصيص طريقة الإبلاغ عن التقدم أثناء الترجمة، بينما تنشئ `HtmlWebpackPlugin` ملف HTML يتضمن ملف `my-first-webpack.bundle.js` باستخدام وسم `script`.
 
 ### Node API
 
-When using the Node API, you can also pass plugins via the `plugins` property in the configuration.
+عند استخدام Node API، يمكنك أيضًا تمرير الإضافات عبر خاصية `plugins` في التكوين.
 
 **some-node-script.js**
 
@@ -100,4 +94,4 @@ compiler.run((err, stats) => {
 });
 ```
 
-T> Did you know: The example seen above is extremely similar to the [webpack runtime itself!](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292) There are lots of great usage examples hiding in the [webpack source code](https://github.com/webpack/webpack) that you can apply to your own configurations and scripts!
+T> هل تعلم؟ المثال السابق يشبه إلى حد كبير [webpack runtime نفسه](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292). توجد أمثلة استخدام رائعة كثيرة مخفية في [كود webpack المصدري](https://github.com/webpack/webpack) يمكنك تطبيقها على تكويناتك وسكربتاتك.

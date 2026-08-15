@@ -1,35 +1,31 @@
 ---
-title: Integrations
+title: التكاملات
 sort: 24
 contributors:
-  - pksjce
-  - bebraw
-  - tashian
-  - skipjack
-  - AnayaDesign
+  - arabpolice
 ---
 
-Let's start by clearing up a common misconception. Webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](https://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
+لنبدأ بتوضيح لبس شائع. Webpack هو مجمّع وحدات مثل [Browserify](http://browserify.org/) أو [Brunch](https://brunch.io/). وهو _ليس مشغّل مهام_ مثل [Make](https://www.gnu.org/software/make/) أو [Grunt](https://gruntjs.com/) أو [Gulp](https://gulpjs.com/). تتولى مشغلات المهام أتمتة مهام التطوير الشائعة مثل فحص الكود، أو بناء المشروع، أو اختباره. وبالمقارنة مع أدوات التجميع، يكون تركيز مشغلات المهام على مستوى أعلى. لا يزال بإمكانك الاستفادة من أدواتها عالية المستوى مع ترك مشكلة التجميع لـ webpack.
 
-Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be [minified](/plugins/minimizer-webpack-plugin/) or [split into chunks](/guides/code-splitting) and [lazy-loaded](/guides/lazy-loading) to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
+تساعدك أدوات التجميع على تجهيز JavaScript وملفات الأنماط للنشر، وذلك بتحويلها إلى صيغة مناسبة للمتصفح. على سبيل المثال، يمكن [تصغير](/plugins/minimizer-webpack-plugin/) JavaScript أو [تقسيمه إلى أجزاء](/guides/code-splitting) و[تحميله كسولًا](/guides/lazy-loading) لتحسين الأداء. يُعد التجميع أحد أهم تحديات تطوير الويب، وحلّه جيدًا يمكن أن يزيل كثيرًا من التعقيد من العملية.
 
-The good news is that, while there is some overlap, task runners and bundlers can play well together if approached in the right way. This guide provides a high-level overview of how webpack can be integrated into some of the more popular task runners.
+الخبر الجيد هو أنه رغم وجود بعض التداخل، يمكن لمشغلات المهام وأدوات التجميع العمل معًا بشكل جيد إذا تم التعامل معها بالطريقة المناسبة. يقدم هذا الدليل نظرة عامة عالية المستوى على كيفية دمج webpack مع بعض مشغلات المهام الأكثر شيوعًا.
 
-## NPM Scripts
+## سكربتات NPM
 
-Often webpack users use npm [`scripts`](https://docs.npmjs.com/misc/scripts) as their task runner. This is a good starting point. Cross-platform support can become a problem, but there are several workarounds for that. Many, if not most users, get by with npm `scripts` and various levels of webpack configuration and tooling.
+غالبًا ما يستخدم مستخدمو webpack [`scripts`](https://docs.npmjs.com/misc/scripts) الخاصة بـ npm كمشغّل مهام. هذه نقطة بداية جيدة. قد يصبح دعم المنصات المختلفة مشكلة، لكن توجد عدة حلول بديلة لذلك. كثير من المستخدمين، إن لم يكن معظمهم، يكتفون بـ npm `scripts` ومستويات مختلفة من إعدادات webpack وأدواته.
 
-So while webpack's core focus is bundling, there are a variety of extensions that can enable you to use it for jobs typical of a task runner. Integrating a separate tool adds complexity, so be sure to weigh the pros and cons before going forward.
+لذلك، ورغم أن تركيز webpack الأساسي هو التجميع، توجد مجموعة متنوعة من الإضافات التي تتيح لك استخدامه في أعمال معتادة لمشغلات المهام. إن دمج أداة منفصلة يضيف تعقيدًا، لذا احرص على موازنة المزايا والعيوب قبل المتابعة.
 
 ## Grunt
 
-For those using Grunt, we recommend the [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package. With `grunt-webpack` you can run webpack or [webpack-dev-server](https://github.com/webpack/webpack-dev-server) as a task, get access to stats within [template tags](https://gruntjs.com/api/grunt.template), split development and production configurations and more. Start by installing `grunt-webpack` as well as `webpack` itself if you haven't already:
+لمن يستخدمون Grunt، نوصي بحزمة [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack). باستخدام `grunt-webpack` يمكنك تشغيل webpack أو [webpack-dev-server](https://github.com/webpack/webpack-dev-server) كمهمة، والوصول إلى الإحصاءات داخل [وسوم القوالب](https://gruntjs.com/api/grunt.template)، وفصل إعدادات التطوير والإنتاج، وغير ذلك. ابدأ بتثبيت `grunt-webpack` وكذلك `webpack` نفسه إذا لم تكن قد ثبّته بعد:
 
 ```bash
 npm install --save-dev grunt-webpack webpack
 ```
 
-Then register a configuration and load the task:
+ثم سجّل الإعدادات وحمّل المهمة:
 
 **Gruntfile.js**
 
@@ -51,17 +47,17 @@ module.exports = function (grunt) {
 };
 ```
 
-For more information, please visit the [repository](https://github.com/danez/grunt-webpack).
+لمزيد من المعلومات، يُرجى زيارة [المستودع](https://github.com/danez/grunt-webpack).
 
 ## Gulp
 
-Gulp is also a fairly straightforward integration with the help of the [`webpack-stream`](https://github.com/shama/webpack-stream) package (a.k.a. `gulp-webpack`). In this case, it is unnecessary to install `webpack` separately as it is a direct dependency of `webpack-stream`:
+يُعد التكامل مع Gulp مباشرًا نسبيًا أيضًا بمساعدة حزمة [`webpack-stream`](https://github.com/shama/webpack-stream) (المعروفة أيضًا باسم `gulp-webpack`). في هذه الحالة، لا حاجة إلى تثبيت `webpack` بشكل منفصل لأنه تبعية مباشرة لـ `webpack-stream`:
 
 ```bash
 npm install --save-dev webpack-stream
 ```
 
-You can `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
+يمكنك استخدام `require('webpack-stream')` بدلًا من `webpack` وتمرير إعدادات إليه اختياريًا:
 
 **gulpfile.js**
 
@@ -74,29 +70,29 @@ gulp.task("default", () =>
     .src("src/entry.js")
     .pipe(
       webpack({
-        // Any configuration options...
+        // أي خيارات إعدادات...
       }),
     )
     .pipe(gulp.dest("dist/")),
 );
 ```
 
-For more information, please visit the [repository](https://github.com/shama/webpack-stream).
+لمزيد من المعلومات، يُرجى زيارة [المستودع](https://github.com/shama/webpack-stream).
 
 ## Mocha
 
-The [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) utility can be used for a clean integration with Mocha. The repository offers more details on the pros and cons but essentially `mocha-webpack` is a simple wrapper that provides almost the same CLI as Mocha itself and provides various webpack functionality like an improved watch mode and improved path resolution. Here is a small example of how you would install it and use it to run a test suite (found within `./test`):
+يمكن استخدام أداة [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) لتكامل نظيف مع Mocha. يقدم المستودع تفاصيل أكثر حول المزايا والعيوب، لكن `mocha-webpack` في جوهره غلاف بسيط يوفر تقريبًا واجهة CLI نفسها الخاصة بـ Mocha، مع وظائف متعددة من webpack مثل وضع مراقبة محسّن وحل مسارات أفضل. إليك مثالًا صغيرًا على كيفية تثبيتها واستخدامها لتشغيل مجموعة اختبارات (موجودة داخل `./test`):
 
 ```bash
 npm install --save-dev webpack mocha mocha-webpack
 mocha-webpack 'test/**/*.js'
 ```
 
-For more information, please visit the [repository](https://github.com/zinserjan/mocha-webpack).
+لمزيد من المعلومات، يُرجى زيارة [المستودع](https://github.com/zinserjan/mocha-webpack).
 
 ## Karma
 
-The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](https://karma-runner.github.io/1.0/index.html).
+تتيح لك حزمة [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) استخدام webpack للمعالجة المسبقة للملفات داخل [Karma](https://karma-runner.github.io/1.0/index.html).
 
 ```bash
 npm install --save-dev webpack karma karma-webpack
@@ -117,11 +113,11 @@ export default function (config) {
       "test/**/*_test.js": ["webpack"],
     },
     webpack: {
-      // Any custom webpack configuration...
+      // أي إعدادات webpack مخصصة...
     },
     plugins: ["karma-webpack"],
   });
 }
 ```
 
-For more information, please visit the [repository](https://github.com/webpack-contrib/karma-webpack).
+لمزيد من المعلومات، يُرجى زيارة [المستودع](https://github.com/webpack-contrib/karma-webpack).

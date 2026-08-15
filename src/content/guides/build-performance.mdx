@@ -1,35 +1,29 @@
 ---
-title: Build Performance
+title: أداء البناء
 sort: 9
 contributors:
-  - sokra
-  - tbroadley
-  - byzyk
-  - madhavarshney
-  - wizardofhogwarts
-  - anikethsaha
-  - Brennvo
+  - arabpolice
 ---
 
-This guide contains some useful tips for improving build/compilation performance.
+يحتوي هذا الدليل على بعض النصائح المفيدة لتحسين أداء البناء/الترجمة.
 
 ---
 
-## General
+## عام
 
-The following best practices should help, whether you're running build scripts in [development](/guides/development) or [production](/guides/production).
+ينبغي أن تساعد أفضل الممارسات التالية سواء كنت تشغّل سكربتات البناء في [التطوير](/guides/development) أو [الإنتاج](/guides/production).
 
-### Stay Up to Date
+### ابقَ محدّثًا
 
-Use the latest webpack version. We are always making performance improvements. The latest recommended version of webpack is:
+استخدم أحدث إصدار من webpack. نحن نعمل دائمًا على تحسينات في الأداء. أحدث إصدار موصى به من webpack هو:
 
 [![latest webpack version](https://img.shields.io/github/package-json/v/webpack/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
-Staying up-to-date with **Node.js** can also help with performance. On top of this, keeping your package manager (e.g. `npm` or `yarn`) up-to-date can also help. Newer versions create more efficient module trees and increase resolving speed.
+يمكن أن يساعد البقاء محدّثًا مع **Node.js** أيضًا في الأداء. إضافة إلى ذلك، يمكن أن يساعد تحديث مدير الحزم لديك، مثل `npm` أو `yarn`. فالإصدارات الأحدث تُنشئ أشجار وحدات أكثر كفاءة وتزيد سرعة الحل.
 
 ### Loaders
 
-Apply loaders to the minimal number of modules necessary. Instead of:
+طبّق الـ loaders على أقل عدد ممكن من الوحدات الضرورية. بدلًا من:
 
 ```js
 export default {
@@ -45,7 +39,7 @@ export default {
 };
 ```
 
-Use the `include` field to only apply the loader modules that actually need to be transformed by it:
+استخدم الحقل `include` لتطبيق الـ loader فقط على الوحدات التي تحتاج فعليًا إلى تحويله لها:
 
 ```js
 import path from "node:path";
@@ -68,89 +62,89 @@ export default {
 };
 ```
 
-### Bootstrap
+### بدء التشغيل
 
-Each additional loader/plugin has a bootup time. Try to use as few tools as possible.
+لكل loader أو plugin إضافي وقت بدء تشغيل. حاول استخدام أقل عدد ممكن من الأدوات.
 
-### Resolving
+### الحل
 
-The following steps can increase resolving speed:
+يمكن للخطوات التالية زيادة سرعة الحل:
 
-- Minimize the number of items in `resolve.modules`, `resolve.extensions`, `resolve.mainFiles`, `resolve.descriptionFiles`, as they increase the number of filesystem calls.
-- Set `resolve.symlinks: false` if you don't use symlinks (e.g. `npm link` or `yarn link`).
-- Set `resolve.cacheWithContext: false` if you use custom resolving plugins, that are not context specific.
+- قلّل عدد العناصر في `resolve.modules` و`resolve.extensions` و`resolve.mainFiles` و`resolve.descriptionFiles`، لأنها تزيد عدد استدعاءات نظام الملفات.
+- اضبط `resolve.symlinks: false` إذا كنت لا تستخدم الروابط الرمزية، مثل `npm link` أو `yarn link`.
+- اضبط `resolve.cacheWithContext: false` إذا كنت تستخدم ملحقات حل مخصصة غير مرتبطة بسياق محدد.
 
 ### Dlls
 
-Use the `DllPlugin` to move code that is changed less often into a separate compilation. This will improve the application's compilation speed, although it does increase complexity of the build process.
+استخدم `DllPlugin` لنقل الكود الذي يتغير بوتيرة أقل إلى ترجمة منفصلة. سيحسّن ذلك سرعة ترجمة التطبيق، مع أنه يزيد تعقيد عملية البناء.
 
-### Smaller = Faster
+### الأصغر = الأسرع
 
-Decrease the total size of the compilation to increase build performance. Try to keep chunks small.
+خفّض الحجم الإجمالي للترجمة لزيادة أداء البناء. حاول إبقاء الأجزاء صغيرة.
 
-- Use fewer/smaller libraries.
-- Use the `SplitChunksPlugin` in Multi-Page Applications.
-- Use the `SplitChunksPlugin` in `async` mode in Multi-Page Applications.
-- Remove unused code.
-- Only compile the part of the code you are currently developing on.
+- استخدم مكتبات أقل أو أصغر.
+- استخدم `SplitChunksPlugin` في التطبيقات متعددة الصفحات.
+- استخدم `SplitChunksPlugin` في وضع `async` داخل التطبيقات متعددة الصفحات.
+- أزل الكود غير المستخدم.
+- ترجم فقط الجزء الذي تعمل على تطويره حاليًا من الكود.
 
-### Worker Pool
+### تجمع العمال
 
-The `thread-loader` can be used to offload expensive loaders to a worker pool.
+يمكن استخدام `thread-loader` لنقل الـ loaders المكلفة إلى تجمع عمال.
 
-W> Don't use too many workers, as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive.
+W> لا تستخدم عددًا كبيرًا جدًا من العمال، لأن هناك كلفة بدء تشغيل لبيئة تشغيل Node.js ولـ loader. قلّل عمليات نقل الوحدات بين العامل والعملية الرئيسية. الاتصال بين العمليات IPC مكلف.
 
-### Persistent cache
+### التخزين المؤقت المستمر
 
-Use [`cache`](/configuration/cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
+استخدم خيار [`cache`](/configuration/cache) في إعداد webpack. امسح مجلد التخزين المؤقت في `"postinstall"` داخل `package.json`.
 
-T> We support yarn PnP version 3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp) for persistent caching.
+T> ندعم yarn PnP الإصدار 3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp) للتخزين المؤقت المستمر.
 
-### Custom plugins/loaders
+### Plugins/Loaders مخصصة
 
-Profile them to not introduce a performance problem here.
+حلّل أداءها حتى لا تضيف مشكلة أداء هنا.
 
-### Progress plugin
+### ملحق التقدم
 
-It is possible to shorten build times by removing `ProgressPlugin` from webpack's configuration. Keep in mind, `ProgressPlugin` might not provide as much value for fast builds as well, so make sure you are leveraging the benefits of using it.
+يمكن تقصير أزمنة البناء بإزالة `ProgressPlugin` من إعداد webpack. ضع في الحسبان أن `ProgressPlugin` قد لا يقدم قيمة كبيرة في البناءات السريعة أيضًا، لذلك تأكد من أنك تستفيد فعلًا من استخدامه.
 
 ---
 
-## Development
+## التطوير
 
-The following steps are especially useful in _development_.
+الخطوات التالية مفيدة خصوصًا في _التطوير_.
 
-### Incremental Builds
+### البناءات التزايدية
 
-Use webpack's watch mode. Don't use other tools to watch your files and invoke webpack. The built-in watch mode will keep track of timestamps and passes this information to the compilation for cache invalidation.
+استخدم وضع المراقبة في webpack. لا تستخدم أدوات أخرى لمراقبة ملفاتك واستدعاء webpack. سيتتبع وضع المراقبة المدمج الطوابع الزمنية ويمرر هذه المعلومات إلى الترجمة لإبطال التخزين المؤقت.
 
-In some setups, watching falls back to polling mode. With many watched files, this can cause a lot of CPU load. In these cases, you can increase the polling interval with `watchOptions.poll`.
+في بعض الإعدادات، تعود المراقبة إلى وضع الاستطلاع. ومع وجود عدد كبير من الملفات المراقبة، قد يسبب ذلك حملًا كبيرًا على CPU. في هذه الحالات، يمكنك زيادة فاصل الاستطلاع باستخدام `watchOptions.poll`.
 
-### Compile in Memory
+### الترجمة في الذاكرة
 
-The following utilities improve performance by compiling and serving assets in memory rather than writing to disk:
+تحسن الأدوات التالية الأداء عبر ترجمة الأصول وتقديمها من الذاكرة بدلًا من الكتابة على القرص:
 
 - `webpack-dev-server`
 - `webpack-hot-middleware`
 - `webpack-dev-middleware`
 
-### stats.toJson speed
+### سرعة stats.toJson
 
-Webpack 4 outputs a large amount of data with its `stats.toJson()` by default. Avoid retrieving portions of the `stats` object unless necessary in the incremental step. `webpack-dev-server` after v3.1.3 contained a substantial performance fix to minimize the amount of data retrieved from the `stats` object per incremental build step.
+يُخرج Webpack 4 كمية كبيرة من البيانات باستخدام `stats.toJson()` افتراضيًا. تجنب استرجاع أجزاء من كائن `stats` ما لم يكن ذلك ضروريًا في الخطوة التزايدية. احتوى `webpack-dev-server` بعد v3.1.3 على إصلاح أداء مهم لتقليل كمية البيانات المسترجعة من كائن `stats` في كل خطوة بناء تزايدية.
 
 ### Devtool
 
-Be aware of the performance differences between the different `devtool` settings.
+كن واعيًا بفروق الأداء بين إعدادات `devtool` المختلفة.
 
-- `"eval"` has the best performance, but doesn't assist you for transpiled code.
-- The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
-- Use a `eval-source-map` variant for incremental builds.
+- يملك `"eval"` أفضل أداء، لكنه لا يساعدك مع الكود المحوّل.
+- متغيرات `cheap-source-map` أكثر أداء إذا كان بإمكانك قبول جودة ربط أقل قليلًا.
+- استخدم أحد متغيرات `eval-source-map` للبناءات التزايدية.
 
-T> In most cases, `eval-cheap-module-source-map` is the best option.
+T> في معظم الحالات، يكون `eval-cheap-module-source-map` الخيار الأفضل.
 
-### Avoid Production Specific Tooling
+### تجنب أدوات الإنتاج الخاصة
 
-Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `MinimizerPlugin` while in development. These tools should typically be excluded in development:
+بعض الأدوات والملحقات والـ loaders لا تكون منطقية إلا عند البناء للإنتاج. على سبيل المثال، لا يكون تصغير الكود وتغيير أسمائه باستخدام `MinimizerPlugin` منطقيًا عادة أثناء التطوير. ينبغي غالبًا استبعاد هذه الأدوات في التطوير:
 
 - `MinimizerPlugin`
 - `[fullhash]`/`[chunkhash]`/`[contenthash]`
@@ -158,11 +152,11 @@ Certain utilities, plugins, and loaders only make sense when building for produc
 - `AggressiveMergingPlugin`
 - `ModuleConcatenationPlugin`
 
-### Minimal Entry Chunk
+### جزء إدخال صغير
 
-Webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]`/`[contenthash]` in `output.chunkFilename`, `[fullhash]`) the entry chunk is invalidated in addition to the changed chunks.
+لا يصدر webpack إلى نظام الملفات إلا الأجزاء المحدّثة. في بعض خيارات الإعداد، مثل HMR و`[name]`/`[chunkhash]`/`[contenthash]` في `output.chunkFilename` و`[fullhash]`، يُبطل جزء الإدخال بالإضافة إلى الأجزاء التي تغيرت.
 
-Make sure the entry chunk is cheap to emit by keeping it small. The following configuration creates an additional chunk for the runtime code, so it's cheap to generate:
+تأكد من أن إصدار جزء الإدخال رخيص بإبقائه صغيرًا. ينشئ الإعداد التالي جزءًا إضافيًا لكود وقت التشغيل، لذلك يكون توليده رخيصًا:
 
 ```js
 export default {
@@ -173,9 +167,9 @@ export default {
 };
 ```
 
-### Avoid Extra Optimization Steps
+### تجنب خطوات التحسين الإضافية
 
-Webpack does extra algorithmic work to optimize the output for size and load performance. These optimizations are performant for smaller codebases, but can be costly in larger ones:
+ينفذ webpack عملًا خوارزميًا إضافيًا لتحسين الخرج من ناحية الحجم وأداء التحميل. هذه التحسينات ذات أداء جيد في قواعد الكود الأصغر، لكنها قد تكون مكلفة في القواعد الأكبر:
 
 ```js
 export default {
@@ -188,9 +182,9 @@ export default {
 };
 ```
 
-### Output Without Path Info
+### الإخراج من دون معلومات المسار
 
-Webpack has the ability to generate path info in the output bundle. However, this puts garbage collection pressure on projects that bundle thousands of modules. Turn this off in the `options.output.pathinfo` setting:
+لدى webpack القدرة على توليد معلومات المسار داخل الحزمة الناتجة. لكن ذلك يضع ضغطًا على جامع القمامة في المشاريع التي تجمع آلاف الوحدات. عطّل ذلك في الإعداد `options.output.pathinfo`:
 
 ```js
 export default {
@@ -201,15 +195,15 @@ export default {
 };
 ```
 
-### Node.js Versions 8.9.10-9.11.1
+### إصدارات Node.js 8.9.10-9.11.1
 
-There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. Webpack uses those data structures liberally, so this regression affects compile times.
+كان هناك [تراجع في الأداء](https://github.com/nodejs/node/issues/19769) في إصدارات Node.js من 8.9.10 إلى 9.11.1 في تطبيقات ES2015 لـ `Map` و`Set`. يستخدم webpack هياكل البيانات هذه بكثرة، لذلك يؤثر هذا التراجع في أزمنة الترجمة.
 
-Earlier and later Node.js versions are not affected.
+لا تتأثر إصدارات Node.js الأقدم أو الأحدث.
 
 ### TypeScript Loader
 
-To improve the build time when using `ts-loader`, use the `transpileOnly` loader option. On its own, this option turns off type checking. To gain type checking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin). This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
+لتحسين وقت البناء عند استخدام `ts-loader`، استخدم خيار loader المسمى `transpileOnly`. هذا الخيار يوقف فحص الأنواع بحد ذاته. لاستعادة فحص الأنواع، استخدم [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin). يسرّع ذلك فحص أنواع TypeScript وتدقيق ESLint بنقل كل منهما إلى عملية منفصلة.
 
 ```js
 export default {
@@ -226,36 +220,36 @@ export default {
 };
 ```
 
-T> There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the `ts-loader` GitHub repository.
+T> يوجد [مثال كامل](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) في مستودع `ts-loader` على GitHub.
 
 ---
 
-## Production
+## الإنتاج
 
-The following steps are especially useful in _production_.
+الخطوات التالية مفيدة خصوصًا في _الإنتاج_.
 
-W> **Don't sacrifice the quality of your application for small performance gains!** Keep in mind that optimization quality is, in most cases, more important than build performance.
+W> **لا تضحّ بجودة تطبيقك من أجل مكاسب أداء صغيرة!** تذكر أن جودة التحسين أهم، في معظم الحالات، من أداء البناء.
 
-### Source Maps
+### خرائط المصدر
 
-Source maps are really expensive. Do you really need them?
+خرائط المصدر مكلفة جدًا. هل تحتاج إليها فعلًا؟
 
 ---
 
-## Specific Tooling Issues
+## مشكلات أدوات محددة
 
-The following tools have certain problems that can degrade build performance:
+تعاني الأدوات التالية من مشكلات معينة قد تضعف أداء البناء:
 
 ### Babel
 
-- Minimize the number of preset/plugins
+- قلّل عدد الـ preset/plugins.
 
 ### TypeScript
 
-- Use the `fork-ts-checker-webpack-plugin` for typechecking in a separate process.
-- Configure loaders to skip typechecking.
-- Use the `ts-loader` in `happyPackMode: true` / `transpileOnly: true`.
+- استخدم `fork-ts-checker-webpack-plugin` لفحص الأنواع في عملية منفصلة.
+- اضبط الـ loaders لتخطي فحص الأنواع.
+- استخدم `ts-loader` في `happyPackMode: true` / `transpileOnly: true`.
 
 ### Sass
 
-- `node-sass` has a bug which blocks threads from the Node.js thread pool. When using it with the `thread-loader` set `workerParallelJobs: 2`.
+- تحتوي `node-sass` على علة تمنع الخيوط من تجمع خيوط Node.js. عند استخدامها مع `thread-loader` اضبط `workerParallelJobs: 2`.

@@ -2,10 +2,11 @@
 title: VirtualUrlPlugin
 group: webpack
 contributors:
-  - xiaoxiaojx
+  - MohaDev-69
+  - RlxChap2
 ---
 
-Allow creating virtual modules of any type, such as `.ts`, `.json`, `.css`, etc. default is `.js`.
+يسمح بإنشاء virtual modules من أي نوع، مثل `.ts` و`.json` و`.css`. النوع الافتراضي هو `.js`.
 
 <Badge text="5.100.0+" />
 
@@ -13,7 +14,7 @@ Allow creating virtual modules of any type, such as `.ts`, `.json`, `.css`, etc.
 import webpack from "webpack";
 
 new webpack.experiments.schemes.VirtualUrlPlugin({
-  myModule: 'export const msg = "from virtual module"',
+  myModule: 'export const msg = "من virtual module"',
 });
 ```
 
@@ -25,9 +26,9 @@ import { msg } from "virtual:myModule";
 console.log(msg);
 ```
 
-## Basic Example
+## مثال أساسي
 
-Create a virtual module that generates build information
+إنشاء virtual module يصدّر معلومات عن build:
 
 ```js
 import webpack from "webpack";
@@ -50,7 +51,7 @@ import { buildTime } from "virtual:buildInfo";
 console.log(`App version: ${buildTime}`);
 ```
 
-Use custom schema
+استخدام scheme مخصص:
 
 ```js
 import webpack from "webpack";
@@ -71,9 +72,9 @@ import { msg } from "v:myModule";
 console.log(msg);
 ```
 
-## Advanced Example
+## مثال متقدم
 
-Create multiple virtual modules of different types
+إنشاء عدة virtual modules بأنواع مختلفة:
 
 ```js
 import webpack from "webpack";
@@ -97,7 +98,7 @@ import json from "virtual:myJsonModule";
 import "virtual:myCssModule";
 ```
 
-Virtualize the routing file
+محاكاة ملف routing:
 
 ```js
 import path from "node:path";
@@ -112,7 +113,8 @@ const watchDir = path.join(__dirname, "./src/routes");
 new webpack.experiments.schemes.VirtualUrlPlugin({
   routes: {
     source(loaderContext) {
-      // Use addContextDependency to monitor the addition or removal of subdirectories in watchDir to trigger the rebuilding of virtual modules.
+      // استخدم addContextDependency لمراقبة الإضافات والحذف داخل مجلد routes
+      // حتى يعاد بناء virtual module عند تغير الملفات.
       loaderContext.addContextDependency(watchDir);
 
       const files = fs.readdirSync(watchDir);
@@ -132,14 +134,12 @@ new webpack.experiments.schemes.VirtualUrlPlugin({
 import { routes } from "virtual:routes";
 ```
 
-## Options
+## الخيارات
 
-- `module.type` (`string`): Content type of the virtual module.
+- `module.type` (`string`): نوع محتوى virtual module.
 
-T> Make sure that these types have a loader set via [module.rules](https://webpack.js.org/configuration/module/#modulerules).
+T> تأكد أن هذه الأنواع لديها loader مناسب عبر [`module.rules`](/configuration/module/#modulerules).
 
-- `module.source` (`string | ((loaderContext: import('webpack').LoaderContext<T>) => Promise<string> | string))`: Factory function for generating the content of virtual module.
-
-- `module.version`(`boolean | string | () => string`): When a invalidate is triggered, the source function is called again if the value of the version is different from the previous one. If set to true it will always trigger.
-
-- `schema` (`string`): Customizable virtual module schema, default is `virtual`.
+- `module.source` (`string | ((loaderContext: import("webpack").LoaderContext<T>) => Promise<string> | string)`): دالة factory التي تولد محتوى virtual module.
+- `module.version` (`boolean | string | () => string`): عند حدوث invalidation، يتم استدعاء `source` مرة أخرى إذا كانت قيمة version مختلفة عن القيمة السابقة. تفعيلها يجعل module يعاد بناؤه دائمًا.
+- `schema` (`string`): scheme مخصص للـ virtual module، والقيمة الافتراضية هي `virtual`.

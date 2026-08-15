@@ -1,19 +1,15 @@
 ---
-title: Internal webpack plugins
-group: webpack
+title: Plugins الداخلية في webpack
 contributors:
-  - iAziz786
-  - EugeneHlushko
-  - ooflorent
-  - Legends
-  - chenxsan
+  - RlxChap2
+group: webpack
 ---
 
-This is a list of plugins which are used by webpack internally.
+هذه قائمة بالـ plugins التي يستخدمها webpack داخليًا.
 
-W> You should only care about them if you are building your own compiler based on webpack, or introspect the internals.
+W> غالبًا لن تحتاج إلى هذه plugins إلا إذا كنت تبني compiler خاصًا بك فوق webpack، أو تريد فحص التفاصيل الداخلية.
 
-Categories of internal plugins:
+تصنيفات plugins الداخلية:
 
 - [environment](#environment)
 - [compiler](#compiler)
@@ -24,51 +20,51 @@ Categories of internal plugins:
 
 ## environment
 
-Plugins affecting the environment of the compiler.
+Plugins تؤثر في بيئة compiler.
 
 ### NodeEnvironmentPlugin
 
 `webpack.node.NodeEnvironmentPlugin()`
 
-Applies Node.js style filesystem to the compiler.
+يطبّق نظام ملفات بأسلوب Node.js على compiler.
 
 ## compiler
 
-Plugins affecting the compiler
+Plugins تؤثر في compiler.
 
 ### MemoryCachePlugin
 
 `MemoryCachePlugin()`
 
-Adds a cache to the compiler, where modules are cached in memory.
+يضيف cache إلى compiler، حيث يتم تخزين modules في الذاكرة.
 
 ### ProgressPlugin
 
 `ProgressPlugin(handler)`
 
-Hook into the compiler to extract progress information. The `handler` must have the signature `function(percentage, message)`. Percentage is called with a value between 0 and 1, where 0 indicates the start and 1 the end.
+يدخل إلى compiler لاستخراج معلومات التقدم. يجب أن تكون دالة `handler` بالشكل `function(percentage, message)`. تُستدعى `percentage` بقيمة بين 0 و1، حيث 0 تعني البداية و1 تعني النهاية.
 
 ### RecordIdsPlugin
 
 `RecordIdsPlugin()`
 
-Saves and restores module and chunk ids from records.
+يحفظ ويستعيد ids الخاصة بـ modules وchunks من records.
 
 ## entry
 
-Plugins, which add entry chunks to the compilation.
+تضيف plugins entry chunks إلى compilation.
 
 ### EntryPlugin
 
 `EntryPlugin(context, entry, options)`
 
-Adds an entry chunk on compilation. The chunk is named `options.name` and contains only one module (plus dependencies). The module is resolved from `entry` in `context` (absolute path).
+يضيف entry chunk أثناء compilation. يُسمى chunk حسب `options.name` ويحتوي على module واحد فقط، إضافة إلى dependencies الخاصة به. يتم حل module من `entry` داخل `context`، ويجب أن يكون `context` مسارًا مطلقًا.
 
 ### PrefetchPlugin
 
 `PrefetchPlugin(context, request)`
 
-Prefetches `request` and dependencies to enable a more parallel compilation. It doesn't create any chunk. The module is resolved from `request` in `context` (absolute path).
+ينفّذ prefetch لـ `request` وdependencies الخاصة به لإتاحة compilation أكثر توازيًا. لا ينشئ أي chunk. يتم حل module من `request` داخل `context`، ويجب أن يكون `context` مسارًا مطلقًا.
 
 ## output
 
@@ -76,226 +72,226 @@ Prefetches `request` and dependencies to enable a more parallel compilation. It 
 
 `JsonpTemplatePlugin(options)`
 
-Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry chunks. It loads chunks by adding a `<script>` tag.
+يتم تغليف chunks داخل JSONP calls. ويتم تضمين خوارزمية تحميل داخل entry chunks، وتحمل chunks عبر إضافة وسم `<script>`.
 
-`options` are the output options.
+`options` هي خيارات output.
 
-`options.jsonpFunction` is the JSONP function.
+`options.jsonpFunction` هي دالة JSONP.
 
-`options.publicPath` is used as path for loading the chunks.
+`options.publicPath` يُستخدم كمسار لتحميل chunks.
 
-`options.chunkFilename` is the filename under that chunks are expected.
+`options.chunkFilename` هو اسم الملف المتوقع للـ chunks.
 
 ### NodeTemplatePlugin
 
 `node/NodeTemplatePlugin(options)`
 
-Chunks are wrapped into Node.js modules exporting the bundled modules. The entry chunks loads chunks by requiring them.
+يتم تغليف chunks داخل modules خاصة بـ Node.js وتصدّر bundled modules. وتحمّل entry chunks بقية chunks عبر `require`.
 
-`options` are the output options.
+`options` هي خيارات output.
 
-`options.chunkFilename` is the filename under that chunks are expected.
+`options.chunkFilename` هو اسم الملف المتوقع للـ chunks.
 
 ### LibraryTemplatePlugin
 
 `LibraryTemplatePlugin(name, target)`
 
-The entries chunks are decorated to form a library `name` of type `type`.
+يتم تهيئة entry chunks لتكوين مكتبة باسم `name` ومن نوع `type`.
 
 ### WebWorkerTemplatePlugin
 
 `webworker/WebWorkerTemplatePlugin(options)`
 
-Chunks are loaded by `importScripts`. Else it's similar to [`JsonpTemplatePlugin`](#jsonptemplateplugin).
+يتم تحميل chunks عبر `importScripts`. فيما عدا ذلك، فهو مشابه لـ [`JsonpTemplatePlugin`](#jsonptemplateplugin).
 
-`options` are the output options.
+`options` هي خيارات output.
 
 ### EvalDevToolModulePlugin
 
-Decorates the module template by wrapping each module in a `eval` annotated with `// @sourceURL`.
+يعدّل قالب module عن طريق تغليف كل module داخل `eval` مع تعليق `// @sourceURL`.
 
 ### SourceMapDevToolPlugin
 
 `SourceMapDevToolPlugin(sourceMapFilename, sourceMappingURLComment, moduleFilenameTemplate, fallbackModuleFilenameTemplate)`
 
-Decorates the templates by generating a SourceMap for each chunk.
+يعدّل القوالب بإنشاء SourceMap لكل chunk.
 
-`sourceMapFilename` the filename template of the SourceMap. `[hash]`, `[name]`, `[id]`, `[file]` and `[filebase]` are replaced. If this argument is missing, the SourceMap will be inlined as DataUrl.
+`sourceMapFilename` هو قالب اسم ملف SourceMap. يتم استبدال `[hash]` و`[name]` و`[id]` و`[file]` و`[filebase]`. إذا لم يُمرر هذا argument، فسيتم تضمين SourceMap كـ DataUrl.
 
 ### HotModuleReplacementPlugin
 
 `HotModuleReplacementPlugin(options)`
 
-Add support for hot module replacement. Decorates the templates to add runtime code. Adds `module.hot` API.
+يضيف دعم hot module replacement. يعدّل القوالب لإضافة كود runtime، ويضيف API باسم `module.hot`.
 
-`options.hotUpdateChunkFilename` the filename for hot update chunks.
+`options.hotUpdateChunkFilename` هو اسم ملف hot update chunks.
 
-`options.hotUpdateMainFilename` the filename for the hot update manifest.
+`options.hotUpdateMainFilename` هو اسم ملف hot update manifest.
 
-`options.hotUpdateFunction` JSON function name for the hot update.
+`options.hotUpdateFunction` هو اسم دالة JSON الخاصة بالـ hot update.
 
 ## source
 
-Plugins affecting the source code of modules.
+Plugins تؤثر في كود المصدر الخاص بـ modules.
 
 ### APIPlugin
 
-Make webpack_public_path, webpack_require, webpack_modules and webpack_chunk_load accessible. Ensures that `require.valueOf` and `require.onError` are not processed by other plugins.
+يجعل `webpack_public_path` و`webpack_require` و`webpack_modules` و`webpack_chunk_load` قابلة للوصول. ويتأكد من أن `require.valueOf` و`require.onError` لا تتم معالجتهما بواسطة plugins أخرى.
 
 ### CompatibilityPlugin
 
-Currently useless. Ensures compatibility with other module loaders.
+حاليًا فائدته محدودة جدًا. يضمن التوافق مع module loaders أخرى.
 
 ### ConstPlugin
 
-Tries to evaluate expressions in `if (...)` statements and ternaries to replace them with `true`/`false` for further possible dead branch elimination using hooks fired by the parser.
+يحاول تقييم expressions داخل عبارات `if (...)` والـ ternaries لاستبدالها بـ `true` أو `false`، حتى يمكن لاحقًا حذف الفروع الميتة عبر hooks يطلقها parser.
 
-There are multiple optimizations in production mode regarding dead branches:
+توجد عدة تحسينات في production mode للتعامل مع الفروع الميتة:
 
-- The ones performed by [Terser](https://github.com/fabiosantoscode/terser)
-- The ones performed by webpack
+- التحسينات التي ينفذها [Terser](https://github.com/fabiosantoscode/terser).
+- التحسينات التي ينفذها webpack.
 
-Webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. Webpack can't do constant folding unless the compiler knows it. For example:
+سيحاول webpack تقييم العبارات الشرطية. إذا نجح، فسيزيل الفرع الميت. لا يستطيع webpack إجراء constant folding إلا إذا كانت القيمة معروفة للـ compiler. مثال:
 
 ```js
 import { calculateTax } from "./tax";
 
 const FOO = 1;
 if (FOO === 0) {
-  // dead branch
+  // فرع ميت
   calculateTax();
 }
 ```
 
-In the above example, webpack is unable to prune the branch, but Terser does. However, if `FOO` is defined using [DefinePlugin](/plugins/define-plugin/), webpack will succeed.
+في المثال السابق، لا يستطيع webpack حذف الفرع، لكن Terser يستطيع. أما إذا عُرّف `FOO` باستخدام [DefinePlugin](/plugins/define-plugin/)، فسينجح webpack في ذلك.
 
-It is important to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
+من المهم أيضًا ملاحظة أن `import { calculateTax } from './tax';` سيُحذف كذلك، لأن استدعاء `calculateTax()` كان داخل الفرع الميت وتمت إزالته.
 
 ### ProvidePlugin
 
 `ProvidePlugin(name, request)`
 
-If `name` is used in a module it is filled by a module loaded by `import ... from <request>`/`import(<request>)`/`require(<request>)`.
+إذا استُخدم `name` داخل module، فسيتم ملؤه من module يتم تحميله عبر `import ... from <request>` أو `import(<request>)` أو `require(<request>)`.
 
 ### NodeStuffPlugin
 
 `NodeStuffPlugin(options, context)`
 
-Provide stuff that is normally available in Node.js modules.
+يوفر أشياء تكون متاحة عادةً داخل Node.js modules.
 
-It also ensures that `module` is filled with some Node.js stuff if you use it.
+كما يضمن ملء `module` ببعض خصائص Node.js إذا استخدمته.
 
 ### RequireJsStuffPlugin
 
-Provide stuff that is normally available in require.js.
+يوفر أشياء تكون متاحة عادةً في require.js.
 
-`require[js].config` is removed. `require.version` is `0.0.0`. `requirejs.onError` is mapped to `require.onError`.
+تتم إزالة `require[js].config`. وتصبح `require.version` مساوية لـ `0.0.0`. ويتم ربط `requirejs.onError` مع `require.onError`.
 
 ### NodeSourcePlugin
 
 `node/NodeSourcePlugin(options)`
 
-This module adds stuff from Node.js that is not available in non Node.js environments.
+يضيف هذا module أشياء من Node.js غير متاحة في البيئات غير المبنية على Node.js.
 
-It adds polyfills for `process`, `console`, `Buffer` and `global` if used. It also binds the built in Node.js replacement modules.
+يضيف polyfills لـ `process` و`console` و`Buffer` و`global` إذا استُخدمت. كما يربط modules البديلة المدمجة الخاصة بـ Node.js.
 
 ### NodeTargetPlugin
 
 `node/NodeTargetPlugin()`
 
-The plugins should be used if you run the bundle in a Node.js environment.
+ينبغي استخدام هذه plugins إذا كنت ستشغّل bundle داخل بيئة Node.js.
 
-If ensures that native modules are loaded correctly even if bundled.
+يضمن ذلك تحميل native modules بشكل صحيح حتى لو كانت ضمن bundle.
 
 ### AMDPlugin
 
 `dependencies/AMDPlugin(options)`
 
-Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `define.amd` and webpack_amd_options## to the `options` passed as parameter.
+يوفر `define` و`require` بأسلوب AMD داخل modules. كما يربط `require.amd` و`define.amd` و`webpack_amd_options##` مع `options` الممررة كـ parameter.
 
 ### CommonJsPlugin
 
 `dependencies/CommonJsPlugin`
 
-Provides CommonJs-style `require` to modules.
+يوفر `require` بأسلوب CommonJs داخل modules.
 
 ### RequireContextPlugin
 
 `dependencies/RequireContextPlugin(modulesDirectories, extensions)`
 
-Provides `require.context`. The parameter `modulesDirectories` and `extensions` are used to find alternative requests for files. It's useful to provide the same arrays as you provide to the resolver.
+يوفر `require.context`. تُستخدم parameters المسماة `modulesDirectories` و`extensions` للعثور على requests بديلة للملفات. من المفيد تمرير نفس arrays التي تمررها إلى resolver.
 
 ### RequireEnsurePlugin
 
 `dependencies/RequireEnsurePlugin()`
 
-Provides `require.ensure`.
+يوفر `require.ensure`.
 
 ### RequireIncludePlugin
 
 `dependencies/RequireIncludePlugin()`
 
-Provides `require.include`.
+يوفر `require.include`.
 
 ### DefinePlugin
 
 `DefinePlugin(definitions)`
 
-Define constants for identifier.
+يعرّف ثوابت للـ identifier.
 
-`definitions` is an object.
+`definitions` هو object.
 
 ## optimize
 
-Note that all plugins under `webpack.optimize` namespace should only be used when [`mode`](/configuration/mode/#mode-none) set to `'none'`. Otherwise you might get into trouble where plugins are applied twice.
+لاحظ أن كل plugins الموجودة تحت namespace باسم `webpack.optimize` يجب استخدامها فقط عندما يكون [`mode`](/configuration/mode/#mode-none) مضبوطًا على `'none'`. بخلاف ذلك قد تواجه مشاكل بسبب تطبيق plugins مرتين.
 
 ### LimitChunkCountPlugin
 
 `optimize/LimitChunkCountPlugin(options)`
 
-Merge chunks limit chunk count is lower than `options.maxChunks`.
+يدمج chunks عندما يكون عدد chunks أقل من `options.maxChunks`.
 
-The overhead for each chunks is provided by `options.chunkOverhead` or defaults to 10000. Entry chunks sizes are multiplied by `options.entryChunkMultiplicator` (or 10).
+يأتي overhead الخاص بكل chunk من `options.chunkOverhead` أو تكون قيمته الافتراضية 10000. ويتم ضرب أحجام entry chunks في `options.entryChunkMultiplicator` أو في 10 افتراضيًا.
 
-Chunks that reduce the total size the most are merged first. If multiple combinations are equal the minimal merged size wins.
+يتم أولًا دمج chunks التي تخفض الحجم الإجمالي بأكبر قدر. وإذا تساوت عدة تركيبات، يفوز الدمج الذي ينتج أقل حجم.
 
 ### MergeDuplicateChunksPlugin
 
 `optimize/MergeDuplicateChunksPlugin()`
 
-Chunks with the same modules are merged.
+يدمج chunks التي تحتوي على modules نفسها.
 
 ### RemoveEmptyChunksPlugin
 
 `optimize/RemoveEmptyChunksPlugin()`
 
-Modules that are included in every parent chunk are removed from the chunk.
+يزيل من chunk أي modules موجودة داخل كل parent chunk.
 
 ### MinChunkSizePlugin
 
 `optimize/MinChunkSizePlugin(minChunkSize)`
 
-Merges chunks until each chunk has the minimum size of `minChunkSize`.
+يدمج chunks حتى يصبح لكل chunk الحجم الأدنى `minChunkSize`.
 
 ### ModuleConcatenationPlugin
 
-See the [ModuleConcatenationPlugin page](/plugins/module-concatenation-plugin/) for details.
+راجع صفحة [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin/) للتفاصيل.
 
 ### FlagIncludedChunksPlugin
 
 `optimize/FlagIncludedChunksPlugin()`
 
-Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
+يضيف chunk ids الخاصة بـ chunks المضمنة داخل chunk. هذا يزيل عمليات تحميل chunks غير الضرورية.
 
 ### RealContentHashPlugin
 
 `optimize/RealContentHashPlugin()`
 
-When [`optimization.realContentHash`](/configuration/optimization/#optimizationrealcontenthash) option is enabled, webpack will apply `RealContentHashPlugin` to compiler internally.
+عند تفعيل خيار [`optimization.realContentHash`](/configuration/optimization/#optimizationrealcontenthash)، سيطبق webpack داخليًا `RealContentHashPlugin` على compiler.
 
 #### Hook
 
-`RealContentHashPlugin` provides a `updateHash` <Badge text='5.8.0+' /> hook for customizing hash updating:
+يوفر `RealContentHashPlugin` hook باسم `updateHash` <Badge text='5.8.0+' /> لتخصيص تحديث hash:
 
 ```js
 import webpack from "webpack";
@@ -305,7 +301,7 @@ const { RealContentHashPlugin } = webpack.optimize;
 compiler.hooks.compilation.tap("MyPlugin", (compilation) => {
   const hooks = RealContentHashPlugin.getCompilationHooks(compilation);
   hooks.updateHash.tap("MyPlugin", (content, oldHash) => {
-    // you can calculate the hash here as you wish
+    // يمكنك حساب hash هنا بالطريقة التي تريدها
   });
 });
 ```

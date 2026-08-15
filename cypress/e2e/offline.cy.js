@@ -53,7 +53,7 @@ describe("offline", () => {
 
     it("shows /migrate/ page", () => {
       const url = "/migrate/";
-      const text = "Migrate";
+      const text = "الترقية";
 
       cy.visit(url);
       cy.get("h1").contains(text);
@@ -73,9 +73,8 @@ describe("offline", () => {
       cy.visit(url);
       cy.get("h1").contains(text);
 
-      // click `guides` link
-      cy.get('a[title="guides"]').click();
-      cy.get("h1").contains("Guides");
+      cy.get('a[title="الأدلة"]').click();
+      cy.get("h1").contains("الأدلة");
     });
 
     it("open print dialog when accessing /printable url", () => {

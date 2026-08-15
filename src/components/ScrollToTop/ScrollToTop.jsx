@@ -27,7 +27,7 @@ function ScrollToTop() {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[999] pointer-events-none">
+    <div className="fixed bottom-4 end-4 md:bottom-8 md:end-8 z-[999] pointer-events-none">
       <button
         className={`
           group flex items-center justify-center 
@@ -46,8 +46,8 @@ function ScrollToTop() {
           }
         `}
         onClick={scrollToTop}
-        aria-label="Scroll to top"
-        title="Scroll to top"
+        aria-label="العودة إلى أعلى الصفحة"
+        title="العودة إلى أعلى الصفحة"
         disabled={!isVisible}
       >
         <svg
