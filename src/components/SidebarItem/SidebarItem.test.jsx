@@ -37,6 +37,7 @@ describe("SidebarItem", () => {
   afterAll(() => {
     delete HTMLElement.prototype.scrollIntoView;
   });
+
   const defaultProps = {
     title: "Getting Started",
     url: "/guides/getting-started/",
