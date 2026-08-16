@@ -4,7 +4,6 @@ import AGLogoDark from "../../assets/ag-grid-logo-dark.png";
 import AGLogo from "../../assets/ag-grid-logo.png";
 import WebpackIcon from "../../assets/icon-square-small.svg";
 import Link from "../Link/Link.jsx";
-import { RenderATLCard } from "../RenderATL/RenderATL.jsx";
 
 // Tailwind CSS is used for styling
 
@@ -59,8 +58,6 @@ const Sponsors = () => (
           />
         </Link>
       </div>
-
-      <RenderATLCard />
 
       {/* Webpack Sponsor */}
       <div className="m-5 flex flex-col items-center transition-transform duration-200">
