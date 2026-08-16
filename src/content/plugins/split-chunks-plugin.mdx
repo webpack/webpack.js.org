@@ -46,6 +46,14 @@ Webpack will automatically split chunks based on these conditions:
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
+T> The default request limits are heuristic guardrails, not HTTP/1-specific
+recommendations. Browsers and transports such as HTTP/2 can handle many parallel
+requests, but extra chunks still add scheduling, header, cache lookup, parsing,
+and evaluation overhead. If your app benefits from more granular chunks, adjust
+[`splitChunks.maxAsyncRequests`](#splitchunksmaxasyncrequests) and
+[`splitChunks.maxInitialRequests`](#splitchunksmaxinitialrequests), then measure
+the result for your users.
+
 ## Configuration
 
 Webpack provides a set of options for developers that want more control over this functionality.
