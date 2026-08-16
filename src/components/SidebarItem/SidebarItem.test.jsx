@@ -14,30 +14,29 @@ const requestAnimationFrameMock = (callback) => {
 };
 const cancelAnimationFrameMock = jest.fn();
 
-beforeAll(() => {
-  Object.defineProperty(HTMLElement.prototype, "scrollIntoView", {
-    configurable: true,
-    value: scrollIntoViewMock,
-  });
-  Object.defineProperty(window, "requestAnimationFrame", {
-    configurable: true,
-    value: requestAnimationFrameMock,
-  });
-  Object.defineProperty(window, "cancelAnimationFrame", {
-    configurable: true,
-    value: cancelAnimationFrameMock,
-  });
-});
-
-afterAll(() => {
-  delete HTMLElement.prototype.scrollIntoView;
-});
-
 function renderWithRouter(ui, { route = "/" } = {}) {
   return render(<MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>);
 }
 
 describe("SidebarItem", () => {
+  beforeAll(() => {
+    Object.defineProperty(HTMLElement.prototype, "scrollIntoView", {
+      configurable: true,
+      value: scrollIntoViewMock,
+    });
+    Object.defineProperty(window, "requestAnimationFrame", {
+      configurable: true,
+      value: requestAnimationFrameMock,
+    });
+    Object.defineProperty(window, "cancelAnimationFrame", {
+      configurable: true,
+      value: cancelAnimationFrameMock,
+    });
+  });
+
+  afterAll(() => {
+    delete HTMLElement.prototype.scrollIntoView;
+  });
   const defaultProps = {
     title: "Getting Started",
     url: "/guides/getting-started/",
@@ -120,7 +119,11 @@ describe("SidebarItem", () => {
             <h2 id="intro">Introduction</h2>
             <h2 id="setup">Setup</h2>
           </div>
-          <SidebarItem {...defaultProps} anchors={anchors} currentPage="/guides/getting-started/" />
+          <SidebarItem
+            {...defaultProps}
+            anchors={anchors}
+            currentPage="/guides/getting-started/"
+          />
         </div>
       </MemoryRouter>,
     );
