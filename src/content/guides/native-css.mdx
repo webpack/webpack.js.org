@@ -186,6 +186,16 @@ export default {
 
 ## Migration Guide
 
+### Automated migration (codemod)
+
+Most of the migration can be done for you by the [`@webpack/css-plugins-to-native-css`](https://app.codemod.com/registry/@webpack/css-plugins-to-native-css) codemod:
+
+```bash
+npx codemod @webpack/css-plugins-to-native-css
+```
+
+It requires webpack 5.109.0 or later, since it relies on the [`experiments.css: "auto"`](/configuration/experiments/#experimentscss) default introduced in that release.
+
 ### At a glance
 
 | Legacy setup                                              | Native equivalent                                                                                                                                     |
