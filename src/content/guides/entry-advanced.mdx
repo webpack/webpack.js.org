@@ -35,13 +35,11 @@ console.log("account page type");
 // account page individual styles
 ```
 
-We will use [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin/) in `production` mode for css as a best practice.
+Webpack extracts CSS on its own, so `sass-loader` is the only loader needed — give the rule a [CSS module type](/guides/native-css/#css-module-types) and webpack takes it from there.
 
 **webpack.config.js**
 
 ```js
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-
 export default {
   mode: process.env.NODE_ENV,
   entry: {
@@ -50,27 +48,20 @@ export default {
   },
   output: {
     filename: "[name].js",
+    cssFilename: "[name].css",
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
-        use: [
-          // fallback to style-loader in development
-          process.env.NODE_ENV !== "production"
-            ? "style-loader"
-            : MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
-        ],
+        use: ["sass-loader"],
+        type: "css/auto",
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-    }),
-  ],
+  experiments: {
+    css: true,
+  },
 };
 ```
 

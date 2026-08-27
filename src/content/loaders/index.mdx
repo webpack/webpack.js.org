@@ -38,7 +38,9 @@ Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`
 
 ## Templating
 
-- [`html-loader`](/loaders/html-loader) Exports HTML as string, require references to static resources
+W> Webpack bundles HTML on its own — see [`experiments.html`](/configuration/experiments/#experimentshtml) and the [Native HTML](/guides/native-html/) guide, which also covers migrating off `html-loader`.
+
+- [`html-loader`](/loaders/html-loader) **Deprecated** — superseded by webpack's [built-in HTML support](/guides/native-html/). Exports HTML as string, require references to static resources
 - [`pug-loader`](https://github.com/pugjs/pug-loader) Loads Pug and Jade templates and returns a function
 - [`markdown-loader`](https://github.com/peerigon/markdown-loader) Compiles Markdown to HTML
 - [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) Compiles Markdown to a React Component using the markdown-parse parser
@@ -50,8 +52,10 @@ Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`
 
 ## Styling
 
-- [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM
-- [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code
+W> Webpack parses, extracts and minifies CSS on its own — see [`experiments.css`](/configuration/experiments/#experimentscss) and the [Native CSS](/guides/native-css/) guide, which also covers migrating off the loaders marked below. Preprocessor loaders (Sass, Less, PostCSS, Stylus) stay: pair them with a `css/auto` rule.
+
+- [`style-loader`](/loaders/style-loader) **Deprecated** — superseded by webpack's [built-in CSS support](/guides/native-css/). Add exports of a module as style to DOM
+- [`css-loader`](/loaders/css-loader) **Deprecated** — superseded by webpack's [built-in CSS support](/guides/native-css/). Loads CSS file with resolved imports and returns CSS code
 - [`css-utility-loader`](https://github.com/SahilKhanWDC/css-utility-loader-webpack-.git) - Automatically parses and translates legacy CSS properties into modern utility classes (Tailwind) at build-time.
 - [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
 - [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file

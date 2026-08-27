@@ -23,13 +23,13 @@ Loaders are transformations that are applied to the source code of a module. The
 
 ## Example
 
-For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:
+For example, you can use loaders to compile Sass to CSS or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:
 
 ```bash
-npm install --save-dev css-loader ts-loader
+npm install --save-dev sass-loader ts-loader
 ```
 
-And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for every `.css` file and the [`ts-loader`](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
+And then instruct webpack to use the [`sass-loader`](/loaders/sass-loader) for every `.scss` file and the [`ts-loader`](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
 
 **webpack.config.js**
 
@@ -37,14 +37,14 @@ And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for eve
 export default {
   module: {
     rules: [
-      { test: /\.css$/, use: "css-loader" },
+      { test: /\.scss$/, use: "sass-loader", type: "css/auto" },
       { test: /\.ts$/, use: "ts-loader" },
     ],
   },
 };
 ```
 
-T> While in the previous examples we used a loader to load CSS files, webpack has an experimental option ([`experiments.css`](https://webpack.js.org/configuration/experiments/)) that allows webpack to process CSS and automatically inject the styles into the webpage.
+T> Plain `.css` files need no loader at all: webpack parses, extracts and minifies CSS itself — see [`experiments.css`](/configuration/experiments/#experimentscss) and the [Native CSS](/guides/native-css/) guide. A preprocessor still needs its loader, and `type: 'css/auto'` hands what the loader produces to webpack's CSS pipeline.
 
 ## Using Loaders
 
@@ -60,24 +60,24 @@ Note that loaders can be used from CLI under webpack v4, but the feature was dep
 [`module.rules`](/configuration/module/#modulerules) allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
 
-Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
+Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader and ends with postcss-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
 
 ```js
 export default {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
-          { loader: "style-loader" },
+          { loader: "postcss-loader" },
           {
-            loader: "css-loader",
+            loader: "sass-loader",
             options: {
-              modules: true,
+              sourceMap: true,
             },
           },
-          { loader: "sass-loader" },
         ],
+        type: "css/auto",
       },
     ],
   },
@@ -91,7 +91,7 @@ It's possible to specify loaders in an `import` statement, or any [equivalent "i
 T> The `loader1!loader2!./file` syntax is shown for illustration. In most projects, prefer configuring loaders via `module.rules` and importing styles for their side effects (e.g. `import "./styles.css"`).
 
 ```js
-import * as styles from "style-loader!css-loader?modules!./styles.css";
+import * as styles from "postcss-loader!sass-loader!./styles.scss";
 ```
 
 It's possible to override any loaders, preLoaders and postLoaders from the [configuration](/configuration) by prefixing the inline `import` statement:
@@ -99,19 +99,19 @@ It's possible to override any loaders, preLoaders and postLoaders from the [conf
 - Prefixing with `!` will disable all configured normal loaders
 
   ```js
-  import * as styles from "!style-loader!css-loader?modules!./styles.css";
+  import * as styles from "!postcss-loader!sass-loader!./styles.scss";
   ```
 
 - Prefixing with `!!` will disable all configured loaders (preLoaders, loaders, postLoaders)
 
   ```js
-  import * as styles from "!!style-loader!css-loader?modules!./styles.css";
+  import * as styles from "!!postcss-loader!sass-loader!./styles.scss";
   ```
 
 - Prefixing with `-!` will disable all configured preLoaders and loaders but not postLoaders
 
   ```js
-  import * as styles from "-!style-loader!css-loader?modules!./styles.css";
+  import * as styles from "-!postcss-loader!sass-loader!./styles.scss";
   ```
 
 Options can be passed with a query parameter, e.g. `?key=value&foo=bar`, or a JSON object, e.g. `?{"key":"value","foo":"bar"}`.

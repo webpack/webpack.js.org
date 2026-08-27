@@ -228,7 +228,7 @@ T> Avoid `inline-***` and `eval-***` use in production as they can increase bund
 
 ## Minimize CSS
 
-It is crucial to minimize your CSS for production. Please see the [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
+It is crucial to minimize your CSS for production, and webpack does it for you: [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on in `production` mode and covers CSS assets along with JavaScript, with no extra plugin to install. See [Minification](/guides/native-css/#minification) for what it does and how to tune each transform.
 
 ## CLI Alternatives
 
