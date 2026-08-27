@@ -1,0 +1,1345 @@
+---
+title: Native HTML
+description: Bundle HTML with webpack's built-in HTML support, and migrate off html-loader and html-webpack-plugin.
+sort: 28
+contributors:
+  - alexander-akait
+---
+
+This guide shows how to use webpack's native HTML handling with `experiments.html`, and how to migrate an existing setup off `html-loader` and `html-webpack-plugin`.
+
+T> `experiments.html` is still experimental. It is expected to become the default in webpack v6, but behavior can still change while development continues. The overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+
+## Getting Started
+
+Enable native HTML support in your webpack configuration:
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: {
+    html: true,
+  },
+};
+```
+
+With this option enabled, webpack understands `.html` files as first-class modules — parsing tags, resolving every URL they reference, bundling inline `<script>` and `<style>` bodies, emitting hashed assets, and writing the rewritten HTML back out — without `html-loader` or `html-webpack-plugin`.
+
+T> Since webpack 5.109.0 the option defaults to `'auto'`: built-in HTML support turns on unless a [`module.rules`](/configuration/module/#modulerules) entry with a loader (or an explicit module type) already matches `.html` files. An existing `html-loader` setup therefore keeps working untouched, and you can migrate one rule at a time. [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) resolves it to `true`.
+
+## Three ways to use HTML
+
+Native HTML covers three separate jobs that used to need two different packages. Pick the one that matches your project — they can be combined.
+
+| Use case                                                                                                            | What you write                   | Replaces                                |
+| ------------------------------------------------------------------------------------------------------------------- | -------------------------------- | --------------------------------------- |
+| [**HTML entry point**](#1-html-as-an-entry-point) — the page drives the build                                       | `entry: './src/index.html'`      | `html-webpack-plugin` with a `template` |
+| [**Generated page**](#2-a-generated-page-for-a-javascript-entry) — webpack scaffolds a document around your bundles | `output.html: true`              | `html-webpack-plugin` with no template  |
+| [**HTML imported from JavaScript**](#3-html-imported-from-javascript) — a partial used as a string                  | `import page from './page.html'` | `html-loader`                           |
+
+### 1. HTML as an entry point
+
+Point [`entry`](/configuration/entry-context/) at an `.html` file and webpack builds the page itself: every `<script src>`, `<link rel="stylesheet">`, `<img src>`, inline `<style>` and inline `<script>` becomes part of the module graph, and the emitted page has all of its URLs rewritten to the built (hashed) filenames.
+
+**src/index.html**
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>My App</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <img src="./logo.png" alt="Logo" />
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: "./src/index.html",
+  experiments: {
+    html: true,
+    css: true,
+  },
+};
+```
+
+This is the HTML-first model Vite and Parcel use: the page is the source of truth about which scripts and styles it needs, so there is no second list of entry points to keep in sync.
+
+T> When `experiments.html` is enabled, `.html` is added to the default [`resolve.extensions`](/configuration/resolve/#resolveextensions) ahead of the JavaScript extensions, so `entry: './src'` resolves `./src/index.html` even when `./src/index.js` exists.
+
+### 2. A generated page for a JavaScript entry
+
+If you would rather keep a JavaScript entry and have webpack write the document for you, set [`output.html`](/configuration/output/#outputhtml). Webpack generates one HTML file per non-HTML entrypoint and injects that entrypoint's initial JS and CSS chunks — including chunks shared through [`dependOn`](/configuration/entry-context/#dependencies):
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: {
+    main: "./src/main.js",
+  },
+  output: {
+    html: true,
+  },
+  experiments: {
+    html: true,
+  },
+};
+```
+
+This is the part of `html-webpack-plugin` that scaffolds a document around your bundles. Set `output.html` to an object to configure the [generated page](#configuring-the-generated-page).
+
+### 3. HTML imported from JavaScript
+
+Importing an `.html` file from JavaScript gives you the processed HTML as a string, with every asset reference resolved through webpack — the role `html-loader` has played for years:
+
+**src/index.js**
+
+```js
+import page from "./page.html";
+
+document.querySelector("#app").innerHTML = page;
+```
+
+An HTML module imported this way is **not** emitted as a standalone file by default; an HTML module used as an entry is. Override either with [`module.generator.html.extract`](/configuration/module/#modulegeneratorhtmlextract).
+
+## What webpack bundles from a page
+
+By default the parser treats a known set of URL-bearing attributes as dependencies. Everything below is handled with no configuration:
+
+| Markup                                                | What happens                                                                       |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `<script src>`                                        | Becomes a classic chunk entry; the `src` is rewritten to the emitted chunk         |
+| `<script type="module" src>`                          | Becomes an ES module chunk entry                                                   |
+| `<script>…</script>` (inline)                         | The body becomes its own entry; the tag is rewritten to `<script src>`             |
+| `<style>…</style>` (inline)                           | Routed through the CSS pipeline; `@import` / `url()` resolved, text written back   |
+| `style="…"` attribute                                 | Routed through the CSS pipeline as a declaration list                              |
+| `<link rel="stylesheet">`                             | Becomes a CSS chunk entry                                                          |
+| `<link rel="modulepreload">`                          | Becomes an independent entry (preloaded, never executed by a sibling)              |
+| `<link rel="preload">` / `<link rel="prefetch">`      | Its script/style is bundled and the `href` rewritten                               |
+| `<link rel="icon">`, `<link rel="manifest">`          | Emitted as hashed assets; the manifest's `icons` / `screenshots` / `shortcuts` too |
+| `<img src>`, `<img srcset>`, `<source srcset>`        | Emitted as hashed assets                                                           |
+| `<iframe srcdoc>`                                     | The document inside is bundled through the HTML pipeline                           |
+| SVG references (`fill`, `cursor`, `font-face-uri`, …) | `url(...)` targets are emitted as assets                                           |
+| `<meta name="twitter:player:stream">`                 | Emitted as a hashed asset                                                          |
+
+Two rules make the JavaScript side predictable:
+
+- Multiple `<script src>` tags on the same page **share a single runtime**. Within each group (classic or `type="module"`), the leader holds the runtime and the rest declare `dependOn` on it.
+- With [`output.module`](/configuration/output/#outputmodule) enabled, classic `<script>` tags are auto-upgraded to `type="module"` so the emitted ES module chunks load in the right mode.
+
+Non-JS script types (`application/ld+json`, `importmap`, …), data URIs, and `<style>` with a non-CSS `type` flow through unchanged.
+
+### Skipping a single URL
+
+Put a `webpackIgnore` comment immediately before a tag to leave its URLs alone — useful for CDN assets or URLs a server rewrites at runtime:
+
+```html
+<!-- webpackIgnore: true -->
+<script src="https://cdn.example.com/analytics.js"></script>
+```
+
+### Customizing which attributes are URLs
+
+[`module.parser.html.sources`](/configuration/module/#moduleparserhtmlsources) controls the whole list. Use the literal `"..."` to keep the built-in defaults and add your own on top:
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        sources: [
+          "...", // keep the built-in defaults
+          { tag: "img", attribute: "data-src", type: "src" },
+          { tag: "img", attribute: "data-srcset", type: "srcset" },
+          { attribute: "data-href", type: "src" }, // any tag
+          { tag: "img", attribute: "src", type: false }, // drop a built-in default
+        ],
+      },
+    },
+  },
+};
+```
+
+Pass `sources: false` to switch URL extraction off entirely; inline `<script>` and `<style>` bodies are still processed. A `filter` callback skips individual elements:
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        sources: [
+          "...",
+          {
+            tag: "img",
+            attribute: "src",
+            type: "src",
+            // Leave absolute URLs to the CDN alone.
+            filter: (attributes, value) => !value.startsWith("https://"),
+          },
+        ],
+      },
+    },
+  },
+};
+```
+
+### Linking pages together
+
+The `html` source type makes an `href` to another page part of the build: the linked file is bundled as its own emitted page and the attribute is rewritten to its output filename.
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: "./src/index.html",
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        sources: ["...", { tag: "a", attribute: "href", type: "html" }],
+      },
+    },
+  },
+};
+```
+
+```html
+<!-- src/index.html -->
+<a href="./about.html">About</a>
+```
+
+## Configuring the generated page
+
+Every option below lives under [`output.html`](/configuration/output/#outputhtml) and applies to webpack-generated pages. They can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor):
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: {
+    app: "./src/app.js",
+    // This entry gets no HTML page.
+    worker: { import: "./src/worker.js", html: false },
+    // …and this one overrides a single option.
+    admin: { import: "./src/admin.js", html: { title: "Admin" } },
+  },
+  output: { html: { title: "My App" } },
+  experiments: { html: true },
+};
+```
+
+### Title, meta and base
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      title: "My App",
+      meta: {
+        viewport: "width=device-width, initial-scale=1",
+        description: "A webpack-built app",
+        "og:title": "My App",
+      },
+      base: { href: "/app/", target: "_self" },
+    },
+  },
+};
+```
+
+The `charset` key is special-cased into a charset declaration (`meta: { charset: "UTF-8" }` emits `<meta charset="UTF-8">`), and keys beginning with `og:` use the `property` attribute instead of `name`. Each of these is skipped when the page already declares it, so an authored page always wins.
+
+### Where the tags go
+
+[`output.html.inject`](/configuration/output/#outputhtmlinject) places the injected chunk tags: `'body'` (default; `'head'` with `output.module`), `'head'`, or `false` to suppress sibling-chunk injection. [`output.html.scriptLoading`](/configuration/output/#outputhtmlscriptloading) chooses how they load: `'auto'` (default — a module script for ES module output, `defer` otherwise), `'defer'`, or `'blocking'`.
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      inject: "head",
+      scriptLoading: "defer",
+    },
+  },
+};
+```
+
+Stylesheet `<link>` tags always land in `<head>` when the page has one, ahead of the first blocking script.
+
+### Inlining critical chunks
+
+[`output.html.inline`](/configuration/output/#outputhtmlinline) writes a chunk's content straight into the page instead of linking it — the job `html-webpack-inline-source-plugin` used to do. The page's `[contenthash]` accounts for the inlined content.
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      // `true` inlines everything; `'script'` / `'style'` narrow it by type.
+      inline: [/^runtime/, /critical/],
+    },
+  },
+};
+```
+
+An authored page can opt a single reference in or out with the `webpackInline` magic comment:
+
+```html
+<!-- webpackInline: true -->
+<script src="./critical.js"></script>
+```
+
+### Favicons and the web app manifest
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      favicon: {
+        icon: [
+          { href: "./favicon.svg", type: "image/svg+xml" },
+          { href: "./favicon-32.png", sizes: "32x32" },
+          {
+            href: "./favicon-dark.png",
+            media: "(prefers-color-scheme: dark)",
+          },
+        ],
+        "apple-touch-icon": "./apple-touch-icon.png",
+      },
+      manifest: {
+        name: "My App",
+        short_name: "App",
+        start_url: "/",
+        display: "standalone",
+        icons: [{ src: "./icon-512.png", sizes: "512x512" }],
+      },
+    },
+  },
+};
+```
+
+Every icon — including the ones named inside the manifest — is emitted as a hashed asset through the normal pipeline, so `favicons-webpack-plugin` and friends are no longer needed. Both apply to webpack-generated pages only: an authored page is left exactly as written, so add the `<link>` tags to the page itself when you own its markup. Both options also accept a function receiving the page name, which is how you give each page of a multi-page build its own icon set.
+
+### Subresource Integrity and CSP
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    crossOriginLoading: "anonymous",
+    html: {
+      integrity: true, // or ['sha256', 'sha384']
+      csp: {
+        policy: {
+          "img-src": ["'self'", "data:"],
+          "connect-src": "https://api.example.com",
+        },
+      },
+    },
+  },
+};
+```
+
+`integrity: true` adds `sha384` `integrity` attributes to injected `<script>` / `<link>` tags — pair it with [`output.crossOriginLoading`](/configuration/output/#outputcrossoriginloading), since SRI requires CORS-enabled fetches. `csp` injects a `<meta http-equiv="Content-Security-Policy">` with a strict baseline plus a hash of every inline `<script>` / `<style>`; set `nonce` instead when your server rewrites one per request. Both replace `webpack-subresource-integrity` and `csp-html-webpack-plugin`.
+
+### Resource hints
+
+[`output.resourceHints`](/configuration/output/#outputresourcehints) emits `<link rel="preload">` / `prefetch` / `modulepreload` / `preconnect` tags into the page — the job `preload-webpack-plugin` used to do:
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    resourceHints: {
+      initial: true, // hint the initial dependency graph
+      preconnect: true, // preconnect to origins the build references
+      urlHints: [{ test: /\.woff2$/, preload: true, as: "font" }],
+    },
+  },
+};
+```
+
+An array gives you full control, including literal hrefs and references to a named chunk or entry:
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    resourceHints: [
+      { rel: "preconnect", href: "https://cdn.example.com" },
+      {
+        rel: "preload",
+        href: "/fonts/inter.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossorigin: true,
+      },
+      { rel: "prefetch", entry: "settings" },
+      { rel: "preload", chunk: "runtime", fetchPriority: "high" },
+    ],
+  },
+};
+```
+
+For fonts referenced from CSS, [`module.parser.css.fontPreload`](/configuration/module/#moduleparsercssfontpreload) seeds the hints automatically. For server-side rendering, `resourceHints.manifest` writes the resolved hint list to a JSON asset so the server can inject the tags itself.
+
+## Templating
+
+[`module.parser.html.template`](/configuration/module/#moduleparserhtmltemplate) transforms the raw HTML **before** the parser extracts dependencies, so URLs produced by a templating language are still discovered and bundled. It runs for authored pages and for generated ones alike.
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        template: (source, { resource, addDependency }) => {
+          addDependency(resource);
+          return source
+            .replaceAll("{{title}}", "Hello world")
+            .replaceAll("{{image}}", "./image.png");
+        },
+      },
+    },
+  },
+};
+```
+
+The context object carries the current `module` and its `resource`, the build-dependency helpers (`addDependency`, `addContextDependency`, `addMissingDependency`, `addBuildDependency`) and `emitWarning` / `emitError`. Register the template files you read so watch mode picks up their changes.
+
+Any synchronous template engine plugs in the same way:
+
+```js
+import fs from "node:fs";
+import { fileURLToPath } from "node:url";
+import { compile } from "handlebars";
+
+const dataFile = fileURLToPath(new URL("./src/data.json", import.meta.url));
+
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        template: (source, { addDependency }) => {
+          // Rebuild the page when the data changes.
+          addDependency(dataFile);
+          const data = JSON.parse(fs.readFileSync(dataFile, "utf8"));
+          return compile(source)(data);
+        },
+      },
+    },
+  },
+};
+```
+
+### Parsing a fragment
+
+An HTML partial is not a document, and parsing it as one drops context-sensitive tags — a bare `<tr>` outside a table, for instance. [`module.parser.html.as`](/configuration/module/#moduleparserhtmlas) names the context element to parse the source as:
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    rules: [
+      {
+        test: /\.rows\.html$/i,
+        type: "html",
+        parser: { as: "tbody" },
+      },
+      {
+        test: /\.partial\.html$/i,
+        type: "html",
+        parser: { as: "template" }, // a neutral fragment
+      },
+    ],
+  },
+};
+```
+
+## Minification
+
+HTML assets are minified by the built-in minimizer whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  experiments: { html: true },
+};
+```
+
+Every transform that keeps the document's DOM is on by default; the ones that change what a script or a selector can read back are opt-in. Configure them through the object form of `optimization.minimize`:
+
+```js
+export default {
+  mode: "production",
+  experiments: { html: true },
+  optimization: {
+    minimize: {
+      html: {
+        collapseWhitespace: "smart",
+        removeRedundantAttributes: "smart",
+        // Opt in — these change what the DOM reads back.
+        sortAttributes: true,
+        sortTokenLists: true,
+        mergeStyles: true,
+      },
+    },
+  },
+};
+```
+
+Inline `<style>` elements and `style=""` attributes are minified with the CSS minimizer using the options `optimization.minimize.css` names, so a stylesheet and the same declarations inline are treated identically. Disable HTML minification alone with `minimize: { html: false }`.
+
+## Hot Module Replacement
+
+HTML modules support [Hot Module Replacement](/concepts/hot-module-replacement/) with no extra configuration — it activates whenever HMR is on, for example via [`devServer.hot`](/configuration/dev-server/#devserverhot). For a page extracted to a real `.html` file, each update patches `document.body.innerHTML` and `document.title` in place; a change to `<head>` beyond the title falls back to a full reload.
+
+## Plugin hooks
+
+`webpack.html.HtmlModulesPlugin` exposes `injectTags`, `transformTags`, `transformHtml` and `htmlEmitted` compilation hooks — the extension point that `html-webpack-plugin`'s hooks provided. See [`HtmlModulesPlugin.getCompilationHooks`](/api/compilation-hooks/#htmlmodulesplugingetcompilationhookscompilation).
+
+```js
+class AddBuildStampPlugin {
+  apply(compiler) {
+    compiler.hooks.compilation.tap("AddBuildStamp", (compilation) => {
+      const hooks =
+        compiler.webpack.html.HtmlModulesPlugin.getCompilationHooks(
+          compilation,
+        );
+
+      hooks.transformHtml.tap("AddBuildStamp", (html) =>
+        html.replace("</body>", `<!-- built ${Date.now()} --></body>`),
+      );
+    });
+  }
+}
+```
+
+## Migrating from `html-loader`
+
+`html-loader` turned an imported `.html` file into a string with its URLs resolved. Native HTML does the same thing without a loader, so the migration is mostly deletion.
+
+### At a glance
+
+| `html-loader` option | Native equivalent                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------------- |
+| `sources`            | [`module.parser.html.sources`](/configuration/module/#moduleparserhtmlsources) — `true` by default |
+| `sources.list`       | the array form of `sources` (use `"..."` to keep the defaults)                                     |
+| `sources.urlFilter`  | a `filter` callback on a source entry, or a `webpackIgnore` comment                                |
+| `preprocessor`       | [`module.parser.html.template`](/configuration/module/#moduleparserhtmltemplate)                   |
+| `postprocessor`      | the `transformHtml` [compilation hook](#plugin-hooks)                                              |
+| `minimize`           | [`optimization.minimize`](#minification) — on by default in production                             |
+| `esModule`           | n/a — an HTML module exports the processed HTML as its default export                              |
+
+### Before
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+        options: {
+          sources: {
+            list: ["...", { tag: "img", attribute: "data-src", type: "src" }],
+          },
+          minimize: true,
+        },
+      },
+    ],
+  },
+};
+```
+
+### After
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: {
+    html: true,
+  },
+  module: {
+    parser: {
+      html: {
+        sources: ["...", { tag: "img", attribute: "data-src", type: "src" }],
+      },
+    },
+  },
+};
+```
+
+Your imports do not change:
+
+```js
+import page from "./page.html";
+```
+
+T> While `experiments.html` is `'auto'` (the default since 5.109.0), a `module.rules` entry that still names `html-loader` keeps that rule on the loader. Migrate one rule at a time and delete the rule last.
+
+## Migrating from `html-webpack-plugin`
+
+`html-webpack-plugin` did two jobs: scaffolding a document around your bundles, and rendering a template. Native HTML splits them — [`output.html`](#2-a-generated-page-for-a-javascript-entry) scaffolds, and an [HTML entry point](#1-html-as-an-entry-point) or [`module.parser.html.template`](#templating) renders.
+
+### At a glance
+
+| `html-webpack-plugin`                    | Native equivalent                                                                 |
+| ---------------------------------------- | --------------------------------------------------------------------------------- |
+| no `template`                            | [`output.html: true`](/configuration/output/#outputhtml)                          |
+| `template`                               | use the file as an [HTML entry point](#1-html-as-an-entry-point)                  |
+| `templateContent` / `templateParameters` | [`module.parser.html.template`](#templating)                                      |
+| `filename`                               | [`output.htmlFilename`](/configuration/output/#outputhtmlfilename)                |
+| `title`                                  | [`output.html.title`](/configuration/output/#outputhtmltitle)                     |
+| `meta`                                   | [`output.html.meta`](/configuration/output/#outputhtmlmeta)                       |
+| `base`                                   | [`output.html.base`](/configuration/output/#outputhtmlbase)                       |
+| `inject`                                 | [`output.html.inject`](/configuration/output/#outputhtmlinject)                   |
+| `scriptLoading`                          | [`output.html.scriptLoading`](/configuration/output/#outputhtmlscriptloading)     |
+| `favicon`                                | [`output.html.favicon`](/configuration/output/#outputhtmlfavicon)                 |
+| `publicPath`                             | [`output.publicPath`](/configuration/output/#outputpublicpath)                    |
+| `minify`                                 | [`optimization.minimize`](#minification)                                          |
+| `hash`                                   | `[contenthash]` in [`output.filename`](/configuration/output/#outputfilename)     |
+| `chunks` / `excludeChunks`               | one page per entrypoint; opt an entry out with the entry descriptor `html: false` |
+| several plugin instances (MPA)           | [several entries](#multi-page-application)                                        |
+| `chunksSortMode`                         | n/a — injection order follows the chunk graph                                     |
+| `cache`, `showErrors`, `xhtml`           | n/a                                                                               |
+| plugin hooks                             | [`HtmlModulesPlugin` hooks](#plugin-hooks)                                        |
+
+Companion plugins fold in too:
+
+| Plugin                              | Native equivalent                                                        |
+| ----------------------------------- | ------------------------------------------------------------------------ |
+| `html-webpack-inline-source-plugin` | [`output.html.inline`](#inlining-critical-chunks)                        |
+| `webpack-subresource-integrity`     | [`output.html.integrity`](#subresource-integrity-and-csp)                |
+| `csp-html-webpack-plugin`           | [`output.html.csp`](#subresource-integrity-and-csp)                      |
+| `preload-webpack-plugin`            | [`output.resourceHints`](#resource-hints)                                |
+| `favicons-webpack-plugin`           | [`output.html.favicon` / `manifest`](#favicons-and-the-web-app-manifest) |
+
+### Without a template
+
+**Before**
+
+```js
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+export default {
+  entry: { main: "./src/main.js" },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: "My App",
+      scriptLoading: "defer",
+      favicon: "./src/favicon.png",
+      meta: { viewport: "width=device-width, initial-scale=1" },
+    }),
+  ],
+};
+```
+
+**After**
+
+```js
+export default {
+  entry: { main: "./src/main.js" },
+  experiments: { html: true },
+  output: {
+    html: {
+      title: "My App",
+      scriptLoading: "defer",
+      favicon: "./src/favicon.png",
+      meta: { viewport: "width=device-width, initial-scale=1" },
+    },
+  },
+};
+```
+
+### With a template
+
+A template that only listed your bundles becomes the entry itself — write the `<script>` and `<link>` tags you actually want, pointing at your source files, and webpack rewrites them to the built assets:
+
+**Before**
+
+```js
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+export default {
+  entry: { main: "./src/main.js" },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html",
+    }),
+  ],
+};
+```
+
+```html
+<!-- src/index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- html-webpack-plugin injected the script here -->
+  </body>
+</html>
+```
+
+**After**
+
+```js
+export default {
+  entry: { index: "./src/index.html" },
+  experiments: { html: true, css: true },
+};
+```
+
+```html
+<!-- src/index.html -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>My App</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
+```
+
+The page now says what it loads, so the `entry` list and the template no longer have to agree.
+
+T> Prefer to keep the JavaScript entry and have webpack inject into your existing template? Keep `output.html: true` and use [`module.parser.html.template`](#templating) to wrap the generated document — it receives the synthesized HTML and returns whatever should be parsed.
+
+### Multi-page application
+
+Instead of one plugin instance per page, use one entry per page:
+
+**Before**
+
+```js
+import HtmlWebpackPlugin from "html-webpack-plugin";
+
+export default {
+  entry: { home: "./src/home.js", about: "./src/about.js" },
+  plugins: [
+    new HtmlWebpackPlugin({ filename: "home.html", chunks: ["home"] }),
+    new HtmlWebpackPlugin({ filename: "about.html", chunks: ["about"] }),
+  ],
+};
+```
+
+**After**
+
+```js
+export default {
+  entry: {
+    home: "./src/home.html",
+    about: "./src/about.html",
+  },
+  output: {
+    htmlFilename: "[name].html",
+  },
+  experiments: { html: true, css: true },
+};
+```
+
+Each page pulls in exactly the chunks it references, so `chunks` / `excludeChunks` have nothing left to do. The same works with generated pages — `output.html: true` plus one JavaScript entry per page.
+
+## All options with examples
+
+HTML is configured in four places: the [parser](#parser-options) and [generator](#generator-options) under `module`, the [output options](#output-options) that describe the emitted page, and the [minimizer](#minifier-options) options under `optimization`. The tables below list every option, with the reference entry linked from each name.
+
+### Parser options
+
+Set them globally under `module.parser.html`, or per rule with `parser` on a rule whose `type` is `html`.
+
+| Option                                                        | Type                                     | Default      | Description                                                         |
+| ------------------------------------------------------------- | ---------------------------------------- | ------------ | ------------------------------------------------------------------- |
+| [`sources`](/configuration/module/#moduleparserhtmlsources)   | `boolean \| Array<'...' \| SourceEntry>` | `true`       | Which attribute values are treated as URLs and how each is bundled. |
+| [`as`](/configuration/module/#moduleparserhtmlas)             | `'document' \| string`                   | `'document'` | Parse a full page, or the named element's inner HTML (a fragment).  |
+| [`urlHints`](/configuration/module/#moduleparserhtmlurlhints) | `UrlHintRule[]`                          | `[]`         | Default resource-hint rules for the assets this parser references.  |
+| [`template`](/configuration/module/#moduleparserhtmltemplate) | `(source, context) => string`            | —            | Transform the HTML source before dependencies are extracted.        |
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    parser: {
+      html: {
+        sources: true,
+        as: "document",
+        urlHints: [{ test: /\.woff2$/, preload: true, as: "font" }],
+        template: (source) => source.replaceAll("{{title}}", "My App"),
+      },
+    },
+  },
+};
+```
+
+#### Source entries
+
+Each entry in the `sources` array is either the string `"..."` (inline the built-in defaults) or an object:
+
+| Field       | Type                                                          | Required | Description                                                    |
+| ----------- | ------------------------------------------------------------- | -------- | -------------------------------------------------------------- |
+| `attribute` | `string`                                                      | yes      | The attribute whose value is a URL.                            |
+| `type`      | see [source types](#source-types), or `false`                 | yes      | How the value is parsed and bundled; `false` drops a built-in. |
+| `tag`       | `string`                                                      | no       | Tag name to match. Omit to match any element.                  |
+| `filter`    | `(attributes: Map<string, string>, value: string) => boolean` | no       | Return `false` to skip this entry for a given element.         |
+
+An array without `"..."` opts out of the built-in list entirely. Inline `<script>` and `<style>` bodies are processed whatever `sources` says; only `sources: false` turns URL extraction off completely.
+
+#### Source types
+
+| `type`                       | What the value is                    | How it is bundled                                                  |
+| ---------------------------- | ------------------------------------ | ------------------------------------------------------------------ |
+| `src`                        | one URL                              | Plain asset (`<img src>`)                                          |
+| `srcset`                     | a `srcset` candidate list            | Each URL as a plain asset                                          |
+| `css-url`                    | a CSS value containing `url(...)`    | Each reference as a plain asset (an SVG presentation attribute)    |
+| `script`                     | a URL                                | Classic chunk entry, like `<script src>`                           |
+| `script-module`              | a URL                                | ES module chunk entry, like `<script type="module" src>`           |
+| `stylesheet`                 | a URL                                | CSS chunk entry, like `<link rel="stylesheet">`                    |
+| `html`                       | a URL                                | Another page, bundled and emitted; the attribute gets its filename |
+| `stylesheet-style`           | a full stylesheet                    | CSS pipeline; the processed CSS replaces the attribute's content   |
+| `stylesheet-style-attribute` | a declaration list (like `style=""`) | CSS pipeline, as a block's contents                                |
+| `srcdoc`                     | an entity-encoded HTML document      | HTML pipeline; the processed HTML replaces the attribute's content |
+| `false`                      | —                                    | Disables a built-in source for that `tag` / `attribute` pair       |
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true, css: true },
+  module: {
+    parser: {
+      html: {
+        sources: [
+          "...",
+          { tag: "img", attribute: "data-src", type: "src" },
+          { tag: "img", attribute: "data-srcset", type: "srcset" },
+          { tag: "a", attribute: "href", type: "html" },
+          { tag: "my-widget", attribute: "styles", type: "stylesheet-style" },
+          {
+            tag: "my-widget",
+            attribute: "css",
+            type: "stylesheet-style-attribute",
+          },
+          { tag: "template", attribute: "data-html", type: "srcdoc" },
+          { tag: "circle", attribute: "fill", type: "css-url" },
+          { attribute: "data-worker", type: "script-module" },
+          // Keep the defaults but stop treating `<img src>` as a URL.
+          { tag: "img", attribute: "src", type: false },
+        ],
+      },
+    },
+  },
+};
+```
+
+### Generator options
+
+| Option                                                         | Type                  | Default                                        | Description                                                                |
+| -------------------------------------------------------------- | --------------------- | ---------------------------------------------- | -------------------------------------------------------------------------- |
+| [`extract`](/configuration/module/#modulegeneratorhtmlextract) | `boolean \| 'inline'` | `true` for HTML entries, `false` when imported | Whether the processed HTML is emitted as a standalone `.html` output file. |
+
+`'inline'` processes the HTML and hands it back for write-back into the document that holds it — what an `<iframe srcdoc>` needs — without emitting a file of its own.
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    rules: [
+      // A partial imported from JS: string only, no file.
+      {
+        test: /\.partial\.html$/i,
+        type: "html",
+        generator: { extract: false },
+      },
+      // A page imported from JS that should still be emitted.
+      {
+        test: /\.page\.html$/i,
+        type: "html",
+        generator: { extract: true },
+      },
+    ],
+  },
+};
+```
+
+### Output options
+
+Everything under [`output.html`](/configuration/output/#outputhtml) describes the page webpack generates for a JavaScript entrypoint. Authored pages keep their own markup — of these, only `inject`, `inline`, `scriptLoading` and `integrity` affect what is injected into them.
+
+| Option                                                                       | Type                                         | Default                                  | Description                                                |
+| ---------------------------------------------------------------------------- | -------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------- |
+| [`title`](/configuration/output/#outputhtmltitle)                            | `string`                                     | —                                        | The page `<title>`. Skipped when the page has one.         |
+| [`meta`](/configuration/output/#outputhtmlmeta)                              | `object`                                     | —                                        | `<meta>` tags; `charset` and `og:` keys are special-cased. |
+| [`base`](/configuration/output/#outputhtmlbase)                              | `string \| { href, target }`                 | —                                        | A `<base>` element. Skipped when the page has one.         |
+| [`inject`](/configuration/output/#outputhtmlinject)                          | `'body' \| 'head' \| false`                  | `'body'` (`'head'` with `output.module`) | Where injected chunk tags go.                              |
+| [`scriptLoading`](/configuration/output/#outputhtmlscriptloading)            | `'auto' \| 'defer' \| 'blocking'`            | `'auto'`                                 | How injected `<script>` tags load.                         |
+| [`inline`](/configuration/output/#outputhtmlinline)                          | `boolean \| 'script' \| 'style' \| RegExp[]` | `false`                                  | Inline matching chunks into the page.                      |
+| [`favicon`](/configuration/output/#outputhtmlfavicon)                        | `boolean \| string \| object \| function`    | `false`                                  | Icon `<link>`s; every icon is emitted as a hashed asset.   |
+| [`manifest`](/configuration/output/#outputhtmlmanifest)                      | `false \| string \| object \| function`      | `false`                                  | A web app manifest to link, or to serialize and emit.      |
+| [`integrity`](/configuration/output/#outputhtmlintegrity)                    | `boolean \| string[] \| function`            | `false`                                  | Subresource Integrity attributes on injected tags.         |
+| [`csp`](/configuration/output/#outputhtmlcsp)                                | `boolean \| { policy, hashFunction, nonce }` | `false`                                  | A `<meta http-equiv="Content-Security-Policy">`.           |
+| [`output.htmlFilename`](/configuration/output/#outputhtmlfilename)           | `string \| function`                         | `output.filename` with `.html`           | Filename template for initial pages.                       |
+| [`output.htmlChunkFilename`](/configuration/output/#outputhtmlchunkfilename) | `string \| function`                         | `output.chunkFilename` with `.html`      | Filename template for on-demand pages.                     |
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: { main: "./src/main.js" },
+  experiments: { html: true, css: true },
+  output: {
+    htmlFilename: "[name].html",
+    htmlChunkFilename: "pages/[name].[contenthash].html",
+    crossOriginLoading: "anonymous",
+    html: {
+      title: "My App",
+      meta: { viewport: "width=device-width, initial-scale=1" },
+      base: { href: "/app/", target: "_self" },
+      inject: "head",
+      scriptLoading: "defer",
+      inline: [/^runtime/],
+      favicon: { icon: "./src/favicon.svg" },
+      manifest: { name: "My App", short_name: "App" },
+      integrity: ["sha384"],
+      csp: { policy: { "img-src": ["'self'", "data:"] } },
+    },
+  },
+};
+```
+
+The `favicon`, `manifest` and `integrity` options also take a function, which is how a multi-page build varies them per page or per asset:
+
+```js
+export default {
+  experiments: { html: true },
+  output: {
+    html: {
+      favicon: (name) => `./src/icons/${name}.svg`,
+      manifest: (name) => (name === "app" ? "./src/app.webmanifest" : false),
+      // Skip SRI for the chunks a CDN rewrites.
+      integrity: ({ filename }) =>
+        filename.startsWith("vendor/") ? false : ["sha384"],
+    },
+  },
+};
+```
+
+Per-entry overrides use the [entry descriptor](/configuration/entry-context/#entry-descriptor) `html` option, which takes the same values and merges over `output.html` option by option:
+
+```js
+export default {
+  entry: {
+    app: "./src/app.js",
+    admin: { import: "./src/admin.js", html: { title: "Admin", csp: true } },
+    worker: { import: "./src/worker.js", html: false },
+  },
+  output: { html: { title: "My App" } },
+  experiments: { html: true },
+};
+```
+
+T> `inline` is resolved once per generated page, so it can only be set on `output.html`.
+
+### Resource-hint options
+
+[`output.resourceHints`](/configuration/output/#outputresourcehints) accepts the `initial` value directly as a shorthand, or the full object:
+
+| Option                  | Type                                                                             | Default                                 | Description                                                                   |
+| ----------------------- | -------------------------------------------------------------------------------- | --------------------------------------- | ----------------------------------------------------------------------------- |
+| `initial`               | `boolean \| 'preload' \| 'prefetch' \| 'none' \| HtmlResourceHint[] \| function` | `true` for ESM output, else `false`     | Hints for the entry's initial dependency chunks.                              |
+| `urlHints`              | `UrlHintRule[]`                                                                  | `[]`                                    | Project-wide rules for URL-referenced assets, applied to every parser.        |
+| `preconnect`            | `boolean`                                                                        | `false`                                 | Preconnect to a cross-origin `output.publicPath` origin.                      |
+| `dedupe`                | `boolean`                                                                        | `false`                                 | Skip a runtime-injected prefetch for a chunk the document already hints.      |
+| `modulePreloadPolyfill` | `boolean`                                                                        | from `output.environment.modulePreload` | Inject the inline `<link rel="modulepreload">` polyfill into extracted pages. |
+| `manifest`              | `string`                                                                         | —                                       | Emit the resolved hints per entrypoint as a JSON asset at this path.          |
+
+`'none'` is the hard off switch — no `<link>` anywhere, and empty stats and manifest. `false` only disables the chunk hints, leaving `urlHints` and magic comments working.
+
+Each descriptor in an `initial` array (and in `output.resourceHints` used as an array) is an `HtmlResourceHint`:
+
+| Field           | Type                                                                           | Description                                                          |
+| --------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| `rel`           | `'preload' \| 'prefetch' \| 'modulepreload' \| 'preconnect' \| 'dns-prefetch'` | Required — the hint's `rel`.                                         |
+| `href`          | `string`                                                                       | A literal URL, used verbatim.                                        |
+| `chunk`         | `string`                                                                       | A chunk name; its emitted URL is resolved for you.                   |
+| `entry`         | `string`                                                                       | An entrypoint name; expands to one hint per initial chunk.           |
+| `as`            | `string`                                                                       | The `as` attribute; defaults to `script` for chunk/entry references. |
+| `type`          | `string`                                                                       | The MIME type.                                                       |
+| `media`         | `string`                                                                       | The `media` attribute.                                               |
+| `crossorigin`   | `boolean \| 'anonymous' \| 'use-credentials'`                                  | CORS mode; `true` means `anonymous`.                                 |
+| `fetchPriority` | `'low' \| 'high' \| 'auto'`                                                    | The `fetchpriority` attribute.                                       |
+| `integrity`     | `boolean`                                                                      | Follows `output.html.integrity`; `false` opts this hint out.         |
+
+Exactly one of `href` / `chunk` / `entry` names the target; a descriptor that resolves to nothing is dropped silently.
+
+A `UrlHintRule` — used by `output.resourceHints.urlHints` and by every parser's `urlHints` — matches assets by request and sets what a magic comment would:
+
+| Field                          | Type                                 | Description                                                              |
+| ------------------------------ | ------------------------------------ | ------------------------------------------------------------------------ |
+| `test` / `include` / `exclude` | `RuleSetCondition`                   | Matched against the asset's request. Omit all three to match everything. |
+| `preload` / `prefetch`         | `boolean`                            | Which hint to emit for matching assets.                                  |
+| `as`, `type`, `media`          | `string`                             | Attributes for the emitted `<link>`.                                     |
+| `fetchPriority`                | `'low' \| 'high' \| 'auto' \| false` | The `fetchpriority` attribute.                                           |
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true, outputModule: true },
+  output: {
+    module: true,
+    resourceHints: {
+      initial: true,
+      preconnect: true,
+      dedupe: true,
+      modulePreloadPolyfill: false,
+      manifest: "resource-hints.json",
+      urlHints: [
+        { test: /\.woff2$/, preload: true, as: "font", type: "font/woff2" },
+        {
+          include: /\/hero\//,
+          preload: true,
+          as: "image",
+          media: "(min-width: 800px)",
+        },
+        {
+          test: /\.png$/,
+          exclude: /\/hero\//,
+          prefetch: true,
+          fetchPriority: "low",
+        },
+      ],
+    },
+  },
+};
+```
+
+An explicit magic comment always beats a rule, and a rule beats the defaults. The resolved list for each entrypoint is readable from [`stats`](/configuration/stats/) as `entrypoints[name].resourceHints`, which is what the `manifest` asset serializes for a server-side renderer.
+
+### Minifier options
+
+Every option of [`optimization.minimize.html`](/configuration/optimization/#optimizationminimizehtml), grouped by whether it is on by default. The ones that are off change what a script, a selector or a byte-for-byte comparison reads back, so they are opt-in.
+
+**On by default**
+
+| Option                          | Type                                                         | Default   | Description                                                                  |
+| ------------------------------- | ------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------- |
+| `collapseBooleanAttributes`     | `boolean`                                                    | `true`    | `disabled="disabled"` becomes the bare name.                                 |
+| `collapseWhitespace`            | `boolean \| 'conservative' \| 'smart' \| 'all'`              | `true`    | Collapse whitespace runs; `pre` / `textarea` / `listing` are left alone.     |
+| `comments`                      | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'`  | Which comments survive — `'some'` keeps none, since HTML comments are inert. |
+| `minifyJson`                    | `boolean`                                                    | `true`    | Strip whitespace in a JSON `<script>`, copying literals byte for byte.       |
+| `minifyStyles`                  | `boolean`                                                    | `true`    | Run the CSS minimizer over inline `<style>` and `style=""`.                  |
+| `normalizeAttributeQuotes`      | `boolean`                                                    | `true`    | Use whichever delimiters cost least.                                         |
+| `normalizeEnumeratedAttributes` | `boolean`                                                    | `true`    | Fold an enumerated value to the keyword it names.                            |
+| `normalizeListAttributes`       | `boolean`                                                    | `true`    | Normalize list-shaped values (`class`, `rel`, `srcset`, viewport `content`). |
+| `normalizeNumericAttributes`    | `boolean`                                                    | `true`    | Write an integer attribute the one way its rules read it.                    |
+| `removeImpliedTags`             | `boolean \| 'smart' \| 'all'`                                | `'smart'` | How much of the `<html>` / `<head>` / `<body>` shell may be implied.         |
+| `removeOptionalTags`            | `boolean`                                                    | `true`    | Leave out other tags the parser can imply.                                   |
+
+**Off by default**
+
+| Option                      | Type                          | Default | Why it is opt-in                                                              |
+| --------------------------- | ----------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `mergeStyles`               | `boolean`                     | `false` | Removes elements, so `document.styleSheets` and `style:nth-child()` differ.   |
+| `minifyConditionalComments` | `boolean`                     | `false` | The body is minified as if it started a document, not where the comment sits. |
+| `minifySrcdoc`              | `boolean`                     | `false` | A consumer comparing `iframe.srcdoc` byte for byte sees it change.            |
+| `removeEmptyAttributes`     | `boolean`                     | `false` | An attribute selector matches on presence, so `[class]` stops matching.       |
+| `removeEmptyElements`       | `boolean`                     | `false` | CSS the minifier cannot see may give an empty element a size or a `::before`. |
+| `removeRedundantAttributes` | `boolean \| 'smart' \| 'all'` | `false` | Dropping an attribute changes `getAttribute` and attribute selectors.         |
+| `sortAttributes`            | `boolean`                     | `false` | A script reading `element.attributes` back sees the new order.                |
+| `sortTokenLists`            | `boolean`                     | `false` | A script reading `className` or `rel` back sees the new order.                |
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  experiments: { html: true, css: true },
+  optimization: {
+    minimize: {
+      html: {
+        collapseWhitespace: "smart",
+        comments: /^!/,
+        removeImpliedTags: "all",
+        removeRedundantAttributes: "smart",
+        removeEmptyAttributes: true,
+        removeEmptyElements: true,
+        mergeStyles: true,
+        minifySrcdoc: true,
+        sortAttributes: true,
+        sortTokenLists: true,
+      },
+    },
+  },
+};
+```
+
+T> A `comments` predicate runs in the minimizer's worker pool and is passed to it as source, so it must not close over anything outside itself.
+
+### Magic comments
+
+An HTML comment placed immediately before a tag configures that tag alone:
+
+| Comment                                 | Effect                                                             |
+| --------------------------------------- | ------------------------------------------------------------------ |
+| `<!-- webpackIgnore: true -->`          | Leave the tag's URLs untouched.                                    |
+| `<!-- webpackInline: true -->`          | Inline the referenced chunk into the page (`false` opts back out). |
+| `<!-- webpackPreload: true -->`         | Set the next referenced asset's hint to `preload`.                 |
+| `<!-- webpackPrefetch: true -->`        | Set it to `prefetch`.                                              |
+| `<!-- webpackFetchPriority: "high" -->` | Set the hint's `fetchpriority`.                                    |
+
+The hint comments set the same fields a [`urlHints`](#resource-hint-options) rule would and win over one. The resolved hints for each entrypoint are emitted as `<link>` tags in the extracted page's `<head>` and exposed through `stats.entrypoints[name].resourceHints`.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- webpackPreload: true -->
+    <link rel="stylesheet" href="./critical.css" />
+  </head>
+  <body>
+    <!-- webpackIgnore: true -->
+    <script src="https://cdn.example.com/analytics.js"></script>
+
+    <!-- webpackInline: true -->
+    <script src="./bootstrap.js"></script>
+
+    <!-- webpackPrefetch: true -->
+    <!-- webpackFetchPriority: "low" -->
+    <img src="./below-the-fold.avif" alt="" />
+  </body>
+</html>
+```
+
+## Popular examples
+
+### Single-page app with hashed assets
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  entry: "./src/index.html",
+  output: {
+    filename: "js/[name].[contenthash].js",
+    cssFilename: "css/[name].[contenthash].css",
+    assetModuleFilename: "assets/[name].[contenthash][ext]",
+    htmlFilename: "[name].html",
+    clean: true,
+  },
+  experiments: { html: true, css: true },
+};
+```
+
+### Inline the runtime chunk
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  entry: { main: "./src/main.js" },
+  optimization: { runtimeChunk: "single" },
+  output: {
+    html: {
+      inline: [/^runtime/],
+    },
+  },
+  experiments: { html: true, css: true },
+};
+```
+
+Inlining the runtime removes one blocking request; `inline: 'style'` does the same for every CSS chunk.
+
+### A page per locale
+
+**webpack.config.js**
+
+```js
+import { fileURLToPath } from "node:url";
+
+const locales = ["en", "de", "fr"];
+const greetings = { en: "Hello", de: "Hallo", fr: "Bonjour" };
+
+export default locales.map((locale) => ({
+  name: locale,
+  entry: { [locale]: "./src/index.html" },
+  output: {
+    path: fileURLToPath(new URL(`./dist/${locale}`, import.meta.url)),
+    htmlFilename: "index.html",
+  },
+  module: {
+    parser: {
+      html: {
+        template: (source) =>
+          source
+            .replaceAll("{{lang}}", locale)
+            .replaceAll("{{greeting}}", greetings[locale]),
+      },
+    },
+  },
+  experiments: { html: true, css: true },
+}));
+```
+
+### Strict CSP with hashed inline scripts
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  entry: "./src/index.html",
+  output: {
+    crossOriginLoading: "anonymous",
+    html: {
+      integrity: true,
+      csp: true,
+    },
+  },
+  experiments: { html: true, css: true },
+};
+```
+
+`csp: true` writes a strict baseline (`script-src 'self'`, `style-src 'self'`, `object-src 'none'`, `base-uri 'self'`) and appends a `sha256` hash for each inline `<script>` / `<style>` so your own inline code keeps running.
+
+### An installable PWA
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: { main: "./src/main.js" },
+  output: {
+    html: {
+      title: "My App",
+      meta: { viewport: "width=device-width, initial-scale=1" },
+      favicon: "./src/icon.svg",
+      manifest: {
+        name: "My App",
+        short_name: "App",
+        start_url: "/",
+        display: "standalone",
+        background_color: "#ffffff",
+        icons: [
+          { src: "./src/icon-192.png", sizes: "192x192" },
+          { src: "./src/icon-512.png", sizes: "512x512" },
+        ],
+      },
+    },
+  },
+  experiments: { html: true },
+};
+```
+
+See [Progressive Web Application](/guides/progressive-web-application/) for the service worker half.
+
+### HTML partials rendered at runtime
+
+**src/index.js**
+
+```js
+import card from "./card.partial.html";
+
+document.querySelector("#list").insertAdjacentHTML("beforeend", card);
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { html: true },
+  module: {
+    rules: [
+      {
+        test: /\.partial\.html$/i,
+        type: "html",
+        parser: { as: "template" },
+        generator: { extract: false },
+      },
+    ],
+  },
+};
+```
+
+### Lazy-loaded page fragments
+
+```js
+const template = await import("./modal.partial.html");
+
+document.body.insertAdjacentHTML("beforeend", template.default);
+```
+
+The fragment's own `<img>` and inline `<style>` are bundled and resolved just like a static import's, and only fetched when the dynamic import runs.
+
+### Development server
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "development",
+  entry: "./src/index.html",
+  devServer: {
+    hot: true,
+  },
+  experiments: { html: true, css: true },
+};
+```
+
+The emitted page is served from the build output, so there is no template to keep in sync with a static `index.html`, and edits to the page, its styles and its scripts are all hot-applied.
+
+## Limitations
+
+`experiments.html` is explicitly opt-in — test it before a broad rollout.
+
+- APIs and behavior may still evolve before the webpack v6 defaults.
+- Full parity with `html-webpack-plugin` is still in progress; `chunksSortMode`, `xhtml`, `showErrors` and `cache` have no equivalent, and template-engine loaders (`pug-loader`, `ejs-loader`, …) are replaced by the synchronous [`template`](#templating) hook rather than being reused as-is.
+- `html-loader`'s `sources.scriptingEnabled` (parsing `<noscript>` content as markup) has no native switch.
+- [Module concatenation](/configuration/optimization/#optimizationconcatenatemodules) is disabled for HTML modules while HMR is active, because each module needs its own `module.hot` scope.
+
+## Further reading
+
+- [`experiments.html`](/configuration/experiments/#experimentshtml) — the flag and everything it unlocks
+- [`output.html`](/configuration/output/#outputhtml) — every generated-page option
+- [`module.parser.html`](/configuration/module/#moduleparserhtml) — parser options
+- [`module.generator.html.extract`](/configuration/module/#modulegeneratorhtmlextract) — when a page is emitted
+- [Native CSS](/guides/native-css/) — the CSS half of the same effort

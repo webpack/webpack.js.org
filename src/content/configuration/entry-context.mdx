@@ -96,6 +96,22 @@ export default {
 
 Descriptor syntax might be used to pass additional options to an entry point.
 
+The `html` option <Badge text="5.108.0+" /> generates an HTML file for this entrypoint with its JS and CSS output chunks injected. It accepts the same values as [`output.html`](/configuration/output/#outputhtml) and overrides it option by option for this entry, so a single entry can opt out of page generation or change just its title:
+
+```js
+export default {
+  entry: {
+    app: "./src/app.js",
+    admin: { import: "./src/admin.js", html: { title: "Admin" } },
+    worker: { import: "./src/worker.js", html: false },
+  },
+  output: { html: true },
+  experiments: { html: true },
+};
+```
+
+T> [`output.html.inline`](/configuration/output/#outputhtmlinline) is resolved once per generated page and can only be set on `output.html`.
+
 T> The `worker` flag (added in webpack 5.108.0) marks an entry as a worker so its output file uses [`output.workerChunkFilename`](/configuration/output/#outputworkerchunkfilename) instead of the regular chunk filename. webpack sets it automatically for entries it creates from `new Worker(new URL(...))`, so you rarely set it by hand.
 
 ### Output filename

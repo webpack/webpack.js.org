@@ -2422,7 +2422,7 @@ Starting with webpack 5.87.0 falsy values such as `undefined` `null` can be used
 
 `Rule.use` can be an array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
-Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'style-loader '} ]`).
+Passing a string (i.e. `use: [ 'sass-loader' ]`) is a shortcut to the loader property (i.e. `use: [ { loader: 'sass-loader '} ]`).
 
 Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
 
@@ -2436,13 +2436,7 @@ export default {
       {
         // ...
         use: [
-          "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-            },
-          },
+          "postcss-loader",
           {
             loader: "less-loader",
             options: {
@@ -2450,6 +2444,7 @@ export default {
             },
           },
         ],
+        type: "css/auto",
       },
     ],
   },
@@ -2467,7 +2462,7 @@ The `info` object parameter has the following fields:
 - `realResource`: Always the path to the module being loaded
 - `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
 
-The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
+The same shortcut as an array can be used for the return value (i.e. `use: [ 'sass-loader' ]`).
 
 **webpack.config.js**
 

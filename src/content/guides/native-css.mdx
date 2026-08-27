@@ -1,8 +1,10 @@
 ---
 title: Native CSS
+description: Bundle CSS with webpack's built-in support, and migrate off css-loader, style-loader and mini-css-extract-plugin.
 sort: 27
 contributors:
   - phoekerson
+  - alexander-akait
 ---
 
 This guide shows how to use webpack's native CSS handling with `experiments.css`, and how to migrate an existing setup off `css-loader`, `style-loader`, and `mini-css-extract-plugin`.
@@ -23,7 +25,9 @@ export default {
 };
 ```
 
-With this option enabled, webpack understands `.css` files as first-class modules — parsing `@import` and `url()`, extracting stylesheets, generating content hashes, and supporting CSS Modules — without `css-loader`, `style-loader`, or `mini-css-extract-plugin`.
+With this option enabled, webpack understands `.css` files as first-class modules — parsing `@import` and `url()`, extracting stylesheets, generating content hashes, minifying, and supporting CSS Modules — without `css-loader`, `style-loader`, `mini-css-extract-plugin`, or `css-minimizer-webpack-plugin`.
+
+T> Since webpack 5.109.0 the option defaults to `'auto'`: built-in CSS support turns on unless a [`module.rules`](/configuration/module/#modulerules) entry with a loader (or an explicit module type) already matches `.css` files. An existing `css-loader` setup therefore keeps working untouched, and you can migrate one rule at a time. Set it to `true` to force the native support, or `false` to switch it off.
 
 ## Importing CSS
 
@@ -184,6 +188,141 @@ export default {
 };
 ```
 
+## Custom media and custom selectors
+
+Native CSS resolves `@custom-media` and `@custom-selector` at build time, so the two rules people most often reach for a PostCSS plugin for need no plugin:
+
+**src/styles.css**
+
+```css
+@custom-media --narrow (width <= 40rem);
+@custom-selector :--heading h1, h2, h3;
+
+@media (--narrow) {
+  :--heading {
+    font-size: 1.25rem;
+  }
+}
+```
+
+Resolution is file-local — a definition applies to the file that declares it (and to what that file `@import`s) rather than to the whole project. Both are on by default and can be switched off individually with [`module.parser.css.customMedia`](/configuration/module/#moduleparsercsscustommedia) and [`module.parser.css.customSelectors`](/configuration/module/#moduleparsercsscustomselectors), which is what you want if a PostCSS plugin in your chain already handles them.
+
+## Minification
+
+CSS assets are minified by the built-in minimizer whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  experiments: { css: true },
+};
+```
+
+That replaces `css-minimizer-webpack-plugin` and the `cssnano` chain behind it. Every transform that preserves what the stylesheet means is on by default — shortening colors, numbers, values and selectors, merging longhands and rules, dropping dead rules, folding `calc()` and other math over constants, normalizing quotes, and writing media queries in their range spelling. Two are off because they change text a script can read back (`rewriteCustomProperties`) or rarely pay for themselves once compressed (`convertLengthUnits`).
+
+Configure them through the object form of `optimization.minimize`:
+
+```js
+export default {
+  mode: "production",
+  experiments: { css: true },
+  optimization: {
+    minimize: {
+      css: {
+        comments: false,
+        // `getComputedStyle().getPropertyValue()` hands custom property text
+        // back as authored — opt in only if nothing reads it.
+        rewriteCustomProperties: true,
+      },
+    },
+  },
+};
+```
+
+Disable CSS minification alone with `minimize: { css: false }`, leaving JavaScript minification in place.
+
+### Vendor prefixes
+
+The minimizer maintains vendor prefixes for your [browserslist](https://github.com/browserslist/browserslist) target: it adds the `-webkit-` / `-moz-` / `-ms-` spelling of a property, at-rule or pseudo-selector a selected browser still needs, and drops the ones none of them do. For most projects that is `autoprefixer` — and so `postcss-loader` — off the dependency list:
+
+**.browserslistrc**
+
+```text
+> 0.5%
+last 2 versions
+not dead
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  target: "browserslist",
+  experiments: { css: true },
+};
+```
+
+T> Prefixing is only in effect for a `browserslist` [target](/configuration/target/) — any other target names no browsers to prefix for. Turn it off with `optimization.minimize.css.vendorPrefixes: false` when a PostCSS chain already does it.
+
+## Resource hints and font preloading
+
+Assets referenced from CSS can be given `<link rel="preload">` / `prefetch` hints without a plugin. [`module.parser.css.fontPreload`](/configuration/module/#moduleparsercssfontpreload) seeds one preload for each `@font-face` reachable from an HTML entry's initial CSS — the primary `src` URL only, since preloading every format would download the font twice:
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true, html: true },
+  output: {
+    // A preload must match the font's CORS fetch.
+    crossOriginLoading: "anonymous",
+  },
+  module: {
+    parser: {
+      css: {
+        fontPreload: true,
+      },
+    },
+  },
+};
+```
+
+[`module.parser.css.urlHints`](/configuration/module/#moduleparsercssurlhints) gives per-asset rules for anything else reached through `url(...)`, and [`output.resourceHints`](/configuration/output/#outputresourcehints) sets them project-wide:
+
+```js
+export default {
+  experiments: { css: true, html: true },
+  module: {
+    parser: {
+      css: {
+        urlHints: [
+          { test: /\.woff2$/, preload: true, as: "font" },
+          { test: /hero\.avif$/, preload: true, as: "image" },
+        ],
+      },
+    },
+  },
+};
+```
+
+## CSS referenced from HTML
+
+With [`experiments.html`](/configuration/experiments/#experimentshtml) enabled, a `<link rel="stylesheet">` in an HTML page becomes a CSS chunk entry and inline `<style>` bodies (and `style=""` attributes) run through this same CSS pipeline — `@import` and `url()` inside them resolve relative to the HTML file, and the minimizer options above apply to them too:
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: "./src/index.html",
+  experiments: { css: true, html: true },
+};
+```
+
+See the [Native HTML](/guides/native-html/) guide for the whole HTML story.
+
 ## Migration Guide
 
 ### Automated migration (codemod)
@@ -213,6 +352,10 @@ It requires webpack 5.109.0 or later, since it relies on the [`experiments.css: 
 | `css-loader` `modules.exportOnlyLocals`                   | generator `exportsOnly`                                                                                                                               |
 | `css-loader` `esModule`                                   | generator `esModule` (default `true`)                                                                                                                 |
 | `css-loader` `exportType: 'string'` / `'css-style-sheet'` | [`exportType: "text"` / `"css-style-sheet"`](#output-modes-exporttype)                                                                                |
+| `css-minimizer-webpack-plugin` / `cssnano`                | [`optimization.minimize`](#minification) — on by default in production                                                                                |
+| `postcss-loader` + `autoprefixer`                         | [`optimization.minimize.css.vendorPrefixes`](#vendor-prefixes) — on by default for a `browserslist` target                                            |
+| `postcss-custom-media` / `postcss-custom-selectors`       | [built-in `@custom-media` / `@custom-selector`](#custom-media-and-custom-selectors)                                                                   |
+| `preload-webpack-plugin` (fonts)                          | [`module.parser.css.fontPreload`](#resource-hints-and-font-preloading)                                                                                |
 
 Migrate one loader at a time — the sections below go in the order that keeps the build green at each step.
 
@@ -474,7 +617,28 @@ On a `node` target the CSS generator defaults to `exportsOnly: true`, so the ser
 
 T> Avoid the production default `localIdentName: "[fullhash]"` for SSR — the full compilation hash differs between the web and node builds, so class names won't line up. Pin a deterministic template (path- or `[local]`-based, optionally with a per-file `[hash]`) in both configs.
 
-### 8. Keep imports unchanged and validate
+### 8. Drop the CSS minimizer and `autoprefixer`
+
+`optimization.minimize` covers both in production, so the minimizer plugin and — for most projects — the PostCSS chain that only ran `autoprefixer` can go:
+
+**webpack.config.js**
+
+```diff
+-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+-
+ export default {
+   mode: "production",
++  target: "browserslist",
++  experiments: { css: true },
+-  optimization: {
+-    minimizer: ["...", new CssMinimizerPlugin()],
+-  },
+ };
+```
+
+See [Minification](#minification) for what the built-in minimizer does and how to tune it.
+
+### 9. Keep imports unchanged and validate
 
 Your JS imports stay the same:
 
@@ -495,22 +659,26 @@ Configure options per module type under [`module.parser`](/configuration/module/
 
 ### Parser options
 
-All boolean parser options below default to `true`.
+Boolean parser options default to `true` unless the table says otherwise.
 
-| Option                                                               | Type                                               | Default        | Description                                                                                        |
-| -------------------------------------------------------------------- | -------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------- |
-| [`import`](/configuration/module/#moduleparsercssimport)             | `boolean`                                          | `true`         | Handle `@import` at-rules.                                                                         |
-| [`url`](/configuration/module/#moduleparsercssurl)                   | `boolean`                                          | `true`         | Handle `url()` / `image-set()` / `src()` / `image()`.                                              |
-| [`namedExports`](/configuration/module/#moduleparsercssnamedexports) | `boolean`                                          | `true`         | Export CSS Modules locals as ES module named exports.                                              |
-| [`exportType`](/configuration/module/#moduleparsercssexporttype)     | `"link" \| "style" \| "text" \| "css-style-sheet"` | `"link"`       | How the CSS is emitted (see [Output modes](#output-modes-exporttype)).                             |
-| [`pure`](/configuration/module/#moduleparsercsspure)                 | `boolean`                                          | `false`        | Strict pure mode — every selector must contain a local class/id. `css/module` and `css/auto` only. |
-| [`as`](/configuration/module/#moduleparsercssas)                     | `"stylesheet" \| "block-contents"`                 | `"stylesheet"` | Parse the source as a full stylesheet or as a block's contents.                                    |
-| `animation`                                                          | `boolean`                                          | `true`         | Rename local `@keyframes` names.                                                                   |
-| `container`                                                          | `boolean`                                          | `true`         | Rename local `@container` names.                                                                   |
-| `customIdents`                                                       | `boolean`                                          | `true`         | Rename custom identifiers.                                                                         |
-| `dashedIdents`                                                       | `boolean`                                          | `true`         | Rename dashed identifiers (custom properties).                                                     |
-| `function`                                                           | `boolean`                                          | `true`         | Rename local `@function` names.                                                                    |
-| `grid`                                                               | `boolean`                                          | `true`         | Rename grid line/area identifiers.                                                                 |
+| Option                                                                     | Type                                               | Default        | Description                                                                                        |
+| -------------------------------------------------------------------------- | -------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------- |
+| [`import`](/configuration/module/#moduleparsercssimport)                   | `boolean`                                          | `true`         | Handle `@import` at-rules.                                                                         |
+| [`url`](/configuration/module/#moduleparsercssurl)                         | `boolean`                                          | `true`         | Handle `url()` / `image-set()` / `src()` / `image()`.                                              |
+| [`namedExports`](/configuration/module/#moduleparsercssnamedexports)       | `boolean`                                          | `true`         | Export CSS Modules locals as ES module named exports.                                              |
+| [`exportType`](/configuration/module/#moduleparsercssexporttype)           | `"link" \| "style" \| "text" \| "css-style-sheet"` | `"link"`       | How the CSS is emitted (see [Output modes](#output-modes-exporttype)).                             |
+| [`pure`](/configuration/module/#moduleparsercsspure)                       | `boolean`                                          | `false`        | Strict pure mode — every selector must contain a local class/id. `css/module` and `css/auto` only. |
+| [`as`](/configuration/module/#moduleparsercssas)                           | `"stylesheet" \| "block-contents"`                 | `"stylesheet"` | Parse the source as a full stylesheet or as a block's contents.                                    |
+| `animation`                                                                | `boolean`                                          | `true`         | Rename local `@keyframes` names.                                                                   |
+| `container`                                                                | `boolean`                                          | `true`         | Rename local `@container` names.                                                                   |
+| `customIdents`                                                             | `boolean`                                          | `true`         | Rename custom identifiers.                                                                         |
+| `dashedIdents`                                                             | `boolean`                                          | `true`         | Rename dashed identifiers (custom properties).                                                     |
+| `function`                                                                 | `boolean`                                          | `true`         | Rename local `@function` names.                                                                    |
+| `grid`                                                                     | `boolean`                                          | `true`         | Rename grid line/area identifiers.                                                                 |
+| [`customMedia`](/configuration/module/#moduleparsercsscustommedia)         | `boolean`                                          | `true`         | Resolve `@custom-media` at build time.                                                             |
+| [`customSelectors`](/configuration/module/#moduleparsercsscustomselectors) | `boolean`                                          | `true`         | Resolve `@custom-selector` at build time.                                                          |
+| [`fontPreload`](/configuration/module/#moduleparsercssfontpreload)         | `boolean`                                          | `false`        | Preload each `@font-face`'s primary `src` from an HTML entry.                                      |
+| [`urlHints`](/configuration/module/#moduleparsercssurlhints)               | `UrlHintRule[]`                                    | —              | Resource-hint rules for assets referenced via `url(...)`.                                          |
 
 ```js
 export default {
@@ -684,6 +852,127 @@ With the default `css/auto` rule, `*.module.css` is scoped and everything else i
 import "./reset.css"; // global
 import * as card from "./card.module.css"; // scoped
 ```
+
+### Tailwind CSS (or any PostCSS chain)
+
+Native CSS replaces the CSS loaders, not PostCSS. Keep `postcss-loader` and give the rule a CSS module type so webpack handles what comes out of it:
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["postcss-loader"],
+        type: "css/auto",
+      },
+    ],
+  },
+};
+```
+
+T> Setting `experiments.css: true` explicitly matters here: with the `'auto'` default, a rule that names a loader for `.css` files keeps the native support off for them.
+
+### Sass with CSS Modules
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.module\.s[ac]ss$/i,
+        use: ["sass-loader"],
+        type: "css/module",
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        exclude: /\.module\.s[ac]ss$/i,
+        use: ["sass-loader"],
+        type: "css/global",
+      },
+    ],
+  },
+};
+```
+
+### Group every stylesheet into one file
+
+By default CSS follows the chunk graph, so each entry gets its own stylesheet. A [cache group](/plugins/split-chunks-plugin/#splitchunkscachegroups) keyed on the CSS module type collects them all into one instead:
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  entry: { home: "./src/home.js", about: "./src/about.js" },
+  experiments: { css: true },
+  output: {
+    cssFilename: "css/[name].[contenthash].css",
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          type: "css/auto",
+          name: "styles",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
+};
+```
+
+### Theme switching with constructable stylesheets
+
+**src/index.js**
+
+```js
+import dark from "./theme-dark.css" with { type: "css" };
+import light from "./theme-light.css" with { type: "css" };
+
+const media = matchMedia("(prefers-color-scheme: dark)");
+const apply = () => {
+  document.adoptedStyleSheets = [media.matches ? dark : light];
+};
+
+media.addEventListener("change", apply);
+apply();
+```
+
+Each theme is a separate `CSSStyleSheet`, so swapping them costs no re-parse and no flash of unstyled content.
+
+### Development server with hot-reloaded styles
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "development",
+  experiments: { css: true },
+  devServer: {
+    hot: true,
+  },
+};
+```
+
+CSS changes are applied in place; there is no `style-loader` to configure and no separate HMR wiring.
+
+### Importing a package's stylesheet
+
+```css
+/* src/styles.css */
+@import "bootstrap";
+```
+
+Webpack looks for a `style` field in the package's `package.json` and falls back to `main`, so bare specifiers work in CSS the way they do in JavaScript.
 
 ## Experimental status & known limitations
 
