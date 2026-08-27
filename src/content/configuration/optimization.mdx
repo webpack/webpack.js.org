@@ -406,7 +406,7 @@ export default {
 
 ## optimization.minimize
 
-`boolean`
+`boolean` `object`
 
 Tell webpack to minimize the bundle using the [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
 
@@ -430,6 +430,111 @@ export default {
 ```
 
 T> Learn how [mode](/configuration/mode/) works.
+
+### Per-asset-type options
+
+<Badge text="5.110.0+" />
+
+An object enables minimizing and configures the built-in minimizer per asset type. An absent type is minimized with its defaults, and `false` disables minimizing that type alone:
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  optimization: {
+    minimize: {
+      javascript: {
+        /* handed to the JavaScript minimizer as-is */
+      },
+      css: {
+        comments: false,
+      },
+      html: false,
+    },
+  },
+};
+```
+
+#### optimization.minimize.css
+
+`false` `object`
+
+What the built-in CSS minimizer may do beyond the transforms that always apply. Every transform that preserves what the stylesheet means is on by default; the ones that change text a script can read back, or that rarely pay for themselves once the asset is compressed, are off until asked for.
+
+| Option                    | Type                                                         | Default  | Description                                                                                                                         |
+| ------------------------- | ------------------------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `comments`                | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'` | Which comments survive. `'some'` keeps a `/*!` banner and `@license` / `@preserve`; a pattern or predicate stands in for that rule. |
+| `mergeLonghands`          | `boolean`                                                    | `true`   | Write a family of longhands as the one shorthand that sets them.                                                                    |
+| `mergeRules`              | `boolean`                                                    | `true`   | Join rules nothing stands between, and fold at-rules sharing a prelude.                                                             |
+| `normalizeQuotes`         | `boolean`                                                    | `true`   | Use whichever quoting needs fewer escapes, and drop quotes where the value is still one token.                                      |
+| `reduceFunctions`         | `boolean`                                                    | `true`   | Compute `calc()` and other math over constants, identity transforms, implied gradient stops, and named easings.                     |
+| `removeDeadRules`         | `boolean`                                                    | `true`   | Drop a rule or declaration nothing can read.                                                                                        |
+| `shortenColors`           | `boolean`                                                    | `true`   | Write each color in the shortest spelling of the same value.                                                                        |
+| `shortenMediaQueries`     | `boolean`                                                    | `true`   | Write a media feature in its range spelling where the target reads one.                                                             |
+| `shortenNumbers`          | `boolean`                                                    | `true`   | Write each number in its shortest equal spelling.                                                                                   |
+| `shortenSelectors`        | `boolean`                                                    | `true`   | Rewrite a selector into an equal, shorter one.                                                                                      |
+| `shortenValues`           | `boolean`                                                    | `true`   | Write a value the shortest way its property's grammar allows.                                                                       |
+| `vendorPrefixes`          | `boolean`                                                    | `true`   | Maintain vendor prefixes for the [browserslist](/configuration/target/) target — add what a selected browser needs, drop the rest.  |
+| `convertLengthUnits`      | `boolean`                                                    | `false`  | Rewrite a length into a shorter unit it is exactly equal in (`16px` → `1pc`).                                                       |
+| `rewriteCustomProperties` | `boolean`                                                    | `false`  | Shorten custom property values, which are otherwise written back exactly as authored.                                               |
+
+T> `vendorPrefixes` only has an effect for a `browserslist` [target](/configuration/target/) — any other target names no browsers to prefix for.
+
+#### optimization.minimize.html
+
+`false` `object`
+
+What the built-in HTML minimizer may do. As with CSS, everything that keeps the document's DOM is on by default and the transforms that change what a script or a selector reads back are opt-in.
+
+| Option                          | Type                                                         | Default   | Description                                                                                                              |
+| ------------------------------- | ------------------------------------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `collapseBooleanAttributes`     | `boolean`                                                    | `true`    | Write `disabled="disabled"` as the bare name the spec canonicalizes it to.                                               |
+| `collapseWhitespace`            | `boolean \| 'conservative' \| 'smart' \| 'all'`              | `true`    | Collapse runs of whitespace. `'smart'` also drops it against a block element's edge; `'all'` at every text node's edges. |
+| `comments`                      | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'`  | Which comments survive — `'some'` keeps none, since every comment an HTML parser reads is inert.                         |
+| `minifyJson`                    | `boolean`                                                    | `true`    | Strip whitespace between the tokens of a JSON `<script>`, copying every literal byte for byte.                           |
+| `minifyStyles`                  | `boolean`                                                    | `true`    | Run the CSS minimizer over inline `<style>` and every `style=""`, with the `css` options above.                          |
+| `normalizeAttributeQuotes`      | `boolean`                                                    | `true`    | Write an attribute value with whichever delimiters cost least.                                                           |
+| `normalizeEnumeratedAttributes` | `boolean`                                                    | `true`    | Fold an enumerated attribute's value to the keyword it names.                                                            |
+| `normalizeListAttributes`       | `boolean`                                                    | `true`    | Normalize list-shaped attribute values (`class`, `rel`, `srcset`, the viewport `content`, …).                            |
+| `normalizeNumericAttributes`    | `boolean`                                                    | `true`    | Write an integer attribute the one way its own rules read it.                                                            |
+| `removeImpliedTags`             | `boolean \| 'smart' \| 'all'`                                | `'smart'` | How much of the `<html>` / `<head>` / `<body>` shell may be left out.                                                    |
+| `removeOptionalTags`            | `boolean`                                                    | `true`    | Leave out other tags the parser can imply.                                                                               |
+| `mergeStyles`                   | `boolean`                                                    | `false`   | Print a run of adjacent `<style>` elements as one sheet.                                                                 |
+| `minifyConditionalComments`     | `boolean`                                                    | `false`   | Minify the markup inside a downlevel-hidden conditional comment.                                                         |
+| `minifySrcdoc`                  | `boolean`                                                    | `false`   | Minify the document held in an `<iframe srcdoc>`.                                                                        |
+| `removeEmptyAttributes`         | `boolean`                                                    | `false`   | Drop an attribute whose empty value leaves it in the state its absence gives.                                            |
+| `removeEmptyElements`           | `boolean`                                                    | `false`   | Drop an element with no children and no attributes.                                                                      |
+| `removeRedundantAttributes`     | `boolean \| 'smart' \| 'all'`                                | `false`   | Drop an attribute whose value is the element's own default. `'smart'` only touches non-rendering markers.                |
+| `sortAttributes`                | `boolean`                                                    | `false`   | Print attributes in a fixed order so shared runs compress better across pages.                                           |
+| `sortTokenLists`                | `boolean`                                                    | `false`   | Print set-like token lists (`class`, `rel`, …) in token order, for the same reason.                                      |
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  experiments: { html: true, css: true },
+  optimization: {
+    minimize: {
+      html: {
+        collapseWhitespace: "smart",
+        removeRedundantAttributes: "smart",
+        sortAttributes: true,
+        sortTokenLists: true,
+      },
+    },
+  },
+};
+```
+
+T> A `comments` predicate is handed to the minimizer's worker pool as source, so it must not close over anything.
+
+#### optimization.minimize.javascript
+
+`false` `object`
+
+Handed to the JavaScript minimizer as-is; `false` disables JavaScript minimizing while leaving CSS and HTML minimized.
 
 ## optimization.minimizer
 
