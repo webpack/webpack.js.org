@@ -289,6 +289,36 @@ W> Multiple configurations will **not be run in parallel**. Each
 configuration is only processed after the previous one has finished
 processing.
 
+### MultiCompiler hooks
+
+A `MultiCompiler` exposes the child compilers' hooks as one, so a plugin can tap the set instead of every child:
+
+| Hook                | Type                                    | Description                                                                      |
+| ------------------- | --------------------------------------- | -------------------------------------------------------------------------------- |
+| `done`              | `SyncHook<[MultiStats, Compiler[]]>`    | Called once every child compilation has finished. Aggregated, not a `MultiHook`. |
+| `shutdown`          | `AsyncSeriesHook<[Compiler]>`           | <Badge text="5.110.0+" /> Called when the compilers are closing, once per child. |
+| `invalid`           | `SyncHook<[string \| null, number]>`    | Called when a watched file changes in any of the children.                       |
+| `run`               | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a non-watch build.                                  |
+| `watchRun`          | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a watch build.                                      |
+| `watchClose`        | `SyncHook<[]>`                          | Called when watching stops.                                                      |
+| `infrastructureLog` | `SyncBailHook<[string, string, any[]]>` | Infrastructure logging for any child.                                            |
+
+Since webpack 5.110.0 the `done` hook is also handed the compilers whose build actually ran, in configuration order. In watch mode a change usually invalidates only some of the children, and the others are reported from their previous stats, so this is how a plugin tells what is new:
+
+```js
+import webpack from "webpack";
+
+const compiler = webpack([config1, config2]);
+
+compiler.hooks.done.tap("MyPlugin", (multiStats, changedCompilers) => {
+  for (const child of changedCompilers) {
+    console.log(`${child.name} rebuilt`);
+  }
+});
+```
+
+On the first build every child is reported as changed. `shutdown` was added in the same release and lets a plugin release resources once, for the whole set, rather than tapping each child's own [`shutdown`](/api/compiler-hooks/#shutdown).
+
 ## Error Handling
 
 For good error handling, you need to account for these three types of errors:
