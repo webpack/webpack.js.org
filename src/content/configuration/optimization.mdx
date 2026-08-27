@@ -444,9 +444,7 @@ export default {
   // ...
   optimization: {
     minimize: {
-      javascript: {
-        /* handed to the JavaScript minimizer as-is */
-      },
+      javascript: {/* handed to the JavaScript minimizer as-is */},
       css: {
         comments: false,
       },
@@ -570,9 +568,7 @@ export default {
   optimization: {
     minimizer: [
       (compiler) => {
-        new MinimizerPlugin({
-          /* your config */
-        }).apply(compiler);
+        new MinimizerPlugin({/* your config */}).apply(compiler);
       },
     ],
   },
