@@ -80,7 +80,7 @@
     "tough-cookie": "^4.1.3"
   },
   "dependencies": {
-    "@docsearch/react": "^5.0.4",
+    "@docsearch/react": "^4.7.0",
     "@react-spring/web": "^10.1.2",
     "clsx": "^2.1.1",
     "path-browserify": "^1.0.1",
