@@ -406,7 +406,7 @@ export default {
 
 ## optimization.minimize
 
-`boolean`
+`boolean` `object` <Badge text="5.110.0+" />
 
 Tell webpack to minimize the bundle using the [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
 
@@ -430,6 +430,143 @@ export default {
 ```
 
 T> Learn how [mode](/configuration/mode/) works.
+
+### Minimizing per asset type
+
+<Badge text="5.110.0+" />
+
+Since webpack 5.110.0 the default minimizer also handles CSS and HTML assets, not only JavaScript, and `optimization.minimize` accepts an object that configures it per asset type:
+
+```js
+export default {
+  // ...
+  optimization: {
+    minimize: {
+      javascript: { compress: { passes: 3 } },
+      css: { rewriteCustomProperties: true },
+      html: false,
+    },
+  },
+};
+```
+
+An asset type the object does not name is minimized with its defaults, and `false` disables minimizing that type while the others keep running. `minimize: true` is the same as `minimize: {}`.
+
+The CSS and HTML minifiers only run when the corresponding built-in support is enabled ([`experiments.css`](/configuration/experiments/#experimentscss), [`experiments.html`](/configuration/experiments/#experimentshtml)), and webpack steps aside for a minimizer you already configured for those assets, so an existing `css-minimizer-webpack-plugin` setup keeps owning its assets.
+
+W> The object configures the minimizer webpack installs by default. Replacing [`optimization.minimizer`](#optimizationminimizer) with your own plugins replaces that minimizer, and the options here no longer apply.
+
+### optimization.minimize.javascript
+
+<Badge text="5.110.0+" />
+
+`object = { compress: { passes: 2 } }` `false`
+
+Options handed as-is to the JavaScript minimizer, which is terser-compatible. `false` leaves JavaScript unminified while CSS and HTML are still minimized.
+
+```js
+export default {
+  // ...
+  optimization: {
+    minimize: {
+      javascript: {
+        compress: { passes: 2, drop_console: true },
+        format: { comments: false },
+      },
+    },
+  },
+};
+```
+
+### optimization.minimize.css
+
+<Badge text="5.110.0+" />
+
+`object` `false`
+
+What the built-in CSS minifier may do beyond the transforms that always apply. The options apply wherever that minifier runs: on `.css` assets and on the inline `<style>` elements and `style=""` attributes the HTML minifier hands to it.
+
+Every transform that keeps the stylesheet's meaning is on by default and can be turned off on its own, so a stylesheet that one rewrite breaks can still be minified by the rest. The two that change what the CSSOM hands back are off until you ask for them.
+
+| Option                    | Default  | What it does                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `comments`                | `"some"` | Which comments survive. `"some"` keeps a `/*!` banner and anything annotated `@license` or `@preserve`, `true` / `"all"` keeps every comment, `false` keeps none. A string is read as a regular expression source, and a `RegExp` or a `(comment) => boolean` predicate is asked about each comment and replaces the default rule rather than adding to it. |
+| `mergeLonghands`          | `true`   | Write a family of longhands as the one shorthand that sets them, even where unrelated declarations stand between them.                                                                                                                                                                                                                                      |
+| `mergeRules`              | `true`   | Join rules nothing stands between: adjacent rules printing the same block, at-rules sharing a prelude, a named `@layer` reopened by a later sibling.                                                                                                                                                                                                        |
+| `normalizeQuotes`         | `true`   | Give each string the quote that needs fewer escapes, drop the quotes a `url()` or an attribute selector does not need, and unquote a font family that is a run of identifiers.                                                                                                                                                                              |
+| `reduceFunctions`         | `true`   | Compute a call into the shorter call naming the same value: `calc()` and the other math functions over constants, single-axis transforms, a gradient's default direction, an easing function that has a keyword.                                                                                                                                            |
+| `removeDeadRules`         | `true`   | Drop a rule or declaration nothing can read: an empty block, a declaration an identical later one overrides, a rule an identical later sibling makes dead.                                                                                                                                                                                                  |
+| `shortenColors`           | `true`   | Write each color in the shortest spelling of the same value (`#ffffff` to `#fff`, `rgb(1 2 3)` to `#010203`).                                                                                                                                                                                                                                               |
+| `shortenMediaQueries`     | `true`   | Write a media feature in its range spelling where the target reads one, and collapse an `and` of two one-sided ranges into the interval it describes.                                                                                                                                                                                                       |
+| `shortenNumbers`          | `true`   | Write each number in its shortest equal spelling: no leading zero, no trailing fraction, no `+`, no unit on a zero.                                                                                                                                                                                                                                         |
+| `shortenSelectors`        | `true`   | Rewrite a selector into an equal one: a deduplicated and ordered selector list, a CSS2 pseudo-element's second colon dropped, the shortest `An+B`.                                                                                                                                                                                                          |
+| `shortenValues`           | `true`   | Write a value the shortest way its property's grammar allows: a `{1,4}` box notation collapsed, a slot holding its own initial dropped, short `flex` / `font-weight` / `display`.                                                                                                                                                                           |
+| `vendorPrefixes`          | `true`   | Add the `-webkit-` / `-moz-` / `-ms-` spelling a selected browser still needs and drop one none of them does. Only in effect for a [`browserslist`](/configuration/target/#browserslist) target, which is what names the browsers.                                                                                                                          |
+| `convertLengthUnits`      | `false`  | Rewrite a length into a shorter unit it is exactly equal in (`16px` to `1pc`). Off because the authored unit is lost and compression rarely earns anything back.                                                                                                                                                                                            |
+| `rewriteCustomProperties` | `false`  | Shorten the values of custom properties (`--x: #ffffff` to `#fff`). Off because `getComputedStyle().getPropertyValue()` hands this text back verbatim, so a rewrite changes what a script reads.                                                                                                                                                            |
+
+```js
+export default {
+  // ...
+  optimization: {
+    minimize: {
+      css: {
+        // this one page relies on the authored custom property text
+        rewriteCustomProperties: false,
+        comments: false,
+      },
+    },
+  },
+};
+```
+
+W> A predicate passed to `comments` runs in the minimizer's worker pool, where it is handed over as source. It must not close over anything outside itself.
+
+### optimization.minimize.html
+
+<Badge text="5.110.0+" />
+
+`object` `false`
+
+What the built-in HTML minifier may do. Every transform that keeps the document's DOM is on by default and can be turned off on its own; the ones that change what a script or a selector reads back are off until you ask for them.
+
+| Option                          | Default          | What it does                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `collapseBooleanAttributes`     | `true`           | Write `disabled="disabled"` as the bare `disabled` the spec canonicalizes it to.                                                                                                                                                                                                                                                                                                                          |
+| `collapseWhitespace`            | `"conservative"` | Collapse each run of whitespace in text to a single space, never inside `pre`, `textarea` or `listing`. `true` / `"conservative"` never removes whitespace entirely, since that would join two inline elements that render apart. `"smart"` also drops the whitespace against a block element's edge. `"all"` drops it at every text node's edges, which does change how adjacent inline elements render. |
+| `comments`                      | `"some"`         | Which comments survive. For HTML `"some"` keeps nothing, since every comment a parser reads is inert. Otherwise it works like the CSS option above. Conditional comments, server-side includes and `<?…?>` directives are code rather than comments and are kept whatever this says.                                                                                                                      |
+| `minifyJson`                    | `true`           | Strip the whitespace between the tokens of a `<script>` whose type is a JSON MIME type, copying every literal byte for byte.                                                                                                                                                                                                                                                                              |
+| `minifyStyles`                  | `true`           | Run the CSS minifier over inline `<style>` elements and every `style=""` attribute, with the [`optimization.minimize.css`](#optimizationminimizecss) options.                                                                                                                                                                                                                                             |
+| `normalizeAttributeQuotes`      | `true`           | Write an attribute value with whichever delimiters cost least: bare where the grammar allows it, otherwise the quote needing fewer character references.                                                                                                                                                                                                                                                  |
+| `normalizeEnumeratedAttributes` | `true`           | Fold an enumerated attribute's value to the keyword it names (`type="TEXT"` to `type=text`), which the DOM matches case-insensitively.                                                                                                                                                                                                                                                                    |
+| `normalizeListAttributes`       | `true`           | Normalize a list-shaped attribute value: token lists like `class` and `rel`, comma-separated ones like `accept` and `sizes`, `srcset`, and the viewport `<meta content>`.                                                                                                                                                                                                                                 |
+| `normalizeNumericAttributes`    | `true`           | Write an integer attribute (`tabindex`, `colspan`, `width`, …) the one way its own rules read it.                                                                                                                                                                                                                                                                                                         |
+| `removeOptionalTags`            | `true`           | Leave out a tag the parser is allowed to imply, other than the `<html>` / `<head>` / `<body>` shell, which `removeImpliedTags` decides.                                                                                                                                                                                                                                                                   |
+| `removeImpliedTags`             | `"smart"`        | How much of the `<html>` / `<head>` / `<body>` shell may be left out. `"smart"` leaves out only the `<html>` start tag, and only when it carries no attribute, so the `<html lang=en>` that tooling greps for keeps its tag. `true` / `"all"` leaves out all six tags, `false` none.                                                                                                                      |
+| `mergeStyles`                   | `false`          | Print a run of adjacent `<style>` elements as one sheet. Off because it removes elements, so `document.styleSheets`, `style:nth-child()` and `querySelectorAll("style").length` all read a different document.                                                                                                                                                                                            |
+| `minifyConditionalComments`     | `false`          | Minify the markup inside a downlevel-hidden conditional comment. Off because the body is minified as though it started a document of its own, and only browsers older than IE10 read them at all.                                                                                                                                                                                                         |
+| `minifySrcdoc`                  | `false`          | Minify the document held in an `<iframe srcdoc>` attribute. Off because the attribute is readable from script, and a consumer comparing `iframe.srcdoc` byte for byte would see it change.                                                                                                                                                                                                                |
+| `removeEmptyAttributes`         | `false`          | Drop an attribute whose empty value leaves it in the state its absence gives. Off because an attribute selector matches on presence, so `[class]` stops matching. `title`, `lang`, `sandbox` and event handlers are never dropped.                                                                                                                                                                        |
+| `removeEmptyElements`           | `false`          | Drop an element with no children and no attributes. Off because CSS can give an empty element a size or a `::before`, and the minifier cannot see the stylesheet.                                                                                                                                                                                                                                         |
+| `removeRedundantAttributes`     | `false`          | Drop an attribute whose value is the element's own default. `true` / `"smart"` drops only markers on elements that render nothing (`<script type=text/javascript>`, `<style type=text/css>`, `<link media=all>`). `"all"` also drops spec defaults such as `<input type=text>`, which stops `input[type=text]` from matching.                                                                             |
+| `sortAttributes`                | `false`          | Print attributes in a fixed order so the same markup compresses better across pages. Off because a script reading `element.attributes`, or an HTML snapshot test, sees the new order.                                                                                                                                                                                                                     |
+| `sortTokenLists`                | `false`          | Print the token lists the DOM reads as a set (`class`, `rel`, `part`, `sandbox`, …) in sorted order, for the same compression reason. Off because a script reading `className` or `rel` back sees the new order. `ping` and `accesskey` are never sorted, since their order is meaningful.                                                                                                                |
+
+```js
+export default {
+  // ...
+  optimization: {
+    minimize: {
+      html: {
+        collapseWhitespace: "smart",
+        removeRedundantAttributes: true,
+        sortAttributes: true,
+        sortTokenLists: true,
+      },
+    },
+  },
+};
+```
 
 ## optimization.minimizer
 
