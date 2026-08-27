@@ -345,9 +345,7 @@ import { Volume, createFsFromVolume } from "memfs";
 import webpack from "webpack";
 
 const fs = createFsFromVolume(new Volume());
-const compiler = webpack({
-  /* options */
-});
+const compiler = webpack({/* options */});
 
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {

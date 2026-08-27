@@ -570,17 +570,12 @@ The "asset info" metadata is not automatically provided for this hook. If needed
 **Example:**
 
 ```js
-compilation.hooks.processAssets.tap(
-  {
-    /** … */
-  },
-  (assets) => {
-    for (const [pathname, source] of Object.entries(assets)) {
-      const assetInfo = compilation.assetsInfo.get(pathname);
-      // @todo: do something with "pathname", "source" and "assetInfo"
-    }
-  },
-);
+compilation.hooks.processAssets.tap({/** … */}, (assets) => {
+  for (const [pathname, source] of Object.entries(assets)) {
+    const assetInfo = compilation.assetsInfo.get(pathname);
+    // @todo: do something with "pathname", "source" and "assetInfo"
+  }
+});
 ```
 
 ## afterProcessAssets
