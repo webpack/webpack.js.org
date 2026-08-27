@@ -13,10 +13,6 @@ contributors:
   - chenxsan
 ---
 
-Webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
-Loaders are separate packages that extend webpack's capabilities and are maintained within the broader ecosystem.
-Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`/`require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders/#configuration).
-
 ## What needs no loader
 
 Webpack handles these itself — install a loader only for what is _not_ on this list:
@@ -29,7 +25,9 @@ Webpack handles these itself — install a loader only for what is _not_ on this
 - **HTML** — [`experiments.html`](/configuration/experiments/#experimentshtml), experimental; see [what it covers](/guides/native-html/#whats-built-in)
 - **TypeScript** — [`experiments.typescript`](/configuration/experiments/#experimentstypescript), experimental; erases types on Node.js 22.6+, but does not type-check or handle JSX
 
-Everything below is for the rest: preprocessors, template engines and other languages.
+Webpack enables use of [loaders](/concepts/loaders) to preprocess everything else. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
+Loaders are separate packages that extend webpack's capabilities and are maintained within the broader ecosystem.
+Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`/`require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders/#configuration).
 
 ## Files
 
