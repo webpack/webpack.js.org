@@ -24,7 +24,22 @@ export default {
 };
 ```
 
-With this option enabled, webpack understands `.html` files as first-class modules — parsing tags, resolving every URL they reference, bundling inline `<script>` and `<style>` bodies, emitting hashed assets, and writing the rewritten HTML back out — without `html-loader` or `html-webpack-plugin`.
+With this option enabled, webpack understands `.html` files as first-class modules: it parses them itself instead of handing them to a loader.
+
+## What's built-in
+
+"Built-in" means webpack does the work itself, with no loader or plugin in the chain — not that it covers everything `html-loader` and `html-webpack-plugin` do. The scope is exactly this:
+
+| Built in                                                                                                                | Still needs a loader or plugin                                                                                                        |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Parsing `.html`, as an [entry point](#1-html-as-an-entry-point) or [imported from JS](#3-html-imported-from-javascript) | **Template engines** — Pug, EJS, Handlebars and friends, unless a synchronous [`template`](#templating) hook is enough                |
+| [Extracting every URL a page references](#what-webpack-bundles-from-a-page) and rewriting it to the built filename      | `html-loader`'s `sources.scriptingEnabled` and `postprocessor`                                                                        |
+| Bundling inline `<script>` and `<style>` bodies, and `style=""` attributes                                              | `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache`                                                           |
+| [Generating a page](#2-a-generated-page-for-a-javascript-entry) per entrypoint with its chunks injected                 | The third-party plugins that tap `html-webpack-plugin`'s hooks, which have no counterpart on [`HtmlModulesPlugin`](#plugin-hooks) yet |
+| [`title`, `meta`, `base`, `favicon`, `manifest`, `integrity`, `csp`, inlining](#configuring-the-generated-page)         |                                                                                                                                       |
+| [Minification](#minification) and Hot Module Replacement                                                                |                                                                                                                                       |
+
+So a project using `html-webpack-plugin` to scaffold a document around its bundles, or `html-loader` to import a partial, needs neither. A project that renders its page through a template engine, or depends on a plugin that hooks into `html-webpack-plugin`, keeps that plugin.
 
 T> Since webpack 5.109.0 the option defaults to `'auto'`: built-in HTML support turns on unless a [`module.rules`](/configuration/module/#modulerules) entry with a loader (or an explicit module type) already matches `.html` files. An existing `html-loader` setup therefore keeps working untouched, and you can migrate one rule at a time. [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) resolves it to `true`.
 
@@ -335,7 +350,9 @@ export default {
 };
 ```
 
-Every icon — including the ones named inside the manifest — is emitted as a hashed asset through the normal pipeline, so `favicons-webpack-plugin` and friends are no longer needed. Both apply to webpack-generated pages only: an authored page is left exactly as written, so add the `<link>` tags to the page itself when you own its markup. Both options also accept a function receiving the page name, which is how you give each page of a multi-page build its own icon set.
+Every icon — including the ones named inside the manifest — is emitted as a hashed asset through the normal pipeline. Both options also accept a function receiving the page name, which is how you give each page of a multi-page build its own icon set.
+
+Two limits are worth knowing. Webpack emits the icons you point it at; it does not generate the size and format variants a dedicated plugin such as `favicons-webpack-plugin` produces from one source image. And both options apply to webpack-generated pages only — an authored page is left exactly as written, so add the `<link>` tags to the page yourself when you own its markup.
 
 ### Subresource Integrity and CSP
 

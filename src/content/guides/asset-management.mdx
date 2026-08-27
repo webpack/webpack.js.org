@@ -70,7 +70,7 @@ Webpack understands CSS on its own, so you can `import` a CSS file from a JavaSc
 import "./style.css";
 ```
 
-Webpack parses the file — resolving its `@import` and `url()` references — and extracts it into a `.css` output file next to your bundle. CSS Modules, minification and content hashes all come from the same built-in support; the [Native CSS](/guides/native-css/) guide covers the whole feature set.
+Webpack parses the file — resolving its `@import` and `url()` references — and extracts it into a `.css` output file next to your bundle. CSS Modules, minification and content hashes all come from the same built-in support, which is still experimental; [What's built-in](/guides/native-css/#whats-built-in) states what it covers and what still needs a loader.
 
 T> Built-in CSS is controlled by [`experiments.css`](/configuration/experiments/#experimentscss), which defaults to `'auto'`: it turns itself on unless a `module.rules` entry with a loader already matches your `.css` files. That means an existing `css-loader` / `style-loader` setup keeps working untouched — see [migrating off the CSS loaders](/guides/native-css/#migration-guide).
 
