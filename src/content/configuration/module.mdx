@@ -1718,6 +1718,8 @@ There are two input values for the conditions:
 
 In a Rule the properties [`test`](#ruletest), [`include`](#ruleinclude), [`exclude`](#ruleexclude) and [`resource`](#ruleresource) are matched with the resource and the property [`issuer`](#ruleissuer) is matched with the issuer.
 
+Since webpack 5.110.0 the resource can also be matched with [`glob`](#ruleglob), which is OS-independent, and with [`descriptionRelativePath`](#ruledescriptionrelativepath), which is the resource's path inside its own package.
+
 When using multiple conditions, all conditions must match.
 
 W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files. Note that you can turn off symlink resolving (so that resources are resolved to the symlink path) via [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
@@ -1809,6 +1811,35 @@ export default {
 };
 ```
 
+## Rule.descriptionRelativePath
+
+<Badge text="5.110.0+" />
+
+A [`Condition`](#condition) matched against the path of the module relative to the directory of its description file (usually the closest `package.json`), for example `./lib/button.js`. The path always uses forward slashes, so the same rule matches on every operating system.
+
+This is what you want when a rule should target a file by its place inside a package rather than by its absolute location, which changes with the install layout (a hoisted `node_modules`, a pnpm store, a workspace symlink):
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        descriptionData: {
+          name: "some-package",
+        },
+        descriptionRelativePath: /^\.\/src\//,
+        // ...
+      },
+    ],
+  },
+};
+```
+
+The condition does not apply when a [match resource](/api/loaders/#inline-matchresource) replaced the resource, since the description file of the original request no longer describes it.
+
 ## Rule.enforce
 
 `string`
@@ -1854,6 +1885,66 @@ Exclude all modules matching any of these conditions. If you supply a `Rule.excl
 ## Rule.include
 
 Include all modules matching any of these conditions. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
+
+## Rule.glob
+
+<Badge text="5.110.0+" />
+
+`string` `[string]`
+
+Match the module resource against one or more glob patterns. Unlike a regular expression, a glob matches the same way on every operating system: `/` and `\` are both read as a path separator, in the pattern as well as in the tested path, so a rule written on macOS keeps matching on Windows. See [`performance.osDependentRules`](/configuration/performance/#performanceosdependentrules) for a check that reports the regexp conditions that do not.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        glob: "src/**/*.css",
+        type: "css/module",
+      },
+    ],
+  },
+};
+```
+
+Several patterns are OR-ed together, and a `!` prefix subtracts what it matches. A list that only contains `!` patterns subtracts from everything, so it reads as an exclusion list:
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        // every .ts file except the tests and the generated ones
+        glob: ["**/*.ts", "!**/*.test.ts", "!**/generated/**"],
+        loader: "ts-loader",
+      },
+    ],
+  },
+};
+```
+
+A relative pattern matches at any depth, so `"src/**/*.css"` also matches `packages/ui/src/theme.css`. Start the pattern with an absolute path when you want to pin it to one directory.
+
+`glob` combines with the other conditions: [`test`](#ruletest), [`include`](#ruleinclude) and [`exclude`](#ruleexclude) still have to match too. It is also available inside a [`Condition`](#condition) object, which lets you use it wherever a condition is accepted:
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: { glob: "src/**" },
+        loader: "babel-loader",
+      },
+    ],
+  },
+};
+```
 
 ## Rule.issuer
 
@@ -2642,6 +2733,8 @@ Conditions can be one of these:
 `{ or: [Condition] }`: Any Condition must match.
 
 `{ not: [Condition] }`: All Conditions must NOT match.
+
+`{ glob: string | [string] }`: <Badge text="5.110.0+" /> The input must match the glob pattern, or one of them. See [`Rule.glob`](#ruleglob) for the pattern syntax.
 
 **Example:**
 
