@@ -8,16 +8,61 @@ contributors:
   - madhavarshney
   - EugeneHlushko
   - shivxmsharma
+  - bjohansebas
 ---
 
 These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
 This feature was inspired by the idea of [webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216).
+
+Since webpack 5.110.0 the same option also hosts a set of opt-in checks that look at the shape of the bundle and of your configuration, not only at asset sizes: duplicated packages, modules nothing uses, rules that never match, `import()` calls that defer nothing, and so on. Every one of those checks is `false` by default; see [`performance.all`](#performanceall) to turn the whole set on at once.
 
 ## `performance`
 
 `object`
 
 Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifying you of this.
+
+### Available checks
+
+Besides the size budget ([`maxAssetSize`](#performancemaxassetsize) and [`maxEntrypointSize`](#performancemaxentrypointsize)), webpack ships these checks, grouped here by what they look at:
+
+| Area                | Checks                                                                                                                                                                                                                                                                                                                                         |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| What ships twice    | [`duplicatePackages`](#performanceduplicatepackages), [`duplicateModules`](#performanceduplicatemodules), [`entrypointOverlap`](#performanceentrypointoverlap)                                                                                                                                                                                 |
+| What ships unused   | [`unusedReexports`](#performanceunusedreexports), [`missingSideEffects`](#performancemissingsideeffects), [`dynamicExports`](#performancedynamicexports), [`scopeHoistingBailouts`](#performancescopehoistingbailouts), [`legacyJavascript`](#performancelegacyjavascript)                                                                     |
+| How chunks load     | [`asyncChunkWaterfalls`](#performanceasyncchunkwaterfalls), [`redundantDynamicImports`](#performanceredundantdynamicimports), [`tinyChunks`](#performancetinychunks), [`unsplitVendors`](#performanceunsplitvendors), [`splitChunksCapped`](#performancesplitchunkscapped), [`conflictingResourceHints`](#performanceconflictingresourcehints) |
+| What weighs a chunk | [`largeModules`](#performancelargemodules), [`inlinedAssets`](#performanceinlinedassets), [`embeddedSourceMaps`](#performanceembeddedsourcemaps), [`broadContexts`](#performancebroadcontexts)                                                                                                                                                 |
+| Code hazards        | [`evalUsage`](#performanceevalusage), [`pureAnnotations`](#performancepureannotations), [`topLevelThis`](#performancetoplevelthis), [`mixedExports`](#performancemixedexports)                                                                                                                                                                 |
+| Configuration       | [`unusedRules`](#performanceunusedrules), [`unusedAliases`](#performanceunusedaliases), [`unusedDefines`](#performanceunuseddefines), [`unusedExternals`](#performanceunusedexternals), [`osDependentRules`](#performanceosdependentrules)                                                                                                     |
+| Build itself        | [`cacheEffectiveness`](#performancecacheeffectiveness), [`hotspots`](#performancehotspots), [`circularDependencies`](#performancecirculardependencies)                                                                                                                                                                                         |
+
+Most of them are reported through [`performance.hints`](#performancehints), so they are silent while `hints` is `false`.
+
+The checks that look at your configuration are not gated on `hints`, since a rule nothing matches or a misspelled external is a configuration mistake rather than a size: [`unusedRules`](#performanceunusedrules), [`unusedAliases`](#performanceunusedaliases), [`unusedDefines`](#performanceunuseddefines), [`unusedExternals`](#performanceunusedexternals), [`osDependentRules`](#performanceosdependentrules) and [`conflictingResourceHints`](#performanceconflictingresourcehints) are reported as warnings whenever the check itself is on.
+
+### performance.all
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Fallback value for every check that is not set individually. It takes precedence over webpack's own defaults, so `all: true` enables the whole set and any check you set explicitly still wins:
+
+```js
+export default {
+  // ...
+  performance: {
+    hints: "warning",
+    all: true,
+    // enabled by `all`, but this one stays off
+    hotspots: false,
+  },
+};
+```
+
+`all` does not apply to [`hints`](#performancehints), [`maxAssetSize`](#performancemaxassetsize) or [`maxEntrypointSize`](#performancemaxentrypointsize).
+
+T> Turning everything on at once is a good way to audit a project, but several checks walk the module graph and cost build time. Once you have read the report, keep the handful that matter to you enabled and leave the rest off.
 
 ### performance.assetFilter
 
@@ -46,9 +91,117 @@ export default {
 
 The example above will only give you performance hints based on `.js` files.
 
+### performance.asyncChunkWaterfalls
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report chains of `import()` calls where each chunk can only be requested once the one before it has arrived and run, so every level of the chain costs a round trip in series before anything below it starts.
+
+Importing the deeper modules from the entry, or giving them a single [`webpackPrefetch`](/api/module-methods/#magic-comments) hint, lets them be fetched together instead.
+
+### performance.broadContexts
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report [`require.context`](/api/module-methods/#requirecontext) calls with no filter, which bundle every file under a directory, including the ones nothing ever requests. A sync context bundles them all; a lazy one gives each of them its own chunk.
+
+Narrowing the pattern, or using [`ContextReplacementPlugin`](/plugins/context-replacement-plugin/), limits the context to what is actually reachable.
+
+### performance.cacheEffectiveness
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report how much of the module graph the [cache](/configuration/cache/) reused, and which modules can never be reused. The warning names how many modules were rebuilt although the cache was warm, and the reasons why, so you can tell a cold cache apart from one that is being invalidated on every build.
+
+### performance.circularDependencies
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report groups of modules that import each other synchronously. A cycle makes at least one module in the group observe a partially initialized binding at evaluation time, and it prevents some export inlining.
+
+The scan runs in `mode: "production"` regardless of this option, since [export inlining](/configuration/optimization/#optimizationinlineexports) needs it; this option only decides whether the cycles it finds are reported.
+
+### performance.conflictingResourceHints
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report chunks asked for as both prefetch and preload from the same place. The two directives say opposite things: a preload fetches the chunk at high priority right away, while a prefetch asks for it at idle priority in case it is needed later. Keep [`webpackPreload`](/guides/code-splitting/#prefetchingpreloading-modules) for what the page needs now and `webpackPrefetch` for what it may need later, not both.
+
+This check is not gated on [`hints`](#performancehints).
+
+### performance.duplicateModules
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report modules emitted into more than one chunk, and the bytes the extra copies cost. Usually a sign that [`optimization.splitChunks`](/plugins/split-chunks-plugin/) could move the shared modules into a chunk of their own.
+
+### performance.duplicatePackages
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report packages that are included more than once, either in different versions or as several copies of the same version. Both cost the bundle a full extra copy, and different copies of a package that keeps state (a React or a store instance, for example) also break at runtime.
+
+```js
+export default {
+  // ...
+  performance: {
+    hints: "warning",
+    duplicatePackages: true,
+  },
+};
+```
+
+T> [`resolve.alias`](/configuration/resolve/#resolvealias) or your package manager's dependency resolution can force a single copy once the report tells you which package is duplicated.
+
+### performance.dynamicExports
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report modules whose exports cannot be read statically (a CommonJS module assigning to `module.exports` behind a condition, for example), which stops anything importing them from being tree-shaken.
+
+### performance.embeddedSourceMaps
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report a production build whose [`devtool`](/configuration/devtool/) writes the source map into the JavaScript itself. The map is then downloaded by everyone who loads the page, at several times the size of the code it describes. A separate `.map` file is fetched only by whoever opens the devtools, and `hidden-source-map` keeps it off the client entirely while still producing a map to upload to an error reporter.
+
+### performance.entrypointOverlap
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report modules shipped by more than one entrypoint, which every page that loads them downloads again, along with the bytes the overlap costs.
+
+### performance.evalUsage
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report modules that call `eval` directly. A direct eval reads and writes any name in scope, so nothing the module declares can be renamed or dropped: minification, [scope hoisting](/configuration/optimization/#optimizationconcatenatemodules) and tree shaking all stop at it. `new Function` takes no local scope and does not have this effect.
+
 ### performance.hints
 
-`string: 'error' | 'warning'` `boolean: false`
+`string: 'error' | 'warning' | 'stats'` `boolean: false`
 
 Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found.
 
@@ -95,6 +248,51 @@ export default {
 
 An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance.
 
+```js
+export default {
+  // ...
+  performance: {
+    hints: "stats",
+  },
+};
+```
+
+<Badge text="5.110.0+" />
+
+The hints are collected and exposed through [`stats`](/configuration/stats/) only. They are not counted as warnings or errors, so the build stays green and nothing fails a CI step that treats warnings as failures. This is the value to use when you want the report from the checks listed above without turning every finding into build output.
+
+### performance.hotspots
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report the loaders, plugins and hooks that hold the main thread, timing each one's own code rather than what it waited for. Only synchronous stretches count, so work resumed after an `await` is not attributed. When the ordering matters rather than the totals, [`ProfilingPlugin`](/plugins/profiling-plugin/) records the same work as a trace.
+
+### performance.inlinedAssets
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report assets inlined as data urls that are large enough for the base64 cost and the lost caching to outweigh the request they save. A data url costs about a third more than the file it replaces, cannot be cached on its own, and is downloaded again whenever the code around it changes. [`Rule.parser.dataUrlCondition.maxSize`](/guides/asset-modules/#general-asset-type) decides which files are small enough to be worth that.
+
+### performance.largeModules
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report a single module that makes up most of the chunk it is in. Everything else in the chunk together weighs less than that one module, so splitting it out with [`optimization.splitChunks`](/plugins/split-chunks-plugin/), loading it on demand, or replacing it is what actually changes the size.
+
+### performance.legacyJavascript
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report polyfill packages that emulate language features the [target](/configuration/target/) already supports natively, along with the bytes they cost.
+
 ### performance.maxAssetSize
 
 `number = 250000`
@@ -110,6 +308,8 @@ export default {
 };
 ```
 
+Since webpack 5.110.0 the warning also names the largest modules inside the oversized asset, so the report points at what to split rather than only at the file.
+
 ### performance.maxEntrypointSize
 
 `number = 250000`
@@ -124,3 +324,137 @@ export default {
   },
 };
 ```
+
+Since webpack 5.110.0, when the entrypoint that goes over the limit is also the one carrying the runtime, the hint recommends [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk) so the runtime stops being re-downloaded with it.
+
+### performance.missingSideEffects
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report packages that keep unused code in the bundle because their `package.json` does not declare [`sideEffects`](/guides/tree-shaking/#mark-the-file-as-side-effect-free), together with the bytes that costs.
+
+### performance.mixedExports
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report an entry that exports a default beside named exports for a CommonJS [library](/configuration/output/#outputlibrary), where a consumer calling `require()` gets the namespace object and therefore receives the default as `.default` rather than as the value itself. Exporting only a default, or only named exports, leaves no ambiguity, and [`output.library.export`](/configuration/output/#outputlibraryexport) can also pick one.
+
+### performance.osDependentRules
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report conditions in [`module.rules`](/configuration/module/#modulerules) that hardcode a path separator, so they only match on one operating system (a `test: /src\/components\//` that matches on Linux and macOS but not on Windows, for example).
+
+This check is not gated on [`hints`](#performancehints). See also the [`glob`](/configuration/module/#ruleglob) condition, which matches OS-independently.
+
+### performance.pureAnnotations
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report `/*#__PURE__*/` annotations that sit somewhere the parser does not read them. The annotation is only read directly before a call, a `new`, or a tagged template; anywhere else it is a plain comment, and the code it was meant to make droppable is kept.
+
+### performance.redundantDynamicImports
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report `import()` calls whose module is already loaded where the call runs, so they defer nothing while still costing a promise and a chunk boundary.
+
+### performance.scopeHoistingBailouts
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report modules that could not be merged into their importer's scope by [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules), and why, so each keeps its own wrapper. The reasons are grouped and counted rather than listed one module at a time.
+
+### performance.splitChunksCapped
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report splits [`optimization.splitChunks`](/plugins/split-chunks-plugin/) refused because `maxInitialRequests` or `maxAsyncRequests` was already reached. The modules stayed where they were, so the cache group did not take effect; raising the limit lets the split happen, at the cost of more parallel requests.
+
+### performance.tinyChunks
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report chunks that are loaded on demand but carry less than [`optimization.splitChunks.minSize`](/plugins/split-chunks-plugin/#splitchunksminsize), where the request costs more than the bytes it defers.
+
+### performance.topLevelThis
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report modules that read `this` at the top level of an ES module, where it is `undefined` rather than the module object or the global one. A single `import` or `export` is enough for `javascript/auto` to decide a file is an ES module, so a file that worked as CommonJS can silently read nothing once it is bundled that way. Use `globalThis` where the global object was meant, [`import.meta`](/api/module-variables/#importmeta) for anything about the module, or give the file a `.cjs` extension to keep it CommonJS.
+
+### performance.unsplitVendors
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report initial chunks that mix `node_modules` code with application code. The dependencies then get a new hash on every application change, so returning visitors download them again; [`optimization.splitChunks`](/plugins/split-chunks-plugin/) can move them into a chunk of their own.
+
+### performance.unusedAliases
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report [`resolve.alias`](/configuration/resolve/#resolvealias) entries that no request matched, which usually means the alias is misspelled and the real request resolved somewhere else.
+
+This check is not gated on [`hints`](#performancehints).
+
+### performance.unusedDefines
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report keys defined by [`DefinePlugin`](/plugins/define-plugin/) that no module ever referenced. Each one costs a parser hook per module and invalidates the build whenever its value changes. The keys webpack defines itself (`process.env.NODE_ENV` and the `import.meta.env` defaults) are marked internal and are never reported against you.
+
+This check is not gated on [`hints`](#performancehints).
+
+### performance.unusedExternals
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report requests listed in [`externals`](/configuration/externals/) that no module ever imported, which usually means the request is misspelled and the real one got bundled instead.
+
+This check is not gated on [`hints`](#performancehints).
+
+### performance.unusedReexports
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report modules that are bundled although nothing uses what they export, pulled in by a re-export. This is the classic barrel file cost: `export * from "./x"` in an `index.js` drags `./x` into the bundle even when only its neighbour is imported.
+
+### performance.unusedRules
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Report rules in [`module.rules`](/configuration/module/#modulerules) that never matched a module, which cost condition evaluation on every build and usually mean the `test` does not describe the files you thought it did.
+
+This check is not gated on [`hints`](#performancehints).
+
+W> Plugins add rules too, so a reported rule is not necessarily one you wrote.
