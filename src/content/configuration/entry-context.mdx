@@ -98,6 +98,53 @@ Descriptor syntax might be used to pass additional options to an entry point.
 
 T> The `worker` flag (added in webpack 5.108.0) marks an entry as a worker so its output file uses [`output.workerChunkFilename`](/configuration/output/#outputworkerchunkfilename) instead of the regular chunk filename. webpack sets it automatically for entries it creates from `new Worker(new URL(...))`, so you rarely set it by hand.
 
+### HTML per entry
+
+<Badge text="5.108.0+" />
+
+When [`output.html`](/configuration/output/#outputhtml) is enabled, every non-HTML entrypoint gets a generated page. The descriptor's `html` option decides that per entry: `false` leaves the entry without a page even though `output.html` is on, and `true` gives it one when `output.html` is off.
+
+```js
+export default {
+  experiments: { html: true },
+  entry: {
+    app: "./app.js",
+    // no page for this one
+    embed: { import: "./embed.js", html: false },
+  },
+  output: {
+    html: true,
+  },
+};
+```
+
+Since webpack 5.110.0 it also accepts an object, which overrides [`output.html`](/configuration/output/#outputhtml) option by option for that entry. Anything the object does not name keeps the value from `output.html`:
+
+```js
+export default {
+  experiments: { html: true },
+  entry: {
+    app: "./app.js",
+    admin: {
+      import: "./admin.js",
+      html: {
+        // only these two differ from output.html
+        title: "Admin",
+        scriptLoading: "blocking",
+      },
+    },
+  },
+  output: {
+    html: {
+      title: "My App",
+      scriptLoading: "defer",
+    },
+  },
+};
+```
+
+T> [`output.html.inline`](/configuration/output/#outputhtmlinline) is resolved once per generated page, so it can only be set on `output.html` and not per entry.
+
 ### Output filename
 
 By default, the output filename for the entry chunk is extracted from [`output.filename`](/configuration/output/#outputfilename) but you can specify a custom output filename for a specific entry:
