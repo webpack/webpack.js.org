@@ -535,6 +535,10 @@ export default {
       templateLiteral: true,
       // The environment supports `import.meta.dirname` and `import.meta.filename`.
       importMetaDirnameAndFilename: false,
+      // The environment supports deferred module evaluation ('import defer * as ns from "..."', 'import.defer("...")'). Since webpack 5.110.0.
+      deferImport: false,
+      // The environment supports source phase imports ('import source m from "..."', 'import.source("...")'). Since webpack 5.110.0.
+      sourceImport: false,
     },
   },
 };
