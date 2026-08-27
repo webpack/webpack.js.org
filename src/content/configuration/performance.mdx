@@ -275,7 +275,7 @@ Report the loaders, plugins and hooks that hold the main thread, timing each one
 
 `boolean = false`
 
-Report assets inlined as data urls that are large enough for the base64 cost and the lost caching to outweigh the request they save. A data url costs about a third more than the file it replaces, cannot be cached on its own, and is downloaded again whenever the code around it changes. [`Rule.parser.dataUrlCondition.maxSize`](/guides/asset-modules/#general-asset-type) decides which files are small enough to be worth that.
+Report assets inlined as data urls that are large enough for the base64 cost and the lost caching to outweigh the request they save. A data url costs about a third more than the file it replaces, cannot be cached on its own, and is downloaded again whenever the code around it changes. [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) decides which files are small enough to be worth that.
 
 ### performance.largeModules
 
