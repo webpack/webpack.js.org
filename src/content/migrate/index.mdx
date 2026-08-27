@@ -3,6 +3,14 @@ title: Migrate
 sort: -1
 contributors:
   - EugeneHlushko
+  - alexander-akait
 ---
 
 This section contains information about migrating from older versions of webpack to newer ones.
+
+## Migrating off deprecated loaders and plugins
+
+Webpack bundles CSS and HTML on its own, so the packages that used to do it are deprecated. Each guide below lists the native equivalent of every option and walks through the migration:
+
+- [Migrating off `css-loader`, `style-loader` and `mini-css-extract-plugin`](/guides/native-css/#migration-guide) — also covers `css-minimizer-webpack-plugin` and `autoprefixer`, and links a codemod that does most of the work.
+- [Migrating off `html-loader`](/guides/native-html/#migrating-from-html-loader) and [off `html-webpack-plugin`](/guides/native-html/#migrating-from-html-webpack-plugin).
