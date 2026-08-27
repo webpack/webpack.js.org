@@ -516,7 +516,7 @@ When [`experiments.css`](#experimentscss) is enabled, `.css` is likewise appende
 
 HTML modules support [Hot Module Replacement](/concepts/hot-module-replacement/). No extra configuration is needed. It activates automatically when HMR is enabled (for example via [`devServer.hot`](/configuration/dev-server/#devserverhot)).
 
-For a page extracted to a real `.html` file, each hot update patches `document.body.innerHTML` and `document.title` in place instead of triggering a full reload. Changes to `<head>` beyond the `<title>` (a new `<meta>`, a swapped `<link rel="icon">`, …) cannot be safely DOM-patched, so the shim falls back to a full page reload.
+For a page extracted to a real `.html` file, each hot update patches `document.body.innerHTML` and `document.title` in place instead of triggering a full reload. Since webpack 5.110.0 the `<head>` is patched in place as well, so a new `<meta>`, a swapped `<link rel="icon">` or a removed `<script>` that never executed no longer costs a full page reload.
 
 T> [Module concatenation](/configuration/optimization/#optimizationconcatenatemodules) is disabled for HTML modules while HMR is active, because each module needs its own `module.hot` scope to self-accept updates.
 
