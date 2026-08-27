@@ -17,6 +17,20 @@ Webpack enables use of [loaders](/concepts/loaders) to preprocess files. This al
 Loaders are separate packages that extend webpack's capabilities and are maintained within the broader ecosystem.
 Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`/`require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders/#configuration).
 
+## What needs no loader
+
+Webpack handles these itself — install a loader only for what is _not_ on this list:
+
+- **JavaScript**, ESM and CommonJS
+- **JSON**
+- **Images, fonts, media and text files** — [Asset Modules](/guides/asset-modules/), which replace `file-loader`, `url-loader` and `raw-loader`
+- **WebAssembly** — [`experiments.asyncWebAssembly`](/configuration/experiments/#experiments)
+- **CSS** — [`experiments.css`](/configuration/experiments/#experimentscss), experimental; see [what it covers](/guides/native-css/#whats-built-in)
+- **HTML** — [`experiments.html`](/configuration/experiments/#experimentshtml), experimental; see [what it covers](/guides/native-html/#whats-built-in)
+- **TypeScript** — [`experiments.typescript`](/configuration/experiments/#experimentstypescript), experimental; erases types on Node.js 22.6+, but does not type-check or handle JSX
+
+Everything below is for the rest: preprocessors, template engines and other languages.
+
 ## Files
 
 - [`ref-loader`](https://www.npmjs.com/package/ref-loader) Create dependencies between any files manually
@@ -38,9 +52,9 @@ Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`
 
 ## Templating
 
-T> Webpack has experimental built-in HTML support ([`experiments.html`](/configuration/experiments/#experimentshtml)): it parses `.html`, extracts the URLs a page references and bundles inline `<script>` / `<style>`, so importing a plain HTML partial needs no loader. Template engines still need theirs — [What's built-in](/guides/native-html/#whats-built-in) states the exact scope.
+T> Webpack has experimental built-in HTML support ([`experiments.html`](/configuration/experiments/#experimentshtml)) that covers the common setup. Template engines still need their loader — see [What's built-in](/guides/native-html/#whats-built-in).
 
-- [`html-loader`](/loaders/html-loader) Exports HTML as string, require references to static resources. Webpack can [do this itself](/guides/native-html/#3-html-imported-from-javascript); still needed for `sources.scriptingEnabled` and `postprocessor`
+- [`html-loader`](/loaders/html-loader) Exports HTML as string, require references to static resources ([built-in alternative](/guides/native-html/#whats-built-in))
 - [`pug-loader`](https://github.com/pugjs/pug-loader) Loads Pug and Jade templates and returns a function
 - [`markdown-loader`](https://github.com/peerigon/markdown-loader) Compiles Markdown to HTML
 - [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) Compiles Markdown to a React Component using the markdown-parse parser
@@ -52,10 +66,10 @@ T> Webpack has experimental built-in HTML support ([`experiments.html`](/configu
 
 ## Styling
 
-T> Webpack has experimental built-in CSS support ([`experiments.css`](/configuration/experiments/#experimentscss)): it parses `.css`, resolves `@import` and `url()`, handles CSS Modules, extracts or injects stylesheets and minifies them, so a setup using the CSS loaders with default options needs neither. It does **not** replace preprocessors, and a handful of loader options have no equivalent — [What's built-in](/guides/native-css/#whats-built-in) states the exact scope.
+T> Webpack has experimental built-in CSS support ([`experiments.css`](/configuration/experiments/#experimentscss)) that covers the common setup. It does not replace preprocessors, and a few loader options have no equivalent — see [What's built-in](/guides/native-css/#whats-built-in).
 
-- [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM. Webpack can [inject styles itself](/guides/native-css/#output-modes-exporttype); still needed for `insert`, `attributes`, `styleTagTransform` and lazy / singleton injection
-- [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code. Webpack can [parse CSS itself](/guides/native-css/); still needed for `importLoaders`, `localIdentRegExp`, `getJSON` and the `url` / `import` filter callbacks
+- [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM ([built-in alternative](/guides/native-css/#whats-built-in))
+- [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code ([built-in alternative](/guides/native-css/#whats-built-in))
 - [`css-utility-loader`](https://github.com/SahilKhanWDC/css-utility-loader-webpack-.git) - Automatically parses and translates legacy CSS properties into modern utility classes (Tailwind) at build-time.
 - [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
 - [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file
