@@ -85,6 +85,9 @@ npm install workbox-webpack-plugin --save-dev
 +       skipWaiting: true,
 +     }),
     ],
+    experiments: {
+      html: true,
+    },
     output: {
       filename: '[name].bundle.js',
       htmlFilename: '[name].html',

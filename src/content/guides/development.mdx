@@ -43,6 +43,9 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
      index: './src/index.js',
      print: './src/print.js',
    },
+   experiments: {
+     html: true,
+   },
    output: {
      filename: '[name].bundle.js',
      htmlFilename: '[name].html',
@@ -82,6 +85,9 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
      print: './src/print.js',
    },
 +  devtool: 'inline-source-map',
+   experiments: {
+     html: true,
+   },
    output: {
      filename: '[name].bundle.js',
      htmlFilename: '[name].html',
@@ -223,6 +229,9 @@ Change your configuration file to tell the dev server where to look for files:
 +  devServer: {
 +    static: './dist',
 +  },
+   experiments: {
+     html: true,
+   },
    output: {
      filename: '[name].bundle.js',
      htmlFilename: '[name].html',
@@ -312,6 +321,9 @@ Now we need to make some adjustments to our webpack configuration file in order 
    devtool: 'inline-source-map',
    devServer: {
      static: './dist',
+   },
+   experiments: {
+     html: true,
    },
    output: {
      filename: '[name].bundle.js',

@@ -144,11 +144,17 @@ export default {
   module: {
     rules: [{ test: /\.js$/, use: "babel-loader" }],
   },
-  plugins: [new webpack.BannerPlugin({ banner: "hello world" })],
+  plugins: [new webpack.ProgressPlugin()],
+  experiments: {
+    html: true,
+  },
+  output: {
+    html: true,
+  },
 };
 ```
 
-In the example above, the `BannerPlugin` adds a comment to the top of each generated chunk.
+In the example above, the `ProgressPlugin` customizes how build progress is reported, and [`output.html`](/configuration/output/#outputhtml) generates an HTML file for your application with all your generated bundles injected into it — webpack does that itself, so no plugin is needed for it.
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 

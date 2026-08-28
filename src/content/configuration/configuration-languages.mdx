@@ -194,9 +194,12 @@ __dirname = path.dirname(__filename)
 config =
   mode: 'production'
   entry: './path/to/my/entry/file.js'
+  experiments:
+    html: true
   output:
     path: path.resolve(__dirname, 'dist')
     filename: 'my-first-webpack.bundle.js'
+    html: true
   module:
     rules: [
       {

@@ -63,6 +63,9 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
       static: './dist',
 +     hot: true,
     },
+    experiments: {
+      html: true,
+    },
     output: {
       filename: '[name].bundle.js',
       htmlFilename: '[name].html',
@@ -107,6 +110,9 @@ you can also provide manual entry points for HMR:
 +     // Plugin for hot module replacement
 +     new webpack.HotModuleReplacementPlugin(),
     ],
+    experiments: {
+      html: true,
+    },
     output: {
       filename: '[name].bundle.js',
       htmlFilename: '[name].html',
@@ -212,6 +218,9 @@ const config = {
     // Plugin for hot module replacement
     new webpack.HotModuleReplacementPlugin(),
   ],
+  experiments: {
+    html: true,
+  },
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
