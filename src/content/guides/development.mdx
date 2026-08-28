@@ -33,6 +33,7 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
@@ -43,18 +44,16 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
      index: './src/index.js',
      print: './src/print.js',
    },
-   experiments: {
-     html: true,
-   },
-   output: {
-     filename: '[name].bundle.js',
-     htmlFilename: '[name].html',
-     path: path.resolve(__dirname, 'dist'),
-     clean: true,
-     html: {
+   plugins: [
+     new HtmlWebpackPlugin({
 -      title: 'Output Management',
 +      title: 'Development',
-     },
+     }),
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+     clean: true,
    },
  };
 ```
@@ -74,6 +73,7 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
@@ -85,17 +85,15 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
      print: './src/print.js',
    },
 +  devtool: 'inline-source-map',
-   experiments: {
-     html: true,
-   },
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: 'Development',
+     }),
+   ],
    output: {
      filename: '[name].bundle.js',
-     htmlFilename: '[name].html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
-     html: {
-       title: 'Development',
-     },
    },
  };
 ```
@@ -173,6 +171,7 @@ Let's add an npm script that will start webpack's Watch Mode:
    "author": "",
    "license": "ISC",
    "devDependencies": {
+     "html-webpack-plugin": "^5.6.6",
      "webpack": "^5.105.0",
      "webpack-cli": "^7.0.0"
    },
@@ -202,6 +201,8 @@ The only downside is that you have to refresh your browser in order to see the c
 
 ### Using webpack-dev-server
 
+T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because it emits one page per entrypoint rather than a single page carrying every entry's script, so the output here would not be the same.
+
 The `webpack-dev-server` provides you with a rudimentary web server and the ability to use live reloading. Let's set it up:
 
 ```bash
@@ -215,6 +216,7 @@ Change your configuration file to tell the dev server where to look for files:
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
@@ -229,17 +231,15 @@ Change your configuration file to tell the dev server where to look for files:
 +  devServer: {
 +    static: './dist',
 +  },
-   experiments: {
-     html: true,
-   },
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: 'Development',
+     }),
+   ],
    output: {
      filename: '[name].bundle.js',
-     htmlFilename: '[name].html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
-     html: {
-       title: 'Development',
-     },
    },
 +  optimization: {
 +    runtimeChunk: 'single',
@@ -275,6 +275,7 @@ Let's add a script to easily run the dev server as well:
    "author": "",
    "license": "ISC",
    "devDependencies": {
+     "html-webpack-plugin": "^5.6.6",
      "webpack": "^5.105.0",
      "webpack-cli": "^7.0.0",
      "webpack-dev-server": "^5.2.3"
@@ -308,6 +309,7 @@ Now we need to make some adjustments to our webpack configuration file in order 
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
+ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
@@ -322,17 +324,15 @@ Now we need to make some adjustments to our webpack configuration file in order 
    devServer: {
      static: './dist',
    },
-   experiments: {
-     html: true,
-   },
+   plugins: [
+     new HtmlWebpackPlugin({
+       title: 'Development',
+     }),
+   ],
    output: {
      filename: '[name].bundle.js',
-     htmlFilename: '[name].html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
-     html: {
-       title: 'Development',
-     },
 +    publicPath: '/',
    },
  };
@@ -402,6 +402,7 @@ Now add an npm script to make it a little easier to run the server:
    "license": "ISC",
    "devDependencies": {
      "express": "^5.2.1",
+     "html-webpack-plugin": "^5.6.6",
      "webpack": "^5.105.0",
      "webpack-cli": "^7.0.0",
      "webpack-dev-middleware": "^8.0.3",

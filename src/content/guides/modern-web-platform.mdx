@@ -172,9 +172,16 @@ export default {
   },
   output: {
     filename: "[name].[contenthash].js",
+    htmlFilename: "index.html",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    html: { title: "PWA + content hashes" },
+    html: {
+      title: "PWA + content hashes",
+      meta: {
+        charset: "utf8",
+        viewport: "width=device-width, initial-scale=1",
+      },
+    },
   },
   plugins: [
     new InjectManifest({

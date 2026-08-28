@@ -56,6 +56,8 @@ This is what we aim to change. Once we reach the end of this module we should be
 
 ## Adding Workbox
 
+T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because it emits one page per entrypoint rather than a single page carrying every entry's script, so the output here would not be the same.
+
 Let's add the Workbox webpack plugin and adjust the `webpack.config.js` file:
 
 ```bash
@@ -67,6 +69,7 @@ npm install workbox-webpack-plugin --save-dev
 ```diff
   import path from "node:path";
   import { fileURLToPath } from 'node:url';
+  import HtmlWebpackPlugin from "html-webpack-plugin";
 + import WorkboxPlugin from "workbox-webpack-plugin";
 
  const __filename = fileURLToPath(import.meta.url);
@@ -78,6 +81,10 @@ npm install workbox-webpack-plugin --save-dev
       print: './src/print.js',
     },
     plugins: [
+      new HtmlWebpackPlugin({
+-       title: 'Output Management',
++       title: 'Progressive Web Application',
+      }),
 +     new WorkboxPlugin.GenerateSW({
 +       // these options encourage the ServiceWorkers to get in there fast
 +       // and not allow any straggling "old" SWs to hang around
@@ -85,18 +92,10 @@ npm install workbox-webpack-plugin --save-dev
 +       skipWaiting: true,
 +     }),
     ],
-    experiments: {
-      html: true,
-    },
     output: {
       filename: '[name].bundle.js',
-      htmlFilename: '[name].html',
       path: path.resolve(__dirname, 'dist'),
       clean: true,
-      html: {
--       title: 'Output Management',
-+       title: 'Progressive Web Application',
-      },
     },
   };
 ```

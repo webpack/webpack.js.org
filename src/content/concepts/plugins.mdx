@@ -58,14 +58,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  entry: "./path/to/my/entry/file.js",
+  entry: "./src/index.html",
   experiments: {
     html: true,
   },
   output: {
     filename: "my-first-webpack.bundle.js",
     path: path.resolve(__dirname, "dist"),
-    html: true,
   },
   module: {
     rules: [
@@ -79,7 +78,7 @@ export default {
 };
 ```
 
-The `ProgressPlugin` is used to customize how progress should be reported during compilation, and [`output.html`](/configuration/output/#outputhtml) generates an HTML file including the `my-first-webpack.bundle.js` file using a `script` tag — see [Native HTML](/guides/native-html/).
+The `ProgressPlugin` is used to customize how progress should be reported during compilation. `src/index.html` is the entry, so webpack emits it as the page with the `<script src>` it references rewritten to the built chunk — no plugin is needed for that, see [Native HTML](/guides/native-html/).
 
 ### Node API
 
