@@ -274,9 +274,7 @@ cacheable modules 530 KiB
 webpack 5.x.x compiled successfully in 241 ms
 ```
 
-Here are some other useful plugins and loaders provided by the community for splitting code:
-
-- [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
+CSS is split the same way: webpack extracts a stylesheet per chunk on its own, so a lazily imported CSS file arrives with the chunk that needs it — see [Native CSS](/guides/native-css/).
 
 ## Dynamic Imports
 

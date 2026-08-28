@@ -181,7 +181,7 @@ We support `webpackIgnore` in the following cases:
 }
 ```
 
-T> For other CSS scenarios, [`css-loader` fully supports `webpackIgnore`](/loaders/css-loader/#disable-url-resolving-using-the--webpackignore-true--comment), allowing more flexibility if needed.
+T> The same comment works in CSS handled by webpack's [built-in CSS support](/guides/native-css/): put `/* webpackIgnore: true */` before an `@import` or a `url()` to leave it as written.
 
 **HTML Usage**
 

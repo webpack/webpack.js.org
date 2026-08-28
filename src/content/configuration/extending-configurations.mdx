@@ -28,8 +28,9 @@ export default {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.scss$/,
+        use: ["sass-loader"],
+        type: "css/auto",
       },
     ],
   },
@@ -89,8 +90,9 @@ export default {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.scss$/,
+        use: ["sass-loader"],
+        type: "css/auto",
       },
     ],
   },
@@ -202,8 +204,9 @@ export default {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.scss$/,
+        use: ["sass-loader"],
+        type: "css/auto",
       },
     ],
   },
@@ -230,8 +233,9 @@ export default {
 
       // From webpack.config.js (appended)
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.scss$/,
+        use: ["sass-loader"],
+        type: "css/auto",
       },
     ],
   },

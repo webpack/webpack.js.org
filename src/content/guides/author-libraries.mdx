@@ -343,4 +343,4 @@ W> The `module` property should point to a script that utilizes ES2015 module sy
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
 
-T> To expose stylesheets associated with your library, the [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
+T> To expose stylesheets associated with your library, import the CSS from your entry and let webpack's [built-in CSS support](/guides/native-css/) extract it — the emitted `.css` file is named by [`output.cssFilename`](/configuration/output/#outputcssfilename), and users consume and load it as they would any other stylesheet.

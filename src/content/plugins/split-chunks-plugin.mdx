@@ -156,7 +156,7 @@ export default {
 };
 ```
 
-T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/) for Single Page Application or [ChunksWebpackPlugin](https://github.com/yoriiis/chunks-webpack-plugin?tab=readme-ov-file#chunkswebpackplugin) for Multiple Page Application. It will inject all the generated vendor chunks for you.
+T> Combine this with [`output.html`](/configuration/output/#outputhtml) — webpack generates the page and injects every generated vendor chunk for you, for a single page or one page per entry. See [Native HTML](/guides/native-html/).
 
 ### splitChunks.maxAsyncRequests
 
