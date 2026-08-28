@@ -160,7 +160,6 @@ npm install workbox-webpack-plugin workbox-precaching --save-dev
 ```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import { InjectManifest } from "workbox-webpack-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -168,13 +167,16 @@ const __dirname = path.dirname(__filename);
 
 export default {
   entry: "./src/index.js",
+  experiments: {
+    html: true,
+  },
   output: {
     filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    html: { title: "PWA + content hashes" },
   },
   plugins: [
-    new HtmlWebpackPlugin({ title: "PWA + content hashes" }),
     new InjectManifest({
       swSrc: path.resolve(__dirname, "src/service-worker.js"),
       swDest: "service-worker.js",

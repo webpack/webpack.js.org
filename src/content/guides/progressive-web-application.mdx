@@ -67,7 +67,6 @@ npm install workbox-webpack-plugin --save-dev
 ```diff
   import path from "node:path";
   import { fileURLToPath } from 'node:url';
-  import HtmlWebpackPlugin from "html-webpack-plugin";
 + import WorkboxPlugin from "workbox-webpack-plugin";
 
  const __filename = fileURLToPath(import.meta.url);
@@ -79,10 +78,6 @@ npm install workbox-webpack-plugin --save-dev
       print: './src/print.js',
     },
     plugins: [
-      new HtmlWebpackPlugin({
--       title: 'Output Management',
-+       title: 'Progressive Web Application',
-      }),
 +     new WorkboxPlugin.GenerateSW({
 +       // these options encourage the ServiceWorkers to get in there fast
 +       // and not allow any straggling "old" SWs to hang around
@@ -92,8 +87,13 @@ npm install workbox-webpack-plugin --save-dev
     ],
     output: {
       filename: '[name].bundle.js',
+      htmlFilename: '[name].html',
       path: path.resolve(__dirname, 'dist'),
       clean: true,
+      html: {
+-       title: 'Output Management',
++       title: 'Progressive Web Application',
+      },
     },
   };
 ```

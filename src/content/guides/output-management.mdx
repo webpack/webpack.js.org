@@ -141,6 +141,8 @@ Multiple entry points are used here solely to demonstrate output management and 
 
 ## Setting up HtmlWebpackPlugin
 
+T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because the generated page re-enters the entry's script under an internal chunk name, which would obscure the bundle filenames this guide is about.
+
 First install the plugin and adjust the `webpack.config.js` file:
 
 ```bash

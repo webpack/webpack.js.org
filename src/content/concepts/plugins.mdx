@@ -52,7 +52,6 @@ Depending on how you are using webpack, there are multiple ways to use plugins.
 ```js
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import webpack from "webpack"; // to access built-in plugins
 
 const __filename = fileURLToPath(import.meta.url);
@@ -72,14 +71,11 @@ export default {
       },
     ],
   },
-  plugins: [
-    new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
-  ],
+  plugins: [new webpack.ProgressPlugin()],
 };
 ```
 
-The `ProgressPlugin` is used to customize how progress should be reported during compilation, and `HtmlWebpackPlugin` will generate a HTML file including the `my-first-webpack.bundle.js` file using a `script` tag.
+The `ProgressPlugin` is used to customize how progress should be reported during compilation. To generate an HTML file that loads `my-first-webpack.bundle.js`, set [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/).
 
 ### Node API
 

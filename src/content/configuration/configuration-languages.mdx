@@ -186,7 +186,6 @@ and then proceed to write your configuration:
 ```coffeescript
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
 
 __filename = fileURLToPath(import.meta.url)
@@ -206,7 +205,7 @@ config =
       }
     ]
   plugins: [
-    new HtmlWebpackPlugin(template: './src/index.html')
+    new webpack.ProgressPlugin()
   ]
 
 export default config
