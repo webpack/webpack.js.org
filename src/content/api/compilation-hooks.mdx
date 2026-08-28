@@ -303,6 +303,42 @@ Store chunk info to the records. This is only triggered if [`shouldRecord`](#sho
 
 - Callback Parameters: `chunks` `records`
 
+## renderEmbeddedSource
+
+<Badge text="5.110.0+" />
+
+`AsyncSeriesWaterfallHook`
+
+Called with source written in one language that a module emits inside another, before it is embedded. Today that is CSS or HTML reaching the bundle as a JavaScript string literal. Return the source to embed, possibly transformed.
+
+- Callback Parameters: `source`, `info`
+
+`info` carries `type` (the embedded source's type, `"css"` or `"html"`), `hostType` (the type it is embedded in, `"javascript"`) and `module` (the module being generated), so one tap can serve every pair.
+
+```js
+compilation.hooks.renderEmbeddedSource.tapPromise(
+  "MyPlugin",
+  async (source, info) => {
+    if (info.type !== "css") return source;
+    return new RawSource(await minifyCss(source.source()));
+  },
+);
+```
+
+No asset ever carries this source, so an asset-level minimizer cannot reach it. That is what the hook is for.
+
+W> Module hashes are taken before code generation, so a tap must write whatever it varies on into the hash through [`embeddedSourceHash`](#embeddedsourcehash). Otherwise the code generation cache replays output produced before your options changed.
+
+## embeddedSourceHash
+
+<Badge text="5.110.0+" />
+
+`SyncHook`
+
+Called while hashing a module that embeds a source of another language. Tap it to add whatever your [`renderEmbeddedSource`](#renderembeddedsource) tap varies on to the module hash.
+
+- Callback Parameters: `module`, `hash`
+
 ## beforeModuleHash
 
 `SyncHook`

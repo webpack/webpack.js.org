@@ -96,7 +96,7 @@ export default {
 
 Descriptor syntax might be used to pass additional options to an entry point.
 
-The `html` option <Badge text="5.108.0+" /> generates an HTML file for this entrypoint with its JS and CSS output chunks injected. It accepts the same values as [`output.html`](/configuration/output/#outputhtml) and overrides it option by option for this entry, so a single entry can opt out of page generation or change just its title:
+The `html` option <Badge text="5.108.0+" /> generates an HTML file for this entrypoint with its JS and CSS output chunks injected. It accepts the same values as [`output.html`](/configuration/output/#outputhtml) and, since webpack 5.110.0, an object that overrides it option by option for this entry, so a single entry can opt out of page generation or change just its title:
 
 ```js
 export default {

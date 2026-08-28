@@ -20,6 +20,7 @@ contributors:
   - anshumanv
   - SaulSilver
   - fi3ework
+  - bjohansebas
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to **library developers**, however there are a variety of applications for it.
@@ -192,6 +193,31 @@ export default {
   },
 };
 ```
+
+### object with options
+
+<Badge text="5.110.0+" />
+
+An external value can also be given as an object carrying the target under `external` plus options describing how webpack should treat it:
+
+```js
+export default {
+  // ...
+  externals: {
+    "@scope/icons": {
+      external: "commonjs @scope/icons",
+      sideEffects: false,
+    },
+  },
+};
+```
+
+- `external` - the target, in any of the forms above (a string, an array, or an object per externals type).
+- `sideEffects` - whether importing the external has side effects, the same idea as the [`sideEffects` flag](/guides/tree-shaking/#mark-the-file-as-side-effect-free) in a `package.json`.
+
+webpack cannot analyze an external, so it has to assume that importing one does something observable and keeps the import even when nothing reads its exports. `sideEffects: false` states the opposite, and lets webpack drop the external entirely when none of its exports are used. This matters most for a large external imported by a barrel file, where the request would otherwise survive into every chunk that touches the barrel.
+
+W> Only set it when the package really is free of side effects. Getting it wrong removes an import that the runtime was relying on for its effect, and the failure shows up at runtime rather than at build time.
 
 ### function
 
@@ -1053,16 +1079,19 @@ jq(".my-element").animate(/* ... */);
 
 Enable presets of externals for specific targets.
 
-| Option             | Description                                                                                                                                                                                                     | Input Type |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `electron`         | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                                                       | boolean    |
-| `electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                                                                      | boolean    |
-| `electronPreload`  | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                                                           | boolean    |
-| `electronRenderer` | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                                                        | boolean    |
-| `node`             | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.                                                                                                   | boolean    |
-| `nwjs`             | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.                                                                                                                         | boolean    |
-| `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.  | boolean    |
-| `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**. | boolean    |
+| Option             | Description                                                                                                                                                                                                                                                         | Input Type      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| `electron`         | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                                                                                                           | boolean         |
+| `electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                                                                                                                          | boolean         |
+| `electronPreload`  | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                                                                                                               | boolean         |
+| `electronRenderer` | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                                                                                                            | boolean         |
+| `bun`              | Treat bun built-in modules like `bun`, `bun:sqlite` or `bun:ffi`, and node.js built-in modules, as external and load them via `import` when used (for the Bun runtime).                                                                                             | boolean         |
+| `deno`             | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via the required `node:` specifier when used (for the Deno runtime).                                                                                                             | boolean         |
+| `node`             | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.                                                                                                                                                       | boolean         |
+| `nodeModules`      | <Badge text="5.110.0+" /> Treat installed packages (requests resolving into a `node_modules` directory) as external and load them via `require()`/`import` at runtime instead of bundling them. See [`externalsPresets.nodeModules`](#externalspresetsnodemodules). | boolean, object |
+| `nwjs`             | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.                                                                                                                                                                             | boolean         |
+| `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.                                                      | boolean         |
+| `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**.                                                     | boolean         |
 
 Note that if you're going to output ES Modules with those node.js-related presets, webpack will set the default `externalsType` to [`node-commonjs`](#externalstypenode-commonjs) which would use `createRequire` to construct a require function instead of using `require()`.
 
@@ -1080,3 +1109,60 @@ export default {
   },
 };
 ```
+
+### externalsPresets.nodeModules
+
+<Badge text="5.110.0+" />
+
+`boolean` `object`
+
+Treat every request that resolves into a `node_modules` directory as external and load it with `require()` or `import` at runtime, instead of bundling it. This is what a server-side build usually wants: the dependencies are already installed next to the output, so bundling them only makes the build slower and the output bigger.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  target: "node",
+  externalsPresets: {
+    nodeModules: true,
+  },
+};
+```
+
+The preset looks at where the request resolves, not at how it is written, so a request that resolves through a symlink into `node_modules` (a pnpm store, a linked workspace package) is externalized as well. A few things are never externalized, so you do not have to list them:
+
+- relative and absolute requests, and `#` subpath imports, which are never installed packages;
+- anything that does not resolve to a file the runtime can load on its own, that is anything other than `.js`, `.mjs`, `.cjs`, `.json` and `.node`, so a package's CSS or assets imported from JavaScript stay bundled and webpack keeps processing them;
+- CSS `@import` and `url()` references, which are handled by their own presets;
+- a request that [`resolve.alias`](/configuration/resolve/#resolvealias) sends to a different package, since the external would keep the original request and load the wrong one.
+
+The external is emitted as [`node-commonjs`](#externalstypenode-commonjs), or as [`module-import`](#externalstypemodule-import) when [`output.module`](/configuration/output/#outputmodule) is enabled; a `require()` dependency stays `node-commonjs` either way, so its `require()` semantics are preserved.
+
+T> This preset replaces the [`webpack-node-externals`](https://github.com/liady/webpack-node-externals) plugin, which did the same thing from outside webpack, and it has the resolver's answer instead of guessing from the request string.
+
+#### externalsPresets.nodeModules.allowlist
+
+Some installed packages still have to be bundled: one that only ships ESM while the output is CommonJS, a workspace package that is not published next to the output, or a package you want processed by your loaders. Pass them in `allowlist` to keep them bundled:
+
+```js
+export default {
+  // ...
+  externalsPresets: {
+    nodeModules: {
+      allowlist: [
+        // an exact request
+        "some-esm-only-package",
+        // everything under a scope
+        /^@my-company\//,
+        // or decide per request
+        (request) => request.startsWith("internal-"),
+      ],
+    },
+  },
+};
+```
+
+Each entry is a string matched exactly, a `RegExp` tested against the request, or a function returning `true` for the requests that should stay bundled.
+
+T> Turn on [`performance.unusedExternals`](/configuration/performance/#performanceunusedexternals) while you are tuning the list: it reports the requests listed in `externals` that no module imported, which is what a misspelled allowlist entry looks like.

@@ -803,6 +803,40 @@ export default {
 };
 ```
 
+### stats.hints
+
+<Badge text="5.110.0+" />
+
+`boolean = true`
+
+Add the performance hints reported with [`performance.hints: "stats"`](/configuration/performance/#performancehints). With that value the hints are not emitted as warnings or errors, so the stats are where they are read.
+
+```js
+export default {
+  // ...
+  stats: {
+    hints: false,
+  },
+};
+```
+
+### stats.hintsCount
+
+<Badge text="5.110.0+" />
+
+`boolean = true`
+
+Add the number of performance hints.
+
+```js
+export default {
+  // ...
+  stats: {
+    hintsCount: false,
+  },
+};
+```
+
 ### stats.ids
 
 `boolean = false`

@@ -382,6 +382,29 @@ Access to the internal object of all modules.
 
 It provides access to the hash of the compilation.
 
+## \_\_webpack_css_server_styles\_\_ (webpack-specific)
+
+<Badge text="5.110.0+" />
+
+`string`
+
+Returns the CSS that has been collected while rendering without a DOM, as one string. When the built-in CSS support ([`experiments.css`](/configuration/experiments/#experimentscss)) runs somewhere there is no `document` to insert a `<style>` into, a server-side render for example, webpack writes the styles to a global registry instead. This variable reads that registry back, in the order the styles were applied, so the server can inline them into the HTML it sends:
+
+```js
+import { renderToString } from "react-dom/server";
+import App from "./App.js";
+
+export function render() {
+  const html = renderToString(<App />);
+  // every stylesheet the render pulled in, in application order
+  const css = __webpack_css_server_styles__;
+
+  return `<!doctype html><html><head><style>${css}</style></head><body>${html}</body></html>`;
+}
+```
+
+The registry is keyed by style identifier and namespaced with [`output.uniqueName`](/configuration/output/#outputuniquename), so several bundles rendering in the same process do not read each other's styles.
+
 ## \_\_webpack_get_script_filename\_\_ (webpack-specific)
 
 `function (chunkId)`

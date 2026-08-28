@@ -437,6 +437,8 @@ T> Learn how [mode](/configuration/mode/) works.
 
 An object enables minimizing and configures the built-in minimizer per asset type. An absent type is minimized with its defaults, and `false` disables minimizing that type alone:
 
+The CSS and HTML minimizers only run when the corresponding built-in support is enabled ([`experiments.css`](/configuration/experiments/#experimentscss), [`experiments.html`](/configuration/experiments/#experimentshtml)), and webpack steps aside for a minimizer already configured for those assets, so an existing `css-minimizer-webpack-plugin` setup keeps owning its own.
+
 **webpack.config.js**
 
 ```js
@@ -528,11 +530,13 @@ export default {
 
 T> A `comments` predicate is handed to the minimizer's worker pool as source, so it must not close over anything.
 
+W> These options configure the minimizer webpack installs by default. Replacing [`optimization.minimizer`](#optimizationminimizer) with your own plugins replaces that minimizer, and they no longer apply.
+
 #### optimization.minimize.javascript
 
 `false` `object`
 
-Handed to the JavaScript minimizer as-is; `false` disables JavaScript minimizing while leaving CSS and HTML minimized.
+Handed to the JavaScript minimizer as-is, defaulting to `{ compress: { passes: 2 } }`; `false` disables JavaScript minimizing while leaving CSS and HTML minimized.
 
 ## optimization.minimizer
 

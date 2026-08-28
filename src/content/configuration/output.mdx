@@ -535,6 +535,10 @@ export default {
       templateLiteral: true,
       // The environment supports `import.meta.dirname` and `import.meta.filename`.
       importMetaDirnameAndFilename: false,
+      // The environment supports deferred module evaluation ('import defer * as ns from "..."', 'import.defer("...")'). Since webpack 5.110.0.
+      deferImport: false,
+      // The environment supports source phase imports ('import source m from "..."', 'import.source("...")'). Since webpack 5.110.0.
+      sourceImport: false,
     },
   },
 };
@@ -670,16 +674,18 @@ Substitutions available on Module-level:
 
 Substitutions available on File-level:
 
-| Template   | Description                                                                       |
-| ---------- | --------------------------------------------------------------------------------- |
-| [file]     | Filename and path, without query or fragment                                      |
-| [query]    | Query with leading `?`                                                            |
-| [fragment] | Fragment with leading `#`                                                         |
-| [base]     | Only filename (including extensions), without path                                |
-| [filebase] | Same, but deprecated                                                              |
-| [path]     | Only path, without filename                                                       |
-| [name]     | Only filename without extension or path                                           |
-| [ext]      | Extension with leading `.` (not available for [output.filename](#outputfilename)) |
+| Template        | Description                                                                       |
+| --------------- | --------------------------------------------------------------------------------- |
+| [file]          | Filename and path, without query or fragment                                      |
+| [query]         | Query with leading `?`                                                            |
+| [fragment]      | Fragment with leading `#`                                                         |
+| [base]          | Only filename (including extensions), without path                                |
+| [filebase]      | Same, but deprecated                                                              |
+| [path]          | Only path, without filename                                                       |
+| [containedfile] | Same as `[file]`, kept inside `output.path`                                       |
+| [containedpath] | Same as `[path]`, kept inside `output.path`                                       |
+| [name]          | Only filename without extension or path                                           |
+| [ext]           | Extension with leading `.` (not available for [output.filename](#outputfilename)) |
 
 Substitutions available on URL-level:
 
@@ -688,6 +694,21 @@ Substitutions available on URL-level:
 | [url]    | URL         |
 
 T> `[file]` equals `[path][base]`. `[base]` equals `[name][ext]`. The full path is `[path][name][ext][query][fragment]` or `[path][base][query][fragment]` or `[file][query][fragment]`.
+
+`[containedfile]` and `[containedpath]` <Badge text="5.110.0+" /> are `[file]` and `[path]` rewritten so the result always stays under [`output.path`](#outputpath): a leading absolute root and every `../` segment become `_/`. A module resolved outside the [`context`](/configuration/entry-context/#context), a linked package or a file above the project root, has a `[path]` starting with `..`, and using it in a filename template writes the asset outside the output directory. The contained placeholders keep the same directory structure inside it instead:
+
+```js
+// a module at ../shared/logo.png, with context at ./src
+export default {
+  // ...
+  output: {
+    assetModuleFilename: "[containedpath][name][ext]", // _/shared/logo.png
+    // "[path][name][ext]" would emit ../shared/logo.png, outside output.path
+  },
+};
+```
+
+With [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) enabled, `[path]` and `[file]` already behave this way for asset and HTML modules, so the contained placeholders are what those templates resolve to anyway. This will become the default in webpack 6.
 
 The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
@@ -1371,6 +1392,31 @@ Which will result in the following bundle:
 ```js
 globalThis.clientContainer.define(/* define args */); // or 'amd-require' window['clientContainer'].require(/*require args*/);
 ```
+
+### output.library.umdAmdContainer
+
+<Badge text="5.110.0+" />
+
+`string`
+
+Add a branch to the UMD wrapper for an AMD-style loader that exposes `define` on a container object rather than as a global, given as a dot-separated path. The branch is emitted right after the standard `define.amd` one, so a plain AMD loader still wins and the container is only used where it is the loader present:
+
+```js
+export default {
+  // ...
+  output: {
+    library: {
+      name: "MyLibrary",
+      type: "umd",
+      umdAmdContainer: "myContainer.amdLoader",
+    },
+  },
+};
+```
+
+The value must be a dot-separated identifier path (`myContainer.amdLoader`), not an arbitrary expression.
+
+W> This is not [`output.library.amdContainer`](#outputlibraryamdcontainer), which applies to the `amd` and `amd-require` library types and calls `define`/`require` through the container. `umdAmdContainer` only adds a branch to the `umd` wrapper's detection chain.
 
 ### output.library.name
 
@@ -2809,6 +2855,28 @@ export default {
   },
 };
 ```
+
+### output.resourceHints.dedupe
+
+<Badge text="5.110.0+" />
+
+`boolean = false`
+
+Skip the runtime-injected `<link rel="prefetch">` for a chunk that the document already preloads or prefetches. Some browsers, Chrome among them, fetch the chunk twice when both links are present.
+
+```js
+export default {
+  // ...
+  output: {
+    resourceHints: {
+      initial: true,
+      dedupe: true,
+    },
+  },
+};
+```
+
+T> [`performance.conflictingResourceHints`](/configuration/performance/#performanceconflictingresourcehints) reports the other half of the problem: a chunk asked for as both prefetch and preload from the same place, where the two directives contradict each other.
 
 ### output.resourceHints.manifest
 
