@@ -712,7 +712,7 @@ With [`experiments.futureDefaults`](/configuration/experiments/#experimentsfutur
 
 The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
-Since webpack 5.108.0, the hash digest encoding can also be set inline as `[<hash>:<digest>:<length>]`, for example `[contenthash:base64:8]`. The digest defaults to [`output.hashDigest`](#outputhashdigest) (`hex`), and the same form works in CSS module [`localIdentName`](/loaders/css-loader/#localidentname) placeholders.
+Since webpack 5.108.0, the hash digest encoding can also be set inline as `[<hash>:<digest>:<length>]`, for example `[contenthash:base64:8]`. The digest defaults to [`output.hashDigest`](#outputhashdigest) (`hex`), and the same form works in CSS module [`localIdentName`](/configuration/module/#modulegenerator) placeholders.
 
 It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
 
