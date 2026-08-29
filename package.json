@@ -117,7 +117,6 @@
     "autoprefixer": "^10.5.4",
     "babel-loader": "^10.1.1",
     "copy-webpack-plugin": "^14.0.0",
-    "css-minimizer-webpack-plugin": "^8.0.0",
     "cypress": "^15.21.1",
     "directory-tree": "^3.6.0",
     "directory-tree-webpack-plugin": "^1.0.3",

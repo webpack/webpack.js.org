@@ -3,7 +3,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { TransformStream } from "node:stream/web";
 import CopyWebpackPlugin from "copy-webpack-plugin";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import RedirectWebpackPlugin from "redirect-webpack-plugin";
 import SSGPlugin from "static-site-generator-webpack-plugin";
 
@@ -38,12 +37,10 @@ export default (env) =>
       filename: ".server/[name].[contenthash].js",
       libraryTarget: "umd",
     },
+    // The server bundle only renders the pages and the stylesheet it emits is
+    // unreferenced, so nothing here is worth minifying.
     optimization: {
-      minimizer: [
-        new CssMinimizerPlugin({
-          minify: CssMinimizerPlugin.lightningCssMinify,
-        }),
-      ],
+      minimize: false,
     },
     plugins: [
       new SSGPlugin({
