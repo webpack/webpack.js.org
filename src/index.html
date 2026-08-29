@@ -1,6 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head> </head>
+  <head>
+    <script>
+      (function () {
+        try {
+          var d = document.documentElement;
+          var s = localStorage.getItem("theme");
+          var isDark = false;
+          if (s) {
+            isDark = s === '"dark"' || s === "dark";
+          } else {
+            isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (isDark) {
+              localStorage.setItem("theme", '"dark"');
+            }
+          }
+          if (isDark) {
+            d.setAttribute("data-theme", "dark");
+            d.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
   <body>
     <div id="root"></div>
   </body>
