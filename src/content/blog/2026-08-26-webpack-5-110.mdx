@@ -161,7 +161,17 @@ Since 5.109 that support defaults to `'auto'`: it turns itself on unless a loade
 
 ### Migrating
 
-In most projects, migrating is deleting configuration:
+You do not have to do it by hand. There is now a [webpack codemods](https://github.com/webpack/codemods) repository, and its first codemod migrates exactly this:
+
+```sh
+npx codemod run @webpack/css-plugins-to-native-css
+```
+
+It removes the rules that only wire up `style-loader`, `css-loader` and `MiniCssExtractPlugin.loader`, drops the plugin and its import, and moves the options that have a native counterpart: the plugin's `filename` and `chunkFilename` become [`output.cssFilename`](/configuration/output/#outputcssfilename) and [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename), `css-loader`'s `modules` sub-options become the rule's `generator` and `parser` options, and a preprocessor left in the chain keeps working with `type: "css/auto"` added to its rule.
+
+It understands the shapes real configs come in, including the `isDev ? "style-loader" : MiniCssExtractPlugin.loader` ternary that ejected Create React App configs use, function-form configs and `webpack-merge` fragments. Anything without a native equivalent is dropped with a comment naming what went, so you can review the change rather than discover it later.
+
+Underneath, in most projects migrating is deleting configuration:
 
 ```diff
  export default {
