@@ -3,7 +3,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { h as hastscript } from "hastscript";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import autolink from "remark-autolink-headings";
 import remarkEmoji from "remark-emoji";
 import frontmatter from "remark-frontmatter";
@@ -94,7 +93,8 @@ export default ({ ssg = false }) => ({
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        use: ["postcss-loader"],
+        type: "css/auto",
       },
       {
         test: /\.woff2?$/,
@@ -129,19 +129,20 @@ export default ({ ssg = false }) => ({
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-      experimentalUseImportModule: true,
-    }),
     new webpack.DefinePlugin({
       // https://github.com/algolia/algoliasearch-client-javascript/issues/764
       "process.env.RESET_APP_DATA_TIMER": JSON.stringify(""), // fix for algoliasearch
     }),
   ],
+  experiments: {
+    css: true,
+  },
   output: {
     path: path.resolve(__dirname, "./dist"),
     publicPath: "/",
     filename: "[name].bundle.js",
+    cssFilename: "[name].[contenthash].css",
+    cssChunkFilename: "[name].[contenthash].css",
     hashFunction: "xxhash64",
   },
 });
