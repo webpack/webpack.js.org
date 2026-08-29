@@ -69,3 +69,44 @@ body {
 .screen-reader-only {
   @apply sr-only;
 }
+
+.sidebar-anchor {
+  display: block;
+  margin-left: -0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-left: 4px solid transparent;
+  color: #2b3a42;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.sidebar-anchor:hover {
+  border-left-color: #9ab3c0;
+  color: #175d96;
+}
+
+.sidebar-anchor--active {
+  border-left-color: #175d96;
+  background-color: #d8ecfb;
+  color: #175d96;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px rgba(23, 93, 150, 0.08);
+}
+
+.dark .sidebar-anchor {
+  color: #b8b8b8;
+}
+
+.dark .sidebar-anchor:hover {
+  border-left-color: #82b7f6;
+  color: #82b7f6;
+}
+
+.dark .sidebar-anchor--active {
+  border-left-color: #82b7f6;
+  background-color: #263342;
+  color: #82b7f6;
+}

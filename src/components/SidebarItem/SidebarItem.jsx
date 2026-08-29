@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
 import BarIcon from "../../styles/icons/vertical-bar.svg";
 import list2Tree from "../../utilities/list2Tree/index.js";
@@ -14,7 +14,9 @@ import list2Tree from "../../utilities/list2Tree/index.js";
  * @returns {boolean}
  */
 function isOpen(currentPage, url) {
-  return new RegExp(`${currentPage}/?$`).test(url);
+  const normalizePath = (path) => path.replace(/\/+$/, "");
+
+  return normalizePath(currentPage) === normalizePath(url);
 }
 
 /**
@@ -26,6 +28,13 @@ function isOpen(currentPage, url) {
  */
 function generateAnchorURL(url, anchor) {
   return anchor.id ? `${url}#${anchor.id}` : url;
+}
+
+function hasAnchorId(anchors, id) {
+  return anchors.some(
+    (anchor) =>
+      anchor.id === id || (anchor.children && hasAnchorId(anchor.children, id)),
+  );
 }
 
 function scrollTop(event) {
@@ -41,25 +50,48 @@ function scrollTop(event) {
     window.scrollTo(0, 0);
   }
 }
-
-function Anchors({ anchors, url }) {
+function Anchors({
+  anchors,
+  url,
+  activeSection,
+  setActiveSection,
+  isCurrentPage,
+}) {
   return (
     <ul className="relative hidden flex-[0_0_100%] flex-wrap my-[0.35em] pl-6 overflow-hidden list-none leading-[19px] before:content-[''] before:absolute before:h-[calc(100%-0.6em)] before:top-0 before:left-6 before:border-l before:border-dashed before:border-[#777676] group-data-[open]/item:flex">
-      {anchors.map((anchor) => (
-        <li
-          key={generateAnchorURL(url, anchor)}
-          className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
-          title={anchor.title}
-        >
-          <NavLink
-            to={generateAnchorURL(url, anchor)}
-            className="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+      {anchors.map((anchor) => {
+        const active = isCurrentPage && activeSection === anchor.id;
+
+        return (
+          <li
+            key={generateAnchorURL(url, anchor)}
+            className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
+            title={anchor.title}
           >
-            {anchor.title2}
-          </NavLink>
-          {anchor.children && <Anchors anchors={anchor.children} url={url} />}
-        </li>
-      ))}
+            <Link
+              to={generateAnchorURL(url, anchor)}
+              onClick={() => setActiveSection?.(anchor.id)}
+              aria-current={active ? "location" : undefined}
+              className={
+                active
+                  ? "sidebar-anchor sidebar-anchor--active"
+                  : "sidebar-anchor"
+              }
+            >
+              {anchor.title2}
+            </Link>
+            {anchor.children && (
+              <Anchors
+                anchors={anchor.children}
+                url={url}
+                activeSection={activeSection}
+                setActiveSection={setActiveSection}
+                isCurrentPage={isCurrentPage}
+              />
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -67,24 +99,80 @@ function Anchors({ anchors, url }) {
 Anchors.propTypes = {
   anchors: PropTypes.array.isRequired,
   url: PropTypes.string.isRequired,
+  activeSection: PropTypes.string,
+  setActiveSection: PropTypes.func,
+  isCurrentPage: PropTypes.bool,
 };
 
-export default function SidebarItem({ title, anchors = [], url, currentPage }) {
+export default function SidebarItem({
+  title,
+  anchors = [],
+  url,
+  currentPage,
+  activeSection,
+  setActiveSection,
+}) {
   const [open, setOpen] = useState(() => isOpen(currentPage, url));
+  const itemRef = useRef(null);
+  const current = isOpen(currentPage, url);
+  const tree = useMemo(
+    () =>
+      list2Tree(
+        title,
+        anchors.filter((anchor) => anchor.level > 1),
+      ),
+    [anchors, title],
+  );
 
   useEffect(() => {
     setOpen(isOpen(currentPage, url));
   }, [currentPage, url]);
+  useEffect(() => {
+    if (current && activeSection && hasAnchorId(tree, activeSection)) {
+      setOpen(true);
+    }
+  }, [activeSection, current, tree]);
+  useEffect(() => {
+    if (current && open && activeSection && itemRef.current) {
+      const activeAnchor = itemRef.current.querySelector(
+        `a[href$="#${activeSection}"]`,
+      );
 
+      if (activeAnchor) {
+        const scrollContainer = itemRef.current
+          .closest("nav")
+          ?.querySelector(".overflow-y-auto");
+        const activeRect = activeAnchor.getBoundingClientRect();
+        const containerRect = scrollContainer?.getBoundingClientRect();
+        const shouldScroll =
+          !containerRect ||
+          containerRect.height === 0 ||
+          activeRect.top < containerRect.top ||
+          activeRect.bottom > containerRect.bottom;
+
+        if (shouldScroll) {
+          activeAnchor.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }
+      }
+    }
+  }, [activeSection, current, open]);
   const toggle = useCallback(() => {
     setOpen((prev) => !prev);
   }, []);
-
-  const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
-  const tree = list2Tree(title, filteredAnchors);
+  const handlePageLinkClick = useCallback(
+    (event) => {
+      setActiveSection?.("");
+      scrollTop(event);
+    },
+    [setActiveSection],
+  );
 
   return (
     <div
+      ref={itemRef}
       className="group/item relative flex flex-wrap text-[15px] my-[0.6em]"
       data-open={open || undefined}
     >
@@ -119,12 +207,19 @@ export default function SidebarItem({ title, anchors = [], url, currentPage }) {
           `flex-1 max-w-[85%] overflow-hidden whitespace-nowrap text-ellipsis ${isActive ? "font-semibold text-[#333] dark:text-white" : "text-[#2b3a42] dark:text-[#b8b8b8]"}`
         }
         to={url}
-        onClick={scrollTop}
+        onClick={handlePageLinkClick}
       >
         {title}
       </NavLink>
-
-      {anchors.length > 0 ? <Anchors anchors={tree} url={url} /> : null}
+      {anchors.length > 0 ? (
+        <Anchors
+          anchors={tree}
+          url={url}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          isCurrentPage={current}
+        />
+      ) : null}
     </div>
   );
 }
@@ -134,4 +229,6 @@ SidebarItem.propTypes = {
   anchors: PropTypes.array,
   url: PropTypes.string,
   currentPage: PropTypes.string,
+  activeSection: PropTypes.string,
+  setActiveSection: PropTypes.func,
 };

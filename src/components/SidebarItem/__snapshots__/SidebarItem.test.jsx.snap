@@ -32,7 +32,7 @@ exports[`SidebarItem matches snapshot 1`] = `
       title="Step 1"
     >
       <a
-        class="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+        class="sidebar-anchor"
         data-discover="true"
         href="/guides/getting-started/#step-1"
       >

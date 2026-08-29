@@ -10,7 +10,13 @@ const versions = [5, 4];
 const currentDocsVersion = 5;
 
 // Create and export the component
-export default function Sidebar({ className = "", pages, currentPage }) {
+export default function Sidebar({
+  className = "",
+  pages,
+  currentPage,
+  activeSection,
+  setActiveSection,
+}) {
   const [version, setVersion] = useState(currentDocsVersion);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -85,6 +91,8 @@ export default function Sidebar({ className = "", pages, currentPage }) {
                 title={page.title}
                 anchors={page.anchors}
                 currentPage={currentPage}
+                activeSection={activeSection}
+                setActiveSection={setActiveSection}
               />
             </div>
           );
@@ -98,4 +106,6 @@ Sidebar.propTypes = {
   className: PropTypes.string,
   pages: PropTypes.array,
   currentPage: PropTypes.string,
+  activeSection: PropTypes.string,
+  setActiveSection: PropTypes.func,
 };
