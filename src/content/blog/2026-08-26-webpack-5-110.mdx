@@ -277,6 +277,7 @@ The registry is namespaced with `output.uniqueName`, so several bundles renderin
 - [`output.resourceHints.dedupe`](/configuration/output/#outputresourcehintsdedupe) skips the runtime-injected prefetch link for a chunk the document already preloads or prefetches, which some browsers otherwise fetch twice. [`performance.conflictingResourceHints`](/configuration/performance/#performanceconflictingresourcehints) reports the other half of that problem.
 - The [`[containedpath]` and `[containedfile]`](/configuration/output/#template-strings) placeholders are `[path]` and `[file]` rewritten to stay under `output.path`, which is what a module resolved outside the `context` needs. With `experiments.futureDefaults`, `[path]` and `[file]` already behave this way for asset and HTML modules.
 - ESM output emits analyzable urls for chunks, assets, styles, workers and wasm.
+- A library build no longer gets a source map by default in `development`. The default [`devtool`](/configuration/devtool/) wraps each module in `eval`, and a library is read by another bundler, which the wrapper then hides `import.meta` from. This applies when the build emits a `module` or `modern-module` library, and with [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) to a library of any type. Setting `devtool` yourself still does what it says.
 - A relative entry `baseUri` is resolved, and bindings named `eval`, `arguments` or a reserved word are reported in ES module output.
 
 ## MultiCompiler
