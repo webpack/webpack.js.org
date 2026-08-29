@@ -25,7 +25,22 @@ export default {
 };
 ```
 
-With this option enabled, webpack understands `.css` files as first-class modules — parsing `@import` and `url()`, extracting stylesheets, generating content hashes, minifying, and supporting CSS Modules — without `css-loader`, `style-loader`, `mini-css-extract-plugin`, or `css-minimizer-webpack-plugin`.
+With this option enabled, webpack understands `.css` files as first-class modules: it parses them itself instead of handing them to a loader.
+
+## What's built-in
+
+"Built-in" means webpack does the work itself, with no loader in the chain — not that it covers everything the CSS loaders do. The scope is exactly this:
+
+| Built in                                                                                           | Still needs a loader or plugin                                                                           |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Parsing `.css`; resolving `@import` and `url()` / `image-set()` / `src()` / `image()`              | **Preprocessors** — Sass, Less, Stylus and PostCSS always keep their loaders                             |
+| [CSS Modules](#css-modules): `composes`, `@value`, `:export`, `:local()` / `:global()`             | `css-loader`'s `importLoaders`, `localIdentRegExp`, `getJSON`, and the `url` / `import` filter callbacks |
+| [Extracting](#output-modes-exporttype) a `.css` file, or injecting a `<style>` tag at runtime      | `style-loader`'s `insert`, `attributes`, `styleTagTransform`, and its lazy / singleton injection modes   |
+| Content hashes, [minification](#minification) and browserslist [vendor prefixes](#vendor-prefixes) | Anything a PostCSS plugin does beyond `@custom-media` / `@custom-selector`                               |
+| [`@custom-media` and `@custom-selector`](#custom-media-and-custom-selectors)                       |                                                                                                          |
+| Hot Module Replacement for stylesheets                                                             |                                                                                                          |
+
+So a project whose CSS setup is `css-loader` + `style-loader` (or `mini-css-extract-plugin`) with default options needs no CSS loader at all. A project that reaches for the options in the right-hand column keeps that loader for the files that need it — the two can coexist, rule by rule.
 
 T> Since webpack 5.109.0 the option defaults to `'auto'`: built-in CSS support turns on unless a [`module.rules`](/configuration/module/#modulerules) entry with a loader (or an explicit module type) already matches `.css` files. An existing `css-loader` setup therefore keeps working untouched, and you can migrate one rule at a time. Set it to `true` to force the native support, or `false` to switch it off.
 

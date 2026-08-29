@@ -38,6 +38,8 @@ W> **HMR** is not intended for use in production, meaning it should only be used
 
 ## Enabling HMR
 
+T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because it emits one page per entrypoint rather than a single page carrying every entry's script, so the output here would not be the same.
+
 This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built-in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
 
 Since `webpack-dev-server` v4.0.0, Hot Module Replacement is enabled by default.

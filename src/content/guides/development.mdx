@@ -201,6 +201,8 @@ The only downside is that you have to refresh your browser in order to see the c
 
 ### Using webpack-dev-server
 
+T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because it emits one page per entrypoint rather than a single page carrying every entry's script, so the output here would not be the same.
+
 The `webpack-dev-server` provides you with a rudimentary web server and the ability to use live reloading. Let's set it up:
 
 ```bash

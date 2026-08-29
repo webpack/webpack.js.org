@@ -31,6 +31,8 @@ We can use the `output.filename` [substitutions](/configuration/output/#outputfi
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
+T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because the generated page re-enters the entry's script under an internal chunk name, which would obscure the bundle filenames this guide is about.
+
 **project**
 
 ```diff

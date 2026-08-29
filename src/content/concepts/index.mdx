@@ -138,18 +138,21 @@ In order to use a plugin, you need to `import` it and add it to the `plugins` ar
 **webpack.config.js**
 
 ```js
-import HtmlWebpackPlugin from "html-webpack-plugin";
 import webpack from "webpack"; // to access built-in plugins
 
 export default {
+  entry: "./src/index.html",
+  experiments: {
+    html: true,
+  },
   module: {
     rules: [{ test: /\.js$/, use: "babel-loader" }],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+  plugins: [new webpack.ProgressPlugin()],
 };
 ```
 
-In the example above, the `html-webpack-plugin` generates an HTML file for your application and automatically injects all your generated bundles into this file.
+In the example above, the `ProgressPlugin` customizes how build progress is reported. Your `src/index.html` is the entry: webpack bundles the scripts and styles it references and rewrites those URLs to the built filenames, so no plugin is needed to produce the page — see [Native HTML](/guides/native-html/).
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 

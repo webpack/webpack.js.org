@@ -186,7 +186,6 @@ and then proceed to write your configuration:
 ```coffeescript
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
 
 __filename = fileURLToPath(import.meta.url)
@@ -194,7 +193,9 @@ __dirname = path.dirname(__filename)
 
 config =
   mode: 'production'
-  entry: './path/to/my/entry/file.js'
+  entry: './src/index.html'
+  experiments:
+    html: true
   output:
     path: path.resolve(__dirname, 'dist')
     filename: 'my-first-webpack.bundle.js'
@@ -206,7 +207,7 @@ config =
       }
     ]
   plugins: [
-    new HtmlWebpackPlugin(template: './src/index.html')
+    new webpack.ProgressPlugin()
   ]
 
 export default config
