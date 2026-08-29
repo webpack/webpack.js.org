@@ -50,9 +50,8 @@ Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`
 
 ## Templating
 
-T> Webpack has experimental built-in HTML support ([`experiments.html`](/configuration/experiments/#experimentshtml)) that covers the common setup. Template engines still need their loader — see [What's built-in](/guides/native-html/#whats-built-in).
+T> HTML is built in ([`experiments.html`](/configuration/experiments/#experimentshtml), experimental), so `html-loader` is not listed here. It stays [documented](/loaders/html-loader) for what the built-in support does not cover — see [What's built-in](/guides/native-html/#whats-built-in). Template engines always keep their loader.
 
-- [`html-loader`](/loaders/html-loader) Exports HTML as string, require references to static resources ([built-in alternative](/guides/native-html/#whats-built-in))
 - [`pug-loader`](https://github.com/pugjs/pug-loader) Loads Pug and Jade templates and returns a function
 - [`markdown-loader`](https://github.com/peerigon/markdown-loader) Compiles Markdown to HTML
 - [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader) Compiles Markdown to a React Component using the markdown-parse parser
@@ -64,10 +63,8 @@ T> Webpack has experimental built-in HTML support ([`experiments.html`](/configu
 
 ## Styling
 
-T> Webpack has experimental built-in CSS support ([`experiments.css`](/configuration/experiments/#experimentscss)) that covers the common setup. It does not replace preprocessors, and a few loader options have no equivalent — see [What's built-in](/guides/native-css/#whats-built-in).
+T> CSS is built in ([`experiments.css`](/configuration/experiments/#experimentscss), experimental), so [`css-loader`](/loaders/css-loader) and [`style-loader`](/loaders/style-loader) are not listed here. Both stay documented for the options that have no built-in equivalent — see [What's built-in](/guides/native-css/#whats-built-in). Preprocessors always keep their loader.
 
-- [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM ([built-in alternative](/guides/native-css/#whats-built-in))
-- [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code ([built-in alternative](/guides/native-css/#whats-built-in))
 - [`css-utility-loader`](https://github.com/SahilKhanWDC/css-utility-loader-webpack-.git) - Automatically parses and translates legacy CSS properties into modern utility classes (Tailwind) at build-time.
 - [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
 - [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file
