@@ -1,0 +1,308 @@
+---
+title: Webpack 5.110
+sort: 20260826
+contributors:
+  - bjohansebas
+---
+
+Webpack 5.110 is out. The headline is that webpack now tells you what is wrong with your bundle: a suite of more than thirty performance checks that report duplicated packages, modules nothing uses, chunks that load in a waterfall, rules that never match, and the rest of the things people used to reach for a plugin or a bundle analyzer to find.
+
+The second story is that the built-in minimizer now handles CSS and HTML as well as JavaScript, with every rewrite it may perform exposed as an option. Together with the native CSS support that has been maturing since 5.107, that closes the last gap between webpack's own CSS pipeline and the loader-based one, and it is why this release also announces the deprecation of `css-loader`, `style-loader` and `mini-css-extract-plugin`.
+
+Explore what's new:
+
+- [**Performance Hints**](#performance-hints)
+  - [Turning them on](#turning-them-on)
+  - [What each check looks at](#what-each-check-looks-at)
+  - [Reporting into stats only](#reporting-into-stats-only)
+- [**CSS and HTML Minification, Built In**](#css-and-html-minification-built-in)
+  - [Configuring the minimizer per asset type](#configuring-the-minimizer-per-asset-type)
+- [**Native CSS Is the Way Forward**](#native-css-is-the-way-forward)
+  - [Benchmarks](#benchmarks)
+  - [Migrating](#migrating)
+- [**Externalizing Installed Packages**](#externalizing-installed-packages)
+- [**OS-Independent Module Rules**](#os-independent-module-rules)
+- [**Tree Shaking and Scope Hoisting**](#tree-shaking-and-scope-hoisting)
+- [**Server-Side Rendering**](#server-side-rendering)
+- [**HTML Improvements**](#html-improvements)
+- [**Output and Library**](#output-and-library)
+- [**MultiCompiler**](#multicompiler)
+- [**Other Improvements**](#other-improvements)
+- [**Bug Fixes and Performance**](#bug-fixes-and-performance)
+
+## Performance Hints
+
+`performance` used to do one thing: warn when an asset or an entrypoint went over a size budget. In 5.110 it becomes the place where webpack reports everything it noticed about your build while it was making it.
+
+The checks fall into two groups. Some look at the bundle: packages included twice, modules shipped by several entrypoints, a barrel file dragging in code nothing uses, a chunk carried by a single module, `import()` calls that defer nothing. Others look at the configuration: a `module.rules` entry that never matched, a `resolve.alias` nothing resolved through, a `DefinePlugin` key no module reads, an `externals` request nothing imported, a `test` that only matches on one operating system.
+
+None of it is guesswork from outside the build. webpack already has the module graph, the chunk graph, the resolver's answers and the rule set, so each check reads the thing it is reporting on.
+
+### Turning them on
+
+Every check is off by default. [`performance.all`](/configuration/performance/#performanceall) turns on the whole set, and anything you set explicitly still wins:
+
+```js
+export default {
+  // ...
+  performance: {
+    hints: "warning",
+    all: true,
+  },
+};
+```
+
+That is the configuration to audit a project with. Once you have read the report, keep the handful that matter to you and leave the rest off, since several of the checks walk the module graph and cost build time.
+
+A single check works the same way:
+
+```js
+export default {
+  // ...
+  performance: {
+    hints: "warning",
+    duplicatePackages: true,
+    unusedRules: true,
+  },
+};
+```
+
+### What each check looks at
+
+| Area                | Checks                                                                                                             |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| What ships twice    | `duplicatePackages`, `duplicateModules`, `entrypointOverlap`                                                       |
+| What ships unused   | `unusedReexports`, `missingSideEffects`, `dynamicExports`, `scopeHoistingBailouts`, `legacyJavascript`             |
+| How chunks load     | `asyncChunkWaterfalls`, `redundantDynamicImports`, `tinyChunks`, `unsplitVendors`, `splitChunksCapped`             |
+| What weighs a chunk | `largeModules`, `inlinedAssets`, `embeddedSourceMaps`, `broadContexts`                                             |
+| Code hazards        | `evalUsage`, `pureAnnotations`, `topLevelThis`, `mixedExports`                                                     |
+| Configuration       | `unusedRules`, `unusedAliases`, `unusedDefines`, `unusedExternals`, `osDependentRules`, `conflictingResourceHints` |
+| Build itself        | `cacheEffectiveness`, `hotspots`, `circularDependencies`                                                           |
+
+Each one is documented under [`performance`](/configuration/performance/#available-checks), with what it reports and what to do about it.
+
+Each hint says what it found, what it costs and what to do about it. A duplicate package report names the versions and the bytes; a scope hoisting report groups the bailouts by reason rather than listing every module; [`hotspots`](/configuration/performance/#performancehotspots) times each loader, plugin and hook's own synchronous code rather than what it waited for, so it points at the thing that is actually slow.
+
+The configuration checks are not gated on `hints`. A rule nothing matches or a misspelled external is a mistake rather than a size, so they are reported whenever the check itself is on.
+
+### Reporting into stats only
+
+Turning on twenty checks in a project that has never had them is a lot of warnings, and in CI a lot of failures. [`performance.hints: "stats"`](/configuration/performance/#performancehints) collects the hints into [`stats`](/configuration/stats/#statshints) instead of emitting them as warnings or errors, so the build stays green while you work through the report:
+
+```js
+export default {
+  // ...
+  performance: {
+    hints: "stats",
+    all: true,
+  },
+};
+```
+
+Hints are also now computed after hashing, so turning one on does not change your output hashes, and they are reported in a stable order when entries tie.
+
+## CSS and HTML Minification, Built In
+
+When [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is enabled, webpack's default minimizer now minifies CSS and HTML assets as well as JavaScript, through the same worker pool. If you already have a minimizer configured for those assets, webpack steps aside and leaves them to it.
+
+Both minifiers are conservative by construction: they only make transformations an engine cannot tell apart.
+
+The CSS side folds `calc()` and the other math functions over constants, merges box longhands into the shorthand they are, writes each color, number, selector and media query in its shortest equal spelling, drops rules a later identical one makes dead, and maintains vendor prefixes against your `browserslist` target.
+
+The HTML side leaves out the tags the parser re-implies, collapses whitespace nothing renders, normalizes attribute quoting and casing, and rewrites `style`, token lists, `srcset`, `sizes` and a JSON `<script>` body through their own grammars.
+
+### Configuring the minimizer per asset type
+
+`optimization.minimize` now accepts an object, and every rewrite either minifier may perform is an option you can turn off on its own:
+
+```js
+export default {
+  // ...
+  optimization: {
+    minimize: {
+      javascript: { compress: { passes: 3 } },
+      css: {
+        // this app reads authored custom property text back at runtime
+        rewriteCustomProperties: false,
+      },
+      html: {
+        collapseWhitespace: "smart",
+        sortAttributes: true,
+        sortTokenLists: true,
+      },
+    },
+  },
+};
+```
+
+An asset type the object does not name is minimized with its defaults, and `false` disables minimizing that type while the others keep running. The defaults are the transformations that keep the document's meaning; the ones that change what a script or a selector reads back, like `sortAttributes` or `removeRedundantAttributes`, stay off until you ask for them. The full option sets are documented under [`optimization.minimize.css`](/configuration/optimization/#optimizationminimizecss) and [`optimization.minimize.html`](/configuration/optimization/#optimizationminimizehtml).
+
+CSS and HTML can also be printed beautified rather than minified, which is what makes the output readable while you are debugging a build.
+
+## Native CSS Is the Way Forward
+
+With this release, webpack's own CSS pipeline covers what the loader stack covered: CSS Modules with scoped classes, ids, keyframes, counters and grid area names, `@import` and `url()` resolution, custom media, source maps, hot module replacement, code splitting per chunk, and now minification with browser-aware prefixing.
+
+That makes the loader-based setup redundant, so it is being wound down: **`css-loader`, `style-loader` and `mini-css-extract-plugin` are deprecated in favour of the built-in support.** They keep working, and webpack still steps aside for them wherever they are configured, so nothing breaks in this release. They will stop receiving features, and the recommendation for every new project, and for every migration, is [`experiments.css`](/configuration/experiments/#experimentscss).
+
+Since 5.109 that support defaults to `'auto'`: it turns itself on unless a loader is already registered for CSS files. So an existing project stays on the loaders until you remove them, and a new project gets the native pipeline without configuring anything.
+
+### Benchmarks
+
+**This section is being measured and will be filled in before this post is published.**
+
+| Metric                | Loader pipeline | Native CSS | Difference |
+| --------------------- | --------------- | ---------- | ---------- |
+| Cold production build |                 |            |            |
+| Rebuild (warm cache)  |                 |            |            |
+| HMR update            |                 |            |            |
+| Peak memory           |                 |            |            |
+| Emitted CSS           |                 |            |            |
+
+### Migrating
+
+In most projects, migrating is deleting configuration:
+
+```diff
+ export default {
++  experiments: {
++    css: true,
++  },
+   module: {
+     rules: [
+-      {
+-        test: /\.css$/,
+-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+-      },
++      // nothing: webpack handles .css and .module.css itself
+     ],
+   },
+-  plugins: [new MiniCssExtractPlugin()],
+ };
+```
+
+A few things to know before you do:
+
+- A `.module.css` file is a CSS Module and any other `.css` file is global, which is the `css/auto` behaviour. [`Rule.type`](/configuration/module/#ruletype) picks a different one explicitly per rule.
+- Class name generation moves to the [`generator`](/configuration/module/#rulegenerator) options of the CSS module types (`localIdentName`, `exportsConvention`, `exportsOnly`) rather than `css-loader`'s `modules` options.
+- PostCSS, Sass and Less still run as loaders. Native CSS replaces the tail of the chain, not the preprocessor at its head: keep `sass-loader`, drop `css-loader` after it.
+- The extracted CSS is a real chunk asset, so `[contenthash]`, `splitChunks` and the resource hints apply to it the way they do to JavaScript.
+
+## Externalizing Installed Packages
+
+Server builds have used `webpack-node-externals` for years to keep `node_modules` out of the bundle. That is now a preset:
+
+```js
+export default {
+  // ...
+  target: "node",
+  externalsPresets: {
+    nodeModules: true,
+  },
+};
+```
+
+Because it runs inside webpack, it decides from where a request actually resolves rather than from how it is written, so a symlinked workspace package or a pnpm store path is externalized correctly. It also never externalizes what the runtime could not load on its own: a package's CSS or assets imported from JavaScript stay bundled and keep going through your loaders.
+
+[`allowlist`](/configuration/externals/#externalspresetsnodemodulesallowlist) keeps chosen requests bundled, by exact string, `RegExp` or predicate.
+
+Externals also gained a `sideEffects` flag. webpack cannot analyze an external, so it has always had to assume that importing one does something observable. Saying otherwise lets it drop the external entirely when nothing uses its exports:
+
+```js
+export default {
+  // ...
+  externals: {
+    "@scope/icons": {
+      external: "commonjs @scope/icons",
+      sideEffects: false,
+    },
+  },
+};
+```
+
+## OS-Independent Module Rules
+
+A rule written as `test: /src\/components\//` matches on Linux and macOS and silently matches nothing on Windows. [`Rule.glob`](/configuration/module/#ruleglob) is a condition where that cannot happen: both `/` and `\` are read as a path separator, in the pattern and in the tested path.
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        glob: ["**/*.ts", "!**/*.test.ts", "!**/generated/**"],
+        loader: "ts-loader",
+      },
+    ],
+  },
+};
+```
+
+Patterns are OR-ed, a `!` prefix subtracts, and the condition is also accepted inside a `Condition` object, so `include: { glob: "src/**" }` works too. [`performance.osDependentRules`](/configuration/performance/#performanceosdependentrules) reports the regexp conditions in your configuration that have the problem this solves.
+
+The companion condition is [`Rule.descriptionRelativePath`](/configuration/module/#ruledescriptionrelativepath), which matches a module by its path inside its own package (`./lib/button.js`) rather than by an absolute location that changes with the install layout.
+
+## Tree Shaking and Scope Hoisting
+
+- Exports destructured from a `require()` binding are tree-shaken, as are `module.exports` object literals and unused method requires. Unused side-effect-free `require()` calls and re-exports are dropped outright.
+- A namespace re-exported as `default` shakes properly, and `import d from "./mod"; d.member` no longer reads `undefined` when `mod` re-exports a namespace that way.
+- Concatenated modules that cannot be merged are wrapped in lazy `__webpack_require__.cw` accessors with the `require()` inlined, which keeps a wrapped body's names and side effects intact while letting the rest of the group hoist.
+- `sideEffects` is inherited past a type-only nested `package.json` for files under `node_modules`.
+- The exports usage of side-effect-free modules that an active `import()` evaluates is tracked.
+- Provided exports are determined in dependency order, so a build's module hashes no longer depend on what the persistent cache happened to hold.
+
+## Server-Side Rendering
+
+Rendering on the server has no DOM to insert a `<style>` into, so the built-in CSS support writes the styles it collects to a global registry instead. [`__webpack_css_server_styles__`](/api/module-variables/#__webpack_css_server_styles__-webpack-specific) reads that registry back, in the order the styles were applied:
+
+```js
+export function render() {
+  const html = renderToString(App);
+  const css = __webpack_css_server_styles__;
+
+  return `<!doctype html><html><head><style>${css}</style></head><body>${html}</body></html>`;
+}
+```
+
+The registry is namespaced with `output.uniqueName`, so several bundles rendering in the same process do not read each other's styles.
+
+## HTML Improvements
+
+- A hot update now patches the `<head>` in place instead of falling back to a full page reload, so a new `<meta>`, a swapped `<link rel="icon">` or a removed `<script>` that never executed no longer costs a reload.
+- An entry's [`html`](/configuration/entry-context/#entry-descriptor) option accepts an object that overrides [`output.html`](/configuration/output/#outputhtml) option by option, so one page can differ in a title or a script loading strategy while the rest of the configuration is shared.
+- The parser matches the spec's tree for frameset content, quirks-mode paragraphs and selects, treats `<![CDATA[` outside foreign content as a bogus comment, parses `<?target data?>` as a processing instruction, and keeps the attributes a repeated `<html>` or `<body>` tag merges.
+
+## Output and Library
+
+- [`output.library.umdAmdContainer`](/configuration/output/#outputlibraryumdamdcontainer) adds a branch to the UMD wrapper for an AMD-style loader that exposes `define` on a container object instead of as a global, after the standard `define.amd` branch.
+- [`output.resourceHints.dedupe`](/configuration/output/#outputresourcehintsdedupe) skips the runtime-injected prefetch link for a chunk the document already preloads or prefetches, which some browsers otherwise fetch twice. [`performance.conflictingResourceHints`](/configuration/performance/#performanceconflictingresourcehints) reports the other half of that problem.
+- The [`[containedpath]` and `[containedfile]`](/configuration/output/#template-strings) placeholders are `[path]` and `[file]` rewritten to stay under `output.path`, which is what a module resolved outside the `context` needs. With `experiments.futureDefaults`, `[path]` and `[file]` already behave this way for asset and HTML modules.
+- ESM output emits analyzable urls for chunks, assets, styles, workers and wasm.
+- A relative entry `baseUri` is resolved, and bindings named `eval`, `arguments` or a reserved word are reported in ES module output.
+
+## MultiCompiler
+
+- The `done` hook is handed the compilers whose build actually ran, in configuration order. In watch mode a change usually invalidates only some children, so this is how a plugin tells what is new. See [MultiCompiler hooks](/api/node/#multicompiler-hooks).
+- A `shutdown` hook lets a plugin release resources once for the whole set.
+- The children share one file watcher pool, the common `outputPath` is computed by whole path segments, watch mode recovers from a fatal child error without leaking watchings, and a run is possible again after a dependency validation failure.
+
+## Other Improvements
+
+- A failed request now suggests the closest name, or a casing fix, anywhere in the request.
+- [`stats.hints`](/configuration/stats/#statshints) and [`stats.hintsCount`](/configuration/stats/#statshintscount) expose the performance hints, and `optimizationBailout` reports inner-graph, AMD and bare `module` bailouts.
+- The [`renderEmbeddedSource`](/api/compilation-hooks/#renderembeddedsource) compilation hook offers source one language embeds in another, CSS or HTML reaching the bundle as a JavaScript string literal, to a plugin before it is embedded. No asset carries that source, so an asset-level minimizer cannot reach it.
+- [`output.environment`](/configuration/output/#outputenvironment) gained `deferImport` and `sourceImport`, and `import defer` / `import source` are derived from the target.
+- `@custom-media` values that are `true` / `false` or that name another custom media are resolved, counter names are scoped in CSS Modules, and cross-kind CSS Module export conflicts warn rather than resolving silently.
+- UNC paths are supported in the module and context replacement plugins.
+- Compilation and file system caches retained after `compiler.close()` are released.
+
+## Bug Fixes and Performance
+
+Beyond the features, a long list of bugs has been fixed since version [5.109](https://github.com/webpack/webpack/releases/tag/v5.109.0).
+
+The performance campaign continues: `eslint-scope` is replaced with a faster, leaner built-in scope analyzer, runtime modules, parsers, generators and dependencies are loaded only when used, concatenated module renaming works from AST offsets and a shared-name index, and CSS, HTML and JavaScript parsing all got faster while allocating less. The runtime itself emits less code, and shorter syntax wherever `output.environment` allows it. Check the [changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md) for all the details.
+
+## Thanks
+
+A big thank you to all our contributors and [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring)
+who made Webpack 5.110 possible. Your support, whether through code contributions, documentation, or financial sponsorship, helps keep Webpack evolving and improving for everyone.
