@@ -18,7 +18,6 @@ Explore what's new:
 - [**CSS and HTML Minification, Built In**](#css-and-html-minification-built-in)
   - [Configuring the minimizer per asset type](#configuring-the-minimizer-per-asset-type)
 - [**Native CSS Is the Way Forward**](#native-css-is-the-way-forward)
-  - [Benchmarks](#benchmarks)
   - [Migrating](#migrating)
 - [**Externalizing Installed Packages**](#externalizing-installed-packages)
 - [**OS-Independent Module Rules**](#os-independent-module-rules)
@@ -147,9 +146,7 @@ That makes the loader-based setup redundant, so it is being wound down: **`css-l
 
 Since 5.109 that support defaults to `'auto'`: it turns itself on unless a loader is already registered for CSS files. So an existing project stays on the loaders until you remove them, and a new project gets the native pipeline without configuring anything.
 
-### Benchmarks
-
-**This section is being measured and will be filled in before this post is published.**
+It is also faster. Every stylesheet in a loader setup is read, parsed and stringified once per loader in the chain, and then handed back to webpack as a JavaScript module to parse again; the built-in support parses it once, as CSS, and keeps it as CSS all the way to the asset. The bigger the share of your build that is CSS, the more that shows up in the wall clock, so a design-system or component-library build with thousands of stylesheets gains far more from the migration than an app with a handful of them.
 
 ### Migrating
 
