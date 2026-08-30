@@ -2,16 +2,42 @@
  * @jest-environment jsdom
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { describe, expect, it } from "@jest/globals";
+import { afterAll, beforeAll, describe, expect, it, jest } from "@jest/globals";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import SidebarItem from "./SidebarItem.jsx";
+
+const scrollIntoViewMock = jest.fn();
+const requestAnimationFrameMock = (callback) => {
+  callback();
+  return 1;
+};
+const cancelAnimationFrameMock = jest.fn();
 
 function renderWithRouter(ui, { route = "/" } = {}) {
   return render(<MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>);
 }
 
 describe("SidebarItem", () => {
+  beforeAll(() => {
+    Object.defineProperty(HTMLElement.prototype, "scrollIntoView", {
+      configurable: true,
+      value: scrollIntoViewMock,
+    });
+    Object.defineProperty(window, "requestAnimationFrame", {
+      configurable: true,
+      value: requestAnimationFrameMock,
+    });
+    Object.defineProperty(window, "cancelAnimationFrame", {
+      configurable: true,
+      value: cancelAnimationFrameMock,
+    });
+  });
+
+  afterAll(() => {
+    delete HTMLElement.prototype.scrollIntoView;
+  });
+
   const defaultProps = {
     title: "Getting Started",
     url: "/guides/getting-started/",
@@ -79,6 +105,34 @@ describe("SidebarItem", () => {
     renderWithRouter(<SidebarItem {...defaultProps} anchors={anchors} />);
     expect(screen.getByText("Introduction")).toBeTruthy();
     expect(screen.getByText("Basic Setup")).toBeTruthy();
+  });
+
+  it("highlights and scrolls the active anchor into view", () => {
+    const anchors = [
+      { id: "intro", title: "Introduction", title2: "Introduction", level: 2 },
+      { id: "setup", title: "Setup", title2: "Setup", level: 2 },
+    ];
+
+    render(
+      <MemoryRouter initialEntries={["/guides/getting-started/"]}>
+        <div>
+          <div id="md-content">
+            <h2 id="intro">Introduction</h2>
+            <h2 id="setup">Setup</h2>
+          </div>
+          <SidebarItem
+            {...defaultProps}
+            anchors={anchors}
+            currentPage="/guides/getting-started/"
+          />
+        </div>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole("link", { name: "Setup" }).className).toContain(
+      "text-[#175d96]",
+    );
+    expect(scrollIntoViewMock).toHaveBeenCalled();
   });
 
   it("renders a bar icon when no anchors are provided", () => {

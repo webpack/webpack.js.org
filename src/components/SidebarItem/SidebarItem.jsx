@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
 import BarIcon from "../../styles/icons/vertical-bar.svg";
 import list2Tree from "../../utilities/list2Tree/index.js";
@@ -42,22 +42,41 @@ function scrollTop(event) {
   }
 }
 
-function Anchors({ anchors, url }) {
+function Anchors({ anchors, url, activeAnchorId }) {
+  const activeAnchorRef = useRef(null);
+
+  useEffect(() => {
+    if (activeAnchorRef.current) {
+      activeAnchorRef.current.scrollIntoView({
+        block: "nearest",
+        inline: "nearest",
+        behavior: "smooth",
+      });
+    }
+  }, [activeAnchorId]);
+
   return (
     <ul className="relative hidden flex-[0_0_100%] flex-wrap my-[0.35em] pl-6 overflow-hidden list-none leading-[19px] before:content-[''] before:absolute before:h-[calc(100%-0.6em)] before:top-0 before:left-6 before:border-l before:border-dashed before:border-[#777676] group-data-[open]/item:flex">
       {anchors.map((anchor) => (
         <li
           key={generateAnchorURL(url, anchor)}
-          className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
+          ref={anchor.id === activeAnchorId ? activeAnchorRef : null}
+          className={`relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676] ${anchor.id === activeAnchorId ? "border-l-2 border-[#175d96] pl-3 bg-[#eef6fc] dark:bg-[#122235]" : ""}`.trim()}
           title={anchor.title}
         >
-          <NavLink
+          <Link
             to={generateAnchorURL(url, anchor)}
-            className="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+            className={`${anchor.id === activeAnchorId ? "font-semibold text-[#175d96] dark:text-[#82b7f6]" : "text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"}`}
           >
             {anchor.title2}
-          </NavLink>
-          {anchor.children && <Anchors anchors={anchor.children} url={url} />}
+          </Link>
+          {anchor.children && (
+            <Anchors
+              anchors={anchor.children}
+              url={url}
+              activeAnchorId={activeAnchorId}
+            />
+          )}
         </li>
       ))}
     </ul>
@@ -67,14 +86,79 @@ function Anchors({ anchors, url }) {
 Anchors.propTypes = {
   anchors: PropTypes.array.isRequired,
   url: PropTypes.string.isRequired,
+  activeAnchorId: PropTypes.string,
 };
 
 export default function SidebarItem({ title, anchors = [], url, currentPage }) {
   const [open, setOpen] = useState(() => isOpen(currentPage, url));
+  const [activeAnchorId, setActiveAnchorId] = useState(null);
 
   useEffect(() => {
     setOpen(isOpen(currentPage, url));
   }, [currentPage, url]);
+
+  useEffect(() => {
+    if (currentPage !== url || anchors.length === 0) {
+      setActiveAnchorId(null);
+      return undefined;
+    }
+
+    const content = document.getElementById("md-content");
+
+    if (!content) {
+      setActiveAnchorId(null);
+      return undefined;
+    }
+
+    const activeAnchors = anchors.filter((anchor) => anchor.level > 1);
+
+    const updateActiveAnchor = () => {
+      const anchorElements = activeAnchors
+        .map((anchor) => document.getElementById(anchor.id))
+        .filter(Boolean);
+
+      let nextActiveAnchorId = null;
+
+      for (const anchorElement of anchorElements) {
+        if (anchorElement.getBoundingClientRect().top <= 120) {
+          nextActiveAnchorId = anchorElement.id;
+        } else {
+          break;
+        }
+      }
+
+      if (!nextActiveAnchorId && anchorElements.length > 0) {
+        nextActiveAnchorId = anchorElements[0].id;
+      }
+
+      setActiveAnchorId(nextActiveAnchorId);
+    };
+
+    updateActiveAnchor();
+
+    let animationFrameId = window.requestAnimationFrame(updateActiveAnchor);
+
+    const handleScroll = () => {
+      window.cancelAnimationFrame(animationFrameId);
+      animationFrameId = window.requestAnimationFrame(updateActiveAnchor);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    const mutationObserver = new MutationObserver(handleScroll);
+    mutationObserver.observe(content, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      mutationObserver.disconnect();
+    };
+  }, [anchors, currentPage, url]);
 
   const toggle = useCallback(() => {
     setOpen((prev) => !prev);
@@ -124,7 +208,9 @@ export default function SidebarItem({ title, anchors = [], url, currentPage }) {
         {title}
       </NavLink>
 
-      {anchors.length > 0 ? <Anchors anchors={tree} url={url} /> : null}
+      {anchors.length > 0 ? (
+        <Anchors anchors={tree} url={url} activeAnchorId={activeAnchorId} />
+      ) : null}
     </div>
   );
 }
