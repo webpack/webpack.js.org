@@ -1,7 +1,6 @@
 // Import External Dependencies
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import { merge } from "webpack-merge";
 import { InjectManifest } from "workbox-webpack-plugin";
 
@@ -35,7 +34,6 @@ export default (env) =>
           },
         },
       },
-      minimizer: ["...", new CssMinimizerPlugin()],
     },
     plugins: [
       new InjectManifest({
