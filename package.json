@@ -121,7 +121,7 @@
     "directory-tree": "^3.6.0",
     "directory-tree-webpack-plugin": "^1.0.3",
     "duplexer": "^0.1.2",
-    "eslint": "^9.39.5",
+    "eslint": "^10.9.1",
     "eslint-config-webpack": "^4.9.6",
     "eslint-plugin-cypress": "^6.4.4",
     "eslint-plugin-mdx": "^3.8.1",
