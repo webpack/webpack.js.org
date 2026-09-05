@@ -1165,4 +1165,4 @@ export default {
 
 Each entry is a string matched exactly, a `RegExp` tested against the request, or a function returning `true` for the requests that should stay bundled.
 
-T> Turn on [`performance.unusedExternals`](/configuration/performance/#performanceunusedexternals) while you are tuning the list: it reports the requests listed in `externals` that no module imported, which is what a misspelled allowlist entry looks like.
+T> Turn on [`performance.unusedConfig`](/configuration/performance/#performanceunusedconfig) while you are tuning the list: it reports the requests listed in `externals` that no module imported, which is what a misspelled allowlist entry looks like.
