@@ -28,17 +28,17 @@ Besides the size budget ([`maxAssetSize`](#performancemaxassetsize) and [`maxEnt
 
 | Area                | Checks                                                                                                                                                                                                                                                                                                                                         |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| What ships twice    | [`duplicatePackages`](#performanceduplicatepackages), [`duplicateModules`](#performanceduplicatemodules), [`entrypointOverlap`](#performanceentrypointoverlap)                                                                                                                                                                                 |
-| What ships unused   | [`unusedReexports`](#performanceunusedreexports), [`missingSideEffects`](#performancemissingsideeffects), [`dynamicExports`](#performancedynamicexports), [`scopeHoistingBailouts`](#performancescopehoistingbailouts), [`legacyJavascript`](#performancelegacyjavascript)                                                                     |
+| What ships twice    | [`duplicatePackages`](#performanceduplicatepackages), [`duplicateModules`](#performanceduplicatemodules)                                                                                                                                                                                                                                       |
+| What ships unused   | [`unusedModules`](#performanceunusedmodules), [`unusedAssets`](#performanceunusedassets), [`missingSideEffects`](#performancemissingsideeffects), [`dynamicExports`](#performancedynamicexports), [`scopeHoistingBailouts`](#performancescopehoistingbailouts), [`legacyJavascript`](#performancelegacyjavascript)                             |
 | How chunks load     | [`asyncChunkWaterfalls`](#performanceasyncchunkwaterfalls), [`redundantDynamicImports`](#performanceredundantdynamicimports), [`tinyChunks`](#performancetinychunks), [`unsplitVendors`](#performanceunsplitvendors), [`splitChunksCapped`](#performancesplitchunkscapped), [`conflictingResourceHints`](#performanceconflictingresourcehints) |
-| What weighs a chunk | [`largeModules`](#performancelargemodules), [`inlinedAssets`](#performanceinlinedassets), [`embeddedSourceMaps`](#performanceembeddedsourcemaps), [`broadContexts`](#performancebroadcontexts)                                                                                                                                                 |
+| What weighs a chunk | [`largeModules`](#performancelargemodules), [`inlinedAssets`](#performanceinlinedassets), [`sourceMaps`](#performancesourcemaps), [`broadContexts`](#performancebroadcontexts)                                                                                                                                                                 |
 | Code hazards        | [`evalUsage`](#performanceevalusage), [`pureAnnotations`](#performancepureannotations), [`topLevelThis`](#performancetoplevelthis), [`mixedExports`](#performancemixedexports)                                                                                                                                                                 |
-| Configuration       | [`unusedRules`](#performanceunusedrules), [`unusedAliases`](#performanceunusedaliases), [`unusedDefines`](#performanceunuseddefines), [`unusedExternals`](#performanceunusedexternals), [`osDependentRules`](#performanceosdependentrules)                                                                                                     |
+| Configuration       | [`unusedConfig`](#performanceunusedconfig), [`osDependentRules`](#performanceosdependentrules)                                                                                                                                                                                                                                                 |
 | Build itself        | [`cacheEffectiveness`](#performancecacheeffectiveness), [`hotspots`](#performancehotspots), [`circularDependencies`](#performancecirculardependencies)                                                                                                                                                                                         |
 
 Most of them are reported through [`performance.hints`](#performancehints), so they are silent while `hints` is `false`.
 
-The checks that look at your configuration are not gated on `hints`, since a rule nothing matches or a misspelled external is a configuration mistake rather than a size: [`unusedRules`](#performanceunusedrules), [`unusedAliases`](#performanceunusedaliases), [`unusedDefines`](#performanceunuseddefines), [`unusedExternals`](#performanceunusedexternals), [`osDependentRules`](#performanceosdependentrules) and [`conflictingResourceHints`](#performanceconflictingresourcehints) are reported as warnings whenever the check itself is on.
+The checks that look at your configuration are not gated on `hints`, since a rule nothing matches or a misspelled external is a configuration mistake rather than a size: [`unusedConfig`](#performanceunusedconfig), [`osDependentRules`](#performanceosdependentrules) and [`conflictingResourceHints`](#performanceconflictingresourcehints) are reported as warnings whenever the check itself is on.
 
 ### performance.all
 
@@ -145,7 +145,7 @@ This check is not gated on [`hints`](#performancehints).
 
 `boolean = false`
 
-Report modules emitted into more than one chunk, and the bytes the extra copies cost. Usually a sign that [`optimization.splitChunks`](/plugins/split-chunks-plugin/) could move the shared modules into a chunk of their own.
+Report modules emitted into more than one chunk, and the bytes the extra copies cost, naming the entrypoints that pay for each. Usually a sign that [`optimization.splitChunks`](/plugins/split-chunks-plugin/) could move the shared modules into a chunk of their own, with `chunks: "all"` where the copies are in different entrypoints.
 
 ### performance.duplicatePackages
 
@@ -174,22 +174,6 @@ T> [`resolve.alias`](/configuration/resolve/#resolvealias) or your package manag
 `boolean = false`
 
 Report modules whose exports cannot be read statically (a CommonJS module assigning to `module.exports` behind a condition, for example), which stops anything importing them from being tree-shaken.
-
-### performance.embeddedSourceMaps
-
-<Badge text="5.110.0+" />
-
-`boolean = false`
-
-Report a production build whose [`devtool`](/configuration/devtool/) writes the source map into the JavaScript itself. The map is then downloaded by everyone who loads the page, at several times the size of the code it describes. A separate `.map` file is fetched only by whoever opens the devtools, and `hidden-source-map` keeps it off the client entirely while still producing a map to upload to an error reporter.
-
-### performance.entrypointOverlap
-
-<Badge text="5.110.0+" />
-
-`boolean = false`
-
-Report modules shipped by more than one entrypoint, which every page that loads them downloads again, along with the bytes the overlap costs.
 
 ### performance.evalUsage
 
@@ -377,6 +361,16 @@ Report `import()` calls whose module is already loaded where the call runs, so t
 
 Report modules that could not be merged into their importer's scope by [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules), and why, so each keeps its own wrapper. The reasons are grouped and counted rather than listed one module at a time.
 
+### performance.sourceMaps
+
+<Badge text="5.111.0+" />
+
+`boolean = false`
+
+Report source maps that cost more than they give. Two findings share this switch. A production build whose [`devtool`](/configuration/devtool/) writes the map into the JavaScript itself has it downloaded by everyone who loads the page, at several times the size of the code it describes; a separate `.map` file is fetched only by whoever opens the devtools, and `hidden-source-map` keeps it off the client entirely while still producing a map to upload to an error reporter.
+
+The second is a module a loader transformed without returning a map. webpack then maps positions to the loader's output as though it were the file on disk, so a loader that injects ten lines ships a map whose stack traces point ten lines out, with no error and no warning. Have the loader pass its map to `this.callback(null, code, map)`.
+
 ### performance.splitChunksCapped
 
 <Badge text="5.110.0+" />
@@ -409,52 +403,28 @@ Report modules that read `this` at the top level of an ES module, where it is `u
 
 Report initial chunks that mix `node_modules` code with application code. The dependencies then get a new hash on every application change, so returning visitors download them again; [`optimization.splitChunks`](/plugins/split-chunks-plugin/) can move them into a chunk of their own.
 
-### performance.unusedAliases
+### performance.unusedAssets
 
-<Badge text="5.110.0+" />
-
-`boolean = false`
-
-Report [`resolve.alias`](/configuration/resolve/#resolvealias) entries that no request matched, which usually means the alias is misspelled and the real request resolved somewhere else.
-
-This check is not gated on [`hints`](#performancehints).
-
-### performance.unusedDefines
-
-<Badge text="5.110.0+" />
+<Badge text="5.111.0+" />
 
 `boolean = false`
 
-Report keys defined by [`DefinePlugin`](/plugins/define-plugin/) that no module ever referenced. Each one costs a parser hook per module and invalidates the build whenever its value changes. The keys webpack defines itself (`process.env.NODE_ENV` and the `import.meta.env` defaults) are marked internal and are never reported against you.
+Report asset files emitted for an import whose binding nothing reads, so the bytes ship for nothing. A bare `import "./icon.png"` is not reported: with nothing bound, emitting the file is the only thing the import can have been written for.
 
-This check is not gated on [`hints`](#performancehints).
+### performance.unusedConfig
 
-### performance.unusedExternals
-
-<Badge text="5.110.0+" />
+<Badge text="5.111.0+" />
 
 `boolean = false`
 
-Report requests listed in [`externals`](/configuration/externals/) that no module ever imported, which usually means the request is misspelled and the real one got bundled instead.
+Report configuration that no build used: [`resolve.alias`](/configuration/resolve/#resolvealias) entries nothing matched, [`DefinePlugin`](/plugins/define-plugin/) keys nothing referenced, [`externals`](/configuration/externals/) nothing imported, and [`module.rules`](/configuration/module/#modulerules) that never matched. Each finding keeps its own message, so the report names which of the four it is.
 
-This check is not gated on [`hints`](#performancehints).
+A misspelled external is the costly one, since the real request gets bundled instead and no size limit would explain it. Plugins add rules too, so a reported rule is not necessarily one you wrote.
 
-### performance.unusedReexports
+### performance.unusedModules
 
-<Badge text="5.110.0+" />
-
-`boolean = false`
-
-Report modules that are bundled although nothing uses what they export, pulled in by a re-export. This is the classic barrel file cost: `export * from "./x"` in an `index.js` drags `./x` into the bundle even when only its neighbour is imported.
-
-### performance.unusedRules
-
-<Badge text="5.110.0+" />
+<Badge text="5.111.0+" />
 
 `boolean = false`
 
-Report rules in [`module.rules`](/configuration/module/#modulerules) that never matched a module, which cost condition evaluation on every build and usually mean the `test` does not describe the files you thought it did.
-
-This check is not gated on [`hints`](#performancehints).
-
-W> Plugins add rules too, so a reported rule is not necessarily one you wrote.
+Report modules bundled although nothing uses what they export, naming what kept each one. A re-export is the classic barrel file cost: `export * from "./x"` in an `index.js` drags `./x` into the bundle even when only its neighbour is imported. The other cause is a side-effect statement, where the module is kept only by something it does when it is evaluated, and the report names that statement and where it is.
