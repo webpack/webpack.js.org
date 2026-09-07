@@ -1,0 +1,116 @@
+---
+title: CopyPlugin
+group: webpack
+contributors:
+  - alexander-akait
+related:
+  - title: output.copy
+    url: /configuration/output/#outputcopy
+  - title: output-copy example
+    url: https://github.com/webpack/webpack/tree/main/examples/output-copy
+---
+
+Copies files and directories into [`output.path`](/configuration/output/#outputpath) as part of the build. This is the plugin behind [`output.copy`](/configuration/output/#outputcopy), and webpack applies it for you when that option is set — reach for the plugin directly when you need one of the two options `output.copy` does not carry, `concurrency` and `stage`.
+
+<Badge text="5.111.0+" />
+
+```js
+import webpack from "webpack";
+
+new webpack.CopyPlugin(options);
+```
+
+T> It supersedes [`copy-webpack-plugin`](/plugins/copy-webpack-plugin/), which is deprecated in its favour.
+
+## Options
+
+```ts
+{
+  patterns: (string | object)[], // what is copied, see output.copy
+  concurrency?: number, // how many files are read at the same time
+  stage?: number, // the processAssets stage the files are copied at
+}
+```
+
+- `patterns` (`(string | object)[]`): the files to copy. A pattern is a `from` plus `context`, `filename`, `globOptions`, `info`, `preservePermissions`, `preserveTimestamps`, `to` and `transform` — all documented under [`output.copy`](/configuration/output/#outputcopy), which takes the same patterns.
+- `concurrency` (`number = 100`): the maximum number of files read at the same time.
+- `stage` (`number = webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL`): the [`processAssets`](/api/compilation-hooks/#processassets) stage the files are copied at. At the default stage a copied file is minimized and compressed like every other asset; a later stage emits it after the taps that would have done so.
+
+## Usage
+
+```js
+import webpack from "webpack";
+
+export default {
+  // ...
+  plugins: [
+    new webpack.CopyPlugin({
+      patterns: [
+        "static",
+        { from: "img", to: "images" },
+        { from: "licenses/*.txt", to: "licenses" },
+      ],
+      concurrency: 50,
+    }),
+  ],
+};
+```
+
+### Keeping a file out of the minimizer
+
+A prebuilt file is already minimized, and running the minimizer over it again costs time for nothing. Mark it as minimized in its [asset info](/api/stats/#asset-objects) and the minimizer leaves it alone:
+
+```js
+import webpack from "webpack";
+
+export default {
+  // ...
+  plugins: [
+    new webpack.CopyPlugin({
+      patterns: [
+        {
+          from: "*.min.js",
+          context: "vendor",
+          to: "vendor",
+          info: { minimized: true },
+        },
+      ],
+    }),
+  ],
+};
+```
+
+W> A later `stage` is not how a file is kept out of the minimizer. Minimizers tap `processAssets` with `additionalAssets`, so they run again for assets added at any later stage; `info: { minimized: true }` is what tells them to skip one.
+
+### Merging copied assets
+
+One source file becomes one asset, so combining several into one is a second pass over what the copy emitted — which any plugin can do. Copied assets carry `copied: true` in their asset info, which is how you pick them out:
+
+```js
+compilation.hooks.processAssets.tap(
+  {
+    name: "MergeCopiedAssetsPlugin",
+    stage: webpack.Compilation.PROCESS_ASSETS_STAGE_DERIVED,
+  },
+  () => {
+    const assets = compilation
+      .getAssets()
+      .filter((asset) => asset.info.copied && /^licenses\//.test(asset.name))
+      .toSorted((a, b) => (a.name < b.name ? -1 : 1));
+    if (assets.length === 0) return;
+
+    const merged = assets
+      .map((asset) => `/* ${asset.name} */\n${asset.source.source()}`)
+      .join("\n");
+
+    compilation.emitAsset(
+      "THIRD_PARTY_LICENSES.txt",
+      new webpack.sources.RawSource(merged),
+      { copied: true },
+    );
+    for (const asset of assets) compilation.deleteAsset(asset.name);
+  },
+);
+```
+
+T> The [`output-copy` example](https://github.com/webpack/webpack/tree/main/examples/output-copy) carries this plugin in full, caching included, alongside a configuration exercising every pattern option.
