@@ -120,18 +120,17 @@ Run an `npm run build`, it should compile to something like this:
 ```bash
 ...
 [webpack-cli] Compilation finished
-asset __html_6d047296_1.bundle.js 1.38 MiB [emitted] (name: __html_6d047296_1)
-asset __html_6d047296_0.bundle.js 16.1 KiB [emitted] (name: __html_6d047296_0)
-asset main.bundle.js 2.05 KiB [emitted] (name: main)
-asset index.html 241 bytes [emitted] (auxiliary name: main)
+asset main1.bundle.js 1.38 MiB [emitted]
+asset main.bundle.js 16.2 KiB [emitted]
+asset index.html 216 bytes [emitted] (auxiliary name: main)
 runtime modules 3.35 KiB 7 modules
 cacheable modules 534 KiB (javascript) 207 bytes (html)
   modules by path ./src/*.js 487 bytes
     ./src/index.js 403 bytes [built] [code generated]
     ./src/print.js 84 bytes [built] [code generated]
-  ./src/index.html 217 bytes (javascript) 207 bytes (html) [built] [code generated]
+  ./src/index.html 207 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 533 KiB [built] [code generated]
-webpack 5.x.x compiled successfully in 344 ms
+webpack 5.x.x compiled successfully in 322 ms
 ```
 
 Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
@@ -414,17 +413,16 @@ Now in your terminal run `npm run server`, it should give you an output similar 
 ```bash
 Example app listening on port 3000!
 ...
-<i> [webpack-dev-middleware] asset __html_6d047296_1.bundle.js 1.38 MiB [emitted] (name: __html_6d047296_1)
-<i> asset __html_6d047296_0.bundle.js 16.1 KiB [emitted] (name: __html_6d047296_0)
-<i> asset main.bundle.js 2.05 KiB [emitted] (name: main)
-<i> asset index.html 241 bytes [emitted] (auxiliary name: main)
+<i> [webpack-dev-middleware] asset main1.bundle.js 1.38 MiB [emitted]
+<i> asset main.bundle.js 16.2 KiB [emitted]
+<i> asset index.html 216 bytes [emitted] (auxiliary name: main)
 <i> runtime modules 3.35 KiB 7 modules
 <i> cacheable modules 534 KiB (javascript) 207 bytes (html)
 <i>   ./src/index.js 403 bytes [built] [code generated]
 <i>   ./src/print.js 84 bytes [built] [code generated]
-<i>   ./src/index.html 217 bytes (javascript) 207 bytes (html) [built] [code generated]
+<i>   ./src/index.html 207 bytes [built] [code generated]
 <i>   ./node_modules/lodash/lodash.js 533 KiB [built] [code generated]
-<i> webpack 5.x.x compiled successfully in 344 ms
+<i> webpack 5.x.x compiled successfully in 322 ms
 <i> [webpack-dev-middleware] Compiled successfully.
 <i> [webpack-dev-middleware] Compiling...
 <i> [webpack-dev-middleware] assets by status 1.38 MiB [cached] 2 assets

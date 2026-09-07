@@ -211,23 +211,22 @@ There is no list of entry points to keep in sync any more — the page states wh
 ```bash
 ...
 [webpack-cli] Compilation finished
-asset __html_6d047296_1.bundle.js 69.1 KiB [emitted] [minimized] (name: __html_6d047296_1) 1 related asset
-asset __html_6d047296_0.bundle.js 1.38 KiB [emitted] [minimized] (name: __html_6d047296_0)
-asset main.bundle.js 405 bytes [emitted] [minimized] (name: main)
-asset index.html 208 bytes [emitted] [minimized] (auxiliary name: main)
-runtime modules 3.12 KiB 6 modules
+asset main1.bundle.js 69.1 KiB [emitted] [minimized] 1 related asset
+asset main.bundle.js 1.39 KiB [emitted] [minimized]
+asset index.html 183 bytes [emitted] [minimized] (auxiliary name: main)
+runtime modules 3.13 KiB 6 modules
 cacheable modules 534 KiB (javascript) 213 bytes (html)
   modules by path ./src/*.js 487 bytes
     ./src/index.js 403 bytes [built] [code generated]
     ./src/print.js 84 bytes [built] [code generated]
-  ./src/index.html 223 bytes (javascript) 213 bytes (html) [built] [code generated]
+  ./src/index.html 213 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 533 KiB [built] [code generated]
-webpack 5.x.x compiled successfully in 2158 ms
+webpack 5.x.x compiled successfully in 3064 ms
 ```
 
 Webpack has written `dist/index.html` for you, with both `<script>` tags rewritten to the bundles it just emitted. Rename an entry, add a script tag, or turn on hashed filenames, and the page follows along on the next build.
 
-T> The scripts a page pulls in become chunks of that page rather than named entry points, so `[name]` resolves to a generated identifier such as `__html_6d047296_0`. You never type those names — the page references your sources and webpack rewrites the URLs on the way out. If you would rather keep named JavaScript entries and have webpack scaffold a document around each one, set [`output.html`](/configuration/output/#outputhtml) instead; the [Native HTML](/guides/native-html/) guide walks through both models, along with titles, meta tags, favicons and templating.
+T> The page itself emits no JavaScript, so the scripts it pulls in take the entry's filename: `main.bundle.js` for the first, `main1.bundle.js` for the second. If you would rather keep named JavaScript entries and have webpack scaffold a document around each one, set [`output.html`](/configuration/output/#outputhtml) instead; the [Native HTML](/guides/native-html/) guide walks through both models, along with titles, meta tags, favicons and templating.
 
 ## Cleaning up the `/dist` folder
 

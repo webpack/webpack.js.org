@@ -73,14 +73,12 @@ webpack-demo
 
 [`output.html`](/configuration/output/#outputhtml) writes a document around the entry and injects its chunks, so the page tracks the hashed filenames on every build.
 
-T> Webpack builds the page it generated, which means your entry's code is bundled as a chunk of that page and carries a generated chunk name such as `__html_c191ce97_0`. The name is stable across builds — only the `[contenthash]` in the filename moves — and it is what the listings below show in place of `main`.
-
 Running our build script, `npm run build`, with this configuration should produce the following output:
 
 ```bash
 ...
                        Asset       Size  Chunks                    Chunk Names
-__html_c191ce97_0.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  __html_c191ce97_0
+main.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  main
                   index.html  197 bytes          [emitted]
 ...
 ```
@@ -90,7 +88,7 @@ As you can see the bundle's name now reflects its content (via the hash). If we 
 ```bash
 ...
                        Asset       Size  Chunks                    Chunk Names
-__html_c191ce97_0.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  __html_c191ce97_0
+main.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  main
                   index.html  197 bytes          [emitted]
 ...
 ```
@@ -140,7 +138,7 @@ Version: webpack 4.12.0
 Time: 3027ms
                           Asset       Size  Chunks             Chunk Names
 runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
-   __html_c191ce97_0.e81de2cf758ada72f306.js   69.5 KiB       1  [emitted]  __html_c191ce97_0
+   main.e81de2cf758ada72f306.js   69.5 KiB       1  [emitted]  main
                      index.html  275 bytes          [emitted]
 [1] (webpack)/buildin/module.js 497 bytes {1} [built]
 [2] (webpack)/buildin/global.js 489 bytes {1} [built]
@@ -196,12 +194,12 @@ Let's run another build to see our new `vendor` bundle:
                           Asset       Size  Chunks             Chunk Names
 runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
 vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  [emitted]  vendors
-   __html_c191ce97_0.abf44fedb7d11d4312d7.js  240 bytes       2  [emitted]  __html_c191ce97_0
+   main.abf44fedb7d11d4312d7.js  240 bytes       2  [emitted]  main
                      index.html  353 bytes          [emitted]
 ...
 ```
 
-We can now see that our application bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
+We can now see that our `main` bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
 
 ## Module Identifiers
 
@@ -248,21 +246,21 @@ webpack-demo
   document.body.appendChild(component());
 ```
 
-Running another build, we would expect only our application bundle's hash to change, however...
+Running another build, we would expect only our `main` bundle's hash to change, however...
 
 ```bash
 ...
                            Asset       Size  Chunks                    Chunk Names
   runtime.1400d5af64fc1b7b3a45.js    5.85 kB      0  [emitted]         runtime
   vendor.a7561fb0e9a071baadb9.js     541 kB       1  [emitted]  [big]  vendor
-    __html_c191ce97_0.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         __html_c191ce97_0
+    main.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         main
                       index.html  352 bytes          [emitted]
 ...
 ```
 
 ... we can see that all three have. This is because each [`module.id`](/api/module-variables/#moduleid-commonjs) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. To recap:
 
-- The application bundle changed because of its new content.
+- The `main` bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
@@ -312,11 +310,11 @@ Now, despite any new local dependencies, our `vendor` hash should stay consisten
 ```bash
 ...
                           Asset       Size  Chunks             Chunk Names
-   __html_c191ce97_0.216e852f60c8829c2289.js  340 bytes       0  [emitted]  __html_c191ce97_0
+   main.216e852f60c8829c2289.js  340 bytes       0  [emitted]  main
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
 runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
                      index.html  353 bytes          [emitted]
-Entrypoint __html_c191ce97_0 = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js __html_c191ce97_0.216e852f60c8829c2289.js
+Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.216e852f60c8829c2289.js
 ...
 ```
 
@@ -348,11 +346,11 @@ And finally run our build again:
 ```bash
 ...
                           Asset       Size  Chunks             Chunk Names
-   __html_c191ce97_0.ad717f2466ce655fff5c.js  274 bytes       0  [emitted]  __html_c191ce97_0
+   main.ad717f2466ce655fff5c.js  274 bytes       0  [emitted]  main
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
 runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
                      index.html  353 bytes          [emitted]
-Entrypoint __html_c191ce97_0 = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js __html_c191ce97_0.ad717f2466ce655fff5c.js
+Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.ad717f2466ce655fff5c.js
 ...
 ```
 
