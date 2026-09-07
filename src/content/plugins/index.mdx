@@ -24,7 +24,8 @@ T> CSS and HTML are built in (experimental), so [`MiniCssExtractPlugin`](/plugin
 | [`ChunksWebpackPlugin`](/plugins/chunks-webpack-plugin/)                        | Create HTML files with entrypoints and chunks relations to serve your bundles          |
 | [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)               | Prepare compressed versions of assets to serve them with Content-Encoding              |
 | [`ContextReplacementPlugin`](/plugins/context-replacement-plugin)               | Override the inferred context of a `require` expression                                |
-| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | Copies individual files or entire directories to the build directory                   |
+| [`CopyPlugin`](/plugins/copy-plugin)                                            | Copy files and directories into the output directory                                   |
+| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | Deprecated in favour of the built-in [`CopyPlugin`](/plugins/copy-plugin)              |
 | [`DefinePlugin`](/plugins/define-plugin)                                        | Allow global constants configured at compile time                                      |
 | [`DllPlugin`](/plugins/dll-plugin)                                              | Split bundles in order to drastically improve build time                               |
 | [`EnvironmentPlugin`](/plugins/environment-plugin)                              | Shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on `process.env` keys |

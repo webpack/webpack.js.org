@@ -330,6 +330,181 @@ export default {
 };
 ```
 
+## output.copy
+
+<Badge text="5.111.0+" />
+
+`string` `[string, object]`
+
+Copy files and directories into [`output.path`](#outputpath) as part of the build. A copied file becomes an asset like any other, so [`output.clean`](#outputclean) keeps it, [stats](/configuration/stats/) reports it, and in [watch mode](/configuration/watch/) editing a source file copies it again without rebuilding the rest.
+
+```js
+export default {
+  // ...
+  output: {
+    copy: "static",
+  },
+};
+```
+
+A string is shorthand for the `from` of a single pattern. Pass an array to copy from more than one place, mixing strings and pattern objects:
+
+```js
+export default {
+  // ...
+  output: {
+    copy: [
+      // A directory keeps the structure below itself.
+      "static",
+      // Several sources into one destination, in order.
+      { from: ["licenses/*.txt", "vendor/licenses/*.txt"], to: "licenses" },
+      // A filename template renames, flattens and hashes.
+      { from: "img", to: "i", filename: "[name].[contenthash][ext]" },
+    ],
+  },
+};
+```
+
+Every copied asset carries `copied: true` and the `sourceFilename` it came from in its [asset info](/api/stats/#asset-objects), so a later plugin can tell the copied assets from the generated ones.
+
+W> A pattern that matches nothing warns, and copying a file onto an asset the compilation itself emits is an error — give the copy another name with `filename` or `to`. Within one `output.copy`, a later pattern may deliberately copy over what an earlier one wrote.
+
+### Copy patterns
+
+A pattern is a `from` plus the options below.
+
+| Option                | Type                                                                | Default                      | Description                                                                                                             |
+| --------------------- | ------------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `context`             | `string`                                                            | see below                    | Directory `from` is resolved from, and the directory the copied paths keep their structure below.                       |
+| `filename`            | `string` `function (pathData, assetInfo) => string`                 | `'[path][base]'`             | Name of the copied file inside `to`, as a [filename template](#template-strings).                                       |
+| `from`                | `string` `[string]`                                                 | required                     | Glob or path to copy from. A glob separates with `/`, matches dot files, and takes `*`, `**`, `?`, `[]` and `{}`.       |
+| `globOptions`         | `object`                                                            |                              | How the glob in `from` matches — see [glob options](#glob-options).                                                     |
+| `info`                | `object` `function (file) => object`                                |                              | [Asset info](/api/stats/#asset-objects) of the copied file, merged over the info the copy already carries.              |
+| `preservePermissions` | `boolean`                                                           | `false`                      | Whether the copy keeps the permissions of the file it came from. Has no effect on Windows.                              |
+| `preserveTimestamps`  | `boolean`                                                           | `false`                      | Whether the copy keeps the access and modification times of the file it came from, rather than the time it was written. |
+| `to`                  | `string` `function (file) => string`                                | [`output.path`](#outputpath) | Directory the files are copied to, relative to `output.path`.                                                           |
+| `transform`           | `function (content, absoluteFilename) => string \| Buffer` `object` |                              | Modifies the content on the way through — see [transforming content](#transforming-content).                            |
+
+`context` defaults to the compiler [`context`](/configuration/entry-context/#context), and to what `from` names when `from` is not a glob — so `from: 'static'` copies the tree below `static/` rather than into a `static/` directory. Setting it explicitly roots every `from` of the pattern at one directory, which is how several globs keep a shared structure:
+
+```js
+export default {
+  // ...
+  output: {
+    copy: [
+      // "vendor/a/x.js" lands at "lib/a/x.js", not at "lib/x.js".
+      { from: ["a/**/*.js", "b/**/*.js"], context: "vendor", to: "lib" },
+    ],
+  },
+};
+```
+
+`to` and `info` may each be a function of the file being copied, which receives `{ absoluteFilename, sourceFilename, filename }` — `filename` being the name the file has so far, relative to `to`:
+
+```js
+export default {
+  // ...
+  output: {
+    copy: [
+      {
+        from: "assets",
+        to: (file) => (file.filename.endsWith(".css") ? "css" : "media"),
+        info: (file) => ({ immutable: file.filename.endsWith(".png") }),
+      },
+    ],
+  },
+};
+```
+
+### Glob options
+
+`globOptions` says how the glob in `from` matches.
+
+| Option           | Type       | Default  | Description                                                                                                      |
+| ---------------- | ---------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
+| `caseSensitive`  | `boolean`  | `true`   | Whether the glob matches the case of a file name.                                                                |
+| `deep`           | `number`   | no limit | How many directory levels below the base of the glob are read, where `1` reads only the base itself.             |
+| `dot`            | `boolean`  | `true`   | Whether the glob reaches a file or directory whose name starts with a dot without naming it.                     |
+| `followSymlinks` | `boolean`  | `true`   | Whether a symbolic link is resolved and copied as what it points at. `false` copies the link itself, unresolved. |
+| `ignore`         | `[string]` |          | Globs of files which are not copied, resolved like `from`. A directory one of them matches is skipped whole.     |
+
+```js
+export default {
+  // ...
+  output: {
+    copy: [
+      {
+        from: "static/**/*.html",
+        to: "pages",
+        globOptions: { dot: false, deep: 2, ignore: ["**/draft-*.html"] },
+      },
+    ],
+  },
+};
+```
+
+### Transforming content
+
+`transform` rewrites a file on the way through. It receives the content as a `Buffer` and the absolute path it was read from, and may return a string, a `Buffer`, or a promise of either:
+
+```js
+export default {
+  // ...
+  output: {
+    copy: [
+      {
+        from: "config.json",
+        to: "runtime",
+        transform: (content) =>
+          content.toString().replace("__API__", "https://example.com"),
+      },
+    ],
+  },
+};
+```
+
+The result is cached on the content of the file. When the transform depends on anything else, say so with the object form so the cache misses when that changes:
+
+```js
+export default {
+  // ...
+  output: {
+    copy: [
+      {
+        from: "config.json",
+        transform: {
+          transformer: (content) =>
+            content.toString().replace("__API__", apiUrl),
+          cache: { keys: { apiUrl } },
+        },
+      },
+    ],
+  },
+};
+```
+
+`cache` also takes `false` to skip caching, or a function receiving `(defaultKeys, absoluteFilename)` and returning the keys to cache under.
+
+T> A symbolic link copied as a link (`globOptions.followSymlinks: false`) has its target as its whole content, so a `transform` never sees it.
+
+### Copying with the plugin
+
+`output.copy` covers the patterns; [`CopyPlugin`](/plugins/copy-plugin/) is the same copying with two more options on it — `concurrency` and the `processAssets` `stage` the files are copied at. Reach for it when you need either:
+
+```js
+import webpack from "webpack";
+
+export default {
+  // ...
+  plugins: [
+    new webpack.CopyPlugin({
+      patterns: ["static"],
+      concurrency: 50,
+    }),
+  ],
+};
+```
+
 ## output.crossOriginLoading
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
