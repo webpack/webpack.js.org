@@ -24,11 +24,9 @@ const pathMap = {
 };
 
 const loaderGroup = {
-  "css-loader": "CSS",
   "less-loader": "CSS",
   "postcss-loader": "CSS",
   "sass-loader": "CSS",
-  "style-loader": "CSS",
   "stylus-loader": "CSS",
 };
 const communityPackages = [

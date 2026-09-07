@@ -302,51 +302,7 @@ This is only one example, but there are many others that can easily trip people 
 
 ## HMR with Stylesheets
 
-Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated.
-
-First let's install both loaders with the following command:
-
-```bash
-npm install --save-dev style-loader css-loader
-```
-
-Now let's update the configuration file to make use of the loader.
-
-**webpack.config.js**
-
-```diff
-  import path from 'node:path';
-  import { fileURLToPath } from 'node:url';
-
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-
-  export default {
-    entry: './src/index.html',
-    experiments: {
-      html: true,
-    },
-    devtool: 'inline-source-map',
-    devServer: {
-      static: './dist',
-      hot: true,
-    },
-+   module: {
-+     rules: [
-+       {
-+         test: /\.css$/,
-+         use: ['style-loader', 'css-loader'],
-+       },
-+     ],
-+   },
-    output: {
-      filename: '[name].bundle.js',
-      htmlFilename: '[name].html',
-      path: path.resolve(__dirname, 'dist'),
-      clean: true,
-    },
-  };
-```
+Hot Module Replacement with CSS needs no setup at all: [`experiments.css`](/configuration/experiments/#experimentscss) defaults to `'auto'`, so webpack handles stylesheets itself and patches them in place when they change — no loader to install, no rule to add. See [Native CSS](/guides/native-css/) for what the built-in support covers.
 
 Hot loading stylesheets can be done by importing them into a module:
 

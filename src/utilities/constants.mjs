@@ -1,4 +1,7 @@
 export const excludedLoaders = [
+  // CSS is built in — see /guides/native-css/
+  "webpack/css-loader",
+  "webpack/style-loader",
   "webpack-contrib/config-loader",
   "webpack-contrib/eslint-loader",
   "webpack-contrib/transform-loader",
@@ -26,6 +29,8 @@ export const excludedLoaders = [
   "webpack-contrib/worker-loader",
 ];
 export const excludedPlugins = [
+  // CSS extraction is built in — see /guides/native-css/
+  "webpack/mini-css-extract-plugin",
   "webpack-contrib/component-webpack-plugin",
   "webpack-contrib/extract-text-webpack-plugin",
   "webpack-contrib/i18n-webpack-plugin",
