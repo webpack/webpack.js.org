@@ -96,7 +96,7 @@ compilation.hooks.processAssets.tap(
     const assets = compilation
       .getAssets()
       .filter((asset) => asset.info.copied && /^licenses\//.test(asset.name))
-      .sort((a, b) => (a.name < b.name ? -1 : 1));
+      .toSorted((a, b) => (a.name < b.name ? -1 : 1));
     if (assets.length === 0) return;
 
     const merged = assets
