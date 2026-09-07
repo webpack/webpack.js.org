@@ -1,19 +1,16 @@
-Start without a configuration file, or provide a custom **webpack.config.js**:
+Point webpack at the page in **webpack.config.js**:
 
 ```js
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 export default {
-  entry: "./src/index.js",
+  entry: "./src/index.html",
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "[contenthash].js",
+    cssFilename: "[contenthash].css",
+    htmlFilename: "[name].html",
   },
 };
 ```
 
-Prefer a video walkthrough? **[Without config](https://youtu.be/3Nv9muOkb6k?t=21293)**
+Webpack parses the page, bundles everything it references, and rewrites the URLs. No loader, no plugin.
+
+Prefer a video walkthrough? **[Watch one here](https://youtu.be/3Nv9muOkb6k?t=21293)**
