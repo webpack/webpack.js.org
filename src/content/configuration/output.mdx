@@ -886,7 +886,7 @@ T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
 `boolean = false` `object`
 
-Generate an HTML file for each non-HTML [entrypoint](/concepts/entry-points/), injecting that entrypoint's initial JS and CSS output chunks (including chunks shared through [`dependOn`](/configuration/entry-context/#dependencies)). This is the part of `html-webpack-plugin` that scaffolds a document around your bundles, built into webpack core. It relies on the experimental HTML support, so enable [`experiments.html`](/configuration/experiments/#experimentshtml).
+Generate an HTML file for each non-HTML [entrypoint](/concepts/entry-points/), injecting that entrypoint's initial JS and CSS output chunks (including chunks shared through [`dependOn`](/configuration/entry-context/#dependencies)). This is the document scaffolding that used to need a separate plugin, built into webpack core. It relies on the experimental HTML support, so enable [`experiments.html`](/configuration/experiments/#experimentshtml).
 
 ```js
 // webpack.config.js
@@ -1000,7 +1000,7 @@ Where to place injected chunk `<script>` tags (and `<link rel="modulepreload">` 
 - `'head'`: move them into `<head>`.
 - `false`: suppress sibling-chunk injection; entry tags and resource hints remain.
 
-Stylesheet `<link>` tags for CSS chunks are not affected: they always land in `<head>` when the page has one, ahead of the first blocking script, or after `defer` / module script tags when there is none (the order `html-webpack-plugin` emits).
+Stylesheet `<link>` tags for CSS chunks are not affected: they always land in `<head>` when the page has one, ahead of the first blocking script, or after `defer` / module script tags when there is none.
 
 ```js
 // webpack.config.js

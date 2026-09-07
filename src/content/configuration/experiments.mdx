@@ -410,7 +410,7 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **This feature is experimental and partial.** Webpack 5.107 implemented the `html-loader` role: importing an HTML file from JS runs its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with `html-webpack-plugin` is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+W> **This feature is experimental and partial.** Webpack 5.107 implemented the `html-loader` role: importing an HTML file from JS runs its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with the plugin-based setups it replaces is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
 
 T> The HTML parser can be tuned via [`module.parser.html`](/configuration/module/#moduleparserhtml): use [`sources`](/configuration/module/#moduleparserhtmlsources) to disable or customize URL-attribute extraction, and [`template`](/configuration/module/#moduleparserhtmltemplate) to transform the HTML source before parsing.
 

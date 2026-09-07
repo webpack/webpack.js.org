@@ -182,7 +182,7 @@ First we'll tweak our directory structure slightly, separating the "source" code
        └── index.js
 ```
 
-The `dist` directory is build output, so you usually do not hand-edit files there in a mature project. We are moving `index.html` into `dist` for now only as temporary scaffolding, so the browser has an HTML file that loads the first generated bundle. Later on in [another guide](/guides/output-management/#setting-up-htmlwebpackplugin), we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and regenerate all the files within it.
+The `dist` directory is build output, so you usually do not hand-edit files there in a mature project. We are moving `index.html` into `dist` for now only as temporary scaffolding, so the browser has an HTML file that loads the first generated bundle. Later on in [another guide](/guides/output-management/#making-the-page-an-entry-point), we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and regenerate all the files within it.
 
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
 

@@ -91,6 +91,7 @@ export default (env) =>
           migrating: "/migrate/3/",
           "plugins/no-emit-on-errors-plugin":
             "/configuration/optimization/#optimizationemitonerrors",
+          "plugins/html-webpack-plugin": "/guides/native-html/",
           "concepts/mode": "/configuration/mode",
           "contribute/writing-a-scaffold": "/api/cli/#init",
           "loaders/raw-loader": "https://v4.webpack.js.org/loaders/raw-loader",

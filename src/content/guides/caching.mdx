@@ -29,9 +29,7 @@ This guide focuses on the configuration needed to ensure files produced by webpa
 
 We can use the `output.filename` [substitutions](/configuration/output/#outputfilename) setting to define the names of our output files. Webpack provides a method of templating the filenames using bracketed strings called **substitutions**. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
 
-Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
-
-T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because the generated page re-enters the entry's script under an internal chunk name, which would obscure the bundle filenames this guide is about.
+Let's get our project set up using the example from [getting started](/guides/getting-started), letting webpack write the page for us as in [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
 **project**
 
@@ -51,34 +49,38 @@ webpack-demo
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
--      title: 'Output Management',
-+      title: 'Caching',
-     }),
-   ],
++  experiments: {
++    html: true,
++  },
    output: {
++    html: {
++      title: 'Caching',
++    },
 -    filename: 'bundle.js',
 +    filename: '[name].[contenthash].js',
++    htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
  };
 ```
 
+[`output.html`](/configuration/output/#outputhtml) writes a document around the entry and injects its chunks, so the page tracks the hashed filenames on every build.
+
+T> Webpack builds the page it generated, which means your entry's code is bundled as a chunk of that page and carries a generated chunk name such as `__html_c191ce97_0`. The name is stable across builds — only the `[contenthash]` in the filename moves — and it is what the listings below show in place of `main`.
+
 Running our build script, `npm run build`, with this configuration should produce the following output:
 
 ```bash
 ...
                        Asset       Size  Chunks                    Chunk Names
-main.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  main
+__html_c191ce97_0.7e2c49a622975ebd9b7e.js     544 kB       0  [emitted]  [big]  __html_c191ce97_0
                   index.html  197 bytes          [emitted]
 ...
 ```
@@ -88,7 +90,7 @@ As you can see the bundle's name now reflects its content (via the hash). If we 
 ```bash
 ...
                        Asset       Size  Chunks                    Chunk Names
-main.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  main
+__html_c191ce97_0.205199ab45963f6a62ec.js     544 kB       0  [emitted]  [big]  __html_c191ce97_0
                   index.html  197 bytes          [emitted]
 ...
 ```
@@ -106,20 +108,21 @@ As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlug
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
-       title: 'Caching',
-     }),
-   ],
+   experiments: {
+     html: true,
+   },
    output: {
+     html: {
+       title: 'Caching',
+     },
      filename: '[name].[contenthash].js',
+     htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
@@ -137,7 +140,7 @@ Version: webpack 4.12.0
 Time: 3027ms
                           Asset       Size  Chunks             Chunk Names
 runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
-   main.e81de2cf758ada72f306.js   69.5 KiB       1  [emitted]  main
+   __html_c191ce97_0.e81de2cf758ada72f306.js   69.5 KiB       1  [emitted]  __html_c191ce97_0
                      index.html  275 bytes          [emitted]
 [1] (webpack)/buildin/module.js 497 bytes {1} [built]
 [2] (webpack)/buildin/global.js 489 bytes {1} [built]
@@ -153,20 +156,21 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
-       title: 'Caching',
-     }),
-   ],
+   experiments: {
+     html: true,
+   },
    output: {
+     html: {
+       title: 'Caching',
+     },
      filename: '[name].[contenthash].js',
+     htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
@@ -192,12 +196,12 @@ Let's run another build to see our new `vendor` bundle:
                           Asset       Size  Chunks             Chunk Names
 runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
 vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  [emitted]  vendors
-   main.abf44fedb7d11d4312d7.js  240 bytes       2  [emitted]  main
+   __html_c191ce97_0.abf44fedb7d11d4312d7.js  240 bytes       2  [emitted]  __html_c191ce97_0
                      index.html  353 bytes          [emitted]
 ...
 ```
 
-We can now see that our `main` bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
+We can now see that our application bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
 
 ## Module Identifiers
 
@@ -244,21 +248,21 @@ webpack-demo
   document.body.appendChild(component());
 ```
 
-Running another build, we would expect only our `main` bundle's hash to change, however...
+Running another build, we would expect only our application bundle's hash to change, however...
 
 ```bash
 ...
                            Asset       Size  Chunks                    Chunk Names
   runtime.1400d5af64fc1b7b3a45.js    5.85 kB      0  [emitted]         runtime
   vendor.a7561fb0e9a071baadb9.js     541 kB       1  [emitted]  [big]  vendor
-    main.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         main
+    __html_c191ce97_0.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         __html_c191ce97_0
                       index.html  352 bytes          [emitted]
 ...
 ```
 
 ... we can see that all three have. This is because each [`module.id`](/api/module-variables/#moduleid-commonjs) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. To recap:
 
-- The `main` bundle changed because of its new content.
+- The application bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
@@ -269,20 +273,21 @@ The first and last are expected, it's the `vendor` hash we want to fix. Let's us
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
-       title: 'Caching',
-     }),
-   ],
+   experiments: {
+     html: true,
+   },
    output: {
+     html: {
+       title: 'Caching',
+     },
      filename: '[name].[contenthash].js',
+     htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
@@ -307,11 +312,11 @@ Now, despite any new local dependencies, our `vendor` hash should stay consisten
 ```bash
 ...
                           Asset       Size  Chunks             Chunk Names
-   main.216e852f60c8829c2289.js  340 bytes       0  [emitted]  main
+   __html_c191ce97_0.216e852f60c8829c2289.js  340 bytes       0  [emitted]  __html_c191ce97_0
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
 runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
                      index.html  353 bytes          [emitted]
-Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.216e852f60c8829c2289.js
+Entrypoint __html_c191ce97_0 = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js __html_c191ce97_0.216e852f60c8829c2289.js
 ...
 ```
 
@@ -343,11 +348,11 @@ And finally run our build again:
 ```bash
 ...
                           Asset       Size  Chunks             Chunk Names
-   main.ad717f2466ce655fff5c.js  274 bytes       0  [emitted]  main
+   __html_c191ce97_0.ad717f2466ce655fff5c.js  274 bytes       0  [emitted]  __html_c191ce97_0
 vendors.55e79e5927a639d21a1b.js   69.5 KiB       1  [emitted]  vendors
 runtime.725a1a51ede5ae0cfde0.js   1.42 KiB       2  [emitted]  runtime
                      index.html  353 bytes          [emitted]
-Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js main.ad717f2466ce655fff5c.js
+Entrypoint __html_c191ce97_0 = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.js __html_c191ce97_0.ad717f2466ce655fff5c.js
 ...
 ```
 

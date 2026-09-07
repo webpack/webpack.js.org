@@ -23,12 +23,12 @@ describe("processReadme", () => {
     const loaderMDData =
       "- [extract-loader](https://github.com/peerigon/extract-loader)";
     const pluginMDData =
-      "- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)";
+      "- [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)";
     expect(processReadme(loaderMDData, options)).toBe(
       "- [extract-loader](https://github.com/peerigon/extract-loader)",
     );
     expect(processReadme(pluginMDData, options)).toBe(
-      "- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)",
+      "- [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)",
     );
   });
 
