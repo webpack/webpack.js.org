@@ -172,28 +172,30 @@ export default {
 
 CommonJS syntax is not available in ESM: `require`, `module`, `exports`, `__filename`, `__dirname`.
 
-When importing from a CommonJS module inside ESM, only the `default` export
-is available (the entire `module.exports` object):
+When webpack bundles a CommonJS module imported from ESM, both the `default`
+import (the entire `module.exports` object) and named imports (its properties) work:
 
 ```js
 // esm-consumer.js (ESM)
 import cjs from "./cjs-module.js";
-// named imports from CJS don't work
-import { foo } from "./cjs-module.js"; // undefined
+import { foo } from "./cjs-module.js";
 
 // cjs-module.js (CommonJS)
 module.exports = { foo: 1, bar: 2 };
 
-console.log(cjs.foo); // works - cjs is the whole exports object
+console.log(cjs.foo); // 1 - cjs is the whole exports object
+console.log(foo); // 1 - named imports read properties of module.exports
 ```
 
-This strict behavior applies when webpack treats the **imported** module as CommonJS.
+This interop applies when webpack treats the **imported** module as CommonJS.
 If that module itself uses ESM `export` syntax, webpack will auto-detect it as ESM
-and named imports will work normally. This commonly affects projects that mix `.js` files
+and use its exports directly. This commonly affects projects that mix `.js` files
 files in a project that has `"type": "module"` set - webpack may treat some files as
 ESM while third-party packages in `node_modules` remain CommonJS.
 
-T> To get named exports from CommonJS modules, consider migrating to ESM
+T> This is webpack's bundling behavior. When Node.js itself loads a CommonJS module from ESM,
+T> named imports only work if Node.js can detect them statically; otherwise only the `default`
+T> import is available - consider migrating to ESM
 T> or using [`@babel/plugin-transform-modules-commonjs`](https://babeljs.io/docs/babel-plugin-transform-modules-commonjs).
 
 ## Common Migration Errors

@@ -256,13 +256,13 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 ...
 ```
 
-... we can see that all three have. This is because each [`module.id`](/api/module-variables/#moduleid-commonjs) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. To recap:
+... we can see that all three have. This happens when each [`module.id`](/api/module-variables/#moduleid-commonjs) is assigned from the resolving order (`optimization.moduleIds: 'natural'`), which webpack 5 only does by default for `mode: 'none'`. Meaning when the order of resolving is changed, the IDs will be changed as well. To recap:
 
 - The `main` bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
-The first and last are expected, it's the `vendor` hash we want to fix. Let's use [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) with `'deterministic'` option:
+The first and last are expected, it's the `vendor` hash we want to fix. `production` mode already defaults [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) to `'deterministic'` and `development` mode to `'named'`, both stable across builds; setting `'deterministic'` explicitly keeps the ids stable regardless of `mode`:
 
 **webpack.config.js**
 

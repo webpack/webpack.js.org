@@ -243,7 +243,8 @@ export const greeting = "Bonjour";
 
 ```text
 const language = navigator.language.split("-")[0]; // "en", "fr", etc.
-const locale = import.defer("./locales/" + language + ".js");
+// Resolves to a deferred namespace; nothing is evaluated yet.
+const locale = await import.defer("./locales/" + language + ".js");
 
 document.getElementById("btn").addEventListener("click", () => {
   // The locale module is evaluated here, on first property access.
