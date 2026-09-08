@@ -18,7 +18,7 @@ This can be useful for allowing different behaviour between builds.
 new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource);
 ```
 
-Note that the `resourceRegExp` is tested against the request you write in your code, not the resolved resource. For instance, `'./sum'` will be used to test instead of `'./sum.js'` when you have code `import sum from './sum'`.
+Note that the `resourceRegExp` is tested twice: against the request as written in your code before resolving (e.g. `'./sum'` for `import sum from './sum'`) and against the resolved absolute resource path after resolving (e.g. `'/project/src/sum.js'`).
 
 Also please note that when using Windows, you have to accommodate the different folder separator symbol. E.g. `/src\/environments\/environment\.ts/` won't work on Windows, you have to use `/src[\\/]environments[\\/]environment\.ts/,` instead.
 

@@ -51,7 +51,7 @@ import { buildTime } from "virtual:buildInfo";
 console.log(`App version: ${buildTime}`);
 ```
 
-Use custom schema
+Use custom scheme
 
 ```js
 import webpack from "webpack";
@@ -143,4 +143,4 @@ T> Make sure that these types have a loader set via [module.rules](https://webpa
 
 - `module.version`(`boolean | string | () => string`): When a invalidate is triggered, the source function is called again if the value of the version is different from the previous one. If set to true it will always trigger.
 
-- `schema` (`string`): Customizable virtual module schema, default is `virtual`.
+- `scheme` (`string`): URL scheme for virtual modules, default is `'virtual'`. The second constructor argument is either the scheme string or an object `{ scheme?, context? }`.
