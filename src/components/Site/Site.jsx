@@ -194,7 +194,7 @@ function Site(props) {
 
   const description =
     getPageDescription(Content, location.pathname) ||
-    "webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.";
+    "webpack is a module bundler for JavaScript, CSS, HTML, WebAssembly and assets. It builds a dependency graph from your project and emits optimized bundles for browsers, Node.js, Deno, Bun and other environments.";
 
   function isPrintPage(url) {
     return url.includes("/printable");
