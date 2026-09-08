@@ -56,8 +56,6 @@ This is what we aim to change. Once we reach the end of this module we should be
 
 ## Adding Workbox
 
-T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because it emits one page per entrypoint rather than a single page carrying every entry's script, so the output here would not be the same.
-
 Let's add the Workbox webpack plugin and adjust the `webpack.config.js` file:
 
 ```bash
@@ -69,47 +67,61 @@ npm install workbox-webpack-plugin --save-dev
 ```diff
   import path from "node:path";
   import { fileURLToPath } from 'node:url';
-  import HtmlWebpackPlugin from "html-webpack-plugin";
 + import WorkboxPlugin from "workbox-webpack-plugin";
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
   export default {
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
+    entry: './src/index.html',
+    experiments: {
+      html: true,
     },
-    plugins: [
-      new HtmlWebpackPlugin({
--       title: 'Output Management',
-+       title: 'Progressive Web Application',
-      }),
++   plugins: [
 +     new WorkboxPlugin.GenerateSW({
 +       // these options encourage the ServiceWorkers to get in there fast
 +       // and not allow any straggling "old" SWs to hang around
 +       clientsClaim: true,
 +       skipWaiting: true,
 +     }),
-    ],
++   ],
     output: {
       filename: '[name].bundle.js',
+      htmlFilename: '[name].html',
       path: path.resolve(__dirname, 'dist'),
       clean: true,
     },
   };
 ```
 
+The page keeps its own title, so retitle it there:
+
+**src/index.html**
+
+```diff
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8" />
+-    <title>Output Management</title>
++    <title>Progressive Web Application</title>
+     <script src="./print.js"></script>
+   </head>
+   <body>
+     <script src="./index.js"></script>
+   </body>
+ </html>
+```
+
 With that in place, let's see what happens when we do an `npm run build`:
 
 ```bash
 ...
-                  Asset       Size  Chunks                    Chunk Names
-          app.bundle.js     545 kB    0, 1  [emitted]  [big]  app
-        print.bundle.js    2.74 kB       1  [emitted]         print
-             index.html  254 bytes          [emitted]
-precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitted]
-      service-worker.js       1 kB          [emitted]
+asset main1.bundle.js 545 kB [emitted] [big]
+asset main.bundle.js 2.74 kB [emitted]
+asset index.html 254 bytes [emitted]
+asset precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js 268 bytes [emitted]
+asset service-worker.js 1 kB [emitted]
 ...
 ```
 

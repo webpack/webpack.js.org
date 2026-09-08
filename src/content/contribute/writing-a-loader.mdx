@@ -267,7 +267,7 @@ This can be done in one of two ways:
 - By transforming them to `require` statements.
 - Using the `this.resolve` function to resolve the path.
 
-The `css-loader` is a good example of the first approach. It transforms dependencies to `require`s, by replacing `@import` statements with a `require` to the other stylesheet and `url(...)` with a `require` to the referenced file.
+A CSS loader is a good example of the first approach: it transforms dependencies to `require`s, replacing `@import` statements with a `require` to the other stylesheet and `url(...)` with a `require` to the referenced file. Webpack now does this itself — see [Native CSS](/guides/native-css/).
 
 In the case of the `less-loader`, it cannot transform each `@import` to a `require` because all `.less` files must be compiled in one pass for variables and mixin tracking. Therefore, the `less-loader` extends the less compiler with custom path resolving logic. It then takes advantage of the second approach, `this.resolve`, to resolve the dependency through webpack.
 

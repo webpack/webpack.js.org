@@ -30,14 +30,14 @@ With this option enabled, webpack understands `.html` files as first-class modul
 
 "Built-in" means webpack does the work itself, with no loader or plugin in the chain — not that it covers everything `html-loader` and `html-webpack-plugin` do. The scope is exactly this:
 
-| Built in                                                                                                                | Still needs a loader or plugin                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Parsing `.html`, as an [entry point](#1-html-as-an-entry-point) or [imported from JS](#3-html-imported-from-javascript) | **Template engines** — Pug, EJS, Handlebars and friends, unless a synchronous [`template`](#templating) hook is enough                |
-| [Extracting every URL a page references](#what-webpack-bundles-from-a-page) and rewriting it to the built filename      | `html-loader`'s `sources.scriptingEnabled` and `postprocessor`                                                                        |
-| Bundling inline `<script>` and `<style>` bodies, and `style=""` attributes                                              | `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache`                                                           |
-| [Generating a page](#2-a-generated-page-for-a-javascript-entry) per entrypoint with its chunks injected                 | The third-party plugins that tap `html-webpack-plugin`'s hooks, which have no counterpart on [`HtmlModulesPlugin`](#plugin-hooks) yet |
-| [`title`, `meta`, `base`, `favicon`, `manifest`, `integrity`, `csp`, inlining](#configuring-the-generated-page)         |                                                                                                                                       |
-| [Minification](#minification) and Hot Module Replacement                                                                |                                                                                                                                       |
+| Built in                                                                                                                | Still needs a loader or plugin                                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parsing `.html`, as an [entry point](#1-html-as-an-entry-point) or [imported from JS](#3-html-imported-from-javascript) | **Template engines** — Pug, EJS, Handlebars and friends, unless a synchronous [`template`](#templating) hook is enough                                                 |
+| [Extracting every URL a page references](#what-webpack-bundles-from-a-page) and rewriting it to the built filename      | `html-loader`'s `sources.scriptingEnabled` and `postprocessor`                                                                                                         |
+| Bundling inline `<script>` and `<style>` bodies, and `style=""` attributes                                              | `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache`                                                                                            |
+| [Generating a page](#2-a-generated-page-for-a-javascript-entry) per entrypoint with its chunks injected                 | The third-party plugins that tap `html-webpack-plugin`'s hooks — they do not run as-is, but most [rewrite](#rewriting-a-plugin-that-tapped-its-hooks) into a few lines |
+| [`title`, `meta`, `base`, `favicon`, `manifest`, `integrity`, `csp`, inlining](#configuring-the-generated-page)         |                                                                                                                                                                        |
+| [Minification](#minification) and Hot Module Replacement                                                                |                                                                                                                                                                        |
 
 So a project using `html-webpack-plugin` to scaffold a document around its bundles, or `html-loader` to import a partial, needs neither. A project that renders its page through a template engine, or depends on a plugin that hooks into `html-webpack-plugin`, keeps that plugin.
 
@@ -647,15 +647,22 @@ T> While `experiments.html` is `'auto'` (the default since 5.109.0), a `module.r
 | `cache`, `showErrors`, `xhtml`           | n/a                                                                               |
 | plugin hooks                             | [`HtmlModulesPlugin` hooks](#plugin-hooks)                                        |
 
-Companion plugins fold in too:
+Companion plugins fold in too. Most of the popular ones are an option now; the rest are a few lines against the [`HtmlModulesPlugin` hooks](#rewriting-a-plugin-that-tapped-its-hooks):
 
-| Plugin                              | Native equivalent                                                        |
-| ----------------------------------- | ------------------------------------------------------------------------ |
-| `html-webpack-inline-source-plugin` | [`output.html.inline`](#inlining-critical-chunks)                        |
-| `webpack-subresource-integrity`     | [`output.html.integrity`](#subresource-integrity-and-csp)                |
-| `csp-html-webpack-plugin`           | [`output.html.csp`](#subresource-integrity-and-csp)                      |
-| `preload-webpack-plugin`            | [`output.resourceHints`](#resource-hints)                                |
-| `favicons-webpack-plugin`           | [`output.html.favicon` / `manifest`](#favicons-and-the-web-app-manifest) |
+| Plugin                                                                                              | Instead                                                                                                                  |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `html-webpack-inline-source-plugin`                                                                 | [`output.html.inline`](#inlining-critical-chunks), or a `<!-- webpackInline: true -->` comment on the tag                |
+| `webpack-subresource-integrity`                                                                     | [`output.html.integrity`](#subresource-integrity-and-csp)                                                                |
+| `csp-html-webpack-plugin`, `strict-csp-html-webpack-plugin`                                         | [`output.html.csp`](#subresource-integrity-and-csp)                                                                      |
+| `preload-webpack-plugin`, `resource-hints-webpack-plugin`, `html-webpack-inject-preload`            | [`output.resourceHints`](#resource-hints), or the [`webpackPreload` / `webpackPrefetch`](#magic-comments) comments       |
+| `favicons-webpack-plugin`                                                                           | [`output.html.favicon` / `manifest`](#favicons-and-the-web-app-manifest)                                                 |
+| `html-webpack-injector`                                                                             | [`output.html.inject`](/configuration/output/#outputhtmlinject), or put the tag where you want it in an HTML entry       |
+| `html-webpack-include-assets-plugin`                                                                | write the tag in the page; mark files copied verbatim with `<!-- webpackIgnore: true -->`                                |
+| `html-webpack-exclude-assets-plugin`, `html-webpack-skip-assets-plugin`                             | nothing — a page carries what it references, and an entry opts out of a generated page with the descriptor `html: false` |
+| `html-webpack-harddisk-plugin`                                                                      | [`devServer.devMiddleware.writeToDisk`](/configuration/dev-server/#devserverdevmiddleware)                               |
+| `html-webpack-inject-attributes-plugin`, `webpack-nomodule-plugin`, `html-webpack-link-type-plugin` | the [`transformTags`](#rewriting-a-plugin-that-tapped-its-hooks) hook                                                    |
+| `inject-body-webpack-plugin`, `html-webpack-inline-style-plugin`, `html-webpack-inline-svg-plugin`  | write it in the page, or the [`transformHtml`](#rewriting-a-plugin-that-tapped-its-hooks) hook                           |
+| `appcache-webpack-plugin`                                                                           | n/a — AppCache was removed from browsers                                                                                 |
 
 ### Without a template
 
@@ -790,6 +797,53 @@ export default {
 ```
 
 Each page pulls in exactly the chunks it references, so `chunks` / `excludeChunks` have nothing left to do. The same works with generated pages — `output.html: true` plus one JavaScript entry per page.
+
+### Rewriting a plugin that tapped its hooks
+
+A plugin written against `html-webpack-plugin` does not run without it, but the hook it used has a counterpart on [`HtmlModulesPlugin`](#plugin-hooks):
+
+| `html-webpack-plugin`                   | `HtmlModulesPlugin`                                                                                                                                                  |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `beforeAssetTagGeneration`              | n/a — the tags come from the page and the chunk graph, so there is no asset list to edit up front                                                                    |
+| `alterAssetTags`, `alterAssetTagGroups` | [`transformTags`](/api/compilation-hooks/#transformtags) to change, remove or move existing tags, [`injectTags`](/api/compilation-hooks/#injecttags) to add new ones |
+| `afterTemplateExecution`                | [`module.parser.html.template`](#templating)                                                                                                                         |
+| `beforeEmit`                            | [`transformHtml`](/api/compilation-hooks/#transformhtml)                                                                                                             |
+| `afterEmit`                             | [`htmlEmitted`](/api/compilation-hooks/#htmlemitted)                                                                                                                 |
+
+Both plugins hand you the hooks per compilation, so the shape of the plugin barely changes — swap `HtmlWebpackPlugin.getCompilationHooks(compilation)` for `compiler.webpack.html.HtmlModulesPlugin.getCompilationHooks(compilation)` and work with tag descriptors instead of the plugin's `assetTags`:
+
+```js
+class NoModulePlugin {
+  apply(compiler) {
+    compiler.hooks.compilation.tap("NoModulePlugin", (compilation) => {
+      const hooks =
+        compiler.webpack.html.HtmlModulesPlugin.getCompilationHooks(
+          compilation,
+        );
+
+      // alterAssetTags: mutate what is already on the page
+      hooks.transformTags.tap("NoModulePlugin", (tags) => {
+        for (const tag of tags) {
+          if (tag.tag === "script") {
+            tag.attrs.nomodule = true;
+          }
+        }
+      });
+
+      // beforeAssetTagGeneration: add tags of your own
+      hooks.injectTags.tap("NoModulePlugin", (tags) => {
+        tags.push({
+          tag: "meta",
+          attrs: { name: "theme-color", content: "#2b3a42" },
+        });
+        return tags;
+      });
+    });
+  }
+}
+```
+
+`transformTags` mutates in place (`attrs`, `remove: true`, `injectTo`), while `injectTags` and `transformHtml` are waterfalls — return the value you were given. Anything that only rewrites the final markup, such as inlining styles or injecting a snippet into `<body>`, is a one-line `transformHtml` tap.
 
 ## All options with examples
 

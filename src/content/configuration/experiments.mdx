@@ -195,7 +195,7 @@ Enable native CSS support. Note that it's an experimental feature still under de
 - Type: `boolean | 'auto'`
 - Default: `'auto'` <Badge text="5.109.0+" />
 
-Since webpack 5.109.0, the option defaults to `'auto'`: the built-in CSS support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.css` or `.module.css` files, so existing `css-loader`/`mini-css-extract-plugin` setups keep working unchanged. Set it to `true` to force the native support, or `false` to disable it entirely. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
+Since webpack 5.109.0, the option defaults to `'auto'`: the built-in CSS support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.css` or `.module.css` files, so an existing loader-based CSS setup keeps working unchanged. Set it to `true` to force the native support, or `false` to disable it entirely. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
 Experimental features:
 
@@ -239,7 +239,7 @@ Experimental features:
   For example, if you add `@import 'bootstrap';` to your CSS file, webpack will look for `bootstrap` in `node_modules` and use the `style` field in `package.json` from there. If `style` field is not found, webpack will use the `main` field instead to preserve backward compatibility.
 
 - Content hash for CSS files: webpack will generate a content hash for CSS files and use it in the filename. This is useful for long-term caching.
-- CSS extraction: webpack will extract CSS into a separate file. This functionality replaces the need for `mini-css-extract-plugin` and `css-loader`, as it provides native support.
+- CSS extraction: webpack will extract CSS into a separate file, so no loader or plugin is needed for it — see [Native CSS](/guides/native-css/).
 - CSS imports: webpack will inline CSS imports into the generated CSS file.
 - Hot Module Reload (HMR): webpack supports HMR for CSS files. This means that changes made to CSS files will be reflected in the browser without a full page reload.
 
@@ -410,7 +410,7 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **This feature is experimental and partial.** Webpack 5.107 implemented the `html-loader` role: importing an HTML file from JS runs its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with `html-webpack-plugin` is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+W> **This feature is experimental and partial.** Webpack 5.107 implemented the `html-loader` role: importing an HTML file from JS runs its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with the plugin-based setups it replaces is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
 
 T> The HTML parser can be tuned via [`module.parser.html`](/configuration/module/#moduleparserhtml): use [`sources`](/configuration/module/#moduleparserhtmlsources) to disable or customize URL-attribute extraction, and [`template`](/configuration/module/#moduleparserhtmltemplate) to transform the HTML source before parsing.
 
