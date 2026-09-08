@@ -123,7 +123,7 @@
     "duplexer": "^0.1.2",
     "eslint": "^9.39.5",
     "eslint-config-webpack": "^4.9.6",
-    "eslint-plugin-cypress": "^6.4.4",
+    "eslint-plugin-cypress": "^7.0.1",
     "eslint-plugin-mdx": "^3.8.1",
     "feed": "^6.0.0",
     "front-matter": "^4.0.2",
