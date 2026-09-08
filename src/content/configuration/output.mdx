@@ -1812,10 +1812,8 @@ These options will result in a bundle that comes with a complete header to ensur
 ```js
 export default {
   // …
-  experiments: {
-    outputModule: true,
-  },
   output: {
+    module: true,
     library: {
       // do not specify a `name` here
       type: "module",
@@ -1824,9 +1822,7 @@ export default {
 };
 ```
 
-Output ES Module.
-
-However this feature is still experimental and not fully supported yet, so make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand. In addition, you can track the development progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+Output ES Module. You can track the remaining development progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
 ##### type: 'modern-module'
 
@@ -1835,10 +1831,8 @@ However this feature is still experimental and not fully supported yet, so make 
 ```js
 export default {
   // …
-  experiments: {
-    outputModule: true,
-  },
   output: {
+    module: true,
     library: {
       // do not specify a `name` here
       type: "modern-module",
@@ -1848,8 +1842,6 @@ export default {
 ```
 
 This configuration generates tree-shakable output for ES Modules.
-
-However this feature is still experimental and not fully supported yet, so make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
 
 ##### type: 'commonjs2'
 
@@ -2452,7 +2444,7 @@ These options will result in a bundle that comes with a complete header to ensur
 
 W> Prefer to use [`output.library.type: 'module'`](#type-module).
 
-Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
+Output ES Module. Make sure to enable [`output.module`](#outputmodule) beforehand.
 
 Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
@@ -2677,7 +2669,7 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 `boolean = false`
 
-Output JavaScript files as module type. Disabled by default as it's an experimental feature.
+Output JavaScript files as module type. It defaults to `true` for the [`universal`](/configuration/target/#universal), [`deno`](/configuration/target/#deno) and [`bun`](/configuration/target/#bun) targets, which only run ECMAScript modules, and to `false` everywhere else.
 
 When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `minimizerOptions.module` to `true` internally.
 
@@ -2686,16 +2678,15 @@ If you're using webpack to compile a library to be consumed by others, make sure
 ```js
 export default {
   // ...
-  experiments: {
-    outputModule: true,
-  },
   output: {
     module: true,
   },
 };
 ```
 
-W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`. [One of the known problems](https://github.com/webpack/webpack/issues/11277#issuecomment-992565287) is that such a library can't be consumed by webpack4-based (and possibly other too) applications.
+T> Until webpack `5.111.0` this option also required [`experiments.outputModule`](/configuration/experiments/); that experiment has been removed and `output.module` now works on its own.
+
+W> [One of the known problems](https://github.com/webpack/webpack/issues/11277#issuecomment-992565287) is that such a library can't be consumed by webpack4-based (and possibly other too) applications.
 
 ## output.path
 
