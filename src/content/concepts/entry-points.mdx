@@ -26,7 +26,7 @@ The result of this process is later written to disk according to the
 `output` configuration, which controls where and how the bundled
 files are emitted.
 
-T> When running webpack without a configuration file, the entry defaults to `'./src/index.js'`. If that file is missing — even if your `src/` directory exists — webpack will throw: <br /> **`ERROR in Entry module not found: Error: Can't resolve './src'`** <br /><br /> The error says `'./src'` rather than `'./src/index.js'` because webpack resolves the directory first, then fails to find `index.js` inside it. To use a different entry filename, configure the `entry` option as shown in the sections below.
+T> When running webpack without a configuration file, the entry defaults to `'./src'`, which webpack resolves to `./src/index.js` through `resolve.mainFiles` and `resolve.extensions`. If that file is missing — even if your `src/` directory exists — webpack will throw: <br /> **`Module not found: Error: Can't resolve './src' in '/path/to/project'`** <br /><br /> The error names `'./src'` because that is the actual entry request; `index.js` is only the default file looked up inside it. To use a different entry filename, configure the `entry` option as shown in the sections below.
 
 ## Single Entry (Shorthand) Syntax
 

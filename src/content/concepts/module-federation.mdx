@@ -66,7 +66,7 @@ This plugin creates an additional container entry with the specified exposed mod
 
 ### ContainerReferencePlugin (low level)
 
-This plugin adds specific references to containers as externals and allows to import remote modules from these containers. It also calls the `override` API of these containers to provide overrides to them. Local overrides (via `__webpack_override__` or `override` API when build is also a container) and specified overrides are provided to all referenced containers.
+This plugin adds specific references to containers as externals (of the configured `remoteType`) and allows to import remote modules from these containers. At runtime it initializes the share scope via `__webpack_init_sharing__`, which passes that scope to the `init()` method of each referenced container, and then loads remote modules through the container's `get()` method.
 
 ### ModuleFederationPlugin (high level)
 
@@ -118,13 +118,14 @@ It can be leveraged to connect remote containers to a host container dynamically
   const container = globalThis.someContainer; // or get the container somewhere else
   // Initialize the container, it may provide shared modules
   await container.init(__webpack_share_scopes__.default);
-  const module = await container.get("./module");
+  const factory = await container.get("./module");
+  const module = factory();
 })();
 ```
 
 T> A **container** is the remote container entry object exposed by a federated build, usually through that remote's `remoteEntry.js`. It provides the `get` and `init` methods shown here. In examples like `window[scope]` or `globalThis.someContainer`, the container is expected to exist only once the remote container script has already loaded.
 
-The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
+The container tries to provide shared modules, but if the shared module has already been used (loaded), the newly provided one is ignored without a warning. The container might still use it as a fallback.
 
 This way you could dynamically load an A/B test which provides a different version of a shared module.
 
