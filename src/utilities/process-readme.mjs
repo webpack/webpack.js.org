@@ -89,6 +89,21 @@ function getMatches(string, regex) {
   return matches;
 }
 
+// A README may link to a repository the site builds no page for, because the
+// repository was renamed or moved after that README was written. `repos` is the
+// list the pages are generated from, so a package missing from it keeps its
+// GitHub link, which redirects, rather than becoming a link to a page that does
+// not exist. Rewrite everything when no list is given.
+function hasPage(repos, packageName) {
+  if (!Array.isArray(repos)) {
+    return true;
+  }
+
+  return repos.some(
+    (repo) => repo.slice(repo.indexOf("/") + 1) === packageName,
+  );
+}
+
 export default function processREADME(body, options = {}) {
   let processingString = body
     // close <img> tags
@@ -147,10 +162,15 @@ export default function processREADME(body, options = {}) {
   );
   // dont make relative links for excluded loaders
   for (const match of loaderMatches) {
-    if (!excludedLoaders.includes(`${match[1]}/${match[2]}`)) {
+    const packageName = match[2].replace(/\/$/, "");
+
+    if (
+      !excludedLoaders.includes(`${match[1]}/${packageName}`) &&
+      hasPage(options.loaders, packageName)
+    ) {
       processingString = processingString.replace(
         match[0],
-        `/loaders/${match[2]}/)`,
+        `/loaders/${packageName}/)`,
       );
     }
   }
@@ -161,10 +181,15 @@ export default function processREADME(body, options = {}) {
   );
   // dont make relative links for excluded loaders
   for (const match of pluginMatches) {
-    if (!excludedPlugins.includes(`${match[1]}/${match[2]}`)) {
+    const packageName = match[2].replace(/\/$/, "");
+
+    if (
+      !excludedPlugins.includes(`${match[1]}/${packageName}`) &&
+      hasPage(options.plugins, packageName)
+    ) {
       processingString = processingString.replace(
         match[0],
-        `/plugins/${match[2]}/)`,
+        `/plugins/${packageName}/)`,
       );
     }
   }

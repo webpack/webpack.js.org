@@ -24,11 +24,12 @@ T> CSS and HTML are built in (experimental), so neither needs a plugin here. The
 | [`ChunksWebpackPlugin`](/plugins/chunks-webpack-plugin/)                        | Create HTML files with entrypoints and chunks relations to serve your bundles          |
 | [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin)               | Prepare compressed versions of assets to serve them with Content-Encoding              |
 | [`ContextReplacementPlugin`](/plugins/context-replacement-plugin)               | Override the inferred context of a `require` expression                                |
-| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | Copies individual files or entire directories to the build directory                   |
+| [`CopyPlugin`](/plugins/copy-plugin)                                            | Copy files and directories into the output directory                                   |
+| [`CopyWebpackPlugin`](/plugins/copy-webpack-plugin)                             | Deprecated in favour of the built-in [`CopyPlugin`](/plugins/copy-plugin)              |
 | [`DefinePlugin`](/plugins/define-plugin)                                        | Allow global constants configured at compile time                                      |
+| [`DiagnosticsWebpackPlugin`](/plugins/diagnostics-webpack-plugin)               | Run linters and other diagnostic tools over your sources during the build              |
 | [`DllPlugin`](/plugins/dll-plugin)                                              | Split bundles in order to drastically improve build time                               |
 | [`EnvironmentPlugin`](/plugins/environment-plugin)                              | Shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on `process.env` keys |
-| [`EslintWebpackPlugin`](/plugins/eslint-webpack-plugin)                         | A ESLint plugin for webpack                                                            |
 | [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin)          | Enable Hot Module Replacement (HMR)                                                    |
 | [`IgnorePlugin`](/plugins/ignore-plugin)                                        | Exclude certain modules from bundles                                                   |
 | [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | Set min/max limits for chunking to better control chunking                             |

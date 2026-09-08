@@ -9,6 +9,7 @@ contributors:
   - EugeneHlushko
   - shivxmsharma
   - bjohansebas
+  - alexander-akait
 ---
 
 These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
@@ -34,6 +35,7 @@ Besides the size budget ([`maxAssetSize`](#performancemaxassetsize) and [`maxEnt
 | What weighs a chunk | [`largeModules`](#performancelargemodules), [`inlinedAssets`](#performanceinlinedassets), [`sourceMaps`](#performancesourcemaps), [`broadContexts`](#performancebroadcontexts)                                                                                                                                                                 |
 | Code hazards        | [`evalUsage`](#performanceevalusage), [`pureAnnotations`](#performancepureannotations), [`topLevelThis`](#performancetoplevelthis), [`mixedExports`](#performancemixedexports)                                                                                                                                                                 |
 | Configuration       | [`unusedConfig`](#performanceunusedconfig), [`osDependentRules`](#performanceosdependentrules)                                                                                                                                                                                                                                                 |
+| What tools can read | [`analyzableBailouts`](#performanceanalyzablebailouts)                                                                                                                                                                                                                                                                                         |
 | Build itself        | [`cacheEffectiveness`](#performancecacheeffectiveness), [`hotspots`](#performancehotspots), [`circularDependencies`](#performancecirculardependencies)                                                                                                                                                                                         |
 
 Most of them are reported through [`performance.hints`](#performancehints), so they are silent while `hints` is `false`.
@@ -79,6 +81,42 @@ export default {
 `all` does not apply to [`hints`](#performancehints), [`maxAssetSize`](#performancemaxassetsize) or [`maxEntrypointSize`](#performancemaxentrypointsize).
 
 T> Turning everything on at once is a good way to audit a project, but several checks walk the module graph and cost build time. Once you have read the report, keep the handful that matter to you enabled and leave the rest off.
+
+### performance.analyzableBailouts
+
+<Badge text="5.111.0+" />
+
+`boolean = false`
+
+Report references in [`output.module`](/configuration/output/#outputmodule) builds that kept webpack's runtime form, naming what stopped each from being written as a literal `import()` or `new URL()`. The reasons are grouped and counted rather than listed one module at a time, and the check is silent outside ESM output, where nothing claims to be analyzable in the first place.
+
+An ESM build normally names each chunk and asset outright, so another bundler, a CDN's module preloader or an import-map generator can follow the reference without running webpack's runtime. Where something prevents that, webpack falls back to `__webpack_require__.e(id)` or a URL built from `__webpack_require__.p` — correct, but opaque to every tool but webpack. Until this check, that fallback was reported only through `stats.optimizationBailout`, which nothing shows by default.
+
+What each reason means, and what lifts it:
+
+| Reason mentions                                                                  | What to change                                                                                                                                                                                                    |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`output.chunkFormat`](/configuration/output/#outputchunkformat) is not `module` | chunks are not read through a native `import()` at all; set it to `"module"`                                                                                                                                      |
+| [`output.importFunctionName`](/configuration/output/#outputimportfunctionname)   | the call site is a named function rather than `import()`; leave it at `"import"`                                                                                                                                  |
+| a worker loads its chunks with something other than `import`                     | set [`output.workerChunkLoading`](/configuration/output/#outputworkerchunkloading) to `"import"`, or the entry's `chunkLoading` likewise                                                                          |
+| [`devtool`](/configuration/devtool/) wraps the module in `eval()`                | `import.meta` does not parse there, and a specifier written inside the `eval()` string is invisible to a lexer even when webpack does write it out; use a non-`eval` devtool when the output has to be analyzable |
+| `__webpack_public_path__` is reassigned                                          | the path is only known at runtime, so no literal can be written; set [`output.publicPath`](/configuration/output/#outputpublicpath) instead                                                                       |
+| [`output.publicPath`](/configuration/output/#outputpublicpath) needs a base      | a relative public path is read differently from each chunk; a root-absolute or absolute one, or `"auto"`, reads the same everywhere                                                                               |
+| entries disagree on `baseUri`, or one is not absolute                            | give the entries that share a module the same absolute `baseUri`                                                                                                                                                  |
+| the compilation emits no JavaScript for a chunk                                  | the chunk belongs to another build, as a Module Federation remote does; nothing to change here                                                                                                                    |
+| a hot update could move the name                                                 | only while [HMR](/concepts/hot-module-replacement/) is on; production output is unaffected                                                                                                                        |
+
+```js
+export default {
+  // ...
+  experiments: { outputModule: true },
+  output: { module: true },
+  performance: {
+    hints: "warning",
+    analyzableBailouts: true,
+  },
+};
+```
 
 ### performance.assetFilter
 

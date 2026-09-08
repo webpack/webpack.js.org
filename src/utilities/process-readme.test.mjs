@@ -18,6 +18,46 @@ describe("processReadme", () => {
     );
   });
 
+  it("keeps the github link when the site builds no page for the package", () => {
+    const options = {
+      source: url,
+      loaders: ["webpack/css-loader"],
+      plugins: ["webpack/stylelint-webpack-plugin"],
+    };
+    const renamedPluginMDData =
+      "- [lint-webpack-plugin](https://github.com/webpack/lint-webpack-plugin)";
+    const renamedLoaderMDData =
+      "- [sass-loader](https://github.com/webpack/sass-loader)";
+
+    expect(processReadme(renamedPluginMDData, options)).toBe(
+      renamedPluginMDData,
+    );
+    expect(processReadme(renamedLoaderMDData, options)).toBe(
+      renamedLoaderMDData,
+    );
+  });
+
+  it("links a package the site has a page for under its current owner", () => {
+    const options = {
+      source: url,
+      loaders: ["webpack/css-loader"],
+      plugins: ["webpack/copy-webpack-plugin"],
+    };
+
+    expect(
+      processReadme(
+        "- [copy-webpack-plugin](https://github.com/webpack-contrib/copy-webpack-plugin)",
+        options,
+      ),
+    ).toBe("- [copy-webpack-plugin](/plugins/copy-webpack-plugin/)");
+    expect(
+      processReadme(
+        "- [css-loader](https://github.com/webpack/css-loader)",
+        options,
+      ),
+    ).toBe("- [css-loader](/loaders/css-loader/)");
+  });
+
   it("links without the site", () => {
     const options = { source: url };
     const loaderMDData =
