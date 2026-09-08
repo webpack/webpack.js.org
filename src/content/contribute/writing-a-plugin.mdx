@@ -425,7 +425,7 @@ Various types of hooks supported are :
   - Tapped into using `tap` method.
   - Called using `call(...params)` method.
 
-  In these types of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeChunkModules` are SyncBailHooks.
+  In these types of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeModules` are SyncBailHooks.
 
 - **Waterfall Hooks**
   - Defined using `SyncWaterfallHook[params]`
@@ -433,7 +433,7 @@ Various types of hooks supported are :
   - Called using `call(...params)` method
 
   Here each of the plugins is called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
-  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
+  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the rendering hooks exposed by `webpack.javascript.JavascriptModulesPlugin.getCompilationHooks(compilation)` like `renderChunk`, `renderMain`, `render` etc.
 
 ### Asynchronous Hooks
 
@@ -451,7 +451,7 @@ Various types of hooks supported are :
   - Called using `callAsync(...params)` method
 
   The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
-  This plugin pattern is expected for events like `before-resolve` and `after-resolve`.
+  This plugin pattern is expected for events like `ContextModuleFactory.hooks.beforeResolve` and `afterResolve`; the `NormalModuleFactory` equivalents are AsyncSeriesBailHooks.
 
 - **Async Series Bail**
   - Defined using `AsyncSeriesBailHook[params]`
@@ -495,7 +495,7 @@ class AssetLoggerPlugin {
 export default AssetLoggerPlugin;
 ```
 
-This plugin taps into the `emit` hook of the Webpack compiler and prints the names of all generated assets to the console. It demonstrates how plugins can interact with the compilation process using Webpack hooks.
+This plugin taps into the `thisCompilation` hook of the Webpack compiler and the compilation's `processAssets` hook, and prints the names of all generated assets to the console. It demonstrates how plugins can interact with the compilation process using Webpack hooks.
 
 For example, when running a Webpack build, the output may look like:
 
