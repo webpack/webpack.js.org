@@ -164,7 +164,7 @@ watching.close((closeErr) => {
 ```
 
 W> It’s not allowed to watch or run again before the existing watcher has been
-closed or invalidated.
+closed.
 
 ### Invalidate `Watching`
 
@@ -285,23 +285,23 @@ webpack(
 );
 ```
 
-W> Multiple configurations will **not be run in parallel**. Each
-configuration is only processed after the previous one has finished
-processing.
+W> Multiple configurations are **run in parallel** by default
+(`parallelism: Infinity`). Use the [`parallelism`](/configuration/configuration-types/#parallelism) option on the
+configuration array or [`dependencies`](/configuration/configuration-types/#dependencies) in a configuration to limit or order them.
 
 ### MultiCompiler hooks
 
 A `MultiCompiler` exposes the child compilers' hooks as one, so a plugin can tap the set instead of every child:
 
-| Hook                | Type                                    | Description                                                                      |
-| ------------------- | --------------------------------------- | -------------------------------------------------------------------------------- |
-| `done`              | `SyncHook<[MultiStats, Compiler[]]>`    | Called once every child compilation has finished. Aggregated, not a `MultiHook`. |
-| `shutdown`          | `AsyncSeriesHook<[Compiler]>`           | <Badge text="5.110.0+" /> Called when the compilers are closing, once per child. |
-| `invalid`           | `SyncHook<[string \| null, number]>`    | Called when a watched file changes in any of the children.                       |
-| `run`               | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a non-watch build.                                  |
-| `watchRun`          | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a watch build.                                      |
-| `watchClose`        | `SyncHook<[]>`                          | Called when watching stops.                                                      |
-| `infrastructureLog` | `SyncBailHook<[string, string, any[]]>` | Infrastructure logging for any child.                                            |
+| Hook                | Type                                    | Description                                                                                                                                     |
+| ------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `done`              | `SyncHook<[MultiStats, Compiler[]]>`    | Called once every child compilation has finished. Aggregated, not a `MultiHook`.                                                                |
+| `shutdown`          | `AsyncSeriesHook<[]>`                   | <Badge text="5.110.0+" /> Called when the compilers are closing. A `MultiHook` over the children's `shutdown` hooks; taps receive no arguments. |
+| `invalid`           | `SyncHook<[string \| null, number]>`    | Called when a watched file changes in any of the children.                                                                                      |
+| `run`               | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a non-watch build.                                                                                                 |
+| `watchRun`          | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a watch build.                                                                                                     |
+| `watchClose`        | `SyncHook<[]>`                          | Called when watching stops.                                                                                                                     |
+| `infrastructureLog` | `SyncBailHook<[string, string, any[]]>` | Infrastructure logging for any child.                                                                                                           |
 
 Since webpack 5.110.0 the `done` hook is also handed the compilers whose build actually ran, in configuration order. In watch mode a change usually invalidates only some of the children, and the others are reported from their previous stats, so this is how a plugin tells what is new:
 
@@ -394,5 +394,5 @@ and many other packages, uses to mysteriously hide your files but continue
 serving them up to the browser!
 
 T> The output file system you provide needs to be compatible with Node’s own
-[`fs`](https://nodejs.org/api/fs.html) interface, which requires the `mkdirp`
-and `join` helper methods.
+[`fs`](https://nodejs.org/api/fs.html) interface: it must provide `mkdir`,
+`writeFile`, `stat` and `readFile`; `join`, `relative` and `dirname` are optional.

@@ -360,7 +360,7 @@ define([name: String], [dependencies: String[]], factoryMethod: function(...))
 
 If `dependencies` are provided, `factoryMethod` will be called with the exports of each dependency (in the same order). If `dependencies` are not provided, `factoryMethod` is called with `require`, `exports` and `module` (for compatibility!). If this function returns a value, this value is exported by the module. The compiler ensures that each dependency is available.
 
-W> Note that webpack ignores the `name` argument.
+W> The `name` argument does not affect the module id. webpack registers it as a local module, so other `define` or `require` calls in the same file can reference it.
 
 ```js
 define(["jquery", "my-module"], ($, myModule) =>
@@ -410,44 +410,6 @@ import("b").then((b) => {
 
 W> There is no option to provide a chunk name.
 
-## Labeled Modules
-
-W> These syntaxes are legacy. We highly recommend using ES6 Modules for modern applications.
-
-The internal `LabeledModulesPlugin` enables you to use the following methods for exporting and requiring within your modules:
-
-### export label
-
-Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
-
-```ts
-export: const answer = 42;
-export: function method(value) {
-  // Do something...
-};
-```
-
-W> Using it in an async function may not have the expected effect.
-
-### require label
-
-Make all exports from the dependency available in the current scope. The `require` label can occur before a string. The dependency must export values with the `export` label. CommonJS or AMD modules cannot be consumed.
-
-**some-dependency.js**
-
-```ts
-export: const answer = 42;
-export: function method(value) {
-  // Do something...
-};
-```
-
-```ts
-require: 'some-dependency';
-console.log(answer);
-method(...);
-```
-
 ## Webpack
 
 Aside from the module syntaxes described above, webpack also allows a few custom, webpack-specific methods:
@@ -493,6 +455,8 @@ The full list of available modes and their behavior is described in [`import()`]
 ```ts
 require.include((dependency: String));
 ```
+
+W> `require.include()` emits a `RequireIncludeDeprecationWarning` ("require.include() is deprecated and will be removed soon.") by default. Set [`module.parser.javascript.requireInclude`](/configuration/module/#moduleparserjavascript) to `true` to silence it, or to `false` to disable the feature.
 
 Include a `dependency` without executing it. This can be used for optimizing the position of a module in the output chunks.
 

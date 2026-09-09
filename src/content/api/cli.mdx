@@ -49,7 +49,7 @@ webpack-cli offers a variety of commands to make working with webpack easier. By
 | [`help`](#help)             | `help\|h [command] [option]`              | Display help for commands and options.                                                             |
 | [`info`](#info)             | `info\|i [options]`                       | Outputs information about your system.                                                             |
 | [`serve`](#serve)           | `serve\|server\|s [options]`              | Run the `webpack-dev-server`.                                                                      |
-| [`version`](#version)       | `version\|v [commands...]`                | Output the version number of 'webpack', 'webpack-cli' and 'webpack-dev-server' and other packages. |
+| [`version`](#version)       | `version\|v [options]`                    | Output the version number of 'webpack', 'webpack-cli' and 'webpack-dev-server' and other packages. |
 | [`watch`](#watch)           | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                                           |
 
 ### Build
@@ -176,7 +176,7 @@ npx webpack info [options]
 **example**
 
 ```bash
-npx webpack info --output json --addition-package postcss
+npx webpack info --output json --additional-package postcss
 ```
 
 #### Options for info
@@ -621,11 +621,11 @@ npx webpack --config-node-env production   # process.env.NODE_ENV = 'production'
 
 When the `mode` option is not specified in the configuration, you can use the `--config-node-env` option to set the `mode`. For example, using `--config-node-env production` will set both `process.env.NODE_ENV` and `mode` to `'production'`.
 
-If your configuration exports a function, the value of `--config-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--config-node-env` is accessible as `argv.nodeEnv` within the function and can be used accordingly.
+If your configuration exports a function, the value of `--config-node-env` is assigned to mode after the function returns. This means that `mode` will not be available in the function arguments (`env` and `argv`). However, the value of `--config-node-env` is accessible as `argv.configNodeEnv` within the function and can be used accordingly.
 
 ```js
 export default (env, argv) => {
-  console.log(argv.defineProcessEnvNodeEnv); // 'production' if --config-node-env production is used
+  console.log(argv.configNodeEnv); // 'production' if --config-node-env production is used
   return {
     // your configuration
   };

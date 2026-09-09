@@ -42,26 +42,24 @@ Parameters:
 
 ### findModule
 
-`function (module)`
+`function (identifier)`
 
-Attempts to search for a module by its identifier.
+Attempts to search for a module by its identifier. Returns the module, or `undefined` if none matches.
 
 Parameters:
 
-- `module` - module to be searched for. The identifier is extracted from the module by the compilation using `module.identifier()` method.
+- `identifier` - the identifier string of the module to be searched for.
 
 ### buildModule
 
-`function (module, optional, origin, dependencies)`
+`function (module, callback)`
 
 Builds the given module.
 
 Parameters:
 
 - `module` - the module to be built.
-- `optional` - optional flag.
-- `origin` - origin module from which this module build was requested.
-- `dependencies` - optional dependencies of the module to be built.
+- `callback` - invoked as `callback(err, module)` when the build finishes.
 
 ### processModuleDependencies
 
@@ -124,10 +122,6 @@ Parameters:
 
 Unseals the compilation.
 
-Parameters:
-
-- `callback` - function to be invoked when the compilation has been unsealed.
-
 ### reportDependencyErrorsAndWarnings
 
 `function (module, blocks)`
@@ -172,26 +166,16 @@ Parameters:
 
 - `module` - the module to assign depth to.
 
-### getDependencyReference
+### getDependencyReferencedExports
 
-`function (module, dependency)`
+`function (dependency, runtime)`
 
-Returns the reference to the dependency from a given module.
-
-Parameters:
-
-- `module` - the module at question.
-- `dependency` - the dependency to get reference to.
-
-### processDependenciesBlocksForChunkGroups
-
-`function (inputChunkGroups)`
-
-Creates the `Chunk` graph from the `Module` graph. The process is done in two phases. Phase one: traverse the module graph and build a basic chunks graph in `chunkDependencies`. Phase two: traverse every possible way through the basic chunk graph and track the available modules. While traversing, `processDependenciesBlocksForChunkGroups` connects chunks with each other and `Blocks` with `Chunks`. It stops traversing when all modules for a chunk are already available and it doesn't connect unneeded chunks.
+Returns the exports referenced by the given dependency.
 
 Parameters:
 
-- `inputChunkGroups` - chunk groups that are processed.
+- `dependency` - the dependency to get the referenced exports of.
+- `runtime` - the runtime to get them for.
 
 ### removeReasonsOfDependencyBlock
 

@@ -9,7 +9,7 @@ contributors:
 
 The `NormalModuleFactory` module is used by the `Compiler` to generate modules. Starting with entry points, it resolves each request, parses the content to find further requests, and keeps crawling through files by resolving all and parsing any new files. At last stage, each dependency becomes a Module instance.
 
-The `NormalModuleFactory` class extends `Tapable` and provides the following
+The `NormalModuleFactory` class exposes a `hooks` object of tapable hooks and provides the following
 lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ```js
@@ -58,11 +58,13 @@ Called before the request is resolved. A dependency can be ignored by returning 
 
 ## resolveForScheme
 
-`AsyncSeriesBailHook`
+`HookMap<AsyncSeriesBailHook>`
 
 Called before a request with scheme (URI) is resolved.
 
-- Callback Parameters: `resolveData`
+- Hook Parameters: `scheme`
+
+- Callback Parameters: `resourceData` `resolveData`
 
 ## afterResolve
 

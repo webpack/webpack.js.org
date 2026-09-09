@@ -73,11 +73,16 @@ For compatibility reasons webpack polyfills the `global` variable by default.
 
 ## \_\_dirname (NodeJS)
 
-Depending on the configuration option `node.__dirname`:
+Depending on the configuration option [`node.__dirname`](/configuration/node/):
 
 - `false`: Not defined
-- `mock`: equal to `'/'`
-- `true`: [node.js \_\_dirname](https://nodejs.org/api/globals.html#globals_dirname)
+- `true`: The directory of the module, relative to the compiler [`context`](/configuration/entry-context/#context)
+- `'mock'`: equal to `'/'`
+- `'warn-mock'`: equal to `'/'`, with a warning
+- `'node-module'`: Derived from `import.meta.url` (or `import.meta.dirname` where supported) in ES module output
+- `'eval-only'`: Left for Node.js to evaluate at runtime
+
+Defaults to `'eval-only'` for Node.js-like targets and `'mock'` otherwise.
 
 If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
@@ -85,13 +90,11 @@ If used inside an expression that is parsed by the Parser, the configuration opt
 
 The `import.meta` exposes context-specific metadata to a JavaScript module, such as the URL of the module. It is only available in [ESM](/guides/ecma-script-modules/).
 
-Please note that webpack does not support direct access to `import.meta`. Instead, you should access its properties or use destructuring assignment. E.g.,
+Direct access to `import.meta` is supported: webpack replaces it with an object of the known properties (`url`, `webpack`, `main`, `env`, …). Unknown properties are `undefined` unless [`module.parser.javascript.importMeta`](/configuration/module/#moduleparserjavascriptimportmeta) is set to `'preserve-unknown'` or an object.
 
 ```js
-// webpack will warn about this
-Object.keys(import.meta);
+Object.keys(import.meta); // e.g. ['url', 'webpack', 'main', 'env']
 
-// fine to use
 console.log(import.meta.url);
 const { url } = import.meta;
 ```
@@ -302,11 +305,16 @@ const icons = import.meta.glob("./icons/*.svg", {
 
 ## \_\_filename (NodeJS)
 
-Depending on the configuration option `node.__filename`:
+Depending on the configuration option [`node.__filename`](/configuration/node/):
 
 - `false`: Not defined
-- `mock`: equal to `'/index.js'`
-- `true`: [node.js \_\_filename](https://nodejs.org/api/globals.html#globals_filename)
+- `true`: The path of the module, relative to the compiler [`context`](/configuration/entry-context/#context)
+- `'mock'`: equal to `'/index.js'`
+- `'warn-mock'`: equal to `'/index.js'`, with a warning
+- `'node-module'`: Derived from `import.meta.url` (or `import.meta.filename` where supported) in ES module output
+- `'eval-only'`: Left for Node.js to evaluate at runtime
+
+Defaults to `'eval-only'` for Node.js-like targets and `'mock'` otherwise.
 
 If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
@@ -497,7 +505,3 @@ This is a webpack specific feature and it's available since webpack 5.25.0.
 ```js
 console.log(__webpack_runtime_id__ === "main");
 ```
-
-## DEBUG (webpack-specific)
-
-Equals the configuration option `debug`.

@@ -351,35 +351,47 @@ Called for every specifier of every `export`-import statement.
 
 ### varDeclaration
 
-`SyncBailHook`
+`HookMap<SyncBailHook>`
 
-Called when parsing a variable declaration.
+Called when parsing a variable declaration, once for each declared identifier. The callback receives the `Identifier` node.
 
-- Callback Parameters: `declaration`
+- Hook Parameters: `identifier`
+- Callback Parameters: `identifier`
+
+```js
+const a = 1;
+
+parser.hooks.varDeclaration.for("a").tap("MyPlugin", (identifier) => {
+  // identifier is the `Identifier` node of a
+});
+```
 
 ### varDeclarationLet
 
-`SyncBailHook`
+`HookMap<SyncBailHook>`
 
 Called when parsing a variable declaration defined using `let`
 
-- Callback Parameters: `declaration`
+- Hook Parameters: `identifier`
+- Callback Parameters: `identifier`
 
 ### varDeclarationConst
 
-`SyncBailHook`
+`HookMap<SyncBailHook>`
 
 Called when parsing a variable declaration defined using `const`
 
-- Callback Parameters: `declaration`
+- Hook Parameters: `identifier`
+- Callback Parameters: `identifier`
 
 ### varDeclarationVar
 
-`SyncBailHook`
+`HookMap<SyncBailHook>`
 
 Called when parsing a variable declaration defined using `var`
 
-- Callback Parameters: `declaration`
+- Hook Parameters: `identifier`
+- Callback Parameters: `identifier`
 
 ### canRename
 
@@ -416,11 +428,11 @@ const a = b;
 parser.hooks.rename.for("b").tap("MyPlugin", (expression) => {});
 ```
 
-### assign (before parsing assigned expression)
+### assign
 
 `SyncBailHook`
 
-Called when parsing an `AssignmentExpression` before parsing the assigned expression.
+Called when parsing an `AssignmentExpression`, after the assigned expression has been walked and before the target is walked. Returning `true` prevents the target from being walked.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
@@ -429,24 +441,7 @@ Called when parsing an `AssignmentExpression` before parsing the assigned expres
 a += b;
 
 parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
-  // this is called before parsing b
-});
-```
-
-### assign (before parsing target)
-
-`SyncBailHook`
-
-Called when parsing an `AssignmentExpression` before parsing the assign expression.
-
-- Hook Parameters: `identifier`
-- Callback Parameters: `expression`
-
-```js
-a += b;
-
-parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
-  // this is called before parsing a
+  // this is called after b has been walked, before a is walked
 });
 ```
 
