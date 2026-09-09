@@ -239,13 +239,15 @@ Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loa
 
 ### this.cacheable
 
-A function that sets the cacheable flag:
+A function that can mark the current module's build result as not cacheable:
 
 ```ts
 cacheable(flag = true: boolean)
 ```
 
-By default, loader results are flagged as cacheable. Call this method passing `false` to make the loader's result not cacheable.
+By default, the module's build result is flagged as cacheable. Calling `this.cacheable(false)` in any loader marks the entire module's build result as not cacheable, so webpack rebuilds the module in subsequent compilations even when its inputs and dependencies haven't changed. This applies to the whole loader chain, rather than only the calling loader's intermediate result.
+
+Calling `this.cacheable(true)` or `this.cacheable()` has no effect and does not restore cacheability after it has been disabled.
 
 A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have dependencies other than those specified with `this.addDependency`.
 
