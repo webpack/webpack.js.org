@@ -1,5 +1,6 @@
 ---
 title: Module
+description: Configure how webpack treats each module type with rules, parser and generator options, covering JavaScript, CSS, HTML, assets and WebAssembly.
 sort: 7
 contributors:
   - sokra
@@ -186,7 +187,7 @@ export default {
         // Customize the format of the local class names generated for css modules.
         // type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].
         // available since webpack 5.90.4
-        // Since webpack 5.108.0, [hash] here resolves to the local ident hash (matching css-loader); use [modulehash] for the module hash. An inline digest/length form is also supported, e.g. [hash:base64:8].
+        // Since webpack 5.108.0, [hash] here resolves to the local ident hash rather than the module hash; use [modulehash] for that. An inline digest/length form is also supported, e.g. [hash:base64:8].
         localIdentName: "[uniqueName]-[id]-[local]",
       },
       "css/global": {
@@ -217,7 +218,7 @@ export default {
 
 <Badge text="5.107.0+" />
 
-When `exportsConvention` is a function, it may return either a `string` or a `string[]`. Returning an array exports the local class under every name in the array, matching `css-loader`'s behavior. This is useful when you want to expose the same class under several aliases without writing two rules.
+When `exportsConvention` is a function, it may return either a `string` or a `string[]`. Returning an array exports the local class under every name in the array. This is useful when you want to expose the same class under several aliases without writing two rules.
 
 **webpack.config.js**
 
@@ -441,7 +442,7 @@ This option enables the handling of `@import` at-rules in CSS files. When set to
   }
   ```
 
-T> To filter specific imports, you can use Webpack's built-in [IgnorePlugin](/plugins/ignore-plugin/). The [`filter` option](/loaders/css-loader/#filter), as available in `css-loader`, is not supported.
+T> To filter specific imports, you can use Webpack's built-in [IgnorePlugin](/plugins/ignore-plugin/). A per-import `filter` option is not supported.
 
 #### module.parser.css.url
 
@@ -474,7 +475,7 @@ This option enables or disables the handling of URLs in functions such as `url()
   }
   ```
 
-T> To filter specific imports, you can use Webpack's built-in [IgnorePlugin](/plugins/ignore-plugin/). The [`filter` option](/loaders/css-loader/#filter), as available in `css-loader`, is not supported.
+T> To filter specific imports, you can use Webpack's built-in [IgnorePlugin](/plugins/ignore-plugin/). A per-import `filter` option is not supported.
 
 #### module.parser.css.namedExports
 

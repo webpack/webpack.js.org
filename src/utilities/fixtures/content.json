@@ -115,8 +115,8 @@
           "anchors": [
             { "title": "Preparation", "id": "preparation", "level": 2 },
             {
-              "title": "Setting up HtmlWebpackPlugin",
-              "id": "setting-up-htmlwebpackplugin",
+              "title": "Making the page an entry point",
+              "id": "making-the-page-an-entry-point",
               "level": 2
             },
             {

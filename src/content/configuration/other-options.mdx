@@ -1,5 +1,6 @@
 ---
 title: Other Options
+description: The remaining webpack options, including amd, bail, dependencies, loader, parallelism, profile, recordsPath and snapshot.
 sort: 22
 contributors:
   - sokra
@@ -442,3 +443,24 @@ Snapshots for resolving of build dependencies when using the persistent cache.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
+
+## validate
+
+`boolean`
+
+<Badge text="5.106.0+" />
+
+Whether webpack validates the configuration, and the options passed to loaders and plugins, against their schemas. Defaults to `true`, except in a production build with [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) enabled, where it defaults to `false`.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  validate: false,
+};
+```
+
+Turning validation off skips that work on every build, so a typo in an option is no longer reported — keep it on while a configuration is still changing, and turn it off once a build is known good and the time it takes is worth saving.
+
+T> When validation is on, webpack calls the [`validate` hook](/api/compiler-hooks/#validate) so plugins can check their own options at the same point.
