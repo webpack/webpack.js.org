@@ -21,7 +21,7 @@ describe("processReadme", () => {
   it("keeps the github link when the site builds no page for the package", () => {
     const options = {
       source: url,
-      loaders: ["webpack/css-loader"],
+      loaders: ["webpack/postcss-loader"],
       plugins: ["webpack/stylelint-webpack-plugin"],
     };
     const renamedPluginMDData =
@@ -40,7 +40,7 @@ describe("processReadme", () => {
   it("links a package the site has a page for under its current owner", () => {
     const options = {
       source: url,
-      loaders: ["webpack/css-loader"],
+      loaders: ["webpack/postcss-loader"],
       plugins: ["webpack/copy-webpack-plugin"],
     };
 
@@ -52,10 +52,10 @@ describe("processReadme", () => {
     ).toBe("- [copy-webpack-plugin](/plugins/copy-webpack-plugin/)");
     expect(
       processReadme(
-        "- [css-loader](https://github.com/webpack/css-loader)",
+        "- [postcss-loader](https://github.com/webpack/postcss-loader)",
         options,
       ),
-    ).toBe("- [css-loader](/loaders/css-loader/)");
+    ).toBe("- [postcss-loader](/loaders/postcss-loader/)");
   });
 
   it("links without the site", () => {
@@ -63,12 +63,12 @@ describe("processReadme", () => {
     const loaderMDData =
       "- [extract-loader](https://github.com/peerigon/extract-loader)";
     const pluginMDData =
-      "- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)";
+      "- [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)";
     expect(processReadme(loaderMDData, options)).toBe(
       "- [extract-loader](https://github.com/peerigon/extract-loader)",
     );
     expect(processReadme(pluginMDData, options)).toBe(
-      "- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)",
+      "- [dotenv-webpack](https://github.com/mrsteele/dotenv-webpack)",
     );
   });
 

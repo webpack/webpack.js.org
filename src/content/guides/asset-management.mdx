@@ -1,5 +1,6 @@
 ---
 title: Asset Management
+description: Load CSS, images, fonts and data into a webpack build and let the dependency graph manage them alongside your JavaScript.
 sort: 2
 contributors:
   - skipjack
@@ -72,7 +73,7 @@ import "./style.css";
 
 Webpack parses the file — resolving its `@import` and `url()` references — and extracts it into a `.css` output file next to your bundle. CSS Modules, minification and content hashes all come from the same built-in support, which is still experimental; [What's built-in](/guides/native-css/#whats-built-in) states what it covers and what still needs a loader.
 
-T> Built-in CSS is controlled by [`experiments.css`](/configuration/experiments/#experimentscss), which defaults to `'auto'`: it turns itself on unless a `module.rules` entry with a loader already matches your `.css` files. That means an existing `css-loader` / `style-loader` setup keeps working untouched — see [migrating off the CSS loaders](/guides/native-css/#migration-guide).
+T> Built-in CSS is controlled by [`experiments.css`](/configuration/experiments/#experimentscss), which defaults to `'auto'`: it turns itself on unless a `module.rules` entry with a loader already matches your `.css` files. That means an existing loader-based setup keeps working untouched — see [the migration guide](/guides/native-css/#migration-guide).
 
 Preprocessors still use loaders, and module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order (right to left).
 
@@ -176,7 +177,7 @@ Webpack extracted the CSS into its own file, `bundle.css` — the name follows [
 
 Open up `dist/index.html` in your browser again and you should see that `Hello webpack` is now styled in red.
 
-T> A separate stylesheet is the default because the browser can fetch it in parallel with the bundle and cache it on its own. If you would rather have the styles injected from JavaScript at runtime — what `style-loader` did — set [`exportType: 'style'`](/guides/native-css/#output-modes-exporttype) and no `<link>` is needed.
+T> A separate stylesheet is the default because the browser can fetch it in parallel with the bundle and cache it on its own. If you would rather have the styles injected from JavaScript at runtime, set [`exportType: 'style'`](/guides/native-css/#output-modes-exporttype) and no `<link>` is needed.
 
 Minification is built in too: in [`mode: 'production'`](/configuration/mode/) webpack minifies the emitted CSS with no extra plugin, and can maintain vendor prefixes for your browserslist target — see [Minification](/guides/native-css/#minification). On top of that, loaders exist for pretty much any flavor of CSS you can think of – [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 

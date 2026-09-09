@@ -13,6 +13,7 @@ export default function SplashViz() {
           <span> scripts </span>
           <span> images </span>
           <span> styles </span>
+          <span> pages </span>
         </TextRotator>
       </h1>
       <div

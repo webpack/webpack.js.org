@@ -1,5 +1,6 @@
 ---
 title: Output Management
+description: Keep emitted files in sync with your bundles by making the page itself an entry point with webpack's native HTML support.
 sort: 3
 contributors:
   - skipjack
@@ -15,7 +16,7 @@ contributors:
 
 T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
 
-So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, a few plugins exist that will make this process much easier to manage.
+So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, webpack can take the page over for you.
 
 ## Preparation
 
@@ -132,69 +133,101 @@ webpack 5.x.x compiled successfully in 1996 ms
 
 We can see that webpack generates our `print.bundle.js` and `index.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
 
-But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
+But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that by handing the page to webpack.
 
 T> If you inspected `print.bundle.js`, you might have noticed that it did not contain the `printMe` function. Instead, it contained only an [IIFE](/concepts/why-webpack/#iifes---immediately-invoked-function-expressions) with no observable side effects.<br /><br />
 This is because in our current setup, webpack treats each entry point as a standalone program that runs when the bundle is loaded. Because `print.js` only exports a function and never calls `printMe()`, executing it as its own entry does not require any executable runtime code. Thus, [webpack is able to omit that code as an optimization](/guides/tree-shaking/) since it would have no observable effect.<br /><br />
 In contrast, since `index.js` imports and uses `printMe`, webpack includes that function directly in `index.bundle.js`. Remember that webpack is a module _bundler_, so `index.bundle.js` contains all the code it needs to run rather than unresolved import statements.<br /><br />
-Multiple entry points are used here solely to demonstrate output management and the `HtmlWebpackPlugin`. In a real project, you would typically avoid creating a separate entry point for utility modules like this. If you do have multiple entry points that share dependencies, see [Prevent Duplication](/guides/code-splitting/#prevent-duplication) in the Code Splitting guide.
+Multiple entry points are used here solely to demonstrate output management. In a real project, you would typically avoid creating a separate entry point for utility modules like this. If you do have multiple entry points that share dependencies, see [Prevent Duplication](/guides/code-splitting/#prevent-duplication) in the Code Splitting guide.
 
-## Setting up HtmlWebpackPlugin
+## Making the page an entry point
 
-T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because the generated page re-enters the entry's script under an internal chunk name, which would obscure the bundle filenames this guide is about.
+Webpack understands HTML natively behind [`experiments.html`](/configuration/experiments/#experimentshtml): point [`entry`](/configuration/entry-context/) at an `.html` file and the page joins the build. Every `<script src>` it references becomes part of the module graph, and the emitted page has those URLs rewritten to the generated filenames — so the page and the bundles cannot drift apart.
 
-First install the plugin and adjust the `webpack.config.js` file:
+Move `index.html` out of `dist/` and into `src/`, next to the files it refers to:
 
-```bash
-npm install --save-dev html-webpack-plugin
+**project**
+
+```diff
+  webpack-demo
+  ├── package.json
+  ├── package-lock.json
+  ├── webpack.config.js
+  ├── /dist
+  ├── /src
++ │   ├── index.html
+  │   ├── index.js
+  │   ├── print.js
+  └── /node_modules
 ```
+
+**src/index.html**
+
+```diff
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8" />
+     <title>Output Management</title>
+-    <script src="./print.bundle.js"></script>
++    <script src="./print.js"></script>
+   </head>
+   <body>
+-    <script src="./index.bundle.js"></script>
++    <script src="./index.js"></script>
+   </body>
+ </html>
+```
+
+The tags point at the files you actually wrote, not at build output. Now adjust the config to build the page rather than the two scripts:
 
 **webpack.config.js**
 
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
-+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
-   entry: {
-     index: './src/index.js',
-     print: './src/print.js',
-   },
-+  plugins: [
-+    new HtmlWebpackPlugin({
-+      title: 'Output Management',
-+    }),
-+  ],
+-  entry: {
+-    index: './src/index.js',
+-    print: './src/print.js',
+-  },
++  entry: './src/index.html',
++  experiments: {
++    html: true,
++  },
    output: {
      filename: '[name].bundle.js',
++    htmlFilename: '[name].html',
      path: path.resolve(__dirname, 'dist'),
    },
  };
 ```
 
-Before we do a build, you should know that the `HtmlWebpackPlugin` by default will generate its own `index.html` file, even though we already have one in the `dist/` folder. This means that it will replace our `index.html` file with a newly generated one. Let's see what happens when we do an `npm run build`:
+There is no list of entry points to keep in sync any more — the page states which scripts it needs, and [`output.htmlFilename`](/configuration/output/#outputhtmlfilename) says where the built page goes. Let's see what `npm run build` generates now:
 
 ```bash
 ...
 [webpack-cli] Compilation finished
-asset index.bundle.js 69.5 KiB [compared for emit] [minimized] (name: index) 1 related asset
-asset print.bundle.js 316 bytes [compared for emit] [minimized] (name: print)
-asset index.html 253 bytes [emitted]
-runtime modules 1.36 KiB 7 modules
-cacheable modules 530 KiB
-  ./src/index.js 406 bytes [built] [code generated]
-  ./src/print.js 83 bytes [built] [code generated]
-  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.x.x compiled successfully in 2189 ms
+asset main1.bundle.js 69.1 KiB [emitted] [minimized] 1 related asset
+asset main.bundle.js 1.39 KiB [emitted] [minimized]
+asset index.html 183 bytes [emitted] [minimized] (auxiliary name: main)
+runtime modules 3.13 KiB 6 modules
+cacheable modules 534 KiB (javascript) 213 bytes (html)
+  modules by path ./src/*.js 487 bytes
+    ./src/index.js 403 bytes [built] [code generated]
+    ./src/print.js 84 bytes [built] [code generated]
+  ./src/index.html 213 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 533 KiB [built] [code generated]
+webpack 5.x.x compiled successfully in 3064 ms
 ```
 
-If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
+Webpack has written `dist/index.html` for you, with both `<script>` tags rewritten to the bundles it just emitted. Rename an entry, add a script tag, or turn on hashed filenames, and the page follows along on the next build.
 
-If you want to learn more about all the features and options that the `HtmlWebpackPlugin` provides, then you should read up on it on the [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) repo.
+T> The page itself emits no JavaScript, so the scripts it pulls in take the entry's filename: `main.bundle.js` for the first, `main1.bundle.js` for the second. If you would rather keep named JavaScript entries and have webpack scaffold a document around each one, set [`output.html`](/configuration/output/#outputhtml) instead; the [Native HTML](/guides/native-html/) guide walks through both models, along with titles, meta tags, favicons and templating.
 
 ## Cleaning up the `/dist` folder
 
@@ -207,23 +240,18 @@ In general it's good practice to clean the `/dist` folder before each build, so 
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
-   entry: {
-     index: './src/index.js',
-     print: './src/print.js',
+   entry: './src/index.html',
+   experiments: {
+     html: true,
    },
-   plugins: [
-     new HtmlWebpackPlugin({
-       title: 'Output Management',
-     }),
-   ],
    output: {
      filename: '[name].bundle.js',
+     htmlFilename: '[name].html',
      path: path.resolve(__dirname, 'dist'),
 +    clean: true,
    },
