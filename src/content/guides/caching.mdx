@@ -1,5 +1,6 @@
 ---
 title: Caching
+description: Use content hashes, runtime chunks and stable module IDs so browsers cache webpack bundles reliably across deploys.
 sort: 6
 contributors:
   - okonet
@@ -29,9 +30,7 @@ This guide focuses on the configuration needed to ensure files produced by webpa
 
 We can use the `output.filename` [substitutions](/configuration/output/#outputfilename) setting to define the names of our output files. Webpack provides a method of templating the filenames using bracketed strings called **substitutions**. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
 
-Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
-
-T> Webpack can generate the page itself with [`output.html`](/configuration/output/#outputhtml) — see [Native HTML](/guides/native-html/). This guide keeps `HtmlWebpackPlugin` because the generated page re-enters the entry's script under an internal chunk name, which would obscure the bundle filenames this guide is about.
+Let's get our project set up using the example from [getting started](/guides/getting-started), letting webpack write the page for us as in [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
 **project**
 
@@ -51,27 +50,29 @@ webpack-demo
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
--      title: 'Output Management',
-+      title: 'Caching',
-     }),
-   ],
++  experiments: {
++    html: true,
++  },
    output: {
++    html: {
++      title: 'Caching',
++    },
 -    filename: 'bundle.js',
 +    filename: '[name].[contenthash].js',
++    htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
  };
 ```
+
+[`output.html`](/configuration/output/#outputhtml) writes a document around the entry and injects its chunks, so the page tracks the hashed filenames on every build.
 
 Running our build script, `npm run build`, with this configuration should produce the following output:
 
@@ -106,20 +107,21 @@ As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlug
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
-       title: 'Caching',
-     }),
-   ],
+   experiments: {
+     html: true,
+   },
    output: {
+     html: {
+       title: 'Caching',
+     },
      filename: '[name].[contenthash].js',
+     htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
@@ -153,20 +155,21 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
-       title: 'Caching',
-     }),
-   ],
+   experiments: {
+     html: true,
+   },
    output: {
+     html: {
+       title: 'Caching',
+     },
      filename: '[name].[contenthash].js',
+     htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
@@ -269,20 +272,21 @@ The first and last are expected, it's the `vendor` hash we want to fix. `product
 ```diff
  import path from 'node:path';
  import { fileURLToPath } from 'node:url';
- import HtmlWebpackPlugin from 'html-webpack-plugin';
 
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
  export default {
    entry: './src/index.js',
-   plugins: [
-     new HtmlWebpackPlugin({
-       title: 'Caching',
-     }),
-   ],
+   experiments: {
+     html: true,
+   },
    output: {
+     html: {
+       title: 'Caching',
+     },
      filename: '[name].[contenthash].js',
+     htmlFilename: 'index.html',
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
