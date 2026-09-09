@@ -121,13 +121,13 @@ export default {
 
 ### performance.assetFilter
 
-`function(assetFilename) => boolean`
+`function(assetFilename, source, assetInfo) => boolean`
 
-This property allows webpack to control what files are used to calculate performance hints. The default function is:
+This property allows webpack to control what files are used to calculate performance hints. The default function excludes assets whose `assetInfo.development` flag is set, such as source maps:
 
 ```js
-function assetFilter(assetFilename) {
-  return !/\.map$/.test(assetFilename);
+function assetFilter(assetFilename, source, assetInfo) {
+  return !assetInfo.development;
 }
 ```
 
@@ -472,25 +472,9 @@ Report asset files emitted for an import whose binding nothing reads, so the byt
 
 `boolean = false`
 
-Report configuration that no build used: [`resolve.alias`](/configuration/resolve/#resolvealias) entries nothing matched, [`DefinePlugin`](/plugins/define-plugin/) keys nothing referenced, [`externals`](/configuration/externals/) nothing imported, [`module.rules`](/configuration/module/#modulerules) that never matched, and [Module Federation](/concepts/module-federation/) `shared` keys or `remotes` nothing imported. Each finding keeps its own message, so the report names which of the five it is.
+Report configuration that no build used: [`resolve.alias`](/configuration/resolve/#resolvealias) entries nothing matched, [`DefinePlugin`](/plugins/define-plugin/) keys nothing referenced, [`externals`](/configuration/externals/) nothing imported and [`module.rules`](/configuration/module/#modulerules) that never matched. Each finding keeps its own message, so the report names which of the four it is.
 
 A misspelled external is the costly one, since the real request gets bundled instead and no size limit would explain it. Plugins add rules too, so a reported rule is not necessarily one you wrote.
-
-A `shared` key nothing imports is the quiet one: an exact key matches only the exact request, so `shared: { lodash: {} }` shares nothing at all next to `import debounce from 'lodash/debounce'`, and the build still succeeds. Give the key a trailing slash to share everything under it:
-
-```js
-export default {
-  // ...
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "host",
-      shared: {
-        "lodash/": { singleton: true },
-      },
-    }),
-  ],
-};
-```
 
 ### performance.unusedModules
 

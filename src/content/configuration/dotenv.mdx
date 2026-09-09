@@ -35,7 +35,6 @@ export default {
   // ...
   dotenv: {
     prefix: "WEBPACK_",
-    dir: true,
     template: [".env", ".env.local", ".env.[mode]", ".env.[mode].local"],
   },
 };
@@ -77,23 +76,27 @@ T> For security reasons, an empty string `''` is not allowed as a prefix, as it 
 
 ### `dir`
 
-`boolean` `string`
+`false` `string`
 
-**Default:** `true`
+**Default:** the compiler [`context`](/configuration/entry-context/#context)
 
 The directory from which `.env` files are loaded.
 
-- `true` - Load from the project root (context)
 - `false` - Disable `.env` file loading
-- `string` - Relative path from project root or absolute path
+- `string` - Absolute path to the directory; relative paths are rejected by the configuration validation
 
 **webpack.config.js**
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export default {
   // ...
   dotenv: {
-    dir: "./config", // Load from ./config directory
+    dir: path.resolve(__dirname, "config"), // Load from ./config directory
   },
 };
 ```
@@ -286,10 +289,15 @@ Load environment files from a custom location with custom naming:
 **webpack.config.js**
 
 ```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export default {
   // ...
   dotenv: {
-    dir: "./environments",
+    dir: path.resolve(__dirname, "environments"),
     template: [".env.base", ".env.[mode]"],
   },
 };

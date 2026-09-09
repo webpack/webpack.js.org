@@ -37,22 +37,24 @@ export default {
 
 Webpack comes with certain presets available for the stats output:
 
-| Preset              | Alternative | Description                                                    |
-| ------------------- | ----------- | -------------------------------------------------------------- |
-| `'errors-only'`     | _none_      | Only output when errors happen                                 |
-| `'errors-warnings'` | _none_      | Only output errors and warnings happen                         |
-| `'minimal'`         | _none_      | Only output when errors or new compilation happen              |
-| `'none'`            | `false`     | Output nothing                                                 |
-| `'normal'`          | `true`      | Standard output                                                |
-| `'verbose'`         | _none_      | Output everything                                              |
-| `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
-| `'summary'`         | _none_      | Output webpack version, warnings count and errors count        |
+| Preset              | Alternative | Description                                                                                                                                                                                                                                                           |
+| ------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `'errors-only'`     | _none_      | Only output when errors happen                                                                                                                                                                                                                                        |
+| `'errors-warnings'` | _none_      | Only output errors and warnings happen                                                                                                                                                                                                                                |
+| `'minimal'`         | _none_      | Only output when errors or new compilation happen                                                                                                                                                                                                                     |
+| `'none'`            | `false`     | Output nothing                                                                                                                                                                                                                                                        |
+| `'normal'`          | `true`      | Standard output                                                                                                                                                                                                                                                       |
+| `'verbose'`         | _none_      | Output everything                                                                                                                                                                                                                                                     |
+| `'detailed'`        | _none_      | Like `'verbose'` but without `chunkModules`, `chunkGroupResourceHints`, `dependentModules`, `reasons`, `orphanModules`, `errorStack`, `env` and `children`, and with `errorsSpace`, `warningsSpace`, `modulesSpace`, `assetsSpace` and `reasonsSpace` limited to 1000 |
+| `'summary'`         | _none_      | Output webpack version, warnings count and errors count                                                                                                                                                                                                               |
 
 ## Stats Options
 
 It is possible to specify which information you want to see in the stats output.
 
 T> All of the options in the stats configuration object are optional.
+
+T> The defaults below describe the string output (`stats.toString()`, used by the CLI). These options are `false` there but `true` in `stats.toJson()`: `builtAt`, `cachedAssets`, `cachedModules`, `children`, `chunkGroupAuxiliary`, `chunkGroupChildren`, `chunkGroupResourceHints`, `chunkGroups`, `chunkOrigins`, `chunkRelations`, `chunks`, `dependentModules`, `depth`, `errorStack`, `hash`, `ids`, `loggingTrace`, `moduleAssets`, `nestedModules`, `optimizationBailout`, `orphanModules`, `outputPath`, `providedExports`, `publicPath`, `reasons`, `relatedAssets`, `runtimeModules` and `usedExports`.
 
 ### stats.all
 
@@ -84,9 +86,9 @@ export default {
 
 ### stats.assetsSort
 
-`string = 'id'`
+`string = '!size'` `false`
 
-Tells `stats` to sort the assets by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.assetsSort`. Use `!` prefix in the value to reverse the sort order by a given field.
+Tells `stats` to sort the assets by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.assetsSort`. Use `!` prefix in the value to reverse the sort order by a given field. Set it to `false` to disable sorting.
 
 ```js
 export default {
@@ -114,7 +116,7 @@ export default {
 
 ### stats.builtAt
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add the build date and the build time information. Set `stats.builtAt` to `false` to hide it.
 
@@ -133,7 +135,7 @@ Old version of `stats.cachedModules`.
 
 ### stats.cachedAssets
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about the cached assets. Setting `stats.cachedAssets` to `false` will tell `stats` to only show the emitted files (not the ones that were built).
 
@@ -148,7 +150,7 @@ export default {
 
 ### stats.cachedModules
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about cached (not built) modules.
 
@@ -163,7 +165,7 @@ export default {
 
 ### stats.children
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about the children.
 
@@ -178,7 +180,7 @@ export default {
 
 ### stats.chunkGroupAuxiliary
 
-`boolean = true`
+`boolean = false`
 
 Display auxiliary assets in chunk groups.
 
@@ -193,7 +195,7 @@ export default {
 
 ### stats.chunkGroupChildren
 
-`boolean = true`
+`boolean = false`
 
 Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
 
@@ -223,7 +225,7 @@ export default {
 
 ### stats.chunkGroups
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about the `namedChunkGroups`.
 
@@ -268,7 +270,7 @@ export default {
 
 ### stats.chunkOrigins
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about the origins of chunks and chunk merging.
 
@@ -298,7 +300,7 @@ export default {
 
 ### stats.chunks
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about the chunk. Setting `stats.chunks` to `false` results in a less verbose output.
 
@@ -313,9 +315,9 @@ export default {
 
 ### stats.chunksSort
 
-`string = 'id'`
+`string` `false`
 
-Tells `stats` to sort the chunks by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.chunksSort`. Use `!` prefix in the value to reverse the sort order by a given field.
+Tells `stats` to sort the chunks by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.chunksSort`. Use `!` prefix in the value to reverse the sort order by a given field. Sorting is disabled by default (`false`).
 
 ```js
 export default {
@@ -358,8 +360,10 @@ You can specify your own terminal output colors using [ANSI escape sequences](ht
 ```js
 export default {
   // ...
-  colors: {
-    green: "\u001B[32m",
+  stats: {
+    colors: {
+      green: "\u001B[32m",
+    },
   },
 };
 ```
@@ -419,9 +423,9 @@ export default {
 
 ### stats.entrypoints
 
-`boolean = true` `"auto"`
+`boolean` `string = 'auto'`
 
-Tells `stats` whether to display the entry points with the corresponding bundles.
+Tells `stats` whether to display the entry points with the corresponding bundles. Defaults to `'auto'` in the string output and to `true` in `stats.toJson()`.
 
 ```js
 export default {
@@ -498,7 +502,7 @@ export default {
 
 ### stats.errorStack
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to show stack trace of errors.
 
@@ -560,7 +564,7 @@ export default {
 
 ### stats.exclude
 
-See [`stats.excludeModules`](#statsexcludemodules).
+W> Deprecated and ineffective: `stats.exclude` is still accepted by the configuration schema but never read. Use [`stats.excludeModules`](#statsexcludemodules) instead.
 
 ### stats.excludeAssets
 
@@ -583,15 +587,15 @@ export default {
 
 ### stats.excludeModules
 
-`array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean` `boolean: false`
+`array = []: string | RegExp | function (moduleName, module, type) => boolean` `string` `RegExp` `function (moduleName, module, type) => boolean` `boolean: false`
 
-Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, a `function` that is getting the module's source as an argument and returns a `boolean`. `stats.excludeModules` can be an `array` of any of the above. `stats.excludeModules`'s configuration [is merged](https://github.com/webpack/webpack/blob/main/lib/Stats.js#L215) with the `stats.exclude`'s configuration value.
+Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, a `function` that is getting the module's name (plus the stats module object and the type of the module list) as arguments and returns a `boolean`. `stats.excludeModules` can be an `array` of any of the above.
 
 ```js
 export default {
   // ...
   stats: {
-    excludeModules: ["filter", /filter/, (moduleSource) => true],
+    excludeModules: ["filter", /filter/, (moduleName) => true],
   },
 };
 ```
@@ -791,7 +795,7 @@ export default {
 
 ### stats.hash
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about the hash of the compilation.
 
@@ -879,7 +883,7 @@ export default {
 
 `array = []: string | RegExp | function (name) => boolean` `string` `RegExp` `function (name) => boolean`
 
-Tells `stats` to include the debug information of the specified loggers such as Plugins or Loaders. When [`stats.logging`](#statslogging) is set to `false`, `stats.loggingDebug` option is ignored.
+Tells `stats` to include the debug information of the specified loggers such as Plugins or Loaders. Loggers matched by `stats.loggingDebug` are shown even when [`stats.logging`](#statslogging) is set to `false`.
 
 ```js
 export default {
@@ -897,7 +901,7 @@ export default {
 
 ### stats.loggingTrace
 
-`boolean = true`
+`boolean = false`
 
 Enable stack traces in the logging output for errors, warnings and traces. Set `stats.loggingTrace` to hide the trace.
 
@@ -912,7 +916,7 @@ export default {
 
 ### stats.moduleAssets
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
 
@@ -957,9 +961,9 @@ export default {
 
 ### stats.modulesSort
 
-`string = 'id'`
+`string = 'depth'` `false`
 
-Tells `stats` to sort the modules by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.modulesSort`. Use `!` prefix in the value to reverse the sort order by a given field.
+Tells `stats` to sort the modules by a given field. All of the [sorting fields](#sorting-fields) are allowed to be used as values for `stats.modulesSort`. Use `!` prefix in the value to reverse the sort order by a given field. Set it to `false` to disable sorting.
 
 ```js
 export default {
@@ -1034,7 +1038,7 @@ export default {
 
 `boolean = false`
 
-Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphan modules are hidden by default in `stats`.
+Tells `stats` whether to show `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphan modules are hidden by default in `stats`.
 
 ```js
 export default {
@@ -1047,7 +1051,7 @@ export default {
 
 ### stats.outputPath
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` to show the `outputPath`.
 
@@ -1090,7 +1094,7 @@ export default {
 };
 ```
 
-Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
+Setting the top-level `stats` option to `false` tells webpack to use the `'none'` [stats preset](/configuration/stats/#stats-presets); inside the `stats` object, use `preset: 'none'`.
 
 ### stats.providedExports
 
@@ -1109,7 +1113,7 @@ export default {
 
 ### stats.publicPath
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` to show the `publicPath`.
 
@@ -1124,7 +1128,7 @@ export default {
 
 ### stats.reasons
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` to add information about the reasons of why modules are included.
 
@@ -1173,7 +1177,7 @@ export default {
 
 ### stats.runtimeModules
 
-`boolean = true`
+`boolean = false`
 
 Tells `stats` whether to add information about runtime modules.
 
@@ -1315,6 +1319,7 @@ export default {
 For `assetsSort`, `chunksSort`, and `modulesSort` there are several possible fields that you can sort items by:
 
 - `'id'` - the item's id,
+- `'depth'` - the module's depth in the module graph (the default for `modulesSort`),
 - `'name'` - the item's name that was assigned to it upon importing,
 - `'size'` - the size of item in bytes,
 - `'chunks'` - what chunks the item originates from (for example, if there are multiple subchunks for one chunk: the subchunks will be grouped according to their main chunk),
@@ -1323,7 +1328,6 @@ For `assetsSort`, `chunksSort`, and `modulesSort` there are several possible fie
 - `'failed'` - whether the item has failed compilation,
 - `'cacheable'` - whether the item is cacheable,
 - `'built'` - whether the asset has been built,
-- `'prefetched'` - whether the asset will be prefetched,
 - `'optional'` - whether the asset is optional.
 - `'identifier'` - identifier of the item.
 - `'index'` - item's processing index.

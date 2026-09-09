@@ -13,7 +13,7 @@ contributors:
 
 ## experiments
 
-`boolean: false`
+`object`
 
 `experiments` option was introduced in webpack 5 to empower users with the ability to activate and try out experimental features.
 
@@ -500,7 +500,7 @@ Placing an HTML `<!-- webpackIgnore: true -->` comment immediately before a tag 
 
 <Badge text="5.108.0+" />
 
-When `experiments.html` is enabled, `.html` is added to the default `resolve.extensions` ahead of the JavaScript extensions, so a directory entry like `entry: "./src"` resolves `./src/index.html` even when `./src/index.js` also exists. This makes the build HTML-first, similar to Vite or Parcel.
+When `experiments.html` is explicitly set to `true`, `.html` is added to the default `resolve.extensions` ahead of the JavaScript extensions, so a directory entry like `entry: "./src"` resolves `./src/index.html` even when `./src/index.js` also exists. This makes the build HTML-first, similar to Vite or Parcel. With the default `'auto'` (since 5.109.0), `.html` is appended after the JavaScript extensions instead, so `./src/index.js` still wins.
 
 ```js
 export default {

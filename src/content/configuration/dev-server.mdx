@@ -75,7 +75,7 @@ If you're using dev-server through the Node.js API, the options in `devServer` w
 
 W> You cannot use the second `compiler` argument (a callback) when using `WebpackDevServer`.
 
-W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
+W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) the `devServer` options are taken from the first configuration that defines `devServer`; if none does, from the first configuration with a web-like target (a `web` or `universal` platform, which covers `web`, `webworker`, `electron-preload`, `electron-renderer`, `node-webkit` and an unset `target`), and otherwise from the first configuration. They are used for all the configurations in the array.
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
@@ -366,9 +366,9 @@ W> The function will not have access to the variables declared in the outer scop
 
 ### progress
 
-`boolean`
+`boolean` `'linear' | 'circular'`
 
-Prints compilation progress in percentage in the browser.
+Prints compilation progress in percentage in the browser. `'linear'` and `'circular'` additionally show a visual indicator.
 
 **webpack.config.js**
 
@@ -397,11 +397,11 @@ npx webpack serve --no-client-progress
 
 ### reconnect
 
-`boolean = true` `number`
+`boolean` `number = 10`
 
 <Badge text="v4.4.0+" />
 
-Tells dev-server the number of times it should try to reconnect the client. When `true` it will try to reconnect unlimited times.
+Tells dev-server the number of times it should try to reconnect the client, 10 by default. When `true` it will try to reconnect unlimited times; `false` disables reconnecting.
 
 **webpack.config.js**
 
@@ -1263,7 +1263,7 @@ export default {
 
 ## devServer.server
 
-`'http' | 'https' | 'spdy'` `string` `object`
+`'http' | 'https' | 'http2'` `string` `object` `function`
 
 <Badge text="v4.4.0+" />
 
@@ -1324,7 +1324,7 @@ Usage via the CLI:
 npx webpack serve --server-type spdy
 ```
 
-W> This option is ignored for Node 15.0.0 and above, as [spdy is broken for those versions](https://github.com/spdy-http2/node-spdy/issues/380). The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
+W> Since webpack-dev-server v6, `'spdy'` is no longer a built-in server type: it only works as a custom server string when the `spdy` package is installed, the CLI does not accept it, and [spdy is broken for Node 15.0.0 and above](https://github.com/spdy-http2/node-spdy/issues/380). Prefer `'http2'`, which uses Node's built-in `http2` module (with HTTP/1 fallback).
 
 Use the object syntax to provide your own certificate:
 

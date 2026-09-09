@@ -63,7 +63,7 @@ import $ from "jquery";
 $(".my-element").animate(/* ... */);
 ```
 
-The property name `jquery` specified under `externals` in the above `webpack.config.js` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded from bundling. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable, as the default external library type is `var`, see [externalsType](#externalstype).
+The property name `jquery` specified under `externals` in the above `webpack.config.js` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded from bundling. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable, as the default external library type is `var` when neither [`output.library.type`](/configuration/output/#outputlibrarytype) nor [`output.module`](/configuration/output/#outputmodule) is set, see [externalsType](#externalstype).
 
 While we showed an example consuming external global variable above, the external can actually be available in any of these forms: global variable, CommonJS, AMD, ES2015 Module, see more in [externalsType](#externalstype).
 
@@ -132,7 +132,7 @@ export default {
 
 ### object
 
-W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) and [`externalsType: 'umd'`](#externalstype). It's not allowed for other library targets.
+W> An object with `{ root, amd, commonjs, ... }` maps [externals types](#externalstype) to the external's target for each type. A [`umd`](/configuration/output/#outputlibrarytarget) library reads the `root`, `amd`, `commonjs` and `commonjs2` entries, an `amd` or `system` library reads `amd`, and for any other externals type webpack uses the entry matching the effective type.
 
 W> Since webpack 5.109.0, an object external with no entry for the used externals type emits a build error instead of silently resolving to `undefined` at runtime.
 
@@ -232,6 +232,8 @@ Here're arguments the function can receive:
 - `ctx` (`object`): Object containing details of the file.
   - `ctx.context` (`string`): The directory of the file which contains the import.
   - `ctx.request` (`string`): The import path being requested.
+  - `ctx.originalRequest` (`string`) <Badge text='5.110.0+' />: Same as `ctx.request`, except for an element of a context module, where it is the request as written by the user.
+  - `ctx.dependencyType` (`string`): The category of the referencing dependency, e.g. `'esm'`, `'commonjs'` or `'url'`.
   - `ctx.contextInfo` (`object`): Contains information about the issuer (e.g. the layer and compiler)
   - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
 - `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
@@ -398,9 +400,9 @@ export default {
 
 ## externalsType
 
-`string = 'var'`
+`string`
 
-Specify the default type of externals. `amd`, `umd`, `system` and `jsonp` externals **depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
+Specify the default type of externals. It defaults to [`output.library.type`](/configuration/output/#outputlibrarytype) when that is a valid externals type, otherwise to `'module-import'` when [`output.module`](/configuration/output/#outputmodule) is enabled, and to `'var'` otherwise. `amd`, `umd`, `system` and `jsonp` externals **depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
 
 Supported types:
 
@@ -408,10 +410,15 @@ Supported types:
 - [`'amd-async'`](#externalstypeamd-async) - loads the external via the asynchronous AMD `require([...])` API (async module) <Badge text="5.109.0+" />
 - `'amd-require'`
 - `'assign'` - same as `'var'`
+- `'asset'` - the external is treated as an asset URL, the module exports the request string
+- `'asset-url'` - the external is used as a URL, e.g. in a CSS `url()`
 - [`'commonjs'`](#externalstypecommonjs)
+- `'commonjs2'` - same output as `'commonjs'`
 - `'commonjs-module'`
+- `'commonjs-static'` - same output as `'commonjs'`
+- `'css-import'` - the external becomes a CSS `@import url(...)`
+- `'css-url'` - deprecated alias for `'asset-url'`
 - [`'global'`](#externalstypeglobal)
-- `'import'` - uses `import()` to load a native EcmaScript module (async module)
 - `'jsonp'`
 - [`'module'`](#externalstypemodule)
 - [`'import'`](#externalstypeimport)
@@ -503,7 +510,7 @@ export default {
 Will generate into something like:
 
 ```js
-import fs from "fs-extra";
+const fs = require("fs-extra");
 ```
 
 Note that there will be a `require()` in the output bundle.
@@ -602,8 +609,6 @@ import source v from "external-mod";
 
 ### externalsType.import
 
-<Badge text="5.94.0+" />
-
 Specify the default type of externals as `'import'`. Webpack will generate code like `import('...')` for externals used in a module.
 
 #### Example
@@ -701,7 +706,7 @@ Will generate something like below:
 ```js
 import * as __WEBPACK_EXTERNAL_MODULE_lodash__ from "lodash";
 
-const lodash = __WEBPACK_EXTERNAL_MODULE_jquery__;
+const lodash = __WEBPACK_EXTERNAL_MODULE_lodash__;
 
 const __webpack_modules__ = {
   jQuery: (module) => {
@@ -1094,7 +1099,7 @@ Enable presets of externals for specific targets.
 | `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.                                                      | boolean         |
 | `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**.                                                     | boolean         |
 
-Note that if you're going to output ES Modules with those node.js-related presets, webpack will set the default `externalsType` to [`node-commonjs`](#externalstypenode-commonjs) which would use `createRequire` to construct a require function instead of using `require()`.
+Note that if you're going to output ES Modules with those node.js-related presets, the built-in modules are externalized as [`module-import`](#externalstypemodule-import). In ES module output, [`node-commonjs`](#externalstypenode-commonjs) externals, as well as `commonjs*` externals when `externalsPresets.node` is set, use `createRequire` to construct a require function instead of using `require()`.
 
 **Example**
 

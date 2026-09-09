@@ -389,8 +389,10 @@ For files below these paths webpack does not snapshot the files themselves. It i
 Make sure the directory that contains the packages is wrapped in the first capture group of your regular expression, so webpack can extract it — for example, here's a RegExp webpack internally uses to match the `node_modules` directory:
 
 ```text
-/^(.+?[\\/]node_modules)[\\/]/
+/^(.+?[\\/]node_modules[\\/])/
 ```
+
+Note that the capture group includes the trailing slash. Without it, webpack would treat the `node_modules` directory itself as the managed item instead of the package directories inside it.
 
 A common use case for `managedPaths` would be to exclude some folders from `node_modules`, e.g. you want webpack to know that files in the `node_modules/@azure/msal-browser` folder are expected to change, which can be done with a regular expression like the one below:
 
@@ -418,16 +420,16 @@ A regular expression here is only tested against the path, so it doesn't need a 
 
 ### module
 
-`object = {hash boolean = true, timestamp boolean = true}`
+`object = { timestamp boolean = true }`
 
-Snapshots for building modules.
+Snapshots for building modules. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
 ### contextModule
 
-`object = {hash boolean = true, timestamp boolean = true}`
+`object = { timestamp boolean = true }`
 
 Snapshots for building context modules.
 
@@ -436,9 +438,9 @@ Snapshots for building context modules.
 
 ### resolve
 
-`object = {hash boolean = true, timestamp boolean = true}`
+`object = { timestamp boolean = true }`
 
-Snapshots for resolving of requests.
+Snapshots for resolving of requests. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.

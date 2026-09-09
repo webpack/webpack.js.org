@@ -268,11 +268,11 @@ export default {
 
 ### cache.managedPaths
 
-`[string] = ['./node_modules']`
+`[string]`
 
 W> Moved to [snapshot.managedPaths](/configuration/other-options/#managedpaths)
 
-`cache.managedPaths` is an array of package-manager only managed paths. Webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+`cache.managedPaths` is still accepted by the configuration schema (only under `type: 'filesystem'`) but ignored: webpack drops it while normalizing the configuration and only reads [`snapshot.managedPaths`](/configuration/other-options/#managedpaths), which is the effective option for package-manager managed paths.
 
 ### cache.maxAge
 
@@ -458,7 +458,7 @@ export default {
 
 `string: 'memory' | 'filesystem'`
 
-Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and only accepts the [`cache.maxGenerations`](#cachemaxgenerations) and [`cache.cacheUnaffected`](#cachecacheunaffected) options:
 
 **webpack.config.js**
 

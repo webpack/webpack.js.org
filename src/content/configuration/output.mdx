@@ -39,11 +39,11 @@ The top-level `output` key contains a set of options instructing webpack on how 
 
 ## output.assetModuleFilename
 
-`string = '[hash][ext][query]'` `function (pathData, assetInfo) => string`
+`string = '[hash][ext][query][fragment]'` `function (pathData, assetInfo) => string`
 
 The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/).
 
-`[name]`, `[file]`, `[query]`, `[fragment]`, `[base]`, and `[path]` are set to an empty string for the assets built from data URI replacements.
+For assets built from data URI modules, `[file]`, `[query]`, `[fragment]` and `[path]` are set to an empty string, `[name]` and `[base]` resolve to the content hash, and `[ext]` is derived from the MIME type.
 
 ## output.asyncChunks
 
@@ -147,7 +147,7 @@ This option determines the name of non-initial chunk files. See [`output.filenam
 
 Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
-By default `[id].js` is used or a value inferred from [`output.filename`](#outputfilename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
+By default the value is inferred from [`output.filename`](#outputfilename): it is used as-is when it contains `[name]`, `[id]`, `[chunkhash]` or `[contenthash]`; otherwise `[id].` is prepended to its basename (`bundle.js` becomes `[id].bundle.js`). When `output.filename` is a function, `[id].js` (or `[id].mjs` with [`output.module`](#outputmodule)) is used.
 
 **webpack.config.js**
 
@@ -217,7 +217,7 @@ export default {
 
 ## output.chunkLoadingGlobal
 
-`string = 'webpackChunk' + output.uniqueName`
+`string`
 
 The name of the global array webpack uses to load chunks whenever [`output.chunkFormat`](#outputchunkformat) is `'array-push'`, which is the default for the `web` and `webworker` [targets](/configuration/target/). The default name is `'webpackChunk'` followed by [`output.uniqueName`](#outputuniquename), with every character that is not valid in a JavaScript identifier replaced by `_`. The array lives on [`output.globalObject`](#outputglobalobject), so in a browser build of a package named `my-app` it is `self['webpackChunkmy_app']`.
 
@@ -247,7 +247,7 @@ W> Prefer setting [`output.uniqueName`](#outputuniquename): it disambiguates [`o
 
 `false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
-The method to load chunks (methods included by default are `'jsonp'` (web), `'import'` (ESM), `'importScripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
+The method to load chunks (methods included by default are `'jsonp'` (web), `'import'` (ESM), `'import-scripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
 
 T> The default value of this option depends on the [`target`](/configuration/target/) and [`chunkFormat `](#outputchunkformat) setting. For more details, search for `"chunkLoading"` [in the webpack defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js).
 
@@ -983,9 +983,9 @@ In addition to the standard Node.js encodings, webpack also supports the followi
 - `'base58'` - Base58 encoding (Bitcoin alphabet)
 - `'base52'` - Base52 encoding (A-Z, a-z)
 - `'base49'` - Base49 encoding
-- `'base36'` - Base36 encoding (0-9, A-Z)
+- `'base36'` - Base36 encoding (0-9, a-z)
 - `'base32'` - Base32 encoding (RFC 4648)
-- `'base25'` - Base25 encoding
+- `'base26'` - Base26 encoding (a-z)
 
 These custom encodings are particularly useful for generating shorter hash values in filenames while maintaining URL safety.
 
@@ -1063,9 +1063,9 @@ For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
 ## output.hotUpdateMainFilename
 
-`string = '[runtime].[fullhash].hot-update.json'` `function`
+`string = '[runtime].[fullhash].hot-update.json'`
 
-Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
+Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder. When [`output.chunkLoading`](#outputchunkloading) is `'import'`, the default is `'[runtime].[fullhash].hot-update.json.mjs'`, because the manifest is loaded via `import()`.
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
@@ -1350,7 +1350,7 @@ export default {
 
 `string = output.filename with '.js' replaced by '.html'` `function (pathData, assetInfo) => string`
 
-The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) (initial chunks). It works like [`output.filename`](#outputfilename) and supports the same [template strings](#template-strings). When unset, it is derived from `output.filename` by swapping the `.js` extension for `.html` (falling back to `[name].html` when `output.filename` is a function), mirroring how `cssFilename` derives from `filename`.
+The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) (initial chunks). It works like [`output.filename`](#outputfilename) and supports the same [template strings](#template-strings). When unset, it is derived from `output.filename` by swapping the `.js` extension for `.html` (falling back to `[name].html` when `output.filename` is a function, or when the derived template contains no `[name]`, `[id]` or hash placeholder), mirroring how `cssFilename` derives from `filename`.
 
 ```js
 // webpack.config.js
@@ -1578,8 +1578,10 @@ export default {
 
 Which will result in the following bundle:
 
+{/* eslint-disable dot-notation */}
+
 ```js
-globalThis.clientContainer.define(/* define args */); // or 'amd-require' window['clientContainer'].require(/*require args*/);
+window["clientContainer"].define(/* define args */); // or 'amd-require' window["clientContainer"].require(/*require args*/);
 ```
 
 ### output.library.umdAmdContainer
@@ -1765,10 +1767,12 @@ export default {
 
 The **return value of your entry point** will be assigned to the `window` object using the `output.library.name` value.
 
-```js
-globalThis.MyLibrary = _entry_return_;
+{/* eslint-disable */}
 
-globalThis.MyLibrary.doSomething();
+```js
+window.MyLibrary = _entry_return_;
+
+window.MyLibrary.doSomething();
 ```
 
 ##### type: 'global'
@@ -2428,10 +2432,12 @@ W> Prefer to use [`output.library.type: 'window'`](#type-window).
 
 The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
 
-```js
-globalThis.MyLibrary = _entry_return_;
+{/* eslint-disable */}
 
-globalThis.MyLibrary.doSomething();
+```js
+window.MyLibrary = _entry_return_;
+
+window.MyLibrary.doSomething();
 ```
 
 #### libraryTarget: 'global'
@@ -2482,7 +2488,7 @@ export default _entry_return_;
 require("MyLibrary").doSomething();
 ```
 
-Note that `output.library` can't be used with this particular `output.libraryTarget`, for further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).
+If `output.library` is set, the return value of your entry point is assigned to `module.exports.<name>` instead, see [`type: 'commonjs2'`](#type-commonjs2).
 
 T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
@@ -2536,7 +2542,7 @@ This packages your output with an immediately executed AMD `require(dependencies
 
 The `'amd-require'` target allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
 
-With this target, the library name is ignored.
+With this target, the library name must be unset; webpack throws an error otherwise.
 
 #### libraryTarget: 'umd'
 
@@ -3292,14 +3298,14 @@ export default {
 
 ## output.wasmLoading
 
-`false` `'fetch' | 'async-node'` `string`
+`false` `'fetch' | 'async-node' | 'universal'` `string`
 
-Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
+Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), `'universal'` (both), but others might be added by plugins.
 
 The default value can be affected by different [`target`](/configuration/target/):
 
-- Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'`, `'electron-renderer'` or `'node-webkit'`.
-- Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
+- Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'` or `'electron-renderer'`.
+- Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'node-webkit'`, `'electron-main'` or `'electron-preload'`.
 
 ```js
 export default {
@@ -3368,7 +3374,7 @@ T> Entries that webpack creates automatically from `new Worker(new URL(...))` ar
 
 ## output.workerChunkLoading
 
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
+`string: 'require' | 'import-scripts' | 'async-node' | 'import'` `boolean: false`
 
 The new option `workerChunkLoading` controls the chunk loading of workers.
 
@@ -3404,7 +3410,7 @@ export default {
 
 ## output.workerWasmLoading
 
-`false` `'fetch-streaming' | 'fetch' | 'async-node'` `string`
+`false` `'fetch' | 'async-node' | 'universal'` `string`
 
 Option to set the method of loading WebAssembly Modules in workers, defaults to the value of [output.wasmLoading](#outputwasmloading).
 

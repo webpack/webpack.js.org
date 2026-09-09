@@ -30,22 +30,22 @@ Defaults to `'browserslist'` or to `'web'` when no browserslist configuration wa
 
 The following string values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/main/lib/WebpackOptionsApply.js):
 
-| Option                     | Description                                                                                                                                                                                                                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)                                                                                                                                                                                                   |
-| `electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.                                                                                                                                                                                                                                    |
-| `electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.                                       |
-| `electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules. |
-| `node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)                                                                                                                                                                                                              |
-| `node-webkit[[X].Y]`       | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)                                                                                                                             |
-| `nwjs[[X].Y]`              | The same as `node-webkit`                                                                                                                                                                                                                                                                            |
-| `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                                                                        |
-| `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                                                                 |
-| `universal`                | Compile a single bundle that adapts at runtime to browser, web worker, Node.js, Electron and NW.js. Always outputs ECMAScript modules. Available since webpack 5.108.0.                                                                                                                              |
-| `bun`                      | Compile for [Bun](https://bun.sh/). Outputs ECMAScript modules and externalizes `bun:*` and Node.js built-in modules. Available since webpack 5.108.0.                                                                                                                                               |
-| `deno[[X].Y]`              | Compile for [Deno](https://deno.com/). Outputs ECMAScript modules, resolves Node.js built-ins via the required `node:` specifier, and keeps Deno's own import protocols (`npm:`, `jsr:`, `node:`, `http(s)://`) external. Available since webpack 5.108.0.                                           |
-| `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.                                                                                                                                                                                                                                     |
-| `browserslist`             | Infer a platform and the ES-features from a browserslist-config **(default if browserslist config is available)**                                                                                                                                                                                    |
+| Option                     | Description                                                                                                                                                                                                                                                |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)                                                                                                                                                         |
+| `electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.                                                                                                                                                                                          |
+| `electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process: chunks are loaded via JSONP, and Node.js and Electron built-in modules are treated as externals.                                                                                     |
+| `electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for preload scripts of the renderer process: chunks are loaded via `require`, and Node.js and Electron built-in modules are treated as externals.                                                          |
+| `node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)                                                                                                                                                                    |
+| `node-webkit[[X].Y]`       | Compile for [NW.js](https://nwjs.io/); chunks are loaded asynchronously via `fs` and `vm` (`async-node`). Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)                                       |
+| `nwjs[[X].Y]`              | The same as `node-webkit`                                                                                                                                                                                                                                  |
+| `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                              |
+| `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                       |
+| `universal`                | Compile a single bundle that adapts at runtime to browser, web worker, Node.js, Electron and NW.js. Always outputs ECMAScript modules. Available since webpack 5.108.0.                                                                                    |
+| `bun`                      | Compile for [Bun](https://bun.sh/). Outputs ECMAScript modules and externalizes `bun:*` and Node.js built-in modules. Available since webpack 5.108.0.                                                                                                     |
+| `deno[[X].Y]`              | Compile for [Deno](https://deno.com/). Outputs ECMAScript modules, resolves Node.js built-ins via the required `node:` specifier, and keeps Deno's own import protocols (`npm:`, `jsr:`, `node:`, `http(s)://`) external. Available since webpack 5.108.0. |
+| `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.                                                                                                                                                                                           |
+| `browserslist`             | Infer a platform and the ES-features from a browserslist-config **(default if browserslist config is available)**                                                                                                                                          |
 
 For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables.
 
@@ -160,12 +160,17 @@ Webpack will generate runtime code that works in both browser and Node.js enviro
 
 Set `target` to `false` if none of the predefined targets from the list above meet your needs, no plugins will be applied.
 
+W> Without a target webpack cannot infer the target-dependent defaults, so [`output.chunkFormat`](/configuration/output/#outputchunkformat) must be set explicitly (and usually [`output.chunkLoading`](/configuration/output/#outputchunkloading) and [`output.environment`](/configuration/output/#outputenvironment) as well); otherwise the build fails with "Chunk format can't be selected by default when no target is specified".
+
 **webpack.config.js**
 
 ```js
 export default {
   // ...
   target: false,
+  output: {
+    chunkFormat: "array-push",
+  },
 };
 ```
 
