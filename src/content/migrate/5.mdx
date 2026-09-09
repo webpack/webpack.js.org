@@ -76,17 +76,17 @@ Set `mode` to either [`production`](/configuration/mode/#mode-production) or [`d
 
 Update the following options to their new version (if used):
 
-- `optimization.hashedModuleIds: true` → `optimization.moduleIds: 'hashed'`
+- `optimization.hashedModuleIds: true` → `optimization.moduleIds: 'deterministic'` (`'hashed'` still works, but is deprecated and logs a warning)
 - `optimization.namedChunks: true` → `optimization.chunkIds: 'named'`
 - `optimization.namedModules: true` → `optimization.moduleIds: 'named'`
 - `NamedModulesPlugin` → `optimization.moduleIds: 'named'`
 - `NamedChunksPlugin` → `optimization.chunkIds: 'named'`
-- `HashedModuleIdsPlugin` → `optimization.moduleIds: 'hashed'`
+- `HashedModuleIdsPlugin` → `optimization.moduleIds: 'deterministic'`
 - `optimization.noEmitOnErrors: false` → `optimization.emitOnErrors: true`
 - `optimization.occurrenceOrder: true` → `optimization: { chunkIds: 'total-size', moduleIds: 'size' }`
 - `optimization.splitChunks.cacheGroups.vendors` → `optimization.splitChunks.cacheGroups.defaultVendors`
 - `optimization.splitChunks.cacheGroups.test(module, chunks)` → `optimization.splitChunks.cacheGroups.test(module, { chunkGraph, moduleGraph })`
-- `Compilation.entries` → `Compilation.entryDependencies`
+- `Compilation.entries` (array of entry modules) → `Compilation.entries` is now a `Map<string, EntryData>`; read an entry's dependencies via `compilation.entries.get(name).dependencies`
 - `serve` → `serve` is removed in favor of [`DevServer`](/configuration/dev-server/)
 - [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (deprecated since v3) → `Rule.options`/`UseEntry.options`
 - `Rule.loaders` → [`Rule.use`](/configuration/module/#ruleuse)
@@ -190,7 +190,7 @@ If you were not able to upgrade some plugins/loaders to the latest in Upgrade we
 If you were using WebAssembly via import, you should follow this two step process:
 
 - Enable the deprecated spec by setting `experiments.syncWebAssembly: true`, to get the same behavior as in webpack 4.
-- After successful migration to webpack 5, change the `experiments` value to `experiments: { asyncWebAssembly: true }` to use the up-to-date spec for WASM integration.
+- After successful migration to webpack 5, remove `experiments.syncWebAssembly` again. Since webpack 5.109.0 `experiments.asyncWebAssembly` defaults to `'auto'`, which enables the up-to-date spec for WASM integration unless `syncWebAssembly` is set or a `module.rules` rule matches `.wasm` files; on older webpack 5 versions set `experiments: { asyncWebAssembly: true }` explicitly.
 
 Reconsider `optimization.splitChunks`:
 
@@ -350,4 +350,4 @@ Webpack 5 ships with built-in [`this.getOptions`](/api/loaders/#thisgetoptionssc
 - `this.getOptions` is available since webpack 5
 - Instead of JSON5 it supports JSON as a query string: `?{arg:true}` → `?{"arg":true}`. Using JSON5 should be considered and documented as deprecated in favor of JSON in the respective Loader's documentation.
 - [`loader-utils`](https://github.com/webpack/loader-utils) has specific behavior for parsing query strings (`true`, `false` and `null` won't be parsed as `string` but as a primitive value). This is no longer the case for the new built-in `this.getOptions` method, which uses native [`querystring`](https://nodejs.org/api/querystring.html) parsing (ships with Node.js). It is still possible to add custom behavior for these cases in the Loader's code after getting the options by using `this.getOptions` method.
-- Schema argument is optional for the new `this.getOptions` method, but we strongly advise to add schema validation for your Loader's options. The `title` field in the schema, can be used to customize the validation error message e.g. `"title": "My Loader ooooptions"` will result in displaying errors this way: `Invalid ooooptions object. My Loader has been initialised using an ooooptions object that does not match the API schema. - ooooptions.foo.bar.baz should be a string.`
+- Schema argument is optional for the new `this.getOptions` method, but we strongly advise to add schema validation for your Loader's options. The `title` field in the schema, can be used to customize the validation error message e.g. `"title": "My Loader ooooptions"` will result in displaying errors this way: `Invalid ooooptions object. My Loader has been initialized using an ooooptions object that does not match the API schema. - ooooptions.foo.bar.baz should be a string.`
