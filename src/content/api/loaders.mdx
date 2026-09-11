@@ -405,14 +405,28 @@ All dependencies of the resolving operation are automatically added as dependenc
 
 ### this.hot
 
-Information about HMR for loaders.
+`boolean`
+
+Whether [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled — `true` when [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) is applied, which `--hot` and `devServer.hot` do for you.
+
+Check it before emitting the `import.meta.webpackHot.accept(...)` call that lets your generated module handle its own updates, so that production output does not carry it:
 
 ```js
 export default function (source) {
-  console.log(this.hot); // true if HMR is enabled via --hot flag or webpack configuration
-  return source;
+  const code = compile(source);
+
+  if (!this.hot) return code;
+
+  return `${code}
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept();
+}`;
 }
 ```
+
+See [Hot Module Replacement](/contribute/writing-a-loader/#hot-module-replacement) in the loader guide for what to accept and why.
+
+W> This is about the modules your loader generates. The loader's own source is not hot-reloadable — a change to it needs a restart of the build, see [changes to a loader need a restart](/contribute/writing-a-loader/#changes-to-a-loader-need-a-restart).
 
 ### this.hashDigest
 
