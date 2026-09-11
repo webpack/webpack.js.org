@@ -55,7 +55,7 @@ It is possible to nest containers. Containers can use modules from other contain
 
 Each build acts as a container and also consumes other builds as containers. This way, each build is able to access any other exposed module by loading it from its container.
 
-Shared modules are modules that are both overridable and provided as overrides to nested containers. They usually point to the same module in each build, e.g., the same library.
+Shared modules are modules a build both **provides** into a share scope and **consumes** from it, instead of bundling its own private copy. They usually point to the same module in each build, e.g., the same library. How that scope is built and handed around is covered in [Share scopes](#share-scopes) below.
 
 The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
 
@@ -94,13 +94,53 @@ This plugin adds specific references to containers as externals (of the configur
 
 [`ModuleFederationPlugin`](/plugins/module-federation-plugin) combines `ContainerPlugin` and `ContainerReferencePlugin`.
 
+## Share scopes
+
+A share scope is a plain object, held per scope name on the webpack runtime, that maps a module key to the versions of it that are available on the page:
+
+```js
+const shareScope = {
+  react: {
+    // one entry per version any build on the page registered
+    "18.3.1": { get, from: "host", eager: false },
+  },
+};
+```
+
+Two plugins put it to work, and `SharePlugin` — which is what the `shared` option applies — is the two of them together:
+
+- **`ProvideSharedPlugin`** registers this build's copy of a module into the scope.
+- **`ConsumeSharedPlugin`** looks a module up in the scope instead of bundling it, falling back to the local copy when nothing satisfying is there.
+
+Which is why a build that only lists `shared` still ends up doing both: every entry is provided _and_ consumed.
+
+### How the scope gets populated
+
+The host creates its scope first, through [`__webpack_init_sharing__`](/api/module-variables/#__webpack_init_sharing__-webpack-specific), then hands that same object to each container it loads:
+
+```js
+await __webpack_init_sharing__("default");
+// `container` is the remote's entry, e.g. window[scope] once remoteEntry.js has loaded
+await container.init(__webpack_share_scopes__.default);
+```
+
+`init()` does not copy the scope — the container **adopts** the object it is given and then registers its own provided modules into it. So provisions flow in both directions: after `init()`, the host can consume what the remote provided just as the remote can consume what the host provided. `init()` also propagates into that container's own remotes, so a nested container joins the same scope, with a guard that makes circular container graphs safe.
+
+T> This is why sibling remotes _do_ share with each other. They are handed the same scope object by their common host, so a library registered by one is visible to the other — there is no separate copy per remote.
+
+### Which copy wins
+
+When several builds register the same module, `requiredVersion` decides: a consumer gets the highest version in the scope that satisfies its range, which is what lets two builds needing different majors coexist. See [`requiredVersion`](/plugins/module-federation-plugin/#requiredversion) and [`singleton`](/plugins/module-federation-plugin/#singleton) for the per-module options.
+
+When two builds register the _same_ version of the same module, the runtime breaks the tie by comparing their [`output.uniqueName`](/configuration/output/#outputuniquename) values — which is one more reason two builds must never share a unique name. An already-loaded version is never replaced.
+
 ## Concept goals
 
 - It should be possible to expose and consume any module type that webpack supports.
 - Chunk loading should load everything needed in parallel (web: single round-trip to server).
-- Control from consumer to container
-  - Overriding modules is a one-directional operation.
-  - Sibling containers cannot override each other's modules.
+- Sharing is mediated by a [share scope](#share-scopes) rather than by one build overwriting another
+  - A container adopts the scope it is handed and registers its own modules into it.
+  - Containers handed the same scope — siblings of a common host included — can all consume what the others provided.
 - Concept should be environment-independent.
   - Usable in web, Node.js, etc.
 - Relative and absolute request in shared:
@@ -392,6 +432,12 @@ new ModuleFederationPlugin({
   }
 });
 ```
+
+### `Container initialization failed as it has already been initialized with a different share scope`
+
+A container's `init()` was called twice with two different scope objects. A container adopts the object it is handed and keeps it, so the second call cannot be honoured without silently detaching the modules already registered against the first.
+
+It usually means the page initialized sharing more than once — two host bundles each calling `__webpack_init_sharing__` and then initializing the same remote, or code calling `init()` again on a container that an earlier `import()` already set up. Initialize each container once and reuse the resulting container object; when loading a remote dynamically, guard the `init()` call so repeat loads skip it.
 
 ### `Uncaught TypeError: fn is not a function`
 
