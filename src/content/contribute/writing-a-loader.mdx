@@ -67,6 +67,19 @@ By the way, if you've already created a separate repository and package for your
 
 T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
 
+### Changes to a loader need a restart
+
+W> Editing a loader's own source while a build is watching does **not** change the output. Restart the build process.
+
+This catches most people developing a loader against a demo project, and neither half of it fails loudly:
+
+- **The edit does not trigger a rebuild.** webpack records the loader's path in the module's `buildDependencies`, which invalidate the [persistent cache](/configuration/cache/#cachetype) on the next start — the watcher only watches file, context and missing dependencies, so nothing rebuilds when the loader file changes.
+- **Forcing a rebuild does not help either.** webpack loads a loader with `require()` (or `import()` for an ESM loader) once, and Node caches that module for the life of the process. A module rebuilt after the edit is handed the _old_ loader function and produces the old output, with no error and no warning.
+
+So calling `this.addDependency(__filename)` in your loader is not a workaround. It does what it says — the loader file is now watched, and editing it rebuilds the modules that use it — but that rebuild still runs the loader code the process loaded at startup, which is worse than not rebuilding at all: the build reports work it did not really redo.
+
+Develop the loader against its own tests instead, where each run is a fresh process (see [Testing](#testing)), and restart webpack when you want to see a change in the demo — `nodemon --watch loaders -- node_modules/.bin/webpack serve` or an equivalent wrapper makes that automatic.
+
 ## Simple Usage
 
 When a single loader is applied to the resource, the loader is called with only one parameter – a string containing the content of the resource file.
@@ -318,6 +331,31 @@ A CSS loader is a good example of the first approach: it transforms dependencies
 In the case of the `less-loader`, it cannot transform each `@import` to a `require` because all `.less` files must be compiled in one pass for variables and mixin tracking. Therefore, the `less-loader` extends the less compiler with custom path resolving logic. It then takes advantage of the second approach, `this.resolve`, to resolve the dependency through webpack.
 
 T> If the language only accepts relative urls (e.g. `url(file)` always refers to `./file`), you can use the `~` convention to specify references to installed modules (e.g. those in `node_modules`). In the case of `url`, that would look something like `url('~some-library/image.jpg')`.
+
+### Hot Module Replacement
+
+A loader takes part in [HMR](/concepts/hot-module-replacement/) through the code it generates: webpack replaces a changed module at runtime, and the generated module decides what to do with the new version by calling `module.hot.accept`. A loader that produces a side effect — installing a stylesheet, registering a template, seeding a store — has to emit that call itself, or an edit to one of its files will reload the whole page instead of being applied in place.
+
+[`this.hot`](/api/loaders/#thishot) tells you whether that is worth emitting: it is `true` only when [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) is applied, so guard the extra code with it and keep production output clean.
+
+```js
+export default function (source) {
+  const installed = `install(${JSON.stringify(transform(source))});`;
+
+  if (!this.hot) return installed;
+
+  return `${installed}
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept();
+}`;
+}
+```
+
+Accepting in the generated module — rather than leaving it to whoever imports it — is what keeps an update from bubbling up to the entry point and forcing a full reload.
+
+Prefer `import.meta.webpackHot` over `module.hot` in generated code: webpack recognizes it whether the module ends up auto-detected or [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm), while `module.hot` is unavailable in a strict ESM module — it compiles to a reference to an undefined `module`, which builds without an error and throws at runtime. A loader does not control which of the two its output becomes, since that follows from the file it processes.
+
+T> `this.hot` says nothing about the loader's own source, which is not hot-reloadable — see [changes to a loader need a restart](#changes-to-a-loader-need-a-restart).
 
 ### Common Code
 
