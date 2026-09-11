@@ -69,11 +69,26 @@ This applies to a host and a single remote as much as to several remotes, and it
 
 ### ContainerPlugin (low level)
 
-This plugin creates an additional container entry with the specified exposed modules.
+This plugin creates an additional container entry with the specified exposed modules. Use it when you only expose modules and consume none, or when you need to control the container entry itself:
+
+| Option       | Description                                                                                                 |
+| ------------ | ----------------------------------------------------------------------------------------------------------- |
+| `name`       | The name of the container, which is also the global a consumer reads it from.                               |
+| `exposes`    | The modules to expose, as described under [`exposes`](/plugins/module-federation-plugin/#exposes).          |
+| `filename`   | The filename of the container entry, relative to [`output.path`](/configuration/output/#outputpath).        |
+| `library`    | How the container is exposed, as a [`library`](/configuration/output/#outputlibrary) — `type` and `name`.   |
+| `runtime`    | The name of the runtime chunk. When set, the container is added to that runtime instead of getting its own. |
+| `shareScope` | The share scope this container puts its shared modules into, `'default'` by default.                        |
 
 ### ContainerReferencePlugin (low level)
 
 This plugin adds specific references to containers as externals (of the configured `remoteType`) and allows to import remote modules from these containers. At runtime it initializes the share scope via `__webpack_init_sharing__`, which passes that scope to the `init()` method of each referenced container, and then loads remote modules through the container's `get()` method.
+
+| Option       | Description                                                                                                                        |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `remotes`    | The containers to consume, as `name: "container@url"` — the same value `ModuleFederationPlugin` takes.                             |
+| `remoteType` | How a remote is loaded, as an [`externalsType`](/configuration/externals/#externalstype); `'script'` is the usual one for the web. |
+| `shareScope` | The share scope handed to every remote's `init()`, `'default'` by default.                                                         |
 
 ### ModuleFederationPlugin (high level)
 

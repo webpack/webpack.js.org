@@ -494,6 +494,78 @@ import "core-js/modules/web.dom.iterable";
 
 See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
 
+### Serving a smaller polyfill to modern browsers
+
+The same set of polyfills can be compiled twice and the right one picked at runtime, so that browsers which need little only download little. The entry decides which build to fetch, and both are loaded before the application:
+
+**src/index.js**
+
+{/* eslint-skip */}
+
+```js
+(async () => {
+  if (isLegacyBrowser()) {
+    await import("./polyfills?legacy");
+  } else {
+    await import(/* webpackMode: "eager" */ "./polyfills");
+  }
+  await import(/* webpackMode: "eager" */ "./app");
+})();
+```
+
+**src/polyfills.js**
+
+{/* eslint-skip */}
+
+```js
+import "core-js";
+import "regenerator-runtime/runtime";
+```
+
+The two builds differ only in what Babel is told to target, which [`Rule.resourceQuery`](/configuration/module/#ruleresourcequery) selects through the `?legacy` query:
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: [path.resolve(__dirname, "src")],
+        oneOf: [
+          {
+            resourceQuery: /legacy/,
+            loader: "babel-loader",
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  { useBuiltIns: "entry", targets: "ie 11" },
+                ],
+              ],
+            },
+          },
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                [
+                  "@babel/preset-env",
+                  { useBuiltIns: "entry", targets: "last 2 versions" },
+                ],
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+W> This is the trade-off the section above warns about: the polyfills now load asynchronously, so nothing outside the entry may run before they do — which is why the application itself is imported rather than being part of the entry. `isLegacyBrowser()` also has to be written in syntax the oldest target parses, since it runs before any polyfill.
+
 ## Node Built-Ins
 
 Node built-ins like `global`, `__dirname` and `__filename` can be handled directly from your configuration file with the [`node`](/configuration/node) option, without the use of any special loaders or plugins. `process` and Node core modules such as `buffer` are not polyfilled by webpack 5; provide them with [`ProvidePlugin`](/plugins/provide-plugin/) or [`resolve.fallback`](/configuration/resolve/#resolvefallback). See the [node configuration page](/configuration/node) for more information and examples.

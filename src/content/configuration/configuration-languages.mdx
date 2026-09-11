@@ -111,11 +111,12 @@ Starting with v22.18.0 Node.js supports built-in [type stripping](https://nodejs
 
 > To enable the transformation of non erasable TypeScript syntax, which requires JavaScript code generation, such as enum declarations, parameter properties use the flag [--experimental-transform-types](https://nodejs.org/api/cli.html#experimental-transform-types).
 
-If you are using an older version of Node.js that does not support the `typescript` format, or want to set `module` in `compilerOptions` in `tsconfig.json` to `commonjs` there are three solutions to this issue:
+If you are using an older version of Node.js that does not support the `typescript` format, or want to set `module` in `compilerOptions` in `tsconfig.json` to `commonjs` there are four solutions to this issue:
 
 - Modify `tsconfig.json`.
 - Modify `tsconfig.json` and add settings for `ts-node`.
-- Install `tsconfig-paths`.
+- Tell `ts-node` the module type of the config file.
+- Point `ts-node` at a separate TypeScript configuration.
 
 The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
@@ -136,13 +137,22 @@ You can keep `"module": "ESNext"` for `tsc`, and if you use webpack, or another 
 }
 ```
 
-The **third option** is to install the `tsconfig-paths` package:
+The **third option** is [`moduleTypes`](https://typestrong.org/ts-node/docs/module-type-overrides), which overrides the module type for the config file alone. It is usually the better of the two overrides: unlike `compilerOptions.module` it also tells Node.js to load that file as CommonJS, which avoids the error you get when Node is asked to `require()` an ES module.
 
-```bash
-npm install --save-dev tsconfig-paths
+```json
+{
+  "compilerOptions": {
+    "module": "ESNext"
+  },
+  "ts-node": {
+    "moduleTypes": {
+      "webpack.config.ts": "cjs"
+    }
+  }
+}
 ```
 
-And create a separate TypeScript configuration specifically for your webpack configs:
+The **fourth option** is to create a separate TypeScript configuration specifically for your webpack configs:
 
 **tsconfig-for-webpack-config.json**
 
@@ -156,9 +166,9 @@ And create a separate TypeScript configuration specifically for your webpack con
 }
 ```
 
-T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-paths`.
+T> `TS_NODE_PROJECT` is read by `ts-node` itself, so no additional package is needed to use it.
 
-Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-paths` like so:
+Then set the environment variable `TS_NODE_PROJECT` like so:
 
 **package.json**
 
