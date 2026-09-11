@@ -11,8 +11,15 @@ const __dirname = path.dirname(__filename);
 const owner = "webpack";
 const repo = "governance";
 
-// Output directly under /contribute (no Governance subfolder)
+// Output directly under /contribute (no Governance subfolder). The pages are
+// grouped under their own "Governance" heading in that section's sidebar, which
+// is what `group` below controls.
 const outputDir = path.resolve(__dirname, "../content/contribute");
+
+// Words to keep upper-cased in titles, so AI_POLICY.md reads "AI Policy"
+// rather than "Ai Policy". Listed explicitly rather than detected by length,
+// which would also catch ordinary words like "CODE" and "OF".
+const ACRONYMS = new Set(["AI", "API", "CLI", "FAQ", "OSS", "TSC"]);
 
 // Generate readable title from filename
 function generateTitle(filename) {
@@ -21,8 +28,13 @@ function generateTitle(filename) {
     .replace(".md", "")
     .replaceAll("_", " ")
     .replaceAll("-", " ")
-    .toLowerCase()
-    .replaceAll(/\b\w/g, (char) => char.toUpperCase());
+    .split(" ")
+    .map((word) =>
+      ACRONYMS.has(word.toUpperCase())
+        ? word.toUpperCase()
+        : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
+    )
+    .join(" ");
 }
 
 // Fix internal markdown links (.md → /)
@@ -63,21 +75,24 @@ try {
     let content = await response.text();
     content = fixMarkdownLinks(content);
 
-    // Generate title and sorting order
+    // Generate title and sorting order. These sit above the range the
+    // hand-written /contribute pages use, so the governance docs stay one
+    // contiguous block below them instead of interleaving with the guides.
     const title = generateTitle(filename);
     const sortOrder =
       {
-        "README.md": 0,
-        "CHARTER.md": 1,
-        "MEMBER_EXPECTATIONS.md": 2,
-        "MODERATION_POLICY.md": 3,
-        "WORKING_GROUPS.md": 4,
-      }[filename] ?? 10;
+        "README.md": 100,
+        "CHARTER.md": 101,
+        "MEMBER_EXPECTATIONS.md": 102,
+        "MODERATION_POLICY.md": 103,
+        "WORKING_GROUPS.md": 104,
+        "AI_POLICY.md": 105,
+      }[filename] ?? 199;
 
     // Build YAML frontmatter
     const fm = {
       title,
-      group: "Contribute",
+      group: "Governance",
       sort: sortOrder,
       source: `https://github.com/${owner}/${repo}/blob/main/${filename}`,
       edit: `https://github.com/${owner}/${repo}/edit/main/${filename}`,
