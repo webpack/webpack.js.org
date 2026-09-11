@@ -2877,6 +2877,42 @@ Conditions can be one of these:
 
 `{ glob: string | [string] }`: <Badge text="5.110.0+" /> The input must match the glob pattern, or one of them. See [`Rule.glob`](#ruleglob) for the pattern syntax.
 
+The input a condition is tested against depends on which field it is written in: [`test`](#ruletest), [`include`](#ruleinclude) and [`exclude`](#ruleexclude) all get the module's resource path, [`issuer`](#ruleissuer) the path of the module that requested it, [`resourceQuery`](#ruleresourcequery) the query string, and so on. The grammar is the same everywhere.
+
+Conditions compose. A bare array is an `or`, so `test: [/\.ts$/, /\.tsx$/]` and `test: { or: [/\.ts$/, /\.tsx$/] }` match the same modules, while the properties of one object are combined with `and`. The following condition matches a TypeScript file under `src/` that is not a test file — the three properties must all hold, and `not` takes a condition of its own, so listing two regexps there excludes a file matching either of them:
+
+```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        test: {
+          // every property of this object must match, so:
+          and: [
+            // the path must start with `<context>/src`
+            path.resolve(__dirname, "src"),
+            // and end with `.ts` or `.tsx` (an array is an `or`)
+            [/\.ts$/, /\.tsx$/],
+          ],
+          // and match neither of these
+          not: [/\.test\.tsx?$/, /\.stories\.tsx?$/],
+        },
+        loader: "ts-loader",
+      },
+    ],
+  },
+};
+```
+
+T> `{ not: [A, B] }` means "neither `A` nor `B` matches", not "does not match both". To exclude only the inputs matching every one of several conditions, negate the `and` instead: `{ not: { and: [A, B] } }`.
+
 **Example:**
 
 ```js

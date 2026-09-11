@@ -237,6 +237,51 @@ export default function (source) {
 
 In the example above, `some` property in the fourth argument of `this.callback` is used to pass data to the next chained loader.
 
+### Sharing data with a plugin
+
+A loader can only return module source, so a loader that extracts something else — style fragments to concatenate, icons to pack into a sprite — needs another way to hand that to the plugin which emits the combined asset. Store it on the module's `buildInfo`:
+
+**loader.js**
+
+```js
+export default function (source) {
+  this._module.buildInfo.myLoaderData = collectIcons(source);
+  return source;
+}
+```
+
+The plugin then reads it back off the modules of the compilation:
+
+**plugin.js**
+
+```js
+compiler.hooks.thisCompilation.tap("MyPlugin", (compilation) => {
+  compilation.hooks.processAssets.tap(
+    {
+      name: "MyPlugin",
+      stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
+    },
+    () => {
+      const collected = [];
+
+      for (const module of compilation.modules) {
+        const data = module.buildInfo.myLoaderData;
+        if (data) collected.push(...data);
+      }
+
+      compilation.emitAsset(
+        "sprite.svg",
+        new compiler.webpack.sources.RawSource(buildSprite(collected)),
+      );
+    },
+  );
+});
+```
+
+`buildInfo` is serialized together with the module, so the data survives the [persistent cache](/configuration/cache/#cachetype) and is still there on a build where the loader itself never runs again. That is the reason to use it rather than a variable in the loader's own module scope, which a cached build leaves empty. Only store plain, serializable values there, and namespace the property so two loaders don't collide.
+
+W> `this._module` is not part of the documented loader context. It is what loader/plugin pairs in the ecosystem use, and it is unlikely to disappear, but treat it as an internal.
+
 ### Loader Dependencies
 
 If a loader uses external resources (i.e. by reading from filesystem), they **must** indicate it. This information is used to invalidate cacheable loaders and recompile in watch mode. Here's a brief example of how to accomplish this using the `addDependency` method:

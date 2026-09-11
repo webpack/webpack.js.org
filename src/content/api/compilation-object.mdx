@@ -387,27 +387,43 @@ compilation.hooks.optimizeChunks.tap("MyPlugin", (chunks) => {
 
 Accessing the old members still works, but logs a deprecation warning naming a `DEP_WEBPACK_*` code. These are the replacements:
 
-| Deprecated                     | Use instead                                          |
-| ------------------------------ | ---------------------------------------------------- |
-| `chunk.entryModule`            | `chunkGraph.getChunkEntryModulesIterable(chunk)`     |
-| `chunk.hasEntryModule()`       | `chunkGraph.getNumberOfEntryModules(chunk) > 0`      |
-| `chunk.getModules()`           | `chunkGraph.getChunkModules(chunk)`                  |
-| `chunk.getNumberOfModules()`   | `chunkGraph.getNumberOfChunkModules(chunk)`          |
-| `chunk.containsModule(module)` | `chunkGraph.isModuleInChunk(module, chunk)`          |
-| `chunk.removeModule(module)`   | `chunkGraph.disconnectChunkAndModule(chunk, module)` |
-| `module.id`                    | `chunkGraph.getModuleId(module)`                     |
-| `module.hash`                  | `chunkGraph.getModuleHash(module, runtime)`          |
-| `module.renderedHash`          | `chunkGraph.getRenderedModuleHash(module, runtime)`  |
-| `module.getChunks()`           | `chunkGraph.getModuleChunks(module)`                 |
-| `module.getNumberOfChunks()`   | `chunkGraph.getNumberOfModuleChunks(module)`         |
-| `module.isInChunk(chunk)`      | `chunkGraph.isModuleInChunk(module, chunk)`          |
-| `module.isEntryModule()`       | `chunkGraph.isEntryModule(module)`                   |
-| `module.index`                 | `moduleGraph.getPreOrderIndex(module)`               |
-| `module.depth`                 | `moduleGraph.getDepth(module)`                       |
-| `module.issuer`                | `moduleGraph.getIssuer(module)`                      |
-| `module.usedExports`           | `moduleGraph.getUsedExports(module, runtime)`        |
-| `module.optimizationBailout`   | `moduleGraph.getOptimizationBailout(module)`         |
-| `module.profile`               | `moduleGraph.getProfile(module)`                     |
-| `dependency.originModule`      | `moduleGraph.getParentModule(dependency)`            |
+| Deprecated                                | Use instead                                                                       |
+| ----------------------------------------- | --------------------------------------------------------------------------------- |
+| `chunk.entryModule`                       | `chunkGraph.getChunkEntryModulesIterable(chunk)`                                  |
+| `chunk.hasEntryModule()`                  | `chunkGraph.getNumberOfEntryModules(chunk) > 0`                                   |
+| `chunk.getModules()`                      | `chunkGraph.getChunkModules(chunk)`                                               |
+| `chunk.modulesIterable`                   | `chunkGraph.getChunkModulesIterable(chunk)`                                       |
+| `chunk.getNumberOfModules()`              | `chunkGraph.getNumberOfChunkModules(chunk)`                                       |
+| `chunk.containsModule(module)`            | `chunkGraph.isModuleInChunk(module, chunk)`                                       |
+| `chunk.addModule(module)`                 | `chunkGraph.connectChunkAndModule(chunk, module)`                                 |
+| `chunk.removeModule(module)`              | `chunkGraph.disconnectChunkAndModule(chunk, module)`                              |
+| `chunk.moveModule(module, other)`         | `chunkGraph.disconnectChunkAndModule(chunk, module)` then `connectChunkAndModule` |
+| `chunk.remove()`                          | `chunkGraph.disconnectChunk(chunk)` and `chunk.disconnectFromGroups()`            |
+| `chunk.isEmpty()`                         | `chunkGraph.getNumberOfChunkModules(chunk) === 0`                                 |
+| `chunk.integrate(other)`                  | `chunkGraph.integrateChunks(chunk, other)`                                        |
+| `chunk.canBeIntegrated(other)`            | `chunkGraph.canChunksBeIntegrated(chunk, other)`                                  |
+| `chunk.integratedSize(other, options)`    | `chunkGraph.getIntegratedChunksSize(chunk, other, options)`                       |
+| `chunk.modulesSize()`                     | `chunkGraph.getChunkModulesSize(chunk)`                                           |
+| `chunk.size(options)`                     | `chunkGraph.getChunkSize(chunk, options)`                                         |
+| `chunk.compareTo(other)`                  | `chunkGraph.compareChunks(chunk, other)`                                          |
+| `chunk.hasModuleInGraph(filter, filter2)` | `chunkGraph.hasModuleInGraph(chunk, filter, filter2)`                             |
+| `module.id`                               | `chunkGraph.getModuleId(module)`                                                  |
+| `module.hash`                             | `chunkGraph.getModuleHash(module, runtime)`                                       |
+| `module.renderedHash`                     | `chunkGraph.getRenderedModuleHash(module, runtime)`                               |
+| `module.getChunks()`                      | `chunkGraph.getModuleChunks(module)`                                              |
+| `module.getNumberOfChunks()`              | `chunkGraph.getNumberOfModuleChunks(module)`                                      |
+| `module.isInChunk(chunk)`                 | `chunkGraph.isModuleInChunk(module, chunk)`                                       |
+| `module.addChunk(chunk)`                  | `chunkGraph.connectChunkAndModule(chunk, module)`                                 |
+| `module.removeChunk(chunk)`               | `chunkGraph.disconnectChunkAndModule(chunk, module)`                              |
+| `module.isEntryModule()`                  | `chunkGraph.isEntryModule(module)`                                                |
+| `module.index`                            | `moduleGraph.getPreOrderIndex(module)`                                            |
+| `module.index2`                           | `moduleGraph.getPostOrderIndex(module)`                                           |
+| `module.depth`                            | `moduleGraph.getDepth(module)`                                                    |
+| `module.issuer`                           | `moduleGraph.getIssuer(module)`                                                   |
+| `module.usedExports`                      | `moduleGraph.getUsedExports(module, runtime)`                                     |
+| `module.optimizationBailout`              | `moduleGraph.getOptimizationBailout(module)`                                      |
+| `module.profile`                          | `moduleGraph.getProfile(module)`                                                  |
+| `module.optional`                         | `module.isOptional(moduleGraph)`                                                  |
+| `dependency.originModule`                 | `moduleGraph.getParentModule(dependency)`                                         |
 
 T> Outside a hook that hands you the compilation you can still reach a graph through `ChunkGraph.getChunkGraphForChunk(chunk, ...)` / `ModuleGraph.getModuleGraphForModule(module, ...)`, but taking it from the compilation is preferred.
