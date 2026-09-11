@@ -191,7 +191,7 @@ console.log(foo); // 1 - named imports read properties of module.exports
 This interop applies when webpack treats the **imported** module as CommonJS.
 If that module itself uses ESM `export` syntax, webpack will auto-detect it as ESM
 and use its exports directly. This commonly affects projects that mix `.js` files
-files in a project that has `"type": "module"` set - webpack may treat some files as
+in a project that has `"type": "module"` set - webpack may treat some files as
 ESM while third-party packages in `node_modules` remain CommonJS.
 
 T> This is webpack's bundling behavior. When Node.js itself loads a CommonJS module from ESM,

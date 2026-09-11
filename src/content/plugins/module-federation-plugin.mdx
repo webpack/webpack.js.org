@@ -235,6 +235,10 @@ The package name that is used to determine required version from description fil
 
 This field specifies the required version of the package. It accepts semantic versioning, such as "^1.2.3". Additionally, it retrieves the version if it's provided as a URL, for instance: "git+ssh://git@github.com:foo/bar.git#v1.0.0".
 
+webpack implements the full [range grammar](https://github.com/npm/node-semver#ranges), so a required version can be an exact version (`1.2.3`), a partial one (`1.2`, which matches any patch), a comparator (`>=1.2.3 <2`), a caret or tilde range (`^1.2.3`, `~1.2.3`), a hyphen range (`1.2.3 - 2.3.4`) or several of those joined with `||`. Set it to `false` to accept whatever the scope offers.
+
+A share scope can hold several versions of the same module at once — each build provides the version it has, and a consumer gets the highest one that satisfies its own `requiredVersion`. That is what lets two builds that need different major versions of a library work on one page, at the cost of shipping both. `singleton: true` gives up that guarantee to keep one instance, and warns when the chosen version does not satisfy a consumer.
+
 ##### **`shareKey`**
 
 `string`
