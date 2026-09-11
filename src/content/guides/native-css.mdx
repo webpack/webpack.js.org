@@ -72,12 +72,12 @@ Webpack processes the CSS and includes it in the build output.
 
 Native CSS introduces four [`Rule.type`](/configuration/module/#ruletype) values. Knowing which one applies is the key to migrating, because each maps to a different `css-loader` `modules.mode`:
 
-| Type         | Scoping                                                                         | `css-loader` equivalent  |
-| ------------ | ------------------------------------------------------------------------------- | ------------------------ |
-| `css`        | Global, no CSS Modules parsing                                                  | `modules: false`         |
-| `css/global` | Global selectors, but `:local()` is honored                                     | `modules.mode: 'global'` |
-| `css/module` | Local by default, `:global()` escapes to global                                 | `modules.mode: 'local'`  |
-| `css/auto`   | Picks `css/module` for `*.module.css` / `*.modules.css`, otherwise `css/global` | `modules.auto: true`     |
+| Type         | Scoping                                                                                                         | `css-loader` equivalent  |
+| ------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `css`        | Global, no CSS Modules parsing                                                                                  | `modules: false`         |
+| `css/global` | Global selectors, but `:local()` is honored                                                                     | `modules.mode: 'global'` |
+| `css/module` | Local by default, `:global()` escapes to global                                                                 | `modules.mode: 'local'`  |
+| `css/auto`   | Picks `css/module` for `*.module.css` / `*.modules.css`, otherwise plain `css` (global, no CSS Modules parsing) | `modules.auto: true`     |
 
 The default rule webpack adds for `/\.css$/i` is `css/auto`, so `*.module.css` files become CSS Modules and everything else stays global — matching the most common `css-loader` configuration out of the box.
 
@@ -220,7 +220,7 @@ Native CSS resolves `@custom-media` and `@custom-selector` at build time, so the
 }
 ```
 
-Resolution is file-local — a definition applies to the file that declares it (and to what that file `@import`s) rather than to the whole project. Both are on by default and can be switched off individually with [`module.parser.css.customMedia`](/configuration/module/#moduleparsercsscustommedia) and [`module.parser.css.customSelectors`](/configuration/module/#moduleparsercsscustomselectors), which is what you want if a PostCSS plugin in your chain already handles them.
+Resolution is file-local — a definition applies only to the file that declares it, not to the files it `@import`s nor to the whole project. Both are on by default and can be switched off individually with [`module.parser.css.customMedia`](/configuration/module/#moduleparsercsscustommedia) and [`module.parser.css.customSelectors`](/configuration/module/#moduleparsercsscustomselectors), which is what you want if a PostCSS plugin in your chain already handles them.
 
 ## Minification
 
@@ -435,13 +435,13 @@ Native CSS extracts stylesheets and adds content hashes to them by default (`exp
 
 Map the remaining plugin options:
 
-| `mini-css-extract-plugin` | Native equivalent                                                               |
-| ------------------------- | ------------------------------------------------------------------------------- |
-| `filename`                | [`output.cssFilename`](/configuration/output/#outputcssfilename)                |
-| `chunkFilename`           | [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)      |
-| loader `publicPath`       | [`output.publicPath`](/configuration/output/#outputpublicpath)                  |
-| loader `esModule`         | generator [`esModule`](/configuration/module/#modulegenerator) (default `true`) |
-| `ignoreOrder`             | n/a — native CSS does not emit order-conflict warnings                          |
+| `mini-css-extract-plugin` | Native equivalent                                                                                                                                                                                                                      |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filename`                | [`output.cssFilename`](/configuration/output/#outputcssfilename)                                                                                                                                                                       |
+| `chunkFilename`           | [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename)                                                                                                                                                             |
+| loader `publicPath`       | [`output.publicPath`](/configuration/output/#outputpublicpath)                                                                                                                                                                         |
+| loader `esModule`         | generator [`esModule`](/configuration/module/#modulegenerator) (default `true`)                                                                                                                                                        |
+| `ignoreOrder`             | n/a — the order-conflict warning cannot be silenced per option; use [`ignoreWarnings`](/configuration/other-options/#ignorewarnings), or `CssModulesPlugin.getCompilationHooks(compilation).orderModules` to define the order yourself |
 
 **webpack.config.js**
 

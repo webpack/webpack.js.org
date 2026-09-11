@@ -118,25 +118,31 @@ With that in place, let's update our entry script to utilize one of these new me
 
 Note that we **did not `import` the `square` method** from the `src/math.js` module. That function is what's known as "dead code", meaning an unused `export` that should be dropped. Now let's run our npm script, `npm run build`, and inspect the output bundle:
 
-**dist/bundle.js (around lines 90 - 100)**
+**dist/bundle.js (around lines 5 - 25)**
 
-{/* eslint-disable no-use-before-define */}
+{/* eslint-skip */}
 
 ```js
-/* 1 */
-/***/ (function (module, __webpack_exports__, __webpack_require__) {
-  "use strict";
+/***/ "./src/math.js"
+/*!*********************!*\
+  !*** ./src/math.js ***!
+  \*********************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
-  /* unused harmony export square */
-  /* harmony export (immutable) */ __webpack_exports__.a = cube;
-  function square(x) {
-    return x * x;
-  }
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cube: () => (/* binding */ cube)
+/* harmony export */ });
+/* unused harmony export square */
+function square(x) {
+  return x * x;
+}
 
-  function cube(x) {
-    return x * x * x;
-  }
-});
+function cube(x) {
+  return x * x * x;
+}
+
+
+/***/ }
 ```
 
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
@@ -576,7 +582,7 @@ export default {
 };
 ```
 
-T> Note that the `--optimize-minimize` flag can be used to enable `TerserPlugin` as well.
+T> Note that the `--optimization-minimize` flag can be used to enable `TerserPlugin` as well.
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 
