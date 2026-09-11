@@ -1,0 +1,210 @@
+---
+title: Compiler Object
+description: The properties and methods of the webpack Compiler that plugins can rely on.
+group: Objects
+sort: 14
+contributors:
+  - hai-x
+---
+
+The `Compiler` is the object that drives a build. It is created once for a configuration, holds everything that outlives a single build — the resolved options, the file systems, the cache — and delegates the actual work to plugins through its [hooks](/api/compiler-hooks/).
+
+A plugin receives it as the argument to `apply`:
+
+```js
+class MyPlugin {
+  apply(compiler) {
+    compiler.hooks.done.tap("MyPlugin", (stats) => {
+      // ...
+    });
+  }
+}
+```
+
+One `Compiler` usually runs many builds — every rebuild in watch mode is a new [`Compilation`](/api/compilation-object/) on the same compiler. State that must survive a rebuild belongs here; state about one build belongs on the compilation.
+
+## Properties
+
+### hooks
+
+The [compiler hooks](/api/compiler-hooks/), the main way a plugin takes part in the build.
+
+### webpack
+
+The webpack exports — `Compilation`, `sources`, `NormalModule`, every plugin — taken from the running instance rather than from your own `require("webpack")`. Prefer it, so the plugin keeps working when the project resolves a different copy of webpack than the one next to your plugin.
+
+```js
+class MyPlugin {
+  apply(compiler) {
+    const { Compilation, sources } = compiler.webpack;
+    // ...
+  }
+}
+```
+
+### options
+
+The resolved configuration, after defaults and normalization have been applied. This is not the object the user wrote: reading `compiler.options.output.path` gives you the value webpack settled on, which is what the build actually uses.
+
+### context
+
+The absolute directory the build resolves from — [`context`](/configuration/entry-context/#context).
+
+### name
+
+The compiler's name, from [`name`](/configuration/other-options/#name). For a child compiler it is the name given when it was created.
+
+### outputPath
+
+The absolute output directory, i.e. the resolved [`output.path`](/configuration/output/#outputpath).
+
+### watchMode / running / idle
+
+`boolean`
+
+Whether this compiler was started with `watch()`, whether a build is in progress, and whether the compiler is idle (between builds, with the cache free to store). Read them rather than tracking build state yourself.
+
+### watching
+
+The `Watching` instance when running in watch mode, otherwise `undefined`. It carries the controls for the watch loop:
+
+| Method                 | What it does                                                    |
+| ---------------------- | --------------------------------------------------------------- |
+| `invalidate(callback)` | Trigger a rebuild now, without waiting for a file to change     |
+| `suspend()`            | Stop rebuilding on changes, while keeping the watchers in place |
+| `resume()`             | Resume after `suspend()`                                        |
+| `close(callback)`      | Stop watching                                                   |
+
+### modifiedFiles / removedFiles
+
+`Set<string> | undefined`
+
+In watch mode, the files that changed and that were removed since the previous build. They are `undefined` on the first build, and are the supported way to find out what a rebuild is reacting to.
+
+### fileTimestamps / contextTimestamps
+
+Timestamp caches used to decide what is out of date.
+
+W> These are an implementation detail of change detection, not a way to force a rebuild. To make one file rebuild when another changes, declare the dependency instead — see [making a module depend on another file](#making-a-module-depend-on-another-file).
+
+### inputFileSystem / outputFileSystem / intermediateFileSystem / watchFileSystem
+
+The file systems webpack reads sources from, writes assets to, and writes its own intermediate files (cache, records) to, plus the one that watches for changes. See [the file systems table](/api/node/#custom-file-systems) for which one to replace when.
+
+### cache
+
+The compiler-level cache. Use [`getCache(name)`](#getcache) rather than this object directly.
+
+### resolverFactory
+
+Creates and caches the resolvers webpack uses. Tap its hooks to influence resolution — see [Resolvers](/api/resolvers/).
+
+### platform
+
+The target environment resolved from [`target`](/configuration/target/), as read-only flags (`web`, `node`, `webworker`, …), each `true`, `false`, or `null` when the platform is left neutral. See [Compiler Instance](/api/node/#compiler-instance).
+
+### managedPaths / immutablePaths / unmanagedPaths
+
+The resolved [`snapshot`](/configuration/other-options/#snapshot) path sets that decide how aggressively webpack may trust files without re-checking them.
+
+### parentCompilation / root
+
+For a child compiler, the compilation that created it and the top-level compiler at the root of the tree. `isChild()` is the shorthand for the check.
+
+## Methods
+
+### run
+
+`function (callback)`
+
+Run a single build. The callback receives `(err, stats)`.
+
+W> `run` does not free the compiler's resources — call [`close`](#close) when the build is finished, or the filesystem cache may not be written out.
+
+### watch
+
+`function (watchOptions, handler)`
+
+Build, then rebuild whenever a watched file changes. Returns the [`Watching`](#watching) instance; `handler` is called with `(err, stats)` after every build.
+
+### close
+
+`function (callback)`
+
+Shut the compiler down: stop watching, let the cache write out, and release what the build held.
+
+### getCache
+
+`function (name)`
+
+Returns a `CacheFacade` scoped to `name`, for storing results between builds. Prefer [`compilation.getCache(name)`](/api/compilation-object/#getcache) inside a compilation so entries belong to the build being made.
+
+### getInfrastructureLogger
+
+`function (name)`
+
+A [logger](/api/logging/) for output that is about the compiler rather than about a build — the infrastructure log. For anything tied to a build use `compilation.getLogger(name)` instead, so the message appears in that build's stats.
+
+### isChild
+
+`function () => boolean`
+
+Whether this is a child compiler.
+
+### runAsChild
+
+`function (callback)`
+
+Run a child compiler created with [`compilation.createChildCompiler`](/api/compilation-object/#createchildcompiler), passing its assets up to the parent compilation.
+
+### purgeInputFileSystem
+
+`function ()`
+
+Clear the input file system's cache. Rarely needed — webpack does it itself at the right points in watch mode.
+
+## Common tasks
+
+### Making a module depend on another file
+
+The usual reason for reaching into the compiler is wanting a module rebuilt when some _other_ file changes — a config file, a schema, a template the module reads at build time.
+
+Declare it as a file dependency; do not touch [`fileTimestamps`](#filetimestamps--contexttimestamps). Webpack watches every path in `compilation.fileDependencies` and rebuilds the modules that declared them.
+
+From a loader, which is the simplest case:
+
+```js
+export default function (source) {
+  this.addDependency("/abs/path/to/config.json");
+  return transform(source);
+}
+```
+
+From a plugin, for a path the whole build depends on rather than one module:
+
+```js
+compiler.hooks.thisCompilation.tap("MyPlugin", (compilation) => {
+  compilation.fileDependencies.add("/abs/path/to/config.json");
+});
+```
+
+Use `contextDependencies` for a directory and `missingDependencies` for a path that does not exist yet but should trigger a rebuild when it appears.
+
+### Reacting to what changed in a rebuild
+
+```js
+compiler.hooks.watchRun.tap("MyPlugin", (compiler) => {
+  const changed = compiler.modifiedFiles;
+  const removed = compiler.removedFiles;
+
+  if (!changed) return; // first build
+
+  for (const file of changed) {
+    // ...
+  }
+});
+```
+
+### Rebuilding on demand
+
+`compiler.watching.invalidate()` starts a rebuild immediately — useful when something outside the file system changed and the watcher cannot see it.
