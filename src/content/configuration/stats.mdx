@@ -208,6 +208,23 @@ export default {
 };
 ```
 
+### stats.chunkGroupResourceHints
+
+`boolean = false`
+
+Include the resolved resource-hint descriptors of each entrypoint as `entrypoints[name].resourceHints`, combining [`output.resourceHints.chunks`](/configuration/output/#outputresourcehints) (the `modulepreload` / `preload` / `prefetch` hints for the initial graph) with `output.resourceHints.assets` (fonts, images and other URL-referenced assets).
+
+It lets a server-side renderer emit the `<link>` tags itself instead of walking the chunk graph. It is `false` in `stats.toString()` and `true` in `stats.toJson()`.
+
+```js
+export default {
+  // ...
+  stats: {
+    chunkGroupResourceHints: true,
+  },
+};
+```
+
 ### stats.chunkGroupMaxAssets
 
 `number`

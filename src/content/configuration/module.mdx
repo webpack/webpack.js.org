@@ -239,6 +239,20 @@ console.log(styles.btn); // hashed class
 console.log(styles.BTN); // same hashed class, uppercase alias
 ```
 
+### module.generator.css.exportsOnly
+
+`boolean`
+
+Skip generating and loading a stylesheet and only embed the exports of a CSS module — the mapping from a local class name to its generated one — into the JavaScript output. This is what a server-side build wants, where the styles are shipped by the client build and the server only needs the names.
+
+- Default: `false` for targets that have a `document`, `true` for those that don't (`node`, for example), so a server build gets it without asking.
+
+### module.generator.css.esModule
+
+`boolean = true`
+
+Generate the exports of a CSS module with ES module syntax, so they can be tree-shaken and concatenated. Set it to `false` to emit CommonJS exports instead.
+
 ### module.generator.html.extract
 
 <Badge text="5.107.0+" />
@@ -897,6 +911,54 @@ export default {
 #### module.parser.javascript.commonjsMagicComments
 
 Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJS.
+
+#### module.parser.javascript.createRequire
+
+Enable parsing of `import { createRequire } from "module"` and evaluation of the `require` function it returns, so that such calls become real dependencies.
+
+- Type: `boolean | string`
+- Default: `true` when the [`target`](/configuration/target/) is Node.js, `false` otherwise
+
+A string names the module to take `createRequire` from instead of `"module"`.
+
+#### module.parser.javascript.dynamicUrl
+
+Enable parsing of a `new URL()` whose first argument is not a static string, e.g. ``new URL(`./${name}.png`, import.meta.url)``. With `false`, only URLs webpack can resolve statically become assets and a dynamic one is left as written.
+
+- Type: `boolean`
+- Default: `true`
+
+#### module.parser.javascript.strictThisContextOnImports
+
+Handle the `this` context of imported functions the way the specification requires for namespace objects, i.e. call them with `this === undefined` rather than with the namespace object. Enabling it costs a little output size, which is why it is off by default.
+
+- Type: `boolean`
+- Default: `false`
+
+#### module.parser.javascript.worker
+
+Disable or configure which syntax is parsed as a Web Worker reference.
+
+- Type: `boolean | string[]`
+- Default: `["Worker", "SharedWorker", "navigator.serviceWorker.register()", "Worker from worker_threads"]`
+
+An entry is a constructor name (`"Abc"` handles `new Abc()`), an imported binding (`"Abc from xyz"` handles `new Abc()` where `Abc` is imported from `xyz`), or a call expression (`"abc.def()"`). `"..."` stands for the defaults, so you extend rather than replace them. Set it to `false` to stop webpack from bundling workers at all.
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      javascript: {
+        worker: ["MyWorker from ./my-worker.js", "..."],
+      },
+    },
+  },
+};
+```
+
+T> [`module.parser.javascript.worklet`](#moduleparserjavascriptworklet) does the same for worklets, and the dynamic-dependency options (`exprContext*`, `unknownContext*`, `wrappedContext*`) are described under [Module Contexts](#module-contexts).
 
 - Type: `boolean`
 - Available: 5.17.0+
@@ -1960,6 +2022,10 @@ export default {
 
 Specify the layer in which the module should be placed in. A group of modules could be united in one layer which could then be used in [split chunks](/plugins/split-chunks-plugin/#splitchunkscachegroupscachegrouplayer), [stats](/configuration/stats/#statsgroupmodulesbylayer) or [entry options](/configuration/entry-context/#entry-descriptor).
 
+A module reached through a dynamic ``import(`./dir/${name}`)`` is resolved through a context module, which inherits the layer of the module that imported it. The modules it can resolve to therefore end up in the importer's layer unless a rule places them elsewhere, the same way a statically imported module would.
+
+The layer a module ended up in is readable from the module itself as [`__webpack_layer__`](/api/module-variables/#__webpack_layer__-webpack-specific).
+
 **webpack.config.js**
 
 ```js
@@ -2340,6 +2406,80 @@ export default {
 ## Rule.resource
 
 A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
+
+## Rule.realResource
+
+A [`Condition`](#condition) matched with the real resource — the path of the file that is actually read. It differs from [`Rule.resource`](#ruleresource) only when a [match resource](/api/loaders/#inline-matchresource) (`!=!`) made webpack apply the rules of a different path, in which case `resource` is the pretended one and `realResource` the file on disk.
+
+## Rule.resourceFragment
+
+A [`Condition`](#condition) matched with the fragment of the request, i.e. everything from the `#` onwards. For `import Foo from './foo.svg#icon'` the fragment is `#icon`:
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.svg$/,
+        resourceFragment: /^#icon$/,
+        type: "asset/inline",
+      },
+    ],
+  },
+};
+```
+
+## Rule.descriptionData
+
+A set of [`Condition`](#condition)s matched against the contents of the module's description file, which is usually the closest `package.json`. Each key names a property to test — nested properties are addressed by a dotted key:
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        descriptionData: {
+          type: "module",
+        },
+        // ...
+      },
+    ],
+  },
+};
+```
+
+Like [`Rule.descriptionRelativePath`](#ruledescriptionrelativepath), the condition does not apply when a match resource replaced the resource.
+
+## Rule.dependency
+
+A [`Condition`](#condition) matched with the type of the dependency that requested the module, which is how a rule can treat the same file differently depending on how it was imported. Values webpack uses include `'esm'` for an `import`, `'commonjs'` for a `require()`, `'url'` for a `new URL()`, `'worker'` for a worker constructor, `'amd'`, `'css-import'` and `'unknown'`.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        dependency: "url",
+        type: "asset/resource",
+      },
+    ],
+  },
+};
+```
+
+## Rule.phase
+
+A [`Condition`](#condition) matched with the [import phase](https://github.com/tc39/proposal-defer-import-eval) of the dependency: `'evaluation'` for an ordinary import, `'defer'` for `import defer`, and `'source'` for `import source`.
 
 ## Rule.resourceQuery
 

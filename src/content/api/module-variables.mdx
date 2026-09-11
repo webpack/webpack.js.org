@@ -391,6 +391,56 @@ Access to the internal object of all modules.
 
 It provides access to the hash of the compilation.
 
+## \_\_webpack_layer\_\_ (webpack-specific)
+
+`string | null`
+
+The [layer](/configuration/module/#rulelayer) the current module was placed in, or `null` when it has no layer. webpack replaces it at build time with a literal, so it can be compared or branched on without any runtime cost, and `typeof __webpack_layer__` is evaluated statically as well:
+
+```js
+if (__webpack_layer__ === "server") {
+  // only kept in modules built in the "server" layer
+}
+```
+
+## \_\_webpack_nonce\_\_ (webpack-specific)
+
+`string`
+
+The [nonce](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#nonce-base64-value) webpack sets on every script tag it injects, for pages served under a Content Security Policy. Assign it once, before any chunk is loaded:
+
+```js
+__webpack_nonce__ = "2726c7f26c";
+```
+
+## \_\_webpack_chunkname\_\_ (webpack-specific)
+
+`string`
+
+The name of the chunk the current runtime belongs to.
+
+## \_\_webpack_init_sharing\_\_ (webpack-specific)
+
+`function`
+
+Initializes a [share scope](/concepts/module-federation/) and fills it with the shared modules this build provides. It returns a promise and takes the scope name:
+
+```js
+await __webpack_init_sharing__("default");
+```
+
+## \_\_webpack_share_scopes\_\_ (webpack-specific)
+
+`object`
+
+The share scopes this build knows about, keyed by scope name. It is what you hand to a remote container's `init()` after initializing the scope — see [Dynamic Remote Containers](/concepts/module-federation/#dynamic-remote-containers).
+
+## \_\_system_context\_\_ (webpack-specific)
+
+`object`
+
+The [System.register](https://github.com/systemjs/systemjs/blob/main/docs/system-register.md) context, available when building with `output.libraryTarget: 'system'`.
+
 ## \_\_webpack_css_server_styles\_\_ (webpack-specific)
 
 <Badge text="5.110.0+" />

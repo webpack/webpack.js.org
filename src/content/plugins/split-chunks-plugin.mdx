@@ -365,6 +365,28 @@ Figure out which exports are used by modules to mangle export names, omit unused
 
 Defaults to `true` when [`optimization.usedExports`](/configuration/optimization/#optimizationusedexports) is `true` (the case in `production` mode) and to `false` otherwise.
 
+### splitChunks.fallbackCacheGroup
+
+`object`
+
+Options for the modules that no cache group selected, which is the group webpack uses when it has to split a chunk further to honour [`maxSize`](#splitchunksmaxsize). It accepts `chunks`, `minSize`, `maxSize`, `maxAsyncSize`, `maxInitialSize` and `automaticNameDelimiter`, each defaulting to the value set at `splitChunks` level.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  optimization: {
+    splitChunks: {
+      fallbackCacheGroup: {
+        maxSize: 100000,
+        automaticNameDelimiter: "~",
+      },
+    },
+  },
+};
+```
+
 ### splitChunks.cacheGroups
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.

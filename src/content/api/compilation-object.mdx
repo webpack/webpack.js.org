@@ -310,3 +310,103 @@ Returns array of all assets under the current compilation.
 Parameters:
 
 - `name` - the name of the asset to return
+
+### getCache
+
+`function (name)`
+
+Returns a `CacheFacade` for the given name, the API a plugin uses to store results between builds and reuse them from the [persistent cache](/configuration/cache/). Prefer it over `compiler.getCache(name)`, and over the deprecated `compilation.cache`, so that the cached entries belong to the compilation being built.
+
+Parameters:
+
+- `name` - a name identifying the cache, conventionally your plugin's name
+
+```js
+compiler.hooks.compilation.tap("MyPlugin", (compilation) => {
+  const cache = compilation.getCache("MyPlugin");
+
+  compilation.hooks.processAssets.tapPromise("MyPlugin", async (assets) => {
+    for (const [name, source] of Object.entries(assets)) {
+      // the etag decides when an entry is stale: pass something derived
+      // from the inputs, here the source itself
+      const etag = cache.getLazyHashedEtag(source);
+      const cached = await cache.getPromise(name, etag);
+      if (cached !== undefined) {
+        compilation.updateAsset(name, cached);
+        continue;
+      }
+      const result = transform(source);
+      await cache.storePromise(name, etag, result);
+      compilation.updateAsset(name, result);
+    }
+  });
+});
+```
+
+A `CacheFacade` provides:
+
+| Method                                          | Description                                                                                                                                   |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `get(identifier, etag, callback)`               | Read an entry. The callback receives `undefined` when nothing valid is stored.                                                                |
+| `getPromise(identifier, etag)`                  | The promise form of `get`.                                                                                                                    |
+| `store(identifier, etag, data, callback)`       | Write an entry.                                                                                                                               |
+| `storePromise(identifier, etag, data)`          | The promise form of `store`.                                                                                                                  |
+| `provide(identifier, etag, computer, callback)` | Read an entry, or compute it with `computer` and store the result.                                                                            |
+| `getItemCache(identifier, etag)`                | An `ItemCacheFacade` bound to one identifier and etag, with `get` / `getPromise` / `store` / `storePromise` / `provide` taking no identifier. |
+| `getChildCache(name)`                           | A nested `CacheFacade` whose entries are namespaced under `name`.                                                                             |
+| `getLazyHashedEtag(obj)`                        | An etag for a hashable object such as a `Source`, computed only when it is actually needed.                                                   |
+| `mergeEtags(a, b)`                              | One etag standing for two, when an entry depends on more than one input.                                                                      |
+| `isEnabled()`                                   | Whether caching is enabled at all.                                                                                                            |
+
+W> An entry is only reused when its `etag` matches, so the etag has to cover everything the stored value was derived from — the source, your plugin's options, and anything else that would change the result.
+
+## Module and chunk graphs
+
+<Badge text="5.0.0+" />
+
+webpack 5 moved the relations between modules and chunks out of the `Module` and `Chunk` objects themselves and into two graphs held by the compilation:
+
+- `compilation.moduleGraph` — how modules relate to each other: which module issued which, what a dependency refers to, which exports are used.
+- `compilation.chunkGraph` — how modules relate to chunks: which chunk contains a module, a module's id and hash, which modules are entry modules of a chunk.
+
+The reason is that one module can now take part in several graphs (a module built once can appear in more than one runtime), so a value like "the id of this module" is only meaningful together with a graph.
+
+```js
+compilation.hooks.optimizeChunks.tap("MyPlugin", (chunks) => {
+  const { chunkGraph, moduleGraph } = compilation;
+
+  for (const chunk of chunks) {
+    for (const module of chunkGraph.getChunkModules(chunk)) {
+      const id = chunkGraph.getModuleId(module);
+      const issuer = moduleGraph.getIssuer(module);
+      // ...
+    }
+  }
+});
+```
+
+Accessing the old members still works, but logs a deprecation warning naming a `DEP_WEBPACK_*` code. These are the replacements:
+
+| Deprecated                     | Use instead                                          |
+| ------------------------------ | ---------------------------------------------------- |
+| `chunk.entryModule`            | `chunkGraph.getChunkEntryModulesIterable(chunk)`     |
+| `chunk.hasEntryModule()`       | `chunkGraph.getNumberOfEntryModules(chunk) > 0`      |
+| `chunk.getModules()`           | `chunkGraph.getChunkModules(chunk)`                  |
+| `chunk.getNumberOfModules()`   | `chunkGraph.getNumberOfChunkModules(chunk)`          |
+| `chunk.containsModule(module)` | `chunkGraph.isModuleInChunk(module, chunk)`          |
+| `chunk.removeModule(module)`   | `chunkGraph.disconnectChunkAndModule(chunk, module)` |
+| `module.id`                    | `chunkGraph.getModuleId(module)`                     |
+| `module.hash`                  | `chunkGraph.getModuleHash(module, runtime)`          |
+| `module.renderedHash`          | `chunkGraph.getRenderedModuleHash(module, runtime)`  |
+| `module.getChunks()`           | `chunkGraph.getModuleChunks(module)`                 |
+| `module.getNumberOfChunks()`   | `chunkGraph.getNumberOfModuleChunks(module)`         |
+| `module.isInChunk(chunk)`      | `chunkGraph.isModuleInChunk(module, chunk)`          |
+| `module.isEntryModule()`       | `chunkGraph.isEntryModule(module)`                   |
+| `module.index`                 | `moduleGraph.getPreOrderIndex(module)`               |
+| `module.depth`                 | `moduleGraph.getDepth(module)`                       |
+| `module.issuer`                | `moduleGraph.getIssuer(module)`                      |
+| `module.usedExports`           | `moduleGraph.getUsedExports(module, runtime)`        |
+| `module.optimizationBailout`   | `moduleGraph.getOptimizationBailout(module)`         |
+| `module.profile`               | `moduleGraph.getProfile(module)`                     |
+
+T> Outside a hook that hands you the compilation you can still reach a graph through `ChunkGraph.getChunkGraphForChunk(chunk, ...)` / `ModuleGraph.getModuleGraphForModule(module, ...)`, but taking it from the compilation is preferred.

@@ -233,6 +233,16 @@ addMissingDependency(file: string)
 
 Add a non-existing file as a dependency of the loader result in order to make them watchable. Similar to `addDependency`, but handles the creation of files during compilation before watchers are attached correctly.
 
+### this.addBuildDependency
+
+```ts
+addBuildDependency(file: string)
+```
+
+Add a file as a build dependency, i.e. as something the loader's own behavior depends on rather than something the module's result depends on. A loader that reads a configuration file of its own registers it here, so that the [persistent cache](/configuration/cache/#cachetype) is invalidated when that file changes — see [`cache.buildDependencies`](/configuration/cache/#cachebuilddependencies).
+
+Use [`addDependency`](#thisadddependency) for files whose content becomes part of the result.
+
 ### this.async
 
 Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.

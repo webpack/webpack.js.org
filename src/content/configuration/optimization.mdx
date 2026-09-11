@@ -554,6 +554,32 @@ W> These options configure the minimizer webpack installs by default. Replacing 
 
 Handed to the JavaScript minimizer as-is, defaulting to `{ compress: { passes: 2 } }`; `false` disables JavaScript minimizing while leaving CSS and HTML minimized.
 
+## optimization.minimizeOptions
+
+`object`
+
+<Badge text="5.110.0+" />
+
+The same per-asset-type object as above, set separately from [`optimization.minimize`](#optimizationminimize). Passing the object to `minimize` is a shorthand: webpack normalizes `minimize: { css: … }` to `minimize: true` plus `minimizeOptions: { css: … }`, so the two forms below are equivalent.
+
+**webpack.config.js**
+
+```js
+export default {
+  // ...
+  optimization: {
+    minimize: true,
+    minimizeOptions: {
+      css: {
+        comments: false,
+      },
+    },
+  },
+};
+```
+
+Reach for it when minimizing is switched on elsewhere — by the [`mode`](/configuration/mode/) default or by a config that is merged with yours — and you only want to adjust how it is done. It is also the property plugins see, since `optimization.minimize` is always a boolean after normalization.
+
 ## optimization.minimizer
 
 `[MinimizerPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
