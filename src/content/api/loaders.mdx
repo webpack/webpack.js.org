@@ -616,7 +616,20 @@ In [the example](#example-for-the-loader-context): `'?rrr'`
 
 ### this.rootContext
 
-Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+The absolute path of the project's base directory, i.e. the [`context`](/configuration/entry-context/#context) option of the configuration, which defaults to the directory webpack was started from. Unlike [`this.context`](#thiscontext), which is the directory of the module being loaded, it is the same for every module of a compilation.
+
+Use it whenever a loader needs a path that is stable across modules: to make a path relative for an output name or a source map, to look up a configuration file next to the project root, or to key a cache by project rather than by file.
+
+```js
+import path from "node:path";
+
+export default function loader(source) {
+  const relative = path.relative(this.rootContext, this.resourcePath);
+  // …
+}
+```
+
+T> Since webpack 4, this replaces the former `this.options.context`.
 
 ### this.sourceMap
 

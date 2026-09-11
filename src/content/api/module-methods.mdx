@@ -112,6 +112,26 @@ import(`./locale/${language}.json`).then((module) => {
 
 T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-comments) options allows you to add regex patterns that reduce the number of files that webpack will bundle for this import.
 
+A fully dynamic `import(foo)` is not an error — webpack still creates a [context module](/guides/dependency-management/) for it, but an empty one. It reports `Critical dependency: the request of a dependency is an expression` at build time, bundles nothing for that call, and the returned promise rejects at runtime. Nothing is included because the parser can't tell which files could be requested, and including every file the expression might resolve to is almost never what you want.
+
+If it _is_ what you want, the [module context](/configuration/module/#module-contexts) options let you opt in — `exprContextRequest` is the directory to look in, `exprContextRegExp` selects the files inside it, `exprContextRecursive` decides whether subdirectories are included, and `exprContextCritical` controls the warning:
+
+```js
+export default {
+  module: {
+    parser: {
+      javascript: {
+        // bundle every module below the importing directory
+        exprContextRegExp: /^\.\/.*$/,
+        exprContextCritical: false,
+      },
+    },
+  },
+};
+```
+
+W> Every module matched this way ends up in the bundle, so this can grow the output dramatically. Prefer keeping a static prefix in the request, as in the example above. The equivalent options for an unanalyzable `require(expr)` are named `unknownContextRequest`, `unknownContextRegExp`, `unknownContextRecursive` and `unknownContextCritical`.
+
 #### Magic Comments
 
 By adding comments to the import, we can do things such as name our chunk or select different modes. For a full list of these magic comments see the code below followed by an explanation of what these comments do.
@@ -223,7 +243,7 @@ Since webpack 2.6.0, different modes for resolving dynamic imports can be specif
 
 - `'lazy'` (default): Generates a lazy-loadable chunk for each `import()`ed module.
 - `'lazy-once'`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where multiple module paths that can potentially be requested.
-- `'eager'`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
+- `'eager'`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made. Since no chunk is created, `webpackChunkName` has no effect in this mode — use `'lazy'` or `'lazy-once'` when you want the module in a chunk of its own.
 - `'weak'`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
 
 ##### webpackPrefetch
