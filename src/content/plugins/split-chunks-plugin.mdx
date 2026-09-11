@@ -110,7 +110,13 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 `string = 'async'` `function (chunk)` `RegExp`
 
-This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
+This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`:
+
+- `'initial'` selects chunks that a browser loads up front, before any code of the application runs — the chunks that belong to an [entry point](/concepts/entry-points/), including its runtime and anything it statically imports.
+- `'async'` selects chunks that are loaded on demand, i.e. chunks created by [`import()`](/api/module-methods/#import-1) and other asynchronous dependencies.
+- `'all'` selects both.
+
+A chunk counts as initial when at least one of the chunk groups it belongs to is loaded with the page, so a chunk that is part of an entry point and is additionally pulled in by an `import()` somewhere else is treated as initial rather than async. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
 Note that it is applied to the fallback cache group as well (`splitChunks.fallbackCacheGroup.chunks`).
 
