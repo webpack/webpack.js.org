@@ -23,9 +23,11 @@ Use the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin) for a mo
 
 ## devtool
 
-`string = 'eval'` `Array<{ type: "all" | "javascript" | "css", use: string }>` `false`
+`string` `Array<{ type: "all" | "javascript" | "css", use: string }>` `false`
 
 Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-source-maps) to enhance the debugging process. These values can affect build and rebuild speed dramatically.
+
+The default is `false`. In [`mode: 'development'`](/configuration/mode/) it defaults to `'eval'` for JavaScript (plus `'source-map'` for CSS when [`experiments.css`](/configuration/experiments/#experimentscss) is enabled), unless a `module` or `modern-module` [library type](/configuration/output/#outputlibrarytype) is emitted, in which case it stays `false`.
 
 <Badge text="5.105.0+" />
 
@@ -99,7 +101,7 @@ T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugi
 | `hidden-*` addition     | no reference to the SourceMap added. When SourceMap is not deployed, but should still be generated, e. g. for error reporting purposes.                                                                                                                                                                           |
 | `nosources-*` addition  | source code is not included in SourceMap. This can be useful when the original files should be referenced (further config options needed).                                                                                                                                                                        |
 
-T> We expect a certain pattern when validate devtool name, pay attention and don't mix up the sequence of devtool string. The pattern is: `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`.
+T> We expect a certain pattern when validate devtool name, pay attention and don't mix up the sequence of devtool string. The pattern is: `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map[-debugids]`.
 
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate and support minimizing.
 
@@ -149,7 +151,7 @@ The following options are not ideal for development nor production. They are nee
 
 These options are typically used in production:
 
-`(none)` (Omit the `devtool` option or set `devtool: false`) - No SourceMap is emitted. This is a good option to start with.
+`(none)` (Set `devtool: false`, or omit the option outside of `development` mode) - No SourceMap is emitted. This is a good option to start with.
 
 `source-map` - A full SourceMap is emitted as a separate file. It adds a reference comment to the bundle so development tools know where to find it.
 

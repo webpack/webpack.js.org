@@ -166,11 +166,6 @@ export default {
         // Avoid generating and loading a stylesheet and only embed exports from css into output javascript files.
         // type: boolean, available since webpack 5.90.0
         exportsOnly: true,
-
-        // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
-        // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string | string[])
-        // available since webpack 5.90.4; the function form may return string[] since 5.107.0
-        exportsConvention: "camel-case-only",
       },
       "css/auto": {
         // Generator options for css/auto modules
@@ -181,13 +176,13 @@ export default {
 
         // Customize how css export names are exported to javascript modules, such as keeping them as is, transforming them to camel case, etc.
         // type: 'as-is' | 'camel-case' | 'camel-case-only' | 'dashes' | 'dashes-only' | ((name: string) => string | string[])
-        // available since webpack 5.90.4; the function form may return string[] since 5.107.0
+        // available since webpack 5.91.0; the function form may return string[] since 5.107.0
         exportsConvention: "camel-case-only",
 
         // Customize the format of the local class names generated for css modules.
         // type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].
-        // available since webpack 5.90.4
-        // Since webpack 5.108.0, [hash] here resolves to the local ident hash rather than the module hash; use [modulehash] for that. An inline digest/length form is also supported, e.g. [hash:base64:8].
+        // available since webpack 5.91.0
+        // Since webpack 5.108.0, [hash] here resolves to the local ident hash (matching css-loader); use [modulehash] for the module hash. An inline digest/length form is also supported, e.g. [hash:base64:8].
         localIdentName: "[uniqueName]-[id]-[local]",
       },
       "css/global": {
@@ -199,7 +194,8 @@ export default {
       json: {
         // Generator options for json modules
         // Use `JSON.parse` when the JSON string is longer than 20 characters.
-        parse: JSONParse,
+        // type: boolean, default true
+        JSONParse: true,
       },
       html: {
         // Generator options for html modules, requires `experiments.html`, available since webpack 5.107.0
@@ -287,31 +283,12 @@ export default {
       asset: {
         // Parser options for asset modules
 
-        // The options for data url generator.
-        dataUrl: {
-          // Asset encoding (defaults to "base64")
-          // type: 'base64' | false
-          encoding: "base64",
-          // Asset mimetype (getting from file extension by default).
-          // type: string
-          mimetype: "image/png",
+        // The condition for inlining the asset as a data URI.
+        // type: { maxSize: number } | ((source: string | Buffer, { filename, module }) => boolean)
+        dataUrlCondition: {
+          // Inline assets up to this size in bytes (default 8096)
+          maxSize: 8096,
         },
-
-        // Emit an output asset from this asset module. This can be set to 'false' to omit emitting e. g. for SSR.
-        // type: boolean
-        emit: true,
-
-        // Customize filename for this asset module
-        // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        filename: "static/[path][name][ext]",
-
-        // Customize publicPath for asset modules, available since webpack 5.28.0
-        // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        publicPath: "https://cdn/assets/",
-
-        // Emit the asset in the specified folder relative to 'output.path', available since webpack 5.67.0
-        // type: string | ((pathData: PathData, assetInfo?: AssetInfo) => string)
-        outputPath: "cdn-assets/",
       },
       "asset/inline": {
         // No parser options are supported for this module type yet
@@ -584,7 +561,7 @@ Some constructs are exempt by design: nested rules inside a local-bearing ancest
 
 <Badge text="5.104.0+" />
 
-Enable or disable renaming of `@keyframes` animation names in CSS modules.
+Enable or disable renaming of `@keyframes` animation names in CSS modules. Only available for the `css/auto`, `css/module` and `css/global` module types.
 
 - Type: `boolean`
 - Default: `true`
@@ -595,7 +572,7 @@ Enable or disable renaming of `@keyframes` animation names in CSS modules.
 export default {
   module: {
     parser: {
-      css: {
+      "css/auto": {
         animation: true, // Enable @keyframes renaming
       },
     },
@@ -607,7 +584,7 @@ export default {
 
 <Badge text="5.104.0+" />
 
-Enable or disable renaming of `@container` names in CSS modules.
+Enable or disable renaming of `@container` names in CSS modules. Only available for the `css/auto`, `css/module` and `css/global` module types.
 
 - Type: `boolean`
 - Default: `true`
@@ -618,7 +595,7 @@ Enable or disable renaming of `@container` names in CSS modules.
 export default {
   module: {
     parser: {
-      css: {
+      "css/auto": {
         container: true, // Enable @container renaming
       },
     },
@@ -630,7 +607,7 @@ export default {
 
 <Badge text="5.104.0+" />
 
-Enable or disable renaming of custom identifiers in CSS modules.
+Enable or disable renaming of custom identifiers in CSS modules. Only available for the `css/auto`, `css/module` and `css/global` module types.
 
 - Type: `boolean`
 - Default: `true`
@@ -643,7 +620,7 @@ T> Since webpack 5.109.0 this also scopes `view-transition-name` / `view-transit
 export default {
   module: {
     parser: {
-      css: {
+      "css/auto": {
         customIdents: true, // Enable custom identifier renaming
       },
     },
@@ -717,7 +694,7 @@ export default {
 
 <Badge text="5.104.0+" />
 
-Enable or disable renaming of dashed identifiers, such as CSS custom properties (e.g., `--my-variable`).
+Enable or disable renaming of dashed identifiers, such as CSS custom properties (e.g., `--my-variable`). Only available for the `css/auto`, `css/module` and `css/global` module types.
 
 - Type: `boolean`
 - Default: `true`
@@ -728,7 +705,7 @@ Enable or disable renaming of dashed identifiers, such as CSS custom properties 
 export default {
   module: {
     parser: {
-      css: {
+      "css/auto": {
         dashedIdents: true, // Enable dashed identifier renaming
       },
     },
@@ -740,7 +717,7 @@ export default {
 
 <Badge text="5.104.0+" />
 
-Enable or disable renaming of `@function` names in CSS modules.
+Enable or disable renaming of `@function` names in CSS modules. Only available for the `css/auto`, `css/module` and `css/global` module types.
 
 - Type: `boolean`
 - Default: `true`
@@ -751,7 +728,7 @@ Enable or disable renaming of `@function` names in CSS modules.
 export default {
   module: {
     parser: {
-      css: {
+      "css/auto": {
         function: true, // Enable @function renaming
       },
     },
@@ -796,7 +773,7 @@ Default resource-hint rules for assets referenced via `url(...)` in CSS. Same ru
 
 <Badge text="5.104.0+" />
 
-Enable or disable renaming of grid identifiers in CSS modules.
+Enable or disable renaming of grid identifiers in CSS modules. Only available for the `css/auto`, `css/module` and `css/global` module types.
 
 - Type: `boolean`
 - Default: `true`
@@ -807,7 +784,7 @@ Enable or disable renaming of grid identifiers in CSS modules.
 export default {
   module: {
     parser: {
-      css: {
+      "css/auto": {
         grid: true, // Enable grid identifier renaming
       },
     },
@@ -819,8 +796,8 @@ export default {
 
 Configure how CSS content will be exported.
 
-- Type: `boolean`
-- Available: 5.102.0+
+- Type: `'link' | 'text' | 'css-style-sheet' | 'style'`
+- Available: 5.103.0+
 - Example:
 
   ```js
@@ -836,11 +813,12 @@ Configure how CSS content will be exported.
   };
   ```
 
-Possible values: `'link' | 'text' | 'css-style-sheet'
+Possible values: `'link' | 'text' | 'css-style-sheet' | 'style'`
 
 - `link` - extract CSS into own file and use `link` tags to inject into DOM.
 - `text` - store CSS in JS file and return using default export.
 - `css-style-sheet` - the default export is a constructable stylesheet (i.e. CSSStyleSheet). Useful for custom elements and shadow DOM.
+- `style` - store CSS in JS file and inject it into the DOM at runtime through a `<style>` element (available since 5.106.0).
 
 ### module.parser.css.as
 
@@ -1736,8 +1714,6 @@ There are two output values of a Rule:
 
 These properties affect the loaders: [`loader`](#ruleloader), [`options`](#ruleoptions--rulequery), [`use`](#ruleuse).
 
-For compatibility also these properties: [`query`](#ruleoptions--rulequery), [`loaders`](#ruleloaders).
-
 The [`enforce`](#ruleenforce) property affects the loader category. Whether it's a normal, pre- or post- loader.
 
 The [`parser`](#ruleparser) property affects the parser options.
@@ -2028,9 +2004,9 @@ export default {
 
 ## Rule.loaders
 
-W> This option is **deprecated** in favor of `Rule.use`.
+W> This option was **removed** in webpack 5 and is rejected by the configuration validation.
 
-`Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#ruleuse) for details.
+Use [`Rule.use`](#ruleuse) instead.
 
 ## Rule.mimetype
 
@@ -2087,9 +2063,9 @@ T> See [`Nested rules`](#nested-rules) for more information.
 
 ## Rule.options / Rule.query
 
-`Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
+`Rule.options` is a shortcut to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
 
-W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
+W> `Rule.query` was removed in webpack 5 and is rejected by the configuration validation. Use `Rule.options` or `UseEntry.options` instead.
 
 ## Rule.parser
 
@@ -2149,7 +2125,7 @@ See [Asset Modules guide](/guides/asset-modules/) for additional information and
 
 `object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
 
-If a module source size is less than `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
+If a module source size is less than or equal to `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
 
 **webpack.config.js**
 
@@ -2198,7 +2174,7 @@ export default {
 
 ### Rule.generator.dataUrl
 
-`object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
+`object = { encoding string = 'base64' | false, mimetype string = undefined }` `function (content, { filename, module }) => string`
 
 When `Rule.generator.dataUrl` is used as an object, you can configure two properties:
 
@@ -2773,8 +2749,6 @@ export default {
 It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context/#context) with the loader resolving options ([resolveLoader](/configuration/resolve/#resolveloader)).
 
 It can have an `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
-
-For compatibility a `query` property is also possible, which is an alias for the `options` property. Use the `options` property instead.
 
 Note that webpack needs to generate a unique module identifier from the resource and all loaders including options. It tries to do this with a `JSON.stringify` of the options object. This is fine in 99.9% of cases, but may be not unique if you apply the same loaders with different options to the resource and the options have same stringified values.
 
