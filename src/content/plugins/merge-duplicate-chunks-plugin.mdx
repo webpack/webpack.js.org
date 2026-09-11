@@ -20,7 +20,7 @@ new webpack.optimize.MergeDuplicateChunksPlugin({
 
 `number`
 
-Controls the optimization stage at which duplicate chunk merging runs. By default, merging occurs before `SplitChunksPlugin`. Setting a higher `stage` value causes merging to run _after_ other optimizations such as `SplitChunksPlugin`.
+Controls the optimization stage at which duplicate chunk merging runs. By default, merging occurs before `SplitChunksPlugin`. Setting a `stage` greater than `10` (the stage of `SplitChunksPlugin`) causes merging to run _after_ it; a value of `10` still runs before it because user plugins are applied first. The built-in instance (stage `-10`) stays active, so this adds a second merging pass.
 
 **webpack.config.js**
 
@@ -31,7 +31,7 @@ export default {
   // ...
   plugins: [
     new webpack.optimize.MergeDuplicateChunksPlugin({
-      stage: 10, // run after SplitChunksPlugin
+      stage: 11, // run after SplitChunksPlugin (stage 10)
     }),
   ],
 };

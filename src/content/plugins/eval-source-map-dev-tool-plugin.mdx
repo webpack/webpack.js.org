@@ -23,28 +23,20 @@ This plugin enables more fine grained control of source map generation. It is al
 new webpack.EvalSourceMapDevToolPlugin(options);
 ```
 
-This plugin wraps every module in an `eval()` call with its source map appended as a data URL, so no `.map` files are emitted. It accepts the same options object as the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin/), but the options that describe a separate source map file — `filename`, `fileContext` and `publicPath` — have nothing to name here and are ignored.
+This plugin wraps every module in an `eval()` call with its source map appended as a data URL, so no `.map` files are emitted. It accepts the same options object as the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin/), but the options that describe a separate source map file — `filename`, `fileContext` and `publicPath` — have nothing to name here and are ignored, as is a function-valued `append`.
 
 ## Options
 
 The following options are supported:
 
-- `test` (`string` `RegExp` `function (module) => boolean` `[string, RegExp, function (module) => boolean]`): Generate source maps for modules whose path matches the given value. It matches the module's own path, not the name of the chunk it ends up in, so it cannot be used to exclude a whole entry point or bundle.
+- `test` (`string` `RegExp` `function (module) => boolean` `[string, RegExp, function (module) => boolean]`): Generate source maps for modules whose path matches the given value. There is no default: all modules get source maps unless `test`, `include` or `exclude` restrict them. It matches the module's own path, not the name of the chunk it ends up in, so it cannot be used to exclude a whole entry point or bundle.
 - `include` (`string` `RegExp` `function (module) => boolean` `[string, RegExp, function (module) => boolean]`): Include source maps for module paths that match the given value.
 - `exclude` (`string` `RegExp` `function (module) => boolean` `[string, RegExp, function (module) => boolean]`): Exclude modules that match the given value from source map generation.
-- `append` (`string|function`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file.
-
-  Starting from version 5.84.0, webpack allows the `append` option to be a function that accepts path data and an asset info object as arguments, and returns a string.
-
-  ```ts
-  (pathData: PathData, assetInfo?: AssetInfo) => string;
-  ```
-
+- `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file.
 - `ignoreList` (`string` `RegExp` `function (source) => boolean` `[string, RegExp, function (source) => boolean]`): Decide whether to ignore source files that match the specified value in source maps.
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `protocol` (`string`): Allows user to override default protocol (`webpack-internal://`)
 - `namespace` (`string`): Namespace prefix to allow multiple webpack roots in the devtools. See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
 - `noSources = false` (`boolean`): Prevents the source file content from being included in the source map.
 - `sourceRoot` (`string`): Provide a custom value for the `sourceRoot` property in source maps.

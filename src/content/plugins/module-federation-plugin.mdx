@@ -123,8 +123,9 @@ export default {
     new ModuleFederationPlugin({
       // adds lodash as shared module
       // version is inferred from package.json
-      // there is no version check for the required version
-      // so it will always use the higher version found
+      // requiredVersion is inferred from package.json as well
+      // (a warning is emitted if it can't be determined)
+      // a shared version that doesn't satisfy it falls back to the local copy
       shared: ["lodash"],
     }),
   ],
