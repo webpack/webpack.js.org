@@ -300,6 +300,172 @@ To make this work with HMR we need to update that binding to the new `printMe` f
 
 This is only one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
 
+## What an update actually replaces
+
+Most HMR confusion comes from one wrong assumption: that an update re-runs the module you wrote the `accept` call in. It does not.
+
+When a module changes, webpack walks up from it through the modules that imported it until it finds one that accepted the change. Only the **changed** module is re-executed. The module that accepted it keeps running — the same instance, the same variables, the same closures — and its callback is invoked so it can react. `accept('./dep.js', cb)` therefore means "I will deal with `./dep.js` changing", not "re-run me when it changes".
+
+Two consequences follow, and they are the whole of HMR in practice:
+
+- **The accepting module's `dispose` handler does not fire.** Its handler runs only when that module is itself replaced, which happens when it changes or when it [self-accepts](#self-accepting-a-module).
+- **Its imported bindings are already updated by the time the callback runs.** Webpack rewires the import, so calling `dep()` inside the callback calls the new version — there is nothing to re-import.
+
+```js
+import { greet } from "./service.js";
+
+// this runs once; it is NOT re-run when service.js changes
+console.log(greet());
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept("./service.js", () => {
+    // `greet` already points at the new version here
+    console.log(greet());
+  });
+}
+```
+
+T> These examples use `import.meta.webpackHot`, which works whether the module ends up auto-detected or [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm). `module.hot` is the equivalent, and the only spelling in CommonJS, but it is unavailable in a strict ESM module. Both are erased in a production build, so the `if` guard keeps the code out of your bundle.
+
+## Self-accepting a module
+
+A module that has no outward-visible bindings — it only causes effects when it runs — can accept its own changes. Webpack then re-executes that module in place and the update stops there instead of bubbling to the entry point.
+
+```js
+import.meta.webpackHot.accept();
+```
+
+This is what stylesheets do, and it is the right choice for things like a registered route table, a set of chart definitions, or a `<canvas>` render loop. It is the wrong choice when other modules hold on to what this one exported: they captured the _old_ value at import time, and re-running the module does not update their copies. Accept in the module that owns the reference instead.
+
+## Cleaning up side effects
+
+Re-executing a module runs its side effects a second time. An interval gets scheduled twice, a listener is registered twice, a socket is opened again — after ten edits the page has ten of everything and looks "slow" or "flickery" for reasons that have nothing to do with webpack.
+
+`dispose` is the release valve. It runs **before** the new version executes, so it is where you undo what the current version claimed:
+
+```js
+const socket = new WebSocket(url);
+const timer = setInterval(poll, 1000);
+const onResize = () => layout();
+
+window.addEventListener("resize", onResize);
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept();
+  import.meta.webpackHot.dispose(() => {
+    socket.close();
+    clearInterval(timer);
+    window.removeEventListener("resize", onResize);
+  });
+}
+```
+
+The rule of thumb: anything that outlives the module's own evaluation — timers, listeners, sockets, observers, DOM nodes appended to `document`, entries added to a global registry — needs a matching line in `dispose`.
+
+## Preserving state across an update
+
+The `data` object passed to `dispose` is handed to the next version of the module as `import.meta.webpackHot.data`, which is `undefined` on the first run. That round trip is how an edit keeps the state it should keep — a scroll position, a form draft, a game's score, the frame counter of an animation:
+
+```js
+const previous = import.meta.webpackHot && import.meta.webpackHot.data;
+let ticks = previous ? previous.ticks : 0;
+
+const timer = setInterval(() => {
+  ticks += 1;
+  render(ticks);
+}, 1000);
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept();
+  import.meta.webpackHot.dispose((data) => {
+    clearInterval(timer);
+    data.ticks = ticks;
+  });
+}
+```
+
+Edit this module and the counter carries on from where it was instead of restarting at zero — `dispose` stops the old interval and stashes the value, then the new version reads it back out of `data`.
+
+W> `data` is transferred as the same object, not serialized, so a live handle put there survives — but so does anything it keeps alive. Copy out the values you need rather than stashing whole component trees.
+
+## Hot-swapping a singleton
+
+A store, a router, a DI container: something created once that the whole application holds a reference to. Replacing the object itself would strand every holder on the old one, so replace its _contents_ instead and leave the identity alone. A Redux store is the familiar version — `replaceReducer` exists for exactly this:
+
+```js
+import { createStore } from "redux";
+import rootReducer from "./reducers/index.js";
+
+const store = createStore(rootReducer);
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept("./reducers/index.js", () => {
+    store.replaceReducer(rootReducer);
+  });
+}
+
+export default store;
+```
+
+The store keeps its state and its subscribers; only the reducer function changes. Any singleton with a "swap the implementation" method — a router's route table, a registry's entries, an event bus's handlers — follows the same shape.
+
+## When an update can't be applied
+
+If no module up the chain accepts a change, the update is aborted. `webpack-dev-server` responds by reloading the page, so a full reload during development usually means "nothing accepted this file", not a broken setup.
+
+Two ways to steer that deliberately:
+
+- [`decline`](/api/hot-module-replacement/#decline) marks a module as never hot-updatable, forcing the reload immediately rather than after a failed attempt. Useful for a module whose side effects genuinely cannot be undone.
+- [`invalidate`](/api/hot-module-replacement/#invalidate) is for the conditional case: you accepted a dependency, but this particular change is one your callback cannot handle, so you hand the update to your parent instead.
+
+```js
+import.meta.webpackHot.accept("./config.js", () => {
+  if (config.port !== runningPort) {
+    // a port change needs a restart; let it bubble
+    import.meta.webpackHot.invalidate();
+    return;
+  }
+  applyConfig(config);
+});
+```
+
+## HMR on the server
+
+HMR is not browser-only — it works under `target: 'node'`, and is how a long-running server swaps request handlers without dropping its listening socket or in-memory state. There is no dev-server client here, so the bundle asks for updates itself, driven by a watching compiler that writes the update files:
+
+```js
+import express from "express";
+import handler from "./handler.js";
+
+const app = express();
+let current = handler;
+
+// the indirection is what makes the swap possible:
+// express keeps this closure, and the closure reads `current`
+app.use((req, res, next) => current(req, res, next));
+
+const server = app.listen(3000);
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept("./handler.js", () => {
+    current = handler;
+  });
+  import.meta.webpackHot.dispose(() => server.close());
+
+  setInterval(() => {
+    if (import.meta.webpackHot.status() === "idle") {
+      import.meta.webpackHot.check(true).catch((err) => {
+        console.error("HMR update failed, restart the server:", err.message);
+      });
+    }
+  }, 1000);
+}
+```
+
+[`check(true)`](/api/hot-module-replacement/#check) downloads the update and applies it, resolving with the replaced modules — or with `null` when there is nothing new. It **rejects** when the update could not be applied, with a message naming the file, e.g. `Aborted because ./handler.js is not accepted`. On a server that is your cue to restart the process, since there is no page to reload.
+
+W> Registering a listener on a hot module without a matching `dispose` leaks on the server just as it does in the browser, except the process never reloads to clean up — so the handles accumulate for as long as the server runs.
+
 ## HMR with Stylesheets
 
 Hot Module Replacement with CSS needs no setup at all: [`experiments.css`](/configuration/experiments/#experimentscss) defaults to `'auto'`, so webpack handles stylesheets itself and patches them in place when they change — no loader to install, no rule to add. See [Native CSS](/guides/native-css/) for what the built-in support covers.
@@ -379,7 +545,7 @@ Change the style on `body` to `background: red;` and you should immediately see 
 
 There are many other loaders and examples out in the community to make HMR interact smoothly with a variety of frameworks and libraries...
 
-- [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
+- [React Fast Refresh](https://github.com/pmmmwh/react-refresh-webpack-plugin): Tweak React components in real time, preserving their state. It replaces React Hot Loader, which is deprecated and no longer maintained.
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
 - [Elm Hot webpack Loader](https://github.com/klazuka/elm-hot-webpack-loader): Supports HMR for the Elm programming language.
 - [Angular HMR](https://angular.io/cli/serve): No loader necessary! HMR support is built in the Angular CLI, add the `--hmr` flag to you `ng serve` command.
