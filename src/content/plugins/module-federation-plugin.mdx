@@ -57,6 +57,38 @@ export default {
 };
 ```
 
+### exposes
+
+The modules this container makes available to other builds. The property name is the public name a consumer imports (`import Button from "remote/Button"`), the value the module to expose:
+
+**webpack.config.js**
+
+```js
+new ModuleFederationPlugin({
+  name: "remote",
+  exposes: {
+    "./Button": "./src/components/Button",
+  },
+});
+```
+
+An entry can also be an object:
+
+- `import` (`string`): the module to expose.
+- `name` (`string`): the name of the chunk webpack generates for it. Without it the chunk is named after the module's internal id, which changes as the build changes; setting it gives the file a stable name that can be referenced statically.
+
+```js
+new ModuleFederationPlugin({
+  name: "remote",
+  exposes: {
+    "./Button": {
+      import: "./src/components/Button",
+      name: "button-chunk",
+    },
+  },
+});
+```
+
 ### Sharing libraries
 
 With the `shared` key in the configuration you can define libraries that are shared between your federated modules. The package name is the same as the one found in the `dependencies` section of your package.json. However, by default webpack will only share the root level of a library.

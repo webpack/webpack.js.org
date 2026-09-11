@@ -75,6 +75,32 @@ Executed when a module has been built successfully.
 
 - Callback Parameters: `module`
 
+## stillValidModule
+
+`SyncHook`
+
+Called when a module was found to be still valid and therefore not rebuilt, for example because the cache is still up to date.
+
+- Callback Parameters: `module`
+
+## succeedEntry
+
+`SyncHook`
+
+Called when an entry and its dependencies have been added successfully.
+
+- Callback Parameters: `entry` `options` `module`
+
+`entry` is the entry `Dependency`, `options` the [entry options](/configuration/entry-context/#entry-descriptor) it was added with.
+
+## failedEntry
+
+`SyncHook`
+
+Called when adding an entry failed.
+
+- Callback Parameters: `entry` `options` `error`
+
 ## finishModules
 
 `AsyncSeriesHook`
@@ -118,6 +144,20 @@ Fired at the beginning of dependency optimization.
 Fired after the dependency optimization.
 
 - Callback Parameters: `modules`
+
+## dependencyReferencedExports
+
+`SyncWaterfallHook`
+
+Called with the exports a dependency references, allowing them to be changed. The result decides what [`optimization.usedExports`](/configuration/optimization/#optimizationusedexports) keeps for that dependency.
+
+- Callback Parameters: `referencedExports` `dependency` `runtime`
+
+## beforeChunks
+
+`SyncHook`
+
+Called right before chunks are created from the entrypoints, i.e. before the chunk graph exists.
 
 ## afterChunks
 
@@ -304,6 +344,14 @@ Store chunk info to the records. This is only triggered if [`shouldRecord`](#sho
 
 - Callback Parameters: `chunks` `records`
 
+## renderManifest
+
+`SyncWaterfallHook`
+
+Called to collect the render manifest of a chunk — the list of files it renders to and how each one is generated. Plugins that emit an additional file type for a chunk add their entry here.
+
+- Callback Parameters: `result` `options`
+
 ## renderEmbeddedSource
 
 <Badge text="5.110.0+" />
@@ -340,6 +388,70 @@ Called while hashing a module that embeds a source of another language. Tap it t
 
 - Callback Parameters: `module`, `hash`
 
+## optimizeCodeGeneration
+
+`SyncHook`
+
+Called with all modules right before code generation, so their code generation can still be influenced.
+
+- Callback Parameters: `modules`
+
+## beforeCodeGeneration
+
+`SyncHook`
+
+Called before the code generation phase starts.
+
+## afterCodeGeneration
+
+`SyncHook`
+
+Called after the code generation phase has finished.
+
+## beforeRuntimeRequirements
+
+`SyncHook`
+
+Called before the runtime requirements of modules, chunks and chunk trees are collected.
+
+## additionalModuleRuntimeRequirements
+
+`SyncHook`
+
+Called for each module so that plugins can add runtime requirements ([`RuntimeGlobals`](https://github.com/webpack/webpack/blob/main/lib/RuntimeGlobals.js)) the module needs.
+
+- Callback Parameters: `module` `runtimeRequirements` `context`
+
+## additionalChunkRuntimeRequirements
+
+`SyncHook`
+
+Called for each chunk so that plugins can add runtime requirements the chunk needs.
+
+- Callback Parameters: `chunk` `runtimeRequirements` `context`
+
+## additionalTreeRuntimeRequirements
+
+`SyncHook`
+
+Called for each entry chunk so that plugins can add runtime requirements for the whole chunk tree, which is where most runtime modules are injected.
+
+- Callback Parameters: `chunk` `runtimeRequirements` `context`
+
+## runtimeModule
+
+`SyncHook`
+
+Called after a runtime module has been added to a chunk, and can be used to modify its generated code.
+
+- Callback Parameters: `module` `chunk`
+
+## afterRuntimeRequirements
+
+`SyncHook`
+
+Called after all runtime requirements have been collected.
+
 ## beforeModuleHash
 
 `SyncHook`
@@ -363,6 +475,22 @@ Called before the compilation is hashed.
 `SyncHook`
 
 Called after the compilation is hashed.
+
+## fullHash
+
+`SyncHook`
+
+Called with the compilation hash once every module and chunk has contributed to it, so further data can be hashed in.
+
+- Callback Parameters: `hash`
+
+## contentHash
+
+`SyncHook`
+
+Called for each chunk after its hash was computed, which is where content hashes per source type are added.
+
+- Callback Parameters: `chunk`
 
 ## recordHash
 
@@ -615,6 +743,14 @@ compilation.hooks.processAssets.tap({/** … */}, (assets) => {
 });
 ```
 
+## processAdditionalAssets
+
+`AsyncSeriesHook`
+
+Called with the assets that were added while [`processAssets`](#processassets) was running, so a plugin can process assets created by another plugin in the same stage.
+
+- Callback Parameters: `assets`
+
 ## afterProcessAssets
 
 `SyncHook`
@@ -672,6 +808,38 @@ Called to determine the path of an asset.
 `SyncBailHook`
 
 Called to determine if an asset needs to be processed further after being emitted.
+
+## processErrors
+
+`SyncWaterfallHook`
+
+Called with the compilation's errors before they are reported, and returns the list to report. Returning a shorter array drops errors.
+
+- Callback Parameters: `errors`
+
+## processWarnings
+
+`SyncWaterfallHook`
+
+Called with the compilation's warnings before they are reported. This is how [`ignoreWarnings`](/configuration/other-options/#ignorewarnings) filters them.
+
+- Callback Parameters: `warnings`
+
+## prepareModuleExecution
+
+`AsyncParallelHook`
+
+Called before a module is executed at build time, so its execution can be prepared.
+
+- Callback Parameters: `options` `context`
+
+## executeModule
+
+`SyncHook`
+
+Called when a module is executed during the build rather than at runtime — the mechanism behind `compilation.executeModule` and a loader's [`importModule`](/api/loaders/#thisimportmodule).
+
+- Callback Parameters: `options` `context`
 
 ## childCompiler
 

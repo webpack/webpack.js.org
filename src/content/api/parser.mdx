@@ -217,6 +217,38 @@ Where the `statement.type` could be:
 - `'LabeledStatement'`
 - `'WithStatement'`
 
+### preStatement
+
+`SyncBailHook`
+
+Called for every statement during the pre-walk, before any statement of the block is walked. This is where hoisted declarations are seen. Returning `true` tells the parser the statement was handled and stops the default pre-walk for it.
+
+- Callback Parameters: `statement`
+
+### blockPreStatement
+
+`SyncBailHook`
+
+Same as [`preStatement`](#prestatement), but for the block pre-walk, which only visits declarations scoped to the current block.
+
+- Callback Parameters: `statement`
+
+### unusedStatement
+
+`SyncBailHook`
+
+Called for each statement that follows a terminating statement in the same block and is therefore unreachable. Returning `true` skips walking it.
+
+- Callback Parameters: `statement`
+
+### terminate
+
+`SyncBailHook`
+
+Called for a `return` or `throw` statement outside the top-level scope. Returning `true` marks the scope as terminated, so the parser treats the statements after it as unreachable.
+
+- Callback Parameters: `statement`
+
 ### statementIf
 
 `SyncBailHook`
@@ -366,6 +398,22 @@ parser.hooks.varDeclaration.for("a").tap("MyPlugin", (identifier) => {
   // identifier is the `Identifier` node of a
 });
 ```
+
+### preDeclarator
+
+`SyncBailHook`
+
+Called for each declarator of a variable declaration during the pre-walk, before the declaration itself is walked.
+
+- Callback Parameters: `declarator` `declaration`
+
+### declarator
+
+`SyncBailHook`
+
+Called for each declarator of a variable declaration while walking it. Returning `true` stops the parser from walking that declarator itself.
+
+- Callback Parameters: `declarator` `statement`
 
 ### varDeclarationLet
 
@@ -524,6 +572,88 @@ parser.hooks.expression.for("this").tap("MyPlugin", (expression) => {});
 `SyncBailHook`
 
 Called when parsing a `ConditionalExpression` e.g. `condition ? a : b`
+
+- Callback Parameters: `expression`
+
+### expressionLogicalOperator
+
+`SyncBailHook`
+
+Called when parsing a `LogicalExpression` e.g. `a && b` or `a || b`. Returning a value stops the parser from walking the operands itself, which is how a plugin can skip a branch it evaluated as dead.
+
+- Callback Parameters: `expression`
+
+### binaryExpression
+
+`SyncBailHook`
+
+Called when parsing a `BinaryExpression` e.g. `a === b`. Returning a value stops the default walk of both operands.
+
+- Callback Parameters: `expression`
+
+### optionalChaining
+
+`SyncBailHook`
+
+Called when parsing a `ChainExpression`, i.e. an expression using optional chaining such as `a?.b` or `a?.()`.
+
+- Callback Parameters: `expression`
+
+### importCall
+
+`SyncBailHook`
+
+Called when parsing a dynamic [`import()`](/api/module-methods/#import-1). Returning `true` marks the call as handled, so webpack creates no dependency of its own for it.
+
+- Callback Parameters: `expression` `callExpression`
+
+`callExpression` is only given when the `import()` is immediately called, e.g. `import("./m").then(...)`.
+
+### topLevelAwait
+
+`SyncBailHook`
+
+Called when a top-level `await` is parsed, which is what turns the module into an async module.
+
+- Callback Parameters: `expression`
+
+### classExtendsExpression
+
+`SyncBailHook`
+
+Called with the expression a class extends, e.g. `Base` in `class A extends Base {}`.
+
+- Callback Parameters: `expression` `classDefinition`
+
+### classBodyElement
+
+`SyncBailHook`
+
+Called for each element of a class body — a method, a property definition or a static block. Returning `true` stops the parser from walking that element.
+
+- Callback Parameters: `element` `classDefinition`
+
+### classBodyValue
+
+`SyncBailHook`
+
+Called for the value of a class body element, i.e. a field initializer or a method's function expression. Returning `true` stops the parser from walking it.
+
+- Callback Parameters: `expression` `element` `classDefinition`
+
+### collectDestructuringAssignmentProperties
+
+`SyncBailHook`
+
+Called for a destructuring assignment so the properties it reads can be collected, which is what lets webpack treat a destructured import as a reference to only those exports.
+
+- Callback Parameters: `expression`
+
+### collectGuards
+
+`SyncBailHook`
+
+Called with the test of a conditional expression to collect the guards it implies, so the parser can narrow what the branches may evaluate to.
 
 - Callback Parameters: `expression`
 

@@ -157,6 +157,12 @@ Runs a plugin after a [ContextModuleFactory](/api/contextmodulefactory-hooks) is
 
 - Callback Parameters: `contextModuleFactory`
 
+### readRecords
+
+`AsyncSeriesHook`
+
+Called to read the [records](/configuration/other-options/#recordspath) of the previous build, before the compilation starts. It only runs when a records path is configured.
+
 ### beforeCompile
 
 `AsyncSeriesHook`
@@ -215,6 +221,14 @@ Executed before finishing the compilation. This hook is _not_ copied to child co
 
 - Callback Parameters: `compilation`
 
+### finishMake
+
+`AsyncSeriesHook`
+
+Called after [`make`](#make), when every entry and its dependencies have been added to the compilation but before it is finished. Use it to add modules that depend on what the build already contains.
+
+- Callback Parameters: `compilation`
+
 ### afterCompile
 
 `AsyncSeriesHook`
@@ -256,6 +270,12 @@ Called after emitting assets to output directory. This hook is _not_ copied to c
 
 - Callback Parameters: `compilation`
 
+### emitRecords
+
+`AsyncSeriesHook`
+
+Called to write the [records](/configuration/other-options/#recordspath) of this build, after the assets were emitted. Like [`readRecords`](#readrecords) it only runs when a records path is configured.
+
 ### assetEmitted
 
 `AsyncSeriesHook`
@@ -280,6 +300,14 @@ compiler.hooks.assetEmitted.tap(
 `AsyncSeriesHook`
 
 Executed when the compilation has completed. This hook is _not_ copied to child compilers.
+
+- Callback Parameters: `stats`
+
+### afterDone
+
+`SyncHook`
+
+Called after [`done`](#done) has finished, once the callbacks of the run are settled. Being synchronous, it cannot delay the build, which makes it the place for reporting that must not hold the compiler up.
 
 - Callback Parameters: `stats`
 
