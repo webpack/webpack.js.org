@@ -61,7 +61,7 @@ export default {
 };
 ```
 
-T> When running webpack without a configuration file, the entry defaults to `'./src/index.js'`. If that file does not exist — even if your `src/` directory does — webpack will throw: <br /> **`ERROR in Entry module not found: Error: Can't resolve './src'`** <br /><br /> The error says `'./src'` rather than `'./src/index.js'` because webpack resolves the directory first and then fails to find the default `index.js` inside it. To use a different entry filename, add a `webpack.config.js` as shown in the example above.
+T> When running webpack without a configuration file, the entry defaults to `'./src'`, which webpack resolves to `./src/index.js` through `resolve.mainFiles` and `resolve.extensions`. If that file does not exist — even if your `src/` directory does — webpack will throw: <br /> **`Module not found: Error: Can't resolve './src' in '/path/to/project'`** <br /><br /> The error names `'./src'` because that is the actual entry request; `index.js` is only the default file looked up inside it. To use a different entry filename, add a `webpack.config.js` as shown in the example above.
 
 T> Learn more in the [entry points](/concepts/entry-points) section.
 
@@ -75,6 +75,7 @@ You can configure this part of the process by specifying an `output` field in yo
 
 ```js
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -94,7 +95,7 @@ T> The `output` property has [many more configurable features](/configuration/ou
 
 ## Loaders
 
-Out of the box, webpack only understands JavaScript and JSON files. **Loaders** allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
+Out of the box, webpack understands JavaScript, JSON and WebAssembly files, as well as CSS and HTML through its built-in support ([Native CSS](/guides/native-css/), [Native HTML](/guides/native-html/)), which is enabled by default. **Loaders** allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
 W> One of webpack's specific features is the ability to `import` any type of module, e.g. `.css` files, which may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 

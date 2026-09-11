@@ -39,7 +39,7 @@ In addition to normal assets, the compiler needs to emit an "update" to allow up
 1. The updated [manifest](/concepts/manifest) (JSON)
 2. One or more updated chunks (JavaScript)
 
-The manifest contains the new compilation hash and a list of all updated chunks. Each of these chunks contains the new code for all updated modules (or a flag indicating that the module was removed).
+The manifest lists the ids of the updated chunks, the removed chunks and the removed modules. Each update chunk contains the new code for its updated modules; the update for the runtime chunk also carries the new compilation hash.
 
 The compiler ensures that module IDs and chunk IDs are consistent between these builds. It typically stores these IDs in memory (e.g. with [webpack-dev-server](/configuration/dev-server/)), but it's also possible to store them in a JSON file.
 
