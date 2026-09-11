@@ -47,7 +47,7 @@ The top-level structure of the output JSON file is fairly straightforward but th
   "modules": [
     // A list of module objects
   ],
-  "entryPoints": {
+  "entrypoints": {
     // A list of entry objects
   },
   "errors": [
@@ -122,10 +122,7 @@ The `chunks` object will also contain a list of `origins` describing how the giv
   "moduleId": 0, // The ID of the module
   "moduleIdentifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // Path to the module
   "moduleName": "./lib/index.web.js", // Relative path to the module
-  "name": "main", // The name of the chunk
-  "reasons": [
-    // A list of the same `reasons` found in [module objects](#module-objects)
-  ]
+  "request": "./lib/index.web.js" // The request that created the chunk group
 }
 ```
 
@@ -138,18 +135,18 @@ What good would these statistics be without some description of the compiled app
   "assets": [
     // A list of [asset objects](#asset-objects)
   ],
-  "built": true, // Indicates that the module went through [Loaders](/concepts/loaders), Parsing, and Code Generation
+  "built": true, // Indicates that the module was built ([Loaders](/concepts/loaders) and Parsing) in this compilation
   "cacheable": true, // Whether or not this module is cacheable
   "chunks": [
     // IDs of chunks that contain this module
   ],
+  "codeGenerated": true, // Indicates that the module went through Code Generation in this compilation
   "errors": 0, // Number of errors when resolving or processing the module
   "failed": false, // Whether or not compilation failed on this module
   "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables/#moduleid-commonjs))
   "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // A unique ID used internally
   "name": "./lib/index.web.js", // Path to the actual file
   "optional": false, // All requests to this module are with `try... catch` blocks (irrelevant with ESM)
-  "prefetched": false, // Indicates whether or not the module was [prefetched](/plugins/prefetch-plugin)
   "profile": {
     // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli/#profiling) (in milliseconds)
     "building": 73, // Loading and parsing
