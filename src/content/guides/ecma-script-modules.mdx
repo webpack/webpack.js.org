@@ -199,6 +199,48 @@ T> named imports only work if Node.js can detect them statically; otherwise only
 T> import is available - consider migrating to ESM
 T> or using [`@babel/plugin-transform-modules-commonjs`](https://babeljs.io/docs/babel-plugin-transform-modules-commonjs).
 
+## Dependencies that ship modern syntax
+
+webpack bundles the code of a dependency as it finds it. [`target`](/configuration/target/) and your browserslist configuration constrain the runtime code webpack _generates_ — they never downlevel the syntax you or a package wrote. So a package published with arrow functions, optional chaining or class fields reaches the browser exactly as published, and an older browser fails on it at parse time, with an error pointing into the bundle rather than at the package.
+
+This became more common with webpack 5, which resolves the [`exports` field](/guides/package-exports/), so a package that offers both a legacy and a modern build now hands webpack the modern one by default.
+
+There are two ways out, and they are not exclusive.
+
+**Transpile the dependency.** Guides — this site's [build performance](/guides/build-performance/#loaders) page included — recommend keeping loaders off `node_modules`, which is the right default: it is the bulk of the code and the slowest part to transform. Rather than dropping that rule, carve out the packages that need it:
+
+```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.m?js$/,
+        include: [
+          path.resolve(__dirname, "src"),
+          // plus the dependencies that are not ES5
+          /node_modules[\\/](pkg-a|pkg-b)[\\/]/,
+        ],
+        loader: "babel-loader",
+      },
+    ],
+  },
+};
+```
+
+The [condition grammar](/configuration/module/#condition) also expresses this the other way round — `exclude: { and: [/node_modules/], not: [/node_modules[\\/]pkg-a[\\/]/] }` skips `node_modules` except for one package.
+
+T> A package whose files mix CommonJS and ESM needs `sourceType: "unambiguous"` in the Babel options, otherwise Babel treats every file as one or the other and the wrong half breaks.
+
+**Or resolve a different build of it.** When the package still publishes an ES5 bundle under another condition or field, point webpack at it instead of transpiling — see [`resolve.conditionNames`](/configuration/resolve/#resolveconditionnames) and [`resolve.mainFields`](/configuration/resolve/#resolvemainfields). Both apply to every package webpack resolves, so narrow them with [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) or a per-package [`Rule.resolve`](/configuration/module/#ruleresolve) rather than changing them globally.
+
+W> Whichever you pick, the syntax webpack emits for its own runtime is a separate setting: keep a [browserslist](https://github.com/browserslist/browserslist) config, or set [`target`](/configuration/target/) to something like `['web', 'es5']`, so the runtime does not fail on the same browsers.
+
 ## Common Migration Errors
 
 **`ReferenceError: require is not defined`**
