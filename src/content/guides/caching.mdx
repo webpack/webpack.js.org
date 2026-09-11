@@ -357,6 +357,31 @@ Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.j
 
 We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundle's filename.
 
+## Deploying a new build
+
+Content hashes make every deploy emit a new set of filenames, and that interacts with [code splitting](/guides/code-splitting/) in a way worth planning for: a visitor who loaded the page before the deploy is running the _old_ entry chunk, which asks for the old filename of an async chunk. If that file is gone from the server, the `import()` rejects and the application sees a `ChunkLoadError` — usually as a route or a lazily loaded widget that fails for exactly as long as the tab stays open.
+
+The fix is on the deployment side, not in the configuration. Two measures cover it:
+
+**Keep the previous build's assets around.** Serving old files costs little and makes the error disappear for anyone who loaded the page before the deploy. Copy the new build over the old one instead of replacing the directory; if you clean the output directory on build, [`output.clean`](/configuration/output/#outputclean) accepts a `keep` predicate, and a CDN can expire the old objects after a day or so rather than on the next deploy.
+
+**Handle the rejection anyway.** No retention window covers a tab left open over a weekend, so treat a failed chunk load as "this page is out of date" and reload it:
+
+```js
+async function loadWidget() {
+  try {
+    return await import("./widget.js");
+  } catch {
+    // the deploy removed the chunk this build asks for
+    globalThis.location.reload();
+  }
+}
+```
+
+T> Reloading unconditionally will loop if the chunk is missing for another reason — a broken deploy, an offline user. Reload at most once (record it in `sessionStorage`), and surface a "new version available, reload" prompt instead when you already have one.
+
+Two related options: [`output.chunkLoadTimeout`](/configuration/output/#outputchunkloadtimeout) sets how long webpack waits before rejecting, and [`output.crossOriginLoading`](/configuration/output/#outputcrossoriginloading) is needed to get a useful error rather than an opaque one when chunks are served from a different origin.
+
 ## Conclusion
 
 Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the _Further Reading_ section below to learn more.
