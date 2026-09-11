@@ -716,6 +716,23 @@ export default {
 | `salt`           | `number`                       | `0`                | Mixed into the hash. Change it to move every id, for example to work around a collision.                                                                          |
 | `failOnConflict` | `boolean`                      | `false`            | Fails the build on a colliding id instead of rehashing it.                                                                                                        |
 
+### The id plugins
+
+Each value of `moduleIds` and `chunkIds` is implemented by a plugin under `webpack.ids`, which you can also use directly after setting the option to `false`. They are what the webpack 4 plugins of similar names became:
+
+| Plugin                                     | Equivalent to                | Options                                                                              |
+| ------------------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------ |
+| `webpack.ids.NaturalModuleIdsPlugin`       | `moduleIds: 'natural'`       | —                                                                                    |
+| `webpack.ids.NamedModuleIdsPlugin`         | `moduleIds: 'named'`         | `context`                                                                            |
+| `webpack.ids.DeterministicModuleIdsPlugin` | `moduleIds: 'deterministic'` | see above                                                                            |
+| `webpack.ids.OccurrenceModuleIdsPlugin`    | `moduleIds: 'size'`          | `prioritiseInitial`                                                                  |
+| `webpack.ids.NamedChunkIdsPlugin`          | `chunkIds: 'named'`          | `context`, `delimiter`                                                               |
+| `webpack.ids.DeterministicChunkIdsPlugin`  | `chunkIds: 'deterministic'`  | see above                                                                            |
+| `webpack.ids.OccurrenceChunkIdsPlugin`     | `chunkIds: 'size'`           | `prioritiseInitial`                                                                  |
+| `webpack.ids.ChunkModuleIdRangePlugin`     | —                            | `name`, `order`, `start`, `end` — assigns ids in a range to the modules of one chunk |
+
+`context` makes the generated names relative to a directory other than the compiler's, and `prioritiseInitial` gives modules of initial chunks the shorter ids.
+
 W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
 
 W> `moduleIds: total-size` has been removed in webpack 5.

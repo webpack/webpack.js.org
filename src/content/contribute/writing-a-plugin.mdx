@@ -507,6 +507,60 @@ vendor.js
 styles.css
 ```
 
+## Making your own classes cacheable
+
+A plugin that adds its own `Module` or `Dependency` class has to say how instances of it are written to and read from the [persistent cache](/configuration/cache/), or the cache will refuse to store anything that references them. `webpack.util.serialization` is the API for that:
+
+```js
+import webpack from "webpack";
+
+class MyDependency extends webpack.dependencies.ModuleDependency {
+  constructor(request, myOption) {
+    super(request);
+    this.myOption = myOption;
+  }
+
+  get type() {
+    return "my dependency";
+  }
+
+  serialize(context) {
+    const { write } = context;
+    // only this class's own fields — the base class writes its own
+    write(this.myOption);
+    super.serialize(context);
+  }
+
+  deserialize(context) {
+    const { read } = context;
+    this.myOption = read();
+    super.deserialize(context);
+  }
+}
+
+webpack.util.serialization.register(
+  MyDependency,
+  // the request webpack will `require` to get this class back when reading the
+  // cache, so it has to resolve to the file that registers it
+  "my-plugin/MyDependency",
+  null,
+  {
+    serialize(obj, context) {
+      obj.serialize(context);
+    },
+    deserialize(context) {
+      const obj = new MyDependency();
+      obj.deserialize(context);
+      return obj;
+    },
+  },
+);
+```
+
+The module also exposes `registerNotSerializable(Constructor)` for classes that must never be written, and `registerLoader(regExp, loader)` for resolving a request to the module that registers it.
+
+W> A class that is reachable from the module graph and is not registered makes the whole entry uncacheable, and webpack reports it as `No serializer registered for <Class>` with [`infrastructureLogging.debug`](/configuration/infrastructureLogging/) enabled.
+
 ## Testing your plugin
 
 Testing plugins is similar to testing any other build tool. The recommended approach is to run a webpack compilation with your plugin enabled and verify that the compilation produces the expected result.
