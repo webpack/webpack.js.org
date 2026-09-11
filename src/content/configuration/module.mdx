@@ -2716,6 +2716,31 @@ W> `Rule.resolve` is Available since webpack 4.36.1
 Resolving can be configured on module level. See all available options on [resolve configuration page](/configuration/resolve/#resolve).
 All applied resolve options get deeply merged with higher level [resolve](/configuration/resolve/#resolve).
 
+The merge is per property: an object is merged into the one above it, while an array **replaces** the one above it. Use the `"..."` item to keep the outer value instead, at the position you put it — the same convention [`resolve.extensions`](/configuration/resolve/#resolveextensions) and the other array options use at the top level. `Rule.parser` is merged the same way, and so are the options passed to [`this.getResolve(options)`](/api/loaders/#thisgetresolve) in a loader.
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.txt$/,
+        resolve: {
+          // only .txt and .md are tried here, the outer extensions are dropped
+          extensions: [".txt", ".md"],
+        },
+      },
+      {
+        test: /\.mdx$/,
+        resolve: {
+          // .mdx is tried first, then whatever the outer config had
+          extensions: [".mdx", "..."],
+        },
+      },
+    ],
+  },
+};
+```
+
 For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/default.js` and a `./src/footer/overridden.js` to demonstrate the module level resolve.
 
 **./src/index.js**

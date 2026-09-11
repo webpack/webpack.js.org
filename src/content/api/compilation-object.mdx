@@ -408,5 +408,6 @@ Accessing the old members still works, but logs a deprecation warning naming a `
 | `module.usedExports`           | `moduleGraph.getUsedExports(module, runtime)`        |
 | `module.optimizationBailout`   | `moduleGraph.getOptimizationBailout(module)`         |
 | `module.profile`               | `moduleGraph.getProfile(module)`                     |
+| `dependency.originModule`      | `moduleGraph.getParentModule(dependency)`            |
 
 T> Outside a hook that hands you the compilation you can still reach a graph through `ChunkGraph.getChunkGraphForChunk(chunk, ...)` / `ModuleGraph.getModuleGraphForModule(module, ...)`, but taking it from the compilation is preferred.

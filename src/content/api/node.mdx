@@ -388,6 +388,18 @@ compiler.run((err, stats) => {
 });
 ```
 
+webpack distinguishes three file systems on the compiler:
+
+| Property                 | Used for                                                                                              |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `inputFileSystem`        | Reading the files that are compiled — sources, `package.json`, everything the resolver touches.       |
+| `outputFileSystem`       | Writing the emitted assets.                                                                           |
+| `intermediateFileSystem` | Reading and writing files that are neither input nor output: the persistent cache, records, profiles. |
+
+`intermediateFileSystem` defaults to Node's `fs`. Set it when a build has to run without touching the disk at all, since replacing `outputFileSystem` alone still leaves the [cache](/configuration/cache/) and [records](/configuration/other-options/#recordspath) writing to it.
+
+W> `outputFileSystem` no longer needs an `mkdirp` method, and `join` is optional on it — webpack falls back to its own implementation when the file system does not provide one.
+
 Note that this is what
 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware),
 used by [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
