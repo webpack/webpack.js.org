@@ -46,6 +46,36 @@ If not set, webpack sets `production` as the default value for `mode`.
 
 T> If `mode` is not provided via configuration or CLI, CLI will use any valid `NODE_ENV` value for `mode`.
 
+### Defaults per mode
+
+`mode` doesn't do anything by itself — it picks the defaults of other options, each of which you can still set explicitly. These are the options whose default depends on it:
+
+| Option                                                                                           | `development`        | `production`      | `none`      |
+| ------------------------------------------------------------------------------------------------ | -------------------- | ----------------- | ----------- |
+| [`cache`](/configuration/cache/)                                                                 | `{ type: 'memory' }` | `false`           | `false`     |
+| [`devtool`](/configuration/devtool/)                                                             | `'eval'`             | `false`           | `false`     |
+| [`output.pathinfo`](/configuration/output/#outputpathinfo)                                       | `true`               | `false`           | `false`     |
+| [`performance.hints`](/configuration/performance/#performancehints)                              | `false`              | `'warning'`       | `false`     |
+| [`optimization.chunkIds`](/configuration/optimization/#optimizationchunkids)                     | `'named'`            | `'deterministic'` | `'natural'` |
+| [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids)                   | `'named'`            | `'deterministic'` | `'natural'` |
+| [`optimization.nodeEnv`](/configuration/optimization/#optimizationnodeenv)                       | `'development'`      | `'production'`    | `false`     |
+| [`optimization.emitOnErrors`](/configuration/optimization/#optimizationemitonerrors)             | `true`               | `false`           | `true`      |
+| [`optimization.sideEffects`](/configuration/optimization/#optimizationsideeffects)               | `'flag'`             | `true`            | `'flag'`    |
+| [`optimization.usedExports`](/configuration/optimization/#optimizationusedexports)               | `false`              | `true`            | `false`     |
+| [`optimization.innerGraph`](/configuration/optimization/#optimizationinnergraph)                 | `false`              | `true`            | `false`     |
+| [`optimization.mangleExports`](/configuration/optimization/#optimizationmangleexports)           | `false`              | `true`            | `false`     |
+| [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules) | `false`              | `true`            | `false`     |
+| [`optimization.flagIncludedChunks`](/configuration/optimization/#optimizationflagincludedchunks) | `false`              | `true`            | `false`     |
+| [`optimization.realContentHash`](/configuration/optimization/#optimizationrealcontenthash)       | `false`              | `true`            | `false`     |
+| [`optimization.checkWasmTypes`](/configuration/optimization/#optimizationcheckwasmtypes)         | `false`              | `true`            | `false`     |
+| [`optimization.minimize`](/configuration/optimization/#optimizationminimize)                     | `false`              | `true`            | `false`     |
+
+[`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) is also tuned by mode: `minSize`, `enforceSizeThreshold`, `maxAsyncRequests` and `maxInitialRequests` are stricter in `production`. See [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) for their values.
+
+Two rows come with a condition: `performance.hints` only applies to browser [targets](/configuration/target/), and `devtool` stays `false` in `development` when the build [outputs an ES module library](/configuration/output/#outputlibrarytype). With [`experiments.css`](/configuration/experiments/#experimentscss) enabled, `development` additionally defaults CSS assets to `source-map`.
+
+T> `mode: 'none'` only opts out of the defaults listed here. Options that don't depend on the mode — such as [`optimization.providedExports`](/configuration/optimization/#optimizationprovidedexports) or [`optimization.removeEmptyChunks`](/configuration/optimization/#optimizationremoveemptychunks) — keep their usual defaults, and `mode: 'none'` is not the same as disabling every optimization.
+
 ### Mode: development
 
 ```js

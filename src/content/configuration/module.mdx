@@ -2390,7 +2390,7 @@ export default {
 
 `function(input) => string | object`
 
-If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a function that implements custom logic to parse module's source and convert it to a JavaScript `object`. It may be useful to import `toml`, `yaml` and other non-JSON files as JSON, without specific loaders:
+If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a function that implements custom logic to parse module's source and convert it to a JavaScript `object`. It defaults to `JSON.parse`. It may be useful to import `toml`, `yaml` and other non-JSON files as JSON, without specific loaders:
 
 **webpack.config.js**
 
@@ -2412,6 +2412,10 @@ export default {
   },
 };
 ```
+
+The `type: 'json'` above is not redundant, and webpack can't assume it. [`Rule.parser`](#ruleparser) is handed to the parser of the module type that the rule selects, and only [`Rule.type`](#ruletype) selects that type — by default only `.json` files and modules with the `application/json` mimetype are of type `'json'`, so a `.toml` file would otherwise be parsed as JavaScript and the `parse` function would never run.
+
+Every module type validates the parser options it is given against its own schema, so `parse` doesn't carry over to types that don't have it. With `type: 'asset'`, for example, the build fails with `parser has an unknown property 'parse'`.
 
 ## Rule.rules
 
@@ -2840,6 +2844,8 @@ Example for an `unknown` dynamic dependency: `require`.
 Example for an `expr` dynamic dependency: `require(expr)`.
 
 Example for an `wrapped` dynamic dependency: `require('./templates/' + expr)`.
+
+The same settings apply to the equivalent `import()` calls, so `exprContextRegExp` is what decides which modules a fully dynamic `import(expr)` pulls in. See [Dynamic expressions in import()](/api/module-methods/#dynamic-expressions-in-import) for what happens with the defaults.
 
 Here are the available options with their [defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js):
 

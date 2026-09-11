@@ -372,7 +372,9 @@ Both `hash` and `timestamp` are optional.
 
 An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
 
-Make sure to wrap the path in a capture group if you use regular expressions.
+webpack records nothing at all for files below these paths — no timestamp, no content hash — and never checks them again. Reserve it for directories whose path itself changes whenever the content changes, such as the zip cache of [Yarn Plug'n'Play](https://yarnpkg.com/features/pnp), where the package version is part of the path. Editing a file below an immutable path will not invalidate anything that was built from it.
+
+A regular expression here is only tested against the path, so it doesn't need a capture group.
 
 ### managedPaths
 
@@ -380,7 +382,11 @@ Make sure to wrap the path in a capture group if you use regular expressions.
 
 An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
 
-Make sure you wrap the path in a capture group if you are using regular expressions so webpack can extract the path, for example, here's a RegExp webpack internally uses to match the `node_modules` directory:
+For files below these paths webpack does not snapshot the files themselves. It instead determines the package directory that contains the file and records `name@version` as read from that directory's `package.json`. Everything built from the package is invalidated when that string changes — which happens when the package manager installs a different version — and not when a file inside the package is edited in place. That is the difference from [`immutablePaths`](#immutablepaths): a managed path is still re-checked on every build, just once per package instead of once per file.
+
+"Otherwise" in the description above means exactly this: if you edit a file in `node_modules` by hand, or a tool patches one after install without changing the version, webpack keeps using the cached result. List such packages under [`unmanagedPaths`](#unmanagedpaths) (or narrow `managedPaths`, as shown below) so their files are snapshotted individually.
+
+Make sure the directory that contains the packages is wrapped in the first capture group of your regular expression, so webpack can extract it — for example, here's a RegExp webpack internally uses to match the `node_modules` directory:
 
 ```text
 /^(.+?[\\/]node_modules)[\\/]/
@@ -406,7 +412,9 @@ export default {
 
 An array of paths that are not managed by a package manager and the contents are subject to change.
 
-Make sure to wrap the path in a capture group if you use regular expressions.
+It is checked before [`immutablePaths`](#immutablepaths) and [`managedPaths`](#managedpaths), so it is the way to carve a directory out of them — a linked package inside `node_modules`, for example. Files below an unmanaged path are snapshotted individually, according to [`snapshot.module`](#module) and [`snapshot.resolve`](#resolve).
+
+A regular expression here is only tested against the path, so it doesn't need a capture group.
 
 ### module
 

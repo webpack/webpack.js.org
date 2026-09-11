@@ -43,6 +43,29 @@ export default {
 };
 ```
 
+### Defaults
+
+These are the defaults each option starts from. Where a default depends on the [`target`](/configuration/target/) or on how a module is requested, the option's own section below gives the exact rules.
+
+| Option                                         | Default                                                                         |
+| ---------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`extensions`](#resolveextensions)             | `['.js', '.json', '.wasm']`                                                     |
+| [`mainFiles`](#resolvemainfiles)               | `['index']`                                                                     |
+| [`mainFields`](#resolvemainfields)             | `['browser', 'module', 'main']` for web targets, `['module', 'main']` otherwise |
+| [`aliasFields`](#resolvealiasfields)           | `['browser']` for web targets, `[]` otherwise                                   |
+| [`modules`](#resolvemodules)                   | `['node_modules']`                                                              |
+| [`descriptionFiles`](#resolvedescriptionfiles) | `['package.json']`                                                              |
+| [`exportsFields`](#resolveexportsfields)       | `['exports']`                                                                   |
+| [`importsFields`](#resolveimportsfields)       | `['imports']`                                                                   |
+| [`conditionNames`](#resolveconditionnames)     | derived from `mode` and `target`, e.g. `['webpack', 'production', 'browser']`   |
+| [`roots`](#resolveroots)                       | `[context]`                                                                     |
+| [`symlinks`](#resolvesymlinks)                 | `true`                                                                          |
+| [`preferRelative`](#resolvepreferrelative)     | `false`, except for `new URL()` and worker requests                             |
+| [`preferAbsolute`](#resolvepreferabsolute)     | `false`                                                                         |
+| [`enforceExtension`](#resolveenforceextension) | `false`                                                                         |
+
+T> `extensions`, `mainFields`, `aliasFields` and `conditionNames` are additionally refined per dependency type through [`resolve.byDependency`](#resolvebydependency) — a `require()` and an `import` of the same package can resolve to different files. The table there lists those values.
+
 ### resolve.alias
 
 `object`
@@ -221,6 +244,18 @@ export default {
 ### resolve.byDependency
 
 Configure resolve options by the type of module request.
+
+webpack ships defaults for the dependency types it knows, which is why an `import` and a `require()` of the same request can resolve differently. `'...'` stands for the value configured outside `byDependency`:
+
+| Dependency type                                     | Defaults                                                                                                                                                  |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `esm`, `wasm`, `loaderImport`                       | `conditionNames: ['import', 'module-sync', 'module', '...']`, `mainFields: ['browser', 'module', '...']` on web targets and `['module', '...']` elsewhere |
+| `commonjs`, `amd`, `loader`, `unknown`, `undefined` | the same, with `conditionNames: ['require', 'module-sync', 'module', '...']`                                                                              |
+| `worker`                                            | as `esm`, with `'worker'` prepended to `conditionNames` and `preferRelative: true`                                                                        |
+| `url`                                               | `preferRelative: true`                                                                                                                                    |
+| `css-import`                                        | `conditionNames: ['webpack', <mode>, 'style']`, `mainFields: ['style', '...']`, `mainFiles: []`, `extensions: ['.css']`, `preferRelative: true`           |
+
+`mainFiles: []` for CSS is deliberate: a CSS `@import` never resolves a directory to a main file, so the full path has to be written out.
 
 - Type: `[type: string]: ResolveOptions`
 - Example:
