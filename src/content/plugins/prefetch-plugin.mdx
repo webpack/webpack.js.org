@@ -19,3 +19,25 @@ new webpack.PrefetchPlugin([context], request);
 
 - `context`: An absolute path to a directory
 - `request`: A request string for a normal module
+
+## What it does
+
+webpack discovers modules by walking the dependency graph: a module deep in an import chain is only resolved once everything above it has been parsed. A long chain therefore builds partly in sequence, even though webpack processes modules in parallel wherever it can.
+
+This plugin starts one such chain at the very beginning of the compilation instead, when webpack would otherwise be waiting for the first modules to be parsed. By the time the real `import` is found, the module is already built and the result is reused.
+
+```js
+import path from "node:path";
+import webpack from "webpack";
+
+export default {
+  plugins: [
+    // start building the heaviest dependency right away
+    new webpack.PrefetchPlugin(path.resolve("./src"), "./deeply/nested/heavy"),
+  ],
+};
+```
+
+Prefetching a module that the build never imports only wastes the work: the module ends up in no chunk and nothing is emitted for it. That makes profiling the build first worthwhile — see [Build performance](/guides/build-performance/) — because the win depends entirely on picking a request that is both expensive and discovered late.
+
+W> This is about **build time**, not about what the browser does. It emits no [`<link rel="prefetch">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/prefetch) tag and changes nothing in the output. To tell the browser to fetch a chunk ahead of time, use the `webpackPrefetch` [magic comment](/api/module-methods/#magic-comments) described in [Prefetching/Preloading modules](/guides/code-splitting/#prefetchingpreloading-modules).
