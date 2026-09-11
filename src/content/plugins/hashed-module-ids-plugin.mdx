@@ -8,7 +8,9 @@ contributors:
   - EslamHiko
 ---
 
-This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id. Suggested for use in production.
+This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id.
+
+W> Prefer [`optimization.moduleIds: 'deterministic'`](/configuration/optimization/#optimizationmoduleids). It is already the default in `production`, so a production build needs no plugin and no option to get stable module IDs. Selecting the equivalent `optimization.moduleIds: 'hashed'` makes webpack emit a deprecation warning pointing at `'deterministic'` — this plugin is what that value applies.
 
 ```js
 new webpack.ids.HashedModuleIdsPlugin({
