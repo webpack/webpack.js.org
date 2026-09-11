@@ -89,7 +89,7 @@ the package author may let the module system choose one based on conditions abou
 
 In this case an object mapping conditions to results should be used.
 Conditions are tried in object order.
-Conditions that contain invalid results are skipped.
+Once a condition matches, its target is used; if that target is `null` or cannot be resolved, resolution fails rather than trying later conditions.
 Conditions might be nested to create a logical AND.
 The last condition in the object might be the special `"default"` condition,
 which is always matched.
@@ -115,14 +115,13 @@ Example:
 This translates to something like:
 
 ```ts
-if (red && valid("./stop.js")) return "./stop.js";
-if (yellow && valid("./stop.js")) return "./stop.js";
+if (red) return "./stop.js";
+if (yellow) return "./stop.js";
 if (green) {
-  if (free && valid("./drive.js")) return "./drive.js";
-  if (valid("./wait.js")) return "./wait.js";
+  if (free) return "./drive.js";
+  return "./wait.js";
 }
-if (valid("./drive-carefully.js")) return "./drive-carefully.js";
-throw new ModuleNotFoundError();
+return "./drive-carefully.js";
 ```
 
 The available conditions vary depending on the module system and tool used.
@@ -201,7 +200,7 @@ One of these conditions is set depending on the syntax used to reference the mod
 | --------- | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
 | `import`  | Request is issued from ESM syntax or similar.                     | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
 | `require` | Request is issued from CommonJs/AMD syntax or similar.            | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
-| `style`   | Request is issued from a stylesheet reference.                    |                                                                      |
+| `style`   | Request is issued from a stylesheet reference.                    | webpack                                                              |
 | `sass`    | Request is issued from a sass stylesheet reference.               |                                                                      |
 | `asset`   | Request is issued from a asset reference.                         |                                                                      |
 | `script`  | Request is issued from a normal script tag without module system. |                                                                      |
@@ -226,7 +225,7 @@ The following syntax will set the `import` condition:
 - HTML `<link rel="preload/prefetch">` in HTML
 - JS `new Worker(..., { type: "module" })`
 - WASM `import` section
-- ESM HMR (webpack) `import.hot.accept/decline([...])`
+- ESM HMR (webpack) `import.meta.webpackHot.accept/decline([...])`
 - JS `Worklet.addModule`
 - Using javascript as entrypoint
 
@@ -293,7 +292,8 @@ The following conditions are set depending on the target environment:
 | `worker`       | Code will run in a (Web)Worker.<sup>(1)</sup> | webpack                             |
 | `worklet`      | Code will run in a Worklet.<sup>(1)</sup>     |                                     |
 | `node`         | Code will run in Node.js.                     | Node.js, webpack, wmr<sup>(2)</sup> |
-| `deno`         | Code will run in Deno.                        |                                     |
+| `deno`         | Code will run in Deno.                        | webpack                             |
+| `bun`          | Code will run in Bun.                         | webpack                             |
 | `react-native` | Code will run in react-native.                |                                     |
 
 (1) `electron`, `worker` and `worklet` comes combined with either `node` or `browser`, depending on the context.

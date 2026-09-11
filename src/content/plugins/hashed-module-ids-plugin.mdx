@@ -24,9 +24,9 @@ This plugin supports the following options:
 - `hashFunction`: The hashing algorithm to use, defaults to `'md4'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported.
 - `hashDigest`: The encoding to use when generating the hash, defaults to `'base64'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
 
-  <Badge text="5.104.0+" />
+  <Badge text="5.102.1+" />
 
-  In addition to standard Node.js encodings, webpack also supports custom digest algorithms: `'base64url'`, `'base62'`, `'base58'`, `'base52'`, `'base49'`, `'base36'`, `'base32'`, and `'base25'`. These are useful for generating shorter or URL-safe hash values.
+  In addition to standard Node.js encodings, this plugin also supports `'base64url'`, which is useful for generating URL-safe hash values. The custom bases (`'base26'`, `'base32'`, `'base36'`, `'base49'`, `'base52'`, `'base58'`, `'base62'`) are only available for [`output.hashDigest`](/configuration/output/#outputhashdigest).
 
 - `hashDigestLength`: The prefix length of the hash digest to use, defaults to `4`. Note that some generated ids might be longer than specified here, to avoid module id collisions.
 
@@ -49,7 +49,7 @@ new webpack.ids.HashedModuleIdsPlugin({
 });
 ```
 
-**Using URL-safe encoding (5.104.0+):**
+**Using URL-safe encoding (5.102.1+):**
 
 ```js
 import path from "node:path";

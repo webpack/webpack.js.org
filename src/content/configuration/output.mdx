@@ -217,9 +217,11 @@ export default {
 
 ## output.chunkLoadingGlobal
 
-`string = 'webpackChunkwebpack'`
+`string = 'webpackChunk' + output.uniqueName`
 
-The global variable is used by webpack for loading chunks.
+The name of the global array webpack uses to load chunks whenever [`output.chunkFormat`](#outputchunkformat) is `'array-push'`, which is the default for the `web` and `webworker` [targets](/configuration/target/). The default name is `'webpackChunk'` followed by [`output.uniqueName`](#outputuniquename), with every character that is not valid in a JavaScript identifier replaced by `_`. The array lives on [`output.globalObject`](#outputglobalobject), so in a browser build of a package named `my-app` it is `self['webpackChunkmy_app']`.
+
+Every chunk file pushes its modules into that array, and the runtime contained in the initial chunk replaces the array's `push` method with its own callback. That way chunks that were loaded before the runtime and chunks that arrive after it are both installed, which is what makes asynchronous chunk loading work without a fixed loading order.
 
 **webpack.config.js**
 
@@ -232,6 +234,14 @@ export default {
   },
 };
 ```
+
+T> This option replaces webpack 4's `output.jsonpFunction`. Passing `jsonpFunction` to webpack 5 fails validation with a message pointing at `output.chunkLoadingGlobal`.
+
+Two builds loaded by one document that share the same `chunkLoadingGlobal` push their chunks into each other's array, which typically surfaces as a runtime error such as `Uncaught TypeError: __webpack_modules__[moduleId] is not a function`.
+
+webpack 5 prevents that by deriving the default from [`output.uniqueName`](#outputuniquename), which in turn defaults to the `name` in your `package.json`. So you only need to set this option — or, better, `output.uniqueName` — when several builds on a page would otherwise end up with the same unique name: a host application and a remote built from the same package name, or a library built twice with the same configuration.
+
+W> Prefer setting [`output.uniqueName`](#outputuniquename): it disambiguates [`output.hotUpdateGlobal`](#outputhotupdateglobal) and [`output.devtoolNamespace`](#outputdevtoolnamespace) along with the chunk loading global, whereas `chunkLoadingGlobal` only changes the latter.
 
 ## output.chunkLoading
 
@@ -561,18 +571,21 @@ export default {
 
 The following substitutions are available in template strings (via webpack's internal [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/main/lib/ModuleFilenameHelpers.js)):
 
-| Template                 | Description                                                                                         |
-| ------------------------ | --------------------------------------------------------------------------------------------------- |
-| [absolute-resource-path] | The absolute filename                                                                               |
-| [all-loaders]            | Automatic and explicit loaders and params up to the name of the first loader                        |
-| [hash]                   | The hash of the module identifier                                                                   |
-| [id]                     | The module identifier                                                                               |
-| [loaders]                | Explicit loaders and params up to the name of the first loader                                      |
-| [resource]               | The path used to resolve the file and any query params used on the first loader                     |
-| [resource-path]          | The path used to resolve the file without any query params                                          |
-| [namespace]              | The modules namespace. This is usually the library name when building as a library, empty otherwise |
+| Template                 | `info` property        | Description                                                                                         |
+| ------------------------ | ---------------------- | --------------------------------------------------------------------------------------------------- |
+| [absolute-resource-path] | `absoluteResourcePath` | The absolute filename                                                                               |
+| [all-loaders]            | `allLoaders`           | Automatic and explicit loaders and params up to the name of the first loader                        |
+| [hash]                   | `hash`                 | The hash of the module identifier                                                                   |
+| [id]                     | `moduleId`             | The module id                                                                                       |
+| [identifier]             | `identifier`           | The module identifier, which includes every loader and the query                                    |
+| [loaders]                | `loaders`              | Explicit loaders and params up to the name of the first loader                                      |
+| [query]                  | `query`                | The query of the resource, including the leading `?`, or an empty string                            |
+| [resource]               | `resource`             | The path used to resolve the file and any query params used on the first loader                     |
+| [resource-path]          | `resourcePath`         | The path used to resolve the file without any query params                                          |
+| [short-identifier]       | `shortIdentifier`      | The readable module identifier, as shown in [stats](/configuration/stats/)                          |
+| [namespace]              | `namespace`            | The modules namespace. This is usually the library name when building as a library, empty otherwise |
 
-When using a function, the same options are available camel-cased via the `info` parameter:
+When using a function, the same values are available through the `info` parameter, under the property names listed above. Note that they are not always the camel-cased template name: `[id]` is `info.moduleId`.
 
 ```js
 export default {

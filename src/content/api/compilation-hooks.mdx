@@ -22,7 +22,7 @@ compilation of all the modules in the dependency graph of an application.
 During the compilation phase, modules are loaded, sealed, optimized, chunked,
 hashed and restored.
 
-The `Compilation` class also extends `Tapable` and provides the following
+The `Compilation` class also exposes a `hooks` object of tapable hooks and provides the following
 lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ```js
@@ -85,7 +85,7 @@ Called when all modules have been built without errors.
 
 ## finishRebuildingModule
 
-`SyncHook`
+`AsyncSeriesHook`
 
 Executed when a module has been rebuilt, in case of both success or with errors.
 
@@ -160,7 +160,7 @@ Called after modules optimization has completed.
 
 Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
 
-- Callback Parameters: `chunks`
+- Callback Parameters: `chunks` `chunkGroups`
 
 ## afterOptimizeChunks
 
@@ -168,7 +168,7 @@ Called at the beginning of the chunk optimization phase. A plugin can tap into t
 
 Fired after chunk optimization has completed.
 
-- Callback Parameters: `chunks`
+- Callback Parameters: `chunks` `chunkGroups`
 
 ## optimizeTree
 
@@ -188,7 +188,7 @@ Called after the dependency tree optimization has completed with success.
 
 ## optimizeChunkModules
 
-`SyncBailHook`
+`AsyncSeriesBailHook`
 
 Called after the tree optimization, at the beginning of the chunk modules optimization. A plugin can tap into this hook to perform optimizations of chunk modules.
 
@@ -206,7 +206,7 @@ Called after the chunkmodules optimization has completed successfully.
 
 `SyncBailHook`
 
-Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed ([`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) and [`recordHash`](#recordhash)).
+Called to determine whether or not to store records. Returning `false` prevents the "record" hooks from being executed ([`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) and [`recordHash`](#recordhash)); any other value allows them.
 
 ## reviveModules
 
@@ -348,7 +348,7 @@ Called before modules are hashed.
 
 ## afterModuleHash
 
-`syncHook`
+`SyncHook`
 
 Called after modules are hashed.
 
@@ -639,7 +639,9 @@ Executed right after `needAdditionalSeal`.
 
 Triggered to emit the hash for each chunk.
 
-- Callback Parameters: `chunk` `chunkHash`
+- Callback Parameters: `chunk` `chunkHash` `context`
+
+`context` is a `ChunkHashContext` holding `chunkGraph`, `moduleGraph`, `runtimeTemplate` and `codeGenerationResults`.
 
 ## moduleAsset
 
@@ -663,7 +665,7 @@ Triggered when an asset from a chunk was added to the compilation.
 
 Called to determine the path of an asset.
 
-- Callback Parameters: `path` `options`
+- Callback Parameters: `path` `options` `assetInfo`
 
 ## needAdditionalPass
 
@@ -678,6 +680,14 @@ Called to determine if an asset needs to be processed further after being emitte
 Executed after setting up a child compiler.
 
 - Callback Parameters: `childCompiler` `compilerName` `compilerIndex`
+
+## log
+
+`SyncBailHook`
+
+Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/infrastructureLogging/).
+
+- Callback Parameters: `origin`, `logEntry`
 
 ## normalModuleLoader
 

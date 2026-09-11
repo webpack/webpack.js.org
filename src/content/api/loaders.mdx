@@ -267,7 +267,7 @@ this.callback(
 1. The first argument must be an `Error` or `null`
 2. The second argument is a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
 3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
-4. Optional: The fourth option, ignored by webpack, can be anything (e.g. some metadata).
+4. Optional: The fourth argument (`meta`) can be anything (e.g. some metadata). webpack only reads `meta.webpackAST` and uses it as the pre-parsed AST; everything else is passed on to the next loader.
 
 T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
 
@@ -311,10 +311,10 @@ T> Unlike throwing an Error directly, it will NOT interrupt the compilation proc
 ### this.emitFile
 
 ```ts
-emitFile(name: string, content: Buffer|string, sourceMap: {...})
+emitFile(name: string, content: Buffer|string, sourceMap: {...}, assetInfo?: AssetInfo)
 ```
 
-Emit a file. This is webpack-specific.
+Emit a file. This is webpack-specific. The optional `assetInfo` is stored as the asset's info in `buildInfo.assetsInfo`.
 
 ### this.emitWarning
 
@@ -446,6 +446,7 @@ An alternative lightweight solution for the child compiler to compile and execut
 
 - `request`: the request string to load the module from
 - `options`:
+  - `baseUri`: the base URI used for the built modules <Badge text="5.70.0+" />
   - `layer`: specify a layer in which this module is placed/compiled
   - `publicPath`: the public path used for the built modules
 - `callback`: an optional Node.js style callback returning the exports of the module or a namespace object for ESM. `importModule` will return a Promise if no callback is provided.
@@ -528,7 +529,21 @@ Resolves the given request to a module, applies all configured loaders and calls
 An array of all the loaders. It is writable in the pitch phase.
 
 ```ts
-loaders = [{request: string, path: string, query: string, module: function}]
+loaders = [{
+  request: string,
+  path: string,
+  query: string,
+  fragment: string,
+  options: object | string | undefined,
+  ident: string,
+  normal: function | undefined,
+  pitch: function | undefined,
+  raw: boolean | undefined,
+  data: object | undefined,
+  pitchExecuted: boolean,
+  normalExecuted: boolean,
+  type?: 'commonjs' | 'module'
+}]
 ```
 
 In [the example](#example-for-the-loader-context):
@@ -539,13 +554,13 @@ In [the example](#example-for-the-loader-context):
     request: "/abc/loader1.js?xyz",
     path: "/abc/loader1.js",
     query: "?xyz",
-    module: [Function],
+    normal: [Function],
   },
   {
     request: "/abc/node_modules/loader2/index.js",
     path: "/abc/node_modules/loader2/index.js",
     query: "",
-    module: [Function],
+    normal: [Function],
   },
 ];
 ```
@@ -601,7 +616,20 @@ In [the example](#example-for-the-loader-context): `'?rrr'`
 
 ### this.rootContext
 
-Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+The absolute path of the project's base directory, i.e. the [`context`](/configuration/entry-context/#context) option of the configuration, which defaults to the directory webpack was started from. Unlike [`this.context`](#thiscontext), which is the directory of the module being loaded, it is the same for every module of a compilation.
+
+Use it whenever a loader needs a path that is stable across modules: to make a path relative for an output name or a source map, to look up a configuration file next to the project root, or to key a cache by project rather than by file.
+
+```js
+import path from "node:path";
+
+export default function loader(source) {
+  const relative = path.relative(this.rootContext, this.resourcePath);
+  // …
+}
+```
+
+T> Since webpack 4, this replaces the former `this.options.context`.
 
 ### this.sourceMap
 
@@ -674,19 +702,11 @@ W> The usage of these properties is highly discouraged since we are planning to 
 
 ### this.debug
 
-A boolean flag. It is set when in debug mode.
-
-### this.inputValue
-
-Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
+No longer set by webpack. It is only set when `LoaderOptionsPlugin` is configured with a `debug` option, which copies the option onto the loader context.
 
 ### this.minimize
 
-Tells if result should be minimized.
-
-### this.value
-
-Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
+No longer set by webpack. It is only set when `LoaderOptionsPlugin` is configured with a `minimize` option, which copies the option onto the loader context.
 
 ### this.\_module
 

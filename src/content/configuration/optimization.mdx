@@ -111,6 +111,13 @@ export default {
 };
 ```
 
+`webpack.ids.DeterministicChunkIdsPlugin` is the plugin behind `chunkIds: 'deterministic'`. It hashes each chunk's name — its path relative to `context`, so ids don't change when the project moves — into a number, and it accepts these options:
+
+| Option      | Type     | Default            | Description                                                                                                                                                      |
+| ----------- | -------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`   | `string` | `compiler.context` | The directory chunk names are made relative to before hashing.                                                                                                   |
+| `maxLength` | `number` | `3`                | The number of digits ids start with. webpack keeps multiplying that range by ten until it is roughly 20 times the number of chunks, which keeps collisions rare. |
+
 ## optimization.concatenateModules
 
 `boolean` `object`
@@ -663,6 +670,17 @@ export default {
   ],
 };
 ```
+
+`webpack.ids.DeterministicModuleIdsPlugin` is the plugin behind `moduleIds: 'deterministic'`. It hashes each module's request — made relative to `context`, so ids survive a checkout in another directory — into a number, and it accepts these options:
+
+| Option           | Type                           | Default            | Description                                                                                                                                                       |
+| ---------------- | ------------------------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`        | `string`                       | `compiler.context` | The directory module names are made relative to before hashing.                                                                                                   |
+| `test`           | `function (module) => boolean` | all modules        | Restricts the plugin to the modules it returns `true` for, so another plugin can name the rest.                                                                   |
+| `maxLength`      | `number`                       | `3`                | The number of digits ids start with. webpack keeps multiplying that range by ten until it is roughly 20 times the number of modules, which keeps collisions rare. |
+| `fixedLength`    | `boolean`                      | `false`            | Keeps the id space at `maxLength` digits instead of growing it.                                                                                                   |
+| `salt`           | `number`                       | `0`                | Mixed into the hash. Change it to move every id, for example to work around a collision.                                                                          |
+| `failOnConflict` | `boolean`                      | `false`            | Fails the build on a colliding id instead of rehashing it.                                                                                                        |
 
 W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
 

@@ -194,7 +194,7 @@ This becomes a problem when the module is executed in a CommonJS context where `
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
- exports default {
+ export default {
    entry: './src/index.js',
    output: {
      filename: 'main.js',
@@ -203,7 +203,7 @@ This becomes a problem when the module is executed in a CommonJS context where `
 +  module: {
 +    rules: [
 +      {
-+        test: import.meta.resolve('./src/index.js'),
++        test: fileURLToPath(import.meta.resolve('./src/index.js')),
 +        use: 'imports-loader?wrapper=window',
 +      },
 +    ],
@@ -269,11 +269,11 @@ Now, while you'd likely never do this in your own source code, you may encounter
    module: {
      rules: [
        {
-         test: import.meta.resolve('./src/index.js'),
+         test: fileURLToPath(import.meta.resolve('./src/index.js')),
          use: 'imports-loader?wrapper=window',
        },
 +      {
-+        test: import.meta.resolve('./src/globals.js'),
++        test: fileURLToPath(import.meta.resolve('./src/globals.js')),
 +        use:
 +          'exports-loader?type=commonjs&exports=file,multiple|helpers.parse|parse',
 +      },
@@ -496,7 +496,7 @@ See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset
 
 ## Node Built-Ins
 
-Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
+Node built-ins like `global`, `__dirname` and `__filename` can be handled directly from your configuration file with the [`node`](/configuration/node) option, without the use of any special loaders or plugins. `process` and Node core modules such as `buffer` are not polyfilled by webpack 5; provide them with [`ProvidePlugin`](/plugins/provide-plugin/) or [`resolve.fallback`](/configuration/resolve/#resolvefallback). See the [node configuration page](/configuration/node) for more information and examples.
 
 ## Other Utilities
 

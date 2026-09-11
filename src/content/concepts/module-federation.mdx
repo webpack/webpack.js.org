@@ -59,6 +59,12 @@ Shared modules are modules that are both overridable and provided as overrides t
 
 The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
 
+### Every build needs its own unique name
+
+Builds loaded by one document identify themselves by [`output.uniqueName`](/configuration/output/#outputuniquename), which webpack derives from the `name` field of your `package.json`. Two builds that share that name also share the global array their runtimes load chunks from ([`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)) and become indistinguishable to the shared-module runtime, which uses the unique name to decide which build's copy of a shared module wins.
+
+This applies to a host and a single remote as much as to several remotes, and it is easy to run into when a remote is split out of an existing project and keeps its `package.json`. See [Setting `output.uniqueName`](#setting-outputuniquename) for how to fix it.
+
 ## Building blocks
 
 ### ContainerPlugin (low level)

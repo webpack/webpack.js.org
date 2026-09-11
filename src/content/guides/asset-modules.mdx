@@ -148,7 +148,7 @@ All `.png` files will be emitted to the output directory and their paths will be
 
 ### Custom output filename
 
-By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory.
+By default, `asset/resource` modules are emitting with `[hash][ext][query][fragment]` filename into output directory.
 
 You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
 
@@ -373,10 +373,10 @@ new URL(
 // target: webworker
 new URL(`${__webpack_public_path__}logo.svg`, self.location);
 
-// target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
+// target: node, node-webkit, nwjs, electron-main, electron-preload, async-node
 new URL(
   `${__webpack_public_path__}logo.svg`,
-  require("node:url").pathToFileUrl(__filename),
+  require("node:url").pathToFileURL(__filename),
 );
 ```
 

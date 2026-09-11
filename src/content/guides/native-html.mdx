@@ -88,7 +88,7 @@ export default {
 
 This is the HTML-first model Vite and Parcel use: the page is the source of truth about which scripts and styles it needs, so there is no second list of entry points to keep in sync.
 
-T> When `experiments.html` is enabled, `.html` is added to the default [`resolve.extensions`](/configuration/resolve/#resolveextensions) ahead of the JavaScript extensions, so `entry: './src'` resolves `./src/index.html` even when `./src/index.js` exists.
+T> When `experiments.html` is set to `true` explicitly, `.html` is added to the default [`resolve.extensions`](/configuration/resolve/#resolveextensions) ahead of the JavaScript extensions, so `entry: './src'` resolves `./src/index.html` even when `./src/index.js` exists. With the `'auto'` default, `.html` is only a fallback after `.js`.
 
 ### 2. A generated page for a JavaScript entry
 
@@ -531,7 +531,7 @@ Inline `<style>` elements and `style=""` attributes are minified with the CSS mi
 
 ## Hot Module Replacement
 
-HTML modules support [Hot Module Replacement](/concepts/hot-module-replacement/) with no extra configuration — it activates whenever HMR is on, for example via [`devServer.hot`](/configuration/dev-server/#devserverhot). For a page extracted to a real `.html` file, each update patches `document.body.innerHTML` and `document.title` in place; a change to `<head>` beyond the title falls back to a full reload.
+HTML modules support [Hot Module Replacement](/concepts/hot-module-replacement/) with no extra configuration — it activates whenever HMR is on, for example via [`devServer.hot`](/configuration/dev-server/#devserverhot). For a page extracted to a real `.html` file, each update patches `document.body.innerHTML` and `document.title` in place; other `<head>` changes are patched in place as a delta, and only a removed `<script>` that already ran, or a reordering, falls back to a full reload.
 
 ## Plugin hooks
 
@@ -618,7 +618,7 @@ Your imports do not change:
 import page from "./page.html";
 ```
 
-T> While `experiments.html` is `'auto'` (the default since 5.109.0), a `module.rules` entry that still names `html-loader` keeps that rule on the loader. Migrate one rule at a time and delete the rule last.
+T> While `experiments.html` is `'auto'` (the default since 5.109.0), any `module.rules` entry that still matches `.html` files with a loader or a `type` switches native HTML off for the whole build. To migrate one rule at a time, set `experiments.html: true` explicitly and give the rules that still use `html-loader` `type: 'javascript/auto'`, so the loader output is not parsed as HTML.
 
 ## Migrating from `html-webpack-plugin`
 
@@ -972,7 +972,7 @@ export default {
 
 ### Output options
 
-Everything under [`output.html`](/configuration/output/#outputhtml) describes the page webpack generates for a JavaScript entrypoint. Authored pages keep their own markup — of these, only `inject`, `inline`, `scriptLoading` and `integrity` affect what is injected into them.
+Everything under [`output.html`](/configuration/output/#outputhtml) describes the page webpack generates for a JavaScript entrypoint. Authored pages keep their own markup — of these, only `inject`, `inline`, `integrity` and `csp` affect what is injected into them; `scriptLoading` applies to generated pages only.
 
 | Option                                                                       | Type                                         | Default                                  | Description                                                |
 | ---------------------------------------------------------------------------- | -------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------- |
@@ -1132,11 +1132,8 @@ Every option of [`optimization.minimize.html`](/configuration/optimization/#opti
 
 | Option                          | Type                                                         | Default   | Description                                                                  |
 | ------------------------------- | ------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------- |
-| `collapseBooleanAttributes`     | `boolean`                                                    | `true`    | `disabled="disabled"` becomes the bare name.                                 |
-| `collapseWhitespace`            | `boolean \| 'conservative' \| 'smart' \| 'all'`              | `true`    | Collapse whitespace runs; `pre` / `textarea` / `listing` are left alone.     |
+| `collapseBooleanAttributes`     | `boolean \| 'all'`                                           | `true`    | `disabled="disabled"` becomes the bare name; `'all'` rewrites any value.     |
 | `comments`                      | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'`  | Which comments survive — `'some'` keeps none, since HTML comments are inert. |
-| `minifyJson`                    | `boolean`                                                    | `true`    | Strip whitespace in a JSON `<script>`, copying literals byte for byte.       |
-| `minifyStyles`                  | `boolean`                                                    | `true`    | Run the CSS minimizer over inline `<style>` and `style=""`.                  |
 | `normalizeAttributeQuotes`      | `boolean`                                                    | `true`    | Use whichever delimiters cost least.                                         |
 | `normalizeEnumeratedAttributes` | `boolean`                                                    | `true`    | Fold an enumerated value to the keyword it names.                            |
 | `normalizeListAttributes`       | `boolean`                                                    | `true`    | Normalize list-shaped values (`class`, `rel`, `srcset`, viewport `content`). |
@@ -1146,16 +1143,16 @@ Every option of [`optimization.minimize.html`](/configuration/optimization/#opti
 
 **Off by default**
 
-| Option                      | Type                          | Default | Why it is opt-in                                                              |
-| --------------------------- | ----------------------------- | ------- | ----------------------------------------------------------------------------- |
-| `mergeStyles`               | `boolean`                     | `false` | Removes elements, so `document.styleSheets` and `style:nth-child()` differ.   |
-| `minifyConditionalComments` | `boolean`                     | `false` | The body is minified as if it started a document, not where the comment sits. |
-| `minifySrcdoc`              | `boolean`                     | `false` | A consumer comparing `iframe.srcdoc` byte for byte sees it change.            |
-| `removeEmptyAttributes`     | `boolean`                     | `false` | An attribute selector matches on presence, so `[class]` stops matching.       |
-| `removeEmptyElements`       | `boolean`                     | `false` | CSS the minifier cannot see may give an empty element a size or a `::before`. |
-| `removeRedundantAttributes` | `boolean \| 'smart' \| 'all'` | `false` | Dropping an attribute changes `getAttribute` and attribute selectors.         |
-| `sortAttributes`            | `boolean`                     | `false` | A script reading `element.attributes` back sees the new order.                |
-| `sortTokenLists`            | `boolean`                     | `false` | A script reading `className` or `rel` back sees the new order.                |
+| Option                      | Type                                            | Default | Why it is opt-in                                                                                                                 |
+| --------------------------- | ----------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `collapseWhitespace`        | `boolean \| 'conservative' \| 'smart' \| 'all'` | `false` | `textContent` and a `white-space: pre` rule the minifier cannot see read the collapsed runs back; `true` means `'conservative'`. |
+| `mergeStyles`               | `boolean`                                       | `false` | Removes elements, so `document.styleSheets` and `style:nth-child()` differ.                                                      |
+| `minifyConditionalComments` | `boolean`                                       | `false` | The body is minified as if it started a document, not where the comment sits.                                                    |
+| `removeEmptyAttributes`     | `boolean`                                       | `false` | An attribute selector matches on presence, so `[class]` stops matching.                                                          |
+| `removeEmptyElements`       | `boolean`                                       | `false` | CSS the minifier cannot see may give an empty element a size or a `::before`.                                                    |
+| `removeRedundantAttributes` | `boolean \| 'smart' \| 'all'`                   | `false` | Dropping an attribute changes `getAttribute` and attribute selectors.                                                            |
+| `sortAttributes`            | `boolean`                                       | `false` | A script reading `element.attributes` back sees the new order.                                                                   |
+| `sortTokenLists`            | `boolean`                                       | `false` | A script reading `className` or `rel` back sees the new order.                                                                   |
 
 **webpack.config.js**
 
@@ -1173,7 +1170,6 @@ export default {
         removeEmptyAttributes: true,
         removeEmptyElements: true,
         mergeStyles: true,
-        minifySrcdoc: true,
         sortAttributes: true,
         sortTokenLists: true,
       },

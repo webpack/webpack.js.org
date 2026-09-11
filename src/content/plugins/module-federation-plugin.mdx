@@ -123,8 +123,9 @@ export default {
     new ModuleFederationPlugin({
       // adds lodash as shared module
       // version is inferred from package.json
-      // there is no version check for the required version
-      // so it will always use the higher version found
+      // requiredVersion is inferred from package.json as well
+      // (a warning is emitted if it can't be determined)
+      // a shared version that doesn't satisfy it falls back to the local copy
       shared: ["lodash"],
     }),
   ],
@@ -206,13 +207,27 @@ This field specifies the required version of the package. It accepts semantic ve
 
 `string`
 
-The requested shared module is looked up under this key from the shared scope.
+The requested shared module is looked up under this key from the shared scope. It defaults to the key you used in `shared`, i.e. the request itself, so `shared: ['lodash']` is stored and looked up as `lodash`.
+
+Set it when the name a build imports and the name it should share under differ. Two builds only share a module when both the key and the scope match, so the key is what lets an application that imports `lodash-es` reuse what another build provided as `lodash`:
+
+```js
+new ModuleFederationPlugin({
+  shared: {
+    "lodash-es": {
+      shareKey: "lodash",
+    },
+  },
+});
+```
 
 ##### **`shareScope`**
 
 `string`
 
-The name of the shared scope.
+The name of the shared scope, defaulting to the plugin's own `shareScope` option and, when that is unset, to `'default'`. A scope is one namespace of shared modules: builds put the modules they provide into it and look the ones they need up from it, so builds using different scope names never share with each other even when their keys match.
+
+Change it to keep groups of builds apart — for example when a page hosts two independent sets of remotes that should each get their own copy of a library, or when a widget must not adopt the host's version of one. Both the providing and the consuming side have to name the same scope.
 
 ##### **`singleton`**
 

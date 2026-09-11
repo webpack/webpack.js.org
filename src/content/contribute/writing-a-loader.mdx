@@ -223,11 +223,11 @@ export default function (source) {
 
 ### Data Sharing
 
-In webpack, loaders can be chained together and share data with subsequent loaders in the chain. To achieve this, you can pass data along with the content (source code) using the `this.callback` method in raw loaders. In the default exported function of a raw loader, you can pass data using the fourth argument of `this.callback`.
+In webpack, loaders can be chained together and share data with subsequent loaders in the chain. To achieve this, you can pass data along with the content (source code) using the `this.callback` method. In the default exported function of a loader, you can pass data using the fourth argument of `this.callback`.
 
 ```js
 export default function (source) {
-  const options = getOptions(this);
+  const options = this.getOptions();
   // Pass data using the fourth argument of this.callback
   this.callback(null, `export default ${JSON.stringify(source)}`, null, {
     some: data,
@@ -368,7 +368,7 @@ Our loader will process `.txt` files and replace any instance of `[name]` with t
 export default function loader(source) {
   const options = this.getOptions();
 
-  source = source.replaceAll(/\[name\]/, options.name);
+  source = source.replaceAll("[name]", options.name);
 
   return `export default ${JSON.stringify(source)}`;
 }

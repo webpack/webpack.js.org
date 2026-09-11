@@ -9,7 +9,7 @@ contributors:
 
 The `ContextModuleFactory` module is used by the `Compiler` to generate dependencies from webpack specific [require.context](/api/module-methods/#requirecontext) API. It resolves the requested directory, generates requests for each file and filters against passed regExp. Matching dependencies then passes through [NormalModuleFactory](/api/normalmodulefactory-hooks).
 
-The `ContextModuleFactory` class extends `Tapable` and provides the following
+The `ContextModuleFactory` class exposes a `hooks` object of tapable hooks and provides the following
 lifecycle hooks. They can be tapped the same way as compiler hooks:
 
 ```js
@@ -47,6 +47,6 @@ Called after directory contents are read. On recursive mode, calls for each sub-
 
 `AsyncSeriesWaterfallHook`
 
-Called for each file after the request is created but before filtering against regExp.
+Called once per directory with the array of generated `{ context, request }` alternatives, before filtering against regExp. Return the (possibly modified) array.
 
-- Callback Parameters: `request` `options`
+- Callback Parameters: `modules` `options`

@@ -34,9 +34,10 @@ As the article explains, webpack attempts to achieve partial scope hoisting. It 
 | Imported By Multiple Other Module Groups      | Root    |
 | Imported With `import()`                      | Root    |
 | Affected By `ProvidePlugin` Or Using `module` | Prevent |
-| HMR Accepted                                  | Root    |
+| Uses HMR (`module.hot`)                       | Prevent |
 | Using `eval()`                                | Prevent |
-| In Multiple Chunks                            | Prevent |
+| Not in any chunk                              | Prevent |
+| In different chunk(s) than the importer       | Root    |
 | `export * from "cjs-module"`                  | Prevent |
 
 ### Module Grouping Algorithm

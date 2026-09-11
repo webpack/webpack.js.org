@@ -25,6 +25,9 @@ This is equivalent to the following `DefinePlugin` application:
 new webpack.DefinePlugin({
   "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
   "process.env.DEBUG": JSON.stringify(process.env.DEBUG),
+  // since webpack 5.103.0
+  "import.meta.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+  "import.meta.env.DEBUG": JSON.stringify(process.env.DEBUG),
 });
 ```
 

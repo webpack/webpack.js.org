@@ -17,12 +17,10 @@ When merging pull requests into the `main` branch, select the _Create Merge Comm
 
 ## Releasing
 
-```bash
-npm version patch && git push --follow-tags && npm publish
-npm version minor && git push --follow-tags && npm publish
-npm version major && git push --follow-tags && npm publish
-```
+Releases are automated with [changesets](https://github.com/changesets/changesets):
 
-_This will increment the package version, commits the changes, cuts a **local tag**, push to github & publish the npm package._
+1. Every user-facing pull request adds a [changeset](https://github.com/webpack/webpack/blob/main/.changeset/README.md) file in `.changeset/` declaring its bump level (`patch`, `minor` or `major`).
+2. On every push to `main`, the [release workflow](https://github.com/webpack/webpack/blob/main/.github/workflows/release.yml) updates a `chore(release): new release` pull request that consumes the pending changesets, bumps the version in `package.json` and writes `CHANGELOG.md`.
+3. Merging that pull request publishes the new version to npm and creates the matching git tag and [GitHub release](https://github.com/webpack/webpack/releases).
 
-After that go to the github [releases page](https://github.com/webpack/webpack/releases) and write a Changelog for the new tag.
+Cutting a release means merging the release pull request. When that happens (patch releases as soon as possible, minor releases every four weeks) is described in [`RELEASE_SCHEDULE.md`](https://github.com/webpack/webpack/blob/main/RELEASE_SCHEDULE.md).

@@ -75,17 +75,17 @@ Prefetches `request` and dependencies to enable a more parallel compilation. It 
 
 ### JsonpTemplatePlugin
 
-`JsonpTemplatePlugin(options)`
+`web/JsonpTemplatePlugin()`
 
 Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry chunks. It loads chunks by adding a `<script>` tag.
 
-`options` are the output options.
+It takes no options and sets [`output.chunkLoading`](/configuration/output/#outputchunkloading) to `'jsonp'`. It is configured via the output options:
 
-`options.jsonpFunction` is the JSONP function.
+[`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal) is the JSONP function.
 
-`options.publicPath` is used as path for loading the chunks.
+[`output.publicPath`](/configuration/output/#outputpublicpath) is used as path for loading the chunks.
 
-`options.chunkFilename` is the filename under that chunks are expected.
+[`output.chunkFilename`](/configuration/output/#outputchunkfilename) is the filename under that chunks are expected.
 
 ### NodeTemplatePlugin
 
@@ -93,9 +93,7 @@ Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry ch
 
 Chunks are wrapped into Node.js modules exporting the bundled modules. The entry chunks loads chunks by requiring them.
 
-`options` are the output options.
-
-`options.chunkFilename` is the filename under that chunks are expected.
+`options.asyncChunkLoading` (`boolean`) selects `'async-node'` instead of `'require'` as [`output.chunkLoading`](/configuration/output/#outputchunkloading).
 
 ### LibraryTemplatePlugin
 
@@ -105,35 +103,41 @@ The entries chunks are decorated to form a library `name` of type `type`.
 
 ### WebWorkerTemplatePlugin
 
-`webworker/WebWorkerTemplatePlugin(options)`
+`webworker/WebWorkerTemplatePlugin()`
 
 Chunks are loaded by `importScripts`. Else it's similar to [`JsonpTemplatePlugin`](#jsonptemplateplugin).
 
-`options` are the output options.
+It takes no options and sets [`output.chunkLoading`](/configuration/output/#outputchunkloading) to `'import-scripts'`.
 
 ### EvalDevToolModulePlugin
 
-Decorates the module template by wrapping each module in a `eval` annotated with `// @sourceURL`.
+`EvalDevToolModulePlugin(options)`
+
+Decorates the module template by wrapping each module in a `eval` annotated with a `//# sourceURL=` comment (`options.sourceUrlComment`, defaults to `//# sourceURL=[url]`).
 
 ### SourceMapDevToolPlugin
 
-`SourceMapDevToolPlugin(sourceMapFilename, sourceMappingURLComment, moduleFilenameTemplate, fallbackModuleFilenameTemplate)`
+`SourceMapDevToolPlugin(options)`
 
 Decorates the templates by generating a SourceMap for each chunk.
 
-`sourceMapFilename` the filename template of the SourceMap. `[hash]`, `[name]`, `[id]`, `[file]` and `[filebase]` are replaced. If this argument is missing, the SourceMap will be inlined as DataUrl.
+`options.filename` the filename template of the SourceMap. `[fullhash]`, `[name]`, `[id]`, `[file]` and `[base]` are replaced. If this option is missing, the SourceMap will be inlined as DataUrl.
+
+`options.append`, `options.moduleFilenameTemplate`, `options.fallbackModuleFilenameTemplate` and the remaining options are described on the [SourceMapDevToolPlugin page](/plugins/source-map-dev-tool-plugin/).
 
 ### HotModuleReplacementPlugin
 
-`HotModuleReplacementPlugin(options)`
+`HotModuleReplacementPlugin()`
 
 Add support for hot module replacement. Decorates the templates to add runtime code. Adds `module.hot` API.
 
-`options.hotUpdateChunkFilename` the filename for hot update chunks.
+It takes no options and reads the following output options:
 
-`options.hotUpdateMainFilename` the filename for the hot update manifest.
+`output.hotUpdateChunkFilename` the filename for hot update chunks.
 
-`options.hotUpdateFunction` JSON function name for the hot update.
+`output.hotUpdateMainFilename` the filename for the hot update manifest.
+
+[`output.hotUpdateGlobal`](/configuration/output/#outputhotupdateglobal) the global function name for loading hot updates.
 
 ## source
 
@@ -141,11 +145,11 @@ Plugins affecting the source code of modules.
 
 ### APIPlugin
 
-Make webpack_public_path, webpack_require, webpack_modules and webpack_chunk_load accessible. Ensures that `require.valueOf` and `require.onError` are not processed by other plugins.
+Makes the `__webpack_*` variables (`__webpack_public_path__`, `__webpack_require__`, `__webpack_modules__`, `__webpack_chunk_load__`, `__webpack_hash__`, `__webpack_nonce__`, ...) accessible in modules and maps `require.onError` to the runtime's error handler (`__webpack_require__.oe`).
 
 ### CompatibilityPlugin
 
-Currently useless. Ensures compatibility with other module loaders.
+Ensures compatibility with other module loaders by rewriting legacy patterns: browserify-style `require` delegators, user code that declares its own `__webpack_require__`, and hashbang lines.
 
 ### ConstPlugin
 
@@ -174,13 +178,13 @@ It is important to mention that `import { calculateTax } from './tax';` will als
 
 ### ProvidePlugin
 
-`ProvidePlugin(name, request)`
+`ProvidePlugin(definitions)`
 
-If `name` is used in a module it is filled by a module loaded by `import ... from <request>`/`import(<request>)`/`require(<request>)`.
+For each `name: request` entry in `definitions`, if `name` is used in a module it is filled by a module loaded by `import ... from <request>`/`import(<request>)`/`require(<request>)`.
 
 ### NodeStuffPlugin
 
-`NodeStuffPlugin(options, context)`
+`NodeStuffPlugin(options)`
 
 Provide stuff that is normally available in Node.js modules.
 
@@ -194,11 +198,9 @@ Provide stuff that is normally available in require.js.
 
 ### NodeSourcePlugin
 
-`node/NodeSourcePlugin(options)`
+`node/NodeSourcePlugin()`
 
-This module adds stuff from Node.js that is not available in non Node.js environments.
-
-It adds polyfills for `process`, `console`, `Buffer` and `global` if used. It also binds the built in Node.js replacement modules.
+This plugin is a no-op kept for backward compatibility. webpack 5 no longer polyfills Node.js core modules or globals such as `process` and `Buffer`.
 
 ### NodeTargetPlugin
 
@@ -222,9 +224,9 @@ Provides CommonJs-style `require` to modules.
 
 ### RequireContextPlugin
 
-`dependencies/RequireContextPlugin(modulesDirectories, extensions)`
+`dependencies/RequireContextPlugin()`
 
-Provides `require.context`. The parameter `modulesDirectories` and `extensions` are used to find alternative requests for files. It's useful to provide the same arrays as you provide to the resolver.
+Provides `require.context`. Alternative requests for files are derived from the configured [resolve options](/configuration/resolve/) (`modules`, `extensions`, `mainFiles`, `enforceExtension`).
 
 ### RequireEnsurePlugin
 
@@ -256,7 +258,7 @@ Note that all plugins under `webpack.optimize` namespace should only be used whe
 
 Merge chunks limit chunk count is lower than `options.maxChunks`.
 
-The overhead for each chunks is provided by `options.chunkOverhead` or defaults to 10000. Entry chunks sizes are multiplied by `options.entryChunkMultiplicator` (or 10).
+`options.chunkOverhead` and `options.entryChunkMultiplicator` are still accepted but no longer have any effect.
 
 Chunks that reduce the total size the most are merged first. If multiple combinations are equal the minimal merged size wins.
 
@@ -270,11 +272,11 @@ Chunks with the same modules are merged.
 
 `optimize/RemoveEmptyChunksPlugin()`
 
-Modules that are included in every parent chunk are removed from the chunk.
+Chunks that contain no modules (and are neither runtime nor entry chunks) are removed.
 
 ### MinChunkSizePlugin
 
-`optimize/MinChunkSizePlugin(minChunkSize)`
+`optimize/MinChunkSizePlugin({ minChunkSize })`
 
 Merges chunks until each chunk has the minimum size of `minChunkSize`.
 
