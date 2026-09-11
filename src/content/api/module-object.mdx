@@ -1,0 +1,167 @@
+---
+title: Module Object
+description: The properties and methods of a webpack Module that plugins and loaders can rely on.
+group: Objects
+sort: 14
+contributors:
+  - hai-x
+---
+
+Every file webpack builds becomes a `Module` in the [compilation](/api/compilation-object/). Plugins meet them everywhere — iterating `compilation.modules`, on the `succeedModule` hook, behind `moduleGraph.getIssuer(module)` — and a loader can reach its own through the loader context.
+
+`Module` is a base class. What a build actually holds is one of its subclasses, and which one depends on where the module came from:
+
+| Class                | Comes from                                                                                                                 |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `NormalModule`       | a resolved file processed by loaders — the usual case                                                                      |
+| `RawModule`          | source webpack generated itself, with no file behind it                                                                    |
+| `ExternalModule`     | a request matched by [`externals`](/configuration/externals/)                                                              |
+| `ContextModule`      | a [context](/guides/dependency-management/), i.e. a `require` of an expression                                             |
+| `ConcatenatedModule` | several modules merged by [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules) |
+| `DllModule`          | a module delivered by [`DllReferencePlugin`](/plugins/dll-plugin/)                                                         |
+
+W> Test with `instanceof` (`module instanceof compiler.webpack.NormalModule`) rather than by name or by `module.type` — [`type`](#type) says which kind of source the module holds, not which class it is.
+
+## Properties on every module
+
+### type
+
+`string`
+
+The module type, e.g. `'javascript/auto'`, `'javascript/esm'`, `'json'`, `'css/auto'`, `'asset/resource'`, `'webassembly/async'`. A plugin can add its own, so match a prefix rather than a fixed list when you mean "any JavaScript".
+
+### layer
+
+`string | null`
+
+The [layer](/configuration/module/#rulelayer) the module was built in, or `null`.
+
+### context
+
+`string | null`
+
+The absolute path of the directory the module's requests are resolved against.
+
+### buildMeta
+
+`object`
+
+What the parser worked out about the module, filled during the build. The fields a plugin normally reads:
+
+| Field                 | Meaning                                                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `exportsType`         | how the module's exports are consumed: `'namespace'`, `'default'`, `'flagged'`, `'dynamic'`, or `undefined` |
+| `defaultObject`       | how a `default` import of a CommonJS module is built: `false`, `'redirect'`, `'redirect-warn'`              |
+| `strictHarmonyModule` | the module is ESM and must be treated strictly                                                              |
+| `async`               | the module is asynchronous (top-level `await`)                                                              |
+| `sideEffectFree`      | the module was determined to have no side effects                                                           |
+
+### buildInfo
+
+`object`
+
+What the build itself produced — dependencies to watch, assets emitted from the module, and whether the result may be cached:
+
+| Field                                                            | Meaning                                                                               |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `cacheable`                                                      | `false` when a loader called `this.cacheable(false)`                                  |
+| `fileDependencies`, `contextDependencies`, `missingDependencies` | paths watched for changes, as collected from the loader context                       |
+| `buildDependencies`                                              | paths whose change invalidates the persistent cache, from `this.addBuildDependency()` |
+| `assets`, `assetsInfo`                                           | assets the module emitted through `this.emitFile()`                                   |
+| `strict`, `exportsArgument`, `moduleArgument`                    | set by the parser; they shape the code the generator emits                            |
+| `hash`                                                           | the hash of the build result                                                          |
+
+`buildInfo` is serialized with the module, so it is also where a loader leaves data for a plugin to pick up: it is still there on a build restored from the [persistent cache](/configuration/cache/#cachetype), where the loader itself never runs again. Store plain, serializable values only, under a property named after your plugin.
+
+W> Both are `undefined` until the module is built. Read them from `succeedModule`, `finishModules` or later, never from `buildModule`.
+
+### dependencies
+
+`Dependency[]`
+
+What the module requires. `presentationalDependencies` holds the ones that only affect code generation, and `blocks` (`AsyncDependenciesBlock[]`) the ones behind an `import()`. To find the module a dependency points at, ask the graph: `moduleGraph.getModule(dependency)`.
+
+### factoryMeta
+
+`object`
+
+Set by the module factory before the build, e.g. `sideEffectFree` derived from the package's `sideEffects` field.
+
+T> `module.id`, `module.hash`, `module.issuer`, `module.usedExports` and friends are deprecated — a module can take part in more than one graph, so those values live on `chunkGraph` and `moduleGraph` now. The [replacement table](/api/compilation-object/#module-and-chunk-graphs) lists them all.
+
+## Methods on every module
+
+### identifier
+
+`function () => string`
+
+A string that identifies the module uniquely in the compilation — the request with all loaders and their options. It is the key `compilation.findModule` looks up.
+
+### readableIdentifier
+
+`function (requestShortener) => string`
+
+The same identity in the shortened form stats and warnings print. Take the shortener from `compilation.requestShortener`.
+
+### originalSource
+
+`function () => Source | null`
+
+The module's source before code generation, or `null` for a module that has none.
+
+### getSourceTypes
+
+`function () => Set<string>`
+
+Which kinds of code the module can generate, e.g. `'javascript'`, `'css'`, `'asset'`. Ask the module instead of deriving it from `type`.
+
+### size
+
+`function (type) => number`
+
+The size of the module's source of that type, in bytes.
+
+### nameForCondition
+
+`function () => string | null`
+
+The path [rule conditions](/configuration/module/#condition) are matched against — the resource without its query and fragment. `null` when the module has no file behind it.
+
+### addError / addWarning / getErrors / getWarnings
+
+`function`
+
+Diagnostics attached to the module. One added here is reported against the module and survives into the cache, unlike a `compilation.errors` entry pushed after seal.
+
+## Properties of a NormalModule
+
+A `NormalModule` is a resolved file plus the loaders applied to it, so it carries the parts of the request separately:
+
+| Property              | Example for `'babel-loader!./src/app.js?x=1'`                                            |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| `request`             | the full request with all resolved loaders, `'/abs/babel-loader.js!/abs/src/app.js?x=1'` |
+| `userRequest`         | the request without automatically added loaders                                          |
+| `rawRequest`          | the request as written in the source, `'./app.js?x=1'`                                   |
+| `resource`            | the resolved file with query and fragment, `'/abs/src/app.js?x=1'`                       |
+| `matchResource`       | the [`!=!` match resource](/api/loaders/#inline-matchresource), if any                   |
+| `resourceResolveData` | what the resolver returned — `descriptionFileData` holds the package.json                |
+| `loaders`             | `[{ loader, options, ident, type }]` in the order they run                               |
+| `binary`              | `true` for asset and WebAssembly modules, whose source is a `Buffer`                     |
+
+A loader reaches its own module as `this._module`. That property is not part of the documented [loader context](/api/loaders/), but loader/plugin pairs rely on it.
+
+```js
+class MyPlugin {
+  apply(compiler) {
+    const { NormalModule } = compiler.webpack;
+
+    compiler.hooks.compilation.tap("MyPlugin", (compilation) => {
+      compilation.hooks.succeedModule.tap("MyPlugin", (module) => {
+        if (!(module instanceof NormalModule)) return;
+
+        console.log(module.resource, module.getSourceTypes());
+      });
+    });
+  }
+}
+```

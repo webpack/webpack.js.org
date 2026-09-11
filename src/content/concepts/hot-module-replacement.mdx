@@ -41,7 +41,9 @@ In addition to normal assets, the compiler needs to emit an "update" to allow up
 
 The manifest lists the ids of the updated chunks, the removed chunks and the removed modules. Each update chunk contains the new code for its updated modules; the update for the runtime chunk also carries the new compilation hash.
 
-The compiler ensures that module IDs and chunk IDs are consistent between these builds. It typically stores these IDs in memory (e.g. with [webpack-dev-server](/configuration/dev-server/)), but it's also possible to store them in a JSON file.
+The compiler ensures that module IDs and chunk IDs are consistent between these builds. A watching compiler keeps them in memory, which is all a dev server needs. To keep them consistent across separate compiler runs — a build on one machine that has to produce updates applicable to a build from another — write them to a JSON file with [`recordsPath`](/configuration/other-options/#recordspath).
+
+T> The update files are emitted like any other asset, so under [webpack-dev-server](/configuration/dev-server/) they live in memory and are served from there. Set [`devServer.devMiddleware.writeToDisk`](/configuration/dev-server/#devserverdevmiddleware) when something outside the server has to read them from `output.path`.
 
 ### In a Module
 
