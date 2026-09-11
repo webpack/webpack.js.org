@@ -37,6 +37,77 @@ export default {
 
 ## Options
 
+### name
+
+`string`
+
+The name of the container this build produces. For the default `script` remote type it is also the **global variable** the container is assigned to, which is how a consumer reaches it once `remoteEntry.js` has loaded.
+
+It must be unique among the builds on a page. It is a separate thing from [`output.uniqueName`](/configuration/output/#outputuniquename), which also has to be unique — see [Every build needs its own unique name](/concepts/module-federation/#every-build-needs-its-own-unique-name).
+
+### filename
+
+`string`
+
+The filename of the container entry, as a path relative to [`output.path`](/configuration/output/#outputpath). Conventionally `remoteEntry.js`.
+
+This names the file **this** build emits. It has nothing to do with the filenames of the remotes it consumes — those are whatever each remote chose, and appear in the URLs under [`remotes`](#remotes).
+
+### remotes
+
+`string[]` `object`
+
+The containers this build consumes. Each entry maps a **request scope** — the name you import through — to a **container location**:
+
+```js
+new ModuleFederationPlugin({
+  remotes: {
+    // request scope        container location
+    app1: "app1@http://localhost:3001/remoteEntry.js",
+  },
+});
+```
+
+which is then imported as:
+
+```js
+import Button from "app1/Button";
+```
+
+The two halves of the location string are split at the first `@`:
+
+| Part                                               | Meaning                                                                    |
+| -------------------------------------------------- | -------------------------------------------------------------------------- |
+| before `@` — `app1`                                | the remote's [`name`](#name), i.e. the global its container is assigned to |
+| after `@` — `http://localhost:3001/remoteEntry.js` | the URL its [`filename`](#filename) is served from                         |
+
+So a name appearing "twice" in a config is usually two different things that happen to match: the key is what **you** import through and can be renamed freely, while the part before `@` must match what the **remote** called itself. They are free to differ:
+
+```js
+new ModuleFederationPlugin({
+  remotes: {
+    // imported as "checkout/…", served by a container that calls itself "shop"
+    checkout: "shop@http://localhost:3001/remoteEntry.js",
+  },
+});
+```
+
+Passing an array instead of an object drops the keys and lets webpack infer each request scope from the location.
+
+T> A location without an `@`, or with one at either end, fails the build with `Invalid request "…"`.
+
+For a statically configured remote you do not load anything yourself: webpack emits code that injects the `<script>`, waits for the global to appear, and reports `ScriptExternalLoadError` if it does not. Loading the container by hand is only needed for [dynamic remotes](/concepts/module-federation/#dynamic-remote-containers), where the location is not known at build time.
+
+An entry can also be an object with `external` (the location) and `shareScope`, when one remote needs a different [share scope](/concepts/module-federation/#share-scopes) from the rest.
+
+### remoteType
+
+`string`
+
+How a remote is fetched, as an [`externalsType`](/configuration/externals/#externalstype).
+
+When unset it falls back to this plugin's own `library.type`, but only if that is a valid externals type, and otherwise to `'script'` — the `name@url` form described above. Since `library` itself defaults to `{ type: 'var', name }`, a config that sets neither gets `'script'`.
+
 ### runtime
 
 Create a new runtime chunk with the specified name.
