@@ -49,9 +49,20 @@ T> The update files are emitted like any other asset, so under [webpack-dev-serv
 
 HMR is an opt-in feature that only affects modules containing HMR code. Styling is one example: webpack's [built-in CSS support](/guides/native-css/) implements the HMR interface for you, so when a stylesheet update arrives it replaces the old styles with the new ones without a full reload.
 
-Similarly, when implementing the HMR interface in a module, you can describe what should happen when the module is updated. However, in most cases, it's not mandatory to write HMR code in every module. If a module has no HMR handlers, the update bubbles up. This means that a single handler can update a complete module tree. If a single module from the tree is updated, the entire set of dependencies is reloaded.
+Similarly, when implementing the HMR interface in a module, you can describe what should happen when the module is updated. However, in most cases, it's not mandatory to write HMR code in every module. If a module has no HMR handlers, the update bubbles up: webpack walks from the changed module through the modules that imported it until it finds one that accepts the change. A single handler placed high enough can therefore cover a whole subtree.
 
-See the [HMR API page](/api/hot-module-replacement) for details on the `module.hot` interface.
+What that handler covers is worth being precise about, because it decides which of your code runs again. Given `top.js` → `middle.js` → `leaf.js`, where only `top.js` accepts `./middle.js`, editing `leaf.js` re-executes:
+
+| Module                                              | Re-executed? | Why                                                  |
+| --------------------------------------------------- | ------------ | ---------------------------------------------------- |
+| `leaf.js`                                           | yes          | it is what changed                                   |
+| `middle.js`                                         | yes          | it lies between the change and the handler           |
+| a module `middle.js` imports but that didn't change | no           | it is still in the module cache, and is reused as-is |
+| `top.js`                                            | **no**       | it is the module that accepted, so it keeps running  |
+
+`top.js` is not re-executed and its `dispose` handler does not run — only its `accept` callback is invoked, by which point its imported bindings already point at the new versions. Its own state therefore survives the update, which is exactly what makes it the right place to re-render from or to swap a value into a long-lived object. A module that instead wants to be re-executed on its own changes says so with a self-accept, and then it _is_ disposed and re-run in place.
+
+See the [HMR API page](/api/hot-module-replacement) for details on the `module.hot` interface, and the [HMR guide](/guides/hot-module-replacement) for worked examples.
 
 ### In the Runtime
 
@@ -59,11 +70,22 @@ Here things get a bit more technical... if you're not interested in the internal
 
 For the module system runtime, additional code is emitted to track module `parents` and `children`. On the management side, the runtime supports two methods: `check` and `apply`.
 
-A `check` makes an HTTP request to the update manifest. If this request fails, there is no update available. If it succeeds, the list of updated chunks is compared to the list of currently loaded chunks. For each loaded chunk, the corresponding update chunk is downloaded. All module updates are stored in the runtime. When all update chunks have been downloaded and are ready to be applied, the runtime switches into the `ready` state.
+A `check` requests the update manifest. How it is fetched depends on the target — a browser build requests it over HTTP, a `target: 'node'` build reads it with `fs.readFile` — but the logic is the same: if the request fails, there is no update available. If it succeeds, the list of updated chunks is compared to the list of currently loaded chunks. For each loaded chunk, the corresponding update chunk is downloaded. All module updates are stored in the runtime. When all update chunks have been downloaded and are ready to be applied, the runtime switches into the `ready` state.
 
-The `apply` method flags all updated modules as invalid. For each invalid module, there needs to be an update handler in the module or in its parent(s). Otherwise, the invalid flag bubbles up and invalidates parent(s) as well. Each bubble continues until the app's entry point or a module with an update handler is reached (whichever comes first). If it bubbles up from an entry point, the process fails.
+The `apply` method flags all updated modules as invalid. For each invalid module, there needs to be an update handler in the module or in its parent(s). Otherwise, the invalid flag bubbles up and invalidates parent(s) as well. Each bubble continues until the app's entry point or a module with an update handler is reached (whichever comes first). If it bubbles up from an entry point, the process fails — the update is aborted with a message naming the file that nobody accepted, and the application is left running its old code. This is what a dev server turns into a full page reload.
 
 Afterwards, all invalid modules are disposed (via the dispose handler) and unloaded. The current hash is then updated and all `accept` handlers are called. The runtime switches back to the `idle` state and everything continues as normal.
+
+The runtime reports where it is in that sequence through [`status`](/api/hot-module-replacement/#status), which is how a custom HMR client knows when it is safe to ask for the next update.
+
+### On the wire
+
+An update is a pair of files next to your normal output, named by [`output.hotUpdateMainFilename`](/configuration/output/#outputhotupdatemainfilename) and [`output.hotUpdateChunkFilename`](/configuration/output/#outputhotupdatechunkfilename):
+
+- `[runtime].[fullhash].hot-update.json` — the manifest, listing the chunks and modules the update touches.
+- `[id].[fullhash].hot-update.js` — one per updated chunk, carrying the new module code.
+
+The hash in those names is the hash of the build being updated **from**, not the one being updated to, which is what lets a client that has been idle ask for the update that follows the version it is actually running. A client whose build is too old to have a matching update file gets a failed request, falls back to a full reload, and picks up the current bundle.
 
 ## Get Started
 
