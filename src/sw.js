@@ -27,9 +27,51 @@ const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
   const url = new URL(entry.url, self.location);
   return url.href;
 });
+// Every URL below is served by a NetworkFirst route, so the cache is a warm-up
+// for offline use rather than something the site depends on. `cache.addAll()`
+// would make it a dependency: it rejects as a whole if any single request
+// fails, which aborts the install and leaves the site with no service worker at
+// all. Cache them individually instead, and keep the number of parallel
+// requests low so installing does not saturate the connection pool.
+const INSTALL_CONCURRENCY = 6;
+
+async function warmCache(cache, urls) {
+  const pending = [...urls];
+  const failed = [];
+
+  const worker = async () => {
+    let url;
+    while ((url = pending.shift()) !== undefined) {
+      try {
+        await cache.add(url);
+      } catch {
+        failed.push(url);
+      }
+    }
+  };
+
+  await Promise.all(
+    Array.from(
+      { length: Math.min(INSTALL_CONCURRENCY, pending.length) },
+      worker,
+    ),
+  );
+
+  return failed;
+}
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(manifestURLs)),
+    caches.open(cacheName).then(async (cache) => {
+      const failed = await warmCache(cache, manifestURLs);
+
+      if (failed.length > 0) {
+        console.warn(
+          `[sw] ${failed.length} of ${manifestURLs.length} assets could not be precached; they will be fetched from the network on demand.`,
+          failed,
+        );
+      }
+    }),
   );
 });
 
