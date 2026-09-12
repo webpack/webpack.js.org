@@ -186,7 +186,7 @@ W> `resolve.alias` takes precedence over other module resolutions.
 
 W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated in webpack 5. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, './path/to/module')]: false }`
 
-W> `[string]` values are supported since webpack 5.
+W> `string[]` values are supported since webpack 5.
 
 ```js
 import path from "node:path";
@@ -767,7 +767,7 @@ export default {
 
 ### resolve.plugins
 
-[`[Plugin | Function]`](/plugins/)
+[`(Plugin | Function)[]`](/plugins/)
 
 A list of additional resolve plugins which should be applied.
 

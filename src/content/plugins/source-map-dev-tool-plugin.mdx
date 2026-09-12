@@ -25,11 +25,21 @@ new webpack.SourceMapDevToolPlugin(options);
 
 The following options are supported:
 
-- `test` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): Include source maps for modules based on their extension (defaults to `.js`, `.cjs`, `.mjs`, and `.css`).
-- `include` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp, function (asset) => boolean]`): Include source maps for module paths that match the given value.
-- `exclude` (`string` `RegExp` `function (asset) => boolean` `[string, RegExp], function (asset) => boolean`): Exclude modules that match the given value from source map generation.
+```ts
+type Matcher =
+  | string
+  | RegExp
+  | ((name: string) => boolean)
+  | (string | RegExp | ((name: string) => boolean))[];
+```
+
+A `string` matches by prefix, a `RegExp` by test, and a function is called with the name and returns whether it matches.
+
+- `test` (`Matcher`): Include source maps for modules based on their extension (defaults to `.js`, `.cjs`, `.mjs`, and `.css`).
+- `include` (`Matcher`): Include source maps for module paths that match the given value.
+- `exclude` (`Matcher`): Exclude modules that match the given value from source map generation.
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
-- `append` (`string` `function` `false`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. Since webpack v4.36.0, path parameters are supported: `[chunk]`, `[filename]` and `[contenthash]`. Setting `append` to `false` disables the appending.
+- `append` (`string` `(pathData: PathData, assetInfo?: AssetInfo) => string` `false`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. Since webpack v4.36.0, path parameters are supported: `[chunk]`, `[filename]` and `[contenthash]`. Setting `append` to `false` disables the appending.
 
   Starting from version 5.84.0, webpack allows the `append` option to be a function that accepts path data and an asset info object as arguments, and returns a string.
 
@@ -39,7 +49,7 @@ The following options are supported:
 
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
-- `ignoreList` (`string` `RegExp` `function (source) => boolean` `[string, RegExp, function (source) => boolean]`): Decide whether to ignore source files that match the specified value in source maps.
+- `ignoreList` (`Matcher`): Decide whether to ignore source files that match the specified value in source maps.
 - `module = true` (`boolean`): Indicates whether loaders should generate source maps.
 - `columns = true` (`boolean`): Indicates whether column mappings should be used.
 - `namespace` (`string`): Namespace prefix to allow multiple webpack roots in the devtools. See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).

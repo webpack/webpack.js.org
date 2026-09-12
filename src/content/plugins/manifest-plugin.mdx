@@ -80,19 +80,19 @@ Allows filtering the files which make up the manifest.
 
 ### `generate`
 
-`function (manifest: ManifestObject) => ManifestObject`
+`(manifest: ManifestObject) => ManifestObject`
 
 Receives the manifest object, modifies it, and returns the modified manifest.
 
 ### `prefix`
 
-`string = "[publicpath]"`
+`string = '[publicpath]'`
 
 Specifies a path prefix for all keys in the manifest.
 
 ### serialize
 
-`function (manifest: ManifestObject) => string = (manifest) => JSON.stringify(manifest, null, 2)`
+`(manifest: ManifestObject) => string = (manifest) => JSON.stringify(manifest, null, 2)`
 
 Receives the manifest object and returns the manifest string.
 

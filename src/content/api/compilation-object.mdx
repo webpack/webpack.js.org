@@ -19,7 +19,7 @@ The signatures below use two callback shapes that recur throughout the API:
 ```ts
 type ModuleCallback = (
   err?: WebpackError | null,
-  result?: Module | null
+  result?: Module | null,
 ) => void;
 
 type ErrorCallback = (err?: WebpackError | null) => void;

@@ -108,7 +108,7 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 ### splitChunks.chunks
 
-`string = 'async'` `function (chunk)` `RegExp`
+`'initial' | 'async' | 'all' = 'async'` `RegExp` `(chunk: Chunk) => boolean | undefined`
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`:
 
@@ -195,7 +195,7 @@ The default value of `splitChunks.maxInitialRequests` depends on the [`mode`](/c
 
 ### splitChunks.defaultSizeTypes
 
-`[string] = ['javascript', 'css', 'unknown']`
+`string[] = ['javascript', 'css', 'unknown']`
 
 Sets the size types which are used when a number is used for sizes. When the built-in CSS support ([`experiments.css`](/configuration/experiments/#experimentscss)) is disabled, the default is `['javascript', 'unknown']`.
 
@@ -213,7 +213,7 @@ Prevents exposing path info when creating names for parts splitted by maxSize.
 
 ### splitChunks.minSize
 
-`number` `{ [index: string]: number }`
+`number` `Record<string, number>`
 
 Minimum size, in bytes, for a chunk to be generated.
 
@@ -227,7 +227,7 @@ The default value of `splitChunks.minSize` depends on the [`mode`](/configuratio
 
 ### splitChunks.minSizeReduction
 
-`number` `{ [index: string]: number }`
+`number` `Record<string, number>`
 
 Minimum size reduction to the main chunk (bundle), in bytes, needed for a chunk to be generated. Meaning if splitting into a chunk does not reduce the size of the main chunk (bundle) by the given amount of bytes, it won't be split, even if it meets the `splitChunks.minSize` value.
 
@@ -302,7 +302,7 @@ The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` w
 
 ### splitChunks.name
 
-`boolean = false` `function (module, chunks, cacheGroupKey) => string` `string`
+`false = false` `string` `(module: Module, chunks: Chunk[], cacheGroupKey: string) => string | undefined`
 
 Also available for each cacheGroup: `splitChunks.cacheGroups.{cacheGroup}.name`.
 
@@ -468,7 +468,7 @@ Assign modules to a cache group by module layer.
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 
-`function (module, { chunkGraph, moduleGraph }) => boolean` `RegExp` `string`
+`RegExp` `string` `(module: Module, context: { chunkGraph: ChunkGraph, moduleGraph: ModuleGraph }) => boolean`
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It is matched against the module's resource path (`module.nameForCondition()`): a string matches by prefix, a `RegExp` by test.
 
@@ -531,7 +531,7 @@ export default {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
-`string` `function (pathData, assetInfo) => string`
+`string` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 Overrides the filename template for the chunks created by this cache group (initial and on-demand). It can also be set globally as `splitChunks.filename`.
 All placeholders available in [`output.filename`](/configuration/output/#outputfilename) are also available here.

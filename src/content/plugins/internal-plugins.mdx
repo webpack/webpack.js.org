@@ -47,7 +47,7 @@ Adds a cache to the compiler, where modules are cached in memory.
 
 `ProgressPlugin(handler)`
 
-Hook into the compiler to extract progress information. The `handler` must have the signature `function(percentage, message)`. Percentage is called with a value between 0 and 1, where 0 indicates the start and 1 the end.
+Hook into the compiler to extract progress information. The `handler` must have the signature `(percentage: number, message: string) => void`. Percentage is called with a value between 0 and 1, where 0 indicates the start and 1 the end.
 
 ### RecordIdsPlugin
 
