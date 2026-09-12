@@ -511,7 +511,7 @@ module.exports =
 
 We prefer static detection of production/development mode via the `production` or `development` condition.
 
-Node.js allows to detection production/development mode at runtime via `process.env.NODE_ENV`, so we use that as fallback in Node.js. Sync conditional importing ESM is not possible and we don't want to load the package twice, so we have to use CommonJs for the runtime detection.
+Node.js allows detection of production/development mode at runtime via `process.env.NODE_ENV`, so we use that as fallback in Node.js. Sync conditional importing ESM is not possible and we don't want to load the package twice, so we have to use CommonJs for the runtime detection.
 
 When it's not possible to detect mode we fallback to the production version.
 
