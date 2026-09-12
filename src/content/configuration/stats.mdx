@@ -585,9 +585,9 @@ W> Deprecated and ineffective: `stats.exclude` is still accepted by the configur
 
 ### stats.excludeAssets
 
-`array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
+`(string | RegExp | ((name: string, asset: StatsAsset) => boolean))[] = []` `string` `RegExp` `(name: string, asset: StatsAsset) => boolean`
 
-Tells `stats` to exclude the matching assets information. This can be done with a `string`, a `RegExp`, a `function` that is getting the assets name as an argument and returns a `boolean`. `stats.excludeAssets` can be an `array` of any of the above.
+Tells `stats` to exclude the matching assets information. This can be done with a `string`, a `RegExp`, or a function receiving the asset's name and its stats object. `stats.excludeAssets` can be an `array` of any of the above.
 
 ```js
 export default {
@@ -604,9 +604,17 @@ export default {
 
 ### stats.excludeModules
 
-`array = []: string | RegExp | function (moduleName, module, type) => boolean` `string` `RegExp` `function (moduleName, module, type) => boolean` `boolean: false`
+`(string | RegExp | ModuleFilterFn)[] = []` `string` `RegExp` `ModuleFilterFn` `false`
 
-Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, a `function` that is getting the module's name (plus the stats module object and the type of the module list) as arguments and returns a `boolean`. `stats.excludeModules` can be an `array` of any of the above.
+Tells `stats` to exclude the matching modules information. This can be done with a `string`, a `RegExp`, or a `ModuleFilterFn`. `stats.excludeModules` can be an `array` of any of the above.
+
+```ts
+type ModuleFilterFn = (
+  name: string,
+  module: StatsModule,
+  type: "module" | "chunk" | "root-of-chunk" | "nested",
+) => boolean;
+```
 
 ```js
 export default {
@@ -876,7 +884,7 @@ export default {
 
 ### stats.logging
 
-`string = 'info': 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'` `boolean`
+`'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose' = 'info'` `boolean`
 
 Tells `stats` whether to add logging output.
 
@@ -898,7 +906,7 @@ export default {
 
 ### stats.loggingDebug
 
-`array = []: string | RegExp | function (name) => boolean` `string` `RegExp` `function (name) => boolean`
+`(string | RegExp | ((name: string) => boolean))[] = []` `string` `RegExp` `(name: string) => boolean` `boolean`
 
 Tells `stats` to include the debug information of the specified loggers such as Plugins or Loaders. Loggers matched by `stats.loggingDebug` are shown even when [`stats.logging`](#statslogging) is set to `false`.
 
@@ -1098,7 +1106,7 @@ export default {
 
 ### stats.preset
 
-`string` `boolean: false`
+`string` `false`
 
 Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
@@ -1299,9 +1307,13 @@ export default {
 
 ### stats.warningsFilter
 
-`array = []: string | RegExp | function (warning) => boolean` `string` `RegExp` `function (warning) => boolean`
+`(string | RegExp | WarningFilterFn)[] = []` `string` `RegExp` `WarningFilterFn`
 
-Tells `stats` to exclude the warnings that are matching given filters. This can be done with a `string`, a `RegExp`, a `function` that is getting a warning as an argument and returns a `boolean`. `stats.warningsFilter` can be an `array` of any of the above.
+Tells `stats` to exclude the warnings that are matching given filters. This can be done with a `string`, a `RegExp`, or a `WarningFilterFn`. `stats.warningsFilter` can be an `array` of any of the above.
+
+```ts
+type WarningFilterFn = (warning: StatsError, warningString: string) => boolean;
+```
 
 ```js
 export default {

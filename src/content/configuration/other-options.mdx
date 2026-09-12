@@ -29,7 +29,7 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 ## amd
 
-`object` `boolean: false`
+`object` `false`
 
 Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
 
@@ -72,7 +72,7 @@ W> Avoid using `bail` option in [`watch`](/configuration/watch) mode, as it will
 
 ## dependencies
 
-`[string]`
+`string[]`
 
 A list of [`name`](#name) defining all sibling configurations it depends on. Dependent configurations need to be compiled first.
 
@@ -102,7 +102,7 @@ export default [
 
 ## ignoreWarnings
 
-`[RegExp, function (WebpackError, Compilation) => boolean, {module?: RegExp, file?: RegExp, message?: RegExp}]`
+`(RegExp | { module?: RegExp, file?: RegExp, message?: RegExp } | ((warning: WebpackError, compilation: Compilation) => boolean))[]`
 
 Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
 
@@ -353,7 +353,7 @@ export default {
 
 ### buildDependencies
 
-`object = { hash boolean = true, timestamp boolean = true }`
+`{ hash?: boolean = true, timestamp?: boolean = true }`
 
 Snapshots for build dependencies when using the persistent cache.
 
@@ -420,7 +420,7 @@ A regular expression here is only tested against the path, so it doesn't need a 
 
 ### module
 
-`object = { timestamp boolean = true }`
+`{ hash?: boolean, timestamp?: boolean = true }`
 
 Snapshots for building modules. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`.
 
@@ -429,7 +429,7 @@ Snapshots for building modules. In [`production`](/configuration/mode/) mode the
 
 ### contextModule
 
-`object = { timestamp boolean = true }`
+`{ hash?: boolean, timestamp?: boolean = true }`
 
 Snapshots for building context modules.
 
@@ -438,7 +438,7 @@ Snapshots for building context modules.
 
 ### resolve
 
-`object = { timestamp boolean = true }`
+`{ hash?: boolean, timestamp?: boolean = true }`
 
 Snapshots for resolving of requests. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`.
 
@@ -447,7 +447,7 @@ Snapshots for resolving of requests. In [`production`](/configuration/mode/) mod
 
 ### resolveBuildDependencies
 
-`object = {hash boolean = true, timestamp boolean = true}`
+`{ hash?: boolean = true, timestamp?: boolean = true }`
 
 Snapshots for resolving of build dependencies when using the persistent cache.
 

@@ -226,9 +226,11 @@ T> To ignore modules based on a regex, you can use [IgnorePlugin](https://webpac
 
 ### resolve.aliasFields
 
-`[string]: ['browser']`
+`(string | string[])[] = ['browser']`
 
 Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec).
+
+An entry may also be an array of strings, which names a nested field path — `[['exports', 'browser']]` reads `package.json#exports.browser`.
 
 **webpack.config.js**
 
@@ -299,9 +301,9 @@ export default {
 
 ### resolve.cachePredicate
 
-`function(module) => boolean`
+`(request: ResolveRequest) => boolean`
 
-A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. It must return a boolean.
+A function which decides whether a request should be cached or not. It receives the [`ResolveRequest`](https://github.com/webpack/enhanced-resolve) being resolved — an object carrying `path` and `request` among other properties — and must return a boolean.
 
 **webpack.config.js**
 
@@ -309,7 +311,7 @@ A function which decides whether a request should be cached or not. An object is
 export default {
   // ...
   resolve: {
-    cachePredicate: (module) =>
+    cachePredicate: (request) =>
       // additional logic
       true,
   },
@@ -459,7 +461,7 @@ export default {
 
 ### resolve.descriptionFiles
 
-`[string] = ['package.json']`
+`string[] = ['package.json']`
 
 The JSON files to use for descriptions.
 
@@ -493,7 +495,7 @@ export default {
 
 ### resolve.exportsFields
 
-`[string] = ['exports']`
+`string[] = ['exports']`
 
 Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
 
@@ -530,7 +532,7 @@ export default {
 
 ### resolve.extensions
 
-`[string] = ['.js', '.json', '.wasm']`
+`string[] = ['.js', '.json', '.wasm']`
 
 Attempt to resolve these extensions in order. If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
 
@@ -646,7 +648,7 @@ export default {
 
 ### resolve.importsFields
 
-`[string]`
+`string[] = ['imports']`
 
 Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
 
@@ -663,7 +665,7 @@ export default {
 
 ### resolve.mainFields
 
-`[string]`
+`(string | string[])[]`
 
 When importing from an npm package, e.g. `import * as D3 from 'd3'`, this option will determine which fields in its `package.json` are checked. The default values will vary based upon the [`target`](/concepts/targets) specified in your webpack configuration.
 
@@ -706,7 +708,7 @@ When we `import * as Upstream from 'upstream'` this will actually resolve to the
 
 ### resolve.mainFiles
 
-`[string] = ['index']`
+`string[] = ['index']`
 
 The filename to be used while resolving directories.
 
@@ -723,7 +725,7 @@ export default {
 
 ### resolve.modules
 
-`[string] = ['node_modules']`
+`string[] = ['node_modules']`
 
 Tell webpack what directories should be searched when resolving modules.
 
@@ -851,7 +853,7 @@ const a = new URL("./module/path", import.meta.url);
 
 ### resolve.restrictions
 
-`[string, RegExp]`
+`(string | RegExp)[]`
 
 A list of resolve restrictions to restrict the paths that a request can be resolved on.
 
@@ -868,7 +870,7 @@ export default {
 
 ### resolve.roots
 
-`[string]`
+`string[]`
 
 A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). These requests are resolved against `roots` first and as an absolute path afterwards; set [`resolve.preferAbsolute`](#resolvepreferabsolute) to `true` to flip that order.
 
@@ -1060,7 +1062,7 @@ T> This option is also available in `resolveLoader` with the same configuration 
 
 ## resolveLoader
 
-`object { modules [string] = ['node_modules'], extensions [string] = ['.js'], mainFields [string] = ['loader', 'main'], mainFiles [string] = ['index'], conditionNames [string] = ['loader', 'require', 'node'], exportsFields [string] = ['exports']}`
+`{ modules: string[] = ['node_modules'], extensions: string[] = ['.js'], mainFields: (string | string[])[] = ['loader', 'main'], mainFiles: string[] = ['index'], conditionNames: string[] = ['loader', 'require', 'node'], exportsFields: string[] = ['exports'] }`
 
 This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
 

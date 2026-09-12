@@ -51,8 +51,7 @@ export default {
 
 ## optimization.chunkIds
 
-`boolean: false`
-`string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
+`'natural' | 'named' | 'size' | 'total-size' | 'deterministic' | false`
 
 - `false`: disable webpack's built-in chunk id algorithm
 - one of the following values:
@@ -582,7 +581,7 @@ Reach for it when minimizing is switched on elsewhere — by the [`mode`](/confi
 
 ## optimization.minimizer
 
-`[MinimizerPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
+`(MinimizerPlugin | ((compiler: Compiler) => void) | '...' | false | 0 | '' | null | undefined)[]`
 
 Allows you to override the default minimizer by providing a different one or more customized [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.
 
@@ -655,7 +654,7 @@ Basically, `'...'` is [a shortcut to access the default configuration value](htt
 
 ## optimization.moduleIds
 
-`boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
+`'natural' | 'named' | 'deterministic' | 'size' | false`
 
 Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
 
@@ -739,7 +738,7 @@ W> `moduleIds: total-size` has been removed in webpack 5.
 
 ## optimization.nodeEnv
 
-`boolean: false` `string`
+`string` `false`
 
 Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`.
 

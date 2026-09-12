@@ -1683,7 +1683,7 @@ export default {
 
 ## module.noParse
 
-`RegExp` `[RegExp]` `function(resource)` `string` `[string]`
+`RegExp` `string` `(request: string) => boolean` `(RegExp | string | ((request: string) => boolean))[]`
 
 Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
@@ -1715,7 +1715,7 @@ export default {
 
 ## module.unsafeCache
 
-`boolean` `function (module)`
+`boolean` `(module: Module) => boolean`
 
 Cache the resolution of module requests. There are a couple of defaults for `module.unsafeCache`:
 
@@ -1929,7 +1929,7 @@ Include all modules matching any of these conditions. If you supply a `Rule.incl
 
 <Badge text="5.110.0+" />
 
-`string` `[string]`
+`string` `string[]`
 
 Match the module resource against one or more glob patterns. Unlike a regular expression, a glob matches the same way on every operating system: `/` and `\` are both read as a path separator, in the pattern as well as in the tested path, so a rule written on macOS keeps matching on Windows. See [`performance.osDependentRules`](/configuration/performance/#performanceosdependentrules) for a check that reports the regexp conditions that do not.
 
@@ -2189,7 +2189,7 @@ See [Asset Modules guide](/guides/asset-modules/) for additional information and
 
 ## Rule.parser.dataUrlCondition
 
-`object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
+`{ maxSize?: number = 8096 }` `(source: string | Buffer, context: { filename: string, module: Module }) => boolean`
 
 If a module source size is less than or equal to `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
 
@@ -2240,7 +2240,7 @@ export default {
 
 ### Rule.generator.dataUrl
 
-`object = { encoding string = 'base64' | false, mimetype string = undefined }` `function (content, { filename, module }) => string`
+`{ encoding?: 'base64' | false = 'base64', mimetype?: string }` `(content: string | Buffer, context: { filename: string, module: Module }) => string`
 
 When `Rule.generator.dataUrl` is used as an object, you can configure two properties:
 
@@ -2504,7 +2504,7 @@ export default {
 
 ## Rule.parser.parse
 
-`function(input) => string | object`
+`(input: string) => Buffer | JsonValue`
 
 If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a function that implements custom logic to parse module's source and convert it to a JavaScript `object`. It defaults to `JSON.parse`. It may be useful to import `toml`, `yaml` and other non-JSON files as JSON, without specific loaders:
 
@@ -2626,7 +2626,7 @@ export default {
 
 ## Rule.use
 
-`[UseEntry]` `function(info)`
+`UseEntry` `UseEntry[]` `(info: UseEntryInfo) => UseEntry | UseEntry[]`
 
 Starting with webpack 5.87.0 falsy values such as `undefined` `null` can be used to conditionally disable specific use entry.
 
@@ -2663,16 +2663,16 @@ export default {
 };
 ```
 
-**`function(info)`**
+**`(info: UseEntryInfo) => UseEntry | UseEntry[]`**
 
-`Rule.use` can also be a function which receives the object argument describing the module being loaded, and must return an array of `UseEntry` items.
+`Rule.use` can also be a function which receives an object describing the module being loaded, and must return an array of `UseEntry` items.
 
-The `info` object parameter has the following fields:
+The `info` parameter (`UseEntryInfo`) has the following fields:
 
-- `compiler`: The current webpack compiler (can be undefined)
-- `issuer`: The path to the module that is importing the module being loaded
-- `realResource`: Always the path to the module being loaded
-- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
+- `compiler` (`string | undefined`): The name of the current [child compiler](#rulecompiler), `undefined` outside one
+- `issuer` (`string`): The path to the module that is importing the module being loaded
+- `realResource` (`string | undefined`): Always the path to the module being loaded
+- `resource` (`string | undefined`): The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
 
 The same shortcut as an array can be used for the return value (i.e. `use: [ 'sass-loader' ]`).
 
@@ -2943,7 +2943,7 @@ export default {
 
 ## UseEntry
 
-`object` `function(info)`
+`object` `(info: UseEntryInfo) => UseEntry`
 
 **`object`**
 
@@ -2973,16 +2973,16 @@ export default {
 };
 ```
 
-**`function(info)`**
+**`(info: UseEntryInfo) => UseEntry`**
 
-A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return a non-function `UseEntry` object. This can be used to vary the loader options on a per-module basis.
+A `UseEntry` can also be a function which receives an object describing the module being loaded, and must return a non-function `UseEntry` object. This can be used to vary the loader options on a per-module basis.
 
-The `info` object parameter has the following fields:
+The `info` parameter (`UseEntryInfo`) has the following fields:
 
-- `compiler`: The current webpack compiler (can be undefined)
-- `issuer`: The path to the module that is importing the module being loaded
-- `realResource`: Always the path to the module being loaded
-- `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
+- `compiler` (`string | undefined`): The name of the current [child compiler](#rulecompiler), `undefined` outside one
+- `issuer` (`string`): The path to the module that is importing the module being loaded
+- `realResource` (`string | undefined`): Always the path to the module being loaded
+- `resource` (`string | undefined`): The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
 
 **webpack.config.js**
 

@@ -39,7 +39,7 @@ The top-level `output` key contains a set of options instructing webpack on how 
 
 ## output.assetModuleFilename
 
-`string = '[hash][ext][query][fragment]'` `function (pathData, assetInfo) => string`
+`string = '[hash][ext][query][fragment]'` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/).
 
@@ -141,7 +141,7 @@ T> Although the `charset` attribute for `<script>` tag was [deprecated](https://
 
 ## output.chunkFilename
 
-`string = '[id].js'` `function (pathData, assetInfo) => string`
+`string = '[id].js'` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 This option determines the name of non-initial chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -179,7 +179,7 @@ T> If the `output.filename` is defined as a string containing placeholder such a
 
 ## output.chunkFormat
 
-`false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
+`false` `'array-push' | 'commonjs' | 'module' | string`
 
 The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), `'module'` (ESM), but others might be added by plugins).
 
@@ -345,7 +345,7 @@ export default {
 
 <Badge text="5.111.0+" />
 
-`string` `[string, object]`
+`string` `(string | object)[]`
 
 Copy files and directories into [`output.path`](#outputpath) as part of the build. A copied file becomes an asset like any other, so [`output.clean`](#outputclean) keeps it, [stats](/configuration/stats/) reports it, and in [watch mode](/configuration/watch/) editing a source file copies it again without rebuilding the rest.
 
@@ -384,17 +384,17 @@ W> A pattern that matches nothing warns, and copying a file onto an asset the co
 
 A pattern is a `from` plus the options below.
 
-| Option                | Type                                                                | Default                      | Description                                                                                                             |
-| --------------------- | ------------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `context`             | `string`                                                            | see below                    | Directory `from` is resolved from, and the directory the copied paths keep their structure below.                       |
-| `filename`            | `string` `function (pathData, assetInfo) => string`                 | `'[path][base]'`             | Name of the copied file inside `to`, as a [filename template](#template-strings).                                       |
-| `from`                | `string` `[string]`                                                 | required                     | Glob or path to copy from. A glob separates with `/`, matches dot files, and takes `*`, `**`, `?`, `[]` and `{}`.       |
-| `globOptions`         | `object`                                                            |                              | How the glob in `from` matches — see [glob options](#glob-options).                                                     |
-| `info`                | `object` `function (file) => object`                                |                              | [Asset info](/api/stats/#asset-objects) of the copied file, merged over the info the copy already carries.              |
-| `preservePermissions` | `boolean`                                                           | `false`                      | Whether the copy keeps the permissions of the file it came from. Has no effect on Windows.                              |
-| `preserveTimestamps`  | `boolean`                                                           | `false`                      | Whether the copy keeps the access and modification times of the file it came from, rather than the time it was written. |
-| `to`                  | `string` `function (file) => string`                                | [`output.path`](#outputpath) | Directory the files are copied to, relative to `output.path`.                                                           |
-| `transform`           | `function (content, absoluteFilename) => string \| Buffer` `object` |                              | Modifies the content on the way through — see [transforming content](#transforming-content).                            |
+| Option                | Type                                                                       | Default                      | Description                                                                                                             |
+| --------------------- | -------------------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `context`             | `string`                                                                   | see below                    | Directory `from` is resolved from, and the directory the copied paths keep their structure below.                       |
+| `filename`            | `string` `(pathData: PathData, assetInfo?: AssetInfo) => string`           | `'[path][base]'`             | Name of the copied file inside `to`, as a [filename template](#template-strings).                                       |
+| `from`                | `string` `string[]`                                                        | required                     | Glob or path to copy from. A glob separates with `/`, matches dot files, and takes `*`, `**`, `?`, `[]` and `{}`.       |
+| `globOptions`         | `object`                                                                   |                              | How the glob in `from` matches — see [glob options](#glob-options).                                                     |
+| `info`                | `object` `(file: CopiedFile) => object`                                    |                              | [Asset info](/api/stats/#asset-objects) of the copied file, merged over the info the copy already carries.              |
+| `preservePermissions` | `boolean`                                                                  | `false`                      | Whether the copy keeps the permissions of the file it came from. Has no effect on Windows.                              |
+| `preserveTimestamps`  | `boolean`                                                                  | `false`                      | Whether the copy keeps the access and modification times of the file it came from, rather than the time it was written. |
+| `to`                  | `string` `(file: CopiedFile) => string`                                    | [`output.path`](#outputpath) | Directory the files are copied to, relative to `output.path`.                                                           |
+| `transform`           | `(content: Buffer, absoluteFilename: string) => string \| Buffer` `object` |                              | Modifies the content on the way through — see [transforming content](#transforming-content).                            |
 
 `context` defaults to the compiler [`context`](/configuration/entry-context/#context), and to what `from` names when `from` is not a glob — so `from: 'static'` copies the tree below `static/` rather than into a `static/` directory. Setting it explicitly roots every `from` of the pattern at one directory, which is how several globs keep a shared structure:
 
@@ -410,7 +410,15 @@ export default {
 };
 ```
 
-`to` and `info` may each be a function of the file being copied, which receives `{ absoluteFilename, sourceFilename, filename }` — `filename` being the name the file has so far, relative to `to`:
+`to` and `info` may each be a function of the file being copied, which receives a `CopiedFile` — `filename` being the name the file has so far, relative to `to`:
+
+```ts
+type CopiedFile = {
+  absoluteFilename: string;
+  sourceFilename: string;
+  filename: string;
+};
+```
 
 ```js
 export default {
@@ -437,7 +445,7 @@ export default {
 | `deep`           | `number`   | no limit | How many directory levels below the base of the glob are read, where `1` reads only the base itself.             |
 | `dot`            | `boolean`  | `true`   | Whether the glob reaches a file or directory whose name starts with a dot without naming it.                     |
 | `followSymlinks` | `boolean`  | `true`   | Whether a symbolic link is resolved and copied as what it points at. `false` copies the link itself, unresolved. |
-| `ignore`         | `[string]` |          | Globs of files which are not copied, resolved like `from`. A directory one of them matches is skipped whole.     |
+| `ignore`         | `string[]` |          | Globs of files which are not copied, resolved like `from`. A directory one of them matches is skipped whole.     |
 
 ```js
 export default {
@@ -527,7 +535,7 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 
 ## output.cssChunkFilename
 
-`string` `function (pathData, assetInfo) => string`
+`string` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 This option determines the name of non-initial CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -535,7 +543,7 @@ You **must not** specify an absolute path here. However, feel free to include fo
 
 ## output.cssFilename
 
-`string` `function (pathData, assetInfo) => string`
+`string` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 This option determines the name of CSS output files on disk. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -543,7 +551,7 @@ You **must not** specify an absolute path here. However, feel free to include fo
 
 ## output.devtoolFallbackModuleFilenameTemplate
 
-`string` `function (info)`
+`string` `(context: ModuleFilenameTemplateContext) => string`
 
 A fallback is used when the template string or function above yields duplicates.
 
@@ -551,7 +559,7 @@ See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplat
 
 ## output.devtoolModuleFilenameTemplate
 
-`string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
+`string = 'webpack://[namespace]/[resource-path]?[loaders]'` `(context: ModuleFilenameTemplateContext) => string`
 
 This option is only used when [`devtool`](/configuration/devtool) uses an option that requires module names.
 
@@ -625,7 +633,7 @@ export default {
 
 ## output.enabledChunkLoadingTypes
 
-`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+`('jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | string)[]`
 
 List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
 
@@ -643,7 +651,7 @@ export default {
 
 ## output.enabledLibraryTypes
 
-`[string]`
+`string[]`
 
 List of library types enabled for use by entry points.
 
@@ -658,7 +666,7 @@ export default {
 
 ## output.enabledWasmLoadingTypes
 
-`[string]`
+`string[]`
 
 List of wasm loading types enabled for use by entry points.
 
@@ -739,7 +747,7 @@ T> `let`, `spread`, `hasOwn`, `symbol`, and `nodeBuiltinModuleGetter` were added
 
 ## output.filename
 
-`string` `function (pathData, assetInfo) => string`
+`string` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
@@ -1348,7 +1356,7 @@ export default {
 
 <Badge text="5.107.0+" />
 
-`string = output.filename with '.js' replaced by '.html'` `function (pathData, assetInfo) => string`
+`string = output.filename with '.js' replaced by '.html'` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) (initial chunks). It works like [`output.filename`](#outputfilename) and supports the same [template strings](#template-strings). When unset, it is derived from `output.filename` by swapping the `.js` extension for `.html` (falling back to `[name].html` when `output.filename` is a function, or when the derived template contains no `[name]`, `[id]` or hash placeholder), mirroring how `cssFilename` derives from `filename`.
 
@@ -1368,7 +1376,7 @@ W> You must **not** specify an absolute path here. The path may contain folders 
 
 <Badge text="5.107.0+" />
 
-`string = output.chunkFilename with '.js' replaced by '.html'` `function (pathData, assetInfo) => string`
+`string = output.chunkFilename with '.js' replaced by '.html'` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 The filename template for HTML files emitted by [extracted HTML modules](/configuration/module/#modulegeneratorhtmlextract) for non-initial (on-demand) chunks. It defaults from [`output.chunkFilename`](#outputchunkfilename) the same way `htmlFilename` defaults from `filename`.
 
@@ -2298,7 +2306,7 @@ define("MyLibrary", [], factory);
 
 W> We might drop support for this, so prefer to use [output.library.export](#outputlibraryexport) which works the same as `libraryExport`.
 
-`string` `[string]`
+`string` `string[]`
 
 Configure which module or modules will be exposed via the `libraryTarget`. It is `undefined` by default, same behaviour will be applied if you set `libraryTarget` to an empty string e.g. `''` it will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using `libraryTarget: 'var'`.
 
@@ -3239,7 +3247,7 @@ export default {
 
 ### output.trustedTypes.onPolicyCreationFailure
 
-`string = 'stop': 'continue' | 'stop'`
+`'continue' | 'stop' = 'stop'`
 
 <Badge text="5.82.0+" />
 
@@ -3350,7 +3358,7 @@ export default {
 
 ## output.workerChunkFilename
 
-`string` `function (pathData, assetInfo) => string`
+`string` `(pathData: PathData, assetInfo?: AssetInfo) => string`
 
 - Available: 5.108.0+
 
@@ -3374,7 +3382,7 @@ T> Entries that webpack creates automatically from `new Worker(new URL(...))` ar
 
 ## output.workerChunkLoading
 
-`string: 'require' | 'import-scripts' | 'async-node' | 'import'` `boolean: false`
+`'require' | 'import-scripts' | 'async-node' | 'import'` `false`
 
 The new option `workerChunkLoading` controls the chunk loading of workers.
 

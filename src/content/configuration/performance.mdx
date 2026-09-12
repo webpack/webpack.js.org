@@ -121,7 +121,7 @@ export default {
 
 ### performance.assetFilter
 
-`function(assetFilename, source, assetInfo) => boolean`
+`(assetFilename: string, source: Source, assetInfo: AssetInfo) => boolean`
 
 This property allows webpack to control what files are used to calculate performance hints. The default function excludes assets whose `assetInfo.development` flag is set, such as source maps:
 
@@ -240,7 +240,7 @@ Report modules that call `eval` directly. A direct eval reads and writes any nam
 
 ### performance.hints
 
-`string: 'error' | 'warning' | 'stats'` `boolean: false`
+`'error' | 'warning' | 'stats'` `false`
 
 Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found.
 

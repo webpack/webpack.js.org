@@ -82,7 +82,7 @@ export default {
 
 ## infrastructureLogging.debug
 
-`string` `boolean = false` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+`string` `boolean = false` `RegExp` `(name: string) => boolean` `(string | RegExp | ((name: string) => boolean))[]`
 
 Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. Defaults to `false`.
 
@@ -100,7 +100,7 @@ export default {
 
 ## infrastructureLogging.level
 
-`string = 'info' : 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'`
+`'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose' = 'info'`
 
 Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. Defaults to `'info'`.
 
