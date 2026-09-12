@@ -157,61 +157,41 @@ Please do not assume things are simple. Avoid words like 'just', 'simply'.
 
 ### Configuration defaults and types
 
-Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
+Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. Types are written in **TypeScript notation**, placed directly under the documented option's title:
 
 **configuration.example.option**
 
-`string = 'none'`
+`'none' | 'development' | 'production' = 'none'`
 
-Where `= 'none'` means that the default value is `'none'` for the given option.
+The type comes first and the default, where there is one, follows after `=`. TypeScript has no syntax for a default value, so that trailing `= value` is the one addition this site makes to it — everything to its left is ordinary TypeScript that a reader can paste into an editor.
 
-`string = 'none': 'none' | 'development' | 'production'`
+Use a space between separate annotations to list alternatives that are easier to read apart than a single union:
 
-Where `: 'none' | 'development' | 'production'` enumerates the possible type values, in this case, three strings are acceptable: `'none'`, `'development'`, and `'production'`.
+`'none' | 'development' | 'production' = 'none'` `boolean`
 
-Use space between types to list all available types for the given option:
+Arrays, functions, objects and records are written as TypeScript spells them:
 
-`string = 'none': 'none' | 'development' | 'production'` `boolean`
+| Meaning                          | Notation                                                |
+| -------------------------------- | ------------------------------------------------------- |
+| An array of strings              | `string[]`                                              |
+| An array mixing several types    | `(string \| RegExp \| ((arg: string) => string))[]`     |
+| A function with known arguments  | `(compilation: Compilation, module: Module) => boolean` |
+| An object with known properties  | `{ prop1: string, prop2?: boolean }`                    |
+| An object with user-defined keys | `Record<string, string>`                                |
+| One or several plugin instances  | `MinimizerPlugin \| MinimizerPlugin[]`                  |
+| A fixed set of numbers           | `5 \| 15 \| 30 = 15`                                    |
 
-To mark an array, use square brackets:
+Mark an optional property with `?`, as TypeScript does, rather than describing it in prose.
 
-`string` `[string]`
+W> Do not write an array as `[string]`. That is a **tuple of exactly one string** in TypeScript, so a reader who knows the language will read it as something the option does not accept. Use `string[]`.
 
-If multiple types are allowed in `array`, use comma:
-
-`string` `[string, RegExp, function(arg) => string]`
-
-To mark a function, also list arguments when they are available:
-
-`function (compilation, module, path) => boolean`
-
-Where `(compilation, module, path)` lists the arguments that the provided function will receive and `=> boolean` means that the return value of the function must be a `boolean`.
-
-To mark a Plugin as an available option value type, use the camel case title of the `Plugin`:
-
-`MinimizerPlugin` `[MinimizerPlugin]`
-
-Which means that the option expects one or few `MinimizerPlugin` instances.
-
-To mark a number, use `number`:
-
-`number = 15: 5, 15, 30`
-
-To mark an object, use `object`:
-
-`object = { prop1 string = 'none': 'none' | 'development' | 'production', prop2 boolean = false, prop3 function (module) => string }`
-
-When object's key can have multiple types, use `|` to list them. Here is an example, where `prop1` can be both a string and an array of strings:
-
-`object = { prop1 string = 'none': 'none' | 'development' | 'production' | [string]}`
-
-This allows us to display the defaults, enumeration and other information.
+T> Prefer copying the real type over inventing one. webpack ships its own types in `types.d.ts`, generated from the JSDoc in `lib/`, so the authoritative shape of an option is already written down — `webpack.Configuration` and the option interfaces beneath it are what a user's editor shows them. Simplify it for readability where the real type is unwieldy, but keep it valid TypeScript.
 
 When an option has different defaults depending on the [`mode`](/configuration/mode/), use a defaults table instead of the inline `= value` syntax:
 
 **configuration.example.option**
 
-`string: 'natural' | 'named' | 'deterministic'`
+`'natural' | 'named' | 'deterministic'`
 
 The default value of `configuration.example.option` depends on the [`mode`](/configuration/mode/):
 
@@ -235,16 +215,13 @@ The default value of `configuration.example.flag` depends on the [`mode`](/confi
 | `"development"` | `false` |
 | `"none"`        | `false` |
 
-If the object's key is dynamic, user-defined, use `<key>` to describe it:
-
-`object = { <key> string }`
-
 ### Options shortlists and their typing
 
-Sometimes, we want to describe certain properties of objects and functions in lists. When applicable add typing directly to the list where properties are enlisted:
+Sometimes, we want to describe certain properties of objects and functions in lists. When applicable add typing directly to the list where properties are enlisted, in the same TypeScript notation:
 
 - `madeUp` (`boolean = true`): short description
 - `shortText` (`string = 'i am text'`): another short description
+- `pattern` (`RegExp | string`): a property with no default
 
 W> `:` is not a necessity here, note the property, type and default.
 
