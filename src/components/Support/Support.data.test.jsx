@@ -1,16 +1,15 @@
 /**
  * @jest-environment jsdom
  */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import SmallIcon from "../../assets/icon-square-small-slack.png";
 
-import Support from "./Support.jsx";
-
-// Data must be inline - jest.mock is hoisted before const declarations (TDZ)
-jest.mock("./AdditionalSupporters.mjs", () => []);
-jest.mock(
-  "./_supporters.json",
-  () => [
+// Data must be inline - the factories are hoisted before const declarations (TDZ)
+jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
+jest.unstable_mockModule("./_supporters.json", () => ({
+  default: [
     {
       slug: "gold-org",
       name: "Gold Org",
@@ -22,8 +21,9 @@ jest.mock(
       ).toISOString(),
     },
   ],
-  { virtual: true },
-);
+}));
+
+const { default: Support } = await import("./Support.jsx");
 
 const AVATAR_URL = "https://example.com/avatar.png";
 

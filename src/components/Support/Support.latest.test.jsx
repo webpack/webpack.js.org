@@ -1,40 +1,38 @@
 /**
  * @jest-environment jsdom
  */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { act, render, screen } from "@testing-library/react";
 import SmallIcon from "../../assets/icon-square-small-slack.png";
 
-import Support from "./Support.jsx";
-
-// Data must be inline - jest.mock is hoisted before const declarations (TDZ)
-jest.mock("./AdditionalSupporters.mjs", () => []);
-jest.mock(
-  "./_supporters.json",
-  () => {
-    const NOW = Date.now();
-    const DAY = 24 * 60 * 60 * 1000;
-    const recent = Array.from({ length: 12 }, (_, i) => ({
-      slug: `recent-${i}`,
-      name: `Recent ${i}`,
-      avatar: `https://example.com/recent-${i}.png`,
-      totalDonations: (12 - i) * 10000,
+// Data must be inline - the factories are hoisted before const declarations (TDZ)
+jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
+jest.unstable_mockModule("./_supporters.json", () => {
+  const NOW = Date.now();
+  const DAY = 24 * 60 * 60 * 1000;
+  const recent = Array.from({ length: 12 }, (_, i) => ({
+    slug: `recent-${i}`,
+    name: `Recent ${i}`,
+    avatar: `https://example.com/recent-${i}.png`,
+    totalDonations: (12 - i) * 10000,
+    monthlyDonations: 0,
+    firstDonation: new Date(NOW - (i + 1) * DAY).toISOString(),
+  }));
+  const stale = [
+    {
+      slug: "stale-org",
+      name: "Stale Org",
+      avatar: "https://example.com/stale.png",
+      totalDonations: 9999999,
       monthlyDonations: 0,
-      firstDonation: new Date(NOW - (i + 1) * DAY).toISOString(),
-    }));
-    const stale = [
-      {
-        slug: "stale-org",
-        name: "Stale Org",
-        avatar: "https://example.com/stale.png",
-        totalDonations: 9999999,
-        monthlyDonations: 0,
-        firstDonation: new Date(NOW - 30 * DAY).toISOString(),
-      },
-    ];
-    return [...recent, ...stale];
-  },
-  { virtual: true },
-);
+      firstDonation: new Date(NOW - 30 * DAY).toISOString(),
+    },
+  ];
+  return { default: [...recent, ...stale] };
+});
+
+const { default: Support } = await import("./Support.jsx");
 
 describe("Support with rank='latest'", () => {
   let intersectionCallback;

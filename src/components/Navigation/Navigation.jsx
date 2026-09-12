@@ -2,7 +2,7 @@
 import { DocSearch } from "@docsearch/react";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import { Link as ReactDOMLink, NavLink, useLocation } from "react-router-dom";
+import { Link as ReactDOMLink, NavLink, useLocation } from "react-router";
 
 // Import Internal Config
 import {

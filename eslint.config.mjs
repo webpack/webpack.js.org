@@ -34,6 +34,9 @@ export default defineConfig([
     ],
     rules: {
       "unicorn/prefer-global-this": "off",
+      // eslint-import-resolver-node predates `exports` maps, and react-router 8
+      // is ESM only with no `main`, so the resolver cannot find it.
+      "import/no-unresolved": ["error", { ignore: ["^react-router$"] }],
     },
   },
   {

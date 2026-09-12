@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from "react-router";
 
 const Link = ({ to = "", url, ...props }) => {
   if (url) to = url;

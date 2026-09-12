@@ -1,33 +1,25 @@
 /**
  * @jest-environment jsdom
  */
-
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { describe, expect, it, jest } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
-import Page from "../Page.jsx";
+import { MemoryRouter } from "react-router";
 
-jest.mock("../../Contributors/Contributors.jsx", () => {
-  const MockContributors = () => <div />;
-  return MockContributors;
-});
+jest.unstable_mockModule("../../Contributors/Contributors.jsx", () => ({
+  default: () => <div />,
+}));
 
-jest.mock("../../PageLinks/PageLinks.jsx", () => {
-  const MockPageLinks = () => <div />;
-  return MockPageLinks;
-});
-
-jest.mock("react-router-dom", () => {
-  const actual = jest.requireActual("react-router-dom");
-  return {
-    ...actual,
-    useLocation: () => ({ pathname: "/test", hash: "" }),
-  };
-});
+jest.unstable_mockModule("../../PageLinks/PageLinks.jsx", () => ({
+  default: () => <div />,
+}));
 
 Object.defineProperty(window, "scrollTo", {
   value: jest.fn(),
   writable: true,
 });
+
+const { default: Page } = await import("../Page.jsx");
 
 describe("Page component", () => {
   it("renders error message when content.__error exists", async () => {
@@ -37,7 +29,7 @@ describe("Page component", () => {
     };
 
     render(
-      <MemoryRouter>
+      <MemoryRouter initialEntries={["/test"]}>
         <Page content={content} title="Test" path="/test" />
       </MemoryRouter>,
     );

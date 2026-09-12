@@ -2,16 +2,10 @@
 import PropTypes from "prop-types";
 import { Fragment, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import {
-  Outlet,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Outlet, Route, Routes, useLocation, useNavigate } from "react-router";
 
 // Import Utilities
-/* eslint import/no-unresolved: ["error", { ignore: ["_content\.json$"] }] */
+/* eslint import/no-unresolved: ["error", { ignore: ["_content\.json$", "^react-router$"] }] */
 import Content from "../../_content.json";
 import OgImage from "../../assets/icon-pwa-512x512.png";
 import Logo from "../../assets/logo-on-white-bg.svg";

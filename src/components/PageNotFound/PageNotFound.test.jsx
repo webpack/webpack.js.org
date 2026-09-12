@@ -5,7 +5,7 @@
 import { describe, expect, it } from "@jest/globals";
 import { render } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import PageNotFound from "./PageNotFound.jsx";
 
 describe("PageNotFound", () => {
