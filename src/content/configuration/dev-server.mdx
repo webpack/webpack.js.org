@@ -120,7 +120,7 @@ export default {
 
 ## devServer.allowedHosts
 
-`'auto' | 'all'` `[string]`
+`'auto' | 'all'` `string` `string[]`
 
 This option allows you to allowlist services that are allowed to access the dev server.
 
@@ -633,7 +633,7 @@ export default {
 
 ## devServer.headers
 
-`array` `function` `object`
+`object` `{ key: string, value: string }[]` `(req: Request, res: Response, context?: Context) => object | { key: string, value: string }[]`
 
 Adds headers to all responses:
 
@@ -928,7 +928,7 @@ W> Live reloading works only with web related [targets](/configuration/target/#s
 
 ## devserver.onListening
 
-`function (devServer)`
+`(devServer: WebpackDevServer) => void`
 
 Provides the ability to execute a custom function when webpack-dev-server starts listening for connections on a port.
 
@@ -952,7 +952,7 @@ export default {
 
 ## devServer.open
 
-`boolean` `string` `object` `[string, object]`
+`boolean` `string` `object` `(string | object)[]`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -1105,7 +1105,7 @@ npx webpack serve --port auto
 
 ## devServer.proxy
 
-`[object, function]`
+`(object | Function)[]`
 
 Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
 
@@ -1405,7 +1405,7 @@ export default {
 
 ## devServer.setupMiddlewares
 
-`function (middlewares, devServer)`
+`(middlewares: Middleware[], devServer: WebpackDevServer) => Middleware[]`
 
 <Badge text="v4.7.0+" />
 
@@ -1460,7 +1460,7 @@ export default {
 
 ## devServer.static
 
-`boolean` `string` `object` `[string, object]`
+`boolean` `string` `object` `(string | object)[]`
 
 This option allows configuring options for serving static files from the directory (by default 'public' directory). To disable set it to `false`:
 
@@ -1601,7 +1601,7 @@ export default {
 
 ### publicPath
 
-`string = '/'` `[string]`
+`string = '/'` `string[]`
 
 Tell the server at which URL to serve [`static.directory`](#directory) content. For example to serve a file `assets/manifest.json` at `/serve-public-path-url/manifest.json`, your configurations should be as following:
 
@@ -1758,7 +1758,7 @@ export default {
 
 ## devServer.watchFiles
 
-`string` `object` `[string, object]`
+`string` `object` `(string | object)[]`
 
 This option allows you to configure a list of globs/directories/files to watch for file changes. For example:
 
