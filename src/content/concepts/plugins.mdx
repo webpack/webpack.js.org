@@ -101,3 +101,24 @@ compiler.run((err, stats) => {
 ```
 
 T> Did you know: The example seen above is extremely similar to the [webpack runtime itself!](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292) There are lots of great usage examples hiding in the [webpack source code](https://github.com/webpack/webpack) that you can apply to your own configurations and scripts!
+
+## Writing your own
+
+The [Writing a Plugin](/contribute/writing-a-plugin/) guide takes the object above and builds it out into a real plugin — options, async hooks, file dependencies for watch mode, types and tests.
+
+Two things decide whether a plugin behaves well, and both are about _which_ hook it taps.
+
+### Where the hooks live
+
+Hooks belong to the object that owns them, and the two reference pages list them in the order they run:
+
+- [Compiler hooks](/api/compiler-hooks/) — once per build, around the whole run: `run`, `watchRun`, `compile`, `make`, `emit`, `done`.
+- [Compilation hooks](/api/compilation-hooks/) — inside a single build, over modules, chunks and assets.
+
+A compiler outlives the builds it runs: in watch mode every rebuild is a new [`Compilation`](/api/compilation-object/) on the same [`Compiler`](/api/compiler-object/). State that must survive a rebuild belongs on the compiler; state about one build belongs on the compilation.
+
+### Creating or changing assets
+
+Do it in [`processAssets`](/api/compilation-hooks/#processassets), with the [stage](/api/compilation-hooks/#choosing-a-stage) that matches the work — `PROCESS_ASSETS_STAGE_ADDITIONAL` to emit a new file, `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` to minify, and so on.
+
+W> A plugin that emits its files from the compiler's [`emit`](/api/compiler-hooks/#emit) hook instead is a common mistake, and webpack reports it as deprecated. `emit` runs after the compilation is sealed, so the file skips every stage that would have minified, compressed, source-mapped or hashed it, and no other plugin sees it. The stage system exists so that plugins compose without being ordered by hand in the configuration.
