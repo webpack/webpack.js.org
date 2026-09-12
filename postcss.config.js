@@ -1,5 +1,7 @@
 "use strict";
 
 module.exports = {
-  plugins: ["@tailwindcss/postcss", "autoprefixer"],
+  // No autoprefixer: webpack's CSS minifier adds and removes vendor prefixes
+  // itself, from the same browserslist, and strips whatever autoprefixer added.
+  plugins: ["@tailwindcss/postcss"],
 };
