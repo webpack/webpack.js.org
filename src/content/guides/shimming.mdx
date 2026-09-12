@@ -165,26 +165,24 @@ This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of th
 
 ## Granular Shimming
 
-W> `imports-loader` is deprecated and only receives bug fixes. It still works, and the example below is unchanged, but webpack can do the same from the configuration itself — see webpack's [add-imports example](https://github.com/webpack/webpack/tree/main/examples/add-imports), which is the same behaviour as a short plugin.
-
 Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
 
 ```diff
++// Assume we are in the context of `window`
++this.alert("Hmmm, this probably isn't a great idea...");
++
  function component() {
    const element = document.createElement('div');
 
    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-+  // Assume we are in the context of `window`
-+  this.alert("Hmmm, this probably isn't a great idea...");
-+
    return element;
  }
 
  document.body.appendChild(component());
 ```
 
-This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](https://github.com/webpack/imports-loader):
+This becomes a problem when the module is executed in a CommonJS context, where the module's own `this` is `module.exports` rather than the global object. Wrapping the module in a function called with the global object fixes that, and it needs no loader: `NormalModule`'s `processResult` hook hands a plugin what the loaders produced and takes back a replacement, so putting code around a file before webpack parses it is a short plugin you can keep in the configuration.
 
 **webpack.config.js**
 
@@ -196,21 +194,65 @@ This becomes a problem when the module is executed in a CommonJS context where `
  const __filename = fileURLToPath(import.meta.url);
  const __dirname = path.dirname(__filename);
 
++const PLUGIN_NAME = 'SurroundModulePlugin';
++
++// A prepend before a directive would demote it to an expression, silently
++// making the module sloppy, so the code goes after one.
++const DIRECTIVE = /^\s*(["'])use strict\1;?/;
++
++class SurroundModulePlugin {
++  constructor(rules) {
++    this.rules = rules;
++  }
++
++  apply(compiler) {
++    const { NormalModule } = compiler.webpack;
++
++    compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
++      NormalModule.getCompilationHooks(compilation).processResult.tap(
++        PLUGIN_NAME,
++        (result, module) => {
++          const [source, sourceMap] = result;
++
++          for (const [resource, { before = '', after = '' }] of this.rules) {
++            if (module.resource !== resource) continue;
++
++            // a file no loader touched arrives as the buffer webpack read
++            const code =
++              typeof source === 'string' ? source : source.toString('utf8');
++            const directive = DIRECTIVE.exec(code);
++            const at = directive ? directive[0].length : 0;
++            const end = directive && !directive[0].endsWith(';') ? ';' : '';
++
++            // no newline after `before`: one would shift every line below it
++            // out of the source map
++            return [
++              `${code.slice(0, at)}${end}${before}${code.slice(at)}\n${after}`,
++              sourceMap,
++              undefined,
++            ];
++          }
++
++          return result;
++        }
++      );
++    });
++  }
++}
++
  export default {
    entry: './src/index.js',
    output: {
      filename: 'main.js',
      path: path.resolve(__dirname, 'dist'),
    },
-+  module: {
-+    rules: [
-+      {
-+        test: fileURLToPath(import.meta.resolve('./src/index.js')),
-+        use: 'imports-loader?wrapper=window',
-+      },
-+    ],
-+  },
    plugins: [
++    new SurroundModulePlugin([
++      [
++        fileURLToPath(import.meta.resolve('./src/index.js')),
++        { before: '(function () {', after: '}).call(globalThis);' },
++      ],
++    ]),
      new webpack.ProvidePlugin({
        join: ['lodash', 'join'],
      }),
@@ -218,9 +260,11 @@ This becomes a problem when the module is executed in a CommonJS context where `
  };
 ```
 
-## Global Exports
+W> The wrapper is for scripts only. `import` and `export` may appear only at the top level, so wrapping an ES module in a function is a syntax error — and an ES module's own `this` is `undefined` anyway, never `module.exports`.
 
-W> `exports-loader` is deprecated and only receives bug fixes. It still works, and the example below is unchanged, but appending exports to a file that has none is a few lines over webpack's public API — see webpack's [add-exports example](https://github.com/webpack/webpack/tree/main/examples/add-exports).
+T> A name the module only _reads_ is [`ProvidePlugin`](/plugins/provide-plugin/)'s job, since it binds the name where the module reads it without touching the source. What is left for this plugin is the wrapper above, a side-effect import the file never names, and a real binding. webpack's [add-imports example](https://github.com/webpack/webpack/tree/main/examples/add-imports) is the same plugin with a `RegExp` condition, so one entry can match many files.
+
+## Global Exports
 
 Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
 
@@ -252,38 +296,28 @@ const helpers = {
 };
 ```
 
-Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](https://github.com/webpack/exports-loader), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. A file that exports nothing needs the exports appending to it, which is the same plugin from the other end of the file — only `after` this time. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
 
 **webpack.config.js**
 
 ```diff
- import path from "node:path";
- import webpack from "webpack";
- import { fileURLToPath } from 'url';
-
- const __filename = fileURLToPath(import.meta.url);
- const __dirname = path.dirname(__filename);
-
  export default {
    entry: './src/index.js',
    output: {
      filename: 'main.js',
      path: path.resolve(__dirname, 'dist'),
    },
-   module: {
-     rules: [
-       {
-         test: fileURLToPath(import.meta.resolve('./src/index.js')),
-         use: 'imports-loader?wrapper=window',
-       },
-+      {
-+        test: fileURLToPath(import.meta.resolve('./src/globals.js')),
-+        use:
-+          'exports-loader?type=commonjs&exports=file,multiple|helpers.parse|parse',
-+      },
-     ],
-   },
    plugins: [
+     new SurroundModulePlugin([
+       [
+         fileURLToPath(import.meta.resolve('./src/index.js')),
+         { before: '(function () {', after: '}).call(globalThis);' },
+       ],
++      [
++        fileURLToPath(import.meta.resolve('./src/globals.js')),
++        { after: 'module.exports = { file, parse: helpers.parse };' },
++      ],
+     ]),
      new webpack.ProvidePlugin({
        join: ['lodash', 'join'],
      }),
@@ -292,6 +326,8 @@ Now, while you'd likely never do this in your own source code, you may encounter
 ```
 
 Now from within our entry script (i.e. `src/index.js`), we could use `const { file, parse } = require('./globals.js');` and all should work smoothly.
+
+T> Which format to append is the file's own, and the two are not equivalent. `module.exports = …` keeps a script the script it is, which is what `globals.js` above wants. `export { … }` is what makes a file an ES module, exactly as it would be in the source, so those exports can be analyzed and tree-shaken — prefer it wherever the file tolerates it. webpack's [add-exports example](https://github.com/webpack/webpack/tree/main/examples/add-exports) shows both side by side.
 
 ## Loading Polyfills
 
@@ -399,20 +435,17 @@ import "whatwg-fetch";
 +    filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
    },
-   module: {
-     rules: [
-       {
-         test: fileURLToPath(import.meta.resolve('./src/index.js')),
-         use: 'imports-loader?wrapper=window',
-       },
-       {
-         test: fileURLToPath(import.meta.resolve('./src/globals.js')),
-         use:
-           'exports-loader?type=commonjs&exports[]=file&exports[]=multiple|helpers.parse|parse',
-       },
-     ],
-   },
    plugins: [
+     new SurroundModulePlugin([
+       [
+         fileURLToPath(import.meta.resolve('./src/index.js')),
+         { before: '(function () {', after: '}).call(globalThis);' },
+       ],
+       [
+         fileURLToPath(import.meta.resolve('./src/globals.js')),
+         { after: 'module.exports = { file, parse: helpers.parse };' },
+       ],
+     ]),
      new webpack.ProvidePlugin({
        join: ['lodash', 'join'],
      }),
@@ -582,4 +615,4 @@ When there is no AMD/CommonJS version of the module and you want to include the 
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
-Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `additionalCode=var%20define%20=%20false;` via the [`imports-loader`](https://github.com/webpack/imports-loader).
+Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by prepending `var define = false;` with the [plugin above](#granular-shimming) — `{ before: 'var define = false;' }` for that file.

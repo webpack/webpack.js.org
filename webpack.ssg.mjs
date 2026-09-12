@@ -97,11 +97,11 @@ export default (env) =>
           "loaders/style-loader": "/guides/native-css/",
           "loaders/html-loader": "/guides/native-html/",
           "loaders/expose-loader": "/guides/shimming/",
-          "loaders/imports-loader": "/guides/shimming/",
-          "loaders/exports-loader": "/guides/shimming/",
+          "loaders/imports-loader": "/guides/shimming/#granular-shimming",
+          "loaders/exports-loader": "/guides/shimming/#global-exports",
           "loaders/remark-loader":
             "https://github.com/webpack/webpack/tree/main/examples/markdown",
-          "plugins/copy-webpack-plugin": "/plugins/copy-plugin/",
+          "plugins/copy-webpack-plugin": "/configuration/output/#outputcopy",
           "plugins/terser-webpack-plugin": "/plugins/minimizer-webpack-plugin/",
           "plugins/css-minimizer-webpack-plugin":
             "/plugins/minimizer-webpack-plugin/",
