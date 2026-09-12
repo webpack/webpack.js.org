@@ -464,7 +464,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 <Badge text="5.32.0+" />
 
-`this.importModule(request, options, [callback]): Promise`
+`(request: string, options?: ImportModuleOptions) => Promise<any>` `(request: string, options: ImportModuleOptions | undefined, callback: (err?: Error | null, exports?: any) => void) => void`
 
 An alternative lightweight solution for the child compiler to compile and execute a request at build time.
 

@@ -79,7 +79,7 @@ export default {
 
 ### import()
 
-`function(string path):Promise`
+`(path: string) => Promise<any>`
 
 Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and its children are split out into a separate chunk.
 

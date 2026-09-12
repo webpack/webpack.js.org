@@ -14,15 +14,26 @@ The Compilation object has many methods and hooks available. On this page, we wi
 
 ## compilation object methods
 
+The signatures below use two callback shapes that recur throughout the API:
+
+```ts
+type ModuleCallback = (
+  err?: WebpackError | null,
+  result?: Module | null
+) => void;
+
+type ErrorCallback = (err?: WebpackError | null) => void;
+```
+
 ### getStats
 
-`function`
+`() => Stats`
 
 Returns Stats object for the current compilation.
 
 ### addModule
 
-`function (module, callback)`
+`(module: Module, callback: ModuleCallback) => void`
 
 Adds a module to the current compilation.
 
@@ -33,7 +44,7 @@ Parameters:
 
 ### getModule
 
-`function (module)`
+`(module: Module) => Module`
 
 Fetches a module from a compilation by its identifier.
 
@@ -43,7 +54,7 @@ Parameters:
 
 ### findModule
 
-`function (identifier)`
+`(identifier: string) => Module | undefined`
 
 Attempts to search for a module by its identifier. Returns the module, or `undefined` if none matches.
 
@@ -53,7 +64,7 @@ Parameters:
 
 ### buildModule
 
-`function (module, callback)`
+`(module: Module, callback: ModuleCallback) => void`
 
 Builds the given module.
 
@@ -64,7 +75,7 @@ Parameters:
 
 ### processModuleDependencies
 
-`function (module, callback)`
+`(module: Module, callback: ModuleCallback) => void`
 
 Process the given module dependencies.
 
@@ -75,7 +86,7 @@ Parameters:
 
 ### addEntry
 
-`function (context, entry, name, callback)`
+`(context: string, entry: Dependency, optionsOrName: string | EntryOptions, callback: ModuleCallback) => void`
 
 Adds an entry to the compilation.
 
@@ -88,7 +99,7 @@ Parameters:
 
 ### rebuildModule
 
-`function (module, thisCallback)`
+`(module: Module, callback: ModuleCallback) => void`
 
 Triggers a re-build of the module.
 
@@ -99,7 +110,7 @@ Parameters:
 
 ### finish
 
-`function (callback)`
+`(callback: ErrorCallback) => void`
 
 Finishes compilation and invokes the given callback.
 
@@ -109,7 +120,7 @@ Parameters:
 
 ### seal
 
-`function (callback)`
+`(callback: ErrorCallback) => void`
 
 Seals the compilation.
 
@@ -119,13 +130,13 @@ Parameters:
 
 ### unseal
 
-`function`
+`() => void`
 
 Unseals the compilation.
 
 ### reportDependencyErrorsAndWarnings
 
-`function (module, blocks)`
+`(module: Module, blocks: DependenciesBlock[]) => boolean`
 
 Adds errors and warnings of the given module to the compilation errors and warnings.
 
@@ -136,7 +147,7 @@ Parameters:
 
 ### addChunkInGroup
 
-`function (groupOptions, module, loc, request)`
+`(groupOptions: string | ChunkGroupOptions, module?: Module, loc?: DependencyLocation, request?: string) => ChunkGroup`
 
 Adds module to an existing chunk group or creates a new one. Returns a `chunkGroup`.
 
@@ -149,7 +160,7 @@ Parameters:
 
 ### addChunk
 
-`function (name)`
+`(name?: string | null) => Chunk`
 
 Creates and adds a new chunk to the `compilation.chunks`. Returns that `chunk`.
 
@@ -159,7 +170,7 @@ Parameters:
 
 ### assignDepth
 
-`function (module)`
+`(module: Module) => void`
 
 Assigns `depth` to the given module and its dependency blocks recursively.
 
@@ -169,7 +180,7 @@ Parameters:
 
 ### getDependencyReferencedExports
 
-`function (dependency, runtime)`
+`(dependency: Dependency, runtime: RuntimeSpec) => (string[] | ReferencedExport)[]`
 
 Returns the exports referenced by the given dependency.
 
@@ -180,7 +191,7 @@ Parameters:
 
 ### removeReasonsOfDependencyBlock
 
-`function (module, block)`
+`(module: Module, block: DependenciesBlockLike) => void`
 
 Removes relation of the module to the dependency block.
 
@@ -191,7 +202,7 @@ Parameters:
 
 ### patchChunksAfterReasonRemoval
 
-`function (module, chunk)`
+`(module: Module, chunk: Chunk) => void`
 
 Patches ties of module and chunk after removing dependency reasons. Called automatically by `removeReasonsOfDependencyBlock`.
 
@@ -202,7 +213,7 @@ Parameters:
 
 ### removeChunkFromDependencies
 
-`function (block, chunk)`
+`(block: DependenciesBlock, chunk: Chunk) => void`
 
 Removes given chunk from a dependencies block module and chunks after removing dependency reasons. Called automatically by `removeReasonsOfDependencyBlock`.
 
@@ -213,27 +224,27 @@ Parameters:
 
 ### sortItemsWithChunkIds
 
-`function`
+`() => void`
 
 ### summarizeDependencies
 
-`function`
+`() => void`
 
 ### createHash
 
-`function`
+`() => CodeGenerationJob[]`
 
 ### createModuleAssets
 
-`function`
+`() => void`
 
 ### createChunkAssets
 
-`function`
+`(callback: ErrorCallback) => void`
 
 ### getPath
 
-`function (filename, data)`
+`(filename: string | TemplatePathFn, data?: PathData) => string`
 
 Returns the interpolated path.
 
@@ -244,7 +255,7 @@ Parameters:
 
 ### getPathWithInfo
 
-`function (filename, data)`
+`(filename: string | TemplatePathFn, data?: PathData) => { path: string, info: AssetInfo }`
 
 Returns interpolated path and asset information.
 
@@ -255,7 +266,7 @@ Parameters:
 
 ### createChildCompiler
 
-`function (name, outputOptions, plugins)`
+`(name: string, outputOptions?: Partial<OutputNormalized>, plugins?: (WebpackPluginInstance | ((this: Compiler, compiler: Compiler) => void) | Falsy)[]) => Compiler`
 
 Allows running another instance of webpack inside of webpack. However, as a child with different settings and configurations applied. It copies all hooks and plugins from the parent (or top-level compiler) and creates a child `Compiler` instance. Returns the created `Compiler`.
 
@@ -267,21 +278,21 @@ Parameters:
 
 ### checkConstraints
 
-`function`
+`() => void`
 
 ### emitAsset
 
-`function (file, source, assetInfo = {})`
+`(file: string, source: Source, assetInfo?: AssetInfo) => void`
 
 Parameters:
 
 - `file` - file name of the asset
 - `source` - the source of the asset
-- `assetInfo` - additional asset information
+- `assetInfo` - additional asset information, `{}` when omitted
 
 ### updateAsset
 
-`function (file, newSourceOrFunction, assetInfoUpdateOrFunction)`
+`(file: string, newSourceOrFunction: Source | ((source: Source) => Source), assetInfoUpdateOrFunction?: AssetInfo | ((assetInfo?: AssetInfo) => AssetInfo | undefined)) => void`
 
 Parameters:
 
@@ -291,7 +302,7 @@ Parameters:
 
 ### deleteAsset
 
-`function (file)`
+`(file: string) => void`
 
 Parameters:
 
@@ -299,13 +310,13 @@ Parameters:
 
 ### getAssets
 
-`function`
+`() => Readonly<Asset>[]`
 
 Returns array of all assets under the current compilation.
 
 ### getAsset
 
-`function (name)`
+`(name: string) => Readonly<Asset> | undefined`
 
 Parameters:
 
@@ -313,7 +324,7 @@ Parameters:
 
 ### getCache
 
-`function (name)`
+`(name: string) => CacheFacade`
 
 Returns a `CacheFacade` for the given name, the API a plugin uses to store results between builds and reuse them from the [persistent cache](/configuration/cache/). Prefer it over `compiler.getCache(name)`, and over the deprecated `compilation.cache`, so that the cached entries belong to the compilation being built.
 
