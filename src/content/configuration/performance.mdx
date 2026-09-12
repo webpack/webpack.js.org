@@ -104,7 +104,6 @@ What each reason means, and what lifts it:
 | `__webpack_public_path__` is reassigned                                          | the path is only known at runtime, so no literal can be written; set [`output.publicPath`](/configuration/output/#outputpublicpath) instead                                                                       |
 | [`output.publicPath`](/configuration/output/#outputpublicpath) needs a base      | a relative public path is read differently from each chunk; a root-absolute or absolute one, or `"auto"`, reads the same everywhere                                                                               |
 | entries disagree on `baseUri`, or one is not absolute                            | give the entries that share a module the same absolute `baseUri`                                                                                                                                                  |
-| the compilation emits no JavaScript for a chunk                                  | the chunk belongs to another build, as a Module Federation remote does; nothing to change here                                                                                                                    |
 | a hot update could move the name                                                 | only while [HMR](/concepts/hot-module-replacement/) is on; production output is unaffected                                                                                                                        |
 
 ```js
