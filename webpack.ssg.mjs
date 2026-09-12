@@ -95,6 +95,26 @@ export default (env) =>
           "plugins/mini-css-extract-plugin": "/guides/native-css/",
           "loaders/css-loader": "/guides/native-css/",
           "loaders/style-loader": "/guides/native-css/",
+          "loaders/html-loader": "/guides/native-html/",
+          "loaders/expose-loader": "/guides/shimming/",
+          "loaders/imports-loader": "/guides/shimming/#granular-shimming",
+          "loaders/exports-loader": "/guides/shimming/#global-exports",
+          "loaders/remark-loader":
+            "https://github.com/webpack/webpack/tree/main/examples/markdown",
+          "plugins/copy-webpack-plugin": "/configuration/output/#outputcopy",
+          "plugins/terser-webpack-plugin": "/plugins/minimizer-webpack-plugin/",
+          "plugins/css-minimizer-webpack-plugin":
+            "/plugins/minimizer-webpack-plugin/",
+          "plugins/html-minimizer-webpack-plugin":
+            "/plugins/minimizer-webpack-plugin/",
+          "plugins/json-minimizer-webpack-plugin":
+            "/plugins/minimizer-webpack-plugin/",
+          "plugins/image-minimizer-webpack-plugin":
+            "/plugins/minimizer-webpack-plugin/",
+          "plugins/eslint-webpack-plugin":
+            "/plugins/diagnostics-webpack-plugin/",
+          "plugins/stylelint-webpack-plugin":
+            "/plugins/diagnostics-webpack-plugin/",
           "concepts/mode": "/configuration/mode",
           "contribute/writing-a-scaffold": "/api/cli/#init",
           "loaders/raw-loader": "https://v4.webpack.js.org/loaders/raw-loader",

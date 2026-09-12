@@ -384,12 +384,12 @@ export default {
 
 <Badge text="5.107.0+" />
 
-Enable native HTML module support. Importing a `.html` file from JavaScript runs its tag references through the normal webpack pipeline, replacing the role `html-loader` has played for years. The flag registers the `html` module type on `NormalModuleFactory` and unlocks the HTML behaviors described below.
+Enable native HTML module support. Importing a `.html` file from JavaScript runs its tag references through the normal webpack pipeline, with no loader in the way. The flag registers the `html` module type on `NormalModuleFactory` and unlocks the HTML behaviors described below.
 
 - Type: `boolean | 'auto'`
 - Default: `false`, `'auto'` since webpack 5.109.0
 
-Since webpack 5.109.0, the option defaults to `'auto'`: the built-in HTML support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.html` files, so existing `html-loader` setups keep working unchanged. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
+Since webpack 5.109.0, the option defaults to `'auto'`: the built-in HTML support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.html` files, so a project that still handles HTML with a loader keeps working unchanged. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
 **webpack.config.js**
 
@@ -411,7 +411,7 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **This feature is experimental and partial.** Webpack 5.107 implemented the `html-loader` role: importing an HTML file from JS runs its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with the plugin-based setups it replaces is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+W> **This feature is experimental and partial.** Webpack 5.107 made importing an HTML file from JS run its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with the plugin-based setups it replaces is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
 
 T> The HTML parser can be tuned via [`module.parser.html`](/configuration/module/#moduleparserhtml): use [`sources`](/configuration/module/#moduleparserhtmlsources) to disable or customize URL-attribute extraction, and [`template`](/configuration/module/#moduleparserhtmltemplate) to transform the HTML source before parsing.
 

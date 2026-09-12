@@ -51,7 +51,7 @@ Loaders are activated by using `loadername!` prefixes in `import .. from "mod";`
 
 ## Templating
 
-T> HTML is built in ([`experiments.html`](/configuration/experiments/#experimentshtml), experimental), so `html-loader` is not listed here. It stays [documented](/loaders/html-loader) for what the built-in support does not cover — see [What's built-in](/guides/native-html/#whats-built-in). Template engines always keep their loader.
+T> HTML is built in ([`experiments.html`](/configuration/experiments/#experimentshtml), experimental), so no loader is listed here for plain HTML — the [Native HTML](/guides/native-html/) guide covers [what is built in](/guides/native-html/#whats-built-in) and how to move an existing setup over. Template engines always keep their loader.
 
 - [`pug-loader`](https://github.com/pugjs/pug-loader) Loads Pug and Jade templates and returns a function
 - [`markdown-loader`](https://github.com/peerigon/markdown-loader) Compiles Markdown to HTML
@@ -60,7 +60,6 @@ T> HTML is built in ([`experiments.html`](/configuration/experiments/#experiment
 - [`handlebars-loader`](https://github.com/pcardune/handlebars-loader) Compiles Handlebars to HTML
 - [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
 - [`twig-loader`](https://github.com/zimmo-be/twig-loader) Compiles Twig templates and returns a function
-- [`remark-loader`](https://github.com/webpack/remark-loader) Load markdown through `remark` with built-in image resolution
 
 ## Styling
 

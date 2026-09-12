@@ -168,53 +168,27 @@ This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of th
 Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
 
 ```diff
++// Assume we are in the context of `window`
++this.alert("Hmmm, this probably isn't a great idea...");
++
  function component() {
    const element = document.createElement('div');
 
    element.innerHTML = join(['Hello', 'webpack'], ' ');
 
-+  // Assume we are in the context of `window`
-+  this.alert("Hmmm, this probably isn't a great idea...");
-+
    return element;
  }
 
  document.body.appendChild(component());
 ```
 
-This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](/loaders/imports-loader/):
+This becomes a problem when the module is executed in a CommonJS context, where the module's own `this` is `module.exports` rather than the global object. Wrapping the module in a function called with the global object fixes that, and it needs no loader: `NormalModule`'s `processResult` hook hands a plugin what the loaders produced and takes back a replacement, so putting code around a file before webpack parses it is a plugin short enough to keep in the configuration.
 
-**webpack.config.js**
+webpack's [add-imports example](https://github.com/webpack/webpack/tree/main/examples/add-imports) is that plugin. It covers the wrapper above, a side-effect import the file never names, and a real binding.
 
-```diff
- import path from "node:path";
- import webpack from "webpack";
- import { fileURLToPath } from 'url';
+W> The wrapper is for scripts only. `import` and `export` may appear only at the top level, so wrapping an ES module in a function is a syntax error — and an ES module's own `this` is `undefined` anyway, never `module.exports`.
 
- const __filename = fileURLToPath(import.meta.url);
- const __dirname = path.dirname(__filename);
-
- export default {
-   entry: './src/index.js',
-   output: {
-     filename: 'main.js',
-     path: path.resolve(__dirname, 'dist'),
-   },
-+  module: {
-+    rules: [
-+      {
-+        test: fileURLToPath(import.meta.resolve('./src/index.js')),
-+        use: 'imports-loader?wrapper=window',
-+      },
-+    ],
-+  },
-   plugins: [
-     new webpack.ProvidePlugin({
-       join: ['lodash', 'join'],
-     }),
-   ],
- };
-```
+T> A name the module only _reads_ is [`ProvidePlugin`](/plugins/provide-plugin/)'s job, since it binds the name where the module reads it without touching the source.
 
 ## Global Exports
 
@@ -248,46 +222,11 @@ const helpers = {
 };
 ```
 
-Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. A file that exports nothing needs the exports appending to it, which is the same hook from the other end of the file: webpack's [add-exports example](https://github.com/webpack/webpack/tree/main/examples/add-exports) is the plugin for it.
 
-**webpack.config.js**
+For `globals.js` above, appending `module.exports = { file, parse: helpers.parse };` exports `file` as `file` and `helpers.parse` as `parse`. From within our entry script (i.e. `src/index.js`), we could then use `const { file, parse } = require('./globals.js');` and all should work smoothly.
 
-```diff
- import path from "node:path";
- import webpack from "webpack";
- import { fileURLToPath } from 'url';
-
- const __filename = fileURLToPath(import.meta.url);
- const __dirname = path.dirname(__filename);
-
- export default {
-   entry: './src/index.js',
-   output: {
-     filename: 'main.js',
-     path: path.resolve(__dirname, 'dist'),
-   },
-   module: {
-     rules: [
-       {
-         test: fileURLToPath(import.meta.resolve('./src/index.js')),
-         use: 'imports-loader?wrapper=window',
-       },
-+      {
-+        test: fileURLToPath(import.meta.resolve('./src/globals.js')),
-+        use:
-+          'exports-loader?type=commonjs&exports=file,multiple|helpers.parse|parse',
-+      },
-     ],
-   },
-   plugins: [
-     new webpack.ProvidePlugin({
-       join: ['lodash', 'join'],
-     }),
-   ],
- };
-```
-
-Now from within our entry script (i.e. `src/index.js`), we could use `const { file, parse } = require('./globals.js');` and all should work smoothly.
+T> Which format to append is the file's own, and the two are not equivalent. `module.exports = …` keeps a script the script it is, which is what `globals.js` above wants. `export { … }` is what makes a file an ES module, exactly as it would be in the source, so those exports can be analyzed and tree-shaken — prefer it wherever the file tolerates it. The example shows both side by side.
 
 ## Loading Polyfills
 
@@ -394,19 +333,6 @@ import "whatwg-fetch";
 -    filename: 'main.js',
 +    filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
-   },
-   module: {
-     rules: [
-       {
-         test: fileURLToPath(import.meta.resolve('./src/index.js')),
-         use: 'imports-loader?wrapper=window',
-       },
-       {
-         test: fileURLToPath(import.meta.resolve('./src/globals.js')),
-         use:
-           'exports-loader?type=commonjs&exports[]=file&exports[]=multiple|helpers.parse|parse',
-       },
-     ],
    },
    plugins: [
      new webpack.ProvidePlugin({
@@ -578,4 +504,4 @@ When there is no AMD/CommonJS version of the module and you want to include the 
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
-Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `additionalCode=var%20define%20=%20false;` via the [`imports-loader`](/loaders/imports-loader/).
+Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by prepending `var define = false;` to that file, with the same [add-imports example](https://github.com/webpack/webpack/tree/main/examples/add-imports) plugin used under [Granular Shimming](#granular-shimming).

@@ -112,7 +112,7 @@ T> Loaders were originally designed to work in synchronous loader pipelines, lik
 
 By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag to `true`, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as a `String` or as a `Buffer`. The compiler converts them between loaders.
 
-**raw-loader.js**
+**my-raw-loader.js**
 
 ```js
 export default function rawLoader(content) {

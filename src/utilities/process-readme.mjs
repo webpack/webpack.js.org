@@ -19,8 +19,8 @@ const fragmentLinkMap = {
     "/configuration/output/#outputpublicpath",
   "/configuration/resolve/#resolve-modules":
     "/configuration/resolve/#resolvemodules",
-  "/guides/shimming/#exports-loader": "/loaders/exports-loader",
-  "/guides/shimming/#imports-loader": "/loaders/imports-loader",
+  "/guides/shimming/#exports-loader": "/guides/shimming/#global-exports",
+  "/guides/shimming/#imports-loader": "/guides/shimming/#granular-shimming",
   "/guides/shimming/#provideplugin": "/plugins/provide-plugin/",
 };
 

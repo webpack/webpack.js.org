@@ -187,7 +187,8 @@ Take the case of rendering a template file with data specified via loader option
 
 - `pug-loader`: Convert template to a module that exports a function.
 - `apply-loader`: Executes the function with loader options and returns raw HTML.
-- `html-loader`: Accepts HTML and outputs a valid JavaScript module.
+
+Webpack takes it from there: the HTML that falls out of the chain is handled by [built-in HTML support](/guides/native-html/), so nothing needs to turn it into a module.
 
 T> The fact that loaders can be chained also means they don't necessarily have to output JavaScript. As long as the next loader in the chain can handle its output, the loader can return any type of module.
 
