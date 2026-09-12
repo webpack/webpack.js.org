@@ -31,10 +31,10 @@ T> When running webpack without a configuration file, the entry defaults to `'./
 
 ## Single Entry (Shorthand) Syntax
 
-Usage: `entry: string | [string]`
+Usage: `entry: string | string[]`
 
 - `string`: a single entry file
-- `[string]`: multiple entry files
+- `string[]`: multiple entry files
 
 **webpack.config.js**
 
@@ -86,12 +86,12 @@ Single Entry Syntax is a great choice when you are looking to quickly set up a w
 
 ## Object Syntax
 
-Usage: `entry: { <entryChunkName> string | [string] } | {}`
+Usage: `entry: Record<entryChunkName, string | string[]>`
 
-- `<entryChunkName>`: name of the entry chunk
+- `entryChunkName`: name of the entry chunk
 - `string`: single entry file
-- `[string]`: multiple entry files
-- `{}`: empty object
+- `string[]`: multiple entry files
+- `{}`: an empty object is also accepted
 
 **webpack.config.js**
 

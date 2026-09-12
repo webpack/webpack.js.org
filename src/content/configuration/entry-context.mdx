@@ -43,7 +43,17 @@ By default, the current working directory of Node.js is used, but it's recommend
 
 ## entry
 
-`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string, runtime string | false }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string, layer string, runtime string | false })`
+`string` `string[]` `EntryObject` `EntryFn`
+
+```ts
+type Entry = string | string[] | EntryObject | EntryFn;
+
+// Each key names a chunk; see Entry descriptor below for EntryDescription.
+type EntryObject = Record<string, string | string[] | EntryDescription>;
+
+type EntryFn = () =>
+  string | string[] | EntryObject | Promise<string | string[] | EntryObject>;
+```
 
 The point or points where to start the application bundling process. If an array is passed then all items will be processed.
 

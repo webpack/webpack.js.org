@@ -268,7 +268,7 @@ export default {
 
 ### cache.managedPaths
 
-`[string]`
+`(string | RegExp)[]`
 
 W> Moved to [snapshot.managedPaths](/configuration/other-options/#managedpaths)
 
@@ -432,7 +432,7 @@ export default {
 
 ### cache.store
 
-`string = 'pack': 'pack'`
+`'pack' = 'pack'`
 
 `cache.store` tells webpack when to store data on the file system.
 
@@ -456,7 +456,7 @@ export default {
 
 ### cache.type
 
-`string: 'memory' | 'filesystem'`
+`'memory' | 'filesystem'`
 
 Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and only accepts the [`cache.maxGenerations`](#cachemaxgenerations) and [`cache.cacheUnaffected`](#cachecacheunaffected) options:
 

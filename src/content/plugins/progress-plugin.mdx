@@ -47,7 +47,7 @@ When providing an `object` to the `ProgressPlugin`, following properties are sup
 - `profile` (`boolean = false`): Tells `ProgressPlugin` to collect profile data for progress steps.
 - `dependencies` (`boolean = true`): Shows the count of dependencies in progress message.
 - `dependenciesCount` (`number = 10000`): A minimum dependencies count to start with. Takes effect when `dependencies` property is enabled.
-- `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): Tells `ProgressPlugin` how to calculate progress percentage.
+- `percentBy` (`'entries' | 'dependencies' | 'modules' | null = null`): Tells `ProgressPlugin` how to calculate progress percentage.
 - `progressBar` (`boolean | 'auto' | object = false`) <Badge text="5.107.0+" />: Renders a progress bar in the terminal instead of the plain percentage message. Only takes effect with the default handler, i.e. when no custom `handler` is provided. Pass `true` to enable it with defaults, `'auto'` <Badge text="5.109.0+" /> to enable it only in interactive terminals (TTY), or an object with the following properties:
   - `name` (`string = 'Build'`): Name shown before the progress bar.
   - `color` (`string = 'green'`): Color used for the filled portion of the bar. Falls back to `'green'` when the given color is not supported.

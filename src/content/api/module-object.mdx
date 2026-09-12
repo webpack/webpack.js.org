@@ -93,43 +93,43 @@ T> `module.id`, `module.hash`, `module.issuer`, `module.usedExports` and friends
 
 ### identifier
 
-`function () => string`
+`() => string`
 
 A string that identifies the module uniquely in the compilation — the request with all loaders and their options. It is the key `compilation.findModule` looks up.
 
 ### readableIdentifier
 
-`function (requestShortener) => string`
+`(requestShortener: RequestShortener) => string`
 
 The same identity in the shortened form stats and warnings print. Take the shortener from `compilation.requestShortener`.
 
 ### originalSource
 
-`function () => Source | null`
+`() => Source | null`
 
 The module's source before code generation, or `null` for a module that has none.
 
 ### getSourceTypes
 
-`function () => Set<string>`
+`() => ReadonlySet<string>`
 
 Which kinds of code the module can generate, e.g. `'javascript'`, `'css'`, `'asset'`. Ask the module instead of deriving it from `type`.
 
 ### size
 
-`function (type) => number`
+`(type?: string) => number`
 
 The size of the module's source of that type, in bytes.
 
 ### nameForCondition
 
-`function () => string | null`
+`() => string | null`
 
 The path [rule conditions](/configuration/module/#condition) are matched against — the resource without its query and fragment. `null` when the module has no file behind it.
 
 ### addError / addWarning / getErrors / getWarnings
 
-`function`
+`(error: Error) => void` `(warning: Error) => void` `() => Error[] | undefined` `() => Error[] | undefined`
 
 Diagnostics attached to the module. One added here is reported against the module and survives into the cache, unlike a `compilation.errors` entry pushed after seal.
 

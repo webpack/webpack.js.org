@@ -115,7 +115,7 @@ For a child compiler, the compilation that created it and the top-level compiler
 
 ### run
 
-`function (callback)`
+`(callback: (err: Error | null, stats?: Stats) => void) => void`
 
 Run a single build. The callback receives `(err, stats)`.
 
@@ -123,43 +123,43 @@ W> `run` does not free the compiler's resources — call [`close`](#close) when 
 
 ### watch
 
-`function (watchOptions, handler)`
+`(watchOptions: WatchOptions, handler: (err: Error | null, stats?: Stats) => void) => Watching | undefined`
 
 Build, then rebuild whenever a watched file changes. Returns the [`Watching`](#watching) instance; `handler` is called with `(err, stats)` after every build.
 
 ### close
 
-`function (callback)`
+`(callback: (err: Error | null) => void) => void`
 
 Shut the compiler down: stop watching, let the cache write out, and release what the build held.
 
 ### getCache
 
-`function (name)`
+`(name: string) => CacheFacade`
 
 Returns a `CacheFacade` scoped to `name`, for storing results between builds. Prefer [`compilation.getCache(name)`](/api/compilation-object/#getcache) inside a compilation so entries belong to the build being made.
 
 ### getInfrastructureLogger
 
-`function (name)`
+`(name: string | (() => string)) => WebpackLogger`
 
 A [logger](/api/logging/) for output that is about the compiler rather than about a build — the infrastructure log. For anything tied to a build use `compilation.getLogger(name)` instead, so the message appears in that build's stats.
 
 ### isChild
 
-`function () => boolean`
+`() => boolean`
 
 Whether this is a child compiler.
 
 ### runAsChild
 
-`function (callback)`
+`(callback: (err: Error | null, entries?: Chunk[], compilation?: Compilation) => void) => void`
 
 Run a child compiler created with [`compilation.createChildCompiler`](/api/compilation-object/#createchildcompiler), passing its assets up to the parent compilation.
 
 ### purgeInputFileSystem
 
-`function ()`
+`() => void`
 
 Clear the input file system's cache. Rarely needed — webpack does it itself at the right points in watch mode.
 

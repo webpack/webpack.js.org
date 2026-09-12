@@ -28,7 +28,7 @@ The `externals` configuration option provides a way of excluding dependencies fr
 
 ## externals
 
-`string` `object` `function` `RegExp` `[string, object, function, RegExp]`
+`string` `RegExp` `object` `ExternalsFn` `(string | RegExp | object | ExternalsFn)[]`
 
 **Prevent bundling** of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
@@ -104,7 +104,7 @@ export default {
 };
 ```
 
-### [string]
+### string[]
 
 ```js
 export default {
@@ -222,26 +222,28 @@ W> Only set it when the package really is free of side effects. Getting it wrong
 
 ### function
 
-- `function ({ context, request, contextInfo, getResolve }, callback)`
-- `function ({ context, request, contextInfo, getResolve }) => promise` <Badge text='5.15.0+' />
+An `ExternalsFn` comes in two forms:
+
+- `(ctx: ExternalsCtx, callback: ExternalsCallback) => void`
+- `(ctx: ExternalsCtx) => Promise<ExternalsResult>` <Badge text='5.15.0+' />
 
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides options to allowlist packages.
 
 Here're arguments the function can receive:
 
-- `ctx` (`object`): Object containing details of the file.
+- `ctx` (`ExternalsCtx`): Object containing details of the file.
   - `ctx.context` (`string`): The directory of the file which contains the import.
   - `ctx.request` (`string`): The import path being requested.
   - `ctx.originalRequest` (`string`) <Badge text='5.110.0+' />: Same as `ctx.request`, except for an element of a context module, where it is the request as written by the user.
   - `ctx.dependencyType` (`string`): The category of the referencing dependency, e.g. `'esm'`, `'commonjs'` or `'url'`.
   - `ctx.contextInfo` (`object`): Contains information about the issuer (e.g. the layer and compiler)
   - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
-- `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
+- `callback` (`ExternalsCallback`, i.e. `(err?: Error | null, result?: ExternalsResult, type?: string) => void`): Callback function used to indicate how the module should be externalized.
 
 The callback function takes three arguments:
 
 - `err` (`Error`): Used to indicate if there has been an error while externalizing the import. If there is an error, this should be the only parameter used.
-- `result` (`string` `[string]` `object`): Describes the external module with the other external formats ([`string`](#string), [`[string]`](#string-1), or [`object`](#object))
+- `result` (`ExternalsResult`, i.e. `string | string[] | boolean | object`): Describes the external module with the other external formats ([`string`](#string), [`string[]`](#string-1), or [`object`](#object))
 - `type` (`string`): Optional parameter that indicates the module [external type](#externalstype) (if it has not already been indicated in the `result` parameter).
 
 As an example, to externalize all imports where the import path matches a regular expression you could do the following:
@@ -380,7 +382,7 @@ For more information on how to use this configuration, please refer to the artic
 
 ### byLayer
 
-`function` `object`
+`Record<string, ExternalItem>` `(layer: string | null) => ExternalItem`
 
 Specify externals by layer.
 

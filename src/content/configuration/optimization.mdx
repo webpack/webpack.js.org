@@ -51,8 +51,7 @@ export default {
 
 ## optimization.chunkIds
 
-`boolean: false`
-`string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
+`'natural' | 'named' | 'size' | 'total-size' | 'deterministic' | false`
 
 - `false`: disable webpack's built-in chunk id algorithm
 - one of the following values:
@@ -346,7 +345,7 @@ T> Supported guard forms include ternaries (`isDEV ? A : B`), `if` statements, a
 
 ## optimization.mangleExports
 
-`boolean` `string: 'deterministic' | 'size'`
+`boolean` `'deterministic' | 'size'`
 
 `optimization.mangleExports` allows to control export mangling.
 
@@ -494,7 +493,7 @@ What the built-in CSS minimizer may do beyond the transforms that always apply. 
 | `resolveCustomAtRules`    | `boolean`                                                    | `false`     | <Badge text="5.111.0+" /> Resolve `@custom-media` and `@custom-selector` at-rules in a stylesheet that reached the minimizer without being parsed.                                   |
 | `rewriteCustomProperties` | `boolean`                                                    | `false`     | Shorten custom property values, which are otherwise written back exactly as authored.                                                                                                |
 | `rewriteDirSelector`      | `boolean`                                                    | `false`     | <Badge text="5.111.0+" /> Write a `:dir()` the browserslist target cannot read as the `[dir]` attribute selector it approximates.                                                    |
-| `unusedSymbols`           | `[string]`                                                   | `undefined` | <Badge text="5.111.0+" /> Class, id, `@keyframes` and custom property names a whole-project analysis found unused, which the minimizer removes.                                      |
+| `unusedSymbols`           | `string[]`                                                   | `undefined` | <Badge text="5.111.0+" /> Class, id, `@keyframes` and custom property names a whole-project analysis found unused, which the minimizer removes.                                      |
 
 T> `vendorPrefixes` only has an effect for a `browserslist` [target](/configuration/target/) — any other target names no browsers to prefix for.
 
@@ -582,7 +581,7 @@ Reach for it when minimizing is switched on elsewhere — by the [`mode`](/confi
 
 ## optimization.minimizer
 
-`[MinimizerPlugin]` and or `[function (compiler)]` or `undefined | null | 0 | false | ""`
+`(MinimizerPlugin | ((compiler: Compiler) => void) | '...' | false | 0 | '' | null | undefined)[]`
 
 Allows you to override the default minimizer by providing a different one or more customized [MinimizerPlugin](/plugins/minimizer-webpack-plugin/) instances. Starting with webpack 5.87.0 falsy values can be used to conditionally disable specific minimizers.
 
@@ -655,7 +654,7 @@ Basically, `'...'` is [a shortcut to access the default configuration value](htt
 
 ## optimization.moduleIds
 
-`boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
+`'natural' | 'named' | 'deterministic' | 'size' | false`
 
 Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
 
@@ -707,14 +706,14 @@ export default {
 
 `webpack.ids.DeterministicModuleIdsPlugin` is the plugin behind `moduleIds: 'deterministic'`. It hashes each module's request — made relative to `context`, so ids survive a checkout in another directory — into a number, and it accepts these options:
 
-| Option           | Type                           | Default            | Description                                                                                                                                                       |
-| ---------------- | ------------------------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context`        | `string`                       | `compiler.context` | The directory module names are made relative to before hashing.                                                                                                   |
-| `test`           | `function (module) => boolean` | all modules        | Restricts the plugin to the modules it returns `true` for, so another plugin can name the rest.                                                                   |
-| `maxLength`      | `number`                       | `3`                | The number of digits ids start with. webpack keeps multiplying that range by ten until it is roughly 20 times the number of modules, which keeps collisions rare. |
-| `fixedLength`    | `boolean`                      | `false`            | Keeps the id space at `maxLength` digits instead of growing it.                                                                                                   |
-| `salt`           | `number`                       | `0`                | Mixed into the hash. Change it to move every id, for example to work around a collision.                                                                          |
-| `failOnConflict` | `boolean`                      | `false`            | Fails the build on a colliding id instead of rehashing it.                                                                                                        |
+| Option           | Type                          | Default            | Description                                                                                                                                                       |
+| ---------------- | ----------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`        | `string`                      | `compiler.context` | The directory module names are made relative to before hashing.                                                                                                   |
+| `test`           | `(module: Module) => boolean` | all modules        | Restricts the plugin to the modules it returns `true` for, so another plugin can name the rest.                                                                   |
+| `maxLength`      | `number`                      | `3`                | The number of digits ids start with. webpack keeps multiplying that range by ten until it is roughly 20 times the number of modules, which keeps collisions rare. |
+| `fixedLength`    | `boolean`                     | `false`            | Keeps the id space at `maxLength` digits instead of growing it.                                                                                                   |
+| `salt`           | `number`                      | `0`                | Mixed into the hash. Change it to move every id, for example to work around a collision.                                                                          |
+| `failOnConflict` | `boolean`                     | `false`            | Fails the build on a colliding id instead of rehashing it.                                                                                                        |
 
 ### The id plugins
 
@@ -739,7 +738,7 @@ W> `moduleIds: total-size` has been removed in webpack 5.
 
 ## optimization.nodeEnv
 
-`boolean: false` `string`
+`string` `false`
 
 Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`.
 
@@ -921,7 +920,7 @@ export default {
 
 ## optimization.sideEffects
 
-`boolean` `string: 'flag'`
+`boolean` `'flag'`
 
 Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
@@ -979,7 +978,7 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 ## optimization.usedExports
 
-`boolean` `string: 'global'`
+`boolean` `'global'`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationprovidedexports). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
