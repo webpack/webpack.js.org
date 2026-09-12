@@ -1,0 +1,234 @@
+---
+title: Webpack 5.111
+sort: 20260914
+contributors:
+  - bjohansebas
+---
+
+Webpack 5.111 is here! This release takes a few more tasks off your hands: copying public files, preparing CSS for older browsers, and finding code that no longer needs to ship. It also makes ES module output stable, so you can remove the experimental flag from your configuration.
+
+You'll also find fixes for hot updates and caching, along with a few new tools for plugin authors. Let's look at what changes for your project and what to update if you're coming from 5.110.
+
+Explore what's new:
+
+- [**ES Module Output Without an Experiment**](#es-module-output-without-an-experiment)
+- [**File URLs in Configuration**](#file-urls-in-configuration)
+- [**Copying Static Files**](#copying-static-files)
+- [**CSS for Your Browser Targets**](#css-for-your-browser-targets)
+- [**HTML and Embedded Content**](#html-and-embedded-content)
+- [**More Useful Performance Hints**](#more-useful-performance-hints)
+- [**Webpack's Own JavaScript Parser**](#webpacks-own-javascript-parser)
+- [**Optional Cache Dependencies**](#optional-cache-dependencies)
+- [**Module Namespace Objects**](#module-namespace-objects)
+- [**Bug Fixes**](#bug-fixes)
+
+## ES Module Output Without an Experiment
+
+Shipping your app or library as ES modules? You can now remove `experiments.outputModule` and keep [`output.module`](/configuration/output/#outputmodule). ESM output is stable, and the `module` and `modern-module` library types and `externalsType: "module"` are available without the experiment, too:
+
+```diff
+ export default {
+-  experiments: {
+-    outputModule: true,
+-  },
+   output: {
+     module: true,
+   },
+ };
+```
+
+One detail to check when upgrading: **if you only had `experiments.outputModule: true`, add `output.module: true`.** Webpack now ignores the old flag, so keeping it alone won't enable ESM output. The `universal`, `deno`, and `bun` targets still use ESM by default; other targets still use classic output by default.
+
+Async startup gets an improvement as well. If your entry uses top-level `await` to load configuration, code that imports your bundle now waits until that setup finishes and receives an error if it fails. This works when your target supports top-level `await`. Webpack detects that support for you; `output.environment.topLevelAwait` lets you override it in the [output environment settings](/configuration/output/#outputenvironment).
+
+## File URLs in Configuration
+
+If you write your webpack configuration as an ES module, you can now pass `file:` URL strings directly to path options such as `context` and `output.path`. That saves the extra `fileURLToPath()` conversion:
+
+```diff
+-import { fileURLToPath } from "node:url";
+-
+ export default {
+   output: {
+-    path: fileURLToPath(new URL("./dist/", import.meta.url)),
++    path: new URL("./dist/", import.meta.url).href,
+   },
+ };
+```
+
+You can use the same approach in rule conditions such as `test` and `include`. Just remember the `.href`: webpack expects the URL as a string here, rather than a `URL` object.
+
+## Copying Static Files
+
+Your `robots.txt`, public images, and license files need to reach the output directory even if nothing imports them. With [`output.copy`](/configuration/output/#outputcopy), you can ask webpack to copy a whole folder as part of the build:
+
+```js
+export default {
+  output: {
+    copy: "public",
+  },
+};
+```
+
+That copies the contents of `public/` into your output directory, keeping their folder structure. You no longer need a separate copy step for this setup. Edit a file while watch mode is running and webpack copies the updated version for you. The files also appear in build stats and stay in place when `output.clean` cleans the output.
+
+To copy from several places or choose where the files land, use patterns:
+
+```js
+export default {
+  output: {
+    copy: [
+      "public",
+      { from: ["licenses/*.txt", "vendor/licenses/*.txt"], to: "licenses" },
+      { from: "images", to: "img", filename: "[name].[contenthash][ext]" },
+    ],
+  },
+};
+```
+
+You can also filter files, transform their contents, or preserve their permissions and timestamps. Webpack warns if a pattern finds nothing and reports an error if a copy would overwrite a generated asset, helping you catch a wrong path early. For more control over when copying happens and how many files are processed at once, use the built-in [`CopyPlugin`](/plugins/copy-plugin/).
+
+## CSS for Your Browser Targets
+
+You can write modern CSS while webpack handles more of the work needed for older browsers. When you use a [`browserslist` target](/configuration/target/), the built-in CSS minimizer checks which browsers you're supporting. `lowerUnsupported` rewrites supported cases of newer syntax into forms those browsers understand, and `colorFallbacks` adds a compatible color declaration before a newer one.
+
+Both options are on by default. This release covers more syntax, including `inset`, media ranges, and CSS nesting, and improves how the minimizer simplifies math and colors. You can adjust the individual settings through [`optimization.minimize.css`](/configuration/optimization/#optimizationminimizecss):
+
+```js
+export default {
+  target: "browserslist",
+  optimization: {
+    minimize: {
+      css: {
+        lowerUnsupported: true,
+        colorFallbacks: true,
+      },
+    },
+  },
+};
+```
+
+For example, if a browser in your target list doesn't understand `inset`, webpack writes out the four sides instead. Here's the change, formatted for readability:
+
+```diff
+ .panel {
+-  inset: 0;
++  top: 0;
++  right: 0;
++  bottom: 0;
++  left: 0;
+ }
+```
+
+If your project needs more control, there are a few options you can turn on:
+
+- `unusedSymbols` lets you remove classes, ids, keyframes, and custom properties you've identified as unused. You supply the names after checking your project; webpack doesn't find them automatically.
+- `pseudoClasses` helps if you use a script to provide a pseudo-class behavior. For example, `{ "focus-visible": "focus-visible" }` replaces `:focus-visible` with `.focus-visible`, which your script can apply.
+- `resolveCustomAtRules` lets the minimizer handle `@custom-media` and `@custom-selector` in stylesheets that haven't gone through webpack's CSS parser.
+- `rewriteDirSelector` replaces an unsupported `:dir()` with an approximation using attribute selectors. Enable it only if that approximation fits your styles.
+- `mergeDistantRules` combines rules with matching declarations even when other rules sit between them. It's off by default because changing their order can affect which styles win.
+
+Minification also preserves colors more carefully when another CSS expression reads their channels, and keeps CSS layer blocks in the right order. These fixes help your production styles behave as you wrote them.
+
+## HTML and Embedded Content
+
+If you use webpack's native HTML support, this release tidies up more of your generated pages. The minimizer trims whitespace around URLs in attributes such as `href` and `src`. You can also opt into joining adjacent bare script elements with `mergeScripts`, or shortening more boolean attributes with `collapseBooleanAttributes: "all"`. See [`optimization.minimize.html`](/configuration/optimization/#optimizationminimizehtml) for the settings.
+
+If you use a custom minimizer, you can now give it inline CSS and JSON through `renderEmbeddedSource`, keeping those parts of your pages under the same control as standalone files. Webpack can handle the content your minimizer leaves to it. Event handler attributes can also be sent to a minimizer with the context it needs to read them correctly.
+
+Building a plugin? You can reuse webpack's own CSS and HTML minifiers through `webpack.css.syntax.cssMinify` and `webpack.html.syntax.htmlMinify`.
+
+Plugins can also do asynchronous work in `NormalModule`'s `processResult` hook. For example, an image plugin can convert a PNG to WebP and set `module.buildInfo.assetResource` to the new path. Webpack then uses the matching filename and inline media type, so references keep pointing to the right file, even when the build uses the cache.
+
+HTML entries also produce output that's easier to navigate: page chunks use names based on your entry or source file, and redundant JavaScript copies are removed. If your HTML contains template delimiters in attribute names or lists, those are now preserved during minification.
+
+## More Useful Performance Hints
+
+Ever removed an image from a page and wondered why it still appears in your output? Or opened a source map that points to the wrong lines? The new checks help you track down problems like these:
+
+- [`sourceMaps`](/configuration/performance/#performancesourcemaps) helps you find maps adding weight to production bundles and loaders that change code without returning a map, making debugging harder.
+- [`unusedAssets`](/configuration/performance/#performanceunusedassets) points out files still being emitted for imports you no longer use, so you can clean up the imports keeping them around.
+- [`unusedModules`](/configuration/performance/#performanceunusedmodules) helps answer "why is this module still in my bundle?" by identifying the re-export or side effect keeping it there.
+- [`analyzableBailouts`](/configuration/performance/#performanceanalyzablebailouts) helps when you pass ESM output to another tool. It explains what prevents a reference from becoming a literal `import()` or `new URL()` that the tool can follow.
+
+If several pages include copies of the same module, duplicate-module reporting now catches those copies even when webpack has merged modules together during optimization.
+
+### Updating existing checks
+
+If you enabled checks in 5.110, take a moment to update their names. We've grouped several related checks together, and webpack will report a configuration error if you keep the removed names:
+
+| Previous option                                                    | Use in 5.111       |
+| ------------------------------------------------------------------ | ------------------ |
+| `unusedAliases`, `unusedDefines`, `unusedExternals`, `unusedRules` | `unusedConfig`     |
+| `unusedReexports`                                                  | `unusedModules`    |
+| `embeddedSourceMaps`                                               | `sourceMaps`       |
+| `entrypointOverlap`                                                | `duplicateModules` |
+
+`unusedConfig` groups the alias, define, external, and rule checks. It also reports Module Federation `shared` entries and `remotes` that nothing imports, helping you clean up configuration left behind as your app changes. For example:
+
+```js
+export default {
+  performance: {
+    hints: "warning",
+    unusedConfig: true,
+    sourceMaps: true,
+    unusedAssets: true,
+  },
+};
+```
+
+You choose which checks to enable. If you'd like to explore their findings without adding warnings to your build, use [`performance.hints: "stats"`](/configuration/performance/#performancehints). This includes `unusedConfig`. One distinction to keep in mind: `hints: false` silences bundle checks, but enabled configuration checks still warn. Turn off their individual options to silence those too. The [performance documentation](/configuration/performance/#renamed-checks) has the full list of renamed options.
+
+## Webpack's Own JavaScript Parser
+
+Some improvements happen behind the scenes. Webpack's own JavaScript parser now handles more of the work, and we've reduced allocations in CSS and HTML output and the work involved in saving the cache. You get these changes simply by upgrading.
+
+There's also a useful change if your app runs in a newer environment than your build machine. Webpack can now read regular expressions that the Node.js version running the build cannot execute. The browser or runtime running your app still needs to support those expressions, but webpack can process your source without that getting in the way.
+
+Syntax errors also keep their source locations when restored from the filesystem cache, so the next build still points you to the line you need to fix.
+
+## Optional Cache Dependencies
+
+If you share a webpack configuration across projects, some may have a `tailwind.config.js` and others may not. You can now tell the filesystem cache that a build dependency is optional, so a missing file does not prevent webpack from saving the cache:
+
+```js
+// webpack.config.cjs
+const path = require("node:path");
+
+module.exports = {
+  cache: {
+    type: "filesystem",
+    buildDependencies: {
+      config: [__filename],
+      tailwind: [
+        {
+          dependency: path.resolve(__dirname, "tailwind.config.js"),
+          optional: true,
+        },
+      ],
+    },
+  },
+};
+```
+
+Projects without that file can still save and reuse their cache. Add or remove it later, and webpack knows to rebuild with the new setup instead of reusing an outdated result.
+
+## Module Namespace Objects
+
+When you write `import * as utils from "./utils.js"`, you usually just call something like `utils.format()`. Some libraries look more closely at the `utils` object itself: which keys it has, what its prototype is, or whether it can be changed. The new `module.parser.javascript.specNamespaceObject` option helps that code behave more like native ESM. It provides a null prototype, sorted export names, bindings that stay up to date, and protection against changes to the namespace.
+
+Most apps can leave this off. If you need it, enable it on the module you're importing and make sure your runtime supports `Proxy`. There's a tradeoff: webpack keeps all of that module's exported names and can't merge it with other modules, so you get extra runtime code and less optimization. The modules importing it can still be merged as usual.
+
+## Bug Fixes
+
+This release also makes everyday development smoother:
+
+- **More reliable rebuilds.** Fixes to CSS hot updates and cache invalidation help your latest changes appear correctly.
+- **More predictable runtime behavior.** Fixes cover async initialization, optimized JavaScript, and CSS in server and loader workflows.
+- **Clearer build errors.** Missing assets and runtime code generation failures now surface as errors instead of leaving builds stuck or hiding the cause.
+
+See the [5.111.0 release notes](https://github.com/webpack/webpack/pull/21914) for the complete list of changes and contributors.
+
+## Thanks
+
+Thanks to everyone who contributed code, improved the docs, tested a change, or took the time to report a bug. And thank you to our [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring) for helping make this work possible.
