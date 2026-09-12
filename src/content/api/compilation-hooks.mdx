@@ -708,6 +708,25 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
    );
    ```
 
+### Choosing a stage
+
+`processAssets` is the hook for creating and changing assets, and the stage decides where in the pipeline your work lands. Pick it from what the plugin does:
+
+| What the plugin does                                   | Stage                                    |
+| ------------------------------------------------------ | ---------------------------------------- |
+| Emits a new file of its own                            | `PROCESS_ASSETS_STAGE_ADDITIONAL`        |
+| Adds to an existing asset, e.g. a banner               | `PROCESS_ASSETS_STAGE_ADDITIONS`         |
+| Minifies                                               | `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE`     |
+| Writes a companion file, e.g. a source map             | `PROCESS_ASSETS_STAGE_DEV_TOOLING`       |
+| Prepares a compressed copy                             | `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` |
+| Reads every asset without changing it, e.g. a manifest | `PROCESS_ASSETS_STAGE_SUMMARIZE`         |
+
+The stage is what makes plugins compose. A file emitted at `ADDITIONAL` is still ahead of the minifier, the source-map stage and the compressor, so it gets the same treatment as a chunk webpack generated itself — which is why adding assets from the compiler's [`emit`](/api/compiler-hooks/#emit) hook is wrong: it runs after all of these, so nothing downstream ever sees the file.
+
+Getting the stage wrong has the same shape of consequence. Emit at `SUMMARIZE` and the file is written unminified, because `OPTIMIZE_SIZE` has already run; read the assets at `ADDITIONAL` and the list is missing everything added after you.
+
+T> If you need to see assets added after your own stage, use [`additionalAssets`](#additional-assets) rather than moving to a later stage.
+
 ### List of asset processing stages
 
 Here's a list of supported stages (in the order of processing):

@@ -262,6 +262,8 @@ Executed right before emitting assets to output dir. This hook is _not_ copied t
 
 - Callback Parameters: `compilation`
 
+W> **Do not add or change assets here.** `emit` runs after the compilation is sealed, so every [`processAssets`](/api/compilation-hooks/#processassets) stage has gone by: an asset added here is never minified or compressed, gets no source map, and no other plugin sees it. Webpack reports the write as deprecated (`DEP_WEBPACK_COMPILATION_ASSETS`). Use `processAssets` with the right [stage](/api/compilation-hooks/#choosing-a-stage) instead. Reading the assets here is fine.
+
 ### afterEmit
 
 `AsyncSeriesHook`
