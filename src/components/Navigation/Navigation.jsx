@@ -211,7 +211,7 @@ function Navigation({ links, pathname, hash = "", toggleSidebar }) {
               <DocSearch
                 appId={DOCSEARCH_APP_ID}
                 apiKey={DOCSEARCH_API_KEY}
-                indexName={DOCSEARCH_INDEX_NAME}
+                indices={[DOCSEARCH_INDEX_NAME]}
                 disableUserPersonalization={true}
                 placeholder="Search webpack documentation"
                 transformItems={(items) =>
