@@ -147,6 +147,8 @@ This option determines the name of non-initial chunk files. See [`output.filenam
 
 Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
+T> Since webpack 5.111.0, an [`output.module`](#outputmodule) build that loads its chunks through a native `import()` names each one with a literal specifier held by the chunk loader, so a bundler or a preload scanner can follow it without running webpack's runtime, and no chunk id is turned into a filename. The names live in the chunk carrying the runtime — with [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk) that is the runtime chunk alone — so changing a lazily loaded chunk invalidates that one rather than every module importing it. Webpack 5.110 wrote the specifier at each import site instead, which put the imported chunk's `[contenthash]` into the importing module.
+
 By default the value is inferred from [`output.filename`](#outputfilename): it is used as-is when it contains `[name]`, `[id]`, `[chunkhash]` or `[contenthash]`; otherwise `[id].` is prepended to its basename (`bundle.js` becomes `[id].bundle.js`). When `output.filename` is a function, `[id].js` (or `[id].mjs` with [`output.module`](#outputmodule)) is used.
 
 **webpack.config.js**
