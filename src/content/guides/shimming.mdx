@@ -165,6 +165,8 @@ This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of th
 
 ## Granular Shimming
 
+W> `imports-loader` is deprecated and only receives bug fixes. It still works, and the example below is unchanged, but webpack can do the same from the configuration itself — see webpack's [add-imports example](https://github.com/webpack/webpack/tree/main/examples/add-imports), which is the same behaviour as a short plugin.
+
 Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
 
 ```diff
@@ -182,7 +184,7 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
  document.body.appendChild(component());
 ```
 
-This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](/loaders/imports-loader/):
+This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](https://github.com/webpack/imports-loader):
 
 **webpack.config.js**
 
@@ -218,6 +220,8 @@ This becomes a problem when the module is executed in a CommonJS context where `
 
 ## Global Exports
 
+W> `exports-loader` is deprecated and only receives bug fixes. It still works, and the example below is unchanged, but appending exports to a file that has none is a few lines over webpack's public API — see webpack's [add-exports example](https://github.com/webpack/webpack/tree/main/examples/add-exports).
+
 Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
 
 **project**
@@ -248,7 +252,7 @@ const helpers = {
 };
 ```
 
-Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](https://github.com/webpack/exports-loader), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
 
 **webpack.config.js**
 
@@ -578,4 +582,4 @@ When there is no AMD/CommonJS version of the module and you want to include the 
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
-Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `additionalCode=var%20define%20=%20false;` via the [`imports-loader`](/loaders/imports-loader/).
+Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `additionalCode=var%20define%20=%20false;` via the [`imports-loader`](https://github.com/webpack/imports-loader).
