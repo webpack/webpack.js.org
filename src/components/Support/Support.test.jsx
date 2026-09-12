@@ -1,12 +1,14 @@
 /**
  * @jest-environment jsdom
  */
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 
-import Support from "./Support.jsx";
+jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
 
-jest.mock("./AdditionalSupporters.mjs", () => []);
-jest.mock("./_supporters.json", () => [], { virtual: true });
+// `_supporters.json` resolves to the empty mock this suite wants already.
+const { default: Support } = await import("./Support.jsx");
 
 describe("Support", () => {
   let mockObserve;

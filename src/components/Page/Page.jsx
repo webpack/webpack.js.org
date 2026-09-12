@@ -1,7 +1,7 @@
 // Import External Dependencies
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 // Import Components
 import Contributors from "../Contributors/Contributors.jsx";

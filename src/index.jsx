@@ -1,7 +1,7 @@
 // Import External Dependencies
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 
 import App from "./App.jsx";
 
