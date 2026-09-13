@@ -379,6 +379,8 @@ export default {
 };
 ```
 
+Since webpack 5.111.0 those defaults include [`output.module`](/configuration/output/#outputmodule): the build emits an ECMAScript module wherever the [`target`](/configuration/target/) can read one, so it produces `[name].mjs` with `output.chunkFormat: 'module'` and `output.chunkLoading: 'import'` instead of a script. A target without module support, a script library type such as `var` or `umd`, and an explicit `output.module` each keep the classic output — see [`output.module`](/configuration/output/#outputmodule) for the exact rule.
+
 ### experiments.html
 
 <Badge text="5.107.0+" />
