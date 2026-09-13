@@ -486,7 +486,7 @@ The whole-tree counterpart of [`runtimeRequirementInModule`](#runtimerequirement
 
 - Callback Parameters: `chunk` `runtimeRequirements` `context`
 
-Expanding a requirement into the ones it implies works as it does above; the other use is attaching the runtime module that implements it, where the returned value stops any further tap for that requirement:
+Expanding a requirement into the ones it implies works as it does above; the other use is attaching the runtime module that implements it with [`addRuntimeModule`](/api/compilation-object/#addruntimemodule), where the returned value stops any further tap for that requirement:
 
 ```js
 compilation.hooks.runtimeRequirementInTree
@@ -497,7 +497,7 @@ compilation.hooks.runtimeRequirementInTree
   });
 ```
 
-W> The hook is synchronous, so a tap cannot await anything. To attach a runtime module whose implementation is loaded on demand, hand it to `compilation.addLazyRuntimeModule(chunk, load, create)` instead and read whatever you need from the requirement set before queueing it.
+W> The hook is synchronous, so a tap cannot await anything. To attach a runtime module whose implementation is loaded on demand, hand it to [`addLazyRuntimeModule`](/api/compilation-object/#addlazyruntimemodule) instead and read whatever you need from the requirement set before queueing it.
 
 ## runtimeModule
 
