@@ -1452,6 +1452,59 @@ T> Since webpack 5.109.0, custom parsers no longer need to collect `semicolons` 
   };
   ```
 
+#### module.parser.javascript.typescript
+
+Parse TypeScript syntax. Defaults to [`experiments.typescript`](/configuration/experiments/#experimentstypescript), so enabling the experiment turns this on for you; set it here to override that per rule.
+
+- Type: `boolean`
+
+#### module.parser.javascript.deferImport
+
+Parse the TC39 [deferred module evaluation](https://github.com/tc39/proposal-defer-import-eval) proposal (`import defer * as ns from "..."`). Defaults to [`experiments.deferImport`](/configuration/experiments/#experimentsdeferimport).
+
+- Type: `boolean`
+
+#### module.parser.javascript.sourceImport
+
+Parse the TC39 [source phase imports](https://github.com/tc39/proposal-source-phase-imports) proposal (`import source x from "..."`). Defaults to [`experiments.sourceImport`](/configuration/experiments/#experimentssourceimport).
+
+- Type: `boolean`
+
+#### Syntax toggles
+
+Each of these turns parsing of one module syntax on or off. They take a `boolean`, and **they do not all default the same way** — three of them are off, or warn, until you say otherwise:
+
+| Option           | Syntax                                                    | Default                                                                               |
+| ---------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `amd`            | AMD — `define()`, `require([...], cb)`                    | on                                                                                    |
+| `browserify`     | browserify-specific handling                              | on                                                                                    |
+| `commonjs`       | CommonJS — `require()`, `module.exports`                  | on                                                                                    |
+| `harmony`        | ECMAScript modules — `import` / `export`                  | on                                                                                    |
+| `import`         | `import()`                                                | on                                                                                    |
+| `requireContext` | `require.context()`                                       | on                                                                                    |
+| `requireEnsure`  | `require.ensure()`                                        | on                                                                                    |
+| `requireInclude` | `require.include()`                                       | on, and warns that it is deprecated unless you set it explicitly                      |
+| `requireJs`      | RequireJS specifics — `require.config`, `require.version` | **off** unless set to `true`                                                          |
+| `system`         | System.js — `System.import`, `System.register`            | **off** unless set to `true`                                                          |
+| `node`           | Node.js built-ins — `__dirname`, `__filename`, `global`   | takes the same shape as [`node`](/configuration/node/); `false` disables the handling |
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      javascript: {
+        // this project has no AMD, so do not pay to parse for it
+        amd: false,
+        // opt in to the two that are off by default
+        system: true,
+      },
+    },
+  },
+};
+```
+
 ### module.parser.json
 
 Configure options for json parser.
@@ -3022,7 +3075,7 @@ Example for an `wrapped` dynamic dependency: `require('./templates/' + expr)`.
 
 The same settings apply to the equivalent `import()` calls, so `exprContextRegExp` is what decides which modules a fully dynamic `import(expr)` pulls in. See [Dynamic expressions in import()](/api/module-methods/#dynamic-expressions-in-import) for what happens with the defaults.
 
-Here are the available options with their [defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js):
+These options live under [`module.parser.javascript`](#moduleparserjavascript). Here they are with their [defaults](https://github.com/webpack/webpack/blob/main/lib/config/defaults.js):
 
 **webpack.config.js**
 
@@ -3030,18 +3083,21 @@ Here are the available options with their [defaults](https://github.com/webpack/
 export default {
   // ...
   module: {
-    exprContextCritical: true,
-    exprContextRecursive: true,
-    exprContextRegExp: false,
-    exprContextRequest: ".",
-    unknownContextCritical: true,
-    unknownContextRecursive: true,
-    unknownContextRegExp: false,
-    unknownContextRequest: ".",
-    wrappedContextCritical: false,
-    wrappedContextRecursive: true,
-    wrappedContextRegExp: /.*/,
-    strictExportPresence: false,
+    parser: {
+      javascript: {
+        exprContextCritical: true,
+        exprContextRecursive: true,
+        exprContextRegExp: false,
+        exprContextRequest: ".",
+        unknownContextCritical: true,
+        unknownContextRecursive: true,
+        unknownContextRegExp: false,
+        unknownContextRequest: ".",
+        wrappedContextCritical: false,
+        wrappedContextRecursive: true,
+        wrappedContextRegExp: /.*/,
+      },
+    },
   },
 };
 ```
@@ -3053,7 +3109,6 @@ A few use cases:
 - Warn for dynamic dependencies: `wrappedContextCritical: true`.
 - `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
 - `require('./templates/' + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
-- `strictExportPresence` makes missing exports an error instead of warning
-- Set the inner regular expression for partial dynamic dependencies : `wrappedContextRegExp: /\\.\\*/`
+- Set the inner regular expression for partial dynamic dependencies: `wrappedContextRegExp: /\.\*/`
 
-W> `strictExportPresence` is deprecated in favor of [`exportsPresence`](#moduleparserjavascriptexportspresence) option.
+W> Setting any of these directly on `module` — `module.exprContextCritical` and the rest — is deprecated. Each one moved to `module.parser.javascript` under the same name, so `module.exprContextRegExp` becomes `module.parser.javascript.exprContextRegExp`. `module.strictExportPresence` moved the same way and is itself deprecated in favour of [`exportsPresence`](#moduleparserjavascriptexportspresence), and `module.strictThisContextOnImports` became [`module.parser.javascript.strictThisContextOnImports`](#moduleparserjavascriptstrictthiscontextonimports).
