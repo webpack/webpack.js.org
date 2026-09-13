@@ -168,6 +168,33 @@ Parameters:
 
 - `name` - the name of the chunk.
 
+### addRuntimeModule
+
+`(chunk: Chunk, module: RuntimeModule, chunkGraph?: ChunkGraph) => void`
+
+Adds a runtime module to a chunk. It registers the module with the compilation, connects it to the chunk in the chunk graph and attaches it, so the code the module generates becomes part of that chunk's runtime. Plugins normally call it from [`runtimeRequirementInTree`](/api/compilation-hooks/#runtimerequirementintree), once for the requirement the module implements.
+
+Parameters:
+
+- `chunk` - the chunk to add the runtime module to.
+- `module` - the `RuntimeModule` to add.
+- `chunkGraph` - the chunk graph to connect it in; defaults to the compilation's own.
+
+### addLazyRuntimeModule
+
+`(chunk: Chunk, load: () => Promise<any>, create: (loaded: any) => RuntimeModule, chunkGraph?: ChunkGraph) => void`
+
+Queues a runtime module whose implementation is loaded on demand. Neither callback runs during the call: the queue is worked once the runtime requirement pass is over, `load` is awaited first, and `create` then builds the module from whatever it resolved, which is added as [`addRuntimeModule`](#addruntimemodule) would add it.
+
+Parameters:
+
+- `chunk` - the chunk to add the runtime module to.
+- `load` - resolves the runtime module implementation.
+- `create` - builds the `RuntimeModule` from the loaded value.
+- `chunkGraph` - the chunk graph to connect it in; defaults to the compilation's own.
+
+W> [`runtimeRequirementInTree`](/api/compilation-hooks/#runtimerequirementintree) is synchronous, so a tap cannot await the load itself — that is what this method is for. Capture anything you need from the requirement set before queueing, because `create` runs after the pass has moved on.
+
 ### assignDepth
 
 `(module: Module) => void`
