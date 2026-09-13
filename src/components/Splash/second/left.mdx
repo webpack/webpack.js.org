@@ -3,9 +3,8 @@ Point webpack at the page in **webpack.config.js**:
 ```js
 export default {
   entry: "./src/index.html",
-  // the page loads a `<script type="module">`, so emit ES modules to match
-  experiments: { outputModule: true },
   output: {
+    // the page loads a `<script type="module">`, so emit ES modules to match
     module: true,
     filename: "[contenthash].js",
     cssFilename: "[contenthash].css",
