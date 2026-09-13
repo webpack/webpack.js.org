@@ -1462,7 +1462,7 @@ export default {
 
 ## output.library
 
-Output a library exposing the exports of your entry point.
+Output a library exposing the exports of your entry point — the bundle hands them to whoever loads it, instead of keeping them to itself. How they are handed over is [`output.library.type`](#outputlibrarytype): a global variable, a CommonJS or AMD module, an ECMAScript module, and so on.
 
 - Type: `string | string[] | object`
 
@@ -1642,17 +1642,41 @@ Specify a name for the library.
 
 ### output.library.type
 
-Configure how the library will be exposed.
+Configure the module format the library is published in — a global variable, a CommonJS or AMD module, an ECMAScript module, and so on. The type decides the wrapper webpack writes around your bundle, and therefore how a consumer gets at your exports.
 
 - Type: `string`
 
   Types included by default are `'var'`, `'module'`, `'modern-module'`, `'assign'`, `'assign-properties'`, `'this'`, `'window'`, `'self'`, `'global'`, `'commonjs'`, `'commonjs2'`, `'commonjs-module'`, `'commonjs-static'`, `'amd'`, `'amd-require'`, `'umd'`, `'umd2'`, `'jsonp'` and `'system'`, but others might be added by plugins.
 
+At a glance, with `name: 'MyLibrary'` where the type uses one:
+
+| `type`                | What the bundle does when it is loaded                                                |
+| --------------------- | ------------------------------------------------------------------------------------- |
+| `'var'`               | declares `var MyLibrary` in whatever scope the script runs in                         |
+| `'assign'`            | `MyLibrary = …`, creating an implied global if nothing declared it                    |
+| `'assign-properties'` | copies the exports onto an existing `MyLibrary`, creating it only if it is missing    |
+| `'this'`              | `this.MyLibrary = …`                                                                  |
+| `'window'`            | `window.MyLibrary = …`                                                                |
+| `'self'`              | `self.MyLibrary = …`                                                                  |
+| `'global'`            | assigns to whatever [`output.globalObject`](#outputglobalobject) names for the target |
+| `'commonjs'`          | `exports.MyLibrary = …`, a named property of the CommonJS exports                     |
+| `'commonjs2'`         | `module.exports = …`, so `require()` returns the exports themselves                   |
+| `'commonjs-module'`   | the same as `'commonjs2'`                                                             |
+| `'commonjs-static'`   | one `exports.<name>` per export, so Node can name them from ESM                       |
+| `'amd'`               | `define('MyLibrary', [], …)`                                                          |
+| `'amd-require'`       | `require([], …)`, which runs the bundle immediately rather than defining it           |
+| `'umd'`               | a header that picks CommonJS, AMD or a global at load time                            |
+| `'umd2'`              | `'umd'`, plus optional AMD externals read off the global object                       |
+| `'system'`            | `System.register('MyLibrary', [], …)`                                                 |
+| `'jsonp'`             | `MyLibrary(…)`, calling a function the page defined beforehand                        |
+| `'module'`            | real `export` statements; requires [`output.module`](#outputmodule)                   |
+| `'modern-module'`     | like `'module'`, kept tree-shakable for the consumer's bundler                        |
+
 For the following examples, we'll use `_entry_return_` to indicate the values returned by the entry point.
 
 #### Expose a Variable
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
+These options assign what the entry point exported to the name given by [`output.library.name`](#outputlibraryname), in whatever scope the bundle was loaded into.
 
 ##### type: 'var'
 
@@ -1785,6 +1809,28 @@ window.MyLibrary = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
+##### type: 'self'
+
+```js
+export default {
+  // …
+  output: {
+    library: {
+      name: "MyLibrary",
+      type: "self",
+    },
+  },
+};
+```
+
+The same assignment against `self` rather than `window`, which is what a web worker has:
+
+{/* eslint-disable */}
+
+```js
+self.MyLibrary = _entry_return_;
+```
+
 ##### type: 'global'
 
 ```js
@@ -1799,13 +1845,22 @@ export default {
 };
 ```
 
-The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Depending on the [`target`](/configuration/target/) value, the global object could change respectively, e.g., `self`, `global` or `globalThis`.
+The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Which object that is comes from [`output.globalObject`](#outputglobalobject), whose default follows the [`target`](/configuration/target/) — so the same configuration emits a different first token per target:
+
+{/* eslint-disable */}
 
 ```js
-globalThis.MyLibrary = _entry_return_;
+// target: 'web' (the default) and target: 'webworker', where it is `self`
+self.MyLibrary = _entry_return_;
 
-globalThis.MyLibrary.doSomething();
+// target: 'node', where it is `global`
+global.MyLibrary = _entry_return_;
+
+// target: ['web', 'node'], where it is `globalThis`
+globalThis.MyLibrary = _entry_return_;
 ```
+
+T> Set [`output.globalObject`](#outputglobalobject) explicitly to pin it — `'globalThis'` is the one name every modern target agrees on, which is why the neutral target picks it.
 
 ##### type: 'commonjs'
 
@@ -1850,7 +1905,27 @@ export default {
 };
 ```
 
-Output ES Module. You can track the remaining development progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+Output a real ECMAScript module: the bundle ends in `export` statements rather than an assignment, so a consumer imports it with `import`. There is no `name` to give, because the export names come from your entry point.
+
+Input:
+
+```js
+export function hello(name) {
+  return `Hello ${name}`;
+}
+```
+
+Output:
+
+```js
+function hello(name) {
+  return `Hello ${name}`;
+}
+
+export { hello };
+```
+
+W> This type requires [`output.module`](#outputmodule). Every other type is written into a classic script, so `module: true` is what lets webpack emit the `export` above.
 
 ##### type: 'modern-module'
 
@@ -1869,7 +1944,9 @@ export default {
 };
 ```
 
-This configuration generates tree-shakable output for ES Modules.
+Like [`module`](#type-module), and aimed at a library whose consumer runs another bundler over it: the output is kept analysable so that the consumer's tree shaking can still drop the exports their application never imports. A small library often comes out byte-identical under both types — the difference shows on bundles where `module` would otherwise obscure what is exported.
+
+Also requires [`output.module`](#outputmodule), and takes no `name` for the same reason.
 
 ##### type: 'commonjs2'
 
@@ -2084,6 +2161,22 @@ export default {
         commonjs: "my-common-library",
       },
       type: "umd",
+    },
+  },
+};
+```
+
+##### type: 'umd2'
+
+`umd2` emits the same universal header as [`umd`](#type-umd) and differs in one place: an **optional** AMD external is read off the global object when the AMD loader has not provided it, instead of being left undefined. A bundle without optional AMD externals therefore produces byte-identical output under either type.
+
+```js
+export default {
+  // …
+  output: {
+    library: {
+      name: "MyLibrary",
+      type: "umd2",
     },
   },
 };
@@ -2345,7 +2438,7 @@ T> Note that `_entry_return_` in the example code below is the value returned by
 
 ### Expose a Variable
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library`](#outputlibrary) at whatever scope the bundle was included at.
+These options assign what the entry point exported to the name given by [`output.library`](#outputlibrary), in whatever scope the bundle was loaded into.
 
 #### libraryTarget: 'var'
 
