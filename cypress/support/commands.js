@@ -2,7 +2,7 @@
 
 Cypress.Commands.add("isNotInViewport", (element) => {
   cy.get(element).then(($el) => {
-    // we won't have horizontal scollbar
+    // we won't have horizontal scrollbar
     const rect = $el[0].getBoundingClientRect();
     if (rect.top < 0) {
       expect(rect.bottom).to.be.lessThan(0);
