@@ -633,11 +633,22 @@ export default {
 
 `InputFileSystem`
 
-The filesystem the resolver reads from.
+The filesystem the resolver reads from, defaulting to the compiler's own input filesystem. Set it to resolve against a different filesystem — an in-memory one, for instance — without replacing the compiler's:
 
-W> Setting this in the configuration has no effect. webpack assigns the compiler's own input filesystem over whatever the configuration supplies, for each of the three resolvers it creates, so the value never reaches [enhanced-resolve](https://github.com/webpack/enhanced-resolve).
+**webpack.config.js**
 
-To resolve against a different filesystem — an in-memory one, for instance — replace it on the compiler through the [Node.js API](/api/node/) instead:
+```js
+export default {
+  // ...
+  resolve: {
+    fileSystem: myFileSystem,
+  },
+};
+```
+
+It belongs to the resolver it is set on, so [`resolveLoader.fileSystem`](#resolveloader) does the same for the resolution of loaders.
+
+T> Only resolution goes through it. Reading a module's source still goes through the compiler's `inputFileSystem`, so a filesystem that is to serve the files themselves is set on the compiler through the [Node.js API](/api/node/):
 
 ```js
 import webpack from "webpack";
@@ -646,6 +657,8 @@ const compiler = webpack(configuration);
 
 compiler.inputFileSystem = myFileSystem;
 ```
+
+W> Before webpack 5.111.0 the option was accepted and then discarded: webpack assigned the compiler's input filesystem over it for every resolver it created, so the value never reached [enhanced-resolve](https://github.com/webpack/enhanced-resolve). On those versions, set `compiler.inputFileSystem` as above, or supply a whole [`resolve.resolver`](#resolveresolver) built around your filesystem.
 
 ### resolve.fullySpecified
 
@@ -875,7 +888,7 @@ const a = new URL("./module/path", import.meta.url);
 
 A prebuilt [enhanced-resolve](https://github.com/webpack/enhanced-resolve) `Resolver` to use instead of the one webpack would construct. The rest of the `resolve` options still apply: the resolution pipeline they describe is tapped onto the instance you supply.
 
-What the instance brings with it is its own filesystem, so this — not [`resolve.fileSystem`](#resolvefilesystem) — is the way to resolve against a different filesystem from within the configuration.
+An instance also brings its own filesystem, which is how a different filesystem was reached from the configuration before [`resolve.fileSystem`](#resolvefilesystem) was honoured in webpack 5.111.0. Since then, prefer `resolve.fileSystem` when the filesystem is the only thing you are changing, and keep a whole resolver for a genuinely different resolution pipeline.
 
 **webpack.config.js**
 
