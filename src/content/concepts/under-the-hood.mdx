@@ -140,3 +140,55 @@ A [few placeholders](/configuration/output/#template-strings) are available in t
 - `[id]` - chunk id (e.g. `[id].js` -> `485.js`)
 - `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will be used
 - `[contenthash]` - md4-hash of the output file content (e.g. `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`)
+
+## The build lifecycle
+
+Those parts are produced in a fixed order, and every build runs the same phases. Plugins hook into them: [compiler hooks](/api/compiler-hooks/) mark the phases themselves, [compilation hooks](/api/compilation-hooks/) cover everything inside `make` and `seal`.
+
+```text
+compiler created
+  environment -> afterEnvironment -> entryOption -> afterPlugins
+  -> afterResolvers -> initialize
+  |
+run (or watch)
+  beforeRun -> run
+  |
+compile                        one Compilation per build
+  beforeCompile -> compile -> thisCompilation -> compilation
+  |
+make                           files become modules
+  addEntry -> resolve -> buildModule -> succeedModule
+  ...repeated for every dependency found...
+  finishMake -> finishModules
+  |
+seal                           modules become chunks, chunks become assets
+  seal -> optimizeDependencies
+  -> beforeChunks -> afterChunks
+  -> optimize -> optimizeModules -> optimizeChunks -> optimizeTree
+  -> moduleIds -> chunkIds
+  -> codeGeneration -> runtimeRequirements -> beforeHash -> afterHash
+  -> processAssets -> afterProcessAssets -> afterSeal
+  |
+emit                           assets become files
+  afterCompile -> shouldEmit -> emit -> assetEmitted -> afterEmit
+  |
+done
+  done -> afterDone
+```
+
+Two phases carry most of the work.
+
+**`make`** builds the module graph. Each entry is handed to a module factory, which resolves the request to a file. The module is then built — its [loaders](/concepts/loaders/) run over the source, and the result is parsed for dependencies. Every dependency found is resolved and built the same way, so the graph grows outwards until nothing new is reached. [`finishModules`](/api/compilation-hooks/#finishmodules) is the first point at which the whole graph exists.
+
+**`seal`** turns that graph into output. Modules are assigned to chunks, the chunk graph is optimized, ids and hashes are assigned, and code is generated — and only then do assets exist. That ordering is why asset work belongs in [`processAssets`](/api/compilation-hooks/#processassets) rather than in the compiler's [`emit`](/api/compiler-hooks/#emit) hook, which runs after the compilation is already sealed.
+
+| To                                   | Tap                                                                                                                         |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| see or change how a request resolves | the [`normalModuleFactory`](/api/compiler-hooks/#normalmodulefactory) hooks                                                 |
+| read a module once it is built       | [`succeedModule`](/api/compilation-hooks/#succeedmodule)                                                                    |
+| act once the graph is complete       | [`finishModules`](/api/compilation-hooks/#finishmodules)                                                                    |
+| change how modules land in chunks    | [`optimizeChunks`](/api/compilation-hooks/#optimizechunks)                                                                  |
+| add, edit or remove an asset         | [`processAssets`](/api/compilation-hooks/#processassets), at the matching [stage](/api/compilation-hooks/#choosing-a-stage) |
+| read the finished build              | [`done`](/api/compiler-hooks/#done)                                                                                         |
+
+T> In watch mode the compiler is reused and everything from `compile` down runs again per rebuild, on a new [`Compilation`](/api/compilation-object/).
