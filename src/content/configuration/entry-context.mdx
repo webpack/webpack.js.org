@@ -186,6 +186,23 @@ export default {
 };
 ```
 
+### Polyfills in an entry
+
+The array form is also how polyfills are loaded, because the order of an entry array is the order the files run in. Anything a polyfill repairs has to be repaired before the application touches it, so the polyfill goes first:
+
+```js
+export default {
+  // ...
+  entry: {
+    main: ["core-js/stable", "./src/index.js"],
+  },
+};
+```
+
+W> Importing all of `core-js/stable` ships every polyfill regardless of what the code uses or what the browsers need — 637 modules, 215 KB minified and 71 KB gzipped with core-js 3.50. Prefer `@babel/preset-env` with [`useBuiltIns: 'usage'`](https://babeljs.io/docs/babel-preset-env#usebuiltins) and a [browserslist](https://github.com/browserslist/browserslist) query, which imports only the polyfills your source actually reaches and your targets actually lack.
+
+See [Loading Polyfills](/guides/shimming/#loading-polyfills) for when a separate polyfill entry is worth the extra request, and [Serving a smaller polyfill to modern browsers](/guides/shimming/#serving-a-smaller-polyfill-to-modern-browsers) for building the same source twice so modern browsers download less.
+
 ### Dynamic entry
 
 If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
