@@ -1,0 +1,62 @@
+---
+title: Codebase Overview
+description: A map of the webpack source tree for contributors, covering the objects a build runs through and where each part of the code lives.
+sort: 8
+contributors:
+  - hai-x
+---
+
+This page is a map of [webpack/webpack](https://github.com/webpack/webpack) for someone about to change it. It does not cover how to open a pull request, which is in [CONTRIBUTING.md](https://github.com/webpack/webpack/blob/main/CONTRIBUTING.md), or how to run the suites, which is in [TESTING_DOCS.md](https://github.com/webpack/webpack/blob/main/TESTING_DOCS.md).
+
+T> This is about webpack's own source. To extend webpack from the outside, read [Writing a Loader](/contribute/writing-a-loader/) and [Writing a Plugin](/contribute/writing-a-plugin/) instead.
+
+## Five objects
+
+Almost everything in `lib/` hangs off one of these, and knowing which one owns a behavior is most of the work of finding its code.
+
+| Object                                                                           | What it is                                                                                           |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [`Compiler`](https://github.com/webpack/webpack/blob/main/lib/Compiler.js)       | Created once from your configuration; drives the whole build and owns the filesystem and the watcher |
+| [`Compilation`](https://github.com/webpack/webpack/blob/main/lib/Compilation.js) | Created once per build; holds the module graph and the chunks, and is thrown away afterwards         |
+| [`Module`](https://github.com/webpack/webpack/blob/main/lib/Module.js)           | One thing that was built — a file, an asset, an external — and the source it generates               |
+| [`Dependency`](https://github.com/webpack/webpack/blob/main/lib/Dependency.js)   | One reference from a module to another, plus the template that rewrites it in the output             |
+| [`Chunk`](https://github.com/webpack/webpack/blob/main/lib/Chunk.js)             | A group of modules that get emitted into one file                                                    |
+
+A run then has three phases, and each is a good place to put a `debugger`:
+
+1. **make** — [`Compiler#compile`](https://github.com/webpack/webpack/blob/main/lib/Compiler.js) creates the compilation and adds the entries. Each entry is resolved, loaded through its loaders, parsed, and its dependencies are queued, until the graph stops growing.
+2. **seal** — [`Compilation#seal`](https://github.com/webpack/webpack/blob/main/lib/Compilation.js) turns that graph into output: chunks are formed, ids and hashes assigned, optimizations run, and code is generated.
+3. **emit** — [`Compiler#emitAssets`](https://github.com/webpack/webpack/blob/main/lib/Compiler.js) writes the assets to the output filesystem.
+
+Every phase is a sequence of [tapable](https://github.com/webpack/tapable) hooks, which is how plugins get in. Compiler-wide hooks are declared at the top of `Compiler.js` and documented under [Compiler Hooks](/api/compiler-hooks/); per-build hooks live in `Compilation.js` and are documented under [Compilation Hooks](/api/compilation-hooks/).
+
+## Where the code lives
+
+`lib/` is CommonJS only, and its types are declared in JSDoc and compiled into `types.d.ts` — so a type error is fixed in the JSDoc above the function, never in the generated file.
+
+| Area                     | Directories                                                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| The graph                | `dependencies/` (dependency classes and their templates), `optimize/` (`SplitChunksPlugin`, module concatenation), `ids/`     |
+| Languages and assets     | `javascript/` (acorn parsing, exports analysis, code generation), `css/`, `html/`, `json/`, `asset/`, `wasm*/`, `typescript/` |
+| Targets                  | `web/`, `webworker/`, `node/`, `deno/`, `electron/`, `bun/`, `esm/` — each with its own chunk loading and externals preset    |
+| Runtime shipped to users | `runtime/` (the runtime modules webpack writes into a bundle) and `hot/` at the repo root (the browser-side HMR client)       |
+| Configuration            | `config/` (defaults, normalization, target presets), `rules/` (the `module.rules` matching engine)                            |
+| Features                 | `container/` and `sharing/` (Module Federation), `library/`, `hmr/`, `dll/`, `prefetch/`, `performance/`, `schemes/`          |
+| Infrastructure           | `cache/`, `serialization/` (persistent cache), `logging/`, `stats/`, `errors/` (every error and warning class), `util/`       |
+
+Outside `lib/`: `schemas/` holds the JSON schemas that define the configuration API, `bin/` the CLI entry point, `tooling/` the code generators and analysis scripts, `test/` the suites, and `examples/` runnable configurations that double as documentation.
+
+## Finding the code behind a thing
+
+- **A configuration option.** Options cross four layers in order: its schema in [`schemas/WebpackOptions.json`](https://github.com/webpack/webpack/blob/main/schemas/WebpackOptions.json), its default in `lib/config/defaults.js`, any shorthand it accepts in `lib/config/normalization.js`, and finally the plugin that reads it. Grep the option name and you will land in all four.
+- **A hook.** Hooks are declared on the class that owns them, so search `Compiler.js` or `Compilation.js` for the name; `lib/WebpackOptionsApply.js` is where options get turned into the plugins that tap them.
+- **Something in the generated bundle.** Runtime symbols are named in [`lib/RuntimeGlobals.js`](https://github.com/webpack/webpack/blob/main/lib/RuntimeGlobals.js); the code behind each one is a `RuntimeModule` subclass under `lib/runtime/`.
+- **An error message.** Error and warning classes live in `lib/errors/`, whatever pushes them.
+
+## Before you change it
+
+- **Regenerate what is generated.** `types.d.ts`, the files under `declarations/`, and the precompiled schema validators are all produced by `yarn fix:special` — edit the JSDoc or the schema and re-run it, never the output.
+- **Cover the change with an integration test.** `test/configCases/` runs a real build and executes the bundle, which catches what a mocked unit test does not. See [TESTING_DOCS.md](https://github.com/webpack/webpack/blob/main/TESTING_DOCS.md) for the layout and how to run a single case.
+- **Add a changeset.** Every user-facing change needs one file in `.changeset/`, which is what writes the changelog.
+
+T> webpack is a bundler, so a change in `lib/` often lands on a path that runs once per module — sometimes once per module per chunk. Weigh what it costs before optimizing for elegance.
