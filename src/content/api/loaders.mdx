@@ -16,6 +16,7 @@ contributors:
   - chenxsan
   - jamesgeorge007
   - alexeyr
+  - raj-sapalya
 ---
 
 A loader is a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -425,6 +426,48 @@ A copy of the non-existing files registered so far with [`addMissingDependency`]
 Extracts given loader options. Optionally, accepts JSON schema as an argument.
 
 T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
+
+Pass a schema and webpack validates the options against it with [schema-utils](https://github.com/webpack/schema-utils) before handing them over, so a misspelled or wrong-typed option is reported instead of quietly ignored:
+
+**my-loader.js**
+
+```js
+const schema = {
+  title: "Prefix Loader options",
+  type: "object",
+  properties: {
+    prefix: {
+      type: "string",
+      description: "String to prepend to each file.",
+    },
+  },
+  additionalProperties: false,
+};
+
+export default function (source) {
+  const { prefix = "" } = this.getOptions(schema);
+  return `${prefix}\n${source}`;
+}
+```
+
+Configured with a typo — `{ loader: "./my-loader.js", options: { prefx: "// built by me" } }` — the module that uses the loader then fails to build:
+
+```bash
+ERROR in ./src/index.js
+Module build failed (from ./my-loader.js):
+ValidationError: Invalid options object. Prefix Loader has been initialized using an options object that does not match the API schema.
+ - options has an unknown property 'prefx'. These properties are valid:
+   object { prefix?: string }
+```
+
+Two keywords shape that message:
+
+- `additionalProperties: false` is what makes an unrecognized option an error rather than something the loader silently never reads.
+- `title` is split at its last space: everything before names the loader, and the last word names the value being validated — `'Prefix Loader options'` is what puts `Prefix Loader` and `options has an unknown property` in the message above. Without a title the message opens with a bare `Loader`, which identifies nothing when several loaders are in the chain.
+
+T> The check runs where `getOptions` is called, so it happens while the first module the loader runs on is built, not when the configuration is read. A build that never reaches the loader never validates its options.
+
+W> Validation is skipped entirely when webpack's [`validate`](/configuration/other-options/#validate) option is off. It defaults to `true`, but to `false` under [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) in `production` mode — so a schema is a development-time guard, not a check that every build is guaranteed to run.
 
 ### this.getResolve
 
