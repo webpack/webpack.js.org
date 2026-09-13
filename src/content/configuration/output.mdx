@@ -2699,7 +2699,13 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 `boolean = false`
 
-Output JavaScript files as module type. It defaults to `true` for the [`universal`](/configuration/target/#universal), [`deno`](/configuration/target/#deno) and [`bun`](/configuration/target/#bun) targets, which only run ECMAScript modules, and to `false` everywhere else.
+Output JavaScript files as module type. It defaults to `true` for the [`universal`](/configuration/target/#universal), [`deno`](/configuration/target/#deno) and [`bun`](/configuration/target/#bun) targets, which only run ECMAScript modules, and for a [`module`](#type-module) or [`modern-module`](#type-modern-module) library type, which exists only as an ECMAScript module. It defaults to `false` everywhere else.
+
+Under [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) <Badge text="5.111.0+" /> it defaults to `true` wherever the target can read an ECMAScript module, which is the webpack 6 default. Three things keep script output there:
+
+- a [`target`](/configuration/target/) stating it cannot read one — a `browserslist` query resolving to engines without module support (`ie 11`), or a version below it (`node10`, `['web', 'es5']`). A target that says nothing about modules, such as `web`, `webworker` or a plain `node`, counts as able to read one;
+- a library type that is read out of a script — `var`, `umd`, `commonjs2`, `assign`, `window`, `global`, … — wherever it is declared: [`output.library`](#outputlibrary), an entry's own `library`, or `output.enabledLibraryTypes` as a plugin such as `ModuleFederationPlugin` leaves it;
+- setting `output.module` yourself, which wins over the target and the library type in both directions.
 
 When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `minimizerOptions.module` to `true` internally.
 
