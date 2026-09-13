@@ -129,7 +129,7 @@ export default function (source) {
   return `${prefix}\n${source}`;
 }
 
-export function pitch(remainingRequest, precedingRequest, data) {
+export function pitch(remainingRequest, previousRequest, data) {
   // Pitch phase — runs left to right before normal loaders
   data.value = "/* processed by my-loader */";
 }

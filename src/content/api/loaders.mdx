@@ -167,7 +167,7 @@ export default function myLoaderName(content) {
   return someSyncOperation(content, this.data.value);
 }
 
-export function pitch(remainingRequest, precedingRequest, data) {
+export function pitch(remainingRequest, previousRequest, data) {
   data.value = 42;
 }
 ```
@@ -179,7 +179,7 @@ export default function myLoaderName(content) {
   return someSyncOperation(content);
 }
 
-export function pitch(remainingRequest, precedingRequest, data) {
+export function pitch(remainingRequest, previousRequest, data) {
   if (someCondition()) {
     return `import _from_loader from "${JSON.stringify(`-!${remainingRequest}`)}"; export default _from_loader;`;
   }
@@ -297,6 +297,14 @@ Remove all dependencies of the loader result, even initial dependencies and thos
 
 In [the example](#example-for-the-loader-context): `/abc` because `resource.js` is in this directory
 
+### this.currentRequest
+
+`string`
+
+The part of the request the current loader still has ahead of it, including the current loader itself: every loader from [`this.loaderIndex`](#thisloaderindex) onwards, plus the resource.
+
+In [the example](#example-for-the-loader-context): in loader1 `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`, in loader2 `'/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+
 ### this.data
 
 A data object shared between the pitch and the normal phase.
@@ -379,6 +387,38 @@ E.g.,
 ### this.fs
 
 Access to the `compilation`'s `inputFileSystem` property.
+
+### this.getContextDependencies
+
+```ts
+getContextDependencies(): string[]
+```
+
+A copy of the directories registered so far with [`addContextDependency`](#thisaddcontextdependency) during this loader run.
+
+### this.getDependencies
+
+```ts
+getDependencies(): string[]
+```
+
+A copy of the files registered so far with [`addDependency`](#thisadddependency) during this loader run. The resource itself is in the list before any loader runs, so a loader that wants only what it added must remember its own.
+
+### this.getLogger
+
+```ts
+getLogger(name?: string): Logger
+```
+
+A [logger](/api/logging/) scoped to this loader and the file being processed — a shortcut to `compilation.getLogger()` that prefixes the loader path and the module identifier. Pass a `name` for an independent child logger. See [Logging](#logging) for how the output is filtered and formatted.
+
+### this.getMissingDependencies
+
+```ts
+getMissingDependencies(): string[]
+```
+
+A copy of the non-existing files registered so far with [`addMissingDependency`](#thisaddmissingdependency) during this loader run.
 
 ### this.getOptions(schema)
 
@@ -595,10 +635,26 @@ Read in which [`mode`](/configuration/mode/) webpack is running.
 
 Possible values: `'production'`, `'development'`, `'none'`
 
+### this.previousRequest
+
+`string`
+
+The loaders already passed, joined with `!` — everything before [`this.loaderIndex`](#thisloaderindex). It carries no resource, and is the empty string in the first loader.
+
+In [the example](#example-for-the-loader-context): in loader1 `''`, in loader2 `'/abc/loader1.js?xyz'`
+
 ### this.query
 
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
+
+### this.remainingRequest
+
+`string`
+
+The part of the request left for the loaders after the current one: every loader beyond [`this.loaderIndex`](#thisloaderindex), plus the resource. This is the value handed to [`pitch`](#pitching-loader) as its first argument, and prefixing it with `-!` is how a pitching loader re-requests the rest of the chain.
+
+In [the example](#example-for-the-loader-context): in loader1 `'/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`, in loader2 `'/abc/resource.js?rrr'`
 
 ### this.request
 
@@ -625,6 +681,14 @@ All dependencies of the resolving operation are automatically added as dependenc
 The resource part of the request, including query.
 
 In [the example](#example-for-the-loader-context): `'/abc/resource.js?rrr'`
+
+### this.resourceFragment
+
+`string`
+
+The fragment of the resource, including the leading `#`, or the empty string when the request carries none. Assigning to [`this.resource`](#thisresource) splits the new value across `resourcePath`, `resourceQuery` and `resourceFragment`.
+
+For a request of `./resource?rrr#frag`: `'#frag'`
 
 ### this.resourcePath
 
