@@ -73,14 +73,20 @@ export const enhance = (tree, options) => {
 
     const isBlogItem = normalizedPath.includes("/blog/");
     if (isBlogItem) {
-      const teaser = (body || "")
+      const teaserLines = (body || "")
         .split("\n")
-        .filter((line) => line.trim() && !line.trim().startsWith("#"))
+        .map((line) => line.trim())
+        // a teaser is prose: headings, MDX imports/exports, JSX and expressions
+        // all render as markup rather than as a sentence
+        .filter((line) => line && !/^(#|import\s|export\s|<|\{)/.test(line));
+      const teaserText = teaserLines
         .slice(0, 3)
         .join(" ")
-        .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Strip markdown links but keep text
-        .slice(0, 240);
-      tree.teaser = `${teaser}...`;
+        .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, "$1"); // Strip markdown links but keep text
+      const teaser = teaserText.slice(0, 240);
+      // only an actually shortened teaser earns the ellipsis
+      const isTruncated = teaserLines.length > 3 || teaserText.length > 240;
+      tree.teaser = isTruncated ? `${teaser}...` : teaser;
     }
 
     Object.assign(
