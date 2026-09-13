@@ -110,7 +110,7 @@ Two things decide whether a plugin behaves well, and both are about _which_ hook
 
 ### Where the hooks live
 
-Hooks belong to the object that owns them, and the two reference pages list them in the order they run:
+The [build lifecycle](/concepts/under-the-hood/#the-build-lifecycle) shows which phase each hook belongs to. Hooks belong to the object that owns them, and the two reference pages list them in the order they run:
 
 - [Compiler hooks](/api/compiler-hooks/) — once per build, around the whole run: `run`, `watchRun`, `compile`, `make`, `emit`, `done`.
 - [Compilation hooks](/api/compilation-hooks/) — inside a single build, over modules, chunks and assets.
