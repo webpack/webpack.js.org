@@ -47,6 +47,7 @@ jobs:
       - run: npm run lint:js
       - run: npm run lint:prettier
       - run: npm run lint:markdown
+      - run: npm run lint:spelling
 
   proseLint:
     name: Proselint
