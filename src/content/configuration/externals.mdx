@@ -556,7 +556,7 @@ jq(".my-element").animate(/* ... */);
 
 Specify the default type of externals as `'module'`. Webpack will generate code like `import * as X from '...'` for externals used in a module.
 
-Make sure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first, otherwise webpack will throw errors.
+Make sure to enable [`output.module`](/configuration/output/#outputmodule) first, otherwise webpack will throw errors.
 
 #### Example
 
@@ -570,8 +570,8 @@ jq(".my-element").animate(/* ... */);
 
 ```js
 export default {
-  experiments: {
-    outputModule: true,
+  output: {
+    module: true,
   },
   externalsType: "module",
   externals: {
@@ -678,7 +678,7 @@ const src = await import.source("external-mod");
 
 Specify the default type of externals as `'module-import'`. This combines [`'module'`](#externalstypemodule) and [`'import'`](#externalstypeimport). Webpack will automatically detect the type of import syntax, setting it to `'module'` for static imports and `'import'` for dynamic imports.
 
-Ensure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first if static imports exist, otherwise, webpack will throw errors.
+Ensure to enable [`output.module`](/configuration/output/#outputmodule) first if static imports exist, otherwise, webpack will throw errors.
 
 #### Example
 
@@ -760,8 +760,8 @@ jq(".my-element").animate(/* ... */);
 
 ```js
 module.export = {
-  experiments: {
-    outputModule: true,
+  output: {
+    module: true,
   },
   externalsType: "node-commonjs",
   externals: {
@@ -798,7 +798,7 @@ You can use `node-commonjs` to ensure that the prototype chain is preserved:
 const { builtinModules } = require("node:module");
 
 export default {
-  experiments: { outputModule: true },
+  output: { module: true },
   externalsType: "node-commonjs",
   externals: ({ request }, callback) => {
     if (request.startsWith("node:") || builtinModules.includes(request)) {

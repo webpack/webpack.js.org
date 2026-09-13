@@ -54,7 +54,7 @@ module.exports = {
 
 [`target: "universal"`](/configuration/target/#universal) combines the `web`, `web worker`, `node`, `electron`, and `nwjs` platforms into one target and leaves each platform flag _neutral_ instead of locking the bundle to a single environment. Rather than compiling separate web and node bundles, you ship one bundle that figures out its surroundings at runtime and uses whatever the current platform provides.
 
-A bundle that has to load equally well in a browser and in Node needs a portable module format, so universal builds always output ECMAScript modules: [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) defaults to `true`, synchronous `require` is turned off, and Node's built-in modules stay available (resolved at runtime through ESM). [`output.globalObject`](/configuration/output/#outputglobalobject) also defaults to `globalThis` so runtime code has one global to reach for on every platform.
+A bundle that has to load equally well in a browser and in Node needs a portable module format, so universal builds always output ECMAScript modules: [`output.module`](/configuration/output/#outputmodule) defaults to `true`, synchronous `require` is turned off, and Node's built-in modules stay available (resolved at runtime through ESM). [`output.globalObject`](/configuration/output/#outputglobalobject) also defaults to `globalThis` so runtime code has one global to reach for on every platform.
 
 To make a single bundle behave correctly everywhere, several pieces were made platform-aware and now branch on feature detection at runtime instead of being fixed at build time:
 

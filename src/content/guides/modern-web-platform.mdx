@@ -70,7 +70,7 @@ Splitting alone does not change **browser** rules: the tag name must still be re
 
 ### Approach
 
-Enable [ES module output](/configuration/output/#outputmodule) (`experiments.outputModule` and `output.module`), set [`externalsType: "module"`](/configuration/externals/#externalstypemodule) for static imports, and list each bare specifier in `externals` with the same string the browser will resolve via the import map.
+Enable [ES module output](/configuration/output/#outputmodule) (`output.module`), set [`externalsType: "module"`](/configuration/externals/#externalstypemodule) for static imports, and list each bare specifier in `externals` with the same string the browser will resolve via the import map.
 
 **webpack.config.js**
 
@@ -83,9 +83,6 @@ const __dirname = path.dirname(__filename);
 
 export default {
   mode: "production",
-  experiments: {
-    outputModule: true,
-  },
   entry: "./src/index.js",
   externalsType: "module",
   externals: {
@@ -131,7 +128,7 @@ The key `"lodash-es"` must match both the **`externals` key** and the **specifie
 <script type="module" src="/dist/main.mjs"></script>
 ```
 
-W> [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) and [`output.module`](/configuration/output/#outputmodule) are still experimental. Check the latest [webpack release notes](https://github.com/webpack/webpack/releases) before relying on them in production.
+W> Check the latest [webpack release notes](https://github.com/webpack/webpack/releases) for the current state of [`output.module`](/configuration/output/#outputmodule) before relying on it in production.
 
 ### Limitations and future work
 
