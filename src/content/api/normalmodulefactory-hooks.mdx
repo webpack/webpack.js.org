@@ -67,6 +67,18 @@ Called before a request with scheme (URI) is resolved.
 
 - Callback Parameters: `resourceData` `resolveData`
 
+## resolveInScheme
+
+`HookMap<AsyncSeriesBailHook>`
+
+<Badge text="5.49.0+" />
+
+Called to resolve a request made from inside a resource that itself has a scheme, when the request carries no scheme of its own — the relative case of [`resolveForScheme`](#resolveforscheme). The map is keyed by the scheme of the importing resource. Return `true` to report the request as resolved; anything else lets webpack fall back to its normal resolution.
+
+- Hook Parameters: `scheme`
+
+- Callback Parameters: `resourceData` `resolveData`
+
 ## afterResolve
 
 `AsyncSeriesBailHook`
@@ -102,6 +114,16 @@ A hook that allows you to override the `NormalModule` class when creating module
 Called after a `NormalModule` instance is created.
 
 - Callback Parameters: `module` `createData` `resolveData`
+
+## prepareModuleType
+
+`HookMap<AsyncSeriesHook>`
+
+<Badge text="5.110.0+" />
+
+Called once for a module type before webpack needs that type's parser or generator, so a plugin can asynchronously load whatever its synchronous [`createParser`](#createparser) or [`createGenerator`](#creategenerator) tap then uses. A type nothing taps, or one already prepared, continues without waiting.
+
+- Hook Parameters: `type`
 
 ## createParser
 

@@ -151,6 +151,28 @@ Called when evaluating an identifier that is a defined variable.
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
+### evaluateNewExpression
+
+`SyncBailHook`
+
+<Badge text="5.73.0+" />
+
+Called when evaluating a `new` expression, keyed by the name of the constructor being called.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
+### evaluateCallExpression
+
+`SyncBailHook`
+
+<Badge text="5.73.0+" />
+
+Called when evaluating a call whose callee is a plain identifier, keyed by that identifier's name.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression`
+
 ### evaluateCallExpressionMember
 
 `SyncBailHook`
@@ -179,7 +201,18 @@ parser.hooks.evaluateCallExpressionMember.for("myFunc").tap(
 );
 ```
 
+### isPure
+
+`SyncBailHook`
+
+Called to decide whether a node is free of side effects, keyed by the node's type. Returning `false` marks it impure, which keeps webpack from dropping it.
+
+- Hook Parameters: `type`
+- Callback Parameters: `expression` `commentsStartPosition`
+
 ### statement
+
+`SyncBailHook`### statement
 
 `SyncBailHook`
 
@@ -225,6 +258,17 @@ Called for every statement during the pre-walk, before any statement of the bloc
 
 - Callback Parameters: `statement`
 
+### preStatementByType
+
+`SyncBailHook`
+
+<Badge text="5.109.0+" />
+
+The per-type form of [`preStatement`](#prestatement), keyed by the statement's node type. It runs only when no `preStatement` tap has already bailed.
+
+- Hook Parameters: `type`
+- Callback Parameters: `statement`
+
 ### blockPreStatement
 
 `SyncBailHook`
@@ -232,6 +276,17 @@ Called for every statement during the pre-walk, before any statement of the bloc
 Same as [`preStatement`](#prestatement), but for the block pre-walk, which only visits declarations scoped to the current block.
 
 - Callback Parameters: `statement`
+
+### blockPreStatementByType
+
+`SyncBailHook`
+
+<Badge text="5.109.0+" />
+
+The per-type form of [`blockPreStatement`](#blockprestatement), keyed by the declaration's node type, and run on the same terms as [`preStatementByType`](#prestatementbytype).
+
+- Hook Parameters: `type`
+- Callback Parameters: `declaration`
 
 ### unusedStatement
 
@@ -433,6 +488,17 @@ Called when parsing a variable declaration defined using `const`
 - Hook Parameters: `identifier`
 - Callback Parameters: `identifier`
 
+### varDeclarationUsing
+
+`SyncBailHook`
+
+<Badge text="5.100.0+" />
+
+Called for a variable declared with `using` or `await using`, keyed by the declared name, alongside the [`let`](#vardeclarationlet), [`const`](#vardeclarationconst) and [`var`](#vardeclarationvar) forms.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `declaration`
+
 ### varDeclarationVar
 
 `HookMap<SyncBailHook>`
@@ -441,6 +507,15 @@ Called when parsing a variable declaration defined using `var`
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `identifier`
+
+### pattern
+
+`SyncBailHook`
+
+Called for each identifier a destructuring pattern binds, keyed by that name.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `pattern`
 
 ### canRename
 
@@ -494,6 +569,15 @@ parser.hooks.assign.for("a").tap("MyPlugin", (expression) => {
 });
 ```
 
+### assignMemberChain
+
+`SyncBailHook`
+
+Called when a member chain is assigned to, keyed by the name the chain starts from.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression` `members`
+
 ### typeof
 
 `SyncBailHook`
@@ -537,6 +621,24 @@ parser.hooks.callMemberChain
   .tap("MyPlugin", (expression, properties) => {});
 ```
 
+### memberChainOfCallMemberChain
+
+`SyncBailHook`
+
+Called for a member chain read off the result of a call that was itself made on a member chain, keyed by the name the chain starts from.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression` `calleeMembers` `callExpression` `members` `memberRanges`
+
+### callMemberChainOfCallMemberChain
+
+`SyncBailHook`
+
+The same as [`memberChainOfCallMemberChain`](#memberchainofcallmemberchain), for when that outer member chain is itself called.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression` `calleeMembers` `callExpression` `members` `memberRanges`
+
 ### new
 
 `SyncBailHook`
@@ -566,6 +668,24 @@ const a = this;
 
 parser.hooks.expression.for("this").tap("MyPlugin", (expression) => {});
 ```
+
+### expressionMemberChain
+
+`SyncBailHook`
+
+Called for a member chain read as an expression, keyed by the name the chain starts from.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression` `members` `membersOptionals` `memberRanges`
+
+### unhandledExpressionMemberChain
+
+`SyncBailHook`
+
+Called for a member chain that [`expressionMemberChain`](#expressionmemberchain) left unhandled, keyed by the name the chain starts from.
+
+- Hook Parameters: `identifier`
+- Callback Parameters: `expression` `members`
 
 ### expressionConditionalOperator
 
@@ -656,6 +776,14 @@ Called for a destructuring assignment so the properties it reads can be collecte
 Called with the test of a conditional expression to collect the guards it implies, so the parser can narrow what the branches may evaluate to.
 
 - Callback Parameters: `expression`
+
+### finish
+
+`SyncBailHook`
+
+Called after the whole program has been walked, with the parsed AST and its comments.
+
+- Callback Parameters: `ast` `comments`
 
 ### program
 
