@@ -83,6 +83,16 @@ Called when a module was found to be still valid and therefore not rebuilt, for 
 
 - Callback Parameters: `module`
 
+## addEntry
+
+`SyncHook`
+
+Called when an entry and its dependencies start being added, before any of its modules are built. Every call is followed by either [`succeedEntry`](#succeedentry) or [`failedEntry`](#failedentry).
+
+- Callback Parameters: `entry` `options`
+
+`entry` is the entry `Dependency`, `options` the [entry options](/configuration/entry-context/#entry-descriptor) it was added with.
+
 ## succeedEntry
 
 `SyncHook`
@@ -422,11 +432,41 @@ Called for each module so that plugins can add runtime requirements ([`RuntimeGl
 
 - Callback Parameters: `module` `runtimeRequirements` `context`
 
+## runtimeRequirementInModule
+
+`HookMap<SyncBailHook>`
+
+Called once per runtime requirement a module already has, so that a plugin can react to one requirement instead of inspecting the whole set. Tap it through `for` with the [`RuntimeGlobals`](https://github.com/webpack/webpack/blob/main/lib/RuntimeGlobals.js) value it applies to.
+
+- Callback Parameters: `module` `runtimeRequirements` `context`
+
+`runtimeRequirements` is the `Set` collected for this module, and `context` carries `chunkGraph` and `codeGenerationResults`.
+
+Adding a requirement to that set from inside a tap schedules the added requirement's own hook within the same pass, which is how one requirement pulls in the others it needs. webpack itself declares such pairs this way — asking for `moduleId` also brings in `module`:
+
+```js
+compilation.hooks.runtimeRequirementInModule
+  .for(webpack.RuntimeGlobals.moduleId)
+  .tap("MyPlugin", (module, set) => {
+    set.add(webpack.RuntimeGlobals.module);
+  });
+```
+
+Because it is a `SyncBailHook`, returning any value from a tap skips the remaining taps for that requirement.
+
 ## additionalChunkRuntimeRequirements
 
 `SyncHook`
 
 Called for each chunk so that plugins can add runtime requirements the chunk needs.
+
+- Callback Parameters: `chunk` `runtimeRequirements` `context`
+
+## runtimeRequirementInChunk
+
+`HookMap<SyncBailHook>`
+
+The per-chunk counterpart of [`runtimeRequirementInModule`](#runtimerequirementinmodule), tapped the same way. The set it receives is the union of the requirements of every module in the chunk.
 
 - Callback Parameters: `chunk` `runtimeRequirements` `context`
 
@@ -437,6 +477,27 @@ Called for each chunk so that plugins can add runtime requirements the chunk nee
 Called for each entry chunk so that plugins can add runtime requirements for the whole chunk tree, which is where most runtime modules are injected.
 
 - Callback Parameters: `chunk` `runtimeRequirements` `context`
+
+## runtimeRequirementInTree
+
+`HookMap<SyncBailHook>`
+
+The whole-tree counterpart of [`runtimeRequirementInModule`](#runtimerequirementinmodule), and the one most runtime modules are attached from. `chunk` is the entry chunk, and the set is the union of the requirements of every chunk the entry references.
+
+- Callback Parameters: `chunk` `runtimeRequirements` `context`
+
+Expanding a requirement into the ones it implies works as it does above; the other use is attaching the runtime module that implements it, where the returned value stops any further tap for that requirement:
+
+```js
+compilation.hooks.runtimeRequirementInTree
+  .for(webpack.RuntimeGlobals.publicPath)
+  .tap("MyPlugin", (chunk) => {
+    compilation.addRuntimeModule(chunk, new MyRuntimeModule());
+    return true;
+  });
+```
+
+W> The hook is synchronous, so a tap cannot await anything. To attach a runtime module whose implementation is loaded on demand, hand it to `compilation.addLazyRuntimeModule(chunk, load, create)` instead and read whatever you need from the requirement set before queueing it.
 
 ## runtimeModule
 
