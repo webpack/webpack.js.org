@@ -492,6 +492,133 @@ export default {
 
 W> This is the trade-off the section above warns about: the polyfills now load asynchronously, so nothing outside the entry may run before they do — which is why the application itself is imported rather than being part of the entry. `isLegacyBrowser()` also has to be written in syntax the oldest target parses, since it runs before any polyfill.
 
+### Two bundles from one source with layers
+
+The `?legacy` query above tags imports one at a time. A [layer](/configuration/entry-context/#entry-descriptor) tags a whole entry instead: webpack walks the entry's graph once per layer, so every file it reaches exists twice as two separate modules, and [`Rule.issuerLayer`](/configuration/module/#ruleissuerlayer) chooses the loaders for each copy. The polyfills go into the legacy entry only, and no browser detection runs in the page.
+
+**webpack.config.js**
+
+```js
+import path from "node:path";
+
+const src = path.resolve(process.cwd(), "src");
+
+const babel = (targets, corejs) => ({
+  loader: "babel-loader",
+  options: {
+    presets: [
+      [
+        "@babel/preset-env",
+        {
+          targets,
+          useBuiltIns: corejs ? "usage" : false,
+          corejs,
+        },
+      ],
+    ],
+  },
+});
+
+export default {
+  entry: {
+    modern: { import: "./src/index.js", layer: "modern" },
+    legacy: { import: "./src/index.js", layer: "legacy" },
+  },
+  output: {
+    filename: "[name].js",
+    path: path.resolve(process.cwd(), "dist"),
+    environment: {
+      arrowFunction: false,
+      const: false,
+      destructuring: false,
+      dynamicImport: false,
+      forOf: false,
+      module: false,
+      optionalChaining: false,
+      templateLiteral: false,
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: src,
+        issuerLayer: "modern",
+        use: babel("last 2 chrome versions, last 2 firefox versions", false),
+      },
+      {
+        test: /\.js$/,
+        include: src,
+        issuerLayer: "legacy",
+        use: babel("ie 11", 3),
+      },
+    ],
+  },
+};
+```
+
+An entry's `layer` is what `issuerLayer` matches for the entry module itself, and every module the entry imports inherits it, so one rule per layer covers the whole graph. One compilation emits both bundles, and the page lets the browser pick — a browser that understands `type="module"` ignores `nomodule`, and one that does not ignores the module script:
+
+```html
+<script type="module" src="/modern.js"></script>
+<script nomodule defer src="/legacy.js"></script>
+```
+
+T> Before webpack 5.102.0, layers had to be switched on with `experiments.layers: true`.
+
+W> [`output.environment`](/configuration/output/#outputenvironment) belongs to the compilation, not to an entry, so both bundles share one runtime — set it to the oldest browser you support, as above. It constrains the code **webpack generates**, and never transpiles your own source; that is what the per-layer `babel-loader` is for.
+
+### Two configurations, when the modern build has to be ESM
+
+Layers cannot vary the output format, because [`output.module`](/configuration/output/#outputmodule) is compilation-wide for the same reason `output.environment` is. When the modern build should be real ECMAScript modules — `export` statements, `import()` for chunk loading — pass an array of configurations and let each one be its own compilation:
+
+```js
+import path from "node:path";
+
+const common = {
+  mode: "production",
+  entry: { app: "./src/index.js" },
+};
+
+export default [
+  {
+    ...common,
+    name: "modern",
+    output: {
+      path: path.resolve(process.cwd(), "dist/modern"),
+      filename: "[name].mjs",
+      chunkFilename: "[name].chunk.mjs",
+      module: true,
+      chunkFormat: "module",
+      chunkLoading: "import",
+      library: { type: "module" },
+    },
+  },
+  {
+    ...common,
+    name: "legacy",
+    output: {
+      path: path.resolve(process.cwd(), "dist/legacy"),
+      filename: "[name].js",
+      chunkFilename: "[name].chunk.js",
+      library: { type: "var", name: "App" },
+      environment: {
+        arrowFunction: false,
+        const: false,
+        destructuring: false,
+        dynamicImport: false,
+        forOf: false,
+        module: false,
+        optionalChaining: false,
+        templateLiteral: false,
+      },
+    },
+  },
+];
+```
+
+The modern compilation emits `export` and loads its chunks with `import()`; the legacy one emits a `var` library and loads its chunks with an injected `<script>`, because `environment.dynamicImport` is `false`. Add the per-target `babel-loader` rules to each configuration's `module.rules` as usual — with two compilations there is nothing for `issuerLayer` to distinguish, so the layers are not needed here.
+
 ## Node Built-Ins
 
 Node built-ins like `global`, `__dirname` and `__filename` can be handled directly from your configuration file with the [`node`](/configuration/node) option, without the use of any special loaders or plugins. `process` and Node core modules such as `buffer` are not polyfilled by webpack 5; provide them with [`ProvidePlugin`](/plugins/provide-plugin/) or [`resolve.fallback`](/configuration/resolve/#resolvefallback). See the [node configuration page](/configuration/node) for more information and examples.
