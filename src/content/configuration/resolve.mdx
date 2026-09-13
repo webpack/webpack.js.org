@@ -629,6 +629,24 @@ export default {
 };
 ```
 
+### resolve.fileSystem
+
+`InputFileSystem`
+
+The filesystem the resolver reads from.
+
+W> Setting this in the configuration has no effect. webpack assigns the compiler's own input filesystem over whatever the configuration supplies, for each of the three resolvers it creates, so the value never reaches [enhanced-resolve](https://github.com/webpack/enhanced-resolve).
+
+To resolve against a different filesystem — an in-memory one, for instance — replace it on the compiler through the [Node.js API](/api/node/) instead:
+
+```js
+import webpack from "webpack";
+
+const compiler = webpack(configuration);
+
+compiler.inputFileSystem = myFileSystem;
+```
+
 ### resolve.fullySpecified
 
 `boolean`
@@ -849,6 +867,30 @@ import logo2 from "./logo.svg"; // otherwise you can only use relative path to r
 // `preferRelative` is enabled by default for `new URL()` case
 const b = new URL("module/path", import.meta.url);
 const a = new URL("./module/path", import.meta.url);
+```
+
+### resolve.resolver
+
+`Resolver`
+
+A prebuilt [enhanced-resolve](https://github.com/webpack/enhanced-resolve) `Resolver` to use instead of the one webpack would construct. The rest of the `resolve` options still apply: the resolution pipeline they describe is tapped onto the instance you supply.
+
+What the instance brings with it is its own filesystem, so this — not [`resolve.fileSystem`](#resolvefilesystem) — is the way to resolve against a different filesystem from within the configuration.
+
+**webpack.config.js**
+
+```js
+import { ResolverFactory } from "enhanced-resolve";
+
+export default {
+  // ...
+  resolve: {
+    resolver: ResolverFactory.createResolver({
+      fileSystem: myFileSystem,
+      extensions: [".js", ".json"],
+    }),
+  },
+};
 ```
 
 ### resolve.restrictions

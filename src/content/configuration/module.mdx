@@ -1282,6 +1282,38 @@ Specifies the behavior of invalid export names in `\"export ... from ...\"`. Thi
   };
   ```
 
+#### module.parser.javascript.specNamespaceObject
+
+Hand out a spec-compliant [Module Namespace Exotic Object](https://tc39.es/ecma262/#sec-module-namespace-exotic-objects) for `import * as ns` and `import()` of this module, instead of the plain exports object webpack hands out by default.
+
+- Type: `boolean`
+- Default: `false`
+- Available: 5.111.0+
+
+The plain exports object already reports `[object Module]`, carries the same live bindings, and throws a `TypeError` on writing to or deleting an export, so most code cannot tell the two apart. What the spec object adds is the remaining invariants: `Object.getPrototypeOf(ns)` is `null` rather than `Object.prototype`, and `Object.isExtensible(ns)` is `false`. Reach for it when something in the graph checks those — a conformance test, or a library that feature-detects a real namespace — not as a general setting.
+
+W> Set it on the module being **imported**, not on the importer — webpack asks each module whether the namespace it hands out is a spec object. Enabling it for a file that only does `import * as ns` changes nothing.
+
+Because it is implemented with a `Proxy` and costs extra runtime code, enable it per module — usually through [`Rule.parser`](#ruleparser) — rather than globally:
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: /node_modules\/strict-package/,
+        parser: {
+          specNamespaceObject: true,
+        },
+      },
+    ],
+  },
+};
+```
+
+W> The target environment must support `Proxy`, which rules out ES5 targets.
+
 #### module.parser.javascript.strictModeViolations
 
 Specifies the behavior of constructs that break at runtime in strict mode when modules are emitted as ES module output ([`output.module`](/configuration/output/#outputmodule)). This covers strict-mode-only syntax (`delete` of a variable, `with`, octal literals and escapes, duplicate parameters, assigning to `eval`/`arguments`) and semantic hazards (`arguments.callee`/`arguments.caller`, assigning to read-only globals).
