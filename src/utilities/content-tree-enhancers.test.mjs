@@ -57,6 +57,43 @@ describe("restructure", () => {
 
     expect(root.children.map((item) => item.title)).toEqual(["API", "Guides"]);
   });
+
+  it("keeps blog roadmaps below the releases, newest first", () => {
+    const post = (name, date, title) => ({
+      type: "file",
+      path: `src/content/blog/${name}`,
+      name,
+      date,
+      title,
+    });
+
+    const root = {
+      type: "directory",
+      path: "src/content/blog",
+      children: [
+        post("2026-02-04-roadmap-2026.mdx", "2026-02-04", "Roadmap 2026"),
+        post("2020-12-08-roadmap-2021.mdx", "2020-12-08", "Roadmap 2021"),
+        post("2026-02-03-webpack-5-105.mdx", "2026-02-03", "Webpack 5.105"),
+        post("2026-09-14-webpack-5-111.mdx", "2026-09-14", "Webpack 5.111"),
+        {
+          type: "file",
+          path: "src/content/blog/index.mdx",
+          name: "index.mdx",
+          title: "Blog",
+        },
+      ],
+    };
+
+    restructure(root, { dir: "src/content" });
+
+    expect(root.children.map((item) => item.title)).toEqual([
+      "Blog",
+      "Webpack 5.111",
+      "Webpack 5.105",
+      "Roadmap 2026",
+      "Roadmap 2021",
+    ]);
+  });
 });
 
 describe("enhance", () => {
