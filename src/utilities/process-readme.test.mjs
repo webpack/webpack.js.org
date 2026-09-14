@@ -18,6 +18,20 @@ describe("processReadme", () => {
     );
   });
 
+  it("renders a relative link against the branch the readme was read from", () => {
+    // A raw url names the branch where a rendered one names `blob` and then
+    // the branch, whatever the repository calls its default one.
+    for (const branch of ["master", "main", "next"]) {
+      const options = {
+        source: `https://raw.githubusercontent.com/webpack/html-loader/${branch}/README.md`,
+      };
+
+      expect(processReadme("[LICENSE](./LICENSE)", options)).toBe(
+        `[LICENSE](https://github.com/webpack/html-loader/blob/${branch}/LICENSE)`,
+      );
+    }
+  });
+
   it("keeps the github link when the site builds no page for the package", () => {
     const options = {
       source: url,
@@ -80,7 +94,7 @@ describe("processReadme", () => {
     const loaderMDData =
       "See the file [`./src/config.d.ts`](./src/config.d.ts).";
     expect(processReadme(loaderMDData, options)).toBe(
-      "See the file [`https://github.com/webpack/postcss-loader/main/src/config.d.ts`](https://github.com/webpack/postcss-loader/main/src/config.d.ts).",
+      "See the file [`https://github.com/webpack/postcss-loader/blob/main/src/config.d.ts`](https://github.com/webpack/postcss-loader/blob/main/src/config.d.ts).",
     );
   });
 

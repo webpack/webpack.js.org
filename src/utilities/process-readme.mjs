@@ -24,6 +24,23 @@ const fragmentLinkMap = {
   "/guides/shimming/#provideplugin": "/plugins/provide-plugin/",
 };
 
+/**
+ * The page a raw README url is rendered at. A raw url names the branch where a
+ * rendered one names `blob` and then the branch, and the branch is whatever the
+ * repository calls its default one.
+ * @param {string} sourceUrl where the readme was read from
+ * @returns {string} what its relative links resolve against
+ */
+function renderedUrlOf(sourceUrl) {
+  const raw = new URL(sourceUrl);
+
+  if (raw.hostname !== "raw.githubusercontent.com") return sourceUrl;
+
+  const [, owner, repository, ...rest] = raw.pathname.split("/");
+
+  return `https://github.com/${owner}/${repository}/blob/${rest.join("/")}`;
+}
+
 function linkFixerFactory(sourceUrl) {
   return function linkFixer(markdownLink, href) {
     const oldHref = href;
@@ -34,12 +51,7 @@ function linkFixerFactory(sourceUrl) {
 
     // Only resolve non-absolute urls from their source if they are not a document fragment link
     if (!href.startsWith("#")) {
-      // Convert Github raw links to rendered links
-      const renderedUrl = sourceUrl
-        .replace(/raw.githubusercontent.com/, "github.com")
-        .replace(/master/, "blob/master");
-
-      href = new URL(href, renderedUrl).href;
+      href = new URL(href, renderedUrlOf(sourceUrl)).href;
     }
 
     // Modify absolute documentation links to be root relative
