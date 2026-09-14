@@ -9,6 +9,7 @@ import FirstRight from "../components/Splash/first/right.mdx";
 import SecondLeft from "../components/Splash/second/left.mdx";
 import SecondRight from "../components/Splash/second/right.mdx";
 import Install from "../components/Splash/install/install.mdx";
+import Build from "../components/Splash/build/build.mdx";
 
 ## Install Webpack
 
@@ -40,7 +41,15 @@ import Install from "../components/Splash/install/install.mdx";
   </div>
 </div>
 
-Then run `webpack` on the command-line: HTML, CSS and JavaScript are all handled by webpack itself, so `dist/` ends up with the page and the hashed assets it points at.
+Then run webpack on the command-line:
+
+<div className="splash__wrap">
+  <div className="splash__install">
+    <Build />
+  </div>
+</div>
+
+HTML, CSS and JavaScript are all handled by webpack itself, so `dist/` ends up with the page and the assets it points at: readable output and source maps in development, minified in production.
 
 ## Awesome, isn't it? Let's dive in!
 
