@@ -9,7 +9,8 @@ import FirstRight from "../components/Splash/first/right.mdx";
 import SecondLeft from "../components/Splash/second/left.mdx";
 import SecondRight from "../components/Splash/second/right.mdx";
 import Install from "../components/Splash/install/install.mdx";
-import Build from "../components/Splash/build/build.mdx";
+import BuildDevelopment from "../components/Splash/build/development.mdx";
+import BuildProduction from "../components/Splash/build/production.mdx";
 
 ## Install Webpack
 
@@ -41,15 +42,23 @@ import Build from "../components/Splash/build/build.mdx";
   </div>
 </div>
 
-Then run webpack on the command-line:
+Then run webpack on the command-line. HTML, CSS and JavaScript are all handled by webpack itself, so `dist/` ends up with the page and the assets it points at.
 
 <div className="splash__wrap">
   <div className="splash__install">
-    <Build />
+    <BuildDevelopment />
   </div>
 </div>
 
-HTML, CSS and JavaScript are all handled by webpack itself, so `dist/` ends up with the page and the assets it points at. [`--mode development`](/configuration/mode/) leaves them unminified and shows your own sources in browser devtools; `--mode production` minifies the page, the stylesheet and the script, and drops the code nothing uses.
+[`--mode development`](/configuration/mode/) leaves the page and the stylesheet unminified and maps the bundle back to your own files in browser devtools, so what you debug looks like what you wrote.
+
+<div className="splash__wrap">
+  <div className="splash__install">
+    <BuildProduction />
+  </div>
+</div>
+
+[`--mode production`](/configuration/mode/) minifies the page, the stylesheet and the script, and drops the code nothing uses. That is the build you deploy.
 
 ## Awesome, isn't it? Let's dive in!
 
