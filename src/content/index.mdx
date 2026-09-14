@@ -49,7 +49,7 @@ Then run webpack on the command-line:
   </div>
 </div>
 
-HTML, CSS and JavaScript are all handled by webpack itself, so `dist/` ends up with the page and the assets it points at: readable output and source maps in development, minified in production.
+HTML, CSS and JavaScript are all handled by webpack itself, so `dist/` ends up with the page and the assets it points at. [`--mode development`](/configuration/mode/) leaves them unminified and shows your own sources in browser devtools; `--mode production` minifies the page, the stylesheet and the script, and drops the code nothing uses.
 
 ## Awesome, isn't it? Let's dive in!
 
