@@ -110,6 +110,12 @@ export const sort = (a, b) => {
     if (a.name === "index.mdx" || a.url === "/blog/") return -1;
     if (b.name === "index.mdx" || b.url === "/blog/") return 1;
 
+    // Roadmaps outlive the releases they plan, so they sit below all of
+    // them rather than among the releases published around the same date.
+    const aIsRoadmap = aPath.includes("roadmap");
+    const bIsRoadmap = bPath.includes("roadmap");
+    if (aIsRoadmap !== bIsRoadmap) return aIsRoadmap ? 1 : -1;
+
     // Blog specific sorting: Index at top, then newest first by date
     if (a.date && b.date) {
       if (a.date > b.date) return -1;
