@@ -42,5 +42,9 @@ export default (locals) => {
   const hoistedTags = headTagsMatch ? headTagsMatch[1] : "";
   const bodyHtml = renderedHtml.slice(hoistedTags.length);
 
-  return `<!DOCTYPE html><html><head>${css}${hoistedTags}</head><body><div id="root">${bodyHtml}</div>${scripts}</body></html>`;
+  // Blocking inline script to prevent dark mode FOUC
+  const themeScript =
+    "<script>(function(){try{var d=document.documentElement;var s=localStorage.getItem('theme');var isDark=false;if(s){isDark=s==='\"dark\"'||s==='dark'}else{isDark=window.matchMedia('(prefers-color-scheme: dark)').matches;if(isDark){localStorage.setItem('theme','\"dark\"')}}if(isDark){d.setAttribute('data-theme','dark');d.classList.add('dark')}}catch(e){}})();</script>";
+
+  return `<!DOCTYPE html><html lang="en"><head>${themeScript}${css}${hoistedTags}</head><body><div id="root">${bodyHtml}</div>${scripts}</body></html>`;
 };
