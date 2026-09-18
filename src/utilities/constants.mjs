@@ -46,6 +46,8 @@ export const excludedPlugins = [
   "webpack/html-minimizer-webpack-plugin",
   "webpack/json-minimizer-webpack-plugin",
   "webpack/image-minimizer-webpack-plugin",
+  // Folded into minimizer-webpack-plugin too, as an `asset` generator
+  "webpack/compression-webpack-plugin",
   // Folded into diagnostics-webpack-plugin, which runs every linter
   "webpack/stylelint-webpack-plugin",
   "webpack-contrib/component-webpack-plugin",
