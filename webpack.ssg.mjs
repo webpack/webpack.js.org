@@ -111,6 +111,8 @@ export default (env) =>
             "/plugins/minimizer-webpack-plugin/",
           "plugins/image-minimizer-webpack-plugin":
             "/plugins/minimizer-webpack-plugin/",
+          "plugins/compression-webpack-plugin":
+            "/plugins/minimizer-webpack-plugin/#compressing-with-minifying-and-without",
           "plugins/eslint-webpack-plugin":
             "/plugins/diagnostics-webpack-plugin/",
           "plugins/stylelint-webpack-plugin":

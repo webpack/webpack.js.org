@@ -38,14 +38,13 @@ T> Several of these exist mainly because a [configuration option](/configuration
 
 ## Output and assets
 
-| Name                                                              | Description                                                                   |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [`BannerPlugin`](/plugins/banner-plugin)                          | Add a banner to the top of each generated chunk                               |
-| [`CopyPlugin`](/plugins/copy-plugin)                              | Copy files and directories into the output directory                          |
-| [`ManifestPlugin`](/plugins/manifest-plugin)                      | Generate an asset manifest mapping source filenames to emitted output files   |
-| [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin) | Prepare compressed versions of assets to serve them with Content-Encoding     |
-| [`ChunksWebpackPlugin`](/plugins/chunks-webpack-plugin/)          | Create HTML files with entrypoints and chunks relations to serve your bundles |
-| [`SvgChunkWebpackPlugin`](/plugins/svg-chunk-webpack-plugin/)     | Generate SVG sprites optimized by SVGO based on your entry point dependencies |
+| Name                                                          | Description                                                                   |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [`BannerPlugin`](/plugins/banner-plugin)                      | Add a banner to the top of each generated chunk                               |
+| [`CopyPlugin`](/plugins/copy-plugin)                          | Copy files and directories into the output directory                          |
+| [`ManifestPlugin`](/plugins/manifest-plugin)                  | Generate an asset manifest mapping source filenames to emitted output files   |
+| [`ChunksWebpackPlugin`](/plugins/chunks-webpack-plugin/)      | Create HTML files with entrypoints and chunks relations to serve your bundles |
+| [`SvgChunkWebpackPlugin`](/plugins/svg-chunk-webpack-plugin/) | Generate SVG sprites optimized by SVGO based on your entry point dependencies |
 
 ## Chunks and optimization
 
@@ -56,7 +55,7 @@ T> Several of these exist mainly because a [configuration option](/configuration
 | [`MergeDuplicateChunksPlugin`](/plugins/merge-duplicate-chunks-plugin)          | Merge chunks that contain the same modules                                                                                                                             |
 | [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | Limit the maximum number of chunks by merging them                                                                                                                     |
 | [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)                          | Keep chunk size above the specified limit                                                                                                                              |
-| [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/)                         | Uses Terser (or other) to minify the JS/CSS/HTML/JSON/etc in your project                                                                                              |
+| [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/)                         | Minify the JS/CSS/HTML/JSON/etc in your project, and [compress what it emits](/plugins/minimizer-webpack-plugin/#compressing-with-minifying-and-without)               |
 | [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin)                    | Hash-based module IDs — use [`optimization.moduleIds: 'deterministic'`](/configuration/optimization/#optimizationmoduleids) instead, which is the `production` default |
 | [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | Skip the emitting phase when there are compilation errors                                                                                                              |
 | [`AutomaticPrefetchPlugin`](/plugins/automatic-prefetch-plugin)                 | Resolve all modules from the previous compilation upfront to speed up watch rebuilds                                                                                   |
