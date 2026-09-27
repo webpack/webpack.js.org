@@ -630,7 +630,7 @@ export default [
 
 On a `node` target the CSS generator defaults to `exportsOnly: true`, so the server build exports only the class-name mapping and emits no stylesheet — exactly what an SSR renderer needs. The browser build still extracts the real CSS. If you prefer a single config, `target: ["web", "node"]` builds a universal bundle that runs in both environments.
 
-T> The production default `localIdentName: "[fullhash]"` is a CSS Module local-ident hash, not the compilation hash. It can produce matching class names in web and node builds when both use the same `output.uniqueName`, compiler context, resource paths, `localIdentHashSalt`, and CSS hash options. If those inputs differ, pin the same deterministic template (such as `[file]__[local]`) in both configs.
+T> The production default `localIdentName: "[fullhash]"` is a CSS Module local-ident hash, not the compilation hash. It can produce matching class names in web and node builds when both use the same `output.uniqueName`, compiler context, resource paths, `localIdentHashSalt`, and CSS hash options. If hash inputs differ, use the same deterministic template (such as `[file]__[local]`) in both configs, and make sure its placeholders resolve to the same values; `[file]` still depends on the resource path.
 
 ### 8. Drop the CSS minimizer and `autoprefixer`
 
