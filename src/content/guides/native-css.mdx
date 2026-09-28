@@ -601,7 +601,7 @@ export default {
 
 For SSR you typically build twice — a `web` bundle for the browser and a `node` bundle for the server — and the CSS Modules class names must match so the server-rendered markup hydrates cleanly on the client. This is what `css-loader`'s `getJSON` was often used to round-trip; with native CSS you avoid the round-trip entirely by making `localIdentName` deterministic across targets.
 
-Class names are deterministic across targets as long as both builds share the inputs of the class name: the `localIdentName` template and the local ident hash inputs described below. A readable **path-based** template works on every target:
+Class names are deterministic across targets as long as both builds share the `localIdentName` template, resolve every placeholder in it to the same value (for example, `[id]` is the module id, which can differ between separate builds), and share the local ident hash inputs described below. A readable **path-based** template works on every target:
 
 **webpack.config.js**
 
