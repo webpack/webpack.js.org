@@ -183,6 +183,8 @@ export default {
         // type: string, besides the substitutions at File-level and Module-level in https://webpack.js.org/configuration/output/#template-strings, also include [uniqueName] and [local].
         // available since webpack 5.91.0
         // Since webpack 5.108.0, [hash] here resolves to the local ident hash; use [modulehash] for the module hash. An inline digest/length form is also supported, e.g. [hash:base64:8].
+        // [hash] and [fullhash] here are the local ident hash, not the compilation hash: a hash of `localIdentHashSalt`, `output.uniqueName`, the resource path relative to `context`, and the local name.
+        // It is deterministic, so builds sharing those values (e.g. web and node builds for SSR) produce identical class names.
         localIdentName: "[uniqueName]-[id]-[local]",
       },
       "css/global": {

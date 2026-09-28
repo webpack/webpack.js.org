@@ -601,7 +601,7 @@ export default {
 
 For SSR you typically build twice — a `web` bundle for the browser and a `node` bundle for the server — and the CSS Modules class names must match so the server-rendered markup hydrates cleanly on the client. This is what `css-loader`'s `getJSON` was often used to round-trip; with native CSS you avoid the round-trip entirely by making `localIdentName` deterministic across targets.
 
-Use a **path-based** template (no compilation-wide hash) so the same class name is produced on every target:
+Class names are deterministic across targets as long as both builds share the inputs of the class name: the `localIdentName` template and the local ident hash inputs described below. A readable **path-based** template works on every target:
 
 **webpack.config.js**
 
@@ -630,7 +630,16 @@ export default [
 
 On a `node` target the CSS generator defaults to `exportsOnly: true`, so the server build exports only the class-name mapping and emits no stylesheet — exactly what an SSR renderer needs. The browser build still extracts the real CSS. If you prefer a single config, `target: ["web", "node"]` builds a universal bundle that runs in both environments.
 
-T> Avoid the production default `localIdentName: "[fullhash]"` for SSR — the full compilation hash differs between the web and node builds, so class names won't line up. Pin a deterministic template (path- or `[local]`-based, optionally with a per-file `[hash]`) in both configs.
+The production default `localIdentName: "[fullhash]"` (and any `[hash]` template) is SSR-safe too. Despite its name, `[fullhash]` in `localIdentName` is **not** the compilation hash: it is the local ident hash, computed from:
+
+- [`localIdentHashSalt`](#generator-options) (defaults to [`output.hashSalt`](/configuration/output/#outputhashsalt)),
+- [`output.uniqueName`](/configuration/output/#outputuniquename) — included even when `[uniqueName]` is not in the template,
+- the resource path relative to [`context`](/configuration/entry-context/#context),
+- the local class name.
+
+So you get short class names (6 characters by default) that match between the `web` and `node` builds, and the same local name in two files still gets different class names.
+
+W> Make sure `output.uniqueName` and `context` are the same in both configs. `output.uniqueName` defaults to the `name` in the nearest `package.json`, so separate projects or configs that set it differently will generate different hashes and the class names won't line up. The same applies to `localIdentHashSalt`, `localIdentHashFunction`, `localIdentHashDigest`, and `localIdentHashDigestLength`.
 
 ### 8. Drop the CSS minimizer and `autoprefixer`
 
