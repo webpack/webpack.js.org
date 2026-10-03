@@ -36,6 +36,45 @@ Webpack is used to efficiently compile JavaScript modules. Once [installed](/gui
 
 W> The examples in this guide use `webpack-cli` 7, which requires Node.js 20.9.0 or later.
 
+## Prerequisites
+
+Before you begin this guide, make sure you have the following installed and ready:
+
+### Required Software
+
+- **[Node.js](https://nodejs.org/)** version 20.9.0 or later
+  - Node.js is a JavaScript runtime that lets you run JavaScript outside the browser
+  - It comes bundled with npm (Node Package Manager), which you'll use to install webpack
+- **A package manager**: npm (included with Node.js), [yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/)
+- **A code editor** such as [VS Code](https://code.visualstudio.com/), [WebStorm](https://www.jetbrains.com/webstorm/), or [Sublime Text](https://www.sublimetext.com/)
+- **A terminal/command line** application
+
+### Verify Your Installation
+
+Open your terminal and run these commands to check that Node.js and npm are installed correctly:
+
+```bash
+node --version
+# Should output v20.9.0 or higher
+
+npm --version
+# Should output 10.0.0 or higher
+```
+
+If these commands don't work or show older versions, visit [nodejs.org](https://nodejs.org/) to download and install the latest LTS (Long Term Support) version.
+
+### Recommended Knowledge
+
+This guide assumes you have:
+
+- Basic understanding of JavaScript (variables, functions, modules)
+- Familiarity with using a terminal/command line
+- Understanding of how to navigate directories with `cd` and `ls` (or `dir` on Windows)
+
+T> **New to JavaScript?** You might want to start with [MDN's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide) before diving into webpack.
+
+T> **Need help with the command line?** Check out [this beginner's guide to the terminal](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line).
+
 <StackBlitzPreview example="getting-started?terminal=" />
 
 ## Quick Start (Minimal Working Example)
