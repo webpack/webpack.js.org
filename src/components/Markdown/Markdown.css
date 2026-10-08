@@ -253,6 +253,12 @@
 
   td {
     @apply py-1 px-3 border-r-0 grid grid-cols-2 text-left border-b border-solid border-b-gray-100;
+    @media (max-width: 767px) {
+      > span {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+    }
     &::before {
       content: attr(data-th);
       @apply font-bold;
