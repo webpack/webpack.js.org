@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { describe, expect, it } from "@jest/globals";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, jest } from "@jest/globals";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import SidebarItem from "./SidebarItem.jsx";
 
@@ -18,6 +18,25 @@ describe("SidebarItem", () => {
     currentPage: "/guides/",
     anchors: [],
   };
+
+  let content;
+
+  afterEach(() => {
+    content?.remove();
+    content = undefined;
+  });
+
+  function setupHeadings(positions) {
+    content = document.createElement("div");
+    content.id = "md-content";
+    for (const [id, top] of Object.entries(positions)) {
+      const heading = document.createElement("h2");
+      heading.id = id;
+      heading.getBoundingClientRect = () => ({ top, bottom: top + 30 });
+      content.append(heading);
+    }
+    document.body.append(content);
+  }
 
   it("renders the title", () => {
     renderWithRouter(<SidebarItem {...defaultProps} />);
@@ -89,6 +108,57 @@ describe("SidebarItem", () => {
     expect(screen.queryByRole("button")).toBeNull();
     // The wrapper should still render
     expect(container.firstChild).toBeTruthy();
+  });
+
+  it("highlights the anchor of the heading currently in view", async () => {
+    const anchors = [
+      { id: "intro", title: "Introduction", title2: "Introduction", level: 2 },
+      { id: "setup", title: "Setup", title2: "Setup", level: 2 },
+    ];
+    setupHeadings({ intro: -50, setup: 400 });
+
+    renderWithRouter(
+      <SidebarItem
+        {...defaultProps}
+        currentPage="/guides/getting-started/"
+        anchors={anchors}
+      />,
+    );
+
+    await waitFor(() =>
+      expect(
+        screen.getByText("Introduction").getAttribute("data-active-anchor"),
+      ).toBe("true"),
+    );
+    expect(
+      screen.getByText("Setup").getAttribute("data-active-anchor"),
+    ).toBeNull();
+  });
+
+  it("auto-scrolls the active anchor into view", async () => {
+    const scrollIntoView = jest.fn();
+    Element.prototype.scrollIntoView = scrollIntoView;
+
+    const anchors = [
+      { id: "intro", title: "Introduction", title2: "Introduction", level: 2 },
+    ];
+    setupHeadings({ intro: -50 });
+
+    renderWithRouter(
+      <SidebarItem
+        {...defaultProps}
+        currentPage="/guides/getting-started/"
+        anchors={anchors}
+      />,
+    );
+
+    await waitFor(() => expect(scrollIntoView).toHaveBeenCalled());
+    expect(scrollIntoView).toHaveBeenCalledWith({
+      block: "nearest",
+      behavior: "smooth",
+    });
+
+    delete Element.prototype.scrollIntoView;
   });
 
   it("matches snapshot", () => {

@@ -1,9 +1,18 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router";
 import ChevronRightIcon from "../../styles/icons/chevron-right.svg";
 import BarIcon from "../../styles/icons/vertical-bar.svg";
 import list2Tree from "../../utilities/list2Tree/index.js";
+
+// Distance (in px) from the top of the viewport that counts as the
+// "current" section while scrolling. It roughly matches the height of the
+// sticky site header so the heading just below the header wins.
+const SCROLL_SPY_OFFSET = 120;
+
+const anchorBaseClasses =
+  "text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]";
+const anchorActiveClasses = "font-semibold text-[#175d96] dark:text-[#82b7f6]";
 
 /**
  * Checks whether the sidebar item should be expanded
@@ -42,24 +51,35 @@ function scrollTop(event) {
   }
 }
 
-function Anchors({ anchors, url }) {
+function Anchors({ anchors, url, activeId }) {
   return (
     <ul className="relative hidden flex-[0_0_100%] flex-wrap my-[0.35em] pl-6 overflow-hidden list-none leading-[19px] before:content-[''] before:absolute before:h-[calc(100%-0.6em)] before:top-0 before:left-6 before:border-l before:border-dashed before:border-[#777676] group-data-[open]/item:flex">
-      {anchors.map((anchor) => (
-        <li
-          key={generateAnchorURL(url, anchor)}
-          className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
-          title={anchor.title}
-        >
-          <NavLink
-            to={generateAnchorURL(url, anchor)}
-            className="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+      {anchors.map((anchor) => {
+        const isActive = Boolean(anchor.id) && anchor.id === activeId;
+
+        return (
+          <li
+            key={generateAnchorURL(url, anchor)}
+            className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
+            title={anchor.title}
           >
-            {anchor.title2}
-          </NavLink>
-          {anchor.children && <Anchors anchors={anchor.children} url={url} />}
-        </li>
-      ))}
+            <NavLink
+              to={generateAnchorURL(url, anchor)}
+              data-active-anchor={isActive ? "true" : undefined}
+              className={isActive ? anchorActiveClasses : anchorBaseClasses}
+            >
+              {anchor.title2}
+            </NavLink>
+            {anchor.children && (
+              <Anchors
+                anchors={anchor.children}
+                url={url}
+                activeId={activeId}
+              />
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -67,10 +87,15 @@ function Anchors({ anchors, url }) {
 Anchors.propTypes = {
   anchors: PropTypes.array.isRequired,
   url: PropTypes.string.isRequired,
+  activeId: PropTypes.string,
 };
 
 export default function SidebarItem({ title, anchors = [], url, currentPage }) {
   const [open, setOpen] = useState(() => isOpen(currentPage, url));
+  const [activeId, setActiveId] = useState(null);
+  const rootRef = useRef(null);
+
+  const pageIsActive = isOpen(currentPage, url);
 
   useEffect(() => {
     setOpen(isOpen(currentPage, url));
@@ -82,9 +107,109 @@ export default function SidebarItem({ title, anchors = [], url, currentPage }) {
 
   const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
   const tree = list2Tree(title, filteredAnchors);
+  const anchorKey = filteredAnchors
+    .map((anchor) => anchor.id)
+    .filter(Boolean)
+    .join("|");
+
+  // Track which heading is currently in view and highlight its anchor.
+  useEffect(() => {
+    if (!pageIsActive || !open) {
+      setActiveId(null);
+      return undefined;
+    }
+
+    let elements = [];
+    let frame = null;
+
+    const collect = () => {
+      elements = anchorKey
+        .split("|")
+        .filter(Boolean)
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+    };
+
+    const update = () => {
+      frame = null;
+      if (elements.length === 0) {
+        collect();
+      }
+      if (elements.length === 0) {
+        return;
+      }
+
+      let current = elements[0].id;
+      for (const element of elements) {
+        if (element.getBoundingClientRect().top <= SCROLL_SPY_OFFSET) {
+          current = element.id;
+        } else {
+          break;
+        }
+      }
+      setActiveId(current);
+    };
+
+    const schedule = () => {
+      if (frame !== null) {
+        return;
+      }
+      frame =
+        typeof window.requestAnimationFrame === "function"
+          ? window.requestAnimationFrame(update)
+          : window.setTimeout(update, 16);
+    };
+
+    collect();
+    schedule();
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    // Headings may be rendered asynchronously after client-side navigation.
+    const content = document.getElementById("md-content");
+    const mutation =
+      content && typeof MutationObserver !== "undefined"
+        ? new MutationObserver(() => {
+            collect();
+            schedule();
+          })
+        : null;
+    if (mutation) {
+      mutation.observe(content, { childList: true, subtree: true });
+    }
+
+    return () => {
+      if (frame !== null) {
+        if (typeof window.cancelAnimationFrame === "function") {
+          window.cancelAnimationFrame(frame);
+        } else {
+          window.clearTimeout(frame);
+        }
+      }
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (mutation) {
+        mutation.disconnect();
+      }
+    };
+  }, [pageIsActive, open, anchorKey]);
+
+  // Keep the highlighted anchor visible within the scrollable sidebar.
+  useEffect(() => {
+    if (!activeId) {
+      return;
+    }
+    const root = rootRef.current;
+    const element = root?.querySelector('[data-active-anchor="true"]');
+    if (element && typeof element.scrollIntoView === "function") {
+      element.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  }, [activeId]);
 
   return (
     <div
+      ref={rootRef}
       className="group/item relative flex flex-wrap text-[15px] my-[0.6em]"
       data-open={open || undefined}
     >
@@ -124,7 +249,9 @@ export default function SidebarItem({ title, anchors = [], url, currentPage }) {
         {title}
       </NavLink>
 
-      {anchors.length > 0 ? <Anchors anchors={tree} url={url} /> : null}
+      {anchors.length > 0 ? (
+        <Anchors anchors={tree} url={url} activeId={activeId} />
+      ) : null}
     </div>
   );
 }
