@@ -140,7 +140,12 @@ export default function CodeBlockWithCopy({ children }) {
             : "Copy"}
       </button>
 
-      <pre ref={preRef}>{children}</pre>
+      <pre
+  ref={preRef}
+  className="overflow-x-auto rounded-lg p-4"
+>
+  {children}
+</pre>
     </div>
   );
 }
