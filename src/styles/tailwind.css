@@ -33,8 +33,30 @@
 
 /* doc search */
 :root {
-  --docsearch-primary-color: #1d78c1 !important;
+  --docsearch-key-color: rgb(148 163 184);
 }
+
+[data-theme="dark"] {
+  --docsearch-key-color: rgb(148 163 184);
+}
+.DocSearch-Button-Key {
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  border-radius: 3px;
+
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.DocSearch-Button-Keys {
+  gap: 1px;
+}
+.DocSearch-Button-Key--pressed {
+  @apply bg-transparent!;
+}
+
 .DocSearch-Button {
   @apply bg-transparent! lg:bg-gray-500! transition! duration-200! lg:rounded-full!;
 }
