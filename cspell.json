@@ -80,6 +80,7 @@
     "customise",
     "deamdify",
     "debugids",
+    "dedupDepth",
     "delegators",
     "dependingfile",
     "destructures",

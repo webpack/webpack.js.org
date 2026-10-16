@@ -1,0 +1,293 @@
+---
+title: Webpack 5.112
+description: Source map scopes, an SSR asset manifest, more flexible library exports, and plugins for multiple configurations.
+sort: 20261013
+contributors:
+  - bjohansebas
+---
+
+Webpack 5.112 is here! This release helps you debug imports, load the right styles during server rendering, and publish libraries with several entry modules. It also adds plugins for multiple configurations and gives you more control over shared dependencies and the chunks extracted from HTML.
+
+Explore what's new:
+
+- [**Debug Imports by Their Original Names**](#debug-imports-by-their-original-names)
+- [**An Asset Manifest for Server Rendering**](#an-asset-manifest-for-server-rendering)
+- [**Export More Than the Last Entry Module**](#export-more-than-the-last-entry-module)
+- [**Choose Which Dependencies to Share**](#choose-which-dependencies-to-share)
+- [**Name the Chunks in Your HTML**](#name-the-chunks-in-your-html)
+- [**Async Values in DefinePlugin**](#async-values-in-defineplugin)
+- [**Find More Shared Chunks**](#find-more-shared-chunks)
+- [**More Control over CSS and JSON Assets**](#more-control-over-css-and-json-assets)
+- [**Plugins for Multiple Configurations**](#plugins-for-multiple-configurations)
+
+To update an existing project, run:
+
+```bash
+npm install --save-dev webpack@5.112.0
+```
+
+## Debug Imports by Their Original Names
+
+Paused at a breakpoint, but can't inspect an imported variable by the name you wrote? Webpack can turn that import into a property read on a generated namespace object. A source map points the debugger to your source, but that alone doesn't tell it how to evaluate the original name.
+
+The new `-scopes` suffix adds that information to your source maps:
+
+```js
+export default {
+  mode: "development",
+  devtool: "source-map-scopes",
+};
+```
+
+For example, a debugger that supports source map scopes can look up an imported `formatPrice` using the generated expression webpack recorded for it. You can also use `eval-source-map-scopes`, or set `scopes: true` when configuring `SourceMapDevToolPlugin` directly.
+
+This is opt-in: it adds data to the map without changing the emitted JavaScript. There is one limitation in this release: modules merged by module concatenation do not contribute their imported bindings yet. The development configuration above leaves concatenation off by default.
+
+## An Asset Manifest for Server Rendering
+
+A server can render a lazy route before the browser loads its JavaScript. If the route's stylesheet only arrives with that JavaScript, the user sees the page without its styles first.
+
+`SSRManifestPlugin` gives your server the information it needs to load those assets earlier. Add it to your client build:
+
+```js
+import webpack from "webpack";
+
+export default {
+  target: "web",
+  output: {
+    publicPath: "/assets/",
+  },
+  plugins: [new webpack.SSRManifestPlugin()],
+};
+```
+
+The plugin writes `ssr-manifest.json`, mapping source module paths to their client assets. That includes shared chunks and the async ancestors needed to reach a module, with stylesheets listed in cascade order.
+
+Your server rendering integration can look up the modules it rendered and use those paths to add stylesheet links and module preloads for ESM output. The plugin supplies the manifest; your integration still tracks the rendered modules and writes the tags. Set `output.publicPath` to the URL prefix where you serve the client assets. With `"auto"`, the plugin warns and uses `/` as the base instead.
+
+Native CSS also gets a server rendering fix: dedicated `target: "node"` builds can collect styles through `__webpack_css_server_styles__`. That API arrived in 5.110; this release makes collection work on a target with no document, too.
+
+## Export More Than the Last Entry Module
+
+An entry array runs every module you list, but a library normally exposes only the last module's exports. If you maintain separate modules for different parts of your public API, that can mean writing an extra entry file just to re-export them.
+
+Set `library.entryExports: "all"` to collect their exports into one library:
+
+```js
+export default {
+  entry: ["./src/format.js", "./src/validate.js"],
+  output: {
+    filename: "utils.mjs",
+    library: {
+      type: "module",
+      entryExports: "all",
+    },
+  },
+};
+```
+
+If those files export `formatPrice` and `validateOrder`, consumers can import both from `utils.mjs`. You can configure this on `output.library` or on an individual entry's `library` options.
+
+The default remains `"last"`. With `"all"`, conflicting names follow the idea behind `export *`: if two modules export different bindings under the same name, webpack leaves that name out and reports a warning. Re-exporting the same binding through both modules is fine.
+
+## Choose Which Dependencies to Share
+
+Sharing a dependency through Module Federation doesn't always mean sharing every installed version of it. Your app might use one major version while a nested dependency still needs another.
+
+New `include` and `exclude` filters let you decide which modules participate in sharing. For example, share versions of `uuid` matching `^8.3.2` while letting a dependency's older copy resolve normally:
+
+```js
+import webpack from "webpack";
+
+export default {
+  plugins: [
+    new webpack.container.ModuleFederationPlugin({
+      name: "shop",
+      shared: {
+        uuid: {
+          requiredVersion: "^8.3.2",
+          include: { version: "^8.3.2" },
+        },
+      },
+    }),
+  ],
+};
+```
+
+A module outside the filter is resolved and bundled as an ordinary dependency. Version filters on consumed modules inspect the local fallback, so they do not apply when `import: false` removes that fallback.
+
+There are request filters too. For a shared key ending in `/`, such as `lodash/`, `include.request` or `exclude.request` matches the remaining part of the request, such as `get` in `lodash/get`.
+
+## Name the Chunks in Your HTML
+
+With [native HTML support](/guides/native-html/), webpack extracts the scripts and styles your page needs. You can now give those chunks names that describe their role, directly in the HTML:
+
+```html
+<!-- webpackChunkName: "checkout" -->
+<script type="module" src="./checkout.js"></script>
+```
+
+For a naming rule across your pages, use `module.parser.html.chunkName`. It accepts a function or a template using `[page]`, `[name]`, `[index]`, and `[type]`:
+
+```js
+export default {
+  entry: "./src/index.html",
+  experiments: {
+    html: true,
+  },
+  module: {
+    parser: {
+      html: {
+        chunkName: "[page]-[type]-[index]",
+      },
+    },
+  },
+};
+```
+
+A `webpackChunkName` comment takes precedence over that rule. A named inline script starts a new run and can share its chunk with compatible scripts that follow it. If separate tags within a single HTML document request the same chunk name, webpack assigns distinct names to keep their chunks apart.
+
+Webpack also bundles compatible runs of inline scripts into a shared chunk. This avoids a separate chunk for every small script while preserving execution order. Async scripts, external scripts, and other boundaries that would change that order keep runs apart. Use `output.html.inline` or a `webpackInline` comment when you want eligible chunks written back into the page.
+
+## Async Values in DefinePlugin
+
+Need to read a file asynchronously before replacing a constant in your source? `DefinePlugin.runtimeValue` can now wait for an async callback before webpack parses the modules that use it:
+
+```js
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import webpack from "webpack";
+
+const versionFile = fileURLToPath(new URL("./version.txt", import.meta.url));
+
+export default {
+  plugins: [
+    new webpack.DefinePlugin({
+      APP_VERSION: webpack.DefinePlugin.runtimeValue(
+        async () =>
+          JSON.stringify((await readFile(versionFile, "utf8")).trim()),
+        [versionFile],
+      ),
+    }),
+  ],
+};
+```
+
+Listing the file as a dependency lets webpack recompute the value when it changes. `JSON.stringify` makes the result a JavaScript string literal, ready to replace `APP_VERSION` in your application.
+
+An `async` function is recognized automatically. If your callback returns a promise without being declared `async`, pass `{ async: true }` in the runtime value options. This work happens during compilation, so it adds no asynchronous lookup to your application.
+
+## Find More Shared Chunks
+
+Imagine one group of modules used by pages A, B, and C, and another used by A, B, and D. Both groups are needed by A and B, but webpack's existing chunk combinations can miss that shared pair.
+
+The new `optimization.splitChunks.dedupDepth` option searches for these overlaps:
+
+```js
+export default {
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      dedupDepth: 1,
+    },
+  },
+};
+```
+
+A value of `1` adds one round of discovery; higher values also explore combinations found in earlier rounds. The resulting candidates still need to meet your cache group's rules. Groups use these candidates when they keep automatic naming and require a minimum size or size reduction, through `minSize` or `minSizeReduction`. The default cache groups qualify; groups with a custom `name`, including a naming function, do not.
+
+The option defaults to `0`, or `1` with `experiments.futureDefaults`. Start with one round and compare your build's output and build time before increasing it.
+
+## More Control over CSS and JSON Assets
+
+Copied stylesheets can reach the output without passing through webpack's CSS parser. New `customMedia` and `customSelectors` minimizer options let you resolve their custom at-rules during minification instead:
+
+```js
+export default {
+  mode: "production",
+  output: {
+    copy: "public",
+  },
+  optimization: {
+    minimize: {
+      css: {
+        customMedia: true,
+        customSelectors: true,
+      },
+    },
+  },
+};
+```
+
+These options are off by default. Stylesheets handled by webpack's native CSS parser already resolve custom media and selectors there; the new settings cover assets that bypass that step. Custom selector expansion also respects whether the target supports `:is()`.
+
+CSS minification also takes more care with browser compatibility. When your target does not specify browsers, webpack uses Browserslist's `defaults` query. If your browser list includes an engine missing from webpack's compatibility data, webpack avoids rewrites that assume it supports newer CSS and keeps vendor-prefixed spellings.
+
+Two other CSS options let you choose more aggressive transformations. Without an explicit browser selection, `dropOverriddenDeclarations` opts out of that fallback query and allows removing declarations overridden by newer values. `convertApproximateColors` can replace a color with an approximate hex value. Both are off by default because they can change compatibility or the colors displayed.
+
+Emitted JSON assets and web manifests can also be minified with the default minimizer:
+
+```js
+export default {
+  mode: "production",
+  optimization: {
+    minimizeOptions: {
+      json: true,
+    },
+  },
+};
+```
+
+This removes unnecessary whitespace from output files such as `.json` and `.webmanifest` assets. It is enabled by default with `experiments.futureDefaults`; otherwise, opt in as shown above. If you configure a custom minimizer that handles those assets, webpack leaves that job to it.
+
+## Plugins for Multiple Configurations
+
+Building client and server bundles from an array of configurations? You can now attach `plugins` to the array itself. Webpack applies each plugin once to the `MultiCompiler`, giving it access to the combined build.
+
+For example, attach a single progress plugin to both configurations:
+
+```js
+import webpack from "webpack";
+
+export default Object.assign(
+  [
+    {
+      name: "client",
+      target: "web",
+      entry: "./src/client.js",
+      output: { filename: "client.js" },
+    },
+    {
+      name: "server",
+      target: "node",
+      entry: "./src/server.js",
+      output: { filename: "server.js" },
+    },
+  ],
+  { plugins: [new webpack.ProgressPlugin()] },
+);
+```
+
+Plugins inside an individual configuration still apply to that configuration's compiler. Use the array's `plugins` property for plugins that support `MultiCompiler`, such as `ProgressPlugin`, when they need to work across the builds.
+
+## Smaller Changes Worth a Look
+
+- **Glob filters in more places.** `snapshot.managedPaths`, `immutablePaths`, and `unmanagedPaths` accept globs relative to your project context, such as `**/node_modules`. Other filters now accept a `{ glob: "..." }` condition, including `output.clean.keep`, `experiments.lazyCompilation.test`, and a split chunks cache group's `test`. For example, `test: { glob: "**/vendor/**" }` matches modules under a `vendor` directory.
+- **More public APIs for plugin authors.** More built-in plugins are available under their corresponding namespaces, alongside `webpack.template.DependencyTemplate`, `webpack.module.NullFactory`, and `webpack.util.makeSerializable`. Several older export locations are deprecated.
+- **ESM names for ESM internals.** The `Harmony*` names are deprecated in favor of `ESM*` names. For example, use `webpack.dependencies.ESMImportDependency` in place of `webpack.dependencies.HarmonyImportDependency`.
+
+For modules without source maps, webpack releases redundant source buffers after computing their build hashes. It also clears cached eval sources after wrapping them and releases rendered module sources after emitting chunks.
+
+## Bug Fixes
+
+Rebuilds get several fixes to keep output in step with your edits. Webpack preserves loader resolution dependencies across cached builds, invalidates cached results when module connections or async status change, and updates re-exports and warnings when a missing module returns.
+
+Watch mode now catches files deleted while a build is running and schedules a rebuild for those removals. It also refreshes generated code when one unused dependency goes missing as another returns. Tools that retain stats from previous builds can still read them after later builds remove the modules they describe.
+
+Hot updates also handle newly introduced deferred imports, async stylesheets load correctly with a shared runtime, and `output.clean` keeps the latest hot update files available.
+
+See the [5.112.0 release notes](https://github.com/webpack/webpack/releases/tag/v5.112.0) for the full list of changes and contributors.
+
+## Thanks
+
+Thanks to everyone who contributed code, tested a fix, improved the documentation, or reported a bug. And thank you to our [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring) for supporting webpack's development.
