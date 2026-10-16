@@ -117,10 +117,6 @@ export default (env) =>
             "/plugins/diagnostics-webpack-plugin/",
           "plugins/stylelint-webpack-plugin":
             "/plugins/diagnostics-webpack-plugin/",
-          "plugins/hashed-module-ids-plugin":
-            "/configuration/optimization/#optimizationmoduleids",
-          "plugins/watch-ignore-plugin":
-            "/configuration/watch/#watchoptionsignored",
           "concepts/mode": "/configuration/mode",
           "contribute/writing-a-scaffold": "/api/cli/#init",
           "loaders/raw-loader": "https://v4.webpack.js.org/loaders/raw-loader",

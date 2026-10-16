@@ -1,0 +1,69 @@
+---
+title: HashedModuleIdsPlugin
+description: Derive module IDs from module paths so hashes stay stable between builds.
+group: webpack
+contributors:
+  - shaodahong
+  - byzyk
+  - EslamHiko
+---
+
+This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id.
+
+W> Prefer [`optimization.moduleIds: 'deterministic'`](/configuration/optimization/#optimizationmoduleids). It is already the default in `production`, so a production build needs no plugin and no option to get stable module IDs. Selecting the equivalent `optimization.moduleIds: 'hashed'` makes webpack emit a deprecation warning pointing at `'deterministic'` — this plugin is what that value applies.
+
+```js
+new webpack.ids.HashedModuleIdsPlugin({
+  // Options...
+});
+```
+
+## Options
+
+This plugin supports the following options:
+
+- `context`: The context directory (**absolute path**) for creating names.
+- `hashFunction`: The hashing algorithm to use, defaults to `'md4'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported.
+- `hashDigest`: The encoding to use when generating the hash, defaults to `'base64'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
+
+  <Badge text="5.102.1+" />
+
+  In addition to standard Node.js encodings, this plugin also supports `'base64url'`, which is useful for generating URL-safe hash values. The custom bases (`'base26'`, `'base32'`, `'base36'`, `'base49'`, `'base52'`, `'base58'`, `'base62'`) are only available for [`output.hashDigest`](/configuration/output/#outputhashdigest).
+
+- `hashDigestLength`: The prefix length of the hash digest to use, defaults to `4`. Note that some generated ids might be longer than specified here, to avoid module id collisions.
+
+## Usage
+
+Here's an example of how this plugin might be used:
+
+```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+new webpack.ids.HashedModuleIdsPlugin({
+  context: __dirname,
+  hashFunction: "sha256",
+  hashDigest: "hex",
+  hashDigestLength: 20,
+});
+```
+
+**Using URL-safe encoding (5.102.1+):**
+
+```js
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+new webpack.ids.HashedModuleIdsPlugin({
+  context: __dirname,
+  hashFunction: "md4",
+  hashDigest: "base64url", // URL-safe encoding
+  hashDigestLength: 8,
+});
+```
