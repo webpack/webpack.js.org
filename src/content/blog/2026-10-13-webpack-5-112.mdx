@@ -145,7 +145,7 @@ export default {
 };
 ```
 
-A `webpackChunkName` comment takes precedence over that rule. A named inline script starts a new run and can share its chunk with compatible scripts that follow it. If separate tags on the same page request the same chunk name, webpack assigns distinct names to keep their chunks apart.
+A `webpackChunkName` comment takes precedence over that rule. A named inline script starts a new run and can share its chunk with compatible scripts that follow it. If separate tags within a single HTML document request the same chunk name, webpack assigns distinct names to keep their chunks apart.
 
 Webpack also bundles compatible runs of inline scripts into a shared chunk. This avoids a separate chunk for every small script while preserving execution order. Async scripts, external scripts, and other boundaries that would change that order keep runs apart. Use `output.html.inline` or a `webpackInline` comment when you want eligible chunks written back into the page.
 
