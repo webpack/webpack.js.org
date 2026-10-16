@@ -48,19 +48,18 @@ T> Several of these exist mainly because a [configuration option](/configuration
 
 ## Chunks and optimization
 
-| Name                                                                            | Description                                                                                                                                                            |
-| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`SplitChunksPlugin`](/plugins/split-chunks-plugin)                             | Extract shared and vendor code into separate chunks — configured through [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks)            |
-| [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin)             | Scope hoisting — on by default in `production` via [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)                    |
-| [`MergeDuplicateChunksPlugin`](/plugins/merge-duplicate-chunks-plugin)          | Merge chunks that contain the same modules                                                                                                                             |
-| [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | Limit the maximum number of chunks by merging them                                                                                                                     |
-| [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)                          | Keep chunk size above the specified limit                                                                                                                              |
-| [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/)                         | Minify the JS/CSS/HTML/JSON/etc in your project, and [compress what it emits](/plugins/minimizer-webpack-plugin/#compressing-with-minifying-and-without)               |
-| [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin)                    | Hash-based module IDs — use [`optimization.moduleIds: 'deterministic'`](/configuration/optimization/#optimizationmoduleids) instead, which is the `production` default |
-| [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | Skip the emitting phase when there are compilation errors                                                                                                              |
-| [`AutomaticPrefetchPlugin`](/plugins/automatic-prefetch-plugin)                 | Resolve all modules from the previous compilation upfront to speed up watch rebuilds                                                                                   |
-| [`PrefetchPlugin`](/plugins/prefetch-plugin)                                    | Resolve and build a module ahead of its first import to shorten the critical build path                                                                                |
-| [`DllPlugin`](/plugins/dll-plugin)                                              | Split bundles into a pre-built vendor bundle — largely replaced by the [filesystem cache](/configuration/cache/)                                                       |
+| Name                                                                            | Description                                                                                                                                                 |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`SplitChunksPlugin`](/plugins/split-chunks-plugin)                             | Extract shared and vendor code into separate chunks — configured through [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) |
+| [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin)             | Scope hoisting — on by default in `production` via [`optimization.concatenateModules`](/configuration/optimization/#optimizationconcatenatemodules)         |
+| [`MergeDuplicateChunksPlugin`](/plugins/merge-duplicate-chunks-plugin)          | Merge chunks that contain the same modules                                                                                                                  |
+| [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin)                    | Limit the maximum number of chunks by merging them                                                                                                          |
+| [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)                          | Keep chunk size above the specified limit                                                                                                                   |
+| [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/)                         | Minify the JS/CSS/HTML/JSON/etc in your project, and [compress what it emits](/plugins/minimizer-webpack-plugin/#compressing-with-minifying-and-without)    |
+| [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | Skip the emitting phase when there are compilation errors                                                                                                   |
+| [`AutomaticPrefetchPlugin`](/plugins/automatic-prefetch-plugin)                 | Resolve all modules from the previous compilation upfront to speed up watch rebuilds                                                                        |
+| [`PrefetchPlugin`](/plugins/prefetch-plugin)                                    | Resolve and build a module ahead of its first import to shorten the critical build path                                                                     |
+| [`DllPlugin`](/plugins/dll-plugin)                                              | Split bundles into a pre-built vendor bundle — largely replaced by the [filesystem cache](/configuration/cache/)                                            |
 
 ## Module Federation
 
@@ -77,7 +76,6 @@ T> Several of these exist mainly because a [configuration option](/configuration
 | [`EvalSourceMapDevToolPlugin`](/plugins/eval-source-map-dev-tool-plugin) | Enables a more fine grained control of eval source maps                   |
 | [`ProgressPlugin`](/plugins/progress-plugin)                             | Report compilation progress                                               |
 | [`ProfilingPlugin`](/plugins/profiling-plugin)                           | Record plugin execution timings to a Chrome profile file                  |
-| [`WatchIgnorePlugin`](/plugins/watch-ignore-plugin)                      | Ignore matching paths in watch mode so they do not trigger rebuilds       |
 | [`DiagnosticsWebpackPlugin`](/plugins/diagnostics-webpack-plugin)        | Run linters and other diagnostic tools over your sources during the build |
 
 For more third-party plugins, see the list from [awesome-webpack](/awesome-webpack/#webpack-plugins).
