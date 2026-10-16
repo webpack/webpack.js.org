@@ -1,12 +1,12 @@
 ---
 title: Webpack 5.112
-description: Source map scopes, an SSR asset manifest, more flexible library exports, and improvements to HTML, CSS, and rebuilds.
+description: Source map scopes, an SSR asset manifest, more flexible library exports, and plugins for multiple configurations.
 sort: 20261013
 contributors:
   - bjohansebas
 ---
 
-Webpack 5.112 is here! This release helps you debug imports, load the right styles during server rendering, and publish libraries with several entry modules. It also gives you more control over shared dependencies and the chunks extracted from HTML.
+Webpack 5.112 is here! This release helps you debug imports, load the right styles during server rendering, and publish libraries with several entry modules. It also adds plugins for multiple configurations and gives you more control over shared dependencies and the chunks extracted from HTML.
 
 Explore what's new:
 
@@ -18,6 +18,7 @@ Explore what's new:
 - [**Async Values in DefinePlugin**](#async-values-in-defineplugin)
 - [**Find More Shared Chunks**](#find-more-shared-chunks)
 - [**More Control over CSS and JSON Assets**](#more-control-over-css-and-json-assets)
+- [**Plugins for Multiple Configurations**](#plugins-for-multiple-configurations)
 
 To update an existing project, run:
 
@@ -220,7 +221,9 @@ export default {
 
 These options are off by default. Stylesheets handled by webpack's native CSS parser already resolve custom media and selectors there; the new settings cover assets that bypass that step. Custom selector expansion also respects whether the target supports `:is()`.
 
-Two other CSS options let you choose more aggressive transformations. `dropOverriddenDeclarations` can remove fallback declarations when no browser target is configured, and `convertApproximateColors` can replace a color with an approximate hex value. Both are off by default because they can change compatibility or the colors displayed.
+CSS minification also takes more care with browser compatibility. When your target does not specify browsers, webpack uses Browserslist's `defaults` query. If your browser list includes an engine missing from webpack's compatibility data, webpack avoids rewrites that assume it supports newer CSS and keeps vendor-prefixed spellings.
+
+Two other CSS options let you choose more aggressive transformations. Without an explicit browser selection, `dropOverriddenDeclarations` opts out of that fallback query and allows removing declarations overridden by newer values. `convertApproximateColors` can replace a color with an approximate hex value. Both are off by default because they can change compatibility or the colors displayed.
 
 Emitted JSON assets and web manifests can also be minified with the default minimizer:
 
@@ -237,9 +240,39 @@ export default {
 
 This removes unnecessary whitespace from output files such as `.json` and `.webmanifest` assets. It is enabled by default with `experiments.futureDefaults`; otherwise, opt in as shown above. If you configure a custom minimizer that handles those assets, webpack leaves that job to it.
 
+## Plugins for Multiple Configurations
+
+Building client and server bundles from an array of configurations? You can now attach `plugins` to the array itself. Webpack applies each plugin once to the `MultiCompiler`, giving it access to the combined build.
+
+For example, attach a single progress plugin to both configurations:
+
+```js
+import webpack from "webpack";
+
+export default Object.assign(
+  [
+    {
+      name: "client",
+      target: "web",
+      entry: "./src/client.js",
+      output: { filename: "client.js" },
+    },
+    {
+      name: "server",
+      target: "node",
+      entry: "./src/server.js",
+      output: { filename: "server.js" },
+    },
+  ],
+  { plugins: [new webpack.ProgressPlugin()] },
+);
+```
+
+Plugins inside an individual configuration still apply to that configuration's compiler. Use the array's `plugins` property for plugins that support `MultiCompiler`, such as `ProgressPlugin`, when they need to work across the builds.
+
 ## Smaller Changes Worth a Look
 
-- **Simpler snapshot paths.** `snapshot.managedPaths`, `immutablePaths`, and `unmanagedPaths` accept globs relative to your project context. Patterns such as `**/node_modules` save you from writing a regular expression for nested directories.
+- **Glob filters in more places.** `snapshot.managedPaths`, `immutablePaths`, and `unmanagedPaths` accept globs relative to your project context, such as `**/node_modules`. Other filters now accept a `{ glob: "..." }` condition, including `output.clean.keep`, `experiments.lazyCompilation.test`, and a split chunks cache group's `test`. For example, `test: { glob: "**/vendor/**" }` matches modules under a `vendor` directory.
 - **More public APIs for plugin authors.** More built-in plugins are available under their corresponding namespaces, alongside `webpack.template.DependencyTemplate`, `webpack.module.NullFactory`, and `webpack.util.makeSerializable`. Several older export locations are deprecated.
 - **ESM names for ESM internals.** The `Harmony*` names are deprecated in favor of `ESM*` names. For example, use `webpack.dependencies.ESMImportDependency` in place of `webpack.dependencies.HarmonyImportDependency`.
 
@@ -249,9 +282,11 @@ For modules without source maps, webpack releases redundant source buffers after
 
 Rebuilds get several fixes to keep output in step with your edits. Webpack preserves loader resolution dependencies across cached builds, invalidates cached results when module connections or async status change, and updates re-exports and warnings when a missing module returns.
 
+Watch mode now catches files deleted while a build is running and schedules a rebuild for those removals. It also refreshes generated code when one unused dependency goes missing as another returns. Tools that retain stats from previous builds can still read them after later builds remove the modules they describe.
+
 Hot updates also handle newly introduced deferred imports, async stylesheets load correctly with a shared runtime, and `output.clean` keeps the latest hot update files available.
 
-See the [release PR](https://github.com/webpack/webpack/pull/22170) for the full list of changes and contributors.
+See the [5.112.0 release notes](https://github.com/webpack/webpack/releases/tag/v5.112.0) for the full list of changes and contributors.
 
 ## Thanks
 
