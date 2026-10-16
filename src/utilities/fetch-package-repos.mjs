@@ -56,10 +56,15 @@ for (const [type, collection] of Object.entries(fetch)) {
 
         const repos = await paginate(organization);
 
+        // Match hidden repos by name alone: repos move between `webpack` and
+        // `webpack-contrib`, and the listing reports them under their new owner.
+        const hiddenNames = new Set(hides.map((name) => name.split("/")[1]));
+
         return repos
+          .filter((repo) => !repo.archived)
           .map((repo) => repo.full_name)
           .filter((name) => suffixes.some((suffix) => name.endsWith(suffix)))
-          .filter((name) => !hides.includes(name));
+          .filter((name) => !hiddenNames.has(name.split("/")[1]));
       }),
     );
 
