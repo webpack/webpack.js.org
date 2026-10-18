@@ -3,6 +3,7 @@ dist
 **/feed.xml
 !examples/**/dist
 src/**/_*.json
+src/assets/sponsors.svg
 src/**/_*.mdx
 src/content/contribute/Governance-*.mdx
 .vscode

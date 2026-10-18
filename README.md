@@ -43,6 +43,12 @@ Read through the [writer's guide][writer-guide-url] if you're interested in edit
 content on this site. See the [contributors page][contributing-url] to learn how to set up and
 start working on the site locally.
 
+## Sponsors
+
+Thank you to everyone who supports webpack through [Open Collective][sponsors-url].
+
+[![webpack sponsors and backers][sponsors-image]][sponsors-url]
+
 ## License
 
 The content is available under the [Creative Commons BY 4.0][license-url] license.
@@ -68,5 +74,7 @@ _Vercel_ has given us a Pro account.
 [license-url]: https://creativecommons.org/licenses/by/4.0/
 [release]: https://img.shields.io/badge/release-standard%20version-brightgreen.svg
 [release-url]: https://github.com/conventional-changelog/standard-version
+[sponsors-image]: https://webpack.js.org/assets/sponsors.svg
+[sponsors-url]: https://opencollective.com/webpack
 [translate-url]: https://github.com/webpack/webpack.js.org/tree/translation
 [writer-guide-url]: https://webpack.js.org/contribute/writers-guide
