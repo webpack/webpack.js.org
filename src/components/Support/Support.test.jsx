@@ -8,7 +8,11 @@ import { render, screen } from "@testing-library/react";
 jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
 
 // `_supporters.json` resolves to the empty mock this suite wants already.
-const { default: Support, packTiles } = await import("./Support.jsx");
+const {
+  default: Support,
+  framedLogoStyle,
+  packTiles,
+} = await import("./Support.jsx");
 
 describe("Support", () => {
   let mockObserve;
@@ -135,5 +139,52 @@ describe("packTiles", () => {
       "W2",
       "n1",
     ]);
+  });
+});
+
+describe("framedLogoStyle", () => {
+  // Where the artwork ends up, as fractions of the tile.
+  const frame = (box, tileAspect) => {
+    const style = framedLogoStyle(box, tileAspect);
+    const [left, top, width, height] = [
+      style.left,
+      style.top,
+      style.width,
+      style.height,
+    ].map((value) => Number.parseFloat(value) / 100);
+    return {
+      left: left + box.x * width,
+      top: top + box.y * height,
+      width: box.width * width,
+      height: box.height * height,
+      imageAspect: (width * tileAspect) / height,
+    };
+  };
+
+  // A square image whose artwork is a 2:1 band in the middle.
+  const band = { x: 0.25, y: 0.375, width: 0.5, height: 0.25, aspect: 2 };
+  const square = { x: 0, y: 0, width: 1, height: 1, aspect: 1 };
+
+  it("centers the artwork and keeps the image's proportions", () => {
+    const result = frame(band, 1);
+    expect(result.left).toBeCloseTo((1 - result.width) / 2);
+    expect(result.top).toBeCloseTo((1 - result.height) / 2);
+    expect(result.imageAspect).toBeCloseTo(1);
+  });
+
+  it("never lets the artwork overflow its tile", () => {
+    for (const tileAspect of [1, 2]) {
+      const result = frame({ ...band, aspect: 8 }, tileAspect);
+      expect(result.width * tileAspect).toBeLessThanOrEqual(0.92 * tileAspect);
+      expect(result.height).toBeLessThanOrEqual(0.92);
+    }
+  });
+
+  it("gives a text logo about the same area as a square logo", () => {
+    const icon = frame(square, 1);
+    const textLogo = frame({ ...square, aspect: 4 }, 2);
+    expect(textLogo.width * 2 * textLogo.height).toBeCloseTo(
+      icon.width * icon.height,
+    );
   });
 });

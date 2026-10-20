@@ -122,10 +122,48 @@ const TILE_CLASSES = {
 const IMG_CLASSES = {
   backer: "support__logo w-full h-full object-cover",
   logo: "support__logo absolute inset-0 w-full h-full object-contain",
+  // Positioned by `framedLogoStyle` instead.
+  framed: "support__logo absolute max-w-none",
 };
 
 // Logos at least this much wider than tall get a double-width tile.
 const WIDE_LOGO_RATIO = 1.6;
+// Logos are sized to roughly the same visual area, so a long text logo does not
+// outweigh a square icon: a square logo spans `LOGO_SIZE` of a square tile, and
+// any logo is capped at `LOGO_MAX_FILL` of its tile in either direction.
+const LOGO_SIZE = 0.82;
+const LOGO_MAX_FILL = 0.92;
+
+const percent = (value) => `${(value * 100).toFixed(3)}%`;
+
+// Positions a logo image inside its tile, in percentages of the tile, so the
+// artwork is centered and sized by area. Many sponsor logos sit on a large
+// white or transparent canvas, which makes them look tiny; `box` (measured by
+// src/utilities/logo-box.mjs at build time) says where the artwork is, and the
+// image is scaled and offset so that box is what gets framed.
+export function framedLogoStyle(box, tileAspect) {
+  const root = Math.sqrt(box.aspect);
+  let width = (LOGO_SIZE * root) / tileAspect;
+  let height = LOGO_SIZE / root;
+  const scale = Math.min(1, LOGO_MAX_FILL / width, LOGO_MAX_FILL / height);
+  width *= scale;
+  height *= scale;
+
+  const imageWidth = width / box.width;
+  const imageHeight = height / box.height;
+
+  return {
+    left: percent((1 - width) / 2 - box.x * imageWidth),
+    top: percent((1 - height) / 2 - box.y * imageHeight),
+    width: percent(imageWidth),
+    height: percent(imageHeight),
+  };
+}
+
+// Whether a logo gets a double-width tile, judged by its trimmed artwork when
+// it was measured at build time and by the loaded image otherwise.
+const isWideLogo = (supporter, loadedWide) =>
+  supporter.logoBox ? supporter.logoBox.aspect >= WIDE_LOGO_RATIO : loadedWide;
 
 function handleImgError(event) {
   const imgNode = event.target;
@@ -153,13 +191,34 @@ export function packTiles(items, isWide, columns) {
 }
 
 function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
+  const [failed, setFailed] = useState(false);
+  const [naturalAspect, setNaturalAspect] = useState(0);
   const kind = rank === "backer" ? "backer" : "logo";
+  const showsAvatar = inView && Boolean(supporter.avatar) && !failed;
+  // Untrimmed logos are framed as a whole once their shape is known.
+  const box =
+    supporter.logoBox ||
+    (naturalAspect > 0 && {
+      x: 0,
+      y: 0,
+      width: 1,
+      height: 1,
+      aspect: naturalAspect,
+    });
+  const framed = kind === "logo" && showsAvatar && box;
 
   const handleLoad = (event) => {
     const { naturalWidth, naturalHeight } = event.target;
-    if (kind === "logo" && naturalHeight > 0) {
-      onWideChange(naturalWidth / naturalHeight >= WIDE_LOGO_RATIO);
-    }
+    if (kind !== "logo" || !showsAvatar || naturalHeight <= 0) return;
+
+    const aspect = naturalWidth / naturalHeight;
+    setNaturalAspect(aspect);
+    if (!supporter.logoBox) onWideChange(aspect >= WIDE_LOGO_RATIO);
+  };
+
+  const handleError = (event) => {
+    setFailed(true);
+    handleImgError(event);
   };
 
   return (
@@ -178,8 +237,9 @@ function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
         }
       >
         <img
-          className={IMG_CLASSES[kind]}
-          src={inView && supporter.avatar ? supporter.avatar : SmallIcon}
+          className={framed ? IMG_CLASSES.framed : IMG_CLASSES[kind]}
+          style={framed ? framedLogoStyle(box, wide ? 2 : 1) : undefined}
+          src={showsAvatar ? supporter.avatar : SmallIcon}
           alt={
             supporter.alt ||
             (supporter.name || supporter.slug
@@ -188,7 +248,7 @@ function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
           }
           loading="lazy"
           onLoad={handleLoad}
-          onError={handleImgError}
+          onError={handleError}
         />
       </a>
     </Tooltip>
@@ -245,6 +305,9 @@ export default function Support({ rank, type }) {
 
     return () => observer.disconnect();
   }, []);
+
+  const isTileWide = ({ key, supporter }) =>
+    rank !== "backer" && isWideLogo(supporter, wideKeys.has(key));
 
   const setWide = (key, wide) => {
     setWideKeys((previous) => {
@@ -393,7 +456,7 @@ export default function Support({ rank, type }) {
               key: supporter.slug || String(index),
               supporter,
             })),
-            ({ key }) => wideKeys.has(key),
+            isTileWide,
             columns,
           ).map(({ key, supporter }) => (
             <SupporterTile
@@ -401,7 +464,7 @@ export default function Support({ rank, type }) {
               supporter={supporter}
               rank={rank}
               inView={inView}
-              wide={wideKeys.has(key)}
+              wide={isTileWide({ key, supporter })}
               onWideChange={(wide) => setWide(key, wide)}
             />
           ))}
