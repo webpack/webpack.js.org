@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import lodash from "lodash";
+import { measureLogo } from "./logo-box.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +38,16 @@ if (process.env.OPENCOLLECTIVE_API_KEY) {
     "No personal access token found, using public API to fetch supporters from OpenCollective",
   );
 }
+
+// Supporters at or above these amounts (in cents), or who first donated within
+// `LOGO_RECENT_DAYS`, are shown as logo tiles rather than backer avatars. Keep
+// in sync with the bronze and latest ranks in src/components/Support/Support.jsx.
+const LOGO_MIN_TOTAL = 200 * 100;
+const LOGO_MIN_MONTHLY = 10 * 100;
+const LOGO_RECENT_DAYS = 21;
+const LOGO_FETCH_CONCURRENCY = 8;
+const LOGO_FETCH_TIMEOUT = 15 * 1000;
+const LOGO_MAX_BYTES = 5 * 1024 * 1024;
 
 // https://github.com/opencollective/opencollective-api/blob/master/server/graphql/v2/query/TransactionsQuery.ts#L81
 const graphqlPageSize = 1000;
@@ -194,6 +205,53 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
   }
 };
 
+const isShownAsLogo = (supporter) => {
+  const recent =
+    supporter.firstDonation &&
+    Date.now() - new Date(supporter.firstDonation).getTime() <
+      LOGO_RECENT_DAYS * 24 * 60 * 60 * 1000;
+  return (
+    supporter.avatar &&
+    (supporter.totalDonations >= LOGO_MIN_TOTAL ||
+      supporter.monthlyDonations >= LOGO_MIN_MONTHLY ||
+      recent)
+  );
+};
+
+// Measure where the artwork sits inside each logo, so the site can scale up
+// logos that come with a wide empty margin. This is best effort: a logo that
+// fails to download or decode is simply shown as is.
+const measureLogos = async (supporters) => {
+  const pending = supporters.filter(isShownAsLogo);
+  let measured = 0;
+
+  const worker = async () => {
+    let supporter;
+    while ((supporter = pending.shift()) !== undefined) {
+      try {
+        const response = await fetch(supporter.avatar, {
+          signal: AbortSignal.timeout(LOGO_FETCH_TIMEOUT),
+        });
+        const length = Number(response.headers.get("content-length"));
+        if (!response.ok || length > LOGO_MAX_BYTES) continue;
+
+        const box = await measureLogo(
+          Buffer.from(await response.arrayBuffer()),
+        );
+        if (box) {
+          supporter.logoBox = box;
+          measured++;
+        }
+      } catch {
+        // Keep the logo untrimmed.
+      }
+    }
+  };
+
+  await Promise.all(Array.from({ length: LOGO_FETCH_CONCURRENCY }, worker));
+  console.log(`Trimmed empty margins from ${measured} supporter logos`);
+};
+
 try {
   const members = await getAllNodes(
     membersGraphqlQuery,
@@ -241,6 +299,8 @@ try {
   for (const supporter of supporters) {
     supporter.monthlyDonations = Math.round(supporter.monthlyDonations);
   }
+
+  await measureLogos(supporters);
 
   // Write the file
   await asyncWriteFile(absoluteFilename, JSON.stringify(supporters, null, 2));
