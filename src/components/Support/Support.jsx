@@ -114,6 +114,9 @@ const BACKER_GRID_CLASSES =
 
 // Tiles never take more than this share of the viewport height.
 const MAX_TILE_VIEWPORT_HEIGHT = 0.35;
+// Viewport height changes smaller than this (a mobile address bar showing or
+// hiding) do not resize the tiles.
+const MIN_VIEWPORT_HEIGHT_CHANGE = 100;
 
 export function gridLayout(
   width,
@@ -357,15 +360,31 @@ export default function Support({ rank, type }) {
       return undefined;
     }
 
-    const observer = new ResizeObserver(() => {
-      setAvailable({
+    const update = () => {
+      const next = {
         width: node.clientWidth,
         viewportHeight: window.innerHeight,
-      });
-    });
+      };
+      // Mobile browsers resize the viewport as their address bar shows and
+      // hides while scrolling; ignore that, or logos would jump in size.
+      setAvailable((previous) =>
+        previous &&
+        previous.width === next.width &&
+        Math.abs(previous.viewportHeight - next.viewportHeight) <
+          MIN_VIEWPORT_HEIGHT_CHANGE
+          ? previous
+          : next,
+      );
+    };
+    const observer = new ResizeObserver(update);
     observer.observe(node);
+    // A viewport can get shorter without the grid getting narrower.
+    window.addEventListener("resize", update);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", update);
+    };
   }, [grid]);
 
   const isTileWide = ({ key, supporter }) =>

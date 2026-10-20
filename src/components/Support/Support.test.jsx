@@ -229,10 +229,11 @@ describe("gridLayout", () => {
 
   it("keeps tiles small on a phone held sideways", () => {
     const { tile } = gridLayout(796, platinum, {
-      viewportHeight: 390,
+      viewportHeight: 300,
       span: 4,
     });
-    expect(tile).toBeLessThanOrEqual(390 * 0.35);
+    expect(tile).toBeLessThanOrEqual(300 * 0.35);
+    expect(tile).toBeLessThan(platinum.tile);
   });
 
   it("keeps a few logos at the tile size instead of stretching them", () => {
