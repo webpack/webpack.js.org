@@ -85,51 +85,45 @@ function formatMoney(number) {
   return Math.round(number).toLocaleString("en-US");
 }
 
-// Each rank is laid out as a centered grid of fixed-size tiles so logos with
-// very different aspect ratios still line up, and a short last row (or a rank
-// with only a few sponsors) stays centered. Tiles grow with the viewport:
-// phones get one to four columns depending on the rank, tablets and laptops
-// get more. Logos scale up to fill their tile, since most sponsor avatars are
-// small squares.
+// Each rank is laid out as a centered grid of square tiles, since most sponsor
+// avatars are square, so logos line up and a short last row (or a rank with
+// only a few sponsors) stays centered. Tiles grow with the rank and with the
+// viewport.
 //
-// On the crowded ranks, wide logos (like text logos) span two columns and
-// `grid-flow-dense` back-fills the gaps, giving a masonry-like packing. Those
-// ranks cap the tile at a third (or a quarter) of the row on phones so there are
-// always at least two columns and a double-width tile never overflows.
+// Wide logos (like text logos) span two columns and `grid-flow-dense`
+// back-fills the gaps, giving a masonry-like packing. On phones every rank
+// caps the tile at a fraction of the row so there are always at least two
+// columns and a double-width tile never overflows.
 const GRID_CLASSES = {
   backer: "grid-cols-[repeat(auto-fit,36px)] gap-1.5 max-w-200 mx-auto",
   latest:
-    "grid-cols-[repeat(auto-fit,min(110px,calc(33.333%-0.334rem)))] sm:grid-cols-[repeat(auto-fit,150px)] lg:grid-cols-[repeat(auto-fit,160px)] auto-rows-[76px] sm:auto-rows-[88px] gap-2 sm:gap-3",
+    "grid-cols-[repeat(auto-fit,min(96px,calc(33.333%-0.5rem)))] lg:grid-cols-[repeat(auto-fit,104px)] auto-rows-[96px] lg:auto-rows-[104px] gap-3",
   bronze:
-    "grid-cols-[repeat(auto-fit,min(84px,calc(25%-0.375rem)))] sm:grid-cols-[repeat(auto-fit,112px)] lg:grid-cols-[repeat(auto-fit,120px)] auto-rows-[60px] sm:auto-rows-[64px] gap-2",
+    "grid-cols-[repeat(auto-fit,min(64px,calc(25%-0.375rem)))] sm:grid-cols-[repeat(auto-fit,72px)] auto-rows-[64px] sm:auto-rows-[72px] gap-2",
   silver:
-    "grid-cols-[repeat(auto-fit,min(110px,calc(33.333%-0.334rem)))] sm:grid-cols-[repeat(auto-fit,150px)] lg:grid-cols-[repeat(auto-fit,160px)] auto-rows-[76px] sm:auto-rows-[88px] gap-2 sm:gap-3",
-  gold: "grid-cols-[repeat(auto-fit,min(200px,calc(50%-0.25rem)))] lg:grid-cols-[repeat(auto-fit,224px)] auto-rows-[100px] sm:auto-rows-[112px] gap-2 sm:gap-4",
+    "grid-cols-[repeat(auto-fit,min(96px,calc(33.333%-0.5rem)))] lg:grid-cols-[repeat(auto-fit,104px)] auto-rows-[96px] lg:auto-rows-[104px] gap-3",
+  gold: "grid-cols-[repeat(auto-fit,min(128px,calc(50%-0.375rem)))] sm:grid-cols-[repeat(auto-fit,144px)] auto-rows-[128px] sm:auto-rows-[144px] gap-3",
   platinum:
-    "grid-cols-[repeat(auto-fit,min(300px,100%))] auto-rows-[128px] sm:auto-rows-[150px] gap-3 sm:gap-4",
+    "grid-cols-[repeat(auto-fit,min(160px,calc(50%-0.5rem)))] sm:grid-cols-[repeat(auto-fit,192px)] auto-rows-[160px] sm:auto-rows-[192px] gap-4",
 };
-
-// Ranks with enough sponsors for the dense packing to fill the gaps that
-// double-width tiles leave behind.
-const MASONRY_RANKS = new Set(["latest", "silver", "bronze"]);
 
 const TILE_CLASSES = {
   backer:
     "block w-9 h-9 mx-auto rounded-full border border-white shadow-[0_0_0_1px_rgb(112,202,10)] overflow-hidden bg-white transition-transform duration-200 hover:scale-110",
-  logo: "relative block w-full h-full overflow-hidden rounded-lg bg-white border border-[#dedede] dark:border-transparent transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_18px_rgba(0,0,0,0.12)]",
+  // No card around the logo; the white backing only shows in dark mode so
+  // transparent logos with dark artwork stay visible.
+  logo: "relative block w-full h-full overflow-hidden rounded-lg dark:bg-white transition-transform duration-200 hover:scale-105",
 };
 
 // `support__logo` opts the images out of the Markdown `img { height: auto }`
 // rule, which would otherwise override the height utilities below.
 const IMG_CLASSES = {
   backer: "support__logo w-full h-full object-cover",
-  // The logo fills its tile with `object-contain`; the padding sits on the image
-  // itself so the logo box is always exactly the tile minus the padding.
-  logo: "support__logo absolute inset-0 w-full h-full p-1.5 sm:p-2 object-contain",
+  logo: "support__logo absolute inset-0 w-full h-full object-contain",
 };
 
 // Logos at least this much wider than tall get a double-width tile.
-const WIDE_LOGO_RATIO = 2.5;
+const WIDE_LOGO_RATIO = 1.6;
 
 function handleImgError(event) {
   const imgNode = event.target;
@@ -143,7 +137,7 @@ function SupporterTile({ supporter, rank, inView }) {
 
   const handleLoad = (event) => {
     const { naturalWidth, naturalHeight } = event.target;
-    if (MASONRY_RANKS.has(rank) && naturalHeight > 0) {
+    if (kind === "logo" && naturalHeight > 0) {
       setWide(naturalWidth / naturalHeight >= WIDE_LOGO_RATIO);
     }
   };
