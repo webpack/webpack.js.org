@@ -99,11 +99,11 @@ function formatMoney(number) {
 // focus and screen readers follow the same order as the eye. Every rank keeps
 // at least two columns, so a double-width tile never overflows.
 // The maximum sizes follow the logo heights the site used before this grid
-// (128px platinum, 96px gold, 64px silver/latest and 32px bronze, with a little
-// more room for bronze so small logos stay legible).
+// (128px platinum, 96px gold, 64px silver/latest and 32px bronze, with more
+// room for bronze so small logos stay legible).
 const RANK_GRIDS = {
   latest: { tile: 60, maxTile: 72, gap: 12 },
-  bronze: { tile: 46, maxTile: 54, gap: 8 },
+  bronze: { tile: 52, maxTile: 58, gap: 6 },
   silver: { tile: 60, maxTile: 72, gap: 12 },
   gold: { tile: 84, maxTile: 96, gap: 12 },
   platinum: { tile: 112, maxTile: 128, gap: 16 },
@@ -235,7 +235,7 @@ export function packTiles(items, isWide, columns) {
   return rows.flatMap((row) => row.items);
 }
 
-function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
+function SupporterTile({ supporter, rank, inView, size, onWideChange }) {
   const [failed, setFailed] = useState(false);
   const [natural, setNatural] = useState(null);
   const [tile, setTile] = useState(null);
@@ -276,7 +276,7 @@ function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
 
   return (
     <Tooltip
-      className={wide ? "col-span-2" : ""}
+      className="shrink-0"
       content={`$${formatMoney(supporter.totalDonations / 100)} by ${
         supporter.name || supporter.slug
       } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
@@ -284,6 +284,7 @@ function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
       <a
         ref={tileRef}
         className={TILE_CLASSES[kind]}
+        style={size && { width: `${size.width}px`, height: `${size.height}px` }}
         target="_blank"
         rel="noopener noreferrer nofollow"
         href={
@@ -321,7 +322,7 @@ SupporterTile.propTypes = {
   supporter: PropTypes.object.isRequired,
   rank: PropTypes.string,
   inView: PropTypes.bool,
-  wide: PropTypes.bool,
+  size: PropTypes.shape({ width: PropTypes.number, height: PropTypes.number }),
   onWideChange: PropTypes.func,
 };
 
@@ -493,13 +494,12 @@ export default function Support({ rank, type }) {
         })
       : null;
   // Until the grid has been measured, fall back to tiles at the rank's size.
-  const gridStyle = grid && {
-    gap: `${grid.gap}px`,
-    gridTemplateColumns: layout
-      ? `repeat(${layout.columns}, ${layout.tile}px)`
-      : `repeat(auto-fit, ${grid.tile}px)`,
-    gridAutoRows: `${layout ? layout.tile : grid.tile}px`,
-  };
+  const tileSize = layout ? layout.tile : grid && grid.tile;
+  const tileSizeFor = (wide) =>
+    grid && {
+      width: wide ? tileSize * 2 + grid.gap : tileSize,
+      height: tileSize,
+    };
 
   return (
     <>
@@ -551,23 +551,43 @@ export default function Support({ rank, type }) {
           )}
         </div>
 
-        <div
-          ref={gridRef}
-          className={`grid justify-center w-full ${grid ? "" : BACKER_GRID_CLASSES}`}
-          style={gridStyle}
-        >
-          {packTiles(tiles, isTileWide, layout ? layout.columns : 0).map(
-            ({ key, supporter }) => (
-              <SupporterTile
-                key={key}
-                supporter={supporter}
-                rank={rank}
-                inView={inView}
-                wide={isTileWide({ key, supporter })}
-                onWideChange={(wide) => setWide(key, wide)}
-              />
-            ),
-          )}
+        {/* The outer element measures the width available to the logos. The
+            logos themselves wrap in a row exactly `columns` tiles wide, so
+            every row lines up and a short row (the last one, or a rank with
+            only a few sponsors) is centered. */}
+        <div ref={gridRef} className="w-full">
+          <div
+            data-sponsor-grid={rank}
+            className={
+              grid
+                ? "flex flex-wrap justify-center mx-auto max-w-full"
+                : `grid justify-center w-full ${BACKER_GRID_CLASSES}`
+            }
+            style={
+              grid && {
+                gap: `${grid.gap}px`,
+                width: layout
+                  ? `${layout.columns * layout.tile + (layout.columns - 1) * grid.gap}px`
+                  : undefined,
+              }
+            }
+          >
+            {packTiles(tiles, isTileWide, layout ? layout.columns : 0).map(
+              ({ key, supporter }) => {
+                const wide = isTileWide({ key, supporter });
+                return (
+                  <SupporterTile
+                    key={key}
+                    supporter={supporter}
+                    rank={rank}
+                    inView={inView}
+                    size={tileSizeFor(wide)}
+                    onWideChange={(isWide) => setWide(key, isWide)}
+                  />
+                );
+              },
+            )}
+          </div>
         </div>
 
         <div className="w-full mt-4">
