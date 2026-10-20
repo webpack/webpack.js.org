@@ -217,13 +217,13 @@ describe("logoLayout", () => {
 });
 
 describe("gridLayout", () => {
-  const platinum = { tile: 150, maxTile: 190, gap: 16 };
-  const bronze = { tile: 60, maxTile: 72, gap: 8 };
+  const platinum = { tile: 112, maxTile: 128, gap: 16 };
+  const bronze = { tile: 46, maxTile: 54, gap: 8 };
 
   it("fills a phone-width row without exceeding the tile size", () => {
     const { columns, tile } = gridLayout(342, bronze, { span: 50 });
-    expect(columns).toBe(5);
-    expect(tile).toBeLessThanOrEqual(72);
+    expect(columns).toBe(6);
+    expect(tile).toBeLessThanOrEqual(54);
     expect(columns * tile + (columns - 1) * 8).toBeGreaterThan(342 - columns);
   });
 
@@ -238,12 +238,12 @@ describe("gridLayout", () => {
   it("keeps a few logos at the tile size instead of stretching them", () => {
     expect(gridLayout(960, platinum, { span: 3 })).toEqual({
       columns: 3,
-      tile: 150,
+      tile: 112,
     });
   });
 
   it("keeps larger ranks larger on a wide phone", () => {
-    const gold = { tile: 108, maxTile: 130, gap: 12 };
+    const gold = { tile: 84, maxTile: 96, gap: 12 };
     expect(gridLayout(382, platinum, { span: 9 }).tile).toBeGreaterThan(
       gridLayout(382, gold, { span: 9 }).tile,
     );

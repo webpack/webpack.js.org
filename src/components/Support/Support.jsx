@@ -98,12 +98,15 @@ function formatMoney(number) {
 // reordering happens in the DOM rather than with `grid-flow-dense`, so keyboard
 // focus and screen readers follow the same order as the eye. Every rank keeps
 // at least two columns, so a double-width tile never overflows.
+// The maximum sizes follow the logo heights the site used before this grid
+// (128px platinum, 96px gold, 64px silver/latest and 32px bronze, with a little
+// more room for bronze so small logos stay legible).
 const RANK_GRIDS = {
-  latest: { tile: 80, maxTile: 96, gap: 12 },
-  bronze: { tile: 60, maxTile: 72, gap: 8 },
-  silver: { tile: 80, maxTile: 96, gap: 12 },
-  gold: { tile: 108, maxTile: 130, gap: 12 },
-  platinum: { tile: 150, maxTile: 190, gap: 16 },
+  latest: { tile: 60, maxTile: 72, gap: 12 },
+  bronze: { tile: 46, maxTile: 54, gap: 8 },
+  silver: { tile: 60, maxTile: 72, gap: 12 },
+  gold: { tile: 84, maxTile: 96, gap: 12 },
+  platinum: { tile: 112, maxTile: 128, gap: 16 },
 };
 
 const BACKER_GRID_CLASSES =
