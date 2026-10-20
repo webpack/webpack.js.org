@@ -10,7 +10,7 @@ jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
 // `_supporters.json` resolves to the empty mock this suite wants already.
 const {
   default: Support,
-  framedLogoStyle,
+  logoLayout,
   packTiles,
 } = await import("./Support.jsx");
 
@@ -142,49 +142,68 @@ describe("packTiles", () => {
   });
 });
 
-describe("framedLogoStyle", () => {
-  // Where the artwork ends up, as fractions of the tile.
-  const frame = (box, tileAspect) => {
-    const style = framedLogoStyle(box, tileAspect);
+describe("logoLayout", () => {
+  // Where the artwork ends up inside the tile, in pixels.
+  const place = (box, natural, tile) => {
+    const style = logoLayout(box, natural, tile);
     const [left, top, width, height] = [
       style.left,
       style.top,
       style.width,
       style.height,
-    ].map((value) => Number.parseFloat(value) / 100);
+    ].map((value) => Number.parseFloat(value));
     return {
       left: left + box.x * width,
       top: top + box.y * height,
       width: box.width * width,
       height: box.height * height,
-      imageAspect: (width * tileAspect) / height,
+      imageAspect: width / height,
     };
   };
 
+  const whole = { x: 0, y: 0, width: 1, height: 1 };
   // A square image whose artwork is a 2:1 band in the middle.
-  const band = { x: 0.25, y: 0.375, width: 0.5, height: 0.25, aspect: 2 };
-  const square = { x: 0, y: 0, width: 1, height: 1, aspect: 1 };
+  const band = { x: 0.25, y: 0.375, width: 0.5, height: 0.25 };
 
-  it("centers the artwork and keeps the image's proportions", () => {
-    const result = frame(band, 1);
-    expect(result.left).toBeCloseTo((1 - result.width) / 2);
-    expect(result.top).toBeCloseTo((1 - result.height) / 2);
+  it("fills most of the tile with the artwork, centered", () => {
+    const result = place(
+      band,
+      { width: 400, height: 400 },
+      {
+        width: 100,
+        height: 100,
+      },
+    );
+    expect(result.width).toBeCloseTo(92);
+    expect(result.height).toBeCloseTo(46);
+    expect(result.left).toBeCloseTo(4);
+    expect(result.top).toBeCloseTo(27);
     expect(result.imageAspect).toBeCloseTo(1);
   });
 
-  it("never lets the artwork overflow its tile", () => {
-    for (const tileAspect of [1, 2]) {
-      const result = frame({ ...band, aspect: 8 }, tileAspect);
-      expect(result.width * tileAspect).toBeLessThanOrEqual(0.92 * tileAspect);
-      expect(result.height).toBeLessThanOrEqual(0.92);
-    }
+  it("fits wide artwork to the height of a double-width tile", () => {
+    const result = place(
+      whole,
+      { width: 600, height: 100 },
+      {
+        width: 200,
+        height: 96,
+      },
+    );
+    expect(result.width).toBeCloseTo(184);
+    expect(result.height).toBeLessThanOrEqual(96 * 0.92);
   });
 
-  it("gives a text logo about the same area as a square logo", () => {
-    const icon = frame(square, 1);
-    const textLogo = frame({ ...square, aspect: 4 }, 2);
-    expect(textLogo.width * 2 * textLogo.height).toBeCloseTo(
-      icon.width * icon.height,
+  it("does not enlarge small images until they blur", () => {
+    const result = place(
+      whole,
+      { width: 40, height: 40 },
+      {
+        width: 192,
+        height: 192,
+      },
     );
+    expect(result.width).toBeCloseTo(50);
+    expect(result.left).toBeCloseTo(71);
   });
 });

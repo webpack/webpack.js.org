@@ -85,28 +85,30 @@ function formatMoney(number) {
   return Math.round(number).toLocaleString("en-US");
 }
 
-// Each rank is laid out as a centered grid of square tiles, since most sponsor
-// avatars are square, so logos line up and a short last row (or a rank with
-// only a few sponsors) stays centered. Tiles grow with the rank and with the
-// viewport.
+// Each rank is laid out as a grid of square tiles, since most sponsor avatars
+// are square, so logos line up. On phones the columns are fractions of the
+// row, so the grid always spans the full width; square rows are sized from the
+// container width with `cqw` units (the wrapper is an `@container`). From `md`
+// up, tiles have a fixed size per rank and the grid is centered. (`sm` is not
+// used: the site redefines `md` and `lg` in pixels, and Tailwind then orders
+// the rem-based `sm` after them, so `sm:` would override `lg:`.)
 //
 // Wide logos (like text logos) span two columns, and `packTiles` reorders the
 // tiles so narrow logos back-fill the gaps, giving a masonry-like packing. The
 // reordering happens in the DOM rather than with `grid-flow-dense`, so keyboard
-// focus and screen readers follow the same order as the eye. On phones every rank
-// caps the tile at a fraction of the row so there are always at least two
-// columns and a double-width tile never overflows.
+// focus and screen readers follow the same order as the eye. Every rank keeps
+// at least two columns, so a double-width tile never overflows.
 const GRID_CLASSES = {
   backer: "grid-cols-[repeat(auto-fit,36px)] gap-1.5 max-w-200 mx-auto",
   latest:
-    "grid-cols-[repeat(auto-fit,min(96px,calc(33.333%-0.5rem)))] lg:grid-cols-[repeat(auto-fit,104px)] auto-rows-[96px] lg:auto-rows-[104px] gap-3",
+    "grid-cols-[repeat(3,minmax(0,1fr))] auto-rows-[calc((100cqw-1.5rem)/3)] md:grid-cols-[repeat(auto-fit,96px)] md:auto-rows-[96px] lg:grid-cols-[repeat(auto-fit,104px)] lg:auto-rows-[104px] gap-3",
   bronze:
-    "grid-cols-[repeat(auto-fit,min(64px,calc(25%-0.375rem)))] sm:grid-cols-[repeat(auto-fit,72px)] auto-rows-[64px] sm:auto-rows-[72px] gap-2",
+    "grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[calc((100cqw-1.5rem)/4)] md:grid-cols-[repeat(auto-fit,72px)] md:auto-rows-[72px] gap-2",
   silver:
-    "grid-cols-[repeat(auto-fit,min(96px,calc(33.333%-0.5rem)))] lg:grid-cols-[repeat(auto-fit,104px)] auto-rows-[96px] lg:auto-rows-[104px] gap-3",
-  gold: "grid-cols-[repeat(auto-fit,min(128px,calc(50%-0.375rem)))] sm:grid-cols-[repeat(auto-fit,144px)] auto-rows-[128px] sm:auto-rows-[144px] gap-3",
+    "grid-cols-[repeat(3,minmax(0,1fr))] auto-rows-[calc((100cqw-1.5rem)/3)] md:grid-cols-[repeat(auto-fit,96px)] md:auto-rows-[96px] lg:grid-cols-[repeat(auto-fit,104px)] lg:auto-rows-[104px] gap-3",
+  gold: "grid-cols-[repeat(2,minmax(0,1fr))] auto-rows-[calc((100cqw-0.75rem)/2)] md:grid-cols-[repeat(auto-fit,144px)] md:auto-rows-[144px] gap-3",
   platinum:
-    "grid-cols-[repeat(auto-fit,min(160px,calc(50%-0.5rem)))] sm:grid-cols-[repeat(auto-fit,192px)] auto-rows-[160px] sm:auto-rows-[192px] gap-4",
+    "grid-cols-[repeat(2,minmax(0,1fr))] auto-rows-[calc((100cqw-1rem)/2)] md:grid-cols-[repeat(auto-fit,192px)] md:auto-rows-[192px] gap-4",
 };
 
 const TILE_CLASSES = {
@@ -122,43 +124,47 @@ const TILE_CLASSES = {
 const IMG_CLASSES = {
   backer: "support__logo w-full h-full object-cover",
   logo: "support__logo absolute inset-0 w-full h-full object-contain",
-  // Positioned by `framedLogoStyle` instead.
+  // Positioned by `logoLayout` instead.
   framed: "support__logo absolute max-w-none",
 };
 
 // Logos at least this much wider than tall get a double-width tile.
 const WIDE_LOGO_RATIO = 1.6;
-// Logos are sized to roughly the same visual area, so a long text logo does not
-// outweigh a square icon: a square logo spans `LOGO_SIZE` of a square tile, and
-// any logo is capped at `LOGO_MAX_FILL` of its tile in either direction.
-const LOGO_SIZE = 0.82;
-const LOGO_MAX_FILL = 0.92;
+// Share of the tile a logo may fill, leaving a little air around it.
+const LOGO_FILL = 0.92;
+// How far a logo may be enlarged beyond its own pixels before it gets blurry.
+const LOGO_MAX_UPSCALE = 1.25;
 
-const percent = (value) => `${(value * 100).toFixed(3)}%`;
+const px = (value) => `${Math.round(value * 100) / 100}px`;
 
-// Positions a logo image inside its tile, in percentages of the tile, so the
-// artwork is centered and sized by area. Many sponsor logos sit on a large
-// white or transparent canvas, which makes them look tiny; `box` (measured by
+// Positions a logo image inside its tile, in pixels, so the artwork is as large
+// as fits and centered. Many sponsor logos sit on a large white or transparent
+// canvas, which makes them look tiny; `box` (measured by
 // src/utilities/logo-box.mjs at build time) says where the artwork is, and the
-// image is scaled and offset so that box is what gets framed.
-export function framedLogoStyle(box, tileAspect) {
-  const root = Math.sqrt(box.aspect);
-  let width = (LOGO_SIZE * root) / tileAspect;
-  let height = LOGO_SIZE / root;
-  const scale = Math.min(1, LOGO_MAX_FILL / width, LOGO_MAX_FILL / height);
-  width *= scale;
-  height *= scale;
-
+// image is scaled and offset so that box is what gets framed. Small images are
+// not blown up past `LOGO_MAX_UPSCALE`, where they would turn blurry.
+export function logoLayout(box, natural, tile) {
+  const artworkWidth = box.width * natural.width;
+  const artworkHeight = box.height * natural.height;
+  const aspect = artworkWidth / artworkHeight;
+  const width = Math.min(
+    LOGO_FILL * tile.width,
+    LOGO_FILL * tile.height * aspect,
+    LOGO_MAX_UPSCALE * artworkWidth,
+  );
+  const height = width / aspect;
   const imageWidth = width / box.width;
   const imageHeight = height / box.height;
 
   return {
-    left: percent((1 - width) / 2 - box.x * imageWidth),
-    top: percent((1 - height) / 2 - box.y * imageHeight),
-    width: percent(imageWidth),
-    height: percent(imageHeight),
+    left: px((tile.width - width) / 2 - box.x * imageWidth),
+    top: px((tile.height - height) / 2 - box.y * imageHeight),
+    width: px(imageWidth),
+    height: px(imageHeight),
   };
 }
+
+const WHOLE_IMAGE = { x: 0, y: 0, width: 1, height: 1 };
 
 // Whether a logo gets a double-width tile, judged by its trimmed artwork when
 // it was measured at build time and by the loaded image otherwise.
@@ -192,32 +198,40 @@ export function packTiles(items, isWide, columns) {
 
 function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
   const [failed, setFailed] = useState(false);
-  const [naturalAspect, setNaturalAspect] = useState(0);
+  const [natural, setNatural] = useState(null);
+  const [tile, setTile] = useState(null);
+  const tileRef = useRef(null);
   const kind = rank === "backer" ? "backer" : "logo";
   const showsAvatar = inView && Boolean(supporter.avatar) && !failed;
-  // Untrimmed logos are framed as a whole once their shape is known.
-  const box =
-    supporter.logoBox ||
-    (naturalAspect > 0 && {
-      x: 0,
-      y: 0,
-      width: 1,
-      height: 1,
-      aspect: naturalAspect,
+  const framed = kind === "logo" && showsAvatar && natural && tile;
+  // Without ResizeObserver the logo is shown as a plain contained image.
+  const canFrame = typeof ResizeObserver !== "undefined";
+
+  useEffect(() => {
+    const node = tileRef.current;
+    if (kind !== "logo" || !node || !canFrame) return undefined;
+
+    const observer = new ResizeObserver(() => {
+      setTile({ width: node.clientWidth, height: node.clientHeight });
     });
-  const framed = kind === "logo" && showsAvatar && box;
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [kind, canFrame]);
 
-  const handleLoad = (event) => {
-    const { naturalWidth, naturalHeight } = event.target;
-    if (kind !== "logo" || !showsAvatar || naturalHeight <= 0) return;
-
-    const aspect = naturalWidth / naturalHeight;
-    setNaturalAspect(aspect);
-    if (!supporter.logoBox) onWideChange(aspect >= WIDE_LOGO_RATIO);
+  const measure = (image) => {
+    const { naturalWidth, naturalHeight } = image;
+    if (kind !== "logo" || !showsAvatar || !naturalWidth || !naturalHeight) {
+      return;
+    }
+    setNatural({ width: naturalWidth, height: naturalHeight });
+    if (!supporter.logoBox) {
+      onWideChange(naturalWidth / naturalHeight >= WIDE_LOGO_RATIO);
+    }
   };
 
   const handleError = (event) => {
     setFailed(true);
+    setNatural(null);
     handleImgError(event);
   };
 
@@ -229,6 +243,7 @@ function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
       } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
     >
       <a
+        ref={tileRef}
         className={TILE_CLASSES[kind]}
         target="_blank"
         rel="noopener noreferrer nofollow"
@@ -237,8 +252,16 @@ function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
         }
       >
         <img
-          className={framed ? IMG_CLASSES.framed : IMG_CLASSES[kind]}
-          style={framed ? framedLogoStyle(box, wide ? 2 : 1) : undefined}
+          className={`${framed ? IMG_CLASSES.framed : IMG_CLASSES[kind]} ${
+            kind === "logo" && showsAvatar && canFrame && !framed
+              ? "opacity-0"
+              : ""
+          }`}
+          style={
+            framed
+              ? logoLayout(supporter.logoBox || WHOLE_IMAGE, natural, tile)
+              : undefined
+          }
           src={showsAvatar ? supporter.avatar : SmallIcon}
           alt={
             supporter.alt ||
@@ -247,7 +270,7 @@ function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
               : "avatar")
           }
           loading="lazy"
-          onLoad={handleLoad}
+          onLoad={(event) => measure(event.target)}
           onError={handleError}
         />
       </a>
@@ -447,27 +470,29 @@ export default function Support({ rank, type }) {
           )}
         </div>
 
-        <div
-          ref={gridRef}
-          className={`grid justify-center w-full ${GRID_CLASSES[rank] || ""}`}
-        >
-          {packTiles(
-            supporters.map((supporter, index) => ({
-              key: supporter.slug || String(index),
-              supporter,
-            })),
-            isTileWide,
-            columns,
-          ).map(({ key, supporter }) => (
-            <SupporterTile
-              key={key}
-              supporter={supporter}
-              rank={rank}
-              inView={inView}
-              wide={isTileWide({ key, supporter })}
-              onWideChange={(wide) => setWide(key, wide)}
-            />
-          ))}
+        <div className="@container mx-auto w-full max-w-[26rem] md:max-w-none">
+          <div
+            ref={gridRef}
+            className={`grid justify-center w-full ${GRID_CLASSES[rank] || ""}`}
+          >
+            {packTiles(
+              supporters.map((supporter, index) => ({
+                key: supporter.slug || String(index),
+                supporter,
+              })),
+              isTileWide,
+              columns,
+            ).map(({ key, supporter }) => (
+              <SupporterTile
+                key={key}
+                supporter={supporter}
+                rank={rank}
+                inView={inView}
+                wide={isTileWide({ key, supporter })}
+                onWideChange={(wide) => setWide(key, wide)}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="w-full mt-4">
