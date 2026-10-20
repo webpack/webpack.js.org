@@ -144,6 +144,10 @@ export default (env) =>
             to: "./assets/",
           },
           {
+            from: "./assets/sponsors.svg",
+            to: "./assets/",
+          },
+          {
             from: "./assets/supporters-*.png",
             to: "./",
           },
