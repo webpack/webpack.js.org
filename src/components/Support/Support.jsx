@@ -85,21 +85,101 @@ function formatMoney(number) {
   return Math.round(number).toLocaleString("en-US");
 }
 
-const AVATAR_CLASSES = {
-  backer:
-    "inline-block w-[31px] h-[31px] rounded-full border border-white shadow-[0_0_0_1px_rgb(112,202,10)] overflow-hidden align-middle",
-  latest: "max-h-16 max-w-48 align-middle",
-  bronze: "max-h-8 max-w-24 align-middle",
-  silver: "max-h-16 max-w-48 align-middle",
-  gold: "max-h-24 max-w-72 align-middle",
-  platinum: "max-h-32 max-w-full min-[400px]:max-w-96 align-middle",
+// Each rank is laid out as a centered grid of fixed-size tiles so logos with
+// very different aspect ratios still line up, and a short last row (or a rank
+// with only a few sponsors) stays centered. Tiles grow with the viewport:
+// phones get two or three columns, tablets and laptops get more.
+//
+// On the crowded ranks, wide logos (like text logos) span two columns and
+// `grid-flow-dense` back-fills the gaps, giving a masonry-like packing. Those
+// ranks cap the tile at half (or a third) of the row on phones so there are
+// always at least two columns and a double-width tile never overflows.
+const GRID_CLASSES = {
+  backer: "grid-cols-[repeat(auto-fit,36px)] gap-1.5 max-w-200 mx-auto",
+  latest:
+    "grid-cols-[repeat(auto-fit,min(150px,calc(50%-0.375rem)))] sm:grid-cols-[repeat(auto-fit,170px)] lg:grid-cols-[repeat(auto-fit,180px)] auto-rows-[72px] sm:auto-rows-[84px] lg:auto-rows-[88px] gap-3",
+  bronze:
+    "grid-cols-[repeat(auto-fit,min(100px,calc(33.333%-0.334rem)))] sm:grid-cols-[repeat(auto-fit,128px)] lg:grid-cols-[repeat(auto-fit,136px)] auto-rows-[52px] sm:auto-rows-[60px] lg:auto-rows-[64px] gap-2",
+  silver:
+    "grid-cols-[repeat(auto-fit,min(150px,calc(50%-0.375rem)))] sm:grid-cols-[repeat(auto-fit,170px)] lg:grid-cols-[repeat(auto-fit,180px)] auto-rows-[72px] sm:auto-rows-[84px] lg:auto-rows-[88px] gap-3",
+  gold: "grid-cols-[repeat(auto-fit,min(220px,calc(50%-0.5rem)))] lg:grid-cols-[repeat(auto-fit,224px)] auto-rows-[88px] sm:auto-rows-[110px] lg:auto-rows-[116px] gap-4",
+  platinum:
+    "grid-cols-[repeat(auto-fit,min(300px,100%))] auto-rows-[120px] sm:auto-rows-[150px] gap-4",
 };
+
+// Ranks with enough sponsors for the dense packing to fill the gaps that
+// double-width tiles leave behind.
+const MASONRY_RANKS = new Set(["latest", "silver", "bronze"]);
+
+const TILE_CLASSES = {
+  backer:
+    "block w-9 h-9 mx-auto rounded-full border border-white shadow-[0_0_0_1px_rgb(112,202,10)] overflow-hidden bg-white transition-transform duration-200 hover:scale-110",
+  logo: "flex items-center justify-center w-full h-full p-3 rounded-lg bg-white border border-[#dedede] dark:border-transparent transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_18px_rgba(0,0,0,0.12)]",
+};
+
+const IMG_CLASSES = {
+  backer: "w-full h-full object-cover",
+  logo: "max-w-full max-h-full object-contain",
+};
+
+// Logos at least this much wider than tall get a double-width tile.
+const WIDE_LOGO_RATIO = 2.5;
 
 function handleImgError(event) {
   const imgNode = event.target;
   if (imgNode.getAttribute("src") === SmallIcon) return;
   imgNode.setAttribute("src", SmallIcon);
 }
+
+function SupporterTile({ supporter, rank, inView }) {
+  const [wide, setWide] = useState(false);
+  const kind = rank === "backer" ? "backer" : "logo";
+
+  const handleLoad = (event) => {
+    const { naturalWidth, naturalHeight } = event.target;
+    if (MASONRY_RANKS.has(rank) && naturalHeight > 0) {
+      setWide(naturalWidth / naturalHeight >= WIDE_LOGO_RATIO);
+    }
+  };
+
+  return (
+    <Tooltip
+      className={wide ? "col-span-2" : ""}
+      content={`$${formatMoney(supporter.totalDonations / 100)} by ${
+        supporter.name || supporter.slug
+      } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
+    >
+      <a
+        className={TILE_CLASSES[kind]}
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href={
+          supporter.website || `https://opencollective.com/${supporter.slug}`
+        }
+      >
+        <img
+          className={IMG_CLASSES[kind]}
+          src={inView && supporter.avatar ? supporter.avatar : SmallIcon}
+          alt={
+            supporter.alt ||
+            (supporter.name || supporter.slug
+              ? `${supporter.name || supporter.slug}'s avatar`
+              : "avatar")
+          }
+          loading="lazy"
+          onLoad={handleLoad}
+          onError={handleImgError}
+        />
+      </a>
+    </Tooltip>
+  );
+}
+
+SupporterTile.propTypes = {
+  supporter: PropTypes.object.isRequired,
+  rank: PropTypes.string,
+  inView: PropTypes.bool,
+};
 
 function filterByAge(result, age) {
   const now = Date.now();
@@ -210,10 +290,7 @@ export default function Support({ rank, type }) {
                 type === "monthly" ? "Monthly " : ""
               }Sponsors`}
       </h2>
-      <div
-        ref={containerRef}
-        className="flex flex-wrap justify-center px-2 pb-4"
-      >
+      <div ref={containerRef} className="px-2 pb-4">
         <div className="w-full mb-4">
           {rank === "backer" ? (
             <p>
@@ -252,40 +329,18 @@ export default function Support({ rank, type }) {
           )}
         </div>
 
-        {supporters.map((supporter, index) => (
-          <Tooltip
-            key={supporter.slug || index}
-            content={`$${formatMoney(supporter.totalDonations / 100)} by ${
-              supporter.name || supporter.slug
-            } ($${formatMoney(supporter.monthlyDonations / 100)} monthly)`}
-          >
-            <a
-              className="relative mx-0.5 mb-0.5 dark:bg-white"
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-              href={
-                supporter.website ||
-                `https://opencollective.com/${supporter.slug}`
-              }
-            >
-              {
-                <img
-                  className={AVATAR_CLASSES[rank]}
-                  src={
-                    inView && supporter.avatar ? supporter.avatar : SmallIcon
-                  }
-                  alt={
-                    supporter.alt ||
-                    (supporter.name || supporter.slug
-                      ? `${supporter.name || supporter.slug}'s avatar`
-                      : "avatar")
-                  }
-                  onError={handleImgError}
-                />
-              }
-            </a>
-          </Tooltip>
-        ))}
+        <div
+          className={`grid grid-flow-dense justify-center w-full ${GRID_CLASSES[rank] || ""}`}
+        >
+          {supporters.map((supporter, index) => (
+            <SupporterTile
+              key={supporter.slug || index}
+              supporter={supporter}
+              rank={rank}
+              inView={inView}
+            />
+          ))}
+        </div>
 
         <div className="w-full mt-4">
           <a
