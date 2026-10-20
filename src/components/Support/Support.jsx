@@ -86,30 +86,55 @@ function formatMoney(number) {
 }
 
 // Each rank is laid out as a grid of square tiles, since most sponsor avatars
-// are square, so logos line up. On phones the columns are fractions of the
-// row, so the grid always spans the full width; square rows are sized from the
-// container width with `cqw` units (the wrapper is an `@container`). From `md`
-// up, tiles have a fixed size per rank and the grid is centered. (`sm` is not
-// used: the site redefines `md` and `lg` in pixels, and Tailwind then orders
-// the rem-based `sm` after them, so `sm:` would override `lg:`.)
+// are square, so logos line up. `gridLayout` sizes the tiles from the width
+// that is actually available: it picks the column count whose tiles come
+// closest to the rank's `tile` size without going over `maxTile`, so rows
+// always span the full width and no breakpoint or orientation ends up with
+// oversized logos. Both sizes also shrink on short screens (a phone held
+// sideways), and a rank with only a few logos shows them at `tile`, centered.
 //
 // Wide logos (like text logos) span two columns, and `packTiles` reorders the
 // tiles so narrow logos back-fill the gaps, giving a masonry-like packing. The
 // reordering happens in the DOM rather than with `grid-flow-dense`, so keyboard
 // focus and screen readers follow the same order as the eye. Every rank keeps
 // at least two columns, so a double-width tile never overflows.
-const GRID_CLASSES = {
-  backer: "grid-cols-[repeat(auto-fit,36px)] gap-1.5 max-w-200 mx-auto",
-  latest:
-    "grid-cols-[repeat(3,minmax(0,1fr))] auto-rows-[calc((100cqw-1.5rem)/3)] md:grid-cols-[repeat(auto-fit,96px)] md:auto-rows-[96px] lg:grid-cols-[repeat(auto-fit,104px)] lg:auto-rows-[104px] gap-3",
-  bronze:
-    "grid-cols-[repeat(4,minmax(0,1fr))] auto-rows-[calc((100cqw-1.5rem)/4)] md:grid-cols-[repeat(auto-fit,72px)] md:auto-rows-[72px] gap-2",
-  silver:
-    "grid-cols-[repeat(3,minmax(0,1fr))] auto-rows-[calc((100cqw-1.5rem)/3)] md:grid-cols-[repeat(auto-fit,96px)] md:auto-rows-[96px] lg:grid-cols-[repeat(auto-fit,104px)] lg:auto-rows-[104px] gap-3",
-  gold: "grid-cols-[repeat(2,minmax(0,1fr))] auto-rows-[calc((100cqw-0.75rem)/2)] md:grid-cols-[repeat(auto-fit,144px)] md:auto-rows-[144px] gap-3",
-  platinum:
-    "grid-cols-[repeat(2,minmax(0,1fr))] auto-rows-[calc((100cqw-1rem)/2)] md:grid-cols-[repeat(auto-fit,192px)] md:auto-rows-[192px] gap-4",
+const RANK_GRIDS = {
+  latest: { tile: 80, maxTile: 96, gap: 12 },
+  bronze: { tile: 60, maxTile: 72, gap: 8 },
+  silver: { tile: 80, maxTile: 96, gap: 12 },
+  gold: { tile: 108, maxTile: 130, gap: 12 },
+  platinum: { tile: 150, maxTile: 190, gap: 16 },
 };
+
+const BACKER_GRID_CLASSES =
+  "grid-cols-[repeat(auto-fit,36px)] gap-1.5 max-w-200 mx-auto";
+
+// Tiles never take more than this share of the viewport height.
+const MAX_TILE_VIEWPORT_HEIGHT = 0.35;
+
+export function gridLayout(
+  width,
+  { tile, maxTile, gap },
+  { viewportHeight, span },
+) {
+  const cap = viewportHeight
+    ? viewportHeight * MAX_TILE_VIEWPORT_HEIGHT
+    : Infinity;
+  const target = Math.min(tile, cap);
+  const max = Math.min(maxTile, cap);
+  const size = (columns) => (width - (columns - 1) * gap) / columns;
+
+  let columns = Math.max(2, Math.round((width + gap) / (target + gap)));
+  while (size(columns) > max) columns++;
+  // Do not open more columns than there are tiles to fill them; the few
+  // tiles there are keep the target size instead of stretching.
+  if (span > 0 && span < columns) {
+    columns = Math.max(2, span);
+    return { columns, tile: Math.floor(Math.min(target, size(columns))) };
+  }
+
+  return { columns, tile: Math.floor(size(columns)) };
+}
 
 const TILE_CLASSES = {
   backer:
@@ -132,6 +157,10 @@ const IMG_CLASSES = {
 const WIDE_LOGO_RATIO = 1.6;
 // Share of the tile a logo may fill, leaving a little air around it.
 const LOGO_FILL = 0.92;
+// Wide logos (mostly text) would look much heavier than icons at full height,
+// so their height is scaled down with their aspect ratio, but never below this
+// share of the tile, so the text stays readable.
+const MIN_WIDE_LOGO_HEIGHT = 0.55;
 // How far a logo may be enlarged beyond its own pixels before it gets blurry.
 const LOGO_MAX_UPSCALE = 1.25;
 
@@ -147,9 +176,13 @@ export function logoLayout(box, natural, tile) {
   const artworkWidth = box.width * natural.width;
   const artworkHeight = box.height * natural.height;
   const aspect = artworkWidth / artworkHeight;
+  const heightFill = Math.max(
+    MIN_WIDE_LOGO_HEIGHT,
+    Math.min(LOGO_FILL, LOGO_FILL / Math.sqrt(aspect)),
+  );
   const width = Math.min(
     LOGO_FILL * tile.width,
-    LOGO_FILL * tile.height * aspect,
+    heightFill * tile.height * aspect,
     LOGO_MAX_UPSCALE * artworkWidth,
   );
   const height = width / aspect;
@@ -308,26 +341,29 @@ function shuffleSlice(arr, n) {
 export default function Support({ rank, type }) {
   const [inView, setInView] = useState(false);
   const [wideKeys, setWideKeys] = useState(() => new Set());
-  const [columns, setColumns] = useState(0);
+  const [available, setAvailable] = useState(null);
   const containerRef = useRef(null);
   const gridRef = useRef(null);
+  const grid = RANK_GRIDS[rank];
 
-  // Track how many columns the grid currently has so `packTiles` can mirror
-  // the layout.
+  // Track the width the grid can use (and the viewport height, for phones held
+  // sideways) so `gridLayout` can size the tiles.
   useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid || typeof ResizeObserver === "undefined") return undefined;
+    const node = gridRef.current;
+    if (!grid || !node || typeof ResizeObserver === "undefined") {
+      return undefined;
+    }
 
     const observer = new ResizeObserver(() => {
-      setColumns(
-        getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean)
-          .length,
-      );
+      setAvailable({
+        width: node.clientWidth,
+        viewportHeight: window.innerHeight,
+      });
     });
-    observer.observe(grid);
+    observer.observe(node);
 
     return () => observer.disconnect();
-  }, []);
+  }, [grid]);
 
   const isTileWide = ({ key, supporter }) =>
     rank !== "backer" && isWideLogo(supporter, wideKeys.has(key));
@@ -420,6 +456,29 @@ export default function Support({ rank, type }) {
       };
     }, [rank, type]);
 
+  const tiles = supporters.map((supporter, index) => ({
+    key: supporter.slug || String(index),
+    supporter,
+  }));
+  const layout =
+    grid && available
+      ? gridLayout(available.width, grid, {
+          viewportHeight: available.viewportHeight,
+          span: tiles.reduce(
+            (total, tile) => total + (isTileWide(tile) ? 2 : 1),
+            0,
+          ),
+        })
+      : null;
+  // Until the grid has been measured, fall back to tiles at the rank's size.
+  const gridStyle = grid && {
+    gap: `${grid.gap}px`,
+    gridTemplateColumns: layout
+      ? `repeat(${layout.columns}, ${layout.tile}px)`
+      : `repeat(auto-fit, ${grid.tile}px)`,
+    gridAutoRows: `${layout ? layout.tile : grid.tile}px`,
+  };
+
   return (
     <>
       <h2>
@@ -470,19 +529,13 @@ export default function Support({ rank, type }) {
           )}
         </div>
 
-        <div className="@container mx-auto w-full max-w-[26rem] md:max-w-none">
-          <div
-            ref={gridRef}
-            className={`grid justify-center w-full ${GRID_CLASSES[rank] || ""}`}
-          >
-            {packTiles(
-              supporters.map((supporter, index) => ({
-                key: supporter.slug || String(index),
-                supporter,
-              })),
-              isTileWide,
-              columns,
-            ).map(({ key, supporter }) => (
+        <div
+          ref={gridRef}
+          className={`grid justify-center w-full ${grid ? "" : BACKER_GRID_CLASSES}`}
+          style={gridStyle}
+        >
+          {packTiles(tiles, isTileWide, layout ? layout.columns : 0).map(
+            ({ key, supporter }) => (
               <SupporterTile
                 key={key}
                 supporter={supporter}
@@ -491,8 +544,8 @@ export default function Support({ rank, type }) {
                 wide={isTileWide({ key, supporter })}
                 onWideChange={(wide) => setWide(key, wide)}
               />
-            ))}
-          </div>
+            ),
+          )}
         </div>
 
         <div className="w-full mt-4">
