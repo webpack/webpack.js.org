@@ -10,6 +10,7 @@ jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
 // `_supporters.json` resolves to the empty mock this suite wants already.
 const {
   default: Support,
+  gridLayout,
   logoLayout,
   packTiles,
 } = await import("./Support.jsx");
@@ -181,17 +182,24 @@ describe("logoLayout", () => {
     expect(result.imageAspect).toBeCloseTo(1);
   });
 
-  it("fits wide artwork to the height of a double-width tile", () => {
+  it("keeps wide artwork lighter than full height", () => {
+    // A 3:1 text logo in a double-width tile is held to 55% of the tile height.
+    const result = place(
+      whole,
+      { width: 600, height: 200 },
+      { width: 200, height: 96 },
+    );
+    expect(result.height).toBeCloseTo(96 * 0.55);
+    expect(result.width).toBeLessThanOrEqual(200 * 0.92);
+  });
+
+  it("fits very wide artwork to the width of its tile", () => {
     const result = place(
       whole,
       { width: 600, height: 100 },
-      {
-        width: 200,
-        height: 96,
-      },
+      { width: 200, height: 96 },
     );
     expect(result.width).toBeCloseTo(184);
-    expect(result.height).toBeLessThanOrEqual(96 * 0.92);
   });
 
   it("does not enlarge small images until they blur", () => {
@@ -205,5 +213,44 @@ describe("logoLayout", () => {
     );
     expect(result.width).toBeCloseTo(50);
     expect(result.left).toBeCloseTo(71);
+  });
+});
+
+describe("gridLayout", () => {
+  const platinum = { tile: 112, maxTile: 128, gap: 16 };
+  const bronze = { tile: 46, maxTile: 54, gap: 8 };
+
+  it("fills a phone-width row without exceeding the tile size", () => {
+    const { columns, tile } = gridLayout(342, bronze, { span: 50 });
+    expect(columns).toBe(6);
+    expect(tile).toBeLessThanOrEqual(54);
+    expect(columns * tile + (columns - 1) * 8).toBeGreaterThan(342 - columns);
+  });
+
+  it("keeps tiles small on a phone held sideways", () => {
+    const { tile } = gridLayout(796, platinum, {
+      viewportHeight: 300,
+      span: 4,
+    });
+    expect(tile).toBeLessThanOrEqual(300 * 0.35);
+    expect(tile).toBeLessThan(platinum.tile);
+  });
+
+  it("keeps a few logos at the tile size instead of stretching them", () => {
+    expect(gridLayout(960, platinum, { span: 3 })).toEqual({
+      columns: 3,
+      tile: 112,
+    });
+  });
+
+  it("keeps larger ranks larger on a wide phone", () => {
+    const gold = { tile: 84, maxTile: 96, gap: 12 };
+    expect(gridLayout(382, platinum, { span: 9 }).tile).toBeGreaterThan(
+      gridLayout(382, gold, { span: 9 }).tile,
+    );
+  });
+
+  it("always keeps two columns for double-width tiles", () => {
+    expect(gridLayout(200, platinum, { span: 1 }).columns).toBe(2);
   });
 });
