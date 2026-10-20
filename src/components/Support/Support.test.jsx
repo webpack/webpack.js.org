@@ -8,7 +8,7 @@ import { render, screen } from "@testing-library/react";
 jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
 
 // `_supporters.json` resolves to the empty mock this suite wants already.
-const { default: Support } = await import("./Support.jsx");
+const { default: Support, packTiles } = await import("./Support.jsx");
 
 describe("Support", () => {
   let mockObserve;
@@ -106,5 +106,34 @@ describe("Support", () => {
   it("matches snapshot for backer rank", () => {
     const { container } = render(<Support rank="backer" type="total" />);
     expect(container.firstChild).toMatchSnapshot();
+  });
+});
+
+describe("packTiles", () => {
+  const isWide = (item) => item.startsWith("W");
+
+  it("back-fills a narrow tile into the gap a wide tile leaves", () => {
+    expect(packTiles(["W1", "W2", "n1"], isWide, 3)).toEqual([
+      "W1",
+      "n1",
+      "W2",
+    ]);
+  });
+
+  it("keeps the original order when everything fits", () => {
+    expect(packTiles(["n1", "W1", "n2", "n3"], isWide, 3)).toEqual([
+      "n1",
+      "W1",
+      "n2",
+      "n3",
+    ]);
+  });
+
+  it("does not reorder until the column count is known", () => {
+    expect(packTiles(["W1", "W2", "n1"], isWide, 0)).toEqual([
+      "W1",
+      "W2",
+      "n1",
+    ]);
   });
 });

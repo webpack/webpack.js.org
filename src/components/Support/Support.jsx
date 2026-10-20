@@ -90,8 +90,10 @@ function formatMoney(number) {
 // only a few sponsors) stays centered. Tiles grow with the rank and with the
 // viewport.
 //
-// Wide logos (like text logos) span two columns and `grid-flow-dense`
-// back-fills the gaps, giving a masonry-like packing. On phones every rank
+// Wide logos (like text logos) span two columns, and `packTiles` reorders the
+// tiles so narrow logos back-fill the gaps, giving a masonry-like packing. The
+// reordering happens in the DOM rather than with `grid-flow-dense`, so keyboard
+// focus and screen readers follow the same order as the eye. On phones every rank
 // caps the tile at a fraction of the row so there are always at least two
 // columns and a double-width tile never overflows.
 const GRID_CLASSES = {
@@ -131,14 +133,32 @@ function handleImgError(event) {
   imgNode.setAttribute("src", SmallIcon);
 }
 
-function SupporterTile({ supporter, rank, inView }) {
-  const [wide, setWide] = useState(false);
+// Orders tiles row by row the way `grid-auto-flow: dense` would place them:
+// each tile goes into the first row that still has room for it.
+export function packTiles(items, isWide, columns) {
+  if (columns < 2) return items;
+
+  const rows = [];
+  for (const item of items) {
+    const span = isWide(item) ? 2 : 1;
+    let row = rows.find((candidate) => candidate.free >= span);
+    if (!row) {
+      row = { free: columns, items: [] };
+      rows.push(row);
+    }
+    row.free -= span;
+    row.items.push(item);
+  }
+  return rows.flatMap((row) => row.items);
+}
+
+function SupporterTile({ supporter, rank, inView, wide, onWideChange }) {
   const kind = rank === "backer" ? "backer" : "logo";
 
   const handleLoad = (event) => {
     const { naturalWidth, naturalHeight } = event.target;
     if (kind === "logo" && naturalHeight > 0) {
-      setWide(naturalWidth / naturalHeight >= WIDE_LOGO_RATIO);
+      onWideChange(naturalWidth / naturalHeight >= WIDE_LOGO_RATIO);
     }
   };
 
@@ -179,6 +199,8 @@ SupporterTile.propTypes = {
   supporter: PropTypes.object.isRequired,
   rank: PropTypes.string,
   inView: PropTypes.bool,
+  wide: PropTypes.bool,
+  onWideChange: PropTypes.func,
 };
 
 function filterByAge(result, age) {
@@ -202,7 +224,40 @@ function shuffleSlice(arr, n) {
 
 export default function Support({ rank, type }) {
   const [inView, setInView] = useState(false);
+  const [wideKeys, setWideKeys] = useState(() => new Set());
+  const [columns, setColumns] = useState(0);
   const containerRef = useRef(null);
+  const gridRef = useRef(null);
+
+  // Track how many columns the grid currently has so `packTiles` can mirror
+  // the layout.
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid || typeof ResizeObserver === "undefined") return undefined;
+
+    const observer = new ResizeObserver(() => {
+      setColumns(
+        getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean)
+          .length,
+      );
+    });
+    observer.observe(grid);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const setWide = (key, wide) => {
+    setWideKeys((previous) => {
+      if (previous.has(key) === wide) return previous;
+      const next = new Set(previous);
+      if (wide) {
+        next.add(key);
+      } else {
+        next.delete(key);
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -330,14 +385,24 @@ export default function Support({ rank, type }) {
         </div>
 
         <div
-          className={`grid grid-flow-dense justify-center w-full ${GRID_CLASSES[rank] || ""}`}
+          ref={gridRef}
+          className={`grid justify-center w-full ${GRID_CLASSES[rank] || ""}`}
         >
-          {supporters.map((supporter, index) => (
+          {packTiles(
+            supporters.map((supporter, index) => ({
+              key: supporter.slug || String(index),
+              supporter,
+            })),
+            ({ key }) => wideKeys.has(key),
+            columns,
+          ).map(({ key, supporter }) => (
             <SupporterTile
-              key={supporter.slug || index}
+              key={key}
               supporter={supporter}
               rank={rank}
               inView={inView}
+              wide={wideKeys.has(key)}
+              onWideChange={(wide) => setWide(key, wide)}
             />
           ))}
         </div>
