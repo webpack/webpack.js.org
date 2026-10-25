@@ -992,7 +992,7 @@ export default {
 
 ### Output options
 
-Everything under [`output.html`](/configuration/output/#outputhtml) describes the page webpack generates for a JavaScript entrypoint. Authored pages keep their own markup — of these, only `inject`, `inline`, `integrity` and `csp` affect what is injected into them; `scriptLoading` applies to generated pages only.
+Everything under [`output.html`](/configuration/output/#outputhtml) describes the page webpack generates for a JavaScript entrypoint. Authored pages keep their own markup — of these, `title`, `meta` and `base` are added only where the page lacks them, `inject`, `inline`, `integrity` and `csp` affect what is injected into them, and `scriptLoading` applies to generated pages only.
 
 | Option                                                                       | Type                                         | Default                                  | Description                                                |
 | ---------------------------------------------------------------------------- | -------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------- |
