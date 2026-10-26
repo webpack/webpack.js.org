@@ -51,22 +51,15 @@ function Anchors({ anchors, url }) {
           className="relative flex-[0_0_100%] my-1 first:mt-0 last:mb-0 pl-4 overflow-hidden whitespace-nowrap text-ellipsis before:content-[''] before:absolute before:w-2 before:left-0 before:top-[10px] before:border-b before:border-dashed before:border-[#777676]"
           title={anchor.title}
         >
-         <NavLink
+        <NavLink
   to={generateAnchorURL(url, anchor)}
   className="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
   onClick={() => {
-    // Wait for scroll to complete, then move focus to the target heading
     setTimeout(() => {
       const targetElement = document.getElementById(anchor.id);
       if (targetElement) {
         targetElement.setAttribute('tabindex', '-1');
         targetElement.focus();
-        targetElement.style.outline = '2px solid #175d96';
-        targetElement.style.outlineOffset = '2px';
-        setTimeout(() => {
-          targetElement.style.outline = '';
-          targetElement.style.outlineOffset = '';
-        }, 2000);
       }
     }, 100);
   }}
