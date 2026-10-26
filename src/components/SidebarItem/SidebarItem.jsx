@@ -58,7 +58,7 @@ function Anchors({ anchors, url }) {
     setTimeout(() => {
       const targetElement = document.getElementById(anchor.id);
       if (targetElement) {
-        targetElement.setAttribute('tabindex', '-1');
+        targetElement.setAttribute("tabindex", "-1");
         targetElement.focus();
       }
     }, 100);
