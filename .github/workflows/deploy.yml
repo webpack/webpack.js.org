@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  schedule:
+    # Every 12 hours, so fetched content (READMEs, supporters, governance) stays fresh
+    - cron: "23 0,12 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Trigger Vercel deployment
+    if: github.repository == 'webpack/webpack.js.org'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Vercel deploy hook
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "::error::The VERCEL_DEPLOY_HOOK_URL secret is not set"
+            exit 1
+          fi
+          # printf is a shell builtin, so the secret never appears in a process's argv
+          printf 'url = "%s"\nrequest = POST\n' "$VERCEL_DEPLOY_HOOK_URL" |
+            curl --fail --silent --show-error --config -
