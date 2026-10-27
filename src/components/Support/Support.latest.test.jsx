@@ -11,13 +11,15 @@ jest.unstable_mockModule("./AdditionalSupporters.mjs", () => ({ default: [] }));
 jest.unstable_mockModule("./_supporters.json", () => {
   const NOW = Date.now();
   const DAY = 24 * 60 * 60 * 1000;
-  const recent = Array.from({ length: 12 }, (_, i) => ({
+  const HOUR = 60 * 60 * 1000;
+  // More than the limit of 30, with older supporters having donated more
+  const recent = Array.from({ length: 32 }, (_, i) => ({
     slug: `recent-${i}`,
     name: `Recent ${i}`,
     avatar: `https://example.com/recent-${i}.png`,
-    totalDonations: (12 - i) * 10000,
+    totalDonations: (i + 1) * 10000,
     monthlyDonations: 0,
-    firstDonation: new Date(NOW - (i + 1) * DAY).toISOString(),
+    firstDonation: new Date(NOW - (i + 1) * HOUR).toISOString(),
   }));
   const stale = [
     {
@@ -61,6 +63,13 @@ describe("Support with rank='latest'", () => {
   it("excludes supporters whose firstDonation is older than 21 days", () => {
     render(<Support rank="latest" type="total" />);
     expect(screen.queryByAltText("Stale Org's avatar")).toBeNull();
+  });
+
+  it("keeps the newest supporters when more than the limit are recent", () => {
+    render(<Support rank="latest" type="total" />);
+    expect(screen.getAllByRole("img")).toHaveLength(30);
+    expect(screen.getByAltText("Recent 0's avatar")).toBeTruthy();
+    expect(screen.queryByAltText("Recent 31's avatar")).toBeNull();
   });
 
   it("shows SmallIcon for every supporter before intersection observer fires", () => {
