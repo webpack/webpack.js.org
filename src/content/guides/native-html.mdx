@@ -136,6 +136,7 @@ By default the parser treats a known set of URL-bearing attributes as dependenci
 | `<script type="module" src>`                          | Becomes an ES module chunk entry                                                   |
 | `<script>…</script>` (inline)                         | The body becomes its own entry; the tag is rewritten to `<script src>`             |
 | `<style>…</style>` (inline)                           | Routed through the CSS pipeline; `@import` / `url()` resolved, text written back   |
+| `<style lang>`, `<script lang>` (inline)              | Same, after its [language's rules](#preprocessors-in-inline-style-and-script)      |
 | `style="…"` attribute                                 | Routed through the CSS pipeline as a declaration list                              |
 | `<link rel="stylesheet">`                             | Becomes a CSS chunk entry                                                          |
 | `<link rel="modulepreload">`                          | Becomes an independent entry (preloaded, never executed by a sibling)              |
@@ -152,6 +153,58 @@ Two rules make the JavaScript side predictable:
 - With [`output.module`](/configuration/output/#outputmodule) enabled, classic `<script>` tags are auto-upgraded to `type="module"` so the emitted ES module chunks load in the right mode.
 
 Non-JS script types (`application/ld+json`, `importmap`, …), data URIs, and `<style>` with a non-CSS `type` flow through unchanged.
+
+### Preprocessors in inline `<style>` and `<script>`
+
+An inline body whose `lang` names another language is built as a virtual file beside its page, named `inline.<hash>.<lang>`. Your existing rules for that language's files apply to it, with no extra configuration:
+
+**page.html**
+
+```html
+<style lang="scss">
+  @use "./theme/colors";
+  .button {
+    color: colors.$accent;
+    &:hover {
+      background: url("./hover.png");
+    }
+  }
+</style>
+<script lang="ts">
+  import { greet } from "./greet.ts";
+  const name: string = "webpack";
+  greet(name);
+</script>
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: "./page.html",
+  experiments: { html: true, css: true },
+  module: {
+    rules: [
+      { test: /\.s[ac]ss$/, use: "sass-loader" },
+      { test: /\.less$/, use: "less-loader" },
+    ],
+  },
+};
+```
+
+Because the virtual file sits in the page's directory, relative `@use` / `@import` / `import` resolve from the page, loaders that read the extension behave as for a real file (`sass-loader` reads `lang="sass"` as the indented syntax), and the compiled CSS goes through the CSS pipeline like any other `<style>`. `<script lang="ts">` needs no rule at all when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) is on.
+
+The `lang` is used as written: `lang="postcss"` matches `test: /\.postcss$/`, and a body no rule matches is read as CSS (for `<style>`) or JavaScript (for `<script>`), as before. To match a `lang` that can't be a file extension, or the attribute exactly as written, use [`with`](/configuration/module/#rulewith):
+
+```js
+export default {
+  module: {
+    rules: [{ with: { lang: "my dialect" }, use: "my-dialect-loader" }],
+  },
+};
+```
+
+A body without `lang`, or with `lang="css"` / `lang="js"`, is processed exactly as before. `<style type="text/less">` and `<script type="text/typescript">` keep flowing through unchanged — only `lang` opts a body into a loader.
 
 ### Skipping a single URL
 

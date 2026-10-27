@@ -597,6 +597,8 @@ export default {
 
 `sass-loader` compiles to CSS, `postcss-loader` post-processes it, and native CSS handles extraction, `url()`, and CSS Modules from there. The same pattern works for `less-loader`, `stylus-loader`, and friends.
 
+The same rules apply to an inline `<style lang="scss">` in an HTML page — see [Preprocessors in inline `<style>` and `<script>`](/guides/native-html/#preprocessors-in-inline-style-and-script).
+
 ### 7. Server-side rendering (node + web)
 
 For SSR you typically build twice — a `web` bundle for the browser and a `node` bundle for the server — and the CSS Modules class names must match so the server-rendered markup hydrates cleanly on the client. This is what `css-loader`'s `getJSON` was often used to round-trip; with native CSS you avoid the round-trip entirely by making `localIdentName` deterministic across targets.
