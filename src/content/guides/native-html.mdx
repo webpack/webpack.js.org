@@ -201,12 +201,16 @@ export default {
 };
 ```
 
-`<script lang="ts">` needs no rule: [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before. To match any `lang`, including one that can't be a media type, use [`with`](/configuration/module/#rulewith) — it holds the attribute as written:
+`<script lang="ts">` needs no rule: [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
+
+A `lang` webpack knows no media type for is typed `text/x-<lang>`: `x-` marks an unregistered subtype, so it never collides with a type webpack already handles (`text/javascript`, `text/css`, `text/html`). A `lang` that can't be a media type at all (spaces, symbols) leaves the body as plain CSS or JavaScript.
+
+A string `mimetype` condition matches by prefix, so `"text/x-scss"` also matches `lang="scss2"`. Use a regular expression to match exactly one language:
 
 ```js
 export default {
   module: {
-    rules: [{ with: { lang: "my dialect" }, use: "my-dialect-loader" }],
+    rules: [{ mimetype: /^text\/x-postcss$/, use: "postcss-loader" }],
   },
 };
 ```
