@@ -156,15 +156,24 @@ Non-JS script types (`application/ld+json`, `importmap`, …), data URIs, and `<
 
 ### Preprocessors in inline `<style>` and `<script>`
 
-An inline body whose `lang` names another language is built as a virtual file beside its page, named `inline.<hash>.<lang>`. Your existing rules for that language's files apply to it, with no extra configuration:
+An inline body whose `lang` names another language enters the module graph as a `data:` module typed as that language's files, so a [`Rule.mimetype`](/configuration/module/#rulemimetype) rule runs its loader on it — and on no other `<style>` or `<script>` of the page:
+
+| `lang`                   | Mimetype                                 |
+| ------------------------ | ---------------------------------------- |
+| none, `css` / `js`       | `text/css` / `text/javascript`, as today |
+| `scss`, `sass`           | `text/x-scss`, `text/x-sass`             |
+| `less`                   | `text/less`                              |
+| `styl`, `stylus`         | `text/stylus`                            |
+| `ts`, `mts`, `cts`       | `text/typescript`                        |
+| any other (`postcss`, …) | `text/x-<lang>`, e.g. `text/x-postcss`   |
 
 **page.html**
 
 ```html
 <style lang="scss">
-  @use "./theme/colors";
+  $accent: rebeccapurple;
   .button {
-    color: colors.$accent;
+    color: $accent;
     &:hover {
       background: url("./hover.png");
     }
@@ -185,16 +194,14 @@ export default {
   experiments: { html: true, css: true },
   module: {
     rules: [
-      { test: /\.s[ac]ss$/, use: "sass-loader" },
-      { test: /\.less$/, use: "less-loader" },
+      { mimetype: "text/x-scss", use: "sass-loader" },
+      { mimetype: "text/less", use: "less-loader" },
     ],
   },
 };
 ```
 
-Because the virtual file sits in the page's directory, relative `@use` / `@import` / `import` resolve from the page, loaders that read the extension behave as for a real file (`sass-loader` reads `lang="sass"` as the indented syntax), and the compiled CSS goes through the CSS pipeline like any other `<style>`. `<script lang="ts">` needs no rule at all when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) is on.
-
-The `lang` is used as written: `lang="postcss"` matches `test: /\.postcss$/`, and a body no rule matches is read as CSS (for `<style>`) or JavaScript (for `<script>`), as before. To match a `lang` that can't be a file extension, or the attribute exactly as written, use [`with`](/configuration/module/#rulewith):
+`<script lang="ts">` needs no rule: [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before. To match any `lang`, including one that can't be a media type, use [`with`](/configuration/module/#rulewith) — it holds the attribute as written:
 
 ```js
 export default {
@@ -204,7 +211,9 @@ export default {
 };
 ```
 
-A body without `lang`, or with `lang="css"` / `lang="js"`, is processed exactly as before. `<style type="text/less">` and `<script type="text/typescript">` keep flowing through unchanged — only `lang` opts a body into a loader.
+W> A `data:` module has no file path. Loaders see the page's directory as `this.context`, but a loader that locates files from `this.resourcePath` — as `sass-loader`, `less-loader` and `stylus-loader` currently do — can't resolve a relative `@use` / `@import` from an inline body, and `sass-loader` reads `lang="sass"` as SCSS unless its options ask for the indented syntax. Keep partial-importing styles in a stylesheet file.
+
+`<style type="text/less">` and `<script type="text/typescript">` keep flowing through unchanged — only `lang` opts a body into a loader.
 
 ### Skipping a single URL
 

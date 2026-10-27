@@ -2183,6 +2183,8 @@ export default {
 
 `application/json`, `text/javascript`, `application/javascript`, `application/node` and `application/wasm` are already included by default as mimetype.
 
+With [`experiments.html`](/configuration/experiments/#experimentshtml), an inline `<style lang>` / `<script lang>` body is a `data:` module typed as its language's files (`text/x-scss`, `text/less`, `text/typescript`, …), so `mimetype` registers a loader for it — see [Preprocessors in inline `<style>` and `<script>`](/guides/native-html/#preprocessors-in-inline-style-and-script).
+
 ## Rule.oneOf
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
