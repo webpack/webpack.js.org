@@ -162,6 +162,26 @@ Put a `webpackIgnore` comment immediately before a tag to leave its URLs alone �
 <script src="https://cdn.example.com/analytics.js"></script>
 ```
 
+### Pages with a `<base href>`
+
+The first `<base href>` in the document changes how the relative URLs after it are bundled:
+
+| `<base href>`                                            | Relative URLs after it                                                                                        |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Relative (`assets/`)                                     | Resolved through the base (`assets/logo.png`) and still bundled                                               |
+| Root-relative (`/`, `/app/`)                             | Treated as the URL where the page's own directory is served, so resolved and bundled as if there were no base |
+| Absolute or protocol-relative (`https://cdn/`, `//cdn/`) | Point outside the build, so they are left untouched                                                           |
+
+A `<base href="/">` copied from an `html-webpack-plugin` template therefore needs no change. To keep bundling the URLs of a page whose base points to another origin, put a `webpackIgnore` comment before the `<base>` tag itself; the browser still honors the tag, so the emitted URLs then resolve against that origin:
+
+```html
+<!-- webpackIgnore: true -->
+<base href="https://cdn.example.com/" />
+<script src="./src/index.js"></script>
+```
+
+T> Before webpack 5.113.0, a root-relative base made webpack leave every relative URL after it untouched without a warning, so a page with `<base href="/">` bundled nothing.
+
 ### Customizing which attributes are URLs
 
 [`module.parser.html.sources`](/configuration/module/#moduleparserhtmlsources) controls the whole list. Use the literal `"..."` to keep the built-in defaults and add your own on top:
@@ -238,7 +258,7 @@ export default {
 
 ## Configuring the generated page
 
-Every option below lives under [`output.html`](/configuration/output/#outputhtml) and applies to webpack-generated pages. They can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor):
+Every option below lives under [`output.html`](/configuration/output/#outputhtml) and applies to webpack-generated pages. They can be overridden per entry through the [entry descriptor](/configuration/entry-context/#entry-descriptor). Since webpack 5.113.0, an entry's `title`, `meta` and `base` also apply to an authored `.html` entry (`{ import: "./src/index.html", html: { base: "/app/" } }`):
 
 **webpack.config.js**
 
@@ -972,7 +992,7 @@ export default {
 
 ### Output options
 
-Everything under [`output.html`](/configuration/output/#outputhtml) describes the page webpack generates for a JavaScript entrypoint. Authored pages keep their own markup — of these, only `inject`, `inline`, `integrity` and `csp` affect what is injected into them; `scriptLoading` applies to generated pages only.
+Everything under [`output.html`](/configuration/output/#outputhtml) describes the page webpack generates for a JavaScript entrypoint. Authored pages keep their own markup — of these, `title`, `meta` and `base` are added only where the page lacks them, `inject`, `inline`, `integrity` and `csp` affect what is injected into them, and `scriptLoading` applies to generated pages only.
 
 | Option                                                                       | Type                                         | Default                                  | Description                                                |
 | ---------------------------------------------------------------------------- | -------------------------------------------- | ---------------------------------------- | ---------------------------------------------------------- |
