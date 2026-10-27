@@ -459,6 +459,13 @@ export default function Support({ rank, type }) {
       }
 
       if (typeof lim === "number") {
+        // Keep the newest supporters, not the largest
+        result = [...result];
+        result.sort(
+          (a, b) =>
+            new Date(b.firstDonation).getTime() -
+            new Date(a.firstDonation).getTime(),
+        );
         result = result.slice(0, lim);
       }
 
