@@ -201,7 +201,7 @@ export default {
 };
 ```
 
-`<script lang="ts">` needs no rule: [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
+`<script lang="ts">` needs no rule when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript` — by default on Node.js 22.6+ when no rule already handles `.ts` files. Otherwise register a loader for it, e.g. `{ mimetype: "text/typescript", use: "ts-loader" }`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
 
 A `lang` webpack knows no media type for is typed `text/x-<lang>`: `x-` marks an unregistered subtype, so it never collides with a type webpack already handles (`text/javascript`, `text/css`, `text/html`). A `lang` that can't be a media type at all (spaces, symbols) leaves the body as plain CSS or JavaScript.
 
