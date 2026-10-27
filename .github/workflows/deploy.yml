@@ -26,4 +26,6 @@ jobs:
             echo "::error::The VERCEL_DEPLOY_HOOK_URL secret is not set"
             exit 1
           fi
-          curl --fail --silent --show-error --request POST "$VERCEL_DEPLOY_HOOK_URL"
+          # printf is a shell builtin, so the secret never appears in a process's argv
+          printf 'url = "%s"\nrequest = POST\n' "$VERCEL_DEPLOY_HOOK_URL" |
+            curl --fail --silent --show-error --config -
