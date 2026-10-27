@@ -136,6 +136,7 @@ By default the parser treats a known set of URL-bearing attributes as dependenci
 | `<script type="module" src>`                          | Becomes an ES module chunk entry                                                   |
 | `<script>…</script>` (inline)                         | The body becomes its own entry; the tag is rewritten to `<script src>`             |
 | `<style>…</style>` (inline)                           | Routed through the CSS pipeline; `@import` / `url()` resolved, text written back   |
+| `<style lang>`, `<script lang>` (inline)              | Same, after its [language's rules](#preprocessors-in-inline-style-and-script)      |
 | `style="…"` attribute                                 | Routed through the CSS pipeline as a declaration list                              |
 | `<link rel="stylesheet">`                             | Becomes a CSS chunk entry                                                          |
 | `<link rel="modulepreload">`                          | Becomes an independent entry (preloaded, never executed by a sibling)              |
@@ -152,6 +153,71 @@ Two rules make the JavaScript side predictable:
 - With [`output.module`](/configuration/output/#outputmodule) enabled, classic `<script>` tags are auto-upgraded to `type="module"` so the emitted ES module chunks load in the right mode.
 
 Non-JS script types (`application/ld+json`, `importmap`, …), data URIs, and `<style>` with a non-CSS `type` flow through unchanged.
+
+### Preprocessors in inline `<style>` and `<script>`
+
+An inline body whose `lang` names another language enters the module graph as a `data:` module typed as that language's files, so a [`Rule.mimetype`](/configuration/module/#rulemimetype) rule runs its loader on it — and on no other `<style>` or `<script>` of the page:
+
+| `lang`                   | Mimetype                                 |
+| ------------------------ | ---------------------------------------- |
+| none, `css` / `js`       | `text/css` / `text/javascript`, as today |
+| `scss`, `sass`           | `text/x-scss`, `text/x-sass`             |
+| `less`                   | `text/less`                              |
+| `styl`, `stylus`         | `text/stylus`                            |
+| `ts`, `mts`, `cts`       | `text/typescript`                        |
+| any other (`postcss`, …) | `text/x-<lang>`, e.g. `text/x-postcss`   |
+
+**page.html**
+
+```html
+<style lang="scss">
+  $accent: rebeccapurple;
+  .button {
+    color: $accent;
+    &:hover {
+      background: url("./hover.png");
+    }
+  }
+</style>
+<script lang="ts">
+  import { greet } from "./greet.ts";
+  const name: string = "webpack";
+  greet(name);
+</script>
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: "./page.html",
+  experiments: { html: true, css: true },
+  module: {
+    rules: [
+      { mimetype: "text/x-scss", use: "sass-loader" },
+      { mimetype: "text/less", use: "less-loader" },
+    ],
+  },
+};
+```
+
+`<script lang="ts">` needs no rule when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript` — by default on Node.js 22.6+ when no rule already handles `.ts` files. Otherwise register a loader for it, e.g. `{ mimetype: "text/typescript", use: "ts-loader" }`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
+
+A `lang` webpack knows no media type for is typed `text/x-<lang>`: `x-` marks an unregistered subtype, so it never collides with a type webpack already handles (`text/javascript`, `text/css`, `text/html`). A `lang` that can't be a media type at all (spaces, symbols) leaves the body as plain CSS or JavaScript.
+
+A string `mimetype` condition matches by prefix, so `"text/x-scss"` also matches `lang="scss2"`. Use a regular expression to match exactly one language:
+
+```js
+export default {
+  module: {
+    rules: [{ mimetype: /^text\/x-postcss$/, use: "postcss-loader" }],
+  },
+};
+```
+
+W> A `data:` module has no file path. Loaders see the page's directory as `this.context`, but a loader that locates files from `this.resourcePath` — as `sass-loader`, `less-loader` and `stylus-loader` currently do — can't resolve a relative `@use` / `@import` from an inline body, and `sass-loader` reads `lang="sass"` as SCSS unless its options ask for the indented syntax. Keep partial-importing styles in a stylesheet file.
+
+`<style type="text/less">` and `<script type="text/typescript">` keep flowing through unchanged — only `lang` opts a body into a loader.
 
 ### Skipping a single URL
 
