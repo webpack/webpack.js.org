@@ -81,6 +81,8 @@ The following string values are supported:
 | `'size'`          | Numeric ids focused on minimal initial download size.                                                                                 |
 | `'total-size'`    | numeric ids focused on minimal total download size.                                                                                   |
 
+W> A custom chunk id must not be an `Object.prototype` key such as `constructor`, `toString` or `__proto__`. The chunk loaders keep loaded chunks in a plain object, so such a chunk can count as already loaded and never be fetched. webpack's built-in algorithms never produce these ids.
+
 **webpack.config.js**
 
 ```js
