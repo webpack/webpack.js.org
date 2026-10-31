@@ -57,6 +57,19 @@ export default function Page(props) {
 
   useEffect(() => {
     let observer;
+    let focusTimeout;
+
+    const focusHeading = (el) => {
+      if (!el) return;
+      const heading = el.closest("h1, h2, h3, h4, h5, h6") || el;
+      if (!heading.hasAttribute("tabindex")) {
+        heading.setAttribute("tabindex", "-1");
+      }
+      focusTimeout = setTimeout(() => {
+        heading.focus();
+      }, 100);
+    };
+
     if (contentLoaded) {
       if (hash) {
         const target = document.querySelector("#md-content");
@@ -64,15 +77,18 @@ export default function Page(props) {
         // 1. server side rendered page, so hash target is already there
         // Note: Why this change because we use getElementById instead of querySelector(hash) here because
         // CSS selectors cannot start with a digit (e.g. #11-in-scope is invalid)
-        if (document.getElementById(hash.slice(1))) {
-          document.getElementById(hash.slice(1)).scrollIntoView();
+        const element = document.getElementById(hash.slice(1));
+        if (element) {
+          element.scrollIntoView();
+          focusHeading(element);
         } else {
           // 2. dynamic loaded content
           // we need to observe the dom change to tell if hash exists
           observer = new MutationObserver(() => {
-            const element = document.getElementById(hash.slice(1));
-            if (element) {
-              element.scrollIntoView();
+            const el = document.getElementById(hash.slice(1));
+            if (el) {
+              el.scrollIntoView();
+              focusHeading(el);
               observer.disconnect();
             }
           });
@@ -89,6 +105,9 @@ export default function Page(props) {
     return () => {
       if (observer) {
         observer.disconnect();
+      }
+      if (focusTimeout) {
+        clearTimeout(focusTimeout);
       }
     };
   }, [contentLoaded, pathname, hash]);

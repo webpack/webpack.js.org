@@ -57,6 +57,14 @@ function handleAnchorClick(event, anchorId) {
     return;
   }
 
+  // Cross-page anchor clicks navigate to another page; focus is handled after destination renders.
+  const isSamePage =
+    (event.currentTarget.pathname || "").replace(/\/$/, "") ===
+    (window.location.pathname || "").replace(/\/$/, "");
+  if (!isSamePage) {
+    return;
+  }
+
   const target = document.getElementById(anchorId);
   if (!target) {
     return;

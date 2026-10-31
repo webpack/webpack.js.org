@@ -8,6 +8,7 @@ import { MemoryRouter } from "react-router";
 import SidebarItem from "./SidebarItem.jsx";
 
 function renderWithRouter(ui, { route = "/" } = {}) {
+  window.history.pushState(null, "", route);
   return render(<MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>);
 }
 
@@ -275,6 +276,49 @@ describe("SidebarItem", () => {
 
       window.location.hash = "";
       heading.remove();
+      jest.useRealTimers();
+    });
+
+    it("does not prevent navigation or scroll when clicking an anchor for a different page with same hash", () => {
+      jest.useFakeTimers();
+      const currentHeading = document.createElement("h2");
+      currentHeading.id = "shared-hash";
+      currentHeading.scrollIntoView = () => {};
+      const scrollSpy = jest.spyOn(currentHeading, "scrollIntoView");
+      document.body.appendChild(currentHeading);
+
+      window.location.hash = "#shared-hash";
+
+      const anchors = [
+        {
+          id: "shared-hash",
+          title: "Shared Hash",
+          title2: "Shared Hash",
+          level: 2,
+        },
+      ];
+
+      // Item is for /guides/getting-started/, but current page is /concepts/
+      renderWithRouter(
+        <SidebarItem
+          {...defaultProps}
+          url="/guides/getting-started/"
+          anchors={anchors}
+          currentPage="/concepts/"
+        />,
+        { route: "/concepts/#shared-hash" },
+      );
+
+      const link = screen.getByText("Shared Hash");
+      fireEvent.click(link);
+
+      expect(scrollSpy).not.toHaveBeenCalled();
+
+      jest.advanceTimersByTime(100);
+      expect(document.activeElement).not.toBe(currentHeading);
+
+      window.location.hash = "";
+      currentHeading.remove();
       jest.useRealTimers();
     });
   });
