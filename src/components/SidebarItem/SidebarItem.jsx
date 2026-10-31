@@ -42,6 +42,42 @@ function scrollTop(event) {
   }
 }
 
+/**
+ * Handle anchor link click to scroll and move focus to target heading.
+ *
+ * @param {import("react").MouseEvent} event - The click event
+ * @param {string} anchorId - The target anchor element id
+ */
+function handleAnchorClick(event, anchorId) {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+    return;
+  }
+
+  if (!anchorId) {
+    return;
+  }
+
+  const target = document.getElementById(anchorId);
+  if (!target) {
+    return;
+  }
+
+  const heading = target.closest("h1, h2, h3, h4, h5, h6") || target;
+
+  if (!heading.hasAttribute("tabindex")) {
+    heading.setAttribute("tabindex", "-1");
+  }
+
+  if (window.location.hash === `#${anchorId}`) {
+    event.preventDefault();
+    target.scrollIntoView();
+  }
+
+  setTimeout(() => {
+    heading.focus();
+  }, 100);
+}
+
 function Anchors({ anchors, url }) {
   return (
     <ul className="relative hidden flex-[0_0_100%] flex-wrap my-[0.35em] pl-6 overflow-hidden list-none leading-[19px] before:content-[''] before:absolute before:h-[calc(100%-0.6em)] before:top-0 before:left-6 before:border-l before:border-dashed before:border-[#777676] group-data-[open]/item:flex">
@@ -54,6 +90,7 @@ function Anchors({ anchors, url }) {
           <NavLink
             to={generateAnchorURL(url, anchor)}
             className="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+            onClick={(event) => handleAnchorClick(event, anchor.id)}
           >
             {anchor.title2}
           </NavLink>
