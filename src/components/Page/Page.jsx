@@ -1,6 +1,6 @@
 // Import External Dependencies
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 
 // Import Components
@@ -54,6 +54,29 @@ export default function Page(props) {
 
   const { hash, pathname } = useLocation();
   const isBlogIndex = pathname === "/blog/";
+  const focusChanged = useRef(false);
+
+  useEffect(() => {
+    focusChanged.current = false;
+    if (!hash) return;
+
+    const handleFocusIn = (event) => {
+      const element = document.getElementById(hash.slice(1));
+      const heading = element?.closest("h1, h2, h3, h4, h5, h6") || element;
+      if (
+        heading &&
+        (event.target === heading || heading.contains(event.target))
+      ) {
+        return;
+      }
+      focusChanged.current = true;
+    };
+
+    document.addEventListener("focusin", handleFocusIn);
+    return () => {
+      document.removeEventListener("focusin", handleFocusIn);
+    };
+  }, [pathname, hash]);
 
   useEffect(() => {
     let observer;
@@ -66,7 +89,9 @@ export default function Page(props) {
         heading.setAttribute("tabindex", "-1");
       }
       focusTimeout = setTimeout(() => {
-        heading.focus();
+        if (!focusChanged.current) {
+          heading.focus();
+        }
       }, 100);
     };
 
