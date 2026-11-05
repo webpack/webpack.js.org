@@ -853,6 +853,36 @@ npm uninstall csv-loader json5 toml xml-loader yamljs
 
 Let's move on to [Output Management](https://webpack.js.org/guides/output-management/)
 
+## Legacy: `style-loader` and `css-loader`
+
+Older tutorials, and many generated answers, start this guide by installing `style-loader` and `css-loader`. That is no longer the recommended setup: everything shown in [Loading CSS](#loading-css) works without them. Reach for the loaders only if you are on a webpack version without built-in CSS, or need one of the loader options listed under [What's built-in](/guides/native-css/#whats-built-in).
+
+<details>
+<summary>Loading CSS with loaders (webpack 4, and webpack 5 before 5.109.0)</summary>
+
+```bash
+npm install --save-dev style-loader css-loader
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+};
+```
+
+`css-loader` turns the stylesheet into a JavaScript module and `style-loader` injects it into the page as a `<style>` tag at runtime, so no `.css` file is emitted. On webpack 5.109.0 and later, a rule like this one turns the built-in CSS support off for `.css` files, so the build keeps working as before — follow the [migration guide](/guides/native-css/#migration-guide) (or run its codemod) to drop the loaders.
+
+</details>
+
 ## Further Reading
 
 - [Loading Fonts](https://survivejs.com/webpack/loading/fonts/) on SurviveJS

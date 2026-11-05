@@ -9,11 +9,17 @@ contributors:
 
 This guide shows how to use webpack's native CSS handling with `experiments.css`, and how to migrate an existing setup off `css-loader`, `style-loader`, and `mini-css-extract-plugin`.
 
-T> `experiments.css` is still experimental. It is expected to become the default in webpack v6, but behavior can still change while development continues.
+T> Native CSS is the recommended way to load CSS in webpack 5.109.0 and later. It still lives under `experiments.css` and is expected to become the unconditional default in webpack v6, so details can change while development continues.
 
 ## Getting Started
 
-Enable native CSS support in your webpack configuration:
+On webpack 5.109.0 or later there is nothing to install and nothing to configure — import a `.css` file and webpack handles it:
+
+```js
+import "./styles.css";
+```
+
+[`experiments.css`](/configuration/experiments/#experimentscss) defaults to `'auto'`, which turns the built-in support on as long as no `module.rules` entry already claims `.css` files. Set it to `true` yourself only when you add such a rule — for example to run `postcss-loader` on `.css` files:
 
 **webpack.config.js**
 
@@ -25,7 +31,7 @@ export default {
 };
 ```
 
-With this option enabled, webpack understands `.css` files as first-class modules: it parses them itself instead of handing them to a loader.
+Either way, webpack understands `.css` files as first-class modules: it parses them itself instead of handing them to a loader.
 
 ## What's built-in
 
@@ -80,6 +86,81 @@ Native CSS introduces four [`Rule.type`](/configuration/module/#ruletype) values
 | `css/auto`   | Picks `css/module` for `*.module.css` / `*.modules.css`, otherwise plain `css` (global, no CSS Modules parsing) | `modules.auto: true`     |
 
 The default rule webpack adds for `/\.css$/i` is `css/auto`, so `*.module.css` files become CSS Modules and everything else stays global — matching the most common `css-loader` configuration out of the box.
+
+## How `css/auto` handles each file
+
+`css/auto` decides per file, by name: a resource path matching `/\.modules?\.[^.]+$/i` is parsed as a CSS Module (`css/module`), anything else as plain global CSS (`css`). The test looks at the file name only, with any extension — so it applies just as well to the output of a [preprocessor rule](#6-keep-using-preprocessors-sass-less-postcss) as to `.css` files.
+
+Given this project, with no CSS configuration at all apart from one Sass rule:
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["sass-loader"],
+        type: "css/auto",
+      },
+    ],
+  },
+};
+```
+
+**src/index.js**
+
+```js
+import "./reset.css";
+import "./layout.scss";
+import * as button from "./button.module.scss";
+import * as card from "./card.module.css";
+```
+
+each file is handled like this (class names from a project whose `package.json` `name` is `my-app`):
+
+| File                 | Parsed as             | What the `import` gives JavaScript | Emitted selector, `development`         | Emitted selector, `production` |
+| -------------------- | --------------------- | ---------------------------------- | --------------------------------------- | ------------------------------ |
+| `reset.css`          | `css` — global        | nothing (side-effect import)       | `.title` — unchanged                    | `.title`                       |
+| `layout.scss`        | `css` — global        | nothing (side-effect import)       | `.layout .sidebar` — unchanged          | `.layout .sidebar`             |
+| `button.module.scss` | `css/module` — scoped | `button.button`                    | `.my-app-src_button_module_scss-button` | `.pRFShR`                      |
+| `card.module.css`    | `css/module` — scoped | `card.card`, `card["card-title"]`  | `.my-app-src_card_module_css-card`      | `.-Nx8GA`                      |
+
+All four end up in the same extracted `main.css`, in import order. Inside a CSS Module, `:global(.theme-dark) .card` keeps `.theme-dark` as written and scopes only `.card`, and `composes` makes the exported value a space-separated list of class names.
+
+To treat a file differently from what its name says, give its rule an explicit type instead: `css/module` makes every matched file scoped, `css/global` keeps selectors global but honors `:local()`, and `css` disables CSS Modules parsing entirely.
+
+### Naming the scoped classes
+
+Scoped class names come from the [`localIdentName`](/configuration/module/#modulegenerator) generator option. It sits directly on the generator options for the module type — `module.generator["css/auto"]` for every file the default rule handles, or a rule's own `generator` for a subset:
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    generator: {
+      "css/auto": {
+        localIdentName: "[local]_[hash:base64url:5]",
+      },
+    },
+  },
+};
+```
+
+| `localIdentName`                      | `.card` in `src/card.module.css` becomes | Notes                                                                                |
+| ------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------ |
+| `"[uniqueName]-[id]-[local]"`         | `.my-app-src_card_module_css-card`       | Default in `development`. `[id]` is the module id, so it can change between builds.  |
+| `"[fullhash]"`                        | `.-Nx8GA`                                | Default in `production`. The local ident hash, not the compilation hash — see below. |
+| `"[local]_[hash:base64url:5]"`        | `.card_-Nx8G`                            | Readable and short. `[hash]` here is the same local ident hash, cut to 5 characters. |
+| `"[uniqueName]-[local]-[fullhash:6]"` | `.my-app-card--Nx8GA`                    | Prefixes classes when several webpack builds share one page.                         |
+
+The local ident hash is computed from [`localIdentHashSalt`](#generator-options), [`output.uniqueName`](/configuration/output/#outputuniquename), the file path relative to [`context`](/configuration/entry-context/#context) and the local name, so it is stable across builds and across `web` / `node` targets.
+
+T> Prefer the `base64url` digest (or the default `[fullhash]`) over `base64` in a template: `base64` can produce `+` and `/`, which are valid in a class name only once escaped, so the stylesheet ends up with selectors such as `.card_Hsi\/i`.
+
+W> [`exportsConvention`](/configuration/module/#modulegenerator) renames the local _before_ `[local]` is interpolated. With `"camel-case-only"`, `.card-title` is exported as `cardTitle` **and** emitted as `.cardTitle` when the template contains `[local]` — keep that in mind if global CSS or tests target the original spelling.
 
 ## CSS Modules
 
@@ -202,6 +283,188 @@ export default {
   },
 };
 ```
+
+## CSS and chunks (`splitChunks`)
+
+With the default `exportType: "link"`, CSS follows the [chunk graph](/concepts/under-the-hood/#chunks) exactly like JavaScript does: every chunk that contains CSS modules gets its own `.css` file, named by [`output.cssFilename`](/configuration/output/#outputcssfilename) for initial chunks and [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename) for the rest. No plugin decides where styles go — [`optimization.splitChunks`](/plugins/split-chunks-plugin/) does, the same way it does for scripts.
+
+Take two entries that both import `shared.css` and `card.module.css`, plus one stylesheet of their own each, and a lazily imported `lazy.css`:
+
+```js
+// home.js
+import "./shared.css";
+import "./card.module.css";
+import "./home.css";
+
+import("./lazy.css");
+```
+
+| `optimization.splitChunks`                                          | Emitted CSS                                        | Result                                                                                               |
+| ------------------------------------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| default (`chunks: "async"`)                                         | `home.css`, `about.css`, `[id].css` for `lazy.css` | Shared styles are **duplicated** into each entry's stylesheet; the dynamic import gets its own file. |
+| `{ chunks: "all" }`                                                 | `home.css`, `about.css`, plus a shared `[id].css`  | Shared modules move to a common chunk once they pass `minSize`; each page loads two stylesheets.     |
+| a cache group with `type: /^css/`, `chunks: "all"`, `enforce: true` | one `styles.css`                                   | Every stylesheet in one file, loaded by every entry.                                                 |
+
+The loading side needs no configuration: an entry's initial CSS chunks are listed in the entrypoint (and injected by [native HTML](#css-referenced-from-html) when it builds the page), and the runtime inserts a `<link>` for an async chunk's CSS before it resolves the `import()`.
+
+### Splitting by module type
+
+A cache group's [`type`](/plugins/split-chunks-plugin/#splitchunkscachegroupscachegrouptype) option selects modules by their module type, which for native CSS is the type the matching rule assigned — `css/auto` for the default rule, but `css/module` or `css/global` for a rule that sets one explicitly. Use a regular expression so the group catches all of them:
+
+**webpack.config.js**
+
+```js
+export default {
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          // Matches css, css/auto, css/module and css/global.
+          type: /^css/,
+          name: "styles",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
+};
+```
+
+To keep vendor styles in their own long-cached file instead, combine `type` with `test`:
+
+```js
+export default {
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendorStyles: {
+          type: /^css/,
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor-styles",
+          chunks: "all",
+          enforce: true,
+        },
+      },
+    },
+  },
+};
+```
+
+T> Moving CSS modules between chunks can change the order in which rules reach the page. When two chunks import the same stylesheets in different orders, webpack keeps a consistent order and reports a `Conflicting order` warning; fix it by importing shared stylesheets in the same order everywhere, or by grouping them into one chunk as above.
+
+## Preprocessors, PostCSS and Tailwind
+
+Native CSS replaces `css-loader`, `style-loader` and `mini-css-extract-plugin` — not the tools that _produce_ CSS. Sass, Less, Stylus and PostCSS keep their loaders, and the rule's [`type`](/configuration/module/#ruletype) hands what they output straight to webpack's CSS pipeline, which then resolves `@import` and `url()`, applies CSS Modules, extracts, hashes and minifies it. The loaders that used to sit between them and the page drop out of the chain:
+
+```diff
+ {
+   test: /\.s[ac]ss$/i,
+-  use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
++  use: ["postcss-loader", "sass-loader"],
++  type: "css/auto",
+ }
+```
+
+| Tool              | Rule                                                              | `experiments.css: true` needed?                                     |
+| ----------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Sass / SCSS       | `test: /\.s[ac]ss$/i`, `use: ["sass-loader"]`, `type: "css/auto"` | No                                                                  |
+| Less              | `test: /\.less$/i`, `use: ["less-loader"]`, `type: "css/auto"`    | No                                                                  |
+| Stylus            | `test: /\.styl$/i`, `use: ["stylus-loader"]`, `type: "css/auto"`  | No                                                                  |
+| PostCSS, Tailwind | `test: /\.css$/i`, `use: ["postcss-loader"]`, `type: "css/auto"`  | **Yes** — a rule for `.css` files switches the `'auto'` default off |
+
+The last column follows from how [`'auto'`](/configuration/experiments/#experimentscss) works: any rule that matches `.css` files with a loader or a `type` counts as "this project handles CSS itself", and the build then fails with `No parser registered for css/auto` unless you set `experiments.css: true`. Rules for `.scss`, `.less` or `.styl` don't match `.css` files, so they leave the default alone.
+
+### Sass
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["sass-loader"],
+        type: "css/auto",
+      },
+    ],
+  },
+};
+```
+
+One rule covers both kinds of file: [`css/auto`](#how-cssauto-handles-each-file) checks the file name, so `button.module.scss` becomes a CSS Module and `layout.scss` stays global. Two Sass specifics to know about:
+
+- **`url()` in partials.** Sass inlines a partial without rewriting its URLs, so `url("./img/icon.png")` inside `partials/_icon.scss` is resolved relative to the `.scss` file that was imported from JavaScript — just as it was with `css-loader`. Write such URLs relative to the entry file, use a [`resolve.alias`](/configuration/resolve/#resolvealias), or add [`resolve-url-loader`](https://github.com/bholloway/resolve-url-loader), which works in the native chain unchanged:
+
+  ```js
+  export default {
+    module: {
+      rules: [
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            "resolve-url-loader",
+            // resolve-url-loader needs the source map to know which file a URL came from.
+            { loader: "sass-loader", options: { sourceMap: true } },
+          ],
+          type: "css/auto",
+        },
+      ],
+    },
+  };
+  ```
+
+- **Source maps.** The maps a loader returns are passed on, so with a [`devtool`](/configuration/devtool/) set, the emitted `.css.map` points at the original `.scss` partials.
+
+Less and Stylus work the same way with `less-loader` and `stylus-loader`.
+
+### PostCSS and Tailwind CSS
+
+PostCSS runs on plain `.css` files, so its rule needs `experiments.css: true`. For Tailwind CSS v4:
+
+```bash
+npm install --save-dev tailwindcss @tailwindcss/postcss postcss postcss-loader
+```
+
+**postcss.config.mjs**
+
+```js
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+**src/styles.css**
+
+```css
+@import "tailwindcss";
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  experiments: { css: true },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["postcss-loader"],
+        type: "css/auto",
+      },
+    ],
+  },
+};
+```
+
+`postcss-loader` runs Tailwind, which expands `@import "tailwindcss"` into the utilities your sources use, and webpack bundles the result like any other stylesheet — `*.module.css` files processed by the same rule are still CSS Modules. Tailwind CSS v3 needs the same webpack configuration, with `tailwindcss` (and its `@tailwind` directives) in place of `@tailwindcss/postcss`.
+
+To run PostCSS over Sass output too, list it before the preprocessor — loaders run right to left, so Sass compiles first: `use: ["postcss-loader", "sass-loader"]`.
+
+T> If PostCSS only ran `autoprefixer`, you may not need it: the built-in minimizer adds and removes [vendor prefixes](#vendor-prefixes) for your browserslist targets in production. Likewise, [`@custom-media` and `@custom-selector`](#custom-media-and-custom-selectors) are resolved without a plugin.
 
 ## Custom media and custom selectors
 
@@ -576,26 +839,29 @@ Notes on `style-loader` options: `injectType: "linkTag"` corresponds to the defa
 
 ### 6. Keep using preprocessors (Sass, Less, PostCSS)
 
-Native CSS replaces the CSS loaders, not preprocessor loaders. Keep the preprocessor loader in `use` and set the rule's `type` to `css/auto` so webpack treats the loader's output as CSS:
+Native CSS replaces the CSS loaders, not preprocessor loaders. Remove `style-loader` / `MiniCssExtractPlugin.loader` and `css-loader` from the chain, keep the rest, and set the rule's `type` to `css/auto` so webpack treats the loader's output as CSS:
 
 **webpack.config.js**
 
-```js
-export default {
-  experiments: { css: true },
-  module: {
-    rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: ["postcss-loader", "sass-loader"],
-        type: "css/auto",
-      },
-    ],
-  },
-};
+```diff
+-import MiniCssExtractPlugin from "mini-css-extract-plugin";
+-
+ export default {
+   module: {
+     rules: [
+       {
+         test: /\.s[ac]ss$/i,
+-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"],
++        use: ["postcss-loader", "sass-loader"],
++        type: "css/auto",
+       },
+     ],
+   },
+-  plugins: [new MiniCssExtractPlugin()],
+ };
 ```
 
-`sass-loader` compiles to CSS, `postcss-loader` post-processes it, and native CSS handles extraction, `url()`, and CSS Modules from there. The same pattern works for `less-loader`, `stylus-loader`, and friends.
+`sass-loader` compiles to CSS, `postcss-loader` post-processes it, and native CSS handles extraction, `url()`, and CSS Modules from there. The same pattern works for `less-loader`, `stylus-loader`, and friends. If you split `*.module.scss` and other Sass files into two rules for `css-loader`'s `modules` option, a single `css/auto` rule now covers both. [Preprocessors, PostCSS and Tailwind](#preprocessors-postcss-and-tailwind) covers when `experiments.css: true` is needed, Tailwind CSS, and `url()` in Sass partials.
 
 For an inline `<style lang="scss">` in an HTML page, register the loader by `mimetype` instead — see [Preprocessors in inline `<style>` and `<script>`](/guides/native-html/#preprocessors-in-inline-style-and-script).
 
@@ -881,7 +1147,7 @@ import * as card from "./card.module.css"; // scoped
 
 ### Tailwind CSS (or any PostCSS chain)
 
-Native CSS replaces the CSS loaders, not PostCSS. Keep `postcss-loader` and give the rule a CSS module type so webpack handles what comes out of it:
+Keep `postcss-loader` and give the rule a CSS module type so webpack handles what comes out of it — the full Tailwind setup is under [PostCSS and Tailwind CSS](#postcss-and-tailwind-css):
 
 **webpack.config.js**
 
@@ -908,28 +1174,23 @@ T> Setting `experiments.css: true` explicitly matters here: with the `'auto'` de
 
 ```js
 export default {
-  experiments: { css: true },
   module: {
     rules: [
       {
-        test: /\.module\.s[ac]ss$/i,
-        use: ["sass-loader"],
-        type: "css/module",
-      },
-      {
         test: /\.s[ac]ss$/i,
-        exclude: /\.module\.s[ac]ss$/i,
         use: ["sass-loader"],
-        type: "css/global",
+        type: "css/auto",
       },
     ],
   },
 };
 ```
 
+`card.module.scss` is scoped and `layout.scss` is global. To scope every Sass file regardless of its name, use `type: "css/module"` instead.
+
 ### Group every stylesheet into one file
 
-By default CSS follows the chunk graph, so each entry gets its own stylesheet. A [cache group](/plugins/split-chunks-plugin/#splitchunkscachegroups) keyed on the CSS module type collects them all into one instead:
+By default CSS follows the chunk graph, so each entry gets its own stylesheet. A [cache group](/plugins/split-chunks-plugin/#splitchunkscachegroups) keyed on the CSS module type collects them all into one instead — see [CSS and chunks](#css-and-chunks-splitchunks) for the other layouts:
 
 **webpack.config.js**
 
@@ -945,7 +1206,7 @@ export default {
     splitChunks: {
       cacheGroups: {
         styles: {
-          type: "css/auto",
+          type: /^css/,
           name: "styles",
           chunks: "all",
           enforce: true,
@@ -1002,7 +1263,7 @@ Webpack looks for a `style` field in the package's `package.json` and falls back
 
 ## Experimental status & known limitations
 
-`experiments.css` is explicitly experimental — treat it as opt-in and test carefully before a broad rollout.
+Native CSS is on by default for new projects, but it still sits under `experiments`: test an existing setup before migrating it wholesale.
 
 - APIs and behavior may still evolve before webpack v6 defaults.
 - A few loader options have no drop-in switch: `css-loader`'s `localIdentRegExp` and filter callbacks, and `style-loader`'s `attributes` / `insert` / `styleTagTransform`. Keep the loader for files that need them. (`getLocalIdent` maps to the `localIdentName` function form, and `getJSON`/SSR is covered by [matching class names across targets](#7-server-side-rendering-node--web).)
