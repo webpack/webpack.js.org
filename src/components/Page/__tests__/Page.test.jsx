@@ -39,4 +39,67 @@ describe("Page component", () => {
     );
     expect(errorElement).toBeTruthy();
   });
+
+  it("focuses heading matching URL hash on render", async () => {
+    jest.useFakeTimers();
+
+    const content = () => (
+      <div>
+        <h2>
+          <span id="target-section" />
+          Target Section
+        </h2>
+      </div>
+    );
+
+    window.HTMLElement.prototype.scrollIntoView = () => {};
+
+    render(
+      <MemoryRouter initialEntries={["/guides/#target-section"]}>
+        <Page content={content} title="Guides" path="/guides/" />
+      </MemoryRouter>,
+    );
+
+    const heading = screen.getByRole("heading", { name: "Target Section" });
+
+    jest.advanceTimersByTime(100);
+
+    expect(heading.getAttribute("tabindex")).toBe("-1");
+    expect(document.activeElement).toBe(heading);
+
+    jest.useRealTimers();
+  });
+
+  it("does not steal focus if the user changes focus before hash focus runs", async () => {
+    jest.useFakeTimers();
+
+    const content = () => (
+      <div>
+        <h2>
+          <span id="target-section" />
+          Target Section
+        </h2>
+        <input data-testid="search-input" />
+      </div>
+    );
+
+    window.HTMLElement.prototype.scrollIntoView = () => {};
+
+    render(
+      <MemoryRouter initialEntries={["/guides/#target-section"]}>
+        <Page content={content} title="Guides" path="/guides/" />
+      </MemoryRouter>,
+    );
+
+    const input = screen.getByTestId("search-input");
+    input.focus();
+
+    jest.advanceTimersByTime(100);
+
+    const heading = screen.getByRole("heading", { name: "Target Section" });
+    expect(document.activeElement).toBe(input);
+    expect(document.activeElement).not.toBe(heading);
+
+    jest.useRealTimers();
+  });
 });
