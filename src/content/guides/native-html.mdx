@@ -8,7 +8,7 @@ contributors:
 
 This guide shows how to use webpack's native HTML handling with `experiments.html`, and how to migrate an existing setup off `html-loader` and `html-webpack-plugin`.
 
-T> Native HTML is the recommended way to build pages in webpack 5.109.0 and later. It still lives under `experiments.html` and is expected to become the unconditional default in webpack v6, so details can change while development continues. The overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+T> Native HTML is stable and the recommended way to build pages in webpack 5.109.0 and later — it is on by default. The option keeps its `experiments.html` name until webpack v6 makes it unconditional. `html-loader` and `html-webpack-plugin` are deprecated.
 
 ## Getting Started
 
@@ -38,18 +38,18 @@ Either way, webpack understands `.html` files as first-class modules: it parses 
 
 ## What's built-in
 
-"Built-in" means webpack does the work itself, with no loader or plugin in the chain — not that it covers everything `html-loader` and `html-webpack-plugin` do. The scope is exactly this:
+"Built-in" means webpack does the work itself, with no loader or plugin in the chain. It replaces `html-loader` and `html-webpack-plugin`, both deprecated, without copying every option they had — options that a native build no longer needs are deliberately left out. The scope is exactly this:
 
-| Built in                                                                                                                | Still needs a loader or plugin                                                                                                                                         |
+| Built in                                                                                                                | Not built in                                                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Parsing `.html`, as an [entry point](#1-html-as-an-entry-point) or [imported from JS](#3-html-imported-from-javascript) | **Template engines** — Pug, EJS, Handlebars and friends, unless a synchronous [`template`](#templating) hook is enough                                                 |
 | [Extracting every URL a page references](#what-webpack-bundles-from-a-page) and rewriting it to the built filename      | `html-loader`'s `sources.scriptingEnabled` and `postprocessor`                                                                                                         |
-| Bundling inline `<script>` and `<style>` bodies, and `style=""` attributes                                              | `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache`                                                                                            |
+| Bundling inline `<script>` and `<style>` bodies, and `style=""` attributes                                              | `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache` — not needed with native HTML, so intentionally not carried over                           |
 | [Generating a page](#2-a-generated-page-for-a-javascript-entry) per entrypoint with its chunks injected                 | The third-party plugins that tap `html-webpack-plugin`'s hooks — they do not run as-is, but most [rewrite](#rewriting-a-plugin-that-tapped-its-hooks) into a few lines |
 | [`title`, `meta`, `base`, `favicon`, `manifest`, `integrity`, `csp`, inlining](#configuring-the-generated-page)         |                                                                                                                                                                        |
 | [Minification](#minification) and Hot Module Replacement                                                                |                                                                                                                                                                        |
 
-So a project using `html-webpack-plugin` to scaffold a document around its bundles, or `html-loader` to import a partial, needs neither. A project that renders its page through a template engine, or depends on a plugin that hooks into `html-webpack-plugin`, keeps that plugin.
+So a project using `html-webpack-plugin` to scaffold a document around its bundles, or `html-loader` to import a partial, needs neither. A project that renders its page through an asynchronous template engine keeps that engine's loader; a plugin that hooked into `html-webpack-plugin` [rewrites](#rewriting-a-plugin-that-tapped-its-hooks) onto webpack's own hooks.
 
 T> Since webpack 5.109.0 the option defaults to `'auto'`: built-in HTML support turns on unless a [`module.rules`](/configuration/module/#modulerules) entry with a loader (or an explicit module type) already matches `.html` files. An existing `html-loader` setup therefore keeps working untouched, and you can migrate one rule at a time. [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) resolves it to `true`.
 
@@ -567,7 +567,7 @@ export default {
 
 ### Loaders that output HTML
 
-A loader whose result is HTML _text_ — Markdown converters, `posthtml-loader`, `pug-plain-loader`, or a few lines of your own — chains in front of native HTML the way `sass-loader` chains in front of native CSS: keep the loader in `use` and set the rule's `type` to `"html"`. Webpack then parses the loader's output, bundles every `<img src>`, `<link>` and inline `<style>` it finds, and rewrites the URLs, which is what `html-loader` used to be appended to the chain for:
+A loader whose result is HTML _text_ — Markdown converters, `posthtml-loader`, `pug-plain-loader`, or a few lines of your own — chains in front of native HTML the way `sass-loader` chains in front of native CSS: keep the loader in `use` and set the rule's `type` to `"html"`. Webpack then parses the loader's output, bundles every `<img src>` and `<link>` it finds — and every inline `<style>`, as long as [native CSS](/guides/native-css/) is on — and rewrites the URLs, which is what `html-loader` used to be appended to the chain for:
 
 ```diff
  {
@@ -745,7 +745,7 @@ T> While `experiments.html` is `'auto'` (the default since 5.109.0), any `module
 
 ## Migrating from `html-webpack-plugin`
 
-`html-webpack-plugin` did two jobs: scaffolding a document around your bundles, and rendering a template. Native HTML splits them — [`output.html`](#2-a-generated-page-for-a-javascript-entry) scaffolds, and an [HTML entry point](#1-html-as-an-entry-point) or [`module.parser.html.template`](#templating) renders.
+`html-webpack-plugin` is deprecated: native HTML replaces it. The plugin did two jobs: scaffolding a document around your bundles, and rendering a template. Native HTML splits them — [`output.html`](#2-a-generated-page-for-a-javascript-entry) scaffolds, and an [HTML entry point](#1-html-as-an-entry-point) or [`module.parser.html.template`](#templating) renders.
 
 ### At a glance
 
@@ -1519,10 +1519,10 @@ The emitted page is served from the build output, so there is no template to kee
 
 ## Limitations
 
-Native HTML is on by default for new projects, but it still sits under `experiments`: test an existing setup before migrating it wholesale.
+Native HTML is stable and on by default. It is not a clone of `html-webpack-plugin`: the deprecated plugin's options that a native build does not need are intentionally not supported, and anything else that does not work as documented is a bug — please [report it](https://github.com/webpack/webpack/issues).
 
-- APIs and behavior may still evolve before the webpack v6 defaults.
-- Full parity with `html-webpack-plugin` is still in progress; `chunksSortMode`, `xhtml`, `showErrors` and `cache` have no equivalent, and template-engine loaders that return a JavaScript function (`pug-loader`, `ejs-loader`, …) are replaced by the synchronous [`template`](#templating) hook rather than being reused as-is. Loaders that return HTML text [chain in front of native HTML](#loaders-that-output-html).
+- `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache` are not supported, by design.
+- Template-engine loaders that return a JavaScript function (`pug-loader`, `ejs-loader`, …) are replaced by the synchronous [`template`](#templating) hook rather than being reused as-is. Loaders that return HTML text [chain in front of native HTML](#loaders-that-output-html).
 - `html-loader`'s `sources.scriptingEnabled` (parsing `<noscript>` content as markup) has no native switch.
 - [Module concatenation](/configuration/optimization/#optimizationconcatenatemodules) is disabled for HTML modules while HMR is active, because each module needs its own `module.hot` scope.
 

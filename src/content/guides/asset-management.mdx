@@ -860,8 +860,17 @@ Older tutorials, and many generated answers, start this guide by installing `sty
 <details>
 <summary>Loading CSS with loaders (webpack 4, and webpack 5 before 5.109.0)</summary>
 
+Install the loader versions that match your webpack version:
+
 ```bash
+# webpack 5.27.0 or later
 npm install --save-dev style-loader css-loader
+
+# webpack 5.0.0 – 5.26.x
+npm install --save-dev style-loader@3 css-loader@6
+
+# webpack 4.27.0 or later
+npm install --save-dev style-loader@2 css-loader@5
 ```
 
 **webpack.config.js**
