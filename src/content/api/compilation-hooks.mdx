@@ -1053,7 +1053,7 @@ class MyCssPlugin {
 }
 ```
 
-W> These hooks are only registered when `experiments.css` is enabled and may evolve while the CSS feature is experimental.
+T> These hooks are registered when the built-in CSS support is enabled — the default since webpack 5.109.0 ([`experiments.css`](/configuration/experiments/#experimentscss)). They are a stable API.
 
 ### orderModules
 
@@ -1113,7 +1113,7 @@ class MyHtmlPlugin {
 }
 ```
 
-W> These hooks are only registered when `experiments.html` is enabled and may evolve while the HTML feature is experimental.
+T> These hooks are registered when the built-in HTML support is enabled — the default since webpack 5.109.0 ([`experiments.html`](/configuration/experiments/#experimentshtml)). They are a stable API, the extension point that replaces the deprecated `html-webpack-plugin`'s hooks.
 
 ### injectTags
 

@@ -1085,7 +1085,7 @@ T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
 `boolean = false` `object`
 
-Generate an HTML file for each non-HTML [entrypoint](/concepts/entry-points/), injecting that entrypoint's initial JS and CSS output chunks (including chunks shared through [`dependOn`](/configuration/entry-context/#dependencies)). This is the document scaffolding that used to need a separate plugin, built into webpack core. It relies on the experimental HTML support, so enable [`experiments.html`](/configuration/experiments/#experimentshtml).
+Generate an HTML file for each non-HTML [entrypoint](/concepts/entry-points/), injecting that entrypoint's initial JS and CSS output chunks (including chunks shared through [`dependOn`](/configuration/entry-context/#dependencies)). This is the document scaffolding that used to need a separate plugin, built into webpack core. It relies on the built-in HTML support, which is on by default since 5.109.0 ([`experiments.html`](/configuration/experiments/#experimentshtml)).
 
 ```js
 // webpack.config.js

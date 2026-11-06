@@ -1,6 +1,6 @@
 ---
 title: Experiments
-description: Enable webpack's opt-in features, including native CSS, HTML and TypeScript support, WebAssembly, lazy compilation and ES module output.
+description: Configure webpack's built-in CSS and HTML support (on by default), and opt-in features such as TypeScript support, WebAssembly, lazy compilation and ES module output.
 sort: 19
 contributors:
   - EugeneHlushko
@@ -190,14 +190,14 @@ Detect changes to remote resources and upgrade them automatically.
 
 ### experiments.css
 
-Enable native CSS support. Note that it's an experimental feature still under development and will be enabled by default in webpack v6, however you can track the progress on [GitHub](https://github.com/webpack/webpack/issues/14893).
+Webpack's built-in CSS support — stable, and on by default since webpack 5.109.0, so `.css` files need no configuration and no loader. It replaces the deprecated `css-loader`, `style-loader` and `mini-css-extract-plugin`; see the [Native CSS](/guides/native-css/) guide. The option keeps its `experiments` name until webpack v6 makes it unconditional.
 
 - Type: `boolean | 'auto'`
 - Default: `'auto'` <Badge text="5.109.0+" />
 
 Since webpack 5.109.0, the option defaults to `'auto'`: the built-in CSS support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.css` or `.module.css` files, so an existing loader-based CSS setup keeps working unchanged. Set it to `true` to force the native support, or `false` to disable it entirely. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
-Experimental features:
+Features:
 
 - CSS Modules support: webpack will generate a unique name for each CSS class. Use the `.module.css` extension for CSS Modules.
 
@@ -412,7 +412,7 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **This feature is experimental and partial.** Webpack 5.107 made importing an HTML file from JS run its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with the plugin-based setups it replaces is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+T> Native HTML is stable and on by default since 5.109.0; the option keeps its `experiments` name until webpack v6. Webpack 5.107 made importing an HTML file from JS run its tag references through the webpack pipeline, and since 5.108 a `.html` file can also be used as an entry, with the default `./src` entry resolving to `index.html` when it is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). It replaces the deprecated `html-loader` and `html-webpack-plugin` without copying options a native build does not need — see the [Native HTML](/guides/native-html/) guide.
 
 T> The HTML parser can be tuned via [`module.parser.html`](/configuration/module/#moduleparserhtml): use [`sources`](/configuration/module/#moduleparserhtmlsources) to disable or customize URL-attribute extraction, and [`template`](/configuration/module/#moduleparserhtmltemplate) to transform the HTML source before parsing.
 
