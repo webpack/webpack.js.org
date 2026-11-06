@@ -21,10 +21,10 @@ If you set up a webpack project today by following an older tutorial, you will i
 | `css-loader`                    | Built-in CSS parsing, `@import` / `url()` resolution and [CSS Modules](/guides/native-css/#css-modules)                                           |
 | `style-loader`                  | [`exportType: "style"`](/guides/native-css/#output-modes-exporttype)                                                                              |
 | `mini-css-extract-plugin`       | Built-in extraction — a `.css` file per chunk, by default                                                                                         |
-| `css-minimizer-webpack-plugin`  | Built-in [CSS minification](/guides/native-css/#minification) and [vendor prefixes](/guides/native-css/#vendor-prefixes)                          |
+| `css-minimizer-webpack-plugin`  | Built-in [CSS minification](/guides/native-css/#minification) and [vendor prefixes](/guides/native-css/#vendor-prefixes) (5.110.0+)               |
 | `html-loader`                   | [Importing `.html` from JavaScript](/guides/native-html/#3-html-imported-from-javascript)                                                         |
 | `html-webpack-plugin`           | An [HTML entry](/guides/native-html/#1-html-as-an-entry-point) or [`output.html`](/guides/native-html/#2-a-generated-page-for-a-javascript-entry) |
-| `html-minimizer-webpack-plugin` | Built-in [HTML minification](/guides/native-html/#minification)                                                                                   |
+| `html-minimizer-webpack-plugin` | Built-in [HTML minification](/guides/native-html/#minification) (5.110.0+)                                                                        |
 
 These packages are deprecated. Preprocessors and template engines — `sass-loader`, `less-loader`, `postcss-loader`, Pug and friends — are not; they keep working, in front of the built-in support.
 
@@ -37,7 +37,7 @@ import "./styles.css";
 import * as button from "./button.module.css";
 ```
 
-Webpack resolves `@import` and `url()`, scopes `*.module.css` files as CSS Modules and extracts a `.css` file for each chunk. In `mode: "production"` it minifies the CSS, and with a [`browserslist` target](/configuration/target/) it also adds the vendor prefixes those browsers need. No `module.rules`, no plugin.
+Webpack resolves `@import` and `url()`, scopes `*.module.css` files as CSS Modules and extracts a `.css` file for each chunk. In `mode: "production"` (webpack 5.110.0 or later) it minifies the CSS, and with a [`browserslist` target](/configuration/target/) it also adds the vendor prefixes those browsers need. No `module.rules`, no plugin.
 
 ## Sass, Less, PostCSS and Tailwind
 
