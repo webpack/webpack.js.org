@@ -1053,7 +1053,7 @@ class MyCssPlugin {
 }
 ```
 
-T> These hooks are registered when the built-in CSS support is enabled — the default since webpack 5.109.0 ([`experiments.css`](/configuration/experiments/#experimentscss)). They are a stable API. With the `'auto'` default, a `module.rules` entry of your own for `.css` files switches the built-in support off and these hooks never run; set `experiments.css: true` to keep them.
+T> These hooks are registered when the built-in CSS support is enabled — the default since webpack 5.109.0 ([`experiments.css`](/configuration/experiments/#experimentscss)). They are a stable API. With the `'auto'` default, a `module.rules` entry that gives `.css` files a loader or a `type` (pre- and post-loaders don't count) switches the built-in support off and these hooks never run; set `experiments.css: true` to keep them, and leave those files a CSS module type.
 
 ### orderModules
 
@@ -1113,7 +1113,7 @@ class MyHtmlPlugin {
 }
 ```
 
-T> These hooks are registered when the built-in HTML support is enabled — the default since webpack 5.109.0 ([`experiments.html`](/configuration/experiments/#experimentshtml)). They are a stable API, the extension point that replaces the deprecated `html-webpack-plugin`'s hooks. With the `'auto'` default, a `module.rules` entry of your own for `.html` files switches the built-in support off and these hooks never run; set `experiments.html: true` to keep them.
+T> These hooks are registered when the built-in HTML support is enabled — the default since webpack 5.109.0 ([`experiments.html`](/configuration/experiments/#experimentshtml)). They are a stable API, the extension point that replaces the deprecated `html-webpack-plugin`'s hooks. With the `'auto'` default, a `module.rules` entry that gives `.html` files a loader or a `type` (pre- and post-loaders don't count) switches the built-in support off and these hooks never run; set `experiments.html: true` to keep them, and leave those files the `html` module type.
 
 ### injectTags
 
