@@ -37,7 +37,7 @@ import "./styles.css";
 import * as button from "./button.module.css";
 ```
 
-Webpack resolves `@import` and `url()`, scopes `*.module.css` files as CSS Modules, extracts a `.css` file for each chunk and, in `mode: "production"`, minifies it and adds the vendor prefixes your `browserslist` targets need. No `module.rules`, no plugin.
+Webpack resolves `@import` and `url()`, scopes `*.module.css` files as CSS Modules and extracts a `.css` file for each chunk. In `mode: "production"` it minifies the CSS, and with a [`browserslist` target](/configuration/target/) it also adds the vendor prefixes those browsers need. No `module.rules`, no plugin.
 
 ## Sass, Less, PostCSS and Tailwind
 
@@ -68,7 +68,9 @@ For a project with a JavaScript entry, `output.html: true` generates the page an
 
 ## Existing projects keep working
 
-`experiments.css` and `experiments.html` default to `'auto'`: the built-in support switches itself off for any file type your `module.rules` already handle with a loader. An existing `css-loader` or `html-loader` setup keeps building exactly as before, and you can migrate one rule at a time.
+`experiments.css` and `experiments.html` default to `'auto'`: when a rule in your `module.rules` already gives `.css` or `.html` files a loader, the built-in support for that file type stays off for the whole build. An existing `css-loader` or `html-loader` setup therefore keeps building exactly as before.
+
+To migrate one rule at a time, set `experiments.css: true` (or `experiments.html: true`) and give the rules that still use the old loaders `type: "javascript/auto"`, so the built-in support leaves their files to them.
 
 To migrate CSS, run the codemod:
 
