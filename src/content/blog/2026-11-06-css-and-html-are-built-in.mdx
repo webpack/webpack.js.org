@@ -68,7 +68,7 @@ For a project with a JavaScript entry, `output.html: true` generates the page an
 
 ## Existing projects keep working
 
-`experiments.css` and `experiments.html` default to `'auto'`: when a rule in your `module.rules` already gives `.css` or `.html` files a loader, the built-in support for that file type stays off for the whole build. An existing `css-loader` or `html-loader` setup therefore keeps building exactly as before.
+`experiments.css` and `experiments.html` default to `'auto'`: when a rule in your `module.rules` already gives `.css` or `.html` files a loader or an explicit `type`, the built-in support for that file type stays off for the whole build. An existing `css-loader` or `html-loader` setup therefore keeps building exactly as before.
 
 To migrate one rule at a time, set `experiments.css: true` (or `experiments.html: true`) and give the rules that still use the old loaders `type: "javascript/auto"`, so the built-in support leaves their files to them.
 
