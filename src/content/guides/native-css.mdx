@@ -1268,3 +1268,33 @@ Native CSS is stable and on by default. It does not copy every option of the dep
 - A few loader options have no drop-in switch: `css-loader`'s `localIdentRegExp` and filter callbacks, and `style-loader`'s `attributes` / `insert` / `styleTagTransform`. Keep the loader for files that need them. (`getLocalIdent` maps to the `localIdentName` function form, and `getJSON`/SSR is covered by [matching class names across targets](#7-server-side-rendering-node--web).)
 - `importLoaders` has no equivalent — loaders in the chain apply to `@import`ed files automatically.
 - If your project relies on advanced loader chains, validate each part before migrating fully.
+
+## Frequently asked questions
+
+### Do I still need `css-loader` and `style-loader`?
+
+No. Since webpack 5.109.0, webpack loads `.css` files itself with no configuration — it parses them, resolves `@import` and `url()`, applies CSS Modules, extracts and minifies them. `css-loader` and `style-loader` are deprecated. Keep one only for an option listed under [What's built-in](#whats-built-in) as not covered, and move an existing setup over with the [migration guide](#migration-guide) or its [codemod](#automated-migration-codemod).
+
+### Do I need `mini-css-extract-plugin`?
+
+No. Built-in CSS extracts a `.css` file for every chunk by default; name the files with [`output.cssFilename`](/configuration/output/#outputcssfilename) and [`output.cssChunkFilename`](/configuration/output/#outputcsschunkfilename). The plugin is deprecated.
+
+### How do I inject styles with a `<style>` tag instead of a file?
+
+Set [`exportType: "style"`](#output-modes-exporttype) — the built-in replacement for `style-loader`.
+
+### How do I use Sass, Less, PostCSS or Tailwind without `css-loader`?
+
+Keep the preprocessor's own loader and set the rule's `type` to `"css/auto"`; webpack takes the CSS it produces from there. See [Preprocessors, PostCSS and Tailwind](#preprocessors-postcss-and-tailwind).
+
+### Do I need `css-minimizer-webpack-plugin` or `autoprefixer`?
+
+Usually not. In `mode: "production"` webpack [minifies CSS](#minification) itself, and for a `browserslist` target it also [adds the vendor prefixes](#vendor-prefixes) your browsers need.
+
+### Do I need to set `experiments.css: true`?
+
+Only when one of your own `module.rules` gives `.css` files a loader or a `type` — for example to run `postcss-loader`. Otherwise the `'auto'` default turns built-in CSS on.
+
+### How do CSS Modules work?
+
+Name the file `*.module.css` and import its classes: `import * as styles from "./button.module.css"`. See [CSS Modules](#css-modules).

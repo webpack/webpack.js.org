@@ -1526,6 +1526,32 @@ Native HTML is stable and on by default. It is not a clone of `html-webpack-plug
 - `html-loader`'s `sources.scriptingEnabled` (parsing `<noscript>` content as markup) has no native switch.
 - [Module concatenation](/configuration/optimization/#optimizationconcatenatemodules) is disabled for HTML modules while HMR is active, because each module needs its own `module.hot` scope.
 
+## Frequently asked questions
+
+### Do I still need `html-webpack-plugin`?
+
+No. Since webpack 5.109.0, webpack builds pages itself: point an [`entry` at an `.html` file](#1-html-as-an-entry-point), or set [`output.html: true`](#2-a-generated-page-for-a-javascript-entry) to generate a page for a JavaScript entry. `html-webpack-plugin` is deprecated; the options of it that a native build does not need are intentionally not supported. See [Migrating from `html-webpack-plugin`](#migrating-from-html-webpack-plugin).
+
+### Do I still need `html-loader`?
+
+No. [Importing an `.html` file from JavaScript](#3-html-imported-from-javascript) gives you the processed HTML as a string, with every URL it references bundled. `html-loader` is deprecated. See [Migrating from `html-loader`](#migrating-from-html-loader).
+
+### How does my page load the CSS?
+
+Let webpack build the page: an HTML entry or `output.html` adds a `<link rel="stylesheet">` for every CSS chunk the page needs. A static page that only loads the JavaScript bundle stays unstyled unless it links the emitted `.css` file itself.
+
+### How do I use Pug, Handlebars or Markdown?
+
+A synchronous template engine plugs into the [`template`](#templating) hook. A loader that outputs HTML text, such as a Markdown converter, chains in front of `type: "html"` — see [Loaders that output HTML](#loaders-that-output-html).
+
+### Do I need `html-minimizer-webpack-plugin`?
+
+No. In `mode: "production"` webpack [minifies HTML](#minification) itself, including inline `<style>` and `style=""`.
+
+### Do I need to set `experiments.html: true`?
+
+Only when one of your own `module.rules` gives `.html` files a loader or a `type`. Otherwise the `'auto'` default turns built-in HTML on.
+
 ## Further reading
 
 - [`experiments.html`](/configuration/experiments/#experimentshtml) — the flag and everything it unlocks
