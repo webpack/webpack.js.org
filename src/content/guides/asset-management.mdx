@@ -860,23 +860,24 @@ Older tutorials, and many generated answers, start this guide by installing `sty
 <details>
 <summary>Loading CSS with loaders (webpack 4, and webpack 5 before 5.109.0)</summary>
 
-Install the loader versions that match your webpack version:
+Install the loader versions that match your webpack and Node.js versions:
 
 ```bash
-# webpack 5.27.0 or later
+# webpack 5.27.0 or later, Node.js 18.12.0 or later
 npm install --save-dev style-loader css-loader
 
-# webpack 5.0.0 – 5.26.x
+# webpack 5.0.0 or later, Node.js 12.13.0 or later
 npm install --save-dev style-loader@3 css-loader@6
 
-# webpack 4.27.0 or later
+# webpack 4.27.0 or later, or webpack 5 on Node.js 10.13.0 – 12.12.x
 npm install --save-dev style-loader@2 css-loader@5
 ```
 
 **webpack.config.js**
 
 ```js
-export default {
+// CommonJS, so webpack-cli 3 (used with webpack 4) can load it too
+module.exports = {
   module: {
     rules: [
       {
@@ -888,7 +889,9 @@ export default {
 };
 ```
 
-`css-loader` turns the stylesheet into a JavaScript module and `style-loader` injects it into the page as a `<style>` tag at runtime, so no `.css` file is emitted. On webpack 5.109.0 and later, a rule like this one turns the built-in CSS support off for `.css` files, so the build keeps working as before — follow the [migration guide](/guides/native-css/#migration-guide) (or run its codemod) to drop the loaders.
+`css-loader` turns the stylesheet into a JavaScript module and `style-loader` injects it into the page as a `<style>` tag at runtime, so no `.css` file is emitted. On webpack 5.109.0 and later, a rule like this one turns the built-in CSS support off for `.css` files while [`experiments.css`](/configuration/experiments/#experimentscss) is `'auto'` (the default), so the build keeps working as before.
+
+If built-in CSS is forced on with `experiments.css: true` or `experiments.futureDefaults`, it handles `.css` files instead of the loaders — add `type: "javascript/auto"` to this rule to keep the loaders in charge. Either way, follow the [migration guide](/guides/native-css/#migration-guide) (or run its codemod) to drop the loaders.
 
 </details>
 
