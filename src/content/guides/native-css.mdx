@@ -9,7 +9,7 @@ contributors:
 
 This guide shows how to use webpack's native CSS handling with `experiments.css`, and how to migrate an existing setup off `css-loader`, `style-loader`, and `mini-css-extract-plugin`.
 
-T> Native CSS is the recommended way to load CSS in webpack 5.109.0 and later. It still lives under `experiments.css` and is expected to become the unconditional default in webpack v6, so details can change while development continues.
+T> Native CSS is stable and the recommended way to load CSS in webpack 5.109.0 and later — it is on by default, with no configuration. Use it instead of `css-loader`, `style-loader` and `mini-css-extract-plugin`, which are deprecated. The option keeps its `experiments.css` name until webpack v6 makes it unconditional.
 
 ## Getting Started
 
@@ -1261,11 +1261,10 @@ CSS changes are applied in place; there is no `style-loader` to configure and no
 
 Webpack looks for a `style` field in the package's `package.json` and falls back to `main`, so bare specifiers work in CSS the way they do in JavaScript.
 
-## Experimental status & known limitations
+## Known limitations
 
-Native CSS is on by default for new projects, but it still sits under `experiments`: test an existing setup before migrating it wholesale.
+Native CSS is stable and on by default. It does not copy every option of the deprecated CSS loaders; anything that does not work as documented is a bug — please [report it](https://github.com/webpack/webpack/issues).
 
-- APIs and behavior may still evolve before webpack v6 defaults.
 - A few loader options have no drop-in switch: `css-loader`'s `localIdentRegExp` and filter callbacks, and `style-loader`'s `attributes` / `insert` / `styleTagTransform`. Keep the loader for files that need them. (`getLocalIdent` maps to the `localIdentName` function form, and `getJSON`/SSR is covered by [matching class names across targets](#7-server-side-rendering-node--web).)
 - `importLoaders` has no equivalent — loaders in the chain apply to `@import`ed files automatically.
 - If your project relies on advanced loader chains, validate each part before migrating fully.

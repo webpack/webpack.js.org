@@ -71,7 +71,7 @@ Webpack understands CSS on its own, so you can `import` a CSS file from a JavaSc
 import "./style.css";
 ```
 
-Webpack parses the file — resolving its `@import` and `url()` references — and extracts it into a `.css` output file next to your bundle. CSS Modules, minification and content hashes all come from the same built-in support, which is still experimental; [What's built-in](/guides/native-css/#whats-built-in) states what it covers and what still needs a loader.
+Webpack parses the file — resolving its `@import` and `url()` references — and extracts it into a `.css` output file next to your bundle. CSS Modules, minification and content hashes all come from the same built-in support; [What's built-in](/guides/native-css/#whats-built-in) states what it covers and what still needs a loader.
 
 T> Built-in CSS is controlled by [`experiments.css`](/configuration/experiments/#experimentscss), which defaults to `'auto'`: it turns itself on unless a `module.rules` entry with a loader already matches your `.css` files. That means an existing loader-based setup keeps working untouched — see [the migration guide](/guides/native-css/#migration-guide).
 
@@ -858,7 +858,7 @@ Let's move on to [Output Management](https://webpack.js.org/guides/output-manage
 Older tutorials, and many generated answers, start this guide by installing `style-loader` and `css-loader`. That is no longer the recommended setup: everything shown in [Loading CSS](#loading-css) works without them. Reach for the loaders only if you are on a webpack version without built-in CSS, or need one of the loader options listed under [What's built-in](/guides/native-css/#whats-built-in).
 
 <details>
-<summary>Loading CSS with loaders (webpack 4, and webpack 5 before 5.109.0)</summary>
+<summary>Loading CSS with the deprecated loaders (webpack 5 before 5.109.0)</summary>
 
 Install the loader versions that match your webpack and Node.js versions:
 
@@ -868,16 +868,12 @@ npm install --save-dev style-loader css-loader
 
 # webpack 5.0.0 or later, Node.js 12.13.0 or later
 npm install --save-dev style-loader@3 css-loader@6
-
-# webpack 4.27.0 or later, or webpack 5 on Node.js 10.13.0 – 12.12.x
-npm install --save-dev style-loader@2 css-loader@5
 ```
 
 **webpack.config.js**
 
 ```js
-// CommonJS, so webpack-cli 3 (used with webpack 4) can load it too
-module.exports = {
+export default {
   module: {
     rules: [
       {
