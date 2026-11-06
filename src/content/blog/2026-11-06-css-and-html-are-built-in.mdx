@@ -1,0 +1,79 @@
+---
+title: CSS and HTML Are Built In
+description: Since webpack 5.109.0, webpack handles CSS and HTML itself. You no longer need css-loader, style-loader, mini-css-extract-plugin, html-loader or html-webpack-plugin.
+sort: 20261106
+contributors:
+  - alexander-akait
+---
+
+If you set up a webpack project today by following an older tutorial, you will install `css-loader`, `style-loader`, `mini-css-extract-plugin`, `html-loader` and `html-webpack-plugin`. You don't need any of them anymore. Since webpack 5.109.0, CSS and HTML are built in, stable and on by default — with no configuration.
+
+- [**What you can remove**](#what-you-can-remove)
+- [**CSS with no configuration**](#css-with-no-configuration)
+- [**Sass, Less, PostCSS and Tailwind**](#sass-less-postcss-and-tailwind)
+- [**HTML pages with no plugin**](#html-pages-with-no-plugin)
+- [**Existing projects keep working**](#existing-projects-keep-working)
+
+## What you can remove
+
+| Package                         | Replaced by                                                                                                                                       |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `css-loader`                    | Built-in CSS parsing, `@import` / `url()` resolution and [CSS Modules](/guides/native-css/#css-modules)                                           |
+| `style-loader`                  | [`exportType: "style"`](/guides/native-css/#output-modes-exporttype)                                                                              |
+| `mini-css-extract-plugin`       | Built-in extraction — a `.css` file per chunk, by default                                                                                         |
+| `css-minimizer-webpack-plugin`  | Built-in [CSS minification](/guides/native-css/#minification) and [vendor prefixes](/guides/native-css/#vendor-prefixes)                          |
+| `html-loader`                   | [Importing `.html` from JavaScript](/guides/native-html/#3-html-imported-from-javascript)                                                         |
+| `html-webpack-plugin`           | An [HTML entry](/guides/native-html/#1-html-as-an-entry-point) or [`output.html`](/guides/native-html/#2-a-generated-page-for-a-javascript-entry) |
+| `html-minimizer-webpack-plugin` | Built-in [HTML minification](/guides/native-html/#minification)                                                                                   |
+
+These packages are deprecated. Preprocessors and template engines — `sass-loader`, `less-loader`, `postcss-loader`, Pug and friends — are not; they keep working, in front of the built-in support.
+
+## CSS with no configuration
+
+Import a stylesheet and webpack does the rest:
+
+```js
+import "./styles.css";
+import * as button from "./button.module.css";
+```
+
+Webpack resolves `@import` and `url()`, scopes `*.module.css` files as CSS Modules, extracts a `.css` file for each chunk and, in `mode: "production"`, minifies it and adds the vendor prefixes your `browserslist` targets need. No `module.rules`, no plugin.
+
+## Sass, Less, PostCSS and Tailwind
+
+Keep the preprocessor's loader and drop the CSS loaders behind it. The rule's `type` hands its output to webpack's CSS pipeline:
+
+```diff
+ {
+   test: /\.s[ac]ss$/i,
+-  use: ["style-loader", "css-loader", "sass-loader"],
++  use: ["sass-loader"],
++  type: "css/auto",
+ }
+```
+
+One rule covers both `layout.scss` (global) and `button.module.scss` (a CSS Module). For PostCSS and Tailwind on `.css` files, and the few cases where `experiments.css: true` is needed, see [Preprocessors, PostCSS and Tailwind](/guides/native-css/#preprocessors-postcss-and-tailwind).
+
+## HTML pages with no plugin
+
+Point an entry at a page and webpack builds it — every `<script>`, `<link>`, `<img>` and inline `<style>` it references is bundled, and its URLs are rewritten to the hashed files:
+
+```js
+export default {
+  entry: "./src/index.html",
+};
+```
+
+For a project with a JavaScript entry, `output.html: true` generates the page and links its scripts and stylesheets. The [Native HTML](/guides/native-html/) guide covers titles, favicons, Subresource Integrity, CSP and the rest.
+
+## Existing projects keep working
+
+`experiments.css` and `experiments.html` default to `'auto'`: the built-in support switches itself off for any file type your `module.rules` already handle with a loader. An existing `css-loader` or `html-loader` setup keeps building exactly as before, and you can migrate one rule at a time.
+
+To migrate CSS, run the codemod:
+
+```bash
+npx codemod @webpack/css-plugins-to-native-css
+```
+
+or follow the [Native CSS](/guides/native-css/#migration-guide) and [Native HTML](/guides/native-html/#migrating-from-html-webpack-plugin) migration guides. New projects scaffolded with `npx create-webpack-app` already use the built-in support.
