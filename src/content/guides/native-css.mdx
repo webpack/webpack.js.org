@@ -487,7 +487,7 @@ Resolution is file-local — a definition applies only to the file that declares
 
 ## Minification
 
-CSS assets are minified by the built-in minimizer whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
+CSS assets are minified by the built-in minimizer (webpack 5.110.0 or later) whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
 
 **webpack.config.js**
 
@@ -1281,15 +1281,15 @@ No. Built-in CSS extracts a `.css` file for every chunk by default; name the fil
 
 ### How do I inject styles with a `<style>` tag instead of a file?
 
-Set [`exportType: "style"`](#output-modes-exporttype) — the built-in replacement for `style-loader`.
+Set [`exportType: "style"`](#output-modes-exporttype) (webpack 5.106.0 or later) — the built-in replacement for `style-loader`. Keep this in mind when you drop `style-loader`: with the default output, the styles are a `.css` file the page has to link. Let webpack build the page ([an HTML entry or `output.html`](/guides/native-html/)), link the file yourself, or switch to `exportType: "style"`.
 
 ### How do I use Sass, Less, PostCSS or Tailwind without `css-loader`?
 
-Keep the preprocessor's own loader and set the rule's `type` to `"css/auto"`; webpack takes the CSS it produces from there. See [Preprocessors, PostCSS and Tailwind](#preprocessors-postcss-and-tailwind).
+Keep the preprocessor's own loader and set the rule's `type` to `"css/auto"`; webpack takes the CSS it produces from there. A rule that matches `.css` files itself — `postcss-loader` for PostCSS or Tailwind — also needs `experiments.css: true`, or the build fails with `No parser registered for css/auto`. See [Preprocessors, PostCSS and Tailwind](#preprocessors-postcss-and-tailwind).
 
 ### Do I need `css-minimizer-webpack-plugin` or `autoprefixer`?
 
-Usually not. In `mode: "production"` webpack [minifies CSS](#minification) itself, and for a `browserslist` target it also [adds the vendor prefixes](#vendor-prefixes) your browsers need.
+Usually not, on webpack 5.110.0 or later. Whenever webpack minimizes — `optimization.minimize`, on by default in `mode: "production"` — it [minifies CSS](#minification) itself, and for a `browserslist` target it also [adds the vendor prefixes](#vendor-prefixes) your browsers need. Check two things before removing them: built-in CSS must be on (a remaining `css-loader` rule turns it off under `'auto'`), and a custom `optimization.minimizer` list must keep `"..."` so the built-in minimizers still run. Keep `autoprefixer` if builds without minification, such as development, need prefixes.
 
 ### Do I need to set `experiments.css: true`?
 

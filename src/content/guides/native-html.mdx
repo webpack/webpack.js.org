@@ -618,7 +618,7 @@ export default {
 
 ## Minification
 
-HTML assets are minified by the built-in minimizer whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
+HTML assets are minified by the built-in minimizer (webpack 5.110.0 or later) whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
 
 **webpack.config.js**
 
@@ -1530,15 +1530,15 @@ Native HTML is stable and on by default. It is not a clone of `html-webpack-plug
 
 ### Do I still need `html-webpack-plugin`?
 
-No. Since webpack 5.109.0, webpack builds pages itself: point an [`entry` at an `.html` file](#1-html-as-an-entry-point), or set [`output.html: true`](#2-a-generated-page-for-a-javascript-entry) to generate a page for a JavaScript entry. `html-webpack-plugin` is deprecated; the options of it that a native build does not need are intentionally not supported. See [Migrating from `html-webpack-plugin`](#migrating-from-html-webpack-plugin).
+No. Since webpack 5.109.0, webpack builds pages itself: point an [`entry` at an `.html` file](#1-html-as-an-entry-point), or set [`output.html: true`](#2-a-generated-page-for-a-javascript-entry) to generate a page for a JavaScript entry. `html-webpack-plugin` is deprecated; the options of it that a native build does not need, such as `chunksSortMode` and `xhtml`, are intentionally not supported. Plugins that tapped its hooks need a native equivalent or a [short rewrite](#rewriting-a-plugin-that-tapped-its-hooks) onto webpack's own hooks. See [Migrating from `html-webpack-plugin`](#migrating-from-html-webpack-plugin).
 
 ### Do I still need `html-loader`?
 
-No. [Importing an `.html` file from JavaScript](#3-html-imported-from-javascript) gives you the processed HTML as a string, with every URL it references bundled. `html-loader` is deprecated. See [Migrating from `html-loader`](#migrating-from-html-loader).
+No. [Importing an `.html` file from JavaScript](#3-html-imported-from-javascript) gives you the processed HTML as a string, with the URLs in [the attributes webpack knows](#what-webpack-bundles-from-a-page) bundled — [add more](#customizing-which-attributes-are-urls), such as `<a href>`, through `sources`. `html-loader` is deprecated. See [Migrating from `html-loader`](#migrating-from-html-loader).
 
 ### How does my page load the CSS?
 
-Let webpack build the page: an HTML entry or `output.html` adds a `<link rel="stylesheet">` for every CSS chunk the page needs. A static page that only loads the JavaScript bundle stays unstyled unless it links the emitted `.css` file itself.
+Let webpack build the page: an HTML entry or `output.html` (webpack 5.108.0 or later) adds a `<link rel="stylesheet">` for every CSS chunk the page needs — unless you set [`output.html.inject: false`](/configuration/output/#outputhtmlinject), which leaves the tags to you. With the default CSS output, a static page that only loads the JavaScript bundle stays unstyled unless it links the emitted `.css` file itself; with [`exportType: "style"`](/guides/native-css/#output-modes-exporttype) the bundle injects the styles and no link is needed.
 
 ### How do I use Pug, Handlebars or Markdown?
 
@@ -1546,11 +1546,11 @@ A synchronous template engine plugs into the [`template`](#templating) hook. A l
 
 ### Do I need `html-minimizer-webpack-plugin`?
 
-No. In `mode: "production"` webpack [minifies HTML](#minification) itself, including inline `<style>` and `style=""`.
+No, on webpack 5.110.0 or later. Whenever webpack minimizes — `optimization.minimize`, on by default in `mode: "production"` — it [minifies HTML](#minification) itself, including inline `<style>` and `style=""`. A custom `optimization.minimizer` list must keep `"..."` for that.
 
 ### Do I need to set `experiments.html: true`?
 
-Only when one of your own `module.rules` gives `.html` files a loader or a `type`. Otherwise the `'auto'` default turns built-in HTML on.
+Only when one of your own `module.rules` gives `.html` files a loader or a `type`, or when you want `.html` to win over `.js` during resolution — so that `entry: "./src"` picks `src/index.html` over `src/index.js` (see [HTML as an entry point](#1-html-as-an-entry-point)). Otherwise the `'auto'` default turns built-in HTML on.
 
 ## Further reading
 
