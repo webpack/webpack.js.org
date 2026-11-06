@@ -1550,7 +1550,7 @@ No, on webpack 5.110.0 or later. Whenever webpack minimizes — `optimization.mi
 
 ### Do I need to set `experiments.html: true`?
 
-Only when one of your own `module.rules` gives `.html` files a loader or a `type`, or when you want `.html` to win over `.js` during resolution — so that `entry: "./src"` picks `src/index.html` over `src/index.js` (see [HTML as an entry point](#1-html-as-an-entry-point)). Otherwise the `'auto'` default turns built-in HTML on.
+Before webpack 5.109.0, yes — it defaulted to `false`. From 5.109.0 on, only when one of your own `module.rules` gives `.html` files a loader or a `type`, or when you want `.html` to win over `.js` during resolution — so that `entry: "./src"` picks `src/index.html` over `src/index.js` (see [HTML as an entry point](#1-html-as-an-entry-point)). Otherwise the `'auto'` default turns built-in HTML on.
 
 ## Further reading
 
