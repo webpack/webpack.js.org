@@ -463,13 +463,16 @@
   @apply text-white;
 }
 
-.markdown aside.tip p a,
-.markdown aside.tip li a {
+/* The default link color falls below 4.5:1 on the tinted aside backgrounds,
+   so links in every aside use the darker accessible color. Inline code in
+   those links inherits it. */
+.markdown aside p a,
+.markdown aside li a {
   @apply text-link-accessible;
 }
 
-.markdown aside.tip p a:hover,
-.markdown aside.tip li a:hover {
+.markdown aside p a:hover,
+.markdown aside li a:hover {
   @apply text-link-accessible-hover;
 }
 
@@ -484,7 +487,9 @@
 .markdown p a > tt,
 .markdown li a > tt,
 .markdown aside a > tt {
-  @apply text-link-accessible;
+  /* Inline code inside a link reads as part of the link text, so it takes the
+     link's color (including hover) instead of drawing its own chip. */
+  color: inherit;
   background: transparent;
   padding: 0;
   margin: 0;
@@ -498,5 +503,7 @@
 .dark .markdown p a > tt,
 .dark .markdown li a > tt,
 .dark .markdown aside a > tt {
-  @apply text-link-accessible-dark;
+  /* Outranks `.dark .markdown code`, which would bring the chip back. */
+  color: inherit;
+  background: transparent;
 }
