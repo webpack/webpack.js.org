@@ -365,7 +365,7 @@ Both `hash` and `timestamp` are optional.
 
 - `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
 - `{ timestamp: true }`: Good for local development caching.
-- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps differ, so a file whose timestamp changed but whose content did not (e.g. after a fresh checkout) keeps its cache. Computing the hashes leads to a small performance hit for the initial build. A content change that keeps the old timestamp is not detected; use `{ hash: true }` when content must always be compared.
+- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps differ, so a file whose timestamp changed but whose content did not (e.g. after a fresh checkout) keeps its cache. Computing the hashes leads to a small performance hit for the initial build. A content change that keeps the old timestamp is not detected; use `{ hash: true }` when content must always be compared. Files below [`managedPaths`](#managedpaths) and [`immutablePaths`](#immutablepaths) are not compared by content either way; list packages that change in place under [`unmanagedPaths`](#unmanagedpaths).
 
 ### immutablePaths
 
@@ -423,7 +423,7 @@ A regular expression here is only tested against the path, so it doesn't need a 
 
 `{ hash?: boolean, timestamp?: boolean = true }`
 
-Snapshots for building modules. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`.
+Snapshots for building modules. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`. It does not detect a content change that keeps the old timestamp (see [`snapshot`](#snapshot)).
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
@@ -441,7 +441,7 @@ Snapshots for building context modules.
 
 `{ hash?: boolean, timestamp?: boolean = true }`
 
-Snapshots for resolving of requests. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`.
+Snapshots for resolving of requests. In [`production`](/configuration/mode/) mode the default is `{ timestamp: true, hash: true }`. It does not detect a content change that keeps the old timestamp (see [`snapshot`](#snapshot)).
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
