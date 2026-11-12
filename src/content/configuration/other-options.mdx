@@ -18,6 +18,7 @@ contributors:
   - u01jmg3
   - jamesgeorge007
   - snitin315
+  - alexander-akait
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -364,7 +365,7 @@ Both `hash` and `timestamp` are optional.
 
 - `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
 - `{ timestamp: true }`: Good for local development caching.
-- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps differ, so a file whose timestamp changed but whose content did not (e.g. after a fresh checkout) keeps its cache. Computing the hashes leads to a small performance hit for the initial build. A content change that keeps the old timestamp is not detected; use `{ hash: true }` when content must always be compared.
 
 ### immutablePaths
 
