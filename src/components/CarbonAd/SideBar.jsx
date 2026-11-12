@@ -1,12 +1,17 @@
 import useCarbonAd, { adColors } from "./useCarbonAd.mjs";
 import "./carbon-ad.css";
 
+// Carbon zone that serves the sidebar creative.
+const ZONE = "CWBI6K77";
+// The docs sidebar is shown from the `md` breakpoint up.
+const MEDIA = "(min-width: 768px)";
+
 /**
  * Carbon ad card at the bottom of the docs sidebar. The sidebar is hidden
  * below the `md` breakpoint, and the ad is neither shown nor requested there.
  */
 export default function SideBarAd() {
-  const { ad, ref } = useCarbonAd("CWBI6K77", "(min-width: 768px)");
+  const { ad, ref } = useCarbonAd(ZONE, MEDIA);
 
   if (!ad) {
     return null;

@@ -4,6 +4,8 @@ import CloseIcon from "../../styles/icons/cross.svg";
 import useCarbonAd, { adColors } from "./useCarbonAd.mjs";
 import "./carbon-ad.css";
 
+// Carbon zone that serves the top bar creative.
+const ZONE = "CWBI623E";
 const DISMISSED_KEY = "top-bar-ad-dismissed";
 
 /**
@@ -11,7 +13,7 @@ const DISMISSED_KEY = "top-bar-ad-dismissed";
  * rest of the visit and does not request another ad.
  */
 function Ad({ onClose }) {
-  const { ad, ref } = useCarbonAd("CWBI623E");
+  const { ad, ref } = useCarbonAd(ZONE);
 
   if (!ad) {
     return null;
@@ -59,10 +61,15 @@ Ad.propTypes = {
 };
 
 export default function TopBarAd() {
-  // There is no storage while rendering on the server.
-  const [dismissed, setDismissed] = useState(
-    () => globalThis.sessionStorage?.getItem(DISMISSED_KEY) === "true",
-  );
+  // There is no storage while rendering on the server, and reading it throws
+  // when the browser blocks storage.
+  const [dismissed, setDismissed] = useState(() => {
+    try {
+      return globalThis.sessionStorage?.getItem(DISMISSED_KEY) === "true";
+    } catch {
+      return false;
+    }
+  });
 
   if (dismissed) {
     return null;
@@ -71,7 +78,11 @@ export default function TopBarAd() {
   return (
     <Ad
       onClose={() => {
-        sessionStorage.setItem(DISMISSED_KEY, "true");
+        try {
+          sessionStorage.setItem(DISMISSED_KEY, "true");
+        } catch {
+          // Storage is blocked or full. Close the banner for this page only.
+        }
         setDismissed(true);
       }}
     />
