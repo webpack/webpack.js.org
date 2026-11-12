@@ -37,6 +37,11 @@
   @apply flex min-w-0 flex-1 items-center gap-3;
 }
 
+/* Fills the free space so the call to action sits at the right edge. */
+.carbon-top-text {
+  @apply min-w-0 flex-1;
+}
+
 .carbon-logo {
   @apply size-8 shrink-0 rounded-sm;
 }
@@ -96,7 +101,9 @@
   @apply mt-2 rounded-full border border-current px-3 py-1 font-semibold;
 }
 
-.carbon-overlay {
+/* Scoped under `.carbon-side` so it outranks `.carbon-side a`, which would
+   otherwise give the badge the ad's text color on the dark overlay. */
+.carbon-side .carbon-overlay {
   @apply absolute
     top-2
     right-2

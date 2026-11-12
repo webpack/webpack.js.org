@@ -31,7 +31,7 @@ function Ad({ onClose }) {
         className="carbon-top-link"
       >
         <img src={ad.image} alt={ad.company} className="carbon-logo" />
-        <span>{ad.description}</span>
+        <span className="carbon-top-text">{ad.description}</span>
         <span className="carbon-cta">{ad.callToAction}</span>
       </a>
       <a href={ad.ad_via_link} className="carbon-badge">
