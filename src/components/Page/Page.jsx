@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 
 // Import Components
+import TopBarAd from "../CarbonAd/TopBar.jsx";
 import Contributors from "../Contributors/Contributors.jsx";
 import Link from "../Link/Link.jsx";
 import Markdown from "../Markdown/Markdown.jsx";
@@ -118,8 +119,9 @@ export default function Page(props) {
   return (
     <main
       id="main-content"
-      className="flex-auto relative overflow-x-hidden py-[1.5em] px-[1em] md:flex-[3] md:p-[1.5em]"
+      className="flex-auto relative overflow-x-hidden pt-0 pb-[1.5em] px-[1em] md:flex-[3] md:p-[1.5em]"
     >
+      {pathname.includes("/printable") ? null : <TopBarAd key={pathname} />}
       <Markdown>
         <h1>{title}</h1>
         {rest.date && pathname.startsWith("/blog/") && !isBlogIndex && (
