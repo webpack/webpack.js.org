@@ -484,7 +484,9 @@
 .markdown p a > tt,
 .markdown li a > tt,
 .markdown aside a > tt {
-  @apply text-link-accessible;
+  /* Inline code inside a link reads as part of the link text, so it takes the
+     link's color (including hover) instead of drawing its own chip. */
+  color: inherit;
   background: transparent;
   padding: 0;
   margin: 0;
@@ -498,5 +500,7 @@
 .dark .markdown p a > tt,
 .dark .markdown li a > tt,
 .dark .markdown aside a > tt {
-  @apply text-link-accessible-dark;
+  /* Outranks `.dark .markdown code`, which would bring the chip back. */
+  color: inherit;
+  background: transparent;
 }
