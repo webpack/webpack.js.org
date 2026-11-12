@@ -119,7 +119,7 @@ export default function Page(props) {
   return (
     <main
       id="main-content"
-      className="flex-auto relative overflow-x-hidden py-[1.5em] px-[1em] md:flex-[3] md:p-[1.5em]"
+      className="flex-auto relative overflow-x-hidden pt-0 pb-[1.5em] px-[1em] md:flex-[3] md:p-[1.5em]"
     >
       {pathname.includes("/printable") ? null : <TopBarAd key={pathname} />}
       <Markdown>

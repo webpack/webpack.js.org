@@ -308,7 +308,7 @@ function Site(props) {
         <Route index element={<Splash />} />
         <Route
           element={
-            <div className="flex-[1_1_auto] relative mt-[80px] md:mt-[110px] print:mt-0">
+            <div className="flex-[1_1_auto] relative mt-[74px] md:mt-[110px] print:mt-0">
               <Container className="flex relative">
                 <Outlet />
               </Container>
