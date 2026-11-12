@@ -463,13 +463,16 @@
   @apply text-white;
 }
 
-.markdown aside.tip p a,
-.markdown aside.tip li a {
+/* The default link color falls below 4.5:1 on the tinted aside backgrounds,
+   so links in every aside use the darker accessible color. Inline code in
+   those links inherits it. */
+.markdown aside p a,
+.markdown aside li a {
   @apply text-link-accessible;
 }
 
-.markdown aside.tip p a:hover,
-.markdown aside.tip li a:hover {
+.markdown aside p a:hover,
+.markdown aside li a:hover {
   @apply text-link-accessible-hover;
 }
 
