@@ -54,6 +54,23 @@ function Anchors({ anchors, url }) {
           <NavLink
             to={generateAnchorURL(url, anchor)}
             className="text-[#2b3a42] hover:text-[#175d96] dark:text-[#b8b8b8] dark:hover:text-[#82b7f6]"
+            onClick={() => {
+              if (
+                window.location.pathname === url &&
+                window.location.hash === `#${anchor.id}`
+              ) {
+                window.setTimeout(() => {
+                  const target = document.getElementById(anchor.id);
+                  const heading = target?.closest("h1, h2, h3, h4, h5, h6");
+
+                  if (heading) {
+                    heading.setAttribute("tabindex", "-1");
+                    heading.focus({ preventScroll: true });
+                    target.scrollIntoView();
+                  }
+                }, 0);
+              }
+            }}
           >
             {anchor.title2}
           </NavLink>

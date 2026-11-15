@@ -379,6 +379,16 @@
   h3 {
     @apply mt-[1.5em];
   }
+
+  h1:focus,
+  h2:focus,
+  h3:focus,
+  h4:focus,
+  h5:focus,
+  h6:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
 }
 
 .dark .markdown h1,

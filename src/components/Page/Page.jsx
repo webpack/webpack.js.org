@@ -12,6 +12,33 @@ import PageLinks from "../PageLinks/PageLinks.jsx";
 import { placeholderString } from "../Placeholder/Placeholder.jsx";
 import AdjacentPages from "./AdjacentPages.jsx";
 
+function focusHeadingFromHash(hash) {
+  const target = document.getElementById(hash.slice(1));
+
+  if (!target) {
+    return false;
+  }
+
+  // The ID belongs to a span inside the actual heading.
+  const heading = target.closest("h1, h2, h3, h4, h5, h6");
+
+  if (!heading) {
+    return false;
+  }
+
+  // Allow programmatic focus without adding the heading
+  // to the normal Tab navigation order.
+  heading.setAttribute("tabindex", "-1");
+
+  // Move focus without changing the current scroll position.
+  heading.focus({ preventScroll: true });
+
+  // Scroll the original anchor span into view.
+  // This preserves the existing sticky-header offset.
+  target.scrollIntoView();
+
+  return true;
+}
 // Load Styling
 
 export default function Page(props) {
@@ -64,19 +91,17 @@ export default function Page(props) {
         // two cases here
         // 1. server side rendered page, so hash target is already there
         // Note: Why this change because we use getElementById instead of querySelector(hash) here because
+
         // CSS selectors cannot start with a digit (e.g. #11-in-scope is invalid)
-        if (document.getElementById(hash.slice(1))) {
-          document.getElementById(hash.slice(1)).scrollIntoView();
-        } else {
-          // 2. dynamic loaded content
-          // we need to observe the dom change to tell if hash exists
+
+        if (!focusHeadingFromHash(hash)) {
+          // Wait for dynamically loaded content.
           observer = new MutationObserver(() => {
-            const element = document.getElementById(hash.slice(1));
-            if (element) {
-              element.scrollIntoView();
+            if (focusHeadingFromHash(hash)) {
               observer.disconnect();
             }
           });
+
           observer.observe(target, {
             childList: true,
             attributes: false,
