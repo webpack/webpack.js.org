@@ -78,4 +78,10 @@ To migrate CSS, run the codemod:
 npx codemod @webpack/css-plugins-to-native-css
 ```
 
-or follow the [Native CSS](/guides/native-css/#migration-guide) and [Native HTML](/guides/native-html/#migrating-from-html-webpack-plugin) migration guides. New projects scaffolded with `npx create-webpack-app` already use the built-in support.
+For HTML, run the [`@webpack/html-plugins-to-native-html`](https://app.codemod.com/registry/@webpack/html-plugins-to-native-html) codemod (webpack 5.112.0 or later):
+
+```bash
+npx codemod @webpack/html-plugins-to-native-html
+```
+
+For manual migration, follow the [Native CSS](/guides/native-css/#migration-guide) and [Native HTML](/guides/native-html/#migrating-from-html-webpack-plugin) guides. New projects scaffolded with `npx create-webpack-app` already use the built-in support.
