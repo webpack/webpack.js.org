@@ -1,0 +1,148 @@
+---
+title: Webpack 5.113
+description: Scoped styles for HTML pages, smaller SVG assets, and loaders that run only when needed.
+sort: 20261119
+contributors:
+  - bjohansebas
+---
+
+Webpack 5.113 brings scoped styles to your HTML pages. Write a CSS Module in a `<style>` tag, and webpack keeps the class names in your markup in sync. This release also adds SVG optimization, lets you skip unnecessary loader transformations, and improves CommonJS tree shaking and hot updates.
+
+Explore what's new:
+
+- [**CSS Modules in HTML**](#css-modules-in-html)
+- [**Smaller SVG Assets**](#smaller-svg-assets)
+- [**Run Loaders Only When Needed**](#run-loaders-only-when-needed)
+- [**Better CommonJS Tree Shaking**](#better-commonjs-tree-shaking)
+- [**More Reliable Hot Updates**](#more-reliable-hot-updates)
+- [**Control Where Files Are Written**](#control-where-files-are-written)
+- [**Other Improvements**](#other-improvements)
+- [**Bug Fixes**](#bug-fixes)
+
+Once webpack 5.113.0 is published, update your project with:
+
+```bash
+npm install --save-dev webpack@5.113.0
+```
+
+## CSS Modules in HTML
+
+A CSS Module renames your classes, so the HTML needs to use those names too. Webpack now does that for you. Add `module` to a `<style>` tag and write your markup using the original names:
+
+**src/index.html**
+
+```html
+<style module>
+  .button {
+    color: white;
+    background: navy;
+  }
+</style>
+
+<button class="button">Save</button>
+```
+
+Build the page with [native HTML support](/guides/native-html/):
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: "./src/index.html",
+};
+```
+
+Webpack scopes `.button` and updates the button's `class` to match. You can also link a `.module.css` stylesheet. Classes that no CSS Module declares stay unchanged, so your global styles keep working.
+
+If two modules use the same class name, give them names too. For example, `<style module="card">` lets you select its button style with `class="card.button"`.
+
+IDs stay connected to their labels, ARIA references and links within the page. Selectors written inside JavaScript are not rewritten.
+
+## Smaller SVG Assets
+
+You can now optimize SVG files as part of your webpack build. Enable it for emitted `.svg` and `.xml` assets with an `xml` options object:
+
+```js
+export default {
+  mode: "production",
+  optimization: {
+    minimizeOptions: {
+      xml: {},
+    },
+  },
+};
+```
+
+This is opt-in unless you use `experiments.futureDefaults`. Set `xml: false` to turn it off. Styles inside an SVG follow your CSS optimization settings and browser target.
+
+For more control, you can remove editor metadata or shorten path data through the XML options. Changes that can affect the image or references to it, such as rounding geometry with `precision` or renaming IDs with `cleanupIds`, require an explicit opt-in.
+
+## Run Loaders Only When Needed
+
+A loader may match every JavaScript file even when only a few need its transformation. With `sourceTest`, you can check the content before doing that work.
+
+For example, run a custom instrumentation loader only on files containing an `@instrument` marker:
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.js$/i,
+        use: [
+          {
+            loader: "./loaders/instrument-loader.js",
+            sourceTest: /@instrument/,
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+Here, the loader's normal function runs only when its input contains `@instrument`. The check sees the current input, including changes made by loaders to its right. Pitch functions still run, and input that is not valid UTF-8 is processed normally.
+
+## Better CommonJS Tree Shaking
+
+Unused CommonJS code is easier for webpack to remove. A simple export assignment like `exports.answer = 42` no longer keeps an otherwise unused module in your bundle.
+
+Webpack can also remove unused `require()` calls when the referenced module has no side effects. Modules that perform initialization or other side effects still run.
+
+## More Reliable Hot Updates
+
+Moving code between chunks should not interrupt your development session. This release fixes hot updates that previously aborted when modules moved between chunks or an update needed a chunk the browser had not loaded yet.
+
+Styles stay in sync too. New chunks load their stylesheets, removed chunks lose theirs, and existing stylesheets keep their attributes and disabled state.
+
+Watch mode also picks up files added inside subdirectories of recursive contexts, so newly added files appear in the next build.
+
+## Control Where Files Are Written
+
+Some builds need to write files outside their main output directory, such as a manifest consumed by a server. `output.allowOutside` lets you choose where webpack can write, copy and clean files beyond `output.path`:
+
+- `false` keeps those operations inside the output directory.
+- An array of absolute directory paths allows specific locations outside it.
+- `true` allows any location.
+
+With `experiments.futureDefaults`, this defaults to `false`. Without it, webpack preserves the existing behavior: assets emitted outside `output.path` can still be written, while copying and cleaning stay inside.
+
+## Other Improvements
+
+- **Tree shaking with cached modules.** `experiments.cacheUnaffected` now works with `optimization.usedExports` and `optimization.mangleExports`. Webpack tracks changes in export usage and names while reusing unaffected work.
+- **Async work after multiple builds.** The `MultiCompiler` `done` hook accepts asynchronous taps. Calling it synchronously with `.call()` is deprecated.
+- **Custom hot update data.** Plugins can add their own data through the new `updateManifest` HMR hook.
+- **Keep chunk hashes in sync.** `compilation.hooks.chunkHashDependencies` lets plugins declare when a chunk's hash depends on another chunk.
+
+For plugins using the experimental parser APIs, taps can now read nodes through a path with `path: true`, and scope analysis is available through `webpack.javascript.syntax.scopes`. `JavascriptParser.extend` has been removed.
+
+## Bug Fixes
+
+- **WebAssembly files load correctly** when runtime chunks live in subdirectories or filenames use the full hash in universal builds.
+- **HTML keeps the right URLs** for remote resources, encoded asset paths and pages with `<base href>`. Inlined assets also keep custom license banners.
+- **CommonJS and ES modules work together more reliably**, including circular re-exports and modules used by both `import` and `require()`.
+- **CSS keeps its order and context.** Imports retain their layer and media conditions, and CSS collected asynchronously on the server keeps request order. Imported `@value` URLs resolve relative to their source, and longer `composes` chains work correctly.
+
+## Thanks
+
+Thanks to everyone who contributed code, documentation, tests and bug reports. And thank you to our [sponsors](https://github.com/webpack/webpack?tab=readme-ov-file#sponsoring) for supporting webpack's development.
