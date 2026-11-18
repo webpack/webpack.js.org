@@ -1,6 +1,9 @@
 name: Deploy
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     # Every 12 hours, so fetched content (READMEs, supporters, governance) stays fresh
     - cron: "23 0,12 * * *"
@@ -8,24 +11,59 @@ on:
 
 permissions: {}
 
+# Let a running deployment finish; queue the next one instead of cancelling it.
 concurrency:
-  group: ${{ github.workflow }}
+  group: pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Trigger Vercel deployment
+  build:
+    name: Build site
     if: github.repository == 'webpack/webpack.js.org'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - name: Call Vercel deploy hook
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Use Node.js lts/*
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - run: npm ci
+
+      - name: Enable webpack persistent caching
+        uses: ./.github/actions/webpack-persistent-cache
+
+      - name: Build
+        run: npm run build
         env:
-          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
-        run: |
-          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
-            echo "::error::The VERCEL_DEPLOY_HOOK_URL secret is not set"
-            exit 1
-          fi
-          # printf is a shell builtin, so the secret never appears in a process's argv
-          printf 'url = "%s"\nrequest = POST\n' "$VERCEL_DEPLOY_HOOK_URL" |
-            curl --fail --silent --show-error --config -
+          # Authenticates the GitHub API calls that fetch READMEs and governance docs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional; supporters are fetched without it, just with lower limits
+          OPENCOLLECTIVE_API_KEY: ${{ secrets.OPENCOLLECTIVE_API_KEY }}
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
