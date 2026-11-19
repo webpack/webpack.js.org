@@ -519,7 +519,7 @@ export default {
 };
 ```
 
-Disable CSS minification alone with `minimize: { css: false }`, leaving JavaScript minification in place.
+Disable CSS minification alone with `minimize: { css: false }`, leaving JavaScript minification in place. The [Minification](/guides/minification/#css) guide shows each transform on real input.
 
 ### Vendor prefixes
 
@@ -543,7 +543,9 @@ export default {
 };
 ```
 
-T> Prefixing is only in effect for a `browserslist` [target](/configuration/target/) — any other target names no browsers to prefix for. Turn it off with `optimization.minimize.css.vendorPrefixes: false` when a PostCSS chain already does it.
+T> A [target](/configuration/target/) that names no browsers, such as `"web"`, is prefixed for browserslist's `defaults` query since webpack 5.112.0. Turn prefixing off with `optimization.minimize.css.vendorPrefixes: false` when a PostCSS chain already does it.
+
+The minimizer also lowers nesting, media ranges, new color functions, `light-dark()` and other modern syntax for the same targets, and drops prefixes and fallbacks they no longer need — see [CSS Browser Targets](/guides/css-browser-targets/) for every rewrite with examples.
 
 ## Resource hints and font preloading
 

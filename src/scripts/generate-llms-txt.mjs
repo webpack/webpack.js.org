@@ -30,8 +30,12 @@ export const HIGHLIGHTS = [
   ["Native CSS", "/guides/native-css/"],
   ["Native HTML", "/guides/native-html/"],
   [
+    "CSS vendor prefixes and syntax lowering for browserslist targets (replaces autoprefixer and postcss-preset-env)",
+    "/guides/css-browser-targets/",
+  ],
+  [
     "Built-in CSS, HTML, JavaScript, JSON and SVG minification",
-    "/configuration/optimization/#optimizationminimize",
+    "/guides/minification/",
   ],
   ["TypeScript", "/guides/typescript/"],
   ["Modern web platform features", "/guides/modern-web-platform/"],

@@ -205,6 +205,8 @@ If you're using a library like [`react`](https://reactjs.org/), you should actua
 
 Webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
+Since webpack 5.110.0 that covers CSS and HTML as well as JavaScript, and JSON and SVG can be switched on too — see the [Minification](/guides/minification/) guide for what each minimizer does, with before-and-after examples.
+
 Note that while the [`MinimizerPlugin`](/plugins/minimizer-webpack-plugin/) is a great place to start for minification and being used by default, there are other options out there:
 
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
@@ -231,7 +233,7 @@ T> Avoid `inline-***` and `eval-***` use in production as they can increase bund
 
 ## Minimize CSS
 
-It is crucial to minimize your CSS for production, and webpack does it for you: [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on in `production` mode and covers CSS assets along with JavaScript, with no extra plugin to install. See [Minification](/guides/native-css/#minification) for what it does and how to tune each transform.
+It is crucial to minimize your CSS for production, and webpack does it for you: [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on in `production` mode and covers CSS assets along with JavaScript, with no extra plugin to install. See [Minification](/guides/minification/#css) for what it does and how to tune each transform, and [CSS Browser Targets](/guides/css-browser-targets/) for the vendor prefixes and syntax lowering it applies for your browserslist targets.
 
 ## CLI Alternatives
 

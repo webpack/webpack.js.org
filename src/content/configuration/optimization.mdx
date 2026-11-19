@@ -507,7 +507,7 @@ What the built-in CSS minimizer may do beyond the transforms that always apply. 
 
 T> `resolveCustomAtRules`, added in 5.111.0, was split into `customMedia` and `customSelectors` in 5.112.0.
 
-T> `vendorPrefixes` only has an effect for a `browserslist` [target](/configuration/target/) — any other target names no browsers to prefix for.
+T> `vendorPrefixes`, `lowerUnsupported`, `colorFallbacks` and `removeDeadRules` answer to the [browserslist](/configuration/target/) target. Since webpack 5.112.0 a target that names no browsers, such as `"web"`, is minimized for browserslist's `defaults` query. See [CSS Browser Targets](/guides/css-browser-targets/) for examples of each rewrite.
 
 #### optimization.minimize.html
 
