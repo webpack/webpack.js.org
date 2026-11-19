@@ -971,6 +971,7 @@ Boolean parser options default to `true` unless the table says otherwise.
 | [`customSelectors`](/configuration/module/#moduleparsercsscustomselectors) | `boolean`                                          | `true`         | Resolve `@custom-selector` at build time.                                                          |
 | [`fontPreload`](/configuration/module/#moduleparsercssfontpreload)         | `boolean`                                          | `false`        | Preload each `@font-face`'s primary `src` from an HTML entry.                                      |
 | [`urlHints`](/configuration/module/#moduleparsercssurlhints)               | `UrlHintRule[]`                                    | —              | Resource-hint rules for assets referenced via `url(...)`.                                          |
+| [`parseErrors`](/configuration/module/#moduleparsercssparseerrors)         | `boolean`                                          | `false`        | <Badge text="5.113.0+" /> Report CSS parse errors as build errors and warnings.                    |
 
 ```js
 export default {

@@ -1,6 +1,6 @@
 ---
 title: Native HTML
-description: Bundle HTML with webpack's built-in HTML support, and migrate off html-loader and html-webpack-plugin.
+description: Bundle HTML with webpack's built-in HTML support, scope pages with CSS Modules, and migrate off html-loader and html-webpack-plugin.
 sort: 28
 contributors:
   - alexander-akait
@@ -228,6 +228,88 @@ export default {
 W> A `data:` module has no file path. Loaders see the page's directory as `this.context`, but a loader that locates files from `this.resourcePath` — as `sass-loader`, `less-loader` and `stylus-loader` currently do — can't resolve a relative `@use` / `@import` from an inline body, and `sass-loader` reads `lang="sass"` as SCSS unless its options ask for the indented syntax. Keep partial-importing styles in a stylesheet file.
 
 `<style type="text/less">` and `<script type="text/typescript">` keep flowing through unchanged — only `lang` opts a body into a loader.
+
+### CSS Modules in HTML
+
+<Badge text="5.113.0+" />
+
+A page can use [CSS Modules](/guides/native-css/#css-modules) without any JavaScript. Mark an inline stylesheet with the `module` attribute, or link a stylesheet that is a CSS module (a `.module.css` file, or any file a rule types as `css/module`), and webpack scopes its class names and ids and rewrites the page's markup to match:
+
+**src/index.html**
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./card.module.css" />
+    <style module>
+      .title {
+        font-size: 2rem;
+      }
+      .base {
+        margin: 0;
+      }
+      .primary {
+        composes: base;
+        color: blue;
+      }
+      #help {
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Hello</h1>
+    <button class="primary card" aria-describedby="help">Save</button>
+    <p id="help">Saves the draft.</p>
+    <a href="#help">What does it do?</a>
+  </body>
+</html>
+```
+
+With `mode: "development"` and `localIdentName: "[id]-[local]"` set on the `css/module` and `css/auto` [generators](/guides/native-css/#naming-the-scoped-classes), the page is emitted as:
+
+**dist/index.html**
+
+```html
+<h1 class="src_index_html-style-1-title">Hello</h1>
+<button
+  class="src_index_html-style-1-primary src_index_html-style-1-base src_card_module_css-card"
+  aria-describedby="src_index_html-style-1-help"
+>
+  Save
+</button>
+<p id="src_index_html-style-1-help">Saves the draft.</p>
+<a href="#src_index_html-style-1-help">What does it do?</a>
+```
+
+What you get:
+
+- **Scoped names** generated with the [`localIdentName`](/guides/native-css/#naming-the-scoped-classes) of the CSS module type, hashed in production.
+- **`composes`** adds the composed classes to the element, and `:global(.name)` keeps a name unscoped.
+- **Every reference to an id** follows it: `for`, `form`, `list`, the `aria-*` ID references, `popovertarget`, `commandfor`, `interestfor`, same-page links (`href="#help"`), SVG `href` / `xlink:href`, `url(#id)` paints such as `fill` and `clip-path`, and SMIL `begin` / `end` timings. Add your own attributes with [`module.parser.html.cssModules.attributes`](/configuration/module/#moduleparserhtmlcssmodules).
+- **Unknown names stay as written**, so global classes (from a plain `<style>` or a plain linked stylesheet) keep working side by side with scoped ones. A plain `<style>` without `module` stays global.
+- **Preprocessors** work too: `<style module lang="scss">` runs through the loader that [`lang`](#preprocessors-in-inline-style-and-script) selects and is then scoped.
+
+When several modules on a page declare the same name, the first one wins. To keep them apart, name a module with `module="name"` and refer to its names as `name.class` / `name.id`:
+
+```html
+<link rel="stylesheet" href="./theme.module.css" module="theme" />
+<style module="card">
+  .btn {
+    color: white;
+  }
+  #field {
+    color: gray;
+  }
+</style>
+
+<button class="theme.btn card.btn">OK</button>
+<label for="card.field">Name</label>
+<input id="card.field" />
+```
+
+A `name.class` that no module named `name` declares (`other.x`) is left untouched. Put a `<!-- webpackIgnore: true -->` comment before an element to leave its names as written.
 
 ### Skipping a single URL
 
@@ -652,6 +734,8 @@ export default {
 
 Inline `<style>` elements and `style=""` attributes are minified with the CSS minimizer using the options `optimization.minimize.css` names, so a stylesheet and the same declarations inline are treated identically. Disable HTML minification alone with `minimize: { html: false }`.
 
+Once [`optimization.minimize.xml`](/configuration/optimization/#optimizationminimizexml) is set — the option that minifies standalone `.svg` files — an `<svg>` inlined in the page follows its `shortenNumbers`, `shortenPathData` and `removeMetadata` switches too.
+
 ## Hot Module Replacement
 
 HTML modules support [Hot Module Replacement](/concepts/hot-module-replacement/) with no extra configuration — it activates whenever HMR is on, for example via [`devServer.hot`](/configuration/dev-server/#devserverhot). For a page extracted to a real `.html` file, each update patches `document.body.innerHTML` and `document.title` in place; other `<head>` changes are patched in place as a delta, and only a removed `<script>` that already ran, or a reordering, falls back to a full reload.
@@ -986,12 +1070,14 @@ HTML is configured in four places: the [parser](#parser-options) and [generator]
 
 Set them globally under `module.parser.html`, or per rule with `parser` on a rule whose `type` is `html`.
 
-| Option                                                        | Type                                     | Default      | Description                                                         |
-| ------------------------------------------------------------- | ---------------------------------------- | ------------ | ------------------------------------------------------------------- |
-| [`sources`](/configuration/module/#moduleparserhtmlsources)   | `boolean \| Array<'...' \| SourceEntry>` | `true`       | Which attribute values are treated as URLs and how each is bundled. |
-| [`as`](/configuration/module/#moduleparserhtmlas)             | `'document' \| string`                   | `'document'` | Parse a full page, or the named element's inner HTML (a fragment).  |
-| [`urlHints`](/configuration/module/#moduleparserhtmlurlhints) | `UrlHintRule[]`                          | `[]`         | Default resource-hint rules for the assets this parser references.  |
-| [`template`](/configuration/module/#moduleparserhtmltemplate) | `(source, context) => string`            | —            | Transform the HTML source before dependencies are extracted.        |
+| Option                                                              | Type                                                                               | Default      | Description                                                                                     |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------- |
+| [`sources`](/configuration/module/#moduleparserhtmlsources)         | `boolean \| Array<'...' \| SourceEntry>`                                           | `true`       | Which attribute values are treated as URLs and how each is bundled.                             |
+| [`as`](/configuration/module/#moduleparserhtmlas)                   | `'document' \| string`                                                             | `'document'` | Parse a full page, or the named element's inner HTML (a fragment).                              |
+| [`urlHints`](/configuration/module/#moduleparserhtmlurlhints)       | `UrlHintRule[]`                                                                    | `[]`         | Default resource-hint rules for the assets this parser references.                              |
+| [`template`](/configuration/module/#moduleparserhtmltemplate)       | `(source, context) => string`                                                      | —            | Transform the HTML source before dependencies are extracted.                                    |
+| [`cssModules`](/configuration/module/#moduleparserhtmlcssmodules)   | `{ attributes?: Record<string, 'class' \| 'id' \| 'ids' \| 'fragment' \| 'url'> }` | —            | <Badge text="5.113.0+" /> Extra attributes [CSS Modules in HTML](#css-modules-in-html) rewrite. |
+| [`parseErrors`](/configuration/module/#moduleparserhtmlparseerrors) | `boolean`                                                                          | `false`      | <Badge text="5.113.0+" /> Report HTML parse errors as build errors and warnings.                |
 
 **webpack.config.js**
 
@@ -1263,29 +1349,32 @@ Every option of [`optimization.minimize.html`](/configuration/optimization/#opti
 
 **On by default**
 
-| Option                          | Type                                                         | Default   | Description                                                                  |
-| ------------------------------- | ------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------- |
-| `collapseBooleanAttributes`     | `boolean \| 'all'`                                           | `true`    | `disabled="disabled"` becomes the bare name; `'all'` rewrites any value.     |
-| `comments`                      | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'`  | Which comments survive — `'some'` keeps none, since HTML comments are inert. |
-| `normalizeAttributeQuotes`      | `boolean`                                                    | `true`    | Use whichever delimiters cost least.                                         |
-| `normalizeEnumeratedAttributes` | `boolean`                                                    | `true`    | Fold an enumerated value to the keyword it names.                            |
-| `normalizeListAttributes`       | `boolean`                                                    | `true`    | Normalize list-shaped values (`class`, `rel`, `srcset`, viewport `content`). |
-| `normalizeNumericAttributes`    | `boolean`                                                    | `true`    | Write an integer attribute the one way its rules read it.                    |
-| `removeImpliedTags`             | `boolean \| 'smart' \| 'all'`                                | `'smart'` | How much of the `<html>` / `<head>` / `<body>` shell may be implied.         |
-| `removeOptionalTags`            | `boolean`                                                    | `true`    | Leave out other tags the parser can imply.                                   |
+| Option                          | Type                                                         | Default   | Description                                                                                    |
+| ------------------------------- | ------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------------------------- |
+| `collapseBooleanAttributes`     | `boolean \| 'all'`                                           | `true`    | `disabled="disabled"` becomes the bare name; `'all'` rewrites any value.                       |
+| `comments`                      | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'`  | Which comments survive — `'some'` keeps none, since HTML comments are inert.                   |
+| `normalizeAttributeQuotes`      | `boolean`                                                    | `true`    | Use whichever delimiters cost least.                                                           |
+| `normalizeEnumeratedAttributes` | `boolean`                                                    | `true`    | Fold an enumerated value to the keyword it names.                                              |
+| `normalizeListAttributes`       | `boolean`                                                    | `true`    | Normalize list-shaped values (`class`, `rel`, `srcset`, viewport `content`).                   |
+| `normalizeNumericAttributes`    | `boolean`                                                    | `true`    | Write an integer attribute the one way its rules read it.                                      |
+| `normalizeUrlAttributes`        | `boolean`                                                    | `true`    | <Badge text="5.111.0+" /> Drop the whitespace around a URL value (`href`, `src`, `action`, …). |
+| `removeImpliedTags`             | `boolean \| 'smart' \| 'all'`                                | `'smart'` | How much of the `<html>` / `<head>` / `<body>` shell may be implied.                           |
+| `removeOptionalTags`            | `boolean`                                                    | `true`    | Leave out other tags the parser can imply.                                                     |
 
 **Off by default**
 
-| Option                      | Type                                            | Default | Why it is opt-in                                                                                                                 |
-| --------------------------- | ----------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `collapseWhitespace`        | `boolean \| 'conservative' \| 'smart' \| 'all'` | `false` | `textContent` and a `white-space: pre` rule the minifier cannot see read the collapsed runs back; `true` means `'conservative'`. |
-| `mergeStyles`               | `boolean`                                       | `false` | Removes elements, so `document.styleSheets` and `style:nth-child()` differ.                                                      |
-| `minifyConditionalComments` | `boolean`                                       | `false` | The body is minified as if it started a document, not where the comment sits.                                                    |
-| `removeEmptyAttributes`     | `boolean`                                       | `false` | An attribute selector matches on presence, so `[class]` stops matching.                                                          |
-| `removeEmptyElements`       | `boolean`                                       | `false` | CSS the minifier cannot see may give an empty element a size or a `::before`.                                                    |
-| `removeRedundantAttributes` | `boolean \| 'smart' \| 'all'`                   | `false` | Dropping an attribute changes `getAttribute` and attribute selectors.                                                            |
-| `sortAttributes`            | `boolean`                                       | `false` | A script reading `element.attributes` back sees the new order.                                                                   |
-| `sortTokenLists`            | `boolean`                                       | `false` | A script reading `className` or `rel` back sees the new order.                                                                   |
+| Option                      | Type                                                         | Default     | Why it is opt-in                                                                                                                                     |
+| --------------------------- | ------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `collapseWhitespace`        | `boolean \| 'conservative' \| 'smart' \| 'all'`              | `false`     | `textContent` and a `white-space: pre` rule the minifier cannot see read the collapsed runs back; `true` means `'conservative'`.                     |
+| `extractComments`           | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `undefined` | <Badge text="5.112.0+" /> Moves legal comments into `[file].LICENSE.txt`, leaving a banner comment at the end of the page.                           |
+| `mergeScripts`              | `boolean`                                                    | `false`     | <Badge text="5.111.0+" /> Removes elements, so `document.scripts` differs, and a later body's `var` declarations become visible to the earlier ones. |
+| `mergeStyles`               | `boolean`                                                    | `false`     | Removes elements, so `document.styleSheets` and `style:nth-child()` differ.                                                                          |
+| `minifyConditionalComments` | `boolean`                                                    | `false`     | The body is minified as if it started a document, not where the comment sits.                                                                        |
+| `removeEmptyAttributes`     | `boolean`                                                    | `false`     | An attribute selector matches on presence, so `[class]` stops matching.                                                                              |
+| `removeEmptyElements`       | `boolean`                                                    | `false`     | CSS the minifier cannot see may give an empty element a size or a `::before`.                                                                        |
+| `removeRedundantAttributes` | `boolean \| 'smart' \| 'all'`                                | `false`     | Dropping an attribute changes `getAttribute` and attribute selectors.                                                                                |
+| `sortAttributes`            | `boolean`                                                    | `false`     | A script reading `element.attributes` back sees the new order.                                                                                       |
+| `sortTokenLists`            | `boolean`                                                    | `false`     | A script reading `className` or `rel` back sees the new order.                                                                                       |
 
 **webpack.config.js**
 

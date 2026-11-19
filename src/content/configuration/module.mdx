@@ -808,6 +808,31 @@ export default {
 };
 ```
 
+#### module.parser.css.parseErrors
+
+<Badge text="5.113.0+" />
+
+Report each CSS parse error the stylesheet holds (as defined by [CSS Syntax Level 3](https://www.w3.org/TR/css-syntax-3/)): a build error where the end of the input cuts a token or rule short, such as an unclosed string, comment or block, and a build warning for an error the parser recovers from, such as a stray `}` (`unexpected-right-curly-bracket`) or a newline inside a string (`newline-in-string`). Each diagnostic is named by its code, e.g. `eof-in-string` or `eof-in-qualified-rule`.
+
+- Type: `boolean`
+- Default: `false`
+
+**webpack.config.js**
+
+```js
+export default {
+  module: {
+    parser: {
+      css: {
+        parseErrors: true,
+      },
+    },
+  },
+};
+```
+
+T> Turn it on in CI to catch malformed CSS that browsers would quietly recover from.
+
 ### module.parser.css.exportType
 
 Configure how CSS content will be exported.
@@ -1761,6 +1786,61 @@ export default {
           return source
             .replaceAll("{{title}}", "Hello world")
             .replaceAll("{{image}}", "./image.png");
+        },
+      },
+    },
+  },
+};
+```
+
+#### module.parser.html.parseErrors
+
+<Badge text="5.113.0+" />
+
+Report each HTML parse error the page holds, by its [WHATWG](https://html.spec.whatwg.org/multipage/parsing.html#parse-errors) or html5lib name (`eof-in-tag`, `missing-end-tag-name`, `missing-whitespace-between-attributes`, …): a build error where the end of the input cuts a tag, comment or doctype short, and a build warning for an error the parser reads past.
+
+- Type: `boolean`
+- Default: `false`
+
+```js
+export default {
+  module: {
+    parser: {
+      html: {
+        parseErrors: true,
+      },
+    },
+  },
+};
+```
+
+#### module.parser.html.cssModules
+
+<Badge text="5.113.0+" />
+
+Configure how a page's [CSS modules](/guides/native-html/#css-modules-in-html) — `<style module>` bodies and linked stylesheets that are CSS modules — rewrite the page's markup.
+
+- Type: `{ attributes?: Record<string, 'class' | 'id' | 'ids' | 'fragment' | 'url'> }`
+
+By default webpack rewrites `class`, `id`, `for`, `form`, `list`, the `aria-*` ID references (`aria-labelledby`, `aria-describedby`, `aria-controls`, …), `popovertarget`, `commandfor`, `interestfor`, same-page links (`href="#id"`), SVG `href` / `xlink:href`, `url(#id)` paint references (`fill`, `clip-path`, `mask`, `filter`, …) and SMIL `begin` / `end` timings. `attributes` adds more, each with how its value names a class or an id:
+
+- `class` - a class list, like `class`.
+- `id` - one id, like `id`.
+- `ids` - a whitespace-separated list of ids, like `aria-labelledby`.
+- `fragment` - a same-page link, `#id`, like `href`.
+- `url` - `url(#id)` references, like `fill`.
+
+```js
+export default {
+  module: {
+    parser: {
+      html: {
+        cssModules: {
+          attributes: {
+            "data-target": "id",
+            "data-classes": "class",
+            "data-link": "fragment",
+          },
         },
       },
     },
