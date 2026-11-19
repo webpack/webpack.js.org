@@ -89,6 +89,24 @@ export default {
 };
 ```
 
+<Badge text="5.111.0+" />
+
+An entry can be `{ dependency, optional: true }` for a file that may not exist, such as a local override. Its appearing or disappearing invalidates the cache too:
+
+```js
+export default {
+  cache: {
+    type: "filesystem",
+    buildDependencies: {
+      config: [
+        import.meta.filename,
+        { dependency: "./webpack.local.js", optional: true },
+      ],
+    },
+  },
+};
+```
+
 ### cache.cacheDirectory
 
 `string`
@@ -159,6 +177,12 @@ export default {
   },
 };
 ```
+
+<Badge text="5.113.0+" /> `cacheUnaffected` works together with
+[`optimization.usedExports`](/configuration/optimization/#optimizationusedexports)
+and
+[`optimization.mangleExports`](/configuration/optimization/#optimizationmangleexports).
+Before 5.113.0, combining them was a configuration error.
 
 ### cache.compression
 

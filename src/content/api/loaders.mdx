@@ -471,6 +471,23 @@ T> The check runs where `getOptions` is called, so it happens while the first mo
 
 W> Validation is skipped entirely when webpack's [`validate`](/configuration/other-options/#validate) option is off. It defaults to `true`, but to `false` under [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) in `production` mode — so a schema is a development-time guard, not a check that every build is guaranteed to run.
 
+<Badge text="5.113.0+" />
+
+`this.getOptions(schema, [configuration], check)` also takes:
+
+- a function returning the schema, so the schema is only loaded when needed;
+- as the last argument, a check precompiled with `npx schema-utils precompile`. With valid options only the check runs and `ajv` is never loaded, which makes the loader start faster; invalid options produce the same errors as before. A check that no longer matches its schema warns with `DEP_WEBPACK_PRE_COMPILED_SCHEMA_INVALID`.
+
+```js
+import check from "./options.check.js";
+import schema from "./options.json";
+
+export default function (source) {
+  const { prefix = "" } = this.getOptions(() => schema, check);
+  return prefix + source;
+}
+```
+
 ### this.getResolve
 
 ```ts

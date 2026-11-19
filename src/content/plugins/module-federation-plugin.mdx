@@ -358,6 +358,32 @@ The version of the provided module. It allows webpack to replace lower matching 
 
 By default, webpack uses the version from the `package.json` file of the dependency.
 
+##### **`include`** and **`exclude`**
+
+<Badge text="5.112.0+" />
+
+`{ version?: string, request?: RegExp | string }`
+
+Filter which modules take part in sharing: with `include`, only matching modules are shared; with `exclude`, matching ones are not. A module filtered out is resolved and bundled as if it were not shared. `version` is tested against the module's version (for a consumed module, through its fallback, so it has no effect with `import: false`); `request` is matched against the rest of the request under a key that ends in `/`.
+
+```js
+import webpack from "webpack";
+
+export default {
+  plugins: [
+    new webpack.container.ModuleFederationPlugin({
+      name: "shop",
+      shared: {
+        // Share uuid only where the installed version satisfies ^8.3.2.
+        uuid: { requiredVersion: "^8.3.2", include: { version: "^8.3.2" } },
+        // Share lodash/* deep imports, except lodash/fp/*.
+        "lodash/": { exclude: { request: /^fp\// } },
+      },
+    }),
+  ],
+};
+```
+
 #### **Additional examples**
 
 ```js

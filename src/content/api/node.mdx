@@ -294,15 +294,15 @@ configuration array or [`dependencies`](/configuration/configuration-types/#depe
 
 A `MultiCompiler` exposes the child compilers' hooks as one, so a plugin can tap the set instead of every child:
 
-| Hook                | Type                                    | Description                                                                                                                                     |
-| ------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `done`              | `SyncHook<[MultiStats, Compiler[]]>`    | Called once every child compilation has finished. Aggregated, not a `MultiHook`.                                                                |
-| `shutdown`          | `AsyncSeriesHook<[]>`                   | <Badge text="5.110.0+" /> Called when the compilers are closing. A `MultiHook` over the children's `shutdown` hooks; taps receive no arguments. |
-| `invalid`           | `SyncHook<[string \| null, number]>`    | Called when a watched file changes in any of the children.                                                                                      |
-| `run`               | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a non-watch build.                                                                                                 |
-| `watchRun`          | `AsyncSeriesHook<[Compiler]>`           | Called before a child starts a watch build.                                                                                                     |
-| `watchClose`        | `SyncHook<[]>`                          | Called when watching stops.                                                                                                                     |
-| `infrastructureLog` | `SyncBailHook<[string, string, any[]]>` | Infrastructure logging for any child.                                                                                                           |
+| Hook                | Type                                        | Description                                                                                                                                     |
+| ------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `done`              | `AsyncSeriesHook<[MultiStats, Compiler[]]>` | Called once every child compilation has finished. Aggregated, not a `MultiHook`. A `SyncHook` before webpack 5.113.0.                           |
+| `shutdown`          | `AsyncSeriesHook<[]>`                       | <Badge text="5.110.0+" /> Called when the compilers are closing. A `MultiHook` over the children's `shutdown` hooks; taps receive no arguments. |
+| `invalid`           | `SyncHook<[string \| null, number]>`        | Called when a watched file changes in any of the children.                                                                                      |
+| `run`               | `AsyncSeriesHook<[Compiler]>`               | Called before a child starts a non-watch build.                                                                                                 |
+| `watchRun`          | `AsyncSeriesHook<[Compiler]>`               | Called before a child starts a watch build.                                                                                                     |
+| `watchClose`        | `SyncHook<[]>`                              | Called when watching stops.                                                                                                                     |
+| `infrastructureLog` | `SyncBailHook<[string, string, any[]]>`     | Infrastructure logging for any child.                                                                                                           |
 
 Since webpack 5.110.0 the `done` hook is also handed the compilers whose build actually ran, in configuration order. In watch mode a change usually invalidates only some of the children, and the others are reported from their previous stats, so this is how a plugin tells what is new:
 
@@ -317,6 +317,23 @@ compiler.hooks.done.tap("MyPlugin", (multiStats, changedCompilers) => {
   }
 });
 ```
+
+<Badge text="5.113.0+" />
+
+`done` is an `AsyncSeriesHook`, so a tap can finish asynchronous work — uploading assets, writing a report — before the `run()` or `watch()` callback is called, and its error reaches that callback:
+
+```js
+compiler.hooks.done.tapPromise(
+  "Upload",
+  async (multiStats, changedCompilers) => {
+    await upload(changedCompilers.map((child) => child.outputPath));
+  },
+);
+```
+
+`tap` keeps working. Calling `compiler.hooks.done.call()` yourself is deprecated (`DEP_WEBPACK_MULTI_COMPILER_DONE_CALL`); use `callAsync()` or `promise()`.
+
+A plugin can also be applied to the `MultiCompiler` itself from the configuration, by setting [`plugins` on the configuration array](/configuration/configuration-types/#plugins).
 
 On the first build every child is reported as changed. `shutdown` was added in the same release and lets a plugin release resources once, for the whole set, rather than tapping each child's own [`shutdown`](/api/compiler-hooks/#shutdown).
 

@@ -464,6 +464,8 @@ export function render() {
 
 The registry is keyed by style identifier and namespaced with [`output.uniqueName`](/configuration/output/#outputuniquename), so several bundles rendering in the same process do not read each other's styles.
 
+T> To know which client scripts and stylesheets a rendered page needs, pair it with [`SSRManifestPlugin`](/plugins/ssr-manifest-plugin/).
+
 ## \_\_webpack_get_script_filename\_\_ (webpack-specific)
 
 `(chunkId: string | number) => string`

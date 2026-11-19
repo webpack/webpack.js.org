@@ -24,7 +24,7 @@ Webpack handles these itself — install a loader only for what is _not_ on this
 - **WebAssembly** — [`experiments.asyncWebAssembly`](/configuration/experiments/#experiments)
 - **CSS** — [`experiments.css`](/configuration/experiments/#experimentscss), stable and on by default; see [what it covers](/guides/native-css/#whats-built-in)
 - **HTML** — [`experiments.html`](/configuration/experiments/#experimentshtml), stable and on by default; see [what it covers](/guides/native-html/#whats-built-in)
-- **TypeScript** — [`experiments.typescript`](/configuration/experiments/#experimentstypescript), experimental; erases types on Node.js 22.6+, but does not type-check or handle JSX
+- **TypeScript** — [`experiments.typescript`](/configuration/experiments/#experimentstypescript), erases types (on Node.js 22.6+ before webpack 5.113.0, on any supported Node.js since), but does not type-check or handle JSX
 
 Webpack enables use of [loaders](/concepts/loaders) to preprocess everything else. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
 Loaders are separate packages that extend webpack's capabilities and are maintained within the broader ecosystem.

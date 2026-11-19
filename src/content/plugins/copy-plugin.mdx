@@ -113,3 +113,28 @@ compilation.hooks.processAssets.tap(
 ```
 
 T> The [`output-copy` example](https://github.com/webpack/webpack/tree/main/examples/output-copy) carries this plugin in full, caching included, alongside a configuration exercising every pattern option.
+
+## Hooks
+
+### ignore
+
+<Badge text="5.112.0+" />
+
+`SyncBailHook<[path]>`
+
+Asked about each path before `globOptions.ignore`, with an absolute path using `/` separators. Return `true` to skip the path, `false` to copy it anyway, or nothing to let webpack decide. Directories are asked too, and skipping one skips everything in it. Since webpack 5.112.0 files inside `output.path` are never read as sources; return `false` here to copy one anyway.
+
+```js
+import webpack from "webpack";
+
+class NoDraftsPlugin {
+  apply(compiler) {
+    compiler.hooks.compilation.tap("NoDraftsPlugin", (compilation) => {
+      webpack.CopyPlugin.getCompilationHooks(compilation).ignore.tap(
+        "NoDraftsPlugin",
+        (path) => (path.includes("/drafts/") ? true : undefined),
+      );
+    });
+  }
+}
+```

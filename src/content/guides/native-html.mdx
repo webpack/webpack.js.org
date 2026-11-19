@@ -140,27 +140,78 @@ An HTML module imported this way is **not** emitted as a standalone file by defa
 
 By default the parser treats a known set of URL-bearing attributes as dependencies. Everything below is handled with no configuration:
 
-| Markup                                                | What happens                                                                       |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `<script src>`                                        | Becomes a classic chunk entry; the `src` is rewritten to the emitted chunk         |
-| `<script type="module" src>`                          | Becomes an ES module chunk entry                                                   |
-| `<script>…</script>` (inline)                         | The body becomes its own entry; the tag is rewritten to `<script src>`             |
-| `<style>…</style>` (inline)                           | Routed through the CSS pipeline; `@import` / `url()` resolved, text written back   |
-| `<style lang>`, `<script lang>` (inline)              | Same, after its [language's rules](#preprocessors-in-inline-style-and-script)      |
-| `style="…"` attribute                                 | Routed through the CSS pipeline as a declaration list                              |
-| `<link rel="stylesheet">`                             | Becomes a CSS chunk entry                                                          |
-| `<link rel="modulepreload">`                          | Becomes an independent entry (preloaded, never executed by a sibling)              |
-| `<link rel="preload">` / `<link rel="prefetch">`      | Its script/style is bundled and the `href` rewritten                               |
-| `<link rel="icon">`, `<link rel="manifest">`          | Emitted as hashed assets; the manifest's `icons` / `screenshots` / `shortcuts` too |
-| `<img src>`, `<img srcset>`, `<source srcset>`        | Emitted as hashed assets                                                           |
-| `<iframe srcdoc>`                                     | The document inside is bundled through the HTML pipeline                           |
-| SVG references (`fill`, `cursor`, `font-face-uri`, …) | `url(...)` targets are emitted as assets                                           |
-| `<meta name="twitter:player:stream">`                 | Emitted as a hashed asset                                                          |
+| Markup                                                | What happens                                                                                |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `<script src>`                                        | Becomes a classic chunk entry; the `src` is rewritten to the emitted chunk                  |
+| `<script type="module" src>`                          | Becomes an ES module chunk entry                                                            |
+| `<script>…</script>` (inline)                         | Bundled as an entry named after the page; a run of adjacent inline scripts shares one chunk |
+| `<style>…</style>` (inline)                           | Routed through the CSS pipeline; `@import` / `url()` resolved, text written back            |
+| `<style lang>`, `<script lang>` (inline)              | Same, after its [language's rules](#preprocessors-in-inline-style-and-script)               |
+| `style="…"` attribute                                 | Routed through the CSS pipeline as a declaration list                                       |
+| `<link rel="stylesheet">`                             | Becomes a CSS chunk entry                                                                   |
+| `<link rel="modulepreload">`                          | Becomes an independent entry (preloaded, never executed by a sibling)                       |
+| `<link rel="preload">` / `<link rel="prefetch">`      | Its script/style is bundled and the `href` rewritten                                        |
+| `<link rel="icon">`, `<link rel="manifest">`          | Emitted as hashed assets; the manifest's `icons` / `screenshots` / `shortcuts` too          |
+| `<img src>`, `<img srcset>`, `<source srcset>`        | Emitted as hashed assets                                                                    |
+| `<iframe srcdoc>`                                     | The document inside is bundled through the HTML pipeline                                    |
+| SVG references (`fill`, `cursor`, `font-face-uri`, …) | `url(...)` targets are emitted as assets                                                    |
+| `<meta name="twitter:player:stream">`                 | Emitted as a hashed asset                                                                   |
 
 Two rules make the JavaScript side predictable:
 
 - Multiple `<script src>` tags on the same page **share a single runtime**. Within each group (classic or `type="module"`), the leader holds the runtime and the rest declare `dependOn` on it.
 - With [`output.module`](/configuration/output/#outputmodule) enabled, classic `<script>` tags are auto-upgraded to `type="module"` so the emitted ES module chunks load in the right mode.
+- <Badge text="5.112.0+" /> A run of inline `<script>` bodies is bundled into **one chunk named after the page**. The first tag loads it and the others are removed. In classic output only tags separated by nothing but whitespace or comments form a run; with `output.module`, any run on the page does.
+
+**src/index.html**
+
+```html
+<script>
+  window.config = { api: "/v1" };
+</script>
+<script>
+  console.log(window.config.api);
+</script>
+<p>…</p>
+<script>
+  console.log("footer");
+</script>
+```
+
+The first two bodies become `index.js` and the third, after the `<p>`, becomes `index1.js`:
+
+```html
+<script src="index.js"></script>
+<p>…</p>
+<script src="index1.js"></script>
+```
+
+### Naming the chunks a page creates
+
+<Badge text="5.112.0+" />
+
+A chunk a page creates is named after its tag's file (`analytics.js` for `<script src="./analytics.js">`) or, for an inline body, after the page. Choose the names with [`module.parser.html.chunkName`](/configuration/module/#moduleparserhtmlchunkname), or name one tag with a `webpackChunkName` comment, which wins over the option:
+
+```js
+export default {
+  entry: "./src/index.html",
+  module: {
+    parser: {
+      html: {
+        // src-index-stylesheet-0.css, src-index-script-1.js, …
+        chunkName: "[page]-[type]-[index]",
+      },
+    },
+  },
+};
+```
+
+```html
+<!-- webpackChunkName: "analytics" -->
+<script src="./tracking.js"></script>
+```
+
+The name is also the stem of the emitted file, through [`output.filename`](/configuration/output/#outputfilename) and [`output.cssFilename`](/configuration/output/#outputcssfilename).
 
 Non-JS script types (`application/ld+json`, `importmap`, …), data URIs, and `<style>` with a non-CSS `type` flow through unchanged.
 
@@ -211,7 +262,7 @@ export default {
 };
 ```
 
-`<script lang="ts">` needs no rule when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript` — by default on Node.js 22.6+ when no rule already handles `.ts` files. Otherwise register a loader for it, e.g. `{ mimetype: "text/typescript", use: "ts-loader" }`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
+`<script lang="ts">` needs no rule when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript` — by default whenever no rule already handles `.ts` files (on webpack before 5.113.0, also only on Node.js 22.6+). Otherwise register a loader for it, e.g. `{ mimetype: "text/typescript", use: "ts-loader" }`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
 
 A `lang` webpack knows no media type for is typed `text/x-<lang>`: `x-` marks an unregistered subtype, so it never collides with a type webpack already handles (`text/javascript`, `text/css`, `text/html`). A `lang` that can't be a media type at all (spaces, symbols) leaves the body as plain CSS or JavaScript.
 
@@ -490,6 +541,8 @@ export default {
   },
 };
 ```
+
+Since webpack 5.112.0, `inline` also inlines the chunk an inline `<script>` run was bundled into, and a pattern is matched against emitted chunk names.
 
 An authored page can opt a single reference in or out with the `webpackInline` magic comment:
 
@@ -1076,6 +1129,7 @@ Set them globally under `module.parser.html`, or per rule with `parser` on a rul
 | [`as`](/configuration/module/#moduleparserhtmlas)                   | `'document' \| string`                                                             | `'document'` | Parse a full page, or the named element's inner HTML (a fragment).                              |
 | [`urlHints`](/configuration/module/#moduleparserhtmlurlhints)       | `UrlHintRule[]`                                                                    | `[]`         | Default resource-hint rules for the assets this parser references.                              |
 | [`template`](/configuration/module/#moduleparserhtmltemplate)       | `(source, context) => string`                                                      | —            | Transform the HTML source before dependencies are extracted.                                    |
+| [`chunkName`](/configuration/module/#moduleparserhtmlchunkname)     | `string \| (data) => string`                                                       | —            | <Badge text="5.112.0+" /> Name the chunks the page creates.                                     |
 | [`cssModules`](/configuration/module/#moduleparserhtmlcssmodules)   | `{ attributes?: Record<string, 'class' \| 'id' \| 'ids' \| 'fragment' \| 'url'> }` | —            | <Badge text="5.113.0+" /> Extra attributes [CSS Modules in HTML](#css-modules-in-html) rewrite. |
 | [`parseErrors`](/configuration/module/#moduleparserhtmlparseerrors) | `boolean`                                                                          | `false`      | <Badge text="5.113.0+" /> Report HTML parse errors as build errors and warnings.                |
 
@@ -1409,6 +1463,7 @@ An HTML comment placed immediately before a tag configures that tag alone:
 | Comment                                 | Effect                                                             |
 | --------------------------------------- | ------------------------------------------------------------------ |
 | `<!-- webpackIgnore: true -->`          | Leave the tag's URLs untouched.                                    |
+| `<!-- webpackChunkName: "name" -->`     | <Badge text="5.112.0+" /> Name the chunk the tag creates.          |
 | `<!-- webpackInline: true -->`          | Inline the referenced chunk into the page (`false` opts back out). |
 | `<!-- webpackPreload: true -->`         | Set the next referenced asset's hint to `preload`.                 |
 | `<!-- webpackPrefetch: true -->`        | Set it to `prefetch`.                                              |

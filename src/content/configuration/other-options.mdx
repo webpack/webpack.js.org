@@ -130,6 +130,15 @@ export default {
 };
 ```
 
+<Badge text="5.112.0+" /> `file` also takes a glob string, matched at any depth
+when relative:
+
+```js
+export default {
+  ignoreWarnings: [{ file: "**/legacy/**" }],
+};
+```
+
 ## loader
 
 `object`
@@ -420,6 +429,20 @@ An array of paths that are not managed by a package manager and the contents are
 It is checked before [`immutablePaths`](#immutablepaths) and [`managedPaths`](#managedpaths), so it is the way to carve a directory out of them — a linked package inside `node_modules`, for example. Files below an unmanaged path are snapshotted individually, according to [`snapshot.module`](#module) and [`snapshot.resolve`](#resolve).
 
 A regular expression here is only tested against the path, so it doesn't need a capture group.
+
+<Badge text="5.112.0+" />
+
+`managedPaths`, `immutablePaths` and `unmanagedPaths` also take glob strings. A pattern starting with `./` or `../` is relative to the [`context`](/configuration/entry-context/#context); where several match a path, the outermost match wins:
+
+```js
+export default {
+  snapshot: {
+    managedPaths: ["node_modules"],
+    // Packages of your own monorepo, linked into node_modules, change often.
+    unmanagedPaths: ["node_modules/@my-org/*"],
+  },
+};
+```
 
 ### module
 

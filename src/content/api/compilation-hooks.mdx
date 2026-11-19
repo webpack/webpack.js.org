@@ -859,6 +859,27 @@ Triggered to emit the hash for each chunk.
 
 `context` is a `ChunkHashContext` holding `chunkGraph`, `moduleGraph`, `runtimeTemplate` and `codeGenerationResults`.
 
+## chunkHashDependencies
+
+<Badge text="5.113.0+" />
+
+`SyncHook`
+
+Called for each chunk after chunk ids are assigned. A plugin adds the chunks whose file names this chunk's output contains; webpack hashes those first and includes their hashes in this chunk's hash, so a changed file name changes the hash of every chunk that names it.
+
+- Callback Parameters: `chunk` `dependencies`
+
+```js
+compilation.hooks.chunkHashDependencies.tap(
+  "MyPlugin",
+  (chunk, dependencies) => {
+    if (chunk.name === "main") {
+      dependencies.add(compilation.namedChunks.get("worker"));
+    }
+  },
+);
+```
+
 ## moduleAsset
 
 `SyncHook`

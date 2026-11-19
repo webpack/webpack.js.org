@@ -106,6 +106,25 @@ W> Since webpack 5, passing an entry name to `{cacheGroup}.test` and using a nam
 
 By default webpack will generate names using origin and name of the chunk (e.g. `vendors-main.js`). This option lets you specify the delimiter to use for the generated names.
 
+### splitChunks.dedupDepth
+
+<Badge text="5.112.0+" />
+
+`number = 0`
+
+How many rounds of intersections of chunk sets to search for modules that overlapping chunk sets share. With `0`, a module only gets its own chunk when one chunk set holds it; with `1`, modules shared by both `{a, b, c}` and `{a, b, d}` — that is, by `a` and `b` — can be split into one chunk too. Each round costs more build time. Only cache groups with automatic naming and a `minSize` / `minSizeReduction` take these candidates. Defaults to `1` with [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults).
+
+```js
+export default {
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      dedupDepth: 1,
+    },
+  },
+};
+```
+
 ### splitChunks.chunks
 
 `'initial' | 'async' | 'all' = 'async'` `RegExp` `(chunk: Chunk) => boolean | undefined`
@@ -465,6 +484,28 @@ export default {
 Assign modules to a cache group by module layer.
 
 #### splitChunks.cacheGroups.test
+
+<Badge text="5.112.0+" />
+
+`test` also takes a `{ glob }` object; a pattern starting with `!` excludes:
+
+```js
+export default {
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: {
+            glob: ["**/node_modules/**", "!**/node_modules/polyfills/**"],
+          },
+          name: "vendor",
+          chunks: "all",
+        },
+      },
+    },
+  },
+};
+```
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 

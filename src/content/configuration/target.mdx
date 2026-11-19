@@ -96,6 +96,13 @@ Notes for universal builds:
 
 - `new Worker(new URL(...))` resolves the `Worker` constructor from `worker_threads` in Node and from the global `Worker` on the web.
 - `commonjs` and `node-commonjs` externals are supported in the ESM output (loaded via `createRequire` from `process.getBuiltinModule`), and `global` externals use `globalThis` as the global object.
+- <Badge text="5.113.0+" /> Node.js built-ins are read through
+  `process.getBuiltinModule()` in the ESM output when the target's Node.js
+  version has it (Node.js 20.16+ on 20.x, or 22.3+), so the same file loads in
+  the browser too. A `universal` target without such a version cannot know that,
+  and warns that a static `import "node:fs"` would fail in a browser: name the
+  Node.js version, e.g. `target: ["node22.3", "web"]` with `output.module:
+  true`.
 - CSS runs in Node for server-side rendering: styles from `style` injection and `link`-loaded chunks are collected into `globalThis["__webpack_css__" + output.uniqueName]` for an SSR host to read.
 
 #### bun

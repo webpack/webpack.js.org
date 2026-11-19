@@ -41,6 +41,25 @@ By default, the current working directory of Node.js is used, but it's recommend
 
 ---
 
+<Badge text="5.111.0+" />
+
+Every option that takes an absolute path — `context`, [`output.path`](/configuration/output/#outputpath), rule conditions such as `include` / `exclude`, and plugin options like `ProfilingPlugin`'s `outputPath` — also accepts a `file://` URL string, so values from `import.meta.resolve()` or `new URL(…, import.meta.url)` can be used directly. Pass the URL's `.href`; a `URL` object is not accepted.
+
+```js
+export default {
+  context: new URL("./", import.meta.url).href,
+  output: { path: new URL("./dist/", import.meta.url).href },
+  module: {
+    rules: [
+      {
+        include: new URL("./src/", import.meta.url).href,
+        type: "javascript/auto",
+      },
+    ],
+  },
+};
+```
+
 ## entry
 
 `string` `string[]` `EntryObject` `EntryFn`

@@ -1529,23 +1529,50 @@ Parse the TC39 [source phase imports](https://github.com/tc39/proposal-source-ph
 
 - Type: `boolean`
 
+#### module.parser.javascript.topLevelThis
+
+<Badge text="5.112.0+" />
+
+What top-level `this` refers to in a non-ES module (CommonJS or a plain script).
+
+- Type: `'exports' | 'global'`
+- Default: `'exports'`
+
+`'exports'` makes it the module's exports object, as in Node.js. `'global'` makes it the global object, as in a classic browser script: webpack rewrites it to `globalThis`, or to its own global reference when the target has no `globalThis`. Use it for legacy scripts written as `(function (root) { … })(this)`:
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: /legacy/,
+        type: "javascript/auto",
+        parser: { topLevelThis: "global" },
+      },
+    ],
+  },
+};
+```
+
 #### Syntax toggles
 
 Each of these turns parsing of one module syntax on or off. They take a `boolean`, and **they do not all default the same way** — three of them are off, or warn, until you say otherwise:
 
-| Option           | Syntax                                                    | Default                                                                               |
-| ---------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `amd`            | AMD — `define()`, `require([...], cb)`                    | on                                                                                    |
-| `browserify`     | browserify-specific handling                              | on                                                                                    |
-| `commonjs`       | CommonJS — `require()`, `module.exports`                  | on                                                                                    |
-| `harmony`        | ECMAScript modules — `import` / `export`                  | on                                                                                    |
-| `import`         | `import()`                                                | on                                                                                    |
-| `requireContext` | `require.context()`                                       | on                                                                                    |
-| `requireEnsure`  | `require.ensure()`                                        | on                                                                                    |
-| `requireInclude` | `require.include()`                                       | on, and warns that it is deprecated unless you set it explicitly                      |
-| `requireJs`      | RequireJS specifics — `require.config`, `require.version` | **off** unless set to `true`                                                          |
-| `system`         | System.js — `System.import`, `System.register`            | **off** unless set to `true`                                                          |
-| `node`           | Node.js built-ins — `__dirname`, `__filename`, `global`   | takes the same shape as [`node`](/configuration/node/); `false` disables the handling |
+| Option           | Syntax                                                                         | Default                                                                               |
+| ---------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| `amd`            | AMD — `define()`, `require([...], cb)`                                         | on                                                                                    |
+| `browserify`     | browserify-specific handling                                                   | on                                                                                    |
+| `commonjs`       | CommonJS — `require()`, `module.exports`                                       | on                                                                                    |
+| `esm`            | ECMAScript modules — `import` / `export` (5.112.0+; the new name of `harmony`) | on                                                                                    |
+| `harmony`        | ECMAScript modules — `import` / `export`; deprecated spelling of `esm`         | on                                                                                    |
+| `import`         | `import()`                                                                     | on                                                                                    |
+| `requireContext` | `require.context()`                                                            | on                                                                                    |
+| `requireEnsure`  | `require.ensure()`                                                             | on                                                                                    |
+| `requireInclude` | `require.include()`                                                            | on, and warns that it is deprecated unless you set it explicitly                      |
+| `requireJs`      | RequireJS specifics — `require.config`, `require.version`                      | **off** unless set to `true`                                                          |
+| `system`         | System.js — `System.import`, `System.register`                                 | **off** unless set to `true`                                                          |
+| `node`           | Node.js built-ins — `__dirname`, `__filename`, `global`                        | takes the same shape as [`node`](/configuration/node/); `false` disables the handling |
 
 **webpack.config.js**
 
@@ -1766,6 +1793,36 @@ Default resource-hint rules for assets referenced from HTML attributes (`<img sr
 
 - Type: `UrlHintRule[]`
 
+#### module.parser.html.chunkName
+
+<Badge text="5.112.0+" />
+
+Name the chunks a page creates for its `<script>`, `<link rel="stylesheet">`, `<link rel="modulepreload">`, preload/prefetch links and inline script runs. A `<!-- webpackChunkName: "name" -->` comment before a tag wins over this option.
+
+- Type: `string | ((data: { page: string, name: string, index: number, type: string }) => string)`
+
+A string takes these placeholders:
+
+- `[page]` - the page's path relative to the context, escaped (`src-index` for `src/index.html`).
+- `[name]` - the basename of the tag's file, empty for an inline body.
+- `[index]` - the tag's position among the chunks the page creates, from `0`.
+- `[type]` - `script`, `script-module`, `modulepreload`, `stylesheet`, `html`, `preload` or `prefetch`.
+
+```js
+export default {
+  entry: "./src/index.html",
+  module: {
+    parser: {
+      html: {
+        chunkName: "[page]-[type]-[index]",
+      },
+    },
+  },
+};
+```
+
+With this option, a page with one stylesheet and two scripts emits `src-index-stylesheet-0.css`, `src-index-script-1.js` and `src-index-script-2.js`.
+
 #### module.parser.html.template
 
 Transform the raw HTML source **before** the parser extracts dependencies, so URLs emitted by a templating language (Handlebars, EJS, Eta, …) are still discovered and bundled. The function runs synchronously and must return the HTML string to parse.
@@ -1876,6 +1933,18 @@ export default {
   module: {
     noParse: (content) =>
       /jquery|lodash|src[\\/]vendor[\\/]somelib/.test(content),
+  },
+};
+```
+
+<Badge text="5.112.0+" />
+
+A string that is not an absolute path is read as a glob pattern; a relative pattern matches at any depth:
+
+```js
+export default {
+  module: {
+    noParse: ["**/vendor/*.min.js"],
   },
 };
 ```
@@ -3173,6 +3242,31 @@ export default {
             ],
           },
         }),
+      },
+    ],
+  },
+};
+```
+
+### UseEntry.sourceTest
+
+<Badge text="5.113.0+" />
+
+Run the loader only when its input matches a condition. The input is the source as it reaches this loader — the file's content, or the output of the loader after it in the chain — so a loader can skip work for files that do not need it. It takes the same kind of [condition](#condition) as `test`. Input that is not valid UTF-8 text always runs the loader.
+
+```js
+export default {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: "babel-loader",
+            // Only transpile files that use syntax older targets cannot read.
+            sourceTest: /=>|\bclass\s|\?\./,
+          },
+        ],
       },
     ],
   },
