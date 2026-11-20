@@ -519,7 +519,7 @@ export default {
 };
 ```
 
-Disable CSS minification alone with `minimize: { css: false }`, leaving JavaScript minification in place.
+Disable CSS minification alone with `minimize: { css: false }`, leaving JavaScript minification in place. The [Minification](/guides/minification/#css) guide shows each transform on real input.
 
 ### Vendor prefixes
 
@@ -543,7 +543,9 @@ export default {
 };
 ```
 
-T> Prefixing is only in effect for a `browserslist` [target](/configuration/target/) — any other target names no browsers to prefix for. Turn it off with `optimization.minimize.css.vendorPrefixes: false` when a PostCSS chain already does it.
+T> A [target](/configuration/target/) that names no browsers, such as `"web"`, is prefixed for browserslist's `defaults` query since webpack 5.112.0. Turn prefixing off with `optimization.minimize.css.vendorPrefixes: false` when a PostCSS chain already does it.
+
+The minimizer also lowers nesting, media ranges, new color functions, `light-dark()` and other modern syntax for the same targets, and drops prefixes and fallbacks they no longer need — see [CSS Browser Targets](/guides/css-browser-targets/) for every rewrite with examples.
 
 ## Resource hints and font preloading
 
@@ -971,6 +973,7 @@ Boolean parser options default to `true` unless the table says otherwise.
 | [`customSelectors`](/configuration/module/#moduleparsercsscustomselectors) | `boolean`                                          | `true`         | Resolve `@custom-selector` at build time.                                                          |
 | [`fontPreload`](/configuration/module/#moduleparsercssfontpreload)         | `boolean`                                          | `false`        | Preload each `@font-face`'s primary `src` from an HTML entry.                                      |
 | [`urlHints`](/configuration/module/#moduleparsercssurlhints)               | `UrlHintRule[]`                                    | —              | Resource-hint rules for assets referenced via `url(...)`.                                          |
+| [`parseErrors`](/configuration/module/#moduleparsercssparseerrors)         | `boolean`                                          | `false`        | <Badge text="5.113.0+" /> Report CSS parse errors as build errors and warnings.                    |
 
 ```js
 export default {

@@ -1,0 +1,501 @@
+---
+title: Minification
+description: How webpack minifies JavaScript, CSS, HTML, SVG and JSON out of the box, with before-and-after examples and the options that tune each minimizer.
+sort: 28.5
+contributors:
+  - alexander-akait
+---
+
+A production build minifies every asset type webpack emits, with no plugin to install. This guide shows what each minimizer does to real code and how to tune it. The full option reference is [`optimization.minimize`](/configuration/optimization/#optimizationminimize).
+
+| Asset       | Minimized by default | Configure with                                                                       | Since                     |
+| ----------- | -------------------- | ------------------------------------------------------------------------------------ | ------------------------- |
+| JavaScript  | yes                  | [`minimize.javascript`](/configuration/optimization/#optimizationminimizejavascript) | always                    |
+| CSS         | yes                  | [`minimize.css`](/configuration/optimization/#optimizationminimizecss)               | <Badge text="5.110.0+" /> |
+| HTML        | yes                  | [`minimize.html`](/configuration/optimization/#optimizationminimizehtml)             | <Badge text="5.110.0+" /> |
+| JSON        | opt-in               | [`minimize.json`](/configuration/optimization/#optimizationminimizejson)             | <Badge text="5.112.0+" /> |
+| SVG and XML | opt-in               | [`minimize.xml`](/configuration/optimization/#optimizationminimizexml)               | <Badge text="5.112.0+" /> |
+
+"By default" means whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on, which it is in `mode: "production"`. JSON and SVG minimizing are on by default with [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults).
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  optimization: {
+    minimize: {
+      // Each key configures one minimizer; `false` turns that one off.
+      javascript: { compress: { passes: 2 } },
+      css: {},
+      html: {},
+      json: true,
+      xml: {},
+    },
+  },
+};
+```
+
+All minimizers run in one worker pool, so adding CSS, HTML or SVG minimizing costs no extra plugin setup and no extra threads. If [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer) or `plugins` already holds a minimizer from the `minimizer-webpack-plugin` family for some files — `css-minimizer-webpack-plugin` for `.css`, `html-minimizer-webpack-plugin` for `.html`, … — webpack steps aside and leaves those assets to it, so an existing setup keeps working unchanged.
+
+## JavaScript
+
+JavaScript is compressed and mangled with [terser](https://terser.org/)'s options, defaulting to `{ compress: { passes: 2 } }`. The most common reason to configure it is to strip development-only code:
+
+**src/index.js**
+
+```js
+function assert(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
+export function area(width, height) {
+  console.log("area", width, height);
+  assert(width > 0, "width");
+  if (DEBUG) {
+    console.debug("debug build");
+  }
+  return width * height;
+}
+
+globalThis.area = area;
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  optimization: {
+    minimize: {
+      javascript: {
+        compress: {
+          // Remove console.* calls.
+          drop_console: true,
+          // Treat assert() as side-effect free, so unused calls are removed.
+          pure_funcs: ["assert"],
+          // Replace DEBUG with a constant and drop the dead branch.
+          global_defs: { DEBUG: false },
+        },
+      },
+    },
+  },
+};
+```
+
+**dist/main.js**
+
+```text
+(()=>{"use strict";globalThis.area=function(r,t){return r*t}})();
+```
+
+### Built-in JavaScript minifier
+
+<Badge text="5.112.0+" />
+
+With [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults), webpack minifies JavaScript with its own terser-compatible minifier. The same configuration works unchanged, and the result for the example above is:
+
+```text
+globalThis.area=function(e,i){return e*i};
+```
+
+<Badge text="5.113.0+" />
+
+Option names can also be written in camelCase. terser's snake_case names stay accepted, and webpack translates camelCase names for terser when terser does the minifying:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      javascript: {
+        compress: {
+          dropConsole: true,
+          pureFuncs: ["assert"],
+          globalDefs: { DEBUG: false },
+        },
+        mangle: { keepClassnames: true },
+      },
+    },
+  },
+};
+```
+
+## CSS
+
+<Badge text="5.110.0+" />
+
+The CSS minimizer replaces `css-minimizer-webpack-plugin` and cssnano. Every transform that keeps the stylesheet's meaning is on by default:
+
+**src/card.css**
+
+```css
+/*! Copyright Acme */
+/* a note */
+.card {
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  color: #ff0000;
+  background-color: rgb(255, 255, 255);
+  width: calc(100% - (2 * 16px));
+  transition: opacity 0.3s ease;
+  font-weight: bold;
+}
+.title {
+  color: red;
+}
+.subtitle {
+  color: red;
+}
+```
+
+**dist/main.css**
+
+```text
+.card{color:red;background-color:#fff;width:calc(100% - 32px);margin:10px 20px;font-weight:700;transition:opacity.3s}.subtitle,.title{color:red}/*! For license information please see main.css.LICENSE.txt */
+```
+
+What happened:
+
+- the four `margin-*` longhands became one `margin` shorthand (`mergeLonghands`);
+- `#ff0000` became `red`, `rgb(255, 255, 255)` became `#fff`, `bold` became `700` (`shortenColors`, `shortenValues`);
+- `calc(100% - (2 * 16px))` was computed as far as it can be (`reduceFunctions`);
+- `ease`, the default timing function, was left out, and `0.3s` became `.3s` (`shortenValues`, `shortenNumbers`);
+- `.title` and `.subtitle`, which print the same block, were joined (`mergeRules`);
+- the plain comment was removed, and the `/*!` legal comment was moved to `main.css.LICENSE.txt` ([license comments](#license-comments)).
+
+More examples of what the defaults do:
+
+| Input                                                       | Output                                        |
+| ----------------------------------------------------------- | --------------------------------------------- |
+| `font: 16px/1 serif; line-height: 1.5`                      | `font:16px/1.5 serif`                         |
+| `font-family: "Helvetica Neue", "Arial", sans-serif`        | `font-family:Helvetica Neue,Arial,sans-serif` |
+| `border: medium none currentcolor`                          | `border:none`                                 |
+| `transition: all 0s ease 0s`                                | `transition:all`                              |
+| `flex: 1 1 0%`                                              | `flex:1`                                      |
+| `linear-gradient(to bottom, #fff 0%, #000 100%)`            | `linear-gradient(#fff 0%,#000)`               |
+| `radial-gradient(circle at center, red 0%, blue 100%)`      | `radial-gradient(circle,red 0%,blue)`         |
+| `.a{color:red} .b{color:blue} .a{color:red}`                | `.b{color:blue}.a{color:red}`                 |
+| `@layer base{.a{…}} @layer theme{.b{…}} @layer base{.c{…}}` | `@layer base{.a{…}.c{…}}@layer theme{.b{…}}`  |
+
+Declarations are also printed in one order by property family (`reorderDeclarations`, <Badge text="5.112.0+" />), so blocks setting the same properties read alike, compress better, and can be merged:
+
+```css
+.a {
+  color: red;
+  display: flex;
+  margin: 0;
+  position: relative;
+}
+.b {
+  position: relative;
+  margin: 0;
+  display: flex;
+  color: red;
+}
+```
+
+becomes
+
+```text
+.a,.b{color:red;margin:0;display:flex;position:relative}
+```
+
+The minimizer also adds vendor prefixes, lowers modern syntax and drops dead fallbacks for your browserslist targets — see [CSS Browser Targets](/guides/css-browser-targets/).
+
+### Opt-in CSS transforms
+
+These are off by default because they change something a script can read back, or reorder the cascade:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      css: {
+        // `--space: calc( 2 * 8px )` → `--space:16px`
+        rewriteCustomProperties: true,
+        // `width: 16px` → `width:1pc`
+        convertLengthUnits: true,
+        // `.a{color:red}.b{margin:0}.c{color:red}` → `.a,.c{color:red}.b{margin:0}`
+        mergeDistantRules: true,
+      },
+    },
+  },
+};
+```
+
+Without `rewriteCustomProperties`, custom property values only lose their surrounding whitespace (`--color:  #FF0000` → `--color:#FF0000`), because `getComputedStyle()` hands them back exactly as written.
+
+### Removing unused classes
+
+[`unusedSymbols`](/configuration/optimization/#optimizationminimizecss) removes the classes, ids, `@keyframes` and custom properties you know nothing uses — for example from a coverage report or a content scan:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      css: {
+        unusedSymbols: ["unused", "gone", "fade", "--unused"],
+      },
+    },
+  },
+};
+```
+
+```text
+.used{color:red}
+.unused{color:blue}
+#gone{margin:0}
+@keyframes fade{to{opacity:0}}
+:root{--unused:1px}
+```
+
+becomes
+
+```text
+.used{color:red}
+```
+
+## HTML
+
+<Badge text="5.110.0+" />
+
+The HTML minimizer replaces `html-minimizer-webpack-plugin`. By default it keeps the document's DOM exactly — every transform a script or a selector could notice is opt-in. Inline stylesheets and `style` attributes go through the CSS minimizer, event handler attributes and `<iframe srcdoc>` documents are minified as the code they hold, and inline `<script>` bodies are bundled as JavaScript.
+
+**src/index.html**
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <!-- build: 2026-11-19 -->
+    <style>
+      .hero {
+        margin-top: 0px;
+        color: #ff0000;
+      }
+    </style>
+  </head>
+  <body>
+    <form action=" /search " method="GET">
+      <input type="text" name="q" disabled="disabled" class="  field   big " />
+      <button type="submit" onclick="  return   validate( this.form ) ;  ">
+        Search
+      </button>
+    </form>
+    <p style="color: #ffffff; margin: 0px">Hello <b>world</b></p>
+    <iframe srcdoc="<p   class='x'>  inner  </p>"></iframe>
+  </body>
+</html>
+```
+
+The defaults remove the comment, minify the `<style>`, `style=""`, `onclick` and `srcdoc` contents, drop the redundant attribute quotes, the whitespace around the `action` URL and inside `class`, collapse `disabled="disabled"` to `disabled`, lowercase `GET`, and leave out the tags the parser implies. Whitespace in text is kept, since `white-space` rules the minimizer cannot see may render it:
+
+```html
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Demo</title><style>.hero{color:red;margin-top:0}</style></head><body>
+    <form action=/search method=get>
+      <input type=text name=q disabled class="field big">
+      <button type=submit onclick="return validate(this.form)">
+        Search
+      </button>
+    </form>
+    <p style=color:#fff;margin:0>Hello <b>world</b></p>
+    <iframe srcdoc="<p class=x>  inner  "></iframe>
+
+
+</body></html>
+```
+
+Opt in to the transforms that change what the DOM reads back when you know nothing depends on them:
+
+```js
+export default {
+  mode: "production",
+  optimization: {
+    minimize: {
+      html: {
+        // Collapse whitespace runs, and drop them at block edges.
+        collapseWhitespace: "smart",
+        // Leave out <html>, <head> and <body> wherever the parser implies them.
+        removeImpliedTags: "all",
+        // Drop attributes set to their default value (type="text" on <input>, …).
+        removeRedundantAttributes: "smart",
+        // Order attributes and class lists consistently so pages gzip better.
+        sortAttributes: true,
+        sortTokenLists: true,
+        // Join adjacent <style> elements into one.
+        mergeStyles: true,
+      },
+    },
+  },
+};
+```
+
+With those options the same page becomes:
+
+```html
+<!doctype html><html lang=en><meta charset=utf-8><title>Demo</title><style>.hero{color:red;margin-top:0}</style><form action=/search method=get><input type=text class="big field" disabled name=q> <button type=submit onclick="return validate(this.form)"> Search </button></form><p style=color:#fff;margin:0>Hello <b>world</b></p> <iframe srcdoc="<p class=x>inner"></iframe>
+```
+
+See [Native HTML](/guides/native-html/#minification) for every HTML minimizer option and why each opt-in one is off.
+
+## SVG and XML
+
+<Badge text="5.112.0+" />
+
+Enable the SVG minimizer by giving `minimize.xml` an object. It minifies emitted `.svg` and `.xml` files — icons imported as [asset modules](/guides/asset-modules/), images referenced from CSS or HTML — and SVG `data:` URLs, and it replaces `svgo-loader` and `image-minimizer-webpack-plugin` for typical icon pipelines.
+
+**src/check.svg**
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generator: Sketch -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="24.000" height="24.000" viewBox="0 0 24 24">
+  <title>Check</title>
+  <g fill="#FF0000">
+    <path d="M 4.000 12.000 L 9.000 17.000 L 20.000 6.000" stroke="#000000"/>
+  </g>
+</svg>
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  optimization: {
+    minimize: {
+      xml: {},
+    },
+  },
+};
+```
+
+<Badge text="5.113.0+" />
+
+The defaults keep the drawing and everything a script or assistive technology can read, and shorten numbers, colors and path data, remove whitespace and comments, and drop unused namespaces:
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><title>Check</title><g fill="red"><path d="M4 12l5 5 11-11" stroke="#000"/></g></svg>
+```
+
+For icons that are only ever shown as images, opt in to svgo-style cleanups:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      xml: {
+        // Round geometry to 3 decimals, as svgo does.
+        precision: 3,
+        // Let the icon scale to its box.
+        removeDimensions: true,
+        // Collapse groups and move shared attributes onto their children.
+        cleanupStructure: true,
+        // Only if the icon needs no accessible name.
+        removeTitles: true,
+      },
+    },
+  },
+};
+```
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 12l5 5 11-11" stroke="#000" fill="red"/></svg>
+```
+
+An `<svg>` inlined in an HTML page follows the `shortenNumbers`, `shortenPathData` and `removeMetadata` switches too. See [`optimization.minimize.xml`](/configuration/optimization/#optimizationminimizexml) for all of the options, grouped by what they change.
+
+## JSON
+
+<Badge text="5.112.0+" />
+
+`minimize.json: true` re-serializes emitted `.json` and `.webmanifest` files without whitespace — files emitted as [asset modules](/guides/asset-modules/) or copied with [`output.copy`](/configuration/output/#outputcopy):
+
+```js
+export default {
+  module: {
+    rules: [{ test: /\.json$/, type: "asset/resource" }],
+  },
+  optimization: {
+    minimize: {
+      json: true,
+    },
+  },
+};
+```
+
+```json
+{
+  "name": "demo",
+  "items": [1, 2, 3]
+}
+```
+
+becomes `{"name":"demo","items":[1,2,3]}`. JSON imported into JavaScript is part of the bundle and is minified with it.
+
+## License comments
+
+<Badge text="5.112.0+" />
+
+Legal comments — `/*! … */`, `<!--! … -->` and comments containing `@license` or `@preserve` — are moved out of CSS and HTML files into a `[file].LICENSE.txt` next to them, the same way the JavaScript minimizer does, leaving one banner comment pointing at it:
+
+```css
+/*! Copyright Acme */
+.a {
+  color: red;
+}
+```
+
+**dist/main.css**
+
+```text
+.a{color:red}/*! For license information please see main.css.LICENSE.txt */
+```
+
+**dist/main.css.LICENSE.txt**
+
+```css
+/*! Copyright Acme */
+```
+
+Set `extractComments: false` to keep them in the stylesheet instead — `comments` then decides which survive — or pass a pattern or predicate to choose which ones move:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      css: {
+        // Keep /*! … */ banners in the CSS file.
+        extractComments: false,
+      },
+      html: {
+        // Move only comments mentioning a license.
+        extractComments: /license/i,
+      },
+    },
+  },
+};
+```
+
+## Turning minimizers off
+
+Disable one asset type and keep the rest minified:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      html: false,
+      css: false,
+    },
+  },
+};
+```
+
+To configure minimizing without switching it on — for example when `mode` decides whether to minimize — use [`optimization.minimizeOptions`](/configuration/optimization/#optimizationminimizeoptions), which takes the same object.
+
+W> Replacing [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer) with your own plugins replaces the built-in minimizers, and the options above no longer apply. Add `"..."` to the array to keep them alongside your plugins.

@@ -276,6 +276,12 @@ Enable additional in-memory caching of modules which are unchanged and reference
 
 Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
 
+<Badge text="5.113.0+" /> `cacheUnaffected` works together with
+[`optimization.usedExports`](/configuration/optimization/#optimizationusedexports)
+and
+[`optimization.mangleExports`](/configuration/optimization/#optimizationmangleexports).
+Before 5.113.0, combining them was a configuration error.
+
 ### experiments.deferImport
 
 Enable support of the tc39 proposal [the `import defer` proposal](https://github.com/tc39/proposal-defer-import-eval).
@@ -567,14 +573,14 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
         },
       entries?: boolean,
       imports?: boolean,
-      test?: string | RegExp | ((module: Module) => boolean)
+      test?: string | RegExp | { glob: string | string[] } | ((module: Module) => boolean)
     }
     ```
 
     - `backend`: Customize the backend.
     - `entries`: Enable lazy compilation for entries.
     - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
-    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
+    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled. Since webpack 5.112.0 it also takes a `{ glob }` object, e.g. `{ glob: "src/pages/**" }`; a pattern starting with `!` excludes.
 
 - Available: 5.17.0+
 - Example 1:
@@ -608,18 +614,49 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
   };
   ```
 
+#### Serving lazy compilation from your own server
+
+<Badge text="5.113.0+" />
+
+A development server can serve the lazy compilation backend from the server it already runs instead of a separate port, through the `transport` hook of `webpack.hmr.LazyCompilationPlugin`. A tap hands over the `server` (which the backend shares and never listens on or closes) and the `urlBase` clients reach it at; every request that is not for lazy compilation is passed on to the server's own handlers:
+
+```js
+import webpack from "webpack";
+
+class MyDevServerPlugin {
+  constructor(httpServer) {
+    this.httpServer = httpServer;
+  }
+
+  apply(compiler) {
+    webpack.hmr.LazyCompilationPlugin.getCompilerHooks(compiler).transport.tap(
+      "MyDevServerPlugin",
+      (transport) => ({
+        ...transport,
+        server: this.httpServer,
+        urlBase: "http://localhost:8080",
+      }),
+    );
+  }
+}
+```
+
+A tap can also return a `backend` of its own, which may bring its own `client`. A custom backend receives the settled options as its third argument.
+
 ### experiments.typescript
 
 <Badge text="5.107.0+" />
 
-Enable native TypeScript support. With the flag turned on, webpack compiles `.ts`, `.cts`, and `.mts` files (and the matching `data:text/typescript` and `data:application/typescript` data URIs) directly, without any external loader. Under the hood it calls Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options).
+Enable native TypeScript support. With the flag turned on, webpack compiles `.ts`, `.cts`, and `.mts` files (and the matching `data:text/typescript` and `data:application/typescript` data URIs) directly, without any external loader.
+
+Since webpack 5.113.0, webpack's own JavaScript parser reads the TypeScript syntax and skips the types, so each file is parsed once, source positions are kept exactly, and any Node.js version webpack supports works. Before 5.113.0 the types were removed with Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options), which needs Node.js >= 22.6.
 
 - Type: `boolean | 'auto'`
 - Default: `false`, `'auto'` since webpack 5.109.0
 
-Since webpack 5.109.0, the option defaults to `'auto'`: the built-in TypeScript support is enabled when the running Node.js provides `module.stripTypeScriptTypes` (>= 22.6) and no `module.rules` entry with a loader (e.g. `ts-loader`, `swc-loader`) matches `.ts`/`.mts`/`.cts` files. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
+Since webpack 5.109.0, the option defaults to `'auto'`: the built-in TypeScript support is enabled when no `module.rules` entry with a loader (e.g. `ts-loader`, `swc-loader`) matches `.ts`/`.mts`/`.cts` files. Before webpack 5.113.0, `'auto'` also required the running Node.js to provide `module.stripTypeScriptTypes` (>= 22.6). [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
-W> Requires Node.js >= 22.6 for the stable `module.stripTypeScriptTypes` API.
+W> On webpack 5.107.0 – 5.112.x this requires Node.js >= 22.6 for the stable `module.stripTypeScriptTypes` API. webpack 5.113.0 and later have no such requirement.
 
 ```js
 export default {

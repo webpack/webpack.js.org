@@ -133,3 +133,28 @@ new webpack.DefinePlugin({
 ```
 
 The value of `BUILT_AT` would be the time at which the `'sample.txt'` was last updated in the file system, e.g. `1597953013291`.
+
+<Badge text="5.112.0+" />
+
+The value function can be `async`. webpack resolves it before parsing the modules that use the value:
+
+```js
+import fs from "node:fs/promises";
+import webpack from "webpack";
+
+const pkg = new URL("./package.json", import.meta.url);
+
+export default {
+  plugins: [
+    new webpack.DefinePlugin({
+      APP_VERSION: webpack.DefinePlugin.runtimeValue(
+        async () =>
+          JSON.stringify(JSON.parse(await fs.readFile(pkg, "utf8")).version),
+        { fileDependencies: [pkg.pathname] },
+      ),
+    }),
+  ],
+};
+```
+
+A function that is not declared `async` but returns a promise needs `{ async: true }` in its options; otherwise the promise is an error.

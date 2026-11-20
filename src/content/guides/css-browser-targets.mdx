@@ -1,0 +1,721 @@
+---
+title: CSS Browser Targets
+description: Write modern CSS and let webpack add vendor prefixes, lower nesting, media ranges, new colors and shorthands, and drop dead fallbacks for your browserslist targets — without autoprefixer or postcss-preset-env.
+sort: 27.5
+contributors:
+  - alexander-akait
+---
+
+webpack's built-in CSS minimizer reads your [browserslist](https://github.com/browserslist/browserslist) targets and rewrites each stylesheet for them. It adds the vendor prefixes a selected browser still needs, rewrites syntax a browser cannot read as an equal spelling it can, writes a fallback before a color a browser cannot paint, and drops the prefixes and fallbacks no selected browser needs any more. For most projects that removes `autoprefixer`, `postcss-preset-env` and the `postcss-loader` that runs them.
+
+T> This guide builds on [Native CSS](/guides/native-css/). Everything here runs as part of [minification](/configuration/optimization/#optimizationminimizecss), so it applies to production builds (`mode: "production"`, or any build with `optimization.minimize` on) and needs no loader.
+
+Every example below shows the real output of the minimizer for the browsers named above it, formatted for readability — the emitted file is minified onto one line.
+
+## Choosing the targets
+
+Set [`target`](/configuration/target/) to `"browserslist"` and keep the query where browserslist looks for it — a `.browserslistrc` file, or the `browserslist` key in `package.json`:
+
+**.browserslistrc**
+
+```text
+> 0.5%
+last 2 versions
+not dead
+```
+
+**webpack.config.js**
+
+```js
+export default {
+  mode: "production",
+  target: "browserslist",
+  experiments: { css: true },
+};
+```
+
+A query can also be inlined in the target, which is handy for one-off builds:
+
+```js
+export default {
+  mode: "production",
+  target: "browserslist: safari 13, chrome 100",
+};
+```
+
+<Badge text="5.112.0+" />
+
+A target that names no browsers — `"web"`, `"webworker"`, `"electron-renderer"` or the default when no browserslist config exists — is minimized for browserslist's [`defaults`](https://browsersl.ist/#q=defaults) query, so the output stays readable by the browsers most people use. Name your browsers to get output tuned to them.
+
+## Vendor prefixes
+
+<Badge text="5.110.0+" />
+
+Write the standard property, pseudo-class, pseudo-element or value, and the minimizer adds the `-webkit-`, `-moz-` and `-ms-` spellings your targets still need:
+
+**src/styles.css**
+
+```css
+.btn {
+  user-select: none;
+  appearance: none;
+  backdrop-filter: blur(4px);
+}
+input::placeholder {
+  color: gray;
+}
+.player:fullscreen {
+  background: black;
+}
+.toolbar {
+  position: sticky;
+  top: 0;
+}
+.fade {
+  mask-image: linear-gradient(black, transparent);
+}
+```
+
+**dist/main.css** with `chrome 60, firefox 60, safari 12, edge 18`
+
+```css
+.btn {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+input::-webkit-input-placeholder {
+  color: gray;
+}
+input::-ms-input-placeholder {
+  color: gray;
+}
+input::placeholder {
+  color: gray;
+}
+.player:-webkit-full-screen {
+  background: #000;
+}
+.player:-moz-full-screen {
+  background: #000;
+}
+.player:fullscreen {
+  background: #000;
+}
+.toolbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+.fade {
+  -webkit-mask-image: linear-gradient(#000, transparent);
+  mask-image: linear-gradient(#000, transparent);
+}
+```
+
+A prefixed selector gets a rule of its own, since a browser drops a whole rule when it cannot parse one selector in it.
+
+### Dropping prefixes nobody needs
+
+The same data removes prefixes that no selected browser reads, so hand-written or vendored prefixes stop costing bytes once your targets move on:
+
+```css
+.btn {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 1px red;
+  box-shadow: 0 0 1px red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+```
+
+**dist/main.css** with `last 2 chrome versions, last 2 firefox versions, last 2 safari versions`
+
+```css
+.btn {
+  -webkit-user-select: none;
+  user-select: none;
+  border-radius: 4px;
+  display: flex;
+  box-shadow: 0 0 1px red;
+}
+```
+
+`-webkit-user-select` stays because current Safari still needs it.
+
+### Old flexbox and logical sizes
+
+<Badge text="5.112.0+" />
+
+Browsers that only implement the 2009 flexbox draft get its property and keyword names, and older WebKit gets its own names for logical sizes:
+
+```css
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.cell {
+  flex: 1;
+  order: 2;
+}
+```
+
+**dist/main.css** with `android 4.3, firefox 20`
+
+```css
+.row {
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  justify-content: space-between;
+  display: -webkit-box;
+  display: -moz-box;
+  display: flex;
+}
+.cell {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  flex: 1;
+  -webkit-box-ordinal-group: 3;
+  -moz-box-ordinal-group: 3;
+  order: 2;
+}
+```
+
+```css
+.panel {
+  inline-size: 20em;
+  block-size: 10em;
+}
+```
+
+**dist/main.css** with `safari 12`
+
+```css
+.panel {
+  -webkit-logical-width: 20em;
+  inline-size: 20em;
+  -webkit-logical-height: 10em;
+  block-size: 10em;
+}
+```
+
+## Lowering modern syntax
+
+<Badge text="5.111.0+" />
+
+When a selected browser cannot read a spelling, the minimizer writes the same value in a spelling it can. These rewrites are exact: each one means what you wrote. (A [color fallback](#color-fallbacks) is the one approximation, and it is written beside your color, not instead of it.)
+
+### CSS nesting
+
+```css
+.card {
+  color: red;
+
+  & .title {
+    font-weight: 700;
+  }
+
+  &:hover {
+    color: blue;
+  }
+
+  .dark & {
+    color: white;
+  }
+}
+```
+
+**dist/main.css** with `chrome 100, safari 15`
+
+```css
+.card {
+  color: red;
+}
+.card .title {
+  font-weight: 700;
+}
+.card:hover {
+  color: blue;
+}
+.dark .card {
+  color: #fff;
+}
+```
+
+For targets that read nesting (`last 2 chrome versions, last 2 firefox versions, last 2 safari versions`), the nested rules are kept as written:
+
+```css
+.card {
+  color: red;
+  & .title {
+    font-weight: 700;
+  }
+  &:hover {
+    color: blue;
+  }
+}
+```
+
+W> A conditional at-rule nested in a style rule (`.card { @media print { … } }`) and a declaration written after a nested rule are kept as written, because flattening them would change which declarations win. Write those at the top level if you target browsers without nesting.
+
+### Media query ranges
+
+```css
+@media (480px <= width <= 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+```
+
+**dist/main.css** with `chrome 100, safari 15`
+
+```css
+@media (min-width: 480px) and (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+```
+
+An inclusive bound (`<=`, `>=`) becomes `min-` / `max-`. A strict one such as `width > 1024px` has no exact `min-width` equivalent and is kept as written, so prefer inclusive bounds when you target older browsers.
+
+### Shorthands and multi-keyword values
+
+```css
+.overlay {
+  inset: 0;
+}
+.scroller {
+  overflow: hidden auto;
+}
+.chip {
+  display: inline flex;
+}
+.link {
+  text-decoration: underline 2px dotted red;
+}
+.stripes {
+  background-image: linear-gradient(green, red 30% 40%, pink);
+}
+```
+
+**dist/main.css** with `chrome 60, safari 12`
+
+```css
+.overlay {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.scroller {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.chip {
+  display: inline-flex;
+}
+.link {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
+.stripes {
+  background-image: linear-gradient(green, red 30%, red 40%, pink);
+}
+```
+
+### Colors
+
+Colors the target cannot read are rewritten to `rgba()` or hex where that is exact, and computed where every input is known:
+
+```css
+.a {
+  color: #7bffff80;
+}
+.b {
+  color: color-mix(in hsl, hsl(120deg 10% 20%) 25%, hsl(30deg 30% 40%));
+}
+.c {
+  color: rgb(from rebeccapurple r calc(g * 2) b);
+}
+```
+
+**dist/main.css** with `chrome 60, safari 12`
+
+```css
+.a {
+  color: rgba(123, 255, 255, 0.5);
+}
+.b {
+  color: #706a43;
+}
+.c {
+  color: #669;
+}
+```
+
+#### Color fallbacks
+
+A wide-gamut or perceptual color (`oklch()`, `lab()`, `lch()`, `hwb()`, `color()`, or a `color-mix()` in such a space) is kept, and the nearest sRGB color is written before it, so browsers that cannot read it still paint something close:
+
+```css
+.brand {
+  color: oklch(59.686% 0.15619 49.7694);
+}
+.ok {
+  background: hwb(120 20% 30%);
+}
+.mix {
+  color: color-mix(in oklch, red, blue);
+}
+```
+
+**dist/main.css** with `chrome 60, safari 12` (the `.mix` line with `chrome 100`)
+
+```css
+.brand {
+  color: #c65d06;
+  color: oklch(59.686% 0.15619 49.7694);
+}
+.ok {
+  background: #33b333;
+  background: hwb(120 20% 30%);
+}
+.mix {
+  color: #ba00c2;
+  color: color-mix(in oklch, red, blue);
+}
+```
+
+A mix with `currentcolor` cannot be computed at build time and gets no fallback. Turn fallbacks off with [`colorFallbacks: false`](/configuration/optimization/#optimizationminimizecss).
+
+#### `light-dark()`
+
+Browsers that read `color-scheme` but not `light-dark()` get the pair as custom properties toggled by `prefers-color-scheme`, so the color still follows the scheme:
+
+```css
+html {
+  color-scheme: light dark;
+}
+button {
+  background: light-dark(#eee, #222);
+  color: light-dark(black, white);
+}
+```
+
+**dist/main.css** with `chrome 100`
+
+```css
+html {
+  color-scheme: light dark;
+  --webpack-light: initial;
+  --webpack-dark:;
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    --webpack-light:;
+    --webpack-dark: initial;
+  }
+}
+button {
+  color: var(--webpack-light, #000) var(--webpack-dark, #fff);
+  background: var(--webpack-light, #eee) var(--webpack-dark, #222);
+}
+:where(:root) {
+  --webpack-light: initial;
+  --webpack-dark:;
+}
+```
+
+### `system-ui`
+
+Browsers that predate the `system-ui` keyword get each platform's own name for its UI font:
+
+```css
+body {
+  font-family: system-ui, sans-serif;
+}
+```
+
+**dist/main.css** with `chrome 50, firefox 50, safari 10`
+
+```css
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Noto Sans,
+    Ubuntu,
+    Cantarell,
+    Helvetica Neue,
+    sans-serif;
+}
+```
+
+### Custom media and custom selectors
+
+`@custom-media` and `@custom-selector` are resolved at build time by the [CSS parser](/configuration/module/#moduleparsercsscustommedia), and the result is lowered like anything else:
+
+```css
+@custom-media --narrow (width <= 40rem);
+@custom-selector :--heading h1, h2, h3;
+
+@media (--narrow) {
+  :--heading {
+    font-size: 1.25rem;
+  }
+}
+```
+
+**dist/main.css** with `chrome 100, safari 15`
+
+```css
+@media (max-width: 40rem) {
+  :is(h1, h2, h3) {
+    font-size: 1.25rem;
+  }
+}
+```
+
+## Dropping dead code for the target
+
+<Badge text="5.111.0+" />
+
+The other direction matters as much: CSS only browsers outside your targets could read is removed.
+
+A fallback declaration followed by one every target reads is dropped:
+
+```css
+.a {
+  color: #c65d06;
+  color: lab(50% 100 -100);
+}
+.b {
+  display: block;
+  display: flex;
+}
+.c {
+  width: auto;
+  width: fit-content;
+}
+```
+
+**dist/main.css** with `last 2 chrome versions, last 2 firefox versions, last 2 safari versions`
+
+```css
+.a {
+  color: lab(50% 100 -100);
+}
+.b {
+  display: flex;
+}
+.c {
+  width: fit-content;
+}
+```
+
+A rule whose selector only an engine outside the targets parses — `::-ms-expand`, `:-ms-input-placeholder`, Presto's `:-o-prefocus` — is removed, while one a selected engine reads stays:
+
+```css
+input::-ms-expand {
+  display: none;
+}
+input:-ms-input-placeholder {
+  color: red;
+}
+input::-webkit-slider-thumb {
+  width: 1px;
+}
+```
+
+**dist/main.css** with `defaults`
+
+```css
+input::-webkit-slider-thumb {
+  width: 1px;
+}
+```
+
+<Badge text="5.112.0+" />
+
+Without any browserslist target there is no list of engines to ask, so fallback pairs are kept. Set [`dropOverriddenDeclarations: true`](/configuration/optimization/#optimizationminimizecss) to drop them anyway, assuming today's Chromium, Gecko and WebKit:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      css: { dropOverriddenDeclarations: true },
+    },
+  },
+};
+```
+
+## Opt-in rewrites
+
+These rewrites are off by default because they approximate the source or rely on a script or markup you provide.
+
+### `:dir()` as an attribute selector
+
+[`rewriteDirSelector`](/configuration/optimization/#optimizationminimizecss) writes `:dir()` as the `[dir]` attribute selector for browsers without it. It only matches where the element itself carries `dir`, which is why it is opt-in:
+
+```js
+export default {
+  target: "browserslist: chrome 100, safari 15",
+  optimization: {
+    minimize: {
+      css: { rewriteDirSelector: true },
+    },
+  },
+};
+```
+
+```css
+.icon:dir(rtl) {
+  margin-left: 1rem;
+}
+```
+
+becomes
+
+```css
+.icon[dir="rtl"] {
+  margin-left: 1rem;
+}
+```
+
+### Pseudo-classes as classes
+
+[`pseudoClasses`](/configuration/optimization/#optimizationminimizecss) writes a pseudo-class as an ordinary class, for a polyfill script to toggle — for example the `focus-visible` polyfill:
+
+```js
+export default {
+  optimization: {
+    minimize: {
+      css: {
+        pseudoClasses: { "focus-visible": "focus-visible" },
+      },
+    },
+  },
+};
+```
+
+```css
+.button:focus-visible {
+  outline: 2px solid;
+}
+.button:not(:focus-visible) {
+  outline: none;
+}
+```
+
+becomes
+
+```css
+.button.focus-visible {
+  outline: 2px solid;
+}
+.button:not(.focus-visible) {
+  outline: none;
+}
+```
+
+### Approximate colors
+
+`shortenColors` only replaces a color function with hex where the hex is exactly the same color. [`convertApproximateColors`](/configuration/optimization/#optimizationminimizecss) also replaces colors that sit on a rounding boundary or outside the sRGB gamut with their nearest hex, trading exactness for bytes:
+
+```js
+export default {
+  target: "browserslist: last 2 chrome versions",
+  optimization: {
+    minimize: {
+      css: { convertApproximateColors: true },
+    },
+  },
+};
+```
+
+```css
+.a {
+  color: hwb(194 0% 0%);
+}
+.b {
+  color: oklch(70% 0.4 30);
+}
+```
+
+becomes
+
+```css
+.a {
+  color: #00c3ff;
+}
+.b {
+  color: red;
+}
+```
+
+## Turning features off
+
+Each part can be switched off on its own through [`optimization.minimize.css`](/configuration/optimization/#optimizationminimizecss), for example when a PostCSS chain still does that job:
+
+```js
+export default {
+  mode: "production",
+  target: "browserslist",
+  optimization: {
+    minimize: {
+      css: {
+        // Keep autoprefixer in charge of prefixes.
+        vendorPrefixes: false,
+        // Ship modern syntax as written.
+        lowerUnsupported: false,
+        // No sRGB color before oklch() / lab() / color-mix().
+        colorFallbacks: false,
+        // Keep fallbacks and rules for engines outside the targets.
+        removeDeadRules: false,
+      },
+    },
+  },
+};
+```
+
+With `lowerUnsupported: false`, `.a{inset:0;color:#7bffff80}` is kept as `.a{color:#7bffff80;inset:0}` even for `chrome 60`.
+
+T> Turn off minimizing for CSS alone with `optimization.minimize: { css: false }` — that also turns off prefixing and lowering, which happen in the minimizer.
+
+## Migrating from PostCSS
+
+| You used                                           | With native CSS                                                                     |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `autoprefixer`                                     | Built in: [vendor prefixes](#vendor-prefixes) for your browserslist                 |
+| `postcss-nesting`                                  | Built in: [nesting](#css-nesting) is lowered where targets need it                  |
+| `postcss-media-minmax`                             | Built in: [media ranges](#media-query-ranges)                                       |
+| `postcss-custom-media`, `postcss-custom-selectors` | Built in: [custom media and selectors](#custom-media-and-custom-selectors)          |
+| `postcss-color-*`, `postcss-oklab-function`        | Built in: [color lowering and fallbacks](#colors)                                   |
+| `postcss-light-dark-function`                      | Built in: [`light-dark()`](#light-dark)                                             |
+| `postcss-dir-pseudo-class`                         | Opt in: [`rewriteDirSelector`](#dir-as-an-attribute-selector)                       |
+| `postcss-focus-visible`                            | Opt in: [`pseudoClasses`](#pseudo-classes-as-classes)                               |
+| `cssnano`                                          | Built in: the [CSS minimizer](/configuration/optimization/#optimizationminimizecss) |
+
+Remove those plugins, then remove `postcss-loader` once nothing else runs through it. Keep it for tools that generate CSS, such as Tailwind CSS — see [Preprocessors, PostCSS and Tailwind](/guides/native-css/#preprocessors-postcss-and-tailwind).

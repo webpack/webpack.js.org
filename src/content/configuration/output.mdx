@@ -37,6 +37,31 @@ contributors:
 
 The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
 
+## output.allowOutside
+
+`boolean` `string[]`
+
+<Badge text="5.113.0+" />
+
+Where webpack may write, copy and clean files outside [`output.path`](#outputpath). `true` allows anywhere, `false` nowhere, and an array of absolute directories allows only inside those.
+
+When it is unset, assets a plugin emits outside `output.path` (`../report.html`) are still written, while [`output.copy`](#outputcopy) and [`output.clean`](#outputclean) stay inside `output.path` — a copy to `../public` fails with an error saying it would write outside `output.path`. With [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) it defaults to `false`, so plugin assets outside are refused too.
+
+**webpack.config.js**
+
+```js
+import path from "node:path";
+
+export default {
+  output: {
+    path: path.resolve(import.meta.dirname, "dist"),
+    // Copy static files into a sibling directory served by another app.
+    allowOutside: [path.resolve(import.meta.dirname, "public")],
+    copy: [{ from: "static", to: "../public" }],
+  },
+};
+```
+
 ## output.assetModuleFilename
 
 `string = '[hash][ext][query][fragment]'` `(pathData: PathData, assetInfo?: AssetInfo) => string`
@@ -326,6 +351,20 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 );
 ```
 
+<Badge text="5.112.0+" />
+
+`keep` also takes a `{ glob }` object; a pattern starting with `!` excludes:
+
+```js
+export default {
+  output: {
+    clean: {
+      keep: { glob: ["uploads/**", "!uploads/tmp/**"] },
+    },
+  },
+};
+```
+
 ## output.compareBeforeEmit
 
 `boolean = true`
@@ -344,6 +383,8 @@ export default {
 ```
 
 ## output.copy
+
+T> To copy outside `output.path`, list the target directory in [`output.allowOutside`](#outputallowoutside) (webpack 5.113.0+).
 
 <Badge text="5.111.0+" />
 
@@ -2250,6 +2291,27 @@ MyLibrary(_entry_return_);
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library.name` as well as `output.library.type`.
+
+### output.library.entryExports
+
+<Badge text="5.112.0+" />
+
+Which modules of a multi-module entry the library exposes the exports of.
+
+- Type: `'last' | 'all'`
+- Default: `'last'`
+
+With an array entry, a library normally exposes only the exports of the last module. `'all'` merges the exports of every module of the entry; a name two modules bind differently is left out with a warning, as `export *` does. It can also be set per entry, through [`entry.<name>.library`](/configuration/entry-context/#entry-descriptor).
+
+```js
+export default {
+  entry: ["./src/format.js", "./src/validate.js"],
+  output: {
+    filename: "utils.mjs",
+    library: { type: "module", entryExports: "all" },
+  },
+};
+```
 
 ### output.library.export
 
