@@ -58,7 +58,7 @@ export function area(width, height) {
   return width * height;
 }
 
-window.area = area;
+globalThis.area = area;
 ```
 
 **webpack.config.js**
@@ -86,7 +86,7 @@ export default {
 **dist/main.js**
 
 ```text
-(()=>{"use strict";window.area=function(n,r){return n*r}})();
+(()=>{"use strict";globalThis.area=function(r,t){return r*t}})();
 ```
 
 ### Built-in JavaScript minifier
@@ -96,7 +96,7 @@ export default {
 With [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults), webpack minifies JavaScript with its own terser-compatible minifier. The same configuration works unchanged, and the result for the example above is:
 
 ```text
-window.area=function(e,i){return e*i};
+globalThis.area=function(e,i){return e*i};
 ```
 
 <Badge text="5.113.0+" />

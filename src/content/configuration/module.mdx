@@ -3264,7 +3264,7 @@ export default {
           {
             loader: "babel-loader",
             // Only transpile files that use syntax older targets cannot read.
-            sourceTest: /=>|\bclass\s|\?\./,
+            sourceTest: /\bclass\s|=>|\?\./,
           },
         ],
       },
