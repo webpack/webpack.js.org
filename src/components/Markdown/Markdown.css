@@ -74,6 +74,11 @@
     &:hover a[aria-hidden="true"] {
       @apply opacity-100 visible;
     }
+
+    &:focus {
+      outline: 2px solid var(--color-brand-blue, #175d96);
+      outline-offset: 2px;
+    }
   }
 
   h1:first-child {
@@ -506,4 +511,13 @@
   /* Outranks `.dark .markdown code`, which would bring the chip back. */
   color: inherit;
   background: transparent;
+}
+
+.dark .markdown h1:focus,
+.dark .markdown h2:focus,
+.dark .markdown h3:focus,
+.dark .markdown h4:focus,
+.dark .markdown h5:focus,
+.dark .markdown h6:focus {
+  outline-color: var(--color-dark-link, #69a8ee);
 }
