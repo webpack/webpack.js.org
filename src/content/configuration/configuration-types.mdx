@@ -135,3 +135,36 @@ config.parallelism = 1;
 
 export default config;
 ```
+
+### plugins
+
+<Badge text="5.112.0+" />
+
+Plugins set on the configuration array itself are applied once to the `MultiCompiler` that runs every configuration, instead of to each child compiler. Use it for work that concerns the whole set, such as reporting which builds changed or uploading their output once all of them finish:
+
+- Type: `(WebpackPluginInstance | ((compiler: MultiCompiler) => void))[]`
+
+**webpack.config.js**
+
+```js
+const config = [
+  { name: "client", entry: "./src/client.js" },
+  { name: "server", entry: "./src/server.js", target: "node" },
+];
+
+config.plugins = [
+  {
+    apply(multiCompiler) {
+      multiCompiler.hooks.done.tap("Report", (multiStats, changedCompilers) => {
+        console.log(
+          `rebuilt: ${changedCompilers.map((c) => c.name).join(", ")}`,
+        );
+      });
+    },
+  },
+];
+
+export default config;
+```
+
+See the [`MultiCompiler` hooks](/api/node/#multicompiler-hooks) for what such a plugin can tap.

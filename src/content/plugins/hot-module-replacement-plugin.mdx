@@ -25,3 +25,29 @@ Enabling HMR is straightforward; the plugin takes no options.
 ```js
 new webpack.HotModuleReplacementPlugin();
 ```
+
+## Hooks
+
+### updateManifest
+
+<Badge text="5.113.0+" />
+
+`SyncHook<[manifest, { compilation, chunks, joinedSiblings }]>`
+
+Lets a plugin add its own data to the hot update manifest (`[runtime].[fullhash].hot-update.json`) that the runtime downloads, next to webpack's own `c` (updated chunks), `r` (removed chunks) and `m` (removed modules) fields:
+
+```js
+import webpack from "webpack";
+
+class MyHotDataPlugin {
+  apply(compiler) {
+    compiler.hooks.compilation.tap("MyHotDataPlugin", (compilation) => {
+      webpack.HotModuleReplacementPlugin.getCompilationHooks(
+        compilation,
+      ).updateManifest.tap("MyHotDataPlugin", (manifest, { chunks }) => {
+        manifest.myData = chunks.map((chunk) => chunk.id);
+      });
+    });
+  }
+}
+```

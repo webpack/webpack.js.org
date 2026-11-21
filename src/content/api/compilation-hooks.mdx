@@ -859,6 +859,27 @@ Triggered to emit the hash for each chunk.
 
 `context` is a `ChunkHashContext` holding `chunkGraph`, `moduleGraph`, `runtimeTemplate` and `codeGenerationResults`.
 
+## chunkHashDependencies
+
+<Badge text="5.113.0+" />
+
+`SyncHook`
+
+Called for each chunk after chunk ids are assigned. A plugin adds the chunks whose file names this chunk's output contains; webpack hashes those first and includes their hashes in this chunk's hash, so a changed file name changes the hash of every chunk that names it.
+
+- Callback Parameters: `chunk` `dependencies`
+
+```js
+compilation.hooks.chunkHashDependencies.tap(
+  "MyPlugin",
+  (chunk, dependencies) => {
+    if (chunk.name === "main") {
+      dependencies.add(compilation.namedChunks.get("worker"));
+    }
+  },
+);
+```
+
 ## moduleAsset
 
 `SyncHook`
@@ -1053,7 +1074,7 @@ class MyCssPlugin {
 }
 ```
 
-W> These hooks are only registered when `experiments.css` is enabled and may evolve while the CSS feature is experimental.
+T> These hooks are registered when the built-in CSS support is enabled — the default since webpack 5.109.0 ([`experiments.css`](/configuration/experiments/#experimentscss)). They are a stable API. With the `'auto'` default, a `module.rules` entry that gives `.css` files a loader or a `type` (pre- and post-loaders don't count) switches the built-in support off and these hooks never run; set `experiments.css: true` to keep them, and leave those files a CSS module type.
 
 ### orderModules
 
@@ -1113,7 +1134,7 @@ class MyHtmlPlugin {
 }
 ```
 
-W> These hooks are only registered when `experiments.html` is enabled and may evolve while the HTML feature is experimental.
+T> These hooks are registered when the built-in HTML support is enabled — the default since webpack 5.109.0 ([`experiments.html`](/configuration/experiments/#experimentshtml)). They are a stable API, the extension point that replaces the deprecated `html-webpack-plugin`'s hooks. With the `'auto'` default, a `module.rules` entry that gives `.html` files a loader or a `type` (pre- and post-loaders don't count) switches the built-in support off and these hooks never run; set `experiments.html: true` to keep them, and leave those files the `html` module type.
 
 ### injectTags
 

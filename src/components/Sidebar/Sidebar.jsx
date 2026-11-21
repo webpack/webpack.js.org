@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import DownIcon from "../../styles/icons/chevron-down.svg";
 import LoadingIcon from "../../styles/icons/loading.svg";
+import SideBarAd from "../CarbonAd/SideBar.jsx";
 import Print from "../Print/Print.jsx";
 import SidebarItem from "../SidebarItem/SidebarItem.jsx";
 
@@ -89,6 +90,9 @@ export default function Sidebar({ className = "", pages, currentPage }) {
             </div>
           );
         })}
+        {currentPage?.includes("/printable") ? null : (
+          <SideBarAd key={currentPage} />
+        )}
       </div>
     </nav>
   );

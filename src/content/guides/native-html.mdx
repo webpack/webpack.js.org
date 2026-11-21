@@ -1,6 +1,6 @@
 ---
 title: Native HTML
-description: Bundle HTML with webpack's built-in HTML support, and migrate off html-loader and html-webpack-plugin.
+description: Bundle HTML with webpack's built-in HTML support, scope pages with CSS Modules, and migrate off html-loader and html-webpack-plugin.
 sort: 28
 contributors:
   - alexander-akait
@@ -8,11 +8,21 @@ contributors:
 
 This guide shows how to use webpack's native HTML handling with `experiments.html`, and how to migrate an existing setup off `html-loader` and `html-webpack-plugin`.
 
-T> `experiments.html` is still experimental. It is expected to become the default in webpack v6, but behavior can still change while development continues. The overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+T> Native HTML is stable and the recommended way to build pages in webpack 5.109.0 and later — it is on by default. The option keeps its `experiments.html` name until webpack v6 makes it unconditional. `html-loader` and `html-webpack-plugin` are deprecated.
 
 ## Getting Started
 
-Enable native HTML support in your webpack configuration:
+On webpack 5.109.0 or later there is nothing to install: point an entry at a page, and webpack builds it — no `html-webpack-plugin`, no `html-loader`:
+
+**webpack.config.js**
+
+```js
+export default {
+  entry: "./src/index.html",
+};
+```
+
+[`experiments.html`](/configuration/experiments/#experimentshtml) defaults to `'auto'`, which turns the built-in support on as long as no `module.rules` entry already claims `.html` files. Set it to `true` yourself when you add such a rule, or to make `.html` resolve ahead of `.js` for imports written without an extension:
 
 **webpack.config.js**
 
@@ -24,22 +34,22 @@ export default {
 };
 ```
 
-With this option enabled, webpack understands `.html` files as first-class modules: it parses them itself instead of handing them to a loader.
+Either way, webpack understands `.html` files as first-class modules: it parses them itself instead of handing them to a loader.
 
 ## What's built-in
 
-"Built-in" means webpack does the work itself, with no loader or plugin in the chain — not that it covers everything `html-loader` and `html-webpack-plugin` do. The scope is exactly this:
+"Built-in" means webpack does the work itself, with no loader or plugin in the chain. It replaces `html-loader` and `html-webpack-plugin`, both deprecated, without copying every option they had — options that a native build no longer needs are deliberately left out. The scope is exactly this:
 
-| Built in                                                                                                                | Still needs a loader or plugin                                                                                                                                         |
-| ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Parsing `.html`, as an [entry point](#1-html-as-an-entry-point) or [imported from JS](#3-html-imported-from-javascript) | **Template engines** — Pug, EJS, Handlebars and friends, unless a synchronous [`template`](#templating) hook is enough                                                 |
-| [Extracting every URL a page references](#what-webpack-bundles-from-a-page) and rewriting it to the built filename      | `html-loader`'s `sources.scriptingEnabled` and `postprocessor`                                                                                                         |
-| Bundling inline `<script>` and `<style>` bodies, and `style=""` attributes                                              | `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache`                                                                                            |
-| [Generating a page](#2-a-generated-page-for-a-javascript-entry) per entrypoint with its chunks injected                 | The third-party plugins that tap `html-webpack-plugin`'s hooks — they do not run as-is, but most [rewrite](#rewriting-a-plugin-that-tapped-its-hooks) into a few lines |
-| [`title`, `meta`, `base`, `favicon`, `manifest`, `integrity`, `csp`, inlining](#configuring-the-generated-page)         |                                                                                                                                                                        |
-| [Minification](#minification) and Hot Module Replacement                                                                |                                                                                                                                                                        |
+| Built in                                                                                                                        | Not built in                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parsing `.html`, as an [entry point](#1-html-as-an-entry-point) or [imported from JS](#3-html-imported-from-javascript)         | **Template engines** — Pug, EJS, Handlebars and friends, unless a synchronous [`template`](#templating) hook is enough                                                 |
+| [Extracting every URL a page references](#what-webpack-bundles-from-a-page) and rewriting it to the built filename              | `html-loader`'s `sources.scriptingEnabled` and `postprocessor`                                                                                                         |
+| Bundling inline `<script>` bodies, and — with [native CSS](/guides/native-css/) on — `<style>` bodies and `style=""` attributes | `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache` — not needed with native HTML, so intentionally not carried over                           |
+| [Generating a page](#2-a-generated-page-for-a-javascript-entry) per entrypoint with its chunks injected                         | The third-party plugins that tap `html-webpack-plugin`'s hooks — they do not run as-is, but most [rewrite](#rewriting-a-plugin-that-tapped-its-hooks) into a few lines |
+| [`title`, `meta`, `base`, `favicon`, `manifest`, `integrity`, `csp`, inlining](#configuring-the-generated-page)                 |                                                                                                                                                                        |
+| [Minification](#minification) and Hot Module Replacement                                                                        |                                                                                                                                                                        |
 
-So a project using `html-webpack-plugin` to scaffold a document around its bundles, or `html-loader` to import a partial, needs neither. A project that renders its page through a template engine, or depends on a plugin that hooks into `html-webpack-plugin`, keeps that plugin.
+So a project using `html-webpack-plugin` to scaffold a document around its bundles, or `html-loader` to import a partial, needs neither. A project that renders its page through an asynchronous template engine keeps that engine's loader; a plugin that hooked into `html-webpack-plugin` [rewrites](#rewriting-a-plugin-that-tapped-its-hooks) onto webpack's own hooks.
 
 T> Since webpack 5.109.0 the option defaults to `'auto'`: built-in HTML support turns on unless a [`module.rules`](/configuration/module/#modulerules) entry with a loader (or an explicit module type) already matches `.html` files. An existing `html-loader` setup therefore keeps working untouched, and you can migrate one rule at a time. [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) resolves it to `true`.
 
@@ -130,27 +140,78 @@ An HTML module imported this way is **not** emitted as a standalone file by defa
 
 By default the parser treats a known set of URL-bearing attributes as dependencies. Everything below is handled with no configuration:
 
-| Markup                                                | What happens                                                                       |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `<script src>`                                        | Becomes a classic chunk entry; the `src` is rewritten to the emitted chunk         |
-| `<script type="module" src>`                          | Becomes an ES module chunk entry                                                   |
-| `<script>…</script>` (inline)                         | The body becomes its own entry; the tag is rewritten to `<script src>`             |
-| `<style>…</style>` (inline)                           | Routed through the CSS pipeline; `@import` / `url()` resolved, text written back   |
-| `<style lang>`, `<script lang>` (inline)              | Same, after its [language's rules](#preprocessors-in-inline-style-and-script)      |
-| `style="…"` attribute                                 | Routed through the CSS pipeline as a declaration list                              |
-| `<link rel="stylesheet">`                             | Becomes a CSS chunk entry                                                          |
-| `<link rel="modulepreload">`                          | Becomes an independent entry (preloaded, never executed by a sibling)              |
-| `<link rel="preload">` / `<link rel="prefetch">`      | Its script/style is bundled and the `href` rewritten                               |
-| `<link rel="icon">`, `<link rel="manifest">`          | Emitted as hashed assets; the manifest's `icons` / `screenshots` / `shortcuts` too |
-| `<img src>`, `<img srcset>`, `<source srcset>`        | Emitted as hashed assets                                                           |
-| `<iframe srcdoc>`                                     | The document inside is bundled through the HTML pipeline                           |
-| SVG references (`fill`, `cursor`, `font-face-uri`, …) | `url(...)` targets are emitted as assets                                           |
-| `<meta name="twitter:player:stream">`                 | Emitted as a hashed asset                                                          |
+| Markup                                                | What happens                                                                                |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `<script src>`                                        | Becomes a classic chunk entry; the `src` is rewritten to the emitted chunk                  |
+| `<script type="module" src>`                          | Becomes an ES module chunk entry                                                            |
+| `<script>…</script>` (inline)                         | Bundled as an entry named after the page; a run of adjacent inline scripts shares one chunk |
+| `<style>…</style>` (inline)                           | Routed through the CSS pipeline; `@import` / `url()` resolved, text written back            |
+| `<style lang>`, `<script lang>` (inline)              | Same, after its [language's rules](#preprocessors-in-inline-style-and-script)               |
+| `style="…"` attribute                                 | Routed through the CSS pipeline as a declaration list                                       |
+| `<link rel="stylesheet">`                             | Becomes a CSS chunk entry                                                                   |
+| `<link rel="modulepreload">`                          | Becomes an independent entry (preloaded, never executed by a sibling)                       |
+| `<link rel="preload">` / `<link rel="prefetch">`      | Its script/style is bundled and the `href` rewritten                                        |
+| `<link rel="icon">`, `<link rel="manifest">`          | Emitted as hashed assets; the manifest's `icons` / `screenshots` / `shortcuts` too          |
+| `<img src>`, `<img srcset>`, `<source srcset>`        | Emitted as hashed assets                                                                    |
+| `<iframe srcdoc>`                                     | The document inside is bundled through the HTML pipeline                                    |
+| SVG references (`fill`, `cursor`, `font-face-uri`, …) | `url(...)` targets are emitted as assets                                                    |
+| `<meta name="twitter:player:stream">`                 | Emitted as a hashed asset                                                                   |
 
 Two rules make the JavaScript side predictable:
 
 - Multiple `<script src>` tags on the same page **share a single runtime**. Within each group (classic or `type="module"`), the leader holds the runtime and the rest declare `dependOn` on it.
 - With [`output.module`](/configuration/output/#outputmodule) enabled, classic `<script>` tags are auto-upgraded to `type="module"` so the emitted ES module chunks load in the right mode.
+- <Badge text="5.112.0+" /> A run of inline `<script>` bodies is bundled into **one chunk named after the page**. The first tag loads it and the others are removed. In classic output only tags separated by nothing but whitespace or comments form a run; with `output.module`, any run on the page does.
+
+**src/index.html**
+
+```html
+<script>
+  window.config = { api: "/v1" };
+</script>
+<script>
+  console.log(window.config.api);
+</script>
+<p>…</p>
+<script>
+  console.log("footer");
+</script>
+```
+
+The first two bodies become `index.js` and the third, after the `<p>`, becomes `index1.js`:
+
+```html
+<script src="index.js"></script>
+<p>…</p>
+<script src="index1.js"></script>
+```
+
+### Naming the chunks a page creates
+
+<Badge text="5.112.0+" />
+
+A chunk a page creates is named after its tag's file (`analytics.js` for `<script src="./analytics.js">`) or, for an inline body, after the page. Choose the names with [`module.parser.html.chunkName`](/configuration/module/#moduleparserhtmlchunkname), or name one tag with a `webpackChunkName` comment, which wins over the option:
+
+```js
+export default {
+  entry: "./src/index.html",
+  module: {
+    parser: {
+      html: {
+        // src-index-stylesheet-0.css, src-index-script-1.js, …
+        chunkName: "[page]-[type]-[index]",
+      },
+    },
+  },
+};
+```
+
+```html
+<!-- webpackChunkName: "analytics" -->
+<script src="./tracking.js"></script>
+```
+
+The name is also the stem of the emitted file, through [`output.filename`](/configuration/output/#outputfilename) and [`output.cssFilename`](/configuration/output/#outputcssfilename).
 
 Non-JS script types (`application/ld+json`, `importmap`, …), data URIs, and `<style>` with a non-CSS `type` flow through unchanged.
 
@@ -201,7 +262,7 @@ export default {
 };
 ```
 
-`<script lang="ts">` needs no rule when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript` — by default on Node.js 22.6+ when no rule already handles `.ts` files. Otherwise register a loader for it, e.g. `{ mimetype: "text/typescript", use: "ts-loader" }`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
+`<script lang="ts">` needs no rule when [`experiments.typescript`](/configuration/experiments/#experimentstypescript) handles `text/typescript` — by default whenever no rule already handles `.ts` files (on webpack before 5.113.0, also only on Node.js 22.6+). Otherwise register a loader for it, e.g. `{ mimetype: "text/typescript", use: "ts-loader" }`. The compiled CSS goes through the CSS pipeline like any other `<style>`, so `url()` resolves relative to the page, and a body no rule matches is read as CSS or JavaScript, as before.
 
 A `lang` webpack knows no media type for is typed `text/x-<lang>`: `x-` marks an unregistered subtype, so it never collides with a type webpack already handles (`text/javascript`, `text/css`, `text/html`). A `lang` that can't be a media type at all (spaces, symbols) leaves the body as plain CSS or JavaScript.
 
@@ -218,6 +279,88 @@ export default {
 W> A `data:` module has no file path. Loaders see the page's directory as `this.context`, but a loader that locates files from `this.resourcePath` — as `sass-loader`, `less-loader` and `stylus-loader` currently do — can't resolve a relative `@use` / `@import` from an inline body, and `sass-loader` reads `lang="sass"` as SCSS unless its options ask for the indented syntax. Keep partial-importing styles in a stylesheet file.
 
 `<style type="text/less">` and `<script type="text/typescript">` keep flowing through unchanged — only `lang` opts a body into a loader.
+
+### CSS Modules in HTML
+
+<Badge text="5.113.0+" />
+
+A page can use [CSS Modules](/guides/native-css/#css-modules) without any JavaScript. Mark an inline stylesheet with the `module` attribute, or link a stylesheet that is a CSS module (a `.module.css` file, or any file a rule types as `css/module`), and webpack scopes its class names and ids and rewrites the page's markup to match:
+
+**src/index.html**
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./card.module.css" />
+    <style module>
+      .title {
+        font-size: 2rem;
+      }
+      .base {
+        margin: 0;
+      }
+      .primary {
+        composes: base;
+        color: blue;
+      }
+      #help {
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Hello</h1>
+    <button class="primary card" aria-describedby="help">Save</button>
+    <p id="help">Saves the draft.</p>
+    <a href="#help">What does it do?</a>
+  </body>
+</html>
+```
+
+With `mode: "development"` and `localIdentName: "[id]-[local]"` set on the `css/module` and `css/auto` [generators](/guides/native-css/#naming-the-scoped-classes), the page is emitted as:
+
+**dist/index.html**
+
+```html
+<h1 class="src_index_html-style-1-title">Hello</h1>
+<button
+  class="src_index_html-style-1-primary src_index_html-style-1-base src_card_module_css-card"
+  aria-describedby="src_index_html-style-1-help"
+>
+  Save
+</button>
+<p id="src_index_html-style-1-help">Saves the draft.</p>
+<a href="#src_index_html-style-1-help">What does it do?</a>
+```
+
+What you get:
+
+- **Scoped names** generated with the [`localIdentName`](/guides/native-css/#naming-the-scoped-classes) of the CSS module type, hashed in production.
+- **`composes`** adds the composed classes to the element, and `:global(.name)` keeps a name unscoped.
+- **Every reference to an id** follows it: `for`, `form`, `list`, the `aria-*` ID references, `popovertarget`, `commandfor`, `interestfor`, same-page links (`href="#help"`), SVG `href` / `xlink:href`, `url(#id)` paints such as `fill` and `clip-path`, and SMIL `begin` / `end` timings. Add your own attributes with [`module.parser.html.cssModules.attributes`](/configuration/module/#moduleparserhtmlcssmodules).
+- **Unknown names stay as written**, so global classes (from a plain `<style>` or a plain linked stylesheet) keep working side by side with scoped ones. A plain `<style>` without `module` stays global.
+- **Preprocessors** work too: `<style module lang="scss">` runs through the loader that [`lang`](#preprocessors-in-inline-style-and-script) selects and is then scoped.
+
+When several modules on a page declare the same name, the first one wins. To keep them apart, name a module with `module="name"` and refer to its names as `name.class` / `name.id`:
+
+```html
+<link rel="stylesheet" href="./theme.module.css" module="theme" />
+<style module="card">
+  .btn {
+    color: white;
+  }
+  #field {
+    color: gray;
+  }
+</style>
+
+<button class="theme.btn card.btn">OK</button>
+<label for="card.field">Name</label>
+<input id="card.field" />
+```
+
+A `name.class` that no module named `name` declares (`other.x`) is left untouched. Put a `<!-- webpackIgnore: true -->` comment before an element to leave its names as written.
 
 ### Skipping a single URL
 
@@ -399,6 +542,8 @@ export default {
 };
 ```
 
+Since webpack 5.112.0, `inline` also inlines the chunk an inline `<script>` run was bundled into, and a pattern is matched against emitted chunk names.
+
 An authored page can opt a single reference in or out with the `webpackInline` magic comment:
 
 ```html
@@ -555,6 +700,33 @@ export default {
 };
 ```
 
+### Loaders that output HTML
+
+A loader whose result is HTML _text_ — Markdown converters, `posthtml-loader`, `pug-plain-loader`, or a few lines of your own — chains in front of native HTML the way `sass-loader` chains in front of native CSS: keep the loader in `use` and set the rule's `type` to `"html"`. Webpack then parses the loader's output, bundles every `<img src>` and `<link>` it finds — and every inline `<style>`, as long as [native CSS](/guides/native-css/) is on — and rewrites the URLs, which is what `html-loader` used to be appended to the chain for:
+
+```diff
+ {
+   test: /\.md$/i,
+-  use: ["html-loader", "markdown-loader"],
++  use: ["markdown-loader"],
++  type: "html",
++  parser: { as: "template" },
++  generator: { extract: false },
+ }
+```
+
+**src/index.js**
+
+```js
+import article from "./article.md";
+
+document.querySelector("main").innerHTML = article;
+```
+
+`parser.as: "template"` parses the output as a fragment rather than a whole document (see [Parsing a fragment](#parsing-a-fragment)), and `generator.extract: false` keeps it as a string export instead of emitting a page. Leave both out, and point an `entry` at the file, to turn the loader's output into a full page instead. Because such a rule matches `.md` rather than `.html` files, it does not switch the [`'auto'`](/configuration/experiments/#experimentshtml) default off.
+
+Prefer the [`template`](#templating) hook for an engine with a synchronous API; reach for a loader when the transformation is asynchronous, already packaged as one, or needs a loader's caching and watch integration.
+
 ### Parsing a fragment
 
 An HTML partial is not a document, and parsing it as one drops context-sensitive tags — a bare `<tr>` outside a table, for instance. [`module.parser.html.as`](/configuration/module/#moduleparserhtmlas) names the context element to parse the source as:
@@ -581,7 +753,7 @@ export default {
 
 ## Minification
 
-HTML assets are minified by the built-in minimizer whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
+HTML assets are minified by the built-in minimizer (webpack 5.110.0 or later) whenever [`optimization.minimize`](/configuration/optimization/#optimizationminimize) is on — which it is by default in `mode: 'production'`. There is nothing to install and nothing to wire up:
 
 **webpack.config.js**
 
@@ -615,6 +787,8 @@ export default {
 
 Inline `<style>` elements and `style=""` attributes are minified with the CSS minimizer using the options `optimization.minimize.css` names, so a stylesheet and the same declarations inline are treated identically. Disable HTML minification alone with `minimize: { html: false }`.
 
+Once [`optimization.minimize.xml`](/configuration/optimization/#optimizationminimizexml) is set — the option that minifies standalone `.svg` files — an `<svg>` inlined in the page follows its `shortenNumbers`, `shortenPathData` and `removeMetadata` switches too.
+
 ## Hot Module Replacement
 
 HTML modules support [Hot Module Replacement](/concepts/hot-module-replacement/) with no extra configuration — it activates whenever HMR is on, for example via [`devServer.hot`](/configuration/dev-server/#devserverhot). For a page extracted to a real `.html` file, each update patches `document.body.innerHTML` and `document.title` in place; other `<head>` changes are patched in place as a delta, and only a removed `<script>` that already ran, or a reordering, falls back to a full reload.
@@ -639,6 +813,16 @@ class AddBuildStampPlugin {
   }
 }
 ```
+
+## Automated migration (codemod)
+
+Most of the migration can be done for you by the [`@webpack/html-plugins-to-native-html`](https://app.codemod.com/registry/@webpack/html-plugins-to-native-html) codemod:
+
+```bash
+npx codemod @webpack/html-plugins-to-native-html
+```
+
+It requires webpack 5.112.0 or later.
 
 ## Migrating from `html-loader`
 
@@ -708,7 +892,7 @@ T> While `experiments.html` is `'auto'` (the default since 5.109.0), any `module
 
 ## Migrating from `html-webpack-plugin`
 
-`html-webpack-plugin` did two jobs: scaffolding a document around your bundles, and rendering a template. Native HTML splits them — [`output.html`](#2-a-generated-page-for-a-javascript-entry) scaffolds, and an [HTML entry point](#1-html-as-an-entry-point) or [`module.parser.html.template`](#templating) renders.
+`html-webpack-plugin` is deprecated: native HTML replaces it. The plugin did two jobs: scaffolding a document around your bundles, and rendering a template. Native HTML splits them — [`output.html`](#2-a-generated-page-for-a-javascript-entry) scaffolds, and an [HTML entry point](#1-html-as-an-entry-point) or [`module.parser.html.template`](#templating) renders.
 
 ### At a glance
 
@@ -939,12 +1123,15 @@ HTML is configured in four places: the [parser](#parser-options) and [generator]
 
 Set them globally under `module.parser.html`, or per rule with `parser` on a rule whose `type` is `html`.
 
-| Option                                                        | Type                                     | Default      | Description                                                         |
-| ------------------------------------------------------------- | ---------------------------------------- | ------------ | ------------------------------------------------------------------- |
-| [`sources`](/configuration/module/#moduleparserhtmlsources)   | `boolean \| Array<'...' \| SourceEntry>` | `true`       | Which attribute values are treated as URLs and how each is bundled. |
-| [`as`](/configuration/module/#moduleparserhtmlas)             | `'document' \| string`                   | `'document'` | Parse a full page, or the named element's inner HTML (a fragment).  |
-| [`urlHints`](/configuration/module/#moduleparserhtmlurlhints) | `UrlHintRule[]`                          | `[]`         | Default resource-hint rules for the assets this parser references.  |
-| [`template`](/configuration/module/#moduleparserhtmltemplate) | `(source, context) => string`            | —            | Transform the HTML source before dependencies are extracted.        |
+| Option                                                              | Type                                                                               | Default      | Description                                                                                     |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------- |
+| [`sources`](/configuration/module/#moduleparserhtmlsources)         | `boolean \| Array<'...' \| SourceEntry>`                                           | `true`       | Which attribute values are treated as URLs and how each is bundled.                             |
+| [`as`](/configuration/module/#moduleparserhtmlas)                   | `'document' \| string`                                                             | `'document'` | Parse a full page, or the named element's inner HTML (a fragment).                              |
+| [`urlHints`](/configuration/module/#moduleparserhtmlurlhints)       | `UrlHintRule[]`                                                                    | `[]`         | Default resource-hint rules for the assets this parser references.                              |
+| [`template`](/configuration/module/#moduleparserhtmltemplate)       | `(source, context) => string`                                                      | —            | Transform the HTML source before dependencies are extracted.                                    |
+| [`chunkName`](/configuration/module/#moduleparserhtmlchunkname)     | `string \| (data) => string`                                                       | —            | <Badge text="5.112.0+" /> Name the chunks the page creates.                                     |
+| [`cssModules`](/configuration/module/#moduleparserhtmlcssmodules)   | `{ attributes?: Record<string, 'class' \| 'id' \| 'ids' \| 'fragment' \| 'url'> }` | —            | <Badge text="5.113.0+" /> Extra attributes [CSS Modules in HTML](#css-modules-in-html) rewrite. |
+| [`parseErrors`](/configuration/module/#moduleparserhtmlparseerrors) | `boolean`                                                                          | `false`      | <Badge text="5.113.0+" /> Report HTML parse errors as build errors and warnings.                |
 
 **webpack.config.js**
 
@@ -1216,29 +1403,32 @@ Every option of [`optimization.minimize.html`](/configuration/optimization/#opti
 
 **On by default**
 
-| Option                          | Type                                                         | Default   | Description                                                                  |
-| ------------------------------- | ------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------- |
-| `collapseBooleanAttributes`     | `boolean \| 'all'`                                           | `true`    | `disabled="disabled"` becomes the bare name; `'all'` rewrites any value.     |
-| `comments`                      | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'`  | Which comments survive — `'some'` keeps none, since HTML comments are inert. |
-| `normalizeAttributeQuotes`      | `boolean`                                                    | `true`    | Use whichever delimiters cost least.                                         |
-| `normalizeEnumeratedAttributes` | `boolean`                                                    | `true`    | Fold an enumerated value to the keyword it names.                            |
-| `normalizeListAttributes`       | `boolean`                                                    | `true`    | Normalize list-shaped values (`class`, `rel`, `srcset`, viewport `content`). |
-| `normalizeNumericAttributes`    | `boolean`                                                    | `true`    | Write an integer attribute the one way its rules read it.                    |
-| `removeImpliedTags`             | `boolean \| 'smart' \| 'all'`                                | `'smart'` | How much of the `<html>` / `<head>` / `<body>` shell may be implied.         |
-| `removeOptionalTags`            | `boolean`                                                    | `true`    | Leave out other tags the parser can imply.                                   |
+| Option                          | Type                                                         | Default   | Description                                                                                    |
+| ------------------------------- | ------------------------------------------------------------ | --------- | ---------------------------------------------------------------------------------------------- |
+| `collapseBooleanAttributes`     | `boolean \| 'all'`                                           | `true`    | `disabled="disabled"` becomes the bare name; `'all'` rewrites any value.                       |
+| `comments`                      | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `'some'`  | Which comments survive — `'some'` keeps none, since HTML comments are inert.                   |
+| `normalizeAttributeQuotes`      | `boolean`                                                    | `true`    | Use whichever delimiters cost least.                                                           |
+| `normalizeEnumeratedAttributes` | `boolean`                                                    | `true`    | Fold an enumerated value to the keyword it names.                                              |
+| `normalizeListAttributes`       | `boolean`                                                    | `true`    | Normalize list-shaped values (`class`, `rel`, `srcset`, viewport `content`).                   |
+| `normalizeNumericAttributes`    | `boolean`                                                    | `true`    | Write an integer attribute the one way its rules read it.                                      |
+| `normalizeUrlAttributes`        | `boolean`                                                    | `true`    | <Badge text="5.111.0+" /> Drop the whitespace around a URL value (`href`, `src`, `action`, …). |
+| `removeImpliedTags`             | `boolean \| 'smart' \| 'all'`                                | `'smart'` | How much of the `<html>` / `<head>` / `<body>` shell may be implied.                           |
+| `removeOptionalTags`            | `boolean`                                                    | `true`    | Leave out other tags the parser can imply.                                                     |
 
 **Off by default**
 
-| Option                      | Type                                            | Default | Why it is opt-in                                                                                                                 |
-| --------------------------- | ----------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `collapseWhitespace`        | `boolean \| 'conservative' \| 'smart' \| 'all'` | `false` | `textContent` and a `white-space: pre` rule the minifier cannot see read the collapsed runs back; `true` means `'conservative'`. |
-| `mergeStyles`               | `boolean`                                       | `false` | Removes elements, so `document.styleSheets` and `style:nth-child()` differ.                                                      |
-| `minifyConditionalComments` | `boolean`                                       | `false` | The body is minified as if it started a document, not where the comment sits.                                                    |
-| `removeEmptyAttributes`     | `boolean`                                       | `false` | An attribute selector matches on presence, so `[class]` stops matching.                                                          |
-| `removeEmptyElements`       | `boolean`                                       | `false` | CSS the minifier cannot see may give an empty element a size or a `::before`.                                                    |
-| `removeRedundantAttributes` | `boolean \| 'smart' \| 'all'`                   | `false` | Dropping an attribute changes `getAttribute` and attribute selectors.                                                            |
-| `sortAttributes`            | `boolean`                                       | `false` | A script reading `element.attributes` back sees the new order.                                                                   |
-| `sortTokenLists`            | `boolean`                                       | `false` | A script reading `className` or `rel` back sees the new order.                                                                   |
+| Option                      | Type                                                         | Default     | Why it is opt-in                                                                                                                                     |
+| --------------------------- | ------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `collapseWhitespace`        | `boolean \| 'conservative' \| 'smart' \| 'all'`              | `false`     | `textContent` and a `white-space: pre` rule the minifier cannot see read the collapsed runs back; `true` means `'conservative'`.                     |
+| `extractComments`           | `boolean \| 'all' \| 'some' \| string \| RegExp \| function` | `undefined` | <Badge text="5.112.0+" /> Moves legal comments into `[file].LICENSE.txt`, leaving a banner comment at the end of the page.                           |
+| `mergeScripts`              | `boolean`                                                    | `false`     | <Badge text="5.111.0+" /> Removes elements, so `document.scripts` differs, and a later body's `var` declarations become visible to the earlier ones. |
+| `mergeStyles`               | `boolean`                                                    | `false`     | Removes elements, so `document.styleSheets` and `style:nth-child()` differ.                                                                          |
+| `minifyConditionalComments` | `boolean`                                                    | `false`     | The body is minified as if it started a document, not where the comment sits.                                                                        |
+| `removeEmptyAttributes`     | `boolean`                                                    | `false`     | An attribute selector matches on presence, so `[class]` stops matching.                                                                              |
+| `removeEmptyElements`       | `boolean`                                                    | `false`     | CSS the minifier cannot see may give an empty element a size or a `::before`.                                                                        |
+| `removeRedundantAttributes` | `boolean \| 'smart' \| 'all'`                                | `false`     | Dropping an attribute changes `getAttribute` and attribute selectors.                                                                                |
+| `sortAttributes`            | `boolean`                                                    | `false`     | A script reading `element.attributes` back sees the new order.                                                                                       |
+| `sortTokenLists`            | `boolean`                                                    | `false`     | A script reading `className` or `rel` back sees the new order.                                                                                       |
 
 **webpack.config.js**
 
@@ -1273,6 +1463,7 @@ An HTML comment placed immediately before a tag configures that tag alone:
 | Comment                                 | Effect                                                             |
 | --------------------------------------- | ------------------------------------------------------------------ |
 | `<!-- webpackIgnore: true -->`          | Leave the tag's URLs untouched.                                    |
+| `<!-- webpackChunkName: "name" -->`     | <Badge text="5.112.0+" /> Name the chunk the tag creates.          |
 | `<!-- webpackInline: true -->`          | Inline the referenced chunk into the page (`false` opts back out). |
 | `<!-- webpackPreload: true -->`         | Set the next referenced asset's hint to `preload`.                 |
 | `<!-- webpackPrefetch: true -->`        | Set it to `prefetch`.                                              |
@@ -1482,12 +1673,38 @@ The emitted page is served from the build output, so there is no template to kee
 
 ## Limitations
 
-`experiments.html` is explicitly opt-in — test it before a broad rollout.
+Native HTML is stable and on by default. It is not a clone of `html-webpack-plugin`: the deprecated plugin's options that a native build does not need are intentionally not supported, and anything else that does not work as documented is a bug — please [report it](https://github.com/webpack/webpack/issues).
 
-- APIs and behavior may still evolve before the webpack v6 defaults.
-- Full parity with `html-webpack-plugin` is still in progress; `chunksSortMode`, `xhtml`, `showErrors` and `cache` have no equivalent, and template-engine loaders (`pug-loader`, `ejs-loader`, …) are replaced by the synchronous [`template`](#templating) hook rather than being reused as-is.
+- `html-webpack-plugin`'s `chunksSortMode`, `xhtml`, `showErrors` and `cache` are not supported, by design.
+- Template-engine loaders that return a JavaScript function (`pug-loader`, `ejs-loader`, …) are replaced by the synchronous [`template`](#templating) hook rather than being reused as-is. Loaders that return HTML text [chain in front of native HTML](#loaders-that-output-html).
 - `html-loader`'s `sources.scriptingEnabled` (parsing `<noscript>` content as markup) has no native switch.
 - [Module concatenation](/configuration/optimization/#optimizationconcatenatemodules) is disabled for HTML modules while HMR is active, because each module needs its own `module.hot` scope.
+
+## Frequently asked questions
+
+### Do I still need `html-webpack-plugin`?
+
+No. Since webpack 5.109.0, webpack builds pages itself: point an [`entry` at an `.html` file](#1-html-as-an-entry-point), or set [`output.html: true`](#2-a-generated-page-for-a-javascript-entry) to generate a page for a JavaScript entry. `html-webpack-plugin` is deprecated; the options of it that a native build does not need, such as `chunksSortMode` and `xhtml`, are intentionally not supported. Plugins that tapped its hooks need a native equivalent or a [short rewrite](#rewriting-a-plugin-that-tapped-its-hooks) onto webpack's own hooks. See [Migrating from `html-webpack-plugin`](#migrating-from-html-webpack-plugin).
+
+### Do I still need `html-loader`?
+
+No. [Importing an `.html` file from JavaScript](#3-html-imported-from-javascript) gives you the processed HTML as a string, with the URLs in [the attributes webpack knows](#what-webpack-bundles-from-a-page) bundled — [add more](#customizing-which-attributes-are-urls), such as `<a href>`, through `sources`. `html-loader` is deprecated. See [Migrating from `html-loader`](#migrating-from-html-loader).
+
+### How does my page load the CSS?
+
+Let webpack build the page: an HTML entry or `output.html` (webpack 5.108.0 or later) adds a `<link rel="stylesheet">` for every CSS chunk the page needs — unless you set [`output.html.inject: false`](/configuration/output/#outputhtmlinject), which leaves the tags to you. With the default CSS output, a static page that only loads the JavaScript bundle stays unstyled unless it links the emitted `.css` file itself; with [`exportType: "style"`](/guides/native-css/#output-modes-exporttype) the bundle injects the styles and no link is needed.
+
+### How do I use Pug, Handlebars or Markdown?
+
+A synchronous template engine plugs into the [`template`](#templating) hook. A loader that outputs HTML text, such as a Markdown converter, chains in front of `type: "html"` — see [Loaders that output HTML](#loaders-that-output-html).
+
+### Do I need `html-minimizer-webpack-plugin`?
+
+No, on webpack 5.110.0 or later. Whenever webpack minimizes — `optimization.minimize`, on by default in `mode: "production"` — it [minifies HTML](#minification) itself, including inline `<style>` and `style=""`. A custom `optimization.minimizer` list must keep `"..."` for that.
+
+### Do I need to set `experiments.html: true`?
+
+Before webpack 5.109.0, yes — it defaulted to `false`. From 5.109.0 on, only when one of your own `module.rules` gives `.html` files a loader or a `type`, or when you want `.html` to win over `.js` during resolution — so that `entry: "./src"` picks `src/index.html` over `src/index.js` (see [HTML as an entry point](#1-html-as-an-entry-point)). Otherwise the `'auto'` default turns built-in HTML on.
 
 ## Further reading
 

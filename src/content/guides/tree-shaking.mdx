@@ -334,6 +334,16 @@ After this optimization, other optimizations can still apply. For example: `butt
 
 Module Concatenation also applies. So that these 4 modules plus the entry module (and probably more dependencies) can be concatenated. **`index.js` has no code generated in the end**.
 
+<Badge text="5.113.0+" />
+
+CommonJS modules take part too. A module whose top level only assigns pure values to `exports.x`, `module.exports` or `Object.defineProperty(exports, …)`, and only `require()`s side-effect-free modules, is itself treated as side-effect free, so it is dropped when nothing uses its exports — no `sideEffects` flag needed:
+
+```js
+// constants.js — dropped when nothing reads it
+exports.API_URL = "/api";
+exports.TIMEOUT = 5000;
+```
+
 ## Full Example: Understanding Side Effects with CSS Files
 
 To better understand the impact of the `sideEffects` flag, let's look at a complete example of an npm package with CSS assets and how they might be affected during tree shaking. We'll create a fictional UI component library called "awesome-ui".

@@ -1,6 +1,6 @@
 ---
 title: Experiments
-description: Enable webpack's opt-in features, including native CSS, HTML and TypeScript support, WebAssembly, lazy compilation and ES module output.
+description: Configure webpack's built-in CSS and HTML support (on by default), and opt-in features such as TypeScript support, WebAssembly, lazy compilation and ES module output.
 sort: 19
 contributors:
   - EugeneHlushko
@@ -190,14 +190,14 @@ Detect changes to remote resources and upgrade them automatically.
 
 ### experiments.css
 
-Enable native CSS support. Note that it's an experimental feature still under development and will be enabled by default in webpack v6, however you can track the progress on [GitHub](https://github.com/webpack/webpack/issues/14893).
+Webpack's built-in CSS support — stable, and on by default since webpack 5.109.0, so `.css` files need no configuration and no loader. It replaces the deprecated `css-loader`, `style-loader` and `mini-css-extract-plugin`; see the [Native CSS](/guides/native-css/) guide. The option keeps its `experiments` name until webpack v6 makes it unconditional.
 
 - Type: `boolean | 'auto'`
 - Default: `'auto'` <Badge text="5.109.0+" />
 
 Since webpack 5.109.0, the option defaults to `'auto'`: the built-in CSS support is enabled unless a `module.rules` entry with a loader (or explicit module type) already matches `.css` or `.module.css` files, so an existing loader-based CSS setup keeps working unchanged. Set it to `true` to force the native support, or `false` to disable it entirely. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
-Experimental features:
+Features:
 
 - CSS Modules support: webpack will generate a unique name for each CSS class. Use the `.module.css` extension for CSS Modules.
 
@@ -275,6 +275,12 @@ Enable additional in-memory caching of modules which are unchanged and reference
 - Type: `boolean`
 
 Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
+
+<Badge text="5.113.0+" /> `cacheUnaffected` works together with
+[`optimization.usedExports`](/configuration/optimization/#optimizationusedexports)
+and
+[`optimization.mangleExports`](/configuration/optimization/#optimizationmangleexports).
+Before 5.113.0, combining them was a configuration error.
 
 ### experiments.deferImport
 
@@ -412,7 +418,7 @@ import page from "./page.html";
 document.documentElement.innerHTML = page;
 ```
 
-W> **This feature is experimental and partial.** Webpack 5.107 made importing an HTML file from JS run its tag references through the webpack pipeline. Since 5.108 a `.html` file can also be used as an entry, and the default `./src` entry resolves to `index.html` when this experiment is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). Full parity with the plugin-based setups it replaces is still in progress; the overall effort is tracked in issue [#536](https://github.com/webpack/webpack/issues/536).
+T> Native HTML is stable and on by default since 5.109.0; the option keeps its `experiments` name until webpack v6. Webpack 5.107 made importing an HTML file from JS run its tag references through the webpack pipeline, and since 5.108 a `.html` file can also be used as an entry, with the default `./src` entry resolving to `index.html` when it is enabled (see [HTML as the default entry](#html-as-the-default-entry) below). It replaces the deprecated `html-loader` and `html-webpack-plugin` without copying options a native build does not need — see the [Native HTML](/guides/native-html/) guide.
 
 T> The HTML parser can be tuned via [`module.parser.html`](/configuration/module/#moduleparserhtml): use [`sources`](/configuration/module/#moduleparserhtmlsources) to disable or customize URL-attribute extraction, and [`template`](/configuration/module/#moduleparserhtmltemplate) to transform the HTML source before parsing.
 
@@ -567,14 +573,14 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
         },
       entries?: boolean,
       imports?: boolean,
-      test?: string | RegExp | ((module: Module) => boolean)
+      test?: string | RegExp | { glob: string | string[] } | ((module: Module) => boolean)
     }
     ```
 
     - `backend`: Customize the backend.
     - `entries`: Enable lazy compilation for entries.
     - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
-    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
+    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled. Since webpack 5.112.0 it also takes a `{ glob }` object, e.g. `{ glob: "src/pages/**" }`; a pattern starting with `!` excludes.
 
 - Available: 5.17.0+
 - Example 1:
@@ -608,18 +614,49 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
   };
   ```
 
+#### Serving lazy compilation from your own server
+
+<Badge text="5.113.0+" />
+
+A development server can serve the lazy compilation backend from the server it already runs instead of a separate port, through the `transport` hook of `webpack.hmr.LazyCompilationPlugin`. A tap hands over the `server` (which the backend shares and never listens on or closes) and the `urlBase` clients reach it at; every request that is not for lazy compilation is passed on to the server's own handlers:
+
+```js
+import webpack from "webpack";
+
+class MyDevServerPlugin {
+  constructor(httpServer) {
+    this.httpServer = httpServer;
+  }
+
+  apply(compiler) {
+    webpack.hmr.LazyCompilationPlugin.getCompilerHooks(compiler).transport.tap(
+      "MyDevServerPlugin",
+      (transport) => ({
+        ...transport,
+        server: this.httpServer,
+        urlBase: "http://localhost:8080",
+      }),
+    );
+  }
+}
+```
+
+A tap can also return a `backend` of its own, which may bring its own `client`. A custom backend receives the settled options as its third argument.
+
 ### experiments.typescript
 
 <Badge text="5.107.0+" />
 
-Enable native TypeScript support. With the flag turned on, webpack compiles `.ts`, `.cts`, and `.mts` files (and the matching `data:text/typescript` and `data:application/typescript` data URIs) directly, without any external loader. Under the hood it calls Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options).
+Enable native TypeScript support. With the flag turned on, webpack compiles `.ts`, `.cts`, and `.mts` files (and the matching `data:text/typescript` and `data:application/typescript` data URIs) directly, without any external loader.
+
+Since webpack 5.113.0, webpack's own JavaScript parser reads the TypeScript syntax and skips the types, so each file is parsed once, source positions are kept exactly, and any Node.js version webpack supports works. Before 5.113.0 the types were removed with Node.js's built-in [`module.stripTypeScriptTypes`](https://nodejs.org/api/module.html#modulestriptypescripttypescode-options), which needs Node.js >= 22.6.
 
 - Type: `boolean | 'auto'`
 - Default: `false`, `'auto'` since webpack 5.109.0
 
-Since webpack 5.109.0, the option defaults to `'auto'`: the built-in TypeScript support is enabled when the running Node.js provides `module.stripTypeScriptTypes` (>= 22.6) and no `module.rules` entry with a loader (e.g. `ts-loader`, `swc-loader`) matches `.ts`/`.mts`/`.cts` files. [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
+Since webpack 5.109.0, the option defaults to `'auto'`: the built-in TypeScript support is enabled when no `module.rules` entry with a loader (e.g. `ts-loader`, `swc-loader`) matches `.ts`/`.mts`/`.cts` files. Before webpack 5.113.0, `'auto'` also required the running Node.js to provide `module.stripTypeScriptTypes` (>= 22.6). [`experiments.futureDefaults`](#experimentsfuturedefaults) resolves it to `true`.
 
-W> Requires Node.js >= 22.6 for the stable `module.stripTypeScriptTypes` API.
+W> On webpack 5.107.0 – 5.112.x this requires Node.js >= 22.6 for the stable `module.stripTypeScriptTypes` API. webpack 5.113.0 and later have no such requirement.
 
 ```js
 export default {

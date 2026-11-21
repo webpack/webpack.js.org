@@ -1,0 +1,104 @@
+---
+title: SSRManifestPlugin
+description: Emit a manifest mapping each source module to the client scripts and stylesheets it needs, for server-side rendering.
+group: webpack
+contributors:
+  - alexander-akait
+---
+
+<Badge text="5.112.0+" />
+
+`SSRManifestPlugin` writes a JSON manifest that maps each source module of the client build to the scripts and stylesheets it needs — its chunk and the chunks loaded together with it — with stylesheets in cascade order. A server renderer reads it to emit `<link rel="modulepreload">`, `<link rel="stylesheet">` and `<script>` tags for exactly the modules a page rendered, so the client does not wait for JavaScript to discover them.
+
+**webpack.config.js**
+
+```js
+import webpack from "webpack";
+
+export default {
+  target: "web",
+  output: { publicPath: "/assets/" },
+  plugins: [new webpack.SSRManifestPlugin()],
+};
+```
+
+For this client code:
+
+**src/index.js**
+
+```js
+import "./app.css";
+
+import("./page.js");
+```
+
+**src/page.js**
+
+```js
+import "./page.css";
+
+export default 1;
+```
+
+the build emits:
+
+**dist/ssr-manifest.json**
+
+```json
+{
+  "./src/app.css": ["/assets/main.js", "/assets/main.css"],
+  "./src/index.js": ["/assets/main.js", "/assets/main.css"],
+  "./src/page.css": ["/assets/349.js", "/assets/349.css"],
+  "./src/page.js": ["/assets/349.js", "/assets/349.css"]
+}
+```
+
+On the server, collect the source modules a render used and look up their assets:
+
+```js
+import manifest from "./dist/ssr-manifest.json" with { type: "json" };
+
+function assetsFor(renderedModules) {
+  const assets = new Set();
+  for (const id of renderedModules) {
+    for (const file of manifest[id] ?? []) assets.add(file);
+  }
+  return [...assets];
+}
+
+const tags = assetsFor(["./src/page.js"])
+  .map((file) =>
+    file.endsWith(".css")
+      ? `<link rel="stylesheet" href="${file}">`
+      : `<link rel="modulepreload" href="${file}">`,
+  )
+  .join("");
+```
+
+URLs are built from [`output.publicPath`](/configuration/output/#outputpublicpath). With `publicPath: "auto"` the URL is only known in the browser, so the plugin warns and writes root-relative `/` URLs.
+
+To read the CSS a server-side render collected without a DOM, see [`__webpack_css_server_styles__`](/api/module-variables/#__webpack_css_server_styles__-webpack-specific).
+
+## Options
+
+### `filename`
+
+`string = 'ssr-manifest.json'`
+
+The name of the emitted manifest, relative to [`output.path`](/configuration/output/#outputpath).
+
+```js
+new webpack.SSRManifestPlugin({ filename: "server/manifest.json" });
+```
+
+### `context`
+
+`string`
+
+An absolute path the module keys are made relative to. Defaults to the compiler's [`context`](/configuration/entry-context/#context).
+
+```js
+new webpack.SSRManifestPlugin({
+  context: path.resolve(import.meta.dirname, "src"),
+});
+```
