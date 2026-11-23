@@ -14,6 +14,7 @@ contributors:
   - smelukov
   - chenxsan
   - JamesHoran
+  - Aditya060806
 ---
 
 Webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets/).
@@ -37,7 +38,7 @@ The following string values are supported via [`WebpackOptionsApply`](https://gi
 | `electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process: chunks are loaded via JSONP, and Node.js and Electron built-in modules are treated as externals.                                                                                     |
 | `electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for preload scripts of the renderer process: chunks are loaded via `require`, and Node.js and Electron built-in modules are treated as externals.                                                          |
 | `node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)                                                                                                                                                                    |
-| `node-webkit[[X].Y]`       | Compile for [NW.js](https://nwjs.io/); chunks are loaded asynchronously via `fs` and `vm` (`async-node`). Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)                                       |
+| `node-webkit[[X].Y]`       | Compile for [NW.js](https://nwjs.io/); chunks are loaded asynchronously via `fs` and `vm` (`async-node`). Allows importing of built-in Node.js modules and [`nw.gui`](https://nwjs.readthedocs.io/en/latest/) (experimental)                               |
 | `nwjs[[X].Y]`              | The same as `node-webkit`                                                                                                                                                                                                                                  |
 | `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                              |
 | `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                       |
