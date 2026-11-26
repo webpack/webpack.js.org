@@ -27,6 +27,14 @@ Called before resolving the requested directory. The request can be ignored by r
 
 - Callback Parameters: `data`
 
+The `data` object describes the context request to resolve and its properties can be updated in place (for example, overwriting `data.request` to redirect where modules are loaded from):
+
+- `context`: `string` — the base directory path from which the context request is resolved.
+- `request`: `string` — the requested directory path relative to `context`.
+- `recursive`: `boolean` — whether subdirectories should be searched recursively.
+- `regExp`: `RegExp` — the regular expression used to filter matching files inside the directory.
+- `dependencies`: `ContextDependency[]` — the dependency instances associated with the context request.
+
 ## afterResolve
 
 `AsyncSeriesWaterfallHook`
