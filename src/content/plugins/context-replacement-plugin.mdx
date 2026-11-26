@@ -48,7 +48,7 @@ new webpack.ContextReplacementPlugin(
 );
 ```
 
-The `newContentCallback` function is given a [`data` object of the `ContextModuleFactory`](/api/plugins/module-factories/) and is expected to overwrite the `request` attribute of the supplied object.
+The `newContentCallback` function is given a [`data` object of the `ContextModuleFactory`](/api/contextmodulefactory-hooks/#beforeresolve) and is expected to overwrite the `request` attribute of the supplied object.
 
 Using this callback we can dynamically redirect requests to a new location:
 
